@@ -181,9 +181,9 @@ class GridFilmesViewController: UIViewController {
         }else{//Senão, favorita
             arrayIndexPathFavoritos.append(indexPathSelecionado)
             
-            referenciaRealtime.child("\(idUsuarioAtual ?? "")/favoritos").child("\(estadoCollection.dadosFilme[indiceFilme].id ?? 0)").setValue(estadoCollection.dadosFilme[indiceFilme].id ?? 0)
-            
+            referenciaRealtime.child("\(idUsuarioAtual ?? "")/favoritos").child("\(filmesEncontrados[indiceFilme].id ?? 0)").setValue(filmesEncontrados[indiceFilme].id ?? 0)
         }//else indexPathSelecionado
+        estadoCollection = .concluido(filmesEncontrados)
     }//func favoritar
     
     //MARK: Fluxo da view
@@ -212,9 +212,9 @@ class GridFilmesViewController: UIViewController {
         
         if segue.identifier == "segueDetalhesFilme"{
             if modoPesquisa{
-                viewDetalhes?.filme = estadoCollection.dadosFilme[estadoCollection.indicesBusca[itemSelecionado]]
+                viewDetalhes?.filme = filmesEncontrados[estadoCollection.indicesBusca[itemSelecionado]]
             }else{
-                viewDetalhes?.filme = estadoCollection.dadosFilme[itemSelecionado]
+                viewDetalhes?.filme = filmesEncontrados[itemSelecionado]
             }//else !modoPesquisa
             viewDetalhes?.favorito = favorito
         }// if segue.identifier == "segueDetalhesFilme"
@@ -245,7 +245,7 @@ extension GridFilmesViewController: UICollectionViewDelegate, UICollectionViewDa
         else{
             //Scroll Infinito. Busca novos filmes quando o usuário chega próximo ao fim da tabela
             //Não efetua no modo pesquisa
-            if indexPath.row == estadoCollection.dadosFilme.count - 1{
+            if indexPath.row == filmesEncontrados.count - 1{
                 pagina+=1//Incrementa para a próxima página. Valor máximo == 1000, segundo API
                 buscaPopulares()
             }//if indexPath.row == listaFilmes.count

@@ -105,7 +105,7 @@ class FavoritosViewController: UIViewController{
         //Inicialização de variáveis e delegates
         barraPesquisa.delegate = self
         barraPesquisa.showsScopeBar = true
-        barraPesquisa.scopeButtonTitles = ["Nome", "Ano de Lançamento", "Gênero"]        
+        barraPesquisa.scopeButtonTitles = ["Nome", "Ano Lançamento", "Gênero"]        
     }//func viewDidLoad()
     
     //MARK: Busca de dados
