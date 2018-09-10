@@ -10,10 +10,8 @@ import UIKit
 
 class InformacoesViewController: UIViewController {
 
-    //MARK: Ciclo da view
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }//func viewDidLoad
-
+    @IBAction func voltar(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }//func voltar
+    
 }//Fim da classe

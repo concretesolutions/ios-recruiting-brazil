@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Inicia serviços do Firebase
         FirebaseApp.configure()
         
+        //Habilita persistência para trabalhar offline
+        Database.database().isPersistenceEnabled = true
+        
         //Status bar branca
         UIApplication.shared.statusBarStyle = .lightContent
         
