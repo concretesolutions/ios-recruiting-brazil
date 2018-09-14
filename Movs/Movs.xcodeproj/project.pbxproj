@@ -13,8 +13,9 @@
 		3D5E99C9214B407D00828B65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E99C7214B407D00828B65 /* Main.storyboard */; };
 		3D5E99CB214B407E00828B65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E99CA214B407E00828B65 /* Assets.xcassets */; };
 		3D5E99CE214B407E00828B65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E99CC214B407E00828B65 /* LaunchScreen.storyboard */; };
-		3D5E99D9214B407E00828B65 /* MovsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99D8214B407E00828B65 /* MovsTests.swift */; };
+		3D5E99D9214B407E00828B65 /* MovieModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99D8214B407E00828B65 /* MovieModelTests.swift */; };
 		3DDDEBD6214B5B6000B0AD25 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDDEBD5214B5B6000B0AD25 /* Movie.swift */; };
+		3DDDEBD7214B63EB00B0AD25 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDDEBD5214B5B6000B0AD25 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,7 @@
 		3D5E99CD214B407E00828B65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D5E99CF214B407E00828B65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D5E99D4214B407E00828B65 /* MovsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D5E99D8214B407E00828B65 /* MovsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTests.swift; sourceTree = "<group>"; };
+		3D5E99D8214B407E00828B65 /* MovieModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModelTests.swift; sourceTree = "<group>"; };
 		3D5E99DA214B407E00828B65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DDDEBD5214B5B6000B0AD25 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +95,7 @@
 		3D5E99D7214B407E00828B65 /* MovsTests */ = {
 			isa = PBXGroup;
 			children = (
-				3D5E99D8214B407E00828B65 /* MovsTests.swift */,
+				3D5E99D8214B407E00828B65 /* MovieModelTests.swift */,
 				3D5E99DA214B407E00828B65 /* Info.plist */,
 			);
 			path = MovsTests;
@@ -238,7 +239,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D5E99D9214B407E00828B65 /* MovsTests.swift in Sources */,
+				3DDDEBD7214B63EB00B0AD25 /* Movie.swift in Sources */,
+				3D5E99D9214B407E00828B65 /* MovieModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +394,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PMD3Q4LVK;
-				INFOPLIST_FILE = Movs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movs/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -410,7 +412,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PMD3Q4LVK;
-				INFOPLIST_FILE = Movs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movs/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
