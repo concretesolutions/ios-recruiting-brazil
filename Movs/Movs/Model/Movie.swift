@@ -11,40 +11,39 @@ import UIKit
 class Movie: Decodable {
 	
 	public let id: Int?
-	public let title: String?
-	public let overview: String?
-	public let genreIds: [Int]?
-	public let releaseDate: Date?
 	
+	public let localizedTitle: String?
 	public let originalTitle: String?
+	
+	public let voteAverage: Double?
+	public let overview: String?
+	public var genres: [String]?
+	public let releaseDate: Date?
 	public let originalLanguage: String?
 	
 	// Images
-	public let posterPath: String?
-	public var posterImage: UIImage?
-	
-	public let backdropPath: String?
-	public var backdropImage: UIImage?
+	public var posterImageData: Data?
+	public var backdropImageData: Data?
 	
 	private enum CodingKeys: String, CodingKey {
 		case id
-		case title
-		case overview
-		case genreIds 			= "genre_ids"
-		case releaseDate 		= "release_date"
+		case localizedTitle		= "title"
 		case originalTitle 		= "original_title"
+		case voteAverage		= "vote_average"
+		case overview
+		case releaseDate 		= "release_date"
 		case originalLanguage 	= "original_language"
-		case posterPath			= "poster_path"
-		case backdropPath		= "backdrop_path"
 	}
 	
 	required init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		
 		id = try? values.decode(Int.self, forKey: .id)
-		title = try? values.decode(String.self, forKey: .title)
+		localizedTitle = try? values.decode(String.self, forKey: .localizedTitle)
+		originalTitle = try? values.decode(String.self, forKey: .originalTitle)
+		voteAverage = try? values.decode(Double.self, forKey: .voteAverage)
 		overview = try? values.decode(String.self, forKey: .overview)
-		genreIds = try? values.decode([Int].self, forKey: .genreIds)
+		originalLanguage = try? values.decode(String.self, forKey: .originalLanguage)
 		
 		let releaseDateString = try? values.decode(String.self, forKey: .releaseDate)
 		let formatter = DateFormatter()
@@ -55,12 +54,6 @@ class Movie: Decodable {
 		} else {
 			releaseDate = nil
 		}
-		
-		originalTitle = try? values.decode(String.self, forKey: .originalTitle)
-		originalLanguage = try? values.decode(String.self, forKey: .originalLanguage)
-		
-		posterPath = try? values.decode(String.self, forKey: .posterPath)
-		backdropPath = try? values.decode(String.self, forKey: .backdropPath)
 	}
 	
 }
