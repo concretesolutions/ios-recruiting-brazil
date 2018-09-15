@@ -19,6 +19,7 @@ protocol ListMoviesDisplayLogic: class {
 class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	var interactor: ListMoviesBusinessLogic?
 	var router: (NSObjectProtocol & ListMoviesRoutingLogic & ListMoviesDataPassing)?
+	@IBOutlet weak var moviesCollectionView: UICollectionView!
 	
 	// MARK: Object lifecycle
 	
