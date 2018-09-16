@@ -44,7 +44,7 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 		}
 		
 		var mainGenre: String? = nil
-		if let firstGenre = movieInfo.genres.first {
+		if let firstGenre = movieInfo.genres?.first {
 			mainGenre = firstGenre
 		}
 		

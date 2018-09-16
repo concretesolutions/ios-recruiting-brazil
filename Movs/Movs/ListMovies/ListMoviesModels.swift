@@ -24,7 +24,7 @@ enum ListMovies {
 		var id: Int
 		var title: String
 		var image: Data?
-		var genres: [String]
+		var genres: [String]?
 		var releaseDate: Date
 	}
 	

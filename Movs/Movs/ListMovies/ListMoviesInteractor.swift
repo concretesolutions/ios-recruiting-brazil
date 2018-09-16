@@ -32,7 +32,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	func getMovies() {
 		worker = ListMoviesWorker()
 		
-		worker?.downloadMovies({ (success, returnedMovies: [Movie]?, error)  in
+		worker?.downloadPopularMovies({ (success, returnedMovies: [Movie]?, error)  in
 			if let returnedMovies = returnedMovies {
 				self.movies = returnedMovies
 			}
