@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3D25E0CF214DFC4600E91697 /* TMDbClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25E0CE214DFC4600E91697 /* TMDbClient.swift */; };
 		3D25E0D1214DFDE700E91697 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25E0D0214DFDE700E91697 /* NetworkWorker.swift */; };
+		3D25E0D4214E034300E91697 /* TMDbMoviesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25E0D3214E034300E91697 /* TMDbMoviesWorker.swift */; };
+		3D25E0D6214E07DC00E91697 /* TMDbMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25E0D5214E07DC00E91697 /* TMDbMovie.swift */; };
 		3D5E99C2214B407D00828B65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99C1214B407D00828B65 /* AppDelegate.swift */; };
 		3D5E99C4214B407D00828B65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99C3214B407D00828B65 /* FirstViewController.swift */; };
 		3D5E99C6214B407D00828B65 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99C5214B407D00828B65 /* SecondViewController.swift */; };
@@ -35,6 +37,8 @@
 		27CD7B123F3EC689D6444EAD /* Pods-Movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.debug.xcconfig"; sourceTree = "<group>"; };
 		3D25E0CE214DFC4600E91697 /* TMDbClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbClient.swift; sourceTree = "<group>"; };
 		3D25E0D0214DFDE700E91697 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
+		3D25E0D3214E034300E91697 /* TMDbMoviesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbMoviesWorker.swift; sourceTree = "<group>"; };
+		3D25E0D5214E07DC00E91697 /* TMDbMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbMovie.swift; sourceTree = "<group>"; };
 		3D5E99BE214B407D00828B65 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5E99C1214B407D00828B65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D5E99C3214B407D00828B65 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -81,10 +85,20 @@
 		3D25E0CD214DFC2E00E91697 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3D25E0CE214DFC4600E91697 /* TMDbClient.swift */,
+				3D25E0D2214E032100E91697 /* TMDb */,
 				3D25E0D0214DFDE700E91697 /* NetworkWorker.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		3D25E0D2214E032100E91697 /* TMDb */ = {
+			isa = PBXGroup;
+			children = (
+				3D25E0CE214DFC4600E91697 /* TMDbClient.swift */,
+				3D25E0D3214E034300E91697 /* TMDbMoviesWorker.swift */,
+				3D25E0D5214E07DC00E91697 /* TMDbMovie.swift */,
+			);
+			path = TMDb;
 			sourceTree = "<group>";
 		};
 		3D5E99B5214B407C00828B65 = {
@@ -323,6 +337,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D25E0D4214E034300E91697 /* TMDbMoviesWorker.swift in Sources */,
+				3D25E0D6214E07DC00E91697 /* TMDbMovie.swift in Sources */,
 				3D25E0CF214DFC4600E91697 /* TMDbClient.swift in Sources */,
 				3D5E99C6214B407D00828B65 /* SecondViewController.swift in Sources */,
 				3D25E0D1214DFDE700E91697 /* NetworkWorker.swift in Sources */,

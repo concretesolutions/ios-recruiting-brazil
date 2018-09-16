@@ -27,7 +27,7 @@ class HTTPNetworkWorker {
 	///   - parameters: The parameters.
 	///   - headers: The headers.
 	///   - completion: The handler to be called once the request has finished.
-	public func getDecodable<T>(from urlString: String, with parameters: [String : Any]? = nil, headers: [String : String]? = nil, _ completion: @escaping (GetDecodableResult<T>) -> Void) where T : Decodable {
+	public func get<T>(decodable: T.Type, from urlString: String, with parameters: [String : Any]? = nil, headers: [String : String]? = nil, _ completion: @escaping (GetDecodableResult<T>) -> Void) where T : Decodable {
 		guard hasConnection() else {
 			return completion((false, nil, .NoConnection))
 		}
