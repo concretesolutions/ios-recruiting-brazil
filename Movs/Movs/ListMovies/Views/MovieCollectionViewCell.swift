@@ -12,6 +12,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 	
 	static let identifier = "MovieCollectionViewCell"
 	static let nib = UINib(nibName: MovieCollectionViewCell.identifier, bundle: Bundle.main)
+	static let preferredSize = CGSize(width: 300, height: 455)
 	
 	public var favoriteMovie: ((_ id: Int) -> Void)?
 	private var presentedMovieId: Int!
@@ -21,11 +22,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak private var genreLabel: UILabel!
 	
 	@IBAction private func favorite(_ sender: UIButton) {
-		if sender.isSelected {
-			sender.tintColor = .red
-		} else {
-			sender.tintColor = .white
-		}
+		setSelected(sender)
 		
 		favoriteMovie?(presentedMovieId)
 	}
@@ -41,6 +38,31 @@ class MovieCollectionViewCell: UICollectionViewCell {
 		posterImageView.image = formattedMovieModel.image
 		titleLabel.text = formattedMovieModel.title
 		genreLabel.text = formattedMovieModel.mainGenre
+	}
+	
+	public func setPoster(_ posterImage: UIImage) {
+		posterImageView.image = posterImage
+	}
+	
+	// MARK: Auxiliary methods
+	
+	private func setSelected(_ button: UIButton) {
+		
+		UIButton.animate(withDuration: 0.2, animations: {
+			button.isSelected = !button.isSelected
+			
+			if button.isSelected {
+				button.tintColor = .red
+			} else {
+				button.tintColor = .white
+			}
+			
+			button.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+		}, completion: { finish in
+			UIButton.animate(withDuration: 0.2, animations: {
+				button.transform = CGAffineTransform.identity
+			})
+		})
 	}
 	
 }
