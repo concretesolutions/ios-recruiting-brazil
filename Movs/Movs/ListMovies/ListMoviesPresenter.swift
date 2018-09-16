@@ -13,16 +13,52 @@
 import UIKit
 
 protocol ListMoviesPresentationLogic {
-	func presentSomething(response: ListMovies.Something.Response)
+	func presentMovies(with response: ListMovies.GetMovies.Response)
 }
 
 class ListMoviesPresenter: ListMoviesPresentationLogic {
 	weak var viewController: ListMoviesDisplayLogic?
 	
-	// MARK: Do something
+	// MARK: Present Movies
 	
-	func presentSomething(response: ListMovies.Something.Response) {
-		let viewModel = ListMovies.Something.ViewModel()
-		viewController?.displaySomething(viewModel: viewModel)
+	func presentMovies(with response: ListMovies.GetMovies.Response) {
+		let formattedMovies = response.movies?.map(formatMovieInfo)
+		
+		var message: String? = nil
+		if let error = response.error {
+			message = getMessage(for: error)
+		}
+		
+		let viewModel = ListMovies.GetMovies.ViewModel(isSuccess: response.isSuccess, moviesInfo: formattedMovies, errorMessage: message)
+		DispatchQueue.main.async {
+			self.viewController?.displayMovieList(with: viewModel)
+		}
+	}
+	
+	// MARK: Auxiliary methods
+	
+	private func formatMovieInfo(from movieInfo: ListMovies.MovieInfo) -> ListMovies.FormattedMovieInfo {
+		var image: UIImage? = nil
+		if let data = movieInfo.image, let imageFromData = UIImage(data: data) {
+			image = imageFromData
+		}
+		
+		var mainGenre: String? = nil
+		if let firstGenre = movieInfo.genres.first {
+			mainGenre = firstGenre
+		}
+		
+		let release = DateFormatter.localizedString(from: movieInfo.releaseDate, dateStyle: .short, timeStyle: .none)
+		
+		return ListMovies.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, image: image, mainGenre: mainGenre, release: release)
+	}
+	
+	private func getMessage(for error: ListMovies.RequestError) -> String {
+		switch error {
+		case .NoConnection:
+			return "You doesn't seem to have an internet connectio. Connect you device and try again."
+		case .Failure:
+			return "Sorry, we are having problems to get a movie list for you."
+		}
 	}
 }

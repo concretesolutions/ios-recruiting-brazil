@@ -13,7 +13,8 @@
 import UIKit
 
 class ListMoviesWorker {
-	func doSomeWork() {
+	
+	func downloadMovies<T>(_ completion: @escaping (_ success: Bool, _ response: [T]?, _ error: ListMovies.RequestError?) -> Void) where T : Decodable {
 		
 	}
 }

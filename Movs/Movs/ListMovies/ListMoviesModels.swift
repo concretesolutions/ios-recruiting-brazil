@@ -13,17 +13,40 @@
 import UIKit
 
 enum ListMovies {
-	// MARK: Use cases
 	
-	enum Something {
-		struct Request {
-			
-		}
+	enum RequestError: Error {
+		case NoConnection, Failure
+	}
+	
+	//MARK:- Get Movies -
+	
+	struct MovieInfo {
+		var id: Int
+		var title: String
+		var image: Data?
+		var genres: [String]
+		var releaseDate: Date
+	}
+	
+	struct FormattedMovieInfo {
+		var id: Int
+		var title: String
+		var image: UIImage?
+		var mainGenre: String?
+		var release: String
+	}
+	
+	enum GetMovies {
 		struct Response {
-			
+			let isSuccess: Bool
+			let error: RequestError?
+			let movies: [MovieInfo]?
 		}
+		
 		struct ViewModel {
-			
+			let isSuccess: Bool
+			let moviesInfo: [FormattedMovieInfo]?
+			let errorMessage: String?
 		}
 	}
 }

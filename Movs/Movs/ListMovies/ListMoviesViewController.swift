@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ListMoviesDisplayLogic: class {
-	func displaySomething(viewModel: ListMovies.Something.ViewModel)
+	func displayMovieList(with viewModel: ListMovies.GetMovies.ViewModel)
 }
 
 class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
@@ -63,19 +63,12 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		doSomething()
+		interactor?.getMovies()
 	}
 	
 	// MARK: Do something
 	
-	//@IBOutlet weak var nameTextField: UITextField!
-	
-	func doSomething() {
-		let request = ListMovies.Something.Request()
-		interactor?.doSomething(request: request)
-	}
-	
-	func displaySomething(viewModel: ListMovies.Something.ViewModel) {
+	func displayMovieList(with viewModel: ListMovies.GetMovies.ViewModel) {
 		//nameTextField.text = viewModel.name
 	}
 }

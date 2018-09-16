@@ -13,25 +13,47 @@
 import UIKit
 
 protocol ListMoviesBusinessLogic {
-	func doSomething(request: ListMovies.Something.Request)
+	func getMovies()
 }
 
 protocol ListMoviesDataStore {
-	//var name: String { get set }
 }
 
 class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	var presenter: ListMoviesPresentationLogic?
 	var worker: ListMoviesWorker?
-	//var name: String = ""
 	
-	// MARK: Do something
+	// MARK: Auxiliary variables
 	
-	func doSomething(request: ListMovies.Something.Request) {
+	var movies: [Movie] = []
+	
+	// MARK: Get Movies
+	
+	func getMovies() {
 		worker = ListMoviesWorker()
-		worker?.doSomeWork()
 		
-		let response = ListMovies.Something.Response()
-		presenter?.presentSomething(response: response)
+		worker?.downloadMovies({ (success, returnedMovies: [Movie]?, error)  in
+			if let returnedMovies = returnedMovies {
+				self.movies = returnedMovies
+			}
+			let moviesInfo: [ListMovies.MovieInfo]? = returnedMovies?.map(self.getResponseMovieInfo)
+			
+			let response = ListMovies.GetMovies.Response(isSuccess: success, error: error, movies: moviesInfo)
+			self.presenter?.presentMovies(with: response)
+		})
+	}
+	
+	// MARK: Auxiliary methods
+	
+	private func getResponseMovieInfo(from movie: Movie) -> ListMovies.MovieInfo {
+		// The poster image is preferable to the backdrop image
+		var image: Data? = nil
+		if let posterData = movie.posterImageData {
+			image = posterData
+		} else if let backdropImage = movie.backdropImageData {
+			image = backdropImage
+		}
+		
+		return ListMovies.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate)
 	}
 }
