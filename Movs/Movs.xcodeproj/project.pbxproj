@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D25E0CF214DFC4600E91697 /* TMDbClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D25E0CE214DFC4600E91697 /* TMDbClient.swift */; };
 		3D5E99C2214B407D00828B65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99C1214B407D00828B65 /* AppDelegate.swift */; };
 		3D5E99C4214B407D00828B65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99C3214B407D00828B65 /* FirstViewController.swift */; };
 		3D5E99C6214B407D00828B65 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E99C5214B407D00828B65 /* SecondViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D25E0CE214DFC4600E91697 /* TMDbClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDbClient.swift; sourceTree = "<group>"; };
 		3D5E99BE214B407D00828B65 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5E99C1214B407D00828B65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D5E99C3214B407D00828B65 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D25E0CD214DFC2E00E91697 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3D25E0CE214DFC4600E91697 /* TMDbClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		3D5E99B5214B407C00828B65 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +94,7 @@
 			children = (
 				3DDDEBD4214B5B5000B0AD25 /* Model */,
 				3DDDEBD3214B4B3B00B0AD25 /* Interface Helpers */,
+				3D25E0CD214DFC2E00E91697 /* Services */,
 				3DDDEBD2214B4B1800B0AD25 /* Supporting Files */,
 				3D5E99C3214B407D00828B65 /* FirstViewController.swift */,
 				3D5E99C5214B407D00828B65 /* SecondViewController.swift */,
@@ -228,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D25E0CF214DFC4600E91697 /* TMDbClient.swift in Sources */,
 				3D5E99C6214B407D00828B65 /* SecondViewController.swift in Sources */,
 				3D5E99C2214B407D00828B65 /* AppDelegate.swift in Sources */,
 				3DDDEBD6214B5B6000B0AD25 /* Movie.swift in Sources */,
