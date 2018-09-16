@@ -10,6 +10,9 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
 	
+	static let identifier = "MovieCollectionViewCell"
+	static let nib = UINib(nibName: MovieCollectionViewCell.identifier, bundle: Bundle.main)
+	
 	public var favoriteMovie: ((_ id: Int) -> Void)?
 	private var presentedMovieId: Int!
 

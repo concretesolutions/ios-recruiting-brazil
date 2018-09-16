@@ -19,6 +19,10 @@ protocol ListMoviesDisplayLogic: class {
 class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	var interactor: ListMoviesBusinessLogic?
 	var router: (NSObjectProtocol & ListMoviesRoutingLogic & ListMoviesDataPassing)?
+	
+	fileprivate var collectionManager: MovieCollectionViewManager!
+	fileprivate var refreshControl: UIRefreshControl!
+	
 	@IBOutlet weak var moviesCollectionView: UICollectionView!
 	
 	// MARK: Object lifecycle
@@ -63,12 +67,54 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		setupMoviesCollection()
+		getUpcomingMovies()
+	}
+	
+	// MARK: ListMoviesDisplayLogic implementation
+	
+	func displayMovieList(with viewModel: ListMovies.GetMovies.ViewModel) {
+		if refreshControl.isRefreshing {
+			refreshControl.endRefreshing()
+		}
+		
+		if let moviesInfo = viewModel.moviesInfo {
+			collectionManager.display(movies: moviesInfo)
+		} else if let message = viewModel.errorMessage {
+			let alert = UIAlertController(title: "Ops", message: message, preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+			
+			self.present(alert, animated: true, completion: nil)
+		}
+	}
+	
+	//MARK:- Auxiliary Methods
+	
+	@objc fileprivate func getUpcomingMovies() {
+		if !refreshControl.isRefreshing {
+			refreshControl.beginRefreshing()
+		}
+		
 		interactor?.getMovies()
 	}
 	
-	// MARK: Do something
+	fileprivate func setupMoviesCollection() {
+		moviesCollectionView.contentInset = UIEdgeInsets(top: 20, left: 5, bottom: 0, right: 5)
+		moviesCollectionView.alwaysBounceVertical = true
+		
+		refreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(getUpcomingMovies), for: .valueChanged)
+		moviesCollectionView.refreshControl = refreshControl
+		
+		setupMoviewCollectionManager()
+	}
 	
-	func displayMovieList(with viewModel: ListMovies.GetMovies.ViewModel) {
-		//nameTextField.text = viewModel.name
+	fileprivate func setupMoviewCollectionManager() {
+		collectionManager = MovieCollectionViewManager(of: moviesCollectionView)
+//		collectionManager.delegate = self
+		
+		moviesCollectionView.dataSource = collectionManager
+		moviesCollectionView.delegate = collectionManager
 	}
 }
