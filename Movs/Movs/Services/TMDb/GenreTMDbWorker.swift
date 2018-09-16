@@ -1,5 +1,5 @@
 //
-//  TMDbGenreWorker.swift
+//  GenreTMDbWorker.swift
 //  Movs
 //
 //  Created by Lucas Ferraço on 16/09/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TMDbGenreWorker: TMDbClient {
+class GenreTMDbWorker: TMDbClient {
 	
 	private var httpNetworkWorker: HTTPNetworkWorker?
 	private var movieList: [Genre]? = nil

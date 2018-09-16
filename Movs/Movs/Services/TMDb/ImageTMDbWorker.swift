@@ -1,5 +1,5 @@
 //
-//  TMDbImageWorker.swift
+//  ImageTMDbWorker.swift
 //  Movs
 //
 //  Created by Lucas Ferraço on 16/09/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TMDbImageWorker: TMDbClient {
+class ImageTMDbWorker: TMDbClient {
 	
 	private var httpNetworkWorker: HTTPNetworkWorker?
 	

@@ -1,5 +1,5 @@
 //
-//  TMDbMoviesWorker.swift
+//  MoviesTMDbWorker.swift
 //  Movs
 //
 //  Created by Lucas Ferraço on 16/09/18.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-enum TMDbMoviesWorkerError: Error {
+enum MoviesTMDbWorkerError: Error {
 	case NoConnection
 	case Failure
 }
 
-class TMDbMoviesWorker: TMDbClient {
+class MoviesTMDbWorker: TMDbClient {
 	
 	private var httpNetworkWorker: HTTPNetworkWorker? = nil
 	
@@ -38,7 +38,7 @@ class TMDbMoviesWorker: TMDbClient {
 	
 	//MARK:- Public Methods
 	
-	typealias FetchMoviesListResponse = (success: Bool, response: MoviesListResponse?, error: TMDbMoviesWorkerError?)
+	typealias FetchMoviesListResponse = (success: Bool, response: MoviesListResponse?, error: MoviesTMDbWorkerError?)
 	
 	/// Downloads a list of movies' information according to the specified type.
 	///
@@ -69,7 +69,7 @@ class TMDbMoviesWorker: TMDbClient {
 	
 	//MARK:- Auxiliary Methods
 	
-	private func getError(from networkError: HTTPNetworkWorkerError) -> TMDbMoviesWorkerError {
+	private func getError(from networkError: HTTPNetworkWorkerError) -> MoviesTMDbWorkerError {
 		switch networkError {
 		case .NoConnection:
 			return .NoConnection
