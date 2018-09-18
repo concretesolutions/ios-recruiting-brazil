@@ -10,6 +10,10 @@ import UIKit
 
 class MoviesTableViewController: UITableViewController {
 
+    @IBOutlet weak var imgMovie: UIImageView!
+    @IBOutlet weak var lblMovie: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

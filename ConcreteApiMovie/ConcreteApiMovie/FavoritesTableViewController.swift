@@ -10,6 +10,8 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
 
+    @IBOutlet weak var imgFavoriteMovie: UIImageView!
+    @IBOutlet weak var lblFavoriteMovie: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 

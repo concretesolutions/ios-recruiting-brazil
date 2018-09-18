@@ -10,6 +10,8 @@ import UIKit
 
 class DetailsViewController: UIViewController {
 
+    @IBOutlet weak var imaMovieDetail: UIImageView!
+    @IBOutlet weak var lblMovieDetail: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
