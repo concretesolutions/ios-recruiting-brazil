@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -26,14 +26,14 @@
                             <constraint firstAttribute="width" secondItem="AqO-az-C5m" secondAttribute="height" multiplier="300:410" id="1Te-fq-I6s"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="FqL-PG-Xi2">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="FqL-PG-Xi2">
                         <rect key="frame" x="5" y="539" width="349" height="16"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="d5b-sz-9vs">
-                        <rect key="frame" x="5" y="518" width="372" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="d5b-sz-9vs">
+                        <rect key="frame" x="5" y="518" width="349" height="18"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uug-YS-2aw">
-                        <rect key="frame" x="359" y="533" width="18" height="22"/>
+                        <rect key="frame" x="359" y="518" width="18" height="22"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" image="favorite_empty_icon"/>
                         <state key="selected" image="favorite_full_icon"/>
@@ -63,9 +63,9 @@
                 <constraint firstItem="AqO-az-C5m" firstAttribute="top" secondItem="KbQ-1w-hnH" secondAttribute="top" constant="5" id="4Cw-nG-ova"/>
                 <constraint firstItem="AqO-az-C5m" firstAttribute="leading" secondItem="KbQ-1w-hnH" secondAttribute="leading" constant="5" id="EGe-1c-z68"/>
                 <constraint firstAttribute="trailing" secondItem="LUH-q9-Tua" secondAttribute="trailing" constant="5" id="GEB-jh-mwx"/>
-                <constraint firstItem="Uug-YS-2aw" firstAttribute="bottom" secondItem="FqL-PG-Xi2" secondAttribute="bottom" id="PKW-hu-yOQ"/>
+                <constraint firstItem="Uug-YS-2aw" firstAttribute="top" secondItem="d5b-sz-9vs" secondAttribute="top" id="J9F-xx-yJp"/>
                 <constraint firstItem="d5b-sz-9vs" firstAttribute="leading" secondItem="AqO-az-C5m" secondAttribute="leading" id="VBN-2C-oK9"/>
-                <constraint firstItem="d5b-sz-9vs" firstAttribute="trailing" secondItem="AqO-az-C5m" secondAttribute="trailing" id="d3O-H2-BeE"/>
+                <constraint firstItem="Uug-YS-2aw" firstAttribute="leading" secondItem="d5b-sz-9vs" secondAttribute="trailing" constant="5" id="d3O-H2-BeE"/>
                 <constraint firstItem="Uug-YS-2aw" firstAttribute="leading" secondItem="FqL-PG-Xi2" secondAttribute="trailing" constant="5" id="hOH-9C-Y79"/>
                 <constraint firstItem="d5b-sz-9vs" firstAttribute="top" secondItem="AqO-az-C5m" secondAttribute="bottom" constant="5" id="j5H-en-ex8"/>
                 <constraint firstAttribute="bottom" secondItem="LUH-q9-Tua" secondAttribute="bottom" constant="5" id="kHX-QX-zbr"/>
