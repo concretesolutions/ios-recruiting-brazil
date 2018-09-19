@@ -51,7 +51,7 @@ class FavoriteCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             poster.heightAnchor .constraint(equalToConstant: 70),
-            poster.widthAnchor  .constraint(equalToConstant: 70),
+            poster.widthAnchor  .constraint(equalToConstant: 50),
             poster.topAnchor    .constraint(equalTo: self.contentView.topAnchor, constant: 5),
             poster.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
             poster.bottomAnchor .constraint(equalTo: self.contentView.bottomAnchor, constant: -5),
