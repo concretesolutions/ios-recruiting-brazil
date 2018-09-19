@@ -18,7 +18,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
 	public var didFavoritedMovie: ((_ movieId: Int) -> Void)?
 	
 	@IBOutlet weak private var posterImageView: UIImageView!
-	@IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var titleLabel: UILabel!
 	@IBOutlet weak private var genreLabel: UILabel!
 	@IBOutlet weak var favoriteButton: UIButton!
 	@IBOutlet weak var overviewLabel: UILabel!
@@ -40,7 +40,7 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
 	
 	public func configure(with formattedMovieModel: ListFavorites.FormattedMovieInfo)  {
 		presentedMovieId = formattedMovieModel.id
-		titleLabel.text = formattedMovieModel.title
+        titleLabel.text = formattedMovieModel.title
 		genreLabel.text = formattedMovieModel.genres
 		posterImageView.image = formattedMovieModel.image
 		overviewLabel.text = formattedMovieModel.overview

@@ -86,9 +86,8 @@ class ListFavoritesViewController: UIViewController, ListFavoritesDisplayLogic {
 	//MARK:- Auxiliary Methods
 	
 	fileprivate func setupMoviesCollection() {
-		favoritesCollectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
-		favoritesCollectionView.alwaysBounceVertical = true
-		
+		favoritesCollectionView.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 5)
+        
 		setupMoviewCollectionManager()
 	}
 	
