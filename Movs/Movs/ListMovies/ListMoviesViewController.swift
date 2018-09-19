@@ -165,7 +165,7 @@ extension ListMoviesViewController: MovieCollectionViewCellProtocol {
 
 extension ListMoviesViewController: MovieCollectionViewManagerProtocol {	
 	func getMoreMovies(_ completion: @escaping ([ListMovies.FormattedMovieInfo]) -> Void) {
-		
+		interactor?.getMoreMovies(completion)
 	}
 	
 	func didSelectMovie(with id: Int) {

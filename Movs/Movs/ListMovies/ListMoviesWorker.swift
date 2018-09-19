@@ -37,11 +37,7 @@ class ListMoviesWorker {
 	/// Downloads a list of the most popular movies.
 	///
 	/// - Parameter completion: The handler to be called once the movies were downloaded.
-	/// - Parameter success: Whether or not the method suceeded.
-	/// - Parameter response: The decoded response for the call.
-	/// - Parameter error: The error encontered during the download.
 	public func downloadPopularMovies<T>(_ completion: @escaping (DownloadMoviesResult<T>) -> Void) where T : Decodable {
-		
 		// Resets pagination
 		currentPage = 1
 		totalPages = 0
@@ -57,6 +53,30 @@ class ListMoviesWorker {
 			}
 		}
 	}
+    
+    /// Downloads a list of more popular movies.
+    /// Should be called after a first call to downloadPopularMovies.
+    ///
+    /// - Parameter completion: The handler to be called once the movies were downloaded.
+    func getMoreMovies<T>(_ completion: @escaping (DownloadMoviesResult<T>) -> Void) where T : Decodable {
+        if currentPage > totalPages {
+            completion((false, nil, .AllMoviesDownloaded))
+            return
+        } else {
+            currentPage += 1 // Keeps the user from fetching the same page twice
+        }
+        
+        moviesTMDbWorker = MoviesTMDbWorker()
+        moviesTMDbWorker?.fetchMoviesList(of: .popular, on: currentPage, { (result) in
+            if result.success, let apiResponse = result.response {
+                self.store(apiMovies: apiResponse.movies)
+                self.handle(apiResponse, completion)
+            } else {
+                let error = self.useCaseError(for: result.error)
+                completion((false, nil, error))
+            }
+        })
+    }
 	
 	typealias DownloadImageResponse = (success: Bool, imageData: Data?)
 	
@@ -96,11 +116,10 @@ class ListMoviesWorker {
 	}
 	
 	private func handle<T>(_ apiResponse: MoviesTMDbWorker.MoviesListResponse, _ completion: @escaping (DownloadMoviesResult<T>) -> Void) where T : Decodable {
-		totalPages = apiResponse.totalPages
+        totalPages = apiResponse.totalPages
 		
 		do {
 			let response = try self.getGenericMovies(fromAPIMovies: apiResponse.movies, to: T.self)
-			self.currentPage += 1
 			completion((true, response, nil))
 		} catch _ {
 			completion((false, nil, .Failure))

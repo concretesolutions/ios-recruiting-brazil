@@ -14,6 +14,7 @@ import UIKit
 
 protocol ListMoviesBusinessLogic {
 	func getMovies()
+    func getMoreMovies(_ completion: @escaping ([ListMovies.FormattedMovieInfo]) -> Void)
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
 	func setSelectedMovie(with id: Int)
 	func favoriteMovie(with id: Int)
@@ -53,6 +54,21 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 			self.presenter?.presentMovies(with: response)
 		})
 	}
+    
+    
+    func getMoreMovies(_ completion: @escaping ([ListMovies.FormattedMovieInfo]) -> Void) {
+        worker.getMoreMovies { (success, returnedMovies: [Movie]?, error) in
+            if let returnedMovies = returnedMovies {
+                self.movies += returnedMovies
+            }
+            
+            if let moviesInfo = returnedMovies?.map(self.getResponseMovieInfo),
+                let transformMethod = self.presenter?.formatMovieInfo {
+                let formattedMoviesInto = moviesInfo.map(transformMethod)
+                completion(formattedMoviesInto)
+            }
+        }
+    }
 	
 	//MARK: Get Movie Image
 	

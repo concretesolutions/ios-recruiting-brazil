@@ -15,7 +15,7 @@ import UIKit
 enum ListMovies {
 	
 	enum RequestError: Error {
-		case NoConnection, Failure
+		case NoConnection, Failure, AllMoviesDownloaded
 	}
 	
 	//MARK:- Get Movies -
