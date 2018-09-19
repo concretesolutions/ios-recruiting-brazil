@@ -16,6 +16,7 @@ protocol ListMoviesPresentationLogic {
 	func presentMovies(with response: ListMovies.GetMovies.Response)
     func presentUpdatedMovies(with response: ListMovies.UpdateMovies.Response)
 	func mountMovieImage(from data: Data) -> UIImage
+    func formatMovieInfo(from movieInfo: ListMovies.MovieInfo) -> ListMovies.FormattedMovieInfo
 }
 
 class ListMoviesPresenter: ListMoviesPresentationLogic {
@@ -47,7 +48,6 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
         }
     }
 	
-	//MARK: Mount Movie Image
 	
 	func mountMovieImage(from data: Data) -> UIImage {
 		var presentedImage = UIImage(named: "defaultPoster")!
@@ -57,19 +57,21 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 		
 		return presentedImage
 	}
+    
+    //MARK: Format Movie Info
+
+    func formatMovieInfo(from movieInfo: ListMovies.MovieInfo) -> ListMovies.FormattedMovieInfo {
+        var mainGenre: String? = nil
+        if let firstGenre = movieInfo.genres?.first {
+            mainGenre = firstGenre
+        }
+        
+        let release = DateFormatter.localizedString(from: movieInfo.releaseDate, dateStyle: .short, timeStyle: .none)
+        
+        return ListMovies.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, mainGenre: mainGenre, release: release, isFavorite: movieInfo.isFavorite)
+    }
 	
 	// MARK: Auxiliary methods
-	
-	private func formatMovieInfo(from movieInfo: ListMovies.MovieInfo) -> ListMovies.FormattedMovieInfo {
-		var mainGenre: String? = nil
-		if let firstGenre = movieInfo.genres?.first {
-			mainGenre = firstGenre
-		}
-		
-		let release = DateFormatter.localizedString(from: movieInfo.releaseDate, dateStyle: .short, timeStyle: .none)
-		
-		return ListMovies.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, mainGenre: mainGenre, release: release, isFavorite: movieInfo.isFavorite)
-	}
 	
 	private func getMessage(for error: ListMovies.RequestError) -> String {
 		switch error {
@@ -77,6 +79,8 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 			return "You doesn't seem to have an internet connectio. Connect you device and try again."
 		case .Failure:
 			return "Sorry, we are having problems to get a movie list for you."
-		}
+        case .AllMoviesDownloaded:
+            return "All movies downloaded. Enjoy! 😄"
+        }
 	}
 }
