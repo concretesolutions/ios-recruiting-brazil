@@ -13,14 +13,16 @@
 import UIKit
 
 protocol ListFavoritesDisplayLogic: class {
-	func displaySomething(viewModel: ListFavorites.Something.ViewModel)
+	func displayFavoriteList(with viewModel: ListFavorites.GetFavorites.ViewModel)
 }
 
 class ListFavoritesViewController: UIViewController, ListFavoritesDisplayLogic {
 	var interactor: ListFavoritesBusinessLogic?
 	var router: (NSObjectProtocol & ListFavoritesRoutingLogic & ListFavoritesDataPassing)?
 	
+	fileprivate var collectionManager: FavoriteCollectionManager!
 	@IBOutlet weak var favoritesCollectionView: UICollectionView!
+	
 	// MARK: Object lifecycle
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -61,21 +63,46 @@ class ListFavoritesViewController: UIViewController, ListFavoritesDisplayLogic {
 	
 	// MARK: View lifecycle
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		doSomething()
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		setupMoviesCollection()
+		interactor?.getFavorites()
 	}
 	
-	// MARK: Do something
+	// MARK: Display Favorites
 	
-	//@IBOutlet weak var nameTextField: UITextField!
-	
-	func doSomething() {
-		let request = ListFavorites.Something.Request()
-		interactor?.doSomething(request: request)
+	func displayFavoriteList(with viewModel: ListFavorites.GetFavorites.ViewModel) {
+		if viewModel.isSuccess, let moviesInfo = viewModel.moviesInfo {
+			collectionManager.display(movies: moviesInfo)
+		} else if let message = viewModel.errorMessage {
+			let alert = UIAlertController(title: "Ops", message: message, preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+			
+			self.present(alert, animated: true, completion: nil)
+		}
 	}
 	
-	func displaySomething(viewModel: ListFavorites.Something.ViewModel) {
-		//nameTextField.text = viewModel.name
+	//MARK:- Auxiliary Methods
+	
+	fileprivate func setupMoviesCollection() {
+		favoritesCollectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
+		favoritesCollectionView.alwaysBounceVertical = true
+		
+		setupMoviewCollectionManager()
+	}
+	
+	fileprivate func setupMoviewCollectionManager() {
+		collectionManager = FavoriteCollectionManager(of: favoritesCollectionView)
+		collectionManager.delegate = self
+		
+		favoritesCollectionView.dataSource = collectionManager
+		favoritesCollectionView.delegate = collectionManager
+	}
+}
+
+extension ListFavoritesViewController: FavoriteCollectionManagerProtocol {
+	func didFavoritedMovie(withId id: Int) {
+		
 	}
 }

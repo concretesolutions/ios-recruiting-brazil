@@ -13,16 +13,49 @@
 import UIKit
 
 protocol ListFavoritesPresentationLogic {
-	func presentSomething(response: ListFavorites.Something.Response)
+	func presentFavorites(with response: ListFavorites.GetFavorites.Response)
 }
 
 class ListFavoritesPresenter: ListFavoritesPresentationLogic {
 	weak var viewController: ListFavoritesDisplayLogic?
 	
-	// MARK: Do something
+	// MARK: Present Favorites
 	
-	func presentSomething(response: ListFavorites.Something.Response) {
-		let viewModel = ListFavorites.Something.ViewModel()
-		viewController?.displaySomething(viewModel: viewModel)
+	func presentFavorites(with response: ListFavorites.GetFavorites.Response) {
+		let formattedMovies = response.movies?.map(formatMovieInfo)
+		
+		var message: String? = nil
+		if !response.isSuccess {
+			message = "We couldn't get your favorite movies."
+		} else if let formattedMovies = formattedMovies, formattedMovies.isEmpty {
+			message = "You don't have any favorite movies yet."
+		}
+		
+		let viewModel = ListFavorites.GetFavorites.ViewModel(isSuccess: response.isSuccess, moviesInfo: formattedMovies, errorMessage: message)
+		DispatchQueue.main.async {
+			self.viewController?.displayFavoriteList(with: viewModel)
+		}
+	}
+	
+	// MARK: Auxiliary methods
+	
+	private func formatMovieInfo(from movieInfo: ListFavorites.MovieInfo) -> ListFavorites.FormattedMovieInfo {
+		var image: UIImage? = nil
+		if let data = movieInfo.image, let imageFromData = UIImage(data: data) {
+			image = imageFromData
+		}
+		
+		var genresString = ""
+		if let genres = movieInfo.genres {
+			for genre in genres {
+				genresString += genre.capitalized + ", "
+			}
+			
+			genresString = String(genresString.dropLast(2))
+		}
+		
+		let release = DateFormatter.localizedString(from: movieInfo.releaseDate, dateStyle: .short, timeStyle: .none)
+		
+		return ListFavorites.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, image: image, genres: genresString, release: release, overview: movieInfo.overview)
 	}
 }

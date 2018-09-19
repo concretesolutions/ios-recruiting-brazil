@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ListFavoritesBusinessLogic {
-	func doSomething(request: ListFavorites.Something.Request)
+	func getFavorites()
 }
 
 protocol ListFavoritesDataStore {
@@ -23,14 +23,37 @@ protocol ListFavoritesDataStore {
 class ListFavoritesInteractor: ListFavoritesBusinessLogic, ListFavoritesDataStore {
 	var presenter: ListFavoritesPresentationLogic?
 	var worker: ListFavoritesWorker?
-	//var name: String = ""
 	
-	// MARK: Do something
+	var favorites: [Movie] = []
 	
-	func doSomething(request: ListFavorites.Something.Request) {
-		worker = ListFavoritesWorker()
+	// MARK: Get Favorites
+	
+	func getFavorites() {
+		var success = true
 		
-		let response = ListFavorites.Something.Response()
-		presenter?.presentSomething(response: response)
+		worker = ListFavoritesWorker()
+		if let fetchedFavs = worker?.fetchFavorites(ofType: Movie.self) {
+			favorites = fetchedFavs
+		} else {
+			success = false
+		}
+		
+		let moviesInfo: [ListFavorites.MovieInfo]? = favorites.map(self.getResponseMovieInfo)
+		let response = ListFavorites.GetFavorites.Response(isSuccess: success, movies: moviesInfo)
+		presenter?.presentFavorites(with: response)
+	}
+	
+	// MARK: Auxiliary methods
+	
+	private func getResponseMovieInfo(from movie: Movie) -> ListFavorites.MovieInfo {
+		// The poster image is preferable to the backdrop image
+		var image: Data? = nil
+		if let posterData = movie.posterImageData {
+			image = posterData
+		} else if let backdropImage = movie.backdropImageData {
+			image = backdropImage
+		}
+		
+		return ListFavorites.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate, overview: movie.overview)
 	}
 }

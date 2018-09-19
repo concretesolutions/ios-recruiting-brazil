@@ -13,17 +13,36 @@
 import UIKit
 
 enum ListFavorites {
-	// MARK: Use cases
+	//MARK:- Get Favorites -
 	
-	enum Something {
-		struct Request {
-			
-		}
+	struct MovieInfo {
+		var id: Int
+		var title: String
+		var image: Data?
+		var genres: [String]?
+		var releaseDate: Date
+		var overview: String
+	}
+	
+	struct FormattedMovieInfo {
+		var id: Int
+		var title: String
+		var image: UIImage?
+		var genres: String?
+		var release: String
+		var overview: String
+	}
+	
+	enum GetFavorites {
 		struct Response {
-			
+			let isSuccess: Bool
+			let movies: [MovieInfo]?
 		}
+		
 		struct ViewModel {
-			
+			let isSuccess: Bool
+			let moviesInfo: [FormattedMovieInfo]?
+			let errorMessage: String?
 		}
 	}
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="FavoriteCollectionViewCell" reuseIdentifier="FavoriteCollectionViewCell" id="KbQ-1w-hnH" customClass="FavoriteCollectionViewCell" customModule="Movs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="683"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="382" height="683"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="defaultPoster" translatesAutoresizingMaskIntoConstraints="NO" id="AqO-az-C5m">
+                        <rect key="frame" x="5" y="26.5" width="372" height="455"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="FqL-PG-Xi2">
+                        <rect key="frame" x="5" y="486.5" width="344" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="LUH-q9-Tua">
+                        <rect key="frame" x="5" y="509.5" width="372" height="168.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uug-YS-2aw">
+                        <rect key="frame" x="359" y="486.5" width="18" height="22"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="favorite_empty_icon"/>
+                        <state key="selected" image="favorite_full_icon"/>
+                        <connections>
+                            <action selector="favorite:" destination="KbQ-1w-hnH" eventType="touchUpInside" id="6AO-Np-ioV"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ms-WE-pZr">
+                        <rect key="frame" x="5" y="0.0" width="372" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="FqL-PG-Xi2" firstAttribute="leading" secondItem="AqO-az-C5m" secondAttribute="leading" id="1Zp-ce-So4"/>
+                <constraint firstItem="LUH-q9-Tua" firstAttribute="leading" secondItem="FqL-PG-Xi2" secondAttribute="leading" id="2xE-Vr-Rpy"/>
+                <constraint firstAttribute="trailing" secondItem="AqO-az-C5m" secondAttribute="trailing" constant="5" id="DN6-Fp-aKO"/>
+                <constraint firstAttribute="trailing" secondItem="LUH-q9-Tua" secondAttribute="trailing" constant="5" id="GEB-jh-mwx"/>
+                <constraint firstItem="FqL-PG-Xi2" firstAttribute="top" secondItem="AqO-az-C5m" secondAttribute="bottom" constant="5" id="QL8-IG-IC2"/>
+                <constraint firstItem="7ms-WE-pZr" firstAttribute="leading" secondItem="KbQ-1w-hnH" secondAttribute="leading" constant="5" id="U9S-zV-EXf"/>
+                <constraint firstItem="AqO-az-C5m" firstAttribute="leading" secondItem="KbQ-1w-hnH" secondAttribute="leading" constant="5" id="Z1L-Qj-e3U"/>
+                <constraint firstItem="AqO-az-C5m" firstAttribute="top" secondItem="7ms-WE-pZr" secondAttribute="bottom" constant="5" id="bYk-oF-snT"/>
+                <constraint firstItem="Uug-YS-2aw" firstAttribute="leading" secondItem="FqL-PG-Xi2" secondAttribute="trailing" constant="10" id="jx5-HZ-N9I"/>
+                <constraint firstAttribute="bottom" secondItem="LUH-q9-Tua" secondAttribute="bottom" constant="5" id="kHX-QX-zbr"/>
+                <constraint firstItem="7ms-WE-pZr" firstAttribute="top" secondItem="KbQ-1w-hnH" secondAttribute="top" id="lZi-Y9-eWA"/>
+                <constraint firstItem="Uug-YS-2aw" firstAttribute="trailing" secondItem="AqO-az-C5m" secondAttribute="trailing" id="nk7-bm-rlO"/>
+                <constraint firstItem="Uug-YS-2aw" firstAttribute="top" secondItem="FqL-PG-Xi2" secondAttribute="top" id="qQZ-0b-t8t"/>
+                <constraint firstAttribute="trailing" secondItem="7ms-WE-pZr" secondAttribute="trailing" constant="5" id="ref-R1-hYQ"/>
+                <constraint firstItem="LUH-q9-Tua" firstAttribute="top" secondItem="FqL-PG-Xi2" secondAttribute="bottom" constant="5" id="vCU-sq-DIZ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="QzG-pV-yhD"/>
+            <size key="customSize" width="382" height="687"/>
+            <connections>
+                <outlet property="favoriteButton" destination="Uug-YS-2aw" id="Q4F-QN-cg8"/>
+                <outlet property="genreLabel" destination="FqL-PG-Xi2" id="a00-jv-Kf8"/>
+                <outlet property="overviewLabel" destination="LUH-q9-Tua" id="a3l-IM-hef"/>
+                <outlet property="posterImageView" destination="AqO-az-C5m" id="evn-ly-1V3"/>
+                <outlet property="titleLabel" destination="7ms-WE-pZr" id="GTy-Nf-7yX"/>
+            </connections>
+            <point key="canvasLocation" x="157" y="199.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="defaultPoster" width="300" height="455"/>
+        <image name="favorite_empty_icon" width="18" height="16"/>
+        <image name="favorite_full_icon" width="18" height="16"/>
+    </resources>
+</document>
