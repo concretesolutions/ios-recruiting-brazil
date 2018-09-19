@@ -148,6 +148,6 @@ extension ListMoviesViewController: MovieCollectionViewManagerProtocol {
 	}
 	
 	func didFavoritedMovie(withId id: Int) {
-		
+		interactor?.favoriteMovie(with: id)
 	}
 }

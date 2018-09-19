@@ -25,6 +25,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak private var posterImageView: UIImageView!
 	@IBOutlet weak private var titleLabel: UILabel!
 	@IBOutlet weak private var genreLabel: UILabel!
+	@IBOutlet weak var favoriteButton: UIButton!
 	
 	@IBAction private func favorite(_ sender: UIButton) {
 		setSelected(sender)
@@ -35,14 +36,16 @@ class MovieCollectionViewCell: UICollectionViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		self.posterImageView.layer.masksToBounds = true
-		self.posterImageView.layer.cornerRadius = 5.0
+		favoriteButton.isSelected = false
+		posterImageView.layer.masksToBounds = true
+		posterImageView.layer.cornerRadius = 5.0
 	}
 	
 	public func configure(with formattedMovieModel: ListMovies.FormattedMovieInfo)  {
 		presentedMovieId = formattedMovieModel.id
 		titleLabel.text = formattedMovieModel.title
 		genreLabel.text = formattedMovieModel.mainGenre
+		setSelected(favoriteButton, to: formattedMovieModel.isFavorite)
 		
 		delegate?.image(forMovieId: presentedMovieId, { (image) in
 			self.posterImageView.image = image
@@ -51,10 +54,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
 	
 	// MARK: Auxiliary methods
 	
-	private func setSelected(_ button: UIButton) {
+	private func setSelected(_ button: UIButton, to isSelected: Bool? = nil) {
 		
 		UIButton.animate(withDuration: 0.2, animations: {
-			button.isSelected = !button.isSelected
+			if let isSelected = isSelected {
+				button.isSelected = isSelected
+			} else {
+				button.isSelected = !button.isSelected
+			}
 			
 			if button.isSelected {
 				button.tintColor = .red

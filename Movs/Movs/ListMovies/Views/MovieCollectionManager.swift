@@ -58,7 +58,12 @@ extension MovieCollectionViewManager: UICollectionViewDataSource {
 		
 		let currentMovieInfo = data[indexPath.section][indexPath.row]
 		movieCell.delegate = cellDelegate
-		movieCell.didFavoritedMovie = delegate?.didFavoritedMovie
+		movieCell.didFavoritedMovie = { id in
+			// Updates the local object to persist when reloading the cell,
+			// without having to reload the full collection.
+			self.data[indexPath.section][indexPath.row].isFavorite = !currentMovieInfo.isFavorite
+			self.delegate?.didFavoritedMovie(withId: id)
+		}
 		movieCell.configure(with: currentMovieInfo)
 		
 		return movieCell

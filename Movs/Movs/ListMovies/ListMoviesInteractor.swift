@@ -16,6 +16,7 @@ protocol ListMoviesBusinessLogic {
 	func getMovies()
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
 	func setSelectedMovie(with id: Int)
+	func favoriteMovie(with id: Int)
 }
 
 protocol ListMoviesDataStore {
@@ -30,6 +31,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	// MARK: Auxiliary variables
 	
 	var movies: [Movie] = []
+	var favoriteMovies: [Movie] = []
 	
 	// MARK: Get Movies
 	
@@ -74,6 +76,16 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 		self.selectedMovie = selectedMovie
 	}
 	
+	//MARK: Favorite Movie
+	
+	func favoriteMovie(with id: Int) {
+		guard let selectedMovie = movies.first(where: { (movie) -> Bool in
+			return movie.id == id
+		}) else { return }
+		
+		favoriteMovies.append(selectedMovie)
+	}
+	
 	// MARK: Auxiliary methods
 	
 	private func getResponseMovieInfo(from movie: Movie) -> ListMovies.MovieInfo {
@@ -85,6 +97,8 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 			image = backdropImage
 		}
 		
-		return ListMovies.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate)
+		let isFav = favoriteMovies.contains(movie)
+		
+		return ListMovies.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate, isFavorite: isFav)
 	}
 }
