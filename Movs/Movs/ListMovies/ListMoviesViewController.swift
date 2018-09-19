@@ -100,7 +100,7 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	}
 	
 	fileprivate func setupMoviesCollection() {
-		moviesCollectionView.contentInset = UIEdgeInsets(top: 20, left: 5, bottom: 0, right: 5)
+		moviesCollectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
 		moviesCollectionView.alwaysBounceVertical = true
 		
 		refreshControl = UIRefreshControl()
