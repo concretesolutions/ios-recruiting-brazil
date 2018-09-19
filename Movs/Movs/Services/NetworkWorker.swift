@@ -36,12 +36,21 @@ class HTTPNetworkWorker {
 			Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers)
 				.validate()
 				.responseData { (response) in
+					debugPrint("--- Result for GET request for URL: \(url) ---")
+					
 					guard response.result.isSuccess else {
+						if let errorDesc = response.error?.localizedDescription {
+							debugPrint(errorDesc)
+						} else {
+							debugPrint("Unknown failure during GET request")
+						}
+						
 						completion((false, nil, .Failure))
 						return
 					}
 					
 					guard let decodableData = response.result.value else {
+						debugPrint("Malformed response data during GET request")
 						completion((false, nil, .MalformedData))
 						return
 					}
@@ -50,9 +59,11 @@ class HTTPNetworkWorker {
 						let jsonDecoder = JSONDecoder()
 						let obj = try jsonDecoder.decode(T.self, from: decodableData)
 						
+						debugPrint("Succesful")
 						completion((true, obj, nil))
 					}
 					catch _ {
+						debugPrint("Malformed decodable response data during GET request")
 						completion((false, nil, .MalformedData))
 					}
 			}
