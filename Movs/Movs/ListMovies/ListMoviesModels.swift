@@ -23,7 +23,6 @@ enum ListMovies {
 	struct MovieInfo {
 		var id: Int
 		var title: String
-		var image: Data?
 		var genres: [String]?
 		var releaseDate: Date
 		var isFavorite: Bool
@@ -32,7 +31,6 @@ enum ListMovies {
 	struct FormattedMovieInfo {
 		var id: Int
 		var title: String
-		var image: UIImage?
 		var mainGenre: String?
 		var release: String
 		var isFavorite: Bool

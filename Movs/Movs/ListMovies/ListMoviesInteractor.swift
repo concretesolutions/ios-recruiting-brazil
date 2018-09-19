@@ -122,17 +122,9 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	
 	// MARK: Auxiliary methods
 	
-	private func getResponseMovieInfo(from movie: Movie) -> ListMovies.MovieInfo {
-		// The poster image is preferable to the backdrop image
-		var image: Data? = nil
-		if let posterData = movie.posterImageData {
-			image = posterData
-		} else if let backdropImage = movie.backdropImageData {
-			image = backdropImage
-		}
-		
+	private func getResponseMovieInfo(from movie: Movie) -> ListMovies.MovieInfo {		
 		let isFav = favoriteMovies.contains(movie)
 		
-		return ListMovies.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate, isFavorite: isFav)
+		return ListMovies.MovieInfo(id: movie.id, title: movie.title, genres: movie.genres, releaseDate: movie.releaseDate, isFavorite: isFav)
 	}
 }
