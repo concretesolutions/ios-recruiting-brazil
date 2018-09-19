@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Movie: Decodable {
+class Movie: Codable {
 	
 	public let id: Int!
 	public let title: String!

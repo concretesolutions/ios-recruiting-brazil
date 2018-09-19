@@ -12,8 +12,18 @@
 
 import UIKit
 
+public let FavoritesKey = "favorites"
+
 class ListFavoritesWorker {
-	func doSomeWork() {
-		
+	
+	fileprivate let localPersistanceWorker = LocalPersistanceWorker()
+	
+	func fetchFavorites<T>(ofType: T.Type) -> [T]? where T : Decodable {
+		return localPersistanceWorker.fetch(dataForKey: FavoritesKey, ofType: [T].self)
 	}
+	
+	func saveToFavorites<T>(_ data: T) -> Bool where T : Codable {
+		return localPersistanceWorker.saveToArray(data, withKey: FavoritesKey)
+	}
+	
 }

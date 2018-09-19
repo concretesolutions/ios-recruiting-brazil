@@ -29,7 +29,6 @@ class ListFavoritesInteractor: ListFavoritesBusinessLogic, ListFavoritesDataStor
 	
 	func doSomething(request: ListFavorites.Something.Request) {
 		worker = ListFavoritesWorker()
-		worker?.doSomeWork()
 		
 		let response = ListFavorites.Something.Response()
 		presenter?.presentSomething(response: response)

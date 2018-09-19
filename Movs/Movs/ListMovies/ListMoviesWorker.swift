@@ -17,6 +17,7 @@ class ListMoviesWorker {
 	private var moviesTMDbWorker: MoviesTMDbWorker?
 	private var genreTMDbWorker: GenreTMDbWorker!
 	private var imageTMDbWorker = ImageTMDbWorker()
+	fileprivate let localPersistanceWorker = LocalPersistanceWorker()
 	
 	// MARK:- Pagination helpers
 	private var currentPage: Int = 1
@@ -70,6 +71,18 @@ class ListMoviesWorker {
 		imageTMDbWorker.downloadImage(for: movie) { (result) in
 			completion((result.success, result.imageData))
 		}
+	}
+	
+	func fetchFavorites<T>(ofType: T.Type) -> [T]? where T : Decodable {
+		return localPersistanceWorker.fetch(dataForKey: FavoritesKey, ofType: [T].self)
+	}
+	
+	func saveToFavorites<T>(_ data: T) -> Bool where T : Codable {
+		return localPersistanceWorker.saveToArray(data, withKey: FavoritesKey)
+	}
+	
+	func removeFromFavorites<T>(_ data: T) -> Bool where T : Codable & Equatable {
+		return localPersistanceWorker.removeFromArray(data, withKey: FavoritesKey)
 	}
 	
 	//MARK:- Auxiliary methods

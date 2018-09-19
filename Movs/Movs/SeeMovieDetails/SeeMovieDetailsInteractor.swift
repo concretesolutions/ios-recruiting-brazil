@@ -24,6 +24,8 @@ protocol SeeMovieDetailsDataStore {
 
 class SeeMovieDetailsInteractor: SeeMovieDetailsBusinessLogic, SeeMovieDetailsDataStore {
 	var presenter: SeeMovieDetailsPresentationLogic?
+	let localPersistanceWorker = LocalPersistanceWorker()
+	
 	var movie: Movie!
 	var isFavorite: Bool!
 	
@@ -36,5 +38,11 @@ class SeeMovieDetailsInteractor: SeeMovieDetailsBusinessLogic, SeeMovieDetailsDa
 	
 	func toggleFavorite() {
 		isFavorite = !isFavorite
+		
+		if isFavorite {
+			_ = localPersistanceWorker.saveToArray(movie, withKey: FavoritesKey)
+		} else {
+			_ = localPersistanceWorker.removeFromArray(movie, withKey: FavoritesKey)
+		}
 	}
 }

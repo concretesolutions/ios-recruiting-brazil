@@ -39,6 +39,10 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	// MARK: Get Movies
 	
 	func getMovies() {
+		if let storedMovies = worker.fetchFavorites(ofType: Movie.self) {
+			favoriteMovies = storedMovies
+		}
+		
 		worker.downloadPopularMovies({ (success, returnedMovies: [Movie]?, error)  in
 			if let returnedMovies = returnedMovies {
 				self.movies = returnedMovies
@@ -89,8 +93,10 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 		
 		if let i = favoriteMovies.index(of: selectedMovie) {
 			favoriteMovies.remove(at: i)
+			_ = worker.removeFromFavorites(selectedMovie)
 		} else {
 			favoriteMovies.append(selectedMovie)
+			_ = worker.saveToFavorites(selectedMovie)
 		}
 	}
 	
