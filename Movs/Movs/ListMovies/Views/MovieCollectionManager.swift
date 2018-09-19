@@ -57,9 +57,9 @@ extension MovieCollectionViewManager: UICollectionViewDataSource {
 		}
 		
 		let currentMovieInfo = data[indexPath.section][indexPath.row]
-		movieCell.configure(with: currentMovieInfo)
 		movieCell.delegate = cellDelegate
 		movieCell.didFavoritedMovie = delegate?.didFavoritedMovie
+		movieCell.configure(with: currentMovieInfo)
 		
 		return movieCell
 	}
