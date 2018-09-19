@@ -15,14 +15,17 @@ import UIKit
 protocol ListMoviesBusinessLogic {
 	func getMovies()
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
+	func setSelectedMovie(with id: Int)
 }
 
 protocol ListMoviesDataStore {
+	var selectedMovie: Movie! { get set }
 }
 
 class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	var presenter: ListMoviesPresentationLogic?
 	var worker = ListMoviesWorker()
+	var selectedMovie: Movie!
 	
 	// MARK: Auxiliary variables
 	
@@ -59,6 +62,16 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 				}
 			}
 		}
+	}
+	
+	//MARK: Set selected Movie
+	
+	func setSelectedMovie(with id: Int) {
+		guard let selectedMovie = movies.first(where: { (movie) -> Bool in
+			return movie.id == id
+		}) else { return }
+		
+		self.selectedMovie = selectedMovie
 	}
 	
 	// MARK: Auxiliary methods

@@ -17,13 +17,13 @@ protocol SeeMovieDetailsBusinessLogic {
 }
 
 protocol SeeMovieDetailsDataStore {
-	//var name: String { get set }
+	var movie: Movie! { get set }
 }
 
 class SeeMovieDetailsInteractor: SeeMovieDetailsBusinessLogic, SeeMovieDetailsDataStore {
 	var presenter: SeeMovieDetailsPresentationLogic?
 	var worker: SeeMovieDetailsWorker?
-	//var name: String = ""
+	var movie: Movie!
 	
 	// MARK: Do something
 	

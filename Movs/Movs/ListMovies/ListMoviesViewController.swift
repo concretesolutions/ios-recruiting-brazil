@@ -138,7 +138,8 @@ extension ListMoviesViewController: MovieCollectionViewManagerProtocol {
 	}
 	
 	func didSelectMovie(with id: Int) {
-		
+		interactor?.setSelectedMovie(with: id)
+		router?.routeToSeeMovieDetails()
 	}
 	
 	func didFavoritedMovie(withId id: Int) {
