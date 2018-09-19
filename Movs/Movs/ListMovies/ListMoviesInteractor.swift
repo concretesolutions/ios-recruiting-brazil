@@ -16,20 +16,25 @@ protocol ListMoviesBusinessLogic {
 	func getMovies()
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
 	func setSelectedMovie(with id: Int)
+	func favoriteMovie(with id: Int)
+	func checkForNewFavorite()
 }
 
 protocol ListMoviesDataStore {
 	var selectedMovie: Movie! { get set }
+	var isFavorite: Bool! { get set }
 }
 
 class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	var presenter: ListMoviesPresentationLogic?
 	var worker = ListMoviesWorker()
 	var selectedMovie: Movie!
+	var isFavorite: Bool!
 	
 	// MARK: Auxiliary variables
 	
 	var movies: [Movie] = []
+	var favoriteMovies: [Movie] = []
 	
 	// MARK: Get Movies
 	
@@ -72,6 +77,41 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 		}) else { return }
 		
 		self.selectedMovie = selectedMovie
+		self.isFavorite = favoriteMovies.contains(selectedMovie)
+	}
+	
+	//MARK: Favorite Movie
+	
+	func favoriteMovie(with id: Int) {
+		guard let selectedMovie = movies.first(where: { (movie) -> Bool in
+			return movie.id == id
+		}) else { return }
+		
+		if let i = favoriteMovies.index(of: selectedMovie) {
+			favoriteMovies.remove(at: i)
+		} else {
+			favoriteMovies.append(selectedMovie)
+		}
+	}
+	
+	//MARK: Check for Favorite Movie
+	
+	/// Checks if the favorite state of the movie presented by SeeMovieDetails changed
+	func checkForNewFavorite() {
+		guard selectedMovie != nil, isFavorite != favoriteMovies.contains(selectedMovie) else { return }
+		
+		if isFavorite != favoriteMovies.contains(selectedMovie) {
+			if let i = favoriteMovies.index(of: selectedMovie) {
+				favoriteMovies.remove(at: i)
+			} else {
+				favoriteMovies.append(selectedMovie)
+			}
+		}
+		
+		let moviesInfo: [ListMovies.MovieInfo]? = movies.map(self.getResponseMovieInfo)
+		
+		let response = ListMovies.GetMovies.Response(isSuccess: true, error: nil, movies: moviesInfo)
+		self.presenter?.presentMovies(with: response)
 	}
 	
 	// MARK: Auxiliary methods
@@ -85,6 +125,8 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 			image = backdropImage
 		}
 		
-		return ListMovies.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate)
+		let isFav = favoriteMovies.contains(movie)
+		
+		return ListMovies.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate, isFavorite: isFav)
 	}
 }

@@ -62,7 +62,7 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 		
 		let release = DateFormatter.localizedString(from: movieInfo.releaseDate, dateStyle: .short, timeStyle: .none)
 		
-		return ListMovies.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, image: image, mainGenre: mainGenre, release: release)
+		return ListMovies.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, image: image, mainGenre: mainGenre, release: release, isFavorite: movieInfo.isFavorite)
 	}
 	
 	private func getMessage(for error: ListMovies.RequestError) -> String {

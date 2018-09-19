@@ -74,7 +74,7 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		tabBarController?.tabBar.isHidden = false
+		interactor?.checkForNewFavorite()
 	}
 	
 	// MARK: ListMoviesDisplayLogic implementation
@@ -148,6 +148,6 @@ extension ListMoviesViewController: MovieCollectionViewManagerProtocol {
 	}
 	
 	func didFavoritedMovie(withId id: Int) {
-		
+		interactor?.favoriteMovie(with: id)
 	}
 }

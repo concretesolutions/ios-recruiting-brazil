@@ -13,42 +13,27 @@
 import UIKit
 
 @objc protocol SeeMovieDetailsRoutingLogic {
-  //func routeToSomewhere(_ segue: UIStoryboardSegue? = nil)
+	func routeToListMovies()
 }
 
 protocol SeeMovieDetailsDataPassing {
-  var dataStore: SeeMovieDetailsDataStore? { get }
+	var dataStore: SeeMovieDetailsDataStore? { get }
 }
 
 class SeeMovieDetailsRouter: NSObject, SeeMovieDetailsRoutingLogic, SeeMovieDetailsDataPassing {
-  weak var viewController: SeeMovieDetailsViewController?
-  var dataStore: SeeMovieDetailsDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(_ segue: UIStoryboardSegue? = nil) {
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: SeeMovieDetailsViewController, destination: SomewhereViewController) {
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: SeeMovieDetailsDataStore, destination: inout SomewhereDataStore) {
-  //  destination.name = source.name
-  //}
+	weak var viewController: SeeMovieDetailsViewController?
+	var dataStore: SeeMovieDetailsDataStore?
+	
+	// MARK: Routing
+	
+	func routeToListMovies() {
+		guard let destinationVC = viewController?.navigationController?.viewControllers.first as? ListMoviesViewController else { return }
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToListMovies(source: dataStore!, destination: &destinationDS)
+	}
+	// MARK: Passing data
+	
+	func passDataToListMovies(source: SeeMovieDetailsDataStore, destination: inout ListMoviesDataStore) {
+	  destination.isFavorite = source.isFavorite
+	}
 }

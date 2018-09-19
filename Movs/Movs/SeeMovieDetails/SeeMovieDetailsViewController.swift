@@ -28,6 +28,9 @@ class SeeMovieDetailsViewController: UIViewController, SeeMovieDetailsDisplayLog
 	@IBOutlet weak var genresLabel: UILabel!
 	@IBOutlet weak var overviewLabel: UILabel!
 	
+	fileprivate var favoriteBarButton: UIBarButtonItem!
+	fileprivate var isFavoriteMovie: Bool = false
+	
 	// MARK: Object lifecycle
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -73,10 +76,17 @@ class SeeMovieDetailsViewController: UIViewController, SeeMovieDetailsDisplayLog
 		
 		navigationController?.navigationBar.prefersLargeTitles = false
 		tabBarController?.tabBar.isHidden = true
+		setupFavoriteButton()
+		
 		interactor?.getMovieDetails()
 	}
 	
-	// MARK: Do something
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		router?.routeToListMovies()
+	}
+	
+	// MARK: Display Movie Details
 	
 	func displayMovieDetails(with viewModel: SeeMovieDetails.GetMovieDetails.ViewModel) {
 		backgroundImageView.image = viewModel.image
@@ -84,5 +94,31 @@ class SeeMovieDetailsViewController: UIViewController, SeeMovieDetailsDisplayLog
 		releaseDateLabel.text = viewModel.release
 		genresLabel.text = viewModel.genres
 		overviewLabel.text = viewModel.overview
+		
+		isFavoriteMovie = viewModel.isFavorite
+		setFavoriteButton(to: viewModel.isFavorite)
+	}
+	
+	// MARK: Auxiliary methods
+	
+	fileprivate func setupFavoriteButton() {
+		favoriteBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "favorite_empty_icon.png"), style: .plain, target: self, action: #selector(self.setFavorite))
+		navigationItem.setRightBarButton(favoriteBarButton, animated: false)
+	}
+	
+	@objc fileprivate func setFavorite() {
+		isFavoriteMovie = !isFavoriteMovie
+		setFavoriteButton(to: isFavoriteMovie)
+		interactor?.toggleFavorite()
+	}
+	
+	fileprivate func setFavoriteButton(to selected: Bool) {
+		if selected {
+			favoriteBarButton.tintColor = .red
+			favoriteBarButton.image = #imageLiteral(resourceName: "favorite_full_icon.png")
+		} else {
+			favoriteBarButton.tintColor = navigationController?.navigationBar.tintColor
+			favoriteBarButton.image = #imageLiteral(resourceName: "favorite_empty_icon.png")
+		}
 	}
 }

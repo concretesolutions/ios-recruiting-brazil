@@ -44,5 +44,6 @@ class ListMoviesRouter: NSObject, ListMoviesRoutingLogic, ListMoviesDataPassing 
 	
 	func passDataToSeeMovieDetails(source: ListMoviesDataStore, destination: inout SeeMovieDetailsDataStore) {
 		destination.movie = source.selectedMovie
+		destination.isFavorite = source.isFavorite
 	}
 }

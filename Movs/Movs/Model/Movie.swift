@@ -53,3 +53,9 @@ class Movie: Decodable {
 	}
 	
 }
+
+extension Movie: Equatable {
+	static func == (lhs: Movie, rhs: Movie) -> Bool {
+		return lhs.id == rhs.id
+	}
+}
