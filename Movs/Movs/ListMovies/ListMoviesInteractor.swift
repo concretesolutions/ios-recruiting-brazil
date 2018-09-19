@@ -17,16 +17,19 @@ protocol ListMoviesBusinessLogic {
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
 	func setSelectedMovie(with id: Int)
 	func favoriteMovie(with id: Int)
+	func checkForNewFavorite()
 }
 
 protocol ListMoviesDataStore {
 	var selectedMovie: Movie! { get set }
+	var isFavorite: Bool! { get set }
 }
 
 class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	var presenter: ListMoviesPresentationLogic?
 	var worker = ListMoviesWorker()
 	var selectedMovie: Movie!
+	var isFavorite: Bool!
 	
 	// MARK: Auxiliary variables
 	
@@ -74,6 +77,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 		}) else { return }
 		
 		self.selectedMovie = selectedMovie
+		self.isFavorite = favoriteMovies.contains(selectedMovie)
 	}
 	
 	//MARK: Favorite Movie
@@ -83,7 +87,31 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 			return movie.id == id
 		}) else { return }
 		
-		favoriteMovies.append(selectedMovie)
+		if let i = favoriteMovies.index(of: selectedMovie) {
+			favoriteMovies.remove(at: i)
+		} else {
+			favoriteMovies.append(selectedMovie)
+		}
+	}
+	
+	//MARK: Check for Favorite Movie
+	
+	/// Checks if the favorite state of the movie presented by SeeMovieDetails changed
+	func checkForNewFavorite() {
+		guard selectedMovie != nil, isFavorite != favoriteMovies.contains(selectedMovie) else { return }
+		
+		if isFavorite != favoriteMovies.contains(selectedMovie) {
+			if let i = favoriteMovies.index(of: selectedMovie) {
+				favoriteMovies.remove(at: i)
+			} else {
+				favoriteMovies.append(selectedMovie)
+			}
+		}
+		
+		let moviesInfo: [ListMovies.MovieInfo]? = movies.map(self.getResponseMovieInfo)
+		
+		let response = ListMovies.GetMovies.Response(isSuccess: true, error: nil, movies: moviesInfo)
+		self.presenter?.presentMovies(with: response)
 	}
 	
 	// MARK: Auxiliary methods

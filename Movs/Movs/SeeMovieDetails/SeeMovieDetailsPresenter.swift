@@ -38,7 +38,14 @@ class SeeMovieDetailsPresenter: SeeMovieDetailsPresentationLogic {
 		
 		let release = DateFormatter.localizedString(from: response.releaseDate, dateStyle: .short, timeStyle: .none)
 		
-		let viewModel = SeeMovieDetails.GetMovieDetails.ViewModel(title: response.title, image: image, genres: genresString, release: release, overview: response.overview)
+		let viewModel = SeeMovieDetails.GetMovieDetails.ViewModel(
+			title: response.title,
+			image: image,
+			genres: genresString,
+			release: release,
+			overview: response.overview,
+			isFavorite: response.isFavorite
+		)
 		viewController?.displayMovieDetails(with: viewModel)
 	}
 }

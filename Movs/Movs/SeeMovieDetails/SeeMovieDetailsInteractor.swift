@@ -14,20 +14,27 @@ import UIKit
 
 protocol SeeMovieDetailsBusinessLogic {
 	func getMovieDetails()
+	func toggleFavorite()
 }
 
 protocol SeeMovieDetailsDataStore {
 	var movie: Movie! { get set }
+	var isFavorite: Bool! { get set }
 }
 
 class SeeMovieDetailsInteractor: SeeMovieDetailsBusinessLogic, SeeMovieDetailsDataStore {
 	var presenter: SeeMovieDetailsPresentationLogic?
 	var movie: Movie!
+	var isFavorite: Bool!
 	
 	// MARK: Get Movie Details
 	
 	func getMovieDetails() {		
-		let response = SeeMovieDetails.GetMovieDetails.Response(title: movie.title, image: movie.posterImageData, genres: movie.genres, releaseDate: movie.releaseDate, overview: movie.overview)
+		let response = SeeMovieDetails.GetMovieDetails.Response(title: movie.title, image: movie.posterImageData, genres: movie.genres, releaseDate: movie.releaseDate, overview: movie.overview, isFavorite: isFavorite)
 		presenter?.presentMovieDetails(with: response)
+	}
+	
+	func toggleFavorite() {
+		isFavorite = !isFavorite
 	}
 }

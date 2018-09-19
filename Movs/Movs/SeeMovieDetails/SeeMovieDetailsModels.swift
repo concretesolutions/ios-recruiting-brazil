@@ -22,6 +22,7 @@ enum SeeMovieDetails {
 			var genres: [String]?
 			var releaseDate: Date
 			var overview: String
+			var isFavorite: Bool
 		}
 		
 		struct ViewModel {
@@ -30,6 +31,7 @@ enum SeeMovieDetails {
 			var genres: String
 			var release: String
 			var overview: String
+			var isFavorite: Bool
 		}
 	}
 }
