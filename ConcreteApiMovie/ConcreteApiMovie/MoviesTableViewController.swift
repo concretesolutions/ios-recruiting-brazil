@@ -23,7 +23,6 @@ class MoviesTableViewController: UITableViewController {
     func loadMovies(){
         MoviesAPI.loadMovies(page: currentPage) { (info) in
             if let info = info {
-                print("info.results: ", info.results)
                 self.movies += info.results
                 self.totalPage = info.total_pages
                 print("Total:", self.totalPage, " - Já incluidos: ", self.movies.count)
