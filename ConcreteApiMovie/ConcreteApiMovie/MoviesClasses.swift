@@ -20,4 +20,8 @@ struct MoviesResults : Codable {
     let overview: String
     let release_date: String
     let poster_path: String
+    
+    var urlImage:String{
+        return "http://image.tmdb.org/t/p/w185/"+poster_path
+    }
 }

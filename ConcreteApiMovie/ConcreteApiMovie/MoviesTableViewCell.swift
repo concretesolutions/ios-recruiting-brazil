@@ -17,7 +17,8 @@ class MoviesTableViewCell: UITableViewCell {
     
     func prepareCell(withMovie movie:MoviesResults) {
         lblMovie.text = movie.title
-        if let url = URL(string: movie.poster_path) {
+        if let url = URL(string: movie.urlImage) {
+            print("url", url)
             imgMovie.kf.indicatorType = .activity
             imgMovie.kf.setImage(with: url)
         } else {
