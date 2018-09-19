@@ -13,42 +13,36 @@
 import UIKit
 
 @objc protocol ListMoviesRoutingLogic {
-  //func routeToSomewhere(_ segue: UIStoryboardSegue? = nil)
+	func routeToSeeMovieDetails()
 }
 
 protocol ListMoviesDataPassing {
-  var dataStore: ListMoviesDataStore? { get }
+	var dataStore: ListMoviesDataStore? { get }
 }
 
 class ListMoviesRouter: NSObject, ListMoviesRoutingLogic, ListMoviesDataPassing {
-  weak var viewController: ListMoviesViewController?
-  var dataStore: ListMoviesDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(_ segue: UIStoryboardSegue? = nil) {
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: ListMoviesViewController, destination: SomewhereViewController) {
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: ListMoviesDataStore, destination: inout SomewhereDataStore) {
-  //  destination.name = source.name
-  //}
+	weak var viewController: ListMoviesViewController?
+	var dataStore: ListMoviesDataStore?
+	
+	// MARK: Routing
+	
+	func routeToSeeMovieDetails() {
+		let storyboard = UIStoryboard(name: "SeeMovieDetails", bundle: nil)
+		let destinationVC = storyboard.instantiateViewController(withIdentifier: "SeeMovieDetailsViewController") as! SeeMovieDetailsViewController
+		var destinationDS = destinationVC.router!.dataStore!
+		passDataToSeeMovieDetails(source: dataStore!, destination: &destinationDS)
+		navigateToSeeMovieDetails(source: viewController!, destination: destinationVC)
+	}
+	
+	// MARK: Navigation
+	
+	func navigateToSeeMovieDetails(source: ListMoviesViewController, destination: SeeMovieDetailsViewController) {
+	  source.navigationController?.pushViewController(destination, animated: true)
+	}
+	
+	// MARK: Passing data
+	
+	func passDataToSeeMovieDetails(source: ListMoviesDataStore, destination: inout SeeMovieDetailsDataStore) {
+		destination.movie = source.selectedMovie
+	}
 }

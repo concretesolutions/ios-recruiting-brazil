@@ -72,6 +72,11 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 		getUpcomingMovies()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tabBarController?.tabBar.isHidden = false
+	}
+	
 	// MARK: ListMoviesDisplayLogic implementation
 	
 	func displayMovieList(with viewModel: ListMovies.GetMovies.ViewModel) {
@@ -138,7 +143,8 @@ extension ListMoviesViewController: MovieCollectionViewManagerProtocol {
 	}
 	
 	func didSelectMovie(with id: Int) {
-		
+		interactor?.setSelectedMovie(with: id)
+		router?.routeToSeeMovieDetails()
 	}
 	
 	func didFavoritedMovie(withId id: Int) {
