@@ -45,9 +45,18 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	//MARK: Get Movie Image
 	
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void) {
-		worker.getImageForMovie(withId: movieId) { (result) in
-			if let data = result.imageData, let image = self.presenter?.mountMovieImage(from: data) {
-				completion(image)
+		guard let movie = self.movies.first(where: { (movie) -> Bool in
+			return movie.id == movieId
+		}) else { return }
+		
+		if let storedImageData = movie.posterImageData, let image = self.presenter?.mountMovieImage(from: storedImageData) {
+			completion(image)
+		} else {
+			worker.getImageForMovie(withId: movieId) { (result) in
+				if let data = result.imageData, let image = self.presenter?.mountMovieImage(from: data) {
+					movie.posterImageData = data
+					completion(image)
+				}
 			}
 		}
 	}
