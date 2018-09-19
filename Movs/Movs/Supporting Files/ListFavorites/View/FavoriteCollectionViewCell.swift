@@ -35,6 +35,14 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
 		posterImageView.layer.masksToBounds = true
 		posterImageView.layer.cornerRadius = 5.0
 	}
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+                
+        let isInLandscape = (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft)
+        overviewLabel.isHidden = isInLandscape
+        genreLabel.isHidden = isInLandscape
+    }
 	
 	public func configure(with formattedMovieModel: ListFavorites.FormattedMovieInfo)  {
 		presentedMovieId = formattedMovieModel.id

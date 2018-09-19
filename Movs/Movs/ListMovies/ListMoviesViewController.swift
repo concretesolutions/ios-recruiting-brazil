@@ -78,8 +78,14 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 		super.viewWillAppear(animated)
 		
 		tabBarController?.tabBar.isHidden = false
+        changeScrollOrientation(to: UIApplication.shared.statusBarOrientation)
+        
 		interactor?.updateFavorites()
 	}
+    
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        changeScrollOrientation(to: toInterfaceOrientation)
+    }
 	
 	// MARK: ListMoviesDisplayLogic implementation
 	
@@ -117,8 +123,7 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	
 	fileprivate func setupMoviesCollection() {
 		moviesCollectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
-		moviesCollectionView.alwaysBounceVertical = true
-		
+        
 		refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(getUpcomingMovies), for: .valueChanged)
 		moviesCollectionView.refreshControl = refreshControl
@@ -134,6 +139,16 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 		moviesCollectionView.dataSource = collectionManager
 		moviesCollectionView.delegate = collectionManager
 	}
+    
+    fileprivate func changeScrollOrientation(to interfaceOrientation: UIInterfaceOrientation) {
+        guard let layout = moviesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        
+        if interfaceOrientation == .landscapeLeft || interfaceOrientation == .landscapeRight {
+            layout.scrollDirection = .horizontal
+        } else {
+            layout.scrollDirection = .vertical
+        }
+    }
 }
 
 //MARK: - MovieCollectionViewCellProtocol -
