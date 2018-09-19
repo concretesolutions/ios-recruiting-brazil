@@ -72,6 +72,7 @@ class SeeMovieDetailsViewController: UIViewController, SeeMovieDetailsDisplayLog
 		super.viewDidLoad()
 		
 		navigationController?.navigationBar.prefersLargeTitles = false
+		tabBarController?.tabBar.isHidden = true
 		interactor?.getMovieDetails()
 	}
 	
