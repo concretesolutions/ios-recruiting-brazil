@@ -23,9 +23,10 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	
 	fileprivate var collectionManager: MovieCollectionViewManager!
 	fileprivate var refreshControl: UIRefreshControl!
-	
+    
 	@IBOutlet weak var moviesCollectionView: UICollectionView!
-	
+    @IBOutlet weak var errorLabel: UILabel!
+    
 	// MARK: Object lifecycle
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -88,12 +89,15 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 		}
 		
 		if let moviesInfo = viewModel.moviesInfo {
+            errorLabel.isHidden = true
+            moviesCollectionView.isHidden = false
+            
 			collectionManager.display(movies: moviesInfo)
 		} else if let message = viewModel.errorMessage {
-			let alert = UIAlertController(title: "Ops", message: message, preferredStyle: .alert)
-			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-			
-			self.present(alert, animated: true, completion: nil)
+			errorLabel.isHidden = false
+            moviesCollectionView.isHidden = true
+            
+            errorLabel.text = message
 		}
 	}
     

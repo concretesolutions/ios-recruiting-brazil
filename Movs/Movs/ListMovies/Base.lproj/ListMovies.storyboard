@@ -18,6 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk6-qg-Dok">
+                                <rect key="frame" x="10" y="126" width="355" height="482"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gBM-aJ-WgS">
                                 <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" red="0.1764705882" green="0.18823529410000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -32,9 +38,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.19215686274509805" green="0.27843137254901962" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Bk6-qg-Dok" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="10" id="1bh-ez-dgN"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="gBM-aJ-WgS" secondAttribute="bottom" id="Ccq-98-dPc"/>
                             <constraint firstAttribute="trailing" secondItem="gBM-aJ-WgS" secondAttribute="trailing" id="F8w-5s-Y92"/>
                             <constraint firstItem="gBM-aJ-WgS" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="MUd-g8-adu"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="Bk6-qg-Dok" secondAttribute="bottom" constant="10" id="RDP-LO-lkd"/>
+                            <constraint firstAttribute="trailing" secondItem="Bk6-qg-Dok" secondAttribute="trailing" constant="10" id="TZ0-TM-nxz"/>
+                            <constraint firstItem="Bk6-qg-Dok" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="10" id="WEf-h2-fZD"/>
                             <constraint firstItem="gBM-aJ-WgS" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="xOO-g8-huE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -42,6 +52,7 @@
                     <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="Movies" largeTitleDisplayMode="always" id="lL9-Ty-SB5"/>
                     <connections>
+                        <outlet property="errorLabel" destination="Bk6-qg-Dok" id="i1K-tS-7cL"/>
                         <outlet property="moviesCollectionView" destination="gBM-aJ-WgS" id="Mln-jV-XR6"/>
                     </connections>
                 </viewController>
