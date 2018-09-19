@@ -19,6 +19,7 @@ struct TMDbMovie: Codable {
 	let originalLanguage: String?
 	let originalTitle: String?
 	let genreIds: [Int]?
+	var genreNames: [String]?
 	let backdropPath: String?
 	let adult: Bool?
 	let overview: String?
@@ -33,6 +34,7 @@ struct TMDbMovie: Codable {
 		case originalLanguage = "original_language"
 		case originalTitle = "original_title"
 		case genreIds = "genre_ids"
+		case genreNames = "genres"
 		case backdropPath = "backdrop_path"
 		case adult, overview
 		case releaseDate = "release_date"

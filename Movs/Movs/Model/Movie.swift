@@ -10,16 +10,13 @@ import UIKit
 
 class Movie: Decodable {
 	
-	public let id: Int?
-	
-	public let localizedTitle: String?
-	public let originalTitle: String?
-	
-	public let voteAverage: Double?
-	public let overview: String?
-	public var genres: [String]?
-	public let releaseDate: Date?
-	public let originalLanguage: String?
+	public let id: Int!
+	public let title: String!
+	public let voteAverage: Double!
+	public let overview: String!
+	public var genres: [String]!
+	public let releaseDate: Date!
+	public let originalLanguage: String!
 	
 	// Images
 	public var posterImageData: Data?
@@ -27,10 +24,9 @@ class Movie: Decodable {
 	
 	private enum CodingKeys: String, CodingKey {
 		case id
-		case localizedTitle		= "title"
-		case originalTitle 		= "original_title"
+		case title				= "title"
 		case voteAverage		= "vote_average"
-		case overview
+		case overview, genres
 		case releaseDate 		= "release_date"
 		case originalLanguage 	= "original_language"
 	}
@@ -39,10 +35,10 @@ class Movie: Decodable {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
 		
 		id = try? values.decode(Int.self, forKey: .id)
-		localizedTitle = try? values.decode(String.self, forKey: .localizedTitle)
-		originalTitle = try? values.decode(String.self, forKey: .originalTitle)
+		title = try? values.decode(String.self, forKey: .title)
 		voteAverage = try? values.decode(Double.self, forKey: .voteAverage)
 		overview = try? values.decode(String.self, forKey: .overview)
+		genres = try? values.decode([String].self, forKey: .genres)
 		originalLanguage = try? values.decode(String.self, forKey: .originalLanguage)
 		
 		let releaseDateString = try? values.decode(String.self, forKey: .releaseDate)

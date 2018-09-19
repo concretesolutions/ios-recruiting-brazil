@@ -29,8 +29,7 @@ class MovieModelTests: XCTestCase {
 			let movie = try JSONDecoder().decode(Movie.self, from: json)
 			
 			XCTAssertEqual(movie.id, 439079)
-			XCTAssertEqual(movie.localizedTitle, "The Nun")
-			XCTAssertEqual(movie.originalTitle, "The Nun")
+			XCTAssertEqual(movie.title, "The Nun")
 			XCTAssertEqual(movie.voteAverage, 5.0)
 			XCTAssertEqual(movie.overview, "Overview test.")
 			XCTAssertEqual(movie.originalLanguage, "en")
@@ -61,11 +60,10 @@ class MovieModelTests: XCTestCase {
 			let movie = try JSONDecoder().decode(Movie.self, from: json)
 			
 			XCTAssertNil(movie.id)
-			XCTAssertNil(movie.localizedTitle)
+			XCTAssertNil(movie.title)
 			XCTAssertNil(movie.voteAverage)
 			XCTAssertNil(movie.overview)
 			XCTAssertNil(movie.releaseDate)
-			XCTAssertNil(movie.originalTitle)
 			XCTAssertNil(movie.originalLanguage)
 		} catch _ {
 			XCTFail()

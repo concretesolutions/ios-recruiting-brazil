@@ -18,7 +18,7 @@ class MoviesTMDbWorker: TMDbClient {
 	private var httpNetworkWorker: HTTPNetworkWorker? = nil
 	
 	public struct MoviesListResponse: Decodable {
-		let movies: [TMDbMovie]
+		var movies: [TMDbMovie]
 		let page: Int
 		let totalPages: Int
 		
