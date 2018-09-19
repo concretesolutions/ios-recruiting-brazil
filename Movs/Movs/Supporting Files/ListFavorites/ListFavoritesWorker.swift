@@ -26,4 +26,7 @@ class ListFavoritesWorker {
 		return localPersistanceWorker.saveToArray(data, withKey: FavoritesKey)
 	}
 	
+    func removeFromFavorites<T>(_ data: T) -> Bool where T : Codable & Equatable {
+        return localPersistanceWorker.removeFromArray(data, withKey: FavoritesKey)
+    }
 }

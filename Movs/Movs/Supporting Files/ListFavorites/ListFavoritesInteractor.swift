@@ -14,10 +14,10 @@ import UIKit
 
 protocol ListFavoritesBusinessLogic {
 	func getFavorites()
+    func removeFromFavorites(movieId: Int)
 }
 
 protocol ListFavoritesDataStore {
-	//var name: String { get set }
 }
 
 class ListFavoritesInteractor: ListFavoritesBusinessLogic, ListFavoritesDataStore {
@@ -42,6 +42,26 @@ class ListFavoritesInteractor: ListFavoritesBusinessLogic, ListFavoritesDataStor
 		let response = ListFavorites.GetFavorites.Response(isSuccess: success, movies: moviesInfo)
 		presenter?.presentFavorites(with: response)
 	}
+    
+    // MARK: Remove from Favorites
+    
+    func removeFromFavorites(movieId: Int) {
+        guard let movie = favorites.first(where: { (favMovie) -> Bool in
+            return favMovie.id == movieId
+        }) else { return }
+        
+        worker = ListFavoritesWorker()
+        if let removeSuccess = worker?.removeFromFavorites(movie), removeSuccess {
+            if let index = favorites.index(of: movie) {
+                favorites.remove(at: index)
+                
+                if favorites.isEmpty {
+                    let response = ListFavorites.GetFavorites.Response(isSuccess: false, movies: [])
+                    presenter?.presentFavorites(with: response)
+                }
+            }
+        }
+    }
 	
 	// MARK: Auxiliary methods
 	

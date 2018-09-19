@@ -17,7 +17,7 @@ protocol ListMoviesBusinessLogic {
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
 	func setSelectedMovie(with id: Int)
 	func favoriteMovie(with id: Int)
-	func checkForNewFavorite()
+	func updateFavorites()
 }
 
 protocol ListMoviesDataStore {
@@ -102,17 +102,10 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	
 	//MARK: Check for Favorite Movie
 	
-	/// Checks if the favorite state of the movie presented by SeeMovieDetails changed
-	func checkForNewFavorite() {
-		guard selectedMovie != nil, isFavorite != favoriteMovies.contains(selectedMovie) else { return }
-		
-		if isFavorite != favoriteMovies.contains(selectedMovie) {
-			if let i = favoriteMovies.index(of: selectedMovie) {
-				favoriteMovies.remove(at: i)
-			} else {
-				favoriteMovies.append(selectedMovie)
-			}
-		}
+	func updateFavorites() {
+        if let storedMovies = worker.fetchFavorites(ofType: Movie.self) {
+            favoriteMovies = storedMovies
+        }
 		
 		let moviesInfo: [ListMovies.MovieInfo]? = movies.map(self.getResponseMovieInfo)
 		

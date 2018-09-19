@@ -26,9 +26,11 @@ class ListFavoritesPresenter: ListFavoritesPresentationLogic {
 		
 		var message: String? = nil
 		if !response.isSuccess {
-			message = "We couldn't get your favorite movies."
-		} else if let formattedMovies = formattedMovies, formattedMovies.isEmpty {
-			message = "You don't have any favorite movies yet."
+            if let formattedMovies = formattedMovies, formattedMovies.isEmpty {
+                message = "You don't have any favorite movies yet."
+            } else {
+                message = "We couldn't get your favorite movies."
+            }
 		}
 		
 		let viewModel = ListFavorites.GetFavorites.ViewModel(isSuccess: response.isSuccess, moviesInfo: formattedMovies, errorMessage: message)
@@ -36,7 +38,7 @@ class ListFavoritesPresenter: ListFavoritesPresentationLogic {
 			self.viewController?.displayFavoriteList(with: viewModel)
 		}
 	}
-	
+    	
 	// MARK: Auxiliary methods
 	
 	private func formatMovieInfo(from movieInfo: ListFavorites.MovieInfo) -> ListFavorites.FormattedMovieInfo {

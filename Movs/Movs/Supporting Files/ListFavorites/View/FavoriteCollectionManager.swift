@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FavoriteCollectionManagerProtocol {
-	func didFavoritedMovie(withId id: Int)
+	func didDefavoritedMovie(withId id: Int)
 }
 
 class FavoriteCollectionManager: NSObject {
@@ -56,8 +56,9 @@ extension FavoriteCollectionManager: UICollectionViewDataSource {
 		movieCell.didFavoritedMovie = { id in
 			// Updates the local object to persist when reloading the cell,
 			// without having to reload the full collection.
-			
-			self.delegate?.didFavoritedMovie(withId: id)
+            self.data.remove(at: indexPath.row)
+			collectionView.deleteItems(at: [indexPath])
+			self.delegate?.didDefavoritedMovie(withId: id)
 		}
 		movieCell.configure(with: currentMovieInfo)
 		

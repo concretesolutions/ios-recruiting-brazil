@@ -76,7 +76,7 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 		super.viewWillAppear(animated)
 		
 		tabBarController?.tabBar.isHidden = false
-		interactor?.checkForNewFavorite()
+		interactor?.updateFavorites()
 	}
 	
 	// MARK: ListMoviesDisplayLogic implementation

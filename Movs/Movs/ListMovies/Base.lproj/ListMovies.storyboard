@@ -82,6 +82,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwS-bI-unZ">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pPQ-hD-XRt">
                                 <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" red="0.1764705882" green="0.18823529410000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -96,16 +102,21 @@
                         </subviews>
                         <color key="backgroundColor" red="0.17647058823529413" green="0.18823529411764706" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="IwS-bI-unZ" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailing" id="4cZ-fE-AM1"/>
                             <constraint firstItem="pPQ-hD-XRt" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="KoC-BQ-B6g"/>
+                            <constraint firstItem="IwS-bI-unZ" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="Mvc-8o-veD"/>
                             <constraint firstItem="pPQ-hD-XRt" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="VfW-Uu-ZO7"/>
+                            <constraint firstItem="IwS-bI-unZ" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="Wim-TS-2hy"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="pPQ-hD-XRt" secondAttribute="bottom" id="ldM-ih-k2c"/>
                             <constraint firstAttribute="trailing" secondItem="pPQ-hD-XRt" secondAttribute="trailing" id="mZU-Rv-ZAd"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="IwS-bI-unZ" secondAttribute="bottom" id="nt5-2l-Qta"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" selectedImage="favorite_full_icon" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Favorites" largeTitleDisplayMode="always" id="jhB-V9-oVw"/>
                     <connections>
+                        <outlet property="errorLabel" destination="IwS-bI-unZ" id="lic-Dp-FFv"/>
                         <outlet property="favoritesCollectionView" destination="pPQ-hD-XRt" id="nRi-fW-Ur2"/>
                     </connections>
                 </viewController>

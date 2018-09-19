@@ -22,7 +22,8 @@ class ListFavoritesViewController: UIViewController, ListFavoritesDisplayLogic {
 	
 	fileprivate var collectionManager: FavoriteCollectionManager!
 	@IBOutlet weak var favoritesCollectionView: UICollectionView!
-	
+    @IBOutlet weak var errorLabel: UILabel!
+    
 	// MARK: Object lifecycle
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -74,12 +75,15 @@ class ListFavoritesViewController: UIViewController, ListFavoritesDisplayLogic {
 	
 	func displayFavoriteList(with viewModel: ListFavorites.GetFavorites.ViewModel) {
 		if viewModel.isSuccess, let moviesInfo = viewModel.moviesInfo {
+            errorLabel.isHidden = true
+            favoritesCollectionView.isHidden = false
+            
 			collectionManager.display(movies: moviesInfo)
 		} else if let message = viewModel.errorMessage {
-			let alert = UIAlertController(title: "Ops", message: message, preferredStyle: .alert)
-			alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-			
-			self.present(alert, animated: true, completion: nil)
+            errorLabel.isHidden = false
+            favoritesCollectionView.isHidden = true
+            
+            errorLabel.text = message
 		}
 	}
 	
@@ -101,7 +105,7 @@ class ListFavoritesViewController: UIViewController, ListFavoritesDisplayLogic {
 }
 
 extension ListFavoritesViewController: FavoriteCollectionManagerProtocol {
-	func didFavoritedMovie(withId id: Int) {
-		
+	func didDefavoritedMovie(withId id: Int) {
+		interactor?.removeFromFavorites(movieId: id)
 	}
 }
