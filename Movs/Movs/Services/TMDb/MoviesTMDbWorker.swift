@@ -16,9 +16,10 @@ enum MoviesTMDbWorkerError: Error {
 class MoviesTMDbWorker: TMDbClient {
 	
 	private var httpNetworkWorker: HTTPNetworkWorker? = nil
+	private var genreWorker: GenreTMDbWorker?
 	
 	public struct MoviesListResponse: Decodable {
-		let movies: [TMDbMovie]
+		var movies: [TMDbMovie]
 		let page: Int
 		let totalPages: Int
 		
@@ -34,6 +35,12 @@ class MoviesTMDbWorker: TMDbClient {
 		case topRated 		= "/top_rated"
 		case popular		= "/popular"
 		case nowPlaying		= "/now_playing"
+	}
+	
+	override init() {
+		super.init()
+		genreWorker = GenreTMDbWorker()
+		genreWorker?.fetchGenres(of: .movie)
 	}
 	
 	//MARK:- Public Methods

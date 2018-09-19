@@ -11,8 +11,8 @@ import Foundation
 class GenreTMDbWorker: TMDbClient {
 	
 	private var httpNetworkWorker: HTTPNetworkWorker?
-	private var movieList: [Genre]? = nil
-	private var tvList: [Genre]? = nil
+	public var movieList: [Genre]? = nil
+	public var tvList: [Genre]? = nil
 	
 	public enum Kind: String {
 		case movie	= "/movie"

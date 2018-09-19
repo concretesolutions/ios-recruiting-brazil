@@ -26,7 +26,7 @@ class Movie: Decodable {
 		case id
 		case title				= "title"
 		case voteAverage		= "vote_average"
-		case overview
+		case overview, genres
 		case releaseDate 		= "release_date"
 		case originalLanguage 	= "original_language"
 	}
@@ -38,6 +38,7 @@ class Movie: Decodable {
 		title = try? values.decode(String.self, forKey: .title)
 		voteAverage = try? values.decode(Double.self, forKey: .voteAverage)
 		overview = try? values.decode(String.self, forKey: .overview)
+		genres = try? values.decode([String].self, forKey: .genres)
 		originalLanguage = try? values.decode(String.self, forKey: .originalLanguage)
 		
 		let releaseDateString = try? values.decode(String.self, forKey: .releaseDate)

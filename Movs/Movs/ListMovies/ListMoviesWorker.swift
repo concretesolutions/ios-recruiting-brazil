@@ -15,12 +15,20 @@ import UIKit
 class ListMoviesWorker {
 	
 	private var moviesTMDbWorker: MoviesTMDbWorker?
+	private var genreTMDbWorker: GenreTMDbWorker!
 	
 	// MARK:- Pagination helpers
 	private var currentPage: Int = 1
 	private var totalPages: Int = 0
 	
+	init() {
+		genreTMDbWorker = GenreTMDbWorker()
+		genreTMDbWorker.fetchGenres(of: .movie)
+	}
+	
 	//MARK:- Public Methods
+	
+	typealias DownloadMoviesResult<T> = (success: Bool, response: [T]?, error: ListMovies.RequestError?) where T : Decodable
 	
 	/// Downloads a list of the most popular movies.
 	///
@@ -28,7 +36,7 @@ class ListMoviesWorker {
 	/// - Parameter success: Whether or not the method suceeded.
 	/// - Parameter response: The decoded response for the call.
 	/// - Parameter error: The error encontered during the download.
-	public func downloadPopularMovies<T>(_ completion: @escaping (_ success: Bool, _ response: [T]?, _ error: ListMovies.RequestError?) -> Void) where T : Decodable {
+	public func downloadPopularMovies<T>(_ completion: @escaping (DownloadMoviesResult<T>) -> Void) where T : Decodable {
 		
 		// Resets pagination
 		currentPage = 1
@@ -37,23 +45,27 @@ class ListMoviesWorker {
 		moviesTMDbWorker = MoviesTMDbWorker()
 		moviesTMDbWorker?.fetchMoviesList(of: .popular, on: currentPage) { (result) in
 			if result.success, let apiResponse = result.response {
-				self.totalPages = apiResponse.totalPages
-				
-				do {
-					let response = try self.getGenericMovies(fromAPIMovies: apiResponse.movies, to: T.self)
-					self.currentPage += 1
-					completion(true, response, nil)
-				} catch _ {
-					completion(false, nil, .Failure)
-				}
+				self.handle(apiResponse, completion)
 			} else {
 				let error = self.useCaseError(for: result.error)
-				completion(false, nil, error)
+				completion((false, nil, error))
 			}
 		}
 	}
 	
 	//MARK:- Auxiliary methods
+	
+	func handle<T>(_ apiResponse: MoviesTMDbWorker.MoviesListResponse, _ completion: @escaping (DownloadMoviesResult<T>) -> Void) where T : Decodable {
+		totalPages = apiResponse.totalPages
+		
+		do {
+			let response = try self.getGenericMovies(fromAPIMovies: apiResponse.movies, to: T.self)
+			self.currentPage += 1
+			completion((true, response, nil))
+		} catch _ {
+			completion((false, nil, .Failure))
+		}
+	}
 	
 	private func getGenericMovies<T>(fromAPIMovies apiMovies: [TMDbMovie], to type: T.Type) throws -> [T]  where T : Decodable {
 		var genericMovies: [T] = []
@@ -72,14 +84,39 @@ class ListMoviesWorker {
 	private func decode<T>(apiMovie: TMDbMovie, to type: T.Type) throws -> T where T : Decodable {
 		let encoder = JSONEncoder()
 		let decoder = JSONDecoder()
+		var mutableAPIMovie = apiMovie
+		
+		if let genreIds = mutableAPIMovie.genreIds {
+			mutableAPIMovie.genreNames = []
+			mutableAPIMovie.genreNames?.append(contentsOf: getGenreNames(forIds: genreIds))
+		}
 		
 		do {
-			let raw = try encoder.encode(apiMovie)
+			let raw = try encoder.encode(mutableAPIMovie)
 			let t = try decoder.decode(T.self, from: raw)
 			return t
 		} catch _ {
 			throw ListMovies.RequestError.Failure
 		}
+	}
+	
+	/// Get a list of genre names for the specified ids.
+	///
+	/// - Parameter genreIds: The genres' ids.
+	/// - Returns: The genres' names.
+	private func getGenreNames(forIds genreIds: [Int]) -> [String] {
+		guard let allGenres = genreTMDbWorker?.movieList else { return [] }
+		
+		var genreNames: [String] = []
+		for genreId in genreIds {
+			if let genreName = allGenres.first(where: { (genre) -> Bool in
+				return genre.id == genreId
+			})?.name {
+				genreNames.append(genreName)
+			}
+		}
+		
+		return genreNames
 	}
 	
 	private func useCaseError(for apiError: MoviesTMDbWorkerError?) -> ListMovies.RequestError {
