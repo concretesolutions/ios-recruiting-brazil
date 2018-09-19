@@ -32,6 +32,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
 		didFavoritedMovie?(presentedMovieId)
 	}
 	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		self.posterImageView.layer.masksToBounds = true
+		self.posterImageView.layer.cornerRadius = 5.0
+	}
+	
 	public func configure(with formattedMovieModel: ListMovies.FormattedMovieInfo)  {
 		presentedMovieId = formattedMovieModel.id
 		titleLabel.text = formattedMovieModel.title
@@ -39,8 +46,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
 		
 		delegate?.image(forMovieId: presentedMovieId, { (image) in
 			self.posterImageView.image = image
-			self.posterImageView.layer.cornerRadius = 15.0
-			self.layoutIfNeeded()
 		})
 	}
 	
