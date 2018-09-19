@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SeeMovieDetailsPresentationLogic {
-	func presentSomething(response: SeeMovieDetails.Something.Response)
+	func presentMovieDetails(with response: SeeMovieDetails.GetMovieDetails.Response)
 }
 
 class SeeMovieDetailsPresenter: SeeMovieDetailsPresentationLogic {
@@ -21,8 +21,24 @@ class SeeMovieDetailsPresenter: SeeMovieDetailsPresentationLogic {
 	
 	// MARK: Do something
 	
-	func presentSomething(response: SeeMovieDetails.Something.Response) {
-		let viewModel = SeeMovieDetails.Something.ViewModel()
-		viewController?.displaySomething(viewModel: viewModel)
+	func presentMovieDetails(with response: SeeMovieDetails.GetMovieDetails.Response) {
+		var image: UIImage? = nil
+		if let data = response.image {
+			image = UIImage(data: data)?.grayMultiply()
+		}
+		
+		var genresString = ""
+		if let genres = response.genres {
+			for genre in genres {
+				genresString += genre.capitalized + ", "
+			}
+			
+			genresString = String(genresString.dropLast(2))
+		}
+		
+		let release = DateFormatter.localizedString(from: response.releaseDate, dateStyle: .short, timeStyle: .none)
+		
+		let viewModel = SeeMovieDetails.GetMovieDetails.ViewModel(title: response.title, image: image, genres: genresString, release: release, overview: response.overview)
+		viewController?.displayMovieDetails(with: viewModel)
 	}
 }

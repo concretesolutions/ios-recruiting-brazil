@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SeeMovieDetailsDisplayLogic: class {
-	func displaySomething(viewModel: SeeMovieDetails.Something.ViewModel)
+	func displayMovieDetails(with viewModel: SeeMovieDetails.GetMovieDetails.ViewModel)
 }
 
 class SeeMovieDetailsViewController: UIViewController, SeeMovieDetailsDisplayLogic {
@@ -22,7 +22,7 @@ class SeeMovieDetailsViewController: UIViewController, SeeMovieDetailsDisplayLog
 	
 	// MARK: Outlets
 	
-	@IBOutlet weak var backgroundImageView: UIImage!
+	@IBOutlet weak var backgroundImageView: UIImageView!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var releaseDateLabel: UILabel!
 	@IBOutlet weak var genresLabel: UILabel!
@@ -70,19 +70,18 @@ class SeeMovieDetailsViewController: UIViewController, SeeMovieDetailsDisplayLog
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		doSomething()
+		
+		navigationController?.navigationBar.prefersLargeTitles = false
+		interactor?.getMovieDetails()
 	}
 	
 	// MARK: Do something
 	
-	//@IBOutlet weak var nameTextField: UITextField!
-	
-	func doSomething() {
-		let request = SeeMovieDetails.Something.Request()
-		interactor?.doSomething(request: request)
-	}
-	
-	func displaySomething(viewModel: SeeMovieDetails.Something.ViewModel) {
-		//nameTextField.text = viewModel.name
+	func displayMovieDetails(with viewModel: SeeMovieDetails.GetMovieDetails.ViewModel) {
+		backgroundImageView.image = viewModel.image
+		titleLabel.text = viewModel.title
+		releaseDateLabel.text = viewModel.release
+		genresLabel.text = viewModel.genres
+		overviewLabel.text = viewModel.overview
 	}
 }

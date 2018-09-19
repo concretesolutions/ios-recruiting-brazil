@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SeeMovieDetailsBusinessLogic {
-	func doSomething(request: SeeMovieDetails.Something.Request)
+	func getMovieDetails()
 }
 
 protocol SeeMovieDetailsDataStore {
@@ -22,16 +22,12 @@ protocol SeeMovieDetailsDataStore {
 
 class SeeMovieDetailsInteractor: SeeMovieDetailsBusinessLogic, SeeMovieDetailsDataStore {
 	var presenter: SeeMovieDetailsPresentationLogic?
-	var worker: SeeMovieDetailsWorker?
 	var movie: Movie!
 	
-	// MARK: Do something
+	// MARK: Get Movie Details
 	
-	func doSomething(request: SeeMovieDetails.Something.Request) {
-		worker = SeeMovieDetailsWorker()
-		worker?.doSomeWork()
-		
-		let response = SeeMovieDetails.Something.Response()
-		presenter?.presentSomething(response: response)
+	func getMovieDetails() {		
+		let response = SeeMovieDetails.GetMovieDetails.Response(title: movie.title, image: movie.posterImageData, genres: movie.genres, releaseDate: movie.releaseDate, overview: movie.overview)
+		presenter?.presentMovieDetails(with: response)
 	}
 }

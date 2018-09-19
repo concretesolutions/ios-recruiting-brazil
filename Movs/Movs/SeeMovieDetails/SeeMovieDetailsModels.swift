@@ -13,17 +13,23 @@
 import UIKit
 
 enum SeeMovieDetails {
-	// MARK: Use cases
+	//MARK:- Get Movie Details -
 	
-	enum Something {
-		struct Request {
-			
-		}
+	enum GetMovieDetails {
 		struct Response {
-			
+			var title: String
+			var image: Data?
+			var genres: [String]?
+			var releaseDate: Date
+			var overview: String
 		}
+		
 		struct ViewModel {
-			
+			var title: String
+			var image: UIImage?
+			var genres: String
+			var release: String
+			var overview: String
 		}
 	}
 }
