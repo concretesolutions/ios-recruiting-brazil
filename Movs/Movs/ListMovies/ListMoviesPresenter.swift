@@ -14,6 +14,7 @@ import UIKit
 
 protocol ListMoviesPresentationLogic {
 	func presentMovies(with response: ListMovies.GetMovies.Response)
+    func presentUpdatedMovies(with response: ListMovies.UpdateMovies.Response)
 	func mountMovieImage(from data: Data) -> UIImage
 }
 
@@ -35,6 +36,16 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 			self.viewController?.displayMovieList(with: viewModel)
 		}
 	}
+    
+    // MARK: Present Updated Movies
+    
+    func presentUpdatedMovies(with response: ListMovies.UpdateMovies.Response) {
+        let formattedMovies = response.movies.map(formatMovieInfo)
+        let viewModel = ListMovies.UpdateMovies.ViewModel(moviesInfo: formattedMovies)
+        DispatchQueue.main.async {
+            self.viewController?.displayUpdatedMovies(with: viewModel)
+        }
+    }
 	
 	//MARK: Mount Movie Image
 	
@@ -50,11 +61,6 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 	// MARK: Auxiliary methods
 	
 	private func formatMovieInfo(from movieInfo: ListMovies.MovieInfo) -> ListMovies.FormattedMovieInfo {
-		var image: UIImage? = nil
-		if let data = movieInfo.image, let imageFromData = UIImage(data: data) {
-			image = imageFromData
-		}
-		
 		var mainGenre: String? = nil
 		if let firstGenre = movieInfo.genres?.first {
 			mainGenre = firstGenre
@@ -62,7 +68,7 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 		
 		let release = DateFormatter.localizedString(from: movieInfo.releaseDate, dateStyle: .short, timeStyle: .none)
 		
-		return ListMovies.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, image: image, mainGenre: mainGenre, release: release, isFavorite: movieInfo.isFavorite)
+		return ListMovies.FormattedMovieInfo(id: movieInfo.id, title: movieInfo.title, mainGenre: mainGenre, release: release, isFavorite: movieInfo.isFavorite)
 	}
 	
 	private func getMessage(for error: ListMovies.RequestError) -> String {

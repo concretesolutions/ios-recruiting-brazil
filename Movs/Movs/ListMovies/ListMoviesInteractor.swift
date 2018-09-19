@@ -17,7 +17,7 @@ protocol ListMoviesBusinessLogic {
 	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
 	func setSelectedMovie(with id: Int)
 	func favoriteMovie(with id: Int)
-	func checkForNewFavorite()
+	func updateFavorites()
 }
 
 protocol ListMoviesDataStore {
@@ -39,6 +39,10 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	// MARK: Get Movies
 	
 	func getMovies() {
+		if let storedMovies = worker.fetchFavorites(ofType: Movie.self) {
+			favoriteMovies = storedMovies
+		}
+		
 		worker.downloadPopularMovies({ (success, returnedMovies: [Movie]?, error)  in
 			if let returnedMovies = returnedMovies {
 				self.movies = returnedMovies
@@ -89,44 +93,41 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 		
 		if let i = favoriteMovies.index(of: selectedMovie) {
 			favoriteMovies.remove(at: i)
+			_ = worker.removeFromFavorites(selectedMovie)
 		} else {
 			favoriteMovies.append(selectedMovie)
+			_ = worker.saveToFavorites(selectedMovie)
 		}
 	}
 	
-	//MARK: Check for Favorite Movie
+	//MARK: Update Favorite Movie
 	
-	/// Checks if the favorite state of the movie presented by SeeMovieDetails changed
-	func checkForNewFavorite() {
-		guard selectedMovie != nil, isFavorite != favoriteMovies.contains(selectedMovie) else { return }
+	func updateFavorites() {
+        var updatedMovie: [Movie] = []
+        if let storedMovies = worker.fetchFavorites(ofType: Movie.self) {
+            updatedMovie = storedMovies.filter({ (storedMovie) -> Bool in
+                return !favoriteMovies.contains(storedMovie)
+            })
+            
+            updatedMovie += favoriteMovies.filter({ (favMovie) -> Bool in
+                return !storedMovies.contains(favMovie)
+            })
+            
+            favoriteMovies = storedMovies
+        }
+        
+        guard !updatedMovie.isEmpty else { return }
 		
-		if isFavorite != favoriteMovies.contains(selectedMovie) {
-			if let i = favoriteMovies.index(of: selectedMovie) {
-				favoriteMovies.remove(at: i)
-			} else {
-				favoriteMovies.append(selectedMovie)
-			}
-		}
-		
-		let moviesInfo: [ListMovies.MovieInfo]? = movies.map(self.getResponseMovieInfo)
-		
-		let response = ListMovies.GetMovies.Response(isSuccess: true, error: nil, movies: moviesInfo)
-		self.presenter?.presentMovies(with: response)
+		let moviesInfo: [ListMovies.MovieInfo] = updatedMovie.map(self.getResponseMovieInfo)
+		let response = ListMovies.UpdateMovies.Response(movies: moviesInfo)
+		self.presenter?.presentUpdatedMovies(with: response)
 	}
 	
 	// MARK: Auxiliary methods
 	
-	private func getResponseMovieInfo(from movie: Movie) -> ListMovies.MovieInfo {
-		// The poster image is preferable to the backdrop image
-		var image: Data? = nil
-		if let posterData = movie.posterImageData {
-			image = posterData
-		} else if let backdropImage = movie.backdropImageData {
-			image = backdropImage
-		}
-		
+	private func getResponseMovieInfo(from movie: Movie) -> ListMovies.MovieInfo {		
 		let isFav = favoriteMovies.contains(movie)
 		
-		return ListMovies.MovieInfo(id: movie.id, title: movie.title, image: image, genres: movie.genres, releaseDate: movie.releaseDate, isFavorite: isFav)
+		return ListMovies.MovieInfo(id: movie.id, title: movie.title, genres: movie.genres, releaseDate: movie.releaseDate, isFavorite: isFav)
 	}
 }

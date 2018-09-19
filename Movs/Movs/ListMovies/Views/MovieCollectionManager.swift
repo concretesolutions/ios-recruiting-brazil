@@ -38,6 +38,18 @@ class MovieCollectionViewManager: NSObject {
 		data[0] = movies
 		collectionView.reloadData()
 	}
+    
+    public func updateInfo(forMovies changedMovies: [ListMovies.FormattedMovieInfo]) {
+        var changedIndexes: [IndexPath] = []
+        for movie in changedMovies {
+            if let path = getIndexPath(ofMovie: movie.id) {
+                data[path.section][path.row] = movie
+                changedIndexes.append(path)
+            }
+        }
+        
+        collectionView.reloadItems(at: changedIndexes)
+    }
 }
 
 //MARK:- UICollectionViewDataSource
@@ -103,7 +115,7 @@ extension MovieCollectionViewManager: UICollectionViewDelegateFlowLayout {
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-		return UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+		return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 	}
 }
 
@@ -126,12 +138,12 @@ extension MovieCollectionViewManager {
 		
 		for i in 0..<data.count {
 			section = i
-			let movie = data[i].first(where: { (movieInfo) -> Bool in
+			let movieRow = data[i].index(where: { (movieInfo) -> Bool in
 				return movieInfo.id == id
 			})
 			
-			if movie != nil {
-				row = i
+			if movieRow != nil {
+				row = movieRow
 				break
 			}
 		}
