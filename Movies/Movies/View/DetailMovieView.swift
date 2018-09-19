@@ -44,7 +44,29 @@ class DetailMovieView: UIView {
         label.numberOfLines = 1
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // The movie's genres
+    let movieGenre: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12, weight: .black)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // The movie's overview
+    let movieOverview: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -55,6 +77,8 @@ class DetailMovieView: UIView {
         self.addSubview(gradient)
         self.addSubview(movieName)
         self.addSubview(movieDate)
+        self.addSubview(movieGenre)
+        self.addSubview(movieOverview)
         
         NSLayoutConstraint.activate([
             poster.topAnchor     .constraint(equalTo: self.topAnchor),
@@ -67,13 +91,21 @@ class DetailMovieView: UIView {
             gradient.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             gradient.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             
-            movieName.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            movieName.topAnchor     .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
             movieName.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             movieName.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5),
             
-            movieDate.bottomAnchor     .constraint(equalTo: self.movieName.topAnchor),
-            movieDate.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            movieDate.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5)
+            movieDate.topAnchor     .constraint(equalTo: movieName.bottomAnchor),
+            movieDate.leadingAnchor .constraint(equalTo: movieName.leadingAnchor),
+            movieDate.trailingAnchor.constraint(equalTo: movieName.trailingAnchor),
+            
+            movieOverview.topAnchor     .constraint(equalTo: movieDate.bottomAnchor, constant: 10),
+            movieOverview.leadingAnchor .constraint(equalTo: movieDate.leadingAnchor),
+            movieOverview.trailingAnchor.constraint(equalTo: movieDate.trailingAnchor),
+            
+            movieGenre.topAnchor     .constraint(equalTo: movieOverview.bottomAnchor, constant: 5),
+            movieGenre.leadingAnchor .constraint(equalTo: movieName.leadingAnchor),
+            movieGenre.trailingAnchor.constraint(equalTo: movieName.trailingAnchor),
         ])
     }
     

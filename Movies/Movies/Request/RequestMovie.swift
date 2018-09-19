@@ -20,6 +20,6 @@ class RequestMovie: RequestBase {
     
     /// Requests the informations of a given movie
     func detail(of movie:Movie) -> DataRequest{
-        return get(endpoint: .detail)
+        return get(endpoint: .detail, movieId: movie.id ?? -1)
     }
 }

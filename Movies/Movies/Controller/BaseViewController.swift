@@ -13,13 +13,23 @@ class BaseViewController: UIViewController, UISearchResultsUpdating {
     var timer:Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSearchController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        User.current.favorites = Movie.retrieveFavoriteList()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Movie.saveFavoriteList(User.current.favorites)
     }
     
     /// Adds the SearchController to the View
-    private func setSearchController(){
-        let searchController = UISearchController(searchResultsController: nil)
+    func setSearchController(navBarTitle:String){
+        self.title = navBarTitle
         
+        let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for a movie"

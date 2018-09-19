@@ -61,6 +61,12 @@ class RequestBase {
         return RequestBase.session.request(defaultURL, method: .get, parameters: parameters, headers:nil)
     }
     
+    func get(endpoint: Endpoint, movieId: Int) -> DataRequest {
+        endpointName = endpoint.rawValue
+        printAccess(["movie id":movieId])
+        return RequestBase.session.request("\(defaultURL)\(movieId)", method: .get, parameters: parameters, headers:nil)
+    }
+    
     // Request logs
     private func printAccess(_ parameters: Parameters?){
         let param: Any = parameters ?? "--"
@@ -70,9 +76,9 @@ class RequestBase {
 
 enum Endpoint:String {
     
-    /// Endpoint for
+    /// Endpoint for the list of movies
     case movies
     
-    /// Endpoint
+    /// Endpoint for the detail of o movie
     case detail
 }

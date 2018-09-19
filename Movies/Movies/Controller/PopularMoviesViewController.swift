@@ -33,15 +33,20 @@ class PopularMoviesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Popular"
+        setSearchController(navBarTitle: "Popular Movies")
         setupBarsTableView()
         requestPopularMovies()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+    }
+    
     /// Sets up the collectionView
     private func setupBarsTableView(){
-        collectionView.delegate        = self
-        collectionView.dataSource      = self
+        collectionView.delegate   = self
+        collectionView.dataSource = self
         collectionView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(requestPopularMovies), for: .valueChanged)
     }
@@ -80,7 +85,7 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: collectionView.bounds.size.width/2.15, height: collectionView.bounds.size.height/1.5)
+        return CGSize(width: collectionView.bounds.size.width/2.15, height: 270)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
@@ -98,7 +103,7 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource, MovieActionDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -108,8 +113,7 @@ extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionVie
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else{
             return UICollectionViewCell()
         }
-        
-        cell.setupCell(movie: movies[indexPath.row])
+        cell.setupCell(movie: movies[indexPath.row], delegate: self)
         return cell
     }
     
@@ -117,6 +121,11 @@ extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionVie
         let detailController   = DetailMovieViewController()
         detailController.movie = movies[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
+    }
+    
+    func onMovieFavorited(movie: Movie, isFavorite:Bool) {
+        User.current.favorite(movie: movie, !isFavorite)
+        collectionView.reloadData()
     }
 }
 

@@ -11,10 +11,10 @@ import UIKit
 class FavoriteMoviesViewController: BaseViewController {
     
     /// The list of favorited movies
-    private var movies:[Movie] = []
+    //private var movies:[Movie] = []
 
     private unowned var favoriteMoviesView: FavoriteMoviesView{ return self.view as! FavoriteMoviesView }
-    private unowned var collectionView:UICollectionView { return favoriteMoviesView.collectionView }
+    private unowned var tableView:UITableView { return favoriteMoviesView.tableView }
     
     override func loadView() {
         self.view = FavoriteMoviesView()
@@ -22,9 +22,14 @@ class FavoriteMoviesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Favorites"
+        setSearchController(navBarTitle: "Favorite Movies")
         setFilterButton()
         setupBarsTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     /// Adds the filter button to the Controller
@@ -35,8 +40,8 @@ class FavoriteMoviesViewController: BaseViewController {
     
     /// Sets up the collectionView
     private func setupBarsTableView(){
-        collectionView.delegate        = self
-        collectionView.dataSource      = self
+        tableView.delegate   = self
+        tableView.dataSource = self
     }
     
     /// Opens the FilterController
@@ -49,28 +54,28 @@ class FavoriteMoviesViewController: BaseViewController {
     }
 }
 
-extension FavoriteMoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSource, MovieActionDelegate  {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return User.current.favorites.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else{
-            return UICollectionViewCell()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.identifier, for: indexPath) as? FavoriteCell else{
+            return UITableViewCell()
         }
-        
-        cell.setupCell(movie: movies[indexPath.row])
+        cell.setupCell(movie: User.current.favorites[indexPath.row], delegate: self)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailController   = DetailMovieViewController()
-        detailController.movie = movies[indexPath.row]
+        detailController.movie = User.current.favorites[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2.1, height: 70)
+    func onMovieFavorited(movie: Movie, isFavorite:Bool) {
+        User.current.favorite(movie: movie, !isFavorite)
+        tableView.reloadData()
     }
 }

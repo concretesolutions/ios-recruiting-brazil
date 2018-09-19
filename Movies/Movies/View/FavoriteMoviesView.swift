@@ -10,28 +10,26 @@ import UIKit
 
 class FavoriteMoviesView: UIView {
     
-    /// The collectionView which holds the movies
-    let collectionView:UICollectionView = {
-        let layout = UICollectionViewFlowLayout.init()
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        
-        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
-        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    /// The list of favorited movies
+    let tableView:UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle  = .singleLine
+        tableView.backgroundColor = .white
+        tableView.tableFooterView = UIView()
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     // Adds the constraints to this view
     private func setupConstraints(){
-        self.addSubview(collectionView)
+        self.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor     .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            tableView.topAnchor     .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     override init(frame: CGRect) {
