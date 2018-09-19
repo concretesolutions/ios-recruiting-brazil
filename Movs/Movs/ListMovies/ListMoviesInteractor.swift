@@ -100,17 +100,27 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 		}
 	}
 	
-	//MARK: Check for Favorite Movie
+	//MARK: Update Favorite Movie
 	
 	func updateFavorites() {
+        var updatedMovie: [Movie] = []
         if let storedMovies = worker.fetchFavorites(ofType: Movie.self) {
+            updatedMovie = storedMovies.filter({ (storedMovie) -> Bool in
+                return !favoriteMovies.contains(storedMovie)
+            })
+            
+            updatedMovie += favoriteMovies.filter({ (favMovie) -> Bool in
+                return !storedMovies.contains(favMovie)
+            })
+            
             favoriteMovies = storedMovies
         }
+        
+        guard !updatedMovie.isEmpty else { return }
 		
-		let moviesInfo: [ListMovies.MovieInfo]? = movies.map(self.getResponseMovieInfo)
-		
-		let response = ListMovies.GetMovies.Response(isSuccess: true, error: nil, movies: moviesInfo)
-		self.presenter?.presentMovies(with: response)
+		let moviesInfo: [ListMovies.MovieInfo] = updatedMovie.map(self.getResponseMovieInfo)
+		let response = ListMovies.UpdateMovies.Response(movies: moviesInfo)
+		self.presenter?.presentUpdatedMovies(with: response)
 	}
 	
 	// MARK: Auxiliary methods

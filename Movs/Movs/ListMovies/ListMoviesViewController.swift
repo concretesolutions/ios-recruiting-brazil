@@ -14,6 +14,7 @@ import UIKit
 
 protocol ListMoviesDisplayLogic: class {
 	func displayMovieList(with viewModel: ListMovies.GetMovies.ViewModel)
+    func displayUpdatedMovies(with viewModel: ListMovies.UpdateMovies.ViewModel)
 }
 
 class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
@@ -95,6 +96,10 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 			self.present(alert, animated: true, completion: nil)
 		}
 	}
+    
+    func displayUpdatedMovies(with viewModel: ListMovies.UpdateMovies.ViewModel) {
+        collectionManager.updateInfo(forMovies: viewModel.moviesInfo)
+    }
 	
 	//MARK:- Auxiliary Methods
 	

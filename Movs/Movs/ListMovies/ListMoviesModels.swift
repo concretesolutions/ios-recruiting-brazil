@@ -49,4 +49,16 @@ enum ListMovies {
 			let errorMessage: String?
 		}
 	}
+    
+    //MARK:- Update Movies -
+    
+    enum UpdateMovies {
+        struct Response {
+            let movies: [MovieInfo]
+        }
+        
+        struct ViewModel {
+            let moviesInfo: [FormattedMovieInfo]
+        }
+    }
 }

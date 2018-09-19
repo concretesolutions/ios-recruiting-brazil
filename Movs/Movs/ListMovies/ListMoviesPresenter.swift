@@ -14,6 +14,7 @@ import UIKit
 
 protocol ListMoviesPresentationLogic {
 	func presentMovies(with response: ListMovies.GetMovies.Response)
+    func presentUpdatedMovies(with response: ListMovies.UpdateMovies.Response)
 	func mountMovieImage(from data: Data) -> UIImage
 }
 
@@ -35,6 +36,16 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 			self.viewController?.displayMovieList(with: viewModel)
 		}
 	}
+    
+    // MARK: Present Updated Movies
+    
+    func presentUpdatedMovies(with response: ListMovies.UpdateMovies.Response) {
+        let formattedMovies = response.movies.map(formatMovieInfo)
+        let viewModel = ListMovies.UpdateMovies.ViewModel(moviesInfo: formattedMovies)
+        DispatchQueue.main.async {
+            self.viewController?.displayUpdatedMovies(with: viewModel)
+        }
+    }
 	
 	//MARK: Mount Movie Image
 	
