@@ -10,13 +10,76 @@ import UIKit
 
 class DetailMovieView: UIView {
     
+    // The movie's image
+    let poster: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    // The gradient view
+    private let gradient: UIView = {
+        let view = UIView()
+        view.alpha = 0.7
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    // The movie's name
+    let movieName: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // The movie's release date
+    let movieDate: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     // Adds the constraints to this view
     private func setupConstraints(){
+        self.addSubview(poster)
+        self.addSubview(gradient)
+        self.addSubview(movieName)
+        self.addSubview(movieDate)
         
+        NSLayoutConstraint.activate([
+            poster.topAnchor     .constraint(equalTo: self.topAnchor),
+            poster.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            poster.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            poster.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            
+            gradient.topAnchor     .constraint(equalTo: self.topAnchor),
+            gradient.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            gradient.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            gradient.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            
+            movieName.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            movieName.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            movieName.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5),
+            
+            movieDate.bottomAnchor     .constraint(equalTo: self.movieName.topAnchor),
+            movieDate.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            movieDate.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5)
+        ])
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .appColor
         setupConstraints()
     }
     

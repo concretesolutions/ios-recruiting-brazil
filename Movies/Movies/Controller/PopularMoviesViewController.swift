@@ -33,7 +33,7 @@ class PopularMoviesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Populares"
+        self.title = "Popular"
         setupBarsTableView()
         requestPopularMovies()
     }
@@ -42,9 +42,8 @@ class PopularMoviesViewController: BaseViewController {
     private func setupBarsTableView(){
         collectionView.delegate        = self
         collectionView.dataSource      = self
-        collectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(requestPopularMovies), for: UIControl.Event.valueChanged)
-        navigationController?.hidesBarsOnSwipe = false
+        collectionView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(requestPopularMovies), for: .valueChanged)
     }
     
     /// Makes the request to the list of popular movies
@@ -77,6 +76,28 @@ class PopularMoviesViewController: BaseViewController {
     }
 }
 
+extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.size.width/2.15, height: collectionView.bounds.size.height/1.5)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 6
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
+    }
+}
+
 extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,10 +118,6 @@ extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionVie
         detailController.movie = movies[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 300, height: 130)
-//    }
 }
 
 /// Delegates for Scrolling

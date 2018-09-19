@@ -12,12 +12,8 @@ class PopularMoviesView: UIView {
     
     /// The collectionView which holds the movies
     let collectionView:UICollectionView = {
-        let layout = UICollectionViewFlowLayout.init()
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSize(width: 150, height: 300)
-        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .appColorDarker
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -26,13 +22,13 @@ class PopularMoviesView: UIView {
     /// The RefreshControl that indicates when the list is updating
     let refreshControl:UIRefreshControl = {
         let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .white
         return refreshControl
     }()
 
     // Adds the constraints to this view
     private func setupConstraints(){
         self.addSubview(collectionView)
-        
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
@@ -43,6 +39,7 @@ class PopularMoviesView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .appColor
         setupConstraints()
     }
     
@@ -58,8 +55,7 @@ class MovieCell: UICollectionViewCell{
     // The cell's icon
     private let poster: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -67,7 +63,7 @@ class MovieCell: UICollectionViewCell{
     // The movie's name
     private let movieName: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.textColor = .darkGray
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -78,7 +74,7 @@ class MovieCell: UICollectionViewCell{
     // The movie's release date
     private let movieDate: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.textColor = .darkGray
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -89,7 +85,10 @@ class MovieCell: UICollectionViewCell{
     // Indicates if the movie is favorite
     private let favoriteIcon: UIImageView = {
         let icon   = UIImageView()
-        icon.image = UIImage(named: "icon_favorite")
+        icon.image = UIImage(named: "icon_favorite_over")
+        icon.image = icon.image!.withRenderingMode(.alwaysTemplate)
+        icon.tintColor = UIColor.init(hexString: "#d32f2f")
+        icon.contentMode = .scaleAspectFill
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
     }()
@@ -97,21 +96,21 @@ class MovieCell: UICollectionViewCell{
     /// Adds the constraints to the views in this cell
     private func setupConstraints(){
         
-        self.addSubview(poster)
-        self.addSubview(movieName)
-        self.addSubview(movieDate)
-        self.addSubview(favoriteIcon)
+        self.contentView.addSubview(poster)
+        self.contentView.addSubview(movieName)
+        self.contentView.addSubview(movieDate)
+        self.contentView.addSubview(favoriteIcon)
         
         NSLayoutConstraint.activate([
-            poster.heightAnchor  .constraint(equalToConstant: 70),
+            poster.heightAnchor  .constraint(equalToConstant: 200),
             poster.topAnchor     .constraint(equalTo: self.contentView.topAnchor, constant: 5),
             poster.leadingAnchor .constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
             poster.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
             
-            favoriteIcon.widthAnchor   .constraint(equalToConstant: 15),
-            favoriteIcon.heightAnchor  .constraint(equalToConstant: 15),
-            favoriteIcon.topAnchor     .constraint(equalTo: poster.topAnchor),
-            favoriteIcon.trailingAnchor.constraint(equalTo: poster.trailingAnchor),
+            favoriteIcon.widthAnchor   .constraint(equalToConstant: 25),
+            favoriteIcon.heightAnchor  .constraint(equalToConstant: 25),
+            favoriteIcon.bottomAnchor  .constraint(equalTo: self.contentView.bottomAnchor, constant: -5),
+            favoriteIcon.trailingAnchor.constraint(equalTo: poster.trailingAnchor, constant: -5),
             
             movieName.topAnchor     .constraint(equalTo: self.poster.bottomAnchor, constant: 5),
             movieName.leadingAnchor .constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
@@ -119,13 +118,14 @@ class MovieCell: UICollectionViewCell{
             
             movieDate.topAnchor     .constraint(equalTo: self.movieName.bottomAnchor, constant: 5),
             movieDate.leadingAnchor .constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
-            movieDate.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5),
-            movieDate.bottomAnchor  .constraint(equalTo: self.contentView.bottomAnchor, constant: -5)
+            movieDate.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5)
         ])
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.contentView.backgroundColor = .white
+        self.addDropShadow()
         setupConstraints()
     }
     

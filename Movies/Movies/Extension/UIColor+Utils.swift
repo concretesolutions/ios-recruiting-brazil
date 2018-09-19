@@ -14,7 +14,14 @@ extension UIColor {
     /// Apps's default colour
     open class var appColor: UIColor {
         get{
-            return UIColor.init(hexString: "#b71c1c") // Red
+            return UIColor.init(hexString: "#000a12")
+        }
+    }
+    
+    /// Apps's default colour darker
+    open class var appColorDarker: UIColor {
+        get{
+            return UIColor.init(hexString: "#263238") 
         }
     }
     

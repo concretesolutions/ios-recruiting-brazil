@@ -32,6 +32,7 @@
 		4A348C6F21517F9300F07F1A /* UIImageView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A348C6E21517F9300F07F1A /* UIImageView+Utils.swift */; };
 		5204FD5D1D379A7765D871B1 /* Pods_MoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5428DAF1EF6864D3403737A /* Pods_MoviesUITests.framework */; };
 		6FF303150B06B90446C18E68 /* Pods_MoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016C207ADE442DA3BF3472B9 /* Pods_MoviesTests.framework */; };
+		745603692152040300912225 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745603682152040300912225 /* UIView+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		4A348C6C2151770600F07F1A /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4A348C6E21517F9300F07F1A /* UIImageView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Utils.swift"; sourceTree = "<group>"; };
 		687BA2C316BD93FBB8C66DDC /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
+		745603682152040300912225 /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		9125C48F0BF2826BE8896171 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A65930F25E7485636A8D2F5 /* Pods-MoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesUITests/Pods-MoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BA94CA9F159E8AF46366A7 /* Pods-MoviesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesTests/Pods-MoviesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		4A348C6721516D9400F07F1A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				745603682152040300912225 /* UIView+Utils.swift */,
 				4A348C6821516DA900F07F1A /* UIColor+Utils.swift */,
 				4A348C6E21517F9300F07F1A /* UIImageView+Utils.swift */,
 			);
@@ -480,6 +483,7 @@
 				4A348C4F215155E100F07F1A /* FavoriteMoviesView.swift in Sources */,
 				4A348C532151560A00F07F1A /* FilterView.swift in Sources */,
 				4A348C4B215154DB00F07F1A /* MainViewController.swift in Sources */,
+				745603692152040300912225 /* UIView+Utils.swift in Sources */,
 				4A348C552151572800F07F1A /* PopularMoviesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -692,6 +696,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7Y7N4KE744;
 				INFOPLIST_FILE = MoviesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -714,6 +719,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7Y7N4KE744;
 				INFOPLIST_FILE = MoviesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -735,6 +741,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7Y7N4KE744;
 				INFOPLIST_FILE = MoviesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -756,6 +763,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7Y7N4KE744;
 				INFOPLIST_FILE = MoviesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -22,7 +22,7 @@ class FavoriteMoviesViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Meus Favoritos"
+        self.title = "Favorites"
         setFilterButton()
         setupBarsTableView()
     }
