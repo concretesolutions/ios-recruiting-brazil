@@ -32,8 +32,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		favoriteButton.isSelected = true
-		setSelected(favoriteButton, to: true)
 		posterImageView.layer.masksToBounds = true
 		posterImageView.layer.cornerRadius = 5.0
 	}
@@ -44,6 +42,9 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
 		genreLabel.text = formattedMovieModel.genres
 		posterImageView.image = formattedMovieModel.image
 		overviewLabel.text = formattedMovieModel.overview
+        
+        favoriteButton.isSelected = true
+        setSelected(favoriteButton, to: true)
 	}
 	
 	// MARK: Auxiliary methods
@@ -62,12 +63,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
 			} else {
 				button.tintColor = .white
 			}
-			
-			button.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-		}, completion: { finish in
-			UIButton.animate(withDuration: 0.2, animations: {
-				button.transform = CGAffineTransform.identity
-			})
 		})
 	}
 }

@@ -32,7 +32,7 @@ class ListFavoritesInteractor: ListFavoritesBusinessLogic, ListFavoritesDataStor
 		var success = true
 		
 		worker = ListFavoritesWorker()
-		if let fetchedFavs = worker?.fetchFavorites(ofType: Movie.self) {
+		if let fetchedFavs = worker?.fetchFavorites(ofType: Movie.self), !fetchedFavs.isEmpty {
 			favorites = fetchedFavs
 		} else {
 			success = false
