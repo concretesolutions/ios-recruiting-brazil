@@ -8,14 +8,19 @@
 
 import UIKit
 
+protocol MovieCollectionViewCellProtocol {
+	func image(forMovieId id: Int, _ completion: @escaping (UIImage) -> Void)
+}
+
 class MovieCollectionViewCell: UICollectionViewCell {
 	
 	static let identifier = "MovieCollectionViewCell"
 	static let nib = UINib(nibName: MovieCollectionViewCell.identifier, bundle: Bundle.main)
 	static let preferredSize = CGSize(width: 300, height: 455)
 	
-	public var favoriteMovie: ((_ id: Int) -> Void)?
-	private var presentedMovieId: Int!
+	private var presentedMovieId: Int! = -1
+	public var delegate: MovieCollectionViewCellProtocol?
+	public var didFavoritedMovie: ((_ movieId: Int) -> Void)?
 
 	@IBOutlet weak private var posterImageView: UIImageView!
 	@IBOutlet weak private var titleLabel: UILabel!
@@ -24,24 +29,19 @@ class MovieCollectionViewCell: UICollectionViewCell {
 	@IBAction private func favorite(_ sender: UIButton) {
 		setSelected(sender)
 		
-		favoriteMovie?(presentedMovieId)
-	}
-	
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		
-		posterImageView.layer.cornerRadius = 5.0
+		didFavoritedMovie?(presentedMovieId)
 	}
 	
 	public func configure(with formattedMovieModel: ListMovies.FormattedMovieInfo)  {
 		presentedMovieId = formattedMovieModel.id
-		posterImageView.image = formattedMovieModel.image
 		titleLabel.text = formattedMovieModel.title
 		genreLabel.text = formattedMovieModel.mainGenre
-	}
-	
-	public func setPoster(_ posterImage: UIImage) {
-		posterImageView.image = posterImage
+		
+		delegate?.image(forMovieId: presentedMovieId, { (image) in
+			self.posterImageView.image = image
+			self.posterImageView.layer.cornerRadius = 15.0
+			self.layoutIfNeeded()
+		})
 	}
 	
 	// MARK: Auxiliary methods

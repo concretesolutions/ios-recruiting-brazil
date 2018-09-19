@@ -14,6 +14,7 @@ import UIKit
 
 protocol ListMoviesBusinessLogic {
 	func getMovies()
+	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void)
 }
 
 protocol ListMoviesDataStore {
@@ -21,7 +22,7 @@ protocol ListMoviesDataStore {
 
 class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	var presenter: ListMoviesPresentationLogic?
-	var worker: ListMoviesWorker?
+	var worker = ListMoviesWorker()
 	
 	// MARK: Auxiliary variables
 	
@@ -30,9 +31,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 	// MARK: Get Movies
 	
 	func getMovies() {
-		worker = ListMoviesWorker()
-		
-		worker?.downloadPopularMovies({ (success, returnedMovies: [Movie]?, error)  in
+		worker.downloadPopularMovies({ (success, returnedMovies: [Movie]?, error)  in
 			if let returnedMovies = returnedMovies {
 				self.movies = returnedMovies
 			}
@@ -41,6 +40,16 @@ class ListMoviesInteractor: ListMoviesBusinessLogic, ListMoviesDataStore {
 			let response = ListMovies.GetMovies.Response(isSuccess: success, error: error, movies: moviesInfo)
 			self.presenter?.presentMovies(with: response)
 		})
+	}
+	
+	//MARK: Get Movie Image
+	
+	func getImage(forMovieId movieId: Int, _ completion: @escaping (UIImage) -> Void) {
+		worker.getImageForMovie(withId: movieId) { (result) in
+			if let data = result.imageData, let image = self.presenter?.mountMovieImage(from: data) {
+				completion(image)
+			}
+		}
 	}
 	
 	// MARK: Auxiliary methods

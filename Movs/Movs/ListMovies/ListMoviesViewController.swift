@@ -112,9 +112,36 @@ class ListMoviesViewController: UIViewController, ListMoviesDisplayLogic {
 	
 	fileprivate func setupMoviewCollectionManager() {
 		collectionManager = MovieCollectionViewManager(of: moviesCollectionView)
-//		collectionManager.delegate = self
+		collectionManager.delegate = self
+		collectionManager.cellDelegate = self
 		
 		moviesCollectionView.dataSource = collectionManager
 		moviesCollectionView.delegate = collectionManager
+	}
+}
+
+//MARK: - MovieCollectionViewCellProtocol -
+
+extension ListMoviesViewController: MovieCollectionViewCellProtocol {
+	func image(forMovieId id: Int, _ completion: @escaping (UIImage) -> Void) {
+		DispatchQueue.main.async {
+			self.interactor?.getImage(forMovieId: id, completion)
+		}
+	}
+}
+
+//MARK: - MovieCollectionViewManagerProtocol -
+
+extension ListMoviesViewController: MovieCollectionViewManagerProtocol {	
+	func getMoreMovies(_ completion: @escaping ([ListMovies.FormattedMovieInfo]) -> Void) {
+		
+	}
+	
+	func didSelectMovie(with id: Int) {
+		
+	}
+	
+	func didFavoritedMovie(withId id: Int) {
+		
 	}
 }

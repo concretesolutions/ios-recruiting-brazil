@@ -10,9 +10,9 @@
 import UIKit
 
 protocol MovieCollectionViewManagerProtocol {
-	func getImageForMovie(with movieInfo: ListMovies.FormattedMovieInfo, _ completion: @escaping (UIImage) -> Void)
 	func getMoreMovies(_ completion: @escaping ([ListMovies.FormattedMovieInfo]) -> Void)
 	func didSelectMovie(with id: Int)
+	func didFavoritedMovie(withId id: Int)
 }
 
 class MovieCollectionViewManager: NSObject {
@@ -24,6 +24,7 @@ class MovieCollectionViewManager: NSObject {
 	private var currentSection = 0
 	
 	var delegate: MovieCollectionViewManagerProtocol?
+	var cellDelegate: MovieCollectionViewCellProtocol?
 	
 	init(of collection: UICollectionView) {
 		super.init()
@@ -57,9 +58,8 @@ extension MovieCollectionViewManager: UICollectionViewDataSource {
 		
 		let currentMovieInfo = data[indexPath.section][indexPath.row]
 		movieCell.configure(with: currentMovieInfo)
-		delegate?.getImageForMovie(with: currentMovieInfo) { (image) in
-			movieCell.setPoster(image)
-		}
+		movieCell.delegate = cellDelegate
+		movieCell.didFavoritedMovie = delegate?.didFavoritedMovie
 		
 		return movieCell
 	}
@@ -113,6 +113,29 @@ extension MovieCollectionViewManager {
 	fileprivate func getProportionalSize(forHeight height: CGFloat) -> CGSize {
 		let multiplier = height / MovieCollectionViewCell.preferredSize.height
 		return CGSize(width: MovieCollectionViewCell.preferredSize.width * multiplier, height: height)
+	}
+	
+	fileprivate func getIndexPath(ofMovie id: Int) -> IndexPath? {
+		var section: Int = 0
+		var row: Int?
+		
+		for i in 0..<data.count {
+			section = i
+			let movie = data[i].first(where: { (movieInfo) -> Bool in
+				return movieInfo.id == id
+			})
+			
+			if movie != nil {
+				row = i
+				break
+			}
+		}
+		
+		if let row = row {
+			return IndexPath(row: row, section: section)
+		}
+		
+		return nil
 	}
 }
 

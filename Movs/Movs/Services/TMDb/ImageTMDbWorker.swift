@@ -35,14 +35,14 @@ class ImageTMDbWorker: TMDbClient {
 	
 	typealias DownloadImageResponse = (success: Bool, path: String, imageData: Data?)
 	
-	/// Download the image from the specified URL.
+	/// Download the image from the specified movie.
 	///
 	/// - Parameters:
-	///   - path: The file path to be downloaded.
-	///   - type: Whether poster or backdrop image.
+	///   - movie: The movie to download an image.
 	///   - completion: The handler to be called once the download has finished.
-	public func downloadImage(from path: String, type: ImageType, _ completion: @escaping (DownloadImageResponse) -> Void) {
-		var downloadResponse = DownloadImageResponse(false, path, nil)
+	public func downloadImage(for movie: TMDbMovie, _ completion: @escaping (DownloadImageResponse) -> Void) {
+		let imageMetadata = getImageMetadata(for: movie)
+		var downloadResponse = DownloadImageResponse(false, imageMetadata.path, nil)
 		
 		guard let properties = properties else {
 			updateProperties() { (error) in
@@ -51,7 +51,7 @@ class ImageTMDbWorker: TMDbClient {
 					return
 				}
 				
-				self.downloadImage(from: path, type: type, completion)
+				self.downloadImage(for: movie, completion)
 			}
 			
 			return
@@ -62,7 +62,7 @@ class ImageTMDbWorker: TMDbClient {
 			return
 		}
 		
-		let completeURL = preferredImageURL + type.getDefaultSizeString() + path
+		let completeURL = preferredImageURL + imageMetadata.type.getDefaultSizeString() + imageMetadata.path
 		httpNetworkWorker = HTTPNetworkWorker()
 		httpNetworkWorker?.downloadData(from: completeURL) { (response) in
 			guard let unwrappedData = response.data else {
@@ -70,11 +70,16 @@ class ImageTMDbWorker: TMDbClient {
 				return
 			}
 			
-			downloadResponse.success = true
-			downloadResponse.imageData = unwrappedData
-			completion(downloadResponse)
+			if downloadResponse.path == imageMetadata.path { // Avoid the image to load on the wrong spot
+				downloadResponse.success = true
+				downloadResponse.imageData = unwrappedData
+				
+				print("--- Downloaded \(imageMetadata.type) for \(movie.title ?? "") ---")
+				completion(downloadResponse)
+			}
 		}
 	}
+	
 	
 	// MARK:- Auxiliary Methods
 	
@@ -98,4 +103,22 @@ class ImageTMDbWorker: TMDbClient {
 			completion?(nil)
 		}
 	}
+	
+	/// Gets the preferrable image metadata (path andd type) for the specified movie.
+	///
+	/// - Parameter movie: The movie to get image info.
+	/// - Returns: A tuple containing path and type of the preferrable image.
+	private func getImageMetadata(for movie: TMDbMovie) -> (path: String, type: ImageTMDbWorker.ImageType) {
+		var path = ""
+		var imageType: ImageTMDbWorker.ImageType = .poster
+		if let posterPath = movie.posterPath {
+			path = posterPath
+		} else if let backdropPath = movie.backdropPath {
+			path = backdropPath
+			imageType = .backdrop
+		}
+		
+		return (path, imageType)
+	}
+	
 }

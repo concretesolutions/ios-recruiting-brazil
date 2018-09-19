@@ -19,23 +19,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="450"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FCO-Vi-ALk">
-                        <rect key="frame" x="5" y="5" width="290" height="391"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="defaultPoster" translatesAutoresizingMaskIntoConstraints="NO" id="FCO-Vi-ALk">
+                        <rect key="frame" x="5" y="5" width="290" height="402.5"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="chn-9a-5QP">
-                        <rect key="frame" x="5" y="406" width="258" height="17"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="chn-9a-5QP">
+                        <rect key="frame" x="5" y="412.5" width="262" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Auz-LZ-dbc">
-                        <rect key="frame" x="5" y="428" width="258" height="17"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <rect key="frame" x="5" y="432.5" width="262" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzp-4D-maM">
-                        <rect key="frame" x="273" y="406" width="22" height="39"/>
+                        <rect key="frame" x="277" y="412.5" width="18" height="34.5"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" image="favorite_empty_icon"/>
                         <state key="selected" image="favorite_full_icon"/>
@@ -47,18 +47,18 @@
             </view>
             <constraints>
                 <constraint firstItem="chn-9a-5QP" firstAttribute="leading" secondItem="FCO-Vi-ALk" secondAttribute="leading" id="53j-kG-LgR"/>
-                <constraint firstItem="chn-9a-5QP" firstAttribute="top" secondItem="FCO-Vi-ALk" secondAttribute="bottom" constant="10" id="Pfb-Xq-0ra"/>
+                <constraint firstItem="chn-9a-5QP" firstAttribute="top" secondItem="FCO-Vi-ALk" secondAttribute="bottom" constant="5" id="Pfb-Xq-0ra"/>
                 <constraint firstItem="Auz-LZ-dbc" firstAttribute="leading" secondItem="chn-9a-5QP" secondAttribute="leading" id="Z1q-Tl-kxS"/>
                 <constraint firstItem="FCO-Vi-ALk" firstAttribute="top" secondItem="WgY-nw-yUO" secondAttribute="top" constant="5" id="g7H-dV-aiE"/>
                 <constraint firstItem="kzp-4D-maM" firstAttribute="leading" secondItem="chn-9a-5QP" secondAttribute="trailing" constant="10" id="k1h-fR-jZp"/>
                 <constraint firstItem="kzp-4D-maM" firstAttribute="top" secondItem="chn-9a-5QP" secondAttribute="top" id="naa-nO-Ws9"/>
-                <constraint firstItem="Auz-LZ-dbc" firstAttribute="top" secondItem="chn-9a-5QP" secondAttribute="bottom" constant="5" id="pvp-TI-Fbp"/>
+                <constraint firstItem="Auz-LZ-dbc" firstAttribute="top" secondItem="chn-9a-5QP" secondAttribute="bottom" constant="3" id="pvp-TI-Fbp"/>
                 <constraint firstItem="Auz-LZ-dbc" firstAttribute="trailing" secondItem="chn-9a-5QP" secondAttribute="trailing" id="sOc-K5-CKt"/>
                 <constraint firstAttribute="trailing" secondItem="FCO-Vi-ALk" secondAttribute="trailing" constant="5" id="sSH-XW-N5Y"/>
                 <constraint firstItem="kzp-4D-maM" firstAttribute="trailing" secondItem="FCO-Vi-ALk" secondAttribute="trailing" id="usZ-JL-dvB"/>
                 <constraint firstItem="kzp-4D-maM" firstAttribute="bottom" secondItem="Auz-LZ-dbc" secondAttribute="bottom" id="w89-P4-HgD"/>
                 <constraint firstItem="FCO-Vi-ALk" firstAttribute="leading" secondItem="WgY-nw-yUO" secondAttribute="leading" constant="5" id="yQo-Sj-LQu"/>
-                <constraint firstAttribute="bottom" secondItem="Auz-LZ-dbc" secondAttribute="bottom" constant="5" id="zy7-qu-R5g"/>
+                <constraint firstAttribute="bottom" secondItem="Auz-LZ-dbc" secondAttribute="bottom" constant="3" id="zy7-qu-R5g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="uEi-E6-4I0"/>
             <size key="customSize" width="300" height="454"/>
@@ -71,7 +71,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="defaultPoster" width="300" height="455"/>
+        <image name="favorite_empty_icon" width="18" height="16"/>
         <image name="favorite_full_icon" width="18" height="16"/>
     </resources>
 </document>

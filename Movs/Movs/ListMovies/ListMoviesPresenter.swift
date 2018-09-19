@@ -14,6 +14,7 @@ import UIKit
 
 protocol ListMoviesPresentationLogic {
 	func presentMovies(with response: ListMovies.GetMovies.Response)
+	func mountMovieImage(from data: Data) -> UIImage
 }
 
 class ListMoviesPresenter: ListMoviesPresentationLogic {
@@ -33,6 +34,17 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
 		DispatchQueue.main.async {
 			self.viewController?.displayMovieList(with: viewModel)
 		}
+	}
+	
+	//MARK: Mount Movie Image
+	
+	func mountMovieImage(from data: Data) -> UIImage {
+		var presentedImage = UIImage(named: "defaultPoster")!
+		if let image = UIImage(data: data) {
+			presentedImage = image
+		}
+		
+		return presentedImage
 	}
 	
 	// MARK: Auxiliary methods

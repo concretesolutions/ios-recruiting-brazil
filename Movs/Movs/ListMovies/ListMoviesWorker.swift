@@ -16,10 +16,13 @@ class ListMoviesWorker {
 	
 	private var moviesTMDbWorker: MoviesTMDbWorker?
 	private var genreTMDbWorker: GenreTMDbWorker!
+	private var imageTMDbWorker = ImageTMDbWorker()
 	
 	// MARK:- Pagination helpers
 	private var currentPage: Int = 1
 	private var totalPages: Int = 0
+	
+	private var apiMoviesById: [Int : TMDbMovie] = [:]
 	
 	init() {
 		genreTMDbWorker = GenreTMDbWorker()
@@ -45,6 +48,7 @@ class ListMoviesWorker {
 		moviesTMDbWorker = MoviesTMDbWorker()
 		moviesTMDbWorker?.fetchMoviesList(of: .popular, on: currentPage) { (result) in
 			if result.success, let apiResponse = result.response {
+				self.store(apiMovies: apiResponse.movies)
 				self.handle(apiResponse, completion)
 			} else {
 				let error = self.useCaseError(for: result.error)
@@ -53,9 +57,32 @@ class ListMoviesWorker {
 		}
 	}
 	
+	typealias DownloadImageResponse = (success: Bool, imageData: Data?)
+	
+	/// Download the image for the movie with the specified id.
+	///
+	/// - Parameters:
+	///   - id: The id for a movie.
+	///   - completion: The handler to be called once the download has finished.
+	public func getImageForMovie(withId id: Int, _ completion: @escaping (DownloadImageResponse) -> Void) {
+		guard let movie = apiMoviesById[id] else { return }
+		
+		imageTMDbWorker.downloadImage(for: movie) { (result) in
+			completion((result.success, result.imageData))
+		}
+	}
+	
 	//MARK:- Auxiliary methods
 	
-	func handle<T>(_ apiResponse: MoviesTMDbWorker.MoviesListResponse, _ completion: @escaping (DownloadMoviesResult<T>) -> Void) where T : Decodable {
+	private func store(apiMovies: [TMDbMovie])  {
+		for movie in apiMovies {
+			if let id = movie.id {
+				apiMoviesById.updateValue(movie, forKey: id)
+			}
+		}
+	}
+	
+	private func handle<T>(_ apiResponse: MoviesTMDbWorker.MoviesListResponse, _ completion: @escaping (DownloadMoviesResult<T>) -> Void) where T : Decodable {
 		totalPages = apiResponse.totalPages
 		
 		do {
