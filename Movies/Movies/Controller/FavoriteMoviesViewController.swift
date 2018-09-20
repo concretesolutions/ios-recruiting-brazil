@@ -10,11 +10,10 @@ import UIKit
 
 class FavoriteMoviesViewController: BaseViewController {
     
-    /// The list of favorited movies
-    //private var movies:[Movie] = []
-
-    private unowned var favoriteMoviesView: FavoriteMoviesView{ return self.view as! FavoriteMoviesView }
-    private unowned var tableView:UITableView { return favoriteMoviesView.tableView }
+    private unowned var favoriteMoviesView:FavoriteMoviesView { return self.view as! FavoriteMoviesView }
+    
+    private unowned var tableView:UITableView        { return favoriteMoviesView.tableView }
+    private unowned var buttonRemoveFilter:UIButton  { return favoriteMoviesView.buttonRemoveFilter }
     
     override func loadView() {
         self.view = FavoriteMoviesView()
@@ -29,14 +28,65 @@ class FavoriteMoviesViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        checkHasFilters()
+    }
+    
+    /// Checks if there is any filter to be applied
+    private func checkHasFilters(){
+        filteredMovies = User.current.favorites
+        if Filter.current.hasFilters{
+            showFilterButton(show: true)
+            
+            /// Filters by genre
+            if let genre = Filter.current.genre{
+                filteredMovies = filteredMovies.filter({
+                    $0.genres!.contains(where: {
+                        $0.id == genre.id
+                    })
+                })
+            }
+            
+            if let date = Filter.current.date{
+                filteredMovies = filteredMovies.filter({
+                    $0.releaseDate.formatDate(fromPattern: "yyyy-mm-dd", toPattern: "yyyy").elementsEqual(date)
+                })
+            }
+        }
+        else{
+            showFilterButton(show: false)
+        }
         updateList()
+    }
+    
+    /// Shows or hides the "Remove Filter" button
+    func showFilterButton(show:Bool){
+        if show{
+            favoriteMoviesView.removeFilterButtonHeight.constant = 45
+            buttonRemoveFilter.isHidden = false
+            buttonRemoveFilter.layoutIfNeeded()
+        }
+        else{
+            favoriteMoviesView.removeFilterButtonHeight.constant = 0
+            buttonRemoveFilter.isHidden = true
+            buttonRemoveFilter.layoutIfNeeded()
+        }
+    }
+    
+    /// Sets up the collectionView
+    private func setupBarsTableView(){
+        tableView.delegate   = self
+        tableView.dataSource = self
+        buttonRemoveFilter.addTarget(self, action: #selector(hideFilterButton), for: .touchUpInside)
     }
     
     /// Updates the state of the list
     private func updateList(){
         tableView.reloadData()
         if User.current.favorites.isEmpty{
-            self.showFeedback(message: "Your favorite list is empty")
+            self.showFeedback(message: "Your favorite list is empty.")
+        }
+        else if filteredMovies.isEmpty{
+            self.showFeedback(message: "There is no movies with the filters or search term you typed.")
         }
         else{
             self.showFeedback()
@@ -48,10 +98,12 @@ class FavoriteMoviesViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = filter
     }
     
-    /// Sets up the collectionView
-    private func setupBarsTableView(){
-        tableView.delegate   = self
-        tableView.dataSource = self
+    /// Hides the "Remove Filter" button
+    @objc private func hideFilterButton(){
+        showFilterButton(show: false)
+        Filter.current.resetAll()
+        filteredMovies = User.current.favorites
+        updateList()
     }
     
     /// Opens the FilterController
@@ -61,7 +113,22 @@ class FavoriteMoviesViewController: BaseViewController {
     }
     
     override func updateSearchResults(for searchController: UISearchController) {
-        
+        triggerRequestForText(searchController.searchBar.text)
+    }
+
+    /// Triggers the timer to execute the filtering
+    private func triggerRequestForText(_ term:String?){
+        timer?.invalidate()
+        if let text = term, !text.isEmpty {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+                print("Filtering movie with name: \(text)...")
+                self.filteredMovies = User.current.favorites.filter({$0.title!.range(of: text, options: [.diacriticInsensitive, .caseInsensitive]) != nil })
+                self.updateList()
+            }
+        }
+        else{
+            checkHasFilters()
+        }
     }
 }
 
@@ -78,20 +145,20 @@ extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.current.favorites.count
+        return filteredMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.identifier, for: indexPath) as? FavoriteCell else{
             return UITableViewCell()
         }
-        cell.setupCell(movie: User.current.favorites[indexPath.row])
+        cell.setupCell(movie: filteredMovies[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailController   = DetailMovieViewController()
-        detailController.movie = User.current.favorites[indexPath.row]
+        detailController.movie = filteredMovies[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
     }
 }

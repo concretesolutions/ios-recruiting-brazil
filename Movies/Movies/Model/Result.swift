@@ -11,8 +11,10 @@ import Foundation
 struct Result:Decodable{
     
     var movies:[Movie]?
+    var genres:[Genre]?
     
     private enum CodingKeys: String, CodingKey {
-        case movies      = "results"
+        case movies = "results"
+        case genres = "genres"
     }
 }

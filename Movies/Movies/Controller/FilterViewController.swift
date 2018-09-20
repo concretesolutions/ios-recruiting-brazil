@@ -8,21 +8,21 @@
 
 import UIKit
 
-class FilterViewController: UIViewController {
+class FilterViewController: UITableViewController {
     
-    private let items = ["Date", "Genres"]
+    /// The filters'options
+    private let items = [(name: "Date", type: FilterOption.date), (name: "Genre", type: FilterOption.genre)]
 
-    private unowned var filterView: FilterView { return self.view as! FilterView }
-    private unowned var tableView:  UITableView{ return filterView.tableView     }
-    
-    override func loadView() {
-        self.view = FilterView()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         configureNavigationBar()
+        setupTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
     }
     
     /// Adds the close button and title to the Controller
@@ -34,9 +34,7 @@ class FilterViewController: UIViewController {
     
     /// Sets up the tableview
     private func setupTableView(){
-        tableView.delegate   = self
-        tableView.dataSource = self
-        
+        self.tableView.register(FilterCell.self, forCellReuseIdentifier: FilterCell.identifier)
         let footer = FilterFooterCell(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         footer.buttonApply.addTarget(self, action: #selector(applyFilters), for: .touchUpInside)
         tableView.tableFooterView = footer
@@ -44,30 +42,42 @@ class FilterViewController: UIViewController {
     
     /// Apply the filters
     @objc private func applyFilters(){
+        Filter.current.hasFilters = true
         closeViewController()
     }
     
     /// Opens the FilterController
     @objc private func closeViewController(){
+        if !Filter.current.hasFilters{
+            Filter.current.resetAll()
+        }
         self.dismiss(animated: true, completion: nil)
     }
 }
 
-extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
+extension FilterViewController{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FilterCell.identifier, for: indexPath) as? FilterCell else{
             return UITableViewCell()
         }
-        cell.title.text = items[indexPath.row]
+        cell.setupCell(item: items[indexPath.row])
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let filterDetail = FilterDetailViewController()
+        switch items[indexPath.row].type {
+            case .date:
+                filterDetail.filterOption = .date
+            case .genre:
+                filterDetail.filterOption = .genre
+        }
+        navigationController?.pushViewController(filterDetail, animated: true)
     }
 }

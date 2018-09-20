@@ -84,4 +84,7 @@ enum Endpoint:String {
     
     /// Endpoint for the genres
     case genres
+    
+    /// Endpoint for the searches
+    case search
 }

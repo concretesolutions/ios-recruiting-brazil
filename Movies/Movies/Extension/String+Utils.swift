@@ -12,9 +12,9 @@ import UIKit
 extension Optional where Wrapped == String {
 
     /// Converts a string date to a given format
-    func formatDate(fromPattern:String, toPattern: String)->String?{
+    func formatDate(fromPattern:String, toPattern: String)->String{
         guard let date = self else{
-            return ""
+            return "NaN"
         }
         
         let dateFormatter = DateFormatter()
@@ -26,6 +26,6 @@ extension Optional where Wrapped == String {
             return dateFormatter.string(from: date)
         }
         
-        return nil
+        return "NaN"
     }
 }

@@ -22,6 +22,9 @@ class PopularMoviesViewController: BaseViewController {
     // Indicates the current list page
     var currentPage = 1
     
+    // Indicates if it's the first time loading the app
+    var firstTime = true
+    
     private unowned var popularMoviesView: PopularMoviesView{ return self.view as! PopularMoviesView }
     
     private unowned var collectionView:UICollectionView { return popularMoviesView.collectionView }
@@ -42,7 +45,24 @@ class PopularMoviesViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if !firstTime{
+            updateList()
+        }
+        firstTime = false
+    }
+    
+    /// Updates the state of the list
+    private func updateList(){
         collectionView.reloadData()
+        if movies.isEmpty{
+            self.showFeedback(message: "Ops... Something went wrong. Please, try again.")
+        }
+        else if filteredMovies.isEmpty{
+            self.showFeedback(message: "There is no movies with the search term you typed.")
+        }
+        else{
+            self.showFeedback()
+        }
     }
     
     /// Sets up the collectionView
@@ -78,18 +98,49 @@ class PopularMoviesViewController: BaseViewController {
             self.collectionView.reloadData()
             self.isLoadingMore = false
             
-            /// Shows the error message
-            if self.movies.isEmpty{
-                self.showFeedback(message: "Ops... Something went wrong. Please, try again.")
+            self.filteredMovies = self.movies
+            self.updateList()
+        }
+    }
+    
+    /// Makes the request to the list of popular movies based on a search term
+    private var isSearching = false
+    private func searchMovie(term:String?){
+        RequestMovie().search(term).responseJSON { response in
+            
+            self.filteredMovies = []
+            if let data = response.data, let result = try? JSONDecoder().decode(Result.self, from: data), let movies = result.movies{
+                self.filteredMovies.append(contentsOf: movies)
             }
-            else{
-               self.showFeedback()
-            }
+            
+            self.showLoading(false)
+            self.refreshControl.endRefreshing()
+            
+            self.collectionView.reloadData()
+            self.isLoadingMore = false
+            
+            self.updateList()
         }
     }
     
     override func updateSearchResults(for searchController: UISearchController) {
-        
+        triggerRequestForText(searchController.searchBar.text)
+    }
+    
+    /// Triggers the timer to execute the filtering
+    private func triggerRequestForText(_ term:String?){
+        timer?.invalidate()
+        if let text = term, !text.isEmpty {
+            isSearching = true
+            timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+                print("Filtering movie with name: \(text)...")
+                self.searchMovie(term: text)
+            }
+        }
+        else{
+             isSearching = false
+             requestPopularMovies()
+        }
     }
 }
 
@@ -110,7 +161,6 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
         return UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
     }
 }
@@ -118,20 +168,20 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
 extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return filteredMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else{
             return UICollectionViewCell()
         }
-        cell.setupCell(movie: movies[indexPath.row])
+        cell.setupCell(movie: filteredMovies[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailController   = DetailMovieViewController()
-        detailController.movie = movies[indexPath.row]
+        detailController.movie = filteredMovies[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
     }
 }
@@ -141,8 +191,8 @@ extension PopularMoviesViewController{
     
     // Load more items when the collectionView's scrolls reach
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if scrollView == self.collectionView{
+        self.navigationItem.searchController?.searchBar.endEditing(true)
+        if scrollView == self.collectionView && !isSearching{
             
             let contentOffset = scrollView .contentOffset.y
             let maximumOffset = (scrollView.contentSize.height - scrollView.frame.size.height)
