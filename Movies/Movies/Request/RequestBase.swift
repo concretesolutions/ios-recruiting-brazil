@@ -81,4 +81,7 @@ enum Endpoint:String {
     
     /// Endpoint for the detail of o movie
     case detail
+    
+    /// Endpoint for the genres
+    case genres
 }

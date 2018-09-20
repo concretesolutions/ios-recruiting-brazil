@@ -8,12 +8,13 @@
 
 import UIKit
 
-class PopularMoviesView: UIView {
+class PopularMoviesView: BaseView {
     
     /// The collectionView which holds the movies
     let collectionView:UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .appColorDarker
+        collectionView.backgroundColor = .appSecondColor
+        collectionView.alwaysBounceVertical = true
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -22,12 +23,12 @@ class PopularMoviesView: UIView {
     /// The RefreshControl that indicates when the list is updating
     let refreshControl:UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .white
+        refreshControl.tintColor = .appColor
         return refreshControl
     }()
 
     // Adds the constraints to this view
-    private func setupConstraints(){
+    override func setupConstraints(){
         self.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
@@ -35,6 +36,7 @@ class PopularMoviesView: UIView {
             collectionView.topAnchor     .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
         ])
+        super.setupConstraints()
     }
     
     override init(frame: CGRect) {

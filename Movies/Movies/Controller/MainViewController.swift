@@ -21,6 +21,7 @@ class MainViewController: UITabBarController {
         /// Sets the selected colour for the icons and the
         self.tabBar.tintColor       = .appColor
         self.tabBar.backgroundColor = .white
+        self.hidesBottomBarWhenPushed = true
         
         /// Creates instances of the View Controllers
         let popularMoviesController   = PopularMoviesViewController()

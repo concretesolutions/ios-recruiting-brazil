@@ -29,9 +29,19 @@ class FavoriteMoviesViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
+        updateList()
     }
     
+    /// Updates the state of the list
+    private func updateList(){
+        tableView.reloadData()
+        if User.current.favorites.isEmpty{
+            self.showFeedback(message: "Your favorite list is empty")
+        }
+        else{
+            self.showFeedback()
+        }
+    }
     /// Adds the filter button to the Controller
     private func setFilterButton(){
         let filter = UIBarButtonItem(image: UIImage(named: "icon_filter"), style: .plain, target: self, action: #selector(openFilterController))
@@ -46,7 +56,8 @@ class FavoriteMoviesViewController: BaseViewController {
     
     /// Opens the FilterController
     @objc private func openFilterController(){
-        self.present(FilterViewController(), animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: FilterViewController())
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     override func updateSearchResults(for searchController: UISearchController) {
@@ -54,7 +65,17 @@ class FavoriteMoviesViewController: BaseViewController {
     }
 }
 
-extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSource, MovieActionDelegate  {
+extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSource  {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let movie         = User.current.favorites[indexPath.row]
+        let unfavoriteAct = UIContextualAction(style: .destructive, title: "Unfavorite", handler: { (action, view, handler) in
+            User.current.favorite(movie: movie, false)
+            self.updateList()
+        })
+        
+        return UISwipeActionsConfiguration(actions: [unfavoriteAct])
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return User.current.favorites.count
@@ -64,7 +85,7 @@ extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.identifier, for: indexPath) as? FavoriteCell else{
             return UITableViewCell()
         }
-        cell.setupCell(movie: User.current.favorites[indexPath.row], delegate: self)
+        cell.setupCell(movie: User.current.favorites[indexPath.row])
         return cell
     }
     
@@ -72,10 +93,5 @@ extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSour
         let detailController   = DetailMovieViewController()
         detailController.movie = User.current.favorites[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
-    }
-    
-    func onMovieFavorited(movie: Movie, isFavorite:Bool) {
-        User.current.favorite(movie: movie, !isFavorite)
-        tableView.reloadData()
     }
 }

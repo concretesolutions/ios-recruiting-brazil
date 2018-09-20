@@ -35,6 +35,8 @@ class PopularMoviesViewController: BaseViewController {
         super.viewDidLoad()
         setSearchController(navBarTitle: "Popular Movies")
         setupBarsTableView()
+        
+        showLoading()
         requestPopularMovies()
     }
     
@@ -48,31 +50,41 @@ class PopularMoviesViewController: BaseViewController {
         collectionView.delegate   = self
         collectionView.dataSource = self
         collectionView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(requestPopularMovies), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+        collectionView.contentOffset = CGPoint(x:0, y:-refreshControl.frame.size.height)
+    }
+    
+    @objc private func refreshAction(){
+        currentPage = 1
+        showFeedback()
+        requestPopularMovies()
     }
     
     /// Makes the request to the list of popular movies
-    @objc private func requestPopularMovies(page:Int=1){
-        
-        if page == 1 && !refreshControl.isRefreshing{
-            collectionView.isUserInteractionEnabled = false
-            refreshControl.beginRefreshing()
-            movies = []
-        }
-        
+    private func requestPopularMovies(page:Int=1){
         RequestMovie().list(page: page).responseJSON { response in
+            
+            if page == 1{
+                self.movies = []
+            }
+
             if let data = response.data, let result = try? JSONDecoder().decode(Result.self, from: data), let movies = result.movies{
                 self.movies.append(contentsOf: movies)
             }
             
-            if self.refreshControl.isRefreshing{
-                self.refreshControl.endRefreshing()
-            }
+            self.showLoading(false)
+            self.refreshControl.endRefreshing()
             
             self.collectionView.reloadData()
-            self.collectionView.isUserInteractionEnabled = true
-            
             self.isLoadingMore = false
+            
+            /// Shows the error message
+            if self.movies.isEmpty{
+                self.showFeedback(message: "Ops... Something went wrong. Please, try again.")
+            }
+            else{
+               self.showFeedback()
+            }
         }
     }
     
@@ -103,7 +115,7 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource, MovieActionDelegate {
+extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -113,7 +125,7 @@ extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionVie
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell else{
             return UICollectionViewCell()
         }
-        cell.setupCell(movie: movies[indexPath.row], delegate: self)
+        cell.setupCell(movie: movies[indexPath.row])
         return cell
     }
     
@@ -121,11 +133,6 @@ extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionVie
         let detailController   = DetailMovieViewController()
         detailController.movie = movies[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
-    }
-    
-    func onMovieFavorited(movie: Movie, isFavorite:Bool) {
-        User.current.favorite(movie: movie, !isFavorite)
-        collectionView.reloadData()
     }
 }
 

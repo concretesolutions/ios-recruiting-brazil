@@ -8,13 +8,13 @@
 
 import UIKit
 
-class FavoriteMoviesView: UIView {
+class FavoriteMoviesView: BaseView {
     
     /// The list of favorited movies
     let tableView:UITableView = {
         let tableView = UITableView()
-        tableView.separatorStyle  = .singleLine
-        tableView.backgroundColor = .white
+        tableView.separatorStyle  = .none
+        tableView.backgroundColor = .appSecondColor
         tableView.tableFooterView = UIView()
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,16 +22,17 @@ class FavoriteMoviesView: UIView {
     }()
     
     // Adds the constraints to this view
-    private func setupConstraints(){
+    override func setupConstraints(){
         self.addSubview(tableView)
-        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             tableView.topAnchor     .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
         ])
+        super.setupConstraints()
     }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .appColor

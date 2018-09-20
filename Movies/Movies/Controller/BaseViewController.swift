@@ -10,9 +10,13 @@ import UIKit
 
 class BaseViewController: UIViewController, UISearchResultsUpdating {
     
+    private unowned var loading: UIActivityIndicatorView  { return (self.view as! BaseView).loading }
+    private unowned var feedback:UILabel                  { return (self.view as! BaseView).feedbackMessage }
+    
     var timer:Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
+        (self.parent as? UITabBarController)?.hidesBottomBarWhenPushed = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -23,6 +27,22 @@ class BaseViewController: UIViewController, UISearchResultsUpdating {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         Movie.saveFavoriteList(User.current.favorites)
+    }
+    
+    /// Hides or shows the loading
+    func showLoading(_ show:Bool=true){
+        if show{
+            loading.startAnimating()
+        }
+        else{
+            loading.stopAnimating()
+        }
+    }
+    
+    /// Shows a feedback message
+    func showFeedback(message:String?=nil){
+        feedback.text     = message
+        feedback.isHidden = message != nil ? false:true
     }
     
     /// Adds the SearchController to the View

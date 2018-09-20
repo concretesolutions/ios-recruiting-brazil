@@ -37,6 +37,7 @@
 		5204FD5D1D379A7765D871B1 /* Pods_MoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5428DAF1EF6864D3403737A /* Pods_MoviesUITests.framework */; };
 		6FF303150B06B90446C18E68 /* Pods_MoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016C207ADE442DA3BF3472B9 /* Pods_MoviesTests.framework */; };
 		745603692152040300912225 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745603682152040300912225 /* UIView+Utils.swift */; };
+		7460040721533F380042A0A2 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7460040621533F380042A0A2 /* BaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		4A348C762152CE0600F07F1A /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		687BA2C316BD93FBB8C66DDC /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
 		745603682152040300912225 /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
+		7460040621533F380042A0A2 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		9125C48F0BF2826BE8896171 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A65930F25E7485636A8D2F5 /* Pods-MoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesUITests/Pods-MoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BA94CA9F159E8AF46366A7 /* Pods-MoviesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesTests/Pods-MoviesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		4A348C18215153AA00F07F1A /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				74600408215340000042A0A2 /* Cell */,
 				4A348C6721516D9400F07F1A /* Extension */,
 				4A348C5E2151598F00F07F1A /* Request */,
 				4A348C492151540100F07F1A /* Controller */,
@@ -202,12 +205,11 @@
 		4A348C47215153F300F07F1A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7460040621533F380042A0A2 /* BaseView.swift */,
 				4A348C522151560A00F07F1A /* FilterView.swift */,
 				4A348C50215155F500F07F1A /* DetailMovieView.swift */,
 				4A348C542151572800F07F1A /* PopularMoviesView.swift */,
 				4A348C4E215155E100F07F1A /* FavoriteMoviesView.swift */,
-				4A348C722152C2E600F07F1A /* MovieCell.swift */,
-				4A348C762152CE0600F07F1A /* FavoriteCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -225,12 +227,12 @@
 		4A348C492151540100F07F1A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4A348C65215162DB00F07F1A /* BaseViewController.swift */,
 				4A348C4A215154DB00F07F1A /* MainViewController.swift */,
 				4A348C5C215157CF00F07F1A /* FilterViewController.swift */,
 				4A348C582151579D00F07F1A /* FavoriteMoviesViewController.swift */,
 				4A348C562151578900F07F1A /* PopularMoviesViewController.swift */,
 				4A348C5A215157BB00F07F1A /* DetailMovieViewController.swift */,
-				4A348C65215162DB00F07F1A /* BaseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -263,6 +265,15 @@
 				D5428DAF1EF6864D3403737A /* Pods_MoviesUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		74600408215340000042A0A2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4A348C722152C2E600F07F1A /* MovieCell.swift */,
+				4A348C762152CE0600F07F1A /* FavoriteCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,6 +509,7 @@
 				4A348C532151560A00F07F1A /* FilterView.swift in Sources */,
 				4A348C4B215154DB00F07F1A /* MainViewController.swift in Sources */,
 				745603692152040300912225 /* UIView+Utils.swift in Sources */,
+				7460040721533F380042A0A2 /* BaseView.swift in Sources */,
 				4A348C732152C2E600F07F1A /* MovieCell.swift in Sources */,
 				4A348C552151572800F07F1A /* PopularMoviesView.swift in Sources */,
 				4A348C752152C5BA00F07F1A /* User.swift in Sources */,
@@ -668,16 +680,18 @@
 			baseConfigurationReference = 687BA2C316BD93FBB8C66DDC /* Pods-Movies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7Y7N4KE744;
+				DEVELOPMENT_TEAM = NA36627892;
 				INFOPLIST_FILE = Movies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.surrey.Movies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.surrey.Imovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -688,16 +702,18 @@
 			baseConfigurationReference = D4F5C16CFA3124815DF4994C /* Pods-Movies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7Y7N4KE744;
+				DEVELOPMENT_TEAM = NA36627892;
 				INFOPLIST_FILE = Movies/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.surrey.Movies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.surrey.Imovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -18,10 +18,10 @@ extension UIColor {
         }
     }
     
-    /// Apps's default colour darker
-    open class var appColorDarker: UIColor {
+    /// Apps's second colour
+    open class var appSecondColor: UIColor {
         get{
-            return UIColor.init(hexString: "#263238") 
+            return UIColor.init(hexString: "#C0C0C0")
         }
     }
     

@@ -22,4 +22,9 @@ class RequestMovie: RequestBase {
     func detail(of movie:Movie) -> DataRequest{
         return get(endpoint: .detail, movieId: movie.id ?? -1)
     }
+    
+    /// Requests the genres
+    func genres() -> DataRequest{
+        return get(endpoint: .genres)
+    }
 }

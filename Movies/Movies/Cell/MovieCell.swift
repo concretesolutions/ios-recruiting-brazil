@@ -9,10 +9,6 @@
 import UIKit
 import Foundation
 
-protocol MovieActionDelegate {
-    func onMovieFavorited(movie:Movie, isFavorite:Bool)
-}
-
 class MovieCell: UICollectionViewCell{
     
     static let identifier = "MovieCell"
@@ -99,50 +95,22 @@ class MovieCell: UICollectionViewCell{
     }
     
     /// Configures the Cell
-    private var movie:Movie!
-    private var isFavorite = false
-    private var delegate:MovieActionDelegate?
-    func setupCell(movie:Movie, delegate:MovieActionDelegate?){
-        self.movie    = movie
-        self.delegate = delegate
-        
+    func setupCell(movie:Movie){
+
         /// Sets the name of the cell
-        movieName.text = self.movie.title
+        movieName.text = movie.title
         
         /// Sets the release date of the cell
-        movieDate.text = self.movie.releaseDate.formatDate(fromPattern: "yyyy-mm-dd", toPattern: "d MMMM yyyy")
+        movieDate.text = movie.releaseDate.formatDate(fromPattern: "yyyy-mm-dd", toPattern: "d MMMM yyyy")
         
         /// Sets the icon of the cell
-        if let url = self.movie.poster{
+        if let url = movie.poster{
             poster.load(url)
         }
         
         /// Hides or shows the favorite icon
-        isFavorite = User.current.isMovieFavorite(movie: self.movie)
+        let isFavorite = User.current.isMovieFavorite(movie: movie)
         favoriteIcon.isHidden = !isFavorite
-        
-        /// Adds the longpress action
-        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(favoriteAction)))
-    }
-    
-    /// Action to favorite or unfavorite a movie
-    @objc private func favoriteAction(){
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let title:String
-        let style:UIAlertAction.Style
-        if isFavorite{
-            title = "Favorite"
-            style = .default
-        }
-        else{
-            title = "Unfavorite"
-            style = .destructive
-        }
-
-        alert.addAction(UIAlertAction(title: title, style: style, handler: { action in
-            self.delegate?.onMovieFavorited(movie: self.movie, isFavorite: self.isFavorite)
-        }))
     }
 }
 
