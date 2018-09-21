@@ -50,6 +50,10 @@ class FavoritesTableViewController: UITableViewController {
                     self.tableView.reloadData()
                     self.stopLoading()
                 }
+            }else{
+                let alert = UIAlertController(title: "Ocorreu um erro!", message: "Por favor, tente novamente.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
