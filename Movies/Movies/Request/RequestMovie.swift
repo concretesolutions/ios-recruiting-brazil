@@ -25,6 +25,12 @@ class RequestMovie: RequestBase {
     
     /// Requests the genres
     func genres() -> DataRequest{
-        return get(endpoint: .genres)
+        return get(endpoint: .genres, parameters: parameters)
+    }
+    
+    /// Requests a list of movies according to the search parameter
+    func search(_ term:String?) -> DataRequest{
+        parameters["query"] = term
+        return get(endpoint: .search, parameters: parameters)
     }
 }

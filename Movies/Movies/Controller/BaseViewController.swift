@@ -13,6 +13,9 @@ class BaseViewController: UIViewController, UISearchResultsUpdating {
     private unowned var loading: UIActivityIndicatorView  { return (self.view as! BaseView).loading }
     private unowned var feedback:UILabel                  { return (self.view as! BaseView).feedbackMessage }
     
+    /// The array to hold the filtered movies
+    var filteredMovies:[Movie] = []
+    
     var timer:Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +58,22 @@ class BaseViewController: UIViewController, UISearchResultsUpdating {
         searchController.searchBar.placeholder = "Search for a movie"
         definesPresentationContext = true
     
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
+        
+        // Customize the searchbar to be white
+        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            
+            if let backgroundview = textfield.subviews.first {
+                
+                // Background color
+                backgroundview.backgroundColor = .white
+                
+                // Rounded corner
+                backgroundview.clipsToBounds = true
+                backgroundview.layer.cornerRadius = 5
+            }
+        }
     }
     
     func updateSearchResults(for searchController: UISearchController) {

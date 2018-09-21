@@ -21,13 +21,32 @@ class FavoriteMoviesView: BaseView {
         return tableView
     }()
     
+    // The "remove filter" button
+    let buttonRemoveFilter: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .appColor
+        button.isHidden = true
+        button.setTitle("Remove Filters", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // Adds the constraints to this view
+    var removeFilterButtonHeight:NSLayoutConstraint!
     override func setupConstraints(){
-        self.addSubview(tableView)
+         self.addSubview(tableView)
+         self.addSubview(buttonRemoveFilter)
+        
+        removeFilterButtonHeight = buttonRemoveFilter.heightAnchor.constraint(equalToConstant: 45)
         NSLayoutConstraint.activate([
+            buttonRemoveFilter.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            buttonRemoveFilter.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            buttonRemoveFilter.topAnchor     .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            removeFilterButtonHeight,
+            
             tableView.leadingAnchor .constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            tableView.topAnchor     .constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor     .constraint(equalTo: buttonRemoveFilter.bottomAnchor),
             tableView.bottomAnchor  .constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
         ])
         super.setupConstraints()
