@@ -1,15 +1,15 @@
 //
-//  MoviesTests.swift
+//  MovieTests.swift
 //  MoviesTests
 //
-//  Created by Jonathan Martins on 18/09/18.
+//  Created by Jonathan Martins on 20/09/2018.
 //  Copyright © 2018 Jonathan Martins. All rights reserved.
 //
 
 import XCTest
-@testable import Movies
+//@testable import Movies
 
-class MoviesTests: XCTestCase {
+class MovieTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
