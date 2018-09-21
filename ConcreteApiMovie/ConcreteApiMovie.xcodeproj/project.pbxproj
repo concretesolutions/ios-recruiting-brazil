@@ -75,21 +75,53 @@
 		078BEA0D215040D700FFF5A0 /* ConcreteApiMovie */ = {
 			isa = PBXGroup;
 			children = (
+				07E51BB92155906100592CF4 /* Models */,
+				07E51BB82155902200592CF4 /* Controllers */,
+				07E51BB72155901200592CF4 /* Views */,
 				078BEA0E215040D700FFF5A0 /* AppDelegate.swift */,
-				078BEA12215040D700FFF5A0 /* Main.storyboard */,
 				078BEA15215040D700FFF5A0 /* Assets.xcassets */,
-				078BEA17215040D700FFF5A0 /* LaunchScreen.storyboard */,
 				078BEA1A215040D700FFF5A0 /* Info.plist */,
-				078BEA202150A6B100FFF5A0 /* MoviesTableViewController.swift */,
-				078BEA2A2151EFE100FFF5A0 /* MoviesTableViewCell.swift */,
-				078BEA222150A6C000FFF5A0 /* FavoritesTableViewController.swift */,
-				078BEA242150A6D500FFF5A0 /* DetailsViewController.swift */,
-				078BEA262150A82900FFF5A0 /* MoviesAPI.swift */,
-				078BEA282150A83E00FFF5A0 /* MoviesClasses.swift */,
-				078BEA2C2153C3BB00FFF5A0 /* FavoritesTableViewCell.swift */,
-				078BEA2E2153CF9D00FFF5A0 /* FavoritesUserDefaults.swift */,
 			);
 			path = ConcreteApiMovie;
+			sourceTree = "<group>";
+		};
+		07E51BB72155901200592CF4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				078BEA12215040D700FFF5A0 /* Main.storyboard */,
+				078BEA17215040D700FFF5A0 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		07E51BB82155902200592CF4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				07E51BBA2155908000592CF4 /* Cell */,
+				078BEA202150A6B100FFF5A0 /* MoviesTableViewController.swift */,
+				078BEA222150A6C000FFF5A0 /* FavoritesTableViewController.swift */,
+				078BEA242150A6D500FFF5A0 /* DetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		07E51BB92155906100592CF4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				078BEA262150A82900FFF5A0 /* MoviesAPI.swift */,
+				078BEA282150A83E00FFF5A0 /* MoviesClasses.swift */,
+				078BEA2E2153CF9D00FFF5A0 /* FavoritesUserDefaults.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		07E51BBA2155908000592CF4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				078BEA2A2151EFE100FFF5A0 /* MoviesTableViewCell.swift */,
+				078BEA2C2153C3BB00FFF5A0 /* FavoritesTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		170654AA8C1BFB340CA4D756 /* Pods */ = {
