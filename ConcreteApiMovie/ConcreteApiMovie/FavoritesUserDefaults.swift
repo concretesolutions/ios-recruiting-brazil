@@ -11,6 +11,7 @@ import UIKit
 class FavoritesUserDefaults {
     
     let favoriteMoviesKey = "favoriteMovieslist"
+    let pageKey = "page"
     var moviesArray:[Int] = []
     
     func showFavoritesMovie() -> Array<Int>{
@@ -36,5 +37,20 @@ class FavoritesUserDefaults {
     
     func clearUserDefaults() {
         UserDefaults.standard.removeObject(forKey: favoriteMoviesKey)
+        UserDefaults.standard.removeObject(forKey: pageKey)
     }
+    
+    func addPageMovie(movie: Int){
+        UserDefaults.standard.set(movie, forKey: pageKey)
+    }
+    
+    func getPage() -> Int{
+        let data = UserDefaults.standard.object(forKey: pageKey)
+        if data != nil{
+            return data as! Int
+        }else {
+            return 1
+        }
+    }
+    
 }

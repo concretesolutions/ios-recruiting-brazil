@@ -15,6 +15,7 @@ class FavoritesTableViewController: UITableViewController {
     var moviesIds: [Int] = []
     var currentPage: Int = 1
     var totalPage: Int = 0
+    var activityIndicator = UIActivityIndicatorView()
     let favoriteMoviesUserDefaults = FavoritesUserDefaults()
     
     override func viewDidLoad() {
@@ -22,15 +23,20 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadMovies()
+
+        totalPage =  FavoritesUserDefaults().getPage()
+        for _ in 1...totalPage{
+            loadMovies()
+            if !(currentPage>totalPage) {currentPage += 1}
+        }
+        currentPage = 1
         moviesIds = favoriteMoviesUserDefaults.showFavoritesMovie()
-        print(favoriteMoviesUserDefaults.showFavoritesMovie())
     }
 
     func loadMovies(){
+        startLoading()
         movies = []
         favoriteMovies = []
-        //*********** VERIFICAR PAGINAÇÃO NESTE MÉTODO *************
         MoviesAPI.loadMovies(page: currentPage) { (info) in
             if let info = info {
                 print(self.moviesIds)
@@ -42,6 +48,7 @@ class FavoritesTableViewController: UITableViewController {
                 self.totalPage = info.total_pages
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.stopLoading()
                 }
             }
         }
@@ -76,6 +83,24 @@ class FavoritesTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         return [delete]
+    }
+    
+    // MARK: - Loading
+    func startLoading() {
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+        
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopLoading(){
+        activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
 }
