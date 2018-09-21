@@ -10,6 +10,8 @@ import UIKit
 
 class BaseViewController: UIViewController, UISearchResultsUpdating {
     
+    private let FAVORITED = "favorited_movies"
+    
     private unowned var loading: UIActivityIndicatorView  { return (self.view as! BaseView).loading }
     private unowned var feedback:UILabel                  { return (self.view as! BaseView).feedbackMessage }
     
@@ -24,12 +26,24 @@ class BaseViewController: UIViewController, UISearchResultsUpdating {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        User.current.favorites = Movie.retrieveFavoriteList()
+        loadFavoriteList()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        Movie.saveFavoriteList(User.current.favorites)
+        saveFavoriteList()
+    }
+    
+    /// Loads the favorite list (as json String) from the device
+    private func loadFavoriteList(){
+        let json = UserDefaults.standard.string(forKey: FAVORITED)
+        User.current.favorites = Movie.convertJsonStringToFavoriteList(json)
+    }
+    
+    /// Saves the favorite list in the device
+    private func saveFavoriteList(){
+        let json = Movie.convertFavoriteListToJsonString(User.current.favorites)
+        UserDefaults.standard.setValue(json, forKeyPath: FAVORITED)
     }
     
     /// Hides or shows the loading

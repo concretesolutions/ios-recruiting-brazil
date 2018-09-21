@@ -45,10 +45,13 @@ struct Movie:Codable{
         case releaseDate = "release_date"
     }
     
-    /// Gets the list of favorite movies
-    private static let FAVORITED = "favorited_movies"
-    static func retrieveFavoriteList()->[Movie]{
-        if let json = UserDefaults.standard.string(forKey: FAVORITED), let data = json.data(using: .utf8, allowLossyConversion: false){
+    init(withId id:Int?=nil) {
+        self.id = id
+    }
+    
+    /// Converts the favorite list (Json String) to Array object
+    static func convertJsonStringToFavoriteList(_ json:String?)->[Movie]{
+        if let json = json, let data = json.data(using: .utf8, allowLossyConversion: false){
             if let list = try? JSONDecoder().decode([Movie].self, from: data){
                 return list
             }
@@ -56,16 +59,12 @@ struct Movie:Codable{
         return []
     }
     
-    /// Saves the favorite list
-    static func saveFavoriteList(_ favorites:[Movie]){
-        
+    /// Converts the favorite list (Object) to a Json String
+    static func convertFavoriteListToJsonString(_ favorites:[Movie])->String?{
         guard let jsonData = try? JSONEncoder().encode(favorites) else{
-            return
+            return nil
         }
         
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
-
-        // Saves the list locally
-        UserDefaults.standard.setValue(json, forKeyPath: FAVORITED)
+        return String(data: jsonData, encoding: String.Encoding.utf8)
     }
 }

@@ -13,7 +13,6 @@ class FilterViewController: UITableViewController {
     /// The filters'options
     private let items = [(name: "Date", type: FilterOption.date), (name: "Genre", type: FilterOption.genre)]
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()

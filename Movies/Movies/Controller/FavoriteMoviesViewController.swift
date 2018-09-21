@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JonAlert
 
 class FavoriteMoviesViewController: BaseViewController {
     
@@ -135,10 +136,11 @@ class FavoriteMoviesViewController: BaseViewController {
 extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let movie         = User.current.favorites[indexPath.row]
+        let movie         = filteredMovies[indexPath.row]
         let unfavoriteAct = UIContextualAction(style: .destructive, title: "Unfavorite", handler: { (action, view, handler) in
+            JonAlert.showSuccess(message: "Movie removed")
             User.current.favorite(movie: movie, false)
-            self.updateList()
+            self.checkHasFilters()
         })
         
         return UISwipeActionsConfiguration(actions: [unfavoriteAct])

@@ -94,7 +94,7 @@ open class JonAlert:UIView{
     }
     
     /// Displays the alert with the given message and icon
-    open static func show(message:String, andIcon icon:UIImage?=nil, duration:TimeInterval=1.0){
+    public static func show(message:String, andIcon icon:UIImage?=nil, duration:TimeInterval=1.0){
         
         /// Gets the instance of the Window
         guard let window = UIApplication.shared.keyWindow else{
@@ -132,13 +132,13 @@ open class JonAlert:UIView{
     }
     
     /// Displays the alert with a given message and a success icon
-    open static func showSuccess(message:String, duration:TimeInterval=1.0){
+    public static func showSuccess(message:String, duration:TimeInterval=1.0){
         let image = UIImage(named:"icon_success", in: Bundle(for: JonAlert.self), compatibleWith: nil)
         show(message: message, andIcon: image, duration: duration)
     }
     
     /// Displays the alert with a given message and an error icon
-    open static func showError(message:String, duration:TimeInterval=1.0){
+    public static func showError(message:String, duration:TimeInterval=1.0){
         let image = UIImage(named:"icon_error", in: Bundle(for: JonAlert.self), compatibleWith: nil)
         show(message: message, andIcon: image, duration: duration)
     }

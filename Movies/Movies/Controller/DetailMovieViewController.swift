@@ -52,6 +52,12 @@ class DetailMovieViewController: BaseViewController {
 
     /// Action to favorite the movie
     @objc private func favoriteAction(){
+        if isFavorite{
+            JonAlert.showSuccess(message: "Movie removed from Favorites")
+        }
+        else{
+            JonAlert.showSuccess(message: "Movie added to Favorites")
+        }
         User.current.favorite(movie: movie, !isFavorite)
         setFilterButton()
     }

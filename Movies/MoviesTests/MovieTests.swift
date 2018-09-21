@@ -7,28 +7,54 @@
 //
 
 import XCTest
-//@testable import Movies
+@testable import Movies
 
 class MovieTests: XCTestCase {
+    
+    private let FAVORITE_TEST = "test_favorited_movies"
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    /// This test asserts that if a nil String is passed, the result will be an empty [Movie] object
+    func testConvertNilObjectToEmptyMovieList() {
+        let list = Movie.convertJsonStringToFavoriteList(nil)
+        XCTAssertTrue(list.isEmpty, "The list should be empty, The returned value should be true")
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    /// This test asserts that if any Json String that is not an [Movie] is passed, the result will be an empty [Movie] object
+    func testConvertAnyWrongStringToEmptyMovieList() {
+        var list = Movie.convertJsonStringToFavoriteList("")
+        XCTAssertTrue(list.isEmpty, "The list should be empty, The returned value should be true")
+        
+        list = Movie.convertJsonStringToFavoriteList("fasdd")
+        XCTAssertTrue(list.isEmpty, "The list should be empty, The returned value should be true")
+        
+        list = Movie.convertJsonStringToFavoriteList("fasdd")
+        XCTAssertTrue(list.isEmpty, "The list should be empty, thus, The returned value should be true")
     }
-
+    
+    /// This test asserts that if an Json String of [Movie] is passed, the result will be an [Movie] object
+    func testConvertMovieArrayJsonToMovieArrayObject() {
+        let json = movieArrayToJson()
+        let list = Movie.convertJsonStringToFavoriteList(json)
+        XCTAssertTrue(!list.isEmpty, "The list should not be empty, thus, The returned value should be true")
+    }
+    
+    /// This test asserts that if an [Movie] object is passed, the result will be a String not empty
+    func testConvertMovieArrayObjectToArrayJson() {
+        let json = movieArrayToJson()
+        XCTAssertTrue(!json!.isEmpty, "The json should not be empty, thus, The returned value should be true")
+    }
+    
+    /// Converts an [Movie] to Json String
+    private func movieArrayToJson()->String?{
+        let movies = [Movie(withId: 10), Movie(withId: 20)]
+        return Movie.convertFavoriteListToJsonString(movies)
+    }
 }

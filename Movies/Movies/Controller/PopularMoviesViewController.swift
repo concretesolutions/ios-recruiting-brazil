@@ -48,7 +48,6 @@ class PopularMoviesViewController: BaseViewController {
         if !firstTime{
             updateList()
         }
-        firstTime = false
     }
     
     /// Updates the state of the list
@@ -63,6 +62,7 @@ class PopularMoviesViewController: BaseViewController {
         else{
             self.showFeedback()
         }
+        firstTime = false
     }
     
     /// Sets up the collectionView
