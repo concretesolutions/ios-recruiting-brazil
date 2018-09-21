@@ -29,6 +29,7 @@ class MovieDBAPIRequest {
     }
     
     class func requestImage(forMovieId id: String) -> UIImage {
+        
         Alamofire.request(URLs.baseImageURL + id).responseData { response in
             debugPrint("All Response Info: \(response)")
             
