@@ -25,7 +25,20 @@ class MoviesAPI {
                     return
             }
             onComplete(moviesInfo)
-                
         }
     }
+    
+    class func loadMovieGener(idMovie:Int, onComplete: @escaping (MovieGenres?) -> Void) {
+        
+        let url = self.basePath+"/movie/\(idMovie)?api_key=\(self.chaveAPI)"
+        Alamofire.request(url).responseJSON { (response) in
+            guard let data  = response.data,
+                let movieGener = try? JSONDecoder().decode(MovieGenres.self, from: data) else {
+                    onComplete(nil)
+                    return
+            }
+            onComplete(movieGener)
+        }
+    }
+    
 }

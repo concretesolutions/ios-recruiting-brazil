@@ -13,12 +13,17 @@ class MoviesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgMovie: UIImageView!
     @IBOutlet weak var lblMovie: UILabel!
+    @IBOutlet weak var imgFavorited: UIImageView!
     
+    var moviesIds: [Int] = []
     
     func prepareCell(withMovie movie:MoviesResults) {
         lblMovie.text = movie.title
+        moviesIds = FavoritesUserDefaults().showFavoritesMovie()
+        
+        imgFavorited.image = (moviesIds.contains(movie.id)) ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_empty_icon")
+        
         if let url = URL(string: movie.urlImage) {
-            print("url", url)
             imgMovie.kf.indicatorType = .activity
             imgMovie.kf.setImage(with: url)
         } else {
@@ -27,6 +32,7 @@ class MoviesTableViewCell: UITableViewCell {
         
         imgMovie.layer.cornerRadius = imgMovie.frame.size.height/2
         imgMovie.layer.borderWidth = 2
+        
     }
     
     override func awakeFromNib() {

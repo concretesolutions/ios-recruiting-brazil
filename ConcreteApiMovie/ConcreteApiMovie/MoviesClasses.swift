@@ -25,3 +25,12 @@ struct MoviesResults : Codable {
         return "http://image.tmdb.org/t/p/w185/"+poster_path
     }
 }
+
+struct MovieGenres : Codable {
+    let genres : [MovieGenresDetails]
+}
+
+struct MovieGenresDetails : Codable {
+    let id: Int
+    let name: String
+}
