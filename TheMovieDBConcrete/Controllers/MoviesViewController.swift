@@ -10,19 +10,18 @@ import UIKit
 
 class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    //MARK: - Variables
-    //MARK: - Outlets
+    // MARK: - Variables
+    // MARK: - Outlets
     @IBOutlet weak var movieFilterSearchBar: UISearchBar!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     
-    //MARK: - Life Cicle
+    // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
     
-    //MARK: - CollectionView
+    // MARK: - CollectionView
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
