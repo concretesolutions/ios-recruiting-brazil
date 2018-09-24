@@ -25,6 +25,9 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.allMovies = movies
             self.moviesCollectionView.reloadData()
         }
+        MovieDBAPIRequest.getAllRenres { (genres, error) in
+            AllGenresSingleton.allGenres = genres
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -41,6 +44,13 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.backgroundImage.image = allMovies.movies[indexPath.row].backgroundImage
         cell.nameLabel.text = allMovies.movies[indexPath.row].name
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieViewControllerId") as? MovieViewController {
+            vc.movie = self.allMovies.movies[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     /*

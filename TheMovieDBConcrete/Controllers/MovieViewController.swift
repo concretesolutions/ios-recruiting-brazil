@@ -9,14 +9,15 @@
 import UIKit
 
 class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var movie = Movies()
-    
+    var movie = Movie()
+
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var moviesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.backgroundImage.image = movie.backgroundImage
         // Do any additional setup after loading the view.
     }
 
@@ -26,11 +27,38 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        if indexPath.row == 0 {
+            let cell = moviesTableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath as IndexPath) as! NameTableViewCell
+            cell.textLabel?.text = movie.name
+            return cell
+        } else if indexPath.row == 1 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+            cell.textLabel?.text = movie.year
+            return cell
+        } else if indexPath.row == 2 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+            var genreStr = ""
+            var first = true
+            for genre in movie.genres.genresArray {
+                if first {
+                    genreStr += AllGenresSingleton.allGenres.getGenreName(withId: genre.genreId)
+                    first = false
+                } else {
+                    genreStr += "," + AllGenresSingleton.allGenres.getGenreName(withId: genre.genreId)
+                }
+            }
+            cell.textLabel?.text = genreStr
+            return cell
+        } else {
+            let cell = moviesTableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath as IndexPath) as! DescriptionTableViewCell
+            cell.textLabel?.text = movie.movieDescription
+            return cell
+        }
+        
     }
     /*
     // MARK: - Navigation

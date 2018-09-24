@@ -14,8 +14,18 @@ import AlamofireImage
 class MovieDBAPIRequest {
     
     // MARK: - GENRE REQUEST
-    class func getAllRenres() {
-        
+    class func getAllRenres(callback:@escaping (_ response: Genres, _ error: NSError?) -> Void) {
+        Alamofire.request(URLs.genreURL).responseJSON { response in
+            // response serialization result
+            
+            if let json = response.result.value {
+                let genresDic = json as! [String:Any]
+                let genres = genresDic["genres"] as! [[String:Any]]
+                let finalGenres = Genres(genresWithDictionary: genres)
+                callback(finalGenres,nil)
+            }
+            
+        }
     }
     // MARK: - MOVIE REQUEST
     class func requestPopularMovies(withPage Page: Int, callback:@escaping (_ response: Movies, _ error: NSError?) -> Void) {
@@ -44,6 +54,8 @@ class MovieDBAPIRequest {
                     let singleMovie = Movie(name: movie["title"] as! String,
                                             movieDescription: movie["overview"] as! String)
                     singleMovie.backgroundImage = image
+                    let year = movie["release_date"] as! String
+                    singleMovie.year = year
                     singleMovie.genres = Genres.init(genresInInt: movie["genre_ids"] as! [Int])
                     print(singleMovie.name)
                     finalMovies.movies.append(singleMovie)

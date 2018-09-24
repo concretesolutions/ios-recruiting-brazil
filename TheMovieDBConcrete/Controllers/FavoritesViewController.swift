@@ -27,9 +27,10 @@ class FavoritesViewController: UIViewController,UITableViewDelegate,UITableViewD
         return 10
     }
     
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = favoritesTableView.dequeueReusableCell(withReuseIdentifier: "TableView", for: indexPath as IndexPath) as! MovieCollectionViewCell
-//    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = favoritesTableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath as IndexPath) as! FavoriteTableViewCell
+        return cell
+    }
     /*
     // MARK: - Navigation
 

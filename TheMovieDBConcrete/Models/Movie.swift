@@ -14,6 +14,7 @@ class Movie: NSObject {
     var movieDescription = ""
     var genres = Genres.init()
     var backgroundImage = UIImage()
+    var year = ""
     
     init (name: String , movieDescription: String) {
         self.name = name
