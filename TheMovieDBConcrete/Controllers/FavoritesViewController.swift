@@ -8,9 +8,8 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
-
-    let teste = true
+class FavoritesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    
     @IBOutlet weak var favoritesFilterSearchBar: UISearchBar!
     @IBOutlet weak var favoritesTableView: UITableView!
     override func viewDidLoad() {
@@ -23,6 +22,14 @@ class FavoritesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = favoritesTableView.dequeueReusableCell(withReuseIdentifier: "TableView", for: indexPath as IndexPath) as! MovieCollectionViewCell
+//    }
     /*
     // MARK: - Navigation
 

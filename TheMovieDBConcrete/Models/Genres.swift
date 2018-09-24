@@ -15,4 +15,11 @@ class Genres: NSObject {
     override init() {
         genresArray = []
     }
+    init(genresInInt genres: [Int]) {
+        genresArray = []
+        for genre in genres {
+            let singleGenre = Genre(genreId: genre)
+            genresArray.append(singleGenre)
+        }
+    }
 }

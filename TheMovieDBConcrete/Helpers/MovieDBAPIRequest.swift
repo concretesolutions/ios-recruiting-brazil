@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
+// swiftlint: disable foce_cast
 class MovieDBAPIRequest {
     
     // MARK: - GENRE REQUEST
@@ -19,19 +20,16 @@ class MovieDBAPIRequest {
     // MARK: - MOVIE REQUEST
     class func requestPopularMovies(withPage Page: Int, callback:@escaping (_ response: Movies, _ error: NSError?) -> Void) {
         Alamofire.request(URLs.popularMovieBaseURL + String(Page)).responseJSON { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
+            // response serialization result
             
             if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
+                getAllImages(forMovies: json as! [String:Any], callback: { (movies, error) in
+                    callback(movies,nil)
+                }) // serialized json response
             }
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
-            }
         }
-        callback(Movies.init(),nil)
+        
     }
     
     
@@ -42,17 +40,20 @@ class MovieDBAPIRequest {
             let myGroup = DispatchGroup()
             for movie in movies {
                 myGroup.enter()
-                
                 requestImage(forImagePath: movie["backdrop_path"] as! String) { (image, error) in
                     let singleMovie = Movie(name: movie["title"] as! String,
                                             movieDescription: movie["overview"] as! String)
                     singleMovie.backgroundImage = image
+                    singleMovie.genres = Genres.init(genresInInt: movie["genre_ids"] as! [Int])
+                    print(singleMovie.name)
+                    finalMovies.movies.append(singleMovie)
                     myGroup.leave()
                 }
             }
             
             myGroup.notify(queue: .main) {
                 print("Finished all requests.")
+                callback(finalMovies,nil)
             }
         }
         
@@ -61,14 +62,15 @@ class MovieDBAPIRequest {
     class func requestImage(forImagePath path: String, callback:@escaping (_ response: UIImage, _ error: NSError?) -> Void) {
         
         Alamofire.request(URLs.baseImageURL + path).responseImage { response in
-            debugPrint(response)
+            //debugPrint(response)
             
             //print(response.request)
             //print(response.response)
-            debugPrint(response.result)
+            //debugPrint(response.result)
             
             if let image = response.result.value {
-                print("image downloaded: \(image)")
+                //print("image downloaded: \(image)")
+                callback(image,nil)
             }
         }
         

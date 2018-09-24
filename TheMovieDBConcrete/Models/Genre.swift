@@ -10,16 +10,20 @@ import UIKit
 
 class Genre: NSObject {
 
-    var genreid: Int
+    var genreId: Int
     var name: String
     
     override init() {
-        genreid = 0
+        genreId = 0
         name = ""
     }
     
-    init(genreid: Int, name: String) {
-        self.genreid = genreid
+    init(genreId: Int, name: String) {
+        self.genreId = genreId
         self.name = name
+    }
+    init(genreId: Int) {
+        self.genreId = genreId
+        self.name = ""
     }
 }
