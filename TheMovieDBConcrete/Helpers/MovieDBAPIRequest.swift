@@ -17,7 +17,7 @@ class MovieDBAPIRequest {
         
     }
     // MARK: - MOVIE REQUEST
-    class func requestPopularMovies(withPage Page: Int) -> [String:Any] {
+    class func requestPopularMovies(withPage Page: Int, callback:@escaping (_ response: Movies, _ error: NSError?) -> Void) {
         Alamofire.request(URLs.popularMovieBaseURL + String(Page)).responseJSON { response in
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response
@@ -31,32 +31,36 @@ class MovieDBAPIRequest {
                 print("Data: \(utf8Text)") // original server data as UTF8 string
             }
         }
-        return [:]
+        callback(Movies.init(),nil)
     }
     
     
     // MARK: - IMAGE REQUEST
-    class func getAllImages(forMovies dic: [String:Any]) -> [UIImage]{
-        let movies = dic["results"] as! [[String:Any]]
-        let myGroup = DispatchGroup()
-        for movie in movies {
-            myGroup.enter()
+    class func getAllImages(forMovies dic: [String:Any], callback:@escaping (_ response: Movies, _ error: NSError?) -> Void) {
+        let finalMovies = Movies.init()
+        if let movies = dic["results"] as? [[String:Any]] {
+            let myGroup = DispatchGroup()
+            for movie in movies {
+                myGroup.enter()
+                
+                requestImage(forImagePath: movie["backdrop_path"] as! String) { (image, error) in
+                    let singleMovie = Movie(name: movie["title"] as! String,
+                                            movieDescription: movie["overview"] as! String)
+                    singleMovie.backgroundImage = image
+                    myGroup.leave()
+                }
+            }
             
-            Alamofire.request("https://httpbin.org/get", parameters: ["foo": "bar"]).responseJSON { response in
-                //print("Finished request \(i)")
-                myGroup.leave()
+            myGroup.notify(queue: .main) {
+                print("Finished all requests.")
             }
         }
         
-        myGroup.notify(queue: .main) {
-            print("Finished all requests.")
-        }
-        return []
     }
     
-    class func requestImage(forMovieId id: String) -> UIImage {
+    class func requestImage(forImagePath path: String, callback:@escaping (_ response: UIImage, _ error: NSError?) -> Void) {
         
-        Alamofire.request("https://httpbin.org/image/png").responseImage { response in
+        Alamofire.request(URLs.baseImageURL + path).responseImage { response in
             debugPrint(response)
             
             //print(response.request)
@@ -68,7 +72,6 @@ class MovieDBAPIRequest {
             }
         }
         
-        return UIImage()
         
     }
 }

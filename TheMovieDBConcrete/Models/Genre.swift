@@ -13,6 +13,11 @@ class Genre: NSObject {
     var genreid: Int
     var name: String
     
+    override init() {
+        genreid = 0
+        name = ""
+    }
+    
     init(genreid: Int, name: String) {
         self.genreid = genreid
         self.name = name

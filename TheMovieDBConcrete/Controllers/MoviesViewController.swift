@@ -18,6 +18,10 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MovieDBAPIRequest.requestPopularMovies(withPage: 1, callback: { result, error in
+            
+        })
         // Do any additional setup after loading the view.
     }
     
@@ -30,7 +34,8 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell.init()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionViewCell", for: indexPath as IndexPath) as! MovieCollectionViewCell
+        return cell
     }
 
     /*
