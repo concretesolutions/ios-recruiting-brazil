@@ -12,6 +12,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     var isFavorite = false
     
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     
     func changeFavorite() {
