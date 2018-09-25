@@ -55,7 +55,7 @@ class MovieDBAPIRequest {
                                             movieDescription: movie["overview"] as! String)
                     singleMovie.backgroundImage = image
                     let year = movie["release_date"] as! String
-                    singleMovie.year = year
+                    singleMovie.year = String(year.prefix(4))
                     singleMovie.genres = Genres.init(genresInInt: movie["genre_ids"] as! [Int])
                     print(singleMovie.name)
                     finalMovies.movies.append(singleMovie)
