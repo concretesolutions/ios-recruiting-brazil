@@ -28,13 +28,15 @@ class MovieDBAPIRequest {
         }
     }
     // MARK: - MOVIE REQUEST
-    class func requestPopularMovies(withPage Page: Int, callback:@escaping (_ response: Movies, _ error: NSError?) -> Void) {
-        Alamofire.request(URLs.popularMovieBaseURL + String(Page)).responseJSON { response in
+    class func requestPopularMovies(withPage Page: Int, callback:@escaping (_ response: Movies, _ error: Bool) -> Void) {
+        Alamofire.request(URLs.popularMovieBaseURL + String(Page)).responseJSON { (response) in
             // response serialization result
-            
+            if response.result.value == nil {
+                callback(Movies(),true)
+            }
             if let json = response.result.value {
                 getAllImages(forMovies: json as! [String:Any], callback: { (movies, error) in
-                    callback(movies,nil)
+                    callback(movies,false)
                 }) // serialized json response
             }
             
