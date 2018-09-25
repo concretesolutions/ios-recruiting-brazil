@@ -24,8 +24,8 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         MovieDBAPIRequest.requestPopularMovies(withPage: 1) { (movies, error) in
-            //self.allMovies = movies
-            //self.moviesCollectionView.reloadData()
+            self.allMovies = movies
+            self.moviesCollectionView.reloadData()
         }
         MovieDBAPIRequest.getAllRenres { (genres, error) in
             AllGenresSingleton.allGenres = genres
@@ -54,11 +54,19 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if(searchActive) {
+            if filteredMovies.movies.isEmpty {
+                let backgroundViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ErrorSearchID") as! SearchErrorViewController
+                print(movieFilterSearchBar.text)
+                let myView = backgroundViewController.view as! ErrorView
+                myView.errorText.text = "Sua busca por " + movieFilterSearchBar.text! + " não resulto em nenhum resultado"
+                self.moviesCollectionView.backgroundView = myView
+                self.moviesCollectionView.backgroundView?.isHidden = false
+            }
             return filteredMovies.movies.count
         }
         
         if allMovies.movies.isEmpty {
-            let backgroundViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "background")
+            let backgroundViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ErrorID")
             self.moviesCollectionView.backgroundView = backgroundViewController.view
             self.moviesCollectionView.backgroundView?.isHidden = false
         } else {
