@@ -14,6 +14,8 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     var allMovies: Movies = Movies()
     var searchActive = false
     var filteredMovies: Movies = Movies()
+    var requestHasError = false
+    
     // MARK: - Outlets
     @IBOutlet weak var movieFilterSearchBar: UISearchBar!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
@@ -22,10 +24,25 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
+        let view = UIView.init(frame: moviesCollectionView.frame)
+        print(moviesCollectionView.frame)
+        print(view.frame)
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: view.frame.width/2, y: view.frame.height/2, width: 50, height: 50))
+        print(loadingIndicator.frame)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating()
+        view.addSubview(loadingIndicator)
+        self.moviesCollectionView.backgroundView = view
+        self.moviesCollectionView.backgroundView?.isHidden = false
         
         MovieDBAPIRequest.requestPopularMovies(withPage: 1) { (movies, error) in
-            //self.allMovies = movies
-            //self.moviesCollectionView.reloadData()
+            if error{
+                self.requestHasError = true
+            } else {
+                self.allMovies = movies
+            }
+            self.moviesCollectionView.reloadData()
         }
         MovieDBAPIRequest.getAllRenres { (genres, error) in
             AllGenresSingleton.allGenres = genres
@@ -54,11 +71,17 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if(searchActive) {
+            if filteredMovies.movies.isEmpty {
+                let backgroundViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ErrorSearchID") as! SearchErrorViewController
+                print(movieFilterSearchBar.text)
+                let myView = backgroundViewController.view as! ErrorView
+                myView.errorText.text = "Sua busca por " + movieFilterSearchBar.text! + " não resulto em nenhum resultado"
+                self.moviesCollectionView.backgroundView = myView
+                self.moviesCollectionView.backgroundView?.isHidden = false
+            }
             return filteredMovies.movies.count
-        }
-        
-        if allMovies.movies.isEmpty {
-            let backgroundViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "background")
+        } else if requestHasError {
+            let backgroundViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ErrorID")
             self.moviesCollectionView.backgroundView = backgroundViewController.view
             self.moviesCollectionView.backgroundView?.isHidden = false
         } else {

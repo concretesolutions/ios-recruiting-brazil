@@ -175,7 +175,7 @@
         <!--View Controller-->
         <scene sceneID="hsZ-Mr-7wr">
             <objects>
-                <viewController storyboardIdentifier="background" id="XKK-bY-bCc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ErrorID" id="XKK-bY-bCc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AqI-xy-Ml1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -341,11 +341,11 @@
             </objects>
             <point key="canvasLocation" x="-492" y="-239.73013493253376"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Error View Controller-->
         <scene sceneID="hb8-yQ-IMh">
             <objects>
-                <viewController storyboardIdentifier="background" id="cK2-Kr-prM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u8q-iA-zrZ">
+                <viewController storyboardIdentifier="ErrorSearchID" id="cK2-Kr-prM" customClass="SearchErrorViewController" customModule="TheMovieDBConcrete" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="u8q-iA-zrZ" customClass="ErrorView" customModule="TheMovieDBConcrete" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -375,6 +375,9 @@
                             <constraint firstItem="d3Z-UB-IGr" firstAttribute="centerY" secondItem="u8q-iA-zrZ" secondAttribute="centerY" constant="-0.5" id="uMm-El-J2W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aqQ-qa-K9Y"/>
+                        <connections>
+                            <outlet property="errorText" destination="d3Z-UB-IGr" id="VVH-k1-PAF"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Stj-px-9ho" userLabel="First Responder" sceneMemberID="firstResponder"/>
