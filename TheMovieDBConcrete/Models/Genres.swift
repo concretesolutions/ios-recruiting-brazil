@@ -8,12 +8,30 @@
 
 import UIKit
 
-class Genres: NSObject {
+public class Genres: NSObject, NSCoding {
 
     var genresArray: [Genre]
     
     override init() {
         genresArray = []
+    }
+    func getGenreName(withId genreId: Int) -> String {
+        var genreName = ""
+        for genre in genresArray {
+            if genre.genreId == genreId {
+                genreName = genre.name
+                break
+            }
+        }
+        return genreName
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        genresArray = aDecoder.decodeObject(forKey: "genresArray") as! [Genre]
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(genresArray, forKey: "genresArray")
     }
     init(genresInInt genres: [Int]) {
         genresArray = []
@@ -30,15 +48,5 @@ class Genres: NSObject {
             let singleGenre = Genre(genreId: genreId, name: name)
             genresArray.append(singleGenre)
         }
-    }
-    func getGenreName(withId genreId: Int) -> String {
-        var genreName = ""
-        for genre in genresArray {
-            if genre.genreId == genreId {
-                genreName = genre.name
-                break
-            }
-        }
-        return genreName
     }
 }

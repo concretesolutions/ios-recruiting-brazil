@@ -55,12 +55,12 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
 //        self.movieFilterSearchBar.layer.shadowOpacity = 0.5
 //        self.movieFilterSearchBar.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
 //        self.movieFilterSearchBar.layer.shadowRadius = 3
-        if let txfSearchField = movieFilterSearchBar.value(forKey: "_searchField") as? UITextField {
-            txfSearchField.layer.cornerRadius = 10
-            txfSearchField.borderStyle = .none
-            txfSearchField.backgroundColor = .white
-            txfSearchField.leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 20))
-        }
+//        if let txfSearchField = movieFilterSearchBar.value(forKey: "_searchField") as? UITextField {
+//            txfSearchField.layer.cornerRadius = 10
+//            txfSearchField.borderStyle = .none
+//            txfSearchField.backgroundColor = .white
+//            txfSearchField.leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 20))
+//        }
         // Do any additional setup after loading the view.
     }
     
@@ -137,7 +137,11 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             return range.location != NSNotFound
         })
-        searchActive = true
+        if searchText == "" {
+            searchActive = false
+        } else {
+            searchActive = true
+        }
         print("111111")
         self.moviesCollectionView.reloadData()
     }
