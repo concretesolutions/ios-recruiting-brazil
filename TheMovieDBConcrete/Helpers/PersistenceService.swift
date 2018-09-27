@@ -26,7 +26,7 @@ class PersistenceService {
         
         do {
             try context.save()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteChanged"), object: nil)
+            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteChanged"), object: nil)
         } catch {
             print("Failed saving")
         }
@@ -71,7 +71,7 @@ class PersistenceService {
         return movies
     }
     
-    class func removeFavorite(withName name:String){
+    class func removeFavorite(withName name:String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
@@ -88,8 +88,28 @@ class PersistenceService {
             
             print("Failed")
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteChanged"), object: nil)
+        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteChanged"), object: nil)
     }
     
-    
+    class func isFavorite(withTitle title: String) -> Bool {
+        var isFavorite = false
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
+        request.predicate = NSPredicate(format: "name == %@", title)
+        
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                if let name = data.value(forKey: "name") as? String {
+                    if title == name {
+                        isFavorite = true
+                    }
+                }
+            }
+        } catch {
+            print("Failed")
+        }
+        return isFavorite
+    }
 }

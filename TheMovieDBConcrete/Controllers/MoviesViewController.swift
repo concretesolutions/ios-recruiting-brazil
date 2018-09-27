@@ -15,6 +15,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     var searchActive = false
     var filteredMovies: Movies = Movies()
     var requestHasError = false
+    var page = 1
     
     // MARK: - Outlets
     @IBOutlet weak var movieFilterSearchBar: UISearchBar!
@@ -24,6 +25,8 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        
         let view = UIView.init(frame: moviesCollectionView.frame)
         print(moviesCollectionView.frame)
         print(view.frame)
@@ -36,8 +39,8 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.moviesCollectionView.backgroundView = view
         self.moviesCollectionView.backgroundView?.isHidden = false
         
-        MovieDBAPIRequest.requestPopularMovies(withPage: 1) { (movies, error) in
-            if error{
+        MovieDBAPIRequest.requestPopularMovies(withPage: page) { (movies, error) in
+            if error {
                 self.requestHasError = true
             } else {
                 self.allMovies = movies
@@ -47,21 +50,10 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         MovieDBAPIRequest.getAllRenres { (genres, error) in
             AllGenresSingleton.allGenres = genres
         }
-        
-//        self.movieFilterSearchBar.layer.zPosition = 1000
-//        self.movieFilterSearchBar.layer.cornerRadius = 20
-//        self.movieFilterSearchBar.clipsToBounds = false
-//        self.movieFilterSearchBar.layer.shadowColor = UIColor.black.cgColor
-//        self.movieFilterSearchBar.layer.shadowOpacity = 0.5
-//        self.movieFilterSearchBar.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-//        self.movieFilterSearchBar.layer.shadowRadius = 3
-//        if let txfSearchField = movieFilterSearchBar.value(forKey: "_searchField") as? UITextField {
-//            txfSearchField.layer.cornerRadius = 10
-//            txfSearchField.borderStyle = .none
-//            txfSearchField.backgroundColor = .white
-//            txfSearchField.leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 20))
-//        }
-        // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.moviesCollectionView.reloadData()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - CollectionView
@@ -98,9 +90,21 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         if searchActive {
             cell.backgroundImage.image = filteredMovies.movies[indexPath.row].backgroundImage
             cell.nameLabel.text = filteredMovies.movies[indexPath.row].name
+            let isFavorite = PersistenceService.isFavorite(withTitle: filteredMovies.movies[indexPath.row].name)
+            if isFavorite {
+                cell.favoriteIcon.image = #imageLiteral(resourceName: "favorite_full_icon")
+            } else {
+                cell.favoriteIcon.image = #imageLiteral(resourceName: "favorite_gray_icon")
+            }
         } else {
             cell.backgroundImage.image = allMovies.movies[indexPath.row].backgroundImage
             cell.nameLabel.text = allMovies.movies[indexPath.row].name
+            let isFavorite = PersistenceService.isFavorite(withTitle: allMovies.movies[indexPath.row].name)
+            if isFavorite {
+                cell.favoriteIcon.image = #imageLiteral(resourceName: "favorite_full_icon")
+            } else {
+                cell.favoriteIcon.image = #imageLiteral(resourceName: "favorite_gray_icon")
+            }
         }
         return cell
     }
@@ -109,6 +113,20 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieViewControllerId") as? MovieViewController {
             vc.movie = self.allMovies.movies[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !searchActive {
+            if indexPath.row == self.allMovies.movies.count - 5 {
+                self.page += 1
+                MovieDBAPIRequest.requestPopularMovies(withPage: page) { (movies, error) in
+                    for movie in movies.movies {
+                        self.allMovies.movies.append(movie)
+                        self.moviesCollectionView.reloadData()
+                    }
+                }
+            }
         }
     }
 

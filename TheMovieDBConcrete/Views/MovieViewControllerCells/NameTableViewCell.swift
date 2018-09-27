@@ -10,6 +10,10 @@ import UIKit
 
 class NameTableViewCell: UITableViewCell {
 
+    var isFavorite = false
+    var movie = Movie()
+    @IBOutlet weak var movieName: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +24,18 @@ class NameTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    @IBAction func setFavorite(_ sender: Any) {
+        if isFavorite {
+            PersistenceService.removeFavorite(withName: movie.name)
+            favoriteButton.setImage(#imageLiteral(resourceName: "favorite_empty_icon"), for: .normal)
+            isFavorite = !isFavorite
+        } else {
+            PersistenceService.saveFavoriteMovie(movie: movie)
+            favoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+            isFavorite = !isFavorite
+        }
+    }
+    
+    
 
 }

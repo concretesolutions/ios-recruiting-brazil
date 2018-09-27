@@ -20,30 +20,32 @@ class FavoritesViewController: UIViewController,UITableViewDelegate,UITableViewD
     @IBOutlet weak var favoritesTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        //NotificationCenter.default.addObserver(self, selector: #selector(favoriteMoviesChanged(_:)), name: NSNotification.Name(rawValue: "favoriteChanged"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(favoriteMoviesChanged(_:)), name: NSNotification.Name(rawValue: "favoriteChanged"), object: nil)
-        
-        MovieDBAPIRequest.requestPopularMovies(withPage: 1) { (movies, error) in
-            if error {
-                self.requestHasError = true
-            } else {
-                PersistenceService.saveFavoriteMovie(movie: movies.movies.last!)
-            }
-            self.favoritesTableView.reloadData()
-        }
         favoriteMovies = PersistenceService.retrieveFavoriteMovies()
         favoritesTableView.reloadData()
         // Do any additional setup after loading the view.
     }
     
-    @objc func favoriteMoviesChanged(_ notification:Notification) {
+    override func viewWillAppear(_ animated: Bool) {
         favoriteMovies = PersistenceService.retrieveFavoriteMovies()
         favoritesTableView.reloadData()
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    @objc func favoriteMoviesChanged(_ notification:Notification) {
+        favoriteMovies = PersistenceService.retrieveFavoriteMovies()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func removeFilter(_ sender: Any) {
+        favoritesFilterSearchBar.text = ""
+        searchActive = false
+        self.favoritesTableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -114,6 +116,19 @@ class FavoritesViewController: UIViewController,UITableViewDelegate,UITableViewD
             vc.movie = self.favoriteMovies.movies[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let unfavorite = UITableViewRowAction(style: .destructive, title: "Unfavorite") { (action, indexPath) in
+            // delete item at indexPath
+            
+            print(indexPath.row)
+            print(self.favoriteMovies.movies.first?.name)
+            PersistenceService.removeFavorite(withName: self.favoriteMovies.movies[indexPath.row].name)
+            self.favoriteMovies.movies.remove(at: indexPath.row)
+            self.favoritesTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        return [unfavorite]
     }
 
     /*
