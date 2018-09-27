@@ -70,7 +70,6 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         if(searchActive) {
             if filteredMovies.movies.isEmpty {
                 let backgroundViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ErrorSearchID") as! SearchErrorViewController
-                print(movieFilterSearchBar.text)
                 let myView = backgroundViewController.view as! ErrorView
                 myView.errorText.text = "Sua busca por " + movieFilterSearchBar.text! + " não resulto em nenhum resultado"
                 self.moviesCollectionView.backgroundView = myView
@@ -168,15 +167,5 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         print("111111")
         self.moviesCollectionView.reloadData()
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

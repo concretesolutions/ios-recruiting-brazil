@@ -25,15 +25,11 @@ class PersistenceService {
             genresIDs.append(genre.genreId)
         }
         newFavorite.setValue(genresIDs, forKey: "genres")
-        print("////////////")
-        print(movie.genres.genresArray.first?.genreId)
-        print("////////////")
         let imageData = UIImageJPEGRepresentation(movie.backgroundImage, 1)
         newFavorite.setValue(imageData, forKey: "backgroundImage")
         
         do {
             try context.save()
-            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "favoriteChanged"), object: nil)
         } catch {
             print("Failed saving")
         }
@@ -44,7 +40,6 @@ class PersistenceService {
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
         let movies = Movies()
-        //request.predicate = NSPredicate(format: "age = %@", "12")
         request.returnsObjectsAsFaults = false
         do {
             let result = try context.fetch(request)

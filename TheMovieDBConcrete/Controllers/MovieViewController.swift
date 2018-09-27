@@ -9,11 +9,15 @@
 import UIKit
 
 class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Variables
     var movie = Movie()
     
+    // MARK: - Outlets
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var moviesTableView: UITableView!
     
+    // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +34,8 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - TableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
@@ -47,9 +53,6 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = moviesTableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath as IndexPath) as! NameTableViewCell
-            print("-------")
-            print(movie.genres.genresArray.first?.name)
-            print("-------")
             cell.movieName.text = movie.name
             cell.movie = self.movie
             let isFavorite = PersistenceService.isFavorite(withTitle: movie.name)
@@ -88,14 +91,5 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

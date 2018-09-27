@@ -15,11 +15,16 @@ protocol passUniqueFilter {
 
 class PickAdvencedFilterViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
+    // MARK: - Variables
     var delegate: passUniqueFilter?
     var uniqueYears = [String]()
     var isPickingGender = true
     var filter = AdvancedFilter()
+    
+    // MARK: - Outlet
     @IBOutlet weak var optionsTableView: UITableView!
+    
+    // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +49,7 @@ class PickAdvencedFilterViewController: UIViewController,UITableViewDataSource,U
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isPickingGender {
             return AllGenresSingleton.allGenres.genresArray.count

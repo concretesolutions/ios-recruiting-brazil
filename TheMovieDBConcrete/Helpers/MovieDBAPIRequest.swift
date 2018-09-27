@@ -70,7 +70,6 @@ class MovieDBAPIRequest {
             }
             
             myGroup.notify(queue: .main) {
-                print("Finished all requests.")
                 callback(finalMovies,nil)
             }
         }

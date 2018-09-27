@@ -14,11 +14,14 @@ protocol passFilter {
 
 class AdvancedFilterViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, passUniqueFilter {
     
+    // MARK: - Variables
     var filter = AdvancedFilter()
     var delegate: passFilter?
     
+    // MARK: - Outlet
     @IBOutlet weak var filtersTableView: UITableView!
     
+    // MARK: - Life Cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Filter"
@@ -34,12 +37,14 @@ class AdvancedFilterViewController: UIViewController,UITableViewDelegate,UITable
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Class Function
     @IBAction func applyFilter(_ sender: Any) {
         filter.isActive = true
         delegate?.filterDidChange(filter: filter)
         self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
