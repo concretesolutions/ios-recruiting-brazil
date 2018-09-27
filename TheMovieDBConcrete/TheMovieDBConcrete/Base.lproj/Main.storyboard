@@ -132,6 +132,9 @@
                     <navigationItem key="navigationItem" title="Movies" id="WrI-zi-IVe">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="FilterIcon" id="GTi-Yi-fTL">
                             <color key="tintColor" red="0.3433465725" green="0.34674604349999999" blue="0.34674604349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="goToAdvancedFilter:" destination="GR0-mg-G6B" id="MWr-8B-HCE"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -246,11 +249,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cUA-vC-QKI"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="uI5-ax-CEo">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="FilterIcon" id="s9O-CI-mBn">
-                            <color key="tintColor" red="0.3433465725" green="0.34674604349999999" blue="0.34674604349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Movies" id="uI5-ax-CEo"/>
                     <connections>
                         <outlet property="movieFilterSearchBar" destination="Bay-ec-mP4" id="Cbe-CT-yMB"/>
                         <outlet property="moviesCollectionView" destination="0Tx-o9-PTk" id="Sqf-O1-ViI"/>
@@ -412,10 +411,10 @@
             </objects>
             <point key="canvasLocation" x="1509.5999999999999" y="-240.62968515742131"/>
         </scene>
-        <!--Advenced Filter View Controller-->
+        <!--Advanced Filter View Controller-->
         <scene sceneID="PLF-fE-rCa">
             <objects>
-                <viewController id="IY0-0x-ZK8" customClass="AdvencedFilterViewController" customModule="TheMovieDBConcrete" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="advancedFilter" id="IY0-0x-ZK8" customClass="AdvancedFilterViewController" customModule="TheMovieDBConcrete" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nUN-TS-SaC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -493,7 +492,7 @@
         <!--Pick Advenced Filter View Controller-->
         <scene sceneID="bbO-uJ-yfu">
             <objects>
-                <viewController id="1Yh-vH-1LD" customClass="PickAdvencedFilterViewController" customModule="TheMovieDBConcrete" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="filterPicker" id="1Yh-vH-1LD" customClass="PickAdvencedFilterViewController" customModule="TheMovieDBConcrete" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fsq-tF-iV8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -26,7 +26,14 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        
+        self.makeRequests()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.moviesCollectionView.reloadData()
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    // MARK: - SetUp
+    func setUp() {
         let view = UIView.init(frame: moviesCollectionView.frame)
         print(moviesCollectionView.frame)
         print(view.frame)
@@ -38,7 +45,10 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.addSubview(loadingIndicator)
         self.moviesCollectionView.backgroundView = view
         self.moviesCollectionView.backgroundView?.isHidden = false
-        
+    }
+    
+    // MARK: - Requests
+    func makeRequests() {
         MovieDBAPIRequest.requestPopularMovies(withPage: page) { (movies, error) in
             if error {
                 self.requestHasError = true
@@ -51,11 +61,6 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             AllGenresSingleton.allGenres = genres
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        self.moviesCollectionView.reloadData()
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     // MARK: - CollectionView
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -129,7 +134,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             }
         }
     }
-
+    
     // MARK: - SEARCHBAR
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -165,13 +170,13 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

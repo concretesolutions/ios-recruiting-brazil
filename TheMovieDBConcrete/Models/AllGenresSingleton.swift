@@ -9,7 +9,7 @@
 import UIKit
 
 class AllGenresSingleton: NSObject {
-
+    
     
     private override init() { }
     

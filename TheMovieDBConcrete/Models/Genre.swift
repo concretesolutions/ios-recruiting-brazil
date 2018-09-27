@@ -8,29 +8,10 @@
 
 import UIKit
 
-class Genre: NSObject, NSCoding {
-
+class Genre: NSObject {
+    
     var genreId: Int
     var name: String
-    
-    
-    required public init?(coder aDecoder: NSCoder) {
-        if let genreId = aDecoder.decodeObject(forKey: "genreId") as? Int {
-            self.genreId = genreId
-        } else {
-            self.genreId = 0
-        }
-        if let name = aDecoder.decodeObject(forKey: "name") as? String {
-            self.name = name
-        } else {
-            self.name = ""
-        }
-    }
-    
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(genreId, forKey: "genreId")
-        aCoder.encode(name, forKey: "name")
-    }
     
     override init() {
         genreId = 0

@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class Genres: NSObject, NSCoding {
-
+public class Genres: NSObject {
+    
     var genresArray: [Genre]
     
     override init() {
@@ -24,14 +24,6 @@ public class Genres: NSObject, NSCoding {
             }
         }
         return genreName
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        genresArray = aDecoder.decodeObject(forKey: "genresArray") as! [Genre]
-    }
-    
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(genresArray, forKey: "genresArray")
     }
     init(genresInInt genres: [Int]) {
         genresArray = []
