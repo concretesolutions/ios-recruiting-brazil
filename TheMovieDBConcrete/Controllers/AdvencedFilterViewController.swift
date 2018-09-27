@@ -16,7 +16,7 @@ class AdvencedFilterViewController: UIViewController,UITabBarDelegate,UITableVie
     @IBOutlet weak var filtersTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Filter"
         // Do any additional setup after loading the view.
     }
 
