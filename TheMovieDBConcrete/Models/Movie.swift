@@ -9,7 +9,7 @@
 import UIKit
 
 class Movie: NSObject {
-
+    
     var name = ""
     var movieDescription = ""
     var genres = Genres.init()
@@ -26,3 +26,4 @@ class Movie: NSObject {
         self.movieDescription = ""
     }
 }
+

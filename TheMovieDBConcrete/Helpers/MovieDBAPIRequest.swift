@@ -60,7 +60,6 @@ class MovieDBAPIRequest {
                         let year = movie["release_date"] as! String
                         singleMovie.year = String(year.prefix(4))
                         singleMovie.genres = Genres.init(genresInInt: movie["genre_ids"] as! [Int])
-                        print(singleMovie.name)
                         finalMovies.movies.append(singleMovie)
                         myGroup.leave()
                     }

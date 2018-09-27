@@ -20,7 +20,14 @@ class PersistenceService {
         newFavorite.setValue(movie.name, forKey: "name")
         newFavorite.setValue(movie.movieDescription, forKey: "movieDescription")
         newFavorite.setValue(movie.year, forKey: "movieYear")
-        newFavorite.setValue(movie.genres, forKey: "genres")
+        var genresIDs = [Int]()
+        for genre in movie.genres.genresArray {
+            genresIDs.append(genre.genreId)
+        }
+        newFavorite.setValue(genresIDs, forKey: "genres")
+        print("////////////")
+        print(movie.genres.genresArray.first?.genreId)
+        print("////////////")
         let imageData = UIImageJPEGRepresentation(movie.backgroundImage, 1)
         newFavorite.setValue(imageData, forKey: "backgroundImage")
         
@@ -58,8 +65,13 @@ class PersistenceService {
                 if let year = data.value(forKey: "movieYear") as? String {
                     movie.year = year
                 }
-                if let genres = data.value(forKey: "genres") as? Genres {
-                    movie.genres = genres
+                if let genres = data.value(forKey: "genres") as? [Int] {
+                    for genre in genres {
+                        let newGenre = Genre()
+                        newGenre.genreId = genre
+                        newGenre.name = AllGenresSingleton.allGenres.getGenreName(withId: genre)
+                        movie.genres.genresArray.append(newGenre)
+                    }
                 }
                 movies.movies.append(movie)
             }
