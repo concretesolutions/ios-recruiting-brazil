@@ -52,17 +52,22 @@ class MovieDBAPIRequest {
             let myGroup = DispatchGroup()
             for movie in movies {
                 myGroup.enter()
-                requestImage(forImagePath: movie["backdrop_path"] as! String) { (image, error) in
-                    let singleMovie = Movie(name: movie["title"] as! String,
-                                            movieDescription: movie["overview"] as! String)
-                    singleMovie.backgroundImage = image
-                    let year = movie["release_date"] as! String
-                    singleMovie.year = String(year.prefix(4))
-                    singleMovie.genres = Genres.init(genresInInt: movie["genre_ids"] as! [Int])
-                    print(singleMovie.name)
-                    finalMovies.movies.append(singleMovie)
+                if let imagePath = movie["backdrop_path"] as? String {
+                    requestImage(forImagePath: imagePath) { (image, error) in
+                        let singleMovie = Movie(name: movie["title"] as! String,
+                                                movieDescription: movie["overview"] as! String)
+                        singleMovie.backgroundImage = image
+                        let year = movie["release_date"] as! String
+                        singleMovie.year = String(year.prefix(4))
+                        singleMovie.genres = Genres.init(genresInInt: movie["genre_ids"] as! [Int])
+                        print(singleMovie.name)
+                        finalMovies.movies.append(singleMovie)
+                        myGroup.leave()
+                    }
+                } else {
                     myGroup.leave()
                 }
+                
             }
             
             myGroup.notify(queue: .main) {

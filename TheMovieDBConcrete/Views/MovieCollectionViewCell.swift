@@ -10,12 +10,8 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
-    var isFavorite = false
-    
+    @IBOutlet weak var favoriteIcon: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    func changeFavorite() {
-        self.isFavorite = !self.isFavorite
-    }
 }

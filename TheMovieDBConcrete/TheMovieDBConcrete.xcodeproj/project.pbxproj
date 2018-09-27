@@ -30,6 +30,10 @@
 		D49A187D2159A082006B0934 /* AllGenresSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A187C2159A082006B0934 /* AllGenresSingleton.swift */; };
 		D49A187F2159C83B006B0934 /* SearchErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A187E2159C83B006B0934 /* SearchErrorViewController.swift */; };
 		D49A18812159CD09006B0934 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A18802159CD09006B0934 /* ErrorView.swift */; };
+		D4A0D3B8215C857800E7649F /* AdvencedFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A0D3B7215C857800E7649F /* AdvencedFilterViewController.swift */; };
+		D4A0D3BA215C85AF00E7649F /* PickAdvencedFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A0D3B9215C85AF00E7649F /* PickAdvencedFilterViewController.swift */; };
+		D4A54794215BF35B00599BCD /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A54793215BF35B00599BCD /* PersistenceService.swift */; };
+		D4EDD789215C6BDB0016FAB5 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EDD788215C6BDB0016FAB5 /* ViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,10 @@
 		D49A187C2159A082006B0934 /* AllGenresSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGenresSingleton.swift; sourceTree = "<group>"; };
 		D49A187E2159C83B006B0934 /* SearchErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchErrorViewController.swift; sourceTree = "<group>"; };
 		D49A18802159CD09006B0934 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		D4A0D3B7215C857800E7649F /* AdvencedFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvencedFilterViewController.swift; sourceTree = "<group>"; };
+		D4A0D3B9215C85AF00E7649F /* PickAdvencedFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickAdvencedFilterViewController.swift; sourceTree = "<group>"; };
+		D4A54793215BF35B00599BCD /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		D4EDD788215C6BDB0016FAB5 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		E7B7DBD54CBF4E666BC80A73 /* Pods-TheMovieDBConcrete.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieDBConcrete.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieDBConcrete/Pods-TheMovieDBConcrete.debug.xcconfig"; sourceTree = "<group>"; };
 		F07B4FEE6C33061EADE224A0 /* Pods-TheMovieDBConcrete.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieDBConcrete.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieDBConcrete/Pods-TheMovieDBConcrete.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				D406D2B3215547020022A3FF /* MovieDBAPIRequest.swift */,
+				D4A54793215BF35B00599BCD /* PersistenceService.swift */,
+				D4EDD788215C6BDB0016FAB5 /* ViewControllerExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -142,6 +152,8 @@
 				D406D2AF215546E20022A3FF /* MoviesViewController.swift */,
 				D406D2BB215590C20022A3FF /* MovieViewController.swift */,
 				D49A187E2159C83B006B0934 /* SearchErrorViewController.swift */,
+				D4A0D3B7215C857800E7649F /* AdvencedFilterViewController.swift */,
+				D4A0D3B9215C85AF00E7649F /* PickAdvencedFilterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -309,9 +321,13 @@
 			files = (
 				D406D2B4215547020022A3FF /* MovieDBAPIRequest.swift in Sources */,
 				D406D2BC215590C20022A3FF /* MovieViewController.swift in Sources */,
+				D4EDD789215C6BDB0016FAB5 /* ViewControllerExtension.swift in Sources */,
+				D4A0D3BA215C85AF00E7649F /* PickAdvencedFilterViewController.swift in Sources */,
 				D49A18812159CD09006B0934 /* ErrorView.swift in Sources */,
+				D4A0D3B8215C857800E7649F /* AdvencedFilterViewController.swift in Sources */,
 				D406D298215546430022A3FF /* ViewController.swift in Sources */,
 				D406D2C32155A5100022A3FF /* NameTableViewCell.swift in Sources */,
+				D4A54794215BF35B00599BCD /* PersistenceService.swift in Sources */,
 				D49A18792155AAEA006B0934 /* FavoriteTableViewCell.swift in Sources */,
 				D406D2C0215591D80022A3FF /* Genres.swift in Sources */,
 				D406D2BE215591640022A3FF /* Genre.swift in Sources */,
