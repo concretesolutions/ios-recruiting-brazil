@@ -10,6 +10,17 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
+    static let nibName = "FavoritesViewController"
+
+    init() {
+        super.init(nibName: FavoritesViewController.nibName, bundle: nil)
+        tabBarItem.title = "Favorites"
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

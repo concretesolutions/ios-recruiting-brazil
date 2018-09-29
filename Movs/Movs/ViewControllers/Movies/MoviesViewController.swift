@@ -10,6 +10,17 @@ import UIKit
 
 class MoviesViewController: UIViewController {
 
+    static let nibName = "MoviesViewController"
+
+    init() {
+        super.init(nibName: MoviesViewController.nibName, bundle: nil)
+        tabBarItem.title = "Movies"
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
