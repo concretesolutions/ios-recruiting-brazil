@@ -28,7 +28,6 @@ final class MovieCell: UICollectionViewCell {
         return button
     }()
     
-    
     @objc func favoriteAction() {
         print("favorite")
     }
@@ -40,6 +39,10 @@ final class MovieCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configuration(movie: MovieModel) {
+        self.lbMovieName.text = movie.title
     }
 }
 
