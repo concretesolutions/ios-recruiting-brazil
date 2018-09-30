@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import SnapKit
 
 final class PopularMoviesGridView: UIViewController {
     
@@ -20,8 +21,9 @@ final class PopularMoviesGridView: UIViewController {
     // MARK: Lazy variable
     private lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         let collection = UICollectionView(frame: self.view.frame,
-                                          collectionViewLayout: UICollectionViewFlowLayout())
+                                          collectionViewLayout: layout)
         collection.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
         collection.backgroundColor = UIColor.white
         return collection
@@ -55,7 +57,7 @@ final class PopularMoviesGridView: UIViewController {
         self.viewModel.movies.asObservable()
             .bind(to: collection.rx.items(cellIdentifier: "MovieCell",
                                           cellType: MovieCell.self)) { (_, movie: MovieModel, cell: MovieCell) in
-                                            cell.configuration(movie: movie)
+                cell.configuration(viewModel: PopularMoviesCellViewModel(movie: movie))
             }.disposed(by: self.disposeBag)
         
         collection.rx.setDelegate(self).disposed(by: self.disposeBag)
@@ -75,19 +77,16 @@ extension PopularMoviesGridView: ViewConfiguration {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            self.collection.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.collection.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            self.collection.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            self.collection.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        ])
+        self.collection.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
 
 extension PopularMoviesGridView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width / 2.0
-        return CGSize(width: width, height: 130)
+        let width = (collectionView.bounds.width - 20.0) / 2.0
+        return CGSize(width: width, height: 200)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -9,15 +9,22 @@
 import UIKit
 
 final class MovieCell: UICollectionViewCell {
+    
+    private var viewModel: PopularMoviesCellViewModelType!
+    
     private lazy var img: UIImageView = {
         let img = UIImageView(frame: .zero)
+//        img.contentMode = .scaleAspectFit
         return img
     }()
     
     private lazy var lbMovieName: UILabel = {
         let label = UILabel()
         label.text = "name"
+        label.textAlignment = .center
         label.numberOfLines = 0
+        label.textColor = .lightYellow
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
@@ -41,8 +48,11 @@ final class MovieCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configuration(movie: MovieModel) {
-        self.lbMovieName.text = movie.title
+    func configuration(viewModel: PopularMoviesCellViewModelType) {
+        self.viewModel = viewModel
+        self.lbMovieName.text = viewModel.title
+        self.img.loadImage(url: viewModel.imgUrl)
+        self.contentView.backgroundColor = .darkBlue
     }
 }
 
@@ -54,24 +64,22 @@ extension MovieCell: ViewConfiguration {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            self.img.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            self.img.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-            self.img.rightAnchor.constraint(equalTo: self.contentView.rightAnchor)
-        ])
+        self.img.snp.makeConstraints { make in
+            make.top.trailing.leading.equalToSuperview()
+        }
         
-        NSLayoutConstraint.activate([
-            self.lbMovieName.heightAnchor.constraint(equalToConstant: 40.0),
-            self.lbMovieName.topAnchor.constraint(equalTo: self.img.bottomAnchor),
-            self.lbMovieName.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-            self.lbMovieName.rightAnchor.constraint(equalTo: self.contentView.rightAnchor)
-        ])
+        self.lbMovieName.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-5)
+            make.leading.equalToSuperview().offset(5)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(40)
+            make.top.equalTo(self.img.snp_bottomMargin)
+        }
         
-        NSLayoutConstraint.activate([
-            self.btFavorite.heightAnchor.constraint(equalToConstant: 40.0),
-            self.btFavorite.widthAnchor.constraint(equalToConstant: 40.0),
-            self.btFavorite.rightAnchor.constraint(equalTo: self.contentView.rightAnchor),
-            self.btFavorite.topAnchor.constraint(equalTo: self.img.bottomAnchor)
-        ])
+        self.btFavorite.snp.makeConstraints { make in
+            make.trailing.bottom.equalToSuperview()
+            make.height.width.equalTo(40)
+            make.top.equalTo(self.img.snp_bottomMargin)
+        }
     }
 }
