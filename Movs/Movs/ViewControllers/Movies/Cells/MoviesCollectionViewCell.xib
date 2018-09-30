@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MoviesCollectionViewCell" customModule="Movs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcE-ls-aqJ">
+                        <rect key="frame" x="0.0" y="150" width="150" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Violet Evergarden" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEJ-WJ-kL7">
+                                <rect key="frame" x="3" y="0.0" width="144" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.90496855970000001" green="0.74709385630000003" blue="0.32595163579999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.17238631839999999" green="0.187818706" blue="0.27472317219999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gEJ-WJ-kL7" secondAttribute="trailing" constant="3" id="1O7-1H-7xS"/>
+                            <constraint firstAttribute="bottom" secondItem="gEJ-WJ-kL7" secondAttribute="bottom" id="SiR-pi-FlZ"/>
+                            <constraint firstAttribute="height" constant="30" id="qP9-Z0-MzP"/>
+                            <constraint firstItem="gEJ-WJ-kL7" firstAttribute="top" secondItem="hcE-ls-aqJ" secondAttribute="top" id="rwR-3b-fTk"/>
+                            <constraint firstItem="gEJ-WJ-kL7" firstAttribute="leading" secondItem="hcE-ls-aqJ" secondAttribute="leading" constant="3" id="sfg-X3-qlh"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movieImageSample" translatesAutoresizingMaskIntoConstraints="NO" id="t6m-qI-GOx">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="hcE-ls-aqJ" firstAttribute="top" secondItem="t6m-qI-GOx" secondAttribute="bottom" id="1X2-AD-9jz"/>
+                <constraint firstAttribute="trailing" secondItem="hcE-ls-aqJ" secondAttribute="trailing" id="FaY-du-vFr"/>
+                <constraint firstAttribute="trailing" secondItem="t6m-qI-GOx" secondAttribute="trailing" id="XTh-YT-fqp"/>
+                <constraint firstAttribute="bottom" secondItem="hcE-ls-aqJ" secondAttribute="bottom" id="ZpG-oh-k4S"/>
+                <constraint firstItem="hcE-ls-aqJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gJc-5R-ren"/>
+                <constraint firstItem="t6m-qI-GOx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jMa-Bz-I4N"/>
+                <constraint firstItem="t6m-qI-GOx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qh1-DT-f1A"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="149" height="184"/>
+            <point key="canvasLocation" x="211.19999999999999" y="214.99250374812596"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="movieImageSample" width="600" height="900"/>
+    </resources>
+</document>
