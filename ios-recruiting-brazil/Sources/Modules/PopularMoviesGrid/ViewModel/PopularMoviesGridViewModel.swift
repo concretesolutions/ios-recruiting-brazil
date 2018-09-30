@@ -52,7 +52,7 @@ final class PopularMoviesGridViewModel: PopularMoviesGridViewModelType {
                 self?.movies.value.append(contentsOf: response.results)
             }
             self?.incrementPage(target: target, currentPage: response.page)
-            }, onError: {[weak self] _ in
+            }, onError: {[weak self] error in
                 self?.error.value = "Um erro ocorreu por favor tente novamente"
             }, onCompleted: {[weak self] in
                 self?.showLoading.value = false

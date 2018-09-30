@@ -47,6 +47,12 @@ final class PopularMoviesGridController: UIViewController, StoryboardLoadable {
             }.disposed(by: self.disposeBag)
         
         collection.rx.setDelegate(self).disposed(by: self.disposeBag)
+        
+        collection.rx.modelSelected(MovieModel.self).subscribe(onNext: {[weak self] movie in
+            let movieDetail = MovieDetailController.loadFromStoryboard()
+            movieDetail.prepareForShow(viewModel: MovieDetailViewModel(movie: movie))
+            self?.navigationController?.pushViewController(movieDetail, animated: true)
+        }).disposed(by: self.disposeBag)
     }
     
     private func setupBindLoading() {

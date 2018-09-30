@@ -13,8 +13,7 @@ import Moya
 final class PupolarMoviesGridService {
     
     // MARK: Private Variables
-    private typealias Target = MoviesTargetType
-    private var provider: RequestProvider<Target>
+    private var provider: RequestProvider<MoviesTargetType>
     
     init(provider: RequestProvider<MoviesTargetType>) {
         self.provider = provider
@@ -22,13 +21,5 @@ final class PupolarMoviesGridService {
     
     func fetchMovies(target: MoviesTargetType) -> Observable<ResponsePopularMovies> {
         return self.provider.requestObject(target)
-    }
-    
-    func getPopularMovies(page: Int) -> Observable<ResponsePopularMovies> {
-        return self.provider.requestObject(Target.popularMovies(page))
-    }
-    
-    func searchMovies(search: String, page: Int) -> Observable<ResponsePopularMovies>{
-        return self.provider.requestObject(Target.filterMovies(search, page))
     }
 }
