@@ -20,7 +20,9 @@ class TabBarViewController: UITabBarController {
         let controllers = [popularGrid, favorite]
         self.viewControllers = controllers
         self.viewControllers = controllers.map {
-            UINavigationController(rootViewController: $0)
+            let navigation = UINavigationController(rootViewController: $0)
+            navigation.setupDefaultNavBar()
+            return navigation
         }
     }
 }

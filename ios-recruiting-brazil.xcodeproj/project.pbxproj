@@ -14,6 +14,7 @@
 		4725E64F2160F35600ECE43C /* FavoriteMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E64E2160F35600ECE43C /* FavoriteMoviesView.swift */; };
 		4725E6512160F36900ECE43C /* PopularMoviesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6502160F36900ECE43C /* PopularMoviesGridView.swift */; };
 		4725E6592160FB2F00ECE43C /* UIColor+defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6582160FB2F00ECE43C /* UIColor+defaults.swift */; };
+		4725E65C2160FD6700ECE43C /* UINavigationController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E65B2160FD6700ECE43C /* UINavigationController+setup.swift */; };
 		4767F80F215EFEE400517D09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F80E215EFEE400517D09 /* AppDelegate.swift */; };
 		4767F811215EFEE400517D09 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F810215EFEE400517D09 /* TabBarViewController.swift */; };
 		4767F814215EFEE400517D09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4767F812215EFEE400517D09 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		4725E64E2160F35600ECE43C /* FavoriteMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesView.swift; sourceTree = "<group>"; };
 		4725E6502160F36900ECE43C /* PopularMoviesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesGridView.swift; sourceTree = "<group>"; };
 		4725E6582160FB2F00ECE43C /* UIColor+defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+defaults.swift"; sourceTree = "<group>"; };
+		4725E65B2160FD6700ECE43C /* UINavigationController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+setup.swift"; sourceTree = "<group>"; };
 		4767F80B215EFEE400517D09 /* ios-recruiting-brazil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-recruiting-brazil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4767F80E215EFEE400517D09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4767F810215EFEE400517D09 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,14 @@
 			path = UIColor;
 			sourceTree = "<group>";
 		};
+		4725E65A2160FD4C00ECE43C /* UINavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				4725E65B2160FD6700ECE43C /* UINavigationController+setup.swift */,
+			);
+			path = UINavigationController;
+			sourceTree = "<group>";
+		};
 		4767F802215EFEE400517D09 = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +263,7 @@
 		4767F832215F009300517D09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4725E65A2160FD4C00ECE43C /* UINavigationController */,
 				4725E6572160FB1F00ECE43C /* UIColor */,
 				4725E6432160E8A500ECE43C /* MapModel */,
 			);
@@ -503,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4725E6472160E8E500ECE43C /* DataError.swift in Sources */,
+				4725E65C2160FD6700ECE43C /* UINavigationController+setup.swift in Sources */,
 				4725E6422160E86C00ECE43C /* RequestProvider.swift in Sources */,
 				4725E6452160E8C200ECE43C /* Response+MapModel.swift in Sources */,
 				4725E63F2160E83700ECE43C /* RequestProtocol.swift in Sources */,
