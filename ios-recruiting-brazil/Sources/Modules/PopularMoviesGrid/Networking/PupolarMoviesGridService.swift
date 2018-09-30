@@ -23,4 +23,8 @@ final class PupolarMoviesGridService {
     func getPopularMovies(page: Int) -> Observable<ResponsePopularMovies>{
         return self.provider.requestObject(Target.popularMovies(page))
     }
+    
+    func searchMovies(search: String, page: Int) -> Observable<ResponsePopularMovies>{
+        return self.provider.requestObject(Target.filterMovies(search, page))
+    }
 }

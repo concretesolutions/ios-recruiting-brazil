@@ -18,7 +18,7 @@ final class PopularMoviesGridView: UIViewController {
     private var viewModel: PopularMoviesGridViewModelType
     private var numberOfItemsPerSection = 30
     
-    // MARK: Lazy variable
+    // MARK: Lazy variables
     private lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
@@ -36,6 +36,12 @@ final class PopularMoviesGridView: UIViewController {
         return activity
     }()
     
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.barTintColor = .lightYellow
+        return searchBar
+    }()
+    
     init(viewModel: PopularMoviesGridViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -50,7 +56,8 @@ final class PopularMoviesGridView: UIViewController {
         self.setupViewConfiguration()
         self.setupBindCollection()
         self.setupBindLoading()
-        self.viewModel.fetchMovies()
+        self.setupBindSearchBar()
+        self.viewModel.fetchMovies(search: nil)
     }
     
     private func setupBindCollection() {
@@ -68,17 +75,34 @@ final class PopularMoviesGridView: UIViewController {
             loading ? self?.activity.startAnimating() : self?.activity.stopAnimating()
         }).disposed(by: self.disposeBag)
     }
+    
+    private func setupBindSearchBar() {
+        self.searchBar.rx.text
+            .debounce(1, scheduler: MainScheduler.instance)
+//            .distinctUntilChanged()
+            .subscribe(onNext: {[weak self] text in
+               self?.viewModel.fetchMovies(search: text)
+            }).disposed(by: disposeBag)
+    }
 }
 
 extension PopularMoviesGridView: ViewConfiguration {
     func buildViewHierarchy() {
+        self.view.addSubview(self.searchBar)
         self.view.addSubview(self.collection)
         self.view.addSubview(self.activity)
     }
     
     func setupConstraints() {
+        self.searchBar.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(-1)
+            make.height.equalTo(50)
+        }
+        
         self.collection.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.searchBar.snp_bottomMargin).offset(7)
         }
     }
 }
@@ -95,7 +119,7 @@ extension PopularMoviesGridView: UICollectionViewDelegateFlowLayout {
         
         if offsetY > contentHeight - scrollView.frame.size.height && self.viewModel.showLoading.value == false {
             numberOfItemsPerSection += 30
-            self.viewModel.fetchMovies()
+            self.viewModel.fetchMovies(search: self.searchBar.text)
         }
     }
 }

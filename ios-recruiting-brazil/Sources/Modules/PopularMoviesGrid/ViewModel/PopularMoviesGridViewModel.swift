@@ -14,7 +14,7 @@ protocol PopularMoviesGridViewModelType {
     var requestError: Variable<(title: String, msg: String)?> { get }
     var showLoading: Variable<Bool> { get }
     
-    func fetchMovies()
+    func fetchMovies(search: String?)
 }
 
 final class PopularMoviesGridViewModel: PopularMoviesGridViewModelType {
@@ -33,9 +33,28 @@ final class PopularMoviesGridViewModel: PopularMoviesGridViewModelType {
         self.service = PupolarMoviesGridService(provider: RequestProvider<MoviesTargetType>());
     }
     
-    func fetchMovies() {
+    func fetchMovies(search: String? = nil) {
+        guard  let search = search, search.count > 0 else {
+            self.fetchPopularMovies()
+            return
+        }
+        self.searchMovies(search: search)
+    }
+    
+    private func fetchPopularMovies() {
         self.showLoading.value = true
         self.service.getPopularMovies(page: self.page).subscribe(onNext: {[weak self] response in
+            self?.movies.value = response.results
+            }, onError: {[weak self] _ in
+                self?.requestError.value = (title: "Error", msg: "Request fail")
+            }, onCompleted: {[weak self] in
+                self?.showLoading.value = false
+        }).disposed(by: disposeBag)
+    }
+    
+    private func searchMovies(search: String) {
+        self.showLoading.value = true
+        self.service.searchMovies(search: search, page: self.page).subscribe(onNext: {[weak self] response in
             self?.movies.value = response.results
             }, onError: {[weak self] _ in
                 self?.requestError.value = (title: "Error", msg: "Request fail")

@@ -10,11 +10,12 @@ import UIKit
 
 final class MovieCell: UICollectionViewCell {
     
+    // MARK: Private Variables
     private var viewModel: PopularMoviesCellViewModelType!
     
+    // MARK: Lazy variables
     private lazy var img: UIImageView = {
         let img = UIImageView(frame: .zero)
-//        img.contentMode = .scaleAspectFit
         return img
     }()
     
