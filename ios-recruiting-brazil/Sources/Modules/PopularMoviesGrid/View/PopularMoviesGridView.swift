@@ -17,6 +17,7 @@ final class PopularMoviesGridView: UIViewController {
     private let disposeBag = DisposeBag()
     private var viewModel: PopularMoviesGridViewModelType
     private var numberOfItemsPerSection = 30
+    private var errorView = ErrorView()
     
     // MARK: Lazy variables
     private lazy var collection: UICollectionView = {
@@ -57,6 +58,7 @@ final class PopularMoviesGridView: UIViewController {
         self.setupBindCollection()
         self.setupBindLoading()
         self.setupBindSearchBar()
+        self.setupBindError()
         self.viewModel.fetchMovies(search: nil)
     }
     
@@ -76,10 +78,19 @@ final class PopularMoviesGridView: UIViewController {
         }).disposed(by: self.disposeBag)
     }
     
+    private func setupBindError() {
+        self.viewModel.error.asObservable().subscribe(onNext: {[weak self] error in
+            self?.errorView.setup(error: error)
+            self?.errorView.isHidden = (error == nil)
+            self?.collection.isHidden = !(error == nil)
+            
+        }).disposed(by: disposeBag)
+    }
+    
     private func setupBindSearchBar() {
         self.searchBar.rx.text
             .debounce(1, scheduler: MainScheduler.instance)
-//            .distinctUntilChanged()
+            .distinctUntilChanged()
             .subscribe(onNext: {[weak self] text in
                self?.viewModel.fetchMovies(search: text)
             }).disposed(by: disposeBag)
@@ -90,6 +101,7 @@ extension PopularMoviesGridView: ViewConfiguration {
     func buildViewHierarchy() {
         self.view.addSubview(self.searchBar)
         self.view.addSubview(self.collection)
+        self.view.addSubview(self.errorView)
         self.view.addSubview(self.activity)
     }
     
@@ -101,6 +113,11 @@ extension PopularMoviesGridView: ViewConfiguration {
         }
         
         self.collection.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.searchBar.snp_bottomMargin).offset(7)
+        }
+        
+        self.errorView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.searchBar.snp_bottomMargin).offset(7)
         }

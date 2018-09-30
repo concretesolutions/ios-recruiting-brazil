@@ -11,7 +11,7 @@ import RxSwift
 
 protocol PopularMoviesGridViewModelType {
     var movies: Variable<[MovieModel]> { get }
-    var requestError: Variable<(title: String, msg: String)?> { get }
+    var error: Variable<String?> { get }
     var showLoading: Variable<Bool> { get }
     
     func fetchMovies(search: String?)
@@ -21,12 +21,13 @@ final class PopularMoviesGridViewModel: PopularMoviesGridViewModelType {
     
     // MARK: Public Variables
     var movies = Variable<[MovieModel]>([])
-    var requestError = Variable<(title: String, msg: String)?>(nil)
+    var error = Variable<String?>(nil)
     var showLoading = Variable(false)
     
     // MARK: Private Variables
     private let disposeBag = DisposeBag()
-    private var page = 1
+    private var popularPage = 1
+    private var searchPage = 1
     private var service: PupolarMoviesGridService
     
     init() {
@@ -34,32 +35,38 @@ final class PopularMoviesGridViewModel: PopularMoviesGridViewModelType {
     }
     
     func fetchMovies(search: String? = nil) {
-        guard  let search = search, search.count > 0 else {
-            self.fetchPopularMovies()
-            return
+        self.error.value = nil
+        var target = MoviesTargetType.popularMovies(self.popularPage)
+        if let search = search, search.count > 0 {
+            target = MoviesTargetType.filterMovies(search, self.searchPage)
         }
-        self.searchMovies(search: search)
-    }
-    
-    private func fetchPopularMovies() {
-        self.showLoading.value = true
-        self.service.getPopularMovies(page: self.page).subscribe(onNext: {[weak self] response in
-            self?.movies.value = response.results
+        self.service.fetchMovies(target: target).subscribe(onNext: {[weak self] response in
+            guard !(response.results.count == 0) else {
+                self?.error.value = "Sua busca não retornou resultados"
+                return
+            }
+            
+            if response.page == 1 {
+                self?.movies.value = response.results
+            } else {
+                self?.movies.value.append(contentsOf: response.results)
+            }
+            self?.incrementPage(target: target, currentPage: response.page)
             }, onError: {[weak self] _ in
-                self?.requestError.value = (title: "Error", msg: "Request fail")
+                self?.error.value = "Um erro ocorreu por favor tente novamente"
             }, onCompleted: {[weak self] in
                 self?.showLoading.value = false
         }).disposed(by: disposeBag)
     }
     
-    private func searchMovies(search: String) {
-        self.showLoading.value = true
-        self.service.searchMovies(search: search, page: self.page).subscribe(onNext: {[weak self] response in
-            self?.movies.value = response.results
-            }, onError: {[weak self] _ in
-                self?.requestError.value = (title: "Error", msg: "Request fail")
-            }, onCompleted: {[weak self] in
-                self?.showLoading.value = false
-        }).disposed(by: disposeBag)
+    private func incrementPage(target: MoviesTargetType, currentPage: Int) {
+        switch target {
+        case .popularMovies:
+            self.searchPage = 1
+            self.popularPage = currentPage + 1
+        case .filterMovies:
+            self.popularPage = 1
+            self.searchPage = currentPage + 1
+        }
     }
 }

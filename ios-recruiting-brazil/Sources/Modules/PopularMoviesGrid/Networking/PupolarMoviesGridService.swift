@@ -20,7 +20,11 @@ final class PupolarMoviesGridService {
         self.provider = provider
     }
     
-    func getPopularMovies(page: Int) -> Observable<ResponsePopularMovies>{
+    func fetchMovies(target: MoviesTargetType) -> Observable<ResponsePopularMovies> {
+        return self.provider.requestObject(target)
+    }
+    
+    func getPopularMovies(page: Int) -> Observable<ResponsePopularMovies> {
         return self.provider.requestObject(Target.popularMovies(page))
     }
     
