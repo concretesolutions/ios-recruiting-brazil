@@ -42,5 +42,21 @@ final class MovieDetailService {
                 }
         })
     }
+    
+    func fentMovieInRealm(id: Int) -> MovieModel? {
+        guard let movie = try? RealmWrapper.readFirst(RLMMovieModel.self,
+                                                      filter: "id = \(id)") else {
+            return nil
+        }
+        return MovieModel(RLMMovieModel: movie)
+    }
+    
+    func removeMovie(id: Int) {
+        _ = try? RealmWrapper.remove(RLMMovieModel.self, filter: "id = \(id)")
+    }
+    
+    func save(movie: MovieModel) {
+        _ = RealmWrapper.write(movie.asRealm())
+    }
 }
 

@@ -33,6 +33,10 @@
 		4725E69621615ED900ECE43C /* MovieDetailTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E69521615ED900ECE43C /* MovieDetailTargetType.swift */; };
 		4725E69821615F8600ECE43C /* MovieDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E69721615F8600ECE43C /* MovieDetailService.swift */; };
 		4725E69B2161601600ECE43C /* GenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E69A2161601600ECE43C /* GenderModel.swift */; };
+		4725E6A02161791900ECE43C /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E69F2161791900ECE43C /* Object.swift */; };
+		4725E6A3216179D800ECE43C /* RealmWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6A2216179D800ECE43C /* RealmWrapper.swift */; };
+		4725E6A621617B5800ECE43C /* RLMMovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6A521617B5800ECE43C /* RLMMovieModel.swift */; };
+		4725E6A821617BD600ECE43C /* RLMGenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6A721617BD600ECE43C /* RLMGenderModel.swift */; };
 		4767F80F215EFEE400517D09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F80E215EFEE400517D09 /* AppDelegate.swift */; };
 		4767F811215EFEE400517D09 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F810215EFEE400517D09 /* TabBarViewController.swift */; };
 		4767F814215EFEE400517D09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4767F812215EFEE400517D09 /* Main.storyboard */; };
@@ -81,6 +85,10 @@
 		4725E69521615ED900ECE43C /* MovieDetailTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTargetType.swift; sourceTree = "<group>"; };
 		4725E69721615F8600ECE43C /* MovieDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailService.swift; sourceTree = "<group>"; };
 		4725E69A2161601600ECE43C /* GenderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderModel.swift; sourceTree = "<group>"; };
+		4725E69F2161791900ECE43C /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		4725E6A2216179D800ECE43C /* RealmWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmWrapper.swift; sourceTree = "<group>"; };
+		4725E6A521617B5800ECE43C /* RLMMovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMMovieModel.swift; sourceTree = "<group>"; };
+		4725E6A721617BD600ECE43C /* RLMGenderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMGenderModel.swift; sourceTree = "<group>"; };
 		4767F80B215EFEE400517D09 /* ios-recruiting-brazil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-recruiting-brazil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4767F80E215EFEE400517D09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4767F810215EFEE400517D09 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -247,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				4725E66D2161117600ECE43C /* ResponsePopularMovies.swift */,
-				4725E66F216111FC00ECE43C /* MovieModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,9 +331,44 @@
 		4725E69921615FE900ECE43C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4725E6A421617B2900ECE43C /* RealmModel */,
+				4725E66F216111FC00ECE43C /* MovieModel.swift */,
 				4725E69A2161601600ECE43C /* GenderModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4725E69E2161790A00ECE43C /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				4725E69F2161791900ECE43C /* Object.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		4725E6A1216179C400ECE43C /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				4725E6A2216179D800ECE43C /* RealmWrapper.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		4725E6A421617B2900ECE43C /* RealmModel */ = {
+			isa = PBXGroup;
+			children = (
+				4725E6A521617B5800ECE43C /* RLMMovieModel.swift */,
+				4725E6A721617BD600ECE43C /* RLMGenderModel.swift */,
+			);
+			path = RealmModel;
+			sourceTree = "<group>";
+		};
+		4725E6A921617EFB00ECE43C /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				4725E6A1216179C400ECE43C /* Realm */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		4767F802215EFEE400517D09 = {
@@ -379,6 +421,7 @@
 		4767F82F215F000800517D09 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4725E6A921617EFB00ECE43C /* Helper */,
 				4725E69921615FE900ECE43C /* Model */,
 				4725E6402160E85700ECE43C /* Networking */,
 				4767F833215F00A700517D09 /* Modules */,
@@ -411,6 +454,7 @@
 		4767F832215F009300517D09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4725E69E2161790A00ECE43C /* Realm */,
 				4725E673216121FA00ECE43C /* UIimage */,
 				4725E65A2160FD4C00ECE43C /* UINavigationController */,
 				4725E6572160FB1F00ECE43C /* UIColor */,
@@ -680,19 +724,23 @@
 				4725E69621615ED900ECE43C /* MovieDetailTargetType.swift in Sources */,
 				4725E670216111FC00ECE43C /* MovieModel.swift in Sources */,
 				4725E6452160E8C200ECE43C /* Response+MapModel.swift in Sources */,
+				4725E6A02161791900ECE43C /* Object.swift in Sources */,
 				4725E63F2160E83700ECE43C /* RequestProtocol.swift in Sources */,
 				4725E69B2161601600ECE43C /* GenderModel.swift in Sources */,
 				4767F811215EFEE400517D09 /* TabBarViewController.swift in Sources */,
 				4725E666216106CB00ECE43C /* ViewConfigurationProtocol.swift in Sources */,
+				4725E6A821617BD600ECE43C /* RLMGenderModel.swift in Sources */,
 				4725E6512160F36900ECE43C /* PopularMoviesGridView.swift in Sources */,
 				4725E66E2161117600ECE43C /* ResponsePopularMovies.swift in Sources */,
 				4725E690216159E400ECE43C /* MovieDetailController.swift in Sources */,
+				4725E6A621617B5800ECE43C /* RLMMovieModel.swift in Sources */,
 				4725E69821615F8600ECE43C /* MovieDetailService.swift in Sources */,
 				4725E6592160FB2F00ECE43C /* UIColor+defaults.swift in Sources */,
 				4725E69321615A9700ECE43C /* MovieDetailViewModel.swift in Sources */,
 				4767F80F215EFEE400517D09 /* AppDelegate.swift in Sources */,
 				4725E64F2160F35600ECE43C /* FavoriteMoviesView.swift in Sources */,
 				4725E66A21610E2B00ECE43C /* PupolarMoviesGridTargetType.swift in Sources */,
+				4725E6A3216179D800ECE43C /* RealmWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

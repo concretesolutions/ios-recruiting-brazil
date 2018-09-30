@@ -14,6 +14,7 @@ public enum DataError: Swift.Error {
     case jsonParse(JSONParseError, Response)
     case jsonMapping(Response)
     case statusCode(Response)
+    case realm(message: String)
     case underlying(Swift.Error)
 }
 

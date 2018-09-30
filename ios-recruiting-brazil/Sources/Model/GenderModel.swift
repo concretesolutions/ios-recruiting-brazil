@@ -26,6 +26,24 @@ struct GenderModel: Mappable {
         self.id = JSON["id"] as? Int ?? 0
         self.name = JSON["name"] as? String
     }
+    
+    public init(id: Int,
+                name: String) {
+        self.id = id
+        self.name = name
+    }
+    
+    public init(RLMGenderModel: RLMGenderModel) {
+        self.id = RLMGenderModel.id
+        self.name = RLMGenderModel.name
+    }
+    
+    func asRealm() -> RLMGenderModel {
+        return RLMGenderModel.build({ object in
+            object.id = self.id
+            object.name = self.name ?? ""
+        })
+    }
 }
 
 extension GenderModel: Equatable {

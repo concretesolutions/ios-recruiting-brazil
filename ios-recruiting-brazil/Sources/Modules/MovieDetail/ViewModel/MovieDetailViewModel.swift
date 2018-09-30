@@ -15,7 +15,10 @@ protocol MovieDetailViewModelType {
     var desc: String? { get }
     var gender: String? { get }
     var imgURL: String { get }
+    var imgFavorite: String { get }
     var reload: Variable<Bool> { get }
+    
+    func saveFavorite()
 }
 
 final class MovieDetailViewModel: MovieDetailViewModelType {
@@ -30,7 +33,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     }
     
     var year: String? {
-        return String(self.movie.releaseDate.split(separator: "-")[0])
+        return self.movie.releaseYear
     }
     
     var desc: String? {
@@ -45,6 +48,14 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     
     var imgURL: String {
         return "https://image.tmdb.org/t/p/w400\(movie.posterPath)"
+    }
+    
+    var imgFavorite: String {
+        guard let exist = self.service.fentMovieInRealm(id: self.movie.id) else {
+            return "favorite_gray_icon"
+        }
+        
+        return "favorite_full_icon"
     }
     
     init(movie: MovieModel) {
@@ -65,5 +76,13 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
         }, onError: { error in
             print(error.localizedDescription)
         }).disposed(by: self.disposeBag)
+    }
+    
+    func saveFavorite() {
+        guard let realmMovie = self.service.fentMovieInRealm(id: self.movie.id) else {
+            self.service.save(movie: self.movie)
+            return
+        }
+        self.service.removeMovie(id: self.movie.id)
     }
 }

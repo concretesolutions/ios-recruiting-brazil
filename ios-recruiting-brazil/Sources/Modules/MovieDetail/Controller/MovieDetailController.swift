@@ -21,6 +21,7 @@ final class MovieDetailController: UITableViewController, StoryboardLoadable {
     @IBOutlet private weak var lbYear: UILabel!
     @IBOutlet private weak var lbGender: UILabel!
     @IBOutlet private weak var lbdesc: UILabel!
+    @IBOutlet private weak var btFavorite: UIButton!
     
     func prepareForShow(viewModel: MovieDetailViewModelType) {
         self.viewModel = viewModel
@@ -39,6 +40,14 @@ final class MovieDetailController: UITableViewController, StoryboardLoadable {
             self?.lbYear.text = self?.viewModel.year
             self?.lbGender.text = self?.viewModel.gender
             self?.lbdesc.text = self?.viewModel.desc
+            self?.btFavorite.setImage(UIImage(named: self?.viewModel.imgFavorite ?? ""),
+                                      for: .normal)
         }).disposed(by: self.disposeBag)
+    }
+    
+    @IBAction func favoriteAction(sender: UIButton) {
+        self.viewModel.saveFavorite()
+        self.btFavorite.setImage(UIImage(named: self.viewModel.imgFavorite ?? ""),
+                                  for: .normal)
     }
 }

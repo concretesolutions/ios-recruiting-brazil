@@ -58,6 +58,9 @@
                                                         <constraint firstAttribute="height" constant="40" id="McN-CC-1sv"/>
                                                     </constraints>
                                                     <state key="normal" image="favorite_gray_icon"/>
+                                                    <connections>
+                                                        <action selector="favoriteActionWithSender:" destination="dNs-HO-28S" eventType="touchUpInside" id="r8w-6z-bM4"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -146,6 +149,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="btFavorite" destination="d47-C2-Jms" id="a5z-Rx-VUm"/>
                         <outlet property="imgPoster" destination="Uw6-LJ-MPT" id="f0U-sK-c5E"/>
                         <outlet property="lbGender" destination="gEc-xx-bKf" id="IcR-pq-cMH"/>
                         <outlet property="lbTitle" destination="Beb-VG-1Eh" id="lwA-C0-qj5"/>
