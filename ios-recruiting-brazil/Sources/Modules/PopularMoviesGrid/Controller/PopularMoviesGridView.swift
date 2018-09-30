@@ -11,50 +11,27 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-final class PopularMoviesGridView: UIViewController {
-    
+final class PopularMoviesGridController: UIViewController, StoryboardLoadable {
+    static var storyboardName: String = "PopularMovies"
+
     // MARK: Private Variables
     private let disposeBag = DisposeBag()
-    private var viewModel: PopularMoviesGridViewModelType
+    private var viewModel: PopularMoviesGridViewModelType!
     private var numberOfItemsPerSection = 30
-    private var errorView = ErrorView()
     
-    // MARK: Lazy variables
-    private lazy var collection: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        let collection = UICollectionView(frame: self.view.frame,
-                                          collectionViewLayout: layout)
-        collection.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
-        collection.backgroundColor = UIColor.white
-        return collection
-    }()
+    // MARK: IBOutlet
+    @IBOutlet private weak var collection: UICollectionView!
+    @IBOutlet private weak var activity: UIActivityIndicatorView!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var lbError: UILabel!
+    @IBOutlet private weak var vwError: UIView!
     
-    private lazy var activity: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .gray)
-        activity.center = self.view.center
-        activity.hidesWhenStopped = true
-        return activity
-    }()
-    
-    private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar(frame: .zero)
-        searchBar.barTintColor = .lightYellow
-        return searchBar
-    }()
-    
-    init(viewModel: PopularMoviesGridViewModelType) {
+    func prepareForShow(viewModel: PopularMoviesGridViewModelType) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupViewConfiguration()
         self.setupBindCollection()
         self.setupBindLoading()
         self.setupBindSearchBar()
@@ -80,10 +57,9 @@ final class PopularMoviesGridView: UIViewController {
     
     private func setupBindError() {
         self.viewModel.error.asObservable().subscribe(onNext: {[weak self] error in
-            self?.errorView.setup(error: error)
-            self?.errorView.isHidden = (error == nil)
+            self?.lbError.text = error
+            self?.vwError.isHidden = (error == nil)
             self?.collection.isHidden = !(error == nil)
-            
         }).disposed(by: disposeBag)
     }
     
@@ -97,34 +73,7 @@ final class PopularMoviesGridView: UIViewController {
     }
 }
 
-extension PopularMoviesGridView: ViewConfiguration {
-    func buildViewHierarchy() {
-        self.view.addSubview(self.searchBar)
-        self.view.addSubview(self.collection)
-        self.view.addSubview(self.errorView)
-        self.view.addSubview(self.activity)
-    }
-    
-    func setupConstraints() {
-        self.searchBar.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(-1)
-            make.height.equalTo(50)
-        }
-        
-        self.collection.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.searchBar.snp_bottomMargin).offset(7)
-        }
-        
-        self.errorView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.searchBar.snp_bottomMargin).offset(7)
-        }
-    }
-}
-
-extension PopularMoviesGridView: UICollectionViewDelegateFlowLayout {
+extension PopularMoviesGridController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.width - 20.0) / 2.0
         return CGSize(width: width, height: 200)
