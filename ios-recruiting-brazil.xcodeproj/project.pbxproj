@@ -11,8 +11,10 @@
 		4725E6422160E86C00ECE43C /* RequestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6412160E86C00ECE43C /* RequestProvider.swift */; };
 		4725E6452160E8C200ECE43C /* Response+MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6442160E8C200ECE43C /* Response+MapModel.swift */; };
 		4725E6472160E8E500ECE43C /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6462160E8E500ECE43C /* DataError.swift */; };
+		4725E64F2160F35600ECE43C /* FavoriteMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E64E2160F35600ECE43C /* FavoriteMoviesView.swift */; };
+		4725E6512160F36900ECE43C /* PopularMoviesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6502160F36900ECE43C /* PopularMoviesGridView.swift */; };
 		4767F80F215EFEE400517D09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F80E215EFEE400517D09 /* AppDelegate.swift */; };
-		4767F811215EFEE400517D09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F810215EFEE400517D09 /* ViewController.swift */; };
+		4767F811215EFEE400517D09 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767F810215EFEE400517D09 /* TabBarViewController.swift */; };
 		4767F814215EFEE400517D09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4767F812215EFEE400517D09 /* Main.storyboard */; };
 		4767F816215EFEE400517D09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4767F815215EFEE400517D09 /* Assets.xcassets */; };
 		4767F819215EFEE400517D09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4767F817215EFEE400517D09 /* LaunchScreen.storyboard */; };
@@ -37,9 +39,11 @@
 		4725E6412160E86C00ECE43C /* RequestProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProvider.swift; sourceTree = "<group>"; };
 		4725E6442160E8C200ECE43C /* Response+MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+MapModel.swift"; sourceTree = "<group>"; };
 		4725E6462160E8E500ECE43C /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
+		4725E64E2160F35600ECE43C /* FavoriteMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesView.swift; sourceTree = "<group>"; };
+		4725E6502160F36900ECE43C /* PopularMoviesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesGridView.swift; sourceTree = "<group>"; };
 		4767F80B215EFEE400517D09 /* ios-recruiting-brazil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-recruiting-brazil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4767F80E215EFEE400517D09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4767F810215EFEE400517D09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4767F810215EFEE400517D09 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4767F813215EFEE400517D09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4767F815215EFEE400517D09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4767F818215EFEE400517D09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,6 +123,47 @@
 			path = MapModel;
 			sourceTree = "<group>";
 		};
+		4725E6492160F17C00ECE43C /* PopularMoviesGrid */ = {
+			isa = PBXGroup;
+			children = (
+				4725E64D2160F32B00ECE43C /* View */,
+			);
+			path = PopularMoviesGrid;
+			sourceTree = "<group>";
+		};
+		4725E64A2160F1F200ECE43C /* FavoriteMovies */ = {
+			isa = PBXGroup;
+			children = (
+				4725E64C2160F31D00ECE43C /* View */,
+			);
+			path = FavoriteMovies;
+			sourceTree = "<group>";
+		};
+		4725E64B2160F20900ECE43C /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4767F810215EFEE400517D09 /* TabBarViewController.swift */,
+				4767F812215EFEE400517D09 /* Main.storyboard */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		4725E64C2160F31D00ECE43C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4725E64E2160F35600ECE43C /* FavoriteMoviesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4725E64D2160F32B00ECE43C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4725E6502160F36900ECE43C /* PopularMoviesGridView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4767F802215EFEE400517D09 = {
 			isa = PBXGroup;
 			children = (
@@ -144,8 +189,6 @@
 			children = (
 				4767F82E215EFFDD00517D09 /* Resources */,
 				4767F82F215F000800517D09 /* Sources */,
-				4767F810215EFEE400517D09 /* ViewController.swift */,
-				4767F812215EFEE400517D09 /* Main.storyboard */,
 			);
 			path = "ios-recruiting-brazil";
 			sourceTree = "<group>";
@@ -208,6 +251,9 @@
 		4767F833215F00A700517D09 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4725E64B2160F20900ECE43C /* TabBar */,
+				4725E64A2160F1F200ECE43C /* FavoriteMovies */,
+				4725E6492160F17C00ECE43C /* PopularMoviesGrid */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -449,8 +495,10 @@
 				4725E6422160E86C00ECE43C /* RequestProvider.swift in Sources */,
 				4725E6452160E8C200ECE43C /* Response+MapModel.swift in Sources */,
 				4725E63F2160E83700ECE43C /* RequestProtocol.swift in Sources */,
-				4767F811215EFEE400517D09 /* ViewController.swift in Sources */,
+				4767F811215EFEE400517D09 /* TabBarViewController.swift in Sources */,
+				4725E6512160F36900ECE43C /* PopularMoviesGridView.swift in Sources */,
 				4767F80F215EFEE400517D09 /* AppDelegate.swift in Sources */,
+				4725E64F2160F35600ECE43C /* FavoriteMoviesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
