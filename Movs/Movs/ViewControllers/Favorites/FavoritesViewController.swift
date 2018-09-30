@@ -15,6 +15,7 @@ class FavoritesViewController: UIViewController {
     init() {
         super.init(nibName: FavoritesViewController.nibName, bundle: nil)
         tabBarItem.title = "Favorites"
+        tabBarItem.image = UIImage(named: "tabItemFavorites")
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -15,6 +15,7 @@ class MoviesViewController: UIViewController {
     init() {
         super.init(nibName: MoviesViewController.nibName, bundle: nil)
         tabBarItem.title = "Movies"
+        tabBarItem.image = UIImage(named: "tabItemList")
     }
 
     required init?(coder aDecoder: NSCoder) {
