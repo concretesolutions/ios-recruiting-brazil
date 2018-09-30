@@ -9,6 +9,7 @@ target 'ios-recruiting-brazil' do
   pod 'Moya/RxSwift'
   pod 'ModelMapper'
   pod 'RealmSwift'
+  pod 'SnapKit'
 
   target 'ios-recruiting-brazilTests' do
     inherit! :search_paths
