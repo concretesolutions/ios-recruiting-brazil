@@ -7,21 +7,26 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 final class PopularMoviesGridView: UIViewController {
+    
+    // MARK: Private Variables
+    private let disposeBag = DisposeBag()
+    
+    // MARK: Lazy variable
+    private lazy var collection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collection = UICollectionView(frame: self.view.frame,
+                                          collectionViewLayout: UICollectionViewFlowLayout())
+        collection.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
+        collection.backgroundColor = UIColor.white
+        return collection
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .red
-        let button: UIButton = UIButton(frame: CGRect(x: view.bounds.width / 2.0-50.0, y: view.bounds.height / 2.0, width: 100.0, height: 50.0))
-        button.backgroundColor = UIColor.black
-        button.addTarget(self, action: #selector(pushToNextVC), for: .touchUpInside)
-        self.view.addSubview(button)
-    }
-    
-    @objc func pushToNextVC() {
-        let newVC = UIViewController()
-        newVC.view.backgroundColor = UIColor.red
-        self.navigationController?.pushViewController(newVC, animated:
-            true)
     }
 }
