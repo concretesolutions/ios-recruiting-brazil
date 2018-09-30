@@ -9,14 +9,20 @@
 import UIKit
 
 class MoviesViewController: UIViewController {
-
-    static let nibName = "MoviesViewController"
+    
+    enum Constants {
+        static let nibName = "MoviesViewController"
+        static let title = "Movies"
+        static let cellIdentifier = "MoviesCollectionViewCell"
+        static let cellSpacing: CGFloat = 5.0
+    }
 
     @IBOutlet var popularCollectionView: UICollectionView!
 
     init() {
-        super.init(nibName: MoviesViewController.nibName, bundle: nil)
-        tabBarItem.title = "Movies"
+        super.init(nibName: Constants.nibName, bundle: nil)
+        title = Constants.title
+        tabBarItem.title = Constants.title
         tabBarItem.image = UIImage(named: "tabItemList")
     }
 
@@ -32,9 +38,14 @@ class MoviesViewController: UIViewController {
     private func setupCollectionView() {
         popularCollectionView.register(
             UINib(nibName: "MoviesCollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: "MoviesCollectionViewCell"
+            forCellWithReuseIdentifier: Constants.cellIdentifier
         )
-        popularCollectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        popularCollectionView.contentInset = UIEdgeInsets(
+            top: Constants.cellSpacing,
+            left: Constants.cellSpacing,
+            bottom: Constants.cellSpacing,
+            right: Constants.cellSpacing
+        )
         popularCollectionView.dataSource = self
         popularCollectionView.delegate = self
     }
@@ -42,7 +53,12 @@ class MoviesViewController: UIViewController {
 
 extension MoviesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesCollectionViewCell", for: indexPath) as? MoviesCollectionViewCell {
+        let moviesCell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: Constants.cellIdentifier,
+            for: indexPath
+        )
+        if let cell = moviesCell as? MoviesCollectionViewCell {
+            // TODO: setup cell
             return cell
         }
         return UICollectionViewCell()
@@ -70,12 +86,12 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return Constants.cellSpacing
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return Constants.cellSpacing
     }
 }

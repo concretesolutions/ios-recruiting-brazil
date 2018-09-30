@@ -10,9 +10,12 @@ import UIKit
 
 class MoviesCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet var favoriteButton: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        let favoriteImage = UIImage(named: "buttonFavorite")?.withRenderingMode(.alwaysTemplate)
+        favoriteButton.setImage(favoriteImage, for: .normal)
     }
 
 }

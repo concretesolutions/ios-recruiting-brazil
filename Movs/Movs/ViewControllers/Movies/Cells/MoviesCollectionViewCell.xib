@@ -13,33 +13,47 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MoviesCollectionViewCell" customModule="Movs" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+            <rect key="frame" x="0.0" y="0.0" width="170" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+                <rect key="frame" x="0.0" y="0.0" width="170" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcE-ls-aqJ">
-                        <rect key="frame" x="0.0" y="150" width="150" height="30"/>
+                        <rect key="frame" x="0.0" y="170" width="170" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Violet Evergarden" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEJ-WJ-kL7">
-                                <rect key="frame" x="3" y="0.0" width="144" height="30"/>
+                                <rect key="frame" x="3" y="0.0" width="164" height="30"/>
+                                <color key="backgroundColor" red="0.17238631839999999" green="0.187818706" blue="0.27472317219999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.90496855970000001" green="0.74709385630000003" blue="0.32595163579999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHe-vE-5mA">
+                                <rect key="frame" x="140" y="0.0" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.17238631839999999" green="0.187818706" blue="0.27472317219999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="oFV-1S-HeL"/>
+                                </constraints>
+                                <color key="tintColor" red="0.90496855970000001" green="0.74709385630000003" blue="0.32595163579999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                                <state key="normal" image="buttonFavorite"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.17238631839999999" green="0.187818706" blue="0.27472317219999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gEJ-WJ-kL7" secondAttribute="trailing" constant="3" id="1O7-1H-7xS"/>
+                            <constraint firstAttribute="trailing" secondItem="MHe-vE-5mA" secondAttribute="trailing" id="FhJ-HU-F8L"/>
                             <constraint firstAttribute="bottom" secondItem="gEJ-WJ-kL7" secondAttribute="bottom" id="SiR-pi-FlZ"/>
+                            <constraint firstAttribute="bottom" secondItem="MHe-vE-5mA" secondAttribute="bottom" id="c61-9A-2bf"/>
                             <constraint firstAttribute="height" constant="30" id="qP9-Z0-MzP"/>
                             <constraint firstItem="gEJ-WJ-kL7" firstAttribute="top" secondItem="hcE-ls-aqJ" secondAttribute="top" id="rwR-3b-fTk"/>
                             <constraint firstItem="gEJ-WJ-kL7" firstAttribute="leading" secondItem="hcE-ls-aqJ" secondAttribute="leading" constant="3" id="sfg-X3-qlh"/>
+                            <constraint firstItem="MHe-vE-5mA" firstAttribute="top" secondItem="hcE-ls-aqJ" secondAttribute="top" id="x2s-La-kZj"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movieImageSample" translatesAutoresizingMaskIntoConstraints="NO" id="t6m-qI-GOx">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
                     </imageView>
                 </subviews>
             </view>
@@ -54,11 +68,15 @@
                 <constraint firstItem="t6m-qI-GOx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qh1-DT-f1A"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="149" height="184"/>
-            <point key="canvasLocation" x="211.19999999999999" y="214.99250374812596"/>
+            <size key="customSize" width="169" height="204"/>
+            <connections>
+                <outlet property="favoriteButton" destination="MHe-vE-5mA" id="Fjo-9f-NbP"/>
+            </connections>
+            <point key="canvasLocation" x="227.19999999999999" y="205.99700149925039"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="movieImageSample" width="600" height="900"/>
+        <image name="buttonFavorite" width="22" height="21"/>
+        <image name="movieImageSample" width="300" height="450"/>
     </resources>
 </document>
