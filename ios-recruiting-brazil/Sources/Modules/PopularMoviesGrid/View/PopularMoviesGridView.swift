@@ -25,8 +25,36 @@ final class PopularMoviesGridView: UIViewController {
         return collection
     }()
     
+    private lazy var activity: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .gray)
+        activity.center = self.view.center
+        activity.hidesWhenStopped = true
+        return activity
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupViewConfiguration()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = .red
+//        self.view.backgroundColor = .red
+    }
+}
+
+extension PopularMoviesGridView: ViewConfiguration {
+    func buildViewHierarchy() {
+        self.view.addSubview(self.collection)
+        self.view.addSubview(self.activity)
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            self.collection.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.collection.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            self.collection.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            self.collection.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
     }
 }
