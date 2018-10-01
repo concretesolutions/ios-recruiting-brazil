@@ -11,8 +11,8 @@ import Moya
 import RxSwift
 
 protocol MovieDetailServiceType {
-    func fetGender() -> Observable<[GenderModel]>
-    func fentMovieInRealm(id: Int) -> MovieModel?
+    func fetchGender() -> Observable<[GenderModel]>
+    func fetchMovieInRealm(id: Int) -> MovieModel?
     func removeMovie(id: Int)
     func save(movie: MovieModel)
 }
@@ -26,7 +26,7 @@ final class MovieDetailService: MovieDetailServiceType {
         self.provider = provider
     }
     
-    func fetGender() -> Observable<[GenderModel]> {
+    func fetchGender() -> Observable<[GenderModel]> {
         // this map is necessary becau the API not respecty the REST
         return self.provider
             .requestJSON(MovieDetailTargetType.genders)
@@ -50,7 +50,7 @@ final class MovieDetailService: MovieDetailServiceType {
         })
     }
     
-    func fentMovieInRealm(id: Int) -> MovieModel? {
+    func fetchMovieInRealm(id: Int) -> MovieModel? {
         guard let movie = try? RealmWrapper.readFirst(RLMMovieModel.self,
                                                       filter: "id = \(id)") else {
             return nil

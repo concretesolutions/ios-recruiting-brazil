@@ -51,7 +51,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     }
     
     var imgFavorite: String {
-        guard self.service.fentMovieInRealm(id: self.movie.id) != nil else {
+        guard self.service.fetchMovieInRealm(id: self.movie.id) != nil else {
             return "favorite_gray_icon"
         }
         
@@ -65,7 +65,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     }
     
     private func fetchGender() {
-        self.service.fetGender().reduce(self.movie, accumulator: { (movie, genders) -> MovieModel in
+        self.service.fetchGender().reduce(self.movie, accumulator: { (movie, genders) -> MovieModel in
             let filter = genders.filter({ self.movie.genders.contains($0) })
             var newMovie = movie
             newMovie.genders = filter
@@ -79,7 +79,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     }
     
     func saveFavorite() {
-        guard (service.fentMovieInRealm(id: self.movie.id)) != nil else {
+        guard (service.fetchMovieInRealm(id: self.movie.id)) != nil else {
             self.service.save(movie: self.movie)
             return
         }

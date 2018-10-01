@@ -20,7 +20,7 @@ final class MockMovieDetailService: MovieDetailServiceType {
     
     private var provider = RequestMockProvider<MovieDetailTargetTypeMock>()
     
-    func fetGender() -> Observable<[GenderModel]> {
+    func fetchGender() -> Observable<[GenderModel]> {
         if fetchGenderSuccess {
             return self.provider.requestArray(MovieDetailTargetTypeMock.genders)
         } else {
@@ -28,7 +28,7 @@ final class MockMovieDetailService: MovieDetailServiceType {
         }
     }
     
-    func fentMovieInRealm(id: Int) -> MovieModel? {
+    func fetchMovieInRealm(id: Int) -> MovieModel? {
         if fetchMovieInRealmSuccess {
             return MovieModel(id: 272,
                               posterPath: "/65JWXDCAfwHhJKnDwRnEgVB411X.jpg",

@@ -34,16 +34,6 @@ class MovieDetailViewModelSpec: QuickSpec {
                                                       service: self.service)
             }
             
-            /*
-             var title: String? { get }
-             var year: String? { get }
-             var desc: String? { get }
-             var gender: String? { get }
-             var imgURL: String { get }
-             var imgFavorite: String { get }
-             var reload: Variable<Bool> { get }
-             */
-            
             it("the movie gender should be not nil") {
                 expect(self.viewModel.gender).to(equal("Action"))
             }
