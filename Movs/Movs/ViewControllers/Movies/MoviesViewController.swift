@@ -41,7 +41,7 @@ class MoviesViewController: UIViewController {
 
     private func setupCollectionView() {
         popularCollectionView.register(
-            UINib(nibName: "MoviesCollectionViewCell", bundle: nil),
+            UINib(nibName: Constants.cellIdentifier, bundle: nil),
             forCellWithReuseIdentifier: Constants.cellIdentifier
         )
         popularCollectionView.contentInset = UIEdgeInsets(

@@ -12,11 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MovieDetailsViewController" customModule="Movs" customModuleProvider="target">
             <connections>
-                <outlet property="favoriteButton" destination="GDz-eT-pPz" id="ISD-QB-LfB"/>
                 <outlet property="imageHeight" destination="lZl-yX-Tre" id="FZc-Ms-hZT"/>
                 <outlet property="lbCategory" destination="3DD-ne-jqD" id="NBk-H3-fQ2"/>
                 <outlet property="lbDescription" destination="bs9-8d-TXc" id="aWb-5p-32J"/>
-                <outlet property="lbTitle" destination="Sfw-eE-fcY" id="99r-9U-xK0"/>
                 <outlet property="lbYear" destination="xiy-bK-PNG" id="Qa9-u0-suJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,10 +28,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vdf-yY-mpx">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="419"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="jN9-MB-X3Q">
-                                    <rect key="frame" x="8" y="8" width="304" height="403"/>
+                                    <rect key="frame" x="8" y="8" width="304" height="384"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movieImageSample" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-E6-s2F">
                                             <rect key="frame" x="0.0" y="0.0" width="304" height="223"/>
@@ -41,45 +39,8 @@
                                                 <constraint firstAttribute="height" constant="223" id="lZl-yX-Tre"/>
                                             </constraints>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXg-00-VKd">
-                                            <rect key="frame" x="0.0" y="224" width="304" height="40"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Violet Evergarden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfw-eE-fcY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="256" height="40"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDz-eT-pPz">
-                                                    <rect key="frame" x="264" y="0.0" width="40" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="kkv-Lh-neR"/>
-                                                    </constraints>
-                                                    <color key="tintColor" red="0.90496855970000001" green="0.74709385630000003" blue="0.32595163579999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <state key="normal" image="buttonFavorite"/>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="Sfw-eE-fcY" firstAttribute="leading" secondItem="sXg-00-VKd" secondAttribute="leading" id="CHf-Kn-W6V"/>
-                                                <constraint firstAttribute="bottom" secondItem="GDz-eT-pPz" secondAttribute="bottom" id="DWm-RO-5wc"/>
-                                                <constraint firstItem="Sfw-eE-fcY" firstAttribute="top" secondItem="sXg-00-VKd" secondAttribute="top" id="IYR-xH-kjb"/>
-                                                <constraint firstAttribute="height" constant="40" id="bPi-le-fES"/>
-                                                <constraint firstItem="GDz-eT-pPz" firstAttribute="leading" secondItem="Sfw-eE-fcY" secondAttribute="trailing" constant="8" id="dgf-GG-oN2"/>
-                                                <constraint firstItem="GDz-eT-pPz" firstAttribute="top" secondItem="sXg-00-VKd" secondAttribute="top" id="kjs-4y-tNs"/>
-                                                <constraint firstAttribute="trailing" secondItem="GDz-eT-pPz" secondAttribute="trailing" id="nqZ-b0-Zmq"/>
-                                                <constraint firstAttribute="bottom" secondItem="Sfw-eE-fcY" secondAttribute="bottom" id="vA3-Pv-Ehz"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A2W-kq-fBp">
-                                            <rect key="frame" x="0.0" y="265" width="304" height="1"/>
-                                            <color key="backgroundColor" red="0.5742490291595459" green="0.58006209135055542" blue="0.62464296817779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="ffh-Zk-cco"/>
-                                            </constraints>
-                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EbH-PD-Qy8">
-                                            <rect key="frame" x="0.0" y="267" width="304" height="40"/>
+                                            <rect key="frame" x="0.0" y="224" width="304" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xiy-bK-PNG">
                                                     <rect key="frame" x="0.0" y="0.0" width="304" height="40"/>
@@ -98,14 +59,14 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccB-Bb-DPq">
-                                            <rect key="frame" x="0.0" y="308" width="304" height="1"/>
+                                            <rect key="frame" x="0.0" y="265" width="304" height="1"/>
                                             <color key="backgroundColor" red="0.57424902919999998" green="0.58006209139999998" blue="0.62464296819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="Aok-2J-sb1"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Xc-CZ-4c9">
-                                            <rect key="frame" x="0.0" y="310" width="304" height="40"/>
+                                            <rect key="frame" x="0.0" y="267" width="304" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drama" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DD-ne-jqD">
                                                     <rect key="frame" x="0.0" y="0.0" width="304" height="40"/>
@@ -124,17 +85,17 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXh-JQ-F8r">
-                                            <rect key="frame" x="0.0" y="351" width="304" height="1"/>
+                                            <rect key="frame" x="0.0" y="308" width="304" height="1"/>
                                             <color key="backgroundColor" red="0.57424902919999998" green="0.58006209139999998" blue="0.62464296819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="Epf-MS-oSa"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vv3-Sb-cHf">
-                                            <rect key="frame" x="0.0" y="353" width="304" height="50"/>
+                                            <rect key="frame" x="0.0" y="310" width="304" height="74"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Violet Evergarden tells the story of a girl that was raised for the war in a post-war scenario." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bs9-8d-TXc">
-                                                    <rect key="frame" x="0.0" y="5" width="304" height="40"/>
+                                                    <rect key="frame" x="0.0" y="5" width="304" height="64"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -184,7 +145,6 @@
         </view>
     </objects>
     <resources>
-        <image name="buttonFavorite" width="22" height="21"/>
         <image name="movieImageSample" width="300" height="450"/>
     </resources>
 </document>

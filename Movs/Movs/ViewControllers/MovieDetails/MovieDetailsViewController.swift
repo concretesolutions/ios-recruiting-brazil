@@ -12,20 +12,17 @@ class MovieDetailsViewController: UIViewController {
 
     enum Constants {
         static let nibName = "MovieDetailsViewController"
-        static let title = "Movie Details"
     }
 
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
-    @IBOutlet weak var favoriteButton: UIButton!
 
-    @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbYear: UILabel!
     @IBOutlet weak var lbCategory: UILabel!
     @IBOutlet weak var lbDescription: UILabel!
 
     init() {
         super.init(nibName: Constants.nibName, bundle: nil)
-        self.title = Constants.title
+        self.title = "Violet Evergarden"
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,21 +33,32 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
 
+        let image = UIImage(named: "buttonFavorite")?.withRenderingMode(.alwaysTemplate)
+        let rightButtonItem = UIBarButtonItem(
+            image: image,
+            style: .plain,
+            target: self,
+            action: #selector(onFavoriteButtonTapped)
+        )
+        navigationItem.rightBarButtonItem = rightButtonItem
+
         lbDescription.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-            + " ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"
-            + " aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum"
-            + " dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia"
-            + " deserunt mollit anim id est laborum."
-            + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-            + " ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut"
-            + " aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum"
-            + " dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia"
-            + " deserunt mollit anim id est laborum."
+        + " ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
+        + " aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum"
+        + " dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia"
+        + " deserunt mollit anim id est laborum."
+        + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+        + " ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
+        + " aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum"
+        + " dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia"
+        + " deserunt mollit anim id est laborum."
+    }
+
+    @objc private func onFavoriteButtonTapped() {
+        print("Favorited")
     }
 
     private func setupViews() {
         imageHeight.constant = UIScreen.main.bounds.width - 16
-        let favoriteImage = UIImage(named: "buttonFavorite")?.withRenderingMode(.alwaysTemplate)
-        favoriteButton.setImage(favoriteImage, for: .normal)
     }
 }
