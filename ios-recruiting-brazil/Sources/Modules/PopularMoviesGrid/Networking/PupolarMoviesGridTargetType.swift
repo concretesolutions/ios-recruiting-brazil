@@ -51,8 +51,6 @@ extension MoviesTargetType: TargetType {
                                                        "page": page,
                                                        "query": search],
                                           encoding: URLEncoding.default)
-        default:
-            return .requestPlain
         }
     }
     

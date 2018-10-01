@@ -37,7 +37,7 @@ final class MovieDetailService: MovieDetailServiceType {
                     let genders = dic["genres"] as? NSArray else {
                         return []
                     }
-                    return try Array(genders)
+                    return Array(genders)
                         .map({ $0 as? NSDictionary })
                         .filter({ $0 != nil })
                         .map({ gender -> GenderModel in
@@ -66,4 +66,3 @@ final class MovieDetailService: MovieDetailServiceType {
         _ = RealmWrapper.write(movie.asRealm())
     }
 }
-

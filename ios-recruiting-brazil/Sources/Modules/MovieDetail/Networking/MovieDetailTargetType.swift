@@ -31,11 +31,11 @@ extension MovieDetailTargetType: TargetType {
     }
     
     var task: Task {
-        return .requestParameters(parameters: ["api_key" : "9ddaf105f04f0d57967901a059565af4"],
+        return .requestParameters(parameters: ["api_key": "9ddaf105f04f0d57967901a059565af4"],
                                   encoding: URLEncoding.default)
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return nil
     }
 }

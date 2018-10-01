@@ -44,7 +44,8 @@ extension StoryboardLoadable {
     
     static func loadFromStoryboard() -> Self {
         let storyboard = UIStoryboard(name: self.storyboardName, bundle: nil)
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: self.storyboardIdentifier) as? Self else {
+        guard let viewController = storyboard
+            .instantiateViewController(withIdentifier: self.storyboardIdentifier) as? Self else {
             fatalError("The view controller \(self.storyboardIdentifier) expected its root view to be of type \(self)")
         }
         return viewController

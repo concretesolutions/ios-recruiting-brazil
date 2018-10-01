@@ -81,7 +81,9 @@ final class PopularMoviesGridController: UIViewController, StoryboardLoadable {
 }
 
 extension PopularMoviesGridController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.width - 20.0) / 2.0
         return CGSize(width: width, height: 200)
     }

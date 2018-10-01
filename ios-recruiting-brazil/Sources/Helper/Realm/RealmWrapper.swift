@@ -34,7 +34,7 @@ class RealmWrapper {
     static func update(_ obj: [Object]) -> Bool {
         guard let realm = realm() else { return false }
         var result = true
-        obj.forEach { object in
+        obj.forEach { _ in
             do {
                 _ = try realm.write { () -> Void in
                     realm.add(obj, update: true)

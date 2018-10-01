@@ -47,7 +47,7 @@ final class MovieDetailController: UITableViewController, StoryboardLoadable {
     
     @IBAction func favoriteAction(sender: UIButton) {
         self.viewModel.saveFavorite()
-        self.btFavorite.setImage(UIImage(named: self.viewModel.imgFavorite ?? ""),
+        self.btFavorite.setImage(UIImage(named: self.viewModel.imgFavorite),
                                   for: .normal)
     }
 }

@@ -51,7 +51,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     }
     
     var imgFavorite: String {
-        guard let exist = self.service.fentMovieInRealm(id: self.movie.id) else {
+        guard self.service.fentMovieInRealm(id: self.movie.id) != nil else {
             return "favorite_gray_icon"
         }
         
@@ -79,7 +79,7 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
     }
     
     func saveFavorite() {
-        guard let realmMovie = self.service.fentMovieInRealm(id: self.movie.id) else {
+        guard (service.fentMovieInRealm(id: self.movie.id)) != nil else {
             self.service.save(movie: self.movie)
             return
         }
