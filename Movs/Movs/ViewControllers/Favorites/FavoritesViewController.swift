@@ -10,11 +10,15 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
-    static let nibName = "FavoritesViewController"
+    enum Constants {
+        static let nibName = "FavoritesViewController"
+        static let title = "Favorites"
+    }
 
     init() {
-        super.init(nibName: FavoritesViewController.nibName, bundle: nil)
-        tabBarItem.title = "Favorites"
+        super.init(nibName: Constants.nibName, bundle: nil)
+        self.title = Constants.title
+        tabBarItem.title = Constants.title
         tabBarItem.image = UIImage(named: "tabItemFavorites")
     }
 
@@ -24,7 +28,5 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 }

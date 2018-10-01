@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             UINavigationController(rootViewController: MoviesViewController()),
-            FavoritesViewController()
+            UINavigationController(rootViewController: FavoritesViewController())
         ]
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabBarController
