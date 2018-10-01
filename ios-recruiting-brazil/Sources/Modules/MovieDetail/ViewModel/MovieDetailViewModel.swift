@@ -24,7 +24,7 @@ protocol MovieDetailViewModelType {
 final class MovieDetailViewModel: MovieDetailViewModelType {
 
     private var movie: MovieModel
-    private var service: MovieDetailService
+    private var service: MovieDetailServiceType
     private let disposeBag = DisposeBag()
     
     var reload = Variable(false)
@@ -58,9 +58,9 @@ final class MovieDetailViewModel: MovieDetailViewModelType {
         return "favorite_full_icon"
     }
     
-    init(movie: MovieModel) {
+    init(movie: MovieModel, service: MovieDetailServiceType) {
         self.movie = movie
-        self.service = MovieDetailService(provider: RequestProvider<MovieDetailTargetType>())
+        self.service = service
         self.fetchGender()
     }
     

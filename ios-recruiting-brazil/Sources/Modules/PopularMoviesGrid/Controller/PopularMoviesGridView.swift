@@ -50,7 +50,8 @@ final class PopularMoviesGridController: UIViewController, StoryboardLoadable {
         
         collection.rx.modelSelected(MovieModel.self).subscribe(onNext: {[weak self] movie in
             let movieDetail = MovieDetailController.loadFromStoryboard()
-            movieDetail.prepareForShow(viewModel: MovieDetailViewModel(movie: movie))
+            movieDetail.prepareForShow(viewModel: MovieDetailViewModel(movie: movie,
+                                                                       service: MovieDetailService()))
             self?.navigationController?.pushViewController(movieDetail, animated: true)
         }).disposed(by: self.disposeBag)
     }

@@ -10,12 +10,19 @@ import Foundation
 import Moya
 import RxSwift
 
-final class MovieDetailService {
+protocol MovieDetailServiceType {
+    func fetGender() -> Observable<[GenderModel]>
+    func fentMovieInRealm(id: Int) -> MovieModel?
+    func removeMovie(id: Int)
+    func save(movie: MovieModel)
+}
+
+final class MovieDetailService: MovieDetailServiceType {
     
     // MARK: Private Variables
     private var provider: RequestProvider<MovieDetailTargetType>
     
-    init(provider: RequestProvider<MovieDetailTargetType>) {
+    init(provider: RequestProvider<MovieDetailTargetType> = RequestProvider<MovieDetailTargetType>()) {
         self.provider = provider
     }
     

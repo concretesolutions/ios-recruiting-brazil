@@ -10,12 +10,16 @@ import Foundation
 import RxSwift
 import Moya
 
-final class PupolarMoviesGridService {
+protocol PupolarMoviesGridServiceType {
+    func fetchMovies(target: MoviesTargetType) -> Observable<ResponsePopularMovies>
+}
+
+final class PupolarMoviesGridService: PupolarMoviesGridServiceType {
     
     // MARK: Private Variables
     private var provider: RequestProvider<MoviesTargetType>
     
-    init(provider: RequestProvider<MoviesTargetType>) {
+    init(provider: RequestProvider<MoviesTargetType> = RequestProvider<MoviesTargetType>()) {
         self.provider = provider
     }
     

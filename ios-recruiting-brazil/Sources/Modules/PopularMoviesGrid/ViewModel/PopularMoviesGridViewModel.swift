@@ -28,10 +28,10 @@ final class PopularMoviesGridViewModel: PopularMoviesGridViewModelType {
     private let disposeBag = DisposeBag()
     private var popularPage = 1
     private var searchPage = 1
-    private var service: PupolarMoviesGridService
+    private var service: PupolarMoviesGridServiceType
     
-    init() {
-        self.service = PupolarMoviesGridService(provider: RequestProvider<MoviesTargetType>());
+    init(service: PupolarMoviesGridServiceType) {
+        self.service = service
     }
     
     func fetchMovies(search: String? = nil) {

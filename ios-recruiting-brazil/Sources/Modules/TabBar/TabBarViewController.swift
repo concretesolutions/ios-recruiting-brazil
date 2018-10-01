@@ -13,9 +13,9 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         let popularGrid = PopularMoviesGridController.loadFromStoryboard()
-        popularGrid.prepareForShow(viewModel: PopularMoviesGridViewModel())
+        popularGrid.prepareForShow(viewModel: PopularMoviesGridViewModel(service: PupolarMoviesGridService()))
         let favorite = FavoriteMoviesListController.loadFromStoryboard()
-        favorite.prepareForShow(viewModel: FavoriteMoveisListViewModel())
+        favorite.prepareForShow(viewModel: FavoriteMoveisListViewModel(service: FavoriteMoviesListService()))
         
         favorite.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag:  1)
         popularGrid.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag:  0)

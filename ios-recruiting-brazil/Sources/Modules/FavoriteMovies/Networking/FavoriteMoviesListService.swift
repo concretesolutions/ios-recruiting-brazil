@@ -8,7 +8,12 @@
 
 import Foundation
 
-final class FavoriteMoviesListService {
+protocol FavoriteMoviesListServiceType {
+    func fetchFavoreites() -> [MovieModel]?
+    func remove(movie: MovieModel)
+}
+
+final class FavoriteMoviesListService: FavoriteMoviesListServiceType {
     func fetchFavoreites() -> [MovieModel]? {
         return try? RealmWrapper
             .read(RLMMovieModel.self)

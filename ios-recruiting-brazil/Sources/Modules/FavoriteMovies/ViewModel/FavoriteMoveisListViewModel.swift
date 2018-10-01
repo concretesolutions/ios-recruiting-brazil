@@ -19,13 +19,13 @@ protocol FavoriteMoveisListViewModelType {
 
 final class FavoriteMoveisListViewModel: FavoriteMoveisListViewModelType {
     
-    private var service: FavoriteMoviesListService
+    private var service: FavoriteMoviesListServiceType
     private var originalFavoriter: [MovieModel] = []
     
     var favorites = Variable<[MovieModel]>([])
     
-    init() {
-        self.service = FavoriteMoviesListService()
+    init(service: FavoriteMoviesListServiceType) {
+        self.service = service
         self.fetchFavorites()
     }
     
