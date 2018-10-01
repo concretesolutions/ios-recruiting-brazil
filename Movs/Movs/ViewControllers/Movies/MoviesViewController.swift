@@ -18,6 +18,7 @@ class MoviesViewController: UIViewController {
     }
 
     @IBOutlet var popularCollectionView: UICollectionView!
+    let searchController = UISearchController(searchResultsController: nil)
 
     private var presenter: MoviesPresenter!
 
@@ -36,12 +37,22 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         presenter = MoviesPresenter()
         presenter.view = self
+        setupNavigationItem()
         setupCollectionView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
+    private func setupNavigationItem() {
+        searchController.searchBar.tintColor = UIColor.black
+        searchController.searchBar.placeholder = "Search movie"
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.searchController = searchController
     }
 
     private func setupCollectionView() {
@@ -104,6 +115,16 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.cellSpacing
+    }
+}
+
+extension MoviesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if searchController.isActive {
+            print("Is active")
+        } else {
+            print("Is NOT active")
+        }
     }
 }
 
