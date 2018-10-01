@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        setupAppearances()
+
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             UINavigationController(rootViewController: MoviesViewController()),
@@ -55,5 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also
         // applicationDidEnterBackground:.
+    }
+
+    // MARK: - Private functions
+
+    private func setupAppearances() {
+        UINavigationBar.appearance().barTintColor = GlobalConstants.Colors.goldenOrange
+        UINavigationBar.appearance().tintColor = UIColor.black
+
+        UITabBar.appearance().barTintColor = GlobalConstants.Colors.goldenOrange
+        UITabBar.appearance().tintColor = UIColor.black
     }
 }
