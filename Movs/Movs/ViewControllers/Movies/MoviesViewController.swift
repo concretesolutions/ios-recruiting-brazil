@@ -39,6 +39,11 @@ class MoviesViewController: UIViewController {
         setupCollectionView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
     private func setupCollectionView() {
         popularCollectionView.register(
             UINib(nibName: Constants.cellIdentifier, bundle: nil),
