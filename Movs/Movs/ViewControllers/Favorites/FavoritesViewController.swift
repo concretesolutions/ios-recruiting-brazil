@@ -17,6 +17,7 @@ class FavoritesViewController: UIViewController {
     }
 
     @IBOutlet var favoritesTableView: UITableView!
+    let searchController = UISearchController(searchResultsController: nil)
 
     init() {
         super.init(nibName: Constants.nibName, bundle: nil)
@@ -31,7 +32,18 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchBar()
         setupTableView()
+    }
+
+    // MARK: - Private methods
+
+    private func setupSearchBar() {
+        searchController.searchBar.placeholder = "Search favorite"
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.searchController = searchController
     }
 
     private func setupTableView() {
@@ -47,6 +59,9 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearching() {
+            return 1
+        }
         return 5
     }
 
@@ -70,5 +85,26 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+}
+
+extension FavoritesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if searchController.isActive {
+            print("Search is active")
+        } else {
+            print("Search is NOT active")
+        }
+        favoritesTableView.reloadData()
+    }
+
+    /**
+     Return whether the user is searching for a specific movie.
+     */
+    func isSearching() -> Bool {
+        if let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) {
+            return !text.isEmpty
+        }
+        return false
     }
 }

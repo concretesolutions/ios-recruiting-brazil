@@ -80,6 +80,9 @@ extension MoviesViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isSearching() {
+            return 3
+        }
         return 100
     }
 }
@@ -119,13 +122,17 @@ extension MoviesViewController: UISearchResultsUpdating {
         } else {
             print("Is NOT active")
         }
+        popularCollectionView.reloadData()
     }
 
     /**
      Return whether the user is searching for a specific movie.
      */
     func isSearching() -> Bool {
-        return searchController.searchBar.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true
+        if let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) {
+            return !text.isEmpty
+        }
+        return false
     }
 }
 
