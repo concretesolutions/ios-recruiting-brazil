@@ -21,20 +21,22 @@ class MovieModelSpec: QuickSpec {
     
     override func spec() {
         
-        describe("MovieModelSpec - parse") {
-            beforeEach {
-                if let path = Bundle.main.path(forResource: "MovieMock", ofType: "json") {
-                    do {
-                        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                        let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                        if let jsonResult = jsonResult as? NSDictionary{
-                            self.movie = try MovieModel(map: Mapper(JSON: jsonResult))
-                        }
-                    } catch {
-                        self.error = error
+        beforeEach {
+            if let path = Bundle.main.path(forResource: "MovieMock", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                    if let jsonResult = jsonResult as? NSDictionary{
+                        self.movie = try MovieModel(map: Mapper(JSON: jsonResult))
+                        self.RLMMovieModel = self.movie?.asRealm()
                     }
+                } catch {
+                    self.error = error
                 }
             }
+        }
+        
+        describe("MovieModelSpec - parse") {
             
             it("id", closure: {
                 expect(self.movie?.id).to(equal(272))
@@ -70,20 +72,6 @@ class MovieModelSpec: QuickSpec {
         }
         
         describe("MovieModelSpec - asRealm") {
-            beforeEach {
-                if let path = Bundle.main.path(forResource: "MovieMock", ofType: "json") {
-                    do {
-                        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                        let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                        if let jsonResult = jsonResult as? NSDictionary{
-                            self.movie = try MovieModel(map: Mapper(JSON: jsonResult))
-                            self.RLMMovieModel = self.movie?.asRealm()
-                        }
-                    } catch {
-                        self.error = error
-                    }
-                }
-            }
             
             it("id", closure: {
                 expect(self.RLMMovieModel?.id).to(equal(272))

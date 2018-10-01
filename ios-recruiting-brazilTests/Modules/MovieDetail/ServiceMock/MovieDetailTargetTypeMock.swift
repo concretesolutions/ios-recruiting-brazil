@@ -22,7 +22,7 @@ extension MovieDetailTargetTypeMock: TargetType {
     var path: String {
         switch self {
         case .genders:
-            return "GenderMock"
+            return "GendersMock"
         case .gendersError:
             return ""
         }
