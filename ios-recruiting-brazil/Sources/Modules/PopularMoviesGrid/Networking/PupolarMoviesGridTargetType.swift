@@ -16,7 +16,7 @@ enum MoviesTargetType {
 
 extension MoviesTargetType: TargetType {
     var baseURL: URL {
-        return URL(string: "https://api.themoviedb.org")!
+        return URL(string: environment.baseUrl)!
     }
     
     var path: String {
@@ -25,8 +25,6 @@ extension MoviesTargetType: TargetType {
             return "/3/movie/popular"
         case .filterMovies:
             return "/3/search/movie"
-        default:
-            return ""
         }
     }
     
@@ -34,8 +32,6 @@ extension MoviesTargetType: TargetType {
         switch self {
         case .popularMovies,
              .filterMovies:
-            return .get
-        default:
             return .get
         }
     }
@@ -47,20 +43,20 @@ extension MoviesTargetType: TargetType {
     var task: Task {
         switch self {
         case .popularMovies(let page):
-            return .requestParameters(parameters: ["api_key" : "9ddaf105f04f0d57967901a059565af4",
-                                                   "page" : page],
+            return .requestParameters(parameters: ["api_key": environment.apiKey,
+                                                   "page": page],
                                       encoding: URLEncoding.default)
         case .filterMovies(let search, let page):
-                return .requestParameters(parameters: ["api_key" : "9ddaf105f04f0d57967901a059565af4",
-                                                       "page" : page,
-                                                       "query" : search],
+                return .requestParameters(parameters: ["api_key": environment.apiKey,
+                                                       "page": page,
+                                                       "query": search],
                                           encoding: URLEncoding.default)
         default:
             return .requestPlain
         }
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return nil
     }
 }

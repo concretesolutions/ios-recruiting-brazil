@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F94A86D2162678C0070C854 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94A86C2162678C0070C854 /* Environment.swift */; };
+		1F94A870216268C90070C854 /* TargetType+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94A86F216268C90070C854 /* TargetType+Environment.swift */; };
 		4725E63F2160E83700ECE43C /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E63E2160E83700ECE43C /* RequestProtocol.swift */; };
 		4725E6422160E86C00ECE43C /* RequestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6412160E86C00ECE43C /* RequestProvider.swift */; };
 		4725E6452160E8C200ECE43C /* Response+MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4725E6442160E8C200ECE43C /* Response+MapModel.swift */; };
@@ -64,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		17E0DA7D2B80E05D0039D057 /* Pods_ios_recruiting_brazil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_recruiting_brazil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F94A86C2162678C0070C854 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		1F94A86F216268C90070C854 /* TargetType+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TargetType+Environment.swift"; sourceTree = "<group>"; };
 		4725E63E2160E83700ECE43C /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		4725E6412160E86C00ECE43C /* RequestProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProvider.swift; sourceTree = "<group>"; };
 		4725E6442160E8C200ECE43C /* Response+MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+MapModel.swift"; sourceTree = "<group>"; };
@@ -136,6 +140,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F94A86E216268B30070C854 /* TargetType */ = {
+			isa = PBXGroup;
+			children = (
+				1F94A86F216268C90070C854 /* TargetType+Environment.swift */,
+			);
+			path = TargetType;
+			sourceTree = "<group>";
+		};
 		36D56F2ED07D6A9C0F8080E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +496,7 @@
 			children = (
 				4767F817215EFEE400517D09 /* LaunchScreen.storyboard */,
 				4767F80E215EFEE400517D09 /* AppDelegate.swift */,
+				1F94A86C2162678C0070C854 /* Environment.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -501,6 +514,7 @@
 		4767F832215F009300517D09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1F94A86E216268B30070C854 /* TargetType */,
 				4725E69E2161790A00ECE43C /* Realm */,
 				4725E673216121FA00ECE43C /* UIimage */,
 				4725E65A2160FD4C00ECE43C /* UINavigationController */,
@@ -783,6 +797,7 @@
 				4725E666216106CB00ECE43C /* ViewConfigurationProtocol.swift in Sources */,
 				4725E6A821617BD600ECE43C /* RLMGenderModel.swift in Sources */,
 				4725E6512160F36900ECE43C /* PopularMoviesGridView.swift in Sources */,
+				1F94A86D2162678C0070C854 /* Environment.swift in Sources */,
 				4725E66E2161117600ECE43C /* ResponsePopularMovies.swift in Sources */,
 				4725E690216159E400ECE43C /* MovieDetailController.swift in Sources */,
 				4725E6A621617B5800ECE43C /* RLMMovieModel.swift in Sources */,
@@ -790,6 +805,7 @@
 				4725E6592160FB2F00ECE43C /* UIColor+defaults.swift in Sources */,
 				4725E69321615A9700ECE43C /* MovieDetailViewModel.swift in Sources */,
 				4767F80F215EFEE400517D09 /* AppDelegate.swift in Sources */,
+				1F94A870216268C90070C854 /* TargetType+Environment.swift in Sources */,
 				4725E64F2160F35600ECE43C /* FavoriteMoviesView.swift in Sources */,
 				4725E66A21610E2B00ECE43C /* PupolarMoviesGridTargetType.swift in Sources */,
 				4725E6A3216179D800ECE43C /* RealmWrapper.swift in Sources */,
@@ -954,7 +970,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FDD54CB72A03B352B0EE49CE /* Pods-ios-recruiting-brazil.debug.xcconfig */;
 			buildSettings = {
+				API_KEY = 9ddaf105f04f0d57967901a059565af4;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_URL = "https://api.themoviedb.org";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "ios-recruiting-brazil/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -972,7 +990,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6DCAAECDF5CFF88E35E4B024 /* Pods-ios-recruiting-brazil.release.xcconfig */;
 			buildSettings = {
+				API_KEY = 9ddaf105f04f0d57967901a059565af4;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_URL = "https://api.themoviedb.org";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "ios-recruiting-brazil/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
