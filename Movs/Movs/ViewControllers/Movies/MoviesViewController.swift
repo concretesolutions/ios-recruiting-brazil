@@ -9,7 +9,7 @@
 import UIKit
 
 class MoviesViewController: UIViewController {
-    
+
     enum Constants {
         static let nibName = "MoviesViewController"
         static let title = "Movies"
@@ -18,6 +18,8 @@ class MoviesViewController: UIViewController {
     }
 
     @IBOutlet var popularCollectionView: UICollectionView!
+
+    private var presenter: MoviesPresenter!
 
     init() {
         super.init(nibName: Constants.nibName, bundle: nil)
@@ -32,6 +34,8 @@ class MoviesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = MoviesPresenter()
+        presenter.view = self
         setupCollectionView()
     }
 
@@ -52,7 +56,8 @@ class MoviesViewController: UIViewController {
 }
 
 extension MoviesViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let moviesCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.cellIdentifier,
             for: indexPath
@@ -70,8 +75,9 @@ extension MoviesViewController: UICollectionViewDataSource {
 }
 
 extension MoviesViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        presenter.onMovieSelected()
     }
 }
 
@@ -93,5 +99,12 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.cellSpacing
+    }
+}
+
+extension MoviesViewController: MoviesView {
+    func openMovieDetails() {
+        let movieDetailsViewController = MovieDetailsViewController()
+        navigationController?.pushViewController(movieDetailsViewController, animated: true)
     }
 }

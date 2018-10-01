@@ -12,6 +12,9 @@
 		0151A9F9215DBBB5001CBC6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0151A9F7215DBBB5001CBC6F /* LaunchScreen.storyboard */; };
 		0151AA04215DBBB5001CBC6F /* MovsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AA03215DBBB5001CBC6F /* MovsTests.swift */; };
 		0151AA0F215DBBB6001CBC6F /* MovsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151AA0E215DBBB6001CBC6F /* MovsUITests.swift */; };
+		01E2931821616F6000830745 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2931621616F6000830745 /* MovieDetailsViewController.swift */; };
+		01E2931921616F6000830745 /* MovieDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2931721616F6000830745 /* MovieDetailsViewController.xib */; };
+		01E2931B216183D000830745 /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2931A216183D000830745 /* MoviesPresenter.swift */; };
 		01EB622021601EBF00327628 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB621E21601EBF00327628 /* MoviesViewController.swift */; };
 		01EB622121601EBF00327628 /* MoviesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB621F21601EBF00327628 /* MoviesViewController.xib */; };
 		01EB622421601EDB00327628 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB622221601EDB00327628 /* FavoritesViewController.swift */; };
@@ -52,6 +55,9 @@
 		0151AA0A215DBBB6001CBC6F /* MovsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0151AA0E215DBBB6001CBC6F /* MovsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsUITests.swift; sourceTree = "<group>"; };
 		0151AA10215DBBB6001CBC6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01E2931621616F6000830745 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		01E2931721616F6000830745 /* MovieDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieDetailsViewController.xib; sourceTree = "<group>"; };
+		01E2931A216183D000830745 /* MoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
 		01EB621E21601EBF00327628 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		01EB621F21601EBF00327628 /* MoviesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesViewController.xib; sourceTree = "<group>"; };
 		01EB622221601EDB00327628 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -149,10 +155,20 @@
 			path = MovsUITests;
 			sourceTree = "<group>";
 		};
+		01E2931521616F3400830745 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				01E2931621616F6000830745 /* MovieDetailsViewController.swift */,
+				01E2931721616F6000830745 /* MovieDetailsViewController.xib */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
 		01EB621B21601DFD00327628 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				01EB621D21601E9000327628 /* Favorites */,
+				01E2931521616F3400830745 /* MovieDetails */,
 				01EB621C21601E8900327628 /* Movies */,
 			);
 			path = ViewControllers;
@@ -162,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				01F784A0216138E7007E1FAE /* Cells */,
+				01E2931A216183D000830745 /* MoviesPresenter.swift */,
 				01EB621E21601EBF00327628 /* MoviesViewController.swift */,
 				01EB621F21601EBF00327628 /* MoviesViewController.xib */,
 			);
@@ -322,6 +339,7 @@
 				0151A9F6215DBBB5001CBC6F /* Assets.xcassets in Resources */,
 				01EB622521601EDB00327628 /* FavoritesViewController.xib in Resources */,
 				01EB622121601EBF00327628 /* MoviesViewController.xib in Resources */,
+				01E2931921616F6000830745 /* MovieDetailsViewController.xib in Resources */,
 				01F784A421613917007E1FAE /* MoviesCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,10 +454,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E2931821616F6000830745 /* MovieDetailsViewController.swift in Sources */,
 				0151A9EF215DBBAC001CBC6F /* AppDelegate.swift in Sources */,
 				01EB622421601EDB00327628 /* FavoritesViewController.swift in Sources */,
 				01EB622021601EBF00327628 /* MoviesViewController.swift in Sources */,
 				01F784A321613917007E1FAE /* MoviesCollectionViewCell.swift in Sources */,
+				01E2931B216183D000830745 /* MoviesPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
