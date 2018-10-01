@@ -37,7 +37,7 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         presenter = MoviesPresenter()
         presenter.view = self
-        setupNavigationItem()
+        setupSearchBar()
         setupCollectionView()
     }
 
@@ -46,7 +46,7 @@ class MoviesViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
-    private func setupNavigationItem() {
+    private func setupSearchBar() {
         searchController.searchBar.tintColor = UIColor.black
         searchController.searchBar.placeholder = "Search movie"
         searchController.searchResultsUpdater = self
@@ -74,15 +74,15 @@ class MoviesViewController: UIViewController {
 extension MoviesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let moviesCell = collectionView.dequeueReusableCell(
+        let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.cellIdentifier,
             for: indexPath
         )
-        if let cell = moviesCell as? MoviesCollectionViewCell {
+        if let moviesCell = cell as? MoviesCollectionViewCell {
             // TODO: setup cell
-            return cell
+            return moviesCell
         }
-        return UICollectionViewCell()
+        fatalError("Cell not configured")
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -126,9 +126,19 @@ extension MoviesViewController: UISearchResultsUpdating {
             print("Is NOT active")
         }
     }
+
+    /**
+     Return whether the user is searching for a specific movie.
+     */
+    func isSearching() -> Bool {
+        return searchController.searchBar.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true
+    }
 }
 
 extension MoviesViewController: MoviesView {
+    /**
+     Fetches and displays the details of the selected movie.
+     */
     func openMovieDetails() {
         let movieDetailsViewController = MovieDetailsViewController()
         navigationController?.pushViewController(movieDetailsViewController, animated: true)
