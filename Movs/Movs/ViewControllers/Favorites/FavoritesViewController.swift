@@ -19,6 +19,8 @@ class FavoritesViewController: UIViewController {
     @IBOutlet var favoritesTableView: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
 
+    private var presenter: FavoritesPresenter!
+
     init() {
         super.init(nibName: Constants.nibName, bundle: nil)
         self.title = Constants.title
@@ -32,6 +34,8 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = FavoritesPresenter()
+        presenter.view = self
         setupSearchBar()
         setupTableView()
     }
@@ -80,7 +84,7 @@ extension FavoritesViewController: UITableViewDataSource {
 
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO
+        presenter.onMovieSelected()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -106,5 +110,12 @@ extension FavoritesViewController: UISearchResultsUpdating {
             return !text.isEmpty
         }
         return false
+    }
+}
+
+extension FavoritesViewController: FavoritesView {
+    func openMovieDetails() {
+        let movieDetailsViewController = MovieDetailsViewController()
+        navigationController?.pushViewController(movieDetailsViewController, animated: true)
     }
 }
