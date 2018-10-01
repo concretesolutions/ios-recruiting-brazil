@@ -41,13 +41,7 @@ class MoviesViewController: UIViewController {
         setupCollectionView()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-
     private func setupSearchBar() {
-        searchController.searchBar.tintColor = UIColor.black
         searchController.searchBar.placeholder = "Search movie"
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false

@@ -61,10 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private functions
 
     private func setupAppearances() {
+        // Navigation Bar
         UINavigationBar.appearance().barTintColor = GlobalConstants.Colors.goldenOrange
         UINavigationBar.appearance().tintColor = UIColor.black
-
+        UINavigationBar.appearance().prefersLargeTitles = true
+        // Tab Bar
         UITabBar.appearance().barTintColor = GlobalConstants.Colors.goldenOrange
         UITabBar.appearance().tintColor = UIColor.black
+        // Search Bar
+        UISearchBar.appearance().tintColor = UIColor.black
     }
 }
