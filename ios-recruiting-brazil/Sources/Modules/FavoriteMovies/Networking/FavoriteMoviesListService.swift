@@ -16,4 +16,8 @@ final class FavoriteMoviesListService {
             .map({ MovieModel(RLMMovieModel: $0)
         })
     }
+    
+    func remove(movie: MovieModel) {
+        _ = try? RealmWrapper.remove(RLMMovieModel.self, filter: "id = \(movie.id)")
+    }
 }

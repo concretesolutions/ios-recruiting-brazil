@@ -32,6 +32,21 @@ final class FavoriteMoviesListController: UIViewController, StoryboardLoadable {
         super.viewDidAppear(animated)
         self.viewModel.fetchFavorites()
         self.setupBindSearchBar()
+        self.setupEditButtom()
+    }
+    
+    private func setupEditButtom() {
+        if tableView.isEditing {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Ok",
+                                                                     style: .plain,
+                                                                     target: self,
+                                                                     action: #selector(endEdit))
+        } else {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
+                                                                     style: .plain,
+                                                                     target: self,
+                                                                     action: #selector(startEdit))
+        }
     }
     
     private func setupBindFavorites() {
@@ -40,6 +55,16 @@ final class FavoriteMoviesListController: UIViewController, StoryboardLoadable {
                                           cellType: FavoriteCell.self)) { (_, movie: MovieModel, cell: FavoriteCell) in
                                             cell.configuration(viewModel: FavoriteCellViewModel(movie: movie))
             }.disposed(by: self.disposeBag)
+        
+        self.tableView.rx.modelSelected(MovieModel.self).subscribe(onNext: {[weak self] movie in
+            let movieDetail = MovieDetailController.loadFromStoryboard()
+            movieDetail.prepareForShow(viewModel: MovieDetailViewModel(movie: movie))
+            self?.navigationController?.pushViewController(movieDetail, animated: true)
+        }).disposed(by: self.disposeBag)
+        
+        self.tableView.rx.itemDeleted.subscribe(onNext: {[weak self] indexPath in
+            self?.viewModel.removeFavorite(index: indexPath.row)
+        }).disposed(by: self.disposeBag)
     }
     
     private func setupBindSearchBar() {
@@ -47,7 +72,17 @@ final class FavoriteMoviesListController: UIViewController, StoryboardLoadable {
             .debounce(1, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: {[weak self] text in
-                self?.viewModel.filterFAvorite(titleSearched: text ?? "")
+                self?.viewModel.filterFavorite(titleSearched: text ?? "")
             }).disposed(by: disposeBag)
+    }
+    
+    @objc private func startEdit() {
+        self.tableView.setEditing(true, animated: true)
+        self.setupEditButtom()
+    }
+    
+    @objc private func endEdit() {
+        self.tableView.setEditing(false, animated: true)
+        self.setupEditButtom()
     }
 }
