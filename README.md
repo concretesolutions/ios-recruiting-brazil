@@ -1,8 +1,37 @@
 # Concrete iOS Recruit Challenge
 
----
 
 ![Gif](assets/Logo-animado-1.gif)
+
+---
+
+## Instrucão para o build
+
+---
+
+1. install bundler
+`$ gem install bundler`
+Se você não pode instalar o brandler, não se preocupe, o bandler é somente para garantir que esta utilizando a ultima versão do Cocoapods.
+
+2. Sim, eu instalei o Bundler 😄
+agora, entre na pasta do projeto e execute o comando abaixo:
+`$ bundler install`
+Após executar o comando acima, você pode rodar o comando:
+`$ bundler exec pod install` para baixar as dependencies do projeto
+    - OBS: se você executou esse passo, você pode pular o passo 3
+    - OBS 2: se você tiver algum problema ao rodar o comando acima execute o comando `$ bundler exec pod install —repo-update`
+
+3. Não instalei o bundler 😔
+Não se preocupe, você só precisa installer o Cocoapods, para instalar o Cocoapods rode o commando abaixo:
+`$ sudo gem install cocoapods`
+Agora, entre na pasta do projeto e execute o comando
+`$ pod install`
+
+4. Otimo 👍, agora abra a pasta do projeto e click no arquivo `ios-recruiting-brazil.xcworkspace`
+
+Nome: André Vieira  
+Email: vieira.agp@gmail.com 
+
 
 ## Bem vindo
 
