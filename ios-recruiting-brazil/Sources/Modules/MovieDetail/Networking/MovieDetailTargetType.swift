@@ -15,7 +15,7 @@ enum MovieDetailTargetType {
 
 extension MovieDetailTargetType: TargetType {
     var baseURL: URL {
-        return URL(string: "https://api.themoviedb.org")!
+        return URL(string: environment.baseUrl)!
     }
     
     var path: String {
@@ -31,7 +31,7 @@ extension MovieDetailTargetType: TargetType {
     }
     
     var task: Task {
-        return .requestParameters(parameters: ["api_key": "9ddaf105f04f0d57967901a059565af4"],
+        return .requestParameters(parameters: ["api_key": environment.apiKey],
                                   encoding: URLEncoding.default)
     }
     
