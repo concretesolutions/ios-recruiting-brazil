@@ -15,6 +15,8 @@
 		EB98E8B52162F4800025CD55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB98E8B32162F4800025CD55 /* LaunchScreen.storyboard */; };
 		EB98E8C02162F4800025CD55 /* RMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8BF2162F4800025CD55 /* RMovieTests.swift */; };
 		EB98E8CB2162F4800025CD55 /* RMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8CA2162F4800025CD55 /* RMovieUITests.swift */; };
+		EB98E8DA2162F7880025CD55 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8D92162F7880025CD55 /* SplashViewController.swift */; };
+		EB98E8DC2162F7FF0025CD55 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = EB98E8DB2162F7FF0025CD55 /* assets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		EB98E8C62162F4800025CD55 /* RMovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMovieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB98E8CA2162F4800025CD55 /* RMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMovieUITests.swift; sourceTree = "<group>"; };
 		EB98E8CC2162F4800025CD55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB98E8D92162F7880025CD55 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		EB98E8DB2162F7FF0025CD55 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 		EB98E89B2162F47E0025CD55 = {
 			isa = PBXGroup;
 			children = (
+				EB98E8DB2162F7FF0025CD55 /* assets */,
 				EB98E8A62162F47E0025CD55 /* RMovie */,
 				EB98E8BE2162F4800025CD55 /* RMovieTests */,
 				EB98E8C92162F4800025CD55 /* RMovieUITests */,
@@ -99,6 +104,7 @@
 		EB98E8A62162F47E0025CD55 /* RMovie */ = {
 			isa = PBXGroup;
 			children = (
+				EB98E8D82162F75E0025CD55 /* ViewControllers */,
 				EB98E8A72162F47F0025CD55 /* AppDelegate.swift */,
 				EB98E8A92162F47F0025CD55 /* ViewController.swift */,
 				EB98E8AB2162F47F0025CD55 /* Main.storyboard */,
@@ -126,6 +132,14 @@
 				EB98E8CC2162F4800025CD55 /* Info.plist */,
 			);
 			path = RMovieUITests;
+			sourceTree = "<group>";
+		};
+		EB98E8D82162F75E0025CD55 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB98E8D92162F7880025CD55 /* SplashViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB98E8B52162F4800025CD55 /* LaunchScreen.storyboard in Resources */,
+				EB98E8DC2162F7FF0025CD55 /* assets in Resources */,
 				EB98E8B22162F4800025CD55 /* Assets.xcassets in Resources */,
 				EB98E8AD2162F47F0025CD55 /* Main.storyboard in Resources */,
 			);
@@ -262,6 +277,7 @@
 				EB98E8AA2162F47F0025CD55 /* ViewController.swift in Sources */,
 				EB98E8B02162F47F0025CD55 /* RMovie.xcdatamodeld in Sources */,
 				EB98E8A82162F47F0025CD55 /* AppDelegate.swift in Sources */,
+				EB98E8DA2162F7880025CD55 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
