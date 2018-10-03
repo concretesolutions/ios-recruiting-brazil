@@ -8,6 +8,14 @@
 
 import UIKit
 
-class Movie {
+class Movie: Decodable {
+    let title: String
+    let releaseDate: String
+    let overview: String
 
+    enum CodingKeys: String, CodingKey {
+        case title
+        case releaseDate = "release_date"
+        case overview
+    }
 }

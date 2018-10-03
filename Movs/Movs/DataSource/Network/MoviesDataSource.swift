@@ -10,6 +10,17 @@ import UIKit
 import RxSwift
 
 /**
+ The object representing the response of TMDB's popular movies.
+ */
+class PopularMovieResponse: Decodable {
+    let results: [Movie]
+
+    enum CodingKeys: String, CodingKey {
+        case results
+    }
+}
+
+/**
  The basic set of methods that any implementation must comform to.
  */
 protocol MoviesDataSource {
@@ -21,37 +32,22 @@ protocol MoviesDataSource {
  */
 class MoviesDataSourceImpl: MoviesDataSource {
 
-    private func fetchData(url: URL) -> Single<Data> {
-        return Single<Data>.create { observer in
-            let disposable = Disposables.create {}
-            let task = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
-                guard !disposable.isDisposed else { return }
-                if let error = error {
-                    DispatchQueue.main.async {
-                        observer(.error(error))
-                    }
-                }
-                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
-                    return
-                }
-                if let mimeType = httpResponse.mimeType, mimeType == "application/json", let data = data {
-                    DispatchQueue.main.async {
-                        observer(.success(data))
-                    }
-                }
+    func fetchPopularMovies() -> Single<[Movie]> {
+        let url: URL! = URL(string: "https://api.themoviedb.org/3/movie/popular")
+        return requestData(url: url).map({ (data: Data) -> [Movie] in
+            if let movies = self.parseMovies(data) {
+                return movies
             }
-            task.resume()
-            return disposable
-        }
+            return []
+        })
     }
 
-    func fetchPopularMovies() -> Single<[Movie]> {
-        let url: URL! = URL(string: "http://api.themoviedb.org/3/movie/popular?api_key=f1ee15e95c330dccd34b6fdd63de841d")
-        return fetchData(url: url).map({ (data: Data) -> [Movie] in
-            return [Movie(), Movie()]
-        })
+    private func parseMovies(_ data: Data) -> [Movie]? {
+        do {
+            let response = try JSONDecoder().decode(PopularMovieResponse.self, from: data)
+            return response.results
+        } catch {
+            return nil
+        }
     }
 }

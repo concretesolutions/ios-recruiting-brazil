@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol MoviesView: AnyObject {
     func openMovieDetails()
@@ -15,6 +16,20 @@ protocol MoviesView: AnyObject {
 class MoviesPresenter {
 
     weak var view: MoviesView?
+
+    private let moviesUseCase = PopularMoviesUseCase()
+    private let disposeBag = DisposeBag()
+
+    func onStart() {
+        moviesUseCase.fetchNextPopularMovies()
+            .subscribe(onSuccess: { (movies: [Movie]) in
+                print(movies.count)
+                // TODO
+            }, onError: { (error: Error) in
+                // TODO
+            })
+            .disposed(by: disposeBag)
+    }
 
     func onMovieSelected() {
         view?.openMovieDetails()

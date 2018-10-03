@@ -39,6 +39,8 @@ class MoviesViewController: UIViewController {
         presenter.view = self
         setupSearchBar()
         setupCollectionView()
+
+        presenter.onStart()
     }
 
     private func setupSearchBar() {
