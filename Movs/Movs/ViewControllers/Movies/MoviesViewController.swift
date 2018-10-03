@@ -21,6 +21,7 @@ class MoviesViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
 
     private var presenter: MoviesPresenter!
+    private var movies = [Movie]()
 
     init() {
         super.init(nibName: Constants.nibName, bundle: nil)
@@ -75,7 +76,7 @@ extension MoviesViewController: UICollectionViewDataSource {
             for: indexPath
         )
         if let moviesCell = cell as? MoviesCollectionViewCell {
-            // TODO: setup cell
+            moviesCell.setup(with: movies[indexPath.item])
             return moviesCell
         }
         fatalError("Cell not configured")
@@ -83,9 +84,9 @@ extension MoviesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isSearching() {
-            return 3
+            return 0
         }
-        return 100
+        return movies.count
     }
 }
 
@@ -139,11 +140,14 @@ extension MoviesViewController: UISearchResultsUpdating {
 }
 
 extension MoviesViewController: MoviesView {
-    /**
-     Fetches and displays the details of the selected movie.
-     */
+
     func openMovieDetails() {
         let movieDetailsViewController = MovieDetailsViewController()
         navigationController?.pushViewController(movieDetailsViewController, animated: true)
+    }
+
+    func updateWith(movies: [Movie]) {
+        self.movies = movies
+        self.popularCollectionView.reloadData()
     }
 }

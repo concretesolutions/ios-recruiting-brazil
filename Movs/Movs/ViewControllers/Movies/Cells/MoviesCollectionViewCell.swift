@@ -11,11 +11,19 @@ import UIKit
 class MoviesCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var favoriteButton: UIButton!
+    @IBOutlet var titleLabel: UILabel!
+
+    private var movie: Movie?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         let favoriteImage = UIImage(named: "buttonFavorite")?.withRenderingMode(.alwaysTemplate)
         favoriteButton.setImage(favoriteImage, for: .normal)
+    }
+
+    func setup(with movie: Movie) {
+        self.movie = movie
+        self.titleLabel.text = movie.title
     }
 
 }

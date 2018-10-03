@@ -20,16 +20,10 @@ class PopularMovieResponse: Decodable {
     }
 }
 
-/**
- The basic set of methods that any implementation must comform to.
- */
 protocol MoviesDataSource {
     func fetchPopularMovies() -> Single<[Movie]>
 }
 
-/**
- The default implementation of MoviesDataSource used in the project.
- */
 class MoviesDataSourceImpl: MoviesDataSource {
 
     func fetchPopularMovies() -> Single<[Movie]> {

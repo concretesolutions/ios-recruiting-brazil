@@ -11,6 +11,7 @@ import RxSwift
 
 protocol MoviesView: AnyObject {
     func openMovieDetails()
+    func updateWith(movies: [Movie])
 }
 
 class MoviesPresenter {
@@ -23,8 +24,7 @@ class MoviesPresenter {
     func onStart() {
         moviesUseCase.fetchNextPopularMovies()
             .subscribe(onSuccess: { (movies: [Movie]) in
-                print(movies.count)
-                // TODO
+                self.view?.updateWith(movies: movies)
             }, onError: { (error: Error) in
                 // TODO
             })
