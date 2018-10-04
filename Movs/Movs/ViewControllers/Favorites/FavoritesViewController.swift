@@ -20,6 +20,7 @@ class FavoritesViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
 
     private var presenter: FavoritesPresenter!
+    private var movies = [Movie]()
 
     init() {
         super.init(nibName: Constants.nibName, bundle: nil)
@@ -89,6 +90,14 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let unfavoriteAction = UIContextualAction(style: .destructive, title: "Unfavorite") { (_, _, _) in
+//            let movie = self.movies[indexPath.row]
+            // TODO: Delete from favorites
+        }
+        return UISwipeActionsConfiguration(actions: [unfavoriteAction])
     }
 }
 
