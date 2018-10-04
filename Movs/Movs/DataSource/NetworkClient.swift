@@ -9,7 +9,16 @@
 import UIKit
 import RxSwift
 
-func requestData(url: URL) -> Single<Data> {
+enum NetworkClientConstants {
+    static let baseURL = "https://api.themoviedb.org/3"
+    static let allowedMimeTypes = ["application/json", "image/jpeg"]
+    static let apiKey = "f1ee15e95c330dccd34b6fdd63de841d"
+}
+
+func requestData(url: String) -> Single<Data> {
+    guard let url = URL(string: "\(url)?api_key=\(NetworkClientConstants.apiKey)") else {
+        return Single.error(MovErrors.genericError)
+    }
     return Single<Data>.create { observer in
         let disposable = Disposables.create {}
         let task = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
@@ -25,7 +34,9 @@ func requestData(url: URL) -> Single<Data> {
                 }
                 return
             }
-            if let mimeType = httpResponse.mimeType, mimeType == "application/json", let data = data {
+            if let mimeType = httpResponse.mimeType,
+                NetworkClientConstants.allowedMimeTypes.contains(mimeType),
+                let data = data {
                 DispatchQueue.main.async {
                     observer(.success(data))
                 }
@@ -33,5 +44,14 @@ func requestData(url: URL) -> Single<Data> {
         }
         task.resume()
         return disposable
+    }
+}
+
+func parseDecodable<T: Decodable>(from data: Data) -> T? {
+    do {
+        let object = try JSONDecoder().decode(T.self, from: data)
+        return object
+    } catch {
+        return nil
     }
 }

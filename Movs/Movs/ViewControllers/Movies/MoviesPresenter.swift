@@ -26,7 +26,7 @@ class MoviesPresenter {
             .subscribe(onSuccess: { (movies: [Movie]) in
                 self.view?.updateWith(movies: movies)
             }, onError: { (error: Error) in
-                // TODO
+                print(error)
             })
             .disposed(by: disposeBag)
     }

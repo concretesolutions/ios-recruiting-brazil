@@ -27,8 +27,7 @@ protocol MoviesDataSource {
 class MoviesDataSourceImpl: MoviesDataSource {
 
     func fetchPopularMovies() -> Single<[Movie]> {
-        let url: URL! = URL(string: "https://api.themoviedb.org/3/movie/popular")
-        return requestData(url: url).map({ (data: Data) -> [Movie] in
+        return requestData(url: "\(NetworkClientConstants.baseURL)/movie/popular").map({ (data: Data) -> [Movie] in
             if let movies = self.parseMovies(data) {
                 return movies
             }
