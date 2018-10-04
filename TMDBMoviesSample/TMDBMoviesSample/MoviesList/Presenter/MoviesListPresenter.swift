@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+class MoviesListPresenter {
+    private weak var viewProtocol: MoviesListViewProtocol?
+    
+    init(with view: MoviesListViewProtocol) {
+        viewProtocol = view
+    }
+}
+
+extension MoviesListPresenter: MoviesListPresenterProtocol {
+    
+}

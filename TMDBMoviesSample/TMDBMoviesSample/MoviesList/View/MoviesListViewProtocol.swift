@@ -8,4 +8,6 @@
 
 import Foundation
 
-protocol MoviesListViewProtocol {}
+protocol MoviesListViewProtocol: class {
+    
+}
