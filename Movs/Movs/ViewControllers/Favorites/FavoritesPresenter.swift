@@ -11,7 +11,7 @@ import RxSwift
 
 protocol FavoritesView: AnyObject {
     func updateView(with movies: [Movie])
-    func openMovieDetails()
+    func openMovieDetails(with movie: Movie)
 }
 
 class FavoritesPresenter {
@@ -31,7 +31,7 @@ class FavoritesPresenter {
             .disposed(by: disposeBag)
     }
 
-    func onMovieSelected() {
-        view?.openMovieDetails()
+    func onMovieSelected(movie: Movie) {
+        view?.openMovieDetails(with: movie)
     }
 }

@@ -16,13 +16,18 @@ class MovieDetailsViewController: UIViewController {
 
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
 
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var lbYear: UILabel!
     @IBOutlet weak var lbCategory: UILabel!
     @IBOutlet weak var lbDescription: UILabel!
 
-    init() {
+    private var presenter: MovieDetailsPresenter
+
+    init(movie: Movie) {
+        presenter = MovieDetailsPresenter(movie: movie)
         super.init(nibName: Constants.nibName, bundle: nil)
-        self.title = "Violet Evergarden"
+        presenter.view = self
+        self.title = movie.title
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,6 +57,8 @@ class MovieDetailsViewController: UIViewController {
         + " aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum"
         + " dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia"
         + " deserunt mollit anim id est laborum."
+
+        presenter.onStart()
     }
 
     @objc private func onFavoriteButtonTapped() {
@@ -60,5 +67,15 @@ class MovieDetailsViewController: UIViewController {
 
     private func setupViews() {
         imageHeight.constant = UIScreen.main.bounds.width - 16
+    }
+}
+
+extension MovieDetailsViewController: MovieDetailsView {
+    func setup(with movie: Movie) {
+        lbYear.text = movie.releaseDate
+        lbDescription.text = movie.overview
+    }
+    func presenter(_ presenter: MovieDetailsPresenter, didFetchImage image: UIImage) {
+        self.imageView.image = image
     }
 }

@@ -87,7 +87,7 @@ extension FavoritesViewController: UITableViewDataSource {
 
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.onMovieSelected()
+        presenter.onMovieSelected(movie: movies[indexPath.row])
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -130,8 +130,8 @@ extension FavoritesViewController: FavoritesView {
         favoritesTableView.reloadData()
     }
 
-    func openMovieDetails() {
-        let movieDetailsViewController = MovieDetailsViewController()
+    func openMovieDetails(with movie: Movie) {
+        let movieDetailsViewController = MovieDetailsViewController(movie: movie)
         navigationController?.pushViewController(movieDetailsViewController, animated: true)
     }
 }
