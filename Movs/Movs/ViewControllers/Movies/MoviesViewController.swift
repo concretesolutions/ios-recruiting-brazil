@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MoviesViewController: UIViewController {
 
@@ -149,5 +150,14 @@ extension MoviesViewController: MoviesView {
     func updateWith(movies: [Movie]) {
         self.movies = movies
         self.popularCollectionView.reloadData()
+    }
+
+    func setLoading(to loading: Bool) {
+        if loading {
+            SVProgressHUD.show(withStatus: "Loading movies...")
+        } else {
+            SVProgressHUD.dismiss()
+        }
+
     }
 }

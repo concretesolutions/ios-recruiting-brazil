@@ -12,6 +12,7 @@ import RxSwift
 protocol MoviesView: AnyObject {
     func openMovieDetails(with movie: Movie)
     func updateWith(movies: [Movie])
+    func setLoading(to loading: Bool)
 }
 
 class MoviesPresenter {
@@ -22,10 +23,14 @@ class MoviesPresenter {
     private let disposeBag = DisposeBag()
 
     func onStart() {
+        view?.setLoading(to: true)
         moviesUseCase.fetchNextPopularMovies()
             .subscribe(onSuccess: { (movies: [Movie]) in
+                self.view?.setLoading(to: false)
                 self.view?.updateWith(movies: movies)
             }, onError: { (error: Error) in
+                self.view?.setLoading(to: false)
+                // TODO
                 print(error)
             })
             .disposed(by: disposeBag)
