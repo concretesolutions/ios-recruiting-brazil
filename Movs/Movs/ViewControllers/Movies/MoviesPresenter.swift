@@ -18,7 +18,7 @@ class MoviesPresenter {
 
     weak var view: MoviesView?
 
-    private let moviesUseCase = PopularMoviesUseCase()
+    private let moviesUseCase = MoviesUseCase()
     private let disposeBag = DisposeBag()
 
     func onStart() {

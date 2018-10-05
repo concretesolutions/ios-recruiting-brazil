@@ -12,7 +12,7 @@ import RxSwift
 /**
  Handles the fetching of Movies and the "load more" feature.
  */
-class PopularMoviesUseCase {
+class MoviesUseCase {
 
     private let moviesDataSource: MoviesDataSource = MoviesDataSourceImpl()
     private var currentPage = 0
@@ -27,5 +27,13 @@ class PopularMoviesUseCase {
                 })
                 return movies
             })
+    }
+
+    func favoriteMovie(_ movie: Movie) -> Completable {
+        return moviesDataSource.addToFavorites(movie)
+    }
+
+    func unfavoriteMovie(_ movie: Movie) -> Completable {
+        return moviesDataSource.removefromFavorites(movie)
     }
 }
