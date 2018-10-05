@@ -15,8 +15,16 @@
 		EB98E8B52162F4800025CD55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB98E8B32162F4800025CD55 /* LaunchScreen.storyboard */; };
 		EB98E8C02162F4800025CD55 /* RMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8BF2162F4800025CD55 /* RMovieTests.swift */; };
 		EB98E8CB2162F4800025CD55 /* RMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8CA2162F4800025CD55 /* RMovieUITests.swift */; };
-		EB98E8DA2162F7880025CD55 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8D92162F7880025CD55 /* SplashViewController.swift */; };
 		EB98E8DC2162F7FF0025CD55 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = EB98E8DB2162F7FF0025CD55 /* assets */; };
+		EB98E8DE21643BDB0025CD55 /* RM_UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8DD21643BDB0025CD55 /* RM_UINavigationController.swift */; };
+		EB98E8E5216443220025CD55 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB98E8E4216443220025CD55 /* Alamofire.framework */; };
+		EB98E8E6216443220025CD55 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB98E8E4216443220025CD55 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB98E8EA216443D00025CD55 /* RM_HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8E9216443D00025CD55 /* RM_HTTP.swift */; };
+		EB98E8EC216588900025CD55 /* RM_HTTP_Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8EB216588900025CD55 /* RM_HTTP_Genres.swift */; };
+		EB98E8EE216588F90025CD55 /* RM_HTTP_Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8ED216588F90025CD55 /* RM_HTTP_Movies.swift */; };
+		EB98E8F1216593CA0025CD55 /* RM_Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8F0216593CA0025CD55 /* RM_Movie.swift */; };
+		EB98E8F32166E25E0025CD55 /* RM_MoviesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8F22166E25E0025CD55 /* RM_MoviesTableViewController.swift */; };
+		EB98E8F721675DBF0025CD55 /* RM_MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8F621675DBF0025CD55 /* RM_MovieTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +44,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EB98E8E7216443230025CD55 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB98E8E6216443220025CD55 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		EB98E8A42162F47E0025CD55 /* RMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB98E8A72162F47F0025CD55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,8 +73,15 @@
 		EB98E8C62162F4800025CD55 /* RMovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMovieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB98E8CA2162F4800025CD55 /* RMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMovieUITests.swift; sourceTree = "<group>"; };
 		EB98E8CC2162F4800025CD55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB98E8D92162F7880025CD55 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		EB98E8DB2162F7FF0025CD55 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
+		EB98E8DD21643BDB0025CD55 /* RM_UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_UINavigationController.swift; sourceTree = "<group>"; };
+		EB98E8E4216443220025CD55 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB98E8E9216443D00025CD55 /* RM_HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_HTTP.swift; sourceTree = "<group>"; };
+		EB98E8EB216588900025CD55 /* RM_HTTP_Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_HTTP_Genres.swift; sourceTree = "<group>"; };
+		EB98E8ED216588F90025CD55 /* RM_HTTP_Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_HTTP_Movies.swift; sourceTree = "<group>"; };
+		EB98E8F0216593CA0025CD55 /* RM_Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_Movie.swift; sourceTree = "<group>"; };
+		EB98E8F22166E25E0025CD55 /* RM_MoviesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_MoviesTableViewController.swift; sourceTree = "<group>"; };
+		EB98E8F621675DBF0025CD55 /* RM_MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_MovieTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB98E8E5216443220025CD55 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +113,7 @@
 		EB98E89B2162F47E0025CD55 = {
 			isa = PBXGroup;
 			children = (
+				EB98E8E4216443220025CD55 /* Alamofire.framework */,
 				EB98E8DB2162F7FF0025CD55 /* assets */,
 				EB98E8A62162F47E0025CD55 /* RMovie */,
 				EB98E8BE2162F4800025CD55 /* RMovieTests */,
@@ -104,6 +135,9 @@
 		EB98E8A62162F47E0025CD55 /* RMovie */ = {
 			isa = PBXGroup;
 			children = (
+				EB98E8EF216593B40025CD55 /* Models */,
+				EB98E8E82164439D0025CD55 /* WS */,
+				EB98E8E121643DEE0025CD55 /* Views */,
 				EB98E8D82162F75E0025CD55 /* ViewControllers */,
 				EB98E8A72162F47F0025CD55 /* AppDelegate.swift */,
 				EB98E8A92162F47F0025CD55 /* ViewController.swift */,
@@ -137,9 +171,36 @@
 		EB98E8D82162F75E0025CD55 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EB98E8D92162F7880025CD55 /* SplashViewController.swift */,
+				EB98E8DD21643BDB0025CD55 /* RM_UINavigationController.swift */,
+				EB98E8F22166E25E0025CD55 /* RM_MoviesTableViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EB98E8E121643DEE0025CD55 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB98E8F621675DBF0025CD55 /* RM_MovieTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EB98E8E82164439D0025CD55 /* WS */ = {
+			isa = PBXGroup;
+			children = (
+				EB98E8E9216443D00025CD55 /* RM_HTTP.swift */,
+				EB98E8EB216588900025CD55 /* RM_HTTP_Genres.swift */,
+				EB98E8ED216588F90025CD55 /* RM_HTTP_Movies.swift */,
+			);
+			path = WS;
+			sourceTree = "<group>";
+		};
+		EB98E8EF216593B40025CD55 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB98E8F0216593CA0025CD55 /* RM_Movie.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +213,7 @@
 				EB98E8A02162F47E0025CD55 /* Sources */,
 				EB98E8A12162F47E0025CD55 /* Frameworks */,
 				EB98E8A22162F47E0025CD55 /* Resources */,
+				EB98E8E7216443230025CD55 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -275,9 +337,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB98E8AA2162F47F0025CD55 /* ViewController.swift in Sources */,
+				EB98E8F1216593CA0025CD55 /* RM_Movie.swift in Sources */,
+				EB98E8EC216588900025CD55 /* RM_HTTP_Genres.swift in Sources */,
+				EB98E8EE216588F90025CD55 /* RM_HTTP_Movies.swift in Sources */,
 				EB98E8B02162F47F0025CD55 /* RMovie.xcdatamodeld in Sources */,
+				EB98E8EA216443D00025CD55 /* RM_HTTP.swift in Sources */,
+				EB98E8F32166E25E0025CD55 /* RM_MoviesTableViewController.swift in Sources */,
+				EB98E8F721675DBF0025CD55 /* RM_MovieTableViewCell.swift in Sources */,
+				EB98E8DE21643BDB0025CD55 /* RM_UINavigationController.swift in Sources */,
 				EB98E8A82162F47F0025CD55 /* AppDelegate.swift in Sources */,
-				EB98E8DA2162F7880025CD55 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
