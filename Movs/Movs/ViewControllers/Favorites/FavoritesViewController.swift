@@ -80,7 +80,7 @@ extension FavoritesViewController: UITableViewDataSource {
         guard let favoriteCell = cell as? FavoritesTableViewCell else {
             fatalError("Cell not configured")
         }
-        // TODO: setup cell
+        favoriteCell.setup(with: movies[indexPath.row])
         return favoriteCell
     }
 }
