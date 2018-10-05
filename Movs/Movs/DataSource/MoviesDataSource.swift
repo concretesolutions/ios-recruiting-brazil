@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
 /**
  The object representing the response of TMDB's popular movies.
@@ -22,6 +23,7 @@ class PopularMovieResponse: Decodable {
 
 protocol MoviesDataSource {
     func fetchPopularMovies() -> Single<[Movie]>
+    func isMovieFavorited(_ movie: Movie) -> Bool
 }
 
 class MoviesDataSourceImpl: MoviesDataSource {
@@ -33,6 +35,84 @@ class MoviesDataSourceImpl: MoviesDataSource {
             }
             return []
         })
+    }
+
+    func fetchFavoritedMovies() -> Single<[Movie]> {
+        return Single.create { observer in
+            let disposable = Disposables.create {}
+            DispatchQueue.global(qos: .background).async {
+                guard let realm = try? Realm() else {
+                    DispatchQueue.main.async {
+                        observer(.error(MovErrors.genericError))
+                    }
+                    return
+                }
+                var favoritedMovies = [Movie]()
+                let results = realm.objects(RealmMovieModel.self)
+                for object in results {
+                    favoritedMovies.append(object.toMovie())
+                }
+                DispatchQueue.main.async {
+                    observer(.success(favoritedMovies))
+                }
+            }
+            return disposable
+        }
+    }
+
+    func addToFavorites(_ movie: Movie) -> Completable {
+        guard let realm = try? Realm() else {
+            return Completable.error(MovErrors.genericError)
+        }
+        return Completable.create { observer in
+            DispatchQueue.global(qos: .background).async {
+                do {
+                    try realm.write {
+                        if !self.isMovieFavorited(movie) {
+                            realm.add(RealmMovieModel(movie: movie))
+                        }
+                        DispatchQueue.main.async {
+                            observer(.completed)
+                        }
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        observer(.error(MovErrors.genericError))
+                    }
+                }
+            }
+            return Disposables.create {}
+        }
+    }
+
+    func removefromFavorites(_ movie: Movie) -> Completable {
+        guard let realm = try? Realm() else {
+            return Completable.error(MovErrors.genericError)
+        }
+        return Completable.create { observer in
+            DispatchQueue.global(qos: .background).async {
+                do {
+                    try realm.write {
+                        if self.isMovieFavorited(movie) {
+                            realm.delete(RealmMovieModel(movie: movie))
+                        }
+                        DispatchQueue.main.async {
+                            observer(.completed)
+                        }
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        observer(.error(MovErrors.genericError))
+                    }
+                }
+            }
+            return Disposables.create {}
+        }
+    }
+
+    func isMovieFavorited(_ movie: Movie) -> Bool {
+        guard let realm = try? Realm() else { return false }
+        return realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) != nil
     }
 
     private func parseMovies(_ data: Data) -> [Movie]? {

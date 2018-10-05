@@ -9,12 +9,17 @@
 import UIKit
 
 class Movie: Decodable {
-    let title: String
-    let releaseDate: String
-    let overview: String
-    let posterPath: String
+    var movieId: Int = -1
+    var title = ""
+    var releaseDate = ""
+    var overview = ""
+    var posterPath = ""
+    var isFavorited = false
+
+    init() { }
 
     enum CodingKeys: String, CodingKey {
+        case movieId = "id"
         case title
         case releaseDate = "release_date"
         case overview

@@ -19,5 +19,13 @@ class PopularMoviesUseCase {
 
     func fetchNextPopularMovies() -> Single<[Movie]> {
         return moviesDataSource.fetchPopularMovies()
+            .map({ (movies: [Movie]) -> [Movie] in
+                movies.forEach({ (movie: Movie) in
+                    if self.moviesDataSource.isMovieFavorited(movie) {
+                        movie.isFavorited = true
+                    }
+                })
+                return movies
+            })
     }
 }
