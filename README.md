@@ -10,6 +10,24 @@
 
 Obrigado por participar do desafio iOS da Concrete! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
 
+## Comentários
+
+Toda a parte de baixar os filmes da API e salvar localmente (assim como mostrar as imagens) está implementada.
+
+### O que está implementado:
+* Lista de filmes populares;
+* Salvar filmes favoritados localmente pela tela de filmes principais (atualmente a única forma de recarregar a lista de favoritos é fechando e abrindo o aplicativo);
+* Detalhes (sem as categorias);
+
+### Não está implementado ainda:
+* Buscas;
+* Cache de imagens;
+* Atualizar outras telas quando um filme é favoritado / desfavoritado;
+* Loading infinito dos filmes populares.
+* Categorias;
+* Filtros;
+* Testes;
+
 ## Afinal, o que é esse desafio?
 
 ---
