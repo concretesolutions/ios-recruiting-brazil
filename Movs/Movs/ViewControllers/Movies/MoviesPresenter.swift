@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 protocol MoviesView: AnyObject {
-    func openMovieDetails()
+    func openMovieDetails(with movie: Movie)
     func updateWith(movies: [Movie])
 }
 
@@ -31,7 +31,7 @@ class MoviesPresenter {
             .disposed(by: disposeBag)
     }
 
-    func onMovieSelected() {
-        view?.openMovieDetails()
+    func onMovieSelected(movie: Movie) {
+        view?.openMovieDetails(with: movie)
     }
 }

@@ -93,7 +93,7 @@ extension MoviesViewController: UICollectionViewDataSource {
 extension MoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        presenter.onMovieSelected()
+        presenter.onMovieSelected(movie: movies[indexPath.item])
     }
 }
 
@@ -141,8 +141,8 @@ extension MoviesViewController: UISearchResultsUpdating {
 
 extension MoviesViewController: MoviesView {
 
-    func openMovieDetails() {
-        let movieDetailsViewController = MovieDetailsViewController()
+    func openMovieDetails(with movie: Movie) {
+        let movieDetailsViewController = MovieDetailsViewController(movie: movie)
         navigationController?.pushViewController(movieDetailsViewController, animated: true)
     }
 
