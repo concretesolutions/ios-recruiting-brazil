@@ -34,9 +34,15 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     func setup(with movie: Movie) {
         self.movie = movie
         self.titleLabel.text = movie.title
+        setFavorite(to: movie.isFavorited)
 
         presenter = MoviesCellPresenter(view: self)
         presenter.onMovieSet(movie: movie)
+    }
+
+    @IBAction func onFavoriteButtonTapped(_ sender: UIButton) {
+        guard let movie = self.movie else { return }
+        presenter.onFavoriteAction(movie: movie)
     }
 }
 
@@ -44,6 +50,16 @@ extension MoviesCollectionViewCell: MovieCellItem {
     func moviesCellPresenter(presenter: MoviesCellPresenter, didFetchImage image: UIImage) {
         if let selfPresenter = self.presenter, selfPresenter === presenter {
             self.moviePicture.image = image
+        }
+    }
+
+    func setFavorite(to favorite: Bool) {
+        if !favorite {
+            let favoriteImage = UIImage(named: "buttonFavorite")?.withRenderingMode(.alwaysTemplate)
+            favoriteButton.setImage(favoriteImage, for: .normal)
+        } else {
+            let unfavoriteImage = UIImage(named: "buttonUnfavorite")?.withRenderingMode(.alwaysTemplate)
+            favoriteButton.setImage(unfavoriteImage, for: .normal)
         }
     }
 }

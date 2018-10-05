@@ -20,6 +20,7 @@ class FavoritesViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
 
     private var presenter: FavoritesPresenter!
+    private var movies = [Movie]()
 
     init() {
         super.init(nibName: Constants.nibName, bundle: nil)
@@ -38,6 +39,8 @@ class FavoritesViewController: UIViewController {
         presenter.view = self
         setupSearchBar()
         setupTableView()
+
+        presenter.onStart()
     }
 
     // MARK: - Private methods
@@ -64,9 +67,9 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearching() {
-            return 1
+            return 0
         }
-        return 5
+        return movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,7 +80,7 @@ extension FavoritesViewController: UITableViewDataSource {
         guard let favoriteCell = cell as? FavoritesTableViewCell else {
             fatalError("Cell not configured")
         }
-        // TODO: setup cell
+        favoriteCell.setup(with: movies[indexPath.row])
         return favoriteCell
     }
 }
@@ -89,6 +92,14 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let unfavoriteAction = UIContextualAction(style: .destructive, title: "Unfavorite") { (_, _, _) in
+//            let movie = self.movies[indexPath.row]
+            // TODO: Delete from favorites
+        }
+        return UISwipeActionsConfiguration(actions: [unfavoriteAction])
     }
 }
 
@@ -114,6 +125,11 @@ extension FavoritesViewController: UISearchResultsUpdating {
 }
 
 extension FavoritesViewController: FavoritesView {
+    func updateView(with movies: [Movie]) {
+        self.movies = movies
+        favoritesTableView.reloadData()
+    }
+
     func openMovieDetails() {
         let movieDetailsViewController = MovieDetailsViewController()
         navigationController?.pushViewController(movieDetailsViewController, animated: true)
