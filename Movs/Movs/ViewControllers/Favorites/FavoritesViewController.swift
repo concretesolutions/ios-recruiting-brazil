@@ -39,6 +39,8 @@ class FavoritesViewController: UIViewController {
         presenter.view = self
         setupSearchBar()
         setupTableView()
+
+        presenter.onStart()
     }
 
     // MARK: - Private methods
@@ -65,9 +67,9 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearching() {
-            return 1
+            return 0
         }
-        return 5
+        return movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,6 +125,11 @@ extension FavoritesViewController: UISearchResultsUpdating {
 }
 
 extension FavoritesViewController: FavoritesView {
+    func updateView(with movies: [Movie]) {
+        self.movies = movies
+        favoritesTableView.reloadData()
+    }
+
     func openMovieDetails() {
         let movieDetailsViewController = MovieDetailsViewController()
         navigationController?.pushViewController(movieDetailsViewController, animated: true)

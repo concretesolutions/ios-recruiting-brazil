@@ -23,6 +23,7 @@ class PopularMovieResponse: Decodable {
 
 protocol MoviesDataSource {
     func fetchPopularMovies() -> Single<[Movie]>
+    func fetchFavoritedMovies() -> Single<[Movie]>
     func isMovieFavorited(_ movie: Movie) -> Bool
     func addToFavorites(_ movie: Movie) -> Completable
     func removefromFavorites(_ movie: Movie) -> Completable

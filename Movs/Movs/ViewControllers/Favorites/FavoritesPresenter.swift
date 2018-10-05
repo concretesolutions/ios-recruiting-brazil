@@ -7,13 +7,29 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol FavoritesView: AnyObject {
+    func updateView(with movies: [Movie])
     func openMovieDetails()
 }
 
 class FavoritesPresenter {
     weak var view: FavoritesView?
+
+    private let disposeBag = DisposeBag()
+    private let moviesUseCase = MoviesUseCase()
+
+    func onStart() {
+        moviesUseCase.fetchFavoritedMovies()
+            .subscribe(onSuccess: { (favoritedMovies: [Movie]) in
+                self.view?.updateView(with: favoritedMovies)
+            }, onError: { (error: Error) in
+                print(error)
+                // TODO
+            })
+            .disposed(by: disposeBag)
+    }
 
     func onMovieSelected() {
         view?.openMovieDetails()

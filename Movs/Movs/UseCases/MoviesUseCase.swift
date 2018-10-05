@@ -29,6 +29,10 @@ class MoviesUseCase {
             })
     }
 
+    func fetchFavoritedMovies() -> Single<[Movie]> {
+        return moviesDataSource.fetchFavoritedMovies()
+    }
+
     func favoriteMovie(_ movie: Movie) -> Completable {
         return moviesDataSource.addToFavorites(movie)
     }
