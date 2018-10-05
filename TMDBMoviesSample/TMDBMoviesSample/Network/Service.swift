@@ -13,9 +13,15 @@ class Service {
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
     
-    func get<T: Decodable>(in url: URL?, completion: @escaping (ResponseResultType<T>) -> Void) {
+    func cancelActiveTasks() {
         dataTask?.cancel()
-        guard let url = url else { return }
+    }
+    
+    func get<T: Decodable>(in url: URL?, completion: @escaping (ResponseResultType<T>) -> Void) {
+        guard let url = url else {
+            completion(ResponseResultType.fail(NSError(domain: NSURLErrorDomain, code: 1000, userInfo: nil)))
+            return
+        }
         
         dataTask = defaultSession.dataTask(with: url) { data, response, error in
             defer { self.dataTask = nil }
@@ -30,7 +36,7 @@ class Service {
                     completion(.success(decodableObject))
                 }
                 catch {
-                    completion(.fail(error))
+                    completion(ResponseResultType.fail(NSError(domain: "JSONMalformed", code: 1002, userInfo: nil)))
                 }
             }
         }
