@@ -8,17 +8,35 @@
 
 import UIKit
 
-class MovieCell: UITableViewCell {
+class MovieCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static let cellSize = CGSize(width: 150, height: 250)
+    
+    @IBOutlet private weak var posterImage: UIImageView!
+    @IBOutlet private weak var movieTitleLabel: UILabel!
+    @IBOutlet private weak var movieReleaseDate: UILabel!
+    
+    var model: MovieModel? {
+        didSet {
+            setupView()
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    private func setupView() {
+        setMovieTitle()
+        setMovieReleaseDate()
     }
     
+    private func setMovieTitle() {
+        movieTitleLabel.text = model?.title
+    }
+    
+    private func setMovieReleaseDate() {
+        if let releaseDate = model?.releaseDate {
+            movieReleaseDate.text = "Lançado em: \(releaseDate)"
+            movieReleaseDate.isHidden = false
+        } else {
+            movieReleaseDate.isHidden = true
+        }
+    }
 }

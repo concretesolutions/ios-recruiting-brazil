@@ -9,5 +9,9 @@
 import Foundation
 
 protocol MoviesListViewProtocol: class {
-    
+    func addSection(in index: Int)
+    func showLoading()
+    func hideLoading()
+    func showCollectionView()
+    func hideCollectionView()
 }

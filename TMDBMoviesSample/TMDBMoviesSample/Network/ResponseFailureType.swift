@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum ResponseFailureType {
+public enum ResponseFailureType: Error {
     case network
     case badRequest
     case apiError

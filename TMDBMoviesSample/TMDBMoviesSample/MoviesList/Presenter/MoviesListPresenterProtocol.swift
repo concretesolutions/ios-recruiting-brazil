@@ -9,5 +9,6 @@
 import Foundation
 
 protocol MoviesListPresenterProtocol {
-    
+    var moviesLists: MoviesPages? { get }
+    func getMovies()
 }

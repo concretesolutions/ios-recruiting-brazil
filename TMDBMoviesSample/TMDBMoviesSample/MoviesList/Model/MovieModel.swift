@@ -8,4 +8,17 @@
 
 import Foundation
 
-class MovieModel {}
+class MovieModel: Decodable {
+    
+    var posterPath: String?
+    var title: String?
+    var releaseDate: String?
+    var id: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case id
+        case posterPath = "poster_path"
+        case releaseDate = "release_date"
+    }
+}

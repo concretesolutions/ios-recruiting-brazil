@@ -14,20 +14,22 @@ struct TMDBUrl {
     
     func getUrl(to endpoint: EndPoints, and page: Int? = nil) -> URL? {
         var urlComponents = URLComponents(string: getUrlString(to: endpoint))
+        var queryItems: [URLQueryItem] = []
         
         let apiKeyQueryItem = URLQueryItem(name: "api_key", value: apiKey)
-        urlComponents?.queryItems?.append(apiKeyQueryItem)
+        queryItems.append(apiKeyQueryItem)
         
         if let page = page {
             let pageQueryItem = URLQueryItem(name: "page", value: String(page))
-            urlComponents?.queryItems?.append(pageQueryItem)
+            queryItems.append(pageQueryItem)
         }
         
         if let languageCode = Locale.current.languageCode {
             let languageQueryItem = URLQueryItem(name: "language", value: languageCode)
-            urlComponents?.queryItems?.append(languageQueryItem)
+            queryItems.append(languageQueryItem)
         }
         
+        urlComponents?.queryItems = queryItems
         return urlComponents?.url
     }
     

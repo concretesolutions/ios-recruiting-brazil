@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tzM-Fd-qk4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,20 +9,54 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies List View Controller-->
+        <!--Filmes-->
         <scene sceneID="4qL-lK-mF9">
             <objects>
-                <viewController id="tzM-Fd-qk4" customClass="MoviesListViewController" customModule="TMDBMoviesSample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoviesListView" id="tzM-Fd-qk4" customClass="MoviesListViewController" customModule="TMDBMoviesSample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XJf-7O-A1G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="h5Y-2O-tr5">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7sy-4c-G0b">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.78039215689999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="No9-Nf-TeE">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.78039215689999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="h5Y-2O-tr5" firstAttribute="centerX" secondItem="XJf-7O-A1G" secondAttribute="centerX" id="NvC-4g-2aN"/>
+                            <constraint firstItem="BVh-cd-1XU" firstAttribute="trailing" secondItem="7sy-4c-G0b" secondAttribute="trailing" id="VRn-FO-xe2"/>
+                            <constraint firstItem="h5Y-2O-tr5" firstAttribute="centerY" secondItem="XJf-7O-A1G" secondAttribute="centerY" id="hcE-Wl-5Yp"/>
+                            <constraint firstItem="BVh-cd-1XU" firstAttribute="bottom" secondItem="7sy-4c-G0b" secondAttribute="bottom" id="oAQ-p7-kui"/>
+                            <constraint firstItem="7sy-4c-G0b" firstAttribute="top" secondItem="BVh-cd-1XU" secondAttribute="top" id="ocM-zB-sY8"/>
+                            <constraint firstItem="7sy-4c-G0b" firstAttribute="leading" secondItem="BVh-cd-1XU" secondAttribute="leading" id="vgt-ln-yug"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="BVh-cd-1XU"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Filmes" image="tab_ic_films" id="66Q-rf-eaN"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="h5Y-2O-tr5" id="c1q-VO-v9R"/>
+                        <outlet property="collectionView" destination="7sy-4c-G0b" id="xhx-9n-wAu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwP-VE-oqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="201" y="-31"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tab_ic_films" width="18" height="10"/>
+    </resources>
 </document>
