@@ -62,7 +62,11 @@ class RM_MoviesTableViewController: UITableViewController {
         return cell
     }
 
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
+        
+        appDelegate.selectedIndex = indexPath.row;
+    }
     
     
 }
