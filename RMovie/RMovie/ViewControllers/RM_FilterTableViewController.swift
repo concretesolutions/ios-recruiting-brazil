@@ -23,28 +23,68 @@ class RM_FilterTableViewController: UITableViewController
     @IBOutlet weak var pckGenero: UIPickerView!
     
     var movies : RM_HTTP_Movies?;
+    var genres : RM_HTTP_Genres?;
+    
     var arrayYears : [String]?;
+    var arrayGeneros : [String]?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
+        
+        self.movies = appDelegate.movies;
+        self.genres = appDelegate.genres;
         
         initArrayYears();
         initYear(pck: self.pckAnoDe ,swt: self.swtAnoDe , year: movies?.yearMin);
         initYear(pck: self.pckAnoAte ,swt: self.swtAnoAte , year: movies?.yearMax);
         
+        initArrayGenero();
+        initGeneros(pck: self.pckGenero,genero: movies?.genero);
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    //MARK: - convert Genero
+    func getGenero(id: NSInteger) -> String{
+        return (self.genres?.genres[id])!;
+    }
     
-    
+    func getGeneroArrayIndex(genero: String) -> NSInteger?{
+        for generoKey in (self.genres?.genres.keys)! {
+            let value : String = (self.genres?.genres[generoKey])!;
+            if(genero .elementsEqual(value)){
+                return generoKey;
+            }
+        }
+        return nil;
+    }
+    func getGeneroFromIndex(index: NSInteger) -> String{
+        var i = index;
+        for generoKey in (self.genres?.genres.keys)! {
+            i = i - 1;
+            if(i > 0){
+                continue;
+            }
+            return (self.genres?.genres[generoKey])!;
+        }
+        return "";
+    }
     
     // MARK: - Picker Views
     func   initArrayYears(){
         arrayYears = [String]();
         for i in 1970...2030 {
             arrayYears?.append(String(format:"%d", i));
+        }
+    }
+    func initArrayGenero(){
+        self.arrayGeneros = [String]();
+        for generoKey in (self.genres?.genres.keys)! {
+            let genero : String = (self.genres?.genres[generoKey])!;
+            self.arrayGeneros?.append(genero);
         }
     }
     
@@ -61,6 +101,17 @@ class RM_FilterTableViewController: UITableViewController
         pck.selectRow(index - 1970, inComponent: 0, animated: false);
     }
     
+    func   initGeneros(pck: UIPickerView,genero: NSInteger?){
+        pck.dataSource = self;
+        pck.delegate = self;
+
+        var index = 0;
+        if(genero != nil){
+            index = getGeneroArrayIndex(genero:getGenero(id: genero!))!
+        }
+        pck.selectRow(index, inComponent: 0, animated: false);
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1;
     }
@@ -69,7 +120,7 @@ class RM_FilterTableViewController: UITableViewController
         if(pickerView == pckAnoDe || pickerView == pckAnoAte){
             return (arrayYears?.count)!;
         }else if(pickerView == pckGenero){
-            
+            return (genres?.genres.count)!;
         }
         return 0;
     }
@@ -79,7 +130,7 @@ class RM_FilterTableViewController: UITableViewController
         if(pickerView == pckAnoDe || pickerView == pckAnoAte){
             return arrayYears![row];
         }else if(pickerView == pckGenero){
-            
+            return getGeneroFromIndex(index: row);
         }
         
         return "";
@@ -164,7 +215,7 @@ class RM_FilterTableViewController: UITableViewController
             self.movies?.yearMax = nil;
         }
         
-        
+        self.movies?.applyFilters();
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
