@@ -25,6 +25,7 @@
 		EB98E8F1216593CA0025CD55 /* RM_Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8F0216593CA0025CD55 /* RM_Movie.swift */; };
 		EB98E8F32166E25E0025CD55 /* RM_MoviesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8F22166E25E0025CD55 /* RM_MoviesTableViewController.swift */; };
 		EB98E8F721675DBF0025CD55 /* RM_MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8F621675DBF0025CD55 /* RM_MovieTableViewCell.swift */; };
+		EB98E8FA216831AB0025CD55 /* RM_DownloaderImageAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8F9216831AB0025CD55 /* RM_DownloaderImageAsync.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		EB98E8F0216593CA0025CD55 /* RM_Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_Movie.swift; sourceTree = "<group>"; };
 		EB98E8F22166E25E0025CD55 /* RM_MoviesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_MoviesTableViewController.swift; sourceTree = "<group>"; };
 		EB98E8F621675DBF0025CD55 /* RM_MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_MovieTableViewCell.swift; sourceTree = "<group>"; };
+		EB98E8F9216831AB0025CD55 /* RM_DownloaderImageAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_DownloaderImageAsync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		EB98E8A62162F47E0025CD55 /* RMovie */ = {
 			isa = PBXGroup;
 			children = (
+				EB98E8F82168317E0025CD55 /* Extensions */,
 				EB98E8EF216593B40025CD55 /* Models */,
 				EB98E8E82164439D0025CD55 /* WS */,
 				EB98E8E121643DEE0025CD55 /* Views */,
@@ -201,6 +204,14 @@
 				EB98E8F0216593CA0025CD55 /* RM_Movie.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EB98E8F82168317E0025CD55 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EB98E8F9216831AB0025CD55 /* RM_DownloaderImageAsync.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB98E8FA216831AB0025CD55 /* RM_DownloaderImageAsync.swift in Sources */,
 				EB98E8AA2162F47F0025CD55 /* ViewController.swift in Sources */,
 				EB98E8F1216593CA0025CD55 /* RM_Movie.swift in Sources */,
 				EB98E8EC216588900025CD55 /* RM_HTTP_Genres.swift in Sources */,

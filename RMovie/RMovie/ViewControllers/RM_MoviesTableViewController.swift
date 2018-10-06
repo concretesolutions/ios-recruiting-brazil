@@ -50,21 +50,18 @@ class RM_MoviesTableViewController: UITableViewController {
             movie = self.movies?.getMovie(index: indexPath.row) ;
             
             DispatchQueue.main.async {
-
+                cell.imgPoster.imageFromServerURL("https://image.tmdb.org/t/p/w500\(String((movie?.poster_path)!))", placeHolder:nil);
+                
                 cell.lblTitle.text = movie?.title;
                 cell.lblYear.text = String((movie?.release_date?.prefix(4))!);
                 cell.lblDescricao.text = movie?.overview;
+                
             }
         }
         
-        
-        //"Section \(indexPath.section) Row \(indexPath.row)"
-        
         return cell
     }
-    // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //     return "Section \(section)"
-    // }
+
     
     
     
