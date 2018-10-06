@@ -35,8 +35,12 @@ class RM_MoviesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return (self.movies?.movies.count)!;
+        if(self.movies?.moviesFilter == nil ||
+            
+            (self.movies?.moviesFilter?.count)! == 0 && (self.movies?.movies.count)! < (self.movies?.total_results)!){
+            self.movies?.getMore();
+        }
+        return self.movies?.moviesFilter == nil ? 0 : (self.movies?.moviesFilter!.count)!;
     }
     
     

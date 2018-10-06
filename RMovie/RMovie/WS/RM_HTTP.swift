@@ -49,16 +49,22 @@ class RM_HTTP{
                         switch(status){
                         case 200:
                             print("example success")
+                            //to get JSON return value
+                            if let result = response.result.value {
+                                let JSON = result as! NSDictionary
+                                print(JSON)
+                                self.callback(JSON: JSON);
+                            }
                         default:
                             print("error with response status: \(status)")
+                            if let result = response.result.value {
+                                let JSON = result as! NSDictionary
+                                print(JSON)
+                                self.erroCallback(JSON: JSON);
+                            }
                         }
                     }
-                    //to get JSON return value
-                    if let result = response.result.value {
-                        let JSON = result as! NSDictionary
-                        print(JSON)
-                        self.callback(JSON: JSON);
-                    }
+                   
                     
             }
             //            print("This is run on the background queue")
@@ -69,7 +75,9 @@ class RM_HTTP{
         }
         
     }
-    
+    func erroCallback(JSON : NSDictionary){
+        fatalError("Subclasses need to implement the `callback()` method.")
+    }
     func callback(JSON : NSDictionary){
         fatalError("Subclasses need to implement the `callback()` method.")
     }
