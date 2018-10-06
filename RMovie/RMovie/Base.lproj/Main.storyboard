@@ -69,7 +69,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies" id="Cbh-EP-HuJ">
-                        <barButtonItem key="rightBarButtonItem" title="Filtrar" image="FilterIcon.png" style="plain" id="ZR4-bf-xjR">
+                        <barButtonItem key="rightBarButtonItem" title="Filtros" style="done" id="ZR4-bf-xjR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="NAJ-pS-u9K" kind="show" id="8wG-OZ-lY0"/>
@@ -81,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="498.39999999999998" y="-0.44977511244377816"/>
         </scene>
-        <!--Filter Table View Controller-->
+        <!--Filtros-->
         <scene sceneID="7g7-N3-Aiw">
             <objects>
                 <tableViewController id="NAJ-pS-u9K" customClass="RM_FilterTableViewController" customModule="RMovie" customModuleProvider="target" sceneMemberID="viewController">
@@ -197,6 +197,14 @@
                             <outlet property="delegate" destination="NAJ-pS-u9K" id="wUZ-TL-S7O"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Filtros" id="WZP-Wp-df2">
+                        <barButtonItem key="rightBarButtonItem" title="Salvar" style="done" id="Hwa-es-ew5">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="btnSalvar_onClick:" destination="NAJ-pS-u9K" id="hpe-Br-r1X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="pckAnoAte" destination="YJW-ZQ-pFw" id="gob-7R-riT"/>
                         <outlet property="pckAnoDe" destination="LZR-9P-Bb0" id="2Jz-bm-HYL"/>
@@ -321,8 +329,5 @@
             <point key="canvasLocation" x="-350" y="1"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="FilterIcon.png" width="17" height="19"/>
-    </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
