@@ -76,8 +76,8 @@ class RM_HTTP_Movies : RM_HTTP{
     // MARK: - Filter
     
     var moviesFilter : [RM_Movie?]?;
-    var yearMin : NSInteger? = 2005;
-    var yearMax : NSInteger? = 2005;
+    var yearMin : NSInteger?;
+    var yearMax : NSInteger?;
     var genero : NSInteger?;
     
     func hasFilter() -> Bool{
