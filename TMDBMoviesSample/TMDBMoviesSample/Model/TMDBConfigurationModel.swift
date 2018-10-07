@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct TMDBConfigurationModel: Decodable {
+class TMDBConfigurationModel: Codable {
     let images: TMDBImageConfiguration?
 }
 
-struct TMDBImageConfiguration: Decodable {
+class TMDBImageConfiguration: Codable {
 
     var baseURL: String?
     var safeBaseURL: String?

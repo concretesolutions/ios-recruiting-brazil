@@ -18,9 +18,13 @@ class MoviesListClient {
     private var totalPages: Int = 1
     private var configurationModel: TMDBConfigurationModel? {
         didSet {
-            guard let configs = configurationModel else { return }
+            guard
+                let configs = configurationModel,
+                let data = try? JSONEncoder().encode(configs)
+            else { return }
+            
             let userDefaults = UserDefaultWrapper()
-            userDefaults.save(object: configs, with: userDefaults.configModelKey)
+            userDefaults.save(object: data, with: userDefaults.configModelKey)
         }
     }
     
