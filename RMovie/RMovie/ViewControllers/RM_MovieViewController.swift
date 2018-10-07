@@ -56,9 +56,9 @@ class RM_MovieViewController: UIViewController
     }
     private func updateBtnFavorito(){
         if(Favorite.store.hasId(id: (self.movie?.id)!)){
-            self.btnFavorito.title = "Desfavoritar";
+            self.btnFavorito.image = UIImage(named: "favorite_full_icon")
         }else{
-            self.btnFavorito.title = "Favoritar";
+            self.btnFavorito.image = UIImage(named: "favorite_empty_icon");
         }
     }
 

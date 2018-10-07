@@ -84,6 +84,11 @@ class RM_MoviesTableViewController: UITableViewController, UISearchBarDelegate{
                 cell.lblYear.text = String((movie?.release_date?.prefix(4))!);
                 cell.lblDescricao.text = movie?.overview;
                 
+                if(Favorite.store.hasId(id: (movie?.id)!)){
+                    cell.imgFavorite?.image = UIImage(named: "favorite_full_icon");
+                }else{
+                    cell.imgFavorite?.image = UIImage(named: "favorite_empty_icon");
+                }
             }
         }
         
@@ -95,6 +100,7 @@ class RM_MoviesTableViewController: UITableViewController, UISearchBarDelegate{
         
         appDelegate.selectedMovie =  self.movies?.getMovie(index: indexPath.row);
     }
+    
     
     
 }

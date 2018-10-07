@@ -31,56 +31,40 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="154.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hSp-ip-XoX">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hSp-ip-XoX">
                                             <rect key="frame" x="0.0" y="0.0" width="139.5" height="154.5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="hSp-ip-XoX" secondAttribute="height" multiplier="28:31" id="Y6t-CC-6qt"/>
-                                            </constraints>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="2018" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qu-sU-bvN">
-                                            <rect key="frame" x="184" y="11" width="172" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="8kk-1O-PuT"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="ogh-T3-k9E"/>
-                                            </constraints>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="favorite_empty_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="vXv-ku-8bj">
+                                            <rect key="frame" x="337" y="3" width="22" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            <gestureRecognizers/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" fixedFrame="YES" text="2018" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qu-sU-bvN">
+                                            <rect key="frame" x="187" y="3" width="140" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UO6-mo-n9C">
-                                            <rect key="frame" x="148" y="11" width="33" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="ThH-GB-JJk"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="sFI-Oj-4MO"/>
-                                            </constraints>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UO6-mo-n9C">
+                                            <rect key="frame" x="148" y="3" width="134" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descricao" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ft-Po-UqI">
-                                            <rect key="frame" x="148" y="40" width="208" height="104"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="descricao" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ft-Po-UqI">
+                                            <rect key="frame" x="148" y="27" width="211" height="117"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="hSp-ip-XoX" secondAttribute="bottom" id="2gW-L4-LCc"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="1Qu-sU-bvN" secondAttribute="trailing" constant="3" id="2uR-6d-CdH"/>
-                                        <constraint firstItem="2Ft-Po-UqI" firstAttribute="top" secondItem="1Qu-sU-bvN" secondAttribute="bottom" constant="9" id="3rq-8L-zTX"/>
-                                        <constraint firstItem="2Ft-Po-UqI" firstAttribute="leading" secondItem="hSp-ip-XoX" secondAttribute="trailing" constant="8.5" id="7kd-RR-O1r"/>
-                                        <constraint firstItem="hSp-ip-XoX" firstAttribute="top" secondItem="SJw-OM-HCJ" secondAttribute="top" id="IVK-UF-MwT"/>
-                                        <constraint firstItem="1Qu-sU-bvN" firstAttribute="top" secondItem="SJw-OM-HCJ" secondAttribute="topMargin" id="NAE-im-2kK"/>
-                                        <constraint firstItem="1Qu-sU-bvN" firstAttribute="leading" secondItem="UO6-mo-n9C" secondAttribute="trailing" constant="3" id="OmE-WJ-59t"/>
-                                        <constraint firstItem="2Ft-Po-UqI" firstAttribute="top" secondItem="1Qu-sU-bvN" secondAttribute="bottom" constant="9" id="YFk-do-DdA"/>
-                                        <constraint firstItem="UO6-mo-n9C" firstAttribute="top" secondItem="SJw-OM-HCJ" secondAttribute="topMargin" id="YlI-Qa-TYm"/>
-                                        <constraint firstItem="UO6-mo-n9C" firstAttribute="leading" secondItem="hSp-ip-XoX" secondAttribute="trailing" constant="8.5" id="d2x-AL-uUh"/>
-                                        <constraint firstItem="hSp-ip-XoX" firstAttribute="leading" secondItem="SJw-OM-HCJ" secondAttribute="leading" id="hcf-sr-XdM"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="2Ft-Po-UqI" secondAttribute="trailing" constant="3" id="men-rD-g9v"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="2Ft-Po-UqI" secondAttribute="bottom" id="pch-0R-M1S"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="imgFavorite" destination="vXv-ku-8bj" id="Hjg-QF-7dy"/>
                                     <outlet property="imgPoster" destination="hSp-ip-XoX" id="avc-eY-XST"/>
                                     <outlet property="lblDescricao" destination="2Ft-Po-UqI" id="5VL-aS-MKb"/>
                                     <outlet property="lblTitle" destination="UO6-mo-n9C" id="tOo-dk-4YZ"/>
@@ -101,7 +85,7 @@
                                 <segue destination="p36-df-a9u" kind="show" id="Ygg-ns-vGg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Filtros" style="done" id="ZR4-bf-xjR">
+                        <barButtonItem key="rightBarButtonItem" title="Filtros" image="FilterIcon" style="done" id="ZR4-bf-xjR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="NAJ-pS-u9K" kind="show" id="8wG-OZ-lY0"/>
@@ -332,7 +316,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Filtros" id="WZP-Wp-df2">
-                        <barButtonItem key="rightBarButtonItem" title="Salvar" style="done" id="Hwa-es-ew5">
+                        <barButtonItem key="rightBarButtonItem" title="Salvar" image="check_icon" style="done" id="Hwa-es-ew5">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="btnSalvar_onClick:" destination="NAJ-pS-u9K" id="hpe-Br-r1X"/>
@@ -421,7 +405,8 @@
                         <viewLayoutGuide key="safeArea" id="Xaw-Da-WaH"/>
                     </view>
                     <navigationItem key="navigationItem" title="Titulo do Filme" id="13C-SB-QD9">
-                        <barButtonItem key="rightBarButtonItem" title="Favoritar" id="xLs-Gb-bXp">
+                        <barButtonItem key="rightBarButtonItem" title="Favoritar" image="favorite_full_icon" id="xLs-Gb-bXp">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="btnFavorito_onClick:" destination="k8C-kp-asr" id="giC-Bk-dMZ"/>
                             </connections>
@@ -466,9 +451,15 @@
             <point key="canvasLocation" x="-350" y="1"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FilterIcon" width="17" height="19"/>
+        <image name="check_icon" width="18" height="14"/>
+        <image name="favorite_empty_icon.png" width="22" height="21"/>
+        <image name="favorite_full_icon" width="18" height="16"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m2s-5I-tDB"/>
-        <segue reference="wgT-Ak-XI1"/>
+        <segue reference="K38-ql-ZOl"/>
+        <segue reference="8wG-OZ-lY0"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

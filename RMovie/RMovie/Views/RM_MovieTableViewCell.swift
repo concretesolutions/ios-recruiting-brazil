@@ -14,6 +14,7 @@ class RM_MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblYear: UILabel!
     @IBOutlet weak var lblDescricao: UILabel!
+    @IBOutlet weak var imgFavorite: UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
