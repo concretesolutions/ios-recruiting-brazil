@@ -52,7 +52,8 @@ class RM_FilterTableViewController: UITableViewController
         return (self.genres?.genres[id])!;
     }
     
-    func getGeneroArrayIndex(genero: String) -> NSInteger?{
+    
+    func getGeneroId(genero: String) -> NSInteger?{
         for generoKey in (self.genres?.genres.keys)! {
             let value : String = (self.genres?.genres[generoKey])!;
             if(genero .elementsEqual(value)){
@@ -61,13 +62,27 @@ class RM_FilterTableViewController: UITableViewController
         }
         return nil;
     }
+    
+    func getGeneroArrayIndex(genero: String) -> NSInteger?{
+        var index = 0;
+        for generoKey in (self.genres?.genres.keys)! {
+            let value : String = (self.genres?.genres[generoKey])!;
+            if(genero .elementsEqual(value)){
+                return index;
+            }
+            index = index + 1;
+        }
+        return nil;
+    }
+    
     func getGeneroFromIndex(index: NSInteger) -> String{
         var i = index;
         for generoKey in (self.genres?.genres.keys)! {
-            i = i - 1;
             if(i > 0){
+                i = i - 1;
                 continue;
             }
+            
             return (self.genres?.genres[generoKey])!;
         }
         return "";
@@ -105,11 +120,11 @@ class RM_FilterTableViewController: UITableViewController
         pck.dataSource = self;
         pck.delegate = self;
 
-        var index = 0;
+        var index = self.genres?.genres.count;
         if(genero != nil){
-            index = getGeneroArrayIndex(genero:getGenero(id: genero!))!
+            index = getGeneroArrayIndex(genero: getGenero(id: genero!))!;
         }
-        pck.selectRow(index, inComponent: 0, animated: false);
+        pck.selectRow(index ?? 0, inComponent: 0, animated: false);
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -120,7 +135,7 @@ class RM_FilterTableViewController: UITableViewController
         if(pickerView == pckAnoDe || pickerView == pckAnoAte){
             return (arrayYears?.count)!;
         }else if(pickerView == pckGenero){
-            return (genres?.genres.count)!;
+            return (genres?.genres.count)! + 1;
         }
         return 0;
     }
@@ -130,6 +145,9 @@ class RM_FilterTableViewController: UITableViewController
         if(pickerView == pckAnoDe || pickerView == pckAnoAte){
             return arrayYears![row];
         }else if(pickerView == pckGenero){
+            if(row == self.genres?.genres.count){
+               return "Todos";
+            }
             return getGeneroFromIndex(index: row);
         }
         
@@ -213,6 +231,13 @@ class RM_FilterTableViewController: UITableViewController
             self.movies?.yearMax = 1970 + self.pckAnoAte.selectedRow(inComponent: 0);
         }else{
             self.movies?.yearMax = nil;
+        }
+   
+        let index = self.pckGenero.selectedRow(inComponent: 0);
+        if(index == self.genres?.genres.count){
+            self.movies?.genero = nil;
+        }else{
+            self.movies?.genero = self.getGeneroId(genero: self.getGeneroFromIndex(index:index));
         }
         
         self.movies?.applyFilters();

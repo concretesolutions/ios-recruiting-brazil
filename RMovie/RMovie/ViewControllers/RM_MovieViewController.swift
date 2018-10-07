@@ -17,8 +17,8 @@ class RM_MovieViewController: UIViewController {
     
     @IBOutlet weak var lblVoteAverage: UILabel!
     @IBOutlet weak var lblLancamento: UILabel!
-    @IBOutlet weak var lblgeneros: UILabel!
-    @IBOutlet weak var lblDescricao: UILabel!
+    @IBOutlet weak var lblGeneros: UITextField!
+    @IBOutlet weak var lblDescricao: UITextView!
     
     
     override func viewDidLoad() {
@@ -44,11 +44,10 @@ class RM_MovieViewController: UIViewController {
         self.lblVoteAverage.text = String(format:"%.1f", (self.movie?.vote_average)!);
         
 //Generos
-        self.lblgeneros.text = self.listarGeneros()
+        self.lblGeneros.text = self.listarGeneros()
         
 //Descrição
         self.lblDescricao.text = self.movie?.overview;
-        self.lblDescricao.sizeToFit()
     }
 
     override func didReceiveMemoryWarning() {

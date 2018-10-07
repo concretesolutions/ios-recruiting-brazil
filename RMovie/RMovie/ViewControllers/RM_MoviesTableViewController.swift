@@ -51,14 +51,17 @@ class RM_MoviesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! RM_MovieTableViewCell;
         
         DispatchQueue.global(qos: .background).async {
-        
+            
             var movie : RM_Movie?;
             
             movie = self.movies?.getMovie(index: indexPath.row) ;
             
             DispatchQueue.main.async {
-                cell.imgPoster.imageFromServerURL("https://image.tmdb.org/t/p/w500\(String((movie?.poster_path)!))", placeHolder:nil);
-                
+                if(movie?.poster_path != nil){
+                    cell.imgPoster.imageFromServerURL("https://image.tmdb.org/t/p/w500\(String((movie?.poster_path)!))", placeHolder:nil);
+                }else{
+                    cell.imgPoster.image = nil;
+                }
                 cell.lblTitle.text = movie?.title;
                 cell.lblYear.text = String((movie?.release_date?.prefix(4))!);
                 cell.lblDescricao.text = movie?.overview;
@@ -68,7 +71,7 @@ class RM_MoviesTableViewController: UITableViewController {
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         
