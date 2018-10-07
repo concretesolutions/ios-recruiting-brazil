@@ -12,17 +12,19 @@ import UIKit
 class RM_HTTP_Movies : RM_HTTP{
     var ready : Bool;
     var page : NSInteger;
-    var movies : [RM_Movie?];
+//    var movies : [RM_Movie?];
     var total_pages : NSInteger;
     var total_results : NSInteger;
     var viewController : UITableViewController?;
+    var moviesFilter : MovieFilter;
     
     override init() {
         self.ready = true;
         self.page = 0;
-        self.movies = [];
+//        self.movies = [];
         self.total_pages = 1;
         self.total_results = 0;
+        self.moviesFilter = MovieFilter(movies: []);
         super.init(method: "/movie/popular");
         getMore();
     }
@@ -38,13 +40,13 @@ class RM_HTTP_Movies : RM_HTTP{
     override func callback(JSON: NSDictionary) {
         
         for json_movie in JSON.value(forKey: "results") as! NSArray{
-            self.movies.append(RM_Movie(JSON: json_movie as! NSDictionary));
+            self.moviesFilter.movies.append(RM_Movie(JSON: json_movie as! NSDictionary));
         }
         self.total_pages = JSON.value(forKey: "total_pages") as! NSInteger;
         self.total_results = JSON.value(forKey: "total_results") as! NSInteger;
         
         self.ready = true;
-        self.applyFilters();
+        self.moviesFilter.applyFilters();
         
         DispatchQueue.main.async { self.viewController?.tableView.reloadData() }
     }
@@ -63,55 +65,15 @@ class RM_HTTP_Movies : RM_HTTP{
     }
     
     func getMovie(index: NSInteger) -> RM_Movie?{
-        if(index > (self.moviesFilter?.count)!-10 && self.movies.count < self.total_results && self.ready){
+        if(index > (self.moviesFilter.count)!-2 && self.moviesFilter.movies.count < self.total_results && self.ready){
             getMore();
         }
         
-        if(index < (self.moviesFilter?.count)!){
-            return self.moviesFilter?[index];
+        if(index < (self.moviesFilter.count)!){
+            return self.moviesFilter[index];
         }
         return nil;
     }
     
-    // MARK: - Filter
     
-    var moviesFilter : [RM_Movie?]?;
-    var yearMin : NSInteger?;
-    var yearMax : NSInteger?;
-    var genero : NSInteger?;
-    
-    func hasFilter() -> Bool{
-        return yearMin != nil || yearMax != nil || genero != nil;
-    }
-    
-    func applyFilters(){
-        moviesFilter = [RM_Movie]();
-        
-        for movie in movies {
-            if(movie?.release_date == nil || (movie?.release_date?.count)! < 4){
-                if (yearMin == nil || yearMax == nil){
-                    continue;
-                }
-            }else{
-                
-                let movieYear : NSInteger = Int(String((movie?.release_date?.prefix(4))!))!;
-                
-                if(yearMin != nil && yearMin! > movieYear) {continue;}
-                if(yearMax != nil && yearMax! < movieYear) {continue;}
-            }
-            if(genero != nil){
-                var count = 0;
-                for id in (movie?.genre_ids)! {
-                    if(genero == id){
-                        break;
-                    }
-                    count = count+1;
-                }
-                if(count == movie?.genre_ids.count){
-                    continue;
-                }
-            }
-            moviesFilter?.append(movie);
-        }
-    }
 }

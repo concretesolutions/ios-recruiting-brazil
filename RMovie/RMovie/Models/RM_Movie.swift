@@ -9,6 +9,7 @@
 import Foundation
 
 class RM_Movie{
+    var JSON : NSDictionary;
     var adult : Bool?;
     var backdrop_path :String?;
     var genre_ids : [NSInteger?];
@@ -25,6 +26,7 @@ class RM_Movie{
     var vote_count : NSInteger?;
     
     init(JSON : NSDictionary){
+        self.JSON = JSON;
         print(JSON)
         self.adult = (JSON.value(forKey: "adult") != nil && JSON.value(forKey: "adult") as! NSInteger == 1)
         self.backdrop_path = JSON.value(forKey: "backdrop_path") as? String
@@ -41,5 +43,6 @@ class RM_Movie{
         self.vote_average = JSON.value(forKey: "vote_average") as? Double
         self.vote_count = JSON.value(forKey: "vote_count") as? NSInteger
     }
+    
     
 }

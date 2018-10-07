@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RM_MoviesTableViewController: UITableViewController {
+class RM_MoviesTableViewController: UITableViewController, UISearchBarDelegate{
     
     var movies : RM_HTTP_Movies?;
     
@@ -19,7 +19,7 @@ class RM_MoviesTableViewController: UITableViewController {
         self.movies = appDelegate.movies!;
         
         self.movies?.viewController = self;
-        
+        self.srcBusca.delegate = self;
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,7 +29,22 @@ class RM_MoviesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         self.tableView.reloadData();
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
+        appDelegate.moviesFilter = self.movies?.moviesFilter;
     }
+    
+    //MARK: - Search
+    
+    @IBOutlet weak var srcBusca: UISearchBar!
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+        {
+            self.movies?.moviesFilter.titleSearch = searchText;
+            self.movies?.moviesFilter.applyFilters();
+            self.tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,11 +54,11 @@ class RM_MoviesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(self.movies?.moviesFilter == nil ||
-            
-            (self.movies?.moviesFilter?.count)! == 0 && (self.movies?.movies.count)! < (self.movies?.total_results)!){
+
+            (self.movies?.moviesFilter.count)! == 0 && (self.movies?.moviesFilter.movies.count)! < (self.movies?.total_results)!){
             self.movies?.getMore();
         }
-        return self.movies?.moviesFilter == nil ? 0 : (self.movies?.moviesFilter!.count)!;
+        return self.movies?.moviesFilter == nil ? 0 : (self.movies?.moviesFilter.count)!;
     }
     
     
@@ -57,6 +72,9 @@ class RM_MoviesTableViewController: UITableViewController {
             movie = self.movies?.getMovie(index: indexPath.row) ;
             
             DispatchQueue.main.async {
+                if(movie == nil){
+                    return;
+                }
                 if(movie?.poster_path != nil){
                     cell.imgPoster.imageFromServerURL("https://image.tmdb.org/t/p/w500\(String((movie?.poster_path)!))", placeHolder:nil);
                 }else{
@@ -75,7 +93,7 @@ class RM_MoviesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         
-        appDelegate.selectedIndex = indexPath.row;
+        appDelegate.selectedMovie =  self.movies?.getMovie(index: indexPath.row);
     }
     
     

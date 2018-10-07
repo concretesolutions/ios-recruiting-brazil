@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var genres: RM_HTTP_Genres?;
     var movies: RM_HTTP_Movies?;
-    var selectedIndex: NSInteger?;
+    var selectedMovie: RM_Movie?;
+    var moviesFilter: MovieFilter?;
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

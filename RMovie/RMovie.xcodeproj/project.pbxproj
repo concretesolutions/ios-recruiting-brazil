@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EB89C3AD2169005B00503B4F /* RM_FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB89C3AC2169005B00503B4F /* RM_FilterTableViewController.swift */; };
+		EB92A24F216A996000E68A03 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB92A24E216A996000E68A03 /* Favorite.swift */; };
+		EB92A251216AA25B00E68A03 /* RM_FavoritoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB92A250216AA25B00E68A03 /* RM_FavoritoTableViewController.swift */; };
+		EB92A254216AA4F900E68A03 /* MovieFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB92A253216AA4F900E68A03 /* MovieFilter.swift */; };
 		EB98E8A82162F47F0025CD55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8A72162F47F0025CD55 /* AppDelegate.swift */; };
 		EB98E8AA2162F47F0025CD55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB98E8A92162F47F0025CD55 /* ViewController.swift */; };
 		EB98E8AD2162F47F0025CD55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB98E8AB2162F47F0025CD55 /* Main.storyboard */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		EB89C3AC2169005B00503B4F /* RM_FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_FilterTableViewController.swift; sourceTree = "<group>"; };
+		EB92A24E216A996000E68A03 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		EB92A250216AA25B00E68A03 /* RM_FavoritoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RM_FavoritoTableViewController.swift; sourceTree = "<group>"; };
+		EB92A253216AA4F900E68A03 /* MovieFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFilter.swift; sourceTree = "<group>"; };
 		EB98E8A42162F47E0025CD55 /* RMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB98E8A72162F47F0025CD55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB98E8A92162F47F0025CD55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +122,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB92A24D216A993900E68A03 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				EB92A24E216A996000E68A03 /* Favorite.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		EB92A252216AA4D000E68A03 /* FIlter */ = {
+			isa = PBXGroup;
+			children = (
+				EB92A253216AA4F900E68A03 /* MovieFilter.swift */,
+			);
+			path = FIlter;
+			sourceTree = "<group>";
+		};
 		EB98E89B2162F47E0025CD55 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +163,8 @@
 		EB98E8A62162F47E0025CD55 /* RMovie */ = {
 			isa = PBXGroup;
 			children = (
+				EB92A252216AA4D000E68A03 /* FIlter */,
+				EB92A24D216A993900E68A03 /* Storage */,
 				EB98E8F82168317E0025CD55 /* Extensions */,
 				EB98E8EF216593B40025CD55 /* Models */,
 				EB98E8E82164439D0025CD55 /* WS */,
@@ -182,6 +206,7 @@
 				EB98E8F22166E25E0025CD55 /* RM_MoviesTableViewController.swift */,
 				EB98E8FB216846710025CD55 /* RM_MovieViewController.swift */,
 				EB89C3AC2169005B00503B4F /* RM_FilterTableViewController.swift */,
+				EB92A250216AA25B00E68A03 /* RM_FavoritoTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -355,17 +380,20 @@
 			files = (
 				EB98E8FA216831AB0025CD55 /* RM_DownloaderImageAsync.swift in Sources */,
 				EB98E8AA2162F47F0025CD55 /* ViewController.swift in Sources */,
+				EB92A254216AA4F900E68A03 /* MovieFilter.swift in Sources */,
 				EB98E8F1216593CA0025CD55 /* RM_Movie.swift in Sources */,
 				EB98E8EC216588900025CD55 /* RM_HTTP_Genres.swift in Sources */,
 				EB98E8EE216588F90025CD55 /* RM_HTTP_Movies.swift in Sources */,
 				EB98E8B02162F47F0025CD55 /* RMovie.xcdatamodeld in Sources */,
 				EB98E8EA216443D00025CD55 /* RM_HTTP.swift in Sources */,
+				EB92A24F216A996000E68A03 /* Favorite.swift in Sources */,
 				EB98E8F32166E25E0025CD55 /* RM_MoviesTableViewController.swift in Sources */,
 				EB98E8FC216846710025CD55 /* RM_MovieViewController.swift in Sources */,
 				EB98E8F721675DBF0025CD55 /* RM_MovieTableViewCell.swift in Sources */,
 				EB89C3AD2169005B00503B4F /* RM_FilterTableViewController.swift in Sources */,
 				EB98E8DE21643BDB0025CD55 /* RM_UINavigationController.swift in Sources */,
 				EB98E8A82162F47F0025CD55 /* AppDelegate.swift in Sources */,
+				EB92A251216AA25B00E68A03 /* RM_FavoritoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

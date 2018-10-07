@@ -8,7 +8,9 @@
 
 import UIKit
 
-class RM_MovieViewController: UIViewController {
+class RM_MovieViewController: UIViewController
+,UITextFieldDelegate
+{
     var movie : RM_Movie?;
     var genres : RM_HTTP_Genres?;
     
@@ -20,13 +22,14 @@ class RM_MovieViewController: UIViewController {
     @IBOutlet weak var lblGeneros: UITextField!
     @IBOutlet weak var lblDescricao: UITextView!
     
+    @IBOutlet weak var btnFavorito: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         
-        self.movie = (appDelegate.movies?.getMovie(index: appDelegate.selectedIndex!))!;
+        self.movie = appDelegate.selectedMovie;
         self.genres = appDelegate.genres;
         
 //Titulo
@@ -45,9 +48,18 @@ class RM_MovieViewController: UIViewController {
         
 //Generos
         self.lblGeneros.text = self.listarGeneros()
-        
+        self.lblGeneros.delegate = self;
 //Descrição
         self.lblDescricao.text = self.movie?.overview;
+
+        self.updateBtnFavorito();
+    }
+    private func updateBtnFavorito(){
+        if(Favorite.store.hasId(id: (self.movie?.id)!)){
+            self.btnFavorito.title = "Desfavoritar";
+        }else{
+            self.btnFavorito.title = "Favoritar";
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,4 +77,17 @@ class RM_MovieViewController: UIViewController {
         return String(generos.suffix(generos.count-2));
     }
 
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false;
+    }
+    
+    @IBAction func btnFavorito_onClick(_ sender: Any) {
+        if(Favorite.store.hasId(id: (self.movie?.id!)!)){
+            Favorite.store.removeItem(item:self.movie!);
+        }else{
+            Favorite.store.addItem(item: self.movie!);
+        }
+        updateBtnFavorito();
+    }
+    
 }
