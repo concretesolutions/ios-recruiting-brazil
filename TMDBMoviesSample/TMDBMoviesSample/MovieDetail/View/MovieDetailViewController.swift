@@ -1,0 +1,79 @@
+//
+//  MovieDetailViewController.swift
+//  TMDBMoviesSample
+//
+//  Created by Breno Rage Aboud on 07/10/18.
+//  Copyright © 2018 Breno Rage Aboud. All rights reserved.
+//
+
+import UIKit
+
+class MovieDetailViewController: UIViewController {
+
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var releaseYearLabel: UILabel!
+    @IBOutlet private weak var genresListLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var favButton: UIButton!
+    @IBOutlet private weak var backdropActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var backdropImageView: UIImageView!
+    @IBOutlet private weak var genreActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var genrePlaceHolder: UILabel!
+    
+    @IBAction private func favAction(_ sender: Any) {}
+    
+    private lazy var presenter: MoviePresenterProtocol = MovieDetailPresenter(with: self)
+    
+    var model: MovieDetailModel?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+    }
+}
+
+//MARK: - SetupMethods -
+extension MovieDetailViewController {
+    private func setupViews() {
+        guard let model = model else { return }
+        titleLabel.text = model.title
+        releaseYearLabel.text = model.releaseYear
+        descriptionLabel.text = model.description
+        presenter.getGenreList()
+    }
+}
+
+//MARK: - ViewProtocol methods -
+extension MovieDetailViewController: MovieDetailViewProtocol {
+    func showBackdropLoading() {
+        DispatchQueue.main.async {
+            self.backdropActivityIndicator.startAnimating()
+            self.backdropActivityIndicator.isHidden = false
+        }
+    }
+    
+    func hideBackdropLoading() {
+        DispatchQueue.main.async {
+            self.backdropActivityIndicator.isHidden = true
+            self.backdropActivityIndicator.stopAnimating()
+        }
+    }
+    
+    func showGenreLoading() {
+        DispatchQueue.main.async {
+            self.genrePlaceHolder.isHidden = false
+            self.genresListLabel.isHidden = true
+            self.backdropActivityIndicator.startAnimating()
+            self.genreActivityIndicator.isHidden = false
+        }
+    }
+    
+    func hideGenreLoading() {
+        DispatchQueue.main.async {
+            self.genrePlaceHolder.isHidden = true
+            self.genreActivityIndicator.isHidden = true
+            self.backdropActivityIndicator.stopAnimating()
+            self.genresListLabel.isHidden = false
+        }
+    }
+}

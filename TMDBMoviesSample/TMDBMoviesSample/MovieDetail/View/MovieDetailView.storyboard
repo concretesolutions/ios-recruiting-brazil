@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AOh-tV-C82">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="C2j-9x-CSE">
+            <objects>
+                <viewController id="AOh-tV-C82" customClass="MovieDetailViewController" customModule="TMDBMoviesSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DJ6-0i-9Zh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iAq-2Q-a3r">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NLs-pP-1r6">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6E-Si-ZIG">
+                                <rect key="frame" x="0.0" y="642" width="414" height="220"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEo-p6-9eo">
+                                        <rect key="frame" x="10" y="10" width="394" height="26"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ua8-Al-6da">
+                                        <rect key="frame" x="10" y="41" width="394" height="21"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nt3-de-g0c">
+                                        <rect key="frame" x="10" y="78" width="20" height="20"/>
+                                        <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carregando lista de generos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zch-fD-Vsq">
+                                        <rect key="frame" x="40" y="67" width="364" height="42"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bep-sN-Z77">
+                                        <rect key="frame" x="10" y="67" width="394" height="42"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Kw-MO-VQg">
+                                        <rect key="frame" x="10" y="114" width="394" height="36.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.20050299657534246" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="GEo-p6-9eo" firstAttribute="leading" secondItem="W6E-Si-ZIG" secondAttribute="leading" constant="10" id="0a8-ja-s3k"/>
+                                    <constraint firstAttribute="height" constant="220" id="AJ8-fo-BEd"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Kw-MO-VQg" secondAttribute="trailing" constant="10" id="Bbv-UD-fwm"/>
+                                    <constraint firstItem="ua8-Al-6da" firstAttribute="leading" secondItem="W6E-Si-ZIG" secondAttribute="leading" constant="10" id="F1u-ih-7vF"/>
+                                    <constraint firstItem="GEo-p6-9eo" firstAttribute="top" secondItem="W6E-Si-ZIG" secondAttribute="top" constant="10" id="Ged-r9-JiO"/>
+                                    <constraint firstItem="4Kw-MO-VQg" firstAttribute="top" secondItem="bep-sN-Z77" secondAttribute="bottom" constant="5" id="JKk-FW-ieE"/>
+                                    <constraint firstItem="Zch-fD-Vsq" firstAttribute="bottom" secondItem="bep-sN-Z77" secondAttribute="bottom" id="MWM-wN-vDu"/>
+                                    <constraint firstAttribute="trailing" secondItem="GEo-p6-9eo" secondAttribute="trailing" constant="10" id="MdA-bx-n9h"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4Kw-MO-VQg" secondAttribute="bottom" constant="5" id="UfF-CY-phx"/>
+                                    <constraint firstAttribute="trailing" secondItem="bep-sN-Z77" secondAttribute="trailing" constant="10" id="auY-3w-7dT"/>
+                                    <constraint firstItem="bep-sN-Z77" firstAttribute="leading" secondItem="W6E-Si-ZIG" secondAttribute="leading" constant="10" id="cOs-rN-ciU"/>
+                                    <constraint firstItem="ua8-Al-6da" firstAttribute="top" secondItem="GEo-p6-9eo" secondAttribute="bottom" constant="5" id="ckN-dk-Sul"/>
+                                    <constraint firstItem="nt3-de-g0c" firstAttribute="centerY" secondItem="Zch-fD-Vsq" secondAttribute="centerY" id="cpx-Re-aFs"/>
+                                    <constraint firstItem="Zch-fD-Vsq" firstAttribute="top" secondItem="bep-sN-Z77" secondAttribute="top" id="oKQ-Ia-oAU"/>
+                                    <constraint firstItem="4Kw-MO-VQg" firstAttribute="leading" secondItem="W6E-Si-ZIG" secondAttribute="leading" constant="10" id="p4g-Ws-c71"/>
+                                    <constraint firstItem="nt3-de-g0c" firstAttribute="leading" secondItem="bep-sN-Z77" secondAttribute="leading" id="ps9-lu-SLQ"/>
+                                    <constraint firstItem="Zch-fD-Vsq" firstAttribute="leading" secondItem="nt3-de-g0c" secondAttribute="trailing" constant="10" id="qxM-OU-4zM"/>
+                                    <constraint firstItem="Zch-fD-Vsq" firstAttribute="trailing" secondItem="bep-sN-Z77" secondAttribute="trailing" id="sdI-CD-YdV"/>
+                                    <constraint firstItem="bep-sN-Z77" firstAttribute="top" secondItem="ua8-Al-6da" secondAttribute="bottom" constant="5" id="vQC-Im-wsA"/>
+                                    <constraint firstAttribute="trailing" secondItem="ua8-Al-6da" secondAttribute="trailing" constant="10" id="z0E-1X-Dhd"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7X-70-l7W">
+                                <rect key="frame" x="354" y="572" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8wK-iX-NjL"/>
+                                    <constraint firstAttribute="width" constant="50" id="k4a-oE-TQZ"/>
+                                </constraints>
+                                <state key="normal" image="ic_fav_disable"/>
+                                <connections>
+                                    <action selector="favAction:" destination="AOh-tV-C82" eventType="touchUpInside" id="5Cx-b9-YLf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SZn-m9-3He" firstAttribute="bottom" secondItem="W6E-Si-ZIG" secondAttribute="bottom" id="1pK-DD-GGf"/>
+                            <constraint firstItem="iAq-2Q-a3r" firstAttribute="top" secondItem="SZn-m9-3He" secondAttribute="top" id="7uj-Oy-Yw9"/>
+                            <constraint firstItem="W6E-Si-ZIG" firstAttribute="top" secondItem="h7X-70-l7W" secondAttribute="bottom" constant="20" id="EUw-Da-McZ"/>
+                            <constraint firstItem="SZn-m9-3He" firstAttribute="trailing" secondItem="W6E-Si-ZIG" secondAttribute="trailing" id="HFt-sY-Rsm"/>
+                            <constraint firstItem="iAq-2Q-a3r" firstAttribute="leading" secondItem="DJ6-0i-9Zh" secondAttribute="leading" id="ISF-ZS-xUJ"/>
+                            <constraint firstItem="NLs-pP-1r6" firstAttribute="centerY" secondItem="DJ6-0i-9Zh" secondAttribute="centerY" id="Js2-so-FVs"/>
+                            <constraint firstItem="W6E-Si-ZIG" firstAttribute="leading" secondItem="SZn-m9-3He" secondAttribute="leading" id="MrZ-mR-jpl"/>
+                            <constraint firstItem="iAq-2Q-a3r" firstAttribute="bottom" secondItem="DJ6-0i-9Zh" secondAttribute="bottom" id="ZTZ-iJ-4gO"/>
+                            <constraint firstAttribute="trailing" secondItem="iAq-2Q-a3r" secondAttribute="trailing" id="hGH-nx-ble"/>
+                            <constraint firstItem="SZn-m9-3He" firstAttribute="trailing" secondItem="h7X-70-l7W" secondAttribute="trailing" constant="10" id="jyT-mE-Bl9"/>
+                            <constraint firstItem="NLs-pP-1r6" firstAttribute="centerX" secondItem="DJ6-0i-9Zh" secondAttribute="centerX" id="nV5-ga-RGH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SZn-m9-3He"/>
+                    </view>
+                    <connections>
+                        <outlet property="backdropActivityIndicator" destination="NLs-pP-1r6" id="z8U-uC-AQv"/>
+                        <outlet property="backdropImageView" destination="iAq-2Q-a3r" id="059-Eh-QQW"/>
+                        <outlet property="descriptionLabel" destination="4Kw-MO-VQg" id="Mkw-VO-wDd"/>
+                        <outlet property="favButton" destination="h7X-70-l7W" id="xKS-uN-cWh"/>
+                        <outlet property="genreActivityIndicator" destination="nt3-de-g0c" id="AyV-U4-rws"/>
+                        <outlet property="genrePlaceHolder" destination="Zch-fD-Vsq" id="z1o-Us-F6g"/>
+                        <outlet property="genresListLabel" destination="bep-sN-Z77" id="nKC-yR-GIf"/>
+                        <outlet property="releaseYearLabel" destination="ua8-Al-6da" id="GiG-7Q-ify"/>
+                        <outlet property="titleLabel" destination="GEo-p6-9eo" id="6DF-66-IU2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O86-Hz-tt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.25" y="-4.225352112676056"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_fav_disable" width="17" height="16"/>
+    </resources>
+</document>

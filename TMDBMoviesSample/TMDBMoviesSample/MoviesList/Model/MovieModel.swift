@@ -23,11 +23,3 @@ class MovieModel: Decodable {
         case posterPath = "poster_path"
     }
 }
-
-extension MovieModel {
-    func downloadImage(completion: @escaping (ResponseResultType<Data>) -> Void) {
-        guard let path = posterPath else { return }
-        let client = MoviesListClient()
-        client.getMoviePoster(posterPath: path, completion: completion)
-    }
-}
