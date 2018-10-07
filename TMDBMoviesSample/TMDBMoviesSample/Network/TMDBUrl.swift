@@ -41,11 +41,14 @@ struct TMDBUrl {
 enum EndPoints {
     
     case moviesList
+    case configuration
     
     var rawValue: String {
         switch self {
         case .moviesList:
             return "/movie/popular"
+        case .configuration:
+            return "/configuration"
         }
     }
 }

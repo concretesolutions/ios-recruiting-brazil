@@ -27,6 +27,8 @@
 		43463B1D2166FE0A007D1488 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43463B1B2166FE0A007D1488 /* MovieCell.xib */; };
 		43463B20216705F1007D1488 /* MoviesCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43463B1F216705F1007D1488 /* MoviesCollectionViewManager.swift */; };
 		43463B232167090A007D1488 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43463B222167090A007D1488 /* UICollectionView+Extension.swift */; };
+		434A605D21686BCB006B56F4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A605C21686BCB006B56F4 /* UIView+Extension.swift */; };
+		434A6060216881A3006B56F4 /* TMDBConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A605F216881A3006B56F4 /* TMDBConfigurationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		43463B1B2166FE0A007D1488 /* MovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		43463B1F216705F1007D1488 /* MoviesCollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewManager.swift; sourceTree = "<group>"; };
 		43463B222167090A007D1488 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		434A605C21686BCB006B56F4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		434A605F216881A3006B56F4 /* TMDBConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBConfigurationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +88,8 @@
 		43463AD62165AEA9007D1488 /* TMDBMoviesSample */ = {
 			isa = PBXGroup;
 			children = (
-				43463B21216708F2007D1488 /* Util */,
+				434A605E21688140006B56F4 /* Model */,
+				43463B21216708F2007D1488 /* Extensions */,
 				43463B0B2165BB9B007D1488 /* Network */,
 				43463AF62165B738007D1488 /* MoviesList */,
 				43463AF02165B11B007D1488 /* TabController */,
@@ -164,8 +169,8 @@
 		43463B042165B9E3007D1488 /* MovieCell */ = {
 			isa = PBXGroup;
 			children = (
-				43463B1A2166FE0A007D1488 /* MovieCell.swift */,
 				43463B1B2166FE0A007D1488 /* MovieCell.xib */,
+				43463B1A2166FE0A007D1488 /* MovieCell.swift */,
 			);
 			path = MovieCell;
 			sourceTree = "<group>";
@@ -189,12 +194,21 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
-		43463B21216708F2007D1488 /* Util */ = {
+		43463B21216708F2007D1488 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				43463B222167090A007D1488 /* UICollectionView+Extension.swift */,
+				434A605C21686BCB006B56F4 /* UIView+Extension.swift */,
 			);
-			path = Util;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		434A605E21688140006B56F4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				434A605F216881A3006B56F4 /* TMDBConfigurationModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +286,7 @@
 			files = (
 				43463B1C2166FE0A007D1488 /* MovieCell.swift in Sources */,
 				43463B0A2165BA1F007D1488 /* MovieModel.swift in Sources */,
+				434A605D21686BCB006B56F4 /* UIView+Extension.swift in Sources */,
 				43463B0D2165BC19007D1488 /* Service.swift in Sources */,
 				43463B032165B800007D1488 /* MoviesListPresenterProtocol.swift in Sources */,
 				43463AD82165AEA9007D1488 /* AppDelegate.swift in Sources */,
@@ -282,6 +297,7 @@
 				43463B172166E4A0007D1488 /* MoviesListClient.swift in Sources */,
 				43463B112165BC69007D1488 /* ResponseFailureType.swift in Sources */,
 				43463AFD2165B7AD007D1488 /* MoviesListViewController.swift in Sources */,
+				434A6060216881A3006B56F4 /* TMDBConfigurationModel.swift in Sources */,
 				43463B012165B7E1007D1488 /* MoviesListPresenter.swift in Sources */,
 				43463B142165BCBC007D1488 /* TMDBUrl.swift in Sources */,
 				43463B20216705F1007D1488 /* MoviesCollectionViewManager.swift in Sources */,

@@ -29,14 +29,35 @@ extension MoviesListPresenter: MoviesListPresenterProtocol {
             case let .success(page):
                 self?.showSuccess()
                 self?.viewProtocol?.addSection(in: page - 1)
-            case let .fail(error):
-                break
+            case .fail(_):
+                self?.showError()
+            }
+        }
+    }
+    
+    func getMoviePoster(to model: MovieModel, completion: @escaping (ResponseResultType<Data>, String) -> Void) {
+        guard let posterPath = model.posterPath else { return }
+        client.getMoviePoster(posterPath: posterPath, completion: completion)
+    }
+    
+    private func showError() {
+        if  let list = moviesLists,
+            list.isEmpty {
+            if let errorIsShowing = viewProtocol?.errorIsShowing,
+                errorIsShowing {
+                viewProtocol?.hideErrorLoading()
+            } else {
+                viewProtocol?.hideLoading()
+                viewProtocol?.showErrorView()
             }
         }
     }
     
     private func showLoading() {
-        if  let list = moviesLists,
+        if let errorIsShowing = viewProtocol?.errorIsShowing,
+            errorIsShowing {
+            viewProtocol?.showErrorLoading()
+        } else if let list = moviesLists,
             list.isEmpty {
             viewProtocol?.hideCollectionView()
             viewProtocol?.showLoading()
@@ -45,6 +66,7 @@ extension MoviesListPresenter: MoviesListPresenterProtocol {
     
     private func showSuccess() {
         viewProtocol?.hideLoading()
+        viewProtocol?.hideErrorView()
         viewProtocol?.showCollectionView()
     }
 }

@@ -9,9 +9,15 @@
 import Foundation
 
 protocol MoviesListViewProtocol: class {
+    var errorIsShowing: Bool { get }
     func addSection(in index: Int)
     func showLoading()
     func hideLoading()
     func showCollectionView()
     func hideCollectionView()
+    func showErrorView()
+    func hideErrorView()
+    func showErrorLoading()
+    func hideErrorLoading()
+    func reloadRow(in indexPath: IndexPath)
 }

@@ -44,6 +44,7 @@ extension MoviesCollectionViewManager: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let movies = presenterProtocol?.moviesLists?[indexPath.section] else { return UICollectionViewCell() }
         let cell = collectionView.dequeueReusableCell(with: MovieCell.self, for: indexPath)
+        cell.delegate = self
         cell.model = movies[indexPath.item]
         return cell
     }
@@ -55,12 +56,10 @@ extension MoviesCollectionViewManager: UICollectionViewDataSource {
             presenterProtocol?.getMovies()
         }
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        guard let moviesCount = presenterProtocol?.moviesLists?[indexPath.section].count else { return }
-//        let loadMorePercent = Double(moviesCount) * 0.7
-//        if Double(indexPath.row) >= loadMorePercent {
-//            presenterProtocol?.getMovies()
-//        }
-//    }
+}
+
+extension MoviesCollectionViewManager: MovieCellDelegate {
+    func downloadImage(to model: MovieModel, completion: @escaping (ResponseResultType<Data>, String) -> Void) {
+        presenterProtocol?.getMoviePoster(to: model, completion: completion)
+    }
 }

@@ -16,6 +16,7 @@ class MoviesListClient {
     
     private lazy var service = Service()
     private var totalPages: Int = 1
+    private var configurationModel: TMDBConfigurationModel?
     
     private var actualPage: Int {
         return moviesList.count
@@ -29,7 +30,18 @@ class MoviesListClient {
         }
     }
     
-    internal func getMoviesList(completion: @escaping (ResponseResultType<Int>) -> Void) {
+    init() {
+        getConfigurationModel()
+    }
+    
+    public func cancelTask() {
+        service.cancelActiveTasks()
+    }
+}
+
+//MARK: - GetMovies methods -
+extension MoviesListClient {
+    func getMoviesList(completion: @escaping (ResponseResultType<Int>) -> Void) {
         let url = TMDBUrl().getUrl(to: .moviesList, and: moviePage)
         if actualPage > totalPages { return }
         service.get(in: url) { [weak self] (result: ResponseResultType<MoviesListModel>) in
@@ -49,7 +61,50 @@ class MoviesListClient {
     }
     
     private func doErrorTreat(with error: Error, completion: @escaping (ResponseResultType<Int>) -> Void) {
-        
         completion(.fail(error))
+    }
+}
+
+//MARK: - GetMoviePoster methods -
+extension MoviesListClient {
+    func getMoviePoster(posterPath: String, completion: @escaping (ResponseResultType<Data>, String) -> Void) {
+        let defaultPosterSize = "w500"
+        guard
+            let configModel = configurationModel,
+            let baseURL = configModel.images?.safeBaseURL,
+            let posterUrl = URL(string: baseURL + defaultPosterSize + posterPath)
+        else {
+            let urlError = NSError(domain: NSURLErrorDomain, code: 1002, userInfo: nil)
+            return completion(.fail(urlError), posterPath)
+        }
+        
+        service.getImage(in: posterUrl) { result, url in
+            switch result {
+            case let .success(data):
+                completion(.success(data), self.getPosterPath(from: url))
+            case let .fail(error):
+                completion(.fail(error), self.getPosterPath(from: url))
+            }
+        }
+    }
+    
+    private func getPosterPath(from url: URL?) -> String {
+        guard let posterURL = url else { return "" }
+        return "/\(posterURL.absoluteURL.lastPathComponent)"
+    }
+}
+
+//MARK: - GetConfiguration methods -
+extension MoviesListClient {
+    func getConfigurationModel() {
+        let url = TMDBUrl().getUrl(to: .configuration)
+        service.get(in: url) { [weak self] (result: ResponseResultType<TMDBConfigurationModel>) in
+            switch result {
+            case let .success(configModel):
+                self?.configurationModel = configModel
+            case .fail(_):
+                fatalError("Erro ao baixar as configs")
+            }
+        }
     }
 }

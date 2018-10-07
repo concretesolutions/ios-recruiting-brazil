@@ -11,4 +11,5 @@ import Foundation
 protocol MoviesListPresenterProtocol {
     var moviesLists: MoviesPages? { get }
     func getMovies()
+    func getMoviePoster(to model: MovieModel, completion: @escaping (ResponseResultType<Data>, String) -> Void)
 }

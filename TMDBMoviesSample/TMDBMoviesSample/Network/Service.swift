@@ -42,4 +42,24 @@ class Service {
         }
         dataTask?.resume()
     }
+    
+    func getImage(in imageURL: URL?, completion: @escaping (ResponseResultType<Data>, URL?) -> Void) {
+        guard let url = imageURL else {
+            completion(ResponseResultType.fail(NSError(domain: NSURLErrorDomain, code: 1000, userInfo: nil)), imageURL)
+            return
+        }
+        
+        dataTask = defaultSession.dataTask(with: url) { data, response, error in
+            defer { self.dataTask = nil }
+            
+            if let error = error {
+                
+                completion(.fail(error), response?.url)
+            } else if let response = response as? HTTPURLResponse,
+                let data = data {
+                completion(.success(data), response.url)
+            }
+        }
+        dataTask?.resume()
+    }
 }
