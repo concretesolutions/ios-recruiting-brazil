@@ -15,11 +15,17 @@ class MovieModel: Decodable {
     var id: Int?
     var posterPath: String?
     var posterImageData: Data?
+    var backdropPath: String?
+    var description: String?
+    var genreIds: [Int]?
     
     enum CodingKeys: String, CodingKey {
         case title
         case releaseDate = "release_date"
         case id
         case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
+        case description = "overview"
+        case genreIds = "genre_ids"
     }
 }

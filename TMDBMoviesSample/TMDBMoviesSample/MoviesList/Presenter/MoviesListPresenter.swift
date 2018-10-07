@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MoviesListPresenter {
     private weak var viewProtocol: MoviesListViewProtocol?
@@ -20,6 +21,32 @@ class MoviesListPresenter {
 extension MoviesListPresenter: MoviesListPresenterProtocol {
     var moviesLists: MoviesPages? {
         return client.moviesList
+    }
+    
+    func openMovieDetail(to indexPath: IndexPath) {
+        let detailStoryboard = UIStoryboard(name: "MovieDetailView", bundle: nil)
+        guard
+            let movie = moviesLists?[indexPath.section][indexPath.item],
+            let detailModel = getDetailModel(with: movie),
+            let detailVC = detailStoryboard.instantiateInitialViewController() as? MovieDetailViewController
+        else { return }
+        
+        detailVC.model = detailModel
+        viewProtocol?.show(with: detailVC)
+    }
+    
+    private func getDetailModel(with movie: MovieModel) -> MovieDetailModel? {
+        guard
+            let title = movie.title,
+            let releaseDate = movie.releaseDate,
+            let description = movie.description,
+            let genreIds = movie.genreIds,
+            let backdropPath = movie.backdropPath
+            else { return nil }
+        
+        let releaseYear = releaseDate.prefix(4)
+        let detailModel = MovieDetailModel(title: title, releaseYear: String(releaseYear), genreIds: genreIds, description: description, backdropPath: backdropPath)
+        return detailModel
     }
     
     func getMovies() {

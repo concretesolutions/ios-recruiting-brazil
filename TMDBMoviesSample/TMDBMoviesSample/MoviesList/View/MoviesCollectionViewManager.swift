@@ -56,6 +56,10 @@ extension MoviesCollectionViewManager: UICollectionViewDataSource {
             presenterProtocol?.getMovies()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenterProtocol?.openMovieDetail(to: indexPath)
+    }
 }
 
 extension MoviesCollectionViewManager: MovieCellDelegate {

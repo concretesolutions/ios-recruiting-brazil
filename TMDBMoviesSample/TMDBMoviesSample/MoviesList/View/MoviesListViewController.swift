@@ -109,7 +109,7 @@ extension MoviesListViewController: MoviesListViewProtocol {
         }
     }
     
-    func reloadRow(in indexPath: IndexPath) {
-        collectionView.reloadItems(at: [indexPath])
+    func show(with vc: UIViewController) {
+        navigationController?.show(vc, sender: nil)
     }
 }

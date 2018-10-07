@@ -6,7 +6,7 @@
 //  Copyright © 2018 Breno Rage Aboud. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol MoviesListViewProtocol: class {
     var errorIsShowing: Bool { get }
@@ -19,5 +19,5 @@ protocol MoviesListViewProtocol: class {
     func hideErrorView()
     func showErrorLoading()
     func hideErrorLoading()
-    func reloadRow(in indexPath: IndexPath)
+    func show(with vc: UIViewController)
 }
