@@ -16,7 +16,13 @@ class MoviesListClient {
     
     private lazy var service = Service()
     private var totalPages: Int = 1
-    private var configurationModel: TMDBConfigurationModel?
+    private var configurationModel: TMDBConfigurationModel? {
+        didSet {
+            guard let configs = configurationModel else { return }
+            let userDefaults = UserDefaultWrapper()
+            userDefaults.save(object: configs, with: userDefaults.configModelKey)
+        }
+    }
     
     private var actualPage: Int {
         return moviesList.count
