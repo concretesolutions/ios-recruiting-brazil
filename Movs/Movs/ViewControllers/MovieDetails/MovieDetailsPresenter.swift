@@ -43,22 +43,30 @@ class MovieDetailsPresenter {
     func onFavoriteAction() {
         if !movie.isFavorited {
             movie.isFavorited = true
+            notifyMovieChanged()
             view?.setFavorite(to: true)
             popularMoviesUseCase.favoriteMovie(movie)
                 .subscribe(onError: { _ in
                     self.movie.isFavorited = false
+                    self.notifyMovieChanged()
                     self.view?.setFavorite(to: false)
                 })
                 .disposed(by: disposeBag)
         } else {
             movie.isFavorited = false
+            notifyMovieChanged()
             view?.setFavorite(to: false)
             popularMoviesUseCase.unfavoriteMovie(movie)
                 .subscribe(onError: { (error: Error) in
                     self.movie.isFavorited = true
+                    self.notifyMovieChanged()
                     self.view?.setFavorite(to: true)
                 })
                 .disposed(by: disposeBag)
         }
+    }
+
+    private func notifyMovieChanged() {
+        NotificationCenter.default.post(name: NSNotification.Name.movie, object: movie)
     }
 }

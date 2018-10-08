@@ -158,6 +158,12 @@ extension MoviesViewController: MoviesView {
         } else {
             SVProgressHUD.dismiss()
         }
+    }
 
+    func update(with movie: Movie) {
+        if let index = movies.firstIndex(where: { $0.movieId == movie.movieId }) {
+            movies[index] = movie
+        }
+        popularCollectionView.reloadData()
     }
 }

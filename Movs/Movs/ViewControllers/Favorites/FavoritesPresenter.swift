@@ -20,7 +20,28 @@ class FavoritesPresenter {
     private let disposeBag = DisposeBag()
     private let moviesUseCase = MoviesUseCase()
 
+    init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onMovieChanged(notification:)),
+            name: NSNotification.Name.movie,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func onStart() {
+        fetchFavoriteMovies()
+    }
+
+    func onMovieSelected(movie: Movie) {
+        view?.openMovieDetails(with: movie)
+    }
+
+    private func fetchFavoriteMovies() {
         moviesUseCase.fetchFavoritedMovies()
             .subscribe(onSuccess: { (favoritedMovies: [Movie]) in
                 self.view?.updateView(with: favoritedMovies)
@@ -31,7 +52,7 @@ class FavoritesPresenter {
             .disposed(by: disposeBag)
     }
 
-    func onMovieSelected(movie: Movie) {
-        view?.openMovieDetails(with: movie)
+    @objc private func onMovieChanged(notification: NSNotification) {
+        fetchFavoriteMovies()
     }
 }

@@ -102,7 +102,7 @@ class MoviesDataSourceImpl: MoviesDataSource {
                 }
                 do {
                     try realm.write {
-                        if self.isMovieFavorited(movie), let object = realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) {
+                        if let object = realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) {
                             realm.delete(object)
                         }
                         DispatchQueue.main.async {
