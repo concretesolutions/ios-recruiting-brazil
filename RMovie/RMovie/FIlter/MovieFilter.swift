@@ -70,8 +70,11 @@ class MovieFilter {
         return moviesFilter?.count;
     }
     
-    subscript(index:Int) -> RM_Movie{
+    subscript(index:Int) -> RM_Movie?{
         self.applyFilters();
-        return self.moviesFilter![index]!;
+        if(index < (self.moviesFilter?.count)!){
+            return self.moviesFilter![index];
+        }
+        return nil;
     }
 }
