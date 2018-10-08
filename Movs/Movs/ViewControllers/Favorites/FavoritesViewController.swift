@@ -77,6 +77,10 @@ class FavoritesViewController: UIViewController {
     @objc private func onFiltersButtonTapped() {
         presenter.onFilterSelected()
     }
+
+    @IBAction func onClearFiltersTapped() {
+        presenter.onClearFilters()
+    }
 }
 
 extension FavoritesViewController: UITableViewDataSource {

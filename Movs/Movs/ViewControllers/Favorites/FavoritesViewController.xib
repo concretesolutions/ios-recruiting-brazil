@@ -21,17 +21,33 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MqI-Sv-tdY">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <color key="backgroundColor" red="0.17238631839999999" green="0.187818706" blue="0.27472317219999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="3jh-fb-mOx"/>
+                    </constraints>
+                    <state key="normal" title="Clear Filters">
+                        <color key="titleColor" red="0.90588235289999997" green="0.74901960779999999" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onClearFiltersTapped" destination="-1" eventType="touchUpInside" id="9nW-Lo-16O"/>
+                    </connections>
+                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pDU-K3-0T1">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="504"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="MqI-Sv-tdY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="1T8-EW-c46"/>
+                <constraint firstItem="MqI-Sv-tdY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5og-bA-ECg"/>
                 <constraint firstItem="pDU-K3-0T1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8jV-Ga-Usc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MqI-Sv-tdY" secondAttribute="trailing" id="EvS-KF-Ejf"/>
+                <constraint firstItem="pDU-K3-0T1" firstAttribute="top" secondItem="MqI-Sv-tdY" secondAttribute="bottom" id="RR3-hd-i3J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pDU-K3-0T1" secondAttribute="bottom" id="Sx5-BH-dHq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pDU-K3-0T1" secondAttribute="trailing" id="Vyl-pj-vqC"/>
-                <constraint firstItem="pDU-K3-0T1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="gjt-5c-k7M"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>

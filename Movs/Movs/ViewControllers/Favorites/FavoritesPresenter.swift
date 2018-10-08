@@ -58,6 +58,11 @@ class FavoritesPresenter {
         view?.openFiltersScreen()
     }
 
+    func onClearFilters() {
+        settingsDataSource.clearFilters()
+        fetchFavoriteMovies()
+    }
+
     // MARK: - Private methods
 
     private func fetchFavoriteMovies() {

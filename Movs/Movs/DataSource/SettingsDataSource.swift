@@ -13,6 +13,7 @@ protocol SettingsDataSource {
     func setGenreFilter(_ genre: String)
     func getYearFilter() -> Int?
     func getGenreFilter() -> String?
+    func clearFilters()
 }
 
 class SettingsDataSourceImpl: SettingsDataSource {
@@ -42,5 +43,11 @@ class SettingsDataSourceImpl: SettingsDataSource {
 
     func getGenreFilter() -> String? {
         return UserDefaults.standard.string(forKey: Keys.genre)
+    }
+
+    func clearFilters() {
+        UserDefaults.standard.set(0, forKey: Keys.year)
+        UserDefaults.standard.set(nil, forKey: Keys.genre)
+        UserDefaults.standard.synchronize()
     }
 }
