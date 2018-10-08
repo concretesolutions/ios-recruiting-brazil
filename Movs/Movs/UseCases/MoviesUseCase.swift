@@ -21,6 +21,11 @@ class MoviesUseCase {
     func fetchNextPopularMovies() -> Single<[Movie]> {
         let popularMoviesObservable = moviesDataSource.fetchPopularMovies()
         let genresObservable = genresDataSource.fetchGenres()
+            .map({ (genres: [Genre]) -> [Int: String] in
+                var hashedGenres = [Int: String]()
+                genres.forEach({ hashedGenres[$0.genreId] = $0.name })
+                return hashedGenres
+            })
         return Single.zip(popularMoviesObservable, genresObservable, resultSelector: { ($0, $1) })
             .map({ (movies: [Movie], genresList: [Int: String]) -> [Movie] in
                 for movie in movies {

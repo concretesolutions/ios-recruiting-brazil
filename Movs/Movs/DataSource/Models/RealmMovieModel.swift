@@ -15,6 +15,7 @@ class RealmMovieModel: Object {
     @objc dynamic var releaseDate = ""
     @objc dynamic var overview = ""
     @objc dynamic var posterPath = ""
+    let genres = List<String>()
 
     override static func primaryKey() -> String? {
         return "movieId"
@@ -27,6 +28,9 @@ class RealmMovieModel: Object {
         self.releaseDate = movie.releaseDate
         self.overview = movie.overview
         self.posterPath = movie.posterPath
+        for genre in movie.genres {
+            self.genres.append(genre)
+        }
     }
 
     func toMovie() -> Movie {
@@ -37,6 +41,9 @@ class RealmMovieModel: Object {
         movie.overview = self.overview
         movie.posterPath = self.posterPath
         movie.isFavorited = true
+        for genre in self.genres {
+            movie.genres.append(genre)
+        }
         return movie
     }
 }

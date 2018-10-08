@@ -20,6 +20,7 @@ class FavoritesPresenter {
 
     private let disposeBag = DisposeBag()
     private let moviesUseCase = MoviesUseCase()
+    private let settingsDataSource: SettingsDataSource = SettingsDataSourceImpl()
 
     init() {
         NotificationCenter.default.addObserver(
@@ -57,10 +58,22 @@ class FavoritesPresenter {
         view?.openFiltersScreen()
     }
 
+    func onClearFilters() {
+        settingsDataSource.clearFilters()
+        fetchFavoriteMovies()
+    }
+
     // MARK: - Private methods
 
     private func fetchFavoriteMovies() {
         moviesUseCase.fetchFavoritedMovies()
+            .map({ (movies: [Movie]) -> [Movie] in
+                var filteredMovies = movies
+                if let yearFilter = self.settingsDataSource.getYearFilter() {
+                    filteredMovies = filteredMovies.filter({ $0.year == yearFilter })
+                }
+                return filteredMovies
+            })
             .subscribe(onSuccess: { (favoritedMovies: [Movie]) in
                 self.view?.updateView(with: favoritedMovies)
             }, onError: { (error: Error) in

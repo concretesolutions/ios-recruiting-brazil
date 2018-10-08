@@ -10,19 +10,14 @@ import UIKit
 import RxSwift
 
 protocol GenresDataSource {
-    func fetchGenres() -> Single<[Int: String]>
+    func fetchGenres() -> Single<[Genre]>
 }
 
 class GenresDataSourceImpl: GenresDataSource {
 
-    func fetchGenres() -> Single<[Int: String]> {
+    func fetchGenres() -> Single<[Genre]> {
         return requestData(url: "\(NetworkClientConstants.baseURL)/genre/movie/list")
             .map(parseGenres)
-            .map({ (genres: [Genre]) -> [Int: String] in
-                var hashedGenres = [Int: String]()
-                genres.forEach({ hashedGenres[$0.genreId] = $0.name })
-                return hashedGenres
-            })
     }
 
     private func parseGenres(_ data: Data) -> [Genre] {
