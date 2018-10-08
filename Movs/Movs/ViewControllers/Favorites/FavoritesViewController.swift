@@ -96,8 +96,8 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let unfavoriteAction = UIContextualAction(style: .destructive, title: "Unfavorite") { (_, _, _) in
-//            let movie = self.movies[indexPath.row]
-            // TODO: Delete from favorites
+            let movie = self.movies[indexPath.row]
+            self.presenter.onMovieUnfavorited(movie: movie)
         }
         return UISwipeActionsConfiguration(actions: [unfavoriteAction])
     }

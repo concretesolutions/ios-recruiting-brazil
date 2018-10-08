@@ -62,7 +62,7 @@ class MovieDetailsViewController: UIViewController {
     }
 
     @objc private func onFavoriteButtonTapped() {
-        print("Favorited")
+        presenter.onFavoriteAction()
     }
 
     private func setupViews() {
@@ -71,11 +71,37 @@ class MovieDetailsViewController: UIViewController {
 }
 
 extension MovieDetailsViewController: MovieDetailsView {
+
     func setup(with movie: Movie) {
         lbYear.text = movie.releaseDate
         lbDescription.text = movie.overview
     }
+
     func presenter(_ presenter: MovieDetailsPresenter, didFetchImage image: UIImage) {
         self.imageView.image = image
+    }
+
+    func setFavorite(to favorite: Bool) {
+        if favorite {
+            let image = UIImage(named: "buttonUnfavorite")?.withRenderingMode(.alwaysTemplate)
+            let rightButtonItem = UIBarButtonItem(
+                image: image,
+                style: .plain,
+                target: self,
+                action: #selector(onFavoriteButtonTapped)
+            )
+            rightButtonItem.tintColor = UIColor.red
+            navigationItem.rightBarButtonItem = rightButtonItem
+        } else {
+            let image = UIImage(named: "buttonFavorite")?.withRenderingMode(.alwaysTemplate)
+            let rightButtonItem = UIBarButtonItem(
+                image: image,
+                style: .plain,
+                target: self,
+                action: #selector(onFavoriteButtonTapped)
+            )
+            rightButtonItem.tintColor = UIColor.black
+            navigationItem.rightBarButtonItem = rightButtonItem
+        }
     }
 }

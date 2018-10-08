@@ -65,11 +65,9 @@ class MoviesDataSourceImpl: MoviesDataSource {
 
     func addToFavorites(_ movie: Movie) -> Completable {
         return Completable.create { observer in
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 guard let realm = try? Realm() else {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                     return
                 }
                 do {
@@ -77,15 +75,11 @@ class MoviesDataSourceImpl: MoviesDataSource {
                         if !self.isMovieFavorited(movie) {
                             realm.add(RealmMovieModel(movie: movie))
                         }
-                        DispatchQueue.main.async {
-                            observer(.completed)
-                        }
                     }
                 } catch {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                 }
+                observer(.completed)
             }
             return Disposables.create {}
         }
@@ -93,27 +87,21 @@ class MoviesDataSourceImpl: MoviesDataSource {
 
     func removefromFavorites(_ movie: Movie) -> Completable {
         return Completable.create { observer in
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 guard let realm = try? Realm() else {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                     return
                 }
                 do {
                     try realm.write {
-                        if self.isMovieFavorited(movie), let object = realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) {
+                        if let object = realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) {
                             realm.delete(object)
-                        }
-                        DispatchQueue.main.async {
-                            observer(.completed)
                         }
                     }
                 } catch {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                 }
+                observer(.completed)
             }
             return Disposables.create {}
         }
