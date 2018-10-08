@@ -32,12 +32,8 @@ protocol MoviesDataSource {
 class MoviesDataSourceImpl: MoviesDataSource {
 
     func fetchPopularMovies() -> Single<[Movie]> {
-        return requestData(url: "\(NetworkClientConstants.baseURL)/movie/popular").map({ (data: Data) -> [Movie] in
-            if let movies = self.parseMovies(data) {
-                return movies
-            }
-            return []
-        })
+        return requestData(url: "\(NetworkClientConstants.baseURL)/movie/popular")
+            .map(parseMovies)
     }
 
     func fetchFavoritedMovies() -> Single<[Movie]> {
@@ -65,11 +61,9 @@ class MoviesDataSourceImpl: MoviesDataSource {
 
     func addToFavorites(_ movie: Movie) -> Completable {
         return Completable.create { observer in
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 guard let realm = try? Realm() else {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                     return
                 }
                 do {
@@ -77,15 +71,11 @@ class MoviesDataSourceImpl: MoviesDataSource {
                         if !self.isMovieFavorited(movie) {
                             realm.add(RealmMovieModel(movie: movie))
                         }
-                        DispatchQueue.main.async {
-                            observer(.completed)
-                        }
                     }
                 } catch {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                 }
+                observer(.completed)
             }
             return Disposables.create {}
         }
@@ -93,27 +83,21 @@ class MoviesDataSourceImpl: MoviesDataSource {
 
     func removefromFavorites(_ movie: Movie) -> Completable {
         return Completable.create { observer in
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 guard let realm = try? Realm() else {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                     return
                 }
                 do {
                     try realm.write {
-                        if self.isMovieFavorited(movie), let object = realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) {
+                        if let object = realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) {
                             realm.delete(object)
-                        }
-                        DispatchQueue.main.async {
-                            observer(.completed)
                         }
                     }
                 } catch {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                 }
+                observer(.completed)
             }
             return Disposables.create {}
         }
@@ -124,12 +108,12 @@ class MoviesDataSourceImpl: MoviesDataSource {
         return realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) != nil
     }
 
-    private func parseMovies(_ data: Data) -> [Movie]? {
+    private func parseMovies(_ data: Data) -> [Movie] {
         do {
             let response = try JSONDecoder().decode(PopularMovieResponse.self, from: data)
             return response.results
         } catch {
-            return nil
+            return []
         }
     }
 }

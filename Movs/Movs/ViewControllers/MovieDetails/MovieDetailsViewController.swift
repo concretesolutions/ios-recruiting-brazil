@@ -47,22 +47,11 @@ class MovieDetailsViewController: UIViewController {
         )
         navigationItem.rightBarButtonItem = rightButtonItem
 
-        lbDescription.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-        + " ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
-        + " aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum"
-        + " dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia"
-        + " deserunt mollit anim id est laborum."
-        + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-        + " ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
-        + " aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum"
-        + " dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia"
-        + " deserunt mollit anim id est laborum."
-
         presenter.onStart()
     }
 
     @objc private func onFavoriteButtonTapped() {
-        print("Favorited")
+        presenter.onFavoriteAction()
     }
 
     private func setupViews() {
@@ -71,11 +60,38 @@ class MovieDetailsViewController: UIViewController {
 }
 
 extension MovieDetailsViewController: MovieDetailsView {
+
     func setup(with movie: Movie) {
         lbYear.text = movie.releaseDate
         lbDescription.text = movie.overview
+        lbCategory.text = String.join(movie.genres, withSeparator: ", ")
     }
+
     func presenter(_ presenter: MovieDetailsPresenter, didFetchImage image: UIImage) {
         self.imageView.image = image
+    }
+
+    func setFavorite(to favorite: Bool) {
+        if favorite {
+            let image = UIImage(named: "buttonUnfavorite")?.withRenderingMode(.alwaysTemplate)
+            let rightButtonItem = UIBarButtonItem(
+                image: image,
+                style: .plain,
+                target: self,
+                action: #selector(onFavoriteButtonTapped)
+            )
+            rightButtonItem.tintColor = UIColor.red
+            navigationItem.rightBarButtonItem = rightButtonItem
+        } else {
+            let image = UIImage(named: "buttonFavorite")?.withRenderingMode(.alwaysTemplate)
+            let rightButtonItem = UIBarButtonItem(
+                image: image,
+                style: .plain,
+                target: self,
+                action: #selector(onFavoriteButtonTapped)
+            )
+            rightButtonItem.tintColor = UIColor.black
+            navigationItem.rightBarButtonItem = rightButtonItem
+        }
     }
 }

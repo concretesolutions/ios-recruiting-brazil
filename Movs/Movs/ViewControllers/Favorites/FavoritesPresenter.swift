@@ -12,6 +12,7 @@ import RxSwift
 protocol FavoritesView: AnyObject {
     func updateView(with movies: [Movie])
     func openMovieDetails(with movie: Movie)
+    func openFiltersScreen()
 }
 
 class FavoritesPresenter {
@@ -19,9 +20,60 @@ class FavoritesPresenter {
 
     private let disposeBag = DisposeBag()
     private let moviesUseCase = MoviesUseCase()
+    private let settingsDataSource: SettingsDataSource = SettingsDataSourceImpl()
+
+    init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onMovieChanged(notification:)),
+            name: NSNotification.Name.movie,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     func onStart() {
+        fetchFavoriteMovies()
+    }
+
+    func onMovieSelected(movie: Movie) {
+        view?.openMovieDetails(with: movie)
+    }
+
+    func onMovieUnfavorited(movie: Movie) {
+        movie.isFavorited = false
+        moviesUseCase.unfavoriteMovie(movie)
+            .subscribe(onCompleted: {
+                self.notifyMovieChanged(movie)
+            }, onError: { (error: Error) in
+                // hehe
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func onFilterSelected() {
+        view?.openFiltersScreen()
+    }
+
+    func onClearFilters() {
+        settingsDataSource.clearFilters()
+        fetchFavoriteMovies()
+    }
+
+    // MARK: - Private methods
+
+    private func fetchFavoriteMovies() {
         moviesUseCase.fetchFavoritedMovies()
+            .map({ (movies: [Movie]) -> [Movie] in
+                var filteredMovies = movies
+                if let yearFilter = self.settingsDataSource.getYearFilter() {
+                    filteredMovies = filteredMovies.filter({ $0.year == yearFilter })
+                }
+                return filteredMovies
+            })
             .subscribe(onSuccess: { (favoritedMovies: [Movie]) in
                 self.view?.updateView(with: favoritedMovies)
             }, onError: { (error: Error) in
@@ -31,7 +83,11 @@ class FavoritesPresenter {
             .disposed(by: disposeBag)
     }
 
-    func onMovieSelected(movie: Movie) {
-        view?.openMovieDetails(with: movie)
+    @objc private func onMovieChanged(notification: NSNotification) {
+        fetchFavoriteMovies()
+    }
+
+    private func notifyMovieChanged(_ movie: Movie) {
+        NotificationCenter.default.post(name: NSNotification.Name.movie, object: movie)
     }
 }

@@ -12,6 +12,7 @@ import RxSwift
 protocol MoviesView: AnyObject {
     func openMovieDetails(with movie: Movie)
     func updateWith(movies: [Movie])
+    func update(with movie: Movie)
     func setLoading(to loading: Bool)
 }
 
@@ -21,6 +22,19 @@ class MoviesPresenter {
 
     private let moviesUseCase = MoviesUseCase()
     private let disposeBag = DisposeBag()
+
+    init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onMovieChanged(notification:)),
+            name: NSNotification.Name.movie,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     func onStart() {
         view?.setLoading(to: true)
@@ -38,5 +52,11 @@ class MoviesPresenter {
 
     func onMovieSelected(movie: Movie) {
         view?.openMovieDetails(with: movie)
+    }
+
+    @objc private func onMovieChanged(notification: NSNotification) {
+        if let changedMovie = notification.object as? Movie {
+            view?.update(with: changedMovie)
+        }
     }
 }

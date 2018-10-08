@@ -39,11 +39,22 @@ class FavoritesViewController: UIViewController {
         presenter.view = self
         setupSearchBar()
         setupTableView()
-
+        setupNavigaitonButtons()
         presenter.onStart()
     }
 
     // MARK: - Private methods
+
+    private func setupNavigaitonButtons() {
+        let rightButtonItem = UIBarButtonItem(
+            image: UIImage(named: "buttonFilters")?.withRenderingMode(.alwaysTemplate),
+            style: .plain,
+            target: self,
+            action: #selector(onFiltersButtonTapped)
+        )
+        rightButtonItem.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem = rightButtonItem
+    }
 
     private func setupSearchBar() {
         searchController.searchBar.placeholder = "Search favorite"
@@ -61,6 +72,14 @@ class FavoritesViewController: UIViewController {
         favoritesTableView.estimatedRowHeight = 100
         favoritesTableView.dataSource = self
         favoritesTableView.delegate = self
+    }
+
+    @objc private func onFiltersButtonTapped() {
+        presenter.onFilterSelected()
+    }
+
+    @IBAction func onClearFiltersTapped() {
+        presenter.onClearFilters()
     }
 }
 
@@ -96,8 +115,8 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let unfavoriteAction = UIContextualAction(style: .destructive, title: "Unfavorite") { (_, _, _) in
-//            let movie = self.movies[indexPath.row]
-            // TODO: Delete from favorites
+            let movie = self.movies[indexPath.row]
+            self.presenter.onMovieUnfavorited(movie: movie)
         }
         return UISwipeActionsConfiguration(actions: [unfavoriteAction])
     }
@@ -116,7 +135,7 @@ extension FavoritesViewController: UISearchResultsUpdating {
     /**
      Return whether the user is searching for a specific movie.
      */
-    func isSearching() -> Bool {
+    private func isSearching() -> Bool {
         if let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) {
             return !text.isEmpty
         }
@@ -133,5 +152,10 @@ extension FavoritesViewController: FavoritesView {
     func openMovieDetails(with movie: Movie) {
         let movieDetailsViewController = MovieDetailsViewController(movie: movie)
         navigationController?.pushViewController(movieDetailsViewController, animated: true)
+    }
+
+    func openFiltersScreen() {
+        let filtersViewController = FiltersViewController()
+        navigationController?.pushViewController(filtersViewController, animated: true)
     }
 }

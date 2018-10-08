@@ -42,8 +42,11 @@ class MoviesCellPresenter {
             movie.isFavorited = true
             view?.setFavorite(to: true)
             popularMoviesUseCase.favoriteMovie(movie)
-                .subscribe(onError: { _ in
+                .subscribe(onCompleted: {
+                    self.notifyMovieChanged(movie)
+                }, onError: { _ in
                     movie.isFavorited = false
+                    self.notifyMovieChanged(movie)
                     self.view?.setFavorite(to: false)
                 })
                 .disposed(by: disposeBag)
@@ -51,11 +54,18 @@ class MoviesCellPresenter {
             movie.isFavorited = false
             view?.setFavorite(to: false)
             popularMoviesUseCase.unfavoriteMovie(movie)
-                .subscribe(onError: { (error: Error) in
+                .subscribe(onCompleted: {
+                    self.notifyMovieChanged(movie)
+                },onError: { (error: Error) in
                     movie.isFavorited = true
+                    self.notifyMovieChanged(movie)
                     self.view?.setFavorite(to: true)
                 })
                 .disposed(by: disposeBag)
         }
+    }
+
+    private func notifyMovieChanged(_ movie: Movie) {
+        NotificationCenter.default.post(name: NSNotification.Name.movie, object: movie)
     }
 }
