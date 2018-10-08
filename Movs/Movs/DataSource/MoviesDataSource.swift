@@ -77,9 +77,9 @@ class MoviesDataSourceImpl: MoviesDataSource {
                         if !self.isMovieFavorited(movie) {
                             realm.add(RealmMovieModel(movie: movie))
                         }
-                        DispatchQueue.main.async {
-                            observer(.completed)
-                        }
+                    }
+                    DispatchQueue.main.async {
+                        observer(.completed)
                     }
                 } catch {
                     DispatchQueue.main.async {
@@ -105,9 +105,9 @@ class MoviesDataSourceImpl: MoviesDataSource {
                         if let object = realm.object(ofType: RealmMovieModel.self, forPrimaryKey: movie.movieId) {
                             realm.delete(object)
                         }
-                        DispatchQueue.main.async {
-                            observer(.completed)
-                        }
+                    }
+                    DispatchQueue.main.async {
+                        observer(.completed)
                     }
                 } catch {
                     DispatchQueue.main.async {
