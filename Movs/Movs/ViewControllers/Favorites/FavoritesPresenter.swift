@@ -41,6 +41,19 @@ class FavoritesPresenter {
         view?.openMovieDetails(with: movie)
     }
 
+    func onMovieUnfavorited(movie: Movie) {
+        movie.isFavorited = false
+        moviesUseCase.unfavoriteMovie(movie)
+            .subscribe(onCompleted: {
+                self.notifyMovieChanged(movie)
+            }, onError: { (error: Error) in
+                // hehe
+            })
+            .disposed(by: disposeBag)
+    }
+
+    // MARK: - Private methods
+
     private func fetchFavoriteMovies() {
         moviesUseCase.fetchFavoritedMovies()
             .subscribe(onSuccess: { (favoritedMovies: [Movie]) in
@@ -54,5 +67,9 @@ class FavoritesPresenter {
 
     @objc private func onMovieChanged(notification: NSNotification) {
         fetchFavoriteMovies()
+    }
+
+    private func notifyMovieChanged(_ movie: Movie) {
+        NotificationCenter.default.post(name: NSNotification.Name.movie, object: movie)
     }
 }
