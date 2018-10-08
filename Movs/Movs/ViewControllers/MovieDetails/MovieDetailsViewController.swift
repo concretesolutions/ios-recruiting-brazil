@@ -64,6 +64,7 @@ extension MovieDetailsViewController: MovieDetailsView {
     func setup(with movie: Movie) {
         lbYear.text = movie.releaseDate
         lbDescription.text = movie.overview
+        lbCategory.text = String.join(movie.genres, withSeparator: ", ")
     }
 
     func presenter(_ presenter: MovieDetailsPresenter, didFetchImage image: UIImage) {
