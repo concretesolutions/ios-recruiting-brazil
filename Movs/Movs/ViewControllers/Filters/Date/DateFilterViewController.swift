@@ -14,7 +14,8 @@ class DateFilterViewController: UITableViewController {
         static let cellIdentifier = "DateCell"
     }
 
-    var years = [Int]()
+    private var years = [Int]()
+    private let settingsDataSource: SettingsDataSource = SettingsDataSourceImpl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,15 @@ class DateFilterViewController: UITableViewController {
         populateYears()
         tableView.register(DateFilterCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.reloadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let selectedYear = settingsDataSource.getYearFilter(),
+            let selectedYearIndex = years.firstIndex(where: { $0 == selectedYear }) {
+            let indexPath = IndexPath(row: selectedYearIndex, section: 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,7 +48,11 @@ class DateFilterViewController: UITableViewController {
         fatalError("Cell not configured")
     }
 
-    // MARK: - Populate years
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedYear = years[indexPath.row]
+        settingsDataSource.setYearFilter(selectedYear)
+        NotificationCenter.default.post(name: NSNotification.Name.movie, object: nil)
+    }
 
     private func populateYears() {
         let components = Calendar.current.dateComponents([.year], from: Date())

@@ -131,7 +131,7 @@ extension FavoritesViewController: UISearchResultsUpdating {
     /**
      Return whether the user is searching for a specific movie.
      */
-    func isSearching() -> Bool {
+    private func isSearching() -> Bool {
         if let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) {
             return !text.isEmpty
         }

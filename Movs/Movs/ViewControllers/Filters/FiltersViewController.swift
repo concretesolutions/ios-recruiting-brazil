@@ -22,6 +22,11 @@ class FiltersViewController: UITableViewController {
         tableView.register(FilterTableViewCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -34,14 +39,14 @@ class FiltersViewController: UITableViewController {
                 if let dateFilter = settingsDataSource.getYearFilter() {
                     cell.detailTextLabel?.text = "\(dateFilter)"
                 } else {
-                    cell.detailTextLabel?.text = "2018"
+                    cell.detailTextLabel?.text = ""
                 }
             } else {
                 cell.textLabel?.text = "Genre"
                 if let genreFilter = settingsDataSource.getGenreFilter() {
                     cell.detailTextLabel?.text = genreFilter
                 } else {
-                    cell.detailTextLabel?.text = "Humor"
+                    cell.detailTextLabel?.text = ""
                 }
             }
             return cell
