@@ -65,11 +65,9 @@ class MoviesDataSourceImpl: MoviesDataSource {
 
     func addToFavorites(_ movie: Movie) -> Completable {
         return Completable.create { observer in
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 guard let realm = try? Realm() else {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                     return
                 }
                 do {
@@ -78,14 +76,10 @@ class MoviesDataSourceImpl: MoviesDataSource {
                             realm.add(RealmMovieModel(movie: movie))
                         }
                     }
-                    DispatchQueue.main.async {
-                        observer(.completed)
-                    }
                 } catch {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                 }
+                observer(.completed)
             }
             return Disposables.create {}
         }
@@ -93,11 +87,9 @@ class MoviesDataSourceImpl: MoviesDataSource {
 
     func removefromFavorites(_ movie: Movie) -> Completable {
         return Completable.create { observer in
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 guard let realm = try? Realm() else {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                     return
                 }
                 do {
@@ -106,14 +98,10 @@ class MoviesDataSourceImpl: MoviesDataSource {
                             realm.delete(object)
                         }
                     }
-                    DispatchQueue.main.async {
-                        observer(.completed)
-                    }
                 } catch {
-                    DispatchQueue.main.async {
-                        observer(.error(MovErrors.genericError))
-                    }
+                    observer(.error(MovErrors.genericError))
                 }
+                observer(.completed)
             }
             return Disposables.create {}
         }
