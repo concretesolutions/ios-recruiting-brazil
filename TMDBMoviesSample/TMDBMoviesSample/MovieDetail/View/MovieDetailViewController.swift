@@ -28,12 +28,16 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTitle()
         setupViews()
     }
 }
 
 //MARK: - SetupMethods -
 extension MovieDetailViewController {
+    private func setupTitle() {
+        title = model?.title
+    }
     private func setupViews() {
         guard let model = model else { return }
         titleLabel.text = model.title
@@ -74,6 +78,12 @@ extension MovieDetailViewController: MovieDetailViewProtocol {
             self.genreActivityIndicator.isHidden = true
             self.backdropActivityIndicator.stopAnimating()
             self.genresListLabel.isHidden = false
+        }
+    }
+    
+    func setGenreText(with text: String?) {
+        DispatchQueue.main.async {
+            self.genresListLabel.text = text
         }
     }
 }

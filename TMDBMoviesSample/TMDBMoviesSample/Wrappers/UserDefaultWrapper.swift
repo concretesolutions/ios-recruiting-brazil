@@ -11,6 +11,7 @@ import Foundation
 class UserDefaultWrapper {
     let tmdbFavsKey = "TMDBFavsKey"
     let configModelKey = "ConfigModelKey"
+    let genresIdsKey = "GenresIdsKey"
     
     private let defaults = UserDefaults.standard
     

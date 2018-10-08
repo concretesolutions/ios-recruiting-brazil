@@ -14,4 +14,5 @@ protocol MovieDetailViewProtocol: class {
     func hideBackdropLoading()
     func showGenreLoading()
     func hideGenreLoading()
+    func setGenreText(with text: String?)
 }

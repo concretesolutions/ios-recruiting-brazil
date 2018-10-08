@@ -18,13 +18,7 @@ class MoviesListClient {
     private var totalPages: Int = 1
     private var configurationModel: TMDBConfigurationModel? {
         didSet {
-            guard
-                let configs = configurationModel,
-                let data = try? JSONEncoder().encode(configs)
-            else { return }
-            
-            let userDefaults = UserDefaultWrapper()
-            userDefaults.save(object: data, with: userDefaults.configModelKey)
+            saveConfigs()
         }
     }
     
@@ -116,5 +110,15 @@ extension MoviesListClient {
                 fatalError("Erro ao baixar as configs")
             }
         }
+    }
+    
+    private func saveConfigs() {
+        guard
+            let configs = configurationModel,
+            let data = try? JSONEncoder().encode(configs)
+        else { return }
+        
+        let userDefaults = UserDefaultWrapper()
+        userDefaults.save(object: data, with: userDefaults.configModelKey)
     }
 }

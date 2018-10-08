@@ -42,6 +42,7 @@ enum EndPoints {
     
     case moviesList
     case configuration
+    case genreIds
     
     var rawValue: String {
         switch self {
@@ -49,6 +50,8 @@ enum EndPoints {
             return "/movie/popular"
         case .configuration:
             return "/configuration"
+        case .genreIds:
+            return "/genre/movie/list"
         }
     }
 }
