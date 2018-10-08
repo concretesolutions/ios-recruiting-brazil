@@ -22,6 +22,8 @@
 		017FC17B2167020100882E84 /* FavoritesCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FC17A2167020100882E84 /* FavoritesCellPresenter.swift */; };
 		017FC17D2167056800882E84 /* MovieDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FC17C2167056800882E84 /* MovieDetailsPresenter.swift */; };
 		017FC181216A64CC00882E84 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FC180216A64CC00882E84 /* Notification.swift */; };
+		017FC184216AF2BC00882E84 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FC183216AF2BC00882E84 /* FiltersViewController.swift */; };
+		017FC186216AF3C300882E84 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FC185216AF3C300882E84 /* FilterTableViewCell.swift */; };
 		0181782921644B45001621BF /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181782821644B45001621BF /* NetworkClient.swift */; };
 		0181782B21646E6C001621BF /* ResourcesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0181782A21646E6C001621BF /* ResourcesDataSource.swift */; };
 		01E2931821616F6000830745 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2931621616F6000830745 /* MovieDetailsViewController.swift */; };
@@ -81,6 +83,8 @@
 		017FC17A2167020100882E84 /* FavoritesCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCellPresenter.swift; sourceTree = "<group>"; };
 		017FC17C2167056800882E84 /* MovieDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsPresenter.swift; sourceTree = "<group>"; };
 		017FC180216A64CC00882E84 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		017FC183216AF2BC00882E84 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		017FC185216AF3C300882E84 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		0181782821644B45001621BF /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		0181782A21646E6C001621BF /* ResourcesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesDataSource.swift; sourceTree = "<group>"; };
 		01E2931621616F6000830745 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +249,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		017FC182216AF28E00882E84 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				017FC183216AF2BC00882E84 /* FiltersViewController.swift */,
+				017FC185216AF3C300882E84 /* FilterTableViewCell.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
 		01E2931521616F3400830745 /* MovieDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				01EB621D21601E9000327628 /* Favorites */,
+				017FC182216AF28E00882E84 /* Filters */,
 				01E2931521616F3400830745 /* MovieDetails */,
 				01EB621C21601E8900327628 /* Movies */,
 			);
@@ -573,6 +587,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017FC186216AF3C300882E84 /* FilterTableViewCell.swift in Sources */,
 				017FC1792166D2F700882E84 /* RealmMovieModel.swift in Sources */,
 				01E2931821616F6000830745 /* MovieDetailsViewController.swift in Sources */,
 				0151A9EF215DBBAC001CBC6F /* AppDelegate.swift in Sources */,
@@ -593,6 +608,7 @@
 				017FC181216A64CC00882E84 /* Notification.swift in Sources */,
 				01E2931B216183D000830745 /* MoviesPresenter.swift in Sources */,
 				015727122165B5D000A221F4 /* MoviesCellPresenter.swift in Sources */,
+				017FC184216AF2BC00882E84 /* FiltersViewController.swift in Sources */,
 				0181782B21646E6C001621BF /* ResourcesDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

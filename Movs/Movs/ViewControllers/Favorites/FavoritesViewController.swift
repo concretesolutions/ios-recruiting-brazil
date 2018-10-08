@@ -39,11 +39,22 @@ class FavoritesViewController: UIViewController {
         presenter.view = self
         setupSearchBar()
         setupTableView()
-
+        setupNavigaitonButtons()
         presenter.onStart()
     }
 
     // MARK: - Private methods
+
+    private func setupNavigaitonButtons() {
+        let rightButtonItem = UIBarButtonItem(
+            image: UIImage(named: "buttonFilters")?.withRenderingMode(.alwaysTemplate),
+            style: .plain,
+            target: self,
+            action: #selector(onFiltersButtonTapped)
+        )
+        rightButtonItem.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem = rightButtonItem
+    }
 
     private func setupSearchBar() {
         searchController.searchBar.placeholder = "Search favorite"
@@ -61,6 +72,10 @@ class FavoritesViewController: UIViewController {
         favoritesTableView.estimatedRowHeight = 100
         favoritesTableView.dataSource = self
         favoritesTableView.delegate = self
+    }
+
+    @objc private func onFiltersButtonTapped() {
+        presenter.onFilterSelected()
     }
 }
 
@@ -133,5 +148,10 @@ extension FavoritesViewController: FavoritesView {
     func openMovieDetails(with movie: Movie) {
         let movieDetailsViewController = MovieDetailsViewController(movie: movie)
         navigationController?.pushViewController(movieDetailsViewController, animated: true)
+    }
+
+    func openFiltersScreen() {
+        let filtersViewController = FiltersViewController()
+        navigationController?.pushViewController(filtersViewController, animated: true)
     }
 }

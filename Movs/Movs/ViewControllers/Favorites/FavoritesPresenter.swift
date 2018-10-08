@@ -12,6 +12,7 @@ import RxSwift
 protocol FavoritesView: AnyObject {
     func updateView(with movies: [Movie])
     func openMovieDetails(with movie: Movie)
+    func openFiltersScreen()
 }
 
 class FavoritesPresenter {
@@ -50,6 +51,10 @@ class FavoritesPresenter {
                 // hehe
             })
             .disposed(by: disposeBag)
+    }
+
+    func onFilterSelected() {
+        view?.openFiltersScreen()
     }
 
     // MARK: - Private methods
