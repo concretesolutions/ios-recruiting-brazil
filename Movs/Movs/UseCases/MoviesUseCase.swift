@@ -15,16 +15,20 @@ import RxSwift
 class MoviesUseCase {
 
     private let moviesDataSource: MoviesDataSource = MoviesDataSourceImpl()
+    private let genresDataSource: GenresDataSource = GenresDataSourceImpl()
     private var currentPage = 0
 
     func fetchNextPopularMovies() -> Single<[Movie]> {
-        return moviesDataSource.fetchPopularMovies()
-            .map({ (movies: [Movie]) -> [Movie] in
-                movies.forEach({ (movie: Movie) in
+        let popularMoviesObservable = moviesDataSource.fetchPopularMovies()
+        let genresObservable = genresDataSource.fetchGenres()
+        return Single.zip(popularMoviesObservable, genresObservable, resultSelector: { ($0, $1) })
+            .map({ (movies: [Movie], genresList: [Int: String]) -> [Movie] in
+                for movie in movies {
+                    movie.genres = self.mapGenres(from: movie.genreIds, genresList: genresList)
                     if self.moviesDataSource.isMovieFavorited(movie) {
                         movie.isFavorited = true
                     }
-                })
+                }
                 return movies
             })
     }
@@ -39,5 +43,20 @@ class MoviesUseCase {
 
     func unfavoriteMovie(_ movie: Movie) -> Completable {
         return moviesDataSource.removefromFavorites(movie)
+    }
+
+    // MARK: - Map genres ids to their names
+
+    /**
+     Maps genre ids to their names
+     */
+    func mapGenres(from genreIds: [Int], genresList: [Int: String]) -> [String] {
+        var genreNames = [String]()
+        for genreId in genreIds {
+            if let name = genresList[genreId] {
+                genreNames.append(name)
+            }
+        }
+        return genreNames
     }
 }

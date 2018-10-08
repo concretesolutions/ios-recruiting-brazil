@@ -15,8 +15,12 @@ class Movie: Decodable {
     var overview = ""
     var posterPath = ""
     var isFavorited = false
+    var genreIds = [Int]()
 
-    init() { }
+    // Transient variables
+    var genres = [String]()
+
+//    init() { }
 
     enum CodingKeys: String, CodingKey {
         case movieId = "id"
@@ -24,5 +28,6 @@ class Movie: Decodable {
         case releaseDate = "release_date"
         case overview
         case posterPath = "poster_path"
+        case genreIds = "genre_ids"
     }
 }
