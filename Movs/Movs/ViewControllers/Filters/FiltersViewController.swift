@@ -54,7 +54,8 @@ class FiltersViewController: UITableViewController {
             let dateFilterViewController = DateFilterViewController()
             self.navigationController?.pushViewController(dateFilterViewController, animated: true)
         } else {
-            // TODO
+            let genreFilterViewController = GenreFilterViewController()
+            self.navigationController?.pushViewController(genreFilterViewController, animated: true)
         }
     }
 }
