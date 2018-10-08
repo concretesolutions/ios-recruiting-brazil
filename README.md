@@ -18,14 +18,13 @@ Toda a parte de baixar os filmes da API e salvar localmente (assim como mostrar 
 * Lista de filmes populares;
 * Salvar filmes favoritados localmente pela tela de filmes principais (atualmente a única forma de recarregar a lista de favoritos é fechando e abrindo o aplicativo);
 * Detalhes (sem as categorias);
+* Filtro (de ano);
 
 ### Não está implementado ainda:
 * Buscas;
 * Cache de imagens;
-* Atualizar outras telas quando um filme é favoritado / desfavoritado;
 * Loading infinito dos filmes populares.
 * Categorias;
-* Filtros;
 * Testes;
 
 ## Afinal, o que é esse desafio?
