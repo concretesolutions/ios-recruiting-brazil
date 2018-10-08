@@ -8,10 +8,25 @@
 
 import Foundation
 
-struct MovieDetailModel {
+class MovieDetailModel: Codable {
     let title: String
     let releaseYear: String
     let genreIds: [Int]
     let description: String
-    let backdropPath: String
+    let posterData: Data
+    var isFav: Bool = false
+    
+    init(title: String, releaseYear: String, genreIds: [Int], description: String, posterData: Data) {
+        self.title = title
+        self.releaseYear = releaseYear
+        self.genreIds = genreIds
+        self.description = description
+        self.posterData = posterData
+    }
+}
+
+extension MovieDetailModel: Equatable {
+    static func == (lhs: MovieDetailModel, rhs: MovieDetailModel) -> Bool {
+        return lhs.title == rhs.title
+    }
 }

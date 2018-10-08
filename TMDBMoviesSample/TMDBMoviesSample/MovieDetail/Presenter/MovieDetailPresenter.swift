@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MovieDetailPresenter {
     private weak var viewProtocol: MovieDetailViewProtocol?
@@ -28,7 +29,7 @@ extension MovieDetailPresenter: MoviePresenterProtocol {
             case let .success(genreList):
                 self?.viewProtocol?.setGenreText(with: self?.makeGenreString(with: genreList, and: model.genreIds))
             case .fail(_):
-                break
+                self?.viewProtocol?.setGenreText(with: "Ocorreu um erro ao baixar a lista de generos do filme.")
             }
         }
     }
@@ -43,5 +44,70 @@ extension MovieDetailPresenter: MoviePresenterProtocol {
         
         string.removeLast(2)
         return string
+    }
+    
+    func setFavorite() {
+        guard let model = viewProtocol?.model else { return }
+        changeFavsList(with: model)
+    }
+    
+    private func setButtonState(with isFav: Bool) {
+        if isFav {
+            viewProtocol?.setFavEnable()
+        } else {
+            viewProtocol?.setFavDisable()
+        }
+    }
+    
+    private func changeFavsList(with model: MovieDetailModel) {
+        if model.isFav {
+            removeModelInFavsList(with: model)
+        } else {
+            saveModelInFavsList(with: model)
+        }
+    }
+    
+    private func removeModelInFavsList(with model: MovieDetailModel) {
+        let userDefault = UserDefaultWrapper()
+        model.isFav = false
+        guard
+            let favList = getfavList(),
+            let index = favList.firstIndex(where: { $0 == model }),
+            let _: [Data] = userDefault.deleteItem(in: index, with: userDefault.favsListKey)
+        else {
+            model.isFav = true
+            return
+        }
+        
+        setButtonState(with: model.isFav)
+    }
+    
+    private func saveModelInFavsList(with model: MovieDetailModel) {
+        model.isFav = true
+        guard let data = try? JSONEncoder().encode(model) else {
+            model.isFav = false
+            return
+        }
+        let userDefault = UserDefaultWrapper()
+        userDefault.appendItem(data, with: userDefault.favsListKey)
+        setButtonState(with: model.isFav)
+    }
+    
+    func setupFavoriteState() {
+        guard
+            let list = getfavList(),
+            let model = viewProtocol?.model,
+            let favMovie = list.first(where: { $0 == model })
+            else { return }
+        
+        model.isFav = favMovie.isFav
+        setButtonState(with: model.isFav)
+    }
+    
+    private func getfavList() -> [MovieDetailModel]? {
+        let userDefault = UserDefaultWrapper()
+        let favListData: [Data]? = userDefault.get(with: userDefault.favsListKey)
+        let favList = favListData?.compactMap { try? JSONDecoder().decode(MovieDetailModel.self, from: $0) }
+        return favList
     }
 }

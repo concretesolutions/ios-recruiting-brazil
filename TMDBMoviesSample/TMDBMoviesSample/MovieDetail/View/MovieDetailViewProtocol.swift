@@ -10,9 +10,9 @@ import Foundation
 
 protocol MovieDetailViewProtocol: class {
     var model: MovieDetailModel? { get }
-    func showBackdropLoading()
-    func hideBackdropLoading()
     func showGenreLoading()
     func hideGenreLoading()
     func setGenreText(with text: String?)
+    func setFavEnable()
+    func setFavDisable()
 }

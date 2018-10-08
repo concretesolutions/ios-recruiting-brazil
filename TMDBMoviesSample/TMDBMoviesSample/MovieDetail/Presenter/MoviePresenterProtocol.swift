@@ -10,4 +10,6 @@ import Foundation
 
 protocol MoviePresenterProtocol {
     func getGenreList()
+    func setFavorite()
+    func setupFavoriteState()
 }

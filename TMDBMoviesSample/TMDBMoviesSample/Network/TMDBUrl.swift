@@ -24,8 +24,8 @@ struct TMDBUrl {
             queryItems.append(pageQueryItem)
         }
         
-        if let languageCode = Locale.current.languageCode {
-            let languageQueryItem = URLQueryItem(name: "language", value: languageCode)
+        if let languageCode = Locale.preferredLanguages.first {
+            let languageQueryItem = URLQueryItem(name: "language", value: Locale(identifier: languageCode).languageCode)
             queryItems.append(languageQueryItem)
         }
         

@@ -12,6 +12,7 @@ class UserDefaultWrapper {
     let tmdbFavsKey = "TMDBFavsKey"
     let configModelKey = "ConfigModelKey"
     let genresIdsKey = "GenresIdsKey"
+    let favsListKey = "FavsListKey"
     
     private let defaults = UserDefaults.standard
     
@@ -39,7 +40,7 @@ class UserDefaultWrapper {
         defaults.set(recoveryArray, forKey: key)
     }
     
-    func deleteItem<T>(in index: Int, with key: String) -> [T]? {
+    func deleteItem<T: Equatable>(in index: Int, with key: String) -> [T]? {
         guard let result: [T] = get(with: key) else { return nil }
         var recoveryArray = result
         recoveryArray.remove(at: index)
