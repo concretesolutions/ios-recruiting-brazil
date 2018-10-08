@@ -68,10 +68,11 @@ class FavoritesPresenter {
     private func fetchFavoriteMovies() {
         moviesUseCase.fetchFavoritedMovies()
             .map({ (movies: [Movie]) -> [Movie] in
+                var filteredMovies = movies
                 if let yearFilter = self.settingsDataSource.getYearFilter() {
-                    return movies.filter({ $0.year == yearFilter })
+                    filteredMovies = filteredMovies.filter({ $0.year == yearFilter })
                 }
-                return movies
+                return filteredMovies
             })
             .subscribe(onSuccess: { (favoritedMovies: [Movie]) in
                 self.view?.updateView(with: favoritedMovies)
