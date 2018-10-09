@@ -10,7 +10,11 @@ import Foundation
 
 protocol MoviesListPresenterProtocol {
     var moviesLists: MoviesPages? { get }
-    func openMovieDetail(to indexPath: IndexPath)
+    var filteredList: [MovieModel] { get }
+    func filterList(with textFilter: String)
+    func openMovieDetail(to indexPath: IndexPath, comeFromSearch: Bool)
     func getMovies()
     func getMoviePoster(to model: MovieModel, completion: @escaping (ResponseResultType<Data>, String) -> Void)
+    func cancelTasks()
+    func changeSearchCollectionState(shouldShowEmptySearch: Bool)
 }

@@ -13,6 +13,8 @@ class MoviesListPresenter {
     private weak var viewProtocol: MoviesListViewProtocol?
     private lazy var client = MoviesListClient()
     
+    var filteredList: [MovieModel] = []
+    
     init(with view: MoviesListViewProtocol) {
         viewProtocol = view
     }
@@ -23,16 +25,24 @@ extension MoviesListPresenter: MoviesListPresenterProtocol {
         return client.moviesList
     }
     
-    func openMovieDetail(to indexPath: IndexPath) {
+    func openMovieDetail(to indexPath: IndexPath, comeFromSearch: Bool) {
         let detailStoryboard = UIStoryboard(name: "MovieDetailView", bundle: nil)
         guard
-            let movie = moviesLists?[indexPath.section][indexPath.item],
+            let movie = getMovieModel(in: indexPath, comeFromSearch),
             let detailModel = getDetailModel(with: movie),
             let detailVC = detailStoryboard.instantiateInitialViewController() as? MovieDetailViewController
         else { return }
         
         detailVC.model = detailModel
         viewProtocol?.show(with: detailVC)
+    }
+    
+    private func getMovieModel(in indexPath: IndexPath, _ comeFromSearch: Bool) -> MovieModel? {
+        if comeFromSearch {
+            return filteredList[indexPath.row]
+        } else {
+            return moviesLists?[indexPath.section][indexPath.item]
+        }
     }
     
     private func getDetailModel(with movie: MovieModel) -> MovieDetailModel? {
@@ -57,6 +67,7 @@ extension MoviesListPresenter: MoviesListPresenterProtocol {
             case let .success(page):
                 self?.showSuccess()
                 self?.viewProtocol?.addSection(in: page - 1)
+                self?.viewProtocol?.setupSearchBar()
             case .fail(_):
                 self?.showError()
             }
@@ -66,6 +77,28 @@ extension MoviesListPresenter: MoviesListPresenterProtocol {
     func getMoviePoster(to model: MovieModel, completion: @escaping (ResponseResultType<Data>, String) -> Void) {
         guard let posterPath = model.posterPath else { return }
         client.getMoviePoster(posterPath: posterPath, completion: completion)
+    }
+    
+    func filterList(with textFilter: String) {
+        var movieList: [MovieModel] = []
+        moviesLists?.forEach {
+            movieList.append(contentsOf: $0.filter { $0.title?.contains(textFilter) ?? false })
+        }
+        filteredList = movieList
+    }
+    
+    func changeSearchCollectionState(shouldShowEmptySearch: Bool) {
+        if shouldShowEmptySearch {
+            viewProtocol?.showEmptySearchLabel()
+            viewProtocol?.hideCollectionView()
+        } else {
+            viewProtocol?.hideEmptySearchLabel()
+            viewProtocol?.showCollectionView()
+        }
+    }
+    
+    func cancelTasks() {
+        client.cancelTask()
     }
     
     private func showError() {

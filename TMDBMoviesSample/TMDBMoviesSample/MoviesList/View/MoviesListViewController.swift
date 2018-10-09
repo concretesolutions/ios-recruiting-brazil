@@ -14,8 +14,11 @@ class MoviesListViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var errorView: UIView!
     @IBOutlet private weak var refreshIcon: UIImageView!
+    @IBOutlet private weak var searchBarContainer: UIView!
+    @IBOutlet private weak var searchBarHeight: NSLayoutConstraint!
+    @IBOutlet private weak var emptySearchLabel: UILabel!
     
-    private lazy var collectionViewManager = MoviesCollectionViewManager(with: presenter)
+    private lazy var collectionViewManager = MoviesCollectionViewManager(with: presenter, collectionView)
     private lazy var presenter: MoviesListPresenterProtocol = MoviesListPresenter(with: self)
     
     var errorIsShowing: Bool {
@@ -49,10 +52,31 @@ extension MoviesListViewController {
     @objc private func refreshAction() {
         presenter.getMovies()
     }
+    
+    func setSearchBar() {
+        let searchController = collectionViewManager.searchController
+        searchController.searchResultsUpdater = collectionViewManager
+        searchController.delegate = collectionViewManager
+        searchController.searchBar.delegate = collectionViewManager
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Digite o nome do filme"
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.searchBarStyle = .minimal
+        searchBarHeight.constant = searchController.searchBar.frame.height
+        searchBarContainer.addSubview(searchController.searchBar)
+    }
 }
 
 //MARK: - ViewProtocol methods -
 extension MoviesListViewController: MoviesListViewProtocol {
+    func setupSearchBar() {
+        DispatchQueue.main.async {
+            self.setSearchBar()
+        }
+    }
+    
     func addSection(in index: Int) {
         DispatchQueue.main.async {
             self.collectionView.insertSections(IndexSet(integer: index))
@@ -106,6 +130,18 @@ extension MoviesListViewController: MoviesListViewProtocol {
     func hideErrorLoading() {
         DispatchQueue.main.async {
             self.refreshIcon.layer.removeAllAnimations()
+        }
+    }
+    
+    func showEmptySearchLabel() {
+        DispatchQueue.main.async {
+            self.emptySearchLabel.isHidden = false
+        }
+    }
+    
+    func hideEmptySearchLabel() {
+        DispatchQueue.main.async {
+            self.emptySearchLabel.isHidden = true
         }
     }
     

@@ -10,6 +10,7 @@ import UIKit
 
 protocol MoviesListViewProtocol: class {
     var errorIsShowing: Bool { get }
+    func setupSearchBar()
     func addSection(in index: Int)
     func showLoading()
     func hideLoading()
@@ -19,5 +20,7 @@ protocol MoviesListViewProtocol: class {
     func hideErrorView()
     func showErrorLoading()
     func hideErrorLoading()
+    func showEmptySearchLabel()
+    func hideEmptySearchLabel()
     func show(with vc: UIViewController)
 }
