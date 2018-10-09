@@ -29,6 +29,6 @@ class MovieDetailModel: Codable {
 
 extension MovieDetailModel: Equatable {
     static func == (lhs: MovieDetailModel, rhs: MovieDetailModel) -> Bool {
-        return lhs.title == rhs.title
+        return lhs.id == rhs.id
     }
 }
