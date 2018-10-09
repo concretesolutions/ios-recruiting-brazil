@@ -9,6 +9,8 @@
 import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -44,6 +46,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     let favButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "heart"), for: .normal)
+        btn.isUserInteractionEnabled = true
+        btn.isEnabled = true
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -60,6 +64,23 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieNameCanvas.contentView.addConstraintsWithVisualFormat(format: "V:|[v0]|", views: movieNameLabel)
         movieNameCanvas.contentView.addConstraintsWithVisualFormat(format: "H:|-[v0]-[v1]-|", views: movieNameLabel, favButton)
         movieNameCanvas.contentView.addConstraintsWithVisualFormat(format: "V:|[v0]|", views: favButton)
-        backgroundColor = .white
     }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        var view = favButton.hitTest(favButton.convert(point, from: self), with: event)
+        if view == nil {
+            view = super.hitTest(point, with: event)
+        }
+        
+        return view
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if super.point(inside: point, with: event) {
+            return true
+        }
+        
+        return !favButton.isHidden && favButton.point(inside: favButton.convert(point, from: self), with: event)
+    }
+    
 }

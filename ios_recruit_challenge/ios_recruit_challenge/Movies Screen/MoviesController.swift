@@ -18,6 +18,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         setup()
     }
     
+    
     func setup(){
         movieView = MoviesView(frame: self.view.frame)
         movieView.collectionView.delegate = self
@@ -34,9 +35,19 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         return CGSize(width: (self.view.frame.width/2) - 8, height: 180)
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MovieCollectionViewCell
+        cell.favButton.tag = indexPath.row
+        cell.isUserInteractionEnabled = true
+        cell.favButton.addTarget(self, action: #selector(teste), for: .touchUpInside)
         return cell;
     }
     
+    
+    @objc func teste(){
+        print("Ei")
+    }
+    
 }
+
