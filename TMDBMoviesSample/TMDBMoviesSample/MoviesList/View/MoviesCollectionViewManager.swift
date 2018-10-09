@@ -12,7 +12,8 @@ class MoviesCollectionViewManager: NSObject {
     
     private let collectionViewPadding: CGFloat = 10
     private var presenterProtocol: MoviesListPresenterProtocol?
-    
+    private var favIdList: [Int]?
+        
     init(with presenter: MoviesListPresenterProtocol) {
         presenterProtocol = presenter
     }

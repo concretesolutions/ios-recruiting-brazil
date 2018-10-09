@@ -18,6 +18,7 @@ class MovieModel: Decodable {
     var backdropPath: String?
     var description: String?
     var genreIds: [Int]?
+    var isFav: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case title
