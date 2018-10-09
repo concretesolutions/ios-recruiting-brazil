@@ -13,16 +13,15 @@ class MovieDetailModel: Codable {
     let releaseYear: String
     let genreIds: [Int]
     let description: String
-    let posterData: Data
     let id: Int
+    var posterData: Data?
     var isFav: Bool = false
     
-    init(title: String, releaseYear: String, genreIds: [Int], description: String, posterData: Data, id: Int) {
+    init(title: String, releaseYear: String, genreIds: [Int], description: String, id: Int) {
         self.title = title
         self.releaseYear = releaseYear
         self.genreIds = genreIds
         self.description = description
-        self.posterData = posterData
         self.id = id
     }
 }

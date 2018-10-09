@@ -41,12 +41,12 @@ extension MoviesListPresenter: MoviesListPresenterProtocol {
             let releaseDate = movie.releaseDate,
             let description = movie.description,
             let genreIds = movie.genreIds,
-            let posterData = movie.posterImageData,
             let id = movie.id
         else { return nil }
         
         let releaseYear = releaseDate.prefix(4)
-        let detailModel = MovieDetailModel(title: title, releaseYear: String(releaseYear), genreIds: genreIds, description: description, posterData: posterData, id: id)
+        let detailModel = MovieDetailModel(title: title, releaseYear: String(releaseYear), genreIds: genreIds, description: description, id: id)
+        detailModel.posterData = movie.posterImageData
         return detailModel
     }
     

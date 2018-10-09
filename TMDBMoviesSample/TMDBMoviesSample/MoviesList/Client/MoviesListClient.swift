@@ -72,14 +72,31 @@ extension MoviesListClient {
 //MARK: - GetMoviePoster methods -
 extension MoviesListClient {
     func getMoviePoster(posterPath: String, completion: @escaping (ResponseResultType<Data>, String) -> Void) {
+        
+        if let _ = configurationModel {
+            downloadMoviePoster(posterPath: posterPath, completion: completion)
+        } else {
+            getConfigurationModel { [weak self] hasConfigModel in
+                if hasConfigModel {
+                    self?.downloadMoviePoster(posterPath: posterPath, completion: completion)
+                } else {
+                    let urlError = NSError(domain: NSURLErrorDomain, code: 1002, userInfo: nil)
+                    completion(.fail(urlError), posterPath)
+                }
+            }
+        }
+        
+    }
+    
+    private func downloadMoviePoster(posterPath: String, completion: @escaping (ResponseResultType<Data>, String) -> Void) {
         let defaultPosterSize = "w500"
         guard
             let configModel = configurationModel,
             let baseURL = configModel.images?.safeBaseURL,
             let posterUrl = URL(string: baseURL + defaultPosterSize + posterPath)
-        else {
-            let urlError = NSError(domain: NSURLErrorDomain, code: 1002, userInfo: nil)
-            return completion(.fail(urlError), posterPath)
+            else {
+                let urlError = NSError(domain: NSURLErrorDomain, code: 1002, userInfo: nil)
+                return completion(.fail(urlError), posterPath)
         }
         
         service.getImage(in: posterUrl) { result, url in
@@ -100,14 +117,15 @@ extension MoviesListClient {
 
 //MARK: - GetConfiguration methods -
 extension MoviesListClient {
-    func getConfigurationModel() {
+    func getConfigurationModel(completion: ((Bool) -> Void)? = nil) {
         let url = TMDBUrl().getUrl(to: .configuration)
         service.get(in: url) { [weak self] (result: ResponseResultType<TMDBConfigurationModel>) in
             switch result {
             case let .success(configModel):
                 self?.configurationModel = configModel
+                completion?(true)
             case .fail(_):
-                fatalError("Erro ao baixar as configs")
+                completion?(false)
             }
         }
     }

@@ -87,6 +87,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		430B8928216C567A002BE671 /* FavoritesMoviesList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FavoritesMoviesList;
+			sourceTree = "<group>";
+		};
 		43463ACB2165AEA8007D1488 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +119,7 @@
 				43463B0B2165BB9B007D1488 /* Network */,
 				43463AF62165B738007D1488 /* MoviesList */,
 				434A60612169BD9B006B56F4 /* MovieDetail */,
+				430B8928216C567A002BE671 /* FavoritesMoviesList */,
 				43463AF02165B11B007D1488 /* TabController */,
 				43463AEC2165B0C5007D1488 /* SupportFiles */,
 				43463AEB2165B08A007D1488 /* Resources */,
@@ -530,6 +538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Q78K25WNR;
 				INFOPLIST_FILE = "$(SRCROOT)/TMDBMoviesSample/SupportFiles/Info.plist";
@@ -539,6 +548,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.brenorage.TMDBMoviesSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -548,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Q78K25WNR;
 				INFOPLIST_FILE = "$(SRCROOT)/TMDBMoviesSample/SupportFiles/Info.plist";
@@ -557,6 +568,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.brenorage.TMDBMoviesSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

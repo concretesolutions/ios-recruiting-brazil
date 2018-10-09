@@ -76,6 +76,8 @@ class MovieCell: UICollectionViewCell {
                 case .fail(_):
                     self?.setPlaceHolder()
                 }
+            } else {
+                self?.setPlaceHolder()
             }
         }
     }

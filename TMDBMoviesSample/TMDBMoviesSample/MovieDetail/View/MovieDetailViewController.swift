@@ -44,7 +44,9 @@ extension MovieDetailViewController {
         titleLabel.text = model.title
         releaseYearLabel.text = model.releaseYear
         descriptionLabel.text = model.description
-        backdropImageView.image = UIImage(data: model.posterData)
+        if let imageData = model.posterData {
+            backdropImageView.image = UIImage(data: imageData)
+        }
         presenter.getGenreList()
     }
 }
