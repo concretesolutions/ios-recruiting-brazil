@@ -38,7 +38,7 @@ class MoviesListClient {
         getConfigurationModel()
     }
     
-    public func cancelTask() {
+    func cancelTask() {
         service.cancelActiveTasks()
     }
 }

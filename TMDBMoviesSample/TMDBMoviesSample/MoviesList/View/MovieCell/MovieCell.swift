@@ -35,6 +35,7 @@ class MovieCell: UICollectionViewCell {
         movieTitleLabel.text = nil
         movieReleaseDate.text = nil
         delegate = nil
+        model = nil
     }
 
     private func setupView() {
@@ -58,7 +59,8 @@ class MovieCell: UICollectionViewCell {
     
     private func setupPosterImage() {
         guard let model = model else { return }
-        if let posterImageData = model.posterImageData {
+        if  let posterImageData = model.posterImageData,
+            posterImageData.count > 0 {
             setPoster(with: posterImageData)
         } else {
             downloadPosterImage(with: model)
@@ -68,16 +70,15 @@ class MovieCell: UICollectionViewCell {
     private func downloadPosterImage(with model: MovieModel) {
         showLoading()
         delegate?.downloadImage(to: model) { [weak self] result, path in
-            if model.posterPath == path {
-                switch result {
+            if  let originalPosterPath = self?.model?.posterPath,
+                originalPosterPath == path {
+            switch result {
                 case let .success(imageData):
                     self?.model?.posterImageData = imageData
                     self?.setPoster(with: imageData)
                 case .fail(_):
                     self?.setPlaceHolder()
                 }
-            } else {
-                self?.setPlaceHolder()
             }
         }
     }
