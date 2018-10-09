@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        let tabBarController = setupTabBar(item0Title: "Movies", item1Title: "Favorites")
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         return true
     }
@@ -57,6 +58,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func setupTabBar(item0Title:String,item1Title:String) -> UITabBarController{
+        let nc0 = setupNavigationBar(title: item0Title, controller: ViewController())
+        let nc1 = setupNavigationBar(title: item1Title, controller: ViewController2())
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [nc0,nc1]
+        tabBarController.selectedIndex = 0
+        tabBarController.tabBar.backgroundColor = UIColor(red: 246/255, green: 205/255, blue: 100/255, alpha: 1)
+        tabBarController.tabBar.tintColor = UIColor(red: 134/255, green: 8/255, blue: 63/255, alpha: 1)
+        tabBarController.tabBar.items![0].title = item0Title
+        tabBarController.tabBar.items![0].image = UIImage(named: "itens")?.withRenderingMode(.alwaysOriginal)
+        tabBarController.tabBar.items![0].selectedImage = UIImage(named: "itensSelected")?.withRenderingMode(.alwaysOriginal)
+        tabBarController.tabBar.items![1].title = item1Title
+        tabBarController.tabBar.items![1].image = UIImage(named: "heart")?.withRenderingMode(.alwaysOriginal)
+        tabBarController.tabBar.items![1].selectedImage = UIImage(named: "heartSelected")?.withRenderingMode(.alwaysOriginal)
+        return tabBarController
+    }
+    
+    func setupNavigationBar(title:String, controller:UIViewController)->UINavigationController{
+        controller.navigationItem.title = title
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.navigationBar.barTintColor = UIColor(red: 246/255, green: 205/255, blue: 100/255, alpha: 1)
+        return navigationController
     }
 
 }
