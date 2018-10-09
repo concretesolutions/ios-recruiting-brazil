@@ -20,7 +20,14 @@ class FavoritesMoviesListPresenter {
 
 extension FavoritesMoviesListPresenter: FavoritesMoviesListPresenterProtocol {
     var movies: [MovieDetailModel] {
-        return client.moviesList
+        if  let unwrappedMovies = client.getMovies(),
+            !unwrappedMovies.isEmpty {
+            viewProtocol?.showTableView()
+            return unwrappedMovies
+        } else {
+            viewProtocol?.showEmptyState()
+            return []
+        }
     }
     
     func openMovieDetail(to indexPath: IndexPath) {
@@ -32,7 +39,10 @@ extension FavoritesMoviesListPresenter: FavoritesMoviesListPresenterProtocol {
         viewProtocol?.show(with: detailVC)
     }
     
-    func getMovies() {
-        
+    func deleteItem(in indexPath: IndexPath) {
+        let hasDelete = client.deleteMovie(in: indexPath.row)
+        if hasDelete {
+            viewProtocol?.removeRow(in: indexPath)
+        }
     }
 }

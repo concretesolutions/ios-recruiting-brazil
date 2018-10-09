@@ -10,17 +10,25 @@ import UIKit
 
 class FavoriteMovieCell: UITableViewCell {
 
-    var model: MovieDetailModel?
+    @IBOutlet private weak var posterImage: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    var model: MovieDetailModel? {
+        didSet{
+            setupViews()
+        }
     }
     
+    func setupViews() {
+        guard let model = self.model else { return }
+        if let posterData = model.posterData {
+            posterImage.image = UIImage(data: posterData)
+        }
+        titleLabel.text = model.title
+        dateLabel.text = model.releaseYear
+        descriptionLabel.text = model.description
+    }
 }

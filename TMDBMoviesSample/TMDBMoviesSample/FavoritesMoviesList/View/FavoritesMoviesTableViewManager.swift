@@ -20,7 +20,7 @@ class FavoritesMoviesTableViewManager: NSObject {
 //MARK: - TableView Delegate -
 extension FavoritesMoviesTableViewManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 0
+        return 90
     }
 }
 
@@ -41,4 +41,12 @@ extension FavoritesMoviesTableViewManager: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenterProtocol?.openMovieDetail(to: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction.init(style: .destructive, title: "Desfavoritar") { _,_,_ in self.presenterProtocol?.deleteItem(in: indexPath) }
+        return UISwipeActionsConfiguration.init(actions: [deleteAction])
+    }
 }

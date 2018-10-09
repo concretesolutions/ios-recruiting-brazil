@@ -9,5 +9,8 @@
 import UIKit
 
 protocol FavoritesMoviesListViewProtocol: class {
+    func showEmptyState()
+    func showTableView()
+    func removeRow(in indexPath: IndexPath)
     func show(with vc: UIViewController)
 }

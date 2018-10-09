@@ -10,20 +10,25 @@ import UIKit
 
 class FavoritesMoviesListViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var emptyLabel: UILabel!
     
     private lazy var tableViewManager = FavoritesMoviesTableViewManager(with: presenter)
     private lazy var presenter: FavoritesMoviesListPresenterProtocol = FavoritesMoviesListPresenter(with: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
 }
 
 //MARK: - SetupMethods -
 extension FavoritesMoviesListViewController {
-    private func setupCollectionView() {
+    private func setupTableView() {
         tableView.delegate = tableViewManager
         tableView.dataSource = tableViewManager
         registerCells()
@@ -36,6 +41,20 @@ extension FavoritesMoviesListViewController {
 
 //MARK: - ViewProtocol methods -
 extension FavoritesMoviesListViewController: FavoritesMoviesListViewProtocol {
+    func showEmptyState() {
+        emptyLabel.isHidden = false
+        tableView.isHidden = true
+    }
+    
+    func showTableView() {
+        emptyLabel.isHidden = true
+        tableView.isHidden = false
+    }
+    
+    func removeRow(in indexPath: IndexPath) {
+        tableView.reloadData()
+    }
+    
     func show(with vc: UIViewController) {
         navigationController?.show(vc, sender: nil)
     }

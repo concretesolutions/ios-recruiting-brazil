@@ -11,5 +11,5 @@ import Foundation
 protocol FavoritesMoviesListPresenterProtocol {
     var movies: [MovieDetailModel] { get }
     func openMovieDetail(to indexPath: IndexPath)
-    func getMovies()
+    func deleteItem(in indexPath: IndexPath)
 }
