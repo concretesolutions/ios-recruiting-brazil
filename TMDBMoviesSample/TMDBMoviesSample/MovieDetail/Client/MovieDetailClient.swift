@@ -39,3 +39,38 @@ extension MovieDetailClient {
         userDefault.save(object: data, with: userDefault.genresIdsKey)
     }
 }
+
+//MARK: - FavList Methods -
+extension MovieDetailClient {
+    func getfavList() -> [MovieDetailModel]? {
+        let userDefault = UserDefaultWrapper()
+        guard let favListData: [Data]? = userDefault.get(with: userDefault.favsListKey) else { return nil }
+        let favList = favListData?.compactMap { try? JSONDecoder().decode(MovieDetailModel.self, from: $0) }
+        return favList
+    }
+    
+    func removeModelInFavsList(with model: MovieDetailModel) -> Bool {
+        let userDefault = UserDefaultWrapper()
+        model.isFav = false
+        guard
+            let favList = getfavList(),
+            let index = favList.firstIndex(where: { $0 == model }),
+            let _: [Data] = userDefault.deleteItem(in: index, with: userDefault.favsListKey)
+            else {
+                model.isFav = true
+                return false
+        }
+        return true
+    }
+    
+    func saveModelInFavsList(with model: MovieDetailModel) -> Bool {
+        model.isFav = true
+        let userDefault = UserDefaultWrapper()
+        guard let data = try? JSONEncoder().encode(model) else {
+            model.isFav = false
+            return false
+        }
+        userDefault.appendItem(data, with: userDefault.favsListKey)
+        return true
+    }
+}

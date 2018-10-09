@@ -61,41 +61,29 @@ extension MovieDetailPresenter: MoviePresenterProtocol {
     
     private func changeFavsList(with model: MovieDetailModel) {
         if model.isFav {
-            removeModelInFavsList(with: model)
+            removeFromList(model)
         } else {
-            saveModelInFavsList(with: model)
+            saveInList(model)
         }
     }
     
-    private func removeModelInFavsList(with model: MovieDetailModel) {
-        let userDefault = UserDefaultWrapper()
-        model.isFav = false
-        guard
-            let favList = getfavList(),
-            let index = favList.firstIndex(where: { $0 == model }),
-            let _: [Data] = userDefault.deleteItem(in: index, with: userDefault.favsListKey)
-        else {
-            model.isFav = true
-            return
+    private func saveInList(_ model: MovieDetailModel) {
+        let didSave = client.saveModelInFavsList(with: model)
+        if didSave {
+            setButtonState(with: model.isFav)
         }
-        
-        setButtonState(with: model.isFav)
     }
     
-    private func saveModelInFavsList(with model: MovieDetailModel) {
-        model.isFav = true
-        let userDefault = UserDefaultWrapper()
-        guard let data = try? JSONEncoder().encode(model) else {
-            model.isFav = false
-            return
+    private func removeFromList(_ model: MovieDetailModel) {
+        let didRemove = client.removeModelInFavsList(with: model)
+        if didRemove {
+            setButtonState(with: model.isFav)
         }
-        userDefault.appendItem(data, with: userDefault.favsListKey)
-        setButtonState(with: model.isFav)
     }
     
     func setupFavoriteState() {
         guard
-            let list = getfavList(),
+            let list = client.getfavList(),
             let model = viewProtocol?.model
             else { return }
         
@@ -103,12 +91,5 @@ extension MovieDetailPresenter: MoviePresenterProtocol {
         
         model.isFav = isFav
         setButtonState(with: model.isFav)
-    }
-    
-    private func getfavList() -> [MovieDetailModel]? {
-        let userDefault = UserDefaultWrapper()
-        guard let favListData: [Data]? = userDefault.get(with: userDefault.favsListKey) else { return nil }
-        let favList = favListData?.compactMap { try? JSONDecoder().decode(MovieDetailModel.self, from: $0) }
-        return favList
     }
 }
