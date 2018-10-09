@@ -61,8 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupTabBar(item0Title:String,item1Title:String) -> UITabBarController{
-        let nc0 = setupNavigationBar(title: item0Title, controller: ViewController())
-        let nc1 = setupNavigationBar(title: item1Title, controller: ViewController2())
+        let nc0 = setupNavigationBar(title: item0Title, controller: MoviesController())
+        let nc1 = setupNavigationBar(title: item1Title, controller: FavoritesController())
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [nc0,nc1]
         tabBarController.selectedIndex = 0
