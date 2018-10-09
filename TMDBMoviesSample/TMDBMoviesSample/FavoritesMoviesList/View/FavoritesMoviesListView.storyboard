@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tzM-Fd-qk4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Favoritos-->
+        <scene sceneID="4qL-lK-mF9">
+            <objects>
+                <viewController storyboardIdentifier="MoviesListView" id="tzM-Fd-qk4" customClass="FavoritesMoviesListViewController" customModule="TMDBMoviesSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XJf-7O-A1G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hMe-0L-hCs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="iaQ-JZ-WmM">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.78039215689999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="hMe-0L-hCs" firstAttribute="top" secondItem="BVh-cd-1XU" secondAttribute="top" id="1Ec-2m-JI8"/>
+                            <constraint firstItem="BVh-cd-1XU" firstAttribute="bottom" secondItem="hMe-0L-hCs" secondAttribute="bottom" id="MYT-8q-xpC"/>
+                            <constraint firstItem="hMe-0L-hCs" firstAttribute="leading" secondItem="BVh-cd-1XU" secondAttribute="leading" id="wfR-2q-eIS"/>
+                            <constraint firstItem="BVh-cd-1XU" firstAttribute="trailing" secondItem="hMe-0L-hCs" secondAttribute="trailing" id="ywJ-7p-XUq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BVh-cd-1XU"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favoritos" image="tac_ic_fav_deselected" selectedImage="tac_ic_fav_selected" id="66Q-rf-eaN">
+                        <color key="badgeColor" red="0.96470588239999999" green="0.78039215689999997" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="hMe-0L-hCs" id="E1W-GY-gQn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qwP-VE-oqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="200.80000000000001" y="-31.03448275862069"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tac_ic_fav_deselected" width="36" height="36"/>
+        <image name="tac_ic_fav_selected" width="36" height="36"/>
+    </resources>
+</document>
