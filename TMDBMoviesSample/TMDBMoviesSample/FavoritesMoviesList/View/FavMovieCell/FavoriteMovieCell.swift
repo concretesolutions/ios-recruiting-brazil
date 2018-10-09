@@ -10,6 +10,8 @@ import UIKit
 
 class FavoriteMovieCell: UITableViewCell {
 
+    static let height: CGFloat = 100
+    
     @IBOutlet private weak var posterImage: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!

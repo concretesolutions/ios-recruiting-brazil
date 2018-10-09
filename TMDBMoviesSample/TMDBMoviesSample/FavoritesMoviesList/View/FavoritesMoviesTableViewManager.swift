@@ -20,7 +20,7 @@ class FavoritesMoviesTableViewManager: NSObject {
 //MARK: - TableView Delegate -
 extension FavoritesMoviesTableViewManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return FavoriteMovieCell.height
     }
 }
 

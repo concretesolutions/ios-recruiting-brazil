@@ -52,7 +52,7 @@ extension FavoritesMoviesListViewController: FavoritesMoviesListViewProtocol {
     }
     
     func removeRow(in indexPath: IndexPath) {
-        tableView.reloadData()
+        tableView.reloadSections(IndexSet(integersIn: 0...0), with: .automatic)
     }
     
     func show(with vc: UIViewController) {
