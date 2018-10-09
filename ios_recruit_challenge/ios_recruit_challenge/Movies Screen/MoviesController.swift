@@ -12,6 +12,8 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     
     var movieView = MoviesView()
     let cellId = "cellId"
+    var cellStatusList:[Bool] = [true,false,true,false,true,false]
+    var maxNumberOfCells = 10
     
     override func viewDidLoad() {
         self.view.backgroundColor = .blue
@@ -28,7 +30,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return cellStatusList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -38,15 +40,25 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MovieCollectionViewCell
-        cell.favButton.tag = indexPath.row
         cell.isUserInteractionEnabled = true
+        cell.favButton.tag = indexPath.row
         cell.favButton.addTarget(self, action: #selector(teste), for: .touchUpInside)
-        return cell;
+        cell.favButton.setImage(setBtnImage(index: indexPath.row), for: .normal)
+        return cell
     }
     
     
-    @objc func teste(){
-        print("Ei")
+    @objc func teste(sender: UIButton){
+        cellStatusList[sender.tag] = !cellStatusList[sender.tag]
+        movieView.collectionView.reloadData()
+    }
+    
+    func setBtnImage(index:Int) -> UIImage{
+        if cellStatusList[index]{
+            return UIImage(named: "fullHeart")!
+        }else{
+            return UIImage(named: "heart")!
+        }
     }
     
 }
