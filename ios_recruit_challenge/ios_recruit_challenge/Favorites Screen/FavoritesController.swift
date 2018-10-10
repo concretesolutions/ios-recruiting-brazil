@@ -12,10 +12,18 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var favoritesView = FavoritesView()
     let cellId = "cellId"
+    var favoriteMovieIndexList:[Int] = []
+    var favoriteMovieArray:[FavoriteMovie] = []
     
     override func viewDidLoad() {
         self.view.backgroundColor = .red
         setupView()
+        setupUserData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupUserData()
+        favoritesView.tableView.reloadData()
     }
     
     func setupView(){
@@ -26,12 +34,21 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addSubview(favoritesView)
     }
     
+    func setupUserData(){
+        if UserDefaultsManager.shared.isThereAnyFavoriteMovie{
+            favoriteMovieArray = UserDefaultsManager.shared.favoriteMoviesArray
+            favoriteMovieIndexList = UserDefaultsManager.shared.favoriteMoviesIndexArray
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return favoriteMovieArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! FavoritesTableViewCell
+        cell.nameLabel.text = favoriteMovieArray[indexPath.row].movieTitle!
+        cell.photoView.loadImage(urlString: "https://image.tmdb.org/t/p/w200/" + favoriteMovieArray[indexPath.row].moviePosterUrl!)
         return cell
     }
     

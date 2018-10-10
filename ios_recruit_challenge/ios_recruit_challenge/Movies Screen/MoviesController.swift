@@ -25,12 +25,8 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     
     override func viewDidLoad() {
         setup()
-        let data = UserDefaults.standard.object(forKey: "teste") as! Data
-        if let decodedList =  NSKeyedUnarchiver.unarchiveObject(with: data) as? [FavoriteMovie]{
-            print(decodedList.count)
-        }
+        setupUserData()
     }
-    
     
     func setup(){
         movieView = MoviesView(frame: self.view.frame)
@@ -38,6 +34,13 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         movieView.collectionView.dataSource = self
         movieView.collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         self.view.addSubview(movieView)
+    }
+    
+    func setupUserData(){
+        if UserDefaultsManager.shared.isThereAnyFavoriteMovie{
+            favoriteMovieArray = UserDefaultsManager.shared.favoriteMoviesArray
+            favoriteMovieIndexList = UserDefaultsManager.shared.favoriteMoviesIndexArray
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -87,11 +90,13 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     }
     
     @objc func editFavoriteList(sender: UIButton){
+        sender.isEnabled = false
         movieView.collectionView.allowsSelection = false
         if favoriteMovieIndexList.contains(sender.tag){
             if let index = favoriteMovieIndexList.index(of: sender.tag){
                 favoriteMovieIndexList.remove(at: index)
                 movieView.collectionView.allowsSelection = true
+                sender.isEnabled = true
                 movieView.collectionView.reloadData()
             }
         }else{
@@ -104,10 +109,12 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
                 let movieGenre = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
                 let favoritedMovie = FavoriteMovie(movieTitle: movieTitle, moviePosterUrl: moviePosterUrl, movieReleaseDate: movieReleaseDate, movieGenre: movieGenre)
                 self.favoriteMovieArray.append(favoritedMovie)
-//                let encodedArray: Data = NSKeyedArchiver.archivedData(withRootObject: self.favoriteMovieArray)
-//                UserDefaults.standard.set(encodedArray, forKey: "teste")
-                self.movieView.collectionView.allowsSelection = true
                 self.favoriteMovieIndexList.append(sender.tag)
+                UserDefaultsManager.shared.isThereAnyFavoriteMovie = true
+                UserDefaultsManager.shared.favoriteMoviesArray = self.favoriteMovieArray
+                UserDefaultsManager.shared.favoriteMoviesIndexArray = self.favoriteMovieIndexList
+                self.movieView.collectionView.allowsSelection = true
+                sender.isEnabled = true
                 self.movieView.collectionView.reloadData()
             })
             

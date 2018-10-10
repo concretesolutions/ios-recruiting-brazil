@@ -27,9 +27,8 @@ class FavoritesTableViewCell: UITableViewCell{
         return bgview
     }()
     
-    let photoView:UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "venom")
+    let photoView:CachedImageView = {
+        let image = CachedImageView()
         image.layer.borderColor = UIColor(white: 0.95, alpha: 1).cgColor
         image.layer.borderWidth = 2
         image.layer.cornerRadius = 38
@@ -43,7 +42,6 @@ class FavoritesTableViewCell: UITableViewCell{
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Nome do Filme"
         return label
     }()
     
