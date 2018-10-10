@@ -44,7 +44,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let favButton: UIButton = {
         let btn = UIButton()
-        //btn.setImage(setBtnImage(), for: .normal)
         btn.isUserInteractionEnabled = true
         btn.isEnabled = true
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -80,14 +79,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
         
         return !favButton.isHidden && favButton.point(inside: favButton.convert(point, from: self), with: event)
-    }
-    
-    func setBtnImage() -> UIImage{
-        if isItOneOfTheFavorites{
-            return UIImage(named: "heart")!
-        }else{
-            return UIImage(named: "fullHeart")!
-        }
     }
     
 }

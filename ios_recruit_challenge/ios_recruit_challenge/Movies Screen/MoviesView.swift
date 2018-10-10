@@ -21,7 +21,7 @@ class MoviesView: UIView {
     
     let collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        cv.backgroundView?.backgroundColor = UIColor(red: 25/255, green: 23/255, blue: 22/255, alpha: 1)
+        cv.backgroundView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         return cv
     }()
     

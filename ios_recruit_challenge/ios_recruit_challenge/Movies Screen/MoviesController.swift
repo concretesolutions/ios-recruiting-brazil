@@ -14,17 +14,21 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     
     var movieView = MoviesView()
     let cellId = "cellId"
-    var cellStatusList:[Bool] = [true,false,true,false,true,false,true,false,true,false,true,false]
     var loadingContent = false
     var actualPage = 1
     var lastPage = 10
     var movieTitleList:[String] = []
     var moviePosterUrlList:[String] = []
     var movieIdList:[String] = []
+    var favoriteMovieIndexList:[Int] = []
+    var favoriteMovieArray:[FavoriteMovie] = []
     
     override func viewDidLoad() {
-        self.view.backgroundColor = .blue
         setup()
+        let data = UserDefaults.standard.object(forKey: "teste") as! Data
+        if let decodedList =  NSKeyedUnarchiver.unarchiveObject(with: data) as? [FavoriteMovie]{
+            print(decodedList.count)
+        }
     }
     
     
@@ -50,10 +54,14 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         cell.movieNameLabel.text = fitMovieTitleInoLabel(title: movieTitleList[indexPath.row])
         cell.imageView.loadImage(urlString: "https://image.tmdb.org/t/p/w200/" + moviePosterUrlList[indexPath.row])
         cell.isUserInteractionEnabled = true
-        cell.favButton.tag = indexPath.row
-        cell.favButton.addTarget(self, action: #selector(teste), for: .touchUpInside)
-        cell.favButton.setImage(UIImage(named: "heart"), for: .normal)
+        cell.favButton.tag = Int(movieIdList[indexPath.row])!
+        cell.favButton.addTarget(self, action: #selector(editFavoriteList), for: .touchUpInside)
+        cell.favButton.setImage(setBtnImage(index: Int(movieIdList[indexPath.row])!), for: .normal)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Ei")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -70,7 +78,6 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
                     self.movieTitleList = self.movieTitleList + jsonResponse["results"].arrayValue.map({$0["title"].stringValue})
                     self.moviePosterUrlList = self.moviePosterUrlList + jsonResponse["results"].arrayValue.map({$0["poster_path"].stringValue})
                     self.movieIdList = self.movieIdList + jsonResponse["results"].arrayValue.map({$0["id"].stringValue})
-                    print(self.movieIdList)
                     self.movieView.collectionView.reloadData()
                     self.loadingContent = false
                 }
@@ -79,13 +86,36 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         
     }
     
-    
-    @objc func teste(sender: UIButton){
-        print("Ei")
+    @objc func editFavoriteList(sender: UIButton){
+        movieView.collectionView.allowsSelection = false
+        if favoriteMovieIndexList.contains(sender.tag){
+            if let index = favoriteMovieIndexList.index(of: sender.tag){
+                favoriteMovieIndexList.remove(at: index)
+                movieView.collectionView.allowsSelection = true
+                movieView.collectionView.reloadData()
+            }
+        }else{
+            getJsonData(url: "https://api.themoviedb.org/3/movie/" + String(sender.tag) + "?api_key=25655d622412630c8d690077b4a564f6&language=en-US", completion: { (response) in
+                print(response)
+                let jsonResponse = JSON(response)
+                let movieTitle = jsonResponse["title"].stringValue
+                let moviePosterUrl = jsonResponse["poster_path"].stringValue
+                let movieReleaseDate = jsonResponse["release_date"].stringValue
+                let movieGenre = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
+                let favoritedMovie = FavoriteMovie(movieTitle: movieTitle, moviePosterUrl: moviePosterUrl, movieReleaseDate: movieReleaseDate, movieGenre: movieGenre)
+                self.favoriteMovieArray.append(favoritedMovie)
+//                let encodedArray: Data = NSKeyedArchiver.archivedData(withRootObject: self.favoriteMovieArray)
+//                UserDefaults.standard.set(encodedArray, forKey: "teste")
+                self.movieView.collectionView.allowsSelection = true
+                self.favoriteMovieIndexList.append(sender.tag)
+                self.movieView.collectionView.reloadData()
+            })
+            
+        }
     }
     
     func setBtnImage(index:Int) -> UIImage{
-        if cellStatusList[index]{
+        if favoriteMovieIndexList.contains(index){
             return UIImage(named: "fullHeart")!
         }else{
             return UIImage(named: "heart")!
