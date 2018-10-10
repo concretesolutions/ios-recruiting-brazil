@@ -21,9 +21,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let imageView: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: "madmax")
+    let imageView: CachedImageView = {
+        let iv = CachedImageView()
         iv.contentMode = .scaleAspectFill
         iv.layer.masksToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +38,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let movieNameLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Filme"
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
