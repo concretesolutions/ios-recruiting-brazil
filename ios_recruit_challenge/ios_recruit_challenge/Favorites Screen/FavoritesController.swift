@@ -10,22 +10,24 @@ import UIKit
 
 class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // MARK: - Properties
     var favoritesView = FavoritesView()
     let cellId = "cellId"
     var favoriteMovieIndexList:[Int] = []
     var favoriteMovieArray:[FavoriteMovie] = []
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
-        self.view.backgroundColor = .red
         setupView()
-        setupUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupUserData()
+        updateUserData()
         favoritesView.tableView.reloadData()
+        showTableViewPlaceHolder()
     }
     
+    // MARK: - Setup View Function
     func setupView(){
         favoritesView = FavoritesView(frame: self.view.frame)
         favoritesView.tableView.delegate = self
@@ -34,13 +36,15 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addSubview(favoritesView)
     }
     
-    func setupUserData(){
+    // MARK: - Update view model
+    func updateUserData(){
         if UserDefaultsManager.shared.isThereAnyFavoriteMovie{
             favoriteMovieArray = UserDefaultsManager.shared.favoriteMoviesArray
             favoriteMovieIndexList = UserDefaultsManager.shared.favoriteMoviesIndexArray
         }
     }
     
+    // MARK: - TableView DataSource and Delegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favoriteMovieArray.count
     }
@@ -54,6 +58,38 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.favoriteMovieArray.remove(at: indexPath.row)
+            self.favoriteMovieIndexList.remove(at: indexPath.row)
+            UserDefaultsManager.shared.favoriteMoviesArray = favoriteMovieArray
+            UserDefaultsManager.shared.favoriteMoviesIndexArray = favoriteMovieIndexList
+            favoritesView.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            showTableViewPlaceHolder()
+        }
+    }
+    
+    // MARK: - Auxiliar functions
+    func showTableViewPlaceHolder(){
+        if favoritesView.tableView.numberOfRows(inSection: 0) == 0{
+            let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            let messageLabel = UILabel(frame: rect)
+            messageLabel.text = "Don`t you like any movie?!"
+            messageLabel.backgroundColor = UIColor(white: 0.95, alpha: 1)
+            messageLabel.textColor = UIColor.black
+            messageLabel.font = UIFont.boldSystemFont(ofSize: 20)
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = .center
+            messageLabel.sizeToFit()
+            self.favoritesView.tableView.backgroundView = messageLabel
+            self.favoritesView.tableView.separatorStyle = .none
+        } else {
+            let view = UIView()
+            view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+            self.favoritesView.tableView.backgroundView = view
+        }
     }
     
 }

@@ -25,7 +25,11 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     
     override func viewDidLoad() {
         setup()
-        setupUserData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateUserData()
+        movieView.collectionView.reloadData()
     }
     
     func setup(){
@@ -36,7 +40,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         self.view.addSubview(movieView)
     }
     
-    func setupUserData(){
+    func updateUserData(){
         if UserDefaultsManager.shared.isThereAnyFavoriteMovie{
             favoriteMovieArray = UserDefaultsManager.shared.favoriteMoviesArray
             favoriteMovieIndexList = UserDefaultsManager.shared.favoriteMoviesIndexArray
@@ -95,6 +99,9 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         if favoriteMovieIndexList.contains(sender.tag){
             if let index = favoriteMovieIndexList.index(of: sender.tag){
                 favoriteMovieIndexList.remove(at: index)
+                favoriteMovieArray.remove(at: index)
+                UserDefaultsManager.shared.favoriteMoviesArray = self.favoriteMovieArray
+                UserDefaultsManager.shared.favoriteMoviesIndexArray = self.favoriteMovieIndexList
                 movieView.collectionView.allowsSelection = true
                 sender.isEnabled = true
                 movieView.collectionView.reloadData()
