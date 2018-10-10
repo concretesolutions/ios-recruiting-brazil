@@ -12,6 +12,7 @@ import Alamofire
 
 class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    //MARK: - Properties
     var movieView = MoviesView()
     let cellId = "cellId"
     var loadingContent = false
@@ -23,6 +24,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     var favoriteMovieIndexList:[Int] = []
     var favoriteMovieArray:[FavoriteMovie] = []
     
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
         setup()
     }
@@ -32,6 +34,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         movieView.collectionView.reloadData()
     }
     
+    //MARK: - Setup view
     func setup(){
         movieView = MoviesView(frame: self.view.frame)
         movieView.collectionView.delegate = self
@@ -40,6 +43,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         self.view.addSubview(movieView)
     }
     
+    //MARK: - update user model
     func updateUserData(){
         if UserDefaultsManager.shared.isThereAnyFavoriteMovie{
             favoriteMovieArray = UserDefaultsManager.shared.favoriteMoviesArray
@@ -47,6 +51,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         }
     }
     
+    // MARK: - CollectionView DataSource and Delegate Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movieTitleList.count
     }
@@ -68,7 +73,19 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Ei")
+        let x = collectionView.cellForItem(at: indexPath) as! MovieCollectionViewCell
+        collectionView.allowsSelection = false
+        getJsonData(url: "https://api.themoviedb.org/3/movie/" + String(x.favButton.tag) + "?api_key=25655d622412630c8d690077b4a564f6&language=en-US") { (response) in
+            print(response)
+            let movieDetailViewController = MovieDetailController()
+            let jsonResponse = JSON(response)
+            movieDetailViewController.moviePosterUrl = jsonResponse["poster_path"].stringValue
+            movieDetailViewController.movieName = jsonResponse["title"].stringValue
+            movieDetailViewController.movieOverview = jsonResponse["overview"].stringValue
+            movieDetailViewController.movieGenres = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
+            self.navigationController?.pushViewController(movieDetailViewController, animated: true)
+            collectionView.allowsSelection = true
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -93,6 +110,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         
     }
     
+    // MARK: - Auxiliar functions
     @objc func editFavoriteList(sender: UIButton){
         sender.isEnabled = false
         movieView.collectionView.allowsSelection = false

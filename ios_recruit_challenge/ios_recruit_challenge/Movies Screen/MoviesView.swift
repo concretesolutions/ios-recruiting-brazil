@@ -10,6 +10,7 @@ import UIKit
 
 class MoviesView: UIView {
     
+    // MARK: - View init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -19,12 +20,14 @@ class MoviesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Properties
     let collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         cv.backgroundView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         return cv
     }()
     
+    // MARK: - View Setup and constraints
     func setupView(){
         addSubview(collectionView)
         addConstraintsWithVisualFormat(format: "H:|[v0]|", views: collectionView)

@@ -10,6 +10,7 @@ import UIKit
 
 class FavoritesView: UIView {
     
+    // MARK: - View init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -19,6 +20,7 @@ class FavoritesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Properties
     let tableView: UITableView = {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +31,7 @@ class FavoritesView: UIView {
         return tv
     }()
     
+    // MARK: - View Setup and constraints
     func setup(){
         addSubview(tableView)
         addConstraintsWithVisualFormat(format: "H:|[v0]|", views: tableView)
