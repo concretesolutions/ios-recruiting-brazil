@@ -33,11 +33,25 @@ class MovieDetailView: UIView{
         return view
     }()
     
+    let titleFavView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let movieNameLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.boldSystemFont(ofSize: 20)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
+    }()
+    
+    let favButton: UIButton = {
+        let btn = UIButton()
+        btn.isUserInteractionEnabled = true
+        btn.isEnabled = true
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
     }()
     
     let decorationLine: UIView = {
@@ -59,13 +73,18 @@ class MovieDetailView: UIView{
         addConstraintsWithVisualFormat(format: "H:|[v0]|", views: moviePosterView)
         addConstraintsWithVisualFormat(format: "H:|-[v0]-|", views: movieInfoView)
         addConstraintsWithVisualFormat(format: "V:|[v0(250)]-8-[v1]|", views: moviePosterView,movieInfoView)
-        movieInfoView.addSubview(movieNameLabel)
+        movieInfoView.addSubview(titleFavView)
         movieInfoView.addSubview(decorationLine)
         movieInfoView.addSubview(movieDetailLabel)
-        movieInfoView.addConstraintsWithVisualFormat(format:  "H:|-[v0]-|", views: movieNameLabel)
+        movieInfoView.addConstraintsWithVisualFormat(format:  "H:|[v0]|", views: titleFavView)
+        titleFavView.addSubview(movieNameLabel)
+        titleFavView.addSubview(favButton)
+        titleFavView.addConstraintsWithVisualFormat(format: "H:|-[v0]-[v1]-|", views: movieNameLabel, favButton)
+        titleFavView.addConstraintsWithVisualFormat(format: "V:|[v0]|", views: movieNameLabel)
+        titleFavView.addConstraintsWithVisualFormat(format: "V:|[v0]|", views: favButton)
         movieInfoView.addConstraintsWithVisualFormat(format:  "H:|-[v0]-|", views: decorationLine)
         movieInfoView.addConstraintsWithVisualFormat(format:  "H:|-[v0]-|", views: movieDetailLabel)
-        movieInfoView.addConstraintsWithVisualFormat(format: "V:|-[v0][v1(2)]-[v2]", views: movieNameLabel,decorationLine,movieDetailLabel)
+        movieInfoView.addConstraintsWithVisualFormat(format: "V:|-[v0][v1(2)]-[v2]", views: titleFavView,decorationLine,movieDetailLabel)
     }
     
 }

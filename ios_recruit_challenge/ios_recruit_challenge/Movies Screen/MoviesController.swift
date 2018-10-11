@@ -24,9 +24,11 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     var favoriteMovieIndexList:[Int] = []
     var favoriteMovieArray:[FavoriteMovie] = []
     
+    
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         setup()
+        print(dateFormatter(date: "2018-10-25"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +85,11 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
             movieDetailViewController.movieName = jsonResponse["title"].stringValue
             movieDetailViewController.movieOverview = jsonResponse["overview"].stringValue
             movieDetailViewController.movieGenres = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
+            movieDetailViewController.movieRelaseDate = jsonResponse["release_date"].stringValue
+            movieDetailViewController.movieIdList = self.movieIdList
+            movieDetailViewController.favoriteMovieIndexList = self.favoriteMovieIndexList
+            movieDetailViewController.movieGridIndex = indexPath.row
+            movieDetailViewController.movieApiIndex = jsonResponse["id"].intValue
             self.navigationController?.pushViewController(movieDetailViewController, animated: true)
             collectionView.allowsSelection = true
         }
@@ -173,6 +180,17 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         }else{
             return title
         }
+    }
+    
+    func dateFormatter(date: String) -> String{
+        let format = "yyyy-MM-dd"
+        let format2 = "dd/MM/yyyy"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        let y = dateFormatter.date(from: date)!
+        dateFormatter.dateFormat = format2
+        return dateFormatter.string(from: y)
     }
     
 }

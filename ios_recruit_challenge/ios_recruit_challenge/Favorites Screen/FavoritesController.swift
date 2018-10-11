@@ -60,6 +60,10 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
         return 90
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Ei!")
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.favoriteMovieArray.remove(at: indexPath.row)
