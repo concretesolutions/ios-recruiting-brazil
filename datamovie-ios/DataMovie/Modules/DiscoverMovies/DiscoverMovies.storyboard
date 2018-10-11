@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFCompactText-Light.otf">
+            <string>SFCompactText-Light</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Discover Movies View Controller-->
+        <scene sceneID="xc3-QD-42B">
+            <objects>
+                <viewController storyboardIdentifier="DiscoverMoviesViewController" id="mjL-pV-dgJ" customClass="DiscoverMoviesViewController" customModule="DataMovie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vo5-L1-GMY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Stp-xW-hBs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.062745098040000002" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Xv1-Ir-dt1">
+                                    <rect key="frame" x="0.0" y="72" width="375" height="55"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="H9Q-fS-lhR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading items..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVa-pW-asH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="25.5"/>
+                                                    <fontDescription key="fontDescription" name="SFCompactText-Light" family="SF Compact Text" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="3Xg-Tp-SzV">
+                                                    <rect key="frame" x="0.0" y="30.5" width="375" height="24.5"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="H9Q-fS-lhR" secondAttribute="trailing" id="Nkl-yz-5W5"/>
+                                        <constraint firstItem="H9Q-fS-lhR" firstAttribute="top" secondItem="Xv1-Ir-dt1" secondAttribute="top" id="db5-hX-re5"/>
+                                        <constraint firstItem="H9Q-fS-lhR" firstAttribute="leading" secondItem="Xv1-Ir-dt1" secondAttribute="leading" id="rWa-gM-l0E"/>
+                                        <constraint firstAttribute="bottom" secondItem="H9Q-fS-lhR" secondAttribute="bottom" id="ucf-1V-t7X"/>
+                                    </constraints>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="fkQ-mT-Ojh">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fkQ-mT-Ojh" id="pHA-pV-66n">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.058823529409999999" green="0.08235294118" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="C2a-Fv-VR4" firstAttribute="bottom" secondItem="Stp-xW-hBs" secondAttribute="bottom" id="BG7-t7-NI9"/>
+                            <constraint firstItem="Stp-xW-hBs" firstAttribute="top" secondItem="C2a-Fv-VR4" secondAttribute="top" id="ie8-L2-BsC"/>
+                            <constraint firstItem="C2a-Fv-VR4" firstAttribute="trailing" secondItem="Stp-xW-hBs" secondAttribute="trailing" id="jWc-sC-cUu"/>
+                            <constraint firstItem="Stp-xW-hBs" firstAttribute="leading" secondItem="C2a-Fv-VR4" secondAttribute="leading" id="tcR-v6-rXD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C2a-Fv-VR4"/>
+                    </view>
+                    <connections>
+                        <outlet property="footerActivity" destination="3Xg-Tp-SzV" id="RP5-hf-g9Z"/>
+                        <outlet property="footerLabel" destination="eVa-pW-asH" id="dyA-VP-yhd"/>
+                        <outlet property="tableView" destination="Stp-xW-hBs" id="W0d-bS-K0A"/>
+                        <outlet property="tableViewFooter" destination="Xv1-Ir-dt1" id="Yk9-2c-yJm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fjb-aR-3Z7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="-122.78860569715144"/>
+        </scene>
+    </scenes>
+</document>

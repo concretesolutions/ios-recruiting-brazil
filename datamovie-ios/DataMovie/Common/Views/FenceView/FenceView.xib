@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFCompactText-Regular.otf">
+            <string>SFCompactText-Regular</string>
+        </array>
+        <array key="SFCompactText-Semibold.otf">
+            <string>SFCompactText-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB" customClass="FenceView" customModule="DataMovie" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0h6-7R-IyP" customClass="DMCardView" customModule="DataMovie" customModuleProvider="target">
+                    <rect key="frame" x="97.5" y="293.5" width="180" height="80"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carregando..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkQ-vF-Jno">
+                            <rect key="frame" x="9.5" y="9.5" width="160" height="19"/>
+                            <fontDescription key="fontDescription" name="SFCompactText-Regular" family="SF Compact Text" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="qDK-ef-bzg">
+                            <rect key="frame" x="80" y="44" width="20" height="20"/>
+                            <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="qDK-ef-bzg" firstAttribute="centerX" secondItem="0h6-7R-IyP" secondAttribute="centerX" id="1aS-5U-Ahl"/>
+                        <constraint firstAttribute="trailing" secondItem="nkQ-vF-Jno" secondAttribute="trailing" constant="10" id="5uA-hf-yW1"/>
+                        <constraint firstItem="nkQ-vF-Jno" firstAttribute="top" secondItem="0h6-7R-IyP" secondAttribute="top" constant="10" id="Uir-k8-CO2"/>
+                        <constraint firstItem="nkQ-vF-Jno" firstAttribute="leading" secondItem="0h6-7R-IyP" secondAttribute="leading" constant="10" id="gb1-oZ-Opv"/>
+                        <constraint firstAttribute="height" constant="80" id="gnZ-gp-psS"/>
+                        <constraint firstItem="qDK-ef-bzg" firstAttribute="top" secondItem="nkQ-vF-Jno" secondAttribute="bottom" constant="15" id="kOw-d6-Kl1"/>
+                        <constraint firstAttribute="width" constant="180" id="mpa-ay-81Y"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layerBackgroundColor">
+                            <color key="value" red="0.039215686274509803" green="0.062745098039215685" blue="0.12941176470588234" alpha="0.74670911815068497" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Xf-zG-XNa">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGQ-m6-bQL" customClass="DMButton" customModule="DataMovie" customModuleProvider="target">
+                            <rect key="frame" x="62" y="363.5" width="250" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="250" id="IH6-nO-gCT"/>
+                                <constraint firstAttribute="height" constant="60" id="a6h-QN-8Hh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFCompactText-Semibold" family="SF Compact Text" pointSize="16"/>
+                            <state key="normal" title="Tentar novamente">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                    <color key="value" red="0.20392156862745098" green="0.25882352941176467" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="touchRetry:" destination="iN0-l3-epB" eventType="touchUpInside" id="hBT-Hc-jSw"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ocorreu um erro, tente novamente" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxt-AG-Efp">
+                            <rect key="frame" x="40" y="302" width="295" height="21.5"/>
+                            <fontDescription key="fontDescription" name="SFCompactText-Regular" family="SF Compact Text" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_alert" translatesAutoresizingMaskIntoConstraints="NO" id="QF7-Sd-WsQ" customClass="DMImageView" customModule="DataMovie" customModuleProvider="target">
+                            <rect key="frame" x="162" y="227" width="50" height="50"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="bim-3E-mCO"/>
+                                <constraint firstAttribute="height" constant="50" id="r4G-pV-qVJ"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isRenderingMode" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.058823529411764705" green="0.082352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="Nxt-AG-Efp" firstAttribute="top" secondItem="QF7-Sd-WsQ" secondAttribute="bottom" constant="25" id="OHG-a2-U6n"/>
+                        <constraint firstItem="JL2-bR-fbs" firstAttribute="trailing" secondItem="Nxt-AG-Efp" secondAttribute="trailing" constant="40" id="OSR-lN-P6R"/>
+                        <constraint firstItem="kGQ-m6-bQL" firstAttribute="centerY" secondItem="JL2-bR-fbs" secondAttribute="centerY" constant="50" id="OoE-6U-gyO"/>
+                        <constraint firstItem="Nxt-AG-Efp" firstAttribute="leading" secondItem="JL2-bR-fbs" secondAttribute="leading" constant="40" id="RII-Gi-246"/>
+                        <constraint firstItem="kGQ-m6-bQL" firstAttribute="centerX" secondItem="JL2-bR-fbs" secondAttribute="centerX" id="jaV-26-SSq"/>
+                        <constraint firstItem="kGQ-m6-bQL" firstAttribute="top" secondItem="Nxt-AG-Efp" secondAttribute="bottom" constant="40" id="oEx-zc-3eI"/>
+                        <constraint firstItem="QF7-Sd-WsQ" firstAttribute="centerX" secondItem="JL2-bR-fbs" secondAttribute="centerX" id="xYz-xe-ICZ"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="JL2-bR-fbs"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="4Xf-zG-XNa" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="4dL-9x-kGa"/>
+                <constraint firstItem="4Xf-zG-XNa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BcF-TH-fM8"/>
+                <constraint firstItem="0h6-7R-IyP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Fmv-CI-0VZ"/>
+                <constraint firstItem="0h6-7R-IyP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Nef-f4-vZG"/>
+                <constraint firstItem="4Xf-zG-XNa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Tp4-OY-N7m"/>
+                <constraint firstItem="4Xf-zG-XNa" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="blo-to-8cD"/>
+            </constraints>
+            <connections>
+                <outlet property="activityIndicator" destination="qDK-ef-bzg" id="sjY-db-rFg"/>
+                <outlet property="btRetry" destination="kGQ-m6-bQL" id="trY-ys-wcx"/>
+                <outlet property="errorView" destination="4Xf-zG-XNa" id="mtu-WI-lzE"/>
+                <outlet property="loadingView" destination="0h6-7R-IyP" id="9Qa-jA-8kz"/>
+                <outlet property="messageLbl" destination="Nxt-AG-Efp" id="Aqw-Py-dcx"/>
+            </connections>
+            <point key="canvasLocation" x="34.5" y="90.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_alert" width="64" height="64"/>
+    </resources>
+</document>

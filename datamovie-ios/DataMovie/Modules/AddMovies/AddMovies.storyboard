@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Movies-->
+        <scene sceneID="ekQ-wU-iaA">
+            <objects>
+                <viewController storyboardIdentifier="AddMoviesViewController" title="Add Movies" id="Z8E-8R-C0d" customClass="AddMoviesViewController" customModule="DataMovie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IT8-H7-xtM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljs-HL-oBP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.1137254902" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" red="0.090196078430000007" green="0.1137254902" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </toolbar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYD-Sd-0E8">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.058823529411764705" green="0.082352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dYD-Sd-0E8" firstAttribute="top" secondItem="ljs-HL-oBP" secondAttribute="bottom" id="0cU-Ka-aKq"/>
+                            <constraint firstItem="dYD-Sd-0E8" firstAttribute="leading" secondItem="GpL-Ii-oyv" secondAttribute="leading" id="CKP-Gi-Ynt"/>
+                            <constraint firstItem="ljs-HL-oBP" firstAttribute="top" secondItem="GpL-Ii-oyv" secondAttribute="top" id="Kmu-TQ-quy"/>
+                            <constraint firstItem="ljs-HL-oBP" firstAttribute="trailing" secondItem="GpL-Ii-oyv" secondAttribute="trailing" id="N5G-9p-Ivf"/>
+                            <constraint firstItem="dYD-Sd-0E8" firstAttribute="trailing" secondItem="GpL-Ii-oyv" secondAttribute="trailing" id="bsj-0z-tGV"/>
+                            <constraint firstItem="dYD-Sd-0E8" firstAttribute="bottom" secondItem="GpL-Ii-oyv" secondAttribute="bottom" id="qxq-0u-d5c"/>
+                            <constraint firstItem="ljs-HL-oBP" firstAttribute="leading" secondItem="GpL-Ii-oyv" secondAttribute="leading" id="scj-GV-jl7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GpL-Ii-oyv"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Movies" largeTitleDisplayMode="never" id="FTa-wC-sDI">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="RDP-2C-9Ud">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="touchClose:" destination="Z8E-8R-C0d" id="Q8U-5Z-nCz"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="OAh-hx-Sms">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="touchSearch:" destination="Z8E-8R-C0d" id="1EN-V1-y2p"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="containerView" destination="dYD-Sd-0E8" id="P2u-Sx-B7l"/>
+                        <outlet property="rightBarbuttonItem" destination="OAh-hx-Sms" id="ZTp-Tb-eFB"/>
+                        <outlet property="searchBar" destination="0Jq-kr-O0p" id="gYi-MD-cgK"/>
+                        <outlet property="segmentedControl" destination="5yH-Ee-Mxx" id="nYM-6W-CRX"/>
+                        <outlet property="toolbar" destination="ljs-HL-oBP" id="VKe-Go-3ax"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5e6-8l-Sa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Movie title" showsCancelButton="YES" translucent="NO" id="0Jq-kr-O0p">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="56"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.090196078430000007" green="0.1137254902" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="barTintColor" red="0.090196078431372548" green="0.11372549019607843" blue="0.19215686274509802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="5yH-Ee-Mxx">
+                    <rect key="frame" x="0.0" y="0.0" width="121" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="On theaters"/>
+                        <segment title="Up Comming"/>
+                        <segment title="Top rated"/>
+                    </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="segmentChanged:" destination="Z8E-8R-C0d" eventType="valueChanged" id="Ud9-Az-EjB"/>
+                    </connections>
+                </segmentedControl>
+            </objects>
+            <point key="canvasLocation" x="245.59999999999999" y="157.87106446776613"/>
+        </scene>
+    </scenes>
+</document>

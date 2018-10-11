@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Zoom Image View Controller-->
+        <scene sceneID="Lf7-M8-Kih">
+            <objects>
+                <viewController storyboardIdentifier="ZoomImageViewController" id="tVS-NA-hTZ" customClass="ZoomImageViewController" customModule="DataMovie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FgV-21-ROX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="1CP-OL-XQb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBd-6v-fL6">
+                                        <rect key="frame" x="0.0" y="1" width="375" height="667"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="KBd-6v-fL6" firstAttribute="leading" secondItem="1CP-OL-XQb" secondAttribute="leading" id="2pd-D5-QTZ"/>
+                                    <constraint firstItem="KBd-6v-fL6" firstAttribute="top" secondItem="1CP-OL-XQb" secondAttribute="top" id="5oK-II-lWf"/>
+                                    <constraint firstAttribute="trailing" secondItem="KBd-6v-fL6" secondAttribute="trailing" id="F4A-qx-tf2"/>
+                                    <constraint firstAttribute="bottom" secondItem="KBd-6v-fL6" secondAttribute="bottom" id="Rji-B3-5Dc"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.058823529409999999" green="0.08235294118" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1CP-OL-XQb" firstAttribute="leading" secondItem="FgV-21-ROX" secondAttribute="leading" id="3PJ-Yi-Ne5"/>
+                            <constraint firstAttribute="bottom" secondItem="1CP-OL-XQb" secondAttribute="bottom" id="7Jc-w4-6Cb"/>
+                            <constraint firstItem="KBd-6v-fL6" firstAttribute="height" secondItem="FgV-21-ROX" secondAttribute="height" id="H7d-8T-NfP"/>
+                            <constraint firstItem="KBd-6v-fL6" firstAttribute="width" secondItem="FgV-21-ROX" secondAttribute="width" id="HBB-CS-tv2"/>
+                            <constraint firstAttribute="trailing" secondItem="1CP-OL-XQb" secondAttribute="trailing" id="O9j-3d-OnC"/>
+                            <constraint firstItem="1CP-OL-XQb" firstAttribute="top" secondItem="FgV-21-ROX" secondAttribute="top" id="iwk-Og-dQB"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="imageView" destination="KBd-6v-fL6" id="By1-IE-I4b"/>
+                        <outlet property="scrollView" destination="1CP-OL-XQb" id="UtL-Qg-lvl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TC3-xY-rxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2711" y="-2715"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,34 @@
+platform :ios, '9.0'
+use_frameworks!
+
+workspace 'DataMovie'
+
+def shared_pods
+    pod 'HCSStarRatingView', '~> 1.5'
+    pod 'SkyFloatingLabelTextField'
+    pod 'Alamofire'
+    pod 'AlamofireImage'
+    pod 'TPKeyboardAvoiding'
+    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    pod 'Shimmer'
+end
+
+target 'DataMovie' do
+    shared_pods
+end 
+
+target 'DataMovieTests' do
+    shared_pods
+end
+
+target 'DataMovieUITests' do
+    shared_pods
+end
+
+# Workaround for Cocoapods issue
+post_install do |installer|
+    installer.pods_project.build_configurations.each do |config|
+        config.build_settings.delete('CODE_SIGNING_ALLOWED')
+        config.build_settings.delete('CODE_SIGNING_REQUIRED')
+    end
+end

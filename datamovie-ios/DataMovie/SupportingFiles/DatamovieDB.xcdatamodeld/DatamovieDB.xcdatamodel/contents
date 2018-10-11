@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CastEntity" representedClassName="CastEntity" syncable="YES">
+        <attribute name="character" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creditID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="personID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="profilePicture" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MovieEntity" inverseName="cast" inverseEntity="MovieEntity" syncable="YES"/>
+    </entity>
+    <entity name="CrewEntity" representedClassName="CrewEntity" syncable="YES">
+        <attribute name="creditID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="department" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="profilePicture" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MovieEntity" inverseName="crew" inverseEntity="MovieEntity" syncable="YES"/>
+    </entity>
+    <entity name="GenreEntity" representedClassName="GenreEntity" syncable="YES">
+        <attribute name="genreID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MovieEntity" inverseName="genres" inverseEntity="MovieEntity" syncable="YES"/>
+    </entity>
+    <entity name="MovieEntity" representedClassName="MovieEntity" syncable="YES">
+        <attribute name="budget" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="didWatch" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="homepage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imdbID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isAdult" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="originalLanguage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="originalTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="overview" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personalRating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="posterPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="revenue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="runtime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tmdbID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="voteAverage" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cast" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="CastEntity" inverseName="movies" inverseEntity="CastEntity" syncable="YES"/>
+        <relationship name="crew" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="CrewEntity" inverseName="movies" inverseEntity="CrewEntity" syncable="YES"/>
+        <relationship name="genres" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="GenreEntity" inverseName="movies" inverseEntity="GenreEntity" syncable="YES"/>
+        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoEntity" inverseName="movie" inverseEntity="VideoEntity" syncable="YES"/>
+    </entity>
+    <entity name="VideoEntity" representedClassName="VideoEntity" syncable="YES">
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="site" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="movie" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MovieEntity" inverseName="videos" inverseEntity="MovieEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CastEntity" positionX="-765" positionY="-0" width="128" height="58"/>
+        <element name="CrewEntity" positionX="-315" positionY="-106" width="128" height="133"/>
+        <element name="GenreEntity" positionX="-306" positionY="81" width="128" height="90"/>
+        <element name="MovieEntity" positionX="-495" positionY="-0" width="128" height="103"/>
+        <element name="VideoEntity" positionX="-488" positionY="-180" width="128" height="135"/>
+    </elements>
+</model>
