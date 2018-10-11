@@ -66,7 +66,6 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         getJsonData(url: "https://api.themoviedb.org/3/movie/" + favoriteMovieArray[indexPath.row].movieApiIndex! + "?api_key=25655d622412630c8d690077b4a564f6&language=en-US") { (response) in
-            print(response)
             let movieDetailViewController = MovieDetailController()
             let jsonResponse = JSON(response)
             movieDetailViewController.moviePosterUrl = jsonResponse["poster_path"].stringValue

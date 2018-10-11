@@ -111,7 +111,6 @@ class MovieDetailController: UIViewController {
             }
         }else{
             getJsonData(url: "https://api.themoviedb.org/3/movie/" + String(movieApiIndex) + "?api_key=25655d622412630c8d690077b4a564f6&language=en-US", completion: { (response) in
-                print(response)
                 let jsonResponse = JSON(response)
                 let movieTitle = jsonResponse["title"].stringValue
                 let moviePosterUrl = jsonResponse["poster_path"].stringValue

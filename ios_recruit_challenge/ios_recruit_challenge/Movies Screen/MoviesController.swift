@@ -28,8 +28,6 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         setup()
-        print(dateFormatter(date: "2018-10-25"))
-        print(movieIdList)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,7 +77,6 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
         let x = collectionView.cellForItem(at: indexPath) as! MovieCollectionViewCell
         collectionView.allowsSelection = false
         getJsonData(url: "https://api.themoviedb.org/3/movie/" + String(x.favButton.tag) + "?api_key=25655d622412630c8d690077b4a564f6&language=en-US") { (response) in
-            print(response)
             let movieDetailViewController = MovieDetailController()
             let jsonResponse = JSON(response)
             movieDetailViewController.moviePosterUrl = jsonResponse["poster_path"].stringValue
@@ -133,7 +130,6 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
             }
         }else{
             getJsonData(url: "https://api.themoviedb.org/3/movie/" + String(sender.tag) + "?api_key=25655d622412630c8d690077b4a564f6&language=en-US", completion: { (response) in
-                print(response)
                 let jsonResponse = JSON(response)
                 let movieTitle = jsonResponse["title"].stringValue
                 let moviePosterUrl = jsonResponse["poster_path"].stringValue
