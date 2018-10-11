@@ -14,6 +14,7 @@ struct Keys {
         static let isThereAnyFavoriteMovie = "isThereAnyFavoriteMovie"
         static let favoriteMoviesArray = "favoriteMoviesArray"
         static let favoriteMoviesIndexArray = "favoriteMoviesIndexArray"
+        static let movieidList = "movieidList"
     }
     
     private init(){}
@@ -59,6 +60,18 @@ class UserDefaultsManager {
         
         set{
             return UserDefaults.standard.set(newValue, forKey: Keys.favoriteMovies.favoriteMoviesIndexArray)
+        }
+        
+    }
+    
+    var movieIdList: Array<String>{
+        
+        get{
+            return UserDefaults.standard.array(forKey: Keys.favoriteMovies.movieidList) as! Array<String>
+        }
+        
+        set{
+            return UserDefaults.standard.set(newValue, forKey: Keys.favoriteMovies.movieidList)
         }
         
     }

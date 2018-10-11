@@ -14,12 +14,15 @@ class FavoriteMovie: NSObject, NSCoding {
     var moviePosterUrl: String?
     var movieReleaseDate: String?
     var movieGenre:[String]?
+    var movieApiIndex: String?
+    
 
-    init(movieTitle:String,moviePosterUrl:String,movieReleaseDate:String,movieGenre:[String]){
+    init(movieTitle:String,moviePosterUrl:String,movieReleaseDate:String,movieGenre:[String], movieApiIndex:String){
         self.movieTitle = movieTitle
         self.moviePosterUrl = moviePosterUrl
         self.movieReleaseDate = movieReleaseDate
         self.movieGenre = movieGenre
+        self.movieApiIndex = movieApiIndex
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,6 +30,7 @@ class FavoriteMovie: NSObject, NSCoding {
         moviePosterUrl = aDecoder.decodeObject(forKey: "moviePosterUrl") as? String
         movieReleaseDate = aDecoder.decodeObject(forKey: "movieReleaseDate") as? String
         movieGenre = aDecoder.decodeObject(forKey: "movieGenre") as? [String]
+        movieApiIndex = aDecoder.decodeObject(forKey: "movieApiIndex") as? String
     }
     
     func encode(with aCoder: NSCoder) {
@@ -34,6 +38,7 @@ class FavoriteMovie: NSObject, NSCoding {
         aCoder.encode(moviePosterUrl, forKey: "moviePosterUrl")
         aCoder.encode(movieReleaseDate, forKey: "movieReleaseDate")
         aCoder.encode(movieGenre, forKey: "movieGenre")
+        aCoder.encode(movieApiIndex, forKey: "movieApiIndex")
     }
     
 }

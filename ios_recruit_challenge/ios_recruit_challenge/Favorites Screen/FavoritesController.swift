@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,6 +17,7 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     let cellId = "cellId"
     var favoriteMovieIndexList:[Int] = []
     var favoriteMovieArray:[FavoriteMovie] = []
+    var movieIdList:[String] = []
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -41,6 +44,7 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
         if UserDefaultsManager.shared.isThereAnyFavoriteMovie{
             favoriteMovieArray = UserDefaultsManager.shared.favoriteMoviesArray
             favoriteMovieIndexList = UserDefaultsManager.shared.favoriteMoviesIndexArray
+            movieIdList = UserDefaultsManager.shared.movieIdList
         }
     }
     
@@ -61,7 +65,21 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Ei!")
+        getJsonData(url: "https://api.themoviedb.org/3/movie/" + favoriteMovieArray[indexPath.row].movieApiIndex! + "?api_key=25655d622412630c8d690077b4a564f6&language=en-US") { (response) in
+            print(response)
+            let movieDetailViewController = MovieDetailController()
+            let jsonResponse = JSON(response)
+            movieDetailViewController.moviePosterUrl = jsonResponse["poster_path"].stringValue
+            movieDetailViewController.movieName = jsonResponse["title"].stringValue
+            movieDetailViewController.movieOverview = jsonResponse["overview"].stringValue
+            movieDetailViewController.movieGenres = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
+            movieDetailViewController.movieRelaseDate = jsonResponse["release_date"].stringValue
+            movieDetailViewController.movieIdList = self.movieIdList
+            movieDetailViewController.favoriteMovieIndexList = self.favoriteMovieIndexList
+            movieDetailViewController.movieGridIndex = indexPath.row
+            movieDetailViewController.movieApiIndex = jsonResponse["id"].intValue
+            self.navigationController?.pushViewController(movieDetailViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -93,6 +111,17 @@ class FavoritesController: UIViewController, UITableViewDelegate, UITableViewDat
             let view = UIView()
             view.backgroundColor = UIColor(white: 0.95, alpha: 1)
             self.favoritesView.tableView.backgroundView = view
+        }
+    }
+    
+    func getJsonData(url: String, completion:@escaping (Any) -> Void){
+        Alamofire.request(url).responseJSON { (response) in
+            guard response.result.isSuccess,
+                let value = response.result.value else {
+                    print("Error while fetching tags: \(String(describing: response.result.error))")
+                    return
+            }
+            completion(value)
         }
     }
     

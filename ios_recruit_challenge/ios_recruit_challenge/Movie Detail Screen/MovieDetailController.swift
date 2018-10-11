@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class MovieDetailController: UIViewController {
     
+    //MARK: - Properties
     var movieDetailView = MovieDetailView()
     var moviePosterUrl: String = ""
     var movieName: String = ""
@@ -24,10 +25,10 @@ class MovieDetailController: UIViewController {
     var movieGridIndex: Int = 0
     var movieApiIndex: Int = 0
     
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
-        setupView()
         updateUserData()
-        print(String(describing: movieGenres))
+        setupView()
     }
     
     //MARK: - update user model
@@ -35,15 +36,17 @@ class MovieDetailController: UIViewController {
         if UserDefaultsManager.shared.isThereAnyFavoriteMovie{
             favoriteMovieArray = UserDefaultsManager.shared.favoriteMoviesArray
             favoriteMovieIndexList = UserDefaultsManager.shared.favoriteMoviesIndexArray
+            movieIdList = UserDefaultsManager.shared.movieIdList
         }
     }
     
+    //MARK: - Setup view
     func setupView(){
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        let vf = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 750)
+        let vf = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 600)
         movieDetailView = MovieDetailView(frame: vf)
         let sv = UIScrollView(frame: self.view.frame)
-        sv.contentSize.height = 755
+        sv.contentSize.height = 605
         self.view.addSubview(sv)
         sv.addSubview(movieDetailView)
         movieDetailView.moviePosterView.loadImage(urlString: "https://image.tmdb.org/t/p/w500/" + moviePosterUrl)
@@ -67,6 +70,7 @@ class MovieDetailController: UIViewController {
         return attributedText
     }
     
+    
     func fitMovieTitleIntoLabel(title: String) -> String{
         let nsString = title as NSString
         if nsString.length >= 20{
@@ -76,6 +80,7 @@ class MovieDetailController: UIViewController {
         }
     }
     
+    //MARK: - Auxiliar functions
     func dateFormatter(date: String) -> String{
         let format = "yyyy-MM-dd"
         let format2 = "dd/MM/yyyy"
@@ -112,7 +117,8 @@ class MovieDetailController: UIViewController {
                 let moviePosterUrl = jsonResponse["poster_path"].stringValue
                 let movieReleaseDate = jsonResponse["release_date"].stringValue
                 let movieGenre = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
-                let favoritedMovie = FavoriteMovie(movieTitle: movieTitle, moviePosterUrl: moviePosterUrl, movieReleaseDate: movieReleaseDate, movieGenre: movieGenre)
+                let movieApiIndex = jsonResponse["id"].stringValue
+                let favoritedMovie = FavoriteMovie(movieTitle: movieTitle, moviePosterUrl: moviePosterUrl, movieReleaseDate: movieReleaseDate, movieGenre: movieGenre, movieApiIndex:movieApiIndex)
                 self.favoriteMovieArray.append(favoritedMovie)
                 self.favoriteMovieIndexList.append(self.movieApiIndex)
                 UserDefaultsManager.shared.isThereAnyFavoriteMovie = true

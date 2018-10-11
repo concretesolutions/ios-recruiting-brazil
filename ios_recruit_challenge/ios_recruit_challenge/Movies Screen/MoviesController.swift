@@ -29,6 +29,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
     override func viewDidLoad() {
         setup()
         print(dateFormatter(date: "2018-10-25"))
+        print(movieIdList)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,8 +87,6 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
             movieDetailViewController.movieOverview = jsonResponse["overview"].stringValue
             movieDetailViewController.movieGenres = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
             movieDetailViewController.movieRelaseDate = jsonResponse["release_date"].stringValue
-            movieDetailViewController.movieIdList = self.movieIdList
-            movieDetailViewController.favoriteMovieIndexList = self.favoriteMovieIndexList
             movieDetailViewController.movieGridIndex = indexPath.row
             movieDetailViewController.movieApiIndex = jsonResponse["id"].intValue
             self.navigationController?.pushViewController(movieDetailViewController, animated: true)
@@ -109,6 +108,7 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
                     self.movieTitleList = self.movieTitleList + jsonResponse["results"].arrayValue.map({$0["title"].stringValue})
                     self.moviePosterUrlList = self.moviePosterUrlList + jsonResponse["results"].arrayValue.map({$0["poster_path"].stringValue})
                     self.movieIdList = self.movieIdList + jsonResponse["results"].arrayValue.map({$0["id"].stringValue})
+                    UserDefaultsManager.shared.movieIdList = self.movieIdList
                     self.movieView.collectionView.reloadData()
                     self.loadingContent = false
                 }
@@ -139,7 +139,8 @@ class MoviesController: UIViewController,UICollectionViewDelegate, UICollectionV
                 let moviePosterUrl = jsonResponse["poster_path"].stringValue
                 let movieReleaseDate = jsonResponse["release_date"].stringValue
                 let movieGenre = jsonResponse["genres"].arrayValue.map({$0["name"].stringValue})
-                let favoritedMovie = FavoriteMovie(movieTitle: movieTitle, moviePosterUrl: moviePosterUrl, movieReleaseDate: movieReleaseDate, movieGenre: movieGenre)
+                let movieApiIndex = jsonResponse["id"].stringValue
+                let favoritedMovie = FavoriteMovie(movieTitle: movieTitle, moviePosterUrl: moviePosterUrl, movieReleaseDate: movieReleaseDate, movieGenre: movieGenre, movieApiIndex:movieApiIndex)
                 self.favoriteMovieArray.append(favoritedMovie)
                 self.favoriteMovieIndexList.append(sender.tag)
                 UserDefaultsManager.shared.isThereAnyFavoriteMovie = true

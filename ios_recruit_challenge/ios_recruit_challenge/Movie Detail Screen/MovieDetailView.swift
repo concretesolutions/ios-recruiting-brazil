@@ -10,6 +10,7 @@ import UIKit
 
 class MovieDetailView: UIView{
     
+    // MARK: - View init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -19,6 +20,7 @@ class MovieDetailView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Properties
     let moviePosterView: CachedImageView = {
         let mp = CachedImageView()
         mp.translatesAutoresizingMaskIntoConstraints = false
@@ -67,6 +69,7 @@ class MovieDetailView: UIView{
         return lbl
     }()
     
+    // MARK: - Setup view
     func setupView(){
         addSubview(moviePosterView)
         addSubview(movieInfoView)
