@@ -10,6 +10,8 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    //MARK: - Variables
+    
     var currentTitle: String?
     
     //MARK: - Overrides
@@ -49,6 +51,23 @@ class BaseViewController: UIViewController {
         lblTitle.font = UIFont.init(name: "Futura-Medium", size: 17.0)!
         lblTitle.sizeToFit()
         navigationItem.titleView = lblTitle
+    }
+    
+    func showDetail(of movie: Movie){
+        LoadingOverlay.shared.showOverlay()
+        MovieService.getDetail(with: movie.id) { [unowned self](movie, error) in
+            LoadingOverlay.shared.hideOverlayView()
+            if let error = error{
+                self.showMessage("Ops... Algo deu errado", mensagem: error.localizedDescription, completion: nil)
+            }
+            else if let movie = movie{
+                DispatchQueue.main.async {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "detailVC") as! MovieDetailViewController
+                    vc.movie = movie
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
 
 }

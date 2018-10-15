@@ -33,31 +33,64 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="80m-k5-w6C"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B6U-lT-iee">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="TTU-Wo-jcl" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="PSZ-Jo-Adc"/>
+                            <constraint firstItem="B6U-lT-iee" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="caO-P6-Pch"/>
                             <constraint firstItem="TTU-Wo-jcl" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="cyJ-jo-QMA"/>
                             <constraint firstAttribute="bottom" secondItem="TTU-Wo-jcl" secondAttribute="bottom" id="lxP-MG-ryi"/>
                             <constraint firstItem="TTU-Wo-jcl" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="xH2-tH-LXM"/>
+                            <constraint firstItem="B6U-lT-iee" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="yPc-Ff-yZz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="PVQ-Gq-y6g">
-                        <barButtonItem key="rightBarButtonItem" image="filter" id="KsM-M5-16x">
-                            <connections>
-                                <action selector="ShowFilters:" destination="9pv-A4-QxB" id="x85-gC-EdD"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Movies" id="PVQ-Gq-y6g"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="B6U-lT-iee" id="Bhp-Qh-acU"/>
                         <outlet property="collectionView" destination="TTU-Wo-jcl" id="sRa-Yg-RVn"/>
-                        <segue destination="3JF-fu-V4j" kind="show" identifier="showFilters" id="kii-OH-zCS"/>
+                        <segue destination="u1f-bA-iKs" kind="show" identifier="showDetail" id="dhL-jh-AMj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1488.8" y="-321.58920539730138"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="HRV-W9-y5V">
+            <objects>
+                <viewController storyboardIdentifier="detailVC" hidesBottomBarWhenPushed="YES" id="u1f-bA-iKs" customClass="MovieDetailViewController" customModule="Mov" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qbA-8C-BpC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PAK-uw-dMc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="u1f-bA-iKs" id="Q5p-n2-Ldi"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PAK-uw-dMc" firstAttribute="trailing" secondItem="SUv-Zw-t84" secondAttribute="trailing" id="0fR-Vj-WVe"/>
+                            <constraint firstItem="PAK-uw-dMc" firstAttribute="bottom" secondItem="SUv-Zw-t84" secondAttribute="bottom" id="3bj-pl-D3N"/>
+                            <constraint firstItem="PAK-uw-dMc" firstAttribute="top" secondItem="qbA-8C-BpC" secondAttribute="top" id="CBk-9r-MQd"/>
+                            <constraint firstItem="PAK-uw-dMc" firstAttribute="leading" secondItem="SUv-Zw-t84" secondAttribute="leading" id="L2A-mV-Wis"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SUv-Zw-t84"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="PAK-uw-dMc" id="U9e-F9-fvA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nns-Oe-Yhg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2332" y="-321"/>
         </scene>
         <!--Filters View Controller-->
         <scene sceneID="WCB-xn-xKA">
@@ -104,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akw-r3-RFr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2296.8000000000002" y="-321.58920539730138"/>
+            <point key="canvasLocation" x="2332" y="358"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="wg7-f3-ORb">
@@ -132,9 +165,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Favorites" id="NbC-9w-kqv"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="NbC-9w-kqv">
+                        <barButtonItem key="rightBarButtonItem" image="filter" id="KsM-M5-16x">
+                            <connections>
+                                <action selector="ShowFilters:" destination="8rJ-Kc-sve" id="6sN-Zp-u3m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="xsR-1P-4LC" id="l4u-gW-Ibb"/>
+                        <segue destination="3JF-fu-V4j" kind="show" identifier="showFilters" id="pu7-iQ-WY1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

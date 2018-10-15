@@ -10,17 +10,33 @@ import UIKit
 
 final class FavoritesViewController: BaseViewController {
 
+    //MARK: - Outlets
     @IBOutlet weak private var tableView: UITableView!
     
+    //MARK: - Actions
+    @IBAction func ShowFilters(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "showFilters", sender: nil)
+    }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //MARK: - Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadFavs(_:)), name: Notification.Name(rawValue: "favoritesChanged"), object: nil)
     }
     
     override func setupInterface() {
         super.setupInterface()
         currentTitle = "Favorites"
         tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteTableViewCell")
+        tableView.tableFooterView = UIView(frame: .zero)
+    }
+    
+    @objc private func reloadFavs(_ notification: Notification){
+        self.tableView.reloadData()
     }
 
 }
@@ -34,7 +50,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return FavoriteController.shared.favorites.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -43,7 +59,13 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
+        cell.setup(with: FavoriteController.shared.favorites[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.showDetail(of: FavoriteController.shared.favorites[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -60,5 +82,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         print("Removing favorite...")
+        FavoriteController.shared.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }

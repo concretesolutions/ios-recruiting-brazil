@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Interface
         setupInterface()
         
+        //Getting Favorites
+        _ = FavoriteController.shared
         
         return true
     }

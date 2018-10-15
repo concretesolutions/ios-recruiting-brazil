@@ -10,10 +10,10 @@ import UIKit
 
 final class FavoriteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imgViewMovie: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblDescription: UILabel!
-    @IBOutlet weak var lblYear: UILabel!
+    @IBOutlet weak private var imgViewMovie: UIImageView!
+    @IBOutlet weak private var lblTitle: UILabel!
+    @IBOutlet weak private var lblDescription: UILabel!
+    @IBOutlet weak private var lblYear: UILabel!
     
     
     
@@ -27,6 +27,15 @@ final class FavoriteTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setup(with movie: Movie){
+        if let urlString = movie.imageURL, let url = URL(string: urlString){
+            imgViewMovie.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: [], completed: nil)
+        }
+        lblTitle.text = movie.title
+        lblDescription.text = movie.overview
+        lblYear.text = movie.releaseDate.year
     }
 
 }
