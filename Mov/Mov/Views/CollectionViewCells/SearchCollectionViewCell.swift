@@ -20,8 +20,9 @@ final class SearchCollectionViewCell: UICollectionViewCell{
         
         super.init(frame: frame)
         self.searchBar = UISearchBar()
-        self.searchBar.barTintColor = Constants.Colors.darkyellow
         self.searchBar.placeholder = "Search"
+        self.searchBar.searchBarStyle = .minimal
+        self.searchBar.tintColor = UIColor.black
         self.backgroundColor = Constants.Colors.yellow
         self.contentView.addSubview(self.searchBar)
     }

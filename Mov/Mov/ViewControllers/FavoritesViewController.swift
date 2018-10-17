@@ -18,6 +18,15 @@ final class FavoritesViewController: BaseViewController {
         self.performSegue(withIdentifier: "showFilters", sender: nil)
     }
     
+    //MARK: - Variables
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var filteredFavs = [Movie]()
+    
+    private var isSearching: Bool{
+        let searchBarIsEmpty = searchController.searchBar.text?.isEmpty ?? false
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -33,10 +42,31 @@ final class FavoritesViewController: BaseViewController {
         currentTitle = "Favorites"
         tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteTableViewCell")
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.backgroundColor = Constants.Colors.yellow
+        searchController.searchBar.barTintColor = Constants.Colors.darkyellow
+        searchController.searchBar.tintColor = UIColor.black
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
     }
+    
+    //MARK: - Methods
     
     @objc private func reloadFavs(_ notification: Notification){
         self.tableView.reloadData()
+    }
+    
+    func filterFavsForSearchText(_ searchText: String) {
+        filteredFavs = FavoriteController.shared.favorites.filter({( movie : Movie) -> Bool in
+            return movie.title.lowercased().contains(searchText.lowercased())
+        })
+        
+        tableView.reloadData()
     }
 
 }
@@ -50,7 +80,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return FavoriteController.shared.favorites.count
+        return isSearching ? filteredFavs.count : FavoriteController.shared.favorites.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -59,13 +89,15 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
-        cell.setup(with: FavoriteController.shared.favorites[indexPath.row])
+        let fav = isSearching ? filteredFavs[indexPath.row] : FavoriteController.shared.favorites[indexPath.row]
+        cell.setup(with: fav)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.showDetail(of: FavoriteController.shared.favorites[indexPath.row])
+        let fav = isSearching ? filteredFavs[indexPath.row] : FavoriteController.shared.favorites[indexPath.row]
+        self.showDetail(of: fav)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -73,7 +105,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return !isSearching
     }
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
@@ -84,5 +116,13 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
         print("Removing favorite...")
         FavoriteController.shared.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+}
+
+// MARK: - UISearchResultsUpdating Delegate
+extension FavoritesViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterFavsForSearchText(searchController.searchBar.text!)
     }
 }

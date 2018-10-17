@@ -117,8 +117,7 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell.identifier", for: indexPath) as! SearchCollectionViewCell
             
             cell.searchBar.delegate = self
-            cell.searchBar.searchBarStyle = .minimal
-            cell.searchBar.tintColor = UIColor.black
+            
             return cell
         }
         
