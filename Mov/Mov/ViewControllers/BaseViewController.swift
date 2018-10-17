@@ -35,7 +35,10 @@ class BaseViewController: UIViewController {
     //MARK: - Interface
 
     func setupInterface(){
-        
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.backgroundColor = Constants.Colors.yellow
     }
     
     private func setTitleView(_ text: String?){

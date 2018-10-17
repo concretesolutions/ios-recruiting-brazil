@@ -13,11 +13,11 @@ import SwiftyJSON
 final class MovieService {
     
     
-    static func getPopularMovies(with completion: @escaping (_ movies: [Movie], _ error: Error?) -> Void){
+    static func getPopularMovies(with page: Int, _ completion: @escaping (_ movies: [Movie], _ currentPage: Int, _ totalOfPages: Int, _ error: Error?) -> Void){
         
         let language = Locale.preferredLanguages[0].prefix(2)
         
-        let urlString = Constants.URL.baseURI + Constants.URL.mostPopular + "?api_key=\(Constants.Keys.MovieDB_APIKey)" + "&language=\(language)" + "&include_image_language=\(language),en"
+        let urlString = Constants.URL.baseURI + Constants.URL.mostPopular + "?api_key=\(Constants.Keys.MovieDB_APIKey)" + "&language=\(language)" + "&include_image_language=\(language),en" + "&page=\(page)"
         
         var movies = [Movie]()
         Alamofire.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -27,6 +27,8 @@ final class MovieService {
                 print(value)
                 let json = JSON(value)
                 let results = json["results"].arrayValue
+                let currentPage = json["page"].intValue
+                let totalOfPages = json["total_pages"].intValue
                 
                 for result in results{
                     guard let movie = Movie(with: result) else { continue }
@@ -34,12 +36,12 @@ final class MovieService {
                 }
                 
                 DispatchQueue.main.async {
-                    completion(movies, nil)
+                    completion(movies, currentPage, totalOfPages, nil)
                 }
             case .failure(let error):
                 print(error)
                 DispatchQueue.main.async {
-                    completion(movies, error)
+                    completion(movies, 0, 0, error)
                 }
             }
         }
