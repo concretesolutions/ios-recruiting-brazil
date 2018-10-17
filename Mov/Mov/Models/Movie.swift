@@ -65,7 +65,8 @@ struct Movie: Equatable{
                     kVoteCount: voteCount,
                     kVideo: video,
                     kVoteAverage: voteAverage,
-                    kGenreIds: kGenreIds]
+                    kGenreIds: genreIds,
+                    kGenres: genres]
         
         if let posterPath = posterPath{
             json.updateValue(posterPath, forKey: kPosterPath)
@@ -95,6 +96,7 @@ struct Movie: Equatable{
         self.video = json[kVideo].boolValue
         self.voteAverage = json[kVoteAverage].floatValue
         self.genreIds = json[kGenreIds].arrayObject as? [Int] ?? []
+        self.genres = json[kGenres].arrayObject as? [String] ?? []
         
         if let posterPath = self.posterPath{
             self.imageURL = Constants.URL.imageURI + posterPath

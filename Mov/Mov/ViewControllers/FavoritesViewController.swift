@@ -14,8 +14,15 @@ final class FavoritesViewController: BaseViewController {
     @IBOutlet weak private var tableView: UITableView!
     
     //MARK: - Actions
-    @IBAction func ShowFilters(_ sender: UIBarButtonItem) {
-        self.performSegue(withIdentifier: "showFilters", sender: nil)
+    @IBAction private func ShowFilters(_ sender: UIBarButtonItem) {
+        
+        let availableGenres = Set(FavoriteController.shared.favorites.compactMap({$0.genres}).reduce([], +))
+        let availableYears = Set(FavoriteController.shared.favorites.compactMap({$0.releaseDate.year}))
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "filterVC") as! FiltersViewController
+        vc.availableYears = availableYears
+        vc.availableGenres = availableGenres
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Variables
@@ -51,7 +58,6 @@ final class FavoritesViewController: BaseViewController {
         searchController.searchBar.tintColor = UIColor.black
         searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
     

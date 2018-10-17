@@ -175,7 +175,12 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
 //MARK: - MovieCollectionViewCellDelegate
 extension MoviesViewController: FavoriteMovieDelegate{
     func didAddedToFavorite(movie: Movie) {
-        FavoriteController.shared.add(favorite: movie)
+        //Getting movie detail before add as favorite
+        MovieService.getDetail(with: movie.id) { (movie, error) in
+            if let movie = movie{
+                FavoriteController.shared.add(favorite: movie)
+            }
+        }
     }
     func didRemovedFromFavorite(movie: Movie) {
         FavoriteController.shared.remove(favorite: movie)
