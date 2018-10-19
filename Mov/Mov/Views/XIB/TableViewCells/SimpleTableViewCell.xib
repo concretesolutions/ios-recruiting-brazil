@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SimpleTableViewCell" id="1uG-kc-5yR" customClass="MovieDetailTableViewCell" customModule="Mov" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1uG-kc-5yR" id="lzR-j9-cE9">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s40-4y-j4z">
+                        <rect key="frame" x="16" y="17" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nv-Gp-fva">
+                        <rect key="frame" x="311" y="3.5" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="8gK-NE-ojM"/>
+                            <constraint firstAttribute="height" constant="48" id="JqU-Yk-yAU"/>
+                        </constraints>
+                        <state key="normal" image="fav_off"/>
+                        <state key="selected" image="fav_on"/>
+                        <connections>
+                            <action selector="DidTappedFavoriteButton:" destination="1uG-kc-5yR" eventType="touchUpInside" id="Loq-0h-upI"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="5Nv-Gp-fva" secondAttribute="trailing" constant="16" id="Nhu-Aa-pBW"/>
+                    <constraint firstItem="5Nv-Gp-fva" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s40-4y-j4z" secondAttribute="trailing" constant="8" id="TEc-Wa-G5F"/>
+                    <constraint firstItem="s40-4y-j4z" firstAttribute="leading" secondItem="lzR-j9-cE9" secondAttribute="leadingMargin" id="WKu-pi-YPF"/>
+                    <constraint firstItem="5Nv-Gp-fva" firstAttribute="centerY" secondItem="lzR-j9-cE9" secondAttribute="centerY" id="XTm-aE-b1j"/>
+                    <constraint firstItem="s40-4y-j4z" firstAttribute="centerY" secondItem="lzR-j9-cE9" secondAttribute="centerY" id="ZfD-PN-qzz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnFavorite" destination="5Nv-Gp-fva" id="L6s-em-4Vc"/>
+                <outlet property="lblTitle" destination="s40-4y-j4z" id="9PT-hd-Fmy"/>
+            </connections>
+            <point key="canvasLocation" x="109.59999999999999" y="67.916041979010501"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="fav_off" width="17" height="16"/>
+        <image name="fav_on" width="18" height="16"/>
+    </resources>
+</document>
