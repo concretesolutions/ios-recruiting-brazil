@@ -108,6 +108,11 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        let hasData = isSearching ? !self.filteredMovies.isEmpty : !self.movies.isEmpty
+        let type = isSearching ? UICollectionView.EmptyListType.search : UICollectionView.EmptyListType.error
+        collectionView.setEmpty(for: type, hasData: hasData)
+        
         return section == 0 ? 1 : self.filteredMovies.count
     }
     

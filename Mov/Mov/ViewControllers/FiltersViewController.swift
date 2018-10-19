@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FiltersViewControllerDelegate {
+    func didApplyFilters(filters: [Filter])
+}
+
 final class FiltersViewController: BaseViewController {
     
     //MARK: - Outlets
@@ -15,14 +19,15 @@ final class FiltersViewController: BaseViewController {
     
      //MARK: - Actions
     @IBAction private func ApplyFilter(_ sender: UIButton) {
-        
+        self.delegate?.didApplyFilters(filters: self.items)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: - Variables
-    private var items = [Filter]()
+    var items = [Filter]()
     var availableYears = Set<String>()
     var availableGenres = Set<String>()
-    
+    var delegate: FiltersViewControllerDelegate?
     
     //MARK: - Overrides
     override func viewDidLoad() {
@@ -34,26 +39,39 @@ final class FiltersViewController: BaseViewController {
         currentTitle = "Filters"
         tableView.register(UINib(nibName: "SelectActionTableViewCell", bundle: nil), forCellReuseIdentifier: "SelectActionTableViewCell")
         tableView.tableFooterView = UIView(frame: .zero)
-        if !availableYears.isEmpty{
-            var item = Filter(property: "Dates")
-            item.values = Array(availableYears)
-            items.append(item)
-        }
         
-        if !availableGenres.isEmpty{
-            var item = Filter(property: "Genres")
-            item.values = Array(availableGenres)
-            items.append(item)
+        if self.items.isEmpty{
+            if !availableYears.isEmpty{
+                var item = Filter(property: "Dates")
+                item.values = Array(availableYears)
+                items.append(item)
+            }
+            
+            if !availableGenres.isEmpty{
+                var item = Filter(property: "Genres")
+                item.values = Array(availableGenres)
+                items.append(item)
+            }
         }
     }
     
     private func showFilterSelector(with filter: Filter){
         let vc = storyboard?.instantiateViewController(withIdentifier: "filterSelectionVC") as! FilterSelectionViewController
-        vc.options = filter.values
-        vc.currentTitle = filter.property
+        vc.filter = filter
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+//MARK: - FilterSelectionViewControllerDelegate
+extension FiltersViewController: FilterSelectionViewControllerDelegate{
+    func didSelectFilter(filter: Filter) {
+        if let index = items.index(of: filter){
+            items[index] = filter
+            tableView.reloadData()
+        }
+    }
 }
 
 //MARK: - TableView DataSource, Delegate
@@ -74,7 +92,8 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectActionTableViewCell", for: indexPath) as! SelectActionTableViewCell
-        cell.setup(with: items[indexPath.row].property)
+        let filter = items[indexPath.row]
+        cell.setup(with: filter.property, subtitle: filter.selectedValues.compactMap({String($0)}).joined(separator: ", "))
         return cell
     }
     

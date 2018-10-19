@@ -12,6 +12,7 @@ final class FavoritesViewController: BaseViewController {
 
     //MARK: - Outlets
     @IBOutlet weak private var tableView: UITableView!
+    @IBOutlet private var btnFilters: UIBarButtonItem!
     
     //MARK: - Actions
     @IBAction private func ShowFilters(_ sender: UIBarButtonItem) {
@@ -20,18 +21,30 @@ final class FavoritesViewController: BaseViewController {
         let availableYears = Set(FavoriteController.shared.favorites.compactMap({$0.releaseDate.year}))
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "filterVC") as! FiltersViewController
-        vc.availableYears = availableYears
-        vc.availableGenres = availableGenres
+        if appliedFilters.isEmpty{
+            vc.availableYears = availableYears
+            vc.availableGenres = availableGenres
+        }
+        else{
+            vc.items = appliedFilters
+        }
+        
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Variables
     private let searchController = UISearchController(searchResultsController: nil)
     private var filteredFavs = [Movie]()
+    private var appliedFilters = [Filter]()
     
     private var isSearching: Bool{
         let searchBarIsEmpty = searchController.searchBar.text?.isEmpty ?? false
-        return searchController.isActive && !searchBarIsEmpty
+        return (searchController.isActive && !searchBarIsEmpty) || isFiltering
+    }
+    
+    private var isFiltering: Bool{
+        return !self.appliedFilters.isEmpty
     }
     
     deinit {
@@ -48,6 +61,7 @@ final class FavoritesViewController: BaseViewController {
         super.setupInterface()
         currentTitle = "Favorites"
         tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteTableViewCell")
+        tableView.register(UINib(nibName: "RemoveFilterTableViewCell", bundle: nil), forCellReuseIdentifier: "RemoveFilterTableViewCell")
         tableView.tableFooterView = UIView(frame: .zero)
         
         searchController.searchResultsUpdater = self
@@ -67,14 +81,55 @@ final class FavoritesViewController: BaseViewController {
         self.tableView.reloadData()
     }
     
-    func filterFavsForSearchText(_ searchText: String) {
+    private func filterFavsForSearchText(_ searchText: String) {
         filteredFavs = FavoriteController.shared.favorites.filter({( movie : Movie) -> Bool in
             return movie.title.lowercased().contains(searchText.lowercased())
         })
         
         tableView.reloadData()
     }
+    
+    private func applyFilters(_ filters: [Filter]){
+        filteredFavs = FavoriteController.shared.favorites.filter({( movie : Movie) -> Bool in
+            var result = true
+            for filter in filters{
+                guard !filter.selectedValues.isEmpty else { continue }
+                if filter.property == "Dates", let year = movie.releaseDate.year{
+                    result = filter.selectedValues.contains(year)
+                }
+                else if filter.property == "Genres"{
+                    result = result && !Set(filter.selectedValues).intersection(Set(movie.genres)).isEmpty
+                }
+            }
+            return result
+        })
+        self.appliedFilters = filters
+        navigationItem.searchController = nil
+        tableView.reloadData()
+    }
+    
+    @objc private func removeFilters(){
+        self.appliedFilters.removeAll()
+        navigationItem.searchController = searchController
+        tableView.reloadData()
+    }
+    
+    private func setEmpty(){
+        let hasData = isSearching ? !filteredFavs.isEmpty : !FavoriteController.shared.favorites.isEmpty
+        let type = isSearching ? UITableView.EmptyListType.search : UITableView.EmptyListType.favorite
+        tableView.setEmpty(for: type, hasData: hasData)
+        
+        let hasFavs = !FavoriteController.shared.favorites.isEmpty
+        navigationItem.rightBarButtonItem = hasFavs ? btnFilters : nil
+    }
+    
+}
 
+//MARK: - FiltersViewControllerDelegate
+extension FavoritesViewController: FiltersViewControllerDelegate{
+    func didApplyFilters(filters: [Filter]) {
+        self.applyFilters(filters)
+    }
 }
 
 //MARK: - TableView DataSource, Delegate
@@ -86,7 +141,21 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.setEmpty()
         return isSearching ? filteredFavs.count : FavoriteController.shared.favorites.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return isFiltering ? 55.0 : UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if isFiltering{
+            let header = tableView.dequeueReusableCell(withIdentifier: "RemoveFilterTableViewCell") as! RemoveFilterTableViewCell
+            header.btnRemove.addTarget(self, action: #selector(removeFilters), for: .touchUpInside)
+            return header
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

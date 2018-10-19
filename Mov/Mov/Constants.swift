@@ -23,7 +23,7 @@ struct Constants {
     }
     
     struct Keys {
-        static let MovieDB_APIKey = "6937a73b2f2a9e3e902dc37860232bc6"
+        static let MovieDB_APIKey = "YOUR_API_KEY"
         static let MyFavorites = "myfavorites"
     }
 }

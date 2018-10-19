@@ -24,17 +24,26 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWV-Zw-JTU">
+                        <rect key="frame" x="291" y="17" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="bWV-Zw-JTU" firstAttribute="trailing" secondItem="NM5-nl-eIC" secondAttribute="trailingMargin" id="4HC-JN-2pt"/>
+                    <constraint firstItem="bWV-Zw-JTU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wwA-0p-nHe" secondAttribute="trailing" constant="8" id="AKb-w0-elr"/>
                     <constraint firstItem="wwA-0p-nHe" firstAttribute="leading" secondItem="NM5-nl-eIC" secondAttribute="leadingMargin" id="CNS-Nq-Elf"/>
+                    <constraint firstItem="bWV-Zw-JTU" firstAttribute="centerY" secondItem="NM5-nl-eIC" secondAttribute="centerY" id="G32-jo-opL"/>
                     <constraint firstItem="wwA-0p-nHe" firstAttribute="centerY" secondItem="NM5-nl-eIC" secondAttribute="centerY" id="ROi-1y-ccu"/>
-                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="wwA-0p-nHe" secondAttribute="trailing" id="h2k-l5-6GV"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="lblSubtitle" destination="bWV-Zw-JTU" id="QLz-4F-dBQ"/>
                 <outlet property="lblTitle" destination="wwA-0p-nHe" id="NKK-zi-jdR"/>
             </connections>
-            <point key="canvasLocation" x="-220" y="38"/>
+            <point key="canvasLocation" x="-220" y="37.331334332833585"/>
         </tableViewCell>
     </objects>
 </document>
