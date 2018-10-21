@@ -40,7 +40,6 @@
 		0818B32C217C0C1E00F884B8 = {
 			isa = PBXGroup;
 			children = (
-				08FB15CD217C109B0047E57B /* Default-568h@2x.png */,
 				0818B337217C0C1E00F884B8 /* Movs */,
 				0818B336217C0C1E00F884B8 /* Products */,
 			);
@@ -57,14 +56,31 @@
 		0818B337217C0C1E00F884B8 /* Movs */ = {
 			isa = PBXGroup;
 			children = (
-				0818B338217C0C1E00F884B8 /* AppDelegate.swift */,
+				08FB15D3217C15DC0047E57B /* Support */,
+				08FB15D4217C160D0047E57B /* Core */,
 				0818B33A217C0C1E00F884B8 /* ViewController.swift */,
-				0818B33F217C0C1F00F884B8 /* Assets.xcassets */,
-				08FB15D1217C11120047E57B /* Colors.xcassets */,
-				0818B344217C0C1F00F884B8 /* Info.plist */,
-				08FB15CF217C10C00047E57B /* LaunchScreen.xib */,
 			);
 			path = Movs;
+			sourceTree = "<group>";
+		};
+		08FB15D3217C15DC0047E57B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				0818B344217C0C1F00F884B8 /* Info.plist */,
+				08FB15CF217C10C00047E57B /* LaunchScreen.xib */,
+				0818B33F217C0C1F00F884B8 /* Assets.xcassets */,
+				08FB15D1217C11120047E57B /* Colors.xcassets */,
+				08FB15CD217C109B0047E57B /* Default-568h@2x.png */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		08FB15D4217C160D0047E57B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0818B338217C0C1E00F884B8 /* AppDelegate.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,7 +285,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JP3F8DJU56;
-				INFOPLIST_FILE = Movs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movs/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -287,7 +303,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JP3F8DJU56;
-				INFOPLIST_FILE = Movs/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Movs/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
