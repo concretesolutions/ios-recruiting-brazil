@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D085044217BBADC0017E78D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D085043217BBADC0017E78D /* Genre.swift */; };
+		1D085047217C2BF50017E78D /* SortedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D085046217C2BF50017E78D /* SortedArray.swift */; };
 		1DE41859217B4654000D2446 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE41858217B4654000D2446 /* AppDelegate.swift */; };
 		1DE4185B217B4654000D2446 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4185A217B4654000D2446 /* LoginViewController.swift */; };
 		1DE4185E217B4654000D2446 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DE4185C217B4654000D2446 /* Main.storyboard */; };
@@ -44,6 +46,8 @@
 		05B1B3B70179F6C6CD1B25CE /* Pods_ChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FA915CDE9978830133C2CC4 /* Pods-Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Challenge/Pods-Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		0FD3097F8A7FA33BDAE26EBC /* Pods-ChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChallengeUITests/Pods-ChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1D085043217BBADC0017E78D /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		1D085046217C2BF50017E78D /* SortedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedArray.swift; sourceTree = "<group>"; };
 		1DE41855217B4654000D2446 /* Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DE41858217B4654000D2446 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DE4185A217B4654000D2446 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1D085045217C2BD60017E78D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1D085046217C2BF50017E78D /* SortedArray.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		1DE4184C217B4654000D2446 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +144,7 @@
 		1DE41857217B4654000D2446 /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				1D085045217C2BD60017E78D /* Helpers */,
 				1DE4188B217B4772000D2446 /* Controllers */,
 				1DE4188A217B4765000D2446 /* Views */,
 				1DE41889217B4759000D2446 /* Models */,
@@ -167,6 +180,7 @@
 				1DE4188C217B4ACC000D2446 /* Movie.swift */,
 				1DE4188E217B4C1D000D2446 /* User.swift */,
 				1DE41890217B6651000D2446 /* Tmdb.swift */,
+				1D085043217BBADC0017E78D /* Genre.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -417,8 +431,10 @@
 				1DE4185B217B4654000D2446 /* LoginViewController.swift in Sources */,
 				1DE4188D217B4ACC000D2446 /* Movie.swift in Sources */,
 				1DE4188F217B4C1D000D2446 /* User.swift in Sources */,
+				1D085047217C2BF50017E78D /* SortedArray.swift in Sources */,
 				1DE41891217B6651000D2446 /* Tmdb.swift in Sources */,
 				1DE41859217B4654000D2446 /* AppDelegate.swift in Sources */,
+				1D085044217BBADC0017E78D /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,7 @@ import Alamofire
 class User {
     
     var username: String?
-    var userId: String?
+    var userId: Int?
     var sessionId: String?
     
     static let user = User()
@@ -33,6 +33,30 @@ class User {
             onFailure(error)
         }
         
+    }
+    /*Get account details. In this case, the user ID*/
+    func getAccountDetails(onSuccess: @escaping (_ userId: Int) -> Void, onFailure: @escaping (_ error: String) -> Void) {
+        let headers: HTTPHeaders = ["content-type": "application/json"]
+        Alamofire.request("\(Tmdb.apiRequestBaseUrl)/account?api_key=\(Tmdb.apiKey)&session_id=\(String(describing: self.sessionId!))", method: .get, parameters: nil, headers: headers).validate().responseJSON { (response) in
+            guard response.result.isSuccess else {
+                onFailure("Request error requesting account details")
+                return
+            }
+            guard let value = response.result.value as? [String: Any] else {
+                onFailure("Data received is compromised")
+                return
+            }
+            if let id = value["id"] as? Int {
+                self.userId = id
+                onSuccess(id)
+            } else {
+                if let status = value["status_message"] as? String {
+                    onFailure(status)
+                } else {
+                    onFailure("Data received is compromised")
+                }
+            }
+        }
     }
     
     /*Function that requests and returns an unvalidated and temporary token which can be validated and later used to generate a session (user logedin)*/

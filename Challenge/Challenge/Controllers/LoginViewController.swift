@@ -16,13 +16,22 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Movie.getPopularMovies(pageToRequest: 1, onSuccess: { (movies) in
+            
+        }) { (error) in
+            
+        }
         
     }
 
     @IBAction func loginAction(_ sender: Any) {
         if !(userNameTextField.text?.isEmpty)! && !(passwordTextField.text?.isEmpty)! {
             User.user.login(username: userNameTextField.text!, password: passwordTextField.text!, onSuccess: { (result) in
-                
+                User.user.getAccountDetails(onSuccess: { (result) in
+                    print("User ID: \(String(describing: User.user.userId!))")
+                }, onFailure: { (error) in
+                    print(error)
+                })
             }) { (error) in
                 print(error)
             }
