@@ -13,14 +13,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    var movies: [Movie] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Movie.getPopularMovies(pageToRequest: 1, onSuccess: { (movies) in
-            
-        }) { (error) in
-            
-        }
+        print("TELA 1")
+        
+        
         
     }
 
@@ -29,6 +29,18 @@ class LoginViewController: UIViewController {
             User.user.login(username: userNameTextField.text!, password: passwordTextField.text!, onSuccess: { (result) in
                 User.user.getAccountDetails(onSuccess: { (result) in
                     print("User ID: \(String(describing: User.user.userId!))")
+                    print("Session ID: \(String(describing: User.user.sessionId!))")
+                    
+                    Movie.getFavoriteMovies(pageToRequest: 1, onSuccess: { (movies) in
+                        for element in movies {
+                            print(element.genre.read())
+                            element.genre.addObserver(self, using: { (vc, genre) in
+                                print(genre)
+                            })
+                        }
+                    }) { (error) in
+                        print(error)
+                    }
                 }, onFailure: { (error) in
                     print(error)
                 })
