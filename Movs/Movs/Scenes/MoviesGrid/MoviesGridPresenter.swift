@@ -7,3 +7,25 @@
 //
 
 import Foundation
+
+protocol MoviesGridPresenterView: ViewProtocol {
+}
+
+final class MoviesGridPresenter: MoviesGridViewPresenter {
+    
+    unowned let view:MoviesGridPresenterView
+    unowned let coordinator:Coordinator
+    
+    init(view:MoviesGridPresenterView, coordinator: Coordinator) {
+        self.view = view
+        self.coordinator = coordinator
+    }
+    
+    func viewDidLoad() {
+        self.view.setupOnce()
+    }
+    
+    func viewWillAppear() {
+        self.view.setupWhenAppear()
+    }
+}

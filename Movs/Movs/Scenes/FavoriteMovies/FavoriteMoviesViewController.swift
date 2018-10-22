@@ -6,4 +6,18 @@
 //  Copyright © 2018 Gabriel Reynoso. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol FavoriteMoveisViewPresenter: PresenterProtocol {
+}
+
+final class FavoriteMoviesViewController: MVPBaseViewController, FavoriteMoviesPresenterView {
+    var presenter:FavoriteMoveisViewPresenter? {
+        get {
+            return self.basePresenter as? FavoriteMoveisViewPresenter
+        }
+        set {
+            self.basePresenter = newValue
+        }
+    }
+}

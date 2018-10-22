@@ -6,4 +6,12 @@
 //  Copyright © 2018 Gabriel Reynoso. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class FavoriteMoviesCoordinator: Coordinator {
+    
+    func start() {
+        let vc = FavoriteMoviesViewController()
+        vc.presenter = FavoriteMoviesPresenter(view: vc, coordinator: self)
+    }
+}

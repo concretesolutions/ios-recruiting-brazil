@@ -6,4 +6,12 @@
 //  Copyright © 2018 Gabriel Reynoso. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class MoviesGridCoordinator: Coordinator {
+    
+    func start() {
+        let vc = MoviesGridViewController()
+        vc.presenter = MoviesGridPresenter(view: vc, coordinator: self)
+    }
+}

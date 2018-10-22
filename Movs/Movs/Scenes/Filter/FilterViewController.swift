@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+import UIKit
+
+protocol FilterViewPresenter: PresenterProtocol {
+}
+
+final class FilterViewController: MVPBaseViewController, FilterPresenterView {
+    var presenter: FilterViewPresenter? {
+        get {
+            return self.basePresenter as? FilterViewPresenter
+        }
+        set {
+            self.basePresenter = newValue
+        }
+    }
+}

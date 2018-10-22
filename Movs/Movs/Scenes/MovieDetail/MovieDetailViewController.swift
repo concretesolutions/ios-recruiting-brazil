@@ -6,4 +6,19 @@
 //  Copyright © 2018 Gabriel Reynoso. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol MovieDetailViewPresenter: PresenterProtocol {
+}
+
+final class MovieDetailViewController: MVPBaseViewController, MovieDetailPresenterView {
+    
+    var presenter: MovieDetailViewPresenter? {
+        get {
+            return self.basePresenter as? MovieDetailViewPresenter
+        }
+        set {
+            self.basePresenter = newValue
+        }
+    }
+}

@@ -6,4 +6,19 @@
 //  Copyright © 2018 Gabriel Reynoso. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol MoviesGridViewPresenter: PresenterProtocol {
+}
+
+final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenterView {
+    
+    var presenter: MoviesGridViewPresenter? {
+        get {
+            return self.basePresenter as? MoviesGridViewPresenter
+        }
+        set {
+            self.basePresenter = newValue
+        }
+    }
+}

@@ -6,4 +6,12 @@
 //  Copyright © 2018 Gabriel Reynoso. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class FilterCoordinator: Coordinator {
+    
+    func start() {
+        let vc = FilterViewController()
+        vc.presenter = FilterPresenter(view: vc, coordinator: self)
+    }
+}
