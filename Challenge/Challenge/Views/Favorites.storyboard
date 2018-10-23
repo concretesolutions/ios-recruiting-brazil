@@ -44,7 +44,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="162.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8cf-Kh-ceT">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8cf-Kh-ceT">
                                                     <rect key="frame" x="15" y="11" width="130" height="141"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="BDZ-oA-jYk"/>
@@ -134,11 +134,20 @@
                     <connections>
                         <outlet property="searchBar" destination="tCd-jS-vrz" id="Txb-Q9-el6"/>
                         <outlet property="tableView" destination="0Bs-cJ-zZZ" id="G04-3W-Jat"/>
+                        <segue destination="PcE-mn-Xxp" kind="show" identifier="favoriteToDetail" id="Xkx-m8-oKA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXY-Ce-0ls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="245.59999999999999" y="112.89355322338831"/>
+        </scene>
+        <!--MovieDetails-->
+        <scene sceneID="5Cy-W4-u42">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MovieDetails" referencedIdentifier="MovieDetails" id="PcE-mn-Xxp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ut1-64-xvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="-128"/>
         </scene>
     </scenes>
 </document>

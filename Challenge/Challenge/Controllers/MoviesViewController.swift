@@ -9,11 +9,15 @@
 import UIKit
 import Kingfisher
 
-class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var movies: [Movie] = []
+    var filteredMovies: [Movie] = []
     var page = 1
+    var searchActive = false
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -26,14 +30,30 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         return refreshControl
     }()
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let image = UIImage(named: "list_icon")
+        image?.draw(in: CGRect(x: 0, y: 0, width: 0, height: 0))
+        tabBarItem = UITabBarItem(title: "Movies", image: image, tag: 1)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.searchBar.delegate = self
         handlePagination()
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @objc func handlePagination() {
@@ -84,14 +104,24 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.searchActive ?? false {
+            return self.filteredMovies.count
+        }
         return self.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MoviesCollectionViewCell
-        cell.label.text = self.movies[indexPath.row].name
-        cell.imageView.kf.indicatorType = .activity
-        cell.imageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.movies[indexPath.row].imagePath!))"))
+        if self.searchActive ?? false {
+            cell.label.text = self.filteredMovies[indexPath.row].name
+            cell.imageView.kf.indicatorType = .activity
+            cell.imageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.filteredMovies[indexPath.row].imagePath!))"))
+        } else {
+            cell.label.text = self.movies[indexPath.row].name
+            cell.imageView.kf.indicatorType = .activity
+            cell.imageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.movies[indexPath.row].imagePath!))"))
+        }
+        
         return cell
     }
     
@@ -100,8 +130,38 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.collectionView.deselectItem(at: indexPath, animated: false)
         self.performSegue(withIdentifier: "moviesToDetails", sender: nil)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchActive = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchActive = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchActive = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchActive = false
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        self.filteredMovies = self.movies.filter({ (text) -> Bool in
+            let tmp: NSString = (text.name! as NSString?)!
+            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            return range.location != NSNotFound
+        })
+        if(self.filteredMovies.isEmpty) {
+            self.searchActive = false
+        } else {
+            self.searchActive = true
+        }
+        self.collectionView.reloadData()
     }
 
     
@@ -110,6 +170,17 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "moviesToDetails" {
+            let vc = segue.destination as! MovieDetailsViewController
+            if let itemIndex = self.collectionView.indexPathsForSelectedItems?.first?.item, let indexPath = self.collectionView.indexPathsForSelectedItems?.first{
+                if self.searchActive {
+                    vc.movie = self.filteredMovies[itemIndex]
+                } else {
+                    vc.movie = self.movies[itemIndex]
+                }
+                let cell = self.collectionView.cellForItem(at: indexPath) as! MoviesCollectionViewCell
+                vc.image = cell.imageView?.image
+                self.collectionView.deselectItem(at: indexPath, animated: false)
+            }
             
         }
     }

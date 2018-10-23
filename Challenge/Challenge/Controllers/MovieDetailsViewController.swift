@@ -32,6 +32,12 @@ class MovieDetailsViewController: UIViewController {
         }
         if self.image != nil {
             self.imageView.image = self.image
+        } else {
+            self.imageView.kf.indicatorType = .activity
+            self.imageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.movie?.imagePath!))"))
+        }
+        if self.movie?.date != nil && self.movie?.date != ""{
+            self.year.text = self.movie?.date?.dateYyyyMmDdToDdMmYyyyWithDashes()
         }
         // Do any additional setup after loading the view.
     }

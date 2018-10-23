@@ -19,9 +19,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("TELA 1")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        self.userNameTextField.addBottomBorderWithColor(color: .black, width: 1)
+        self.passwordTextField.addBottomBorderWithColor(color: .black, width: 1)
         
-        
-        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     @IBAction func loginAction(_ sender: Any) {
