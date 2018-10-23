@@ -37,7 +37,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" rowHeight="163" id="Ibh-CM-T2s">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" rowHeight="163" id="Ibh-CM-T2s" customClass="FavoriteTableViewCell" customModule="Challenge" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ibh-CM-T2s" id="0dq-hG-n9E">
@@ -103,6 +103,13 @@
                                                 <constraint firstItem="w7m-so-EFO" firstAttribute="top" secondItem="Lzu-kF-LKU" secondAttribute="bottom" constant="8" id="vQo-3K-KgF"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="favoriteContentView" destination="0dq-hG-n9E" id="qFb-uF-aeb"/>
+                                            <outlet property="favoriteImageView" destination="8cf-Kh-ceT" id="tpP-nX-uf5"/>
+                                            <outlet property="favoriteOverview" destination="i86-lp-joI" id="HET-Vx-REo"/>
+                                            <outlet property="favoriteTitle" destination="Lzu-kF-LKU" id="9Cq-aC-9KS"/>
+                                            <outlet property="favoriteYear" destination="w7m-so-EFO" id="mbb-fe-IqJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -124,6 +131,10 @@
                         <viewLayoutGuide key="safeArea" id="xUV-IP-Wj5"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="tfH-Kr-RxU"/>
+                    <connections>
+                        <outlet property="searchBar" destination="tCd-jS-vrz" id="Txb-Q9-el6"/>
+                        <outlet property="tableView" destination="0Bs-cJ-zZZ" id="G04-3W-Jat"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXY-Ce-0ls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

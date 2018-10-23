@@ -50,7 +50,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="159" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Ke-O5-Ux0">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Ke-O5-Ux0">
                                                     <rect key="frame" x="0.0" y="0.0" width="159" height="163.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="159" id="1bE-KE-BCh"/>
@@ -118,7 +118,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="Phi-Cr-Bzq"/>
                     <connections>
-                        <segue destination="bp2-sb-amX" kind="show" id="hHT-lL-7OV"/>
+                        <outlet property="collectionView" destination="FEl-MP-mEa" id="Jdk-wm-8Ce"/>
+                        <segue destination="bp2-sb-amX" kind="show" identifier="moviesToDetails" id="hHT-lL-7OV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08q-id-70x" userLabel="First Responder" sceneMemberID="firstResponder"/>
