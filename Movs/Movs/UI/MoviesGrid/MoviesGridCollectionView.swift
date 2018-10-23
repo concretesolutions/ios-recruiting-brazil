@@ -28,30 +28,6 @@ final class MoviesGridCollectionView: UICollectionView, ViewCode {
     }
 }
 
-// MARK: - Collection view data source
-
-final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
-    
-    var items:[MoviesGridCell.Data]
-    
-    init(items:[MoviesGridCell.Data]? = nil) {
-        self.items = items ?? []
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.items.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesGridCell.identifier, for: indexPath) as? MoviesGridCell else {
-            return UICollectionViewCell()
-        }
-        let data = self.items[indexPath.row]
-        cell.setup(with: data)
-        return cell
-    }
-}
-
 // MARK: - Collection view layout delegate
 
 final class MoviesGridLayout: NSObject, UICollectionViewDelegateFlowLayout {

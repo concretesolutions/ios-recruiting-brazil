@@ -13,6 +13,8 @@
 		084645B9217F806800B3A05F /* ViewCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084645B8217F806800B3A05F /* ViewCode.swift */; };
 		084645BC217FA05400B3A05F /* MoviesGridCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084645BB217FA05400B3A05F /* MoviesGridCollectionView.swift */; };
 		084645BE217FA07900B3A05F /* MoviesGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084645BD217FA07900B3A05F /* MoviesGridCell.swift */; };
+		084645C1217FA1AC00B3A05F /* MovsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084645C0217FA1AC00B3A05F /* MovsNavigationController.swift */; };
+		084645C4217FAF2500B3A05F /* MoviesGridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084645C3217FAF2500B3A05F /* MoviesGridDataSource.swift */; };
 		08FB15CE217C109B0047E57B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15CD217C109B0047E57B /* Default-568h@2x.png */; };
 		08FB15D0217C10C00047E57B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15CF217C10C00047E57B /* LaunchScreen.xib */; };
 		08FB15D2217C11120047E57B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15D1217C11120047E57B /* Colors.xcassets */; };
@@ -43,6 +45,8 @@
 		084645B8217F806800B3A05F /* ViewCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCode.swift; sourceTree = "<group>"; };
 		084645BB217FA05400B3A05F /* MoviesGridCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridCollectionView.swift; sourceTree = "<group>"; };
 		084645BD217FA07900B3A05F /* MoviesGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridCell.swift; sourceTree = "<group>"; };
+		084645C0217FA1AC00B3A05F /* MovsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsNavigationController.swift; sourceTree = "<group>"; };
+		084645C3217FAF2500B3A05F /* MoviesGridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridDataSource.swift; sourceTree = "<group>"; };
 		08FB15CD217C109B0047E57B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		08FB15CF217C10C00047E57B /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		08FB15D1217C11120047E57B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -106,9 +110,18 @@
 			isa = PBXGroup;
 			children = (
 				084645BB217FA05400B3A05F /* MoviesGridCollectionView.swift */,
+				084645C3217FAF2500B3A05F /* MoviesGridDataSource.swift */,
 				084645BD217FA07900B3A05F /* MoviesGridCell.swift */,
 			);
 			path = MoviesGrid;
+			sourceTree = "<group>";
+		};
+		084645BF217FA16900B3A05F /* NavigationCotroller */ = {
+			isa = PBXGroup;
+			children = (
+				084645C0217FA1AC00B3A05F /* MovsNavigationController.swift */,
+			);
+			path = NavigationCotroller;
 			sourceTree = "<group>";
 		};
 		08FB15D3217C15DC0047E57B /* Support */ = {
@@ -189,8 +202,9 @@
 		08FB1602217E52A80047E57B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				084645BA217FA03E00B3A05F /* MoviesGrid */,
 				08FB1605217E5EAF0047E57B /* Assets */,
+				084645BA217FA03E00B3A05F /* MoviesGrid */,
+				084645BF217FA16900B3A05F /* NavigationCotroller */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -289,7 +303,9 @@
 				08FB1609217E5EC30047E57B /* Assets.swift in Sources */,
 				08FB15E8217C2F970047E57B /* MoviesGridPresenter.swift in Sources */,
 				084645B9217F806800B3A05F /* ViewCode.swift in Sources */,
+				084645C4217FAF2500B3A05F /* MoviesGridDataSource.swift in Sources */,
 				08FB15F8217C30040047E57B /* FilterViewController.swift in Sources */,
+				084645C1217FA1AC00B3A05F /* MovsNavigationController.swift in Sources */,
 				08FB15FA217C302E0047E57B /* FilterPresenter.swift in Sources */,
 				08FB15F6217C2FF80047E57B /* FavoriteMoviesCoordinator.swift in Sources */,
 				08FB15DF217C2A5D0047E57B /* Coordinator.swift in Sources */,

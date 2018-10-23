@@ -33,5 +33,10 @@ final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenter
         self.title = "Movies"
         self.moviesGrid = MoviesGrid(frame: self.view.bounds)
         self.moviesGrid.setup()
+        self.navigationItem.largeTitleDisplayMode = .automatic
+        let searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.definesPresentationContext = true
     }
 }

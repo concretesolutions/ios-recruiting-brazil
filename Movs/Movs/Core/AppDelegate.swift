@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initial = MoviesGridViewController()
         initial.presenter = MoviesGridPresenter(view: initial, coordinator: coordinator)
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = UINavigationController(rootViewController: initial)
+        self.window?.rootViewController = MovsNavigationController(rootViewController: initial)
         self.window?.makeKeyAndVisible()
         return true
     }
