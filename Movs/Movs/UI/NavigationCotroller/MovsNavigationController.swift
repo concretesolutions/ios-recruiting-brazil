@@ -15,5 +15,9 @@ final class MovsNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationBar.prefersLargeTitles = true
+        self.navigationBar.backgroundColor = Colors.mainYellow.color
+        self.navigationBar.barTintColor = Colors.mainYellow.color
+        self.navigationBar.tintColor = Colors.darkBlue.color
+        self.navigationBar.largeTitleTextAttributes = [.foregroundColor:Colors.darkBlue.color]
     }
 }

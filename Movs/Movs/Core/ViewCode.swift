@@ -15,6 +15,7 @@ protocol ViewCode: NSObjectProtocol {
 }
 
 extension ViewCode {
+    func autolayout() {}
     func additionalSetups() {}
     func setup() {
         self.design()
