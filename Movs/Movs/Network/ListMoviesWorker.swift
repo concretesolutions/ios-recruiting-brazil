@@ -1,0 +1,14 @@
+//
+//  ListMoviesWorker.swift
+//  Movs
+//
+//  Created by Maisa on 23/10/18.
+//  Copyright (c) 2018 Maisa Milena. All rights reserved.
+//
+
+import UIKit
+
+class ListMoviesWorker{
+  
+   
+}
