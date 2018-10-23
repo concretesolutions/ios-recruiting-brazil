@@ -30,17 +30,18 @@ class LoginViewController: UIViewController {
                 User.user.getAccountDetails(onSuccess: { (result) in
                     print("User ID: \(String(describing: User.user.userId!))")
                     print("Session ID: \(String(describing: User.user.sessionId!))")
+                    self.performSegue(withIdentifier: "loginAccepted", sender: nil)
                     
-                    Movie.getFavoriteMovies(pageToRequest: 1, onSuccess: { (movies) in
-                        for element in movies {
-                            print(element.genre.read())
-                            element.genre.addObserver(self, using: { (vc, genre) in
-                                print(genre)
-                            })
-                        }
-                    }) { (error) in
-                        print(error)
-                    }
+//                    Movie.getFavoriteMovies(pageToRequest: 1, onSuccess: { (movies) in
+//                        for element in movies {
+//                            print(element.genre.read())
+//                            element.genre.addObserver(self, using: { (vc, genre) in
+//                                print(genre)
+//                            })
+//                        }
+//                    }) { (error) in
+//                        print(error)
+//                    }
                 }, onFailure: { (error) in
                     print(error)
                 })
