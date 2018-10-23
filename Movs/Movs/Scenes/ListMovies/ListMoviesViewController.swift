@@ -22,7 +22,7 @@ class ListMoviesViewController: UIViewController {
       // MARK: - View lifecycle
       override func viewDidLoad() {
         super.viewDidLoad()
-        ListMoviesConfigurator.inject(dependenciesFor: self)
+        ListMoviesSceneConfigurator.inject(dependenciesFor: self)
       }
   
     

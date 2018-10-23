@@ -22,6 +22,8 @@
 		25CE2C8B217F66320009EF05 /* ListMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE2C85217F66320009EF05 /* ListMoviesViewController.swift */; };
 		25CE2C8C217F66320009EF05 /* ListMoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE2C86217F66320009EF05 /* ListMoviesInteractor.swift */; };
 		25CE2C8E217F76340009EF05 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE2C8D217F76340009EF05 /* Movie.swift */; };
+		25CE3155217FD5B20009EF05 /* ListMovies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25CE3154217FD5B20009EF05 /* ListMovies.storyboard */; };
+		25CE315C217FDB690009EF05 /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25CE315B217FDB690009EF05 /* Favorites.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		25CE2C85217F66320009EF05 /* ListMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMoviesViewController.swift; sourceTree = "<group>"; };
 		25CE2C86217F66320009EF05 /* ListMoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMoviesInteractor.swift; sourceTree = "<group>"; };
 		25CE2C8D217F76340009EF05 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		25CE3154217FD5B20009EF05 /* ListMovies.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListMovies.storyboard; sourceTree = "<group>"; };
+		25CE315B217FDB690009EF05 /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,13 +99,13 @@
 		25CE2C1A217E3FB90009EF05 /* Movs */ = {
 			isa = PBXGroup;
 			children = (
-				25CE2C5C217E4C020009EF05 /* Support files */,
 				25CE2C59217E4B4E0009EF05 /* Network */,
 				25CE2C5A217E4B770009EF05 /* Helper */,
 				25CE2C7B217EBEAB0009EF05 /* Models */,
 				25CE2C5B217E4BF50009EF05 /* Scenes */,
 				25CE2C1D217E3FB90009EF05 /* ViewController.swift */,
 				25CE2C1F217E3FB90009EF05 /* Main.storyboard */,
+				25CE3156217FD7B90009EF05 /* Supporting files */,
 			);
 			path = Movs;
 			sourceTree = "<group>";
@@ -142,17 +146,6 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		25CE2C5C217E4C020009EF05 /* Support files */ = {
-			isa = PBXGroup;
-			children = (
-				25CE2C1B217E3FB90009EF05 /* AppDelegate.swift */,
-				25CE2C22217E3FBB0009EF05 /* Assets.xcassets */,
-				25CE2C24217E3FBB0009EF05 /* LaunchScreen.storyboard */,
-				25CE2C27217E3FBB0009EF05 /* Info.plist */,
-			);
-			path = "Support files";
-			sourceTree = "<group>";
-		};
 		25CE2C6C217EBD350009EF05 /* ListMovies */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +154,7 @@
 				25CE2C84217F66320009EF05 /* ListMoviesModels.swift */,
 				25CE2C85217F66320009EF05 /* ListMoviesViewController.swift */,
 				25CE2C86217F66320009EF05 /* ListMoviesInteractor.swift */,
+				25CE3154217FD5B20009EF05 /* ListMovies.storyboard */,
 			);
 			path = ListMovies;
 			sourceTree = "<group>";
@@ -175,6 +169,7 @@
 		25CE2C7A217EBDD00009EF05 /* FavoriteMovies */ = {
 			isa = PBXGroup;
 			children = (
+				25CE315B217FDB690009EF05 /* Favorites.storyboard */,
 			);
 			path = FavoriteMovies;
 			sourceTree = "<group>";
@@ -185,6 +180,17 @@
 				25CE2C8D217F76340009EF05 /* Movie.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		25CE3156217FD7B90009EF05 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				25CE2C1B217E3FB90009EF05 /* AppDelegate.swift */,
+				25CE2C22217E3FBB0009EF05 /* Assets.xcassets */,
+				25CE2C24217E3FBB0009EF05 /* LaunchScreen.storyboard */,
+				25CE2C27217E3FBB0009EF05 /* Info.plist */,
+			);
+			name = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +277,8 @@
 				25CE2C26217E3FBB0009EF05 /* LaunchScreen.storyboard in Resources */,
 				25CE2C23217E3FBB0009EF05 /* Assets.xcassets in Resources */,
 				25CE2C21217E3FB90009EF05 /* Main.storyboard in Resources */,
+				25CE3155217FD5B20009EF05 /* ListMovies.storyboard in Resources */,
+				25CE315C217FDB690009EF05 /* Favorites.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

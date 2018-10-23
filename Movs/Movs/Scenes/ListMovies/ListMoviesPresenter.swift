@@ -9,17 +9,15 @@
 import UIKit
 
 protocol ListMoviesPresentationLogic {
-  func presentSomething(response: ListMovies.Something.Response)
+  
 }
 
 class ListMoviesPresenter: ListMoviesPresentationLogic {
+    
     weak var viewController: ListMoviesDisplayLogic?
     
       // MARK: Do something
     
-    func presentSomething(response: ListMovies.Something.Response) {
-        
-        
-    }
+    
     
 }

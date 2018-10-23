@@ -12,7 +12,7 @@ import UIKit
 enum ListMovies{
   // MARK: Use cases
   
-  enum Something {
+  enum Fetch {
     struct Request {
     
     }
