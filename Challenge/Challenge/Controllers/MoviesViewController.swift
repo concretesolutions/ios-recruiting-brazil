@@ -15,7 +15,11 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [Movie] = []
-    var filteredMovies: [Movie] = []
+    var filteredMovies: [Movie] = [] {
+        didSet {
+            self.updateView()
+        }
+    }
     var page = 1
     var searchActive = false
     
@@ -50,6 +54,14 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.addGestureRecognizer(tap)
         
         // Do any additional setup after loading the view.
+    }
+    
+    func updateView() {
+        let hasSearchResult = self.filteredMovies.count > 0
+        self.collectionView.isHidden = !hasSearchResult
+        if !hasSearchResult {
+            print("No result in the search")
+        }
     }
     
     @objc func dismissKeyboard() {

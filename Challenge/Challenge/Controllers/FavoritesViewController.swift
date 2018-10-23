@@ -14,7 +14,11 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [Movie] = []
-    var filteredMovies: [Movie] = []
+    var filteredMovies: [Movie] = [] {
+        didSet {
+            self.updateView()
+        }
+    }
     var page = 1
     var searchActive = false
     lazy var refreshControl: UIRefreshControl = {
@@ -53,9 +57,17 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         view.endEditing(true)
     }
     
+    func updateView() {
+        let hasSearchResult = self.filteredMovies.count > 0
+        self.tableView.isHidden = !hasSearchResult
+        if !hasSearchResult {
+            print("No result in the search")
+        }
+    }
+    
     @objc func handlePagination() {
         print("Handling pagination")
-        Movie.getPopularMovies(pageToRequest: self.page, onSuccess: { (moviesResult) in
+        Movie.getFavoriteMovies(pageToRequest: self.page, onSuccess: { (moviesResult) in
             self.movies.append(contentsOf: moviesResult)
             self.page += 1
             self.tableView.reloadData()
