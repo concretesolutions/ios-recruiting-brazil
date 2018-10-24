@@ -18,7 +18,7 @@ protocol MainScreenDisplayLogic: class
     func displaySomething(viewModel: MainScreen.Something.ViewModel)
 }
 
-class MainScreenViewController: UICollectionViewController, MainScreenDisplayLogic
+class MainScreenViewController: BaseCollectionViewController<MainScreenMovieCell, Movie>, MainScreenDisplayLogic
 {
     var interactor: MainScreenBusinessLogic?
     var router: (NSObjectProtocol & MainScreenRoutingLogic & MainScreenDataPassing)?

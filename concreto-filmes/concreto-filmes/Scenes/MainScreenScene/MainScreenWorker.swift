@@ -14,27 +14,22 @@ import UIKit
 
 class MainScreenWorker
 {
+    
+    let movieNetworkManager = MovieNetworkManager()
     func doSomeWork()
     {
     }
     
     func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request){
-//        guard let url = URL(string: request.url) else {return}
-//        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            guard let dataResponse = data,
-//                error == nil else {
-//                    print(error?.localizedDescription ?? "Response Error")
-//                    return }
-//            do{
-//                //here dataResponse received from a network request
-//                let jsonResponse = try JSONSerialization.jsonObject(with:
-//                    dataResponse, options: [])
-//                print(jsonResponse) //Response result
-//            } catch let parsingError {
-//                print("Error", parsingError)
-//            }
-//        }
-//        task.resume()
+
+        movieNetworkManager.getPopularMovies(page: 1) { (movies, error) in
+            if let error = error {
+                print(error)
+            }
+            if let movies = movies {
+                print(movies)
+            }
+        }
     }
 }
 

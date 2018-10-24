@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainScreenMovieCell : UICollectionViewCell {
+class MainScreenMovieCell : BaseCollectionViewCell<Movie> {
     
     private lazy var coverImage: UIImageView = {
         let image = UIImageView()

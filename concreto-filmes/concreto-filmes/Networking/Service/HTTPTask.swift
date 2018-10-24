@@ -15,5 +15,5 @@ public enum HTTPTask {
     
     case requestParameters(bodyParameters: Parameters?, urlParameters: Parameters?)
     
-    case requestParametersAndHeaders(bodyParameters: Parameters?, urlParameters: Parameters?, additionHeaders: HTTPHeaders?)
+    case requestParametersAndHeaders(bodyParameters: Parameters?, urlParameters: Parameters?, additionalHeaders: HTTPHeaders?)
 }
