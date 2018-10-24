@@ -8,8 +8,7 @@
 
 import UIKit
 
-
-class MoviesTableViewDataSource: NSObject, UITableViewDataSource {
+class FavoriteTableViewDataSource: NSObject, UITableViewDataSource {
     var datas = [NSDictionary]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

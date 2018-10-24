@@ -22,16 +22,19 @@ import UIKit
 class MovieDAO {
     
     static let shared = MovieDAO()
-    private let apiKey = "ad2a4bfff8f6571c51c072374044a33"
-    private let apiUrl = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=1ad2a4bfff8f6571c51c072374044a33")!
+    
+    private let apiUrl : URL?
     var movies = [NSDictionary]()
     
     init() {
-        
+        self.apiUrl = URL(string: APILinks.moviesPlayingNow.value)
     }
     
     func requestMovies(completion: @escaping ( [NSDictionary]?) -> ()) {
-        let request = URLRequest(url: (self.apiUrl) , cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        
+        guard let url = apiUrl else {return}
+        
+        let request = URLRequest(url: (url) , cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         
         let task : URLSessionDataTask = session.dataTask(with: request) { (dataOrNil, response, error) in
@@ -45,5 +48,21 @@ class MovieDAO {
             }
         }
         task.resume()
+    }
+    
+    func requestImage(from api: String, name: String, imageFormate: String) -> UIImage? {
+        
+        let pathImage = String(api).appending(name)
+        let imgUrl = URL(string: pathImage)
+        if let contentFilePath = imgUrl {
+            do {
+                let data = try Data(contentsOf: contentFilePath)
+                let img = UIImage(data: data)
+                return img
+            }catch {
+                print("Don`t success in get API image.")
+            }
+        }
+        return nil
     }
 }

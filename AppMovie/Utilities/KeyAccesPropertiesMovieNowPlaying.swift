@@ -30,7 +30,7 @@ enum KeyAccesPropertiesMovieNowPlaying  {
         case .popularity:
             return "popularity"
         case .posterPath:
-            return "posterPath"
+            return "poster_path"
         case .releaseDate:
             return "release_date"
         case .title:
@@ -45,21 +45,21 @@ enum KeyAccesPropertiesMovieNowPlaying  {
     }
 }
     
-struct MovieNowPlaying {
-    private var adult: Bool
-    private var backdropPath: String
-    private var genre: Int
-    private var id: Int
-    private var language: String
-    private var originalTitle: String
-    private var overview: String
-    private var popularity: Decimal
-    private var posterPath: String
-    private var releaseDate: Date
-    private var title: String
-    private var video: Bool
-    private var voteAverage: String
-    private var voteCount: Int
-}
+//struct MovieNowPlaying {
+//    private var adult: Bool
+//    private var backdropPath: String
+//    private var genre: Int
+//    private var id: Int
+//    private var language: String
+//    private var originalTitle: String
+//    private var overview: String
+//    private var popularity: Decimal
+//    private var posterPath: String
+//    private var releaseDate: Date
+//    private var title: String
+//    private var video: Bool
+//    private var voteAverage: String
+//    private var voteCount: Int
+//}
 
 
