@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+
+class Movie {
+    var name : String
+    var releaseDate: Date
+    var genres: [String]
+    var description: String
+    var posterUrl: String
+    
+    init(name: String, releaseDate: Date, genres: [String], description: String, posterUrl: String) {
+        self.name = name
+        self.releaseDate = releaseDate
+        self.genres = genres
+        self.description = description
+        self.posterUrl = posterUrl
+    }
+}

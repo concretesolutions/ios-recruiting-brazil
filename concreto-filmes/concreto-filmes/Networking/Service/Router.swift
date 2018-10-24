@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+class Router<EndPoint: EndPointTye>: NetworkRouter {
+    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
+        
+    }
+    
+    func cancel() {
+        
+    }
+    
+    
+}

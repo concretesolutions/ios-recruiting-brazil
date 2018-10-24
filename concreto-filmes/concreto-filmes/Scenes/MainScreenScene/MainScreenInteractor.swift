@@ -14,28 +14,36 @@ import UIKit
 
 protocol MainScreenBusinessLogic
 {
-  func doSomething(request: MainScreen.Something.Request)
+    func doSomething(request: MainScreen.Something.Request)
+    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request)
 }
 
 protocol MainScreenDataStore
 {
-  //var name: String { get set }
+    var movieTitle: String { get set }
 }
 
 class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
 {
-  var presenter: MainScreenPresentationLogic?
-  var worker: MainScreenWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: MainScreen.Something.Request)
-  {
-    worker = MainScreenWorker()
-    worker?.doSomeWork()
     
-    let response = MainScreen.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    var presenter: MainScreenPresentationLogic?
+    var worker: MainScreenWorker?
+    var movieTitle: String = ""
+    
+    // MARK: Do something
+    
+    func doSomething(request: MainScreen.Something.Request)
+    {
+        worker = MainScreenWorker()
+        worker?.doSomeWork()
+        
+        let response = MainScreen.Something.Response()
+        presenter?.presentSomething(response: response)
+    }
+    
+    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request) {
+        worker = MainScreenWorker()
+        worker?.fetchPopularMovies(request: request)
+    }
 }
+

@@ -6,4 +6,8 @@
 //  Copyright © 2018 Leonel Menezes. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class BaseCollectionViewCell<U>: UICollectionViewCell {
+    var item: U!
+}

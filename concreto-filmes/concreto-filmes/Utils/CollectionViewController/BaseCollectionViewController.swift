@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseCollectionViewController<T: BaseCollectionCell<U>, U>: UICollectionViewController {
+class BaseCollectionViewController<T: BaseCollectionViewCell<U>, U>: UICollectionViewController {
     let cellID = "cellID"
     var items = [U]()
     

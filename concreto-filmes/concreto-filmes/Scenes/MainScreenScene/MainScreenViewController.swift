@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Keys
 
 protocol MainScreenDisplayLogic: class
 {
@@ -41,12 +42,14 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupView()
+        interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request(index: 1, apiKey: ConcretoFilmesKeys().tHE_MOVIE_DB_V3_KEY, language: Locale.preferredLanguages[0] as String))
     }
     
     // MARK: Object lifecycle
     
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
