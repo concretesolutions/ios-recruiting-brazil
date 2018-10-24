@@ -16,6 +16,7 @@ final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenter
     private let moviesGridDataSource = MoviesGridDataSource()
     private var moviesGrid: MoviesGrid! {
         didSet {
+            self.moviesGrid.setup()
             self.view = self.moviesGrid
         }
     }
@@ -32,9 +33,8 @@ final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenter
     func setupOnce() {
         self.title = "Movies"
         self.moviesGrid = MoviesGrid(frame: self.view.bounds)
-        self.moviesGrid.setup()
         self.navigationItem.largeTitleDisplayMode = .automatic
-        let searchController = UISearchController(searchResultsController: nil)
+        let searchController = MovsNavigationSearchController(searchResultsController: nil)
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.definesPresentationContext = true

@@ -23,9 +23,6 @@ final class MoviesGridCollectionView: UICollectionView, ViewCode {
         self.layout = MoviesGridLayout()
         self.backgroundColor = .clear
     }
-    
-    func autolayout() {
-    }
 }
 
 // MARK: - Collection view layout delegate

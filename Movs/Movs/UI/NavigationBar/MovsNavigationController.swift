@@ -18,6 +18,6 @@ final class MovsNavigationController: UINavigationController {
         self.navigationBar.backgroundColor = Colors.mainYellow.color
         self.navigationBar.barTintColor = Colors.mainYellow.color
         self.navigationBar.tintColor = Colors.darkBlue.color
-        self.navigationBar.largeTitleTextAttributes = [.foregroundColor:Colors.darkBlue.color]
+        self.navigationBar.largeTitleTextAttributes = [.foregroundColor:Colors.darkBlue.color, .font: Fonts.futuraBold.font(size: 34.0)]
     }
 }

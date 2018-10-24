@@ -10,6 +10,8 @@ import UIKit
 
 final class FilterCoordinator: Coordinator {
     
+    var onCoordinatorStarted: OnCoordinatorStarted?
+    
     func start() {
         let vc = FilterViewController()
         vc.presenter = FilterPresenter(view: vc, coordinator: self)

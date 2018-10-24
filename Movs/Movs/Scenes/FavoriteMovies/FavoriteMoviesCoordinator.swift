@@ -10,6 +10,8 @@ import UIKit
 
 final class FavoriteMoviesCoordinator: Coordinator {
     
+    var onCoordinatorStarted: OnCoordinatorStarted?
+    
     func start() {
         let vc = FavoriteMoviesViewController()
         vc.presenter = FavoriteMoviesPresenter(view: vc, coordinator: self)
