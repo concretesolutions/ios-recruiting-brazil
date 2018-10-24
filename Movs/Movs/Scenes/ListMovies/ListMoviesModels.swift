@@ -17,7 +17,7 @@ enum ListMovies{
     
     }
     struct Response {
-        
+        let movies: [Movie]
     }
     struct ViewModel {
         

@@ -24,6 +24,11 @@ class ListMoviesViewController: UIViewController {
         super.viewDidLoad()
         ListMoviesSceneConfigurator.inject(dependenciesFor: self)
       }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let request = ListMovies.Fetch.Request()
+        interactor?.fetchPopularMovies(request: request)
+    }
   
     
     // MARK: Routing

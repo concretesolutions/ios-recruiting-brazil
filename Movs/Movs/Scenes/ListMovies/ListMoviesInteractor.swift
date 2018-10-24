@@ -10,17 +10,20 @@
 import UIKit
 
 protocol ListMoviesBusinessLogic {
-  
+    func fetchPopularMovies(request: ListMovies.Fetch.Request)
 }
 
 class ListMoviesInteractor: ListMoviesBusinessLogic {
   
     var presenter: ListMoviesPresentationLogic?
-    var worker: ListMoviesWorker?
-
+    var worker: ListMoviesWorker = ListMoviesWorker()
   
-    // MARK: Do something
-  
+    // MARK: Do request
+    func fetchPopularMovies(request: ListMovies.Fetch.Request) {
+        worker.fetchPopularMovies(page: 1) { (response) in
+            
+        }
+    }
     
     
 }
