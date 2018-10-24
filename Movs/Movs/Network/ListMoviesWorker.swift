@@ -8,6 +8,7 @@
 
 import Moya
 import Result
+import Foundation
 
 class ListMoviesWorker {
   
@@ -17,14 +18,15 @@ class ListMoviesWorker {
      Fetch the most popular movies
      - parameter page: the current page to load
      */
-    func fetchPopularMovies(page: Int, success: @escaping (ListMovies.Fetch.Response) -> ()) {
+    func fetchPopularMovies(page: Int, completion: @escaping (ListMovies.Fetch.Response) -> ()) {
         provider.request(.listPopularMovies(page: page)) { (result) in
+            
             switch result {
             case .success(let response):
                 do {
-                    let results = try response.mapJSON()
-                    print("👽 result")
-                    print(results)
+                    let movies = try JSONDecoder().decode(MovieList.self, from: response.data)
+                    let responseSuccess = ListMovies.Fetch.Response(movies: movies.movies, error: "")
+                    completion(responseSuccess)
                 } catch let error {
                     print(error)
                 }

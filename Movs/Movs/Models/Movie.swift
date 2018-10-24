@@ -9,7 +9,6 @@
 import Foundation
 import Moya
 
-
 struct Movie {
     let id: Int
     let genresId: [Int]
@@ -17,14 +16,15 @@ struct Movie {
     let overview: String
     let releaseDate: String
     let posterPath: String
+    
 }
 
 extension Movie: Decodable {
     enum MovieCodingKeys: String, CodingKey {
-        case id
+        case id = "id"
         case genresId = "genre_ids"
-        case title
-        case overview
+        case title = "title"
+        case overview = "overview"
         case releaseDate = "release_date"
         case posterPath = "poster_path"
     }
@@ -39,5 +39,6 @@ extension Movie: Decodable {
         // TODO: format the release date
         releaseDate = try container.decode(String.self, forKey: .releaseDate)
         posterPath = try container.decode(String.self, forKey: .posterPath)
+        
     }
 }
