@@ -15,5 +15,6 @@ final class FilterCoordinator: Coordinator {
     func start() {
         let vc = FilterViewController()
         vc.presenter = FilterPresenter(view: vc, coordinator: self)
+        self.onCoordinatorStarted?(vc)
     }
 }

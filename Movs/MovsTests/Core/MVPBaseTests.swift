@@ -1,0 +1,64 @@
+//
+//  MVPBaseTests.swift
+//  MovsTests
+//
+//  Created by Gabriel Reynoso on 25/10/18.
+//  Copyright © 2018 Gabriel Reynoso. All rights reserved.
+//
+
+import XCTest
+@testable import Movs
+
+class MVPBaseTests: XCTestCase {
+
+    private lazy var baseViewController:MVPBaseViewController = {
+        let vc = MVPBaseViewController()
+        vc.basePresenter = self
+        return vc
+    }()
+    
+    private var methodWasCalled:Bool = false
+    
+    override func setUp() {
+        self.methodWasCalled = false
+    }
+    
+    func testBaseViewControllerShouldCallViewDidLoad() {
+        self.baseViewController.viewDidLoad()
+        XCTAssertTrue(self.methodWasCalled)
+    }
+    
+    func testBaseViewControllerShouldCallViewWillAppear() {
+        self.baseViewController.viewWillAppear(false)
+        XCTAssertTrue(self.methodWasCalled)
+    }
+    
+    func testBaseViewControllerShouldCallViewWillDisappear() {
+        self.baseViewController.viewDidDisappear(false)
+        XCTAssertTrue(self.methodWasCalled)
+    }
+    
+    func testBaseViewControllerShouldCallViewDidDisappear() {
+        self.baseViewController.viewWillDisappear(false)
+        XCTAssertTrue(self.methodWasCalled)
+    }
+}
+
+extension MVPBaseTests: PresenterProtocol {
+    
+    func viewDidLoad() {
+        self.methodWasCalled = true
+    }
+    
+    func viewWillAppear() {
+        self.methodWasCalled = true
+    }
+    
+    func viewWillDisappear() {
+        self.methodWasCalled = true
+    }
+    
+    func viewDidDisappear() {
+        self.methodWasCalled = true
+    }
+}

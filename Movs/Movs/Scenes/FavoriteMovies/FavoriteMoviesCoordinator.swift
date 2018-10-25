@@ -15,5 +15,6 @@ final class FavoriteMoviesCoordinator: Coordinator {
     func start() {
         let vc = FavoriteMoviesViewController()
         vc.presenter = FavoriteMoviesPresenter(view: vc, coordinator: self)
+        self.onCoordinatorStarted?(vc)
     }
 }

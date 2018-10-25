@@ -15,5 +15,6 @@ final class MovieDetailCoordinator: Coordinator {
     func start() {
         let vc = MovieDetailViewController()
         vc.presenter = MovieDetailPresenter(view: vc, coordinator: self)
+        self.onCoordinatorStarted?(vc)
     }
 }
