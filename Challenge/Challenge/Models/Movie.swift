@@ -346,7 +346,7 @@ class Movie {
         }
     }
     
-    func setFavorite(movie: Movie, setAsFavorite: Bool, onSuccess: @escaping (_ success: Any) -> Void, onFailure: @escaping (_ error: String) -> Void) {
+    class func setFavorite(movie: Movie, setAsFavorite: Bool, onSuccess: @escaping (_ success: Any) -> Void, onFailure: @escaping (_ error: String) -> Void) {
         let headers: HTTPHeaders = ["content-type": "application/json"]
         var parameters: Parameters = [:]
         if setAsFavorite {

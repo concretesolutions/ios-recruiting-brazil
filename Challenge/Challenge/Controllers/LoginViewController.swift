@@ -30,6 +30,8 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func unwindToLogin(segue:UIStoryboardSegue) { }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -57,6 +59,23 @@ class LoginViewController: UIViewController {
                 })
             }) { (error) in
                 print(error)
+            }
+        }
+    }
+    
+    @IBAction func signUp(_ sender: Any) {
+        User.user.requestToken(onSuccess: { (token) in
+            self.performSegue(withIdentifier: "sign", sender: nil)
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sign" {
+            if let vc = segue.destination as? SignUpViewController {
+                vc.token = User.user.token
             }
         }
     }

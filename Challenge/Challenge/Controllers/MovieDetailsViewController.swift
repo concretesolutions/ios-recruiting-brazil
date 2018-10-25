@@ -42,7 +42,25 @@ class MovieDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func favorite(_ sender: Any) {
+        if let control = self.movie?.isFavourite {
+            if control {
+                Movie.setFavorite(movie: self.movie!, setAsFavorite: false, onSuccess: { (_) in
+                    self.movie?.isFavourite = false
+                }) { (error) in
+                    print(error)
+                }
+            } else {
+                Movie.setFavorite(movie: self.movie!, setAsFavorite: true, onSuccess: { (_) in
+                    self.movie?.isFavourite = true
+                }) { (error) in
+                    print(error)
+                }
+            }
+        }
+        
+    }
+    
     /*
     // MARK: - Navigation
 

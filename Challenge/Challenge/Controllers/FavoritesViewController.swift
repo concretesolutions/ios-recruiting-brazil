@@ -59,6 +59,10 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

@@ -14,13 +14,29 @@ class User {
     var username: String?
     var userId: Int?
     var sessionId: String?
+    var token: String?
     
     static let user = User()
     
     func login(username: String, password: String, onSuccess: @escaping (_ sessionId: String) -> Void, onFailure: @escaping (_ error: String) -> Void) {
         self.username = username
-        self.requestToken(onSuccess: { (token) in
-            self.validateToken(token: token, password: password, onSuccess: { (validatedToken) in
+        if User.user.token != nil {
+            self.requestToken(onSuccess: { (token) in
+                self.token = token
+                self.validateToken(token: token, password: password, onSuccess: { (validatedToken) in
+                    self.generateSessionId(validatedToken: validatedToken, onSuccess: { (sessionId) in
+                        onSuccess(sessionId)
+                    }, onFailure: { (error) in
+                        onFailure(error)
+                    })
+                }, onFailure: { (error) in
+                    onFailure(error)
+                })
+            }) { (error) in
+                onFailure(error)
+            }
+        } else {
+            self.validateToken(token: self.token!, password: password, onSuccess: { (validatedToken) in
                 self.generateSessionId(validatedToken: validatedToken, onSuccess: { (sessionId) in
                     onSuccess(sessionId)
                 }, onFailure: { (error) in
@@ -29,9 +45,8 @@ class User {
             }, onFailure: { (error) in
                 onFailure(error)
             })
-        }) { (error) in
-            onFailure(error)
         }
+        
         
     }
     /*Get account details. In this case, the user ID*/
@@ -74,6 +89,7 @@ class User {
             if let success = value["success"] as? Int {
                 if success == 1 {
                     if let token = value["request_token"] as? String {
+                        self.token = token
                         onSuccess(token)
                     } else {
                         onFailure("Data received is compromised")

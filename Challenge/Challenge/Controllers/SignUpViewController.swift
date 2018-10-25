@@ -7,11 +7,20 @@
 //
 
 import UIKit
+import WebKit
 
 class SignUpViewController: UIViewController {
-
+    
+    @IBOutlet weak var webView: WKWebView!
+    var token: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let token = token {
+            let url = URL(string: "https://www.themoviedb.org/authenticate/\(token)")
+            webView.load(URLRequest(url: url!))
+        }
 
         // Do any additional setup after loading the view.
     }

@@ -43,7 +43,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aa3-eP-GSa">
                                 <rect key="frame" x="137" y="355" width="46" height="30"/>
@@ -62,7 +62,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0k1-XN-Gvi" kind="presentation" identifier="Sign" id="bg3-Qb-TLX"/>
+                                    <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EVN-Gv-zDo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -73,6 +73,7 @@
                         <outlet property="passwordTextField" destination="x0i-8I-Pf1" id="x4Q-05-Mxc"/>
                         <outlet property="userNameTextField" destination="aci-hw-fBB" id="KWl-8i-ApZ"/>
                         <segue destination="OHJ-pC-vPS" kind="show" identifier="loginAccepted" id="56I-sA-Otv"/>
+                        <segue destination="0k1-XN-Gvi" kind="presentation" identifier="sign" id="ZYn-gl-kbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -88,10 +89,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmy-GX-bGG">
-                                <rect key="frame" x="0.0" y="20" width="265" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="gOY-jD-r4S">
-                                        <barButtonItem key="rightBarButtonItem" title="Done" id="RH9-Ya-b0E"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="RH9-Ya-b0E">
+                                            <connections>
+                                                <segue destination="vw9-Ch-Jt7" kind="unwind" unwindAction="unwindToLoginWithSegue:" id="0DC-Xv-4jb"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -116,8 +121,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RDj-LP-y7S"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="3QT-JA-SdO" id="n5q-kd-cvz"/>
+                        <segue destination="vw9-Ch-Jt7" kind="unwind" unwindAction="unwindToLoginWithSegue:" id="lLY-4z-NrH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iem-V9-BIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vw9-Ch-Jt7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="860" y="-193.85307346326837"/>
         </scene>
