@@ -14,18 +14,34 @@ import UIKit
 
 protocol MainScreenPresentationLogic
 {
-  func presentSomething(response: MainScreen.Something.Response)
+    func presentSomething(response: MainScreen.Something.Response)
+    func present(movies: [Movie])
+    func present(error: String)
 }
 
 class MainScreenPresenter: MainScreenPresentationLogic
 {
-  weak var viewController: MainScreenDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: MainScreen.Something.Response)
-  {
-    let viewModel = MainScreen.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    
+    func present(movies: [Movie]) {
+        var viewModelItems: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel] = []
+        for movie in movies {
+            viewModelItems.append(MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel(posterUrl: movie.posterPath, title: movie.title))
+            viewController?.display(movies: viewModelItems)
+        }
+    }
+    
+    func present(error: String) {
+        
+    }
+    
+    weak var viewController: MainScreenDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentSomething(response: MainScreen.Something.Response)
+    {
+        let viewModel = MainScreen.Something.ViewModel()
+        viewController?.displaySomething(viewModel: viewModel)
+    }
 }
+

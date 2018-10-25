@@ -33,7 +33,7 @@ extension AppDelegate {
     private func setupWindow() {
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: MainScreenViewController(collectionViewLayout: UICollectionViewLayout()))
+        window?.rootViewController = UINavigationController(rootViewController: MainScreenViewController(collectionViewLayout: UICollectionViewFlowLayout()))
     }
 }
 

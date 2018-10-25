@@ -12,17 +12,21 @@
 
 import UIKit
 import Keys
+import SnapKit
 
 protocol MainScreenDisplayLogic: class
 {
     func displaySomething(viewModel: MainScreen.Something.ViewModel)
+    func display(movies: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel])
 }
 
-class MainScreenViewController: BaseCollectionViewController<MainScreenMovieCell, Movie>, MainScreenDisplayLogic
+class MainScreenViewController: UICollectionViewController, MainScreenDisplayLogic
 {
     var interactor: MainScreenBusinessLogic?
     var router: (NSObjectProtocol & MainScreenRoutingLogic & MainScreenDataPassing)?
     
+    let movieCellID = "movieCellID"
+    var displayedMovies : [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel] = []
     
     private let leftBarButton : UIBarButtonItem = {
         let btn = UIBarButtonItem()
@@ -40,9 +44,10 @@ class MainScreenViewController: BaseCollectionViewController<MainScreenMovieCell
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         setupView()
-        interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request(index: 1, apiKey: ConcretoFilmesKeys().tHE_MOVIE_DB_V3_KEY, language: Locale.preferredLanguages[0] as String))
+        collectionView.reloadData()
+        // Do any additional setup after loading the view, typically from a nib.
+        interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request(index: 1))
     }
     
     // MARK: Object lifecycle
@@ -98,6 +103,30 @@ class MainScreenViewController: BaseCollectionViewController<MainScreenMovieCell
     {
         //nameTextField.text = viewModel.name
     }
+    
+    func display(movies: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel]) {
+        self.displayedMovies = movies
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return displayedMovies.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.movieCellID, for: indexPath) as! MainScreenMovieCell
+        let item = displayedMovies[indexPath.item]
+        let data = MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel(posterUrl: item.posterUrl, title: item.title)
+        cell.setData(data: data)
+        return cell
+    }
 }
 
 
@@ -109,14 +138,30 @@ extension MainScreenViewController: CodeView {
     }
     
     func setupConstraints() {
-        
     }
     
     func setupAdditionalConfiguration() {
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color
+        collectionView.register(MainScreenMovieCell.self, forCellWithReuseIdentifier: self.movieCellID)
     }
-    
-    
 }
 
+
+extension MainScreenViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width/2.2, height: view.frame.width/1.5)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 10)
+    }
+}

@@ -28,8 +28,6 @@
 		8A2D18A5217FD43500139CA4 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D189F217FD43500139CA4 /* MainScreenViewController.swift */; };
 		8A2D18A6217FD43500139CA4 /* MainScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D18A0217FD43500139CA4 /* MainScreenInteractor.swift */; };
 		8AB5243E2180ECDF00DADDFA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5243D2180ECDF00DADDFA /* Router.swift */; };
-		8AB524402180FB0600DADDFA /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB5243F2180FB0600DADDFA /* BaseCollectionViewController.swift */; };
-		8AB524432180FC6F00DADDFA /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB524422180FC6F00DADDFA /* BaseCollectionViewCell.swift */; };
 		8AB524452181050B00DADDFA /* MovieEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB524442181050B00DADDFA /* MovieEndPoint.swift */; };
 		8AB524472181077200DADDFA /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB524462181077200DADDFA /* MovieModel.swift */; };
 		8AB524492181080300DADDFA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB524482181080300DADDFA /* NetworkManager.swift */; };
@@ -94,8 +92,6 @@
 		8A2D189F217FD43500139CA4 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		8A2D18A0217FD43500139CA4 /* MainScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractor.swift; sourceTree = "<group>"; };
 		8AB5243D2180ECDF00DADDFA /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		8AB5243F2180FB0600DADDFA /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
-		8AB524422180FC6F00DADDFA /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		8AB524442181050B00DADDFA /* MovieEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEndPoint.swift; sourceTree = "<group>"; };
 		8AB524462181077200DADDFA /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		8AB524482181080300DADDFA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -229,7 +225,6 @@
 		8A2D187A217FA2F300139CA4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				8AB524412180FC4E00DADDFA /* CollectionViewController */,
 				8A2D187B217FA30300139CA4 /* AppColors.swift */,
 				8A2D187D217FA52400139CA4 /* CodeViewProtocol.swift */,
 			);
@@ -271,15 +266,6 @@
 				8A2D1894217FD3D600139CA4 /* MovieDetailInteractor.swift */,
 			);
 			path = MoviewDetailScene;
-			sourceTree = "<group>";
-		};
-		8AB524412180FC4E00DADDFA /* CollectionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				8AB5243F2180FB0600DADDFA /* BaseCollectionViewController.swift */,
-				8AB524422180FC6F00DADDFA /* BaseCollectionViewCell.swift */,
-			);
-			path = CollectionViewController;
 			sourceTree = "<group>";
 		};
 		8AEAB79B21801CB70092BB21 /* Model */ = {
@@ -632,7 +618,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AEAB7AA218044CF0092BB21 /* ParameterEncoding.swift in Sources */,
-				8AB524432180FC6F00DADDFA /* BaseCollectionViewCell.swift in Sources */,
 				8AEAB7AE218047370092BB21 /* URLParameterEncoder.swift in Sources */,
 				8AEAB7A6218043020092BB21 /* HTTPMethod.swift in Sources */,
 				8A2D187C217FA30300139CA4 /* AppColors.swift in Sources */,
@@ -641,7 +626,6 @@
 				8A2D189A217FD3D600139CA4 /* MovieDetailInteractor.swift in Sources */,
 				8AEAB7B221804B850092BB21 /* NetworkRouter.swift in Sources */,
 				8A2D18A3217FD43500139CA4 /* MainScreenRouter.swift in Sources */,
-				8AB524402180FB0600DADDFA /* BaseCollectionViewController.swift in Sources */,
 				8AEAB7B021804A710092BB21 /* JSONParameterEncoder.swift in Sources */,
 				8AB524492181080300DADDFA /* NetworkManager.swift in Sources */,
 				8AB524472181077200DADDFA /* MovieModel.swift in Sources */,

@@ -20,14 +20,14 @@ class MainScreenWorker
     {
     }
     
-    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request){
+    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request, completion: @escaping (_ movies: [Movie]?,_ error: String?) -> ()){
 
         movieNetworkManager.getPopularMovies(page: 1) { (movies, error) in
             if let error = error {
-                print(error)
+                completion(nil, error)
             }
             if let movies = movies {
-                print(movies)
+                completion(movies, nil)
             }
         }
     }

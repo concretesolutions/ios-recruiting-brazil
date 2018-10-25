@@ -21,6 +21,7 @@ protocol MainScreenBusinessLogic
 protocol MainScreenDataStore
 {
     var movieTitle: String { get set }
+    var movies: [Movie] {get set}
 }
 
 class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
@@ -29,6 +30,7 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
     var presenter: MainScreenPresentationLogic?
     var worker: MainScreenWorker?
     var movieTitle: String = ""
+    var movies: [Movie] = []
     
     // MARK: Do something
     
@@ -43,7 +45,14 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
     
     func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request) {
         worker = MainScreenWorker()
-        worker?.fetchPopularMovies(request: request)
+        worker?.fetchPopularMovies(request: request, completion: { (movies, error) in
+            if(error != nil){
+//                presenter.present(message: error)
+            }
+            if(movies != nil){
+                self.presenter?.present(movies: movies!)
+            }
+        })
     }
 }
 
