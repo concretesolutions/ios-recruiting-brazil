@@ -17,7 +17,7 @@ extension ListMoviesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseIdentifier) as! PopularMovieTableViewCell
-        print("🦋 cell for row at")
+        cell.configureCellWith(data: movies[indexPath.row])
         return cell
     }
     
