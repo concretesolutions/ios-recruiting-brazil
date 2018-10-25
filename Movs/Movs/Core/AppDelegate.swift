@@ -15,12 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let appCoordinator = AppCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        let coordinator = MoviesGridCoordinator()
-//        let initial = MoviesGridViewController()
-//        initial.presenter = MoviesGridPresenter(view: initial, coordinator: coordinator)
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = MovsTabBarController()
-//        self.window?.makeKeyAndVisible()
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.appCoordinator.onCoordinatorStarted = { [unowned self] vc in
             self.window?.rootViewController = vc

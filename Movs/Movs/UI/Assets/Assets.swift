@@ -10,6 +10,7 @@ import UIKit
 
 enum Assets: String {
     case checkIcon = "check_icon"
+    case errorIcon = "error_image"
     case favoriteEmptyIcon = "favorite_empty_icon"
     case favoriteFillIcon = "favorite_full_icon"
     case favoriteGrayIcon = "favorite_gray_icon"
