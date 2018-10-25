@@ -15,9 +15,13 @@ class ViewCodeTests: XCTestCase {
     private var autolayoutWasCalled:Bool = false
     private var additionalSetupsWasCalled:Bool = false
     
-    func testSetupShouldCallAllViewCodeMethods() {
-        self.setup()
-        XCTAssertTrue(self.designWasCalled && self.autolayoutWasCalled && self.additionalSetupsWasCalled)
+    private var allMethodsWereCalled:Bool {
+        return self.designWasCalled && self.autolayoutWasCalled && self.additionalSetupsWasCalled
+    }
+    
+    func testSetupViewShouldCallAllViewCodeMethods() {
+        self.setupView()
+        XCTAssertTrue(self.allMethodsWereCalled)
     }
 }
 

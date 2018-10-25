@@ -85,13 +85,13 @@ extension MoviesGrid: ViewCode {
         self.backgroundColor = Colors.white.color
         // collection view
         self.collectionView = MoviesGridCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        self.collectionView.setup()
+        self.collectionView.setupView()
         self.collectionView.dataSource = self.collectionViewDataSource
         // activity view
         self.activityIndicator = UIActivityIndicatorView(style: .gray)
         // feedback view
         self.feedbackView = FeedbackView()
-        self.feedbackView.setup()
+        self.feedbackView.setupView()
         // setup view acording to state
         self.refreshUIAccordingToState()
     }

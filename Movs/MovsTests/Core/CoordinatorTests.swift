@@ -12,31 +12,31 @@ import XCTest
 class CoordinatorTests: XCTestCase {
 
     func testAppCoordinatorShouldCallOnCoordinatorStarted() {
-        let didCall = self.checkIfOnCoordinatorStartedIsCalled(by: AppCoordinator())
+        let didCall = CoordinatorTests.checkIfOnCoordinatorStartedIsCalled(by: AppCoordinator())
         XCTAssertTrue(didCall)
     }
     
     func testMoviesGridCoordinatorShoudCallOnCoordinatorStarted() {
-        let didCall = self.checkIfOnCoordinatorStartedIsCalled(by: MoviesGridCoordinator())
+        let didCall = CoordinatorTests.checkIfOnCoordinatorStartedIsCalled(by: MoviesGridCoordinator())
         XCTAssertTrue(didCall)
     }
     
     func testMovieDetailCoordinatorShouldCallOnCoordinatorStarted() {
-        let didCall = self.checkIfOnCoordinatorStartedIsCalled(by: MovieDetailCoordinator())
+        let didCall = CoordinatorTests.checkIfOnCoordinatorStartedIsCalled(by: MovieDetailCoordinator())
         XCTAssertTrue(didCall)
     }
     
     func testFavoriteMoviesCoordinatorShouldCallOnCoordinatorStarted() {
-        let didCall = self.checkIfOnCoordinatorStartedIsCalled(by: FavoriteMoviesCoordinator())
+        let didCall = CoordinatorTests.checkIfOnCoordinatorStartedIsCalled(by: FavoriteMoviesCoordinator())
         XCTAssertTrue(didCall)
     }
     
     func testFilterCoordinatorShouldCallOnCoordinatorStarted() {
-        let didCall = self.checkIfOnCoordinatorStartedIsCalled(by: FilterCoordinator())
+        let didCall = CoordinatorTests.checkIfOnCoordinatorStartedIsCalled(by: FilterCoordinator())
         XCTAssertTrue(didCall)
     }
     
-    private func checkIfOnCoordinatorStartedIsCalled(by coordinator: Coordinator) -> Bool {
+    static func checkIfOnCoordinatorStartedIsCalled(by coordinator: Coordinator) -> Bool {
         var didCall: Bool = false
         coordinator.onCoordinatorStarted = { _ in didCall = true }
         coordinator.start()

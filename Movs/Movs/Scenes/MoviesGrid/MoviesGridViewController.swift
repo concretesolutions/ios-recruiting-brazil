@@ -16,7 +16,7 @@ final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenter
     private let moviesGridDataSource = MoviesGridDataSource()
     private var moviesGrid: MoviesGrid! {
         didSet {
-            self.moviesGrid.setup()
+            self.moviesGrid.setupView()
             self.view = self.moviesGrid
         }
     }

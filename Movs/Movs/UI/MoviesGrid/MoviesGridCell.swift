@@ -10,7 +10,13 @@ import UIKit
 
 // MARK: - Collection view cell
 
-final class MoviesGridCell: UICollectionViewCell, ViewCode {
+final class MoviesGridCell: UICollectionViewCell {
+    
+    struct Data {
+        let movieImage:UIImage
+        let movieTitle:String
+        var movieIsFavorite:Bool
+    }
     
     static let identifier:String = "CellReuseIdentififer:MoviesGridCell"
     
@@ -39,6 +45,8 @@ final class MoviesGridCell: UICollectionViewCell, ViewCode {
         return button
     }()
     
+    private var settedUp:Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
@@ -53,8 +61,16 @@ final class MoviesGridCell: UICollectionViewCell, ViewCode {
         self.addSubview(self.movieImageView)
         self.addSubview(self.movieTitleLabel)
         self.addSubview(self.movieIsFavoriteIndicatorButton)
-        self.setup()
     }
+    
+    func configure(with data: Data) {
+        self.movieImageView.image = data.movieImage
+        self.movieTitleLabel.text = data.movieTitle
+        self.movieIsFavoriteIndicatorButton.isSelected = data.movieIsFavorite
+    }
+}
+
+extension MoviesGridCell: ViewCode {
     
     func design() {
         self.backgroundColor = Colors.darkBlue.color
@@ -78,15 +94,12 @@ final class MoviesGridCell: UICollectionViewCell, ViewCode {
         self.movieIsFavoriteIndicatorButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    func setup(with data: Data) {
-        self.movieImageView.image = data.movieImage
-        self.movieTitleLabel.text = data.movieTitle
-        self.movieIsFavoriteIndicatorButton.isSelected = data.movieIsFavorite
-    }
-    
-    struct Data {
-        let movieImage:UIImage
-        let movieTitle:String
-        var movieIsFavorite:Bool
+    func setupView() {
+        if !self.settedUp {
+            self.design()
+            self.autolayout()
+            self.additionalSetups()
+            self.settedUp = true
+        }
     }
 }

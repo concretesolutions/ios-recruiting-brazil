@@ -24,8 +24,9 @@ final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesGridCell.identifier, for: indexPath) as? MoviesGridCell else {
             return UICollectionViewCell()
         }
+        cell.setupView()
         let data = self.items[indexPath.row]
-        cell.setup(with: data)
+        cell.configure(with: data)
         return cell
     }
 }
