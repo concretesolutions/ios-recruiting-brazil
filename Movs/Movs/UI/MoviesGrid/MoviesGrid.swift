@@ -23,19 +23,31 @@ final class MoviesGrid: UIView {
     private let collectionViewDataSource = MoviesGridDataSource()
     
     private var collectionView:MoviesGridCollectionView! {
-        didSet { self.addSubview(self.collectionView) }
+        didSet {
+            self.collectionView.setupView()
+            self.collectionView.dataSource = self.collectionViewDataSource
+            self.collectionView.delegate = self
+            self.addSubview(self.collectionView)
+        }
     }
     
-    private var activityIndicator:UIActivityIndicatorView! {
-        didSet { self.addSubview(self.activityIndicator) }
+    private var feedbackView:MoviesGridFeedbackView! {
+        didSet {
+            self.feedbackView.setupView()
+            self.addSubview(self.feedbackView)
+        }
     }
     
-    private var feedbackView:FeedbackView! {
-        didSet { self.addSubview(self.feedbackView) }
+    private var activityIndicatorView:UIActivityIndicatorView! {
+        didSet {
+            self.addSubview(self.activityIndicatorView)
+        }
     }
     
     var state: State = .loading {
-        didSet { self.refreshUIAccordingToState() }
+        didSet {
+            self.refreshUIAccordingToState()
+        }
     }
     
     var movieItems:[MoviesGridCell.Data] = [] {
@@ -46,56 +58,47 @@ final class MoviesGrid: UIView {
     
     weak var delegate:MoviesGridDelegate?
     
-    func reloadData() {
-        self.collectionView.reloadData()
-    }
-    
     private func refreshUIAccordingToState() {
         switch self.state {
         case .loading:
             self.collectionView.isHidden = true
-            self.activityIndicator.isHidden = false
-            self.activityIndicator.startAnimating()
+            self.activityIndicatorView.isHidden = false
+            self.activityIndicatorView.startAnimating()
             self.feedbackView.isHidden = true
         case .error:
             self.collectionView.isHidden = true
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.isHidden = true
             self.feedbackView.isHidden = false
             self.feedbackView.image = Assets.errorIcon.image
             self.feedbackView.text = "Um erro ocorreu. Por favor, tente novamente."
         case .emptySearch:
             self.collectionView.isHidden = true
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.isHidden = true
             self.feedbackView.isHidden = false
             self.feedbackView.image = Assets.searchIcon.image
             self.feedbackView.text = "Não foi encontrado nenhum resultado para sua pesquisa."
         case .grid:
             self.collectionView.isHidden = false
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.isHidden = true
             self.feedbackView.isHidden = false
         }
+    }
+    
+    func reloadData() {
+        self.collectionView.reloadData()
     }
 }
 
 extension MoviesGrid: ViewCode {
     
     func design() {
-        // view
         self.backgroundColor = Colors.white.color
-        // collection view
         self.collectionView = MoviesGridCollectionView(frame: .zero, collectionViewLayout: MoviesGridFlowLayout())
-        self.collectionView.setupView()
-        self.collectionView.dataSource = self.collectionViewDataSource
-        self.collectionView.delegate = self
-        // activity view
-        self.activityIndicator = UIActivityIndicatorView(style: .gray)
-        // feedback view
-        self.feedbackView = FeedbackView()
-        self.feedbackView.setupView()
-        // setup view acording to state
+        self.activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        self.feedbackView = MoviesGridFeedbackView()
         self.refreshUIAccordingToState()
     }
     
@@ -107,11 +110,11 @@ extension MoviesGrid: ViewCode {
         self.collectionView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
         self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
         // activity indicator
-        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.activityIndicator.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
-        self.activityIndicator.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
-        self.activityIndicator.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.activityIndicator.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.activityIndicatorView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
+        self.activityIndicatorView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
+        self.activityIndicatorView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.activityIndicatorView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
         // background image view
         self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
         self.feedbackView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true

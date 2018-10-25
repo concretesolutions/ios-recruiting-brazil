@@ -13,7 +13,6 @@ protocol MoviesGridViewPresenter: PresenterProtocol {
 
 final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenterView {
     
-    private let moviesGridDataSource = MoviesGridDataSource()
     private var moviesGrid: MoviesGrid! {
         didSet {
             self.moviesGrid.setupView()

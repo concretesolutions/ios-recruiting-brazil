@@ -19,7 +19,7 @@
 		08E4A6162181263200386DFA /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6152181263200386DFA /* Fonts.swift */; };
 		08E4A619218132BD00386DFA /* MovsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A618218132BD00386DFA /* MovsTabBarController.swift */; };
 		08E4A61B2181373500386DFA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A61A2181373500386DFA /* AppCoordinator.swift */; };
-		08E4A61E2181417100386DFA /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A61D2181417100386DFA /* FeedbackView.swift */; };
+		08E4A61E2181417100386DFA /* MoviesGridFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A61D2181417100386DFA /* MoviesGridFeedbackView.swift */; };
 		08E4A6322181EB4F00386DFA /* CoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6312181EB4F00386DFA /* CoordinatorTests.swift */; };
 		08E4A6342181F03500386DFA /* MVPBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6332181F03500386DFA /* MVPBaseTests.swift */; };
 		08E4A6362181FAC900386DFA /* ViewCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6352181FAC900386DFA /* ViewCodeTests.swift */; };
@@ -70,7 +70,7 @@
 		08E4A6152181263200386DFA /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		08E4A618218132BD00386DFA /* MovsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTabBarController.swift; sourceTree = "<group>"; };
 		08E4A61A2181373500386DFA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		08E4A61D2181417100386DFA /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		08E4A61D2181417100386DFA /* MoviesGridFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridFeedbackView.swift; sourceTree = "<group>"; };
 		08E4A6232181E9FB00386DFA /* MovsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E4A6272181E9FB00386DFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08E4A6312181EB4F00386DFA /* CoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTests.swift; sourceTree = "<group>"; };
@@ -148,10 +148,12 @@
 		084645BA217FA03E00B3A05F /* MoviesGrid */ = {
 			isa = PBXGroup;
 			children = (
+				084645B6217F7FF400B3A05F /* MoviesGrid.swift */,
 				084645BB217FA05400B3A05F /* MoviesGridCollectionView.swift */,
+				084645C3217FAF2500B3A05F /* MoviesGridDataSource.swift */,
 				08E4A6372182456E00386DFA /* MoviesGridFlowLayout.swift */,
 				084645BD217FA07900B3A05F /* MoviesGridCell.swift */,
-				08E4A61D2181417100386DFA /* FeedbackView.swift */,
+				08E4A61D2181417100386DFA /* MoviesGridFeedbackView.swift */,
 			);
 			path = MoviesGrid;
 			sourceTree = "<group>";
@@ -237,9 +239,7 @@
 		08FB15E1217C2EEF0047E57B /* MoviesGrid */ = {
 			isa = PBXGroup;
 			children = (
-				084645B6217F7FF400B3A05F /* MoviesGrid.swift */,
 				08FB15E5217C2F760047E57B /* MoviesGridViewController.swift */,
-				084645C3217FAF2500B3A05F /* MoviesGridDataSource.swift */,
 				08FB15E7217C2F970047E57B /* MoviesGridPresenter.swift */,
 				08FB15E9217C2FA10047E57B /* MoviesGridCoordinator.swift */,
 			);
@@ -423,7 +423,7 @@
 				08FB15F8217C30040047E57B /* FilterViewController.swift in Sources */,
 				084645C1217FA1AC00B3A05F /* MovsNavigationController.swift in Sources */,
 				08FB15FA217C302E0047E57B /* FilterPresenter.swift in Sources */,
-				08E4A61E2181417100386DFA /* FeedbackView.swift in Sources */,
+				08E4A61E2181417100386DFA /* MoviesGridFeedbackView.swift in Sources */,
 				08FB15F6217C2FF80047E57B /* FavoriteMoviesCoordinator.swift in Sources */,
 				08FB15DF217C2A5D0047E57B /* Coordinator.swift in Sources */,
 				08FB15FC217C30360047E57B /* FilterCoordinator.swift in Sources */,
