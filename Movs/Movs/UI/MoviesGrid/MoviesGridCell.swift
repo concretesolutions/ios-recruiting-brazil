@@ -58,9 +58,6 @@ final class MoviesGridCell: UICollectionViewCell {
     }
     
     private func commonInit() {
-        self.addSubview(self.movieImageView)
-        self.addSubview(self.movieTitleLabel)
-        self.addSubview(self.movieIsFavoriteIndicatorButton)
     }
     
     func configure(with data: Data) {
@@ -74,6 +71,9 @@ extension MoviesGridCell: ViewCode {
     
     func design() {
         self.backgroundColor = Colors.darkBlue.color
+        self.addSubview(self.movieImageView)
+        self.addSubview(self.movieTitleLabel)
+        self.addSubview(self.movieIsFavoriteIndicatorButton)
     }
     
     func autolayout() {

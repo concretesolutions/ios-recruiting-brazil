@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MoviesGridDelegate:UICollectionViewDelegate {
+protocol MoviesGridDelegate:AnyObject {
 }
 
 final class MoviesGrid: UIView {
@@ -39,7 +39,9 @@ final class MoviesGrid: UIView {
     }
     
     var movieItems:[MoviesGridCell.Data] = [] {
-        didSet { self.collectionViewDataSource.items = self.movieItems }
+        didSet {
+            self.collectionViewDataSource.items = self.movieItems
+        }
     }
     
     weak var delegate:MoviesGridDelegate?
@@ -84,9 +86,10 @@ extension MoviesGrid: ViewCode {
         // view
         self.backgroundColor = Colors.white.color
         // collection view
-        self.collectionView = MoviesGridCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        self.collectionView = MoviesGridCollectionView(frame: .zero, collectionViewLayout: MoviesGridFlowLayout())
         self.collectionView.setupView()
         self.collectionView.dataSource = self.collectionViewDataSource
+        self.collectionView.delegate = self
         // activity view
         self.activityIndicator = UIActivityIndicatorView(style: .gray)
         // feedback view
@@ -115,5 +118,12 @@ extension MoviesGrid: ViewCode {
         self.feedbackView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
         self.feedbackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
         self.feedbackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+}
+
+extension MoviesGrid: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return MoviesGridFlowLayout.calculateItemSize(for: collectionView.bounds.size)
     }
 }
