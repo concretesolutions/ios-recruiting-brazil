@@ -20,6 +20,7 @@
 		08E4A619218132BD00386DFA /* MovsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A618218132BD00386DFA /* MovsTabBarController.swift */; };
 		08E4A61B2181373500386DFA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A61A2181373500386DFA /* AppCoordinator.swift */; };
 		08E4A61E2181417100386DFA /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A61D2181417100386DFA /* FeedbackView.swift */; };
+		08E4A6322181EB4F00386DFA /* CoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6312181EB4F00386DFA /* CoordinatorTests.swift */; };
 		08FB15CE217C109B0047E57B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15CD217C109B0047E57B /* Default-568h@2x.png */; };
 		08FB15D0217C10C00047E57B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15CF217C10C00047E57B /* LaunchScreen.xib */; };
 		08FB15D2217C11120047E57B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15D1217C11120047E57B /* Colors.xcassets */; };
@@ -41,6 +42,16 @@
 		08FB1609217E5EC30047E57B /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB1608217E5EC30047E57B /* Assets.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		08E4A6282181E9FB00386DFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0818B32D217C0C1E00F884B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0818B334217C0C1E00F884B8;
+			remoteInfo = Movs;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0818B335217C0C1E00F884B8 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0818B338217C0C1E00F884B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +68,9 @@
 		08E4A618218132BD00386DFA /* MovsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTabBarController.swift; sourceTree = "<group>"; };
 		08E4A61A2181373500386DFA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		08E4A61D2181417100386DFA /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		08E4A6232181E9FB00386DFA /* MovsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08E4A6272181E9FB00386DFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08E4A6312181EB4F00386DFA /* CoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTests.swift; sourceTree = "<group>"; };
 		08FB15CD217C109B0047E57B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		08FB15CF217C10C00047E57B /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		08FB15D1217C11120047E57B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -86,6 +100,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08E4A6202181E9FB00386DFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				0818B337217C0C1E00F884B8 /* Movs */,
+				08E4A6242181E9FB00386DFA /* MovsTests */,
 				0818B336217C0C1E00F884B8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				0818B335217C0C1E00F884B8 /* Movs.app */,
+				08E4A6232181E9FB00386DFA /* MovsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +172,23 @@
 				08E4A618218132BD00386DFA /* MovsTabBarController.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		08E4A6242181E9FB00386DFA /* MovsTests */ = {
+			isa = PBXGroup;
+			children = (
+				08E4A6272181E9FB00386DFA /* Info.plist */,
+				08E4A62D2181EA0F00386DFA /* Core */,
+			);
+			path = MovsTests;
+			sourceTree = "<group>";
+		};
+		08E4A62D2181EA0F00386DFA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				08E4A6312181EB4F00386DFA /* CoordinatorTests.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		08FB15D3217C15DC0047E57B /* Support */ = {
@@ -269,6 +309,24 @@
 			productReference = 0818B335217C0C1E00F884B8 /* Movs.app */;
 			productType = "com.apple.product-type.application";
 		};
+		08E4A6222181E9FB00386DFA /* MovsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08E4A62A2181E9FB00386DFA /* Build configuration list for PBXNativeTarget "MovsTests" */;
+			buildPhases = (
+				08E4A61F2181E9FB00386DFA /* Sources */,
+				08E4A6202181E9FB00386DFA /* Frameworks */,
+				08E4A6212181E9FB00386DFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08E4A6292181E9FB00386DFA /* PBXTargetDependency */,
+			);
+			name = MovsTests;
+			productName = MovsTests;
+			productReference = 08E4A6232181E9FB00386DFA /* MovsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -281,6 +339,11 @@
 				TargetAttributes = {
 					0818B334217C0C1E00F884B8 = {
 						CreatedOnToolsVersion = 10.0;
+					};
+					08E4A6222181E9FB00386DFA = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+						TestTargetID = 0818B334217C0C1E00F884B8;
 					};
 				};
 			};
@@ -298,6 +361,7 @@
 			projectRoot = "";
 			targets = (
 				0818B334217C0C1E00F884B8 /* Movs */,
+				08E4A6222181E9FB00386DFA /* MovsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -311,6 +375,13 @@
 				08FB15D2217C11120047E57B /* Colors.xcassets in Resources */,
 				08FB15D0217C10C00047E57B /* LaunchScreen.xib in Resources */,
 				08FB15CE217C109B0047E57B /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08E4A6212181E9FB00386DFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +423,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		08E4A61F2181E9FB00386DFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08E4A6322181EB4F00386DFA /* CoordinatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		08E4A6292181E9FB00386DFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0818B334217C0C1E00F884B8 /* Movs */;
+			targetProxy = 08E4A6282181E9FB00386DFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0818B345217C0C1F00F884B8 /* Debug */ = {
@@ -507,6 +594,51 @@
 			};
 			name = Release;
 		};
+		08E4A62B2181E9FB00386DFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JP3F8DJU56;
+				INFOPLIST_FILE = MovsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.greynoso.MovsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
+			};
+			name = Debug;
+		};
+		08E4A62C2181E9FB00386DFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JP3F8DJU56;
+				INFOPLIST_FILE = MovsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.greynoso.MovsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -524,6 +656,15 @@
 			buildConfigurations = (
 				0818B348217C0C1F00F884B8 /* Debug */,
 				0818B349217C0C1F00F884B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08E4A62A2181E9FB00386DFA /* Build configuration list for PBXNativeTarget "MovsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08E4A62B2181E9FB00386DFA /* Debug */,
+				08E4A62C2181E9FB00386DFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
