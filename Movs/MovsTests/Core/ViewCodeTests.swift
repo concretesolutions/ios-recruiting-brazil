@@ -14,6 +14,11 @@ class ViewCodeTests: XCTestCase {
     private var designWasCalled:Bool = false
     private var autolayoutWasCalled:Bool = false
     private var additionalSetupsWasCalled:Bool = false
+    
+    private var allMethodsWereCalled:Bool {
+        return self.designWasCalled && self.autolayoutWasCalled && self.additionalSetupsWasCalled
+    }
+    
     private var setupCount:Int = 0
     
     var settedUp:Bool = false
@@ -26,16 +31,13 @@ class ViewCodeTests: XCTestCase {
         self.settedUp = false
     }
     
-    private var allMethodsWereCalled:Bool {
-        return self.designWasCalled && self.autolayoutWasCalled && self.additionalSetupsWasCalled
-    }
-    
     func testSetupViewShouldCallAllViewCodeMethods() {
         self.setupView()
         XCTAssertTrue(self.allMethodsWereCalled)
     }
     
     func testSetupViewShouldChangeSettedUpValue() {
+        XCTAssertFalse(self.settedUp)
         self.setupView()
         XCTAssertTrue(self.settedUp)
     }

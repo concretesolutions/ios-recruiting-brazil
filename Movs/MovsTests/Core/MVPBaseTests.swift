@@ -23,22 +23,22 @@ class MVPBaseTests: XCTestCase {
         self.methodWasCalled = false
     }
     
-    func testBaseViewControllerShouldCallViewDidLoad() {
+    func testBaseViewControllerShouldCallPresenterViewDidLoad() {
         self.baseViewController.viewDidLoad()
         XCTAssertTrue(self.methodWasCalled)
     }
     
-    func testBaseViewControllerShouldCallViewWillAppear() {
+    func testBaseViewControllerShouldCallPresenterViewWillAppear() {
         self.baseViewController.viewWillAppear(false)
         XCTAssertTrue(self.methodWasCalled)
     }
     
-    func testBaseViewControllerShouldCallViewWillDisappear() {
+    func testBaseViewControllerShouldCallPresenterViewWillDisappear() {
         self.baseViewController.viewDidDisappear(false)
         XCTAssertTrue(self.methodWasCalled)
     }
     
-    func testBaseViewControllerShouldCallViewDidDisappear() {
+    func testBaseViewControllerShouldCallPresenterViewDidDisappear() {
         self.baseViewController.viewWillDisappear(false)
         XCTAssertTrue(self.methodWasCalled)
     }
