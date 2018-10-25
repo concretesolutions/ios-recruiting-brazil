@@ -7,13 +7,16 @@
 //
 
 import Foundation
-@testable import FAK
+@testable import Mov
 
 class MovieFetcherMock: MovieFetcher {
     public var flawedFetch = false
+    public var mockMovies = (0..<5).map { id in
+        return Movie(id: id, title: "", releaseDate: Date(), genres: [], overview: "", posterPath: "")
+    }
     
     func fetchMovies() -> [Movie]? {
-        return flawedFetch ? nil : []
+        return flawedFetch ? nil : self.mockMovies
     }
     
     

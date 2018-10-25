@@ -11,7 +11,7 @@ import Foundation
 
 protocol MovieGridViewOutput {
     
-    func display(movies: [Movie])
+    func display(movies: [MovieGridViewModel])
     
     func displayNetworkError()
     

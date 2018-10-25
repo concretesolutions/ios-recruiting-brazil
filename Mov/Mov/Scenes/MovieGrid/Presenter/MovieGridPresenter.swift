@@ -10,7 +10,7 @@ import Foundation
 
 
 protocol MovieGridPresenter {
-    func present(movies: [Movie])
+    func present(movies: [MovieGridUnit])
     
     func presentNetworkError()
 }

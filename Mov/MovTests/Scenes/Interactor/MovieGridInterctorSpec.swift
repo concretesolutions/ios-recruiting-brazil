@@ -8,8 +8,10 @@
 
 import Quick
 import Nimble
+import XCTest
 
-@testable import FAK
+
+@testable import Mov
 
 class MovieGridInteractorSpec: QuickSpec {
     
@@ -28,11 +30,19 @@ class MovieGridInteractorSpec: QuickSpec {
                 
                 
                 it("call presenter's presentMovies only") {
-                    expect(presenter.calledOnly(method: .presentMovies)).to(beTrue())
+                    expect(presenter.calledAlone(method: .presentMovies)).to(beTrue())
+                }
+                
+                it("pass correctly all data fetched") {
+                    let fetchedMoviesMock = movieFethcer.mockMovies.map { movie in
+                        return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: false)
+                    }
+                    
+                    expect(presenter.receivedMovies).to(equal(fetchedMoviesMock))
                 }
                 
                 afterEach {
-                    presenter.clearCalls()
+                    presenter.resetMock()
                 }
             }
             
@@ -44,11 +54,11 @@ class MovieGridInteractorSpec: QuickSpec {
                 }
                 
                 it("call presenter's presentNetworkError only") {
-                    expect(presenter.calledOnly(method: .presentNetworkError)).to(beTrue())
+                    expect(presenter.calledAlone(method: .presentNetworkError)).to(beTrue())
                 }
                 
                 afterEach {
-                    presenter.clearCalls()
+                    presenter.resetMock()
                 }
             }
         }

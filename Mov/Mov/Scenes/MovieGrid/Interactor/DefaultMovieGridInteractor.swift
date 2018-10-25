@@ -19,13 +19,19 @@ final class DefaultMovieGridInteractor {
         self.presenter = presenter
         self.movieFetcher = movieFetcher
     }
+    
+    func buildMovieGridUnits(from movies: [Movie]) -> [MovieGridUnit] {
+        return movies.map { movie in
+            return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: false)
+        }
+    }
 }
 
 extension DefaultMovieGridInteractor: MovieGridInteractor {
     
     func fetchMovieList() {
         if let movies = self.movieFetcher.fetchMovies() {
-            self.presenter.present(movies: movies)
+            self.presenter.present(movies: buildMovieGridUnits(from: movies))
         } else {
             self.presenter.presentNetworkError()
         }

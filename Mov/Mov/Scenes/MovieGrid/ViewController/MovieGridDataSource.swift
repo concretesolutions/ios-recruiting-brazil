@@ -10,7 +10,7 @@ import UIKit
 
 final class MovieGridDataSource: NSObject {
 
-    private var movies: [Movie] = []
+    private var movies: [MovieGridViewModel] = []
     
     private let collectionView: UICollectionView
     
@@ -35,7 +35,7 @@ extension MovieGridDataSource: UICollectionViewDataSource {
 
 extension MovieGridDataSource: MovieGridViewOutput {
     
-    func display(movies: [Movie]) {
+    func display(movies: [MovieGridViewModel]) {
         self.movies = movies
         self.collectionView.reloadData()
     }

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Movie: Decodable {
+    let id: Int
     let title: String
     let releaseDate: Date
     let genres: [MovieGenre]

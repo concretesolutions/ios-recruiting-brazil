@@ -16,12 +16,18 @@ final class DefaultMovieGridPresenter {
         self.viewOutput = viewOutput
     }
     
+    func buildMovieGridViewModels(from movies: [MovieGridUnit]) -> [MovieGridViewModel] {
+        return movies.map { movie in
+            return MovieGridViewModel(title: movie.title, poster: kImages.poster_placeholder, isFavoriteIcon: kImages.isFavoriteIconEmpty)
+        }
+    }
+    
 }
 
 extension DefaultMovieGridPresenter: MovieGridPresenter {
     
-    func present(movies: [Movie]) {
-        self.viewOutput.display(movies: movies)
+    func present(movies: [MovieGridUnit]) {
+        self.viewOutput.display(movies: buildMovieGridViewModels(from: movies))
     }
     
     func presentNetworkError() {
