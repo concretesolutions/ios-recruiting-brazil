@@ -20,10 +20,10 @@
 		1D085059217EADF70017E78D /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D085058217EADF70017E78D /* MoviesCollectionViewCell.swift */; };
 		1D08505B217EE89B0017E78D /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D08505A217EE89B0017E78D /* FavoriteTableViewCell.swift */; };
 		1D08505D217F41620017E78D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D08505C217F41620017E78D /* Extensions.swift */; };
+		1D6C26E42180F5A700E1222B /* Challenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D6C26E22180F5A700E1222B /* Challenge.xcdatamodeld */; };
 		1DE41859217B4654000D2446 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE41858217B4654000D2446 /* AppDelegate.swift */; };
 		1DE4185B217B4654000D2446 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4185A217B4654000D2446 /* LoginViewController.swift */; };
 		1DE4185E217B4654000D2446 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DE4185C217B4654000D2446 /* Main.storyboard */; };
-		1DE41861217B4654000D2446 /* Challenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4185F217B4654000D2446 /* Challenge.xcdatamodeld */; };
 		1DE41863217B4657000D2446 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DE41862217B4657000D2446 /* Assets.xcassets */; };
 		1DE41866217B4657000D2446 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DE41864217B4657000D2446 /* LaunchScreen.storyboard */; };
 		1DE41871217B4658000D2446 /* ChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE41870217B4658000D2446 /* ChallengeTests.swift */; };
@@ -70,11 +70,11 @@
 		1D085058217EADF70017E78D /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		1D08505A217EE89B0017E78D /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		1D08505C217F41620017E78D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1D6C26E32180F5A700E1222B /* Challenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Challenge.xcdatamodel; sourceTree = "<group>"; };
 		1DE41855217B4654000D2446 /* Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DE41858217B4654000D2446 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DE4185A217B4654000D2446 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1DE4185D217B4654000D2446 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1DE41860217B4654000D2446 /* Challenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Challenge.xcdatamodel; sourceTree = "<group>"; };
 		1DE41862217B4657000D2446 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DE41865217B4657000D2446 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1DE41867217B4657000D2446 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 				1DE41858217B4654000D2446 /* AppDelegate.swift */,
 				1DE41862217B4657000D2446 /* Assets.xcassets */,
 				1DE41867217B4657000D2446 /* Info.plist */,
-				1DE4185F217B4654000D2446 /* Challenge.xcdatamodeld */,
+				1D6C26E22180F5A700E1222B /* Challenge.xcdatamodeld */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -464,7 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D08504F217EA8650017E78D /* MoviesViewController.swift in Sources */,
-				1DE41861217B4654000D2446 /* Challenge.xcdatamodeld in Sources */,
+				1D6C26E42180F5A700E1222B /* Challenge.xcdatamodeld in Sources */,
 				1D085057217EA9A70017E78D /* MovieDetailsViewController.swift in Sources */,
 				1DE4185B217B4654000D2446 /* LoginViewController.swift in Sources */,
 				1D08505B217EE89B0017E78D /* FavoriteTableViewCell.swift in Sources */,
@@ -815,12 +815,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		1DE4185F217B4654000D2446 /* Challenge.xcdatamodeld */ = {
+		1D6C26E22180F5A700E1222B /* Challenge.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				1DE41860217B4654000D2446 /* Challenge.xcdatamodel */,
+				1D6C26E32180F5A700E1222B /* Challenge.xcdatamodel */,
 			);
-			currentVersion = 1DE41860217B4654000D2446 /* Challenge.xcdatamodel */;
+			currentVersion = 1D6C26E32180F5A700E1222B /* Challenge.xcdatamodel */;
 			path = Challenge.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -20,6 +20,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     var page = 1
+    var usingCoredata: Bool?
     var searchActive = false
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -45,6 +46,11 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.searchBar.delegate = self
+        if self.movies.count == 0 {
+            self.usingCoredata = true
+            self.movies = Movie.fetchSortedByDate()
+            self.tableView.reloadData()
+        }
         self.handlePagination()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -68,8 +74,15 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     @objc func handlePagination() {
         print("Handling pagination")
         Movie.getFavoriteMovies(pageToRequest: self.page, onSuccess: { (moviesResult) in
+            self.movies = []
             self.movies.append(contentsOf: moviesResult)
+            if self.page == 1 {
+                Movie.saveMoviesToCoreData(movies: moviesResult)
+            } else {
+                Movie.appendMoviesToCoreData(movies: moviesResult)
+            }
             self.page += 1
+            self.usingCoredata = false
             self.tableView.reloadData()
         }) { (error) in
             print(error)
@@ -107,13 +120,21 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.favoriteYear.text = self.filteredMovies[indexPath.row].date?.dateYyyyMmDdToDdMmYyyyWithDashes()
             cell.favoriteOverview.text = self.filteredMovies[indexPath.row].overview
             cell.favoriteImageView.kf.indicatorType = .activity
-            cell.favoriteImageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.filteredMovies[indexPath.row].imagePath!))"))
+            if usingCoredata ?? false {
+                cell.favoriteImageView.image = movies[indexPath.row].image
+            } else {
+                cell.favoriteImageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.filteredMovies[indexPath.row].imagePath!))"))
+            }
         } else {
             cell.favoriteTitle.text = self.movies[indexPath.row].name
             cell.favoriteYear.text = self.movies[indexPath.row].date?.dateYyyyMmDdToDdMmYyyyWithDashes()
             cell.favoriteOverview.text = self.movies[indexPath.row].overview
             cell.favoriteImageView.kf.indicatorType = .activity
-            cell.favoriteImageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.movies[indexPath.row].imagePath!))"))
+            if usingCoredata ?? false {
+                cell.favoriteImageView.image = movies[indexPath.row].image
+            } else {
+                cell.favoriteImageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.movies[indexPath.row].imagePath!))"))
+            }
         }
         return cell
     }
@@ -154,12 +175,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         } else {
             self.searchActive = true
         }
-//        if(self.filteredMovies.isEmpty) {
-//            self.searchActive = false
-//        } else {
-//            self.searchActive = true
-//        }
         self.tableView.reloadData()
+        
     }
     
     // MARK: - Navigation

@@ -24,7 +24,10 @@ class LoginViewController: UIViewController {
         view.addGestureRecognizer(tap)
         self.userNameTextField.addBottomBorderWithColor(color: .black, width: 1)
         self.passwordTextField.addBottomBorderWithColor(color: .black, width: 1)
-        
+        self.movies = Movie.fetchSortedByDate()
+        for movie in self.movies {
+            print(movie.name)
+        }
     }
     
     @objc func dismissKeyboard() {

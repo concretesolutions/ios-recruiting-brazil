@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import Alamofire
+import CoreData
+import Kingfisher
 
 class Movie {
     
@@ -20,9 +22,44 @@ class Movie {
     var description: String?
     var overview: String?
     var id: Int?
+    var image: UIImage = UIImage()
     
     init() {
         
+    }
+    
+    init(coredataObject: NSManagedObject) {
+        self.imagePath = ""
+        if let name = coredataObject.value(forKey: "title") {
+            self.name = (name as! String)
+        } else {
+            self.name = ""
+        }
+        if let genre = coredataObject.value(forKey: "genre") {
+            self.genre.update(with: genre as! String)
+        } else {
+            self.genre.update(with: "")
+        }
+        if let date = coredataObject.value(forKey: "date") {
+            self.date = (date as! String)
+        } else {
+            self.name = ""
+        }
+        if let overview = coredataObject.value(forKey: "overview") {
+            self.overview = (overview as! String)
+        } else {
+            self.overview = ""
+        }
+        if let id = coredataObject.value(forKey: "id") {
+            self.id = (id as! Int)
+        } else {
+            self.id = 0
+        }
+        if let image = coredataObject.value(forKey: "image") {
+            self.image = UIImage(data: image as! Data) ?? UIImage()
+        }
+        self.isFavourite = true
+        self.description = ""
     }
     
     init(movie: [String: Any]) {
@@ -86,6 +123,175 @@ class Movie {
             self.imagePath = dbImagePath
         } else {
             self.imagePath = ""
+        }
+    }
+    
+    class func loadCoreData() -> (NSEntityDescription, NSManagedObjectContext)? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return nil
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        if let movieEntity = NSEntityDescription.entity(forEntityName: "MovieEntity", in: managedContext) {
+            return (movieEntity, managedContext)
+        } else {
+            return nil
+        }
+    }
+    
+    class func fetchSortedByGenre() -> [Movie]{
+        
+        guard let coreDataData = self.loadCoreData() else {
+            return []
+        }
+        //let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieEntity")
+        
+        let descriptor = NSSortDescriptor(key: "genre", ascending: true)
+        
+        fetchRequest.sortDescriptors = [descriptor]
+        
+        do {
+            let objects = try managedContext.fetch(fetchRequest)
+            print("Fetch Successfull.")
+            var returnMovies: [Movie] = []
+            for object in objects {
+                let movie = Movie(coredataObject: object)
+                returnMovies.append(movie)
+            }
+            return returnMovies
+        } catch let error as NSError {
+            print("Could not Fetch. \(error) \(error.userInfo)")
+            return []
+        }
+        
+    }
+    
+    class func fetchSortedByDate() -> [Movie]{
+        
+        guard let coreDataData = Movie.loadCoreData() else {
+            return []
+        }
+        //let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieEntity")
+        
+        let descriptor = NSSortDescriptor(key: "date", ascending: true)
+        
+        fetchRequest.sortDescriptors = [descriptor]
+        
+        do {
+            let objects = try managedContext.fetch(fetchRequest)
+            print("Fetch Successfull.")
+            var returnMovies: [Movie] = []
+            for object in objects {
+                let movie = Movie(coredataObject: object)
+                returnMovies.append(movie)
+            }
+            return returnMovies
+        } catch let error as NSError {
+            print("Could not Fetch. \(error) \(error.userInfo)")
+            return []
+        }
+    }
+    
+    class func fetch() -> [NSManagedObject] {
+        guard let coreDataData = Movie.loadCoreData() else {
+            return []
+        }
+        //let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "MovieEntity")
+        
+        let descriptor = NSSortDescriptor(key: "date", ascending: true)
+        
+        fetchRequest.sortDescriptors = [descriptor]
+        
+        do {
+            let objects = try managedContext.fetch(fetchRequest)
+            print("Fetch Successfull.")
+            return objects
+        } catch let error as NSError {
+            print("Could not Fetch. \(error) \(error.userInfo)")
+            return []
+        }
+    }
+    
+    class func saveMoviesToCoreData(movies: [Movie]) {
+        
+        guard let coreDataData = Movie.loadCoreData() else {
+            return
+        }
+        //let entity = coreDataData.0
+        let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        let moviesToDelete = fetch()
+        self.deleteAllFromCoreData(moviesToDelete, managedContext)
+        
+        for movie in movies {
+            let movieCoreData = NSManagedObject(entity: entity, insertInto: managedContext)
+            movieCoreData.setValue(movie.name!, forKey: "title")
+            movieCoreData.setValue(movie.date!, forKey: "date")
+            movieCoreData.setValue(movie.overview!, forKey: "overview")
+            movieCoreData.setValue(movie.genre.read(), forKey: "genre")
+            movieCoreData.setValue(movie.id!, forKey: "id")
+            let url = URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: movie.imagePath!))")
+            ImageDownloader.default.downloadImage(with: url!, options: [], progressBlock: nil) {
+                (image, error, url, data) in
+                if error == nil {
+                    movieCoreData.setValue(image?.jpegData(compressionQuality: 1.0), forKey: "image")
+                } else {
+                    movieCoreData.setValue(UIImage().jpegData(compressionQuality: 1.0), forKey: "image")
+                }
+                self.save(context: managedContext)
+                managedContext.refreshAllObjects()
+            }
+        }
+    }
+    
+    class func appendMoviesToCoreData(movies: [Movie]) {
+        
+        guard let coreDataData = Movie.loadCoreData() else {
+            return
+        }
+        //let entity = coreDataData.0
+        let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        
+        for movie in movies {
+            let movieCoreData = NSManagedObject(entity: entity, insertInto: managedContext)
+            movieCoreData.setValue(movie.name!, forKey: "title")
+            movieCoreData.setValue(movie.date!, forKey: "date")
+            movieCoreData.setValue(movie.overview!, forKey: "overview")
+            movieCoreData.setValue(movie.genre.read(), forKey: "genre")
+            movieCoreData.setValue(movie.id!, forKey: "id")
+            let url = URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: movie.imagePath!))")
+            ImageDownloader.default.downloadImage(with: url!, options: [], progressBlock: nil) {
+                (image, error, url, data) in
+                if error == nil {
+                    movieCoreData.setValue(image?.jpegData(compressionQuality: 1.0), forKey: "image")
+                } else {
+                    movieCoreData.setValue(UIImage().jpegData(compressionQuality: 1.0), forKey: "image")
+                }
+                self.save(context: managedContext)
+                managedContext.refreshAllObjects()
+            }
+        }
+    }
+    
+    class func deleteAllFromCoreData(_ objetcs: [NSManagedObject], _ context: NSManagedObjectContext){
+        for object in objetcs{
+            context.delete(object)
+        }
+        save(context: context)
+    }
+    
+    class func save(context: NSManagedObjectContext){
+        do {
+            try context.save()
+            print("Saving Sccessfull.")
+        } catch let error as NSError {
+            print("Could not save. \(error) \(error.userInfo)")
         }
     }
     
