@@ -26,8 +26,8 @@ class MainScreenPresenter: MainScreenPresentationLogic
         var viewModelItems: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel] = []
         for movie in movies {
             viewModelItems.append(MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel(posterUrl: movie.posterPath, title: movie.title))
-            viewController?.display(movies: viewModelItems)
         }
+        viewController?.display(movies: viewModelItems)
     }
     
     func present(error: String) {

@@ -15,7 +15,7 @@ import UIKit
 protocol MainScreenBusinessLogic
 {
     func doSomething(request: MainScreen.Something.Request)
-    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request)
+    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request, completionBlock: (() -> ())?)
 }
 
 protocol MainScreenDataStore
@@ -26,7 +26,6 @@ protocol MainScreenDataStore
 
 class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
 {
-    
     var presenter: MainScreenPresentationLogic?
     var worker: MainScreenWorker?
     var movieTitle: String = ""
@@ -43,14 +42,16 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
         presenter?.presentSomething(response: response)
     }
     
-    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request) {
+    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request, completionBlock: (() -> ())?) {
         worker = MainScreenWorker()
         worker?.fetchPopularMovies(request: request, completion: { (movies, error) in
             if(error != nil){
-//                presenter.present(message: error)
+                print(error)
             }
             if(movies != nil){
                 self.presenter?.present(movies: movies!)
+                guard let completion = completionBlock else {return}
+                completion()
             }
         })
     }

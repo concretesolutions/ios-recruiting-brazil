@@ -14,6 +14,11 @@ import UIKit
 import Keys
 import SnapKit
 
+enum AppStatus{
+    case fetchingMore
+    case finish
+}
+
 protocol MainScreenDisplayLogic: class
 {
     func displaySomething(viewModel: MainScreen.Something.ViewModel)
@@ -27,6 +32,9 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     
     let movieCellID = "movieCellID"
     var displayedMovies : [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel] = []
+    var currentPageForAPI = 1
+    
+    var applicationStatus : AppStatus = .fetchingMore
     
     private let leftBarButton : UIBarButtonItem = {
         let btn = UIBarButtonItem()
@@ -46,8 +54,10 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         super.viewDidLoad()
         setupView()
         collectionView.reloadData()
-        // Do any additional setup after loading the view, typically from a nib.
-        interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request(index: 1))
+        interactor?.fetchPopularMovies(request:  MainScreen.FetchPopularMuvies.Request(index: self.currentPageForAPI), completionBlock: {
+            self.applicationStatus = .finish
+        })
+        
     }
     
     // MARK: Object lifecycle
@@ -105,7 +115,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     }
     
     func display(movies: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel]) {
-        self.displayedMovies = movies
+        self.displayedMovies.append(contentsOf: movies)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
@@ -126,6 +136,28 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         let data = MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel(posterUrl: item.posterUrl, title: item.title)
         cell.setData(data: data)
         return cell
+    }
+    
+    
+    //MARK: - Scroll View
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if(offsetY > contentHeight - scrollView.frame.height){
+            if(applicationStatus != .fetchingMore){
+                beginBatchFetch()
+            }
+        }
+    }
+    
+    func beginBatchFetch() {
+        self.applicationStatus = .fetchingMore
+        self.currentPageForAPI += 1
+        interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request(index: self.currentPageForAPI), completionBlock: {
+            self.applicationStatus = .finish
+        })
     }
 }
 
