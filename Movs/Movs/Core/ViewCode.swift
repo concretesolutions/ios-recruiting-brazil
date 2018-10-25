@@ -23,3 +23,18 @@ extension ViewCode {
         self.additionalSetups()
     }
 }
+
+protocol ReusableViewCode: ViewCode {
+    var settedUp:Bool { get set }
+}
+
+extension ReusableViewCode {
+    func setupView() {
+        if !self.settedUp {
+            self.design()
+            self.autolayout()
+            self.additionalSetups()
+            self.settedUp = true
+        }
+    }
+}

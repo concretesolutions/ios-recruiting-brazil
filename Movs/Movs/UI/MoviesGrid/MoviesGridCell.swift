@@ -45,7 +45,7 @@ final class MoviesGridCell: UICollectionViewCell {
         return button
     }()
     
-    private var settedUp:Bool = false
+    var settedUp:Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,7 +67,7 @@ final class MoviesGridCell: UICollectionViewCell {
     }
 }
 
-extension MoviesGridCell: ViewCode {
+extension MoviesGridCell: ReusableViewCode {
     
     func design() {
         self.backgroundColor = Colors.darkBlue.color
@@ -92,14 +92,5 @@ extension MoviesGridCell: ViewCode {
         self.movieIsFavoriteIndicatorButton.widthAnchor.constraint(equalTo: self.movieIsFavoriteIndicatorButton.heightAnchor).isActive = true
         self.movieIsFavoriteIndicatorButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         self.movieIsFavoriteIndicatorButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    }
-    
-    func setupView() {
-        if !self.settedUp {
-            self.design()
-            self.autolayout()
-            self.additionalSetups()
-            self.settedUp = true
-        }
     }
 }

@@ -14,6 +14,17 @@ class ViewCodeTests: XCTestCase {
     private var designWasCalled:Bool = false
     private var autolayoutWasCalled:Bool = false
     private var additionalSetupsWasCalled:Bool = false
+    private var setupCount:Int = 0
+    
+    var settedUp:Bool = false
+    
+    override func setUp() {
+        self.designWasCalled = false
+        self.autolayoutWasCalled = false
+        self.additionalSetupsWasCalled = false
+        self.setupCount = 0
+        self.settedUp = false
+    }
     
     private var allMethodsWereCalled:Bool {
         return self.designWasCalled && self.autolayoutWasCalled && self.additionalSetupsWasCalled
@@ -23,12 +34,24 @@ class ViewCodeTests: XCTestCase {
         self.setupView()
         XCTAssertTrue(self.allMethodsWereCalled)
     }
+    
+    func testSetupViewShouldChangeSettedUpValue() {
+        self.setupView()
+        XCTAssertTrue(self.settedUp)
+    }
+    
+    func testReusableViewCodeShouldNotSetupTwice() {
+        self.setupView()
+        self.setupView()
+        XCTAssertTrue(self.setupCount == 1)
+    }
 }
 
-extension ViewCodeTests: ViewCode {
+extension ViewCodeTests: ReusableViewCode {
     
     func design() {
         self.designWasCalled = true
+        self.setupCount += 1
     }
     
     func autolayout() {
