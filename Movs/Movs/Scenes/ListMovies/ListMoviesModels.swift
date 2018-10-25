@@ -12,17 +12,30 @@ import UIKit
 enum ListMovies{
   // MARK: Use cases
   
-  enum Fetch {
-    struct Request {
+    enum Fetch {
+        struct Request {
     
-    }
-    struct Response {
-        let movies: [Movie]?
-        let error: String?
-    }
-    struct ViewModel {
+        }
         
+        struct Response {
+            let movies: [Movie]?
+            let error: String?
+        }
+        
+        enum ViewModel {
+            struct Success {
+                let movies: [Movie]
+            }
+            
+            struct Error {
+                var image: UIImage?
+                var message: String
+            }
+        }
     }
-  }
+
+    enum ErrorType {
+        case connectionError
+    }
     
 }

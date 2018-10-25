@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NBF-7A-b5F">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--List Movies View Controller-->
+        <scene sceneID="Vwz-MW-CYd">
+            <objects>
+                <viewController id="NBF-7A-b5F" customClass="ListMoviesViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4NC-Uu-8N0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnx-4W-3HL">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="Mais populares" id="1oi-yZ-Wm5"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dZv-FE-PiF">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PopularMovieTableViewCell" rowHeight="200" id="mY6-sk-RAk" customClass="PopularMovieTableViewCell" customModule="Movs" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mY6-sk-RAk" id="jw7-S5-Oiv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRq-8R-fyA" customClass="UIViewMovieCard" customModule="Movs" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="16" width="345" height="168"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" name="grayBackground"/>
+                                            <constraints>
+                                                <constraint firstItem="QRq-8R-fyA" firstAttribute="top" secondItem="jw7-S5-Oiv" secondAttribute="topMargin" constant="5" id="Xja-qT-74c"/>
+                                                <constraint firstItem="QRq-8R-fyA" firstAttribute="leading" secondItem="jw7-S5-Oiv" secondAttribute="leadingMargin" id="dlR-CD-Zan"/>
+                                                <constraint firstItem="QRq-8R-fyA" firstAttribute="trailing" secondItem="jw7-S5-Oiv" secondAttribute="trailingMargin" id="naV-iw-xK9"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="QRq-8R-fyA" secondAttribute="bottom" constant="5" id="odm-CP-1NX"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="NBF-7A-b5F" id="Qbq-BA-Rr9"/>
+                                    <outlet property="delegate" destination="NBF-7A-b5F" id="ZFv-LH-VJl"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dZv-FE-PiF" firstAttribute="trailing" secondItem="DAA-4x-9mu" secondAttribute="trailing" id="Rfu-Kp-bum"/>
+                            <constraint firstItem="DAA-4x-9mu" firstAttribute="bottom" secondItem="dZv-FE-PiF" secondAttribute="bottom" id="U29-Dl-ZnF"/>
+                            <constraint firstItem="tnx-4W-3HL" firstAttribute="top" secondItem="DAA-4x-9mu" secondAttribute="top" id="bLy-vd-iJD"/>
+                            <constraint firstItem="dZv-FE-PiF" firstAttribute="leading" secondItem="DAA-4x-9mu" secondAttribute="leading" id="kLT-St-vUR"/>
+                            <constraint firstAttribute="trailing" secondItem="tnx-4W-3HL" secondAttribute="trailing" id="lZu-Oc-u3v"/>
+                            <constraint firstItem="dZv-FE-PiF" firstAttribute="top" secondItem="tnx-4W-3HL" secondAttribute="bottom" id="ox3-8Y-Ywg"/>
+                            <constraint firstItem="tnx-4W-3HL" firstAttribute="leading" secondItem="4NC-Uu-8N0" secondAttribute="leading" id="xnY-vm-gXz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DAA-4x-9mu"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="JAa-x2-sN2" id="TDF-dy-BQC"/>
+                        <outlet property="tableView" destination="dZv-FE-PiF" id="vwf-et-2mE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4tU-iD-XzF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="JAa-x2-sN2">
+                    <connections>
+                        <outlet property="delegate" destination="NBF-7A-b5F" id="oeN-3C-pgk"/>
+                        <outlet property="searchContentsController" destination="NBF-7A-b5F" id="pbw-ja-0UH"/>
+                        <outlet property="searchResultsDataSource" destination="NBF-7A-b5F" id="Elr-dx-cOj"/>
+                        <outlet property="searchResultsDelegate" destination="NBF-7A-b5F" id="Pdk-ce-wCp"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="-79.200000000000003" y="-463.71814092953525"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="grayBackground">
+            <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

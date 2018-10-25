@@ -9,15 +9,23 @@
 import UIKit
 
 protocol ListMoviesPresentationLogic {
-  
+    func presentMovies(movies: [Movie])
+    func presentError(type: ListMovies.ErrorType)
 }
 
 class ListMoviesPresenter: ListMoviesPresentationLogic {
     
     weak var viewController: ListMoviesDisplayLogic?
     
-      // MARK: Do something
     
+    // MARK: Response from Interactor
+    func presentMovies(movies: [Movie]) {
+        let viewModel = ListMovies.Fetch.ViewModel.Success(movies: movies)
+        viewController?.displayMovies(viewModel: viewModel)
+    }
     
+    func presentError(type: ListMovies.ErrorType) {
+        
+    }
     
 }

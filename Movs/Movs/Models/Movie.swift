@@ -16,17 +16,20 @@ struct Movie {
     let overview: String
     let releaseDate: String
     let posterPath: String
+    let voteAverage: Double
     
+    var isFavorite: Bool
 }
 
 extension Movie: Decodable {
     enum MovieCodingKeys: String, CodingKey {
-        case id = "id"
+        case id
         case genresId = "genre_ids"
-        case title = "title"
-        case overview = "overview"
+        case title
+        case overview
         case releaseDate = "release_date"
         case posterPath = "poster_path"
+        case voteAverage = "vote_average"
     }
     
     init(from decoder: Decoder) throws {
@@ -39,6 +42,8 @@ extension Movie: Decodable {
         // TODO: format the release date
         releaseDate = try container.decode(String.self, forKey: .releaseDate)
         posterPath = try container.decode(String.self, forKey: .posterPath)
+        voteAverage = try container.decode(Double.self, forKey: .voteAverage)
         
+        isFavorite = false
     }
 }

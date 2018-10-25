@@ -32,7 +32,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ynA-wQ-C9Q">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0VX-ws-0Mf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="q93-S4-gia" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dKb-2m-Jvx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -46,6 +45,7 @@
                         <segue destination="gMc-og-Sza" kind="relationship" relationship="viewControllers" id="UN4-SG-eag"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0VX-ws-0Mf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-788" y="-55"/>
         </scene>
@@ -55,7 +55,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="69M-Il-jhr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Filmes" image="list_icon" selectedImage="list_icon" id="AR6-dw-Ban" userLabel="ListMovies"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F3e-6c-44x">
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F3e-6c-44x">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -74,7 +74,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gMc-og-Sza" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favoritos" image="favorite_empty_icon" id="iRe-1D-Tih"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HeM-mQ-D91">
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HeM-mQ-D91">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
