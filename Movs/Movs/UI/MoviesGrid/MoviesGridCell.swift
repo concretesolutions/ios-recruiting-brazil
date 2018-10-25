@@ -24,6 +24,7 @@ final class MoviesGridCell: UICollectionViewCell, ViewCode {
     private let movieTitleLabel:UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Colors.mainYellow.color
         label.textAlignment = .center
         return label
     }()
@@ -56,24 +57,25 @@ final class MoviesGridCell: UICollectionViewCell, ViewCode {
     }
     
     func design() {
+        self.backgroundColor = Colors.darkBlue.color
     }
     
     func autolayout() {
         // movie image
-        self.movieImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0.0).isActive = true
-        self.movieImageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0.0).isActive = true
-        self.movieImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0.0).isActive = true
-        self.movieImageView.bottomAnchor.constraint(equalTo: self.movieTitleLabel.topAnchor, constant: 0.0).isActive = true
+        self.movieImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.movieImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.movieImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.movieImageView.bottomAnchor.constraint(equalTo: self.movieTitleLabel.topAnchor).isActive = true
         // movie title
-        self.movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0.0).isActive = true
-        self.movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0.0).isActive = true
+        self.movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         self.movieTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25).isActive = true
-        self.movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0.0).isActive = true
+        self.movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         // movie is favorite indicator
-        self.movieIsFavoriteIndicatorButton.heightAnchor.constraint(equalTo: self.movieTitleLabel.heightAnchor, multiplier: 1.0).isActive = true
-        self.movieIsFavoriteIndicatorButton.widthAnchor.constraint(equalTo: self.movieIsFavoriteIndicatorButton.heightAnchor, multiplier: 1.0).isActive = true
-        self.movieIsFavoriteIndicatorButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0.0).isActive = true
-        self.movieIsFavoriteIndicatorButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0.0).isActive = true
+        self.movieIsFavoriteIndicatorButton.heightAnchor.constraint(equalTo: self.movieTitleLabel.heightAnchor).isActive = true
+        self.movieIsFavoriteIndicatorButton.widthAnchor.constraint(equalTo: self.movieIsFavoriteIndicatorButton.heightAnchor).isActive = true
+        self.movieIsFavoriteIndicatorButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.movieIsFavoriteIndicatorButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     func setup(with data: Data) {
