@@ -10,9 +10,10 @@ import UIKit
 
 class UIImageViewMovieCard: UIImageView {
     
-    private let cornerRadius: CGFloat = 6.0
+    private let cornerRadius: CGFloat = 2.0
     
     override func layoutSubviews() {
+        self.clipsToBounds = true
         self.layer.cornerRadius = cornerRadius
         
     }

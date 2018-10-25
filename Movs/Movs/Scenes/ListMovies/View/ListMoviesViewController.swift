@@ -25,6 +25,7 @@ class ListMoviesViewController: UIViewController {
 
     // Data
     var movies = [Movie]()
+    let moviesLimitToPresent = 50
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -62,7 +63,6 @@ extension ListMoviesViewController: ListMoviesDisplayLogic {
     func displayMovies(viewModel: ListMovies.Fetch.ViewModel.Success) {
         movies = viewModel.movies
         tableView.reloadData()
-        print("🦊 receiving movies in VC")
     }
     
     func displayError(viewModel: ListMovies.Fetch.ViewModel.Error) {

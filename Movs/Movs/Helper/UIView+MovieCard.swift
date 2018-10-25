@@ -11,8 +11,7 @@ import UIKit
 class UIViewMovieCard: UIView {
     
     private var shadowLayer: CAShapeLayer!
-    private let cornerRadius: CGFloat = 6.0
-    
+    private let cornerRadius: CGFloat = 4.0
     
     override func layoutSubviews() {
         super.layoutSubviews()

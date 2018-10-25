@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PopularMovieTableViewCell: UITableViewCell {
 
     var movieIdentifier: Int?
-    var posterPath: String?
+    // w185 is a nice size for mobile app
+    var basePath = "http://image.tmdb.org/t/p/w185"
     
     private let favoriteEmpty = UIImage(named: "favorite_empty_icon")
     private let favoriteFull = UIImage(named: "favorite_full_icon")
@@ -23,17 +25,13 @@ class PopularMovieTableViewCell: UITableViewCell {
     
     func configureCellWith(data: Movie) {
         self.movieIdentifier = data.id
-        self.posterPath = data.posterPath
         self.movieTitle.text = data.title
         self.movieDescription.text = data.overview
         self.favoriteButton.imageView?.image = data.isFavorite == true ? favoriteFull : favoriteEmpty
+        let posterPath = basePath + data.posterPath
+
+        let url = URL(string: posterPath)
+        movieImageView.kf.setImage(with: url)
     }
-    
-    // MARK: - Actions
-    
-    @IBAction func favoriteAction(_ sender: Any) {
-        
-    }
-    
     
 }

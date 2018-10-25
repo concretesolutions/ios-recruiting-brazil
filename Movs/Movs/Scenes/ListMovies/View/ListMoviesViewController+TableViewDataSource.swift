@@ -11,13 +11,14 @@ import UIKit
 extension ListMoviesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return movies.count
-        return 5
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseIdentifier) as! PopularMovieTableViewCell
-        cell.configureCellWith(data: movies[indexPath.row])
+        if !movies.isEmpty {
+            cell.configureCellWith(data: movies[indexPath.row])
+        }
         return cell
     }
     
