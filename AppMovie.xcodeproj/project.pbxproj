@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		594F1AA52181F76F00BFD46B /* DelegateSetFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594F1AA42181F76F00BFD46B /* DelegateSetFavorite.swift */; };
+		594F1AA72182183900BFD46B /* ManagerMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594F1AA62182183900BFD46B /* ManagerMovies.swift */; };
 		5958C5A8217D637D00636980 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958C5A7217D637D00636980 /* AppDelegate.swift */; };
 		5958C5B0217D637D00636980 /* AppMovie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5958C5AE217D637D00636980 /* AppMovie.xcdatamodeld */; };
 		5958C5B2217D637F00636980 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5958C5B1217D637F00636980 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		594F1AA42181F76F00BFD46B /* DelegateSetFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateSetFavorite.swift; sourceTree = "<group>"; };
+		594F1AA62182183900BFD46B /* ManagerMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerMovies.swift; sourceTree = "<group>"; };
 		5958C5A4217D637D00636980 /* AppMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5958C5A7217D637D00636980 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5958C5AF217D637D00636980 /* AppMovie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppMovie.xcdatamodel; sourceTree = "<group>"; };
@@ -55,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		594F1AA32181F74800BFD46B /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				594F1AA42181F76F00BFD46B /* DelegateSetFavorite.swift */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
 		5958C59B217D637D00636980 = {
 			isa = PBXGroup;
 			children = (
@@ -74,10 +86,11 @@
 		5958C5A6217D637D00636980 /* AppMovie */ = {
 			isa = PBXGroup;
 			children = (
+				594F1AA32181F74800BFD46B /* Delegates */,
 				599F3AEE21801930002F3035 /* Favorites */,
 				5958C5CA217D7D6E00636980 /* Initial */,
 				5958C5C0217D6A0200636980 /* Utilities */,
-				5958C5BE217D698E00636980 /* DAO */,
+				5958C5BE217D698E00636980 /* NetWork */,
 				5958C5A7217D637D00636980 /* AppDelegate.swift */,
 				5958C5B1217D637F00636980 /* Assets.xcassets */,
 				5958C5B3217D637F00636980 /* LaunchScreen.storyboard */,
@@ -87,12 +100,13 @@
 			path = AppMovie;
 			sourceTree = "<group>";
 		};
-		5958C5BE217D698E00636980 /* DAO */ = {
+		5958C5BE217D698E00636980 /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
 				5958C5C3217D6A8000636980 /* MovieDAO.swift */,
+				594F1AA62182183900BFD46B /* ManagerMovies.swift */,
 			);
-			name = DAO;
+			name = NetWork;
 			sourceTree = "<group>";
 		};
 		5958C5C0217D6A0200636980 /* Utilities */ = {
@@ -241,7 +255,9 @@
 				5958C5B0217D637D00636980 /* AppMovie.xcdatamodeld in Sources */,
 				5958C5C4217D6A8000636980 /* MovieDAO.swift in Sources */,
 				599F3AEB218018F5002F3035 /* MoviesTableViewCell.swift in Sources */,
+				594F1AA52181F76F00BFD46B /* DelegateSetFavorite.swift in Sources */,
 				599F3AED21801903002F3035 /* FavoriteTableViewDataSource.swift in Sources */,
+				594F1AA72182183900BFD46B /* ManagerMovies.swift in Sources */,
 				599F3AF121801972002F3035 /* MoviesCollectionViewDataSource.swift in Sources */,
 				5958C5C9217D75D700636980 /* KeyAccesPropertiesMovieNowPlaying.swift in Sources */,
 				599F3AFB21801C83002F3035 /* FavoritesViewController.swift in Sources */,

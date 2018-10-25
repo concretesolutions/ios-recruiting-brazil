@@ -11,13 +11,15 @@ import UIKit
 class MoviesController: UIViewController{
 
     var movies = [NSDictionary]()
+    var moviesFavorites = [NSDictionary]()
     
     @IBOutlet weak var collectionView: UICollectionView!
-    let dataSourceCv = MoviesCollectionViewDataSource()
+    let dataSource = MoviesCollectionViewDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         donwloadMovies()
+        
     }
     
     private func donwloadMovies() {
@@ -32,8 +34,33 @@ class MoviesController: UIViewController{
     }
     
     private func setuCollectionView() {
-        collectionView.dataSource = dataSourceCv
-        dataSourceCv.datas = movies
+        collectionView.delegate = dataSource
+        collectionView.dataSource = dataSource
+        dataSource.datas = movies
+        dataSource.controller = self
     }
 }
-
+extension MoviesController: FavoriteMovieDelegate {
+    
+    func setFavorite(movie: NSDictionary) {
+        self.moviesFavorites.append(movie)
+    }
+    
+    func removeFavorite(movie: NSDictionary) {
+        let index = getIndexFavorite(movie: movie)
+        if  index != -1{
+            self.moviesFavorites.remove(at: index)
+        }
+    }
+    
+    private func getIndexFavorite(movie: NSDictionary) -> Int {
+        for (index, _movie) in moviesFavorites.enumerated() {
+            let _id = _movie[KeyAccesPropertiesMovieNowPlaying.id.value] as? Int
+            let id = movie[KeyAccesPropertiesMovieNowPlaying.id.value] as? Int
+            if  _id == id {
+                return index
+            }
+        }
+        return -1
+    }
+}

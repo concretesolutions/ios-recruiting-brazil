@@ -27,11 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-1656" y="-117"/>
         </scene>
-        <!--Movies-->
+        <!--movies-->
         <scene sceneID="Mty-5D-BuL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OYw-9L-VKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="zaB-Zl-UDj" customClass="MoviesController" customModule="AppMovie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="movies" title="movies" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zaB-Zl-UDj" customClass="MoviesController" customModule="AppMovie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3AZ-L0-iHh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,7 +69,7 @@
                                                     <rect key="contentStretch" x="0.10000000000000001" y="0.0" width="1" height="1"/>
                                                     <state key="normal" title="Button" image="favorite_empty_icon"/>
                                                     <connections>
-                                                        <action selector="favorite:" destination="o3C-2d-oml" eventType="touchUpInside" id="lyo-hJ-RUs"/>
+                                                        <action selector="favorite:" destination="o3C-2d-oml" eventType="touchUpInside" id="ltx-Dl-WuQ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -89,6 +88,7 @@
                                             <constraint firstAttribute="trailing" secondItem="TVd-tL-XIU" secondAttribute="trailing" id="seZ-HQ-PTK"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="btnFavorite" destination="oPg-42-Fqv" id="AtZ-Gc-7sv"/>
                                             <outlet property="posterPath" destination="TVd-tL-XIU" id="ocN-fh-ZJ5"/>
                                             <outlet property="titleMovie" destination="Blp-LF-g3g" id="7Dd-KF-Pod"/>
                                         </connections>
@@ -110,16 +110,17 @@
                         <outlet property="collectionView" destination="eel-Pj-DFu" id="bdn-xU-oIk"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OYw-9L-VKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-865" y="-414"/>
+            <point key="canvasLocation" x="-866.39999999999998" y="-414.24287856071965"/>
         </scene>
         <!--FavoriteMovies-->
         <scene sceneID="K5H-8a-zas">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fxE-FO-53P" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="FavoriteMovies" id="dWs-Kx-mNp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="xbG-hQ-R7E"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fxE-FO-53P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1066" y="117"/>
         </scene>
