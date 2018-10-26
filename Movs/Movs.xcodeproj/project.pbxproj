@@ -24,6 +24,7 @@
 		08E4A6342181F03500386DFA /* MVPBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6332181F03500386DFA /* MVPBaseTests.swift */; };
 		08E4A6362181FAC900386DFA /* ViewCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6352181FAC900386DFA /* ViewCodeTests.swift */; };
 		08E4A6382182456E00386DFA /* MoviesGridFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A6372182456E00386DFA /* MoviesGridFlowLayout.swift */; };
+		08E4A63B2182554500386DFA /* FavoriteMoviesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4A63A2182554500386DFA /* FavoriteMoviesCell.swift */; };
 		08FB15CE217C109B0047E57B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15CD217C109B0047E57B /* Default-568h@2x.png */; };
 		08FB15D0217C10C00047E57B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15CF217C10C00047E57B /* LaunchScreen.xib */; };
 		08FB15D2217C11120047E57B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08FB15D1217C11120047E57B /* Colors.xcassets */; };
@@ -77,6 +78,7 @@
 		08E4A6332181F03500386DFA /* MVPBaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVPBaseTests.swift; sourceTree = "<group>"; };
 		08E4A6352181FAC900386DFA /* ViewCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeTests.swift; sourceTree = "<group>"; };
 		08E4A6372182456E00386DFA /* MoviesGridFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridFlowLayout.swift; sourceTree = "<group>"; };
+		08E4A63A2182554500386DFA /* FavoriteMoviesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesCell.swift; sourceTree = "<group>"; };
 		08FB15CD217C109B0047E57B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		08FB15CF217C10C00047E57B /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		08FB15D1217C11120047E57B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -201,6 +203,14 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		08E4A6392182551200386DFA /* FavoriteMovies */ = {
+			isa = PBXGroup;
+			children = (
+				08E4A63A2182554500386DFA /* FavoriteMoviesCell.swift */,
+			);
+			path = FavoriteMovies;
+			sourceTree = "<group>";
+		};
 		08FB15D3217C15DC0047E57B /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,10 +290,11 @@
 			isa = PBXGroup;
 			children = (
 				08FB1605217E5EAF0047E57B /* Assets */,
-				084645BA217FA03E00B3A05F /* MoviesGrid */,
 				08E4A617218132A400386DFA /* TabBar */,
 				084645BF217FA16900B3A05F /* NavigationBar */,
 				084645C5217FB89200B3A05F /* SearchBar */,
+				084645BA217FA03E00B3A05F /* MoviesGrid */,
+				08E4A6392182551200386DFA /* FavoriteMovies */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -403,6 +414,7 @@
 			files = (
 				084645B7217F7FF400B3A05F /* MoviesGrid.swift in Sources */,
 				08FB15F2217C2FE30047E57B /* FavoriteMoviesViewController.swift in Sources */,
+				08E4A63B2182554500386DFA /* FavoriteMoviesCell.swift in Sources */,
 				08FB15F4217C2FEE0047E57B /* FavoriteMoviesPresenter.swift in Sources */,
 				084645BE217FA07900B3A05F /* MoviesGridCell.swift in Sources */,
 				084645BC217FA05400B3A05F /* MoviesGridCollectionView.swift in Sources */,
