@@ -79,8 +79,9 @@ Até o final do projeto deve ser adotado:
 
 ![Image of Yaktocat](assets/flow/app-example-03.png)
 
-## **Processo de submissão**
+## **Em processo de submissão**
 
 ---
 
+Como avisado anteriormente, o commit com todo o projeto deve ocorrer até o final desse Sábado, dia 27/10.
 Agradeço pela atenção na leitura. Tenha um ótimo dia.
