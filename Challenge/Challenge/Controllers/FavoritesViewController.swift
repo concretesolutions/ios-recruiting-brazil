@@ -14,24 +14,16 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [Movie] = []
-    var filteredMovies: [Movie] = [] {
+    var searchedMovies: [Movie] = [] {
         didSet {
             self.updateView()
         }
     }
+    var filteredMovies: [Movie] = []
     var page = 1
     var usingCoredata: Bool?
     var searchActive = false
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:
-            #selector(self.handleRefresh(_:)),
-                                 for: UIControl.Event.valueChanged)
-        refreshControl.tintColor = UIColor.red
-        self.tableView.addSubview(self.refreshControl)
-        
-        return refreshControl
-    }()
+    static var filterIsActive = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -51,6 +43,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             self.movies = Movie.fetchSortedByDate()
             self.tableView.reloadData()
         }
+        
         self.handlePagination()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -60,17 +53,38 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
+        if Movie.favoritesChanged {
+            self.page = 1
+            handlePagination()
+            self.tableView.reloadData()
+        }
+        if FavoritesViewController.filterIsActive {
+            Filter.filter(movies: self.movies, onSuccess: { (moviesResult) in
+                self.filteredMovies = moviesResult
+                self.tableView.reloadData()
+            }) { (error) in
+                print(error)
+            }
+        }
     }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
+    @IBAction func clearFilter(_ sender: Any) {
+        if FavoritesViewController.filterIsActive {
+            FavoritesViewController.filterIsActive = false
+            Filter.filterState.genre = ""
+            Filter.filterState.year = ""
+            self.tableView.reloadData()
+        }
+    }
+    
     func updateView() {
-        let hasSearchResult = self.filteredMovies.count > 0
-        self.tableView.isHidden = !hasSearchResult
-        if !hasSearchResult {
+        let hasSearchResult = self.searchedMovies.count > 0
+        self.tableView.isHidden = !hasSearchResult && !(self.searchBar.text?.isEmpty)!
+        if !hasSearchResult && !(self.searchBar.text?.isEmpty)!{
             print("No result in the search")
         }
     }
@@ -78,11 +92,12 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     @objc func handlePagination() {
         print("Handling pagination")
         Movie.getFavoriteMovies(pageToRequest: self.page, onSuccess: { (moviesResult) in
-            self.movies = []
-            self.movies.append(contentsOf: moviesResult)
             if self.page == 1 {
+                self.movies = []
+                self.movies.append(contentsOf: moviesResult)
                 Movie.saveMoviesToCoreData(movies: moviesResult)
             } else {
+                self.movies.append(contentsOf: moviesResult)
                 Movie.appendMoviesToCoreData(movies: moviesResult)
             }
             self.page += 1
@@ -93,39 +108,47 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        print("Handling refresh")
-        self.page = 1
-        handlePagination()
-        self.tableView.reloadData()
-        refreshControl.endRefreshing()
-    }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let currentOffset = scrollView.contentOffset.y
         let maxOffset = scrollView.contentSize.height - scrollView.frame.height
         if maxOffset - currentOffset <= 40 {
-            self.handlePagination()
+            if !FavoritesViewController.filterIsActive {
+                self.handlePagination()
+            }
         }
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.searchActive {
-            return filteredMovies.count
+            return searchedMovies.count
+        } else if FavoritesViewController.filterIsActive && !searchActive {
+            return self.filteredMovies.count
+        } else {
+            return movies.count
         }
-        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteTableViewCell
         if searchActive {
+            cell.favoriteTitle.text = self.searchedMovies[indexPath.row].name
+            cell.favoriteYear.text = self.searchedMovies[indexPath.row].date?.dateYyyyMmDdToDdMmYyyyWithDashes()
+            cell.favoriteOverview.text = self.searchedMovies[indexPath.row].overview
+            cell.favoriteImageView.kf.indicatorType = .activity
+            if usingCoredata ?? false {
+                cell.favoriteImageView.image = searchedMovies[indexPath.row].image
+            } else {
+                cell.favoriteImageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.searchedMovies[indexPath.row].imagePath!))"))
+            }
+        } else if FavoritesViewController.filterIsActive && !searchActive {
             cell.favoriteTitle.text = self.filteredMovies[indexPath.row].name
             cell.favoriteYear.text = self.filteredMovies[indexPath.row].date?.dateYyyyMmDdToDdMmYyyyWithDashes()
             cell.favoriteOverview.text = self.filteredMovies[indexPath.row].overview
             cell.favoriteImageView.kf.indicatorType = .activity
             if usingCoredata ?? false {
-                cell.favoriteImageView.image = movies[indexPath.row].image
+                cell.favoriteImageView.image = filteredMovies[indexPath.row].image
             } else {
                 cell.favoriteImageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w1280/\(String(describing: self.filteredMovies[indexPath.row].imagePath!))"))
             }
@@ -169,12 +192,21 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        self.filteredMovies = self.movies.filter({ (text) -> Bool in
-            let tmp: NSString = (text.name! as NSString?)!
-            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            return range.location != NSNotFound
-        })
-        if searchText == "" {
+        if FavoritesViewController.filterIsActive {
+            self.searchedMovies = self.filteredMovies.filter({ (text) -> Bool in
+                let tmp: NSString = (text.name! as NSString?)!
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                return range.location != NSNotFound
+            })
+        } else {
+            self.searchedMovies = self.movies.filter({ (text) -> Bool in
+                let tmp: NSString = (text.name! as NSString?)!
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                return range.location != NSNotFound
+            })
+        }
+        
+        if(self.searchedMovies.isEmpty) {
             self.searchActive = false
         } else {
             self.searchActive = true
@@ -192,6 +224,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let row = indexPath.row
                 if self.searchActive {
+                    vc.movie = self.searchedMovies[row]
+                } else if FavoritesViewController.filterIsActive && !searchActive {
                     vc.movie = self.filteredMovies[row]
                 } else {
                     vc.movie = self.movies[row]

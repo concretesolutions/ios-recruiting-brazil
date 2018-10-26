@@ -15,6 +15,7 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var genre: UILabel!
     @IBOutlet weak var overview: UITextView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var image: UIImage?
     var movie: Movie?
@@ -39,21 +40,45 @@ class MovieDetailsViewController: UIViewController {
         if self.movie?.date != nil && self.movie?.date != ""{
             self.year.text = self.movie?.date?.dateYyyyMmDdToDdMmYyyyWithDashes()
         }
+        if self.movie?.isFavourite == true {
+            self.favoriteButton.setImage(UIImage(named: "Mask Group 4"), for: [])
+        } else {
+            self.favoriteButton.setImage(UIImage(named: "starBlack"), for: [])
+        }
         // Do any additional setup after loading the view.
     }
     
     @IBAction func favorite(_ sender: Any) {
         if let control = self.movie?.isFavourite {
+            let indicator:UIActivityIndicatorView = UIActivityIndicatorView  (style: UIActivityIndicatorView.Style.gray)
+            indicator.color = UIColor .black
+            indicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)
+            indicator.center = (self.favoriteButton.imageView?.center)!
+            self.favoriteButton.imageView?.addSubview(indicator)
+            indicator.bringSubviewToFront(self.favoriteButton.imageView!)
+            indicator.startAnimating()
             if control {
                 Movie.setFavorite(movie: self.movie!, setAsFavorite: false, onSuccess: { (_) in
                     self.movie?.isFavourite = false
+                    Movie.deleteMovieFromCoreData(movie: self.movie!)
+                    indicator.stopAnimating()
+                    indicator.removeFromSuperview()
+                    self.favoriteButton.setImage(UIImage(named: "starBlack"), for: [])
                 }) { (error) in
+                    indicator.stopAnimating()
+                    indicator.removeFromSuperview()
                     print(error)
                 }
             } else {
                 Movie.setFavorite(movie: self.movie!, setAsFavorite: true, onSuccess: { (_) in
                     self.movie?.isFavourite = true
+                    Movie.appendMoviesToCoreData(movies: [self.movie!])
+                    indicator.stopAnimating()
+                    indicator.removeFromSuperview()
+                    self.favoriteButton.setImage(UIImage(named: "Mask Group 4"), for: [])
                 }) { (error) in
+                    indicator.stopAnimating()
+                    indicator.removeFromSuperview()
                     print(error)
                 }
             }

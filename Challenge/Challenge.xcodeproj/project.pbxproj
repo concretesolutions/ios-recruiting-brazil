@@ -21,6 +21,9 @@
 		1D08505B217EE89B0017E78D /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D08505A217EE89B0017E78D /* FavoriteTableViewCell.swift */; };
 		1D08505D217F41620017E78D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D08505C217F41620017E78D /* Extensions.swift */; };
 		1D6C26E42180F5A700E1222B /* Challenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D6C26E22180F5A700E1222B /* Challenge.xcdatamodeld */; };
+		1D6C26E92182B76500E1222B /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D6C26E82182B76500E1222B /* Filter.storyboard */; };
+		1D6C26EB2182B83900E1222B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6C26EA2182B83900E1222B /* FilterViewController.swift */; };
+		1D6C26ED2182BB4A00E1222B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6C26EC2182BB4A00E1222B /* Filter.swift */; };
 		1DE41859217B4654000D2446 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE41858217B4654000D2446 /* AppDelegate.swift */; };
 		1DE4185B217B4654000D2446 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4185A217B4654000D2446 /* LoginViewController.swift */; };
 		1DE4185E217B4654000D2446 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DE4185C217B4654000D2446 /* Main.storyboard */; };
@@ -71,6 +74,9 @@
 		1D08505A217EE89B0017E78D /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		1D08505C217F41620017E78D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1D6C26E32180F5A700E1222B /* Challenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Challenge.xcdatamodel; sourceTree = "<group>"; };
+		1D6C26E82182B76500E1222B /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
+		1D6C26EA2182B83900E1222B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		1D6C26EC2182BB4A00E1222B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		1DE41855217B4654000D2446 /* Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DE41858217B4654000D2446 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DE4185A217B4654000D2446 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +211,7 @@
 				1DE4188E217B4C1D000D2446 /* User.swift */,
 				1DE41890217B6651000D2446 /* Tmdb.swift */,
 				1D085043217BBADC0017E78D /* Genre.swift */,
+				1D6C26EC2182BB4A00E1222B /* Filter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 				1D08504C217EA7FE0017E78D /* Movies.storyboard */,
 				1D085050217EA8E20017E78D /* Favorites.storyboard */,
 				1D085054217EA97B0017E78D /* MovieDetails.storyboard */,
+				1D6C26E82182B76500E1222B /* Filter.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +239,7 @@
 				1D085056217EA9A70017E78D /* MovieDetailsViewController.swift */,
 				1D085058217EADF70017E78D /* MoviesCollectionViewCell.swift */,
 				1D08505A217EE89B0017E78D /* FavoriteTableViewCell.swift */,
+				1D6C26EA2182B83900E1222B /* FilterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -357,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DE41866217B4657000D2446 /* LaunchScreen.storyboard in Resources */,
+				1D6C26E92182B76500E1222B /* Filter.storyboard in Resources */,
 				1DE41863217B4657000D2446 /* Assets.xcassets in Resources */,
 				1D085055217EA97B0017E78D /* MovieDetails.storyboard in Resources */,
 				1DE4185E217B4654000D2446 /* Main.storyboard in Resources */,
@@ -444,11 +454,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Challenge/Pods-Challenge-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,9 +478,11 @@
 				1D08504F217EA8650017E78D /* MoviesViewController.swift in Sources */,
 				1D6C26E42180F5A700E1222B /* Challenge.xcdatamodeld in Sources */,
 				1D085057217EA9A70017E78D /* MovieDetailsViewController.swift in Sources */,
+				1D6C26EB2182B83900E1222B /* FilterViewController.swift in Sources */,
 				1DE4185B217B4654000D2446 /* LoginViewController.swift in Sources */,
 				1D08505B217EE89B0017E78D /* FavoriteTableViewCell.swift in Sources */,
 				1DE4188D217B4ACC000D2446 /* Movie.swift in Sources */,
+				1D6C26ED2182BB4A00E1222B /* Filter.swift in Sources */,
 				1DE4188F217B4C1D000D2446 /* User.swift in Sources */,
 				1D08504B217EA2CA0017E78D /* SignUpViewController.swift in Sources */,
 				1D085049217CEDF60017E78D /* Observable.swift in Sources */,
@@ -657,10 +671,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = Challenge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.Challenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -676,10 +687,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = Challenge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.Challenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -696,11 +704,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -718,11 +722,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -739,11 +739,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -760,11 +756,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

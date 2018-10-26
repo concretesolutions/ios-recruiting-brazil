@@ -64,7 +64,7 @@
                                             <constraint firstAttribute="width" constant="30" id="5Aa-B2-yPO"/>
                                             <constraint firstAttribute="height" constant="30" id="mlw-12-Gij"/>
                                         </constraints>
-                                        <state key="normal" image="favorite_gray_icon"/>
+                                        <state key="normal" image="starBlack"/>
                                         <connections>
                                             <action selector="favorite:" destination="skz-8Y-lvz" eventType="touchUpInside" id="olD-iC-kEQ"/>
                                         </connections>
@@ -110,6 +110,7 @@
                     </view>
                     <size key="freeformSize" width="320" height="700"/>
                     <connections>
+                        <outlet property="favoriteButton" destination="ukL-p2-Whr" id="TI5-RN-vTa"/>
                         <outlet property="genre" destination="6mB-Vt-Tcx" id="mmK-EW-Xvi"/>
                         <outlet property="imageView" destination="uUQ-Nl-d95" id="ySw-lY-1Tl"/>
                         <outlet property="name" destination="Rbc-kx-dx9" id="MZL-F0-X56"/>
@@ -123,6 +124,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favorite_gray_icon" width="17" height="16"/>
+        <image name="starBlack" width="1088" height="1024"/>
     </resources>
 </document>

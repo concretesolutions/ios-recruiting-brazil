@@ -25,6 +25,22 @@ extension String {
         print(day)
         return "\(day)/\(month)/\(year)"
     }
+    
+    func dateToYyyyWithDashes() -> String {
+        let indexStartOfText = self.index(self.startIndex, offsetBy: 0)
+        let indexEndOfText = self.index(self.endIndex, offsetBy: -6)
+        let year = "\(self[indexStartOfText..<indexEndOfText])"
+        return "\(year)"
+    }
+    
+    func containsSubstring(find: String) -> Bool{
+        return self.range(of: find) != nil
+    }
+    
+    func containsSubstringIgnoringCase(find: String) -> Bool{
+        return self.range(of: find, options: .caseInsensitive) != nil
+    }
+    
 }
 
 extension UIView {

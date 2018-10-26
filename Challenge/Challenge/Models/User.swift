@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import CoreData
 
 class User {
     
@@ -20,7 +21,7 @@ class User {
     
     func login(username: String, password: String, onSuccess: @escaping (_ sessionId: String) -> Void, onFailure: @escaping (_ error: String) -> Void) {
         self.username = username
-        if User.user.token != nil {
+        if User.user.token == nil {
             self.requestToken(onSuccess: { (token) in
                 self.token = token
                 self.validateToken(token: token, password: password, onSuccess: { (validatedToken) in
@@ -198,6 +199,7 @@ class User {
             }
             if let success = value["success"] as? Int {
                 if success == 1 {
+                    User.deleteUser()
                     onSuccess(true)
                 } else {
                     onFailure("Failure in logout")
@@ -209,6 +211,118 @@ class User {
                     onFailure("Data received is compromised")
                 }
             }
+        }
+    }
+    
+    class func loadCoreData() -> (NSEntityDescription, NSManagedObjectContext)? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return nil
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        if let userEntity = NSEntityDescription.entity(forEntityName: "UserEntity", in: managedContext) {
+            return (userEntity, managedContext)
+        } else {
+            return nil
+        }
+    }
+    
+    class func fetch() -> [NSManagedObject] {
+        guard let coreDataData = User.loadCoreData() else {
+            return []
+        }
+        //let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserEntity")
+        
+        let descriptor = NSSortDescriptor(key: "userId", ascending: true)
+        
+        fetchRequest.sortDescriptors = [descriptor]
+        
+        do {
+            let objects = try managedContext.fetch(fetchRequest)
+            print("Fetch Successfull.")
+            return objects
+        } catch let error as NSError {
+            print("Could not Fetch. \(error) \(error.userInfo)")
+            return []
+        }
+    }
+    
+    class func fetchUser(completion: @escaping (_ error: String?) -> Void) {
+        guard let coreDataData = User.loadCoreData() else {
+            completion("Error trying to load context")
+            return
+        }
+        //let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserEntity")
+        
+        let descriptor = NSSortDescriptor(key: "userId", ascending: true)
+        
+        fetchRequest.sortDescriptors = [descriptor]
+        
+        do {
+            let objects = try managedContext.fetch(fetchRequest)
+            let object = objects.first
+            guard let id = object?.value(forKey: "userId") as? Int, let session = object?.value(forKey: "sessionId") as? String else {
+                completion("Error trying to access User Entity")
+                return
+            }
+            print(id)
+            print(session)
+            User.user.userId = id
+            User.user.sessionId = session
+            completion(nil)
+            print("Fetch Successfull.")
+        } catch let error as NSError {
+            print("Could not Fetch. \(error) \(error.userInfo)")
+            completion("Could not Fetch. \(error) \(error.userInfo)")
+            return
+        }
+    }
+    
+    class func saveUserToCoreData() {
+        
+        guard let coreDataData = User.loadCoreData() else {
+            return
+        }
+        //let entity = coreDataData.0
+        let entity = coreDataData.0
+        let managedContext = coreDataData.1
+        let userToDelete = fetch()
+        self.deleteAllFromCoreData(userToDelete, managedContext)
+        
+        let userCoredata = NSManagedObject(entity: entity, insertInto: managedContext)
+        userCoredata.setValue(User.user.userId!, forKey: "userId")
+        userCoredata.setValue(User.user.sessionId!, forKey: "sessionId")
+        self.save(context: managedContext)
+        managedContext.refreshAllObjects()
+    }
+    
+    class func deleteUser() {
+        guard let coreDataData = User.loadCoreData() else {
+            return
+        }
+        let managedContext = coreDataData.1
+        let userToDelete = fetch()
+        self.deleteAllFromCoreData(userToDelete, managedContext)
+        User.user.userId = 0
+        User.user.sessionId = ""
+    }
+    
+    class func deleteAllFromCoreData(_ objetcs: [NSManagedObject], _ context: NSManagedObjectContext){
+        for object in objetcs{
+            context.delete(object)
+        }
+        self.save(context: context)
+    }
+    
+    class func save(context: NSManagedObjectContext){
+        do {
+            try context.save()
+            print("Saving Sccessfull.")
+        } catch let error as NSError {
+            print("Could not save. \(error) \(error.userInfo)")
         }
     }
     

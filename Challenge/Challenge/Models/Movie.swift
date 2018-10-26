@@ -24,6 +24,9 @@ class Movie {
     var id: Int?
     var image: UIImage = UIImage()
     
+    
+    static var favoritesChanged = false
+    
     init() {
         
     }
@@ -126,6 +129,71 @@ class Movie {
         }
     }
     
+    init(favorite: [String: Any]) {
+        //self.image = movie["image"]
+        if let dbName = favorite["title"] as? String {
+            self.name = dbName
+        } else {
+            self.name = ""
+        }
+        //self.isFavourite = isFavourite
+        if let dbDate = favorite["release_date"] as? String {
+            self.date = dbDate
+        } else {
+            self.date = ""
+        }
+        self.genre.update(with: "")
+        if let genreIds = favorite["genre_ids"] as? [Int] {
+            if Genre.currentGenres.isEmpty {
+                Genre.getCurrentGenres(onSuccess: { (genreArray) in
+                    Genre.currentGenres = genreArray
+                    for element in genreIds {
+                        let localGenre = Genre.currentGenres.first {$0.id == element}
+                        if localGenre != nil {
+                            if !(self.genre.read().isEmpty) {
+                                self.genre.update(with: "\(String(describing: self.genre.read())), \(String(describing: (localGenre?.name!)!))")
+                            } else {
+                                self.genre.update(with: "\(String(describing: (localGenre?.name!)!))")
+                            }
+                        }
+                    }
+                }) { (error) in
+                    print("Error fetching genres: \(error)")
+                }
+            } else {
+                for element in genreIds {
+                    let localGenre = Genre.currentGenres.first {$0.id == element}
+                    if localGenre != nil {
+                        if !(self.genre.read().isEmpty) {
+                            self.genre.update(with: "\(String(describing: self.genre.read())), \(String(describing: (localGenre?.name!)!))")
+                        } else {
+                            self.genre.update(with: "\(String(describing: (localGenre?.name!)!))")
+                        }
+                    }
+                }
+            }
+        } else {
+            self.genre.update(with: "")
+        }
+        if let dbOverview = favorite["overview"] as? String {
+            self.overview = dbOverview
+        } else {
+            self.overview = ""
+        }
+        self.description = ""
+        if let dbId = favorite["id"] as? Int {
+            self.id = dbId
+        } else {
+            self.id = 0
+        }
+        if let dbImagePath = favorite["poster_path"] as? String {
+            self.imagePath = dbImagePath
+        } else {
+            self.imagePath = ""
+        }
+        self.isFavourite = true
+    }
+    
     class func loadCoreData() -> (NSEntityDescription, NSManagedObjectContext)? {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
             return nil
@@ -217,6 +285,27 @@ class Movie {
         }
     }
     
+    class func deleteMovieFromCoreData(movie: Movie) {
+        guard let coreDataData = Movie.loadCoreData() else {
+            return
+        }
+        let managedContext = coreDataData.1
+        let moviesInCoreData = fetch()
+        for object in moviesInCoreData{
+            if let id = object.value(forKey: "id") as? Int {
+                if id == movie.id! {
+                    managedContext.delete(object)
+                }
+            }
+        }
+        do {
+            try managedContext.save()
+            print("Saving Sccessfull.")
+        } catch let error as NSError {
+            print("Could not save. \(error) \(error.userInfo)")
+        }
+    }
+    
     class func saveMoviesToCoreData(movies: [Movie]) {
         
         guard let coreDataData = Movie.loadCoreData() else {
@@ -283,7 +372,7 @@ class Movie {
         for object in objetcs{
             context.delete(object)
         }
-        save(context: context)
+        self.save(context: context)
     }
     
     class func save(context: NSManagedObjectContext){
@@ -338,7 +427,7 @@ class Movie {
             }
             var resultMovies: [Movie] = []
             for element in results {
-                let movie = Movie(movie: element)
+                let movie = Movie(favorite: element)
                 //print(movie.genre)
                 resultMovies.append(movie)
             }
@@ -348,34 +437,41 @@ class Movie {
     
     class func setFavorite(movie: Movie, setAsFavorite: Bool, onSuccess: @escaping (_ success: Any) -> Void, onFailure: @escaping (_ error: String) -> Void) {
         let headers: HTTPHeaders = ["content-type": "application/json"]
-        var parameters: Parameters = [:]
+        var parameters: [String: Any] = [:]
         if setAsFavorite {
             parameters = [
                 "media_type": "movie",
                 "media_id": movie.id!,
-                "favorite": 1
+                "favorite": true
             ]
         } else {
             parameters = [
                 "media_type": "movie",
                 "media_id": movie.id!,
-                "favorite": 0
+                "favorite": false
             ]
         }
         
         print(parameters)
-        Alamofire.request("\(Tmdb.apiRequestBaseUrl)/account/\(String(describing: User.user.userId!))/favorite?api_key=\(Tmdb.apiKey)&session_id=\(String(describing: User.user.sessionId!))", method: .post, parameters: parameters, headers: headers).validate().responseJSON { (response) in
-            guard response.result.isSuccess else {
-                //onFailure("Request error validating token")
-                return
-            }
+        Alamofire.request("\(Tmdb.apiRequestBaseUrl)/account/\(String(describing: User.user.userId!))/favorite?api_key=\(Tmdb.apiKey)&session_id=\(String(describing: User.user.sessionId!))", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+//            guard response.result.isSuccess else {
+//                //onFailure("Request error validating token")
+//                return
+//            }
+            print(response)
             guard let value = response.result.value as? [String: Any] else {
                 //onFailure("Data received is compromised")
                 return
             }
-            if let success = value["success"] as? Int {
-                if success == 1 {
-                    onSuccess(success)
+            if let success = value["status_code"] as? Int {
+                if success == 13 || success == 12 || success == 1 {
+                    if let message = value["status_message"] as? String {
+                        Movie.favoritesChanged = true
+                        onSuccess(message)
+                    } else {
+                        Movie.favoritesChanged = true
+                        onSuccess(success)
+                    }
                 } else {
                     onFailure("Failed to set favorite")
                 }

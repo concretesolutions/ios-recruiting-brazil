@@ -22,17 +22,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     var page = 1
     var searchActive = false
-    
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:
-            #selector(self.handleRefresh(_:)),
-                                 for: UIControl.Event.valueChanged)
-        refreshControl.tintColor = UIColor.red
-        self.collectionView.addSubview(self.refreshControl)
-        
-        return refreshControl
-    }()
+    var searchText: String = ""
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -58,8 +48,8 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func updateView() {
         let hasSearchResult = self.filteredMovies.count > 0
-        self.collectionView.isHidden = !hasSearchResult
-        if !hasSearchResult {
+        self.collectionView.isHidden = !hasSearchResult && !(self.searchBar.text?.isEmpty)!
+        if !hasSearchResult && !(self.searchBar.text?.isEmpty)! {
             print("No result in the search")
         }
     }
@@ -71,20 +61,28 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     @objc func handlePagination() {
         print("Handling pagination")
         Movie.getPopularMovies(pageToRequest: self.page, onSuccess: { (moviesResult) in
-            self.movies.append(contentsOf: moviesResult)
-            self.page += 1
-            self.collectionView.reloadData()
+            Movie.getFavoriteMovies(pageToRequest: self.page, onSuccess: { (favoriteMoviesResult) in
+                var i = 0
+                for movie in moviesResult {
+                    movie.isFavourite = false
+                    moviesResult[i].isFavourite = false
+                    for favorite in favoriteMoviesResult {
+                        if movie.id == favorite.id {
+                            movie.isFavourite = true
+                            moviesResult[i].isFavourite = true
+                        }
+                    }
+                    i += 1
+                }
+                self.movies.append(contentsOf: moviesResult)
+                self.page += 1
+                self.collectionView.reloadData()
+            }, onFailure: { (error) in
+                print(error)
+            })
         }) { (error) in
             print(error)
         }
-    }
-    
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        print("Handling refresh")
-        self.page = 1
-        handlePagination()
-        self.collectionView.reloadData()
-        refreshControl.endRefreshing()
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -165,6 +163,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         self.filteredMovies = self.movies.filter({ (text) -> Bool in
             let tmp: NSString = (text.name! as NSString?)!
+            self.searchText = tmp as String
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             return range.location != NSNotFound
         })
@@ -175,7 +174,21 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
         self.collectionView.reloadData()
     }
-
+    
+    func errorAlert(title : String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: UIAlertController.Style.alert
+        )
+        let ok = UIAlertAction(
+            title: "OK",
+            style: UIAlertAction.Style.default,
+            handler: nil
+        )
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
     
     // MARK: - Navigation
 

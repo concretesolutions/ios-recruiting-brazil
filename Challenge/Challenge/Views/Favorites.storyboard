@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K2q-4h-z3S">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,7 +14,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Favorites" title="Favorites" id="K2q-4h-z3S" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fFH-at-ymC">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -30,18 +30,24 @@
             <objects>
                 <viewController id="h9Z-D3-6Wx" customClass="FavoritesViewController" customModule="Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sCT-Vo-jUG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results in the search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANy-Nv-99p">
+                                <rect key="frame" x="70" y="273.5" width="180.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Bs-cJ-zZZ">
-                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <rect key="frame" x="0.0" y="169" width="320" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" rowHeight="163" id="Ibh-CM-T2s" customClass="FavoriteTableViewCell" customModule="Challenge" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="163"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ibh-CM-T2s" id="0dq-hG-n9E">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="162.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="162.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8cf-Kh-ceT">
@@ -114,18 +120,46 @@
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tCd-jS-vrz">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHb-Uv-BG7">
+                                <rect key="frame" x="0.0" y="120" width="156" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="ABP-qi-CxP"/>
+                                    <constraint firstAttribute="width" constant="156" id="YuE-Vj-ObL"/>
+                                </constraints>
+                                <state key="normal" title="Filter"/>
+                                <connections>
+                                    <segue destination="JY0-TA-9KH" kind="presentation" id="v6K-LQ-PRN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4z-LK-wdV">
+                                <rect key="frame" x="164" y="120" width="156" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="mQh-Yb-xAt"/>
+                                    <constraint firstAttribute="width" constant="156" id="yGP-u3-6CH"/>
+                                </constraints>
+                                <state key="normal" title="Clear filter"/>
+                                <connections>
+                                    <action selector="clearFilter:" destination="h9Z-D3-6Wx" eventType="touchUpInside" id="kx0-TO-red"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="0Bs-cJ-zZZ" firstAttribute="top" secondItem="yHb-Uv-BG7" secondAttribute="bottom" constant="8" id="FBP-Md-WET"/>
                             <constraint firstItem="tCd-jS-vrz" firstAttribute="top" secondItem="xUV-IP-Wj5" secondAttribute="top" id="Gtt-my-RHC"/>
-                            <constraint firstItem="0Bs-cJ-zZZ" firstAttribute="top" secondItem="tCd-jS-vrz" secondAttribute="bottom" id="L8a-MO-9S3"/>
                             <constraint firstItem="tCd-jS-vrz" firstAttribute="leading" secondItem="xUV-IP-Wj5" secondAttribute="leading" id="SCZ-Dy-30M"/>
+                            <constraint firstItem="ANy-Nv-99p" firstAttribute="centerY" secondItem="sCT-Vo-jUG" secondAttribute="centerY" id="WFd-wc-bnq"/>
+                            <constraint firstItem="yHb-Uv-BG7" firstAttribute="top" secondItem="tCd-jS-vrz" secondAttribute="bottom" id="XWT-r7-nJe"/>
+                            <constraint firstItem="yHb-Uv-BG7" firstAttribute="leading" secondItem="xUV-IP-Wj5" secondAttribute="leading" id="Y1a-3A-dIm"/>
                             <constraint firstItem="0Bs-cJ-zZZ" firstAttribute="leading" secondItem="xUV-IP-Wj5" secondAttribute="leading" id="aJy-TU-dYq"/>
+                            <constraint firstItem="v4z-LK-wdV" firstAttribute="top" secondItem="tCd-jS-vrz" secondAttribute="bottom" id="l1C-k1-nid"/>
+                            <constraint firstItem="ANy-Nv-99p" firstAttribute="centerX" secondItem="sCT-Vo-jUG" secondAttribute="centerX" id="oFp-9r-eiN"/>
                             <constraint firstItem="tCd-jS-vrz" firstAttribute="trailing" secondItem="xUV-IP-Wj5" secondAttribute="trailing" id="olr-BQ-oIB"/>
                             <constraint firstItem="0Bs-cJ-zZZ" firstAttribute="trailing" secondItem="xUV-IP-Wj5" secondAttribute="trailing" id="qdx-dM-43P"/>
+                            <constraint firstItem="v4z-LK-wdV" firstAttribute="trailing" secondItem="xUV-IP-Wj5" secondAttribute="trailing" id="vQS-8J-dYe"/>
                             <constraint firstItem="0Bs-cJ-zZZ" firstAttribute="bottom" secondItem="xUV-IP-Wj5" secondAttribute="bottom" id="yC4-vt-7n6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xUV-IP-Wj5"/>
@@ -139,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXY-Ce-0ls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245.59999999999999" y="112.89355322338831"/>
+            <point key="canvasLocation" x="243.75" y="111.97183098591549"/>
         </scene>
         <!--MovieDetails-->
         <scene sceneID="5Cy-W4-u42">
@@ -148,6 +182,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ut1-64-xvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1014" y="-128"/>
+        </scene>
+        <!--Filter-->
+        <scene sceneID="Wnz-bV-BK4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filter" referencedIdentifier="Filter" id="JY0-TA-9KH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N1P-Xu-MdZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="987" y="196"/>
         </scene>
     </scenes>
 </document>

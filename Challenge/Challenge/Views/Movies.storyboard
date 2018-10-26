@@ -33,6 +33,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results in the search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBo-As-2kp">
+                                <rect key="frame" x="97.5" y="323" width="180.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FEl-MP-mEa">
                                 <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -109,7 +115,9 @@
                             <constraint firstItem="FEl-MP-mEa" firstAttribute="bottom" secondItem="6kj-4E-SyH" secondAttribute="bottom" id="ABc-bI-hls"/>
                             <constraint firstItem="K6k-MQ-nDc" firstAttribute="trailing" secondItem="6kj-4E-SyH" secondAttribute="trailing" id="Eye-pu-o7Y"/>
                             <constraint firstItem="FEl-MP-mEa" firstAttribute="leading" secondItem="6kj-4E-SyH" secondAttribute="leading" id="FJx-NS-rvg"/>
+                            <constraint firstItem="oBo-As-2kp" firstAttribute="centerY" secondItem="K6E-Gc-e9h" secondAttribute="centerY" id="RvY-kY-3tM"/>
                             <constraint firstItem="K6k-MQ-nDc" firstAttribute="top" secondItem="6kj-4E-SyH" secondAttribute="top" id="ga5-H8-SPu"/>
+                            <constraint firstItem="oBo-As-2kp" firstAttribute="centerX" secondItem="K6E-Gc-e9h" secondAttribute="centerX" id="goW-4a-eRC"/>
                             <constraint firstItem="FEl-MP-mEa" firstAttribute="trailing" secondItem="6kj-4E-SyH" secondAttribute="trailing" id="i6G-XQ-Py6"/>
                             <constraint firstItem="K6k-MQ-nDc" firstAttribute="leading" secondItem="6kj-4E-SyH" secondAttribute="leading" id="qp2-cH-OYt"/>
                             <constraint firstItem="FEl-MP-mEa" firstAttribute="top" secondItem="K6k-MQ-nDc" secondAttribute="bottom" id="ts0-sm-Z63"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="MovieEntity">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="UserEntity">
     <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
     <entity name="Entity1" representedClassName="Entity1" syncable="YES" codeGenerationType="class"/>
     <entity name="Entity2" representedClassName="Entity2" syncable="YES" codeGenerationType="class"/>
@@ -11,10 +11,15 @@
         <attribute name="overview" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="sessionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
         <element name="MovieEntity" positionX="-63" positionY="-18" width="128" height="133"/>
         <element name="Entity" positionX="-63" positionY="27" width="128" height="45"/>
         <element name="Entity1" positionX="-54" positionY="36" width="128" height="45"/>
         <element name="Entity2" positionX="-36" positionY="45" width="128" height="45"/>
+        <element name="UserEntity" positionX="-18" positionY="54" width="128" height="75"/>
     </elements>
 </model>
