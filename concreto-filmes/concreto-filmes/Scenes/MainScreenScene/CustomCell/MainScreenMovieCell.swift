@@ -23,6 +23,8 @@ class MainScreenMovieCell : UICollectionViewCell {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 2
         return label
     }()
     
@@ -49,8 +51,14 @@ class MainScreenMovieCell : UICollectionViewCell {
     }
     
     
-    func setData(data: MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel){
-        self.coverImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + data.posterUrl), completed: nil)
+    func setData(data: MainScreen.ViewModel.MovieViewModel){
+        self.coverImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + data.posterUrl)) { (image, err, cachetype, url) in
+            if(image == nil){
+                DispatchQueue.main.async {
+                    self.coverImage.image = #imageLiteral(resourceName: "placeholder")
+                }
+            }
+        }
         self.titleLabel.text = data.title
     }
 }
@@ -60,6 +68,7 @@ extension MainScreenMovieCell : CodeView {
         addSubview(self.coverImage)
         addSubview(self.bottomView)
         addSubview(self.titleLabel)
+        addSubview(self.favoriteButton)
     }
     
     func setupConstraints() {
@@ -72,15 +81,21 @@ extension MainScreenMovieCell : CodeView {
             make.left.equalTo(self)
             make.right.equalTo(self)
         }
-        self.titleLabel.snp.makeConstraints { (make) in
-            make.center.equalTo(self.bottomView)
-            make.left.equalTo(self.bottomView).offset(5)
+        self.favoriteButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.bottomView)
             make.right.equalTo(self.bottomView).inset(5)
+            make.size.equalTo(CGSize(width: 30, height: 30))
+        }
+        self.titleLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.bottomView)
+            make.left.equalTo(self.bottomView).offset(5)
+            make.right.equalTo(self.favoriteButton.snp.left)
+            make.height.equalTo(self.bottomView)
         }
     }
     
     func setupAdditionalConfiguration() {
-        self.backgroundColor = .red
+        
     }
     
     

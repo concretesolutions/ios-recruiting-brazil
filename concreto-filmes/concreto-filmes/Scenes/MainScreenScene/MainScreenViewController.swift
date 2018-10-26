@@ -15,14 +15,15 @@ import Keys
 import SnapKit
 
 enum AppStatus{
+    case firstFetch
     case fetchingMore
     case finish
 }
 
 protocol MainScreenDisplayLogic: class
 {
-    func displaySomething(viewModel: MainScreen.Something.ViewModel)
-    func display(movies: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel])
+    func display(movies: [MainScreen.ViewModel.MovieViewModel])
+    func displayAlert(title: String,  message: String)
 }
 
 class MainScreenViewController: UICollectionViewController, MainScreenDisplayLogic
@@ -31,10 +32,11 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     var router: (NSObjectProtocol & MainScreenRoutingLogic & MainScreenDataPassing)?
     
     let movieCellID = "movieCellID"
-    var displayedMovies : [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel] = []
+    var displayedMovies : [MainScreen.ViewModel.MovieViewModel] = []
     var currentPageForAPI = 1
+    internal var isFiltering = false
     
-    var applicationStatus : AppStatus = .fetchingMore
+    var applicationStatus : AppStatus = .firstFetch
     
     private let leftBarButton : UIBarButtonItem = {
         let btn = UIBarButtonItem()
@@ -43,10 +45,11 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         return btn
     }()
     
-    private let searchBar : UISearchBar = {
+    lazy var searchBar : UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.layer.borderColor = UIColor.gray.cgColor
         searchBar.placeholder = "Search"
+        searchBar.delegate = self
         return searchBar
     }()
     
@@ -54,10 +57,9 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         super.viewDidLoad()
         setupView()
         collectionView.reloadData()
-        interactor?.fetchPopularMovies(request:  MainScreen.FetchPopularMuvies.Request(index: self.currentPageForAPI), completionBlock: {
+        interactor?.fetchPopularMovies(request:  MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), isFirstRequest: true, completionBlock: {
             self.applicationStatus = .finish
         })
-        
     }
     
     // MARK: Object lifecycle
@@ -99,45 +101,24 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         }
     }
     
-    // MARK: Do something
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-    
-    func doSomething()
-    {
-        let request = MainScreen.Something.Request()
-        interactor?.doSomething(request: request)
-    }
-    
-    func displaySomething(viewModel: MainScreen.Something.ViewModel)
-    {
-        //nameTextField.text = viewModel.name
-    }
-    
-    func display(movies: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel]) {
-        self.displayedMovies.append(contentsOf: movies)
+    func display(movies: [MainScreen.ViewModel.MovieViewModel]) {
+        self.displayedMovies = movies
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
     
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tentar novamente", style: .default, handler: { (action) in
+            self.interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), isFirstRequest: self.applicationStatus == .firstFetch, completionBlock: {
+                alert.dismiss(animated: true, completion: {
+                    self.applicationStatus = .finish
+                })
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return displayedMovies.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.movieCellID, for: indexPath) as! MainScreenMovieCell
-        let item = displayedMovies[indexPath.item]
-        let data = MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel(posterUrl: item.posterUrl, title: item.title)
-        cell.setData(data: data)
-        return cell
-    }
-    
     
     //MARK: - Scroll View
     
@@ -145,19 +126,23 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        if(offsetY > contentHeight - scrollView.frame.height){
-            if(applicationStatus != .fetchingMore){
-                beginBatchFetch()
-            }
+        if(offsetY > contentHeight - scrollView.frame.height && applicationStatus != .fetchingMore && applicationStatus != .firstFetch){
+            beginBatchFetch()
         }
     }
     
     func beginBatchFetch() {
         self.applicationStatus = .fetchingMore
         self.currentPageForAPI += 1
-        interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request(index: self.currentPageForAPI), completionBlock: {
-            self.applicationStatus = .finish
-        })
+        if(isFiltering){
+            interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPI, text: self.searchBar.text ?? ""), isFirstRequest: false, completionBlock: {
+                self.applicationStatus = .finish
+            })
+        }else {
+            interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), isFirstRequest: false, completionBlock: {
+                self.applicationStatus = .finish
+            })
+        }
     }
 }
 
@@ -176,24 +161,7 @@ extension MainScreenViewController: CodeView {
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color
         collectionView.register(MainScreenMovieCell.self, forCellWithReuseIdentifier: self.movieCellID)
-    }
-}
-
-
-extension MainScreenViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/2.2, height: view.frame.width/1.5)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 10)
+        let tapToDismiss = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tapToDismiss)
     }
 }

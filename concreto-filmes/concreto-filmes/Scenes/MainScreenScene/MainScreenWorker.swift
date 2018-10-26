@@ -16,14 +16,26 @@ class MainScreenWorker
 {
     
     let movieNetworkManager = MovieNetworkManager()
+    let searchNetWorkManager = SearchNetworkManager()
     func doSomeWork()
     {
     }
     
-    func fetchPopularMovies(request: MainScreen.FetchPopularMuvies.Request, completion: @escaping (_ movies: [Movie]?,_ error: String?) -> ()){
+    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, completion: @escaping (_ movies: [Movie]?,_ error: String?) -> ()){
 
         movieNetworkManager.getPopularMovies(page: request.index) { (movies, error) in
             if let error = error {
+                completion(nil, error)
+            }
+            if let movies = movies {
+                completion(movies, nil)
+            }
+        }
+    }
+    
+    func fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request, completion: @escaping (_ movies: [Movie]?,_ error: String?) -> ()) {
+        searchNetWorkManager.getMoviesBy(query: request.text, page: request.index) { (movies, errorMessage) in
+            if let error = errorMessage {
                 completion(nil, error)
             }
             if let movies = movies {

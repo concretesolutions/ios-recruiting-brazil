@@ -17,39 +17,26 @@ enum MainScreen
 {
     // MARK: Use cases
     
-    enum Something
-    {
-        struct Request
-        {
-        }
-        struct Response
-        {
-        }
-        struct ViewModel
-        {
+    struct ViewModel {
+        struct MovieViewModel: Hashable {
+            var posterUrl: String
+            var title: String
         }
     }
     
-    enum FetchPopularMuvies {
+    enum FetchPopularMovies {
         struct Request {
             var index: Int = 1
             init(index: Int) {
                 self.index = index
             }
-            func url() -> String {
-                return "https://api.themoviedb.org/3/movie/popular?api_key=\(ConcretoFilmesKeys().tHE_MOVIE_DB_V3_KEY)&language=\(Locale.preferredLanguages[0] as String)&page=\(index)"
-            }
         }
-        
-        struct Response {
-            
-        }
-        
-        struct ViewModel {
-            struct MovieViewModel: Hashable {
-                var posterUrl: String
-                var title: String
-            }
+    }
+    
+    enum FetchQueryMovies {
+        struct Request {
+            var index: Int = 1
+            var text: String
         }
     }
 }

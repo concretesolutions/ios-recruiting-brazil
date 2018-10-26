@@ -14,34 +14,28 @@ import UIKit
 
 protocol MainScreenPresentationLogic
 {
-    func presentSomething(response: MainScreen.Something.Response)
-    func present(movies: [Movie])
-    func present(error: String)
+    func present(movies: [Movie]?)
+    func present(error: String?)
 }
 
 class MainScreenPresenter: MainScreenPresentationLogic
 {
-    
-    func present(movies: [Movie]) {
-        var viewModelItems: [MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel] = []
-        for movie in movies {
-            viewModelItems.append(MainScreen.FetchPopularMuvies.ViewModel.MovieViewModel(posterUrl: movie.posterPath, title: movie.title))
-        }
-        viewController?.display(movies: viewModelItems)
-    }
-    
-    func present(error: String) {
-        
-    }
-    
     weak var viewController: MainScreenDisplayLogic?
     
-    // MARK: Do something
+    func present(movies: [Movie]?) {
+        var viewModelItems: [MainScreen.ViewModel.MovieViewModel] = []
+        if let movies = movies {
+            for movie in movies {
+                viewModelItems.append(MainScreen.ViewModel.MovieViewModel(posterUrl: movie.posterPath ?? "", title: movie.title))
+            }
+            viewController?.display(movies: viewModelItems)
+        }
+    }
     
-    func presentSomething(response: MainScreen.Something.Response)
-    {
-        let viewModel = MainScreen.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func present(error: String?) {
+        if let error = error {
+         viewController?.displayAlert(title: "OPS!", message: error)
+        }
     }
 }
 

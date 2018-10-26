@@ -16,10 +16,8 @@ enum NetworkEnvironment {
 }
 
 public enum MovieApi {
-    case recommended(id:Int)
     case popular(page:Int)
     case newMovies(page:Int)
-    case video(id:Int)
 }
 
 extension MovieApi: EndPointType {
@@ -39,14 +37,10 @@ extension MovieApi: EndPointType {
     
     var path: String {
         switch self {
-        case .recommended(let id):
-            return "\(id)/recommendations"
         case .popular:
             return "popular"
         case .newMovies:
             return "now_playing"
-        case .video(let id):
-            return "\(id)/videos"
         }
     }
     
@@ -67,8 +61,9 @@ extension MovieApi: EndPointType {
                                         "api_key": MovieNetworkManager.MovieAPIKey,
                                         "language":Locale.preferredLanguages[0] as String
                                         ])
-        default:
-            return .request
+            
+//        default:
+//            return .request
         }
     }
     

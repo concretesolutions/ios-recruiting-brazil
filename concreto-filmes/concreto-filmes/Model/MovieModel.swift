@@ -38,7 +38,7 @@ extension MovieApiResponse: Decodable {
 
 struct Movie {
     let id: Int
-    let posterPath: String
+    let posterPath: String?
     let title: String
     let releaseDate: String
     let overview: String
@@ -61,7 +61,7 @@ extension Movie: Decodable {
         let movieContainer = try decoder.container(keyedBy: MovieCodingKeys.self)
         
         id = try movieContainer.decode(Int.self, forKey: .id)
-        posterPath = try movieContainer.decode(String.self, forKey: .posterPath)
+        posterPath = try? movieContainer.decode(String.self, forKey: .posterPath)
         title = try movieContainer.decode(String.self, forKey: .title)
         releaseDate = try movieContainer.decode(String.self, forKey: .releaseDate)
         overview = try movieContainer.decode(String.self, forKey: .overview)
