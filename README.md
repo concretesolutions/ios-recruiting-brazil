@@ -1,4 +1,4 @@
-# Concrete iOS Recruit Challenge
+# Concrete iOS Recruit Challenge - Guilherme 'Heaven' Guimarães Submission
 
 ---
 
@@ -8,40 +8,33 @@
 
 ---
 
-Obrigado por participar do desafio iOS da Concrete! Estamos muito contentes pelo seu primeiro passo para fazer parte de um time excepcional.
+Agradeço por poder participar do Recruiting Day da Concrete. Foi uma honra conhecer várias pessoas talentodas nas suas várias áreas de atuação e experiências.
 
 ## Afinal, o que é esse desafio?
 
 ---
 
-Você deverá criar uma app sobre filmes, usando a [API](https://developers.themoviedb.org/3/getting-started/introduction) do [TheMovieDB](https://www.themoviedb.org/?language=en). Legal, certo? Para dar uma padronizada e ter um layout minimamente definido anexamos alguns assets que vão te ajudar a desenvolver esse app:
+Como já explicado no branch original, utilizando a [API](https://developers.themoviedb.org/3/getting-started/introduction) do [TheMovieDB](https://www.themoviedb.org/?language=en) foi feito o PhilmaXXX, minha submissão para o desafio. O planejamento e exeução do projeto pode ser acompanhado através do [mural Trello](https://trello.com/b/C317xMAo/concrete-ios-recruiting-guilherme-guimar%C3%A3es-project-philmaxxx) publicamente visível à todos.
 
-- [Ícones do app](assets/appIcons)
-- [ScreenShots](assets/screenshots)
-- [Ícones](assets/icons)
+Esse projeto foi executado utilizando a arquitetura de projetos Clean Archtecture, com suas camadas de Domínio, Plataforma e Aplicação modularizados por targets, reforçando a importância do encapsulamento para a organização de projetos. Também foi utilizado nesse projeto:
 
-Pense no desafio como uma oportunidade de mostrar todo o seu conhecimento. E faça com calma, você tem uma semana para entregar!
-Vamos avaliar como você lida com casos de:
+- Padrões de projeto criacionais como Abstract Factory, Lazy Init, Dependency Injection, Prototype.
+- Padrão de navegação utilizado foi o Navigator.
 
-- Consumo de APIs
-- Persistência de dados (Favoritos)
-- Lógicas de filtros e buscas.
-- Estruturação de layout e fluxo de aplicação.
+O projeto foi desenvolvido no 4 utilizando o iOS 12. As APIs utilizadas foram:
 
-O único pré-requisito é que o código seja feito em Swift, de preferência na versão mais atual. Sinta-se a vontade para:
+- Kingfisher (gerenciamente de image-set com auto-cache)
+- Eureka (criação de formulário, utilizado na tela de filtros)
+- Quick & Nimble (testes)
 
-- Usar ou não usar bibliotecas
-- Estruturar seu layout com storyboards, xibs ou ViewCode
-- Adotar a arquitetura que você quiser.
+Até o final do projeto deve ser adotado:
+- Kif
 
-Somos especialmente preocupados com qualidade e acreditamos bastante em testes automatizados. Entretanto, sabemos que não é um tópico dominado por todos, por isso aceitamos desafios com todos os perfis e diferentes momentos de experiência e conhecimento técnico.
-Para posições mais Seniors, porém, damos muito importância para a qualidade do código.
-
-# Features ..
+# Features incluídas ..
 
 ---
 
-### Precisa ter:
+### Precisava ter:
 
 - [x] Tela de Splash;
 - [x] Layout em abas, contendo na primeira aba a tela de grid de filmes e na segunda aba a tela de lista de filmes favoritados no app;
@@ -53,7 +46,7 @@ Para posições mais Seniors, porém, damos muito importância para a qualidade 
 - [x] Tela de lista de favoritos persistido no app entre sessões;
 - [x] Tela de favoritos deve permitir desfavoritar um filme.
 
-### Ganha mais pontos se tiver:
+### Ganhava mais pontos se tiver:
 
 - [x] Tela de grid com busca local;
 - [x] Scroll Infinito para fazer paginação da API de filmes populares;
@@ -61,44 +54,33 @@ Para posições mais Seniors, porém, damos muito importância para a qualidade 
 - [x] Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
 - [x] Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
 - [x] Testes unitários no projeto;
-- [ ] Testes funcionais.
-- [ ] Pipeline Automatizado
+- [ ] Testes funcionais. (ainda)
+- [ ] Pipeline Automatizado (ainda)
 
-## - PS: Ainda pendente pra commit.
+### Detalhes:
+
+- [x] Proteção de Request Spam.
+
+## - PS: Ainda pendente pra pull. Acontecerá até esse fim de Sábado.
 
 # Exemplos e sugestões
 
 ---
 
-Abaixo podemos ver algumas telas de exemplo de alguns desses fluxos. São apenas sugestões, fique à vontade para modificar como você quiser.
-Para facilitar o processo, existem assets, app icons, ícones e paleta de cores no repositório. Mas se o seu lado designer falar mais alto, pode nos surpreender!
+### Fluxo com Slash e grid de filmes
 
-### Fluxo de grid de filmes
-
-![Image of Yaktocat](assets/flow/lista.png)
+![Image of Yaktocat](assets/flow/app-example-01.png)
 
 ### Fluxo com Splash, Tela de Detalhes e tela de lista da favoritos
 
-![Image of Yaktocat](assets/flow/splash_detalhes.png)
+![Image of Yaktocat](assets/flow/app-example-02.png)
 
 ### Fluxo Opcional de filtro
 
-![Image of Yaktocat](assets/flow/filtro.png)
+![Image of Yaktocat](assets/flow/app-example-03.png)
 
 ## **Processo de submissão**
 
 ---
 
-Depois de implementar a solução, envie um pull request para este repositório.
-O processo de Pull Request funciona da seguinte maneira:
-
-1. Faça um fork deste repositório (não clonar direto!);
-2. Faça seu projeto neste fork;
-3. Commit e suba as alterações para o **SEU** fork;
-4. Pela interface do Github, envie um Pull Request.
-
-Deixe o fork público para facilitar a inspeção do código.
-
-### **ATENÇÃO**
-
-Não tente fazer o PUSH diretamente para ESTE repositório!
+Agradeço pela atenção na leitura. Tenha um ótimo dia.
