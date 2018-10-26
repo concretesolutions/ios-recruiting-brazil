@@ -14,9 +14,9 @@ import UIKit
 
 protocol MainScreenBusinessLogic
 {
-    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, isFirstRequest: Bool, completionBlock: (() -> ())?)
+    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?)
     func filterMoviesLocally(text: String)
-    func fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request, isFirstRequest: Bool, completionBlock: (() -> ())?)
+    func fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?)
 }
 
 protocol MainScreenDataStore
@@ -34,37 +34,39 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
     var movies: [Movie] = []
     var filteredMovies: [Movie] = []
     
-    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, isFirstRequest: Bool, completionBlock: (() -> ())?) {
+    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?) {
         worker.fetchPopularMovies(request: request, completion: { (movies, error) in
             if(error != nil){
                 self.presenter?.present(error: error)
             }
             if let movies = movies{
-                if isFirstRequest {
+                if shouldResetMovies {
                     self.movies = movies
                 }else {
                     self.movies.append(contentsOf: movies)
                 }
                 self.presenter?.present(movies: self.movies)
-                guard let completion = completionBlock else {return}
-                completion()
             }
+            guard let completion = completionBlock else {return}
+            completion()
         })
     }
     
-    func fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request, isFirstRequest: Bool, completionBlock: (() -> ())?) {
+    func fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?) {
         worker.fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request(index: request.index, text: request.text)) { (movies, error) in
             if(error != nil){
                 self.presenter?.present(error: error)
             }
             if let movies = movies {
-                if isFirstRequest {
+                if shouldResetMovies {
                     self.filteredMovies = movies
                 }else {
                     self.filteredMovies.append(contentsOf: movies)
                 }
                 self.presenter?.present(movies: self.filteredMovies)
             }
+            guard let completion = completionBlock else {return}
+            completion()
         }
     }
     

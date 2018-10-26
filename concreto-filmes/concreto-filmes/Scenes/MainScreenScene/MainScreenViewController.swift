@@ -57,7 +57,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         super.viewDidLoad()
         setupView()
         collectionView.reloadData()
-        interactor?.fetchPopularMovies(request:  MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), isFirstRequest: true, completionBlock: {
+        interactor?.fetchPopularMovies(request:  MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: true, completionBlock: {
             self.applicationStatus = .finish
         })
     }
@@ -111,11 +111,14 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Tentar novamente", style: .default, handler: { (action) in
-            self.interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), isFirstRequest: self.applicationStatus == .firstFetch, completionBlock: {
+            self.interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: self.applicationStatus == .firstFetch, completionBlock: {
                 alert.dismiss(animated: true, completion: {
                     self.applicationStatus = .finish
                 })
             })
+        }))
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -135,11 +138,11 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         self.applicationStatus = .fetchingMore
         self.currentPageForAPI += 1
         if(isFiltering){
-            interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPI, text: self.searchBar.text ?? ""), isFirstRequest: false, completionBlock: {
+            interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPI, text: self.searchBar.text ?? ""), shouldResetMovies: false, completionBlock: {
                 self.applicationStatus = .finish
             })
         }else {
-            interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), isFirstRequest: false, completionBlock: {
+            interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: false, completionBlock: {
                 self.applicationStatus = .finish
             })
         }

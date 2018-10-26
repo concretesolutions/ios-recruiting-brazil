@@ -16,7 +16,8 @@ extension MainScreenViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.currentPageForAPI = 1
         self.applicationStatus = .fetchingMore
-        self.interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPI, text: searchBar.text ?? ""), isFirstRequest: true, completionBlock: {
+        self.isFiltering = true
+        self.interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPI, text: searchBar.text ?? ""), shouldResetMovies: true, completionBlock: {
             self.applicationStatus = .finish
         })
         dismissKeyboard()
@@ -31,6 +32,7 @@ extension MainScreenViewController: UISearchBarDelegate {
     @objc func dismissKeyboard() {
         self.searchBar.endEditing(true)
         if(searchBar.text == ""){
+            self.isFiltering = false
             self.interactor?.filterMoviesLocally(text: "")
         }
         self.currentPageForAPI = 0
