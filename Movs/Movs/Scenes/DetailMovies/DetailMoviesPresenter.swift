@@ -18,7 +18,9 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
     var viewController: DetailsMoviesDisplayLogic!
     
     func presentMovieDetailed(response: DetailMovie.Response.Success) {
-        let viewModel = DetailMovie.ViewModel.Success(title: response.movie.title, overview: response.movie.overview, genreNames: response.genreNames, year: "", posterPath: response.movie.posterPath, voteAverage: response.movie.voteAverage, isFavorite: response.movie.isFavorite)
+        let imdbVote = String(response.movie.voteAverage) + "/10"
+        
+        let viewModel = DetailMovie.ViewModel.Success(title: response.movie.title, overview: response.movie.overview, genreNames: response.genreNames, year: "", posterPath: response.movie.posterPath, imdbVote: imdbVote, isFavorite: response.movie.isFavorite)
         
         viewController.displayMovieDetailed(viewModel: viewModel)
     }

@@ -35,7 +35,7 @@ enum DetailMovie {
             let genreNames: [String]
             let year: String
             let posterPath: String
-            let voteAverage: Double
+            let imdbVote: String
             let isFavorite: Bool 
         }
         

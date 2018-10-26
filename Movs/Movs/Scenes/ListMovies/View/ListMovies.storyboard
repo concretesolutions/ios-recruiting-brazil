@@ -68,7 +68,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="167" id="M6J-9G-oLw"/>
                                                                     </constraints>
-                                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -157,24 +157,136 @@
             </objects>
             <point key="canvasLocation" x="-79.200000000000003" y="-463.71814092953525"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail Movies View Controller-->
         <scene sceneID="GY0-k0-bNc">
             <objects>
-                <viewController id="sFt-hF-eIR" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cUR-Tf-6NS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="sFt-hF-eIR" customClass="DetailMoviesViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fvf-oO-NS5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aDa-cy-WmS">
+                                <rect key="frame" x="20" y="255" width="335" height="312"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="N6e-b0-IPX" userLabel="Header">
+                                <rect key="frame" x="20" y="65" width="315" height="170"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YrO-HG-koL" userLabel="poster" customClass="UIImageViewMovieCard" customModule="Movs" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="170"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="135" id="4Hn-v7-gT7"/>
+                                            <constraint firstAttribute="height" constant="170" id="AT1-hQ-nxE"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="f7W-Rs-smv" userLabel="Info">
+                                        <rect key="frame" x="150" y="0.0" width="165" height="114.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="amF-Xn-l7W" userLabel="Title">
+                                                <rect key="frame" x="0.0" y="0.0" width="165" height="44.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THR-Nd-Hcr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="155" height="23.5"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genres" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AH-XR-u4N">
+                                                        <rect key="frame" x="0.0" y="26.5" width="165" height="18"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="8AH-XR-u4N" firstAttribute="leading" secondItem="amF-Xn-l7W" secondAttribute="leading" id="3mw-YJ-y6y"/>
+                                                    <constraint firstItem="THR-Nd-Hcr" firstAttribute="top" secondItem="amF-Xn-l7W" secondAttribute="top" id="71K-Do-S0z"/>
+                                                    <constraint firstAttribute="bottom" secondItem="8AH-XR-u4N" secondAttribute="bottom" id="BNn-Lz-Gne"/>
+                                                    <constraint firstItem="THR-Nd-Hcr" firstAttribute="leading" secondItem="amF-Xn-l7W" secondAttribute="leading" id="HuO-T1-cAb"/>
+                                                    <constraint firstAttribute="trailing" secondItem="THR-Nd-Hcr" secondAttribute="trailing" constant="10" id="iVD-jl-xpV"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8AH-XR-u4N" secondAttribute="trailing" id="tcL-Ud-POi"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gKW-Ue-ge8" userLabel="IMBD vote">
+                                                <rect key="frame" x="0.0" y="58.5" width="165" height="26"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imdb_icon" translatesAutoresizingMaskIntoConstraints="NO" id="bMX-nm-hb9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="29" height="26"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="26" id="U5K-7L-nbq"/>
+                                                            <constraint firstAttribute="width" constant="29" id="to2-Qs-IGB"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="imdb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIi-i1-aBt">
+                                                        <rect key="frame" x="37" y="0.0" width="128" height="26"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXE-2x-NE0">
+                                                <rect key="frame" x="0.0" y="98.5" width="27.5" height="16"/>
+                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="amF-Xn-l7W" secondAttribute="trailing" id="Ghg-tI-6Io"/>
+                                            <constraint firstItem="amF-Xn-l7W" firstAttribute="top" secondItem="f7W-Rs-smv" secondAttribute="top" id="k8s-Fr-d2y"/>
+                                            <constraint firstItem="amF-Xn-l7W" firstAttribute="leading" secondItem="f7W-Rs-smv" secondAttribute="leading" id="r9S-0F-GBG"/>
+                                            <constraint firstAttribute="trailing" secondItem="gKW-Ue-ge8" secondAttribute="trailing" id="skD-X1-Iq3"/>
+                                            <constraint firstItem="gKW-Ue-ge8" firstAttribute="leading" secondItem="f7W-Rs-smv" secondAttribute="leading" id="yak-gE-fp9"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Usp-3H-94K">
+                                <rect key="frame" x="337" y="65" width="22" height="22"/>
+                                <state key="normal" image="favorite_empty_icon"/>
+                                <connections>
+                                    <action selector="favoriteMovieAction:" destination="sFt-hF-eIR" eventType="touchUpInside" id="f3C-Aq-OWu"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3DF-It-atf" firstAttribute="trailing" secondItem="N6e-b0-IPX" secondAttribute="trailing" constant="40" id="EcV-gK-f0H"/>
+                            <constraint firstItem="aDa-cy-WmS" firstAttribute="leading" secondItem="3DF-It-atf" secondAttribute="leading" constant="20" id="FfR-F7-tgK"/>
+                            <constraint firstItem="N6e-b0-IPX" firstAttribute="leading" secondItem="3DF-It-atf" secondAttribute="leading" constant="20" id="OVL-Ws-6OB"/>
+                            <constraint firstItem="3DF-It-atf" firstAttribute="bottom" secondItem="aDa-cy-WmS" secondAttribute="bottom" constant="100" id="R02-7r-duA"/>
+                            <constraint firstItem="Usp-3H-94K" firstAttribute="top" secondItem="N6e-b0-IPX" secondAttribute="top" id="YCz-hc-Nvf"/>
+                            <constraint firstItem="3DF-It-atf" firstAttribute="trailing" secondItem="Usp-3H-94K" secondAttribute="trailing" constant="16" id="a0w-L5-lCC"/>
+                            <constraint firstItem="3DF-It-atf" firstAttribute="trailing" secondItem="aDa-cy-WmS" secondAttribute="trailing" constant="20" id="jHz-YQ-jLQ"/>
+                            <constraint firstItem="aDa-cy-WmS" firstAttribute="top" secondItem="N6e-b0-IPX" secondAttribute="bottom" constant="20" id="mO4-oM-bZ4"/>
+                            <constraint firstItem="N6e-b0-IPX" firstAttribute="top" secondItem="3DF-It-atf" secondAttribute="top" constant="45" id="rgk-3k-8JG"/>
+                            <constraint firstItem="Usp-3H-94K" firstAttribute="leading" secondItem="N6e-b0-IPX" secondAttribute="trailing" constant="2" id="xCb-mE-wYg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="3DF-It-atf"/>
                     </view>
+                    <connections>
+                        <outlet property="favoriteButton" destination="Usp-3H-94K" id="J8p-oh-bMu"/>
+                        <outlet property="genres" destination="8AH-XR-u4N" id="SBm-Mi-P9s"/>
+                        <outlet property="imdbValue" destination="eIi-i1-aBt" id="FgE-YZ-pz0"/>
+                        <outlet property="movieOverview" destination="aDa-cy-WmS" id="jAd-yY-U83"/>
+                        <outlet property="movieTitle" destination="THR-Nd-Hcr" id="nVk-Ez-Hj4"/>
+                        <outlet property="posterImage" destination="YrO-HG-koL" id="2Pg-at-e8g"/>
+                        <outlet property="year" destination="mXE-2x-NE0" id="wJS-68-MIO"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cUR-Tf-6NS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="-464"/>
+            <point key="canvasLocation" x="736.79999999999995" y="-464.6176911544228"/>
         </scene>
     </scenes>
     <resources>
         <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="imdb_icon" width="29" height="26"/>
         <namedColor name="grayBackground">
             <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
