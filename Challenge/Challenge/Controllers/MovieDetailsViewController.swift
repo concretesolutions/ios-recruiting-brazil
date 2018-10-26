@@ -22,6 +22,8 @@ class MovieDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Loading the data recieved from the previous viewcontroller
         if self.movie?.name != nil {
             self.name.text = self.movie?.name
         }
@@ -31,6 +33,8 @@ class MovieDetailsViewController: UIViewController {
         if self.movie?.overview != nil {
             self.overview.text = self.movie?.overview
         }
+        
+        //Using cache with the app images to reduce memory and internet consumption. If is using coredata (no internet), the image comes from the disk. If there is internet, the app tries reload all the data, but all the images that once were downloaded have the chace to be in the cache memory. So they are not downloaded again.
         if self.image != nil {
             self.imageView.image = self.image
         } else {
@@ -48,8 +52,11 @@ class MovieDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //Favorite or unfavorite an movie
     @IBAction func favorite(_ sender: Any) {
         if let control = self.movie?.isFavourite {
+            
+            //Loading indicator
             let indicator:UIActivityIndicatorView = UIActivityIndicatorView  (style: UIActivityIndicatorView.Style.gray)
             indicator.color = UIColor .black
             indicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)

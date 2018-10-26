@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1D085044217BBADC0017E78D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D085043217BBADC0017E78D /* Genre.swift */; };
-		1D085047217C2BF50017E78D /* SortedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D085046217C2BF50017E78D /* SortedArray.swift */; };
 		1D085049217CEDF60017E78D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D085048217CEDF50017E78D /* Observable.swift */; };
 		1D08504B217EA2CA0017E78D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D08504A217EA2CA0017E78D /* SignUpViewController.swift */; };
 		1D08504D217EA7FE0017E78D /* Movies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D08504C217EA7FE0017E78D /* Movies.storyboard */; };
@@ -61,7 +60,6 @@
 		0FA915CDE9978830133C2CC4 /* Pods-Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Challenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Challenge/Pods-Challenge.release.xcconfig"; sourceTree = "<group>"; };
 		0FD3097F8A7FA33BDAE26EBC /* Pods-ChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChallengeUITests/Pods-ChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1D085043217BBADC0017E78D /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
-		1D085046217C2BF50017E78D /* SortedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedArray.swift; sourceTree = "<group>"; };
 		1D085048217CEDF50017E78D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		1D08504A217EA2CA0017E78D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		1D08504C217EA7FE0017E78D /* Movies.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Movies.storyboard; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				1D085048217CEDF50017E78D /* Observable.swift */,
-				1D085046217C2BF50017E78D /* SortedArray.swift */,
 				1D08505C217F41620017E78D /* Extensions.swift */,
 			);
 			path = Helpers;
@@ -486,7 +483,6 @@
 				1DE4188F217B4C1D000D2446 /* User.swift in Sources */,
 				1D08504B217EA2CA0017E78D /* SignUpViewController.swift in Sources */,
 				1D085049217CEDF60017E78D /* Observable.swift in Sources */,
-				1D085047217C2BF50017E78D /* SortedArray.swift in Sources */,
 				1DE41891217B6651000D2446 /* Tmdb.swift in Sources */,
 				1D08505D217F41620017E78D /* Extensions.swift in Sources */,
 				1DE41859217B4654000D2446 /* AppDelegate.swift in Sources */,
@@ -671,7 +667,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = Challenge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.Challenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -687,7 +686,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = Challenge/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.Challenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -704,7 +706,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -722,7 +728,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -739,7 +749,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -756,7 +770,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7PFDZE6A86;
 				INFOPLIST_FILE = ChallengeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = savio.berdine.ChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

@@ -14,6 +14,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [Movie] = []
+    
+    //Using didset to controll the search results on time and show the error message if necessary
     var searchedMovies: [Movie] = [] {
         didSet {
             self.updateView()
@@ -25,6 +27,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     var searchActive = false
     static var filterIsActive = false
     
+    //Configuring the Tab bar icon
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         let image = UIImage(named: "favorite_gray_icon")
@@ -38,6 +41,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.searchBar.delegate = self
+        
+        //Loading persistent data (favorite movies) if they exist
         if self.movies.count == 0 {
             self.usingCoredata = true
             self.movies = Movie.fetchSortedByDate()
@@ -49,15 +54,18 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        //Detecting if the favorites were changed inside the application, requesting the datasource to update and reloading the view
         if Movie.favoritesChanged {
             self.page = 1
             handlePagination()
             self.tableView.reloadData()
         }
+        
+        //If the filter is active, requests the filtered movies to the model and updates the view
         if FavoritesViewController.filterIsActive {
             Filter.filter(movies: self.movies, onSuccess: { (moviesResult) in
                 self.filteredMovies = moviesResult
@@ -72,6 +80,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         view.endEditing(true)
     }
     
+    //Clear all the filters applied
     @IBAction func clearFilter(_ sender: Any) {
         if FavoritesViewController.filterIsActive {
             FavoritesViewController.filterIsActive = false
@@ -81,6 +90,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    //Hides the tableview, showing an error message when the search don't find anything
     func updateView() {
         let hasSearchResult = self.searchedMovies.count > 0
         self.tableView.isHidden = !hasSearchResult && !(self.searchBar.text?.isEmpty)!
@@ -89,6 +99,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    //This function handles pagination and asks to the model for the proper amount of data
     @objc func handlePagination() {
         print("Handling pagination")
         Movie.getFavoriteMovies(pageToRequest: self.page, onSuccess: { (moviesResult) in
@@ -108,7 +119,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    
+    //This function detects when the user get to the end of the tableview, collectionview (or any scrollview child class) and swip up. So the hadlePagination() function is called
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let currentOffset = scrollView.contentOffset.y
         let maxOffset = scrollView.contentSize.height - scrollView.frame.height
@@ -120,6 +131,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
+    //Tableview setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.searchActive {
             return searchedMovies.count
@@ -132,10 +144,14 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteTableViewCell
+        
+        //If the search is active, and/or the filter, the data source is a different array
         if searchActive {
             cell.favoriteTitle.text = self.searchedMovies[indexPath.row].name
             cell.favoriteYear.text = self.searchedMovies[indexPath.row].date?.dateYyyyMmDdToDdMmYyyyWithDashes()
             cell.favoriteOverview.text = self.searchedMovies[indexPath.row].overview
+            
+            //Using cache with the app images to reduce memory and internet consumption. If is using coredata (no internet), the image comes from the disk. If there is internet, the app tries reload all the data, but all the images that once were downloaded have the chace to be in the cache memory. So they are not downloaded again.
             cell.favoriteImageView.kf.indicatorType = .activity
             if usingCoredata ?? false {
                 cell.favoriteImageView.image = searchedMovies[indexPath.row].image
@@ -146,6 +162,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.favoriteTitle.text = self.filteredMovies[indexPath.row].name
             cell.favoriteYear.text = self.filteredMovies[indexPath.row].date?.dateYyyyMmDdToDdMmYyyyWithDashes()
             cell.favoriteOverview.text = self.filteredMovies[indexPath.row].overview
+            
+            //Using cache with the app images to reduce memory and internet consumption. If is using coredata (no internet), the image comes from the disk. If there is internet, the app tries reload all the data, but all the images that once were downloaded have the chace to be in the cache memory. So they are not downloaded again.
             cell.favoriteImageView.kf.indicatorType = .activity
             if usingCoredata ?? false {
                 cell.favoriteImageView.image = filteredMovies[indexPath.row].image
@@ -156,6 +174,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.favoriteTitle.text = self.movies[indexPath.row].name
             cell.favoriteYear.text = self.movies[indexPath.row].date?.dateYyyyMmDdToDdMmYyyyWithDashes()
             cell.favoriteOverview.text = self.movies[indexPath.row].overview
+            
+            //Using cache with the app images to reduce memory and internet consumption. If is using coredata (no internet), the image comes from the disk. If there is internet, the app tries reload all the data, but all the images that once were downloaded have the chace to be in the cache memory. So they are not downloaded again.
             cell.favoriteImageView.kf.indicatorType = .activity
             if usingCoredata ?? false {
                 cell.favoriteImageView.image = movies[indexPath.row].image
@@ -174,6 +194,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         self.performSegue(withIdentifier: "favoriteToDetail", sender: nil)
     }
     
+    //Searchbar setup
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchActive = true
     }
@@ -192,6 +213,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        //Filtering "on demmand". (As the user types). If the filter is active, the datasource to be filled is different
         if FavoritesViewController.filterIsActive {
             self.searchedMovies = self.filteredMovies.filter({ (text) -> Bool in
                 let tmp: NSString = (text.name! as NSString?)!
@@ -206,6 +228,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             })
         }
         
+        //Seting the searchActive flag.
         if(self.searchedMovies.isEmpty) {
             self.searchActive = false
         } else {

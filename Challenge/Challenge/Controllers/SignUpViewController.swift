@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 
+/*Redirects to TheMovieDB site to create account*/
 class SignUpViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!

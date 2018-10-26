@@ -21,19 +21,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Starting implementation of persistent user session
 //        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
 //        loadingIndicator.hidesWhenStopped = true
 //        loadingIndicator.style = UIActivityIndicatorView.Style.gray
 //        loadingIndicator.startAnimating()
 //        self.alert1.view.addSubview(loadingIndicator)
 //        present(self.alert1, animated: true, completion: nil)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-        self.userNameTextField.addBottomBorderWithColor(color: .black, width: 1)
-        self.passwordTextField.addBottomBorderWithColor(color: .black, width: 1)
-        self.movies = Movie.fetchSortedByDate()
 //        User.fetchUser(completion: {(error) in
 //            if error == nil {
 //                if let _ = User.user.userId, let _ = User.user.sessionId {
@@ -53,14 +47,22 @@ class LoginViewController: UIViewController {
 //            }
 //        })
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        self.userNameTextField.addBottomBorderWithColor(color: .black, width: 1)
+        self.passwordTextField.addBottomBorderWithColor(color: .black, width: 1)
+        self.movies = Movie.fetchSortedByDate()
     }
     
+    //Unwind from sign view controller
     @IBAction func unwindToLogin(segue:UIStoryboardSegue) { }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
+    //Default error alert
     func errorAlert(title : String, message: String) {
         let alert = UIAlertController(
             title: title,
@@ -76,7 +78,10 @@ class LoginViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
+    //Trigged when login button pressed
     @IBAction func loginAction(_ sender: Any) {
+        
+        //loading indicator
         let alert = UIAlertController(title: nil, message: "Wait...", preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
@@ -84,12 +89,13 @@ class LoginViewController: UIViewController {
         loadingIndicator.startAnimating()
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
+        
+        //Validating empty fields
         if !(userNameTextField.text?.isEmpty)! && !(passwordTextField.text?.isEmpty)! {
+            //Login request
             User.user.login(username: userNameTextField.text!, password: passwordTextField.text!, onSuccess: { (result) in
                 User.user.getAccountDetails(onSuccess: { (result) in
-                    print("User ID: \(String(describing: User.user.userId!))")
-                    print("Session ID: \(String(describing: User.user.sessionId!))")
-                    User.saveUserToCoreData()
+                    User.saveUserToCoreData() //saving user to coreData (future implementations of persistent user session)
                     alert.dismiss(animated: true, completion: {
                         self.performSegue(withIdentifier: "loginAccepted", sender: nil)
                     })
@@ -110,7 +116,10 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //Trigged when signup button is pressed
     @IBAction func signUp(_ sender: Any) {
+        
+        //loading indicator
         let alert = UIAlertController(title: nil, message: "Wait...", preferredStyle: .alert)
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
@@ -118,9 +127,11 @@ class LoginViewController: UIViewController {
         loadingIndicator.startAnimating()
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
+        
+        //Request token
         User.user.requestToken(onSuccess: { (token) in
             alert.dismiss(animated: true, completion: {
-                self.performSegue(withIdentifier: "sign", sender: nil)
+                self.performSegue(withIdentifier: "sign", sender: nil) //redirects to TheMovieDB site to create account
             })
         }) { (error) in
             alert.dismiss(animated: true, completion: {
