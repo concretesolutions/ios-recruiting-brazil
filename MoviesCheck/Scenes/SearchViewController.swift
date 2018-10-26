@@ -13,9 +13,6 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var mediaCollectionView: UICollectionView!
     
-    //Search parameter that will be sent to the webserver
-    var currentSearchType = ""//movie, series
-    
     //Type for the search of the current ViewController
     var searchType:DestinationScreen? = nil
     
@@ -23,7 +20,7 @@ class SearchViewController: UIViewController {
     let jsonLoader = JsonLoader()
     
     //Media items to be displayed on the Collection View
-    var mediaItems:Array<MediaItem> = Array()
+    var mediaItems:Array<MovieMediaItem> = Array()
     
     //Identifies whether the searched word returned any result
     var sucessfulResponse = true
@@ -31,14 +28,6 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        if(searchType == .movies){
-            currentSearchType = "movie"
-            title = "Movies"
-        }else{
-            currentSearchType = "series"
-            title = "TV/Shows"
-        }
         
         //SearchBar configuration
         searchBar.setTextColor(color: UIColor.white)
@@ -126,10 +115,17 @@ extension SearchViewController:UICollectionViewDelegate, UICollectionViewDataSou
             
             let currentTitle = mediaItems[indexPath.row]
             
-            posterImageView.loadImage(fromURL: currentTitle.poster)
-            titleLabel.text = currentTitle.title
-            yearLabel.text = currentTitle.year
+            //Poster image
+            let posterURL = currentTitle.getPosterURL()
             
+            if(posterURL == "noposter"){
+                posterImageView.image = UIImage(named: "defaultPoster")
+            }else{
+                posterImageView.loadImage(fromURL: posterURL)
+            }
+            
+            titleLabel.text = currentTitle.title
+            yearLabel.text = currentTitle.getYear()
             
         }else{
             
@@ -154,16 +150,26 @@ extension SearchViewController:UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     
-    
-    
 }
 
 //MARK:- JsonLoaderDelegate
 extension SearchViewController:JsonLoaderDelegate{
     
     func loaderCompleted(result: SearchResult) {
+        
         mediaItems = result.items
-        sucessfulResponse = result.getResponse()
+        sucessfulResponse = true
+        
+        DispatchQueue.main.async {
+            self.mediaCollectionView.reloadData()
+        }
+        
+    }
+    
+    func loaderFailed() {
+        
+        sucessfulResponse = false
+        
         DispatchQueue.main.async {
             self.mediaCollectionView.reloadData()
         }
@@ -178,9 +184,16 @@ extension SearchViewController:UISearchBarDelegate{
         
         if let textToSearch = searchBar.text{
             //Execute search
-            jsonLoader.searchRequest(withText: textToSearch, type: currentSearchType)
-            //Hide keyboard
-            searchBar.resignFirstResponder()
+            
+            if let mediaItemType = searchType{
+                
+                jsonLoader.searchRequest(withText: textToSearch, type: mediaItemType)
+                
+                //Hide keyboard
+                searchBar.resignFirstResponder()
+                
+            }
+            
         }
         
     }

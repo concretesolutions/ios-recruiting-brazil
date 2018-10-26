@@ -10,22 +10,16 @@ import Foundation
 
 struct SearchResult:Codable {
     
-    var items:Array<MediaItem>
-    var totalResults:String
-    var response:String
+    var page:Int
+    var totalResults:Int
+    var totalPages:Int
+    var items:Array<MovieMediaItem>
     
     enum CodingKeys : String, CodingKey {
-        case items = "Search"
-        case totalResults
-        case response = "Response"
-    }
-    
-    func getResponse()->Bool{
-        if(response == "True"){
-            return true
-        }else{
-            return false
-        }
+        case page
+        case totalResults = "total_results"
+        case totalPages = "total_pages"
+        case items = "results"
     }
     
 }

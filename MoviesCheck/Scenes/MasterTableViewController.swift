@@ -9,11 +9,11 @@
 import UIKit
 
 //Screen navigation identifier
-enum DestinationScreen{
-    case home
-    case movies
-    case tvShows
-    case favorites
+enum DestinationScreen:String{
+    case home = "home"
+    case movies = "movie"
+    case tvShows = "tb"
+    case favorites = "fav"
 }
 
 class MasterTableViewController: UITableViewController {
