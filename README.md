@@ -8,7 +8,7 @@
 
 ---
 
-Agradeço por poder participar do Recruiting Day da Concrete. Foi uma honra conhecer várias pessoas talentodas nas suas várias áreas de atuação e experiências.
+Agradeço por poder participar do Recruiting Day da Concrete. Foi uma honra conhecer várias pessoas talentosas nas suas várias áreas de atuação e conhecimento.
 
 ## Afinal, o que é esse desafio?
 
