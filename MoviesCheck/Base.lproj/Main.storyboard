@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8iW-Y4-Tna">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -8,21 +8,125 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HindMadurai-Light.ttf">
+            <string>HindMadurai-Light</string>
+        </array>
+        <array key="Lora-Italic.ttf">
+            <string>Lora-Italic</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="isN-1r-56Z">
+        <!--Hello!-->
+        <scene sceneID="Qd0-xH-swI">
             <objects>
-                <viewController id="Omf-Ed-IDd" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ldw-dO-AS8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="jDo-lg-bTQ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mmo-ac-dQf">
+                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to MoviesCheck" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adK-UD-Zas">
+                                <rect key="frame" x="192" y="327.5" width="320" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="enM-CJ-j5R"/>
+                                    <constraint firstAttribute="height" constant="53" id="xKb-uh-5nO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lora-Italic" family="Lora" pointSize="28"/>
+                                <color key="textColor" red="0.48621892929999999" green="0.48630648850000002" blue="0.48621344570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="This simple iOS app allows you keep track of Movies and TV Shows you have seen and liked." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AqO-KZ-2ED">
+                                <rect key="frame" x="197" y="388.5" width="310" height="55"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="310" id="YFw-5Q-ZCW"/>
+                                    <constraint firstAttribute="height" constant="55" id="gwx-oQ-sYl"/>
+                                </constraints>
+                                <color key="textColor" red="0.48621892929999999" green="0.48630648850000002" blue="0.48621344570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.11762935670000001" green="0.1176572666" blue="0.1176275685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="adK-UD-Zas" firstAttribute="centerX" secondItem="Mmo-ac-dQf" secondAttribute="centerX" id="93a-yK-c26"/>
+                            <constraint firstItem="AqO-KZ-2ED" firstAttribute="top" secondItem="adK-UD-Zas" secondAttribute="bottom" constant="8" id="Bpd-dG-Upc"/>
+                            <constraint firstItem="AqO-KZ-2ED" firstAttribute="centerX" secondItem="Mmo-ac-dQf" secondAttribute="centerX" id="JSw-8b-sP6"/>
+                            <constraint firstItem="adK-UD-Zas" firstAttribute="centerY" secondItem="Mmo-ac-dQf" secondAttribute="centerY" constant="-30" id="nK4-Ia-ufa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zT1-gY-Jws"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Hello!" id="a0M-tt-7Ps"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fW7-2j-Pu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="229" y="15"/>
+        </scene>
+        <!--Movies Check-->
+        <scene sceneID="pA9-PV-XQd">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="PTP-jk-n0B" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="m6O-0l-hbd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="OGI-cQ-hrB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yGF-xl-KRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="KXf-oT-gb1">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KXf-oT-gb1" id="mqW-wA-shK">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PTP-jk-n0B" id="CVM-oO-co1"/>
+                            <outlet property="delegate" destination="PTP-jk-n0B" id="G6C-Hu-ZjJ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Movies Check" largeTitleDisplayMode="always" id="VyV-gm-c5O"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VK3-30-red" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="233" y="175"/>
+            <point key="canvasLocation" x="958" y="-832"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Fjt-0D-rp0">
+            <objects>
+                <navigationController id="dX3-2W-zKA" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EHT-cF-RgH">
+                        <rect key="frame" x="0.0" y="20" width="320" height="102"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.21578505640000001" green="0.2119073272" blue="0.20351341370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PTP-jk-n0B" kind="relationship" relationship="rootViewController" id="yB1-0j-mMx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rMK-CC-k3Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="229" y="-832"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="4G1-s5-Agv">
+            <objects>
+                <splitViewController id="8iW-Y4-Tna" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="dX3-2W-zKA" kind="relationship" relationship="masterViewController" id="JNf-uP-nTY"/>
+                        <segue destination="jDo-lg-bTQ" kind="relationship" relationship="detailViewController" id="H0Z-jy-BC9"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p4f-vu-kUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-500" y="-504"/>
         </scene>
     </scenes>
 </document>
