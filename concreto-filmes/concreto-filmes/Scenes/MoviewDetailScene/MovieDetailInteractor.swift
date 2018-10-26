@@ -14,28 +14,18 @@ import UIKit
 
 protocol MovieDetailBusinessLogic
 {
-  func doSomething(request: MovieDetail.Something.Request)
+    
 }
 
 protocol MovieDetailDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore
 {
-  var presenter: MovieDetailPresentationLogic?
-  var worker: MovieDetailWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: MovieDetail.Something.Request)
-  {
-    worker = MovieDetailWorker()
-    worker?.doSomeWork()
+    var presenter: MovieDetailPresentationLogic?
+    var worker: MovieDetailWorker?
     
-    let response = MovieDetail.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
 }
+

@@ -15,7 +15,7 @@ import Keys
 import SnapKit
 
 enum AppStatus{
-    case firstFetch
+    case resetFetch
     case fetchingMore
     case finish
 }
@@ -34,9 +34,32 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     let movieCellID = "movieCellID"
     var displayedMovies : [MainScreen.ViewModel.MovieViewModel] = []
     var currentPageForAPI = 1
+    var currentPageForAPIFiltering = 1
     internal var isFiltering = false
     
-    var applicationStatus : AppStatus = .firstFetch
+    var applicationStatus : AppStatus = .resetFetch {
+        didSet{
+            switch self.applicationStatus {
+            case .resetFetch:
+                DispatchQueue.main.async {
+                    self.activityIndicator.startAnimating()
+                }
+            case .finish:
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                }
+            case .fetchingMore:
+                self.beginBatchFetch()
+            }
+        }
+    }
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = .white
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
     
     private let leftBarButton : UIBarButtonItem = {
         let btn = UIBarButtonItem()
@@ -111,7 +134,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Tentar novamente", style: .default, handler: { (action) in
-            self.interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: self.applicationStatus == .firstFetch, completionBlock: {
+            self.interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: self.applicationStatus == .resetFetch, completionBlock: {
                 alert.dismiss(animated: true, completion: {
                     self.applicationStatus = .finish
                 })
@@ -129,19 +152,20 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        if(offsetY > contentHeight - scrollView.frame.height && applicationStatus != .fetchingMore && applicationStatus != .firstFetch){
-            beginBatchFetch()
+        if(offsetY > contentHeight - scrollView.frame.height && applicationStatus != .fetchingMore && applicationStatus != .resetFetch){
+            self.applicationStatus = .fetchingMore
         }
     }
     
     func beginBatchFetch() {
-        self.applicationStatus = .fetchingMore
-        self.currentPageForAPI += 1
         if(isFiltering){
-            interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPI, text: self.searchBar.text ?? ""), shouldResetMovies: false, completionBlock: {
+            interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPIFiltering + 1, text: self.searchBar.text ?? ""), shouldResetMovies: false, completionBlock: {
                 self.applicationStatus = .finish
+                //I have to add this only in success case
+                self.currentPageForAPIFiltering += 1
             })
         }else {
+            self.currentPageForAPI += 1
             interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: false, completionBlock: {
                 self.applicationStatus = .finish
             })
@@ -154,10 +178,13 @@ extension MainScreenViewController: CodeView {
     func buildViewHierarchy() {
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.titleView = searchBar
-        
+        view.addSubview(self.activityIndicator)
     }
     
     func setupConstraints() {
+        self.activityIndicator.snp.makeConstraints { (make) in
+            make.center.equalTo(self.view)
+        }
     }
     
     func setupAdditionalConfiguration() {
@@ -166,5 +193,6 @@ extension MainScreenViewController: CodeView {
         collectionView.register(MainScreenMovieCell.self, forCellWithReuseIdentifier: self.movieCellID)
         let tapToDismiss = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tapToDismiss)
+        self.activityIndicator.startAnimating()
     }
 }

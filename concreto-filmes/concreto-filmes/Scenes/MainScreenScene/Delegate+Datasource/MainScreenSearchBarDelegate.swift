@@ -14,12 +14,15 @@ extension MainScreenViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.currentPageForAPI = 1
-        self.applicationStatus = .fetchingMore
-        self.isFiltering = true
-        self.interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPI, text: searchBar.text ?? ""), shouldResetMovies: true, completionBlock: {
-            self.applicationStatus = .finish
-        })
+        if let text = searchBar.text?.replacingOccurrences(of: " ", with: "+").lowercased(){
+            self.applicationStatus = .resetFetch
+            self.isFiltering = true
+            self.currentPageForAPIFiltering = 1
+            print("asdfasdfas \(currentPageForAPIFiltering)")
+            self.interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPIFiltering, text: text), shouldResetMovies: true, completionBlock: {
+                self.applicationStatus = .finish
+            })
+        }
         dismissKeyboard()
     }
     
@@ -35,6 +38,6 @@ extension MainScreenViewController: UISearchBarDelegate {
             self.isFiltering = false
             self.interactor?.filterMoviesLocally(text: "")
         }
-        self.currentPageForAPI = 0
+        self.currentPageForAPIFiltering = 0
     }
 }
