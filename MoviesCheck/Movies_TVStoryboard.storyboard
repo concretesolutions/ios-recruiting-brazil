@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bVA-LP-6pX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HindMadurai-Light.ttf">
+            <string>HindMadurai-Light</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Search-->
+        <scene sceneID="5pb-Ul-jMt">
+            <objects>
+                <viewController id="fSG-G8-SsI" customClass="SearchViewController" customModule="MyFavoriteMovies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XKi-Qo-X0s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="DNB-gD-T8d">
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ot9-8g-GmZ"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VJH-rc-ZJL">
+                                <rect key="frame" x="0.0" y="114" width="375" height="553"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RFS-MK-4eN">
+                                    <size key="itemSize" width="220" height="255"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mediaItem" id="0PC-8b-hY5">
+                                        <rect key="frame" x="77.5" y="0.0" width="220" height="255"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="255"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5z-Xh-zgO">
+                                                    <rect key="frame" x="45" y="10" width="130" height="193"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ITY-dU-GFj">
+                                                            <rect key="frame" x="1" y="1" width="128" height="191"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.20391866559999999" green="0.2040795088" blue="0.19571971890000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="193" id="0lF-G4-drM"/>
+                                                        <constraint firstAttribute="width" constant="130" id="T4M-dk-cPD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ITY-dU-GFj" secondAttribute="trailing" constant="1" id="bBf-ns-faO"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ITY-dU-GFj" secondAttribute="bottom" constant="1" id="ekU-7O-dk4"/>
+                                                        <constraint firstItem="ITY-dU-GFj" firstAttribute="leading" secondItem="o5z-Xh-zgO" secondAttribute="leading" constant="1" id="g1D-Aq-Ivu"/>
+                                                        <constraint firstItem="ITY-dU-GFj" firstAttribute="top" secondItem="o5z-Xh-zgO" secondAttribute="top" constant="1" id="ikZ-fm-Avn"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1964" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8j-ty-AfD">
+                                                    <rect key="frame" x="45" y="227" width="130" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="15"/>
+                                                    <color key="textColor" red="0.48621892929999999" green="0.48630648850000002" blue="0.48621344570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Addams Family" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soA-5O-PDk">
+                                                    <rect key="frame" x="45" y="206" width="130" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="15"/>
+                                                    <color key="textColor" red="0.48621892929999999" green="0.48630648850000002" blue="0.48621344570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="o5z-Xh-zgO" firstAttribute="centerX" secondItem="0PC-8b-hY5" secondAttribute="centerX" id="2Fk-Sh-tyr"/>
+                                            <constraint firstItem="soA-5O-PDk" firstAttribute="centerX" secondItem="0PC-8b-hY5" secondAttribute="centerX" id="KRO-cd-gUK"/>
+                                            <constraint firstItem="soA-5O-PDk" firstAttribute="width" secondItem="o5z-Xh-zgO" secondAttribute="width" id="g37-8K-qGI"/>
+                                            <constraint firstItem="l8j-ty-AfD" firstAttribute="width" secondItem="o5z-Xh-zgO" secondAttribute="width" id="kPq-Zw-9TQ"/>
+                                            <constraint firstItem="l8j-ty-AfD" firstAttribute="top" secondItem="soA-5O-PDk" secondAttribute="bottom" id="p0F-Jk-IfZ"/>
+                                            <constraint firstItem="l8j-ty-AfD" firstAttribute="centerX" secondItem="0PC-8b-hY5" secondAttribute="centerX" id="pS8-jC-8vF"/>
+                                            <constraint firstItem="soA-5O-PDk" firstAttribute="top" secondItem="o5z-Xh-zgO" secondAttribute="bottom" constant="3" id="qpC-1f-IFj"/>
+                                            <constraint firstItem="o5z-Xh-zgO" firstAttribute="top" secondItem="0PC-8b-hY5" secondAttribute="top" constant="10" id="rpv-f3-yjc"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="feedbackMessage" id="XNi-KY-40Y">
+                                        <rect key="frame" x="0.0" y="265" width="375" height="288"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" editable="NO" text="Message here" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeK-D6-lVy">
+                                                    <rect key="frame" x="32.5" y="116.5" width="310" height="55"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="310" id="PGE-2Z-wgs"/>
+                                                        <constraint firstAttribute="height" constant="55" id="VRx-yv-AAk"/>
+                                                    </constraints>
+                                                    <color key="textColor" red="0.48621892929999999" green="0.48630648850000002" blue="0.48621344570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="VeK-D6-lVy" firstAttribute="centerX" secondItem="XNi-KY-40Y" secondAttribute="centerX" id="0y3-kW-AKI"/>
+                                            <constraint firstItem="VeK-D6-lVy" firstAttribute="centerY" secondItem="XNi-KY-40Y" secondAttribute="centerY" id="NYB-S2-7vJ"/>
+                                        </constraints>
+                                        <size key="customSize" width="375" height="288"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.11762935670000001" green="0.1176572666" blue="0.1176275685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BWZ-Wv-9s9" firstAttribute="bottom" secondItem="VJH-rc-ZJL" secondAttribute="bottom" id="Dst-rX-61K"/>
+                            <constraint firstItem="DNB-gD-T8d" firstAttribute="top" secondItem="BWZ-Wv-9s9" secondAttribute="top" id="Jy5-hY-mh1"/>
+                            <constraint firstItem="VJH-rc-ZJL" firstAttribute="leading" secondItem="BWZ-Wv-9s9" secondAttribute="leading" id="TPn-EZ-1bp"/>
+                            <constraint firstItem="BWZ-Wv-9s9" firstAttribute="trailing" secondItem="VJH-rc-ZJL" secondAttribute="trailing" id="cUE-rB-IAy"/>
+                            <constraint firstItem="VJH-rc-ZJL" firstAttribute="top" secondItem="DNB-gD-T8d" secondAttribute="bottom" id="oWI-6y-Hmu"/>
+                            <constraint firstItem="DNB-gD-T8d" firstAttribute="leading" secondItem="BWZ-Wv-9s9" secondAttribute="leading" id="peZ-hA-YLo"/>
+                            <constraint firstItem="DNB-gD-T8d" firstAttribute="trailing" secondItem="BWZ-Wv-9s9" secondAttribute="trailing" id="vzF-2s-Oje"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BWZ-Wv-9s9"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Search" id="vcm-Pt-Fqp"/>
+                    <connections>
+                        <outlet property="mediaCollectionView" destination="VJH-rc-ZJL" id="EVK-XL-sYI"/>
+                        <outlet property="searchBar" destination="DNB-gD-T8d" id="yfs-s2-UOZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e3i-4Y-rPS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2418.4000000000001" y="-631.0344827586207"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ce2-g2-ESM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bVA-LP-6pX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kik-EA-J4X">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.11762935670000001" green="0.1176572666" blue="0.1176275685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fSG-G8-SsI" kind="relationship" relationship="rootViewController" id="xRn-7i-Cya"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XdU-ba-uAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1688" y="-630"/>
+        </scene>
+    </scenes>
+</document>

@@ -66,7 +66,7 @@
         <!--Movies Check-->
         <scene sceneID="pA9-PV-XQd">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="PTP-jk-n0B" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="PTP-jk-n0B" customClass="MasterTableViewController" customModule="MoviesCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="m6O-0l-hbd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,10 +196,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies Check" largeTitleDisplayMode="always" id="VyV-gm-c5O"/>
+                    <connections>
+                        <segue destination="Qv0-SA-3e2" kind="showDetail" identifier="search" id="Kap-5z-6Ec"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VK3-30-red" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1681.640625" y="-832.03125"/>
+        </scene>
+        <!--Movies_TVStoryboard-->
+        <scene sceneID="7YJ-BI-hkQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Movies_TVStoryboard" id="Qv0-SA-3e2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INL-8V-7qR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2126" y="-972"/>
         </scene>
         <!--Developer-->
         <scene sceneID="ihG-10-hUy">
@@ -276,6 +287,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="gle-t6-8cP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xdU-XG-354">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
