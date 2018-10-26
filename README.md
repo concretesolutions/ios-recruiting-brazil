@@ -21,7 +21,7 @@ Esse projeto foi executado utilizando a arquitetura de projetos Clean Archtectur
 - Padrões de projeto criacionais como Abstract Factory, Lazy Init, Dependency Injection, Prototype.
 - Padrão de navegação utilizado foi o Navigator.
 
-O projeto foi desenvolvido no 4 utilizando o iOS 12. As APIs utilizadas foram:
+O projeto foi desenvolvido utilizando o Swift 4 no iOS 12. As APIs utilizadas foram:
 
 - Kingfisher (gerenciamente de image-set com auto-cache)
 - Eureka (criação de formulário, utilizado na tela de filtros)
