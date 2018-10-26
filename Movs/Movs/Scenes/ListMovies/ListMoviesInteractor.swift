@@ -33,7 +33,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic {
     
     // TODO: check locally the movies id
     /// Check if the movie to be presented is also an user's favorite movie
-    private func getFavoriteMovies(moviesResponse: [Movie]) -> [Movie] {
+    private func getFavoriteMovies(moviesResponse: [PopularMovie]) -> [PopularMovie] {
         
         return moviesResponse
     }

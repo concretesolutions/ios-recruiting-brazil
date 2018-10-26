@@ -18,13 +18,13 @@ enum ListMovies{
         }
         
         struct Response {
-            let movies: [Movie]?
+            let movies: [PopularMovie]?
             let error: String?
         }
         
         enum ViewModel {
             struct Success {
-                let movies: [Movie]
+                let movies: [PopularMovie]
             }
             
             struct Error {

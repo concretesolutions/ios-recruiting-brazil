@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  PopularMovie.swift
 //  Movs
 //
 //  Created by Maisa on 23/10/18.

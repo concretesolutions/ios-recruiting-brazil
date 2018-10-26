@@ -24,7 +24,7 @@ class ListMoviesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     // Data
-    var movies = [Movie]()
+    var movies = [PopularMovie]()
     let moviesLimitToPresent = 50
     
     // MARK: - View lifecycle
@@ -73,6 +73,9 @@ extension ListMoviesViewController: ListMoviesDisplayLogic {
 
 extension ListMoviesViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: load a detail view
+    }
+    
 }
-
 

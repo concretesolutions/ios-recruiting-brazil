@@ -9,7 +9,7 @@
 import Foundation
 
 struct MovieList {
-    let movies: [Movie]
+    let movies: [PopularMovie]
 }
 
 extension MovieList: Decodable {
@@ -20,6 +20,6 @@ extension MovieList: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ListCodingKeys.self)
-        movies = try container.decode([Movie].self, forKey: .results)
+        movies = try container.decode([PopularMovie].self, forKey: .results)
     }
 }

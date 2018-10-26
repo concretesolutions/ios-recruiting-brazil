@@ -23,7 +23,7 @@ class PopularMovieTableViewCell: UITableViewCell {
     @IBOutlet weak var movieImageView: UIImageViewMovieCard!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    func configureCellWith(data: Movie) {
+    func configureCellWith(data: PopularMovie) {
         self.movieIdentifier = data.id
         self.movieTitle.text = data.title
         self.movieDescription.text = data.overview
