@@ -11,7 +11,7 @@
 		2525BAEE21824AA7007EF9D0 /* MovieGridPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAE321824AA7007EF9D0 /* MovieGridPresenter.swift */; };
 		2525BAEF21824AA7007EF9D0 /* MovieGridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAE521824AA7007EF9D0 /* MovieGridDataSource.swift */; };
 		2525BAF021824AA7007EF9D0 /* MovieGridViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAE621824AA7007EF9D0 /* MovieGridViewOutput.swift */; };
-		2525BAF121824AA7007EF9D0 /* DefaultMovieGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAE721824AA7007EF9D0 /* DefaultMovieGridViewController.swift */; };
+		2525BAF121824AA7007EF9D0 /* MovieGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAE721824AA7007EF9D0 /* MovieGridViewController.swift */; };
 		2525BAF321824AA7007EF9D0 /* DefaultMovieGridInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAEB21824AA7007EF9D0 /* DefaultMovieGridInteractor.swift */; };
 		2525BAF421824AA7007EF9D0 /* MovieGridInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAEC21824AA7007EF9D0 /* MovieGridInteractor.swift */; };
 		2525BAF821824AF2007EF9D0 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAF621824AF2007EF9D0 /* Movie.swift */; };
@@ -26,20 +26,29 @@
 		2578BACA2183F9AD001107B6 /* MoviePersistenceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BAC92183F9AD001107B6 /* MoviePersistenceMock.swift */; };
 		2578BACE218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BACD218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift */; };
 		2578BAD0218406CF001107B6 /* MovieGridViewOutPutMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BACF218406CF001107B6 /* MovieGridViewOutPutMock.swift */; };
+		2578BAD421849847001107B6 /* ViewCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BAD321849847001107B6 /* ViewCode.swift */; };
+		2578BAD6218498D7001107B6 /* MovieGridUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BAD5218498D7001107B6 /* MovieGridUnitView.swift */; };
 		2579DFDA218244AA00D616C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFD9218244AA00D616C9 /* AppDelegate.swift */; };
 		2579DFDC218244AA00D616C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFDB218244AA00D616C9 /* ViewController.swift */; };
-		2579DFDF218244AA00D616C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFDD218244AA00D616C9 /* Main.storyboard */; };
 		2579DFE2218244AA00D616C9 /* Mov.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFE0218244AA00D616C9 /* Mov.xcdatamodeld */; };
 		2579DFE4218244AC00D616C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE3218244AC00D616C9 /* Assets.xcassets */; };
 		2579DFE7218244AC00D616C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE5218244AC00D616C9 /* LaunchScreen.storyboard */; };
+		25B2B7EC2184DF78005C96E1 /* MovieGridBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7EB2184DF78005C96E1 /* MovieGridBuilder.swift */; };
+		25B2B7F02184E4C1005C96E1 /* MovieGridCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7ED2184E3D1005C96E1 /* MovieGridCollectionDelegate.swift */; };
+		25B2B7F52184E87E005C96E1 /* HuePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F42184E87E005C96E1 /* HuePersistence.swift */; };
+		25B2B7F721852029005C96E1 /* UIScreen + widthProportion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */; };
+		25B2B7F921852061005C96E1 /* CGFloat + proportionalToWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */; };
 		25E5464F2182B3DF0043514B /* MoviePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5464E2182B3DF0043514B /* MoviePersistence.swift */; };
 		25E546532182B6680043514B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546522182B6680043514B /* APIConstants.swift */; };
 		25E546562182B8300043514B /* TMDBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546552182B8300043514B /* TMDBProvider.swift */; };
 		25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */; };
 		25E5465B21835DB70043514B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5465A21835DB70043514B /* Result.swift */; };
 		25E5465D218365FA0043514B /* MoyaProvider+requestDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5465C218365FA0043514B /* MoyaProvider+requestDecodable.swift */; };
-		7C7BCF0522B78C48A37749B3 /* Pods_Mov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB0472BC6403A28ABB5240E /* Pods_Mov.framework */; };
-		D3E3205E0BEBD3140C57AC90 /* Pods_MovTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148E52067DFB0382D30179C5 /* Pods_MovTests.framework */; };
+		25FEBC602184A3B1002184D6 /* MovieGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBC5F2184A3B1002184D6 /* MovieGridCollectionViewCell.swift */; };
+		25FEBC622184A5E1002184D6 /* MovieGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBC612184A5E1002184D6 /* MovieGridView.swift */; };
+		25FEBC642184C24F002184D6 /* MovieGridCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBC632184C24F002184D6 /* MovieGridCollectionView.swift */; };
+		AE9E5153F8991E991EB405AE /* Pods_Mov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4783AEE003CE6F0F59521CE4 /* Pods_Mov.framework */; };
+		FB098D5F156CFD0D68772874 /* Pods_MovTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0CF360EEAFB0E70B69ED441 /* Pods_MovTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,12 +62,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		148E52067DFB0382D30179C5 /* Pods_MovTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CCFA7612C4CC79C80B4628D /* Pods-MovTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovTests/Pods-MovTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2525BAE221824AA7007EF9D0 /* DefaultMovieGridPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultMovieGridPresenter.swift; sourceTree = "<group>"; };
 		2525BAE321824AA7007EF9D0 /* MovieGridPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridPresenter.swift; sourceTree = "<group>"; };
 		2525BAE521824AA7007EF9D0 /* MovieGridDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridDataSource.swift; sourceTree = "<group>"; };
 		2525BAE621824AA7007EF9D0 /* MovieGridViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridViewOutput.swift; sourceTree = "<group>"; };
-		2525BAE721824AA7007EF9D0 /* DefaultMovieGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultMovieGridViewController.swift; sourceTree = "<group>"; };
+		2525BAE721824AA7007EF9D0 /* MovieGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridViewController.swift; sourceTree = "<group>"; };
 		2525BAEB21824AA7007EF9D0 /* DefaultMovieGridInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultMovieGridInteractor.swift; sourceTree = "<group>"; };
 		2525BAEC21824AA7007EF9D0 /* MovieGridInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridInteractor.swift; sourceTree = "<group>"; };
 		2525BAF621824AF2007EF9D0 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -73,27 +82,36 @@
 		2578BAC92183F9AD001107B6 /* MoviePersistenceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePersistenceMock.swift; sourceTree = "<group>"; };
 		2578BACD218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMovieGridPresenterSpec.swift; sourceTree = "<group>"; };
 		2578BACF218406CF001107B6 /* MovieGridViewOutPutMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewOutPutMock.swift; sourceTree = "<group>"; };
+		2578BAD321849847001107B6 /* ViewCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCode.swift; sourceTree = "<group>"; };
+		2578BAD5218498D7001107B6 /* MovieGridUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridUnitView.swift; sourceTree = "<group>"; };
 		2579DFD6218244AA00D616C9 /* Mov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2579DFD9218244AA00D616C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2579DFDB218244AA00D616C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2579DFDE218244AA00D616C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2579DFE1218244AA00D616C9 /* Mov.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mov.xcdatamodel; sourceTree = "<group>"; };
 		2579DFE3218244AC00D616C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2579DFE6218244AC00D616C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2579DFE8218244AC00D616C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2579DFED218244AC00D616C9 /* MovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2579DFF3218244AC00D616C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25B2B7EB2184DF78005C96E1 /* MovieGridBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridBuilder.swift; sourceTree = "<group>"; };
+		25B2B7ED2184E3D1005C96E1 /* MovieGridCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridCollectionDelegate.swift; sourceTree = "<group>"; };
+		25B2B7F42184E87E005C96E1 /* HuePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuePersistence.swift; sourceTree = "<group>"; };
+		25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + widthProportion.swift"; sourceTree = "<group>"; };
+		25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat + proportionalToWidth.swift"; sourceTree = "<group>"; };
 		25E5464E2182B3DF0043514B /* MoviePersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviePersistence.swift; sourceTree = "<group>"; };
 		25E546522182B6680043514B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		25E546552182B8300043514B /* TMDBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBProvider.swift; sourceTree = "<group>"; };
 		25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBMoyaGateway.swift; sourceTree = "<group>"; };
 		25E5465A21835DB70043514B /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		25E5465C218365FA0043514B /* MoyaProvider+requestDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+requestDecodable.swift"; sourceTree = "<group>"; };
-		4F64331144AF86E1A57022CA /* Pods-Mov.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mov/Pods-Mov.debug.xcconfig"; sourceTree = "<group>"; };
-		6A3859B2188E54FB52CB798F /* Pods-Mov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mov/Pods-Mov.release.xcconfig"; sourceTree = "<group>"; };
-		6C566BA03C86CCA0AFD81E89 /* Pods-MovTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovTests/Pods-MovTests.release.xcconfig"; sourceTree = "<group>"; };
-		C047782B23886CC0DAA77D7F /* Pods-MovTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovTests/Pods-MovTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CDB0472BC6403A28ABB5240E /* Pods_Mov.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mov.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		25FEBC5F2184A3B1002184D6 /* MovieGridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridCollectionViewCell.swift; sourceTree = "<group>"; };
+		25FEBC612184A5E1002184D6 /* MovieGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridView.swift; sourceTree = "<group>"; };
+		25FEBC632184C24F002184D6 /* MovieGridCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridCollectionView.swift; sourceTree = "<group>"; };
+		40D6ACB852471A7267E03563 /* Pods-MovTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovTests/Pods-MovTests.release.xcconfig"; sourceTree = "<group>"; };
+		4783AEE003CE6F0F59521CE4 /* Pods_Mov.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mov.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB022DA8446BE76BA9011B6A /* Pods-Mov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mov/Pods-Mov.release.xcconfig"; sourceTree = "<group>"; };
+		E0CF360EEAFB0E70B69ED441 /* Pods_MovTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E377E27D811C59A8E062136B /* Pods-Mov.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mov/Pods-Mov.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C7BCF0522B78C48A37749B3 /* Pods_Mov.framework in Frameworks */,
+				AE9E5153F8991E991EB405AE /* Pods_Mov.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,24 +127,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3E3205E0BEBD3140C57AC90 /* Pods_MovTests.framework in Frameworks */,
+				FB098D5F156CFD0D68772874 /* Pods_MovTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C9ADFD7C4BDFAEB81EB9AC3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4F64331144AF86E1A57022CA /* Pods-Mov.debug.xcconfig */,
-				6A3859B2188E54FB52CB798F /* Pods-Mov.release.xcconfig */,
-				C047782B23886CC0DAA77D7F /* Pods-MovTests.debug.xcconfig */,
-				6C566BA03C86CCA0AFD81E89 /* Pods-MovTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		2525BADE21824A46007EF9D0 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,10 +158,12 @@
 		2525BAE021824AA7007EF9D0 /* MovieGrid */ = {
 			isa = PBXGroup;
 			children = (
+				25B2B7EA2184DF66005C96E1 /* Builder */,
 				2525BB072182529B007EF9D0 /* Common */,
 				2525BAEA21824AA7007EF9D0 /* Interactor */,
 				2525BAE121824AA7007EF9D0 /* Presenter */,
 				2525BAE421824AA7007EF9D0 /* ViewController */,
+				2578BAD1218495F3001107B6 /* Views */,
 			);
 			path = MovieGrid;
 			sourceTree = "<group>";
@@ -171,9 +180,9 @@
 		2525BAE421824AA7007EF9D0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2525BAE521824AA7007EF9D0 /* MovieGridDataSource.swift */,
+				25B2B7EF2184E450005C96E1 /* Delegates */,
 				2525BAE621824AA7007EF9D0 /* MovieGridViewOutput.swift */,
-				2525BAE721824AA7007EF9D0 /* DefaultMovieGridViewController.swift */,
+				2525BAE721824AA7007EF9D0 /* MovieGridViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -254,12 +263,12 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		2525BB0C2182561B007EF9D0 /* Constants */ = {
+		2525BB0C2182561B007EF9D0 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
 				2525BB0D21825629007EF9D0 /* Images.swift */,
 			);
-			path = Constants;
+			path = Commons;
 			sourceTree = "<group>";
 		};
 		2578BACB218404AA001107B6 /* Presenter */ = {
@@ -279,14 +288,33 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		2578BAD1218495F3001107B6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2578BAD5218498D7001107B6 /* MovieGridUnitView.swift */,
+				25FEBC5F2184A3B1002184D6 /* MovieGridCollectionViewCell.swift */,
+				25FEBC612184A5E1002184D6 /* MovieGridView.swift */,
+				25FEBC632184C24F002184D6 /* MovieGridCollectionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2578BAD22184983B001107B6 /* ViewCode */ = {
+			isa = PBXGroup;
+			children = (
+				2578BAD321849847001107B6 /* ViewCode.swift */,
+			);
+			path = ViewCode;
+			sourceTree = "<group>";
+		};
 		2579DFCD218244AA00D616C9 = {
 			isa = PBXGroup;
 			children = (
 				2579DFD8218244AA00D616C9 /* Mov */,
 				2579DFF0218244AC00D616C9 /* MovTests */,
 				2579DFD7218244AA00D616C9 /* Products */,
-				1C9ADFD7C4BDFAEB81EB9AC3 /* Pods */,
-				5E43BC2940BFC457CC45B561 /* Frameworks */,
+				7951CE54DFBDC33B3B7820DB /* Pods */,
+				983AC0367439B02EDE8732DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -302,12 +330,13 @@
 		2579DFD8218244AA00D616C9 /* Mov */ = {
 			isa = PBXGroup;
 			children = (
-				2525BB0C2182561B007EF9D0 /* Constants */,
+				25B2B7F12184E5E7005C96E1 /* Extensions */,
+				2578BAD22184983B001107B6 /* ViewCode */,
+				2525BB0C2182561B007EF9D0 /* Commons */,
 				2525BAFA21824B04007EF9D0 /* Workers */,
 				2525BAF521824AF2007EF9D0 /* Models */,
 				2525BADF21824AA7007EF9D0 /* Scenes */,
 				2525BADE21824A46007EF9D0 /* Core */,
-				2579DFDD218244AA00D616C9 /* Main.storyboard */,
 			);
 			path = Mov;
 			sourceTree = "<group>";
@@ -321,10 +350,37 @@
 			path = MovTests;
 			sourceTree = "<group>";
 		};
+		25B2B7EA2184DF66005C96E1 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				25B2B7EB2184DF78005C96E1 /* MovieGridBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		25B2B7EF2184E450005C96E1 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				2525BAE521824AA7007EF9D0 /* MovieGridDataSource.swift */,
+				25B2B7ED2184E3D1005C96E1 /* MovieGridCollectionDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		25B2B7F12184E5E7005C96E1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */,
+				25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		25E5464A218283D20043514B /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
 				25E5464E2182B3DF0043514B /* MoviePersistence.swift */,
+				25B2B7F42184E87E005C96E1 /* HuePersistence.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -346,11 +402,22 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		5E43BC2940BFC457CC45B561 /* Frameworks */ = {
+		7951CE54DFBDC33B3B7820DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CDB0472BC6403A28ABB5240E /* Pods_Mov.framework */,
-				148E52067DFB0382D30179C5 /* Pods_MovTests.framework */,
+				E377E27D811C59A8E062136B /* Pods-Mov.debug.xcconfig */,
+				DB022DA8446BE76BA9011B6A /* Pods-Mov.release.xcconfig */,
+				1CCFA7612C4CC79C80B4628D /* Pods-MovTests.debug.xcconfig */,
+				40D6ACB852471A7267E03563 /* Pods-MovTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		983AC0367439B02EDE8732DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4783AEE003CE6F0F59521CE4 /* Pods_Mov.framework */,
+				E0CF360EEAFB0E70B69ED441 /* Pods_MovTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -362,11 +429,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2579DFF6218244AC00D616C9 /* Build configuration list for PBXNativeTarget "Mov" */;
 			buildPhases = (
-				7F19E41E996D87E8F08C94D3 /* [CP] Check Pods Manifest.lock */,
+				244C62F073979DA0CFB26344 /* [CP] Check Pods Manifest.lock */,
 				2579DFD2218244AA00D616C9 /* Sources */,
 				2579DFD3218244AA00D616C9 /* Frameworks */,
 				2579DFD4218244AA00D616C9 /* Resources */,
-				25D0DE15A323E5ACAD9E4203 /* [CP] Embed Pods Frameworks */,
+				2E37627D0ACC60226D0371B3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -381,10 +448,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2579DFF9218244AC00D616C9 /* Build configuration list for PBXNativeTarget "MovTests" */;
 			buildPhases = (
-				EA0805F628BCE24A6C8E0215 /* [CP] Check Pods Manifest.lock */,
+				AA27F07FF78489AABC8DE9C4 /* [CP] Check Pods Manifest.lock */,
 				2579DFE9218244AC00D616C9 /* Sources */,
 				2579DFEA218244AC00D616C9 /* Frameworks */,
 				2579DFEB218244AC00D616C9 /* Resources */,
+				47CF53648182C8CDBEDA7BD3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -441,7 +509,6 @@
 			files = (
 				2579DFE7218244AC00D616C9 /* LaunchScreen.storyboard in Resources */,
 				2579DFE4218244AC00D616C9 /* Assets.xcassets in Resources */,
-				2579DFDF218244AA00D616C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,37 +522,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		25D0DE15A323E5ACAD9E4203 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Mov/Pods-Mov-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mov/Pods-Mov-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F19E41E996D87E8F08C94D3 /* [CP] Check Pods Manifest.lock */ = {
+		244C62F073979DA0CFB26344 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -507,7 +544,59 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA0805F628BCE24A6C8E0215 /* [CP] Check Pods Manifest.lock */ = {
+		2E37627D0ACC60226D0371B3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Mov/Pods-Mov-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mov/Pods-Mov-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		47CF53648182C8CDBEDA7BD3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MovTests/Pods-MovTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovTests/Pods-MovTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA27F07FF78489AABC8DE9C4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -536,13 +625,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25B2B7F02184E4C1005C96E1 /* MovieGridCollectionDelegate.swift in Sources */,
+				25B2B7F721852029005C96E1 /* UIScreen + widthProportion.swift in Sources */,
 				2525BAFD21824B04007EF9D0 /* MovieFetcher.swift in Sources */,
 				2525BB09218252AD007EF9D0 /* MovieGridUnit.swift in Sources */,
+				25FEBC602184A3B1002184D6 /* MovieGridCollectionViewCell.swift in Sources */,
 				2525BB0B21825479007EF9D0 /* MovieGridViewModel.swift in Sources */,
 				2579DFDC218244AA00D616C9 /* ViewController.swift in Sources */,
 				25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */,
-				2525BAF121824AA7007EF9D0 /* DefaultMovieGridViewController.swift in Sources */,
+				2525BAF121824AA7007EF9D0 /* MovieGridViewController.swift in Sources */,
+				2578BAD421849847001107B6 /* ViewCode.swift in Sources */,
 				2525BAEF21824AA7007EF9D0 /* MovieGridDataSource.swift in Sources */,
+				25FEBC622184A5E1002184D6 /* MovieGridView.swift in Sources */,
 				2525BAF321824AA7007EF9D0 /* DefaultMovieGridInteractor.swift in Sources */,
 				2525BAF921824AF2007EF9D0 /* MovieGenre.swift in Sources */,
 				2525BAED21824AA7007EF9D0 /* DefaultMovieGridPresenter.swift in Sources */,
@@ -551,11 +645,16 @@
 				2579DFDA218244AA00D616C9 /* AppDelegate.swift in Sources */,
 				2525BAF421824AA7007EF9D0 /* MovieGridInteractor.swift in Sources */,
 				25E5464F2182B3DF0043514B /* MoviePersistence.swift in Sources */,
+				25B2B7EC2184DF78005C96E1 /* MovieGridBuilder.swift in Sources */,
+				25B2B7F52184E87E005C96E1 /* HuePersistence.swift in Sources */,
 				2525BAF021824AA7007EF9D0 /* MovieGridViewOutput.swift in Sources */,
 				2525BB0E21825629007EF9D0 /* Images.swift in Sources */,
+				25FEBC642184C24F002184D6 /* MovieGridCollectionView.swift in Sources */,
 				25E5465D218365FA0043514B /* MoyaProvider+requestDecodable.swift in Sources */,
 				2525BAF821824AF2007EF9D0 /* Movie.swift in Sources */,
+				2578BAD6218498D7001107B6 /* MovieGridUnitView.swift in Sources */,
 				25E5465B21835DB70043514B /* Result.swift in Sources */,
+				25B2B7F921852061005C96E1 /* CGFloat + proportionalToWidth.swift in Sources */,
 				25E546562182B8300043514B /* TMDBProvider.swift in Sources */,
 				2579DFE2218244AA00D616C9 /* Mov.xcdatamodeld in Sources */,
 			);
@@ -585,14 +684,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2579DFDD218244AA00D616C9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2579DFDE218244AA00D616C9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2579DFE5218244AC00D616C9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -722,7 +813,7 @@
 		};
 		2579DFF7218244AC00D616C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F64331144AF86E1A57022CA /* Pods-Mov.debug.xcconfig */;
+			baseConfigurationReference = E377E27D811C59A8E062136B /* Pods-Mov.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -741,7 +832,7 @@
 		};
 		2579DFF8218244AC00D616C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A3859B2188E54FB52CB798F /* Pods-Mov.release.xcconfig */;
+			baseConfigurationReference = DB022DA8446BE76BA9011B6A /* Pods-Mov.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -760,7 +851,7 @@
 		};
 		2579DFFA218244AC00D616C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C047782B23886CC0DAA77D7F /* Pods-MovTests.debug.xcconfig */;
+			baseConfigurationReference = 1CCFA7612C4CC79C80B4628D /* Pods-MovTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -781,7 +872,7 @@
 		};
 		2579DFFB218244AC00D616C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C566BA03C86CCA0AFD81E89 /* Pods-MovTests.release.xcconfig */;
+			baseConfigurationReference = 40D6ACB852471A7267E03563 /* Pods-MovTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

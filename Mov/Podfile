@@ -7,11 +7,13 @@ target 'Mov' do
 
   # Pods for Mov
   pod 'Moya', '~> 11.0'
-  pod 'Quick'
-  pod 'Nimble'
+  pod 'SnapKit'
 
+  
   target 'MovTests' do
     inherit! :search_paths
+    pod 'Quick'
+    pod 'Nimble'
   end
 
 end
