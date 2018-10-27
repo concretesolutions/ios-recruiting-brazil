@@ -10,9 +10,13 @@ import Foundation
 
 struct Movie: Decodable {
     let id: Int
+    let genreIds: [Int]
     let title: String
-    let releaseDate: Date
-    let genres: [MovieGenre]
     let overview: String
+    let releaseDate: Date
     let posterPath: String
+}
+
+struct MoviesFetchResults: Decodable {
+    let results: [Movie]
 }

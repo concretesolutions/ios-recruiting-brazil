@@ -22,7 +22,7 @@ class MovieGridPresenterMock: MovieGridPresenter {
     /**
         Every call of method made in this object.
      */
-    public var calls: [Method] = []
+    private var calls = Set<Method>()
     
     /**
         MovieGridMovies received through presentMovies method.
@@ -34,8 +34,8 @@ class MovieGridPresenterMock: MovieGridPresenter {
         Tells if this method was called only once and alone.
      - Parameter method: method to check
      */
-    public func calledAlone(method: Method) -> Bool {
-        return self.calls.count == 1 && calls.first! == method
+    public func didCall(method: Method) -> Bool {
+        return self.calls.contains(method)
     }
     
     /**
@@ -47,12 +47,12 @@ class MovieGridPresenterMock: MovieGridPresenter {
     }
     
     func present(movies: [MovieGridUnit]) {
-        self.calls.append(.presentMovies)
+        self.calls.insert(.presentMovies)
         self.receivedMovies = movies
     }
     
     func presentNetworkError() {
-        self.calls.append(.presentNetworkError)
+        self.calls.insert(.presentNetworkError)
     }
     
 }

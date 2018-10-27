@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct MovieGridViewModel {
+struct MovieGridViewModel: Equatable {
     let title: String
     let poster: UIImage
     let isFavoriteIcon: UIImage

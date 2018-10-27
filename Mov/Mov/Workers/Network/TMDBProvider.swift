@@ -1,5 +1,5 @@
 //
-//  TMDBTarget.swift
+//  TMDBProvider.swift
 //  Mov
 //
 //  Created by Miguel Nery on 25/10/18.
@@ -9,11 +9,11 @@
 import Foundation
 import Moya
 
-enum TMDBTarget {
+enum TMDBProvider {
     case popular(page: Int)
 }
 
-extension TMDBTarget: TargetType {
+extension TMDBProvider: TargetType {
     var baseURL: URL {
         return kAPI.TMDB.basePath
     }

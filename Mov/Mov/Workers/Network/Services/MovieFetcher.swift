@@ -9,5 +9,5 @@
 import Foundation
 
 protocol MovieFetcher {
-    func fetchMovies() -> [Movie]?
+    func fetchPopularMovies(page: Int, _ completion: @escaping (Result<[Movie]>) -> Void)
 }

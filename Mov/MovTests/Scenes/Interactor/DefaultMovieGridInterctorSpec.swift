@@ -8,32 +8,32 @@
 
 import Quick
 import Nimble
-import XCTest
 
 
 @testable import Mov
 
-class MovieGridInteractorSpec: QuickSpec {
+class DefaultMovieGridInteractorSpec: QuickSpec {
     
     override func spec() {
         describe("the movie grid interactor") {
             let movieFethcer = MovieFetcherMock()
             let presenter = MovieGridPresenterMock()
-            let interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFethcer)
+            let moviePersistence = MoviePersistenceMock()
+            
+            let interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFethcer, moviePersistence: moviePersistence)
             
             context("when succeed to fetch movies") {
 
                 beforeEach {
                     movieFethcer.flawedFetch = false
-                    interactor.fetchMovieList()
+                    interactor.fetchMovieList(page: 1)
                 }
                 
-                
-                it("call presenter's presentMovies only") {
-                    expect(presenter.calledAlone(method: .presentMovies)).to(beTrue())
+                it("call presenter's presentMovies") {
+                    expect(presenter.didCall(method: .presentMovies)).to(beTrue())
                 }
                 
-                it("pass correctly all data fetched") {
+                it("send correctly to presenter all data fetched") {
                     let fetchedMoviesMock = movieFethcer.mockMovies.map { movie in
                         return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: false)
                     }
@@ -50,11 +50,11 @@ class MovieGridInteractorSpec: QuickSpec {
                 
                 beforeEach {
                     movieFethcer.flawedFetch = true
-                    interactor.fetchMovieList()
+                    interactor.fetchMovieList(page: 1)
                 }
                 
-                it("call presenter's presentNetworkError only") {
-                    expect(presenter.calledAlone(method: .presentNetworkError)).to(beTrue())
+                it("call presenter's presentNetworkError") {
+                    expect(presenter.didCall(method: .presentNetworkError)).to(beTrue())
                 }
                 
                 afterEach {

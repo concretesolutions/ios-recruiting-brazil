@@ -19,16 +19,25 @@
 		2525BAFD21824B04007EF9D0 /* MovieFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BAFC21824B04007EF9D0 /* MovieFetcher.swift */; };
 		2525BB0421824C83007EF9D0 /* MovieGridPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0121824C83007EF9D0 /* MovieGridPresenterMock.swift */; };
 		2525BB0521824C83007EF9D0 /* MovieFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0221824C83007EF9D0 /* MovieFetcherMock.swift */; };
-		2525BB0621824C83007EF9D0 /* MovieGridInterctorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0321824C83007EF9D0 /* MovieGridInterctorSpec.swift */; };
+		2525BB0621824C83007EF9D0 /* DefaultMovieGridInterctorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0321824C83007EF9D0 /* DefaultMovieGridInterctorSpec.swift */; };
 		2525BB09218252AD007EF9D0 /* MovieGridUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB08218252AD007EF9D0 /* MovieGridUnit.swift */; };
 		2525BB0B21825479007EF9D0 /* MovieGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0A21825479007EF9D0 /* MovieGridViewModel.swift */; };
 		2525BB0E21825629007EF9D0 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0D21825629007EF9D0 /* Images.swift */; };
+		2578BACA2183F9AD001107B6 /* MoviePersistenceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BAC92183F9AD001107B6 /* MoviePersistenceMock.swift */; };
+		2578BACE218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BACD218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift */; };
+		2578BAD0218406CF001107B6 /* MovieGridViewOutPutMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BACF218406CF001107B6 /* MovieGridViewOutPutMock.swift */; };
 		2579DFDA218244AA00D616C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFD9218244AA00D616C9 /* AppDelegate.swift */; };
 		2579DFDC218244AA00D616C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFDB218244AA00D616C9 /* ViewController.swift */; };
 		2579DFDF218244AA00D616C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFDD218244AA00D616C9 /* Main.storyboard */; };
 		2579DFE2218244AA00D616C9 /* Mov.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFE0218244AA00D616C9 /* Mov.xcdatamodeld */; };
 		2579DFE4218244AC00D616C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE3218244AC00D616C9 /* Assets.xcassets */; };
 		2579DFE7218244AC00D616C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE5218244AC00D616C9 /* LaunchScreen.storyboard */; };
+		25E5464F2182B3DF0043514B /* MoviePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5464E2182B3DF0043514B /* MoviePersistence.swift */; };
+		25E546532182B6680043514B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546522182B6680043514B /* APIConstants.swift */; };
+		25E546562182B8300043514B /* TMDBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546552182B8300043514B /* TMDBProvider.swift */; };
+		25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */; };
+		25E5465B21835DB70043514B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5465A21835DB70043514B /* Result.swift */; };
+		25E5465D218365FA0043514B /* MoyaProvider+requestDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5465C218365FA0043514B /* MoyaProvider+requestDecodable.swift */; };
 		7C7BCF0522B78C48A37749B3 /* Pods_Mov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB0472BC6403A28ABB5240E /* Pods_Mov.framework */; };
 		D3E3205E0BEBD3140C57AC90 /* Pods_MovTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148E52067DFB0382D30179C5 /* Pods_MovTests.framework */; };
 /* End PBXBuildFile section */
@@ -57,10 +66,13 @@
 		2525BAFC21824B04007EF9D0 /* MovieFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieFetcher.swift; sourceTree = "<group>"; };
 		2525BB0121824C83007EF9D0 /* MovieGridPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridPresenterMock.swift; sourceTree = "<group>"; };
 		2525BB0221824C83007EF9D0 /* MovieFetcherMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieFetcherMock.swift; sourceTree = "<group>"; };
-		2525BB0321824C83007EF9D0 /* MovieGridInterctorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGridInterctorSpec.swift; sourceTree = "<group>"; };
+		2525BB0321824C83007EF9D0 /* DefaultMovieGridInterctorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultMovieGridInterctorSpec.swift; sourceTree = "<group>"; };
 		2525BB08218252AD007EF9D0 /* MovieGridUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridUnit.swift; sourceTree = "<group>"; };
 		2525BB0A21825479007EF9D0 /* MovieGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewModel.swift; sourceTree = "<group>"; };
 		2525BB0D21825629007EF9D0 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		2578BAC92183F9AD001107B6 /* MoviePersistenceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePersistenceMock.swift; sourceTree = "<group>"; };
+		2578BACD218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMovieGridPresenterSpec.swift; sourceTree = "<group>"; };
+		2578BACF218406CF001107B6 /* MovieGridViewOutPutMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewOutPutMock.swift; sourceTree = "<group>"; };
 		2579DFD6218244AA00D616C9 /* Mov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2579DFD9218244AA00D616C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2579DFDB218244AA00D616C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +83,12 @@
 		2579DFE8218244AC00D616C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2579DFED218244AC00D616C9 /* MovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2579DFF3218244AC00D616C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25E5464E2182B3DF0043514B /* MoviePersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviePersistence.swift; sourceTree = "<group>"; };
+		25E546522182B6680043514B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		25E546552182B8300043514B /* TMDBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBProvider.swift; sourceTree = "<group>"; };
+		25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBMoyaGateway.swift; sourceTree = "<group>"; };
+		25E5465A21835DB70043514B /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		25E5465C218365FA0043514B /* MoyaProvider+requestDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+requestDecodable.swift"; sourceTree = "<group>"; };
 		4F64331144AF86E1A57022CA /* Pods-Mov.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mov/Pods-Mov.debug.xcconfig"; sourceTree = "<group>"; };
 		6A3859B2188E54FB52CB798F /* Pods-Mov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mov/Pods-Mov.release.xcconfig"; sourceTree = "<group>"; };
 		6C566BA03C86CCA0AFD81E89 /* Pods-MovTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovTests/Pods-MovTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +199,7 @@
 		2525BAFA21824B04007EF9D0 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				25E5464A218283D20043514B /* DataBase */,
 				2525BAFB21824B04007EF9D0 /* Network */,
 			);
 			path = Workers;
@@ -189,7 +208,11 @@
 		2525BAFB21824B04007EF9D0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				2525BAFC21824B04007EF9D0 /* MovieFetcher.swift */,
+				25E5465921835DAB0043514B /* Utils */,
+				25E546542182B7E50043514B /* Services */,
+				25E546522182B6680043514B /* APIConstants.swift */,
+				25E546552182B8300043514B /* TMDBProvider.swift */,
+				25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -197,6 +220,7 @@
 		2525BAFE21824C83007EF9D0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2578BACB218404AA001107B6 /* Presenter */,
 				2525BAFF21824C83007EF9D0 /* Interactor */,
 			);
 			path = Scenes;
@@ -206,7 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				2525BB0021824C83007EF9D0 /* Mocks */,
-				2525BB0321824C83007EF9D0 /* MovieGridInterctorSpec.swift */,
+				2525BB0321824C83007EF9D0 /* DefaultMovieGridInterctorSpec.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -216,6 +240,7 @@
 			children = (
 				2525BB0121824C83007EF9D0 /* MovieGridPresenterMock.swift */,
 				2525BB0221824C83007EF9D0 /* MovieFetcherMock.swift */,
+				2578BAC92183F9AD001107B6 /* MoviePersistenceMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -235,6 +260,23 @@
 				2525BB0D21825629007EF9D0 /* Images.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		2578BACB218404AA001107B6 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2578BACC218404B2001107B6 /* Mocks */,
+				2578BACD218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2578BACC218404B2001107B6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				2578BACF218406CF001107B6 /* MovieGridViewOutPutMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		2579DFCD218244AA00D616C9 = {
@@ -277,6 +319,31 @@
 				2579DFF3218244AC00D616C9 /* Info.plist */,
 			);
 			path = MovTests;
+			sourceTree = "<group>";
+		};
+		25E5464A218283D20043514B /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				25E5464E2182B3DF0043514B /* MoviePersistence.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		25E546542182B7E50043514B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2525BAFC21824B04007EF9D0 /* MovieFetcher.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		25E5465921835DAB0043514B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				25E5465A21835DB70043514B /* Result.swift */,
+				25E5465C218365FA0043514B /* MoyaProvider+requestDecodable.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		5E43BC2940BFC457CC45B561 /* Frameworks */ = {
@@ -473,17 +540,23 @@
 				2525BB09218252AD007EF9D0 /* MovieGridUnit.swift in Sources */,
 				2525BB0B21825479007EF9D0 /* MovieGridViewModel.swift in Sources */,
 				2579DFDC218244AA00D616C9 /* ViewController.swift in Sources */,
+				25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */,
 				2525BAF121824AA7007EF9D0 /* DefaultMovieGridViewController.swift in Sources */,
 				2525BAEF21824AA7007EF9D0 /* MovieGridDataSource.swift in Sources */,
 				2525BAF321824AA7007EF9D0 /* DefaultMovieGridInteractor.swift in Sources */,
 				2525BAF921824AF2007EF9D0 /* MovieGenre.swift in Sources */,
 				2525BAED21824AA7007EF9D0 /* DefaultMovieGridPresenter.swift in Sources */,
 				2525BAEE21824AA7007EF9D0 /* MovieGridPresenter.swift in Sources */,
+				25E546532182B6680043514B /* APIConstants.swift in Sources */,
 				2579DFDA218244AA00D616C9 /* AppDelegate.swift in Sources */,
 				2525BAF421824AA7007EF9D0 /* MovieGridInteractor.swift in Sources */,
+				25E5464F2182B3DF0043514B /* MoviePersistence.swift in Sources */,
 				2525BAF021824AA7007EF9D0 /* MovieGridViewOutput.swift in Sources */,
 				2525BB0E21825629007EF9D0 /* Images.swift in Sources */,
+				25E5465D218365FA0043514B /* MoyaProvider+requestDecodable.swift in Sources */,
 				2525BAF821824AF2007EF9D0 /* Movie.swift in Sources */,
+				25E5465B21835DB70043514B /* Result.swift in Sources */,
+				25E546562182B8300043514B /* TMDBProvider.swift in Sources */,
 				2579DFE2218244AA00D616C9 /* Mov.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,9 +565,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2578BACA2183F9AD001107B6 /* MoviePersistenceMock.swift in Sources */,
 				2525BB0521824C83007EF9D0 /* MovieFetcherMock.swift in Sources */,
+				2578BACE218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift in Sources */,
 				2525BB0421824C83007EF9D0 /* MovieGridPresenterMock.swift in Sources */,
-				2525BB0621824C83007EF9D0 /* MovieGridInterctorSpec.swift in Sources */,
+				2578BAD0218406CF001107B6 /* MovieGridViewOutPutMock.swift in Sources */,
+				2525BB0621824C83007EF9D0 /* DefaultMovieGridInterctorSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

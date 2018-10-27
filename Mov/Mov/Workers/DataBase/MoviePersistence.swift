@@ -14,10 +14,4 @@ protocol MoviePersistence {
      - Parameter movie: movie to be evaluated.
      */
     func isFavorite(_ movie: Movie) -> Bool
-    
-    /**
-     Tell if ```movie``` is marked as favorite.
-     - Parameter movie: movie to be evaluated.
-     */
-    func isFavorite(_ movie: MovieGridUnit) -> Bool
 }

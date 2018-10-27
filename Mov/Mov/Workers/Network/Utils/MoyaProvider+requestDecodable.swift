@@ -8,5 +8,22 @@
 
 import Moya
 
-
-extension MoyaProvider
+extension MoyaProvider {
+    
+    func requestDecodable<T: Decodable>(target: Target, decoder: JSONDecoder, _ completion: @escaping (Result<T>) -> Void) {
+        
+        self.request(target) { result in
+            switch result {
+            case .success(let value):
+                do {
+                    let decodedData = try decoder.decode(T.self, from: value.data)
+                    completion(.success(decodedData))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+}

@@ -7,3 +7,12 @@
 //
 
 import Foundation
+@testable import Mov
+
+
+class MoviePersistenceMock: MoviePersistence {
+    
+    func isFavorite(_ movie: Movie) -> Bool {
+        return false
+    }
+}
