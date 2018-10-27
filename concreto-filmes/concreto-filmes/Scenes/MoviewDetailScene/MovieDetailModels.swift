@@ -13,19 +13,16 @@
 import UIKit
 import Keys
 
-enum MovieDetail{
+enum MovieDetail {
     // MARK: Use cases
-    
-    enum FetchMovieGenres{
-        struct Request{
+
+    enum FetchMovieGenres {
+        struct Request {
             var baseUrl: String = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(ConcretoFilmesKeys().tHE_MOVIE_DB_V3_KEY)&language=\(Locale.preferredLanguages[0] as String)"
         }
-        struct Response{
-        }
-        
     }
-    
-    struct ViewModel{
+
+    struct ViewModel {
         var movieImage: UIImage
         var title: String
         var genres: [String]?
@@ -33,4 +30,3 @@ enum MovieDetail{
         var isFavorite: Bool
     }
 }
-

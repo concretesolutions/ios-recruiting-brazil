@@ -12,23 +12,20 @@
 
 import UIKit
 
-@objc protocol MovieDetailRoutingLogic
-{
+@objc protocol MovieDetailRoutingLogic {
   //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
-protocol MovieDetailDataPassing
-{
+protocol MovieDetailDataPassing {
   var dataStore: MovieDetailDataStore? { get }
 }
 
-class MovieDetailRouter: NSObject, MovieDetailRoutingLogic, MovieDetailDataPassing
-{
+class MovieDetailRouter: NSObject, MovieDetailRoutingLogic, MovieDetailDataPassing {
   weak var viewController: MovieDetailViewController?
   var dataStore: MovieDetailDataStore?
-  
+
   // MARK: Routing
-  
+
   //func routeToSomewhere(segue: UIStoryboardSegue?)
   //{
   //  if let segue = segue {
@@ -45,14 +42,14 @@ class MovieDetailRouter: NSObject, MovieDetailRoutingLogic, MovieDetailDataPassi
   //}
 
   // MARK: Navigation
-  
+
   //func navigateToSomewhere(source: MovieDetailViewController, destination: SomewhereViewController)
   //{
   //  source.show(destination, sender: nil)
   //}
-  
+
   // MARK: Passing data
-  
+
   //func passDataToSomewhere(source: MovieDetailDataStore, destination: inout SomewhereDataStore)
   //{
   //  destination.name = source.name

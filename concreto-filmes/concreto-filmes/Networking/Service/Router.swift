@@ -9,9 +9,9 @@
 import Foundation
 
 class Router<EndPoint: EndPointType>: NetworkRouter {
-    
+
     private var task: URLSessionTask?
-    
+
     func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
         let session = URLSession.shared
         do {
@@ -24,25 +24,24 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         }
         self.task?.resume()
     }
-    
+
     func cancel() {
         self.task?.cancel()
     }
-    
-    
-    private func buildRequest(from route: EndPoint) throws -> URLRequest{
+
+    private func buildRequest(from route: EndPoint) throws -> URLRequest {
         var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
-        
+
         request.httpMethod = route.httpMethod.rawValue
-        
+
         do {
             switch route.task {
             case .request:
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
+
             case .requestParameters(let bodyParameters, let urlParameters):
                 try self.configureParameters(bodyParameters: bodyParameters, urlParameters: urlParameters, request: &request)
-                
+
             case .requestParametersAndHeaders(let bodyParameters, let urlParameters, let additionalHeaders):
                 self.addAditionalHeaders(additionalHeaders: additionalHeaders, request: &request)
                 try self.configureParameters(bodyParameters: bodyParameters, urlParameters: urlParameters, request: &request)
@@ -52,13 +51,13 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
             throw error
         }
     }
-    
+
     private func configureParameters(bodyParameters: Parameters?, urlParameters: Parameters?, request: inout URLRequest) throws {
         do {
             if let bodyParameters = bodyParameters {
                 try JSONParameterEncoder.encode(urlRequest: &request, with: bodyParameters)
             }
-            
+
             if let urlParameters = urlParameters {
                 try URLParameterEncoder.encode(urlRequest: &request, with: urlParameters)
             }
@@ -66,14 +65,13 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
             throw error
         }
     }
-    
+
     private func addAditionalHeaders(additionalHeaders: HTTPHeaders?, request: inout URLRequest) {
         guard let headers = additionalHeaders else {return}
-        
+
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }
     }
-    
-    
+
 }

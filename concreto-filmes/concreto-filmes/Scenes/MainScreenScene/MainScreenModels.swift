@@ -13,17 +13,16 @@
 import UIKit
 import Keys
 
-enum MainScreen
-{
+enum MainScreen {
     // MARK: Use cases
-    
+
     struct ViewModel {
         struct MovieViewModel: Hashable {
             var posterUrl: String
             var title: String
         }
     }
-    
+
     enum FetchPopularMovies {
         struct Request {
             var index: Int = 1
@@ -32,7 +31,7 @@ enum MainScreen
             }
         }
     }
-    
+
     enum FetchQueryMovies {
         struct Request {
             var index: Int = 1
@@ -40,4 +39,3 @@ enum MainScreen
         }
     }
 }
-

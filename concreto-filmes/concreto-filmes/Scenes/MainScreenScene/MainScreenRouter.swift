@@ -12,21 +12,20 @@
 
 import UIKit
 
-@objc protocol MainScreenRoutingLogic{
+@objc protocol MainScreenRoutingLogic {
     //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
-protocol MainScreenDataPassing{
+protocol MainScreenDataPassing {
     var dataStore: MainScreenDataStore? { get }
 }
 
-class MainScreenRouter: NSObject, MainScreenRoutingLogic, MainScreenDataPassing{
+class MainScreenRouter: NSObject, MainScreenRoutingLogic, MainScreenDataPassing {
     weak var viewController: MainScreenViewController?
     var dataStore: MainScreenDataStore?
-    
+
     // MARK: Routing
-    
-    
+
     //func routeToSomewhere(segue: UIStoryboardSegue?)
     //{
     //  if let segue = segue {
@@ -41,19 +40,18 @@ class MainScreenRouter: NSObject, MainScreenRoutingLogic, MainScreenDataPassing{
     //    navigateToSomewhere(source: viewController!, destination: destinationVC)
     //  }
     //}
-    
+
     // MARK: Navigation
-    
+
     //func navigateToSomewhere(source: MainScreenViewController, destination: SomewhereViewController)
     //{
     //  source.show(destination, sender: nil)
     //}
-    
+
     // MARK: Passing data
-    
+
     //func passDataToSomewhere(source: MainScreenDataStore, destination: inout SomewhereDataStore)
     //{
     //  destination.name = source.name
     //}
 }
-

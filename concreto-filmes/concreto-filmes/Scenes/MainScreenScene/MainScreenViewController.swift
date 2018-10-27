@@ -14,27 +14,27 @@ import UIKit
 import Keys
 import SnapKit
 
-enum AppStatus{
+enum AppStatus {
     case resetFetch
     case fetchingMore
     case finish
 }
 
-protocol MainScreenDisplayLogic: class{
+protocol MainScreenDisplayLogic: class {
     func display(movies: [MainScreen.ViewModel.MovieViewModel])
-    func displayAlert(title: String,  message: String)
+    func displayAlert(title: String, message: String)
 }
 
-class MainScreenViewController: UICollectionViewController, MainScreenDisplayLogic{
+class MainScreenViewController: UICollectionViewController, MainScreenDisplayLogic {
     var interactor: MainScreenBusinessLogic?
     var router: (NSObjectProtocol & MainScreenRoutingLogic & MainScreenDataPassing)?
-    
+
     let movieCellID = "movieCellID"
-    var displayedMovies : [MainScreen.ViewModel.MovieViewModel] = []
+    var displayedMovies: [MainScreen.ViewModel.MovieViewModel] = []
     internal var isFiltering = false
-    
-    var applicationStatus : AppStatus = .resetFetch {
-        didSet{
+
+    var applicationStatus: AppStatus = .resetFetch {
+        didSet {
             switch self.applicationStatus {
             case .resetFetch:
                 DispatchQueue.main.async {
@@ -49,51 +49,50 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
             }
         }
     }
-    
+
     let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.color = .white
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
-    
-    private let leftBarButton : UIBarButtonItem = {
+
+    private let leftBarButton: UIBarButtonItem = {
         let btn = UIBarButtonItem()
         btn.image = #imageLiteral(resourceName: "MOV")
         btn.tintColor = .black
         return btn
     }()
-    
-    lazy var searchBar : UISearchBar = {
+
+    lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.layer.borderColor = UIColor.gray.cgColor
         searchBar.placeholder = "Search"
         searchBar.delegate = self
         return searchBar
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         interactor?.fetchPopularMovies(shouldResetMovies: true)
         interactor?.initialFetch()
     }
-    
+
     // MARK: Object lifecycle
-    
+
     override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         return nil
     }
-    
+
     // MARK: Setup
-    
-    private func setup()
-    {
+
+    private func setup() {
         let viewController = self
         let interactor = MainScreenInteractor()
         let presenter = MainScreenPresenter()
@@ -105,11 +104,10 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         router.viewController = viewController
         router.dataStore = interactor
     }
-    
+
     // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scene = segue.identifier {
             let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
             if let router = router, router.responds(to: selector) {
@@ -117,7 +115,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
             }
         }
     }
-    
+
     func display(movies: [MainScreen.ViewModel.MovieViewModel]) {
         self.displayedMovies = movies
         self.applicationStatus = .finish
@@ -125,39 +123,38 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
             self.collectionView.reloadData()
         }
     }
-    
+
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Tentar novamente", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Tentar novamente", style: .default, handler: { (_) in
             self.interactor?.fetchPopularMovies(shouldResetMovies: self.applicationStatus == .resetFetch)
         }))
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
             alert.dismiss(animated: true, completion: nil)
             self.applicationStatus = .finish
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    //MARK: - Scroll View
-    
+
+    // MARK: - Scroll View
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-        
-        if(offsetY > contentHeight - scrollView.frame.height && applicationStatus != .fetchingMore && applicationStatus != .resetFetch){
+
+        if offsetY > contentHeight - scrollView.frame.height && applicationStatus != .fetchingMore && applicationStatus != .resetFetch {
             self.applicationStatus = .fetchingMore
         }
     }
-    
+
     func beginBatchFetch() {
-        if(isFiltering){
+        if isFiltering {
             interactor?.fetchQueriedMovies(text: self.searchBar.text ?? "", shouldResetMovies: false)
-        }else {
+        } else {
             interactor?.fetchPopularMovies(shouldResetMovies: false)
         }
     }
 }
-
 
 extension MainScreenViewController: CodeView {
     func buildViewHierarchy() {
@@ -165,13 +162,13 @@ extension MainScreenViewController: CodeView {
         navigationItem.titleView = searchBar
         view.addSubview(self.activityIndicator)
     }
-    
+
     func setupConstraints() {
         self.activityIndicator.snp.makeConstraints { (make) in
             make.center.equalTo(self.view)
         }
     }
-    
+
     func setupAdditionalConfiguration() {
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color

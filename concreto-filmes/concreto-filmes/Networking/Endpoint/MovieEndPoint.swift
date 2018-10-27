@@ -8,9 +8,8 @@
 
 import Foundation
 
-
 enum NetworkEnvironment {
-    case qa
+    case qualityAssurance
     case production
     case staging
 }
@@ -21,20 +20,20 @@ public enum MovieApi {
 }
 
 extension MovieApi: EndPointType {
-    
-    var environmentBaseURL : String {
+
+    var environmentBaseURL: String {
         switch MovieNetworkManager.environment {
         case .production: return "https://api.themoviedb.org/3/movie/"
-        case .qa: return "https://qa.themoviedb.org/3/movie/"
+        case .qualityAssurance: return "https://qa.themoviedb.org/3/movie/"
         case .staging: return "https://staging.themoviedb.org/3/movie/"
         }
     }
-    
+
     var baseURL: URL {
         guard let url = URL(string: environmentBaseURL) else { fatalError("baseURL could not be configured.")}
         return url
     }
-    
+
     var path: String {
         switch self {
         case .popular:
@@ -43,30 +42,30 @@ extension MovieApi: EndPointType {
             return "now_playing"
         }
     }
-    
+
     var httpMethod: HTTPMethod {
         return .get
     }
-    
+
     var task: HTTPTask {
         switch self {
         case .newMovies(let page):
             return .requestParameters(bodyParameters: nil,
-                                      urlParameters: ["page":page,
-                                                      "api_key":MovieNetworkManager.MovieAPIKey])
+                                      urlParameters: ["page": page,
+                                                      "api_key": MovieNetworkManager.MovieAPIKey])
         case .popular(let page):
             return .requestParameters(bodyParameters: nil,
                                       urlParameters: [
-                                        "page":page,
+                                        "page": page,
                                         "api_key": MovieNetworkManager.MovieAPIKey,
-                                        "language":Locale.preferredLanguages[0] as String
+                                        "language": Locale.preferredLanguages[0] as String
                                         ])
-            
+
 //        default:
 //            return .request
         }
     }
-    
+
     var headers: HTTPHeaders? {
         return nil
     }

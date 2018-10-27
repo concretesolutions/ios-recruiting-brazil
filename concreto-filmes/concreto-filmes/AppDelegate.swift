@@ -9,17 +9,16 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     var window: UIWindow?
-    
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         resetStateIfUITesting()
-        
+
         self.setupWindow()
         return true
     }
-    
+
     private func resetStateIfUITesting() {
         if ProcessInfo.processInfo.arguments.contains("UI-Testing") {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -28,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
-    
+
     /// Makes the initial setups of the application window
     private func setupWindow() {
         window = UIWindow()
@@ -36,4 +35,3 @@ extension AppDelegate {
         window?.rootViewController = UINavigationController(rootViewController: MainScreenViewController(collectionViewLayout: UICollectionViewFlowLayout()))
     }
 }
-

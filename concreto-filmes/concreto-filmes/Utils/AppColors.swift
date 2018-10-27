@@ -18,10 +18,9 @@ import UIKit
 enum AppColors {
     case mainYellow
     case darkYellow
-    
+
     private static let allValues = [mainYellow]
-    
-    
+
     var color: UIColor {
         switch self {
         case .mainYellow:

@@ -12,20 +12,16 @@
 
 import UIKit
 
-protocol MovieDetailBusinessLogic
-{
-    
+protocol MovieDetailBusinessLogic {
+
 }
 
-protocol MovieDetailDataStore
-{
+protocol MovieDetailDataStore {
     //var name: String { get set }
 }
 
-class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore
-{
+class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore {
     var presenter: MovieDetailPresentationLogic?
     var worker: MovieDetailWorker?
-    
-}
 
+}

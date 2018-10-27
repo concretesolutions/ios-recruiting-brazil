@@ -12,14 +12,13 @@
 
 import UIKit
 
-class MainScreenWorker
-{
-    
+class MainScreenWorker {
+
     let movieNetworkManager = MovieNetworkManager()
     let searchNetWorkManager = SearchNetworkManager()
     let genreNetworkmanager = MovieGenresNetworkManager()
-    
-    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, completion: @escaping (_ movies: [Movie]?,_ error: String?) -> ()){
+
+    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, completion: @escaping (_ movies: [Movie]?, _ error: String?) -> Void) {
 
         movieNetworkManager.getPopularMovies(page: request.index) { (movies, error) in
             if let error = error {
@@ -30,8 +29,8 @@ class MainScreenWorker
             }
         }
     }
-    
-    func fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request, completion: @escaping (_ movies: [Movie]?,_ error: String?) -> ()) {
+
+    func fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request, completion: @escaping (_ movies: [Movie]?, _ error: String?) -> Void) {
         searchNetWorkManager.getMoviesBy(query: request.text, page: request.index) { (movies, errorMessage) in
             if let error = errorMessage {
                 completion(nil, error)
@@ -41,13 +40,13 @@ class MainScreenWorker
             }
         }
     }
-    
-    func fetchAllMovieGenres(completion: @escaping (_ result: Result<String>) -> ()){
+
+    func fetchAllMovieGenres(completion: @escaping (_ result: Result<String>) -> Void) {
         genreNetworkmanager.getGenres { (genres, error) in
             if let error = error {
                 completion(.failure(error))
             }
-            
+
             if let genres = genres {
                 let genreDictionary = genres.reduce([Int: String]()) { (dict, genre) -> [Int: String] in
                     var dict = dict
@@ -60,4 +59,3 @@ class MainScreenWorker
         }
     }
 }
-

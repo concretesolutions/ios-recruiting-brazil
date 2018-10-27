@@ -12,25 +12,22 @@
 
 import UIKit
 
-protocol MainScreenBusinessLogic
-{
+protocol MainScreenBusinessLogic {
     func fetchPopularMovies(shouldResetMovies: Bool)
     func filterMoviesLocally(text: String)
     func fetchQueriedMovies(text: String, shouldResetMovies: Bool)
     func initialFetch()
 }
 
-protocol MainScreenDataStore
-{
+protocol MainScreenDataStore {
     var movieTitle: String { get set }
     var movies: [Movie] { get set }
     var filteredMovies: [Movie] { get set }
-    var currentPageForAPIPopular : Int { get set }
-    var currentPageForAPIFiltering : Int { get set }
+    var currentPageForAPIPopular: Int { get set }
+    var currentPageForAPIFiltering: Int { get set }
 }
 
-class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
-{
+class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore {
     var presenter: MainScreenPresentationLogic?
     var worker = MainScreenWorker()
     var movieTitle: String = ""
@@ -38,23 +35,23 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
     var filteredMovies: [Movie] = []
     var currentPageForAPIPopular = 1
     var currentPageForAPIFiltering = 1
-    
+
     func fetchPopularMovies(shouldResetMovies: Bool) {
         if shouldResetMovies {self.currentPageForAPIPopular = 1}
         worker.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: currentPageForAPIPopular), completion: { (movies, error) in
-            
+
             self.presentMoviesOrError(movies: movies, persistentMovieList: &self.movies, error: error, shouldResetMovies: shouldResetMovies, pageReference: &self.currentPageForAPIPopular)
         })
     }
-    
+
     func fetchQueriedMovies(text: String, shouldResetMovies: Bool) {
         if shouldResetMovies {self.currentPageForAPIFiltering = 1}
         worker.fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPIFiltering, text: text)) { (movies, error) in
-            
+
             self.presentMoviesOrError(movies: movies, persistentMovieList: &self.filteredMovies, error: error, shouldResetMovies: shouldResetMovies, pageReference: &self.currentPageForAPIFiltering)
         }
     }
-    
+
     func initialFetch() {
         worker.fetchAllMovieGenres { (result) in
             switch result {
@@ -65,25 +62,24 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
             }
         }
     }
-    
-    func presentMoviesOrError(movies: [Movie]?, persistentMovieList: inout [Movie], error: String?, shouldResetMovies: Bool, pageReference: inout Int){
-        if(error != nil){
+
+    func presentMoviesOrError(movies: [Movie]?, persistentMovieList: inout [Movie], error: String?, shouldResetMovies: Bool, pageReference: inout Int) {
+        if error != nil {
             self.presenter?.present(error: error)
         }
         if let movies = movies {
             if shouldResetMovies {
                 persistentMovieList = movies
-            }else {
+            } else {
                 persistentMovieList.append(contentsOf: movies)
             }
             pageReference += 1
             self.presenter?.present(movies: persistentMovieList)
         }
     }
-    
-    
+
     func filterMoviesLocally(text: String) {
-        if(text == ""){
+        if text == "" {
             self.presenter?.present(movies: self.movies)
             return
         }
@@ -93,4 +89,3 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
         self.presenter?.present(movies: filteredMovies)
     }
 }
-

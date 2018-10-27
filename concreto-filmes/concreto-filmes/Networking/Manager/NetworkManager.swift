@@ -10,8 +10,8 @@ import Foundation
 
 class NetworkManager<T: EndPointType> {
     internal let router = Router<T>()
-    
-    internal func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
+
+    internal func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String> {
         switch response.statusCode {
         case 200...299:
             return .success

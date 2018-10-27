@@ -12,16 +12,14 @@
 
 import UIKit
 
-protocol MainScreenPresentationLogic
-{
+protocol MainScreenPresentationLogic {
     func present(movies: [Movie]?)
     func present(error: String?)
 }
 
-class MainScreenPresenter: MainScreenPresentationLogic
-{
+class MainScreenPresenter: MainScreenPresentationLogic {
     weak var viewController: MainScreenDisplayLogic?
-    
+
     func present(movies: [Movie]?) {
         var viewModelItems: [MainScreen.ViewModel.MovieViewModel] = []
         if let movies = movies {
@@ -31,11 +29,10 @@ class MainScreenPresenter: MainScreenPresentationLogic
             viewController?.display(movies: viewModelItems)
         }
     }
-    
+
     func present(error: String?) {
         if let error = error {
          viewController?.displayAlert(title: "OPS!", message: error)
         }
     }
 }
-

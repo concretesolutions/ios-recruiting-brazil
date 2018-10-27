@@ -12,14 +12,11 @@
 
 import UIKit
 
-protocol MovieDetailPresentationLogic
-{
-    
+protocol MovieDetailPresentationLogic {
+
 }
 
-class MovieDetailPresenter: MovieDetailPresentationLogic
-{
+class MovieDetailPresenter: MovieDetailPresentationLogic {
     weak var viewController: MovieDetailDisplayLogic?
-    
-}
 
+}
