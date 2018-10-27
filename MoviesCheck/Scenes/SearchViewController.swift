@@ -12,40 +12,58 @@ class SearchViewController: UIViewController {
 
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var mediaCollectionView: UICollectionView!
+    @IBOutlet var loadingView: UIView!
     
     //Type for the search of the current ViewController
-    var searchType:DestinationScreen? = nil
+    var searchType:ScreenType? = nil
     
-    //Webservice loader
-    let jsonLoader = JsonLoader()
-    
-    //Media items to be displayed on the Collection View
-    var mediaItems:Array<MovieMediaItem> = Array()
-    
-    //Identifies whether the searched word returned any result
-    var sucessfulResponse = true
+    var searchManager:SearchPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //Presenter that manages the SearchBar, JsonLoader and CollectionView
+        if let type = searchType{
+            
+            searchManager = SearchPresenter(type: type)
+            
+            searchBar.delegate = searchManager
+            mediaCollectionView.delegate = searchManager
+            mediaCollectionView.dataSource = searchManager
+            
+            searchManager?.delegate = self
+            searchManager?.dataSource = self
+            
+        }
         
         //SearchBar configuration
         searchBar.setTextColor(color: UIColor.white)
-        searchBar.delegate = self
         
-        //Loader configuration
-        jsonLoader.delegate = self
+        //Add loading view
+        self.view.addSubview(loadingView)
+        setupVisualLanguageConstraints()
         
-        //CollectionView configuration
-        mediaCollectionView.delegate = self
-        mediaCollectionView.dataSource = self
+        //Hide loading view by default
+        loadingView.isHidden = true
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    /**
+     Add 4 constraints generated using visual language 2 horizontal and 2 vertical
+     */
+    func setupVisualLanguageConstraints(){
         
+        //Visual Language Constraints
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
         
+        let myViews = ["spinnerView":loadingView]
         
+        let constraintsHorizontais = NSLayoutConstraint.constraints(withVisualFormat: "H:|-7-[spinnerView]-6-|", options: [], metrics: nil, views: myViews as Any as! [String : Any])
+        
+        let constraintsVerticais = NSLayoutConstraint.constraints(withVisualFormat: "V:|-76-[spinnerView]-6-|", options: [], metrics: nil, views: myViews as Any as! [String : Any])
+        
+        NSLayoutConstraint.activate(constraintsHorizontais)
+        NSLayoutConstraint.activate(constraintsVerticais)
     }
     
     /*
@@ -60,143 +78,30 @@ class SearchViewController: UIViewController {
     
 }
 
-//MARK:- Collection View
-extension SearchViewController:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension SearchViewController: SearchPresenterDelegate, SearchPresenterDataSource{
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let cellSpacing:CGFloat = 10
-        let screenSize = view.frame.size
-        
-        if mediaItems.count > 0{
-            
-            if(UI_USER_INTERFACE_IDIOM() == .pad){//iPad only cell distribution
-                return CGSize(width: (screenSize.width - (cellSpacing * 4)) / 4, height: 255)
-            }else{
-                //TODO:- iPHONE SIZE FOR THE CELLS
-                return CGSize.zero
-            }
-            
-        }else{
-            
-            return CGSize(width: view.frame.size.width, height: 100)
-            
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        //Display informative cell when there is no media items to display
-        if mediaItems.count > 0{
-            return mediaItems.count
-        }else{
-            return 1
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        var cell:UICollectionViewCell
-        
-        if mediaItems.count > 0{
-            
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mediaItem", for: indexPath)
-            
-            let posterImageView = cell.viewWithTag(1) as! UIImageView
-            let titleLabel = cell.viewWithTag(2) as! UILabel
-            let yearLabel = cell.viewWithTag(3) as! UILabel
-            
-            //Clear items before assigning proper values to avoid strange CollectionView behavior
-            posterImageView.image = nil
-            titleLabel.text = ""
-            yearLabel.text = ""
-            
-            let currentTitle = mediaItems[indexPath.row]
-            
-            //Poster image
-            let posterURL = currentTitle.getPosterURL()
-            
-            if(posterURL == "noposter"){
-                posterImageView.image = UIImage(named: "defaultPoster")
-            }else{
-                posterImageView.loadImage(fromURL: posterURL)
-            }
-            
-            titleLabel.text = currentTitle.title
-            yearLabel.text = currentTitle.getYear()
-            
-        }else{
-            
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedbackMessage", for: indexPath)
-            
-            let messageTextView = cell.viewWithTag(1) as! UITextView
-            
-            if(!sucessfulResponse){
-                messageTextView.text = "The title was not found, please try again."
-            }else{
-                if(searchType == .movies){
-                    messageTextView.text = "Use the search bar above to find the Movie you want to bookmark."
-                }else{
-                    messageTextView.text = "Use the search bar above to find the TV Show you want to bookmark."
-                }
-            }
-            
-        }
-        
-        return cell
-        
-    }
-    
-    
-}
-
-//MARK:- JsonLoaderDelegate
-extension SearchViewController:JsonLoaderDelegate{
-    
-    func loaderCompleted(result: SearchResult) {
-        
-        mediaItems = result.items
-        sucessfulResponse = true
-        
-        DispatchQueue.main.async {
-            self.mediaCollectionView.reloadData()
-        }
-        
-    }
-    
-    func loaderFailed() {
-        
-        sucessfulResponse = false
-        
+    //MARK:- SearchPresenterDelegate
+    func shouldRealoadData() {
         DispatchQueue.main.async {
             self.mediaCollectionView.reloadData()
         }
     }
     
-}
-
-//MARK:- UISearchBarDelegate
-extension SearchViewController:UISearchBarDelegate{
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        if let textToSearch = searchBar.text{
-            //Execute search
-            
-            if let mediaItemType = searchType{
-                
-                jsonLoader.searchRequest(withText: textToSearch, type: mediaItemType)
-                
-                //Hide keyboard
-                searchBar.resignFirstResponder()
-                
-            }
-            
+    func displayLoadingIndicator() {
+        DispatchQueue.main.async {
+            self.loadingView.isHidden = false
         }
-        
+    }
+    
+    func hideLoadingIndicator() {
+        DispatchQueue.main.async {
+            self.loadingView.isHidden = true
+        }
+    }
+    
+    //MARK:- SearchPresenterDataSource
+    func getViewSize() -> CGSize {
+        return view.frame.size
     }
     
 }
-

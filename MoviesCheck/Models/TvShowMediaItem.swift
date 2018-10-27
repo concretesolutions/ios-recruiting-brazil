@@ -1,5 +1,5 @@
 //
-//  MovieMediaItem.swift
+//  TvShowMediaItem.swift
 //  MoviesCheck
 //
 //  Created by Daniel Lima on 26/10/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MovieMediaItem:MediaItem ,Codable {
+struct TvShowMediaItem:MediaItem, Codable {
     
     let id: Int
     let evaluation: Float
@@ -20,10 +20,10 @@ struct MovieMediaItem:MediaItem ,Codable {
     enum CodingKeys : String, CodingKey {
         case id
         case evaluation = "vote_average"
-        case title = "title"
+        case title = "name"
         case poster = "poster_path"
         case overview
-        case releaseDate = "release_date"
+        case releaseDate = "first_air_date"
     }
     
     func getThumbnailUrl() -> String {

@@ -9,17 +9,17 @@
 import UIKit
 
 //Screen navigation identifier
-enum DestinationScreen:String{
-    case home = "home"
-    case movies = "movie"
-    case tvShows = "tb"
-    case favorites = "fav"
+enum ScreenType{
+    case home
+    case movies
+    case tvShows
+    case favorites
 }
 
 class MasterTableViewController: UITableViewController {
     
     //Identifier for the destination screen on segue
-    var currentDestination = DestinationScreen.home
+    var currentDestination = ScreenType.home
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class MasterTableViewController: UITableViewController {
         
     }
     
-    // MARK: - Table View
+    // MARK: - Static Table View
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //Change the color of selected row, ingonirg the first row

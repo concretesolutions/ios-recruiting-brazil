@@ -34,30 +34,33 @@ extension UIImageView{
             
         }else{
             
-            DispatchQueue.main.async {
-                
-                do{
-                    //Load image
-                    let imgData = try Data(contentsOf: imageUrl)
-                    
-                    if let img = UIImage(data: imgData){
-                        //Save image
-                        let imageDataToSave = img.pngData()
-                        try imageDataToSave?.write(to: URL(fileURLWithPath: localFilePath!), options: Data.WritingOptions.atomic)
-                        
-                        //Set loaded image to the curret UIImageView
-                        self.image = img
-                        
-                    }else{
-                        print("It wat not possible to load image \(fileName)")
-                    }
-                    
-                }catch{
-                    print("It wat not possible to load image \(fileName)")
-                }
-                
-            }
+            //Image dosent exist in local cache, load from web
+            self.image = UIImage(named: "loadingImage")
             
+            URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+                
+                if error != nil { return }
+                
+                DispatchQueue.main.async(execute: { () -> Void in
+                    let image = UIImage(data: data!)
+                    self.cacheImage(img: image!, localFilePath: localFilePath!)
+                    self.image = image
+                })
+                
+            }).resume()
+            
+        }
+        
+    }
+    
+    func cacheImage(img:UIImage, localFilePath:String){
+        
+        //Save image
+        do{
+            let imageDataToSave = img.pngData()
+            try imageDataToSave?.write(to: URL(fileURLWithPath: localFilePath), options: Data.WritingOptions.atomic)
+        }catch{
+            print("It wat not possible to cache the image")
         }
         
     }

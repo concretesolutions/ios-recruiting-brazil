@@ -10,7 +10,8 @@ import UIKit
 
 //Delegate protocol
 protocol JsonLoaderDelegate{
-    func loaderCompleted(result:SearchResult)
+    func loaderCompleted(withMovies result:MovieSearchResult)
+    func loaderCompleted(withTvShows result: TvShowSearchResult)
     func loaderFailed()
 }
 
@@ -19,12 +20,18 @@ class JsonLoader: NSObject {
     var delegate :JsonLoaderDelegate?
     fileprivate let apiKey = "1bc55c5473e9c54bba20ab9213165879" //This api key have limited data requests of 40 requests every 10 seconds
     
-    func searchRequest(withText text:String, type:DestinationScreen){
+    func searchRequest(withText text:String, type:ScreenType){
         
-        var urlString = "https://api.themoviedb.org/3/search/\(type.rawValue)?api_key=\(apiKey)&language=en-US&query=\(text)&include_adult=false&page=1"
+        var searchTypeParameter:String
+        
+        if(type == .movies){
+            searchTypeParameter = "movie";
+        }else{
+            searchTypeParameter = "tv";
+        }
+        
+        var urlString = "https://api.themoviedb.org/3/search/\(searchTypeParameter)?api_key=\(apiKey)&language=en-US&query=\(text)&include_adult=false&page=1"
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-        
-        print(urlString)
         
         guard let url = URL(string: urlString) else{
             print("Invalid URL")
@@ -41,13 +48,15 @@ class JsonLoader: NSObject {
                 
                 if(type == .tvShows){
                     //Decode as TV Shows
-                    let result = try JSONDecoder().decode(SearchResult.self, from: data!)
-                    self.delegate?.loaderCompleted(result: result)
+                    let result = try JSONDecoder().decode(TvShowSearchResult.self, from: data!)
+                    
+                    self.delegate?.loaderCompleted(withTvShows: result)
                     
                 }else{
                     //Decode as Movies
-                    let result = try JSONDecoder().decode(SearchResult.self, from: data!)
-                    self.delegate?.loaderCompleted(result: result)
+                    let result = try JSONDecoder().decode(MovieSearchResult.self, from: data!)
+                    
+                    self.delegate?.loaderCompleted(withMovies: result)
                 }
                 
             } catch {

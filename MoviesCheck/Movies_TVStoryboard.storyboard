@@ -41,7 +41,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mediaItem" id="0PC-8b-hY5">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mediaItem" id="0PC-8b-hY5" customClass="MediaCollectionViewCell" customModule="MoviesCheck" customModuleProvider="target">
                                         <rect key="frame" x="77.5" y="0.0" width="220" height="255"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -66,13 +66,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1964" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8j-ty-AfD">
-                                                    <rect key="frame" x="45" y="227" width="130" height="21"/>
+                                                    <rect key="frame" x="45" y="223.5" width="130" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="15"/>
                                                     <color key="textColor" red="0.48621892929999999" green="0.48630648850000002" blue="0.48621344570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Addams Family" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soA-5O-PDk">
-                                                    <rect key="frame" x="45" y="206" width="130" height="21"/>
+                                                    <rect key="frame" x="45" y="206" width="130" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="15"/>
                                                     <color key="textColor" red="0.48621892929999999" green="0.48630648850000002" blue="0.48621344570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -89,6 +89,11 @@
                                             <constraint firstItem="soA-5O-PDk" firstAttribute="top" secondItem="o5z-Xh-zgO" secondAttribute="bottom" constant="3" id="qpC-1f-IFj"/>
                                             <constraint firstItem="o5z-Xh-zgO" firstAttribute="top" secondItem="0PC-8b-hY5" secondAttribute="top" constant="10" id="rpv-f3-yjc"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="posterImageView" destination="ITY-dU-GFj" id="vh7-1k-JNw"/>
+                                            <outlet property="titleLabel" destination="soA-5O-PDk" id="GWG-uT-jaw"/>
+                                            <outlet property="yearLabel" destination="l8j-ty-AfD" id="I0X-K5-Co1"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="feedbackMessage" id="XNi-KY-40Y">
                                         <rect key="frame" x="0.0" y="265" width="375" height="288"/>
@@ -133,11 +138,31 @@
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="vcm-Pt-Fqp"/>
                     <connections>
+                        <outlet property="loadingView" destination="7q1-jE-IFp" id="7Nd-mo-6sq"/>
                         <outlet property="mediaCollectionView" destination="VJH-rc-ZJL" id="FrS-Y7-Q1u"/>
                         <outlet property="searchBar" destination="DNB-gD-T8d" id="bgG-n2-hGG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3i-4Y-rPS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="7q1-jE-IFp">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="IVi-3D-Kqv">
+                            <rect key="frame" x="101.5" y="45.5" width="37" height="37"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="37" id="CB9-3T-A37"/>
+                                <constraint firstAttribute="height" constant="37" id="gpE-Je-uw4"/>
+                            </constraints>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="0.1505511558219178" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="IVi-3D-Kqv" firstAttribute="centerY" secondItem="7q1-jE-IFp" secondAttribute="centerY" id="Dak-Dd-RO5"/>
+                        <constraint firstItem="IVi-3D-Kqv" firstAttribute="centerX" secondItem="7q1-jE-IFp" secondAttribute="centerX" id="VKb-mI-QGB"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="2GW-gV-fsr"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="2418.4000000000001" y="-631.0344827586207"/>
         </scene>

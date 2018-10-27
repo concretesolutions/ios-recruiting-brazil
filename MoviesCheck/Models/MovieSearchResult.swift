@@ -1,5 +1,5 @@
 //
-//  SearchResult.swift
+//  MovieSearchResult.swift
 //  MoviesCheck
 //
 //  Created by Daniel Lima on 26/10/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SearchResult:Codable {
+struct MovieSearchResult:Codable {
     
     var page:Int
     var totalResults:Int
