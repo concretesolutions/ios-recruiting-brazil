@@ -9,7 +9,7 @@
 import Moya
 
 enum MovieDB_API {
-    case listPopularMovies(page: Int)
+    case listPopularMovies(listRequest: ListMovies.Request)
     case getMovieDetails(movieRequest: DetailMovie.Request)
 }
 
@@ -47,10 +47,10 @@ extension MovieDB_API: TargetType {
     
     var task: Task {
         switch self {
-        case .listPopularMovies(let page):
+        case .listPopularMovies(let listRequest):
             return .requestParameters(parameters: ["api_key": APISetting.key,
                                                    "language": languagePortuguese,
-                                                   "page": page],
+                                                   "page": listRequest.page],
                                       encoding: URLEncoding.queryString)
         case .getMovieDetails:
             return .requestParameters(parameters: ["api_key": APISetting.key,

@@ -18,20 +18,22 @@ class ListMoviesWorker {
      Fetch the most popular movies
      - parameter page: the current page to load
      */
-    func fetchPopularMovies(page: Int, completion: @escaping (ListMovies.Fetch.Response) -> ()) {
-        provider.request(.listPopularMovies(page: page)) { (result) in
-            
+    func fetchPopularMovies(request: ListMovies.Request,
+                            success successCallback: @escaping (MovieList) -> (),
+                            error errorCallback: @escaping (FetchError) -> (),
+                            failure failureCallback: @escaping (FetchError) -> ()) {
+        
+        provider.request(.listPopularMovies(listRequest: request)) { (result) in
             switch result {
             case .success(let response):
                 do {
-                    let movies = try JSONDecoder().decode(MovieList.self, from: response.data)
-                    let responseSuccess = ListMovies.Fetch.Response(movies: movies.movies, error: "")
-                    completion(responseSuccess)
-                } catch let error {
-                    print(error)
+                    let movies: MovieList = try JSONDecoder().decode(MovieList.self, from: response.data)
+                    successCallback(movies)
+                } catch {
+                    errorCallback(FetchError.serverError)
                 }
-            case .failure(let error):
-                let error = NSError.init(domain: "FetchMovies", code: 0, userInfo: [NSLocalizedDescriptionKey: "Parsing Error"])
+            case .failure:
+                failureCallback(FetchError.networkFailToConnect)
             }
         }
     }

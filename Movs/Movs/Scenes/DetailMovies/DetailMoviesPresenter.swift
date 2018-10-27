@@ -19,8 +19,17 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
     
     func presentMovieDetailed(response: DetailMovie.Response.Success) {
         let imdbVote = String(response.movie.voteAverage) + "/10"
+        let genresFormatted = response.genreNames.joined(separator: ", ")
+        let buttonImage = response.movie.isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_empty_icon")
+        let posterURL = URL(string: response.movie.posterPath)!
         
-        let viewModel = DetailMovie.ViewModel.Success(title: response.movie.title, overview: response.movie.overview, genreNames: response.genreNames, year: "", posterPath: response.movie.posterPath, imdbVote: imdbVote, isFavorite: response.movie.isFavorite)
+        let viewModel = DetailMovie.ViewModel.Success(title: response.movie.title,
+                                                      overview: response.movie.overview,
+                                                      genreNames: genresFormatted,
+                                                      year: "",
+                                                      posterPath: posterURL,
+                                                      imdbVote: imdbVote,
+                                                      favoriteButtonImage: buttonImage!)
         
         viewController.displayMovieDetailed(viewModel: viewModel)
     }

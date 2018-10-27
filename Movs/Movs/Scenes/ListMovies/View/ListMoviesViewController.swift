@@ -10,8 +10,8 @@
 import UIKit
 
 protocol ListMoviesDisplayLogic: class {
-    func displayMovies(viewModel: ListMovies.Fetch.ViewModel.Success)
-    func displayError(viewModel: ListMovies.Fetch.ViewModel.Error)
+    func displayMovies(viewModel: ListMovies.ViewModel.Success)
+    func displayError(viewModel: ListMovies.ViewModel.Error)
 }
 
 class ListMoviesViewController: UIViewController {
@@ -37,7 +37,8 @@ class ListMoviesViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        let request = ListMovies.Fetch.Request()
+        // Start presenting the first page
+        let request = ListMovies.Request(page: 1)
         interactor?.fetchPopularMovies(request: request)
     }
 
@@ -69,12 +70,12 @@ class ListMoviesViewController: UIViewController {
 
 extension ListMoviesViewController: ListMoviesDisplayLogic {
     
-    func displayMovies(viewModel: ListMovies.Fetch.ViewModel.Success) {
+    func displayMovies(viewModel: ListMovies.ViewModel.Success) {
         movies = viewModel.movies
         tableView.reloadData()
     }
     
-    func displayError(viewModel: ListMovies.Fetch.ViewModel.Error) {
+    func displayError(viewModel: ListMovies.ViewModel.Error) {
         
     }
 

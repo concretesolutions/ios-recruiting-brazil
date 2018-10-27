@@ -58,10 +58,12 @@ class DetailMoviesViewController: UIViewController {
 extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
     
     func displayMovieDetailed(viewModel: DetailMovie.ViewModel.Success) {
-        print("🎀 viewModel in DetailMovies! \(viewModel.title)")
-        
-        
-        
+        posterImage.kf.setImage(with: viewModel.posterPath)
+        movieTitle.text = viewModel.title
+        genres.text = viewModel.genreNames
+        movieOverview.text = viewModel.overview
+        imdbValue.text = viewModel.imdbVote
+        favoriteButton.imageView?.image = viewModel.favoriteButtonImage     
     }
     
     func displayError(viewModel: DetailMovie.ViewModel.Error) {

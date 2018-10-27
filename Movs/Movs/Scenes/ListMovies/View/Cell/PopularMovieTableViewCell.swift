@@ -12,8 +12,6 @@ import Kingfisher
 class PopularMovieTableViewCell: UITableViewCell {
 
     var movieIdentifier: Int?
-    // w185 is a nice size for mobile app
-    var basePath = "http://image.tmdb.org/t/p/w185"
     
     private let favoriteEmpty = UIImage(named: "favorite_empty_icon")
     private let favoriteFull = UIImage(named: "favorite_full_icon")
@@ -28,7 +26,7 @@ class PopularMovieTableViewCell: UITableViewCell {
         self.movieTitle.text = data.title
         self.movieDescription.text = data.overview
         self.favoriteButton.imageView?.image = data.isFavorite == true ? favoriteFull : favoriteEmpty
-        let posterPath = basePath + data.posterPath
+        let posterPath = data.posterPath
 
         let url = URL(string: posterPath)
         movieImageView.kf.setImage(with: url)

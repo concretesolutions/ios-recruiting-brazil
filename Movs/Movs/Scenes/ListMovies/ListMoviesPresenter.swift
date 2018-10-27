@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ListMoviesPresentationLogic {
-    func presentMovies(movies: [PopularMovie])
-    func presentError(type: ListMovies.ErrorType)
+    func presentMovies(response: ListMovies.Response.Success)
+    func presentError(error: ListMovies.Response.Error)
 }
 
 class ListMoviesPresenter: ListMoviesPresentationLogic {
@@ -19,12 +19,12 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
     
     
     // MARK: Response from Interactor
-    func presentMovies(movies: [PopularMovie]) {
-        let viewModel = ListMovies.Fetch.ViewModel.Success(movies: movies)
+    func presentMovies(response: ListMovies.Response.Success) {
+        let viewModel = ListMovies.ViewModel.Success(movies: response.movies)
         viewController?.displayMovies(viewModel: viewModel)
     }
     
-    func presentError(type: ListMovies.ErrorType) {
+    func presentError(error: ListMovies.Response.Error) {
         
     }
     

@@ -14,7 +14,7 @@ struct MovieDetailed {
     let title: String
     let overview: String
     let releaseDate: String
-    let posterPath: String
+    var posterPath: String
     let voteAverage: Double
     
     var isFavorite: Bool

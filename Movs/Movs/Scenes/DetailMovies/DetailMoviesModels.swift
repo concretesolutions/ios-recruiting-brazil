@@ -31,11 +31,11 @@ enum DetailMovie {
         struct Success {
             let title: String
             let overview: String
-            let genreNames: [String]
+            let genreNames: String
             let year: String
-            let posterPath: String
+            let posterPath: URL
             let imdbVote: String
-            let isFavorite: Bool 
+            let favoriteButtonImage: UIImage
         }
         
         struct Error {

@@ -9,7 +9,7 @@
 import Foundation
 
 struct MovieList {
-    let movies: [PopularMovie]
+    var movies: [PopularMovie]
 }
 
 extension MovieList: Decodable {
