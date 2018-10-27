@@ -13,5 +13,5 @@ struct MovieGridViewModel: Equatable {
     let poster: UIImage
     let isFavoriteIcon: UIImage
     
-    static let placeHolder = MovieGridViewModel(title: "Movie", poster: kImages.poster_placeholder, isFavoriteIcon: kImages.isFavoriteIconEmpty)
+    static let placeHolder = MovieGridViewModel(title: "Movie", poster: Images.poster_placeholder, isFavoriteIcon: Images.isFavoriteIconGray)
 }

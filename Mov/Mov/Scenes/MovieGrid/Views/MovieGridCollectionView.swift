@@ -14,7 +14,7 @@ class MovieGridCollectionView: UICollectionView {
     
     private static var cellSize: CGSize {
         let width = CGFloat(150).proportionalToWidth
-        let height = width * 1.6
+        let height = width * 1.5
         
         return CGSize(width: width, height: height)
     }

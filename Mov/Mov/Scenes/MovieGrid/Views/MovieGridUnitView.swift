@@ -31,6 +31,7 @@ class MovieGridUnitView: UIView {
         let title = UILabel(frame: .zero)
         title.text = self.viewModel.title
         title.textAlignment = .center
+        title.textColor = Colors.lightYellow
         
         return title
     }()
@@ -38,7 +39,7 @@ class MovieGridUnitView: UIView {
     lazy var isFavoriteButton: UIButton = {
         let isFavoriteButton = UIButton(frame: .zero)
         isFavoriteButton.setImage(self.viewModel.isFavoriteIcon, for: .normal)
-        isFavoriteButton.imageView?.contentMode = .scaleAspectFit
+        isFavoriteButton.imageView!.contentMode = .scaleAspectFit
 
         return isFavoriteButton
     }()
@@ -68,7 +69,7 @@ extension MovieGridUnitView: ViewCode {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.75)
+            make.height.equalToSuperview().multipliedBy(0.80)
         }
         
         self.title.snp.makeConstraints { make in
@@ -84,6 +85,10 @@ extension MovieGridUnitView: ViewCode {
             make.trailing.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.25)
         }
+    }
+    
+    func aditionalSetup() {
+        self.backgroundColor = Colors.darkBlue
     }
     //oin eu sou o miguel e eu faço coisas de programação pq sou lyndo risos
     

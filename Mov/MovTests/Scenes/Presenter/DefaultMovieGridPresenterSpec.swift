@@ -33,7 +33,7 @@ class DefaultMovieGridPresenterSpec: QuickSpec {
                 
                 it("send correctly to viewOutput the data to be displayed") {
                     let viewModelsMock = movieGridUnitsMock.map { unit in
-                        return MovieGridViewModel(title: unit.title, poster: kImages.poster_placeholder, isFavoriteIcon: kImages.isFavoriteIconEmpty)
+                        return MovieGridViewModel(title: unit.title, poster: Images.poster_placeholder, isFavoriteIcon: Images.isFavoriteIconEmpty)
                     }
                     
                     expect(viewOutput.receivedViewModels).to(equal(viewModelsMock))
