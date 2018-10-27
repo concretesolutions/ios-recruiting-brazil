@@ -55,13 +55,11 @@ Até o final do projeto deve ser adotado:
 - [x] Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
 - [x] Testes unitários no projeto;
 - [ ] Testes funcionais. (ainda)
-- [ ] Pipeline Automatizado (ainda)
+- [x] Pipeline Automatizado. (Com testing, code-coderage, project cleaning e git push cycle)
 
 ### Detalhes:
 
 - [x] Proteção de Request Spam.
-
-## - PS: Ainda pendente pra pull. Acontecerá até esse fim de Sábado.
 
 # Exemplos e sugestões
 
