@@ -28,6 +28,29 @@ final class FavoriteMoviesViewController: MVPBaseViewController {
             self.basePresenter = newValue
         }
     }
+    
+    private func showFilterBarButtonIfAppropriated() {
+        if self.favoriteMovies.state != .empty {
+            self.showFilterBarButtonItem()
+        } else {
+            self.hideFilterBarButtonItem()
+        }
+    }
+    
+    private func showFilterBarButtonItem() {
+        if self.navigationItem.rightBarButtonItem == nil {
+            let item = UIBarButtonItem(image: Assets.filterIcon.image, style: .plain, target: self, action: #selector(filterBarButtonItemSelector))
+            self.navigationItem.rightBarButtonItem = item
+        }
+    }
+    
+    private func hideFilterBarButtonItem() {
+        self.navigationItem.rightBarButtonItem = nil
+    }
+    
+    @objc private func filterBarButtonItemSelector() {
+        //TODO: call presenter
+    }
 }
 
 extension FavoriteMoviesViewController: FavoriteMoviesPresenterView {
@@ -39,5 +62,9 @@ extension FavoriteMoviesViewController: FavoriteMoviesPresenterView {
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.definesPresentationContext = true
+    }
+    
+    func setupWhenAppear() {
+        self.showFilterBarButtonIfAppropriated()
     }
 }

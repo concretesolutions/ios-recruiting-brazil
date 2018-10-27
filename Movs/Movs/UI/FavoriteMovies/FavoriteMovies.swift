@@ -31,10 +31,11 @@ final class FavoriteMovies: UIView {
         }
     }
     
-    private var removeFilterButton:UIButton! {
+    private var removeFiltersButton:UIButton! {
         didSet {
-            self.removeFilterButton.backgroundColor = Colors.darkBlue.color
-            self.removeFilterButton.tintColor = Colors.mainYellow.color
+            self.removeFiltersButton.backgroundColor = Colors.darkBlue.color
+            self.removeFiltersButton.setTitleColor(Colors.mainYellow.color, for: .normal)
+            self.removeFiltersButton.setTitle("Remove Filters", for: .normal)
         }
     }
     
@@ -65,12 +66,12 @@ final class FavoriteMovies: UIView {
             self.feedbackView.isHidden = true
             self.tableView.isHidden = false
             self.tableView.sectionHeaderHeight = 0.0
-            self.tableView.tableHeaderView = nil
+//            self.tableView.tableHeaderView = nil
         case .filtered:
             self.feedbackView.isHidden = true
             self.tableView.isHidden = false
-            self.tableView.sectionHeaderHeight = 50.0
-            self.tableView.tableHeaderView = self.removeFilterButton
+            self.tableView.sectionHeaderHeight = 80.0
+//            self.tableView.tableHeaderView = self.removeFiltersButton
         }
     }
     
@@ -84,7 +85,7 @@ extension FavoriteMovies: ViewCode {
     func design() {
         self.backgroundColor = Colors.white.color
         self.tableView = FavoriteMoviesTableView(frame: .zero)
-        self.removeFilterButton = UIButton(frame: .zero)
+        self.removeFiltersButton = UIButton(frame: .zero)
         self.feedbackView = FeedbackView()
         self.refreshUIAcoordingToState()
     }
@@ -103,5 +104,12 @@ extension FavoriteMovies: UITableViewDelegate {
             self.delegate?.favoriteMovies(self, unfavoriteMovieAt: indexPath)
         }
         return [unfavorite]
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self.state == .filtered {
+            return self.removeFiltersButton
+        } else {
+            return nil
+        }
     }
 }
