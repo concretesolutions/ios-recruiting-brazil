@@ -22,15 +22,29 @@ class FavoriteMoviesWorker {
     private let titleKey: String =  MovieDetailed.MovieCoreDataKey.title.rawValue
     private let releaseDateKey: String = MovieDetailed.MovieCoreDataKey.releaseDate.rawValue
     private let genresKey: String = MovieDetailed.MovieCoreDataKey.genres.rawValue
+    private let overviewKey: String = MovieDetailed.MovieCoreDataKey.overview.rawValue
+    
+    func removeAll() {
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do {
+            try context.execute(deleteRequest)
+        } catch {
+            
+        }
+    }
     
     func addFavoriteMovie(movie: MovieDetailed) {
+        removeAll()
         
         let entity = NSEntityDescription.entity(forEntityName: movieCoreData, in: context)
         let newFavorite = NSManagedObject(entity: entity!, insertInto: context)
  
         newFavorite.setValue(movie.id, forKey: idKey)
         newFavorite.setValue(movie.title, forKey: titleKey)
-        newFavorite.setValue(["aaaa", "bbb", "cccc"], forKey: genresKey)
+        newFavorite.setValue(movie.overview, forKey: overviewKey)
+        newFavorite.setValue(movie.releaseDate, forKey: releaseDateKey)
+        newFavorite.setValue(movie.genres, forKey: genresKey) 
         
         do {
             try context.save()
@@ -42,7 +56,7 @@ class FavoriteMoviesWorker {
     func getFavoriteMovies() -> [MovieDetailed] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
         request.returnsObjectsAsFaults = false
-        
+
         var movies = [MovieDetailed]()
         do {
             let result = try context.fetch(request)

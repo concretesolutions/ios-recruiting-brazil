@@ -55,7 +55,7 @@ extension MovieDetailed {
         case genres = "genres"
         case title = "title"
         case overview = "overview"
-        case releaseDate = "releaseDate"
+        case releaseDate = "releaseYear"
         case posterPath = "posterPath"
         case voteAverage = "voteAverage"
     }
