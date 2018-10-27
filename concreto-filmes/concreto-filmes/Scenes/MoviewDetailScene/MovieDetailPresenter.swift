@@ -13,10 +13,20 @@
 import UIKit
 
 protocol MovieDetailPresentationLogic {
-
+    func presentMovie(movie: Movie)
 }
 
 class MovieDetailPresenter: MovieDetailPresentationLogic {
     weak var viewController: MovieDetailDisplayLogic?
+
+    func presentMovie(movie: Movie) {
+        let genres = movie.genreIDS.map { (id) -> String in
+            return Genre.fetchedGenres[id] ?? "Uknown"
+        }
+        let genresString = genres.joined(separator: ", ")
+        
+        let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genresString, overview: movie.overview, isFavorite: false)
+        viewController?.displayMovie(viewModel: viewModel)
+    }
 
 }

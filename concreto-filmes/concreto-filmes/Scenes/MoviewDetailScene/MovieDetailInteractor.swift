@@ -13,15 +13,22 @@
 import UIKit
 
 protocol MovieDetailBusinessLogic {
-
+    func presentMovie()
 }
 
 protocol MovieDetailDataStore {
-    //var name: String { get set }
+    var movie: Movie? {get set}
 }
 
 class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore {
+    var movie: Movie?
     var presenter: MovieDetailPresentationLogic?
     var worker: MovieDetailWorker?
 
+    func presentMovie() {
+        guard let movie = self.movie else {
+            return
+        }
+        self.presenter?.presentMovie(movie: movie)
+    }
 }

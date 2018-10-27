@@ -20,7 +20,6 @@ protocol MainScreenBusinessLogic {
 }
 
 protocol MainScreenDataStore {
-    var movieTitle: String { get set }
     var movies: [Movie] { get set }
     var filteredMovies: [Movie] { get set }
     var currentPageForAPIPopular: Int { get set }
@@ -30,7 +29,6 @@ protocol MainScreenDataStore {
 class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore {
     var presenter: MainScreenPresentationLogic?
     var worker = MainScreenWorker()
-    var movieTitle: String = ""
     var movies: [Movie] = []
     var filteredMovies: [Movie] = []
     var currentPageForAPIPopular = 1

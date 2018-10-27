@@ -28,7 +28,7 @@ extension GenreApiResponse: Decodable {
 struct Genre {
     let id: Int
     let name: String
-    static var fetchedGenres: [Int: String]?
+    static var fetchedGenres: [Int: String] = [:]
 }
 
 extension Genre: Decodable {

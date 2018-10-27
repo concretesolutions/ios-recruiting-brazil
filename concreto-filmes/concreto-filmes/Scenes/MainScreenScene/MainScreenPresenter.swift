@@ -32,7 +32,9 @@ class MainScreenPresenter: MainScreenPresentationLogic {
 
     func present(error: String?) {
         if let error = error {
-         viewController?.displayAlert(title: "OPS!", message: error)
+            DispatchQueue.main.sync {
+                viewController?.displayAlert(title: "OPS!", message: error)
+            }
         }
     }
 }

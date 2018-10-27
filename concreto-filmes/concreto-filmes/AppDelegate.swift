@@ -32,6 +32,8 @@ extension AppDelegate {
     private func setupWindow() {
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: MainScreenViewController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let navigationController = UINavigationController(rootViewController: MainScreenViewController(collectionViewLayout: UICollectionViewFlowLayout()))
+        navigationController.navigationBar.tintColor = .black
+        window?.rootViewController = navigationController
     }
 }

@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol MainScreenRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToMovieDetail(shouldFilter: Bool, index: Int)
 }
 
 protocol MainScreenDataPassing {
@@ -26,32 +26,23 @@ class MainScreenRouter: NSObject, MainScreenRoutingLogic, MainScreenDataPassing 
 
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToMovieDetail(shouldFilter: Bool, index: Int) {
+        guard let sourceVC = viewController else { return }
+        let destinationVC = MovieDetailViewController()
+        var destinationDataStore = destinationVC.router?.dataStore
+        passDataToDetailScreen(source: dataStore, destination: &destinationDataStore, shouldFilter: shouldFilter, index: index)
+        navigateToMovieDetail(source: sourceVC, destination: destinationVC)
+    }
 
-    // MARK: Navigation
+    func passDataToDetailScreen(source: MainScreenDataStore?, destination: inout MovieDetailDataStore?, shouldFilter: Bool, index: Int) {
+        if shouldFilter {
+            destination?.movie = source?.filteredMovies[index]
+        } else {
+            destination?.movie = source?.movies[index]
+        }
+    }
 
-    //func navigateToSomewhere(source: MainScreenViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
-
-    // MARK: Passing data
-
-    //func passDataToSomewhere(source: MainScreenDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func navigateToMovieDetail(source: MainScreenViewController, destination: MovieDetailViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
 }

@@ -20,6 +20,7 @@ class NetworkManager<T: EndPointType> {
         case 501...599:
             return Result.failure(NetworkResponse.badRequest.rawValue)
         case 600: return Result.failure(NetworkResponse.outdate.rawValue)
+        case 1003: return Result.failure(NetworkResponse.requestLimitReached.rawValue)
         default:
             return Result.failure(NetworkResponse.failed.rawValue)
         }
@@ -40,6 +41,7 @@ enum NetworkResponse: String {
     case failed = "Network request failed."
     case noData = "Response returned with no data to decode."
     case unableToDecode = "We could not decode the response."
+    case requestLimitReached = "Please try again later..."
 }
 
 enum Result<String> {

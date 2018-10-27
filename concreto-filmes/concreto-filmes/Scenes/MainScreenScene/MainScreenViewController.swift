@@ -105,17 +105,6 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         router.dataStore = interactor
     }
 
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-
     func display(movies: [MainScreen.ViewModel.MovieViewModel]) {
         self.displayedMovies = movies
         self.applicationStatus = .finish
@@ -134,6 +123,10 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
             self.applicationStatus = .finish
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.searchBar.endEditing(true)
     }
 
     // MARK: - Scroll View
@@ -173,8 +166,6 @@ extension MainScreenViewController: CodeView {
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color
         collectionView.register(MainScreenMovieCell.self, forCellWithReuseIdentifier: self.movieCellID)
-        let tapToDismiss = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tapToDismiss)
         self.activityIndicator.startAnimating()
     }
 }
