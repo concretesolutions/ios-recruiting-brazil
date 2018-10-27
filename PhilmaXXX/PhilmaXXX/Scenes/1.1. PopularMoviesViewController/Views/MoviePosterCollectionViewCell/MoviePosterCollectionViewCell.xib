@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MoviePosterCollectionViewCell" id="gTV-IL-0wX" customClass="MoviePosterCollectionViewCell" customModule="PhilmaXXX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="225"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="225"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Egg-c9-EdI">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="225"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="46I-TZ-4bW">
+                        <rect key="frame" x="0.0" y="10" width="150" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="46I-TZ-4bW" secondAttribute="height" multiplier="5:2" id="Wby-o2-o97"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="Name">
+                                <attributes>
+                                    <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <font key="NSFont" size="26" name="LucidaGrande"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <size key="shadowOffset" width="1" height="1"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qb-Tf-PSH">
+                        <rect key="frame" x="100" y="175" width="50" height="50"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="KKX-w4-caU"/>
+                            <constraint firstAttribute="width" secondItem="5qb-Tf-PSH" secondAttribute="height" multiplier="1:1" id="reb-0o-RJb"/>
+                        </constraints>
+                        <state key="normal" image="favorite_empty_icon"/>
+                        <connections>
+                            <action selector="toggleAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Og6-dy-df9"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5qb-Tf-PSH" secondAttribute="trailing" id="6uu-R3-nZe"/>
+                <constraint firstItem="Egg-c9-EdI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BqF-MI-yeD"/>
+                <constraint firstAttribute="bottom" secondItem="5qb-Tf-PSH" secondAttribute="bottom" id="CtU-kd-hPi"/>
+                <constraint firstAttribute="trailing" secondItem="Egg-c9-EdI" secondAttribute="trailing" id="E98-0I-hLx"/>
+                <constraint firstAttribute="bottom" secondItem="Egg-c9-EdI" secondAttribute="bottom" id="X6f-yi-Gp5"/>
+                <constraint firstItem="46I-TZ-4bW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bNe-Si-RkS"/>
+                <constraint firstItem="Egg-c9-EdI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tpl-Ee-ObV"/>
+                <constraint firstItem="46I-TZ-4bW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="xMG-In-tBd"/>
+                <constraint firstAttribute="trailing" secondItem="46I-TZ-4bW" secondAttribute="trailing" id="zD4-ix-uNK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="240" height="331"/>
+            <connections>
+                <outlet property="favoriteFlag" destination="5qb-Tf-PSH" id="zg0-Ov-WHa"/>
+                <outlet property="nameLabel" destination="46I-TZ-4bW" id="piU-pB-kxD"/>
+                <outlet property="poster" destination="Egg-c9-EdI" id="yaH-xx-MJy"/>
+            </connections>
+            <point key="canvasLocation" x="132.80000000000001" y="13.043478260869566"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+    </resources>
+</document>

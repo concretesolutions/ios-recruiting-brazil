@@ -1,0 +1,73 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '12.0'
+
+def test_pods
+    pod 'Quick'
+    pod 'Nimble'
+end
+
+
+target 'PhilmaXXX' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for PhilmaXXX
+  pod 'Kingfisher'
+  pod 'Eureka'
+
+end
+
+target 'Domain' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Domain
+
+  target 'DomainTests' do
+    inherit! :search_paths
+    # Pods for testing
+    test_pods
+  end
+
+end
+
+target 'NetworkPlatform' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for NetworkPlatform
+  pod 'Moya'
+
+  target 'NetworkPlatformTests' do
+    inherit! :search_paths
+    # Pods for testing
+    test_pods
+  end
+
+end
+
+target 'RealmPlatform' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for RealmPlatform
+  pod 'RealmSwift'
+  pod 'Realm'
+
+  target 'RealmPlatformTests' do
+    inherit! :search_paths
+    # Pods for testing
+    test_pods
+  end
+
+end
+
+target 'Placeholder' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for RealmPlatform
+  pod 'RealmSwift'
+  pod 'Realm'
+
+end

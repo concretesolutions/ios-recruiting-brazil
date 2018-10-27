@@ -1,0 +1,39 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "All-in One Development Action"
+  lane :devpush do  
+    run_tests(workspace: "PhilmaXXX.xcworkspace", device: "iPhone XS", code_coverage: true)
+    slather(scheme: "PhilmaXXX", proj: "PhilmaXXX.xcodeproj", workspace: "PhilmaXXX.wcworkspace")
+    increment_build_number
+    git_add(path: ".")
+    git_commit(path: ".", message: Date.today.to_s)
+    push_to_git_remote
+  end
+
+  desc "Quick+Nimble project tests"
+  lane :tests do
+    run_tests(workspace: "PhilmaXXX.xcworkspace", device: "iPhone XS", code_coverage: true)
+  end
+
+  desc "Analysis of code-coverage using Slather"
+  lane :custom_slather do
+    slather(scheme: "PhilmaXXX", proj: "PhilmaXXX.xcodeproj", workspace: "PhilmaXXX.wcworkspace")
+  end
+
+end
