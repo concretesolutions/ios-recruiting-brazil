@@ -11,21 +11,12 @@ import Foundation
 protocol MoviesGridPresenterView: ViewProtocol {
 }
 
-final class MoviesGridPresenter: MoviesGridViewPresenter {
+final class MoviesGridPresenter: MVPBasePresenter {
     
-    unowned let view:MoviesGridPresenterView
-    unowned let coordinator:Coordinator
-    
-    init(view:MoviesGridPresenterView, coordinator: Coordinator) {
-        self.view = view
-        self.coordinator = coordinator
+    var view:MoviesGridPresenterView? {
+        return self.baseView as? MoviesGridPresenterView
     }
-    
-    func viewDidLoad() {
-        self.view.setupOnce()
-    }
-    
-    func viewWillAppear() {
-        self.view.setupWhenAppear()
-    }
+}
+
+extension MoviesGridPresenter: MoviesGridViewPresenter {
 }

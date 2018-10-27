@@ -8,26 +8,15 @@
 
 import Foundation
 
-import Foundation
-
 protocol MovieDetailPresenterView: ViewProtocol {
 }
 
-final class MovieDetailPresenter: MovieDetailViewPresenter {
+final class MovieDetailPresenter: MVPBasePresenter {
     
-    unowned let view:MovieDetailPresenterView
-    unowned let coordinator:Coordinator
-    
-    init(view:MovieDetailPresenterView, coordinator:Coordinator) {
-        self.view = view
-        self.coordinator = coordinator
+    var view:MovieDetailPresenterView? {
+        return self.baseView as? MovieDetailPresenterView
     }
-    
-    func viewDidLoad() {
-        self.view.setupOnce()
-    }
-    
-    func viewWillAppear() {
-        self.view.setupWhenAppear()
-    }
+}
+
+extension MovieDetailPresenter: MovieDetailViewPresenter {
 }

@@ -11,21 +11,12 @@ import Foundation
 protocol FavoriteMoviesPresenterView: ViewProtocol {
 }
 
-final class FavoriteMoviesPresenter: FavoriteMoveisViewPresenter {
+final class FavoriteMoviesPresenter: MVPBasePresenter {
     
-    unowned let view:FavoriteMoviesPresenterView
-    unowned let coordinator:Coordinator
-    
-    init(view: FavoriteMoviesPresenterView, coordinator: Coordinator) {
-        self.view = view
-        self.coordinator = coordinator
+    var view:MovieDetailPresenterView? {
+        return self.baseView as? MovieDetailPresenterView
     }
-    
-    func viewDidLoad() {
-        self.view.setupOnce()
-    }
-    
-    func viewWillAppear() {
-        self.view.setupWhenAppear()
-    }
+}
+
+extension FavoriteMoviesPresenter: FavoriteMoviesViewPresenter {
 }

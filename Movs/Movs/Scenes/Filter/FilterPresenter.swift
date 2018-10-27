@@ -11,21 +11,12 @@ import Foundation
 protocol FilterPresenterView: ViewProtocol {
 }
 
-final class FilterPresenter: FilterViewPresenter {
+final class FilterPresenter: MVPBasePresenter {
     
-    unowned let view:FilterPresenterView
-    unowned let coordinator:Coordinator
-    
-    init(view: FilterPresenterView, coordinator: Coordinator) {
-        self.view = view
-        self.coordinator = coordinator
+    var view:FilterPresenterView? {
+        return self.baseView as? FilterPresenterView
     }
-    
-    func viewDidLoad() {
-        self.view.setupOnce()
-    }
-    
-    func viewWillAppear() {
-        self.view.setupWhenAppear()
-    }
+}
+
+extension FilterPresenter: FilterViewPresenter {
 }

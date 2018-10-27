@@ -32,6 +32,28 @@ public extension ViewProtocol {
     func setupWhenAppear() {}
 }
 
+open class MVPBasePresenter: PresenterProtocol {
+    
+    unowned var baseView:ViewProtocol
+    unowned var coordinator:Coordinator
+    
+    init(view:ViewProtocol, coordinator:Coordinator) {
+        self.baseView = view
+        self.coordinator = coordinator
+    }
+    
+    open func viewDidLoad() {
+        self.baseView.setupOnce()
+    }
+    
+    open func viewWillAppear() {
+        self.baseView.setupWhenAppear()
+    }
+    
+    open func viewWillDisappear() {}
+    open func viewDidDisappear() {}
+}
+
 open class MVPBaseViewController: UIViewController {
     
     var basePresenter: PresenterProtocol?

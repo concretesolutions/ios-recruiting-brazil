@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FavoriteMoveisViewPresenter: PresenterProtocol {
+protocol FavoriteMoviesViewPresenter: PresenterProtocol {
 }
 
 final class FavoriteMoviesViewController: MVPBaseViewController {
@@ -20,9 +20,9 @@ final class FavoriteMoviesViewController: MVPBaseViewController {
         }
     }
     
-    var presenter:FavoriteMoveisViewPresenter? {
+    var presenter:FavoriteMoviesViewPresenter? {
         get {
-            return self.basePresenter as? FavoriteMoveisViewPresenter
+            return self.basePresenter as? FavoriteMoviesViewPresenter
         }
         set {
             self.basePresenter = newValue
