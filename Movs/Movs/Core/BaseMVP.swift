@@ -35,9 +35,9 @@ public extension ViewProtocol {
 open class MVPBasePresenter: PresenterProtocol {
     
     unowned var baseView:ViewProtocol
-    unowned var coordinator:Coordinator
+    weak var coordinator:Coordinator?
     
-    init(view:ViewProtocol, coordinator:Coordinator) {
+    init(view:ViewProtocol, coordinator:Coordinator? = nil) {
         self.baseView = view
         self.coordinator = coordinator
     }

@@ -1,5 +1,5 @@
 //
-//  MVPBaseTests.swift
+//  BaseMVPTests.swift
 //  MovsTests
 //
 //  Created by Gabriel Reynoso on 25/10/18.
@@ -9,13 +9,15 @@
 import XCTest
 @testable import Movs
 
-class MVPBaseTests: XCTestCase {
+class BaseMVPTests: XCTestCase {
 
     private lazy var baseViewController:MVPBaseViewController = {
         let vc = MVPBaseViewController()
         vc.basePresenter = self
         return vc
     }()
+    
+    private lazy var basePresenter:MVPBasePresenter = MVPBasePresenter(view: self)
     
     private var methodWasCalled:Bool = false
     
@@ -42,23 +44,26 @@ class MVPBaseTests: XCTestCase {
         self.baseViewController.viewWillDisappear(false)
         XCTAssertTrue(self.methodWasCalled)
     }
+    
+    func testBasePresenterShouldCallViewSetupOnce() {
+        self.basePresenter.viewDidLoad()
+        XCTAssertTrue(self.methodWasCalled)
+    }
+    
+    func testBasePresenterShouldCallViewSetupWhenAppear() {
+        self.basePresenter.viewWillAppear()
+        XCTAssertTrue(self.methodWasCalled)
+    }
 }
 
-extension MVPBaseTests: PresenterProtocol {
-    
-    func viewDidLoad() {
-        self.methodWasCalled = true
-    }
-    
-    func viewWillAppear() {
-        self.methodWasCalled = true
-    }
-    
-    func viewWillDisappear() {
-        self.methodWasCalled = true
-    }
-    
-    func viewDidDisappear() {
-        self.methodWasCalled = true
-    }
+extension BaseMVPTests: PresenterProtocol {
+    func viewDidLoad() { self.methodWasCalled = true }
+    func viewWillAppear() { self.methodWasCalled = true }
+    func viewWillDisappear() { self.methodWasCalled = true }
+    func viewDidDisappear() { self.methodWasCalled = true }
+}
+
+extension BaseMVPTests: ViewProtocol {
+    func setupOnce() { self.methodWasCalled = true }
+    func setupWhenAppear() { self.methodWasCalled = true }
 }
