@@ -12,12 +12,12 @@ final class MovsTabBarController: UITabBarController {
     
     let moviesNavigationController:MovsNavigationController = {
         let nav = MovsNavigationController()
-        nav.tabBarItem = UITabBarItem(title: nil, image: Assets.listIcon.image, selectedImage: nil)
+        nav.tabBarItem = UITabBarItem(title: "Movies", image: Assets.listIcon.image, selectedImage: nil)
         return nav
     }()
     let favoritesNavigationController:MovsNavigationController = {
         let nav = MovsNavigationController()
-        nav.tabBarItem = UITabBarItem(title: nil, image: Assets.favoriteEmptyIcon.image, selectedImage: nil)
+        nav.tabBarItem = UITabBarItem(title: "Favorites", image: Assets.favoriteEmptyIcon.image, selectedImage: nil)
         return nav
     }()
     

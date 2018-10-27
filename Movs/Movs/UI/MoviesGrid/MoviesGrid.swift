@@ -31,7 +31,7 @@ final class MoviesGrid: UIView {
         }
     }
     
-    private var feedbackView:MoviesGridFeedbackView! {
+    private var feedbackView:FeedbackView! {
         didSet {
             self.feedbackView.setupView()
             self.addSubview(self.feedbackView)
@@ -98,29 +98,14 @@ extension MoviesGrid: ViewCode {
         self.backgroundColor = Colors.white.color
         self.collectionView = MoviesGridCollectionView(frame: .zero, collectionViewLayout: MoviesGridFlowLayout())
         self.activityIndicatorView = UIActivityIndicatorView(style: .gray)
-        self.feedbackView = MoviesGridFeedbackView()
+        self.feedbackView = FeedbackView()
         self.refreshUIAccordingToState()
     }
     
     func autolayout() {
-        // collection view
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.collectionView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
-        self.collectionView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
-        self.collectionView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        // activity indicator
-        self.activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.activityIndicatorView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
-        self.activityIndicatorView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
-        self.activityIndicatorView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.activityIndicatorView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        // background image view
-        self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
-        self.feedbackView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
-        self.feedbackView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
-        self.feedbackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.feedbackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.collectionView.fillAvailableSpaceInSafeArea()
+        self.activityIndicatorView.fillAvailableSpaceInSafeArea()
+        self.feedbackView.fillAvailableSpaceInSafeArea()
     }
 }
 

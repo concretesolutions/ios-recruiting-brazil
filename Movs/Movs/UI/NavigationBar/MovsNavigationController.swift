@@ -33,10 +33,16 @@ final class MovsNavigationController: UINavigationController {
     }
     
     private func commonInit() {
+        
         self.navigationBar.prefersLargeTitles = true
         self.navigationBar.backgroundColor = Colors.mainYellow.color
         self.navigationBar.barTintColor = Colors.mainYellow.color
         self.navigationBar.tintColor = Colors.darkBlue.color
-        self.navigationBar.largeTitleTextAttributes = [.foregroundColor:Colors.darkBlue.color, .font: Fonts.futuraBold.font(size: 34.0)]
+        
+        var titleAttributes: [NSAttributedString.Key:Any] = [.foregroundColor:Colors.darkBlue.color]
+        titleAttributes[.font] = Fonts.futuraBold.font(size: 34.0)
+        self.navigationBar.largeTitleTextAttributes = titleAttributes
+        titleAttributes[.font] = Fonts.futuraBold.font(size: 18.0)
+        self.navigationBar.titleTextAttributes = titleAttributes
     }
 }

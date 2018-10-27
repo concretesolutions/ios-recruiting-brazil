@@ -10,7 +10,8 @@ import UIKit
 
 // MARK: - Collection view
 
-final class MoviesGridCollectionView: UICollectionView, ViewCode {
+final class MoviesGridCollectionView: UICollectionView {}
+extension MoviesGridCollectionView: ViewCode {
     
     func design() {
         self.register(MoviesGridCell.self, forCellWithReuseIdentifier: MoviesGridCell.identifier)

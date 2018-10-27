@@ -11,7 +11,7 @@ import UIKit
 protocol MoviesGridViewPresenter: PresenterProtocol {
 }
 
-final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenterView {
+final class MoviesGridViewController: MVPBaseViewController {
     
     private var moviesGrid: MoviesGrid! {
         didSet {
@@ -28,14 +28,16 @@ final class MoviesGridViewController: MVPBaseViewController, MoviesGridPresenter
             self.basePresenter = newValue
         }
     }
+}
+
+extension MoviesGridViewController: MoviesGridPresenterView {
     
     func setupOnce() {
         self.title = "Movies"
         self.moviesGrid = MoviesGrid(frame: self.view.bounds)
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        let searchController = MovsNavigationSearchController(searchResultsController: nil)
-        self.navigationItem.searchController = searchController
+        self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
         self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationItem.largeTitleDisplayMode = .automatic
         self.definesPresentationContext = true
     }
 }

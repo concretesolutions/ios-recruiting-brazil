@@ -1,5 +1,5 @@
 //
-//  MoviesGridFeedbackView.swift
+//  FeedbackView.swift
 //  Movs
 //
 //  Created by Gabriel Reynoso on 24/10/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MoviesGridFeedbackView: UIView {
+final class FeedbackView: UIView {
     
     private var stackView:UIStackView! {
         didSet {
@@ -54,7 +54,7 @@ final class MoviesGridFeedbackView: UIView {
     }
 }
 
-extension MoviesGridFeedbackView: ViewCode {
+extension FeedbackView: ViewCode {
     
     func design() {
         self.imageView = UIImageView(image: nil)

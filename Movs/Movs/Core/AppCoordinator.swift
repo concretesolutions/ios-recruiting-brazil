@@ -15,15 +15,25 @@ final class AppCoordinator: Coordinator {
     var onCoordinatorStarted: OnCoordinatorStarted?
     
     func start() {
+        
         let moviesCoordinator = MoviesGridCoordinator()
+        
         moviesCoordinator.onCoordinatorStarted = { [unowned self] vc in
-            self.tabBarController.moviesNavigationController.pushViewController(vc, animated: false)
+            self.tabBarController
+                .moviesNavigationController
+                .pushViewController(vc, animated: false)
         }
         moviesCoordinator.start()
+        
         let favoritesCoordinator = FavoriteMoviesCoordinator()
+        
         favoritesCoordinator.onCoordinatorStarted = { [unowned self] vc in
-            self.tabBarController.favoritesNavigationController.pushViewController(vc, animated: false)
+            self.tabBarController
+                .favoritesNavigationController
+                .pushViewController(vc, animated: false)
         }
+        favoritesCoordinator.start()
+        
         self.onCoordinatorStarted?(self.tabBarController)
     }
 }
