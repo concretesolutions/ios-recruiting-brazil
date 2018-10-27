@@ -24,7 +24,7 @@ class DetailMoviesViewController: UIViewController {
     @IBOutlet weak var imdbValue: UILabel!
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var movieOverview: UITextView!
-    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var favoriteIcon: UIImageView!
     
     private var viewModel: DetailMovie.ViewModel?
     var movieId: Int?
@@ -49,6 +49,8 @@ class DetailMoviesViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func favoriteMovieAction(_ sender: Any) {
+        print("🐞 favoritar")
+
         
     }
     
@@ -63,7 +65,7 @@ extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
         genres.text = viewModel.genreNames
         movieOverview.text = viewModel.overview
         imdbValue.text = viewModel.imdbVote
-        favoriteButton.imageView?.image = viewModel.favoriteButtonImage     
+        favoriteIcon.image = viewModel.favoriteButtonImage     
     }
     
     func displayError(viewModel: DetailMovie.ViewModel.Error) {

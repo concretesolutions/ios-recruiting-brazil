@@ -13,7 +13,7 @@ class PopularMovieTableViewCell: UITableViewCell {
 
     var movieIdentifier: Int?
     
-    private let favoriteEmpty = UIImage(named: "favorite_empty_icon")
+    private let favoriteEmpty = UIImage(named: "favorite_gray_icon")
     private let favoriteFull = UIImage(named: "favorite_full_icon")
     
     @IBOutlet weak var movieTitle: UILabel!

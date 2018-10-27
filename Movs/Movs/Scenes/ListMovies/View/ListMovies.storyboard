@@ -157,7 +157,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aDa-cy-WmS">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aDa-cy-WmS">
                                 <rect key="frame" x="20" y="255" width="335" height="312"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -238,11 +238,24 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Usp-3H-94K">
-                                <rect key="frame" x="337" y="65" width="22" height="22"/>
-                                <state key="normal" image="favorite_empty_icon"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_gray_icon" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-gR-crH">
+                                <rect key="frame" x="335" y="65" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="IsI-SR-TR3"/>
+                                    <constraint firstAttribute="width" constant="20" id="Pm7-zW-Q3u"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="708-Jt-3iy">
+                                <rect key="frame" x="132.5" y="592" width="110" height="30"/>
+                                <color key="backgroundColor" name="primaryColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="rWY-P5-bbi"/>
+                                </constraints>
+                                <state key="normal" title="Favoritar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="favoriteMovieAction:" destination="sFt-hF-eIR" eventType="touchUpInside" id="f3C-Aq-OWu"/>
+                                    <action selector="favoriteMovieAction:" destination="sFt-hF-eIR" eventType="touchUpInside" id="RGt-Jo-n8d"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -252,17 +265,18 @@
                             <constraint firstItem="aDa-cy-WmS" firstAttribute="leading" secondItem="3DF-It-atf" secondAttribute="leading" constant="20" id="FfR-F7-tgK"/>
                             <constraint firstItem="N6e-b0-IPX" firstAttribute="leading" secondItem="3DF-It-atf" secondAttribute="leading" constant="20" id="OVL-Ws-6OB"/>
                             <constraint firstItem="3DF-It-atf" firstAttribute="bottom" secondItem="aDa-cy-WmS" secondAttribute="bottom" constant="100" id="R02-7r-duA"/>
-                            <constraint firstItem="Usp-3H-94K" firstAttribute="top" secondItem="N6e-b0-IPX" secondAttribute="top" id="YCz-hc-Nvf"/>
-                            <constraint firstItem="3DF-It-atf" firstAttribute="trailing" secondItem="Usp-3H-94K" secondAttribute="trailing" constant="16" id="a0w-L5-lCC"/>
+                            <constraint firstItem="wnQ-gR-crH" firstAttribute="leading" secondItem="N6e-b0-IPX" secondAttribute="trailing" id="R7f-gr-YwU"/>
+                            <constraint firstItem="708-Jt-3iy" firstAttribute="top" secondItem="aDa-cy-WmS" secondAttribute="bottom" constant="25" id="Xqh-jn-Dxv"/>
+                            <constraint firstItem="708-Jt-3iy" firstAttribute="centerX" secondItem="fvf-oO-NS5" secondAttribute="centerX" id="b1O-Fd-dAa"/>
                             <constraint firstItem="3DF-It-atf" firstAttribute="trailing" secondItem="aDa-cy-WmS" secondAttribute="trailing" constant="20" id="jHz-YQ-jLQ"/>
                             <constraint firstItem="aDa-cy-WmS" firstAttribute="top" secondItem="N6e-b0-IPX" secondAttribute="bottom" constant="20" id="mO4-oM-bZ4"/>
                             <constraint firstItem="N6e-b0-IPX" firstAttribute="top" secondItem="3DF-It-atf" secondAttribute="top" constant="45" id="rgk-3k-8JG"/>
-                            <constraint firstItem="Usp-3H-94K" firstAttribute="leading" secondItem="N6e-b0-IPX" secondAttribute="trailing" constant="2" id="xCb-mE-wYg"/>
+                            <constraint firstItem="wnQ-gR-crH" firstAttribute="top" secondItem="N6e-b0-IPX" secondAttribute="top" id="zVU-TM-KnI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3DF-It-atf"/>
                     </view>
                     <connections>
-                        <outlet property="favoriteButton" destination="Usp-3H-94K" id="J8p-oh-bMu"/>
+                        <outlet property="favoriteIcon" destination="wnQ-gR-crH" id="o9S-kC-arh"/>
                         <outlet property="genres" destination="8AH-XR-u4N" id="SBm-Mi-P9s"/>
                         <outlet property="imdbValue" destination="eIi-i1-aBt" id="FgE-YZ-pz0"/>
                         <outlet property="movieOverview" destination="aDa-cy-WmS" id="jAd-yY-U83"/>
@@ -278,6 +292,7 @@
     </scenes>
     <resources>
         <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="imdb_icon" width="29" height="26"/>
         <namedColor name="grayBackground">
             <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

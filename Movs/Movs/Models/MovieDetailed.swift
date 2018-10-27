@@ -47,3 +47,17 @@ extension MovieDetailed: Decodable {
         isFavorite = false
     }
 }
+
+extension MovieDetailed {
+    
+    enum MovieCoreDataKey: String {
+        case id = "id"
+        case genres = "genres"
+        case title = "title"
+        case overview = "overview"
+        case releaseDate = "releaseDate"
+        case posterPath = "posterPath"
+        case voteAverage = "voteAverage"
+    }
+    
+}

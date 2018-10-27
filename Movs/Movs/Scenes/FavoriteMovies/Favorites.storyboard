@@ -9,20 +9,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Favorite Movies View Controller-->
         <scene sceneID="fgv-Vi-yxr">
             <objects>
-                <viewController id="dFS-OM-eA5" sceneMemberID="viewController">
+                <viewController id="dFS-OM-eA5" customClass="FavoriteMoviesViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gpq-75-XXm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pLd-VX-sAX">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="157" id="bBO-CD-9AC">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="157"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bBO-CD-9AC" id="Uo7-F6-y3F">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="156.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pLd-VX-sAX" firstAttribute="trailing" secondItem="CSg-mr-ZUS" secondAttribute="trailing" id="7dO-o2-WGX"/>
+                            <constraint firstItem="pLd-VX-sAX" firstAttribute="top" secondItem="CSg-mr-ZUS" secondAttribute="top" id="C3y-3p-q1s"/>
+                            <constraint firstItem="pLd-VX-sAX" firstAttribute="leading" secondItem="CSg-mr-ZUS" secondAttribute="leading" id="GzA-1I-MqX"/>
+                            <constraint firstItem="pLd-VX-sAX" firstAttribute="bottom" secondItem="CSg-mr-ZUS" secondAttribute="bottom" id="NVJ-U6-hjT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="CSg-mr-ZUS"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="pLd-VX-sAX" id="ah7-lf-QeJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22q-ji-iuc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="96"/>
+            <point key="canvasLocation" x="189.59999999999999" y="95.802098950524751"/>
         </scene>
     </scenes>
 </document>
