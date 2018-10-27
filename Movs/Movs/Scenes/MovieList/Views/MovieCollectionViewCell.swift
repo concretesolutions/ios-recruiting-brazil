@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
@@ -20,6 +21,12 @@ class MovieCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
+    }
+    
+    func set(movie: MovieListModel.ViewModel.Movie) {
+        let url = URL(string: movie.posterURL)!
+        movieView.title.text = movie.title
+        movieView.movieImage.kf.setImage(with: url)
     }
     
 }

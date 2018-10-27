@@ -9,13 +9,17 @@
 import UIKit
 
 protocol MovieListDisplayLogic: class {
-    
+    func displayMovies(viewModel: MovieListModel.ViewModel.Success)
+    func displayError(viewModel: MovieListModel.ViewModel.Error)
 }
 
 class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     var interactor: MovieListBussinessLogic!
     var router: MovieListRoutingLogic!
+    
+    var page = 1
+    var data: MovieListModel.ViewModel.Success = MovieListModel.ViewModel.Success(movies: [])
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -53,6 +57,10 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         setupViewController()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchMovies()
+    }
+    
     private func setup() {
         let viewController = self
         let interactor = MovieListInteractor()
@@ -73,33 +81,18 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         setupView()
     }
     
-}
-
-extension MovieListViewController: CodeView {
-    func buildViewHierarchy() {
-        view.addSubview(searchBar)
-        view.addSubview(collectionView)
+    private func fetchMovies() {
+        interactor.fetchMovies(request: MovieListModel.Request(page: page))
+        page += 1
     }
     
-    func setupConstraints() {
-        searchBar.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalToSuperview().inset(64)
-            make.height.equalTo(45)
-        }
-        
-        collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(searchBar.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
-        }
+    func displayMovies(viewModel: MovieListModel.ViewModel.Success) {
+        data = viewModel
+        collectionView.reloadData()
     }
     
-    func setupAdditionalConfiguration() {
-        view.backgroundColor = .white
+    func displayError(viewModel: MovieListModel.ViewModel.Error) {
         
-        if let textFieldSearch = searchBar.value(forKey: "_searchField") as? UITextField {
-            textFieldSearch.backgroundColor = UIColor.Movs.darkYellow
-        }
     }
 }
 

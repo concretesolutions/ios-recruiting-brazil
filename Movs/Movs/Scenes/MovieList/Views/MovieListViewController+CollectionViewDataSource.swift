@@ -10,19 +10,18 @@ import UIKit
 
 extension MovieListViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MovieCollectionViewCell
         
-        cell.movieView.title.text = "Thor"
-        cell.movieView.movieImage.backgroundColor = .green
+        cell.set(movie: data.movies[indexPath.row])
         
         return cell
     }
