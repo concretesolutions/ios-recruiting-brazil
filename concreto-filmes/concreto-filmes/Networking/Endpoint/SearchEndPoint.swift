@@ -41,7 +41,9 @@ extension SearchApi: EndPointType {
             return .requestParameters(bodyParameters: nil,
                                              urlParameters: ["page":page,
                                                              "query": text,
-                                                             "api_key":MovieNetworkManager.MovieAPIKey])
+                                                             "api_key":MovieNetworkManager.MovieAPIKey,
+                                                             "language": Locale.preferredLanguages[0] as String
+                                                            ])
             
         }
     }

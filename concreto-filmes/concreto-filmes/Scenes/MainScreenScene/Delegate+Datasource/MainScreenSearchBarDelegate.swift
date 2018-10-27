@@ -17,11 +17,7 @@ extension MainScreenViewController: UISearchBarDelegate {
         if let text = searchBar.text?.replacingOccurrences(of: " ", with: "+").lowercased(){
             self.applicationStatus = .resetFetch
             self.isFiltering = true
-            self.currentPageForAPIFiltering = 1
-            print("asdfasdfas \(currentPageForAPIFiltering)")
-            self.interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPIFiltering, text: text), shouldResetMovies: true, completionBlock: {
-                self.applicationStatus = .finish
-            })
+            self.interactor?.fetchQueriedMovies(text: text, shouldResetMovies: true)
         }
         dismissKeyboard()
     }
@@ -38,6 +34,5 @@ extension MainScreenViewController: UISearchBarDelegate {
             self.isFiltering = false
             self.interactor?.filterMoviesLocally(text: "")
         }
-        self.currentPageForAPIFiltering = 0
     }
 }

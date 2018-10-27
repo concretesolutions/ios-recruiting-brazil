@@ -20,21 +20,17 @@ enum AppStatus{
     case finish
 }
 
-protocol MainScreenDisplayLogic: class
-{
+protocol MainScreenDisplayLogic: class{
     func display(movies: [MainScreen.ViewModel.MovieViewModel])
     func displayAlert(title: String,  message: String)
 }
 
-class MainScreenViewController: UICollectionViewController, MainScreenDisplayLogic
-{
+class MainScreenViewController: UICollectionViewController, MainScreenDisplayLogic{
     var interactor: MainScreenBusinessLogic?
     var router: (NSObjectProtocol & MainScreenRoutingLogic & MainScreenDataPassing)?
     
     let movieCellID = "movieCellID"
     var displayedMovies : [MainScreen.ViewModel.MovieViewModel] = []
-    var currentPageForAPI = 1
-    var currentPageForAPIFiltering = 1
     internal var isFiltering = false
     
     var applicationStatus : AppStatus = .resetFetch {
@@ -79,10 +75,8 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        collectionView.reloadData()
-        interactor?.fetchPopularMovies(request:  MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: true, completionBlock: {
-            self.applicationStatus = .finish
-        })
+        interactor?.fetchPopularMovies(shouldResetMovies: true)
+        interactor?.initialFetch()
     }
     
     // MARK: Object lifecycle
@@ -126,6 +120,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     
     func display(movies: [MainScreen.ViewModel.MovieViewModel]) {
         self.displayedMovies = movies
+        self.applicationStatus = .finish
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
@@ -134,14 +129,11 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Tentar novamente", style: .default, handler: { (action) in
-            self.interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: self.applicationStatus == .resetFetch, completionBlock: {
-                alert.dismiss(animated: true, completion: {
-                    self.applicationStatus = .finish
-                })
-            })
+            self.interactor?.fetchPopularMovies(shouldResetMovies: self.applicationStatus == .resetFetch)
         }))
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
+            self.applicationStatus = .finish
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -159,16 +151,9 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     
     func beginBatchFetch() {
         if(isFiltering){
-            interactor?.fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPIFiltering + 1, text: self.searchBar.text ?? ""), shouldResetMovies: false, completionBlock: {
-                self.applicationStatus = .finish
-                //I have to add this only in success case
-                self.currentPageForAPIFiltering += 1
-            })
+            interactor?.fetchQueriedMovies(text: self.searchBar.text ?? "", shouldResetMovies: false)
         }else {
-            self.currentPageForAPI += 1
-            interactor?.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: self.currentPageForAPI), shouldResetMovies: false, completionBlock: {
-                self.applicationStatus = .finish
-            })
+            interactor?.fetchPopularMovies(shouldResetMovies: false)
         }
     }
 }

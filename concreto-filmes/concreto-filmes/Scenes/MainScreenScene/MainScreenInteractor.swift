@@ -14,9 +14,10 @@ import UIKit
 
 protocol MainScreenBusinessLogic
 {
-    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?)
+    func fetchPopularMovies(shouldResetMovies: Bool)
     func filterMoviesLocally(text: String)
-    func fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?)
+    func fetchQueriedMovies(text: String, shouldResetMovies: Bool)
+    func initialFetch()
 }
 
 protocol MainScreenDataStore
@@ -24,6 +25,8 @@ protocol MainScreenDataStore
     var movieTitle: String { get set }
     var movies: [Movie] { get set }
     var filteredMovies: [Movie] { get set }
+    var currentPageForAPIPopular : Int { get set }
+    var currentPageForAPIFiltering : Int { get set }
 }
 
 class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
@@ -33,40 +36,48 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore
     var movieTitle: String = ""
     var movies: [Movie] = []
     var filteredMovies: [Movie] = []
+    var currentPageForAPIPopular = 1
+    var currentPageForAPIFiltering = 1
     
-    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?) {
-        worker.fetchPopularMovies(request: request, completion: { (movies, error) in
-            if(error != nil){
-                self.presenter?.present(error: error)
-            }
-            if let movies = movies{
-                if shouldResetMovies {
-                    self.movies = movies
-                }else {
-                    self.movies.append(contentsOf: movies)
-                }
-                self.presenter?.present(movies: self.movies)
-            }
-            guard let completion = completionBlock else {return}
-            completion()
+    func fetchPopularMovies(shouldResetMovies: Bool) {
+        if shouldResetMovies {self.currentPageForAPIPopular = 1}
+        worker.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: currentPageForAPIPopular), completion: { (movies, error) in
+            
+            self.presentMoviesOrError(movies: movies, persistentMovieList: &self.movies, error: error, shouldResetMovies: shouldResetMovies, pageReference: &self.currentPageForAPIPopular)
         })
     }
     
-    func fetchQueriedMovies(request: MainScreen.FetchQueryMovies.Request, shouldResetMovies: Bool, completionBlock: (() -> ())?) {
-        worker.fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request(index: request.index, text: request.text)) { (movies, error) in
-            if(error != nil){
+    func fetchQueriedMovies(text: String, shouldResetMovies: Bool) {
+        if shouldResetMovies {self.currentPageForAPIFiltering = 1}
+        worker.fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request(index: self.currentPageForAPIFiltering, text: text)) { (movies, error) in
+            
+            self.presentMoviesOrError(movies: movies, persistentMovieList: &self.filteredMovies, error: error, shouldResetMovies: shouldResetMovies, pageReference: &self.currentPageForAPIFiltering)
+        }
+    }
+    
+    func initialFetch() {
+        worker.fetchAllMovieGenres { (result) in
+            switch result {
+            case .success:
+                self.fetchPopularMovies(shouldResetMovies: true)
+            case .failure(let error):
                 self.presenter?.present(error: error)
             }
-            if let movies = movies {
-                if shouldResetMovies {
-                    self.filteredMovies = movies
-                }else {
-                    self.filteredMovies.append(contentsOf: movies)
-                }
-                self.presenter?.present(movies: self.filteredMovies)
+        }
+    }
+    
+    func presentMoviesOrError(movies: [Movie]?, persistentMovieList: inout [Movie], error: String?, shouldResetMovies: Bool, pageReference: inout Int){
+        if(error != nil){
+            self.presenter?.present(error: error)
+        }
+        if let movies = movies {
+            if shouldResetMovies {
+                persistentMovieList = movies
+            }else {
+                persistentMovieList.append(contentsOf: movies)
             }
-            guard let completion = completionBlock else {return}
-            completion()
+            pageReference += 1
+            self.presenter?.present(movies: persistentMovieList)
         }
     }
     

@@ -28,6 +28,7 @@ extension GenreApiResponse : Decodable {
 struct Genre {
     let id: Int
     let name: String
+    static var fetchedGenres : Dictionary<Int, String>?
 }
 
 extension Genre: Decodable {

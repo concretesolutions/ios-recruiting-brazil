@@ -17,9 +17,7 @@ class MainScreenWorker
     
     let movieNetworkManager = MovieNetworkManager()
     let searchNetWorkManager = SearchNetworkManager()
-    func doSomeWork()
-    {
-    }
+    let genreNetworkmanager = MovieGenresNetworkManager()
     
     func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, completion: @escaping (_ movies: [Movie]?,_ error: String?) -> ()){
 
@@ -40,6 +38,24 @@ class MainScreenWorker
             }
             if let movies = movies {
                 completion(movies, nil)
+            }
+        }
+    }
+    
+    func fetchAllMovieGenres(completion: @escaping (_ result: Result<String>) -> ()){
+        genreNetworkmanager.getGenres { (genres, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            if let genres = genres {
+                let genreDictionary = genres.reduce([Int: String]()) { (dict, genre) -> [Int: String] in
+                    var dict = dict
+                    dict[genre.id] = genre.name
+                    return dict
+                    }
+                Genre.fetchedGenres = genreDictionary
+                completion(.success)
             }
         }
     }
