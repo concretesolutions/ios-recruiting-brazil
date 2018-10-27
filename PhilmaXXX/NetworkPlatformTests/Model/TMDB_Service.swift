@@ -47,7 +47,29 @@ class TMDB_ServiceSpec: QuickSpec {
 					expect(movies.count).toEventually(beGreaterThan(25))
 				})
 			})
+			
+			describe("should get all movie genres", closure: {
+				var genres = Set<Genre>()
+				
+				beforeSuite {
+					service.request(TMDB_Service.getGenres, completion: { (result) in
+						switch result {
+						case .success(let value):
+							let fetchedGenres = try! value.map([Genre].self, atKeyPath: "genres", using: decoder, failsOnEmptyData: false)
+							fetchedGenres.forEach({ (genre) in
+								genres.insert(genre)
+							})
+						case .failure(let error):
+							print(error.localizedDescription)
+						}
+					})
+				}
+				
+				it("eventually having something", closure: {
+					expect(genres.count).toEventually(beGreaterThan(0))
+				})
+			})
 		}
 	}
-
+	
 }
