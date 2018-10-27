@@ -29,8 +29,8 @@ extension MovieDB_API: TargetType {
         switch self {
         case .listPopularMovies:
             return "/movie/popular"
-        case .getMovieDetails:
-            return "/movie/"
+        case .getMovieDetails(let movieRequest):
+            return "/movie/\(movieRequest.movieId)"
         }
     }
     
@@ -52,8 +52,9 @@ extension MovieDB_API: TargetType {
                                                    "language": languagePortuguese,
                                                    "page": page],
                                       encoding: URLEncoding.queryString)
-        case .getMovieDetails(let movieRequest):
-            return .requestParameters(parameters: ["movie_id": movieRequest.movieId],
+        case .getMovieDetails:
+            return .requestParameters(parameters: ["api_key": APISetting.key,
+                                                   "language": languagePortuguese],
                                       encoding: URLEncoding.queryString)
         }
     }

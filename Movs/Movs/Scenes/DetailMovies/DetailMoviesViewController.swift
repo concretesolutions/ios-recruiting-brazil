@@ -26,19 +26,25 @@ class DetailMoviesViewController: UIViewController {
     @IBOutlet weak var movieOverview: UITextView!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    var viewModel: DetailMovie.ViewModel?
+    private var viewModel: DetailMovie.ViewModel?
+    var movieId: Int?
     
     // MARK: - View life cycle
     override func viewDidLoad() {
         DetailMoviesSceneConfigurator.inject(dependenciesFor: self)
         setup()
+        if let movieId = self.movieId {
+            let request = DetailMovie.Request(movieId: movieId)
+            interactor.fetchMovieDetailed(request: request)
+        }
     }
     
     
     // MARK: - Setup
     private func setup() {
-        self.navigationController?.title = "Favoritos"
-        self.navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "Detalhe"
+        navigationItem.backBarButtonItem?.title = ""
     }
     
     // MARK: - Actions

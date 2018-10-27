@@ -18,8 +18,10 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
     var worker = DetailMovieWorker()
     
     func fetchMovieDetailed(request: DetailMovie.Request) {
+        print("Fetch movie interactor")
         worker.getMovieDetails(request: request,
                                success: { (movie) in
+                                print(">>> success respose")
                                 // Get only the genre names
                                 let genres: [String] = movie.genres.map({ (genre) -> String in
                                     return genre.name

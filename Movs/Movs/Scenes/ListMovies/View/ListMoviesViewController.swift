@@ -20,6 +20,8 @@ class ListMoviesViewController: UIViewController {
     var interactor: ListMoviesBusinessLogic?
     private var page: Int = 1
     let movieCellReuseIdentifier = "PopularMovieTableViewCell"
+    let detailMovieSegue = "detailMovie"
+    
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -43,16 +45,23 @@ class ListMoviesViewController: UIViewController {
     private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.title = "Mais populares"
+        configureNavigationController()
     }
-  
     
+    private func configureNavigationController() {
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.view.tintColor = .darkGray
+        navigationController?.view.backgroundColor = .white
+        navigationItem.title = "Mais populares"
+    }
+
     // MARK: - Routing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-           
+        if (segue.identifier == detailMovieSegue) {
+            let viewController = segue.destination as! DetailMoviesViewController
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let movieId = movies[indexPath!.row].id
+            viewController.movieId = movieId
         }
     }
     
@@ -74,7 +83,7 @@ extension ListMoviesViewController: ListMoviesDisplayLogic {
 extension ListMoviesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: load a detail view
+        performSegue(withIdentifier: detailMovieSegue, sender: nil)
     }
     
 }

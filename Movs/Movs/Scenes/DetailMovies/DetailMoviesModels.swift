@@ -13,7 +13,6 @@ enum DetailMovie {
     
     struct Request {
         let movieId: Int
-        let genresId: [Int]
     }
     
     enum Response {
