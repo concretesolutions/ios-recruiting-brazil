@@ -14,7 +14,7 @@ Agradeço por poder participar do Recruiting Day da Concrete. Foi uma honra conh
 
 ---
 
-Como já explicado no branch original, utilizando a [API](https://developers.themoviedb.org/3/getting-started/introduction) do [TheMovieDB](https://www.themoviedb.org/?language=en) foi feito o PhilmaXXX, minha submissão para o desafio. O planejamento e exeução do projeto pode ser acompanhado através do [mural Trello](https://trello.com/b/C317xMAo/concrete-ios-recruiting-guilherme-guimar%C3%A3es-project-philmaxxx) publicamente visível à todos.
+Como já explicado no branch original, utilizando a [API](https://developers.themoviedb.org/3/getting-started/introduction) do [TheMovieDB](https://www.themoviedb.org/?language=en) foi feito o PhilmaXXX, minha submissão para o desafio. O planejamento e exeução do projeto pode ser acompanhado através do [mural Trello](https://trello.com/b/C317xMAo/concrete-ios-recruiting-guilherme-guimar%C3%A3es-project-philmaxxx) publicamente visível à todos. Tomei o desafio de *uma semana* para fazer o desafio, e tomei algumas horas a mais para complementar com alguns documentos e testes.
 
 Esse projeto foi executado utilizando a arquitetura de projetos Clean Archtecture, com suas camadas de Domínio, Plataforma e Aplicação modularizados por targets, reforçando a importância do encapsulamento para a organização de projetos. Também foi utilizado nesse projeto:
 
@@ -26,9 +26,6 @@ O projeto foi desenvolvido utilizando o Swift 4 no iOS 12. As APIs utilizadas fo
 - Kingfisher (gerenciamente de image-set com auto-cache)
 - Eureka (criação de formulário, utilizado na tela de filtros)
 - Quick & Nimble (testes)
-
-Até o final do projeto deve ser adotado:
-- Kif
 
 # Features incluídas ..
 
@@ -54,12 +51,13 @@ Até o final do projeto deve ser adotado:
 - [x] Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
 - [x] Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
 - [x] Testes unitários no projeto;
-- [ ] Testes funcionais. (ainda)
+- [ ] Testes funcionais.
 - [x] Pipeline Automatizado. (Com testing, code-coderage, project cleaning e git push cycle)
 
 ### Detalhes:
 
 - [x] Proteção de Request Spam.
+- Optei por não utilizar o fastlane para CI por não ter confiança nos processos de autenticação.
 
 # Exemplos e sugestões
 
@@ -77,9 +75,8 @@ Até o final do projeto deve ser adotado:
 
 ![Image of Yaktocat](assets/flow/app-example-03.png)
 
-## **Em processo de submissão**
+## **Submissão**
 
 ---
 
-Como avisado anteriormente, o commit com todo o projeto deve ocorrer até o final desse Sábado, dia 27/10.
-Agradeço pela atenção na leitura. Tenha um ótimo dia.
+Sobre detalhes de instalação do aplicativo basta entrar na pasta do projeto, PhilmaXXX e seguir os passos do Readme.md. Agradeço pela atenção e tenha um bom dia.
