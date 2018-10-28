@@ -15,4 +15,8 @@ extension CGFloat {
     var proportionalToWidth: CGFloat {
         return self * UIScreen.widthProportion
     }
+    
+    var proportionalToHeight: CGFloat {
+        return self * UIScreen.heightProportion
+    }
 }
