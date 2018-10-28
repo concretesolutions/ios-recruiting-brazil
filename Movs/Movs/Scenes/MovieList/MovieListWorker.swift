@@ -8,7 +8,11 @@
 
 import Moya 
 
-class MovieListWorker {
+protocol MovieListWorkingLogic {
+    func fetch(page: Int, completion: @escaping (MovieList, MovieListModel.Response.Status, Error?) -> ())
+}
+
+class MovieListWorker: MovieListWorkingLogic {
     
     let provider = MoyaProvider<MovieService>()
     
@@ -26,6 +30,7 @@ class MovieListWorker {
                         print(error.localizedDescription)
                         completion(movieList, MovieListModel.Response.Status.error, error)
                     }
+                
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(movieList, MovieListModel.Response.Status.error, error)

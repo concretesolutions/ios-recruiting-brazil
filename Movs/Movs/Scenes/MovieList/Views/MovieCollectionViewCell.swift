@@ -11,7 +11,29 @@ import Kingfisher
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
-    let movieView = MovieBoxView()
+    lazy var imageView: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        return view
+    }()
+    
+    lazy var title: UILabel = {
+        let view = UILabel(frame: .zero)
+        view.text = "Title"
+        view.numberOfLines = 0
+        view.font = UIFont.systemFont(ofSize: 20)
+        view.textColor = UIColor.Movs.yellow
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var favoriteButton: UIButton = {
+        let view = UIButton(frame: .zero)
+        view.setImage(UIImage(named: Constants.ImageName.favoriteGray), for: .normal)
+        view.addTarget(self, action: #selector(MovieCollectionViewCell.pressedFavorite), for: .touchUpInside)
+        return view
+    }()
+    
+    var didPressButton: ((UIButton) -> ())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,24 +47,49 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func set(movie: MovieListModel.ViewModel.Movie) {
         let url = URL(string: movie.posterURL)!
-        movieView.title.text = movie.title
-        movieView.movieImage.kf.setImage(with: url)
+        title.text = movie.title
+        imageView.kf.setImage(with: url)
+        favoriteButton.setImage(UIImage(named: movie.favoriteImageName), for: .normal)
+    }
+    
+    @objc func pressedFavorite(sender: UIButton) {
+//        favoriteButton.setImage(UIImage(named: Constants.ImageName.favoriteFull), for: .normal)
+        didPressButton?(favoriteButton)
     }
     
 }
 
 extension MovieCollectionViewCell: CodeView {
     func buildViewHierarchy() {
-        addSubview(movieView)
+        addSubview(imageView)
+        addSubview(title)
+        addSubview(favoriteButton)
     }
     
     func setupConstraints() {
-        movieView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+        imageView.snp.makeConstraints { (make) in
+            make.left.top.right.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.8)
         }
+        
+        title.snp.makeConstraints { (make) in
+            make.left.bottom.equalToSuperview()
+            make.right.equalToSuperview().multipliedBy(0.75)
+            make.top.equalTo(imageView.snp.bottom)
+        }
+        
+        favoriteButton.snp.makeConstraints { (make) in
+            make.bottom.right.equalToSuperview()
+            make.left.equalTo(title.snp.right)
+            make.top.equalTo(imageView.snp.bottom)
+        }
+        
+        favoriteButton.imageView?.snp.makeConstraints({ (make) in
+            make.width.height.equalTo(25)
+        })
     }
     
     func setupAdditionalConfiguration() {
-        
+        backgroundColor = UIColor.Movs.gray
     }
 }

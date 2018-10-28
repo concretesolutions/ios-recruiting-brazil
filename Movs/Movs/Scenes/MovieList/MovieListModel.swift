@@ -23,6 +23,12 @@ enum MovieListModel {
             var isFavorite: Bool
         }
         
+        struct FavoriteResponse {
+            var title: String
+            var posterURL: String
+            var isFavorite: Bool
+        }
+        
         enum Status {
             case success
             case error
@@ -37,7 +43,7 @@ enum MovieListModel {
         struct Movie {
             var title: String
             var posterURL: String
-            var isFavorite: Bool
+            var favoriteImageName: String
         }
         
         struct Error {

@@ -1,5 +1,5 @@
 //
-//  MovieListViewController+CollectionViewDataSource.swift
+//  MovieListViewController+DataSource+Delegate.swift
 //  Movs
 //
 //  Created by Ricardo Rachaus on 25/10/18.
@@ -22,8 +22,19 @@ extension MovieListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MovieCollectionViewCell
         
         cell.set(movie: data.movies[indexPath.row])
+        cell.didPressButton = { button in
+            self.pressedFavorite(sender: button)
+        }
         
         return cell
+    }
+    
+}
+
+extension MovieListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
     
 }

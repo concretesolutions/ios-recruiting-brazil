@@ -23,7 +23,7 @@ class FavoritesViewController: UIViewController {
     private func setupViewController() {
         view.backgroundColor = .white
         title = "Favorites"
-        tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "FavoriteEmptyIcon"), tag: 1)
+        tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: Constants.ImageName.favoriteEmpty), tag: 1)
     }
     
     override func viewDidLoad() {

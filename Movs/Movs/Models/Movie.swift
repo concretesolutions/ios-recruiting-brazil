@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct Movie: Decodable {
     var id: Int

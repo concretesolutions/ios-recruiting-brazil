@@ -77,13 +77,14 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         let view = UIView(frame: .zero)
         self.view = view
         title = "Movies"
-        tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "ListIcon"), tag: 0)
+        tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: Constants.ImageName.list), tag: 0)
         setupView()
     }
     
     private func fetchMovies() {
         interactor.fetchMovies(request: MovieListModel.Request(page: page))
         page += 1
+        
     }
     
     func displayMovies(viewModel: MovieListModel.ViewModel.Success) {
@@ -93,6 +94,14 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     func displayError(viewModel: MovieListModel.ViewModel.Error) {
         
+    }
+    
+    func pressedFavorite(sender: UIButton) {
+        let position = sender.convert(CGPoint.zero, to: collectionView.coordinateSpace)
+        let indexPath = collectionView.indexPathForItem(at: position)
+        if let indexPath = indexPath {
+            interactor.favoriteMovie(at: indexPath.row)
+        }
     }
 }
 

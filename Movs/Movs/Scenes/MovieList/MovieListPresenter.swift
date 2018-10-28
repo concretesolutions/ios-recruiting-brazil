@@ -18,7 +18,9 @@ class MovieListPresenter: MovieListPresentationLogic {
     
     func presentMovies(response: MovieListModel.Response) {
         let movies = response.movies.map { (movie) -> MovieListModel.ViewModel.Movie in
-            return MovieListModel.ViewModel.Movie(title: movie.title, posterURL: movie.posterURL, isFavorite: movie.isFavorite)
+            let favoriteImageName = movie.isFavorite ? Constants.ImageName.favoriteFull : Constants.ImageName.favoriteGray
+            
+            return MovieListModel.ViewModel.Movie(title: movie.title, posterURL: movie.posterURL, favoriteImageName: favoriteImageName)
         }
         let viewModel = MovieListModel.ViewModel.Success(movies: movies)
         viewController.displayMovies(viewModel: viewModel)
