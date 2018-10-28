@@ -11,8 +11,8 @@ import Domain
 
 struct ApplicationServices {
 	let startupUseCaseProvider: Domain.StartupUseCaseProvider
-	let setupUseCaseProvider: Domain.SetupUseCaseProvider
+	let environmentSetupUseCaseProvider: Domain.EnvironmentSetupUseCaseProvider
 	let popularMoviesUseCaseProvider: Domain.PopularMoviesUseCaseProvider
 	let favoriteMoviesUseCaseProvider: Domain.FavoriteMoviesUseCaseProvider
-	let cachedGenresUseCaseProvider: Domain.CachedGenresUseCaseProvider
+	let filterUseCaseProvider: Domain.FilterUseCaseProvider
 }

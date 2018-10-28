@@ -6,7 +6,7 @@
 //  Copyright © 2018 Guilherme Guimaraes. All rights reserved.
 //
 
-public protocol CachedGenresUseCase {
+public protocol FilterUseCase {
 	func fetchCachedGenres(handler: @escaping ([Genre]?, Error?) -> ())
 	func fetchCachedGenres(with IDs: [Int], handler: @escaping ([Genre]?, Error?) -> ())
 }

@@ -20,24 +20,24 @@ public final class FavoriteMoviesUseCaseProvider: Domain.FavoriteMoviesUseCasePr
 	}	
 }
 
-public final class SetupUseCaseProvider: Domain.SetupUseCaseProvider {
+public final class EnvironmentSetupUseCaseProvider: Domain.EnvironmentSetupUseCaseProvider {
 	
 	public init() { }
 	
-	public func useCase() -> Domain.SetupUseCase {
+	public func useCase() -> Domain.EnvironmentSetupUseCase {
 		let repository = GenresRepository(realm: try! Realm())
-		return SetupUseCase(repository: repository)
+		return EnvironmentSetupUseCase(repository: repository)
 	}
 	
 }
 
-public final class CachedGenresUseCaseProvider: Domain.CachedGenresUseCaseProvider {
+public final class FilterUseCaseProvider: Domain.FilterUseCaseProvider {
 	
 	public init() { }
 	
-	public func useCase() -> Domain.CachedGenresUseCase {
+	public func useCase() -> Domain.FilterUseCase {
 		let repository = GenresRepository(realm: try! Realm())
-		return CachedGenresUseCase(repository: repository)
+		return FilterUseCase(repository: repository)
 	}
 	
 }

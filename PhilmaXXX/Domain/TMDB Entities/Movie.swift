@@ -67,3 +67,13 @@ extension Movie: Codable {
 		try container.encode(self.genreIDs, forKey: .genreIDs)
 	}
 }
+
+extension Movie: Hashable {
+	public static func == (lhs: Movie, rhs: Movie) -> Bool {
+		return (lhs.hashValue == rhs.hashValue)
+	}
+	
+	public var hashValue: Int {
+		return id.hashValue
+	}
+}

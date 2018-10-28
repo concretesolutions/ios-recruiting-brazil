@@ -9,10 +9,10 @@
 import Foundation
 import Alamofire
 
-class AlamofireManager: Alamofire.SessionManager {
-	static let standard: AlamofireManager = {
+extension Alamofire.SessionManager {
+	public static var standardManager: Alamofire.SessionManager {
 		let configuration = URLSessionConfiguration.default
 		configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
-		return AlamofireManager(configuration: configuration)
-	}()
+		return Alamofire.SessionManager(configuration: configuration)
+	}
 }

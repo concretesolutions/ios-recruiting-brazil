@@ -9,6 +9,7 @@
 import Foundation
 import Domain
 import Moya
+import Alamofire
 
 public final class PopularMoviesUseCase: Domain.PopularMoviesUseCase {
 	private let provider : MoyaProvider<TMDB_Service>
@@ -17,7 +18,7 @@ public final class PopularMoviesUseCase: Domain.PopularMoviesUseCase {
 	var fetchPermission: Bool = true
 	var timer = Timer()
 	
-	init(decoder: JSONDecoder = JSONDecoder.standardDecoder, provider: MoyaProvider<TMDB_Service> = .init(manager: AlamofireManager.standard)) {
+	init(decoder: JSONDecoder = JSONDecoder.standardDecoder, provider: MoyaProvider<TMDB_Service> = .init(manager: Alamofire.SessionManager.standardManager)) {
 		self.provider = provider
 		self.decoder = decoder
 	}

@@ -25,7 +25,7 @@ final class DefaultFavoritesNavigator: FavoritesNavigator {
 	}
 	
 	func toFavoritesList() {
-		let viewModel = FavoritesListVCModel(cachedGenresUseCase: services.cachedGenresUseCaseProvider.useCase(), favoriteMoviesUseCase: services.favoriteMoviesUseCaseProvider.useCase())
+		let viewModel = FavoritesListVCModel(filterUseCase: services.filterUseCaseProvider.useCase(), favoriteMoviesUseCase: services.favoriteMoviesUseCaseProvider.useCase())
 		let viewController = FavoritesListVC(navigator: self, viewModel: viewModel)
 		navigationController.pushViewController(viewController, animated: true)
 	}
@@ -40,7 +40,7 @@ final class DefaultFavoritesNavigator: FavoritesNavigator {
 	
 	func toDetailMovie(_ movie: Movie, favorite: Bool) {
 		let navigator = DefaultListDetailNavigator(navigationController: navigationController)
-		let viewModel = DetailMovieVCModel(cachedGenresUseCase: services.cachedGenresUseCaseProvider.useCase(), favoriteMoviesUseCase: services.favoriteMoviesUseCaseProvider.useCase(), movie: movie, favorite: favorite)
+		let viewModel = DetailMovieVCModel(filterUseCase: services.filterUseCaseProvider.useCase(), favoriteMoviesUseCase: services.favoriteMoviesUseCaseProvider.useCase(), movie: movie, favorite: favorite)
 		let viewController = DetailMovieVC(viewModel: viewModel, navigator: navigator)
 		navigationController.pushViewController(viewController, animated: true)
 		

@@ -38,3 +38,13 @@ extension Genre : Codable {
 	}
 	
 }
+
+extension Genre: Hashable {
+	public static func == (lhs: Genre, rhs: Genre) -> Bool {
+		return lhs.hashValue == rhs.hashValue
+	}
+	
+	public var hashValue: Int {
+		return id.hashValue
+	}
+}

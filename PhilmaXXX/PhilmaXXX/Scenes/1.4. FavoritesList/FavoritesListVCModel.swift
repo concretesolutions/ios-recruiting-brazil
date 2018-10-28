@@ -10,7 +10,7 @@ import Foundation
 import Domain
 
 final class FavoritesListVCModel: NSObject {
-	private let cachedGenresUseCase: Domain.CachedGenresUseCase
+	private let filterUseCase: Domain.FilterUseCase
 	private let favoriteMoviesUseCase: Domain.FavoriteMoviesUseCase
 	
 	public var baseFilter: Filter?
@@ -24,8 +24,8 @@ final class FavoritesListVCModel: NSObject {
 	
 	var pushToDetail : ((Movie, Bool) -> ())?
 	
-	init(cachedGenresUseCase: Domain.CachedGenresUseCase, favoriteMoviesUseCase: Domain.FavoriteMoviesUseCase, movies: [Movie] = []) {
-		self.cachedGenresUseCase = cachedGenresUseCase
+	init(filterUseCase: Domain.FilterUseCase, favoriteMoviesUseCase: Domain.FavoriteMoviesUseCase, movies: [Movie] = []) {
+		self.filterUseCase = filterUseCase
 		self.favoriteMoviesUseCase = favoriteMoviesUseCase
 		self.movies = movies
 		self.searchMovies = []
@@ -91,7 +91,7 @@ final class FavoritesListVCModel: NSObject {
 	}
 	
 	private func fetchCachedGenres(with IDs: [Int], handler: @escaping ([Genre])->()){
-		cachedGenresUseCase.fetchCachedGenres(with: IDs) { (genres, error) in
+		filterUseCase.fetchCachedGenres(with: IDs) { (genres, error) in
 			if let genres = genres {
 				handler(genres)
 			} else {

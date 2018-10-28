@@ -9,21 +9,21 @@
 import Foundation
 import Domain
 final class DetailMovieVCModel: NSObject {
-	private let cachedGenresUseCase: Domain.CachedGenresUseCase
+	private let filterUseCase: Domain.FilterUseCase
 	private let favoriteMoviesUseCase: Domain.FavoriteMoviesUseCase
 	
 	private var movie: Movie
 	private var favorite: Bool
 	
-	init(cachedGenresUseCase: Domain.CachedGenresUseCase, favoriteMoviesUseCase: Domain.FavoriteMoviesUseCase, movie: Movie = MoviePlaceholder.model1(), favorite: Bool = false) {
-		self.cachedGenresUseCase = cachedGenresUseCase
+	init(filterUseCase: Domain.FilterUseCase, favoriteMoviesUseCase: Domain.FavoriteMoviesUseCase, movie: Movie = MoviePlaceholder.model1(), favorite: Bool = false) {
+		self.filterUseCase = filterUseCase
 		self.favoriteMoviesUseCase = favoriteMoviesUseCase
 		self.movie = movie
 		self.favorite = favorite
 	}
 	
 	public func provideDetailedMetadata(handler: @escaping (Movie?, [Genre]?, Bool, Error?) -> ())  {
-		cachedGenresUseCase.fetchCachedGenres(with: movie.genreIDs) { (genres, error) in
+		filterUseCase.fetchCachedGenres(with: movie.genreIDs) { (genres, error) in
 			
 			if let genres = genres {
 				handler(self.movie, genres, self.favorite, nil)

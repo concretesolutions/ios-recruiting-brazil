@@ -11,17 +11,17 @@ import Domain
 
 final class RootTabBarViewModel {
 	private let startupUseCase: Domain.StartupUseCase
-	private let setupUseCase: Domain.SetupUseCase
+	private let environmentSetupUseCase: Domain.EnvironmentSetupUseCase
 	
-	init(startupUseCase: Domain.StartupUseCase, setupUseCase: Domain.SetupUseCase) {
+	init(startupUseCase: Domain.StartupUseCase, environmentSetupUseCase: Domain.EnvironmentSetupUseCase) {
 		self.startupUseCase = startupUseCase
-		self.setupUseCase = setupUseCase
+		self.environmentSetupUseCase = environmentSetupUseCase
 	}
 	
 	func fetchGenresAndSetInCache(){
 		startupUseCase.fetchGenres { (genres, error) in
 			if let genres = genres {
-				self.setupUseCase.setInCache(genres)
+				self.environmentSetupUseCase.setInCache(genres)
 			} else {
 				print(error?.localizedDescription ?? "")
 			}

@@ -31,7 +31,7 @@ class DefaultListNavigator: ListNavigator {
 	
 	func toDetailMovie(_ movie: Movie, favorite: Bool) {
 		let navigator = DefaultListDetailNavigator(navigationController: navigationController)
-		let viewModel = DetailMovieVCModel(cachedGenresUseCase: services.cachedGenresUseCaseProvider.useCase(), favoriteMoviesUseCase: services.favoriteMoviesUseCaseProvider.useCase(), movie: movie, favorite: favorite)
+		let viewModel = DetailMovieVCModel(filterUseCase: services.filterUseCaseProvider.useCase(), favoriteMoviesUseCase: services.favoriteMoviesUseCaseProvider.useCase(), movie: movie, favorite: favorite)
 		let viewController = DetailMovieVC(viewModel: viewModel, navigator: navigator)
 		navigationController.pushViewController(viewController, animated: true)
 		

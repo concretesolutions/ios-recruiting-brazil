@@ -16,7 +16,7 @@ final class Application {
 	private let services: ApplicationServices
 	
 	private init (){
-		self.services = ApplicationServices(startupUseCaseProvider: NetworkPlatform.StartupUseCaseProvider(), setupUseCaseProvider:  RealmPlatform.SetupUseCaseProvider(), popularMoviesUseCaseProvider: NetworkPlatform.PopularMoviesUseCaseProvider(), favoriteMoviesUseCaseProvider: RealmPlatform.FavoriteMoviesUseCaseProvider(), cachedGenresUseCaseProvider:  RealmPlatform.CachedGenresUseCaseProvider())
+		self.services = ApplicationServices(startupUseCaseProvider: NetworkPlatform.StartupUseCaseProvider(), environmentSetupUseCaseProvider:  RealmPlatform.EnvironmentSetupUseCaseProvider(), popularMoviesUseCaseProvider: NetworkPlatform.PopularMoviesUseCaseProvider(), favoriteMoviesUseCaseProvider: RealmPlatform.FavoriteMoviesUseCaseProvider(), filterUseCaseProvider:  RealmPlatform.FilterUseCaseProvider())
 	}
 	
 	func configureMainInterface(in window: UIWindow){
@@ -30,7 +30,7 @@ final class Application {
 	}
 	
 	private func tabBarViewFactory(viewControllers: [UIViewController]) -> UITabBarController {
-		let viewModel = RootTabBarViewModel(startupUseCase: services.startupUseCaseProvider.useCase(), setupUseCase: services.setupUseCaseProvider.useCase())
+		let viewModel = RootTabBarViewModel(startupUseCase: services.startupUseCaseProvider.useCase(), environmentSetupUseCase: services.environmentSetupUseCaseProvider.useCase())
 		let tabBarController = RootTabBarController(viewModel: viewModel)
 		tabBarController.viewControllers = viewControllers
 		

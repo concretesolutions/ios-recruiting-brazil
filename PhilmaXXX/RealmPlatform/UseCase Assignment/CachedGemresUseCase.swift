@@ -1,5 +1,5 @@
 //
-//  UC05 - CachedGemres.swift
+//  UC05 - CachedGenres.swift
 //  RealmPlatform
 //
 //  Created by Guilherme Guimaraes on 21/10/18.
@@ -10,7 +10,7 @@ import Foundation
 import Domain
 import RealmSwift
 
-public final class CachedGenresUseCase: Domain.CachedGenresUseCase {
+public final class FilterUseCase: Domain.FilterUseCase {
 	private let repository: GenresRepository
 	
 	public init(repository: GenresRepository) {

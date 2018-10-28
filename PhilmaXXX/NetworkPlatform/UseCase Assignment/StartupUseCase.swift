@@ -9,12 +9,13 @@
 import Foundation
 import Domain
 import Moya
+import Alamofire
 
 public final class StartupUseCase: Domain.StartupUseCase {
 	private let provider : MoyaProvider<TMDB_Service>
 	private let decoder : JSONDecoder
 	
-	init(decoder: JSONDecoder = JSONDecoder.standardDecoder, provider: MoyaProvider<TMDB_Service> = .init(manager: AlamofireManager.standard)) {
+	init(decoder: JSONDecoder = JSONDecoder.standardDecoder, provider: MoyaProvider<TMDB_Service> = .init(manager: Alamofire.SessionManager.standardManager)) {
 		self.provider = provider
 		self.decoder = decoder
 	}

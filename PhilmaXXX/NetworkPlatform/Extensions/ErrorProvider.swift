@@ -9,5 +9,5 @@
 import Moya
 
 enum ErrorProvider: Error {
-	case standard(localizedDescription: String)	
+	case standard(localizedDescription: String)
 }

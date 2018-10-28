@@ -1,5 +1,5 @@
 //
-//  2 - SetupUseCase.swift
+//  2 - EnvironmentSetupUseCase.swift
 //  RealmPlatform
 //
 //  Created by Guilherme Guimaraes on 21/10/18.
@@ -9,7 +9,7 @@
 import Foundation
 import Domain
 
-public final class SetupUseCase: Domain.SetupUseCase {
+public final class EnvironmentSetupUseCase: Domain.EnvironmentSetupUseCase {
 	private let repository: GenresRepository
 	
 	public init(repository: GenresRepository) {

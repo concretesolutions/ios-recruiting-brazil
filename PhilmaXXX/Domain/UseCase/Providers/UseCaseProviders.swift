@@ -10,8 +10,8 @@ public protocol StartupUseCaseProvider {
 	func useCase() -> StartupUseCase
 }
 
-public protocol SetupUseCaseProvider {
-	func useCase() -> SetupUseCase
+public protocol EnvironmentSetupUseCaseProvider {
+	func useCase() -> EnvironmentSetupUseCase
 }
 
 public protocol PopularMoviesUseCaseProvider {
@@ -22,6 +22,6 @@ public protocol FavoriteMoviesUseCaseProvider {
 	func useCase() -> FavoriteMoviesUseCase
 }
 
-public protocol CachedGenresUseCaseProvider {
-	func useCase() -> CachedGenresUseCase
+public protocol FilterUseCaseProvider {
+	func useCase() -> FilterUseCase
 }
