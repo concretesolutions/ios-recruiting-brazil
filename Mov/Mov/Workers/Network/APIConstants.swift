@@ -8,9 +8,10 @@
 
 import Foundation
 
-struct kAPI {
+struct API {
     struct TMDB {
         public static let basePath = URL(string: "https://api.themoviedb.org/3/")!
+        public static let imageBase = URL(string: "https://image.tmdb.org/t/p/w500/")
         public static let key = "eb8f32bbe0d7f957729c0f26080650dc"
         public static let keyParamKey = "api_key"
         public static let sortParamKey = "sort_by"

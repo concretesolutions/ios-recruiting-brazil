@@ -38,6 +38,8 @@
 		25B2B7F52184E87E005C96E1 /* HuePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F42184E87E005C96E1 /* HuePersistence.swift */; };
 		25B2B7F721852029005C96E1 /* UIScreen + widthProportion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */; };
 		25B2B7F921852061005C96E1 /* CGFloat + proportionalToWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */; };
+		25B2B7FB21853667005C96E1 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7FA21853667005C96E1 /* ImageFetcher.swift */; };
+		25B2B800218536FA005C96E1 /* ImageKingFisherGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7FF218536FA005C96E1 /* ImageKingFisherGateway.swift */; };
 		25E5464F2182B3DF0043514B /* MoviePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5464E2182B3DF0043514B /* MoviePersistence.swift */; };
 		25E546532182B6680043514B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546522182B6680043514B /* APIConstants.swift */; };
 		25E546562182B8300043514B /* TMDBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546552182B8300043514B /* TMDBProvider.swift */; };
@@ -98,6 +100,8 @@
 		25B2B7F42184E87E005C96E1 /* HuePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuePersistence.swift; sourceTree = "<group>"; };
 		25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + widthProportion.swift"; sourceTree = "<group>"; };
 		25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat + proportionalToWidth.swift"; sourceTree = "<group>"; };
+		25B2B7FA21853667005C96E1 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		25B2B7FF218536FA005C96E1 /* ImageKingFisherGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKingFisherGateway.swift; sourceTree = "<group>"; };
 		25E5464E2182B3DF0043514B /* MoviePersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviePersistence.swift; sourceTree = "<group>"; };
 		25E546522182B6680043514B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		25E546552182B8300043514B /* TMDBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBProvider.swift; sourceTree = "<group>"; };
@@ -219,9 +223,10 @@
 			children = (
 				25E5465921835DAB0043514B /* Utils */,
 				25E546542182B7E50043514B /* Services */,
+				25B2B7FD218536B4005C96E1 /* Movies */,
+				25B2B7FE218536BD005C96E1 /* Images */,
 				25E546522182B6680043514B /* APIConstants.swift */,
 				25E546552182B8300043514B /* TMDBProvider.swift */,
-				25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -376,6 +381,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		25B2B7FD218536B4005C96E1 /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		25B2B7FE218536BD005C96E1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				25B2B7FF218536FA005C96E1 /* ImageKingFisherGateway.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		25E5464A218283D20043514B /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				2525BAFC21824B04007EF9D0 /* MovieFetcher.swift */,
+				25B2B7FA21853667005C96E1 /* ImageFetcher.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -554,6 +576,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Mov/Pods-Mov-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -563,6 +586,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -634,8 +658,10 @@
 				2579DFDC218244AA00D616C9 /* ViewController.swift in Sources */,
 				25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */,
 				2525BAF121824AA7007EF9D0 /* MovieGridViewController.swift in Sources */,
+				25B2B7FB21853667005C96E1 /* ImageFetcher.swift in Sources */,
 				2578BAD421849847001107B6 /* ViewCode.swift in Sources */,
 				2525BAEF21824AA7007EF9D0 /* MovieGridDataSource.swift in Sources */,
+				25B2B800218536FA005C96E1 /* ImageKingFisherGateway.swift in Sources */,
 				25FEBC622184A5E1002184D6 /* MovieGridView.swift in Sources */,
 				2525BAF321824AA7007EF9D0 /* DefaultMovieGridInteractor.swift in Sources */,
 				2525BAF921824AF2007EF9D0 /* MovieGenre.swift in Sources */,

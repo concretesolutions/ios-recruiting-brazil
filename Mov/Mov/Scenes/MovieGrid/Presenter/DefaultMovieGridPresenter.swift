@@ -14,7 +14,10 @@ final class DefaultMovieGridPresenter {
     
     private func buildMovieGridViewModels(from movies: [MovieGridUnit]) -> [MovieGridViewModel] {
         return movies.map { movie in
-            return MovieGridViewModel(title: movie.title, poster: Images.poster_placeholder, isFavoriteIcon: Images.isFavoriteIconGray)
+            return MovieGridViewModel(
+                title: movie.title,
+                posterPath: movie.posterPath,
+                isFavoriteIcon: movie.isFavorite ? Images.isFavoriteIconFull : Images.isFavoriteIconGray)
         }
     }
 }

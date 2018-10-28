@@ -11,9 +11,11 @@ import SnapKit
 
 class MovieGridUnitView: UIView {
     
+    let imageFetcher: ImageFetcher = ImageKingFisherGateway()
+    
     var viewModel: MovieGridViewModel = .placeHolder {
         didSet {
-            self.poster.image = self.viewModel.poster
+            self.viewModel.fetchImage(to: self.poster)
             self.title.text = self.viewModel.title
             self.isFavoriteButton.setImage(self.viewModel.isFavoriteIcon, for: .normal)
         }
@@ -22,7 +24,7 @@ class MovieGridUnitView: UIView {
     // UI Elements
     lazy var poster: UIImageView = {
         let poster = UIImageView(frame: .zero)
-        poster.image = self.viewModel.poster
+        self.viewModel.fetchImage(to: poster)
         
         return poster
     }()

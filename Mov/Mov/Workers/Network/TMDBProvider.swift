@@ -15,7 +15,7 @@ enum TMDBProvider {
 
 extension TMDBProvider: TargetType {
     var baseURL: URL {
-        return kAPI.TMDB.basePath
+        return API.TMDB.basePath
     }
     
     var path: String {
@@ -40,9 +40,9 @@ extension TMDBProvider: TargetType {
         switch self {
         case .popular(let page):
             return [
-                kAPI.TMDB.sortParamKey : kAPI.TMDB.popularityDescParamValue,
-                kAPI.TMDB.pageParamKey : page,
-                kAPI.TMDB.keyParamKey : kAPI.TMDB.key
+                API.TMDB.sortParamKey : API.TMDB.popularityDescParamValue,
+                API.TMDB.pageParamKey : page,
+                API.TMDB.keyParamKey : API.TMDB.key
             ]
         }
     }

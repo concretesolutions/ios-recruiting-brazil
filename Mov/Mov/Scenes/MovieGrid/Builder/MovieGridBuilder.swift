@@ -29,5 +29,4 @@ class MovieGridBuilder {
     static private var moviePersistence: MoviePersistence {
         return HuePersistence()
     }
-    
 }
