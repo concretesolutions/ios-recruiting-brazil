@@ -18,34 +18,29 @@ import Alamofire
 class TMDB_ServiceSpec: QuickSpec {
 
 	override func spec(){
-		var service = MoyaProvider<TMDB_Service>()
+		let service = MoyaProvider<TMDB_Service>(stubClosure: MoyaProvider.immediatelyStub)
 		let decoder = JSONDecoder.standardDecoder
-		beforeSuite {
-			service = .init(manager: Alamofire.SessionManager.standardManager)
-		}
 		
 		context("the webservice") {
-			describe("should get the popular movies, page to page", closure: {
+			describe("should get the first page of popular movies", closure: {
 				var movies = Set<Movie>()
 				
 				beforeSuite {
-					for index in 1...3 {
-						service.request(TMDB_Service.getPopularMovies(pageNumber: index), completion: { (result) in
-							switch result {
-							case .success(let value):
-								let fetchedMovies = try! value.map([Movie].self, atKeyPath: "results", using: decoder, failsOnEmptyData: false)
-								fetchedMovies.forEach({ (movie) in
-									movies.insert(movie)
-								})
-							case .failure(let error):
-								print(error.localizedDescription)
-							}
-						})
-					}
+					service.request(TMDB_Service.getPopularMovies(pageNumber: 1), completion: { (result) in
+						switch result {
+						case .success(let value):
+							let fetchedMovies = try! value.map([Movie].self, atKeyPath: "results", using: decoder, failsOnEmptyData: false)
+							fetchedMovies.forEach({ (movie) in
+								movies.insert(movie)
+							})
+						case .failure(let error):
+							print(error.localizedDescription)
+						}
+					})
 				}
 				
-				it("eventually having 80% of unique movies", closure: {
-					expect(movies.count).toEventually(beGreaterThan(25))
+				it("eventually having something", closure: {
+					expect(movies.count).toEventually(beGreaterThan(0))
 				})
 			})
 			

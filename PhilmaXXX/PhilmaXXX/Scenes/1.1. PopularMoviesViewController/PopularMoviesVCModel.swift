@@ -51,8 +51,8 @@ final class PopularMoviesVCModel: NSObject {
 				self.movies.append(contentsOf: movies)
 				self.refreshFavoriteMovies()
 				handler(true)
-			} else if let error = error{
-				print(error.localizedDescription)
+			} else if let uError = error{
+				print(uError.localizedDescription)
 				handler(false)
 			}
 		}

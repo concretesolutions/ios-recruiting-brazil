@@ -23,7 +23,7 @@ public final class PopularMoviesUseCase: Domain.PopularMoviesUseCase {
 		self.decoder = decoder
 	}
 	
-	func validadeFetchPermission(allowed: @escaping ()->(), denied: @escaping () -> ()){
+	private func validadeFetchPermission(allowed: @escaping ()->(), denied: @escaping () -> ()){
 		if (fetchPermission == true){
 			disableFetchPermission()
 			runFetchTimer()
@@ -33,7 +33,7 @@ public final class PopularMoviesUseCase: Domain.PopularMoviesUseCase {
 		}
 	}
 	
-	func runFetchTimer(){
+	private func runFetchTimer(){
 		self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(enableFetchPermission), userInfo: nil, repeats: false)
 	}
 	
@@ -60,7 +60,7 @@ public final class PopularMoviesUseCase: Domain.PopularMoviesUseCase {
 		
 	}
 	
-	public func requestMovies(pageNumber: Int, handler: @escaping ([Movie]?, Error?) -> ()) {
+	private func requestMovies(pageNumber: Int, handler: @escaping ([Movie]?, Error?) -> ()) {
 		provider.request(TMDB_Service.getPopularMovies(pageNumber: pageNumber)) { (result) in
 			switch (result){
 			case .success(let value):

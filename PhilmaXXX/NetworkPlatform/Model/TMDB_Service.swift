@@ -33,7 +33,16 @@ extension TMDB_Service: TargetType {
 	}
 	
 	var sampleData: Data {
-		return "{}".utf8Encoded
+		switch self {
+		case .getPopularMovies(_):
+			let fileURL = Bundle(for: PopularMoviesUseCase.self).url(forResource: "getPopularMovies-1", withExtension: "json")!
+			let data = try? Data(contentsOf: fileURL)
+			return data ?? "{}".utf8Encoded
+		case .getGenres:
+			let fileURL = Bundle(for: StartupUseCase.self).url(forResource: "getGenres", withExtension: "json")!
+			let data = try? Data(contentsOf: fileURL)
+			return data ?? "{}".utf8Encoded
+		}
 	}
 	
 	var task: Task {
@@ -56,5 +65,4 @@ extension TMDB_Service: TargetType {
 					  "language": "pt-BR"]
 		return params
 	}
-	
 }
