@@ -10,7 +10,7 @@ import Moya
 
 enum MovieDB_API {
     case listPopularMovies(listRequest: ListMovies.Request)
-    case getMovieDetails(movieRequest: DetailMovie.Request)
+    case getMovieDetails(movieRequest: DetailMovieModel.Request)
 }
 
 struct APISetting {

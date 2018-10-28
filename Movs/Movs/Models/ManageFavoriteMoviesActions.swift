@@ -12,5 +12,11 @@ protocol ManageFavoriteMoviesActions {
     func addFavoriteMovie(movie: MovieDetailed) -> Bool
     func removeFavoriteMovie(movie: MovieDetailed) -> Bool
     func getFavoriteMovies() -> [MovieDetailed]
-    
 }
+
+// For Interactors
+protocol FavoriteActionBusinessLogic {
+    func addFavorite(movie: MovieDetailed)
+    func removeFavorite(movie: MovieDetailed)
+}
+

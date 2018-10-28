@@ -11,7 +11,7 @@ import Foundation
 struct MovieDetailed {
     let id: Int
     let genres: [Genre]
-    let genresNames: [String]
+    var genresNames: [String]
     let title: String
     let overview: String
     let releaseDate: String

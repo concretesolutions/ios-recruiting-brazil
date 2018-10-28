@@ -247,12 +247,12 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="708-Jt-3iy">
                                 <rect key="frame" x="132.5" y="592" width="110" height="30"/>
-                                <color key="backgroundColor" name="primaryColor"/>
+                                <color key="backgroundColor" name="secondaryColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="rWY-P5-bbi"/>
                                 </constraints>
                                 <state key="normal" title="Favoritar">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="favoriteMovieAction:" destination="sFt-hF-eIR" eventType="touchUpInside" id="RGt-Jo-n8d"/>
@@ -276,6 +276,7 @@
                         <viewLayoutGuide key="safeArea" id="3DF-It-atf"/>
                     </view>
                     <connections>
+                        <outlet property="favoriteButton" destination="708-Jt-3iy" id="VN6-wd-2TI"/>
                         <outlet property="favoriteIcon" destination="wnQ-gR-crH" id="o9S-kC-arh"/>
                         <outlet property="genres" destination="8AH-XR-u4N" id="SBm-Mi-P9s"/>
                         <outlet property="imdbValue" destination="eIi-i1-aBt" id="FgE-YZ-pz0"/>
@@ -299,6 +300,9 @@
         </namedColor>
         <namedColor name="primaryColor">
             <color red="0.043137254901960784" green="0.59607843137254901" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryColor">
+            <color red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

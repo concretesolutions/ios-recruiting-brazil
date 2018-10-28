@@ -10,13 +10,18 @@ import UIKit
 import Kingfisher
 
 protocol DetailsMoviesDisplayLogic {
-    func displayMovieDetailed(viewModel: DetailMovie.ViewModel.Success)
-    func displayError(viewModel: DetailMovie.ViewModel.Error)
+    func displayMovieDetailed(viewModel: DetailMovieModel.ViewModel.Success)
+    func displayError(viewModel: DetailMovieModel.ViewModel.Error)
+}
+
+protocol DetailMoviesFavoriteMovie {
+    func setRawDetailedMovie(movie: MovieDetailed)
+    func movieAddedToFavorite(message: String)
 }
 
 class DetailMoviesViewController: UIViewController {
     
-    var interactor: DetailMoviesBusinessLogic!
+    var interactor: (DetailMoviesBusinessLogic & FavoriteActionBusinessLogic)?
     
     @IBOutlet weak var posterImage: UIImageViewMovieCard!
     @IBOutlet weak var movieTitle: UILabel!
@@ -25,20 +30,22 @@ class DetailMoviesViewController: UIViewController {
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var movieOverview: UITextView!
     @IBOutlet weak var favoriteIcon: UIImageView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
-    private var viewModel: DetailMovie.ViewModel?
+    // MARK: - Auxiliar variables
+    private var movieRawData: MovieDetailed?
     var movieId: Int?
+    var isFavorite: Bool = false
     
     // MARK: - View life cycle
     override func viewDidLoad() {
         DetailMoviesSceneConfigurator.inject(dependenciesFor: self)
         setup()
         if let movieId = self.movieId {
-            let request = DetailMovie.Request(movieId: movieId)
-            interactor.fetchMovieDetailed(request: request)
+            let request = DetailMovieModel.Request(movieId: movieId)
+            interactor!.fetchMovieDetailed(request: request)
         }
-    }
-    
+    }    
     
     // MARK: - Setup
     private func setup() {
@@ -50,16 +57,27 @@ class DetailMoviesViewController: UIViewController {
     // MARK: - Actions
     @IBAction func favoriteMovieAction(_ sender: Any) {
         print("🐞 favoritar")
-
-        
+        if let movie = movieRawData, isFavorite {
+            let movie = MovieDetailed.init(id: movie.id, genres: movie.genres, genresNames: movie.genresNames, title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate, posterPath: movie.posterPath, voteAverage: movie.voteAverage, isFavorite: movie.isFavorite)
+            interactor?.addFavorite(movie: movie)
+        } else {
+            // remove from favorites
+        }
     }
     
+    func updateFavoriteMovie() {
+        if isFavorite {
+            favoriteButton.titleLabel?.text = "Desfavoritar"  
+        } else {
+            favoriteButton.titleLabel?.text = "Favoritar"
+        }
+    }
     
 }
-
+// MARK: - Presentation logic
 extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
     
-    func displayMovieDetailed(viewModel: DetailMovie.ViewModel.Success) {
+    func displayMovieDetailed(viewModel: DetailMovieModel.ViewModel.Success) {
         posterImage.kf.setImage(with: viewModel.posterPath)
         movieTitle.text = viewModel.title
         genres.text = viewModel.genreNames
@@ -69,8 +87,30 @@ extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
         year.text = viewModel.year
     }
     
-    func displayError(viewModel: DetailMovie.ViewModel.Error) {
+    func displayError(viewModel: DetailMovieModel.ViewModel.Error) {
         
+    }
+    
+}
+
+// MARK: - Add and remove from favorite action
+extension DetailMoviesViewController: DetailMoviesFavoriteMovie {
+    
+    func setRawDetailedMovie(movie: MovieDetailed) {
+        self.movieRawData = movie
+    }
+    
+    func movieAddedToFavorite(message: String) {
+        // Every action about "add favorite" invest the action about being favorite or not
+        isFavorite = !isFavorite
+        // Update the screen presentation
+        self.updateFavoriteMovie()
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "ok", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

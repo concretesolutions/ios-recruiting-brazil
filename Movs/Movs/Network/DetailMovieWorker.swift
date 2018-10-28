@@ -16,7 +16,7 @@ class DetailMovieWorker {
     /**
      Fetch details about a movie
      */
-    func getMovieDetails(request: DetailMovie.Request,
+    func getMovieDetails(request: DetailMovieModel.Request,
                          success successCallback: @escaping (MovieDetailed) -> (),
                          error errorCallback: @escaping (FetchError) -> (),
                          failure failureCallback: @escaping (FetchError) -> ()) {

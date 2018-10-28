@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum DetailMovie {
+enum DetailMovieModel {
     // MARK: Use cases
     
     struct Request {
@@ -18,7 +18,6 @@ enum DetailMovie {
     enum Response {
         struct Success {
             let movie: MovieDetailed
-            let genreNames: [String]
         }
         
         struct Error {
