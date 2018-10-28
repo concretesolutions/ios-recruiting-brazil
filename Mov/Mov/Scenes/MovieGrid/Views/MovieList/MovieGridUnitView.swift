@@ -34,6 +34,7 @@ class MovieGridUnitView: UIView {
         title.text = self.viewModel.title
         title.textAlignment = .center
         title.textColor = Colors.lightYellow
+        title.font = UIFont(name: Fonts.helveticaNeue, size: CGFloat(20).proportionalToHeight)
         
         return title
     }()
@@ -83,13 +84,14 @@ extension MovieGridUnitView: ViewCode {
         
         self.isFavoriteButton.snp.makeConstraints { make in
             make.top.equalTo(self.title.snp_topMargin)
-            make.centerY.equalTo(self.title.snp_centerYWithinMargins)
+            make.bottom.equalToSuperview()
+//            make.centerY.equalTo(self.title.snp_centerYWithinMargins)
             make.trailing.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.25)
         }
     }
     
-    func aditionalSetup() {
+    func additionalSetup() {
         self.backgroundColor = Colors.darkBlue
     }
     //oin eu sou o miguel e eu faço coisas de programação pq sou lyndo risos

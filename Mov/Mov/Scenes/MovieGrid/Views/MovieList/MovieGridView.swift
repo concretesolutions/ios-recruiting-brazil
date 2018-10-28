@@ -9,6 +9,7 @@
 import UIKit
 
 public class MovieGridView: UIView {
+    
     // UI Elements
     lazy var collection: UICollectionView = {
         let collection = MovieGridCollectionView()
@@ -18,9 +19,10 @@ public class MovieGridView: UIView {
     
     
     // Initialization
-    public init() {
+    public init(dataSource: UICollectionViewDataSource) {
         super.init(frame: .zero)
         self.setup()
+        self.collection.dataSource = dataSource
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -27,3 +27,8 @@ struct Colors {
 struct Texts {
     static let movieGridError = "Um erro ocorreu. Por favor, tente novamente."
 }
+
+struct Fonts {
+    static let helveticaNeueBold = "HelveticaNeue-Bold"
+    static let helveticaNeue = "HelveticaNeue"
+}

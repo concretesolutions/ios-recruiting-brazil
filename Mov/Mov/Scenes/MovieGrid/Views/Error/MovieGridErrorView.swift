@@ -24,7 +24,7 @@ public class MovieGridErrorView: UIView {
         let errorLabel = UILabel(frame: .zero)
         errorLabel.text = Texts.movieGridError
         errorLabel.textColor = .black
-        errorLabel.font = UIFont(name: "HelveticaNeue-Bold", size: CGFloat(20).proportionalToHeight)
+        errorLabel.font = UIFont(name: Fonts.helveticaNeueBold, size: CGFloat(20).proportionalToHeight)
         errorLabel.numberOfLines = 3
         errorLabel.textAlignment = .center
         
@@ -67,7 +67,7 @@ extension MovieGridErrorView: ViewCode {
         }
     }
     
-    func aditionalSetup() {
+    func additionalSetup() {
         self.backgroundColor = .white
     }
     

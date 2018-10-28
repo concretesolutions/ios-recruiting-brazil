@@ -24,7 +24,12 @@ class MovieGridCollectionView: UICollectionView {
         flowLayout.scrollDirection = .vertical
         
         flowLayout.itemSize = MovieGridCollectionView.cellSize
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 25, bottom: 10, right: 25)
+        
+        let topInset = CGFloat(10).proportionalToHeight
+        let bottomInset = CGFloat(10).proportionalToHeight
+        let rightInset = CGFloat(25).proportionalToWidth
+        let leftInset = CGFloat(25).proportionalToWidth
+        flowLayout.sectionInset = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
         
         return flowLayout
     }()

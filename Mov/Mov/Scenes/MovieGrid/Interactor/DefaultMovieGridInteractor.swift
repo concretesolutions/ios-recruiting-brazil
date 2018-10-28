@@ -35,6 +35,7 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
     func fetchMovieList(page: Int) {
         self.movieFetcher.fetchPopularMovies(page: page) { [weak self] result in
             guard let self = self else { return }
+            self.presenter.presentNetworkError()
             
             switch result {
             case .success(let movies):

@@ -12,7 +12,7 @@ import Foundation
 protocol ViewCode {
     func addView()
     func addConstraints()
-    func aditionalSetup()
+    func additionalSetup()
     func setup()
 }
 
@@ -21,9 +21,9 @@ extension ViewCode {
     public func setup() {
         self.addView()
         self.addConstraints()
-        self.aditionalSetup()
+        self.additionalSetup()
     }
     
-    public func aditionalSetup() {}
+    public func additionalSetup() {}
 }
 

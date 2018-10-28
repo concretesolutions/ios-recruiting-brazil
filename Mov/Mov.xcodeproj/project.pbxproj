@@ -34,13 +34,18 @@
 		2579DFE4218244AC00D616C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE3218244AC00D616C9 /* Assets.xcassets */; };
 		2579DFE7218244AC00D616C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE5218244AC00D616C9 /* LaunchScreen.storyboard */; };
 		25B2B7EC2184DF78005C96E1 /* MovieGridBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7EB2184DF78005C96E1 /* MovieGridBuilder.swift */; };
-		25B2B7F02184E4C1005C96E1 /* MovieGridCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7ED2184E3D1005C96E1 /* MovieGridCollectionDelegate.swift */; };
 		25B2B7F52184E87E005C96E1 /* HuePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F42184E87E005C96E1 /* HuePersistence.swift */; };
 		25B2B7F721852029005C96E1 /* UIScreen + widthProportion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */; };
 		25B2B7F921852061005C96E1 /* CGFloat + proportionalToWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */; };
 		25B2B7FB21853667005C96E1 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7FA21853667005C96E1 /* ImageFetcher.swift */; };
 		25B2B800218536FA005C96E1 /* ImageKingFisherGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7FF218536FA005C96E1 /* ImageKingFisherGateway.swift */; };
 		25B2B804218646FB005C96E1 /* MovieGridErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B803218646FB005C96E1 /* MovieGridErrorView.swift */; };
+		25B2B806218659C0005C96E1 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B805218659C0005C96E1 /* ViewState.swift */; };
+		25B2B80921865F6A005C96E1 /* MovieGridBaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B80821865F6A005C96E1 /* MovieGridBaseState.swift */; };
+		25B2B80B21866247005C96E1 /* MovieGridCollectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B80A21866247005C96E1 /* MovieGridCollectionState.swift */; };
+		25B2B80D21866564005C96E1 /* MovieGridErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B80C21866564005C96E1 /* MovieGridErrorState.swift */; };
+		25B2B80F218665E2005C96E1 /* ViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B80E218665E2005C96E1 /* ViewStateMachine.swift */; };
+		25B2B81121866ED1005C96E1 /* BlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B81021866ED1005C96E1 /* BlankView.swift */; };
 		25E5464F2182B3DF0043514B /* MoviePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E5464E2182B3DF0043514B /* MoviePersistence.swift */; };
 		25E546532182B6680043514B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546522182B6680043514B /* APIConstants.swift */; };
 		25E546562182B8300043514B /* TMDBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546552182B8300043514B /* TMDBProvider.swift */; };
@@ -97,13 +102,18 @@
 		2579DFED218244AC00D616C9 /* MovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2579DFF3218244AC00D616C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25B2B7EB2184DF78005C96E1 /* MovieGridBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridBuilder.swift; sourceTree = "<group>"; };
-		25B2B7ED2184E3D1005C96E1 /* MovieGridCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridCollectionDelegate.swift; sourceTree = "<group>"; };
 		25B2B7F42184E87E005C96E1 /* HuePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuePersistence.swift; sourceTree = "<group>"; };
 		25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + widthProportion.swift"; sourceTree = "<group>"; };
 		25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat + proportionalToWidth.swift"; sourceTree = "<group>"; };
 		25B2B7FA21853667005C96E1 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 		25B2B7FF218536FA005C96E1 /* ImageKingFisherGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKingFisherGateway.swift; sourceTree = "<group>"; };
 		25B2B803218646FB005C96E1 /* MovieGridErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridErrorView.swift; sourceTree = "<group>"; };
+		25B2B805218659C0005C96E1 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		25B2B80821865F6A005C96E1 /* MovieGridBaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridBaseState.swift; sourceTree = "<group>"; };
+		25B2B80A21866247005C96E1 /* MovieGridCollectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridCollectionState.swift; sourceTree = "<group>"; };
+		25B2B80C21866564005C96E1 /* MovieGridErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridErrorState.swift; sourceTree = "<group>"; };
+		25B2B80E218665E2005C96E1 /* ViewStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateMachine.swift; sourceTree = "<group>"; };
+		25B2B81021866ED1005C96E1 /* BlankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankView.swift; sourceTree = "<group>"; };
 		25E5464E2182B3DF0043514B /* MoviePersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviePersistence.swift; sourceTree = "<group>"; };
 		25E546522182B6680043514B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		25E546552182B8300043514B /* TMDBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBProvider.swift; sourceTree = "<group>"; };
@@ -186,9 +196,11 @@
 		2525BAE421824AA7007EF9D0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				25B2B80721865F5A005C96E1 /* States */,
 				25B2B7EF2184E450005C96E1 /* Delegates */,
 				2525BAE621824AA7007EF9D0 /* MovieGridViewOutput.swift */,
 				2525BAE721824AA7007EF9D0 /* MovieGridViewController.swift */,
+				25B2B80E218665E2005C96E1 /* ViewStateMachine.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -274,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				2525BB0D21825629007EF9D0 /* Assets.swift */,
+				25B2B805218659C0005C96E1 /* ViewState.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -308,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				2578BAD321849847001107B6 /* ViewCode.swift */,
+				25B2B81021866ED1005C96E1 /* BlankView.swift */,
 			);
 			path = ViewCode;
 			sourceTree = "<group>";
@@ -367,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				2525BAE521824AA7007EF9D0 /* MovieGridDataSource.swift */,
-				25B2B7ED2184E3D1005C96E1 /* MovieGridCollectionDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -414,6 +427,16 @@
 				25B2B803218646FB005C96E1 /* MovieGridErrorView.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		25B2B80721865F5A005C96E1 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				25B2B80821865F6A005C96E1 /* MovieGridBaseState.swift */,
+				25B2B80A21866247005C96E1 /* MovieGridCollectionState.swift */,
+				25B2B80C21866564005C96E1 /* MovieGridErrorState.swift */,
+			);
+			path = States;
 			sourceTree = "<group>";
 		};
 		25E5464A218283D20043514B /* DataBase */ = {
@@ -668,23 +691,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25B2B7F02184E4C1005C96E1 /* MovieGridCollectionDelegate.swift in Sources */,
 				25B2B7F721852029005C96E1 /* UIScreen + widthProportion.swift in Sources */,
 				2525BAFD21824B04007EF9D0 /* MovieFetcher.swift in Sources */,
 				2525BB09218252AD007EF9D0 /* MovieGridUnit.swift in Sources */,
 				25FEBC602184A3B1002184D6 /* MovieGridCollectionViewCell.swift in Sources */,
 				25B2B804218646FB005C96E1 /* MovieGridErrorView.swift in Sources */,
+				25B2B80921865F6A005C96E1 /* MovieGridBaseState.swift in Sources */,
 				2525BB0B21825479007EF9D0 /* MovieGridViewModel.swift in Sources */,
 				2579DFDC218244AA00D616C9 /* ViewController.swift in Sources */,
 				25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */,
 				2525BAF121824AA7007EF9D0 /* MovieGridViewController.swift in Sources */,
 				25B2B7FB21853667005C96E1 /* ImageFetcher.swift in Sources */,
+				25B2B80D21866564005C96E1 /* MovieGridErrorState.swift in Sources */,
 				2578BAD421849847001107B6 /* ViewCode.swift in Sources */,
 				2525BAEF21824AA7007EF9D0 /* MovieGridDataSource.swift in Sources */,
+				25B2B80B21866247005C96E1 /* MovieGridCollectionState.swift in Sources */,
 				25B2B800218536FA005C96E1 /* ImageKingFisherGateway.swift in Sources */,
+				25B2B806218659C0005C96E1 /* ViewState.swift in Sources */,
 				25FEBC622184A5E1002184D6 /* MovieGridView.swift in Sources */,
 				2525BAF321824AA7007EF9D0 /* DefaultMovieGridInteractor.swift in Sources */,
 				2525BAF921824AF2007EF9D0 /* MovieGenre.swift in Sources */,
+				25B2B80F218665E2005C96E1 /* ViewStateMachine.swift in Sources */,
+				25B2B81121866ED1005C96E1 /* BlankView.swift in Sources */,
 				2525BAED21824AA7007EF9D0 /* DefaultMovieGridPresenter.swift in Sources */,
 				2525BAEE21824AA7007EF9D0 /* MovieGridPresenter.swift in Sources */,
 				25E546532182B6680043514B /* APIConstants.swift in Sources */,
