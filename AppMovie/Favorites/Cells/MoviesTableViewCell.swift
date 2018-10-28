@@ -15,8 +15,8 @@ class MoviesTableViewCell: UITableViewCell{
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     var imgMovie = UIImageView()
+    var movie: Movie?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

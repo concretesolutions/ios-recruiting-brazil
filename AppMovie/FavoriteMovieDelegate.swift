@@ -7,9 +7,7 @@
 //
 
 import Foundation
-
-
 protocol FavoriteMovieDelegate {
-    func setFavorite(movie: NSDictionary)
-    func removeFavorite(movie: NSDictionary)
+    func setFavorite(movie: Movie)
+    func removeFavorite(movie: Movie)
 }

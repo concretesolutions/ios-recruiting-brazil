@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum KeyAccesPropertiesMovieNowPlaying  {
+enum PropertiesMovieNowPlaying  {
     case adult, backdropPath, genre, id, language, originalTitle, overview, popularity, posterPath, releaseDate, title, video, voteAverage, voteCount
     
     var value: String {

@@ -10,8 +10,8 @@ import UIKit
 
 class ManagerMovies: UIViewController {
 
-    var favorites = [NSDictionary]()
-    var movies = [NSDictionary]()
+    var favorites = [Movie]()
+    var movies = [Movie]()
     
     init() {
         super.init(nibName: "", bundle: nil)
@@ -24,35 +24,47 @@ class ManagerMovies: UIViewController {
     
     func setupMovies() {
         MovieDAO.shared.requestMovies(completion: { (moviesJSON) in
+            dispatchPrecondition(condition: .onQueue(.main))
             if let _movies = moviesJSON {
-                self.movies = _movies
             } else {
                 print("Nothing movies")
             }
         })
     }
+    
+    func transformDictionary(moviesJSON: [Dictionary<String,Any>]) {
+        for movie in moviesJSON {
+            movies.append(Movie(_movieNP: movie))
+        }
+    }
 }
+
 extension ManagerMovies: FavoriteMovieDelegate {
     
-    func setFavorite(movie: NSDictionary) {
+    func setFavorite(movie: Movie) {
         self.favorites.append(movie)
     }
     
-    func removeFavorite(movie: NSDictionary) {
+    func removeFavorite(movie: Movie) {
         let index = getIndexFavorite(movie: movie)
         if  index != -1{
             self.favorites.remove(at: index)
         }
     }
     
-    private func getIndexFavorite(movie: NSDictionary) -> Int {
+    private func getIndexFavorite(movie: Movie) -> Int {
         for (index, _movie) in favorites.enumerated() {
-            let _id = _movie[KeyAccesPropertiesMovieNowPlaying.id.value] as? Int
-            let id = movie[KeyAccesPropertiesMovieNowPlaying.id.value] as? Int
+            let _id = _movie.movie?.id
+            let id = movie.movie?.id
             if  _id == id {
                 return index
             }
         }
         return -1
+    }
+}
+extension ManagerMovies: SendFavoritesFilmesDelegate {
+    func send(favorites: [Movie]) {
+        self.favorites = favorites
     }
 }

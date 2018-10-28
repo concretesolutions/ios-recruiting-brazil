@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
     
-    var movie = NSDictionary()
+    var movie = Movie()
     var delegate: FavoriteMovieDelegate?
     
     @IBOutlet weak var posterPath: UIImageView!

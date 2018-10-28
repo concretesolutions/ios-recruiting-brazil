@@ -24,13 +24,13 @@ class MovieDAO {
     static let shared = MovieDAO()
     
     private let apiUrl : URL?
-    var movies = [NSDictionary]()
+    var movies = [Dictionary<String,Any>]()
     
     init() {
         self.apiUrl = URL(string: APILinks.moviesPlayingNow.value)
     }
     
-    func requestMovies(completion: @escaping ( [NSDictionary]?) -> ()) {
+    func requestMovies(completion: @escaping ( [Dictionary<String,Any>]?) -> ()) {
         
         guard let url = apiUrl else {return}
         
@@ -40,7 +40,7 @@ class MovieDAO {
         let task : URLSessionDataTask = session.dataTask(with: request) { (dataOrNil, response, error) in
             if let data = dataOrNil {
                 if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                    self.movies = responseDictionary.value(forKey: "results") as! [NSDictionary]
+                    self.movies = responseDictionary.value(forKey: "results") as! [Dictionary<String,Any>]
                     completion(self.movies)
                 }
             }else {
@@ -50,7 +50,7 @@ class MovieDAO {
         task.resume()
     }
     
-    func requestImage(from api: String, name: String, imageFormate: String) -> UIImage? {
+    func requestImage(from api: String, name: String, imageFormate: String,completion: @escaping (UIImage?) -> () ) {
         
         let pathImage = String(api).appending(name)
         let imgUrl = URL(string: pathImage)
@@ -58,11 +58,11 @@ class MovieDAO {
             do {
                 let data = try Data(contentsOf: contentFilePath)
                 let img = UIImage(data: data)
-                return img
+                completion(img)
             }catch {
                 print("Don`t success in get API image.")
+                completion(nil)
             }
         }
-        return nil
     }
 }

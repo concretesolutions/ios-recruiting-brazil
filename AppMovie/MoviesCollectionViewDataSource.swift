@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var datas = [NSDictionary]()
+    var datas = [Movie]()
     var controller = UIViewController()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -20,20 +20,12 @@ class MoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellCollectionMovies", for: indexPath) as! MoviesFavoritesCollectionViewCell
         
-        cell.delegate = controller as! FavoriteMovieDelegate
-        let movie = self.datas[indexPath.row]
-        cell.movie = movie
-        cell.titleMovie.text = movie[KeyAccesPropertiesMovieNowPlaying.title.value] as? String
-        if let nameImage = movie[KeyAccesPropertiesMovieNowPlaying.posterPath.value] as? String {
-            cell.posterPath.image = MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: "jpg")
-        }
+        cell.delegate = controller as? FavoriteMovieDelegate
+        let _movie = self.datas[indexPath.row]
+        cell.movie = _movie
+        cell.titleMovie.text = _movie.movie?.originalTitle
+        cell.posterPath.image = _movie.movie?.posterPath
         return cell
     }
 }
-extension MoviesCollectionViewDataSource: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("clickei em: \(indexPath.row)")
-    }
-    
-}
+
