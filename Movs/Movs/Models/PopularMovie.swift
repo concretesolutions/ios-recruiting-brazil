@@ -14,7 +14,7 @@ struct PopularMovie {
     let genresId: [Int]
     let title: String
     let overview: String
-    let releaseDate: String
+    var releaseDate: String
     var posterPath: String
     let voteAverage: Double
     

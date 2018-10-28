@@ -11,6 +11,7 @@ import Foundation
 struct MovieDetailed {
     let id: Int
     let genres: [Genre]
+    let genresNames: [String]
     let title: String
     let overview: String
     let releaseDate: String
@@ -45,6 +46,7 @@ extension MovieDetailed: Decodable {
         voteAverage = try container.decode(Double.self, forKey: .voteAverage)
         
         isFavorite = false
+        genresNames = [""]
     }
 }
 

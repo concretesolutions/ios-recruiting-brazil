@@ -26,8 +26,8 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
         
         FavoriteMoviesSceneConfigurator.inject(dependenciesFor: self)
         
-        let movie = MovieDetailed(id: 123, genres: [], title: "woww title", overview: "super overview", releaseDate: "", posterPath: "", voteAverage: 3.0, isFavorite: true)
-        favoritesWorker.addFavoriteMovie(movie: movie)
+//        let movie = MovieDetailed(id: 123, genres: [], title: "woww title", overview: "super overview", releaseDate: nil, posterPath: "", voteAverage: 3.0, isFavorite: true)
+//        favoritesWorker.addFavoriteMovie(movie: movie)
         favoritesWorker.getFavoriteMovies()
     }
     

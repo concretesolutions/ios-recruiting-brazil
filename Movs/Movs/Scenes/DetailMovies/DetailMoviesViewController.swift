@@ -65,7 +65,8 @@ extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
         genres.text = viewModel.genreNames
         movieOverview.text = viewModel.overview
         imdbValue.text = viewModel.imdbVote
-        favoriteIcon.image = viewModel.favoriteButtonImage     
+        favoriteIcon.image = viewModel.favoriteButtonImage
+        year.text = viewModel.year
     }
     
     func displayError(viewModel: DetailMovie.ViewModel.Error) {

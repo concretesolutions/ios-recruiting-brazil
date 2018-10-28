@@ -22,11 +22,11 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
         let genresFormatted = response.genreNames.joined(separator: ", ")
         let buttonImage = response.movie.isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
         let posterURL = URL(string: response.movie.posterPath)!
-        
+
         let viewModel = DetailMovie.ViewModel.Success(title: response.movie.title,
                                                       overview: response.movie.overview,
                                                       genreNames: genresFormatted,
-                                                      year: "",
+                                                      year: String.getYearRelease(fullDate: response.movie.releaseDate),
                                                       posterPath: posterURL,
                                                       imdbVote: imdbVote,
                                                       favoriteButtonImage: buttonImage!)

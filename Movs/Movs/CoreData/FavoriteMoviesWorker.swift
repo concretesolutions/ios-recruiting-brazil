@@ -9,8 +9,11 @@
 import CoreData
 import UIKit
 
-
-class FavoriteMoviesWorker {
+/**
+ Provides access to the CoreData and actions to do with favorite movies.
+ All data about a movie are stored locally to avoid doing a request to get it
+ */
+class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
     
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     fileprivate let movieCoreData = "MovieCoreData"
@@ -23,7 +26,11 @@ class FavoriteMoviesWorker {
     private let releaseDateKey: String = MovieDetailed.MovieCoreDataKey.releaseDate.rawValue
     private let genresKey: String = MovieDetailed.MovieCoreDataKey.genres.rawValue
     private let overviewKey: String = MovieDetailed.MovieCoreDataKey.overview.rawValue
+    private let posterPathKey: String = MovieDetailed.MovieCoreDataKey.posterPath.rawValue
+    private let voteAverageKey: String = MovieDetailed.MovieCoreDataKey.voteAverage.rawValue
     
+    
+    // MARK: - Database actions
     func removeAll() {
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
@@ -33,8 +40,11 @@ class FavoriteMoviesWorker {
             
         }
     }
-    
-    func addFavoriteMovie(movie: MovieDetailed) {
+    /**
+     Add a favorite movie to CoreData
+     - parameter movie: all data about the movie
+     */
+    func addFavoriteMovie(movie: MovieDetailed) -> Bool {
         removeAll()
         
         let entity = NSEntityDescription.entity(forEntityName: movieCoreData, in: context)
@@ -44,13 +54,33 @@ class FavoriteMoviesWorker {
         newFavorite.setValue(movie.title, forKey: titleKey)
         newFavorite.setValue(movie.overview, forKey: overviewKey)
         newFavorite.setValue(movie.releaseDate, forKey: releaseDateKey)
-        newFavorite.setValue(movie.genres, forKey: genresKey) 
+        newFavorite.setValue(movie.genres, forKey: genresKey)
+        newFavorite.setValue(movie.posterPath, forKey: posterPathKey)
+        newFavorite.setValue(movie.voteAverage, forKey: voteAverageKey)
         
         do {
             try context.save()
+            return true
         } catch {
-            print("Failed saving")
+            return false
         }
+    }
+    
+    func removeFavoriteMovie(movie: MovieDetailed) -> Bool {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try context.fetch(request) as! [NSManagedObject]
+            for data in result  {
+                let id = Int(data.value(forKey: idKey) as! Int16)
+                if id == movie.id {
+                    context.delete(data)
+                }
+            }
+        } catch {
+            return false
+        }
+        return true
     }
     
     func getFavoriteMovies() -> [MovieDetailed] {
@@ -64,16 +94,18 @@ class FavoriteMoviesWorker {
                 let id = data.value(forKey: idKey) as! Int16
                 let title = data.value(forKey: titleKey) as! String
                 let genres = data.value(forKey: genresKey) as! [String]
-                
-                print("🦑 getting data from Core Manager")
-                print(id)
-                print(title)
-                print(genres.description)
+                let overview = data.value(forKey: overviewKey) as! String
+                let releaseDate = data.value(forKey: releaseDateKey) as! String
+                let posterPath = data.value(forKey: posterPathKey) as! String
+                let voteAverage = data.value(forKey: voteAverageKey) as! Double
+
+                let movie = MovieDetailed.init(id: Int(id), genres: [], genresNames: genres, title: title, overview: overview, releaseDate: releaseDate, posterPath: posterPath, voteAverage: voteAverage, isFavorite: true)
+                movies.append(movie)
             }
         } catch {
-            print("Failed")
+            return []
         }
-        return []  
+        return movies
     }
     
 }
