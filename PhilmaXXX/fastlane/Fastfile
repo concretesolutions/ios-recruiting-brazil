@@ -22,7 +22,7 @@ platform :ios do
     slather(scheme: "PhilmaXXX", proj: "PhilmaXXX.xcodeproj", workspace: "PhilmaXXX.wcworkspace")
     increment_build_number
     git_add(path: ".")
-    git_commit(path: ".", message: Date.today.to_s)
+    git_commit(path: ".", message: DateTime.now.to_s)
     push_to_git_remote
   end
 
