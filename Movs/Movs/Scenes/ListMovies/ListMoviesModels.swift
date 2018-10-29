@@ -27,12 +27,21 @@ enum ListMovies{
     
     enum ViewModel {
         struct Success {
-            let movies: [PopularMovie]
+            let movies: [PopularMoviesFormatted]
         }
         
         struct Error {
             var image: UIImage?
             var message: String
+        }
+        
+        struct PopularMoviesFormatted {
+            let id: Int
+            let title: String
+            let overview: String
+            var posterPath: URL
+            var favoriteIcon: UIImage
+            var isFavorite: Bool
         }
     }
 

@@ -21,7 +21,6 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
     // MARK: Response from Interactor
     func presentMovies(response: ListMovies.Response.Success) {
         let formattedMovies = formatData(movies: response.movies)
-        
         let viewModel = ListMovies.ViewModel.Success(movies: formattedMovies)
         viewController?.displayMovies(viewModel: viewModel)
     }
@@ -31,11 +30,16 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
     }
     
     // Format the data to be presented
-    private func formatData(movies: [PopularMovie]) -> [PopularMovie] {
-        let formattedMovies =  movies.map { (movie) -> PopularMovie in
-            var formattedMovie = movie
-            formattedMovie.releaseDate = String.getYearRelease(fullDate: formattedMovie.releaseDate)
-            return formattedMovie
+    private func formatData(movies: [PopularMovie]) -> [ListMovies.ViewModel.PopularMoviesFormatted] {
+        let formattedMovies =  movies.map { (movie) -> ListMovies.ViewModel.PopularMoviesFormatted in
+            let id = movie.id
+            let title = movie.title
+            let overview = movie.overview
+            let favoriteIcon = movie.isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
+            let posterPath = URL(string: movie.posterPath)
+            let isFavorite = movie.isFavorite
+            
+            return ListMovies.ViewModel.PopularMoviesFormatted(id: id, title: title, overview: overview, posterPath: posterPath!, favoriteIcon: favoriteIcon!, isFavorite: isFavorite)
         }
         return formattedMovies
     }

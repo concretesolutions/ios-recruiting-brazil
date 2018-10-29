@@ -74,26 +74,22 @@
                                                                 <constraint firstAttribute="trailing" secondItem="Izv-GD-LYl" secondAttribute="trailing" id="oGP-Uh-RDm"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygi-BT-3bb" userLabel="Favorite">
-                                                            <rect key="frame" x="318" y="176" width="12" height="12"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_gray_icon" translatesAutoresizingMaskIntoConstraints="NO" id="re6-oZ-Vmc">
+                                                            <rect key="frame" x="315" y="175" width="15" height="13"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="12" id="ATl-sh-VHM"/>
-                                                                <constraint firstAttribute="width" constant="12" id="ybk-Qz-Obi"/>
+                                                                <constraint firstAttribute="width" constant="15" id="d1m-QE-mAM"/>
+                                                                <constraint firstAttribute="height" constant="13" id="eJQ-Kw-WHS"/>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="favorite_empty_icon"/>
-                                                            <connections>
-                                                                <action selector="favoriteAction:" destination="mY6-sk-RAk" eventType="touchUpInside" id="3LS-P4-rua"/>
-                                                            </connections>
-                                                        </button>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="7Ds-3S-Cdw" firstAttribute="top" secondItem="QRq-8R-fyA" secondAttribute="top" constant="10" id="5wP-Mz-YEU"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ygi-BT-3bb" secondAttribute="trailing" constant="15" id="8Me-vp-1c0"/>
                                                         <constraint firstItem="AAc-eU-5ns" firstAttribute="centerY" secondItem="QRq-8R-fyA" secondAttribute="centerY" id="D2E-r8-IiD"/>
                                                         <constraint firstItem="7Ds-3S-Cdw" firstAttribute="leading" secondItem="AAc-eU-5ns" secondAttribute="trailing" constant="10" id="GMG-hO-QNU"/>
                                                         <constraint firstAttribute="trailing" secondItem="7Ds-3S-Cdw" secondAttribute="trailing" constant="15" id="KRk-NG-D1y"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ygi-BT-3bb" secondAttribute="bottom" constant="10" id="Vne-JS-g9U"/>
+                                                        <constraint firstAttribute="trailing" secondItem="re6-oZ-Vmc" secondAttribute="trailing" constant="15" id="Wg3-z8-AGf"/>
+                                                        <constraint firstAttribute="bottom" secondItem="re6-oZ-Vmc" secondAttribute="bottom" constant="10" id="gp4-rY-38d"/>
                                                         <constraint firstItem="AAc-eU-5ns" firstAttribute="leading" secondItem="QRq-8R-fyA" secondAttribute="leading" constant="10" id="x2W-tZ-BEK"/>
                                                         <constraint firstItem="7Ds-3S-Cdw" firstAttribute="centerY" secondItem="QRq-8R-fyA" secondAttribute="centerY" constant="-15" id="zRs-kF-lte"/>
                                                     </constraints>
@@ -108,7 +104,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="favoriteButton" destination="ygi-BT-3bb" id="zi3-aT-DTY"/>
+                                            <outlet property="favoriteIcon" destination="re6-oZ-Vmc" id="G6x-Dq-Huq"/>
                                             <outlet property="movieDescription" destination="GZ8-yy-2tJ" id="JHN-j3-aIp"/>
                                             <outlet property="movieImageView" destination="AAc-eU-5ns" id="QyN-07-OJ0"/>
                                             <outlet property="movieTitle" destination="Izv-GD-LYl" id="Wd9-hS-KAB"/>
@@ -292,7 +288,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favorite_empty_icon" width="22" height="21"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="imdb_icon" width="29" height="26"/>
         <namedColor name="grayBackground">

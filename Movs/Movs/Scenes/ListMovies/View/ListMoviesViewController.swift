@@ -26,7 +26,7 @@ class ListMoviesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     // Data
-    var movies = [PopularMovie]()
+    var movies = [ListMovies.ViewModel.PopularMoviesFormatted]()
     let moviesLimitToPresent = 50
     
     // MARK: - View lifecycle

@@ -44,15 +44,17 @@ class ListMoviesInteractor: ListMoviesBusinessLogic {
         for movie in movies {
             var movieFormatted = movie
             movieFormatted.posterPath = imageBasePath + movie.posterPath
+            movieFormatted.isFavorite = checkIfIsFavorite(movieId: movie.id)
             moviesFormatted.append(movieFormatted)
         }
    
         return moviesFormatted
     }
-    // TODO: check locally the movies id
+
     /// Check if the movie to be presented is also an user's favorite movie
-    private func getFavoriteMovies() {
-        
+    private func checkIfIsFavorite(movieId: Int) -> Bool {
+        let favoriteWorker = FavoriteMoviesWorker()
+        return favoriteWorker.findMovieWith(id: movieId)
     }
     
     private func formatListError(error: FetchError) -> String {

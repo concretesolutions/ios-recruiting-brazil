@@ -13,22 +13,18 @@ class PopularMovieTableViewCell: UITableViewCell {
 
     var movieIdentifier: Int?
     
-    private let favoriteEmpty = UIImage(named: "favorite_gray_icon")
-    private let favoriteFull = UIImage(named: "favorite_full_icon")
-    
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieDescription: UITextView!
     @IBOutlet weak var movieImageView: UIImageViewMovieCard!
-    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var favoriteIcon: UIImageView!
     
-    func configureCellWith(data: PopularMovie) {
+    
+    func configureCellWith(data: ListMovies.ViewModel.PopularMoviesFormatted) {
         self.movieIdentifier = data.id
         self.movieTitle.text = data.title
         self.movieDescription.text = data.overview
-        self.favoriteButton.imageView?.image = data.isFavorite == true ? favoriteFull : favoriteEmpty
-        let posterPath = data.posterPath
-        let url = URL(string: posterPath)
-        movieImageView.kf.setImage(with: url)
+        self.favoriteIcon.image = data.favoriteIcon
+        self.movieImageView.kf.setImage(with: data.posterPath)
     }
     
 }
