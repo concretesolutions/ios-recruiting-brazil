@@ -56,9 +56,9 @@ final class FavoritesFilterVC: FormViewController {
 			<<< MultipleSelectorRow<Int>(){
 				$0.tag = FilterFormTags.yearOfReleases.tag
 				$0.title = FilterFormTags.yearOfReleases.title
-				$0.options = viewModel.filter.yearOfReleases
+				$0.options = viewModel.filter.yearOfReleases.sorted(by: { $0 > $1 })
 				$0.displayValueFor = { years in
-					if let uYears = years {
+					if let uYears = years?.sorted() {
 						return "(\(uYears.map({"\($0)"}).joined(separator: ", ")))"
 					}
 					return ""
