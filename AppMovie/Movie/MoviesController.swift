@@ -8,47 +8,22 @@
 
 import UIKit
 
+
 class MoviesController: UIViewController{
 
-    var _movies = [Dictionary<String,Any>]()
     var movies = [Movie]()
     var moviesFavorites = [Movie]()
     let dataSource = MoviesCollectionViewDataSource()
-    var delegate: SendFavoritesFilmesDelegate?
-    
+    var dadController : UIViewController?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        donwloadMovies()
-        delegate = self
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        delegate?.send(favorites: moviesFavorites)
+        setupCollectionView()
     }
     
     //MARK: Privates Methods
-    private func donwloadMovies() {
-        MovieDAO.shared.requestMovies(completion: { (moviesJSON) in
-            if let _movies = moviesJSON {
-                self._movies = _movies
-                self.transformDictionary(moviesJSON: self._movies)
-                self.setupCollectionView()
-                self.collectionView.reloadData()
-            } else {
-                print("Nothing movies")
-            }
-        })
-    }
- 
-    private func transformDictionary(moviesJSON: [Dictionary<String,Any>]) {
-        for movie in moviesJSON {
-            self.movies.append(Movie(_movieNP: movie))
-        }
-    }
-    
     private func setupCollectionView() {
         collectionView.dataSource = dataSource
         collectionView.delegate = self
@@ -58,15 +33,15 @@ class MoviesController: UIViewController{
 }
 
 //MARK: - Delegates
-
 extension MoviesController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         
         let sb = UIStoryboard(name: "DescriptionMovie", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "description")
         if let _vc = vc as? DescriptionMovieViewController {
             _vc.movie = movies[indexPath.row]
-            self.present(_vc, animated: true, completion: nil)
+            self.navigationController?.present(_vc, animated: true, completion: nil)
         }
     }
 }
@@ -95,8 +70,15 @@ extension MoviesController: FavoriteMovieDelegate {
     }
 }
 
-extension MoviesController: SendFavoritesFilmesDelegate {
-    func send(favorites: [Movie]) {
-        
+extension MoviesController: SendDataDelegate {
+    func send(data: Any) {
+        if let _movies = data as? [Movie] {
+            self.movies = _movies
+            self.dataSource.datas = _movies
+            if let dadController = self.dadController{
+                self.dataSource.controller = dadController
+            }
+            self.collectionView.reloadData()
+        }
     }
 }

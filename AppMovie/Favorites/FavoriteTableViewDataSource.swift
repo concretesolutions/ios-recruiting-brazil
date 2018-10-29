@@ -12,6 +12,7 @@ class FavoriteTableViewDataSource: NSObject, UITableViewDataSource {
     var datas = [Movie]()
     var identifierCell = String()
     var movie: Movie?
+    var controller: UIViewController?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if movie != nil {

@@ -18,12 +18,17 @@ class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var btnFavorite: UIButton!
     
     @IBAction func favorite(_ sender: Any) {
-        if btnFavorite.imageView?.image == UIImage(named: "favorite_empty_icon") {
-            btnFavorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
-            delegate?.setFavorite(movie: movie)
-        }else {
-            btnFavorite.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
-            delegate?.removeFavorite(movie: movie)
+        self.movie.updateFavorite()
+        
+        if let _favorite = self.movie.movie?.favorite {
+            if let img =  self.movie.getImage(favorite: _favorite){
+                if self.movie.movie?.favorite == false {
+                    delegate?.removeFavorite(movie: movie)
+                }else {
+                    delegate?.setFavorite(movie: movie)
+                }
+                self.btnFavorite.setImage(img, for: .normal)
+            }
         }
     }
 }

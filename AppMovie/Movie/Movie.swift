@@ -21,6 +21,7 @@ struct MovieNowPlaying {
     var popularity: Decimal
     var posterPath: UIImage
     var releaseDate: String
+    var favorite: Bool
 }
 
 class Movie {
@@ -40,6 +41,7 @@ class Movie {
         let overview = _movieNP[PropertiesMovieNowPlaying.overview.value] as? String ?? ""
         let popularity = _movieNP[PropertiesMovieNowPlaying.popularity.value] as? Decimal ?? 0.0
         let releaseDate = _movieNP[PropertiesMovieNowPlaying.releaseDate.value] as? String ?? ""
+        let favorite = false
         
         var backDropImage : UIImage?
         if let nameImage = _movieNP[PropertiesMovieNowPlaying.backdropPath.value] as? String {
@@ -62,7 +64,33 @@ class Movie {
         }
         
         if let bdImage = backDropImage, let pImage = posterImage {
-                self.movie = MovieNowPlaying(adult: adult, backdropPath: bdImage, genre: genre, id: id, language: language, originalTitle: originalTitle, overview: overview, popularity: popularity, posterPath: pImage, releaseDate: releaseDate)
+            self.movie = MovieNowPlaying(adult: adult, backdropPath: bdImage, genre: genre, id: id, language: language, originalTitle: originalTitle, overview: overview, popularity: popularity, posterPath: pImage, releaseDate: releaseDate, favorite: favorite)
         }
+    }
+    
+    func updateFavorite(){
+        if let _favorite = self.movie?.favorite {
+            if _favorite == true {
+                self.movie?.favorite = false
+            }else {
+                self.movie?.favorite = true
+            }
+        }
+    }
+    
+    func getImage(favorite: Bool) -> UIImage? {
+        
+        if (self.movie?.favorite) != nil {
+            if favorite == false {
+                if let img = UIImage(named: "favorite_empty_icon") {
+                    return img
+                }
+            }else {
+                if let img = UIImage(named: "favorite_full_icon") {
+                    return img
+                }
+            }
+        }
+        return nil
     }
 }

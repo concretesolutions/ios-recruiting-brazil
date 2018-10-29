@@ -10,6 +10,7 @@ import UIKit
 
 class DescriptionMovieViewController: UIViewController {
 
+    @IBOutlet weak var navigation: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imgPoster: UIImageView!
 
@@ -19,6 +20,13 @@ class DescriptionMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMovie()
+        setupNavigation()
+    }
+    
+    private func setupNavigation() {
+        let backButom = UIBarButtonItem()
+        backButom.title = "Back"
+        navigationController?.navigationItem.backBarButtonItem = backButom
     }
     
     private func setupMovie() {

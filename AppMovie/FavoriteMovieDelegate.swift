@@ -11,3 +11,7 @@ protocol FavoriteMovieDelegate {
     func setFavorite(movie: Movie)
     func removeFavorite(movie: Movie)
 }
+
+protocol ReceiveFavoriteDelegate {
+    func receive(favorites: [Movie])
+}
