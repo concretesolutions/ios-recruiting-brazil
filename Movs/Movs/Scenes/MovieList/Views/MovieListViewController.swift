@@ -11,6 +11,7 @@ import UIKit
 protocol MovieListDisplayLogic: class {
     func displayMovies(viewModel: MovieListModel.ViewModel.Success)
     func displayError(viewModel: MovieListModel.ViewModel.Error)
+    func displayNotFind(viewModel: MovieListModel.ViewModel.Error)
 }
 
 class MovieListViewController: UIViewController, MovieListDisplayLogic {
@@ -40,6 +41,12 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.Movs.yellow.cgColor
         view.placeholder = "Search"
+        view.delegate = self
+        return view
+    }()
+    
+    var errorView: MovieListErrorView = {
+        let view = MovieListErrorView()
         return view
     }()
     
@@ -71,6 +78,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
+        router.dataStore = interactor
     }
     
     private func setupViewController() {
@@ -82,18 +90,44 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     }
     
     private func fetchMovies() {
-        interactor.fetchMovies(request: MovieListModel.Request(page: page))
+        interactor.fetchMovies(request: MovieListModel.Request.Page(page: page))
+    }
+    
+    func fetchMoreMovies() {
         page += 1
-        
+        fetchMovies()
     }
     
     func displayMovies(viewModel: MovieListModel.ViewModel.Success) {
+        collectionView.isHidden = false
+        errorView.isHidden = true
         data = viewModel
         collectionView.reloadData()
     }
     
     func displayError(viewModel: MovieListModel.ViewModel.Error) {
-        
+        let error = MovieListErrorView.ViewError(movieTitle: nil, errorType: .error)
+        errorView.error(viewError: error)
+        collectionView.isHidden = true
+        errorView.isHidden = false
+    }
+    
+    func displayNotFind(viewModel: MovieListModel.ViewModel.Error) {
+        var error = MovieListErrorView.ViewError(movieTitle: nil, errorType: .notFind)
+        error.movieTitle = viewModel.error
+        errorView.error(viewError: error)
+        collectionView.isHidden = true
+        errorView.isHidden = false
+    }
+    
+    func filterMovies(named: String) {
+        let request = MovieListModel.Request.Movie(title: named)
+        interactor.filterMovies(request: request)
+    }
+    
+    func displayColletctionView() {
+        collectionView.isHidden = false
+        errorView.isHidden = true
     }
     
     func pressedFavorite(sender: UIButton) {

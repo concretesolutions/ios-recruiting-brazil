@@ -11,6 +11,7 @@ import Foundation
 protocol MovieListPresentationLogic {
     func presentMovies(response: MovieListModel.Response)
     func presentError(response: MovieListModel.Response)
+    func presentNotFind(response: MovieListModel.Response)
 }
 
 class MovieListPresenter: MovieListPresentationLogic {
@@ -30,6 +31,13 @@ class MovieListPresenter: MovieListPresentationLogic {
         if let error = response.error {
             let viewModel = MovieListModel.ViewModel.Error(error: error)
             viewController.displayError(viewModel: viewModel)
+        }
+    }
+    
+    func presentNotFind(response: MovieListModel.Response) {
+        if let error = response.error {
+            let viewModel = MovieListModel.ViewModel.Error(error: error)
+            viewController.displayNotFind(viewModel: viewModel)
         }
     }
 }

@@ -9,8 +9,14 @@
 import UIKit
 
 enum MovieListModel {
-    struct Request {
-        var page: Int
+    enum Request {
+        struct Page {
+            var page: Int
+        }
+        
+        struct Movie {
+            var title: String
+        }
     }
     
     struct Response {

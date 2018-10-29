@@ -9,9 +9,21 @@
 import Foundation
 
 protocol MovieListRoutingLogic {
-    
+    func showMovieDetail()
 }
 
-class MovieListRouter: MovieListRoutingLogic {
-    weak var viewController: MovieListDisplayLogic!
+protocol MovieListDataPassing {
+    var dataStore: MovieListDataStore? { get }
+}
+
+class MovieListRouter: MovieListRoutingLogic, MovieListDataPassing {
+    weak var viewController: MovieListViewController!
+    var dataStore: MovieListDataStore?
+    
+    func showMovieDetail() {
+        if let movie = dataStore?.movie {
+            let movieDetailViewController = MovieDetailViewController(movie: movie)
+            viewController.show(movieDetailViewController, sender: nil)
+        }
+    }
 }

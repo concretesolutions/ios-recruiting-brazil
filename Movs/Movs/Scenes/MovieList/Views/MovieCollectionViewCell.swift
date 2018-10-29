@@ -53,7 +53,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func pressedFavorite(sender: UIButton) {
-//        favoriteButton.setImage(UIImage(named: Constants.ImageName.favoriteFull), for: .normal)
         didPressButton?(favoriteButton)
     }
     

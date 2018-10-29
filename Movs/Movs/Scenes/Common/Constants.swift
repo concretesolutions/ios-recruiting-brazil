@@ -11,6 +11,7 @@ import Foundation
 enum Constants {
     struct ImageName {
         static let check = "CheckIcon"
+        static let error = "ErrorIcon"
         static let favoriteEmpty = "FavoriteEmptyIcon"
         static let favoriteGray = "FavoriteGrayIcon"
         static let favoriteFull = "FavoriteFullIcon"
