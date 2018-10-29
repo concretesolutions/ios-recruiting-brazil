@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MoviesCollectionViewController: UICollectionViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    navigationItem.searchController = UISearchController(searchResultsController: nil)
+    navigationItem.hidesSearchBarWhenScrolling = false
   }
-
 
 }
 
