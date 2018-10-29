@@ -10,10 +10,10 @@ import UIKit
 
 struct Index {
     
-    func getIndexInArray(movie: Movie,at array: [Movie]) -> Int {
+    static func getIndexInArray(movie: MovieNowPlaying,at array: [MovieNowPlaying]) -> Int {
         for (index, _movie) in array.enumerated() {
-            let _id = _movie.movie?.id
-            let id = movie.movie?.id
+            let _id = _movie.id
+            let id = movie.id
             if  _id == id {
                 return index
             }

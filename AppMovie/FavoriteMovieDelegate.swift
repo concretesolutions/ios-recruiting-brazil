@@ -8,10 +8,10 @@
 
 import Foundation
 protocol FavoriteMovieDelegate {
-    func setFavorite(movie: Movie)
-    func removeFavorite(movie: Movie)
+    func setFavorite(movie: MovieNowPlaying)
+    func removeFavorite(movie: MovieNowPlaying)
 }
 
 protocol ReceiveFavoriteDelegate {
-    func receive(favorites: [Movie])
+    func receive(favorites: [MovieNowPlaying])
 }

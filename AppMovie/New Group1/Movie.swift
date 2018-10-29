@@ -11,26 +11,20 @@ import UIKit
 typealias Genre = Dictionary<String,[Dictionary<String,Any>]>
 
 struct MovieNowPlaying {
-    var adult: Bool
-    var backdropPath: UIImage
-    var genre: Genre
-    var id: Int
-    var language: String
-    var originalTitle: String
-    var overview: String
-    var popularity: Decimal
-    var posterPath: UIImage
-    var releaseDate: String
-    var favorite: Bool
+    var adult = Bool()
+    var backdropPath = UIImage()
+    var genre = Genre()
+    var id = Int()
+    var language = String()
+    var originalTitle = String()
+    var overview = String()
+    var popularity = Decimal()
+    var posterPath = UIImage()
+    var releaseDate = String()
+    var favorite = Bool()
 }
 
-class Movie {
-    
-    var movie : MovieNowPlaying?
-    
-    init() {
-        
-    }
+extension MovieNowPlaying {
     
     init(_movieNP: Dictionary<String,Any>) {
         let adult = _movieNP[PropertiesMovieNowPlaying.adult.value] as? Bool ?? false
@@ -64,31 +58,37 @@ class Movie {
         }
         
         if let bdImage = backDropImage, let pImage = posterImage {
-            self.movie = MovieNowPlaying(adult: adult, backdropPath: bdImage, genre: genre, id: id, language: language, originalTitle: originalTitle, overview: overview, popularity: popularity, posterPath: pImage, releaseDate: releaseDate, favorite: favorite)
+            self.adult = adult
+            self.backdropPath = bdImage
+            self.genre = genre
+            self.id = id
+            self.language = language
+            self.originalTitle = originalTitle
+            self.overview = overview
+            self.popularity = popularity
+            self.posterPath = pImage
+            self.releaseDate = releaseDate
+            self.favorite = favorite
         }
     }
     
-    func updateFavorite(){
-        if let _favorite = self.movie?.favorite {
-            if _favorite == true {
-                self.movie?.favorite = false
+    mutating func updateFavorite(){
+            if self.favorite == true {
+                self.favorite = false
             }else {
-                self.movie?.favorite = true
+                self.favorite = true
             }
-        }
     }
     
     func getImage(favorite: Bool) -> UIImage? {
         
-        if (self.movie?.favorite) != nil {
-            if favorite == false {
-                if let img = UIImage(named: "favorite_empty_icon") {
-                    return img
-                }
-            }else {
-                if let img = UIImage(named: "favorite_full_icon") {
-                    return img
-                }
+        if favorite == false {
+            if let img = UIImage(named: "favorite_empty_icon") {
+                return img
+            }
+        }else {
+            if let img = UIImage(named: "favorite_full_icon") {
+                return img
             }
         }
         return nil

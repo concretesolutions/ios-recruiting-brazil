@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
-    var favorites = [Movie]()
+    var favorites = [MovieNowPlaying]()
     var dataSource = FavoriteTableViewDataSource()
     var dadController : InitialViewController?
     var delegateFavoriteDad: FavoriteMovieDelegate?
@@ -39,7 +39,7 @@ extension FavoritesViewController: UITableViewDelegate {
     }
     
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
-        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+        let action = UIContextualAction(style: .destructive, title: "Unfavorite") { (action, view, completion) in
             self.delegateFavoriteDad?.removeFavorite(movie: self.favorites[indexPath.row])
         }
         action.backgroundColor = .red
@@ -49,13 +49,13 @@ extension FavoritesViewController: UITableViewDelegate {
 }
 
 extension FavoritesViewController: SendFavoritesFilmesDelegate {
-    func send(favorites: [Movie]) {
+    func send(favorites: [MovieNowPlaying]) {
         self.favorites = favorites
     }
 }
 
 extension FavoritesViewController: ReceiveFavoriteDelegate {
-    func receive(favorites: [Movie]) {
+    func receive(favorites: [MovieNowPlaying]) {
         self.favorites = favorites
         self.tableView.reloadData()
     }
@@ -63,7 +63,7 @@ extension FavoritesViewController: ReceiveFavoriteDelegate {
 
 extension FavoritesViewController: SendDataDelegate {
     func send(data: Any) {
-        if let _moviesFavorites = data as? [Movie] {
+        if let _moviesFavorites = data as? [MovieNowPlaying] {
             self.favorites = _moviesFavorites
             self.dataSource.datas = _moviesFavorites
             self.dataSource.controller = self.dadController

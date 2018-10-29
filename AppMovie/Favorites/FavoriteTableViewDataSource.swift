@@ -9,13 +9,13 @@
 import UIKit
 
 class FavoriteTableViewDataSource: NSObject, UITableViewDataSource {
-    var datas = [Movie]()
+    var datas = [MovieNowPlaying]()
     var identifierCell = String()
-    var movie: Movie?
+    var movie: MovieNowPlaying?
     var controller: UIViewController?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if movie != nil {
+        if identifierCell == "descriptionCell" {
             return 4
         }
         return datas.count
@@ -31,25 +31,27 @@ class FavoriteTableViewDataSource: NSObject, UITableViewDataSource {
         if let cell = cell as? MoviesTableViewCell {
             let movie = self.datas[indexPath.row]
             cell.movie = movie
-            cell.label.text = movie.movie?.originalTitle
-            cell.imgMovie.image = movie.movie?.backdropPath
+            cell.titleMovie.text = movie.originalTitle
+            cell.detailMovie.text = movie.overview
+            cell.imageCover.image = movie.backdropPath
             return cell
         }else if let cell = cell as? DescribeMovieTableViewCell {
-            
+    
             var text = ""
             if let movie = movie {
                 if indexPath.row == 0 {
-                    text = movie.movie?.originalTitle ?? ""
+                    text = movie.originalTitle
                 }else if indexPath.row == 1{
-                    text = movie.movie?.releaseDate ?? ""
+                    text = movie.releaseDate
                 }else if indexPath.row == 2{
-                    if let _genres = movie.movie?.genre["genres"] {
-                        for genre in _genres {
-                            text = genre["name"] as! String
+                    for genre in movie.genre {
+                        if let dic = genre as? Dictionary<String, Any> {
+                            text = dic["name"] as! String
                         }
+                        
                     }
                 }else {
-                    text = movie.movie?.overview ?? ""
+                    text = movie.overview
                 }
                 cell.textInformate.text = text
                 return cell

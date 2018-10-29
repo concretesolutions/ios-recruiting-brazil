@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
     
-    var movie = Movie()
+    var movie = MovieNowPlaying()
     var delegate: FavoriteMovieDelegate?
     
     @IBOutlet weak var posterPath: UIImageView!
@@ -20,15 +20,13 @@ class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
     @IBAction func favorite(_ sender: Any) {
         self.movie.updateFavorite()
         
-        if let _favorite = self.movie.movie?.favorite {
-            if let img =  self.movie.getImage(favorite: _favorite){
-                if self.movie.movie?.favorite == false {
-                    delegate?.removeFavorite(movie: movie)
-                }else {
-                    delegate?.setFavorite(movie: movie)
-                }
-                self.btnFavorite.setImage(img, for: .normal)
+        if let img =  self.movie.getImage(favorite: self.movie.favorite){
+            if self.movie.favorite == false {
+                delegate?.removeFavorite(movie: movie)
+            }else {
+                delegate?.setFavorite(movie: movie)
             }
+            self.btnFavorite.setImage(img, for: .normal)
         }
     }
 }

@@ -11,8 +11,8 @@ import UIKit
 
 class MoviesController: UIViewController{
 
-    var movies = [Movie]()
-    var moviesFavorites = [Movie]()
+    var movies = [MovieNowPlaying]()
+    var moviesFavorites = [MovieNowPlaying]()
     let dataSource = MoviesCollectionViewDataSource()
     var dadController : UIViewController?
     
@@ -47,21 +47,21 @@ extension MoviesController: UICollectionViewDelegate {
 }
 
 extension MoviesController: FavoriteMovieDelegate {
-    func setFavorite(movie: Movie) {
+    func setFavorite(movie: MovieNowPlaying) {
         self.moviesFavorites.append(movie)
     }
     
-    func removeFavorite(movie: Movie) {
+    func removeFavorite(movie: MovieNowPlaying) {
         let index = getIndexFavorite(movie: movie)
         if  index != -1 {
             self.moviesFavorites.remove(at: index)
         }
     }
     
-    private func getIndexFavorite(movie: Movie) -> Int {
+    private func getIndexFavorite(movie: MovieNowPlaying) -> Int {
         for (index, _movie) in moviesFavorites.enumerated() {
-            let _id = _movie.movie?.id
-            let id = movie.movie?.id
+            let _id = _movie.id
+            let id = movie.id
             if  _id == id {
                 return index
             }
@@ -72,7 +72,7 @@ extension MoviesController: FavoriteMovieDelegate {
 
 extension MoviesController: SendDataDelegate {
     func send(data: Any) {
-        if let _movies = data as? [Movie] {
+        if let _movies = data as? [MovieNowPlaying] {
             self.movies = _movies
             self.dataSource.datas = _movies
             if let dadController = self.dadController{

@@ -18,7 +18,7 @@ enum PropertiesMovieNowPlaying  {
         case .backdropPath:
             return "backdrop_path"
         case .genre:
-            return "genre"
+            return "genre_ids"
         case .id:
             return "id"
         case .language:

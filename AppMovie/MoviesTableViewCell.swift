@@ -10,23 +10,13 @@ import UIKit
 
 class MoviesTableViewCell: UITableViewCell{
     
-    let label: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    var imgMovie = UIImageView()
-    var movie: Movie?
+    @IBOutlet weak var imageCover: UIImageView!
+    @IBOutlet weak var titleMovie: UILabel!
+    @IBOutlet weak var detailMovie: UILabel!
+    
+    var movie: MovieNowPlaying?
     
     override func awakeFromNib() {
-        setupViews()
     }
     
-    func setupViews() {
-        addSubview(label)
-        addSubview(imgMovie)
-        
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":label]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0]-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":label]))
-    }
 }

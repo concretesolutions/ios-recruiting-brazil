@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SendFavoritesFilmesDelegate {
-    func send(favorites: [Movie])
+    func send(favorites: [MovieNowPlaying])
 }

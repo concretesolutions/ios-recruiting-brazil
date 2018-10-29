@@ -10,12 +10,11 @@ import UIKit
 
 class DescriptionMovieViewController: UIViewController {
 
-    @IBOutlet weak var navigation: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imgPoster: UIImageView!
 
     let dataSource = FavoriteTableViewDataSource()
-    var movie: Movie?
+    var movie: MovieNowPlaying?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +22,12 @@ class DescriptionMovieViewController: UIViewController {
         setupNavigation()
     }
     
-    private func setupNavigation() {
-        let backButom = UIBarButtonItem()
-        backButom.title = "Back"
-        navigationController?.navigationItem.backBarButtonItem = backButom
+    func setupNavigation() {
+        
     }
     
     private func setupMovie() {
-        self.imgPoster.image = self.movie?.movie?.backdropPath
+        self.imgPoster.image = self.movie?.backdropPath
         if let _movie = movie {
             tableView.dataSource = dataSource
             tableView.delegate = self

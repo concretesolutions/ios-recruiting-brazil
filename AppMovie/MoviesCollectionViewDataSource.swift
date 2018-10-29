@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var datas = [Movie]()
+    var datas = [MovieNowPlaying]()
     var controller = UIViewController()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -23,11 +23,9 @@ class MoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         cell.delegate = controller as? FavoriteMovieDelegate
         let _movie = self.datas[indexPath.row]
         cell.movie = _movie
-        cell.titleMovie.text = _movie.movie?.originalTitle
-        cell.posterPath.image = _movie.movie?.posterPath
-        if let _favorite = _movie.movie?.favorite {
-            cell.btnFavorite.setImage(_movie.getImage(favorite: _favorite), for: .normal)
-        }
+        cell.titleMovie.text = _movie.originalTitle
+        cell.posterPath.image = _movie.posterPath
+        cell.btnFavorite.setImage(_movie.getImage(favorite: _movie.favorite), for: .normal)
         return cell
     }
 }
