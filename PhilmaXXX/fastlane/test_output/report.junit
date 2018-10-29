@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <testsuites name='NetworkPlatformTests.xctest' tests='24' failures='0'>
   <testsuite name='DomainTests.GenreSpec' tests='4' failures='0'>
-    <testcase classname='DomainTests.GenreSpec' name='a_genre__when_initialized_with_only_its_non_optional_params__in_comparison_with_other_genres_with_same_id_and_different_params__should_be_equal' time='0.003'/>
+    <testcase classname='DomainTests.GenreSpec' name='a_genre__when_initialized_with_only_its_non_optional_params__in_comparison_with_other_genres_with_same_id_and_different_params__should_be_equal' time='0.008'/>
     <testcase classname='DomainTests.GenreSpec' name='a_genre__when_initialized_with_only_its_non_optional_params__but_when_in_comparison_with_other_genres_with_different_id__should_be_not_equal' time='0.001'/>
     <testcase classname='DomainTests.GenreSpec' name='a_genre__initialized_from_json_decoder__and_using_a_valid_json_file__should_parse_correctly' time='0.001'/>
-    <testcase classname='DomainTests.GenreSpec' name='a_genre__initialized_from_json_decoder__and_using_an_invalid_json_file__shouldn_t_parse' time='0.002'/>
+    <testcase classname='DomainTests.GenreSpec' name='a_genre__initialized_from_json_decoder__and_using_an_invalid_json_file__shouldn_t_parse' time='0.003'/>
   </testsuite>
   <testsuite name='DomainTests.MovieSpec' tests='4' failures='0'>
     <testcase classname='DomainTests.MovieSpec' name='a_movie__when_initialized_with_only_its_non_optional_params__in_comparison_with_other_movies_with_same_id_and_different_params__should_be_equal' time='0.001'/>
@@ -35,7 +35,7 @@
     <testcase classname='RealmPlatformTests.RealmMovieSpec' name='a_movie_in_realm__and_its_base_data_and_return__also_should_be_identical_to_its_base_replic_method_return' time='0.001'/>
   </testsuite>
   <testsuite name='NetworkPlatformTests.TMDB_ServiceSpec' tests='2' failures='0'>
-    <testcase classname='NetworkPlatformTests.TMDB_ServiceSpec' name='the_webservice__should_get_the_first_page_of_popular_movies__eventually_having_something' time='0.012'/>
+    <testcase classname='NetworkPlatformTests.TMDB_ServiceSpec' name='the_webservice__should_get_the_first_page_of_popular_movies__eventually_having_something' time='0.015'/>
     <testcase classname='NetworkPlatformTests.TMDB_ServiceSpec' name='the_webservice__should_get_all_movie_genres__eventually_having_something' time='0.001'/>
   </testsuite>
 </testsuites>
