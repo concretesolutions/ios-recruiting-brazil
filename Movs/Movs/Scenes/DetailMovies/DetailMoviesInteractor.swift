@@ -57,19 +57,19 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
 extension DetailMoviesInteractor: FavoriteActionBusinessLogic {
     
     func removeFavorite(movie: MovieDetailed) {
-        
+        let favoriteWorker = FavoriteMoviesWorker()
+        if favoriteWorker.removeFavoriteMovie(id: movie.id) {
+            self.presenter.favoriteActionResponse(message: "Filme desfavoritado", isFavorite: false)
+        }
     }
 
     func addFavorite(movie: MovieDetailed) {
         let favoriteWorker = FavoriteMoviesWorker()
         // If the movie was added
         if favoriteWorker.addFavoriteMovie(movie: movie) {
-            // This movie already has the propeterty indicating that it's a Favorite Movie
-            let response = DetailMovieModel.Response.Success(movie: movie)
-            self.presenter.presentMovieDetailed(response: response)
-            self.presenter.favoriteActionResponse(message: "Filme adicionado à lista de favoritos ✨")
+            self.presenter.favoriteActionResponse(message: "Filme adicionado à lista de favoritos ✨", isFavorite: true)
         } else {
-            self.presenter.favoriteActionResponse(message: "Problemas ao adicionar filme à lista de favoritos")
+            self.presenter.favoriteActionResponse(message: "Problemas ao adicionar filme à lista de favoritos", isFavorite: false)
         }
     }
     

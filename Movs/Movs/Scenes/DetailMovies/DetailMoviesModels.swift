@@ -42,6 +42,12 @@ enum DetailMovieModel {
             var image: UIImage?
             var message: String
         }
+        
+        struct MovieAddedToFavorite {
+            let message: String
+            let isFavorite: Bool
+            let favoriteIcon: UIImage
+        }
     }
     
     enum ErrorType {

@@ -22,10 +22,15 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
     var movies = [FavoriteMoviesModel.FavoriteMovie]()
     let favoriteMovieCellReuseIdentifier = "FavoriteMovieCell"
     
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         FavoriteMoviesSceneConfigurator.inject(dependenciesFor: self)
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+         interactor.getMovies()
     }
     
     func setup() {
@@ -34,10 +39,6 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Favoritos"
         navigationItem.backBarButtonItem?.title = ""
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-         interactor.getMovies()
     }
     
 }
@@ -51,11 +52,7 @@ extension FavoriteMoviesViewController: FavoriteMoviesDisplayLogic {
     
     // TODO: display error
     func displayError(viewModel: FavoriteMoviesModel.ViewModel.Error) {
-        presentMoviesEmpty()
-    }
-    
-    private func presentMoviesEmpty() {
-        let alertVC = UIAlertController(title: "Nenhum favorito", message: "Que tal iniciar a sua lista? Abra os detalhes de um filme e favorite-o.", preferredStyle: .alert)
+        let alertVC = UIAlertController(title: viewModel.title, message: viewModel.description, preferredStyle: .alert)
         let action = UIAlertAction(title: "ok", style: .default) { (action) in
             self.tabBarController?.selectedIndex = 0
         }

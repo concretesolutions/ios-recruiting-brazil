@@ -35,10 +35,8 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
                                                       posterPath: posterURL,
                                                       imdbVote: imdbVote,
                                                       favoriteButtonImage: buttonImage!)
-        
         viewController!.setRawDetailedMovie(movie: response.movie)
         viewController!.displayMovieDetailed(viewModel: viewModel)
-
     }
     
     func presentError(error: DetailMovieModel.Response.Error) {
@@ -50,8 +48,10 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
 // MAARK: Favorite action
 extension DetailMoviesPresenter: FavoriteActionsPresentationLogic {
 
-    func favoriteActionResponse(message: String) {
-        viewController?.movieAddedToFavorite(message: message)
+    func favoriteActionResponse(message: String, isFavorite: Bool) {
+        let imageFavorite = isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
+        let viewModel = DetailMovieModel.ViewModel.MovieAddedToFavorite(message: message, isFavorite: isFavorite, favoriteIcon: imageFavorite!)
+        viewController?.movieAddedToFavorite(viewModel: viewModel)
     }
     
 }

@@ -31,7 +31,7 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
     
     
     // MARK: - Database actions
-    func removeAll() {
+    private func removeAll() {
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
         do {
@@ -65,15 +65,18 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
         }
     }
     
-    func removeFavoriteMovie(movie: MovieDetailed) -> Bool {
+    func removeFavoriteMovie(id: Int) -> Bool {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
         request.returnsObjectsAsFaults = false
+        
         do {
             let result = try context.fetch(request) as! [NSManagedObject]
             for data in result  {
-                let id = Int(data.value(forKey: idKey) as! Int16)
-                if id == movie.id {
+                let findingId = Int(data.value(forKey: idKey) as! Int)
+                if findingId == id {
                     context.delete(data)
+                    try context.save()
+                    return true
                 }
             }
         } catch {

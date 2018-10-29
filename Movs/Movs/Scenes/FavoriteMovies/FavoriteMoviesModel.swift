@@ -36,7 +36,6 @@ enum FavoriteMoviesModel {
             let title: String
             let description: String
         }    
-        
     }
     
     struct FavoriteMovie {

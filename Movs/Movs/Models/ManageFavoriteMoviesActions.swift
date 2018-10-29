@@ -10,7 +10,7 @@ import Foundation
 
 protocol ManageFavoriteMoviesActions {
     func addFavoriteMovie(movie: MovieDetailed) -> Bool
-    func removeFavoriteMovie(movie: MovieDetailed) -> Bool
+    func removeFavoriteMovie(id: Int) -> Bool
     func getFavoriteMovies() -> [MovieDetailed]
     func findMovieWith(id: Int) -> Bool
 }
@@ -23,5 +23,5 @@ protocol FavoriteActionBusinessLogic {
 
 // For Presenter
 protocol FavoriteActionsPresentationLogic {
-    func favoriteActionResponse(message: String)
+    func favoriteActionResponse(message: String, isFavorite: Bool)
 }

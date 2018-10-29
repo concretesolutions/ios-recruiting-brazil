@@ -22,7 +22,10 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic {
     private let imageBasePath = "http://image.tmdb.org/t/p/w185"
     
     func removeMovie(request: FavoriteMoviesModel.Request.Remove) {
-        
+        if !worker.removeFavoriteMovie(id: request.movieId) {
+            let errorResponse = FavoriteMoviesModel.Response.Error(title: "Erro", description: "Não foi possível remover o filme")
+            presenter.presentError(response: errorResponse)
+        }
     }
     
     func getMovies() {
@@ -32,8 +35,7 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic {
             let response = FavoriteMoviesModel.Response.Success(movies: formattedMovies)
             presenter.presentMovies(response: response)
         } else {
-            print(" 💐 FavoriteMoviesInte: Movies are empty")
-            let responseError = FavoriteMoviesModel.Response.Error(title: "Erro", description: "Não foi possível carregar a lista de favoritos")
+            let responseError = FavoriteMoviesModel.Response.Error(title: "Nenhum favorito", description: "Que tal iniciar a sua lista? Abra os detalhes de um filme e favorite-o.")
             presenter.presentError(response: responseError)
         }
     }

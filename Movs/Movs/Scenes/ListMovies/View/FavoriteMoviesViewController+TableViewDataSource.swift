@@ -22,4 +22,14 @@ extension FavoriteMoviesViewController: UITableViewDataSource {
         return movies.isEmpty ? 0 : movies.count
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let currentMovieId = movies[indexPath.row].id
+            let request = FavoriteMoviesModel.Request.Remove(movieId: currentMovieId)
+            interactor.removeMovie(request: request)
+            movies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
 }

@@ -16,7 +16,7 @@ protocol DetailsMoviesDisplayLogic {
 
 protocol DetailMoviesFavoriteMovie {
     func setRawDetailedMovie(movie: MovieDetailed)
-    func movieAddedToFavorite(message: String)
+    func movieAddedToFavorite(viewModel: DetailMovieModel.ViewModel.MovieAddedToFavorite)
 }
 
 class DetailMoviesViewController: UIViewController {
@@ -40,14 +40,13 @@ class DetailMoviesViewController: UIViewController {
     override func viewDidLoad() {
         DetailMoviesSceneConfigurator.inject(dependenciesFor: self)
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if let movieId = self.movieId {
             let request = DetailMovieModel.Request(movieId: movieId)
             interactor!.fetchMovieDetailed(request: request)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        updateFavoriteMovie()
     }
     
     // MARK: - Setup
@@ -64,20 +63,18 @@ class DetailMoviesViewController: UIViewController {
             if !movie.isFavorite {
                 let movie = MovieDetailed.init(id: movie.id, genres: movie.genres, genresNames: movie.genresNames, title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate, posterPath: movie.posterPath, voteAverage: movie.voteAverage, isFavorite: movie.isFavorite)
                 interactor?.addFavorite(movie: movie)
+            } else {
+                interactor?.removeFavorite(movie: movie)
             }
-        } else {
-            // remove from favorites
-            print("🐠  DetailVC: Detail movies trying to remove from favorite")
         }
     }
     
-    func updateFavoriteMovie() {
-        if let isFavorite = movieRawData?.isFavorite {
-            if isFavorite {
-                favoriteButton.setTitle("Desfavoritar", for: .normal)
-            } else {
-                favoriteButton.setTitle("Favoritar", for: .normal)
-            }
+    func updateFavoriteMovie(isFavorite: Bool) {
+        movieRawData?.isFavorite = isFavorite
+        if isFavorite {
+            favoriteButton.setTitle("Desfavoritar", for: .normal)
+        } else {
+            favoriteButton.setTitle("Favoritar", for: .normal)
         }
     }
     
@@ -91,13 +88,13 @@ extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
         genres.text = viewModel.genreNames
         movieOverview.text = viewModel.overview
         imdbValue.text = viewModel.imdbVote
-        favoriteIcon.image = viewModel.favoriteButtonImage
         year.text = viewModel.year
-        updateFavoriteMovie()
+        favoriteIcon.image = viewModel.favoriteButtonImage
+        updateFavoriteMovie(isFavorite: (movieRawData?.isFavorite)!)
     }
     
     func displayError(viewModel: DetailMovieModel.ViewModel.Error) {
-        
+        // TODO: display Error
     }
     
 }
@@ -109,10 +106,11 @@ extension DetailMoviesViewController: DetailMoviesFavoriteMovie {
         self.movieRawData = movie
     }
     
-    func movieAddedToFavorite(message: String) {
+    func movieAddedToFavorite(viewModel: DetailMovieModel.ViewModel.MovieAddedToFavorite) {
         // Update the screen presentation
-        updateFavoriteMovie()
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        updateFavoriteMovie(isFavorite: viewModel.isFavorite)
+        favoriteIcon.image = viewModel.favoriteIcon
+        let alertController = UIAlertController(title: nil, message: viewModel.message, preferredStyle: .alert)
         let action = UIAlertAction(title: "ok", style: .default) { (action) in
             self.dismiss(animated: true, completion: nil)
         }
