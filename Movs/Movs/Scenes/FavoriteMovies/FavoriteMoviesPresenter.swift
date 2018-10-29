@@ -18,11 +18,13 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentationLogic {
     var viewController: FavoriteMoviesDisplayLogic!
     
     func presentMovies(response: FavoriteMoviesModel.Response.Success) {
-        
+        let viewModel = FavoriteMoviesModel.ViewModel.Success(movies: response.movies)
+        viewController.displayMovies(viewModel: viewModel)
     }
     
     func presentError(response: FavoriteMoviesModel.Response.Error) {
-        
+        let viewModel = FavoriteMoviesModel.ViewModel.Error(title: response.title, description: response.description)
+        viewController.displayError(viewModel: viewModel)
     }
     
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		253097532186143200FFA88C /* String+YearRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253097522186143200FFA88C /* String+YearRelease.swift */; };
 		253097552186252C00FFA88C /* ManageFavoriteMoviesActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253097542186252C00FFA88C /* ManageFavoriteMoviesActions.swift */; };
+		2530975A2186583F00FFA88C /* FavoriteMoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253097592186583F00FFA88C /* FavoriteMoviesTableViewCell.swift */; };
 		25317DA02184BB0300B25A81 /* FavoriteMovies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25317D9E2184BB0300B25A81 /* FavoriteMovies.xcdatamodeld */; };
 		25317DA62184C46600B25A81 /* FavoriteMoviesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25317DA52184C46600B25A81 /* FavoriteMoviesWorker.swift */; };
 		25317DAA2184E49000B25A81 /* FavoriteMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25317DA92184E49000B25A81 /* FavoriteMoviesViewController.swift */; };
@@ -65,6 +66,7 @@
 		1BCF8750C2D7CF6522C65D9B /* Pods-MovsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovsTests/Pods-MovsTests.release.xcconfig"; sourceTree = "<group>"; };
 		253097522186143200FFA88C /* String+YearRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+YearRelease.swift"; sourceTree = "<group>"; };
 		253097542186252C00FFA88C /* ManageFavoriteMoviesActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageFavoriteMoviesActions.swift; sourceTree = "<group>"; };
+		253097592186583F00FFA88C /* FavoriteMoviesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesTableViewCell.swift; sourceTree = "<group>"; };
 		25317D9F2184BB0300B25A81 /* FavoriteMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteMovies.xcdatamodel; sourceTree = "<group>"; };
 		25317DA52184C46600B25A81 /* FavoriteMoviesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesWorker.swift; sourceTree = "<group>"; };
 		25317DA92184E49000B25A81 /* FavoriteMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2530975B2186588600FFA88C /* UIExtension */ = {
+			isa = PBXGroup;
+			children = (
+				25CE31932181317B0009EF05 /* PopularMovieTableViewCell.swift */,
+				253097592186583F00FFA88C /* FavoriteMoviesTableViewCell.swift */,
+			);
+			path = UIExtension;
+			sourceTree = "<group>";
+		};
 		25317DAB2185145400B25A81 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +221,7 @@
 		25CE2C5A217E4B770009EF05 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				2530975B2186588600FFA88C /* UIExtension */,
 				25CE31972181339C0009EF05 /* UIView+MovieCard.swift */,
 				25CE31992181425E0009EF05 /* UIImageView+MovieCard.swift */,
 				25CE31D02182946B0009EF05 /* FetchError.swift */,
@@ -258,8 +270,8 @@
 				25317DB421851DCA00B25A81 /* View */,
 				25317DAC21851AEB00B25A81 /* FavoriteMoviesModel.swift */,
 				25317DAE21851C1E00B25A81 /* FavoriteMoviesInteractor.swift */,
-				25317DB021851C5700B25A81 /* FavoriteMoviesFactory.swift */,
 				25317DB221851D3C00B25A81 /* FavoriteMoviesPresenter.swift */,
+				25317DB021851C5700B25A81 /* FavoriteMoviesFactory.swift */,
 			);
 			path = FavoriteMovies;
 			sourceTree = "<group>";
@@ -301,7 +313,6 @@
 		25CE3192218131560009EF05 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				25CE31932181317B0009EF05 /* PopularMovieTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -522,6 +533,7 @@
 				25CE2C75217EBD870009EF05 /* DetailMovieWorker.swift in Sources */,
 				25CE2C1E217E3FB90009EF05 /* ViewController.swift in Sources */,
 				25CE31A6218164250009EF05 /* DetailMoviesPresenter.swift in Sources */,
+				2530975A2186583F00FFA88C /* FavoriteMoviesTableViewCell.swift in Sources */,
 				25CE319A2181425E0009EF05 /* UIImageView+MovieCard.swift in Sources */,
 				25CE3190218131170009EF05 /* ListMoviesViewController+TableViewDataSource.swift in Sources */,
 				25CE316721809FFE0009EF05 /* MovieList.swift in Sources */,

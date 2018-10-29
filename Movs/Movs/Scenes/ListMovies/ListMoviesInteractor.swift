@@ -46,7 +46,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic {
             movieFormatted.posterPath = imageBasePath + movie.posterPath
             moviesFormatted.append(movieFormatted)
         }
-        
+   
         return moviesFormatted
     }
     // TODO: check locally the movies id

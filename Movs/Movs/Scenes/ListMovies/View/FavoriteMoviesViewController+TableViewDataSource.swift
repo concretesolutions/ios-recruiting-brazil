@@ -9,14 +9,17 @@
 import UIKit
 
 extension FavoriteMoviesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: favoriteMovieCellReuseIdentifier) as! FavoriteMoviesTableViewCell
+        if !movies.isEmpty {
+            cell.configureCellWith(data: movies[indexPath.row])
+        }
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return movies.isEmpty ? 0 : movies.count
     }
-    
     
 }

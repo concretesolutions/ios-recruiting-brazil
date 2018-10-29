@@ -14,7 +14,7 @@ protocol DetailMoviesBusinessLogic {
 
 class DetailMoviesInteractor: DetailMoviesBusinessLogic {
     
-    var presenter: DetailMoviesPresentationLogic!
+    var presenter: (DetailMoviesPresentationLogic & FavoriteActionsPresentationLogic)!
     var worker = DetailMovieWorker()
     // w185 is a nice size for mobile app
     private let basePath = "http://image.tmdb.org/t/p/w185"
@@ -43,9 +43,15 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
             return genre.name
         })
         movieFormatted.genresNames = genresNames
+        // TODO: check if the movie is in Favorite list
         return movieFormatted
     }
     
+    private func checkIfIsFavorite(movie: MovieDetailed) -> Bool {
+//        let favoriteWorker = FavoriteMoviesWorker()
+//        favoriteWorker.
+        return false
+    }
     
 }
 
@@ -54,7 +60,6 @@ extension DetailMoviesInteractor: FavoriteActionBusinessLogic {
     func removeFavorite(movie: MovieDetailed) {
         
     }
-    
 
     func addFavorite(movie: MovieDetailed) {
         let favoriteWorker = FavoriteMoviesWorker()
@@ -63,6 +68,9 @@ extension DetailMoviesInteractor: FavoriteActionBusinessLogic {
             // This movie already has the propeterty indicating that it's a Favorite Movie
             let response = DetailMovieModel.Response.Success(movie: movie)
             self.presenter.presentMovieDetailed(response: response)
+            self.presenter.favoriteActionResponse(message: "Filme adicionado à lista de favoritos ✨")
+        } else {
+            self.presenter.favoriteActionResponse(message: "Problemas ao adicionar filme à lista de favoritos")
         }
     }
     

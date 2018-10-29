@@ -37,7 +37,7 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
         do {
             try context.execute(deleteRequest)
         } catch {
-            
+            print("❗️ Got remove all favorites")
         }
     }
     /**
@@ -45,16 +45,15 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
      - parameter movie: all data about the movie
      */
     func addFavoriteMovie(movie: MovieDetailed) -> Bool {
-        removeAll()
-        
+
         let entity = NSEntityDescription.entity(forEntityName: movieCoreData, in: context)
         let newFavorite = NSManagedObject(entity: entity!, insertInto: context)
- 
+
         newFavorite.setValue(movie.id, forKey: idKey)
         newFavorite.setValue(movie.title, forKey: titleKey)
         newFavorite.setValue(movie.overview, forKey: overviewKey)
         newFavorite.setValue(movie.releaseDate, forKey: releaseDateKey)
-        newFavorite.setValue(movie.genres, forKey: genresKey)
+        newFavorite.setValue(movie.genresNames, forKey: genresKey)
         newFavorite.setValue(movie.posterPath, forKey: posterPathKey)
         newFavorite.setValue(movie.voteAverage, forKey: voteAverageKey)
         
@@ -86,7 +85,7 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
     func getFavoriteMovies() -> [MovieDetailed] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
         request.returnsObjectsAsFaults = false
-
+        
         var movies = [MovieDetailed]()
         do {
             let result = try context.fetch(request)
@@ -103,9 +102,22 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
                 movies.append(movie)
             }
         } catch {
+            print("❗️ Got favorite movies error")
             return []
         }
         return movies
     }
+    
+    func findMovieWith(id: Int) -> Bool {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            return true
+        } catch {
+            return false
+        }
+    }
+    
     
 }

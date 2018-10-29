@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 protocol FavoriteMoviesDisplayLogic {
     func displayMovies(viewModel: FavoriteMoviesModel.ViewModel.Success)
@@ -16,38 +15,54 @@ protocol FavoriteMoviesDisplayLogic {
 
 class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
     
-    let favoritesWorker = FavoriteMoviesWorker()
     var interactor: FavoriteMoviesBusinessLogic!
     
     @IBOutlet weak var tableView: UITableView!
 
+    var movies = [FavoriteMoviesModel.FavoriteMovie]()
+    let favoriteMovieCellReuseIdentifier = "FavoriteMovieCell"
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
-        
         FavoriteMoviesSceneConfigurator.inject(dependenciesFor: self)
-        
-//        let movie = MovieDetailed(id: 123, genres: [], title: "woww title", overview: "super overview", releaseDate: nil, posterPath: "", voteAverage: 3.0, isFavorite: true)
-//        favoritesWorker.addFavoriteMovie(movie: movie)
-        favoritesWorker.getFavoriteMovies()
+        setup()
     }
     
-    // MARK: - Fetch Results delegate
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.reloadData()
+    func setup() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "Favoritos"
+        navigationItem.backBarButtonItem?.title = ""
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("🌼 FavoriteVC: willAppear")
+         interactor.getMovies()
+    }
     
 }
 
 extension FavoriteMoviesViewController: FavoriteMoviesDisplayLogic {
     
     func displayMovies(viewModel: FavoriteMoviesModel.ViewModel.Success) {
-        
+        movies = viewModel.movies
+        tableView.reloadData()
+        print("🌼 FavoriteVC: displyaMovies, counting: \(movies.count)")
     }
     
+    // TODO: display error
     func displayError(viewModel: FavoriteMoviesModel.ViewModel.Error) {
-        
+        presentMoviesEmpty()
     }
     
+    private func presentMoviesEmpty() {
+        let alertVC = UIAlertController(title: "Nenhum favorito", message: "Que tal iniciar a sua lista? Abra os detalhes de um filme e favorite-o.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "ok", style: .default) { (action) in
+            self.tabBarController?.selectedIndex = 0
+        }
+        alertVC.addAction(action)
+        self.present(alertVC, animated: true, completion: nil)
+    }
     
 }

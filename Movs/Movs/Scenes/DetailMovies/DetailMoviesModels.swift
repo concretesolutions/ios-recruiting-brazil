@@ -24,6 +24,7 @@ enum DetailMovieModel {
             var image: UIImage?
             let error: FetchError
         }
+        
     }
     
     enum ViewModel {

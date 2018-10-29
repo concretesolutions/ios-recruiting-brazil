@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,17 +18,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pLd-VX-sAX">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pLd-VX-sAX">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="157" id="bBO-CD-9AC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteMovieCell" rowHeight="157" id="bBO-CD-9AC" customClass="FavoriteMoviesTableViewCell" customModule="Movs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="157"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bBO-CD-9AC" id="Uo7-F6-y3F">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="156.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gT9-16-tk4" customClass="UIImageViewMovieCard" customModule="Movs" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="11" width="104" height="135"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="104" id="Jys-DA-0Sn"/>
+                                                        <constraint firstAttribute="height" constant="135" id="sAv-hy-2fw"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eLI-XG-Zoz">
+                                                    <rect key="frame" x="138" y="11" width="217" height="132"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ra6-ea-Wem">
+                                                            <rect key="frame" x="0.0" y="0.0" width="217" height="20.5"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dtm-pp-rOw" userLabel="yellowLine">
+                                                            <rect key="frame" x="0.0" y="25.5" width="217" height="1"/>
+                                                            <color key="backgroundColor" name="secondaryColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="iy8-9B-ioq"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEY-PL-pPG">
+                                                            <rect key="frame" x="0.0" y="31.5" width="40" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="HEh-HZ-l2h"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rba-bb-hmJ">
+                                                            <rect key="frame" x="0.0" y="54.5" width="217" height="77.5"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Rba-bb-hmJ" firstAttribute="top" secondItem="FEY-PL-pPG" secondAttribute="bottom" constant="5" id="Vlb-px-L4Z"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Rba-bb-hmJ" secondAttribute="trailing" id="WbX-V9-GqB"/>
+                                                        <constraint firstItem="Rba-bb-hmJ" firstAttribute="leading" secondItem="eLI-XG-Zoz" secondAttribute="leading" id="aY6-mg-VWl"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Rba-bb-hmJ" secondAttribute="bottom" id="eGx-pp-9vH"/>
+                                                        <constraint firstItem="ra6-ea-Wem" firstAttribute="leading" secondItem="eLI-XG-Zoz" secondAttribute="leading" id="hDp-d1-7LS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ra6-ea-Wem" secondAttribute="trailing" id="r1d-1r-bOe"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="eLI-XG-Zoz" secondAttribute="trailing" constant="5" id="9F3-lI-het"/>
+                                                <constraint firstItem="eLI-XG-Zoz" firstAttribute="leading" secondItem="gT9-16-tk4" secondAttribute="trailing" constant="19" id="Oyh-kA-sdS"/>
+                                                <constraint firstItem="gT9-16-tk4" firstAttribute="leading" secondItem="Uo7-F6-y3F" secondAttribute="leadingMargin" id="XTg-7o-KfY"/>
+                                                <constraint firstItem="eLI-XG-Zoz" firstAttribute="top" secondItem="Uo7-F6-y3F" secondAttribute="topMargin" id="bYL-0m-hH2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="eLI-XG-Zoz" secondAttribute="bottom" constant="3" id="bso-Ti-eZx"/>
+                                                <constraint firstItem="gT9-16-tk4" firstAttribute="top" secondItem="Uo7-F6-y3F" secondAttribute="topMargin" id="sJE-Xh-Kac"/>
+                                                <constraint firstItem="gT9-16-tk4" firstAttribute="bottom" secondItem="Uo7-F6-y3F" secondAttribute="bottomMargin" id="vHX-Hr-sK8"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="movieDescription" destination="Rba-bb-hmJ" id="ANx-EQ-vvT"/>
+                                            <outlet property="movieImageView" destination="gT9-16-tk4" id="d9i-it-6Nu"/>
+                                            <outlet property="movieTitle" destination="ra6-ea-Wem" id="b66-WD-hgV"/>
+                                            <outlet property="movieYear" destination="FEY-PL-pPG" id="PyM-Ng-1v2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -50,4 +119,9 @@
             <point key="canvasLocation" x="189.59999999999999" y="95.802098950524751"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="secondaryColor">
+            <color red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

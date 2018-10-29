@@ -27,7 +27,6 @@ class PopularMovieTableViewCell: UITableViewCell {
         self.movieDescription.text = data.overview
         self.favoriteButton.imageView?.image = data.isFavorite == true ? favoriteFull : favoriteEmpty
         let posterPath = data.posterPath
-
         let url = URL(string: posterPath)
         movieImageView.kf.setImage(with: url)
     }

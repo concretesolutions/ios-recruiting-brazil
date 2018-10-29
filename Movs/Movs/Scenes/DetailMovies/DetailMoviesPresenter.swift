@@ -48,13 +48,10 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
 }
 
 // MAARK: Favorite action
-extension DetailMoviesPresenter: DetailsMoviesPresentFavoriteAction {
-    
-    func addMovieToFavorite(result: Bool) {
-        if result {
-            
-            
-        }
+extension DetailMoviesPresenter: FavoriteActionsPresentationLogic {
+
+    func favoriteActionResponse(message: String) {
+        viewController?.movieAddedToFavorite(message: message)
     }
     
 }

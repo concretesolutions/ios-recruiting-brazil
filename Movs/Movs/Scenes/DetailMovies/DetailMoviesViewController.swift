@@ -45,7 +45,11 @@ class DetailMoviesViewController: UIViewController {
             let request = DetailMovieModel.Request(movieId: movieId)
             interactor!.fetchMovieDetailed(request: request)
         }
-    }    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateFavoriteMovie()
+    }
     
     // MARK: - Setup
     private func setup() {
@@ -56,12 +60,12 @@ class DetailMoviesViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func favoriteMovieAction(_ sender: Any) {
-        print("🐞 favoritar")
-        if let movie = movieRawData, isFavorite {
+        if let movie = movieRawData, !isFavorite {
             let movie = MovieDetailed.init(id: movie.id, genres: movie.genres, genresNames: movie.genresNames, title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate, posterPath: movie.posterPath, voteAverage: movie.voteAverage, isFavorite: movie.isFavorite)
             interactor?.addFavorite(movie: movie)
         } else {
             // remove from favorites
+            print("🐠  DetailVC: Detail movies trying to remove from favorite")
         }
     }
     

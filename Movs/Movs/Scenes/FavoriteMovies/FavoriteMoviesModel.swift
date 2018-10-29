@@ -18,8 +18,7 @@ enum FavoriteMoviesModel {
     
     enum Response {
         struct Success {
-            let movie: MovieDetailed
-            let genreNames: [String]
+            let movies: [FavoriteMovie]
         }
         
         struct Error {
@@ -30,16 +29,22 @@ enum FavoriteMoviesModel {
     
     enum ViewModel {
         struct Success {
-            let title: String
-            let overview: String
-            let genreNames: String
-            let year: String
-            let posterPath: URL
+            let movies: [FavoriteMovie]
         }
         
         struct Error {
             let title: String
             let description: String
-        }
+        }    
+        
     }
+    
+    struct FavoriteMovie {
+        let id: Int
+        let title: String
+        let overview: String
+        let posterPath: URL
+        let year: String
+    }
+    
 }
