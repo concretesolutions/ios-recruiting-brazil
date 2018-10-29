@@ -43,14 +43,13 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
             return genre.name
         })
         movieFormatted.genresNames = genresNames
-        // TODO: check if the movie is in Favorite list
+        movieFormatted.isFavorite = checkIfIsFavorite(movie: movie)
         return movieFormatted
     }
     
     private func checkIfIsFavorite(movie: MovieDetailed) -> Bool {
-//        let favoriteWorker = FavoriteMoviesWorker()
-//        favoriteWorker.
-        return false
+        let favoriteWorker = FavoriteMoviesWorker()
+        return favoriteWorker.findMovieWith(id: movie.id)
     }
     
 }

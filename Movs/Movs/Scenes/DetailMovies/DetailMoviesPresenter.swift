@@ -28,7 +28,6 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
         let genresFormatted = response.movie.genresNames.joined(separator: ", ")
         let buttonImage = response.movie.isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
         let posterURL = URL(string: response.movie.posterPath)!
-
         let viewModel = DetailMovieModel.ViewModel.Success(title: response.movie.title,
                                                       overview: response.movie.overview,
                                                       genreNames: genresFormatted,
@@ -37,8 +36,9 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
                                                       imdbVote: imdbVote,
                                                       favoriteButtonImage: buttonImage!)
         
-        viewController!.displayMovieDetailed(viewModel: viewModel)
         viewController!.setRawDetailedMovie(movie: response.movie)
+        viewController!.displayMovieDetailed(viewModel: viewModel)
+
     }
     
     func presentError(error: DetailMovieModel.Response.Error) {

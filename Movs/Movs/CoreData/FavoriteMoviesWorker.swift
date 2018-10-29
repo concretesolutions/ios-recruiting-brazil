@@ -90,14 +90,14 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
-                let id = data.value(forKey: idKey) as! Int16
+                let id = data.value(forKey: idKey) as! Int
                 let title = data.value(forKey: titleKey) as! String
                 let genres = data.value(forKey: genresKey) as! [String]
                 let overview = data.value(forKey: overviewKey) as! String
                 let releaseDate = data.value(forKey: releaseDateKey) as! String
                 let posterPath = data.value(forKey: posterPathKey) as! String
                 let voteAverage = data.value(forKey: voteAverageKey) as! Double
-
+                
                 let movie = MovieDetailed.init(id: Int(id), genres: [], genresNames: genres, title: title, overview: overview, releaseDate: releaseDate, posterPath: posterPath, voteAverage: voteAverage, isFavorite: true)
                 movies.append(movie)
             }
@@ -109,15 +109,9 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
     }
     
     func findMovieWith(id: Int) -> Bool {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            return true
-        } catch {
-            return false
-        }
+        let movies = getFavoriteMovies()
+        let movieFound = movies.filter { $0.id == id }
+        return movieFound.count == 0 ? false : true
     }
-    
-    
+
 }

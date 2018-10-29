@@ -37,7 +37,6 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("🌼 FavoriteVC: willAppear")
          interactor.getMovies()
     }
     
@@ -48,7 +47,6 @@ extension FavoriteMoviesViewController: FavoriteMoviesDisplayLogic {
     func displayMovies(viewModel: FavoriteMoviesModel.ViewModel.Success) {
         movies = viewModel.movies
         tableView.reloadData()
-        print("🌼 FavoriteVC: displyaMovies, counting: \(movies.count)")
     }
     
     // TODO: display error

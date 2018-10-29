@@ -35,7 +35,6 @@ class DetailMoviesViewController: UIViewController {
     // MARK: - Auxiliar variables
     private var movieRawData: MovieDetailed?
     var movieId: Int?
-    var isFavorite: Bool = false
     
     // MARK: - View life cycle
     override func viewDidLoad() {
@@ -60,9 +59,12 @@ class DetailMoviesViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func favoriteMovieAction(_ sender: Any) {
-        if let movie = movieRawData, !isFavorite {
-            let movie = MovieDetailed.init(id: movie.id, genres: movie.genres, genresNames: movie.genresNames, title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate, posterPath: movie.posterPath, voteAverage: movie.voteAverage, isFavorite: movie.isFavorite)
-            interactor?.addFavorite(movie: movie)
+        
+        if let movie = movieRawData {
+            if !movie.isFavorite {
+                let movie = MovieDetailed.init(id: movie.id, genres: movie.genres, genresNames: movie.genresNames, title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate, posterPath: movie.posterPath, voteAverage: movie.voteAverage, isFavorite: movie.isFavorite)
+                interactor?.addFavorite(movie: movie)
+            }
         } else {
             // remove from favorites
             print("🐠  DetailVC: Detail movies trying to remove from favorite")
@@ -70,10 +72,12 @@ class DetailMoviesViewController: UIViewController {
     }
     
     func updateFavoriteMovie() {
-        if isFavorite {
-            favoriteButton.titleLabel?.text = "Desfavoritar"  
-        } else {
-            favoriteButton.titleLabel?.text = "Favoritar"
+        if let isFavorite = movieRawData?.isFavorite {
+            if isFavorite {
+                favoriteButton.setTitle("Desfavoritar", for: .normal)
+            } else {
+                favoriteButton.setTitle("Favoritar", for: .normal)
+            }
         }
     }
     
@@ -89,6 +93,7 @@ extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
         imdbValue.text = viewModel.imdbVote
         favoriteIcon.image = viewModel.favoriteButtonImage
         year.text = viewModel.year
+        updateFavoriteMovie()
     }
     
     func displayError(viewModel: DetailMovieModel.ViewModel.Error) {
@@ -105,10 +110,8 @@ extension DetailMoviesViewController: DetailMoviesFavoriteMovie {
     }
     
     func movieAddedToFavorite(message: String) {
-        // Every action about "add favorite" invest the action about being favorite or not
-        isFavorite = !isFavorite
         // Update the screen presentation
-        self.updateFavoriteMovie()
+        updateFavoriteMovie()
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "ok", style: .default) { (action) in
             self.dismiss(animated: true, completion: nil)

@@ -24,7 +24,6 @@ class FavoriteMoviesTableViewCell: UITableViewCell {
         movieDescription.text = data.overview
         movieImageView.kf.setImage(with: data.posterPath)
         movieYear.text = data.year
-        print("🎀 configuring: \(data.title)")
     }
     
 }
