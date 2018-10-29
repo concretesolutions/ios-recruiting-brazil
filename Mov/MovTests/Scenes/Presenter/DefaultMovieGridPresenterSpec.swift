@@ -22,6 +22,10 @@ class DefaultMovieGridPresenterSpec: QuickSpec {
                 return MovieGridUnit(title: String(movieTitle), posterPath: "", isFavorite: false)
             }
             
+            context("when initialized") {
+                
+            }
+            
             context("when requested to present movies") {
                 beforeEach {
                     presenter.present(movies: movieGridUnitsMock)
@@ -33,7 +37,7 @@ class DefaultMovieGridPresenterSpec: QuickSpec {
                 
                 it("send correctly to viewOutput the data to be displayed") {
                     let viewModelsMock = movieGridUnitsMock.map { unit in
-                        return MovieGridViewModel(title: unit.title, poster: Images.poster_placeholder, isFavoriteIcon: Images.isFavoriteIconEmpty)
+                        return MovieGridViewModel(title: unit.title, posterPath: unit.posterPath, isFavoriteIcon: Images.isFavoriteIconGray)
                     }
                     
                     expect(viewOutput.receivedViewModels).to(equal(viewModelsMock))

@@ -38,14 +38,6 @@ class MovieGridPresenterMock: MovieGridPresenter {
         return self.calls.contains(method)
     }
     
-    /**
-        Reset this mock to it's original state
-     */
-    public func resetMock() {
-        self.calls.removeAll()
-        self.receivedMovies.removeAll()
-    }
-    
     func present(movies: [MovieGridUnit]) {
         self.calls.insert(.presentMovies)
         self.receivedMovies = movies

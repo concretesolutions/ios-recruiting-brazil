@@ -16,49 +16,54 @@ class DefaultMovieGridInteractorSpec: QuickSpec {
     
     override func spec() {
         describe("the movie grid interactor") {
-            let movieFethcer = MovieFetcherMock()
-            let presenter = MovieGridPresenterMock()
-            let moviePersistence = MoviePersistenceMock()
             
-            let interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFethcer, moviePersistence: moviePersistence)
+            var interactor: DefaultMovieGridInteractor!
             
-            context("when succeed to fetch movies") {
-
+            context("when initialized") {
+                var movieFetcher: MovieFetcherMock!
+                var moviePersistence: MoviePersistenceMock!
+                var presenter: MovieGridPresenterMock!
+                
                 beforeEach {
-                    movieFethcer.flawedFetch = false
-                    interactor.fetchMovieList(page: 1)
+                    movieFetcher = MovieFetcherMock()
+                    moviePersistence = MoviePersistenceMock()
+                    presenter = MovieGridPresenterMock()
+                    
+                    interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, moviePersistence: moviePersistence)
                 }
-                
-                it("call presenter's presentMovies") {
-                    expect(presenter.didCall(method: .presentMovies)).to(beTrue())
-                }
-                
-                it("send correctly to presenter all data fetched") {
-                    let fetchedMoviesMock = movieFethcer.mockMovies.map { movie in
-                        return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: false)
+                    
+                context("and succeed to fetch movies") {
+                    var fetchedMoviesMock: [MovieGridUnit]!
+                    
+                    beforeEach {
+                        fetchedMoviesMock = movieFetcher.mockMovies.map { movie in
+                            return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: false)
+                        }
+                        
+                        movieFetcher.flawedFetch = false
+                        interactor.fetchMovieList(page: 1)
                     }
                     
-                    expect(presenter.receivedMovies).to(equal(fetchedMoviesMock))
+                    it("presentMovies") {
+                        expect(presenter.didCall(method: .presentMovies)).to(beTrue())
+                    }
+                    
+                    it("send correctly to presenter all data fetched") {
+
+                        expect(presenter.receivedMovies).to(equal(fetchedMoviesMock))
+                    }
                 }
                 
-                afterEach {
-                    presenter.resetMock()
-                }
-            }
-            
-            context("when fail to fetch movies"){
-                
-                beforeEach {
-                    movieFethcer.flawedFetch = true
-                    interactor.fetchMovieList(page: 1)
-                }
-                
-                it("call presenter's presentNetworkError") {
-                    expect(presenter.didCall(method: .presentNetworkError)).to(beTrue())
-                }
-                
-                afterEach {
-                    presenter.resetMock()
+                context("and fail to fetch movies") {
+                    
+                    beforeEach {
+                        movieFetcher.flawedFetch = true
+                        interactor.fetchMovieList(page: 1)
+                    }
+                    
+                    it("present presentNetworkError") {
+                        expect(presenter.didCall(method: .presentNetworkError)).to(beTrue())
+                    }
                 }
             }
         }
