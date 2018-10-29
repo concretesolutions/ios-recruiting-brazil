@@ -11,6 +11,9 @@ import UIKit
 extension MainScreenViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.interactor?.filterMoviesLocally(text: searchText)
+        if searchText == "" {
+            self.isFiltering = false
+        }
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

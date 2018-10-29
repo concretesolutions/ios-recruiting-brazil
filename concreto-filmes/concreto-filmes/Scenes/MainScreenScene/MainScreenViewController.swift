@@ -18,6 +18,7 @@ enum AppStatus {
     case resetFetch
     case fetchingMore
     case finish
+    case emptyList
 }
 
 protocol MainScreenDisplayLogic: class {
@@ -39,13 +40,22 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
             case .resetFetch:
                 DispatchQueue.main.async {
                     self.activityIndicator.startAnimating()
+                    self.emptyListLabel.isHidden = true
                 }
             case .finish:
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
+                    self.emptyListLabel.isHidden = true
                 }
             case .fetchingMore:
                 self.beginBatchFetch()
+                DispatchQueue.main.async {
+                    self.emptyListLabel.isHidden = true
+                }
+            case .emptyList:
+                DispatchQueue.main.async {
+                    self.emptyListLabel.isHidden = false
+                }
             }
         }
     }
@@ -55,6 +65,16 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         activityIndicator.color = .white
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
+    }()
+    
+    private let emptyListLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "Desculpe, não pudemos achar nada...\nVocê pode tentar apertar o botão de busca caso não tenha feito."
+        label.numberOfLines = 3
+        label.isHidden = true
+        label.textAlignment = .center
+        return label
     }()
 
     private let leftBarButton: UIBarButtonItem = {
@@ -108,6 +128,9 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     func display(movies: [MainScreen.ViewModel.MovieViewModel]) {
         self.displayedMovies = movies
         self.applicationStatus = .finish
+        if movies.isEmpty {
+            self.applicationStatus = .emptyList
+        }
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
@@ -154,11 +177,17 @@ extension MainScreenViewController: CodeView {
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.titleView = searchBar
         view.addSubview(self.activityIndicator)
+        view.addSubview(self.emptyListLabel)
     }
 
     func setupConstraints() {
-        self.activityIndicator.snp.makeConstraints { (make) in
-            make.center.equalTo(self.view)
+        self.activityIndicator.snp.makeConstraints { (maker) in
+            maker.center.equalTo(self.view)
+        }
+        self.emptyListLabel.snp.makeConstraints { (maker) in
+            maker.center.equalTo(view)
+            maker.left.equalTo(view).offset(20)
+            maker.right.equalTo(view).inset(20)
         }
     }
 

@@ -10,6 +10,7 @@ import UIKit
 
 extension MainScreenViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.searchBar.endEditing(true)
         if isFiltering {
             router?.routeToMovieDetail(shouldFilter: true, index: indexPath.item)
         } else {
