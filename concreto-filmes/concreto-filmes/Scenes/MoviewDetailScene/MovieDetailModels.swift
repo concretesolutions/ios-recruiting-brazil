@@ -21,6 +21,7 @@ enum MovieDetail {
         var title: String
         var genres: String
         var overview: String
+        var releaseDate: String
         var isFavorite: Bool
     }
 }

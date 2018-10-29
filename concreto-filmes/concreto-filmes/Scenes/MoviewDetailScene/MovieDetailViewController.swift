@@ -44,6 +44,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     
     private let favoriteButton: UIButton = {
         let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
         return button
     }()
 
@@ -135,6 +136,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         self.overviewView.text = viewModel.overview
         self.titleLabel.text = viewModel.title
         self.genresLabel.text = viewModel.genres
+        self.releaseDateView.text = viewModel.releaseDate
     }
 }
 
@@ -172,7 +174,6 @@ extension MovieDetailViewController: CodeView {
             maker.width.equalTo(verticalStack)
         }
         self.overviewView.snp.makeConstraints { (maker) in
-//            maker.top.equalTo(verticalStack)
             maker.width.equalTo(verticalStack)
         }
     }

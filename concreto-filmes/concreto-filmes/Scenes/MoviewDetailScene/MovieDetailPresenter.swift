@@ -24,8 +24,9 @@ class MovieDetailPresenter: MovieDetailPresentationLogic {
             return Genre.fetchedGenres[id] ?? "Uknown"
         }
         let genresString = genres.joined(separator: ", ")
-        
-        let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genresString, overview: movie.overview, isFavorite: false)
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: movie.releaseDate)
+        let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genresString, overview: movie.overview, releaseDate: "\(year)", isFavorite: false)
         viewController?.displayMovie(viewModel: viewModel)
     }
 
