@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol MovieGridViewOutput {
+protocol MovieGridViewOutput: class {
     
     func display(movies: [MovieGridViewModel])
     

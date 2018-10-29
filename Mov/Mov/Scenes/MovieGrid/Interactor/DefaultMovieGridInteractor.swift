@@ -11,13 +11,14 @@ import Foundation
 
 final class DefaultMovieGridInteractor {
     
-    var presenter: MovieGridPresenter!
+    let presenter: MovieGridPresenter
     
     private let movieFetcher: MovieFetcher
     
     private let moviePersistence: MoviePersistence
     
-    init(movieFetcher: MovieFetcher, moviePersistence: MoviePersistence) {
+    init(presenter: MovieGridPresenter, movieFetcher: MovieFetcher, moviePersistence: MoviePersistence) {
+        self.presenter = presenter
         self.movieFetcher = movieFetcher
         self.moviePersistence = moviePersistence
     }
@@ -35,7 +36,6 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
     func fetchMovieList(page: Int) {
         self.movieFetcher.fetchPopularMovies(page: page) { [weak self] result in
             guard let self = self else { return }
-            self.presenter.presentNetworkError()
             
             switch result {
             case .success(let movies):

@@ -11,15 +11,19 @@ import Foundation
 class MovieGridBuilder {
     
     static func build() -> MovieGridViewController {
-        let viewOutput = MovieGridViewController()
-        let interactor = DefaultMovieGridInteractor(movieFetcher: movieFetcher, moviePersistence: moviePersistence)
-        let presenter = DefaultMovieGridPresenter()
-        
-        viewOutput.interactor = interactor
-        interactor.presenter = presenter
-        presenter.viewOutput = viewOutput
-        
         return viewOutput
+    }
+    
+    static var viewOutput: MovieGridViewController {
+        return MovieGridViewController()
+    }
+    
+    static func presenter(viewOutput: MovieGridViewOutput) -> MovieGridPresenter {
+        return DefaultMovieGridPresenter(viewOutput: viewOutput)
+    }
+    
+    static func interactor(presenter: MovieGridPresenter) -> MovieGridInteractor {
+        return DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, moviePersistence: moviePersistence)
     }
     
     static private var movieFetcher: MovieFetcher {

@@ -10,7 +10,11 @@ import Foundation
 
 final class DefaultMovieGridPresenter {
     
-    var viewOutput: MovieGridViewOutput!
+    unowned let viewOutput: MovieGridViewOutput
+    
+    init(viewOutput: MovieGridViewOutput) {
+        self.viewOutput = viewOutput
+    }
     
     private func buildMovieGridViewModels(from movies: [MovieGridUnit]) -> [MovieGridViewModel] {
         return movies.map { movie in
