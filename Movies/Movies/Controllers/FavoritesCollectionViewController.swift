@@ -9,13 +9,12 @@
 import UIKit
 
 class FavoritesCollectionViewController: UICollectionViewController {
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     navigationItem.searchController = UISearchController(searchResultsController: nil)
     navigationItem.hidesSearchBarWhenScrolling = false
   }
-  
-}
 
+}
