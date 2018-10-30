@@ -94,7 +94,8 @@ extension DetailMoviesViewController: DetailsMoviesDisplayLogic {
     }
     
     func displayError(viewModel: DetailMovieModel.ViewModel.Error) {
-        // TODO: display Error
+        let viewError = MovieListErrorView(frame: view.frame, image: viewModel.image!, message: viewModel.message)
+        view.addSubview(viewError)
     }
     
 }

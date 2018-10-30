@@ -40,7 +40,8 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
     }
     
     func presentError(error: DetailMovieModel.Response.Error) {
-        // TODO:  create a view controller to present Error
+        let viewModel = DetailMovieModel.ViewModel.Error(image: error.image, message: error.message)
+        viewController?.displayError(viewModel: viewModel)
     }
     
 }

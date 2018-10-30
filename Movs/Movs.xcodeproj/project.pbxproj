@@ -10,6 +10,8 @@
 		253097532186143200FFA88C /* String+YearRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253097522186143200FFA88C /* String+YearRelease.swift */; };
 		253097552186252C00FFA88C /* ManageFavoriteMoviesActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253097542186252C00FFA88C /* ManageFavoriteMoviesActions.swift */; };
 		2530975A2186583F00FFA88C /* FavoriteMoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253097592186583F00FFA88C /* FavoriteMoviesTableViewCell.swift */; };
+		2530975E2187E3C400FFA88C /* UIView+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530975D2187E3C400FFA88C /* UIView+Error.swift */; };
+		25309762218876D400FFA88C /* UIView+Constrains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25309761218876D400FFA88C /* UIView+Constrains.swift */; };
 		25317DA02184BB0300B25A81 /* FavoriteMovies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25317D9E2184BB0300B25A81 /* FavoriteMovies.xcdatamodeld */; };
 		25317DA62184C46600B25A81 /* FavoriteMoviesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25317DA52184C46600B25A81 /* FavoriteMoviesWorker.swift */; };
 		25317DAA2184E49000B25A81 /* FavoriteMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25317DA92184E49000B25A81 /* FavoriteMoviesViewController.swift */; };
@@ -67,6 +69,8 @@
 		253097522186143200FFA88C /* String+YearRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+YearRelease.swift"; sourceTree = "<group>"; };
 		253097542186252C00FFA88C /* ManageFavoriteMoviesActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageFavoriteMoviesActions.swift; sourceTree = "<group>"; };
 		253097592186583F00FFA88C /* FavoriteMoviesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesTableViewCell.swift; sourceTree = "<group>"; };
+		2530975D2187E3C400FFA88C /* UIView+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Error.swift"; sourceTree = "<group>"; };
+		25309761218876D400FFA88C /* UIView+Constrains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constrains.swift"; sourceTree = "<group>"; };
 		25317D9F2184BB0300B25A81 /* FavoriteMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteMovies.xcdatamodel; sourceTree = "<group>"; };
 		25317DA52184C46600B25A81 /* FavoriteMoviesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesWorker.swift; sourceTree = "<group>"; };
 		25317DA92184E49000B25A81 /* FavoriteMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 		2530975B2186588600FFA88C /* UIExtension */ = {
 			isa = PBXGroup;
 			children = (
+				2530975D2187E3C400FFA88C /* UIView+Error.swift */,
 				25CE31932181317B0009EF05 /* PopularMovieTableViewCell.swift */,
 				253097592186583F00FFA88C /* FavoriteMoviesTableViewCell.swift */,
 			);
@@ -221,11 +226,12 @@
 		25CE2C5A217E4B770009EF05 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				25CE31D02182946B0009EF05 /* FetchError.swift */,
 				2530975B2186588600FFA88C /* UIExtension */,
 				25CE31972181339C0009EF05 /* UIView+MovieCard.swift */,
 				25CE31992181425E0009EF05 /* UIImageView+MovieCard.swift */,
-				25CE31D02182946B0009EF05 /* FetchError.swift */,
 				253097522186143200FFA88C /* String+YearRelease.swift */,
+				25309761218876D400FFA88C /* UIView+Constrains.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -510,6 +516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25309762218876D400FFA88C /* UIView+Constrains.swift in Sources */,
 				25CE2C8A217F66320009EF05 /* ListMoviesModels.swift in Sources */,
 				25CE2C87217F66320009EF05 /* ListMoviesPresenter.swift in Sources */,
 				25CE31CE218277C10009EF05 /* Genre.swift in Sources */,
@@ -537,6 +544,7 @@
 				25CE3165217FF4AC0009EF05 /* APIConfiguration.swift in Sources */,
 				25CE31AA2181651D0009EF05 /* DetailMoviesModels.swift in Sources */,
 				25317DAF21851C1E00B25A81 /* FavoriteMoviesInteractor.swift in Sources */,
+				2530975E2187E3C400FFA88C /* UIView+Error.swift in Sources */,
 				25CE2C88217F66320009EF05 /* ListMoviesWorker.swift in Sources */,
 				25317DAD21851AEB00B25A81 /* FavoriteMoviesModel.swift in Sources */,
 				25CE2C80217F65C90009EF05 /* ListMoviesFactory.swift in Sources */,

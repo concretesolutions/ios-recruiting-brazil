@@ -17,14 +17,22 @@ class PopularMovieTableViewCell: UITableViewCell {
     @IBOutlet weak var movieDescription: UITextView!
     @IBOutlet weak var movieImageView: UIImageViewMovieCard!
     @IBOutlet weak var favoriteIcon: UIImageView!
+    @IBOutlet weak var moviePosition: UILabel!
+    @IBOutlet weak var loading: UIActivityIndicatorView!
     
+    func configureCellWith(data: ListMovies.ViewModel.PopularMoviesFormatted, position: Int) {
+        movieIdentifier = data.id
+        movieTitle.text = data.title
+        movieDescription.text = data.overview
+        favoriteIcon.image = data.favoriteIcon
+        movieImageView.kf.setImage(with: data.posterPath)
+        moviePosition.text = String(position) + "º"
+        loading.isHidden = true
+    }
     
-    func configureCellWith(data: ListMovies.ViewModel.PopularMoviesFormatted) {
-        self.movieIdentifier = data.id
-        self.movieTitle.text = data.title
-        self.movieDescription.text = data.overview
-        self.favoriteIcon.image = data.favoriteIcon
-        self.movieImageView.kf.setImage(with: data.posterPath)
+    func loadingCell(){
+        loading.isHidden = false
+        loading.startAnimating()
     }
     
 }

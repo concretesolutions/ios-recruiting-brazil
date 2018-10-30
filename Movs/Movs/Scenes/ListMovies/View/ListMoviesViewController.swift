@@ -22,7 +22,7 @@ class ListMoviesViewController: UIViewController {
     let detailMovieSegue = "detailMovie"
     
     // Auxiliar
-    private var page: Int = 0
+    private var page: Int = 1
     var fetchingMovies = false
     
     @IBOutlet weak var tableView: UITableView!
@@ -40,7 +40,7 @@ class ListMoviesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         // Start presenting the first page
-        let request = ListMovies.Request(page: 1)
+        let request = ListMovies.Request(page: page)
         interactor?.fetchPopularMovies(request: request)
     }
 
@@ -80,7 +80,8 @@ extension ListMoviesViewController: ListMoviesDisplayLogic {
     }
     
     func displayError(viewModel: ListMovies.ViewModel.Error) {
-        
+        let viewError = MovieListErrorView(frame: view.frame, image: viewModel.image!, message: viewModel.message)
+        view.addSubview(viewError)
     }
 
 }

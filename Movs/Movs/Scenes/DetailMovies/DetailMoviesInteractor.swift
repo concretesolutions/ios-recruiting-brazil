@@ -27,10 +27,10 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
                                 let response = DetailMovieModel.Response.Success(movie: movieFormatted)
                                 self.presenter.presentMovieDetailed(response: response)
         }, error: { (error) in
-            let responseError = DetailMovieModel.Response.Error(image: UIImage(named: "alert_search"), error: error)
+            let responseError = DetailMovieModel.Response.Error(image: UIImage(named: "alert_search"), message: self.formatListError(error: error))
             self.presenter.presentError(error: responseError)
         }) { (errorNetwork) in
-            let responseError = DetailMovieModel.Response.Error(image: UIImage(named: "alert_error"), error: errorNetwork)
+            let responseError = DetailMovieModel.Response.Error(image: UIImage(named: "alert_error"), message: self.formatListError(error: errorNetwork))
             self.presenter.presentError(error: responseError)
         }
     }
@@ -50,6 +50,10 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
     private func checkIfIsFavorite(movie: MovieDetailed) -> Bool {
         let favoriteWorker = FavoriteMoviesWorker()
         return favoriteWorker.findMovieWith(id: movie.id)
+    }
+    
+    private func formatListError(error: FetchError) -> String {
+        return "\(error.getTitle()). \(error.getDescription())"
     }
     
 }

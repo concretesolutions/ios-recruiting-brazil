@@ -18,7 +18,9 @@ extension ListMoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseIdentifier) as! PopularMovieTableViewCell
         if !movies.isEmpty {
-            cell.configureCellWith(data: movies[indexPath.row])
+            cell.configureCellWith(data: movies[indexPath.row], position: indexPath.row + 1)
+        } else {
+            cell.loadingCell()
         }
         return cell
     }

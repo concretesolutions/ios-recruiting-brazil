@@ -22,7 +22,7 @@ enum DetailMovieModel {
         
         struct Error {
             var image: UIImage?
-            let error: FetchError
+            let message: String
         }
         
     }
