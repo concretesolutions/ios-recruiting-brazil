@@ -12,6 +12,14 @@ class MoviesCollectionViewController: UICollectionViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    NetworkClient().fetchPopularMovies { (result) in
+      switch result {
+      case .success(let movies):
+        print(movies)
+      case .failure(let error):
+        print(error)
+      }
+    }
     navigationItem.searchController = UISearchController(searchResultsController: nil)
     navigationItem.hidesSearchBarWhenScrolling = false
   }
