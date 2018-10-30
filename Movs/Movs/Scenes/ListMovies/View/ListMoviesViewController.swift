@@ -18,10 +18,12 @@ class ListMoviesViewController: UIViewController {
     
     // Initial configuration
     var interactor: ListMoviesBusinessLogic?
-    private var page: Int = 1
     let movieCellReuseIdentifier = "PopularMovieTableViewCell"
     let detailMovieSegue = "detailMovie"
     
+    // Auxiliar
+    private var page: Int = 0
+    var fetchingMovies = false
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -46,6 +48,7 @@ class ListMoviesViewController: UIViewController {
     private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         configureNavigationController()
     }
     
@@ -67,12 +70,13 @@ class ListMoviesViewController: UIViewController {
     }
     
 }
-
+// MARK: - Display Logic
 extension ListMoviesViewController: ListMoviesDisplayLogic {
     
     func displayMovies(viewModel: ListMovies.ViewModel.Success) {
-        movies = viewModel.movies
+        movies.append(contentsOf: viewModel.movies)
         tableView.reloadData()
+        fetchingMovies = false
     }
     
     func displayError(viewModel: ListMovies.ViewModel.Error) {
@@ -87,5 +91,24 @@ extension ListMoviesViewController: UITableViewDelegate {
         performSegue(withIdentifier: detailMovieSegue, sender: nil)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // calculates where the user is in the y-axis
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            loadMoreData()
+            tableView.reloadData()
+        }
+    }
+    
+    private func loadMoreData() {
+        if !fetchingMovies{
+            page += 1
+            fetchingMovies = true
+            let request = ListMovies.Request(page: page)
+            interactor?.fetchPopularMovies(request: request)
+        }
+    }
 }
 

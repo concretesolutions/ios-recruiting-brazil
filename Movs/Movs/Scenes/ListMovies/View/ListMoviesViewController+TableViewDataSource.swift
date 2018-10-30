@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: - Data Source
 extension ListMoviesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -22,8 +23,23 @@ extension ListMoviesViewController: UITableViewDataSource {
         return cell
     }
     
+}
+// MARK: - Infinite scroll
+extension ListMoviesViewController: UITableViewDataSourcePrefetching {
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+    }
+  
+}
+
+private extension ListMoviesViewController {
     
     
-    
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
+    }
     
 }

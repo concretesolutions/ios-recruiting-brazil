@@ -22,7 +22,7 @@ class ListMoviesWorker {
                             success successCallback: @escaping (MovieList) -> (),
                             error errorCallback: @escaping (FetchError) -> (),
                             failure failureCallback: @escaping (FetchError) -> ()) {
-        
+
         provider.request(.listPopularMovies(listRequest: request)) { (result) in
             switch result {
             case .success(let response):
