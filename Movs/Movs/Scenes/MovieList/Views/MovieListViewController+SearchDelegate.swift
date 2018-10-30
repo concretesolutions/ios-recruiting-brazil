@@ -18,8 +18,8 @@ extension MovieListViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        filterMovies(named: searchBar.text!)
         searchBar.resignFirstResponder()
+        filterMovies(named: searchBar.text!)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -15,7 +15,7 @@ class MovieListErrorView: UIView {
         var errorType: ErrorType
     }
     
-    enum ErrorType {
+    enum ErrorType: Int {
         case error
         case notFind
     }

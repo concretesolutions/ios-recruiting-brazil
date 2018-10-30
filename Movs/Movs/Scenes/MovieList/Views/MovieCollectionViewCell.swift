@@ -46,7 +46,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     func set(movie: MovieListModel.ViewModel.Movie) {
-        let url = URL(string: movie.posterURL)!
+        let posterUrl = URL(string: movie.posterURL)
+        guard let url = posterUrl else { return }
         title.text = movie.title
         imageView.kf.setImage(with: url)
         favoriteButton.setImage(UIImage(named: movie.favoriteImageName), for: .normal)

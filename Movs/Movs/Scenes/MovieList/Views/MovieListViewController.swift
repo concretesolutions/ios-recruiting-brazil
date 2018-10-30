@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GameplayKit
 
 protocol MovieListDisplayLogic: class {
     func displayMovies(viewModel: MovieListModel.ViewModel.Success)
@@ -21,6 +22,8 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     var page = 1
     var data: MovieListModel.ViewModel.Success = MovieListModel.ViewModel.Success(movies: [])
+    var viewError: MovieListErrorView.ViewError?
+    var stateMachine: StateMachine!
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,6 +34,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         view.dataSource = self
         view.delegate = self
         view.backgroundColor = .white
+        view.keyboardDismissMode = .onDrag
         view.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         return view
     }()
@@ -45,7 +49,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         return view
     }()
     
-    var errorView: MovieListErrorView = {
+    lazy var errorView: MovieListErrorView = {
         let view = MovieListErrorView()
         return view
     }()
@@ -58,10 +62,6 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
-    }
-    
-    override func loadView() {
-        setupViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +79,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
+        setupViewController()
     }
     
     private func setupViewController() {
@@ -87,9 +88,12 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         title = "Movies"
         tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: Constants.ImageName.list), tag: 0)
         setupView()
+        stateMachine = StateMachine(states: [MovieListDisplayState(viewController: self), MovieListLoadingState(viewController: self), MovieListErrorState(viewController: self)])
+        _ = stateMachine.enter(MovieListDisplayState.self)
     }
     
     private func fetchMovies() {
+        _ = stateMachine.enter(MovieListLoadingState.self)
         interactor.fetchMovies(request: MovieListModel.Request.Page(page: page))
     }
     
@@ -99,35 +103,25 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     }
     
     func displayMovies(viewModel: MovieListModel.ViewModel.Success) {
-        collectionView.isHidden = false
-        errorView.isHidden = true
         data = viewModel
-        collectionView.reloadData()
+        _ = stateMachine.enter(MovieListDisplayState.self)
     }
     
     func displayError(viewModel: MovieListModel.ViewModel.Error) {
-        let error = MovieListErrorView.ViewError(movieTitle: nil, errorType: .error)
-        errorView.error(viewError: error)
-        collectionView.isHidden = true
-        errorView.isHidden = false
+        viewError = MovieListErrorView.ViewError(movieTitle: nil, errorType: .error)
+        _ = stateMachine.enter(MovieListErrorState.self)
     }
     
     func displayNotFind(viewModel: MovieListModel.ViewModel.Error) {
-        var error = MovieListErrorView.ViewError(movieTitle: nil, errorType: .notFind)
-        error.movieTitle = viewModel.error
-        errorView.error(viewError: error)
-        collectionView.isHidden = true
-        errorView.isHidden = false
+        viewError = MovieListErrorView.ViewError(movieTitle: nil, errorType: .notFind)
+        viewError?.movieTitle = viewModel.error
+        _ = stateMachine.enter(MovieListErrorState.self)
     }
     
     func filterMovies(named: String) {
         let request = MovieListModel.Request.Movie(title: named)
+        _ = stateMachine.enter(MovieListLoadingState.self)
         interactor.filterMovies(request: request)
-    }
-    
-    func displayColletctionView() {
-        collectionView.isHidden = false
-        errorView.isHidden = true
     }
     
     func pressedFavorite(sender: UIButton) {
