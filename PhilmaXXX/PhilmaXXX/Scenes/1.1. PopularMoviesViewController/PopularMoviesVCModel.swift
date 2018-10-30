@@ -197,7 +197,7 @@ extension PopularMoviesVCModel: UISearchBarDelegate {
 		
 		var matchingMovies: [Movie] = []
 		movies.forEach({
-			let searchBase = "\($0.title) \($0.yearOfRelease)".uppercased()
+			let searchBase = "\($0.title) \($0.yearDescription)".uppercased()
 			if searchBase.contains(searchText.uppercased()){
 				matchingMovies.append($0)
 			}

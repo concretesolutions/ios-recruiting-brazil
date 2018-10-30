@@ -59,13 +59,18 @@ final class FavoritesFilterVC: FormViewController {
 				$0.options = viewModel.filter.yearOfReleases.sorted(by: { $0 > $1 })
 				$0.displayValueFor = { years in
 					if let uYears = years?.sorted() {
-						return "(\(uYears.map({"\($0)"}).joined(separator: ", ")))"
+						return "(\(uYears.map({"\($0.yearDescription)"}).joined(separator: ", ")))"
 					}
 					return ""
 				}
 				$0.selectorTitle = "Selecione os Anos de Lançamento"
 				}.onPresent({ (form, to) in
 					to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.multipleSelectorDone(_:)))
+					to.selectableRowCellSetup = { cell, row in
+						if let item = row.selectableValue {
+							row.title = item.yearDescription
+						}
+					}
 				})
 		form = form
 	}

@@ -14,7 +14,7 @@ public final class RealmMovie: Object {
 	@objc dynamic var id: Int = 0
 	@objc dynamic var title: String = ""
 	@objc dynamic var overview: String? = nil
-	@objc dynamic var releaseDate: Date = Date()
+	@objc dynamic var releaseDate: Date? = nil
 	@objc dynamic var posterPath: String? = nil
 	@objc dynamic var backdropPath: String? = nil
 	var genreIDs: List<Int> = List<Int>()
@@ -28,13 +28,7 @@ extension RealmMovie: DomainRepresentableType {
 	typealias TMDB_Entity = Movie
 	
 	func baseData() -> Movie {
-		let data = Movie(id: self.id,
-						 title: self.title,
-						 overview: self.overview,
-						 releaseDate: self.releaseDate,
-						 posterPath: self.posterPath,
-						 backdropPath: self.backdropPath,
-						 genreIDs: Array(genreIDs))
+		let data = Movie(id: self.id, title: self.title, overview: self.overview, releaseDate: self.releaseDate, posterPath: self.posterPath, backdropPath: self.backdropPath, genreIDs: Array(genreIDs))
 		return data
 	}
 }

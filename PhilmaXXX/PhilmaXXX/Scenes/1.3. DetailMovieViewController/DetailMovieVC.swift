@@ -98,7 +98,7 @@ extension DetailMovieVC {
 					
 					self.backgroundImage.kf.setImage(with: movie.posterImageURL())
 					self.titleLabel.text = movie.title
-					self.yearLabel.text = "\(movie.yearOfRelease)"
+					self.yearLabel.text = movie.yearDescription
 					self.genresLabel.text = "(\(genreNames.compactMap({$0}).joined(separator: ", ")))"
 					self.overviewLabel.text = movie.overview
 					

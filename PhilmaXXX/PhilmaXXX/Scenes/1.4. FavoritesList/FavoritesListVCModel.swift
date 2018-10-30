@@ -34,7 +34,7 @@ final class FavoritesListVCModel: NSObject {
 	private func set(filter: Filter?, on baseMovies: [Movie]) -> [Movie]{
 		if let uFilter = filter {
 			let filteredMovies = baseMovies.filter({ (movie) -> Bool in
-				return (uFilter.yearOfReleases.isEmpty || uFilter.yearOfReleases.contains( movie.yearOfRelease ))
+				return (uFilter.yearOfReleases.isEmpty || uFilter.yearOfReleases.contains( movie.yearOfRelease ?? Date.invalidYear ))
 					&& (uFilter.genreIDs().isEmpty || uFilter.genreIDs().filter({ movie.genreIDs.contains( $0 ) }).count != 0)
 			})
 			return filteredMovies
@@ -71,7 +71,7 @@ final class FavoritesListVCModel: NSObject {
 	
 	private func yearOfReleasesOf(movies: [Movie]) -> [Int]{
 		var yearOfReleases = Set<Int>()
-		movies.forEach({ yearOfReleases.insert( $0.yearOfRelease ) })
+		movies.forEach({ yearOfReleases.insert( $0.yearOfRelease ?? Date.invalidYear ) })
 		return Array(yearOfReleases)
 	}
 	
@@ -81,7 +81,7 @@ final class FavoritesListVCModel: NSObject {
 		
 		movies.forEach({
 			$0.genreIDs.forEach({ genresIDs.insert( $0 ) })
-			yearOfReleases.insert($0.yearOfRelease)
+			yearOfReleases.insert($0.yearOfRelease ?? Date.invalidYear)
 		})
 		
 		fetchCachedGenres(with: Array(genresIDs)) { (genres) in
@@ -148,7 +148,7 @@ extension FavoritesListVCModel: UITableViewDelegate, UITableViewDataSource {
 			let item = onSearchMode() ? searchMovies[indexPath.row] : movies[indexPath.row]
 			
 			let entity = MovieCellEntity(title: item.title,
-										 year: "\(item.yearOfRelease)",
+										 year: item.yearDescription,
 										 bannerURL: item.backdropImageURL())
 			
 			cell.setup(entityModel: entity)
@@ -197,7 +197,7 @@ extension FavoritesListVCModel: UISearchBarDelegate {
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		var matchingMovies: [Movie] = []
 		movies.forEach({
-			let searchBase = "\($0.title) \($0.yearOfRelease)".uppercased()
+			let searchBase = "\($0.title) \($0.yearDescription)".uppercased()
 			if searchBase.contains(searchText.uppercased()){
 				matchingMovies.append($0)
 			}

@@ -12,12 +12,12 @@ public struct Movie {
 	public var id: Int
 	public var title: String
 	public var overview: String?
-	public var releaseDate: Date
+	public var releaseDate: Date?
 	public var posterPath: String?
 	public var backdropPath: String?
 	public var genreIDs: [Int]
 	
-	public init(id: Int, title: String, overview: String?, releaseDate: Date, posterPath: String?, backdropPath: String?, genreIDs: [Int]?) {
+	public init(id: Int, title: String, overview: String?, releaseDate: Date?, posterPath: String?, backdropPath: String?, genreIDs: [Int]?) {
 		self.id = id
 		self.title = title
 		self.overview = overview
@@ -50,7 +50,7 @@ extension Movie: Codable {
 		self.id = try container.decode(Int.self, forKey: .id)
 		self.title = try container.decode(String.self, forKey: .title)
 		self.overview = try? container.decode(String.self, forKey: .overview)
-		self.releaseDate = try container.decode(Date.self, forKey: .releaseDate)
+		self.releaseDate = try? container.decode(Date.self, forKey: .releaseDate)
 		self.posterPath = try? container.decode(String.self, forKey: .posterPath)
 		self.backdropPath = try? container.decode(String.self, forKey: .backdropPath)
 		self.genreIDs = try container.decode(Array<Int>.self, forKey: .genreIDs)
