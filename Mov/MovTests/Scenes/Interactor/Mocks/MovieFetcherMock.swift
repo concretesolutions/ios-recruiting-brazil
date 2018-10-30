@@ -11,6 +11,9 @@ import Foundation
 
 class MovieFetcherMock: MovieFetcher {
     
+    static var fetchedMovies = [Movie]()
+    
+    
     public var flawedFetch = false
     public var mockMovies = (0..<5).map { id in
         return Movie(id: id, genreIds: [], title: "", overview: "", releaseDate: Date(), posterPath: "")

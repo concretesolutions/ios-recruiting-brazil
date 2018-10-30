@@ -25,12 +25,16 @@ struct API {
             // convert from api snake-case keys to camelCase
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             
-            // set date format to match api date format
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            decoder.dateDecodingStrategy = .formatted(TMDB.dateFormatter)
             
             return decoder
+        }
+        
+        public static var dateFormatter: DateFormatter {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            return dateFormatter
         }
     }
 }

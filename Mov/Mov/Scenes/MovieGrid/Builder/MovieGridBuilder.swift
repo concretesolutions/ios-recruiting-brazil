@@ -27,14 +27,14 @@ class MovieGridBuilder {
     }
     
     static func interactor(presenter: MovieGridPresenter) -> MovieGridInteractor {
-        return DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, moviePersistence: moviePersistence)
+        return DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, persistence: moviePersistence)
     }
     
     static private var movieFetcher: MovieFetcher {
         return TMDBMoyaGateway()
     }
     
-    static private var moviePersistence: FavoriteMoviesPersistence {
-        return HuePersistence()
+    static private var moviePersistence: FavoritesPersistence {
+        return FavoritesUserDefaultsPersistence()
     }
 }

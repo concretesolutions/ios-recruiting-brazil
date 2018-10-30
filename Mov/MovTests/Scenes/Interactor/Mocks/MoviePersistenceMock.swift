@@ -10,7 +10,17 @@ import Foundation
 @testable import Mov
 
 
-class MoviePersistenceMock: FavoriteMoviesPersistence {
+class MoviePersistenceMock: FavoritesPersistence {
+    var favorites = Set<Movie>()
+    
+    func addFavorite(movie: Movie) -> Bool {
+        return true
+    }
+    
+    func fetchFavorites() -> Set<Movie>? {
+        return []
+    }
+    
     
     func isFavorite(_ movie: Movie) -> Bool {
         return false

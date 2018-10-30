@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FavoriteMoviesPersistence: class {
+protocol FavoritesPersistence: class {
     
     var favorites: Set<Movie> { get }
     

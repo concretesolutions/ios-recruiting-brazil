@@ -33,7 +33,6 @@
 		2579DFE4218244AC00D616C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE3218244AC00D616C9 /* Assets.xcassets */; };
 		2579DFE7218244AC00D616C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE5218244AC00D616C9 /* LaunchScreen.storyboard */; };
 		25B2B7EC2184DF78005C96E1 /* MovieGridBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7EB2184DF78005C96E1 /* MovieGridBuilder.swift */; };
-		25B2B7F52184E87E005C96E1 /* HuePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F42184E87E005C96E1 /* HuePersistence.swift */; };
 		25B2B7F721852029005C96E1 /* UIScreen + widthProportion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */; };
 		25B2B7F921852061005C96E1 /* CGFloat + proportionalToWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */; };
 		25B2B7FB21853667005C96E1 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B7FA21853667005C96E1 /* ImageFetcher.swift */; };
@@ -48,8 +47,8 @@
 		25B2B8142186A12A005C96E1 /* MovieGridViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B8132186A12A005C96E1 /* MovieGridViewControllerSpec.swift */; };
 		25B2B8172186A6E6005C96E1 /* MovieGridInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B8162186A6E6005C96E1 /* MovieGridInteractorMock.swift */; };
 		25B2B81921874E4D005C96E1 /* MovieGridListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2B81821874E4C005C96E1 /* MovieGridListView.swift */; };
-		25D252AE2187FB450067795A /* FavoriteMoviesPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D252AD2187FB450067795A /* FavoriteMoviesPersistence.swift */; };
-		25D252B02187FB640067795A /* MoviesUserDefaultsPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D252AF2187FB640067795A /* MoviesUserDefaultsPersistence.swift */; };
+		25D252AE2187FB450067795A /* FavoritesPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D252AD2187FB450067795A /* FavoritesPersistence.swift */; };
+		25D252B02187FB640067795A /* FavoritesUserDefaultsPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D252AF2187FB640067795A /* FavoritesUserDefaultsPersistence.swift */; };
 		25E546532182B6680043514B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546522182B6680043514B /* APIConstants.swift */; };
 		25E546562182B8300043514B /* TMDBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546552182B8300043514B /* TMDBProvider.swift */; };
 		25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */; };
@@ -104,7 +103,6 @@
 		2579DFED218244AC00D616C9 /* MovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2579DFF3218244AC00D616C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25B2B7EB2184DF78005C96E1 /* MovieGridBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridBuilder.swift; sourceTree = "<group>"; };
-		25B2B7F42184E87E005C96E1 /* HuePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuePersistence.swift; sourceTree = "<group>"; };
 		25B2B7F621852029005C96E1 /* UIScreen + widthProportion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen + widthProportion.swift"; sourceTree = "<group>"; };
 		25B2B7F821852061005C96E1 /* CGFloat + proportionalToWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat + proportionalToWidth.swift"; sourceTree = "<group>"; };
 		25B2B7FA21853667005C96E1 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
@@ -119,8 +117,8 @@
 		25B2B8132186A12A005C96E1 /* MovieGridViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewControllerSpec.swift; sourceTree = "<group>"; };
 		25B2B8162186A6E6005C96E1 /* MovieGridInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridInteractorMock.swift; sourceTree = "<group>"; };
 		25B2B81821874E4C005C96E1 /* MovieGridListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridListView.swift; sourceTree = "<group>"; };
-		25D252AD2187FB450067795A /* FavoriteMoviesPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesPersistence.swift; sourceTree = "<group>"; };
-		25D252AF2187FB640067795A /* MoviesUserDefaultsPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesUserDefaultsPersistence.swift; sourceTree = "<group>"; };
+		25D252AD2187FB450067795A /* FavoritesPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPersistence.swift; sourceTree = "<group>"; };
+		25D252AF2187FB640067795A /* FavoritesUserDefaultsPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUserDefaultsPersistence.swift; sourceTree = "<group>"; };
 		25E546522182B6680043514B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		25E546552182B8300043514B /* TMDBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBProvider.swift; sourceTree = "<group>"; };
 		25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBMoyaGateway.swift; sourceTree = "<group>"; };
@@ -466,9 +464,8 @@
 		25E5464A218283D20043514B /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
-				25D252AD2187FB450067795A /* FavoriteMoviesPersistence.swift */,
-				25B2B7F42184E87E005C96E1 /* HuePersistence.swift */,
-				25D252AF2187FB640067795A /* MoviesUserDefaultsPersistence.swift */,
+				25D252AD2187FB450067795A /* FavoritesPersistence.swift */,
+				25D252AF2187FB640067795A /* FavoritesUserDefaultsPersistence.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -730,7 +727,7 @@
 				2578BAD421849847001107B6 /* ViewCode.swift in Sources */,
 				2525BAEF21824AA7007EF9D0 /* MovieGridDataSource.swift in Sources */,
 				25B2B80B21866247005C96E1 /* MovieGridCollectionState.swift in Sources */,
-				25D252AE2187FB450067795A /* FavoriteMoviesPersistence.swift in Sources */,
+				25D252AE2187FB450067795A /* FavoritesPersistence.swift in Sources */,
 				25B2B800218536FA005C96E1 /* ImageKingFisherGateway.swift in Sources */,
 				25B2B81921874E4D005C96E1 /* MovieGridListView.swift in Sources */,
 				25B2B806218659C0005C96E1 /* ViewState.swift in Sources */,
@@ -738,7 +735,7 @@
 				2525BAF321824AA7007EF9D0 /* DefaultMovieGridInteractor.swift in Sources */,
 				2525BAF921824AF2007EF9D0 /* MovieGenre.swift in Sources */,
 				25B2B80F218665E2005C96E1 /* ViewStateMachine.swift in Sources */,
-				25D252B02187FB640067795A /* MoviesUserDefaultsPersistence.swift in Sources */,
+				25D252B02187FB640067795A /* FavoritesUserDefaultsPersistence.swift in Sources */,
 				25B2B81121866ED1005C96E1 /* BlankView.swift in Sources */,
 				2525BAED21824AA7007EF9D0 /* DefaultMovieGridPresenter.swift in Sources */,
 				2525BAEE21824AA7007EF9D0 /* MovieGridPresenter.swift in Sources */,
@@ -746,7 +743,6 @@
 				2579DFDA218244AA00D616C9 /* AppDelegate.swift in Sources */,
 				2525BAF421824AA7007EF9D0 /* MovieGridInteractor.swift in Sources */,
 				25B2B7EC2184DF78005C96E1 /* MovieGridBuilder.swift in Sources */,
-				25B2B7F52184E87E005C96E1 /* HuePersistence.swift in Sources */,
 				2525BAF021824AA7007EF9D0 /* MovieGridViewOutput.swift in Sources */,
 				2525BB0E21825629007EF9D0 /* Assets.swift in Sources */,
 				25FEBC642184C24F002184D6 /* MovieGridCollectionView.swift in Sources */,

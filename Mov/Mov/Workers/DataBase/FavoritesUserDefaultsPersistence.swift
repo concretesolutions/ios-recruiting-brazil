@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MoviesUserDefaultsPersistence: FavoriteMoviesPersistence {
+class FavoritesUserDefaultsPersistence: FavoritesPersistence {
     
     private static let moviesKey = "Movies"
     
@@ -32,7 +32,7 @@ class MoviesUserDefaultsPersistence: FavoriteMoviesPersistence {
     func fetchFavorites() -> Set<Movie>? {
         guard self.favorites.isEmpty else { return self.favorites }
         
-        if let savedMovies = self.defaults.object(forKey: MoviesUserDefaultsPersistence.moviesKey) as? Data {
+        if let savedMovies = self.defaults.object(forKey: FavoritesUserDefaultsPersistence.moviesKey) as? Data {
             let decoder = API.TMDB.decoder
             if let loadedMovies = try? decoder.decode([Movie].self, from: savedMovies) {
                 self.favorites = Set<Movie>(loadedMovies)
@@ -49,12 +49,10 @@ class MoviesUserDefaultsPersistence: FavoriteMoviesPersistence {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        encoder.dateEncodingStrategy = .formatted(API.TMDB.dateFormatter)
         
         if let encoded = try? encoder.encode(self.favorites) {
-            self.defaults.set(encoded, forKey: MoviesUserDefaultsPersistence.moviesKey)
+            self.defaults.set(encoded, forKey: FavoritesUserDefaultsPersistence.moviesKey)
             return true
         } else { return false }
     }

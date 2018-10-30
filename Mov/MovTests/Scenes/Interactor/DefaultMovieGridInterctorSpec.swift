@@ -29,7 +29,7 @@ class DefaultMovieGridInteractorSpec: QuickSpec {
                     moviePersistence = MoviePersistenceMock()
                     presenter = MovieGridPresenterMock()
                     
-                    interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, moviePersistence: moviePersistence)
+                    interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, persistence: moviePersistence)
                 }
                     
                 context("and succeed to fetch movies") {

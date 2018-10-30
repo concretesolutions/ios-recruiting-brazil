@@ -15,17 +15,17 @@ final class DefaultMovieGridInteractor {
     
     private let movieFetcher: MovieFetcher
     
-    private let moviePersistence: FavoriteMoviesPersistence
+    private let persistence: FavoritesPersistence
     
-    init(presenter: MovieGridPresenter, movieFetcher: MovieFetcher, moviePersistence: FavoriteMoviesPersistence) {
+    init(presenter: MovieGridPresenter, movieFetcher: MovieFetcher, persistence: FavoritesPersistence) {
         self.presenter = presenter
         self.movieFetcher = movieFetcher
-        self.moviePersistence = moviePersistence
+        self.persistence = persistence
     }
     
     private func buildMovieGridUnits(from movies: [Movie]) -> [MovieGridUnit] {
         return movies.map { movie in
-            let isFavorite = self.moviePersistence.isFavorite(movie)
+            let isFavorite = self.persistence.isFavorite(movie)
             return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
         }
     }
