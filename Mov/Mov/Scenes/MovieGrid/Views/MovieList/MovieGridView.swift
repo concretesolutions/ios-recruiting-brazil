@@ -10,7 +10,7 @@ import UIKit
 
 public class MovieGridView: UIView {
     
-    let dataSource: MovieGridDataSource
+    let dataSource: UICollectionViewDataSource
     
     // UI Elements
     lazy var collection: UICollectionView = {
@@ -21,7 +21,7 @@ public class MovieGridView: UIView {
     
     
     // Initialization
-    init(dataSource: MovieGridDataSource) {
+    init(dataSource: UICollectionViewDataSource) {
         self.dataSource = dataSource
         super.init(frame: .zero)
         self.setup()
@@ -43,14 +43,6 @@ extension MovieGridView: ViewCode {
         self.collection.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-}
-
-extension MovieGridView: MovieGridListView {
-    
-    func display(movies: [MovieGridViewModel]) {
-        self.dataSource.viewModels = movies
-        self.collection.reloadData()
     }
 }
 

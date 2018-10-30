@@ -9,6 +9,7 @@
 import Foundation
 
 struct MovieGridUnit {
+    let id: Int
     let title: String
     let posterPath: String
     let isFavorite: Bool
@@ -16,9 +17,7 @@ struct MovieGridUnit {
 
 extension MovieGridUnit: Equatable {
     static func == (lhs: MovieGridUnit, rhs: MovieGridUnit) -> Bool {
-        return
-            lhs.title == rhs.title &&
-                lhs.posterPath == rhs.posterPath &&
-                lhs.isFavorite == rhs.isFavorite
+        return lhs.id == rhs.id
+            && lhs.isFavorite == rhs.isFavorite
     }
 }

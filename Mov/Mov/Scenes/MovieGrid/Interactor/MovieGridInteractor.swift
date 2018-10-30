@@ -10,4 +10,6 @@ import Foundation
 
 protocol MovieGridInteractor {
     func fetchMovieList(page: Int)
+    
+    func toggleFavoriteMovie(at index: Int)
 }

@@ -44,7 +44,7 @@ class DefaultMovieGridInteractorSpec: QuickSpec {
                         interactor.fetchMovieList(page: 1)
                     }
                     
-                    it("presentMovies") {
+                    it("present movies") {
                         expect(presenter.didCall(method: .presentMovies)).to(beTrue())
                     }
                     

@@ -14,7 +14,8 @@ protocol FavoritesPersistence: class {
     
     func isFavorite(_ movie: Movie) -> Bool
     
-    func addFavorite(movie: Movie) -> Bool
+    @discardableResult
+    func toggleFavorite(movie: Movie) -> Bool
     
     func fetchFavorites() -> Set<Movie>?
 }

@@ -25,8 +25,8 @@ class MovieGridCollectionView: UICollectionView {
         
         flowLayout.itemSize = MovieGridCollectionView.cellSize
         
-        let topInset = CGFloat(10).proportionalToHeight
-        let bottomInset = CGFloat(10).proportionalToHeight
+        let topInset = CGFloat(25).proportionalToHeight
+        let bottomInset = CGFloat(25).proportionalToHeight
         let rightInset = CGFloat(25).proportionalToWidth
         let leftInset = CGFloat(25).proportionalToWidth
         flowLayout.sectionInset = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
@@ -39,6 +39,7 @@ class MovieGridCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: MovieGridCollectionView.flowLayout)
         self.backgroundColor = .white
         self.register(MovieGridCollectionViewCell.self, forCellWithReuseIdentifier: MovieGridCollectionView.reuseIdentifier)
+        self.isUserInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {

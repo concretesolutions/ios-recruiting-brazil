@@ -13,7 +13,7 @@ import Foundation
 class MoviePersistenceMock: FavoritesPersistence {
     var favorites = Set<Movie>()
     
-    func addFavorite(movie: Movie) -> Bool {
+    func toggleFavorite(movie: Movie) -> Bool {
         return true
     }
     

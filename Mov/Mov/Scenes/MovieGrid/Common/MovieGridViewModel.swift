@@ -9,6 +9,8 @@
 import UIKit
 
 struct MovieGridViewModel: Equatable {
+    
+    let id: Int
     let title: String
     let posterPath: String
     let isFavoriteIcon: UIImage
@@ -28,5 +30,5 @@ struct MovieGridViewModel: Equatable {
 
 extension MovieGridViewModel {
     // empty path will generate nil url, thus making fetchImage get a placeholder poster
-    static let placeHolder = MovieGridViewModel(title: "Movie", posterPath: "", isFavoriteIcon: Images.isFavoriteIconGray)
+    static let placeHolder = MovieGridViewModel(id: 0, title: "Movie", posterPath: "", isFavoriteIcon: Images.isFavoriteIconGray)
 }

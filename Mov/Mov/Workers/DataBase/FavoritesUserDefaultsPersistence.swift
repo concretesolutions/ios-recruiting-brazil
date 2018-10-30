@@ -21,8 +21,13 @@ class FavoritesUserDefaultsPersistence: FavoritesPersistence {
         fetchFavorites()
     }
     
-    func addFavorite(movie: Movie) -> Bool {
-        self.favorites.insert(movie)
+    func toggleFavorite(movie: Movie) -> Bool {
+        if self.favorites.contains(movie) {
+            self.favorites.remove(movie)
+        } else {
+            self.favorites.insert(movie)
+        }
+        
         return self.saveFavorites()
     }
     

@@ -10,7 +10,6 @@ import UIKit
 
 
 class MovieGridCollectionState: MovieGridBaseState {
-    
     override func hideViews() -> [UIView] {
         return [vc.errorView]
     }

@@ -10,23 +10,24 @@ import UIKit
 
 final class MovieGridViewController: UIViewController {
     
-    
-    let dataSource = MovieGridDataSource()
-    
     var interactor: MovieGridInteractor! {
         didSet {
-            if (self.dataSource.viewModels.isEmpty) {
-                self.interactor.fetchMovieList(page: 1)
+            if (self.viewModels.isEmpty) {
+                self.interactor.fetchMovieList(page: self.page)
             }
         }
     }
+    
+    private(set) var viewModels = [MovieGridViewModel]()
+    
+    private(set) var page = 1
     
     lazy var collection: UICollectionView = {
         return self.collectionView.collection
     }()
     
     lazy var collectionView: MovieGridView = {
-        return MovieGridView(dataSource: self.dataSource)
+        return MovieGridView(dataSource: self)
     }()
     
     lazy var errorView: MovieGridErrorView = {
@@ -64,6 +65,7 @@ final class MovieGridViewController: UIViewController {
         let view = BlankView()
         self.view = view
         self.setup()
+        self.state = .collection
     }
 }
 
@@ -71,7 +73,7 @@ final class MovieGridViewController: UIViewController {
 extension MovieGridViewController: MovieGridViewOutput {
     
     func display(movies: [MovieGridViewModel]) {
-        self.dataSource.viewModels = movies
+        self.viewModels = movies
         self.collection.reloadData()
         
         self.state = .collection
@@ -106,5 +108,18 @@ extension MovieGridViewController {
     enum MovieGridState {
         case collection
         case error
+    }
+}
+
+// MARK: UI actions
+extension MovieGridViewController {
+    func didTapFavorite(button: UIButton) {
+        let position = button.convert(CGPoint.zero, to: self.collectionView)
+        let indexPath = self.collection.indexPathForItem(at: position)
+        
+        if let indexPath = indexPath {
+            self.interactor.toggleFavoriteMovie(at: indexPath.item)
+            self.interactor.fetchMovieList(page: self.page)
+        }
     }
 }

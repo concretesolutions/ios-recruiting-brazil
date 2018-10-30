@@ -11,15 +11,15 @@ import SnapKit
 
 class MovieGridUnitView: UIView {
     
-    let imageFetcher: ImageFetcher = ImageKingFisherGateway()
-    
     var viewModel: MovieGridViewModel = .placeHolder {
         didSet {
             self.viewModel.fetchImage(to: self.poster)
             self.title.text = self.viewModel.title
-            self.isFavoriteButton.setImage(self.viewModel.isFavoriteIcon, for: .normal)
+            self.favoriteButton.setImage(self.viewModel.isFavoriteIcon, for: .normal)
         }
     }
+    
+    @objc var favoriteButtonAction: ((UIButton) -> Void)?
     
     // UI Elements
     lazy var poster: UIImageView = {
@@ -39,12 +39,13 @@ class MovieGridUnitView: UIView {
         return title
     }()
     
-    lazy var isFavoriteButton: UIButton = {
-        let isFavoriteButton = UIButton(frame: .zero)
-        isFavoriteButton.setImage(self.viewModel.isFavoriteIcon, for: .normal)
-        isFavoriteButton.imageView!.contentMode = .scaleAspectFit
-
-        return isFavoriteButton
+    lazy var favoriteButton: UIButton = {
+        let favoriteButton = UIButton(frame: .zero)
+        favoriteButton.setImage(self.viewModel.isFavoriteIcon, for: .normal)
+        favoriteButton.imageView!.contentMode = .scaleAspectFit
+        favoriteButton.addTarget(self, action: #selector(didTapFavoriteButton), for: .touchUpInside)
+        
+        return favoriteButton
     }()
     
     // Initialization
@@ -57,6 +58,12 @@ class MovieGridUnitView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func didTapFavoriteButton(_ sender: UIButton) {
+        if let action = self.favoriteButtonAction {
+            print("👰🏾")
+            action(sender)
+        } else {/*do nothing*/}
+    }
 }
 
 extension MovieGridUnitView: ViewCode {
@@ -64,7 +71,7 @@ extension MovieGridUnitView: ViewCode {
     public func addView() {
         self.addSubview(self.poster)
         self.addSubview(self.title)
-        self.addSubview(self.isFavoriteButton)
+        self.addSubview(self.favoriteButton)
     }
     
     public func addConstraints() {
@@ -78,14 +85,13 @@ extension MovieGridUnitView: ViewCode {
         self.title.snp.makeConstraints { make in
             make.top.equalTo(self.poster.snp_bottomMargin)
             make.bottom.equalToSuperview()
-            make.right.equalTo(self.isFavoriteButton.snp_leftMargin)
+            make.right.equalTo(self.favoriteButton.snp_leftMargin)
             make.centerX.equalToSuperview()
         }
         
-        self.isFavoriteButton.snp.makeConstraints { make in
+        self.favoriteButton.snp.makeConstraints { make in
             make.top.equalTo(self.title.snp_topMargin)
             make.bottom.equalToSuperview()
-//            make.centerY.equalTo(self.title.snp_centerYWithinMargins)
             make.trailing.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.25)
         }

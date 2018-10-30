@@ -17,6 +17,10 @@ final class DefaultMovieGridInteractor {
     
     private let persistence: FavoritesPersistence
     
+    private var fetchedMovies = [Movie]()
+
+    private var fetchedPages = 0
+    
     init(presenter: MovieGridPresenter, movieFetcher: MovieFetcher, persistence: FavoritesPersistence) {
         self.presenter = presenter
         self.movieFetcher = movieFetcher
@@ -26,34 +30,40 @@ final class DefaultMovieGridInteractor {
     private func buildMovieGridUnits(from movies: [Movie]) -> [MovieGridUnit] {
         return movies.map { movie in
             let isFavorite = self.persistence.isFavorite(movie)
-            return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
+            return MovieGridUnit(id: movie.id, title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
         }
     }
 }
 
 extension DefaultMovieGridInteractor: MovieGridInteractor {
     
+    func toggleFavoriteMovie(at index: Int) {
+        print(index)
+        if let movie = self.fetchedMovies[safe: index] {
+            self.persistence.toggleFavorite(movie: movie)
+            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
+        } else {/*do nothing*/}
+    }
+    
     func fetchMovieList(page: Int) {
         
-//        if self.moviePersistence.didFetchMovies {
-//            let movies = buildMovieGridUnits(from: self.moviePersistence.fetchedMovies)
-//            self.presenter.present(movies: movies)
-//        } else {
-//            
-//        }
-        
+        // no need to fetch again if requested page was already fetched
+        guard page > fetchedPages else {
+            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
+            return
+        }
+
         self.movieFetcher.fetchPopularMovies(page: page) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let movies):
-                
+                self.fetchedMovies = movies
+                self.fetchedPages += 1
                 self.presenter.present(movies: self.buildMovieGridUnits(from: movies))
-                
             case .failure:
                 self.presenter.presentNetworkError()
             }
         }
     }
-    
 }
