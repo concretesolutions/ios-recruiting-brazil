@@ -34,7 +34,7 @@ class MovieGridBuilder {
         return TMDBMoyaGateway()
     }
     
-    static private var moviePersistence: MoviePersistence {
+    static private var moviePersistence: FavoriteMoviesPersistence {
         return HuePersistence()
     }
 }

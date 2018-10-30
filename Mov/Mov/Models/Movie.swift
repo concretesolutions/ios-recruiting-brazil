@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie: Decodable {
+struct Movie: Codable, Hashable {
     let id: Int
     let genreIds: [Int]
     let title: String
@@ -17,6 +17,6 @@ struct Movie: Decodable {
     let posterPath: String
 }
 
-struct MoviesFetchResults: Decodable {
+struct MoviesFetchResults: Codable {
     let results: [Movie]
 }

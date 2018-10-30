@@ -8,11 +8,13 @@
 
 import Foundation
 
-protocol MoviePersistence: class {
+protocol FavoriteMoviesPersistence: class {
     
-//    var pagesFetch: Int { get }
-//    
-//    var fetchedMovies: [Movie] { get set }
+    var favorites: Set<Movie> { get }
     
     func isFavorite(_ movie: Movie) -> Bool
+    
+    func addFavorite(movie: Movie) -> Bool
+    
+    func fetchFavorites() -> Set<Movie>?
 }

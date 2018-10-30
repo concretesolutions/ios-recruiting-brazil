@@ -15,9 +15,9 @@ final class DefaultMovieGridInteractor {
     
     private let movieFetcher: MovieFetcher
     
-    private let moviePersistence: MoviePersistence
+    private let moviePersistence: FavoriteMoviesPersistence
     
-    init(presenter: MovieGridPresenter, movieFetcher: MovieFetcher, moviePersistence: MoviePersistence) {
+    init(presenter: MovieGridPresenter, movieFetcher: MovieFetcher, moviePersistence: FavoriteMoviesPersistence) {
         self.presenter = presenter
         self.movieFetcher = movieFetcher
         self.moviePersistence = moviePersistence

@@ -8,7 +8,21 @@
 
 import Foundation
 
-class HuePersistence: MoviePersistence {
+class HuePersistence: FavoriteMoviesPersistence {
+    var favorites: Set<Movie> = []
+    
+    func addFavorite(movie: Movie) -> Bool {
+        return true
+    }
+    
+    func fetchFavorites() -> Set<Movie>? {
+        return []
+    }
+    
+    func saveFavorites() -> Bool {
+        return true
+    }
+    
     
     private (set) var pagesFetch: Int = 0
     
