@@ -16,7 +16,20 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clapperboard-O" translatesAutoresizingMaskIntoConstraints="NO" id="Qbh-FC-OvW">
+                                <rect key="frame" x="147.5" y="293.5" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Jw1-7v-eo3"/>
+                                    <constraint firstAttribute="height" constant="80" id="U1Z-Ah-UD7"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Qbh-FC-OvW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="2Vh-J9-2QI"/>
+                            <constraint firstItem="Qbh-FC-OvW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="EOf-N9-dev"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -25,4 +38,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clapperboard-O" width="409.60000610351562" height="409.60000610351562"/>
+    </resources>
 </document>
