@@ -373,8 +373,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A2D186B217F9F6800139CA4 /* Build configuration list for PBXNativeTarget "concreto-filmes" */;
 			buildPhases = (
-				8A0FF4A72184115200580A58 /* ShellScript */,
 				92E9EE99B95BD393BCE784F7 /* [CP] Check Pods Manifest.lock */,
+				8A0FF4A72184115200580A58 /* ShellScript */,
 				8A2D183F217F9F6600139CA4 /* Sources */,
 				8A2D1840217F9F6600139CA4 /* Frameworks */,
 				8A2D1841217F9F6600139CA4 /* Resources */,
@@ -533,6 +533,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-concreto-filmes/Pods-concreto-filmes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
@@ -541,6 +543,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);

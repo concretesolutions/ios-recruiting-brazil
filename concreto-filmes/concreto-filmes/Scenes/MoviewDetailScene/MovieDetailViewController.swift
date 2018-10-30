@@ -18,9 +18,26 @@ protocol MovieDetailDisplayLogic: class {
     func displayMovie(viewModel: MovieDetail.ViewModel)
 }
 
+enum FavoriteViewState {
+    case favourited, notFavourited
+}
+
 class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     var interactor: MovieDetailBusinessLogic?
     var router: (NSObjectProtocol & MovieDetailRoutingLogic & MovieDetailDataPassing)?
+    
+    var didFavorite : (() -> Void)?
+    var didUnfavorite : (() -> Void)?
+    
+    var viewState: FavoriteViewState = .notFavourited {
+        didSet {
+            if viewState == .notFavourited {
+                self.favoriteButton.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+            } else {
+                self.favoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+            }
+        }
+    }
 
     private var verticalStack: UIStackView = {
         let stack = UIStackView()
@@ -44,7 +61,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     
     private let favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+        button.addTarget(self, action: #selector(touchUpInsideButton), for: .touchUpInside)
         return button
     }()
 
@@ -182,4 +199,17 @@ extension MovieDetailViewController: CodeView {
         view.backgroundColor = .black
     }
 
+}
+
+
+extension MovieDetailViewController {
+    @objc fileprivate func touchUpInsideButton() {
+        if viewState == .favourited {
+            didUnfavorite?()
+            viewState = .notFavourited
+        } else {
+            viewState = .favourited
+            didFavorite?()
+        }
+    }
 }
