@@ -115,27 +115,27 @@
 <tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">    init(from decoder: Decoder) throws {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc">        let container = try decoder.container(keyedBy: GenreApiResponseCodingKeys.self)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">        genres = try container.decode([Genre].self, forKey: .genres)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">26</td>
@@ -215,32 +215,32 @@
 <tr class="covered">
 <td class="num">41</td>
 <td class="src"><pre><code class="objc">    init(from decoder: Decoder) throws {</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">38x</td>
 </tr>
 <tr class="covered">
 <td class="num">42</td>
 <td class="src"><pre><code class="objc">        let container = try decoder.container(keyedBy: GenreCodingKeys.self)</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">38x</td>
 </tr>
 <tr class="covered">
 <td class="num">43</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">38x</td>
 </tr>
 <tr class="covered">
 <td class="num">44</td>
 <td class="src"><pre><code class="objc">        id = try container.decode(Int.self, forKey: .id)</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">38x</td>
 </tr>
 <tr class="covered">
 <td class="num">45</td>
 <td class="src"><pre><code class="objc">        name = try container.decode(String.self, forKey: .name)</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">38x</td>
 </tr>
 <tr class="covered">
 <td class="num">46</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">38x</td>
 </tr>
 <tr class="never">
 <td class="num">47</td>

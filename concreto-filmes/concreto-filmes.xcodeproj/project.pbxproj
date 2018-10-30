@@ -14,7 +14,6 @@
 		8A2D184E217F9F6800139CA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A2D184D217F9F6800139CA4 /* Assets.xcassets */; };
 		8A2D1851217F9F6800139CA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A2D184F217F9F6800139CA4 /* LaunchScreen.storyboard */; };
 		8A2D185C217F9F6800139CA4 /* concreto_filmesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D185B217F9F6800139CA4 /* concreto_filmesTests.swift */; };
-		8A2D1867217F9F6800139CA4 /* concreto_filmesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D1866217F9F6800139CA4 /* concreto_filmesUITests.swift */; };
 		8A2D187C217FA30300139CA4 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D187B217FA30300139CA4 /* AppColors.swift */; };
 		8A2D187E217FA52400139CA4 /* CodeViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D187D217FA52400139CA4 /* CodeViewProtocol.swift */; };
 		8A2D1895217FD3D600139CA4 /* MovieDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D188F217FD3D600139CA4 /* MovieDetailPresenter.swift */; };
@@ -29,6 +28,8 @@
 		8A2D18A4217FD43500139CA4 /* MainScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D189E217FD43500139CA4 /* MainScreenModels.swift */; };
 		8A2D18A5217FD43500139CA4 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D189F217FD43500139CA4 /* MainScreenViewController.swift */; };
 		8A2D18A6217FD43500139CA4 /* MainScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2D18A0217FD43500139CA4 /* MainScreenInteractor.swift */; };
+		8A2EE3D22188CEF200D8082C /* concreto_filmesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2EE3D12188CEF200D8082C /* concreto_filmesUITests.swift */; };
+		8A46EF1A21882989003B86B2 /* FavoriteMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A46EF1921882989003B86B2 /* FavoriteMovie.swift */; };
 		8A68235321826A8B00D06656 /* SearchEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68235221826A8B00D06656 /* SearchEndPoint.swift */; };
 		8A68235521826ED100D06656 /* SearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68235421826ED100D06656 /* SearchNetworkManager.swift */; };
 		8A682357218282C400D06656 /* MainScreenCVDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A682356218282C400D06656 /* MainScreenCVDataSource.swift */; };
@@ -50,6 +51,7 @@
 		8AEAB7B021804A710092BB21 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAB7AF21804A710092BB21 /* JSONParameterEncoder.swift */; };
 		8AEAB7B221804B850092BB21 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAB7B121804B850092BB21 /* NetworkRouter.swift */; };
 		A7DED3D0A5754ACC2ED13D59 /* Pods_concreto_filmes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3BBB10D1D3BB8593B2BF35 /* Pods_concreto_filmes.framework */; };
+		E18DEAAC1D6F02410563FCFE /* Pods_concreto_filmes_concreto_filmesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4ED1A505291EFCBEC4445B /* Pods_concreto_filmes_concreto_filmesTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +62,7 @@
 			remoteGlobalIDString = 8A2D1842217F9F6600139CA4;
 			remoteInfo = "concreto-filmes";
 		};
-		8A2D1863217F9F6800139CA4 /* PBXContainerItemProxy */ = {
+		8A2EE3D42188CEF200D8082C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A2D183B217F9F6600139CA4 /* Project object */;
 			proxyType = 1;
@@ -72,9 +74,12 @@
 /* Begin PBXFileReference section */
 		0BE0E6DBC1BA33140C517FF9 /* Pods_concreto_filmesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_concreto_filmesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D4ED1A505291EFCBEC4445B /* Pods_concreto_filmes_concreto_filmesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_concreto_filmes_concreto_filmesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CE9D05B012D9F93BB200D99 /* Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesUITests/Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig"; sourceTree = "<group>"; };
+		272787B60361BC8072B9B105 /* Pods-concreto-filmes-concreto-filmesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesTests/Pods-concreto-filmes-concreto-filmesTests.release.xcconfig"; sourceTree = "<group>"; };
+		4690514A12075EB27B90C0AE /* Pods-concreto-filmesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmesTests/Pods-concreto-filmesTests.release.xcconfig"; sourceTree = "<group>"; };
 		4BEF8B5F9361EC76DBD2B0DA /* Pods_concreto_filmes_concreto_filmesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_concreto_filmes_concreto_filmesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		739897577993422488CFBFB1 /* Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesTests/Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7E4FA081F153258FFF576603 /* Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesUITests/Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig"; sourceTree = "<group>"; };
+		512B50756523F4D81BC59A0E /* Pods-concreto-filmesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmesUITests/Pods-concreto-filmesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		77B0BC7DB2DA7B82812C330C /* Pods-concreto-filmesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmesUITests/Pods-concreto-filmesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8A01C334217FDEA100DA7882 /* MainScreenMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenMovieCell.swift; sourceTree = "<group>"; };
 		8A0FF4A821841A8300580A58 /* MainScreenColelctionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenColelctionViewDelegate.swift; sourceTree = "<group>"; };
 		8A0FF4AD218682A700580A58 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
@@ -86,9 +91,6 @@
 		8A2D1857217F9F6800139CA4 /* concreto-filmesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "concreto-filmesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A2D185B217F9F6800139CA4 /* concreto_filmesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = concreto_filmesTests.swift; sourceTree = "<group>"; };
 		8A2D185D217F9F6800139CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A2D1862217F9F6800139CA4 /* concreto-filmesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "concreto-filmesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A2D1866217F9F6800139CA4 /* concreto_filmesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = concreto_filmesUITests.swift; sourceTree = "<group>"; };
-		8A2D1868217F9F6800139CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A2D187B217FA30300139CA4 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		8A2D187D217FA52400139CA4 /* CodeViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewProtocol.swift; sourceTree = "<group>"; };
 		8A2D188F217FD3D600139CA4 /* MovieDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailPresenter.swift; sourceTree = "<group>"; };
@@ -103,6 +105,10 @@
 		8A2D189E217FD43500139CA4 /* MainScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModels.swift; sourceTree = "<group>"; };
 		8A2D189F217FD43500139CA4 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		8A2D18A0217FD43500139CA4 /* MainScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractor.swift; sourceTree = "<group>"; };
+		8A2EE3CF2188CEF200D8082C /* concreto-filmesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "concreto-filmesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A2EE3D12188CEF200D8082C /* concreto_filmesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = concreto_filmesUITests.swift; sourceTree = "<group>"; };
+		8A2EE3D32188CEF200D8082C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A46EF1921882989003B86B2 /* FavoriteMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovie.swift; sourceTree = "<group>"; };
 		8A68235221826A8B00D06656 /* SearchEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEndPoint.swift; sourceTree = "<group>"; };
 		8A68235421826ED100D06656 /* SearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManager.swift; sourceTree = "<group>"; };
 		8A682356218282C400D06656 /* MainScreenCVDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCVDataSource.swift; sourceTree = "<group>"; };
@@ -124,11 +130,12 @@
 		8AEAB7AF21804A710092BB21 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
 		8AEAB7B121804B850092BB21 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		8B3BBB10D1D3BB8593B2BF35 /* Pods_concreto_filmes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_concreto_filmes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4D3CFD7C2FB38BE4C45ABF2 /* Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesUITests/Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B09949737941E10918187B49 /* Pods-concreto-filmesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmesTests/Pods-concreto-filmesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DC5BF2BB5687DD9672F76210 /* Pods-concreto-filmes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes/Pods-concreto-filmes.debug.xcconfig"; sourceTree = "<group>"; };
 		DDFC1D539FE2C2EB697E7B3B /* Pods-concreto-filmes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes.release.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes/Pods-concreto-filmes.release.xcconfig"; sourceTree = "<group>"; };
+		DFCE84A0FDFC764F41274907 /* Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesUITests/Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3B31C8A5B774A2001EAF3A3 /* Pods_concreto_filmesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_concreto_filmesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8CC472A8E8BEA42765D05FB /* Pods-concreto-filmes-concreto-filmesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesTests/Pods-concreto-filmes-concreto-filmesTests.release.xcconfig"; sourceTree = "<group>"; };
+		F4106BEB9D373A2A198F539E /* Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesTests/Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,10 +151,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18DEAAC1D6F02410563FCFE /* Pods_concreto_filmes_concreto_filmesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A2D185F217F9F6800139CA4 /* Frameworks */ = {
+		8A2EE3CC2188CEF200D8082C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -162,10 +170,14 @@
 			children = (
 				DC5BF2BB5687DD9672F76210 /* Pods-concreto-filmes.debug.xcconfig */,
 				DDFC1D539FE2C2EB697E7B3B /* Pods-concreto-filmes.release.xcconfig */,
-				739897577993422488CFBFB1 /* Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig */,
-				F8CC472A8E8BEA42765D05FB /* Pods-concreto-filmes-concreto-filmesTests.release.xcconfig */,
-				C4D3CFD7C2FB38BE4C45ABF2 /* Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig */,
-				7E4FA081F153258FFF576603 /* Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig */,
+				512B50756523F4D81BC59A0E /* Pods-concreto-filmesUITests.debug.xcconfig */,
+				77B0BC7DB2DA7B82812C330C /* Pods-concreto-filmesUITests.release.xcconfig */,
+				B09949737941E10918187B49 /* Pods-concreto-filmesTests.debug.xcconfig */,
+				4690514A12075EB27B90C0AE /* Pods-concreto-filmesTests.release.xcconfig */,
+				F4106BEB9D373A2A198F539E /* Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig */,
+				272787B60361BC8072B9B105 /* Pods-concreto-filmes-concreto-filmesTests.release.xcconfig */,
+				DFCE84A0FDFC764F41274907 /* Pods-concreto-filmes-concreto-filmesUITests.debug.xcconfig */,
+				1CE9D05B012D9F93BB200D99 /* Pods-concreto-filmes-concreto-filmesUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -194,7 +206,7 @@
 			children = (
 				8A2D1845217F9F6600139CA4 /* concreto-filmes */,
 				8A2D185A217F9F6800139CA4 /* concreto-filmesTests */,
-				8A2D1865217F9F6800139CA4 /* concreto-filmesUITests */,
+				8A2EE3D02188CEF200D8082C /* concreto-filmesUITests */,
 				8A2D1844217F9F6600139CA4 /* Products */,
 				21A8E2C7BB98517800FAE0C9 /* Pods */,
 				A85EB28F06974CDC118E7D6B /* Frameworks */,
@@ -206,7 +218,7 @@
 			children = (
 				8A2D1843217F9F6600139CA4 /* concreto-filmes.app */,
 				8A2D1857217F9F6800139CA4 /* concreto-filmesTests.xctest */,
-				8A2D1862217F9F6800139CA4 /* concreto-filmesUITests.xctest */,
+				8A2EE3CF2188CEF200D8082C /* concreto-filmesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +226,7 @@
 		8A2D1845217F9F6600139CA4 /* concreto-filmes */ = {
 			isa = PBXGroup;
 			children = (
+				8A46EF1821882973003B86B2 /* Realm */,
 				8AEAB79E2180413E0092BB21 /* Networking */,
 				8AEAB79B21801CB70092BB21 /* Model */,
 				8A2D188D217FD3AE00139CA4 /* Scenes */,
@@ -233,15 +246,6 @@
 				8A2D185D217F9F6800139CA4 /* Info.plist */,
 			);
 			path = "concreto-filmesTests";
-			sourceTree = "<group>";
-		};
-		8A2D1865217F9F6800139CA4 /* concreto-filmesUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8A2D1866217F9F6800139CA4 /* concreto_filmesUITests.swift */,
-				8A2D1868217F9F6800139CA4 /* Info.plist */,
-			);
-			path = "concreto-filmesUITests";
 			sourceTree = "<group>";
 		};
 		8A2D187A217FA2F300139CA4 /* Utils */ = {
@@ -289,6 +293,23 @@
 				8A2D1894217FD3D600139CA4 /* MovieDetailInteractor.swift */,
 			);
 			path = MoviewDetailScene;
+			sourceTree = "<group>";
+		};
+		8A2EE3D02188CEF200D8082C /* concreto-filmesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8A2EE3D12188CEF200D8082C /* concreto_filmesUITests.swift */,
+				8A2EE3D32188CEF200D8082C /* Info.plist */,
+			);
+			path = "concreto-filmesUITests";
+			sourceTree = "<group>";
+		};
+		8A46EF1821882973003B86B2 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				8A46EF1921882989003B86B2 /* FavoriteMovie.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		8AEAB79B21801CB70092BB21 /* Model */ = {
@@ -393,9 +414,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A2D186E217F9F6800139CA4 /* Build configuration list for PBXNativeTarget "concreto-filmesTests" */;
 			buildPhases = (
+				531F8ABAB579586E775CE6CC /* [CP] Check Pods Manifest.lock */,
 				8A2D1853217F9F6800139CA4 /* Sources */,
 				8A2D1854217F9F6800139CA4 /* Frameworks */,
 				8A2D1855217F9F6800139CA4 /* Resources */,
+				D00D3FDA0346F28CB8E17924 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -407,22 +430,22 @@
 			productReference = 8A2D1857217F9F6800139CA4 /* concreto-filmesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8A2D1861217F9F6800139CA4 /* concreto-filmesUITests */ = {
+		8A2EE3CE2188CEF200D8082C /* concreto-filmesUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A2D1871217F9F6800139CA4 /* Build configuration list for PBXNativeTarget "concreto-filmesUITests" */;
+			buildConfigurationList = 8A2EE3D62188CEF200D8082C /* Build configuration list for PBXNativeTarget "concreto-filmesUITests" */;
 			buildPhases = (
-				8A2D185E217F9F6800139CA4 /* Sources */,
-				8A2D185F217F9F6800139CA4 /* Frameworks */,
-				8A2D1860217F9F6800139CA4 /* Resources */,
+				8A2EE3CB2188CEF200D8082C /* Sources */,
+				8A2EE3CC2188CEF200D8082C /* Frameworks */,
+				8A2EE3CD2188CEF200D8082C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8A2D1864217F9F6800139CA4 /* PBXTargetDependency */,
+				8A2EE3D52188CEF200D8082C /* PBXTargetDependency */,
 			);
 			name = "concreto-filmesUITests";
 			productName = "concreto-filmesUITests";
-			productReference = 8A2D1862217F9F6800139CA4 /* concreto-filmesUITests.xctest */;
+			productReference = 8A2EE3CF2188CEF200D8082C /* concreto-filmesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -442,7 +465,7 @@
 						CreatedOnToolsVersion = 10.0;
 						TestTargetID = 8A2D1842217F9F6600139CA4;
 					};
-					8A2D1861217F9F6800139CA4 = {
+					8A2EE3CE2188CEF200D8082C = {
 						CreatedOnToolsVersion = 10.0;
 						TestTargetID = 8A2D1842217F9F6600139CA4;
 					};
@@ -463,7 +486,7 @@
 			targets = (
 				8A2D1842217F9F6600139CA4 /* concreto-filmes */,
 				8A2D1856217F9F6800139CA4 /* concreto-filmesTests */,
-				8A2D1861217F9F6800139CA4 /* concreto-filmesUITests */,
+				8A2EE3CE2188CEF200D8082C /* concreto-filmesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -485,7 +508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A2D1860217F9F6800139CA4 /* Resources */ = {
+		8A2EE3CD2188CEF200D8082C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -504,10 +527,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-concreto-filmes/Pods-concreto-filmes-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/KIF/KIF.framework",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -517,10 +537,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KIF.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -529,6 +546,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-concreto-filmes/Pods-concreto-filmes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		531F8ABAB579586E775CE6CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-concreto-filmes-concreto-filmesTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8A0FF4A72184115200580A58 /* ShellScript */ = {
@@ -570,6 +609,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D00D3FDA0346F28CB8E17924 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesTests/Pods-concreto-filmes-concreto-filmesTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-concreto-filmes-concreto-filmesTests/Pods-concreto-filmes-concreto-filmesTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -578,6 +651,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AEAB7AA218044CF0092BB21 /* ParameterEncoding.swift in Sources */,
+				8A46EF1A21882989003B86B2 /* FavoriteMovie.swift in Sources */,
 				8AEAB7AE218047370092BB21 /* URLParameterEncoder.swift in Sources */,
 				8AEAB7A6218043020092BB21 /* HTTPMethod.swift in Sources */,
 				8A2D187C217FA30300139CA4 /* AppColors.swift in Sources */,
@@ -626,11 +700,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A2D185E217F9F6800139CA4 /* Sources */ = {
+		8A2EE3CB2188CEF200D8082C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A2D1867217F9F6800139CA4 /* concreto_filmesUITests.swift in Sources */,
+				8A2EE3D22188CEF200D8082C /* concreto_filmesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,10 +716,10 @@
 			target = 8A2D1842217F9F6600139CA4 /* concreto-filmes */;
 			targetProxy = 8A2D1858217F9F6800139CA4 /* PBXContainerItemProxy */;
 		};
-		8A2D1864217F9F6800139CA4 /* PBXTargetDependency */ = {
+		8A2EE3D52188CEF200D8082C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8A2D1842217F9F6600139CA4 /* concreto-filmes */;
-			targetProxy = 8A2D1863217F9F6800139CA4 /* PBXContainerItemProxy */;
+			targetProxy = 8A2EE3D42188CEF200D8082C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -819,6 +893,7 @@
 		};
 		8A2D186F217F9F6800139CA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4106BEB9D373A2A198F539E /* Pods-concreto-filmes-concreto-filmesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -839,6 +914,7 @@
 		};
 		8A2D1870217F9F6800139CA4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 272787B60361BC8072B9B105 /* Pods-concreto-filmes-concreto-filmesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -857,7 +933,7 @@
 			};
 			name = Release;
 		};
-		8A2D1872217F9F6800139CA4 /* Debug */ = {
+		8A2EE3D72188CEF200D8082C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -876,7 +952,7 @@
 			};
 			name = Debug;
 		};
-		8A2D1873217F9F6800139CA4 /* Release */ = {
+		8A2EE3D82188CEF200D8082C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -925,11 +1001,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A2D1871217F9F6800139CA4 /* Build configuration list for PBXNativeTarget "concreto-filmesUITests" */ = {
+		8A2EE3D62188CEF200D8082C /* Build configuration list for PBXNativeTarget "concreto-filmesUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8A2D1872217F9F6800139CA4 /* Debug */,
-				8A2D1873217F9F6800139CA4 /* Release */,
+				8A2EE3D72188CEF200D8082C /* Debug */,
+				8A2EE3D82188CEF200D8082C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

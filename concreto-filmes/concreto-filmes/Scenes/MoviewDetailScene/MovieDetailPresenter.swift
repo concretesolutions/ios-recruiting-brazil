@@ -25,8 +25,11 @@ class MovieDetailPresenter: MovieDetailPresentationLogic {
         }
         let genresString = genres.joined(separator: ", ")
         let calendar = Calendar.current
-        let year = calendar.component(.year, from: movie.releaseDate)
-        let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genresString, overview: movie.overview, releaseDate: "\(year)", isFavorite: false)
+        var year: String = ""
+        if let date = movie.releaseDate {
+            year = "\(calendar.component(.year, from: date))"
+        }
+        let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genresString, overview: movie.overview, releaseDate: year, isFavorite: false)
         viewController?.displayMovie(viewModel: viewModel)
     }
 

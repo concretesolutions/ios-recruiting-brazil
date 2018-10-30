@@ -39,7 +39,7 @@ struct Movie {
     let id: Int
     let posterPath: String?
     let title: String
-    let releaseDate: Date
+    let releaseDate: Date?
     let overview: String
     let genreIDS: [Int]
 }
@@ -61,14 +61,10 @@ extension Movie: Decodable {
         id = try movieContainer.decode(Int.self, forKey: .id)
         posterPath = try? movieContainer.decode(String.self, forKey: .posterPath)
         title = try movieContainer.decode(String.self, forKey: .title)
-        let dateString = try movieContainer.decode(String.self, forKey: .releaseDate)
-        let formatter = DateFormatter.yyyyMMdd
-        if let date = formatter.date(from: dateString) {
-            releaseDate = date
-        } else {
-            throw DecodingError.dataCorruptedError(forKey: .releaseDate,
-                                                   in: movieContainer,
-                                                   debugDescription: "Date string does not match format expected by formatter.")
+        if let dateString = try? movieContainer.decode(String.self, forKey: .releaseDate) {
+            let formatter = DateFormatter.yyyyMMdd
+            releaseDate = formatter.date(from: dateString) } else {
+            releaseDate = nil
         }
         overview = try movieContainer.decode(String.self, forKey: .overview)
         genreIDS = try movieContainer.decode([Int].self, forKey: .genreIDS)

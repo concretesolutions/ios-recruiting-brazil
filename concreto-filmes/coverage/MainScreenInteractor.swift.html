@@ -195,37 +195,37 @@
 <tr class="covered">
 <td class="num">37</td>
 <td class="src"><pre><code class="objc">    func fetchPopularMovies(shouldResetMovies: Bool) {</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">38</td>
 <td class="src"><pre><code class="objc">        if shouldResetMovies {self.currentPageForAPIPopular = 1}</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">39</td>
 <td class="src"><pre><code class="objc">        worker.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: currentPageForAPIPopular), completion: { (movies, error) in</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">40</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">41</td>
 <td class="src"><pre><code class="objc">            self.presentMoviesOrError(movies: movies, persistentMovieList: &amp;self.movies, error: error, shouldResetMovies: shouldResetMovies, pageReference: &amp;self.currentPageForAPIPopular)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">42</td>
 <td class="src"><pre><code class="objc">        })</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">43</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="never">
 <td class="num">44</td>
@@ -285,22 +285,22 @@
 <tr class="covered">
 <td class="num">55</td>
 <td class="src"><pre><code class="objc">            switch result {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">56</td>
 <td class="src"><pre><code class="objc">            case .success:</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">57</td>
 <td class="src"><pre><code class="objc">                self.fetchPopularMovies(shouldResetMovies: true)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">58</td>
 <td class="src"><pre><code class="objc">            case .failure(let error):</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="missed">
 <td class="num">59</td>
@@ -310,12 +310,12 @@
 <tr class="covered">
 <td class="num">60</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">61</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">62</td>
@@ -330,12 +330,12 @@
 <tr class="covered">
 <td class="num">64</td>
 <td class="src"><pre><code class="objc">    func presentMoviesOrError(movies: [Movie]?, persistentMovieList: inout [Movie], error: String?, shouldResetMovies: Bool, pageReference: inout Int) {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">65</td>
 <td class="src"><pre><code class="objc">        if error != nil {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="missed">
 <td class="num">66</td>
@@ -345,27 +345,27 @@
 <tr class="covered">
 <td class="num">67</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">68</td>
 <td class="src"><pre><code class="objc">        if let movies = movies {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">69</td>
 <td class="src"><pre><code class="objc">            if shouldResetMovies {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">70</td>
 <td class="src"><pre><code class="objc">                persistentMovieList = movies</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">71</td>
 <td class="src"><pre><code class="objc">            } else {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="missed">
 <td class="num">72</td>
@@ -375,27 +375,27 @@
 <tr class="covered">
 <td class="num">73</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">74</td>
 <td class="src"><pre><code class="objc">            pageReference += 1</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">75</td>
 <td class="src"><pre><code class="objc">            self.presenter?.present(movies: persistentMovieList)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">76</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">77</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="never">
 <td class="num">78</td>

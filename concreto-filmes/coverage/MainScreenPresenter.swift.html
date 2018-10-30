@@ -125,47 +125,47 @@
 <tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc">    func present(movies: [Movie]?) {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">        var viewModelItems: [MainScreen.ViewModel.MovieViewModel] = []</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
 <td class="src"><pre><code class="objc">        if let movies = movies {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">26</td>
 <td class="src"><pre><code class="objc">            for movie in movies {</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">                viewModelItems.append(MainScreen.ViewModel.MovieViewModel(posterUrl: movie.posterPath ?? "", title: movie.title))</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">29</td>
 <td class="src"><pre><code class="objc">            viewController?.display(movies: viewModelItems)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">30</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">31</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="never">
 <td class="num">32</td>

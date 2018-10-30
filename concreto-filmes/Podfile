@@ -16,9 +16,17 @@ target 'concreto-filmes' do
   pod 'SDWebImage', '~> 4.0'
   pod 'SwiftLint'
   pod 'RealmSwift'
-  pod 'Quick'
-  pod 'Nimble'
-  pod 'KIF', :configurations => ['Debug']
+  # Pods for concreto-filmes
+  def testing_pods
+    pod 'Quick'
+    pod 'Nimble'
+  end
+
+  target 'concreto-filmesTests' do
+    use_frameworks!
+    # Pods for testing
+    testing_pods
+  end
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

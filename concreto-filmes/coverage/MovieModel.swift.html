@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MovieModel.swift" : </span><span class="cov_high">88.89%</span>
+<span>Coverage for "MovieModel.swift" : </span><span class="cov_high">95.65%</span>
 </h2>
-<h4 class="cov_subtitle">(24 of 27 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(22 of 23 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Model/MovieModel.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -145,47 +145,47 @@
 <tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">    init(from decoder: Decoder) throws {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">        let container = try decoder.container(keyedBy: MovieApiResponseCodingKeys.self)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">29</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">30</td>
 <td class="src"><pre><code class="objc">        page = try container.decode(Int.self, forKey: .page)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">31</td>
 <td class="src"><pre><code class="objc">        numberOfResults = try container.decode(Int.self, forKey: .numberOfResults)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">32</td>
 <td class="src"><pre><code class="objc">        numberOfPages = try container.decode(Int.self, forKey: .numberOfPages)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">33</td>
 <td class="src"><pre><code class="objc">        movies = try container.decode([Movie].self, forKey: .movies)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">34</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">35</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="never">
 <td class="num">36</td>
@@ -219,7 +219,7 @@
 </tr>
 <tr class="never">
 <td class="num">42</td>
-<td class="src"><pre><code class="objc">    let releaseDate: Date</code></pre></td>
+<td class="src"><pre><code class="objc">    let releaseDate: Date?</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -300,95 +300,75 @@
 <tr class="covered">
 <td class="num">58</td>
 <td class="src"><pre><code class="objc">    init(from decoder: Decoder) throws {</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">59</td>
 <td class="src"><pre><code class="objc">        let movieContainer = try decoder.container(keyedBy: MovieCodingKeys.self)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">60</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">61</td>
 <td class="src"><pre><code class="objc">        id = try movieContainer.decode(Int.self, forKey: .id)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">62</td>
 <td class="src"><pre><code class="objc">        posterPath = try? movieContainer.decode(String.self, forKey: .posterPath)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">63</td>
 <td class="src"><pre><code class="objc">        title = try movieContainer.decode(String.self, forKey: .title)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">64</td>
-<td class="src"><pre><code class="objc">        let dateString = try movieContainer.decode(String.self, forKey: .releaseDate)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="src"><pre><code class="objc">        if let dateString = try? movieContainer.decode(String.self, forKey: .releaseDate) {</code></pre></td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">65</td>
-<td class="src"><pre><code class="objc">        let formatter = DateFormatter.yyyyMMdd</code></pre></td>
-<td class="coverage">20x</td>
+<td class="src"><pre><code class="objc">            let formatter = DateFormatter.yyyyMMdd</code></pre></td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
 <td class="num">66</td>
-<td class="src"><pre><code class="objc">        if let date = formatter.date(from: dateString) {</code></pre></td>
-<td class="coverage">20x</td>
+<td class="src"><pre><code class="objc">            releaseDate = formatter.date(from: dateString) } else {</code></pre></td>
+<td class="coverage">80x</td>
 </tr>
-<tr class="covered">
+<tr class="missed">
 <td class="num">67</td>
-<td class="src"><pre><code class="objc">            releaseDate = date</code></pre></td>
-<td class="coverage">20x</td>
+<td class="src"><pre><code class="objc">            releaseDate = nil</code></pre></td>
+<td class="coverage">!</td>
 </tr>
 <tr class="covered">
 <td class="num">68</td>
-<td class="src"><pre><code class="objc">        } else {</code></pre></td>
-<td class="coverage">20x</td>
-</tr>
-<tr class="missed">
-<td class="num">69</td>
-<td class="src"><pre><code class="objc">            throw DecodingError.dataCorruptedError(forKey: .releaseDate,</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">70</td>
-<td class="src"><pre><code class="objc">                                                   in: movieContainer,</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">71</td>
-<td class="src"><pre><code class="objc">                                                   debugDescription: "Date string does not match format expected by formatter.")</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="covered">
-<td class="num">72</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
-<td class="num">73</td>
+<td class="num">69</td>
 <td class="src"><pre><code class="objc">        overview = try movieContainer.decode(String.self, forKey: .overview)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
-<td class="num">74</td>
+<td class="num">70</td>
 <td class="src"><pre><code class="objc">        genreIDS = try movieContainer.decode([Int].self, forKey: .genreIDS)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="covered">
-<td class="num">75</td>
+<td class="num">71</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">80x</td>
 </tr>
 <tr class="never">
-<td class="num">76</td>
+<td class="num">72</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

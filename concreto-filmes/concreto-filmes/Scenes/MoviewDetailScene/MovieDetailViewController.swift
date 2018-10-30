@@ -201,7 +201,6 @@ extension MovieDetailViewController: CodeView {
 
 }
 
-
 extension MovieDetailViewController {
     @objc fileprivate func touchUpInsideButton() {
         if viewState == .favourited {
