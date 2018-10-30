@@ -34,6 +34,14 @@ final class DefaultMovieGridInteractor {
 extension DefaultMovieGridInteractor: MovieGridInteractor {
     
     func fetchMovieList(page: Int) {
+        
+//        if self.moviePersistence.didFetchMovies {
+//            let movies = buildMovieGridUnits(from: self.moviePersistence.fetchedMovies)
+//            self.presenter.present(movies: movies)
+//        } else {
+//            
+//        }
+        
         self.movieFetcher.fetchPopularMovies(page: page) { [weak self] result in
             guard let self = self else { return }
             

@@ -11,29 +11,15 @@ import Foundation
 
 class MovieGridPresenterMock: MovieGridPresenter {
     
-    /**
-        All methods this class contains. Used to spy on method calls.
-     */
     enum Method: Equatable {
         case presentMovies
         case presentNetworkError
     }
     
-    /**
-        Every call of method made in this object.
-     */
     private var calls = Set<Method>()
     
-    /**
-        MovieGridMovies received through presentMovies method.
-     */
     public var receivedMovies = [MovieGridUnit]()
     
-    
-    /**
-        Tells if this method was called only once and alone.
-     - Parameter method: method to check
-     */
     public func didCall(method: Method) -> Bool {
         return self.calls.contains(method)
     }

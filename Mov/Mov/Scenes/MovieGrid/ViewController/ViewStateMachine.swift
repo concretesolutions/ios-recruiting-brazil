@@ -13,7 +13,7 @@ class ViewStateMachine {
     
     func enter(state: ViewState) {
         if let currentState = self.currentState {
-            currentState.onExit()        
+            currentState.onExit()
         } else {/*do nothing*/}
         
         state.enter()

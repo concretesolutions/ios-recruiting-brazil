@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MovieGridBaseState: ViewState {
+class MovieGridBaseState: ViewState, Equatable {
+    
     unowned let vc: MovieGridViewController
     
     init(viewController: MovieGridViewController) {
@@ -21,5 +22,17 @@ class MovieGridBaseState: ViewState {
     
     func showViews() -> [UIView] {
         return []
+    }
+    
+    func onEnter() {
+        //
+    }
+    
+    func onExit() {
+        //
+    }
+    
+    static func == (lhs: MovieGridBaseState, rhs: MovieGridBaseState) -> Bool {
+        return type(of: lhs) == type(of: rhs)
     }
 }

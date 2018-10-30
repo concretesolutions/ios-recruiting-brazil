@@ -12,22 +12,17 @@ import Foundation
 
 class MovieGridViewOutPutMock: MovieGridViewOutput {
     
-    private var calls = Set<Methods>()
+    private var calls = Set<Method>()
     
     public var receivedViewModels = [MovieGridViewModel]()
     
-    enum Methods {
+    enum Method {
         case displayMovies
         case displayNetworkError
     }
     
-    func didCall(method: Methods) -> Bool {
+    func didCall(method: Method) -> Bool {
         return self.calls.contains(method)
-    }
-    
-    func resetMock() {
-        self.calls.removeAll()
-        self.receivedViewModels.removeAll()
     }
     
     func display(movies: [MovieGridViewModel]) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ViewState {
+protocol ViewState: class {
     func hideViews() -> [UIView]
     func showViews() -> [UIView]
     func onEnter()

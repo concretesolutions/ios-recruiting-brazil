@@ -10,8 +10,20 @@ import Foundation
 
 class HuePersistence: MoviePersistence {
     
+    private (set) var pagesFetch: Int = 0
+    
+    var fetchedMovies: [Movie] = [Movie]()
+    
+    
     func isFavorite(_ movie: Movie) -> Bool {
         return true
     }
     
+    func shouldFetchMovies(forPage page: Int) -> Bool {
+        return page > self.pagesFetch
+    }
+    
+    func incrementPagesFetch() {
+        self.pagesFetch += 1
+    }
 }

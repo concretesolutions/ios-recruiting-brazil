@@ -17,5 +17,5 @@ class MovieGridCollectionState: MovieGridBaseState {
     
     override func showViews() -> [UIView] {
         return [vc.collectionView]
-    }    
+    }
 }

@@ -11,7 +11,11 @@ import Foundation
 class MovieGridBuilder {
     
     static func build() -> MovieGridViewController {
-        return viewOutput
+        let viewController = viewOutput
+        let presenter = MovieGridBuilder.presenter(viewOutput: viewController)
+        viewController.interactor = interactor(presenter: presenter)
+        
+        return viewController
     }
     
     static var viewOutput: MovieGridViewController {

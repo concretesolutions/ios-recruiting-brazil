@@ -13,7 +13,13 @@ final class MovieGridViewController: UIViewController {
     
     let dataSource = MovieGridDataSource()
     
-    var interactor: MovieGridInteractor!
+    var interactor: MovieGridInteractor! {
+        didSet {
+            if (self.dataSource.viewModels.isEmpty) {
+                self.interactor.fetchMovieList(page: 1)
+            }
+        }
+    }
     
     lazy var collection: UICollectionView = {
         return self.collectionView.collection
@@ -39,25 +45,25 @@ final class MovieGridViewController: UIViewController {
        return ViewStateMachine()
     }()
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        let presenter = MovieGridBuilder.presenter(viewOutput: self)
-        self.interactor = MovieGridBuilder.interactor(presenter: presenter)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private(set) var state: MovieGridState = .collection {
+        didSet {
+            var viewState: ViewState
+            
+            switch state {
+            case .collection:
+                viewState = self.collectionState
+            case .error:
+                viewState = self.errorState
+            }
+            
+            self.stateMachine.enter(state: viewState)
+        }
     }
     
     override func loadView() {
         let view = BlankView()
         self.view = view
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         self.setup()
-        interactor.fetchMovieList(page: 1)
     }
 }
 
@@ -66,12 +72,13 @@ extension MovieGridViewController: MovieGridViewOutput {
     
     func display(movies: [MovieGridViewModel]) {
         self.dataSource.viewModels = movies
-        
         self.collection.reloadData()
+        
+        self.state = .collection
     }
     
     func displayNetworkError() {
-        self.stateMachine.enter(state: self.errorState)
+        self.state = .error
     }
 }
 
@@ -91,8 +98,13 @@ extension MovieGridViewController: ViewCode {
             make.edges.equalToSuperview()
         }
     }
-    
-    func additionalSetup() {
-        self.stateMachine.enter(state: self.collectionState)
+}
+
+
+// MARK: State management
+extension MovieGridViewController {
+    enum MovieGridState {
+        case collection
+        case error
     }
 }

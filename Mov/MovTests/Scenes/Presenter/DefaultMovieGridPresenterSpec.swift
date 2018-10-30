@@ -13,51 +13,47 @@ import Nimble
 
 class DefaultMovieGridPresenterSpec: QuickSpec {
     override func spec() {
-        describe("the MovieGrid interactor") {
-            let viewOutput = MovieGridViewOutPutMock()
-            
-            let presenter = DefaultMovieGridPresenter(viewOutput: viewOutput)
-            
-            let movieGridUnitsMock = (0..<5).map { movieTitle in
-                return MovieGridUnit(title: String(movieTitle), posterPath: "", isFavorite: false)
-            }
+        describe("the MovieGrid presenter") {
             
             context("when initialized") {
+                var viewOutput: MovieGridViewOutPutMock!
+                var presenter: DefaultMovieGridPresenter!
                 
-            }
-            
-            context("when requested to present movies") {
                 beforeEach {
-                    presenter.present(movies: movieGridUnitsMock)
+                    viewOutput = MovieGridViewOutPutMock()
+                    presenter = DefaultMovieGridPresenter(viewOutput: viewOutput)
                 }
                 
-                it("call viewOutput displayMovies") {
-                    expect(viewOutput.didCall(method: .displayMovies)).to(beTrue())
-                }
-                
-                it("send correctly to viewOutput the data to be displayed") {
-                    let viewModelsMock = movieGridUnitsMock.map { unit in
+                context("and requested to present movies") {
+                    let unitsMock = (0..<5).map { movieTitle in
+                        return MovieGridUnit(title: String(movieTitle), posterPath: "", isFavorite: false)
+                    }
+                    
+                    let expectedViewModels = unitsMock.map { unit in
                         return MovieGridViewModel(title: unit.title, posterPath: unit.posterPath, isFavoriteIcon: Images.isFavoriteIconGray)
                     }
                     
-                    expect(viewOutput.receivedViewModels).to(equal(viewModelsMock))
+                    beforeEach {
+                        presenter.present(movies: unitsMock)
+                    }
+                    
+                    it("display movies") {
+                        expect(viewOutput.didCall(method: .displayMovies)).to(beTrue())
+                    }
+                    
+                    it("send correctly to viewOutput the data to be displayed") {
+                        expect(viewOutput.receivedViewModels).to(equal(expectedViewModels))
+                    }
                 }
                 
-                afterEach {
-                    viewOutput.resetMock()                }
-            }
-            
-            context("when requested to present a network error") {
-                beforeEach {
-                    presenter.presentNetworkError()
-                }
-                
-                it("call viewOutput displayNetworkError") {
-                    expect(viewOutput.didCall(method: .displayNetworkError)).to(beTrue())
-                }
-                
-                afterEach {
-                    viewOutput.resetMock()
+                context("and requested to present a network error") {
+                    beforeEach {
+                        presenter.presentNetworkError()
+                    }
+                    
+                    it("display networkError") {
+                        expect(viewOutput.didCall(method: .displayNetworkError)).to(beTrue())
+                    }
                 }
             }
         }

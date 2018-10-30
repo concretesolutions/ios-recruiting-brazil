@@ -8,10 +8,11 @@
 
 import Foundation
 
-protocol MoviePersistence {
-    /**
-     Tell if ```movie``` is marked as favorite.
-     - Parameter movie: movie to be evaluated.
-     */
+protocol MoviePersistence: class {
+    
+//    var pagesFetch: Int { get }
+//    
+//    var fetchedMovies: [Movie] { get set }
+    
     func isFavorite(_ movie: Movie) -> Bool
 }
