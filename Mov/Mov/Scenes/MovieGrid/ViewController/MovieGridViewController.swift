@@ -10,6 +10,8 @@ import UIKit
 
 final class MovieGridViewController: UIViewController {
     
+    private static let title = "Movies"
+    
     var interactor: MovieGridInteractor! {
         didSet {
             if (self.viewModels.isEmpty) {
@@ -67,6 +69,10 @@ final class MovieGridViewController: UIViewController {
         self.setup()
         self.state = .collection
     }
+    
+    override func viewDidLoad() {
+        self.setTabBarOptions()
+    }
 }
 
 // MARK: MovieGridViewOutput
@@ -84,7 +90,7 @@ extension MovieGridViewController: MovieGridViewOutput {
     }
 }
 
-// MARK: View Code stuff
+// MARK: View Code
 extension MovieGridViewController: ViewCode {
     func addView() {
         self.view.addSubview(self.collectionView)
@@ -121,5 +127,13 @@ extension MovieGridViewController {
             self.interactor.toggleFavoriteMovie(at: indexPath.item)
             self.interactor.fetchMovieList(page: self.page)
         }
+    }
+}
+
+// MARK: TabBar setup
+extension MovieGridViewController {
+    func setTabBarOptions() {
+        self.tabBarItem = UITabBarItem(title: MovieGridViewController.title,
+                                       image: Images.movieListIcon, tag: 0)
     }
 }

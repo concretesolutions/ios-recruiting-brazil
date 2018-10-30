@@ -1,6 +1,6 @@
 //
 //  TMDBMovieListInteractor.swift
-//  ShitMov
+//  Mov
 //
 //  Created by Miguel Nery on 22/10/18.
 //  Copyright © 2018 Miguel Nery. All rights reserved.
@@ -38,7 +38,6 @@ final class DefaultMovieGridInteractor {
 extension DefaultMovieGridInteractor: MovieGridInteractor {
     
     func toggleFavoriteMovie(at index: Int) {
-        print(index)
         if let movie = self.fetchedMovies[safe: index] {
             self.persistence.toggleFavorite(movie: movie)
             self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))

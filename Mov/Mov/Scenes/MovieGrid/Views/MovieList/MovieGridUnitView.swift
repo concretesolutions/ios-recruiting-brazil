@@ -60,7 +60,6 @@ class MovieGridUnitView: UIView {
     
     @objc func didTapFavoriteButton(_ sender: UIButton) {
         if let action = self.favoriteButtonAction {
-            print("👰🏾")
             action(sender)
         } else {/*do nothing*/}
     }

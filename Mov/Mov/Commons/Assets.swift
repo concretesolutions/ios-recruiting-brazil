@@ -16,6 +16,7 @@ struct Images {
     static let isFavoriteIconFull: UIImage = #imageLiteral(resourceName: "favorite_full_icon")
     static let isFavoriteIconGray: UIImage = #imageLiteral(resourceName: "favorite_gray_icon")
     static let error:UIImage = #imageLiteral(resourceName: "error_icon")
+    static let movieListIcon = #imageLiteral(resourceName: "list_icon")
 }
 
 struct Colors {
