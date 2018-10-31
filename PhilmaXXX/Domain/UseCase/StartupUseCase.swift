@@ -7,5 +7,5 @@
 //
 
 public protocol StartupUseCase {
-	func fetchGenres(handler: @escaping ([Genre]?, Error?) -> ()) 
+	func fetchGenres(handler: @escaping (Result<[Genre]>) -> ()) 
 }

@@ -42,6 +42,7 @@ class MoviePosterCollectionViewCell: UICollectionViewCell {
 	func setup(entityModel: MoviePosterCellEntity){
 		self.nameLabel.text = entityModel.title
 		self.poster.kf.indicatorType = .activity
+		(self.poster.kf.indicator?.view as? UIActivityIndicatorView)?.color = .white
 		self.poster.kf.setImage(with: entityModel.posterURL)
 		self.favorite = entityModel.stateFavorite
 		

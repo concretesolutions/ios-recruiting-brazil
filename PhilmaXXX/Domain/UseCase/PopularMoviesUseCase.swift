@@ -7,6 +7,6 @@
 //
 
 public protocol PopularMoviesUseCase {
-	func fetchMovies(pageNumber: Int, handler: @escaping ([Movie]?, Error?) -> ()) 
+	func fetchMovies(pageNumber: Int, handler: @escaping (Result<[Movie]>) -> ()) 
 	
 }

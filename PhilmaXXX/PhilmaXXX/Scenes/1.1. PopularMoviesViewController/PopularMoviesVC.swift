@@ -77,6 +77,7 @@ final class PopularMoviesVC: UIViewController {
 	
 	lazy var activityIndicator: UIActivityIndicatorView = {
 		let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+		activityIndicator.color = .white
 		activityIndicator.hidesWhenStopped = true
 		activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 		

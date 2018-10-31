@@ -45,26 +45,28 @@ final class PopularMoviesVCModel: NSObject {
 	}
 	
 	private func fetchMovies(handler: @escaping (Bool) -> ()){
-		popularMoviesUseCase.fetchMovies(pageNumber: pageCount) { (movies, error) in
-			if let movies = movies {
+		popularMoviesUseCase.fetchMovies(pageNumber: pageCount) { (result) in
+			switch result {
+			case .success(let value):
 				self.pageCount += 1
-				self.movies.append(contentsOf: movies)
+				self.movies.append(contentsOf: value)
 				self.refreshFavoriteMovies()
 				handler(true)
-			} else if let uError = error{
-				print(uError.localizedDescription)
+			case .failure(_):
 				handler(false)
 			}
+			
 		}
 	}
 	
 	public func refreshFavoriteMovies(){
-		favoriteMoviesUseCase.fetchFavorites(handler: { (favMovies, error) in
-			if let favMovies = favMovies {
-				self.favoriteMoviesIDs = favMovies.map({ $0.id })
+		favoriteMoviesUseCase.fetchFavorites(handler: { (result) in
+			switch result {
+			case .success(let value):
+				self.favoriteMoviesIDs = value.map({ $0.id })
 				self.collectionView?.reloadData()
-			} else {
-				print(error?.localizedDescription ?? "")
+			case .failure(_):
+				break
 			}
 		})
 	}

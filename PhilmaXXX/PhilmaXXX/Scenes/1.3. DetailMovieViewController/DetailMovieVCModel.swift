@@ -22,13 +22,12 @@ final class DetailMovieVCModel: NSObject {
 		self.favorite = favorite
 	}
 	
-	public func provideDetailedMetadata(handler: @escaping (Movie?, [Genre]?, Bool, Error?) -> ())  {
-		filterUseCase.fetchCachedGenres(with: movie.genreIDs) { (genres, error) in
-			
-			if let genres = genres {
-				handler(self.movie, genres, self.favorite, nil)
-			} else {
-				print(error?.localizedDescription ?? "")
+	public func provideDetailedMetadata(handler: @escaping (Movie?, [Genre]?, Bool, DomainError?) -> ())  {
+		filterUseCase.fetchCachedGenres(with: movie.genreIDs) { (result) in
+			switch result {
+			case .success(let value):
+				handler(self.movie, value, self.favorite, nil)
+			case .failure(let error):
 				handler(nil, nil, false, error)
 			}
 		}

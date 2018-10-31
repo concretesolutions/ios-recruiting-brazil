@@ -20,28 +20,31 @@ public final class StartupUseCase: Domain.StartupUseCase {
 		self.decoder = decoder
 	}
 	
-	public func fetchGenres(handler: @escaping ([Genre]?, Error?) -> ()) {
-		requestGenres { (genres, error) in
-			if let error = error {
-				handler(nil, error)
-			} else {
-				handler(genres, nil)
+	public func fetchGenres(handler: @escaping (Domain.Result<[Genre]>) -> ()) {
+		requestGenres { (result) in
+			switch result {
+			case .success(let value):
+				handler(Domain.Result<[Genre]>.success(value))
+			case .failure(let error):
+				handler(Domain.Result<[Genre]>.failure(error))
 			}
 		}
 	}
 	
-	private func requestGenres(handler: @escaping ([Genre]?, Error?) -> ()) {
+	private func requestGenres(handler: @escaping (Domain.Result<[Genre]>) -> ()) {
 		provider.request(TMDB_Service.getGenres) { (result) in
 			switch result {
 			case .success(let value):
 				do {
 					let genres = try value.map([Genre].self, atKeyPath: "genres", using: self.decoder, failsOnEmptyData: false)
-					handler(genres, nil)
+					handler(Domain.Result<[Genre]>.success(genres))
 				} catch {
-					handler(nil, ErrorProvider.standard(localizedDescription: error.localizedDescription))
+					handler(Domain.Result<[Genre]>
+						.failure(NetworkDomainError(errorCode: NetworkErrorCode.decodingError, error: error).value()))
 				}
 			case .failure(let error):
-				handler(nil, ErrorProvider.standard(localizedDescription: error.localizedDescription))
+				handler(Domain.Result<[Genre]>
+					.failure(NetworkDomainError(errorCode: NetworkErrorCode.responseError, error: error).value()))
 			}
 		}
 	}

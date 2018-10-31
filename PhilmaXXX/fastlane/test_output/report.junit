@@ -1,30 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <testsuites name='NetworkPlatformTests.xctest' tests='24' failures='0'>
   <testsuite name='DomainTests.GenreSpec' tests='4' failures='0'>
-    <testcase classname='DomainTests.GenreSpec' name='a_genre__when_initialized_with_only_its_non_optional_params__in_comparison_with_other_genres_with_same_id_and_different_params__should_be_equal' time='0.006'/>
+    <testcase classname='DomainTests.GenreSpec' name='a_genre__when_initialized_with_only_its_non_optional_params__in_comparison_with_other_genres_with_same_id_and_different_params__should_be_equal' time='0.003'/>
     <testcase classname='DomainTests.GenreSpec' name='a_genre__when_initialized_with_only_its_non_optional_params__but_when_in_comparison_with_other_genres_with_different_id__should_be_not_equal' time='0.001'/>
-    <testcase classname='DomainTests.GenreSpec' name='a_genre__initialized_from_json_decoder__and_using_a_valid_json_file__should_parse_correctly' time='0.004'/>
-    <testcase classname='DomainTests.GenreSpec' name='a_genre__initialized_from_json_decoder__and_using_an_invalid_json_file__shouldn_t_parse' time='0.007'/>
+    <testcase classname='DomainTests.GenreSpec' name='a_genre__initialized_from_json_decoder__and_using_a_valid_json_file__should_parse_correctly' time='0.001'/>
+    <testcase classname='DomainTests.GenreSpec' name='a_genre__initialized_from_json_decoder__and_using_an_invalid_json_file__shouldn_t_parse' time='0.003'/>
   </testsuite>
   <testsuite name='DomainTests.MovieSpec' tests='4' failures='0'>
     <testcase classname='DomainTests.MovieSpec' name='a_movie__when_initialized_with_only_its_non_optional_params__in_comparison_with_other_movies_with_same_id_and_different_params__should_be_equal' time='0.001'/>
     <testcase classname='DomainTests.MovieSpec' name='a_movie__when_initialized_with_only_its_non_optional_params__but_when_in_comparison_with_other_movies_with_different_id__should_be_not_equal' time='0.001'/>
-    <testcase classname='DomainTests.MovieSpec' name='a_movie__initialized_from_json_decoder__and_using_a_valid_json_file__should_parse_correctly' time='0.003'/>
+    <testcase classname='DomainTests.MovieSpec' name='a_movie__initialized_from_json_decoder__and_using_a_valid_json_file__should_parse_correctly' time='0.001'/>
     <testcase classname='DomainTests.MovieSpec' name='a_movie__initialized_from_json_decoder__and_using_an_invalid_json_file__shouldn_t_parse' time='0.001'/>
   </testsuite>
   <testsuite name='RealmPlatformTests.FavoritesRepositorySpec' tests='4' failures='0'>
-    <testcase classname='RealmPlatformTests.FavoritesRepositorySpec' name='the_clear_favorite_s_repository__should_have_nothing_on_them' time='0.006'/>
+    <testcase classname='RealmPlatformTests.FavoritesRepositorySpec' name='the_clear_favorite_s_repository__should_have_nothing_on_them' time='0.008'/>
     <testcase classname='RealmPlatformTests.FavoritesRepositorySpec' name='the_clear_favorite_s_repository__inserting_a_new_data__retrieves_the_movies_from_repository___should_have_one_data_on_the_repository' time='0.001'/>
     <testcase classname='RealmPlatformTests.FavoritesRepositorySpec' name='the_clear_favorite_s_repository__inserting_a_new_data__retrieves_the_movies_from_repository___one_data_retrieved_should_be_equal_to_the_first_created' time='0.001'/>
     <testcase classname='RealmPlatformTests.FavoritesRepositorySpec' name='the_clear_favorite_s_repository__inserting_a_new_data__retrieves_the_movies_from_repository___and_after_deleting_the_only_one_item_in_repository__equal_to_the_one_created__should_have_no_items_on_the_repository' time='0.001'/>
   </testsuite>
   <testsuite name='RealmPlatformTests.GenresRepositorySpec' tests='6' failures='0'>
-    <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__should_have_nothing_on_them' time='0.002'/>
+    <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__should_have_nothing_on_them' time='0.001'/>
     <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__inserting_a_new_data__retrieves_the_genres_from_repository___should_have_one_data_on_the_repository' time='0.001'/>
-    <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__inserting_a_new_data__retrieves_the_genres_from_repository___one_data_retrieved_should_be_equal_to_the_first_created' time='0.001'/>
+    <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__inserting_a_new_data__retrieves_the_genres_from_repository___one_data_retrieved_should_be_equal_to_the_first_created' time='0.002'/>
     <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__inserting_a_new_data__retrieves_the_genres_from_repository___and_after_deleting_the_only_one_item_in_repository__equal_to_the_one_created__should_have_no_items_on_the_repository' time='0.001'/>
     <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__after_populating_the_repository_with_items_that_has_id_from_1_to_5__and_set_them_on_the_repository__should_have_5_items' time='0.003'/>
-    <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__after_populating_the_repository_with_items_that_has_id_from_1_to_5__and_set_them_on_the_repository__also_should_get_only_three_items_if_we_fetch_for_ids__1__3__5_' time='0.021'/>
+    <testcase classname='RealmPlatformTests.GenresRepositorySpec' name='the_clear_genres_repository__after_populating_the_repository_with_items_that_has_id_from_1_to_5__and_set_them_on_the_repository__also_should_get_only_three_items_if_we_fetch_for_ids__1__3__5_' time='0.034'/>
   </testsuite>
   <testsuite name='RealmPlatformTests.RealmGenreSpec' tests='2' failures='0'>
     <testcase classname='RealmPlatformTests.RealmGenreSpec' name='a_genre_in_realm__and_its_base_data_and_return__should_have_identical_properties' time='0.001'/>
@@ -35,7 +35,7 @@
     <testcase classname='RealmPlatformTests.RealmMovieSpec' name='a_movie_in_realm__and_its_base_data_and_return__also_should_be_identical_to_its_base_replic_method_return' time='0.001'/>
   </testsuite>
   <testsuite name='NetworkPlatformTests.TMDB_ServiceSpec' tests='2' failures='0'>
-    <testcase classname='NetworkPlatformTests.TMDB_ServiceSpec' name='the_webservice__should_get_the_first_page_of_popular_movies__eventually_having_something' time='0.022'/>
-    <testcase classname='NetworkPlatformTests.TMDB_ServiceSpec' name='the_webservice__should_get_all_movie_genres__eventually_having_something' time='0.001'/>
+    <testcase classname='NetworkPlatformTests.TMDB_ServiceSpec' name='the_webservice__should_get_the_first_page_of_popular_movies__eventually_having_something' time='0.072'/>
+    <testcase classname='NetworkPlatformTests.TMDB_ServiceSpec' name='the_webservice__should_get_all_movie_genres__eventually_having_something' time='0.002'/>
   </testsuite>
 </testsuites>

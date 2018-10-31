@@ -17,12 +17,12 @@ public final class FilterUseCase: Domain.FilterUseCase {
 		self.repository = repository
 	}
 	
-	public func fetchCachedGenres(handler: @escaping ([Genre]?, Error?) -> ()) {
-		handler(self.repository.get(), nil)
+	public func fetchCachedGenres(handler: @escaping (Result<[Genre]>) -> ()) {
+		handler(Result<[Genre]>.success(self.repository.get()))
 	}
 	
-	public func fetchCachedGenres(with IDs: [Int], handler: @escaping ([Genre]?, Error?) -> ()) {
-		handler(self.repository.get(with: IDs), nil)
+	public func fetchCachedGenres(with IDs: [Int], handler: @escaping (Result<[Genre]>) -> ()) {
+		handler(Result<[Genre]>.success(self.repository.get(with: IDs)))
 	}
 	
 }

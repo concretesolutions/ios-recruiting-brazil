@@ -7,6 +7,6 @@
 //
 
 public protocol FilterUseCase {
-	func fetchCachedGenres(handler: @escaping ([Genre]?, Error?) -> ())
-	func fetchCachedGenres(with IDs: [Int], handler: @escaping ([Genre]?, Error?) -> ())
+	func fetchCachedGenres(handler: @escaping (Result<[Genre]>) -> ())
+	func fetchCachedGenres(with IDs: [Int], handler: @escaping (Result<[Genre]>) -> ())
 }

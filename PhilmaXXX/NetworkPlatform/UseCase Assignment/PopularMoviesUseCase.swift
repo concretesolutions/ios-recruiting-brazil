@@ -34,7 +34,7 @@ public final class PopularMoviesUseCase: Domain.PopularMoviesUseCase {
 	}
 	
 	private func runFetchTimer(){
-		self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(enableFetchPermission), userInfo: nil, repeats: false)
+		self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(enableFetchPermission), userInfo: nil, repeats: false)
 	}
 	
 	@objc func enableFetchPermission(){
@@ -45,33 +45,39 @@ public final class PopularMoviesUseCase: Domain.PopularMoviesUseCase {
 		self.fetchPermission = false
 	}
 	
-	public func fetchMovies(pageNumber: Int, handler: @escaping ([Movie]?, Error?) -> ()) {
+	public func fetchMovies(pageNumber: Int, handler: @escaping (Domain.Result<[Movie]>) -> ()) {
 		validadeFetchPermission(allowed: {
-			self.requestMovies(pageNumber: pageNumber) { (movies, error) in
-				if let error = error {
-					handler(nil, error)
-				} else {
-					handler(movies, error)
+			self.requestMovies(pageNumber: pageNumber) { (result) in
+				switch result {
+				case .success(let value):
+					handler(Domain.Result<[Movie]>.success(value))
+				case .failure(let error):
+					handler(Domain.Result<[Movie]>.failure(error))
 				}
 			}
 		}) {
-			handler(nil, ErrorProvider.standard(localizedDescription: "Fetch not permitted due to spam protection.") )
+			handler(Domain.Result<[Movie]>.failure(NetworkDomainError(
+				errorCode: NetworkErrorCode.spamProtectionError,
+				error: ErrorProvider.standard(localizedDescription: "Fetch not permitted due to spam protection.")).value()
+			))
 		}
 		
 	}
 	
-	private func requestMovies(pageNumber: Int, handler: @escaping ([Movie]?, Error?) -> ()) {
+	private func requestMovies(pageNumber: Int, handler: @escaping (Domain.Result<[Movie]>) -> ()) {
 		provider.request(TMDB_Service.getPopularMovies(pageNumber: pageNumber)) { (result) in
 			switch (result){
 			case .success(let value):
 				do {
 					let movies = try value.map([Movie].self, atKeyPath: "results", using: self.decoder, failsOnEmptyData: false)
-					handler(movies, nil)
+					handler(Domain.Result<[Movie]>.success(movies))
 				} catch {
-					handler(nil, ErrorProvider.standard(localizedDescription: error.localizedDescription))
+					handler(Domain.Result<[Movie]>
+						.failure(NetworkDomainError(errorCode: NetworkErrorCode.decodingError, error: error).value()))
 				}
 			case.failure(let error):
-				handler(nil, ErrorProvider.standard(localizedDescription: error.localizedDescription))
+				handler(Domain.Result<[Movie]>
+					.failure(NetworkDomainError(errorCode: NetworkErrorCode.responseError, error: error).value()))
 			}
 		}
 	}

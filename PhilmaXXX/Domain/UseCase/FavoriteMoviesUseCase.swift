@@ -7,7 +7,7 @@
 //
 
 public protocol FavoriteMoviesUseCase {
-	func fetchFavorites(handler: @escaping ([Movie]?, Error?) -> ())
+	func fetchFavorites(handler: @escaping (Result<[Movie]>) -> ())
 	func addFavorite(object: Movie)
 	func deleteFavorite(object: Movie)
 }

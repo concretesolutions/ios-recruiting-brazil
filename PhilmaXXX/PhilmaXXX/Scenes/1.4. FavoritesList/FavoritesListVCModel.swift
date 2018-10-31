@@ -54,10 +54,11 @@ final class FavoritesListVCModel: NSObject {
 	}
 	
 	private func fetchFavoriteMovies(handler: @escaping ([Movie]) ->() ){
-		favoriteMoviesUseCase.fetchFavorites { (movies, error) in
-			if let movies = movies {
-				handler(movies)
-			} else {
+		favoriteMoviesUseCase.fetchFavorites { (result) in
+			switch result {
+			case .success(let value):
+				handler(value)
+			case .failure(_):
 				handler([])
 			}
 		}
@@ -91,10 +92,11 @@ final class FavoritesListVCModel: NSObject {
 	}
 	
 	private func fetchCachedGenres(with IDs: [Int], handler: @escaping ([Genre])->()){
-		filterUseCase.fetchCachedGenres(with: IDs) { (genres, error) in
-			if let genres = genres {
-				handler(genres)
-			} else {
+		filterUseCase.fetchCachedGenres(with: IDs) { (result) in
+			switch result {
+			case .success(let value):
+				handler(value)
+			case .failure(_):
 				handler([])
 			}
 		}

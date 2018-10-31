@@ -19,11 +19,12 @@ final class RootTabBarViewModel {
 	}
 	
 	func fetchGenresAndSetInCache(){
-		startupUseCase.fetchGenres { (genres, error) in
-			if let genres = genres {
-				self.environmentSetupUseCase.setInCache(genres)
-			} else {
-				print(error?.localizedDescription ?? "")
+		startupUseCase.fetchGenres { (result) in
+			switch result {
+			case .success(let value):
+				self.environmentSetupUseCase.setInCache(value)
+			case .failure(_):
+				break
 			}
 		}
 	}

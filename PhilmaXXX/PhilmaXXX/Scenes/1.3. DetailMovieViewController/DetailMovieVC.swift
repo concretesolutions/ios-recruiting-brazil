@@ -91,9 +91,7 @@ final class DetailMovieVC: UIViewController {
 extension DetailMovieVC {
 	func loadMovie(){
 		self.viewModel.provideDetailedMetadata { (movie, genres, favorite, error) in
-			if let error = error {
-				print(error.localizedDescription)
-			} else {
+			if error == nil {
 				if let movie = movie, let genres = genres {
 					let genreNames = genres.map({ $0.name })
 					

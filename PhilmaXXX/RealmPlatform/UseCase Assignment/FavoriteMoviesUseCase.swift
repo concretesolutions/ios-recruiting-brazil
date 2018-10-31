@@ -16,8 +16,8 @@ public final class FavoriteMoviesUseCase: Domain.FavoriteMoviesUseCase {
 		self.repository = repository
 	}
 	
-	public func fetchFavorites(handler: @escaping ([Movie]?, Error?) -> ()) {
-		handler(self.repository.get(), nil)
+	public func fetchFavorites(handler: @escaping (Result<[Movie]>) -> ()) {
+		handler(Result<[Movie]>.success(self.repository.get()))
 	}
 	
 	public func addFavorite(object: Movie){
