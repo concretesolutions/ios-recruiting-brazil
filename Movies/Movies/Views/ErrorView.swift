@@ -21,7 +21,7 @@ class ErrorView: UIView {
   var tryAgainButton: UIButton = {
     let button = UIButton(type: .system)
     button.frame = CGRect(x: 0, y: 0, width: 76, height: 20)
-    button.setTitleColor(UIColor(red: 255 / 255.0, green: 148 / 255.0, blue: 0 / 255.0, alpha: 1), for: .normal)
+    button.setTitleColor(.orangePizazz, for: .normal)
     button.setTitle("Try Again", for: .normal)
     button.addTarget(self, action: #selector(tryAgainButtonTapped), for: .touchUpInside)
     return button

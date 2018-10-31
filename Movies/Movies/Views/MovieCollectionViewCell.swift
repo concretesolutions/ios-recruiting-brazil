@@ -48,10 +48,10 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
       switch currentFavoriteState! {
       case .favorite:
         starContainerView.alpha = 1
-        starImageView.image = UIImage(named: "star_selected")
+        starImageView.image = AssetsManager.getImage(forAsset: .starSelected)
       case .notFavorite:
         starContainerView.alpha = 0.6
-        starImageView.image = UIImage(named: "star")
+        starImageView.image = AssetsManager.getImage(forAsset: .star)
       }
     }
   }
@@ -61,7 +61,7 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
   
     posterImageView.clipsToBounds = true
     posterImageView.layer.cornerRadius = 10
-    posterImageView.layer.borderColor = UIColor(red: 216 / 255.0, green: 216 / 255.0, blue: 216 / 255.0, alpha: 1).cgColor
+    posterImageView.layer.borderColor = UIColor.paleGrey.cgColor
     posterImageView.layer.borderWidth = 1
 
     let path = UIBezierPath(roundedRect: starContainerView.bounds, byRoundingCorners: [.bottomLeft, .topRight], cornerRadii: CGSize(width: 10, height: 10))
@@ -85,7 +85,7 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
       }
     } else {
       self.currentLoadingState = .loaded
-      posterImageView.image = UIImage(named: "placeholder")
+      posterImageView.image =  AssetsManager.getImage(forAsset: .moviePostPlaceholder)
     }
   }
   
@@ -96,4 +96,5 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
       currentFavoriteState = .favorite
     }
   }
+  
 }

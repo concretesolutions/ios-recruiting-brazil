@@ -44,4 +44,5 @@ class LoadingView: UIView {
     loadingLabel.frame.origin.x = center.x - loadingLabel.frame.width / 2
     loadingLabel.frame.origin.y = loadingActivityIndicatorView.frame.maxY + 8
   }
+  
 }
