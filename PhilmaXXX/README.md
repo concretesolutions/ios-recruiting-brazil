@@ -23,8 +23,6 @@ Basta baixar o repositório e abrir o arquivo PhilmaXXX.xcworkspace, todos os po
 * hotfix 30. Oct - Problemas do coder com Data, adicionado opção de Data Inválida
 * Build 17 - Ordenado Anos de Lançamento de forma decrescente no Filter.
 
-Basta baixar o repositório e abrir o arquivo PhilmaXXX.xcworkspace, todos os pods utilizados no projeto foram mantidos.
-
 ## Fastlane
 
 ---
