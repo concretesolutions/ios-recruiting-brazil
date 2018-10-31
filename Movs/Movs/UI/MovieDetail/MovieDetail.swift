@@ -8,7 +8,91 @@
 
 import UIKit
 
+protocol MovieDetailDelegate: AnyObject {
+    func favoriteMovie(at sender:MovieDetail)
+    func unfavoriteMovie(at sender:MovieDetail)
+}
+
 final class MovieDetail: UIView {
+    
+    private let tableViewDataSource = MovieDetailDataSource()
+    
+    private var tableView:UITableView! {
+        didSet {
+            self.tableView.allowsSelection = false
+            self.tableView.isScrollEnabled = false
+            self.tableView.dataSource = self.tableViewDataSource
+            self.addSubview(self.tableView)
+        }
+    }
+    
+    weak var delegate:MovieDetailDelegate?
+    
+    let data: Data
+    
+    init(data:Data) {
+        self.data = data
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.data = aDecoder.decodeObject(forKey: "data") as! Data
+        super.init(coder: aDecoder)
+    }
+    
+    private func createHeaderCell(with image:UIImage, text:String, buttoSelected:Bool) -> UITableViewCell {
+        
+        // setup
+        let imageView = UIImageView(image: nil)
+        let label = UILabel(frame: .zero)
+        let button = FavoriteButton()
+        let cell = UITableViewCell()
+        
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        
+        label.text = text
+        
+        button.onFavorite = { _ in self.delegate?.favoriteMovie(at: self) }
+        button.onUnfavorite = { _ in self.delegate?.unfavoriteMovie(at: self) }
+        button.isSelected = buttoSelected
+        
+        // layout
+        cell.addSubview(imageView)
+        cell.addSubview(label)
+        cell.addSubview(button)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 20.0).isActive = true
+        imageView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 20.0).isActive = true
+        imageView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -20.0).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -10.0).isActive = true
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        label.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 15.0).isActive = true
+        label.rightAnchor.constraint(equalTo: button.leftAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: 5.0).isActive = true
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalTo: label.heightAnchor, multiplier: 1.0).isActive = true
+        button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1.0).isActive = true
+        button.rightAnchor.constraint(equalTo: cell.rightAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+        
+        return cell
+    }
+    
+    private func createLabelCell(with text:String, multipleLines:Bool = false) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        cell.textLabel?.text = text
+        if multipleLines {
+            cell.textLabel?.numberOfLines = 0
+            let f = cell.textLabel?.font.withSize(15.0)
+            cell.textLabel?.font = f
+        }
+        return cell
+    }
     
     struct Data {
         let movieImage:UIImage
@@ -18,82 +102,27 @@ final class MovieDetail: UIView {
         let movieDescription:String
         var isFavorite:Bool
     }
-    
-    private var contentStack:UIStackView! {
-        didSet {
-            
-        }
-    }
-    
-    private var titleStack:UIStackView! {
-        didSet {
-            
-        }
-    }
-    
-    private var imageView:UIImageView! {
-        didSet {
-            
-        }
-    }
-    
-    private var titleLabel:UILabel! {
-        didSet {
-            
-        }
-    }
-    
-    private var favoriteButton:UIButton! {
-        didSet {
-            
-        }
-    }
-    
-    private var yearLabel:UILabel! {
-        didSet {
-            
-        }
-    }
-    
-    private var genreLabel:UILabel! {
-        didSet {
-            
-        }
-    }
-    
-    private var descriptionLabel:UILabel! {
-        didSet {
-            
-        }
-    }
-    
-    var data: Data! {
-        didSet {
-            self.imageView.image = self.data.movieImage
-            self.titleLabel.text = self.data.movieTitle
-            self.favoriteButton.isSelected = self.data.isFavorite
-            self.yearLabel.text = self.data.movieYear
-            self.genreLabel.text = self.data.movieGenre
-            self.descriptionLabel.text = self.data.movieDescription
-        }
-    }
 }
 
 extension MovieDetail: ViewCode {
     
     func design() {
-        self.imageView = UIImageView(image: nil)
-        self.titleLabel = UILabel(frame: .zero)
-        self.favoriteButton = UIButton()
-        self.yearLabel = UILabel(frame: .zero)
-        self.genreLabel = UILabel(frame: .zero)
-        self.descriptionLabel = UILabel(frame: .zero)
+        self.backgroundColor = Colors.white.color
+        // cells
+        var cells = [UITableViewCell]()
+        cells.append(self.createHeaderCell(with: self.data.movieImage,
+                                           text: self.data.movieTitle,
+                                           buttoSelected: self.data.isFavorite))
+        cells.append(self.createLabelCell(with: self.data.movieYear))
+        cells.append(self.createLabelCell(with: self.data.movieGenre))
+        cells.append(self.createLabelCell(with: self.data.movieDescription, multipleLines: true))
         
-        self.titleStack = UIStackView(arrangedSubviews: [self.titleLabel, self.favoriteButton])
-        self.contentStack = UIStackView(arrangedSubviews: [self.imageView, self.titleStack, self.yearLabel, self.genreLabel, self.descriptionLabel])
+        self.tableViewDataSource.items = cells
+        
+        self.tableView = UITableView()
     }
     
     func autolayout() {
-        self.contentStack.fillAvailableSpaceInSafeArea()
+        self.tableView.fillAvailableSpaceInSafeArea()
     }
 }

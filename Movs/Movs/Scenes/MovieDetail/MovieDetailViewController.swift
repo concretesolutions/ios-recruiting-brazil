@@ -11,7 +11,16 @@ import UIKit
 protocol MovieDetailViewPresenter: PresenterProtocol {
 }
 
-final class MovieDetailViewController: MVPBaseViewController, MovieDetailPresenterView {
+final class MovieDetailViewController: MVPBaseViewController {
+    
+    private var movieDetail:MovieDetail! {
+        didSet {
+            self.movieDetail.setupView()
+            self.view = self.movieDetail
+        }
+    }
+    
+    
     
     var presenter: MovieDetailViewPresenter? {
         get {
@@ -20,5 +29,13 @@ final class MovieDetailViewController: MVPBaseViewController, MovieDetailPresent
         set {
             self.basePresenter = newValue
         }
+    }
+}
+
+extension MovieDetailViewController: MovieDetailPresenterView {
+    
+    func setupOnce() {
+        self.title = "Movie"
+        //TODO: create movie detail view
     }
 }

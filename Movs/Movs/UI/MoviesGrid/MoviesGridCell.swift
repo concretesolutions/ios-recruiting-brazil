@@ -33,12 +33,8 @@ final class MoviesGridCell: UICollectionViewCell {
         return label
     }()
     
-    private let movieIsFavoriteIndicatorButton:UIButton = {
-        let button = UIButton()
-        button.setTitle(nil, for: .normal)
-        button.setImage(Assets.favoriteGrayIcon.image, for: .normal)
-        button.setImage(Assets.favoriteFillIcon.image, for: .selected)
-        button.contentMode = .scaleAspectFill
+    private let favoriteButton:FavoriteButton = {
+        let button = FavoriteButton()
         return button
     }()
     
@@ -47,7 +43,7 @@ final class MoviesGridCell: UICollectionViewCell {
     func configure(with data: Data) {
         self.movieImageView.image = data.movieImage
         self.movieTitleLabel.text = data.movieTitle
-        self.movieIsFavoriteIndicatorButton.isSelected = data.movieIsFavorite
+        self.favoriteButton.isSelected = data.movieIsFavorite
     }
 }
 
@@ -57,7 +53,7 @@ extension MoviesGridCell: ReusableViewCode {
         self.backgroundColor = Colors.darkBlue.color
         self.addSubview(self.movieImageView)
         self.addSubview(self.movieTitleLabel)
-        self.addSubview(self.movieIsFavoriteIndicatorButton)
+        self.addSubview(self.favoriteButton)
     }
     
     func autolayout() {
@@ -74,10 +70,10 @@ extension MoviesGridCell: ReusableViewCode {
         self.movieTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25).isActive = true
         self.movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         // movie is favorite indicator
-        self.movieIsFavoriteIndicatorButton.translatesAutoresizingMaskIntoConstraints = false
-        self.movieIsFavoriteIndicatorButton.heightAnchor.constraint(equalTo: self.movieTitleLabel.heightAnchor).isActive = true
-        self.movieIsFavoriteIndicatorButton.widthAnchor.constraint(equalTo: self.movieIsFavoriteIndicatorButton.heightAnchor).isActive = true
-        self.movieIsFavoriteIndicatorButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.movieIsFavoriteIndicatorButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+        self.favoriteButton.heightAnchor.constraint(equalTo: self.movieTitleLabel.heightAnchor).isActive = true
+        self.favoriteButton.widthAnchor.constraint(equalTo: self.favoriteButton.heightAnchor).isActive = true
+        self.favoriteButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.favoriteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 }
