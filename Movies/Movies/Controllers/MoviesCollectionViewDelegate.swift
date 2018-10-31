@@ -22,7 +22,6 @@ class MoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
     self.cellWidth = (frameWidth - (margin * (columns + 1))) / columns
     self.delegate = delegate
     newPosterHeight = posterHeight * cellWidth / posterWidth
-    
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

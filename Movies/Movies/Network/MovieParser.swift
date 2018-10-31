@@ -19,6 +19,7 @@ final class MovieParser {
     }
     
     var posterPath: String
+    
     if let path = json["poster_path"].string {
       posterPath = path
     } else {

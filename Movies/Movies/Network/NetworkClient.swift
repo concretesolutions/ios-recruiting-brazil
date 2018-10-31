@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class NetworkClient {
   
-  static var shared: NetworkClient = NetworkClient()
+  static let shared: NetworkClient = NetworkClient()
   
   var currentPage = 0
   

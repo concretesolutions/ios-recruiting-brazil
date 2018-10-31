@@ -19,6 +19,8 @@ class MoviesCollectionViewController: UICollectionViewController {
   
   var isUpdating = false
   
+  var tabBarDelegate: TabBarControllerDelegate!
+  
   enum ViewState {
     case loading
     case success
@@ -112,6 +114,9 @@ class MoviesCollectionViewController: UICollectionViewController {
     navigationItem.searchController = UISearchController(searchResultsController: nil)
     navigationItem.hidesSearchBarWhenScrolling = false
     
+    tabBarDelegate = TabBarControllerDelegate(delegate: self)
+    tabBarController?.delegate = tabBarDelegate
+    
     setupCollectionView()
     
     setupSubviews()
@@ -131,5 +136,13 @@ extension MoviesCollectionViewController: MoviesCollectionViewUpdateDelegate {
   
   func canShowFooter() -> Bool {
     return !moviesDataSource.movies.isEmpty
+  }
+}
+
+extension MoviesCollectionViewController: TabBarTapDelegate {
+  func handleTapOnFirstIndex() {
+    if !moviesDataSource.movies.isEmpty {
+      collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+    }
   }
 }

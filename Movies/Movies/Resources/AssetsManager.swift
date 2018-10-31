@@ -23,7 +23,7 @@ class AssetsManager {
     case .moviePostPlaceholder:
       return UIImage(named: "placeholder")!
     case .starSelected:
-      return UIImage(named: "star_select")!
+      return UIImage(named: "star_selected")!
     }
   }
   
