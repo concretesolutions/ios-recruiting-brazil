@@ -24,24 +24,16 @@ final class MovieGridViewController: UIViewController {
     
     private(set) var page = 1
     
-    lazy var collection: UICollectionView = {
-        return self.collectionView.collection
-    }()
-    
-    lazy var collectionView: MovieGridView = {
+    lazy var movieGridView: MovieGridView = {
         return MovieGridView(dataSource: self)
     }()
     
-    lazy var errorView: MovieGridErrorView = {
-       return MovieGridErrorView()
-    }()
-    
     lazy var collectionState: MovieGridCollectionState = {
-        return MovieGridCollectionState(viewController: self)
+        return MovieGridCollectionState(movieGridView: self.movieGridView)
     }()
     
     lazy var errorState: MovieGridErrorState = {
-        return MovieGridErrorState(viewController: self)
+        return MovieGridErrorState(movieGridView: self.movieGridView)
     }()
     
     lazy var stateMachine: ViewStateMachine = {
@@ -80,7 +72,7 @@ extension MovieGridViewController: MovieGridViewOutput {
     
     func display(movies: [MovieGridViewModel]) {
         self.viewModels = movies
-        self.collection.reloadData()
+        self.movieGridView.collection.reloadData()
         
         self.state = .collection
     }
@@ -93,16 +85,11 @@ extension MovieGridViewController: MovieGridViewOutput {
 // MARK: View Code
 extension MovieGridViewController: ViewCode {
     func addView() {
-        self.view.addSubview(self.collectionView)
-        self.view.addSubview(self.errorView)
+        self.view.addSubview(self.movieGridView)
     }
     
     func addConstraints() {
-        self.collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        self.errorView.snp.makeConstraints { make in
+        self.movieGridView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -119,13 +106,13 @@ extension MovieGridViewController {
 
 // MARK: UI actions
 extension MovieGridViewController {
+    
     func didTapFavorite(button: UIButton) {
-        let position = button.convert(CGPoint.zero, to: self.collectionView)
-        let indexPath = self.collection.indexPathForItem(at: position)
+        let position = button.convert(CGPoint.zero, to: self.movieGridView.collection.coordinateSpace)
+        let indexPath = self.movieGridView.collection.indexPathForItem(at: position)
         
         if let indexPath = indexPath {
             self.interactor.toggleFavoriteMovie(at: indexPath.item)
-            self.interactor.fetchMovieList(page: self.page)
         }
     }
 }

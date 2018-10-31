@@ -19,6 +19,10 @@ public class MovieGridView: UIView {
         return collection
     }()
     
+    lazy var errorView: MovieGridErrorView = {
+        return MovieGridErrorView()
+    }()
+    
     
     // Initialization
     init(dataSource: UICollectionViewDataSource) {
@@ -37,10 +41,15 @@ extension MovieGridView: ViewCode {
     
     public func addView() {
         self.addSubview(self.collection)
+        self.addSubview(self.errorView)
     }
     
     public func addConstraints() {
         self.collection.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        self.errorView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

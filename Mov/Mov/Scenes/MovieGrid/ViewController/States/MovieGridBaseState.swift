@@ -10,10 +10,10 @@ import UIKit
 
 class MovieGridBaseState: ViewState, Equatable {
     
-    unowned let vc: MovieGridViewController
+    unowned let movieGrid: MovieGridView
     
-    init(viewController: MovieGridViewController) {
-        self.vc = viewController
+    init(movieGridView: MovieGridView) {
+        self.movieGrid = movieGridView
     }
     
     func hideViews() -> [UIView] {
