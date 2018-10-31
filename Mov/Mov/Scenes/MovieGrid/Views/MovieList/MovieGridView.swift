@@ -26,6 +26,7 @@ public class MovieGridView: UIView {
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.barTintColor = Colors.lightYellow
+        searchBar.layer.borderWidth = 1
         searchBar.layer.borderColor = Colors.lightYellow.cgColor
         searchBar.placeholder = "search movies..."
         
