@@ -50,7 +50,11 @@ extension Movie: Codable {
 		self.id = try container.decode(Int.self, forKey: .id)
 		self.title = try container.decode(String.self, forKey: .title)
 		self.overview = try? container.decode(String.self, forKey: .overview)
-		self.releaseDate = try? container.decode(Date.self, forKey: .releaseDate)
+		if let decodedDate = try? container.decode(Date.self, forKey: .releaseDate){
+			self.releaseDate = decodedDate
+		} else {
+			self.releaseDate = DateParser.parseDateWithFormat(date: try container.decodeIfPresent(String.self, forKey: .releaseDate), separator: "-")
+		}
 		self.posterPath = try? container.decode(String.self, forKey: .posterPath)
 		self.backdropPath = try? container.decode(String.self, forKey: .backdropPath)
 		self.genreIDs = try container.decode(Array<Int>.self, forKey: .genreIDs)
