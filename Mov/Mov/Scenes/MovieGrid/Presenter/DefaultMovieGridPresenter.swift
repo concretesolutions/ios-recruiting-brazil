@@ -28,7 +28,6 @@ final class DefaultMovieGridPresenter {
 }
 
 extension DefaultMovieGridPresenter: MovieGridPresenter {
-    
     func present(movies: [MovieGridUnit]) {
         self.viewOutput.display(movies: buildMovieGridViewModels(from: movies))
     }
@@ -37,4 +36,7 @@ extension DefaultMovieGridPresenter: MovieGridPresenter {
         self.viewOutput.displayNetworkError()
     }
     
+    func presentNoResultsFound(for request: String) {
+        self.viewOutput.displayNoResults(for: request)
+    }
 }

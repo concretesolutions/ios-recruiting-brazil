@@ -11,7 +11,7 @@ import UIKit
 
 class MovieGridCollectionState: MovieGridBaseState {
     override func hideViews() -> [UIView] {
-        return [movieGrid.errorView]
+        return [movieGrid.networkErrorView, movieGrid.noResultsView]
     }
     
     override func showViews() -> [UIView] {

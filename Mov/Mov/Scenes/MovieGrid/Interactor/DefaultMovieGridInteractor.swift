@@ -73,6 +73,10 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
         }
         let candidates = self.fetchedMovies.filter { movie in
             movie.title.lowercased().range(of: string.lowercased()) != nil }
-        self.presenter.present(movies: buildMovieGridUnits(from: candidates))
+        if candidates.isEmpty {
+            self.presenter.presentNoResultsFound(for: string)
+        } else {
+            self.presenter.present(movies: buildMovieGridUnits(from: candidates))
+        }
     }
 }

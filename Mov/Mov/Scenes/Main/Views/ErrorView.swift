@@ -1,5 +1,5 @@
 //
-//  MovieGridErrorView.swift
+//  ErrorView.swift
 //  Mov
 //
 //  Created by Miguel Nery on 28/10/18.
@@ -10,7 +10,17 @@ import Foundation
 
 import UIKit
 
-public class MovieGridErrorView: UIView {
+public class ErrorView: UIView {
+    
+    init(errorImage: UIImage, labelText: String) {
+        super.init(frame: .zero)
+        
+        self.errorImage.image = errorImage
+        
+        self.errorLabel.text = labelText
+        
+        setup()
+    }
     
     // UI Elements
     lazy var errorImage: UIImageView = {
@@ -44,7 +54,7 @@ public class MovieGridErrorView: UIView {
     
 }
 
-extension MovieGridErrorView: ViewCode {
+extension ErrorView: ViewCode {
     
     func addView() {
         self.addSubview(self.errorImage)
@@ -61,7 +71,7 @@ extension MovieGridErrorView: ViewCode {
         
         self.errorLabel.snp.makeConstraints { make in
             make.centerX.equalTo(self.errorImage.snp_centerXWithinMargins)
-            make.top.equalTo(self.errorImage.snp_bottomMargin).multipliedBy(0.85)
+            make.top.equalTo(self.errorImage.snp_bottomMargin)
             make.width.equalToSuperview().multipliedBy(0.75)
             make.height.equalToSuperview().multipliedBy(0.2)
         }

@@ -36,6 +36,10 @@ final class MovieGridViewController: UIViewController {
         return MovieGridErrorState(movieGridView: self.movieGridView)
     }()
     
+    lazy var noResultsState: MovieGridNoResultsState = {
+        return MovieGridNoResultsState(movieGridView: self.movieGridView)
+    }()
+    
     lazy var stateMachine: ViewStateMachine = {
        return ViewStateMachine()
     }()
@@ -49,6 +53,9 @@ final class MovieGridViewController: UIViewController {
                 viewState = self.collectionState
             case .error:
                 viewState = self.errorState
+            case .noResults(let request):
+                self.noResultsState.searchRequest = request
+                viewState = self.noResultsState
             }
             
             self.stateMachine.enter(state: viewState)
@@ -81,6 +88,10 @@ extension MovieGridViewController: MovieGridViewOutput {
     func displayNetworkError() {
         self.state = .error
     }
+    
+    func displayNoResults(for request: String) {
+        self.state = .noResults(request)
+    }
 }
 
 // MARK: View Code
@@ -97,6 +108,12 @@ extension MovieGridViewController: ViewCode {
     
     func additionalSetup() {
         self.movieGridView.searchBarDelegate.textDidChangeAction = self.interactor.filterMoviesBy
+        
+        self.movieGridView.searchBarDelegate.didPressCancelAction = { [weak self] in
+            guard let self = self else { return }
+            
+            self.state = .collection
+        }
     }
 }
 
@@ -106,6 +123,7 @@ extension MovieGridViewController {
     enum MovieGridState {
         case collection
         case error
+        case noResults(String)
     }
 }
 

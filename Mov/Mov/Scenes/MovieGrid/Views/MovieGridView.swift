@@ -20,8 +20,12 @@ public class MovieGridView: UIView {
         return collection
     }()
     
-    lazy var errorView: MovieGridErrorView = {
-        return MovieGridErrorView()
+    lazy var networkErrorView: ErrorView = {
+        return ErrorView(errorImage: Images.error, labelText: Texts.movieGridError)
+    }()
+    
+    lazy var noResultsView: ErrorView = {
+        return ErrorView(errorImage: Images.noResults, labelText: Texts.noResults(for: "x"))
     }()
     
     lazy var searchBar: UISearchBar = {
@@ -58,8 +62,9 @@ extension MovieGridView: ViewCode {
     
     public func addView() {
         self.addSubview(self.collection)
-        self.addSubview(self.errorView)
-        self.addSubview(searchBar)
+        self.addSubview(self.networkErrorView)
+        self.addSubview(self.searchBar)
+        self.addSubview(self.noResultsView)
     }
     
     public func addConstraints() {
@@ -70,8 +75,11 @@ extension MovieGridView: ViewCode {
             make.width.equalToSuperview()
         }
         
-        self.errorView.snp.makeConstraints { make in
-            make.edges.equalTo(self.collection)
+        self.networkErrorView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
         self.searchBar.snp.makeConstraints { make in
@@ -79,6 +87,13 @@ extension MovieGridView: ViewCode {
             make.width.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.1)
             make.centerX.equalToSuperview()
+        }
+        
+        self.noResultsView.snp.makeConstraints { make in
+            make.top.equalTo(self.searchBar.snp_bottomMargin)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
         }
     }
 }

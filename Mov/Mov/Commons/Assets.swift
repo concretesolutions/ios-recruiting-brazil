@@ -10,13 +10,15 @@ import UIKit
 
 struct Images {
     
-    static let poster_placeholder: UIImage = #imageLiteral(resourceName: "poster_placeholder")
+    static let poster_placeholder = #imageLiteral(resourceName: "poster_placeholder")
     
     // Mark: Icons
-    static let isFavoriteIconFull: UIImage = #imageLiteral(resourceName: "favorite_full_icon")
-    static let isFavoriteIconGray: UIImage = #imageLiteral(resourceName: "favorite_gray_icon")
-    static let error:UIImage = #imageLiteral(resourceName: "error_icon")
+    static let isFavoriteIconFull = #imageLiteral(resourceName: "favorite_full_icon")
+    static let isFavoriteIconGray = #imageLiteral(resourceName: "favorite_gray_icon")
+    static let error = #imageLiteral(resourceName: "error_icon")
     static let movieListIcon = #imageLiteral(resourceName: "list_icon")
+    static let noResults = #imageLiteral(resourceName: "search")
+    
 }
 
 struct Colors {
@@ -27,6 +29,9 @@ struct Colors {
 
 struct Texts {
     static let movieGridError = "Um erro ocorreu. Por favor, tente novamente."
+    static func noResults(for request: String) -> String {
+        return "Sua busca por \"\(request)\" não retornou nenhum resultado."
+    }
 }
 
 struct Fonts {

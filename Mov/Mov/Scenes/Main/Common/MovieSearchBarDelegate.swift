@@ -11,6 +11,7 @@ import UIKit
 class MovieSearchBarDelegate: NSObject, UISearchBarDelegate {
     
     var textDidChangeAction: ((String) -> Void)?
+    var didPressCancelAction:(() -> Void)?
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)

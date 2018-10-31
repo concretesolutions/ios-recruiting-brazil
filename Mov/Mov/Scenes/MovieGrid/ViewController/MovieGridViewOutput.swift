@@ -15,4 +15,6 @@ protocol MovieGridViewOutput: class {
     
     func displayNetworkError()
     
+    func displayNoResults(for request: String)
+    
 }
