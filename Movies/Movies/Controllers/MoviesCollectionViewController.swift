@@ -63,6 +63,7 @@ class MoviesCollectionViewController: UICollectionViewController {
       case .success(let movies):
         self.updateCollectionView(withMovies: movies)
       case .failure(let error):
+        self.isUpdating = false
         print(error)
       }
     }
@@ -82,7 +83,7 @@ class MoviesCollectionViewController: UICollectionViewController {
       self.collectionView.insertItems(at: indexes)
     }
     
-    collectionView.performBatchUpdates(updates) { (_) in
+    collectionView.performBatchUpdates(updates) { _ in
       self.isUpdating = false
     }
   }

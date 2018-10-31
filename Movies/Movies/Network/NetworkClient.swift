@@ -46,6 +46,7 @@ class NetworkClient {
         fallthrough
         
       case .failure:
+        self.currentPage -= 1
         if response.response?.statusCode != nil {
           completion(.failure(MoviesAPIError.noInternetConnection))
         } else {
