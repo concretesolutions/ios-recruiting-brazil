@@ -11,7 +11,13 @@ import RealmSwift
 
 protocol HomeInterfaceProtocol {
     func set(state: HomeInterfaceState)
-    func reload()
+    func reload(_ indexPath: [IndexPath])
+}
+
+extension HomeInterfaceProtocol {
+    func reload() {
+        self.reload([])
+    }
 }
 
 class HomeManager {
@@ -19,7 +25,11 @@ class HomeManager {
     var provider = HomeProvider()
     
     var movies = [MovieJSON]()
-    var page = 1
+    var page = 0
+    var totalPages = 0
+    var totalResults = 0
+    
+    var isFetchInProgress = false
     
     let realm: Realm!
     
@@ -30,15 +40,28 @@ class HomeManager {
     }
     
     func fetchMovies() {
-        self.provider.fetchPopularMovies(page: page) { movies in
+        
+        guard !isFetchInProgress else {
+            return
+        }
+        
+        self.page += 1
+        self.provider.fetchPopularMovies(page: page) { newMovies, totalPages, totalResults in
+            self.movies.append(contentsOf: newMovies)
+            self.totalPages = totalPages
+            self.totalResults = totalResults
             
-            self.movies = movies
-            self.interface?.reload()
+            if self.page == 1 {
+                self.interface?.reload()
+            } else {
+                self.interface?.reload(self.calculateIndexPathToReload(newMovies: newMovies))
+            }
+
         }
     }
     
     func numberOfMovies() -> Int {
-        return self.movies.count
+        return totalResults
     }
     
     func movieModelIn(index: Int) -> MovieCellModel? {
@@ -73,6 +96,12 @@ class HomeManager {
         movie.overview = movieJson.overview ?? ""
         
         return movie
+    }
+    
+    private func calculateIndexPathToReload(newMovies: [MovieJSON]) -> [IndexPath] {
+        let startIndex = self.movies.count - newMovies.count
+        let endIndex = startIndex + newMovies.count
+        return (startIndex..<endIndex).map({ IndexPath(row: $0, section: 0) })
     }
 }
 

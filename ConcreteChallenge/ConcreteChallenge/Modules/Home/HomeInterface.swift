@@ -42,60 +42,15 @@ class HomeInterface: UIViewController {
     func gridCollectionViewSetup() {
         self.gridCollectionView.delegate = self
         self.gridCollectionView.dataSource = self
+        self.gridCollectionView.prefetchDataSource = self
         
         self.gridCollectionView.register(UINib(nibName: MovieCell.identifier, bundle: nil), forCellWithReuseIdentifier: MovieCell.identifier)
     }
+    
 }
 
 extension HomeInterface: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? MovieCell else {
-            return
-        }
-        
-//        cell.freezeAnimations()
-//
-//        guard let currentCellFrame = cell.layer.presentation()?.frame else {
-//            return
-//        }
-//
-//        let cardPresentationFrameOnScreen = cell.superview?.convert(currentCellFrame, to: nil)
-//
-//        let cardFrameWithoutTransform = { () -> CGRect in
-//            let center = cell.center
-//            let size = cell.bounds.size
-//            let rect = CGRect(x: center.x - size.width / 2,
-//                              y: center.y - size.height / 2,
-//                              width: size.width,
-//                              height: size.height)
-//
-//            guard let superview = cell.superview else {
-//                return .zero
-//            }
-//
-//            return superview.convert(rect, to: nil)
-//        }
-        
-//        // Set up card detail view controller
-//        let vc = storyboard!.instantiateViewController(withIdentifier: "MovieDescription") as! MovieDescriptionInterface
-//        vc.cardViewModel = cardModel.highlightedImage()
-//
-//        vc.unhighlightedCardViewModel = cardModel // Keep the original one to restore when dismiss
-//        let params = CardTransition.Params(fromCardFrame: cardPresentationFrameOnScreen,
-//                                           fromCardFrameWithoutTransform: cardFrameWithoutTransform,
-//                                           fromCell: cell)
-//        transition = CardTransition(params: params)
-//        vc.transitioningDelegate = transition
-//
-//        // If `modalPresentationStyle` is not `.fullScreen`, this should be set to true to make status bar depends on presented vc.
-//        vc.modalPresentationCapturesStatusBarAppearance = true
-//        vc.modalPresentationStyle = .custom
-//
-//        present(vc, animated: true, completion: { [unowned cell] in
-//            // Unfreeze
-//            cell.unfreezeAnimations()
-//        })
-    }
+    
 }
 
 extension HomeInterface: UICollectionViewDataSource {
@@ -106,17 +61,17 @@ extension HomeInterface: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
         
-        if let model = self.manager.movieModelIn(index: indexPath.row) {
-        
-            cell?.set(model: model)
-            cell?.indexPath = indexPath
-            cell?.delegate = self
+        if !isLoadingCell(for: indexPath) {
+            if let model = self.manager.movieModelIn(index: indexPath.row) {
+                cell?.set(model: model)
+                cell?.indexPath = indexPath
+                cell?.delegate = self
+            }
         }
+        
         
         return cell ?? UICollectionViewCell()
     }
-    
-    
 }
 
 extension HomeInterface: UICollectionViewDelegateFlowLayout {
@@ -143,8 +98,12 @@ extension HomeInterface: HomeInterfaceProtocol {
         
     }
     
-    func reload() {
-        self.gridCollectionView.reloadData()
+    func reload(_ indexPath: [IndexPath]) {
+        if indexPath.count > 0 {
+            self.gridCollectionView.reloadItems(at: visibleIndexPathsToReload(interesecting: indexPath))
+        } else {
+           self.gridCollectionView.reloadData()
+        }
     }
 }
 
@@ -152,5 +111,24 @@ extension HomeInterface: HomeInterfaceProtocol {
 extension HomeInterface: MovieCellDelegate {
     func saveTapped(indexPath: IndexPath) {
         self.manager.handleMovie(indexPath: indexPath)
+    }
+}
+
+
+extension HomeInterface: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            self.manager.fetchMovies()
+        }
+    }
+    
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= self.manager.movies.count
+    }
+    
+    func visibleIndexPathsToReload(interesecting indexPaths: [IndexPath] ) -> [IndexPath] {
+        let indexPathsForVisibleItems = self.gridCollectionView.indexPathsForVisibleItems
+        let indexPathsIntersection = Set(indexPathsForVisibleItems).intersection(indexPaths)
+        return Array(indexPathsIntersection)
     }
 }

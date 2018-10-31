@@ -10,5 +10,7 @@ import Foundation
 
 struct PopularMovies: Decodable {
     var page: Int?
+    var total_results: Int?
+    var total_pages: Int?
     var results: [MovieJSON]?
 }
