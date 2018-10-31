@@ -20,6 +20,8 @@
 		C08AC6A12188308900A93011 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AC6A02188308900A93011 /* Result.swift */; };
 		C08AC6A32188310600A93011 /* MoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AC6A22188310600A93011 /* MoviesAPI.swift */; };
 		C08AC6A52188318700A93011 /* MoviesAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AC6A42188318700A93011 /* MoviesAPIError.swift */; };
+		C095835021895AB600C32BD6 /* MoviesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C095834F21895AB600C32BD6 /* MoviesDataSource.swift */; };
+		C09583522189609600C32BD6 /* MoviesCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09583512189609600C32BD6 /* MoviesCollectionViewDelegate.swift */; };
 		C0EE4C9921891F56003C9580 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE4C9721891F55003C9580 /* MovieCollectionViewCell.swift */; };
 		C0EE4C9B21891F6F003C9580 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EE4C9A21891F6F003C9580 /* MovieCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -42,6 +44,8 @@
 		C08AC6A02188308900A93011 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		C08AC6A22188310600A93011 /* MoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPI.swift; sourceTree = "<group>"; };
 		C08AC6A42188318700A93011 /* MoviesAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPIError.swift; sourceTree = "<group>"; };
+		C095834F21895AB600C32BD6 /* MoviesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDataSource.swift; sourceTree = "<group>"; };
+		C09583512189609600C32BD6 /* MoviesCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		C0EE4C9721891F55003C9580 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0EE4C9A21891F6F003C9580 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +107,8 @@
 			children = (
 				C058CE9A2186F608008F731E /* FavoritesCollectionViewController.swift */,
 				C058CE8A2186EAA5008F731E /* MoviesCollectionViewController.swift */,
+				C095834F21895AB600C32BD6 /* MoviesDataSource.swift */,
+				C09583512189609600C32BD6 /* MoviesCollectionViewDelegate.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -304,6 +310,7 @@
 			files = (
 				C08AC6A52188318700A93011 /* MoviesAPIError.swift in Sources */,
 				C058CE8B2186EAA5008F731E /* MoviesCollectionViewController.swift in Sources */,
+				C095835021895AB600C32BD6 /* MoviesDataSource.swift in Sources */,
 				C058CE9B2186F608008F731E /* FavoritesCollectionViewController.swift in Sources */,
 				C058CE892186EAA5008F731E /* AppDelegate.swift in Sources */,
 				C08AC6592188092200A93011 /* NetworkClient.swift in Sources */,
@@ -311,6 +318,7 @@
 				C08AC69C2188283100A93011 /* Movie.swift in Sources */,
 				C0EE4C9921891F56003C9580 /* MovieCollectionViewCell.swift in Sources */,
 				C08AC69F2188296400A93011 /* MovieParser.swift in Sources */,
+				C09583522189609600C32BD6 /* MoviesCollectionViewDelegate.swift in Sources */,
 				C08AC6A32188310600A93011 /* MoviesAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +476,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = matheus.Movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -487,7 +495,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = matheus.Movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
