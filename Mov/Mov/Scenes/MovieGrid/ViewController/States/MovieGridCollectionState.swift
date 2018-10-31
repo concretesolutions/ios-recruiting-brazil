@@ -15,6 +15,6 @@ class MovieGridCollectionState: MovieGridBaseState {
     }
     
     override func showViews() -> [UIView] {
-        return [movieGrid.collection]
+        return [movieGrid.collection, movieGrid.searchBar]
     }
 }

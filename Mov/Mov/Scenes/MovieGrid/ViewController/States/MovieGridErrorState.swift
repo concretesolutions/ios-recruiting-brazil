@@ -12,7 +12,7 @@ import UIKit
 class MovieGridErrorState: MovieGridBaseState {
     
     override func hideViews() -> [UIView] {
-        return [movieGrid.collection]
+        return [movieGrid.collection, movieGrid.searchBar]
     }
     
     override func showViews() -> [UIView] {
