@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
+
 
 typealias Parameters = [String : Any]
 typealias Completion<D> = (_ data: D?, _ err: BadRequest?) -> Void
@@ -18,6 +20,10 @@ class Network {
     
     var domain : String {
         return "https://api.themoviedb.org/3"
+    }
+    
+    var imageDomain: String {
+        return "https://image.tmdb.org/t/p/original/"
     }
     
     var apiKey: String {
@@ -33,7 +39,6 @@ class Network {
         Alamofire.request(url, method: router.method, parameters: parameters, headers: router.headers)
             .validate()
             .response { response in
-                
                 self.decodeResponse(response: response, decodable: decodable, completion: completion)
         }
     }

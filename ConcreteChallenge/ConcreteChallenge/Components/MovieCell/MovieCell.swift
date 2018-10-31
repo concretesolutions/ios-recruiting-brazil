@@ -9,6 +9,16 @@
 import UIKit
 import SDWebImage
 
+struct MovieCellModel {
+    var title: String
+    var backdrop_path: String
+    var poster_path: String
+}
+
+protocol MovieCellDelegate {
+    func saveTapped(indexPath: IndexPath)
+}
+
 class MovieCell: UICollectionViewCell {
     
     static let identifier = "MovieCell"
@@ -17,12 +27,15 @@ class MovieCell: UICollectionViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     
+    var indexPath : IndexPath?
+    
+    var delegate: MovieCellDelegate?
+    
     var disabledHighlightedAnimation = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setup()
-        
     }
     
     func setup() {
@@ -30,16 +43,26 @@ class MovieCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.2
         self.layer.shadowOffset = .init(width: 0, height: 4)
         self.layer.shadowRadius = 12
+        
+        self.saveButton.isExclusiveTouch = true
     }
     
-    func set(movie: Movie) {
-        self.image?.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original/\(movie.backdrop_path ?? "")")!, placeholderImage: UIImage(named: "imageError.png"), options: .cacheMemoryOnly) { (_, err, _, _) in
+    func set(model: MovieCellModel) {
+        self.image?.sd_setImage(with: URL(string: Network.manager.imageDomain + model.backdrop_path)!, placeholderImage: UIImage(named: "imageError.png"), options: .cacheMemoryOnly) { (_, err, _, _) in
             if err != nil {
-                self.image.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original/\(movie.poster_path ?? "")")!, completed: nil)
+                self.image.sd_setImage(with: URL(string: Network.manager.imageDomain + model.poster_path)!, completed: nil)
             }
         }
-        self.title.text = movie.title
-        self.saveButton.isEnabled = !(movie.saved ?? true)
+        self.title.text = model.title
+    }
+    
+    @IBAction func save(_ sender: Any) {
+        self.saveButton.alpha = self.saveButton.alpha == 1 ? 0.6 : 1
+        
+        if let indexPath = self.indexPath {
+           self.delegate?.saveTapped(indexPath: indexPath)
+        }
+        
     }
     
     func resetTransform() {

@@ -53,28 +53,28 @@ extension HomeInterface: UICollectionViewDelegate {
             return
         }
         
-        cell.freezeAnimations()
-        
-        guard let currentCellFrame = cell.layer.presentation()?.frame else {
-            return
-        }
-        
-        let cardPresentationFrameOnScreen = cell.superview?.convert(currentCellFrame, to: nil)
-        
-        let cardFrameWithoutTransform = { () -> CGRect in
-            let center = cell.center
-            let size = cell.bounds.size
-            let rect = CGRect(x: center.x - size.width / 2,
-                              y: center.y - size.height / 2,
-                              width: size.width,
-                              height: size.height)
-            
-            guard let superview = cell.superview else {
-                return .zero
-            }
-            
-            return superview.convert(rect, to: nil)
-        }
+//        cell.freezeAnimations()
+//
+//        guard let currentCellFrame = cell.layer.presentation()?.frame else {
+//            return
+//        }
+//
+//        let cardPresentationFrameOnScreen = cell.superview?.convert(currentCellFrame, to: nil)
+//
+//        let cardFrameWithoutTransform = { () -> CGRect in
+//            let center = cell.center
+//            let size = cell.bounds.size
+//            let rect = CGRect(x: center.x - size.width / 2,
+//                              y: center.y - size.height / 2,
+//                              width: size.width,
+//                              height: size.height)
+//
+//            guard let superview = cell.superview else {
+//                return .zero
+//            }
+//
+//            return superview.convert(rect, to: nil)
+//        }
         
 //        // Set up card detail view controller
 //        let vc = storyboard!.instantiateViewController(withIdentifier: "MovieDescription") as! MovieDescriptionInterface
@@ -106,9 +106,11 @@ extension HomeInterface: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
         
-        if let movie = self.manager.movieIn(index: indexPath.row) {
+        if let model = self.manager.movieModelIn(index: indexPath.row) {
         
-            cell?.set(movie: movie)
+            cell?.set(model: model)
+            cell?.indexPath = indexPath
+            cell?.delegate = self
         }
         
         return cell ?? UICollectionViewCell()
@@ -143,5 +145,12 @@ extension HomeInterface: HomeInterfaceProtocol {
     
     func reload() {
         self.gridCollectionView.reloadData()
+    }
+}
+
+
+extension HomeInterface: MovieCellDelegate {
+    func saveTapped(indexPath: IndexPath) {
+        self.manager.handleMovie(indexPath: indexPath)
     }
 }

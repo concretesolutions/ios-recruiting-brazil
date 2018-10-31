@@ -8,7 +8,14 @@
 
 import UIKit
 
+enum FavoritesInterfaceState {
+    case normal
+    case error
+}
+
 class FavoritesInterface: UIViewController {
+    
+    lazy var manager = FavoritesManager(self)
     
     @IBOutlet weak var listCollectionView: UICollectionView!
     
@@ -16,6 +23,13 @@ class FavoritesInterface: UIViewController {
         super.viewDidLoad()
         
         self.listCollectionViewSetup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.manager.load()
+        self.listCollectionView.reloadData()
     }
     
     func listCollectionViewSetup() {
@@ -33,13 +47,15 @@ extension FavoritesInterface: UICollectionViewDelegate {
 
 extension FavoritesInterface: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return self.manager.numberOfMovies()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoritedMovieCell.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoritedMovieCell.identifier, for: indexPath) as? FavoritedMovieCell
         
-        return cell
+        cell?.set(movie: self.manager.movieIn(index: indexPath.row))
+        
+        return cell ?? UICollectionViewCell()
     }
 }
 
@@ -61,5 +77,15 @@ extension FavoritesInterface: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let width = collectionView.frame.width
         return UIEdgeInsets(top: width * 0.025, left: width * 0.025, bottom: width * 0.025, right: width * 0.025)
+    }
+}
+
+extension FavoritesInterface: FavoritesInterfaceProtocol {
+    func set(state: FavoritesInterfaceState) {
+        
+    }
+    
+    func reload() {
+        self.listCollectionView.reloadData()
     }
 }

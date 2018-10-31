@@ -15,7 +15,7 @@ protocol HomeProviderDelegate {
 class HomeProvider {
     var delegate: HomeProviderDelegate?
     
-    func fetchPopularMovies(page: Int, completion: @escaping ([Movie]) -> Void) {
+    func fetchPopularMovies(page: Int, completion: @escaping ([MovieJSON]) -> Void) {
         let parameters = [
             "api_key": Network.manager.apiKey,
             "page": page
@@ -31,8 +31,6 @@ class HomeProvider {
                 print("No results")
                 return
             }
-            
-            
             
             completion(movies)
         }

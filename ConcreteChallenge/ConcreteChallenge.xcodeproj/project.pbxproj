@@ -37,7 +37,6 @@
 		B7E43E9D218945A700E4056E /* FavoritedMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E43E9B218945A700E4056E /* FavoritedMovieCell.xib */; };
 		B7E43E9F218947A900E4056E /* FavoritesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E9E218947A900E4056E /* FavoritesInterface.swift */; };
 		B7E43EA1218947E500E4056E /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43EA0218947E500E4056E /* FavoritesManager.swift */; };
-		B7E43EA32189480D00E4056E /* FavoritesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43EA22189480D00E4056E /* FavoritesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,7 +97,6 @@
 		B7E43E9B218945A700E4056E /* FavoritedMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritedMovieCell.xib; sourceTree = "<group>"; };
 		B7E43E9E218947A900E4056E /* FavoritesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInterface.swift; sourceTree = "<group>"; };
 		B7E43EA0218947E500E4056E /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
-		B7E43EA22189480D00E4056E /* FavoritesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesProvider.swift; sourceTree = "<group>"; };
 		D85733309C281E73B04925B3 /* Pods-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		F6212BF60DE6FE8DF826952C /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,7 +290,6 @@
 		B7E43E96218943B400E4056E /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
-				B7E43EA22189480D00E4056E /* FavoritesProvider.swift */,
 				B7E43EA0218947E500E4056E /* FavoritesManager.swift */,
 				B7E43E9E218947A900E4056E /* FavoritesInterface.swift */,
 				B7E43E97218943C900E4056E /* Favorites.storyboard */,
@@ -530,11 +527,15 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,7 +562,6 @@
 				B79287BD2188A7EA00A74567 /* MovieCell.swift in Sources */,
 				B7E43E932189311000E4056E /* PopularMovies.swift in Sources */,
 				B7E43EA1218947E500E4056E /* FavoritesManager.swift in Sources */,
-				B7E43EA32189480D00E4056E /* FavoritesProvider.swift in Sources */,
 				B7E43E91218929F800E4056E /* Movie.swift in Sources */,
 				B79287C82188B3E200A74567 /* MovieDescriptionInterface.swift in Sources */,
 				B7928770218895BF00A74567 /* AppDelegate.swift in Sources */,

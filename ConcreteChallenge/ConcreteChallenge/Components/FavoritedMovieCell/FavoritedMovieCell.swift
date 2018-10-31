@@ -21,5 +21,12 @@ class FavoritedMovieCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    func set(movie: Movie) {
+        self.image.sd_setImage(with: URL(string: movie.imageUrl)!, completed: nil)
+        self.title.text = movie.title
+        self.movieDescription.text = movie.overview
+        
+    }
 
 }

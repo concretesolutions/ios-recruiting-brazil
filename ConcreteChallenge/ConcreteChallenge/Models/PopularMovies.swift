@@ -10,5 +10,5 @@ import Foundation
 
 struct PopularMovies: Decodable {
     var page: Int?
-    var results: [Movie]?
+    var results: [MovieJSON]?
 }
