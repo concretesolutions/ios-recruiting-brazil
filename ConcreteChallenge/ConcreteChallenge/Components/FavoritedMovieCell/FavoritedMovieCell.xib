@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoritedMovieCell" id="gTV-IL-0wX" customClass="FavoritedMovieCell" customModule="ConcreteChallenge" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="111"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="440" height="111"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageError.png" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-Mw-Odt">
+                        <rect key="frame" x="0.0" y="0.0" width="111" height="111"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="assawdawdw" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZV-Dj-uar">
+                        <rect key="frame" x="131" y="15" width="128" height="24"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="dawdjwoaidjawoidjwodijawodiawjdoiwajdoaiwjdoawidjaowidjawoidjwodjidjiajdowijodaij" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-0M-mfK">
+                        <rect key="frame" x="131" y="49" width="289" height="42"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="2008" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5vY-L6-k17">
+                        <rect key="frame" x="383" y="18" width="37" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="5vY-L6-k17" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lZV-Dj-uar" secondAttribute="trailing" constant="20" id="0Xv-EU-pwd"/>
+                <constraint firstItem="5vY-L6-k17" firstAttribute="centerY" secondItem="lZV-Dj-uar" secondAttribute="centerY" id="748-Kd-eTY"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="XMe-0M-mfK" secondAttribute="bottom" constant="20" id="BOk-HW-TAD"/>
+                <constraint firstItem="dBI-Mw-Odt" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="BRW-PK-dfq"/>
+                <constraint firstItem="dBI-Mw-Odt" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="height" id="CK1-MD-Ncf"/>
+                <constraint firstItem="lZV-Dj-uar" firstAttribute="leading" secondItem="dBI-Mw-Odt" secondAttribute="trailing" constant="20" id="Ggu-ij-pAd"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="XMe-0M-mfK" secondAttribute="trailing" constant="20" id="LfG-IL-AwQ"/>
+                <constraint firstItem="XMe-0M-mfK" firstAttribute="leading" secondItem="lZV-Dj-uar" secondAttribute="leading" id="MhN-ty-u0N"/>
+                <constraint firstItem="lZV-Dj-uar" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="15" id="aMo-If-pmX"/>
+                <constraint firstAttribute="trailing" secondItem="5vY-L6-k17" secondAttribute="trailing" constant="20" id="f51-HM-3at"/>
+                <constraint firstItem="dBI-Mw-Odt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="q0e-Cz-6mS"/>
+                <constraint firstItem="XMe-0M-mfK" firstAttribute="top" secondItem="lZV-Dj-uar" secondAttribute="bottom" constant="10" id="qHU-nV-9Bt"/>
+                <constraint firstItem="dBI-Mw-Odt" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="se5-3Q-1Wz"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="440" height="111"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="image" destination="dBI-Mw-Odt" id="W50-r0-sJV"/>
+                <outlet property="movieDescription" destination="XMe-0M-mfK" id="3OD-Pp-9Pm"/>
+                <outlet property="releaseDate" destination="5vY-L6-k17" id="bW0-TS-XwL"/>
+                <outlet property="title" destination="lZV-Dj-uar" id="cJM-sL-ljo"/>
+            </connections>
+            <point key="canvasLocation" x="520" y="181.25937031484258"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="imageError.png" width="512" height="512"/>
+    </resources>
+</document>

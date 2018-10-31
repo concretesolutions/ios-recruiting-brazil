@@ -29,6 +29,15 @@
 		B7E43E8B218926E200E4056E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E8A218926E200E4056E /* Network.swift */; };
 		B7E43E8D2189272300E4056E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E8C2189272300E4056E /* Router.swift */; };
 		B7E43E8F2189275800E4056E /* BadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E8E2189275800E4056E /* BadRequest.swift */; };
+		B7E43E91218929F800E4056E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E90218929F800E4056E /* Movie.swift */; };
+		B7E43E932189311000E4056E /* PopularMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E922189311000E4056E /* PopularMovies.swift */; };
+		B7E43E952189403C00E4056E /* imageError.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E43E942189403C00E4056E /* imageError.png */; };
+		B7E43E98218943C900E4056E /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E43E97218943C900E4056E /* Favorites.storyboard */; };
+		B7E43E9C218945A700E4056E /* FavoritedMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E9A218945A700E4056E /* FavoritedMovieCell.swift */; };
+		B7E43E9D218945A700E4056E /* FavoritedMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E43E9B218945A700E4056E /* FavoritedMovieCell.xib */; };
+		B7E43E9F218947A900E4056E /* FavoritesInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43E9E218947A900E4056E /* FavoritesInterface.swift */; };
+		B7E43EA1218947E500E4056E /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43EA0218947E500E4056E /* FavoritesManager.swift */; };
+		B7E43EA32189480D00E4056E /* FavoritesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E43EA22189480D00E4056E /* FavoritesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +90,15 @@
 		B7E43E8A218926E200E4056E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		B7E43E8C2189272300E4056E /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B7E43E8E2189275800E4056E /* BadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequest.swift; sourceTree = "<group>"; };
+		B7E43E90218929F800E4056E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		B7E43E922189311000E4056E /* PopularMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovies.swift; sourceTree = "<group>"; };
+		B7E43E942189403C00E4056E /* imageError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageError.png; sourceTree = "<group>"; };
+		B7E43E97218943C900E4056E /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
+		B7E43E9A218945A700E4056E /* FavoritedMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedMovieCell.swift; sourceTree = "<group>"; };
+		B7E43E9B218945A700E4056E /* FavoritedMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritedMovieCell.xib; sourceTree = "<group>"; };
+		B7E43E9E218947A900E4056E /* FavoritesInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInterface.swift; sourceTree = "<group>"; };
+		B7E43EA0218947E500E4056E /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		B7E43EA22189480D00E4056E /* FavoritesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesProvider.swift; sourceTree = "<group>"; };
 		D85733309C281E73B04925B3 /* Pods-ConcreteChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		F6212BF60DE6FE8DF826952C /* Pods-ConcreteChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConcreteChallengeTests/Pods-ConcreteChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,9 +156,9 @@
 		B792876E218895BF00A74567 /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				B792879D2188960600A74567 /* App */,
 				B792879F2188962300A74567 /* Models */,
 				B79287A02188962800A74567 /* Network */,
-				B792879D2188960600A74567 /* App */,
 				B792879E2188961B00A74567 /* Modules */,
 				B79287B82188A5BB00A74567 /* Components */,
 				B79287A42188968B00A74567 /* Configurations */,
@@ -179,6 +197,7 @@
 		B792879E2188961B00A74567 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B7E43E96218943B400E4056E /* Favorites */,
 				B79287C42188B19B00A74567 /* MovieDescription */,
 				B79287AF21889A4900A74567 /* Home */,
 			);
@@ -188,6 +207,8 @@
 		B792879F2188962300A74567 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B7E43E90218929F800E4056E /* Movie.swift */,
+				B7E43E922189311000E4056E /* PopularMovies.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				B7928776218895C100A74567 /* Assets.xcassets */,
+				B7E43E942189403C00E4056E /* imageError.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -232,10 +254,10 @@
 		B79287AF21889A4900A74567 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B79287AD21889A2B00A74567 /* Home.storyboard */,
-				B79287B22188A0CE00A74567 /* HomeInterface.swift */,
-				B79287B42188A0F000A74567 /* HomeManager.swift */,
 				B79287B62188A10E00A74567 /* HomeProvider.swift */,
+				B79287B42188A0F000A74567 /* HomeManager.swift */,
+				B79287B22188A0CE00A74567 /* HomeInterface.swift */,
+				B79287AD21889A2B00A74567 /* Home.storyboard */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -243,6 +265,7 @@
 		B79287B82188A5BB00A74567 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B7E43E992189458500E4056E /* FavoritedMovieCell */,
 				B79287B92188A5D400A74567 /* MovieCell */,
 			);
 			path = Components;
@@ -264,6 +287,26 @@
 				B79287C72188B3E200A74567 /* MovieDescriptionInterface.swift */,
 			);
 			path = MovieDescription;
+			sourceTree = "<group>";
+		};
+		B7E43E96218943B400E4056E /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				B7E43EA22189480D00E4056E /* FavoritesProvider.swift */,
+				B7E43EA0218947E500E4056E /* FavoritesManager.swift */,
+				B7E43E9E218947A900E4056E /* FavoritesInterface.swift */,
+				B7E43E97218943C900E4056E /* Favorites.storyboard */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		B7E43E992189458500E4056E /* FavoritedMovieCell */ = {
+			isa = PBXGroup;
+			children = (
+				B7E43E9A218945A700E4056E /* FavoritedMovieCell.swift */,
+				B7E43E9B218945A700E4056E /* FavoritedMovieCell.xib */,
+			);
+			path = FavoritedMovieCell;
 			sourceTree = "<group>";
 		};
 		CD60318651AEE5D0D50832D9 /* Pods */ = {
@@ -399,7 +442,10 @@
 			files = (
 				B79287AE21889A2B00A74567 /* Home.storyboard in Resources */,
 				B79287C62188B1DD00A74567 /* MovieDescription.storyboard in Resources */,
+				B7E43E952189403C00E4056E /* imageError.png in Resources */,
+				B7E43E9D218945A700E4056E /* FavoritedMovieCell.xib in Resources */,
 				B792877A218895C100A74567 /* LaunchScreen.storyboard in Resources */,
+				B7E43E98218943C900E4056E /* Favorites.storyboard in Resources */,
 				B79287BB2188A64400A74567 /* MovieCell.xib in Resources */,
 				B7928777218895C100A74567 /* Assets.xcassets in Resources */,
 			);
@@ -484,10 +530,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -506,9 +554,15 @@
 				B79287B32188A0CE00A74567 /* HomeInterface.swift in Sources */,
 				B79287C32188AB0400A74567 /* CALayer+SketchShadow.swift in Sources */,
 				B79287B72188A10E00A74567 /* HomeProvider.swift in Sources */,
+				B7E43E9C218945A700E4056E /* FavoritedMovieCell.swift in Sources */,
 				B79287B52188A0F000A74567 /* HomeManager.swift in Sources */,
+				B7E43E9F218947A900E4056E /* FavoritesInterface.swift in Sources */,
 				B79287C12188AAEC00A74567 /* XibLoader.swift in Sources */,
 				B79287BD2188A7EA00A74567 /* MovieCell.swift in Sources */,
+				B7E43E932189311000E4056E /* PopularMovies.swift in Sources */,
+				B7E43EA1218947E500E4056E /* FavoritesManager.swift in Sources */,
+				B7E43EA32189480D00E4056E /* FavoritesProvider.swift in Sources */,
+				B7E43E91218929F800E4056E /* Movie.swift in Sources */,
 				B79287C82188B3E200A74567 /* MovieDescriptionInterface.swift in Sources */,
 				B7928770218895BF00A74567 /* AppDelegate.swift in Sources */,
 				B79287BF2188A9D000A74567 /* UIView+Inspectables.swift in Sources */,
@@ -683,7 +737,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallenge/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -699,7 +756,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallenge/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -716,7 +776,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -734,7 +798,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -751,7 +819,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallengeUITests/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -768,7 +840,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallengeUITests/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

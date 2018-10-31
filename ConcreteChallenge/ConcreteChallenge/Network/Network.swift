@@ -17,7 +17,11 @@ class Network {
     static let manager = Network()
     
     var domain : String {
-        return "https://gohashapp.herokuapp.com"
+        return "https://api.themoviedb.org/3"
+    }
+    
+    var apiKey: String {
+        return "47265a2c299dbd2185eac909cf0dbeed"
     }
     
     private init() {}

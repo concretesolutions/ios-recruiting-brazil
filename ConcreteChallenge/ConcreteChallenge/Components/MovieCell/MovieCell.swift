@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MovieCell: UICollectionViewCell {
     
@@ -31,8 +32,14 @@ class MovieCell: UICollectionViewCell {
         self.layer.shadowRadius = 12
     }
     
-    func set(imageUrl: URL, title: String) {
-        
+    func set(movie: Movie) {
+        self.image?.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original/\(movie.backdrop_path ?? "")")!, placeholderImage: UIImage(named: "imageError.png"), options: .cacheMemoryOnly) { (_, err, _, _) in
+            if err != nil {
+                self.image.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original/\(movie.poster_path ?? "")")!, completed: nil)
+            }
+        }
+        self.title.text = movie.title
+        self.saveButton.isEnabled = !(movie.saved ?? true)
     }
     
     func resetTransform() {

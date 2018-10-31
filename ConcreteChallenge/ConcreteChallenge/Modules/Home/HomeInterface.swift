@@ -8,7 +8,15 @@
 
 import UIKit
 
+enum HomeInterfaceState {
+    case normal
+    case error
+    case loading
+}
+
 class HomeInterface: UIViewController {
+    
+    lazy var manager = HomeManager(self)
     
     //MARK: - Status Bar Config
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
@@ -27,6 +35,8 @@ class HomeInterface: UIViewController {
         super.viewDidLoad()
         
         self.gridCollectionViewSetup()
+        
+        self.manager.fetchMovies()
     }
     
     func gridCollectionViewSetup() {
@@ -66,38 +76,42 @@ extension HomeInterface: UICollectionViewDelegate {
             return superview.convert(rect, to: nil)
         }
         
-        // Set up card detail view controller
-        let vc = storyboard!.instantiateViewController(withIdentifier: "MovieDescription") as! MovieDescriptionInterface
-        vc.cardViewModel = cardModel.highlightedImage()
-        
-        vc.unhighlightedCardViewModel = cardModel // Keep the original one to restore when dismiss
-        let params = CardTransition.Params(fromCardFrame: cardPresentationFrameOnScreen,
-                                           fromCardFrameWithoutTransform: cardFrameWithoutTransform,
-                                           fromCell: cell)
-        transition = CardTransition(params: params)
-        vc.transitioningDelegate = transition
-        
-        // If `modalPresentationStyle` is not `.fullScreen`, this should be set to true to make status bar depends on presented vc.
-        vc.modalPresentationCapturesStatusBarAppearance = true
-        vc.modalPresentationStyle = .custom
-        
-        present(vc, animated: true, completion: { [unowned cell] in
-            // Unfreeze
-            cell.unfreezeAnimations()
-        })
+//        // Set up card detail view controller
+//        let vc = storyboard!.instantiateViewController(withIdentifier: "MovieDescription") as! MovieDescriptionInterface
+//        vc.cardViewModel = cardModel.highlightedImage()
+//
+//        vc.unhighlightedCardViewModel = cardModel // Keep the original one to restore when dismiss
+//        let params = CardTransition.Params(fromCardFrame: cardPresentationFrameOnScreen,
+//                                           fromCardFrameWithoutTransform: cardFrameWithoutTransform,
+//                                           fromCell: cell)
+//        transition = CardTransition(params: params)
+//        vc.transitioningDelegate = transition
+//
+//        // If `modalPresentationStyle` is not `.fullScreen`, this should be set to true to make status bar depends on presented vc.
+//        vc.modalPresentationCapturesStatusBarAppearance = true
+//        vc.modalPresentationStyle = .custom
+//
+//        present(vc, animated: true, completion: { [unowned cell] in
+//            // Unfreeze
+//            cell.unfreezeAnimations()
+//        })
     }
 }
 
 extension HomeInterface: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return self.manager.numberOfMovies()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
         
+        if let movie = self.manager.movieIn(index: indexPath.row) {
         
-        return cell
+            cell?.set(movie: movie)
+        }
+        
+        return cell ?? UICollectionViewCell()
     }
     
     
@@ -119,5 +133,15 @@ extension HomeInterface: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let frame = collectionView.frame
         return UIEdgeInsets(top: frame.width * 0.05, left: frame.width * 0.05, bottom: frame.width * 0.05, right: frame.width * 0.05)
+    }
+}
+
+extension HomeInterface: HomeInterfaceProtocol {
+    func set(state: HomeInterfaceState) {
+        
+    }
+    
+    func reload() {
+        self.gridCollectionView.reloadData()
     }
 }
