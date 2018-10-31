@@ -96,7 +96,7 @@ extension MovieGridViewController: ViewCode {
     }
     
     func additionalSetup() {
-        self.movieGridView.searchBar.delegate = self
+        self.movieGridView.searchBarDelegate.textDidChangeAction = self.interactor.filterMoviesBy
     }
 }
 

@@ -11,6 +11,7 @@ import UIKit
 public class MovieGridView: UIView {
     
     let dataSource: UICollectionViewDataSource
+    let searchBarDelegate: MovieSearchBarDelegate = MovieSearchBarDelegate()
     
     // UI Elements
     lazy var collection: UICollectionView = {
@@ -29,10 +30,12 @@ public class MovieGridView: UIView {
         searchBar.layer.borderWidth = 1
         searchBar.layer.borderColor = Colors.lightYellow.cgColor
         searchBar.placeholder = "search movies..."
+        searchBar.delegate = searchBarDelegate
         
         if let textField = searchBar.value(forKey: "searchField") as? UITextField {
             textField.backgroundColor = Colors.darkYellow
         } else {/*do nothing*/}
+        
         
         return searchBar
     }()

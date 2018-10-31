@@ -8,7 +8,10 @@
 
 import UIKit
 
-extension MovieGridViewController: UISearchBarDelegate {
+class MovieSearchBarDelegate: NSObject, UISearchBarDelegate {
+    
+    var textDidChangeAction: ((String) -> Void)?
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
@@ -26,6 +29,8 @@ extension MovieGridViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.interactor.filterMoviesBy(string: searchText)
+        if let action = self.textDidChangeAction {
+            action(searchText)
+        } else {/*do nothing*/}
     }
 }

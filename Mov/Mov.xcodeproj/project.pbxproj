@@ -24,7 +24,7 @@
 		2525BB0B21825479007EF9D0 /* MovieGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0A21825479007EF9D0 /* MovieGridViewModel.swift */; };
 		2525BB0E21825629007EF9D0 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0D21825629007EF9D0 /* Assets.swift */; };
 		255937162188EEFC00D2EA69 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255937152188EEFC00D2EA69 /* MainTabBarController.swift */; };
-		2559371821892CC100D2EA69 /* MovieGridViewController+UiSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559371721892CC100D2EA69 /* MovieGridViewController+UiSearchBarDelegate.swift */; };
+		2559371821892CC100D2EA69 /* MovieSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559371721892CC100D2EA69 /* MovieSearchBarDelegate.swift */; };
 		2559371A21892FBC00D2EA69 /* DefaultNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559371921892FBC00D2EA69 /* DefaultNavigationController.swift */; };
 		2578BACA2183F9AD001107B6 /* MoviePersistenceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BAC92183F9AD001107B6 /* MoviePersistenceMock.swift */; };
 		2578BACE218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BACD218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift */; };
@@ -95,7 +95,7 @@
 		2525BB0A21825479007EF9D0 /* MovieGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewModel.swift; sourceTree = "<group>"; };
 		2525BB0D21825629007EF9D0 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		255937152188EEFC00D2EA69 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		2559371721892CC100D2EA69 /* MovieGridViewController+UiSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieGridViewController+UiSearchBarDelegate.swift"; sourceTree = "<group>"; };
+		2559371721892CC100D2EA69 /* MovieSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchBarDelegate.swift; sourceTree = "<group>"; };
 		2559371921892FBC00D2EA69 /* DefaultNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationController.swift; sourceTree = "<group>"; };
 		2578BAC92183F9AD001107B6 /* MoviePersistenceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePersistenceMock.swift; sourceTree = "<group>"; };
 		2578BACD218404C8001107B6 /* DefaultMovieGridPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMovieGridPresenterSpec.swift; sourceTree = "<group>"; };
@@ -164,6 +164,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2516EDF021893F3E007AB6A1 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				2516EDF421893F61007AB6A1 /* Interactor */,
+				2516EDF321893F54007AB6A1 /* Presenter */,
+				2516EDF221893F4F007AB6A1 /* ViewController */,
+				2516EDF121893F4A007AB6A1 /* View */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		2516EDF121893F4A007AB6A1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2516EDF221893F4F007AB6A1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2516EDF321893F54007AB6A1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2516EDF421893F61007AB6A1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		2516EDF52189435E007AB6A1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2559371721892CC100D2EA69 /* MovieSearchBarDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		2525BADE21824A46007EF9D0 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				255937132188EEB400D2EA69 /* Main */,
+				2516EDF021893F3E007AB6A1 /* Favorites */,
 				2525BAE021824AA7007EF9D0 /* MovieGrid */,
 			);
 			path = Scenes;
@@ -309,6 +357,7 @@
 		255937132188EEB400D2EA69 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				2516EDF52189435E007AB6A1 /* Common */,
 				255937142188EEBD00D2EA69 /* ViewController */,
 			);
 			path = Main;
@@ -414,7 +463,6 @@
 			children = (
 				2525BAE521824AA7007EF9D0 /* MovieGridViewController+UICollectionViewDataSource.swift */,
 				25D252B1218883440067795A /* MovieGridViewController+UICollectionViewDelegate.swift */,
-				2559371721892CC100D2EA69 /* MovieGridViewController+UiSearchBarDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -781,7 +829,7 @@
 				25D252B421889C130067795A /* Collection+safeSubscript.swift in Sources */,
 				2525BB0E21825629007EF9D0 /* Assets.swift in Sources */,
 				25FEBC642184C24F002184D6 /* MovieGridCollectionView.swift in Sources */,
-				2559371821892CC100D2EA69 /* MovieGridViewController+UiSearchBarDelegate.swift in Sources */,
+				2559371821892CC100D2EA69 /* MovieSearchBarDelegate.swift in Sources */,
 				25E5465D218365FA0043514B /* MoyaProvider+requestDecodable.swift in Sources */,
 				2525BAF821824AF2007EF9D0 /* Movie.swift in Sources */,
 				2578BAD6218498D7001107B6 /* MovieGridUnitView.swift in Sources */,
