@@ -17,6 +17,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+
+//
+//        let sb = UIStoryboard(name: "MoviePlayNow", bundle: nil)
+//        let mainController = sb.instantiateViewController(withIdentifier: "moviePlayingNow")
+//
+//        navigationController.viewControllers = [mainController]
+//        navigationController.navigationBar.tintColor = UIColor(red: 247, green: 212, blue: 114, alpha: 1)
+//        self.window?.rootViewController = navigationController
+//        self.window?.makeKeyAndVisible()
+
+        let tabBarController = UITabBarController()
+        let navigationControllerMovie = UINavigationController()
+        
+        let sbMovie = UIStoryboard(name: "MoviePlayNow", bundle: nil)
+        let movieController = sbMovie.instantiateViewController(withIdentifier: "moviePlayingNow")
+        navigationControllerMovie.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.bookmarks, tag: 0)
+        navigationControllerMovie.viewControllers = [movieController]
+        navigationControllerMovie.restorationIdentifier = "navigationMovie"
+        
+        
+        
+        let navigationControllerFavorite = UINavigationController()
+        let sbFavorite = UIStoryboard(name: "FavoriteMovies", bundle: nil)
+        let favoriteController = sbFavorite.instantiateViewController(withIdentifier: "FavoriteMovies")
+        navigationControllerFavorite.restorationIdentifier = "navigationFavorite"
+        navigationControllerFavorite.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.favorites, tag: 1)
+        navigationControllerFavorite.viewControllers = [favoriteController]
+        
+        tabBarController.viewControllers = [navigationControllerMovie,navigationControllerFavorite]
+        self.window?.rootViewController = tabBarController
+        self.window?.makeKeyAndVisible()
         return true
     }
 

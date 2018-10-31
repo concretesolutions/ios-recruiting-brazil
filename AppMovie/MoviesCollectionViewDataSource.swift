@@ -26,6 +26,7 @@ class MoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         cell.titleMovie.text = _movie.originalTitle
         cell.posterPath.image = _movie.posterPath
         cell.btnFavorite.setImage(_movie.getImage(favorite: _movie.favorite), for: .normal)
+        
         return cell
     }
 }

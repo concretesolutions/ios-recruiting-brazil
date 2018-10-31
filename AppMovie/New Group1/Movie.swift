@@ -27,18 +27,18 @@ struct MovieNowPlaying {
 extension MovieNowPlaying {
     
     init(_movieNP: Dictionary<String,Any>) {
-        let adult = _movieNP[PropertiesMovieNowPlaying.adult.value] as? Bool ?? false
-        let genre = _movieNP[PropertiesMovieNowPlaying.genre.value] as? Genre ?? Genre()
-        let id = _movieNP[PropertiesMovieNowPlaying.id.value] as? Int ?? 0
-        let language = _movieNP[PropertiesMovieNowPlaying.language.value] as? String ?? ""
-        let originalTitle = _movieNP[PropertiesMovieNowPlaying.originalTitle.value] as? String ?? ""
-        let overview = _movieNP[PropertiesMovieNowPlaying.overview.value] as? String ?? ""
-        let popularity = _movieNP[PropertiesMovieNowPlaying.popularity.value] as? Decimal ?? 0.0
-        let releaseDate = _movieNP[PropertiesMovieNowPlaying.releaseDate.value] as? String ?? ""
+        let adult = _movieNP[PropertireMovie.adult.value] as? Bool ?? false
+        let genre = _movieNP[PropertireMovie.genre.value] as? Genre ?? Genre()
+        let id = _movieNP[PropertireMovie.id.value] as? Int ?? 0
+        let language = _movieNP[PropertireMovie.language.value] as? String ?? ""
+        let originalTitle = _movieNP[PropertireMovie.originalTitle.value] as? String ?? ""
+        let overview = _movieNP[PropertireMovie.overview.value] as? String ?? ""
+        let popularity = _movieNP[PropertireMovie.popularity.value] as? Decimal ?? 0.0
+        let releaseDate = _movieNP[PropertireMovie.releaseDate.value] as? String ?? ""
         let favorite = false
         
         var backDropImage : UIImage?
-        if let nameImage = _movieNP[PropertiesMovieNowPlaying.backdropPath.value] as? String {
+        if let nameImage = _movieNP[PropertireMovie.backdropPath.value] as? String {
             MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: "jpg", completion: { (backDropPath) in
                 if let _img = backDropPath {
                     dispatchPrecondition(condition: .onQueue(.main))
@@ -48,7 +48,7 @@ extension MovieNowPlaying {
         }
         
         var posterImage : UIImage?
-        if let nameImage = _movieNP[PropertiesMovieNowPlaying.posterPath.value] as? String {
+        if let nameImage = _movieNP[PropertireMovie.posterPath.value] as? String {
             MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: "jpg", completion: { (posterPath) in
                 if let _img = posterPath {
                     dispatchPrecondition(condition: .onQueue(.main))

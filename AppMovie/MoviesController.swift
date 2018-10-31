@@ -11,23 +11,53 @@ import UIKit
 
 class MoviesController: UIViewController{
 
-    var movies = [MovieNowPlaying]()
-    var moviesFavorites = [MovieNowPlaying]()
     let dataSource = MoviesCollectionViewDataSource()
-    var dadController : UIViewController?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let activityIndicator = Activity.getActivityLoad(position: CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2), hidesWhenStopped: true, style: UIActivityIndicatorView.Style.gray)
+    let viewLoad = Load.getViewLoad(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), backGround: .gray, tag: 999)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigation()
+        setupLoad()
         setupCollectionView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.dataSource.datas = ManagerMovies.shared.movies
+        self.collectionView.reloadData()
+    }
+    
     //MARK: Privates Methods
+    private func setupLoad() {
+        self.view.addSubview(viewLoad)
+        activityIndicator.startAnimating()
+        self.view.addSubview(activityIndicator)
+    }
+    
+    private func setupNavigation() {
+        self.navigationItem.title = "Movie"
+    }
+    
+    private func setupStopLoading() {
+        if let view = self.view.viewWithTag(999) {
+            view.removeFromSuperview()
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
     private func setupCollectionView() {
         collectionView.dataSource = dataSource
         collectionView.delegate = self
-        dataSource.datas = movies
+        ManagerMovies.shared.setupMovies { (moviesDonwloaded) in
+            if let _movies = moviesDonwloaded {
+                self.dataSource.datas = _movies
+                self.setupStopLoading()
+                self.collectionView.reloadData()
+            }
+        }
         dataSource.controller = self
     }
 }
@@ -35,50 +65,42 @@ class MoviesController: UIViewController{
 //MARK: - Delegates
 extension MoviesController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
         let sb = UIStoryboard(name: "DescriptionMovie", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "description")
-        if let _vc = vc as? DescriptionMovieViewController {
-            _vc.movie = movies[indexPath.row]
-            self.navigationController?.present(_vc, animated: true, completion: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "description") as? DescriptionMovieViewController
+        vc?.movie = ManagerMovies.shared.movies[indexPath.row]
+        if let descViewController = vc {
+            self.navigationController?.pushViewController(descViewController, animated: true)
         }
     }
 }
 
 extension MoviesController: FavoriteMovieDelegate {
     func setFavorite(movie: MovieNowPlaying) {
-        self.moviesFavorites.append(movie)
+        ManagerMovies.shared.moviesFavorites.append(movie)
+        
+        let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.movies)
+        ManagerMovies.shared.movies[index].updateFavorite()
+        self.dataSource.datas = ManagerMovies.shared.movies
+        self.collectionView.reloadData()
     }
     
     func removeFavorite(movie: MovieNowPlaying) {
-        let index = getIndexFavorite(movie: movie)
+        let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.moviesFavorites)
         if  index != -1 {
-            self.moviesFavorites.remove(at: index)
+            ManagerMovies.shared.moviesFavorites.remove(at: index)
         }
-    }
-    
-    private func getIndexFavorite(movie: MovieNowPlaying) -> Int {
-        for (index, _movie) in moviesFavorites.enumerated() {
-            let _id = _movie.id
-            let id = movie.id
-            if  _id == id {
-                return index
-            }
-        }
-        return -1
     }
 }
-
-extension MoviesController: SendDataDelegate {
-    func send(data: Any) {
-        if let _movies = data as? [MovieNowPlaying] {
-            self.movies = _movies
-            self.dataSource.datas = _movies
-            if let dadController = self.dadController{
-                self.dataSource.controller = dadController
-            }
-            self.collectionView.reloadData()
-        }
+extension MoviesController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let resultSearch = ManagerMovies.shared.movies.filter({$0.originalTitle.prefix(searchText.count) ==  searchText })
+        self.dataSource.datas = resultSearch
+        self.collectionView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.dataSource.datas = ManagerMovies.shared.movies
+        self.collectionView.reloadData()
+        self.view.endEditing(true)
     }
 }

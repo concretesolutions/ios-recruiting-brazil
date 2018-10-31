@@ -40,8 +40,10 @@ class MovieDAO {
         let task : URLSessionDataTask = session.dataTask(with: request) { (dataOrNil, response, error) in
             if let data = dataOrNil {
                 if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                    self.movies = responseDictionary.value(forKey: "results") as! [Dictionary<String,Any>]
-                    completion(self.movies)
+                    if let _movies = responseDictionary.value(forKey: "results") as? [Dictionary<String,Any>] {
+                        self.movies = _movies
+                            completion(_movies)
+                    }
                 }
             }else {
                 completion(nil)
