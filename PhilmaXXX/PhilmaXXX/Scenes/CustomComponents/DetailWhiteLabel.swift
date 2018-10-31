@@ -35,6 +35,7 @@ final class DetailWhiteLabel: UILabel {
 		self.numberOfLines = 0
 		self.shadowColor = .black
 		self.shadowOffset = CGSize(width: 1, height: 1)
+		self.minimumScaleFactor = 0.5
 		self.adjustsFontSizeToFitWidth = true
 	}
 	

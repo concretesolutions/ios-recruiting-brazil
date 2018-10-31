@@ -47,6 +47,7 @@ final class DetailMovieVC: UIViewController {
 	lazy var overviewLabel: DetailWhiteLabel = {
 		let label = DetailWhiteLabel(frame: .zero)
 		label.font = label.font.withSize(18)
+		label.adjustsFontSizeToFitWidth = true
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -150,6 +151,9 @@ extension DetailMovieVC: CodeView {
 		genresLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
 		
 		overviewLabel.sizeToFit()
+		let lowPriorityConstraint = overviewLabel.topAnchor.constraint(greaterThanOrEqualTo: genresLabel.bottomAnchor, constant: 8)
+		overviewLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: NSLayoutConstraint.Axis.vertical)
+		lowPriorityConstraint.isActive = true
 		overviewLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
 		overviewLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
 		overviewLabel.bottomAnchor.constraint(equalTo:  view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
