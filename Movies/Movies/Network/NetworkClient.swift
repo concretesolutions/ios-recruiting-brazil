@@ -35,4 +35,11 @@ class NetworkClient {
     }
   }
   
+  public func getImageDownloadURL(fromPath path: String) -> URL {
+    guard let url = URL(string: "\(MoviesAPI.imagesURL)/\(path)") else {
+      fatalError("Invalid path")
+    }
+    
+    return url
+  }
 }

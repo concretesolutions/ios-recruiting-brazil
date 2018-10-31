@@ -63,10 +63,31 @@
                                     <constraint firstItem="tfC-a4-vw3" firstAttribute="leading" secondItem="rtB-OA-mFK" secondAttribute="leading" id="oyc-mg-HVH"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ap-lN-BYU">
+                                <rect key="frame" x="119" y="0.0" width="41" height="37"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="xTw-O8-7yz">
+                                        <rect key="frame" x="11" y="9" width="19" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="seg-Y0-imq"/>
+                                            <constraint firstAttribute="width" constant="19" id="uNU-Nc-3n3"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="xTw-O8-7yz" firstAttribute="centerY" secondItem="0ap-lN-BYU" secondAttribute="centerY" id="3Cd-Gz-Szf"/>
+                                    <constraint firstItem="xTw-O8-7yz" firstAttribute="centerX" secondItem="0ap-lN-BYU" secondAttribute="centerX" id="Hqj-pG-W7X"/>
+                                    <constraint firstAttribute="width" constant="41" id="iaA-ki-z1J"/>
+                                    <constraint firstAttribute="height" constant="37" id="uLx-wk-U0t"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nzN-Cf-GnI" firstAttribute="top" secondItem="wVs-9Z-FoY" secondAttribute="top" id="Dtf-Jg-Y5y"/>
+                            <constraint firstAttribute="trailing" secondItem="0ap-lN-BYU" secondAttribute="trailing" id="Pat-8E-er4"/>
+                            <constraint firstItem="0ap-lN-BYU" firstAttribute="top" secondItem="wVs-9Z-FoY" secondAttribute="top" id="QgJ-M0-JlJ"/>
                             <constraint firstItem="nzN-Cf-GnI" firstAttribute="leading" secondItem="wVs-9Z-FoY" secondAttribute="leading" id="R2b-AT-7Rt"/>
                             <constraint firstItem="nzN-Cf-GnI" firstAttribute="top" secondItem="wVs-9Z-FoY" secondAttribute="top" id="UPu-Pr-btN"/>
                             <constraint firstItem="rtB-OA-mFK" firstAttribute="top" secondItem="nzN-Cf-GnI" secondAttribute="bottom" id="WM1-2P-kyI"/>
@@ -92,6 +113,8 @@
                 <outlet property="posterHeightLayoutConstraint" destination="TjX-21-lC3" id="WDR-Sg-Ul8"/>
                 <outlet property="posterImageView" destination="nzN-Cf-GnI" id="RXc-oz-EUM"/>
                 <outlet property="ratingLabel" destination="rGO-mF-K5V" id="3Tb-sj-0lv"/>
+                <outlet property="starContainerView" destination="0ap-lN-BYU" id="1SM-63-ECr"/>
+                <outlet property="starImageView" destination="xTw-O8-7yz" id="Oix-WA-hTj"/>
                 <outlet property="titleLabel" destination="tfC-a4-vw3" id="NzX-ql-SvO"/>
                 <outlet property="yearLabel" destination="WcV-r1-KVV" id="gC2-3w-Mxo"/>
             </connections>
@@ -100,5 +123,6 @@
     </objects>
     <resources>
         <image name="movie" width="500" height="750"/>
+        <image name="star" width="25" height="25"/>
     </resources>
 </document>

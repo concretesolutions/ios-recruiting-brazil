@@ -20,6 +20,8 @@
 		C08AC6A12188308900A93011 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AC6A02188308900A93011 /* Result.swift */; };
 		C08AC6A32188310600A93011 /* MoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AC6A22188310600A93011 /* MoviesAPI.swift */; };
 		C08AC6A52188318700A93011 /* MoviesAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08AC6A42188318700A93011 /* MoviesAPIError.swift */; };
+		C0EE4C9921891F56003C9580 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE4C9721891F55003C9580 /* MovieCollectionViewCell.swift */; };
+		C0EE4C9B21891F6F003C9580 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EE4C9A21891F6F003C9580 /* MovieCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		C08AC6A02188308900A93011 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		C08AC6A22188310600A93011 /* MoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPI.swift; sourceTree = "<group>"; };
 		C08AC6A42188318700A93011 /* MoviesAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPIError.swift; sourceTree = "<group>"; };
+		C0EE4C9721891F55003C9580 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		C0EE4C9A21891F6F003C9580 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 		C058CE872186EAA5008F731E /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				C0EE4C9221891E71003C9580 /* Views */,
 				C058CE9D2186F9F1008F731E /* AppDelegate */,
 				C058CE9C2186F9DF008F731E /* Controllers */,
 				C08AC69A2188282400A93011 /* Model */,
@@ -146,6 +151,15 @@
 				C08AC69B2188283100A93011 /* Movie.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C0EE4C9221891E71003C9580 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0EE4C9A21891F6F003C9580 /* MovieCollectionViewCell.xib */,
+				C0EE4C9721891F55003C9580 /* MovieCollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FA51CA6384BD3539173E7762 /* Pods */ = {
@@ -221,6 +235,7 @@
 				C058CE932186EAAD008F731E /* LaunchScreen.storyboard in Resources */,
 				C058CE902186EAAD008F731E /* Assets.xcassets in Resources */,
 				C058CE8E2186EAA5008F731E /* Main.storyboard in Resources */,
+				C0EE4C9B21891F6F003C9580 /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,11 +250,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Movies/Pods-Movies-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +309,7 @@
 				C08AC6592188092200A93011 /* NetworkClient.swift in Sources */,
 				C08AC6A12188308900A93011 /* Result.swift in Sources */,
 				C08AC69C2188283100A93011 /* Movie.swift in Sources */,
+				C0EE4C9921891F56003C9580 /* MovieCollectionViewCell.swift in Sources */,
 				C08AC69F2188296400A93011 /* MovieParser.swift in Sources */,
 				C08AC6A32188310600A93011 /* MoviesAPI.swift in Sources */,
 			);

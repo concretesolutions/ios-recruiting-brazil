@@ -20,8 +20,8 @@ struct MoviesAPI {
     return url
   }()
   
-  private static let imagesURL: URL = {
-    guard let url = URL(string: "https://image.tmdb.org/t/p") else {
+  public static let imagesURL: URL = {
+    guard let url = URL(string: "https://image.tmdb.org/t/p/w500") else {
       fatalError("Incorrect images url")
     }
     
