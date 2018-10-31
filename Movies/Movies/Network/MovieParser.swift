@@ -14,9 +14,15 @@ final class MovieParser {
     guard let identificator = json["id"].int,
       let title = json["title"].string,
       let voteAverage = json["vote_average"].double,
-      let posterPath = json["poster_path"].string,
       let releaseDateString = json["release_date"].string else {
         fatalError("Failed to parse a movie object")
+    }
+    
+    var posterPath: String
+    if let path = json["poster_path"].string {
+      posterPath = path
+    } else {
+      posterPath = ""
     }
     
     let formater = DateFormatter()

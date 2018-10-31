@@ -17,6 +17,8 @@ class MoviesCollectionViewController: UICollectionViewController {
   
   var errorView: ErrorView!
   
+  var isUpdating = false
+  
   enum ViewState {
     case loading
     case success
@@ -42,7 +44,7 @@ class MoviesCollectionViewController: UICollectionViewController {
   
   fileprivate func fetchMovies() {
     currentViewState = .loading
-    NetworkClient().fetchPopularMovies { (result) in
+    NetworkClient.shared.fetchPopularMovies { (result) in
       switch result {
       case .success(let movies):
         self.currentViewState = .success
@@ -55,8 +57,38 @@ class MoviesCollectionViewController: UICollectionViewController {
     }
   }
   
+  @objc fileprivate func fetchMoreMovies() {
+    NetworkClient.shared.fetchPopularMovies { (result) in
+      switch result {
+      case .success(let movies):
+        self.updateCollectionView(withMovies: movies)
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+  
+  func updateCollectionView(withMovies movies: [Movie]) {
+    let updates = {
+      var indexes = [IndexPath]()
+      
+      for movie in movies {
+        self.moviesDataSource.movies.append(movie)
+        let lastItem = self.moviesDataSource.movies.count - 1
+        let section = 0
+        indexes.append(IndexPath(row: lastItem, section: section))
+      }
+      
+      self.collectionView.insertItems(at: indexes)
+    }
+    
+    collectionView.performBatchUpdates(updates) { (_) in
+      self.isUpdating = false
+    }
+  }
+  
   fileprivate func setupCollectionView() {
-    moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width)
+    moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width, delegate: self)
     moviesDataSource = MoviesDataSource(posterHeight: moviesDelegate.newPosterHeight)
     self.collectionView.delegate = moviesDelegate
     self.collectionView.dataSource = moviesDataSource
@@ -76,15 +108,28 @@ class MoviesCollectionViewController: UICollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     navigationItem.searchController = UISearchController(searchResultsController: nil)
     navigationItem.hidesSearchBarWhenScrolling = false
-  
+    
     setupCollectionView()
     
     setupSubviews()
     
     fetchMovies()
   }
+  
+}
 
+extension MoviesCollectionViewController: MoviesCollectionViewUpdateDelegate {
+  func loadMoreMovies() {
+    if !isUpdating && !moviesDataSource.movies.isEmpty {
+      isUpdating = true
+      fetchMoreMovies()
+    }
+  }
+  
+  func canShowFooter() -> Bool {
+    return !moviesDataSource.movies.isEmpty
+  }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class MoviesDataSource: NSObject, UICollectionViewDataSource {
-
+  
   var movies: [Movie]
   var posterHeight: CGFloat
   
@@ -31,5 +31,11 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return movies.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    let cell =  collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footerCell", for: indexPath)
+    cell.isHidden = true
+    return cell
   }
 }

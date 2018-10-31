@@ -33,8 +33,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
     didSet {
       switch currentLoadingState! {
       case .loaded:
+        loadingActivityIndicatorView.stopAnimating()
         loadingActivityIndicatorView.isHidden = true
       case .loading:
+        loadingActivityIndicatorView.startAnimating()
         loadingActivityIndicatorView.isHidden = false
       }
     }
@@ -75,8 +77,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
     yearLabel.text = "\(Calendar.current.component(.year, from: movie.releaseDate))"
     currentFavoriteState = movie.isFavorite ? .favorite : .notFavorite
     currentLoadingState = .loading
-    posterImageView.sd_setImage(with: NetworkClient().getImageDownloadURL(fromPath: movie.posterPath)) { (_, _, _, _) in
+    
+    if !movie.posterPath.isEmpty {
+      posterImageView.sd_setImage(with: NetworkClient.shared.getImageDownloadURL(fromPath: movie.posterPath)) { (_, _, _, _) in
+        self.currentLoadingState = .loaded
+      }
+    } else {
       self.currentLoadingState = .loaded
+      posterImageView.image = UIImage(named: "placeholder")
     }
   }
   

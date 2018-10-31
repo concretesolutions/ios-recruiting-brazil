@@ -10,9 +10,9 @@ import Foundation
 
 struct MoviesAPI {
   
-  private static let apiKey = "941592b5f6cb41b1ced69ede6bc6f5be"
+  static let apiKey = "941592b5f6cb41b1ced69ede6bc6f5be"
   
-  private static let baseURL: URL = {
+  static let baseURL: URL = {
     guard let url = URL(string: "https://api.themoviedb.org/3") else {
       fatalError("Incorrect base url")
     }
@@ -20,7 +20,7 @@ struct MoviesAPI {
     return url
   }()
   
-  public static let imagesURL: URL = {
+  static let imagesURL: URL = {
     guard let url = URL(string: "https://image.tmdb.org/t/p/w500") else {
       fatalError("Incorrect images url")
     }
@@ -28,8 +28,8 @@ struct MoviesAPI {
     return url
   }()
   
-  public static var popularMoviesURL: URL {
-    guard let url = URL(string: "\(baseURL.absoluteString)/discover/movie?sort_by=popularity.desc&api_key=\(apiKey)") else {
+  static var popularMoviesURL: URL {
+    guard let url = URL(string: "\(baseURL.absoluteString)/discover/movie") else {
       fatalError("Incorrect popularMoviesURL url")
     }
     

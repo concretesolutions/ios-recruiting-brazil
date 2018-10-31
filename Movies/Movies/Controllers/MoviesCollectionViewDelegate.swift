@@ -16,13 +16,26 @@ class MoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
   var posterHeight: CGFloat = 240
   var posterWidth: CGFloat = 160
   var movieInfoContainerHeight: CGFloat = 66
+  var delegate: MoviesCollectionViewUpdateDelegate
   
-  init(frameWidth: CGFloat) {
+  init(frameWidth: CGFloat, delegate: MoviesCollectionViewUpdateDelegate) {
     self.cellWidth = (frameWidth - (margin * (columns + 1))) / columns
+    self.delegate = delegate
     newPosterHeight = posterHeight * cellWidth / posterWidth
+    
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: cellWidth, height: newPosterHeight + movieInfoContainerHeight)
   }
+  
+  func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+    
+    if delegate.canShowFooter() {
+      view.isHidden = false
+      delegate.loadMoreMovies()
+    }
+    
+  }
+
 }
