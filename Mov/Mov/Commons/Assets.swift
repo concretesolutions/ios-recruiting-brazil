@@ -15,6 +15,7 @@ struct Images {
     // Mark: Icons
     static let isFavoriteIconFull = #imageLiteral(resourceName: "favorite_full_icon")
     static let isFavoriteIconGray = #imageLiteral(resourceName: "favorite_gray_icon")
+    static let favoritesIcon = #imageLiteral(resourceName: "favorite_empty_icon")
     static let error = #imageLiteral(resourceName: "error_icon")
     static let movieListIcon = #imageLiteral(resourceName: "list_icon")
     static let noResults = #imageLiteral(resourceName: "search")

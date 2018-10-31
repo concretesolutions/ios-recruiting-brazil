@@ -23,6 +23,13 @@
 		2525BB09218252AD007EF9D0 /* MovieGridUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB08218252AD007EF9D0 /* MovieGridUnit.swift */; };
 		2525BB0B21825479007EF9D0 /* MovieGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0A21825479007EF9D0 /* MovieGridViewModel.swift */; };
 		2525BB0E21825629007EF9D0 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525BB0D21825629007EF9D0 /* Assets.swift */; };
+		252B42002189D8BB00238FAE /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B41FF2189D8BB00238FAE /* FavoritesViewController.swift */; };
+		252B42022189D9F500238FAE /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B42012189D9F500238FAE /* FavoritesView.swift */; };
+		252B42042189DA4200238FAE /* FavoritesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B42032189DA4200238FAE /* FavoritesTableView.swift */; };
+		252B42062189DC6800238FAE /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B42052189DC6800238FAE /* FavoritesTableViewCell.swift */; };
+		252B420A2189DCA600238FAE /* FavoritesUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B42092189DCA600238FAE /* FavoritesUnitView.swift */; };
+		252B420D2189E57F00238FAE /* FavoritesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B420C2189E57F00238FAE /* FavoritesBuilder.swift */; };
+		252B42102189E8EF00238FAE /* MainTabBarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B420F2189E8EF00238FAE /* MainTabBarBuilder.swift */; };
 		255937162188EEFC00D2EA69 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255937152188EEFC00D2EA69 /* MainTabBarController.swift */; };
 		2559371821892CC100D2EA69 /* MovieSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559371721892CC100D2EA69 /* MovieSearchBarDelegate.swift */; };
 		2559371A21892FBC00D2EA69 /* DefaultNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2559371921892FBC00D2EA69 /* DefaultNavigationController.swift */; };
@@ -94,6 +101,13 @@
 		2525BB08218252AD007EF9D0 /* MovieGridUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridUnit.swift; sourceTree = "<group>"; };
 		2525BB0A21825479007EF9D0 /* MovieGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewModel.swift; sourceTree = "<group>"; };
 		2525BB0D21825629007EF9D0 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		252B41FF2189D8BB00238FAE /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		252B42012189D9F500238FAE /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		252B42032189DA4200238FAE /* FavoritesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableView.swift; sourceTree = "<group>"; };
+		252B42052189DC6800238FAE /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		252B42092189DCA600238FAE /* FavoritesUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUnitView.swift; sourceTree = "<group>"; };
+		252B420C2189E57F00238FAE /* FavoritesBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesBuilder.swift; sourceTree = "<group>"; };
+		252B420F2189E8EF00238FAE /* MainTabBarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarBuilder.swift; sourceTree = "<group>"; };
 		255937152188EEFC00D2EA69 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		2559371721892CC100D2EA69 /* MovieSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchBarDelegate.swift; sourceTree = "<group>"; };
 		2559371921892FBC00D2EA69 /* DefaultNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationController.swift; sourceTree = "<group>"; };
@@ -167,6 +181,7 @@
 		2516EDF021893F3E007AB6A1 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				252B420B2189E57100238FAE /* Builder */,
 				2516EDF421893F61007AB6A1 /* Interactor */,
 				2516EDF321893F54007AB6A1 /* Presenter */,
 				2516EDF221893F4F007AB6A1 /* ViewController */,
@@ -178,6 +193,9 @@
 		2516EDF121893F4A007AB6A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				252B42072189DC6F00238FAE /* TableView */,
+				252B42012189D9F500238FAE /* FavoritesView.swift */,
+				252B42092189DCA600238FAE /* FavoritesUnitView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +203,7 @@
 		2516EDF221893F4F007AB6A1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				252B41FF2189D8BB00238FAE /* FavoritesViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -262,7 +281,6 @@
 				25B2B7EF2184E450005C96E1 /* Delegates */,
 				2525BAE621824AA7007EF9D0 /* MovieGridViewOutput.swift */,
 				2525BAE721824AA7007EF9D0 /* MovieGridViewController.swift */,
-				25B2B80E218665E2005C96E1 /* ViewStateMachine.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -350,13 +368,49 @@
 			children = (
 				2525BB0D21825629007EF9D0 /* Assets.swift */,
 				25B2B805218659C0005C96E1 /* ViewState.swift */,
+				25B2B80E218665E2005C96E1 /* ViewStateMachine.swift */,
 			);
 			path = Commons;
+			sourceTree = "<group>";
+		};
+		252B42072189DC6F00238FAE /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				252B42032189DA4200238FAE /* FavoritesTableView.swift */,
+				252B42052189DC6800238FAE /* FavoritesTableViewCell.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		252B42082189DC8100238FAE /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				25FEBC632184C24F002184D6 /* MovieGridCollectionView.swift */,
+				25FEBC5F2184A3B1002184D6 /* MovieGridCollectionViewCell.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		252B420B2189E57100238FAE /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				252B420C2189E57F00238FAE /* FavoritesBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		252B420E2189E8DE00238FAE /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				252B420F2189E8EF00238FAE /* MainTabBarBuilder.swift */,
+			);
+			path = Builder;
 			sourceTree = "<group>";
 		};
 		255937132188EEB400D2EA69 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				252B420E2189E8DE00238FAE /* Builder */,
 				25A7920021894D5500B052B4 /* Views */,
 				2516EDF52189435E007AB6A1 /* Common */,
 				255937142188EEBD00D2EA69 /* ViewController */,
@@ -393,9 +447,8 @@
 		2578BAD1218495F3001107B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				25FEBC632184C24F002184D6 /* MovieGridCollectionView.swift */,
+				252B42082189DC8100238FAE /* CollectionView */,
 				25FEBC612184A5E1002184D6 /* MovieGridView.swift */,
-				25FEBC5F2184A3B1002184D6 /* MovieGridCollectionViewCell.swift */,
 				2578BAD5218498D7001107B6 /* MovieGridUnitView.swift */,
 			);
 			path = Views;
@@ -790,6 +843,8 @@
 				2525BB09218252AD007EF9D0 /* MovieGridUnit.swift in Sources */,
 				25FEBC602184A3B1002184D6 /* MovieGridCollectionViewCell.swift in Sources */,
 				25B2B804218646FB005C96E1 /* ErrorView.swift in Sources */,
+				252B42102189E8EF00238FAE /* MainTabBarBuilder.swift in Sources */,
+				252B420D2189E57F00238FAE /* FavoritesBuilder.swift in Sources */,
 				25B2B80921865F6A005C96E1 /* MovieGridBaseState.swift in Sources */,
 				2525BB0B21825479007EF9D0 /* MovieGridViewModel.swift in Sources */,
 				25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */,
@@ -797,6 +852,7 @@
 				25B2B7FB21853667005C96E1 /* ImageFetcher.swift in Sources */,
 				25B2B80D21866564005C96E1 /* MovieGridErrorState.swift in Sources */,
 				2578BAD421849847001107B6 /* ViewCode.swift in Sources */,
+				252B42062189DC6800238FAE /* FavoritesTableViewCell.swift in Sources */,
 				2525BAEF21824AA7007EF9D0 /* MovieGridViewController+UICollectionViewDataSource.swift in Sources */,
 				25B2B80B21866247005C96E1 /* MovieGridCollectionState.swift in Sources */,
 				25D252AE2187FB450067795A /* FavoritesPersistence.swift in Sources */,
@@ -807,8 +863,10 @@
 				2525BAF321824AA7007EF9D0 /* DefaultMovieGridInteractor.swift in Sources */,
 				2525BAF921824AF2007EF9D0 /* MovieGenre.swift in Sources */,
 				25B2B80F218665E2005C96E1 /* ViewStateMachine.swift in Sources */,
+				252B420A2189DCA600238FAE /* FavoritesUnitView.swift in Sources */,
 				25D252B02187FB640067795A /* FavoritesUserDefaultsPersistence.swift in Sources */,
 				25B2B81121866ED1005C96E1 /* BlankView.swift in Sources */,
+				252B42042189DA4200238FAE /* FavoritesTableView.swift in Sources */,
 				2525BAED21824AA7007EF9D0 /* DefaultMovieGridPresenter.swift in Sources */,
 				2525BAEE21824AA7007EF9D0 /* MovieGridPresenter.swift in Sources */,
 				25E546532182B6680043514B /* APIConstants.swift in Sources */,
@@ -817,9 +875,11 @@
 				25B2B7EC2184DF78005C96E1 /* MovieGridBuilder.swift in Sources */,
 				2525BAF021824AA7007EF9D0 /* MovieGridViewOutput.swift in Sources */,
 				25D252B2218883440067795A /* MovieGridViewController+UICollectionViewDelegate.swift in Sources */,
+				252B42022189D9F500238FAE /* FavoritesView.swift in Sources */,
 				25D252B421889C130067795A /* Collection+safeSubscript.swift in Sources */,
 				2525BB0E21825629007EF9D0 /* Assets.swift in Sources */,
 				25FEBC642184C24F002184D6 /* MovieGridCollectionView.swift in Sources */,
+				252B42002189D8BB00238FAE /* FavoritesViewController.swift in Sources */,
 				2559371821892CC100D2EA69 /* MovieSearchBarDelegate.swift in Sources */,
 				25E5465D218365FA0043514B /* MoyaProvider+requestDecodable.swift in Sources */,
 				2525BAF821824AF2007EF9D0 /* Movie.swift in Sources */,
