@@ -10,6 +10,19 @@
 
 Basta baixar o repositório e abrir o arquivo PhilmaXXX.xcworkspace, todos os pods utilizados no projeto foram mantidos.
 
+## Atualizações
+
+---
+
+**Aviso:** Caso não consiga inicializar o projeto após atualizar, deve ser deletado e reinstalado o app uma vez que o Realm esteja desatualizado.
+
+* Build 19 - Modificado content compression em DetailViewController
+* Build 18 - Modo alternativo adicionado para decodar Date em Movie
+* hotfix 30. Oct - Problemas do coder com Data, adicionado opção de Data Inválida
+* Build 17 - Ordenado Anos de Lançamento de forma decrescente no Filter.
+
+Basta baixar o repositório e abrir o arquivo PhilmaXXX.xcworkspace, todos os pods utilizados no projeto foram mantidos.
+
 ## Fastlane
 
 ---
