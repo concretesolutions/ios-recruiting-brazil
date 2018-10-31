@@ -17,9 +17,10 @@ final class DetailMovieVC: UIViewController {
 	lazy var backgroundImage: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
 		imageView.translatesAutoresizingMaskIntoConstraints = false
-		imageView.contentMode = .scaleToFill
+		imageView.contentMode = .scaleAspectFill
 		imageView.alpha = 0.3
 		imageView.backgroundColor = .black
+		imageView.clipsToBounds = true
 		return imageView
 	}()
 	

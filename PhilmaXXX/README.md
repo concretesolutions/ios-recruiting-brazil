@@ -16,6 +16,7 @@ Basta baixar o repositório e abrir o arquivo PhilmaXXX.xcworkspace, todos os po
 
 **Aviso:** Caso não consiga inicializar o projeto após atualizar, deve ser deletado e reinstalado o app uma vez que o Realm esteja desatualizado.
 
+* hotfix 31. Oct - Fixado modo de exibição das imagens
 * Build 20 - Implementado Result, tratando dados genéricos, erros de domínio (extendidos à plataforma Network)
 * Build 19 - Modificado content compression em DetailViewController
 * Build 18 - Modo alternativo adicionado para decodar Date em Movie
