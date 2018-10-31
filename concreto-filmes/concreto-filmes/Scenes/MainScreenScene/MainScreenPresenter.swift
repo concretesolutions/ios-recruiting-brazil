@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol MainScreenPresentationLogic {
     func present(movies: [Movie]?)
@@ -19,16 +20,24 @@ protocol MainScreenPresentationLogic {
 
 class MainScreenPresenter: MainScreenPresentationLogic {
     weak var viewController: MainScreenDisplayLogic?
+    var realm = RealmService.shared.realm
 
     func present(movies: [Movie]?) {
-        var viewModelItems: [MainScreen.ViewModel.MovieViewModel] = []
-        if let movies = movies {
-            for movie in movies {
-                viewModelItems.append(MainScreen.ViewModel.MovieViewModel(posterUrl: movie.posterPath ?? "", title: movie.title))
+        DispatchQueue.main.async {
+            var viewModelItems: [MainScreen.ViewModel.MovieViewModel] = []
+            if let movies = movies {
+                for movie in movies {
+                    let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
+                    viewModelItems.append(MainScreen.ViewModel.MovieViewModel(posterUrl: movie.posterPath ?? "", title: movie.title, isFavorite: isFavorite))
+                }
+                self.viewController?.display(movies: viewModelItems)
             }
-            viewController?.display(movies: viewModelItems)
         }
     }
+    
+//    private func checkFavoriteMovie(movie: Movie) -> Bool{
+//        return realm?.objects(FavoriteMovie.self).
+//    }
 
     func present(error: String?) {
         if let error = error {

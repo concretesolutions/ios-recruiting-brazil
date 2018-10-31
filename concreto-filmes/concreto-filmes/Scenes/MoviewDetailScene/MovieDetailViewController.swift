@@ -154,6 +154,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         self.titleLabel.text = viewModel.title
         self.genresLabel.text = viewModel.genres
         self.releaseDateView.text = viewModel.releaseDate
+        self.viewState = viewModel.isFavorite ? .favourited : .notFavourited
     }
 }
 
@@ -193,10 +194,15 @@ extension MovieDetailViewController: CodeView {
         self.overviewView.snp.makeConstraints { (maker) in
             maker.width.equalTo(verticalStack)
         }
+        self.favoriteButton.snp.makeConstraints { (maker) in
+            maker.height.equalTo(50)
+            maker.width.equalTo(50)
+        }
     }
 
     func setupAdditionalConfiguration() {
         view.backgroundColor = .black
+        self.navigationController?.navigationBar.tintColor = .black
     }
 
 }
@@ -204,11 +210,10 @@ extension MovieDetailViewController: CodeView {
 extension MovieDetailViewController {
     @objc fileprivate func touchUpInsideButton() {
         if viewState == .favourited {
-            didUnfavorite?()
             viewState = .notFavourited
         } else {
             viewState = .favourited
-            didFavorite?()
         }
+        interactor?.toggleFavoriteMovie()
     }
 }

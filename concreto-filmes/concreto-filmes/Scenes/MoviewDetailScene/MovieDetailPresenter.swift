@@ -18,19 +18,23 @@ protocol MovieDetailPresentationLogic {
 
 class MovieDetailPresenter: MovieDetailPresentationLogic {
     weak var viewController: MovieDetailDisplayLogic?
+    var realm = RealmService.shared.realm
 
     func presentMovie(movie: Movie) {
-        let genres = movie.genreIDS.map { (id) -> String in
-            return Genre.fetchedGenres[id] ?? "Uknown"
+        DispatchQueue.main.async {
+            let genres = movie.genreIDS.map { (id) -> String in
+                return Genre.fetchedGenres[id] ?? "Uknown"
+            }
+            let genresString = genres.joined(separator: ", ")
+            let calendar = Calendar.current
+            var year: String = ""
+            if let date = movie.releaseDate {
+                year = "\(calendar.component(.year, from: date))"
+            }
+            let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
+            let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genresString, overview: movie.overview, releaseDate: year, isFavorite: isFavorite)
+            self.viewController?.displayMovie(viewModel: viewModel)
         }
-        let genresString = genres.joined(separator: ", ")
-        let calendar = Calendar.current
-        var year: String = ""
-        if let date = movie.releaseDate {
-            year = "\(calendar.component(.year, from: date))"
-        }
-        let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genresString, overview: movie.overview, releaseDate: year, isFavorite: false)
-        viewController?.displayMovie(viewModel: viewModel)
     }
 
 }

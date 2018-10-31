@@ -33,4 +33,8 @@ import RealmSwift
         let genresString = genres.joined(separator: ", ")
         self.genres = genresString
     }
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

@@ -13,6 +13,7 @@
 import UIKit
 import Keys
 import SnapKit
+import RealmSwift
 
 enum AppStatus {
     case resetFetch
@@ -97,6 +98,11 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         setupView()
         interactor?.fetchPopularMovies(shouldResetMovies: true)
         interactor?.initialFetch()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.interactor?.presentCurrentMovies(isFiltering: self.isFiltering)
     }
 
     // MARK: Object lifecycle
@@ -196,5 +202,6 @@ extension MainScreenViewController: CodeView {
         self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color
         collectionView.register(MainScreenMovieCell.self, forCellWithReuseIdentifier: self.movieCellID)
         self.activityIndicator.startAnimating()
+        self.navigationController?.navigationBar.isTranslucent = false
     }
 }

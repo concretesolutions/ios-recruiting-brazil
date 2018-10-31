@@ -20,6 +20,7 @@ enum MainScreen {
         struct MovieViewModel: Hashable {
             var posterUrl: String
             var title: String
+            var isFavorite: Bool
         }
     }
 

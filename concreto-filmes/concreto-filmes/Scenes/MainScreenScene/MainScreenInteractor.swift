@@ -17,6 +17,7 @@ protocol MainScreenBusinessLogic {
     func filterMoviesLocally(text: String)
     func fetchQueriedMovies(text: String, shouldResetMovies: Bool)
     func initialFetch()
+    func presentCurrentMovies(isFiltering: Bool)
 }
 
 protocol MainScreenDataStore {
@@ -33,6 +34,14 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore {
     var filteredMovies: [Movie] = []
     var currentPageForAPIPopular = 1
     var currentPageForAPIFiltering = 1
+    
+    func presentCurrentMovies(isFiltering: Bool) {
+        if isFiltering {
+            presenter?.present(movies: self.filteredMovies)
+        } else {
+            presenter?.present(movies: self.movies)
+        }
+    }
 
     func fetchPopularMovies(shouldResetMovies: Bool) {
         if shouldResetMovies {self.currentPageForAPIPopular = 1}

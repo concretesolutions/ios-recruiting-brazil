@@ -22,8 +22,7 @@ extension MainScreenViewController {
             return UICollectionViewCell()
         }
         let item = displayedMovies[indexPath.item]
-        let data = MainScreen.ViewModel.MovieViewModel(posterUrl: item.posterUrl, title: item.title)
-        cell.setData(data: data)
+        cell.setData(data: item)
         return cell
     }
 }
