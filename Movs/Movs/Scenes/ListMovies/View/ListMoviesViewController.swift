@@ -65,7 +65,7 @@ class ListMoviesViewController: UIViewController {
         navigationItem.title = "Mais populares"
         setSearchButton()
     }
-    
+    // Add a Search button and icon into the navigation bar
     private func setSearchButton() {
         let searchButton = UIButton(type: .custom)
         searchButton.setImage(UIImage(named: "search_icon"), for: .normal)
@@ -76,6 +76,10 @@ class ListMoviesViewController: UIViewController {
     }
 
     // MARK: - Routing
+    /**
+     Going to DetailMovies.
+     The screen should know what is the id of the movie to do it's own request on server
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == detailMovieSegue) {
             let viewController = segue.destination as! DetailMoviesViewController
@@ -92,9 +96,9 @@ class ListMoviesViewController: UIViewController {
     
     func updateSearchBar() {
         if isSearchBarActive {
-           hideSearchBar()
+            hideSearchBar()
         } else {
-           showSearchBar()
+            showSearchBar()
         }
     }
     
@@ -117,6 +121,7 @@ extension ListMoviesViewController: ListMoviesDisplayLogic {
     func displayMovies(viewModel: ListMovies.ViewModel.Success) {
         movies.append(contentsOf: viewModel.movies)
         fetchingMovies = false
+        // This is done to have a set of data to manipulate while presenting only the filtered data
         moviesFiltered = movies
         tableView.reloadData()
     }
@@ -124,7 +129,7 @@ extension ListMoviesViewController: ListMoviesDisplayLogic {
     func displayError(viewModel: ListMovies.ViewModel.Error) {
         // This variable is used due to the behavior of the Cancel button in the search bar.
         // If the view is full screen, the ViewError is the first responder and the button cannot be clicked
-        let yDistance = searchBar.frame.height * 2
+        let yDistance = tableViewTopConstraint.constant + searchBar.layer.frame.height
         let frame = CGRect(x: 0, y: yDistance, width: view.frame.width, height: view.frame.height)
         viewError = MovieListErrorView(frame: frame, image: viewModel.image!, message: viewModel.message)
         if viewModel.errorType == FetchError.networkFailToConnect {

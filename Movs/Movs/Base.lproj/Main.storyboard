@@ -53,7 +53,10 @@
         <scene sceneID="WNG-iW-hJK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="69M-Il-jhr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Filmes" image="list_icon" selectedImage="list_icon" id="AR6-dw-Ban" userLabel="ListMovies"/>
+                    <tabBarItem key="tabBarItem" title="Filmes" image="list_icon" selectedImage="list_icon" id="AR6-dw-Ban" userLabel="ListMovies">
+                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F3e-6c-44x">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -73,7 +76,9 @@
         <scene sceneID="XVL-nf-9NT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gMc-og-Sza" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favoritos" image="favorite_empty_icon" id="iRe-1D-Tih"/>
+                    <tabBarItem key="tabBarItem" title="Favoritos" image="favorite_empty_icon" id="iRe-1D-Tih">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HeM-mQ-D91">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
