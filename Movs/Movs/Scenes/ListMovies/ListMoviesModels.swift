@@ -22,6 +22,7 @@ enum ListMovies{
         struct Error {
             var image: UIImage?
             let description: String
+            var errorType: FetchError
         }
     }
     
@@ -33,6 +34,7 @@ enum ListMovies{
         struct Error {
             var image: UIImage?
             var message: String
+            var errorType: FetchError
         }
         
         struct PopularMoviesFormatted {
@@ -43,11 +45,6 @@ enum ListMovies{
             var favoriteIcon: UIImage
             var isFavorite: Bool
         }
-    }
-
-
-    enum ErrorType {
-        case connectionError
     }
     
 }

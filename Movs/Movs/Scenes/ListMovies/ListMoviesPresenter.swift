@@ -26,7 +26,7 @@ class ListMoviesPresenter: ListMoviesPresentationLogic {
     }
     
     func presentError(error: ListMovies.Response.Error) {
-        let viewModel = ListMovies.ViewModel.Error(image: error.image, message: error.description)
+        let viewModel = ListMovies.ViewModel.Error(image: error.image, message: error.description, errorType: error.errorType)
         viewController?.displayError(viewModel: viewModel)
     }
     

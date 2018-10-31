@@ -22,19 +22,23 @@ class ListMoviesInteractor: ListMoviesBusinessLogic {
     
     // MARK: Do request
     func fetchPopularMovies(request: ListMovies.Request) {
-//        var movies = [Movie]()
-        
-       worker.fetchPopularMovies(request: request,
-                                 success: { (movieList) in
-                                    let moviesFormatted = self.formatMoviesData(movieList.movies)
-                                    let response = ListMovies.Response.Success(movies: moviesFormatted)
-                                    self.presenter.presentMovies(response: response)
-       }, error: { (error) in
-            let responseError = ListMovies.Response.Error(image: UIImage(named: "alert_search"), description: self.formatListError(error: error))
+        // Default request, no data to be presented
+        if request.page == 0 {
+            let responseError = ListMovies.Response.Error(image: UIImage(named: "alert_search"), description: self.formatListError(error: .noFilteredResults), errorType: .noFilteredResults)
             self.presenter.presentError(error: responseError)
-       }) { (errorNetwork) in
-            let responseError = ListMovies.Response.Error(image: UIImage(named: "alert_error"), description: self.formatListError(error: errorNetwork))
-            self.presenter.presentError(error: responseError)
+        } else {
+            worker.fetchPopularMovies(request: request,
+                                      success: { (movieList) in
+                                        let moviesFormatted = self.formatMoviesData(movieList.movies)
+                                        let response = ListMovies.Response.Success(movies: moviesFormatted)
+                                        self.presenter.presentMovies(response: response)
+            }, error: { (error) in
+                let responseError = ListMovies.Response.Error(image: UIImage(named: "alert_search"), description: self.formatListError(error: error), errorType: .serverError)
+                self.presenter.presentError(error: responseError)
+            }) { (errorNetwork) in
+                let responseError = ListMovies.Response.Error(image: UIImage(named: "alert_error"), description: self.formatListError(error: errorNetwork), errorType: .networkFailToConnect)
+                self.presenter.presentError(error: responseError)
+            }
         }
     }
     

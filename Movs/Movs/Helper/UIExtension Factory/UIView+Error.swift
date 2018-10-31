@@ -38,6 +38,7 @@ final class MovieListErrorView: UIView {
         super.init(frame: frame)
         setup(image: image, message: message)
         setupConstraints()
+        self.backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,7 +58,7 @@ final class MovieListErrorView: UIView {
             .widthAnchor(equalTo: widthAnchor, multiplier: imageRatio)
             .heightAnchor(equalTo: widthAnchor, multiplier: imageRatio)
             .centerXAnchor(equalTo: centerXAnchor)
-            .topAnchor(equalTo: topAnchor, constant: (self.frame.height/2) - 60)
+            .topAnchor(equalTo: topAnchor, constant: 40)
         
         message
             .topAnchor(equalTo: imageError.bottomAnchor, constant: 15)

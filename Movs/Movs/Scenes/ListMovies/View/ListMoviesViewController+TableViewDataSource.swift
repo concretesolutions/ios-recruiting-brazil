@@ -12,36 +12,24 @@ import UIKit
 extension ListMoviesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        if isSearchBarActive {
+            return moviesFiltered.count
+        } else {
+            return movies.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseIdentifier) as! PopularMovieTableViewCell
-        if !movies.isEmpty {
-            cell.configureCellWith(data: movies[indexPath.row], position: indexPath.row + 1)
+       
+        if isSearchBarActive {
+            cell.configureCellWith(data: moviesFiltered[indexPath.row], position: indexPath.row + 1)
         } else {
-            cell.loadingCell()
+            if !movies.isEmpty {
+                cell.configureCellWith(data: movies[indexPath.row], position: indexPath.row + 1)
+            } else { cell.loadingCell() }
         }
         return cell
-    }
-    
-}
-// MARK: - Infinite scroll
-extension ListMoviesViewController: UITableViewDataSourcePrefetching {
-    
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
-    }
-  
-}
-
-private extension ListMoviesViewController {
-    
-    
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
     }
     
 }

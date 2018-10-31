@@ -9,7 +9,7 @@
 import Foundation
 
 enum FetchError: Error {
-    case serverError, networkFailToConnect
+    case serverError, networkFailToConnect, noFilteredResults
     
     func getTitle() -> String {
         switch self {
@@ -17,6 +17,8 @@ enum FetchError: Error {
             return "Erro"
         case .networkFailToConnect:
             return "Sem conexão com a internet"
+        case .noFilteredResults:
+            return "Falha de busca"
         }
     }
     
@@ -26,6 +28,10 @@ enum FetchError: Error {
             return "Não há dados para serem apresentados"
         case .networkFailToConnect:
             return "Falha ao carregar a página"
+        case .noFilteredResults:
+            return "Não foi possível encontrar filmes para a sua busca"
         }
     }
+    
+    
 }
