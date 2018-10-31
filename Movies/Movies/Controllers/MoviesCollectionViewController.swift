@@ -92,8 +92,7 @@ class MoviesCollectionViewController: UICollectionViewController {
     moviesDataSource = MoviesDataSource(posterHeight: moviesDelegate.newPosterHeight)
     self.collectionView.delegate = moviesDelegate
     self.collectionView.dataSource = moviesDataSource
-    let movieCellNib = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
-    collectionView.register(movieCellNib, forCellWithReuseIdentifier: "movieCell")
+    collectionView.register(cellType: MovieCollectionViewCell.self)
   }
   
   fileprivate func setupSubviews() {

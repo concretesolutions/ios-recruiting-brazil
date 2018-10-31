@@ -7,8 +7,9 @@
 
 import UIKit
 import SDWebImage
+import Reusable
 
-class MovieCollectionViewCell: UICollectionViewCell {
+final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
   
   @IBOutlet weak var posterHeightLayoutConstraint: NSLayoutConstraint!
   @IBOutlet weak var titleLabel: UILabel!

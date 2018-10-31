@@ -19,14 +19,11 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as? MovieCollectionViewCell {
-      cell.configure(withMovie: movies[indexPath.row])
-      cell.posterHeightLayoutConstraint.constant = posterHeight
-      collectionView.layoutIfNeeded()
-      return cell
-    }
-    
-    return UICollectionViewCell()
+    let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+    cell.configure(withMovie: movies[indexPath.row])
+    cell.posterHeightLayoutConstraint.constant = posterHeight
+    collectionView.layoutIfNeeded()
+    return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -34,7 +31,7 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    let cell =  collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footerCell", for: indexPath)
+    let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footerCell", for: indexPath)
     cell.isHidden = true
     return cell
   }
