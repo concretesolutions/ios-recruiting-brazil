@@ -22,7 +22,8 @@ class MainTabBarController: UITabBarController {
     
     func addViewControllers() {
         let movieGridVC = MovieGridBuilder.build()
-        let movieGridNavigationController = UINavigationController(rootViewController: movieGridVC)
+        let movieGridNavigationController = DefaultNavigationController(rootViewController: movieGridVC)
+    
         
         self.viewControllers = [movieGridNavigationController]
     }

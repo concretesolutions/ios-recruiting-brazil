@@ -64,6 +64,7 @@ final class MovieGridViewController: UIViewController {
     
     override func viewDidLoad() {
         self.setTabBarOptions()
+        self.title = MovieGridViewController.title
     }
 }
 
@@ -92,6 +93,10 @@ extension MovieGridViewController: ViewCode {
         self.movieGridView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    func additionalSetup() {
+        self.movieGridView.searchBar.delegate = self
     }
 }
 

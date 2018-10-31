@@ -23,6 +23,19 @@ public class MovieGridView: UIView {
         return MovieGridErrorView()
     }()
     
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.barTintColor = Colors.lightYellow
+        searchBar.layer.borderColor = Colors.lightYellow.cgColor
+        searchBar.placeholder = "search movies..."
+        
+        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+            textField.backgroundColor = Colors.darkYellow
+        } else {/*do nothing*/}
+        
+        return searchBar
+    }()
+    
     
     // Initialization
     init(dataSource: UICollectionViewDataSource) {
@@ -42,15 +55,26 @@ extension MovieGridView: ViewCode {
     public func addView() {
         self.addSubview(self.collection)
         self.addSubview(self.errorView)
+        self.addSubview(searchBar)
     }
     
     public func addConstraints() {
         self.collection.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(self.searchBar.snp_bottomMargin)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
         self.errorView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(self.collection)
+        }
+        
+        self.searchBar.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide)
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.1)
+            make.centerX.equalToSuperview()
         }
     }
 }

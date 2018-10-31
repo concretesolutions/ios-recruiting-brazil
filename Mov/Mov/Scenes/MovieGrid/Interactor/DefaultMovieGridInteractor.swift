@@ -37,16 +37,7 @@ final class DefaultMovieGridInteractor {
 
 extension DefaultMovieGridInteractor: MovieGridInteractor {
     
-    func toggleFavoriteMovie(at index: Int) {
-        print(index)
-        if let movie = self.fetchedMovies[safe: index] {
-            self.persistence.toggleFavorite(movie: movie)
-            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
-        } else {/*do nothing*/}
-    }
-    
     func fetchMovieList(page: Int) {
-        
         // no need to fetch again if requested page was already fetched
         guard page > fetchedPages else {
             self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
@@ -65,5 +56,23 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
                 self.presenter.presentNetworkError()
             }
         }
+    }
+    
+    func toggleFavoriteMovie(at index: Int) {
+        print(index)
+        if let movie = self.fetchedMovies[safe: index] {
+            self.persistence.toggleFavorite(movie: movie)
+            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
+        } else {/*do nothing*/}
+    }
+    
+    func filterMoviesBy(string: String) {
+        guard !string.isEmpty else {
+            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
+            return
+        }
+        let candidates = self.fetchedMovies.filter { movie in
+            movie.title.lowercased().range(of: string.lowercased()) != nil }
+        self.presenter.present(movies: buildMovieGridUnits(from: candidates))
     }
 }
