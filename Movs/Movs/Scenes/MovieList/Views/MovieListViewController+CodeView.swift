@@ -28,7 +28,8 @@ extension MovieListViewController: CodeView {
         }
         
         errorView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(searchBar.snp.bottom)
         }
     }
     

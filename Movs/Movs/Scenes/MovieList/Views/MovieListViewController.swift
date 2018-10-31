@@ -119,8 +119,8 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     }
     
     func filterMovies(named: String) {
-        let request = MovieListModel.Request.Movie(title: named)
         _ = stateMachine.enter(MovieListLoadingState.self)
+        let request = MovieListModel.Request.Movie(title: named)
         interactor.filterMovies(request: request)
     }
     
@@ -131,5 +131,6 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
             interactor.favoriteMovie(at: indexPath.row)
         }
     }
+    
 }
 

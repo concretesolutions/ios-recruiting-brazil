@@ -24,16 +24,7 @@ class MovieListDisplayState: State {
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        switch stateClass {
-        case is MovieListDisplayState.Type:
-            fallthrough
-        case is MovieListLoadingState.Type:
-            fallthrough
-        case is MovieListErrorState.Type:
-            return true
-        default:
-            return false
-        }
+        return true
     }
     
 }

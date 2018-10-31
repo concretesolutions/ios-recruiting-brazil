@@ -29,4 +29,5 @@ extension MovieListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterMovies(named: searchText)
     }
+    
 }

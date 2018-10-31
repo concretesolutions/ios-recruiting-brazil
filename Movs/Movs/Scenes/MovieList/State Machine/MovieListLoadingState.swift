@@ -17,19 +17,8 @@ class MovieListLoadingState: State {
         super.init()
     }
     
-    override func didEnter(from previousState: State?) {
-        if !(previousState is MovieListDisplayState) {
-            return
-        }
-    }
-    
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        switch stateClass {
-        case is MovieListDisplayState.Type:
-            return true
-        default:
-            return false
-        }
+        return true
     }
     
 }

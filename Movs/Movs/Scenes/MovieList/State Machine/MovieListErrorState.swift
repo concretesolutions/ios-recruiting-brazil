@@ -18,9 +18,6 @@ class MovieListErrorState: State {
     }
     
     override func didEnter(from previousState: State?) {
-        if !(previousState is MovieListDisplayState) {
-            return
-        }
         if let error = viewController.viewError {
             viewController.errorView.error(viewError: error)
             viewController.collectionView.isHidden = true
@@ -29,12 +26,7 @@ class MovieListErrorState: State {
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        switch stateClass {
-        case is MovieListDisplayState.Type:
-            return true
-        default:
-            return false
-        }
+        return true
     }
     
 }

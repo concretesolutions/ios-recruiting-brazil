@@ -55,6 +55,7 @@ class MovieListErrorView: UIView {
             errorLabel.text = "Sua busca por \"\(viewError.movieTitle!)\" não resultou em nenhum resultado."
         }
     }
+    
 }
 
 extension MovieListErrorView: CodeView {
@@ -65,8 +66,9 @@ extension MovieListErrorView: CodeView {
     
     func setupConstraints() {
         errorImage.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview().inset(80)
-            make.top.equalToSuperview().inset(200)
+            make.left.right.equalToSuperview().inset(110)
+            make.top.equalToSuperview().inset(150)
+            make.height.equalTo(130)
         }
         
         errorLabel.snp.makeConstraints { (make) in
