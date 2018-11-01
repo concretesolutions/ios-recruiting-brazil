@@ -8,17 +8,6 @@
 
 import Foundation
 
-protocol MovieListBussinessLogic {
-    func fetchMovies(request: MovieListModel.Request.Page)
-    func filterMovies(request: MovieListModel.Request.Movie)
-    func favoriteMovie(at index: Int)
-    func storeMovie(at index: Int)
-}
-
-protocol MovieListDataStore {
-    var movie: Movie? { get set }
-}
-
 class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
     var presenter: MovieListPresentationLogic!
     var movieListWorker: MovieListWorkingLogic!
@@ -34,7 +23,7 @@ class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
         movies = []
     }
     
-    func fetchMovies(request: MovieListModel.Request.Page) {
+    func fetchMovies(request: MovieList.Request.Page) {
         movieListWorker.fetch(page: request.page) { (movieList, status, error) in
             switch status {
             case .success:
@@ -42,14 +31,14 @@ class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
                 self.presentMovies(movies: self.movies)
                 
             case .error:
-                let response = MovieListModel.Response(movies: [], error: error?.localizedDescription)
+                let response = MovieList.Response(movies: [], error: error?.localizedDescription)
                 self.presenter.presentError(response: response)
             }
             
         }
     }
     
-    func filterMovies(request: MovieListModel.Request.Movie) {
+    func filterMovies(request: MovieList.Request.Movie) {
         if request.title == "" {
             presentMovies(movies: movies)
             return
@@ -60,7 +49,7 @@ class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
         }
         
         if result.isEmpty {
-            let response = MovieListModel.Response(movies: [], error: request.title)
+            let response = MovieList.Response(movies: [], error: request.title)
             presenter.presentNotFind(response: response)
         } else {
             presentMovies(movies: result)
@@ -68,11 +57,11 @@ class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
     }
     
     func presentMovies(movies: [Movie]) {
-        let moviesToBePresented = movies.map({ (movie) -> MovieListModel.Response.FetchResponse in
+        let moviesToBePresented = movies.map({ (movie) -> MovieList.Response.FetchResponse in
             let isFavorite = coreDataWorker.isFavorite(movie: movie)
-            return MovieListModel.Response.FetchResponse(title: movie.title, posterURL: MovieService.baseImageURL + movie.posterPath, isFavorite: isFavorite)
+            return MovieList.Response.FetchResponse(title: movie.title, posterURL: MovieService.baseImageURL + movie.posterPath, isFavorite: isFavorite)
         })
-        let response = MovieListModel.Response(movies: moviesToBePresented, error: nil)
+        let response = MovieList.Response(movies: moviesToBePresented, error: nil)
         self.presenter.presentMovies(response: response)
     }
     

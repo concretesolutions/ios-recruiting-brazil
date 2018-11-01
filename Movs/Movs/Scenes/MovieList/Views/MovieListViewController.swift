@@ -9,19 +9,13 @@
 import UIKit
 import GameplayKit
 
-protocol MovieListDisplayLogic: class {
-    func displayMovies(viewModel: MovieListModel.ViewModel.Success)
-    func displayError(viewModel: MovieListModel.ViewModel.Error)
-    func displayNotFind(viewModel: MovieListModel.ViewModel.Error)
-}
-
 class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     var interactor: MovieListBussinessLogic!
     var router: MovieListRoutingLogic!
     
     var page = 1
-    var data: MovieListModel.ViewModel.Success = MovieListModel.ViewModel.Success(movies: [])
+    var data: MovieList.ViewModel.Success = MovieList.ViewModel.Success(movies: [])
     var viewError: MovieListErrorView.ViewError?
     var stateMachine: StateMachine!
     
@@ -94,7 +88,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     private func fetchMovies() {
         _ = stateMachine.enter(MovieListLoadingState.self)
-        interactor.fetchMovies(request: MovieListModel.Request.Page(page: page))
+        interactor.fetchMovies(request: MovieList.Request.Page(page: page))
     }
     
     func fetchMoreMovies() {
@@ -102,17 +96,17 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         fetchMovies()
     }
     
-    func displayMovies(viewModel: MovieListModel.ViewModel.Success) {
+    func displayMovies(viewModel: MovieList.ViewModel.Success) {
         data = viewModel
         _ = stateMachine.enter(MovieListDisplayState.self)
     }
     
-    func displayError(viewModel: MovieListModel.ViewModel.Error) {
+    func displayError(viewModel: MovieList.ViewModel.Error) {
         viewError = MovieListErrorView.ViewError(movieTitle: nil, errorType: .error)
         _ = stateMachine.enter(MovieListErrorState.self)
     }
     
-    func displayNotFind(viewModel: MovieListModel.ViewModel.Error) {
+    func displayNotFind(viewModel: MovieList.ViewModel.Error) {
         viewError = MovieListErrorView.ViewError(movieTitle: nil, errorType: .notFind)
         viewError?.movieTitle = viewModel.error
         _ = stateMachine.enter(MovieListErrorState.self)
@@ -120,7 +114,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     
     func filterMovies(named: String) {
         _ = stateMachine.enter(MovieListLoadingState.self)
-        let request = MovieListModel.Request.Movie(title: named)
+        let request = MovieList.Request.Movie(title: named)
         interactor.filterMovies(request: request)
     }
     

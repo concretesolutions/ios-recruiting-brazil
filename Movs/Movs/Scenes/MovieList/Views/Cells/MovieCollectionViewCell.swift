@@ -45,7 +45,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
-    func set(movie: MovieListModel.ViewModel.Movie) {
+    func set(movie: MovieList.ViewModel.Movie) {
         let posterUrl = URL(string: movie.posterURL)
         guard let url = posterUrl else { return }
         title.text = movie.title

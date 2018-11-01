@@ -1,5 +1,5 @@
 //
-//  MovieList.swift
+//  MoviesList.swift
 //  Movs
 //
 //  Created by Ricardo Rachaus on 26/10/18.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct MovieList: Decodable {
+struct MoviesList: Decodable {
     var results: [Movie]
 }

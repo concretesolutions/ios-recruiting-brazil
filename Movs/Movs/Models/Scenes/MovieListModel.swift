@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum MovieListModel {
+enum MovieList {
     enum Request {
         struct Page {
             var page: Int

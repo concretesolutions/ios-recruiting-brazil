@@ -8,14 +8,6 @@
 
 import Foundation
 
-protocol MovieListRoutingLogic {
-    func showMovieDetail()
-}
-
-protocol MovieListDataPassing {
-    var dataStore: MovieListDataStore? { get }
-}
-
 class MovieListRouter: MovieListRoutingLogic, MovieListDataPassing {
     weak var viewController: MovieListViewController!
     var dataStore: MovieListDataStore?
