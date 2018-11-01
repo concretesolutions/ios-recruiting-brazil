@@ -33,13 +33,35 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
          interactor.getMovies()
     }
     
-    func setup() {
+    // MARK: = Setup
+    private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        configureNavigationController()
+    }
+    
+    private func configureNavigationController() {
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = .darkGray
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Favoritos"
-        navigationItem.backBarButtonItem?.title = ""
+        setFilterButton()
     }
+    
+    // Add a Filter button and icon into the navigation bar
+    private func setFilterButton() {
+        let filterFavorite = UIButton(type: .custom)
+        filterFavorite.setImage(UIImage(named: "filter_icon"), for: .normal)
+        filterFavorite.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
+        filterFavorite.addTarget(self, action: #selector(self.filterMovies), for: .touchUpInside)
+        let filterFavoritesButton = UIBarButtonItem(customView: filterFavorite)
+        navigationItem.setRightBarButton(filterFavoritesButton, animated: true)
+    }
+    
+    @objc func filterMovies() {
+        self.performSegue(withIdentifier: "filterMovies", sender: nil)
+    }
+    
     
 }
 

@@ -9,7 +9,7 @@
 import Quick
 import Nimble
 
-@testable import Mov
+@testable import Movs
 
 class ListMoviesViewControllerSpec: QuickSpec {
     
