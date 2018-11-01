@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8iW-Y4-Tna">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8iW-Y4-Tna">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fW7-2j-Pu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952.73437499999989" y="14.84375"/>
+            <point key="canvasLocation" x="229" y="29"/>
         </scene>
         <!--Movies Check-->
         <scene sceneID="pA9-PV-XQd">
@@ -197,12 +197,21 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies Check" largeTitleDisplayMode="always" id="VyV-gm-c5O"/>
                     <connections>
-                        <segue destination="Qv0-SA-3e2" kind="showDetail" identifier="search" id="Kap-5z-6Ec"/>
+                        <segue destination="Qv0-SA-3e2" kind="showDetail" identifier="iPadSearch" id="Kap-5z-6Ec"/>
+                        <segue destination="KCH-wN-g50" kind="show" identifier="iPhoneSearch" id="BDW-Ym-hSP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VK3-30-red" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1681.640625" y="-832.03125"/>
+        </scene>
+        <!--searchScreen-->
+        <scene sceneID="S6r-ET-Jhb">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="searchScreen" storyboardName="Movies_TVStoryboard" referencedIdentifier="searchScreen" id="KCH-wN-g50" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ofe-m4-k5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2136" y="-913"/>
         </scene>
         <!--Movies_TVStoryboard-->
         <scene sceneID="7YJ-BI-hkQ">
@@ -210,7 +219,7 @@
                 <viewControllerPlaceholder storyboardName="Movies_TVStoryboard" id="Qv0-SA-3e2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INL-8V-7qR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2126" y="-972"/>
+            <point key="canvasLocation" x="2150" y="-832"/>
         </scene>
         <!--Developer-->
         <scene sceneID="ihG-10-hUy">
@@ -274,7 +283,7 @@
                 <splitViewController id="8iW-Y4-Tna" customClass="SplitViewController" customModule="MoviesCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="gle-t6-8cP" kind="relationship" relationship="masterViewController" id="JNf-uP-nTY"/>
-                        <segue destination="hf2-Qf-c9j" kind="relationship" relationship="detailViewController" id="H0Z-jy-BC9"/>
+                        <segue destination="jDo-lg-bTQ" kind="relationship" relationship="detailViewController" id="KUd-UW-Hdz"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4f-vu-kUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -303,25 +312,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4I-QY-10K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="228.51562499999997" y="-832.03125"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="fHm-Ti-oRd">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hf2-Qf-c9j" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="apz-mD-gyy">
-                        <rect key="frame" x="0.0" y="20" width="703.5" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="jDo-lg-bTQ" kind="relationship" relationship="rootViewController" id="Iik-Nh-3mg"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d3w-ON-jL4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="228.51562499999997" y="14.84375"/>
         </scene>
     </scenes>
     <resources>

@@ -16,6 +16,13 @@ enum ScreenType{
     case favorites
 }
 
+enum AppSegues:String{
+    case iPadSearch = "iPadSearch"
+    case iPhoneSearch = "iPhoneSearch"
+    case iPadFavorites = "iPadFavorite"
+    case iPhoneFavorites = "iPhoneFavorite"
+}
+
 class MasterTableViewController: UITableViewController {
     
     //Identifier for the destination screen on segue
@@ -34,7 +41,7 @@ class MasterTableViewController: UITableViewController {
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "search" {
+        if segue.identifier == AppSegues.iPadSearch.rawValue {
             
             let destinationNavigationController = segue.destination as! UINavigationController
             
@@ -43,6 +50,13 @@ class MasterTableViewController: UITableViewController {
                 destinationViewController.searchType = currentDestination
                 
             }
+            
+        }
+        
+        if segue.identifier == AppSegues.iPhoneSearch.rawValue {
+            
+            let destinationViewController = segue.destination as! SearchViewController
+            destinationViewController.searchType = currentDestination
             
         }
         
@@ -58,20 +72,39 @@ class MasterTableViewController: UITableViewController {
             selectedCell?.contentView.backgroundColor = UIColor(red:0.12, green:0.12, blue:0.12, alpha:1.0)
         }
         
-        switch indexPath.row {
-        case 1:
-            currentDestination = .movies
-            performSegue(withIdentifier: "search", sender: nil)
-        case 2:
-            currentDestination = .tvShows
-            performSegue(withIdentifier: "search", sender: nil)
-        case 3:
-            currentDestination = .favorites
-            performSegue(withIdentifier: "favorites", sender: nil)
-        default:
-            break
+        if(UI_USER_INTERFACE_IDIOM() == .pad){//iPad Segues
+            
+            switch indexPath.row {
+            case 1:
+                currentDestination = .movies
+                performSegue(withIdentifier: AppSegues.iPadSearch.rawValue, sender: nil)
+            case 2:
+                currentDestination = .tvShows
+                performSegue(withIdentifier: AppSegues.iPadSearch.rawValue, sender: nil)
+            case 3:
+                currentDestination = .favorites
+                performSegue(withIdentifier: AppSegues.iPadFavorites.rawValue, sender: nil)
+            default:
+                break
+            }
+            
+        }else{//iPhone Segues
+            
+            switch indexPath.row {
+            case 1:
+                currentDestination = .movies
+                performSegue(withIdentifier: AppSegues.iPhoneSearch.rawValue, sender: nil)
+            case 2:
+                currentDestination = .tvShows
+                performSegue(withIdentifier: AppSegues.iPhoneSearch.rawValue, sender: nil)
+            case 3:
+                currentDestination = .favorites
+                performSegue(withIdentifier: AppSegues.iPhoneFavorites.rawValue, sender: nil)
+            default:
+                break
+            }
+            
         }
-        
         
     }
     

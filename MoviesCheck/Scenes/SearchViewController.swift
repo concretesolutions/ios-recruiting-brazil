@@ -34,6 +34,12 @@ class SearchViewController: UIViewController {
             searchManager?.delegate = self
             searchManager?.dataSource = self
             
+            if(type == .movies){
+                title = "Search Movies"
+            }else{
+                title = "Search TV Shows"
+            }
+            
         }
         
         //SearchBar configuration
@@ -53,14 +59,30 @@ class SearchViewController: UIViewController {
      */
     func setupVisualLanguageConstraints(){
         
+        var topTraillingSpace = CGFloat(4)
+        var bottomTraillingSpace = CGFloat(4)
+        
+        //Adding top safe area size to top trailling constraint
+        if let topSafeAreaHeight = UIApplication.shared.keyWindow?.safeAreaInsets.top{
+            topTraillingSpace += topSafeAreaHeight
+        }
+        
+        if let topNavigationBarHeight = navigationController?.navigationBar.frame.size.height{
+            topTraillingSpace += topNavigationBarHeight
+        }
+        
+        if let bottomTabbarHeight = tabBarController?.tabBar.frame.size.height{
+            bottomTraillingSpace += bottomTabbarHeight
+        }
+        
         //Visual Language Constraints
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         
         let myViews = ["spinnerView":loadingView]
         
-        let constraintsHorizontais = NSLayoutConstraint.constraints(withVisualFormat: "H:|-7-[spinnerView]-6-|", options: [], metrics: nil, views: myViews as Any as! [String : Any])
+        let constraintsHorizontais = NSLayoutConstraint.constraints(withVisualFormat: "H:|-4-[spinnerView]-4-|", options: [], metrics: nil, views: myViews as Any as! [String : Any])
         
-        let constraintsVerticais = NSLayoutConstraint.constraints(withVisualFormat: "V:|-76-[spinnerView]-6-|", options: [], metrics: nil, views: myViews as Any as! [String : Any])
+        let constraintsVerticais = NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(topTraillingSpace)-[spinnerView]-\(bottomTraillingSpace)-|", options: [], metrics: nil, views: myViews as Any as! [String : Any])
         
         NSLayoutConstraint.activate(constraintsHorizontais)
         NSLayoutConstraint.activate(constraintsVerticais)

@@ -121,9 +121,8 @@ extension SearchPresenter:UICollectionViewDelegate, UICollectionViewDataSource, 
                 
                 if(UI_USER_INTERFACE_IDIOM() == .pad){//iPad only cell distribution
                     return CGSize(width: (screenSize.width - (cellSpacing * 4)) / 4, height: 255)
-                }else{
-                    //TODO:- iPHONE SIZE FOR THE CELLS
-                    return CGSize.zero
+                }else{//iPhone only cell distribution
+                    return CGSize(width: (screenSize.width - (cellSpacing * 2)) / 2, height: 255)
                 }
                 
             }else{
