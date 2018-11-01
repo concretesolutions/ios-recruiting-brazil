@@ -10,4 +10,5 @@ import Foundation
 
 protocol MovieDetailBussinessLogic {
     func fetchMovie(request: MovieDetail.Request)
+    func favorite(movie: Movie)
 }

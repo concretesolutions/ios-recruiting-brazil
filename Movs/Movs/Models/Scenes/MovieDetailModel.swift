@@ -12,12 +12,19 @@ enum MovieDetail {
     struct Request {
         var movie: Movie
     }
+    
     struct Response {
-        var title: String
-        var genre: String
-        var overwiew: String
+        var movie: MovieDetailed
+        var imageView: UIImageView
         var isFavorite: Bool
+    }
+    
+    struct ViewModel {
+        var title: String
+        var year: String
+        var genre: String
+        var overview: String
+        var favoriteImage: UIImage
         var imageView: UIImageView
     }
-    struct ViewModel {}
 }

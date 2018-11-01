@@ -9,13 +9,6 @@
 import UIKit
 import CoreData
 
-protocol CoreDataWorkingLogic {
-    func create(movie: Movie)
-    func isFavorite(movie: Movie) -> Bool
-    func fetchFavoriteMovies() -> [Movie]
-    func delete(movie: Movie)
-}
-
 class CoreDataWorker: CoreDataWorkingLogic {
     var managedContext: NSManagedObjectContext?
     
@@ -77,10 +70,18 @@ class CoreDataWorker: CoreDataWorkingLogic {
         }
     }
     
-    func isFavorite(movie: Movie) -> Bool {
+    func favoriteMovie(movie: Movie) {
+        if isFavorite(id: movie.id) {
+            delete(movie: movie)
+        } else {
+            create(movie: movie)
+        }
+    }
+    
+    func isFavorite(id: Int) -> Bool {
         guard let managedContext = managedContext else { return false }
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "MovieEntity")
-        fetchRequest.predicate = NSPredicate(format: "id == %d", movie.id)
+        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
         
         do {
             let movies = try managedContext.fetch(fetchRequest)

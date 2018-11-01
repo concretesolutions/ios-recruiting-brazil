@@ -58,7 +58,7 @@ class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
     
     func presentMovies(movies: [Movie]) {
         let moviesToBePresented = movies.map({ (movie) -> MovieList.Response.FetchResponse in
-            let isFavorite = coreDataWorker.isFavorite(movie: movie)
+            let isFavorite = coreDataWorker.isFavorite(id: movie.id)
             return MovieList.Response.FetchResponse(title: movie.title, posterURL: MovieService.baseImageURL + movie.posterPath, isFavorite: isFavorite)
         })
         let response = MovieList.Response(movies: moviesToBePresented, error: nil)
@@ -67,11 +67,7 @@ class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
     
     func favoriteMovie(at index: Int) {
         let movie = movies[index]
-        if coreDataWorker.isFavorite(movie: movie) {
-            coreDataWorker.delete(movie: movie)
-        } else {
-            coreDataWorker.create(movie: movie)
-        }
+        coreDataWorker.favoriteMovie(movie: movie)
         presentMovies(movies: movies)
     }
     

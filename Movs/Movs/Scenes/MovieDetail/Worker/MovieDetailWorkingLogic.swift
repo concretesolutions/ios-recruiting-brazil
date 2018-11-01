@@ -6,8 +6,8 @@
 //  Copyright © 2018 Ricardo Rachaus. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol MovieDetailWorkingLogic {
-    func fetch(imageURL: String, genreIds: [Int])
+    func fetch(movie: Movie, completion: @escaping (MovieDetailed?, UIImageView?, Error?) -> ())
 }

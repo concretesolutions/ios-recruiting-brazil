@@ -10,14 +10,32 @@ import UIKit
 
 class MovieDetailInteractor: MovieDetailBussinessLogic {
     var presenter: MovieDetailPresentationLogic!
+    var movieDetailedWorker: MovieDetailWorkingLogic!
+    var coreDataWorker: CoreDataWorkingLogic!
+    
+    init() {
+        movieDetailedWorker = MovieDetailWorker()
+        coreDataWorker = CoreDataWorker()
+    }
     
     func fetchMovie(request: MovieDetail.Request) {
-//        let url = URL(string: MovieService.baseImageURL + movie.posterPath)!
-//        let imageView = UImageView(frame: .zero)
-//        imageView.kf.setImage(with: url)
-//        let title = movie.title
-//        let year = movie.releaseDate.split(separator: "-")[0]
-//        let genre = movie.genreIds.description
-//        let overview = movie.overview
+        movieDetailedWorker.fetch(movie: request.movie) { (movieDetailed, imageView, error) in
+            if error != nil {
+                return
+            }
+            
+            if let movie = movieDetailed,
+               let imageView = imageView {
+                let isFavorite = self.coreDataWorker.isFavorite(id: movie.id)
+                let response = MovieDetail.Response(movie: movie, imageView: imageView, isFavorite: isFavorite)
+                self.presenter.present(response: response)
+            }
+        }
+    }
+    
+    func favorite(movie: Movie) {
+        coreDataWorker.favoriteMovie(movie: movie)
+        let request = MovieDetail.Request(movie: movie)
+        fetchMovie(request: request)
     }
 }

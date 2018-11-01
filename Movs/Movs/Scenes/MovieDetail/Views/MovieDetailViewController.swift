@@ -21,12 +21,12 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     
     lazy var tableView: MovieDetailTableView = {
         let view = MovieDetailTableView(frame: .zero, style: .grouped)
+        view.titleCell.button.addTarget(self, action: #selector(pressedFavorite), for: .touchUpInside)
         return view
     }()
     
     lazy var textView: UITextView = {
         let view = UITextView(frame: .zero)
-        view.text = "sahudhsaudhaudh.auhsaudhasudhauhduahdaudhasu"
         view.font = UIFont.systemFont(ofSize: 14)
         return view
     }()
@@ -57,21 +57,29 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         self.view = view
         title = "Movie"
         setupView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         fetchMovie()
     }
     
-    func fetchMovie() {
+    private func fetchMovie() {
         if let movie = movie {
-            let request = MovieDetail.Request(movie: movie)
+           let request = MovieDetail.Request(movie: movie)
             interactor.fetchMovie(request: request)
         }
     }
     
     func display(viewModel: MovieDetail.ViewModel) {
-        
+        imageView.image = viewModel.imageView.image
+        tableView.titleCell.button.setImage(viewModel.favoriteImage, for: .normal)
+        tableView.titleCell.label.text = viewModel.title
+        tableView.yearCell.label.text = viewModel.year
+        tableView.genreCell.label.text = viewModel.genre
+        textView.text = viewModel.overview
+    }
+    
+    @objc func pressedFavorite(sender: UIButton) {
+        if let movie = movie {
+            interactor.favorite(movie: movie)
+        }
     }
     
 }
