@@ -19,10 +19,13 @@ class FavoritesInterface: UIViewController {
     
     @IBOutlet weak var listCollectionView: UICollectionView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.listCollectionViewSetup()
+        self.setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +33,11 @@ class FavoritesInterface: UIViewController {
         
         self.manager.load()
         self.listCollectionView.reloadData()
+    }
+    
+    func setup() {
+        self.searchBar.delegate = self
+        self.enableDismissKeyboard()
     }
     
     func listCollectionViewSetup() {
@@ -78,6 +86,12 @@ extension FavoritesInterface: UICollectionViewDelegateFlowLayout {
         let width = collectionView.frame.width
         return UIEdgeInsets(top: width * 0.025, left: width * 0.025, bottom: width * 0.025, right: width * 0.025)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        
+        self.manager.deleteMovieAt(index: indexPath.row)
+        self.listCollectionView.deleteItems(at: [indexPath])
+    }
 }
 
 extension FavoritesInterface: FavoritesInterfaceProtocol {
@@ -87,5 +101,12 @@ extension FavoritesInterface: FavoritesInterfaceProtocol {
     
     func reload() {
         self.listCollectionView.reloadData()
+    }
+}
+
+extension FavoritesInterface: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.manager.filter(text: searchText)
     }
 }

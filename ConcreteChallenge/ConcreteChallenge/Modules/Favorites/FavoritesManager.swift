@@ -16,20 +16,18 @@ protocol FavoritesInterfaceProtocol {
 
 class FavoritesManager {
     var interface: FavoritesInterfaceProtocol?
-    
-    let realm: Realm!
+    var movieProvider = MovieProvider()
+   
     
     var movies: [Movie] = []
     
     init(_ interface: FavoritesInterfaceProtocol) {
-        self.realm = try! Realm()
         self.interface = interface
         self.load()
     }
     
     func load() {
-        let movies = self.realm.objects(Movie.self)
-        self.movies = Array(movies)
+        self.movies = self.movieProvider.load()
     }
     
     func numberOfMovies() -> Int {
@@ -38,5 +36,15 @@ class FavoritesManager {
     
     func movieIn(index: Int) -> Movie {
         return movies[index]
+    }
+    
+    func deleteMovieAt(index: Int) {
+        self.movieProvider.handle(movie: self.movies[index])
+        self.movies.remove(at: index)
+    }
+    
+    func filter(text: String) {
+        self.movies = self.movieProvider.filteredLoad(text: text)
+        self.interface?.reload()
     }
 }

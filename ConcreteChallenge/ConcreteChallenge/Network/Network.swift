@@ -23,7 +23,7 @@ class Network {
     }
     
     var imageDomain: String {
-        return "https://image.tmdb.org/t/p/original/"
+        return "https://image.tmdb.org/t/p/w500/"
     }
     
     var apiKey: String {

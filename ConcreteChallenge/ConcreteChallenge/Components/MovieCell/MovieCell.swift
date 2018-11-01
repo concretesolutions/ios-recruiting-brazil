@@ -13,6 +13,7 @@ struct MovieCellModel {
     var title: String
     var backdrop_path: String
     var poster_path: String
+    var isSaved: Bool
 }
 
 protocol MovieCellDelegate {
@@ -48,12 +49,13 @@ class MovieCell: UICollectionViewCell {
     }
     
     func set(model: MovieCellModel) {
-        self.image?.sd_setImage(with: URL(string: Network.manager.imageDomain + model.backdrop_path)!, placeholderImage: UIImage(named: "imageError.png"), options: .cacheMemoryOnly) { (_, err, _, _) in
+        self.image?.sd_setImage(with: URL(string: Network.manager.imageDomain + model.backdrop_path)!, placeholderImage: UIImage(named: "imageError.png"), options: .forceTransition) { (_, err, _, _) in
             if err != nil {
                 self.image.sd_setImage(with: URL(string: Network.manager.imageDomain + model.poster_path)!, completed: nil)
             }
         }
         self.title.text = model.title
+        self.saveButton.alpha = model.isSaved ? 0.6 : 1
     }
     
     @IBAction func save(_ sender: Any) {

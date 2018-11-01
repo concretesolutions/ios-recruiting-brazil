@@ -12,16 +12,18 @@ import Alamofire
 
 enum Router {
     case popularMovies
+    case genres
     
     var path: String {
         switch self {
-            case .popularMovies: return "/movie/popular?api_key=47265a2c299dbd2185eac909cf0dbeed&language=en-US&page=1"
+            case .popularMovies: return "/movie/popular"
+            case .genres: return "/genre/movie/list?api_key=\(Network.manager.apiKey)"
         }
     }
     
     var method : HTTPMethod {
         switch  self {
-            case .popularMovies: return .get
+            case .popularMovies, .genres: return .get
         }
     }
     

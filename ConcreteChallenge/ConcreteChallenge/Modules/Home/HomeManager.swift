@@ -22,7 +22,7 @@ extension HomeInterfaceProtocol {
 
 class HomeManager {
     var interface: HomeInterfaceProtocol?
-    var provider = HomeProvider()
+    var provider = MovieProvider()
     
     var movies = [MovieJSON]()
     var page = 0
@@ -31,10 +31,10 @@ class HomeManager {
     
     var isFetchInProgress = false
     
-    let realm: Realm!
+    
     
     init(_ interface: HomeInterfaceProtocol) {
-        self.realm = try! Realm()
+        
         self.interface = interface
         self.provider.delegate = self
     }
@@ -44,7 +44,7 @@ class HomeManager {
         guard !isFetchInProgress else {
             return
         }
-        
+        self.isFetchInProgress = true
         self.page += 1
         self.provider.fetchPopularMovies(page: page) { newMovies, totalPages, totalResults in
             self.movies.append(contentsOf: newMovies)
@@ -56,7 +56,8 @@ class HomeManager {
             } else {
                 self.interface?.reload(self.calculateIndexPathToReload(newMovies: newMovies))
             }
-
+            
+            self.isFetchInProgress = false
         }
     }
     
@@ -66,23 +67,15 @@ class HomeManager {
     
     func movieModelIn(index: Int) -> MovieCellModel? {
         let movie = self.movies[index]
-        
-        return MovieCellModel(title: movie.title ?? "", backdrop_path: movie.backdrop_path ?? "", poster_path: movie.poster_path ?? "")
+        let isSaved = self.provider.contain(id: movie.id)
+        print(isSaved)
+        return MovieCellModel(title: movie.title ?? "", backdrop_path: movie.backdrop_path ?? "", poster_path: movie.poster_path ?? "", isSaved: isSaved)
     }
     
     func handleMovie(indexPath: IndexPath) {
-        try! self.realm.write {
-            let movie = movieFor(index: indexPath.row)
-            
-            if let movie = self.realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
-                
-                self.realm.delete(movie)
-            } else {
-                
-               self.realm.add(movie)
-            }
-            
-        }
+        let movie = movieFor(index: indexPath.row)
+        
+        self.provider.handle(movie: movie)
     }
     
     private func movieFor(index: Int) -> Movie {
@@ -91,9 +84,12 @@ class HomeManager {
         
         movie.id = movieJson.id
         movie.imageUrl = Network.manager.imageDomain + (movieJson.backdrop_path ?? movieJson.poster_path ?? "")
-        movie.release_date = movieJson.release_date ?? ""
+        movie.year = Int(String(movieJson.release_date?.prefix(4) ?? "0")) ?? 0
         movie.title = movieJson.title
         movie.overview = movieJson.overview ?? ""
+        movieJson.genre_ids?.forEach {
+            movie.genre_ids.append($0)
+        }
         
         return movie
     }
@@ -105,7 +101,7 @@ class HomeManager {
     }
 }
 
-extension HomeManager: HomeProviderDelegate {
+extension HomeManager: MovieProviderDelegate {
     func handler(badRequest: BadRequest) {
         
         

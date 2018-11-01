@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="SUh-nx-Xab">
-                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="20" width="280" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="P7V-P7-Tk3"/>
@@ -37,14 +37,36 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKe-HZ-1Ld">
+                                <rect key="frame" x="300" y="30" width="50" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AiL-nk-N19"/>
+                                    <constraint firstAttribute="width" constant="50" id="fv1-e9-tOb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <state key="normal" title="FILTRO">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="mqx-LU-eZb" kind="presentation" id="Jzn-VR-ejV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="AFZ-8I-DvK" firstAttribute="trailing" secondItem="yKe-HZ-1Ld" secondAttribute="trailing" constant="25" id="0ok-D2-1ek"/>
                             <constraint firstItem="SUh-nx-Xab" firstAttribute="leading" secondItem="AFZ-8I-DvK" secondAttribute="leading" id="3hH-ux-6ic"/>
                             <constraint firstItem="SUh-nx-Xab" firstAttribute="top" secondItem="AFZ-8I-DvK" secondAttribute="top" id="8fQ-f0-LT1"/>
+                            <constraint firstItem="yKe-HZ-1Ld" firstAttribute="centerY" secondItem="SUh-nx-Xab" secondAttribute="centerY" id="DgU-Wh-s0l"/>
+                            <constraint firstItem="yKe-HZ-1Ld" firstAttribute="leading" secondItem="SUh-nx-Xab" secondAttribute="trailing" constant="20" id="VyR-oy-oX4"/>
                             <constraint firstItem="2ub-UO-LvS" firstAttribute="top" secondItem="SUh-nx-Xab" secondAttribute="bottom" id="bah-OU-Jr7"/>
                             <constraint firstItem="2ub-UO-LvS" firstAttribute="leading" secondItem="AFZ-8I-DvK" secondAttribute="leading" id="gC5-Eu-shE"/>
-                            <constraint firstItem="SUh-nx-Xab" firstAttribute="trailing" secondItem="AFZ-8I-DvK" secondAttribute="trailing" id="hyt-6A-e2Y"/>
                             <constraint firstItem="AFZ-8I-DvK" firstAttribute="bottom" secondItem="2ub-UO-LvS" secondAttribute="bottom" id="siw-Nj-i65"/>
                             <constraint firstItem="AFZ-8I-DvK" firstAttribute="trailing" secondItem="2ub-UO-LvS" secondAttribute="trailing" id="yPG-Ea-Mb1"/>
                         </constraints>
@@ -54,11 +76,38 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="listCollectionView" destination="2ub-UO-LvS" id="zs7-Qr-4u8"/>
+                        <outlet property="searchBar" destination="SUh-nx-Xab" id="qBK-OF-oAk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oeK-Mf-hgf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="xa7-I4-Lvo">
+                    <rect key="frame" x="0.0" y="0.0" width="242" height="234"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCi-PO-u52">
+                            <rect key="frame" x="86" y="178" width="70" height="36"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Apply"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="kdZ-2O-Wzn"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </objects>
-            <point key="canvasLocation" x="150" y="-216"/>
+            <point key="canvasLocation" x="149.59999999999999" y="-216.34182908545728"/>
+        </scene>
+        <!--Filter-->
+        <scene sceneID="McR-s8-rGb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filter" id="mqx-LU-eZb" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F5d-MW-QYo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="805" y="-430"/>
         </scene>
     </scenes>
 </document>

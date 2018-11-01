@@ -39,6 +39,12 @@ class HomeInterface: UIViewController {
         self.manager.fetchMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.gridCollectionView.reloadItems(at: self.gridCollectionView.indexPathsForVisibleItems)
+    }
+    
     func gridCollectionViewSetup() {
         self.gridCollectionView.delegate = self
         self.gridCollectionView.dataSource = self
