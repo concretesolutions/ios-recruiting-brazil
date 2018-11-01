@@ -14,4 +14,6 @@ struct Movie {
   let voteAverage: Double
   let releaseDate: Date
   let isFavorite: Bool
+  let overview: String
+  let backdropPath: String
 }

@@ -13,6 +13,8 @@ enum Assets {
   case moviePostPlaceholder
   case starSelected
   case orangeClapperboard
+  case movieBackdropPlaceholder
+  case starBordered
 }
 
 class AssetsManager {
@@ -27,6 +29,10 @@ class AssetsManager {
       return UIImage(named: "star_selected")!
     case .orangeClapperboard:
       return UIImage(named: "clapperboard-O")!
+    case .movieBackdropPlaceholder:
+      return UIImage(named: "placeholder2")!
+    case .starBordered:
+      return UIImage(named: "star_bordered")!
     }
   }
   

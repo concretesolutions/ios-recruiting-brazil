@@ -14,7 +14,8 @@ final class MovieParser {
     guard let identificator = json["id"].int,
       let title = json["title"].string,
       let voteAverage = json["vote_average"].double,
-      let releaseDateString = json["release_date"].string else {
+      let releaseDateString = json["release_date"].string,
+      let overview = json["overview"].string else {
         fatalError("Failed to parse a movie object")
     }
     
@@ -26,6 +27,14 @@ final class MovieParser {
       posterPath = ""
     }
     
+    var backdropPath: String
+    
+    if let path = json["backdrop_path"].string {
+      backdropPath = path
+    } else {
+      backdropPath = ""
+    }
+    
     let formater = DateFormatter()
     formater.dateFormat = "yyyy-mm-dd"
     
@@ -33,7 +42,7 @@ final class MovieParser {
       fatalError("Failed to create the date from the formater")
     }
     
-    return Movie(identificator: identificator, title: title, posterPath: posterPath, voteAverage: voteAverage, releaseDate: releaseDate, isFavorite: false)
+    return Movie(identificator: identificator, title: title, posterPath: posterPath, voteAverage: voteAverage, releaseDate: releaseDate, isFavorite: false, overview: overview, backdropPath: backdropPath)
   }
   
   public static func convertJSONResultsToMovies(_ results: [JSON]) -> [Movie] {

@@ -44,6 +44,6 @@ class MoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
   }
 }
 
-protocol CollectionViewdidSelectItemDelegate {
+protocol CollectionViewdidSelectItemDelegate: class {
   func didSelectIndexPath(_ indexPath: IndexPath)
 }
