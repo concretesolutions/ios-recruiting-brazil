@@ -19,10 +19,10 @@ class ManagerMovies {
     init() {
     }
     
-    func setupMovies(completion: @escaping ( [MovieNowPlaying]?) -> ()) {
-        MovieDAO.shared.requestMovies(completion: { (moviesJSON) in
+    func setupMovies(pageNumber: Int,completion: @escaping ( [MovieNowPlaying]?) -> ()) {
+        MovieDAO.shared.requestMovies(apilink: APILinks.moviesPopularity.value, pageNumber: pageNumber, completion: { (moviesJSON) in
             if let _movies = moviesJSON {
-                self._movies = _movies
+                self._movies.append(contentsOf: _movies)
                 self.transformDictionary(moviesJSON: self._movies)
                 completion(self.movies)
             } else {

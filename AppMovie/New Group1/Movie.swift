@@ -83,7 +83,7 @@ extension MovieNowPlaying {
     func getImage(favorite: Bool) -> UIImage? {
         
         if favorite == false {
-            if let img = UIImage(named: "favorite_empty_icon") {
+            if let img = UIImage(named: "favorite_gray_icon") {
                 return img
             }
         }else {

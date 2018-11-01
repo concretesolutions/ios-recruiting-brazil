@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sUN-AR-eDd">
-                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteMoveCell" rowHeight="89" id="ELZ-DS-EXt" customClass="MoviesTableViewCell" customModule="AppMovie" customModuleProvider="target">
@@ -28,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="88.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Qe-ON-tZG">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Qe-ON-tZG">
                                                     <rect key="frame" x="0.0" y="0.0" width="89" height="89"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="89" id="7UG-EV-2K7"/>
@@ -74,20 +74,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAN-TU-SbW">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="sUN-AR-eDd" firstAttribute="trailing" secondItem="Meg-Oe-D1O" secondAttribute="trailing" id="3kD-sy-GXb"/>
-                            <constraint firstItem="OAN-TU-SbW" firstAttribute="top" secondItem="Meg-Oe-D1O" secondAttribute="top" id="4xj-KV-DdL"/>
                             <constraint firstItem="sUN-AR-eDd" firstAttribute="leading" secondItem="Meg-Oe-D1O" secondAttribute="leading" id="Beo-i5-zxF"/>
-                            <constraint firstItem="OAN-TU-SbW" firstAttribute="leading" secondItem="Meg-Oe-D1O" secondAttribute="leading" id="TcK-xo-SHx"/>
+                            <constraint firstItem="sUN-AR-eDd" firstAttribute="top" secondItem="Meg-Oe-D1O" secondAttribute="top" constant="10" id="Cov-vJ-Qug"/>
                             <constraint firstItem="Meg-Oe-D1O" firstAttribute="bottom" secondItem="sUN-AR-eDd" secondAttribute="bottom" id="Ttd-IV-cd6"/>
-                            <constraint firstItem="sUN-AR-eDd" firstAttribute="top" secondItem="OAN-TU-SbW" secondAttribute="bottom" id="n0g-kc-STD"/>
-                            <constraint firstItem="OAN-TU-SbW" firstAttribute="trailing" secondItem="Meg-Oe-D1O" secondAttribute="trailing" id="vLj-ER-gPz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Meg-Oe-D1O"/>
                     </view>

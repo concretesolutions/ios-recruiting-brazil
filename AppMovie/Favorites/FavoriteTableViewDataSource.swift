@@ -36,10 +36,13 @@ class FavoriteTableViewDataSource: NSObject, UITableViewDataSource {
             cell.imageCover.image = movie.backdropPath
             return cell
         }else if let cell = cell as? DescribeMovieTableViewCell {
-    
             var text = ""
             if let movie = movie {
+                cell.delegate = controller as? FavoriteMovieDelegate 
+                cell.movie = movie
                 if indexPath.row == 0 {
+                    cell.btnFavorite.isHidden = false
+                    cell.btnFavorite.setImage(movie.getImage(favorite: movie.favorite), for: .normal)
                     text = movie.originalTitle
                 }else if indexPath.row == 1{
                     text = movie.releaseDate

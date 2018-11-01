@@ -11,8 +11,8 @@ import UIKit
 class FavoritesViewController: UIViewController {
 
     var dataSource = FavoriteTableViewDataSource()
-    
     @IBOutlet weak var tableView: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class FavoritesViewController: UIViewController {
     
     func setupNavigation() {
         self.navigationItem.title = "Favorites"
+        self.navigationController?.navigationBar.barTintColor = Colors.navigationController.value
     }
     
     private func setupTableView() {
@@ -39,6 +40,25 @@ class FavoritesViewController: UIViewController {
 }
 
 //MARK: - Delegates
+extension FavoritesViewController: FavoriteMovieDelegate {
+    func setFavorite(movie: MovieNowPlaying) {
+        ManagerMovies.shared.moviesFavorites.append(movie)
+        
+        let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.movies)
+        ManagerMovies.shared.movies[index].updateFavorite()
+        self.dataSource.datas = ManagerMovies.shared.movies
+        self.tableView.reloadData()
+    }
+    
+    func removeFavorite(movie: MovieNowPlaying) {
+        let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.moviesFavorites)
+        if  index != -1 {
+            ManagerMovies.shared.moviesFavorites.remove(at: index)
+        }
+    }
+    
+}
+
 extension FavoritesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

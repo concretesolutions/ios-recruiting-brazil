@@ -20,33 +20,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-//
-//        let sb = UIStoryboard(name: "MoviePlayNow", bundle: nil)
-//        let mainController = sb.instantiateViewController(withIdentifier: "moviePlayingNow")
-//
-//        navigationController.viewControllers = [mainController]
-//        navigationController.navigationBar.tintColor = UIColor(red: 247, green: 212, blue: 114, alpha: 1)
-//        self.window?.rootViewController = navigationController
-//        self.window?.makeKeyAndVisible()
-
         let tabBarController = UITabBarController()
         let navigationControllerMovie = UINavigationController()
         
-        let sbMovie = UIStoryboard(name: "MoviePlayNow", bundle: nil)
-        let movieController = sbMovie.instantiateViewController(withIdentifier: "moviePlayingNow")
-        navigationControllerMovie.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.bookmarks, tag: 0)
+        let movieController = Controller.createController(storyBoardName: "MoviePlayNow",controllerIdentifier: "moviePlayingNow")
+        
+        navigationControllerMovie.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
         navigationControllerMovie.viewControllers = [movieController]
-        navigationControllerMovie.restorationIdentifier = "navigationMovie"
-        
-        
+        navigationControllerMovie.navigationBar.backgroundColor = Colors.navigationController.value
         
         let navigationControllerFavorite = UINavigationController()
-        let sbFavorite = UIStoryboard(name: "FavoriteMovies", bundle: nil)
-        let favoriteController = sbFavorite.instantiateViewController(withIdentifier: "FavoriteMovies")
-        navigationControllerFavorite.restorationIdentifier = "navigationFavorite"
-        navigationControllerFavorite.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarItem.SystemItem.favorites, tag: 1)
-        navigationControllerFavorite.viewControllers = [favoriteController]
+        let favoriteController = Controller.createController(storyBoardName: "FavoriteMovies",controllerIdentifier: "FavoriteMovies")
         
+        navigationControllerFavorite.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(named: "favorite_empty_icon"), tag: 1)
+        navigationControllerFavorite.viewControllers = [favoriteController]
+        navigationControllerFavorite.navigationBar.backgroundColor = Colors.navigationController.value
+        
+        tabBarController.tabBar.tintColor = Colors.selectedItemTabBar.value
+        tabBarController.tabBar.unselectedItemTintColor = Colors.unselectedItemTabaBar.value
+        tabBarController.tabBar.barTintColor = Colors.tabBarControler.value
         tabBarController.viewControllers = [navigationControllerMovie,navigationControllerFavorite]
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()

@@ -20,7 +20,7 @@ class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
     @IBAction func favorite(_ sender: Any) {
         self.movie.updateFavorite()
         
-        if let img =  self.movie.getImage(favorite: self.movie.favorite){
+        if let img = self.movie.getImage(favorite: self.movie.favorite){
             if self.movie.favorite == false {
                 delegate?.removeFavorite(movie: movie)
             }else {
@@ -28,5 +28,9 @@ class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
             }
             self.btnFavorite.setImage(img, for: .normal)
         }
+    }
+    
+    override func awakeFromNib() {
+        self.backgroundColor = Colors.backGroundCollectionViewCell.value
     }
 }

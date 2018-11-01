@@ -23,15 +23,16 @@ class MovieDAO {
     
     static let shared = MovieDAO()
     
-    private let apiUrl : URL?
+    private var apiUrl : URL?
     var movies = [Dictionary<String,Any>]()
     
     init() {
-        self.apiUrl = URL(string: APILinks.moviesPlayingNow.value)
+        self.apiUrl = URL(string: APILinks.moviesPopularity.value+"1")
     }
     
-    func requestMovies(completion: @escaping ( [Dictionary<String,Any>]?) -> ()) {
+    func requestMovies(apilink: String,pageNumber: Int,completion: @escaping ( [Dictionary<String,Any>]?) -> ()) {
         
+        apiUrl = URL(string: apilink + String(pageNumber))
         guard let url = apiUrl else {return}
         
         let request = URLRequest(url: (url) , cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
