@@ -22,10 +22,10 @@ class MovieDetailPresenter: MovieDetailPresentationLogic {
 
     func presentMovie(movie: Movie) {
         DispatchQueue.main.async {
-            let genres = movie.movieGenresString()
+            let genres = movie.genresString()
             let year = movie.yearString()
-            let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
-            let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: genres, overview: movie.overview, releaseDate: year, isFavorite: isFavorite)
+            let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil
+            let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath, title: movie.title, genres: genres, overview: movie.overview, releaseDate: year, isFavorite: isFavorite)
             self.viewController?.displayMovie(viewModel: viewModel)
         }
     }

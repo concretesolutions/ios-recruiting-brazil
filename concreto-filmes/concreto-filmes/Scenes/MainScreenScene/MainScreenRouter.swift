@@ -24,19 +24,25 @@ class MainScreenRouter: NSObject, MainScreenRoutingLogic, MainScreenDataPassing 
     weak var viewController: MainScreenViewController?
     var dataStore: MainScreenDataStore?
     let realm = RealmService.shared.realm
-
+    
     // MARK: Routing
-
+    
     func routeToMovieDetail(shouldFilter: Bool, index: Int) {
         guard let sourceVC = viewController else { return }
         if let dataStore = self.dataStore {
             let movie = shouldFilter ? dataStore.filteredMovies[index] : dataStore.movies[index]
-            let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
-            let destinationVC = MovieDetailViewController(viewModel: MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: movie.movieGenresString(), overview: movie.overview, releaseDate: movie.yearString(), isFavorite: isFavorite))
+            let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil
+            let destinationVC = MovieDetailViewController(viewModel: MovieDetail.ViewModel(movieImageURL: movie.posterPath, title: movie.title, genres: movie.genresString(), overview: movie.overview, releaseDate: movie.yearString(), isFavorite: isFavorite))
+            guard var destinationDS = destinationVC.router?.dataStore else { return }
+            passDataToDetailVC(source: dataStore, destination: &destinationDS, index: index)
             navigateToMovieDetail(source: sourceVC, destination: destinationVC)
         }
     }
-
+    
+    func passDataToDetailVC(source: MainScreenDataStore, destination: inout MovieDetailDataStore, index: Int) {
+        destination.movie = source.movies[index]
+    }
+    
     func navigateToMovieDetail(source: MainScreenViewController, destination: MovieDetailViewController) {
         source.navigationController?.pushViewController(destination, animated: true)
     }

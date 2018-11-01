@@ -28,10 +28,10 @@ class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore {
     
     func toggleFavoriteMovie() {
         if let movie = movie {
-            if let movieAlreadyInRealm = realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) {
+            if let movieAlreadyInRealm = realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) {
                 RealmService.shared.delete(movieAlreadyInRealm)
             } else {
-                let movieRealm = FavoriteMovie(movie: movie)
+                let movieRealm = MovieRealm(movie: movie)
                 RealmService.shared.create(movieRealm)
             }
         }

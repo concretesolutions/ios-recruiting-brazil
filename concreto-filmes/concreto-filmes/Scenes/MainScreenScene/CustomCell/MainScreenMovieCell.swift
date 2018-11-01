@@ -50,7 +50,7 @@ class MainScreenMovieCell: UICollectionViewCell {
     }
 
     func setData(data: MainScreen.ViewModel.MovieViewModel) {
-        self.coverImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + data.posterUrl)) { (image, _, _, _) in
+        self.coverImage.sd_setImage(with: URL(string: data.posterUrl)) { (image, _, _, _) in
             if image == nil {
                 DispatchQueue.main.async {
                     self.coverImage.image = #imageLiteral(resourceName: "placeholder")

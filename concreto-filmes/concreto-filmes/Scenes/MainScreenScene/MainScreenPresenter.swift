@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 protocol MainScreenPresentationLogic {
     func present(movies: [Movie]?)
@@ -27,8 +26,8 @@ class MainScreenPresenter: MainScreenPresentationLogic {
             var viewModelItems: [MainScreen.ViewModel.MovieViewModel] = []
             if let movies = movies {
                 for movie in movies {
-                    let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
-                    viewModelItems.append(MainScreen.ViewModel.MovieViewModel(posterUrl: movie.posterPath ?? "", title: movie.title, isFavorite: isFavorite))
+                    let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil
+                    viewModelItems.append(MainScreen.ViewModel.MovieViewModel(posterUrl: movie.posterPath, title: movie.title, isFavorite: isFavorite))
                 }
                 self.viewController?.display(movies: viewModelItems)
             }

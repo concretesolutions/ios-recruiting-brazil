@@ -30,8 +30,8 @@ class FavoritesRouter: NSObject, FavoritesRoutingLogic, FavoritesDataPassing {
     func routeToMovieDetail(shouldFilter: Bool, index: Int) {
         guard let sourceVC = viewController else { return }
         if let movie = dataStore?.movies[index] {
-            let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
-            let movieViewModel = MovieDetail.ViewModel(movieImageURL: movie.imageUrl, title: movie.title, genres: movie.genres, overview: movie.overview, releaseDate: movie.releaseDate, isFavorite: isFavorite)
+            let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil
+            let movieViewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath, title: movie.title, genres: movie.genresString(), overview: movie.overview, releaseDate: movie.yearString(), isFavorite: isFavorite)
             let destinationVC = MovieDetailViewController(viewModel: movieViewModel)
             navigateToMovieDetail(source: sourceVC, destination: destinationVC)
         }

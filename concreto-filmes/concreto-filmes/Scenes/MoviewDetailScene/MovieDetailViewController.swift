@@ -125,16 +125,6 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
     
     // MARK: View lifecycle
 
@@ -145,7 +135,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     }
 
     func displayMovie(viewModel: MovieDetail.ViewModel) {
-        self.coverImageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + viewModel.movieImageURL)) { (image, _, _, _) in
+        self.coverImageView.sd_setImage(with: URL(string: viewModel.movieImageURL)) { (image, _, _, _) in
             if image == nil {
                 DispatchQueue.main.async {
                     self.coverImageView.image = #imageLiteral(resourceName: "placeholder")

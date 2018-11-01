@@ -53,7 +53,7 @@ class FavoritesCustomCell: UITableViewCell {
     
     //Helpers
     func setData(data: Favorites.ViewModel.movie) {
-        self.movieImage.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + data.imageUrl)) { (image, _, _, _) in
+        self.movieImage.sd_setImage(with: URL(string: data.imageUrl)) { (image, _, _, _) in
             if image == nil {
                 DispatchQueue.main.async {
                     self.movieImage.image = #imageLiteral(resourceName: "placeholder")

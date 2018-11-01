@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct GenreApiResponse {
     let genres: [Genre]
@@ -25,20 +26,17 @@ extension GenreApiResponse: Decodable {
     }
 }
 
-struct Genre {
+class Genre: Decodable {
     let id: Int
     let name: String
     static var fetchedGenres: [Int: String] = [:]
-}
-
-extension Genre: Decodable {
 
     enum GenreCodingKeys: String, CodingKey {
         case id
         case name
     }
 
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GenreCodingKeys.self)
 
         id = try container.decode(Int.self, forKey: .id)
