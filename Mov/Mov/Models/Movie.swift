@@ -17,6 +17,6 @@ struct Movie: Codable, Hashable {
     let posterPath: String
 }
 
-struct MoviesFetchResults: Codable {
+struct MoviesResults: Codable {
     let results: [Movie]
 }

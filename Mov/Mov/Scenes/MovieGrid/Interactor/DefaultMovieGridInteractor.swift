@@ -33,6 +33,8 @@ final class DefaultMovieGridInteractor {
             return MovieGridUnit(id: movie.id, title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
         }
     }
+    
+    func movie(at index: Int) -> Movie? { return self.fetchedMovies[safe: index] }
 }
 
 extension DefaultMovieGridInteractor: MovieGridInteractor {
@@ -59,7 +61,6 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
     }
     
     func toggleFavoriteMovie(at index: Int) {
-        print(index)
         if let movie = self.fetchedMovies[safe: index] {
             self.persistence.toggleFavorite(movie: movie)
             self.presenter.present(movies: movieGridUnits(from: self.fetchedMovies))

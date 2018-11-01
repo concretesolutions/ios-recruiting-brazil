@@ -25,7 +25,10 @@ final class MovieGridViewController: UIViewController {
     private(set) var page = 1
     
     lazy var movieGridView: MovieGridView = {
-        return MovieGridView(dataSource: self)
+        let movieGridView = MovieGridView()
+        movieGridView.collection.dataSource = self
+        movieGridView.collection.delegate = self
+        return movieGridView
     }()
     
     lazy var collectionState: MovieGridCollectionState = {
@@ -146,4 +149,14 @@ extension MovieGridViewController {
         self.tabBarItem = UITabBarItem(title: MovieGridViewController.title,
                                        image: Images.movieListIcon, tag: 0)
     }
+}
+
+extension MovieGridViewController: MovieDetailsNavigator {
+    
+    func navigateToDetailsView(of movie: Movie) {
+        let detailsVC = MovieDetailsBuilder.build(forMovie: movie)
+        show(detailsVC, sender: nil)
+    }
+    
+    
 }

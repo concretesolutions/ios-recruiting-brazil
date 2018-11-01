@@ -10,7 +10,6 @@ import UIKit
 
 public class MovieGridView: UIView {
     
-    let dataSource: UICollectionViewDataSource
     let searchBarDelegate: MovieSearchBarDelegate = MovieSearchBarDelegate()
     
     // UI Elements
@@ -46,11 +45,9 @@ public class MovieGridView: UIView {
     
     
     // Initialization
-    init(dataSource: UICollectionViewDataSource) {
-        self.dataSource = dataSource
+    init() {
         super.init(frame: .zero)
         self.setup()
-        self.collection.dataSource = dataSource
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -11,6 +11,7 @@ import Moya
 
 enum TMDBProvider {
     case popular(page: Int)
+    case genres
 }
 
 extension TMDBProvider: TargetType {
@@ -22,13 +23,16 @@ extension TMDBProvider: TargetType {
         switch self {
         case .popular:
             return "discover/movie"
+        case .genres:
+            return "genre/movie/list"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .popular:
+        case .popular, .genres:
             return .get
+            
         }
     }
     
@@ -44,12 +48,15 @@ extension TMDBProvider: TargetType {
                 API.TMDB.pageParamKey : page,
                 API.TMDB.keyParamKey : API.TMDB.key
             ]
+            
+        case .genres:
+            return [API.TMDB.keyParamKey : API.TMDB.key]
         }
     }
     
     var task: Task {
         switch self {
-        case .popular:
+        case .popular, .genres:
             return .requestParameters(parameters: self.params!,
                                       encoding: URLEncoding.queryString)
         }
@@ -57,7 +64,7 @@ extension TMDBProvider: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .popular:
+        case .popular, .genres:
             return nil
         }
     }
