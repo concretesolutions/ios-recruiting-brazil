@@ -16,12 +16,13 @@ class MoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
   var posterHeight: CGFloat = 240
   var posterWidth: CGFloat = 160
   var movieInfoContainerHeight: CGFloat = 66
-  var delegate: MoviesCollectionViewUpdateDelegate
-  var controller: UIViewController!
+  var updateDelegate: MoviesCollectionViewUpdateDelegate
+  var itemSelectDelegate: CollectionViewdidSelectItemDelegate
   
-  init(frameWidth: CGFloat, delegate: MoviesCollectionViewUpdateDelegate) {
+  init(frameWidth: CGFloat, updateDelegate: MoviesCollectionViewUpdateDelegate, itemSelectDelegate: CollectionViewdidSelectItemDelegate) {
     self.cellWidth = (frameWidth - (margin * (columns + 1))) / columns
-    self.delegate = delegate
+    self.updateDelegate = updateDelegate
+    self.itemSelectDelegate = itemSelectDelegate
     newPosterHeight = posterHeight * cellWidth / posterWidth
   }
   
@@ -31,14 +32,18 @@ class MoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
   
   func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
     
-    if delegate.canShowFooter() {
+    if updateDelegate.canShowFooter() {
       view.isHidden = false
-      delegate.loadMoreMovies()
+      updateDelegate.loadMoreMovies()
     }
     
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    controller.performSegue(withIdentifier: "movieToDetailViewSegue", sender: nil)
+    itemSelectDelegate.didSelectIndexPath(indexPath)
   }
+}
+
+protocol CollectionViewdidSelectItemDelegate {
+  func didSelectIndexPath(_ indexPath: IndexPath)
 }

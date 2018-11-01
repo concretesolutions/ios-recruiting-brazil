@@ -105,8 +105,7 @@ class MoviesCollectionViewController: UICollectionViewController {
   }
   
   fileprivate func setupCollectionView() {
-    moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width, delegate: self)
-    moviesDelegate.controller = self
+    moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width, updateDelegate: self, itemSelectDelegate: self)
     moviesDataSource = MoviesDataSource(posterHeight: moviesDelegate.newPosterHeight, searchController: searchController, updateCollectionDelegate: self)
     searchController.searchResultsUpdater = moviesDataSource
     self.collectionView.delegate = moviesDelegate
@@ -199,6 +198,29 @@ extension MoviesCollectionViewController {
     let launchScreenAnimationView = LaunchScreenAnimationView(frame: superView.frame)
     launchScreenAnimationView.animateView(onSuperView: superView) {
       self.tabBarController?.tabBar.isHidden = false
+    }
+  }
+}
+
+extension MoviesCollectionViewController: CollectionViewdidSelectItemDelegate {
+  func didSelectIndexPath(_ indexPath: IndexPath) {
+    var aMovie: Movie
+    if moviesDataSource.isFiltering() {
+      aMovie = moviesDataSource.filteredMovies[indexPath.row]
+    } else {
+      aMovie = moviesDataSource.movies[indexPath.row]
+    }
+    
+    self.performSegue(withIdentifier: "movieToDetailViewSegue", sender: aMovie)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "movieToDetailViewSegue" {
+      if let destinationViewController = segue.destination as? MovieDetailViewController {
+        if let aMovie = sender as? Movie {
+          destinationViewController.movie = aMovie
+        }
+      }
     }
   }
 }
