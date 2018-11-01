@@ -17,7 +17,7 @@ class MainTabBarBuilder {
         let favoritesNavigationController = DefaultNavigationController(rootViewController: favoritesVC)
         
         let tabBarVC = MainTabBarController()
-        tabBarVC.viewControllers = [movieGridNavigationController, favoritesNavigationController]
+        tabBarVC.viewControllers = [favoritesNavigationController, movieGridNavigationController]
         
         return tabBarVC
     }

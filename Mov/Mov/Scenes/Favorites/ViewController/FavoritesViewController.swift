@@ -31,6 +31,11 @@ class FavoritesViewController: UIViewController {
         self.setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.fetchFavorites()
+    }
+    
     override func viewDidLoad() {
         self.setTabBarOptions()
         self.title = FavoritesViewController.title
@@ -47,6 +52,26 @@ extension FavoritesViewController: ViewCode {
             make.edges.equalToSuperview()
         }
     }
+    
+    func additionalSetup() {
+        self.favoritesView.tableView.dataSource = self
+        self.favoritesView.tableView.delegate = self
+    }
+}
+
+extension FavoritesViewController: FavoritesViewOutput {
+    func display(movies: [FavoritesViewModel]) {
+        self.viewModels = movies
+        self.favoritesView.tableView.reloadData()
+    }
+    
+    func displayNoResultsFound(for request: String) {
+        //
+    }
+    
+    func displayError() {
+        //
+    }
 }
 
 // MARK: TabBar setup
@@ -61,6 +86,7 @@ extension FavoritesViewController {
 extension FavoritesViewController {
     func fetchFavorites() {
         guard let interactor = self.interactor else {
+            self.displayError()
             return
         }
         

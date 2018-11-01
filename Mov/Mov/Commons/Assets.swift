@@ -26,6 +26,7 @@ struct Colors {
     static let lightYellow = #colorLiteral(red: 0.9690945745, green: 0.8084867597, blue: 0.3556014299, alpha: 1)
     static let darkYellow = #colorLiteral(red: 0.8371319175, green: 0.5835844874, blue: 0.1119432524, alpha: 1)
     static let darkBlue = #colorLiteral(red: 0.1757613122, green: 0.1862640679, blue: 0.2774662971, alpha: 1)
+    static let gray = #colorLiteral(red: 0.8469662666, green: 0.8471121192, blue: 0.8469570279, alpha: 1)
 }
 
 struct Texts {

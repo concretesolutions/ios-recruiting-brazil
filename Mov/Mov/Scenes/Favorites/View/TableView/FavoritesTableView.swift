@@ -23,6 +23,10 @@ class FavoritesTableView: UITableView {
     
     func setup() {
         self.register(FavoritesTableViewCell.self, forCellReuseIdentifier: FavoritesTableView.cellReuseIdentifier)
+        self.bounces = false
+        
+        self.contentInsetAdjustmentBehavior = .never
+        
     }
     
 }

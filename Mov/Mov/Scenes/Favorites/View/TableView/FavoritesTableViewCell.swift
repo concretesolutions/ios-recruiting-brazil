@@ -10,11 +10,13 @@ import UIKit
 
 class FavoritesTableViewCell: UITableViewCell {
 
-    let favoritesUnit = FavoritesUnitView()
+    let favoritesUnit = FavoritesUnitView(frame: .zero)
+    
+    static let defaultHeight = CGFloat(135).proportionalToHeight
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        self.setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,5 +40,4 @@ extension FavoritesTableViewCell: ViewCode {
             make.edges.equalToSuperview()
         }
     }
-    
 }

@@ -11,7 +11,7 @@ import SnapKit
 
 class MovieGridCollectionViewCell: UICollectionViewCell {
     
-    var movieGridUnit = MovieGridUnitView()
+    var movieGridUnit = MovieGridUnitView(frame: .zero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

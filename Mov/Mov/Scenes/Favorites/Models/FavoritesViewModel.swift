@@ -11,14 +11,14 @@ import UIKit
 struct FavoritesViewModel {
     var title: String
     var posterPath: String
-    var year: Int
+    var year: String
     var overview: String
     
     
     init(title: String, posterPath: String, year: Int, overview: String) {
         self.title = title
         self.posterPath = posterPath
-        self.year = year
+        self.year = String(year)
         self.overview = overview
     }
     
