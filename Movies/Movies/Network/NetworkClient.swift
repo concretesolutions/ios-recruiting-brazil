@@ -17,6 +17,8 @@ class NetworkClient {
   
   var totalPages = 0
   
+  var genresLoaded: [Genre]?
+  
   public func fetchPopularMovies(completion: @escaping (Result<[Movie]>) -> Void) {
     currentPage += 1
     let parameters: Parameters = ["sort_by": "popularity.desc", "api_key": MoviesAPI.apiKey, "page": "\(currentPage)"]
@@ -25,7 +27,7 @@ class NetworkClient {
       return
     }
     
-    Alamofire.request(MoviesAPI.popularMoviesURL, parameters: parameters).responseJSON { (response) in
+    Alamofire.request(MoviesAPI.popularMoviesURL, parameters: parameters).responseJSON { response in
       switch response.result {
       case .success:
         if let value = response.result.value {
@@ -56,6 +58,36 @@ class NetworkClient {
     }
   }
   
+  public func getGenres(completion: @escaping (Result<[Genre]>) -> Void) {
+    if let genres = genresLoaded {
+      print("Genres from the memory.")
+      completion(.success(genres))
+      return
+    }
+    
+    let parameters: Parameters = ["api_key": MoviesAPI.apiKey]
+    
+    Alamofire.request(MoviesAPI.genreListURL, parameters: parameters).responseJSON { response in
+      switch response.result {
+      case .success:
+        if let value = response.result.value {
+          let jsonResponse = JSON(value)
+          if let genres = jsonResponse["genres"].array {
+            self.genresLoaded = MovieParser.convertJSONToGenres(genres)
+            completion(.success(self.genresLoaded!))
+            break
+          }
+        }
+        
+        fallthrough
+        
+      case .failure:
+        completion(.failure(MoviesAPIError.unknown))
+      }
+      
+    }
+  }
+  
   public func getImageDownloadURL(fromPath path: String) -> URL {
     guard let url = URL(string: "\(MoviesAPI.imagesURL)/\(path)") else {
       fatalError("Invalid path")
@@ -63,4 +95,5 @@ class NetworkClient {
     
     return url
   }
+  
 }

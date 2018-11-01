@@ -141,6 +141,9 @@
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SAC-qR-YII">
                                                 <rect key="frame" x="177.5" y="95" width="20" height="20"/>
                                             </activityIndicatorView>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="r45-9Z-Qnq">
+                                                <rect key="frame" x="16" y="423.5" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -148,6 +151,7 @@
                                             <constraint firstItem="hRV-Fh-fU4" firstAttribute="bottom" secondItem="3s7-g0-wfX" secondAttribute="bottom" id="1u1-nJ-s7E"/>
                                             <constraint firstItem="t2k-Gi-KC7" firstAttribute="width" secondItem="hRV-Fh-fU4" secondAttribute="width" id="5eg-G3-bZl"/>
                                             <constraint firstItem="SAC-qR-YII" firstAttribute="centerX" secondItem="3s7-g0-wfX" secondAttribute="centerX" id="6wx-7c-93t"/>
+                                            <constraint firstItem="r45-9Z-Qnq" firstAttribute="leading" secondItem="Qrl-4U-J8y" secondAttribute="leading" constant="16" id="DES-5c-1t2"/>
                                             <constraint firstAttribute="trailing" secondItem="SXq-kz-7Pp" secondAttribute="trailing" constant="16" id="E4K-xM-feF"/>
                                             <constraint firstItem="yAT-df-b9v" firstAttribute="leading" secondItem="Qrl-4U-J8y" secondAttribute="leading" constant="16" id="F7X-Dd-6m7"/>
                                             <constraint firstAttribute="trailing" secondItem="SvF-Yk-ErO" secondAttribute="trailing" constant="16" id="FAV-8Y-jZn"/>
@@ -171,6 +175,7 @@
                                             <constraint firstItem="O7M-YX-UL1" firstAttribute="top" secondItem="AWZ-9x-nMt" secondAttribute="bottom" constant="12" id="db4-4g-RFY"/>
                                             <constraint firstAttribute="trailing" secondItem="hRV-Fh-fU4" secondAttribute="trailing" id="iL2-3h-eXF"/>
                                             <constraint firstAttribute="trailing" secondItem="AWZ-9x-nMt" secondAttribute="trailing" constant="16" id="j14-ML-7Hf"/>
+                                            <constraint firstItem="r45-9Z-Qnq" firstAttribute="top" secondItem="SvF-Yk-ErO" secondAttribute="bottom" constant="12" id="nMd-ot-vea"/>
                                             <constraint firstItem="yAT-df-b9v" firstAttribute="top" secondItem="O7M-YX-UL1" secondAttribute="bottom" constant="20" id="nnk-4y-HCj"/>
                                             <constraint firstItem="t2k-Gi-KC7" firstAttribute="centerY" secondItem="hRV-Fh-fU4" secondAttribute="centerY" id="tvy-nF-fFL"/>
                                             <constraint firstItem="t2k-Gi-KC7" firstAttribute="centerX" secondItem="hRV-Fh-fU4" secondAttribute="centerX" id="vyJ-7h-fwb"/>
@@ -204,6 +209,7 @@
                         <outlet property="backdropImageView" destination="3s7-g0-wfX" id="lXr-Sn-Bou"/>
                         <outlet property="backdropInfoView" destination="t2k-Gi-KC7" id="ydb-XJ-E84"/>
                         <outlet property="backdropheightConstraint" destination="zzY-R4-Zvo" id="bSU-Mp-WGT"/>
+                        <outlet property="genreLoadingActivityIndicatorView" destination="r45-9Z-Qnq" id="K7t-8s-8UE"/>
                         <outlet property="genresLabel" destination="u9g-c6-fss" id="IZQ-W9-Uj6"/>
                         <outlet property="gradientView" destination="hRV-Fh-fU4" id="ji6-nM-eUO"/>
                         <outlet property="loadingActivityIndicatorView" destination="SAC-qR-YII" id="fcI-dZ-t6m"/>

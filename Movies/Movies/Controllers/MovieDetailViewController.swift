@@ -21,10 +21,11 @@ class MovieDetailViewController: UIViewController {
   @IBOutlet weak var genresLabel: UILabel!
   @IBOutlet weak var backdropInfoView: UIView!
   @IBOutlet weak var loadingActivityIndicatorView: UIActivityIndicatorView!
+  @IBOutlet weak var genreLoadingActivityIndicatorView: UIActivityIndicatorView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureView(withMovie: movie)
+    configureView()
   }
   
   enum ViewState {
@@ -35,6 +36,11 @@ class MovieDetailViewController: UIViewController {
   enum FavoriteState {
     case favorite
     case notFavorite
+  }
+  
+  enum GenreLoadingState {
+    case loading
+    case loaded
   }
   
   var currentViewState: ViewState! {
@@ -70,6 +76,21 @@ class MovieDetailViewController: UIViewController {
     }
   }
   
+  var currentGenreLoadingState: GenreLoadingState! {
+    didSet {
+      switch currentGenreLoadingState! {
+      case .loaded:
+        genreLoadingActivityIndicatorView.stopAnimating()
+        genreLoadingActivityIndicatorView.isHidden = true
+        genresLabel.isHidden = false
+      case .loading:
+        genreLoadingActivityIndicatorView.startAnimating()
+        genreLoadingActivityIndicatorView.isHidden = false
+        genresLabel.isHidden = true
+      }
+    }
+  }
+  
   @objc func toggleFavorite() {
     if currentFavoriteState == .favorite {
       currentFavoriteState = .notFavorite
@@ -78,7 +99,7 @@ class MovieDetailViewController: UIViewController {
     }
   }
   
-  func configureView(withMovie movie: Movie) {
+  func configureView() {
     setupGradientView()
     
     backdropInfoView.isHidden = true
@@ -99,6 +120,18 @@ class MovieDetailViewController: UIViewController {
       }
     }
     
+    currentGenreLoadingState = .loading
+    NetworkClient.shared.getGenres { (result) in
+      switch result {
+      case .success(let genres):
+        self.genresLabel.text = self.getGenresName(fromGenresArray: genres).joined(separator: ", ")
+        self.currentGenreLoadingState = .loaded
+      case .failure:
+        print("error")
+      }
+
+    }
+    
     ratingLabel.text = String(format: "Rating: %.1f/10", movie.voteAverage)
     yearLabel.text = "\(Calendar.current.component(.year, from: movie.releaseDate))"
     overviewLabel.text = movie.overview
@@ -114,4 +147,12 @@ class MovieDetailViewController: UIViewController {
     gradientView.layer.addSublayer(gradientLayer)
   }
   
+  func getGenresName(fromGenresArray genres: [Genre]) -> [String] {
+    let genresName = movie.genresID.map { (currentId) -> String in
+      let filteredGenres = genres.filter {$0.identificator == currentId}
+      return filteredGenres[0].name
+    }
+    
+    return genresName
+  }
 }

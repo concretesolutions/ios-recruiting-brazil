@@ -15,7 +15,8 @@ final class MovieParser {
       let title = json["title"].string,
       let voteAverage = json["vote_average"].double,
       let releaseDateString = json["release_date"].string,
-      let overview = json["overview"].string else {
+      let overview = json["overview"].string,
+      let genresID = json["genre_ids"].arrayObject as? [Int] else {
         fatalError("Failed to parse a movie object")
     }
     
@@ -42,7 +43,16 @@ final class MovieParser {
       fatalError("Failed to create the date from the formater")
     }
     
-    return Movie(identificator: identificator, title: title, posterPath: posterPath, voteAverage: voteAverage, releaseDate: releaseDate, isFavorite: false, overview: overview, backdropPath: backdropPath)
+    return Movie(identificator: identificator,
+                 title: title,
+                 posterPath: posterPath,
+                 voteAverage: voteAverage,
+                 releaseDate: releaseDate,
+                 isFavorite: false,
+                 overview: overview,
+                 backdropPath: backdropPath,
+                 genresID: genresID
+    )
   }
   
   public static func convertJSONResultsToMovies(_ results: [JSON]) -> [Movie] {
@@ -51,6 +61,16 @@ final class MovieParser {
     }
     
     return movies
+  }
+  
+  public static func convertJSONToGenres(_ genres: [JSON]) -> [Genre] {
+    return genres.map({ (json) -> Genre in
+      if let name = json["name"].string, let identificator = json["id"].int {
+        return Genre(identificator: identificator, name: name)
+      } else {
+        fatalError("Could not parse genre")
+      }
+    })
   }
   
 }

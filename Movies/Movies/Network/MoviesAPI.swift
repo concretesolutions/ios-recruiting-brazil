@@ -36,4 +36,12 @@ struct MoviesAPI {
     return url
   }
   
+  static var genreListURL: URL {
+    guard let url = URL(string: "\(baseURL.absoluteString)/genre/movie/list") else {
+      fatalError("Incorrect genreListURL url")
+    }
+    
+    return url
+  }
+  
 }

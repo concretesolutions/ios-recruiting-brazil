@@ -136,6 +136,17 @@ class MoviesCollectionViewController: UICollectionViewController {
     navigationItem.hidesSearchBarWhenScrolling = false
   }
   
+  fileprivate func loadGenres() {
+    NetworkClient.shared.getGenres { (result) in
+      switch result {
+      case .failure(let error):
+        print(error)
+      case .success:
+        print("Genres loaded")
+      }
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -149,6 +160,8 @@ class MoviesCollectionViewController: UICollectionViewController {
     setupSubviews()
     
     fetchMovies()
+    
+    loadGenres()
     
     launchScreenAnimation()
   }
@@ -210,7 +223,7 @@ extension MoviesCollectionViewController: CollectionViewdidSelectItemDelegate {
     } else {
       aMovie = moviesDataSource.movies[indexPath.row]
     }
-    
+
     self.performSegue(withIdentifier: "movieToDetailViewSegue", sender: aMovie)
   }
   

@@ -16,4 +16,5 @@ struct Movie {
   let isFavorite: Bool
   let overview: String
   let backdropPath: String
+  let genresID: [Int]
 }
