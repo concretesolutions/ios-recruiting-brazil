@@ -134,7 +134,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     func display(movies: [MainScreen.ViewModel.MovieViewModel]) {
         self.displayedMovies = movies
         self.applicationStatus = .finish
-        if movies.isEmpty {
+        if movies.isEmpty && isFiltering {
             self.applicationStatus = .emptyList
         }
         DispatchQueue.main.async {

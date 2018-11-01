@@ -70,3 +70,21 @@ extension Movie: Decodable {
         genreIDS = try movieContainer.decode([Int].self, forKey: .genreIDS)
     }
 }
+
+extension Movie {
+    func movieGenresString() -> String {
+        let genres = self.genreIDS.map { (id) -> String in
+            return Genre.fetchedGenres[id] ?? "Uknown"
+        }
+        return genres.joined(separator: ", ")
+    }
+    
+    func yearString() -> String {
+        let calendar = Calendar.current
+        if let date = self.releaseDate {
+            return "\(calendar.component(.year, from: date))"
+        } else {
+            return ""
+        }
+    }
+}

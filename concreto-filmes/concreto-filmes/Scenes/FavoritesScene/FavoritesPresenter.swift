@@ -11,12 +11,20 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol FavoritesPresentationLogic {
-  
+    func present(movies: [FavoriteMovie])
 }
 
 class FavoritesPresenter: FavoritesPresentationLogic {
-  weak var viewController: FavoritesDisplayLogic?
-  
+    weak var viewController: FavoritesDisplayLogic?
+    
+    func present(movies: [FavoriteMovie]) {
+        let displayedMovies = movies.map { (movie) -> Favorites.ViewModel.movie in
+            return Favorites.ViewModel.movie(title: movie.title, overview: movie.overview, releaseYear: movie.releaseDate, imageUrl: movie.imageUrl)
+        }
+        viewController?.display(movies: displayedMovies)
+    }
+    
 }

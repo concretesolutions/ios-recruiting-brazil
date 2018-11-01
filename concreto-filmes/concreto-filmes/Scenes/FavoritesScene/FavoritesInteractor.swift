@@ -18,17 +18,20 @@ protocol FavoritesBusinessLogic {
 }
 
 protocol FavoritesDataStore {
-    var movies: Results<FavoriteMovie>? { get set }
+    var movies: [FavoriteMovie] { get set }
 }
 
 class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
     var presenter: FavoritesPresentationLogic?
     var worker: FavoritesWorker?
     var realm = RealmService.shared.realm
-    var movies: Results<FavoriteMovie>?
+    var movies: [FavoriteMovie] = []
     
     func presentMovies() {
-        
+        if let realmMovies: Results<FavoriteMovie> = realm?.objects(FavoriteMovie.self) {
+            self.movies = Array(realmMovies)
+            presenter?.present(movies: self.movies)
+        }
     }
     
 }

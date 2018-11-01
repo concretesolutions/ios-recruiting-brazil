@@ -28,6 +28,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     
     var didFavorite : (() -> Void)?
     var didUnfavorite : (() -> Void)?
+    var displayedMovie: MovieDetail.ViewModel
     
     var viewState: FavoriteViewState = .notFavourited {
         didSet {
@@ -94,17 +95,18 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     }()
 
     // MARK: Object lifecycle
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    
+    init(viewModel: MovieDetail.ViewModel) {
+        self.displayedMovie = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.hidesBottomBarWhenPushed = true
         setup()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: Setup
 
     private func setup() {
@@ -133,13 +135,13 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
             }
         }
     }
-
+    
     // MARK: View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        interactor?.presentMovie()
+        displayMovie(viewModel: self.displayedMovie)
     }
 
     func displayMovie(viewModel: MovieDetail.ViewModel) {

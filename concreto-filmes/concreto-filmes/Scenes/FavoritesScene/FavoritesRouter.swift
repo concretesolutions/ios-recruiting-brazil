@@ -11,47 +11,33 @@
 //
 
 import UIKit
+import RealmSwift
 
 @objc protocol FavoritesRoutingLogic {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToMovieDetail(shouldFilter: Bool, index: Int)
 }
 
 protocol FavoritesDataPassing {
-  var dataStore: FavoritesDataStore? { get }
+    var dataStore: FavoritesDataStore? { get }
 }
 
 class FavoritesRouter: NSObject, FavoritesRoutingLogic, FavoritesDataPassing {
-  weak var viewController: FavoritesViewController?
-  var dataStore: FavoritesDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: FavoritesViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: FavoritesDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+    weak var viewController: FavoritesViewController?
+    var dataStore: FavoritesDataStore?
+    let realm = RealmService.shared.realm
+    // MARK: Routing
+    
+    func routeToMovieDetail(shouldFilter: Bool, index: Int) {
+        guard let sourceVC = viewController else { return }
+        if let movie = dataStore?.movies[index] {
+            let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
+            let movieViewModel = MovieDetail.ViewModel(movieImageURL: movie.imageUrl, title: movie.title, genres: movie.genres, overview: movie.overview, releaseDate: movie.releaseDate, isFavorite: isFavorite)
+            let destinationVC = MovieDetailViewController(viewModel: movieViewModel)
+            navigateToMovieDetail(source: sourceVC, destination: destinationVC)
+        }
+    }
+    
+    func navigateToMovieDetail(source: FavoritesViewController, destination: MovieDetailViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
 }

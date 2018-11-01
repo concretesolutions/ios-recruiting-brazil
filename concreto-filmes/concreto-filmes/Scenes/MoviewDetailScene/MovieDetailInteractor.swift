@@ -13,7 +13,6 @@
 import UIKit
 
 protocol MovieDetailBusinessLogic {
-    func presentMovie()
     func toggleFavoriteMovie()
 }
 
@@ -26,13 +25,6 @@ class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore {
     var presenter: MovieDetailPresentationLogic?
     var worker: MovieDetailWorker?
     let realm = RealmService.shared.realm
-
-    func presentMovie() {
-        guard let movie = self.movie else {
-            return
-        }
-        self.presenter?.presentMovie(movie: movie)
-    }
     
     func toggleFavoriteMovie() {
         if let movie = movie {

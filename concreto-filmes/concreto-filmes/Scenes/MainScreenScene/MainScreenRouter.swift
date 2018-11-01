@@ -23,22 +23,17 @@ protocol MainScreenDataPassing {
 class MainScreenRouter: NSObject, MainScreenRoutingLogic, MainScreenDataPassing {
     weak var viewController: MainScreenViewController?
     var dataStore: MainScreenDataStore?
+    let realm = RealmService.shared.realm
 
     // MARK: Routing
 
     func routeToMovieDetail(shouldFilter: Bool, index: Int) {
         guard let sourceVC = viewController else { return }
-        let destinationVC = MovieDetailViewController()
-        var destinationDataStore = destinationVC.router?.dataStore
-        passDataToDetailScreen(source: dataStore, destination: &destinationDataStore, shouldFilter: shouldFilter, index: index)
-        navigateToMovieDetail(source: sourceVC, destination: destinationVC)
-    }
-
-    func passDataToDetailScreen(source: MainScreenDataStore?, destination: inout MovieDetailDataStore?, shouldFilter: Bool, index: Int) {
-        if shouldFilter {
-            destination?.movie = source?.filteredMovies[index]
-        } else {
-            destination?.movie = source?.movies[index]
+        if let dataStore = self.dataStore {
+            let movie = shouldFilter ? dataStore.filteredMovies[index] : dataStore.movies[index]
+            let isFavorite = self.realm?.object(ofType: FavoriteMovie.self, forPrimaryKey: movie.id) != nil
+            let destinationVC = MovieDetailViewController(viewModel: MovieDetail.ViewModel(movieImageURL: movie.posterPath ?? "", title: movie.title, genres: movie.movieGenresString(), overview: movie.overview, releaseDate: movie.yearString(), isFavorite: isFavorite))
+            navigateToMovieDetail(source: sourceVC, destination: destinationVC)
         }
     }
 

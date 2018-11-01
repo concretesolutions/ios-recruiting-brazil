@@ -13,13 +13,14 @@
 import UIKit
 
 protocol FavoritesDisplayLogic: class {
-    
+    func display(movies: [Favorites.ViewModel.movie])
 }
 
 class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
     var interactor: FavoritesBusinessLogic?
     var router: (NSObjectProtocol & FavoritesRoutingLogic & FavoritesDataPassing)?
     var displayedMovies: [Favorites.ViewModel.movie] = []
+    var cellId = "favoritesCustomCell"
     
     // MARK: Object lifecycle
     
@@ -59,6 +60,17 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
         super.viewDidLoad()
         setupView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        interactor?.presentMovies()
+    }
+    
+    func display(movies: [Favorites.ViewModel.movie]) {
+        self.displayedMovies = movies
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension FavoritesViewController: CodeView {
@@ -71,7 +83,10 @@ extension FavoritesViewController: CodeView {
     }
     
     func setupAdditionalConfiguration() {
-        
+        self.tableView.backgroundColor = .black
+        self.tableView.separatorStyle = .none
+        self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
 }

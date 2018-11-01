@@ -19,6 +19,7 @@ enum Favorites {
             var title: String
             var overview: String
             var releaseYear: String
+            var imageUrl: String
         }
     }
     
