@@ -11,22 +11,37 @@ import UIKit
 class MoviesDataSource: NSObject, UICollectionViewDataSource {
   
   var movies: [Movie]
+  var filteredMovies = [Movie]()
   var posterHeight: CGFloat
+  var searchController: UISearchController
+  var updateCollectionDelegate: UpdateCollectionDelegate
   
-  init(posterHeight: CGFloat) {
+  init(posterHeight: CGFloat, searchController: UISearchController, updateCollectionDelegate: UpdateCollectionDelegate) {
     movies = []
     self.posterHeight = posterHeight
+    self.searchController = searchController
+    self.updateCollectionDelegate = updateCollectionDelegate
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-    cell.configure(withMovie: movies[indexPath.row])
+    
+    if !isFiltering() {
+      cell.configure(withMovie: movies[indexPath.row])
+    } else {
+      cell.configure(withMovie: filteredMovies[indexPath.row])
+    }
+    
     cell.posterHeightLayoutConstraint.constant = posterHeight
     collectionView.layoutIfNeeded()
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    if isFiltering() {
+      return filteredMovies.count
+    }
+    
     return movies.count
   }
   
@@ -35,4 +50,39 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
     cell.isHidden = true
     return cell
   }
+  
+}
+
+extension MoviesDataSource: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    filterContent(forSearchedText: searchController.searchBar.text!)
+  }
+  
+  func filterContent(forSearchedText searchedText: String) {
+    filteredMovies = movies.filter { (movie) -> Bool in
+      return movie.title.lowercased().contains(searchedText.lowercased())
+    }
+    
+    if filteredMovies.isEmpty && !searchedText.isEmpty {
+      updateCollectionDelegate.handleResult(hasResults: false, forSearchedString: searchedText)
+    } else {
+      updateCollectionDelegate.handleResult(hasResults: true, forSearchedString: searchedText)
+    }
+    
+    updateCollectionDelegate.updateCollection()
+  }
+  
+  func searchBarIsEmpty() -> Bool {
+    return searchController.searchBar.text?.isEmpty ?? true
+  }
+  
+  func isFiltering() -> Bool {
+    return searchController.isActive && !searchBarIsEmpty()
+  }
+  
+}
+
+protocol UpdateCollectionDelegate: class {
+  func updateCollection()
+  func handleResult(hasResults: Bool, forSearchedString string: String)
 }

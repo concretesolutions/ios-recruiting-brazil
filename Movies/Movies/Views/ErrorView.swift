@@ -9,6 +9,7 @@
 import UIKit
 
 class ErrorView: UIView {
+  
   var errorMessageLabel: UILabel = {
     let label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
     label.textColor = .gray
@@ -54,4 +55,5 @@ class ErrorView: UIView {
   @objc func tryAgainButtonTapped() {
     tryAgainButtonHandler()
   }
+  
 }

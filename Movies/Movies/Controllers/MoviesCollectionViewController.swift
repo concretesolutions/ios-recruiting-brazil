@@ -9,6 +9,7 @@
 import UIKit
 
 class MoviesCollectionViewController: UICollectionViewController {
+  
   var moviesDataSource: MoviesDataSource!
   
   var moviesDelegate: MoviesCollectionViewDelegate!
@@ -17,14 +18,19 @@ class MoviesCollectionViewController: UICollectionViewController {
   
   var errorView: ErrorView!
   
+  var noResultsView: NoResultsView!
+  
   var isUpdating = false
   
   var tabBarDelegate: TabBarControllerDelegate!
   
+  var searchController: UISearchController!
+
   enum ViewState {
     case loading
     case success
     case error(String)
+    case searchNotFound(String)
   }
   
   var currentViewState: ViewState! {
@@ -33,13 +39,21 @@ class MoviesCollectionViewController: UICollectionViewController {
       case .error(let errorMessage):
         errorView.isHidden = false
         loadingView.isHidden = true
+        noResultsView.isHidden = true
         print(errorMessage)
       case .success:
         errorView.isHidden = true
         loadingView.isHidden = true
+        noResultsView.isHidden = true
       case .loading:
         loadingView.isHidden = false
         errorView.isHidden = true
+        noResultsView.isHidden = true
+      case .searchNotFound(let searchString):
+        loadingView.isHidden = true
+        errorView.isHidden = true
+        noResultsView.isHidden = false
+        noResultsView.setSearchString(searchString)
       }
     }
   }
@@ -92,7 +106,8 @@ class MoviesCollectionViewController: UICollectionViewController {
   
   fileprivate func setupCollectionView() {
     moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width, delegate: self)
-    moviesDataSource = MoviesDataSource(posterHeight: moviesDelegate.newPosterHeight)
+    moviesDataSource = MoviesDataSource(posterHeight: moviesDelegate.newPosterHeight, searchController: searchController, updateCollectionDelegate: self)
+    searchController.searchResultsUpdater = moviesDataSource
     self.collectionView.delegate = moviesDelegate
     self.collectionView.dataSource = moviesDataSource
     collectionView.register(cellType: MovieCollectionViewCell.self)
@@ -106,16 +121,28 @@ class MoviesCollectionViewController: UICollectionViewController {
     errorView = ErrorView(tryAgainButtonHandler: fetchMovies)
     errorView.frame.origin = CGPoint(x: view.center.x - errorView.frame.width / 2, y: view.center.y - 20)
     view.addSubview(errorView)
+    
+    noResultsView = NoResultsView()
+    noResultsView.frame.origin = CGPoint(x: view.center.x - noResultsView.frame.width / 2, y: view.center.y - 150)
+    view.addSubview(noResultsView)
+  }
+  
+  fileprivate func setupSearchController() {
+    searchController = UISearchController(searchResultsController: nil)
+    navigationItem.searchController = searchController
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = "Search Movies"
+    definesPresentationContext = true
+    navigationItem.hidesSearchBarWhenScrolling = false
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationItem.searchController = UISearchController(searchResultsController: nil)
-    navigationItem.hidesSearchBarWhenScrolling = false
-    
     tabBarDelegate = TabBarControllerDelegate(delegate: self)
     tabBarController?.delegate = tabBarDelegate
+    
+    setupSearchController()
     
     setupCollectionView()
     
@@ -135,7 +162,7 @@ extension MoviesCollectionViewController: MoviesCollectionViewUpdateDelegate {
   }
   
   func canShowFooter() -> Bool {
-    return !moviesDataSource.movies.isEmpty
+    return !moviesDataSource.movies.isEmpty && !moviesDataSource.isFiltering()
   }
 }
 
@@ -145,4 +172,19 @@ extension MoviesCollectionViewController: TabBarTapDelegate {
       collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
   }
+}
+
+extension MoviesCollectionViewController: UpdateCollectionDelegate {
+  func updateCollection() {
+    collectionView.reloadData()
+  }
+  
+  func handleResult(hasResults: Bool, forSearchedString string: String) {
+    if !hasResults {
+      currentViewState = .searchNotFound(string)
+    } else {
+      currentViewState = .success
+    }
+  }
+  
 }
