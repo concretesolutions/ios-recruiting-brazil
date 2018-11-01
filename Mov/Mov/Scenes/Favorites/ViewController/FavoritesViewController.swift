@@ -12,6 +12,16 @@ class FavoritesViewController: UIViewController {
     
     private static let title = "Favorites"
     
+    private(set) var viewModels = [FavoritesViewModel]()
+    
+    var interactor: FavoritesInteractor? {
+        didSet {
+            if let _ = self.interactor, self.viewModels.isEmpty {
+                self.fetchFavorites()
+            } else {/*do nothing*/}
+        }
+    }
+    
     lazy var favoritesView: FavoritesView = {
         return FavoritesView(frame: .zero)
     }()
@@ -44,6 +54,17 @@ extension FavoritesViewController {
     func setTabBarOptions() {
         self.tabBarItem = UITabBarItem(title: FavoritesViewController.title,
                                        image: Images.favoritesIcon, tag: 1)
+    }
+}
+
+// MARK: View Input
+extension FavoritesViewController {
+    func fetchFavorites() {
+        guard let interactor = self.interactor else {
+            return
+        }
+        
+        interactor.fetchFavorites()
     }
 }
 

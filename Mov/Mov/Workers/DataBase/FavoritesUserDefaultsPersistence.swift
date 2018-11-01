@@ -34,14 +34,14 @@ class FavoritesUserDefaultsPersistence: FavoritesPersistence {
     /**
      Return: Set of movies if it succeed to fecth movies. Empty set if there are no saved favorites. Nil if it fail to decode fetched movies.
      */
-    func fetchFavorites() -> Set<Movie>? {
-        guard self.favorites.isEmpty else { return self.favorites }
+    func fetchFavorites() -> [Movie]? {
+        guard self.favorites.isEmpty else { return Array(self.favorites) }
         
         if let savedMovies = self.defaults.object(forKey: FavoritesUserDefaultsPersistence.moviesKey) as? Data {
             let decoder = API.TMDB.decoder
             if let loadedMovies = try? decoder.decode([Movie].self, from: savedMovies) {
                 self.favorites = Set<Movie>(loadedMovies)
-                return self.favorites
+                return Array(self.favorites)
             } else { return nil }
             
         } else { return [] }

@@ -17,5 +17,5 @@ protocol FavoritesPersistence: class {
     @discardableResult
     func toggleFavorite(movie: Movie) -> Bool
     
-    func fetchFavorites() -> Set<Movie>?
+    func fetchFavorites() -> [Movie]?
 }

@@ -15,6 +15,12 @@ struct MovieGridViewModel: Equatable {
     let posterPath: String
     let isFavoriteIcon: UIImage
     
+    
+    // empty path will generate nil url, thus making fetchImage get a placeholder poster
+    static let placeHolder = MovieGridViewModel(id: 0, title: "Movie", posterPath: "", isFavoriteIcon: Images.isFavoriteIconGray)
+}
+
+extension MovieGridViewModel {
     static let imageFetcher: ImageFetcher = ImageKingFisherGateway()
     
     func fetchImage(to imageView: UIImageView) {
@@ -26,9 +32,4 @@ struct MovieGridViewModel: Equatable {
             imageView.image = Images.poster_placeholder
         }
     }
-}
-
-extension MovieGridViewModel {
-    // empty path will generate nil url, thus making fetchImage get a placeholder poster
-    static let placeHolder = MovieGridViewModel(id: 0, title: "Movie", posterPath: "", isFavoriteIcon: Images.isFavoriteIconGray)
 }

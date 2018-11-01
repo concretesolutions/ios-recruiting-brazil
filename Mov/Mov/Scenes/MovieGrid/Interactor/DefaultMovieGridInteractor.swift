@@ -27,7 +27,7 @@ final class DefaultMovieGridInteractor {
         self.persistence = persistence
     }
     
-    private func buildMovieGridUnits(from movies: [Movie]) -> [MovieGridUnit] {
+    private func movieGridUnits(from movies: [Movie]) -> [MovieGridUnit] {
         return movies.map { movie in
             let isFavorite = self.persistence.isFavorite(movie)
             return MovieGridUnit(id: movie.id, title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
@@ -40,7 +40,7 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
     func fetchMovieList(page: Int) {
         // no need to fetch again if requested page was already fetched
         guard page > fetchedPages else {
-            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
+            self.presenter.present(movies: movieGridUnits(from: self.fetchedMovies))
             return
         }
 
@@ -51,7 +51,7 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
             case .success(let movies):
                 self.fetchedMovies = movies
                 self.fetchedPages += 1
-                self.presenter.present(movies: self.buildMovieGridUnits(from: movies))
+                self.presenter.present(movies: self.movieGridUnits(from: movies))
             case .failure:
                 self.presenter.presentNetworkError()
             }
@@ -62,21 +62,21 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
         print(index)
         if let movie = self.fetchedMovies[safe: index] {
             self.persistence.toggleFavorite(movie: movie)
-            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
+            self.presenter.present(movies: movieGridUnits(from: self.fetchedMovies))
         } else {/*do nothing*/}
     }
     
     func filterMoviesBy(string: String) {
         guard !string.isEmpty else {
-            self.presenter.present(movies: buildMovieGridUnits(from: self.fetchedMovies))
+            self.presenter.present(movies: movieGridUnits(from: self.fetchedMovies))
             return
         }
-        let candidates = self.fetchedMovies.filter { movie in
-            movie.title.lowercased().range(of: string.lowercased()) != nil }
+        let candidates = self.fetchedMovies.filter { movie in movie.title.contains(string) }
+        
         if candidates.isEmpty {
             self.presenter.presentNoResultsFound(for: string)
         } else {
-            self.presenter.present(movies: buildMovieGridUnits(from: candidates))
+            self.presenter.present(movies: movieGridUnits(from: candidates))
         }
     }
 }
