@@ -22,6 +22,8 @@
 		25317DB121851C5700B25A81 /* FavoriteMoviesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25317DB021851C5700B25A81 /* FavoriteMoviesFactory.swift */; };
 		25317DB321851D3C00B25A81 /* FavoriteMoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25317DB221851D3C00B25A81 /* FavoriteMoviesPresenter.swift */; };
 		25317DB621851F9300B25A81 /* FavoriteMoviesViewController+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25317DB521851F9300B25A81 /* FavoriteMoviesViewController+TableViewDataSource.swift */; };
+		259C8C88218A78A900BC4585 /* ListMoviesViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C8C87218A78A900BC4585 /* ListMoviesViewControllerSpec.swift */; };
+		259C8C8A218A7AE800BC4585 /* ListMoviesInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C8C89218A7AE800BC4585 /* ListMoviesInteractorSpec.swift */; };
 		25CE2C1C217E3FB90009EF05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE2C1B217E3FB90009EF05 /* AppDelegate.swift */; };
 		25CE2C1E217E3FB90009EF05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE2C1D217E3FB90009EF05 /* ViewController.swift */; };
 		25CE2C21217E3FB90009EF05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25CE2C1F217E3FB90009EF05 /* Main.storyboard */; };
@@ -83,6 +85,8 @@
 		25317DB021851C5700B25A81 /* FavoriteMoviesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesFactory.swift; sourceTree = "<group>"; };
 		25317DB221851D3C00B25A81 /* FavoriteMoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesPresenter.swift; sourceTree = "<group>"; };
 		25317DB521851F9300B25A81 /* FavoriteMoviesViewController+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavoriteMoviesViewController+TableViewDataSource.swift"; path = "Movs/Scenes/ListMovies/View/FavoriteMoviesViewController+TableViewDataSource.swift"; sourceTree = SOURCE_ROOT; };
+		259C8C87218A78A900BC4585 /* ListMoviesViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMoviesViewControllerSpec.swift; sourceTree = "<group>"; };
+		259C8C89218A7AE800BC4585 /* ListMoviesInteractorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMoviesInteractorSpec.swift; sourceTree = "<group>"; };
 		25CE2C18217E3FB90009EF05 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25CE2C1B217E3FB90009EF05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25CE2C1D217E3FB90009EF05 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +178,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		259C8C85218A783300BC4585 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				259C8C86218A783C00BC4585 /* FavoriteMovies */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		259C8C86218A783C00BC4585 /* FavoriteMovies */ = {
+			isa = PBXGroup;
+			children = (
+				259C8C87218A78A900BC4585 /* ListMoviesViewControllerSpec.swift */,
+				259C8C89218A7AE800BC4585 /* ListMoviesInteractorSpec.swift */,
+			);
+			path = FavoriteMovies;
+			sourceTree = "<group>";
+		};
 		25CE2C0F217E3FB90009EF05 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +233,7 @@
 		25CE2C2F217E3FBB0009EF05 /* MovsTests */ = {
 			isa = PBXGroup;
 			children = (
+				259C8C85218A783300BC4585 /* Scenes */,
 				25CE2C30217E3FBB0009EF05 /* MovsTests.swift */,
 				25CE2C32217E3FBB0009EF05 /* Info.plist */,
 			);
@@ -371,6 +393,7 @@
 				25CE2C28217E3FBB0009EF05 /* Sources */,
 				25CE2C29217E3FBB0009EF05 /* Frameworks */,
 				25CE2C2A217E3FBB0009EF05 /* Resources */,
+				74EFBF75426A7D4958B30330 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -493,6 +516,30 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		74EFBF75426A7D4958B30330 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MovsTests/Pods-MovsTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovsTests/Pods-MovsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		985CE9E33A0C599E040BFFDF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -568,6 +615,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				259C8C8A218A7AE800BC4585 /* ListMoviesInteractorSpec.swift in Sources */,
+				259C8C88218A78A900BC4585 /* ListMoviesViewControllerSpec.swift in Sources */,
 				25CE2C31217E3FBB0009EF05 /* MovsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
