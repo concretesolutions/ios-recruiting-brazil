@@ -149,6 +149,8 @@ class MoviesCollectionViewController: UICollectionViewController {
     setupSubviews()
     
     fetchMovies()
+    
+    launchScreenAnimation()
   }
   
 }
@@ -187,4 +189,15 @@ extension MoviesCollectionViewController: UpdateCollectionDelegate {
     }
   }
   
+}
+
+extension MoviesCollectionViewController {
+  func launchScreenAnimation() {
+    tabBarController?.tabBar.isHidden = true
+    let superView = navigationController!.view!
+    let launchScreenAnimationView = LaunchScreenAnimationView(frame: superView.frame)
+    launchScreenAnimationView.animateView(onSuperView: superView) {
+      self.tabBarController?.tabBar.isHidden = false
+    }
+  }
 }

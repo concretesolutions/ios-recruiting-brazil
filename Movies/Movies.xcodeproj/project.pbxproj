@@ -31,6 +31,9 @@
 		C0D66D36218A6E1300BAB163 /* NoResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D66D35218A6E1300BAB163 /* NoResultsView.swift */; };
 		C0EE4C9921891F56003C9580 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE4C9721891F55003C9580 /* MovieCollectionViewCell.swift */; };
 		C0EE4C9B21891F6F003C9580 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EE4C9A21891F6F003C9580 /* MovieCollectionViewCell.xib */; };
+		C0FC673F218AC05900BFF4E8 /* animation.json in Resources */ = {isa = PBXBuildFile; fileRef = C0FC673E218AC05900BFF4E8 /* animation.json */; };
+		C0FC6741218AC1A300BFF4E8 /* LaunchScreenAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FC6740218AC1A300BFF4E8 /* LaunchScreenAnimationView.swift */; };
+		C0FC6743218ACF9000BFF4E8 /* animation2.json in Resources */ = {isa = PBXBuildFile; fileRef = C0FC6742218ACF9000BFF4E8 /* animation2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		C0D66D35218A6E1300BAB163 /* NoResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsView.swift; sourceTree = "<group>"; };
 		C0EE4C9721891F55003C9580 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0EE4C9A21891F6F003C9580 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		C0FC673E218AC05900BFF4E8 /* animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation.json; sourceTree = "<group>"; };
+		C0FC6740218AC1A300BFF4E8 /* LaunchScreenAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenAnimationView.swift; sourceTree = "<group>"; };
+		C0FC6742218ACF9000BFF4E8 /* animation2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +147,8 @@
 		C058CE9E2186FB67008F731E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C0FC6742218ACF9000BFF4E8 /* animation2.json */,
+				C0FC673E218AC05900BFF4E8 /* animation.json */,
 				C058CE942186EAAD008F731E /* Info.plist */,
 				C058CE8F2186EAAD008F731E /* Assets.xcassets */,
 				C0D66D30218A27F300BAB163 /* AssetsManager.swift */,
@@ -193,6 +201,7 @@
 				C09583532189650C00C32BD6 /* LoadingView.swift */,
 				C095835521896F9400C32BD6 /* ErrorView.swift */,
 				C0D66D35218A6E1300BAB163 /* NoResultsView.swift */,
+				C0FC6740218AC1A300BFF4E8 /* LaunchScreenAnimationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C058CE932186EAAD008F731E /* LaunchScreen.storyboard in Resources */,
+				C0FC6743218ACF9000BFF4E8 /* animation2.json in Resources */,
+				C0FC673F218AC05900BFF4E8 /* animation.json in Resources */,
 				C058CE902186EAAD008F731E /* Assets.xcassets in Resources */,
 				C058CE8E2186EAA5008F731E /* Main.storyboard in Resources */,
 				C0EE4C9B21891F6F003C9580 /* MovieCollectionViewCell.xib in Resources */,
@@ -287,14 +298,18 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -347,6 +362,7 @@
 				C058CE9B2186F608008F731E /* FavoritesCollectionViewController.swift in Sources */,
 				C058CE892186EAA5008F731E /* AppDelegate.swift in Sources */,
 				C09583582189851100C32BD6 /* MoviesCollectionViewUpdateDelegate.swift in Sources */,
+				C0FC6741218AC1A300BFF4E8 /* LaunchScreenAnimationView.swift in Sources */,
 				C0D66D31218A27F300BAB163 /* AssetsManager.swift in Sources */,
 				C08AC6592188092200A93011 /* NetworkClient.swift in Sources */,
 				C08AC6A12188308900A93011 /* Result.swift in Sources */,
