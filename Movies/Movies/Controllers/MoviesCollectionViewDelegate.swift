@@ -17,6 +17,7 @@ class MoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
   var posterWidth: CGFloat = 160
   var movieInfoContainerHeight: CGFloat = 66
   var delegate: MoviesCollectionViewUpdateDelegate
+  var controller: UIViewController!
   
   init(frameWidth: CGFloat, delegate: MoviesCollectionViewUpdateDelegate) {
     self.cellWidth = (frameWidth - (margin * (columns + 1))) / columns
@@ -37,4 +38,7 @@ class MoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
     
   }
 
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    controller.performSegue(withIdentifier: "movieToDetailViewSegue", sender: nil)
+  }
 }

@@ -106,6 +106,7 @@ class MoviesCollectionViewController: UICollectionViewController {
   
   fileprivate func setupCollectionView() {
     moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width, delegate: self)
+    moviesDelegate.controller = self
     moviesDataSource = MoviesDataSource(posterHeight: moviesDelegate.newPosterHeight, searchController: searchController, updateCollectionDelegate: self)
     searchController.searchResultsUpdater = moviesDataSource
     self.collectionView.delegate = moviesDelegate
