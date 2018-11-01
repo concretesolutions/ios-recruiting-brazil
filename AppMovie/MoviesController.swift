@@ -23,7 +23,6 @@ class MoviesController: UIViewController{
        let search = UISearchController(searchResultsController: nil)
         search.hidesNavigationBarDuringPresentation = false
         search.dimsBackgroundDuringPresentation = true
-        search.searchBar.backgroundColor = Colors.navigationController.value
         return search
     }()
     

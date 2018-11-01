@@ -40,21 +40,24 @@ class FavoriteTableViewDataSource: NSObject, UITableViewDataSource {
             if let movie = movie {
                 cell.delegate = controller as? FavoriteMovieDelegate 
                 cell.movie = movie
-                if indexPath.row == 0 {
+                
+                switch indexPath.row {
+                case 0:
                     cell.btnFavorite.isHidden = false
                     cell.btnFavorite.setImage(movie.getImage(favorite: movie.favorite), for: .normal)
                     text = movie.originalTitle
-                }else if indexPath.row == 1{
+                case 1:
                     text = movie.releaseDate
-                }else if indexPath.row == 2{
+                case 2:
                     for genre in movie.genre {
                         if let dic = genre as? Dictionary<String, Any> {
                             text = dic["name"] as! String
                         }
-                        
                     }
-                }else {
+                case 3:
                     text = movie.overview
+                default:
+                    text = ""
                 }
                 cell.textInformate.text = text
                 return cell

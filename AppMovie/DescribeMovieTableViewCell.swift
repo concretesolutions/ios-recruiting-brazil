@@ -33,7 +33,6 @@ class DescribeMovieTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.btnFavorite.isHidden = true
-        self.layer.frame.size = textInformate.frame.size
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
