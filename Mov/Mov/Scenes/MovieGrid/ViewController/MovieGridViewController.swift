@@ -72,6 +72,13 @@ final class MovieGridViewController: UIViewController {
         self.state = .collection
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let interactor = self.interactor else { return }
+        interactor.fetchMovieList(page: self.page)
+    }
+    
     override func viewDidLoad() {
         self.setTabBarOptions()
         self.title = MovieGridViewController.title
@@ -157,6 +164,4 @@ extension MovieGridViewController: MovieDetailsNavigator {
         let detailsVC = MovieDetailsBuilder.build(forMovie: movie)
         show(detailsVC, sender: nil)
     }
-    
-    
 }

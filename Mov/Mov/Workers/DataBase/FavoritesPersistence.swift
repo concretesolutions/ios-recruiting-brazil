@@ -10,12 +10,7 @@ import Foundation
 
 protocol FavoritesPersistence: class {
     
-    var favorites: Set<Movie> { get }
+    func toggleFavorite(movie: Movie) throws
     
-    func isFavorite(_ movie: Movie) -> Bool
-    
-    @discardableResult
-    func toggleFavorite(movie: Movie) -> Bool
-    
-    func fetchFavorites() -> [Movie]?
+    func fetchFavorites() throws -> Set<Movie>
 }

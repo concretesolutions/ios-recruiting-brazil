@@ -21,6 +21,8 @@ final class DefaultMovieGridInteractor {
 
     private var fetchedPages = 0
     
+    private var favorites = Set<Movie>()
+    
     init(presenter: MovieGridPresenter, movieFetcher: MovieFetcher, persistence: FavoritesPersistence) {
         self.presenter = presenter
         self.movieFetcher = movieFetcher
@@ -29,7 +31,7 @@ final class DefaultMovieGridInteractor {
     
     private func movieGridUnits(from movies: [Movie]) -> [MovieGridUnit] {
         return movies.map { movie in
-            let isFavorite = self.persistence.isFavorite(movie)
+            let isFavorite = self.favorites.contains(movie)
             return MovieGridUnit(id: movie.id, title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
         }
     }
@@ -40,12 +42,18 @@ final class DefaultMovieGridInteractor {
 extension DefaultMovieGridInteractor: MovieGridInteractor {
     
     func fetchMovieList(page: Int) {
-        // no need to fetch again if requested page was already fetched
+        // fetch updated favorites
+        do {
+            self.favorites = try self.persistence.fetchFavorites()
+        } catch {/*present db error*/}
+        
+        // no need to fetch movies again if requested page was already fetched
         guard page > fetchedPages else {
             self.presenter.present(movies: movieGridUnits(from: self.fetchedMovies))
             return
         }
 
+        // fetch movies
         self.movieFetcher.fetchPopularMovies(page: page) { [weak self] result in
             guard let self = self else { return }
             
@@ -62,8 +70,10 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
     
     func toggleFavoriteMovie(at index: Int) {
         if let movie = self.fetchedMovies[safe: index] {
-            self.persistence.toggleFavorite(movie: movie)
-            self.presenter.present(movies: movieGridUnits(from: self.fetchedMovies))
+            do {
+                try self.persistence.toggleFavorite(movie: movie)
+                self.fetchMovieList(page: self.fetchedPages)
+            } catch {/*present db error*/}
         } else {/*do nothing*/}
     }
     

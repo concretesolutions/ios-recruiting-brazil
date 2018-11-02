@@ -11,7 +11,7 @@ import Foundation
 final class DefaultFavoritesInteractor {
     let presenter: FavoritesPresenter
     let persistence: FavoritesPersistence
-    let favorites = [Movie]()
+    var favorites = [Movie]()
     
     init(presenter: FavoritesPresenter, persistence: FavoritesPersistence) {
         self.presenter = presenter
@@ -26,23 +26,20 @@ final class DefaultFavoritesInteractor {
 extension DefaultFavoritesInteractor: FavoritesInteractor {
     
     func fetchFavorites() {
-        guard self.favorites.isEmpty else {
-            
+        do {
+            let favoritesSet = try self.persistence.fetchFavorites()
+            self.favorites = Array(favoritesSet)
             self.presenter.present(movies: favoritesUnits(from: self.favorites))
-            return
-        }
-        
-        if let favorites = self.persistence.fetchFavorites() {
-            self.presenter.present(movies: favoritesUnits(from: favorites))
-        } else {
+        } catch {
             self.presenter.presentError()
         }
-        
     }
     
     func toggleFavoriteMovie(at index: Int) {
         if let favorite = self.favorites[safe: index] {
-            self.persistence.toggleFavorite(movie: favorite)
+            do {
+                try self.persistence.toggleFavorite(movie: favorite)
+            } catch {/*present db error*/}
         } else {/*do nothing*/}
     }
     
