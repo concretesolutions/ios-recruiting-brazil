@@ -12,7 +12,7 @@ import UIKit
 
 final class MoviesGridCell: UICollectionViewCell {
     
-    struct Data {
+    struct Model {
         let movieImage:UIImage
         let movieTitle:String
         var movieIsFavorite:Bool
@@ -40,10 +40,10 @@ final class MoviesGridCell: UICollectionViewCell {
     
     var settedUp:Bool = false
     
-    func configure(with data: Data) {
-        self.movieImageView.image = data.movieImage
-        self.movieTitleLabel.text = data.movieTitle
-        self.favoriteButton.isSelected = data.movieIsFavorite
+    func configure(with model: Model) {
+        self.movieImageView.image = model.movieImage
+        self.movieTitleLabel.text = model.movieTitle
+        self.favoriteButton.isSelected = model.movieIsFavorite
     }
 }
 

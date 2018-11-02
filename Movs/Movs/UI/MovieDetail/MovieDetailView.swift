@@ -28,15 +28,15 @@ final class MovieDetailView: UIView {
     
     weak var delegate:MovieDetailViewDelegate?
     
-    let data: Data
+    let movieModel: Model
     
-    init(data:Data) {
-        self.data = data
+    init(data:Model) {
+        self.movieModel = data
         super.init(frame: .zero)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.data = aDecoder.decodeObject(forKey: "data") as! Data
+        self.movieModel = aDecoder.decodeObject(forKey: "movieModel") as! Model
         super.init(coder: aDecoder)
     }
     
@@ -94,7 +94,7 @@ final class MovieDetailView: UIView {
         return cell
     }
     
-    struct Data {
+    struct Model {
         let movieImage:UIImage
         let movieTitle:String
         let movieYear:String
@@ -110,12 +110,12 @@ extension MovieDetailView: ViewCode {
         self.backgroundColor = Colors.white.color
         // cells
         var cells = [UITableViewCell]()
-        cells.append(self.createHeaderCell(with: self.data.movieImage,
-                                           text: self.data.movieTitle,
-                                           buttoSelected: self.data.isFavorite))
-        cells.append(self.createLabelCell(with: self.data.movieYear))
-        cells.append(self.createLabelCell(with: self.data.movieGenre))
-        cells.append(self.createLabelCell(with: self.data.movieDescription, multipleLines: true))
+        cells.append(self.createHeaderCell(with: self.movieModel.movieImage,
+                                           text: self.movieModel.movieTitle,
+                                           buttoSelected: self.movieModel.isFavorite))
+        cells.append(self.createLabelCell(with: self.movieModel.movieYear))
+        cells.append(self.createLabelCell(with: self.movieModel.movieGenre))
+        cells.append(self.createLabelCell(with: self.movieModel.movieDescription, multipleLines: true))
         
         self.tableViewDataSource.items = cells
         

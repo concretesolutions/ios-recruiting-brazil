@@ -10,7 +10,7 @@ import UIKit
 
 final class FavoriteMoviesCell: UITableViewCell {
     
-    struct Data {
+    struct Model {
         let movieImage:UIImage
         let movieTitle:String
         let movieYear:String
@@ -67,11 +67,11 @@ final class FavoriteMoviesCell: UITableViewCell {
     
     var settedUp: Bool = false
     
-    func configure(with data:Data) {
-        self.movieImageView.image = data.movieImage
-        self.movieTitleLabel.text = data.movieTitle
-        self.movieYearLabel.text = data.movieYear
-        self.movieDescriptionLabel.text = data.movieDescription
+    func configure(with model:Model) {
+        self.movieImageView.image = model.movieImage
+        self.movieTitleLabel.text = model.movieTitle
+        self.movieYearLabel.text = model.movieYear
+        self.movieDescriptionLabel.text = model.movieDescription
     }
 }
 

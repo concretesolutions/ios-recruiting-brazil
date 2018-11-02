@@ -50,7 +50,7 @@ final class FavoriteMoviesView: UIView {
         didSet { self.refreshUIAcoordingToState() }
     }
     
-    var movieItems:[FavoriteMoviesCell.Data] = [] {
+    var movieItems:[FavoriteMoviesCell.Model] = [] {
         didSet { self.tableViewDataSource.items = self.movieItems }
     }
     

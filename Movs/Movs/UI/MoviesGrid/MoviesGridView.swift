@@ -50,7 +50,7 @@ final class MoviesGridView: UIView {
         }
     }
     
-    var movieItems:[MoviesGridCell.Data] = [] {
+    var movieItems:[MoviesGridCell.Model] = [] {
         didSet {
             self.collectionViewDataSource.items = self.movieItems
         }

@@ -10,9 +10,9 @@ import UIKit
 
 final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
     
-    var items:[MoviesGridCell.Data]
+    var items:[MoviesGridCell.Model]
     
-    init(items:[MoviesGridCell.Data]? = nil) {
+    init(items:[MoviesGridCell.Model]? = nil) {
         self.items = items ?? []
     }
     
