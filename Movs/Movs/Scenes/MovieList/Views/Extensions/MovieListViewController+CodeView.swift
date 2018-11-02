@@ -35,10 +35,11 @@ extension MovieListViewController: CodeView {
     
     func setupAdditionalConfiguration() {
         view.backgroundColor = .white
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.backgroundColor = .white
+        collectionView.keyboardDismissMode = .onDrag
         errorView.isHidden = true
-        if let textFieldSearch = searchBar.value(forKey: "_searchField") as? UITextField {
-            textFieldSearch.backgroundColor = UIColor.Movs.darkYellow
-        }
     }
 }
 

@@ -25,4 +25,15 @@ struct Movie: Decodable {
         case releaseDate = "release_date"
         case title
     }
+    
+    static func movie(from managedObject: NSManagedObject) -> Movie {
+        var movie = Movie(id: 0, genreIds: [], posterPath: "", overview: "", releaseDate: "", title: "")
+        movie.id = managedObject.value(forKey: "id") as! Int
+        movie.genreIds = managedObject.value(forKey: "genreIds") as! [Int]
+        movie.posterPath = managedObject.value(forKey: "posterPath") as! String
+        movie.overview = managedObject.value(forKey: "overview") as! String
+        movie.releaseDate = managedObject.value(forKey: "releaseDate") as! String
+        movie.title = managedObject.value(forKey: "title") as! String
+        return movie
+    }
 }

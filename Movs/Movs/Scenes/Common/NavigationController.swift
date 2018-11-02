@@ -12,20 +12,27 @@ class NavigationController: UINavigationController {
     
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
-        setup()
+        setupView()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
+        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        setupView()
     }
     
-    func setup() {
+}
+
+extension NavigationController: CodeView {
+    
+    func buildViewHierarchy() {}
+    func setupConstraints() {}
+    
+    func setupAdditionalConfiguration() {
         navigationBar.barTintColor = UIColor.Movs.yellow
         navigationBar.tintColor = .black
     }

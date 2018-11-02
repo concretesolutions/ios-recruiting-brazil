@@ -25,21 +25,13 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: 170, height: 242)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        view.dataSource = self
-        view.delegate = self
-        view.backgroundColor = .white
-        view.keyboardDismissMode = .onDrag
         view.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         return view
     }()
     
-    lazy var searchBar: UISearchBar = {
-        let view = UISearchBar(frame: .zero)
-        view.barTintColor = UIColor.Movs.yellow
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.Movs.yellow.cgColor
-        view.placeholder = "Search"
-        view.delegate = self
+    lazy var searchBar: SearchBar = {
+        let view = SearchBar(frame: .zero)
+        view.textChanged = filterMovies
         return view
     }()
     
@@ -59,6 +51,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchMovies()
     }
     

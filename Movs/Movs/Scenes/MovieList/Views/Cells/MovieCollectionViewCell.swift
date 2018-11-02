@@ -90,6 +90,6 @@ extension MovieCollectionViewCell: CodeView {
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UIColor.Movs.gray
+        backgroundColor = UIColor.Movs.darkGray
     }
 }

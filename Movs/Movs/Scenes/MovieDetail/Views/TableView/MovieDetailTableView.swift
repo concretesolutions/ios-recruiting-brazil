@@ -17,13 +17,11 @@ class MovieDetailTableView: UITableView {
     
     lazy var yearCell: MovieDetailLabelCell = {
         let view = MovieDetailLabelCell(frame: .zero)
-        view.label.text = "Year"
         return view
     }()
     
     lazy var genreCell: MovieDetailLabelCell = {
         let view = MovieDetailLabelCell(frame: .zero)
-        view.label.text = "Genre"
         return view
     }()
     

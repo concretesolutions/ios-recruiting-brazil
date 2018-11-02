@@ -22,11 +22,13 @@ class CoreDataWorker: CoreDataWorkingLogic {
         let entity = NSEntityDescription.entity(forEntityName: "MovieEntity", in: managedContext)!
         let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
         
+        let releaseDate = String(movie.releaseDate.split(separator: "-")[0])
+        
         managedObject.setValue(movie.id, forKey: "id")
         managedObject.setValue(movie.genreIds, forKey: "genreIds")
         managedObject.setValue(movie.overview, forKey: "overview")
         managedObject.setValue(movie.posterPath, forKey: "posterPath")
-        managedObject.setValue(movie.releaseDate, forKey: "releaseDate")
+        managedObject.setValue(releaseDate, forKey: "releaseDate")
         managedObject.setValue(movie.title, forKey: "title")
         
         do {
@@ -36,15 +38,15 @@ class CoreDataWorker: CoreDataWorkingLogic {
         }
     }
     
-    // TODO: Finish fetch favorite movies
     func fetchFavoriteMovies() -> [Movie] {
         guard let managedContext = managedContext else { return [] }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieEntity")
         do {
             let result = try managedContext.fetch(fetchRequest)
-            result.forEach { (movie) in
-                print(movie as! NSManagedObject)
+            let favorites = result.map { (movie) -> Movie in
+                return Movie.movie(from: movie as! NSManagedObject)
             }
+            return favorites
         } catch let error {
             print(error)
         }
@@ -67,6 +69,13 @@ class CoreDataWorker: CoreDataWorkingLogic {
             }
         } catch let error {
             print(error)
+        }
+    }
+    
+    func deleteAll() {
+        let movies = fetchFavoriteMovies()
+        movies.forEach { (movie) in
+            self.delete(movie: movie)
         }
     }
     
