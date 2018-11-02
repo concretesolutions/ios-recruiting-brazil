@@ -9,6 +9,7 @@
 import UIKit
 
 protocol MoviesGridViewPresenter: PresenterProtocol {
+    func loadMoreMovies()
     func updateSearchResults(searchText:String?)
 }
 
@@ -45,6 +46,10 @@ extension MoviesGridViewController: MoviesGridViewDelegate {
     func moviesGrid(_ sender: MoviesGridView, didUnfavoriteItemAt indexPath: IndexPath) {
         print("unfavorite:\(indexPath.row)")
     }
+    
+    func moviewGrid(_ sender: MoviesGridView, didDisplayedCellAtLast indexPath: IndexPath) {
+        self.presenter?.loadMoreMovies()
+    }
 }
 
 extension MoviesGridViewController: MoviesGridPresenterView {
@@ -66,6 +71,11 @@ extension MoviesGridViewController: MoviesGridPresenterView {
         self.moviesGrid.movieItems = movies
         self.moviesGrid.state = .grid
         self.moviesGrid.reloadData()
+    }
+    
+    func present(moreMovies:[Movie], startingAt row:Int) {
+        self.moviesGrid.movieItems.append(contentsOf: moreMovies)
+        self.moviesGrid.appendData(startingAt: row)
     }
     
     func presentError() {

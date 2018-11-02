@@ -12,6 +12,7 @@ protocol MoviesGridViewDelegate:AnyObject {
     func moviesGrid(_ sender:MoviesGridView, didSelectItemAt indexPath:IndexPath)
     func moviesGrid(_ sender:MoviesGridView, didFavoriteItemAt indexPath:IndexPath)
     func moviesGrid(_ sender:MoviesGridView, didUnfavoriteItemAt indexPath:IndexPath)
+    func moviewGrid(_ sender:MoviesGridView, didDisplayedCellAtLast indexPath: IndexPath)
 }
 
 final class MoviesGridView: UIView {
@@ -94,6 +95,14 @@ final class MoviesGridView: UIView {
         self.collectionView.reloadData()
     }
     
+    func appendData(startingAt row:Int) {
+        var indexPaths = [IndexPath]()
+        for i in row..<self.collectionViewDataSource.items.count {
+            indexPaths.append(IndexPath(row: i, section: 0))
+        }
+        self.collectionView.insertItems(at: indexPaths)
+    }
+    
     func collectionViewIndexPath(for cell:MoviesGridCell) -> IndexPath {
         return self.collectionView.indexPath(for: cell)!
     }
@@ -128,6 +137,12 @@ extension MoviesGridView: MoviesGridCellDelegate {
 }
 
 extension MoviesGridView: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.collectionViewDataSource.items.count - 1 {
+            self.delegate?.moviewGrid(self, didDisplayedCellAtLast: indexPath)
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.moviesGrid(self, didSelectItemAt: indexPath)

@@ -11,6 +11,7 @@ import Foundation
 protocol MoviesGridPresenterView: ViewProtocol {
     func presentLoading()
     func present(movies:[Movie])
+    func present(moreMovies:[Movie], startingAt row:Int)
     func presentError()
     func presentEmptySearch()
 }
@@ -18,6 +19,9 @@ protocol MoviesGridPresenterView: ViewProtocol {
 final class MoviesGridPresenter: MVPBasePresenter {
     
     private let operation = FetchMoviesOperation()
+    
+    private(set) var isSearching:Bool = false
+    
     private var movies:[Movie] = []
     private var filteredMovies:[Movie] = []
     
@@ -29,7 +33,13 @@ final class MoviesGridPresenter: MVPBasePresenter {
         super.viewDidLoad()
         
         self.operation.onError = { [unowned self] err in
-            self.view?.presentError()
+            if let error = err as? APIError {
+                if error == .badParsing {
+                    self.operation.perform()
+                } else {
+                    self.view?.presentError()
+                }
+            }
         }
         
         self.operation.onSuccess = { [unowned self] movs in
@@ -37,8 +47,11 @@ final class MoviesGridPresenter: MVPBasePresenter {
                 self.movies = movs
                 self.view?.present(movies: movs)
             } else {
-                self.movies.append(contentsOf: movs)
-                //TODO: Increment movies
+                if !self.isSearching {
+                    let row = self.movies.count
+                    self.movies.append(contentsOf: movs)
+                    self.view?.present(moreMovies: movs, startingAt: row)
+                }
             }
         }
         
@@ -48,12 +61,19 @@ final class MoviesGridPresenter: MVPBasePresenter {
 }
 
 extension MoviesGridPresenter: MoviesGridViewPresenter {
+    
+    func loadMoreMovies() {
+        self.operation.performFromNextPage()
+    }
+    
     func updateSearchResults(searchText: String?) {
         guard let text = searchText, !text.isEmpty else {
+            self.isSearching = false
             self.filteredMovies = []
             self.view?.present(movies: self.movies)
             return
         }
+        self.isSearching = true
         
         self.filteredMovies = self.movies.filter {
             return $0.title.contains(text)
