@@ -10,7 +10,15 @@ import Moya
 import Result
 import Foundation
 
-class ListMoviesWorker {
+protocol ListMoviesWorkerProtocol {
+    func fetchPopularMovies(request: ListMovies.Request,
+                            success successCallback: @escaping (MovieList) -> (),
+                            error errorCallback: @escaping (FetchError) -> (),
+                            failure failureCallback: @escaping (FetchError) -> ())
+}
+
+
+class ListMoviesWorker: ListMoviesWorkerProtocol {
   
     fileprivate let provider = MoyaProvider<MovieDB_API>()
     
