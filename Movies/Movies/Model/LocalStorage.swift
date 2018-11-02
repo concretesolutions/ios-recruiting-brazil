@@ -15,12 +15,12 @@ final class LocalStorage {
   var delegate: MovieFavoriteStateChangedDelegate?
   
   enum StorageKeys: String {
-    case favoriteMoviesIds
+    case favoriteMovies
   }
   
   var favoriteMovies: [Movie]? {
     get {
-      if let data = UserDefaults.standard.value(forKey: StorageKeys.favoriteMoviesIds.rawValue) as? Data {
+      if let data = UserDefaults.standard.value(forKey: StorageKeys.favoriteMovies.rawValue) as? Data {
         return try? PropertyListDecoder().decode(Array<Movie>.self, from: data)
       }
       return nil
@@ -28,7 +28,7 @@ final class LocalStorage {
     
     set {
       if let favoriteMovies = newValue {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(favoriteMovies), forKey: StorageKeys.favoriteMoviesIds.rawValue)
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(favoriteMovies), forKey: StorageKeys.favoriteMovies.rawValue)
       }
     }
   }

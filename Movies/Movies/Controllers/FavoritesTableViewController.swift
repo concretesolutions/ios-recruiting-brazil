@@ -20,7 +20,7 @@ class FavoritesTableViewController: UITableViewController {
     navigationItem.hidesSearchBarWhenScrolling = false
     
     tableView.register(cellType: FavoriteTableViewCell.self)
-
+    tableView.tableFooterView = UIView()
   }
   
   override func viewDidAppear(_ animated: Bool) {
