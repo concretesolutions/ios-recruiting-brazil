@@ -205,6 +205,7 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let detailsController = DetailsViewController()
     let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionCell
+    detailsController.originalSizePoster = cell.originalSizePoster
     detailsController.movie = cell.movie
     detailsController.poster = cell.posterImage.image!
     navigationController?.pushViewController(detailsController, animated: true)
@@ -223,36 +224,32 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
 // Mark:  Tratamento do fluxo de erros
 extension MovieViewController {
-  private func emptySeach() {
-    errorMessage.text = "Sua busca por \"\(searchController.searchBar.text!)\" não trouxe nenhum resultado"
-    errorStackView.isHidden = false
-    errorImage.image = #imageLiteral(resourceName: "search_icon.png")
-  }
-  
-  private func unexpectedError() {
-    errorMessage.text = "Ocorreu um erro. Por favor, tente novamente mais tarde."
-    errorImage.image = #imageLiteral(resourceName: "ErrorIcon.png")
-    errorStackView.isHidden = false
-    errorButton.isHidden = false
-    errorButton.setTitle("Tentar Novamente", for: .normal)
-    errorButton.addTarget(self, action: #selector(tapErrorButton), for: .touchUpInside)
-  }
   
   func getError(error: TypeError) {
     switch error {
     case .empty:
-      emptySeach()
+      errorMessage.text = "Sua busca por \"\(searchController.searchBar.text!)\" não trouxe nenhum resultado"
+      errorStackView.isHidden = false
+      errorImage.image = #imageLiteral(resourceName: "search_icon.png")
     case .unexpected:
-      unexpectedError()
+      errorMessage.text = "Ocorreu um erro. Por favor, tente novamente mais tarde."
+      errorImage.image = #imageLiteral(resourceName: "ErrorIcon.png")
+      errorStackView.isHidden = false
+      errorButton.isHidden = false
+      errorButton.setTitle("Tentar Novamente", for: .normal)
+      errorButton.addTarget(self, action: #selector(tapErrorButton), for: .touchUpInside)
     case .noError:
       errorStackView.isHidden = true
       errorButton.isHidden = true
-      
+    case .noData:
+      errorStackView.isHidden = false
+      errorButton.isHidden = false
+      errorMessage.text = "Desculpe, mas parece que não temos filmes no momento."
+      errorButton.setTitle("Carregar Novamente", for: .normal)
     }
   }
   
   @objc private func tapErrorButton() {
-    print("estou funcionando")
     getMovies()
   }
 }
@@ -262,4 +259,5 @@ enum TypeError {
   case empty
   case unexpected
   case noError
+  case noData
 }

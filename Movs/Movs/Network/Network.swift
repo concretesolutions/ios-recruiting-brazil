@@ -50,11 +50,10 @@ class Network {
   }
   
   func requestImage(imageName: String ,completion: @escaping (Result<UIImage?>) -> ()) {
-    guard let url = URL(string: "https://image.tmdb.org/t/p/w185\(imageName)") else {return}
+    guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(imageName)") else {return}
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     let config = URLSessionConfiguration.default
-    config.requestCachePolicy = .reloadIgnoringLocalCacheData
     let session = URLSession(configuration: config)
     let task = session.dataTask(with: request) { (responseData, response, responseError) in
       DispatchQueue.main.async {
@@ -79,7 +78,6 @@ class Network {
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     let config = URLSessionConfiguration.default
-    config.requestCachePolicy = .reloadIgnoringLocalCacheData
     let session = URLSession(configuration: config)
     let task = session.dataTask(with: request) { (responseData, response, responseError) in
       DispatchQueue.main.async {
@@ -109,7 +107,6 @@ class Network {
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     let config = URLSessionConfiguration.default
-    config.requestCachePolicy = .reloadIgnoringLocalCacheData
     let session = URLSession(configuration: config)
     let task = session.dataTask(with: request) { (responseData, response, responseError) in
       DispatchQueue.main.async {

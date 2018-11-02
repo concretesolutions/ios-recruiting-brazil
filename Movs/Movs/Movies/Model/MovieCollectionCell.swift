@@ -12,6 +12,7 @@ class MovieCollectionCell: UICollectionViewCell {
   var movie: PopularMovie!
   private var isLiked = false
   private var id = 0
+  var originalSizePoster = CGSize()
   private var bottomView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -67,6 +68,7 @@ class MovieCollectionCell: UICollectionViewCell {
       switch result {
       case .success(let image):
         self.posterImage.image = image
+        self.originalSizePoster = (image?.size)!
       case .failure(let error):
         print("error: \(error.localizedDescription)")
       }

@@ -11,6 +11,7 @@ import UIKit
 class DetailsViewController: UIViewController {
   
   private var isLiked = false
+  var originalSizePoster: CGSize!
   var poster: UIImage!
   var movie: PopularMovie!
   var genres = [Genre]()
@@ -26,11 +27,12 @@ class DetailsViewController: UIViewController {
   lazy var posterImageView: UIImageView = {
     let imageview = UIImageView()
     imageview.image = poster
-    imageview.contentMode = .scaleAspectFit
-    imageview.sizeToFit()
     imageview.layer.borderColor = UIColor.black.withAlphaComponent(0.6).cgColor
     imageview.layer.borderWidth = 0.5
+    let size = imageview.getImageRatioBasedOnSize(originalSizePoster)
     imageview.translatesAutoresizingMaskIntoConstraints = false
+    imageview.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+    imageview.widthAnchor.constraint(equalToConstant: size.width).isActive = true
     return imageview
   }()
   

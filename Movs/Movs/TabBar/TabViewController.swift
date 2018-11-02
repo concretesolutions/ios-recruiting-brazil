@@ -15,7 +15,7 @@ class TabViewController: UITabBarController {
         super.viewDidLoad()
       tabBar.barTintColor = UIColor.mango
       let controller1 = MovieViewController()
-      let controller2 = Favorites()
+      let controller2 = FavoritesViewController()
       controller1.tabBarItem = UITabBarItem(title: "Filmes", image: #imageLiteral(resourceName: "list_icon.png").withRenderingMode(.alwaysOriginal), tag: 0)
       controller1.tabBarItem.selectedImage = #imageLiteral(resourceName: "list_icon.png")
       controller2.tabBarItem = UITabBarItem(title: "Favoritos", image: #imageLiteral(resourceName: "favorite_empty_icon.png").withRenderingMode(.alwaysOriginal), tag: 1)

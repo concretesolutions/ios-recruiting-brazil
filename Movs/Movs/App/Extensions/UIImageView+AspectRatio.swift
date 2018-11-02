@@ -14,7 +14,6 @@ extension UIImageView {
     let screenWidth = UIScreen.main.bounds.width - margin
     let ratio =  imgSize.height / imgSize.width
     let newHeight = screenWidth * ratio
-    self.frame.size = CGSize(width: screenWidth, height: newHeight)
     return CGSize(width: screenWidth, height: newHeight)
   }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class FavoritesCell: UITableViewCell {
   
+  var movie: PopularMovie!
+  
   var posterImage: UIImageView = {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +47,7 @@ class FavoritesCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    //selectionStyle = .none
     setupView()
   }
   
@@ -52,21 +55,15 @@ class FavoritesCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configureCell(id: Int) {
-    Network.shared.requestMovieById(id: id) { (result) in
+  func configureCell(movie: PopularMovie) {
+    self.movie = movie
+    self.title.text = movie.title
+    self.date.text = "\(self.getDate(stringDate: (movie.release_date)).year!)"
+    self.overview.text = movie.overview.isEmpty ? "sem descrição*" : movie.overview
+    Network.shared.requestImage(imageName: movie.poster_path) { (result) in
       switch result {
-      case .success(let movie):
-        self.title.text = movie?.title
-        self.date.text = "\(self.getDate(stringDate: (movie?.release_date)!).year!)"
-        self.overview.text = (movie?.overview.isEmpty)! ? "sem descrição*" : movie?.overview
-        Network.shared.requestImage(imageName: (movie?.poster_path)!) { (result) in
-          switch result {
-          case .success(let image):
-            self.posterImage.image = image
-          case .failure(let error):
-            print("error: \(error.localizedDescription)")
-          }
-        }
+      case .success(let image):
+        self.posterImage.image = image
       case .failure(let error):
         print("error: \(error.localizedDescription)")
       }
