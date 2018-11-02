@@ -18,40 +18,53 @@ final class LocalStorage {
     case favoriteMoviesIds
   }
   
-  var favoriteMoviesIds: [Int]? {
+  var favoriteMovies: [Movie]? {
     get {
-      return UserDefaults.standard.array(forKey: StorageKeys.favoriteMoviesIds.rawValue) as? [Int]
+      if let data = UserDefaults.standard.value(forKey: StorageKeys.favoriteMoviesIds.rawValue) as? Data {
+        return try? PropertyListDecoder().decode(Array<Movie>.self, from: data)
+      }
+      return nil
     }
     
     set {
-      if let ids = newValue {
-        UserDefaults.standard.set(ids, forKey: StorageKeys.favoriteMoviesIds.rawValue)
+      if let favoriteMovies = newValue {
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(favoriteMovies), forKey: StorageKeys.favoriteMoviesIds.rawValue)
       }
     }
   }
   
   func addFavorite(movie: Movie) {
-    if var ids = favoriteMoviesIds {
-      ids.append(movie.identificator)
-      favoriteMoviesIds = ids
+    var favoriteMovie = movie
+    favoriteMovie.isFavorite = true
+    
+    if var movies = favoriteMovies {
+      movies.append(favoriteMovie)
+      favoriteMovies = movies
     } else {
-      favoriteMoviesIds = [movie.identificator]
+      favoriteMovies = [favoriteMovie]
     }
     
     delegate?.movie(movie, changedToFavorite: true)
   }
   
   func removeFavorite(movie: Movie) {
-    if let ids = favoriteMoviesIds {
-      let newIds = ids.filter {$0 != movie.identificator}
-      favoriteMoviesIds = newIds
+    if let movies = favoriteMovies {
+      let newFavoriteMovies = movies.filter {$0.identificator != movie.identificator}
+      favoriteMovies = newFavoriteMovies
       delegate?.movie(movie, changedToFavorite: false)
     }
   }
   
   func isFavoriteMovie(byId movieId: Int) -> Bool {
-    if let ids = favoriteMoviesIds {
-      return ids.contains(movieId)
+    if let movies = favoriteMovies {
+      var favorite = false
+      movies.forEach { (movie) in
+        if movieId == movie.identificator {
+          favorite = true
+        }
+      }
+      
+      return favorite
     } else {
       return false
     }

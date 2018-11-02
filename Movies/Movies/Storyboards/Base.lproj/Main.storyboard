@@ -288,6 +288,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="oAw-hW-vx8" kind="show" identifier="favoriteToDetailViewSegue" id="Qpa-St-RJi"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Thv-vw-OhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -337,4 +340,7 @@
         <image name="movie2" width="500" height="281"/>
         <image name="star" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Qpa-St-RJi"/>
+    </inferredMetricsTieBreakers>
 </document>
