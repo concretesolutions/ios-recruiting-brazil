@@ -25,7 +25,7 @@ class FavoritesTableViewController: UITableViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     if let movies = LocalStorage.shared.favoriteMovies {
-      favoriteMovies = movies
+      favoriteMovies = movies.reversed() 
       tableView.reloadData()
     }
   }
@@ -57,4 +57,17 @@ class FavoritesTableViewController: UITableViewController {
       }
     }
   }
+  
+  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      LocalStorage.shared.removeFavorite(movie: favoriteMovies[indexPath.row])
+      favoriteMovies.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+  }
+  
 }
