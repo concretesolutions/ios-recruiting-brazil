@@ -13,16 +13,15 @@ class TabViewController: UITabBarController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-      //    let controller = ViewController()
-      //    let navigation = UINavigationController(rootViewController: controller)
+      tabBar.barTintColor = UIColor.mango
       let controller1 = MovieViewController()
-      let controller2 = ViewController(frame: self.view.frame)
-      controller2.view.backgroundColor = .red
-      controller1.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 0)
-      controller2.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-      
-      controller1.title = "Movies"
-      controller2.title = "Favorites"
+      let controller2 = Favorites()
+      controller1.tabBarItem = UITabBarItem(title: "Filmes", image: #imageLiteral(resourceName: "list_icon.png").withRenderingMode(.alwaysOriginal), tag: 0)
+      controller1.tabBarItem.selectedImage = #imageLiteral(resourceName: "list_icon.png")
+      controller2.tabBarItem = UITabBarItem(title: "Favoritos", image: #imageLiteral(resourceName: "favorite_empty_icon.png").withRenderingMode(.alwaysOriginal), tag: 1)
+      controller2.tabBarItem.selectedImage = #imageLiteral(resourceName: "favorite_empty_icon.png")
+      controller1.title = "Filmes"
+      controller2.title = "Favoritos"
       
       let navigation1 = UINavigationController(rootViewController: controller1)
       let navigation2 = UINavigationController(rootViewController: controller2)
@@ -36,7 +35,6 @@ class TabViewController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     
-
     /*
     // MARK: - Navigation
 
