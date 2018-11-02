@@ -10,6 +10,7 @@ import UIKit
 
 class MoviesTableViewCell: UITableViewCell{
     
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var imageCover: UIImageView!
     @IBOutlet weak var titleMovie: UILabel!
     @IBOutlet weak var detailMovie: UILabel!

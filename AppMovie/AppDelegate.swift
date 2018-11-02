@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         let navigationControllerMovie = UINavigationController()
         
-        let movieController = Controller.createController(storyBoardName: "MoviePlayNow",controllerIdentifier: "moviePlayingNow")
+        let movieController = Controller.createController(storyBoardName: "Movie",controllerIdentifier: "Movie")
         
         navigationControllerMovie.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
         navigationControllerMovie.viewControllers = [movieController]

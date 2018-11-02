@@ -29,6 +29,7 @@ class FavoritesViewController: UIViewController {
     }
     
     func setupNavigation() {
+        self.setupSearchController()
         self.navigationItem.title = "Favorites"
         self.navigationController?.navigationBar.barTintColor = Colors.navigationController.value
     }
@@ -96,7 +97,7 @@ extension FavoritesViewController: UITableViewDelegate {
 extension FavoritesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text {
-            let resultSearch = ManagerMovies.shared.movies.filter({$0.originalTitle.prefix(text.count) ==  text })
+            let resultSearch = ManagerMovies.shared.moviesFavorites.filter({$0.originalTitle.prefix(text.count) ==  text })
             let viewNotFoundMovie = WarningScreens.notFoundMovies(message: "coudn`t not find movies to:\(text)", image: UIImageView(image: UIImage(named: "search_icon")))
             viewNotFoundMovie.tag = 998
             
@@ -111,7 +112,7 @@ extension FavoritesViewController: UISearchResultsUpdating {
                 }
             }else {
                 self.view.viewWithTag(998)?.removeFromSuperview()
-                self.dataSource.datas = ManagerMovies.shared.movies
+                self.dataSource.datas = ManagerMovies.shared.moviesFavorites
                 self.tableView.reloadData()
             }
             

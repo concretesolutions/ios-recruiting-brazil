@@ -34,13 +34,14 @@ class TableViewDataSource: NSObject, UITableViewDataSource {
             cell.titleMovie.text = movie.originalTitle
             cell.detailMovie.text = movie.overview
             cell.imageCover.image = movie.posterPath
+            cell.date.text = String(Date.getComponent(from: .year, at: movie.releaseDate))
             return cell
         }else if let cell = cell as? DescribeMovieTableViewCell {
             var text = ""
             if let movie = movie {
                 cell.delegate = controller as? FavoriteDelegate 
                 cell.movie = movie
-                
+            
                 switch indexPath.row {
                 case 0:
                     cell.btnFavorite.isHidden = false
