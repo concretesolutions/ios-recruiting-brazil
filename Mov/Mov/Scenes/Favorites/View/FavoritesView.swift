@@ -32,6 +32,10 @@ public class FavoritesView: UIView {
         return FavoritesTableView(frame: .zero, style: .plain)
     }()
     
+    lazy var noResultsView: ErrorView = {
+        return ErrorView(errorImage: Images.noResults, labelText: Texts.noResults(for: "x"))
+    }()
+    
     // Initialization
     public override init(frame: CGRect) {
         super.init(frame: frame)

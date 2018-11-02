@@ -22,6 +22,32 @@ class FavoritesViewController: UIViewController {
         }
     }
     
+    let stateMachine: ViewStateMachine = ViewStateMachine()
+    
+    var state: FavoritesState = .tableView {
+        didSet {
+            let state: ViewState
+            
+            switch self.state {
+            case .tableView:
+                state = self.tableViewState
+            case .noResult(let request):
+                self.noResultState.searchRequest = request
+                state = self.noResultState
+            }
+            
+            self.stateMachine.enter(state: state)
+        }
+    }
+    
+    lazy var tableViewState: FavoritesTableViewState = {
+        return FavoritesTableViewState(favoritesView: self.favoritesView)
+    }()
+    
+    lazy var noResultState: FavoritesNoResultState = {
+        return FavoritesNoResultState(favoritesView: self.favoritesView)
+    }()
+    
     lazy var favoritesView: FavoritesView = {
         return FavoritesView(frame: .zero)
     }()
@@ -56,6 +82,8 @@ extension FavoritesViewController: ViewCode {
     func additionalSetup() {
         self.favoritesView.tableView.dataSource = self
         self.favoritesView.tableView.delegate = self
+        
+        self.favoritesView.searchBarDelegate.textDidChangeAction = self.interactor!.filterMoviesBy
     }
 }
 
@@ -63,14 +91,16 @@ extension FavoritesViewController: FavoritesViewOutput {
     func display(movies: [FavoritesViewModel]) {
         self.viewModels = movies
         self.favoritesView.tableView.reloadData()
+        
+        self.state = .tableView
     }
     
     func displayNoResultsFound(for request: String) {
-        //
+        self.state = .noResult(request)
     }
     
     func displayError() {
-        //
+        // db error
     }
 }
 
@@ -94,3 +124,11 @@ extension FavoritesViewController {
     }
 }
 
+
+// MARK: State management
+extension FavoritesViewController {
+    enum FavoritesState {
+        case tableView
+        case noResult(String)
+    }
+}

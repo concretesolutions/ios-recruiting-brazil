@@ -1,19 +1,19 @@
 //
-//  MovieGridBaseState.swift
+//  FavoritesBaseState.swift
 //  Mov
 //
-//  Created by Miguel Nery on 28/10/18.
+//  Created by Miguel Nery on 02/11/18.
 //  Copyright © 2018 Miguel Nery. All rights reserved.
 //
 
 import UIKit
 
-class MovieGridBaseState: ViewState {
+class FavoritesBaseState: ViewState {
     
-    unowned let movieGrid: MovieGridView
+    unowned let favoritesView: FavoritesView
     
-    init(movieGridView: MovieGridView) {
-        self.movieGrid = movieGridView
+    init(favoritesView: FavoritesView) {
+        self.favoritesView = favoritesView
     }
     
     func hideViews() -> [UIView] {
@@ -32,3 +32,4 @@ class MovieGridBaseState: ViewState {
         //
     }
 }
+
