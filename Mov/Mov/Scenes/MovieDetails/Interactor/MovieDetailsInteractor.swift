@@ -11,4 +11,5 @@ import Foundation
 
 protocol MovieDetaisInteractor {
     func getDetails(of movie: Movie)
+    func toggleFavorite(_ movie: Movie)
 }

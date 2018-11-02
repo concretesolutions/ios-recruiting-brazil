@@ -35,6 +35,6 @@ class MovieGridBuilder {
     }
     
     static private var moviePersistence: FavoritesPersistence {
-        return FavoritesUserDefaultsPersistence()
+        return UserDefaultsGateway()
     }
 }

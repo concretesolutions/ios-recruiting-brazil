@@ -25,7 +25,7 @@ class MovieGridUnitView: UIView {
     lazy var poster: UIImageView = {
         let poster = UIImageView(frame: .zero)
         self.viewModel.fetchImage(to: poster)
-        
+        self.contentMode = .scaleAspectFit
         return poster
     }()
     

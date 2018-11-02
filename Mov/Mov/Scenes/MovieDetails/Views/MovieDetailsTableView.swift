@@ -12,7 +12,12 @@ import UIKit
 class MovieDetailsTableView: UITableView {
     
     static let titleCellReuseIdentifier = "detailsTitleCell"
-    static let defaultCellReuseIdentifier = "detailsDefaultCell"
+    static let defaultLabelCellReuseIdentifier = "detailsDefaultLabelCell"
+    static let overviewCellReuseIdentifier = "detailsOverviewCell"
+    
+    static let cellHeight = CGFloat(45).proportionalToHeight
+    static let overviewCellHeight = CGFloat(255).proportionalToHeight
+    
     
     init() {
         super.init(frame: .zero, style: .grouped)
@@ -27,6 +32,8 @@ class MovieDetailsTableView: UITableView {
 extension MovieDetailsTableView: ViewCode {
     func addView() {
         self.register(DetailsTitleTableViewCell.self, forCellReuseIdentifier: MovieDetailsTableView.titleCellReuseIdentifier)
+        self.register(DetailsDefaultLabelTableViewCell.self, forCellReuseIdentifier: MovieDetailsTableView.defaultLabelCellReuseIdentifier)
+        self.register(DetailsOverviewTableViewCell.self, forCellReuseIdentifier: MovieDetailsTableView.overviewCellReuseIdentifier)
     }
     
     func addConstraints() {
@@ -34,7 +41,10 @@ extension MovieDetailsTableView: ViewCode {
     }
     
     func additionalSetup() {
-        self.rowHeight = CGFloat(35).proportionalToHeight
+        self.bounces = false
+        self.allowsSelection = false
+        self.contentInset = .zero
+        self.backgroundColor = .clear
     }
     
     

@@ -26,7 +26,7 @@ class FavoritesTableView: UITableView {
         self.bounces = false
         
         self.contentInsetAdjustmentBehavior = .never
-        
+        self.backgroundColor = .clear
     }
     
 }

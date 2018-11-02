@@ -13,6 +13,18 @@ struct Genre: Decodable {
     let name: String
 }
 
+extension Genre {
+    static var genres = [Genre]()
+    
+    static func genres(forIds ids: [Int]) -> [Genre] {
+        var results = [Genre]()
+        for id in ids {
+            results.append(contentsOf: genres.filter { $0.id == id })
+        }
+        return results
+    }
+}
+
 struct GenreResults: Decodable {
     let genres: [Genre]
 }

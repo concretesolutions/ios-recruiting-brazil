@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // fetch genres to cache
+        TMDBMoyaGateway().fetchGenres { (result) in
+            if case let .success(genres) = result {
+                Genre.genres = genres
+            } else {/*do nothing*/}
+        }
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = MainTabBarBuilder.build()
         

@@ -8,11 +8,10 @@
 
 import Foundation
 
-class FavoritesUserDefaultsPersistence: FavoritesPersistence {
-    
+class UserDefaultsGateway {
     private static let moviesKey = "Movies"
     
-    private (set) var favorites = Set<Movie>()
+    private(set) var favorites = Set<Movie>()
     
     let defaults = UserDefaults.standard
     
@@ -20,6 +19,9 @@ class FavoritesUserDefaultsPersistence: FavoritesPersistence {
         // initialize favorites to avoid addFavorite from overriding saved data
         fetchFavorites()
     }
+}
+
+extension UserDefaultsGateway: FavoritesPersistence {
     
     func toggleFavorite(movie: Movie) -> Bool {
         if self.favorites.contains(movie) {
@@ -37,7 +39,7 @@ class FavoritesUserDefaultsPersistence: FavoritesPersistence {
     func fetchFavorites() -> [Movie]? {
         guard self.favorites.isEmpty else { return Array(self.favorites) }
         
-        if let savedMovies = self.defaults.object(forKey: FavoritesUserDefaultsPersistence.moviesKey) as? Data {
+        if let savedMovies = self.defaults.object(forKey: UserDefaultsGateway.moviesKey) as? Data {
             let decoder = API.TMDB.decoder
             if let loadedMovies = try? decoder.decode([Movie].self, from: savedMovies) {
                 self.favorites = Set<Movie>(loadedMovies)
@@ -57,7 +59,7 @@ class FavoritesUserDefaultsPersistence: FavoritesPersistence {
         encoder.dateEncodingStrategy = .formatted(API.TMDB.dateFormatter)
         
         if let encoded = try? encoder.encode(self.favorites) {
-            self.defaults.set(encoded, forKey: FavoritesUserDefaultsPersistence.moviesKey)
+            self.defaults.set(encoded, forKey: UserDefaultsGateway.moviesKey)
             return true
         } else { return false }
     }
@@ -65,6 +67,4 @@ class FavoritesUserDefaultsPersistence: FavoritesPersistence {
     func isFavorite(_ movie: Movie) -> Bool {
         return self.favorites.contains(movie)
     }
-    
-    
 }

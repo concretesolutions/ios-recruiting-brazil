@@ -13,7 +13,6 @@ public class MovieDetailsView: UIView {
     lazy var poster: UIImageView = {
         let poster = UIImageView(frame: .zero)
         poster.contentMode = .scaleAspectFit
-        
         return poster
     }()
     
@@ -44,14 +43,15 @@ extension MovieDetailsView: ViewCode {
         self.poster.snp.makeConstraints { make in
             make.top.equalToSuperview().multipliedBy(0.8)
             make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalToSuperview().multipliedBy(0.5)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(45)
+            
         }
         
         self.tableView.snp.makeConstraints { make in
-            make.top.equalTo(self.poster).multipliedBy(0.8)
+            make.top.equalTo(self.poster.snp_bottomMargin)
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
             make.centerX.equalToSuperview()
         }
     }

@@ -38,8 +38,8 @@ class MovieDetailsViewController: UIViewController {
     }
 
     init(movie: Movie) {
-        super.init(nibName: nil, bundle: nil)
         self.movie = movie
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,18 +54,23 @@ extension MovieDetailsViewController: ViewCode {
     
     func addConstraints() {
         self.movieDetailsview.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     
     func additionalSetup() {
         self.movieDetailsview.tableView.dataSource = self
+        self.movieDetailsview.tableView.delegate = self
+    }
+    
+    func toggleFavorite() {
+        guard let interactor = self.interactor else { return }
+        interactor.toggleFavorite(self.movie)
     }
 }
 
 extension MovieDetailsViewController: MovieDetailsViewOutput {
     func displayDetails(of movie: MovieDetailsViewModel) {
-        self.
+        self.viewModel = movie
     }
-    
 }

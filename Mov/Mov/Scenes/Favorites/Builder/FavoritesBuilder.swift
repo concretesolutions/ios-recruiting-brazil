@@ -18,5 +18,5 @@ class FavoritesBuilder {
         return vc
     }
     
-    private static let favoritesPersistence: FavoritesPersistence = FavoritesUserDefaultsPersistence()
+    private static let favoritesPersistence: FavoritesPersistence = UserDefaultsGateway()
 }

@@ -1,5 +1,5 @@
 //
-//  MovieDetailsPresenter.swift
+//  GenrePersistence.swift
 //  Mov
 //
 //  Created by Miguel Nery on 01/11/18.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol MovieDetailsPresenter {
-    func presentDetails(of movie: MovieDetailsUnit)
+protocol GenrePersistence {
+    func genresFor(ids: [Int]) -> [Genre]
 }

@@ -10,24 +10,27 @@ import UIKit
 
 class DetailsTitleTableViewCell: UITableViewCell {
     
+    var toggleFavoriteAction: (() -> Void)?
+    
     lazy var titleLabel: UILabel = {
         let title = UILabel(frame: .zero)
-        title.font = UIFont(name: Fonts.helveticaNeue, size: CGFloat(20).proportionalToWidth)
+        title.font = UIFont(name: Fonts.helveticaNeueBold, size: CGFloat(20).proportionalToWidth)
         title.textAlignment = .left
+        title.numberOfLines = 2
         
         return title
     }()
     
-    lazy var isFavoriteIcon: UIImageView = {
-        let icon = UIImageView(frame: .zero)
-        icon.contentMode = .scaleAspectFit
+    lazy var favoriteButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
         
-        return icon
+        return button
     }()
     
-    init() {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: nil)
-        
         self.setup()
     }
     
@@ -35,9 +38,9 @@ class DetailsTitleTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(title: String, isFavorite: Bool) {
-//        self.textLabel.text = title
-        self.isFavoriteIcon.image = isFavorite ? Images.isFavoriteIconFull : Images.isFavoriteIconGray
+    func set(viewModel: MovieDetailsViewModel) {
+        self.titleLabel.text = viewModel.title
+        self.favoriteButton.setImage(viewModel.isFavoriteIcon, for: .normal)
     }
     
     func setTextLabel(settings: @escaping (UILabel) -> Void) {
@@ -45,27 +48,32 @@ class DetailsTitleTableViewCell: UITableViewCell {
         settings(textLabel)
     }
     
+    @objc func toggleFavorite() {
+        guard let action = self.toggleFavoriteAction else { return }
+        action()
+    }
+    
 }
 
 extension DetailsTitleTableViewCell: ViewCode {
     func addView() {
-//        self.addSubview(self.titleLabel)
-        self.addSubview(self.isFavoriteIcon)
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.favoriteButton)
     }
     
     func addConstraints() {
-//        self.titleLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview()
-//            make.bottom.equalToSuperview()
-//            make.left.equalToSuperview()
-//            make.width.equalToSuperview().multipliedBy(0.5)
-//        }
-        
-        self.isFavoriteIcon.snp.makeConstraints { make in
+        self.titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
+            make.left.equalToSuperview().inset(CGFloat(15).proportionalToWidth)
+            make.width.equalToSuperview().multipliedBy(0.6)
+        }
+        
+        self.favoriteButton.snp.makeConstraints { make in
+            make.height.equalToSuperview()
             make.right.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.2)
+            make.width.equalToSuperview().multipliedBy(0.25)
+            make.centerY.equalToSuperview()
         }
     }
     
