@@ -53,6 +53,7 @@ extension FavoritesView: ViewCode {
     public func addView() {
         self.addSubview(self.searchBar)
         self.addSubview(self.tableView)
+        self.addSubview(self.noResultsView)
     }
     
     public func addConstraints() {
@@ -68,6 +69,13 @@ extension FavoritesView: ViewCode {
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
+        }
+        
+        self.noResultsView.snp.makeConstraints { make in
+            make.top.equalTo(self.searchBar.snp_bottomMargin)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
         }
     }
     
