@@ -6,12 +6,7 @@
 //  Copyright © 2018 Renan Alves. All rights reserved.
 //
 
-import Foundation
-protocol FavoriteMovieDelegate {
+protocol FavoriteDelegate {
     func setFavorite(movie: MovieNowPlaying)
     func removeFavorite(movie: MovieNowPlaying)
-}
-
-protocol ReceiveFavoriteDelegate {
-    func receive(favorites: [MovieNowPlaying])
 }

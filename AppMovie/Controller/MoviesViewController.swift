@@ -8,14 +8,13 @@
 
 import UIKit
 
-class MoviesController: UIViewController{
+class MoviesViewController: UIViewController{
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let dataSource = MoviesCollectionViewDataSource()
+    let dataSource = CollectionViewDataSource()
     var pageCollection : Int = 1
     var sizeLastPage : Int = 0
-    
     let activityIndicator = Activity.getActivityLoad(position: CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2), hidesWhenStopped: true, style: UIActivityIndicatorView.Style.gray)
     let viewLoad = Load.getViewLoad(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), backGround: .gray, tag: 999)
     
@@ -43,6 +42,7 @@ class MoviesController: UIViewController{
         self.view.addSubview(activityIndicator)
     }
     
+    //Mark: - Setups
     private func setupNavigation() {
         self.setupSearchController()
         self.navigationItem.title = "Movie"
@@ -91,8 +91,7 @@ class MoviesController: UIViewController{
 }
 
 //MARK: - Delegates
-
-extension MoviesController: UICollectionViewDelegate {
+extension MoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "DescriptionMovie", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "description") as? DescriptionMovieViewController
@@ -111,7 +110,7 @@ extension MoviesController: UICollectionViewDelegate {
     }
 }
 
-extension MoviesController: FavoriteMovieDelegate {
+extension MoviesViewController: FavoriteDelegate {
     func setFavorite(movie: MovieNowPlaying) {
         ManagerMovies.shared.moviesFavorites.append(movie)
         
@@ -128,21 +127,8 @@ extension MoviesController: FavoriteMovieDelegate {
         }
     }
 }
-extension MoviesController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let resultSearch = ManagerMovies.shared.movies.filter({$0.originalTitle.prefix(searchText.count) ==  searchText })
-        self.dataSource.datas = resultSearch
-        self.collectionView.reloadData()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.dataSource.datas = ManagerMovies.shared.movies
-        self.collectionView.reloadData()
-        self.view.endEditing(true)
-    }
-}
 
-extension MoviesController: UISearchResultsUpdating {
+extension MoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text {
             let resultSearch = ManagerMovies.shared.movies.filter({$0.originalTitle.prefix(text.count) ==  text })

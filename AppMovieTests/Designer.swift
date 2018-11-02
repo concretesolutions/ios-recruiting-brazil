@@ -13,7 +13,7 @@ import FBSnapshotTestCase
 
 class DesignerTest: FBSnapshotTestCase {
     
-    let controller = UIStoryboard(name: "MoviePlayNow", bundle: nil).instantiateInitialViewController() as! MoviesController
+    let controller = UIStoryboard(name: "MoviePlayNow", bundle: nil).instantiateInitialViewController() as! MoviesViewController
     
     override func setUp() {
         super.setUp()

@@ -11,7 +11,7 @@ import UIKit
 class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
     
     var movie = MovieNowPlaying()
-    var delegate: FavoriteMovieDelegate?
+    var delegate: FavoriteDelegate?
     
     @IBOutlet weak var posterPath: UIImageView!
     @IBOutlet weak var titleMovie: UILabel!

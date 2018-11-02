@@ -38,7 +38,7 @@ class TableViewDataSource: NSObject, UITableViewDataSource {
         }else if let cell = cell as? DescribeMovieTableViewCell {
             var text = ""
             if let movie = movie {
-                cell.delegate = controller as? FavoriteMovieDelegate 
+                cell.delegate = controller as? FavoriteDelegate 
                 cell.movie = movie
                 
                 switch indexPath.row {

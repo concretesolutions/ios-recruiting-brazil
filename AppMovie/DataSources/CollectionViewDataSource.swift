@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
+class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     var datas = [MovieNowPlaying]()
     var controller = UIViewController()
@@ -20,7 +20,7 @@ class MoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellCollectionMovies", for: indexPath) as! MoviesFavoritesCollectionViewCell
         
-        cell.delegate = controller as? FavoriteMovieDelegate
+        cell.delegate = controller as? FavoriteDelegate
         let _movie = self.datas[indexPath.row]
         cell.movie = _movie
         cell.titleMovie.text = _movie.originalTitle

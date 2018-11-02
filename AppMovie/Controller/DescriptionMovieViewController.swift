@@ -13,7 +13,7 @@ class DescriptionMovieViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imgPoster: UIImageView!
 
-    let dataSource = FavoriteTableViewDataSource()
+    let dataSource = TableViewDataSource()
     var movie: MovieNowPlaying?
     
     override func viewDidLoad() {
@@ -25,6 +25,8 @@ class DescriptionMovieViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    
+    //Mark: - Setups
     private func setupTableView() {
         self.tabBarController?.tabBar.isHidden = true
         tableView.rowHeight = UITableView.automaticDimension
@@ -42,7 +44,9 @@ class DescriptionMovieViewController: UIViewController {
         }
     }
 }
-extension DescriptionMovieViewController: FavoriteMovieDelegate {
+
+//Mark: - Delegates
+extension DescriptionMovieViewController: FavoriteDelegate {
     func setFavorite(movie: MovieNowPlaying) {
         ManagerMovies.shared.moviesFavorites.append(movie)
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.movies)

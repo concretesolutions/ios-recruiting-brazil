@@ -13,7 +13,7 @@ class DescribeMovieTableViewCell: UITableViewCell {
     @IBOutlet weak var btnFavorite: UIButton!
     @IBOutlet weak var textInformate: UILabel!
     
-    var delegate: FavoriteMovieDelegate?
+    var delegate: FavoriteDelegate?
     var movie = MovieNowPlaying()
     
     @IBAction func favoriterMovie(_ sender: Any) {
