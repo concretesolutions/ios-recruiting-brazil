@@ -9,7 +9,7 @@
 import XCTest
 import FBSnapshotTestCase
 
-@testable import AppMovie
+//@testable import AppMovie
 
 class DesignerTest: FBSnapshotTestCase {
     
