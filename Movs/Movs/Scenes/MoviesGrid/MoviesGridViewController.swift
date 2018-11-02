@@ -36,9 +36,7 @@ extension MoviesGridViewController: MoviesGridPresenterView {
         self.title = "Movies"
         self.moviesGrid = MoviesGridView(frame: self.view.bounds)
         self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
-        self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.largeTitleDisplayMode = .automatic
-        self.definesPresentationContext = true
     }
     
     func presentLoading() {
