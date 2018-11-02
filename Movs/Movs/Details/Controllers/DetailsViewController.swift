@@ -10,7 +10,10 @@ import UIKit
 
 class DetailsViewController: UIViewController {
   
+  private var isLiked = false
   var poster: UIImage!
+  var movie: PopularMovie!
+  var genres = [Genre]()
   lazy var tableview: UITableView = {
     let table = UITableView()
     table.dataSource = self
@@ -19,14 +22,18 @@ class DetailsViewController: UIViewController {
     table.translatesAutoresizingMaskIntoConstraints = false
     return table
   }()
+  
   lazy var posterImageView: UIImageView = {
     let imageview = UIImageView()
     imageview.image = poster
+    imageview.contentMode = .scaleAspectFit
+    imageview.sizeToFit()
     imageview.layer.borderColor = UIColor.black.withAlphaComponent(0.6).cgColor
     imageview.layer.borderWidth = 0.5
     imageview.translatesAutoresizingMaskIntoConstraints = false
     return imageview
   }()
+  
   lazy var cellposterImage: UITableViewCell = {
     let cell = UITableViewCell()
     cell.addSubview(posterImageView)
@@ -35,31 +42,37 @@ class DetailsViewController: UIViewController {
     posterImageView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -15).isActive = true
     posterImageView.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
     posterImageView.image = poster
-    _ = posterImageView.getImageRatioBasedOnSize((posterImageView.image?.size)!)
+//    let size = posterImageView.getImageRatioBasedOnSize((posterImageView.image?.size)!)
+//    posterImageView.frame.size = size
     
     return cell
   }()
+  
   var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.font = label.font.withSize(16)
-    label.text = "Thor: Ragnarok"
     label.numberOfLines = 0
     label.sizeToFit()
     return label
   }()
   
-  var likeButton: UIButton = {
+  lazy var likeButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setImage(#imageLiteral(resourceName: "favorite_full_icon.png"), for: .normal)
+    if DefaultsMovie.shared.contains(id: movie.id) {
+      button.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
+    } else {
+      button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+    }
+    button.addTarget(self, action: #selector(likeButtonAction), for: .touchUpInside)
     return button
   }()
+  
   lazy var cellTitle: UITableViewCell = {
     let cell = UITableViewCell()
     cell.addSubview(titleLabel)
     cell.addSubview(likeButton)
-    
     titleLabel.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 15).isActive = true
     titleLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 15).isActive = true
     titleLabel.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -15).isActive = true
@@ -68,64 +81,10 @@ class DetailsViewController: UIViewController {
     likeButton.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -15).isActive = true
     likeButton.bottomAnchor.constraint(lessThanOrEqualTo: cell.bottomAnchor).isActive = true
     likeButton.widthAnchor.constraint(equalToConstant: (likeButton.image(for: .normal)?.size.height)!).isActive = true
-    
-    return cell
-  }()
-  var yearLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = label.font.withSize(16)
-    label.text = "2008"
-    label.numberOfLines = 0
-    label.sizeToFit()
-    return label
-  }()
-  lazy var cellDate: UITableViewCell = {
-    let cell = UITableViewCell()
-    cell.addSubview(yearLabel)
-    yearLabel.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 15).isActive = true
-    yearLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 15).isActive = true
-    yearLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -15).isActive = true
-    yearLabel.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -15).isActive = true
-    return cell
-  }()
-  var genreLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.sizeToFit()
-    label.numberOfLines = 0
-    label.text = "ação, aventura"
-    return label
-  }()
-  
-  lazy var cellGenre: UITableViewCell = {
-    let cell = UITableViewCell()
-    cell.addSubview(genreLabel)
-    genreLabel.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 15).isActive = true
-    genreLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 15).isActive = true
-    genreLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -15).isActive = true
-    genreLabel.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -15).isActive = true
     return cell
   }()
   
-  var overviewLabel: UILabel = {
-    var label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.sizeToFit()
-    label.numberOfLines = 0
-    label.text = "ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura ação, aventura "
-    return label
-  }()
-  
-  lazy var cellOverview: UITableViewCell = {
-    let cell = UITableViewCell()
-    cell.addSubview(overviewLabel)
-    cell.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 15).isActive = true
-    cell.topAnchor.constraint(equalTo: cell.topAnchor, constant: 15).isActive = true
-    cell.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -15).isActive = true
-    cell.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -15).isActive = true
-    return cell
-  }()
+  var genreTitle: String = ""
   
   override func loadView() {
     self.view = ContainerView(frame: UIScreen.main.bounds)
@@ -133,13 +92,57 @@ class DetailsViewController: UIViewController {
     setupView()
   }
   
+  @objc func likeButtonAction() {
+    isLiked = !DefaultsMovie.shared.contains(id: movie.id)
+    if isLiked {
+      likeButton.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
+      DefaultsMovie.shared.saveMoveId(movie.id)
+    } else {
+      likeButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+      DefaultsMovie.shared.deleteId(movie.id)
+    }
+  }
+  
+  func getGenres(completion: @escaping (Result<String?>) -> ()) {
+    var text = ""
+    Network.shared.requestGenres { (result) in
+      switch result {
+      case .success(let resultGenres):
+        for genreId in self.movie.genre_ids! {
+          _ = resultGenres?.genres.contains(where: { (genre) -> Bool in
+            if genre.id == genreId {
+              text.append("\(genre.name), ")
+              return true
+            }
+            return false
+          })
+        }
+        if !text.isEmpty {
+          _ = text.popLast()
+          _ = text.popLast()
+        }
+        completion(.success(text))
+      case .failure(let error):
+        print("error: \(error.localizedDescription)")
+        completion(.failure(error))
+      }
+    }
+  }
+  
+  func getDate(stringDate: String) -> DateComponents  {
+    let dateFormat = DateFormatter()
+    dateFormat.dateFormat = "yyyy-MM-dd"
+    dateFormat.locale = Locale(identifier: "pt_BR")
+    let date = dateFormat.date(from: stringDate)
+    let components = Calendar.current.dateComponents([.year], from: date!)
+    return components
+  }
+  
+  
   func setupView() {
     addViews()
-//    posterImageView.heightAnchor.constraint(equalToConstant: (posterImageView.image?.size.height)!).isActive = true
-//    posterImageView.widthAnchor.constraint(equalToConstant: (posterImageView.image?.size.width)!).isActive = true
   }
   func addViews() {
-//    view.addSubview(posterImageView)
     view.addSubview(tableview)
     addConstraints()
   }
@@ -165,7 +168,7 @@ class DetailsViewController: UIViewController {
 
 extension DetailsViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 4
+    return 5
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -176,11 +179,26 @@ extension DetailsViewController: UITableViewDataSource {
     case 0:
       return cellposterImage
     case 1:
+      titleLabel.text = movie.title
       return cellTitle
     case 2:
-      return cellDate
+      cell.textLabel?.text = "\(getDate(stringDate: movie.release_date).year!)"
+      return cell
     case 3:
-      return cellGenre
+      getGenres { (result) in
+        switch result {
+        case .success(let genreText):
+          cell.textLabel?.text = genreText
+        case.failure(let error):
+          print("error: \(error.localizedDescription)")
+        }
+      }
+      cell.textLabel?.text = "Ação, Aventura"
+      return cell
+    case 4:
+      cell.textLabel?.font = cell.textLabel?.font.withSize(14)
+      cell.textLabel?.text = movie.overview
+      return cell
     default:
       return UITableViewCell()
     }

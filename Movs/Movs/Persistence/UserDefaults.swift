@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Ids = [Int]
+typealias Ints = [Int]
 class DefaultsMovie {
   private var userSessionKey = "com.save.usersession.favorites.movie"
   public static let shared = DefaultsMovie()
@@ -38,9 +38,9 @@ class DefaultsMovie {
   
   func getAll() -> [Int] {
     createUserDefault()
-    var ids = standard.value(forKey: userSessionKey) as! Ids
-    ids.removeAll { (aux) -> Bool in
-      if aux == 0 {
+    var ids = standard.value(forKey: userSessionKey) as! Ints
+    ids.removeAll { (id) -> Bool in
+      if id == 0 {
         return true
       }
       return false
@@ -57,9 +57,9 @@ class DefaultsMovie {
   private func createUserDefault() {
     
     if UserDefaults.standard.value(forKey: userSessionKey) == nil {
-      standard.set(Ids(), forKey: userSessionKey)
+      standard.set(Ints(), forKey: userSessionKey)
     }
-    ids = standard.value(forKey: userSessionKey) as! Ids
+    ids = standard.value(forKey: userSessionKey) as! Ints
     
   }
 }

@@ -23,5 +23,15 @@ struct PopularMovie: Codable {
   let poster_path: String
   let overview: String
   let release_date: String
+  var genre_ids: Ints? = Ints()
   
+}
+
+struct ResultGenres: Codable {
+  let genres: [Genre]
+}
+
+struct Genre: Codable {
+  let id: Int
+  let name: String
 }

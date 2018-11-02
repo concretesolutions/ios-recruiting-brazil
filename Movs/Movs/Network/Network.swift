@@ -54,6 +54,7 @@ class Network {
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     let config = URLSessionConfiguration.default
+    config.requestCachePolicy = .reloadIgnoringLocalCacheData
     let session = URLSession(configuration: config)
     let task = session.dataTask(with: request) { (responseData, response, responseError) in
       DispatchQueue.main.async {
@@ -78,6 +79,7 @@ class Network {
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     let config = URLSessionConfiguration.default
+    config.requestCachePolicy = .reloadIgnoringLocalCacheData
     let session = URLSession(configuration: config)
     let task = session.dataTask(with: request) { (responseData, response, responseError) in
       DispatchQueue.main.async {
@@ -101,4 +103,33 @@ class Network {
     task.resume()
   }
   
+  func requestGenres(completion: @escaping(Result<ResultGenres?>) -> ()) {
+    guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=\(language)") else {return}
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    let config = URLSessionConfiguration.default
+    config.requestCachePolicy = .reloadIgnoringLocalCacheData
+    let session = URLSession(configuration: config)
+    let task = session.dataTask(with: request) { (responseData, response, responseError) in
+      DispatchQueue.main.async {
+        if let error = responseError {
+          completion(.failure(error))
+        } else if let jsonData = responseData {
+          let decoder = JSONDecoder()
+          do {
+            let result = try decoder.decode(ResultGenres.self, from: jsonData)
+            completion(.success(result))
+          }catch {
+            completion(.failure(error))
+          }
+        } else {
+          let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
+          completion(.failure(error))
+        }
+      }
+    }
+    task.resume()
+  }
+
 }

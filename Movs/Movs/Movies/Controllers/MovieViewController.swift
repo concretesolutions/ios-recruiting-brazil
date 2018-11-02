@@ -94,7 +94,7 @@ class MovieViewController: UIViewController, UISearchResultsUpdating{
     }
     if searchTextAux != searchController.searchBar.text! {
       collectionView.reloadData()
-      if isFiltering {
+      if isFiltering && filteredMovies.count == 0{
         getError(error: .empty)
       } else {
         getError(error: .noError)
@@ -204,13 +204,18 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let detailsController = DetailsViewController()
-    
-    detailsController.poster = (collectionView.cellForItem(at: indexPath) as! MovieCollectionCell).posterImage.image!
+    let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionCell
+    detailsController.movie = cell.movie
+    detailsController.poster = cell.posterImage.image!
     navigationController?.pushViewController(detailsController, animated: true)
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     navigationItem.searchController?.searchBar.endEditing(true)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    collectionView.reloadData()
   }
   
 }
