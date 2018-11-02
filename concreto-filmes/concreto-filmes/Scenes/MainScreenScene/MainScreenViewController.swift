@@ -16,6 +16,7 @@ import SnapKit
 import RealmSwift
 
 enum AppStatus {
+    case firstLoad
     case resetFetch
     case fetchingMore
     case finish
@@ -35,7 +36,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     var displayedMovies: [MainScreen.ViewModel.MovieViewModel] = []
     internal var isFiltering = false
 
-    var applicationStatus: AppStatus = .resetFetch {
+    var applicationStatus: AppStatus = .firstLoad {
         didSet {
             switch self.applicationStatus {
             case .resetFetch:
@@ -56,6 +57,11 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
             case .emptyList:
                 DispatchQueue.main.async {
                     self.emptyListLabel.isHidden = false
+                }
+            case .firstLoad:
+                DispatchQueue.main.async {
+                    self.activityIndicator.startAnimating()
+                    self.emptyListLabel.isHidden = true
                 }
             }
         }
@@ -96,13 +102,14 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        interactor?.fetchPopularMovies(shouldResetMovies: true)
         interactor?.initialFetch()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.interactor?.presentCurrentMovies(isFiltering: self.isFiltering)
+        if self.applicationStatus != .firstLoad {
+            self.interactor?.presentCurrentMovies(isFiltering: self.isFiltering)
+        }
     }
 
     // MARK: Object lifecycle
@@ -134,7 +141,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
     func display(movies: [MainScreen.ViewModel.MovieViewModel]) {
         self.displayedMovies = movies
         self.applicationStatus = .finish
-        if movies.isEmpty && isFiltering {
+        if self.displayedMovies.isEmpty && isFiltering {
             self.applicationStatus = .emptyList
         }
         DispatchQueue.main.async {
@@ -164,7 +171,7 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
 
-        if offsetY > contentHeight - scrollView.frame.height && applicationStatus != .fetchingMore && applicationStatus != .resetFetch {
+        if offsetY > contentHeight - scrollView.frame.height && (applicationStatus == .finish || applicationStatus != .emptyList) {
             self.applicationStatus = .fetchingMore
         }
     }
