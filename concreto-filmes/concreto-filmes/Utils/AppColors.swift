@@ -18,6 +18,7 @@ import UIKit
 enum AppColors {
     case mainYellow
     case darkYellow
+    case darkBlue
 
     private static let allValues = [mainYellow]
 
@@ -27,6 +28,8 @@ enum AppColors {
             return UIColor(colorWithHexValue: 0xF7CE5B)
         case .darkYellow:
             return UIColor(colorWithHexValue: 0xD9971D)
+        case .darkBlue:
+            return UIColor(colorWithHexValue: 0x2D3146)
         }
     }
 }

@@ -15,6 +15,7 @@ import RealmSwift
 
 @objc protocol FavoritesRoutingLogic {
     func routeToMovieDetail(shouldFilter: Bool, index: Int)
+    func routeToFilterScene()
 }
 
 protocol FavoritesDataPassing {
@@ -45,5 +46,26 @@ class FavoritesRouter: NSObject, FavoritesRoutingLogic, FavoritesDataPassing {
     
     func navigateToMovieDetail(source: FavoritesViewController, destination: MovieDetailViewController) {
         source.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    func routeToFilterScene() {
+        guard let sourceVC = viewController else { return }
+        if let dataStore = self.dataStore {
+            let destinationVC = FilterViewController()
+            guard var destinationDS = destinationVC.router?.dataStore else { return }
+            passDataToFilterScene(source: dataStore, destination: &destinationDS)
+            navigateToFilterScene(source: sourceVC, destination: destinationVC)
+        }
+    }
+    
+    func passDataToFilterScene(source: FavoritesDataStore, destination: inout FilterDataStore) {
+        destination.genres = Genre.fetchedGenres.map { "\($0.value)" }
+        destination.years = source.movies.map { (movie) -> String in
+            return movie.yearString()
+        }.unique.sorted()
+    }
+    
+    func navigateToFilterScene(source: FavoritesViewController, destination: FilterViewController) {
+        source.present(destination, animated: true, completion: nil)
     }
 }

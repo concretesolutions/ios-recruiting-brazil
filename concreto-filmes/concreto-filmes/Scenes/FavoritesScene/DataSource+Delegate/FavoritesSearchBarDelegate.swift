@@ -10,11 +10,11 @@ import UIKit
 
 extension FavoritesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.interactor?.filterMoviesLocally(text: searchText)
         if searchText == "" {
             self.isFiltering = false
         } else {
             self.isFiltering = true
         }
+        self.interactor?.filterMoviesLocally(text: searchText, isFiltering: self.isFiltering)
     }
 }

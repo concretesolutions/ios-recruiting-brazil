@@ -25,9 +25,7 @@ enum FavoriteViewState {
 class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     var interactor: MovieDetailBusinessLogic?
     var router: (NSObjectProtocol & MovieDetailRoutingLogic & MovieDetailDataPassing)?
-    
-    var didFavorite : (() -> Void)?
-    var didUnfavorite : (() -> Void)?
+
     var displayedMovie: MovieDetail.ViewModel
     
     var viewState: FavoriteViewState = .notFavourited {

@@ -16,12 +16,14 @@ import RealmSwift
 protocol FavoritesBusinessLogic {
     func presentMovies(shouldFiter: Bool)
     func deleteMovie(at index: Int, filter: Bool)
-    func filterMoviesLocally(text: String)
+    func filterMoviesLocally(text: String, isFiltering: Bool)
 }
 
 protocol FavoritesDataStore {
     var movies: [Movie] { get set }
     var filteredMovies: [Movie] { get set }
+    var genreFilter: String { get set }
+    var yearFilter: String { get set }
 }
 
 class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
@@ -30,6 +32,8 @@ class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
     var realm = RealmService.shared.realm
     var movies: [Movie] = []
     var filteredMovies: [Movie] = []
+    var genreFilter: String = ""
+    var yearFilter: String = ""
     
     func presentMovies(shouldFiter: Bool) {
         if let realmMovies: Results<MovieRealm> = realm?.objects(MovieRealm.self) {
@@ -42,10 +46,12 @@ class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
             removeDeletedItemsFromFilteredMovies(consider: Array(realmMovies))
             
             //Here I check if it is filtering to show the right array of movies
-            shouldFiter ?
+            if shouldFiter {
+                filterMoviesLocally(text: "", isFiltering: true)
                 presenter?.present(movies: self.filteredMovies)
-            :
+            } else {
                 presenter?.present(movies: self.movies)
+            }
         }
     }
     
@@ -62,14 +68,28 @@ class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
         }
     }
     
-    func filterMoviesLocally(text: String) {
-        if text == "" {
+    func filterMoviesLocally(text: String, isFiltering: Bool) {
+        if !isFiltering && text != "" {
             self.presenter?.present(movies: self.movies)
             return
         }
+        
         self.filteredMovies = movies.filter({ (movie) -> Bool in
             return movie.title.lowercased().contains(text.lowercased())
         })
+
+        if self.genreFilter != "" {
+            self.filteredMovies = self.filteredMovies.filter({ (movie) -> Bool in
+                return movie.genres.contains(self.genreFilter)
+            })
+        }
+        
+        if self.yearFilter != ""{
+            self.filteredMovies = self.filteredMovies.filter({ (movie) -> Bool in
+                return movie.yearString() == self.yearFilter
+            })
+        }
+        
         self.presenter?.present(movies: self.filteredMovies)
     }
     

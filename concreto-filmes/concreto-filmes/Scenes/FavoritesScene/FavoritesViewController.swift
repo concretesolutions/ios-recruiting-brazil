@@ -21,6 +21,8 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
     var router: (NSObjectProtocol & FavoritesRoutingLogic & FavoritesDataPassing)?
     var displayedMovies: [Favorites.ViewModel.movie] = []
     var cellId = "favoritesCustomCell"
+    
+    // MARK: - Filter Variables
     var isFiltering = false
     
     private let emptyListLabel: UILabel = {
@@ -33,8 +35,8 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
         return label
     }()
     
-    private let rightBarButton: UIBarButtonItem = {
-        let btn = UIBarButtonItem()
+    lazy var filterBarButton: UIBarButtonItem = {
+        let btn = UIBarButtonItem.init(title: "Filter", style: .plain, target: self, action: #selector(goToFilterScene(sender:)))
         btn.image = #imageLiteral(resourceName: "FilterIcon")
         btn.tintColor = .black
         return btn
@@ -99,6 +101,10 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
         }
     }
     
+    @objc func goToFilterScene(sender: UIBarButtonItem) {
+        router?.routeToFilterScene()
+    }
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.searchBar.endEditing(true)
     }
@@ -106,7 +112,7 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
 
 extension FavoritesViewController: CodeView {
     func buildViewHierarchy() {
-        self.navigationItem.rightBarButtonItem = self.rightBarButton
+        self.navigationItem.rightBarButtonItem = self.filterBarButton
         self.navigationItem.titleView = self.searchBar
     }
     
