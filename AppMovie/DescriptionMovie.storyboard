@@ -28,15 +28,15 @@
                                 <rect key="frame" x="15" y="382" width="345" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="descriptionCell" id="Qk1-5v-5u3" customClass="DescribeMovieTableViewCell" customModule="AppMovie" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="345" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="descriptionCell" rowHeight="63" id="Qk1-5v-5u3" customClass="DescribeMovieTableViewCell" customModule="AppMovie" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="345" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qk1-5v-5u3" id="9WL-hU-7JW">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="62.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ual-3I-be9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="306" height="43.5"/>
+                                                    <rect key="frame" x="10" y="5" width="306" height="52.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="306" id="m6G-NZ-gUS"/>
                                                     </constraints>
@@ -48,7 +48,7 @@
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6y-xb-PGu">
-                                                    <rect key="frame" x="306" y="0.0" width="39" height="43.5"/>
+                                                    <rect key="frame" x="316" y="0.0" width="29" height="62.5"/>
                                                     <state key="normal" image="favorite_gray_icon"/>
                                                     <connections>
                                                         <action selector="favoriterMovie:" destination="Qk1-5v-5u3" eventType="touchUpInside" id="L8b-mv-X3k"/>
@@ -58,9 +58,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="K6y-xb-PGu" secondAttribute="bottom" id="Dl8-W8-6C4"/>
                                                 <constraint firstItem="K6y-xb-PGu" firstAttribute="leading" secondItem="Ual-3I-be9" secondAttribute="trailing" id="Fkf-e3-tuv"/>
-                                                <constraint firstItem="Ual-3I-be9" firstAttribute="leading" secondItem="9WL-hU-7JW" secondAttribute="leading" id="XA7-X5-Zq9"/>
-                                                <constraint firstItem="Ual-3I-be9" firstAttribute="top" secondItem="9WL-hU-7JW" secondAttribute="top" id="hmW-2j-Eux"/>
-                                                <constraint firstAttribute="bottom" secondItem="Ual-3I-be9" secondAttribute="bottom" id="kX8-TG-mbZ"/>
+                                                <constraint firstItem="Ual-3I-be9" firstAttribute="leading" secondItem="9WL-hU-7JW" secondAttribute="leading" constant="10" id="XA7-X5-Zq9"/>
+                                                <constraint firstItem="Ual-3I-be9" firstAttribute="top" secondItem="9WL-hU-7JW" secondAttribute="top" constant="5" id="hmW-2j-Eux"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ual-3I-be9" secondAttribute="bottom" constant="5" id="kX8-TG-mbZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="K6y-xb-PGu" secondAttribute="trailing" id="mRP-YE-4m5"/>
                                                 <constraint firstItem="K6y-xb-PGu" firstAttribute="top" secondItem="9WL-hU-7JW" secondAttribute="top" id="uwx-Vk-6Bx"/>
                                             </constraints>

@@ -9,10 +9,12 @@
 import UIKit
 
 enum APILinks {
-    case moviesPopularity,moviesPlayingNow, apikey, posterPath
+    case genres,moviesPopularity,moviesPlayingNow, apikey, posterPath
     
     var value: String {
         switch self {
+        case .genres:
+            return "https://api.themoviedb.org/3/genre/movie/list?api_key=1ad2a4bfff8f6571c51c072374044a33&language=en-US"
         case .moviesPopularity:
             return "https://api.themoviedb.org/3/movie/popular?api_key=1ad2a4bfff8f6571c51c072374044a33&language=en-US&page="
         case .moviesPlayingNow:

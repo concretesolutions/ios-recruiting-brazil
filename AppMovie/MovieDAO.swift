@@ -25,6 +25,7 @@ class MovieDAO {
     
     private var apiUrl : URL?
     var movies = [Dictionary<String,Any>]()
+    var genres = [Dictionary<String,Any>]()
     
     init() {
         self.apiUrl = URL(string: APILinks.moviesPopularity.value+"1")
@@ -43,7 +44,34 @@ class MovieDAO {
                 if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
                     if let _movies = responseDictionary.value(forKey: "results") as? [Dictionary<String,Any>] {
                         self.movies = _movies
-                            completion(_movies)
+                        self.requestGenres(apilink: APILinks.genres.value, completion: { (genresDonwloaded) in
+                            if genresDonwloaded != nil {
+                                self.genres = genresDonwloaded!
+                                  completion(_movies)
+                            }
+                        })
+                    }
+                }
+            }else {
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
+    
+    func requestGenres(apilink: String,completion: @escaping ( [Dictionary<String,Any>]?) -> ()) {
+        
+        apiUrl = URL(string: apilink)
+        guard let url = apiUrl else {return}
+        
+        let request = URLRequest(url: (url) , cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        
+        let task : URLSessionDataTask = session.dataTask(with: request) { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
+                    if let genres = responseDictionary.value(forKey: "genres") as? [Dictionary<String,Any>] {
+                        completion(genres)
                     }
                 }
             }else {

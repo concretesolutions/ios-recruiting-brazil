@@ -47,12 +47,10 @@ class FavoriteTableViewDataSource: NSObject, UITableViewDataSource {
                     cell.btnFavorite.setImage(movie.getImage(favorite: movie.favorite), for: .normal)
                     text = movie.originalTitle
                 case 1:
-                    text = Dates.toString(dateFormat: "dd-MMM-yyyy",to: movie.releaseDate)
+                    text = String(Dates.getComponent(from: .year, at: movie.releaseDate))
                 case 2:
                     for genre in movie.genre {
-                        if let dic = genre as? Dictionary<String, Any> {
-                            text = dic["name"] as! String
-                        }
+                        text.append(contentsOf: genre)
                     }
                 case 3:
                     text = movie.overview

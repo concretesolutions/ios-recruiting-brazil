@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias Genre = Dictionary<String,[Dictionary<String,Any>]>
+typealias Genre = [String]
 
 struct MovieNowPlaying {
     var adult = Bool()
@@ -28,23 +28,22 @@ extension MovieNowPlaying {
     
     init(_movieNP: Dictionary<String,Any>) {
         let adult = _movieNP[PropertireMovie.adult.value] as? Bool ?? false
-        let genre = _movieNP[PropertireMovie.genre.value] as? Genre ?? Genre()
         let id = _movieNP[PropertireMovie.id.value] as? Int ?? 0
         let language = _movieNP[PropertireMovie.language.value] as? String ?? ""
         let originalTitle = _movieNP[PropertireMovie.originalTitle.value] as? String ?? ""
         let overview = _movieNP[PropertireMovie.overview.value] as? String ?? ""
         let popularity = _movieNP[PropertireMovie.popularity.value] as? Decimal ?? 0.0
-        
+        var genreStrin = Genre()
+        if let genreInt = _movieNP[PropertireMovie.genre.value] as? [Int], !genreInt.isEmpty {
+            genreStrin = self.setupGenres(movieGenres: genreInt)
+        }
         var releaseDate = Date()
         if let release = _movieNP[PropertireMovie.releaseDate.value] as? String {
             if let dateConverted = Dates.convertDateFormatter(stringDate: release) {
                 releaseDate = dateConverted
             }
         }
-        
-        
         let favorite = false
-        
         var backDropImage : UIImage?
         if let nameImage = _movieNP[PropertireMovie.backdropPath.value] as? String {
             MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: "jpg", completion: { (backDropPath) in
@@ -68,8 +67,8 @@ extension MovieNowPlaying {
         if let bdImage = backDropImage, let pImage = posterImage {
             self.adult = adult
             self.backdropPath = bdImage
-            self.genre = genre
             self.id = id
+            self.genre = genreStrin
             self.language = language
             self.originalTitle = originalTitle
             self.overview = overview
@@ -80,6 +79,24 @@ extension MovieNowPlaying {
         }
     }
     
+    private func setupGenres(movieGenres: [Int]) -> [String]{
+        var genreStrin = [String]()
+        for dicGenres in MovieDAO.shared.genres {
+            for myGenereID in movieGenres {
+                if let dicId = dicGenres["id"] as? Int {
+                    if  dicId == myGenereID {
+                        if let genre = dicGenres["name"] as? String {
+                            if genreStrin.isEmpty {
+                                genreStrin.append("\(genre)")
+                            }
+                            genreStrin.append(",\(genre)")
+                        }
+                    }
+                }
+            }
+        }
+        return genreStrin
+    }
     mutating func updateFavorite(){
             if self.favorite == true {
                 self.favorite = false
