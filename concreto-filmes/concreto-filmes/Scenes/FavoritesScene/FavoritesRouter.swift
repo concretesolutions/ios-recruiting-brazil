@@ -59,7 +59,7 @@ class FavoritesRouter: NSObject, FavoritesRoutingLogic, FavoritesDataPassing {
     }
     
     func passDataToFilterScene(source: FavoritesDataStore, destination: inout FilterDataStore) {
-        destination.genres = Genre.fetchedGenres.map { "\($0.value)" }
+        destination.genres = Genre.fetchedGenres.map { "\($0.value)" }.sorted()
         destination.years = source.movies.map { (movie) -> String in
             return movie.yearString()
         }.unique.sorted()

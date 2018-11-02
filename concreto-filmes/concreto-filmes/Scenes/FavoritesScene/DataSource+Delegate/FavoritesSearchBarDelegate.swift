@@ -15,6 +15,5 @@ extension FavoritesViewController: UISearchBarDelegate {
         } else {
             self.isFiltering = true
         }
-        self.interactor?.filterMoviesLocally(text: searchText, isFiltering: self.isFiltering)
     }
 }

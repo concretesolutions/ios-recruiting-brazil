@@ -8,8 +8,14 @@
 
 import Foundation
 
-extension Array where Element: Hashable {
+extension Array where Element: Equatable {
     var unique: [Element] {
-        return Array(Set(self))
+        var uniqueValues: [Element] = []
+        forEach { item in
+            if !uniqueValues.contains(item) {
+                uniqueValues += [item]
+            }
+        }
+        return uniqueValues
     }
 }

@@ -28,9 +28,20 @@ class FilterRouter: NSObject, FilterRoutingLogic, FilterDataPassing {
     func routeBackWithFilters() {
         guard let sourceVC = self.viewController else { return }
         guard let dataStore = self.dataStore else { return }
-        guard let destinationVC = sourceVC.presentingViewController as? FavoritesViewController else { return }
+        guard let destinationTabController = sourceVC.presentingViewController as? TabController else { return }
+        guard let destinationNavController = destinationTabController.viewControllers?[1] as? UINavigationController else { return }
+        guard let destinationVC = destinationNavController.viewControllers[0] as? FavoritesViewController else { return }
         guard var destinationDS = destinationVC.router?.dataStore else { return }
+        
         passData(from: dataStore, to: &destinationDS)
+        
+        if dataStore.selectedGenre == "" && dataStore.selectedYear == "" {
+            destinationVC.isFiltering = false
+        } else {
+            destinationVC.isFiltering = true
+        }
+        
+        navigateToPresentingVC()
     }
     
     func passData(from sourceDS: FilterDataStore, to destinationDS: inout  FavoritesDataStore) {

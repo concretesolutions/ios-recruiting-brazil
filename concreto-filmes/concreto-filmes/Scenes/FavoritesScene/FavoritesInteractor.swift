@@ -73,10 +73,13 @@ class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
             self.presenter?.present(movies: self.movies)
             return
         }
-        
-        self.filteredMovies = movies.filter({ (movie) -> Bool in
-            return movie.title.lowercased().contains(text.lowercased())
-        })
+        if text != "" {
+            self.filteredMovies = movies.filter({ (movie) -> Bool in
+                return movie.title.lowercased().contains(text.lowercased())
+            })
+        } else {
+            self.filteredMovies = self.movies
+        }
 
         if self.genreFilter != "" {
             self.filteredMovies = self.filteredMovies.filter({ (movie) -> Bool in

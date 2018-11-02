@@ -23,7 +23,15 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
     var cellId = "favoritesCustomCell"
     
     // MARK: - Filter Variables
-    var isFiltering = false
+    var isFiltering = false {
+        didSet {
+            if self.isFiltering {
+                interactor?.filterMoviesLocally(text: self.searchBar.text ?? "", isFiltering: true)
+            } else {
+                interactor?.filterMoviesLocally(text: "", isFiltering: false)
+            }
+        }
+    }
     
     private let emptyListLabel: UILabel = {
         let label = UILabel()
