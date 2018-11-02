@@ -48,13 +48,23 @@
                         <color key="textColor" red="1" green="0.58039215686274503" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Eln-os-p27">
+                        <rect key="frame" x="53.5" y="74" width="20" height="20"/>
+                    </activityIndicatorView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hsE-UV-xBQ">
+                        <rect key="frame" x="119" y="133" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="color" red="1" green="0.58039215690000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="4Hv-SK-8FN" firstAttribute="trailing" secondItem="tY6-zp-8NP" secondAttribute="trailing" id="19q-yB-bWE"/>
                     <constraint firstItem="4Hv-SK-8FN" firstAttribute="top" secondItem="tY6-zp-8NP" secondAttribute="bottom" constant="2" id="94P-08-tw1"/>
+                    <constraint firstItem="Eln-os-p27" firstAttribute="centerX" secondItem="ebB-i3-5zV" secondAttribute="centerX" id="CSX-iU-8WF"/>
                     <constraint firstItem="VET-cX-3f7" firstAttribute="leading" secondItem="ebB-i3-5zV" secondAttribute="trailing" constant="8" id="Eld-RJ-5y2"/>
                     <constraint firstAttribute="trailing" secondItem="tY6-zp-8NP" secondAttribute="trailing" constant="16" id="FGt-b0-jls"/>
                     <constraint firstItem="VET-cX-3f7" firstAttribute="top" secondItem="uSx-Gy-B2H" secondAttribute="top" constant="16" id="FQ2-dU-10w"/>
+                    <constraint firstItem="Eln-os-p27" firstAttribute="centerY" secondItem="ebB-i3-5zV" secondAttribute="centerY" id="Fjt-ad-B3H"/>
                     <constraint firstItem="tY6-zp-8NP" firstAttribute="leading" secondItem="ebB-i3-5zV" secondAttribute="trailing" constant="8" id="Luf-60-V2f"/>
                     <constraint firstItem="4Hv-SK-8FN" firstAttribute="leading" secondItem="tY6-zp-8NP" secondAttribute="leading" id="Uy6-sh-FMG"/>
                     <constraint firstItem="5Jv-xz-gtD" firstAttribute="leading" secondItem="ebB-i3-5zV" secondAttribute="trailing" constant="8" id="WV6-74-fB7"/>
@@ -67,8 +77,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="genresActivityIndicatorView" destination="hsE-UV-xBQ" id="ECY-QL-9zk"/>
                 <outlet property="genresLabel" destination="5Jv-xz-gtD" id="IXS-vn-CbS"/>
                 <outlet property="overviewLabel" destination="4Hv-SK-8FN" id="QSC-mg-iRI"/>
+                <outlet property="posterDownloadActivityIndicatorView" destination="Eln-os-p27" id="UPd-Mi-hbe"/>
                 <outlet property="posterImageView" destination="ebB-i3-5zV" id="vL8-gQ-be0"/>
                 <outlet property="titleLabel" destination="tY6-zp-8NP" id="uKy-8i-QEO"/>
                 <outlet property="yearLabel" destination="VET-cX-3f7" id="dgB-0P-Xmb"/>
