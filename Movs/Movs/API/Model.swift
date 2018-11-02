@@ -15,6 +15,18 @@ public struct Movie: Codable {
     let posterPath:String
     var isFavorite:Bool = false
     
+    var w92PosterPath:String {
+        return self.posterCompletePath(sizeClass: "w92")
+    }
+    
+    var w185PosterPath:String {
+        return self.posterCompletePath(sizeClass: "w185")
+    }
+    
+    func posterCompletePath(sizeClass:String) -> String {
+        return "\(API.imageLink)/\(sizeClass)\(self.posterPath)"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title

@@ -44,10 +44,14 @@ final class MoviesGridCell: UICollectionViewCell {
     
     weak var delegate:MoviesGridCellDelegate?
     
-    func configure(with movie: Movie, and image:UIImage?) {
-        self.movieImageView.image = image
+    func configure(with movie: Movie) {
+        self.setMovieImageView(image: Assets.searchIcon.image)
         self.movieTitleLabel.text = movie.title
         self.favoriteButton.isSelected = movie.isFavorite
+    }
+    
+    func setMovieImageView(image:UIImage) {
+        self.movieImageView.image = image
     }
 }
 

@@ -30,12 +30,13 @@ final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
         }
         
         let movie = self.items[indexPath.row]
-        let imgLink = "\(API.imageLink)/w92\(movie.posterPath)"
         
-        cell.setupView()
         cell.delegate = self.cellDelegate
-        self.cache.getImage(for: imgLink) {
-            cell.configure(with: movie, and: $0)
+        cell.setupView()
+        cell.configure(with: movie)
+        self.cache.getImage(for: movie.w92PosterPath) { img in
+            guard let image = img else { return }
+            cell.setMovieImageView(image: image)
         }
         
         return cell
