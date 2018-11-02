@@ -91,6 +91,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         let textView = UITextView()
         textView.textColor = .white
         textView.backgroundColor = .black
+        textView.font = UIFont.systemFont(ofSize: 14)
         return textView
     }()
 
@@ -132,6 +133,16 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         super.viewDidLoad()
         setupView()
         displayMovie(viewModel: self.displayedMovie)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.hidesBarsOnSwipe = false
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.hidesBarsOnSwipe = true
     }
 
     func displayMovie(viewModel: MovieDetail.ViewModel) {
@@ -195,7 +206,6 @@ extension MovieDetailViewController: CodeView {
     func setupAdditionalConfiguration() {
         view.backgroundColor = .black
         self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.hidesBarsOnSwipe = false
     }
 
 }
