@@ -9,26 +9,30 @@
 import UIKit
 
 protocol FilterCellDelegate {
-    func deleteTapped(indexPath: IndexPath)
+    func deleteTapped(year: Int?, genre: Genre?)
 }
 
 class FilterCell: UICollectionViewCell {
     
     @IBOutlet weak var label: UILabel!
-    var indexPath: IndexPath?
+    
+    var year: Int?
+    var genre: Genre?
     
     var delegate: FilterCellDelegate?
     
-    func set(text: String, indexPath: IndexPath) {
+    func set(text: String, year: Int?, genre: Genre?) {
         self.label.text = text
-        self.indexPath = indexPath
+        self.year = year
+        self.genre = genre
+    }
+    
+    func set(text: String, genre: Genre) {
+        self.label.text = text
+        self.genre = genre
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        guard let indexPath = self.indexPath else {
-            return
-        }
-        
-        self.delegate?.deleteTapped(indexPath: indexPath)
+        self.delegate?.deleteTapped(year: year, genre: genre)
     }
 }

@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6m-cW-eQU">
-                                <rect key="frame" x="238" y="90" width="166" height="216"/>
+                                <rect key="frame" x="238.33333333333337" y="90" width="165.66666666666663" height="216"/>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTX-Hv-4YQ">
-                                <rect key="frame" x="10" y="79" width="166" height="216"/>
+                                <rect key="frame" x="10" y="79" width="165.66666666666666" height="216"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ca-8j-zs9">
                                 <rect key="frame" x="62.666666666666657" y="315" width="60" height="30"/>
@@ -165,11 +165,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qle-K7-FkS">
+                                <rect key="frame" x="62" y="681" width="60" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.042889324389999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="1rt-RE-NEY"/>
+                                    <constraint firstAttribute="height" constant="30" id="YCd-er-wdb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                <state key="normal" title="REMOVE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="removeAll:" destination="Vje-aa-ose" eventType="touchUpInside" id="gVy-r0-Lq1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FGT-pQ-Gr2" firstAttribute="trailing" secondItem="N4S-8c-jU3" secondAttribute="trailing" id="03d-q3-zh3"/>
                             <constraint firstItem="wTX-Hv-4YQ" firstAttribute="top" secondItem="LmE-Hc-Lhs" secondAttribute="bottom" constant="-1" id="3sR-85-t06"/>
+                            <constraint firstItem="UHa-gZ-ouW" firstAttribute="leading" secondItem="qle-K7-FkS" secondAttribute="trailing" constant="40" id="AhR-2e-pJY"/>
                             <constraint firstItem="FGT-pQ-Gr2" firstAttribute="leading" secondItem="N4S-8c-jU3" secondAttribute="leading" id="H9J-VO-vgS"/>
                             <constraint firstItem="wTX-Hv-4YQ" firstAttribute="leading" secondItem="N4S-8c-jU3" secondAttribute="leading" constant="10" id="J5l-T4-XUx"/>
                             <constraint firstItem="LmE-Hc-Lhs" firstAttribute="centerX" secondItem="wTX-Hv-4YQ" secondAttribute="centerX" id="O3t-aQ-0Aw"/>
@@ -185,6 +206,7 @@
                             <constraint firstItem="wTX-Hv-4YQ" firstAttribute="top" secondItem="LmE-Hc-Lhs" secondAttribute="bottom" constant="-1" id="khw-a9-NF4"/>
                             <constraint firstItem="5ca-8j-zs9" firstAttribute="centerX" secondItem="wTX-Hv-4YQ" secondAttribute="centerX" id="n9C-ao-O3D"/>
                             <constraint firstItem="h6m-cW-eQU" firstAttribute="width" secondItem="IGu-bL-3kf" secondAttribute="width" multiplier="0.4" id="phR-Tc-pFl"/>
+                            <constraint firstItem="qle-K7-FkS" firstAttribute="centerY" secondItem="UHa-gZ-ouW" secondAttribute="centerY" id="swf-io-Cuj"/>
                             <constraint firstItem="FGT-pQ-Gr2" firstAttribute="top" secondItem="Tot-qi-HQi" secondAttribute="bottom" constant="20" id="tAH-Gl-jmy"/>
                             <constraint firstItem="bYk-gf-6HZ" firstAttribute="centerX" secondItem="h6m-cW-eQU" secondAttribute="centerX" id="tTD-hN-G1u"/>
                             <constraint firstItem="wTX-Hv-4YQ" firstAttribute="width" secondItem="h6m-cW-eQU" secondAttribute="width" id="vZb-E0-TE2"/>

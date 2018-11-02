@@ -17,17 +17,21 @@ protocol FavoritesInterfaceProtocol {
 class FavoritesManager {
     var interface: FavoritesInterfaceProtocol?
     var movieProvider = MovieProvider()
+    var filterProvider = FilterProvider()
    
     
     var movies: [Movie] = []
+    var filter: Filter?
     
     init(_ interface: FavoritesInterfaceProtocol) {
         self.interface = interface
-        self.load()
     }
     
     func load() {
         self.movies = self.movieProvider.load()
+        self.filter = self.filterProvider.load()
+        
+        self.filter()
     }
     
     func numberOfMovies() -> Int {
@@ -43,8 +47,8 @@ class FavoritesManager {
         self.movies.remove(at: index)
     }
     
-    func filter(text: String) {
-        self.movies = self.movieProvider.filteredLoad(text: text)
+    func filter(text: String = "") {
+        self.movies = self.movieProvider.filteredLoad(text: text, filter: self.filter)
         self.interface?.reload()
     }
 }

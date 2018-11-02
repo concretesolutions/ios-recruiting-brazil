@@ -37,6 +37,7 @@ class HomeManager {
         
         self.interface = interface
         self.provider.delegate = self
+        self.provider.fetchGenres()
     }
     
     func fetchMovies() {

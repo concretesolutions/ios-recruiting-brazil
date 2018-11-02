@@ -42,20 +42,37 @@ class MovieProvider {
         }
     }
     
-    func fetchGenres(completion: @escaping ([Genre]) -> Void) {
-        let parameters = [ "api_key": Network.manager.apiKey ]
+    func fetchGenres(_ completion: @escaping ([Genre]) -> Void = {_ in }) {
         
-        Network.manager.request(Router.genres, parameters: parameters, decodable: GenreJSON.self) { allGenres, badRequest in
-            if let badRequest = badRequest {
-                self.delegate?.handler(badRequest: badRequest)
-                return
-            }
+        if let allGenres = self.realm.objects(AllGenres.self).first {
+            completion(Array(allGenres.genresList))
+        } else {
+            let parameters = [ "api_key": Network.manager.apiKey ]
             
-            guard let genres = allGenres?.genres else {
-                return
+            Network.manager.request(Router.genres, parameters: parameters, decodable: GenreJSON.self) { genreJSON, badRequest in
+                if let badRequest = badRequest {
+                    self.delegate?.handler(badRequest: badRequest)
+                    return
+                }
+                
+                guard let genreJSON = genreJSON, let genres = genreJSON.genres else {
+                    return
+                }
+                
+                if genres.count > 0 {
+                    try! self.realm.write {
+                        let allGenres = AllGenres()
+                        
+                        for genre in genres {
+                            allGenres.genresList.append(genre)
+                        }
+                        self.realm.add(allGenres)
+                        
+                        completion(genres)
+                    }
+                }
+                
             }
-            
-            completion(genres)
         }
     }
     
@@ -80,24 +97,28 @@ class MovieProvider {
         return self.realm.object(ofType: Movie.self, forPrimaryKey: id) != nil
     }
     
-    func filteredLoad(text: String = "", year: Int = 0, genreIds: [Int] = []) -> [Movie] {
+    func filteredLoad(text: String = "", filter: Filter?) -> [Movie] {
         var movies = self.realm.objects(Movie.self)
         
         if !text.isEmpty {
             movies = movies.filter("title CONTAINS[c] '\(text)'")
         }
         
-        if year != 0 {
-            movies = movies.filter("year = \(year)")
+        guard let filter = filter else {
+            return Array(movies)
+        }
+        
+        if !filter.years.isEmpty {
+            movies = movies.filter("year IN %@", filter.years)
         }
         
         
         var moviesArray = Array(movies)
         
-        if !genreIds.isEmpty {
-            for id in genreIds {
+        if !filter.genres.isEmpty {
+            for genre in filter.genres {
                 moviesArray = moviesArray.filter({
-                    return $0.genre_ids.contains(id)
+                    return $0.genre_ids.contains(genre.id)
                 })
             }
         }

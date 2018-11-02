@@ -46,7 +46,6 @@ class FavoritesInterface: UIViewController {
     
         self.listCollectionView.register(UINib(nibName: FavoritedMovieCell.identifier, bundle: nil), forCellWithReuseIdentifier: FavoritedMovieCell.identifier)
     }
-
 }
 
 extension FavoritesInterface: UICollectionViewDelegate {

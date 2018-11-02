@@ -1,5 +1,5 @@
 //
-//  Genre.swift
+//  Filter.swift
 //  ConcreteChallenge
 //
 //  Created by Thiago  Wlasenko Nicolau on 01/11/18.
@@ -9,20 +9,12 @@
 import Foundation
 import RealmSwift
 
-class GenreJSON: Decodable {
-    var genres: [Genre]?
-}
-
-
-class Genre: Object, Decodable {
-    @objc dynamic var id: Int = 0
-    @objc dynamic var name: String = ""
+class Filter: Object {
+    @objc dynamic var id = 0
+    var genres = List<Genre>()
+    var years = List<Int>()
     
     override class func primaryKey() -> String? {
         return "id"
     }
-}
-
-class AllGenres: Object {
-    var genresList = List<Genre>()
 }

@@ -34,7 +34,7 @@ class FilterInterface: UIViewController{
         self.genrePicker.delegate = self
         self.genrePicker.dataSource = self
         
-        
+        self.manager.fetchGenres()
         
     }
  
@@ -47,10 +47,15 @@ class FilterInterface: UIViewController{
     }
     
     @IBAction func apply(_ sender: Any) {
+        self.manager.saveFilter()
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func removeAll(_ sender: Any) {
+        self.manager.removeFilter()
+    }
+    
 }
-
 
 extension FilterInterface: UICollectionViewDelegate {
     
@@ -64,8 +69,23 @@ extension FilterInterface: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterCell", for: indexPath) as? FilterCell
         
+        let filterOption = self.manager.filterOptionIn(index: indexPath.row)
+        
+        
+        var text = ""
+        
+        if let year = filterOption as? Int {
+            text = String(year)
+            cell?.set(text: text, year: year, genre: nil)
+        }
+        
+        if let genre = filterOption as? Genre {
+            text = genre.name
+            cell?.set(text: text, year: nil, genre: genre)
+        }
+        
         cell?.delegate = self
-        cell?.set(text: self.manager.filterOptionIn(index: indexPath.row), indexPath: indexPath)
+        
         
         return cell ?? UICollectionViewCell()
     }
@@ -92,8 +112,8 @@ extension FilterInterface: UICollectionViewDelegateFlowLayout {
 }
 
 extension FilterInterface: FilterCellDelegate {
-    func deleteTapped(indexPath: IndexPath) {
-        
+    func deleteTapped(year: Int?, genre: Genre?) {
+        self.manager.delete(year: year, genre: genre)
     }
 }
 
@@ -101,7 +121,11 @@ extension FilterInterface: FilterInterfaceProtocol {
     func reload() {
         self.yearPicker.selectRow(199, inComponent: 0, animated: true)
         self.genrePicker.reloadAllComponents()
-        self.filterCollectionView.reloadData()
+        
+        UIView.animate(withDuration: 0.5) {
+            self.filterCollectionView.reloadData()
+        }
+        
     }
 }
 
