@@ -12,6 +12,7 @@ protocol MoviesGridPresenterView: ViewProtocol {
     func presentLoading()
     func present(movies:[Movie])
     func present(moreMovies:[Movie], startingAt row:Int)
+    func present(searchResults:[Movie])
     func presentError()
     func presentEmptySearch()
 }
@@ -23,7 +24,6 @@ final class MoviesGridPresenter: MVPBasePresenter {
     private(set) var isSearching:Bool = false
     
     private var movies:[Movie] = []
-    private var filteredMovies:[Movie] = []
     
     var view:MoviesGridPresenterView? {
         return self.baseView as? MoviesGridPresenterView
@@ -58,6 +58,14 @@ final class MoviesGridPresenter: MVPBasePresenter {
         self.operation.perform()
         self.view?.presentLoading()
     }
+    
+    func getFilteredMovies(searchText:String) -> [Movie] {
+        return self.movies.filter { movie in
+            let movieTitle = movie.title.lowercased()
+            let query = searchText.lowercased()
+            return movieTitle.contains(query)
+        }
+    }
 }
 
 extension MoviesGridPresenter: MoviesGridViewPresenter {
@@ -66,23 +74,26 @@ extension MoviesGridPresenter: MoviesGridViewPresenter {
         self.operation.performFromNextPage()
     }
     
+    func searchBarDidBeginEditing() {
+        self.isSearching = true
+    }
+    
+    func searchBarDidPressCancelButton() {
+        self.isSearching = false
+        self.view?.present(movies: self.movies)
+    }
+    
     func updateSearchResults(searchText: String?) {
         guard let text = searchText, !text.isEmpty else {
-            self.isSearching = false
-            self.filteredMovies = []
-            self.view?.present(movies: self.movies)
             return
         }
-        self.isSearching = true
         
-        self.filteredMovies = self.movies.filter {
-            return $0.title.contains(text)
-        }
+        let filteredMovies = self.getFilteredMovies(searchText: text)
         
-        if self.filteredMovies.isEmpty {
+        if filteredMovies.isEmpty {
             self.view?.presentEmptySearch()
         } else {
-            self.view?.present(movies: self.filteredMovies)
+            self.view?.present(searchResults: filteredMovies)
         }
     }
 }

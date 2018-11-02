@@ -10,6 +10,8 @@ import UIKit
 
 protocol MoviesGridViewPresenter: PresenterProtocol {
     func loadMoreMovies()
+    func searchBarDidBeginEditing()
+    func searchBarDidPressCancelButton()
     func updateSearchResults(searchText:String?)
 }
 
@@ -22,6 +24,8 @@ final class MoviesGridViewController: MVPBaseViewController {
             self.view = self.moviesGrid
         }
     }
+    
+    private var searchResultsViewController = MoviesSearchViewController()
     
     var presenter: MoviesGridViewPresenter? {
         get {
@@ -57,8 +61,10 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     func setupOnce() {
         self.title = "Movies"
         self.moviesGrid = MoviesGridView(frame: self.view.bounds)
-        self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
+        self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: self.searchResultsViewController)
         self.navigationItem.searchController?.searchResultsUpdater = self
+        self.navigationItem.searchController?.delegate = self
+        self.navigationItem.searchController?.searchBar.delegate = self
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.definesPresentationContext = true
     }
@@ -78,6 +84,10 @@ extension MoviesGridViewController: MoviesGridPresenterView {
         self.moviesGrid.appendData(startingAt: row)
     }
     
+    func present(searchResults: [Movie]) {
+        self.searchResultsViewController.searchResults = searchResults
+    }
+    
     func presentError() {
         self.moviesGrid.state = .error
     }
@@ -87,7 +97,15 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     }
 }
 
-extension MoviesGridViewController: UISearchResultsUpdating {
+extension MoviesGridViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.presenter?.searchBarDidBeginEditing()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.presenter?.searchBarDidPressCancelButton()
+    }
     
     func updateSearchResults(for searchController: UISearchController) {
         self.presenter?.updateSearchResults(searchText: searchController.searchBar.text)
