@@ -19,13 +19,17 @@ class DescriptionMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMovie()
+        setupTableView()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func setupTableView() {
         self.tabBarController?.tabBar.isHidden = true
         tableView.rowHeight = UITableView.automaticDimension
         tableView.reloadData()
         dataSource.controller = self
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     private func setupMovie() {

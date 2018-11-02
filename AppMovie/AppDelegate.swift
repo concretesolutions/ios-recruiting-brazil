@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationControllerMovie.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
         navigationControllerMovie.viewControllers = [movieController]
         navigationControllerMovie.navigationBar.backgroundColor = Colors.navigationController.value
-        navigationControllerMovie.viewControllers.first?.view.backgroundColor = .red
         
         let navigationControllerFavorite = UINavigationController()
         let favoriteController = Controller.createController(storyBoardName: "FavoriteMovies",controllerIdentifier: "FavoriteMovies")

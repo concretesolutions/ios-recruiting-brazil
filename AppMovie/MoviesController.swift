@@ -12,13 +12,13 @@ class MoviesController: UIViewController{
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var searchBar = UISearchController()
     let dataSource = MoviesCollectionViewDataSource()
     var pageCollection : Int = 1
     var sizeLastPage : Int = 0
     
     let activityIndicator = Activity.getActivityLoad(position: CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2), hidesWhenStopped: true, style: UIActivityIndicatorView.Style.gray)
     let viewLoad = Load.getViewLoad(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), backGround: .gray, tag: 999)
+    
     let searchController: UISearchController = {
        let search = UISearchController(searchResultsController: nil)
         search.hidesNavigationBarDuringPresentation = false
@@ -65,7 +65,9 @@ class MoviesController: UIViewController{
         self.sizeLastPage += ManagerMovies.shared.movies.count-1
         ManagerMovies.shared.setupMovies(pageNumber: page) { (moviesDonwloaded) in
             if let _movies = moviesDonwloaded {
-                self.dataSource.datas.append(contentsOf: _movies)
+                self.pageCollection+=1
+                self.sizeLastPage += ManagerMovies.shared.movies.count-1
+                self.dataSource.datas = ManagerMovies.shared.movies
                 self.setupStopLoading()
                 self.collectionView.reloadData()
             }
@@ -88,9 +90,7 @@ extension MoviesController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
        
-        if indexPath.row == ManagerMovies.shared.movies.count-1 && ManagerMovies.shared.movies.count > self.sizeLastPage{
-            print(ManagerMovies.shared.movies.count)
-            pageCollection += 1
+        if indexPath.row >= ManagerMovies.shared.movies.count-1 {
             self.setupLoad()
             setupCollectionView(page: pageCollection)
         }

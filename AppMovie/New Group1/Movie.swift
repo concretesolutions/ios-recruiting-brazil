@@ -20,7 +20,7 @@ struct MovieNowPlaying {
     var overview = String()
     var popularity = Decimal()
     var posterPath = UIImage()
-    var releaseDate = String()
+    var releaseDate = Date()
     var favorite = Bool()
 }
 
@@ -34,7 +34,15 @@ extension MovieNowPlaying {
         let originalTitle = _movieNP[PropertireMovie.originalTitle.value] as? String ?? ""
         let overview = _movieNP[PropertireMovie.overview.value] as? String ?? ""
         let popularity = _movieNP[PropertireMovie.popularity.value] as? Decimal ?? 0.0
-        let releaseDate = _movieNP[PropertireMovie.releaseDate.value] as? String ?? ""
+        
+        var releaseDate = Date()
+        if let release = _movieNP[PropertireMovie.releaseDate.value] as? String {
+            if let dateConverted = Dates.convertDateFormatter(stringDate: release) {
+                releaseDate = dateConverted
+            }
+        }
+        
+        
         let favorite = false
         
         var backDropImage : UIImage?

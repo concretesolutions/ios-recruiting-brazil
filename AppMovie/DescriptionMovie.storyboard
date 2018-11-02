@@ -24,12 +24,9 @@
                                     <constraint firstAttribute="width" constant="345" id="8m2-Pq-mWk"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NRC-iA-RkU">
-                                <rect key="frame" x="15" y="382" width="345" height="261"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NRC-iA-RkU">
+                                <rect key="frame" x="15" y="382" width="345" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="261" id="0e0-ca-b5p"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="descriptionCell" id="Qk1-5v-5u3" customClass="DescribeMovieTableViewCell" customModule="AppMovie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="345" height="44"/>
@@ -38,7 +35,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ual-3I-be9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ual-3I-be9">
                                                     <rect key="frame" x="0.0" y="0.0" width="306" height="43.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="306" id="m6G-NZ-gUS"/>
@@ -76,6 +73,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="npl-Rw-6DG" firstAttribute="leading" secondItem="kaE-aR-d8L" secondAttribute="leading" constant="15" id="611-7d-uKs"/>
+                            <constraint firstItem="kaE-aR-d8L" firstAttribute="bottom" secondItem="NRC-iA-RkU" secondAttribute="bottom" constant="5" id="9eH-Hv-ZiP"/>
                             <constraint firstItem="NRC-iA-RkU" firstAttribute="top" secondItem="npl-Rw-6DG" secondAttribute="bottom" constant="10" id="J4e-BW-8Ld"/>
                             <constraint firstItem="kaE-aR-d8L" firstAttribute="trailing" secondItem="npl-Rw-6DG" secondAttribute="trailing" constant="15" id="Kce-kR-hIe"/>
                             <constraint firstItem="npl-Rw-6DG" firstAttribute="top" secondItem="kaE-aR-d8L" secondAttribute="top" constant="10" id="MXC-ij-m0o"/>

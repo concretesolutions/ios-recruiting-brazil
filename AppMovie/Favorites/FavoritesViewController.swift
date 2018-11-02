@@ -16,7 +16,6 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.setupTableView()
         self.setupNavigation()
     }
@@ -32,6 +31,8 @@ class FavoritesViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = dataSource
         tableView.delegate = self
         dataSource.identifierCell = "favoriteMoveCell"
@@ -73,7 +74,6 @@ extension FavoritesViewController: UITableViewDelegate {
             ManagerMovies.shared.movies[index].updateFavorite()
             self.tableView.reloadData()
         }
-        action.backgroundColor = .red
         return action
     }
     

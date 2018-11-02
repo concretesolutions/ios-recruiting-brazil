@@ -55,6 +55,31 @@ struct Controller {
     }
 }
 
+struct Dates {
+    
+    static func toString( dateFormat format  : String, to converted: Date) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: converted)
+    }
+    
+    static func convertDateFormatter(stringDate: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let newDate = dateFormatter.date(from: stringDate)
+        
+        return newDate
+    }
+    
+    static func getComponent(from component: Calendar.Component,at date: Date) -> Int{
+        let calendar = Calendar.current
+        let componentSelected = calendar.component(.year, from: date)
+        
+        return componentSelected
+    }
+}
+
 enum PropertireMovie  {
     case adult, backdropPath, genre, id, language, originalTitle, overview, popularity, posterPath, releaseDate, title, video, voteAverage, voteCount
     
