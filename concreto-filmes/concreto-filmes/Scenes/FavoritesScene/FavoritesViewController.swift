@@ -106,6 +106,7 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
         self.displayedMovies = movies
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.emptyListLabel.isHidden = !self.displayedMovies.isEmpty
         }
     }
     
@@ -122,10 +123,15 @@ extension FavoritesViewController: CodeView {
     func buildViewHierarchy() {
         self.navigationItem.rightBarButtonItem = self.filterBarButton
         self.navigationItem.titleView = self.searchBar
+        view.addSubview(self.emptyListLabel)
     }
     
     func setupConstraints() {
-        
+        self.emptyListLabel.snp.makeConstraints { (maker) in
+            maker.center.equalTo(view)
+            maker.left.equalTo(view).offset(20)
+            maker.right.equalTo(view).inset(20)
+        }
     }
     
     func setupAdditionalConfiguration() {
