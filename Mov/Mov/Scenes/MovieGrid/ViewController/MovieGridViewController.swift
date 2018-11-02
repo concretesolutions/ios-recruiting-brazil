@@ -12,10 +12,10 @@ final class MovieGridViewController: UIViewController {
     
     private static let title = "Movies"
     
-    var interactor: MovieGridInteractor! {
+    var interactor: MovieGridInteractor? {
         didSet {
             if (self.viewModels.isEmpty) {
-                self.interactor.fetchMovieList(page: self.page)
+                self.fetchMovies()
             }
         }
     }
@@ -74,14 +74,18 @@ final class MovieGridViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        guard let interactor = self.interactor else { return }
-        interactor.fetchMovieList(page: self.page)
+        self.fetchMovies()
     }
     
     override func viewDidLoad() {
         self.setTabBarOptions()
         self.title = MovieGridViewController.title
+    }
+    
+    func fetchMovies() {
+        guard let interactor = self.interactor else { return }
+        self.movieGridView.activityIndicator.startAnimating()
+        interactor.fetchMovieList(page: self.page)
     }
 }
 
@@ -91,6 +95,7 @@ extension MovieGridViewController: MovieGridViewOutput {
     func display(movies: [MovieGridViewModel]) {
         self.viewModels = movies
         self.movieGridView.collection.reloadData()
+        self.movieGridView.activityIndicator.stopAnimating()
         
         self.state = .collection
     }
@@ -117,7 +122,7 @@ extension MovieGridViewController: ViewCode {
     }
     
     func additionalSetup() {
-        self.movieGridView.searchBarDelegate.textDidChangeAction = self.interactor.filterMoviesBy
+        self.movieGridView.searchBarDelegate.textDidChangeAction = self.interactor!.filterMoviesBy
         
         self.movieGridView.searchBarDelegate.didPressCancelAction = { [weak self] in
             guard let self = self else { return }
@@ -144,8 +149,8 @@ extension MovieGridViewController {
         let position = button.convert(CGPoint.zero, to: self.movieGridView.collection.coordinateSpace)
         let indexPath = self.movieGridView.collection.indexPathForItem(at: position)
         
-        if let indexPath = indexPath {
-            self.interactor.toggleFavoriteMovie(at: indexPath.item)
+        if let index = indexPath?.item, let interactor = self.interactor {
+            interactor.toggleFavoriteMovie(at: index)
         }
     }
 }

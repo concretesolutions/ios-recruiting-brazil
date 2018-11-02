@@ -17,7 +17,7 @@ public class MovieDetailsView: UIView {
     }()
     
     lazy var tableView: MovieDetailsTableView = {
-        return MovieDetailsTableView()
+        return MovieDetailsTableView(frame: .zero, style: .plain)
     }()
     
     // Initialization
@@ -44,12 +44,11 @@ extension MovieDetailsView: ViewCode {
             make.top.equalToSuperview().multipliedBy(0.8)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalToSuperview().multipliedBy(0.5)
-            make.centerX.equalToSuperview()
-            
+            make.centerX.equalToSuperview()   
         }
         
         self.tableView.snp.makeConstraints { make in
-            make.top.equalTo(self.poster.snp_bottomMargin)
+            make.top.equalTo(self.poster.snp_bottomMargin).inset(CGFloat(40).proportionalToHeight)
             make.width.equalToSuperview()
             make.bottom.equalTo(self.safeAreaLayoutGuide)
             make.centerX.equalToSuperview()

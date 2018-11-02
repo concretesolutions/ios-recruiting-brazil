@@ -9,10 +9,27 @@
 import UIKit
 
 public class FavoritesView: UIView {
+    let searchBarDelegate: MovieSearchBarDelegate = MovieSearchBarDelegate()
     
     // UI Elements
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.barTintColor = Colors.lightYellow
+        searchBar.layer.borderWidth = 1
+        searchBar.layer.borderColor = Colors.lightYellow.cgColor
+        searchBar.placeholder = "search movies..."
+        searchBar.delegate = self.searchBarDelegate
+        
+        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+            textField.backgroundColor = Colors.darkYellow
+        } else {/*do nothing*/}
+        
+        
+        return searchBar
+    }()
+    
     lazy var tableView: FavoritesTableView = {
-        return FavoritesTableView(frame: .zero, style: .grouped)
+        return FavoritesTableView(frame: .zero, style: .plain)
     }()
     
     // Initialization
@@ -30,12 +47,23 @@ public class FavoritesView: UIView {
 extension FavoritesView: ViewCode {
     
     public func addView() {
+        self.addSubview(self.searchBar)
         self.addSubview(self.tableView)
     }
     
     public func addConstraints() {
+        self.searchBar.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide)
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.1)
+            make.centerX.equalToSuperview()
+        }
+        
         self.tableView.snp.makeConstraints { make in
-            make.edges.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(self.searchBar.snp_bottomMargin)
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
         }
     }
     

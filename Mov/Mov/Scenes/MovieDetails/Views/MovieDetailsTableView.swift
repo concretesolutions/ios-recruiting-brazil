@@ -19,8 +19,8 @@ class MovieDetailsTableView: UITableView {
     static let overviewCellHeight = CGFloat(255).proportionalToHeight
     
     
-    init() {
-        super.init(frame: .zero, style: .grouped)
+    override init(frame: CGRect, style: UITableView.Style) {
+        super.init(frame: frame, style: style)
         self.setup()
     }
     

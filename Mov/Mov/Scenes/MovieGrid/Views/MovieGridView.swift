@@ -27,13 +27,22 @@ public class MovieGridView: UIView {
         return ErrorView(errorImage: Images.noResults, labelText: Texts.noResults(for: "x"))
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.stopAnimating()
+        
+        return activityIndicator
+    }()
+    
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.barTintColor = Colors.lightYellow
         searchBar.layer.borderWidth = 1
         searchBar.layer.borderColor = Colors.lightYellow.cgColor
         searchBar.placeholder = "search movies..."
-        searchBar.delegate = searchBarDelegate
+        searchBar.delegate = self.searchBarDelegate
         
         if let textField = searchBar.value(forKey: "searchField") as? UITextField {
             textField.backgroundColor = Colors.darkYellow
@@ -62,6 +71,7 @@ extension MovieGridView: ViewCode {
         self.addSubview(self.networkErrorView)
         self.addSubview(self.searchBar)
         self.addSubview(self.noResultsView)
+        self.addSubview(activityIndicator)
     }
     
     public func addConstraints() {
@@ -91,6 +101,10 @@ extension MovieGridView: ViewCode {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
+        }
+        
+        self.activityIndicator.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
