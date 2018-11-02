@@ -12,6 +12,7 @@ protocol MoviesGridPresenterView: ViewProtocol {
     func presentLoading()
     func present(movies:[Movie])
     func presentError()
+    func presentEmptySearch()
 }
 
 final class MoviesGridPresenter: MVPBasePresenter {
@@ -58,6 +59,10 @@ extension MoviesGridPresenter: MoviesGridViewPresenter {
             return $0.title.contains(text)
         }
         
-        self.view?.present(movies: self.filteredMovies)
+        if self.filteredMovies.isEmpty {
+            self.view?.presentEmptySearch()
+        } else {
+            self.view?.present(movies: self.filteredMovies)
+        }
     }
 }

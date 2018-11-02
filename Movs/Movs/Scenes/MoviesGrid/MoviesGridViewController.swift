@@ -71,6 +71,10 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     func presentError() {
         self.moviesGrid.state = .error
     }
+    
+    func presentEmptySearch() {
+        self.moviesGrid.state = .emptySearch
+    }
 }
 
 extension MoviesGridViewController: UISearchResultsUpdating {

@@ -67,6 +67,6 @@ extension FeedbackView: ViewCode {
         self.stackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6).isActive = true
         self.stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
         self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -65.0).isActive = true
     }
 }
