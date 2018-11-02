@@ -11,20 +11,50 @@ import Foundation
 @testable import Mov
 
 class MovieGridInteractorMock: MovieGridInteractor {
+
+    var calls = Set<Methods>()
     
-    private var calls = Set<Method>()
+    let mockMovies = (0..<5).map { Movie.mock(id: $0) }
     
-    enum Method {
-        case fetchMovieLit
-    }
+    var receivedPage = 0
     
-    func didCall(method: Method) -> Bool {
-        return self.calls.contains(method)
-    }
+    var receivedToggleIndex = 0
+    
+    var receivedFilterString = ""
+    
+    var receivedMovieIndex = 0
     
     func fetchMovieList(page: Int) {
         self.calls.insert(.fetchMovieLit)
+        self.receivedPage = page
     }
     
+    func toggleFavoriteMovie(at index: Int) {
+        self.calls.insert(.toggleFavoriteMovie)
+        self.receivedToggleIndex = index
+    }
     
+    func filterMoviesBy(string: String) {
+        self.calls.insert(.filterMoviesBy)
+        self.receivedFilterString = string
+    }
+    
+    func movie(at index: Int) -> Movie? {
+        self.calls.insert(.movieAt)
+        self.receivedMovieIndex = index
+        return self.mockMovies[safe: index]
+    }
+    
+}
+
+extension MovieGridInteractorMock: Spy {
+    typealias MockMethod = Methods
+    
+    enum Methods {
+        case fetchMovieLit
+        case toggleFavoriteMovie
+        case filterMoviesBy
+        case movieAt
+        
+    }
 }

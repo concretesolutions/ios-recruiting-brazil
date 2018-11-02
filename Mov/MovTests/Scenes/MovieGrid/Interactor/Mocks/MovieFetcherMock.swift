@@ -13,19 +13,27 @@ class MovieFetcherMock: MovieFetcher {
     
     static var fetchedMovies = [Movie]()
     
-    
     public var flawedFetch = false
-    public var mockMovies = (0..<5).map { id in
-        return Movie(id: id, genreIds: [], title: "", overview: "", releaseDate: Date(), posterPath: "")
-    }
+    
+    public var mockMovies = (0..<5).map { Movie.mock(id: $0) }
+    
+    var calls = Set<MovieFetcherMock.Methods>()
     
     func fetchPopularMovies(page: Int, _ completion: @escaping (Result<[Movie]>) -> Void) {
-        let result = self.flawedFetch ? Result<[Movie]>.failure(ErrorMock.testFailed) : Result<[Movie]>.success(self.mockMovies)
+        self.calls.insert(.fetchPopularMovies)
+        
+        let result = self.flawedFetch ? Result<[Movie]>.failure(MockError.fail) : Result<[Movie]>.success(self.mockMovies)
+        
         completion(result)
     }
+}
+
+extension MovieFetcherMock: Spy {
+    typealias MockMethod = Methods
     
-    enum ErrorMock: Error {
-        case testFailed
+    enum Methods {
+        case fetchPopularMovies
     }
+    
 }
 

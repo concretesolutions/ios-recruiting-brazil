@@ -12,27 +12,33 @@ import Foundation
 
 class MovieGridViewOutPutMock: MovieGridViewOutput {
     
-    private var calls = Set<Method>()
+    var calls = Set<Methods>()
     
-    public var receivedViewModels = [MovieGridViewModel]()
+    var receivedViewModels = [MovieGridViewModel]()
     
-    enum Method {
-        case displayMovies
-        case displayNetworkError
-    }
-    
-    func didCall(method: Method) -> Bool {
-        return self.calls.contains(method)
-    }
+    var receivedResultRequest = ""
     
     func display(movies: [MovieGridViewModel]) {
         self.calls.insert(.displayMovies)
-        self.receivedViewModels.append(contentsOf: movies)
+        self.receivedViewModels = movies
     }
     
     func displayNetworkError() {
         self.calls.insert(.displayNetworkError)
     }
     
+    func displayNoResults(for request: String) {
+        self.calls.insert(.displayNoResults)
+        self.receivedResultRequest = request
+    }
+}
+
+extension MovieGridViewOutPutMock: Spy {
+    typealias MockMethod = Methods
     
+    enum Methods {
+        case displayMovies
+        case displayNetworkError
+        case displayNoResults
+    }
 }

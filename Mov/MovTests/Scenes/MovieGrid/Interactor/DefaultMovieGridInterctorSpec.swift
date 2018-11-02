@@ -21,36 +21,44 @@ class DefaultMovieGridInteractorSpec: QuickSpec {
             
             context("when initialized") {
                 var movieFetcher: MovieFetcherMock!
-                var moviePersistence: MoviePersistenceMock!
+                var persistence: FavoritesPersistenceMock!
                 var presenter: MovieGridPresenterMock!
                 
                 beforeEach {
                     movieFetcher = MovieFetcherMock()
-                    moviePersistence = MoviePersistenceMock()
+                    persistence = FavoritesPersistenceMock()
                     presenter = MovieGridPresenterMock()
                     
-                    interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, persistence: moviePersistence)
+                    interactor = DefaultMovieGridInteractor(presenter: presenter, movieFetcher: movieFetcher, persistence: persistence)
                 }
                     
                 context("and succeed to fetch movies") {
-                    var fetchedMoviesMock: [MovieGridUnit]!
                     
                     beforeEach {
-                        fetchedMoviesMock = movieFetcher.mockMovies.map { movie in
-                            return MovieGridUnit(title: movie.title, posterPath: movie.posterPath, isFavorite: false)
+                        movieFetcher.flawedFetch = false
+                    }
+                    
+                    context("and succeed to fetchFavorites") {
+                        var expectedUnits: [MovieGridUnit]!
+                        
+                        beforeEach {
+                            persistence.raiseOnFetch = false
+                            expectedUnits = movieFetcher.mockMovies.map { movie in
+                                let isFavorite = try! persistence.fetchFavorites().contains(movie)
+                                return MovieGridUnit(from: movie, isFavorite: isFavorite)
+                            }
+            
+                            interactor.fetchMovieList(page: 1)
                         }
                         
-                        movieFetcher.flawedFetch = false
-                        interactor.fetchMovieList(page: 1)
-                    }
-                    
-                    it("present movies") {
-                        expect(presenter.didCall(method: .presentMovies)).to(beTrue())
-                    }
-                    
-                    it("send correctly to presenter all data fetched") {
-
-                        expect(presenter.receivedMovies).to(equal(fetchedMoviesMock))
+                        it("present movies") {
+                            expect(presenter.didCall(method: .presentMovies)).to(beTrue())
+                        }
+                        
+                        it("send correctly to presenter all data fetched") {
+                            
+                            expect(presenter.receivedUnits).to(equal(expectedUnits))
+                        }
                     }
                 }
                 

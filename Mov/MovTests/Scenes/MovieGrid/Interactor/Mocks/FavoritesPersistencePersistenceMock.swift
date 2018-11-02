@@ -10,18 +10,24 @@ import Foundation
 @testable import Mov
 
 
-class Mock: FavoritesPersistence {
+class FavoritesPersistenceMock: FavoritesPersistence {
     
-    let mockMovies = (0..<5).map { Movie.mock(id: $0) }
+    let mockMovies = (0..<3).map { Movie.mock(id: $0) }
     
     var calls = Set<Method>()
     
+    var raiseOnToggle = false
+    var raiseOnFetch = false
+    
     func toggleFavorite(movie: Movie) throws {
-        
+        self.calls.insert(.toggleFavorite)
+        if (raiseOnToggle) { throw MockError.fail }
     }
     
     func fetchFavorites() throws -> Set<Movie> {
-        return Set<Movie>(self.mockMovies)
+        self.calls.insert(.fetchFavorites)
+        if (raiseOnFetch) { throw MockError.fail }
+        else { return Set<Movie>(self.mockMovies) }
     }
 }
 

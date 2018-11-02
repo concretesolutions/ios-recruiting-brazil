@@ -11,26 +11,34 @@ import Foundation
 
 class MovieGridPresenterMock: MovieGridPresenter {
     
-    enum Method: Equatable {
-        case presentMovies
-        case presentNetworkError
-    }
+    var calls = Set<Method>()
     
-    private var calls = Set<Method>()
+    var receivedUnits = [MovieGridUnit]()
     
-    public var receivedMovies = [MovieGridUnit]()
+    var receivedSearchRequest = ""
     
-    public func didCall(method: Method) -> Bool {
-        return self.calls.contains(method)
-    }
     
     func present(movies: [MovieGridUnit]) {
         self.calls.insert(.presentMovies)
-        self.receivedMovies = movies
+        self.receivedUnits = movies
     }
     
     func presentNetworkError() {
         self.calls.insert(.presentNetworkError)
     }
     
+    func presentNoResultsFound(for request: String) {
+        self.calls.insert(.presentNoResultsFound)
+        self.receivedSearchRequest = request
+    }
+}
+
+extension MovieGridPresenterMock: Spy {
+    typealias MockMethod = MovieGridPresenterMock.Method
+    
+    enum Method {
+        case presentMovies
+        case presentNetworkError
+        case presentNoResultsFound
+    }
 }
