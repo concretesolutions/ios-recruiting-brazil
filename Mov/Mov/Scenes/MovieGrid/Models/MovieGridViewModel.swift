@@ -10,14 +10,23 @@ import UIKit
 
 struct MovieGridViewModel: Equatable {
     
-    let id: Int
     let title: String
     let posterPath: String
     let isFavoriteIcon: UIImage
     
+    init(title: String, posterPath: String, isFavoriteIcon: UIImage) {
+        self.title = title
+        self.posterPath = posterPath
+        self.isFavoriteIcon = isFavoriteIcon
+    }
+    
+    init(from unit: MovieGridUnit, isFavoriteIcon: UIImage) {
+        self.init(title: unit.title, posterPath: unit.posterPath, isFavoriteIcon: isFavoriteIcon)
+    }
+    
     
     // empty path will generate nil url, thus making fetchImage get a placeholder poster
-    static let placeHolder = MovieGridViewModel(id: 0, title: "Movie", posterPath: "", isFavoriteIcon: Images.isFavoriteIconGray)
+    static let placeHolder = MovieGridViewModel(title: "Movie", posterPath: "", isFavoriteIcon: Images.isFavoriteIconGray)
 }
 
 extension MovieGridViewModel {

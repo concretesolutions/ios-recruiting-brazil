@@ -32,7 +32,7 @@ final class DefaultMovieGridInteractor {
     private func movieGridUnits(from movies: [Movie]) -> [MovieGridUnit] {
         return movies.map { movie in
             let isFavorite = self.favorites.contains(movie)
-            return MovieGridUnit(id: movie.id, title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
+            return MovieGridUnit(from: movie, isFavorite: isFavorite)
         }
     }
     

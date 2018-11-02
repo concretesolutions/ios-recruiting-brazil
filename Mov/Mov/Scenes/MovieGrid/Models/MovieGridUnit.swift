@@ -9,15 +9,24 @@
 import Foundation
 
 struct MovieGridUnit {
-    let id: Int
     let title: String
     let posterPath: String
     let isFavorite: Bool
+    
+    init(title: String, posterPath: String, isFavorite: Bool) {
+        self.title = title
+        self.posterPath = posterPath
+        self.isFavorite = isFavorite
+    }
+    
+    init(from movie: Movie, isFavorite: Bool) {
+        self.init(title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite)
+    }
 }
 
 extension MovieGridUnit: Equatable {
     static func == (lhs: MovieGridUnit, rhs: MovieGridUnit) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.title == rhs.title
             && lhs.isFavorite == rhs.isFavorite
     }
 }
