@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol MoviesGridCellDelegate: NSObjectProtocol {
+    func didFavoriteCell(_ sender:MoviesGridCell)
+    func didUnfavoriteCell(_ sender:MoviesGridCell)
+}
+
 // MARK: - Collection view cell
 
 final class MoviesGridCell: UICollectionViewCell {
@@ -36,6 +41,8 @@ final class MoviesGridCell: UICollectionViewCell {
     }
     
     var settedUp:Bool = false
+    
+    weak var delegate:MoviesGridCellDelegate?
     
     func configure(with movie: Movie, and image:UIImage?) {
         self.movieImageView.image = image
@@ -72,5 +79,14 @@ extension MoviesGridCell: ReusableViewCode {
         self.favoriteButton.widthAnchor.constraint(equalTo: self.favoriteButton.heightAnchor).isActive = true
         self.favoriteButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5.0).isActive = true
         self.favoriteButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 5.0).isActive = true
+    }
+    
+    func additionalSetups() {
+        self.favoriteButton.onFavorite = { [unowned self] _ in
+            self.delegate?.didFavoriteCell(self)
+        }
+        self.favoriteButton.onUnfavorite = { [unowned self] _ in
+            self.delegate?.didUnfavoriteCell(self)
+        }
     }
 }

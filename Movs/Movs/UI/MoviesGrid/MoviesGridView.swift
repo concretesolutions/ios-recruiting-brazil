@@ -9,6 +9,9 @@
 import UIKit
 
 protocol MoviesGridViewDelegate:AnyObject {
+    func moviesGrid(_ sender:MoviesGridView, didSelectItemAt indexPath:IndexPath)
+    func moviesGrid(_ sender:MoviesGridView, didFavoriteItemAt indexPath:IndexPath)
+    func moviesGrid(_ sender:MoviesGridView, didUnfavoriteItemAt indexPath:IndexPath)
 }
 
 final class MoviesGridView: UIView {
@@ -20,7 +23,7 @@ final class MoviesGridView: UIView {
         case grid
     }
     
-    private let collectionViewDataSource = MoviesGridDataSource()
+    private lazy var collectionViewDataSource = MoviesGridDataSource(cellDelegate: self)
     
     private var collectionView:MoviesGridCollectionView! {
         didSet {
@@ -91,6 +94,10 @@ final class MoviesGridView: UIView {
     func reloadData() {
         self.collectionView.reloadData()
     }
+    
+    func collectionViewIndexPath(for cell:MoviesGridCell) -> IndexPath {
+        return self.collectionView.indexPath(for: cell)!
+    }
 }
 
 extension MoviesGridView: ViewCode {
@@ -110,7 +117,22 @@ extension MoviesGridView: ViewCode {
     }
 }
 
+extension MoviesGridView: MoviesGridCellDelegate {
+    
+    func didFavoriteCell(_ sender: MoviesGridCell) {
+        self.delegate?.moviesGrid(self, didFavoriteItemAt: self.collectionViewIndexPath(for: sender))
+    }
+    
+    func didUnfavoriteCell(_ sender: MoviesGridCell) {
+        self.delegate?.moviesGrid(self, didUnfavoriteItemAt: self.collectionViewIndexPath(for: sender))
+    }
+}
+
 extension MoviesGridView: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.moviesGrid(self, didSelectItemAt: indexPath)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return MoviesGridFlowLayout.calculateItemSize(for: collectionView.bounds.size)

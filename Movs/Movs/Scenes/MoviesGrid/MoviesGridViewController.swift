@@ -16,6 +16,7 @@ final class MoviesGridViewController: MVPBaseViewController {
     private var moviesGrid: MoviesGridView! {
         didSet {
             self.moviesGrid.setupView()
+            self.moviesGrid.delegate = self
             self.view = self.moviesGrid
         }
     }
@@ -27,6 +28,21 @@ final class MoviesGridViewController: MVPBaseViewController {
         set {
             self.basePresenter = newValue
         }
+    }
+}
+
+extension MoviesGridViewController: MoviesGridViewDelegate {
+    
+    func moviesGrid(_ sender: MoviesGridView, didSelectItemAt indexPath: IndexPath) {
+        print("select:\(indexPath.row)")
+    }
+    
+    func moviesGrid(_ sender: MoviesGridView, didFavoriteItemAt indexPath: IndexPath) {
+        print("favorite:\(indexPath.row)")
+    }
+    
+    func moviesGrid(_ sender: MoviesGridView, didUnfavoriteItemAt indexPath: IndexPath) {
+        print("unfavorite:\(indexPath.row)")
     }
 }
 

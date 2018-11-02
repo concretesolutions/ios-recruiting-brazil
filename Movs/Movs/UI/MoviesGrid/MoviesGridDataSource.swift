@@ -13,7 +13,10 @@ final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
     let cache = ImageCache()
     var items:[Movie]
     
-    init(items:[Movie]? = nil) {
+    unowned let cellDelegate:MoviesGridCellDelegate
+    
+    init(cellDelegate:MoviesGridCellDelegate, items:[Movie]? = nil) {
+        self.cellDelegate = cellDelegate
         self.items = items ?? []
     }
     
@@ -30,7 +33,10 @@ final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
         let imgLink = "\(API.imageLink)/w92\(movie.posterPath)"
         
         cell.setupView()
-        self.cache.getImage(for: imgLink) { cell.configure(with: movie, and: $0) }
+        cell.delegate = self.cellDelegate
+        self.cache.getImage(for: imgLink) {
+            cell.configure(with: movie, and: $0)
+        }
         
         return cell
     }

@@ -35,9 +35,9 @@ final class FavoriteButton: UIButton {
     
     @objc private func buttonTapSelector() {
         if self.isSelected {
-            self.onFavorite?(self)
-        } else {
             self.onUnfavorite?(self)
+        } else {
+            self.onFavorite?(self)
         }
         self.isSelected = !self.isSelected
     }
