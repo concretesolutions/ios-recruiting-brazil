@@ -107,6 +107,7 @@ class MoviesCollectionViewController: UICollectionViewController {
   fileprivate func setupCollectionView() {
     moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width, updateDelegate: self, itemSelectDelegate: self)
     moviesDataSource = MoviesDataSource(posterHeight: moviesDelegate.newPosterHeight, searchController: searchController, updateCollectionDelegate: self)
+    LocalStorage.shared.delegate = moviesDataSource
     searchController.searchResultsUpdater = moviesDataSource
     self.collectionView.delegate = moviesDelegate
     self.collectionView.dataSource = moviesDataSource
@@ -164,6 +165,7 @@ class MoviesCollectionViewController: UICollectionViewController {
     loadGenres()
     
     launchScreenAnimation()
+
   }
   
 }

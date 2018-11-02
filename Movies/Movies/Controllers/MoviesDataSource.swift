@@ -25,13 +25,15 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+    var movie: Movie
     
     if !isFiltering() {
-      cell.configure(withMovie: movies[indexPath.row])
+      movie = movies[indexPath.row]
     } else {
-      cell.configure(withMovie: filteredMovies[indexPath.row])
+      movie = filteredMovies[indexPath.row]
     }
     
+    cell.configure(withMovie: movie)
     cell.posterHeightLayoutConstraint.constant = posterHeight
     collectionView.layoutIfNeeded()
     return cell
@@ -80,6 +82,26 @@ extension MoviesDataSource: UISearchResultsUpdating {
     return searchController.isActive && !searchBarIsEmpty()
   }
   
+}
+
+extension MoviesDataSource: MovieFavoriteStateChangedDelegate {
+  func movie(_ movie: Movie, changedToFavorite: Bool) {
+    var changedMovie = movie
+    changedMovie.isFavorite = changedToFavorite
+    
+    let indexOnMovies = movies.firstIndex { $0.identificator == changedMovie.identificator }
+    let indexOnFilteredMovies = filteredMovies.firstIndex { $0.identificator == changedMovie.identificator }
+    
+    if let index = indexOnMovies {
+      movies[index] = changedMovie
+    }
+    
+    if let index = indexOnFilteredMovies {
+      filteredMovies[index] = changedMovie
+    }
+    
+    updateCollectionDelegate.updateCollection()
+  }
 }
 
 protocol UpdateCollectionDelegate: class {

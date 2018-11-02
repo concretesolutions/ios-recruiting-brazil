@@ -13,7 +13,7 @@ struct Movie {
   let posterPath: String
   let voteAverage: Double
   let releaseDate: Date
-  let isFavorite: Bool
+  var isFavorite: Bool
   let overview: String
   let backdropPath: String
   let genresID: [Int]

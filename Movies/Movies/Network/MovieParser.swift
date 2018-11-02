@@ -43,12 +43,14 @@ final class MovieParser {
       fatalError("Failed to create the date from the formater")
     }
     
+    let isFavorite = LocalStorage.shared.isFavoriteMovie(byId: identificator)
+    
     return Movie(identificator: identificator,
                  title: title,
                  posterPath: posterPath,
                  voteAverage: voteAverage,
                  releaseDate: releaseDate,
-                 isFavorite: false,
+                 isFavorite: isFavorite,
                  overview: overview,
                  backdropPath: backdropPath,
                  genresID: genresID

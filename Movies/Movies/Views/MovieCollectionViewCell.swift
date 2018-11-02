@@ -20,6 +20,8 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
   @IBOutlet weak var starImageView: UIImageView!
   @IBOutlet weak var loadingActivityIndicatorView: UIActivityIndicatorView!
   
+  var movie: Movie!
+  
   enum CellLoadingState {
     case loading
     case loaded
@@ -73,6 +75,8 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
   }
   
   func configure(withMovie movie: Movie) {
+    self.movie = movie
+    
     titleLabel.text = movie.title
     ratingLabel.text = String(format: "Rating: %.1f/10", movie.voteAverage)
     yearLabel.text = "\(Calendar.current.component(.year, from: movie.releaseDate))"
@@ -92,8 +96,10 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
   @objc func favoriteButtonTapped() {
     if currentFavoriteState == .favorite {
       currentFavoriteState = .notFavorite
+      LocalStorage.shared.removeFavorite(movie: movie)
     } else {
       currentFavoriteState = .favorite
+      LocalStorage.shared.addFavorite(movie: movie)
     }
   }
   

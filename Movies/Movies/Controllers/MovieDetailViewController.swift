@@ -94,8 +94,10 @@ class MovieDetailViewController: UIViewController {
   @objc func toggleFavorite() {
     if currentFavoriteState == .favorite {
       currentFavoriteState = .notFavorite
+      LocalStorage.shared.removeFavorite(movie: movie)
     } else {
       currentFavoriteState = .favorite
+      LocalStorage.shared.addFavorite(movie: movie)
     }
   }
   
