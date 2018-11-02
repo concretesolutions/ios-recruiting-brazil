@@ -10,15 +10,18 @@ import UIKit
 
 final class ImageCache {
     
+    typealias Callback = (UIImage?) -> Void
     private var images:[String:UIImage?] = [:]
     
-    func getImage(for link:String) -> UIImage? {
+    func getImage(for link:String, completion:Callback? = nil) {
         if let img = self.images[link] {
-            return img
+            completion?(img)
         } else {
-            let img = Assets.getImage(from: link)
-            self.images[link] = img
-            return img
+            DispatchQueue.global(qos: .userInitiated).async {
+                let img = Assets.getImage(from: link)
+                self.images[link] = img
+                DispatchQueue.main.async { completion?(img) }
+            }
         }
     }
 }

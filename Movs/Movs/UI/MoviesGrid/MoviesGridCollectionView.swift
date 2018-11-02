@@ -16,7 +16,5 @@ extension MoviesGridCollectionView: ViewCode {
     func design() {
         self.register(MoviesGridCell.self, forCellWithReuseIdentifier: MoviesGridCell.identifier)
         self.backgroundColor = .clear
-        self.isScrollEnabled = true
-        self.dragInteractionEnabled = true
     }
 }
