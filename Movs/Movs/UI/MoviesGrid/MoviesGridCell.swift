@@ -58,19 +58,19 @@ extension MoviesGridCell: ReusableViewCode {
         self.movieImageView.translatesAutoresizingMaskIntoConstraints = false
         self.movieImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         self.movieImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.movieImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.movieImageView.bottomAnchor.constraint(equalTo: self.movieTitleLabel.topAnchor).isActive = true
+        self.movieImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10.0).isActive = true
+        self.movieImageView.bottomAnchor.constraint(equalTo: self.movieTitleLabel.topAnchor, constant: -5.0).isActive = true
         // movie title
         self.movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        self.movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.movieTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25).isActive = true
-        self.movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5.0).isActive = true
+        self.movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 5.0).isActive = true
+        self.movieTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15).isActive = true
+        self.movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0).isActive = true
         // movie is favorite indicator
         self.favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         self.favoriteButton.heightAnchor.constraint(equalTo: self.movieTitleLabel.heightAnchor).isActive = true
         self.favoriteButton.widthAnchor.constraint(equalTo: self.favoriteButton.heightAnchor).isActive = true
-        self.favoriteButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.favoriteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.favoriteButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5.0).isActive = true
+        self.favoriteButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 5.0).isActive = true
     }
 }
