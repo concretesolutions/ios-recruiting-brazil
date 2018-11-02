@@ -21,6 +21,31 @@ struct Index {
     }
 }
 
+struct WarningScreens {
+    
+    static func viewTopresentWarning(message: String,image: UIImageView) -> UIView {
+        let view = UIView()
+        view.frame = UIScreen.main.bounds
+        view.backgroundColor = .white
+        
+        image.frame.size = CGSize(width: image.frame.size.width*2, height: image.frame.size.height*2)
+        image.center = CGPoint(x: view.center.x, y: view.center.y * 0.9)
+        
+        let label = UILabel()
+        label.font = UIFont(name: label.font.fontName, size: 28)
+        label.sizeToFit()
+        label.text = message
+        label.frame.size = CGSize(width: image.frame.size.width*2.5, height: image.frame.size.height*2.4)
+        label.numberOfLines = 0
+        label.center = CGPoint(x: view.center.x, y: view.center.y * 1.2)
+        view.addSubview(image)
+        view.addSubview(label)
+        
+        return view
+    }
+    
+}
+
 struct Activity {
     
     static func getActivityLoad(position: CGPoint, hidesWhenStopped: Bool,style: UIActivityIndicatorView.Style) -> UIActivityIndicatorView {

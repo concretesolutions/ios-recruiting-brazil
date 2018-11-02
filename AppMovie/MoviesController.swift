@@ -133,8 +133,12 @@ extension MoviesController: UISearchResultsUpdating {
         
         if let text = searchController.searchBar.text {
             let resultSearch = ManagerMovies.shared.movies.filter({$0.originalTitle.prefix(text.count) ==  text })
-            self.dataSource.datas = resultSearch
-            self.collectionView.reloadData()
+            if !resultSearch.isEmpty {
+                self.dataSource.datas = resultSearch
+                self.collectionView.reloadData()
+            }else {
+                self.view.addSubview(WarningScreens.viewTopresentWarning(message: "coudn`t not find movies to:\(text)", image: UIImageView(image: UIImage(named: "search_icon"))))
+            }
         }
         
     }
