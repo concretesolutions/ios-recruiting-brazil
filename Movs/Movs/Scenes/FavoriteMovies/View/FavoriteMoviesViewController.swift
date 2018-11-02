@@ -20,8 +20,10 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     var movies = [FavoriteMoviesModel.FavoriteMovie]()
+    var filteredMovies = [FavoriteMoviesModel.FavoriteMovie]()
     let favoriteMovieCellReuseIdentifier = "FavoriteMovieCell"
-    
+    var filteringMovies: FilterFavoritesViewController?
+    var isFilteringMovies: Bool = false
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -37,6 +39,8 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
     private func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        filteringMovies = (UIStoryboard(name: "Favorites", bundle: nil).instantiateViewController(withIdentifier: "filterFavoriteMovies") as! FilterFavoritesViewController)
+        filteringMovies?.viewController = self
         configureNavigationController()
     }
     
@@ -45,26 +49,31 @@ class FavoriteMoviesViewController: UIViewController, UITableViewDelegate {
         navigationController?.navigationBar.tintColor = .darkGray
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Favoritos"
-        setFilterButton()
+        setFilterButtonWith(icon: "filter_icon")
     }
     
     // Add a Filter button and icon into the navigation bar
-    private func setFilterButton() {
+    private func setFilterButtonWith(icon: String) {
         let filterFavorite = UIButton(type: .custom)
-        filterFavorite.setImage(UIImage(named: "filter_icon"), for: .normal)
+        filterFavorite.setImage(UIImage(named: icon), for: .normal)
         filterFavorite.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
         filterFavorite.addTarget(self, action: #selector(self.filterMovies), for: .touchUpInside)
         let filterFavoritesButton = UIBarButtonItem(customView: filterFavorite)
         navigationItem.setRightBarButton(filterFavoritesButton, animated: true)
     }
-    
+    /// Action for Filter Button
     @objc func filterMovies() {
-        self.performSegue(withIdentifier: "filterMovies", sender: nil)
+        if isFilteringMovies {
+            isFilteringMovies = false
+            setFilterButtonWith(icon: "filter_icon")
+            tableView.reloadData()
+        } else {
+            navigationController?.present(filteringMovies!, animated: true, completion: nil)
+        }
     }
-    
-    
-}
 
+}
+// MARK: - Display Logic
 extension FavoriteMoviesViewController: FavoriteMoviesDisplayLogic {
     
     func displayMovies(viewModel: FavoriteMoviesModel.ViewModel.Success) {
@@ -72,7 +81,6 @@ extension FavoriteMoviesViewController: FavoriteMoviesDisplayLogic {
         tableView.reloadData()
     }
     
-    // TODO: display error
     func displayError(viewModel: FavoriteMoviesModel.ViewModel.Error) {
         let alertVC = UIAlertController(title: viewModel.title, message: viewModel.description, preferredStyle: .alert)
         let action = UIAlertAction(title: "ok", style: .default) { (action) in
@@ -80,6 +88,16 @@ extension FavoriteMoviesViewController: FavoriteMoviesDisplayLogic {
         }
         alertVC.addAction(action)
         self.present(alertVC, animated: true, completion: nil)
+    }
+    
+}
+// MARK: - Favorite Delegate
+extension FavoriteMoviesViewController: FilterFavoritesDelegate {
+   
+    func moviesFiltered(movies: [FavoriteMoviesModel.FavoriteMovie]) {
+        isFilteringMovies = true
+        self.filteredMovies = movies
+        setFilterButtonWith(icon: "no_filter_icon")
     }
     
 }

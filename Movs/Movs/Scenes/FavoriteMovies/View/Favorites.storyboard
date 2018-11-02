@@ -112,7 +112,6 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="pLd-VX-sAX" id="ah7-lf-QeJ"/>
-                        <segue destination="oku-O4-ExF" kind="show" identifier="filterMovies" id="Nv4-wU-EfV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22q-ji-iuc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -122,13 +121,13 @@
         <!--Filter Favorites View Controller-->
         <scene sceneID="bBY-Mj-avG">
             <objects>
-                <viewController id="oku-O4-ExF" customClass="FilterFavoritesViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="filterFavoriteMovies" id="oku-O4-ExF" customClass="FilterFavoritesViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CaG-jC-af4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Osz-zY-LJx" userLabel="Genres">
-                                <rect key="frame" x="0.0" y="175.5" width="375" height="338.5"/>
+                                <rect key="frame" x="0.0" y="195.5" width="375" height="371.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gênero" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Px5-DR-uLl">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="27.5"/>
@@ -137,7 +136,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="esU-9F-UFy">
-                                        <rect key="frame" x="0.0" y="37.5" width="375" height="301"/>
+                                        <rect key="frame" x="0.0" y="37.5" width="375" height="334"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" editingAccessoryType="checkmark" textLabel="AGG-XM-z79" style="IBUITableViewCellStyleDefault" id="HEC-7Q-pnX" userLabel="Genres names">
@@ -169,7 +168,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhN-E0-bMX">
-                                <rect key="frame" x="87.5" y="529" width="200" height="19"/>
+                                <rect key="frame" x="87.5" y="582" width="200" height="30"/>
                                 <color key="backgroundColor" name="secondaryColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="JJk-Hp-MFy"/>
@@ -182,7 +181,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VvB-Qc-n9B" userLabel="Year">
-                                <rect key="frame" x="0.0" y="20" width="375" height="135.5"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="135.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ano" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxS-57-5Ac">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="27.5"/>
@@ -202,9 +201,20 @@
                                     <constraint firstAttribute="trailing" secondItem="mxS-57-5Ac" secondAttribute="trailing" id="aiK-jO-HXj"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tP6-u0-MSr">
+                                <rect key="frame" x="330" y="23" width="30" height="36"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeAction:" destination="oku-O4-ExF" eventType="touchUpInside" id="niu-cI-iza"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="pMQ-Lt-qia" firstAttribute="trailing" secondItem="tP6-u0-MSr" secondAttribute="trailing" constant="15" id="9IQ-7U-Ueq"/>
                             <constraint firstItem="VvB-Qc-n9B" firstAttribute="leading" secondItem="pMQ-Lt-qia" secondAttribute="leading" id="FgD-cz-WFf"/>
                             <constraint firstItem="Osz-zY-LJx" firstAttribute="top" secondItem="VvB-Qc-n9B" secondAttribute="bottom" constant="20" id="L6P-nc-qRz"/>
                             <constraint firstItem="pMQ-Lt-qia" firstAttribute="trailing" secondItem="VvB-Qc-n9B" secondAttribute="trailing" id="S48-e4-ewi"/>
@@ -214,10 +224,11 @@
                             <constraint firstItem="VhN-E0-bMX" firstAttribute="centerX" secondItem="CaG-jC-af4" secondAttribute="centerX" id="ivT-Y7-JfI"/>
                             <constraint firstItem="pMQ-Lt-qia" firstAttribute="trailing" secondItem="Osz-zY-LJx" secondAttribute="trailing" id="jCs-Qt-Asd"/>
                             <constraint firstItem="pMQ-Lt-qia" firstAttribute="bottom" secondItem="VhN-E0-bMX" secondAttribute="bottom" constant="55" id="mxF-r5-hde"/>
+                            <constraint firstItem="tP6-u0-MSr" firstAttribute="top" secondItem="pMQ-Lt-qia" secondAttribute="top" constant="3" id="wPy-H1-Ybt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pMQ-Lt-qia"/>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="genreTableTile" destination="esU-9F-UFy" id="UyT-2J-uF6"/>
                         <outlet property="yearPicker" destination="hCe-ME-erW" id="slV-RX-xMA"/>

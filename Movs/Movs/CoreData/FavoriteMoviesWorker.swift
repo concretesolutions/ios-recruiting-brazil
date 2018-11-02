@@ -116,5 +116,27 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
         let movieFound = movies.filter { $0.id == id }
         return movieFound.count == 0 ? false : true
     }
+    /**
+     Filter movies by year (required) and by genres (optional)
+     - parameter year: year of movie release
+     - parameter genresNames: name of movies' genres
+     */
+    func filterMoviesWith(year: String, genresNames: [String]) -> [MovieDetailed] {
+        let movies = getFavoriteMovies()
+        // Filter movies by year
+        let moviesFilteredByYear = movies.filter{ String.getYearRelease(fullDate: $0.releaseDate) == year }
+        // Then with the result, filter the genre names
+        let moviesFilteredByGenres = moviesFilteredByYear.filter { (movie) -> Bool in
+            var contains = false
+            for genreName in movie.genresNames {
+                if genresNames.contains(genreName) {
+                    contains = true
+                }
+            }
+            return contains
+        }
+        // If any genres is selected, so return only the filter for year
+        return moviesFilteredByGenres.count == 0 ? moviesFilteredByYear : moviesFilteredByGenres
+    }
 
 }
