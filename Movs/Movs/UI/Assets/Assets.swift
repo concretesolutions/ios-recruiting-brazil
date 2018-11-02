@@ -21,4 +21,14 @@ enum Assets: String {
     var image:UIImage {
         return UIImage(named:self.rawValue)!
     }
+    
+    static func getImage(from urlPath:String) -> UIImage? {
+        do {
+            guard let url = URL(string: urlPath) else { return nil }
+            let urlData = try Data(contentsOf: url)
+            return UIImage(data: urlData)
+        } catch {
+            return nil
+        }
+    }
 }

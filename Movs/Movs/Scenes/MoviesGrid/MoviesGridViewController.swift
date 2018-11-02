@@ -13,7 +13,7 @@ protocol MoviesGridViewPresenter: PresenterProtocol {
 
 final class MoviesGridViewController: MVPBaseViewController {
     
-    private var moviesGrid: MoviesGrid! {
+    private var moviesGrid: MoviesGridView! {
         didSet {
             self.moviesGrid.setupView()
             self.view = self.moviesGrid
@@ -34,7 +34,7 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     
     func setupOnce() {
         self.title = "Movies"
-        self.moviesGrid = MoviesGrid(frame: self.view.bounds)
+        self.moviesGrid = MoviesGridView(frame: self.view.bounds)
         self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.largeTitleDisplayMode = .automatic

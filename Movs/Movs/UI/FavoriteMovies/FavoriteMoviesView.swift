@@ -1,5 +1,5 @@
 //
-//  FavoriteMovies.swift
+//  FavoriteMoviesView.swift
 //  Movs
 //
 //  Created by Gabriel Reynoso on 26/10/18.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol FavoriteMoviesDelegate: AnyObject {
-    func favoriteMovies(_ sender: FavoriteMovies, unfavoriteMovieAt indexPath: IndexPath)
+protocol FavoriteMoviesViewDelegate: AnyObject {
+    func favoriteMovies(_ sender: FavoriteMoviesView, unfavoriteMovieAt indexPath: IndexPath)
 }
 
-final class FavoriteMovies: UIView {
+final class FavoriteMoviesView: UIView {
     
     enum State {
         case empty
@@ -54,7 +54,7 @@ final class FavoriteMovies: UIView {
         didSet { self.tableViewDataSource.items = self.movieItems }
     }
     
-    weak var delegate:FavoriteMoviesDelegate?
+    weak var delegate:FavoriteMoviesViewDelegate?
     
     private func refreshUIAcoordingToState() {
         switch self.state {
@@ -80,7 +80,7 @@ final class FavoriteMovies: UIView {
     }
 }
 
-extension FavoriteMovies: ViewCode {
+extension FavoriteMoviesView: ViewCode {
     
     func design() {
         self.backgroundColor = Colors.white.color
@@ -96,7 +96,7 @@ extension FavoriteMovies: ViewCode {
     }
 }
 
-extension FavoriteMovies: UITableViewDelegate {
+extension FavoriteMoviesView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let unfavorite = UITableViewRowAction(style: .default,
                                               title: "Unfavorite")

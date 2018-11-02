@@ -13,7 +13,7 @@ protocol FavoriteMoviesViewPresenter: PresenterProtocol {
 
 final class FavoriteMoviesViewController: MVPBaseViewController {
     
-    private var favoriteMovies:FavoriteMovies! {
+    private var favoriteMovies:FavoriteMoviesView! {
         didSet {
             self.favoriteMovies.setupView()
             self.view = self.favoriteMovies
@@ -57,7 +57,7 @@ extension FavoriteMoviesViewController: FavoriteMoviesPresenterView {
     
     func setupOnce() {
         self.title = "Favorites"
-        self.favoriteMovies = FavoriteMovies()
+        self.favoriteMovies = FavoriteMoviesView()
         self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.largeTitleDisplayMode = .automatic

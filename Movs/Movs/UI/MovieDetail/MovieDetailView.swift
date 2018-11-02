@@ -1,5 +1,5 @@
 //
-//  MovieDetail.swift
+//  MovieDetailView.swift
 //  Movs
 //
 //  Created by Gabriel Reynoso on 29/10/18.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol MovieDetailDelegate: AnyObject {
-    func favoriteMovie(at sender:MovieDetail)
-    func unfavoriteMovie(at sender:MovieDetail)
+protocol MovieDetailViewDelegate: AnyObject {
+    func favoriteMovie(at sender:MovieDetailView)
+    func unfavoriteMovie(at sender:MovieDetailView)
 }
 
-final class MovieDetail: UIView {
+final class MovieDetailView: UIView {
     
     private let tableViewDataSource = MovieDetailDataSource()
     
@@ -26,7 +26,7 @@ final class MovieDetail: UIView {
         }
     }
     
-    weak var delegate:MovieDetailDelegate?
+    weak var delegate:MovieDetailViewDelegate?
     
     let data: Data
     
@@ -104,7 +104,7 @@ final class MovieDetail: UIView {
     }
 }
 
-extension MovieDetail: ViewCode {
+extension MovieDetailView: ViewCode {
     
     func design() {
         self.backgroundColor = Colors.white.color

@@ -13,7 +13,7 @@ protocol MovieDetailViewPresenter: PresenterProtocol {
 
 final class MovieDetailViewController: MVPBaseViewController {
     
-    private var movieDetail:MovieDetail! {
+    private var movieDetail:MovieDetailView! {
         didSet {
             self.movieDetail.setupView()
             self.view = self.movieDetail

@@ -1,5 +1,5 @@
 //
-//  MoviesGrid.swift
+//  MoviesGridView.swift
 //  Movs
 //
 //  Created by Gabriel Reynoso on 23/10/18.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol MoviesGridDelegate:AnyObject {
+protocol MoviesGridViewDelegate:AnyObject {
 }
 
-final class MoviesGrid: UIView {
+final class MoviesGridView: UIView {
     
     enum State {
         case loading
@@ -56,7 +56,7 @@ final class MoviesGrid: UIView {
         }
     }
     
-    weak var delegate:MoviesGridDelegate?
+    weak var delegate:MoviesGridViewDelegate?
     
     private func refreshUIAccordingToState() {
         switch self.state {
@@ -92,7 +92,7 @@ final class MoviesGrid: UIView {
     }
 }
 
-extension MoviesGrid: ViewCode {
+extension MoviesGridView: ViewCode {
     
     func design() {
         self.backgroundColor = Colors.white.color
@@ -109,7 +109,7 @@ extension MoviesGrid: ViewCode {
     }
 }
 
-extension MoviesGrid: UICollectionViewDelegateFlowLayout {
+extension MoviesGridView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return MoviesGridFlowLayout.calculateItemSize(for: collectionView.bounds.size)
