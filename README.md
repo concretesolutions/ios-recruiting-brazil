@@ -43,14 +43,14 @@ Optei por utilizar a arquitetura VIP ([Clean Swift](https://clean-swift.com/clea
 - Utilizo Factory para simplificar a criação de objetos e configuração de dependências paras as Scenes
 
 
-### Fluxo de grid de filmes
+### Lista de filmes populares
 
-![Image of Yaktocat](assets/flow/lista.png)
+![Image of Yaktocat](assets/screenshots/List_movies.png)
 
-### Fluxo com Splash, Tela de Detalhes e tela de lista da favoritos
+### Detalhes
 
-![Image of Yaktocat](assets/flow/splash_detalhes.png)
+![Image of Yaktocat](assets/screenshots/Detail.png)
 
-### Fluxo Opcional de filtro
+### Favoritos
 
-![Image of Yaktocat](assets/flow/filtro.png)
+![Image of Yaktocat](assets/screenshots/Favorites.png)
