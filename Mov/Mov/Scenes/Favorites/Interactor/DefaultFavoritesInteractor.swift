@@ -39,6 +39,7 @@ extension DefaultFavoritesInteractor: FavoritesInteractor {
         if let favorite = self.favorites[safe: index] {
             do {
                 try self.persistence.toggleFavorite(movie: favorite)
+                self.fetchFavorites()
             } catch {/*present db error*/}
         } else {/*do nothing*/}
     }
