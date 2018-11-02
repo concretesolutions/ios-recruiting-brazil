@@ -9,6 +9,7 @@
 import UIKit
 
 class MovieCollectionCell: UICollectionViewCell {
+  var movie: PopularMovie!
   private var isLiked = false
   private var id = 0
   private var bottomView: UIView = {
@@ -57,6 +58,7 @@ class MovieCollectionCell: UICollectionViewCell {
 
   
   func configureCell(movie: PopularMovie) {
+    self.movie = movie
     like.addTarget(self, action: #selector(likeButtonAction(sender:)), for: .touchUpInside)
     isLiked = DefaultsMovie.shared.contains(id: movie.id)
     title.text = movie.title

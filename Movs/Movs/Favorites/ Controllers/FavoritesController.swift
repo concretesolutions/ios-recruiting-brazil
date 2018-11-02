@@ -10,13 +10,17 @@ import UIKit
 
 class Favorites: UIViewController, UISearchResultsUpdating {
   
-  private lazy var tableView: UITableView = {
+  lazy var tableView: UITableView = {
     let table = UITableView()
     table.dataSource = self
     table.tableFooterView = UIView(frame: .zero)
     table.translatesAutoresizingMaskIntoConstraints = false
     table.register(FavoritesCell.self, forCellReuseIdentifier: "favoritesCell")
     return table
+  }()
+  lazy var filterButton: UIBarButtonItem = {
+    let button = UIBarButtonItem(image: #imageLiteral(resourceName: "FilterIcon.png").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(tapFilterButton))
+    return button
   }()
   private var ids = DefaultsMovie.shared.getAll()
   func updateSearchResults(for searchController: UISearchController) {
@@ -29,6 +33,10 @@ class Favorites: UIViewController, UISearchResultsUpdating {
     setupView()
   }
   
+  @objc func tapFilterButton() {
+    print("tapped")
+  }
+  
   func setupNavigation() {
     let searchController = UISearchController(searchResultsController: nil)
     navigationItem.searchController = searchController
@@ -36,6 +44,7 @@ class Favorites: UIViewController, UISearchResultsUpdating {
     navigationItem.searchController?.searchResultsUpdater = self
     navigationItem.searchController?.hidesNavigationBarDuringPresentation = false
     navigationItem.searchController?.dimsBackgroundDuringPresentation = false
+    navigationItem.hidesSearchBarWhenScrolling = false
     definesPresentationContext = true
   }
   
@@ -45,6 +54,7 @@ class Favorites: UIViewController, UISearchResultsUpdating {
   
   func addViews() {
     view.addSubview(tableView)
+    navigationItem.rightBarButtonItem = filterButton
     addConstraints()
   }
   
@@ -67,7 +77,6 @@ extension Favorites: UITableViewDataSource {
     cell.configureCell(id: ids[indexPath.row])
     return cell
   }
-  
   
 }
 

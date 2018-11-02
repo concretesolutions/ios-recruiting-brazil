@@ -25,11 +25,6 @@ class TabViewController: UITabBarController {
       
       let navigation1 = UINavigationController(rootViewController: controller1)
       let navigation2 = UINavigationController(rootViewController: controller2)
-      navigation2.navigationBar.prefersLargeTitles = true
-//      navigation1.navigationBar.prefersLargeTitles = true
-  
-//      let searchController = UISearchController(searchResultsController: nil)
-//      controller1.navigationItem.searchController = searchController
       viewControllers = [navigation1, navigation2]
 
         // Do any additional setup after loading the view.

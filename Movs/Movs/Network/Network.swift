@@ -25,6 +25,7 @@ class Network {
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     let config = URLSessionConfiguration.default
+    config.requestCachePolicy = .reloadIgnoringCacheData
     let session = URLSession(configuration: config)
     let task = session.dataTask(with: request) { (responseData, response, responseError) in
       DispatchQueue.main.async {
