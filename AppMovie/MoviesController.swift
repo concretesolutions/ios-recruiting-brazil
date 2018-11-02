@@ -21,8 +21,6 @@ class MoviesController: UIViewController{
     
     let searchController: UISearchController = {
        let search = UISearchController(searchResultsController: nil)
-        search.hidesNavigationBarDuringPresentation = false
-        search.dimsBackgroundDuringPresentation = true
         return search
     }()
     
@@ -46,10 +44,22 @@ class MoviesController: UIViewController{
     }
     
     private func setupNavigation() {
+        self.setupSearchController()
         self.navigationItem.title = "Movie"
         self.navigationController?.navigationBar.barTintColor = Colors.navigationController.value
         self.navigationItem.searchController = searchController
         self.navigationItem.searchController?.searchResultsUpdater = self
+    }
+    
+    private func setupSearchController() {
+        searchController.searchBar.placeholder = "Pesquisa"
+        navigationItem.searchController = searchController
+        navigationController?.navigationBar.barTintColor = Colors.navigationController.value
+        navigationItem.searchController?.searchResultsUpdater = self
+        navigationItem.searchController?.hidesNavigationBarDuringPresentation = false
+        navigationItem.searchController?.dimsBackgroundDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
     }
     
     private func setupStopLoading() {
@@ -64,12 +74,16 @@ class MoviesController: UIViewController{
         collectionView.delegate = self
         self.sizeLastPage += ManagerMovies.shared.movies.count-1
         ManagerMovies.shared.setupMovies(pageNumber: page) { (moviesDonwloaded) in
+            self.setupStopLoading()
             if let _movies = moviesDonwloaded {
                 self.pageCollection+=1
                 self.sizeLastPage += ManagerMovies.shared.movies.count-1
-                self.dataSource.datas = ManagerMovies.shared.movies
-                self.setupStopLoading()
+                self.dataSource.datas = _movies
                 self.collectionView.reloadData()
+            }else {
+                let viewNotFoundMovie = WarningScreens.coldNotDonwnloadMovies(message: "Error was ocurred, please try again tounch in button or try agray latter.", image: UIImageView(image: UIImage(named: "error")))
+                viewNotFoundMovie.tag = 997
+                self.view.addSubview(viewNotFoundMovie)
             }
         }
         dataSource.controller = self
@@ -130,18 +144,26 @@ extension MoviesController: UISearchBarDelegate {
 
 extension MoviesController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
         if let text = searchController.searchBar.text {
             let resultSearch = ManagerMovies.shared.movies.filter({$0.originalTitle.prefix(text.count) ==  text })
-            if !resultSearch.isEmpty {
-                self.dataSource.datas = resultSearch
-                self.collectionView.reloadData()
+            let viewNotFoundMovie = WarningScreens.notFoundMovies(message: "coudn`t not find movies to:\(text)", image: UIImageView(image: UIImage(named: "search_icon")))
+            viewNotFoundMovie.tag = 998
+            
+            if !text.isEmpty {
+                if !resultSearch.isEmpty {
+                        self.dataSource.datas = resultSearch
+                        self.collectionView.reloadData()
+                }else{
+                    if self.view.viewWithTag(998) == nil {
+                        self.view.addSubview(viewNotFoundMovie)
+                    }
+                }
             }else {
-                self.view.addSubview(WarningScreens.viewTopresentWarning(message: "coudn`t not find movies to:\(text)", image: UIImageView(image: UIImage(named: "search_icon"))))
+                self.view.viewWithTag(998)?.removeFromSuperview()
+                self.dataSource.datas = ManagerMovies.shared.movies
+                self.collectionView.reloadData()
             }
+            
         }
-        
     }
-    
-    
 }
