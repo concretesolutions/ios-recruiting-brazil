@@ -261,12 +261,37 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="HaJ-Rg-sKk" kind="relationship" relationship="rootViewController" id="8Oi-Zh-M7r"/>
+                        <segue destination="DJm-7O-WOg" kind="relationship" relationship="rootViewController" id="Kex-9T-NOo"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="57f-sl-VUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1207" y="-178"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="lkK-LR-9Me">
+            <objects>
+                <tableViewController id="DJm-7O-WOg" customClass="FavoritesTableViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bvP-0y-rSO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="DJm-7O-WOg" id="mGs-0f-gwJ"/>
+                            <outlet property="delegate" destination="DJm-7O-WOg" id="phg-xO-PuD"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Favorites" id="RJu-O8-iOc">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="3DN-ap-zDo">
+                            <connections>
+                                <segue destination="obM-bo-gyI" kind="show" id="FMZ-6m-cda"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Thv-vw-OhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-388" y="-179"/>
         </scene>
         <!--Movies-->
         <scene sceneID="tfj-9w-kq1">
@@ -305,47 +330,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Az-ac-Xcm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2124" y="-698"/>
-        </scene>
-        <!--Favorites-->
-        <scene sceneID="3ai-aF-qAg">
-            <objects>
-                <collectionViewController id="HaJ-Rg-sKk" customClass="FavoritesCollectionViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vaH-e1-2Iv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5Z1-qG-pBI">
-                            <size key="itemSize" width="375" height="226"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="favoritesCell" id="yQm-AO-U8A">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="HaJ-Rg-sKk" id="nIz-d6-lHU"/>
-                            <outlet property="delegate" destination="HaJ-Rg-sKk" id="N2F-ku-GDT"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Favorites" id="tv3-Dv-9e2">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="Boy-Cq-11v">
-                            <connections>
-                                <segue destination="obM-bo-gyI" kind="show" id="eHc-GP-WqY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RV2-0P-IzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-255.19999999999999" y="-179.46026986506749"/>
         </scene>
     </scenes>
     <resources>

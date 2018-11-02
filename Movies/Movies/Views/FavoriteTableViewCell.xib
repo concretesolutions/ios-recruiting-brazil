@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="169" id="DTA-HA-e6k" customClass="FavoriteTableViewCell" customModule="Movies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="459" height="169"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DTA-HA-e6k" id="uSx-Gy-B2H">
+                <rect key="frame" x="0.0" y="0.0" width="459" height="168.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie4" translatesAutoresizingMaskIntoConstraints="NO" id="ebB-i3-5zV">
+                        <rect key="frame" x="16" y="15" width="95" height="138"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="95" id="fhJ-PD-Cb6"/>
+                            <constraint firstAttribute="height" constant="138" id="rIE-rR-bO4"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2006" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VET-cX-3f7">
+                        <rect key="frame" x="119" y="16" width="324" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avengers: Age Of Ultron" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="tY6-zp-8NP">
+                        <rect key="frame" x="119" y="35" width="324" height="30"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hv-SK-8FN">
+                        <rect key="frame" x="119" y="67" width="324" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drama, Comedy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jv-xz-gtD">
+                        <rect key="frame" x="119" y="134" width="324" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="1" green="0.58039215686274503" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4Hv-SK-8FN" firstAttribute="trailing" secondItem="tY6-zp-8NP" secondAttribute="trailing" id="19q-yB-bWE"/>
+                    <constraint firstItem="4Hv-SK-8FN" firstAttribute="top" secondItem="tY6-zp-8NP" secondAttribute="bottom" constant="2" id="94P-08-tw1"/>
+                    <constraint firstItem="VET-cX-3f7" firstAttribute="leading" secondItem="ebB-i3-5zV" secondAttribute="trailing" constant="8" id="Eld-RJ-5y2"/>
+                    <constraint firstAttribute="trailing" secondItem="tY6-zp-8NP" secondAttribute="trailing" constant="16" id="FGt-b0-jls"/>
+                    <constraint firstItem="VET-cX-3f7" firstAttribute="top" secondItem="uSx-Gy-B2H" secondAttribute="top" constant="16" id="FQ2-dU-10w"/>
+                    <constraint firstItem="tY6-zp-8NP" firstAttribute="leading" secondItem="ebB-i3-5zV" secondAttribute="trailing" constant="8" id="Luf-60-V2f"/>
+                    <constraint firstItem="4Hv-SK-8FN" firstAttribute="leading" secondItem="tY6-zp-8NP" secondAttribute="leading" id="Uy6-sh-FMG"/>
+                    <constraint firstItem="5Jv-xz-gtD" firstAttribute="leading" secondItem="ebB-i3-5zV" secondAttribute="trailing" constant="8" id="WV6-74-fB7"/>
+                    <constraint firstItem="ebB-i3-5zV" firstAttribute="leading" secondItem="uSx-Gy-B2H" secondAttribute="leading" constant="16" id="YII-RV-JgS"/>
+                    <constraint firstAttribute="bottom" secondItem="5Jv-xz-gtD" secondAttribute="bottom" constant="15" id="blH-Yd-AsG"/>
+                    <constraint firstAttribute="trailing" secondItem="VET-cX-3f7" secondAttribute="trailing" constant="16" id="gkG-pf-G2l"/>
+                    <constraint firstItem="tY6-zp-8NP" firstAttribute="top" secondItem="VET-cX-3f7" secondAttribute="bottom" constant="2" id="hbU-EG-STV"/>
+                    <constraint firstItem="ebB-i3-5zV" firstAttribute="top" secondItem="uSx-Gy-B2H" secondAttribute="top" constant="15" id="kHX-N7-fhf"/>
+                    <constraint firstAttribute="trailing" secondItem="5Jv-xz-gtD" secondAttribute="trailing" constant="16" id="nXR-ic-zj2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="genresLabel" destination="5Jv-xz-gtD" id="IXS-vn-CbS"/>
+                <outlet property="overviewLabel" destination="4Hv-SK-8FN" id="QSC-mg-iRI"/>
+                <outlet property="posterImageView" destination="ebB-i3-5zV" id="vL8-gQ-be0"/>
+                <outlet property="titleLabel" destination="tY6-zp-8NP" id="uKy-8i-QEO"/>
+                <outlet property="yearLabel" destination="VET-cX-3f7" id="dgB-0P-Xmb"/>
+            </connections>
+            <point key="canvasLocation" x="37.600000000000001" y="102.99850074962519"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="movie4" width="500" height="750"/>
+    </resources>
+</document>
