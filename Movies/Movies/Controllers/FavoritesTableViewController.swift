@@ -12,31 +12,60 @@ import Reusable
 class FavoritesTableViewController: UITableViewController {
 
   var favoriteMovies: [Movie] = []
+  var searchedFavorites: [Movie] = []
+  var searchController: UISearchController!
+  
+  fileprivate func setupSearchController() {
+    searchController = UISearchController(searchResultsController: nil)
+    searchController.searchResultsUpdater = self
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = "Search Movies"
+    definesPresentationContext = true
+    navigationItem.hidesSearchBarWhenScrolling = false
+    navigationItem.searchController = searchController
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    navigationItem.searchController = UISearchController(searchResultsController: nil)
-    navigationItem.hidesSearchBarWhenScrolling = false
     
+    setupSearchController()
+
     tableView.register(cellType: FavoriteTableViewCell.self)
     tableView.tableFooterView = UIView()
   }
   
-  override func viewDidAppear(_ animated: Bool) {
+  fileprivate func updateTableViewFromStorage(withReloadData: Bool = true) {
     if let movies = LocalStorage.shared.favoriteMovies {
-      favoriteMovies = movies.reversed() 
-      tableView.reloadData()
+      favoriteMovies = movies.reversed()
+      if withReloadData {
+       tableView.reloadData()
+      }
     }
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    updateTableViewFromStorage()
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: FavoriteTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-    cell.configure(withMovie: favoriteMovies[indexPath.row])
+    let movie: Movie
+    
+    if isOnSearch() {
+      movie = searchedFavorites[indexPath.row]
+    } else {
+      movie = favoriteMovies[indexPath.row]
+    }
+    
+    cell.configure(withMovie: movie)
     return cell
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if isOnSearch() {
+      return searchedFavorites.count
+    }
+    
     return favoriteMovies.count
   }
   
@@ -45,7 +74,13 @@ class FavoritesTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: "favoriteToDetailViewSegue", sender: favoriteMovies[indexPath.row])
+    let movie: Movie
+    if isOnSearch() {
+      movie = searchedFavorites[indexPath.row]
+    } else {
+      movie = favoriteMovies[indexPath.row]
+    }
+    performSegue(withIdentifier: "favoriteToDetailViewSegue", sender: movie)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,9 +100,44 @@ class FavoritesTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       LocalStorage.shared.removeFavorite(movie: favoriteMovies[indexPath.row])
-      favoriteMovies.remove(at: indexPath.row)
+      
+      if isOnSearch() {
+        searchedFavorites.remove(at: indexPath.row)
+      } else {
+        favoriteMovies.remove(at: indexPath.row)
+      }
+      
       tableView.deleteRows(at: [indexPath], with: .fade)
+      updateTableViewFromStorage(withReloadData: false)
     }
   }
+
+}
+
+extension FavoritesTableViewController: UISearchResultsUpdating, MoviesSearchControllerDelegate {
+  func updateSearchResults(for searchController: UISearchController) {
+      searchContent(forSearchedText: searchController.searchBar.text!)
+  }
   
+  func searchContent(forSearchedText searchedText: String) {
+    searchedFavorites = favoriteMovies.filter { (movie) -> Bool in
+      return movie.title.lowercased().contains(searchedText.lowercased())
+    }
+    
+    tableView.reloadData()
+  }
+  
+  func searchBarIsEmpty() -> Bool {
+    return searchController.searchBar.text?.isEmpty ?? true
+  }
+  
+  func isOnSearch() -> Bool {
+    return searchController.isActive && !searchBarIsEmpty()
+  }
+}
+
+protocol MoviesSearchControllerDelegate: class {
+  func searchContent(forSearchedText searchedText: String)
+  func searchBarIsEmpty() -> Bool
+  func isOnSearch() -> Bool
 }
