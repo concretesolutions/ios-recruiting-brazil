@@ -12,12 +12,6 @@ import UIKit
 
 final class MoviesGridCell: UICollectionViewCell {
     
-    struct Model {
-        let movieImage:UIImage
-        let movieTitle:String
-        var movieIsFavorite:Bool
-    }
-    
     static let identifier:String = "CellReuseIdentififer:MoviesGridCell"
     
     private var movieImageView:UIImageView! {
@@ -43,10 +37,10 @@ final class MoviesGridCell: UICollectionViewCell {
     
     var settedUp:Bool = false
     
-    func configure(with model: Model) {
-        self.movieImageView.image = model.movieImage
-        self.movieTitleLabel.text = model.movieTitle
-        self.favoriteButton.isSelected = model.movieIsFavorite
+    func configure(with movie: Movie, and image:UIImage?) {
+        self.movieImageView.image = image
+        self.movieTitleLabel.text = movie.title
+        self.favoriteButton.isSelected = movie.isFavorite
     }
 }
 

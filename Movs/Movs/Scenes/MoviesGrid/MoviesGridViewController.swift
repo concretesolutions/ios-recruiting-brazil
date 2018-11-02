@@ -46,10 +46,11 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     }
     
     func present(movies: [Movie]) {
+        self.moviesGrid.movieItems = movies
         self.moviesGrid.state = .grid
     }
     
-    func present(errorMsg: String) {
+    func presentError() {
         self.moviesGrid.state = .error
     }
 }

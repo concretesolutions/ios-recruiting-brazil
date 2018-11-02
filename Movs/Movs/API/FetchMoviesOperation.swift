@@ -41,7 +41,9 @@ final class FetchMoviesOperation: APIOperation {
         
         URLSession.shared.dataTask(with: request) { [weak self] dta, res, err in
             guard let response = res as? HTTPURLResponse, let data = dta else {
-                self?.onError?(APIError.notFound)
+                DispatchQueue.main.async {
+                    self?.onError?(APIError.notFound)
+                }
                 return
             }
             
@@ -54,16 +56,32 @@ final class FetchMoviesOperation: APIOperation {
             }
             
             if let error = possibleError {
-                self?.onError?(error)
+                DispatchQueue.main.async {
+                    self?.onError?(error)
+                }
                 return
             }
             
-            guard let parsedResult = self?.parser.parse(data: data) else {
-                self?.onError?(APIError.badParsing)
+            guard let resultsData = self?.unrwapResultsJSON(from: data),
+                let parsedResult = self?.parser.parse(data: resultsData) else {
+                DispatchQueue.main.async {
+                    self?.onError?(APIError.badParsing)
+                }
                 return
             }
             
-            self?.onSuccess?(parsedResult)
+            DispatchQueue.main.async {
+                self?.onSuccess?(parsedResult)
+            }
         }.resume()
+    }
+    
+    func unrwapResultsJSON(from data: Data) -> Data? {
+        do {
+            guard let resultDictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any] else { return nil }
+            return try JSONSerialization.data(withJSONObject: resultDictionary["results"]!, options: .prettyPrinted)
+        } catch {
+            return nil
+        }
     }
 }

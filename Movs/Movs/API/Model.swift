@@ -28,6 +28,7 @@ public struct MovieDetail: Codable {
     let title:String
     let posterPath:String
     let genres:[String]
+    let overview:String
     var isFavorite:Bool = false
     
     enum CodingKeys: String, CodingKey {
@@ -35,5 +36,6 @@ public struct MovieDetail: Codable {
         case title
         case posterPath = "poster_path"
         case genres
+        case overview
     }
 }

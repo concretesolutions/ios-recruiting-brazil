@@ -50,7 +50,7 @@ final class MoviesGridView: UIView {
         }
     }
     
-    var movieItems:[MoviesGridCell.Model] = [] {
+    var movieItems:[Movie] = [] {
         didSet {
             self.collectionViewDataSource.items = self.movieItems
         }
@@ -84,6 +84,7 @@ final class MoviesGridView: UIView {
             self.activityIndicatorView.stopAnimating()
             self.activityIndicatorView.isHidden = true
             self.feedbackView.isHidden = false
+            self.reloadData()
         }
     }
     
@@ -96,9 +97,9 @@ extension MoviesGridView: ViewCode {
     
     func design() {
         self.backgroundColor = Colors.white.color
-        self.collectionView = MoviesGridCollectionView(frame: .zero, collectionViewLayout: MoviesGridFlowLayout())
-        self.activityIndicatorView = UIActivityIndicatorView(style: .gray)
         self.feedbackView = FeedbackView()
+        self.activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        self.collectionView = MoviesGridCollectionView(frame: .zero, collectionViewLayout: MoviesGridFlowLayout())
         self.refreshUIAccordingToState()
     }
     

@@ -11,7 +11,7 @@ import Foundation
 protocol MoviesGridPresenterView: ViewProtocol {
     func presentLoading()
     func present(movies:[Movie])
-    func present(errorMsg:String)
+    func presentError()
 }
 
 final class MoviesGridPresenter: MVPBasePresenter {
@@ -26,7 +26,7 @@ final class MoviesGridPresenter: MVPBasePresenter {
         super.viewDidLoad()
         
         self.operation.onError = { [unowned self] err in
-            self.view?.present(errorMsg: err.localizedDescription)
+            self.view?.presentError()
         }
         
         self.operation.onSuccess = { [unowned self] movs in

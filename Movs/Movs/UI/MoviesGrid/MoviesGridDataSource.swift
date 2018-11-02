@@ -10,9 +10,10 @@ import UIKit
 
 final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
     
-    var items:[MoviesGridCell.Model]
+    let cache = ImageCache()
+    var items:[Movie]
     
-    init(items:[MoviesGridCell.Model]? = nil) {
+    init(items:[Movie]? = nil) {
         self.items = items ?? []
     }
     
@@ -24,9 +25,14 @@ final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesGridCell.identifier, for: indexPath) as? MoviesGridCell else {
             return UICollectionViewCell()
         }
+        
         cell.setupView()
-        let data = self.items[indexPath.row]
-        cell.configure(with: data)
+        let movie = self.items[indexPath.row]
+        
+        let imgLink = "\(API.imageLink)/w92\(movie.posterPath)"
+        let img = self.cache.getImage(for: imgLink)
+        
+        cell.configure(with: movie, and: img)
         return cell
     }
 }
