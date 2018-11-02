@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080FCB15218C90C600FF60D5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCB14218C90C600FF60D5 /* API.swift */; };
+		080FCB17218C91F200FF60D5 /* FetchMoviesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCB16218C91F200FF60D5 /* FetchMoviesOperation.swift */; };
+		080FCB1C218C9E5D00FF60D5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FCB1B218C9E5D00FF60D5 /* Model.swift */; };
 		0818B339217C0C1E00F884B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818B338217C0C1E00F884B8 /* AppDelegate.swift */; };
 		0818B340217C0C1F00F884B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0818B33F217C0C1F00F884B8 /* Assets.xcassets */; };
 		084645B7217F7FF400B3A05F /* MoviesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084645B6217F7FF400B3A05F /* MoviesGridView.swift */; };
@@ -65,6 +68,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		080FCB14218C90C600FF60D5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		080FCB16218C91F200FF60D5 /* FetchMoviesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMoviesOperation.swift; sourceTree = "<group>"; };
+		080FCB1B218C9E5D00FF60D5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		0818B335217C0C1E00F884B8 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0818B338217C0C1E00F884B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0818B33F217C0C1F00F884B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,6 +140,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080FCB13218C90A700FF60D5 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				080FCB1B218C9E5D00FF60D5 /* Model.swift */,
+				080FCB14218C90C600FF60D5 /* API.swift */,
+				080FCB16218C91F200FF60D5 /* FetchMoviesOperation.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		0818B32C217C0C1E00F884B8 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +173,7 @@
 			children = (
 				08FB15D3217C15DC0047E57B /* Support */,
 				08FB15D4217C160D0047E57B /* Core */,
+				080FCB13218C90A700FF60D5 /* API */,
 				08FB1602217E52A80047E57B /* UI */,
 				08FB15E0217C2EDE0047E57B /* Scenes */,
 			);
@@ -464,6 +481,7 @@
 				08FB1609217E5EC30047E57B /* Assets.swift in Sources */,
 				08FB15E8217C2F970047E57B /* MoviesGridPresenter.swift in Sources */,
 				08E4A6382182456E00386DFA /* MoviesGridFlowLayout.swift in Sources */,
+				080FCB15218C90C600FF60D5 /* API.swift in Sources */,
 				08F1408721893A9E00136045 /* MovieDetailDataSource.swift in Sources */,
 				084645C9217FB9AF00B3A05F /* MovsNavigationSearchController.swift in Sources */,
 				08E4A619218132BD00386DFA /* MovsTabBarController.swift in Sources */,
@@ -472,6 +490,7 @@
 				084645C4217FAF2500B3A05F /* MoviesGridDataSource.swift in Sources */,
 				08E4A6452184927A00386DFA /* UIView+Autolayout.swift in Sources */,
 				08FB15F8217C30040047E57B /* FilterViewController.swift in Sources */,
+				080FCB1C218C9E5D00FF60D5 /* Model.swift in Sources */,
 				084645C1217FA1AC00B3A05F /* MovsNavigationController.swift in Sources */,
 				08FB15FA217C302E0047E57B /* FilterPresenter.swift in Sources */,
 				08E4A61E2181417100386DFA /* FeedbackView.swift in Sources */,
@@ -479,6 +498,7 @@
 				08FB15DF217C2A5D0047E57B /* Coordinator.swift in Sources */,
 				08FB15FC217C30360047E57B /* FilterCoordinator.swift in Sources */,
 				08FB15EC217C2FC40047E57B /* MovieDetailViewController.swift in Sources */,
+				080FCB17218C91F200FF60D5 /* FetchMoviesOperation.swift in Sources */,
 				08FB15F0217C2FD40047E57B /* MovieDetailCoordinator.swift in Sources */,
 				08FB15E6217C2F760047E57B /* MoviesGridViewController.swift in Sources */,
 			);

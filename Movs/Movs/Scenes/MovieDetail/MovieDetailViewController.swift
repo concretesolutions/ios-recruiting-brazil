@@ -20,8 +20,6 @@ final class MovieDetailViewController: MVPBaseViewController {
         }
     }
     
-    
-    
     var presenter: MovieDetailViewPresenter? {
         get {
             return self.basePresenter as? MovieDetailViewPresenter

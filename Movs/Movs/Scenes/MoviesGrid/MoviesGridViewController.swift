@@ -40,4 +40,16 @@ extension MoviesGridViewController: MoviesGridPresenterView {
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.definesPresentationContext = true
     }
+    
+    func presentLoading() {
+        self.moviesGrid.state = .loading
+    }
+    
+    func present(movies: [Movie]) {
+        self.moviesGrid.state = .grid
+    }
+    
+    func present(errorMsg: String) {
+        self.moviesGrid.state = .error
+    }
 }
