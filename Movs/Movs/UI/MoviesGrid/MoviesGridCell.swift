@@ -20,23 +20,26 @@ final class MoviesGridCell: UICollectionViewCell {
     
     static let identifier:String = "CellReuseIdentififer:MoviesGridCell"
     
-    private let movieImageView:UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
+    private var movieImageView:UIImageView! {
+        didSet {
+            self.movieImageView.contentMode = .scaleAspectFit
+            self.addSubview(self.movieImageView)
+        }
+    }
     
-    private let movieTitleLabel:UILabel = {
-        let label = UILabel()
-        label.textColor = Colors.mainYellow.color
-        label.textAlignment = .center
-        return label
-    }()
+    private var movieTitleLabel:UILabel! {
+        didSet {
+            self.movieTitleLabel.textColor = Colors.mainYellow.color
+            self.movieTitleLabel.textAlignment = .center
+            self.addSubview(self.movieTitleLabel)
+        }
+    }
     
-    private let favoriteButton:FavoriteButton = {
-        let button = FavoriteButton()
-        return button
-    }()
+    private var favoriteButton:FavoriteButton! {
+        didSet {
+            self.addSubview(self.favoriteButton)
+        }
+    }
     
     var settedUp:Bool = false
     
@@ -51,9 +54,9 @@ extension MoviesGridCell: ReusableViewCode {
     
     func design() {
         self.backgroundColor = Colors.darkBlue.color
-        self.addSubview(self.movieImageView)
-        self.addSubview(self.movieTitleLabel)
-        self.addSubview(self.favoriteButton)
+        self.movieImageView = UIImageView()
+        self.movieTitleLabel = UILabel()
+        self.favoriteButton = FavoriteButton()
     }
     
     func autolayout() {
