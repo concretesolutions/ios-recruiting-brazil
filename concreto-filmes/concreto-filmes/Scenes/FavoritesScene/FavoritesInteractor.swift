@@ -14,11 +14,14 @@ import UIKit
 import RealmSwift
 
 protocol FavoritesBusinessLogic {
-    func presentMovies()
+    func presentMovies(shouldFiter: Bool)
+    func deleteMovie(at index: Int, filter: Bool)
+    func filterMoviesLocally(text: String)
 }
 
 protocol FavoritesDataStore {
     var movies: [Movie] { get set }
+    var filteredMovies: [Movie] { get set }
 }
 
 class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
@@ -26,13 +29,59 @@ class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
     var worker: FavoritesWorker?
     var realm = RealmService.shared.realm
     var movies: [Movie] = []
+    var filteredMovies: [Movie] = []
     
-    func presentMovies() {
+    func presentMovies(shouldFiter: Bool) {
         if let realmMovies: Results<MovieRealm> = realm?.objects(MovieRealm.self) {
+            
+            //Here I update the movies array with the realm persistance
             self.movies = Array(realmMovies).map({ (movieRealm) -> Movie in
                 return Movie(movie: movieRealm)
             })
-            presenter?.present(movies: self.movies)
+            //Then I update de filtered movies too
+            removeDeletedItemsFromFilteredMovies(consider: Array(realmMovies))
+            
+            //Here I check if it is filtering to show the right array of movies
+            shouldFiter ?
+                presenter?.present(movies: self.filteredMovies)
+            :
+                presenter?.present(movies: self.movies)
+        }
+    }
+    
+    func deleteMovie(at index: Int, filter: Bool) {
+        let movie = filter ? filteredMovies[index] : movies[index]
+        if let realmMovie = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) {
+            self.movies = self.movies.filter({ (movie) -> Bool in
+                return movie.id != realmMovie.id
+            })
+            self.filteredMovies = self.filteredMovies.filter({ (movie) -> Bool in
+                return movie.id != realmMovie.id
+            })
+            RealmService.shared.delete(realmMovie)
+        }
+    }
+    
+    func filterMoviesLocally(text: String) {
+        if text == "" {
+            self.presenter?.present(movies: self.movies)
+            return
+        }
+        self.filteredMovies = movies.filter({ (movie) -> Bool in
+            return movie.title.lowercased().contains(text.lowercased())
+        })
+        self.presenter?.present(movies: self.filteredMovies)
+    }
+    
+    func removeDeletedItemsFromFilteredMovies(consider realmArray: [MovieRealm]) {
+        for movie in self.filteredMovies {
+            if realmArray.first(where: { (movieRealm) -> Bool in
+                return movieRealm.id == movie.id
+            }) == nil {
+                self.filteredMovies = self.filteredMovies.filter({ (movieIterator) -> Bool in
+                    return movie.id != movieIterator.id
+                })
+            }
         }
     }
     

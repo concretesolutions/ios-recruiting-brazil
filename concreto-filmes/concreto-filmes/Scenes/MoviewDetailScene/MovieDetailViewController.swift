@@ -195,6 +195,7 @@ extension MovieDetailViewController: CodeView {
     func setupAdditionalConfiguration() {
         view.backgroundColor = .black
         self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.hidesBarsOnSwipe = false
     }
 
 }

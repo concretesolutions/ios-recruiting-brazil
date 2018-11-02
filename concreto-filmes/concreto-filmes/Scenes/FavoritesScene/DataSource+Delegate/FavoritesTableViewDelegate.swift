@@ -14,6 +14,22 @@ extension FavoritesViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router?.routeToMovieDetail(shouldFilter: false, index: indexPath.item)
+        router?.routeToMovieDetail(shouldFilter: self.isFiltering, index: indexPath.item)
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            interactor?.deleteMovie(at: indexPath.item, filter: self.isFiltering)
+            self.displayedMovies.remove(at: indexPath.item)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }

@@ -21,6 +21,32 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
     var router: (NSObjectProtocol & FavoritesRoutingLogic & FavoritesDataPassing)?
     var displayedMovies: [Favorites.ViewModel.movie] = []
     var cellId = "favoritesCustomCell"
+    var isFiltering = false
+    
+    private let emptyListLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "Desculpe, não pudemos achar nada nos seus favoritos..."
+        label.numberOfLines = 3
+        label.isHidden = true
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let rightBarButton: UIBarButtonItem = {
+        let btn = UIBarButtonItem()
+        btn.image = #imageLiteral(resourceName: "FilterIcon")
+        btn.tintColor = .black
+        return btn
+    }()
+    
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.layer.borderColor = UIColor.gray.cgColor
+        searchBar.placeholder = "Search"
+        searchBar.delegate = self
+        return searchBar
+    }()
     
     // MARK: Object lifecycle
     
@@ -61,8 +87,9 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
         setupView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        interactor?.presentMovies()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        interactor?.presentMovies(shouldFiter: self.isFiltering)
     }
     
     func display(movies: [Favorites.ViewModel.movie]) {
@@ -71,11 +98,16 @@ class FavoritesViewController: UITableViewController, FavoritesDisplayLogic {
             self.tableView.reloadData()
         }
     }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.searchBar.endEditing(true)
+    }
 }
 
 extension FavoritesViewController: CodeView {
     func buildViewHierarchy() {
-        
+        self.navigationItem.rightBarButtonItem = self.rightBarButton
+        self.navigationItem.titleView = self.searchBar
     }
     
     func setupConstraints() {
@@ -85,6 +117,7 @@ extension FavoritesViewController: CodeView {
     func setupAdditionalConfiguration() {
         self.tableView.backgroundColor = .black
         self.tableView.separatorStyle = .none
+        self.tableView.register(FavoritesCustomCell.self, forCellReuseIdentifier: self.cellId)
         self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color
         self.navigationController?.navigationBar.isTranslucent = false
     }
