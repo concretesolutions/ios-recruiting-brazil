@@ -9,6 +9,7 @@
 import UIKit
 
 protocol MoviesGridViewPresenter: PresenterProtocol {
+    func updateSearchResults(searchText:String?)
 }
 
 final class MoviesGridViewController: MVPBaseViewController {
@@ -52,7 +53,9 @@ extension MoviesGridViewController: MoviesGridPresenterView {
         self.title = "Movies"
         self.moviesGrid = MoviesGridView(frame: self.view.bounds)
         self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
+        self.navigationItem.searchController?.searchResultsUpdater = self
         self.navigationItem.largeTitleDisplayMode = .automatic
+        self.definesPresentationContext = true
     }
     
     func presentLoading() {
@@ -62,9 +65,17 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     func present(movies: [Movie]) {
         self.moviesGrid.movieItems = movies
         self.moviesGrid.state = .grid
+        self.moviesGrid.reloadData()
     }
     
     func presentError() {
         self.moviesGrid.state = .error
+    }
+}
+
+extension MoviesGridViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        self.presenter?.updateSearchResults(searchText: searchController.searchBar.text)
     }
 }

@@ -17,6 +17,8 @@ protocol MoviesGridPresenterView: ViewProtocol {
 final class MoviesGridPresenter: MVPBasePresenter {
     
     private let operation = FetchMoviesOperation()
+    private var movies:[Movie] = []
+    private var filteredMovies:[Movie] = []
     
     var view:MoviesGridPresenterView? {
         return self.baseView as? MoviesGridPresenterView
@@ -30,7 +32,13 @@ final class MoviesGridPresenter: MVPBasePresenter {
         }
         
         self.operation.onSuccess = { [unowned self] movs in
-            self.view?.present(movies: movs)
+            if self.operation.page == 1 {
+                self.movies = movs
+                self.view?.present(movies: movs)
+            } else {
+                self.movies.append(contentsOf: movs)
+                //TODO: Increment movies
+            }
         }
         
         self.operation.perform()
@@ -39,5 +47,17 @@ final class MoviesGridPresenter: MVPBasePresenter {
 }
 
 extension MoviesGridPresenter: MoviesGridViewPresenter {
-    
+    func updateSearchResults(searchText: String?) {
+        guard let text = searchText, !text.isEmpty else {
+            self.filteredMovies = []
+            self.view?.present(movies: self.movies)
+            return
+        }
+        
+        self.filteredMovies = self.movies.filter {
+            return $0.title.contains(text)
+        }
+        
+        self.view?.present(movies: self.filteredMovies)
+    }
 }

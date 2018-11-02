@@ -87,7 +87,6 @@ final class MoviesGridView: UIView {
             self.activityIndicatorView.stopAnimating()
             self.activityIndicatorView.isHidden = true
             self.feedbackView.isHidden = false
-            self.reloadData()
         }
     }
     
