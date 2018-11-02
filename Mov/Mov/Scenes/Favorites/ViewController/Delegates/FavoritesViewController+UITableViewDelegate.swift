@@ -25,5 +25,11 @@ extension FavoritesViewController: UITableViewDelegate {
         
         return [unfavoriteAction]
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedMovie = self.interactor?.movie(at: indexPath.row) else { return }
+        
+        self.navigateToDetailsView(of: selectedMovie)
+    }
 }
 

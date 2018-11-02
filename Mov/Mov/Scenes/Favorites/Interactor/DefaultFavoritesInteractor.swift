@@ -24,6 +24,10 @@ final class DefaultFavoritesInteractor {
 }
 
 extension DefaultFavoritesInteractor: FavoritesInteractor {
+    func movie(at index: Int) -> Movie? {
+        return self.favorites[safe: index]
+    }
+    
     
     func fetchFavorites() {
         do {

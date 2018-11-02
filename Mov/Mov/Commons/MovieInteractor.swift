@@ -12,4 +12,6 @@ protocol MovieInteractor {
     func toggleFavoriteMovie(at index: Int)
     
     func filterMoviesBy(string: String)
+    
+    func movie(at index: Int) -> Movie?
 }

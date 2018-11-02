@@ -132,3 +132,10 @@ extension FavoritesViewController {
         case noResult(String)
     }
 }
+
+extension FavoritesViewController: MovieDetailsNavigator {
+    func navigateToDetailsView(of movie: Movie) {
+        let detailsVC = MovieDetailsBuilder.build(forMovie: movie)
+        show(detailsVC, sender: nil)
+    }
+}

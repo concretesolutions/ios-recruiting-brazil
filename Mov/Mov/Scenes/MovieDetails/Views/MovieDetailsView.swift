@@ -43,7 +43,7 @@ extension MovieDetailsView: ViewCode {
         self.poster.snp.makeConstraints { make in
             make.top.equalToSuperview().multipliedBy(0.8)
             make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalToSuperview().multipliedBy(0.5)
+            make.height.equalToSuperview().multipliedBy(0.8)
             make.centerX.equalToSuperview()   
         }
         

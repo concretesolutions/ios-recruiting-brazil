@@ -10,5 +10,4 @@ import Foundation
 
 protocol MovieGridInteractor: MovieInteractor {
     func fetchMovieList(page: Int)
-    func movie(at index: Int) -> Movie?
 }
