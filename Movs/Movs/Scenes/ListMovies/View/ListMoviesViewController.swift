@@ -35,19 +35,23 @@ class ListMoviesViewController: UIViewController {
     
     // Data
     var movies = [ListMovies.ViewModel.PopularMoviesFormatted]()
+    /// Data filtered from search bar
     var moviesFiltered = [ListMovies.ViewModel.PopularMoviesFormatted]()
+    var favoriteMovies = [MovieDetailed]()
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         ListMoviesSceneConfigurator.inject(dependenciesFor: self)
+        // Start presenting the first page
+        let request = ListMovies.Request(page: page)
+        interactor?.fetchPopularMovies(request: request)
         setup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        // Start presenting the first page
-        let request = ListMovies.Request(page: page)
-        interactor?.fetchPopularMovies(request: request)
+        favoriteMovies = FavoriteMoviesWorker.shared.getFavoriteMovies()
+        tableView.reloadData()
     }
 
     // MARK: - Setup

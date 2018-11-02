@@ -18,7 +18,6 @@ class FilterFavoritesViewController: UIViewController {
     @IBOutlet weak var genreTableTile: UITableView!
 
     var viewController: FilterFavoritesDelegate?
-    let favoritesWorker = FavoriteMoviesWorker()
     
     // Data storage
     var favorites: [MovieDetailed]?
@@ -35,7 +34,7 @@ class FilterFavoritesViewController: UIViewController {
         yearPicker.dataSource = self
         genreTableTile.delegate = self
         genreTableTile.dataSource = self
-        favorites = favoritesWorker.getFavoriteMovies()
+        favorites = FavoriteMoviesWorker.shared.getFavoriteMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,7 +78,7 @@ class FilterFavoritesViewController: UIViewController {
     
     // MARK: - Action
     @IBAction func filterFavorites(_ sender: Any) {
-        let rawMovies: [MovieDetailed] = favoritesWorker.filterMoviesWith(year: currentlyYear, genresNames: currentlyGenres)
+        let rawMovies: [MovieDetailed] = FavoriteMoviesWorker.shared.filterMoviesWith(year: currentlyYear, genresNames: currentlyGenres)
         let filteredMovies: [FavoriteMoviesModel.FavoriteMovie] = getFavoritesFormatted(movies: rawMovies)
         viewController?.moviesFiltered(movies: filteredMovies)
         self.dismiss(animated: true, completion: nil)

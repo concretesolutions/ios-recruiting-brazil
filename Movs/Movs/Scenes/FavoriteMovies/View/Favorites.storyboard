@@ -167,7 +167,7 @@
                                     <constraint firstAttribute="bottom" secondItem="esU-9F-UFy" secondAttribute="bottom" id="wW2-Gr-Dth"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhN-E0-bMX">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhN-E0-bMX">
                                 <rect key="frame" x="87.5" y="582" width="200" height="30"/>
                                 <color key="backgroundColor" name="secondaryColor"/>
                                 <constraints>
@@ -176,6 +176,11 @@
                                 <state key="normal" title="Filtrar">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="filterFavorites:" destination="oku-O4-ExF" eventType="touchUpInside" id="RtH-BY-ILz"/>
                                 </connections>

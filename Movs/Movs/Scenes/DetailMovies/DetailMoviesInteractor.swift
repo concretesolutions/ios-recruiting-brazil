@@ -48,8 +48,7 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
     }
     
     private func checkIfIsFavorite(movie: MovieDetailed) -> Bool {
-        let favoriteWorker = FavoriteMoviesWorker()
-        return favoriteWorker.findMovieWith(id: movie.id)
+        return FavoriteMoviesWorker.shared.findMovieWith(id: movie.id)
     }
     
     private func formatListError(error: FetchError) -> String {
@@ -61,16 +60,14 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
 extension DetailMoviesInteractor: FavoriteActionBusinessLogic {
     
     func removeFavorite(movie: MovieDetailed) {
-        let favoriteWorker = FavoriteMoviesWorker()
-        if favoriteWorker.removeFavoriteMovie(id: movie.id) {
+        if FavoriteMoviesWorker.shared.removeFavoriteMovie(id: movie.id) {
             self.presenter.favoriteActionResponse(message: "Filme desfavoritado", isFavorite: false)
         }
     }
 
     func addFavorite(movie: MovieDetailed) {
-        let favoriteWorker = FavoriteMoviesWorker()
         // If the movie was added
-        if favoriteWorker.addFavoriteMovie(movie: movie) {
+        if FavoriteMoviesWorker.shared.addFavoriteMovie(movie: movie) {
             self.presenter.favoriteActionResponse(message: "Filme adicionado à lista de favoritos ✨", isFavorite: true)
         } else {
             self.presenter.favoriteActionResponse(message: "Problemas ao adicionar filme à lista de favoritos", isFavorite: false)

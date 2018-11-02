@@ -16,20 +16,19 @@ protocol FavoriteMoviesBusinessLogic {
 class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic {
     
     var presenter: FavoriteMoviesPresentationLogic!
-    let worker = FavoriteMoviesWorker()
     
     // w185 is a nice size for mobile app
     private let imageBasePath = "http://image.tmdb.org/t/p/w185"
     
     func removeMovie(request: FavoriteMoviesModel.Request.Remove) {
-        if !worker.removeFavoriteMovie(id: request.movieId) {
+        if !FavoriteMoviesWorker.shared.removeFavoriteMovie(id: request.movieId) {
             let errorResponse = FavoriteMoviesModel.Response.Error(title: "Erro", description: "Não foi possível remover o filme")
             presenter.presentError(response: errorResponse)
         }
     }
     
     func getMovies() {
-        let movies: [MovieDetailed] = worker.getFavoriteMovies()
+        let movies: [MovieDetailed] = FavoriteMoviesWorker.shared.getFavoriteMovies()
         if !movies.isEmpty {
             let formattedMovies = getFormattedFavorites(movies: movies)
             let response = FavoriteMoviesModel.Response.Success(movies: formattedMovies)

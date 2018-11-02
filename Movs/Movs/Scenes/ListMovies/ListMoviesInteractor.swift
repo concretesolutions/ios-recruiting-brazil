@@ -57,8 +57,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic {
 
     /// Check if the movie to be presented is also an user's favorite movie
     private func checkIfIsFavorite(movieId: Int) -> Bool {
-        let favoriteWorker = FavoriteMoviesWorker()
-        return favoriteWorker.findMovieWith(id: movieId)
+        return FavoriteMoviesWorker.shared.findMovieWith(id: movieId)
     }
     
     private func formatListError(error: FetchError) -> String {

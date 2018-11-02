@@ -12,7 +12,7 @@ import Kingfisher
 class PopularMovieTableViewCell: UITableViewCell {
 
     var movieIdentifier: Int?
-    
+
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieDescription: UITextView!
     @IBOutlet weak var movieImageView: UIImageViewMovieCard!
@@ -20,11 +20,12 @@ class PopularMovieTableViewCell: UITableViewCell {
     @IBOutlet weak var moviePosition: UILabel!
     @IBOutlet weak var loading: UIActivityIndicatorView!
     
-    func configureCellWith(data: ListMovies.ViewModel.PopularMoviesFormatted, position: Int) {
+    
+    func configureCellWith(data: ListMovies.ViewModel.PopularMoviesFormatted, position: Int, isFavorite: Bool) {
         movieIdentifier = data.id
         movieTitle.text = data.title
         movieDescription.text = data.overview
-        favoriteIcon.image = data.favoriteIcon
+        favoriteIcon.image = isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
         movieImageView.kf.setImage(with: data.posterPath)
         moviePosition.text = String(position) + "º"
         loading.isHidden = true

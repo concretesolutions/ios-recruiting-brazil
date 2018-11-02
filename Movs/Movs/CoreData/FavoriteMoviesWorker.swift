@@ -15,12 +15,15 @@ import UIKit
  */
 class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
     
+    static let shared = FavoriteMoviesWorker()
+    private init(){}
+    
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     fileprivate let movieCoreData = "MovieCoreData"
     private lazy var context: NSManagedObjectContext = {
         self.appDelegate.persistentContainer.viewContext
     }()
-    // Keys
+    // Keys are used to identify the keys on CoreData Model
     private let idKey: String = MovieDetailed.MovieCoreDataKey.id.rawValue
     private let titleKey: String =  MovieDetailed.MovieCoreDataKey.title.rawValue
     private let releaseDateKey: String = MovieDetailed.MovieCoreDataKey.releaseDate.rawValue
@@ -64,7 +67,10 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
             return false
         }
     }
-    
+    /**
+     Removes a movie using it's id
+     - parameter id: identifier of the movies. This identifier is equals to the one used in the API of TMDB
+     */
     func removeFavoriteMovie(id: Int) -> Bool {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
         request.returnsObjectsAsFaults = false
@@ -84,7 +90,9 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
         }
         return true
     }
-    
+    /**
+     Returns the list of favorite movies in the database
+     */
     func getFavoriteMovies() -> [MovieDetailed] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieCoreData)
         request.returnsObjectsAsFaults = false
@@ -110,7 +118,10 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
         }
         return movies
     }
-    
+    /**
+     Search for a movie with the "id". If it was found, return true, otherwise false
+     - parameter id: identifier of the movies. This identifier is equals to the one used in the API of TMDB
+     */
     func findMovieWith(id: Int) -> Bool {
         let movies = getFavoriteMovies()
         let movieFound = movies.filter { $0.id == id }
