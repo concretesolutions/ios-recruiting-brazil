@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesFavoritesCollectionViewCell: UICollectionViewCell {
     
-    var movie = MovieNowPlaying()
+    var movie = Movie()
     var delegate: FavoriteDelegate?
     
     @IBOutlet weak var posterPath: UIImageView!

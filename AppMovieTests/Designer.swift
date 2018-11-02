@@ -21,7 +21,6 @@ class DesignerTest: FBSnapshotTestCase {
     }
     
     func testFavoriteController() {
-//        FBSnapshotVerifyView(controller.view)
-        let test = FBSnapshotTestController.self
+        FBSnapshotVerifyView(controller.view)
     }
 }

@@ -14,7 +14,7 @@ class DescribeMovieTableViewCell: UITableViewCell {
     @IBOutlet weak var textInformate: UILabel!
     
     var delegate: FavoriteDelegate?
-    var movie = MovieNowPlaying()
+    var movie = Movie()
     
     @IBAction func favoriterMovie(_ sender: Any) {
         self.movie.updateFavorite()
@@ -33,12 +33,6 @@ class DescribeMovieTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.btnFavorite.isHidden = true
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

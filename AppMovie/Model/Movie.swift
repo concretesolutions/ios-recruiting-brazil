@@ -10,7 +10,7 @@ import UIKit
 
 typealias Genre = [String]
 
-struct MovieNowPlaying {
+struct Movie {
     var adult = Bool()
     var backdropPath = UIImage()
     var genre = Genre()
@@ -24,29 +24,29 @@ struct MovieNowPlaying {
     var favorite = Bool()
 }
 
-extension MovieNowPlaying {
+extension Movie {
     
     init(_movieNP: Dictionary<String,Any>) {
-        let adult = _movieNP[PropertireMovie.adult.value] as? Bool ?? false
-        let id = _movieNP[PropertireMovie.id.value] as? Int ?? 0
-        let language = _movieNP[PropertireMovie.language.value] as? String ?? ""
-        let originalTitle = _movieNP[PropertireMovie.originalTitle.value] as? String ?? ""
-        let overview = _movieNP[PropertireMovie.overview.value] as? String ?? ""
-        let popularity = _movieNP[PropertireMovie.popularity.value] as? Decimal ?? 0.0
+        let adult = _movieNP[PropertieMovie.adult.value] as? Bool ?? false
+        let id = _movieNP[PropertieMovie.id.value] as? Int ?? 0
+        let language = _movieNP[PropertieMovie.language.value] as? String ?? ""
+        let originalTitle = _movieNP[PropertieMovie.originalTitle.value] as? String ?? ""
+        let overview = _movieNP[PropertieMovie.overview.value] as? String ?? ""
+        let popularity = _movieNP[PropertieMovie.popularity.value] as? Decimal ?? 0.0
         var genreStrin = Genre()
-        if let genreInt = _movieNP[PropertireMovie.genre.value] as? [Int], !genreInt.isEmpty {
+        if let genreInt = _movieNP[PropertieMovie.genre.value] as? [Int], !genreInt.isEmpty {
             genreStrin = self.setupGenres(movieGenres: genreInt)
         }
         var releaseDate = Date()
-        if let release = _movieNP[PropertireMovie.releaseDate.value] as? String {
-            if let dateConverted = Dates.convertDateFormatter(stringDate: release) {
+        if let release = _movieNP[PropertieMovie.releaseDate.value] as? String {
+            if let dateConverted = Date.convertDateFormatter(stringDate: release) {
                 releaseDate = dateConverted
             }
         }
         let favorite = false
         var backDropImage : UIImage?
-        if let nameImage = _movieNP[PropertireMovie.backdropPath.value] as? String {
-            MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: "jpg", completion: { (backDropPath) in
+        if let nameImage = _movieNP[PropertieMovie.backdropPath.value] as? String {
+            MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: PropertieExtensionImages.jpg.value, completion: { (backDropPath) in
                 if let _img = backDropPath {
                     dispatchPrecondition(condition: .onQueue(.main))
                     backDropImage = _img
@@ -55,8 +55,8 @@ extension MovieNowPlaying {
         }
         
         var posterImage : UIImage?
-        if let nameImage = _movieNP[PropertireMovie.posterPath.value] as? String {
-            MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: "jpg", completion: { (posterPath) in
+        if let nameImage = _movieNP[PropertieMovie.posterPath.value] as? String {
+            MovieDAO.shared.requestImage(from: APILinks.posterPath.value, name: nameImage, imageFormate: PropertieExtensionImages.jpg.value, completion: { (posterPath) in
                 if let _img = posterPath {
                     dispatchPrecondition(condition: .onQueue(.main))
                     posterImage = _img
@@ -83,9 +83,9 @@ extension MovieNowPlaying {
         var genreStrin = [String]()
         for dicGenres in MovieDAO.shared.genres {
             for myGenereID in movieGenres {
-                if let dicId = dicGenres["id"] as? Int {
+                if let dicId = dicGenres[PropertieGenres.id.value] as? Int {
                     if  dicId == myGenereID {
-                        if let genre = dicGenres["name"] as? String {
+                        if let genre = dicGenres[PropertieGenres.name.value] as? String {
                             if genreStrin.isEmpty {
                                 genreStrin.append("\(genre)")
                             }
@@ -97,6 +97,7 @@ extension MovieNowPlaying {
         }
         return genreStrin
     }
+    
     mutating func updateFavorite(){
             if self.favorite == true {
                 self.favorite = false

@@ -9,9 +9,9 @@
 import UIKit
 
 class TableViewDataSource: NSObject, UITableViewDataSource {
-    var datas = [MovieNowPlaying]()
+    var datas = [Movie]()
     var identifierCell = String()
-    var movie: MovieNowPlaying?
+    var movie: Movie?
     var controller: UIViewController?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,7 +47,7 @@ class TableViewDataSource: NSObject, UITableViewDataSource {
                     cell.btnFavorite.setImage(movie.getImage(favorite: movie.favorite), for: .normal)
                     text = movie.originalTitle
                 case 1:
-                    text = String(Dates.getComponent(from: .year, at: movie.releaseDate))
+                    text = String(Date.getComponent(from: .year, at: movie.releaseDate))
                 case 2:
                     for genre in movie.genre {
                         text.append(contentsOf: genre)

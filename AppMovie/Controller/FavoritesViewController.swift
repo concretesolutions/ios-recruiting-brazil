@@ -57,7 +57,7 @@ class FavoritesViewController: UIViewController {
 
 //MARK: - Delegates
 extension FavoritesViewController: FavoriteDelegate {
-    func setFavorite(movie: MovieNowPlaying) {
+    func setFavorite(movie: Movie) {
         ManagerMovies.shared.moviesFavorites.append(movie)
         
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.movies)
@@ -66,7 +66,7 @@ extension FavoritesViewController: FavoriteDelegate {
         self.tableView.reloadData()
     }
     
-    func removeFavorite(movie: MovieNowPlaying) {
+    func removeFavorite(movie: Movie) {
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.moviesFavorites)
         if  index != -1 {
             ManagerMovies.shared.moviesFavorites.remove(at: index)

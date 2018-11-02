@@ -12,14 +12,14 @@ class ManagerMovies {
     
     static var shared = ManagerMovies()
     var _movies = [Dictionary<String,Any>]()
-    var movies = [MovieNowPlaying]()
-    var moviesFavorites = [MovieNowPlaying]()
+    var movies = [Movie]()
+    var moviesFavorites = [Movie]()
     
     
     init() {
     }
     
-    func setupMovies(pageNumber: Int,completion: @escaping ( [MovieNowPlaying]?) -> ()) {
+    func setupMovies(pageNumber: Int,completion: @escaping ( [Movie]?) -> ()) {
         MovieDAO.shared.requestMovies(apilink: APILinks.moviesPopularity.value, pageNumber: pageNumber, completion: { (moviesJSON) in
             if let _movies = moviesJSON {
                 self._movies.append(contentsOf: _movies)
@@ -33,9 +33,9 @@ class ManagerMovies {
     }
     
     private func transformDictionary(moviesJSON: [Dictionary<String,Any>]) {
-        var arrayMovie = [MovieNowPlaying]()
+        var arrayMovie = [Movie]()
         for movie in moviesJSON {
-            let _movie = MovieNowPlaying(_movieNP: movie)
+            let _movie = Movie(_movieNP: movie)
             if _movie.id != 0 {
                 arrayMovie.append(_movie)
             }

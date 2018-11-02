@@ -7,6 +7,6 @@
 //
 
 protocol FavoriteDelegate {
-    func setFavorite(movie: MovieNowPlaying)
-    func removeFavorite(movie: MovieNowPlaying)
+    func setFavorite(movie: Movie)
+    func removeFavorite(movie: Movie)
 }

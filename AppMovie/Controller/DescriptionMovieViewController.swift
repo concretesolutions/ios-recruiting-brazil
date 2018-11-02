@@ -14,7 +14,7 @@ class DescriptionMovieViewController: UIViewController {
     @IBOutlet weak var imgPoster: UIImageView!
 
     let dataSource = TableViewDataSource()
-    var movie: MovieNowPlaying?
+    var movie: Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class DescriptionMovieViewController: UIViewController {
 
 //Mark: - Delegates
 extension DescriptionMovieViewController: FavoriteDelegate {
-    func setFavorite(movie: MovieNowPlaying) {
+    func setFavorite(movie: Movie) {
         ManagerMovies.shared.moviesFavorites.append(movie)
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.movies)
         ManagerMovies.shared.movies[index].updateFavorite()
@@ -56,7 +56,7 @@ extension DescriptionMovieViewController: FavoriteDelegate {
         self.tableView.reloadData()
     }
     
-    func removeFavorite(movie: MovieNowPlaying) {
+    func removeFavorite(movie: Movie) {
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.moviesFavorites)
         if  index != -1 {
             ManagerMovies.shared.moviesFavorites.remove(at: index)

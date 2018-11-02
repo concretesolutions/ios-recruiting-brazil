@@ -14,9 +14,6 @@ class MoviesTableViewCell: UITableViewCell{
     @IBOutlet weak var titleMovie: UILabel!
     @IBOutlet weak var detailMovie: UILabel!
     
-    var movie: MovieNowPlaying?
-    
-    override func awakeFromNib() {
-    }
+    var movie: Movie?
     
 }

@@ -37,8 +37,8 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b1t-jX-QoS">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="143"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTY-rV-C57">
-                                                    <rect key="frame" x="0.0" y="143" width="129" height="49"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTY-rV-C57">
+                                                    <rect key="frame" x="0.0" y="143" width="129" height="41"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.96856278179999999" green="0.83170503380000005" blue="0.44798946379999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -60,17 +60,17 @@
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="oTY-rV-C57" secondAttribute="bottom" constant="-2" id="Cz7-xh-Vvb"/>
                                             <constraint firstItem="h4I-58-BWF" firstAttribute="trailing" secondItem="b1t-jX-QoS" secondAttribute="trailing" id="DF6-n1-vaP"/>
                                             <constraint firstItem="h4I-58-BWF" firstAttribute="top" secondItem="b1t-jX-QoS" secondAttribute="bottom" id="V6y-Xx-Yjb"/>
-                                            <constraint firstItem="oTY-rV-C57" firstAttribute="top" secondItem="h4I-58-BWF" secondAttribute="top" id="Y5e-Df-Scm"/>
+                                            <constraint firstItem="h4I-58-BWF" firstAttribute="leading" secondItem="oTY-rV-C57" secondAttribute="trailing" id="Wz5-Wm-F2S"/>
                                             <constraint firstItem="b1t-jX-QoS" firstAttribute="leading" secondItem="EKr-SJ-VVm" secondAttribute="leading" id="ZDb-gT-uPg"/>
                                             <constraint firstAttribute="bottom" secondItem="h4I-58-BWF" secondAttribute="bottom" id="bkf-Wh-h5X"/>
                                             <constraint firstItem="b1t-jX-QoS" firstAttribute="top" secondItem="EKr-SJ-VVm" secondAttribute="top" id="cAG-4Q-Air"/>
-                                            <constraint firstItem="oTY-rV-C57" firstAttribute="leading" secondItem="b1t-jX-QoS" secondAttribute="leading" id="cFD-AN-Mhq"/>
-                                            <constraint firstItem="h4I-58-BWF" firstAttribute="leading" secondItem="oTY-rV-C57" secondAttribute="trailing" id="cPg-mu-PTW"/>
                                             <constraint firstAttribute="trailing" secondItem="b1t-jX-QoS" secondAttribute="trailing" id="gIK-8c-Moe"/>
+                                            <constraint firstItem="oTY-rV-C57" firstAttribute="top" secondItem="h4I-58-BWF" secondAttribute="top" id="myA-4T-UDY"/>
                                             <constraint firstAttribute="trailing" secondItem="h4I-58-BWF" secondAttribute="trailing" id="ph2-0C-OfS"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="oTY-rV-C57" secondAttribute="bottom" constant="-2" id="shM-36-VHy"/>
+                                            <constraint firstItem="oTY-rV-C57" firstAttribute="leading" secondItem="b1t-jX-QoS" secondAttribute="leading" id="rxJ-HS-qeT"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="btnFavorite" destination="h4I-58-BWF" id="gfo-cb-ooY"/>

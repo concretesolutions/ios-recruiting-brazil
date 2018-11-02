@@ -13,12 +13,11 @@ class MoviesViewController: UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     
     let dataSource = CollectionViewDataSource()
-    var pageCollection : Int = 1
-    var sizeLastPage : Int = 0
-    let activityIndicator = Activity.getActivityLoad(position: CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2), hidesWhenStopped: true, style: UIActivityIndicatorView.Style.gray)
-    let viewLoad = Load.getViewLoad(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), backGround: .gray, tag: 999)
-    
-    let searchController: UISearchController = {
+    private var pageCollection : Int = 1
+    private var sizeLastPage : Int = 0
+    private let activityIndicator = Activity.getActivityLoad(position: CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2), hidesWhenStopped: true, style: UIActivityIndicatorView.Style.gray)
+    private let viewLoad = Load.getViewLoad(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), backGround: .gray, tag: 999)
+    private let searchController: UISearchController = {
        let search = UISearchController(searchResultsController: nil)
         return search
     }()
@@ -111,7 +110,7 @@ extension MoviesViewController: UICollectionViewDelegate {
 }
 
 extension MoviesViewController: FavoriteDelegate {
-    func setFavorite(movie: MovieNowPlaying) {
+    func setFavorite(movie: Movie) {
         ManagerMovies.shared.moviesFavorites.append(movie)
         
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.movies)
@@ -120,7 +119,7 @@ extension MoviesViewController: FavoriteDelegate {
         self.collectionView.reloadData()
     }
     
-    func removeFavorite(movie: MovieNowPlaying) {
+    func removeFavorite(movie: Movie) {
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.moviesFavorites)
         if  index != -1 {
             ManagerMovies.shared.moviesFavorites.remove(at: index)
@@ -149,7 +148,6 @@ extension MoviesViewController: UISearchResultsUpdating {
                 self.dataSource.datas = ManagerMovies.shared.movies
                 self.collectionView.reloadData()
             }
-            
         }
     }
 }

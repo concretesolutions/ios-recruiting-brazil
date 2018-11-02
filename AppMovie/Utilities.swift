@@ -9,7 +9,7 @@
 import UIKit
 
 struct Index {
-    static func getIndexInArray(movie: MovieNowPlaying,at array: [MovieNowPlaying]) -> Int {
+    static func getIndexInArray(movie: Movie,at array: [Movie]) -> Int {
         for (index, _movie) in array.enumerated() {
             let _id = _movie.id
             let id = movie.id
@@ -81,39 +81,38 @@ struct Load {
 
 struct Controller {
     
-    static func createController(storyBoardName: String,controllerIdentifier: String) ->UIViewController {
+    static func createController(storyBoardName: String,controllerIdentifier: String) -> UIViewController {
         let storyBoard = UIStoryboard(name: storyBoardName, bundle: nil)
         let controller = storyBoard.instantiateViewController(withIdentifier: controllerIdentifier)
         return controller
     }
 }
 
-struct Dates {
+enum PropertieExtensionImages {
+    case jpg
     
-    static func toString( dateFormat format  : String, to converted: Date) -> String
-    {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: converted)
-    }
-    
-    static func convertDateFormatter(stringDate: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let newDate = dateFormatter.date(from: stringDate)
-        
-        return newDate
-    }
-    
-    static func getComponent(from component: Calendar.Component,at date: Date) -> Int{
-        let calendar = Calendar.current
-        let componentSelected = calendar.component(.year, from: date)
-        
-        return componentSelected
+    var value: String {
+        switch self {
+        case .jpg:
+            return "jpg"
+        }
     }
 }
 
-enum PropertireMovie  {
+enum PropertieGenres {
+    case id,name
+    
+    var value: String {
+        switch self {
+        case .id:
+            return "id"
+        case .name:
+            return "name"
+        }
+    }
+}
+
+enum PropertieMovie  {
     case adult, backdropPath, genre, id, language, originalTitle, overview, popularity, posterPath, releaseDate, title, video, voteAverage, voteCount
     
     var value: String {
