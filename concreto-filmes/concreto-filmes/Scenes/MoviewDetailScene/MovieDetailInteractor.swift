@@ -22,7 +22,6 @@ protocol MovieDetailDataStore {
 
 class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore {
     var movie: Movie?
-    var presenter: MovieDetailPresentationLogic?
     let realm = RealmService.shared.realm
     
     func toggleFavoriteMovie() {

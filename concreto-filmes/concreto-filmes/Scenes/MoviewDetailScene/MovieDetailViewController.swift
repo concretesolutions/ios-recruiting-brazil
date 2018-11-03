@@ -112,12 +112,9 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     private func setup() {
         let viewController = self
         let interactor = MovieDetailInteractor()
-        let presenter = MovieDetailPresenter()
         let router = MovieDetailRouter()
         viewController.interactor = interactor
         viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
     }
