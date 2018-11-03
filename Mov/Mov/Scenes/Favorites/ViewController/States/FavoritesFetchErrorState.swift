@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesFethErrorState: FavoritesBaseState {
+class FavoritesFetchErrorState: FavoritesBaseState {
     
     override func hideViews() -> [UIView] {
         return [favoritesView.noResultsView, favoritesView.tableView]

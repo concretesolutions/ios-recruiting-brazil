@@ -52,8 +52,8 @@ class FavoritesViewController: UIViewController {
         return FavoritesNoResultState(favoritesView: self.favoritesView)
     }()
     
-    lazy var fetchErrorState: FavoritesFethErrorState = {
-        return FavoritesFethErrorState(favoritesView: self.favoritesView)
+    lazy var fetchErrorState: FavoritesFetchErrorState = {
+        return FavoritesFetchErrorState(favoritesView: self.favoritesView)
     }()
     
     lazy var favoritesView: FavoritesView = {

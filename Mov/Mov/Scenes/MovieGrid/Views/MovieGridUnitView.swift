@@ -34,7 +34,7 @@ class MovieGridUnitView: UIView {
         title.text = self.viewModel.title
         title.textAlignment = .center
         title.textColor = Colors.lightYellow
-        title.font = UIFont(name: Fonts.helveticaNeue, size: CGFloat(20).proportionalToHeight)
+        title.font = UIFont(name: Fonts.helveticaNeue, size: CGFloat(16).proportionalToHeight)
         
         return title
     }()
@@ -42,7 +42,7 @@ class MovieGridUnitView: UIView {
     lazy var favoriteButton: UIButton = {
         let favoriteButton = UIButton(frame: .zero)
         favoriteButton.setImage(self.viewModel.isFavoriteIcon, for: .normal)
-        favoriteButton.imageView!.contentMode = .scaleAspectFit
+        favoriteButton.imageView!.contentMode = .scaleAspectFill
         favoriteButton.addTarget(self, action: #selector(didTapFavoriteButton), for: .touchUpInside)
         
         return favoriteButton
@@ -78,7 +78,7 @@ extension MovieGridUnitView: ViewCode {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.80)
+            make.height.equalToSuperview().multipliedBy(0.8)
         }
         
         self.title.snp.makeConstraints { make in
@@ -89,18 +89,16 @@ extension MovieGridUnitView: ViewCode {
         }
         
         self.favoriteButton.snp.makeConstraints { make in
-            make.top.equalTo(self.title.snp_topMargin)
-            make.bottom.equalToSuperview()
+            make.height.equalTo(self.title)
+            make.centerY.equalTo(self.title)
             make.trailing.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.25)
+            make.width.equalToSuperview().multipliedBy(0.3)
         }
     }
     
     func additionalSetup() {
         self.backgroundColor = Colors.darkBlue
     }
-    //oin eu sou o miguel e eu faço coisas de programação pq sou lyndo risos
-    
 }
 
 
