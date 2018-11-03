@@ -11,6 +11,13 @@ import Reusable
 
 class FavoritesTableViewController: UITableViewController {
 
+  // MARK: - Types
+  
+  enum SearchState {
+    case searching
+    case noResults(String)
+  }
+  
   // MARK: - Properties
   
   var favoriteMovies: [Movie] = []
@@ -25,10 +32,24 @@ class FavoritesTableViewController: UITableViewController {
   
   var selectedGenre: Genre?
   
+  var noResultsView: NoResultsView!
+  
   lazy var filterBarButtonItem: UIBarButtonItem = {
     let barButton = UIBarButtonItem(title: "Apply Filter", style: .plain, target: self, action: #selector(showFilterViewController))
     return barButton
   }()
+  
+  var currentSearchState: SearchState! {
+    didSet {
+      switch currentSearchState! {
+      case .noResults(let searchedString):
+        noResultsView.isHidden = false
+        noResultsView.setSearchString(searchedString)
+      case .searching:
+        noResultsView.isHidden = true
+      }
+    }
+  }
   
   // MARK: - Setup
   
@@ -50,6 +71,13 @@ class FavoritesTableViewController: UITableViewController {
     setupSearchController()
     
     navigationItem.rightBarButtonItem = filterBarButtonItem
+    
+    noResultsView = NoResultsView()
+    noResultsView.frame.origin = CGPoint(x: view.center.x - noResultsView.frame.width / 2, y: view.center.y - 250)
+    view.addSubview(noResultsView)
+    
+    currentSearchState = .searching
+    
     tableView.register(cellType: FavoriteTableViewCell.self)
     tableView.tableFooterView = UIView()
   }

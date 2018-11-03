@@ -86,6 +86,12 @@ extension FavoritesTableViewController: UISearchResultsUpdating, MoviesSearchCon
       return movie.title.lowercased().contains(searchedText.lowercased())
     }
     
+    if searchedFavorites.isEmpty && !searchedText.isEmpty {
+      currentSearchState = .noResults(searchedText)
+    } else {
+      currentSearchState = .searching
+    }
+    
     tableView.reloadData()
   }
   
