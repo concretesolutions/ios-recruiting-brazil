@@ -108,10 +108,41 @@ class DetailMoviesInteractorSpec: QuickSpec {
                         expect(presenter.presentImageForError).to(beTrue())
                     }
                 }
-                
-                
             }
             
+            context("when favoriting a movie") {
+  
+                context("and succeeded") {
+                    
+                    beforeEach {
+                        let movieDetailed = MovieDetailed(id: 333, genres: [Genre(id: 23, name: "genre")], genresNames: ["genre"], title: "title", overview: "overview", releaseDate: "2018-10-10", posterPath: "aaa", voteAverage: 8.0, isFavorite: false)
+                        let addFavoriteResult: Bool = FavoriteMoviesWorkerMock.shared.addFavoriteMovie(movie: movieDetailed)
+                        if addFavoriteResult {
+                            presenter.favoriteActionSuccess(message: "Filme adicionado à lista de favoritos ✨")
+                        }
+                    }
+                    
+                    it("so movie is now a favorite") {
+                        expect(presenter.successMessage).to(beTrue())
+//                        expect(presenter.favoriteResultMessage).to(beTrue())
+                    }
+                }
+                
+                context("and failed ") {
+                    beforeEach {
+                        let movieDetailed = MovieDetailed(id: 123, genres: [Genre(id: 23, name: "genre")], genresNames: ["genre"], title: "title", overview: "overview", releaseDate: "2018-10-10", posterPath: "aaa", voteAverage: 8.0, isFavorite: false)
+                        let addFavoriteResult: Bool = FavoriteMoviesWorkerMock.shared.addFavoriteMovie(movie: movieDetailed)
+                        if !addFavoriteResult {
+                            presenter.favoriteActionError(message: "Problemas ao adicionar filme à lista de favoritos")
+                        }
+                    }
+                    
+                    it("because the movie is already a favorite") {
+                        expect(presenter.successMessage).to(beFalse())
+//                        expect(presenter.favoriteResultMessage).to(equal("Problemas ao adicionar filme à lista de favoritos"))
+                    }
+                }
+            }
             
         }
         
@@ -121,8 +152,9 @@ class DetailMoviesInteractorSpec: QuickSpec {
 }
 
 // MARK: - Presentation logic
-final class DetailMoviesPresenterSpy: DetailMoviesPresentationLogic {
+final class DetailMoviesPresenterSpy: DetailMoviesPresentationLogic, FavoriteActionsPresentationLogic {
     
+    // MARK: - Detail Movies
     var presentMovieCalled = false
     var presentErrorCalled = false
     var movieToBePresented: MovieDetailed?
@@ -139,13 +171,18 @@ final class DetailMoviesPresenterSpy: DetailMoviesPresentationLogic {
             presentImageForError = true
         }
     }
- 
-}
-
-extension DetailMoviesPresenterSpy: FavoriteActionsPresentationLogic {
     
-    func favoriteActionResponse(message: String, isFavorite: Bool) {
-        
+    // MARK: - Favorite actions
+    var successMessage = false
+    var favoriteResultMessage = ""
+    
+    func favoriteActionSuccess(message: String) {
+        successMessage = true
+        favoriteResultMessage = message
     }
     
+    func favoriteActionError(message: String) {
+        successMessage = false
+    }
+ 
 }

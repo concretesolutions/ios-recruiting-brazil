@@ -60,16 +60,16 @@ extension DetailMoviesInteractor: FavoriteActionBusinessLogic {
     
     func removeFavorite(movie: MovieDetailed) {
         if FavoriteMoviesWorker.shared.removeFavoriteMovie(id: movie.id) {
-            self.presenter.favoriteActionResponse(message: "Filme desfavoritado", isFavorite: false)
+            self.presenter.favoriteActionSuccess(message: "Filme desfavoritado")
         }
     }
 
     func addFavorite(movie: MovieDetailed) {
         // If the movie was added
         if FavoriteMoviesWorker.shared.addFavoriteMovie(movie: movie) {
-            self.presenter.favoriteActionResponse(message: "Filme adicionado à lista de favoritos ✨", isFavorite: true)
+            self.presenter.favoriteActionSuccess(message: "Filme adicionado à lista de favoritos ✨")
         } else {
-            self.presenter.favoriteActionResponse(message: "Problemas ao adicionar filme à lista de favoritos", isFavorite: false)
+            self.presenter.favoriteActionError(message: "Problemas ao adicionar filme à lista de favoritos")
         }
     }
     

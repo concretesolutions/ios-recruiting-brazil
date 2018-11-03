@@ -12,12 +12,18 @@ import Foundation
 
 class FavoriteMoviesWorkerMock: ManageFavoriteMoviesActions {
     
+    static let shared = FavoriteMoviesWorkerMock()
+    private init(){}
+    
     let favoritesCoreData = [
         MovieDetailed(id: 123, genres: [Genre(id: 23, name: "genre")], genresNames: ["genre"], title: "title", overview: "overview", releaseDate: "2018-10-10", posterPath: "aaa", voteAverage: 8.0, isFavorite: true),
         MovieDetailed(id: 666, genres: [Genre(id: 66, name: "heeyy")], genresNames: ["heeyy"], title: "hell", overview: "overview", releaseDate: "2018-10-10", posterPath: "aaa", voteAverage: 8.0, isFavorite: true)
     ]
     
     func addFavoriteMovie(movie: MovieDetailed) -> Bool {
+        if findMovieWith(id: movie.id) {
+            return false
+        }
         var addingMovie = favoritesCoreData
         addingMovie.append(movie)
         return addingMovie.count == 3 // the count incresed

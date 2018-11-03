@@ -18,18 +18,13 @@ class FavoriteMoviesInteractorSpec: QuickSpec {
         describe("FavoriteMoviesInteractor") {
             
             var presenter: FavoriteMoviesPresenterSpy!
-            var worker: FavoriteMoviesWorkerMock!
             var interactor: FavoriteMoviesInteractor!
-            context("when initializing"){
+
+            context("when initializing") {
                 
                 beforeEach {
                     presenter = FavoriteMoviesPresenterSpy()
-                    worker = FavoriteMoviesWorkerMock()
                     interactor = FavoriteMoviesInteractor()
-                }
-                
-                it("Worker should conforms to protocol ManageFavoriteMoviesActions"){
-                    expect(worker).to(beAKindOf(ManageFavoriteMoviesActions.self))
                 }
                 
                 it("Presenter should conforms to protocol FavoriteMoviesPresentationLogic"){
@@ -48,7 +43,7 @@ class FavoriteMoviesInteractorSpec: QuickSpec {
                                                 FavoriteMoviesModel.FavoriteMovie(id: 666, title: "hell", overview: "overview", posterPath: URL(string: "aaa")!, year: "2018")]
                         
                         beforeEach {
-                            let favoriteMovies: [MovieDetailed] = worker.getFavoriteMovies()
+                            let favoriteMovies: [MovieDetailed] = FavoriteMoviesWorkerMock.shared.getFavoriteMovies()
                             let formattedMovies = favoriteMovies.map { rawMovie in
                                 FavoriteMoviesModel.FavoriteMovie(id: rawMovie.id, title: rawMovie.title, overview: rawMovie.overview, posterPath: URL(string: rawMovie.posterPath)!, year: String.getYearRelease(fullDate: rawMovie.releaseDate))
                             }
@@ -66,7 +61,7 @@ class FavoriteMoviesInteractorSpec: QuickSpec {
                     
                     context("failed") {
                         beforeEach {
-                            let movies = worker.getFavoriteMoviesEmpty()
+                            let movies = FavoriteMoviesWorkerMock.shared.getFavoriteMoviesEmpty()
                             if movies.isEmpty {
                                 let response = FavoriteMoviesModel.Response.Error(title: "Nenhum favorito", description: "Que tal iniciar a sua lista? Abra os detalhes de um filme e favorite-o.")
                                 presenter.presentError(response: response)
@@ -83,7 +78,7 @@ class FavoriteMoviesInteractorSpec: QuickSpec {
                 
                 context("when removing a movie") {
                     beforeEach {
-                        let response = worker.removeFavoriteMovie(id: 123)
+                        let response = FavoriteMoviesWorkerMock.shared.removeFavoriteMovie(id: 123)
                         if !response {
                             let response = FavoriteMoviesModel.Response.Error(title: "Erro", description: "Não foi possível remover o filme")
                             presenter.presentError(response: response)
@@ -98,7 +93,7 @@ class FavoriteMoviesInteractorSpec: QuickSpec {
                 context("when removing a movie") {
                     beforeEach {
                         // Passing an id that doesn't exist
-                        let response = worker.removeFavoriteMovie(id: 999)
+                        let response = FavoriteMoviesWorkerMock.shared.removeFavoriteMovie(id: 999)
                         if !response {
                             let response = FavoriteMoviesModel.Response.Error(title: "Erro", description: "Não foi possível remover o filme")
                             presenter.presentError(response: response)

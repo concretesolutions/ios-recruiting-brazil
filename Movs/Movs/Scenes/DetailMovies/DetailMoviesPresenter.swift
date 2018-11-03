@@ -48,11 +48,16 @@ class DetailMoviesPresenter: DetailMoviesPresentationLogic {
 
 // MAARK: Favorite action
 extension DetailMoviesPresenter: FavoriteActionsPresentationLogic {
-
-    func favoriteActionResponse(message: String, isFavorite: Bool) {
-        let imageFavorite = isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
-        let viewModel = DetailMovieModel.ViewModel.MovieAddedToFavorite(message: message, isFavorite: isFavorite, favoriteIcon: imageFavorite!)
+    
+    func favoriteActionSuccess(message: String) {
+        let imageFavorite = UIImage(named: "favorite_full_icon")
+        let viewModel = DetailMovieModel.ViewModel.MovieAddedToFavorite(message: message, isFavorite: true, favoriteIcon: imageFavorite!)
         viewController?.movieAddedToFavorite(viewModel: viewModel)
     }
     
+    func favoriteActionError(message: String) {
+         let viewModel = DetailMovieModel.ViewModel.Error(image: UIImage(named: "alert_error"), message: message)
+         viewController?.displayError(viewModel: viewModel)
+    }
+
 }

@@ -48,10 +48,13 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
      - parameter movie: all data about the movie
      */
     func addFavoriteMovie(movie: MovieDetailed) -> Bool {
-
+        
+        if findMovieWith(id: movie.id) {
+            return false
+        }
         let entity = NSEntityDescription.entity(forEntityName: movieCoreData, in: context)
         let newFavorite = NSManagedObject(entity: entity!, insertInto: context)
-
+        
         newFavorite.setValue(movie.id, forKey: idKey)
         newFavorite.setValue(movie.title, forKey: titleKey)
         newFavorite.setValue(movie.overview, forKey: overviewKey)
@@ -66,6 +69,8 @@ class FavoriteMoviesWorker: ManageFavoriteMoviesActions {
         } catch {
             return false
         }
+        
+    
     }
     /**
      Removes a movie using it's id

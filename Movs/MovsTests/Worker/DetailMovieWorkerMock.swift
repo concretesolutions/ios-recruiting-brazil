@@ -19,8 +19,6 @@ class DetailMovieWorkerMock: DetailMovieWorkerProtocol {
                          success successCallback: @escaping (MovieDetailed) -> (),
                          error errorCallback: @escaping (FetchError) -> (),
                          failure failureCallback: @escaping (FetchError) -> ()) {
-        
-        
         if request.movieId == detailMovie.id {
             successCallback(detailMovie)
         } else { // Not able to find the id of the movie
@@ -28,7 +26,7 @@ class DetailMovieWorkerMock: DetailMovieWorkerProtocol {
         }
         if let _ = error {
             failureCallback(FetchError.networkFailToConnect)
-        }
+        } 
     }
     
     
