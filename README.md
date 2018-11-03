@@ -14,6 +14,20 @@ pod install
 open Movies.xcworkspace/
 ```
 
+## Appearance
+
+### Splash Screen
+
+<h3 align="center">
+  <img src="assets/screenshots/splash2.gif" alt="Splash" />
+</h3>
+
+### Flow
+
+<h3 align="center">
+  <img src="assets/screenshots/flow.png" alt="Flow" />
+</h3>
+
 ## Built With
 
 * [Cocoapods](https://cocoapods.org) - Dependency Management
