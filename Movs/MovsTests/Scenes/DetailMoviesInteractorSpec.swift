@@ -153,7 +153,7 @@ class DetailMoviesInteractorSpec: QuickSpec {
 
 // MARK: - Presentation logic
 final class DetailMoviesPresenterSpy: DetailMoviesPresentationLogic, FavoriteActionsPresentationLogic {
-    
+
     // MARK: - Detail Movies
     var presentMovieCalled = false
     var presentErrorCalled = false
@@ -183,6 +183,10 @@ final class DetailMoviesPresenterSpy: DetailMoviesPresentationLogic, FavoriteAct
     
     func favoriteActionError(message: String) {
         successMessage = false
+    }
+    
+    func favoriteRemove(message: String) {
+        successMessage = true
     }
  
 }

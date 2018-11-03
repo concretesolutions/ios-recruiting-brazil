@@ -24,5 +24,6 @@ protocol FavoriteActionBusinessLogic {
 // For Presenter
 protocol FavoriteActionsPresentationLogic {
     func favoriteActionSuccess(message: String)
+    func favoriteRemove(message: String)
     func favoriteActionError(message: String)
 }

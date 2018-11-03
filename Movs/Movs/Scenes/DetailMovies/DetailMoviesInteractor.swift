@@ -60,7 +60,7 @@ extension DetailMoviesInteractor: FavoriteActionBusinessLogic {
     
     func removeFavorite(movie: MovieDetailed) {
         if FavoriteMoviesWorker.shared.removeFavoriteMovie(id: movie.id) {
-            self.presenter.favoriteActionSuccess(message: "Filme desfavoritado")
+            self.presenter.favoriteRemove(message: "Filme desfavoritado")
         }
     }
 
