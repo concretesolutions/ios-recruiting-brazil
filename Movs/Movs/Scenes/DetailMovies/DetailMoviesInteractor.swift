@@ -23,7 +23,6 @@ class DetailMoviesInteractor: DetailMoviesBusinessLogic {
         worker.getMovieDetails(request: request,
                                success: { (movie) in
                                 let movieFormatted = self.formatMovieData(movie)
-                                // TODO: check if the movie is in Favorite list
                                 let response = DetailMovieModel.Response.Success(movie: movieFormatted)
                                 self.presenter.presentMovieDetailed(response: response)
         }, error: { (error) in

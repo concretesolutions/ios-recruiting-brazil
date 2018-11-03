@@ -7,7 +7,7 @@
 
 Criação de um app sobre filmes, usando a [API](https://developers.themoviedb.org/3/getting-started/introduction) do [TheMovieDB](https://www.themoviedb.org/?language=en). 
 
-Optei por utilizar a arquitetura VIP ([Clean Swift](https://clean-swift.com/clean-swift-ios-architecture/)) pois eu a acho muito adequada quando o contexto envolve consultas à API. Ela encapsula comportamentos de request, response, tratamento e apresentação de de dados.
+Optei por utilizar a arquitetura VIP ([Clean Swift](https://clean-swift.com/clean-swift-ios-architecture/)) pois eu a acho muito adequada quando o contexto envolve consultas à API. Ela encapsula comportamentos de request, response, tratamento e apresentação de dados.
 
 # Features 
 
@@ -23,10 +23,10 @@ Optei por utilizar a arquitetura VIP ([Clean Swift](https://clean-swift.com/clea
 - [x] Tela de grid com busca local;
 - [x] Scroll Infinito para fazer paginação da API de filmes populares;
 - [x] Célula do Grid de filmes com informação se o filme foi favoritado no app ou não;
-- Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
-- Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
+- [x] Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
+- [x] Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
 - Testes unitários no projeto;
-- Testes funcionais.
+- [x] Testes funcionais.
 - Pipeline Automatizado
 
 
@@ -40,8 +40,7 @@ Optei por utilizar a arquitetura VIP ([Clean Swift](https://clean-swift.com/clea
 - A busca local por filmes local é feita sincronizada com o momento que o usuário está digitando
 - A parte parte de favoritos atualmente é feita localmente mas a arquitetura permite uma fácil alteração para que seja feita pela API.
 - Faço muito uso de Extensions pois adoro como separa comportamentos específicos e deixa o código limpo.
-- Utilizo Factory para simplificar a criação de objetos e configuração de dependências paras as Scenes
-
+- Utilizo Factory para simplificar a criação de objetos e configuração de dependências paras as Scenes 
 
 ### Lista de filmes populares
 
