@@ -87,6 +87,7 @@ final class FavoriteMoviesView: UIView {
         }
         
         self.tableView.deleteRows(at: indexPaths, with: .left)
+        self.tableView.reloadData()
     }
 }
 

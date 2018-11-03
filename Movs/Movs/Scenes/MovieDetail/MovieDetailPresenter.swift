@@ -17,11 +17,7 @@ final class MovieDetailPresenter: MVPBasePresenter {
     private let favoritesDAO = try! FavoriesDAO()
     private var operation: FetchMovieDetailOperation!
     
-    var initialData:Movie? {
-        didSet {
-            self.fetchMovieDetail()
-        }
-    }
+    var initialData:Movie?
     
     var movieDetail:MovieDetail!
     
@@ -41,14 +37,18 @@ final class MovieDetailPresenter: MVPBasePresenter {
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        if self.movieDetail.isFavorite {
-            if self.movieDetail.isComplete {
-                self.view?.present(movieDetail: self.movieDetail)
-            } else {
-                self.fetchMovieDetail(forCompletingObject: true)
-            }
-        } else {
+        if let _ = self.initialData {
             self.fetchMovieDetail()
+        } else {
+            self.setupMovieDetail()
+        }
+    }
+    
+    func setupMovieDetail() {
+        if self.movieDetail.isComplete {
+            self.view?.present(movieDetail: self.movieDetail)
+        } else {
+            self.fetchMovieDetail(forCompletingObject: true)
         }
     }
     
@@ -56,6 +56,7 @@ final class MovieDetailPresenter: MVPBasePresenter {
         self.operation = FetchMovieDetailOperation(movieId: self.validMovieId)
         self.operation.onSuccess = { [weak self] detail in
             self?.movieDetail = detail
+            self?.setupMovieDetail()
             if forCompletingObject {
                 do {
                     try self?.favoritesDAO.add(favoriteMovie: detail)
