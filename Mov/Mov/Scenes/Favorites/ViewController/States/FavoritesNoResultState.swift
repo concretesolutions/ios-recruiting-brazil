@@ -13,7 +13,7 @@ class FavoritesNoResultState: FavoritesBaseState {
     var searchRequest = ""
     
     override func hideViews() -> [UIView] {
-        return [favoritesView.tableView]
+        return [favoritesView.tableView, favoritesView.fetchErrorView]
     }
     
     override func showViews() -> [UIView] {

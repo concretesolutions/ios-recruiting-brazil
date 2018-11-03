@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesTableViewState: FavoritesBaseState {
     override func hideViews() -> [UIView] {
-        return [favoritesView.noResultsView]
+        return [favoritesView.noResultsView, favoritesView.fetchErrorView]
     }
     
     override func showViews() -> [UIView] {
