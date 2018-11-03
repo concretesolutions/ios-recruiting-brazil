@@ -17,7 +17,7 @@
 		EB123F552183A02A006FD78E /* defaultPoster.png in Resources */ = {isa = PBXBuildFile; fileRef = EB123F542183A029006FD78E /* defaultPoster.png */; };
 		EB123F572183DF3B006FD78E /* TvShowMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB123F562183DF3B006FD78E /* TvShowMediaItem.swift */; };
 		EB123F592183DFE3006FD78E /* TvShowSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB123F582183DFE3006FD78E /* TvShowSearchResult.swift */; };
-		EB123F5D2183E317006FD78E /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB123F5C2183E317006FD78E /* SearchPresenter.swift */; };
+		EB123F5D2183E317006FD78E /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB123F5C2183E317006FD78E /* SearchDataManager.swift */; };
 		EB123F5F2183E9BE006FD78E /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB123F5E2183E9BE006FD78E /* MediaItem.swift */; };
 		EB123F642183F668006FD78E /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB123F632183F668006FD78E /* MediaCollectionViewCell.swift */; };
 		EB123F662184027E006FD78E /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = EB123F652184027E006FD78E /* loadingImage.png */; };
@@ -82,7 +82,7 @@
 		EB123F542183A029006FD78E /* defaultPoster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPoster.png; sourceTree = "<group>"; };
 		EB123F562183DF3B006FD78E /* TvShowMediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowMediaItem.swift; sourceTree = "<group>"; };
 		EB123F582183DFE3006FD78E /* TvShowSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowSearchResult.swift; sourceTree = "<group>"; };
-		EB123F5C2183E317006FD78E /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		EB123F5C2183E317006FD78E /* SearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
 		EB123F5E2183E9BE006FD78E /* MediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
 		EB123F632183F668006FD78E /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB123F652184027E006FD78E /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
@@ -162,7 +162,6 @@
 		EB123F5B2183E252006FD78E /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				EB123F5C2183E317006FD78E /* SearchPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -171,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				EB3C2BEC2183793C00DEC59C /* SearchViewController.swift */,
+				EB123F5C2183E317006FD78E /* SearchDataManager.swift */,
 				EB123F632183F668006FD78E /* MediaCollectionViewCell.swift */,
 			);
 			name = Search;
@@ -487,7 +487,7 @@
 				EB123F5F2183E9BE006FD78E /* MediaItem.swift in Sources */,
 				EB123F4D21837C1C006FD78E /* UIImageView+LoadImage.swift in Sources */,
 				EB123F4421837A82006FD78E /* JsonLoader.swift in Sources */,
-				EB123F5D2183E317006FD78E /* SearchPresenter.swift in Sources */,
+				EB123F5D2183E317006FD78E /* SearchDataManager.swift in Sources */,
 				EB3C2BED2183793C00DEC59C /* SearchViewController.swift in Sources */,
 				EB123F592183DFE3006FD78E /* TvShowSearchResult.swift in Sources */,
 				EB123F4B21837C08006FD78E /* UISearchBar+TextColor.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  SearchPresenter.swift
+//  SearchDataManager.swift
 //  MoviesCheck
 //
 //  Created by Daniel Lima on 26/10/18.
@@ -18,7 +18,7 @@ protocol SearchPresenterDataSource {
     func getViewSize()->CGSize
 }
 
-class SearchPresenter:NSObject{
+class SearchDataManager:NSObject{
     
     var delegate:SearchPresenterDelegate?
     var dataSource:SearchPresenterDataSource?
