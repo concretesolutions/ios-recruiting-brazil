@@ -16,10 +16,11 @@ protocol MediaItem {
     var poster:String? {get}
     var overview:String {get}
     var releaseDate:String {get}
+    var genres:Array<Int> {get}
+    var mediaType:MediaType {get}
     
     func getThumbnailUrl()->String
     func getPosterURL()->String
     func getYear()->String
-    func getDateDescription()->String
     
 }

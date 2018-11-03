@@ -19,6 +19,8 @@ class SearchViewController: UIViewController {
     
     var searchManager:SearchDataManager?
     
+    var selectedMediaItem:MediaItem? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +53,9 @@ class SearchViewController: UIViewController {
         
         //Hide loading view by default
         loadingView.isHidden = true
+        
+        //Show popular Movies or Tv Shows
+        searchManager?.requestPopularMedia()
         
     }
     
@@ -88,15 +93,20 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate(constraintsVerticais)
     }
     
-    /*
+    
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+     
+        if segue.identifier == AppSegues.mediaDetail.rawValue{
+            
+            let destinationViewController = segue.destination as! MediaDetailViewController
+            destinationViewController.searchType = searchType
+            destinationViewController.mediaItem = selectedMediaItem
+            
+        }
+        
      }
-     */
+    
     
 }
 
@@ -119,6 +129,13 @@ extension SearchViewController: SearchDataManagerDelegate, SearchDataManagerData
         DispatchQueue.main.async {
             self.loadingView.isHidden = true
         }
+    }
+    
+    func mediaItemSelected(item: MediaItem) {
+        
+        selectedMediaItem = item
+        performSegue(withIdentifier: AppSegues.mediaDetail.rawValue, sender: nil)
+        
     }
     
     //MARK:- SearchDataManagerDataSource

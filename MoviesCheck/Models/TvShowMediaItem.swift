@@ -16,6 +16,8 @@ struct TvShowMediaItem:MediaItem, Codable {
     let poster: String?
     let overview: String
     let releaseDate: String
+    var genres: Array<Int>
+    let mediaType = MediaType.tv
     
     enum CodingKeys : String, CodingKey {
         case id
@@ -24,6 +26,7 @@ struct TvShowMediaItem:MediaItem, Codable {
         case poster = "poster_path"
         case overview
         case releaseDate = "first_air_date"
+        case genres = "genre_ids"
     }
     
     func getThumbnailUrl() -> String {
@@ -56,10 +59,6 @@ struct TvShowMediaItem:MediaItem, Codable {
             return "unknown"
         }
         
-    }
-    
-    func getDateDescription()->String{
-        return "Data aqui"
     }
     
 }

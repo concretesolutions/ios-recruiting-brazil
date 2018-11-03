@@ -12,6 +12,7 @@ protocol SearchDataManagerDelegate {
     func shouldRealoadData()
     func displayLoadingIndicator()
     func hideLoadingIndicator()
+    func mediaItemSelected(item:MediaItem)
 }
 
 protocol SearchDataManagerDataSource {
@@ -61,10 +62,21 @@ class SearchDataManager:NSObject{
         waitingWebServiceResponse = true
         
         //Load next page, if there is subsequent pages
-        if(currentPage < totalPages){
+        if(currentPage < totalPages && firstSearchExecuted){
             let nextPage = currentPage + 1
-            jsonLoader.searchRequest(withText: lastSearchedText, type: searchType, page: nextPage)
+            jsonLoader.searchMedia(withText: lastSearchedText, type: searchType, page: nextPage)
+        }else{
+            if(currentPage < totalPages){
+                let nextPage = currentPage + 1
+                jsonLoader.searchPopularMedia(type: searchType, page: nextPage)
+            }
         }
+        
+    }
+    
+    func requestPopularMedia(){
+        
+        jsonLoader.searchPopularMedia(type: searchType, page: 1)
         
     }
     
@@ -84,12 +96,16 @@ extension SearchDataManager: UISearchBarDelegate{
             //Reset previous media items
             mediaItems = []
             
+            if(!firstSearchExecuted){
+                firstSearchExecuted = true
+            }
+            
             //Hide keyboard
             searchBar.resignFirstResponder()
             delegate?.displayLoadingIndicator()
             
             //Execute search - bring the first page from webservice
-            jsonLoader.searchRequest(withText: textToSearch, type: searchType, page: 1)
+            jsonLoader.searchMedia(withText: textToSearch, type: searchType, page: 1)
             
             lastSearchedText = textToSearch
             
@@ -113,14 +129,12 @@ extension SearchDataManager: JsonLoaderDelegate{
         mediaItems.append(contentsOf: result.items)
         sucessfulResponse = true
         
-        if(!firstSearchExecuted){
-            firstSearchExecuted = true
-        }
-        
         delegate?.hideLoadingIndicator()
         delegate?.shouldRealoadData()
         
         waitingWebServiceResponse = false
+        
+        
         
     }
     
@@ -135,10 +149,6 @@ extension SearchDataManager: JsonLoaderDelegate{
         mediaItems.append(contentsOf: result.items)
         sucessfulResponse = true
         
-        if(!firstSearchExecuted){
-            firstSearchExecuted = true
-        }
-        
         delegate?.hideLoadingIndicator()
         delegate?.shouldRealoadData()
         
@@ -149,6 +159,7 @@ extension SearchDataManager: JsonLoaderDelegate{
     func loaderFailed() {
         
         sucessfulResponse = false
+        delegate?.hideLoadingIndicator()
         delegate?.shouldRealoadData()
         
     }
@@ -164,7 +175,7 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         
         if let screenSize = dataSource?.getViewSize(){
             
-            if mediaItems.count > 0 && indexPath.row < mediaItems.count{
+            if (mediaItems.count > 0 && indexPath.row < mediaItems.count && firstSearchExecuted) || (indexPath.section == 1 && indexPath.row < mediaItems.count){
                 
                 if(UI_USER_INTERFACE_IDIOM() == .pad){//iPad only cell distribution
                     return CGSize(width: (screenSize.width - (cellSpacing * 4)) / 4, height: 255)
@@ -184,7 +195,54 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         
     }
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        if(firstSearchExecuted){
+            return 1
+        }else{
+            return 2
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)  as! SearchHeaderCollectionReusableView
+        
+        if(indexPath.section == 0){
+            header.isHidden = true
+        }else{
+            header.isHidden = false
+            
+            if(searchType == .movies){
+                header.tittle.text = "Most Popular Movies"
+            }else{
+                header.tittle.text = "Most Popular TV Shows"
+            }
+            
+        }
+        
+        return header
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        if section == 0{
+            return CGSize.zero
+        }else{
+            return CGSize(width: collectionView.frame.size.width, height: 42)
+        }
+        
+    }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if(section == 0 && !firstSearchExecuted){
+            return 1
+        }
         
         //Display informative cell when there is no media items to display
         if mediaItems.count > 0{
@@ -197,7 +255,11 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
             }
             
         }else{
-            return 1
+            if(section == 0){//Onboarding message
+                return 1
+            }else{
+                return 0
+            }
         }
         
     }
@@ -206,44 +268,45 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         
         var cell:UICollectionViewCell
         
-        //Display media item cells when the current row is in the mediaitems count range
-        if mediaItems.count > 0 && indexPath.row < mediaItems.count{
-            
-            let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mediaItem", for: indexPath) as! MediaCollectionViewCell
-            
-            let currentMedia = mediaItems[indexPath.row]
-            
-            mediaCell.setMedia(mediaItem: currentMedia)
-            
-            return mediaCell
-            
-        }else{
-            
-            if(currentPage < totalPages && indexPath.row == mediaItems.count){
+            //Display media item cells when the current row is in the mediaitems count range
+            if (mediaItems.count > 0 && indexPath.row < mediaItems.count && firstSearchExecuted) || (indexPath.section == 1 && indexPath.row < mediaItems.count) {
                 
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
+                let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mediaItem", for: indexPath) as! MediaCollectionViewCell
+                
+                let currentMedia = mediaItems[indexPath.row]
+                
+                mediaCell.setMedia(mediaItem: currentMedia)
+                
+                return mediaCell
                 
             }else{
                 
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedbackMessage", for: indexPath)
-                
-                let messageTextView = cell.viewWithTag(1) as! UITextView
-                
-                //Feedback messages
-                if(!sucessfulResponse && firstSearchExecuted){
-                    messageTextView.text = "The title was not found, please try again."
+                if(currentPage < totalPages && indexPath.row == mediaItems.count){
+                    
+                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
+                    
                 }else{
-                    if(searchType == .movies){
-                        messageTextView.text = "Use the search bar above to find the Movie you want to bookmark."
+                    
+                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedbackMessage", for: indexPath)
+                    
+                    let messageTextView = cell.viewWithTag(1) as! UITextView
+                    
+                    //Feedback messages
+                    if(!sucessfulResponse && firstSearchExecuted){
+                        messageTextView.text = "The title was not found, please try again."
                     }else{
-                        messageTextView.text = "Use the search bar above to find the TV Show you want to bookmark."
+                        if(searchType == .movies){
+                            messageTextView.text = "Use the search bar above to find the Movie you want to bookmark."
+                        }else{
+                            messageTextView.text = "Use the search bar above to find the TV Show you want to bookmark."
+                        }
                     }
+                    
                 }
                 
             }
             
-        }
-        
+            
         return cell
         
     }
@@ -253,6 +316,13 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         if(indexPath.row == mediaItems.count - 1 && !waitingWebServiceResponse){
             paginateData()
         }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectedMediaItem = mediaItems[indexPath.row]
+        delegate?.mediaItemSelected(item: selectedMediaItem)
         
     }
     
