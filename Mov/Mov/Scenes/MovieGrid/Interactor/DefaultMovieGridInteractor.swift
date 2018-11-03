@@ -17,9 +17,9 @@ final class DefaultMovieGridInteractor {
     
     private let persistence: FavoritesPersistence
     
-    private var fetchedMovies = [Movie]()
+    private(set) var fetchedMovies = [Movie]()
 
-    private var fetchedPages = 0
+    private(set) var fetchedPages = 0
     
     private var favorites = Set<Movie>()
     

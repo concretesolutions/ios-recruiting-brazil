@@ -13,21 +13,19 @@ import Nimble
 
 class DefaultMovieGridPresenterSpec: QuickSpec {
     override func spec() {
-        describe("the MovieGrid presenter") {
+        describe("MovieGrid presenter") {
+            var presenter: DefaultMovieGridPresenter!
             
             context("when initialized") {
                 var viewOutput: MovieGridViewOutPutMock!
-                var presenter: DefaultMovieGridPresenter!
                 
                 beforeEach {
                     viewOutput = MovieGridViewOutPutMock()
                     presenter = DefaultMovieGridPresenter(viewOutput: viewOutput)
                 }
                 
-                context("and requested to present movies") {
-                    let unitsMock = (0..<5).map { movieTitle in
-                        return MovieGridUnit(title: String(movieTitle), posterPath: "", isFavorite: false)
-                    }
+                context("and present movies") {
+                    let unitsMock = (0..<5).map { MovieGridUnit(title: String($0), posterPath: "", isFavorite: false) }
                     
                     let expectedViewModels = unitsMock.map { unit in
                         return MovieGridViewModel(title: unit.title, posterPath: unit.posterPath, isFavoriteIcon: Images.isFavoriteIconGray)
@@ -46,13 +44,29 @@ class DefaultMovieGridPresenterSpec: QuickSpec {
                     }
                 }
                 
-                context("and requested to present a network error") {
+                context("and present network error") {
                     beforeEach {
                         presenter.presentNetworkError()
                     }
                     
                     it("display networkError") {
                         expect(viewOutput.didCall(method: .displayNetworkError)).to(beTrue())
+                    }
+                }
+                
+                context("and present no results found") {
+                    let searchRequest = "movieTitle"
+                    
+                    beforeEach {
+                        presenter.presentNoResultsFound(for: searchRequest)
+                    }
+                    
+                    it("should display no results found") {
+                        expect(viewOutput.didCall(method: .displayNoResults)).to(beTrue())
+                    }
+                    
+                    it("shouls send correct request to viewOutput") {
+                        expect(viewOutput.receivedResultRequest).to(equal(searchRequest))
                     }
                 }
             }

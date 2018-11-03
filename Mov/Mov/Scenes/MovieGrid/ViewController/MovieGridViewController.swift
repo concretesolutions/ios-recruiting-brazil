@@ -10,7 +10,7 @@ import UIKit
 
 final class MovieGridViewController: UIViewController {
     
-    private static let title = "Movies"
+    static let title = "Movies"
     
     var interactor: MovieGridInteractor? {
         didSet {
@@ -65,21 +65,26 @@ final class MovieGridViewController: UIViewController {
         }
     }
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.setTabBarOptions()
+        self.state = .collection
+        self.title = MovieGridViewController.title
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         let view = BlankView()
         self.view = view
         self.setup()
-        self.state = .collection
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchMovies()
-    }
-    
-    override func viewDidLoad() {
-        self.setTabBarOptions()
-        self.title = MovieGridViewController.title
     }
     
     func fetchMovies() {
@@ -135,7 +140,7 @@ extension MovieGridViewController: ViewCode {
 
 // MARK: State management
 extension MovieGridViewController {
-    enum MovieGridState {
+    enum MovieGridState: Equatable {
         case collection
         case error
         case noResults(String)

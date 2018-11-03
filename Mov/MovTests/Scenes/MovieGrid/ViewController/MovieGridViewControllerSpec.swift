@@ -14,10 +14,11 @@ import Nimble
 
 class MovieGridViewControllerSpec: QuickSpec {
     override func spec() {
-        describe("the MovieGrid ViewController") {
+        describe("MovieGrid ViewController") {
+            var vc: MovieGridViewController!
+            
             context("when initialized") {
                 var interactor: MovieGridInteractorMock!
-                var vc: MovieGridViewController!
                 beforeEach {
                     interactor = MovieGridInteractorMock()
                     vc = MovieGridViewController()
@@ -25,29 +26,45 @@ class MovieGridViewControllerSpec: QuickSpec {
                     vc.interactor = interactor
                 }
                 
-                it ("fetch movies") {
+                it("should fetch movies") {
                    expect(interactor.didCall(method: .fetchMovieLit)).to(beTrue())
                 }
                 
+                it("should set own title") {
+                    expect(vc.title).to(equal(MovieGridViewController.title))
+                }
+                
+                it("should add MovieGridView") {
+                    expect(vc.view.subviews).to(contain(vc.movieGridView))
+                }
+                
+                it("should enter collection state") {
+                    expect(vc.state).to(equal(MovieGridViewController.MovieGridState.collection))
+                }
+                
                 context("and display movies") {
-                    var viewModels: [MovieGridViewModel]!
+                    var expectedViewModels: [MovieGridViewModel]!
                     let expectedState = MovieGridViewController.MovieGridState.collection
                         
                     beforeEach {
-                        viewModels = Array(repeating: MovieGridViewModel.placeHolder, count: 5)
-                        vc.display(movies: viewModels)
+                        expectedViewModels = Array(repeating: MovieGridViewModel.placeHolder, count: 5)
+                        vc.display(movies: expectedViewModels)
                     }
                     
-                    it("fetch movies") {
+                    it("should fetch movies") {
                         expect(interactor.didCall(method: .fetchMovieLit)).to(beTrue())
                     }
                     
-                    it("enter collection state") {
+                    it("should enter collection state") {
                         expect(vc.state).to(equal(expectedState))
                     }
                     
-                    it("feed data source with viewModels") {
-                        expect(vc.dataSource.viewModels).to(equal(viewModels))
+                    it("should feed data source with viewModels") {
+                        expect(vc.viewModels).to(equal(expectedViewModels))
+                    }
+                    
+                    it("should show collection view") {
+                        expect(vc.movieGridView.collection.isHidden).to(beFalse())
                     }
                 }
                 
@@ -58,8 +75,33 @@ class MovieGridViewControllerSpec: QuickSpec {
                         vc.displayNetworkError()
                     }
                     
-                    it("ente error state") {
+                    it("should enter error state") {
                         expect(vc.state).to(equal(expectedState))
+                    }
+                    
+                    it("should show error view") {
+                        expect(vc.movieGridView.networkErrorView.isHidden).to(beFalse())
+                    }
+                }
+                
+                context("and display no results on search") {
+                    let searchRequest = "movieTitle"
+                    let expectedState = MovieGridViewController.MovieGridState.noResults(searchRequest)
+                    
+                    beforeEach {
+                        vc.displayNoResults(for: searchRequest)
+                    }
+                    
+                    it("should enter no results state") {
+                        expect(vc.state).to(equal(expectedState))
+                    }
+                    
+                    it("should show no results view") {
+                        expect(vc.movieGridView.noResultsView.isHidden).to(beFalse())
+                    }
+                    
+                    it("should display search request on no results view") {
+                        expect(vc.movieGridView.noResultsView.errorLabel.text).to(equal(Texts.noResults(for: searchRequest)))
                     }
                 }
                 

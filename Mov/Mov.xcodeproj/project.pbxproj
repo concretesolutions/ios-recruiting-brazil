@@ -98,6 +98,8 @@
 		25D2B1E5218CEC6400A0A469 /* Movie+MockMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2B1E4218CEC6400A0A469 /* Movie+MockMovie.swift */; };
 		25D2B1E7218CEE2800A0A469 /* FavoritesPersistencePersistenceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2B1E6218CEE2800A0A469 /* FavoritesPersistencePersistenceMock.swift */; };
 		25D2B1E9218CEFE300A0A469 /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2B1E8218CEFE300A0A469 /* MockError.swift */; };
+		25D2B1EC218D268600A0A469 /* MovieGridBuilerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2B1EB218D268600A0A469 /* MovieGridBuilerSpec.swift */; };
+		25D2B1F0218D355F00A0A469 /* DefaultFavoritesInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2B1EF218D355F00A0A469 /* DefaultFavoritesInteractorSpec.swift */; };
 		25E546532182B6680043514B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546522182B6680043514B /* APIConstants.swift */; };
 		25E546562182B8300043514B /* TMDBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546552182B8300043514B /* TMDBProvider.swift */; };
 		25E546582182B8AB0043514B /* TMDBMoyaGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */; };
@@ -217,6 +219,8 @@
 		25D2B1E4218CEC6400A0A469 /* Movie+MockMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+MockMovie.swift"; sourceTree = "<group>"; };
 		25D2B1E6218CEE2800A0A469 /* FavoritesPersistencePersistenceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPersistencePersistenceMock.swift; sourceTree = "<group>"; };
 		25D2B1E8218CEFE300A0A469 /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
+		25D2B1EB218D268600A0A469 /* MovieGridBuilerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridBuilerSpec.swift; sourceTree = "<group>"; };
+		25D2B1EF218D355F00A0A469 /* DefaultFavoritesInteractorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFavoritesInteractorSpec.swift; sourceTree = "<group>"; };
 		25E546522182B6680043514B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		25E546552182B8300043514B /* TMDBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBProvider.swift; sourceTree = "<group>"; };
 		25E546572182B8AB0043514B /* TMDBMoyaGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBMoyaGateway.swift; sourceTree = "<group>"; };
@@ -400,6 +404,7 @@
 		2525BAFE21824C83007EF9D0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				25D2B1ED218D353000A0A469 /* Favorites */,
 				25D2B1E0218CDFB000A0A469 /* MovieGrid */,
 			);
 			path = Scenes;
@@ -772,6 +777,7 @@
 		25D2B1E0218CDFB000A0A469 /* MovieGrid */ = {
 			isa = PBXGroup;
 			children = (
+				25D2B1EA218D267100A0A469 /* Builder */,
 				2525BAFF21824C83007EF9D0 /* Interactor */,
 				2578BACB218404AA001107B6 /* Presenter */,
 				25B2B81221867BE9005C96E1 /* ViewController */,
@@ -787,6 +793,30 @@
 				25D2B1E8218CEFE300A0A469 /* MockError.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		25D2B1EA218D267100A0A469 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				25D2B1EB218D268600A0A469 /* MovieGridBuilerSpec.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		25D2B1ED218D353000A0A469 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				25D2B1EE218D354900A0A469 /* Interactor */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		25D2B1EE218D354900A0A469 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				25D2B1EF218D355F00A0A469 /* DefaultFavoritesInteractorSpec.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		25E5464A218283D20043514B /* DataBase */ = {
@@ -1144,7 +1174,9 @@
 				2525BB0421824C83007EF9D0 /* MovieGridPresenterMock.swift in Sources */,
 				2578BAD0218406CF001107B6 /* MovieGridViewOutPutMock.swift in Sources */,
 				25B2B8142186A12A005C96E1 /* MovieGridViewControllerSpec.swift in Sources */,
+				25D2B1F0218D355F00A0A469 /* DefaultFavoritesInteractorSpec.swift in Sources */,
 				25D2B1E7218CEE2800A0A469 /* FavoritesPersistencePersistenceMock.swift in Sources */,
+				25D2B1EC218D268600A0A469 /* MovieGridBuilerSpec.swift in Sources */,
 				2525BB0621824C83007EF9D0 /* DefaultMovieGridInterctorSpec.swift in Sources */,
 				25D2B1E2218CE13500A0A469 /* Spy.swift in Sources */,
 				25D2B1E5218CEC6400A0A469 /* Movie+MockMovie.swift in Sources */,
