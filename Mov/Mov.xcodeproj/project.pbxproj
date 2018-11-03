@@ -59,7 +59,6 @@
 		2578BAD421849847001107B6 /* ViewCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BAD321849847001107B6 /* ViewCode.swift */; };
 		2578BAD6218498D7001107B6 /* MovieGridUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2578BAD5218498D7001107B6 /* MovieGridUnitView.swift */; };
 		2579DFDA218244AA00D616C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFD9218244AA00D616C9 /* AppDelegate.swift */; };
-		2579DFE2218244AA00D616C9 /* Mov.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2579DFE0218244AA00D616C9 /* Mov.xcdatamodeld */; };
 		2579DFE7218244AC00D616C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579DFE5218244AC00D616C9 /* LaunchScreen.storyboard */; };
 		25A14FB4218A7C47003FF84C /* DefaultFavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A14FB3218A7C47003FF84C /* DefaultFavoritesInteractor.swift */; };
 		25A14FB6218A83BC003FF84C /* String + Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A14FB5218A83BC003FF84C /* String + Contains.swift */; };
@@ -191,7 +190,6 @@
 		2578BAD5218498D7001107B6 /* MovieGridUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridUnitView.swift; sourceTree = "<group>"; };
 		2579DFD6218244AA00D616C9 /* Mov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2579DFD9218244AA00D616C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2579DFE1218244AA00D616C9 /* Mov.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mov.xcdatamodel; sourceTree = "<group>"; };
 		2579DFE6218244AC00D616C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2579DFE8218244AC00D616C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2579DFED218244AC00D616C9 /* MovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,7 +341,6 @@
 				2579DFD9218244AA00D616C9 /* AppDelegate.swift */,
 				2579DFE5218244AC00D616C9 /* LaunchScreen.storyboard */,
 				2579DFE8218244AC00D616C9 /* Info.plist */,
-				2579DFE0218244AA00D616C9 /* Mov.xcdatamodeld */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1307,7 +1304,6 @@
 				25A14FC5218B4A72003FF84C /* MovieDetailsPresenter.swift in Sources */,
 				25E546562182B8300043514B /* TMDBProvider.swift in Sources */,
 				25A791FC21894B9000B052B4 /* MovieGridNoResultsState.swift in Sources */,
-				2579DFE2218244AA00D616C9 /* Mov.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1592,19 +1588,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		2579DFE0218244AA00D616C9 /* Mov.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				2579DFE1218244AA00D616C9 /* Mov.xcdatamodel */,
-			);
-			currentVersion = 2579DFE1218244AA00D616C9 /* Mov.xcdatamodel */;
-			path = Mov.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 2579DFCE218244AA00D616C9 /* Project object */;
 }

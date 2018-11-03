@@ -91,7 +91,7 @@ class DefaultMovieGridInteractorSpec: QuickSpec {
                     context("with a valid movie title") {
                         beforeEach {
                             interactor.fetchMovieList(page: 1) // to have fetched movies in memory
-                            filterRequest = interactor.fetchedMovies[0].title
+                            filterRequest = interactor.movies[0].title
                             interactor.filterMoviesBy(string: filterRequest)
                         }
                         

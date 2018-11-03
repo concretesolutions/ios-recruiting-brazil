@@ -14,4 +14,11 @@ extension MovieGridViewController: UICollectionViewDelegate {
         
         self.navigateToDetailsView(of: selectedMovie)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let height = scrollView.contentSize.height - scrollView.frame.size.height
+        if (scrollView.contentOffset.y == height) {
+            self.incrementPage()
+        }
+    }
 }

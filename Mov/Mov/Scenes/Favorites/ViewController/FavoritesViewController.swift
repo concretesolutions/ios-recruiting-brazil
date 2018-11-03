@@ -78,6 +78,16 @@ class FavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        appear()
+    }
+    
+    func appear() {
+        let searchBar = self.favoritesView.searchBar
+        guard let searchText = searchBar.text, searchText.isEmpty else  {
+            return
+        }
+        
+        searchBar.resignFirstResponder()
         self.fetchFavorites()
     }
 }
@@ -149,12 +159,5 @@ extension FavoritesViewController {
         case tableView
         case fetchError
         case noResults(String)
-    }
-}
-
-extension FavoritesViewController: MovieDetailsNavigator {
-    func navigateToDetailsView(of movie: Movie) {
-        let detailsVC = MovieDetailsBuilder.build(forMovie: movie)
-        show(detailsVC, sender: nil)
     }
 }

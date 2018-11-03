@@ -16,5 +16,5 @@ protocol MovieGridPresenter: class {
     
     func presentNoResultsFound(for request: String)
     
-    func presentFavoritesError()
+    func presentGenericError()
 }

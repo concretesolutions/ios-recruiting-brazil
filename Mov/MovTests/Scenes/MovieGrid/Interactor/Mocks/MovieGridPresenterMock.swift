@@ -32,7 +32,7 @@ class MovieGridPresenterMock: MovieGridPresenter {
         self.receivedSearchRequest = request
     }
     
-    func presentFavoritesError() {
+    func presentGenericError() {
         self.calls.insert(.presentFavoritesError)
     }
     

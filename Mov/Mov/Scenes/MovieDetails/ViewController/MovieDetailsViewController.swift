@@ -21,9 +21,7 @@ class MovieDetailsViewController: UIViewController {
     
     var interactor: MovieDetaisInteractor? {
         didSet {
-            if let interactor = self.interactor {
-                interactor.getDetails(of: self.movie)
-            }
+            self.getDetails()
         }
     }
     
@@ -44,6 +42,16 @@ class MovieDetailsViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.getDetails()
+    }
+    
+    func getDetails() {
+        if let interactor = self.interactor {
+            interactor.getDetails(of: self.movie)
+        }
     }
 }
 

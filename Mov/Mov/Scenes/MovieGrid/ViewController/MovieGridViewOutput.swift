@@ -17,6 +17,6 @@ protocol MovieGridViewOutput: class {
     
     func displayNoResults(for request: String)
     
-    func displayFavoritesError()
+    func displayGenericError()
     
 }

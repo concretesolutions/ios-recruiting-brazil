@@ -32,7 +32,7 @@ class MovieGridViewOutPutMock: MovieGridViewOutput {
         self.receivedResultRequest = request
     }
     
-    func displayFavoritesError() {
+    func displayGenericError() {
         self.calls.insert(.displayFavoritesError)
     }
 }

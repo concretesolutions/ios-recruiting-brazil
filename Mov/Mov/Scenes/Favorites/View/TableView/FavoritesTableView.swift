@@ -27,6 +27,7 @@ class FavoritesTableView: UITableView {
         
         self.contentInsetAdjustmentBehavior = .never
         self.backgroundColor = .clear
+        self.allowsSelection = false
     }
     
 }

@@ -26,10 +26,6 @@ class MovieGridViewControllerSpec: QuickSpec {
                     vc.interactor = interactor
                 }
                 
-                it("should fetch movies") {
-                   expect(interactor.didCall(method: .fetchMovieLit)).to(beTrue())
-                }
-                
                 it("should set own title") {
                     expect(vc.title).to(equal(MovieGridViewController.title))
                 }
@@ -42,6 +38,16 @@ class MovieGridViewControllerSpec: QuickSpec {
                     expect(vc.state).to(equal(MovieGridViewController.MovieGridState.collection))
                 }
                 
+                context("and will appear") {
+                    beforeEach {
+                        vc.viewWillAppear(false)
+                    }
+                    
+                    it("should fetch movies") {
+                        expect(interactor.didCall(method: .fetchMovieLit)).to(beTrue())
+                    }
+                }
+                
                 context("and display movies") {
                     var expectedViewModels: [MovieGridViewModel]!
                     let expectedState = MovieGridViewController.MovieGridState.collection
@@ -49,10 +55,6 @@ class MovieGridViewControllerSpec: QuickSpec {
                     beforeEach {
                         expectedViewModels = Array(repeating: MovieGridViewModel.placeHolder, count: 5)
                         vc.display(movies: expectedViewModels)
-                    }
-                    
-                    it("should fetch movies") {
-                        expect(interactor.didCall(method: .fetchMovieLit)).to(beTrue())
                     }
                     
                     it("should enter collection state") {

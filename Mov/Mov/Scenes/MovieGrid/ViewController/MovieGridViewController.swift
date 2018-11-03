@@ -12,13 +12,7 @@ final class MovieGridViewController: UIViewController {
     
     static let title = "Movies"
     
-    var interactor: MovieGridInteractor? {
-        didSet {
-            if (self.viewModels.isEmpty) {
-                self.fetchMovies()
-            }
-        }
-    }
+    var interactor: MovieGridInteractor?
     
     private(set) var viewModels = [MovieGridViewModel]()
     
@@ -80,16 +74,13 @@ final class MovieGridViewController: UIViewController {
         let view = BlankView()
         self.view = view
         self.setup()
+        self.state = .collection
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.fetchMovies()
-    }
-    
-    override func viewDidLoad() {
-        self.displayFavoritesError()
         
+        self.appear()
     }
     
     func fetchMovies() {
@@ -97,6 +88,23 @@ final class MovieGridViewController: UIViewController {
         self.movieGridView.activityIndicator.startAnimating()
         interactor.fetchMovieList(page: self.page)
     }
+    
+    func incrementPage() {
+        guard let _ = self.interactor else { return }
+        self.page += 1
+        self.fetchMovies()
+    }
+    
+    func appear() {
+        let searchBar = self.movieGridView.searchBar
+        guard let searchText = searchBar.text, searchText.isEmpty else  {
+            return
+        }
+        
+        searchBar.resignFirstResponder()
+        self.fetchMovies()
+    }
+    
 }
 
 // MARK: MovieGridViewOutput
@@ -112,13 +120,14 @@ extension MovieGridViewController: MovieGridViewOutput {
     
     func displayNetworkError() {
         self.state = .error
+        self.movieGridView.activityIndicator.stopAnimating()
     }
     
     func displayNoResults(for request: String) {
         self.state = .noResults(request)
     }
     
-    func displayFavoritesError() {
+    func displayGenericError() {
         self.present(UICommon.favoritesErrorAlert, animated: true, completion: nil)
     }
 }

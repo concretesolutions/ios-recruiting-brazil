@@ -72,7 +72,7 @@ class DefaultMovieGridPresenterSpec: QuickSpec {
                 
                 context("and present favoritesError") {
                     beforeEach {
-                        presenter.presentFavoritesError()
+                        presenter.presentGenericError()
                     }
                     
                     it("should display favorites error") {

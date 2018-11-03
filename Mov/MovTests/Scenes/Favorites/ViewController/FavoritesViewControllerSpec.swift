@@ -53,7 +53,7 @@ class FavoritesViewControllerSpec: QuickSpec {
                         expect(interactor.didCall(method: .fetchFavorites)).to(beTrue())
                     }
                     
-                    it("should enter collection state") {
+                    it("should enter table view state") {
                         expect(vc.state).to(equal(expectedState))
                     }
                     
@@ -61,7 +61,7 @@ class FavoritesViewControllerSpec: QuickSpec {
                         expect(vc.viewModels).to(equal(expectedViewModels))
                     }
                     
-                    it("should show collection view") {
+                    it("should show table view view") {
                         expect(vc.favoritesView.tableView.isHidden).to(beFalse())
                     }
                 }
