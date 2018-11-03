@@ -11,6 +11,6 @@ import Foundation
 
 extension Movie {
     static func mock(id: Int) -> Movie {
-        return Movie(id: id, genreIds: [], title: "title", overview: "", releaseDate: Date(), posterPath: "")
+        return Movie(id: id, genreIds: [1, 2, 3], title: "title", overview: "overview", releaseDate: Date(), posterPath: "path")
     }
 }
