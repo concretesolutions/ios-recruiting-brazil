@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
     //Type for the search of the current ViewController
     var searchType:ScreenType? = nil
     
-    var searchManager:SearchPresenter?
+    var searchManager:SearchDataManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
         //Presenter that manages the SearchBar, JsonLoader and CollectionView
         if let type = searchType{
             
-            searchManager = SearchPresenter(type: type)
+            searchManager = SearchDataManager(type: type)
             
             searchBar.delegate = searchManager
             mediaCollectionView.delegate = searchManager

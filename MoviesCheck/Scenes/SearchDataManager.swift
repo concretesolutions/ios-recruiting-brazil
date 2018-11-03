@@ -52,7 +52,7 @@ class SearchDataManager:NSObject{
 }
 
 //MARK:- UISearchBarDelegate
-extension SearchPresenter: UISearchBarDelegate{
+extension SearchDataManager: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -69,7 +69,7 @@ extension SearchPresenter: UISearchBarDelegate{
 }
 
 //MARK:- JsonLoaderDelegate
-extension SearchPresenter: JsonLoaderDelegate{
+extension SearchDataManager: JsonLoaderDelegate{
     
     func loaderCompleted(withMovies result: MovieSearchResult) {
         
@@ -109,7 +109,7 @@ extension SearchPresenter: JsonLoaderDelegate{
 }
 
 //MARK:- Collection View
-extension SearchPresenter:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
