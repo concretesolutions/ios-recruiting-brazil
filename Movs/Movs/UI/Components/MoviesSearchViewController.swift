@@ -11,7 +11,14 @@ import UIKit
 final class MoviesSearchViewController: UITableViewController {
     
     var searchResults:[Movie] = [] {
-        didSet { self.tableView.reloadData() }
+        didSet {
+            if self.searchResults.count > 0 {
+                self.showBackground()
+            } else {
+                self.hideBackground()
+            }
+            self.tableView.reloadData()
+        }
     }
     
     var didSelectorRowAt: ((IndexPath) -> Void)?
@@ -34,6 +41,16 @@ final class MoviesSearchViewController: UITableViewController {
     private func commonInit() {
         self.tableView = UITableView()
         self.tableView.register(Cell.self, forCellReuseIdentifier: Cell.identifier)
+    }
+    
+    func hideBackground() {
+        self.tableView.backgroundColor = .clear
+        self.tableView.separatorStyle = .none
+    }
+    
+    func showBackground() {
+        self.tableView.backgroundColor = Colors.white.color
+        self.tableView.separatorStyle = .singleLine
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

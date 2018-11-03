@@ -90,10 +90,10 @@ extension MoviesGridPresenter: MoviesGridViewPresenter {
         
         let filteredMovies = self.getFilteredMovies(searchText: text)
         
+        self.view?.present(searchResults: filteredMovies)
+        
         if filteredMovies.isEmpty {
             self.view?.presentEmptySearch()
-        } else {
-            self.view?.present(searchResults: filteredMovies)
         }
     }
 }
