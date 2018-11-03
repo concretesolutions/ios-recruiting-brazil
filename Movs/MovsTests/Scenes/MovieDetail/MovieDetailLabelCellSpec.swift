@@ -15,7 +15,7 @@ class MovieDetailLabelCellSpec: QuickSpec {
     override func spec() {
         describe("MovieDetailLabelCell Spec") {
             
-            context("init with decoder") {
+            context("init with coder") {
                 
                 it("should raise a exception") {
                     let archiver = NSKeyedArchiver(requiringSecureCoding: false)

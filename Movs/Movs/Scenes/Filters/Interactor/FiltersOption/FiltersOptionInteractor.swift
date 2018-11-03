@@ -34,11 +34,12 @@ class FiltersOptionInteractor: FiltersOptionBussinessLogic {
     
     func selectFilter(at index: Int) -> (String, String) {
         self.index = index
-        if genresIds.isEmpty {
+        if genresIds.isEmpty && !dates.isEmpty {
             return (dates[index], dates[index])
-        } else {
+        } else if !genresIds.isEmpty {
             return (String(genresIds[index]), genresNames[index])
         }
+        return ("", "")
     }
     
     private func presentDates() {

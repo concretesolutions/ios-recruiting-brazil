@@ -15,7 +15,7 @@ class FavoritesTableViewCellSpec: QuickSpec {
     override func spec() {
         describe("FavoritesTableViewCell Spec") {
             
-            context("init with decoder") {
+            context("init with coder") {
                 
                 it("should raise exception") {
                     let archiver = NSKeyedArchiver(requiringSecureCoding: false)

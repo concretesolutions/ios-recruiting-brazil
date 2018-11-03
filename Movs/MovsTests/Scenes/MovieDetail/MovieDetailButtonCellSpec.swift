@@ -17,7 +17,7 @@ class MovieDetailButtonCellSpec: QuickSpec {
             
             var cell: MovieDetailButtonCell!
             
-            context("init with decoder") {
+            context("init with coder") {
                 
                 it("should raise a exception") {
                     let archiver = NSKeyedArchiver(requiringSecureCoding: false)

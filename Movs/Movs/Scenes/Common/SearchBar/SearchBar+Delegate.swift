@@ -19,7 +19,7 @@ extension SearchBar: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        textChanged!(searchBar.text!)
+        textChanged?(searchBar.text!)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -27,7 +27,7 @@ extension SearchBar: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        textChanged!(searchText)
+        textChanged?(searchText)
     }
     
 }

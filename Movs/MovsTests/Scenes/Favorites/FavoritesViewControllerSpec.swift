@@ -15,7 +15,7 @@ class FavoritesViewControllerSpec: QuickSpec {
     override func spec() {
         describe("FavoritesViewController Spec") {
             
-            context("init with decoder") {
+            context("init with coder") {
                 
                 it("should raise exception") {
                     let archiver = NSKeyedArchiver(requiringSecureCoding: false)

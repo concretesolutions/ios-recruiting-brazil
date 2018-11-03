@@ -24,14 +24,15 @@ class FiltersInteractor: FiltersBussinessLogic, FiltersDataStore {
            let genre = request.genreFilter {
             movies = coreDataWorker.fetchMoviesFiltered(by: date, by: genre)
         } else if let date = request.dateFilter {
-            movies = coreDataWorker.fetchMoviesFiltered(by: date)
+            movies = coreDataWorker.fetchFilteredYear(date)
         } else if let genre = request.genreFilter {
-            movies = coreDataWorker.fetchFiltered(by: genre)
+            movies = coreDataWorker.fetchFilteredGenre(genre)
         }
         
         let response = Filters.Response(movies: movies)
         presenter.present(response: response)
     }
+
     
     func storeFilter(request: Filters.Request) {
         type = request.type

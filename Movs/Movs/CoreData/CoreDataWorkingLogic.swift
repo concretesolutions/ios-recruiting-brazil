@@ -15,7 +15,7 @@ protocol CoreDataWorkingLogic {
     func deleteAll()
     func favoriteMovie(movie: Movie)
     func isFavorite(id: Int) -> Bool
-    func fetchFiltered(by genre: String) -> [Movie]
-    func fetchMoviesFiltered(by year: String) -> [Movie]
+    func fetchFilteredGenre(_ filter: String) -> [Movie]
+    func fetchFilteredYear(_ filter: String) -> [Movie]
     func fetchMoviesFiltered(by year: String, by genre: String) -> [Movie]
 }

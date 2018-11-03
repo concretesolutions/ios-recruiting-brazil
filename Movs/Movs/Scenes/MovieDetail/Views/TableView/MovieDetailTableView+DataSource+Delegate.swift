@@ -34,6 +34,4 @@ extension MovieDetailTableView: UITableViewDataSource {
     
 }
 
-extension MovieDetailTableView: UITableViewDelegate {
-    
-}
+extension MovieDetailTableView: UITableViewDelegate {}

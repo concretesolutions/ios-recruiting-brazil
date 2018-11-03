@@ -17,9 +17,9 @@ class MovieDetailViewControllerSpec: QuickSpec {
             
             var viewController: MovieDetailViewController!
             
-            context("init with decoder") {
+            context("init with coder") {
                 
-                it("should raise expection") {
+                it("should raise exception") {
                     let archiver = NSKeyedArchiver(requiringSecureCoding: false)
                     expect(MovieDetailViewController(coder: archiver)).to(raiseException())
                 }
