@@ -40,13 +40,15 @@ class APIParserTests: XCTestCase {
     }
     
     func testAPIParserShouldParseMovieDetail() {
-        let jsonData = "{\"id\": 335983, \"title\": \"Venom\", \"poster_path\": \"/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg\", \"genres\":[], \"overview\":\"Over\"}".data(using: .utf8)!
+        let jsonData = "{\"id\": 335983, \"title\": \"Venom\", \"poster_path\": \"/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg\", \"genres\":[], \"overview\":\"Over\", \"release_date\":\"1997-03-12\"}".data(using: .utf8)!
         let result = self.movieDetailParser.parse(data: jsonData)
         XCTAssertNotNil(result)
         XCTAssertTrue(result?.id == 335983)
         XCTAssertTrue(result?.title == "Venom")
         XCTAssertTrue(result?.posterPath == "/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg")
         XCTAssertTrue(result?.genres.count == 0)
+        XCTAssertTrue(result?.releaseDate == "1997-03-12")
+        XCTAssertTrue(result?.releaseYear == "1997")
         XCTAssertTrue(result?.overview == "Over")
     }
 }

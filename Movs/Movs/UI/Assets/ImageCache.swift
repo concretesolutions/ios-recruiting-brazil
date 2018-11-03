@@ -15,6 +15,10 @@ final class ImageCache {
     typealias Callback = (UIImage?) -> Void
     private var images:[String:UIImage?] = [:]
     
+    var imagesCount:Int {
+        return self.images.count
+    }
+    
     func getImage(for link:String, completion:Callback? = nil) {
         if let img = self.images[link] {
             completion?(img)

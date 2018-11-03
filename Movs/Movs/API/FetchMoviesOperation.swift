@@ -47,7 +47,8 @@ final class FetchMoviesOperation: APIGetOperation {
     func unrwapResultsJSON(from data: Data) -> Data? {
         do {
             guard let resultDictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any] else { return nil }
-            return try JSONSerialization.data(withJSONObject: resultDictionary["results"]!, options: .prettyPrinted)
+            guard let results = resultDictionary["results"] else { return nil}
+            return try JSONSerialization.data(withJSONObject: results, options: .prettyPrinted)
         } catch {
             return nil
         }
