@@ -63,7 +63,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
      Setup view controller data.
      */
     private func setupViewController() {
-        let view = UIView(frame: .zero)
+        let view = UIView(frame: UIScreen.main.bounds)
         self.view = view
         title = "Movie"
         setupView()

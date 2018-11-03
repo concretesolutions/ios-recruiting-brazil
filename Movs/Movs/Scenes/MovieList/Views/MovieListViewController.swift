@@ -85,7 +85,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
      Setup view controller data.
      */
     private func setupViewController() {
-        let view = UIView(frame: .zero)
+        let view = UIView(frame: UIScreen.main.bounds)
         self.view = view
         title = "Movies"
         tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: Constants.ImageName.list), tag: 0)
