@@ -1,12 +1,12 @@
 
 ![Movies App](assets/git-logo.png)
 
-The Movies App is a themoviedb.org client for iPhone with an iOS centric UI made for the [Concrete iOS Recruit Challenge](https://github.com/concretesolutions/ios-recruiting-brazil).
+The Movies App is a themoviedb.org [API](https://www.themoviedb.org/documentation/api) client for iPhone with an iOS centric UI made for the [Concrete iOS Recruit Challenge](https://github.com/concretesolutions/ios-recruiting-brazil).
 
 
 ## Installing
 
-This project uses CocoaPods. Before you run, you need to run:
+This project uses CocoaPods. Before you run, you need to:
 
 ```
 cd Movies/
