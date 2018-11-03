@@ -7,7 +7,8 @@
 //
 
 import XCTest
-//@testable import AppMovie
+@testable import AppMovie
+
 class Utilites: XCTestCase {
     
     func testeConverteDate() {

@@ -123,7 +123,11 @@ extension MoviesViewController: FavoriteDelegate {
         let index = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.moviesFavorites)
         if  index != -1 {
             ManagerMovies.shared.moviesFavorites.remove(at: index)
+            let indexMovies = Index.getIndexInArray(movie: movie, at: ManagerMovies.shared.movies)
+            ManagerMovies.shared.movies[indexMovies].updateFavorite()
+            self.dataSource.datas = ManagerMovies.shared.movies
         }
+        self.collectionView.reloadData()
     }
 }
 
