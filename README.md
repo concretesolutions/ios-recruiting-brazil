@@ -64,24 +64,17 @@ Para posições mais Seniors, porém, damos muito importância para a qualidade 
 - [ ] Testes funcionais.
 - [ ] Pipeline Automatizado
 
-# Exemplos e sugestões
+# Movs
 
----
-
-Abaixo podemos ver algumas telas de exemplo de alguns desses fluxos. São apenas sugestões, fique à vontade para modificar como você quiser.
-Para facilitar o processo, existem assets, app icons, ícones e paleta de cores no repositório. Mas se o seu lado designer falar mais alto, pode nos surpreender!
+Abaixo estão as telas do Movs com todo o fluxo que foi construído, e baseado nas especificações acima e dos exemplos que foram dados.
 
 ### Fluxo de grid de filmes
 
-![Image of Yaktocat](assets/flow/lista.png)
+![Screenshots](https://github.com/marcosfellipec/ios-recruiting-brazil/blob/master/Movs/Movs/screenshots/fluxo-de-grid.png)
 
 ### Fluxo com Splash, Tela de Detalhes e tela de lista da favoritos
 
-![Image of Yaktocat](assets/flow/splash_detalhes.png)
-
-### Fluxo Opcional de filtro
-
-![Image of Yaktocat](assets/flow/filtro.png)
+![Screenshots](https://github.com/marcosfellipec/ios-recruiting-brazil/blob/master/Movs/Movs/screenshots/details.png)
 
 ## **Processo de submissão**
 
