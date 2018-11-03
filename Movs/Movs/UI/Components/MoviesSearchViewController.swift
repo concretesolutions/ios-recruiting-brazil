@@ -83,15 +83,16 @@ final class MoviesSearchViewController: UITableViewController {
         
         func configure(movie:Movie) {
             self.movieTitleLabel.text = movie.title
+            self.setMovieImageView(image: nil)
             DispatchQueue.global(qos: .userInitiated).async {
-                guard let img = Assets.getImage(from: movie.w92PosterPath) else { return }
+                let img = Assets.getImage(from: movie.w92PosterPath)
                 DispatchQueue.main.async {
                     self.setMovieImageView(image: img)
                 }
             }
         }
         
-        func setMovieImageView(image:UIImage) {
+        func setMovieImageView(image:UIImage?) {
             self.movieImageView.image = image
         }
         
