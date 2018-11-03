@@ -13,7 +13,6 @@
 		B7928770218895BF00A74567 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792876F218895BF00A74567 /* AppDelegate.swift */; };
 		B7928777218895C100A74567 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7928776218895C100A74567 /* Assets.xcassets */; };
 		B792877A218895C100A74567 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7928778218895C100A74567 /* LaunchScreen.storyboard */; };
-		B7928785218895C100A74567 /* ConcreteChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7928784218895C100A74567 /* ConcreteChallengeTests.swift */; };
 		B7928790218895C100A74567 /* ConcreteChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B792878F218895C100A74567 /* ConcreteChallengeUITests.swift */; };
 		B79287AE21889A2B00A74567 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B79287AD21889A2B00A74567 /* Home.storyboard */; };
 		B79287B32188A0CE00A74567 /* HomeInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79287B22188A0CE00A74567 /* HomeInterface.swift */; };
@@ -82,7 +81,6 @@
 		B7928779218895C100A74567 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B792877B218895C100A74567 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7928780218895C100A74567 /* ConcreteChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7928784218895C100A74567 /* ConcreteChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteChallengeTests.swift; sourceTree = "<group>"; };
 		B7928786218895C100A74567 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B792878B218895C100A74567 /* ConcreteChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B792878F218895C100A74567 /* ConcreteChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteChallengeUITests.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 		B7928783218895C100A74567 /* ConcreteChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
-				B7928784218895C100A74567 /* ConcreteChallengeTests.swift */,
 				B7928786218895C100A74567 /* Info.plist */,
 			);
 			path = ConcreteChallengeTests;
@@ -581,7 +578,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -589,7 +585,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -640,7 +635,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7928785218895C100A74567 /* ConcreteChallengeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,7 +797,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallenge/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -819,7 +816,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallenge/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -836,7 +836,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -854,7 +858,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
 				INFOPLIST_FILE = ConcreteChallengeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -870,8 +878,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -887,8 +899,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EH2QCJHEZN;
-				INFOPLIST_FILE = ConcreteChallengeUITests/Configurations/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				INFOPLIST_FILE = ConcreteChallengeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.bepiducb.ConcreteChallengeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
