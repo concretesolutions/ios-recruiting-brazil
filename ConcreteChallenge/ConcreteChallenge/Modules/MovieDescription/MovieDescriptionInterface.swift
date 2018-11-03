@@ -12,9 +12,10 @@ class MovieDescriptionInterface: StatusBarAnimatableViewController {
     lazy var manager = MovieDescriptionManager(self)
     
     @IBOutlet weak var cardContentView: CardContentView!
-    @IBOutlet weak var topLabelDescription: UILabel!
-    @IBOutlet weak var bottomLabelDescription: UILabel!
-    
+//    @IBOutlet weak var topLabelDescription: UILabel!
+//    @IBOutlet weak var bottomLabelDescription: UILabel!
+//
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
@@ -40,6 +41,7 @@ class MovieDescriptionInterface: StatusBarAnimatableViewController {
         pan.edges = .left
         return pan
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,15 +68,10 @@ class MovieDescriptionInterface: StatusBarAnimatableViewController {
         // Make drag down/scroll pan gesture waits til screen edge pan to fail first to begin
         dismissalPanGesture.require(toFail: dismissalScreenEdgePanGesture)
         scrollView.panGestureRecognizer.require(toFail: dismissalScreenEdgePanGesture)
-        cardContentView.saveButton.addTarget(self, action: #selector(self.save), for: .touchUpInside)
         
         loadViewIfNeeded()
-        view.addGestureRecognizer(dismissalPanGesture)
+        self.view.addGestureRecognizer(dismissalPanGesture)
         view.addGestureRecognizer(dismissalScreenEdgePanGesture)
-    }
-    
-    @objc func save() {
-        self.manager.handleMovie()
     }
     
     func didSuccessfullyDragDownToDismiss() {
@@ -190,6 +187,10 @@ class MovieDescriptionInterface: StatusBarAnimatableViewController {
        
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
     func set(movie: Movie) {
         self.manager.set(movie: movie)
     }
@@ -206,26 +207,19 @@ extension MovieDescriptionInterface: MovieDescriptionInterfaceProtocol {
         
         self.cardContentView.movieTitle.text = title
         
-        var topLabel = ""
-        
-        for genre in genres {
-            topLabel.append(contentsOf: genre.name + (genre != genres.last ? ", " : ""))
-        }
-        
-        self.topLabelDescription.text = String(year) + (topLabel.isEmpty ? "" : "- \(topLabel)")
+        //        var topLabel = ""
+        //
+        //        for genre in genres {
+        //            topLabel.append(contentsOf: genre.name + (genre != genres.last ? ", " : ""))
+        //        }
+        //
+        //        self.topLabelDescription.text = String(year) + (topLabel.isEmpty ? "" : "- \(topLabel)")
         
         self.cardContentView.saveButton.alpha = isSaved ? 0.6 : 1
     }
     
     
 }
-
-extension MovieDescriptionInterface {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}
-
 
 extension MovieDescriptionInterface: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -248,8 +242,10 @@ extension MovieDescriptionInterface: UIScrollViewDelegate {
 
 extension MovieDescriptionInterface: CardContentViewDelegate {
     func saveTapped() {
-        self.manager.handleMovie()
+        self.manager.saveTapped()
     }
 }
+
+
 
 

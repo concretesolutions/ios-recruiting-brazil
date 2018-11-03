@@ -81,7 +81,6 @@ class MovieProvider {
         try! self.realm.write {
             movie.isSaved = !movie.isSaved
             if let movie = self.realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
-                
                 self.realm.delete(movie)
             } else {
                 self.realm.add(movie)
