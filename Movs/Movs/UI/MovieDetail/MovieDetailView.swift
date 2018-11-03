@@ -15,15 +15,18 @@ protocol MovieDetailViewDelegate: AnyObject {
 
 final class MovieDetailView: UIView {
     
-    private let tableViewDataSource = MovieDetailDataSource()
+    private let tableViewDataSourceDelegate = MovieDetailDataSourceDelegate()
     
     private var tableView:UITableView! {
         didSet {
             self.tableView.allowsSelection = false
-            self.tableView.dataSource = self.tableViewDataSource
+            self.tableView.dataSource = self.tableViewDataSourceDelegate
+            self.tableView.delegate = self.tableViewDataSourceDelegate
             self.addSubview(self.tableView)
         }
     }
+    
+    private var movieImageViewHolder:UIImageView?
     
     weak var delegate:MovieDetailViewDelegate?
     
@@ -41,7 +44,7 @@ final class MovieDetailView: UIView {
         cells.append(self.createLabelCell(with: self.movieDetail.genreNames))
         cells.append(self.createLabelCell(with: self.movieDetail.overview, multipleLines: true))
         
-        self.tableViewDataSource.items = cells
+        self.tableViewDataSourceDelegate.items = cells
         self.tableView.reloadData()
     }
     
@@ -53,17 +56,11 @@ final class MovieDetailView: UIView {
         let button = FavoriteButton()
         let cell = UITableViewCell()
         
-        if let img = Assets.getImage(from: self.movieDetail.w185PosterPath) {
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = img
+        self.movieImageViewHolder = imageView
+        ImageCache.global.getImage(for: self.movieDetail.w185PosterPath) { [weak self] img in
+            self?.movieImageViewHolder?.image = img
+            self?.movieImageViewHolder?.contentMode = .scaleAspectFit
         }
-        
-//        DispatchQueue.global(qos: .userInitiated).async {
-//
-//            DispatchQueue.main.async {
-//
-//            }
-//        }
         
         label.text = text
         

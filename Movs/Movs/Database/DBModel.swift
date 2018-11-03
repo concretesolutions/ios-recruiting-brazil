@@ -23,10 +23,6 @@ final class FavoriteMovie: Object {
         return self.genres.map { $0.genre }
     }
     
-    var isCompletlySaved:Bool {
-        return !(self.releaseDate.isEmpty || self.overview.isEmpty)
-    }
-    
     var movie:Movie {
         return Movie(id: self.id,
                      title: self.title,

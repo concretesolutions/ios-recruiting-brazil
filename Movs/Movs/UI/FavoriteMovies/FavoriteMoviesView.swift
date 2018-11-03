@@ -50,7 +50,7 @@ final class FavoriteMoviesView: UIView {
         didSet { self.refreshUIAcoordingToState() }
     }
     
-    var movieItems:[FavoriteMoviesCell.Model] = [] {
+    var movieItems:[MovieDetail] = [] {
         didSet { self.tableViewDataSource.items = self.movieItems }
     }
     
@@ -66,12 +66,12 @@ final class FavoriteMoviesView: UIView {
             self.feedbackView.isHidden = true
             self.tableView.isHidden = false
             self.tableView.sectionHeaderHeight = 0.0
-//            self.tableView.tableHeaderView = nil
+            self.tableView.tableHeaderView = nil
         case .filtered:
             self.feedbackView.isHidden = true
             self.tableView.isHidden = false
             self.tableView.sectionHeaderHeight = 80.0
-//            self.tableView.tableHeaderView = self.removeFiltersButton
+            self.tableView.tableHeaderView = self.removeFiltersButton
         }
     }
     

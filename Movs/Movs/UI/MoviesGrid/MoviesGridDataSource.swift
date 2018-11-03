@@ -10,7 +10,7 @@ import UIKit
 
 final class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
     
-    let cache = ImageCache()
+    let cache = ImageCache.global
     var items:[Movie]
     
     unowned let cellDelegate:MoviesGridCellDelegate

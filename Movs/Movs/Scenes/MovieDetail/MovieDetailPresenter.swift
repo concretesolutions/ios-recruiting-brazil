@@ -19,21 +19,29 @@ final class MovieDetailPresenter: MVPBasePresenter {
     
     var initialData:Movie! {
         didSet {
-            self.operation.onSuccess = { [weak self] detail in
-                self?.movieDetail = detail
-            }
-            self.operation.perform()
+            self.fetchMovieDetail()
         }
     }
     
     private(set) var movieDetail:MovieDetail! {
         didSet {
-            self.view?.present(movieDetail: self.movieDetail)
+            if self.movieDetail.isComplete {
+                self.view?.present(movieDetail: self.movieDetail)
+            } else {
+                self.fetchMovieDetail()
+            }
         }
     }
     
     var view:MovieDetailPresenterView? {
         return self.baseView as? MovieDetailPresenterView
+    }
+    
+    func fetchMovieDetail() {
+        self.operation.onSuccess = { [weak self] detail in
+            self?.movieDetail = detail
+        }
+        self.operation.perform()
     }
 }
 

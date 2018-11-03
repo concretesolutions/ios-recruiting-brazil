@@ -10,13 +10,6 @@ import UIKit
 
 final class FavoriteMoviesCell: UITableViewCell {
     
-    struct Model {
-        let movieImage:UIImage
-        let movieTitle:String
-        let movieYear:String
-        let movieDescription:String
-    }
-    
     static let identifier:String = "CellReuseIdentifier:FavoriteMoviesCell"
     
     private var cellContentStack:UIStackView! {
@@ -57,21 +50,29 @@ final class FavoriteMoviesCell: UITableViewCell {
         }
     }
     
-    private var movieDescriptionLabel:UILabel! {
+    private var movieOverviewLabel:UILabel! {
         didSet {
-            self.movieDescriptionLabel.textAlignment = .left
-            self.movieDescriptionLabel.textColor = Colors.darkBlue.color
-            self.movieDescriptionLabel.numberOfLines = 0
+            self.movieOverviewLabel.textAlignment = .left
+            self.movieOverviewLabel.textColor = Colors.darkBlue.color
+            self.movieOverviewLabel.numberOfLines = 0
         }
     }
     
     var settedUp: Bool = false
     
-    func configure(with model:Model) {
-        self.movieImageView.image = model.movieImage
-        self.movieTitleLabel.text = model.movieTitle
-        self.movieYearLabel.text = model.movieYear
-        self.movieDescriptionLabel.text = model.movieDescription
+    func configure(with movie:MovieDetail) {
+        self.setMovieImageView(image: Assets.searchIcon.image)
+        ImageCache.global.getImage(for: movie.w185PosterPath) { img in
+            self.setMovieImageView(image: img)
+        }
+        
+        self.movieTitleLabel.text = movie.title
+        self.movieYearLabel.text = movie.releaseYear
+        self.movieOverviewLabel.text = movie.overview
+    }
+    
+    func setMovieImageView(image:UIImage?) {
+        self.movieImageView.image = image
     }
 }
 
@@ -82,9 +83,9 @@ extension FavoriteMoviesCell: ReusableViewCode {
         self.movieImageView = UIImageView(image: nil)
         self.movieTitleLabel = UILabel(frame: .zero)
         self.movieYearLabel = UILabel(frame: .zero)
-        self.movieDescriptionLabel = UILabel(frame: .zero)
+        self.movieOverviewLabel = UILabel(frame: .zero)
         self.cellHeaderStack = UIStackView(arrangedSubviews: [self.movieTitleLabel, self.movieYearLabel])
-        self.cellContentStack = UIStackView(arrangedSubviews: [self.cellHeaderStack, self.movieDescriptionLabel])
+        self.cellContentStack = UIStackView(arrangedSubviews: [self.cellHeaderStack, self.movieOverviewLabel])
     }
     
     func autolayout() {
@@ -96,9 +97,9 @@ extension FavoriteMoviesCell: ReusableViewCode {
         self.movieImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25).isActive = true
         // cell content stack
         self.cellContentStack.translatesAutoresizingMaskIntoConstraints = false
-        self.cellContentStack.leftAnchor.constraint(equalTo: self.movieImageView.rightAnchor).isActive = true
-        self.cellContentStack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.cellContentStack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.cellContentStack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.cellContentStack.leftAnchor.constraint(equalTo: self.movieImageView.rightAnchor, constant: 5.0).isActive = true
+        self.cellContentStack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5.0).isActive = true
+        self.cellContentStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 5.0).isActive = true
+        self.cellContentStack.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0).isActive = true
     }
 }

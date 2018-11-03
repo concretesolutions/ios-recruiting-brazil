@@ -10,6 +10,8 @@ import UIKit
 
 final class ImageCache {
     
+    static let global = ImageCache()
+    
     typealias Callback = (UIImage?) -> Void
     private var images:[String:UIImage?] = [:]
     

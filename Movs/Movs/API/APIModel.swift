@@ -62,6 +62,10 @@ public struct MovieDetail: Codable {
         return self.posterCompletePath(sizeClass: "w185")
     }
     
+    var isComplete:Bool {
+        return !(self.releaseDate.isEmpty || self.overview.isEmpty)
+    }
+    
     init(id:Int, title:String, posterPath:String, releaseDate:String, genres:[Genre], overview:String) {
         self.id = id
         self.title = title

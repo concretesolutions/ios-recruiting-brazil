@@ -13,10 +13,10 @@ protocol FavoriteMoviesViewPresenter: PresenterProtocol {
 
 final class FavoriteMoviesViewController: MVPBaseViewController {
     
-    private var favoriteMovies:FavoriteMoviesView! {
+    private var favoriteMoviesView:FavoriteMoviesView! {
         didSet {
-            self.favoriteMovies.setupView()
-            self.view = self.favoriteMovies
+            self.favoriteMoviesView.setupView()
+            self.view = self.favoriteMoviesView
         }
     }
     
@@ -30,7 +30,7 @@ final class FavoriteMoviesViewController: MVPBaseViewController {
     }
     
     private func showFilterBarButtonIfAppropriated() {
-        if self.favoriteMovies.state != .empty {
+        if self.favoriteMoviesView.state != .empty {
             self.showFilterBarButtonItem()
         } else {
             self.hideFilterBarButtonItem()
@@ -57,14 +57,28 @@ extension FavoriteMoviesViewController: FavoriteMoviesPresenterView {
     
     func setupOnce() {
         self.title = "Favorites"
-        self.favoriteMovies = FavoriteMoviesView()
-        self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
-        self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        self.definesPresentationContext = true
+        self.favoriteMoviesView = FavoriteMoviesView()
+//        self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
+//        self.navigationItem.hidesSearchBarWhenScrolling = false
+//        self.navigationItem.largeTitleDisplayMode = .automatic
+//        self.definesPresentationContext = true
     }
     
     func setupWhenAppear() {
         self.showFilterBarButtonIfAppropriated()
+    }
+    
+    func present(favoriteMovies: [MovieDetail]) {
+        self.favoriteMoviesView.state = .all
+        self.favoriteMoviesView.movieItems = favoriteMovies
+    }
+    
+    func present(filteredMovies: [MovieDetail]) {
+        self.favoriteMoviesView.state = .filtered
+        self.favoriteMoviesView.movieItems = filteredMovies
+    }
+    
+    func presentEmpty() {
+        self.favoriteMoviesView.state = .empty
     }
 }

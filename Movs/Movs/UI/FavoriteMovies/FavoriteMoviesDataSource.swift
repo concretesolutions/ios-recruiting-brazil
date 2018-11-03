@@ -10,9 +10,9 @@ import UIKit
 
 final class FavoriteMoviesDataSource: NSObject, UITableViewDataSource {
     
-    var items: [FavoriteMoviesCell.Model]
+    var items: [MovieDetail]
     
-    init(items: [FavoriteMoviesCell.Model] = []) {
+    init(items: [MovieDetail] = []) {
         self.items = items
     }
     
