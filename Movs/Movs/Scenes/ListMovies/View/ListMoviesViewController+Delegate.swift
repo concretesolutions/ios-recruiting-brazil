@@ -58,14 +58,14 @@ extension ListMoviesViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(">>>>>> text did change")
         // Search for movies and put them into "moviesFiltered". This allows the Table View to access only the filted data. The user has the response of what is he searching for instantaneally.
         moviesFiltered = movies.filter { (movie) -> Bool in
             return movie.title.contains(searchText)
         }
         
         if let _ = viewError { removeViewError() }
-
+        tableView.reloadSections(IndexSet.init(integer: 0), with: .automatic)
+        
         // Search didn't found anything and search bar has content
         if moviesFiltered.count == 0 && !searchText.isEmpty {
             let request = ListMovies.Request(page: 0)

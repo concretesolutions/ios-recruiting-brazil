@@ -27,7 +27,11 @@ class PopularMovieTableViewCell: UITableViewCell {
         movieDescription.text = data.overview
         favoriteIcon.image = isFavorite ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
         movieImageView.kf.setImage(with: data.posterPath)
-        moviePosition.text = String(position) + "º"
+        if position != 0 {
+            moviePosition.text = String(position) + "º"         
+        } else {
+            moviePosition.text = ""
+        }
         loading.isHidden = true
     }
     

@@ -20,18 +20,33 @@ extension ListMoviesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: movieCellReuseIdentifier) as! PopularMovieTableViewCell
         var isFavorite: Bool
+        
         if isSearchBarActive {
-            isFavorite = getFavoriteMovie(moviesFiltered[indexPath.row])
-            cell.configureCellWith(data: moviesFiltered[indexPath.row], position: (indexPath.row + 1), isFavorite: isFavorite)
+            let currentMovie = moviesFiltered[indexPath.row]
+            isFavorite = getFavoriteMovie(currentMovie)
+            cell.configureCellWith(data: currentMovie, position: 0, isFavorite: isFavorite)
         } else {
             if !movies.isEmpty {
-                isFavorite = getFavoriteMovie(movies[indexPath.row])
-                cell.configureCellWith(data: movies[indexPath.row], position: (indexPath.row + 1), isFavorite: isFavorite)
+                let currentMovie = movies[indexPath.row]
+                isFavorite = getFavoriteMovie(currentMovie)
+                cell.configureCellWith(data: currentMovie, position: indexPath.row + 1, isFavorite: isFavorite)
             } else { cell.loadingCell() }
         }
         return cell
+    }
+    
+    func getPosition(movie: ListMovies.ViewModel.PopularMoviesFormatted) -> Int{
+        for element in moviesRanking {
+            for (key, value) in element {
+                if key == movie.id {
+                    return value
+                }
+            }
+        }
+        return 0
     }
     
     private func getFavoriteMovie(_ currentMovie: ListMovies.ViewModel.PopularMoviesFormatted) -> Bool {

@@ -34,10 +34,10 @@ class FilterFavoritesViewController: UIViewController {
         yearPicker.dataSource = self
         genreTableTile.delegate = self
         genreTableTile.dataSource = self
-        favorites = FavoriteMoviesWorker.shared.getFavoriteMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        favorites = FavoriteMoviesWorker.shared.getFavoriteMovies()
         years = getYearList()
         genres = getGenreList()
         // Refreshing data
@@ -45,6 +45,7 @@ class FilterFavoritesViewController: UIViewController {
             currentlyYear = years[0]
             currentlyGenres = [""]
         }
+        yearPicker.reloadAllComponents()
         genreTableTile.reloadData()
     }
     

@@ -36,6 +36,7 @@ class DetailMoviesViewController: UIViewController {
     private var movieRawData: MovieDetailed?
     var movieId: Int?
     
+    
     // MARK: - View life cycle
     override func viewDidLoad() {
         DetailMoviesSceneConfigurator.inject(dependenciesFor: self)
@@ -60,7 +61,6 @@ class DetailMoviesViewController: UIViewController {
     @IBAction func favoriteMovieAction(_ sender: Any) {
         
         if let movie = movieRawData {
-            print("👾 Movie favorite: \(movie.isFavorite)")
             if !movie.isFavorite {
                 let movie = MovieDetailed.init(id: movie.id, genres: movie.genres, genresNames: movie.genresNames, title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate, posterPath: movie.posterPath, voteAverage: movie.voteAverage, isFavorite: movie.isFavorite)
                 interactor?.addFavorite(movie: movie)

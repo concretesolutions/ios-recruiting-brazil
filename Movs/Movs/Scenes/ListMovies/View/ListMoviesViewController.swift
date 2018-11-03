@@ -22,6 +22,10 @@ class ListMoviesViewController: UIViewController {
     let movieCellReuseIdentifier = "PopularMovieTableViewCell"
     let detailMovieSegue = "detailMovie"
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchBar: UISearchBar!
+   
     // Auxiliar
     var page: Int = 1
     var fetchingMovies = false
@@ -29,9 +33,10 @@ class ListMoviesViewController: UIViewController {
     var isEditingSearchBar: Bool = false
     var viewError: MovieListErrorView?
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var searchBar: UISearchBar!
+    typealias MoviePosition = [Int: Int]
+    var moviesRanking = Set<MoviePosition>()
+    var moviesRanking2 = Set<Int>()
+    var moviesRanking3 = [Int]()
     
     // Data
     var movies = [ListMovies.ViewModel.PopularMoviesFormatted]()
@@ -127,7 +132,15 @@ extension ListMoviesViewController: ListMoviesDisplayLogic {
         fetchingMovies = false
         // This is done to have a set of data to manipulate while presenting only the filtered data
         moviesFiltered = movies
+        tupleOfPosition(movies: viewModel.movies)
         tableView.reloadData()
+    }
+    
+    func tupleOfPosition(movies: [ListMovies.ViewModel.PopularMoviesFormatted]) {
+        for movie in movies {
+            let position: MoviePosition = [movie.id: moviesRanking.count + 1]
+            moviesRanking.insert(position)
+        }
     }
     
     func displayError(viewModel: ListMovies.ViewModel.Error) {
