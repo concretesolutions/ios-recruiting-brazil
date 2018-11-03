@@ -13,6 +13,7 @@ class MediaCollectionViewCell: UICollectionViewCell {
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
+    @IBOutlet var favStarImageView: UIImageView!
     
     func setMedia(mediaItem:MediaItem){
         
@@ -26,6 +27,13 @@ class MediaCollectionViewCell: UICollectionViewCell {
         
         titleLabel.text = mediaItem.title
         yearLabel.text = mediaItem.getYear()
+        
+        if(DatabaseWorker.shared.isFavorited(media: mediaItem)){
+            favStarImageView.image = UIImage(named: "favorited")
+        }else{
+            favStarImageView.image = UIImage(named: "unfavorited")
+        }
+        
         
     }
     

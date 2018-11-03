@@ -35,6 +35,9 @@ class DatabaseWorker {
         
     }
     
+    /**
+     Check if the MediaItem is favorited
+     */
     func isFavorited(media:MediaItem)->Bool{
         
         let result = realm.objects(MediaItemDao.self).filter("id = %@ AND type = %@", media.id, media.mediaType.rawValue)
@@ -47,6 +50,9 @@ class DatabaseWorker {
         
     }
     
+    /**
+     Add MediaItem to Reaml
+     */
     func addMediaToFavorites(media:MediaItem){
         
         let newFavorite = MediaItemDao(mediaItem: media)
@@ -57,6 +63,9 @@ class DatabaseWorker {
         
     }
     
+    /**
+     Delete MediaItem from Reaml
+     */
     func removeMediaFromFavorites(media:MediaItem){
         
         let result = realm.objects(MediaItemDao.self).filter("id = %@ AND type = %@", media.id, media.mediaType.rawValue)
@@ -68,6 +77,37 @@ class DatabaseWorker {
             }
             
         }
+        
+    }
+    
+    /**
+     Return All favorited movies from a given type
+     - parameter type: Type of the Media that you want to retrieve
+     - Returns: Array of MediaItems
+     */
+    func getFavorites(type:MediaType)->Array<MediaItem>{
+        
+        var favorites:Array<MediaItem> = Array()
+        
+        let results = realm.objects(MediaItemDao.self).filter("type = %@", type.rawValue)
+        
+        for recordedMedia in results{
+            
+            if(type == .movie){
+                
+                let movie = MovieMediaItem(record: recordedMedia)
+                favorites.append(movie)
+                
+            }else{
+                
+                let tvShow = TvShowMediaItem(record: recordedMedia)
+                favorites.append(tvShow)
+                
+            }
+            
+        }
+        
+        return favorites
         
     }
     

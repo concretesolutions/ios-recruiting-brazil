@@ -1,5 +1,5 @@
 //
-//  SearchDataManager.swift
+//  SearchCollectionManager.swift
 //  MoviesCheck
 //
 //  Created by Daniel Lima on 26/10/18.

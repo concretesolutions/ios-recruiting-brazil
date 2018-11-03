@@ -46,13 +46,21 @@ class MediaItemDao:Object{
     }
     
     func setGenres(mediaGenres:Array<Int>){
-        
         for genre in mediaGenres{
             let newRealmGenre = GenreDao()
             newRealmGenre.id = genre
             genres.append(newRealmGenre)
         }
+    }
+    func getGenres()->Array<Int>{
+        var recordedGenres:Array<Int> = Array()
         
+        for genre in genres{
+            let recordedGenre = genre.id
+            recordedGenres.append(recordedGenre)
+        }
+        
+        return recordedGenres
     }
     
 }

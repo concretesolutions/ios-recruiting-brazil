@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
     //Type for the search of the current ViewController
     var searchType:ScreenType? = nil
     
-    var searchManager:SearchDataManager?
+    var searchManager:SearchCollectionManager?
     
     var selectedMediaItem:MediaItem? = nil
     
@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
         //Manager for the the SearchBar, JsonLoader and CollectionView
         if let type = searchType{
             
-            searchManager = SearchDataManager(type: type)
+            searchManager = SearchCollectionManager(type: type)
             
             searchBar.delegate = searchManager
             mediaCollectionView.delegate = searchManager
@@ -57,6 +57,14 @@ class SearchViewController: UIViewController {
         //Show popular Movies or Tv Shows
         searchManager?.requestPopularMedia()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.mediaCollectionView.reloadData()
+        }
     }
     
     /**

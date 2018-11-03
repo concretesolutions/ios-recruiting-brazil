@@ -17,7 +17,7 @@ MoviesCheck is an iOS app designed for iPhones and iPads built using the Clean S
 - Database management using Realm (The only external framework used in this project);
 - Usage of UISplitViewController;
 - Designed to be used with iPhone and iPad, with differential design for each type of device;
-- Infinite Scrooling pagination in the Most Popular movies and tv shows horizontal collectionview
+- Infinite Scrooling pagination in the Most Popular movies and tv shows collectionview
 - Infinite Scrooling pagination when searching for movies and tv shows
 
 # App Previews

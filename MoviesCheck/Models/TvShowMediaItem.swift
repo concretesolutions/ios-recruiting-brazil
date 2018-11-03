@@ -29,6 +29,18 @@ struct TvShowMediaItem:MediaItem, Codable {
         case genres = "genre_ids"
     }
     
+    init(record:MediaItemDao){
+        
+        id = record.id
+        evaluation = record.evaluation
+        title = record.title
+        poster = record.poster
+        overview = record.overview
+        releaseDate = record.releaseDate
+        genres = record.getGenres()
+        
+    }
+    
     func getThumbnailUrl() -> String {
         
         if let thumbFile = poster{
