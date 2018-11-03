@@ -45,7 +45,9 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
         // fetch updated favorites
         do {
             self.favorites = try self.persistence.fetchFavorites()
-        } catch {/*present db error*/}
+        } catch {
+            self.presenter.presentFavoritesError()
+        }
         
         // no need to fetch movies again if requested page was already fetched
         guard page > fetchedPages else {
@@ -73,7 +75,9 @@ extension DefaultMovieGridInteractor: MovieGridInteractor {
             do {
                 try self.persistence.toggleFavorite(movie: movie)
                 self.fetchMovieList(page: self.fetchedPages)
-            } catch {/*present db error*/}
+            } catch {
+                self.presenter.presentFavoritesError()
+            }
         } else {/*do nothing*/}
     }
     

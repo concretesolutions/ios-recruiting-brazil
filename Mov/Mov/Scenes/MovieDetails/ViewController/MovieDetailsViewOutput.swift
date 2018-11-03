@@ -10,4 +10,5 @@ import Foundation
 
 protocol MovieDetailsViewOutput {
     func displayDetails(of movie: MovieDetailsViewModel)
+    func displayFavoritesErorr()
 }

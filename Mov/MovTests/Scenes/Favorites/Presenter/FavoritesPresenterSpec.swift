@@ -58,13 +58,23 @@ class FavoritesPresenterSpec: QuickSpec {
                     }
                 }
                 
-                context("and present error") {
+                context("and present fetch error") {
                     beforeEach {
-                        presenter.presentError()
+                        presenter.presentFetchError()
                     }
                     
-                    it("should display error") {
-                        expect(viewOutput.didCall(method: .displayError)).to(beTrue())
+                    it("should display getch error") {
+                        expect(viewOutput.didCall(method: .displayFetchError)).to(beTrue())
+                    }
+                }
+                
+                context("and present favoritesError") {
+                    beforeEach {
+                        presenter.presentFavoritesError()
+                    }
+                    
+                    it("should display favorites error") {
+                        expect(viewOutput.didCall(method: .displayFavoritesError)).to(beTrue())
                     }
                 }
             }

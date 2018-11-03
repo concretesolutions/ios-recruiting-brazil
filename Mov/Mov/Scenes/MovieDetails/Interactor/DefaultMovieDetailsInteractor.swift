@@ -31,7 +31,9 @@ extension DefaultMovieDetailsInteractor: MovieDetaisInteractor {
     func getDetails(of movie: Movie) {
         do {
             self.favorites = try self.persistence.fetchFavorites()
-        } catch {/*present db error*/}
+        } catch {
+            self.presenter.presentFavoritesError()
+        }
         
         self.presenter.presentDetails(of: movieDetailsUnit(from: movie))
     }
@@ -40,6 +42,8 @@ extension DefaultMovieDetailsInteractor: MovieDetaisInteractor {
         do {
             try self.persistence.toggleFavorite(movie: movie)
             self.getDetails(of: movie)
-        } catch {/*present db error*/}
+        } catch {
+            presenter.presentFavoritesError()
+        }
     }
 }

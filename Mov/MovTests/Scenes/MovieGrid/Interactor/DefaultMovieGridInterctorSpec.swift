@@ -138,6 +138,32 @@ class DefaultMovieGridInteractorSpec: QuickSpec {
                         }
                     }
                 }
+                
+                context("and succeed to toggle favorite") {
+                    let validIndex = 0
+                    beforeEach {
+                        interactor.fetchMovieList(page: 1)
+                        persistence.raiseOnToggle = false
+                        interactor.toggleFavoriteMovie(at: validIndex)
+                    }
+                    
+                    it("should present movies") {
+                        expect(presenter.didCall(method: .presentMovies)).to(beTrue())
+                    }
+                }
+                
+                context("and fail to toggle favorite") {
+                    let validIndex = 0
+                    beforeEach {
+                        interactor.fetchMovieList(page: 1)
+                        persistence.raiseOnToggle = true
+                        interactor.toggleFavoriteMovie(at: validIndex)
+                    }
+                    
+                    it("should present movies") {
+                        expect(presenter.didCall(method: .presentFavoritesError)).to(beTrue())
+                    }
+                }
             }
         }
     }

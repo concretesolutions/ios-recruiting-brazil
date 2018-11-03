@@ -13,5 +13,7 @@ protocol FavoritesPresenter {
     
     func presentNoResultsFound(for request: String)
     
-    func presentError()
+    func presentFetchError()
+    
+    func presentFavoritesError()
 }

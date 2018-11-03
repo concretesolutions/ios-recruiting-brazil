@@ -6,4 +6,16 @@
 //  Copyright © 2018 Miguel Nery. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+
+struct UICommon {
+    private init() {}
+    
+    static var favoritesErrorAlert: UIAlertController {
+        let alert = UIAlertController(title: "Erro", message: "A memória de Favoritos falhou. Nos perdoe.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Fechar", style: .default, handler: nil))
+        
+        return alert
+    }
+}

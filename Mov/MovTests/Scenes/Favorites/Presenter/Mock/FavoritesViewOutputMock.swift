@@ -27,8 +27,12 @@ class FavoritesViewOutputMock: FavoritesViewOutput {
         self.receivedRequest = request
     }
     
-    func displayError() {
-        self.calls.insert(.displayError)
+    func displayFetchError() {
+        self.calls.insert(.displayFetchError)
+    }
+    
+    func displayFavoritesError() {
+        self.calls.insert(.displayFavoritesError)
     }
     
 }
@@ -39,7 +43,8 @@ extension FavoritesViewOutputMock: Spy {
     enum Methods {
         case displayMovies
         case displayNoResultsFound
-        case displayError
+        case displayFetchError
+        case displayFavoritesError
     }
     
 }

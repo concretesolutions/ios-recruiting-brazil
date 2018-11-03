@@ -32,8 +32,12 @@ extension DefaultFavoritesPresenter: FavoritesPresenter {
         self.viewOutput.displayNoResults(for: request)
     }
     
-    func presentError() {
-        self.viewOutput.displayError()
+    func presentFetchError() {
+        self.viewOutput.displayFetchError()
+    }
+    
+    func presentFavoritesError() {
+        self.viewOutput.displayFavoritesError()
     }
     
 }

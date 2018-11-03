@@ -35,7 +35,7 @@ extension DefaultFavoritesInteractor: FavoritesInteractor {
             self.favorites = Array(favoritesSet)
             self.presenter.present(movies: favoritesUnits(from: self.favorites))
         } catch {
-            self.presenter.presentError()
+            self.presenter.presentFetchError()
         }
     }
     
@@ -44,7 +44,9 @@ extension DefaultFavoritesInteractor: FavoritesInteractor {
             do {
                 try self.persistence.toggleFavorite(movie: favorite)
                 self.fetchFavorites()
-            } catch {/*present db error*/}
+            } catch {
+                self.presenter.presentFavoritesError()
+            }
         } else {/*do nothing*/}
     }
     

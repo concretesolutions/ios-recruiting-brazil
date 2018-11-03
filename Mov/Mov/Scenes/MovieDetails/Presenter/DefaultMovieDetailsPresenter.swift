@@ -26,4 +26,8 @@ extension DefaultMovieDetailsPresenter: MovieDetailsPresenter {
     func presentDetails(of movie: MovieDetailsUnit) {
         self.viewOutput.displayDetails(of: movieDetailsViewModel(for: movie))
     }
+    
+    func presentFavoritesError() {
+        self.viewOutput.displayFavoritesErorr()
+    }
 }

@@ -11,6 +11,6 @@ import Foundation
 protocol FavoritesViewOutput: class {
     func display(movies: [FavoritesViewModel])
     func displayNoResults(for request: String)
-    func displayError()
-    
+    func displayFetchError()
+    func displayFavoritesError()
 }

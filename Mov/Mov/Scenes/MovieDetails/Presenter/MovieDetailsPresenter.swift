@@ -10,4 +10,5 @@ import Foundation
 
 protocol MovieDetailsPresenter {
     func presentDetails(of movie: MovieDetailsUnit)
+    func presentFavoritesError()
 }

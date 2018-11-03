@@ -31,6 +31,11 @@ class MovieGridPresenterMock: MovieGridPresenter {
         self.calls.insert(.presentNoResultsFound)
         self.receivedSearchRequest = request
     }
+    
+    func presentFavoritesError() {
+        self.calls.insert(.presentFavoritesError)
+    }
+    
 }
 
 extension MovieGridPresenterMock: Spy {
@@ -40,5 +45,6 @@ extension MovieGridPresenterMock: Spy {
         case presentMovies
         case presentNetworkError
         case presentNoResultsFound
+        case presentFavoritesError
     }
 }

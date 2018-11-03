@@ -18,6 +18,10 @@ class MovieDetailsViewOutputMock: MovieDetailsViewOutput {
         self.calls.insert(.displayDetails)
         self.receivedViewModel = movie
     }
+    
+    func displayFavoritesErorr() {
+        self.calls.insert(.displayFavoritesErorr)
+    }
 }
 
 extension MovieDetailsViewOutputMock: Spy {
@@ -25,6 +29,7 @@ extension MovieDetailsViewOutputMock: Spy {
     
     enum Methods {
         case displayDetails
+        case displayFavoritesErorr
     }
     
 }

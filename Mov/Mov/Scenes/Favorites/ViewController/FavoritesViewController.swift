@@ -18,7 +18,9 @@ class FavoritesViewController: UIViewController {
         didSet {
             if let _ = self.interactor, self.viewModels.isEmpty {
                 self.fetchFavorites()
-            } else {/*do nothing*/}
+            } else {
+                self.state = .fetchError
+            }
         }
     }
     
@@ -34,6 +36,8 @@ class FavoritesViewController: UIViewController {
             case .noResults(let request):
                 self.noResultState.searchRequest = request
                 state = self.noResultState
+            case .fetchError:
+                state = self.fetchErrorState
             }
             
             self.stateMachine.enter(state: state)
@@ -46,6 +50,10 @@ class FavoritesViewController: UIViewController {
     
     lazy var noResultState: FavoritesNoResultState = {
         return FavoritesNoResultState(favoritesView: self.favoritesView)
+    }()
+    
+    lazy var fetchErrorState: FavoritesFethErrorState = {
+        return FavoritesFethErrorState(favoritesView: self.favoritesView)
     }()
     
     lazy var favoritesView: FavoritesView = {
@@ -105,8 +113,12 @@ extension FavoritesViewController: FavoritesViewOutput {
         self.state = .noResults(request)
     }
     
-    func displayError() {
-        // db error
+    func displayFetchError() {
+        self.state = .fetchError
+    }
+    
+    func displayFavoritesError() {
+        self.present(UICommon.favoritesErrorAlert, animated: true, completion: nil)
     }
 }
 
@@ -122,7 +134,7 @@ extension FavoritesViewController {
 extension FavoritesViewController {
     func fetchFavorites() {
         guard let interactor = self.interactor else {
-            self.displayError()
+            self.displayFetchError()
             return
         }
         
@@ -135,6 +147,7 @@ extension FavoritesViewController {
 extension FavoritesViewController {
     enum FavoritesState: Equatable {
         case tableView
+        case fetchError
         case noResults(String)
     }
 }

@@ -11,7 +11,7 @@ import Nimble
 
 @testable import Mov
 
-class DefaultMovieDetailsSpec: QuickSpec {
+class DefaultMovieDetailsInteractorSpec: QuickSpec {
     override func spec() {
         describe("MovieDetails interacor") {
             var interactor: DefaultMovieDetailsInteractor!
@@ -41,7 +41,7 @@ class DefaultMovieDetailsSpec: QuickSpec {
                     }
                 }
                 
-                context("and toggle favorite") {
+                context("and succeed to toggle favorite") {
                     let movie = Movie.mock(id: 0)
                     beforeEach {
                         persistence.raiseOnToggle = false
@@ -50,6 +50,18 @@ class DefaultMovieDetailsSpec: QuickSpec {
                     
                     it("present updated movie") {
                         expect(presenter.didCall(method: .presentDetails)).to(beTrue())
+                    }
+                }
+                
+                context("and fail to toggle favorite") {
+                    let movie = Movie.mock(id: 0)
+                    beforeEach {
+                        persistence.raiseOnToggle = true
+                        interactor.toggleFavorite(movie)
+                    }
+                    
+                    it("should present movies") {
+                        expect(presenter.didCall(method: .presentFavoritesError)).to(beTrue())
                     }
                 }
             }

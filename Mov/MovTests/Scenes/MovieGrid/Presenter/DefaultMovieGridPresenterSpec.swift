@@ -69,6 +69,16 @@ class DefaultMovieGridPresenterSpec: QuickSpec {
                         expect(viewOutput.receivedResultRequest).to(equal(searchRequest))
                     }
                 }
+                
+                context("and present favoritesError") {
+                    beforeEach {
+                        presenter.presentFavoritesError()
+                    }
+                    
+                    it("should display favorites error") {
+                        expect(viewOutput.didCall(method: .displayFavoritesError)).to(beTrue())
+                    }
+                }
             }
         }
     }

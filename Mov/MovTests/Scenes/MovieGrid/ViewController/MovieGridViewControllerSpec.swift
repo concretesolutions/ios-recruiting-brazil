@@ -104,7 +104,6 @@ class MovieGridViewControllerSpec: QuickSpec {
                         expect(vc.movieGridView.noResultsView.errorLabel.text).to(equal(Texts.noResults(for: searchRequest)))
                     }
                 }
-                
             }
         }
     }

@@ -87,6 +87,11 @@ final class MovieGridViewController: UIViewController {
         self.fetchMovies()
     }
     
+    override func viewDidLoad() {
+        self.displayFavoritesError()
+        
+    }
+    
     func fetchMovies() {
         guard let interactor = self.interactor else { return }
         self.movieGridView.activityIndicator.startAnimating()
@@ -111,6 +116,10 @@ extension MovieGridViewController: MovieGridViewOutput {
     
     func displayNoResults(for request: String) {
         self.state = .noResults(request)
+    }
+    
+    func displayFavoritesError() {
+        self.present(UICommon.favoritesErrorAlert, animated: true, completion: nil)
     }
 }
 

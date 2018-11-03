@@ -73,4 +73,8 @@ extension MovieDetailsViewController: MovieDetailsViewOutput {
     func displayDetails(of movie: MovieDetailsViewModel) {
         self.viewModel = movie
     }
+    
+    func displayFavoritesErorr() {
+        self.present(UICommon.favoritesErrorAlert, animated: true, completion: nil)
+    }
 }

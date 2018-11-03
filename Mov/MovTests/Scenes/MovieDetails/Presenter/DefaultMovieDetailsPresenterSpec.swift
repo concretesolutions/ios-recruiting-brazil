@@ -39,6 +39,16 @@ class DefaultMovieDetailsPresenterSpec: QuickSpec {
                         expect(viewOutput.receivedViewModel).to(equal(expectedViewModel))
                     }
                 }
+                
+                context("and present favoritesError") {
+                    beforeEach {
+                        presenter.presentFavoritesError()
+                    }
+                    
+                    it("should display favorites error") {
+                        expect(viewOutput.didCall(method: .displayFavoritesErorr)).to(beTrue())
+                    }
+                }
             }
         }
     }

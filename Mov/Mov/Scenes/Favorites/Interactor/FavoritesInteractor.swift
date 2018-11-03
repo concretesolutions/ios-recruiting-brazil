@@ -10,4 +10,5 @@ import Foundation
 
 protocol FavoritesInteractor: MovieInteractor {
     func fetchFavorites()
+    func toggleFavoriteMovie(at index: Int)
 }

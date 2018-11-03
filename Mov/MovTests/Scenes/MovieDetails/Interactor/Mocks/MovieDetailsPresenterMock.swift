@@ -10,6 +10,7 @@ import Foundation
 @testable import Mov
 
 class MovieDetailsPresenterMock: MovieDetailsPresenter {
+    
     var calls = Set<Methods>()
     
     var receivedUnit: MovieDetailsUnit!
@@ -18,6 +19,10 @@ class MovieDetailsPresenterMock: MovieDetailsPresenter {
         self.calls.insert(.presentDetails)
         self.receivedUnit = movie
     }
+    
+    func presentFavoritesError() {
+        self.calls.insert(.presentFavoritesError)
+    }
 }
 
 extension MovieDetailsPresenterMock: Spy {
@@ -25,6 +30,7 @@ extension MovieDetailsPresenterMock: Spy {
     
     enum Methods {
         case presentDetails
+        case presentFavoritesError
     }
     
 }

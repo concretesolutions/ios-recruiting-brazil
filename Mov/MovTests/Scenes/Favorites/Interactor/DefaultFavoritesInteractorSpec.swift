@@ -52,7 +52,7 @@ class DefaultFavoritesInteractorSpec: QuickSpec {
                     }
                     
                     it("should present error") {
-                        expect(presenter.didCall(method: .presentError)).to(beTrue())
+                        expect(presenter.didCall(method: .presentFetchError)).to(beTrue())
                     }
                 }
                 
@@ -120,6 +120,33 @@ class DefaultFavoritesInteractorSpec: QuickSpec {
                         }
                     }
                 }
+                
+                context("and succeed to toggle favorite") {
+                    let validIndex = 0
+                    beforeEach {
+                        interactor.fetchFavorites()
+                        persistence.raiseOnToggle = false
+                        interactor.toggleFavoriteMovie(at: validIndex)
+                    }
+                    
+                    it("should present movies") {
+                        expect(presenter.didCall(method: .presentMovies)).to(beTrue())
+                    }
+                }
+                
+                context("and fail to toggle favorite") {
+                    let validIndex = 0
+                    beforeEach {
+                        interactor.fetchFavorites()
+                        persistence.raiseOnToggle = true
+                        interactor.toggleFavoriteMovie(at: validIndex)
+                    }
+                    
+                    it("should present movies") {
+                        expect(presenter.didCall(method: .presentFavoritesError)).to(beTrue())
+                    }
+                }
+                
             }
         }
     }

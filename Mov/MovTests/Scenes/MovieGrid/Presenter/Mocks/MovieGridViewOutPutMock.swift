@@ -31,6 +31,10 @@ class MovieGridViewOutPutMock: MovieGridViewOutput {
         self.calls.insert(.displayNoResults)
         self.receivedResultRequest = request
     }
+    
+    func displayFavoritesError() {
+        self.calls.insert(.displayFavoritesError)
+    }
 }
 
 extension MovieGridViewOutPutMock: Spy {
@@ -40,5 +44,6 @@ extension MovieGridViewOutPutMock: Spy {
         case displayMovies
         case displayNetworkError
         case displayNoResults
+        case displayFavoritesError
     }
 }

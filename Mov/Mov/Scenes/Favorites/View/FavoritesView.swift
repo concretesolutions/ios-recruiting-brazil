@@ -36,6 +36,10 @@ public class FavoritesView: UIView {
         return ErrorView(errorImage: Images.noResults, labelText: Texts.noResults(for: "x"))
     }()
     
+    lazy var fetchErrorView: ErrorView = {
+        return ErrorView(errorImage: Images.error, labelText: Texts.movieGridError)
+    }()
+    
     // Initialization
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,6 +58,7 @@ extension FavoritesView: ViewCode {
         self.addSubview(self.searchBar)
         self.addSubview(self.tableView)
         self.addSubview(self.noResultsView)
+        self.addSubview(self.fetchErrorView)
     }
     
     public func addConstraints() {
@@ -72,6 +77,13 @@ extension FavoritesView: ViewCode {
         }
         
         self.noResultsView.snp.makeConstraints { make in
+            make.top.equalTo(self.searchBar.snp_bottomMargin)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+        
+        self.fetchErrorView.snp.makeConstraints { make in
             make.top.equalTo(self.searchBar.snp_bottomMargin)
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()

@@ -35,4 +35,9 @@ extension DefaultMovieGridPresenter: MovieGridPresenter {
     func presentNoResultsFound(for request: String) {
         self.viewOutput.displayNoResults(for: request)
     }
+    
+    func presentFavoritesError() {
+        self.viewOutput.displayFavoritesError()
+    }
+    
 }

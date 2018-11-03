@@ -28,8 +28,12 @@ class FavoritesPresenterMock: FavoritesPresenter {
         self.receivedSearchRequest = request
     }
     
-    func presentError() {
-        self.calls.insert(.presentError)
+    func presentFetchError() {
+        self.calls.insert(.presentFetchError)
+    }
+    
+    func presentFavoritesError() {
+        self.calls.insert(.presentFavoritesError)
     }
 }
 
@@ -39,6 +43,7 @@ extension FavoritesPresenterMock: Spy {
     enum Methods {
         case presentMovies
         case presentNoResultsFound
-        case presentError
+        case presentFetchError
+        case presentFavoritesError
     }
 }
