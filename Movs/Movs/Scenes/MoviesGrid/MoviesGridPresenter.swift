@@ -21,9 +21,10 @@ final class MoviesGridPresenter: MVPBasePresenter {
     
     private let operation = FetchMoviesOperation()
     
-    private(set) var isSearching:Bool = false
-    
     private var movies:[Movie] = []
+    private var filteredMovies:[Movie] = []
+    
+    private(set) var isSearching:Bool = false
     
     var view:MoviesGridPresenterView? {
         return self.baseView as? MoviesGridPresenterView
@@ -71,7 +72,11 @@ final class MoviesGridPresenter: MVPBasePresenter {
 extension MoviesGridPresenter: MoviesGridViewPresenter {
     
     func didSelectItem(at row: Int) {
-        self.coordinator?.data = self.movies[row]
+        if self.isSearching {
+            self.coordinator?.data = self.filteredMovies[row]
+        } else {
+            self.coordinator?.data = self.movies[row]
+        }
         self.coordinator?.next()
     }
     
@@ -101,9 +106,9 @@ extension MoviesGridPresenter: MoviesGridViewPresenter {
             return
         }
         
-        let filteredMovies = self.getFilteredMovies(searchText: text)
+        self.filteredMovies = self.getFilteredMovies(searchText: text)
         
-        self.view?.present(searchResults: filteredMovies)
+        self.view?.present(searchResults: self.filteredMovies)
         
         if filteredMovies.isEmpty {
             self.view?.presentEmptySearch()

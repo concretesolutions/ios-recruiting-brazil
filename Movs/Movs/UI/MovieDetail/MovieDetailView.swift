@@ -20,7 +20,6 @@ final class MovieDetailView: UIView {
     private var tableView:UITableView! {
         didSet {
             self.tableView.allowsSelection = false
-            self.tableView.isScrollEnabled = false
             self.tableView.dataSource = self.tableViewDataSource
             self.addSubview(self.tableView)
         }
@@ -28,19 +27,25 @@ final class MovieDetailView: UIView {
     
     weak var delegate:MovieDetailViewDelegate?
     
-    let movieModel: Model
-    
-    init(data:Model) {
-        self.movieModel = data
-        super.init(frame: .zero)
+    var movieDetail: MovieDetail! {
+        didSet {
+            self.presentMovieDetail()
+        }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        self.movieModel = aDecoder.decodeObject(forKey: "movieModel") as! Model
-        super.init(coder: aDecoder)
+    private func presentMovieDetail() {
+        var cells = [UITableViewCell]()
+        cells.append(self.createHeaderCell(text: self.movieDetail.title,
+                                           buttoSelected: self.movieDetail.isFavorite))
+        cells.append(self.createLabelCell(with: self.movieDetail.releaseYear))
+        cells.append(self.createLabelCell(with: self.movieDetail.genreNames))
+        cells.append(self.createLabelCell(with: self.movieDetail.overview, multipleLines: true))
+        
+        self.tableViewDataSource.items = cells
+        self.tableView.reloadData()
     }
     
-    private func createHeaderCell(with image:UIImage, text:String, buttoSelected:Bool) -> UITableViewCell {
+    private func createHeaderCell(text:String, buttoSelected:Bool) -> UITableViewCell {
         
         // setup
         let imageView = UIImageView(image: nil)
@@ -48,8 +53,17 @@ final class MovieDetailView: UIView {
         let button = FavoriteButton()
         let cell = UITableViewCell()
         
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
+        if let img = Assets.getImage(from: self.movieDetail.w185PosterPath) {
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = img
+        }
+        
+//        DispatchQueue.global(qos: .userInitiated).async {
+//
+//            DispatchQueue.main.async {
+//
+//            }
+//        }
         
         label.text = text
         
@@ -93,32 +107,12 @@ final class MovieDetailView: UIView {
         }
         return cell
     }
-    
-    struct Model {
-        let movieImage:UIImage
-        let movieTitle:String
-        let movieYear:String
-        let movieGenre:String
-        let movieDescription:String
-        var isFavorite:Bool
-    }
 }
 
 extension MovieDetailView: ViewCode {
     
     func design() {
         self.backgroundColor = Colors.white.color
-        // cells
-        var cells = [UITableViewCell]()
-        cells.append(self.createHeaderCell(with: self.movieModel.movieImage,
-                                           text: self.movieModel.movieTitle,
-                                           buttoSelected: self.movieModel.isFavorite))
-        cells.append(self.createLabelCell(with: self.movieModel.movieYear))
-        cells.append(self.createLabelCell(with: self.movieModel.movieGenre))
-        cells.append(self.createLabelCell(with: self.movieModel.movieDescription, multipleLines: true))
-        
-        self.tableViewDataSource.items = cells
-        
         self.tableView = UITableView()
     }
     

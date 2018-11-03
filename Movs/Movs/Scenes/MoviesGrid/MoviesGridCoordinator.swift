@@ -20,7 +20,9 @@ final class MoviesGridCoordinator: Coordinator {
     }
     
     func next() {
-        guard let movie = self.data as? Movie else { return }
         let coordinator = MovieDetailCoordinator()
+        coordinator.data = self.data
+        coordinator.onCoordinatorStarted = self.onCoordinatorStarted
+        coordinator.start()
     }
 }

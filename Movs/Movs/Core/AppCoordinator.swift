@@ -15,6 +15,8 @@ final class AppCoordinator: Coordinator {
     var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
+    var childs:[Coordinator] = []
+    
     func start() {
         
         let moviesCoordinator = MoviesGridCoordinator()
@@ -22,18 +24,22 @@ final class AppCoordinator: Coordinator {
         moviesCoordinator.onCoordinatorStarted = { [unowned self] vc in
             self.tabBarController
                 .moviesNavigationController
-                .pushViewController(vc, animated: false)
+                .pushViewController(vc, animated: true)
         }
         moviesCoordinator.start()
+        
+        self.childs.append(moviesCoordinator)
         
         let favoritesCoordinator = FavoriteMoviesCoordinator()
         
         favoritesCoordinator.onCoordinatorStarted = { [unowned self] vc in
             self.tabBarController
                 .favoritesNavigationController
-                .pushViewController(vc, animated: false)
+                .pushViewController(vc, animated: true)
         }
         favoritesCoordinator.start()
+        
+        self.childs.append(favoritesCoordinator)
         
         self.onCoordinatorStarted?(self.tabBarController)
     }

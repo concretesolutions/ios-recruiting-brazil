@@ -13,10 +13,10 @@ protocol MovieDetailViewPresenter: PresenterProtocol {
 
 final class MovieDetailViewController: MVPBaseViewController {
     
-    private var movieDetail:MovieDetailView! {
+    private var movieDetailView:MovieDetailView! {
         didSet {
-            self.movieDetail.setupView()
-            self.view = self.movieDetail
+            self.movieDetailView.setupView()
+            self.view = self.movieDetailView
         }
     }
     
@@ -34,6 +34,10 @@ extension MovieDetailViewController: MovieDetailPresenterView {
     
     func setupOnce() {
         self.title = "Movie"
-        //TODO: create movie detail view
+        self.movieDetailView = MovieDetailView()
+    }
+    
+    func present(movieDetail: MovieDetail) {
+        self.movieDetailView.movieDetail = movieDetail
     }
 }
