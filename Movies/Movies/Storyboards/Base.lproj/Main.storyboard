@@ -338,15 +338,10 @@
                             <outlet property="delegate" destination="DJm-7O-WOg" id="phg-xO-PuD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Favorites" id="RJu-O8-iOc">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="3DN-ap-zDo">
-                            <connections>
-                                <segue destination="obM-bo-gyI" kind="show" id="FMZ-6m-cda"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Favorites" id="RJu-O8-iOc"/>
                     <connections>
                         <segue destination="oAw-hW-vx8" kind="show" identifier="favoriteToDetailViewSegue" id="Qpa-St-RJi"/>
+                        <segue destination="obM-bo-gyI" kind="show" identifier="toFilterSegue" id="d1J-Ra-VtG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Thv-vw-OhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -32,20 +32,71 @@ class FilterTableViewController: UITableViewController {
     case none
   }
   
-  var years = ["None", "Action", "Fantasy", "Drama", "Action", "Fantasy"]
+  var years = ["None"]
   
-  var genres = ["None", "a", "b", "c", "a", "b", "c"]
+  var genres: [Genre?] = [nil]
+  var genresIds: [Int] = []
   
   var currentFilterSelect: FilterSelected = .none
+  var filterDelegate: FilterTableViewControllerDelegate!
+  var genreSelectedIndex: Int = 0
+  var yearSelectedIndex: Int = 0
+  var selectedYear: Int?
+  var selectedGenre: Genre?
+  
+  public func getGenres() {
+    NetworkClient.shared.getGenres { (result) in
+      switch result {
+      case .success(let fetchedGenres):
+        var newGenres: [Genre] = []
+        self.genresIds.forEach({ (identificator) in
+          fetchedGenres.forEach({ (fetchedGenre) in
+            if fetchedGenre.identificator == identificator {
+              newGenres.append(fetchedGenre)
+            }
+          })
+        })
+        
+        self.genres.append(contentsOf: newGenres.sorted { $0.name < $1.name })
+      case .failure:
+        print("Error")
+      }
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    selectedYearLabel.text = ""
-    selectedGenreLabel.text = ""
+    
+    getGenres()
+    
+    if let genre = selectedGenre {
+      for (index, aGenre) in genres.enumerated() where aGenre?.name == genre.name {
+          genreSelectedIndex = index
+      }
+      selectedGenreLabel.text =  genre.name
+    } else {
+      selectedGenreLabel.text = ""
+    }
+    
+    if let year = selectedYear {
+      for (index, anYear) in years.enumerated() where year == Int(anYear) {
+        yearSelectedIndex = index
+      }
+      
+      selectedYearLabel.text = "\(year)"
+    } else {
+      selectedYearLabel.text = ""
+    }
     
     tableView.tableFooterView = UIView()
-    
+    print(genresIds)
     setupPickerView()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    hidePickeView()
+    
+    filterDelegate.didChangeFilterValues(Int(years[yearSelectedIndex]), selectedGenre: genres[genreSelectedIndex])
   }
   
   @objc func endEditing() {
@@ -59,9 +110,12 @@ class FilterTableViewController: UITableViewController {
   func setFilterValue() {
     if currentFilterSelect != .none {
       let value = pickerView.selectedRow(inComponent: 0)
+      
       if currentFilterSelect == .genre {
-        selectedGenreLabel.text = value == 0 ? "" : genres[value]
+        genreSelectedIndex = value
+        selectedGenreLabel.text = value == 0 ? "" : genres[value]!.name
       } else {
+        yearSelectedIndex = value
         selectedYearLabel.text = value == 0 ? "" : years[value]
       }
     }
@@ -69,16 +123,19 @@ class FilterTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     setFilterValue()
-    
+    let row: Int
     switch indexPath.row {
     case 0:
       currentFilterSelect = .year
+      row = yearSelectedIndex
     case 1:
       currentFilterSelect = .genre
+      row = genreSelectedIndex
     default:
       fatalError("Invalid cell")
     }
     
+    pickerView.selectRow(row, inComponent: 0, animated: false)
     pickerView.reloadAllComponents()
     showPickerView()
   }
@@ -108,7 +165,7 @@ extension FilterTableViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
     
     if currentFilterSelect == .genre {
-      label.text = genres[row]
+      label.text = row == 0 ? "None" : genres[row]!.name
     } else {
       label.text = years[row]
     }
@@ -174,4 +231,8 @@ extension FilterTableViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
   }
   
+}
+
+protocol FilterTableViewControllerDelegate: class {
+  func didChangeFilterValues(_ selectedYear: Int?, selectedGenre: Genre?)
 }
