@@ -21,6 +21,12 @@ class FilterCell: UICollectionViewCell {
     
     var delegate: FilterCellDelegate?
     
+    override func awakeFromNib() {
+        self.layer.masksToBounds = true
+        self.clipsToBounds = false
+        self.layer.applySketchShadow(color: .black, alpha: 0.6, x: 0, y: 0, blur: 6, spread: 0)
+    }
+    
     func set(text: String, year: Int?, genre: Genre?) {
         self.label.text = text
         self.year = year

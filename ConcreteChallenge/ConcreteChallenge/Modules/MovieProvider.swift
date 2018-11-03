@@ -21,7 +21,7 @@ class MovieProvider {
         self.realm = try! Realm()
     }
     
-    func fetchPopularMovies(page: Int, completion: @escaping ([MovieJSON], Int, Int) -> Void) {
+    func fetchPopularMovies(page: Int, completion: @escaping ([Movie], Int, Int) -> Void) {
         let parameters = [
             "api_key": Network.manager.apiKey,
             "page": page
@@ -38,8 +38,36 @@ class MovieProvider {
                 return
             }
             
-            completion(results, totalPages, totalResults)
+            completion((results.map{ return self.movieJsonToMovie(movieJson: $0) }), totalPages, totalResults)
         }
+    }
+    
+    private func movieJsonToMovie(movieJson: MovieJSON) -> Movie {
+        let movie = Movie()
+        
+        movie.id = movieJson.id
+        movie.imageUrl = (movieJson.backdrop_path ?? movieJson.poster_path ?? "")
+        UIImageView().sd_setImage(with: URL(string: movie.imageUrl), completed: nil)
+        movie.year = Int(String(movieJson.release_date?.prefix(4) ?? "0")) ?? 0
+        movie.title = movieJson.title ?? ""
+        movie.overview = movieJson.overview ?? ""
+        
+        self.fetchGenres { genres in
+            guard let ids = movieJson.genre_ids else {
+                return
+            }
+            
+            for id in ids {
+                if let genre = (genres.filter{ $0.id == id }).first {
+                    
+                    movie.genres.append(genre)
+                }
+            }
+        }
+        
+        movie.isSaved = self.contain(id: movie.id)
+        
+        return movie
     }
     
     func fetchGenres(_ completion: @escaping ([Genre]) -> Void = {_ in }) {
@@ -77,14 +105,10 @@ class MovieProvider {
     }
     
     func handle(movie: Movie) {
+       
         try! self.realm.write {
-            if let movie = self.realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
-                
-                self.realm.delete(movie)
-            } else {
-                
-                self.realm.add(movie)
-            }
+            movie.isSaved = !movie.isSaved
+            self.realm.add(movie, update: true)
         }
     }
     
@@ -94,18 +118,20 @@ class MovieProvider {
     }
     
     func contain(id: Int) -> Bool {
-        return self.realm.object(ofType: Movie.self, forPrimaryKey: id) != nil
+        if let movie = self.realm.object(ofType: Movie.self, forPrimaryKey: id) {
+            if movie.isSaved {
+                return true
+            }
+        }
+        
+        return false
     }
     
-    func filteredLoad(text: String = "", filter: Filter?) -> [Movie] {
+    func filteredLoad(text: String = "", filter: Filter) -> [Movie] {
         var movies = self.realm.objects(Movie.self)
         
         if !text.isEmpty {
             movies = movies.filter("title CONTAINS[c] '\(text)'")
-        }
-        
-        guard let filter = filter else {
-            return Array(movies)
         }
         
         if !filter.years.isEmpty {
@@ -113,17 +139,20 @@ class MovieProvider {
         }
         
         
-        var moviesArray = Array(movies)
         
         if !filter.genres.isEmpty {
+            var moviesArray : [Movie] = []
+            
             for genre in filter.genres {
-                moviesArray = moviesArray.filter({
-                    return $0.genre_ids.contains(genre.id)
-                })
+                moviesArray.append(contentsOf: Array(movies).filter({
+                    return $0.genres.contains(genre)
+                }))
             }
+            
+            return moviesArray
         }
         
-        return moviesArray
+        return Array(movies)
     }
     
     

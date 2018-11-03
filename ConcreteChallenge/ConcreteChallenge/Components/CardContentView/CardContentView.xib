@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardContentView" customModule="ConcreteChallenge" customModuleProvider="target">
+            <connections>
+                <outlet property="imageToBottomAnchor" destination="7K9-3T-E87" id="D8N-wg-GaE"/>
+                <outlet property="imageToLeadingAnchor" destination="583-ve-rT1" id="Lti-eU-1GY"/>
+                <outlet property="imageToTopAnchor" destination="2O3-xr-NuR" id="IRP-no-iEg"/>
+                <outlet property="imageToTrailingAnchor" destination="5yq-yn-QBj" id="8Gq-ju-b95"/>
+                <outlet property="imageView" destination="BRc-iw-hPg" id="e5A-Iz-uq9"/>
+                <outlet property="movieTitle" destination="CLs-2e-ghP" id="7x9-9w-R09"/>
+                <outlet property="saveButton" destination="bas-Jf-iax" id="bD9-f1-FnG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="dGf-o6-MmV">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BRc-iw-hPg">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLs-2e-ghP">
+                    <rect key="frame" x="20" y="235" width="102.5" height="45"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <size key="shadowOffset" width="1" height="1"/>
+                </label>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bas-Jf-iax">
+                    <rect key="frame" x="250" y="250" width="30" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Vvq-1T-Q9R"/>
+                        <constraint firstAttribute="width" constant="30" id="spB-YV-OW3"/>
+                    </constraints>
+                    <color key="tintColor" red="0.34901960780000002" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" image="notSaved">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="l5C-ah-ESh"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="BRc-iw-hPg" firstAttribute="top" secondItem="dGf-o6-MmV" secondAttribute="top" id="2O3-xr-NuR"/>
+                <constraint firstItem="BRc-iw-hPg" firstAttribute="leading" secondItem="dGf-o6-MmV" secondAttribute="leading" id="583-ve-rT1"/>
+                <constraint firstAttribute="trailing" secondItem="BRc-iw-hPg" secondAttribute="trailing" id="5yq-yn-QBj"/>
+                <constraint firstAttribute="bottom" secondItem="CLs-2e-ghP" secondAttribute="bottom" constant="20" id="7K9-3T-E87"/>
+                <constraint firstAttribute="trailing" secondItem="BRc-iw-hPg" secondAttribute="trailing" id="F5C-aZ-Ckg"/>
+                <constraint firstItem="bas-Jf-iax" firstAttribute="bottom" secondItem="CLs-2e-ghP" secondAttribute="bottom" id="GiW-c2-pr6"/>
+                <constraint firstAttribute="trailing" secondItem="bas-Jf-iax" secondAttribute="trailing" constant="20" id="J67-VW-b2e"/>
+                <constraint firstAttribute="bottom" secondItem="BRc-iw-hPg" secondAttribute="bottom" id="Meb-CP-Q1o"/>
+                <constraint firstItem="bas-Jf-iax" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CLs-2e-ghP" secondAttribute="trailing" constant="20" id="U3f-U7-AcC"/>
+                <constraint firstItem="CLs-2e-ghP" firstAttribute="height" secondItem="dGf-o6-MmV" secondAttribute="height" multiplier="0.15" id="Xgw-o0-ZAm"/>
+                <constraint firstItem="CLs-2e-ghP" firstAttribute="leading" secondItem="dGf-o6-MmV" secondAttribute="leading" constant="20" id="mCN-WM-iA2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Mi9-x6-a62"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-237.59999999999999" y="72.413793103448285"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="notSaved" width="513" height="513"/>
+    </resources>
+</document>

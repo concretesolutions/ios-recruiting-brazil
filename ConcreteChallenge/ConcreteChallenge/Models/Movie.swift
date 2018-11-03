@@ -19,14 +19,15 @@ struct MovieJSON: Decodable {
     var genre_ids: [Int]?
 }
 
-class Movie: Object{
+class Movie: Object {
     @objc dynamic var id = 0
-    @objc dynamic var title: String? = ""
+    @objc dynamic var title: String = ""
     @objc dynamic var imageUrl: String = ""
     @objc dynamic var overview: String = ""
     @objc dynamic var year = 0
+    @objc dynamic var isSaved: Bool = false
     
-    let genre_ids: List = List<Int>()
+    let genres = List<Genre>()
     
     override class func primaryKey() -> String? {
         return "id"

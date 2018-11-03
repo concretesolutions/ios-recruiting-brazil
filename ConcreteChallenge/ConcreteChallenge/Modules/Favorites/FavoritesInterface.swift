@@ -19,8 +19,6 @@ class FavoritesInterface: UIViewController {
     
     @IBOutlet weak var listCollectionView: UICollectionView!
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +34,14 @@ class FavoritesInterface: UIViewController {
     }
     
     func setup() {
-        self.searchBar.delegate = self
+        
+        self.navigationController?.title = "Favorites"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        
+        self.navigationItem.searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController?.searchBar.delegate = self
+        
         self.enableDismissKeyboard()
     }
     
@@ -46,10 +51,22 @@ class FavoritesInterface: UIViewController {
     
         self.listCollectionView.register(UINib(nibName: FavoritedMovieCell.identifier, bundle: nil), forCellWithReuseIdentifier: FavoritedMovieCell.identifier)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieDescriptionSegue" {
+            if let movieDescriptionInterface = segue.destination as? MovieDescriptionInterface {
+                if let index = sender as? Int {
+                    movieDescriptionInterface.set(movie: self.manager.movieIn(index: index))
+                }
+            }
+        }
+    }
 }
 
 extension FavoritesInterface: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "movieDescriptionSegue", sender: indexPath.row)
+    }
 }
 
 extension FavoritesInterface: UICollectionViewDataSource {
@@ -80,6 +97,7 @@ extension FavoritesInterface: UICollectionViewDelegateFlowLayout {
     }
     
     
+   
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let width = collectionView.frame.width
@@ -107,5 +125,13 @@ extension FavoritesInterface: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.manager.filter(text: searchText)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.navigationItem.searchController?.searchBar.text = searchBar.text
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.navigationItem.searchController?.searchBar.text = searchBar.text
     }
 }

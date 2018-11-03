@@ -22,19 +22,83 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <view key="backgroundView" contentMode="scaleToFill" misplaced="YES" id="C16-hi-hGn">
+                            <rect key="frame" x="0.0" y="-116" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peW-nf-mcH">
+                                    <rect key="frame" x="67" y="216" width="240" height="232"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning-sign" translatesAutoresizingMaskIntoConstraints="NO" id="1T8-Dv-hQg">
+                                            <rect key="frame" x="81" y="23" width="78" height="80"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="78" id="4J0-Ce-4ux"/>
+                                                <constraint firstAttribute="height" constant="80" id="hSo-5H-mpu"/>
+                                            </constraints>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02S-Xz-Y6l">
+                                            <rect key="frame" x="71" y="164" width="99" height="37"/>
+                                            <color key="backgroundColor" red="0.052544819213502493" green="0.066180613071987138" blue="0.11084631962864722" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="99" id="fIq-DJ-Clv"/>
+                                                <constraint firstAttribute="height" constant="37" id="meC-hH-daC"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" title="TRY AGAIN">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="reloadAction:" destination="xfM-VG-dIF" eventType="touchUpInside" id="vk9-gA-eYX"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Could not load movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXN-Ej-58a">
+                                            <rect key="frame" x="35" y="121" width="170" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="170" id="4im-R5-geG"/>
+                                                <constraint firstAttribute="height" constant="21" id="QCv-hr-C8v"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="02S-Xz-Y6l" firstAttribute="top" secondItem="FXN-Ej-58a" secondAttribute="bottom" constant="20" id="6nZ-NB-gNy"/>
+                                        <constraint firstItem="02S-Xz-Y6l" firstAttribute="centerX" secondItem="peW-nf-mcH" secondAttribute="centerX" id="8fM-WA-ChC"/>
+                                        <constraint firstItem="1T8-Dv-hQg" firstAttribute="top" secondItem="peW-nf-mcH" secondAttribute="top" constant="20" id="NBB-4R-Wa0"/>
+                                        <constraint firstItem="FXN-Ej-58a" firstAttribute="top" secondItem="1T8-Dv-hQg" secondAttribute="bottom" constant="20" id="oUJ-Mx-JLT"/>
+                                        <constraint firstItem="1T8-Dv-hQg" firstAttribute="centerX" secondItem="peW-nf-mcH" secondAttribute="centerX" id="vAa-Bu-Jpn"/>
+                                        <constraint firstItem="FXN-Ej-58a" firstAttribute="centerX" secondItem="peW-nf-mcH" secondAttribute="centerX" id="zzs-oO-Ryw"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="peW-nf-mcH" firstAttribute="height" secondItem="C16-hi-hGn" secondAttribute="height" multiplier="0.5" id="BX1-Lr-8dW"/>
+                                <constraint firstItem="peW-nf-mcH" firstAttribute="centerX" secondItem="C16-hi-hGn" secondAttribute="centerX" id="LlM-qN-4u2"/>
+                                <constraint firstItem="peW-nf-mcH" firstAttribute="centerY" secondItem="C16-hi-hGn" secondAttribute="centerY" id="irR-Jg-xxY"/>
+                                <constraint firstItem="peW-nf-mcH" firstAttribute="width" secondItem="C16-hi-hGn" secondAttribute="width" multiplier="0.8" id="s3j-nw-9zo"/>
+                            </constraints>
+                        </view>
                         <cells/>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Movies" id="29Y-8a-pUh"/>
-                    <navigationItem key="navigationItem" title="Movies" id="ek7-0Q-baK"/>
+                    <navigationItem key="navigationItem" title="Movies" largeTitleDisplayMode="always" id="ek7-0Q-baK"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="errorView" destination="peW-nf-mcH" id="kBe-Yt-P0E"/>
                         <outlet property="gridCollectionView" destination="VZK-0n-R8u" id="igF-sV-r0h"/>
                         <segue destination="vrO-Ch-bPB" kind="show" identifier="movieDescriptionSegue" id="OZU-1m-Yrb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5K-VS-lu7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1538" y="45"/>
+            <point key="canvasLocation" x="2701.5999999999999" y="44.527736131934034"/>
         </scene>
         <!--MovieDescription-->
         <scene sceneID="ziF-WX-UIU">
@@ -42,7 +106,7 @@
                 <viewControllerPlaceholder storyboardName="MovieDescription" id="vrO-Ch-bPB" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMI-U3-8HO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2310" y="86"/>
+            <point key="canvasLocation" x="3379" y="44"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="dH5-KP-COr">
@@ -61,17 +125,44 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Hr0-Sd-fr3"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="en2-ly-3D7">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.014942515983548258" green="0.015505060899173454" blue="0.029074104774535758" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="xfM-VG-dIF" kind="relationship" relationship="viewControllers" id="5Bx-k8-oNZ"/>
-                        <segue destination="SWe-n8-RFt" kind="relationship" relationship="viewControllers" id="ceB-fC-tT8"/>
+                        <segue destination="Vot-FK-4F8" kind="relationship" relationship="viewControllers" id="dvF-nZ-n37"/>
+                        <segue destination="SWe-n8-RFt" kind="relationship" relationship="viewControllers" id="LYW-cf-797"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KK8-XH-e7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="655" y="45"/>
+            <point key="canvasLocation" x="1023" y="45"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="J6p-cQ-qYz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vot-FK-4F8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" image="movies" id="GlU-8d-e4k"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="mwH-qG-V4j">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xfM-VG-dIF" kind="relationship" relationship="rootViewController" id="Jx9-zN-qFx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Zi-gI-pni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1882" y="45"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="movies" width="31" height="28"/>
+        <image name="warning-sign" width="512" height="448"/>
+    </resources>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

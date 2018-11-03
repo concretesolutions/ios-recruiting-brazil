@@ -17,26 +17,33 @@ enum HomeInterfaceState {
 class HomeInterface: UIViewController {
     
     lazy var manager = HomeManager(self)
-    
-    //MARK: - Status Bar Config
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
-    var isStatusBarHidden: Bool = false
-    override var prefersStatusBarHidden: Bool {
-        return self.isStatusBarHidden
+
+    var isLoadingCellCount = 0
+    var canApplyFilter = true {
+        didSet {
+            if self.canApplyFilter == false {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.canApplyFilter = true
+                }
+            }
+        }
     }
     
     //MARK: - Outlets
     @IBOutlet var gridCollectionView: UICollectionView!
+    @IBOutlet weak var errorView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.gridCollectionViewSetup()
         
-        self.manager.fetchMovies()
+//        self.manager.fetchMovies()
+        
+        self.navigationItem.searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController?.searchBar.delegate = self
+        
+        self.enableDismissKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,10 +60,25 @@ class HomeInterface: UIViewController {
         self.gridCollectionView.register(UINib(nibName: MovieCell.identifier, bundle: nil), forCellWithReuseIdentifier: MovieCell.identifier)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieDescriptionSegue" {
+            if let movieDescriptionInterface = segue.destination as? MovieDescriptionInterface {
+                if let index = sender as? Int {
+                    movieDescriptionInterface.set(movie: self.manager.movieFor(index: index))
+                }
+            }
+        }
+    }
+    @IBAction func reloadAction(_ sender: Any) {
+        self.manager.fetchMovies()
+    }
 }
 
 extension HomeInterface: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.navigationItem.searchController?.isActive = false
+        self.performSegue(withIdentifier: "movieDescriptionSegue", sender: indexPath.row)
+    }
 }
 
 extension HomeInterface: UICollectionViewDataSource {
@@ -67,14 +89,17 @@ extension HomeInterface: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
         
-        if !isLoadingCell(for: indexPath) {
-            if let model = self.manager.movieModelIn(index: indexPath.row) {
-                cell?.set(model: model)
-                cell?.indexPath = indexPath
-                cell?.delegate = self
-            }
-        }
+        let movie = self.manager.movieFor(index: indexPath.row)
         
+        cell?.cardContentView.set(movie: movie)
+        cell?.indexPath = indexPath
+        cell?.delegate = self
+        
+        cell?.layer.cornerRadius = 15
+        cell?.layer.masksToBounds = true
+        cell?.clipsToBounds = false
+        
+        cell?.layer.applySketchShadow(color: .black, alpha: 0.6, x: 0, y: 0, blur: 6, spread: 0)
         
         return cell ?? UICollectionViewCell()
     }
@@ -101,15 +126,20 @@ extension HomeInterface: UICollectionViewDelegateFlowLayout {
 
 extension HomeInterface: HomeInterfaceProtocol {
     func set(state: HomeInterfaceState) {
-        
+        switch state {
+        case .error:
+            self.errorView.isHidden = false
+        case .normal, .loading:
+            self.errorView.isHidden = true
+        }
     }
     
     func reload(_ indexPath: [IndexPath]) {
-        if indexPath.count > 0 {
-            self.gridCollectionView.reloadItems(at: visibleIndexPathsToReload(interesecting: indexPath))
-        } else {
-           self.gridCollectionView.reloadData()
-        }
+        self.gridCollectionView.reloadItems(at: visibleIndexPathsToReload(interesecting: indexPath))
+    }
+    
+    func reload() {
+        self.gridCollectionView.reloadData()
     }
 }
 
@@ -124,6 +154,7 @@ extension HomeInterface: MovieCellDelegate {
 extension HomeInterface: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingCell) {
+            self.manager.isFetchInProgress = false
             self.manager.fetchMovies()
         }
     }
@@ -136,5 +167,22 @@ extension HomeInterface: UICollectionViewDataSourcePrefetching {
         let indexPathsForVisibleItems = self.gridCollectionView.indexPathsForVisibleItems
         let indexPathsIntersection = Set(indexPathsForVisibleItems).intersection(indexPaths)
         return Array(indexPathsIntersection)
+    }
+}
+
+extension HomeInterface: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if self.canApplyFilter {
+            self.canApplyFilter = false
+            self.manager.applyFilter(text: searchText)
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.navigationItem.searchController?.searchBar.text = self.manager.filterText
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.navigationItem.searchController?.searchBar.text = self.manager.filterText
     }
 }
