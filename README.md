@@ -39,20 +39,20 @@ Para posições mais Seniors, porém, damos muito importância para a qualidade 
 
 # Features ..
 
-[X] Tela de Splash;
-[X] Layout em abas, contendo na primeira aba a tela de grid de filmes e na segunda aba a tela de lista de filmes favoritados no app;
-[X] Tela de grid de filmes trazendo a lista de filmes populares da [API](https://developers.themoviedb.org/3/movies/get-popular-movies).
-[X] Tratamento de erros e apresentação dos fluxos de exceção: Busca vazia, Error generico, loading;
-[X] Ao clicar em um filme do grid deve navegar para a tela de detalhe do filme;
-[X] Tela de Detalhe do filme deve conter ação para favoritar o filme;
-[X] Tela de Detalhe do filme deve conter gênero do filme por extenso (ex: Action, Horror, etc); Use esse [request](https://developers.themoviedb.org/3/genres/get-movie-list) da API para trazer a lista.
-[X] Tela de lista de favoritos persistido no app entre sessões;
-[X] Tela de favoritos deve permitir desfavoritar um filme.
-[X] Tela de grid com busca local;
-[X] Scroll Infinito para fazer paginação da API de filmes populares;
-[X] Célula do Grid de filmes com informação se o filme foi favoritado no app ou não;
-[X] Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
-[X] Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
+[x] Tela de Splash;
+[x] Layout em abas, contendo na primeira aba a tela de grid de filmes e na segunda aba a tela de lista de filmes favoritados no app;
+[x] Tela de grid de filmes trazendo a lista de filmes populares da [API](https://developers.themoviedb.org/3/movies/get-popular-movies).
+[x] Tratamento de erros e apresentação dos fluxos de exceção: Busca vazia, Error generico, loading;
+[x] Ao clicar em um filme do grid deve navegar para a tela de detalhe do filme;
+[x] Tela de Detalhe do filme deve conter ação para favoritar o filme;
+[x] Tela de Detalhe do filme deve conter gênero do filme por extenso (ex: Action, Horror, etc); Use esse [request](https://developers.themoviedb.org/3/genres/get-movie-list) da API para trazer a lista.
+[x] Tela de lista de favoritos persistido no app entre sessões;
+[x] Tela de favoritos deve permitir desfavoritar um filme.
+[x] Tela de grid com busca local;
+[x] Scroll Infinito para fazer paginação da API de filmes populares;
+[x] Célula do Grid de filmes com informação se o filme foi favoritado no app ou não;
+[x] Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
+[x] Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
 [ ] Testes unitários no projeto;
 [ ] Testes funcionais.
 [ ] Pipeline Automatizado
