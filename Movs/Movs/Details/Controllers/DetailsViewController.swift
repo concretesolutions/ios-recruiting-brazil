@@ -82,7 +82,6 @@ class DetailsViewController: UIViewController {
     likeButton.topAnchor.constraint(equalTo: cell.topAnchor, constant: 15).isActive = true
     likeButton.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -15).isActive = true
     likeButton.bottomAnchor.constraint(lessThanOrEqualTo: cell.bottomAnchor).isActive = true
-    likeButton.widthAnchor.constraint(equalToConstant: (likeButton.image(for: .normal)?.size.height)!).isActive = true
     likeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     likeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     return cell

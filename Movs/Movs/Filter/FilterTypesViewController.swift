@@ -13,14 +13,25 @@ class FilterTypesViewController: UIViewController {
     let table = UITableView()
     table.register(FilterTypeCell.self, forCellReuseIdentifier: "filterTypeCell")
     table.dataSource = self
+    table.delegate = self
     table.tableFooterView = UIView(frame: .zero)
     table.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
     table.translatesAutoresizingMaskIntoConstraints = false
     return table
   }()
+  
+  var applyFilterButton: UIButton = {
+    let button = UIButton()
+    button.layer.cornerRadius = 6
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.backgroundColor = UIColor.orange
+    button.setTitle("Aplicar Filtro", for: .normal)
+    return button
+  }()
 
   override func loadView() {
     view = ContainerView(frame: UIScreen.main.bounds)
+    view.updateConstraints()
     view.backgroundColor = .white
     setupView()
   }
@@ -32,6 +43,7 @@ class FilterTypesViewController: UIViewController {
   
   func addViews() {
     view.addSubview(tableview)
+    view.addSubview(applyFilterButton)
     addConstraints()
   }
   
@@ -40,6 +52,10 @@ class FilterTypesViewController: UIViewController {
     tableview.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     tableview.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    applyFilterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    applyFilterButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
+    applyFilterButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
+    applyFilterButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15 - (tabBarController?.tabBar.frame.size.height)!).isActive = true
   }
     
 
@@ -55,7 +71,7 @@ class FilterTypesViewController: UIViewController {
 
 }
 
-extension FilterTypesViewController: UITableViewDataSource {
+extension FilterTypesViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 2
   }
@@ -65,7 +81,7 @@ extension FilterTypesViewController: UITableViewDataSource {
     
     switch indexPath.row {
     case 0:
-      cell.configure(name: "Data", sample:
+      cell.configure(name: "Data de lançamento", sample:
       "\(Calendar.current.dateComponents([.year], from: Date()).year!)")
     case 1:
       cell.configure(name: "Gênero", sample: "")
@@ -75,5 +91,9 @@ extension FilterTypesViewController: UITableViewDataSource {
     return cell
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    var controller = FilterTableViewController()
+//    navigationController?.pushViewController(controller, animated: true)
+  }
   
 }

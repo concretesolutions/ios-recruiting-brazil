@@ -301,11 +301,3 @@ extension MovieViewController {
     getMovies()
   }
 }
-
-
-enum TypeError {
-  case empty
-  case unexpected
-  case noError
-  case noData
-}

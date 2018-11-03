@@ -12,3 +12,15 @@ enum Result<Value> {
   case success(Value)
   case failure(Error)
 }
+
+enum FilterType {
+  case genre
+  case date
+}
+
+enum TypeError {
+  case empty
+  case unexpected
+  case noError
+  case noData
+}
