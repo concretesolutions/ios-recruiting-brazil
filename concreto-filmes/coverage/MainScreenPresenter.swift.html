@@ -130,62 +130,62 @@
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">    func present(movies: [Movie]?) {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
 <td class="src"><pre><code class="objc">        DispatchQueue.main.async {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="covered">
 <td class="num">26</td>
 <td class="src"><pre><code class="objc">            var viewModelItems: [MainScreen.ViewModel.MovieViewModel] = []</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">            if let movies = movies {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">                for movie in movies {</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">131x</td>
 </tr>
 <tr class="covered">
 <td class="num">29</td>
 <td class="src"><pre><code class="objc">                    let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">131x</td>
 </tr>
 <tr class="covered">
 <td class="num">30</td>
 <td class="src"><pre><code class="objc">                    viewModelItems.append(MainScreen.ViewModel.MovieViewModel(posterUrl: movie.posterPath, title: movie.title, isFavorite: isFavorite))</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">131x</td>
 </tr>
 <tr class="covered">
 <td class="num">31</td>
 <td class="src"><pre><code class="objc">                }</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">131x</td>
 </tr>
 <tr class="covered">
 <td class="num">32</td>
 <td class="src"><pre><code class="objc">                self.viewController?.display(movies: viewModelItems)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="covered">
 <td class="num">33</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="covered">
 <td class="num">34</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="covered">
 <td class="num">35</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">11x</td>
 </tr>
 <tr class="never">
 <td class="num">36</td>

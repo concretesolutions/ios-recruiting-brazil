@@ -22,6 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func resetStateIfUITesting() {
         if ProcessInfo.processInfo.arguments.contains("UI-Testing") {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            let realm = RealmService.shared.realm
+            do {
+                try realm?.write {
+                    realm?.deleteAll()
+                }
+            } catch {
+                print(error)
+            }
         }
     }
 }

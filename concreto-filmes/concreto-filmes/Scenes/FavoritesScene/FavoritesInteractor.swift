@@ -28,7 +28,6 @@ protocol FavoritesDataStore {
 
 class FavoritesInteractor: FavoritesBusinessLogic, FavoritesDataStore {
     var presenter: FavoritesPresentationLogic?
-    var worker: FavoritesWorker?
     var realm = RealmService.shared.realm
     var movies: [Movie] = []
     var filteredMovies: [Movie] = []

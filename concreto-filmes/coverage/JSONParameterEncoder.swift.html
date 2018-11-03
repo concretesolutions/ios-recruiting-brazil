@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "JSONParameterEncoder.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "JSONParameterEncoder.swift" : </span><span class="cov_high">90.91%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 11 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(10 of 11 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Networking/Encoding/JSONParameterEncoder.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -67,60 +67,60 @@
 <td class="src"><pre><code class="objc">public struct JSONParameterEncoder: ParameterEncoder {</code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">12</td>
 <td class="src"><pre><code class="objc">    public static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">13</td>
 <td class="src"><pre><code class="objc">        do {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">14</td>
 <td class="src"><pre><code class="objc">            let jsonAsData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">15</td>
 <td class="src"><pre><code class="objc">            urlRequest.httpBody = jsonAsData</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">16</td>
 <td class="src"><pre><code class="objc">            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">17</td>
 <td class="src"><pre><code class="objc">                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">18</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">19</td>
 <td class="src"><pre><code class="objc">        } catch {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
 <tr class="missed">
 <td class="num">20</td>
 <td class="src"><pre><code class="objc">            throw NetworkError.encodingFailed</code></pre></td>
 <td class="coverage">!</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
 <tr class="never">
 <td class="num">23</td>

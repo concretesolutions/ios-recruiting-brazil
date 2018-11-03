@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MainScreenWorker.swift" : </span><span class="cov_high">94.87%</span>
+<span>Coverage for "MainScreenWorker.swift" : </span><span class="cov_high">97.44%</span>
 </h2>
-<h4 class="cov_subtitle">(37 of 39 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(38 of 39 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Scenes/MainScreenScene/MainScreenWorker.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -115,22 +115,22 @@
 <tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">    func fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request, completion: @escaping (_ movies: [Movie]?, _ error: String?) -&gt; Void) {</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc">        movieNetworkManager.getPopularMovies(page: request.index) { (movies, error) in</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">            if let error = error {</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
@@ -140,32 +140,32 @@
 <tr class="covered">
 <td class="num">26</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">            if let movies = movies {</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">                completion(movies, nil)</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">29</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">30</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">31</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="never">
 <td class="num">32</td>
@@ -175,37 +175,37 @@
 <tr class="covered">
 <td class="num">33</td>
 <td class="src"><pre><code class="objc">    func fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request, completion: @escaping (_ movies: [Movie]?, _ error: String?) -&gt; Void) {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">34</td>
 <td class="src"><pre><code class="objc">        let text = request.text.replacingOccurrences(of: " ", with: "+").lowercased()</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">35</td>
 <td class="src"><pre><code class="objc">        searchNetWorkManager.getMoviesBy(query: text, page: request.index) { (movies, errorMessage) in</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">36</td>
 <td class="src"><pre><code class="objc">            if let error = errorMessage {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">37</td>
 <td class="src"><pre><code class="objc">                completion(nil, error)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
 <tr class="covered">
 <td class="num">38</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">39</td>
 <td class="src"><pre><code class="objc">            if let movies = movies {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">40</td>
@@ -215,17 +215,17 @@
 <tr class="covered">
 <td class="num">41</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">42</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">43</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">44</td>
@@ -235,17 +235,17 @@
 <tr class="covered">
 <td class="num">45</td>
 <td class="src"><pre><code class="objc">    func fetchAllMovieGenres(completion: @escaping (_ result: Result&lt;String&gt;) -&gt; Void) {</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">46</td>
 <td class="src"><pre><code class="objc">        genreNetworkmanager.getGenres { (genres, error) in</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">47</td>
 <td class="src"><pre><code class="objc">            if let error = error {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="missed">
 <td class="num">48</td>
@@ -255,67 +255,67 @@
 <tr class="covered">
 <td class="num">49</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">50</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">51</td>
 <td class="src"><pre><code class="objc">            if let genres = genres {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">52</td>
 <td class="src"><pre><code class="objc">                let genreDictionary = genres.reduce([Int: String]()) { (dict, genre) -&gt; [Int: String] in</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">114x</td>
 </tr>
 <tr class="covered">
 <td class="num">53</td>
 <td class="src"><pre><code class="objc">                    var dict = dict</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">114x</td>
 </tr>
 <tr class="covered">
 <td class="num">54</td>
 <td class="src"><pre><code class="objc">                    dict[genre.id] = genre.name</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">114x</td>
 </tr>
 <tr class="covered">
 <td class="num">55</td>
 <td class="src"><pre><code class="objc">                    return dict</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">114x</td>
 </tr>
 <tr class="covered">
 <td class="num">56</td>
 <td class="src"><pre><code class="objc">                    }</code></pre></td>
-<td class="coverage">19x</td>
+<td class="coverage">114x</td>
 </tr>
 <tr class="covered">
 <td class="num">57</td>
 <td class="src"><pre><code class="objc">                Genre.fetchedGenres = genreDictionary</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">58</td>
 <td class="src"><pre><code class="objc">                completion(.success)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">59</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">60</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">61</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="never">
 <td class="num">62</td>

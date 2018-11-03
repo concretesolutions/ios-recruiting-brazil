@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "FavoritesViewController.swift" : </span><span class="cov_low">26.88%</span>
+<span>Coverage for "FavoritesViewController.swift" : </span><span class="cov_high">88.17%</span>
 </h2>
-<h4 class="cov_subtitle">(25 of 93 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(82 of 93 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Scenes/FavoritesScene/FavoritesViewController.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -142,40 +142,40 @@
 <td class="src"><pre><code class="objc">    var isFiltering = false {</code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">        didSet {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">            if self.isFiltering {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">29</td>
 <td class="src"><pre><code class="objc">                interactor?.filterMoviesLocally(text: self.searchBar.text ?? "", isFiltering: true)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">30</td>
 <td class="src"><pre><code class="objc">            } else {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">31</td>
 <td class="src"><pre><code class="objc">                interactor?.filterMoviesLocally(text: "", isFiltering: false)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">32</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">33</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">34</td>
@@ -190,122 +190,122 @@
 <tr class="covered">
 <td class="num">36</td>
 <td class="src"><pre><code class="objc">    private let emptyListLabel: UILabel = {</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">37</td>
 <td class="src"><pre><code class="objc">        let label = UILabel()</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">38</td>
 <td class="src"><pre><code class="objc">        label.textColor = .white</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">39</td>
 <td class="src"><pre><code class="objc">        label.text = "Desculpe, n&atilde;o pudemos achar nada nos seus favoritos..."</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">40</td>
 <td class="src"><pre><code class="objc">        label.numberOfLines = 3</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">41</td>
 <td class="src"><pre><code class="objc">        label.isHidden = true</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">42</td>
 <td class="src"><pre><code class="objc">        label.textAlignment = .center</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">43</td>
 <td class="src"><pre><code class="objc">        return label</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">44</td>
 <td class="src"><pre><code class="objc">    }()</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="never">
 <td class="num">45</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">46</td>
 <td class="src"><pre><code class="objc">    lazy var filterBarButton: UIBarButtonItem = {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">47</td>
 <td class="src"><pre><code class="objc">        let btn = UIBarButtonItem.init(title: "Filter", style: .plain, target: self, action: #selector(goToFilterScene(sender:)))</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">48</td>
 <td class="src"><pre><code class="objc">        btn.image = #imageLiteral(resourceName: "FilterIcon")</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">49</td>
 <td class="src"><pre><code class="objc">        btn.tintColor = .black</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">50</td>
 <td class="src"><pre><code class="objc">        return btn</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">51</td>
 <td class="src"><pre><code class="objc">    }()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">52</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">53</td>
 <td class="src"><pre><code class="objc">    lazy var searchBar: UISearchBar = {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">54</td>
 <td class="src"><pre><code class="objc">        let searchBar = UISearchBar()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">55</td>
 <td class="src"><pre><code class="objc">        searchBar.layer.borderColor = UIColor.gray.cgColor</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">56</td>
 <td class="src"><pre><code class="objc">        searchBar.placeholder = "Search"</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">57</td>
 <td class="src"><pre><code class="objc">        searchBar.delegate = self</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">58</td>
 <td class="src"><pre><code class="objc">        return searchBar</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">59</td>
 <td class="src"><pre><code class="objc">    }()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">60</td>
@@ -325,22 +325,22 @@
 <tr class="covered">
 <td class="num">63</td>
 <td class="src"><pre><code class="objc">    override init(style: UITableView.Style) {</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">64</td>
 <td class="src"><pre><code class="objc">        super.init(style: style)</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">65</td>
 <td class="src"><pre><code class="objc">        setup()</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">66</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="never">
 <td class="num">67</td>
@@ -410,62 +410,62 @@
 <tr class="covered">
 <td class="num">80</td>
 <td class="src"><pre><code class="objc">    private func setup() {</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">81</td>
 <td class="src"><pre><code class="objc">        let viewController = self</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">82</td>
 <td class="src"><pre><code class="objc">        let interactor = FavoritesInteractor()</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">83</td>
 <td class="src"><pre><code class="objc">        let presenter = FavoritesPresenter()</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">84</td>
 <td class="src"><pre><code class="objc">        let router = FavoritesRouter()</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">85</td>
 <td class="src"><pre><code class="objc">        viewController.interactor = interactor</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">86</td>
 <td class="src"><pre><code class="objc">        viewController.router = router</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">87</td>
 <td class="src"><pre><code class="objc">        interactor.presenter = presenter</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">88</td>
 <td class="src"><pre><code class="objc">        presenter.viewController = viewController</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">89</td>
 <td class="src"><pre><code class="objc">        router.viewController = viewController</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">90</td>
 <td class="src"><pre><code class="objc">        router.dataStore = interactor</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">91</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">3x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="never">
 <td class="num">92</td>
@@ -482,110 +482,110 @@
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">95</td>
 <td class="src"><pre><code class="objc">    override func viewDidLoad() {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">96</td>
 <td class="src"><pre><code class="objc">        super.viewDidLoad()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">97</td>
 <td class="src"><pre><code class="objc">        setupView()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">98</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">99</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">100</td>
 <td class="src"><pre><code class="objc">    override func viewDidAppear(_ animated: Bool) {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">3x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">101</td>
 <td class="src"><pre><code class="objc">        super.viewDidAppear(animated)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">3x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">102</td>
 <td class="src"><pre><code class="objc">        interactor?.presentMovies(shouldFiter: self.isFiltering)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">3x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">103</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="never">
 <td class="num">104</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">105</td>
 <td class="src"><pre><code class="objc">    func display(movies: [Favorites.ViewModel.movie]) {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">106</td>
 <td class="src"><pre><code class="objc">        self.displayedMovies = movies</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">107</td>
 <td class="src"><pre><code class="objc">        DispatchQueue.main.async {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">108</td>
 <td class="src"><pre><code class="objc">            self.tableView.reloadData()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">109</td>
 <td class="src"><pre><code class="objc">            self.emptyListLabel.isHidden = !self.displayedMovies.isEmpty</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">110</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">111</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="never">
 <td class="num">112</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">113</td>
 <td class="src"><pre><code class="objc">    @objc func goToFilterScene(sender: UIBarButtonItem) {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">114</td>
 <td class="src"><pre><code class="objc">        router?.routeToFilterScene()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">115</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
 <tr class="never">
 <td class="num">116</td>
@@ -622,110 +622,110 @@
 <td class="src"><pre><code class="objc">extension FavoritesViewController: CodeView {</code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">123</td>
 <td class="src"><pre><code class="objc">    func buildViewHierarchy() {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">124</td>
 <td class="src"><pre><code class="objc">        self.navigationItem.rightBarButtonItem = self.filterBarButton</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">125</td>
 <td class="src"><pre><code class="objc">        self.navigationItem.titleView = self.searchBar</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">126</td>
 <td class="src"><pre><code class="objc">        view.addSubview(self.emptyListLabel)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">127</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">128</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">129</td>
 <td class="src"><pre><code class="objc">    func setupConstraints() {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">130</td>
 <td class="src"><pre><code class="objc">        self.emptyListLabel.snp.makeConstraints { (maker) in</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">131</td>
 <td class="src"><pre><code class="objc">            maker.center.equalTo(view)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">132</td>
 <td class="src"><pre><code class="objc">            maker.left.equalTo(view).offset(20)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">133</td>
 <td class="src"><pre><code class="objc">            maker.right.equalTo(view).inset(20)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">134</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">135</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">136</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">137</td>
 <td class="src"><pre><code class="objc">    func setupAdditionalConfiguration() {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">138</td>
 <td class="src"><pre><code class="objc">        self.tableView.backgroundColor = .black</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">139</td>
 <td class="src"><pre><code class="objc">        self.tableView.separatorStyle = .none</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">140</td>
 <td class="src"><pre><code class="objc">        self.tableView.register(FavoritesCustomCell.self, forCellReuseIdentifier: self.cellId)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">141</td>
 <td class="src"><pre><code class="objc">        self.navigationController?.navigationBar.barTintColor = AppColors.mainYellow.color</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">142</td>
 <td class="src"><pre><code class="objc">        self.navigationController?.navigationBar.isTranslucent = false</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">143</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">144</td>

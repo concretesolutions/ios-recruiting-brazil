@@ -13,7 +13,6 @@
 import UIKit
 
 protocol FilterBusinessLogic {
-    func doSomething(request: Filter.Something.Request)
     func fetchYearsAndGenres()
     func setSelected(year: String, genre: String)
 }
@@ -31,18 +30,6 @@ class FilterInteractor: FilterBusinessLogic, FilterDataStore {
     var selectedGenre = ""
     var selectedYear = ""
     var presenter: FilterPresentationLogic?
-    var worker: FilterWorker?
-    //var name: String = ""
-    
-    // MARK: Do something
-    
-    func doSomething(request: Filter.Something.Request) {
-        worker = FilterWorker()
-        worker?.doSomeWork()
-        
-        let response = Filter.Something.Response()
-        presenter?.presentSomething(response: response)
-    }
     
     func fetchYearsAndGenres() {
         presenter?.present(years: self.years, genres: self.genres)

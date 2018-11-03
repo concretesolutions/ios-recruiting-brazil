@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "FilterInteractor.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "FilterInteractor.swift" : </span><span class="cov_low">42.86%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 14 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(3 of 7 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Scenes/FilterScene/FilterInteractor.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -89,201 +89,136 @@
 </tr>
 <tr class="never">
 <td class="num">16</td>
-<td class="src"><pre><code class="objc">    func doSomething(request: Filter.Something.Request)</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">17</td>
 <td class="src"><pre><code class="objc">    func fetchYearsAndGenres()</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">18</td>
+<td class="num">17</td>
 <td class="src"><pre><code class="objc">    func setSelected(year: String, genre: String)</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">19</td>
+<td class="num">18</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">19</td>
+<td class="src"><pre><code class="objc"></code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">20</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">21</td>
 <td class="src"><pre><code class="objc">protocol FilterDataStore {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">22</td>
+<td class="num">21</td>
 <td class="src"><pre><code class="objc">    var genres: [String] { get set }</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">23</td>
+<td class="num">22</td>
 <td class="src"><pre><code class="objc">    var years: [String] { get set }</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">24</td>
+<td class="num">23</td>
 <td class="src"><pre><code class="objc">    var selectedYear: String { get set }</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">25</td>
+<td class="num">24</td>
 <td class="src"><pre><code class="objc">    var selectedGenre: String { get set }</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">26</td>
+<td class="num">25</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">27</td>
+<td class="num">26</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">28</td>
+<td class="num">27</td>
 <td class="src"><pre><code class="objc">class FilterInteractor: FilterBusinessLogic, FilterDataStore {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">29</td>
+<td class="num">28</td>
 <td class="src"><pre><code class="objc">    var genres: [String] = []</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">30</td>
+<td class="num">29</td>
 <td class="src"><pre><code class="objc">    var years: [String] = []</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">31</td>
+<td class="num">30</td>
 <td class="src"><pre><code class="objc">    var selectedGenre = ""</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">32</td>
+<td class="num">31</td>
 <td class="src"><pre><code class="objc">    var selectedYear = ""</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">33</td>
+<td class="num">32</td>
 <td class="src"><pre><code class="objc">    var presenter: FilterPresentationLogic?</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">34</td>
-<td class="src"><pre><code class="objc">    var worker: FilterWorker?</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">35</td>
-<td class="src"><pre><code class="objc">    //var name: String = ""</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">36</td>
+<td class="num">33</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
+</tr>
+<tr class="covered">
+<td class="num">34</td>
+<td class="src"><pre><code class="objc">    func fetchYearsAndGenres() {</code></pre></td>
+<td class="coverage">1x</td>
+</tr>
+<tr class="covered">
+<td class="num">35</td>
+<td class="src"><pre><code class="objc">        presenter?.present(years: self.years, genres: self.genres)</code></pre></td>
+<td class="coverage">1x</td>
+</tr>
+<tr class="covered">
+<td class="num">36</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">1x</td>
 </tr>
 <tr class="never">
 <td class="num">37</td>
-<td class="src"><pre><code class="objc">    // MARK: Do something</code></pre></td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="never">
+<tr class="missed">
 <td class="num">38</td>
-<td class="src"><pre><code class="objc">    </code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">39</td>
-<td class="src"><pre><code class="objc">    func doSomething(request: Filter.Something.Request) {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">40</td>
-<td class="src"><pre><code class="objc">        worker = FilterWorker()</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">41</td>
-<td class="src"><pre><code class="objc">        worker?.doSomeWork()</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">42</td>
-<td class="src"><pre><code class="objc">        </code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">43</td>
-<td class="src"><pre><code class="objc">        let response = Filter.Something.Response()</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">44</td>
-<td class="src"><pre><code class="objc">        presenter?.presentSomething(response: response)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">45</td>
-<td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="never">
-<td class="num">46</td>
-<td class="src"><pre><code class="objc">    </code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">47</td>
-<td class="src"><pre><code class="objc">    func fetchYearsAndGenres() {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">48</td>
-<td class="src"><pre><code class="objc">        presenter?.present(years: self.years, genres: self.genres)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">49</td>
-<td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="never">
-<td class="num">50</td>
-<td class="src"><pre><code class="objc">    </code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">51</td>
 <td class="src"><pre><code class="objc">    func setSelected(year: String, genre: String) {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">52</td>
+<td class="num">39</td>
 <td class="src"><pre><code class="objc">        self.selectedYear = year</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">53</td>
+<td class="num">40</td>
 <td class="src"><pre><code class="objc">        self.selectedGenre = genre</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">54</td>
+<td class="num">41</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="never">
-<td class="num">55</td>
+<td class="num">42</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

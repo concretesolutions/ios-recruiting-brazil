@@ -14,7 +14,6 @@ import UIKit
 import SnapKit
 
 protocol FilterDisplayLogic: class {
-    func displaySomething(viewModel: Filter.Something.ViewModel)
     func display(years: [String], genres: [String])
 }
 
@@ -118,11 +117,7 @@ final class FilterViewController: UIViewController, FilterDisplayLogic {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-    func displaySomething(viewModel: Filter.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
-    }
-    
+
     func display(years: [String], genres: [String]) {
         self.years = years
         self.genres = genres

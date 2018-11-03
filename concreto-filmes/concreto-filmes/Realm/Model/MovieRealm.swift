@@ -21,14 +21,14 @@ import RealmSwift
         return "id"
     }
     
-    convenience init(id: Int, posterPath: String, title: String, releaseDate: Date?, overview: String, genres: List<String>) {
+    convenience init(id: Int, posterPath: String, title: String, releaseDate: Date?, overview: String, genres: [String]) {
         self.init()
         self.id = id
         self.posterPath = posterPath
         self.title = title
         self.releaseDate = releaseDate
         self.overview = overview
-        self.genres = Array(genres).joined(separator: ", ")
+        self.genres = genres.joined(separator: ", ")
     }
     
     convenience init(movie: Movie) {

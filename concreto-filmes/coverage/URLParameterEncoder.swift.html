@@ -64,93 +64,93 @@
 </tr>
 <tr class="never">
 <td class="num">11</td>
-<td class="src"><pre><code class="objc">public struct URLParameterEncoder {</code></pre></td>
+<td class="src"><pre><code class="objc">public struct URLParameterEncoder: ParameterEncoder {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="covered">
 <td class="num">12</td>
 <td class="src"><pre><code class="objc">    public static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">13</td>
 <td class="src"><pre><code class="objc">        guard let url = urlRequest.url else { throw NetworkError.missingURL }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">14</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">15</td>
 <td class="src"><pre><code class="objc">        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">16</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">17</td>
 <td class="src"><pre><code class="objc">            urlComponents.queryItems = [URLQueryItem]()</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">18</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">19</td>
 <td class="src"><pre><code class="objc">            for(key, value) in parameters {</code></pre></td>
-<td class="coverage">17x</td>
+<td class="coverage">43x</td>
 </tr>
 <tr class="covered">
 <td class="num">20</td>
 <td class="src"><pre><code class="objc">                let queryItem = URLQueryItem(name: key, value: "\(value)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))</code></pre></td>
-<td class="coverage">17x</td>
+<td class="coverage">43x</td>
 </tr>
 <tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">                urlComponents.queryItems?.append(queryItem)</code></pre></td>
-<td class="coverage">17x</td>
+<td class="coverage">43x</td>
 </tr>
 <tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">17x</td>
+<td class="coverage">43x</td>
 </tr>
 <tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc">            urlRequest.url = urlComponents.url</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
 <td class="src"><pre><code class="objc">        if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">26</td>
 <td class="src"><pre><code class="objc">            urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">16x</td>
 </tr>
 <tr class="never">
 <td class="num">29</td>

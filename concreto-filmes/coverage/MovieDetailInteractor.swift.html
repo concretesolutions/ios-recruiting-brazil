@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MovieDetailInteractor.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "MovieDetailInteractor.swift" : </span><span class="cov_high">100.00%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 10 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(10 of 10 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Scenes/MoviewDetailScene/MovieDetailInteractor.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -139,71 +139,66 @@
 </tr>
 <tr class="never">
 <td class="num">26</td>
-<td class="src"><pre><code class="objc">    var worker: MovieDetailWorker?</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">27</td>
 <td class="src"><pre><code class="objc">    let realm = RealmService.shared.realm</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">28</td>
+<td class="num">27</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
-<td class="num">29</td>
+<tr class="covered">
+<td class="num">28</td>
 <td class="src"><pre><code class="objc">    func toggleFavoriteMovie() {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">4x</td>
 </tr>
-<tr class="missed">
-<td class="num">30</td>
+<tr class="covered">
+<td class="num">29</td>
 <td class="src"><pre><code class="objc">        if let movie = movie {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">4x</td>
 </tr>
-<tr class="missed">
-<td class="num">31</td>
+<tr class="covered">
+<td class="num">30</td>
 <td class="src"><pre><code class="objc">            if let movieAlreadyInRealm = realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">4x</td>
 </tr>
-<tr class="missed">
-<td class="num">32</td>
+<tr class="covered">
+<td class="num">31</td>
 <td class="src"><pre><code class="objc">                RealmService.shared.delete(movieAlreadyInRealm)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
-<td class="num">33</td>
+<tr class="covered">
+<td class="num">32</td>
 <td class="src"><pre><code class="objc">            } else {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">4x</td>
 </tr>
-<tr class="missed">
-<td class="num">34</td>
+<tr class="covered">
+<td class="num">33</td>
 <td class="src"><pre><code class="objc">                let movieRealm = MovieRealm(movie: movie)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
-<td class="num">35</td>
+<tr class="covered">
+<td class="num">34</td>
 <td class="src"><pre><code class="objc">                RealmService.shared.create(movieRealm)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
-<td class="num">36</td>
+<tr class="covered">
+<td class="num">35</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">4x</td>
 </tr>
-<tr class="missed">
-<td class="num">37</td>
+<tr class="covered">
+<td class="num">36</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">4x</td>
 </tr>
-<tr class="missed">
-<td class="num">38</td>
+<tr class="covered">
+<td class="num">37</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="never">
-<td class="num">39</td>
+<td class="num">38</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

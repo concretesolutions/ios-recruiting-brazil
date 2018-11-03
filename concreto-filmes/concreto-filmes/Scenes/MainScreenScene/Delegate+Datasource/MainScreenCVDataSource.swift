@@ -23,6 +23,7 @@ extension MainScreenViewController {
         }
         let item = displayedMovies[indexPath.item]
         cell.setData(data: item)
+        cell.accessibilityIdentifier = item.title
         return cell
     }
 }

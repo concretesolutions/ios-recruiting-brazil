@@ -13,19 +13,11 @@
 import UIKit
 
 protocol FilterPresentationLogic {
-  func presentSomething(response: Filter.Something.Response)
     func present(years: [String], genres: [String])
 }
 
 class FilterPresenter: FilterPresentationLogic {
   weak var viewController: FilterDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Filter.Something.Response) {
-    let viewModel = Filter.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
     
     func present(years: [String], genres: [String]) {
         viewController?.display(years: years, genres: genres)

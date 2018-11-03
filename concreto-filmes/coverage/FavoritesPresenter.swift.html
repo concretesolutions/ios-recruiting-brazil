@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "FavoritesPresenter.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "FavoritesPresenter.swift" : </span><span class="cov_high">100.00%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 6 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(6 of 6 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Scenes/FavoritesScene/FavoritesPresenter.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -122,35 +122,35 @@
 <td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc">    func present(movies: [Movie]) {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">        let displayedMovies = movies.map { (movie) -&gt; Favorites.ViewModel.movie in</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">25</td>
 <td class="src"><pre><code class="objc">            return Favorites.ViewModel.movie(title: movie.title, overview: movie.overview, releaseYear: movie.yearString(), imageUrl: movie.posterPath)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">26</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">        viewController?.display(movies: displayedMovies)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="never">
 <td class="num">29</td>

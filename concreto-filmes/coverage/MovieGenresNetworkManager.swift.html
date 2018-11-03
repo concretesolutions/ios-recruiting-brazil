@@ -70,17 +70,17 @@
 <tr class="covered">
 <td class="num">12</td>
 <td class="src"><pre><code class="objc">    func getGenres(completion: @escaping ([Genre]?, _ error: String?) -&gt; Void) {</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">13</td>
 <td class="src"><pre><code class="objc">        router.request(.movieList) { (data, response, error) in</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">14</td>
 <td class="src"><pre><code class="objc">            if error != nil {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="missed">
 <td class="num">15</td>
@@ -90,37 +90,37 @@
 <tr class="covered">
 <td class="num">16</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">17</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">18</td>
 <td class="src"><pre><code class="objc">            if let response = response as? HTTPURLResponse {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">19</td>
 <td class="src"><pre><code class="objc">                let result = self.handleNetworkResponse(response)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">20</td>
 <td class="src"><pre><code class="objc">                switch result {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">                case .success:</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc">                    guard let responseData = data else {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="missed">
 <td class="num">23</td>
@@ -135,27 +135,27 @@
 <tr class="covered">
 <td class="num">25</td>
 <td class="src"><pre><code class="objc">                    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">26</td>
 <td class="src"><pre><code class="objc">                    do {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">                        let apiResponse = try JSONDecoder().decode(GenreApiResponse.self, from: responseData)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">28</td>
 <td class="src"><pre><code class="objc">                        completion(apiResponse.genres, nil)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">29</td>
 <td class="src"><pre><code class="objc">                    } catch {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="missed">
 <td class="num">30</td>
@@ -165,12 +165,12 @@
 <tr class="covered">
 <td class="num">31</td>
 <td class="src"><pre><code class="objc">                    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">32</td>
 <td class="src"><pre><code class="objc">                case .failure(let networkFailureError):</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="missed">
 <td class="num">33</td>
@@ -180,22 +180,22 @@
 <tr class="covered">
 <td class="num">34</td>
 <td class="src"><pre><code class="objc">                }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">35</td>
 <td class="src"><pre><code class="objc">            }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">36</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">37</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="never">
 <td class="num">38</td>
