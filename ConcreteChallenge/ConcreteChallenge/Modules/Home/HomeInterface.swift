@@ -14,11 +14,10 @@ enum HomeInterfaceState {
     case loading
 }
 
-class HomeInterface: StatusBarAnimatableViewController {
+class HomeInterface: UIViewController {
     
     lazy var manager = HomeManager(self)
-    
-    private var transition: CardTransition?
+
     
     //MARK: - Outlets
     @IBOutlet var gridCollectionView: UICollectionView!
@@ -58,53 +57,7 @@ class HomeInterface: StatusBarAnimatableViewController {
 
 extension HomeInterface: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        // Get tapped cell location
-        let cell = collectionView.cellForItem(at: indexPath) as! MovieCell
-        
-        // Freeze highlighted state (or else it will bounce back)
-        cell.freezeAnimations()
-        
-        // Get current frame on screen
-        let currentCellFrame = cell.layer.presentation()!.frame
-        
-        // Convert current frame to screen's coordinates
-        let cardPresentationFrameOnScreen = cell.superview!.convert(currentCellFrame, to: nil)
-        
-        // Get card frame without transform in screen's coordinates  (for the dismissing back later to original location)
-        let cardFrameWithoutTransform = { () -> CGRect in
-            let center = cell.center
-            let size = cell.bounds.size
-            let r = CGRect(
-                x: center.x - size.width / 2,
-                y: center.y - size.height / 2,
-                width: size.width,
-                height: size.height
-            )
-            return cell.superview!.convert(r, to: nil)
-        }()
-        
-        
-        let storyboard = UIStoryboard(name: "MovieDescription", bundle: nil)
-        if let movieDescriptionInterface = storyboard.instantiateInitialViewController() as? MovieDescriptionInterface {
-            movieDescriptionInterface.set(movie: self.manager.movieFor(index: indexPath.row))
-            
-            let params = CardTransition.Params(fromCardFrame: cardPresentationFrameOnScreen,
-                                               fromCardFrameWithoutTransform: cardFrameWithoutTransform,
-                                               fromCell: cell)
-            
-            transition = CardTransition(params: params)
-            movieDescriptionInterface.transitioningDelegate = transition
-            
-            // If `modalPresentationStyle` is not `.fullScreen`, this should be set to true to make status bar depends on presented vc.
-            movieDescriptionInterface.modalPresentationCapturesStatusBarAppearance = true
-            movieDescriptionInterface.modalPresentationStyle = .custom
-            
-            present(movieDescriptionInterface, animated: true, completion: { [unowned cell] in
-                // Unfreeze
-                cell.unfreezeAnimations()
-            })
-        }
+        self.performSegue(withIdentifier: "movieDescriptionSegue", sender: indexPath.row)
     }
 }
 
