@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol FiltersOptionBussinessLogic {
-    func filtersTo(request: Filters.Option.Request)
-    func selectFilter(at index: Int) -> (String, String)
-}
-
 class FiltersOptionInteractor: FiltersOptionBussinessLogic {
     var presenter: FiltersOptionPresentationLogic!
     var coreDataWorker: CoreDataWorkingLogic!

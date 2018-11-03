@@ -31,7 +31,7 @@ class MovieCollectionViewCellSpec: QuickSpec {
             }
             
             it("set with empty movie") {
-                let movie = MovieListModel.ViewModel.Movie(title: "", posterURL: "", favoriteImageName: "")
+                let movie = MovieList.ViewModel.Movie(title: "", posterURL: "", favoriteImageName: "")
                 let cell = MovieCollectionViewCell(frame: .zero)
                 cell.set(movie: movie)
                 expect(cell.imageView.image).to(beNil())
@@ -40,7 +40,7 @@ class MovieCollectionViewCellSpec: QuickSpec {
             }
             
             it("set movie with only title") {
-                let movie = MovieListModel.ViewModel.Movie(title: self.title, posterURL: "", favoriteImageName: "")
+                let movie = MovieList.ViewModel.Movie(title: self.title, posterURL: "", favoriteImageName: "")
                 let cell = MovieCollectionViewCell(frame: .zero)
                 cell.set(movie: movie)
                 expect(cell.imageView.image).to(beNil())
@@ -49,7 +49,7 @@ class MovieCollectionViewCellSpec: QuickSpec {
             }
             
             it("set movie with only posterURL") {
-                let movie = MovieListModel.ViewModel.Movie(title: "", posterURL: self.posterURL, favoriteImageName: "")
+                let movie = MovieList.ViewModel.Movie(title: "", posterURL: self.posterURL, favoriteImageName: "")
                 let cell = MovieCollectionViewCell(frame: .zero)
                 cell.set(movie: movie)
                 expect(cell.imageView.image).toEventuallyNot(beNil())
@@ -58,7 +58,7 @@ class MovieCollectionViewCellSpec: QuickSpec {
             }
             
             it("set movie with only favoriteImage") {
-                let movie = MovieListModel.ViewModel.Movie(title: "", posterURL: "", favoriteImageName: Constants.ImageName.favoriteGray)
+                let movie = MovieList.ViewModel.Movie(title: "", posterURL: "", favoriteImageName: Constants.ImageName.favoriteGray)
                 let cell = MovieCollectionViewCell(frame: .zero)
                 cell.set(movie: movie)
                 expect(cell.imageView.image).to(beNil())
@@ -67,7 +67,7 @@ class MovieCollectionViewCellSpec: QuickSpec {
             }
             
             it("set with movie") {
-                let movie = MovieListModel.ViewModel.Movie(title: self.title, posterURL: self.posterURL, favoriteImageName: Constants.ImageName.favoriteGray)
+                let movie = MovieList.ViewModel.Movie(title: self.title, posterURL: self.posterURL, favoriteImageName: Constants.ImageName.favoriteGray)
                 let cell = MovieCollectionViewCell(frame: .zero)
                 cell.set(movie: movie)
                 expect(cell.imageView.image).toEventuallyNot(beNil())

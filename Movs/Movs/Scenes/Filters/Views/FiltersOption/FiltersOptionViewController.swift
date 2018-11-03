@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol FiltersOptionDisplayLogic: class {
-    func displayFilters(viewModel: Filters.Option.ViewModel)
-}
-
 class FiltersOptionViewController: UIViewController, FiltersOptionDisplayLogic {
     
     var filterType: Filters.FiltersType?

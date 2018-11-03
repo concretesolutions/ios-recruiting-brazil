@@ -8,15 +8,6 @@
 
 import Foundation
 
-protocol FiltersBussinessLogic {
-    func applyFilters(request: Filters.Request.Filters)
-    func storeFilter(request: Filters.Request)
-}
-
-protocol FiltersDataStore {
-    var type: Filters.FiltersType? { get set }
-}
-
 class FiltersInteractor: FiltersBussinessLogic, FiltersDataStore {
     var presenter: FiltersPresentationLogic!
     var coreDataWorker: CoreDataWorkingLogic!

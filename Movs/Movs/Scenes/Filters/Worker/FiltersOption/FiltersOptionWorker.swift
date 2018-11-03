@@ -8,10 +8,6 @@
 
 import Moya
 
-protocol FiltersOptionWorkingLogic {
-    func fetchGenres(completion: @escaping (GenreList?, Error?) -> ())
-}
-
 class FiltersOptionWorker: FiltersOptionWorkingLogic {
     
     let provider = MoyaProvider<MovieService>()

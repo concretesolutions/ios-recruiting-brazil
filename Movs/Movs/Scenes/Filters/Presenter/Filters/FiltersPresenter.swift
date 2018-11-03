@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol FiltersPresentationLogic {
-    func present(response: Filters.Response)
-}
-
 class FiltersPresenter: FiltersPresentationLogic {
     weak var viewController: FiltersDisplayLogic!
     

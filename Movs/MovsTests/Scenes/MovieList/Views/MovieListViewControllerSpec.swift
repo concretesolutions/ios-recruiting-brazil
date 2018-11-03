@@ -13,18 +13,22 @@ import Nimble_Snapshots
 @testable import Movs
 
 class MovieListViewControllerSpec: QuickSpec {
+    
     override func spec() {
         describe("MovieListViewController Spec") {
             var viewController: MovieListViewController!
             
             context("init with coder") {
+                
                 it("should raise exception") {
                     let archiver = NSKeyedArchiver(requiringSecureCoding: false)
                     expect(MovieListViewController(coder: archiver)).to(raiseException())
                 }
+                
             }
             
             context("init with no nib") {
+                
                 beforeEach {
                     viewController = MovieListViewController(nibName: nil, bundle: nil)
                 }
@@ -89,24 +93,29 @@ class MovieListViewControllerSpec: QuickSpec {
                 context("change states by methods") {
                     
                     it("should be in display state when displaying movies") {
-                        let success = MovieListModel.ViewModel.Success(movies: [])
+                        let success = MovieList.ViewModel.Success(movies: [])
                         viewController.displayMovies(viewModel: success)
                         expect(viewController.stateMachine.currentState).to(beAKindOf(MovieListDisplayState.self))
                     }
                     
-                    it("should be in display state when filtering movies") {
+                    it("should be in display state when filtering movies no title") {
                         viewController.filterMovies(named: "")
                         expect(viewController.stateMachine.currentState).toEventually(beAKindOf(MovieListDisplayState.self))
                     }
                     
+                    it("should be in error state when filtering movies with title") {
+                        viewController.filterMovies(named: "Movie")
+                        expect(viewController.stateMachine.currentState).toEventually(beAKindOf(MovieListErrorState.self))
+                    }
+                    
                     it("should be in error state when error occurs") {
-                        let error = MovieListModel.ViewModel.Error(error: "")
+                        let error = MovieList.ViewModel.Error(error: "")
                         viewController.displayError(viewModel: error)
                         expect(viewController.stateMachine.currentState).to(beAKindOf(MovieListErrorState.self))
                     }
                     
                     it("should be in error state when not find a search") {
-                        let error = MovieListModel.ViewModel.Error(error: "")
+                        let error = MovieList.ViewModel.Error(error: "")
                         viewController.displayNotFind(viewModel: error)
                         expect(viewController.stateMachine.currentState).to(beAKindOf(MovieListErrorState.self))
                     }

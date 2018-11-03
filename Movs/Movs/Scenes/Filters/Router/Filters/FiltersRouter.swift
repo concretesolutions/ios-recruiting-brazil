@@ -8,14 +8,6 @@
 
 import Foundation
 
-protocol FiltersRoutingLogic {
-    func showFiltersOption()
-}
-
-protocol FiltersDataPassing {
-    var dataStore: FiltersDataStore? { get }
-}
-
 class FiltersRouter: FiltersRoutingLogic, FiltersDataPassing {
     weak var viewController: FiltersViewController!
     var dataStore: FiltersDataStore?

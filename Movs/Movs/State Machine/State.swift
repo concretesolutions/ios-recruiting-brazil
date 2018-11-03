@@ -11,7 +11,7 @@ import Foundation
 class State: NSObject {
     func didEnter(from previousState: State?) {}
     func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return false
+        return true
     }
     func willExit(to nextState: State) {}
 }

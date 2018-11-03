@@ -15,7 +15,7 @@ class MovieListInteractor: MovieListBussinessLogic, MovieListDataStore {
     
     var movie: Movie?
     
-    private var movies: [Movie]
+    var movies: [Movie]
     
     init() {
         movieListWorker = MovieListWorker()

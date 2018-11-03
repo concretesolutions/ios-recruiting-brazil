@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol FiltersDisplayLogic: class {
-    func applyFilter(viewModel: Filters.ViewModel)
-}
-
 class FiltersViewController: UIViewController, FiltersDisplayLogic {
     
     var filterApply: (([Movie]) -> ())?
