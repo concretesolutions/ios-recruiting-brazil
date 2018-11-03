@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MainScreenCVDataSource.swift" : </span><span class="cov_high">93.33%</span>
+<span>Coverage for "MainScreenCVDataSource.swift" : </span><span class="cov_high">92.86%</span>
 </h2>
-<h4 class="cov_subtitle">(14 of 15 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(13 of 14 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Scenes/MainScreenScene/Delegate+Datasource/MainScreenCVDataSource.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -70,17 +70,17 @@
 <tr class="covered">
 <td class="num">12</td>
 <td class="src"><pre><code class="objc">    override func numberOfSections(in collectionView: UICollectionView) -&gt; Int {</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">13</td>
 <td class="src"><pre><code class="objc">        return 1</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">14</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="never">
 <td class="num">15</td>
@@ -90,17 +90,17 @@
 <tr class="covered">
 <td class="num">16</td>
 <td class="src"><pre><code class="objc">    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -&gt; Int {</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">17</td>
 <td class="src"><pre><code class="objc">        return displayedMovies.count</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">18</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="never">
 <td class="num">19</td>
@@ -110,12 +110,12 @@
 <tr class="covered">
 <td class="num">20</td>
 <td class="src"><pre><code class="objc">    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -&gt; UICollectionViewCell {</code></pre></td>
-<td class="coverage">16x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.movieCellID, for: indexPath) as? MainScreenMovieCell else {</code></pre></td>
-<td class="coverage">16x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="missed">
 <td class="num">22</td>
@@ -125,35 +125,30 @@
 <tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">16x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">        let item = displayedMovies[indexPath.item]</code></pre></td>
-<td class="coverage">16x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
-<td class="src"><pre><code class="objc">        let data = MainScreen.ViewModel.MovieViewModel(posterUrl: item.posterUrl, title: item.title)</code></pre></td>
-<td class="coverage">16x</td>
+<td class="src"><pre><code class="objc">        cell.setData(data: item)</code></pre></td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">26</td>
-<td class="src"><pre><code class="objc">        cell.setData(data: data)</code></pre></td>
-<td class="coverage">16x</td>
+<td class="src"><pre><code class="objc">        return cell</code></pre></td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">27</td>
-<td class="src"><pre><code class="objc">        return cell</code></pre></td>
-<td class="coverage">16x</td>
-</tr>
-<tr class="covered">
-<td class="num">28</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">16x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="never">
-<td class="num">29</td>
+<td class="num">28</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

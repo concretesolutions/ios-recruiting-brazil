@@ -2,38 +2,36 @@
 # platform :ios, '9.0'
 
 target 'concreto-filmes' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  plugin 'cocoapods-keys', {
-  :project => "concreto-filmes",
-  :keys => [
-    "THE_MOVIE_DB_V3_KEY",
-    "THE_MOVIE_DB_V4_READ_TOKEN",
-  ]}
-
-  pod 'SnapKit', '~> 4.0.0'
-  pod 'SDWebImage', '~> 4.0'
-  pod 'SwiftLint'
-  pod 'RealmSwift'
-  # Pods for concreto-filmes
-  def testing_pods
-    pod 'Quick'
-    pod 'Nimble'
-  end
-
-  target 'concreto-filmesTests' do
+    # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
     use_frameworks!
-    # Pods for testing
-    testing_pods
-  end
-
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.2'
-      end
+    
+    pod 'SnapKit', '~> 4.0.0'
+    pod 'SDWebImage', '~> 4.0'
+    pod 'SwiftLint'
+    pod 'RealmSwift'
+    
+    target 'concreto-filmesTests' do
+        use_frameworks!
+        
+        pod 'Quick'
+        pod 'Nimble'
+        
     end
-  end
-
+    
+    plugin 'cocoapods-keys', {
+        :project => "concreto-filmes",
+        :keys => [
+        "THE_MOVIE_DB_V3_KEY",
+        "THE_MOVIE_DB_V4_READ_TOKEN",
+        ]}
+    
+    post_install do |installer|
+        installer.pods_project.targets.each do |target|
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.2'
+            end
+        end
+    end
+    
 end
+

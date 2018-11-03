@@ -31,7 +31,8 @@ class MainScreenWorker {
     }
 
     func fetchMoviesByQuery(request: MainScreen.FetchQueryMovies.Request, completion: @escaping (_ movies: [Movie]?, _ error: String?) -> Void) {
-        searchNetWorkManager.getMoviesBy(query: request.text, page: request.index) { (movies, errorMessage) in
+        let text = request.text.replacingOccurrences(of: " ", with: "+").lowercased()
+        searchNetWorkManager.getMoviesBy(query: text, page: request.index) { (movies, errorMessage) in
             if let error = errorMessage {
                 completion(nil, error)
             }

@@ -15,7 +15,7 @@ extension MainScreenViewController: UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text?.replacingOccurrences(of: " ", with: "+").lowercased() {
+        if let text = searchBar.text {
             self.applicationStatus = .resetFetch
             self.isFiltering = true
             self.interactor?.fetchQueriedMovies(text: text, shouldResetMovies: true)

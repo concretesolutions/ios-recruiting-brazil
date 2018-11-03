@@ -1,16 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-<title>MovieDetailPresenter.swift - Slather</title>
+<title>FavoritesPresenter.swift - Slather</title>
 <link href="slather.css" media="all" rel="stylesheet">
 </head>
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MovieDetailPresenter.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "FavoritesPresenter.swift" : </span><span class="cov_low">0.00%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 9 relevant lines covered)</h4>
-<h4 class="cov_filepath">concreto-filmes/Scenes/MoviewDetailScene/MovieDetailPresenter.swift</h4>
+<h4 class="cov_subtitle">(0 of 6 relevant lines covered)</h4>
+<h4 class="cov_filepath">concreto-filmes/Scenes/FavoritesScene/FavoritesPresenter.swift</h4>
 <table class="source_code">
 <tr class="never">
 <td class="num">1</td>
@@ -19,7 +19,7 @@
 </tr>
 <tr class="never">
 <td class="num">2</td>
-<td class="src"><pre><code class="objc">//  MovieDetailPresenter.swift</code></pre></td>
+<td class="src"><pre><code class="objc">//  FavoritesPresenter.swift</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -34,7 +34,7 @@
 </tr>
 <tr class="never">
 <td class="num">5</td>
-<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 23/10/18.</code></pre></td>
+<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 31/10/18.</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -79,101 +79,86 @@
 </tr>
 <tr class="never">
 <td class="num">14</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
+<td class="src"><pre><code class="objc">import RealmSwift</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">15</td>
-<td class="src"><pre><code class="objc">protocol MovieDetailPresentationLogic {</code></pre></td>
+<td class="src"><pre><code class="objc"></code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">16</td>
-<td class="src"><pre><code class="objc">    func presentMovie(movie: Movie)</code></pre></td>
+<td class="src"><pre><code class="objc">protocol FavoritesPresentationLogic {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">17</td>
-<td class="src"><pre><code class="objc">}</code></pre></td>
+<td class="src"><pre><code class="objc">    func present(movies: [Movie])</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">18</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
+<td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">19</td>
-<td class="src"><pre><code class="objc">class MovieDetailPresenter: MovieDetailPresentationLogic {</code></pre></td>
+<td class="src"><pre><code class="objc"></code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">20</td>
-<td class="src"><pre><code class="objc">    weak var viewController: MovieDetailDisplayLogic?</code></pre></td>
+<td class="src"><pre><code class="objc">class FavoritesPresenter: FavoritesPresentationLogic {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">21</td>
-<td class="src"><pre><code class="objc">    var realm = RealmService.shared.realm</code></pre></td>
+<td class="src"><pre><code class="objc">    weak var viewController: FavoritesDisplayLogic?</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">22</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="missed">
 <td class="num">23</td>
-<td class="src"><pre><code class="objc">    func presentMovie(movie: Movie) {</code></pre></td>
+<td class="src"><pre><code class="objc">    func present(movies: [Movie]) {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
 <td class="num">24</td>
-<td class="src"><pre><code class="objc">        DispatchQueue.main.async {</code></pre></td>
+<td class="src"><pre><code class="objc">        let displayedMovies = movies.map { (movie) -&gt; Favorites.ViewModel.movie in</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
 <td class="num">25</td>
-<td class="src"><pre><code class="objc">            let genres = movie.genresString()</code></pre></td>
+<td class="src"><pre><code class="objc">            return Favorites.ViewModel.movie(title: movie.title, overview: movie.overview, releaseYear: movie.yearString(), imageUrl: movie.posterPath)</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
 <td class="num">26</td>
-<td class="src"><pre><code class="objc">            let year = movie.yearString()</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">27</td>
-<td class="src"><pre><code class="objc">            let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">28</td>
-<td class="src"><pre><code class="objc">            let viewModel = MovieDetail.ViewModel(movieImageURL: movie.posterPath, title: movie.title, genres: genres, overview: movie.overview, releaseDate: year, isFavorite: isFavorite)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">29</td>
-<td class="src"><pre><code class="objc">            self.viewController?.displayMovie(viewModel: viewModel)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">30</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">31</td>
+<td class="num">27</td>
+<td class="src"><pre><code class="objc">        viewController?.display(movies: displayedMovies)</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">28</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="never">
-<td class="num">32</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
+<td class="num">29</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">33</td>
+<td class="num">30</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

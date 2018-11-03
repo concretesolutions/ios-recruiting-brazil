@@ -139,116 +139,221 @@
 </tr>
 <tr class="never">
 <td class="num">26</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
+<td class="src"><pre><code class="objc">    let realm = RealmService.shared.realm</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">27</td>
-<td class="src"><pre><code class="objc">    // MARK: Routing</code></pre></td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
 <td class="num">28</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
+<td class="src"><pre><code class="objc">    // MARK: Routing</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">29</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">30</td>
+<td class="src"><pre><code class="objc">//    func routeToMovieDetail(shouldFilter: Bool, index: Int) {</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">31</td>
+<td class="src"><pre><code class="objc">//        guard let sourceVC = viewController else { return }</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">32</td>
+<td class="src"><pre><code class="objc">//        if let dataStore = self.dataStore {</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">33</td>
+<td class="src"><pre><code class="objc">//            let movie = shouldFilter ? dataStore.filteredMovies[index] : dataStore.movies[index]</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">34</td>
+<td class="src"><pre><code class="objc">//            let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">35</td>
+<td class="src"><pre><code class="objc">//            let destinationVC = MovieDetailViewController(viewModel: MovieDetail.ViewModel(movieImageURL: movie.posterPath, title: movie.title, genres: movie.genresString(), overview: movie.overview, releaseDate: movie.yearString(), isFavorite: isFavorite))</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">36</td>
+<td class="src"><pre><code class="objc">//            guard var destinationDS = destinationVC.router?.dataStore else { return }</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">37</td>
+<td class="src"><pre><code class="objc">//            passDataToDetailVC(source: dataStore, destination: &amp;destinationDS, index: index)</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">38</td>
+<td class="src"><pre><code class="objc">//            navigateToMovieDetail(source: sourceVC, destination: destinationVC)</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">39</td>
+<td class="src"><pre><code class="objc">//        }</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">40</td>
+<td class="src"><pre><code class="objc">//    }</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">41</td>
+<td class="src"><pre><code class="objc">//</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">42</td>
+<td class="src"><pre><code class="objc">//    func passDataToDetailVC(source: MainScreenDataStore, destination: inout MovieDetailDataStore, index: Int) {</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">43</td>
+<td class="src"><pre><code class="objc">//        destination.movie = source.movies[index]</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">44</td>
+<td class="src"><pre><code class="objc">//    }</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">45</td>
+<td class="src"><pre><code class="objc">//</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">46</td>
+<td class="src"><pre><code class="objc">//    func navigateToMovieDetail(source: MainScreenViewController, destination: MovieDetailViewController) {</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">47</td>
+<td class="src"><pre><code class="objc">//        source.navigationController?.pushViewController(destination, animated: true)</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">48</td>
+<td class="src"><pre><code class="objc">//    }</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">49</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="missed">
-<td class="num">29</td>
+<td class="num">50</td>
 <td class="src"><pre><code class="objc">    func routeToMovieDetail(shouldFilter: Bool, index: Int) {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">30</td>
+<td class="num">51</td>
 <td class="src"><pre><code class="objc">        guard let sourceVC = viewController else { return }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">31</td>
-<td class="src"><pre><code class="objc">        let destinationVC = MovieDetailViewController()</code></pre></td>
+<td class="num">52</td>
+<td class="src"><pre><code class="objc">        if let dataStore = self.dataStore {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">32</td>
-<td class="src"><pre><code class="objc">        var destinationDataStore = destinationVC.router?.dataStore</code></pre></td>
+<td class="num">53</td>
+<td class="src"><pre><code class="objc">            let movie = shouldFilter ? dataStore.filteredMovies[index] : dataStore.movies[index]</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">33</td>
-<td class="src"><pre><code class="objc">        passDataToDetailScreen(source: dataStore, destination: &amp;destinationDataStore, shouldFilter: shouldFilter, index: index)</code></pre></td>
+<td class="num">54</td>
+<td class="src"><pre><code class="objc">            let isFavorite = self.realm?.object(ofType: MovieRealm.self, forPrimaryKey: movie.id) != nil</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">34</td>
-<td class="src"><pre><code class="objc">        navigateToMovieDetail(source: sourceVC, destination: destinationVC)</code></pre></td>
+<td class="num">55</td>
+<td class="src"><pre><code class="objc">            let destinationVC = MovieDetailViewController(viewModel: MovieDetail.ViewModel(movieImageURL: movie.posterPath, title: movie.title, genres: movie.genresString(), overview: movie.overview, releaseDate: movie.yearString(), isFavorite: isFavorite))</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">35</td>
-<td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="never">
-<td class="num">36</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">37</td>
-<td class="src"><pre><code class="objc">    func passDataToDetailScreen(source: MainScreenDataStore?, destination: inout MovieDetailDataStore?, shouldFilter: Bool, index: Int) {</code></pre></td>
+<td class="num">56</td>
+<td class="src"><pre><code class="objc">            guard var destinationDS = destinationVC.router?.dataStore else { return }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">38</td>
-<td class="src"><pre><code class="objc">        if shouldFilter {</code></pre></td>
+<td class="num">57</td>
+<td class="src"><pre><code class="objc">            passDataToDetailVC(source: dataStore, destination: &amp;destinationDS, index: index, shouldFilter: shouldFilter)</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">39</td>
-<td class="src"><pre><code class="objc">            destination?.movie = source?.filteredMovies[index]</code></pre></td>
+<td class="num">58</td>
+<td class="src"><pre><code class="objc">            navigateToMovieDetail(source: sourceVC, destination: destinationVC)</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">40</td>
-<td class="src"><pre><code class="objc">        } else {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">41</td>
-<td class="src"><pre><code class="objc">            destination?.movie = source?.movies[index]</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">42</td>
+<td class="num">59</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">43</td>
+<td class="num">60</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="never">
-<td class="num">44</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
+<td class="num">61</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="missed">
-<td class="num">45</td>
+<td class="num">62</td>
+<td class="src"><pre><code class="objc">    func passDataToDetailVC(source: MainScreenDataStore, destination: inout MovieDetailDataStore, index: Int, shouldFilter: Bool) {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">63</td>
+<td class="src"><pre><code class="objc">        destination.movie = shouldFilter ? source.filteredMovies[index] : source.movies[index]</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">64</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="never">
+<td class="num">65</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="missed">
+<td class="num">66</td>
 <td class="src"><pre><code class="objc">    func navigateToMovieDetail(source: MainScreenViewController, destination: MovieDetailViewController) {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">46</td>
+<td class="num">67</td>
 <td class="src"><pre><code class="objc">        source.navigationController?.pushViewController(destination, animated: true)</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">47</td>
+<td class="num">68</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="never">
-<td class="num">48</td>
+<td class="num">69</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

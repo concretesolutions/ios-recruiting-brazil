@@ -1,16 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-<title>MainScreenDelegateFlowLayout.swift - Slather</title>
+<title>TabController.swift - Slather</title>
 <link href="slather.css" media="all" rel="stylesheet">
 </head>
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MainScreenDelegateFlowLayout.swift" : </span><span class="cov_high">100.00%</span>
+<span>Coverage for "TabController.swift" : </span><span class="cov_high">100.00%</span>
 </h2>
-<h4 class="cov_subtitle">(12 of 12 relevant lines covered)</h4>
-<h4 class="cov_filepath">concreto-filmes/Scenes/MainScreenScene/Delegate+Datasource/MainScreenDelegateFlowLayout.swift</h4>
+<h4 class="cov_subtitle">(18 of 18 relevant lines covered)</h4>
+<h4 class="cov_filepath">concreto-filmes/Scenes/TabController.swift</h4>
 <table class="source_code">
 <tr class="never">
 <td class="num">1</td>
@@ -19,7 +19,7 @@
 </tr>
 <tr class="never">
 <td class="num">2</td>
-<td class="src"><pre><code class="objc">//  MainScreenDelegateFlowLayout.swift</code></pre></td>
+<td class="src"><pre><code class="objc">//  TabController.swift</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -34,7 +34,7 @@
 </tr>
 <tr class="never">
 <td class="num">5</td>
-<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 25/10/18.</code></pre></td>
+<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 31/10/18.</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -64,86 +64,106 @@
 </tr>
 <tr class="never">
 <td class="num">11</td>
-<td class="src"><pre><code class="objc">extension MainScreenViewController: UICollectionViewDelegateFlowLayout {</code></pre></td>
+<td class="src"><pre><code class="objc">class TabController: UITabBarController {</code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="covered">
-<td class="num">12</td>
-<td class="src"><pre><code class="objc">    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -&gt; CGSize {</code></pre></td>
-<td class="coverage">20x</td>
-</tr>
-<tr class="covered">
-<td class="num">13</td>
-<td class="src"><pre><code class="objc">            return CGSize(width: 177, height: 278)</code></pre></td>
-<td class="coverage">20x</td>
-</tr>
-<tr class="covered">
-<td class="num">14</td>
-<td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">20x</td>
-</tr>
 <tr class="never">
-<td class="num">15</td>
+<td class="num">12</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="covered">
+<td class="num">13</td>
+<td class="src"><pre><code class="objc">    override func viewDidLoad() {</code></pre></td>
+<td class="coverage">3x</td>
+</tr>
+<tr class="covered">
+<td class="num">14</td>
+<td class="src"><pre><code class="objc">        let firstController = MainScreenViewController(collectionViewLayout: UICollectionViewFlowLayout())</code></pre></td>
+<td class="coverage">3x</td>
+</tr>
+<tr class="covered">
+<td class="num">15</td>
+<td class="src"><pre><code class="objc">        let navigationController = UINavigationController(rootViewController: firstController)</code></pre></td>
+<td class="coverage">3x</td>
+</tr>
+<tr class="covered">
 <td class="num">16</td>
-<td class="src"><pre><code class="objc">    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -&gt; CGFloat {</code></pre></td>
+<td class="src"><pre><code class="objc">        navigationController.tabBarItem.title = "Filmes"</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">17</td>
-<td class="src"><pre><code class="objc">        return 10</code></pre></td>
+<td class="src"><pre><code class="objc">        navigationController.tabBarItem.image = #imageLiteral(resourceName: "list_icon")</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">18</td>
-<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="src"><pre><code class="objc">        let secondController = FavoritesViewController(style: .plain)</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
-<tr class="never">
+<tr class="covered">
 <td class="num">19</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage"></td>
+<td class="src"><pre><code class="objc">        let secondNavigationController = UINavigationController(rootViewController: secondController)</code></pre></td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">20</td>
-<td class="src"><pre><code class="objc">    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -&gt; CGFloat {</code></pre></td>
+<td class="src"><pre><code class="objc">        secondController.tabBarItem.title = "Favoritos"</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">21</td>
-<td class="src"><pre><code class="objc">        return 5</code></pre></td>
+<td class="src"><pre><code class="objc">        secondController.tabBarItem.image = #imageLiteral(resourceName: "favorite_empty_icon")</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">22</td>
-<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="src"><pre><code class="objc">        </code></pre></td>
 <td class="coverage">3x</td>
 </tr>
-<tr class="never">
+<tr class="covered">
 <td class="num">23</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage"></td>
+<td class="src"><pre><code class="objc">        tabBar.barTintColor = AppColors.mainYellow.color</code></pre></td>
+<td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
-<td class="src"><pre><code class="objc">    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -&gt; UIEdgeInsets {</code></pre></td>
+<td class="src"><pre><code class="objc">        tabBar.tintColor = .black</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
-<td class="src"><pre><code class="objc">        return UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 10)</code></pre></td>
+<td class="src"><pre><code class="objc">        tabBar.isTranslucent = false</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
 <tr class="covered">
 <td class="num">26</td>
+<td class="src"><pre><code class="objc">        </code></pre></td>
+<td class="coverage">3x</td>
+</tr>
+<tr class="covered">
+<td class="num">27</td>
+<td class="src"><pre><code class="objc">        let tabBarList = [navigationController, secondNavigationController]</code></pre></td>
+<td class="coverage">3x</td>
+</tr>
+<tr class="covered">
+<td class="num">28</td>
+<td class="src"><pre><code class="objc">        </code></pre></td>
+<td class="coverage">3x</td>
+</tr>
+<tr class="covered">
+<td class="num">29</td>
+<td class="src"><pre><code class="objc">        self.viewControllers = tabBarList</code></pre></td>
+<td class="coverage">3x</td>
+</tr>
+<tr class="covered">
+<td class="num">30</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
 <td class="coverage">3x</td>
 </tr>
 <tr class="never">
-<td class="num">27</td>
+<td class="num">31</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

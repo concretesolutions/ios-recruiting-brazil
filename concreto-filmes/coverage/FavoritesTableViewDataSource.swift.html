@@ -1,16 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-<title>MainScreenSearchBarDelegate.swift - Slather</title>
+<title>FavoritesTableViewDataSource.swift - Slather</title>
 <link href="slather.css" media="all" rel="stylesheet">
 </head>
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MainScreenSearchBarDelegate.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "FavoritesTableViewDataSource.swift" : </span><span class="cov_low">0.00%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 11 relevant lines covered)</h4>
-<h4 class="cov_filepath">concreto-filmes/Scenes/MainScreenScene/Delegate+Datasource/MainScreenSearchBarDelegate.swift</h4>
+<h4 class="cov_subtitle">(0 of 13 relevant lines covered)</h4>
+<h4 class="cov_filepath">concreto-filmes/Scenes/FavoritesScene/DataSource+Delegate/FavoritesTableViewDataSource.swift</h4>
 <table class="source_code">
 <tr class="never">
 <td class="num">1</td>
@@ -19,7 +19,7 @@
 </tr>
 <tr class="never">
 <td class="num">2</td>
-<td class="src"><pre><code class="objc">//  MainScreenSearchBarDelegate.swift</code></pre></td>
+<td class="src"><pre><code class="objc">//  FavoritesTableViewDataSource.swift</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -34,7 +34,7 @@
 </tr>
 <tr class="never">
 <td class="num">5</td>
-<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 25/10/18.</code></pre></td>
+<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 31/10/18.</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -64,71 +64,86 @@
 </tr>
 <tr class="never">
 <td class="num">11</td>
-<td class="src"><pre><code class="objc">extension MainScreenViewController: UISearchBarDelegate {</code></pre></td>
+<td class="src"><pre><code class="objc">extension FavoritesViewController {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="missed">
 <td class="num">12</td>
-<td class="src"><pre><code class="objc">    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {</code></pre></td>
+<td class="src"><pre><code class="objc">    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
 <td class="num">13</td>
-<td class="src"><pre><code class="objc">        isFiltering = searchText != ""</code></pre></td>
+<td class="src"><pre><code class="objc">        guard let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId) as? FavoritesCustomCell else {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
 <td class="num">14</td>
-<td class="src"><pre><code class="objc">        self.interactor?.filterMoviesLocally(text: searchText)</code></pre></td>
+<td class="src"><pre><code class="objc">            return FavoritesCustomCell(style: .default, reuseIdentifier: self.cellId)</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
 <td class="num">15</td>
-<td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="never">
-<td class="num">16</td>
-<td class="src"><pre><code class="objc"></code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">17</td>
-<td class="src"><pre><code class="objc">    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">18</td>
-<td class="src"><pre><code class="objc">        if let text = searchBar.text {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">19</td>
-<td class="src"><pre><code class="objc">            self.applicationStatus = .resetFetch</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">20</td>
-<td class="src"><pre><code class="objc">            self.isFiltering = true</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">21</td>
-<td class="src"><pre><code class="objc">            self.interactor?.fetchQueriedMovies(text: text, shouldResetMovies: true)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">22</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">23</td>
+<td class="num">16</td>
+<td class="src"><pre><code class="objc">        cell.setData(data: displayedMovies[indexPath.item])</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">17</td>
+<td class="src"><pre><code class="objc">        return cell</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">18</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="never">
+<td class="num">19</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="missed">
+<td class="num">20</td>
+<td class="src"><pre><code class="objc">    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">21</td>
+<td class="src"><pre><code class="objc">        return displayedMovies.count</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">22</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="never">
+<td class="num">23</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="missed">
 <td class="num">24</td>
+<td class="src"><pre><code class="objc">    override func numberOfSections(in tableView: UITableView) -&gt; Int {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">25</td>
+<td class="src"><pre><code class="objc">        return 1</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">26</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="never">
+<td class="num">27</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

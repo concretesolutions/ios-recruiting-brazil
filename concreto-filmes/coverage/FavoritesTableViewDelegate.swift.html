@@ -1,16 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
 <head>
-<title>FavoriteMovie.swift - Slather</title>
+<title>FavoritesTableViewDelegate.swift - Slather</title>
 <link href="slather.css" media="all" rel="stylesheet">
 </head>
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "FavoriteMovie.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "FavoritesTableViewDelegate.swift" : </span><span class="cov_low">0.00%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 17 relevant lines covered)</h4>
-<h4 class="cov_filepath">concreto-filmes/Realm/FavoriteMovie.swift</h4>
+<h4 class="cov_subtitle">(0 of 19 relevant lines covered)</h4>
+<h4 class="cov_filepath">concreto-filmes/Scenes/FavoritesScene/DataSource+Delegate/FavoritesTableViewDelegate.swift</h4>
 <table class="source_code">
 <tr class="never">
 <td class="num">1</td>
@@ -19,7 +19,7 @@
 </tr>
 <tr class="never">
 <td class="num">2</td>
-<td class="src"><pre><code class="objc">//  FavouriteMovie.swift</code></pre></td>
+<td class="src"><pre><code class="objc">//  FavoritesTableViewDelegate.swift</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -34,7 +34,7 @@
 </tr>
 <tr class="never">
 <td class="num">5</td>
-<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 30/10/18.</code></pre></td>
+<td class="src"><pre><code class="objc">//  Created by Leonel Menezes on 01/11/18.</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -54,7 +54,7 @@
 </tr>
 <tr class="never">
 <td class="num">9</td>
-<td class="src"><pre><code class="objc">import RealmSwift</code></pre></td>
+<td class="src"><pre><code class="objc">import UIKit</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -64,131 +64,126 @@
 </tr>
 <tr class="never">
 <td class="num">11</td>
-<td class="src"><pre><code class="objc">@objcMembers class FavoriteMovie: Object {</code></pre></td>
+<td class="src"><pre><code class="objc">extension FavoritesViewController {</code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="never">
+<tr class="missed">
 <td class="num">12</td>
-<td class="src"><pre><code class="objc">    dynamic var id = 0</code></pre></td>
-<td class="coverage"></td>
+<td class="src"><pre><code class="objc">    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&gt; CGFloat {</code></pre></td>
+<td class="coverage">!</td>
 </tr>
-<tr class="never">
+<tr class="missed">
 <td class="num">13</td>
-<td class="src"><pre><code class="objc">    dynamic var imageUrl: String = ""</code></pre></td>
-<td class="coverage"></td>
+<td class="src"><pre><code class="objc">        return 150</code></pre></td>
+<td class="coverage">!</td>
 </tr>
-<tr class="never">
+<tr class="missed">
 <td class="num">14</td>
-<td class="src"><pre><code class="objc">    dynamic var genres: String = ""</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">15</td>
-<td class="src"><pre><code class="objc">    dynamic var overview: String = ""</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">16</td>
-<td class="src"><pre><code class="objc">    dynamic var title: String = ""</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">17</td>
-<td class="src"><pre><code class="objc">    dynamic var releaseDate: String = ""</code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="never">
-<td class="num">18</td>
-<td class="src"><pre><code class="objc">    </code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">19</td>
-<td class="src"><pre><code class="objc">    convenience init(movie: Movie) {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">20</td>
-<td class="src"><pre><code class="objc">        self.init()</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">21</td>
-<td class="src"><pre><code class="objc">        self.id = movie.id</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">22</td>
-<td class="src"><pre><code class="objc">        self.imageUrl = movie.posterPath ?? ""</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">23</td>
-<td class="src"><pre><code class="objc">        self.overview = movie.overview</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">24</td>
-<td class="src"><pre><code class="objc">        self.title = movie.title</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">25</td>
-<td class="src"><pre><code class="objc">        let calendar = Calendar.current</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">26</td>
-<td class="src"><pre><code class="objc">        if let date = movie.releaseDate {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">27</td>
-<td class="src"><pre><code class="objc">            let year = calendar.component(.year, from: date)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">28</td>
-<td class="src"><pre><code class="objc">            self.releaseDate = "\(year)"</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">29</td>
-<td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">30</td>
-<td class="src"><pre><code class="objc">        let genres = movie.genreIDS.map { (id) -&gt; String in</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">31</td>
-<td class="src"><pre><code class="objc">            return Genre.fetchedGenres[id] ?? "Uknown"</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">32</td>
-<td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">33</td>
-<td class="src"><pre><code class="objc">        let genresString = genres.joined(separator: ", ")</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">34</td>
-<td class="src"><pre><code class="objc">        self.genres = genresString</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">35</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="never">
-<td class="num">36</td>
+<td class="num">15</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="missed">
+<td class="num">16</td>
+<td class="src"><pre><code class="objc">    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">17</td>
+<td class="src"><pre><code class="objc">        router?.routeToMovieDetail(shouldFilter: self.isFiltering, index: indexPath.item)</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">18</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="never">
+<td class="num">19</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="missed">
+<td class="num">20</td>
+<td class="src"><pre><code class="objc">    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -&gt; UITableViewCell.EditingStyle {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">21</td>
+<td class="src"><pre><code class="objc">        return .delete</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">22</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="never">
+<td class="num">23</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="missed">
+<td class="num">24</td>
+<td class="src"><pre><code class="objc">    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -&gt; Bool {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">25</td>
+<td class="src"><pre><code class="objc">        return true</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">26</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="never">
+<td class="num">27</td>
+<td class="src"><pre><code class="objc">    </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="missed">
+<td class="num">28</td>
+<td class="src"><pre><code class="objc">    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">29</td>
+<td class="src"><pre><code class="objc">        if editingStyle == .delete {</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">30</td>
+<td class="src"><pre><code class="objc">            interactor?.deleteMovie(at: indexPath.item, filter: self.isFiltering)</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">31</td>
+<td class="src"><pre><code class="objc">            self.displayedMovies.remove(at: indexPath.item)</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">32</td>
+<td class="src"><pre><code class="objc">            tableView.deleteRows(at: [indexPath], with: .automatic)</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">33</td>
+<td class="src"><pre><code class="objc">        }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="missed">
+<td class="num">34</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">!</td>
+</tr>
+<tr class="never">
+<td class="num">35</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

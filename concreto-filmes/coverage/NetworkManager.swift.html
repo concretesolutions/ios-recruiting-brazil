@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "NetworkManager.swift" : </span><span class="cov_medium">78.57%</span>
+<span>Coverage for "NetworkManager.swift" : </span><span class="cov_high">85.71%</span>
 </h2>
-<h4 class="cov_subtitle">(11 of 14 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(12 of 14 relevant lines covered)</h4>
 <h4 class="cov_filepath">concreto-filmes/Networking/Manager/NetworkManager.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -80,37 +80,37 @@
 <tr class="covered">
 <td class="num">14</td>
 <td class="src"><pre><code class="objc">    internal func handleNetworkResponse(_ response: HTTPURLResponse) -&gt; Result&lt;String&gt; {</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">15</td>
 <td class="src"><pre><code class="objc">        switch response.statusCode {</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">16</td>
 <td class="src"><pre><code class="objc">        case 200...299:</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">17</td>
 <td class="src"><pre><code class="objc">            return .success</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">4x</td>
 </tr>
 <tr class="covered">
 <td class="num">18</td>
 <td class="src"><pre><code class="objc">        case 401...500:</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">19</td>
 <td class="src"><pre><code class="objc">            return Result.failure(NetworkResponse.authenticationError.rawValue)</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
 <tr class="covered">
 <td class="num">20</td>
 <td class="src"><pre><code class="objc">        case 501...599:</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="missed">
 <td class="num">21</td>
@@ -120,17 +120,17 @@
 <tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc">        case 600: return Result.failure(NetworkResponse.outdate.rawValue)</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc">        case 1003: return Result.failure(NetworkResponse.requestLimitReached.rawValue)</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">        default:</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="missed">
 <td class="num">25</td>
@@ -140,12 +140,12 @@
 <tr class="covered">
 <td class="num">26</td>
 <td class="src"><pre><code class="objc">        }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">27</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">6x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="never">
 <td class="num">28</td>
