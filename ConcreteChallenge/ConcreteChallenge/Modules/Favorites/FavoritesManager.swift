@@ -49,6 +49,7 @@ class FavoritesManager {
     
     func filter(text: String = "") {
         self.movies = self.movieProvider.filteredLoad(text: text, filter: self.filter ?? Filter())
+        self.movies = self.movies.filter { return $0.isSaved }
         self.interface?.reload()
     }
 }

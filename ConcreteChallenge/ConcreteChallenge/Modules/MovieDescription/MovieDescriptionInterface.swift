@@ -13,9 +13,7 @@ class MovieDescriptionInterface: UIViewController {
     
     @IBOutlet weak var cardContentView: CardContentView!
     @IBOutlet weak var topLabelDescription: UILabel!
-    @IBOutlet weak var bottomLabelDescription: UILabel!
-//
-    @IBOutlet weak var textView: UITextView!
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
@@ -25,11 +23,7 @@ class MovieDescriptionInterface: UIViewController {
         
         self.manager.load()
         
-        self.setup()
-    }
-    
-    func setup() {
-        self.scrollView.delegate = self
+        self.cardContentView.delegate = self
     }
     
     func set(movie: Movie) {
@@ -52,7 +46,7 @@ extension MovieDescriptionInterface: MovieDescriptionInterfaceProtocol {
 
         self.topLabelDescription.text = String(year) + (topLabel.isEmpty ? "" : "- \(topLabel)")
 
-        self.cardContentView.saveButton.alpha = isSaved ? 0.6 : 1
+        self.cardContentView.setSaveButton(isSaved: isSaved)
     }
     
     
@@ -60,15 +54,10 @@ extension MovieDescriptionInterface: MovieDescriptionInterfaceProtocol {
 
 extension MovieDescriptionInterface: CardContentViewDelegate {
     func saveTapped() {
-        self.manager.saveTapped()
+        self.manager.save()
     }
 }
 
-extension MovieDescriptionInterface: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset <= 0 && s
-    }
-}
 
 
 

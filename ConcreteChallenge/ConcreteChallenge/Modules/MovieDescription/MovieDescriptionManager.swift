@@ -34,14 +34,6 @@ class MovieDescriptionManager {
         if let movie = self.movie {
             self.movieProvider.handle(movie: movie)
         }
-
-    }
-    
-    func saveTapped() {
-        if let movie = self.movie {
-            movie.isSaved = !movie.isSaved
-            self.load()
-        }
     }
     
     func set(movie: Movie) {

@@ -32,19 +32,43 @@ protocol CardContentViewDelegate {
     }
 
     private func commonSetup() {
+        self.layer.masksToBounds = true
+        self.clipsToBounds = false
+        self.layer.applySketchShadow(color: .black, alpha: 0.6, x: 0, y: 0, blur: 10, spread: 0)
+        
+        self.cornerRadius = 15
+        
+        
         setFontState(isHighlighted: false)
     }
     
     @IBAction func saveAction(_ sender: Any) {
-        self.saveButton.alpha = self.saveButton.alpha == 1 ? 0.6 : 1
+        if Int(self.saveButton.alpha) == 0 {
+            self.setSaveButton(isSaved: true)
+        } else {
+            self.setSaveButton(isSaved: false)
+        }
+        
         self.delegate?.saveTapped()
     }
     
     func set(movie: Movie) {
         self.imageView.imageForURL(URL(string: Network.manager.imageDomainLow + movie.imageUrl))
         self.movieTitle.text = movie.title
-        self.saveButton.alpha = movie.isSaved ? 0.6 : 1
+        
+        self.setSaveButton(isSaved: movie.isSaved)
+        
         self.saveButton.isExclusiveTouch = true
+    }
+    
+    func setSaveButton(isSaved: Bool) {
+        if isSaved {
+            self.saveButton.tintColor = .green
+            self.saveButton.alpha = 1
+        } else {
+            self.saveButton.tintColor = .gray
+            self.saveButton.alpha = 0.6
+        }
     }
     
     private func loadView()  {
