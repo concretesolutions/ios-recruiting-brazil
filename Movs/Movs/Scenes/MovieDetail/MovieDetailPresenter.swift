@@ -31,4 +31,12 @@ final class MovieDetailPresenter: MVPBasePresenter {
 }
 
 extension MovieDetailPresenter: MovieDetailViewPresenter {
+    
+    func didFavoriteMovie() {
+        
+    }
+    
+    func didUnfavoriteMovie() {
+        
+    }
 }

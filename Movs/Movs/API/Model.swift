@@ -35,16 +35,13 @@ public struct MovieDetail: Codable {
     let id:Int
     let title:String
     let posterPath:String
-//    let releaseDate:Date
+    let releaseDate:String
     let genres:[Genre]
     let overview:String
     var isFavorite:Bool = false
     
     var releaseYear:String {
-//        let calendar = Calendar.current
-//        let year = calendar.dateComponents([.year], from: self.releaseDate).year!
-//        return "\(year)"
-        return "2018"
+        return String(self.releaseDate.prefix(4))
     }
     
     var genreNames:String {
@@ -67,7 +64,7 @@ public struct MovieDetail: Codable {
         case id
         case title
         case posterPath = "poster_path"
-//        case releaseDate = "release_date"
+        case releaseDate = "release_date"
         case genres
         case overview
     }

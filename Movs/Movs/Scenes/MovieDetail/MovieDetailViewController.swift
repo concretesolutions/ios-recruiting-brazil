@@ -9,6 +9,8 @@
 import UIKit
 
 protocol MovieDetailViewPresenter: PresenterProtocol {
+    func didFavoriteMovie()
+    func didUnfavoriteMovie()
 }
 
 final class MovieDetailViewController: MVPBaseViewController {
@@ -39,5 +41,16 @@ extension MovieDetailViewController: MovieDetailPresenterView {
     
     func present(movieDetail: MovieDetail) {
         self.movieDetailView.movieDetail = movieDetail
+    }
+}
+
+extension MovieDetailViewController: MovieDetailViewDelegate {
+    
+    func didFavoriteMovie(at sender: MovieDetailView) {
+        self.presenter?.didFavoriteMovie()
+    }
+    
+    func didUnfavoriteMovie(at sender: MovieDetailView) {
+        self.presenter?.didUnfavoriteMovie()
     }
 }
