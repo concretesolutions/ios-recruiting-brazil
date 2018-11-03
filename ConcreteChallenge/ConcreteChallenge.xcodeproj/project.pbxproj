@@ -29,6 +29,8 @@
 		B7A4A03E218D01470018634D /* MovieDescriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A4A03D218D01470018634D /* MovieDescriptionManager.swift */; };
 		B7A4A04A218D2BFB0018634D /* CardContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A4A048218D2BFB0018634D /* CardContentView.xib */; };
 		B7A4A04B218D2BFB0018634D /* CardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A4A049218D2BFB0018634D /* CardContentView.swift */; };
+		B7AB1B90218E62D900ABFF79 /* Logo-animado-1.gif in Resources */ = {isa = PBXBuildFile; fileRef = B7AB1B8F218E62D900ABFF79 /* Logo-animado-1.gif */; };
+		B7AB1B92218E636400ABFF79 /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AB1B91218E636400ABFF79 /* GifLoader.swift */; };
 		B7B0CE77218A697900670060 /* DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0CE76218A697900670060 /* DismissKeyboard.swift */; };
 		B7B0CE79218B2F1A00670060 /* FilterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0CE78218B2F1A00670060 /* FilterInterface.swift */; };
 		B7B0CE7B218B2F8800670060 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B0CE7A218B2F8800670060 /* Filter.storyboard */; };
@@ -100,6 +102,8 @@
 		B7A4A03D218D01470018634D /* MovieDescriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDescriptionManager.swift; sourceTree = "<group>"; };
 		B7A4A048218D2BFB0018634D /* CardContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardContentView.xib; sourceTree = "<group>"; };
 		B7A4A049218D2BFB0018634D /* CardContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardContentView.swift; sourceTree = "<group>"; };
+		B7AB1B8F218E62D900ABFF79 /* Logo-animado-1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Logo-animado-1.gif"; path = "../../../assets/Logo-animado-1.gif"; sourceTree = "<group>"; };
+		B7AB1B91218E636400ABFF79 /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
 		B7B0CE76218A697900670060 /* DismissKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissKeyboard.swift; sourceTree = "<group>"; };
 		B7B0CE78218B2F1A00670060 /* FilterInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInterface.swift; sourceTree = "<group>"; };
 		B7B0CE7A218B2F8800670060 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 		B79287A22188963800A74567 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B7AB1B91218E636400ABFF79 /* GifLoader.swift */,
 				B7B0CE76218A697900670060 /* DismissKeyboard.swift */,
 				B79287C02188AAEC00A74567 /* XibLoader.swift */,
 				B79287BE2188A9D000A74567 /* UIView+Inspectables.swift */,
@@ -262,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				B7928776218895C100A74567 /* Assets.xcassets */,
+				B7AB1B8F218E62D900ABFF79 /* Logo-animado-1.gif */,
 				B7E43E942189403C00E4056E /* imageError.png */,
 			);
 			path = Assets;
@@ -496,6 +502,7 @@
 				B7E43E98218943C900E4056E /* Favorites.storyboard in Resources */,
 				B79287BB2188A64400A74567 /* MovieCell.xib in Resources */,
 				B7928777218895C100A74567 /* Assets.xcassets in Resources */,
+				B7AB1B90218E62D900ABFF79 /* Logo-animado-1.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +623,7 @@
 				B79287BD2188A7EA00A74567 /* MovieCell.swift in Sources */,
 				B7E43E932189311000E4056E /* PopularMovies.swift in Sources */,
 				B7B0CE88218BD19800670060 /* Filter.swift in Sources */,
+				B7AB1B92218E636400ABFF79 /* GifLoader.swift in Sources */,
 				B7A4A04B218D2BFB0018634D /* CardContentView.swift in Sources */,
 				B7A4A03E218D01470018634D /* MovieDescriptionManager.swift in Sources */,
 				B7B0CE77218A697900670060 /* DismissKeyboard.swift in Sources */,

@@ -15,6 +15,8 @@ class FilterInterface: UIViewController{
     @IBOutlet weak var genrePicker: UIPickerView!
     @IBOutlet weak var filterCollectionView: UICollectionView!
     
+    @IBOutlet weak var gifView: UIImageView!
+    
     var filterOptions : [Any] = []
     
     var startingYear = 1819
@@ -33,6 +35,8 @@ class FilterInterface: UIViewController{
         self.yearPicker.dataSource = self
         self.genrePicker.delegate = self
         self.genrePicker.dataSource = self
+        
+        self.gifView.loadGif(name: "Logo-animado-1")
         
         self.manager.fetchGenres()
         

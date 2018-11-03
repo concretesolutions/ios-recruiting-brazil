@@ -185,6 +185,13 @@
                                     <action selector="removeAll:" destination="Vje-aa-ose" eventType="touchUpInside" id="gVy-r0-Lq1"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qlv-v3-red">
+                                <rect key="frame" x="157" y="35" width="100" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="nPY-Bm-BqP"/>
+                                    <constraint firstAttribute="height" constant="60" id="rkJ-dN-iwZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -202,6 +209,7 @@
                             <constraint firstItem="N4S-8c-jU3" firstAttribute="bottom" secondItem="UHa-gZ-ouW" secondAttribute="bottom" constant="15" id="fAV-BC-Uff"/>
                             <constraint firstItem="Tot-qi-HQi" firstAttribute="centerX" secondItem="h6m-cW-eQU" secondAttribute="centerX" id="fFW-4X-Vtr"/>
                             <constraint firstItem="LmE-Hc-Lhs" firstAttribute="top" secondItem="N4S-8c-jU3" secondAttribute="top" constant="30" id="fv3-pF-429"/>
+                            <constraint firstItem="qlv-v3-red" firstAttribute="top" secondItem="N4S-8c-jU3" secondAttribute="top" constant="15" id="g6k-BR-ojU"/>
                             <constraint firstItem="Tot-qi-HQi" firstAttribute="top" secondItem="h6m-cW-eQU" secondAttribute="bottom" constant="10" id="gfJ-Dy-dQF"/>
                             <constraint firstItem="wTX-Hv-4YQ" firstAttribute="top" secondItem="LmE-Hc-Lhs" secondAttribute="bottom" constant="-1" id="khw-a9-NF4"/>
                             <constraint firstItem="5ca-8j-zs9" firstAttribute="centerX" secondItem="wTX-Hv-4YQ" secondAttribute="centerX" id="n9C-ao-O3D"/>
@@ -210,6 +218,7 @@
                             <constraint firstItem="FGT-pQ-Gr2" firstAttribute="top" secondItem="Tot-qi-HQi" secondAttribute="bottom" constant="20" id="tAH-Gl-jmy"/>
                             <constraint firstItem="bYk-gf-6HZ" firstAttribute="centerX" secondItem="h6m-cW-eQU" secondAttribute="centerX" id="tTD-hN-G1u"/>
                             <constraint firstItem="wTX-Hv-4YQ" firstAttribute="width" secondItem="h6m-cW-eQU" secondAttribute="width" id="vZb-E0-TE2"/>
+                            <constraint firstItem="qlv-v3-red" firstAttribute="centerX" secondItem="IGu-bL-3kf" secondAttribute="centerX" id="ytt-se-z6u"/>
                             <constraint firstItem="N4S-8c-jU3" firstAttribute="trailing" secondItem="h6m-cW-eQU" secondAttribute="trailing" constant="10" id="zTz-Zh-Ip3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N4S-8c-jU3"/>
@@ -217,6 +226,7 @@
                     <connections>
                         <outlet property="filterCollectionView" destination="FGT-pQ-Gr2" id="byf-5v-jNt"/>
                         <outlet property="genrePicker" destination="h6m-cW-eQU" id="05w-tO-A9u"/>
+                        <outlet property="gifView" destination="qlv-v3-red" id="GN8-LW-cBI"/>
                         <outlet property="yearPicker" destination="wTX-Hv-4YQ" id="rNp-h8-n2v"/>
                     </connections>
                 </viewController>
