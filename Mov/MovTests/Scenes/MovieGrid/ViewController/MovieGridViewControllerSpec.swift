@@ -59,7 +59,7 @@ class MovieGridViewControllerSpec: QuickSpec {
                         expect(vc.state).to(equal(expectedState))
                     }
                     
-                    it("should feed data source with viewModels") {
+                    it("should feed view controller with viewModels") {
                         expect(vc.viewModels).to(equal(expectedViewModels))
                     }
                     

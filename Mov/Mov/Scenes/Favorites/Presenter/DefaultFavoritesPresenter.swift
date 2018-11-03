@@ -29,7 +29,7 @@ extension DefaultFavoritesPresenter: FavoritesPresenter {
     }
     
     func presentNoResultsFound(for request: String) {
-        self.viewOutput.displayNoResultsFound(for: request)
+        self.viewOutput.displayNoResults(for: request)
     }
     
     func presentError() {

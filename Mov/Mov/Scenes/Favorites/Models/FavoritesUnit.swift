@@ -21,8 +21,14 @@ struct FavoritesUnit {
         self.overview = overview
     }
     
-    
     init(from movie: Movie) {
         self.init(posterPath: movie.posterPath, title: movie.title, releaseDate: movie.releaseDate, overview: movie.overview)
+    }
+}
+
+extension FavoritesUnit: Equatable {
+    static func == (lhs: FavoritesUnit, rhs: FavoritesUnit) -> Bool {
+        return lhs.title == rhs.title
+            && lhs.posterPath == rhs.posterPath
     }
 }

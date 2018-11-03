@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     
-    private static let title = "Favorites"
+    static let title = "Favorites"
     
     private(set) var viewModels = [FavoritesViewModel]()
     
@@ -31,7 +31,7 @@ class FavoritesViewController: UIViewController {
             switch self.state {
             case .tableView:
                 state = self.tableViewState
-            case .noResult(let request):
+            case .noResults(let request):
                 self.noResultState.searchRequest = request
                 state = self.noResultState
             }
@@ -52,6 +52,17 @@ class FavoritesViewController: UIViewController {
         return FavoritesView(frame: .zero)
     }()
     
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        self.setTabBarOptions()
+        self.state = .tableView
+        self.title = FavoritesViewController.title
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         self.view = BlankView()
         self.setup()
@@ -60,11 +71,6 @@ class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchFavorites()
-    }
-    
-    override func viewDidLoad() {
-        self.setTabBarOptions()
-        self.title = FavoritesViewController.title
     }
 }
 
@@ -95,8 +101,8 @@ extension FavoritesViewController: FavoritesViewOutput {
         self.state = .tableView
     }
     
-    func displayNoResultsFound(for request: String) {
-        self.state = .noResult(request)
+    func displayNoResults(for request: String) {
+        self.state = .noResults(request)
     }
     
     func displayError() {
@@ -127,9 +133,9 @@ extension FavoritesViewController {
 
 // MARK: State management
 extension FavoritesViewController {
-    enum FavoritesState {
+    enum FavoritesState: Equatable {
         case tableView
-        case noResult(String)
+        case noResults(String)
     }
 }
 

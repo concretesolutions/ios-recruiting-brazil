@@ -11,7 +11,7 @@ import Foundation
 final class DefaultFavoritesInteractor {
     let presenter: FavoritesPresenter
     let persistence: FavoritesPersistence
-    var favorites = [Movie]()
+    private(set) var favorites = [Movie]()
     
     init(presenter: FavoritesPresenter, persistence: FavoritesPersistence) {
         self.presenter = presenter

@@ -10,7 +10,7 @@ import Foundation
 
 protocol FavoritesViewOutput: class {
     func display(movies: [FavoritesViewModel])
-    func displayNoResultsFound(for request: String)
+    func displayNoResults(for request: String)
     func displayError()
     
 }

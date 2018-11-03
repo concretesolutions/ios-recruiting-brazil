@@ -9,7 +9,7 @@
 import UIKit
 
 
-struct MovieDetailsViewModel {
+struct MovieDetailsViewModel: Equatable {
     var title: String
     var posterPath: String
     var isFavoriteIcon: UIImage

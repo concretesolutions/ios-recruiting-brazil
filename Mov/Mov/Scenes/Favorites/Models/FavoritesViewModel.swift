@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct FavoritesViewModel {
+struct FavoritesViewModel: Equatable {
     var title: String
     var posterPath: String
     var year: String

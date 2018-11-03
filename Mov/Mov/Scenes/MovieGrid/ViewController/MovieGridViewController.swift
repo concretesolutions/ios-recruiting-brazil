@@ -65,8 +65,8 @@ final class MovieGridViewController: UIViewController {
         }
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init() {
+        super.init(nibName: nil, bundle: nil)
         self.setTabBarOptions()
         self.state = .collection
         self.title = MovieGridViewController.title

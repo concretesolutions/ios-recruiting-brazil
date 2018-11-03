@@ -30,3 +30,10 @@ struct MovieDetailsUnit {
         self.init(title: movie.title, posterPath: movie.posterPath, isFavorite: isFavorite, releaseDate: movie.releaseDate, genres: genres, overview: movie.overview)
     }
 }
+
+extension MovieDetailsUnit: Equatable {
+    static func == (lhs: MovieDetailsUnit, rhs: MovieDetailsUnit) -> Bool {
+        return lhs.title == rhs.title
+            && lhs.posterPath == rhs.posterPath
+    }
+}
