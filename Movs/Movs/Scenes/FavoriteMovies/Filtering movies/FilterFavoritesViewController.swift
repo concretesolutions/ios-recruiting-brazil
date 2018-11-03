@@ -51,7 +51,7 @@ class FilterFavoritesViewController: UIViewController {
     // MARK: - Setup
 
     // Get the years of all movies
-    private func getYearList() -> [String] {
+    func getYearList() -> [String] {
         guard let movies = favorites else { return [] }
         var years = Set<String>()
         // Get the year of the movie based on the the release date
@@ -64,7 +64,7 @@ class FilterFavoritesViewController: UIViewController {
     }
     
     // Get the list of genres for the Favorite Movies
-    private func getGenreList() -> [String] {
+    func getGenreList() -> [String] {
         guard let movies = favorites else { return [] }
         var genres = Set<String>()
         for movie in movies {
@@ -88,7 +88,7 @@ class FilterFavoritesViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     /// Formats the presentation of favorite movies to be of type FavoriteMovie
-    private func getFavoritesFormatted(movies: [MovieDetailed]) -> [FavoriteMoviesModel.FavoriteMovie] {
+    func getFavoritesFormatted(movies: [MovieDetailed]) -> [FavoriteMoviesModel.FavoriteMovie] {
         var formattedMovies = [FavoriteMoviesModel.FavoriteMovie]()
         for element in movies {
             let formattedMovie = FavoriteMoviesModel.FavoriteMovie.init(id: element.id, title: element.title, overview: element.overview, posterPath: URL(string: element.posterPath)!, year: currentlyYear)
