@@ -64,11 +64,11 @@ class MovieCollectionCell: UICollectionViewCell {
     isLiked = DefaultsMovie.shared.contains(id: movie.id)
     title.text = movie.title
     id = movie.id
-    Network.shared.requestImage(imageName: movie.poster_path) { (result) in
+    Network.shared.requestImage(imageName: movie.poster_path ?? "") { (result) in
       switch result {
       case .success(let image):
         self.posterImage.image = image
-        self.originalSizePoster = (image?.size)!
+        self.originalSizePoster =  image?.size ?? CGSize()
       case .failure(let error):
         print("error: \(error.localizedDescription)")
       }

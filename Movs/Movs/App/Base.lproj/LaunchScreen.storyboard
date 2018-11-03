@@ -18,15 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLg-fi-Ivp">
-                                <rect key="frame" x="52" y="209" width="270" height="148"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLg-fi-Ivp">
+                                <rect key="frame" x="104" y="246" width="167.5" height="175"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="175" id="Kfh-P5-5qs"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="NotoNastaliqUrdu" family="Noto Nastaliq Urdu" pointSize="70"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" name="mango"/>
+                        <constraints>
+                            <constraint firstItem="TLg-fi-Ivp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="IEA-o0-Sh7"/>
+                            <constraint firstItem="TLg-fi-Ivp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="uJX-g7-Ncs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

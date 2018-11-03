@@ -10,10 +10,12 @@ import UIKit
 
 class FavoritesViewController: UIViewController, UISearchResultsUpdating {
   
-  private var favoritesMovies = [PopularMovie]()
-  private var filteredMovies = [PopularMovie]()
+  private var favoritesMovies = [Movie]()
+  private var filteredMovies = [Movie]()
   private var ids = DefaultsMovie.shared.getAll()
   private var searchText = ""
+  private var searchReleaseDate = "2018"
+  private var searchReleaseGenres = 0
   private var isFiltering = false
   let searchController = UISearchController(searchResultsController: nil)
   
@@ -88,6 +90,19 @@ class FavoritesViewController: UIViewController, UISearchResultsUpdating {
       }
       return false
     }
+    if !searchReleaseDate.isEmpty {
+      filteredMovies =  filteredMovies.filter { (movie) -> Bool in
+        if movie.release_date.range(of: searchReleaseDate) != nil {
+          return true
+        }
+        return false
+      }
+    }
+    if searchReleaseGenres != 0 {
+      filteredMovies = filteredMovies.filter { (movie) -> Bool in return (movie.genre_ids!.contains(searchReleaseGenres))}
+    }
+    
+    
     if searchText != searchController.searchBar.text! {
       tableView.reloadData()
       if favoritesMovies.isEmpty {
@@ -138,10 +153,12 @@ class FavoritesViewController: UIViewController, UISearchResultsUpdating {
   }
   
   @objc func tapFilterButton() {
-    print("tapped")
+    let controller = FilterTypesViewController()
+    navigationController?.pushViewController(controller, animated: true)
   }
   
   func setupNavigation() {
+    navigationController?.navigationBar.tintColor = .black
     navigationItem.searchController = searchController
     navigationController?.navigationBar.barTintColor = UIColor.mango
     navigationItem.searchController?.searchResultsUpdater = self
@@ -217,9 +234,8 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     let deleteAction = UIContextualAction(style: .destructive, title: "descurtir") { (action, view, completion) in
       DefaultsMovie.shared.deleteId(cell.movie.id)
       self.ids = DefaultsMovie.shared.getAll()
-//      tableView.beginUpdates()
-//      tableView.deleteRows(at: [indexPath], with: .left)
-//      tableView.endUpdates()
+      self.getFavoritesMovies()
+      
     }
     let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
     return configuration
@@ -249,6 +265,7 @@ extension FavoritesViewController {
     case .noData:
       errorStackView.isHidden = false
       errorButton.isHidden = false
+      errorImage.isHidden = true
       errorMessage.text = "Você ainda não curtiu nada?😱 \nVai dar uma boa olhada nos nossos filmes!"
       errorButton.setTitle("ir para a lista", for: .normal)
       errorButton.addTarget(self, action: #selector(setTabBarIndexSelected(index:)), for: .touchUpInside)

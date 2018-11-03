@@ -20,6 +20,17 @@ struct PopularMovie: Codable {
   let vote_count: Int
   let id: Int
   let title: String
+  let poster_path: String?
+  let overview: String
+  let release_date: String
+  var genre_ids: Ints
+  
+}
+
+struct Movie: Codable {
+  let vote_count: Int
+  let id: Int
+  let title: String
   let poster_path: String
   let overview: String
   let release_date: String

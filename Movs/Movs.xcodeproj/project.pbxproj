@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B37AF54F218D2DA500ED2904 /* FilterTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37AF54E218D2DA500ED2904 /* FilterTypesViewController.swift */; };
+		B37AF552218D2E7000ED2904 /* FilterTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37AF551218D2E7000ED2904 /* FilterTypeCell.swift */; };
 		B37B0072218B6F7000F437B8 /* PopularMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37B0071218B6F7000F437B8 /* PopularMovie.swift */; };
 		B37B0074218B6FAA00F437B8 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37B0073218B6FAA00F437B8 /* Enums.swift */; };
 		B37B0076218B713E00F437B8 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B37B0075218B713E00F437B8 /* Colors.xcassets */; };
@@ -23,13 +25,13 @@
 		B3D938142188974900F61678 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D938132188974900F61678 /* TabViewController.swift */; };
 		B3FC041A2188D56400A8A444 /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FC04192188D56400A8A444 /* MovieCollectionCell.swift */; };
 		B3FC041C2188D59100A8A444 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FC041B2188D59100A8A444 /* MovieViewController.swift */; };
-		B3FC042021891E3F00A8A444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FC041F21891E3F00A8A444 /* Main.storyboard */; };
-		B3FC042221891E5000A8A444 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FC042121891E5000A8A444 /* MainViewController.swift */; };
 		B3FC04292189E64800A8A444 /* UIColor+Palete.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FC04282189E64800A8A444 /* UIColor+Palete.swift */; };
 		B3FC042E218A44E500A8A444 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FC042D218A44E500A8A444 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B37AF54E218D2DA500ED2904 /* FilterTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypesViewController.swift; sourceTree = "<group>"; };
+		B37AF551218D2E7000ED2904 /* FilterTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeCell.swift; sourceTree = "<group>"; };
 		B37B0071218B6F7000F437B8 /* PopularMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovie.swift; sourceTree = "<group>"; };
 		B37B0073218B6FAA00F437B8 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		B37B0075218B713E00F437B8 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -48,8 +50,6 @@
 		B3D938132188974900F61678 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		B3FC04192188D56400A8A444 /* MovieCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
 		B3FC041B2188D59100A8A444 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
-		B3FC041F21891E3F00A8A444 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		B3FC042121891E5000A8A444 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3FC04282189E64800A8A444 /* UIColor+Palete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Palete.swift"; sourceTree = "<group>"; };
 		B3FC042D218A44E500A8A444 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B37AF550218D2E3600ED2904 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				B37AF54E218D2DA500ED2904 /* FilterTypesViewController.swift */,
+				B37AF551218D2E7000ED2904 /* FilterTypeCell.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		B37B0077218B993200F437B8 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,8 +175,7 @@
 				B3FC04252189DF6D00A8A444 /* Movies */,
 				B37B007A218BF72400F437B8 /* Favorites */,
 				B37B0088218C6D7500F437B8 /* Details */,
-				B3FC041F21891E3F00A8A444 /* Main.storyboard */,
-				B3FC042121891E5000A8A444 /* MainViewController.swift */,
+				B37AF550218D2E3600ED2904 /* Filter */,
 			);
 			path = Movs;
 			sourceTree = "<group>";
@@ -287,7 +295,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3FC042021891E3F00A8A444 /* Main.storyboard in Resources */,
 				B37B0076218B713E00F437B8 /* Colors.xcassets in Resources */,
 				B3D938082187FA0E00F61678 /* LaunchScreen.storyboard in Resources */,
 				B3D938052187FA0E00F61678 /* Assets.xcassets in Resources */,
@@ -305,14 +312,15 @@
 				B37B007F218C064300F437B8 /* FavoritesCell.swift in Sources */,
 				B37B0072218B6F7000F437B8 /* PopularMovie.swift in Sources */,
 				B3FC041A2188D56400A8A444 /* MovieCollectionCell.swift in Sources */,
+				B37AF54F218D2DA500ED2904 /* FilterTypesViewController.swift in Sources */,
 				B3FC041C2188D59100A8A444 /* MovieViewController.swift in Sources */,
 				B3D938122187FDD200F61678 /* ContainerView.swift in Sources */,
 				B3D938002187FA0C00F61678 /* FavoritesController.swift in Sources */,
 				B37B007D218BF8EE00F437B8 /* setupViewDatasource.swift in Sources */,
 				B37B0079218B995E00F437B8 /* UserDefaults.swift in Sources */,
-				B3FC042221891E5000A8A444 /* MainViewController.swift in Sources */,
 				B3D938142188974900F61678 /* TabViewController.swift in Sources */,
 				B3FC04292189E64800A8A444 /* UIColor+Palete.swift in Sources */,
+				B37AF552218D2E7000ED2904 /* FilterTypeCell.swift in Sources */,
 				B37B0074218B6FAA00F437B8 /* Enums.swift in Sources */,
 				B3D937FE2187FA0C00F61678 /* AppDelegate.swift in Sources */,
 				B37B0087218C6D7100F437B8 /* DetailsViewController.swift in Sources */,

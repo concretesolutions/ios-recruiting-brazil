@@ -11,6 +11,8 @@ import UIKit
 class MovieViewController: UIViewController, UISearchResultsUpdating{
   
   var filteredMovies = [PopularMovie]()
+  private var isLoading = false
+  private var numberOfPage = 0
   private let searchController = UISearchController(searchResultsController: nil)
   private var isFiltering = false
   private var searchTextAux = ""
@@ -105,9 +107,11 @@ class MovieViewController: UIViewController, UISearchResultsUpdating{
   }
   
   func getMovies() {
+    isLoading = true
     self.loadIndicator.startAnimating()
     self.loadIndicator.isHidden = false
     Network.shared.requestPopularMovies { (result) in
+      self.isLoading = false
       self.loadIndicator.stopAnimating()
       self.loadIndicator.isHidden = true
       switch result {
@@ -115,6 +119,7 @@ class MovieViewController: UIViewController, UISearchResultsUpdating{
         print("error: \(error.localizedDescription)")
         self.getError(error: .unexpected)
       case .success(let page):
+        self.numberOfPage += 1
         self.popularMovies = (page?.results)!
         self.collectionView.reloadData()
         self.getError(error: .noError)
@@ -122,8 +127,45 @@ class MovieViewController: UIViewController, UISearchResultsUpdating{
     }
   }
   
+  func paginationMovies() {
+    if isLoading {
+      return
+    }
+    isLoading = true
+    self.loadIndicator.startAnimating()
+    self.loadIndicator.isHidden = false
+    Network.shared.requestPopularMovies(numberOfPage: numberOfPage) { (result) in
+      self.isLoading = false
+      self.loadIndicator.stopAnimating()
+      self.loadIndicator.isHidden = true
+      switch result {
+      case .failure(let error):
+        print("error: \(error.localizedDescription)")
+      case .success(let page):
+        self.numberOfPage += 1
+        self.insertMovies(movies: (page?.results)!)
+       // self.popularMovies += (page?.results)!
+        self.collectionView.reloadData()
+        self.getError(error: .noError)
+      }
+    }
+    
+  }
+  
+  func insertMovies(movies: [PopularMovie]) {
+    self.collectionView.performBatchUpdates({
+      for movie in movies {
+        let indexPath = IndexPath(row: popularMovies.count, section: 0)
+        popularMovies.append(movie)
+        collectionView.insertItems(at: [indexPath])
+      }
+    }, completion: nil)
+  }
+
+  
   private func setupNavigation() {
     searchController.searchBar.placeholder = "Pesquisa"
+    navigationController?.navigationBar.tintColor = .black
     navigationItem.searchController = searchController
     navigationController?.navigationBar.barTintColor = UIColor.mango
     navigationItem.searchController?.searchResultsUpdater = self
@@ -207,12 +249,18 @@ extension MovieViewController: UICollectionViewDataSource, UICollectionViewDeleg
     let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionCell
     detailsController.originalSizePoster = cell.originalSizePoster
     detailsController.movie = cell.movie
-    detailsController.poster = cell.posterImage.image!
+    detailsController.poster = cell.posterImage.image ?? #imageLiteral(resourceName: "placeholder.png")
     navigationController?.pushViewController(detailsController, animated: true)
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     navigationItem.searchController?.searchBar.endEditing(true)
+    let  height = scrollView.frame.size.height
+    let contentYoffset = scrollView.contentOffset.y
+    let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+    if distanceFromBottom < height {
+      paginationMovies()
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {

@@ -29,7 +29,7 @@ class DetailsViewController: UIViewController {
     imageview.image = poster
     imageview.layer.borderColor = UIColor.black.withAlphaComponent(0.6).cgColor
     imageview.layer.borderWidth = 0.5
-    let size = imageview.getImageRatioBasedOnSize(originalSizePoster)
+    let size = originalSizePoster == .zero ? poster.size : imageview.getImageRatioBasedOnSize(originalSizePoster)
     imageview.translatesAutoresizingMaskIntoConstraints = false
     imageview.heightAnchor.constraint(equalToConstant: size.height).isActive = true
     imageview.widthAnchor.constraint(equalToConstant: size.width).isActive = true
@@ -83,6 +83,8 @@ class DetailsViewController: UIViewController {
     likeButton.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -15).isActive = true
     likeButton.bottomAnchor.constraint(lessThanOrEqualTo: cell.bottomAnchor).isActive = true
     likeButton.widthAnchor.constraint(equalToConstant: (likeButton.image(for: .normal)?.size.height)!).isActive = true
+    likeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    likeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     return cell
   }()
   
@@ -110,7 +112,7 @@ class DetailsViewController: UIViewController {
     Network.shared.requestGenres { (result) in
       switch result {
       case .success(let resultGenres):
-        for genreId in self.movie.genre_ids! {
+        for genreId in self.movie.genre_ids {
           _ = resultGenres?.genres.contains(where: { (genre) -> Bool in
             if genre.id == genreId {
               text.append("\(genre.name), ")

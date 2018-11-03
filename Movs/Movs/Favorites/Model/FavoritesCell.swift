@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritesCell: UITableViewCell {
   
-  var movie: PopularMovie!
+  var movie: Movie!
   
   var posterImage: UIImageView = {
     let imageView = UIImageView()
@@ -55,12 +55,12 @@ class FavoritesCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func configureCell(movie: PopularMovie) {
+  func configureCell(movie: Movie) {
     self.movie = movie
     self.title.text = movie.title
     self.date.text = "\(self.getDate(stringDate: (movie.release_date)).year!)"
     self.overview.text = movie.overview.isEmpty ? "sem descrição*" : movie.overview
-    Network.shared.requestImage(imageName: movie.poster_path) { (result) in
+    Network.shared.requestImage(imageName: movie.poster_path ) { (result) in
       switch result {
       case .success(let image):
         self.posterImage.image = image
