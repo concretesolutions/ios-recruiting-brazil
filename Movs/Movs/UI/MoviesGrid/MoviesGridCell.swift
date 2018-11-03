@@ -59,6 +59,7 @@ extension MoviesGridCell: ReusableViewCode {
     
     func design() {
         self.backgroundColor = Colors.darkBlue.color
+        self.clipsToBounds = true
         self.movieImageView = UIImageView()
         self.movieTitleLabel = UILabel()
         self.favoriteButton = FavoriteButton()
@@ -74,7 +75,7 @@ extension MoviesGridCell: ReusableViewCode {
         // movie title
         self.movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5.0).isActive = true
-        self.movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 5.0).isActive = true
+        self.movieTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5.0).isActive = true
         self.movieTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15).isActive = true
         self.movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5.0).isActive = true
         // movie is favorite indicator
