@@ -160,7 +160,6 @@ class FilterTableViewController: UITableViewController {
   
 }
 
-
 /////////////////////////////////////////
 //
 // MARK: Picker view delegate and data source
