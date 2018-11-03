@@ -92,6 +92,7 @@ final class MovieGridViewController: UIViewController {
     func incrementPage() {
         guard let _ = self.interactor else { return }
         self.page += 1
+        self.movieGridView.activityIndicator.startAnimating()
         self.fetchMovies()
     }
     
