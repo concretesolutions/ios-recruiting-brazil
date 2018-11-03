@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0vf-8N-Dy3">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Filter View Controller-->
+        <scene sceneID="FOd-cz-nGd">
+            <objects>
+                <viewController storyboardIdentifier="FilterViewController" id="0vf-8N-Dy3" customClass="FilterViewController" customModule="MyMovie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5qS-ng-KIJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w7g-sf-7CN">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellFilter" textLabel="3Sk-OY-xfo" style="IBUITableViewCellStyleDefault" id="sj0-eU-72e" customClass="FilterTableViewCell" customModule="MyMovie" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sj0-eU-72e" id="TgD-fr-HAX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Sk-OY-xfo">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="filter" destination="3Sk-OY-xfo" id="WH3-Eb-QAK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="w7g-sf-7CN" firstAttribute="top" secondItem="lP4-Yz-hLT" secondAttribute="top" id="F8r-BC-hmK"/>
+                            <constraint firstItem="w7g-sf-7CN" firstAttribute="leading" secondItem="lP4-Yz-hLT" secondAttribute="leading" id="wcN-eW-luM"/>
+                            <constraint firstItem="lP4-Yz-hLT" firstAttribute="trailing" secondItem="w7g-sf-7CN" secondAttribute="trailing" id="x90-po-P1m"/>
+                            <constraint firstItem="lP4-Yz-hLT" firstAttribute="bottom" secondItem="w7g-sf-7CN" secondAttribute="bottom" id="xhX-ph-9WX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lP4-Yz-hLT"/>
+                    </view>
+                    <connections>
+                        <outlet property="myTableView" destination="w7g-sf-7CN" id="tg6-He-6Vn"/>
+                        <segue destination="Fwv-do-JUB" kind="show" identifier="filterGenre" id="NfG-qY-ONh"/>
+                        <segue destination="Y73-Dy-cJt" kind="show" identifier="filterDate" id="20F-Ej-ssj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4yS-IF-mdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-182" y="181"/>
+        </scene>
+        <!--FilterGenreStoryboard-->
+        <scene sceneID="6gj-vc-JbL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FilterGenreStoryboard" id="Fwv-do-JUB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqj-aM-oUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="500" y="-7"/>
+        </scene>
+        <!--FilterDateStoryboard-->
+        <scene sceneID="OzN-z6-PrM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FilterDateStoryboard" id="Y73-Dy-cJt" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k6a-mI-auX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="500" y="272"/>
+        </scene>
+    </scenes>
+</document>
