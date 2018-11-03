@@ -22,7 +22,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Presenter that manages the SearchBar, JsonLoader and CollectionView
+        //Manager for the the SearchBar, JsonLoader and CollectionView
         if let type = searchType{
             
             searchManager = SearchDataManager(type: type)
@@ -100,9 +100,9 @@ class SearchViewController: UIViewController {
     
 }
 
-extension SearchViewController: SearchPresenterDelegate, SearchPresenterDataSource{
+extension SearchViewController: SearchDataManagerDelegate, SearchDataManagerDataSource{
     
-    //MARK:- SearchPresenterDelegate
+    //MARK:- SearchDataManagerDelegate
     func shouldRealoadData() {
         DispatchQueue.main.async {
             self.mediaCollectionView.reloadData()
@@ -121,7 +121,7 @@ extension SearchViewController: SearchPresenterDelegate, SearchPresenterDataSour
         }
     }
     
-    //MARK:- SearchPresenterDataSource
+    //MARK:- SearchDataManagerDataSource
     func getViewSize() -> CGSize {
         return view.frame.size
     }

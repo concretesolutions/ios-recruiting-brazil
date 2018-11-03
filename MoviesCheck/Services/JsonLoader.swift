@@ -20,7 +20,7 @@ class JsonLoader: NSObject {
     var delegate :JsonLoaderDelegate?
     fileprivate let apiKey = "1bc55c5473e9c54bba20ab9213165879" //This api key have limited data requests of 40 requests every 10 seconds
     
-    func searchRequest(withText text:String, type:ScreenType){
+    func searchRequest(withText text:String, type:ScreenType, page:Int){
         
         var searchTypeParameter:String
         
@@ -30,7 +30,7 @@ class JsonLoader: NSObject {
             searchTypeParameter = "tv";
         }
         
-        var urlString = "https://api.themoviedb.org/3/search/\(searchTypeParameter)?api_key=\(apiKey)&language=en-US&query=\(text)&include_adult=false&page=1"
+        var urlString = "https://api.themoviedb.org/3/search/\(searchTypeParameter)?api_key=\(apiKey)&language=en-US&query=\(text)&include_adult=false&page=\(page)"
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         
         guard let url = URL(string: urlString) else{

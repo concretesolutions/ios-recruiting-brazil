@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bVA-LP-6pX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bVA-LP-6pX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="HindMadurai-Light.ttf">
             <string>HindMadurai-Light</string>
+        </array>
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
         </array>
     </customFonts>
     <scenes>
@@ -96,14 +99,14 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="feedbackMessage" id="XNi-KY-40Y">
-                                        <rect key="frame" x="0.0" y="265" width="375" height="288"/>
+                                        <rect key="frame" x="0.0" y="265" width="375" height="159"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" editable="NO" text="Message here" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeK-D6-lVy">
-                                                    <rect key="frame" x="32.5" y="116.5" width="310" height="55"/>
+                                                    <rect key="frame" x="32.5" y="52" width="310" height="55"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="310" id="PGE-2Z-wgs"/>
@@ -119,7 +122,29 @@
                                             <constraint firstItem="VeK-D6-lVy" firstAttribute="centerX" secondItem="XNi-KY-40Y" secondAttribute="centerX" id="0y3-kW-AKI"/>
                                             <constraint firstItem="VeK-D6-lVy" firstAttribute="centerY" secondItem="XNi-KY-40Y" secondAttribute="centerY" id="NYB-S2-7vJ"/>
                                         </constraints>
-                                        <size key="customSize" width="375" height="288"/>
+                                        <size key="customSize" width="375" height="159"/>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="loadingCell" id="flD-q2-GWH">
+                                        <rect key="frame" x="0.0" y="434" width="375" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="O5b-3i-Dy4">
+                                                    <rect key="frame" x="169" y="46.5" width="37" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="37" id="6eY-7v-SAh"/>
+                                                        <constraint firstAttribute="height" constant="37" id="eKD-nB-RGc"/>
+                                                    </constraints>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="O5b-3i-Dy4" firstAttribute="centerX" secondItem="flD-q2-GWH" secondAttribute="centerX" id="J9v-Hi-dqk"/>
+                                            <constraint firstItem="O5b-3i-Dy4" firstAttribute="centerY" secondItem="flD-q2-GWH" secondAttribute="centerY" id="bma-bW-Dsd"/>
+                                        </constraints>
+                                        <size key="customSize" width="375" height="130"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -141,6 +166,7 @@
                         <outlet property="loadingView" destination="7q1-jE-IFp" id="7Nd-mo-6sq"/>
                         <outlet property="mediaCollectionView" destination="VJH-rc-ZJL" id="FrS-Y7-Q1u"/>
                         <outlet property="searchBar" destination="DNB-gD-T8d" id="bgG-n2-hGG"/>
+                        <segue destination="N1E-rg-eqF" kind="show" id="DAB-eu-ZaL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3i-4Y-rPS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -166,10 +192,58 @@
             </objects>
             <point key="canvasLocation" x="2418.4000000000001" y="-631.0344827586207"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="w7J-5m-XKx">
+            <objects>
+                <viewController id="N1E-rg-eqF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9pe-hr-fem">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQj-4d-R7g">
+                                <rect key="frame" x="16" y="80" width="128" height="191"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie or TV Show Title Here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdR-3C-jNW">
+                                <rect key="frame" x="152" y="80" width="207" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rating: 0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXv-Gn-hda">
+                                <rect key="frame" x="152" y="136" width="194" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="17"/>
+                                <color key="textColor" red="0.95686274509803915" green="0.4539983868598938" blue="0.072085969150066376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="genero1, genero2, genero3, genero4" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xI2-Ki-TQ2">
+                                <rect key="frame" x="152" y="228" width="207" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Genre:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBh-DF-rBa">
+                                <rect key="frame" x="152" y="168" width="45" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HindMadurai-Light" family="Hind Madurai" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.11862701922655106" green="0.11864549666643143" blue="0.11861640959978104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="sNb-rI-02R"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k5g-hR-5M9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3100" y="-631.0344827586207"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ce2-g2-ESM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XdU-ba-uAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="searchNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bVA-LP-6pX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kik-EA-J4X">
@@ -185,6 +259,7 @@
                         <segue destination="fSG-G8-SsI" kind="relationship" relationship="rootViewController" id="xRn-7i-Cya"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XdU-ba-uAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1688" y="-630"/>
         </scene>

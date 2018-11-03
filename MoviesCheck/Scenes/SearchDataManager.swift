@@ -8,20 +8,20 @@
 
 import UIKit
 
-protocol SearchPresenterDelegate {
+protocol SearchDataManagerDelegate {
     func shouldRealoadData()
     func displayLoadingIndicator()
     func hideLoadingIndicator()
 }
 
-protocol SearchPresenterDataSource {
+protocol SearchDataManagerDataSource {
     func getViewSize()->CGSize
 }
 
 class SearchDataManager:NSObject{
     
-    var delegate:SearchPresenterDelegate?
-    var dataSource:SearchPresenterDataSource?
+    var delegate:SearchDataManagerDelegate?
+    var dataSource:SearchDataManagerDataSource?
     
     //Webservice loader
     let jsonLoader:JsonLoader
@@ -34,6 +34,12 @@ class SearchDataManager:NSObject{
     var firstSearchExecuted:Bool
     
     let searchType:ScreenType
+    
+    var waitingWebServiceResponse = false
+    var currentPage = 0
+    var totalPages = 0
+    
+    var lastSearchedText = "";
     
     init(type:ScreenType){
         
@@ -49,6 +55,19 @@ class SearchDataManager:NSObject{
         
     }
     
+    //Load more data to the CollectionView if available in webserver
+    func paginateData(){
+        
+        waitingWebServiceResponse = true
+        
+        //Load next page, if there is subsequent pages
+        if(currentPage < totalPages){
+            let nextPage = currentPage + 1
+            jsonLoader.searchRequest(withText: lastSearchedText, type: searchType, page: nextPage)
+        }
+        
+    }
+    
 }
 
 //MARK:- UISearchBarDelegate
@@ -57,11 +76,23 @@ extension SearchDataManager: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if let textToSearch = searchBar.text{
-            //Execute search
-            jsonLoader.searchRequest(withText: textToSearch, type: searchType)
+            
+            if(textToSearch == ""){
+                return
+            }
+            
+            //Reset previous media items
+            mediaItems = []
+            
             //Hide keyboard
             searchBar.resignFirstResponder()
             delegate?.displayLoadingIndicator()
+            
+            //Execute search - bring the first page from webservice
+            jsonLoader.searchRequest(withText: textToSearch, type: searchType, page: 1)
+            
+            lastSearchedText = textToSearch
+            
         }
         
     }
@@ -71,9 +102,15 @@ extension SearchDataManager: UISearchBarDelegate{
 //MARK:- JsonLoaderDelegate
 extension SearchDataManager: JsonLoaderDelegate{
     
+    /**
+     Finished loading movies, start display or pagination of media items
+     */
     func loaderCompleted(withMovies result: MovieSearchResult) {
         
-        mediaItems = result.items
+        currentPage = result.page
+        totalPages = result.totalPages
+        
+        mediaItems.append(contentsOf: result.items)
         sucessfulResponse = true
         
         if(!firstSearchExecuted){
@@ -82,12 +119,20 @@ extension SearchDataManager: JsonLoaderDelegate{
         
         delegate?.hideLoadingIndicator()
         delegate?.shouldRealoadData()
+        
+        waitingWebServiceResponse = false
         
     }
     
+    /**
+     Finished loading tv shows, start display or pagination of media items
+     */
     func loaderCompleted(withTvShows result: TvShowSearchResult) {
         
-        mediaItems = result.items
+        currentPage = result.page
+        totalPages = result.totalPages
+        
+        mediaItems.append(contentsOf: result.items)
         sucessfulResponse = true
         
         if(!firstSearchExecuted){
@@ -96,6 +141,8 @@ extension SearchDataManager: JsonLoaderDelegate{
         
         delegate?.hideLoadingIndicator()
         delegate?.shouldRealoadData()
+        
+        waitingWebServiceResponse = false
         
     }
     
@@ -117,7 +164,7 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         
         if let screenSize = dataSource?.getViewSize(){
             
-            if mediaItems.count > 0{
+            if mediaItems.count > 0 && indexPath.row < mediaItems.count{
                 
                 if(UI_USER_INTERFACE_IDIOM() == .pad){//iPad only cell distribution
                     return CGSize(width: (screenSize.width - (cellSpacing * 4)) / 4, height: 255)
@@ -141,7 +188,14 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         
         //Display informative cell when there is no media items to display
         if mediaItems.count > 0{
-            return mediaItems.count
+            
+            //Add loading cell if aditional pages is available
+            if(currentPage < totalPages){
+                return mediaItems.count + 1
+            }else{
+                return mediaItems.count
+            }
+            
         }else{
             return 1
         }
@@ -152,7 +206,8 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         
         var cell:UICollectionViewCell
         
-        if mediaItems.count > 0{
+        //Display media item cells when the current row is in the mediaitems count range
+        if mediaItems.count > 0 && indexPath.row < mediaItems.count{
             
             let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: "mediaItem", for: indexPath) as! MediaCollectionViewCell
             
@@ -164,18 +219,27 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
             
         }else{
             
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedbackMessage", for: indexPath)
-            
-            let messageTextView = cell.viewWithTag(1) as! UITextView
-            
-            if(!sucessfulResponse && firstSearchExecuted){
-                messageTextView.text = "The title was not found, please try again."
+            if(currentPage < totalPages && indexPath.row == mediaItems.count){
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "loadingCell", for: indexPath)
+                
             }else{
-                if(searchType == .movies){
-                    messageTextView.text = "Use the search bar above to find the Movie you want to bookmark."
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedbackMessage", for: indexPath)
+                
+                let messageTextView = cell.viewWithTag(1) as! UITextView
+                
+                //Feedback messages
+                if(!sucessfulResponse && firstSearchExecuted){
+                    messageTextView.text = "The title was not found, please try again."
                 }else{
-                    messageTextView.text = "Use the search bar above to find the TV Show you want to bookmark."
+                    if(searchType == .movies){
+                        messageTextView.text = "Use the search bar above to find the Movie you want to bookmark."
+                    }else{
+                        messageTextView.text = "Use the search bar above to find the TV Show you want to bookmark."
+                    }
                 }
+                
             }
             
         }
@@ -183,5 +247,14 @@ extension SearchDataManager:UICollectionViewDelegate, UICollectionViewDataSource
         return cell
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if(indexPath.row == mediaItems.count - 1 && !waitingWebServiceResponse){
+            paginateData()
+        }
+        
+    }
+    
     
 }

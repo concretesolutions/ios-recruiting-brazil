@@ -9,9 +9,14 @@ MoviesCheck is an iOS app designed for iPhones and iPads built using the Clean S
 # Features ..
 
 ---
-- Feature 1;
-- Feature 3;
-- Feature 2.
+- Custom Fonts;
+- Usage of visual language to create constraints;
+- Usage of vary for traits constraints;
+- Asynchronous image loading;
+- Asynchronous Image caching using iOS native FileManager (Without use of external framework);
+- Database management using Realm (The only external framework used in this project);
+- Usage of UISplitViewController;
+- Designed to be used with iPhone and iPad, with differential design for each type of device;
 
 # App Previews
 
