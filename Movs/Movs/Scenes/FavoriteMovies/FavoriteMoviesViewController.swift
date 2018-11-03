@@ -61,10 +61,6 @@ extension FavoriteMoviesViewController: FavoriteMoviesPresenterView {
     func setupOnce() {
         self.title = "Favorites"
         self.favoriteMoviesView = FavoriteMoviesView()
-//        self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: nil)
-//        self.navigationItem.hidesSearchBarWhenScrolling = false
-//        self.navigationItem.largeTitleDisplayMode = .automatic
-//        self.definesPresentationContext = true
     }
     
     func setupWhenAppear() {
@@ -84,6 +80,7 @@ extension FavoriteMoviesViewController: FavoriteMoviesPresenterView {
     }
     
     func presentEmpty() {
+        self.hideFilterBarButtonItem()
         self.favoriteMoviesView.state = .empty
     }
     
