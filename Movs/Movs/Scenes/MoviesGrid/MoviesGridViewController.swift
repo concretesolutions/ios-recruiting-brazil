@@ -9,6 +9,9 @@
 import UIKit
 
 protocol MoviesGridViewPresenter: PresenterProtocol {
+    func didSelectItem(at row:Int)
+    func didFavoriteItem(at row:Int)
+    func didUnfavoriteItem(at row:Int)
     func loadMoreMovies()
     func searchBarDidBeginEditing()
     func searchBarDidPressCancelButton()
@@ -37,35 +40,22 @@ final class MoviesGridViewController: MVPBaseViewController {
     }
 }
 
-extension MoviesGridViewController: MoviesGridViewDelegate {
-    
-    func moviesGrid(_ sender: MoviesGridView, didSelectItemAt indexPath: IndexPath) {
-        print("select:\(indexPath.row)")
-    }
-    
-    func moviesGrid(_ sender: MoviesGridView, didFavoriteItemAt indexPath: IndexPath) {
-        print("favorite:\(indexPath.row)")
-    }
-    
-    func moviesGrid(_ sender: MoviesGridView, didUnfavoriteItemAt indexPath: IndexPath) {
-        print("unfavorite:\(indexPath.row)")
-    }
-    
-    func moviewGrid(_ sender: MoviesGridView, didDisplayedCellAtLast indexPath: IndexPath) {
-        self.presenter?.loadMoreMovies()
-    }
-}
-
 extension MoviesGridViewController: MoviesGridPresenterView {
     
     func setupOnce() {
         self.title = "Movies"
+        
         self.moviesGrid = MoviesGridView(frame: self.view.bounds)
         self.navigationItem.searchController = MovsNavigationSearchController(searchResultsController: self.searchResultsViewController)
         self.navigationItem.searchController?.searchResultsUpdater = self
         self.navigationItem.searchController?.delegate = self
         self.navigationItem.searchController?.searchBar.delegate = self
         self.navigationItem.largeTitleDisplayMode = .automatic
+        
+        self.searchResultsViewController.didSelectorRowAt = { [unowned self] indexPath in
+            self.presenter?.didSelectItem(at: indexPath.row)
+        }
+        
         self.definesPresentationContext = true
     }
     
@@ -94,6 +84,25 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     
     func presentEmptySearch() {
         self.moviesGrid.state = .emptySearch
+    }
+}
+
+extension MoviesGridViewController: MoviesGridViewDelegate {
+    
+    func moviesGrid(_ sender: MoviesGridView, didSelectItemAt indexPath: IndexPath) {
+        self.presenter?.didSelectItem(at: indexPath.row)
+    }
+    
+    func moviesGrid(_ sender: MoviesGridView, didFavoriteItemAt indexPath: IndexPath) {
+        self.presenter?.didFavoriteItem(at: indexPath.row)
+    }
+    
+    func moviesGrid(_ sender: MoviesGridView, didUnfavoriteItemAt indexPath: IndexPath) {
+        self.presenter?.didUnfavoriteItem(at: indexPath.row)
+    }
+    
+    func moviewGrid(_ sender: MoviesGridView, didDisplayedCellAtLast indexPath: IndexPath) {
+        self.presenter?.loadMoreMovies()
     }
 }
 

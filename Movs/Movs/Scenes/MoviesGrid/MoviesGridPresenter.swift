@@ -70,6 +70,19 @@ final class MoviesGridPresenter: MVPBasePresenter {
 
 extension MoviesGridPresenter: MoviesGridViewPresenter {
     
+    func didSelectItem(at row: Int) {
+        self.coordinator?.data = self.movies[row]
+        self.coordinator?.next()
+    }
+    
+    func didFavoriteItem(at row: Int) {
+        
+    }
+    
+    func didUnfavoriteItem(at row: Int) {
+        
+    }
+    
     func loadMoreMovies() {
         self.operation.performFromNextPage()
     }

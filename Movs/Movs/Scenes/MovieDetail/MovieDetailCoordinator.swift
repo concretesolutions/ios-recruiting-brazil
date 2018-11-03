@@ -10,6 +10,7 @@ import UIKit
 
 final class MovieDetailCoordinator: Coordinator {
     
+    var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
     func start() {

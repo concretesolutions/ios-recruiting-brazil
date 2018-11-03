@@ -11,6 +11,12 @@ import UIKit
 typealias OnCoordinatorStarted = (UIViewController) -> Void
 
 protocol Coordinator: AnyObject {
+    var data:Any? { get set }
     var onCoordinatorStarted:OnCoordinatorStarted? { get set }
     func start()
+    func next()
+}
+
+extension Coordinator {
+    func next() {}
 }

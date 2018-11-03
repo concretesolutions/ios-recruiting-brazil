@@ -10,6 +10,7 @@ import UIKit
 
 final class FilterCoordinator: Coordinator {
     
+    var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
     func start() {

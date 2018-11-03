@@ -12,6 +12,7 @@ final class AppCoordinator: Coordinator {
     
     let tabBarController = MovsTabBarController()
     
+    var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
     func start() {

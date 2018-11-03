@@ -9,8 +9,8 @@
 import UIKit
 
 protocol MovieDetailViewDelegate: AnyObject {
-    func favoriteMovie(at sender:MovieDetailView)
-    func unfavoriteMovie(at sender:MovieDetailView)
+    func didFavoriteMovie(at sender:MovieDetailView)
+    func didUnfavoriteMovie(at sender:MovieDetailView)
 }
 
 final class MovieDetailView: UIView {
@@ -53,8 +53,8 @@ final class MovieDetailView: UIView {
         
         label.text = text
         
-        button.onFavorite = { _ in self.delegate?.favoriteMovie(at: self) }
-        button.onUnfavorite = { _ in self.delegate?.unfavoriteMovie(at: self) }
+        button.onFavorite = { [unowned self] _ in self.delegate?.didFavoriteMovie(at: self) }
+        button.onUnfavorite = { [unowned self] _ in self.delegate?.didUnfavoriteMovie(at: self) }
         button.isSelected = buttoSelected
         
         // layout

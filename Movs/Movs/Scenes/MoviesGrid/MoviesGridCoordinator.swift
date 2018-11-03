@@ -10,11 +10,17 @@ import UIKit
 
 final class MoviesGridCoordinator: Coordinator {
     
+    var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
     func start() {
         let vc = MoviesGridViewController()
         vc.presenter = MoviesGridPresenter(view: vc, coordinator: self)
         self.onCoordinatorStarted?(vc)
+    }
+    
+    func next() {
+        guard let movie = self.data as? Movie else { return }
+        let coordinator = MovieDetailCoordinator()
     }
 }
