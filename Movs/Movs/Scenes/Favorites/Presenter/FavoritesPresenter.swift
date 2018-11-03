@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol FavoritesPresentationLogic {
-    func present(response: Favorites.Response)
-}
-
 class FavoritesPresenter: FavoritesPresentationLogic {
     weak var viewController: FavoritesDisplayLogic!
     

@@ -12,6 +12,7 @@ extension FavoritesViewController: CodeView {
     func buildViewHierarchy() {
         view.addSubview(searchBar)
         view.addSubview(tableView)
+        view.insertSubview(removeFilterButton, belowSubview: searchBar)
     }
     
     func setupConstraints() {
@@ -21,8 +22,14 @@ extension FavoritesViewController: CodeView {
             make.height.equalTo(45)
         }
         
-        tableView.snp.makeConstraints { (make) in
+        removeFilterButton.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
             make.top.equalTo(searchBar.snp.bottom)
+            make.height.equalTo(0)
+        }
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(removeFilterButton.snp.bottom)
             make.left.bottom.right.equalToSuperview()
         }
     }

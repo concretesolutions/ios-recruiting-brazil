@@ -84,6 +84,7 @@ extension FavoritesTableViewCell: CodeView {
     
     func setupAdditionalConfiguration() {
         backgroundColor = UIColor.Movs.lightGray
+        selectionStyle = .none
     }
 }
 

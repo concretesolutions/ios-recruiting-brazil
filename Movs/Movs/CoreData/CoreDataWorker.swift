@@ -101,4 +101,42 @@ class CoreDataWorker: CoreDataWorkingLogic {
         
         return false
     }
+    
+    func fetchMoviesFiltered(by year: String) -> [Movie] {
+        let movies = fetchFavoriteMovies()
+        var result: [Movie] = []
+        movies.forEach { (movie) in
+            if movie.releaseDate == year {
+                print(movie.title)
+                result.append(movie)
+            }
+        }
+        return result
+    }
+    
+    func fetchFiltered(by genre: String) -> [Movie] {
+        let movies = fetchFavoriteMovies()
+        var result: [Movie] = []
+        movies.forEach { (movie) in
+            if movie.genreIds.contains(Int(genre)!) {
+                print(movie.title)
+                result.append(movie)
+            }
+        }
+        return result
+    }
+    
+    func fetchMoviesFiltered(by year: String, by genre: String) -> [Movie] {
+        let movies = fetchFavoriteMovies()
+        var result: [Movie] = []
+        movies.forEach { (movie) in
+            if movie.releaseDate == year &&
+               movie.genreIds.contains(Int(genre)!) {
+                print(movie.title)
+                result.append(movie)
+            }
+        }
+        return result
+    }
+    
 }

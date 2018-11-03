@@ -8,12 +8,6 @@
 
 import Foundation
 
-protocol FavoritesBussinessLogic {
-    func fetchFavoritesMovies(request: Favorites.Request)
-    func filterMovies(request: Favorites.Request.Movie)
-    func unfavoriteMovie(at index: Int)
-}
-
 class FavoritesInteractor: FavoritesBussinessLogic {
     var presenter: FavoritesPresentationLogic!
     var favoritesWorker: FavoritesWorkingLogic!
@@ -32,7 +26,12 @@ class FavoritesInteractor: FavoritesBussinessLogic {
         presentMovies(movies: result)
     }
     
-    func filterMovies(request: Favorites.Request.Movie) {
+    func prepareFilteredMovies(request: Favorites.Request.Filtered) {
+        self.movies = request.movies
+        presentMovies(movies: request.movies)
+    }
+    
+    func filterMovies(request: Favorites.Request.RequestMovie) {
         if request.title == "" {
             presentMovies(movies: movies)
             return
@@ -51,10 +50,10 @@ class FavoritesInteractor: FavoritesBussinessLogic {
     }
     
     func presentMovies(movies: [Movie]) {
-        let movies = movies.map { (movie) -> Favorites.Movie in
+        let movies = movies.map { (movie) -> Favorites.FavoritesMovie in
             let imageView = favoritesWorker.fetchPoster(posterPath: movie.posterPath)
             
-            return Favorites.Movie(title: movie.title, year: movie.releaseDate,
+            return Favorites.FavoritesMovie(title: movie.title, year: movie.releaseDate,
                                    overview: movie.overview, imageView: imageView)
         }
         let response = Favorites.Response(movies: movies)

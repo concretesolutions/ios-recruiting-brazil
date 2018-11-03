@@ -42,7 +42,6 @@ extension MovieDetailTableView: CodeView {
         addSubview(titleCell)
         addSubview(yearCell)
         addSubview(genreCell)
-//        addSubview(descriptionCell)
     }
     
     func setupConstraints() {}

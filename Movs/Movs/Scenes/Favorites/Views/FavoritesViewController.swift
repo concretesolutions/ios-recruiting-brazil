@@ -17,7 +17,10 @@ class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     var interactor: FavoritesBussinessLogic!
     var router: FavoritesRoutingLogic!
     
-    var movies: [Favorites.Movie] = []
+    var movies: [Favorites.FavoritesMovie] = []
+    var isApplyingFilters = false
+    var dateFilter: Filters.Option.Selected?
+    var genreFilter: Filters.Option.Selected?
     
     lazy var searchBar: SearchBar = {
         let view = SearchBar(frame: .zero)
@@ -29,6 +32,16 @@ class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
         let view = UITableView(frame: .zero)
         view.register(FavoritesTableViewCell.self,
                       forCellReuseIdentifier: "Cell")
+        return view
+    }()
+    
+    lazy var removeFilterButton: UIButton = {
+        let view = UIButton(frame: .zero)
+        view.setTitle("Remove Filter", for: .normal)
+        view.setTitleColor(UIColor.Movs.yellow, for: .normal)
+        view.backgroundColor = UIColor.Movs.darkGray
+        view.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        view.addTarget(self, action: #selector(removeFilters), for: .touchUpInside)
         return view
     }()
     
@@ -70,7 +83,9 @@ class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchMovies()
+        if !isApplyingFilters {
+            fetchMovies()
+        }
     }
     
     func fetchMovies() {
@@ -79,12 +94,40 @@ class FavoritesViewController: UIViewController, FavoritesDisplayLogic {
     }
     
     func filterMovies(named: String) {
-        let request = Favorites.Request.Movie(title: named)
+        let request = Favorites.Request.RequestMovie(title: named)
         interactor.filterMovies(request: request)
     }
     
     @objc func showFilters() {
         router.showFilters()
+    }
+    
+    func applyFilters(movies: [Movie]) {
+        let request = Favorites.Request.Filtered(movies: movies)
+        isApplyingFilters = true
+        updateRemoveFilterLayout()
+        interactor.prepareFilteredMovies(request: request)
+    }
+    
+    func activeFilters(date: Filters.Option.Selected?,
+                       genre: Filters.Option.Selected?) {
+        dateFilter = date
+        genreFilter = genre
+    }
+    
+    func updateRemoveFilterLayout() {
+        let height = isApplyingFilters ? 45 : 0
+        removeFilterButton.snp.updateConstraints { (make) in
+            make.height.equalTo(height)
+        }
+    }
+    
+    @objc func removeFilters() {
+        isApplyingFilters = false
+        updateRemoveFilterLayout()
+        fetchMovies()
+        dateFilter = nil
+        genreFilter = nil
     }
     
     func displayFavorites(viewModel: Favorites.ViewModel) {

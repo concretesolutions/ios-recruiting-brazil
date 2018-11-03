@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol FavoritesWorkingLogic {
-    func fetchPoster(posterPath: String) -> UIImageView
-}
-
 class FavoritesWorker: FavoritesWorkingLogic {
     func fetchPoster(posterPath: String) -> UIImageView {
         let imageView = UIImageView(frame: .zero)

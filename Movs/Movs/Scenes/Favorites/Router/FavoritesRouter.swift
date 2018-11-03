@@ -8,16 +8,15 @@
 
 import Foundation
 
-protocol FavoritesRoutingLogic {
-    func showFilters()
-}
-
 class FavoritesRouter: FavoritesRoutingLogic {
     weak var viewController: FavoritesViewController!
     
     func showFilters() {
-        print("Showing filters")
-//        let filterViewControlelr = UIViewController()
-//        viewController.show(filterViewControlelr, sender: self)
+        let filtersViewController = FiltersViewController()
+        filtersViewController.dateFilter = viewController.dateFilter
+        filtersViewController.genreFilter = viewController.genreFilter
+        filtersViewController.activeFilters = viewController.activeFilters
+        filtersViewController.filterApply = viewController.applyFilters
+        viewController.show(filtersViewController, sender: nil)
     }
 }

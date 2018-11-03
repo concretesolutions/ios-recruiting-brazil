@@ -27,12 +27,13 @@ class MovieDetailWorker: MovieDetailWorkingLogic {
                     completion(movie, imageView, nil)
                 } catch let error {
                     print(error.localizedDescription)
+                    completion(nil, nil, error)
                 }
-                
             case .failure(let error):
                 print(error.errorDescription!)
                 completion(nil, nil, error)
             }
         }
     }
+    
 }

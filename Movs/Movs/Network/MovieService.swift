@@ -11,6 +11,7 @@ import Moya
 enum MovieService {
     case listPopular(page: Int)
     case movieDetails(id: Int)
+    case listGenres
     
     static let key = "34b05e648999ed77dffdc0ce65741ccc"
     static let baseImageURL = "https://image.tmdb.org/t/p/w500"
@@ -27,12 +28,14 @@ extension MovieService: TargetType {
             return "/movie/popular"
         case .movieDetails(let id):
             return "/movie/\(id)"
+        case .listGenres:
+            return "/genre/movie/list"
         }
     }
     
     var method: Method {
         switch self {
-        case .listPopular, .movieDetails:
+        case .listPopular, .movieDetails, .listGenres:
             return .get
         }
     }
@@ -45,7 +48,7 @@ extension MovieService: TargetType {
         switch self {
         case .listPopular(let page):
             return .requestParameters(parameters: ["api_key" : MovieService.key, "page" : page], encoding: URLEncoding.queryString)
-        case .movieDetails:
+        case .movieDetails, .listGenres:
             return .requestParameters(parameters: ["api_key" : MovieService.key], encoding: URLEncoding.queryString)
         }
     }

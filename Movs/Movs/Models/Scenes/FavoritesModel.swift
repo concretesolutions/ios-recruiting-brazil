@@ -10,20 +10,24 @@ import UIKit
 
 enum Favorites {
     struct Request {
-        struct Movie {
+        struct RequestMovie {
             var title: String
+        }
+        
+        struct Filtered {
+            var movies: [Movie]
         }
     }
     
     struct Response {
-        var movies: [Favorites.Movie]
+        var movies: [Favorites.FavoritesMovie]
     }
     
     struct ViewModel {
-        var movies: [Favorites.Movie]
+        var movies: [Favorites.FavoritesMovie]
     }
     
-    struct Movie {
+    struct FavoritesMovie {
         var title: String
         var year: String
         var overview: String

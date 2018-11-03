@@ -13,10 +13,7 @@ class MovieListInteractorStub: MovieListBussinessLogic {
     var presenter: MovieListPresentationLogic!
     
     func fetchMovies(request: MovieList.Request.Page) {
-//        let response = MovieList.Response(movies: [], error: "")
-//        let movie = MovieList.Response.FetchResponse(title: "Thor", posterURL: <#T##String#>, isFavorite: <#T##Bool#>)
-//        response.movies
-//        presenter.presentMovies(response: )
+        
     }
     
     func filterMovies(request: MovieList.Request.Movie) {

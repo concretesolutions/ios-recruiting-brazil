@@ -20,7 +20,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
     }()
     
     lazy var tableView: MovieDetailTableView = {
-        let view = MovieDetailTableView(frame: .zero, style: .grouped)
+        let view = MovieDetailTableView(frame: .zero, style: .plain)
         view.titleCell.button.addTarget(self, action: #selector(pressedFavorite), for: .touchUpInside)
         return view
     }()
