@@ -84,8 +84,8 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
         return label
     }()
 
-    private let leftBarButton: UIBarButtonItem = {
-        let btn = UIBarButtonItem()
+    private lazy var leftBarButton: UIBarButtonItem = {
+        let btn = UIBarButtonItem(image: #imageLiteral(resourceName: "MOV"), style: .done, target: self, action: #selector(leftBarButtonItemAction))
         btn.image = #imageLiteral(resourceName: "MOV")
         btn.tintColor = .black
         return btn
@@ -163,6 +163,10 @@ class MainScreenViewController: UICollectionViewController, MainScreenDisplayLog
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.searchBar.endEditing(true)
+    }
+    
+    @objc func leftBarButtonItemAction() {
+        self.collectionView.scrollRectToVisible(CGRect(origin: .zero, size: collectionView.frame.size), animated: true)
     }
 
     // MARK: - Scroll View
