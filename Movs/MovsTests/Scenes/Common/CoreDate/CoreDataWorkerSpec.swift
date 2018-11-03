@@ -40,7 +40,7 @@ class CoreDataWorkerSpec: QuickSpec {
                                       posterPath: "", overview: "",
                                       releaseDate: "2018-11-01", title: "")
                     let filter = "2018"
-                    worker.create(movie: movie)
+                    worker.save(movie: movie)
                     let movies = worker.fetchFilteredYear(filter)
                     worker.delete(movie: movie)
                     expect(movies.count).to(beGreaterThan(0))
@@ -51,7 +51,7 @@ class CoreDataWorkerSpec: QuickSpec {
                                       posterPath: "", overview: "",
                                       releaseDate: "yyyy-", title: "")
                     let filter = "1"
-                    worker.create(movie: movie)
+                    worker.save(movie: movie)
                     let movies = worker.fetchFilteredGenre(filter)
                     worker.delete(movie: movie)
                     expect(movies.count).to(beGreaterThan(0))
@@ -63,7 +63,7 @@ class CoreDataWorkerSpec: QuickSpec {
                                       releaseDate: "2018-11-01", title: "")
                     let year = "2018"
                     let genre = "1"
-                    worker.create(movie: movie)
+                    worker.save(movie: movie)
                     let movies = worker.fetchMoviesFiltered(by: year, by: genre)
                     worker.delete(movie: movie)
                     expect(movies.count).to(beGreaterThan(0))

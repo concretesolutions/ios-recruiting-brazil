@@ -9,5 +9,11 @@
 import Foundation
 
 protocol MovieDetailPresentationLogic {
+    /**
+     Present movie details.
+     
+     - parameters:
+         - response: Response of the movie details requested.
+     */
     func present(response: MovieDetail.Response)
 }

@@ -19,7 +19,7 @@ class MovieListErrorState: State {
     
     override func didEnter(from previousState: State?) {
         if let error = viewController.viewError {
-            viewController.errorView.error(viewError: error)
+            viewController.errorView.setError(viewError: error)
             viewController.collectionView.isHidden = true
             viewController.errorView.isHidden = false
         }

@@ -26,6 +26,14 @@ struct Movie: Decodable {
         case title
     }
     
+    /**
+     Convert a NSManagedObject to a Movie object.
+     
+     - parameters:
+         - managedObject: Object that stores a movie.
+     
+     - Returns: movie : [Movie]
+     */
     static func movie(from managedObject: NSManagedObject) -> Movie {
         var movie = Movie(id: 0, genreIds: [], posterPath: "", overview: "", releaseDate: "", title: "")
         movie.id = managedObject.value(forKey: "id") as! Int

@@ -31,6 +31,8 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         return view
     }()
     
+    // MARK: - Init
+    
     init(movie: Movie) {
         super.init(nibName: nil, bundle: nil)
         self.movie = movie
@@ -42,6 +44,11 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         setup()
     }
     
+    // MARK: - Setup Methods
+    
+    /**
+     Setup the entire scene.
+     */
     private func setup() {
         let viewController = self
         let interactor = MovieDetailInteractor()
@@ -52,6 +59,9 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         setupViewController()
     }
     
+    /**
+     Setup view controller data.
+     */
     private func setupViewController() {
         let view = UIView(frame: .zero)
         self.view = view
@@ -60,6 +70,11 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         fetchMovie()
     }
     
+    // MARK: - Movie Details
+    
+    /**
+     Fecth movie details.
+     */
     private func fetchMovie() {
         if let movie = movie {
            let request = MovieDetail.Request(movie: movie)
@@ -76,6 +91,14 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
         textView.text = viewModel.overview
     }
     
+    // MARK: - Favorite Movie
+    
+    /**
+     When favorite button is pressed.
+     
+     - parameters:
+         - sender: Button that was pressed.
+     */
     @objc func pressedFavorite(sender: UIButton) {
         if let movie = movie {
             interactor.favorite(movie: movie)

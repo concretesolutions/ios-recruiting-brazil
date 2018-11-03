@@ -9,6 +9,9 @@
 import Foundation
 
 extension Array where Element: Equatable {
+    /**
+     Remove any duplicate elements.
+     */
     mutating func removeDuplicates() {
         var result = [Element]()
         for value in self {

@@ -9,5 +9,6 @@
 import Foundation
 
 protocol FiltersDataStore {
+    /// Type of filter
     var type: Filters.FiltersType? { get set }
 }

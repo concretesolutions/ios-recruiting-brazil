@@ -17,7 +17,7 @@ class CoreDataWorker: CoreDataWorkingLogic {
         managedContext = appDelegate.persistentContainer.viewContext
     }
     
-    func create(movie: Movie) {
+    func save(movie: Movie) {
         guard let managedContext = managedContext else { return }
         let entity = NSEntityDescription.entity(forEntityName: "MovieEntity", in: managedContext)!
         let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
@@ -83,7 +83,7 @@ class CoreDataWorker: CoreDataWorkingLogic {
         if isFavorite(id: movie.id) {
             delete(movie: movie)
         } else {
-            create(movie: movie)
+            save(movie: movie)
         }
     }
     
@@ -101,7 +101,7 @@ class CoreDataWorker: CoreDataWorkingLogic {
         
         return false
     }
-    
+
     func fetchFilteredYear(_ filter: String) -> [Movie] {
         let movies = fetchFavoriteMovies()
         var result: [Movie] = []

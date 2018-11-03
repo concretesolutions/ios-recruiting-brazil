@@ -40,7 +40,7 @@ class MovieListErrorViewSpec: QuickSpec {
                 context("handle error of type error") {
                     beforeEach {
                         let viewError = MovieListErrorView.ViewError(movieTitle: "", errorType: .error)
-                        view.error(viewError: viewError)
+                        view.setError(viewError: viewError)
                     }
                     
                     it("should have error message") {
@@ -57,7 +57,7 @@ class MovieListErrorViewSpec: QuickSpec {
                     
                     beforeEach {
                         let viewError = MovieListErrorView.ViewError(movieTitle: title, errorType: .notFind)
-                        view.error(viewError: viewError)
+                        view.setError(viewError: viewError)
                     }
                     
                     it("should have error message") {

@@ -9,7 +9,27 @@
 import Foundation
 
 protocol MovieListDisplayLogic: class {
+    /**
+     Display movies.
+     
+     - parameters:
+         - viewModel: Data to be displayed.
+     */
     func displayMovies(viewModel: MovieList.ViewModel.Success)
+    
+    /**
+     Display error view.
+     
+     - parameters:
+         - viewModel: Data of error to be displayed.
+     */
     func displayError(viewModel: MovieList.ViewModel.Error)
+    
+    /**
+     Display not find view.
+     
+     - parameters:
+         - viewModel: Data of error to be displayed.
+     */
     func displayNotFind(viewModel: MovieList.ViewModel.Error)
 }

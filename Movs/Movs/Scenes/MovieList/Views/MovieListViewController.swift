@@ -14,8 +14,11 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
     var interactor: MovieListBussinessLogic!
     var router: MovieListRoutingLogic!
     
+    /// Page of movies to request.
     var page = 1
+    /// Data to display.
     var data: MovieList.ViewModel.Success = MovieList.ViewModel.Success(movies: [])
+    /// Error of view.
     var viewError: MovieListErrorView.ViewError?
     var stateMachine: StateMachine!
     
@@ -40,6 +43,8 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         return view
     }()
     
+    // MARK: - Init
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -50,11 +55,18 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         setup()
     }
     
+    // MARK: - ViewController Cycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchMovies()
     }
     
+    // MARK: - Setup Methods
+    
+    /**
+     Setup the entire scene.
+     */
     private func setup() {
         let viewController = self
         let interactor = MovieListInteractor()
@@ -69,6 +81,9 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         setupViewController()
     }
     
+    /**
+     Setup view controller data.
+     */
     private func setupViewController() {
         let view = UIView(frame: .zero)
         self.view = view
@@ -79,15 +94,25 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         _ = stateMachine.enter(MovieListDisplayState.self)
     }
     
+    // MARK: - Fetch Methods
+    
+    /**
+     Fetch movies to display.
+     */
     private func fetchMovies() {
         _ = stateMachine.enter(MovieListLoadingState.self)
         interactor.fetchMovies(request: MovieList.Request.Page(page: page))
     }
     
+    /**
+     Fetch more movies to display.
+     */
     func fetchMoreMovies() {
         page += 1
         fetchMovies()
     }
+    
+    // MARK: - Display Logic
     
     func displayMovies(viewModel: MovieList.ViewModel.Success) {
         data = viewModel
@@ -105,12 +130,28 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic {
         _ = stateMachine.enter(MovieListErrorState.self)
     }
     
+    // MARK: - Filter Methods
+    
+    /**
+     Filter movies by name.
+     
+     - parameters:
+         - named: Name of the movie to filter.
+     */
     func filterMovies(named: String) {
         _ = stateMachine.enter(MovieListLoadingState.self)
         let request = MovieList.Request.Movie(title: named)
         interactor.filterMovies(request: request)
     }
     
+    // MARK: - Favorite Methods
+    
+    /**
+     When favorite button is pressed.
+     
+     - parameters:
+         - sender: Button that was pressed.
+     */
     func pressedFavorite(sender: UIButton) {
         let position = sender.convert(CGPoint.zero, to: collectionView.coordinateSpace)
         let indexPath = collectionView.indexPathForItem(at: position)

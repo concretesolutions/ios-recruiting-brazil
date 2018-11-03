@@ -10,6 +10,7 @@ import UIKit
 
 class SearchBar: UISearchBar {
     
+    /// Handles all text change.
     var textChanged: ((String) -> ())?
     
     override init(frame: CGRect = .zero) {
@@ -29,9 +30,9 @@ extension SearchBar: CodeView {
     func setupConstraints() {}
     
     func setupAdditionalConfiguration() {
-        barTintColor = UIColor.Movs.yellow
+        barTintColor = UIColor.Movs.lightYellow
         layer.borderWidth = 1
-        layer.borderColor = UIColor.Movs.yellow.cgColor
+        layer.borderColor = UIColor.Movs.lightYellow.cgColor
         placeholder = "Search"
         delegate = self
         

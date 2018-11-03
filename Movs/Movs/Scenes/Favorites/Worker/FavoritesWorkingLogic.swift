@@ -9,5 +9,13 @@
 import UIKit
 
 protocol FavoritesWorkingLogic {
+    /**
+     Fetch movie poster.
+     
+     - parameters:
+         - posterPath: Path to the poster.
+     
+     - Returns: posterImageView : UIImageView
+     */
     func fetchPoster(posterPath: String) -> UIImageView
 }

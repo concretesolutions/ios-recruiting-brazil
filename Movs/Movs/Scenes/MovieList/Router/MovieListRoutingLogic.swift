@@ -9,5 +9,8 @@
 import Foundation
 
 protocol MovieListRoutingLogic {
+    /**
+     Show MovieDetail sscene.
+     */
     func showMovieDetail()
 }

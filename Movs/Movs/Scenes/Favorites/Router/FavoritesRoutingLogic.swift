@@ -9,5 +9,8 @@
 import Foundation
 
 protocol FavoritesRoutingLogic {
+    /**
+     Show filters scene.
+     */
     func showFilters()
 }

@@ -9,5 +9,11 @@
 import Foundation
 
 protocol FiltersPresentationLogic {
+    /**
+     Present the filters requested.
+     
+     - parameters:
+         - response: Response of the filters requested.
+     */
     func present(response: Filters.Response)
 }

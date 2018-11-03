@@ -9,5 +9,11 @@
 import Foundation
 
 protocol FavoritesPresentationLogic {
+    /**
+     Present movies requested.
+     
+     - parameters:
+         - response: Resposne of the movies requested.
+     */
     func present(response: Favorites.Response)
 }

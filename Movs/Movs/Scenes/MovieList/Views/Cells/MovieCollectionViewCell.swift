@@ -21,7 +21,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         view.text = "Title"
         view.numberOfLines = 0
         view.font = UIFont.systemFont(ofSize: 20)
-        view.textColor = UIColor.Movs.yellow
+        view.textColor = UIColor.Movs.lightYellow
         view.textAlignment = .center
         return view
     }()
@@ -33,7 +33,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    /// Send button when pressed.
     var didPressButton: ((UIButton) -> ())?
+    
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +49,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
         setupView()
     }
     
+    // MARK: Setup Methods
+    
+    /**
+     Set movie to the cell.
+     
+     - parameters:
+         - movie: Movie that will be displayed in cell.
+     */
     func set(movie: MovieList.ViewModel.Movie) {
         let posterUrl = URL(string: movie.posterURL)
         guard let url = posterUrl else { return }
@@ -53,6 +65,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
         favoriteButton.setImage(UIImage(named: movie.favoriteImageName), for: .normal)
     }
     
+    // MARK: Actions
+    
+    /**
+     When favorite button is pressed.
+     
+     - parameters:
+         - sender: Button that was pressed.
+     */
     @objc func pressedFavorite(sender: UIButton) {
         didPressButton?(favoriteButton)
     }

@@ -14,7 +14,7 @@ class FiltersTableView: UITableView {
         let view = FiltersTableViewCell(frame: .zero)
         view.accessoryType = .disclosureIndicator
         view.detailTextLabel?.text = ""
-        view.detailTextLabel?.textColor = UIColor.Movs.yellow
+        view.detailTextLabel?.textColor = UIColor.Movs.lightYellow
         view.textLabel?.text = "Date"
         return view
     }()
@@ -23,7 +23,7 @@ class FiltersTableView: UITableView {
         let view = FiltersTableViewCell(frame: .zero)
         view.accessoryType = .disclosureIndicator
         view.detailTextLabel?.text = ""
-        view.detailTextLabel?.textColor = UIColor.Movs.yellow
+        view.detailTextLabel?.textColor = UIColor.Movs.lightYellow
         view.textLabel?.text = "Genres"
         return view
     }()

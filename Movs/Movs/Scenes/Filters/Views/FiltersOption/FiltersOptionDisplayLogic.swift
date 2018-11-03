@@ -9,5 +9,11 @@
 import Foundation
 
 protocol FiltersOptionDisplayLogic: class {
+    /**
+     Display the filters on screen.
+     
+     - parameters:
+         - viewModel: Data to be displayed.
+     */
     func displayFilters(viewModel: Filters.Option.ViewModel)
 }

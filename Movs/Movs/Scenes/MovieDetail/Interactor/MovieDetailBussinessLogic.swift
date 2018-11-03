@@ -9,6 +9,19 @@
 import Foundation
 
 protocol MovieDetailBussinessLogic {
+    /**
+     Fetch the details of a movie requested.
+     
+     - parameters:
+         - request: Movie requested.
+     */
     func fetchMovie(request: MovieDetail.Request)
+    
+    /**
+     Favorite movie. If is already favorite, unfavorite.
+     
+     - parameters:
+         - movie: Movie to be favorite.
+     */
     func favorite(movie: Movie)
 }

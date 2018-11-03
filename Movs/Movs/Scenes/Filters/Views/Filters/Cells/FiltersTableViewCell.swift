@@ -42,6 +42,6 @@ extension FiltersTableViewCell: CodeView {
     func setupAdditionalConfiguration() {
         accessoryType = .disclosureIndicator
         filter.text = ""
-        filter.textColor = UIColor.Movs.yellow
+        filter.textColor = UIColor.Movs.lightYellow
     }
 }

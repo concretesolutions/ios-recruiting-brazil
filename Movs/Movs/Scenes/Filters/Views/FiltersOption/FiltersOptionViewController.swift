@@ -10,13 +10,17 @@ import UIKit
 
 class FiltersOptionViewController: UIViewController, FiltersOptionDisplayLogic {
     
+    /// Type of the filters to display.
     var filterType: Filters.FiltersType?
+    /// Filters to be displayed.
     var filters: [String] = []
     
     var dateFilter: Filters.Option.Selected?
     var genreFilter: Filters.Option.Selected?
     
+    /// Index of the selected filter.
     var selectIndex: Int?
+    /// Send selected filter.
     var filterSelected: ((Filters.Option.Selected) -> ())?
     
     var interactor: FiltersOptionBussinessLogic!
@@ -30,6 +34,8 @@ class FiltersOptionViewController: UIViewController, FiltersOptionDisplayLogic {
         return view
     }()
     
+    // MARK: - Init
+    
     init(filter: Filters.FiltersType) {
         filterType = filter
         super.init(nibName: nil, bundle: nil)
@@ -40,6 +46,11 @@ class FiltersOptionViewController: UIViewController, FiltersOptionDisplayLogic {
         super.init(coder: aDecoder)
     }
     
+    // MARK: - Setup Methods
+    
+    /**
+     Setup the entire scene.
+     */
     private func setup() {
         let viewController = self
         let interactor = FiltersOptionInteractor()
@@ -50,10 +61,15 @@ class FiltersOptionViewController: UIViewController, FiltersOptionDisplayLogic {
         setupViewController()
     }
     
+    /**
+     Setup view controller data.
+     */
     private func setupViewController() {
         title = filterType!.description
         setupView()
     }
+    
+    // MARK: - ViewController Cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,11 +79,19 @@ class FiltersOptionViewController: UIViewController, FiltersOptionDisplayLogic {
         }
     }
     
+    // MARK: - Filters Methods
+    
     func displayFilters(viewModel: Filters.Option.ViewModel) {
         filters = viewModel.filters
         tableView.reloadData()
     }
     
+    /**
+     When select a filter in a cell.
+     
+     - parameters:
+         - index: Index of the cell selected.
+     */
     func didSelectCell(at index: Int) {
         if let selectIndex = selectIndex {
             let cell = tableView.cellForRow(at: IndexPath(row: selectIndex, section: 0))

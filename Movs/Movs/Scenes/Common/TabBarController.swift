@@ -28,7 +28,7 @@ extension TabBarController: CodeView {
     func setupConstraints() {}
     
     func setupAdditionalConfiguration() {
-        tabBar.barTintColor = UIColor.Movs.yellow
+        tabBar.barTintColor = UIColor.Movs.lightYellow
         tabBar.tintColor = .black
         tabBar.isTranslucent = false
     }

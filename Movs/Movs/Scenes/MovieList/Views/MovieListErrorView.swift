@@ -35,6 +35,8 @@ class MovieListErrorView: UIView {
         return view
     }()
     
+    // MARK: - Init
+    
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupView()
@@ -45,7 +47,15 @@ class MovieListErrorView: UIView {
         setupView()
     }
     
-    func error(viewError: ViewError) {
+    // MARK: - Setup Methods
+    
+    /**
+     Set error to view error type.
+     
+     - parameters:
+         - viewError: Error that occurred.
+     */
+    func setError(viewError: ViewError) {
         switch viewError.errorType {
         case .error:
             errorImage.image = UIImage(named: Constants.ImageName.error)

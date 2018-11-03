@@ -9,5 +9,11 @@
 import Foundation
 
 protocol FiltersOptionWorkingLogic {
+    /**
+     Fetch all genres of movies.
+     
+     - parameters:
+         - completion: Action to be made after complete fetch.
+     */
     func fetchGenres(completion: @escaping (GenreList?, Error?) -> ())
 }

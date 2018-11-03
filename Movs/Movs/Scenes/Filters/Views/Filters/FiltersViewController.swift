@@ -10,7 +10,9 @@ import UIKit
 
 class FiltersViewController: UIViewController, FiltersDisplayLogic {
     
+    /// Apply the filter to the movies.
     var filterApply: (([Movie]) -> ())?
+    /// Send the active filters.
     var activeFilters: ((Filters.Option.Selected?,
                          Filters.Option.Selected?) -> ())?
     
@@ -32,10 +34,12 @@ class FiltersViewController: UIViewController, FiltersDisplayLogic {
         view.setTitleColor(.black, for: .normal)
         view.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         view.layer.cornerRadius = 5
-        view.backgroundColor = UIColor.Movs.yellow
+        view.backgroundColor = UIColor.Movs.lightYellow
         view.addTarget(self, action: #selector(pressedApply), for: .touchUpInside)
         return view
     }()
+    
+    // MARK: - Init
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -47,6 +51,11 @@ class FiltersViewController: UIViewController, FiltersDisplayLogic {
         setup()
     }
     
+    // MARK: - Setup Methods
+    
+    /**
+     Setup the entire scene.
+     */
     private func setup() {
         let viewController = self
         let interactor = FiltersInteractor()
@@ -61,6 +70,9 @@ class FiltersViewController: UIViewController, FiltersDisplayLogic {
         setupViewController()
     }
     
+    /**
+     Setup view controller data.
+     */
     private func setupViewController() {
         let view = UIView(frame: .zero)
         self.view = view
@@ -68,12 +80,22 @@ class FiltersViewController: UIViewController, FiltersDisplayLogic {
         setupView()
     }
     
+    // MARK: - ViewController Cycle
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.date.filter.text = dateFilter?.filterName
         tableView.genre.filter.text = genreFilter?.filterName
     }
     
+    // MARK: - Filters Methods
+    
+    /**
+     Filter a movie by selected filters.
+     
+     - parameters:
+         - selected: Filter selected.
+     */
     func filter(selected: Filters.Option.Selected) {
         if selected.type == .date {
             dateFilter = selected
@@ -85,6 +107,12 @@ class FiltersViewController: UIViewController, FiltersDisplayLogic {
         tableView.reloadData()
     }
     
+    /**
+     When button is pressed apply filters.
+     
+     - parameters:
+         - sender: Button pressed.
+     */
     @objc func pressedApply(sender: UIButton) {
         let request = Filters.Request.Filters(dateFilter: dateFilter?.filterPredicate,
                                               genreFilter: genreFilter?.filterPredicate)

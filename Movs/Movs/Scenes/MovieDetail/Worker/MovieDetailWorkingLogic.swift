@@ -9,5 +9,12 @@
 import UIKit
 
 protocol MovieDetailWorkingLogic {
+    /**
+     Fetch movie details.
+     
+     - parameters:
+         - movie: Movie to request details.
+         - completion: Action to be made after fetch is completed.
+     */
     func fetch(movie: Movie, completion: @escaping (MovieDetailed?, UIImageView?, Error?) -> ())
 }

@@ -9,11 +9,16 @@
 import Moya
 
 enum MovieService {
+    /// List popular movies by page
     case listPopular(page: Int)
+    /// Details of a movie by id
     case movieDetails(id: Int)
+    /// List all genres of movies
     case listGenres
     
+    /// Key to access the api.
     static let key = "34b05e648999ed77dffdc0ce65741ccc"
+    /// Base URL to fetch images.
     static let baseImageURL = "https://image.tmdb.org/t/p/w500"
 }
 

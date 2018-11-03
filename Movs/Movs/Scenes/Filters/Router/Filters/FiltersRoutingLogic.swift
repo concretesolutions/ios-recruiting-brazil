@@ -9,5 +9,8 @@
 import Foundation
 
 protocol FiltersRoutingLogic {
+    /**
+     Show the filters option scene.
+     */
     func showFiltersOption()
 }

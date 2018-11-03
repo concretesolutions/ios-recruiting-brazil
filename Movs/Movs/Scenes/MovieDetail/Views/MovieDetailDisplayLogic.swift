@@ -9,5 +9,11 @@
 import Foundation
 
 protocol MovieDetailDisplayLogic: class {
+    /**
+     Display movie details.
+     
+     - parameters:
+         - viewModel: Data of the movie to be displayed.
+     */
     func display(viewModel: MovieDetail.ViewModel)
 }

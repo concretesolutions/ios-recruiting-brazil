@@ -33,7 +33,7 @@ extension NavigationController: CodeView {
     func setupConstraints() {}
     
     func setupAdditionalConfiguration() {
-        navigationBar.barTintColor = UIColor.Movs.yellow
+        navigationBar.barTintColor = UIColor.Movs.lightYellow
         navigationBar.tintColor = .black
     }
     
