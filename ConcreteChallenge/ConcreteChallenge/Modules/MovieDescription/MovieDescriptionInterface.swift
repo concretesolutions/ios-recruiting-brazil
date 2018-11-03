@@ -26,6 +26,11 @@ class MovieDescriptionInterface: UIViewController {
         self.cardContentView.delegate = self
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.manager.load()
+    }
+    
     func set(movie: Movie) {
         self.manager.set(movie: movie)
     }

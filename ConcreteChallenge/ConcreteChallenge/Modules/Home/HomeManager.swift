@@ -88,11 +88,8 @@ class HomeManager {
     }
     
     func movieFor(index: Int) -> Movie {
-        
         return self.movies[index % self.movies.count]
     }
-    
-    
     
     func filter(movie: Movie) -> Bool {
         if !self.filterText.isEmpty {
