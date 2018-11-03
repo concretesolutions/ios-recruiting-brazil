@@ -10,6 +10,7 @@ import UIKit
 
 final class FilterCoordinator: Coordinator {
     
+    var childs: [Coordinator] = []
     var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     

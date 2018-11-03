@@ -17,6 +17,7 @@ final class FavoriteMoviesCell: UITableViewCell {
             self.cellContentStack.axis = .vertical
             self.cellContentStack.alignment = .fill
             self.cellContentStack.distribution = .fill
+            self.cellContentStack.spacing = 5.0
             self.addSubview(self.cellContentStack)
         }
     }
@@ -26,6 +27,7 @@ final class FavoriteMoviesCell: UITableViewCell {
             self.cellHeaderStack.axis = .horizontal
             self.cellHeaderStack.alignment = .fill
             self.cellHeaderStack.distribution = .fill
+            self.cellHeaderStack.spacing = 5.0
         }
     }
     

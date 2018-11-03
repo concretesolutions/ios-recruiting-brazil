@@ -9,6 +9,8 @@
 import UIKit
 
 protocol FavoriteMoviesViewPresenter: PresenterProtocol {
+    func didSelectItem(at row:Int)
+    func didUnfavoriteItem(at row:Int)
 }
 
 final class FavoriteMoviesViewController: MVPBaseViewController {
@@ -16,6 +18,7 @@ final class FavoriteMoviesViewController: MVPBaseViewController {
     private var favoriteMoviesView:FavoriteMoviesView! {
         didSet {
             self.favoriteMoviesView.setupView()
+            self.favoriteMoviesView.delegate = self
             self.view = self.favoriteMoviesView
         }
     }
@@ -71,14 +74,31 @@ extension FavoriteMoviesViewController: FavoriteMoviesPresenterView {
     func present(favoriteMovies: [MovieDetail]) {
         self.favoriteMoviesView.state = .all
         self.favoriteMoviesView.movieItems = favoriteMovies
+        self.favoriteMoviesView.reloadData()
     }
     
     func present(filteredMovies: [MovieDetail]) {
         self.favoriteMoviesView.state = .filtered
         self.favoriteMoviesView.movieItems = filteredMovies
+        self.favoriteMoviesView.reloadData()
     }
     
     func presentEmpty() {
         self.favoriteMoviesView.state = .empty
+    }
+    
+    func removeItems(at rows: [Int]) {
+        self.favoriteMoviesView.removeItems(at: rows)
+    }
+}
+
+extension FavoriteMoviesViewController: FavoriteMoviesViewDelegate {
+    
+    func favoriteMovies(_ sender: FavoriteMoviesView, didSelectItemAt indexPath: IndexPath) {
+        self.presenter?.didSelectItem(at: indexPath.row)
+    }
+    
+    func favoriteMovies(_ sender: FavoriteMoviesView, unfavoriteMovieAt indexPath: IndexPath) {
+        self.presenter?.didUnfavoriteItem(at: indexPath.row)
     }
 }

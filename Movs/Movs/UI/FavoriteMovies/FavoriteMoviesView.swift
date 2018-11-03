@@ -9,7 +9,8 @@
 import UIKit
 
 protocol FavoriteMoviesViewDelegate: AnyObject {
-    func favoriteMovies(_ sender: FavoriteMoviesView, unfavoriteMovieAt indexPath: IndexPath)
+    func favoriteMovies(_ sender:FavoriteMoviesView, didSelectItemAt indexPath:IndexPath)
+    func favoriteMovies(_ sender:FavoriteMoviesView, unfavoriteMovieAt indexPath:IndexPath)
 }
 
 final class FavoriteMoviesView: UIView {
@@ -78,6 +79,15 @@ final class FavoriteMoviesView: UIView {
     func reloadData() {
         self.tableView.reloadData()
     }
+    
+    func removeItems(at rows:[Int]) {
+        let indexPaths = rows.map { row -> IndexPath in
+            self.movieItems.remove(at: row)
+            return IndexPath(row: row, section: 0)
+        }
+        
+        self.tableView.deleteRows(at: indexPaths, with: .left)
+    }
 }
 
 extension FavoriteMoviesView: ViewCode {
@@ -97,6 +107,11 @@ extension FavoriteMoviesView: ViewCode {
 }
 
 extension FavoriteMoviesView: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.favoriteMovies(self, didSelectItemAt: indexPath)
+    }
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let unfavorite = UITableViewRowAction(style: .default,
                                               title: "Unfavorite")
@@ -105,6 +120,7 @@ extension FavoriteMoviesView: UITableViewDelegate {
         }
         return [unfavorite]
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if self.state == .filtered {
             return self.removeFiltersButton

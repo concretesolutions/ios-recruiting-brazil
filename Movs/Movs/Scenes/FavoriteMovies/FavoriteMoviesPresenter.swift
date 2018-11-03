@@ -12,6 +12,7 @@ protocol FavoriteMoviesPresenterView: ViewProtocol {
     func present(favoriteMovies:[MovieDetail])
     func present(filteredMovies:[MovieDetail])
     func presentEmpty()
+    func removeItems(at rows:[Int])
 }
 
 final class FavoriteMoviesPresenter: MVPBasePresenter {
@@ -36,4 +37,20 @@ final class FavoriteMoviesPresenter: MVPBasePresenter {
 }
 
 extension FavoriteMoviesPresenter: FavoriteMoviesViewPresenter {
+    
+    func didSelectItem(at row: Int) {
+        self.coordinator?.data = self.favoriteMovies[row]
+        self.coordinator?.next()
+    }
+    
+    func didUnfavoriteItem(at row: Int) {
+        do {
+            let rmv = self.favoriteMovies.remove(at: row)
+            try self.favoritesDAO.remove(favoriteMovie: rmv)
+            self.view?.removeItems(at: [row])
+            if self.favoriteMovies.isEmpty {
+                self.view?.presentEmpty()
+            }
+        } catch {}
+    }
 }

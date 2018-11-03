@@ -1,5 +1,5 @@
 //
-//  MovieDetailDataSource.swift
+//  MovieDetailDataSourceDelegate.swift
 //  Movs
 //
 //  Created by Gabriel Reynoso on 30/10/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MovieDetailDataSource: NSObject, UITableViewDataSource {
+final class MovieDetailDataSourceDelegate: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var items:[UITableViewCell]
     
@@ -22,5 +22,16 @@ final class MovieDetailDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return self.items[indexPath.row]
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return 300.0
+        case 3:
+            return 200.0
+        default:
+            return 60.0
+        }
     }
 }

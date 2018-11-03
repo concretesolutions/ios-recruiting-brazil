@@ -10,14 +10,24 @@ import UIKit
 
 final class MovieDetailCoordinator: Coordinator {
     
+    var childs: [Coordinator] = []
     var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
     func start() {
-        guard let movie = self.data as? Movie else { return }
+        
         let vc = MovieDetailViewController()
         let presenter = MovieDetailPresenter(view: vc, coordinator: self)
-        presenter.initialData = movie
+        
+        switch self.data {
+        case let mov as Movie:
+            presenter.initialData = mov
+        case let mov as MovieDetail:
+            presenter.movieDetail = mov
+        default:
+            break
+        }
+        
         vc.presenter = presenter
         self.onCoordinatorStarted?(vc)
     }

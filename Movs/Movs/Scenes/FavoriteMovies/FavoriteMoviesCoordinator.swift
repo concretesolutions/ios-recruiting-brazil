@@ -10,6 +10,7 @@ import UIKit
 
 final class FavoriteMoviesCoordinator: Coordinator {
     
+    var childs: [Coordinator] = []
     var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
@@ -17,5 +18,13 @@ final class FavoriteMoviesCoordinator: Coordinator {
         let vc = FavoriteMoviesViewController()
         vc.presenter = FavoriteMoviesPresenter(view: vc, coordinator: self)
         self.onCoordinatorStarted?(vc)
+    }
+    
+    func next() {
+        let coordinator = MovieDetailCoordinator()
+        coordinator.data = self.data
+        coordinator.onCoordinatorStarted = self.onCoordinatorStarted
+        coordinator.start()
+        self.childs = [coordinator]
     }
 }

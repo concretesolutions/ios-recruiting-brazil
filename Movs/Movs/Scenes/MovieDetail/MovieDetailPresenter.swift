@@ -15,31 +15,52 @@ protocol MovieDetailPresenterView: ViewProtocol {
 final class MovieDetailPresenter: MVPBasePresenter {
     
     private let favoritesDAO = try! FavoriesDAO()
-    private lazy var operation = FetchMovieDetailOperation(movieId: self.initialData.id)
+    private var operation: FetchMovieDetailOperation!
     
-    var initialData:Movie! {
+    var initialData:Movie? {
         didSet {
             self.fetchMovieDetail()
         }
     }
     
-    private(set) var movieDetail:MovieDetail! {
-        didSet {
-            if self.movieDetail.isComplete {
-                self.view?.present(movieDetail: self.movieDetail)
-            } else {
-                self.fetchMovieDetail()
-            }
+    var movieDetail:MovieDetail!
+    
+    var validMovieId:Int {
+        var id:Int
+        if let initialData = self.initialData {
+            id = initialData.id
+        } else {
+            id = self.movieDetail.id
         }
+        return id
     }
     
     var view:MovieDetailPresenterView? {
         return self.baseView as? MovieDetailPresenterView
     }
     
-    func fetchMovieDetail() {
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        if self.movieDetail.isFavorite {
+            if self.movieDetail.isComplete {
+                self.view?.present(movieDetail: self.movieDetail)
+            } else {
+                self.fetchMovieDetail(forCompletingObject: true)
+            }
+        } else {
+            self.fetchMovieDetail()
+        }
+    }
+    
+    func fetchMovieDetail(forCompletingObject:Bool = false) {
+        self.operation = FetchMovieDetailOperation(movieId: self.validMovieId)
         self.operation.onSuccess = { [weak self] detail in
             self?.movieDetail = detail
+            if forCompletingObject {
+                do {
+                    try self?.favoritesDAO.add(favoriteMovie: detail)
+                } catch {}
+            }
         }
         self.operation.perform()
     }

@@ -35,7 +35,8 @@ final class FavoriteMovie: Object {
                             posterPath: self.posterPath,
                             releaseDate: self.releaseDate,
                             genres: self.actualGenres,
-                            overview: self.overview)
+                            overview: self.overview,
+                            isFavorite: true)
     }
     
     init(movie:Movie) {
@@ -45,14 +46,14 @@ final class FavoriteMovie: Object {
         self.posterPath = movie.posterPath
     }
     
-    init(movie:MovieDetail) {
+    init(movie:MovieDetail, genres:[LocalGenre]) {
         super.init()
         self.id = movie.id
         self.title = movie.title
         self.posterPath = movie.posterPath
         self.releaseDate = movie.releaseDate
         self.overview = movie.overview
-        self.genres.append(objectsIn: movie.genres.map { LocalGenre(genre: $0) } )
+        self.genres.append(objectsIn: genres)
     }
     
     required init() {

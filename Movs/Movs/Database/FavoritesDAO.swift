@@ -25,7 +25,8 @@ final class FavoriesDAO {
     
     func add(favoriteMovie:MovieDetail) throws {
         try self.realm.write {
-            let new = FavoriteMovie(movie: favoriteMovie)
+            let genres = self.fetchLocalGenres(matching: favoriteMovie.genres)
+            let new = FavoriteMovie(movie: favoriteMovie, genres: genres)
             self.realm.add(new, update: self.contains(movie: favoriteMovie))
         }
     }
@@ -41,6 +42,12 @@ final class FavoriesDAO {
         guard let obj = self.realm.object(ofType: FavoriteMovie.self, forPrimaryKey: favoriteMovie.id) else { return }
         try self.realm.write {
             self.realm.delete(obj)
+        }
+    }
+    
+    func fetchLocalGenres(matching genres:[Genre]) -> [LocalGenre] {
+        return genres.map { genre -> LocalGenre in
+            return self.realm.object(ofType: LocalGenre.self, forPrimaryKey: genre.id) ?? LocalGenre(genre: genre)
         }
     }
     

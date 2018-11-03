@@ -28,8 +28,6 @@ final class AppCoordinator: Coordinator {
         }
         moviesCoordinator.start()
         
-        self.childs.append(moviesCoordinator)
-        
         let favoritesCoordinator = FavoriteMoviesCoordinator()
         
         favoritesCoordinator.onCoordinatorStarted = { [unowned self] vc in
@@ -39,7 +37,7 @@ final class AppCoordinator: Coordinator {
         }
         favoritesCoordinator.start()
         
-        self.childs.append(favoritesCoordinator)
+        self.childs = [moviesCoordinator, favoritesCoordinator]
         
         self.onCoordinatorStarted?(self.tabBarController)
     }

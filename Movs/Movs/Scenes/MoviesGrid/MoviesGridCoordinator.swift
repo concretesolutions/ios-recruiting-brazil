@@ -10,6 +10,7 @@ import UIKit
 
 final class MoviesGridCoordinator: Coordinator {
     
+    var childs: [Coordinator] = []
     var data: Any?
     var onCoordinatorStarted: OnCoordinatorStarted?
     
@@ -24,5 +25,6 @@ final class MoviesGridCoordinator: Coordinator {
         coordinator.data = self.data
         coordinator.onCoordinatorStarted = self.onCoordinatorStarted
         coordinator.start()
+        self.childs = [coordinator]
     }
 }

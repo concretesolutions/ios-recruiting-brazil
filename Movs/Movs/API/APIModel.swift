@@ -66,13 +66,14 @@ public struct MovieDetail: Codable {
         return !(self.releaseDate.isEmpty || self.overview.isEmpty)
     }
     
-    init(id:Int, title:String, posterPath:String, releaseDate:String, genres:[Genre], overview:String) {
+    init(id:Int, title:String, posterPath:String, releaseDate:String, genres:[Genre], overview:String, isFavorite:Bool) {
         self.id = id
         self.title = title
         self.posterPath = posterPath
         self.releaseDate = releaseDate
         self.genres = genres
         self.overview = overview
+        self.isFavorite = isFavorite
     }
     
     func posterCompletePath(sizeClass:String) -> String {
