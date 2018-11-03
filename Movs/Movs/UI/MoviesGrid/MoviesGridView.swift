@@ -95,6 +95,11 @@ final class MoviesGridView: UIView {
         self.collectionView.reloadData()
     }
     
+    func reloadItems(at rows:[Int]) {
+        let indexPaths = rows.map { IndexPath(row: $0, section: 0) }
+        self.collectionView.reloadItems(at: indexPaths)
+    }
+    
     func appendData(startingAt row:Int) {
         var indexPaths = [IndexPath]()
         for i in row..<self.collectionViewDataSource.items.count {

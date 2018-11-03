@@ -31,6 +31,13 @@ final class FetchMovieDetailOperation: APIGetOperation {
     
     func parse(data:Data) -> MovieDetail? {
         let parser = APIParser<MovieDetail>()
-        return parser.parse(data: data)
+        var result = parser.parse(data: data)
+        if let r = result {
+            do {
+                let favoritesDAO = try FavoriesDAO()
+                result?.isFavorite = favoritesDAO.contains(movie: r)
+            } catch {}
+        }
+        return result
     }
 }

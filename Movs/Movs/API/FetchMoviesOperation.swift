@@ -32,7 +32,16 @@ final class FetchMoviesOperation: APIGetOperation {
     func parse(data: Data) -> [Movie]? {
         guard let resultsData = self.unrwapResultsJSON(from: data) else { return nil }
         let parser = APIParser<[Movie]>()
-        return parser.parse(data: resultsData)
+        var result = parser.parse(data: resultsData)
+        do {
+            let favoritesDAO = try FavoriesDAO()
+            if let r = result {
+                for i in 0..<r.count {
+                    result?[i].isFavorite = favoritesDAO.contains(movie: r[i])
+                }
+            }
+        } catch {}
+        return result
     }
     
     func unrwapResultsJSON(from data: Data) -> Data? {

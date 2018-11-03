@@ -85,6 +85,18 @@ extension MoviesGridViewController: MoviesGridPresenterView {
     func presentEmptySearch() {
         self.moviesGrid.state = .emptySearch
     }
+    
+    func updateMovie(at row: Int, isFavorite: Bool) {
+        self.moviesGrid.movieItems[row].isFavorite = isFavorite
+        self.moviesGrid.reloadItems(at: [row])
+    }
+    
+    func updateItems(at rows: [Int], favoriteFlags:[Bool]) {
+        for i in 0..<rows.count {
+            self.moviesGrid.movieItems[rows[i]].isFavorite = favoriteFlags[i]
+        }
+        self.moviesGrid.reloadItems(at: rows)
+    }
 }
 
 extension MoviesGridViewController: MoviesGridViewDelegate {

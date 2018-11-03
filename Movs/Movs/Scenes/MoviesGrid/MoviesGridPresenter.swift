@@ -15,10 +15,13 @@ protocol MoviesGridPresenterView: ViewProtocol {
     func present(searchResults:[Movie])
     func presentError()
     func presentEmptySearch()
+    func updateMovie(at row:Int, isFavorite:Bool)
+    func updateItems(at rows:[Int], favoriteFlags:[Bool])
 }
 
 final class MoviesGridPresenter: MVPBasePresenter {
     
+    private let favoritesDAO = try! FavoriesDAO()
     private let operation = FetchMoviesOperation()
     
     private var movies:[Movie] = []
@@ -60,6 +63,26 @@ final class MoviesGridPresenter: MVPBasePresenter {
         self.view?.presentLoading()
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        self.refreshChangedMovies()
+    }
+    
+    func refreshChangedMovies() {
+        var rows = [Int]()
+        var flags = [Bool]()
+        for i in 0..<self.movies.count {
+            let mov = self.movies[i]
+            let movieIsFavorite = self.favoritesDAO.contains(movie: mov)
+            if mov.isFavorite != movieIsFavorite {
+                self.movies[i].isFavorite = movieIsFavorite
+                rows.append(i)
+                flags.append(movieIsFavorite)
+            }
+        }
+        self.view?.updateItems(at: rows, favoriteFlags: flags)
+    }
+    
     func getFilteredMovies(searchText:String) -> [Movie] {
         return self.movies.filter { movie in
             let movieTitle = movie.title.lowercased()
@@ -81,11 +104,21 @@ extension MoviesGridPresenter: MoviesGridViewPresenter {
     }
     
     func didFavoriteItem(at row: Int) {
-        
+        do {
+            let movie = self.movies[row]
+            try self.favoritesDAO.add(favoriteMovie: movie)
+            self.movies[row].isFavorite = true
+            self.view?.updateMovie(at: row, isFavorite: true)
+        } catch {}
     }
     
     func didUnfavoriteItem(at row: Int) {
-        
+        do {
+            let movie = self.movies[row]
+            try self.favoritesDAO.remove(favoriteMovie: movie)
+            self.movies[row].isFavorite = false
+            self.view?.updateMovie(at: row, isFavorite: false)
+        } catch {}
     }
     
     func loadMoreMovies() {

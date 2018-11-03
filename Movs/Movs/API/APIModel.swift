@@ -1,5 +1,5 @@
 //
-//  Model.swift
+//  APIModel.swift
 //  Movs
 //
 //  Created by Gabriel Reynoso on 02/11/18.
@@ -21,6 +21,12 @@ public struct Movie: Codable {
     
     func posterCompletePath(sizeClass:String) -> String {
         return "\(API.imageLink)/\(sizeClass)\(self.posterPath)"
+    }
+    
+    init(id:Int, title:String, posterPath:String) {
+        self.id = id
+        self.title = title
+        self.posterPath = posterPath
     }
     
     enum CodingKeys: String, CodingKey {
@@ -56,6 +62,15 @@ public struct MovieDetail: Codable {
         return self.posterCompletePath(sizeClass: "w185")
     }
     
+    init(id:Int, title:String, posterPath:String, releaseDate:String, genres:[Genre], overview:String) {
+        self.id = id
+        self.title = title
+        self.posterPath = posterPath
+        self.releaseDate = releaseDate
+        self.genres = genres
+        self.overview = overview
+    }
+    
     func posterCompletePath(sizeClass:String) -> String {
         return "\(API.imageLink)/\(sizeClass)\(self.posterPath)"
     }
@@ -73,4 +88,8 @@ public struct MovieDetail: Codable {
 public struct Genre: Codable {
     let id:Int
     let name:String
+    init(id:Int, name:String) {
+        self.id = id
+        self.name = name
+    }
 }

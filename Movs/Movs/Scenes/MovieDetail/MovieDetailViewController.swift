@@ -17,6 +17,7 @@ final class MovieDetailViewController: MVPBaseViewController {
     
     private var movieDetailView:MovieDetailView! {
         didSet {
+            self.movieDetailView.delegate = self
             self.movieDetailView.setupView()
             self.view = self.movieDetailView
         }
