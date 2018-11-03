@@ -10,13 +10,17 @@ import Foundation
 
 final class LocalStorage {
   
-  static let shared: LocalStorage = LocalStorage()
-  
-  var delegate: MovieFavoriteStateChangedDelegate?
+  // MARK: Types
   
   enum StorageKeys: String {
     case favoriteMovies
   }
+  
+  // MARK: Properties
+  
+  static let shared: LocalStorage = LocalStorage()
+  
+  var delegate: MovieFavoriteStateChangedDelegate?
   
   var favoriteMovies: [Movie]? {
     get {
@@ -32,6 +36,8 @@ final class LocalStorage {
       }
     }
   }
+  
+  // MARK: Add and delete
   
   func addFavorite(movie: Movie) {
     var favoriteMovie = movie

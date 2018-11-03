@@ -9,15 +9,21 @@
 import UIKit
 
 class TabBarControllerDelegate: NSObject, UITabBarControllerDelegate {
+
+  // MARK: Properties
   
   var delegate: TabBarTapDelegate?
   
   var selectedTabIndex = 0
   
+  // MARK: Initialization
+  
   init(delegate: TabBarTapDelegate) {
     self.delegate = delegate
   }
 
+  // MARK: - Tab bar controller delegate
+  
   func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
     let previousIndex = selectedTabIndex
     selectedTabIndex = tabBarController.selectedIndex
@@ -26,6 +32,7 @@ class TabBarControllerDelegate: NSObject, UITabBarControllerDelegate {
       delegate!.handleTapOnFirstIndex()
     }
   }
+  
 }
 
 protocol TabBarTapDelegate: class {

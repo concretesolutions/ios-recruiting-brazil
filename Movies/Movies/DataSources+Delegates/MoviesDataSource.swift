@@ -10,11 +10,19 @@ import UIKit
 
 class MoviesDataSource: NSObject, UICollectionViewDataSource {
   
+  // MARK: Properties
+  
   var movies: [Movie]
-  var filteredMovies = [Movie]()
+  
+  var searchedMovies = [Movie]()
+  
   var posterHeight: CGFloat
+  
   var searchController: UISearchController
+  
   var updateCollectionDelegate: UpdateCollectionDelegate
+  
+  // MARK: Initialization
   
   init(posterHeight: CGFloat, searchController: UISearchController, updateCollectionDelegate: UpdateCollectionDelegate) {
     movies = []
@@ -23,14 +31,16 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
     self.updateCollectionDelegate = updateCollectionDelegate
   }
   
+  // MARK: - Table view data source
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
     var movie: Movie
     
-    if !isFiltering() {
+    if !isOnSearch() {
       movie = movies[indexPath.row]
     } else {
-      movie = filteredMovies[indexPath.row]
+      movie = searchedMovies[indexPath.row]
     }
     
     cell.configure(withMovie: movie)
@@ -40,8 +50,8 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if isFiltering() {
-      return filteredMovies.count
+    if isOnSearch() {
+      return searchedMovies.count
     }
     
     return movies.count
@@ -55,17 +65,23 @@ class MoviesDataSource: NSObject, UICollectionViewDataSource {
   
 }
 
-extension MoviesDataSource: UISearchResultsUpdating {
+/////////////////////////////////////////
+//
+// MARK: UISearchResultsUpdating and MoviesSearchControllerDelegate methods
+//
+/////////////////////////////////////////
+extension MoviesDataSource: UISearchResultsUpdating, MoviesSearchControllerDelegate {
+  
   func updateSearchResults(for searchController: UISearchController) {
-    filterContent(forSearchedText: searchController.searchBar.text!)
+    searchContent(forSearchedText: searchController.searchBar.text!)
   }
   
-  func filterContent(forSearchedText searchedText: String) {
-    filteredMovies = movies.filter { (movie) -> Bool in
+  func searchContent(forSearchedText searchedText: String) {
+    searchedMovies = movies.filter { (movie) -> Bool in
       return movie.title.lowercased().contains(searchedText.lowercased())
     }
     
-    if filteredMovies.isEmpty && !searchedText.isEmpty {
+    if searchedMovies.isEmpty && !searchedText.isEmpty {
       updateCollectionDelegate.handleResult(hasResults: false, forSearchedString: searchedText)
     } else {
       updateCollectionDelegate.handleResult(hasResults: true, forSearchedString: searchedText)
@@ -78,26 +94,31 @@ extension MoviesDataSource: UISearchResultsUpdating {
     return searchController.searchBar.text?.isEmpty ?? true
   }
   
-  func isFiltering() -> Bool {
+  func isOnSearch() -> Bool {
     return searchController.isActive && !searchBarIsEmpty()
   }
   
 }
 
+/////////////////////////////////////////
+//
+// MARK: MovieFavoriteStateChangedDelegate methods
+//
+/////////////////////////////////////////
 extension MoviesDataSource: MovieFavoriteStateChangedDelegate {
   func movie(_ movie: Movie, changedToFavorite: Bool) {
     var changedMovie = movie
     changedMovie.isFavorite = changedToFavorite
     
     let indexOnMovies = movies.firstIndex { $0.identificator == changedMovie.identificator }
-    let indexOnFilteredMovies = filteredMovies.firstIndex { $0.identificator == changedMovie.identificator }
+    let indexOnFilteredMovies = searchedMovies.firstIndex { $0.identificator == changedMovie.identificator }
     
     if let index = indexOnMovies {
       movies[index] = changedMovie
     }
     
     if let index = indexOnFilteredMovies {
-      filteredMovies[index] = changedMovie
+      searchedMovies[index] = changedMovie
     }
     
     updateCollectionDelegate.updateCollection()

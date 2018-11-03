@@ -10,8 +10,37 @@ import UIKit
 import SnapKit
 
 class FilterTableViewController: UITableViewController {
+
+  // MARK: Types
+  
+  enum FilterSelected {
+    case year
+    case genre
+    case none
+  }
+  
+  // MARK: Properties
+  
+  var years = ["None"]
+  
+  var genres: [Genre?] = [nil]
+  
+  var genresIds: [Int] = []
+  
+  var currentFilterSelect: FilterSelected = .none
+  
+  var filterDelegate: FilterTableViewControllerDelegate!
+  
+  var genreSelectedIndex: Int = 0
+  
+  var yearSelectedIndex: Int = 0
+  
+  var selectedYear: Int?
+  
+  var selectedGenre: Genre?
   
   @IBOutlet weak var selectedYearLabel: UILabel!
+  
   @IBOutlet weak var selectedGenreLabel: UILabel!
   
   lazy var endEditingBarButtonItem: UIBarButtonItem = {
@@ -26,23 +55,31 @@ class FilterTableViewController: UITableViewController {
     return pickerView
   }()
 
-  enum FilterSelected {
-    case year
-    case genre
-    case none
+  // MARK: Filter methods
+  
+  func setFilterValue() {
+    if currentFilterSelect != .none {
+      let value = pickerView.selectedRow(inComponent: 0)
+      
+      if currentFilterSelect == .genre {
+        genreSelectedIndex = value
+        selectedGenreLabel.text = value == 0 ? "" : genres[value]!.name
+      } else {
+        yearSelectedIndex = value
+        selectedYearLabel.text = value == 0 ? "" : years[value]
+      }
+    }
   }
   
-  var years = ["None"]
+  @objc func endEditing() {
+    setFilterValue()
+    hidePickeView()
+    currentFilterSelect = .none
+    tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isSelected = false
+    tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.isSelected = false
+  }
   
-  var genres: [Genre?] = [nil]
-  var genresIds: [Int] = []
-  
-  var currentFilterSelect: FilterSelected = .none
-  var filterDelegate: FilterTableViewControllerDelegate!
-  var genreSelectedIndex: Int = 0
-  var yearSelectedIndex: Int = 0
-  var selectedYear: Int?
-  var selectedGenre: Genre?
+  // MARK: Networking
   
   public func getGenres() {
     NetworkClient.shared.getGenres { (result) in
@@ -63,6 +100,8 @@ class FilterTableViewController: UITableViewController {
       }
     }
   }
+  
+  // MARK: Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -95,31 +134,10 @@ class FilterTableViewController: UITableViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     hidePickeView()
-    
     filterDelegate.didChangeFilterValues(Int(years[yearSelectedIndex]), selectedGenre: genres[genreSelectedIndex])
   }
   
-  @objc func endEditing() {
-    setFilterValue()
-    hidePickeView()
-    currentFilterSelect = .none
-    tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isSelected = false
-    tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.isSelected = false
-  }
-  
-  func setFilterValue() {
-    if currentFilterSelect != .none {
-      let value = pickerView.selectedRow(inComponent: 0)
-      
-      if currentFilterSelect == .genre {
-        genreSelectedIndex = value
-        selectedGenreLabel.text = value == 0 ? "" : genres[value]!.name
-      } else {
-        yearSelectedIndex = value
-        selectedYearLabel.text = value == 0 ? "" : years[value]
-      }
-    }
-  }
+  // MARK: Table view delegate
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     setFilterValue()
@@ -142,6 +160,12 @@ class FilterTableViewController: UITableViewController {
   
 }
 
+
+/////////////////////////////////////////
+//
+// MARK: Picker view delegate and data source
+//
+/////////////////////////////////////////
 extension FilterTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   
   func numberOfComponents(in pickerView: UIPickerView) -> Int {

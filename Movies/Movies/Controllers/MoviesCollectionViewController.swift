@@ -10,6 +10,17 @@ import UIKit
 
 class MoviesCollectionViewController: UICollectionViewController {
   
+  // MARK: Types
+  
+  enum ViewState {
+    case loading
+    case success
+    case error(String)
+    case searchNotFound(String)
+  }
+  
+  // MARK: Properties
+  
   var moviesDataSource: MoviesDataSource!
   
   var moviesDelegate: MoviesCollectionViewDelegate!
@@ -25,13 +36,6 @@ class MoviesCollectionViewController: UICollectionViewController {
   var tabBarDelegate: TabBarControllerDelegate!
   
   var searchController: UISearchController!
-
-  enum ViewState {
-    case loading
-    case success
-    case error(String)
-    case searchNotFound(String)
-  }
   
   var currentViewState: ViewState! {
     didSet {
@@ -57,6 +61,8 @@ class MoviesCollectionViewController: UICollectionViewController {
       }
     }
   }
+  
+  // MARK: Networking
   
   fileprivate func fetchMovies() {
     currentViewState = .loading
@@ -85,24 +91,18 @@ class MoviesCollectionViewController: UICollectionViewController {
     }
   }
   
-  func updateCollectionView(withMovies movies: [Movie]) {
-    let updates = {
-      var indexes = [IndexPath]()
-      
-      for movie in movies {
-        self.moviesDataSource.movies.append(movie)
-        let lastItem = self.moviesDataSource.movies.count - 1
-        let section = 0
-        indexes.append(IndexPath(row: lastItem, section: section))
+  fileprivate func loadGenres() {
+    NetworkClient.shared.getGenres { (result) in
+      switch result {
+      case .failure(let error):
+        print(error)
+      case .success:
+        print("Genres loaded")
       }
-      
-      self.collectionView.insertItems(at: indexes)
-    }
-    
-    collectionView.performBatchUpdates(updates) { _ in
-      self.isUpdating = false
     }
   }
+  
+  // MARK: Setup
   
   fileprivate func setupCollectionView() {
     moviesDelegate = MoviesCollectionViewDelegate(frameWidth: view.frame.width, updateDelegate: self, itemSelectDelegate: self)
@@ -137,40 +137,46 @@ class MoviesCollectionViewController: UICollectionViewController {
     navigationItem.hidesSearchBarWhenScrolling = false
   }
   
-  fileprivate func loadGenres() {
-    NetworkClient.shared.getGenres { (result) in
-      switch result {
-      case .failure(let error):
-        print(error)
-      case .success:
-        print("Genres loaded")
-      }
-    }
+  fileprivate func setupTabBarController() {
+    tabBarDelegate = TabBarControllerDelegate(delegate: self)
+    tabBarController?.delegate = tabBarDelegate
   }
+  
+  // MARK: Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    tabBarDelegate = TabBarControllerDelegate(delegate: self)
-    tabBarController?.delegate = tabBarDelegate
-    
+    setupTabBarController()
     setupSearchController()
-    
     setupCollectionView()
-    
     setupSubviews()
-    
     fetchMovies()
-    
     loadGenres()
-    
     launchScreenAnimation()
+  }
 
+  // MARK: Navigation
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "movieToDetailViewSegue" {
+      if let destinationViewController = segue.destination as? MovieDetailViewController {
+        if let aMovie = sender as? Movie {
+          destinationViewController.movie = aMovie
+        }
+      }
+    }
   }
   
 }
 
+/////////////////////////////////////////
+//
+// MARK: Movies update delegate
+//
+/////////////////////////////////////////
 extension MoviesCollectionViewController: MoviesCollectionViewUpdateDelegate {
+  
   func loadMoreMovies() {
     if !isUpdating && !moviesDataSource.movies.isEmpty {
       isUpdating = true
@@ -179,19 +185,33 @@ extension MoviesCollectionViewController: MoviesCollectionViewUpdateDelegate {
   }
   
   func canShowFooter() -> Bool {
-    return !moviesDataSource.movies.isEmpty && !moviesDataSource.isFiltering()
+    return !moviesDataSource.movies.isEmpty && !moviesDataSource.isOnSearch()
   }
+  
 }
 
+/////////////////////////////////////////
+//
+// MARK: Tab bar tap delegate
+//
+/////////////////////////////////////////
 extension MoviesCollectionViewController: TabBarTapDelegate {
+  
   func handleTapOnFirstIndex() {
     if !moviesDataSource.movies.isEmpty {
       collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
   }
+  
 }
 
+/////////////////////////////////////////
+//
+// MARK: Update collection delegate
+//
+/////////////////////////////////////////
 extension MoviesCollectionViewController: UpdateCollectionDelegate {
+  
   func updateCollection() {
     collectionView.reloadData()
   }
@@ -204,9 +224,34 @@ extension MoviesCollectionViewController: UpdateCollectionDelegate {
     }
   }
   
+  func updateCollectionView(withMovies movies: [Movie]) {
+    let updates = {
+      var indexes = [IndexPath]()
+      
+      for movie in movies {
+        self.moviesDataSource.movies.append(movie)
+        let lastItem = self.moviesDataSource.movies.count - 1
+        let section = 0
+        indexes.append(IndexPath(row: lastItem, section: section))
+      }
+      
+      self.collectionView.insertItems(at: indexes)
+    }
+    
+    collectionView.performBatchUpdates(updates) { _ in
+      self.isUpdating = false
+    }
+  }
+  
 }
 
+/////////////////////////////////////////
+//
+// MARK: Launch screen animation
+//
+/////////////////////////////////////////
 extension MoviesCollectionViewController {
+  
   func launchScreenAnimation() {
     tabBarController?.tabBar.isHidden = true
     let superView = navigationController!.view!
@@ -215,13 +260,20 @@ extension MoviesCollectionViewController {
       self.tabBarController?.tabBar.isHidden = false
     }
   }
+  
 }
 
+/////////////////////////////////////////
+//
+// MARK: Collection did select item delegate
+//
+/////////////////////////////////////////
 extension MoviesCollectionViewController: CollectionViewdidSelectItemDelegate {
+  
   func didSelectIndexPath(_ indexPath: IndexPath) {
     var aMovie: Movie
-    if moviesDataSource.isFiltering() {
-      aMovie = moviesDataSource.filteredMovies[indexPath.row]
+    if moviesDataSource.isOnSearch() {
+      aMovie = moviesDataSource.searchedMovies[indexPath.row]
     } else {
       aMovie = moviesDataSource.movies[indexPath.row]
     }
@@ -229,13 +281,4 @@ extension MoviesCollectionViewController: CollectionViewdidSelectItemDelegate {
     self.performSegue(withIdentifier: "movieToDetailViewSegue", sender: aMovie)
   }
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "movieToDetailViewSegue" {
-      if let destinationViewController = segue.destination as? MovieDetailViewController {
-        if let aMovie = sender as? Movie {
-          destinationViewController.movie = aMovie
-        }
-      }
-    }
-  }
 }

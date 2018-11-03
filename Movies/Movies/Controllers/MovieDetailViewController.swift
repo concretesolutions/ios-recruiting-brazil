@@ -10,23 +10,7 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
   
-  var movie: Movie!
-  
-  @IBOutlet weak var backdropheightConstraint: NSLayoutConstraint!
-  @IBOutlet weak var gradientView: UIView!
-  @IBOutlet weak var backdropImageView: UIImageView!
-  @IBOutlet weak var ratingLabel: UILabel!
-  @IBOutlet weak var yearLabel: UILabel!
-  @IBOutlet weak var overviewLabel: UILabel!
-  @IBOutlet weak var genresLabel: UILabel!
-  @IBOutlet weak var backdropInfoView: UIView!
-  @IBOutlet weak var loadingActivityIndicatorView: UIActivityIndicatorView!
-  @IBOutlet weak var genreLoadingActivityIndicatorView: UIActivityIndicatorView!
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    configureView()
-  }
+  // MARK: Types
   
   enum ViewState {
     case loading
@@ -42,6 +26,30 @@ class MovieDetailViewController: UIViewController {
     case loading
     case loaded
   }
+  
+  // MARK: Properties
+  
+  @IBOutlet weak var backdropheightConstraint: NSLayoutConstraint!
+  
+  @IBOutlet weak var gradientView: UIView!
+  
+  @IBOutlet weak var backdropImageView: UIImageView!
+  
+  @IBOutlet weak var ratingLabel: UILabel!
+  
+  @IBOutlet weak var yearLabel: UILabel!
+  
+  @IBOutlet weak var overviewLabel: UILabel!
+  
+  @IBOutlet weak var genresLabel: UILabel!
+  
+  @IBOutlet weak var backdropInfoView: UIView!
+  
+  @IBOutlet weak var loadingActivityIndicatorView: UIActivityIndicatorView!
+  
+  @IBOutlet weak var genreLoadingActivityIndicatorView: UIActivityIndicatorView!
+  
+  var movie: Movie!
   
   var currentViewState: ViewState! {
     didSet {
@@ -69,7 +77,7 @@ class MovieDetailViewController: UIViewController {
       case .favorite:
         imageView.image = AssetsManager.getImage(forAsset: .starSelected)
       case .notFavorite:
-       imageView.image = AssetsManager.getImage(forAsset: .starBordered)
+        imageView.image = AssetsManager.getImage(forAsset: .starBordered)
       }
       
       navigationItem.rightBarButtonItem = UIBarButtonItem(customView: imageView)
@@ -91,15 +99,14 @@ class MovieDetailViewController: UIViewController {
     }
   }
   
-  @objc func toggleFavorite() {
-    if currentFavoriteState == .favorite {
-      currentFavoriteState = .notFavorite
-      LocalStorage.shared.removeFavorite(movie: movie)
-    } else {
-      currentFavoriteState = .favorite
-      LocalStorage.shared.addFavorite(movie: movie)
-    }
+  // MARK: Lifecycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    configureView()
   }
+  
+  // MARK: Class methods
   
   func configureView() {
     setupGradientView()
@@ -156,5 +163,15 @@ class MovieDetailViewController: UIViewController {
     }
     
     return genresName
+  }
+  
+  @objc func toggleFavorite() {
+    if currentFavoriteState == .favorite {
+      currentFavoriteState = .notFavorite
+      LocalStorage.shared.removeFavorite(movie: movie)
+    } else {
+      currentFavoriteState = .favorite
+      LocalStorage.shared.addFavorite(movie: movie)
+    }
   }
 }

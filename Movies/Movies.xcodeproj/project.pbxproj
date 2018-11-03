@@ -28,6 +28,8 @@
 		C095835621896F9400C32BD6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C095835521896F9400C32BD6 /* ErrorView.swift */; };
 		C09583582189851100C32BD6 /* MoviesCollectionViewUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09583572189851100C32BD6 /* MoviesCollectionViewUpdateDelegate.swift */; };
 		C0C3F034218D13F40090DE46 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C3F033218D13F40090DE46 /* FilterTableViewController.swift */; };
+		C0C3F036218D7FD80090DE46 /* MoviesSearchControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C3F035218D7FD80090DE46 /* MoviesSearchControllerDelegate.swift */; };
+		C0C3F03A218D893C0090DE46 /* FavoritesTableViewController+Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C3F039218D893C0090DE46 /* FavoritesTableViewController+Delegates.swift */; };
 		C0D66D2F218A24F600BAB163 /* UIColor+ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D66D2E218A24F600BAB163 /* UIColor+ColorPalette.swift */; };
 		C0D66D31218A27F300BAB163 /* AssetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D66D30218A27F300BAB163 /* AssetsManager.swift */; };
 		C0D66D34218A51BE00BAB163 /* TabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D66D33218A51BE00BAB163 /* TabBarControllerDelegate.swift */; };
@@ -68,6 +70,8 @@
 		C095835521896F9400C32BD6 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C09583572189851100C32BD6 /* MoviesCollectionViewUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewUpdateDelegate.swift; sourceTree = "<group>"; };
 		C0C3F033218D13F40090DE46 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		C0C3F035218D7FD80090DE46 /* MoviesSearchControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSearchControllerDelegate.swift; sourceTree = "<group>"; };
+		C0C3F039218D893C0090DE46 /* FavoritesTableViewController+Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesTableViewController+Delegates.swift"; sourceTree = "<group>"; };
 		C0D66D2E218A24F600BAB163 /* UIColor+ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ColorPalette.swift"; sourceTree = "<group>"; };
 		C0D66D30218A27F300BAB163 /* AssetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsManager.swift; sourceTree = "<group>"; };
 		C0D66D33218A51BE00BAB163 /* TabBarControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerDelegate.swift; sourceTree = "<group>"; };
@@ -201,9 +205,11 @@
 		C0C3F032218CFD7C0090DE46 /* DataSources+Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				C0C3F039218D893C0090DE46 /* FavoritesTableViewController+Delegates.swift */,
 				C09583512189609600C32BD6 /* MoviesCollectionViewDelegate.swift */,
 				C09583572189851100C32BD6 /* MoviesCollectionViewUpdateDelegate.swift */,
 				C095834F21895AB600C32BD6 /* MoviesDataSource.swift */,
+				C0C3F035218D7FD80090DE46 /* MoviesSearchControllerDelegate.swift */,
 				C0D66D33218A51BE00BAB163 /* TabBarControllerDelegate.swift */,
 			);
 			path = "DataSources+Delegates";
@@ -397,11 +403,13 @@
 				C0FC6741218AC1A300BFF4E8 /* LaunchScreenAnimationView.swift in Sources */,
 				C0D66D31218A27F300BAB163 /* AssetsManager.swift in Sources */,
 				C08AC6592188092200A93011 /* NetworkClient.swift in Sources */,
+				C0C3F03A218D893C0090DE46 /* FavoritesTableViewController+Delegates.swift in Sources */,
 				C08AC6A12188308900A93011 /* Result.swift in Sources */,
 				C08AC69C2188283100A93011 /* Movie.swift in Sources */,
 				C0EE4C9921891F56003C9580 /* MovieCollectionViewCell.swift in Sources */,
 				C08AC69F2188296400A93011 /* MovieParser.swift in Sources */,
 				C0D66D2F218A24F600BAB163 /* UIColor+ColorPalette.swift in Sources */,
+				C0C3F036218D7FD80090DE46 /* MoviesSearchControllerDelegate.swift in Sources */,
 				C09583522189609600C32BD6 /* MoviesCollectionViewDelegate.swift in Sources */,
 				C095835621896F9400C32BD6 /* ErrorView.swift in Sources */,
 				C09583542189650C00C32BD6 /* LoadingView.swift in Sources */,

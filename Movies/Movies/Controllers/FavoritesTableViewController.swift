@@ -10,21 +10,27 @@ import UIKit
 import Reusable
 
 class FavoritesTableViewController: UITableViewController {
+
+  // MARK: - Properties
   
   var favoriteMovies: [Movie] = []
+  
   var searchedFavorites: [Movie] = []
+  
   var searchController: UISearchController!
+  
   var filteredMovies: [Movie] = []
+  
   var selectedYear: Int?
+  
   var selectedGenre: Genre?
+  
   lazy var filterBarButtonItem: UIBarButtonItem = {
     let barButton = UIBarButtonItem(title: "Apply Filter", style: .plain, target: self, action: #selector(showFilterViewController))
     return barButton
   }()
   
-  @objc func showFilterViewController() {
-    performSegue(withIdentifier: "toFilterSegue", sender: nil)
-  }
+  // MARK: - Setup
   
   fileprivate func setupSearchController() {
     searchController = UISearchController(searchResultsController: nil)
@@ -36,6 +42,8 @@ class FavoritesTableViewController: UITableViewController {
     navigationItem.searchController = searchController
   }
   
+  // MARK: - Lifecyle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -46,72 +54,11 @@ class FavoritesTableViewController: UITableViewController {
     tableView.tableFooterView = UIView()
   }
   
-  fileprivate func updateTableViewFromStorage(withReloadData: Bool = true) {
-    if let movies = LocalStorage.shared.favoriteMovies {
-      favoriteMovies = movies.reversed()
-      if isOnFilter() {
-        applyFilter(withReloadData: withReloadData)
-      }
-      
-      if withReloadData {
-        tableView.reloadData()
-      }
-    }
-  }
-  
   override func viewDidAppear(_ animated: Bool) {
     updateTableViewFromStorage()
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell: FavoriteTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-    let movie: Movie
-    
-    if isOnSearch() {
-      movie = searchedFavorites[indexPath.row]
-    } else {
-      if isOnFilter() {
-        movie = filteredMovies[indexPath.row]
-      } else {
-        movie = favoriteMovies[indexPath.row]
-      }
-    }
-    
-    cell.configure(withMovie: movie)
-    return cell
-  }
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if isOnSearch() {
-      return searchedFavorites.count
-    } else {
-      if isOnFilter() {
-        return filteredMovies.count
-      } else {
-        return favoriteMovies.count
-      }
-    }
-  }
-  
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 169
-  }
-  
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let movie: Movie
-    
-    if isOnSearch() {
-      movie = searchedFavorites[indexPath.row]
-    } else {
-      if isOnFilter() {
-        movie = filteredMovies[indexPath.row]
-      } else {
-        movie = favoriteMovies[indexPath.row]
-      }
-    }
-    
-    performSegue(withIdentifier: "favoriteToDetailViewSegue", sender: movie)
-  }
+  // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "favoriteToDetailViewSegue" {
@@ -151,17 +98,43 @@ class FavoritesTableViewController: UITableViewController {
     }
   }
   
+  @objc func showFilterViewController() {
+    performSegue(withIdentifier: "toFilterSegue", sender: nil)
+  }
+  
+}
+
+/////////////////////////////////////////
+//
+// MARK: Table view data source
+//
+/////////////////////////////////////////
+extension FavoritesTableViewController {
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell: FavoriteTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+    let movie: Movie
+    
+    if isOnSearch() {
+      movie = searchedFavorites[indexPath.row]
+    } else {
+      if isOnFilter() {
+        movie = filteredMovies[indexPath.row]
+      } else {
+        movie = favoriteMovies[indexPath.row]
+      }
+    }
+    
+    cell.configure(withMovie: movie)
+    return cell
+  }
+  
   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     return true
   }
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-//      if isOnFilter() {
-//        LocalStorage.shared.removeFavorite(movie: filteredMovies[indexPath.row])
-//      } else {
-//        LocalStorage.shared.removeFavorite(movie: favoriteMovies[indexPath.row])
-//      }
       
       if isOnSearch() {
         LocalStorage.shared.removeFavorite(movie: searchedFavorites[indexPath.row])
@@ -181,87 +154,58 @@ class FavoritesTableViewController: UITableViewController {
     }
   }
   
-}
-
-extension FavoritesTableViewController: UISearchResultsUpdating, MoviesSearchControllerDelegate {
-  func updateSearchResults(for searchController: UISearchController) {
-    searchContent(forSearchedText: searchController.searchBar.text!)
-  }
-  
-  func searchContent(forSearchedText searchedText: String) {
-    let movies: [Movie]
-    
-    if isOnFilter() {
-      movies = filteredMovies
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if isOnSearch() {
+      return searchedFavorites.count
     } else {
-      movies = favoriteMovies
-    }
-    
-    searchedFavorites = movies.filter { (movie) -> Bool in
-      return movie.title.lowercased().contains(searchedText.lowercased())
-    }
-    
-    tableView.reloadData()
-  }
-  
-  func searchBarIsEmpty() -> Bool {
-    return searchController.searchBar.text?.isEmpty ?? true
-  }
-  
-  func isOnSearch() -> Bool {
-    return searchController.isActive && !searchBarIsEmpty()
-  }
-}
-
-extension FavoritesTableViewController: FilterTableViewControllerDelegate {
-  func didChangeFilterValues(_ selectedYear: Int?, selectedGenre: Genre?) {
-    self.selectedYear = selectedYear
-    self.selectedGenre = selectedGenre
-    
-    if isOnFilter() {
-      filterBarButtonItem.title = "Filter ON"
-      applyFilter()
-    } else {
-      filterBarButtonItem.title = "Apply Filter"
+      if isOnFilter() {
+        return filteredMovies.count
+      } else {
+        return favoriteMovies.count
+      }
     }
   }
   
-  func applyFilter(withReloadData: Bool = true) {
-    filteredMovies = favoriteMovies.filter { (movie) -> Bool in
-      var validYear = true
-      var validGenre = true
-      
-      if let appliedYear = selectedYear {
-        if Calendar.current.component(.year, from: movie.releaseDate) != appliedYear {
-          validYear = false
-        }
+  fileprivate func updateTableViewFromStorage(withReloadData: Bool = true) {
+    if let movies = LocalStorage.shared.favoriteMovies {
+      favoriteMovies = movies.reversed()
+      if isOnFilter() {
+        applyFilter(withReloadData: withReloadData)
       }
       
-      if let appliedGenre = selectedGenre {
-        validGenre = false
-        movie.genresID.forEach({ (identificator) in
-          if appliedGenre.identificator == identificator {
-            validGenre = true
-          }
-        })
+      if withReloadData {
+        tableView.reloadData()
       }
-      
-      return validYear && validGenre
     }
-    
-    if withReloadData {
-      tableView.reloadData()
-    }
-    
   }
   
-  func isOnFilter() -> Bool {
-    return selectedGenre != nil || selectedYear != nil
-  }
 }
 
-protocol MoviesSearchControllerDelegate: class {
-  func searchContent(forSearchedText searchedText: String)
-  func searchBarIsEmpty() -> Bool
-  func isOnSearch() -> Bool
+/////////////////////////////////////////
+//
+// MARK: Table view delegate
+//
+/////////////////////////////////////////
+extension FavoritesTableViewController {
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 169
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let movie: Movie
+    
+    if isOnSearch() {
+      movie = searchedFavorites[indexPath.row]
+    } else {
+      if isOnFilter() {
+        movie = filteredMovies[indexPath.row]
+      } else {
+        movie = favoriteMovies[indexPath.row]
+      }
+    }
+    
+    performSegue(withIdentifier: "favoriteToDetailViewSegue", sender: movie)
+  }
+  
 }
