@@ -18,7 +18,7 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic {
     var presenter: FavoriteMoviesPresentationLogic!
     
     // w185 is a nice size for mobile app
-    private let imageBasePath = "http://image.tmdb.org/t/p/w185"
+    let imageBasePath = "http://image.tmdb.org/t/p/w185"
     
     func removeMovie(request: FavoriteMoviesModel.Request.Remove) {
         if !FavoriteMoviesWorker.shared.removeFavoriteMovie(id: request.movieId) {

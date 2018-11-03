@@ -9,7 +9,14 @@
 import UIKit
 import Moya
 
-class DetailMovieWorker {
+protocol DetailMovieWorkerProtocol {
+    func getMovieDetails(request: DetailMovieModel.Request,
+                         success successCallback: @escaping (MovieDetailed) -> (),
+                         error errorCallback: @escaping (FetchError) -> (),
+                         failure failureCallback: @escaping (FetchError) -> ())
+}
+
+class DetailMovieWorker: DetailMovieWorkerProtocol {
   
     fileprivate let provider = MoyaProvider<MovieDB_API>()
     

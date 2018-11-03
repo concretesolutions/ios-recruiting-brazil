@@ -15,9 +15,9 @@ protocol DetailMoviesBusinessLogic {
 class DetailMoviesInteractor: DetailMoviesBusinessLogic {
     
     var presenter: (DetailMoviesPresentationLogic & FavoriteActionsPresentationLogic)!
-    var worker = DetailMovieWorker()
+    var worker: DetailMovieWorkerProtocol = DetailMovieWorker()
     // w185 is a nice size for mobile app
-    private let basePath = "http://image.tmdb.org/t/p/w185"
+    let basePath = "http://image.tmdb.org/t/p/w185"
     
     func fetchMovieDetailed(request: DetailMovieModel.Request) {
         worker.getMovieDetails(request: request,

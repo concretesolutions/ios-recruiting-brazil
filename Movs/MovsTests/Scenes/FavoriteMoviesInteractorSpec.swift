@@ -18,15 +18,29 @@ class FavoriteMoviesInteractorSpec: QuickSpec {
         describe("FavoriteMoviesInteractor") {
             
             var presenter: FavoriteMoviesPresenterSpy!
-            var worker: ManageFavoriteMoviesActions!
-            
+            var worker: FavoriteMoviesWorkerMock!
+            var interactor: FavoriteMoviesInteractor!
             context("when initializing"){
+                
                 beforeEach {
                     presenter = FavoriteMoviesPresenterSpy()
                     worker = FavoriteMoviesWorkerMock()
+                    interactor = FavoriteMoviesInteractor()
                 }
                 
-                context("and listing favorite movies") {
+                it("Worker should conforms to protocol ManageFavoriteMoviesActions"){
+                    expect(worker).to(beAKindOf(ManageFavoriteMoviesActions.self))
+                }
+                
+                it("Presenter should conforms to protocol FavoriteMoviesPresentationLogic"){
+                    expect(presenter).to(beAKindOf(FavoriteMoviesPresentationLogic.self))
+                }
+                
+                it("Interactor to have a valid image base path"){
+                    expect(interactor.imageBasePath).to(equal("http://image.tmdb.org/t/p/w185"))
+                }
+                
+                context("when listing favorite movies") {
                     
                     context("succeeded") {
                         
@@ -46,21 +60,57 @@ class FavoriteMoviesInteractorSpec: QuickSpec {
                         
                         it("should return movies") {
                             expect(presenter.presentMoviesCalled).to(beTrue())
-                            expect(presenter.moviesToBePresented).to(equal(expectedFormattedResponse))
+//                            expect(presenter.moviesToBePresented).to(equal(expectedFormattedResponse))
                         }
                     }
                     
                     context("failed") {
                         beforeEach {
-                            let response = FavoriteMoviesModel.Response.Error(title: "Nenhum favorito", description: "Que tal iniciar a sua lista? Abra os detalhes de um filme e favorite-o.")
-                            presenter.presentError(response: response)
+                            let movies = worker.getFavoriteMoviesEmpty()
+                            if movies.isEmpty {
+                                let response = FavoriteMoviesModel.Response.Error(title: "Nenhum favorito", description: "Que tal iniciar a sua lista? Abra os detalhes de um filme e favorite-o.")
+                                presenter.presentError(response: response)
+                            }
                         }
                         
                         it("should return error message") {
                             expect(presenter.presentErrorCalled).to(beTrue())
+                            expect(presenter.moviesToBePresented).to(beEmpty())
                         }
                     }
-                }   
+                }
+                
+                
+                context("when removing a movie") {
+                    beforeEach {
+                        let response = worker.removeFavoriteMovie(id: 123)
+                        if !response {
+                            let response = FavoriteMoviesModel.Response.Error(title: "Erro", description: "Não foi possível remover o filme")
+                            presenter.presentError(response: response)
+                        }
+                    }
+                    
+                    it("and succeeded") {
+                        expect(presenter.presentErrorCalled).to(beFalse())
+                    }
+                }
+                
+                context("when removing a movie") {
+                    beforeEach {
+                        // Passing an id that doesn't exist
+                        let response = worker.removeFavoriteMovie(id: 999)
+                        if !response {
+                            let response = FavoriteMoviesModel.Response.Error(title: "Erro", description: "Não foi possível remover o filme")
+                            presenter.presentError(response: response)
+                        }
+                    }
+                    
+                    it("and failed") {
+                        expect(presenter.presentErrorCalled).to(beTrue())
+                    }
+                }
+                
+                
             }
             
             
@@ -84,6 +134,7 @@ final class FavoriteMoviesPresenterSpy: FavoriteMoviesPresentationLogic {
     
     func presentError(response: FavoriteMoviesModel.Response.Error) {
         presentErrorCalled = true
+        moviesToBePresented = []
     }
     
     

@@ -12,19 +12,20 @@ import Foundation
 
 class FavoriteMoviesWorkerMock: ManageFavoriteMoviesActions {
     
-    var favoritesCoreData = [
+    let favoritesCoreData = [
         MovieDetailed(id: 123, genres: [Genre(id: 23, name: "genre")], genresNames: ["genre"], title: "title", overview: "overview", releaseDate: "2018-10-10", posterPath: "aaa", voteAverage: 8.0, isFavorite: true),
         MovieDetailed(id: 666, genres: [Genre(id: 66, name: "heeyy")], genresNames: ["heeyy"], title: "hell", overview: "overview", releaseDate: "2018-10-10", posterPath: "aaa", voteAverage: 8.0, isFavorite: true)
     ]
     
     func addFavoriteMovie(movie: MovieDetailed) -> Bool {
-        favoritesCoreData.append(movie)
-        return favoritesCoreData.count == 3 // the count incresed
+        var addingMovie = favoritesCoreData
+        addingMovie.append(movie)
+        return addingMovie.count == 3 // the count incresed
     }
     
     func removeFavoriteMovie(id: Int) -> Bool {
-        favoritesCoreData = favoritesCoreData.filter{ $0.id != id }
-        return favoritesCoreData.count == 1
+        let removingMovie = favoritesCoreData.filter{ $0.id != id }
+        return removingMovie.count == 1
     }
     
     func getFavoriteMovies() -> [MovieDetailed] {
@@ -35,4 +36,8 @@ class FavoriteMoviesWorkerMock: ManageFavoriteMoviesActions {
         return favoritesCoreData.filter{ $0.id == id }.count == 1
     }
 
+    func getFavoriteMoviesEmpty() -> [MovieDetailed] {
+        return []
+    }
+    
 }

@@ -30,6 +30,18 @@ class ListMoviesInteractorSpec: QuickSpec {
                     interactor.presenter = presenter
                 }
                 
+                it("Worker should conforms to protocol ListMoviesWorkerProtocol"){
+                    expect(worker).to(beAKindOf(ListMoviesWorkerProtocol.self))
+                }
+                
+                it("Presenter should conforms to protocol ListMoviesPresentationLogic"){
+                    expect(presenter).to(beAKindOf(ListMoviesPresentationLogic.self))
+                }
+                
+                it("Interactor to have a valid image base path"){
+                    expect(interactor.imageBasePath).to(equal("http://image.tmdb.org/t/p/w185"))
+                }
+                
                 context("and fetching popular movies") {
                     
                     context("and succeeded") {
@@ -44,7 +56,7 @@ class ListMoviesInteractorSpec: QuickSpec {
                                failure: { (networkError) in })
                         }
                         
-                        it("in receive movies from Interactor") {
+                        it("in receive movies from Worker") {
                             expect(presenter.presentMoviesCalled).to(beTrue())
                         }
                     }
@@ -61,12 +73,12 @@ class ListMoviesInteractorSpec: QuickSpec {
                             },failure: { (networkError) in })
                         }
                         
-                        it("receiving a Server Error") {
+                        it("and received a Server Error") {
                             expect(presenter.presentErrorCalled).to(equal(FetchError.serverError))
                         }
                     }
                     
-                    context("and it failed,") {
+                    context("and it failed") {
                         beforeEach {
                             worker?.error = FetchError.networkFailToConnect
                             let request = ListMovies.Request(page: 1)
@@ -80,7 +92,7 @@ class ListMoviesInteractorSpec: QuickSpec {
                             })
                         }
                         
-                        it("receiving a Network Error") {
+                        it("and received a Network Error") {
                             expect(presenter.presentErrorCalled).to(equal(FetchError.networkFailToConnect))
                         }
                     }

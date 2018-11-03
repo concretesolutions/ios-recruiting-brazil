@@ -18,7 +18,7 @@ class ListMoviesInteractor: ListMoviesBusinessLogic {
     var presenter: ListMoviesPresentationLogic!
     var worker: ListMoviesWorker = ListMoviesWorker()
     // w185 is a nice size for mobile app
-    private let imageBasePath = "http://image.tmdb.org/t/p/w185"
+    let imageBasePath = "http://image.tmdb.org/t/p/w185"
     
     // MARK: Do request
     func fetchPopularMovies(request: ListMovies.Request) {
