@@ -53,8 +53,8 @@ Para posições mais Seniors, porém, damos muito importância para a qualidade 
 - [x] Célula do Grid de filmes com informação se o filme foi favoritado no app ou não;
 - [x] Tela de filtro com seleção de data de lançamento e gênero. A tela de filtro só é acessível a partir da tela de favoritos;
 - [x] Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
-- [ ] Testes unitários no projeto;
-- [ ] Testes funcionais.
+- [x] Testes unitários no projeto;
+- [x] Testes funcionais.
 - [ ] Pipeline Automatizado
 
 # Exemplos e sugestões
