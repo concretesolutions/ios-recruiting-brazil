@@ -77,12 +77,13 @@ class MovieProvider {
     }
     
     func handle(movie: Movie) {
+       
         try! self.realm.write {
+            movie.isSaved = !movie.isSaved
             if let movie = self.realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
                 
                 self.realm.delete(movie)
             } else {
-                
                 self.realm.add(movie)
             }
         }
@@ -97,15 +98,11 @@ class MovieProvider {
         return self.realm.object(ofType: Movie.self, forPrimaryKey: id) != nil
     }
     
-    func filteredLoad(text: String = "", filter: Filter?) -> [Movie] {
+    func filteredLoad(text: String = "", filter: Filter) -> [Movie] {
         var movies = self.realm.objects(Movie.self)
         
         if !text.isEmpty {
             movies = movies.filter("title CONTAINS[c] '\(text)'")
-        }
-        
-        guard let filter = filter else {
-            return Array(movies)
         }
         
         if !filter.years.isEmpty {
@@ -113,17 +110,20 @@ class MovieProvider {
         }
         
         
-        var moviesArray = Array(movies)
         
         if !filter.genres.isEmpty {
+            var moviesArray : [Movie] = []
+            
             for genre in filter.genres {
-                moviesArray = moviesArray.filter({
-                    return $0.genre_ids.contains(genre.id)
-                })
+                moviesArray.append(contentsOf: Array(movies).filter({
+                    return $0.genres.contains(genre)
+                }))
             }
+            
+             return moviesArray
         }
         
-        return moviesArray
+       return Array(movies)
     }
     
     

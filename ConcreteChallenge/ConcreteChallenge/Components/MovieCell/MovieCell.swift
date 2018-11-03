@@ -9,13 +9,6 @@
 import UIKit
 import SDWebImage
 
-struct MovieCellModel {
-    var title: String
-    var backdrop_path: String
-    var poster_path: String
-    var isSaved: Bool
-}
-
 protocol MovieCellDelegate {
     func saveTapped(indexPath: IndexPath)
 }
@@ -24,9 +17,8 @@ class MovieCell: UICollectionViewCell {
     
     static let identifier = "MovieCell"
     
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var saveButton: UIButton!
+    
+    @IBOutlet weak var cardContentView: CardContentView!
     
     var indexPath : IndexPath?
     
@@ -45,26 +37,7 @@ class MovieCell: UICollectionViewCell {
         self.layer.shadowOffset = .init(width: 0, height: 4)
         self.layer.shadowRadius = 12
         
-        self.saveButton.isExclusiveTouch = true
-    }
-    
-    func set(model: MovieCellModel) {
-        self.image?.sd_setImage(with: URL(string: Network.manager.imageDomain + model.backdrop_path)!, placeholderImage: UIImage(named: "imageError.png"), options: .forceTransition) { (_, err, _, _) in
-            if err != nil {
-                self.image.sd_setImage(with: URL(string: Network.manager.imageDomain + model.poster_path)!, completed: nil)
-            }
-        }
-        self.title.text = model.title
-        self.saveButton.alpha = model.isSaved ? 0.6 : 1
-    }
-    
-    @IBAction func save(_ sender: Any) {
-        self.saveButton.alpha = self.saveButton.alpha == 1 ? 0.6 : 1
-        
-        if let indexPath = self.indexPath {
-           self.delegate?.saveTapped(indexPath: indexPath)
-        }
-        
+        self.cardContentView.delegate = self
     }
     
     func resetTransform() {
@@ -117,6 +90,14 @@ class MovieCell: UICollectionViewCell {
                            options: animationOptions, animations: {
                             self.transform = .identity
             }, completion: completion)
+        }
+    }
+}
+
+extension MovieCell: CardContentViewDelegate {
+    func saveTapped() {
+        if let indexPath = self.indexPath {
+            self.delegate?.saveTapped(indexPath: indexPath)
         }
     }
 }

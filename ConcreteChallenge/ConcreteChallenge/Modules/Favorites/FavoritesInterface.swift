@@ -46,10 +46,22 @@ class FavoritesInterface: UIViewController {
     
         self.listCollectionView.register(UINib(nibName: FavoritedMovieCell.identifier, bundle: nil), forCellWithReuseIdentifier: FavoritedMovieCell.identifier)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieDescriptionSegue" {
+            if let movieDescriptionInterface = segue.destination as? MovieDescriptionInterface {
+                if let index = sender as? Int {
+                    movieDescriptionInterface.set(movie: self.manager.movieIn(index: index))
+                }
+            }
+        }
+    }
 }
 
 extension FavoritesInterface: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "movieDescriptionSegue", sender: indexPath.row)
+    }
 }
 
 extension FavoritesInterface: UICollectionViewDataSource {

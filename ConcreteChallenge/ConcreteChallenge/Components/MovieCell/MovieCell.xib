@@ -18,51 +18,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="184" height="206"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NWs-wN-Uyc">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hs-fk-Tfg" customClass="CardContentView" customModule="ConcreteChallenge" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="184" height="206"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-0c-wrC">
-                        <rect key="frame" x="118" y="166" width="46" height="20"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="46" id="Bzg-n6-Y1z"/>
-                            <constraint firstAttribute="height" constant="20" id="ucW-tR-ohW"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
-                        <state key="normal" title="SAVE">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <action selector="save:" destination="H24-cw-tFP" eventType="touchUpInside" id="o4h-pS-xF3"/>
-                        </connections>
-                    </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incredibles 2" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ymD-Qe-cxk">
-                        <rect key="frame" x="10" y="155" width="98" height="31"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <size key="shadowOffset" width="1" height="1"/>
-                    </label>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="gMg-0c-wrC" firstAttribute="leading" secondItem="ymD-Qe-cxk" secondAttribute="trailing" constant="10" id="2a5-cW-ySu"/>
-                <constraint firstItem="fMg-jy-JwB" firstAttribute="bottom" secondItem="gMg-0c-wrC" secondAttribute="bottom" constant="20" id="4Xk-bs-Apk"/>
-                <constraint firstAttribute="trailing" secondItem="NWs-wN-Uyc" secondAttribute="trailing" id="PWn-hW-Pn0"/>
-                <constraint firstItem="NWs-wN-Uyc" firstAttribute="top" secondItem="H24-cw-tFP" secondAttribute="top" id="Ww5-pd-XEm"/>
-                <constraint firstItem="ymD-Qe-cxk" firstAttribute="height" secondItem="H24-cw-tFP" secondAttribute="height" multiplier="0.15" id="gD0-Ku-KEd"/>
-                <constraint firstAttribute="bottom" secondItem="ymD-Qe-cxk" secondAttribute="bottom" constant="20" id="gcj-t5-7cs"/>
-                <constraint firstItem="ymD-Qe-cxk" firstAttribute="leading" secondItem="H24-cw-tFP" secondAttribute="leading" constant="10" id="gpE-Ni-atL"/>
-                <constraint firstItem="NWs-wN-Uyc" firstAttribute="leading" secondItem="H24-cw-tFP" secondAttribute="leading" id="omR-jR-CQ9"/>
-                <constraint firstAttribute="bottom" secondItem="NWs-wN-Uyc" secondAttribute="bottom" id="rtw-id-dKG"/>
-                <constraint firstAttribute="trailing" secondItem="gMg-0c-wrC" secondAttribute="trailing" constant="20" id="vRB-e3-Eno"/>
+                <constraint firstItem="7hs-fk-Tfg" firstAttribute="top" secondItem="H24-cw-tFP" secondAttribute="top" id="1j8-6h-7iV"/>
+                <constraint firstAttribute="bottom" secondItem="7hs-fk-Tfg" secondAttribute="bottom" id="KxQ-te-fY5"/>
+                <constraint firstItem="7hs-fk-Tfg" firstAttribute="leading" secondItem="H24-cw-tFP" secondAttribute="leading" id="Pbw-TS-8kd"/>
+                <constraint firstAttribute="trailing" secondItem="7hs-fk-Tfg" secondAttribute="trailing" id="ubd-6l-6k7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fMg-jy-JwB"/>
             <size key="customSize" width="184" height="206"/>
@@ -72,9 +38,7 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="image" destination="NWs-wN-Uyc" id="woL-5j-81U"/>
-                <outlet property="saveButton" destination="gMg-0c-wrC" id="RkV-pO-RbE"/>
-                <outlet property="title" destination="ymD-Qe-cxk" id="Nmi-XB-I1F"/>
+                <outlet property="cardContentView" destination="7hs-fk-Tfg" id="hWh-ZI-NJv"/>
             </connections>
             <point key="canvasLocation" x="-113.59999999999999" y="149.32533733133434"/>
         </collectionViewCell>

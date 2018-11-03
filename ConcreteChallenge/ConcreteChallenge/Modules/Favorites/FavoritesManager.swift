@@ -48,7 +48,7 @@ class FavoritesManager {
     }
     
     func filter(text: String = "") {
-        self.movies = self.movieProvider.filteredLoad(text: text, filter: self.filter)
+        self.movies = self.movieProvider.filteredLoad(text: text, filter: self.filter ?? Filter())
         self.interface?.reload()
     }
 }

@@ -22,8 +22,12 @@ class Network {
         return "https://api.themoviedb.org/3"
     }
     
-    var imageDomain: String {
+    var imageDomainLow: String {
         return "https://image.tmdb.org/t/p/w500/"
+    }
+    
+    var imageDomainHigh: String {
+        return "https://image.tmdb.org/t/p/original/"
     }
     
     var apiKey: String {

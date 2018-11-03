@@ -51,7 +51,7 @@ class FavoritedMovieCell: UICollectionViewCell {
     }
     
     func set(movie: Movie) {
-        self.image.sd_setImage(with: URL(string: movie.imageUrl)!, completed: nil)
+        self.image.sd_setImage(with: URL(string: Network.manager.imageDomainLow + movie.imageUrl)!, completed: nil)
         self.title.text = movie.title
         self.movieDescription.text = movie.overview
         self.releaseDate.text = String(movie.year)

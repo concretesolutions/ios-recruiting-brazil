@@ -22,7 +22,7 @@ extension HomeInterfaceProtocol {
 
 class HomeManager {
     var interface: HomeInterfaceProtocol?
-    var provider = MovieProvider()
+    var movieProvider = MovieProvider()
     
     var movies = [MovieJSON]()
     var page = 0
@@ -36,8 +36,9 @@ class HomeManager {
     init(_ interface: HomeInterfaceProtocol) {
         
         self.interface = interface
-        self.provider.delegate = self
-        self.provider.fetchGenres()
+        self.movieProvider.delegate = self
+        self.movieProvider.fetchGenres()
+        
     }
     
     func fetchMovies() {
@@ -47,7 +48,7 @@ class HomeManager {
         }
         self.isFetchInProgress = true
         self.page += 1
-        self.provider.fetchPopularMovies(page: page) { newMovies, totalPages, totalResults in
+        self.movieProvider.fetchPopularMovies(page: page) { newMovies, totalPages, totalResults in
             self.movies.append(contentsOf: newMovies)
             self.totalPages = totalPages
             self.totalResults = totalResults
@@ -66,31 +67,36 @@ class HomeManager {
         return totalResults
     }
     
-    func movieModelIn(index: Int) -> MovieCellModel? {
-        let movie = self.movies[index]
-        let isSaved = self.provider.contain(id: movie.id)
-        print(isSaved)
-        return MovieCellModel(title: movie.title ?? "", backdrop_path: movie.backdrop_path ?? "", poster_path: movie.poster_path ?? "", isSaved: isSaved)
-    }
-    
     func handleMovie(indexPath: IndexPath) {
         let movie = movieFor(index: indexPath.row)
         
-        self.provider.handle(movie: movie)
+        self.movieProvider.handle(movie: movie)
     }
     
-    private func movieFor(index: Int) -> Movie {
+    func movieFor(index: Int) -> Movie {
         let movieJson = self.movies[index]
         let movie = Movie()
         
         movie.id = movieJson.id
-        movie.imageUrl = Network.manager.imageDomain + (movieJson.backdrop_path ?? movieJson.poster_path ?? "")
+        movie.imageUrl = (movieJson.backdrop_path ?? movieJson.poster_path ?? "")
         movie.year = Int(String(movieJson.release_date?.prefix(4) ?? "0")) ?? 0
-        movie.title = movieJson.title
+        movie.title = movieJson.title ?? ""
         movie.overview = movieJson.overview ?? ""
-        movieJson.genre_ids?.forEach {
-            movie.genre_ids.append($0)
+        
+        self.movieProvider.fetchGenres { genres in
+            guard let ids = movieJson.genre_ids else {
+                return
+            }
+            
+            for id in ids {
+                if let genre = (genres.filter{ $0.id == id }).first {
+                    
+                    movie.genres.append(genre)
+                }
+            }
         }
+        
+        movie.isSaved = self.movieProvider.contain(id: movie.id)
         
         return movie
     }
