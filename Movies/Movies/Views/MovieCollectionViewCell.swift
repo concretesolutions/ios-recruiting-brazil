@@ -11,16 +11,7 @@ import Reusable
 
 final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
   
-  @IBOutlet weak var posterHeightLayoutConstraint: NSLayoutConstraint!
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var ratingLabel: UILabel!
-  @IBOutlet weak var yearLabel: UILabel!
-  @IBOutlet weak var posterImageView: UIImageView!
-  @IBOutlet weak var starContainerView: UIView!
-  @IBOutlet weak var starImageView: UIImageView!
-  @IBOutlet weak var loadingActivityIndicatorView: UIActivityIndicatorView!
-  
-  var movie: Movie!
+  // MARK: Types
   
   enum CellLoadingState {
     case loading
@@ -32,6 +23,26 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
     case notFavorite
   }
   
+  // MARK: Properties
+  
+  @IBOutlet weak var posterHeightLayoutConstraint: NSLayoutConstraint!
+  
+  @IBOutlet weak var titleLabel: UILabel!
+  
+  @IBOutlet weak var ratingLabel: UILabel!
+  
+  @IBOutlet weak var yearLabel: UILabel!
+  
+  @IBOutlet weak var posterImageView: UIImageView!
+  
+  @IBOutlet weak var starContainerView: UIView!
+  
+  @IBOutlet weak var starImageView: UIImageView!
+  
+  @IBOutlet weak var loadingActivityIndicatorView: UIActivityIndicatorView!
+  
+  var movie: Movie!
+
   var currentLoadingState: CellLoadingState! {
     didSet {
       switch currentLoadingState! {
@@ -57,6 +68,8 @@ final class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
       }
     }
   }
+  
+  // MARK: Lifecycle
   
   override func layoutSubviews() {
     super.layoutSubviews()

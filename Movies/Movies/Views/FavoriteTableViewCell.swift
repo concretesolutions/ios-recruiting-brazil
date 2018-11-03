@@ -11,23 +11,7 @@ import Reusable
 
 class FavoriteTableViewCell: UITableViewCell, NibReusable {
   
-  @IBOutlet weak var genresActivityIndicatorView: UIActivityIndicatorView!
-  @IBOutlet weak var posterDownloadActivityIndicatorView: UIActivityIndicatorView!
-  @IBOutlet weak var posterImageView: UIImageView!
-  @IBOutlet weak var genresLabel: UILabel!
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var yearLabel: UILabel!
-  @IBOutlet weak var overviewLabel: UILabel!
-  
-  var movie: Movie!
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    posterImageView.clipsToBounds = true
-    posterImageView.layer.cornerRadius = 10
-    posterImageView.layer.borderColor = UIColor.paleGrey.cgColor
-    posterImageView.layer.borderWidth = 1
-  }
+  // MARK: Types
   
   enum PosterDownloadState {
     case loading
@@ -38,6 +22,24 @@ class FavoriteTableViewCell: UITableViewCell, NibReusable {
     case loading
     case loaded
   }
+  
+  // MARK: Properties
+  
+  @IBOutlet weak var genresActivityIndicatorView: UIActivityIndicatorView!
+  
+  @IBOutlet weak var posterDownloadActivityIndicatorView: UIActivityIndicatorView!
+  
+  @IBOutlet weak var posterImageView: UIImageView!
+  
+  @IBOutlet weak var genresLabel: UILabel!
+  
+  @IBOutlet weak var titleLabel: UILabel!
+  
+  @IBOutlet weak var yearLabel: UILabel!
+  
+  @IBOutlet weak var overviewLabel: UILabel!
+  
+  var movie: Movie!
   
   var currentPosterDownloadState: PosterDownloadState! {
     didSet {
@@ -65,6 +67,16 @@ class FavoriteTableViewCell: UITableViewCell, NibReusable {
     }
   }
   
+  // MARK: Lifecycle
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    posterImageView.clipsToBounds = true
+    posterImageView.layer.cornerRadius = 10
+    posterImageView.layer.borderColor = UIColor.paleGrey.cgColor
+    posterImageView.layer.borderWidth = 1
+  }
+  
   func configure(withMovie movie: Movie) {
     self.movie = movie
     
@@ -88,6 +100,8 @@ class FavoriteTableViewCell: UITableViewCell, NibReusable {
     overviewLabel.text = movie.overview
     yearLabel.text = "\(Calendar.current.component(.year, from: movie.releaseDate))"
   }
+  
+  // MARK: Helper methods
   
   func getGenresName(fromGenresArray genres: [Genre]) -> [String] {
     let genresName = movie.genresID.map { (currentId) -> String in

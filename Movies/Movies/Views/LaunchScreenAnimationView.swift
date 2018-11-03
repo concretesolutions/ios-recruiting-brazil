@@ -37,18 +37,23 @@ class LaunchScreenAnimationView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     backgroundColor = UIColor.whiteAlabaster
-    positionFrames()
+    setupViewConfiguration()
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+
+}
+
+/////////////////////////////////////////
+//
+// MARK: View configuration
+//
+/////////////////////////////////////////
+extension LaunchScreenAnimationView: ViewConfiguration {
   
-  func positionFrames() {
-    addSubview(lottieAnimationView)
-    addSubview(appNameLabel)
-    addSubview(clapperboardImageView)
-    
+  func setupConstraints() {
     clapperboardImageView.snp.makeConstraints { make in
       make.width.height.equalTo(80)
       make.centerX.centerY.equalTo(self)
@@ -67,6 +72,21 @@ class LaunchScreenAnimationView: UIView {
     
     layoutIfNeeded()
   }
+  
+  func buildViewHierarchy() {
+    addSubview(lottieAnimationView)
+    addSubview(appNameLabel)
+    addSubview(clapperboardImageView)
+  }
+  
+}
+
+/////////////////////////////////////////
+//
+// MARK: Launch screen animation
+//
+/////////////////////////////////////////
+extension LaunchScreenAnimationView {
   
   func startAnimations() {
     clapperboardImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
@@ -121,4 +141,5 @@ class LaunchScreenAnimationView: UIView {
         }
     }
   }
+  
 }
