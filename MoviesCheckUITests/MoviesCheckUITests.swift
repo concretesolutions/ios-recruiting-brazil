@@ -8,6 +8,7 @@
 
 import XCTest
 
+//If this is not implemented it's becaouse i run out of time
 class MoviesCheckUITests: XCTestCase {
 
     override func setUp() {

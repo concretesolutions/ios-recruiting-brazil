@@ -16,6 +16,8 @@ class FavoriteViewController: UIViewController {
     let tableManager = FavoritesTableManager()
     var selectedMedia:MediaItem?
     
+    var filter:Filter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +31,12 @@ class FavoriteViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        tableManager.reloadData()
+        if let currentFilter = filter{
+            tableManager.realoadData(usingFilter: currentFilter)
+        }else{
+            tableManager.reloadData()
+        }
+        
         DispatchQueue.main.async {
             self.favoriteTable.reloadData()
         }
@@ -45,10 +52,40 @@ class FavoriteViewController: UIViewController {
             let destination = segue.destination as! MediaDetailViewController
             destination.mediaItem = selectedMedia
             
+            
+            if(selectedMedia?.mediaType == MediaType.movie){
+                destination.searchType = ScreenType.movies
+            }else{
+                destination.searchType = ScreenType.tvShows
+            }
+            
+        }
+        
+        if(segue.identifier == AppSegues.filterPopover.rawValue){
+            
+            let destination = segue.destination as! FilterPopOVerViewController
+            destination.delegate = self
+            
         }
         
     }
 
+}
+
+//MARK:-FilterPopOVerViewControllerDelegate
+extension FavoriteViewController:FilterPopOVerViewControllerDelegate{
+    
+    func applyFilter(filter: Filter) {
+        self.filter = filter
+        
+        if(UI_USER_INTERFACE_IDIOM() == .pad){//Ipad will not dispatch viewDidAppear when dismissing the popover, so we need to reload data here
+            
+            tableManager.realoadData(usingFilter: filter)
+            
+        }
+        
+    }
+    
 }
 
 //MARK:-FavoritesTableManagerDelegate

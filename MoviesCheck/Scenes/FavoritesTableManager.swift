@@ -33,6 +33,11 @@ class FavoritesTableManager:NSObject{
         favoritedTvShows = DatabaseWorker.shared.getFavorites(type: .tv)
     }
     
+    func realoadData(usingFilter filter:Filter){
+        favoritedMovies = DatabaseWorker.shared.getFavorites(type: .movie, filter: filter)
+        favoritedTvShows = DatabaseWorker.shared.getFavorites(type: .tv, filter: filter)
+    }
+    
 }
 
 //MARK:- Table View

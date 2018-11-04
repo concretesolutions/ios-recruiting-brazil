@@ -25,6 +25,7 @@ class MediaItemDao:Object{
     @objc dynamic var poster:String? = nil
     @objc dynamic var overview:String = ""
     @objc dynamic var releaseDate:String = ""
+    @objc dynamic var year:String = ""
     var genres = RealmSwift.List<GenreDao>()
     @objc dynamic var type:Int = 0
     
@@ -42,6 +43,12 @@ class MediaItemDao:Object{
         type = mediaItem.mediaType.rawValue
         
         setGenres(mediaGenres: mediaItem.genres)
+        
+        let dateElements = releaseDate.components(separatedBy: "-")
+        
+        if let yearFound = dateElements.first{
+            year = yearFound
+        }
         
     }
     

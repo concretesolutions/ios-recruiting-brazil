@@ -15,6 +15,9 @@
         <array key="HindMadurai-SemiBold.ttf">
             <string>HindMadurai-SemiBold</string>
         </array>
+        <array key="Lora-Italic.ttf">
+            <string>Lora-Italic</string>
+        </array>
         <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
@@ -111,7 +114,13 @@
                         <viewLayoutGuide key="safeArea" id="IQz-zg-Owh"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="pmt-ym-U4C">
-                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="w8x-ti-2LS"/>
+                        <barButtonItem key="rightBarButtonItem" image="filter.png" id="w8x-ti-2LS">
+                            <connections>
+                                <segue destination="dh6-d1-bBR" kind="popoverPresentation" identifier="goFilter" popoverAnchorBarButtonItem="w8x-ti-2LS" id="m5t-Sh-7f0">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="favoriteTable" destination="xsV-2g-fvm" id="tAy-3Z-ogn"/>
@@ -122,13 +131,130 @@
             </objects>
             <point key="canvasLocation" x="1059.4202898550725" y="157.33695652173915"/>
         </scene>
+        <!--Filter PopO Ver View Controller-->
+        <scene sceneID="4b2-9k-34I">
+            <objects>
+                <viewController id="dh6-d1-bBR" customClass="FilterPopOVerViewController" customModule="MoviesCheck" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sR1-eO-4DY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4sC-qA-vdJ">
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="6Ue-pn-n8v"/>
+                                </constraints>
+                                <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.11762935670000001" green="0.1176572666" blue="0.1176275685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Filter" id="raI-QU-8IK">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="fHR-Uk-VF8">
+                                            <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="cancelFilter:" destination="dh6-d1-bBR" id="F84-ID-zGZ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Apply" id="Icx-Xc-x89">
+                                            <connections>
+                                                <action selector="applyFilter:" destination="dh6-d1-bBR" id="LOM-qW-kYn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pM2-fv-Brb">
+                                <rect key="frame" x="3" y="64" width="408" height="672"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pz7-Th-E0e">
+                                    <size key="itemSize" width="194" height="79"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="filterCell" id="ITw-RB-RzD" customClass="FilterCollectionViewCell" customModule="MoviesCheck" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="194" height="79"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="194" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter element" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIe-m8-Aix">
+                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="79"/>
+                                                    <fontDescription key="fontDescription" name="Lora-Italic" family="Lora" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="0.48726731538772583" green="0.48732489347457886" blue="0.48723411560058594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="AIe-m8-Aix" secondAttribute="trailing" id="H4m-xE-roK"/>
+                                            <constraint firstAttribute="bottom" secondItem="AIe-m8-Aix" secondAttribute="bottom" id="hnv-s9-wRd"/>
+                                            <constraint firstItem="AIe-m8-Aix" firstAttribute="top" secondItem="ITw-RB-RzD" secondAttribute="top" id="usX-5Y-XsN"/>
+                                            <constraint firstItem="AIe-m8-Aix" firstAttribute="leading" secondItem="ITw-RB-RzD" secondAttribute="leading" id="zb2-B8-XbT"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                        <connections>
+                                            <outlet property="filterLabel" destination="AIe-m8-Aix" id="9oM-SP-cac"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="37n-v2-Wxn" customClass="SearchHeaderCollectionReusableView" customModule="MoviesCheck" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="408" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tittle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YT1-WV-CDQ">
+                                            <rect key="frame" x="8" y="14.666666666666664" width="398" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Zo7-8F-d18"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HindMadurai-SemiBold" family="Hind Madurai" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="YT1-WV-CDQ" secondAttribute="trailing" constant="8" id="C1w-06-oCb"/>
+                                        <constraint firstItem="YT1-WV-CDQ" firstAttribute="leading" secondItem="37n-v2-Wxn" secondAttribute="leading" constant="8" id="aTn-6A-Kxn"/>
+                                        <constraint firstItem="YT1-WV-CDQ" firstAttribute="centerY" secondItem="37n-v2-Wxn" secondAttribute="centerY" id="lH2-og-ii0"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="tittle" destination="YT1-WV-CDQ" id="YSA-6E-Dre"/>
+                                    </connections>
+                                </collectionReusableView>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Knf-SW-AKm" firstAttribute="trailing" secondItem="pM2-fv-Brb" secondAttribute="trailing" constant="3" id="KOK-iw-vkZ"/>
+                            <constraint firstItem="Knf-SW-AKm" firstAttribute="bottom" secondItem="pM2-fv-Brb" secondAttribute="bottom" id="RCV-6D-eQF"/>
+                            <constraint firstItem="4sC-qA-vdJ" firstAttribute="leading" secondItem="Knf-SW-AKm" secondAttribute="leading" id="T7E-W6-CEM"/>
+                            <constraint firstItem="pM2-fv-Brb" firstAttribute="top" secondItem="4sC-qA-vdJ" secondAttribute="bottom" id="T7S-Ab-dLq"/>
+                            <constraint firstItem="4sC-qA-vdJ" firstAttribute="top" secondItem="Knf-SW-AKm" secondAttribute="top" id="UGm-V3-3IA"/>
+                            <constraint firstItem="4sC-qA-vdJ" firstAttribute="trailing" secondItem="Knf-SW-AKm" secondAttribute="trailing" id="ZxH-RT-dac"/>
+                            <constraint firstItem="pM2-fv-Brb" firstAttribute="leading" secondItem="Knf-SW-AKm" secondAttribute="leading" constant="3" id="d7f-5V-wEK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Knf-SW-AKm"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="480"/>
+                    <connections>
+                        <outlet property="filterCollectionView" destination="pM2-fv-Brb" id="Yph-uf-46d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dhm-ZD-zob" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2095.6521739130435" y="155.70652173913044"/>
+        </scene>
         <!--mediaDetail-->
         <scene sceneID="beF-A7-d9b">
             <objects>
                 <viewControllerPlaceholder storyboardName="Movies_TVStoryboard" referencedIdentifier="mediaDetail" id="c08-Gh-ZHq" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDB-83-vxJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1718" y="157"/>
+            <point key="canvasLocation" x="1654" y="65"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="N0G-GF-z5H">
@@ -154,4 +280,7 @@
             <point key="canvasLocation" x="120.8" y="157.87106446776613"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="filter.png" width="33" height="29"/>
+    </resources>
 </document>

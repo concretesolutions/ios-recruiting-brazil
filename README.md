@@ -24,3 +24,8 @@ MoviesCheck is an iOS app designed for iPhones and iPads built using the Clean S
 
 ---
 
+### iPad
+
+
+
+### iPhone

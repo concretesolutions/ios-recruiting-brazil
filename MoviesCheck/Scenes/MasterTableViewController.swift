@@ -22,6 +22,9 @@ enum AppSegues:String{
     case iPadFavorites = "iPadFavorite"
     case iPhoneFavorites = "iPhoneFavorite"
     case mediaDetail = "goMediaDetail"
+    case filterPopover = "goFilter"
+    case iPadWeb = "goWebIPad"
+    case iPhoneWeb = "goWebIphone"
 }
 
 class MasterTableViewController: UITableViewController {
