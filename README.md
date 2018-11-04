@@ -31,4 +31,4 @@ MoviesCheck is an iOS app designed for iPhones and iPads built using the Clean S
 ![DanielLima Project](assets/captures/iPadFilter.png)
 
 ### iPhone
-![DanielLima Project](assets/captures/iPhoneFav.PNG =375x667) ![DanielLima Project](assets/captures/iPhoneMovie.PNG =375x667) ![DanielLima Project](assets/captures/iPhoneSearch.PNG =375x667)
+![DanielLima Project](assets/captures/iPhoneFav.PNG | width=375) ![DanielLima Project](assets/captures/iPhoneMovie.PNG | width=375) ![DanielLima Project](assets/captures/iPhoneSearch.PNG | width=375)
