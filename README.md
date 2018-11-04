@@ -37,6 +37,7 @@ open Movies.xcworkspace/
 * [Reusable](https://github.com/AliSoftware/Reusable) - A Swift mixin to use UITableViewCells, UICollectionViewCells and UIViewControllers in a type-safe way
 * [iOS Lottie](https://github.com/airbnb/lottie-ios) - An iOS library to natively render After Effects vector animations
 * [SwiftLint](https://github.com/realm/SwiftLint) - A tool to enforce Swift style and conventions
+* [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) - JSON parser in swift
 
 ## License
 
