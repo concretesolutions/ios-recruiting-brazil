@@ -46,7 +46,7 @@ class MainScreenInteractor: MainScreenBusinessLogic, MainScreenDataStore {
     func fetchPopularMovies(shouldResetMovies: Bool) {
         if shouldResetMovies {self.currentPageForAPIPopular = 1}
         worker.fetchPopularMovies(request: MainScreen.FetchPopularMovies.Request(index: currentPageForAPIPopular), completion: { (movies, error) in
-
+            
             self.presentMoviesOrError(movies: movies, persistentMovieList: &self.movies, error: error, shouldResetMovies: shouldResetMovies, pageReference: &self.currentPageForAPIPopular)
         })
     }
