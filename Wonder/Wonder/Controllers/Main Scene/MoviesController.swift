@@ -126,8 +126,8 @@ class MoviesController: UIViewController, UISearchBarDelegate {
 //        //
 //
 //        self.performSegue(withIdentifier: "showSearchScene", sender: self)
-        
-    }
+//
+//    }
     
 //    @objc private func didSelectBarBackAction() {
 //
@@ -137,6 +137,6 @@ class MoviesController: UIViewController, UISearchBarDelegate {
 //        UIApplication.shared.keyWindow?.rootViewController = vc
 //
 //
-//    }
+    }
     
 }
