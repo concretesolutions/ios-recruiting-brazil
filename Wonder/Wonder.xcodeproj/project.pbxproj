@@ -23,6 +23,8 @@
 		9CC4228421921945000AB1FA /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228321921945000AB1FA /* UIColor+Utils.swift */; };
 		9CC4228621921F0A000AB1FA /* ErrorHandler.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CC4228521921F0A000AB1FA /* ErrorHandler.storyboard */; };
 		9CC4228921921F66000AB1FA /* ErrorHandlerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228821921F66000AB1FA /* ErrorHandlerController.swift */; };
+		9CC4228B21922871000AB1FA /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228A21922871000AB1FA /* AppSettings.swift */; };
+		9CC4228E21922977000AB1FA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228D21922977000AB1FA /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		9CC4228321921945000AB1FA /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		9CC4228521921F0A000AB1FA /* ErrorHandler.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ErrorHandler.storyboard; sourceTree = "<group>"; };
 		9CC4228821921F66000AB1FA /* ErrorHandlerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerController.swift; sourceTree = "<group>"; };
+		9CC4228A21922871000AB1FA /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		9CC4228D21922977000AB1FA /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		DB41C53E711EEB04AFC03A83 /* Pods-Wonder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wonder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wonder/Pods-Wonder.release.xcconfig"; sourceTree = "<group>"; };
 		E470373B8A663E5DB84B92F8 /* Pods-WonderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WonderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WonderTests/Pods-WonderTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +130,7 @@
 		9C065703219207E6008DFDCF /* Wonder */ = {
 			isa = PBXGroup;
 			children = (
+				9CC4228C2192295A000AB1FA /* Reachability */,
 				9CC422822192190F000AB1FA /* Extensions */,
 				9CC4227C2192149C000AB1FA /* Controllers */,
 				9CC4227B21921485000AB1FA /* Core Data */,
@@ -159,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				9C065704219207E6008DFDCF /* AppDelegate.swift */,
+				9CC4228A21922871000AB1FA /* AppSettings.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -238,6 +244,14 @@
 				9CC4228821921F66000AB1FA /* ErrorHandlerController.swift */,
 			);
 			path = "Error Handler";
+			sourceTree = "<group>";
+		};
+		9CC4228C2192295A000AB1FA /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				9CC4228D21922977000AB1FA /* Reachability.swift */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		D4F97620BF59B2156C9A8E00 /* Frameworks */ = {
@@ -477,9 +491,11 @@
 			files = (
 				9CC4228421921945000AB1FA /* UIColor+Utils.swift in Sources */,
 				9C06570D219207E6008DFDCF /* Wonder.xcdatamodeld in Sources */,
+				9CC4228B21922871000AB1FA /* AppSettings.swift in Sources */,
 				9C065705219207E6008DFDCF /* AppDelegate.swift in Sources */,
 				9CC4228921921F66000AB1FA /* ErrorHandlerController.swift in Sources */,
 				9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */,
+				9CC4228E21922977000AB1FA /* Reachability.swift in Sources */,
 				9CC4228121921569000AB1FA /* FavoritesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor.applicationBarTintColor
         UITabBar.appearance().tintColor = UIColor.black
         
+        // reachability
+        reachability = Reachability.reachabilityForInternetConnection()
+        _ = reachability.startNotifier()
+        
+        
         
         return true
     }

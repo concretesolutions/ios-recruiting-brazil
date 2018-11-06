@@ -36,10 +36,21 @@
                         <viewLayoutGuide key="safeArea" id="cYc-kA-UI6"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="nBE-r8-IHG"/>
+                    <connections>
+                        <segue destination="3oC-ky-O7j" kind="presentation" identifier="showErrorHandler" modalTransitionStyle="crossDissolve" id="03r-Wx-BlA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfC-OF-R1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1997.5999999999999" y="-645.42728635682158"/>
+        </scene>
+        <!--ErrorHandler-->
+        <scene sceneID="vbx-K5-0lL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ErrorHandler" id="3oC-ky-O7j" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wer-Bb-FrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2924" y="-646"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FJ1-Hb-tXw">
