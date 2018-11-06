@@ -29,17 +29,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate {
     // MARK: - UI Config
     private func uiConfig() {
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        
-        //        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        
+
         // Navigation Search
         search = UISearchController(searchResultsController: nil)
         search.searchBar.delegate = self
         search.searchResultsUpdater = self as? UISearchResultsUpdating
         search.searchBar.tintColor = UIColor.black
         
-        
-        ////
+        // search text field background color
         if let textfield = search.searchBar.value(forKey: "searchField") as? UITextField {
             if let backgroundview = textfield.subviews.first {
                 
@@ -51,7 +48,6 @@ class FavoritesController: UIViewController, UISearchBarDelegate {
                 backgroundview.clipsToBounds = true;
             }
         }
-        ////
         
         // associate to navigation item
         self.navigationItem.searchController = search
