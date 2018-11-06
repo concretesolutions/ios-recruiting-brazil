@@ -21,6 +21,8 @@
 		9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4227D21921505000AB1FA /* MoviesController.swift */; };
 		9CC4228121921569000AB1FA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228021921569000AB1FA /* FavoritesController.swift */; };
 		9CC4228421921945000AB1FA /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228321921945000AB1FA /* UIColor+Utils.swift */; };
+		9CC4228621921F0A000AB1FA /* ErrorHandler.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CC4228521921F0A000AB1FA /* ErrorHandler.storyboard */; };
+		9CC4228921921F66000AB1FA /* ErrorHandlerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228821921F66000AB1FA /* ErrorHandlerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		9CC4227D21921505000AB1FA /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
 		9CC4228021921569000AB1FA /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		9CC4228321921945000AB1FA /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		9CC4228521921F0A000AB1FA /* ErrorHandler.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ErrorHandler.storyboard; sourceTree = "<group>"; };
+		9CC4228821921F66000AB1FA /* ErrorHandlerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerController.swift; sourceTree = "<group>"; };
 		DB41C53E711EEB04AFC03A83 /* Pods-Wonder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wonder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wonder/Pods-Wonder.release.xcconfig"; sourceTree = "<group>"; };
 		E470373B8A663E5DB84B92F8 /* Pods-WonderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WonderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WonderTests/Pods-WonderTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +184,7 @@
 		9CC4227721920EBB000AB1FA /* Error Handler */ = {
 			isa = PBXGroup;
 			children = (
+				9CC4228521921F0A000AB1FA /* ErrorHandler.storyboard */,
 			);
 			path = "Error Handler";
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				9CC4227F2192154B000AB1FA /* Main Scene */,
+				9CC4228721921F41000AB1FA /* Error Handler */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -224,6 +230,14 @@
 				9CC4228321921945000AB1FA /* UIColor+Utils.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9CC4228721921F41000AB1FA /* Error Handler */ = {
+			isa = PBXGroup;
+			children = (
+				9CC4228821921F66000AB1FA /* ErrorHandlerController.swift */,
+			);
+			path = "Error Handler";
 			sourceTree = "<group>";
 		};
 		D4F97620BF59B2156C9A8E00 /* Frameworks */ = {
@@ -360,6 +374,7 @@
 				9C065712219207EF008DFDCF /* LaunchScreen.storyboard in Resources */,
 				9C06570F219207EF008DFDCF /* Assets.xcassets in Resources */,
 				9C06570A219207E6008DFDCF /* Main.storyboard in Resources */,
+				9CC4228621921F0A000AB1FA /* ErrorHandler.storyboard in Resources */,
 				9CC4227A219211E6000AB1FA /* Logo-animado-1.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +478,7 @@
 				9CC4228421921945000AB1FA /* UIColor+Utils.swift in Sources */,
 				9C06570D219207E6008DFDCF /* Wonder.xcdatamodeld in Sources */,
 				9C065705219207E6008DFDCF /* AppDelegate.swift in Sources */,
+				9CC4228921921F66000AB1FA /* ErrorHandlerController.swift in Sources */,
 				9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */,
 				9CC4228121921569000AB1FA /* FavoritesController.swift in Sources */,
 			);

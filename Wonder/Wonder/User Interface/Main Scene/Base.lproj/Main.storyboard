@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favorites Controller-->
+        <!--Favorites-->
         <scene sceneID="az1-7R-UeY">
             <objects>
                 <viewController id="w3s-0j-4a1" customClass="FavoritesController" customModule="Wonder" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,13 +19,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Npr-Fs-2rH"/>
                     </view>
-                    <navigationItem key="navigationItem" id="R8B-cf-Z2h"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="R8B-cf-Z2h"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBa-Pz-oVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1997.5999999999999" y="20.239880059970016"/>
         </scene>
-        <!--Movies Controller-->
+        <!--Movies-->
         <scene sceneID="L9q-ms-8Gs">
             <objects>
                 <viewController id="z93-9r-2vq" customClass="MoviesController" customModule="Wonder" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cYc-kA-UI6"/>
                     </view>
-                    <navigationItem key="navigationItem" id="nBE-r8-IHG"/>
+                    <navigationItem key="navigationItem" title="Movies" id="nBE-r8-IHG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfC-OF-R1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -59,14 +59,14 @@
             </objects>
             <point key="canvasLocation" x="107" y="-312"/>
         </scene>
-        <!--Item 1-->
+        <!--Movies-->
         <scene sceneID="qPx-NJ-Xwa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SkX-Hj-jGT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="6UX-ZR-9Zb"/>
+                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="6UX-ZR-9Zb"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hhj-iX-3jR">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Hhj-iX-3jR">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -78,14 +78,14 @@
             </objects>
             <point key="canvasLocation" x="1058.4000000000001" y="-645.42728635682158"/>
         </scene>
-        <!--Item 2-->
+        <!--Favorites-->
         <scene sceneID="lLR-2m-qSl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k2Y-hP-Pu6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="JF9-ew-xBt"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" selectedImage="favorite_empty_icon" id="JF9-ew-xBt"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0ya-Un-Cir">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="0ya-Un-Cir">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -98,4 +98,8 @@
             <point key="canvasLocation" x="1058.4000000000001" y="20.239880059970016"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="list_icon" width="18" height="10"/>
+    </resources>
 </document>

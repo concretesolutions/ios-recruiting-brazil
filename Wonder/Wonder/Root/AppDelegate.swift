@@ -18,11 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Global Tint Color
-        window?.tintColor = UIColor.darkGray
+        window?.tintColor = UIColor.black
         
-        // Global Navigation Bar Tint Color
-        UINavigationBar.appearance().tintColor = UIColor.black
+        // Global Navigation
+        UINavigationBar.appearance().tintColor = UIColor.darkGray
         UINavigationBar.appearance().barTintColor = UIColor.applicationBarTintColor
+        
+        // Tab Bar
+        UITabBar.appearance().barTintColor = UIColor.applicationBarTintColor
+        UITabBar.appearance().tintColor = UIColor.black
         
         
         return true
