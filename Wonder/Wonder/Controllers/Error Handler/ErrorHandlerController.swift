@@ -34,7 +34,7 @@ class ErrorHandlerController: UIViewController {
         self.refreshButton.layer.borderWidth = 1
     }
     
-    // MARK: UI Actions
+    // MARK: - UI Actions
     @IBAction func refreshAction(_ sender: Any) {
         print("♻️ refresh connection")
         
