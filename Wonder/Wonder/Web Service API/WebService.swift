@@ -17,27 +17,29 @@ class WebService {
         let configUrl = WebService.getEndpoint("getGenreList")
         let apiKey = WebService.getEndpoint("apiKey")
         
-        let urlString = configUrl.replacingOccurrences(of: "[API_KEY]", with: apiKey)
+        let urlString = configUrl.replacingOccurrences(of: "[APIKEY]", with: apiKey)
         
         let url = URL(string: urlString)
         
         // request web service
         URLSession.shared.dataTask(with: url!) {
             data, response, error in
-            
-            let errorDic = NSDictionary()
+        
             // check response's status code
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200 {
-                    completion(GenresList(dictionary: NSDictionary())!)
+                    DispatchQueue.main.async {
+                        completion(GenresList(dictionary: NSDictionary())!)
+                    }
                     return
                 }
             }
             
             // check error
             if error != nil {
-                errorDic.setValue(error?.localizedDescription, forKey: "error")
-                completion(GenresList(dictionary: NSDictionary())!)
+                DispatchQueue.main.async {
+                    completion(GenresList(dictionary: NSDictionary())!)
+                }
                 return
             }
             
