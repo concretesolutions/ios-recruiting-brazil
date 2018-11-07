@@ -18,7 +18,8 @@ class MoviesController: UIViewController, UISearchBarDelegate {
     private var searchInProgress = false
     private var searchArgument = String()
     
-    
+    private var webService = WebService()
+
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {

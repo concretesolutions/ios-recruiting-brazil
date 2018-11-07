@@ -26,6 +26,9 @@
 		9CC4228B21922871000AB1FA /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228A21922871000AB1FA /* AppSettings.swift */; };
 		9CC4228E21922977000AB1FA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228D21922977000AB1FA /* Reachability.swift */; };
 		9CE44D4A21927B4E00D76492 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CE44D4921927B4E00D76492 /* Config.plist */; };
+		9CE44D4D2192854700D76492 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE44D4C2192854700D76492 /* WebService.swift */; };
+		9CE44D53219285DE00D76492 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE44D51219285DE00D76492 /* Genres.swift */; };
+		9CE44D54219285DE00D76492 /* GenresList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE44D52219285DE00D76492 /* GenresList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,9 @@
 		9CC4228A21922871000AB1FA /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		9CC4228D21922977000AB1FA /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9CE44D4921927B4E00D76492 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		9CE44D4C2192854700D76492 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		9CE44D51219285DE00D76492 /* Genres.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		9CE44D52219285DE00D76492 /* GenresList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenresList.swift; sourceTree = "<group>"; };
 		DB41C53E711EEB04AFC03A83 /* Pods-Wonder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wonder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wonder/Pods-Wonder.release.xcconfig"; sourceTree = "<group>"; };
 		E470373B8A663E5DB84B92F8 /* Pods-WonderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WonderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WonderTests/Pods-WonderTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +138,8 @@
 		9C065703219207E6008DFDCF /* Wonder */ = {
 			isa = PBXGroup;
 			children = (
+				9CE44D4E2192859200D76492 /* Web Service Model */,
+				9CE44D4B219284A500D76492 /* Web Service API */,
 				9CC4228C2192295A000AB1FA /* Reachability */,
 				9CC422822192190F000AB1FA /* Extensions */,
 				9CC4227C2192149C000AB1FA /* Controllers */,
@@ -255,6 +263,23 @@
 				9CC4228D21922977000AB1FA /* Reachability.swift */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		9CE44D4B219284A500D76492 /* Web Service API */ = {
+			isa = PBXGroup;
+			children = (
+				9CE44D4C2192854700D76492 /* WebService.swift */,
+			);
+			path = "Web Service API";
+			sourceTree = "<group>";
+		};
+		9CE44D4E2192859200D76492 /* Web Service Model */ = {
+			isa = PBXGroup;
+			children = (
+				9CE44D51219285DE00D76492 /* Genres.swift */,
+				9CE44D52219285DE00D76492 /* GenresList.swift */,
+			);
+			path = "Web Service Model";
 			sourceTree = "<group>";
 		};
 		D4F97620BF59B2156C9A8E00 /* Frameworks */ = {
@@ -493,6 +518,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CE44D4D2192854700D76492 /* WebService.swift in Sources */,
+				9CE44D53219285DE00D76492 /* Genres.swift in Sources */,
+				9CE44D54219285DE00D76492 /* GenresList.swift in Sources */,
 				9CC4228421921945000AB1FA /* UIColor+Utils.swift in Sources */,
 				9C06570D219207E6008DFDCF /* Wonder.xcdatamodeld in Sources */,
 				9CC4228B21922871000AB1FA /* AppSettings.swift in Sources */,
