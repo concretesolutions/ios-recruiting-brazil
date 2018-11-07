@@ -162,8 +162,9 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     
     // MARK: - UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.backgroundColor = UIColor.black
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MoviesCollectionCell
+        cell.movieImageView.image = UIImage(named: "iconWrong")
+        cell.movieTitle.text = "This is a movie witha a long name!"
         
         return cell
         

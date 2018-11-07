@@ -46,7 +46,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="873-yh-2kU">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="873-yh-2kU" userLabel="Movies Collection Cell" customClass="MoviesCollectionCell" customModule="Wonder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -80,6 +80,10 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="l4j-HI-Oai" secondAttribute="trailing" constant="-16" id="rEc-i7-e1n"/>
                                         </constraints>
                                         <size key="customSize" width="182" height="182"/>
+                                        <connections>
+                                            <outlet property="movieImageView" destination="pie-GZ-mTt" id="kEd-RW-Uv3"/>
+                                            <outlet property="movieTitle" destination="l4j-HI-Oai" id="59M-4u-ANQ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
