@@ -13,6 +13,7 @@ class MoviesCollectionCell: UICollectionViewCell {
     // MARK: - Outlets
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var movieFavoriteBackgroundView: UIView!
     
     
 }

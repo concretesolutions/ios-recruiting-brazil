@@ -197,18 +197,19 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MoviesCollectionCell
         let movie = movies?.results![indexPath.row]
         
-        ////////
+        cell.movieTitle.text = movie?.title!
+        cell.movieFavoriteBackgroundView.isHidden = false
+        
+        // image
         if (movie?.poster_path != nil && movie?.poster_path != "" ) {
             
             let webService = WebService()
             let imgSrc = webService.getFullUrl((movie?.poster_path)!)
-            print(".....")
             let url = URL(string: imgSrc)
 
             if imgSrc.isEmpty {
-                print("*** NULL IMAGE SOURCE ***")
-//                cell.articleImageView?.contentMode = UIView.ContentMode.scaleAspectFit
-//                cell.articleImageView?.image = UIImage(named: "noContentIcon")
+                cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFit
+                cell.movieImageView?.image = UIImage(named: "noContentIcon")
 
             }else{
                 cell.movieImageView?.kf.indicatorType = .activity
@@ -216,10 +217,10 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
             }
             
         }else{
-//            cell.articleImageView?.contentMode = UIView.ContentMode.scaleAspectFit
-//            cell.articleImageView?.image = UIImage(named: "noContentIcon")
+            cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFit
+            cell.movieImageView?.image = UIImage(named: "noContentIcon")
         }
-        ////////
+        // end-image
         
         
         
