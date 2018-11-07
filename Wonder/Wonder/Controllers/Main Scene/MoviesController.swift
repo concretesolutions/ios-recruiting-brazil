@@ -11,12 +11,17 @@ import UIKit
 // reachability
 var reachability = Reachability(hostname: "www.apple.com")
 
-class MoviesController: UIViewController, UISearchBarDelegate {
+class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    
 
     // MARK: - outlets
     @IBOutlet var errorHandlerView: UIView!
     @IBOutlet weak var errorImageView: UIImageView!
     @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
     
     
     
@@ -24,6 +29,8 @@ class MoviesController: UIViewController, UISearchBarDelegate {
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
+    
+    private var source = ["One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four"]
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -146,4 +153,31 @@ class MoviesController: UIViewController, UISearchBarDelegate {
 //
     }
  
+    
+    // MARK: - UICollectionView Data Source
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return source.count
+    }
+    
+    // MARK: - UICollectionView Delegate
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        cell.backgroundColor = UIColor.green
+        
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat =  16
+        let collectionViewSize = collectionView.frame.size.width - padding
+        
+        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
+    }
+    
+    
+    
+    
+    
 }

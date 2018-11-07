@@ -32,11 +32,48 @@
                     <view key="view" contentMode="scaleToFill" id="OAG-wy-j9k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9qR-e4-Jv7">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9qR-e4-Jv7" secondAttribute="height" multiplier="375:502" id="c29-d6-nr6"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1Fy-gS-kOB">
+                                    <size key="itemSize" width="165" height="142"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="873-yh-2kU">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <size key="customSize" width="182" height="182"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="z93-9r-2vq" id="bQT-0a-68a"/>
+                                    <outlet property="delegate" destination="z93-9r-2vq" id="9V0-BA-el6"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9qR-e4-Jv7" firstAttribute="trailing" secondItem="cYc-kA-UI6" secondAttribute="trailing" id="0l8-b8-EQy"/>
+                            <constraint firstItem="9qR-e4-Jv7" firstAttribute="top" secondItem="cYc-kA-UI6" secondAttribute="top" id="1G4-jh-ohk"/>
+                            <constraint firstItem="9qR-e4-Jv7" firstAttribute="bottom" secondItem="cYc-kA-UI6" secondAttribute="bottom" id="Gzb-Tz-3N6"/>
+                            <constraint firstItem="9qR-e4-Jv7" firstAttribute="leading" secondItem="cYc-kA-UI6" secondAttribute="leading" id="PHV-xh-dQb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cYc-kA-UI6"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="nBE-r8-IHG"/>
                     <connections>
+                        <outlet property="collectionView" destination="9qR-e4-Jv7" id="BEf-dG-F2N"/>
                         <outlet property="errorHandlerView" destination="r8v-KQ-k1T" id="bKz-9O-b2I"/>
                         <outlet property="errorImageView" destination="w0H-hd-79f" id="Jta-fC-T9l"/>
                         <outlet property="errorMessage" destination="RTA-XW-lQt" id="fmT-IS-7Se"/>
