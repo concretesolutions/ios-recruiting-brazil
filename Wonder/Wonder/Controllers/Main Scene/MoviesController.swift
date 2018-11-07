@@ -13,6 +13,13 @@ var reachability = Reachability(hostname: "www.apple.com")
 
 class MoviesController: UIViewController, UISearchBarDelegate {
 
+    // MARK: - outlets
+    @IBOutlet var errorHandlerView: UIView!
+    @IBOutlet weak var errorImageView: UIImageView!
+    @IBOutlet weak var errorMessage: UILabel!
+    
+    
+    
     // MARK: - Properties
     private var search = UISearchController()
     private var searchInProgress = false
@@ -21,6 +28,7 @@ class MoviesController: UIViewController, UISearchBarDelegate {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // UI Config
         uiConfig()
@@ -132,5 +140,20 @@ class MoviesController: UIViewController, UISearchBarDelegate {
 //
 //
     }
+ 
+    // MARK: - Error Handler
+    private func showErrorView() {
+        self.errorHandlerView.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
+        self.errorHandlerView.tag = 1001
+        self.view.addSubview(self.errorHandlerView)
+        
+    }
     
+    private func hideErrorView() {
+        for view in self.view.subviews {
+            if view.tag == 1001 {
+                view.removeFromSuperview()
+            }
+        }
+    }
 }

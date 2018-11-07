@@ -37,10 +37,44 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="nBE-r8-IHG"/>
                     <connections>
+                        <outlet property="errorHandlerView" destination="r8v-KQ-k1T" id="bKz-9O-b2I"/>
+                        <outlet property="errorImageView" destination="w0H-hd-79f" id="Jta-fC-T9l"/>
+                        <outlet property="errorMessage" destination="RTA-XW-lQt" id="fmT-IS-7Se"/>
                         <segue destination="3oC-ky-O7j" kind="presentation" identifier="showErrorHandler" modalTransitionStyle="crossDissolve" id="03r-Wx-BlA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfC-OF-R1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="r8v-KQ-k1T">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="290"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNoResult" translatesAutoresizingMaskIntoConstraints="NO" id="w0H-hd-79f">
+                            <rect key="frame" x="75" y="37" width="140" height="140"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="w0H-hd-79f" secondAttribute="height" multiplier="1:1" id="Vlf-Gy-5Et"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTA-XW-lQt">
+                            <rect key="frame" x="46" y="185" width="199" height="65"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="RTA-XW-lQt" secondAttribute="height" multiplier="199:65" id="wXC-7p-RN0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="w0H-hd-79f" firstAttribute="leading" secondItem="gQv-y5-7U8" secondAttribute="leading" constant="75" id="21K-kD-b2a"/>
+                        <constraint firstItem="RTA-XW-lQt" firstAttribute="leading" secondItem="gQv-y5-7U8" secondAttribute="leading" constant="46" id="8EN-ju-zyM"/>
+                        <constraint firstItem="gQv-y5-7U8" firstAttribute="trailing" secondItem="RTA-XW-lQt" secondAttribute="trailing" constant="45" id="Qu0-ZK-FCg"/>
+                        <constraint firstItem="w0H-hd-79f" firstAttribute="top" secondItem="gQv-y5-7U8" secondAttribute="top" constant="37" id="p9y-IO-Ny9"/>
+                        <constraint firstItem="gQv-y5-7U8" firstAttribute="trailing" secondItem="w0H-hd-79f" secondAttribute="trailing" constant="75" id="qYp-qk-QsD"/>
+                        <constraint firstItem="RTA-XW-lQt" firstAttribute="top" secondItem="w0H-hd-79f" secondAttribute="bottom" constant="8" id="wZf-fb-ZHp"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="gQv-y5-7U8"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1997.5999999999999" y="-645.42728635682158"/>
         </scene>
@@ -111,6 +145,7 @@
     </scenes>
     <resources>
         <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="iconNoResult" width="150" height="161"/>
         <image name="list_icon" width="18" height="10"/>
     </resources>
 </document>
