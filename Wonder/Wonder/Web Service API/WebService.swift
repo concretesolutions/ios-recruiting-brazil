@@ -100,6 +100,12 @@ class WebService {
             
             }.resume()
     }
+    
+    // MARK: - Helpers
+    func getFullUrl(_ resource: String) -> String {
+        let configUrl = WebService.getEndpoint("getProfileImage")
+        return configUrl + resource
+    }
 
     
     

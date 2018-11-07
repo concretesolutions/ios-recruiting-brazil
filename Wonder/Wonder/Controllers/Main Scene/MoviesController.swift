@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 // reachability
 var reachability = Reachability(hostname: "www.apple.com")
@@ -29,8 +30,8 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
+    private var movies = Movies(dictionary: NSDictionary())
     
-    private var source = ["One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four", "One", "Two", "Three", "Four"]
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -44,6 +45,9 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         
         // Check internet status
         checkInternetStatus()
+        
+        // load app data source
+        loadPopularMovies()
         
     }
     
@@ -74,6 +78,27 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         // associate to navigation item
         self.navigationItem.searchController = search
         
+    }
+    
+    // MARK: - Application Data Source
+    private func loadPopularMovies() {
+        view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .loading, errorMessage: "Loading movies...")
+        let webService = WebService()
+        webService.getPopularMovies(page: 1) { (movies) in
+            
+            self.view.hideErrorView(view: self.errorHandlerView)
+            
+            if movies.results == nil {
+            }else if movies.results?.count == 0 {
+            }else {
+                self.movies = movies
+            }
+            
+            self.collectionView.reloadData()
+            
+            
+            print("....")
+        }
     }
     
     
@@ -157,14 +182,46 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     // MARK: - UICollectionView Data Source
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return source.count
+        if movies!.results == nil {
+            return 0
+        }else if movies!.results?.count == 0 {
+            return 0
+        }else {
+            return (movies?.results?.count)!
+        }
+
     }
     
     // MARK: - UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MoviesCollectionCell
-        cell.movieImageView.image = UIImage(named: "iconWrong")
-        cell.movieTitle.text = "This is a movie witha a long name!"
+        let movie = movies?.results![indexPath.row]
+        
+        ////////
+        if (movie?.poster_path != nil && movie?.poster_path != "" ) {
+            
+            let webService = WebService()
+            let imgSrc = webService.getFullUrl((movie?.poster_path)!)
+            print(".....")
+            let url = URL(string: imgSrc)
+
+            if imgSrc.isEmpty {
+                print("*** NULL IMAGE SOURCE ***")
+//                cell.articleImageView?.contentMode = UIView.ContentMode.scaleAspectFit
+//                cell.articleImageView?.image = UIImage(named: "noContentIcon")
+
+            }else{
+                cell.movieImageView?.kf.indicatorType = .activity
+                cell.movieImageView?.kf.setImage(with: url)
+            }
+            
+        }else{
+//            cell.articleImageView?.contentMode = UIView.ContentMode.scaleAspectFit
+//            cell.articleImageView?.image = UIImage(named: "noContentIcon")
+        }
+        ////////
+        
+        
         
         return cell
         
