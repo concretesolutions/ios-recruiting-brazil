@@ -56,52 +56,7 @@ class WebService {
     }
     
     
-//
-//    func getNews(sourceId: String, completion: @escaping ([Article]) -> ()) {
-//        // get url
-//        let configUrl = WebService.getEndpoint("getNewsWithSource")
-//        let apiKey = WebService.getEndpoint("apiKey")
-//
-//        var urlString = configUrl.replacingOccurrences(of: "[SOURCE]", with: sourceId)
-//        urlString = urlString.replacingOccurrences(of: "[API_KEY]", with: apiKey)
-//
-//        let url = URL(string: urlString)
-//
-//
-//        // request web service
-//
-//        URLSession.shared.dataTask(with: url!) {
-//            data, response, error in
-//
-//            // check response's status code
-//            if let httpResponse = response as? HTTPURLResponse {
-//                if httpResponse.statusCode != 200 {
-//                    completion([Article]())
-//                    return
-//                }
-//            }
-//
-//            // check error
-//            if error != nil {
-//                completion([Article]())
-//                return
-//            }
-//
-//            // check data retrieved
-//            if let data = data {
-//                let json = try! JSONSerialization.jsonObject(with: data, options: [])
-//                let dataDic : NSDictionary = json as! NSDictionary
-//                let news = News(dictionary: dataDic)
-//
-//                DispatchQueue.main.async {
-//                    completion(news.articles)
-//                }
-//            }
-//
-//            }.resume()
-//    }
-//
-    
+
     
     
     // MARK: - Class Helper
