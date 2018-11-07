@@ -8,13 +8,66 @@
 
 import UIKit
 
+enum ErrorType : String {
+    case internet
+    case loading
+    case business
+}
+
 extension UIView {
     
     
     // MARK: - Error Handler
-    func showErrorView(errorHandlerView: UIView) {
+    func showErrorView(errorHandlerView: UIView, errorType: ErrorType, errorMessage: String) {
+
+        errorHandlerView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)
         errorHandlerView.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
         errorHandlerView.tag = 1001
+        if errorType.rawValue == "internet" {
+            errorHandlerView.backgroundColor = UIColor.applicationBarTintColor
+            for subView in errorHandlerView.subviews {
+                if subView.tag == 1002 {
+                    subView.isHidden = false
+                    let imageView = subView as? UIImageView
+                    imageView?.image = UIImage(named: "iconNoResult")
+                }else if subView.tag == 1003 {
+                    let messageLabel = subView as? UILabel
+                    messageLabel?.text = errorMessage
+                }else if subView.tag == 1004 {
+                    subView.isHidden = true
+                }
+            }
+        }else if errorType.rawValue == "loading"{
+            for subView in errorHandlerView.subviews {
+                if subView.tag == 1002 {
+                    subView.isHidden = true
+                }else if subView.tag == 1003 {
+                    let messageLabel = subView as? UILabel
+                    messageLabel?.text = errorMessage
+                }else if subView.tag == 1004 {
+                    subView.isHidden = false
+                    let activityIndicator = subView as? UIActivityIndicatorView
+                    activityIndicator?.isHidden = false
+                    activityIndicator?.startAnimating()
+                }
+            }
+        }else if errorType.rawValue == "business" {
+            errorHandlerView.backgroundColor = UIColor.applicationBarTintColor
+            for subView in errorHandlerView.subviews {
+                if subView.tag == 1002 {
+                    subView.isHidden = false
+                    let imageView = subView as? UIImageView
+                    imageView?.image = UIImage(named: "iconWrong")
+                }else if subView.tag == 1003 {
+                    let messageLabel = subView as? UILabel
+                    messageLabel?.text = errorMessage
+                }else if subView.tag == 1004 {
+                    subView.isHidden = true
+                }
+            }
+        }
+        
+        
         self.addSubview(errorHandlerView)
     }
     

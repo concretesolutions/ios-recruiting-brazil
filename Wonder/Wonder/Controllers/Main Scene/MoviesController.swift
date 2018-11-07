@@ -97,14 +97,16 @@ class MoviesController: UIViewController, UISearchBarDelegate {
     private func checkInternetStatus() {
         if !reachability.isReachable() {
             AppSettings.standard.updateInternetConnectionStatus(false)
-//            performSegue(withIdentifier: "showErrorHandler", sender: self)
-            view.showErrorView(errorHandlerView: self.errorHandlerView)
-
+            
+            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .internet, errorMessage: "Oops! Looks like you have no conection to the internet!")
+            
+//            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: "Search argument not found!")
+            
+//            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .loading, errorMessage: "Loading...")
+            
         }else{
             AppSettings.standard.updateInternetConnectionStatus(true)
-
-//            self.setNoContent(msg: "Loading...")
-//            self.setActivityIndicator(show: true)
+            
 //            loadAppData()
             
             view.hideErrorView(view: view)
