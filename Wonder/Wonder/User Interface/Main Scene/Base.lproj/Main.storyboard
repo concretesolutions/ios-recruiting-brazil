@@ -33,8 +33,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9qR-e4-Jv7">
-                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9qR-e4-Jv7">
+                                <rect key="frame" x="-3" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9qR-e4-Jv7" secondAttribute="height" multiplier="375:502" id="c29-d6-nr6"/>
@@ -69,10 +69,41 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F8S-dt-q1d" userLabel="Favorite Background View">
+                                                    <rect key="frame" x="130" y="20" width="32" height="32"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_full_icon" translatesAutoresizingMaskIntoConstraints="NO" id="NG2-Qu-Zof">
+                                                            <rect key="frame" x="5" y="5" width="22" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="22" id="DHE-e1-uGB"/>
+                                                                <constraint firstAttribute="width" constant="22" id="DkK-F7-y6U"/>
+                                                                <constraint firstAttribute="width" secondItem="NG2-Qu-Zof" secondAttribute="height" multiplier="1:1" id="vfI-Ic-NJh"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="NG2-Qu-Zof" firstAttribute="top" secondItem="F8S-dt-q1d" secondAttribute="top" constant="5" id="6dK-K2-aTj"/>
+                                                        <constraint firstAttribute="trailing" secondItem="NG2-Qu-Zof" secondAttribute="trailing" constant="5" id="6rf-tk-1Rc"/>
+                                                        <constraint firstItem="NG2-Qu-Zof" firstAttribute="leading" secondItem="F8S-dt-q1d" secondAttribute="leading" constant="5" id="FFu-dY-6gI"/>
+                                                        <constraint firstAttribute="height" constant="32" id="H6y-iN-NWL"/>
+                                                        <constraint firstAttribute="width" constant="32" id="Ihu-Oj-FTL"/>
+                                                        <constraint firstAttribute="width" secondItem="F8S-dt-q1d" secondAttribute="height" multiplier="1:1" id="aL0-4a-Fcq"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NG2-Qu-Zof" secondAttribute="bottom" constant="5" id="pOE-Tp-xxL"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="F8S-dt-q1d" secondAttribute="trailing" constant="12" id="2eB-Vt-AQU"/>
                                             <constraint firstItem="pie-GZ-mTt" firstAttribute="top" secondItem="873-yh-2kU" secondAttribute="top" constant="8" id="3bP-t5-2bZ"/>
+                                            <constraint firstItem="F8S-dt-q1d" firstAttribute="top" secondItem="873-yh-2kU" secondAttribute="topMargin" constant="12" id="8f3-5w-ouI"/>
                                             <constraint firstItem="l4j-HI-Oai" firstAttribute="top" secondItem="pie-GZ-mTt" secondAttribute="bottom" constant="1" id="Bn1-Sa-sZR"/>
                                             <constraint firstAttribute="bottom" secondItem="l4j-HI-Oai" secondAttribute="bottom" id="CRw-ag-vmA"/>
                                             <constraint firstAttribute="trailing" secondItem="l4j-HI-Oai" secondAttribute="trailing" constant="7" id="WyN-4L-Rl7"/>
@@ -215,6 +246,7 @@
     </scenes>
     <resources>
         <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="favorite_full_icon" width="18" height="16"/>
         <image name="iconNoResult" width="150" height="161"/>
         <image name="iconWrong" width="149" height="125"/>
         <image name="list_icon" width="18" height="10"/>
