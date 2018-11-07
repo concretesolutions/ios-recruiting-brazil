@@ -29,7 +29,6 @@ class MoviesController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // UI Config
         uiConfig()
         
@@ -98,7 +97,9 @@ class MoviesController: UIViewController, UISearchBarDelegate {
     private func checkInternetStatus() {
         if !reachability.isReachable() {
             AppSettings.standard.updateInternetConnectionStatus(false)
-            performSegue(withIdentifier: "showErrorHandler", sender: self)
+//            performSegue(withIdentifier: "showErrorHandler", sender: self)
+            view.showErrorView(errorHandlerView: self.errorHandlerView)
+
         }else{
             AppSettings.standard.updateInternetConnectionStatus(true)
 
@@ -106,8 +107,10 @@ class MoviesController: UIViewController, UISearchBarDelegate {
 //            self.setActivityIndicator(show: true)
 //            loadAppData()
             
+            view.hideErrorView(view: view)
+            
             // post notification to error hanlder to dismiss UI
-            NotificationCenter.default.post(name: Notification.Name("didConnectToInternet"), object: nil, userInfo: nil)
+//            NotificationCenter.default.post(name: Notification.Name("didConnectToInternet"), object: nil, userInfo: nil)
         }
     }
 
@@ -141,19 +144,4 @@ class MoviesController: UIViewController, UISearchBarDelegate {
 //
     }
  
-    // MARK: - Error Handler
-    private func showErrorView() {
-        self.errorHandlerView.center = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
-        self.errorHandlerView.tag = 1001
-        self.view.addSubview(self.errorHandlerView)
-        
-    }
-    
-    private func hideErrorView() {
-        for view in self.view.subviews {
-            if view.tag == 1001 {
-                view.removeFromSuperview()
-            }
-        }
-    }
 }

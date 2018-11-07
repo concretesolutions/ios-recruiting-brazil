@@ -40,7 +40,6 @@
                         <outlet property="errorHandlerView" destination="r8v-KQ-k1T" id="bKz-9O-b2I"/>
                         <outlet property="errorImageView" destination="w0H-hd-79f" id="Jta-fC-T9l"/>
                         <outlet property="errorMessage" destination="RTA-XW-lQt" id="fmT-IS-7Se"/>
-                        <segue destination="3oC-ky-O7j" kind="presentation" identifier="showErrorHandler" modalTransitionStyle="crossDissolve" id="03r-Wx-BlA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfC-OF-R1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -60,7 +59,7 @@
                                 <constraint firstAttribute="width" secondItem="RTA-XW-lQt" secondAttribute="height" multiplier="199:65" id="wXC-7p-RN0"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -77,14 +76,6 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="1997.5999999999999" y="-645.42728635682158"/>
-        </scene>
-        <!--ErrorHandler-->
-        <scene sceneID="vbx-K5-0lL">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ErrorHandler" id="3oC-ky-O7j" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wer-Bb-FrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2924" y="-646"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FJ1-Hb-tXw">
