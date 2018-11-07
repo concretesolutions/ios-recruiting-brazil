@@ -20,14 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // load genres list
         self.appSettings.loadGenresList()
         
-        // Global Tint Color
+        // global tint color
         window?.tintColor = UIColor.black
         
-        // Global Navigation
+        // navigation bar
         UINavigationBar.appearance().tintColor = UIColor.darkGray
         UINavigationBar.appearance().barTintColor = UIColor.applicationBarTintColor
         
-        // Tab Bar
+        // tab bar
         UITabBar.appearance().barTintColor = UIColor.applicationBarTintColor
         UITabBar.appearance().tintColor = UIColor.black
         

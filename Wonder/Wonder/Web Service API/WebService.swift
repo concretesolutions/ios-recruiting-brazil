@@ -10,14 +10,14 @@ import Foundation
 
 class WebService {
     
-    // MARK: - Data Retrieval
+    // MARK: - Genres List
     func getGenresList(completion: @escaping (GenresList) -> ()) {
         
         // get url
         let configUrl = WebService.getEndpoint("getGenreList")
         let apiKey = WebService.getEndpoint("apiKey")
         
-        let urlString = configUrl.replacingOccurrences(of: "[APIKEY]", with: apiKey)
+        let urlString = configUrl.replacingOccurrences(of: "[API_KEY]", with: apiKey)
         
         let url = URL(string: urlString)
         
@@ -55,7 +55,51 @@ class WebService {
             }.resume()
     }
     
-    
+    // MARK: - Popular Movies
+    func getPopularMovies(page: Int, completion: @escaping (Movies) -> ()) {
+        
+        // get url
+        let configUrl = WebService.getEndpoint("getPopularMovies")
+        let apiKey = WebService.getEndpoint("apiKey")
+        
+        var urlString = configUrl.replacingOccurrences(of: "[API_KEY]", with: apiKey)
+        urlString = urlString.replacingOccurrences(of: "[PAGE_NUMBER]", with: String(page))
+        
+        let url = URL(string: urlString)
+        
+        // request web service
+        URLSession.shared.dataTask(with: url!) {
+            data, response, error in
+            
+            // check response's status code
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200 {
+                    DispatchQueue.main.async {
+                        completion(Movies(dictionary: NSDictionary())!)
+                    }
+                    return
+                }
+            }
+            
+            // check error
+            if error != nil {
+                DispatchQueue.main.async {
+                    completion(Movies(dictionary: NSDictionary())!)
+                }
+                return
+            }
+            
+            // check data retrieved
+            if let data = data {
+                let json = try! JSONSerialization.jsonObject(with: data, options: [])
+                let dataDic : NSDictionary = json as! NSDictionary
+                DispatchQueue.main.async {
+                    completion(Movies(dictionary: dataDic)!)
+                }
+            }
+            
+            }.resume()
+    }
 
     
     

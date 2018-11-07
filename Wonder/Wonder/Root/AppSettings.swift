@@ -25,12 +25,6 @@ class AppSettings {
     // MARK: - Reachability Helper
     public func updateInternetConnectionStatus(_ status: Bool) {
         self.isConnectedToInternet = status
-        if status {
-            print("🌎 internet ok 👍")
-            
-        }else{
-            print("🌎 internet NOT ok ‼️")
-        }
     }
     
     public func internetConnectionStatus() -> Bool {
@@ -42,23 +36,14 @@ class AppSettings {
         let webService = WebService()
         webService.getGenresList { (genresResult) in
             // completion
-            
             if genresResult.genres == nil {
-                print("... error 1 ...")
                 self.loadGenresList()
-                
             }else if genresResult.genres?.count == 0 {
-                print("... error 2 ...")
                 self.loadGenresList()
             }else {
-                print("*** OK GENRES LIST has been loaded! ****")
                 self.genresList = genresResult
             }
-            
-            
-
         }
     }
-    
     
 }
