@@ -34,6 +34,7 @@
 		9CEE19842193FEDA00CF0D70 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE19822193FEDA00CF0D70 /* MovieViewModel.swift */; };
 		9CEE19852193FEDA00CF0D70 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE19832193FEDA00CF0D70 /* MoviesViewModel.swift */; };
 		9CEE19872194043700CF0D70 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE19862194043700CF0D70 /* String+Utils.swift */; };
+		9CEE198E2194943F00CF0D70 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEE198D2194943F00CF0D70 /* CollectionViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		9CEE19822193FEDA00CF0D70 /* MovieViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		9CEE19832193FEDA00CF0D70 /* MoviesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		9CEE19862194043700CF0D70 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
+		9CEE198D2194943F00CF0D70 /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		DB41C53E711EEB04AFC03A83 /* Pods-Wonder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wonder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wonder/Pods-Wonder.release.xcconfig"; sourceTree = "<group>"; };
 		E470373B8A663E5DB84B92F8 /* Pods-WonderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WonderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WonderTests/Pods-WonderTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 		9C065703219207E6008DFDCF /* Wonder */ = {
 			isa = PBXGroup;
 			children = (
+				9CEE1988219493CA00CF0D70 /* Data Source */,
 				9CEE197F2193FE7300CF0D70 /* View Model */,
 				9C8116A621936FDE00145CAC /* Custom Cells */,
 				9CE44D4E2192859200D76492 /* Web Service Model */,
@@ -319,6 +322,30 @@
 				9CEE19822193FEDA00CF0D70 /* MovieViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		9CEE1988219493CA00CF0D70 /* Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				9CEE198A219493F100CF0D70 /* Table View */,
+				9CEE1989219493E600CF0D70 /* Colection View */,
+			);
+			path = "Data Source";
+			sourceTree = "<group>";
+		};
+		9CEE1989219493E600CF0D70 /* Colection View */ = {
+			isa = PBXGroup;
+			children = (
+				9CEE198D2194943F00CF0D70 /* CollectionViewDataSource.swift */,
+			);
+			path = "Colection View";
+			sourceTree = "<group>";
+		};
+		9CEE198A219493F100CF0D70 /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Table View";
 			sourceTree = "<group>";
 		};
 		D4F97620BF59B2156C9A8E00 /* Frameworks */ = {
@@ -569,6 +596,7 @@
 				9C065705219207E6008DFDCF /* AppDelegate.swift in Sources */,
 				9CE44D5C2192A08D00D76492 /* Results.swift in Sources */,
 				9CEE19842193FEDA00CF0D70 /* MovieViewModel.swift in Sources */,
+				9CEE198E2194943F00CF0D70 /* CollectionViewDataSource.swift in Sources */,
 				9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */,
 				9CC4228E21922977000AB1FA /* Reachability.swift in Sources */,
 				9CC4228121921569000AB1FA /* FavoritesController.swift in Sources */,
