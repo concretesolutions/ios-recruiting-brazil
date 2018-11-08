@@ -27,6 +27,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     
     private var movies = Movies()
     private var filteredMovies = Movies()
+    private var isFiltering = false
     
     
     // pagination
@@ -169,13 +170,21 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
         
         print("**** SEARCH ARGUMENT : \(self.searchArgument)")
-//        let trimmedString = " abc ".trimmingCharacters(in: .whitespaces)
         
+//        self.filteredMovies.results = self.movies.results.filter {
+//            $0.title == self.searchArgument
+//        }
+//
+//
+        self.filteredMovies.results = self.movies.results.filter { $0.title.contains(self.searchArgument)}
         
-        self.filteredMovies.results = self.movies.results.filter {
-            $0.title == self.searchArgument
+        self.isFiltering = true
+        // reload only the tableView
+        DispatchQueue.main.async {
+            self.collectionView.contentOffset = CGPoint.zero
+            self.collectionView.reloadData()
         }
-        print("CHECK FILTERED RESULTS")
+
         
 //        self.search.setEditing(true, animated: true)
 //        self.searchInProgress = true
@@ -208,15 +217,26 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     // MARK: - UICollectionView Data Source
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.results.count
+        
+        if self.isFiltering {
+            return filteredMovies.results.count
+        }else{
+            return movies.results.count
+        }
+    
+        
     }
     
     // MARK: - UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MoviesCollectionCell
-        let movie = movies.results[indexPath.row]
-
+        var movie = movies.results[indexPath.row]
         
+        // change provider in case of filtering
+        if self.isFiltering {
+            movie = filteredMovies.results[indexPath.row]
+        }
+
         cell.movieTitle.text = movie.title
         cell.movieFavoriteBackgroundView.isHidden = false
         
@@ -272,9 +292,15 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
                 runningCall = true
                 if pageCounter < self.totalPages {
                     pageCounter = pageCounter + 1
-                    print("🌕 READ MORE....... pageNumber: \(pageCounter)")
-                    activityIndicatorShow(show: true)
-                    loadPopularMovies(pageNumber: pageCounter)
+                    
+                    // filtering does not allow infinite pagination!
+                    if !self.isFiltering {
+                        print("🌕 READ MORE....... pageNumber: \(pageCounter)")
+                        activityIndicatorShow(show: true)
+                        loadPopularMovies(pageNumber: pageCounter)
+                    }
+                    
+                    
                 }
                 
             }
