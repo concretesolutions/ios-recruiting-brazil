@@ -168,49 +168,13 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
-        
-        print("**** SEARCH ARGUMENT : \(self.searchArgument)")
-        
-//        self.filteredMovies.results = self.movies.results.filter {
-//            $0.title == self.searchArgument
-//        }
-//
-//
         self.filteredMovies.results = self.movies.results.filter { $0.title.contains(self.searchArgument)}
-        
         self.isFiltering = true
         // reload only the tableView
         DispatchQueue.main.async {
             self.collectionView.contentOffset = CGPoint.zero
             self.collectionView.reloadData()
         }
-
-        
-//        self.search.setEditing(true, animated: true)
-//        self.searchInProgress = true
-//        self.searchArgument = (searchBar.text?.trim())!
-//        //
-//        navigationController?.navigationBar.isHidden = true
-//        if #available(iOS 11.0, *) {
-//            navigationController?.navigationBar.prefersLargeTitles = false
-//        } else {
-//            // Fallback on earlier versions
-//        }
-//        self.search.isActive = false
-//        //
-//
-//        self.performSegue(withIdentifier: "showSearchScene", sender: self)
-//
-//    }
-    
-//    @objc private func didSelectBarBackAction() {
-//
-//        // reinstantiate scene
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateInitialViewController()
-//        UIApplication.shared.keyWindow?.rootViewController = vc
-//
-//
     }
  
     
