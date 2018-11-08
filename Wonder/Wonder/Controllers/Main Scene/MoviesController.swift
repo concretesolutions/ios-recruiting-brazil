@@ -30,7 +30,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
-    private var movies = Movies(dictionary: NSDictionary())
+    private var movies = Movies()
     
 
     // MARK: - View Life Cycle
@@ -87,12 +87,9 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         webService.getPopularMovies(page: 1) { (movies) in
             
             self.view.hideErrorView(view: self.errorHandlerView)
+        
+            self.movies = movies
             
-            if movies.results == nil {
-            }else if movies.results?.count == 0 {
-            }else {
-                self.movies = movies
-            }
             
             self.collectionView.reloadData()
             
@@ -182,29 +179,22 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     // MARK: - UICollectionView Data Source
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if movies!.results == nil {
-            return 0
-        }else if movies!.results?.count == 0 {
-            return 0
-        }else {
-            return (movies?.results?.count)!
-        }
-
+        return movies.results.count
     }
     
     // MARK: - UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MoviesCollectionCell
-        let movie = movies?.results![indexPath.row]
+        let movie = movies.results[indexPath.row]
         
-        cell.movieTitle.text = movie?.title!
+        cell.movieTitle.text = movie.title
         cell.movieFavoriteBackgroundView.isHidden = false
         
         // image
-        if (movie?.poster_path != nil && movie?.poster_path != "" ) {
+        if (!movie.poster_path.isEmpty && movie.poster_path != "" ) {
             
             let webService = WebService()
-            let imgSrc = webService.getFullUrl((movie?.poster_path)!)
+            let imgSrc = webService.getFullUrl((movie.poster_path))
             let url = URL(string: imgSrc)
 
             if imgSrc.isEmpty {
