@@ -21,16 +21,18 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     @IBOutlet weak var errorImageView: UIImageView!
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
-    
-    
+ 
     
     // MARK: - Properties
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
     private var movies = Movies()
+    
+    // pagination
+    var pageCounter = 1
+    var totalPages = 0
+    var runningCall = false
     
 
     // MARK: - View Life Cycle
@@ -47,7 +49,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         checkInternetStatus()
         
         // load app data source
-        loadPopularMovies()
+        loadPopularMovies(pageNumber: pageCounter)
         
     }
     
@@ -81,20 +83,34 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     }
     
     // MARK: - Application Data Source
-    private func loadPopularMovies() {
-        view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .loading, errorMessage: "Loading movies...")
+    private func loadPopularMovies(pageNumber: Int) {
+
         let webService = WebService()
-        webService.getPopularMovies(page: 1) { (movies) in
+        webService.getPopularMovies(page: pageNumber) { (moviesResults) in
             
-            self.view.hideErrorView(view: self.errorHandlerView)
-        
-            self.movies = movies
+            // total pages
+            self.totalPages = moviesResults.total_pages
+            
+            // object movies
+            self.movies.page = moviesResults.page
+            self.movies.total_pages = moviesResults.total_pages
+            self.movies.total_results = moviesResults.total_results
             
             
-            self.collectionView.reloadData()
+            // append results
+            for item in moviesResults.results {
+                self.movies.results.append(item)
+            }
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
             
             
-            print("....")
+            self.runningCall = false
+            self.activityIndicatorShow(show: false)
+            
+
         }
     }
     
@@ -226,7 +242,34 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     }
     
     
+    // MARK: - UIScrollView Delegate - Endless Pagination
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let offsetY = scrollView.contentOffset.y
+        let bounds = scrollView.bounds;
+        let size = scrollView.contentSize;
+        let inset = scrollView.contentInset;
+        let y = offsetY + bounds.size.height - inset.bottom;
+        let h = size.height;
+        
+        // call your API for more data
+        if (Int(y) == Int(h) && y > 100) {
+            if !runningCall {
+                runningCall = true
+                if pageCounter < self.totalPages {
+                    pageCounter = pageCounter + 1
+                    print("🌕 READ MORE....... pageNumber: \(pageCounter)")
+                    activityIndicatorShow(show: true)
+                    loadPopularMovies(pageNumber: pageCounter)
+                }
+                
+            }
+        }
+    }
     
-    
+    // MARK: - Activity Indicator
+    private func activityIndicatorShow(show: Bool){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = show
+    }
     
 }
