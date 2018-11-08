@@ -27,7 +27,10 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
+    
     private var movies = Movies()
+    private var filteredMovies = Movies()
+    
     
     // pagination
     var pageCounter = 1
@@ -163,6 +166,17 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
 
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
+        
+        print("**** SEARCH ARGUMENT : \(self.searchArgument)")
+//        let trimmedString = " abc ".trimmingCharacters(in: .whitespaces)
+        
+        
+        self.filteredMovies.results = self.movies.results.filter {
+            $0.title == self.searchArgument
+        }
+        print("CHECK FILTERED RESULTS")
         
 //        self.search.setEditing(true, animated: true)
 //        self.searchInProgress = true
