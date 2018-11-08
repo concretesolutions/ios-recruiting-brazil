@@ -34,14 +34,5 @@ class CollectionViewDataSource<Cell: UICollectionViewCell, ViewModel> : NSObject
     }
 
     
-    
-    
-    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.items.count
-//    }
-    
-    
-    
 }
 
