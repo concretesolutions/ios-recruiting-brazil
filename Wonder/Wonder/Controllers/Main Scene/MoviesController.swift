@@ -214,7 +214,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
             let url = URL(string: imgSrc)
 
             if imgSrc.isEmpty {
-                cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFit
+                cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFill
                 cell.movieImageView?.image = UIImage(named: "noContentIcon")
 
             }else{
@@ -223,7 +223,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
             }
             
         }else{
-            cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFit
+            cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFill
             cell.movieImageView?.image = UIImage(named: "noContentIcon")
         }
         // end-image
