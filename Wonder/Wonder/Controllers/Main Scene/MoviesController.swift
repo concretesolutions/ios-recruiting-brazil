@@ -57,6 +57,8 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     }
     
 
+    
+
     // MARK: - UI Config
     private func uiConfig() {
         self.navigationItem.hidesSearchBarWhenScrolling = false
@@ -216,6 +218,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MoviesCollectionCell
         let movie = movies.results[indexPath.row]
+
         
         cell.movieTitle.text = movie.title
         cell.movieFavoriteBackgroundView.isHidden = false
@@ -287,3 +290,4 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     }
     
 }
+

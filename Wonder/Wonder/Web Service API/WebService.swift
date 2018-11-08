@@ -29,7 +29,7 @@ class WebService {
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200 {
                     DispatchQueue.main.async {
-                        completion(GenresList(dictionary: NSDictionary())!)
+                        completion(GenresList())
                     }
                     return
                 }
@@ -38,7 +38,7 @@ class WebService {
             // check error
             if error != nil {
                 DispatchQueue.main.async {
-                    completion(GenresList(dictionary: NSDictionary())!)
+                    completion(GenresList())
                 }
                 return
             }
@@ -48,7 +48,8 @@ class WebService {
                 let json = try! JSONSerialization.jsonObject(with: data, options: [])
                 let dataDic : NSDictionary = json as! NSDictionary
                 DispatchQueue.main.async {
-                    completion(GenresList(dictionary: dataDic)!)
+                    print("*** dataDic: \(dataDic)")
+                    completion(GenresList(dictionary: dataDic))
                 }
             }
             
