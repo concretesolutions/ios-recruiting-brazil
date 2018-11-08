@@ -48,7 +48,6 @@ class WebService {
                 let json = try! JSONSerialization.jsonObject(with: data, options: [])
                 let dataDic : NSDictionary = json as! NSDictionary
                 DispatchQueue.main.async {
-                    print("*** dataDic: \(dataDic)")
                     completion(GenresList(dictionary: dataDic))
                 }
             }

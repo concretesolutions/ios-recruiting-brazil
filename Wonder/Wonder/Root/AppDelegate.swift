@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appSettings = AppSettings()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+
         // load genres list
         self.appSettings.loadGenresList()
         
@@ -52,6 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        // refresh appSettings properties
+        AppSettings.standard.genresList = AppSettings.standard.getDefualtsGenresList()
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

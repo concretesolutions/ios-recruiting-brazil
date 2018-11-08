@@ -41,36 +41,63 @@ class AppSettings {
             self.genresList = genresResult
             let genres : [Genres] = self.genresList.genres
             // remove previous stored data
-            self.removeCategories()
+            self.removeDefualtsCategories()
             
             // persist categories
             for genre in genres {
-                self.setCategory(id: genre.id, name: genre.name)
+                self.setDefualtsCategory(id: genre.id, name: genre.name)
             }
             
         }
     }
 
-    // MARK: - User Defaults
-    func getCategory(id: Int) -> String {
+    // MARK: - Movie's category persistance
+    
+    func getDefualtsGenresList() -> GenresList {
+        
+        let result : GenresList = GenresList()
+        
+        for item in UserDefaults.standard.dictionaryRepresentation().keys {
+            let index = item.index(item.startIndex, offsetBy: 2)
+            let subStr = String(item[..<index])
+            if subStr == "id" {
+                let userDefaults = UserDefaults.standard
+                let value : String = userDefaults.object(forKey: item) as! String
+                let key : Int = Int(item.replacingOccurrences(of: "id", with: ""))!
+                
+                let genre = Genres(id: key, name: value)
+                result.genres.append(genre)
+            }
+        }
+        
+        return result
+    }
+    
+    
+    func getDefualtsCategory(id: Int) -> String {
         let userDefaults = UserDefaults.standard
         let key = "id" + String(id)
         return userDefaults.string(forKey: key)!
     }
     
-    func setCategory(id: Int, name: String) {
+    func setDefualtsCategory(id: Int, name: String) {
         let userDefaults = UserDefaults.standard
         let key = "id" + String(id)
         userDefaults.set(name, forKey: key)
         userDefaults.synchronize()
     }
     
-    func removeCategories() {
-        let domain = Bundle.main.bundleIdentifier!
-        UserDefaults.standard.removePersistentDomain(forName: domain)
-        UserDefaults.standard.synchronize()
-//        print("removing categories")
-//        print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+    func removeDefualtsCategories() {
+        for item in UserDefaults.standard.dictionaryRepresentation().keys {
+            let index = item.index(item.startIndex, offsetBy: 2)
+            let subStr = String(item[..<index])
+            if subStr == "id" {
+                let userDefaults = UserDefaults.standard
+                userDefaults.removeObject(forKey: item)
+                userDefaults.synchronize()
+            }
+        }
     }
+    
     
 }

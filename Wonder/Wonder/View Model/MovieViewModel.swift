@@ -30,7 +30,7 @@ class MovieViewModel {
         var outputString = String()
         var sep = String()
         for id in ids {
-            outputString = outputString + sep + AppSettings.standard.getCategory(id: id)
+            outputString = outputString + sep + AppSettings.standard.getDefualtsCategory(id: id)
             sep = ", "
         }
         return outputString
