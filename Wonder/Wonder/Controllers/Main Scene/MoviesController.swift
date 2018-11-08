@@ -9,9 +9,6 @@
 import UIKit
 import Kingfisher
 
-// reachability
-var reachability = Reachability(hostname: "www.apple.com")
-
 class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     

@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+// reachability
+var reachability = Reachability(hostname: "www.apple.com")
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
