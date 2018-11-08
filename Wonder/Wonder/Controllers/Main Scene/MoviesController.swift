@@ -9,7 +9,9 @@
 import UIKit
 import Kingfisher
 
-class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    
 
     
 
@@ -64,7 +66,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         // Navigation Search
         search = UISearchController(searchResultsController: nil)
         search.searchBar.delegate = self
-        search.searchResultsUpdater = self as? UISearchResultsUpdating
+        search.searchResultsUpdater = self // as? UISearchResultsUpdating
         search.searchBar.tintColor = UIColor.black
         
         // search text field background color
@@ -166,8 +168,20 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
             self.collectionView.contentOffset = CGPoint.zero
             self.collectionView.reloadData()
         }
+        
     }
  
+    func updateSearchResults(for searchController: UISearchController) {
+        if !search.isActive {
+            print("Cancelled")
+            self.isFiltering = false
+            self.searchArgument = String()
+            self.pageCounter = 1
+            self.totalPages = 0
+            self.runningCall = false
+            self.loadPopularMovies(pageNumber: self.pageCounter)
+        }
+    }
     
     // MARK: - UICollectionView Data Source
 
@@ -178,7 +192,6 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
         }else{
             return movies.results.count
         }
-    
         
     }
     
