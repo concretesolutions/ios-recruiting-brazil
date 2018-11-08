@@ -147,20 +147,11 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
             AppSettings.standard.updateInternetConnectionStatus(false)
             
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .internet, errorMessage: "Oops! Looks like you have no conection to the internet!")
-            
-//            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: "Search argument not found!")
-            
-//            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .loading, errorMessage: "Loading...")
-            
+
         }else{
             AppSettings.standard.updateInternetConnectionStatus(true)
-            
 //            loadAppData()
-            
             view.hideErrorView(view: view)
-            
-            // post notification to error hanlder to dismiss UI
-//            NotificationCenter.default.post(name: Notification.Name("didConnectToInternet"), object: nil, userInfo: nil)
         }
     }
 
@@ -168,7 +159,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UICollectionViewD
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
-        self.filteredMovies.results = self.movies.results.filter { $0.title.contains(self.searchArgument)}
+        self.filteredMovies.results = self.movies.results.filter { $0.title.lowercased().contains(self.searchArgument.lowercased())}
         self.isFiltering = true
         // reload only the tableView
         DispatchQueue.main.async {
