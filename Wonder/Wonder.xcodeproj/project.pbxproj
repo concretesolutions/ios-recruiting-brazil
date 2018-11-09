@@ -28,6 +28,7 @@
 		9C8116A92193703100145CAC /* MoviesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8116A82193703100145CAC /* MoviesCollectionCell.swift */; };
 		9C8B8B822195FF2C004164BA /* FavoriteMovies+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B8B802195FF2C004164BA /* FavoriteMovies+CoreDataProperties.swift */; };
 		9C8B8B832195FF2C004164BA /* FavoriteMovies+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B8B812195FF2C004164BA /* FavoriteMovies+CoreDataClass.swift */; };
+		9C8B8B8621960636004164BA /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B8B8521960636004164BA /* PersistenceManager.swift */; };
 		9CC4227A219211E6000AB1FA /* Logo-animado-1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9CC42279219211E6000AB1FA /* Logo-animado-1.gif */; };
 		9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4227D21921505000AB1FA /* MoviesController.swift */; };
 		9CC4228121921569000AB1FA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228021921569000AB1FA /* FavoritesController.swift */; };
@@ -93,6 +94,7 @@
 		9C8116A82193703100145CAC /* MoviesCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionCell.swift; sourceTree = "<group>"; };
 		9C8B8B802195FF2C004164BA /* FavoriteMovies+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavoriteMovies+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9C8B8B812195FF2C004164BA /* FavoriteMovies+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavoriteMovies+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9C8B8B8521960636004164BA /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		9CC42279219211E6000AB1FA /* Logo-animado-1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Logo-animado-1.gif"; path = "../../../assets/Logo-animado-1.gif"; sourceTree = "<group>"; };
 		9CC4227D21921505000AB1FA /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
 		9CC4228021921569000AB1FA /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 		9C065703219207E6008DFDCF /* Wonder */ = {
 			isa = PBXGroup;
 			children = (
+				9C8B8B8421960615004164BA /* Persistence Manager */,
 				9CC4227B21921485000AB1FA /* Core Data */,
 				9C7241CA2195C41F001E96F9 /* Cell Factory */,
 				9C8116A621936FDE00145CAC /* Custom Cells */,
@@ -252,6 +255,14 @@
 				9C8116A82193703100145CAC /* MoviesCollectionCell.swift */,
 			);
 			path = "Movies Collection";
+			sourceTree = "<group>";
+		};
+		9C8B8B8421960615004164BA /* Persistence Manager */ = {
+			isa = PBXGroup;
+			children = (
+				9C8B8B8521960636004164BA /* PersistenceManager.swift */,
+			);
+			path = "Persistence Manager";
 			sourceTree = "<group>";
 		};
 		9CC4227521920CB8000AB1FA /* User Interface */ = {
@@ -617,6 +628,7 @@
 				9C7241D32195CE97001E96F9 /* DetailActionCell.swift in Sources */,
 				9C7241C721955268001E96F9 /* DetailInfoCell.swift in Sources */,
 				9C7241CF2195C690001E96F9 /* MovieTableCellFactory.swift in Sources */,
+				9C8B8B8621960636004164BA /* PersistenceManager.swift in Sources */,
 				9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */,
 				9C7241C021952409001E96F9 /* MovieDetailController.swift in Sources */,
 				9CC4228E21922977000AB1FA /* Reachability.swift in Sources */,
