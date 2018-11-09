@@ -186,6 +186,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
             self.pageCounter = 1
             self.totalPages = 0
             self.runningCall = false
+            self.movies = Movies()
             self.loadPopularMovies(pageNumber: self.pageCounter)
         }
     }
