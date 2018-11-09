@@ -56,9 +56,8 @@ class PersistenceManager {
     
     // MARK: - I/O Operations
     public func addFile(id: String, data: NSData) -> (absolutePath: String?, error: NSError?) {
-
-        let fileName = "WonderFile_\(id)" + ".wdf"
-        let pathFileName = self.getDocumentsFolder() + fileName
+        
+        let pathFileName = self.self.pathComposer(id: id)
 
         if fileExists(pathFileName) {
             return(nil, self.generateError(code: 9001, message: "File already exists!"))
@@ -90,8 +89,7 @@ class PersistenceManager {
     }
 
     public func getFile(id: String) -> NSData {
-        let fileName = "WonderFile_\(id)" + ".wdf"
-        let pathFileName = self.getDocumentsFolder() + fileName
+        let pathFileName = self.self.pathComposer(id: id)
         return FileManager.default.contents(atPath: pathFileName)! as NSData
     }
     
@@ -99,8 +97,7 @@ class PersistenceManager {
     public func getFileAttributes(_ id: String) -> NSDictionary {
         
         // path composer
-        let fileName = "WonderFile_\(id)" + ".wdf"
-        let pathFileName = self.getDocumentsFolder() + fileName
+        let pathFileName = self.self.pathComposer(id: id)
         
         // File System
         do {
@@ -129,8 +126,7 @@ class PersistenceManager {
     public func deleteFile(_ id: String) -> Bool? {
         
         // path composer
-        let fileName = "WonderFile_\(id)" + ".wdf"
-        let pathFileName = self.getDocumentsFolder() + fileName
+        let pathFileName = self.self.pathComposer(id: id)
         
         // delete file
         do {
@@ -185,6 +181,11 @@ class PersistenceManager {
         return freeSize.doubleValue
     }
     
+    private func pathComposer(id: String) -> String {
+        let fileName = "WonderFile_\(id)" + ".wdf"
+        let pathFileName = self.getDocumentsFolder() + fileName
+        return pathFileName
+    }
     
     
     // MARK: - Error Handler
