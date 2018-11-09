@@ -40,6 +40,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         imageView.image = movieImage
         imageView.frame = view.bounds
         imageView.contentMode = .scaleToFill
+
         
         ///
         let blurEffect = UIBlurEffect(style: .dark)
@@ -53,6 +54,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func loadTableStructure() {
         tableStructure.append("DetailImageCell")
+        tableStructure.append("DetailTitleCell")
     }
     
     // MARK: - Table View Data Source
@@ -72,6 +74,11 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
 //            blurredEffectView.frame = cell.detailImageView.bounds
 //            cell.detailImageView.addSubview(blurredEffectView)
             ///
+            return cell
+        }else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: tableStructure[indexPath.row]) as! DetailTitleCell
+            cell.backgroundColor = UIColor.clear
+            cell.detailTitle.text = movie.title
             return cell
         }
         return UITableViewCell()

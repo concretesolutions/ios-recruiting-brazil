@@ -207,37 +207,67 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailImageCell" rowHeight="248" id="9jn-Sl-Jae" customClass="DetailImageCell" customModule="Wonder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="248"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9jn-Sl-Jae" id="NaH-Si-1hd">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9jn-Sl-Jae" id="NaH-Si-1hd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="248"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bQq-S7-TzW">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bQq-S7-TzW">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="248"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="bQq-S7-TzW" secondAttribute="height" multiplier="375:248" id="cOy-Pz-HFY"/>
+                                                        <constraint firstAttribute="width" secondItem="bQq-S7-TzW" secondAttribute="height" multiplier="375:248" id="yH4-Ad-TVv"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S6U-WO-otL">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S6U-WO-otL">
                                                     <rect key="frame" x="114" y="18" width="146" height="210"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="S6U-WO-otL" secondAttribute="height" multiplier="73:105" id="cse-5X-2lu"/>
+                                                        <constraint firstAttribute="width" secondItem="S6U-WO-otL" secondAttribute="height" multiplier="73:105" id="xef-jI-Imb"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="S6U-WO-otL" secondAttribute="trailing" constant="100" id="0tY-K8-r0v"/>
-                                                <constraint firstItem="bQq-S7-TzW" firstAttribute="top" secondItem="NaH-Si-1hd" secondAttribute="top" id="2Ly-zj-Spy"/>
-                                                <constraint firstAttribute="bottom" secondItem="bQq-S7-TzW" secondAttribute="bottom" constant="-0.5" id="A8t-ge-Blf"/>
-                                                <constraint firstItem="bQq-S7-TzW" firstAttribute="leading" secondItem="NaH-Si-1hd" secondAttribute="leading" id="Nla-lR-ofO"/>
-                                                <constraint firstItem="S6U-WO-otL" firstAttribute="top" secondItem="NaH-Si-1hd" secondAttribute="topMargin" constant="7" id="Xhk-3a-2Ro"/>
-                                                <constraint firstItem="S6U-WO-otL" firstAttribute="leading" secondItem="NaH-Si-1hd" secondAttribute="leadingMargin" constant="99" id="bhX-WD-VnG"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="S6U-WO-otL" secondAttribute="bottom" constant="9" id="nD3-BF-Npw"/>
-                                                <constraint firstAttribute="trailing" secondItem="bQq-S7-TzW" secondAttribute="trailing" id="olF-BY-Sej"/>
+                                                <constraint firstAttribute="bottom" secondItem="bQq-S7-TzW" secondAttribute="bottom" id="0BP-Aq-dt6"/>
+                                                <constraint firstAttribute="trailing" secondItem="bQq-S7-TzW" secondAttribute="trailing" id="1Uv-zF-eQu"/>
+                                                <constraint firstItem="bQq-S7-TzW" firstAttribute="top" secondItem="NaH-Si-1hd" secondAttribute="top" id="Dgq-Zk-0Mi"/>
+                                                <constraint firstItem="S6U-WO-otL" firstAttribute="top" secondItem="NaH-Si-1hd" secondAttribute="topMargin" constant="7" id="LOX-hA-fLW"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="S6U-WO-otL" secondAttribute="bottom" constant="9" id="Omn-xM-3NA"/>
+                                                <constraint firstItem="bQq-S7-TzW" firstAttribute="leading" secondItem="NaH-Si-1hd" secondAttribute="leading" id="drG-PV-FRx"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="S6U-WO-otL" secondAttribute="trailing" constant="100" id="llK-hj-Nrp"/>
+                                                <constraint firstItem="S6U-WO-otL" firstAttribute="leading" secondItem="NaH-Si-1hd" secondAttribute="leadingMargin" constant="99" id="zJb-oo-R1E"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="detailImageView" destination="bQq-S7-TzW" id="hhj-6F-3Vg"/>
                                             <outlet property="detailPoster" destination="S6U-WO-otL" id="agD-hs-4XR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailTitleCell" rowHeight="71" id="VlW-k3-9Lc" customClass="DetailTitleCell" customModule="Wonder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="276" width="375" height="71"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VlW-k3-9Lc" id="AJg-Sg-jAa">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bww-Gd-gDh">
+                                                    <rect key="frame" x="15" y="12" width="345" height="48"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="bww-Gd-gDh" secondAttribute="height" multiplier="115:16" id="OAZ-Gz-APw"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bww-Gd-gDh" firstAttribute="trailing" secondItem="AJg-Sg-jAa" secondAttribute="trailingMargin" id="4Lc-yN-aqh"/>
+                                                <constraint firstItem="bww-Gd-gDh" firstAttribute="top" secondItem="AJg-Sg-jAa" secondAttribute="topMargin" constant="1" id="9ki-fU-ipH"/>
+                                                <constraint firstItem="bww-Gd-gDh" firstAttribute="bottom" secondItem="AJg-Sg-jAa" secondAttribute="bottomMargin" id="frL-Gw-chW"/>
+                                                <constraint firstItem="bww-Gd-gDh" firstAttribute="leading" secondItem="AJg-Sg-jAa" secondAttribute="leadingMargin" id="u3k-xO-nJC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="detailTitle" destination="bww-Gd-gDh" id="4n1-p6-CL2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
