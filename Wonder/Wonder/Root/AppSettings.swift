@@ -73,7 +73,7 @@ class AppSettings {
     }
     
     
-    func getDefualtsCategory(id: Int) -> String {
+    public func getDefualtsCategory(id: Int) -> String {
         let userDefaults = UserDefaults.standard
         let key = "id" + String(id)
         return userDefaults.string(forKey: key)!
