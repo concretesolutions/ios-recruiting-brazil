@@ -89,7 +89,11 @@
                         <viewLayoutGuide key="safeArea" id="Npr-Fs-2rH"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="R8B-cf-Z2h">
-                        <barButtonItem key="rightBarButtonItem" image="FilterIcon" id="8Xk-OU-a8S"/>
+                        <barButtonItem key="rightBarButtonItem" image="FilterIcon" id="8Xk-OU-a8S">
+                            <connections>
+                                <action selector="filterAction:" destination="w3s-0j-4a1" id="fTl-7y-IXo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="errorHandlerView" destination="6lE-yB-mzW" id="LBF-zC-wp3"/>

@@ -18,9 +18,13 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     
     
     // MARK: - Properties
+    
+    private var movies = [Results]()
+    
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
+    private var noData = "No favorites yet! Favorite a movie to see it in here!"
     
     // View Life Cycle
     override func viewDidLoad() {
@@ -59,6 +63,11 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         
         // associate to navigation item
         self.navigationItem.searchController = search
+        
+        if self.movies.count == 0 {
+            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
+        }
+        
         
     }
     
@@ -108,5 +117,13 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         
         return cell
     }
+    
+    // MARK: - UI Actions
+    @IBAction func filterAction(_ sender: Any) {
+        if movies.count == 0 {
+            view.alert(msg: noData, sender: self)
+        }
+    }
+    
     
 }

@@ -117,6 +117,16 @@ extension UIView {
         return imageView
     }
     
+    func alert(msg: String, sender: UIViewController) {
+        let alertController = UIAlertController(title: msg, message: nil, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
+        }
+        alertController.addAction(okAction)
+            sender.present(alertController, animated: true) {
+        }
+    }
+    
     
 }
 
