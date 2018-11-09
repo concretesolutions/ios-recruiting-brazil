@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" secondItem="wqJ-7Z-gpv" secondAttribute="height" multiplier="375:502" id="dXh-pf-m15"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="369" id="DLx-2S-ekI" userLabel="Movie Cell" customClass="MovieTableViewCell" customModule="Movies2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieTableViewCell" rowHeight="369" id="DLx-2S-ekI" userLabel="Movie Cell" customClass="MovieTableViewCell" customModule="Movies2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="369"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DLx-2S-ekI" id="Nti-Mh-IIF">
@@ -73,6 +73,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="w3s-0j-4a1" id="CS0-7R-3cM"/>
+                                    <outlet property="delegate" destination="w3s-0j-4a1" id="hFm-2O-zju"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,6 +89,9 @@
                         <viewLayoutGuide key="safeArea" id="Npr-Fs-2rH"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="R8B-cf-Z2h"/>
+                    <connections>
+                        <outlet property="tableView" destination="wqJ-7Z-gpv" id="Rum-Pu-1UI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBa-Pz-oVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

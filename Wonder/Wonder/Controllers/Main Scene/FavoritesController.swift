@@ -8,13 +8,16 @@
 
 import UIKit
 
-class FavoritesController: UIViewController, UISearchBarDelegate {
+class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK: - Outlets
+    @IBOutlet weak var tableView: UITableView!
+    
     
     // MARK: - Properties
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
-    
     
     // View Life Cycle
     override func viewDidLoad() {
@@ -23,6 +26,8 @@ class FavoritesController: UIViewController, UISearchBarDelegate {
         // UI Config
         uiConfig()
 
+        // AppData
+        loadAppData()
         
     }
  
@@ -53,6 +58,11 @@ class FavoritesController: UIViewController, UISearchBarDelegate {
         self.navigationItem.searchController = search
         
     }
+    
+    private func loadAppData() {
+        
+    }
+    
     
     
     // MARK: - UISearchBar Delegate
@@ -85,7 +95,15 @@ class FavoritesController: UIViewController, UISearchBarDelegate {
         //
     }
     
-    
-    
+    // MARK: - Table View Data Source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as! MovieTableViewCell
+        
+        
+        return cell
+    }
     
 }
