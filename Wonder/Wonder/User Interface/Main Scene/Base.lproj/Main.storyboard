@@ -291,28 +291,25 @@
                                             <outlet property="detailTitle" destination="bww-Gd-gDh" id="4n1-p6-CL2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailInfoCell" rowHeight="32" id="C85-sa-WMS" customClass="DetailInfoCell" customModule="Wonder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="347" width="375" height="32"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailInfoCell" rowHeight="48" id="C85-sa-WMS" customClass="DetailInfoCell" customModule="Wonder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="347" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C85-sa-WMS" id="sZ0-VA-wH0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlr-8f-F3x">
-                                                    <rect key="frame" x="15" y="6" width="345" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Zlr-8f-F3x" secondAttribute="height" multiplier="115:7" id="hSy-lS-OaY"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlr-8f-F3x">
+                                                    <rect key="frame" x="15" y="6" width="345" height="31"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Zlr-8f-F3x" firstAttribute="top" secondItem="sZ0-VA-wH0" secondAttribute="top" constant="6" id="Gc4-xe-H1G"/>
-                                                <constraint firstItem="Zlr-8f-F3x" firstAttribute="leading" secondItem="sZ0-VA-wH0" secondAttribute="leading" constant="15" id="LZF-Cw-PW3"/>
-                                                <constraint firstAttribute="trailing" secondItem="Zlr-8f-F3x" secondAttribute="trailing" constant="15" id="M0j-cZ-qmy"/>
-                                                <constraint firstAttribute="bottom" secondItem="Zlr-8f-F3x" secondAttribute="bottom" constant="5" id="wh8-YL-Mfm"/>
+                                                <constraint firstAttribute="trailing" secondItem="Zlr-8f-F3x" secondAttribute="trailing" constant="15" id="Ves-5j-E6L"/>
+                                                <constraint firstItem="Zlr-8f-F3x" firstAttribute="top" secondItem="sZ0-VA-wH0" secondAttribute="top" constant="6" id="YXu-re-rtA"/>
+                                                <constraint firstItem="Zlr-8f-F3x" firstAttribute="leading" secondItem="sZ0-VA-wH0" secondAttribute="leading" constant="15" id="nD7-FY-vn0"/>
+                                                <constraint firstAttribute="bottom" secondItem="Zlr-8f-F3x" secondAttribute="bottom" constant="11" id="qRd-ye-4ew"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -321,7 +318,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailDescriptionCell" rowHeight="114" id="9lH-MC-fQd" customClass="DetailDescriptionCell" customModule="Wonder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="379" width="375" height="114"/>
+                                        <rect key="frame" x="0.0" y="395" width="375" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9lH-MC-fQd" id="BqK-cC-WYU">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
