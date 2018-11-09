@@ -16,6 +16,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - Private Propertie
     private var tableStructure = [String]()
+    private var movieTableCellFactory = MovieTableCellFactory()
     
     // MARK: - Outlets
     
@@ -33,23 +34,8 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - UI Config
     private func uiConfig() {
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = movie.title
-        
-        let imageView = UIImageView()
-        imageView.image = movieImage
-        imageView.frame = view.bounds
-        imageView.contentMode = .scaleToFill
-
-        
-        ///
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = imageView.bounds
-        imageView.addSubview(blurredEffectView)
-        
-        tableView.backgroundView = imageView
-        
+        // Visual Effects
+        tableView.backgroundView = view.blur(image: movieImage)
     }
     
     private func loadTableStructure() {
@@ -65,76 +51,17 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: tableStructure[indexPath.row]) as! DetailImageCell
-            cell.backgroundColor = UIColor.clear
-            cell.detailPoster.image = movieImage
-            return cell
-        }else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: tableStructure[indexPath.row]) as! DetailTitleCell
-            cell.backgroundColor = UIColor.clear
-            cell.detailTitle.text = movie.title
-            return cell
-        }else if indexPath.row == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: tableStructure[indexPath.row]) as! DetailInfoCell
-            cell.backgroundColor = UIColor.clear
-            cell.detailInfo.text = releaseYear() + genreDisplay(genreIdArray: movie.genre_ids)
-            return cell
-        }else if indexPath.row == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: tableStructure[indexPath.row]) as! DetailDescriptionCell
-            if movie.overview.isEmpty {
-               cell.detailDescription.text = ""
-            }else{
-               cell.detailDescription.text = movie.overview
-            }
-            
-            return cell
-
-        }
-        return UITableViewCell()
+        return self.movieTableCellFactory.movieTableCell(movie: movie, indexPath: indexPath, movieImage: movieImage, tableView: tableView)
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
     
     // MARK: - UI Actions
     @IBAction func closeView(_ sender: Any) {
-        print(".........")
         self.dismiss(animated: true, completion: nil)
-//        navigationController?.dismiss(animated: true, completion: nil)
-//        navigationController?.popViewController(animated: true)
     }
-    
-    
-    
     
     // MARK: - Status Bar Helper
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-    
-    // MARK: - Helpers
-    private func releaseYear() -> String {
-        let releaseDate = movie.release_date.components(separatedBy: "-")
-        let year = String(describing: releaseDate[0])
-        
-        if !year.isEmpty{
-            return "℗ " + year + "  "
-        }else{
-            return ""
-        }
-    }
-    
-    private func genreDisplay(genreIdArray:[Int]) -> String{
-        
-        var resultString = ""
-        for genreId in genreIdArray {
-            resultString = resultString + " ⚐ " + AppSettings.standard.getDefualtsCategory(id: genreId)
-        }
-        return resultString
-    }
-    
-    
+ 
 }

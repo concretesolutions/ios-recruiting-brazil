@@ -22,6 +22,7 @@
 		9C7241C521954329001E96F9 /* DetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7241C421954329001E96F9 /* DetailTitleCell.swift */; };
 		9C7241C721955268001E96F9 /* DetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7241C621955268001E96F9 /* DetailInfoCell.swift */; };
 		9C7241C9219559E8001E96F9 /* DetailDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7241C8219559E7001E96F9 /* DetailDescriptionCell.swift */; };
+		9C7241CF2195C690001E96F9 /* MovieTableCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7241CE2195C690001E96F9 /* MovieTableCellFactory.swift */; };
 		9C8116A92193703100145CAC /* MoviesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8116A82193703100145CAC /* MoviesCollectionCell.swift */; };
 		9CC4227A219211E6000AB1FA /* Logo-animado-1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9CC42279219211E6000AB1FA /* Logo-animado-1.gif */; };
 		9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4227D21921505000AB1FA /* MoviesController.swift */; };
@@ -82,6 +83,7 @@
 		9C7241C421954329001E96F9 /* DetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTitleCell.swift; sourceTree = "<group>"; };
 		9C7241C621955268001E96F9 /* DetailInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoCell.swift; sourceTree = "<group>"; };
 		9C7241C8219559E7001E96F9 /* DetailDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDescriptionCell.swift; sourceTree = "<group>"; };
+		9C7241CE2195C690001E96F9 /* MovieTableCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableCellFactory.swift; sourceTree = "<group>"; };
 		9C8116A82193703100145CAC /* MoviesCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionCell.swift; sourceTree = "<group>"; };
 		9CC42279219211E6000AB1FA /* Logo-animado-1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Logo-animado-1.gif"; path = "../../../assets/Logo-animado-1.gif"; sourceTree = "<group>"; };
 		9CC4227D21921505000AB1FA /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		9C065703219207E6008DFDCF /* Wonder */ = {
 			isa = PBXGroup;
 			children = (
+				9C7241CA2195C41F001E96F9 /* Cell Factory */,
 				9C8116A621936FDE00145CAC /* Custom Cells */,
 				9CE44D4E2192859200D76492 /* Web Service Model */,
 				9CE44D4B219284A500D76492 /* Web Service API */,
@@ -206,6 +209,22 @@
 				9C7241C8219559E7001E96F9 /* DetailDescriptionCell.swift */,
 			);
 			path = "Movies Detail";
+			sourceTree = "<group>";
+		};
+		9C7241CA2195C41F001E96F9 /* Cell Factory */ = {
+			isa = PBXGroup;
+			children = (
+				9C7241CB2195C43B001E96F9 /* Table View */,
+			);
+			path = "Cell Factory";
+			sourceTree = "<group>";
+		};
+		9C7241CB2195C43B001E96F9 /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				9C7241CE2195C690001E96F9 /* MovieTableCellFactory.swift */,
+			);
+			path = "Table View";
 			sourceTree = "<group>";
 		};
 		9C8116A621936FDE00145CAC /* Custom Cells */ = {
@@ -581,6 +600,7 @@
 				9C065705219207E6008DFDCF /* AppDelegate.swift in Sources */,
 				9CE44D5C2192A08D00D76492 /* Results.swift in Sources */,
 				9C7241C721955268001E96F9 /* DetailInfoCell.swift in Sources */,
+				9C7241CF2195C690001E96F9 /* MovieTableCellFactory.swift in Sources */,
 				9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */,
 				9C7241C021952409001E96F9 /* MovieDetailController.swift in Sources */,
 				9CC4228E21922977000AB1FA /* Reachability.swift in Sources */,

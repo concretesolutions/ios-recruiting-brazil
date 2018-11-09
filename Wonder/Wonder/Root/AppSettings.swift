@@ -52,7 +52,7 @@ class AppSettings {
 
     // MARK: - Movie's category persistance
     
-    func getDefualtsGenresList() -> GenresList {
+    public func getDefualtsGenresList() -> GenresList {
         
         let result : GenresList = GenresList()
         
@@ -79,14 +79,14 @@ class AppSettings {
         return userDefaults.string(forKey: key)!
     }
     
-    func setDefualtsCategory(id: Int, name: String) {
+    public func setDefualtsCategory(id: Int, name: String) {
         let userDefaults = UserDefaults.standard
         let key = "id" + String(id)
         userDefaults.set(name, forKey: key)
         userDefaults.synchronize()
     }
     
-    func removeDefualtsCategories() {
+    public func removeDefualtsCategories() {
         for item in UserDefaults.standard.dictionaryRepresentation().keys {
             let index = item.index(item.startIndex, offsetBy: 2)
             let subStr = String(item[..<index])
@@ -97,6 +97,28 @@ class AppSettings {
             }
         }
     }
+    
+    // MARK: - Movies Helper
+    public func releaseYear(_ releaseData: String) -> String {
+        let releaseDate = releaseData.components(separatedBy: "-")
+        let year = String(describing: releaseDate[0])
+        
+        if !year.isEmpty{
+            return "℗ " + year + "  "
+        }else{
+            return ""
+        }
+    }
+    
+    public func genreDisplay(genreIdArray:[Int]) -> String{
+        
+        var resultString = ""
+        for genreId in genreIdArray {
+            resultString = resultString + " ⚐ " + AppSettings.standard.getDefualtsCategory(id: genreId)
+        }
+        return resultString
+    }
+    
     
     
 }

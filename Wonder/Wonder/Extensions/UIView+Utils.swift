@@ -101,5 +101,22 @@ extension UIView {
         self.viewWithTag(-999)?.removeFromSuperview()
     }
     
+    
+    // MARK: - Visual Effects
+    func blur(image: UIImage) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.image = image
+        imageView.frame = self.bounds
+        imageView.contentMode = .scaleToFill
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = imageView.bounds
+        imageView.addSubview(blurredEffectView)
+        
+        return imageView
+    }
+    
+    
 }
 
