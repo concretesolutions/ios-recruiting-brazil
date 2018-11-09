@@ -12,6 +12,7 @@ class DetailImageCell: UITableViewCell {
     
     // MARK: - Outlets
     @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var detailPoster: UIImageView!
     
     
     override func awakeFromNib() {

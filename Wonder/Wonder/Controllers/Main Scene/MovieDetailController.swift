@@ -17,6 +17,11 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - Private Propertie
     private var tableStructure = [String]()
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -30,6 +35,20 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     private func uiConfig() {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = movie.title
+        
+        let imageView = UIImageView()
+        imageView.image = movieImage
+        imageView.frame = view.bounds
+        imageView.contentMode = .scaleToFill
+        
+        ///
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = imageView.bounds
+        imageView.addSubview(blurredEffectView)
+        
+        tableView.backgroundView = imageView
+        
     }
     
     private func loadTableStructure() {
@@ -44,7 +63,15 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: tableStructure[indexPath.row]) as! DetailImageCell
-            cell.detailImageView.image = movieImage
+            cell.backgroundColor = UIColor.clear
+            cell.detailPoster.image = movieImage
+//            cell.detailImageView.image = movieImage
+//            ///
+//            let blurEffect = UIBlurEffect(style: .dark)
+//            let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+//            blurredEffectView.frame = cell.detailImageView.bounds
+//            cell.detailImageView.addSubview(blurredEffectView)
+            ///
             return cell
         }
         return UITableViewCell()
