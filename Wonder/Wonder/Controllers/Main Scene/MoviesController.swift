@@ -219,7 +219,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         if (!movie.poster_path.isEmpty && movie.poster_path != "" ) {
             
             let webService = WebService()
-            let imgSrc = webService.getFullUrl((movie.poster_path))
+            let imgSrc = webService.getFullUrl(movie.poster_path)
             let url = URL(string: imgSrc)
 
             if imgSrc.isEmpty {

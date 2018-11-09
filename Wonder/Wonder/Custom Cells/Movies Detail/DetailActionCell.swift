@@ -27,5 +27,16 @@ class DetailActionCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    // MARK: - UI Actions
+    
+    @IBAction func favoriteAction(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "didChangeFavorite"), object:self)
+    }
+    
+    @IBAction func shareAction(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "didSelectShare"), object:self)
+    }
+    
 
 }

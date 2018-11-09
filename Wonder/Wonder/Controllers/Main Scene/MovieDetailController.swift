@@ -29,6 +29,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         uiConfig()
         loadTableStructure()
+        observerManager()
         
     }
     
@@ -65,5 +66,31 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    // MARK: - Observers
+    private func observerManager() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didChangeFavorite(_:)),
+                                               name: NSNotification.Name(rawValue: "didChangeFavorite"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didSelectShare(_:)),
+                                               name: NSNotification.Name(rawValue: "didSelectShare"),
+                                               object: nil)
+    }
+    
+    // observer actions
+    @objc private func didChangeFavorite(_ sender: NSNotification) {
+        print("FAVORITE action")
+    }
+    @objc private func didSelectShare(_ sender: NSNotification) {
+        let webService = WebService()
+        displayShareSheet(shareContent: movie.title + " - " + webService.getFullUrl(movie.poster_path))
+    }
  
+    // MARK: - Share Sheet Helper
+    private func displayShareSheet(shareContent:String) {
+        let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: {})
+    }
 }
