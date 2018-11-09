@@ -29,6 +29,7 @@
 		9C8B8B822195FF2C004164BA /* FavoriteMovies+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B8B802195FF2C004164BA /* FavoriteMovies+CoreDataProperties.swift */; };
 		9C8B8B832195FF2C004164BA /* FavoriteMovies+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B8B812195FF2C004164BA /* FavoriteMovies+CoreDataClass.swift */; };
 		9C8B8B8621960636004164BA /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B8B8521960636004164BA /* PersistenceManager.swift */; };
+		9C8B8B89219620B0004164BA /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B8B88219620B0004164BA /* MovieTableViewCell.swift */; };
 		9CC4227A219211E6000AB1FA /* Logo-animado-1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9CC42279219211E6000AB1FA /* Logo-animado-1.gif */; };
 		9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4227D21921505000AB1FA /* MoviesController.swift */; };
 		9CC4228121921569000AB1FA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4228021921569000AB1FA /* FavoritesController.swift */; };
@@ -95,6 +96,7 @@
 		9C8B8B802195FF2C004164BA /* FavoriteMovies+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavoriteMovies+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9C8B8B812195FF2C004164BA /* FavoriteMovies+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FavoriteMovies+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9C8B8B8521960636004164BA /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		9C8B8B88219620B0004164BA /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		9CC42279219211E6000AB1FA /* Logo-animado-1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Logo-animado-1.gif"; path = "../../../assets/Logo-animado-1.gif"; sourceTree = "<group>"; };
 		9CC4227D21921505000AB1FA /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
 		9CC4228021921569000AB1FA /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		9C8116A621936FDE00145CAC /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9C8B8B8721962070004164BA /* Favorites */,
 				9C7241C121952AB2001E96F9 /* Movies Detail */,
 				9C8116A721936FEF00145CAC /* Movies Collection */,
 			);
@@ -263,6 +266,14 @@
 				9C8B8B8521960636004164BA /* PersistenceManager.swift */,
 			);
 			path = "Persistence Manager";
+			sourceTree = "<group>";
+		};
+		9C8B8B8721962070004164BA /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				9C8B8B88219620B0004164BA /* MovieTableViewCell.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		9CC4227521920CB8000AB1FA /* User Interface */ = {
@@ -609,6 +620,7 @@
 			files = (
 				9CE44D4D2192854700D76492 /* WebService.swift in Sources */,
 				9CEE19872194043700CF0D70 /* String+Utils.swift in Sources */,
+				9C8B8B89219620B0004164BA /* MovieTableViewCell.swift in Sources */,
 				9CE44D53219285DE00D76492 /* Genres.swift in Sources */,
 				9C7241C521954329001E96F9 /* DetailTitleCell.swift in Sources */,
 				9CE44D5E2192BE2700D76492 /* UIView+Utils.swift in Sources */,
