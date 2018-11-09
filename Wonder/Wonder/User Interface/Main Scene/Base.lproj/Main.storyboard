@@ -343,6 +343,32 @@
                                             <outlet property="detailDescription" destination="FdT-Nj-PTS" id="dMZ-Zt-gd0"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailSeparatorCell" rowHeight="16" id="pCR-UK-okx" customClass="DetailSeparatorCell" customModule="Wonder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="509" width="375" height="16"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pCR-UK-okx" id="isn-bx-cNm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Qbu-zm-kRZ">
+                                                    <rect key="frame" x="15" y="8" width="345" height="1"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Qbu-zm-kRZ" secondAttribute="height" multiplier="345:1" id="StS-u6-wLL"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Qbu-zm-kRZ" secondAttribute="trailing" constant="15" id="86w-CY-aer"/>
+                                                <constraint firstItem="Qbu-zm-kRZ" firstAttribute="leading" secondItem="isn-bx-cNm" secondAttribute="leading" constant="15" id="9Ng-gS-1wg"/>
+                                                <constraint firstAttribute="bottom" secondItem="Qbu-zm-kRZ" secondAttribute="bottom" constant="7" id="lgO-bG-SWa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="detailSeparatorView" destination="Qbu-zm-kRZ" id="Nnz-rb-tUZ"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="2t2-ir-PVV" id="YL8-Ya-w6R"/>

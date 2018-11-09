@@ -30,11 +30,17 @@ class MovieTableCellFactory {
             return cell
         }else if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailDescriptionCell") as! DetailDescriptionCell
+            cell.backgroundColor = UIColor.clear
             if movie.overview.isEmpty {
                 cell.detailDescription.text = ""
             }else{
                 cell.detailDescription.text = movie.overview
             }
+            return cell
+        }else if indexPath.row == 4 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailSeparatorCell") as! DetailSeparatorCell
+            cell.backgroundColor = UIColor.clear
+            cell.detailSeparatorView.alpha = 0.35
             return cell
         }
         return UITableViewCell()
