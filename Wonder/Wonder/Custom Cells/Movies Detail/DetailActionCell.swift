@@ -11,8 +11,12 @@ import UIKit
 class DetailActionCell: UITableViewCell {
     
     // MARK: - Outlets
+    @IBOutlet weak var favoriteView: UIView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
-
+    @IBOutlet weak var shareView: UIView!
+    @IBOutlet weak var shareButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

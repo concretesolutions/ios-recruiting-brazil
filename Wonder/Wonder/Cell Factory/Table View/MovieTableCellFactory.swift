@@ -45,6 +45,8 @@ class MovieTableCellFactory {
         }else if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailActionCell") as! DetailActionCell
             cell.backgroundColor = UIColor.clear
+            cell.favoriteButton.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            cell.shareButton.setImage(UIImage(named: "share"), for: .normal)
             return cell
         }
         return UITableViewCell()
