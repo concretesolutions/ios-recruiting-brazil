@@ -88,14 +88,61 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Npr-Fs-2rH"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Favorites" id="R8B-cf-Z2h"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="R8B-cf-Z2h">
+                        <barButtonItem key="rightBarButtonItem" image="FilterIcon" id="8Xk-OU-a8S"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="errorHandlerView" destination="6lE-yB-mzW" id="LBF-zC-wp3"/>
+                        <outlet property="errorImageView" destination="epy-26-x5e" id="shw-QI-zqj"/>
+                        <outlet property="errorMessage" destination="ias-Jt-QUj" id="bSS-Dn-krh"/>
                         <outlet property="tableView" destination="wqJ-7Z-gpv" id="Rum-Pu-1UI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBa-Pz-oVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="6lE-yB-mzW">
+                    <rect key="frame" x="0.0" y="0.0" width="290" height="290"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNoResult" translatesAutoresizingMaskIntoConstraints="NO" id="epy-26-x5e">
+                            <rect key="frame" x="75" y="37" width="140" height="140"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="epy-26-x5e" secondAttribute="height" multiplier="1:1" id="6Vb-Qh-PzL"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" tag="1003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ias-Jt-QUj">
+                            <rect key="frame" x="46" y="185" width="199" height="65"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="ias-Jt-QUj" secondAttribute="height" multiplier="199:65" id="SEK-sY-azZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView opaque="NO" tag="1004" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ZOQ-6V-XQJ">
+                            <rect key="frame" x="127" y="79" width="37" height="37"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="ZOQ-6V-XQJ" secondAttribute="height" multiplier="1:1" id="ZYj-Jg-cht"/>
+                            </constraints>
+                            <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="ias-Jt-QUj" firstAttribute="top" secondItem="epy-26-x5e" secondAttribute="bottom" constant="8" id="1O6-lm-5hO"/>
+                        <constraint firstItem="ias-Jt-QUj" firstAttribute="leading" secondItem="k8k-fg-Qag" secondAttribute="leading" constant="46" id="H6t-SI-mxZ"/>
+                        <constraint firstItem="ZOQ-6V-XQJ" firstAttribute="leading" secondItem="k8k-fg-Qag" secondAttribute="leading" constant="127" id="Hic-kE-ePr"/>
+                        <constraint firstItem="k8k-fg-Qag" firstAttribute="trailing" secondItem="ias-Jt-QUj" secondAttribute="trailing" constant="45" id="Hzc-dS-aE6"/>
+                        <constraint firstItem="ias-Jt-QUj" firstAttribute="top" secondItem="ZOQ-6V-XQJ" secondAttribute="bottom" constant="69" id="L2Y-y4-8ro"/>
+                        <constraint firstItem="epy-26-x5e" firstAttribute="leading" secondItem="k8k-fg-Qag" secondAttribute="leading" constant="75" id="Z0f-FM-kIP"/>
+                        <constraint firstItem="epy-26-x5e" firstAttribute="top" secondItem="k8k-fg-Qag" secondAttribute="top" constant="37" id="iKD-QA-OXA"/>
+                        <constraint firstItem="k8k-fg-Qag" firstAttribute="trailing" secondItem="ZOQ-6V-XQJ" secondAttribute="trailing" constant="126" id="lTt-jZ-wCM"/>
+                        <constraint firstItem="k8k-fg-Qag" firstAttribute="trailing" secondItem="epy-26-x5e" secondAttribute="trailing" constant="75" id="nJH-w3-ZCV"/>
+                        <constraint firstItem="ZOQ-6V-XQJ" firstAttribute="top" secondItem="k8k-fg-Qag" secondAttribute="top" constant="79" id="o3G-ho-NTD"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="k8k-fg-Qag"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="1997.5999999999999" y="20.239880059970016"/>
+            <point key="canvasLocation" x="1998" y="325"/>
         </scene>
         <!--Movies-->
         <scene sceneID="L9q-ms-8Gs">
@@ -617,6 +664,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="FilterIcon" width="17" height="19"/>
         <image name="close" width="60" height="60"/>
         <image name="favorite_empty_icon" width="22" height="21"/>
         <image name="favorite_full_icon" width="18" height="16"/>

@@ -11,6 +11,9 @@ import UIKit
 class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Outlets
+    @IBOutlet var errorHandlerView: UIView!
+    @IBOutlet weak var errorImageView: UIImageView!
+    @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     
