@@ -35,7 +35,7 @@ class PersistenceManager {
     }
 
 
-    // MARK: - Existance Methods
+    // MARK: - File Existence
     public func fileExists(name: String) -> Bool {
         // path composer
         let pathFileName = self.documentsFolder() + "/" + name
@@ -55,7 +55,7 @@ class PersistenceManager {
     }
     
     // MARK: - I/O Operations
-    public func addFile(data: NSData, id: String) -> (absolutePath: String?, error: NSError?) {
+    public func addFile(id: String, data: NSData) -> (absolutePath: String?, error: NSError?) {
 
         let fileName = "WonderFile_\(id)" + ".wdf"
         let pathFileName = self.getDocumentsFolder() + fileName
@@ -89,6 +89,89 @@ class PersistenceManager {
         }
     }
 
+    public func getFile(id: String) -> NSData {
+        let fileName = "WonderFile_\(id)" + ".wdf"
+        let pathFileName = self.getDocumentsFolder() + fileName
+        return FileManager.default.contents(atPath: pathFileName)! as NSData
+    }
+    
+    
+    public func getFileAttributes(_ id: String) -> NSDictionary {
+        
+        // path composer
+        let fileName = "WonderFile_\(id)" + ".wdf"
+        let pathFileName = self.getDocumentsFolder() + fileName
+        
+        // File System
+        do {
+            let attributes = try FileManager.default.attributesOfItem(atPath: pathFileName)
+            return attributes as NSDictionary
+        }
+        catch let error as NSError {
+            print("👎 error getFileAttributes: \(error) ❌")
+        }
+        return NSDictionary()
+    }
+    
+    public func getFilesNames() -> [String] {
+        
+        // path composer
+        let path = self.getDocumentsFolder()
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: path)
+            return files
+        } catch {
+            print("👎 error deletinf files at: \(path) ❌ error: \(error)")
+        }
+        return [String]()
+    }
+
+    public func deleteFile(_ id: String) -> Bool? {
+        
+        // path composer
+        let fileName = "WonderFile_\(id)" + ".wdf"
+        let pathFileName = self.getDocumentsFolder() + fileName
+        
+        // delete file
+        do {
+            try FileManager.default.removeItem(atPath: pathFileName)
+        } catch {
+            print("👎 error delete file: \(pathFileName) ❌ error: \(error)")
+            return false
+        }
+        return true
+        
+    }
+    
+    @discardableResult public func deleteFileAtPath(_ pathFileName: String) -> Bool {
+        
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: pathFileName)
+        } catch {
+            print("👎 error delete file at path: \(pathFileName) ❌ error: \(error)")
+            return false
+        }
+        
+        return true
+    }
+    
+    @discardableResult public func deleteAllFilesAtPath(_ pathFileName: String) -> Bool {
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: pathFileName)
+            for file in files {
+                do {
+                    try FileManager.default.removeItem(atPath: "\(pathFileName)/\(file)")
+                } catch {
+                    print("👎 error delete file at path: \(pathFileName) ❌ error: \(error)")
+                }
+            }
+        } catch {
+            print("👎 error delete file at path: \(pathFileName) ❌ error: \(error)")
+        }
+        return true
+    }
+
     
     // MARK: - I/O Helpers
     private func deviceRemainingFreeSpaceInBytes() -> Double {
@@ -101,8 +184,6 @@ class PersistenceManager {
         }
         return freeSize.doubleValue
     }
-    
-    
     
     
     
