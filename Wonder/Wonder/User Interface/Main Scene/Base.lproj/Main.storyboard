@@ -140,6 +140,7 @@
                         <outlet property="errorHandlerView" destination="r8v-KQ-k1T" id="bKz-9O-b2I"/>
                         <outlet property="errorImageView" destination="w0H-hd-79f" id="Jta-fC-T9l"/>
                         <outlet property="errorMessage" destination="RTA-XW-lQt" id="fmT-IS-7Se"/>
+                        <segue destination="2t2-ir-PVV" kind="show" identifier="showMovieDetail" id="Eq6-T7-u8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfC-OF-R1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -187,6 +188,21 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="1997.5999999999999" y="-645.42728635682158"/>
+        </scene>
+        <!--Movie Detail Controller-->
+        <scene sceneID="oGa-AN-izP">
+            <objects>
+                <viewController id="2t2-ir-PVV" customClass="MovieDetailController" customModule="Wonder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vqp-3o-y1B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ny5-Pv-E4u"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aa9-HB-IIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2959" y="-645"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FJ1-Hb-tXw">

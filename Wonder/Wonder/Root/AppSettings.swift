@@ -37,7 +37,6 @@ class AppSettings {
         let webService = WebService()
         webService.getGenresList { (genresResult) in
             // completion
-            print("genresResult: \(genresResult)")
             self.genresList = genresResult
             let genres : [Genres] = self.genresList.genres
             // remove previous stored data

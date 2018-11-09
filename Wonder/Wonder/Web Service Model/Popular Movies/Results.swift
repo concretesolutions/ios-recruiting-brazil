@@ -25,6 +25,25 @@ public class Results {
 	var overview = String()
 	var release_date = String()
     
+    init() {
+        self.vote_count = Int()
+        self.id = Int()
+        self.video = Bool()
+        self.vote_average = Double()
+        self.title = String()
+        self.popularity = Double()
+        self.poster_path = String()
+        self.original_language = String()
+        self.original_title = String()
+        self.genre_ids = [Int]()
+        self.backdrop_path = String()
+        self.adult = Bool()
+        self.overview = String()
+        self.release_date = String()
+    }
+    
+    
+    
     init(dictionary: NSDictionary) {
         if let vote_count = dictionary["vote_count"] as? Int {
             self.vote_count = vote_count

@@ -30,6 +30,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     private var movies = Movies()
     private var filteredMovies = Movies()
     private var isFiltering = false
+    private var selectedMovie = Results()
     
     
     // pagination
@@ -41,6 +42,8 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        definesPresentationContext = true
         
         // UI Config
         uiConfig()
@@ -159,7 +162,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
 
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+    
         self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
         self.filteredMovies.results = self.movies.results.filter { $0.title.lowercased().contains(self.searchArgument.lowercased())}
         self.isFiltering = true
@@ -242,6 +245,22 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         
         return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedMovie = movies.results[indexPath.row]
+        performSegue(withIdentifier: "showMovieDetail", sender: self)
+    }
+    
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMovieDetail" {
+            let controller = segue.destination as! MovieDetailController
+            controller.movie = selectedMovie
+            controller.hidesBottomBarWhenPushed = true
+        }
+    }
+    
     
     
     // MARK: - UIScrollView Delegate - Endless Pagination
