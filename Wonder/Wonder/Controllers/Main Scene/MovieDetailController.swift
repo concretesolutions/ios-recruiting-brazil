@@ -44,6 +44,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         tableStructure.append("DetailInfoCell")
         tableStructure.append("DetailDescriptionCell")
         tableStructure.append("DetailSeparatorCell")
+        tableStructure.append("DetailActionCell")
     }
     
     // MARK: - Table View Data Source

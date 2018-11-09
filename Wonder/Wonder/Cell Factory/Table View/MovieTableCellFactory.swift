@@ -42,6 +42,10 @@ class MovieTableCellFactory {
             cell.backgroundColor = UIColor.clear
             cell.detailSeparatorView.alpha = 0.35
             return cell
+        }else if indexPath.row == 5 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailActionCell") as! DetailActionCell
+            cell.backgroundColor = UIColor.clear
+            return cell
         }
         return UITableViewCell()
     }
