@@ -18,6 +18,7 @@
 		9C06571D219207F0008DFDCF /* WonderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C06571C219207F0008DFDCF /* WonderTests.swift */; };
 		9C065728219207F0008DFDCF /* WonderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C065727219207F0008DFDCF /* WonderUITests.swift */; };
 		9C7241C021952409001E96F9 /* MovieDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7241BF21952409001E96F9 /* MovieDetailController.swift */; };
+		9C7241C321952B01001E96F9 /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7241C221952B01001E96F9 /* DetailImageCell.swift */; };
 		9C8116A92193703100145CAC /* MoviesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8116A82193703100145CAC /* MoviesCollectionCell.swift */; };
 		9CC4227A219211E6000AB1FA /* Logo-animado-1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9CC42279219211E6000AB1FA /* Logo-animado-1.gif */; };
 		9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4227D21921505000AB1FA /* MoviesController.swift */; };
@@ -74,6 +75,7 @@
 		9C065727219207F0008DFDCF /* WonderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonderUITests.swift; sourceTree = "<group>"; };
 		9C065729219207F0008DFDCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C7241BF21952409001E96F9 /* MovieDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailController.swift; sourceTree = "<group>"; };
+		9C7241C221952B01001E96F9 /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
 		9C8116A82193703100145CAC /* MoviesCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionCell.swift; sourceTree = "<group>"; };
 		9CC42279219211E6000AB1FA /* Logo-animado-1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Logo-animado-1.gif"; path = "../../../assets/Logo-animado-1.gif"; sourceTree = "<group>"; };
 		9CC4227D21921505000AB1FA /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
@@ -189,9 +191,18 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
+		9C7241C121952AB2001E96F9 /* Movies Detail */ = {
+			isa = PBXGroup;
+			children = (
+				9C7241C221952B01001E96F9 /* DetailImageCell.swift */,
+			);
+			path = "Movies Detail";
+			sourceTree = "<group>";
+		};
 		9C8116A621936FDE00145CAC /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9C7241C121952AB2001E96F9 /* Movies Detail */,
 				9C8116A721936FEF00145CAC /* Movies Collection */,
 			);
 			path = "Custom Cells";
@@ -555,6 +566,7 @@
 				9C06570D219207E6008DFDCF /* Wonder.xcdatamodeld in Sources */,
 				9CC4228B21922871000AB1FA /* AppSettings.swift in Sources */,
 				9C8116A92193703100145CAC /* MoviesCollectionCell.swift in Sources */,
+				9C7241C321952B01001E96F9 /* DetailImageCell.swift in Sources */,
 				9C065705219207E6008DFDCF /* AppDelegate.swift in Sources */,
 				9CE44D5C2192A08D00D76492 /* Results.swift in Sources */,
 				9CC4227E21921505000AB1FA /* MoviesController.swift in Sources */,

@@ -30,7 +30,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     private var movies = Movies()
     private var filteredMovies = Movies()
     private var isFiltering = false
-    private var selectedMovie = Results()
+
     
     
     // pagination
@@ -59,6 +59,10 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
 
     
 
@@ -247,7 +251,6 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedMovie = movies.results[indexPath.row]
         performSegue(withIdentifier: "showMovieDetail", sender: self)
     }
     
@@ -255,9 +258,16 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMovieDetail" {
+            
+            let indexPath = collectionView.indexPathsForSelectedItems?.first
+            let cell = collectionView.cellForItem(at: indexPath!) as? MoviesCollectionCell
+            
             let controller = segue.destination as! MovieDetailController
-            controller.movie = selectedMovie
+            controller.movie = movies.results[(indexPath?.row)!]
             controller.hidesBottomBarWhenPushed = true
+            controller.movie = movies.results[(indexPath?.row)!]
+            controller.movieImage = (cell?.movieImageView.image)!
+            
         }
     }
     
