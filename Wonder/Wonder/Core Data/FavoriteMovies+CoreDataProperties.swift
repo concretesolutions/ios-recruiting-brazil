@@ -22,5 +22,6 @@ extension FavoriteMovies {
     @NSManaged public var title: String?
     @NSManaged public var id: String?
     @NSManaged public var poster: String?
+    @NSManaged public var favoritedAt: Date?
 
 }

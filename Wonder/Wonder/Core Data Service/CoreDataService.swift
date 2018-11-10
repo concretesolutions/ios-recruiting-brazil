@@ -31,6 +31,7 @@ class CoreDataService {
         favoriteMovies.title = businessFavoriteMovies.title
         favoriteMovies.id = businessFavoriteMovies.id
         favoriteMovies.poster = businessFavoriteMovies.poster
+        favoriteMovies.favoritedAt = Date()
       
         completion(true, favoriteMoviesList)
         save("addFavorite")
@@ -39,7 +40,7 @@ class CoreDataService {
     
     public func getAllFavorites() -> [FavoriteMovies]? {
         
-        let sortByTitle = NSSortDescriptor(key: "title", ascending: true)
+        let sortByTitle = NSSortDescriptor(key: "favoritedAt", ascending: false)
         let sortDescriptors = [sortByTitle]
         
         

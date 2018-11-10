@@ -48,6 +48,11 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         loadAppData()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // AppData
+        loadAppData()
+    }
  
     // MARK: - UI Config
     private func uiConfig() {
@@ -130,6 +135,23 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            self.coreDataService?.deleteFavorites(favoriteMovie: self.movies[indexPath.row])
+            self.movies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        tableView.reloadData()
+    }
+
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfavorite"
+    }
+    
+
     
     // MARK: - UI Actions
     @IBAction func filterAction(_ sender: Any) {

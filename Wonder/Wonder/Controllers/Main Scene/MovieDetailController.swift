@@ -46,13 +46,10 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         checkFavoriteExistence()
         uiConfig()
         loadTableStructure()
         observerManager()
-        
-        
     }
     
     // MARK: - Favorite Integrity
@@ -75,7 +72,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         tableStructure.append("DetailActionCell")
     }
     
-    // MARK: - Table View Data Source
+    // MARK: - Table View Data Source & Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableStructure.count
     }
@@ -87,6 +84,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = self.movieTableCellFactory.movieTableCell(movie: movie, indexPath: indexPath, movieImage: movieImage, isFavorite: isFavorite,  tableView: tableView)
         return cell
     }
+    
     
     // MARK: - UI Actions
     @IBAction func closeView(_ sender: Any) {
