@@ -100,7 +100,6 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // observer actions
     @objc private func didChangeFavorite(_ sender: NSNotification) {
-        print("FAVORITE action. will ad movie to core data")
         self.addFavoriteMovie()
     }
     @objc private func didSelectShare(_ sender: NSNotification) {

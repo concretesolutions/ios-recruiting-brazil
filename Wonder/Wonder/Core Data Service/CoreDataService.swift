@@ -66,18 +66,34 @@ class CoreDataService {
     // MARK: - private Functions
     private func save(_ msg: String) {
         do {
-            
-            print("☢️ will save (before))")
             try moc.save()
-            print("☢️ saved (after))")
         }
         catch let error as NSError {
-            print("☢️ error ☢️An error occurred executing step: \(msg): \(error.localizedDescription)")
+            print("An error occurred executing step: \(msg): \(error.localizedDescription)")
         }
     }
     
-    
-    
-    
+
+    public func favoriteExists(id: String) -> Bool {
+        
+        let request : NSFetchRequest<FavoriteMovies> = FavoriteMovies.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", id)
+
+        do {
+            let result = try moc.fetch(request)
+            if result.isEmpty {
+                return false
+            }else{
+                return true
+            }
+        }
+        catch let error as NSError  {
+            print("Error getting lesson: \(error.localizedDescription)")
+        }
+        
+        return false
+        
+    }
+
     
 }

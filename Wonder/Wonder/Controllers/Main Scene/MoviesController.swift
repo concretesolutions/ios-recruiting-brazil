@@ -224,7 +224,16 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         }
 
         cell.movieTitle.text = movie.title
-        cell.movieFavoriteBackgroundView.isHidden = false
+
+        
+        if (self.coreDataService?.favoriteExists(id: String(movie.id)))! {
+            cell.movieFavoriteBackgroundView.isHidden = false
+        }else{
+            cell.movieFavoriteBackgroundView.isHidden = true
+        }
+    
+        
+        
         
         // image
         if (!movie.poster_path.isEmpty && movie.poster_path != "" ) {
