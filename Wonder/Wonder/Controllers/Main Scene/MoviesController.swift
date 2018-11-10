@@ -57,8 +57,16 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         
 //        /// debug
 //        let favs = coreDataService?.getAllFavorites()
-//        print("favs.... \(favs)")
-//        /// end-debug
+//        print("☢️ reading favorites .... \(String(describing: favs?.count))")
+//        for fav in favs! {
+//            print("☢️ title: \(String(describing: fav.title!))  id: \(fav.id)")
+//            // delete existing
+////            coreDataService?.deleteFavorites(favoriteMovie: fav)
+//        }
+        
+        
+        
+        
         
         
         

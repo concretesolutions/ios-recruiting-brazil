@@ -31,7 +31,8 @@ class CoreDataService {
         favoriteMovies.title = businessFavoriteMovies.title
         favoriteMovies.id = Int16(businessFavoriteMovies.id!)!
         favoriteMovies.poster = businessFavoriteMovies.poster
-        
+      
+        completion(true, favoriteMoviesList)
         save("addFavorite")
         
     }
@@ -54,16 +55,24 @@ class CoreDataService {
         
         return nil
     }
-    
-    
+
+    public func deleteFavorites(favoriteMovie: FavoriteMovies) {
+        favoriteMoviesList = favoriteMoviesList.filter({ $0 != favoriteMovie })
+        moc.delete(favoriteMovie)
+        save("delete favoriteMovie")
+    }
+
     
     // MARK: - private Functions
     private func save(_ msg: String) {
         do {
+            
+            print("☢️ will save (before))")
             try moc.save()
+            print("☢️ saved (after))")
         }
         catch let error as NSError {
-            print("An error occurred executing step: \(msg): \(error.localizedDescription)")
+            print("☢️ error ☢️An error occurred executing step: \(msg): \(error.localizedDescription)")
         }
     }
     
