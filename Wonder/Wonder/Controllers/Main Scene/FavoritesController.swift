@@ -37,15 +37,17 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     private var searchArgument = String()
     private var noData = "You have no favorite movie."
     
+    private var selectedFavoriteMovie = FavoriteMovies()
+    private var selectedImage = UIImage()
+    
+    private var modelAdapter = ModelAdapter()
+    
     // View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // UI Config
         uiConfig()
-
-        // AppData
-        loadAppData()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -131,12 +133,28 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as! MovieTableViewCell
         let fav = self.movies[indexPath.row]
-        cell.movieTitle.text = fav.title
+    
+        if fav.year!.isEmpty {
+            cell.movieTitle.text = fav.title
+        }else{
+            cell.movieTitle.text = fav.title! + " (" + fav.year! + ")"
+        }
+    
         cell.movieSubtitle.text = fav.overview
         cell.movieImage.image = UIImage()
         
+        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! MovieTableViewCell
+        selectedFavoriteMovie = movies[indexPath.row]
+        selectedImage = cell.movieImage.image!
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showFavoriteDetail", sender: self)
+    }
+    
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -171,6 +189,12 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         if segue.identifier == "showFilter" {
             let controller = segue.destination as! FilterController
             controller.movies = self.movies
+        }else if segue.identifier == "showFavoriteDetail" {
+            let controller = segue.destination as! MovieDetailController
+            controller.movie = self.modelAdapter.convertToBusiness(selectedFavoriteMovie)
+            controller.movieImage = selectedImage
+            controller.isFavorite = true
+            controller.moc = moc
         }
     }
     

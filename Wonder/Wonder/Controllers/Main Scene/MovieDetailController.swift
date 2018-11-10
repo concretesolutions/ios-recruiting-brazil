@@ -22,13 +22,11 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     public var movie = Results()
     public var movieImage = UIImage()
+    public var isFavorite = false
     
     // MARK: - Private Propertie
     private var tableStructure = [String]()
     private var movieTableCellFactory = MovieTableCellFactory()
-    
-    private var isFavorite = false
-    
     
     // Core Data -----------------------------------
     private var coreDataService : CoreDataService?
@@ -54,7 +52,9 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - Favorite Integrity
     private func checkFavoriteExistence() {
-        isFavorite = (self.coreDataService?.favoriteExists(id: String(movie.id)))!
+        if !isFavorite {
+            isFavorite = self.coreDataService?.favoriteExists(id: String(movie.id)) ?? false
+        }
     }
     
     // MARK: - UI Config
@@ -118,6 +118,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
             // add favorite
             self.addFavoriteMovie()
         }
+        isFavorite = !isFavorite
         // reload table view to refresh fav icon
         tableView.reloadData()
         
@@ -155,6 +156,15 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func deleteFavorite() {
+        
+//        self.coreDataService = CoreDataService(moc: moc!)
+//        let favs = self.coreDataService?.getAllFavorites()
+//        for item in favs! {
+//            print("         +++++++ id: \(item.id)  +++++++ title: \(item.title)")
+//        }
+//
+//
+//
         let fav = self.coreDataService?.getFavorite(id: String(movie.id))
         self.coreDataService?.deleteFavorites(favoriteMovie: fav!)
     }
