@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Public Properties
+    public var moc : NSManagedObjectContext? {
+        didSet {
+            if let moc = moc {
+                coreDataService = CoreDataService(moc: moc)
+            }
+        }
+    }
+    
     public var movie = Results()
     public var movieImage = UIImage()
     
@@ -18,8 +27,16 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     private var tableStructure = [String]()
     private var movieTableCellFactory = MovieTableCellFactory()
     
-    // MARK: - Outlets
     
+    // Core Data -----------------------------------
+    private var coreDataService : CoreDataService?
+    private var favoriteMoviesList = [FavoriteMovies]()
+    // ---------------------------------------------
+    
+    
+    
+    
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -27,6 +44,8 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
         uiConfig()
         loadTableStructure()
         observerManager()
@@ -81,7 +100,8 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // observer actions
     @objc private func didChangeFavorite(_ sender: NSNotification) {
-        print("FAVORITE action")
+        print("FAVORITE action. will ad movie to core data")
+        self.addFavoriteMovie()
     }
     @objc private func didSelectShare(_ sender: NSNotification) {
         let webService = WebService()
@@ -93,4 +113,25 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         present(activityViewController, animated: true, completion: {})
     }
+    
+    
+    // MARK: - Core Data I/O
+    private func addFavoriteMovie() {
+        self.coreDataService?.addFavorite(year: "1998", overview: "bla bla bla Film", genre: "Terror, Drama", title: "bla bla Movie Title" , id: "14", poster: "gagsafagdf", completion: { (success, favoriteMovies) in
+            // completion
+            if success {
+                self.favoriteMoviesList = favoriteMovies
+                print("** inside after core data insert")
+                for favorite in self.favoriteMoviesList {
+                    print("*** fav: \(favorite)")
+                }
+                
+            }else{
+                // Core Data Error
+                print("A problem occured while tryin to save favorite movies to core data!")
+            }
+        })
+    }
+    
+    
 }

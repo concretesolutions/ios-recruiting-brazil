@@ -20,6 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appSettings = AppSettings()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // core data
+        let tabBarController = window?.rootViewController as? UITabBarController
+        print("TabBar controllers: \(tabBarController?.viewControllers?.first)")
+        print("......")
+        
+        let navigationController_0 = tabBarController?.viewControllers?.first as! UINavigationController
+        let moviesController = navigationController_0.viewControllers.first as! MoviesController
+        moviesController.moc = persistentContainer.viewContext
+        
+        
+        
+        
+//        let moviesController = navigationVC?.viewControllers.first as! MoviesController
+//        moviesController.moc = persistentContainer.viewContext
 
         // load genres list
         self.appSettings.loadGenresList()

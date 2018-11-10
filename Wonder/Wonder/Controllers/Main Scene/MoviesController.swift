@@ -7,14 +7,22 @@
 //
 
 import UIKit
+import CoreData
 import Kingfisher
+
 
 class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    // MARK: - Public Properties
+    public var moc : NSManagedObjectContext? {
+        didSet {
+            if let moc = moc {
+                coreDataService = CoreDataService(moc: moc)
+            }
+        }
+    }
     
-
     
-
     // MARK: - outlets
     @IBOutlet var errorHandlerView: UIView!
     @IBOutlet weak var errorImageView: UIImageView!
@@ -26,6 +34,10 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
+    
+    // Core Data -----------------------------------
+    private var coreDataService : CoreDataService?
+    // ---------------------------------------------
     
     private var movies = Movies()
     private var filteredMovies = Movies()
@@ -43,7 +55,12 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        definesPresentationContext = true
+//        /// debug
+//        let favs = coreDataService?.getAllFavorites()
+//        print("favs.... \(favs)")
+//        /// end-debug
+        
+        
         
         // UI Config
         uiConfig()
@@ -268,7 +285,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
             controller.hidesBottomBarWhenPushed = true
             controller.movie = movies.results[(indexPath?.row)!]
             controller.movieImage = (cell?.movieImageView.image)!
-            
+            controller.moc = self.moc
         }
     }
     
