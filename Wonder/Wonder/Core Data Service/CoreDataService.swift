@@ -40,8 +40,8 @@ class CoreDataService {
     
     public func getAllFavorites() -> [FavoriteMovies]? {
         
-        let sortByTitle = NSSortDescriptor(key: "favoritedAt", ascending: false)
-        let sortDescriptors = [sortByTitle]
+        let sortByDate = NSSortDescriptor(key: "favoritedAt", ascending: false)
+        let sortDescriptors = [sortByDate]
         
         
         let request : NSFetchRequest<FavoriteMovies> = FavoriteMovies.fetchRequest()
@@ -57,6 +57,27 @@ class CoreDataService {
         return nil
     }
 
+    public func getDisitinctYear() -> [NSDictionary]? {
+        let fetchRequest = NSFetchRequest<NSDictionary> (entityName:"FavoriteMovies")
+        fetchRequest.resultType = .dictionaryResultType
+        
+        // Optionally, to get only specific properties:
+        fetchRequest.propertiesToFetch = ["year"]
+        fetchRequest.returnsDistinctResults = true
+        
+        do {
+            let records = try moc.fetch(fetchRequest)
+            print(records)
+        } catch {
+            print("Core Data fetch failed:", error.localizedDescription)
+        }
+        
+        return [NSDictionary]()
+        
+    }
+    
+    
+    
     public func deleteFavorites(favoriteMovie: FavoriteMovies) {
         favoriteMoviesList = favoriteMoviesList.filter({ $0 != favoriteMovie })
         moc.delete(favoriteMovie)
