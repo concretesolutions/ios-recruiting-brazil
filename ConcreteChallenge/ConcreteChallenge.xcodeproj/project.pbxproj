@@ -8,13 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		753517B2219780A600CE5DDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517B1219780A600CE5DDA /* AppDelegate.swift */; };
-		753517B4219780A600CE5DDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517B3219780A600CE5DDA /* ViewController.swift */; };
-		753517B7219780A600CE5DDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753517B5219780A600CE5DDA /* Main.storyboard */; };
 		753517BA219780A600CE5DDA /* ConcreteChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 753517B8219780A600CE5DDA /* ConcreteChallenge.xcdatamodeld */; };
 		753517BC219780A700CE5DDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753517BB219780A700CE5DDA /* Assets.xcassets */; };
 		753517BF219780A700CE5DDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 753517BD219780A700CE5DDA /* LaunchScreen.storyboard */; };
 		753517CA219780A800CE5DDA /* ConcreteChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517C9219780A800CE5DDA /* ConcreteChallengeTests.swift */; };
 		753517D5219780A800CE5DDA /* ConcreteChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517D4219780A800CE5DDA /* ConcreteChallengeUITests.swift */; };
+		753517E8219781CA00CE5DDA /* RootContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517E7219781CA00CE5DDA /* RootContract.swift */; };
+		753517EA219781D700CE5DDA /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517E9219781D700CE5DDA /* RootRouter.swift */; };
+		753517ED2197827100CE5DDA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517EC2197827100CE5DDA /* TabBarViewController.swift */; };
+		753517F52197830800CE5DDA /* PopularMoviesContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517F42197830800CE5DDA /* PopularMoviesContract.swift */; };
+		753517F7219783A400CE5DDA /* PopularMoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517F6219783A400CE5DDA /* PopularMoviesRouter.swift */; };
+		753517F92197843000CE5DDA /* PopularMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517F82197843000CE5DDA /* PopularMoviesView.swift */; };
+		753517FB2197851800CE5DDA /* PopularMoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517FA2197851800CE5DDA /* PopularMoviesPresenter.swift */; };
+		753517FD2197859400CE5DDA /* PopularMovieInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753517FC2197859400CE5DDA /* PopularMovieInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +43,6 @@
 /* Begin PBXFileReference section */
 		753517AE219780A600CE5DDA /* ConcreteChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		753517B1219780A600CE5DDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		753517B3219780A600CE5DDA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		753517B6219780A600CE5DDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		753517B9219780A600CE5DDA /* ConcreteChallenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConcreteChallenge.xcdatamodel; sourceTree = "<group>"; };
 		753517BB219780A700CE5DDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		753517BE219780A700CE5DDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +53,14 @@
 		753517D0219780A800CE5DDA /* ConcreteChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		753517D4219780A800CE5DDA /* ConcreteChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteChallengeUITests.swift; sourceTree = "<group>"; };
 		753517D6219780A800CE5DDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		753517E7219781CA00CE5DDA /* RootContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContract.swift; sourceTree = "<group>"; };
+		753517E9219781D700CE5DDA /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
+		753517EC2197827100CE5DDA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		753517F42197830800CE5DDA /* PopularMoviesContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesContract.swift; sourceTree = "<group>"; };
+		753517F6219783A400CE5DDA /* PopularMoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesRouter.swift; sourceTree = "<group>"; };
+		753517F82197843000CE5DDA /* PopularMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesView.swift; sourceTree = "<group>"; };
+		753517FA2197851800CE5DDA /* PopularMoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesPresenter.swift; sourceTree = "<group>"; };
+		753517FC2197859400CE5DDA /* PopularMovieInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +111,10 @@
 		753517B0219780A600CE5DDA /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				753517B1219780A600CE5DDA /* AppDelegate.swift */,
-				753517B3219780A600CE5DDA /* ViewController.swift */,
-				753517B5219780A600CE5DDA /* Main.storyboard */,
-				753517BB219780A700CE5DDA /* Assets.xcassets */,
+				753517E2219780E700CE5DDA /* Application */,
+				753517E5219781A700CE5DDA /* Modules */,
+				753517E42197812100CE5DDA /* Model */,
+				753517E32197810D00CE5DDA /* Resources */,
 				753517BD219780A700CE5DDA /* LaunchScreen.storyboard */,
 				753517C0219780A700CE5DDA /* Info.plist */,
 				753517B8219780A600CE5DDA /* ConcreteChallenge.xcdatamodeld */,
@@ -126,6 +138,108 @@
 				753517D6219780A800CE5DDA /* Info.plist */,
 			);
 			path = ConcreteChallengeUITests;
+			sourceTree = "<group>";
+		};
+		753517E2219780E700CE5DDA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				753517B1219780A600CE5DDA /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		753517E32197810D00CE5DDA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				753517BB219780A700CE5DDA /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		753517E42197812100CE5DDA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		753517E5219781A700CE5DDA /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				753517E6219781B300CE5DDA /* Root */,
+				753517EB2197824D00CE5DDA /* TabBar */,
+				753517EE219782A100CE5DDA /* PopularMovies */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		753517E6219781B300CE5DDA /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				753517E7219781CA00CE5DDA /* RootContract.swift */,
+				753517E9219781D700CE5DDA /* RootRouter.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		753517EB2197824D00CE5DDA /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				753517EC2197827100CE5DDA /* TabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		753517EE219782A100CE5DDA /* PopularMovies */ = {
+			isa = PBXGroup;
+			children = (
+				753517F3219782EF00CE5DDA /* Contract */,
+				753517F2219782E300CE5DDA /* Router */,
+				753517F1219782D900CE5DDA /* View */,
+				753517F0219782D500CE5DDA /* Presenter */,
+				753517EF219782BC00CE5DDA /* Interactor */,
+			);
+			path = PopularMovies;
+			sourceTree = "<group>";
+		};
+		753517EF219782BC00CE5DDA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				753517FC2197859400CE5DDA /* PopularMovieInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		753517F0219782D500CE5DDA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				753517FA2197851800CE5DDA /* PopularMoviesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		753517F1219782D900CE5DDA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				753517F82197843000CE5DDA /* PopularMoviesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		753517F2219782E300CE5DDA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				753517F6219783A400CE5DDA /* PopularMoviesRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		753517F3219782EF00CE5DDA /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				753517F42197830800CE5DDA /* PopularMoviesContract.swift */,
+			);
+			path = Contract;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,7 +348,6 @@
 			files = (
 				753517BF219780A700CE5DDA /* LaunchScreen.storyboard in Resources */,
 				753517BC219780A700CE5DDA /* Assets.xcassets in Resources */,
-				753517B7219780A600CE5DDA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +372,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				753517B4219780A600CE5DDA /* ViewController.swift in Sources */,
+				753517EA219781D700CE5DDA /* RootRouter.swift in Sources */,
 				753517BA219780A600CE5DDA /* ConcreteChallenge.xcdatamodeld in Sources */,
+				753517E8219781CA00CE5DDA /* RootContract.swift in Sources */,
+				753517F92197843000CE5DDA /* PopularMoviesView.swift in Sources */,
+				753517ED2197827100CE5DDA /* TabBarViewController.swift in Sources */,
+				753517F52197830800CE5DDA /* PopularMoviesContract.swift in Sources */,
 				753517B2219780A600CE5DDA /* AppDelegate.swift in Sources */,
+				753517F7219783A400CE5DDA /* PopularMoviesRouter.swift in Sources */,
+				753517FB2197851800CE5DDA /* PopularMoviesPresenter.swift in Sources */,
+				753517FD2197859400CE5DDA /* PopularMovieInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +417,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		753517B5219780A600CE5DDA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				753517B6219780A600CE5DDA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		753517BD219780A700CE5DDA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
