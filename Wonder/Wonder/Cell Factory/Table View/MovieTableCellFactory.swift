@@ -12,7 +12,7 @@ import UIKit
 
 class MovieTableCellFactory {
     
-    func movieTableCell(movie: Results, indexPath: IndexPath, movieImage: UIImage, tableView: UITableView) -> UITableViewCell {
+    func movieTableCell(movie: Results, indexPath: IndexPath, movieImage: UIImage, isFavorite: Bool, tableView: UITableView) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailImageCell") as! DetailImageCell
             cell.backgroundColor = UIColor.clear
@@ -45,7 +45,12 @@ class MovieTableCellFactory {
         }else if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailActionCell") as! DetailActionCell
             cell.backgroundColor = UIColor.clear
-            cell.favoriteButton.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            if isFavorite {
+                cell.favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+            }else{
+                cell.favoriteButton.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            }
+            
             cell.shareButton.setImage(UIImage(named: "share"), for: .normal)
             return cell
         }

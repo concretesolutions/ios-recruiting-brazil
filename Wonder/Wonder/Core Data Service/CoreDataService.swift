@@ -95,5 +95,23 @@ class CoreDataService {
         
     }
 
+    public func getFavorite(id: String) -> FavoriteMovies {
+        
+        let request : NSFetchRequest<FavoriteMovies> = FavoriteMovies.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", id)
+        var favoriteMovies = FavoriteMovies()
+        do {
+            let result = try moc.fetch(request)
+            if !result.isEmpty {
+                favoriteMovies = result.first!
+            }
+        }
+        catch let error as NSError  {
+            print("Error getting lesson: \(error.localizedDescription)")
+        }
+        
+        return favoriteMovies
+        
+    }
     
 }

@@ -80,7 +80,6 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     
     private func loadAppData() {
         self.movies = (self.coreDataService?.getAllFavorites())!
-        print("☢️ reading favorites .... \(String(describing: self.movies.count))")
         if self.movies.count == 0 {
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
         }

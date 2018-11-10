@@ -72,6 +72,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+        collectionView.reloadData()
     }
 
     

@@ -27,6 +27,8 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     private var tableStructure = [String]()
     private var movieTableCellFactory = MovieTableCellFactory()
     
+    private var isFavorite = false
+    
     
     // Core Data -----------------------------------
     private var coreDataService : CoreDataService?
@@ -45,11 +47,17 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        checkFavoriteExistence()
         uiConfig()
         loadTableStructure()
         observerManager()
         
+        
+    }
+    
+    // MARK: - Favorite Integrity
+    private func checkFavoriteExistence() {
+        isFavorite = (self.coreDataService?.favoriteExists(id: String(movie.id)))!
     }
     
     // MARK: - UI Config
@@ -73,7 +81,11 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.movieTableCellFactory.movieTableCell(movie: movie, indexPath: indexPath, movieImage: movieImage, tableView: tableView)
+    
+        checkFavoriteExistence()
+        
+        let cell = self.movieTableCellFactory.movieTableCell(movie: movie, indexPath: indexPath, movieImage: movieImage, isFavorite: isFavorite,  tableView: tableView)
+        return cell
     }
     
     // MARK: - UI Actions
@@ -100,7 +112,17 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // observer actions
     @objc private func didChangeFavorite(_ sender: NSNotification) {
-        self.addFavoriteMovie()
+        
+        if isFavorite {
+            // remove favorite
+            self.deleteFavorite()
+        }else{
+            // add favorite
+            self.addFavoriteMovie()
+        }
+        // reload table view to refresh fav icon
+        tableView.reloadData()
+        
     }
     @objc private func didSelectShare(_ sender: NSNotification) {
         let webService = WebService()
@@ -132,6 +154,11 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
                 print("A problem occured while tryin to save favorite movies to core data!")
             }
         })
+    }
+    
+    private func deleteFavorite() {
+        let fav = self.coreDataService?.getFavorite(id: String(movie.id))
+        self.coreDataService?.deleteFavorites(favoriteMovie: fav!)
     }
     
     private func getBusinessFavoriteMovies() -> BusinessFavoriteMovies {
