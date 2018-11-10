@@ -149,15 +149,15 @@
             </objects>
             <point key="canvasLocation" x="1998" y="325"/>
         </scene>
-        <!--View Controller-->
+        <!--Filter Controller-->
         <scene sceneID="fhM-yG-e9q">
             <objects>
-                <viewController id="wRz-gb-Nam" sceneMemberID="viewController">
+                <viewController id="wRz-gb-Nam" customClass="FilterController" customModule="Wonder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C8g-ht-dym">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="edt-VB-Kme">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="edt-VB-Kme">
                                 <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -168,7 +168,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kbp-Mi-wMq" id="Zyp-17-wBb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="80.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUz-2J-rIa">
@@ -176,7 +176,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="MUz-2J-rIa" secondAttribute="height" multiplier="116:21" id="Qyy-Da-3oz"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -222,6 +222,7 @@
                         <viewLayoutGuide key="safeArea" id="Rf6-3f-lD4"/>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="edt-VB-Kme" id="m0B-lb-GqY"/>
                         <segue destination="sD9-uc-mO5" kind="show" identifier="showFilterSelection" id="ufw-nJ-VBX"/>
                     </connections>
                 </viewController>
@@ -229,10 +230,10 @@
             </objects>
             <point key="canvasLocation" x="2869.5999999999999" y="323.38830584707648"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Filter Selection Controller-->
         <scene sceneID="kgV-1R-mFF">
             <objects>
-                <tableViewController id="sD9-uc-mO5" sceneMemberID="viewController">
+                <tableViewController id="sD9-uc-mO5" customClass="FilterSelectionController" customModule="Wonder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="t29-x4-pnb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

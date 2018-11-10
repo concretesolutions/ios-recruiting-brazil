@@ -8,23 +8,67 @@
 
 import UIKit
 
-class FilterController: UIViewController {
+class FilterController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+
+    // MARK: - Public Properties
+    public var movies = [FavoriteMovies]()  // Core Data Model
+    
+    
+    //MARK: - Private Properties
+    private var source = [String]()
+    private var selectedIndexPath = IndexPath()
+    
+    
+    // MARK: - Outlets
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // setUp
+        setUp()
 
-        // Do any additional setup after loading the view.
+    
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - App SetUp
+    private func setUp() {
+        // filter options
+        source.append("Date")
+        source.append("Genres")
     }
-    */
+    
+    
+    
+    // MARK: - TableView Data Source & Delegate
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.source.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell") as! FilterCell
+        cell.filterTitle.text = source[indexPath.row]
+        cell.fiterDescription.text = String()
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedIndexPath = indexPath
+        performSegue(withIdentifier: "showFilterSelection", sender: self)
+        
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFilterSelection" {
+            let controller = segue.destination as! FilterSelectionController
+            controller.filterSelectedRow = selectedIndexPath.row
+            controller.movies = movies
+        }
+    }
 
 }

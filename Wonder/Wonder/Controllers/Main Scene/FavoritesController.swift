@@ -35,7 +35,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     private var search = UISearchController()
     private var searchInProgress = false
     private var searchArgument = String()
-    private var noData = "No favorites yet! Favorite a movie to see it in here!"
+    private var noData = "You have no favorite movie."
     
     // View Life Cycle
     override func viewDidLoad() {
@@ -79,15 +79,11 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     }
     
     private func loadAppData() {
-        
-        /// debug
         self.movies = (self.coreDataService?.getAllFavorites())!
         print("☢️ reading favorites .... \(String(describing: self.movies.count))")
         if self.movies.count == 0 {
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
         }
-        
-        
     }
     
     
@@ -141,7 +137,18 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         if movies.count == 0 {
             view.alert(msg: noData, sender: self)
         }
+        
+        performSegue(withIdentifier: "showFilter", sender: self)
+        
     }
     
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFilter" {
+            let controller = segue.destination as! FilterController
+            controller.movies = self.movies
+        }
+    }
     
 }
