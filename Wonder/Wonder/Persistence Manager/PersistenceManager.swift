@@ -182,7 +182,7 @@ class PersistenceManager {
     }
     
     private func pathComposer(id: String) -> String {
-        let fileName = "WonderFile_\(id)" + ".wdf"
+        let fileName = "/WonderFile_\(id)" + ".wdf"
         let pathFileName = self.getDocumentsFolder() + fileName
         return pathFileName
     }

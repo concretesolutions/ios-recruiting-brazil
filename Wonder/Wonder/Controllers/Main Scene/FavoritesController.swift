@@ -141,7 +141,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         }
     
         cell.movieSubtitle.text = fav.overview
-        cell.movieImage.image = UIImage()
+        cell.movieImage.image = getImageFromDisk(id: fav.id ?? String())
         
         
         return cell
@@ -194,8 +194,17 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
             controller.movie = self.modelAdapter.convertToBusiness(selectedFavoriteMovie)
             controller.movieImage = selectedImage
             controller.isFavorite = true
+            controller.comesFromFavorite = true
             controller.moc = moc
         }
     }
+    
+    // MARK: - File System I/O
+    private func getImageFromDisk(id: String) -> UIImage {
+        let persistence = PersistenceManager()
+        let imageData = persistence.getFile(id: id)
+        return UIImage(data: imageData as Data) ?? UIImage()
+    }
+    
     
 }

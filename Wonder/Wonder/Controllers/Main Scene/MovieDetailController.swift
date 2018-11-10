@@ -23,6 +23,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     public var movie = Results()
     public var movieImage = UIImage()
     public var isFavorite = false
+    public var comesFromFavorite = false
     
     // MARK: - Private Propertie
     private var tableStructure = [String]()
@@ -44,13 +45,19 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkMovieImage()
         checkFavoriteExistence()
         uiConfig()
         loadTableStructure()
         observerManager()
     }
     
-    // MARK: - Favorite Integrity
+    // MARK: - Initial Procedures
+    private func checkMovieImage() {
+        if comesFromFavorite {
+            movieImage = getImageFromDisk(id: String(movie.id))
+        }
+    }
     private func checkFavoriteExistence() {
         if !isFavorite {
             isFavorite = self.coreDataService?.favoriteExists(id: String(movie.id)) ?? false
@@ -137,17 +144,15 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - Core Data I/O
     private func addFavoriteMovie() {
-
+        
+        // disk persistence movie image
+        addImageToDisk(id: String(movie.id))
+        
         // call core data to add a favorite film
         self.coreDataService?.addFavorite(businessFavoriteMovies: getBusinessFavoriteMovies(), completion: { (success, favoriteMovies) in
             // completion
             if success {
                 self.favoriteMoviesList = favoriteMovies
-                print("** inside after core data insert")
-                for favorite in self.favoriteMoviesList {
-                    print("*** fav: \(favorite)")
-                }
-                
             }else{
                 // Core Data Error
                 print("A problem occured while tryin to save favorite movies to core data!")
@@ -188,5 +193,19 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    
+    // MARK: - File System I/O
+    private func addImageToDisk(id: String) {
+        let imageData = movieImage.pngData()
+        let persistence = PersistenceManager()
+        _ = persistence.addFile(id: id, data: imageData! as NSData)
+        
+    }
+    
+    private func getImageFromDisk(id: String) -> UIImage {
+        let persistence = PersistenceManager()
+        let imageData = persistence.getFile(id: id)
+        return UIImage(data: imageData as Data) ?? UIImage()
+    }
     
 }
