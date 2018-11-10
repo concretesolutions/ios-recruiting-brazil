@@ -18,10 +18,21 @@ class FilterSelectionController: UITableViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         
 
     }
 
+    // MARK: - App Setup
+    private func setup() {
+        if filterSelectedRow == 0 {
+            navigationItem.title = "Filter by Date"
+        }else{
+            navigationItem.title = "Filter by Genre"
+        }
+    }
+    
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

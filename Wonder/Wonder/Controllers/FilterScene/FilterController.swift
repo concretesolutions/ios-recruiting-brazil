@@ -35,6 +35,9 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     
     // MARK: - App SetUp
     private func setUp() {
+        // navigation bar title
+        navigationItem.title = "Filter"
+        
         // filter options
         source.append("Date")
         source.append("Genres")
@@ -61,6 +64,14 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         performSegue(withIdentifier: "showFilterSelection", sender: self)
         
     }
+    
+    
+    // MARK: - UI Actions
+    @IBAction func applyAction(_ sender: Any) {
+        print("*** APPLY FILTER")
+    }
+    
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

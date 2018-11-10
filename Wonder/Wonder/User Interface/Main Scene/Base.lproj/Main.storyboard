@@ -221,6 +221,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rf6-3f-lD4"/>
                     </view>
+                    <navigationItem key="navigationItem" id="6Nk-DT-y15">
+                        <barButtonItem key="rightBarButtonItem" title="Apply" id="3d3-dS-m2z">
+                            <connections>
+                                <action selector="applyAction:" destination="wRz-gb-Nam" id="DLb-aQ-3NL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="edt-VB-Kme" id="m0B-lb-GqY"/>
                         <segue destination="sD9-uc-mO5" kind="show" identifier="showFilterSelection" id="ufw-nJ-VBX"/>
@@ -799,7 +806,7 @@
     </scenes>
     <resources>
         <image name="FilterIcon" width="17" height="19"/>
-        <image name="close" width="60" height="60"/>
+        <image name="close" width="36" height="36"/>
         <image name="favorite_empty_icon" width="22" height="21"/>
         <image name="favorite_full_icon" width="18" height="16"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
