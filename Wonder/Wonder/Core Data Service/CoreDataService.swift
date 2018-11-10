@@ -29,7 +29,7 @@ class CoreDataService {
         favoriteMovies.overview = businessFavoriteMovies.overview
         favoriteMovies.genre = businessFavoriteMovies.genre
         favoriteMovies.title = businessFavoriteMovies.title
-        favoriteMovies.id = Int16(businessFavoriteMovies.id!)!
+        favoriteMovies.id = businessFavoriteMovies.id
         favoriteMovies.poster = businessFavoriteMovies.poster
       
         completion(true, favoriteMoviesList)

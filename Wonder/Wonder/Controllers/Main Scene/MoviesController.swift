@@ -54,22 +54,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        /// debug
-//        let favs = coreDataService?.getAllFavorites()
-//        print("☢️ reading favorites .... \(String(describing: favs?.count))")
-//        for fav in favs! {
-//            print("☢️ title: \(String(describing: fav.title!))  id: \(fav.id)")
-//            // delete existing
-////            coreDataService?.deleteFavorites(favoriteMovie: fav)
-//        }
-        
-        
-        
-        
-        
-        
-        
+
         // UI Config
         uiConfig()
         
@@ -277,6 +262,9 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if movies.results.count == 0 {
+            return
+        }
         performSegue(withIdentifier: "showMovieDetail", sender: self)
     }
     

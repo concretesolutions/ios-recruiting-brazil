@@ -117,18 +117,9 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - Core Data I/O
     private func addFavoriteMovie() {
-        
-        // build business transient object to core data
-        let businessFavoriteMovies = BusinessFavoriteMovies()
-        businessFavoriteMovies.year = "2000"
-        businessFavoriteMovies.overview = "This is an excelent film for the family"
-        businessFavoriteMovies.genre = "Drama, Comedy"
-        businessFavoriteMovies.title = "Dreaming a new world"
-        businessFavoriteMovies.id = "82"
-        businessFavoriteMovies.poster = "jaha_ooqjaa_01"
-        
+
         // call core data to add a favorite film
-        self.coreDataService?.addFavorite(businessFavoriteMovies: businessFavoriteMovies, completion: { (success, favoriteMovies) in
+        self.coreDataService?.addFavorite(businessFavoriteMovies: getBusinessFavoriteMovies(), completion: { (success, favoriteMovies) in
             // completion
             if success {
                 self.favoriteMoviesList = favoriteMovies
@@ -142,6 +133,25 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
                 print("A problem occured while tryin to save favorite movies to core data!")
             }
         })
+    }
+    
+    private func getBusinessFavoriteMovies() -> BusinessFavoriteMovies {
+        
+        let index = movie.release_date.index(movie.release_date.startIndex, offsetBy: 4)
+        let year = String(movie.release_date[..<index])
+        
+        let genreString = AppSettings.standard.genreForDatabase(genreIdArray: movie.genre_ids)
+        
+        let businessFavoriteMovies = BusinessFavoriteMovies()
+        businessFavoriteMovies.year = year
+        businessFavoriteMovies.overview = movie.overview
+        businessFavoriteMovies.genre = genreString
+        businessFavoriteMovies.title = movie.title
+        businessFavoriteMovies.id = String(movie.id)
+        businessFavoriteMovies.poster = movie.poster_path
+        
+        return businessFavoriteMovies
+        
     }
     
     

@@ -23,12 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // core data
         let tabBarController = window?.rootViewController as? UITabBarController
-        print("TabBar controllers: \(tabBarController?.viewControllers?.first)")
-        print("......")
+    
         
         let navigationController_0 = tabBarController?.viewControllers?.first as! UINavigationController
         let moviesController = navigationController_0.viewControllers.first as! MoviesController
+        
+        let navigationController_1 = tabBarController?.viewControllers?[1] as! UINavigationController
+        let favoritesController = navigationController_1.viewControllers.first as! FavoritesController
+
+        
         moviesController.moc = persistentContainer.viewContext
+        favoritesController.moc = persistentContainer.viewContext
         
         
         

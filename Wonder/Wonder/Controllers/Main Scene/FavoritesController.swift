@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK: - Public Properties
+    public var moc : NSManagedObjectContext? {
+        didSet {
+            if let moc = moc {
+                coreDataService = CoreDataService(moc: moc)
+            }
+        }
+    }
     
     // MARK: - Outlets
     @IBOutlet var errorHandlerView: UIView!
@@ -19,7 +29,8 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     
     // MARK: - Properties
     
-    private var movies = [Results]()
+    private var movies = [FavoriteMovies]()  // Core Data Model
+    private var coreDataService : CoreDataService?
     
     private var search = UISearchController()
     private var searchInProgress = false
@@ -63,15 +74,19 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         
         // associate to navigation item
         self.navigationItem.searchController = search
-        
-        if self.movies.count == 0 {
-            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
-        }
-        
+
         
     }
     
     private func loadAppData() {
+        
+        /// debug
+        self.movies = (self.coreDataService?.getAllFavorites())!
+        print("☢️ reading favorites .... \(String(describing: self.movies.count))")
+        if self.movies.count == 0 {
+            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
+        }
+        
         
     }
     
@@ -109,11 +124,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     
     // MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.movies.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as! MovieTableViewCell
-        
+        let fav = self.movies[indexPath.row]
+        cell.movieTitle.text = fav.title
+        cell.movieSubtitle.text = fav.overview
+        cell.movieImage.image = UIImage()
         
         return cell
     }

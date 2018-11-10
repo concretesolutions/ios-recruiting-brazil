@@ -119,6 +119,16 @@ class AppSettings {
         return resultString
     }
     
+    public func genreForDatabase(genreIdArray:[Int]) -> String{
+        
+        var resultString = ""
+        var separator = ""
+        for genreId in genreIdArray {
+            resultString = resultString + separator + AppSettings.standard.getDefualtsCategory(id: genreId)
+            separator = ","
+        }
+        return resultString
+    }
     
     
 }
