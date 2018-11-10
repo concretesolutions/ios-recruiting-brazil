@@ -1,5 +1,5 @@
 //
-//  PopularMovieInteractor.swift
+//  FavoriteMovieInteractor.swift
 //  ConcreteChallenge
 //
 //  Created by Heitor Ishihara on 10/11/18.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-class PopularMoviesInteractor: PopularMoviesInteractorInput {
+class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     
     // MARK: - Properties
-    var output: PopularMoviesInteractorOutput!
+    var output: FavoriteMoviesInteractorOutput!
     
-    // MARK: - PopularMoviesInteractorInput functions
+    // MARK: - FavoriteMoviesInteractorInput functions
     
 }

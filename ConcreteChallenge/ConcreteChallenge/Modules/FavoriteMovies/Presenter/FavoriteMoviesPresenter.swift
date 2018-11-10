@@ -1,5 +1,5 @@
 //
-//  PopularMoviesPresenter.swift
+//  FavoriteMoviesPresenter.swift
 //  ConcreteChallenge
 //
 //  Created by Heitor Ishihara on 10/11/18.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractorOutput {
+class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInteractorOutput {
     
     // MARK: - Properties
-    var view: PopularMoviesView?
-    var interactor: PopularMoviesInteractorInput!
-    var router: PopularMoviesWireframe!
+    var view: FavoriteMoviesView?
+    var interactor: FavoriteMoviesInteractorInput!
+    var router: FavoriteMoviesWireframe!
     
-    // MARK: - PopularMoviesPresentation functions
+    // MARK: - FavoriteMoviesPresentation functions
     func viewDidLoad() {
     }
     
-    // MARK: - PopularMoviesInteractorOutput functions
+    // MARK: - FavoriteMoviesInteractorOutput functions
     
 }
