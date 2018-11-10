@@ -117,7 +117,18 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - Core Data I/O
     private func addFavoriteMovie() {
-        self.coreDataService?.addFavorite(year: "1998", overview: "bla bla bla Film", genre: "Terror, Drama", title: "bla bla Movie Title" , id: "14", poster: "gagsafagdf", completion: { (success, favoriteMovies) in
+        
+        // build business transient object to core data
+        let businessFavoriteMovies = BusinessFavoriteMovies()
+        businessFavoriteMovies.year = "2000"
+        businessFavoriteMovies.overview = "This is an excelent film for the family"
+        businessFavoriteMovies.genre = "Drama, Comedy"
+        businessFavoriteMovies.title = "Dreaming a new world"
+        businessFavoriteMovies.id = "82"
+        businessFavoriteMovies.poster = "jaha_ooqjaa_01"
+        
+        // call core data to add a favorite film
+        self.coreDataService?.addFavorite(businessFavoriteMovies: businessFavoriteMovies, completion: { (success, favoriteMovies) in
             // completion
             if success {
                 self.favoriteMoviesList = favoriteMovies

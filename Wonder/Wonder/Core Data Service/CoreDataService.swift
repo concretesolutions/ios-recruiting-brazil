@@ -22,15 +22,15 @@ class CoreDataService {
     }
     
     // MARK: - Public Functions
-    public func addFavorite(year: String, overview: String, genre: String, title: String , id: String, poster: String, completion: FavoriteMoviesHandler) {
+    public func addFavorite(businessFavoriteMovies: BusinessFavoriteMovies, completion: FavoriteMoviesHandler) {
         
         let favoriteMovies = FavoriteMovies(context: moc)
-        favoriteMovies.year = year
-        favoriteMovies.overview = overview
-        favoriteMovies.genre = genre
-        favoriteMovies.title = title
-        favoriteMovies.id = Int16(id)!
-        favoriteMovies.poster = poster
+        favoriteMovies.year = businessFavoriteMovies.year
+        favoriteMovies.overview = businessFavoriteMovies.overview
+        favoriteMovies.genre = businessFavoriteMovies.genre
+        favoriteMovies.title = businessFavoriteMovies.title
+        favoriteMovies.id = Int16(businessFavoriteMovies.id!)!
+        favoriteMovies.poster = businessFavoriteMovies.poster
         
         save("addFavorite")
         
