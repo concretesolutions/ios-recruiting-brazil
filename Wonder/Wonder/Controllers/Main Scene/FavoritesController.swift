@@ -42,6 +42,9 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     
     private var modelAdapter = ModelAdapter()
     
+    private var persistence = PersistenceManager()
+    
+    
     // View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +93,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         if self.movies.count == 0 {
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
         }else{
+            view.hideErrorView(view: self.errorHandlerView)
             tableView.reloadData()
         }
     }
@@ -159,12 +163,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            self.coreDataService?.deleteFavorites(favoriteMovie: self.movies[indexPath.row])
+            let movie = self.movies[indexPath.row]
+            _ = self.persistence.deleteFile(movie.id!)
+            self.coreDataService?.deleteFavorites(favoriteMovie: movie)
             self.movies.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.reloadData()
         }
-        
-        tableView.reloadData()
+        loadAppData()
     }
 
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {

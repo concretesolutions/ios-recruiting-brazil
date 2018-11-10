@@ -34,7 +34,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     private var favoriteMoviesList = [FavoriteMovies]()
     // ---------------------------------------------
     
-    
+    private var persistence = PersistenceManager()
     
     
     // MARK: - Outlets
@@ -162,14 +162,9 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func deleteFavorite() {
         
-//        self.coreDataService = CoreDataService(moc: moc!)
-//        let favs = self.coreDataService?.getAllFavorites()
-//        for item in favs! {
-//            print("         +++++++ id: \(item.id)  +++++++ title: \(item.title)")
-//        }
-//
-//
-//
+        // disk persistence movie image
+        deleteImageFromDisk(id: String(movie.id))
+
         let fav = self.coreDataService?.getFavorite(id: String(movie.id))
         self.coreDataService?.deleteFavorites(favoriteMovie: fav!)
     }
@@ -197,15 +192,17 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - File System I/O
     private func addImageToDisk(id: String) {
         let imageData = movieImage.pngData()
-        let persistence = PersistenceManager()
         _ = persistence.addFile(id: id, data: imageData! as NSData)
         
     }
     
     private func getImageFromDisk(id: String) -> UIImage {
-        let persistence = PersistenceManager()
         let imageData = persistence.getFile(id: id)
         return UIImage(data: imageData as Data) ?? UIImage()
+    }
+    
+    private func deleteImageFromDisk(id: String) {
+        _ = persistence.deleteFile(id)
     }
     
 }
