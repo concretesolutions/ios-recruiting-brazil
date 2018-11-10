@@ -7,17 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 class FilterController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
     // MARK: - Public Properties
+    public var moc : NSManagedObjectContext? {
+        didSet {
+            if let moc = moc {
+                coreDataService = CoreDataService(moc: moc)
+            }
+        }
+    }
     public var movies = [FavoriteMovies]()  // Core Data Model
     
     
     //MARK: - Private Properties
     private var source = [String]()
     private var selectedIndexPath = IndexPath()
+    private var coreDataService : CoreDataService?
     
     
     // MARK: - Outlets
@@ -79,6 +88,7 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
             let controller = segue.destination as! FilterSelectionController
             controller.filterSelectedRow = selectedIndexPath.row
             controller.movies = movies
+            controller.moc = moc
         }
     }
 

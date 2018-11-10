@@ -195,6 +195,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         if segue.identifier == "showFilter" {
             let controller = segue.destination as! FilterController
             controller.movies = self.movies
+            controller.moc = moc
         }else if segue.identifier == "showFavoriteDetail" {
             let controller = segue.destination as! MovieDetailController
             controller.movie = self.modelAdapter.convertToBusiness(selectedFavoriteMovie)

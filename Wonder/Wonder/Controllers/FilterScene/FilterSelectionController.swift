@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
 class FilterSelectionController: UITableViewController {
 
     // MARK: - Public Properties
+    public var moc : NSManagedObjectContext? {
+        didSet {
+            if let moc = moc {
+                coreDataService = CoreDataService(moc: moc)
+            }
+        }
+    }
     public var movies = [FavoriteMovies]()
     public var filterSelectedRow : Int = -1
+    
+    // MARK: - Provate Properties
+    private var years = [String]()
+    
+    private var coreDataService : CoreDataService?
     
     
     // MARK: - View Life Cycle
@@ -27,6 +40,14 @@ class FilterSelectionController: UITableViewController {
     private func setup() {
         if filterSelectedRow == 0 {
             navigationItem.title = "Filter by Date"
+            let distinctYears = self.coreDataService?.getDisitinctYear() ?? [NSDictionary]()
+            for dic in distinctYears {
+                for (_, value) in dic {
+                    let year = value as! String
+                    years.append(year)
+                    print("******* YEAR: \(year)")
+                }
+            }
         }else{
             navigationItem.title = "Filter by Genre"
         }
@@ -36,7 +57,14 @@ class FilterSelectionController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.movies.count
+        if filterSelectedRow == 0 {
+            // date
+            return self.years.count
+        }else{
+            // genre
+            return self.movies.count
+        }
+        
     }
 
     
@@ -45,7 +73,7 @@ class FilterSelectionController: UITableViewController {
         let movie = self.movies[indexPath.row]
         if filterSelectedRow == 0 {
             // Date
-            cell.filterSelectionOption.text = movie.year
+            cell.filterSelectionOption.text = years[indexPath.row]
         }else{
             // Genres
             cell.filterSelectionOption.text = movie.genre
