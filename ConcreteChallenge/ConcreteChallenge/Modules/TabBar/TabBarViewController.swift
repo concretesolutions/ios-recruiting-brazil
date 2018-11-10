@@ -24,14 +24,13 @@ class TabBarViewController: UITabBarController {
     // MARK: - SetUp functions
     private func setUpItems() {
         
-        self.tabBar.tintColor = UIColor(red: 241.0/255.0, green: 186.0/255.0, blue: 15.0/255.0, alpha: 1.0)
+        self.tabBar.tintColor = .black
         
-        self.tabBar.barTintColor = UIColor.white
-        UITabBar.appearance().layer.borderWidth = 0.0
+        self.tabBar.barTintColor = UIColor.yellow
         UITabBar.appearance().clipsToBounds = true
         
-        self.viewControllers = []
-        self.selectedIndex = 1
+        self.viewControllers = [PopularMoviesRouter.assembleModule(), FavoriteMoviesRouter.assembleModule()]
+        self.selectedIndex = 0
     }
     
 }
