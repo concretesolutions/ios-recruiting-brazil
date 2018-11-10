@@ -87,6 +87,8 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         self.movies = (self.coreDataService?.getAllFavorites())!
         if self.movies.count == 0 {
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
+        }else{
+            tableView.reloadData()
         }
     }
     
