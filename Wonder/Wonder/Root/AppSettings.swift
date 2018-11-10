@@ -53,11 +53,24 @@ class AppSettings {
     // MARK: - Distinct Genres Procedures
     public func getDistinctGenres(favoriteMovies: [FavoriteMovies]) -> [String] {
         let distinctGenres = [String]()
+        var allGenres = [String]()
+        for fav in favoriteMovies {
+            let components = (fav.genre?.split(separator: ","))!
+
+            for item in components {
+                let genre = String(item)
+                allGenres.append(genre)
+            }
+        }
     
-    
+        
+        print("allGenres: \(allGenres)")
+        
+        
         return distinctGenres
     }
     
+
     
     
     // MARK: - Movie's category persistance
