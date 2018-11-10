@@ -226,6 +226,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
 
         cell.movieTitle.text = movie.title
 
+
         
         if (self.coreDataService?.favoriteExists(id: String(movie.id)))! {
             cell.movieFavoriteBackgroundView.isHidden = false
@@ -290,8 +291,9 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
             controller.movie = movies.results[(indexPath?.row)!]
             controller.hidesBottomBarWhenPushed = true
             controller.movie = movies.results[(indexPath?.row)!]
-            controller.movieImage = (cell?.movieImageView.image)!
+            controller.movieImage = cell?.movieImageView.image ?? UIImage(named: "noContentIcon")!
             controller.moc = self.moc
+            
         }
     }
     
