@@ -67,7 +67,7 @@ class CoreDataService {
         
         do {
             let records = try moc.fetch(fetchRequest)
-            print(records)
+            return records
         } catch {
             print("Core Data fetch failed:", error.localizedDescription)
         }

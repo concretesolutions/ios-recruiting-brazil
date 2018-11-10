@@ -54,7 +54,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+
         // UI Config
         uiConfig()
         
@@ -233,10 +233,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         }else{
             cell.movieFavoriteBackgroundView.isHidden = true
         }
-    
-        
-        
-        
+
         // image
         if (!movie.poster_path.isEmpty && movie.poster_path != "" ) {
             

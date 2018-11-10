@@ -22,9 +22,9 @@ class FilterSelectionController: UITableViewController {
     public var movies = [FavoriteMovies]()
     public var filterSelectedRow : Int = -1
     
-    // MARK: - Provate Properties
+    // MARK: - Private Properties
     private var years = [String]()
-    
+    private var genres = [String]()
     private var coreDataService : CoreDataService?
     
     
@@ -32,25 +32,32 @@ class FilterSelectionController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
-
     }
 
     // MARK: - App Setup
     private func setup() {
         if filterSelectedRow == 0 {
             navigationItem.title = "Filter by Date"
-            let distinctYears = self.coreDataService?.getDisitinctYear() ?? [NSDictionary]()
-            for dic in distinctYears {
-                for (_, value) in dic {
-                    let year = value as! String
-                    years.append(year)
-                    print("******* YEAR: \(year)")
-                }
-            }
+            loadYears()
         }else{
             navigationItem.title = "Filter by Genre"
+            loadGenres()
         }
+    }
+    
+    
+    // MARK: App Data Source
+    private func loadYears() {
+        let distinctYears = self.coreDataService?.getDisitinctYear() ?? [NSDictionary]()
+        for dic in distinctYears {
+            for (_, value) in dic {
+                let year = value as! String
+                years.append(year)
+            }
+        }
+    }
+    private func loadGenres() {
+        genres = AppSettings.standard.getDistinctGenres(FavoriteMovies: (self.coreDataService?.getAllFavorites())!)
     }
     
     

@@ -50,6 +50,16 @@ class AppSettings {
         }
     }
 
+    // MARK: - Distinct Genres Procedures
+    public func getDistinctGenres(favoriteMovies: [FavoriteMovies]) -> [String] {
+        let distinctGenres = [String]()
+    
+    
+        return distinctGenres
+    }
+    
+    
+    
     // MARK: - Movie's category persistance
     
     public func getDefualtsGenresList() -> GenresList {

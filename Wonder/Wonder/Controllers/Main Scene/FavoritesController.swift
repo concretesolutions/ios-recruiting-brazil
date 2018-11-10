@@ -192,7 +192,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showFilter" {
+        if segue.identifier == "showFilter" { 
             let controller = segue.destination as! FilterController
             controller.movies = self.movies
             controller.moc = moc
