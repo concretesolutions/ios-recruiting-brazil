@@ -92,6 +92,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+
     
     // MARK: - UI Actions
     @IBAction func closeView(_ sender: Any) {
@@ -113,6 +114,10 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
                                                selector: #selector(didSelectShare(_:)),
                                                name: NSNotification.Name(rawValue: "didSelectShare"),
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didSelectSegue(_:)),
+                                               name: NSNotification.Name(rawValue: "didSelectSegue"),
+                                               object: nil)
     }
     
     // observer actions
@@ -133,6 +138,9 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     @objc private func didSelectShare(_ sender: NSNotification) {
         let webService = WebService()
         displayShareSheet(shareContent: movie.title + " - " + webService.getFullUrl(movie.poster_path))
+    }
+    @objc private func didSelectSegue(_ sender: NSNotification) {
+        performSegue(withIdentifier: "showMoviePoster", sender: self)
     }
  
     // MARK: - Share Sheet Helper
@@ -204,5 +212,15 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     private func deleteImageFromDisk(id: String) {
         _ = persistence.deleteFile(id)
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMoviePoster" {
+            let webService = WebService()
+            let controller = segue.destination as! PosterController
+            controller.urlParam = webService.getFullMoviePosterUrl(movie.poster_path)
+        }
+    }
+    
     
 }

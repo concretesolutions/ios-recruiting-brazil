@@ -107,7 +107,10 @@ class WebService {
         let configUrl = WebService.getEndpoint("getProfileImage")
         return configUrl + resource
     }
-
+    func getFullMoviePosterUrl(_ resource: String) -> String {
+        let configUrl = WebService.getEndpoint("getDistributionImage")
+        return configUrl + resource
+    }
     
     
     // MARK: - Class Helper

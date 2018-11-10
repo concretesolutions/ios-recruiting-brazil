@@ -13,6 +13,7 @@ class DetailImageCell: UITableViewCell {
     // MARK: - Outlets
     @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet weak var detailPoster: UIImageView!
+    @IBOutlet weak var detailSegueButton: UIButton!
     
     
     override func awakeFromNib() {
@@ -25,5 +26,11 @@ class DetailImageCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    // MARK: - UI Actions
+    @IBAction func segueButtonAction(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "didSelectSegue"), object:self)
+    }
+    
 
 }
