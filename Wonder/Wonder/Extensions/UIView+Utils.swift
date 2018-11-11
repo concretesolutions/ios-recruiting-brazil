@@ -128,5 +128,18 @@ extension UIView {
     }
     
     
+    // MARK: - Command Button
+    func showCommandView(commandView: UIView) {
+        commandView.frame = CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 54)
+        commandView.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height - 54/2.0)
+        commandView.backgroundColor = UIColor.applicationBarTintColor
+        commandView.tag = 3000
+        self.addSubview(commandView)
+        
+    }
+    func hideCommandView(view: UIView) {
+        self.viewWithTag(3000)?.removeFromSuperview()
+    }
+    
 }
 

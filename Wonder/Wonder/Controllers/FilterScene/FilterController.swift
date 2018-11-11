@@ -26,8 +26,9 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     private var source = [String]()
     private var selectedIndexPath = IndexPath()
     private var coreDataService : CoreDataService?
-    private var selections: (String, String)!
+    private var selections: (String, String, Int)!
     private var eraseSelections = false
+    private var filterSelection = FilterSelection()
     
     
     // MARK: - Outlets
@@ -49,7 +50,8 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         // navigation bar title
         navigationItem.title = "Filter"
         
-        
+        // selections
+        selections = (" "," ", -1)
         
         // filter options
         source.append("Date")
@@ -66,28 +68,27 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell") as! FilterCell
         cell.filterTitle.text = source[indexPath.row]
-        if selections != nil {
-            if indexPath.row == 0 && !selections.0.isEmpty {
-                if eraseSelections {
-                    cell.fiterDescription.text = ""
-                }else{
-                    cell.fiterDescription.text = selections.0
-                }
-            }else if indexPath.row == 1 && !selections.1.isEmpty{
-                if eraseSelections {
-                    cell.fiterDescription.text = ""
-                }else{
-                    cell.fiterDescription.text = selections.1
-                }
+        if (indexPath.row == 0 && !filterSelection.year.isEmpty) || eraseSelections  {
+            if eraseSelections {
+                cell.fiterDescription.text = ""
+            }else{
+                cell.fiterDescription.text = filterSelection.year
+            }
+        }else if (indexPath.row == 1 && !filterSelection.genre.isEmpty) || eraseSelections {
+            if eraseSelections {
+                cell.fiterDescription.text = ""
+                eraseSelections = false
+            }else{
+                cell.fiterDescription.text = filterSelection.genre
             }
         }
-        eraseSelections = false
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedIndexPath = indexPath
+        eraseSelections = false
         performSegue(withIdentifier: "showFilterSelection", sender: self)
         
     }
@@ -95,11 +96,13 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     
     // MARK: - UI Actions
     @IBAction func eraseFilter(_ sender: Any) {
-        selections = (" "," ")
+        filterSelection = FilterSelection()
+        eraseSelections = true
         self.tableView.reloadData()
+        view.hideCommandView(view: self.view)
     }
     
-    // MARK: Command Manager
+    // MARK: - Command Manager
     @IBAction func commandAction(_ sender: Any) {
         print("*** APPLY FILTER")
     }
@@ -117,10 +120,12 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     // MARK: - Filter Selection Delegate
-    func didUpdateOption(tuple: (String, String)) {
-        selections = tuple
+    func didUpdateOption(filterSelection: FilterSelection) {
+        self.filterSelection = filterSelection
         self.tableView.reloadData()
-        
+        if (!filterSelection.genre.isEmpty && filterSelection.genre != "") || (!filterSelection.year.isEmpty && filterSelection.year != "") {
+            view.showCommandView(commandView: commandView)
+        }
     }
 
     

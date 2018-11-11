@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol FilterSelectionProtocol: class {
-    func didUpdateOption(tuple: (String, String))
+    func didUpdateOption(filterSelection: FilterSelection)
 }
 
 class FilterSelectionController: UITableViewController {
@@ -25,6 +25,7 @@ class FilterSelectionController: UITableViewController {
     }
     public var movies = [FavoriteMovies]()
     public var filterSelectedRow : Int = -1
+    public var filterSelection = FilterSelection()
     
     weak var delegate: FilterSelectionProtocol?
     
@@ -82,31 +83,48 @@ class FilterSelectionController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterSelectionCell", for: indexPath) as! FilterSelectionCell
+        if isDiclosureStyle(indexPath: indexPath, filterSelectedRow: filterSelectedRow) {
+            cell.accessoryType = .disclosureIndicator
+        }else{
+            cell.accessoryType = .none
+        }
         if filterSelectedRow == 0 {
-            // Date
             cell.filterSelectionOption.text = years[indexPath.row]
         }else{
-            // Genres
             cell.filterSelectionOption.text = genres[indexPath.row]
         }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        var selections : (String, String)!
         if filterSelectedRow == 0 {
             // Date
-            selections = (years[indexPath.row], String())
+            filterSelection.year = years[indexPath.row]
+            filterSelection.yearIndexPath = indexPath
         }else{
             // Genres
-            selections = (String(), genres[indexPath.row])
+            filterSelection.genre = genres[indexPath.row]
+            filterSelection.genreIndexPath = indexPath
         }
         // return selections to the caller
-        delegate?.didUpdateOption(tuple: selections)
+        delegate?.didUpdateOption(filterSelection: filterSelection)
         navigationController?.popViewController(animated: true)
     }
  
-
+    // MARK: - TableView Helper
+    private func isDiclosureStyle(indexPath: IndexPath, filterSelectedRow: Int) -> Bool {
+        print("*** indexPath.row: \(indexPath.row)   -------------------------------------------")
+        if filterSelectedRow == 0 {
+            print("*** year: \(filterSelection.year)")
+            print("*** indexPath: \(filterSelection.yearIndexPath)")
+        }else{
+            print("*** genre: \(filterSelection.genre)")
+            print("*** indexPath: \(filterSelection.genreIndexPath)")
+        }
+        
+        return false
+    }
+    
 }
