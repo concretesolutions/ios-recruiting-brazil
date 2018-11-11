@@ -354,7 +354,6 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
                     
                     // filtering does not allow infinite pagination!
                     if !self.isFiltering {
-                        print("🌕 READ MORE....... pageNumber: \(pageCounter)")
                         activityIndicatorShow(show: true)
                         loadPopularMovies(pageNumber: pageCounter)
                     }
