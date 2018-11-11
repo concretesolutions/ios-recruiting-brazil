@@ -27,15 +27,18 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     private var selectedIndexPath = IndexPath()
     private var coreDataService : CoreDataService?
     private var selections: (String, String)!
+    private var eraseSelections = false
     
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet var commandView: UIView!
+    @IBOutlet weak var commandButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // setUp
         setUp()
         
@@ -65,12 +68,20 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         cell.filterTitle.text = source[indexPath.row]
         if selections != nil {
             if indexPath.row == 0 && !selections.0.isEmpty {
-                cell.fiterDescription.text = selections.0
+                if eraseSelections {
+                    cell.fiterDescription.text = ""
+                }else{
+                    cell.fiterDescription.text = selections.0
+                }
             }else if indexPath.row == 1 && !selections.1.isEmpty{
-                cell.fiterDescription.text = selections.1
+                if eraseSelections {
+                    cell.fiterDescription.text = ""
+                }else{
+                    cell.fiterDescription.text = selections.1
+                }
             }
         }
-
+        eraseSelections = false
         return cell
     }
     
@@ -83,10 +94,15 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     
     
     // MARK: - UI Actions
-    @IBAction func applyAction(_ sender: Any) {
-        print("*** APPLY FILTER")
+    @IBAction func eraseFilter(_ sender: Any) {
+        selections = (" "," ")
+        self.tableView.reloadData()
     }
     
+    // MARK: Command Manager
+    @IBAction func commandAction(_ sender: Any) {
+        print("*** APPLY FILTER")
+    }
     
     
     // MARK: - Navigation
@@ -106,7 +122,8 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         self.tableView.reloadData()
         
     }
-    
-    
 
+    
+    
+    
 }

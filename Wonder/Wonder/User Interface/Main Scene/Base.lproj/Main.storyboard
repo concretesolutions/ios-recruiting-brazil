@@ -225,16 +225,45 @@
                     <navigationItem key="navigationItem" id="6Nk-DT-y15">
                         <barButtonItem key="rightBarButtonItem" title="Apply" id="3d3-dS-m2z">
                             <connections>
-                                <action selector="applyAction:" destination="wRz-gb-Nam" id="DLb-aQ-3NL"/>
+                                <action selector="eraseFilter:" destination="wRz-gb-Nam" id="dAw-b6-gYG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="commandButton" destination="lVl-VB-fga" id="prH-gk-ixi"/>
+                        <outlet property="commandView" destination="1E8-Th-SOY" id="30r-sv-veJ"/>
                         <outlet property="tableView" destination="edt-VB-Kme" id="m0B-lb-GqY"/>
                         <segue destination="sD9-uc-mO5" kind="show" identifier="showFilterSelection" id="ufw-nJ-VBX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ILB-Yi-J8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="1E8-Th-SOY">
+                    <rect key="frame" x="0.0" y="0.0" width="295" height="54"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVl-VB-fga">
+                            <rect key="frame" x="0.0" y="0.0" width="295" height="54"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="lVl-VB-fga" secondAttribute="height" multiplier="295:54" id="2Mx-ve-rXz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <state key="normal" title="Apply">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="commandAction:" destination="wRz-gb-Nam" eventType="touchUpInside" id="fwP-hl-Ime"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="lVl-VB-fga" firstAttribute="leading" secondItem="L6E-1U-RNh" secondAttribute="leading" id="4s5-ee-T58"/>
+                        <constraint firstItem="lVl-VB-fga" firstAttribute="trailing" secondItem="L6E-1U-RNh" secondAttribute="trailing" id="UqW-dh-lgo"/>
+                        <constraint firstItem="lVl-VB-fga" firstAttribute="top" secondItem="L6E-1U-RNh" secondAttribute="top" id="e6P-K1-Oxy"/>
+                        <constraint firstItem="lVl-VB-fga" firstAttribute="bottom" secondItem="L6E-1U-RNh" secondAttribute="bottom" id="hoA-qf-JEK"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="L6E-1U-RNh"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1998" y="1233"/>
         </scene>
