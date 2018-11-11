@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52BC96BB2198569000BAA825 /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BA2198569000BAA825 /* ServerURL.swift */; };
+		52BC96BD2198569900BAA825 /* ServerKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BC2198569900BAA825 /* ServerKeys.swift */; };
+		52BC96BF219856A100BAA825 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BE219856A100BAA825 /* ServerManager.swift */; };
 		52D7352A219787D600142C7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D73529219787D600142C7A /* AppDelegate.swift */; };
 		52D7352C219787D600142C7A /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7352B219787D600142C7A /* MoviesView.swift */; };
 		52D7352F219787D600142C7A /* MoviesVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D7352D219787D600142C7A /* MoviesVC.storyboard */; };
@@ -47,6 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52BC96BA2198569000BAA825 /* ServerURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
+		52BC96BC2198569900BAA825 /* ServerKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerKeys.swift; sourceTree = "<group>"; };
+		52BC96BE219856A100BAA825 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		52D73526219787D600142C7A /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D73529219787D600142C7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D7352B219787D600142C7A /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
@@ -100,9 +106,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52BC969F21979E6900BAA825 /* API */ = {
+		52BC96B82198567B00BAA825 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				52BC96B92198568400BAA825 /* API */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		52BC96B92198568400BAA825 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				52BC96BA2198569000BAA825 /* ServerURL.swift */,
+				52BC96BC2198569900BAA825 /* ServerKeys.swift */,
+				52BC96BE219856A100BAA825 /* ServerManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -195,8 +212,8 @@
 		52D7355D21978B4B00142C7A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				52BC96B82198567B00BAA825 /* Manager */,
 				52D7356C2197901D00142C7A /* Entities */,
-				52D7356521978F0D00142C7A /* Managers */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -210,14 +227,6 @@
 				52D73530219787D600142C7A /* Movs.xcdatamodeld */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		52D7356521978F0D00142C7A /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				52BC969F21979E6900BAA825 /* API */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		52D7356C2197901D00142C7A /* Entities */ = {
@@ -360,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52BC96BF219856A100BAA825 /* ServerManager.swift in Sources */,
 				52D735702197905C00142C7A /* FavoritesRouter.swift in Sources */,
 				52D73578219790E000142C7A /* FavoritesProtocol.swift in Sources */,
 				52D7356921978FD700142C7A /* MoviesPresenter.swift in Sources */,
@@ -372,7 +382,9 @@
 				52D73532219787D600142C7A /* Movs.xcdatamodeld in Sources */,
 				52D7356721978FC800142C7A /* MoviesRouter.swift in Sources */,
 				52D7356B21978FF400142C7A /* MoviesInterector.swift in Sources */,
+				52BC96BB2198569000BAA825 /* ServerURL.swift in Sources */,
 				52D7352A219787D600142C7A /* AppDelegate.swift in Sources */,
+				52BC96BD2198569900BAA825 /* ServerKeys.swift in Sources */,
 				52D7356021978CD400142C7A /* AppTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
