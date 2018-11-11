@@ -15,8 +15,8 @@ class AppTabBar: UITabBarController {
         // Do any additional setup after loading the view.
         
         // Setup TabBar
-        UITabBar.appearance().backgroundColor = ColorPallete.yellow
-        UITabBar.appearance().tintColor = UIColor.black
+        self.tabBar.barTintColor = ColorPallete.yellow
+        self.tabBar.tintColor = UIColor.black
         
         // Tab Bar
         self.viewControllers = [moviesTab(), favoritesTab()]
