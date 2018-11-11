@@ -239,12 +239,18 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     // MARK: - Observers
     private func observerManager() {
     
+        removelAllObservers()
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willInactivateFavoritesSearch(_:)),
                                                name: NSNotification.Name(rawValue: "willInactivateFavoritesSearch"),
                                                object: nil)
     }
  
+    private func removelAllObservers() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "willInactivateFavoritesSearch"), object: nil)
+    }
+    
     @objc private func willInactivateFavoritesSearch(_ sender: NSNotification) {
         self.search.isActive = false
     }

@@ -34,6 +34,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     private var search = UISearchController(searchResultsController: nil)
     private var searchInProgress = false
     private var searchArgument = String()
+
     
     // Core Data -----------------------------------
     private var coreDataService : CoreDataService?
@@ -43,6 +44,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     private var filteredMovies = Movies()
     private var isFiltering = false
 
+    
     
     
     // pagination
@@ -146,7 +148,9 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     
     // MARK: - Observers
     private func observerManager() {
-
+        
+        removelAllObservers()
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reachabilityStatusChanged(_:)),
                                                name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
@@ -156,6 +160,11 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
                                                selector: #selector(willInactivateMoviesSearch(_:)),
                                                name: NSNotification.Name(rawValue: "willInactivateMoviesSearch"),
                                                object: nil)
+    }
+    
+    private func removelAllObservers() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "willInactivateMoviesSearch"), object: nil)
     }
     
     // observer actions
@@ -186,6 +195,10 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
 
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        if AppSettings.standard.isConnectedToInternet {
+            view.hideErrorView(view: self.errorHandlerView)
+        }
     
         self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
         if self.searchArgument.isEmpty {
@@ -209,7 +222,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if self.movies.results.count > 0 {
+        if AppSettings.standard.isConnectedToInternet {
             view.hideErrorView(view: self.errorHandlerView)
             collectionView.reloadData()
         }
