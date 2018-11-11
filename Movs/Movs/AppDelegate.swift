@@ -23,11 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = app
         window?.makeKeyAndVisible()
-        
-        ServerManager.call { (movies) in
-            print("-> Movies: \(movies.count)")
-        }
-        
+
 //        let router = EnterRouter.init()
 //        window = UIWindow(frame: UIScreen.main.bounds)
 //        window?.rootViewController = router.presenter.view

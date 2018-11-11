@@ -12,10 +12,23 @@ class MoviesView: UIViewController {
     
     // MARK: - VIPER
     var presenter: MoviesPresenter!
-
+    
+    // MARK: - Outlets
+    @IBOutlet weak var outletMoviesCollection: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.outletMoviesCollection.delegate = self
+        self.outletMoviesCollection.dataSource = self //self.presenter.interector
+        
+        // VIPER
+        self.presenter.didLoad()
+    }
+    
+    func showPopularMovies() {
+        self.outletMoviesCollection.reloadData()
     }
 
 }

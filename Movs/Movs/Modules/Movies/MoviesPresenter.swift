@@ -24,4 +24,16 @@ class MoviesPresenter {
         self.view.presenter = self
     }
     
+    func didLoad() {
+        self.interector.fetchMovies()
+    }
+    
+    func totalMovies() -> Int {
+        return self.interector.movies.count
+    }
+    
+    func loadedMovies() {
+        self.view.showPopularMovies()
+    }
+    
 }

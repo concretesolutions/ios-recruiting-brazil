@@ -24,6 +24,7 @@ class CustomNavigation: UINavigationController {
         
         // Search Bar
         setupSearchBar(viewController: viewController)
+
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -9,7 +9,7 @@
 import Foundation
 
 struct Movie: Codable {
-//    let poster_path: String
+    let poster_path: String?
     let adult: Bool
     let overview: String
     let release_date: String
@@ -24,6 +24,7 @@ struct Movie: Codable {
     let video: Bool
     let vote_average: Double
     private enum CodingKeys: String, CodingKey {
+        case poster_path
         case adult
         case overview
         case release_date
