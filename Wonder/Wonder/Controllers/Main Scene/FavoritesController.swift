@@ -41,7 +41,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     private var movies = [FavoriteMovies]()  // Core Data Model
     private var coreDataService : CoreDataService?
     
-    private var search = UISearchController()
+    private var search = UISearchController(searchResultsController: nil)
     private var searchInProgress = false
     private var searchArgument = String()
     private var noData = "You have no favorite movie."
@@ -235,7 +235,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     
     // MARK: - Filter Protocol
     func didSelectFilter(businessFavoriteMovies: BusinessFavoriteMovies) {
-        print("*** YES, He have filters")
+        print("*** YES, He have filters - businessFavoriteMovies: \(businessFavoriteMovies)")
         self.filterSelectionView.backgroundColor = UIColor.applicationBarTintColor
         self.tableView.tableHeaderView = self.filterSelectionView
         self.tableView.reloadData()

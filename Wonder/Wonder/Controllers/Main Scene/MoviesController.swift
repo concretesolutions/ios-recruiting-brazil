@@ -54,7 +54,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // UI Config
         uiConfig()
         
@@ -71,6 +71,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         navigationController?.navigationBar.prefersLargeTitles = true
         collectionView.reloadData()
     }
@@ -83,8 +84,10 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         
         // Navigation Search
         search = UISearchController(searchResultsController: nil)
-        search.searchBar.delegate = self
         search.searchResultsUpdater = self // as? UISearchResultsUpdating
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Search movies"
+        search.searchBar.delegate = self
         search.searchBar.tintColor = UIColor.black
         
         // search text field background color
