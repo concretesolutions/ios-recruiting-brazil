@@ -116,14 +116,6 @@ class FilterSelectionController: UITableViewController {
     // MARK: - TableView Helper
     private func isDiclosureStyle(indexPath: IndexPath, filterSelectedRow: Int) -> Bool {
 
-        if filterSelectedRow == 0 {
-            print("*** year: \(filterSelection.year)")
-            print("*** indexPath: \(filterSelection.yearIndexPath)")
-        }else{
-            print("*** genre: \(filterSelection.genre)")
-            print("*** indexPath: \(filterSelection.genreIndexPath)")
-        }
-        
         return false
     }
     

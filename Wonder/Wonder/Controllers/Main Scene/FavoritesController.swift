@@ -228,8 +228,8 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     }
     
     // MARK: - Filter Protocol
-    func didSelectFilter(businessFavoriteMovies: BusinessFavoriteMovies) {
-        print("*** YES, He have filters - businessFavoriteMovies: \(businessFavoriteMovies)")
+    func didSelectFilter(filterSelection: FilterSelection) {
+        print("*** YES, He have filters - filterSelection: \(filterSelection)")
         self.filterSelectionView.backgroundColor = UIColor.applicationBarTintColor
         self.tableView.tableHeaderView = self.filterSelectionView
         self.tableView.reloadData()

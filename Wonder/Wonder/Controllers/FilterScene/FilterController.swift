@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol FilterProtocol: class {
-    func didSelectFilter(businessFavoriteMovies: BusinessFavoriteMovies)
+    func didSelectFilter(filterSelection: FilterSelection)
 }
 
 class FilterController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterSelectionProtocol {
@@ -36,7 +36,7 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     private var selections: (String, String, Int)!
     private var eraseSelections = false
     private var filterSelection = FilterSelection()
-    private var businessFavoriteMovies = BusinessFavoriteMovies()
+    private var filterSelectionParameter = FilterSelection()
     
     
     // MARK: - Outlets
@@ -112,7 +112,7 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     
     @IBAction func applyFilter(_ sender: Any) {
         // return selections to the caller
-        delegate?.didSelectFilter(businessFavoriteMovies: businessFavoriteMovies)
+        delegate?.didSelectFilter(filterSelection: filterSelectionParameter)
         navigationController?.popViewController(animated: true)
     }
     
@@ -133,9 +133,19 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         self.filterSelection = filterSelection
         self.tableView.reloadData()
         if (!filterSelection.genre.isEmpty && filterSelection.genre != "") || (!filterSelection.year.isEmpty && filterSelection.year != "") {
+            prepareParameter(filterSelection)
             view.showCommandView(commandView: commandView)
         }
     }
     
+    private func prepareParameter(_ filterSelection: FilterSelection) {
+        if !filterSelection.genre.isEmpty {
+            filterSelectionParameter.genre = filterSelection.genre
+            filterSelectionParameter.genreIndexPath = filterSelection.genreIndexPath
+        }else if !filterSelection.year.isEmpty {
+            filterSelectionParameter.year = filterSelection.year
+            filterSelectionParameter.yearIndexPath = filterSelection.yearIndexPath
+        }
+    }
     
 }
