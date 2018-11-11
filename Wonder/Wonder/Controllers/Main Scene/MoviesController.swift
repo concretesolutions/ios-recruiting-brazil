@@ -31,7 +31,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
  
     
     // MARK: - Properties
-    private var search = UISearchController()
+    private var search = UISearchController(searchResultsController: nil)
     private var searchInProgress = false
     private var searchArgument = String()
     
@@ -72,6 +72,9 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // inactivate search on favorites controller to avoid black screen bug!!
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "willInactivateFavoritesSearch"), object:self)
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         collectionView.reloadData()
     }
@@ -144,15 +147,16 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     
     // MARK: - Observers
     private func observerManager() {
-        
-        //
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reachabilityStatusChanged(_:)),
                                                name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
                                                object: nil)
         
-        
-        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willInactivateMoviesSearch(_:)),
+                                               name: NSNotification.Name(rawValue: "willInactivateMoviesSearch"),
+                                               object: nil)
     }
     
     // observer actions
@@ -163,6 +167,10 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         
         checkInternetStatus()
         
+    }
+    
+    @objc private func willInactivateMoviesSearch(_ sender: NSNotification) {
+        self.search.isActive = false
     }
     
     private func checkInternetStatus() {
@@ -191,6 +199,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         }
         
     }
+    
  
     func updateSearchResults(for searchController: UISearchController) {
         if !search.isActive {

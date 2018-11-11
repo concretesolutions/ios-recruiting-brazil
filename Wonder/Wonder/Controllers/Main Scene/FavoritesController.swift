@@ -58,13 +58,17 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     // View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // observer manager
+        observerManager()
         // UI Config
         uiConfig()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // inactivate search on movies controller to avoid black screen bug!!
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "willInactivateMoviesSearch"), object:self)
+        
         // AppData
         loadAppData()
     }
@@ -242,5 +246,16 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
 
     }
 
+    // MARK: - Observers
+    private func observerManager() {
     
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willInactivateFavoritesSearch(_:)),
+                                               name: NSNotification.Name(rawValue: "willInactivateFavoritesSearch"),
+                                               object: nil)
+    }
+ 
+    @objc private func willInactivateFavoritesSearch(_ sender: NSNotification) {
+        self.search.isActive = false
+    }
 }
