@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
-class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, FilterProtocol {
+
+    
+    
     
     // MARK: - Public Properties
     public var moc : NSManagedObjectContext? {
@@ -24,6 +27,12 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     @IBOutlet var errorHandlerView: UIView!
     @IBOutlet weak var errorImageView: UIImageView!
     @IBOutlet weak var errorMessage: UILabel!
+    
+    @IBOutlet var filterSelectionView: UIView!
+    @IBOutlet weak var filterSelectionButton: UIButton!
+    
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -37,6 +46,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     private var searchArgument = String()
     private var noData = "You have no favorite movie."
     
+    private var businessFavoriteMovies = BusinessFavoriteMovies()
     private var selectedFavoriteMovie = FavoriteMovies()
     private var selectedImage = UIImage()
     
@@ -189,15 +199,22 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         
     }
     
+    @IBAction func removeFilters(_ sender: Any) {
+        businessFavoriteMovies = BusinessFavoriteMovies()
+        tableView.tableHeaderView = nil
+        
+    }
+    
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFilter" { 
             let controller = segue.destination as! FilterController
+            controller.delegate = self
             controller.movies = self.movies
             controller.moc = moc
             controller.hidesBottomBarWhenPushed = true
-            
         
         }else if segue.identifier == "showFavoriteDetail" {
             let controller = segue.destination as! MovieDetailController
@@ -216,5 +233,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         return UIImage(data: imageData as Data) ?? UIImage()
     }
     
+    // MARK: - Filter Protocol
+    func didSelectFilter(businessFavoriteMovies: BusinessFavoriteMovies) {
+        print("*** YES, He have filters")
+        self.filterSelectionView.backgroundColor = UIColor.applicationBarTintColor
+        self.tableView.tableHeaderView = self.filterSelectionView
+        self.tableView.reloadData()
+
+    }
+
     
 }

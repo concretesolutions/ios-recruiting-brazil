@@ -9,7 +9,13 @@
 import UIKit
 import CoreData
 
+protocol FilterProtocol: class {
+    func didSelectFilter(businessFavoriteMovies: BusinessFavoriteMovies)
+}
+
 class FilterController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterSelectionProtocol {
+    
+
 
     // MARK: - Public Properties
     public var moc : NSManagedObjectContext? {
@@ -19,6 +25,7 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
             }
         }
     }
+    weak var delegate: FilterProtocol?
     public var movies = [FavoriteMovies]()  // Core Data Model
     
     
@@ -29,6 +36,7 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     private var selections: (String, String, Int)!
     private var eraseSelections = false
     private var filterSelection = FilterSelection()
+    private var businessFavoriteMovies = BusinessFavoriteMovies()
     
     
     // MARK: - Outlets
@@ -102,9 +110,10 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         view.hideCommandView(view: self.view)
     }
     
-    // MARK: - Command Manager
-    @IBAction func commandAction(_ sender: Any) {
-        print("*** APPLY FILTER")
+    @IBAction func applyFilter(_ sender: Any) {
+        // return selections to the caller
+        delegate?.didSelectFilter(businessFavoriteMovies: businessFavoriteMovies)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -112,10 +121,10 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFilterSelection" {
             let controller = segue.destination as! FilterSelectionController
+            controller.delegate = self
             controller.filterSelectedRow = selectedIndexPath.row
             controller.movies = movies
             controller.moc = moc
-            controller.delegate = self
         }
     }
     
@@ -127,8 +136,6 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
             view.showCommandView(commandView: commandView)
         }
     }
-
-    
     
     
 }

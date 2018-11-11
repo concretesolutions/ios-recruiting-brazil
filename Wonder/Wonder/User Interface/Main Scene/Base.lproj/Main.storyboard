@@ -99,6 +99,8 @@
                         <outlet property="errorHandlerView" destination="6lE-yB-mzW" id="LBF-zC-wp3"/>
                         <outlet property="errorImageView" destination="epy-26-x5e" id="shw-QI-zqj"/>
                         <outlet property="errorMessage" destination="ias-Jt-QUj" id="bSS-Dn-krh"/>
+                        <outlet property="filterSelectionButton" destination="Iz2-I6-Rk2" id="yHr-hJ-ykO"/>
+                        <outlet property="filterSelectionView" destination="I3G-1K-xHK" id="M29-Sa-Md1"/>
                         <outlet property="tableView" destination="wqJ-7Z-gpv" id="Rum-Pu-1UI"/>
                         <segue destination="wRz-gb-Nam" kind="show" identifier="showFilter" id="ihT-D7-RYL"/>
                         <segue destination="2t2-ir-PVV" kind="presentation" identifier="showFavoriteDetail" id="poZ-yQ-Gcz"/>
@@ -146,6 +148,30 @@
                         <constraint firstItem="ZOQ-6V-XQJ" firstAttribute="top" secondItem="k8k-fg-Qag" secondAttribute="top" constant="79" id="o3G-ho-NTD"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="k8k-fg-Qag"/>
+                </view>
+                <view contentMode="scaleToFill" id="I3G-1K-xHK">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="54"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iz2-I6-Rk2">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="54"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Remove Filters">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="removeFilters:" destination="w3s-0j-4a1" eventType="touchUpInside" id="yw4-BM-eD2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Iz2-I6-Rk2" firstAttribute="trailing" secondItem="tN4-KO-1iG" secondAttribute="trailing" id="MtJ-Rf-Jmr"/>
+                        <constraint firstItem="Iz2-I6-Rk2" firstAttribute="leading" secondItem="tN4-KO-1iG" secondAttribute="leading" id="fcS-Wh-MpX"/>
+                        <constraint firstItem="Iz2-I6-Rk2" firstAttribute="top" secondItem="tN4-KO-1iG" secondAttribute="top" id="mLI-6c-4OZ"/>
+                        <constraint firstItem="Iz2-I6-Rk2" firstAttribute="bottom" secondItem="tN4-KO-1iG" secondAttribute="bottom" id="xTF-lF-voM"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="tN4-KO-1iG"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="1998" y="325"/>
@@ -223,7 +249,7 @@
                         <viewLayoutGuide key="safeArea" id="Rf6-3f-lD4"/>
                     </view>
                     <navigationItem key="navigationItem" id="6Nk-DT-y15">
-                        <barButtonItem key="rightBarButtonItem" title="Apply" id="3d3-dS-m2z">
+                        <barButtonItem key="rightBarButtonItem" title="Erase Filter" id="3d3-dS-m2z">
                             <connections>
                                 <action selector="eraseFilter:" destination="wRz-gb-Nam" id="dAw-b6-gYG"/>
                             </connections>
@@ -251,7 +277,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="commandAction:" destination="wRz-gb-Nam" eventType="touchUpInside" id="fwP-hl-Ime"/>
+                                <action selector="applyFilter:" destination="wRz-gb-Nam" eventType="touchUpInside" id="o1e-Nd-2do"/>
                             </connections>
                         </button>
                     </subviews>
