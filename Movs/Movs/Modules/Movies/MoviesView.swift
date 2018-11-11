@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MoviesView: UIViewController {
+    
+    // MARK: - VIPER
+    var presenter: MoviesPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
 
 }
 

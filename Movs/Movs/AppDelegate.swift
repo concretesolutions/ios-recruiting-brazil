@@ -17,6 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // VIPER
+        let app = AppTabBar()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = app
+        window?.makeKeyAndVisible()
+        
+//        let router = EnterRouter.init()
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        window?.rootViewController = router.presenter.view
+//        window?.makeKeyAndVisible()
+        
         return true
     }
 
