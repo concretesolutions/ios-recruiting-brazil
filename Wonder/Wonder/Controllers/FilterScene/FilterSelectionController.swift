@@ -26,6 +26,7 @@ class FilterSelectionController: UITableViewController {
     private var years = [String]()
     private var genres = [String]()
     private var coreDataService : CoreDataService?
+    private var appSettings = AppSettings()
     
     
     // MARK: - View Life Cycle
@@ -43,18 +44,21 @@ class FilterSelectionController: UITableViewController {
             navigationItem.title = "Filter by Genre"
             loadGenres()
         }
+        tableView.reloadData()
     }
     
     
     // MARK: App Data Source
     private func loadYears() {
         let distinctYears = self.coreDataService?.getDisitinctYear() ?? [NSDictionary]()
+        var tempYears = [String]()
         for dic in distinctYears {
             for (_, value) in dic {
                 let year = value as! String
-                years.append(year)
+                tempYears.append(year)
             }
         }
+        self.years = appSettings.sortArray(tempYears)
     }
     private func loadGenres() {
         genres = AppSettings.standard.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites())!)
