@@ -51,17 +51,15 @@ class FilterSelectionController: UITableViewController {
     // MARK: App Data Source
     private func loadYears() {
         let distinctYears = self.coreDataService?.getDisitinctYear() ?? [NSDictionary]()
-        var tempYears = [String]()
         for dic in distinctYears {
             for (_, value) in dic {
                 let year = value as! String
-                tempYears.append(year)
+                self.years.append(year)
             }
         }
-        self.years = appSettings.sortArray(tempYears)
     }
     private func loadGenres() {
-        genres = AppSettings.standard.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites())!)
+        genres = appSettings.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites())!)
         print(genres)
     }
     

@@ -70,7 +70,7 @@ class AppSettings {
         }
         return allGenres
     }
-    public func sortArray(_ input: [String]) -> [String] {
+    private func sortArray(_ input: [String]) -> [String] {
         var result = [String]()
         result = input.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         return result

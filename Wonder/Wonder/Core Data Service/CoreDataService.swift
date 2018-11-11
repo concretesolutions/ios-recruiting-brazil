@@ -51,22 +51,28 @@ class CoreDataService {
             favoriteMoviesList = try moc.fetch(request)
             return favoriteMoviesList
         } catch let error as NSError {
-            print("Error getting students: \(error.localizedDescription)")
+            print("Error getting all favorites: \(error.localizedDescription)")
         }
         
         return nil
     }
 
     public func getDisitinctYear() -> [NSDictionary]? {
-        let fetchRequest = NSFetchRequest<NSDictionary> (entityName:"FavoriteMovies")
-        fetchRequest.resultType = .dictionaryResultType
+        
+        let sortByYear = NSSortDescriptor(key: "year", ascending: true)
+        let sortDescriptors = [sortByYear]
+        
+        
+        let request = NSFetchRequest<NSDictionary> (entityName:"FavoriteMovies")
+        request.resultType = .dictionaryResultType
         
         // Optionally, to get only specific properties:
-        fetchRequest.propertiesToFetch = ["year"]
-        fetchRequest.returnsDistinctResults = true
+        request.propertiesToFetch = ["year"]
+        request.returnsDistinctResults = true
+        request.sortDescriptors = sortDescriptors
         
         do {
-            let records = try moc.fetch(fetchRequest)
+            let records = try moc.fetch(request)
             return records
         } catch {
             print("Core Data fetch failed:", error.localizedDescription)
@@ -110,7 +116,7 @@ class CoreDataService {
             }
         }
         catch let error as NSError  {
-            print("Error getting lesson: \(error.localizedDescription)")
+            print("Error favorite exists: \(error.localizedDescription)")
         }
         
         return false
@@ -129,7 +135,7 @@ class CoreDataService {
             }
         }
         catch let error as NSError  {
-            print("Error getting lesson: \(error.localizedDescription)")
+            print("Error getting favorite: \(error.localizedDescription)")
         }
         
         return favoriteMovies
