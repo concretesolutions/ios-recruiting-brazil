@@ -53,12 +53,12 @@ class AppSettings {
     // MARK: - Distinct Genres Procedures
     public func getDistinctGenres(favoriteMovies: [FavoriteMovies]) -> [String] {
         // get all genres
-        let allGenres = self.getAllExistingGenreInFavorites(favoriteMovies: favoriteMovies)
+        let allGenres = self.getAllExistingGenre(favoriteMovies: favoriteMovies)
         // order all genres asc
         let orderedGenres = self.sortArray(allGenres)
         return breakProcessing(orderedGenres)
     }
-    private func getAllExistingGenreInFavorites(favoriteMovies: [FavoriteMovies]) -> [String] {
+    private func getAllExistingGenre(favoriteMovies: [FavoriteMovies]) -> [String] {
         var allGenres = [String]()
         for fav in favoriteMovies {
             let components = (fav.genre?.split(separator: ","))!

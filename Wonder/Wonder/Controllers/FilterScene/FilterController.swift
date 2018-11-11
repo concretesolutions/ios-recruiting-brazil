@@ -9,8 +9,7 @@
 import UIKit
 import CoreData
 
-class FilterController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class FilterController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterSelectionProtocol {
 
     // MARK: - Public Properties
     public var moc : NSManagedObjectContext? {
@@ -27,6 +26,7 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     private var source = [String]()
     private var selectedIndexPath = IndexPath()
     private var coreDataService : CoreDataService?
+    private var selections: (String, String)!
     
     
     // MARK: - Outlets
@@ -38,14 +38,15 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         
         // setUp
         setUp()
-
-    
+        
     }
     
     // MARK: - App SetUp
     private func setUp() {
         // navigation bar title
         navigationItem.title = "Filter"
+        
+        
         
         // filter options
         source.append("Date")
@@ -62,8 +63,14 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell") as! FilterCell
         cell.filterTitle.text = source[indexPath.row]
-        cell.fiterDescription.text = String()
-        
+        if selections != nil {
+            if indexPath.row == 0 && !selections.0.isEmpty {
+                cell.fiterDescription.text = selections.0
+            }else if indexPath.row == 1 && !selections.1.isEmpty{
+                cell.fiterDescription.text = selections.1
+            }
+        }
+
         return cell
     }
     
@@ -89,7 +96,17 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
             controller.filterSelectedRow = selectedIndexPath.row
             controller.movies = movies
             controller.moc = moc
+            controller.delegate = self
         }
     }
+    
+    // MARK: - Filter Selection Delegate
+    func didUpdateOption(tuple: (String, String)) {
+        selections = tuple
+        self.tableView.reloadData()
+        
+    }
+    
+    
 
 }

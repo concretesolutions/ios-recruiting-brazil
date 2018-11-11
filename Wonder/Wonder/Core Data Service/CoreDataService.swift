@@ -57,7 +57,7 @@ class CoreDataService {
         return nil
     }
 
-    public func getDisitinctYear() -> [NSDictionary]? {
+    public func getDistinctYear() -> [NSDictionary]? {
         
         let sortByYear = NSSortDescriptor(key: "year", ascending: true)
         let sortDescriptors = [sortByYear]

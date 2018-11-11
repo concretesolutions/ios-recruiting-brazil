@@ -163,7 +163,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
                 self.favoriteMoviesList = favoriteMovies
             }else{
                 // Core Data Error
-                print("A problem occured while tryin to save favorite movies to core data!")
+                print("A problem occured - Core Data - 03X")
             }
         })
     }

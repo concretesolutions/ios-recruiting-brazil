@@ -196,6 +196,9 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
             let controller = segue.destination as! FilterController
             controller.movies = self.movies
             controller.moc = moc
+            controller.hidesBottomBarWhenPushed = true
+            
+        
         }else if segue.identifier == "showFavoriteDetail" {
             let controller = segue.destination as! MovieDetailController
             controller.movie = self.modelAdapter.convertToBusiness(selectedFavoriteMovie)

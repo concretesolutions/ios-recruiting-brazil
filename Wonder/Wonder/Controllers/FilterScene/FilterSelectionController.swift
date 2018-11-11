@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+protocol FilterSelectionProtocol: class {
+    func didUpdateOption(tuple: (String, String))
+}
+
 class FilterSelectionController: UITableViewController {
 
     // MARK: - Public Properties
@@ -21,6 +25,8 @@ class FilterSelectionController: UITableViewController {
     }
     public var movies = [FavoriteMovies]()
     public var filterSelectedRow : Int = -1
+    
+    weak var delegate: FilterSelectionProtocol?
     
     // MARK: - Private Properties
     private var years = [String]()
@@ -48,9 +54,9 @@ class FilterSelectionController: UITableViewController {
     }
     
     
-    // MARK: App Data Source
+    // MARK: - App Data Source
     private func loadYears() {
-        let distinctYears = self.coreDataService?.getDisitinctYear() ?? [NSDictionary]()
+        let distinctYears = self.coreDataService?.getDistinctYear() ?? [NSDictionary]()
         for dic in distinctYears {
             for (_, value) in dic {
                 let year = value as! String
@@ -63,9 +69,7 @@ class FilterSelectionController: UITableViewController {
         print(genres)
     }
     
-    
-    // MARK: - Table view data source
-    
+    // MARK: - Table View Datasource & Dlegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filterSelectedRow == 0 {
             // date
@@ -74,10 +78,8 @@ class FilterSelectionController: UITableViewController {
             // genre
             return self.genres.count
         }
-        
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterSelectionCell", for: indexPath) as! FilterSelectionCell
         if filterSelectedRow == 0 {
@@ -92,6 +94,18 @@ class FilterSelectionController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        var selections : (String, String)!
+        if filterSelectedRow == 0 {
+            // Date
+            selections = (years[indexPath.row], String())
+        }else{
+            // Genres
+            selections = (String(), genres[indexPath.row])
+        }
+        // return selections to the caller
+        delegate?.didUpdateOption(tuple: selections)
+        navigationController?.popViewController(animated: true)
     }
  
 
