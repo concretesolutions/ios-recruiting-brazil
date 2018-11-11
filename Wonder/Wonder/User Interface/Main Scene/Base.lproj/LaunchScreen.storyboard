@@ -16,13 +16,39 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.96726387739181519" green="0.80757492780685425" blue="0.35902783274650574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wonder_Artwork" translatesAutoresizingMaskIntoConstraints="NO" id="uVG-au-16w">
+                                <rect key="frame" x="67" y="213" width="241" height="241"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wonder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNB-u6-Lmt">
+                                <rect key="frame" x="67" y="486" width="241" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bNB-u6-Lmt" secondAttribute="height" multiplier="241:42" id="tMy-8d-zVG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="47"/>
+                                <color key="textColor" red="0.96726387739999997" green="0.80757492779999995" blue="0.35902783269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bNB-u6-Lmt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="FoF-x0-3rT"/>
+                            <constraint firstItem="uVG-au-16w" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="IzT-Gd-yqF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bNB-u6-Lmt" secondAttribute="trailing" constant="67" id="KQN-Wd-L4o"/>
+                            <constraint firstItem="bNB-u6-Lmt" firstAttribute="top" secondItem="uVG-au-16w" secondAttribute="bottom" constant="32" id="b6e-fm-UVD"/>
+                            <constraint firstItem="uVG-au-16w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="193" id="p6n-fG-ZcC"/>
+                            <constraint firstItem="uVG-au-16w" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qcs-pW-ChQ"/>
+                            <constraint firstItem="uVG-au-16w" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="quP-ax-wVc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Wonder_Artwork" width="1024" height="1024"/>
+    </resources>
 </document>

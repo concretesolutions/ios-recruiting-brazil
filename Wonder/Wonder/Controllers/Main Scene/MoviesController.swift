@@ -175,7 +175,6 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     private func checkInternetStatus() {
         if !reachability.isReachable() {
             AppSettings.standard.updateInternetConnectionStatus(false)
-            
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .internet, errorMessage: "Oops! Looks like you have no conection to the internet!")
 
         }else{
@@ -189,14 +188,31 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     
         self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
+        if self.searchArgument.isEmpty {
+            return
+        }
+        
+        
         self.filteredMovies.results = self.movies.results.filter { $0.title.lowercased().contains(self.searchArgument.lowercased())}
         self.isFiltering = true
+        
+        if filteredMovies.results.count == 0 {
+            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: "No movie found with '\(searchBar.text!)'")
+            return
+        }
+        
         // reload only the tableView
         DispatchQueue.main.async {
             self.collectionView.contentOffset = CGPoint.zero
             self.collectionView.reloadData()
         }
         
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        if self.movies.results.count > 0 {
+            view.hideErrorView(view: self.errorHandlerView)
+            collectionView.reloadData()
+        }
     }
     
  

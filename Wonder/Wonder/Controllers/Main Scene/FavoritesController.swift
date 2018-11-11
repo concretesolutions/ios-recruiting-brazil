@@ -83,7 +83,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self // as? UISearchResultsUpdating
         search.obscuresBackgroundDuringPresentation = false
-        search.searchBar.placeholder = "Search movies"
+        search.searchBar.placeholder = "Search favorites"
         search.searchBar.delegate = self
         search.searchBar.tintColor = UIColor.black
 //        search = UISearchController(searchResultsController: nil)
