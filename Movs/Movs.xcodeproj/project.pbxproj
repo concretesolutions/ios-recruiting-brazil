@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6052706B2198618400DCA713 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6052706A2198618400DCA713 /* AppDelegate.swift */; };
-		6052706D2198618400DCA713 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6052706C2198618400DCA713 /* ViewController.swift */; };
 		605270702198618400DCA713 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6052706E2198618400DCA713 /* Main.storyboard */; };
 		605270722198618500DCA713 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 605270712198618500DCA713 /* Assets.xcassets */; };
 		605270752198618500DCA713 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 605270732198618500DCA713 /* LaunchScreen.storyboard */; };
@@ -35,7 +34,6 @@
 		4CA264AA65CEFCEA221EA5E0 /* Pods-Movs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.release.xcconfig"; sourceTree = "<group>"; };
 		605270672198618400DCA713 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6052706A2198618400DCA713 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6052706C2198618400DCA713 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6052706F2198618400DCA713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		605270712198618500DCA713 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		605270742198618500DCA713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -89,12 +87,14 @@
 		605270692198618400DCA713 /* Movs */ = {
 			isa = PBXGroup;
 			children = (
-				6052706A2198618400DCA713 /* AppDelegate.swift */,
-				6052706C2198618400DCA713 /* ViewController.swift */,
-				6052706E2198618400DCA713 /* Main.storyboard */,
-				605270712198618500DCA713 /* Assets.xcassets */,
-				605270732198618500DCA713 /* LaunchScreen.storyboard */,
-				605270762198618500DCA713 /* Info.plist */,
+				60527091219866FA00DCA713 /* Application */,
+				60527090219866C600DCA713 /* Resources */,
+				6052708A2198665700DCA713 /* Model */,
+				6052708B2198665B00DCA713 /* View */,
+				6052708D2198666A00DCA713 /* Controller */,
+				6052708F2198668300DCA713 /* Realm */,
+				6052708C2198666400DCA713 /* Service */,
+				6052708E2198667A00DCA713 /* Utilities */,
 			);
 			path = Movs;
 			sourceTree = "<group>";
@@ -106,6 +106,67 @@
 				605270812198618600DCA713 /* Info.plist */,
 			);
 			path = MovsTests;
+			sourceTree = "<group>";
+		};
+		6052708A2198665700DCA713 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6052708B2198665B00DCA713 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6052706E2198618400DCA713 /* Main.storyboard */,
+				605270732198618500DCA713 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6052708C2198666400DCA713 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6052708D2198666A00DCA713 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6052708E2198667A00DCA713 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		6052708F2198668300DCA713 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		60527090219866C600DCA713 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				605270712198618500DCA713 /* Assets.xcassets */,
+				605270762198618500DCA713 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		60527091219866FA00DCA713 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				6052706A2198618400DCA713 /* AppDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		72ED953935DEB9EB072A8CA4 /* Pods */ = {
@@ -305,7 +366,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6052706D2198618400DCA713 /* ViewController.swift in Sources */,
 				6052706B2198618400DCA713 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
