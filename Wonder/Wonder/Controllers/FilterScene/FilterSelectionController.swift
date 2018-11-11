@@ -62,6 +62,7 @@ class FilterSelectionController: UITableViewController {
     }
     private func loadGenres() {
         genres = AppSettings.standard.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites())!)
+        print(genres)
     }
     
     
@@ -73,7 +74,7 @@ class FilterSelectionController: UITableViewController {
             return self.years.count
         }else{
             // genre
-            return self.movies.count
+            return self.genres.count
         }
         
     }
@@ -81,13 +82,12 @@ class FilterSelectionController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterSelectionCell", for: indexPath) as! FilterSelectionCell
-        let movie = self.movies[indexPath.row]
         if filterSelectedRow == 0 {
             // Date
             cell.filterSelectionOption.text = years[indexPath.row]
         }else{
             // Genres
-            cell.filterSelectionOption.text = movie.genre
+            cell.filterSelectionOption.text = genres[indexPath.row]
         }
         return cell
     }

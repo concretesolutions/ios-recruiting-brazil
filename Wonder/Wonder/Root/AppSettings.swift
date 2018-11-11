@@ -76,8 +76,20 @@ class AppSettings {
         return result
     }
     private func breakProcessing(_ input: [String]) -> [String] {
-        let distinct = [String]()
-        
+        var distinct = [String]()
+        var old = ""
+        for i in 0...(input.count - 1) {
+            if i == 0 {
+                old = input[i]
+            }
+            if input[i] != old {
+                distinct.append(old)
+                old = input[i]
+            }
+        }
+        if input.count > 0 {
+            distinct.append(old)
+        }
         return distinct
     }
 
