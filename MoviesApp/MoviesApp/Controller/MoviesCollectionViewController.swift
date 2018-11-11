@@ -15,16 +15,38 @@ class MoviesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        //API Consuming code begins here
+        if let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=bd67e085700f352302ea910f619fe7ec&language=en-US&page=1"){
+            let task = URLSession.shared.dataTask(with: url) { (data, request, error) in
+                
+                if error == nil {
+                    print("Sucessfully retrieved data")
+                    
+                    if let retrievedData = data {
+                        do{
+                            if let jsonObject = try JSONSerialization.jsonObject(with: retrievedData, options: []) as? [String: Any] {
+                             //print(jsonObject)
+                            print(jsonObject)
+                            }
+                        }catch{
+                            print("Error serializing retrieved JSON")
+                        }
+                    }
+                    
+                }else{
+                    print("Failed to retrieve data")
+                }
+                
+            }
+            task.resume()
+        }
+        //API Consuming code ends here
 
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        
+     
+    
     }
 
-    // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
