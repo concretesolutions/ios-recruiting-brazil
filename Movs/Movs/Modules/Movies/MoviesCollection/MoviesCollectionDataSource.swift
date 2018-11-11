@@ -17,11 +17,10 @@ extension MoviesView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         let movie = self.presenter.interector.movies[indexPath.item]
+        cell.awakeFromNib(title: movie.title)
         if let image = movie.poster_path {
             let imageURL = "https://image.tmdb.org/t/p/original\(image)"
-            cell.awakeFromNib(title: movie.title, imageURL: imageURL)
-        }else{
-            cell.awakeFromNib(title: movie.title, imageURL: nil)
+            cell.setup(imageURL: imageURL)
         }
         return cell
     }

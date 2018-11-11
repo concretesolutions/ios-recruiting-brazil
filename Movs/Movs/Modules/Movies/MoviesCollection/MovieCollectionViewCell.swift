@@ -11,38 +11,31 @@ import UIKit
 class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Outlets
+    var imageURL: String?
     @IBOutlet weak var outletActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var outletMovieImage: UIImageView!
     @IBOutlet weak var outletMovieTitle: UILabel!
     
-    func awakeFromNib(title: String, imageURL: String?) {
+    func awakeFromNib(title: String) {
         super.awakeFromNib()
         self.outletMovieTitle.text = title
-        if let image = imageURL {
-            loadImage(imageURL: image)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        //self.outletMovieImage.image = nil
+        self.outletActivityIndicator.startAnimating()
+        //self.setup(content: data)
+    }
+    
+    func setup(imageURL: String) {
+        // Cell Reference
+        self.imageURL = imageURL
+        self.outletMovieImage.loadMovieImage(urlString: imageURL, to: self) { (status) in
+            if status {
+                self.outletActivityIndicator.stopAnimating()
+            }
         }
-    }
-    
-    func showImage(movieImage: UIImage) {
-        self.outletActivityIndicator.stopAnimating()
-        self.outletMovieImage.image = movieImage
-    }
-    
-    func loadImage(imageURL: String) {
-        guard let url = URL(string: imageURL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                print(error!)
-                //completion(nil)
-                return
-            }
-            DispatchQueue.main.async  {
-                if let downloadedImage = UIImage(data: data!) {
-                    //completion(downloadedImage)
-                    self.showImage(movieImage: downloadedImage)
-                }
-            }
-        }.resume()
     }
     
 }
