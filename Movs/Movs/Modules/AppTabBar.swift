@@ -13,6 +13,12 @@ class AppTabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // Setup TabBar
+        UITabBar.appearance().backgroundColor = ColorPallete.yellow
+        UITabBar.appearance().tintColor = UIColor.black
+        
+        // Tab Bar
         self.viewControllers = [moviesTab(), favoritesTab()]
     }
     

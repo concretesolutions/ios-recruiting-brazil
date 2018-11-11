@@ -19,6 +19,7 @@ class CustomNavigation: UINavigationController {
         UINavigationBar.appearance().tintColor = UIColor.gray
         UINavigationBar.appearance().barStyle = .default
         viewController.navigationItem.title = title
+        viewController.tabBarItem.title = title
         self.navigationBar.prefersLargeTitles = false
         
         // Search Bar
