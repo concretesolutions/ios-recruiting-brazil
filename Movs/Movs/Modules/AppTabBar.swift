@@ -25,13 +25,15 @@ class AppTabBar: UITabBarController {
     
     func moviesTab() -> UIViewController {
         let router = MoviesRouter.init()
-        return router.presenter.view
+        let navigation = CustomNavigation.init(viewController: router.presenter.view, title: "Movies")
+        return navigation
     }
     
     func favoritesTab() -> UIViewController {
         let listenStoryboard = UIStoryboard(name:"FavoritesVC",bundle: Bundle.main)
         let view = listenStoryboard.instantiateViewController(withIdentifier: "Favorites")
-        return view
+        let navigation = CustomNavigation.init(viewController: view, title: "Favorites")
+        return navigation
     }
     
 }

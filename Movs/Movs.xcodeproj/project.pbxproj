@@ -10,6 +10,8 @@
 		52BC96BB2198569000BAA825 /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BA2198569000BAA825 /* ServerURL.swift */; };
 		52BC96BD2198569900BAA825 /* ServerKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BC2198569900BAA825 /* ServerKeys.swift */; };
 		52BC96BF219856A100BAA825 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BE219856A100BAA825 /* ServerManager.swift */; };
+		52BC96C22198646500BAA825 /* CustomNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96C12198646500BAA825 /* CustomNavigation.swift */; };
+		52BC96C5219867A800BAA825 /* Pallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96C4219867A800BAA825 /* Pallete.swift */; };
 		52D7352A219787D600142C7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D73529219787D600142C7A /* AppDelegate.swift */; };
 		52D7352C219787D600142C7A /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7352B219787D600142C7A /* MoviesView.swift */; };
 		52D7352F219787D600142C7A /* MoviesVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D7352D219787D600142C7A /* MoviesVC.storyboard */; };
@@ -53,6 +55,8 @@
 		52BC96BA2198569000BAA825 /* ServerURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
 		52BC96BC2198569900BAA825 /* ServerKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerKeys.swift; sourceTree = "<group>"; };
 		52BC96BE219856A100BAA825 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		52BC96C12198646500BAA825 /* CustomNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigation.swift; sourceTree = "<group>"; };
+		52BC96C4219867A800BAA825 /* Pallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pallete.swift; sourceTree = "<group>"; };
 		52D73526219787D600142C7A /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D73529219787D600142C7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D7352B219787D600142C7A /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
@@ -122,6 +126,22 @@
 				52BC96BE219856A100BAA825 /* ServerManager.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		52BC96C02198645500BAA825 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				52BC96C12198646500BAA825 /* CustomNavigation.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		52BC96C32198678800BAA825 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				52BC96C4219867A800BAA825 /* Pallete.swift */,
+			);
+			path = Design;
 			sourceTree = "<group>";
 		};
 		52D7351D219787D600142C7A = {
@@ -212,6 +232,8 @@
 		52D7355D21978B4B00142C7A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				52BC96C32198678800BAA825 /* Design */,
+				52BC96C02198645500BAA825 /* UI */,
 				52BC96B82198567B00BAA825 /* Manager */,
 				52D7356C2197901D00142C7A /* Entities */,
 			);
@@ -375,8 +397,10 @@
 				52D7356921978FD700142C7A /* MoviesPresenter.swift in Sources */,
 				52D7356421978E4B00142C7A /* FavoritesView.swift in Sources */,
 				52D735722197906500142C7A /* FavoritesPresenter.swift in Sources */,
+				52BC96C5219867A800BAA825 /* Pallete.swift in Sources */,
 				52D7356E2197903700142C7A /* Movie.swift in Sources */,
 				52D7352C219787D600142C7A /* MoviesView.swift in Sources */,
+				52BC96C22198646500BAA825 /* CustomNavigation.swift in Sources */,
 				52D73576219790CA00142C7A /* MoviesProtocol.swift in Sources */,
 				52D735742197907100142C7A /* FavoritesInterector.swift in Sources */,
 				52D73532219787D600142C7A /* Movs.xcdatamodeld in Sources */,
