@@ -9,7 +9,9 @@
 import UIKit
 import CoreData
 
-class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, FilterProtocol {
+class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResultsUpdating , UITableViewDataSource, UITableViewDelegate, FilterProtocol {
+
+    
 
     
     
@@ -79,9 +81,15 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
 
         // Navigation Search
         search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self // as? UISearchResultsUpdating
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Search movies"
         search.searchBar.delegate = self
-        search.searchResultsUpdater = self as? UISearchResultsUpdating
         search.searchBar.tintColor = UIColor.black
+//        search = UISearchController(searchResultsController: nil)
+//        search.searchBar.delegate = self
+//        search.searchResultsUpdater = self as? UISearchResultsUpdating
+//        search.searchBar.tintColor = UIColor.black
         
         // search text field background color
         if let textfield = search.searchBar.value(forKey: "searchField") as? UITextField {
@@ -117,32 +125,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        //        self.search.setEditing(true, animated: true)
-        //        self.searchInProgress = true
-        //        self.searchArgument = (searchBar.text?.trim())!
-        //        //
-        //        navigationController?.navigationBar.isHidden = true
-        //        if #available(iOS 11.0, *) {
-        //            navigationController?.navigationBar.prefersLargeTitles = false
-        //        } else {
-        //            // Fallback on earlier versions
-        //        }
-        //        self.search.isActive = false
-        //        //
-        //
-        //        self.performSegue(withIdentifier: "showSearchScene", sender: self)
-        //
-        //    }
-        
-        //    @objc private func didSelectBarBackAction() {
-        //
-        //        // reinstantiate scene
-        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        //        let vc = storyboard.instantiateInitialViewController()
-        //        UIApplication.shared.keyWindow?.rootViewController = vc
-        //
-        //
     }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if !search.isActive {
+            self.searchArgument = String()
+        }
+    }
+    
     
     // MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

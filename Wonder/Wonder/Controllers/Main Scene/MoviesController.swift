@@ -74,8 +74,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
 
         // inactivate search on favorites controller to avoid black screen bug!!
         NotificationCenter.default.post(name: Notification.Name(rawValue: "willInactivateFavoritesSearch"), object:self)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
+        // reload Data
         collectionView.reloadData()
     }
 
@@ -203,7 +202,6 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
  
     func updateSearchResults(for searchController: UISearchController) {
         if !search.isActive {
-            print("Cancelled")
             self.isFiltering = false
             self.searchArgument = String()
             self.pageCounter = 1
