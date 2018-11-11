@@ -194,7 +194,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate, UITableViewDat
         if movies.count == 0 {
             view.alert(msg: noData, sender: self)
         }
-        
+        tableView.tableHeaderView = nil
         performSegue(withIdentifier: "showFilter", sender: self)
         
     }
