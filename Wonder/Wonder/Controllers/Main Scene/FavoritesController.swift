@@ -51,7 +51,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     private var persistence = PersistenceManager()
     
     
-    // View Life Cycle
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // observer manager
@@ -107,12 +107,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     private func loadAppData(_ filterSelection: FilterSelection) {
         // reset initial
         self.movies = [FavoriteMovies]()
-        
-        print("------- FilterSelction")
-        print("------- year: ", filterSelection.year)
-        print("------- genre: ", filterSelection.genre)
-        print("------- title: ", filterSelection.searchArgument)
-        
+    
         // get data
         self.movies = (self.coreDataService?.getAllFavorites(filterSelection: filterSelection))!
         
@@ -142,6 +137,11 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         if !search.isActive {
             self.searchArgument = String()
         }
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        filterSelection = FilterSelection()
+        tableView.tableHeaderView = nil
+        loadAppData(filterSelection)
     }
     
     
@@ -200,6 +200,8 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
             view.alert(msg: message(filterSelection), sender: self)
         }
         tableView.tableHeaderView = nil
+        self.tableView.contentOffset = CGPoint.zero
+        filterSelection = FilterSelection()
         performSegue(withIdentifier: "showFilter", sender: self)
         
     }
@@ -245,10 +247,8 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         self.filterSelection = filterSelection
         self.filterSelectionView.backgroundColor = UIColor.applicationBarTintColor
         self.tableView.tableHeaderView = self.filterSelectionView
-        
         movies = [FavoriteMovies]()
         self.loadAppData(filterSelection)
-
     }
 
     // MARK: - Observers
@@ -274,7 +274,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     private func message(_ filterSelection: FilterSelection) -> String {
         var message = "You have no favorite movie"
         if !filterSelection.searchArgument.isEmpty {
-            message = message + "with: \(filterSelection.searchArgument)"
+            message = message + " with title: \(filterSelection.searchArgument)"
         }
         if !filterSelection.genre.isEmpty {
             message = message + ", genre: \(filterSelection.genre)"
