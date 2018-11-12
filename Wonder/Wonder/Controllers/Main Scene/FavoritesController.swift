@@ -11,11 +11,6 @@ import CoreData
 
 class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResultsUpdating , UITableViewDataSource, UITableViewDelegate, FilterProtocol {
 
-    
-
-    
-    
-    
     // MARK: - Public Properties
     public var moc : NSManagedObjectContext? {
         didSet {
@@ -47,8 +42,8 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     private var searchInProgress = false
     private var searchArgument = String()
     private var noData = "You have no favorite movie."
+    private var filterSelection = FilterSelection()
     
-    private var businessFavoriteMovies = BusinessFavoriteMovies()
     private var selectedFavoriteMovie = FavoriteMovies()
     private var selectedImage = UIImage()
     
@@ -124,7 +119,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+        print("*** WILL query Core Data - filterSelection: \(filterSelection)")
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -194,7 +189,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     }
     
     @IBAction func removeFilters(_ sender: Any) {
-        businessFavoriteMovies = BusinessFavoriteMovies()
+        filterSelection = FilterSelection()
         tableView.tableHeaderView = nil
         
     }
@@ -230,6 +225,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     // MARK: - Filter Protocol
     func didSelectFilter(filterSelection: FilterSelection) {
         print("*** YES, He have filters - filterSelection: \(filterSelection)")
+        self.filterSelection = filterSelection
         self.filterSelectionView.backgroundColor = UIColor.applicationBarTintColor
         self.tableView.tableHeaderView = self.filterSelectionView
         self.tableView.reloadData()
