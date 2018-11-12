@@ -15,8 +15,20 @@ class APIDataManager {
         private static let apiKey: String = "a843669bd8c7b0e6643bbd5be9dcacb3"
         private static let host: String = "https://api.themoviedb.org/3"
         
+        static var readPopular: String { return host + "/movie/popular?api_key=" + apiKey}
+        
     }
     
-    // MARK: -
+    // MARK: - Functions
+    
+    static func readPopular(callback: @escaping ([Movie])->()) {
+        
+    }
+    
+    static func readGenres(callback: @escaping ([Genre])->()) {
+        
+    }
+    
+    
     
 }
