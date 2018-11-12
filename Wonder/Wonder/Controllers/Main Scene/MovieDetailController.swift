@@ -104,28 +104,6 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         return true
     }
     
-    // observer actions
-    @objc private func didChangeFavorite(_ sender: NSNotification) {
-        
-        if isFavorite {
-            // remove favorite
-            self.deleteFavorite()
-        }else{
-            // add favorite
-            self.addFavoriteMovie()
-        }
-        isFavorite = !isFavorite
-        // reload table view to refresh fav icon
-        tableView.reloadData()
-        
-    }
-    @objc private func didSelectShare(_ sender: NSNotification) {
-        let webService = WebService()
-        displayShareSheet(shareContent: movie.title + " - " + webService.getFullUrl(movie.poster_path))
-    }
-    @objc private func didSelectSegue(_ sender: NSNotification) {
-        performSegue(withIdentifier: "showMoviePoster", sender: self)
-    }
  
     // MARK: - Share Sheet Helper
     private func displayShareSheet(shareContent:String) {
@@ -229,5 +207,28 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didSelectShare"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didSelectSegue"), object: nil)
     }
+    // observer actions
+    @objc private func didChangeFavorite(_ sender: NSNotification) {
+        
+        if isFavorite {
+            // remove favorite
+            self.deleteFavorite()
+        }else{
+            // add favorite
+            self.addFavoriteMovie()
+        }
+        isFavorite = !isFavorite
+        // reload table view to refresh fav icon
+        tableView.reloadData()
+        
+    }
+    @objc private func didSelectShare(_ sender: NSNotification) {
+        let webService = WebService()
+        displayShareSheet(shareContent: movie.title + " - " + webService.getFullUrl(movie.poster_path))
+    }
+    @objc private func didSelectSegue(_ sender: NSNotification) {
+        performSegue(withIdentifier: "showMoviePoster", sender: self)
+    }
+
     
 }
