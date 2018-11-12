@@ -10,4 +10,13 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Outlets
+    @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    // MARK: - Actions
+    
+    @IBAction func favoriteButtonTapped(_ sender: Any) {
+    }
 }

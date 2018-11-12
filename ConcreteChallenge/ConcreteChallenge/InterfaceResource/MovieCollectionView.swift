@@ -19,6 +19,6 @@ class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        return MovieCollectionViewCell()
     }
 }
