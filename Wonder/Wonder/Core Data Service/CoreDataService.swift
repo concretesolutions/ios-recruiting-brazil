@@ -47,7 +47,6 @@ class CoreDataService {
         let request : NSFetchRequest<FavoriteMovies> = FavoriteMovies.fetchRequest()
         request.sortDescriptors = sortDescriptors
         
-        var predicates = [NSPredicate]()
         let predicatesResults = self.getPredicates(filterSelection: filterSelection)
         if predicatesResults.count > 0 {
             let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: predicatesResults)
@@ -60,7 +59,6 @@ class CoreDataService {
         } catch let error as NSError {
             print("Error getting all favorites: \(error.localizedDescription)")
         }
-        
         return nil
     }
 
