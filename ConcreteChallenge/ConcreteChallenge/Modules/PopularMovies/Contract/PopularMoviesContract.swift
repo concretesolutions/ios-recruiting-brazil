@@ -17,6 +17,8 @@ protocol PopularMoviesWireframe: class {
 
 protocol PopularMoviesView {
     var presenter: PopularMoviesPresentation! { get set }
+    
+    func show(movies: [Movie])
 }
 
 protocol PopularMoviesPresentation: class {
@@ -25,14 +27,17 @@ protocol PopularMoviesPresentation: class {
     var router: PopularMoviesWireframe! { get set }
     
     func viewDidLoad()
+    func didRequestMovies()
 }
 
 protocol PopularMoviesInteractorInput: class {
     var output: PopularMoviesInteractorOutput! { get set }
+    
+    func fetchMovies()
 }
 
 protocol PopularMoviesInteractorOutput: class {
-    
+    func didFetch(movies: [Movie])
 }
 
 
