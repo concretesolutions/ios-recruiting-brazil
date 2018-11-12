@@ -19,7 +19,7 @@ class PopularMoviesRouter: PopularMoviesWireframe {
         let router = PopularMoviesRouter()
         
         let storyboard = UIStoryboard(name: "PopularMovies", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PopularMovies")
+        var viewController = storyboard.instantiateViewController(withIdentifier: "PopularMovies")
         
         if let popularMoviesViewController = viewController as? PopularMoviesViewController {
             popularMoviesViewController.presenter = presenter
@@ -34,6 +34,7 @@ class PopularMoviesRouter: PopularMoviesWireframe {
         
         self.presenter = presenter
         
+        viewController = UINavigationController(rootViewController: viewController)
         return viewController
     }
 }

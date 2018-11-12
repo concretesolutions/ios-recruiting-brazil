@@ -19,7 +19,7 @@ class FavoriteMoviesRouter: FavoriteMoviesWireframe {
         let router = FavoriteMoviesRouter()
         
         let storyboard = UIStoryboard(name: "FavoriteMovies", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "FavoriteMovies")
+        var viewController = storyboard.instantiateViewController(withIdentifier: "FavoriteMovies")
         
         if let FavoriteMoviesViewController = viewController as? FavoriteMoviesViewController {
             FavoriteMoviesViewController.presenter = presenter
@@ -34,6 +34,7 @@ class FavoriteMoviesRouter: FavoriteMoviesWireframe {
         
         self.presenter = presenter
         
+        viewController = UINavigationController.init(rootViewController: viewController)
         return viewController
     }
 }
