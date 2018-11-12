@@ -23,29 +23,63 @@ class APIDataManager {
     // MARK: - Functions
     
     static func readPopular(callback: @escaping ([Movie])->()) {
-        let url = URL(string: RequestURL.readPopular)!
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            if let data = data {
-                let decoder = JSONDecoder()
-                do {
-                    let movies = try decoder.decode([Movie].self, from: data)
-                    callback(movies)
-                } catch {
-                    print("Impossible to decode to Movie from data.")
+        if let url = URL(string: RequestURL.readPopular) {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    
+                    do {
+                        let result = try decoder.decode(PopularResult.self, from: data)
+                        callback(result.results)
+                    } catch {
+                        print("Impossible to decode to [Movie] from data.")
+                    }
+                    
                 }
             }
+            task.resume()
+        } else {
+            
         }
     }
     
     static func readGenres(callback: @escaping ([Genre])->()) {
-        
+        if let url = URL(string: RequestURL.readGenres) {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    
+                    do {
+                        let result = try decoder.decode(GenresResult.self, from: data)
+                        callback(result.genres)
+                    } catch {
+                        print("Impossible to decode to [Movie] from data.")
+                    }
+                    
+                }
+            }
+            task.resume()
+        } else {
+            
+        }
     }
     
-    
-    
+}
+
+// MARK: - Helper classes
+
+fileprivate class PopularResult: Decodable {
+    var results: [Movie]
+}
+
+fileprivate class GenresResult: Decodable {
+    var genres: [Genre]
 }
