@@ -8,14 +8,17 @@
 
 import UIKit
 
-class MovieCollectionView: UICollectionView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    // MARK: - Properties
+    var movies: [Movie] = []
+    
+    // MARK: - UICollectionViewDelegate Functions
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.movies.count
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+    }
 }
