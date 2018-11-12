@@ -41,7 +41,6 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     private var search = UISearchController(searchResultsController: nil)
     private var searchInProgress = false
     private var searchArgument = String()
-    private var noData = "You have no favorite movie."
     private var filterSelection = FilterSelection()
     
     private var selectedFavoriteMovie = FavoriteMovies()
@@ -118,7 +117,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         self.movies = (self.coreDataService?.getAllFavorites(filterSelection: filterSelection))!
         
         if self.movies.count == 0 {
-            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
+            view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: message(filterSelection))
         }else{
             view.hideErrorView(view: self.errorHandlerView)
             tableView.reloadData()
@@ -198,7 +197,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     // MARK: - UI Actions
     @IBAction func filterAction(_ sender: Any) {
         if movies.count == 0 {
-            view.alert(msg: noData, sender: self)
+            view.alert(msg: message(filterSelection), sender: self)
         }
         tableView.tableHeaderView = nil
         performSegue(withIdentifier: "showFilter", sender: self)
@@ -270,4 +269,21 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     @objc private func willInactivateFavoritesSearch(_ sender: NSNotification) {
         self.search.isActive = false
     }
+    
+    // MARK: - Message Handler
+    private func message(_ filterSelection: FilterSelection) -> String {
+        var message = "You have no favorite movie"
+        if !filterSelection.searchArgument.isEmpty {
+            message = message + "with: \(filterSelection.searchArgument)"
+        }
+        if !filterSelection.genre.isEmpty {
+            message = message + ", genre: \(filterSelection.genre)"
+        }
+        if !filterSelection.year.isEmpty {
+            message = message + ", year: \(filterSelection.year)"
+        }
+
+        return message
+    }
+    
 }
