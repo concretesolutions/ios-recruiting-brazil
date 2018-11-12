@@ -80,10 +80,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         search.searchBar.placeholder = "Search favorites"
         search.searchBar.delegate = self
         search.searchBar.tintColor = UIColor.black
-//        search = UISearchController(searchResultsController: nil)
-//        search.searchBar.delegate = self
-//        search.searchResultsUpdater = self as? UISearchResultsUpdating
-//        search.searchBar.tintColor = UIColor.black
+
         
         // search text field background color
         if let textfield = search.searchBar.value(forKey: "searchField") as? UITextField {
@@ -123,7 +120,6 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("*** WILL query Core Data - filterSelection: \(filterSelection)")
         movies = [FavoriteMovies]()
         self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
         if self.searchArgument.isEmpty {
@@ -131,6 +127,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         }
         filterSelection.searchArgument = self.searchArgument
         loadAppData(filterSelection)
+        self.tableView.contentOffset = CGPoint.zero
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -151,6 +148,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as! MovieTableViewCell
+        if self.movies.count > 0 {
         let fav = self.movies[indexPath.row]
     
         if fav.year!.isEmpty {
@@ -161,7 +159,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     
         cell.movieSubtitle.text = fav.overview
         cell.movieImage.image = getImageFromDisk(id: fav.id ?? String())
-        
+        }
         
         return cell
     }
