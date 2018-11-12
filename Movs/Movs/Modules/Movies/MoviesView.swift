@@ -21,7 +21,7 @@ class MoviesView: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.outletMoviesCollection.delegate = self
-        self.outletMoviesCollection.dataSource = self //self.presenter.interector
+        self.outletMoviesCollection.dataSource = self.presenter //self.presenter.interactor
         
         // VIPER
         self.presenter.didLoad()
@@ -30,6 +30,5 @@ class MoviesView: UIViewController {
     func showPopularMovies() {
         self.outletMoviesCollection.reloadData()
     }
-
+    
 }
-

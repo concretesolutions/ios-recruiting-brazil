@@ -15,6 +15,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var outletActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var outletMovieImage: UIImageView!
     @IBOutlet weak var outletMovieTitle: UILabel!
+    @IBOutlet weak var outletFavorite: UIButton!
     
     func awakeFromNib(title: String) {
         super.awakeFromNib()
@@ -25,7 +26,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         //self.outletMovieImage.image = nil
         self.outletActivityIndicator.startAnimating()
-        //self.setup(content: data)
+        if let image = imageURL {
+            self.setup(imageURL: image)
+        }
     }
     
     func setup(imageURL: String) {
@@ -36,6 +39,21 @@ class MovieCollectionViewCell: UICollectionViewCell {
                 self.outletActivityIndicator.stopAnimating()
             }
         }
+    }
+    
+    @IBAction func actionFavorite(_ sender: UIButton) {
+        
+        let imageFull = UIImage.init(named: "favorite_full_icon")
+        let imageGray = UIImage.init(named: "favorite_gray_icon")
+    
+        if self.outletFavorite.currentImage == imageFull {
+            // FIXME: - Chamar presenter para REMOVER do ADD
+            self.outletFavorite.setImage(imageGray, for: .normal)
+        }else if self.outletFavorite.currentImage == imageGray {
+            // FIXME: - Chamar presenter para ADD
+            self.outletFavorite.setImage(imageFull, for: .normal)
+        }
+        
     }
     
 }

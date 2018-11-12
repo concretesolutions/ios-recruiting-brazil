@@ -6,34 +6,63 @@
 //  Copyright © 2018 João Gabriel Borelli Padilha. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class MoviesPresenter {
+class MoviesPresenter: NSObject {
     
     // MARK: - VIPER
     var view: MoviesView
-    var interector: MoviesInterector
+    var interactor: MoviesInteractor
     var router: MoviesRouter
     
-    init(router: MoviesRouter, interactor: MoviesInterector, view: MoviesView) {
+    init(router: MoviesRouter, interactor: MoviesInteractor, view: MoviesView) {
         self.router = router
-        self.interector = interactor
+        self.interactor = interactor
         self.view = view
         
-        self.interector.presenter = self
+        super.init()
+        
+        self.interactor.presenter = self
         self.view.presenter = self
     }
     
+    // FROM VIEW
+    
     func didLoad() {
-        self.interector.fetchMovies()
+        self.interactor.fetchMovies()
     }
     
     func totalMovies() -> Int {
-        return self.interector.movies.count
+        return self.interactor.getTotalMovies()
     }
+    
+    // FROM INERECTOR
     
     func loadedMovies() {
         self.view.showPopularMovies()
+    }
+    
+}
+
+// MARK: - UICollectionViewDataSource
+extension MoviesPresenter: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return interactor.getTotalMovies()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // Prepare cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
+        // Get movie
+        let movie = self.interactor.getMovie(at: indexPath.item)
+        cell.awakeFromNib(title: movie.title)
+        // Load image
+        if let image = movie.poster_path {
+            let imageURL = "https://image.tmdb.org/t/p/w500\(image)" // w500 original
+            cell.setup(imageURL: imageURL)
+        }
+        return cell
     }
     
 }

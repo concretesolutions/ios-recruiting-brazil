@@ -8,13 +8,15 @@
 
 import UIKit
 
-class MoviesInterector {
+class MoviesInteractor {
     
     // MARK: - VIPER
     var presenter: MoviesPresenter?
     
     // MARK: - Parameters
-    var movies: [Movie] = []
+    private var movies: [Movie] = []
+    
+    // FROM PRESENTER
     
     func fetchMovies() {
         ServerManager.call { (popularMovies) in
@@ -22,6 +24,14 @@ class MoviesInterector {
             self.movies = popularMovies
             self.presenter?.loadedMovies()
         }
+    }
+    
+    func getTotalMovies() -> Int {
+        return movies.count
+    }
+    
+    func getMovie(at index: Int) -> Movie {
+        return movies[index]
     }
     
 }

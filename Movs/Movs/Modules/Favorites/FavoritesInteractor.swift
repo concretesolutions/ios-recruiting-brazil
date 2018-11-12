@@ -1,5 +1,5 @@
 //
-//  FavoritesInterector.swift
+//  FavoritesInteractor.swift
 //  Movs
 //
 //  Created by João Gabriel Borelli Padilha on 10/11/18.

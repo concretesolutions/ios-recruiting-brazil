@@ -23,7 +23,7 @@ class MoviesRouter: NSObject {
             return
         }
         // INTERACTOR
-        let interactor = MoviesInterector()
+        let interactor = MoviesInteractor()
         // PRESENTER
         self.presenter = MoviesPresenter(router: self, interactor: interactor, view: view)
     }
