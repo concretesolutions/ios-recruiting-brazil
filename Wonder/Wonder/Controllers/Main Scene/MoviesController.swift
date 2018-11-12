@@ -309,8 +309,14 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if movies.results.count == 0 {
-            return
+        if self.isFiltering {
+            if filteredMovies.results.count == 0 {
+                return
+            }
+        }else{
+            if movies.results.count == 0 {
+                return
+            }
         }
         performSegue(withIdentifier: "showMovieDetail", sender: self)
     }
@@ -324,9 +330,13 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
             let cell = collectionView.cellForItem(at: indexPath!) as? MoviesCollectionCell
             
             let controller = segue.destination as! MovieDetailController
-            controller.movie = movies.results[(indexPath?.row)!]
+            if self.isFiltering {
+                controller.movie = filteredMovies.results[(indexPath?.row)!]
+            }else{
+                controller.movie = movies.results[(indexPath?.row)!]
+            }
+//            controller.movie = movies.results[(indexPath?.row)!]
             controller.hidesBottomBarWhenPushed = true
-            controller.movie = movies.results[(indexPath?.row)!]
             controller.movieImage = cell?.movieImageView.image ?? UIImage(named: "noContentIcon")!
             controller.moc = self.moc
             

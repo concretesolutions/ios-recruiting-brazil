@@ -112,7 +112,10 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: message(filterSelection))
         }else{
             view.hideErrorView(view: self.errorHandlerView)
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.contentOffset = CGPoint.zero
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -127,7 +130,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         }
         filterSelection.searchArgument = self.searchArgument
         loadAppData(filterSelection)
-        self.tableView.contentOffset = CGPoint.zero
+        // reload only the tableView
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.contentOffset = CGPoint.zero
+            self.tableView.endUpdates()
+            self.tableView.reloadData()
+        }
+        
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -194,12 +204,15 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     
     // MARK: - UI Actions
     @IBAction func filterAction(_ sender: Any) {
-        if movies.count == 0 {
+        if movies.count == 0 && filterSelection.genre.isEmpty && filterSelection.year.isEmpty && filterSelection.searchArgument.isEmpty {
             view.alert(msg: message(filterSelection), sender: self)
         }
         tableView.tableHeaderView = nil
-        self.tableView.contentOffset = CGPoint.zero
         filterSelection = FilterSelection()
+        DispatchQueue.main.async {
+            self.tableView.contentOffset = CGPoint.zero
+            self.tableView.reloadData()
+        }
         performSegue(withIdentifier: "showFilter", sender: self)
         
     }
