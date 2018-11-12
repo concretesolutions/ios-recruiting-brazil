@@ -13,29 +13,35 @@ class Movie: Decodable {
     // MARK: - Properties
     
     var id: Int
+    var title: String
     var year: Int
     var genres: [Genre]
     var overview: String
+    var isFavorite: Bool
     
     enum MovieKeys: String, CodingKey {
         case Id = "id"
+        case Title = "title"
         case ReleaseDate = "release_date"
         case GenreIds = "genre_ids"
         case Overview = "overview"
     }
     
     // MARK: - Initializers
-    init(id: Int, year: Int, genres: [Genre], overview: String) {
+    init(id: Int, title: String, year: Int, genres: [Genre], overview: String, isFavorite: Bool = false) {
         self.id = id
+        self.title = title
         self.year = year
         self.genres = genres
         self.overview = overview
+        self.isFavorite = isFavorite
     }
     
     required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MovieKeys.self)
         
         let id: Int = try container.decode(Int.self, forKey: .Id)
+        let title: String = try container.decode(String.self, forKey: .Title)
         let releaseDate: String = try container.decode(String.self, forKey: .ReleaseDate)
         let genreIds: [Int] = try container.decode([Int].self, forKey: .GenreIds)
         let overview: String = try container.decode(String.self, forKey: .Overview)
@@ -46,7 +52,7 @@ class Movie: Decodable {
             return Genre(id: id, name: "Genre \(id)")
         }
         
-        self.init(id: id, year: year, genres: genres, overview: overview)
+        self.init(id: id, title: title, year: year, genres: genres, overview: overview)
     }
     
     
