@@ -21,7 +21,7 @@ class CoreDataService {
         self.moc = moc
     }
     
-    // MARK: - Public Functions
+    // MARK: - Business Funcions
     public func addFavorite(businessFavoriteMovies: BusinessFavoriteMovies, completion: FavoriteMoviesHandler) {
         
         let favoriteMovies = FavoriteMovies(context: moc)
@@ -48,7 +48,7 @@ class CoreDataService {
         request.sortDescriptors = sortDescriptors
         
 //        ////////// -------------------------
-//        
+//
 //        var predicates = [NSPredicate]()
 //
 //        let year = "2015"
@@ -64,9 +64,9 @@ class CoreDataService {
 //        predicates.append(genrePredicate)
 //
 //        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: predicates)
-//        
+//
 //        request.predicate = andPredicate
-//        
+//
 //        ////////// -------------------------
         
         do {
@@ -112,17 +112,7 @@ class CoreDataService {
         save("delete favoriteMovie")
     }
 
-    
-    // MARK: - private Functions
-    private func save(_ msg: String) {
-        do {
-            try moc.save()
-        }
-        catch let error as NSError {
-            print("An error occurred executing step: \(msg): \(error.localizedDescription)")
-        }
-    }
-    
+
 
     public func favoriteExists(id: String) -> Bool {
         
@@ -163,5 +153,18 @@ class CoreDataService {
         return favoriteMovies
         
     }
+    
+    
+    // MARK: - Core Data Helper
+    private func save(_ msg: String) {
+        do {
+            try moc.save()
+        }
+        catch let error as NSError {
+            print("An error occurred executing step: \(msg): \(error.localizedDescription)")
+        }
+    }
+    
+    
     
 }

@@ -13,6 +13,8 @@ class FilterSelection {
     var genre = String()
     var yearIndexPath = IndexPath()
     var genreIndexPath = IndexPath()
+    var searchArgument = String()
+    
     
     init() {
         self.year = String()
