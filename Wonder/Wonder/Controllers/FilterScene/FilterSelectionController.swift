@@ -66,7 +66,7 @@ class FilterSelectionController: UITableViewController {
         }
     }
     private func loadGenres() {
-        genres = AppSettings.standard.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites())!)
+        genres = AppSettings.standard.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites(filterSelection: FilterSelection()))!)
         print(genres)
     }
     

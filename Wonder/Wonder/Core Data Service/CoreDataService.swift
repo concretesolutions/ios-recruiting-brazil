@@ -38,7 +38,7 @@ class CoreDataService {
         
     }
     
-    public func getAllFavorites() -> [FavoriteMovies]? {
+    public func getAllFavorites(filterSelection: FilterSelection) -> [FavoriteMovies]? {
         
         let sortByDate = NSSortDescriptor(key: "favoritedAt", ascending: false)
         let sortDescriptors = [sortByDate]
@@ -47,28 +47,13 @@ class CoreDataService {
         let request : NSFetchRequest<FavoriteMovies> = FavoriteMovies.fetchRequest()
         request.sortDescriptors = sortDescriptors
         
-//        ////////// -------------------------
-//
-//        var predicates = [NSPredicate]()
-//
-//        let year = "2015"
-//        let yearPredicate = NSPredicate(format: "year = %@", year)
-//        predicates.append(yearPredicate)
-//
-//        let title = "Ant-Man"
-//        let titlePredicate = NSPredicate(format: "title = %@", title)
-//        predicates.append(titlePredicate)
-//
-//        let genre = "Action"
-//        let genrePredicate = NSPredicate(format: "genre CONTAINS[cd] %@", genre)
-//        predicates.append(genrePredicate)
-//
-//        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: predicates)
-//
-//        request.predicate = andPredicate
-//
-//        ////////// -------------------------
-        
+        var predicates = [NSPredicate]()
+        let predicatesResults = self.getPredicates(filterSelection: filterSelection)
+        if predicatesResults.count > 0 {
+            let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: predicatesResults)
+            request.predicate = andPredicate
+        }
+
         do {
             favoriteMoviesList = try moc.fetch(request)
             return favoriteMoviesList
@@ -165,6 +150,26 @@ class CoreDataService {
         }
     }
     
+    // MARK: - Predicate Helper
+    private func getPredicates(filterSelection: FilterSelection) -> [NSPredicate] {
     
+        var predicates = [NSPredicate]()
+        
+        if !filterSelection.year.isEmpty {
+            let yearPredicate = NSPredicate(format: "year = %@", filterSelection.year)
+            predicates.append(yearPredicate)
+        }
+        if !filterSelection.genre.isEmpty {
+            let genrePredicate = NSPredicate(format: "genre CONTAINS[cd] %@", filterSelection.genre)
+            predicates.append(genrePredicate)
+        }
+        if !filterSelection.searchArgument.isEmpty {
+            let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@", filterSelection.searchArgument)
+            predicates.append(titlePredicate)
+        }
+    
+        return predicates
+    
+    }
     
 }

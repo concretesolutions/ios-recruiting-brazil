@@ -67,7 +67,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         NotificationCenter.default.post(name: Notification.Name(rawValue: "willInactivateMoviesSearch"), object:self)
         
         // AppData
-        loadAppData()
+        loadAppData(filterSelection)
     }
  
     // MARK: - UI Config
@@ -105,8 +105,18 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         
     }
     
-    private func loadAppData() {
-        self.movies = (self.coreDataService?.getAllFavorites())!
+    private func loadAppData(_ filterSelection: FilterSelection) {
+        // reset initial
+        self.movies = [FavoriteMovies]()
+        
+        print("------- FilterSelction")
+        print("------- year: ", filterSelection.year)
+        print("------- genre: ", filterSelection.genre)
+        print("------- title: ", filterSelection.searchArgument)
+        
+        // get data
+        self.movies = (self.coreDataService?.getAllFavorites(filterSelection: filterSelection))!
+        
         if self.movies.count == 0 {
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: noData)
         }else{
@@ -120,6 +130,13 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("*** WILL query Core Data - filterSelection: \(filterSelection)")
+        movies = [FavoriteMovies]()
+        self.searchArgument = searchBar.text!.trimmingCharacters(in: .whitespaces)
+        if self.searchArgument.isEmpty {
+            return
+        }
+        filterSelection.searchArgument = self.searchArgument
+        loadAppData(filterSelection)
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -169,7 +186,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             self.tableView.reloadData()
         }
-        loadAppData()
+        loadAppData(filterSelection)
     }
 
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
@@ -191,6 +208,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     @IBAction func removeFilters(_ sender: Any) {
         filterSelection = FilterSelection()
         tableView.tableHeaderView = nil
+        loadAppData(filterSelection)
         
     }
     
@@ -228,7 +246,9 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         self.filterSelection = filterSelection
         self.filterSelectionView.backgroundColor = UIColor.applicationBarTintColor
         self.tableView.tableHeaderView = self.filterSelectionView
-        self.tableView.reloadData()
+        
+        movies = [FavoriteMovies]()
+        self.loadAppData(filterSelection)
 
     }
 
