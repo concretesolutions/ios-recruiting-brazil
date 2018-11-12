@@ -33,7 +33,7 @@ class FilterSelectionController: UITableViewController {
     private var years = [String]()
     private var genres = [String]()
     private var coreDataService : CoreDataService?
-    private var appSettings = AppSettings()
+
     
     
     // MARK: - View Life Cycle
@@ -66,7 +66,7 @@ class FilterSelectionController: UITableViewController {
         }
     }
     private func loadGenres() {
-        genres = appSettings.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites())!)
+        genres = AppSettings.standard.getDistinctGenres(favoriteMovies: (self.coreDataService?.getAllFavorites())!)
         print(genres)
     }
     

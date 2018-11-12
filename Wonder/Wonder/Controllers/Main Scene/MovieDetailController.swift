@@ -104,30 +104,6 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         return true
     }
     
-    // MARK: - Observers
-    private func observerManager() {
-        
-        removelAllObservers()
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didChangeFavorite(_:)),
-                                               name: NSNotification.Name(rawValue: "didChangeFavorite"),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didSelectShare(_:)),
-                                               name: NSNotification.Name(rawValue: "didSelectShare"),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didSelectSegue(_:)),
-                                               name: NSNotification.Name(rawValue: "didSelectSegue"),
-                                               object: nil)
-    }
-    private func removelAllObservers() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didChangeFavorite"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didSelectShare"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didSelectSegue"), object: nil)
-    }
-    
     // observer actions
     @objc private func didChangeFavorite(_ sender: NSNotification) {
         
@@ -230,5 +206,28 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    // MARK: - Observers
+    private func observerManager() {
+        
+        removelAllObservers()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didChangeFavorite(_:)),
+                                               name: NSNotification.Name(rawValue: "didChangeFavorite"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didSelectShare(_:)),
+                                               name: NSNotification.Name(rawValue: "didSelectShare"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didSelectSegue(_:)),
+                                               name: NSNotification.Name(rawValue: "didSelectSegue"),
+                                               object: nil)
+    }
+    private func removelAllObservers() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didChangeFavorite"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didSelectShare"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "didSelectSegue"), object: nil)
+    }
     
 }

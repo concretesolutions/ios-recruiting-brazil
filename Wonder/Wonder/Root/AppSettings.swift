@@ -45,6 +45,7 @@ class AppSettings {
             // persist categories
             for genre in genres {
                 self.setDefualtsCategory(id: genre.id, name: genre.name)
+                AppSettings.standard.genresList.genres.append(Genres(id: genre.id, name: genre.name))
             }
             
         }

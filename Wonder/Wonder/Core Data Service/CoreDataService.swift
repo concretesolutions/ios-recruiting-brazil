@@ -47,6 +47,18 @@ class CoreDataService {
         let request : NSFetchRequest<FavoriteMovies> = FavoriteMovies.fetchRequest()
         request.sortDescriptors = sortDescriptors
         
+//        //////////
+//        let year = "2015"
+//        let yearPredicate = NSPredicate(format: "year = %@", year)
+//        
+//        let title = "Ant-Man"
+//        let titlePredicate = NSPredicate(format: "title = %@", title)
+//        
+//        
+//        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [yearPredicate, titlePredicate])
+//        request.predicate = andPredicate
+//        ////////
+        
         do {
             favoriteMoviesList = try moc.fetch(request)
             return favoriteMoviesList

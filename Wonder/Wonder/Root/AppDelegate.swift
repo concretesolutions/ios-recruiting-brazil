@@ -17,7 +17,6 @@ var reachability = Reachability(hostname: "www.apple.com")
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private var appSettings = AppSettings()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -42,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        moviesController.moc = persistentContainer.viewContext
 
         // load genres list
-        self.appSettings.loadGenresList()
+        AppSettings.standard.loadGenresList()
         
         // global tint color
         window?.tintColor = UIColor.black
