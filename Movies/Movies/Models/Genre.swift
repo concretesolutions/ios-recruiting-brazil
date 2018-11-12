@@ -8,6 +8,18 @@
 
 import Foundation
 
-class Genre {
+class Genre: Decodable {
+    
+    // MARK: - Properties
+    
+    var id: Int
+    var name: String
+    
+    // MARK: - Initializers
+    
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+    }
     
 }
