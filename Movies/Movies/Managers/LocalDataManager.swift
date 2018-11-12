@@ -17,6 +17,11 @@ class LocalDatamanager {
         return []
     }
     
+    static func readGenresByIds(_ ids: [Int]) -> [Genre] {
+        
+        return []
+    }
+    
     static func readMovies() -> [Movie] {
         
         return []
