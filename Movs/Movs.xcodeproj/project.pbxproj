@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A40E88322199AB2D00EE4D5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40E88312199AB2D00EE4D5B /* AppDelegate.swift */; };
+		A40E88342199AB2D00EE4D5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40E88332199AB2D00EE4D5B /* ViewController.swift */; };
+		A40E88372199AB2D00EE4D5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A40E88352199AB2D00EE4D5B /* Main.storyboard */; };
+		A40E883A2199AB2D00EE4D5B /* Movs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A40E88382199AB2D00EE4D5B /* Movs.xcdatamodeld */; };
+		A40E883C2199AB2F00EE4D5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A40E883B2199AB2F00EE4D5B /* Assets.xcassets */; };
+		A40E883F2199AB2F00EE4D5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A40E883D2199AB2F00EE4D5B /* LaunchScreen.storyboard */; };
+		A40E884A2199AB2F00EE4D5B /* MovsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40E88492199AB2F00EE4D5B /* MovsTests.swift */; };
+		A40E88552199AB2F00EE4D5B /* MovsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40E88542199AB2F00EE4D5B /* MovsUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A40E88462199AB2F00EE4D5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A40E88262199AB2D00EE4D5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A40E882D2199AB2D00EE4D5B;
+			remoteInfo = Movs;
+		};
+		A40E88512199AB2F00EE4D5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A40E88262199AB2D00EE4D5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A40E882D2199AB2D00EE4D5B;
+			remoteInfo = Movs;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A40E882E2199AB2D00EE4D5B /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A40E88312199AB2D00EE4D5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A40E88332199AB2D00EE4D5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A40E88362199AB2D00EE4D5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A40E88392199AB2D00EE4D5B /* Movs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movs.xcdatamodel; sourceTree = "<group>"; };
+		A40E883B2199AB2F00EE4D5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A40E883E2199AB2F00EE4D5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A40E88402199AB2F00EE4D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A40E88452199AB2F00EE4D5B /* MovsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A40E88492199AB2F00EE4D5B /* MovsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTests.swift; sourceTree = "<group>"; };
+		A40E884B2199AB2F00EE4D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A40E88502199AB2F00EE4D5B /* MovsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A40E88542199AB2F00EE4D5B /* MovsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsUITests.swift; sourceTree = "<group>"; };
+		A40E88562199AB2F00EE4D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40E882B2199AB2D00EE4D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40E88422199AB2F00EE4D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40E884D2199AB2F00EE4D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A40E88252199AB2D00EE4D5B = {
+			isa = PBXGroup;
+			children = (
+				A40E88302199AB2D00EE4D5B /* Movs */,
+				A40E88482199AB2F00EE4D5B /* MovsTests */,
+				A40E88532199AB2F00EE4D5B /* MovsUITests */,
+				A40E882F2199AB2D00EE4D5B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A40E882F2199AB2D00EE4D5B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A40E882E2199AB2D00EE4D5B /* Movs.app */,
+				A40E88452199AB2F00EE4D5B /* MovsTests.xctest */,
+				A40E88502199AB2F00EE4D5B /* MovsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A40E88302199AB2D00EE4D5B /* Movs */ = {
+			isa = PBXGroup;
+			children = (
+				A40E88312199AB2D00EE4D5B /* AppDelegate.swift */,
+				A40E88332199AB2D00EE4D5B /* ViewController.swift */,
+				A40E88352199AB2D00EE4D5B /* Main.storyboard */,
+				A40E883B2199AB2F00EE4D5B /* Assets.xcassets */,
+				A40E883D2199AB2F00EE4D5B /* LaunchScreen.storyboard */,
+				A40E88402199AB2F00EE4D5B /* Info.plist */,
+				A40E88382199AB2D00EE4D5B /* Movs.xcdatamodeld */,
+			);
+			path = Movs;
+			sourceTree = "<group>";
+		};
+		A40E88482199AB2F00EE4D5B /* MovsTests */ = {
+			isa = PBXGroup;
+			children = (
+				A40E88492199AB2F00EE4D5B /* MovsTests.swift */,
+				A40E884B2199AB2F00EE4D5B /* Info.plist */,
+			);
+			path = MovsTests;
+			sourceTree = "<group>";
+		};
+		A40E88532199AB2F00EE4D5B /* MovsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A40E88542199AB2F00EE4D5B /* MovsUITests.swift */,
+				A40E88562199AB2F00EE4D5B /* Info.plist */,
+			);
+			path = MovsUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A40E882D2199AB2D00EE4D5B /* Movs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A40E88592199AB2F00EE4D5B /* Build configuration list for PBXNativeTarget "Movs" */;
+			buildPhases = (
+				A40E882A2199AB2D00EE4D5B /* Sources */,
+				A40E882B2199AB2D00EE4D5B /* Frameworks */,
+				A40E882C2199AB2D00EE4D5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Movs;
+			productName = Movs;
+			productReference = A40E882E2199AB2D00EE4D5B /* Movs.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A40E88442199AB2F00EE4D5B /* MovsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A40E885C2199AB2F00EE4D5B /* Build configuration list for PBXNativeTarget "MovsTests" */;
+			buildPhases = (
+				A40E88412199AB2F00EE4D5B /* Sources */,
+				A40E88422199AB2F00EE4D5B /* Frameworks */,
+				A40E88432199AB2F00EE4D5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A40E88472199AB2F00EE4D5B /* PBXTargetDependency */,
+			);
+			name = MovsTests;
+			productName = MovsTests;
+			productReference = A40E88452199AB2F00EE4D5B /* MovsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A40E884F2199AB2F00EE4D5B /* MovsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A40E885F2199AB2F00EE4D5B /* Build configuration list for PBXNativeTarget "MovsUITests" */;
+			buildPhases = (
+				A40E884C2199AB2F00EE4D5B /* Sources */,
+				A40E884D2199AB2F00EE4D5B /* Frameworks */,
+				A40E884E2199AB2F00EE4D5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A40E88522199AB2F00EE4D5B /* PBXTargetDependency */,
+			);
+			name = MovsUITests;
+			productName = MovsUITests;
+			productReference = A40E88502199AB2F00EE4D5B /* MovsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A40E88262199AB2D00EE4D5B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = SAS;
+				TargetAttributes = {
+					A40E882D2199AB2D00EE4D5B = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					A40E88442199AB2F00EE4D5B = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = A40E882D2199AB2D00EE4D5B;
+					};
+					A40E884F2199AB2F00EE4D5B = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = A40E882D2199AB2D00EE4D5B;
+					};
+				};
+			};
+			buildConfigurationList = A40E88292199AB2D00EE4D5B /* Build configuration list for PBXProject "Movs" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A40E88252199AB2D00EE4D5B;
+			productRefGroup = A40E882F2199AB2D00EE4D5B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A40E882D2199AB2D00EE4D5B /* Movs */,
+				A40E88442199AB2F00EE4D5B /* MovsTests */,
+				A40E884F2199AB2F00EE4D5B /* MovsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A40E882C2199AB2D00EE4D5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A40E883F2199AB2F00EE4D5B /* LaunchScreen.storyboard in Resources */,
+				A40E883C2199AB2F00EE4D5B /* Assets.xcassets in Resources */,
+				A40E88372199AB2D00EE4D5B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40E88432199AB2F00EE4D5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40E884E2199AB2F00EE4D5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A40E882A2199AB2D00EE4D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A40E88342199AB2D00EE4D5B /* ViewController.swift in Sources */,
+				A40E883A2199AB2D00EE4D5B /* Movs.xcdatamodeld in Sources */,
+				A40E88322199AB2D00EE4D5B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40E88412199AB2F00EE4D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A40E884A2199AB2F00EE4D5B /* MovsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40E884C2199AB2F00EE4D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A40E88552199AB2F00EE4D5B /* MovsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A40E88472199AB2F00EE4D5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A40E882D2199AB2D00EE4D5B /* Movs */;
+			targetProxy = A40E88462199AB2F00EE4D5B /* PBXContainerItemProxy */;
+		};
+		A40E88522199AB2F00EE4D5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A40E882D2199AB2D00EE4D5B /* Movs */;
+			targetProxy = A40E88512199AB2F00EE4D5B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A40E88352199AB2D00EE4D5B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A40E88362199AB2D00EE4D5B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A40E883D2199AB2F00EE4D5B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A40E883E2199AB2F00EE4D5B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A40E88572199AB2F00EE4D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A40E88582199AB2F00EE4D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A40E885A2199AB2F00EE4D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P89J5888T8;
+				INFOPLIST_FILE = Movs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adannsergio.Movs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A40E885B2199AB2F00EE4D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P89J5888T8;
+				INFOPLIST_FILE = Movs/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adannsergio.Movs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A40E885D2199AB2F00EE4D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P89J5888T8;
+				INFOPLIST_FILE = MovsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adannsergio.MovsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
+			};
+			name = Debug;
+		};
+		A40E885E2199AB2F00EE4D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P89J5888T8;
+				INFOPLIST_FILE = MovsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adannsergio.MovsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
+			};
+			name = Release;
+		};
+		A40E88602199AB2F00EE4D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P89J5888T8;
+				INFOPLIST_FILE = MovsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adannsergio.MovsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Movs;
+			};
+			name = Debug;
+		};
+		A40E88612199AB2F00EE4D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P89J5888T8;
+				INFOPLIST_FILE = MovsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adannsergio.MovsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Movs;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A40E88292199AB2D00EE4D5B /* Build configuration list for PBXProject "Movs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A40E88572199AB2F00EE4D5B /* Debug */,
+				A40E88582199AB2F00EE4D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A40E88592199AB2F00EE4D5B /* Build configuration list for PBXNativeTarget "Movs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A40E885A2199AB2F00EE4D5B /* Debug */,
+				A40E885B2199AB2F00EE4D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A40E885C2199AB2F00EE4D5B /* Build configuration list for PBXNativeTarget "MovsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A40E885D2199AB2F00EE4D5B /* Debug */,
+				A40E885E2199AB2F00EE4D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A40E885F2199AB2F00EE4D5B /* Build configuration list for PBXNativeTarget "MovsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A40E88602199AB2F00EE4D5B /* Debug */,
+				A40E88612199AB2F00EE4D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A40E88382199AB2D00EE4D5B /* Movs.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A40E88392199AB2D00EE4D5B /* Movs.xcdatamodel */,
+			);
+			currentVersion = A40E88392199AB2D00EE4D5B /* Movs.xcdatamodel */;
+			path = Movs.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A40E88262199AB2D00EE4D5B /* Project object */;
+}
