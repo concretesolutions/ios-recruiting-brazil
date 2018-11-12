@@ -19,10 +19,16 @@ class MoviesInteractor {
     // FROM PRESENTER
     
     func fetchMovies() {
-        ServerManager.call { (popularMovies) in
-            print("-> Movies: \(popularMovies.count)")
-            self.movies = popularMovies
-            self.presenter?.loadedMovies()
+        ServerManager.call { (popularMovies, status) in
+            switch status {
+                case .error:
+                    print("-> Error")
+                    self.presenter?.loadingError()
+                case .okay:
+                    print("-> Movies: \(popularMovies.count)")
+                    self.movies = popularMovies
+                    self.presenter?.loadedMovies()
+            }
         }
     }
     

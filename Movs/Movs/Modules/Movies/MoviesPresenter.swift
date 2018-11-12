@@ -28,7 +28,7 @@ class MoviesPresenter: NSObject {
     
     // FROM VIEW
     
-    func didLoad() {
+    func fetchMovies() {
         self.interactor.fetchMovies()
     }
     
@@ -36,10 +36,14 @@ class MoviesPresenter: NSObject {
         return self.interactor.getTotalMovies()
     }
     
-    // FROM INERECTOR
+    // FROM INERACTOR
     
     func loadedMovies() {
         self.view.showPopularMovies()
+    }
+    
+    func loadingError() {
+        self.view.showError()
     }
     
 }

@@ -14,7 +14,7 @@ class ServerManager {
      Teste call, retorna se usuario esta logado e uma mensagem caso esteja logdo
      - parameter handler: Função é executado depois que tudo ja foi feito e retorna o valor true quando logado e false quando deslogado
      */
-    public static func call(handler: @escaping (([Movie])->Void) ) {
+    public static func call(handler: @escaping (([Movie], ResponseStatus)->Void) ) {
         let APIurl = ServerURL.serverURL
         let urlString = APIurl.replacingOccurrences(of: "<<api_key>>", with: ServerKeys.serverAPIKeyV3)
         guard let url = URL(string: urlString) else { return }
@@ -25,21 +25,37 @@ class ServerManager {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         // TASK
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            // Setup POST data
-            guard let data = data else { return }
-            do {
-                // Response Data
-                let decoder = JSONDecoder()
-                let serverData = try decoder.decode(Popular.self, from: data)
-                // Continue
+            if error != nil {
                 DispatchQueue.main.async {
-                    if let movies = serverData.results {
-                        handler(movies)
+                    handler([], .error)
+                }
+                //return
+            }else if let httpResponse = response as? HTTPURLResponse{
+                if httpResponse.statusCode == 200 {
+                    // Setup POST data
+                    guard let data = data else { return }
+                    do {
+                        // Response Data
+                        let decoder = JSONDecoder()
+                        let serverData = try decoder.decode(Popular.self, from: data)
+                        // Continue
+                        DispatchQueue.main.async {
+                            if let movies = serverData.results {
+                                handler(movies, .okay)
+                            }
+                        }
+                    } catch let err {
+                        print("Error", err)
+                    }
+                    //print("CODE = 200")
+                    //return
+                }else{
+                    DispatchQueue.main.async {
+                        handler([], .error)
                     }
                 }
-            } catch let err {
-                print("Error", err)
             }
+            
         }.resume()
     }
     
