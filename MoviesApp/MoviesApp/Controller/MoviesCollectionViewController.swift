@@ -24,9 +24,32 @@ class MoviesCollectionViewController: UICollectionViewController {
                     
                     if let retrievedData = data {
                         do{
-                            if let jsonObject = try JSONSerialization.jsonObject(with: retrievedData, options: []) as? [String: Any] {
-                             //print(jsonObject)
-                            print(jsonObject)
+                            if let jsonObject = try JSONSerialization.jsonObject(with: retrievedData, options: []) as? [String:Any] {
+                                
+                                if let resultsArray = jsonObject["results"] as? [[String: Any]]{
+                                    
+                                    for result in resultsArray{
+                                        if let title = result["title"]{
+                                            print(title)
+                                        }
+                                        if let releaseDate = result["release_date"]{
+                                            print(releaseDate)
+                                        }
+                                        if let overview = result["overview"]{
+                                            print(overview)
+                                        }
+                                        print("########################")
+                                    }
+                                    
+                                }
+                                
+//                                for jsonObject in jsonObjects {
+//                                    //print(jsonObject["title"])
+//                                    print(jsonObject["results"])
+//                                }
+                                
+                            //print(jsonObjects)
+                                
                             }
                         }catch{
                             print("Error serializing retrieved JSON")
