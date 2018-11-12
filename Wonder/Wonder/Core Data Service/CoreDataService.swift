@@ -50,12 +50,16 @@ class CoreDataService {
 //        //////////
 //        let year = "2015"
 //        let yearPredicate = NSPredicate(format: "year = %@", year)
-//        
+//
 //        let title = "Ant-Man"
 //        let titlePredicate = NSPredicate(format: "title = %@", title)
-//        
-//        
-//        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [yearPredicate, titlePredicate])
+//
+//        let genre = "Action"
+//        let genrePredicate = NSPredicate(format: "genre CONTAINS[cd] %@", genre)
+//    
+//
+//        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [yearPredicate, titlePredicate, genrePredicate])
+//
 //        request.predicate = andPredicate
 //        ////////
         

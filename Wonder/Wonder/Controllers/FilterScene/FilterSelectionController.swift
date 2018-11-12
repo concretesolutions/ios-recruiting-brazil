@@ -83,11 +83,6 @@ class FilterSelectionController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterSelectionCell", for: indexPath) as! FilterSelectionCell
-        if isDiclosureStyle(indexPath: indexPath, filterSelectedRow: filterSelectedRow) {
-            cell.accessoryType = .disclosureIndicator
-        }else{
-            cell.accessoryType = .none
-        }
         if filterSelectedRow == 0 {
             cell.filterSelectionOption.text = years[indexPath.row]
         }else{
@@ -111,12 +106,6 @@ class FilterSelectionController: UITableViewController {
         // return selections to the caller
         delegate?.didUpdateOption(filterSelection: filterSelection)
         navigationController?.popViewController(animated: true)
-    }
- 
-    // MARK: - TableView Helper
-    private func isDiclosureStyle(indexPath: IndexPath, filterSelectedRow: Int) -> Bool {
-
-        return false
     }
     
 }
