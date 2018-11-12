@@ -19,7 +19,7 @@ class Logger {
     
     static func logError(in classBeingLogged:NSObject, function:String=#function, message:String){
         let customMessage = "\(String(describing:classBeingLogged)) - \(function) - \(message)"
-        _ = NSError(domain: "com.kaiquemagno.MiniChallenge5", code: 1, userInfo: ["description" : customMessage])
+        _ = NSError(domain: "com.kaiquemagno.concreteTest", code: 1, userInfo: ["description" : customMessage])
         print("❌ \(customMessage)")
     }
     
@@ -36,7 +36,7 @@ class Logger {
     
     static func logError(in classBeingLogged:NSObject.Type, function:String=#function, message:String){
         let customMessage = "\(String(describing:classBeingLogged)) - \(function) - \(message)"
-        _ = NSError(domain: "com.kaiquemagno.MiniChallenge5", code: 1, userInfo: ["description" : message])
+        _ = NSError(domain: "com.kaiquemagno.concreteTest", code: 1, userInfo: ["description" : message])
         print("❌ \(customMessage)")
     }
     
@@ -54,7 +54,7 @@ class Logger {
     
     static func logError(in classBeingLogged:Any, function:String=#function, message:String){
         let customMessage = "\(String(describing:classBeingLogged)) - \(function) - \(message)"
-        _ = NSError(domain: "com.kaiquemagno.MiniChallenge5", code: 1, userInfo: ["description" : customMessage])
+        _ = NSError(domain: "com.kaiquemagno.concreteTest", code: 1, userInfo: ["description" : customMessage])
         print("❌ \(customMessage)")
     }
     
