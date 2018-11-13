@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Movie {
+class Movie: Decodable, Encodable {
     
     // MARK: - Properties
     let id: Int
@@ -20,7 +20,7 @@ class Movie {
     
     
     // MARK: - Decodable Keys
-    enum MovieDecodableKey: String, CodingKey {
+    enum MovieCodingKey: String, CodingKey {
         case id = "id"
         case title = "title"
         case posterPath = "poster_path"
@@ -29,6 +29,7 @@ class Movie {
         case releaseDate = "release_date"
     }
     
+    // MARK - Inits
     init(id: Int, title: String, posterPath: String, genreIds: [Int], overview: String, releaseDate: Date) {
         self.id = id
         self.title = title
@@ -39,16 +40,20 @@ class Movie {
     }
     
     required convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: MovieDecodableKey.self)
+        let container = try decoder.container(keyedBy: MovieCodingKey.self)
         
         let id: Int = try container.decode(Int.self, forKey: .id)
-        let title: String = try container.decode(String.self, forKey: .id)
+        let title: String = try container.decode(String.self, forKey: .title)
         let posterPath: String = try container.decode(String.self, forKey: .posterPath)
         let genreIds: [Int] = try container.decode([Int].self, forKey: .genreIds)
         let overview: String = try container.decode(String.self, forKey: .overview)
-        let releaseDate: Date = try container.decode(Date.self, forKey: .releaseDate)
+        let releaseDate: String = try container.decode(String.self, forKey: .releaseDate)
         
-        self.init(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyy"
+        let date = dateFormatter.date(from: releaseDate)
+        
+        self.init(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: date ?? Date())
     }
 
 }
