@@ -29,6 +29,8 @@ class MoviesView: UIViewController {
         self.outletMoviesError.isHidden = true
         self.outletMoviesError.setup(movieView: self)
         
+        // FIXME: - Gesture Any Type
+        // Setup Gesture
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
         self.view.addGestureRecognizer(tap)
         
@@ -57,11 +59,7 @@ class MoviesView: UIViewController {
         self.outletMoviesError.isHidden = false
     }
     
-    func reload() {
-        self.outletMoviesCollection.reloadData()
-    }
-    
-    // VIEW METHODs
+    // GESTUREs METHODs
     
     @objc func endEditing() {
         // Recolhe teclado

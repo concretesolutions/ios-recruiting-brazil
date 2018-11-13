@@ -12,23 +12,22 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Outlets
     var imageURL: String?
+    var favorite: Bool = false {
+        didSet {
+            self.updateFavoriteIcon(status: favorite)
+        }
+    }
     @IBOutlet weak var outletActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var outletMovieImage: UIImageView!
     @IBOutlet weak var outletMovieTitle: UILabel!
     @IBOutlet weak var outletFavorite: UIButton!
     
-    func awakeFromNib(title: String) {
+    // MARK: - Setups
+    
+    func awakeFromNib(title: String, favorite: Bool) {
         super.awakeFromNib()
         self.outletMovieTitle.text = title
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        //self.outletMovieImage.image = nil
-        self.outletActivityIndicator.startAnimating()
-        if let image = imageURL {
-            self.setup(imageURL: image)
-        }
+        self.favorite = favorite
     }
     
     func setup(imageURL: String) {
@@ -41,19 +40,35 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBAction func actionFavorite(_ sender: UIButton) {
-        
-        let imageFull = UIImage.init(named: "favorite_full_icon")
-        let imageGray = UIImage.init(named: "favorite_gray_icon")
+    // MARK: - Favorite Functions
     
-        if self.outletFavorite.currentImage == imageFull {
+    func updateFavoriteIcon(status: Bool) {
+        if status {
             // FIXME: - Chamar presenter para REMOVER do ADD
-            self.outletFavorite.setImage(imageGray, for: .normal)
-        }else if self.outletFavorite.currentImage == imageGray {
-            // FIXME: - Chamar presenter para ADD
+            let imageFull = UIImage.init(named: "favorite_full_icon")
             self.outletFavorite.setImage(imageFull, for: .normal)
+        }else{
+            // FIXME: - Chamar presenter para ADD
+            let imageGray = UIImage.init(named: "favorite_gray_icon")
+            self.outletFavorite.setImage(imageGray, for: .normal)
         }
-        
+    }
+
+    // MARK: - Reuse
+    // FIXME: - Reusable Favorite Icon
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        //self.outletMovieImage.image = nil
+        self.outletActivityIndicator.startAnimating()
+        if let image = imageURL {
+            self.setup(imageURL: image)
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func actionFavorite(_ sender: UIButton) {
+        self.favorite = !self.favorite
     }
     
 }

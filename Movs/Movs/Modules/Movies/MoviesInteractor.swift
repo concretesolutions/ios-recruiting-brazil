@@ -19,12 +19,15 @@ class MoviesInteractor {
             self.presenter?.moviesFilterChanged()
         }
     }
-    private var movies: [Movie] = [] 
+    private var movies: [Movie] = []
+    
+    private var moviePageSearch: Int = 1
+    private var moviePage: Int = 1
     
     // FROM PRESENTER
     
     func fetchMovies() {
-        ServerManager.call { (popularMovies, status) in
+        ServerManager.getMovies(page: self.moviePage) { (popularMovies, status) in
             switch status {
                 case .error:
                     print("-> Error")
@@ -48,9 +51,15 @@ class MoviesInteractor {
     
     func filterMovies(containing: String) {
         moviesFiltered = []
-        for movie in movies {
-            if movie.title.contains(containing) {
-                self.moviesFiltered.append(movie)
+        ServerManager.getMoviesSearch(page: self.moviePageSearch, searchText: containing) { (popularMovies, status) in
+            switch status {
+            case .error:
+                print("-> Error")
+                self.presenter?.loadingError()
+            case .okay:
+                print("-> Movies: \(popularMovies.count)")
+                self.moviesFiltered = popularMovies
+                self.presenter?.loadedMovies()
             }
         }
     }

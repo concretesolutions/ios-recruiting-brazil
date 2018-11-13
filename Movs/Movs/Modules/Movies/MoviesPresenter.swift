@@ -55,7 +55,7 @@ class MoviesPresenter: NSObject {
     }
     
     func moviesFilterChanged() {
-        self.view.reload()
+        self.view.showPopularMovies()
     }
     
 }
@@ -72,10 +72,10 @@ extension MoviesPresenter: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         // Get movie
         let movie = self.interactor.getMovie(at: indexPath.item)
-        cell.awakeFromNib(title: movie.title)
+        cell.awakeFromNib(title: movie.title, favorite: false)
         // Load image
         if let image = movie.poster_path {
-            let imageURL = "https://image.tmdb.org/t/p/w500\(image)" // w500 original
+            let imageURL = ServerURL.imageW500 + image
             cell.setup(imageURL: imageURL)
         }
         return cell
