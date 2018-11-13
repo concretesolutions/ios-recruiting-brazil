@@ -15,10 +15,15 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView {
     // MARK: - Properties
     var presenter: PopularMoviesPresentation!
     
-    // MARK: - Life cycle functions
+    // MARK: - Life cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.viewDidLoad()
+    }
+    
+    // MARK: - PopularMoviesView Functions
+    func show(movies: [Movie]) {
+        self.presenter.didRequestMovies()
     }
     
     // MARK: - Functions

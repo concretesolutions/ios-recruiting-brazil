@@ -13,6 +13,9 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
     // MARK: - Properties
     var output: PopularMoviesInteractorOutput!
     
-    // MARK: - PopularMoviesInteractorInput functions
+    // MARK: - PopularMoviesInteractorInput Functions
+    func fetchMovies() {
+        
+    }
     
 }

@@ -19,6 +19,13 @@ class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractor
     func viewDidLoad() {
     }
     
+    func didRequestMovies() {
+        
+    }
+    
     // MARK: - PopularMoviesInteractorOutput functions
+    func didFetch(movies: [Movie]) {
+        
+    }
     
 }
