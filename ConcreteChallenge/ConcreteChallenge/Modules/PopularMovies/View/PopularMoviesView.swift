@@ -11,6 +11,7 @@ import UIKit
 class PopularMoviesViewController: UIViewController, PopularMoviesView {
     
     // MARK: - Outlets
+    @IBOutlet weak var moviesCollectionView: MovieCollectionView!
     
     // MARK: - Properties
     var presenter: PopularMoviesPresentation!
@@ -19,14 +20,20 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.viewDidLoad()
+        
+        self.setupCollectionView()
         self.presenter.didRequestMovies()
     }
     
     // MARK: - PopularMoviesView Functions
     func show(movies: [Movie]) {
-        print(movies)
+        self.moviesCollectionView.movies = movies
     }
     
     // MARK: - Functions
+    func setupCollectionView() {
+        self.moviesCollectionView.delegate = self.moviesCollectionView
+        self.moviesCollectionView.dataSource = self.moviesCollectionView
+    }
 }
 
