@@ -12,82 +12,78 @@ private let reuseIdentifier = "Cell"
 
 class MoviesCollectionViewController: UICollectionViewController {
 
+    
+    
+    @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
+    var movies: [Movie] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+      self.tabBarController?.tabBar.isHidden = false
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //API Consuming code begins here
-        if let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=bd67e085700f352302ea910f619fe7ec&language=en-US&page=1"){
-            let task = URLSession.shared.dataTask(with: url) { (data, request, error) in
+        self.activityIndicatorOutlet.isHidden = false
+        self.activityIndicatorOutlet.startAnimating()
+        
+        MovieDAO.getAll { (response, error) in
+            if error != nil{
+                return
+            }//>>>>
+            if let responseObj = response as? Response{
                 
-                if error == nil {
-                    print("Sucessfully retrieved data")
-                    
-                    if let retrievedData = data {
-                        do{
-                            if let jsonObject = try JSONSerialization.jsonObject(with: retrievedData, options: []) as? [String:Any] {
-                                
-                                if let resultsArray = jsonObject["results"] as? [[String: Any]]{
-                                    
-                                    for result in resultsArray{
-                                        if let title = result["title"]{
-                                            print(title)
-                                        }
-                                        if let releaseDate = result["release_date"]{
-                                            print(releaseDate)
-                                        }
-                                        if let overview = result["overview"]{
-                                            print(overview)
-                                        }
-                                        print("########################")
-                                    }
-                                    
-                                }
-                                
-//                                for jsonObject in jsonObjects {
-//                                    //print(jsonObject["title"])
-//                                    print(jsonObject["results"])
-//                                }
-                                
-                            //print(jsonObjects)
-                                
-                            }
-                        }catch{
-                            print("Error serializing retrieved JSON")
-                        }
+                let movies = responseObj.results
+                   
+                for movie in movies{
+                    if let tempMovie = movie as? Movie{
+                        self.movies.append(tempMovie)
+                        print(tempMovie)
                     }
-                    
-                }else{
-                    print("Failed to retrieve data")
                 }
                 
             }
-            task.resume()
-        }
-        //API Consuming code ends here
-
-        
-     
+            self.activityIndicatorOutlet.stopAnimating()
+            self.activityIndicatorOutlet.isHidden = true
+            self.collectionView.reloadData()
+        }//>>>>>
     
     }
 
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return self.movies.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviePreviewCell", for: indexPath) as? MoviePreviewCollectionViewCell
     
-        // Configure the cell
+        cell?.setupCell(image: UIImage(named: "theMegPoster")!, title: self.movies[indexPath.row].title)
     
-        return cell
+        return cell!
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print(self.movies[indexPath.row].title)
+        
+        if let viewController = UIStoryboard(name: "Movie", bundle: nil).instantiateViewController(withIdentifier: "selectedMovieViewController") as? SelectedMovieTableViewController {
+            
+            viewController.movie = self.movies[indexPath.row]
+            self.navigationController?.pushViewController(viewController, animated: true)
+            
+        }
+        
     }
 
 

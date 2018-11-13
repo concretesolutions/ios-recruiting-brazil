@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="612" y="201"/>
         </scene>
-        <!--Title-->
+        <!--Movies-->
         <scene sceneID="NUu-KI-hFI">
             <objects>
                 <collectionViewController id="87q-Og-tSh" customClass="MoviesCollectionViewController" customModule="MoviesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -36,15 +36,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qDs-1x-V70">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="13" minimumInteritemSpacing="13" id="qDs-1x-V70">
                             <size key="itemSize" width="167" height="206"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="13" minY="13" maxX="13" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="bHe-C0-HO8">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" id="lFm-XJ-tb4" customClass="MoviePreviewCollectionViewCell" customModule="MoviesApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="167" height="206"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="moviePreviewCell" id="lFm-XJ-tb4" customClass="MoviePreviewCollectionViewCell" customModule="MoviesApp" customModuleProvider="target">
+                                <rect key="frame" x="13" y="13" width="167" height="206"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="167" height="206"/>
@@ -59,20 +63,20 @@
                                             <rect key="frame" x="0.0" y="159" width="167" height="47"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-M4-JNo">
-                                                    <rect key="frame" x="61" y="13" width="44" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGf-fi-TFp">
                                                     <rect key="frame" x="144" y="16" width="15" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="favorite_gray_icon"/>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-M4-JNo">
+                                                    <rect key="frame" x="27" y="8" width="112" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" red="0.032299824060000003" green="0.13734543320000001" blue="0.2868577242" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
                                     </subviews>
                                 </view>
@@ -90,9 +94,10 @@
                             <outlet property="delegate" destination="87q-Og-tSh" id="Gu0-my-c2t"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Title" id="zwR-1M-Jkl"/>
+                    <navigationItem key="navigationItem" title="Movies" id="zwR-1M-Jkl"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="activityIndicatorOutlet" destination="bHe-C0-HO8" id="WLD-7N-jNQ"/>
                         <outlet property="searchDisplayController" destination="reF-iN-OYD" id="8ae-iF-zDf"/>
                     </connections>
                 </collectionViewController>
@@ -108,7 +113,7 @@
             </objects>
             <point key="canvasLocation" x="3101.5999999999999" y="-296.40179910044981"/>
         </scene>
-        <!--Title-->
+        <!--Movies-->
         <scene sceneID="f2f-yT-wiQ">
             <objects>
                 <tableViewController id="1WV-QA-5lM" sceneMemberID="viewController">
@@ -159,7 +164,7 @@
                             <outlet property="delegate" destination="1WV-QA-5lM" id="H07-6A-hgU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="Ggm-KM-1CT"/>
+                    <navigationItem key="navigationItem" title="Movies" id="Ggm-KM-1CT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GcU-gF-czN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

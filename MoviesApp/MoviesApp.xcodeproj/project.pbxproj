@@ -20,7 +20,9 @@
 		19F25E1F2198E9EC0062E10E /* MovieTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F25E1E2198E9EC0062E10E /* MovieTableViewController.swift */; };
 		19F25E232198F2D80062E10E /* MoviePreviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F25E222198F2D80062E10E /* MoviePreviewCollectionViewCell.swift */; };
 		19F25E292198F8230062E10E /* FavoriteMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F25E282198F8230062E10E /* FavoriteMovieTableViewCell.swift */; };
-		19F25E2B21998DF60062E10E /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F25E2A21998DF60062E10E /* MovieManager.swift */; };
+		19F25E2B21998DF60062E10E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F25E2A21998DF60062E10E /* NetworkManager.swift */; };
+		19F4BEB1219A1EF200B2F4D1 /* MovieDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4BEB0219A1EF200B2F4D1 /* MovieDAO.swift */; };
+		19F4BEB3219A511C00B2F4D1 /* SelectedMovieTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4BEB2219A511C00B2F4D1 /* SelectedMovieTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +62,9 @@
 		19F25E1E2198E9EC0062E10E /* MovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewController.swift; sourceTree = "<group>"; };
 		19F25E222198F2D80062E10E /* MoviePreviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePreviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		19F25E282198F8230062E10E /* FavoriteMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieTableViewCell.swift; sourceTree = "<group>"; };
-		19F25E2A21998DF60062E10E /* MovieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
+		19F25E2A21998DF60062E10E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		19F4BEB0219A1EF200B2F4D1 /* MovieDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDAO.swift; sourceTree = "<group>"; };
+		19F4BEB2219A511C00B2F4D1 /* SelectedMovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +151,8 @@
 		19F25E112198C9120062E10E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				19F25E2A21998DF60062E10E /* MovieManager.swift */,
+				19F25E2A21998DF60062E10E /* NetworkManager.swift */,
+				19F4BEB0219A1EF200B2F4D1 /* MovieDAO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			children = (
 				19F25E1C2198D4280062E10E /* MoviesCollectionViewController.swift */,
 				19F25E1E2198E9EC0062E10E /* MovieTableViewController.swift */,
+				19F4BEB2219A511C00B2F4D1 /* SelectedMovieTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -350,14 +356,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19F25E2B21998DF60062E10E /* MovieManager.swift in Sources */,
+				19F25E2B21998DF60062E10E /* NetworkManager.swift in Sources */,
 				19F25E1F2198E9EC0062E10E /* MovieTableViewController.swift in Sources */,
 				19F25DE92198C8FF0062E10E /* MoviesApp.xcdatamodeld in Sources */,
 				19F25E292198F8230062E10E /* FavoriteMovieTableViewCell.swift in Sources */,
 				19F25E232198F2D80062E10E /* MoviePreviewCollectionViewCell.swift in Sources */,
+				19F4BEB1219A1EF200B2F4D1 /* MovieDAO.swift in Sources */,
 				19F25E1D2198D4280062E10E /* MoviesCollectionViewController.swift in Sources */,
 				19F25E192198D34B0062E10E /* Movie.swift in Sources */,
 				19F25DE12198C8FF0062E10E /* AppDelegate.swift in Sources */,
+				19F4BEB3219A511C00B2F4D1 /* SelectedMovieTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
