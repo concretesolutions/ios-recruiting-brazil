@@ -27,9 +27,6 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     
     @IBOutlet var filterSelectionView: UIView!
     @IBOutlet weak var filterSelectionButton: UIButton!
-    
-    
-    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -97,14 +94,10 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         
         // associate to navigation item
         self.navigationItem.searchController = search
-
-        
     }
     
+    // MARK: App Data Source
     private func loadAppData(_ filterSelection: FilterSelection) {
-        // reset initial
-        self.movies = [FavoriteMovies]()
-    
         // get data
         self.movies = (self.coreDataService?.getAllFavorites(filterSelection: filterSelection))!
         
@@ -112,14 +105,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
             view.showErrorView(errorHandlerView: self.errorHandlerView, errorType: .business, errorMessage: message(filterSelection))
         }else{
             view.hideErrorView(view: self.errorHandlerView)
-            DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1, animations: {
+                // animation
                 self.tableView.contentOffset = CGPoint.zero
+            }) { (success) in
                 self.tableView.reloadData()
             }
         }
     }
-    
-    
     
     // MARK: - UISearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -129,15 +122,14 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
             return
         }
         filterSelection.searchArgument = self.searchArgument
-        loadAppData(filterSelection)
-        // reload only the tableView
-        DispatchQueue.main.async {
-            self.tableView.beginUpdates()
+
+        UIView.animate(withDuration: 0.1, animations: {
+            // animation
             self.tableView.contentOffset = CGPoint.zero
-            self.tableView.endUpdates()
-            self.tableView.reloadData()
+        }) { (success) in
+            self.loadAppData(self.filterSelection)
         }
-        
+
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -150,27 +142,22 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         tableView.tableHeaderView = nil
         loadAppData(filterSelection)
     }
-    
-    
+
     // MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.movies.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as! MovieTableViewCell
-        if self.movies.count > 0 {
+        if indexPath.row > self.movies.count || self.movies.count == 0 { return UITableViewCell() }
         let fav = self.movies[indexPath.row]
-    
         if fav.year!.isEmpty {
             cell.movieTitle.text = fav.title
         }else{
             cell.movieTitle.text = fav.title! + " (" + fav.year! + ")"
         }
-    
         cell.movieSubtitle.text = fav.overview
         cell.movieImage.image = getImageFromDisk(id: fav.id ?? String())
-        }
-        
         return cell
     }
     
@@ -182,9 +169,7 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         performSegue(withIdentifier: "showFavoriteDetail", sender: self)
     }
     
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
             let movie = self.movies[indexPath.row]
             _ = self.persistence.deleteFile(movie.id!)
@@ -193,14 +178,11 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             self.tableView.reloadData()
         }
-        loadAppData(filterSelection)
     }
 
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Unfavorite"
     }
-    
-
     
     // MARK: - UI Actions
     @IBAction func filterAction(_ sender: Any) {
@@ -209,22 +191,20 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
         }
         tableView.tableHeaderView = nil
         filterSelection = FilterSelection()
-        DispatchQueue.main.async {
+        UIView.animate(withDuration: 0.1, animations: {
+            // animation
             self.tableView.contentOffset = CGPoint.zero
+        }) { (success) in
             self.tableView.reloadData()
         }
         performSegue(withIdentifier: "showFilter", sender: self)
-        
     }
     
     @IBAction func removeFilters(_ sender: Any) {
         filterSelection = FilterSelection()
         tableView.tableHeaderView = nil
         loadAppData(filterSelection)
-        
     }
-    
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -254,7 +234,6 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
     
     // MARK: - Filter Protocol
     func didSelectFilter(filterSelection: FilterSelection) {
-        print("*** YES, He have filters - filterSelection: \(filterSelection)")
         self.filterSelection = filterSelection
         self.filterSelectionView.backgroundColor = UIColor.applicationBarTintColor
         self.tableView.tableHeaderView = self.filterSelectionView
@@ -264,23 +243,18 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
 
     // MARK: - Observers
     private func observerManager() {
-    
         removelAllObservers()
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willInactivateFavoritesSearch(_:)),
                                                name: NSNotification.Name(rawValue: "willInactivateFavoritesSearch"),
                                                object: nil)
     }
- 
     private func removelAllObservers() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "willInactivateFavoritesSearch"), object: nil)
     }
-    
     @objc private func willInactivateFavoritesSearch(_ sender: NSNotification) {
         self.search.isActive = false
     }
-    
     // MARK: - Message Handler
     private func message(_ filterSelection: FilterSelection) -> String {
         var message = "You have no favorite movie"
@@ -288,13 +262,17 @@ class FavoritesController: UIViewController, UISearchBarDelegate,UISearchResults
             message = message + " with title: \(filterSelection.searchArgument)"
         }
         if !filterSelection.genre.isEmpty {
-            message = message + ", genre: \(filterSelection.genre)"
+            var literal = String()
+            if filterSelection.searchArgument.isEmpty {
+                literal = " with genre: \(filterSelection.genre)"
+            }else{
+                literal = ", genre: \(filterSelection.genre)"
+            }
+            message = message + literal
         }
         if !filterSelection.year.isEmpty {
             message = message + ", year: \(filterSelection.year)"
         }
-
         return message
     }
-    
 }

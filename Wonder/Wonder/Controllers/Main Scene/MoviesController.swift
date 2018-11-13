@@ -132,10 +132,21 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
                 self.movies.results.append(item)
             }
             
-            DispatchQueue.main.async {
+            // reload only the tableView
+            UIView.animate(withDuration: 0.1, animations: {
+                // animation
+                if pageNumber == 1 {
+                    self.collectionView.contentOffset = CGPoint.zero
+                }
+            }) { (success) in
                 self.collectionView.reloadData()
             }
             
+            
+            
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//            }
             
             self.runningCall = false
             self.activityIndicatorShow(show: false)
@@ -215,10 +226,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         }
         
         // reload only the tableView
-        DispatchQueue.main.async {
-            self.collectionView.contentOffset = CGPoint.zero
-            self.collectionView.reloadData()
-        }
+        self.collectionView.reloadData()
         
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
