@@ -43,10 +43,8 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     private var movies = Movies()
     private var filteredMovies = Movies()
     private var isFiltering = false
+    private var movieCollectionCellFactory = MovieCollectionCellFactory()
 
-    
-    
-    
     // pagination
     var pageCounter = 1
     var totalPages = 0
@@ -141,51 +139,34 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
             }) { (success) in
                 self.collectionView.reloadData()
             }
-            
-            
-            
-//            DispatchQueue.main.async {
-//                self.collectionView.reloadData()
-//            }
-            
+        
             self.runningCall = false
             self.activityIndicatorShow(show: false)
             
-
         }
     }
     
-    
-    
     // MARK: - Observers
     private func observerManager() {
-        
         removelAllObservers()
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reachabilityStatusChanged(_:)),
                                                name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
                                                object: nil)
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willInactivateMoviesSearch(_:)),
                                                name: NSNotification.Name(rawValue: "willInactivateMoviesSearch"),
                                                object: nil)
     }
-    
     private func removelAllObservers() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "willInactivateMoviesSearch"), object: nil)
     }
     
-    // observer actions
-    // rawValue: ReachabilityChangedNotification)
+    // reachability
     @objc private func reachabilityStatusChanged(_ sender: NSNotification) {
-        
         guard ((sender.object as? Reachability)?.currentReachabilityStatus) != nil else { return }
-        
         checkInternetStatus()
-        
     }
     
     @objc private func willInactivateMoviesSearch(_ sender: NSNotification) {
@@ -199,7 +180,6 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
 
         }else{
             AppSettings.standard.updateInternetConnectionStatus(true)
-//            loadAppData()
             view.hideErrorView(view: view)
         }
     }
@@ -263,50 +243,18 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
     
     // MARK: - UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MoviesCollectionCell
         var movie = movies.results[indexPath.row]
-        
         // change provider in case of filtering
         if self.isFiltering {
             movie = filteredMovies.results[indexPath.row]
         }
-
-        cell.movieTitle.text = movie.title
-
-
-        
+        let isHidden : Bool!
         if (self.coreDataService?.favoriteExists(id: String(movie.id)))! {
-            cell.movieFavoriteBackgroundView.isHidden = false
+            isHidden = false
         }else{
-            cell.movieFavoriteBackgroundView.isHidden = true
+            isHidden = true
         }
-
-        // image
-        if (!movie.poster_path.isEmpty && movie.poster_path != "" ) {
-            
-            let webService = WebService()
-            let imgSrc = webService.getFullUrl(movie.poster_path)
-            let url = URL(string: imgSrc)
-
-            if imgSrc.isEmpty {
-                cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFill
-                cell.movieImageView?.image = UIImage(named: "noContentIcon")
-
-            }else{
-                cell.movieImageView?.kf.indicatorType = .activity
-                cell.movieImageView?.kf.setImage(with: url)
-            }
-            
-        }else{
-            cell.movieImageView?.contentMode = UIView.ContentMode.scaleAspectFill
-            cell.movieImageView?.image = UIImage(named: "noContentIcon")
-        }
-        // end-image
-        
-        
-        
-        return cell
-        
+        return movieCollectionCellFactory.moviewCollectionCell(indexPath: indexPath, collectionView: collectionView, movie: movie, isHidden: isHidden)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -328,8 +276,7 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         }
         performSegue(withIdentifier: "showMovieDetail", sender: self)
     }
-    
-    
+
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMovieDetail" {
@@ -343,7 +290,6 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
             }else{
                 controller.movie = movies.results[(indexPath?.row)!]
             }
-//            controller.movie = movies.results[(indexPath?.row)!]
             controller.hidesBottomBarWhenPushed = true
             controller.movieImage = cell?.movieImageView.image ?? UIImage(named: "noContentIcon")!
             controller.moc = self.moc
@@ -351,11 +297,8 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
         }
     }
     
-    
-    
     // MARK: - UIScrollView Delegate - Endless Pagination
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         let offsetY = scrollView.contentOffset.y
         let bounds = scrollView.bounds;
         let size = scrollView.contentSize;
@@ -369,16 +312,12 @@ class MoviesController: UIViewController, UISearchBarDelegate, UISearchResultsUp
                 runningCall = true
                 if pageCounter < self.totalPages {
                     pageCounter = pageCounter + 1
-                    
                     // filtering does not allow infinite pagination!
                     if !self.isFiltering {
                         activityIndicatorShow(show: true)
                         loadPopularMovies(pageNumber: pageCounter)
                     }
-                    
-                    
                 }
-                
             }
         }
     }

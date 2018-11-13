@@ -40,8 +40,6 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
-    
-    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,7 +123,7 @@ class MovieDetailController: UIViewController, UITableViewDelegate, UITableViewD
                 self.favoriteMoviesList = favoriteMovies
             }else{
                 // Core Data Error
-                print("A problem occured - Core Data - 03X")
+                view.alert(msg: "An error occured saving favorite movie! Please contact support.", sender: self)
             }
         })
     }

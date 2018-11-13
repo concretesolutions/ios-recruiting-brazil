@@ -117,6 +117,7 @@ extension UIView {
         return imageView
     }
     
+    // MARK: - Alert Controller
     func alert(msg: String, sender: UIViewController) {
         let alertController = UIAlertController(title: msg, message: nil, preferredStyle: .alert)
         
