@@ -129,13 +129,11 @@
 		A40E88302199AB2D00EE4D5B /* Movs */ = {
 			isa = PBXGroup;
 			children = (
-				A40E88312199AB2D00EE4D5B /* AppDelegate.swift */,
-				A40E88332199AB2D00EE4D5B /* ViewController.swift */,
-				A40E88352199AB2D00EE4D5B /* Main.storyboard */,
-				A40E883B2199AB2F00EE4D5B /* Assets.xcassets */,
-				A40E883D2199AB2F00EE4D5B /* LaunchScreen.storyboard */,
-				A40E88402199AB2F00EE4D5B /* Info.plist */,
-				A40E88382199AB2D00EE4D5B /* Movs.xcdatamodeld */,
+				A4256125219B11F5009F5498 /* Mechanism */,
+				A425611C219B1118009F5498 /* Presentation */,
+				A4256120219B1197009F5498 /* Business */,
+				A425611E219B1165009F5498 /* Persistence */,
+				A425611D219B1120009F5498 /* Supporting Files */,
 			);
 			path = Movs;
 			sourceTree = "<group>";
@@ -156,6 +154,80 @@
 				A40E88562199AB2F00EE4D5B /* Info.plist */,
 			);
 			path = MovsUITests;
+			sourceTree = "<group>";
+		};
+		A425611C219B1118009F5498 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A4256123219B11C0009F5498 /* View */,
+				A4256124219B11C5009F5498 /* Controller */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A425611D219B1120009F5498 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A40E88312199AB2D00EE4D5B /* AppDelegate.swift */,
+				A40E883D2199AB2F00EE4D5B /* LaunchScreen.storyboard */,
+				A40E88402199AB2F00EE4D5B /* Info.plist */,
+				A40E883B2199AB2F00EE4D5B /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A425611E219B1165009F5498 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A40E88382199AB2D00EE4D5B /* Movs.xcdatamodeld */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		A4256120219B1197009F5498 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				A4256122219B11AA009F5498 /* DAO */,
+				A4256121219B11A3009F5498 /* Services */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		A4256121219B11A3009F5498 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A4256122219B11AA009F5498 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		A4256123219B11C0009F5498 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A40E88352199AB2D00EE4D5B /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A4256124219B11C5009F5498 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A40E88332199AB2D00EE4D5B /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A4256125219B11F5009F5498 /* Mechanism */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mechanism;
 			sourceTree = "<group>";
 		};
 		C6AAA5BD012CE463ABBC306B /* Frameworks */ = {
@@ -179,6 +251,7 @@
 				A40E882A2199AB2D00EE4D5B /* Sources */,
 				A40E882B2199AB2D00EE4D5B /* Frameworks */,
 				A40E882C2199AB2D00EE4D5B /* Resources */,
+				A464E8982199B35800B54536 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -315,6 +388,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A464E8982199B35800B54536 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		BEB0FEB8409D2946A7D4244B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
