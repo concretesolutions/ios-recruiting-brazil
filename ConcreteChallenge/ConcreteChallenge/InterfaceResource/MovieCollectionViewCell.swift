@@ -10,13 +10,26 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    var movie: Movie? = nil
+    
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     
     // MARK: - Actions
-    
     @IBAction func favoriteButtonTapped(_ sender: Any) {
+    }
+    
+    // MARK: - Functions
+    func setupCell(movie: Movie) {
+        ImageDataManager.getImageFrom(imagePath: movie.posterPath) { (image) in
+            DispatchQueue.main.async {
+                self.posterImage.image = image                
+            }
+        }
+        self.nameLabel.text = movie.title
+        self.movie = movie
     }
 }

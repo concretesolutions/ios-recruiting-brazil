@@ -27,12 +27,8 @@ class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionViewCell
 
-//        cell.posterImage = self.movies[indexPath.item].posterPath
-        cell.nameLabel.text = self.movies[indexPath.item].title
+        cell.setupCell(movie: self.movies[indexPath.row])
         
         return cell
     }
-    
-    // MARK: - Functions
-    
 }

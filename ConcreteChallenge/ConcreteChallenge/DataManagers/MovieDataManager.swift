@@ -8,16 +8,12 @@
 
 import Foundation
 
-enum RequestStatus {
-    case success
-    case failed
-}
-
 class MovieDataManager {
     
     // MARK: - Properties
     static var movies: [Movie] = []
     
+    // The api_key should be into the info.plist but its here for easy testing
     static let getPopularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=0aa2fda064d1eec9e68bccc4220ddf7b&language=en-US&page=1"
     
     // MARK: - Functions
@@ -26,6 +22,7 @@ class MovieDataManager {
         var request = URLRequest(url: popularMoviesURL)
         request.httpMethod = "GET"
         
+        // Making GET api request
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if error == nil {
@@ -34,6 +31,7 @@ class MovieDataManager {
                 do {
                     let decoder = JSONDecoder()
                     
+                    // Decode it into a PopularMoviesResponse with Movies
                     let popularMoviesResponse = try decoder.decode(PopularMoviesResponse.self, from: data)
                     self.movies = popularMoviesResponse.results
 
