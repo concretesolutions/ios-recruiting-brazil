@@ -15,7 +15,9 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
     
     // MARK: - PopularMoviesInteractorInput Functions
     func fetchMovies() {
-        
+        MovieDataManager.fetchPopularMovies(completion: {
+            self.output.didFetch(movies: MovieDataManager.movies)
+        })
     }
     
 }

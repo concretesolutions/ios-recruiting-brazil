@@ -31,6 +31,8 @@
 		755C64C8219A1F2800E13B81 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C64C7219A1F2800E13B81 /* Movie.swift */; };
 		755C64CA219A229200E13B81 /* MovieCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C64C9219A229200E13B81 /* MovieCollectionView.swift */; };
 		755C64CC219A232800E13B81 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C64CB219A232800E13B81 /* MovieCollectionViewCell.swift */; };
+		755C64CF219A407000E13B81 /* MovieDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C64CE219A407000E13B81 /* MovieDataManager.swift */; };
+		755C64D1219A4CDC00E13B81 /* PopularMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C64D0219A4CDC00E13B81 /* PopularMoviesResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		755C64C7219A1F2800E13B81 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		755C64C9219A229200E13B81 /* MovieCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionView.swift; sourceTree = "<group>"; };
 		755C64CB219A232800E13B81 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		755C64CE219A407000E13B81 /* MovieDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataManager.swift; sourceTree = "<group>"; };
+		755C64D0219A4CDC00E13B81 /* PopularMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				753517E2219780E700CE5DDA /* Application */,
+				755C64CD219A405900E13B81 /* DataManagers */,
 				755C64C4219A1E6100E13B81 /* InterfaceResource */,
 				753517E5219781A700CE5DDA /* Modules */,
 				753517E42197812100CE5DDA /* Model */,
@@ -181,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				755C64C7219A1F2800E13B81 /* Movie.swift */,
+				755C64D0219A4CDC00E13B81 /* PopularMoviesResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +334,14 @@
 			path = InterfaceResource;
 			sourceTree = "<group>";
 		};
+		755C64CD219A405900E13B81 /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				755C64CE219A407000E13B81 /* MovieDataManager.swift */,
+			);
+			path = DataManagers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -473,11 +487,13 @@
 				753517F52197830800CE5DDA /* PopularMoviesContract.swift in Sources */,
 				753517B2219780A600CE5DDA /* AppDelegate.swift in Sources */,
 				7535180B2197867100CE5DDA /* FavoriteMoviesView.swift in Sources */,
+				755C64CF219A407000E13B81 /* MovieDataManager.swift in Sources */,
 				753517F7219783A400CE5DDA /* PopularMoviesRouter.swift in Sources */,
 				753517FB2197851800CE5DDA /* PopularMoviesPresenter.swift in Sources */,
 				755C64CC219A232800E13B81 /* MovieCollectionViewCell.swift in Sources */,
 				753517FD2197859400CE5DDA /* PopularMovieInteractor.swift in Sources */,
 				755C64C8219A1F2800E13B81 /* Movie.swift in Sources */,
+				755C64D1219A4CDC00E13B81 /* PopularMoviesResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

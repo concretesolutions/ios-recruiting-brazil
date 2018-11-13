@@ -19,11 +19,12 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.viewDidLoad()
+        self.presenter.didRequestMovies()
     }
     
     // MARK: - PopularMoviesView Functions
     func show(movies: [Movie]) {
-        self.presenter.didRequestMovies()
+        print(movies)
     }
     
     // MARK: - Functions
