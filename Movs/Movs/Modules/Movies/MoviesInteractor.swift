@@ -14,7 +14,12 @@ class MoviesInteractor {
     var presenter: MoviesPresenter?
     
     // MARK: - Parameters
-    private var movies: [Movie] = []
+    private var moviesFiltered: [Movie] = [] {
+        didSet {
+            self.presenter?.moviesFilterChanged()
+        }
+    }
+    private var movies: [Movie] = [] 
     
     // FROM PRESENTER
     
@@ -27,17 +32,31 @@ class MoviesInteractor {
                 case .okay:
                     print("-> Movies: \(popularMovies.count)")
                     self.movies = popularMovies
+                    self.moviesFiltered = popularMovies
                     self.presenter?.loadedMovies()
             }
         }
     }
     
     func getTotalMovies() -> Int {
-        return movies.count
+        return moviesFiltered.count
     }
     
     func getMovie(at index: Int) -> Movie {
-        return movies[index]
+        return moviesFiltered[index]
+    }
+    
+    func filterMovies(containing: String) {
+        moviesFiltered = []
+        for movie in movies {
+            if movie.title.contains(containing) {
+                self.moviesFiltered.append(movie)
+            }
+        }
+    }
+    
+    func filterMoviesEnded() {
+        self.moviesFiltered = self.movies
     }
     
 }

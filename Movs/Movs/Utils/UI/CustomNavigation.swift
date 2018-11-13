@@ -20,11 +20,11 @@ class CustomNavigation: UINavigationController {
         UINavigationBar.appearance().barStyle = .default
         viewController.navigationItem.title = title
         viewController.tabBarItem.title = title
+        viewController.definesPresentationContext = true
         self.navigationBar.prefersLargeTitles = false
         
         // Search Bar
         setupSearchBar(viewController: viewController)
-
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,14 +39,41 @@ class CustomNavigation: UINavigationController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
+    // MARK: - Search Bar
+    
     func setupSearchBar(viewController: UIViewController) {
+        // UISearchController
         let searchController = UISearchController.init(searchResultsController: nil)
-        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.showsCancelButton = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        // View Controller
         viewController.navigationItem.searchController = searchController
         viewController.navigationItem.hidesSearchBarWhenScrolling = false
+        // Delegate
+        viewController.navigationItem.searchController?.searchBar.delegate = self
     }
     
 }
 
+extension CustomNavigation: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            if let view = self.viewControllers.first as? MoviesView {
+                view.searchEnded()
+            }
+        }else if let view = self.viewControllers.first as? MoviesView {
+            view.search(text: searchText)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        if let view = self.viewControllers.first as? MoviesView {
+            view.searchEnded()
+        }
+    }
+    
+}
 
 

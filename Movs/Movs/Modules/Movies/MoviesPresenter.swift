@@ -36,6 +36,14 @@ class MoviesPresenter: NSObject {
         return self.interactor.getTotalMovies()
     }
     
+    func searchMovie(containing: String) {
+        self.interactor.filterMovies(containing: containing)
+    }
+    
+    func searchMovieEnded() {
+        self.interactor.filterMoviesEnded()
+    }
+    
     // FROM INERACTOR
     
     func loadedMovies() {
@@ -44,6 +52,10 @@ class MoviesPresenter: NSObject {
     
     func loadingError() {
         self.view.showError()
+    }
+    
+    func moviesFilterChanged() {
+        self.view.reload()
     }
     
 }

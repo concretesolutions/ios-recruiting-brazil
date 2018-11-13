@@ -29,8 +29,21 @@ class MoviesView: UIViewController {
         self.outletMoviesError.isHidden = true
         self.outletMoviesError.setup(movieView: self)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
+        self.view.addGestureRecognizer(tap)
+        
         // VIPER
         self.presenter.fetchMovies()
+    }
+    
+    // FROM NAVIGATION
+    
+    func searchEnded() {
+        self.presenter.searchMovieEnded()
+    }
+    
+    func search(text: String) {
+        self.presenter.searchMovie(containing: text)
     }
     
     // FROM PRESENTER
@@ -42,7 +55,23 @@ class MoviesView: UIViewController {
     
     func showError() {
         self.outletMoviesError.isHidden = false
-        //self.view.addSubview(self.outletMoviesError)
+    }
+    
+    func reload() {
+        self.outletMoviesCollection.reloadData()
+    }
+    
+    // VIEW METHODs
+    
+    @objc func endEditing() {
+        // Recolhe teclado
+        self.navigationItem.searchController?.searchBar.endEditing(true)
+        // Interagindo sem texto de pesquisa = Recolhe pesquisa
+        if let searchText = self.navigationItem.searchController?.searchBar.text {
+            if searchText.isEmpty {
+                self.navigationItem.searchController?.isActive = false
+            }
+        }
     }
     
 }
