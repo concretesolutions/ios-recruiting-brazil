@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PopularMoviesResponse: Codable {
+class PopularMoviesResponse: Decodable {
     
     // MARK: - Properties
     let page: Int
@@ -18,7 +18,7 @@ class PopularMoviesResponse: Codable {
     
     
     // MARK: - Decodable Keys
-    enum PopularMovieResponseDecodableKey: String, CodingKey {
+    enum PopularMoviesResponseDecodableKey: String, CodingKey {
         case page = "page"
         case totalResults = "total_results"
         case totalPages = "total_pages"
@@ -34,16 +34,15 @@ class PopularMoviesResponse: Codable {
     }
     
     required convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: MovieDecodableKey.self)
+        let container = try decoder.container(keyedBy: PopularMoviesResponseDecodableKey.self)
         
-        let id: Int = try container.decode(Int.self, forKey: .id)
-        let title: String = try container.decode(String.self, forKey: .id)
-        let posterPath: String = try container.decode(String.self, forKey: .posterPath)
-        let genreIds: [Int] = try container.decode([Int].self, forKey: .genreIds)
-        let overview: String = try container.decode(String.self, forKey: .overview)
-        let releaseDate: Date = try container.decode(Date.self, forKey: .releaseDate)
+        let page: Int = try container.decode(Int.self, forKey: .page)
+        let totalResults: Int = try container.decode(Int.self, forKey: .totalResults)
+        let totalPages: Int = try container.decode(Int.self, forKey: .totalPages)
+        let results: [Movie] = try container.decode([Movie].self, forKey: .results)
         
-        self.init(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate)
+        
+        self.init(page: page, totalResults: totalResults, totalPages: totalPages, results: results)
     }
     
 }
