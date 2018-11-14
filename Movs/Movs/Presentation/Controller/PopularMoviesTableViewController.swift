@@ -9,10 +9,14 @@
 import UIKit
 
 class PopularMoviesTableViewController: UITableViewController {
-    
+    // MARK: Behavior IBOutlets
     @IBOutlet var emptySearchView: UIView!
     @IBOutlet var genericErrorView: UIView!
     @IBOutlet var loadingView: UIView!
+    
+    private func actualBehavior() -> Behavior {
+        return .PopularMovies
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +31,18 @@ class PopularMoviesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        tableView.backgroundView = loadingView
+        
+        switch  actualBehavior() {
+        case .PopularMovies:
+            return 1
+        case .EmptySearch:
+            tableView.backgroundView = emptySearchView
+        case .GenericError:
+            tableView.backgroundView = genericErrorView
+        case .LoadingView:
+            tableView.backgroundView = loadingView
+        }
+        
         return 0
     }
 
