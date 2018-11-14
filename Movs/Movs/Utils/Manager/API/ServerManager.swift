@@ -6,17 +6,18 @@
 //  Copyright © 2018 João Gabriel Borelli Padilha. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class ServerManager {
+    
+    //static let moviePlaceholder = UIImage.init(named: "Movie Placeholder")
     
     /**
      Teste call, retorna se usuario esta logado e uma mensagem caso esteja logdo
      - parameter handler: Função é executado depois que tudo ja foi feito e retorna o valor true quando logado e false quando deslogado
      */
     public static func getMovies(page:Int, handler: @escaping (([Movie], ResponseStatus)->Void) ) {
-        let APIurl = ServerURL.serverMovies
-        let urlString = APIurl.replacingOccurrences(of: "<<api_key>>", with: ServerKeys.serverAPIKeyV3).replacingOccurrences(of: "<<page>>", with: String(page))
+        let urlString = ServerURL.prepareMoviesURL(page: page)
         guard let url = URL(string: urlString) else { return }
         // Prepare request
         var request = URLRequest(url: url)
@@ -64,8 +65,7 @@ class ServerManager {
      - parameter handler: Função é executado depois que tudo ja foi feito e retorna o valor true quando logado e false quando deslogado
      */
     public static func getMoviesSearch(page:Int, searchText: String,handler: @escaping (([Movie], ResponseStatus)->Void) ) {
-        let APIurl = ServerURL.serverSearch
-        let urlString = APIurl.replacingOccurrences(of: "<<api_key>>", with: ServerKeys.serverAPIKeyV3).replacingOccurrences(of: "<<page>>", with: String(page)).replacingOccurrences(of: "<<query>>", with: searchText.replacingOccurrences(of: " ", with: "%20"))
+        let urlString = ServerURL.prepareMoviesSearch(page: page, searchText: searchText)
         guard let url = URL(string: urlString) else { return }
         // Prepare request
         var request = URLRequest(url: url)

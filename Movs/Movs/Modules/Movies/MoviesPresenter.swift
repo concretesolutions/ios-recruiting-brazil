@@ -58,6 +58,10 @@ class MoviesPresenter: NSObject {
         self.view.showPopularMovies()
     }
     
+    func noResults() {
+        self.view.showNoResults()
+    }
+    
 }
 
 // MARK: - UICollectionViewDataSource

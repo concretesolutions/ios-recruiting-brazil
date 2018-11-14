@@ -112,15 +112,77 @@
                                     <constraint firstItem="0e7-In-Lk5" firstAttribute="centerX" secondItem="hmt-m7-UJ4" secondAttribute="centerX" id="rZQ-bj-Yed"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5MN-DE-zlO" customClass="MoviesViewNoResults" customModule="Movs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_icon" translatesAutoresizingMaskIntoConstraints="NO" id="TH9-nM-Qi1">
+                                        <rect key="frame" x="170" y="281.5" width="35" height="35"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sua busca por '&lt;&lt;x&gt;&gt;' não resultou em nenhum resultado." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0J-FW-HtJ">
+                                        <rect key="frame" x="61.5" y="324.5" width="252" height="91"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="91" id="fB6-Gz-J41"/>
+                                            <constraint firstAttribute="width" constant="252" id="wXf-Go-fbN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="f0J-FW-HtJ" firstAttribute="centerX" secondItem="5MN-DE-zlO" secondAttribute="centerX" id="80O-4y-tcW"/>
+                                    <constraint firstItem="TH9-nM-Qi1" firstAttribute="centerX" secondItem="5MN-DE-zlO" secondAttribute="centerX" id="LQW-F5-fWh"/>
+                                    <constraint firstItem="TH9-nM-Qi1" firstAttribute="centerY" secondItem="5MN-DE-zlO" secondAttribute="centerY" id="u2J-Eu-xzL"/>
+                                    <constraint firstItem="f0J-FW-HtJ" firstAttribute="top" secondItem="TH9-nM-Qi1" secondAttribute="bottom" constant="8" id="xdR-De-IvB"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="outletResult" destination="f0J-FW-HtJ" id="4lR-8i-pYz"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2q-kT-IvR" customClass="MoviesViewLoading" customModule="Movs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jJw-MP-Rvn">
+                                        <rect key="frame" x="40" y="239" width="295" height="120"/>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qrD-sr-1Vx">
+                                        <rect key="frame" x="177.5" y="289" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="jJw-MP-Rvn" firstAttribute="centerY" secondItem="s2q-kT-IvR" secondAttribute="centerY" id="AsA-WW-xgE"/>
+                                    <constraint firstItem="jJw-MP-Rvn" firstAttribute="centerX" secondItem="s2q-kT-IvR" secondAttribute="centerX" id="BmU-Mb-KL7"/>
+                                    <constraint firstItem="jJw-MP-Rvn" firstAttribute="leading" secondItem="s2q-kT-IvR" secondAttribute="leading" constant="40" id="FG2-Pe-ont"/>
+                                    <constraint firstItem="qrD-sr-1Vx" firstAttribute="centerY" secondItem="s2q-kT-IvR" secondAttribute="centerY" id="SCX-ow-OTL"/>
+                                    <constraint firstItem="jJw-MP-Rvn" firstAttribute="height" secondItem="s2q-kT-IvR" secondAttribute="height" multiplier="0.2" id="Yxr-lW-RhH"/>
+                                    <constraint firstAttribute="trailing" secondItem="jJw-MP-Rvn" secondAttribute="trailing" constant="40" id="rQa-6c-eAY"/>
+                                    <constraint firstItem="qrD-sr-1Vx" firstAttribute="centerX" secondItem="s2q-kT-IvR" secondAttribute="centerX" id="yNY-vv-F0N"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="jJw-MP-Rvn"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hmt-m7-UJ4" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4TV-QI-4LQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="s2q-kT-IvR" secondAttribute="trailing" id="56e-ls-huf"/>
                             <constraint firstItem="hmt-m7-UJ4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8Uc-mq-fug"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5MN-DE-zlO" secondAttribute="trailing" id="ADn-rE-p1O"/>
                             <constraint firstItem="TRo-2c-5YL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BZW-zd-5eJ"/>
+                            <constraint firstItem="5MN-DE-zlO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="D05-3L-aFh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="s2q-kT-IvR" secondAttribute="bottom" id="FIB-OE-sSn"/>
+                            <constraint firstItem="s2q-kT-IvR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="R4j-wG-o36"/>
                             <constraint firstItem="hmt-m7-UJ4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Trl-hN-FDU"/>
+                            <constraint firstItem="5MN-DE-zlO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Vaa-yu-YGS"/>
+                            <constraint firstItem="s2q-kT-IvR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Wgh-W2-G4b"/>
                             <constraint firstItem="TRo-2c-5YL" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="XOo-aL-zfa"/>
                             <constraint firstItem="TRo-2c-5YL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iPW-3s-qlU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5MN-DE-zlO" secondAttribute="bottom" id="jAf-GA-PxH"/>
                             <constraint firstItem="TRo-2c-5YL" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qIW-ul-yOV"/>
                             <constraint firstItem="TRo-2c-5YL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rzW-8Y-Rmn"/>
                             <constraint firstItem="hmt-m7-UJ4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ujr-5w-Hr7"/>
@@ -132,6 +194,8 @@
                     <connections>
                         <outlet property="outletMoviesCollection" destination="TRo-2c-5YL" id="gEQ-rB-4aQ"/>
                         <outlet property="outletMoviesError" destination="hmt-m7-UJ4" id="eFi-EU-T0W"/>
+                        <outlet property="outletMoviesLoading" destination="s2q-kT-IvR" id="FaB-EA-0T8"/>
+                        <outlet property="outletMoviesNoResults" destination="5MN-DE-zlO" id="TdQ-nT-LiP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -143,5 +207,6 @@
         <image name="Failed" width="169" height="169"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="list_icon" width="18" height="10"/>
+        <image name="search_icon" width="35" height="35"/>
     </resources>
 </document>

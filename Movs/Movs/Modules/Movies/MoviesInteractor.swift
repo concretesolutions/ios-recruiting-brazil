@@ -14,7 +14,7 @@ class MoviesInteractor {
     var presenter: MoviesPresenter?
     
     // MARK: - Parameters
-    private var moviesFiltered: [Movie] = [] {
+    private var moviesVisible: [Movie] = [] {
         didSet {
             self.presenter?.moviesFilterChanged()
         }
@@ -35,22 +35,22 @@ class MoviesInteractor {
                 case .okay:
                     print("-> Movies: \(popularMovies.count)")
                     self.movies = popularMovies
-                    self.moviesFiltered = popularMovies
+                    self.moviesVisible = popularMovies
                     self.presenter?.loadedMovies()
             }
         }
     }
     
     func getTotalMovies() -> Int {
-        return moviesFiltered.count
+        return moviesVisible.count
     }
     
     func getMovie(at index: Int) -> Movie {
-        return moviesFiltered[index]
+        return moviesVisible[index]
     }
     
     func filterMovies(containing: String) {
-        moviesFiltered = []
+        moviesVisible = []
         ServerManager.getMoviesSearch(page: self.moviePageSearch, searchText: containing) { (popularMovies, status) in
             switch status {
             case .error:
@@ -58,14 +58,18 @@ class MoviesInteractor {
                 self.presenter?.loadingError()
             case .okay:
                 print("-> Movies: \(popularMovies.count)")
-                self.moviesFiltered = popularMovies
-                self.presenter?.loadedMovies()
+                self.moviesVisible = popularMovies
+                if popularMovies.count > 0 {
+                    self.presenter?.loadedMovies()
+                }else{
+                    self.presenter?.noResults()
+                }
             }
         }
     }
     
     func filterMoviesEnded() {
-        self.moviesFiltered = self.movies
+        self.moviesVisible = self.movies
     }
     
 }

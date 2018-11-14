@@ -17,7 +17,7 @@ class MoviesViewError: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("-> Error")
+        print("-> Reload")
         if let view = movieView {
             view.presenter.fetchMovies()
         }

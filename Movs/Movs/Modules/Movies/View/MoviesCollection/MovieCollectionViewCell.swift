@@ -33,11 +33,16 @@ class MovieCollectionViewCell: UICollectionViewCell {
     func setup(imageURL: String) {
         // Cell Reference
         self.imageURL = imageURL
-        self.outletMovieImage.loadMovieImage(urlString: imageURL, to: self) { (status) in
-            if status {
-                self.outletActivityIndicator.stopAnimating()
+        if let url = self.imageURL {
+            self.outletMovieImage.loadMovieImage(urlString: url, to: self) { (status) in
+                if status {
+                    self.outletActivityIndicator.stopAnimating()
+                }
             }
+        }else{
+            self.outletMovieImage.image = nil // ServerManager.moviePlaceholder
         }
+        
     }
     
     // MARK: - Favorite Functions
@@ -58,7 +63,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     // FIXME: - Reusable Favorite Icon
     override func prepareForReuse() {
         super.prepareForReuse()
-        //self.outletMovieImage.image = nil
+        
+        self.outletMovieImage.image = nil // ServerManager.moviePlaceholder
         self.outletActivityIndicator.startAnimating()
         if let image = imageURL {
             self.setup(imageURL: image)
