@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
+class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Properties
     var movies: [Movie] = [] {
@@ -35,4 +35,12 @@ class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout Functions
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.width / 2.1, height: 300)
+    }
 }
+
+
