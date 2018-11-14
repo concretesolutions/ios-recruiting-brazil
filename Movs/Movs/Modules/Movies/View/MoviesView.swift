@@ -45,6 +45,10 @@ class MoviesView: UIViewController {
     
     // FROM NAVIGATION
     
+    func selectedMovie(at index: Int) {
+        self.presenter.selectedMovie(at: index)
+    }
+    
     func searchEnded() {
         self.presenter.searchMovieEnded()
     }

@@ -41,4 +41,31 @@ struct Movie: Codable {
     }
 }
 
+struct MovieDetail: Codable {
+    let adult: Bool?
+    let genres: [Genre]?
+    let title: String
+    let release_date: String
+    let poster_path: String
+    let overview: String
+    let homepage:String?
+    private enum CodingKeys: String, CodingKey {
+        case adult
+        case genres
+        case title
+        case release_date
+        case poster_path
+        case overview
+        case homepage
+    }
+}
+
+struct Genre: Codable {
+    let id: Int?
+    let name: String?
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case name
+    }
+}
 

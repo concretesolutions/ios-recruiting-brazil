@@ -33,6 +33,18 @@ class MoviesRouter: NSObject {
         return UIStoryboard(name:"MoviesVC",bundle: Bundle.main)
     }
     
+    // PRESENT
+    
+    func goToMovieDetail(movieID: Int) {
+        let router = MovieDetailsRouter.init(id: movieID)
+        
+        if let navigationController = self.presenter.view.navigationController as? CustomNavigation {
+            navigationController.pushViewController(router.presenter.view, animated: true)
+        }else{
+            self.presenter.view.present(router.presenter.view, animated: true, completion: nil)
+        }
+    }
+    
 //    func presentLoginScreen(from view: UserPresenterToViewProtocol) {
 //        let loginViewController = LoginRouter.createModule(with: nil)
 //

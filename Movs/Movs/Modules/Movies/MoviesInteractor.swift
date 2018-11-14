@@ -45,6 +45,10 @@ class MoviesInteractor {
         return self.moviesVisible[index]
     }
     
+    func getMovieID(index: Int) -> Int {
+        return self.moviesVisible[index].id
+    }
+    
     func getTotalMovies() -> Int {
         return moviesVisible.count
     }

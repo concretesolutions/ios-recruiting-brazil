@@ -28,6 +28,11 @@ class MoviesPresenter: NSObject {
     
     // FROM VIEW
     
+    func selectedMovie(at index: Int) {
+        let id = self.interactor.getMovieID(index: index)
+        self.router.goToMovieDetail(movieID: id)
+    }
+    
     func fetchMovies() {
         self.interactor.fetchMovies()
     }
