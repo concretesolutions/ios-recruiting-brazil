@@ -10,11 +10,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="JosefinSans-SemiBold.ttf">
-            <string>JosefinSans-SemiBold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -24,18 +19,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="snw-tO-NMX">
-                                <rect key="frame" x="0.0" y="318.5" width="375" height="50"/>
-                                <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="50"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="@LaunchScreen2" translatesAutoresizingMaskIntoConstraints="NO" id="ukI-pp-dme">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" name="lightYellow"/>
                         <constraints>
-                            <constraint firstItem="snw-tO-NMX" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Iyf-cC-RZu"/>
-                            <constraint firstItem="snw-tO-NMX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="MUD-0V-UYL"/>
-                            <constraint firstItem="snw-tO-NMX" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="hWh-IP-lfd"/>
+                            <constraint firstItem="ukI-pp-dme" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="31u-TZ-q9A"/>
+                            <constraint firstItem="ukI-pp-dme" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ACP-Vo-hsA"/>
+                            <constraint firstItem="ukI-pp-dme" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="JLO-W9-buy"/>
+                            <constraint firstItem="ukI-pp-dme" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mUk-yv-c3V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -46,6 +39,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="@LaunchScreen2" width="250" height="250"/>
         <namedColor name="lightYellow">
             <color red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
