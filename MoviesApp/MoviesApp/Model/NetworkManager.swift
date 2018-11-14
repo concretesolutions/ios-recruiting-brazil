@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class NetworkManager{
     
@@ -54,6 +55,16 @@ public class NetworkManager{
         })
         task.resume()
     }
+    
+    static func makeImageRequest(to baseUrl: String, imagePath: String, completionHandler: @escaping (UIImage?, Error?) -> Void) {
+        
+        let session = URLSession(configuration: .default)
+        let endpoint = baseUrl + imagePath
+        //let endpoint = "https://image.tmdb.org/t/p/w500/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg"
+        let endUrl = URL(fileURLWithPath: endpoint)
+        print(endpoint)
+    }
+    
 }
 
 protocol DataObject: Codable {

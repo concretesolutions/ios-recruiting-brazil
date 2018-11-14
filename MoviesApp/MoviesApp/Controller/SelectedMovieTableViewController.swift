@@ -14,8 +14,10 @@ class SelectedMovieTableViewController: UITableViewController {
     
     @IBOutlet weak var movieImageOutlet: UIImageView!
     @IBOutlet weak var movieTitleOutlet: UILabel!
+    @IBOutlet weak var movieReleaseDateOutlet: UILabel!
+    @IBOutlet weak var movieGenreOutlet: UILabel!
+    @IBOutlet weak var movieOverviewOutlet: UITextView!
     
-
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -23,9 +25,28 @@ class SelectedMovieTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
+        
         if let title = self.movie?.title {
             self.movieTitleOutlet.text = title
         }
+        
+        if let releaseDate = self.movie?.release_date {
+            self.movieReleaseDateOutlet.text = releaseDate
+        }
+        
+        var genres: String = ""
+        
+        for genre in (self.movie?.genre_ids)! {
+            genres += "   " + String(genre)
+        }
+        
+        if let overview = self.movie?.overview {
+            self.movieOverviewOutlet.text = overview
+        }
+        
+        self.movieGenreOutlet.text = genres
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

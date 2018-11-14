@@ -29,13 +29,21 @@ struct Movie: DataObject{
     var video: Bool
     var vote_average: Float
     var popularity: Double
+    var genre_ids: [Int]
     var title: String
-    //var imageUrl: String
+    var poster_path: String
     var release_date: String
     var overview: String
     
+    
 }
 
+struct Genre: DataObject{
+    
+    var id: Int
+    var name: String
+    
+}
 
 struct Results: DataObject {
     var movies: [Movie]

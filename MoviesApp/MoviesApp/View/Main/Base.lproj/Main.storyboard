@@ -67,6 +67,9 @@
                                                     <rect key="frame" x="144" y="16" width="15" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="favorite_gray_icon"/>
+                                                    <connections>
+                                                        <action selector="favoriteMovieButtonTapped:" destination="lFm-XJ-tb4" eventType="touchUpInside" id="l0g-5f-mok"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-M4-JNo">
                                                     <rect key="frame" x="27" y="8" width="112" height="31"/>
@@ -116,7 +119,7 @@
         <!--Movies-->
         <scene sceneID="f2f-yT-wiQ">
             <objects>
-                <tableViewController id="1WV-QA-5lM" sceneMemberID="viewController">
+                <tableViewController id="1WV-QA-5lM" customClass="FavoriteMoviesTableViewController" customModule="MoviesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ssK-Y0-OQM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,6 +160,12 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="backdropImageOutlet" destination="bVP-oZ-5qa" id="aPR-Dn-mXq"/>
+                                    <outlet property="movieDescriptionOutlet" destination="jkP-qr-Rg6" id="Joa-wN-ML9"/>
+                                    <outlet property="movieTitleOutlet" destination="l7Q-HP-9nk" id="sAB-5E-6iQ"/>
+                                    <outlet property="movieYearOutlet" destination="OAA-gJ-WTl" id="Q5R-0r-WHC"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

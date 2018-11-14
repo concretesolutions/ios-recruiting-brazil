@@ -9,7 +9,13 @@
 import UIKit
 
 class FavoriteMovieTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var backdropImageOutlet: UIImageView!
+    @IBOutlet weak var movieTitleOutlet: UILabel!
+    @IBOutlet weak var movieDescriptionOutlet: UILabel!
+    @IBOutlet weak var movieYearOutlet: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +25,15 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setupCell(backdropImage: UIImage, title: String, detail:String, release:String){
+        
+        self.backdropImageOutlet.image = backdropImage
+        self.movieTitleOutlet.text = title
+        self.movieYearOutlet.text = release
+        self.movieDescriptionOutlet.text = detail
+        
     }
 
 }

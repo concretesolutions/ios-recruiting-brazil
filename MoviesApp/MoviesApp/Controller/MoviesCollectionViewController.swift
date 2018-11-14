@@ -12,19 +12,14 @@ private let reuseIdentifier = "Cell"
 
 class MoviesCollectionViewController: UICollectionViewController {
 
-    
-    
     @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
     var movies: [Movie] = []
     
     override func viewWillAppear(_ animated: Bool) {
         
-      self.tabBarController?.tabBar.isHidden = false
+    self.movies = []
         
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+      self.tabBarController?.tabBar.isHidden = false
         
         self.activityIndicatorOutlet.isHidden = false
         self.activityIndicatorOutlet.startAnimating()
@@ -36,9 +31,21 @@ class MoviesCollectionViewController: UICollectionViewController {
             if let responseObj = response as? Response{
                 
                 let movies = responseObj.results
-                   
+                
                 for movie in movies{
                     if let tempMovie = movie as? Movie{
+                        print("xablau2")
+                        MovieDAO.getIimage(backdrop_path: tempMovie.poster_path, completionHandler: { (image, error) in
+                            
+                            if error != nil {
+                                print("deu ruim aqui grande")
+                                return
+                            } else {
+                                print("deu bom")
+                            }
+                            
+                        })
+                        
                         self.movies.append(tempMovie)
                         print(tempMovie)
                     }
@@ -49,7 +56,16 @@ class MoviesCollectionViewController: UICollectionViewController {
             self.activityIndicatorOutlet.isHidden = true
             self.collectionView.reloadData()
         }//>>>>>
+        
+        
+    }
     
+   
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
     }
 
 
@@ -68,7 +84,7 @@ class MoviesCollectionViewController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviePreviewCell", for: indexPath) as? MoviePreviewCollectionViewCell
     
-        cell?.setupCell(image: UIImage(named: "theMegPoster")!, title: self.movies[indexPath.row].title)
+        cell?.setupCell(image: UIImage(named: "theMegPoster")!, title: self.movies[indexPath.row].title, movie: self.movies[indexPath.row])
     
         return cell!
     }
