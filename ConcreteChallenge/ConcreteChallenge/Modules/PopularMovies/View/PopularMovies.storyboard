@@ -23,40 +23,51 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PQc-1N-dVk">
-                                    <size key="itemSize" width="163" height="155"/>
+                                    <size key="itemSize" width="163" height="249"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieCell" id="j1M-90-ueq" customClass="MovieCollectionViewCell" customModule="ConcreteChallenge" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="163" height="155"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="163" height="249"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="163" height="155"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="163" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-BV-eUY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="163" height="111"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-BV-eUY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="163" height="199"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v6-hD-CoS">
-                                                    <rect key="frame" x="0.0" y="123" width="133" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttr-6o-z09">
-                                                    <rect key="frame" x="134" y="124" width="22" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttr-6o-z09">
+                                                    <rect key="frame" x="119" y="199" width="39" height="50"/>
                                                     <state key="normal" image="favorite_gray_icon"/>
                                                     <connections>
                                                         <action selector="favoriteButtonTapped:" destination="j1M-90-ueq" eventType="touchUpInside" id="7Z1-yS-2Ay"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v6-hD-CoS">
+                                                    <rect key="frame" x="5" y="199" width="114" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="0v6-hD-CoS" firstAttribute="top" secondItem="4bG-BV-eUY" secondAttribute="bottom" id="Am0-f8-hHd"/>
+                                            <constraint firstItem="0v6-hD-CoS" firstAttribute="width" secondItem="j1M-90-ueq" secondAttribute="width" multiplier="0.7" id="De5-oM-zl7"/>
+                                            <constraint firstAttribute="bottom" secondItem="ttr-6o-z09" secondAttribute="bottom" id="NrZ-hS-dA2"/>
+                                            <constraint firstItem="ttr-6o-z09" firstAttribute="leading" secondItem="0v6-hD-CoS" secondAttribute="trailing" id="anm-ac-N8w"/>
+                                            <constraint firstItem="ttr-6o-z09" firstAttribute="top" secondItem="4bG-BV-eUY" secondAttribute="bottom" id="fW2-FD-Jpy"/>
+                                            <constraint firstItem="4bG-BV-eUY" firstAttribute="height" secondItem="j1M-90-ueq" secondAttribute="height" multiplier="0.8" id="iDa-wK-BTc"/>
+                                            <constraint firstAttribute="bottom" secondItem="0v6-hD-CoS" secondAttribute="bottom" id="iQf-MG-sc0"/>
+                                            <constraint firstAttribute="trailing" secondItem="4bG-BV-eUY" secondAttribute="trailing" id="nwf-w1-U2s"/>
+                                            <constraint firstAttribute="trailing" secondItem="ttr-6o-z09" secondAttribute="trailing" constant="5" id="twD-vf-gwF"/>
+                                            <constraint firstItem="0v6-hD-CoS" firstAttribute="leading" secondItem="j1M-90-ueq" secondAttribute="leading" constant="5" id="xJY-Fk-aFs"/>
+                                            <constraint firstItem="4bG-BV-eUY" firstAttribute="leading" secondItem="j1M-90-ueq" secondAttribute="leading" id="xRC-bE-96P"/>
+                                            <constraint firstItem="4bG-BV-eUY" firstAttribute="top" secondItem="j1M-90-ueq" secondAttribute="top" id="zPi-kf-7NA"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="favoriteButton" destination="ttr-6o-z09" id="W3M-hJ-iHI"/>
                                             <outlet property="nameLabel" destination="0v6-hD-CoS" id="UV0-fK-QDP"/>
