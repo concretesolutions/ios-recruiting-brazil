@@ -13,6 +13,11 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
     // MARK: - Properties
     var output: PopularMoviesInteractorOutput!
     
-    // MARK: - PopularMoviesInteractorInput functions
+    // MARK: - PopularMoviesInteractorInput Functions
+    func fetchMovies() {
+        MovieDataManager.fetchPopularMovies(completion: {
+            self.output.didFetch(movies: MovieDataManager.movies)
+        })
+    }
     
 }
