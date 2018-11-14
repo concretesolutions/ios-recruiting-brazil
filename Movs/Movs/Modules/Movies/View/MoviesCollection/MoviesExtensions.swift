@@ -11,8 +11,8 @@ import UIKit
 // MARK: - UICollectionViewDelegate
 extension MoviesView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("-> Selected: \(indexPath.item)")
-    }
+        print("-> Selected: \(indexPath.item) [\(self.presenter.interactor.getMovie(at: indexPath.item).title)]")
+    }    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

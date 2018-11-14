@@ -15,6 +15,7 @@ class MoviesView: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var outletMoviesCollection: UICollectionView!
+    
     // MARK: - Outlets Views
     @IBOutlet weak var outletMoviesError: MoviesViewError!
     @IBOutlet weak var outletMoviesNoResults: MoviesViewNoResults!
@@ -37,11 +38,6 @@ class MoviesView: UIViewController {
         // Setup Loading View
         self.outletMoviesLoading.isHidden = false
         self.outletMoviesLoading.setup(movieView: self)
-        
-        // FIXME: - Gesture Any Type
-        // Setup Gesture
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
-        self.view.addGestureRecognizer(tap)
         
         // VIPER
         self.presenter.fetchMovies()
@@ -79,9 +75,13 @@ class MoviesView: UIViewController {
         self.outletMoviesNoResults.isHidden = false
     }
     
-    // GESTUREs METHODs
+    // INTERACTIONs METHODs
     
-    @objc func endEditing() {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollViewInteractionStarted()
+    }
+    
+    func scrollViewInteractionStarted() {
         // Recolhe teclado
         self.navigationItem.searchController?.searchBar.endEditing(true)
         // Interagindo sem texto de pesquisa = Recolhe pesquisa
