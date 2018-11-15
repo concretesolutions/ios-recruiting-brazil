@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         let movies = LocalManager.getMovies()
         for movie in movies {
-            print(movie.title!)
+            print(" - \(movie.title!) - \(movie.image!)")
         }
 
 //        let router = EnterRouter.init()

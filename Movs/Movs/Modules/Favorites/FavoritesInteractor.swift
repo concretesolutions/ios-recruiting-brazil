@@ -37,7 +37,7 @@ class FavoritesInteractor {
     
     func getMovie(at index: Int) -> MovieDetail {
         let storedMovie = moviesVisible[index]
-        let movie = MovieDetail.init(adult: false, genres: nil, title: storedMovie.title!, release_date: storedMovie.year!, poster_path: "", overview: storedMovie.overview!, homepage: nil, id: Int(storedMovie.id))
+        let movie = MovieDetail.init(adult: false, genres: nil, title: storedMovie.title!, release_date: storedMovie.year!, poster_path: storedMovie.image!, overview: storedMovie.overview!, homepage: nil, id: Int(storedMovie.id))
         return movie
     }
    

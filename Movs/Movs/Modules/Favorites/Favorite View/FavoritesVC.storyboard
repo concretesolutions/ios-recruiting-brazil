@@ -50,9 +50,14 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-Su-i7S">
+                                            <rect key="frame" x="43" y="93" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="outletActivityIndicator" destination="f5o-Su-i7S" id="VNa-Um-6Oq"/>
                                     <outlet property="outletMovieImage" destination="Vh1-b4-vhD" id="046-Xh-Inv"/>
                                     <outlet property="outletMovieOverview" destination="p2E-Bv-Xem" id="IrN-LK-syB"/>
                                     <outlet property="outletMovieTitle" destination="hBX-R9-1Us" id="m3y-5M-WSv"/>
