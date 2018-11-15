@@ -59,7 +59,7 @@ class APIManager: NSObject {
                     
                     let decoder = JSONDecoder()
                     decoder.userInfo[CodingUserInfoKey.context] = CoreDataSingleton.shared.persistentContainer.viewContext
-                    
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let movieDBResponse = try decoder.decode(RequestType.Response.self, from: data)
                     
                     

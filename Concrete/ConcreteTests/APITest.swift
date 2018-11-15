@@ -37,7 +37,12 @@ class APITest: XCTestCase {
             case .failure(let error):
                 XCTFail(error.localizedDescription)
                 answerAPIExpectation.fulfill()
-                print(error.localizedDescription)
+                
+                if let decodingError = error as? DecodingError {
+                    print(decodingError)
+                }else{
+                    print(error.localizedDescription)
+                }
             }
         }
         

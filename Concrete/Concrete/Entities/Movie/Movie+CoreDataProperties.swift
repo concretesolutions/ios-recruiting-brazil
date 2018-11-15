@@ -2,7 +2,7 @@
 //  Movie+CoreDataProperties.swift
 //  Concrete
 //
-//  Created by Kaique Magno Dos Santos on 14/11/18.
+//  Created by Kaique Magno Dos Santos on 15/11/18.
 //  Copyright © 2018 Kaique Magno Dos Santos. All rights reserved.
 //
 //
@@ -23,7 +23,9 @@ extension Movie {
     @NSManaged public var popularity: Double
     @NSManaged public var releaseDate: NSDate?
     @NSManaged public var title: String?
-    @NSManaged public var voteAvarage: Double
+    @NSManaged public var voteAverage: Double
     @NSManaged public var overview: String?
+    @NSManaged public var image: NSData?
+    @NSManaged public var posterPath: String?
 
 }

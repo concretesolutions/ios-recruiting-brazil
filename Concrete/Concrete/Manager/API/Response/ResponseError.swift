@@ -10,12 +10,6 @@ import Foundation
 
 public struct ResponseError: Decodable {
     
-    enum CodingKeys: String, CodingKey
-    {
-        case statusCode = "status_code"
-        case statusMessage = "status_message"
-    }
-    
     let statusCode:Int
     let statusMessage:String?
     

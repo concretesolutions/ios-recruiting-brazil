@@ -17,11 +17,12 @@ public class Movie: NSManagedObject,Decodable {
         case id
         case title
         case adult
-        case releaseDate = "release_date"
+        case releaseDate
         case popularity
-        case voteAvarage = "vote_average"
-        case genresIds = "genre_ids"
+        case voteAverage
+        case genresIds
         case overview
+        case posterPath
     }
     
     // MARK: Decodable
@@ -74,10 +75,13 @@ public class Movie: NSManagedObject,Decodable {
         self.popularity = try container.decode(Double.self, forKey: .popularity)
         
         //VoteAvarage
-        self.voteAvarage = try container.decode(Double.self, forKey: .voteAvarage)
+        self.voteAverage = try container.decode(Double.self, forKey: .voteAverage)
         
         //Overview
         self.overview = try container.decodeIfPresent(String.self, forKey: .overview)
+        
+        //PosterPath
+        self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
         
         //Genres
         let genresIdsArray = try container.decodeIfPresent([Int].self, forKey: .genresIds)
