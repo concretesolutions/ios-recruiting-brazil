@@ -10,15 +10,19 @@ import Foundation
 import UIKit
 
 protocol PopularMoviesMiddleDelegate: class {
-    func fetchCompleted(with newIndexPathsToReload: [IndexPath]?)
+    func fetchCompleted()
     func fetchFailed()
+    func fetchWithNewPageResults(paths: [IndexPath])
+    func searchResultNil()
 }
 
 class PopularMoviesMiddle {
     
     weak var delegate: PopularMoviesMiddleDelegate?
     var popularMovies: Popular?
+    var searchResults: SearchResultsWorker?
     var popularResults: [PopularResults] = []
+    var searchResultArray: [ResultsOfSearchWorker] = []
     var currentPage = 1
     var total = 0
     var isFetchInProgress = false
@@ -31,25 +35,30 @@ class PopularMoviesMiddle {
         return popularResults[index]
     }
     
+    func searchData(at index: Int) -> ResultsOfSearchWorker {
+        return searchResultArray[index]
+    }
+    
     func fetchMovies() {
+        self.currentPage = 0
+        self.currentPage += 1
         guard !isFetchInProgress else { return }
         
         isFetchInProgress = true
         
         RequestData.getPopularData(page: currentPage, completion: { (popular: Popular) in
             DispatchQueue.main.async {
-                self.currentPage += 1
                 self.isFetchInProgress = false
                 self.popularMovies = Popular(page: popular.page, total_results: popular.total_results, total_pages: popular.total_pages, results: popular.results)
-                self.popularResults = popular.results
-                print("FEZ O REQUEST")
-                print("popular page \(popular.page)")
-                
-                if popular.page > 1 {
-                    let indexToReload = self.pathsToReload(from: popular.results)
-                    self.delegate?.fetchCompleted(with: indexToReload)
+                if self.currentPage < popular.total_pages {
+                    self.currentPage += 1
+                    self.popularResults.append(contentsOf: popular.results)
+                }
+                if self.currentPage <= 2 {
+                    self.delegate?.fetchCompleted()
                 } else {
-                    self.delegate?.fetchCompleted(with: .none)
+                    let indexPathToReload = self.pathsToReload(from: popular.results)
+                    self.delegate?.fetchWithNewPageResults(paths: indexPathToReload)
                 }
             }
         }) { (error) in
@@ -59,9 +68,52 @@ class PopularMoviesMiddle {
             }
         }
     }
+        
+        func searchMovies(searchString: String) {
+            self.currentPage = 0
+            self.currentPage += 1
+            
+            self.popularResults.removeAll()
+            
+            guard !isFetchInProgress else { return }
+            let stringTrimmed = searchString.replacingOccurrences(of: " ", with: "")
+            
+            isFetchInProgress = true
+            
+            RequestData.getSearchData(searchString: stringTrimmed, page: currentPage, completion: { (searchData: SearchResultsWorker) in
+                DispatchQueue.main.async {
+                self.isFetchInProgress = false
+                self.searchResults = SearchResultsWorker(page: searchData.page, results: searchData.results, total_pages: searchData.total_pages, total_results: searchData.total_results)
+                    if searchData.total_results == 0 {
+                        self.delegate?.searchResultNil()
+                    }
+                    if self.currentPage < searchData.total_pages {
+                        self.currentPage += 1
+                        self.searchResultArray.append(contentsOf: searchData.results)
+                    }
+                    if self.currentPage <= 2 {
+                        self.delegate?.fetchCompleted()
+                    } else {
+                        let indexPathToReload = self.searchPathsToReload(from: searchData.results)
+                        self.delegate?.fetchWithNewPageResults(paths: indexPathToReload)
+                    }
+                }
+            }) { (error) in
+                DispatchQueue.main.async {
+                    print(error)
+                    self.delegate?.fetchFailed()
+                }
+            }
+        }
     
     func pathsToReload(from results: [PopularResults]) -> [IndexPath] {
         let startIndex = popularResults.count - results.count
+        let endIndex = startIndex + results.count
+        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+    }
+    
+    func searchPathsToReload(from results: [ResultsOfSearchWorker]) -> [IndexPath] {
+        let startIndex = searchResultArray.count - results.count
         let endIndex = startIndex + results.count
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }

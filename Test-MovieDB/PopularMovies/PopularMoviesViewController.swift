@@ -10,17 +10,33 @@ import UIKit
 
 class PopularMoviesViewController: UIViewController {
     
-    @IBOutlet weak var popularMoviesTableView: UITableView!
-    @IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
+    @IBOutlet weak var popularMoviesCollectionView: UICollectionView!
+    //@IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    let contentLayoutData = ContentLayoutData()
+    let indicatorOfActivity = UIActivityIndicatorView()
     
     var middle: PopularMoviesMiddle!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        popularMoviesTableView.delegate = self
-        popularMoviesTableView.dataSource = self
-        popularMoviesTableView.prefetchDataSource = self
-
+        popularMoviesCollectionView.delegate = self
+        popularMoviesCollectionView.dataSource = self
+        searchBar.delegate = self
+        
+        navigationItem.title = "Movies"
+        navigationController?.navigationBar.barTintColor = Colors.yellowNavigation.color
+        searchBar.barTintColor = Colors.yellowNavigation.color
+        let tf = searchBar.value(forKey: "searchField") as! UITextField
+        tf.backgroundColor = Colors.darkYellow.color
+        tf.placeholder = "Search"
+        
+        tabBarController?.tabBar.barTintColor = Colors.yellowNavigation.color
+        
+        popularMoviesCollectionView.isHidden = true
+        
+        addActivityIndicator()
+        
         indicatorOfActivity.startAnimating()
         
         middle = PopularMoviesMiddle(delegate: self)
@@ -28,67 +44,171 @@ class PopularMoviesViewController: UIViewController {
         
     }
     
+    func addActivityIndicator() {
+        self.popularMoviesCollectionView.addSubview(indicatorOfActivity)
+        indicatorOfActivity.translatesAutoresizingMaskIntoConstraints = false
+        indicatorOfActivity.centerXAnchor.constraint(equalTo: self.popularMoviesCollectionView.centerXAnchor).isActive = true
+        indicatorOfActivity.centerYAnchor.constraint(equalTo: self.popularMoviesCollectionView.centerYAnchor).isActive = true
+        indicatorOfActivity.startAnimating()
+    }
+    
+    func loadingError() {
+        let alert = UIAlertController(title: "Ops!", message: "Ocorreu um erro, tente novamente.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tentar!", style: .default, handler: { _ in
+            guard let searchText = self.searchBar.text else { return }
+            self.middle.searchMovies(searchString: searchText)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: { _ in
+            self.middle.fetchMovies()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func searchResulError() {
+        let alert = UIAlertController(title: "Ops!", message: "Sua busca não resultou em nenhum resultado.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        print("middle.currentPage \(middle.currentPage)")
         return indexPath.row >= middle.currentPage
     }
     
     func visibleIndexPathsToReload(paths: [IndexPath]) -> [IndexPath] {
-        let indexPathsOfVisibleRows = popularMoviesTableView.indexPathsForVisibleRows ?? []
+        let indexPathsOfVisibleRows = popularMoviesCollectionView.indexPathsForVisibleItems
         let indexPathsIntersection = Set(indexPathsOfVisibleRows).intersection(paths)
         return Array(indexPathsIntersection)
     }
 }
 
-extension PopularMoviesViewController: UITableViewDelegate {
+extension PopularMoviesViewController: UICollectionViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 4
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if self.searchBar.text?.isEmpty == true {
+            if indexPath.row == middle.popularResults.count - 1 {
+                addActivityIndicator()
+                middle.fetchMovies()
+            }
+        } else {
+            if indexPath.row == middle.popularResults.count - 1 {
+                addActivityIndicator()
+                guard let searchString = searchBar.text else { return }
+                middle.searchMovies(searchString: searchString)
+            }
+        }
     }
-    
 }
 
-extension PopularMoviesViewController: UITableViewDataSource {
+extension PopularMoviesViewController: UICollectionViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return middle.popularResults.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.searchBar.text?.isEmpty == true {
+            return middle.popularResults.count
+        } else {
+            return middle.searchResultArray.count
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "popular", for: indexPath) as! PopularMoviesTableViewCell
-        if isLoadingCell(for: indexPath) {
-            cell.configure(with: .none)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popular", for: indexPath) as! PopularMoviesCollectionViewCell
+        if self.searchBar.text?.isEmpty == false {
+            cell.configure(with: nil, searchData: middle.searchData(at: indexPath.row))
         } else {
-            cell.configure(with: middle.movieData(at: indexPath.row))
+            cell.configure(with: middle.movieData(at: indexPath.row), searchData: nil)
         }
+        cell.backgroundColor = .black
         return cell
     }
 }
 
 extension PopularMoviesViewController: PopularMoviesMiddleDelegate {
     
-    func fetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-        guard let newToReload = newIndexPathsToReload else {
-            indicatorOfActivity.stopAnimating()
-            popularMoviesTableView.reloadData()
-            return
-        }
-        let pathsToReload = visibleIndexPathsToReload(paths: newToReload)
-        popularMoviesTableView.reloadRows(at: pathsToReload, with: .automatic)
+    func fetchCompleted() {
+        popularMoviesCollectionView.isHidden = false
+        indicatorOfActivity.stopAnimating()
+        indicatorOfActivity.removeFromSuperview()
+        popularMoviesCollectionView.reloadData()
+    }
+    
+    func fetchWithNewPageResults(paths: [IndexPath]) {
+        popularMoviesCollectionView.isHidden = false
+        indicatorOfActivity.removeFromSuperview()
+       indicatorOfActivity.stopAnimating()
+        let pathsToReload = visibleIndexPathsToReload(paths: paths)
+        popularMoviesCollectionView.reloadData()
+        popularMoviesCollectionView.reloadItems(at: pathsToReload)
     }
     
     func fetchFailed() {
+        popularMoviesCollectionView.removeFromSuperview()
+        indicatorOfActivity.removeFromSuperview()
         indicatorOfActivity.stopAnimating()
-        let alert = UIAlertController(title: "Ops!", message: "Erro ao carregar", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.loadingError()
+    }
+    
+    func searchResultNil() {
+        self.searchResulError()
     }
 }
 
-extension PopularMoviesViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
-            middle.fetchMovies()
-        }
+extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let height2 = collectionView.frame.height * 0.45
+        let width2 = (collectionView.frame.width * 0.5) - contentLayoutData.leftEdgeInsetConstant - contentLayoutData.rightEdgeInsetConstant
+        
+        return CGSize(width: width2, height: height2)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+
+        return UIEdgeInsets(top: contentLayoutData.topEdgeInsetConstant, left: contentLayoutData.leftEdgeInsetConstant, bottom: contentLayoutData.bottomEdgeInsetConstant, right: contentLayoutData.rightEdgeInsetConstant)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return contentLayoutData.spaceBetweenItemsConstant
+    }
+    
+}
+
+extension PopularMoviesViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.popularMoviesCollectionView.reloadData()
+        if searchText.isEmpty {
+            self.middle.fetchMovies()
+        }
+        self.middle.searchResultArray.removeAll(keepingCapacity: true)
+        self.popularMoviesCollectionView.isHidden = true
+        self.addActivityIndicator()
+        self.middle.searchMovies(searchString: searchText)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let textOfSearchBar = searchBar.text else { return }
+        if searchBar.text?.isEmpty == true {
+            self.middle.fetchMovies()
+            
+        }
+        self.middle.searchMovies(searchString: textOfSearchBar)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        middle.fetchMovies()
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    
+    
 }

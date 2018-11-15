@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class RequestData {
     private static let configuration: URLSessionConfiguration = {
@@ -32,9 +33,10 @@ class RequestData {
     
     class func getSearchData<T: Codable>(searchString: String, page: Int, completion: @escaping (T) -> Void, onError: @escaping (LoadError) -> Void) {
         
-        let path = "https://api.themoviedb.org/3/search/company?api_key=ba8157788e70a54b6eb17392403e33c6&query=\(searchString)&page=\(page)"
+        let realPath = "https://api.themoviedb.org/3/search/movie?api_key=ba8157788e70a54b6eb17392403e33c6&language=en-US&query=\(searchString)&page=\(page)&include_adult=false"
         
-        guard let url = URL(string: path) else {
+        
+        guard let url = URL(string: realPath) else {
             return onError(.url)
         }
         
