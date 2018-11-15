@@ -44,4 +44,8 @@ class MovieDataManager {
             }
         }.resume()
     }
+    
+    static func fetchGenres() {
+
+    }
 }

@@ -18,7 +18,7 @@ protocol MovieDetailWireframe: class {
 protocol MovieDetailView {
     var presenter: MovieDetailPresentation! { get set }
     
-    func showDetails(of movie: Movie)
+    func showDetails(of movie: MovieDetails)
 }
 
 protocol MovieDetailPresentation: class {
@@ -33,9 +33,12 @@ protocol MovieDetailPresentation: class {
 
 protocol MovieDetailInteractorInput: class {
     var output: MovieDetailInteractorOutput! { get set }
+    
+    func fetchMovieDetails(movie: Movie)
 }
 
 protocol MovieDetailInteractorOutput: class {
+    func didFetchMovieDetails(movieDetails: MovieDetails)
 }
 
 

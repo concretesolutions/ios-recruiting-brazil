@@ -20,9 +20,12 @@ class MovieDetailPresenter: MovieDetailPresentation, MovieDetailInteractorOutput
     
     // MARK: - MovieDetailPresentation functions
     func viewDidLoad() {
-        self.view?.showDetails(of: movie)
+        self.interactor.fetchMovieDetails(movie: movie)
     }
     
     // MARK: - MovieDetailInteractorOutput functions
+    func didFetchMovieDetails(movieDetails: MovieDetails) {
+        self.view?.showDetails(of: movieDetails)
+    }
     
 }
