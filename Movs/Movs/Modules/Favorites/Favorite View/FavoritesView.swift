@@ -35,6 +35,16 @@ class FavoritesView: UITableViewController {
         self.tableView.reloadData()
     }
     
+    // FROM NAVIGATION
+    
+    func search(text: String) {
+        self.presenter.searchMovie(containing: text)
+    }
+    
+    func searchEnded() {
+        self.presenter.searchMovieEnded()
+    }
+    
     // INTERACTIONs METHODs
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

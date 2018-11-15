@@ -56,6 +56,7 @@ class CustomNavigation: UINavigationController {
     
 }
 
+// MARK: - UISearchBarDelegate
 extension CustomNavigation: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -63,13 +64,22 @@ extension CustomNavigation: UISearchBarDelegate {
             if let view = self.viewControllers.first as? MoviesView {
                 view.searchEnded()
             }
+            if let view = self.viewControllers.first as? FavoritesView {
+                view.searchEnded()
+            }
         }else if let view = self.viewControllers.first as? MoviesView {
+            view.search(text: searchText)
+        }
+        else if let view = self.viewControllers.first as? FavoritesView {
             view.search(text: searchText)
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         if let view = self.viewControllers.first as? MoviesView {
+            view.searchEnded()
+        }
+        if let view = self.viewControllers.first as? FavoritesView {
             view.searchEnded()
         }
     }

@@ -26,6 +26,19 @@ class FavoritesInteractor {
     
     // FROM PRESENTER
     
+    func filterMovies(containing: String) {
+        moviesVisible = []
+        for movie in movies {
+            if movie.title!.contains(containing) {
+                self.moviesVisible.append(movie)
+            }
+        }
+    }
+    
+    func filterMoviesEnded() {
+        self.moviesVisible = self.movies
+    }
+    
     func getMovieID(index: Int) -> Int {
         return Int(self.moviesVisible[index].id)
     }

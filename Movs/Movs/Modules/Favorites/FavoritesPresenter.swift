@@ -37,6 +37,14 @@ class FavoritesPresenter: NSObject {
         self.router.goToMovieDetail(movieID: id)
     }
     
+    func searchMovie(containing: String) {
+        self.interactor.filterMovies(containing: containing)
+    }
+    
+    func searchMovieEnded() {
+        self.interactor.filterMoviesEnded()
+    }
+    
     // FROM INTERACTOR
     
     func moviesFilterChanged() {
