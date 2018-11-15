@@ -25,9 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         print("-> Movies LOCAL: \(LocalManager.fetchMovies().count)")
-        let movies = LocalManager.fetchMovies()
+//        let movies = LocalManager.fetchMovies()
+//        for movie in movies {
+//            print(movie.value(forKey: "title") as! String)
+//        }
+        let movies = LocalManager.getMovies()
         for movie in movies {
-            print(movie.value(forKey: "title") as! String)
+            print(movie.title!)
         }
 
 //        let router = EnterRouter.init()
