@@ -11,6 +11,7 @@ import UIKit
 class MovieDetailViewController: UIViewController, MovieDetailView {
     
     // MARK: - Outlets
+    @IBOutlet weak var posterImage: UIImageView!
     
     // MARK: - Properties
     var presenter: MovieDetailPresentation!
@@ -22,6 +23,15 @@ class MovieDetailViewController: UIViewController, MovieDetailView {
     }
     
     // MARK: - MovieDetailView Functions
+    func showDetails(of movie: Movie) {
+        // Assuming that the image from the MovieCell was just a thumbnail, we should now fetch the full size image
+        ImageDataManager.getImageFrom(imagePath: movie.posterPath, completion: { (image) in
+            DispatchQueue.main.async {
+                self.posterImage.image = image
+            }
+        })
+    }
+    
     
     // MARK: - Functions
     

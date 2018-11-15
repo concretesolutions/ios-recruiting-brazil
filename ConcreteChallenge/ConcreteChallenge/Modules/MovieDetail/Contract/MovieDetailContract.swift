@@ -12,17 +12,21 @@ protocol MovieDetailWireframe: class {
     var viewController: UIViewController? { get set }
     static var presenter: MovieDetailPresentation! { get set }
     
-    static func assembleModule() -> UIViewController
+    static func assembleModule(with movie: Movie) -> UIViewController
 }
 
 protocol MovieDetailView {
     var presenter: MovieDetailPresentation! { get set }
+    
+    func showDetails(of movie: Movie)
 }
 
 protocol MovieDetailPresentation: class {
     var view: MovieDetailView? { get set }
     var interactor: MovieDetailInteractorInput! { get set }
     var router: MovieDetailWireframe! { get set }
+    
+    var movie: Movie! { get set }
     
     func viewDidLoad()
 }

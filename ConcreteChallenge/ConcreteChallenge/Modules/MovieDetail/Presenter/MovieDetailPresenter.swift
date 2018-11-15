@@ -10,14 +10,17 @@ import Foundation
 
 class MovieDetailPresenter: MovieDetailPresentation, MovieDetailInteractorOutput {
     
+    
     // MARK: - Properties
     var view: MovieDetailView?
     var interactor: MovieDetailInteractorInput!
     var router: MovieDetailWireframe!
     
+    var movie: Movie!
+    
     // MARK: - MovieDetailPresentation functions
     func viewDidLoad() {
-        
+        self.view?.showDetails(of: movie)
     }
     
     // MARK: - MovieDetailInteractorOutput functions
