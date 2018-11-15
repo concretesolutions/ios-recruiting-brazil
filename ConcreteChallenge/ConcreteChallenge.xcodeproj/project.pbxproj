@@ -37,7 +37,7 @@
 		755C64D5219A72D400E13B81 /* PosterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C64D4219A72D400E13B81 /* PosterImage.swift */; };
 		7570ACC4219CEC6200AE7C09 /* MovieDetailContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7570ACBA219CEC6200AE7C09 /* MovieDetailContract.swift */; };
 		7570ACC5219CEC6200AE7C09 /* MovieDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7570ACBC219CEC6200AE7C09 /* MovieDetailPresenter.swift */; };
-		7570ACC6219CEC6200AE7C09 /* PopularMovies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7570ACBE219CEC6200AE7C09 /* PopularMovies.storyboard */; };
+		7570ACC6219CEC6200AE7C09 /* MovieDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7570ACBE219CEC6200AE7C09 /* MovieDetail.storyboard */; };
 		7570ACC7219CEC6200AE7C09 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7570ACBF219CEC6200AE7C09 /* MovieDetailView.swift */; };
 		7570ACC8219CEC6200AE7C09 /* MovieDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7570ACC1219CEC6200AE7C09 /* MovieDetailInteractor.swift */; };
 		7570ACC9219CEC6200AE7C09 /* MovieDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7570ACC3219CEC6200AE7C09 /* MovieDetailRouter.swift */; };
@@ -97,7 +97,7 @@
 		755C64D4219A72D400E13B81 /* PosterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImage.swift; sourceTree = "<group>"; };
 		7570ACBA219CEC6200AE7C09 /* MovieDetailContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailContract.swift; sourceTree = "<group>"; };
 		7570ACBC219CEC6200AE7C09 /* MovieDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailPresenter.swift; sourceTree = "<group>"; };
-		7570ACBE219CEC6200AE7C09 /* PopularMovies.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PopularMovies.storyboard; sourceTree = "<group>"; };
+		7570ACBE219CEC6200AE7C09 /* MovieDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MovieDetail.storyboard; sourceTree = "<group>"; };
 		7570ACBF219CEC6200AE7C09 /* MovieDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		7570ACC1219CEC6200AE7C09 /* MovieDetailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailInteractor.swift; sourceTree = "<group>"; };
 		7570ACC3219CEC6200AE7C09 /* MovieDetailRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailRouter.swift; sourceTree = "<group>"; };
@@ -365,10 +365,10 @@
 			isa = PBXGroup;
 			children = (
 				7570ACB9219CEC6200AE7C09 /* Contract */,
-				7570ACBB219CEC6200AE7C09 /* Presenter */,
-				7570ACBD219CEC6200AE7C09 /* View */,
-				7570ACC0219CEC6200AE7C09 /* Interactor */,
 				7570ACC2219CEC6200AE7C09 /* Router */,
+				7570ACBD219CEC6200AE7C09 /* View */,
+				7570ACBB219CEC6200AE7C09 /* Presenter */,
+				7570ACC0219CEC6200AE7C09 /* Interactor */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -392,7 +392,7 @@
 		7570ACBD219CEC6200AE7C09 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7570ACBE219CEC6200AE7C09 /* PopularMovies.storyboard */,
+				7570ACBE219CEC6200AE7C09 /* MovieDetail.storyboard */,
 				7570ACBF219CEC6200AE7C09 /* MovieDetailView.swift */,
 			);
 			path = View;
@@ -521,7 +521,7 @@
 				753517BF219780A700CE5DDA /* LaunchScreen.storyboard in Resources */,
 				7535181121978D3100CE5DDA /* PopularMovies.storyboard in Resources */,
 				753517BC219780A700CE5DDA /* Assets.xcassets in Resources */,
-				7570ACC6219CEC6200AE7C09 /* PopularMovies.storyboard in Resources */,
+				7570ACC6219CEC6200AE7C09 /* MovieDetail.storyboard in Resources */,
 				7535180F21978B4300CE5DDA /* FavoriteMovies.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

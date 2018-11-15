@@ -19,8 +19,13 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.viewDidLoad()
+        
+        self.setupNavigationBar()
     }
     
     // MARK: - Functions
+    func setupNavigationBar() {
+        self.navigationItem.title = "Movies"
+    }
 }
 

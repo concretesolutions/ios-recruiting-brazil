@@ -34,7 +34,6 @@ class MovieDetailRouter: MovieDetailWireframe {
         
         self.presenter = presenter
         
-        viewController = UINavigationController(rootViewController: viewController)
         return viewController
     }
 }

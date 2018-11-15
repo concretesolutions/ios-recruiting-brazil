@@ -8,7 +8,12 @@
 
 import UIKit
 
-class PopularMoviesViewController: UIViewController, PopularMoviesView {
+protocol MovieCellSelected {
+    func didTapMovieCell(of movie: Movie)
+}
+
+class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCellSelected {
+    
     
     // MARK: - Outlets
     @IBOutlet weak var moviesCollectionView: MovieCollectionView!
@@ -21,6 +26,8 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView {
         super.viewDidLoad()
         self.presenter.viewDidLoad()
         
+        self.setupNavigationBar()
+        
         self.setupCollectionView()
         self.presenter.didRequestMovies()
     }
@@ -29,11 +36,20 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView {
     func show(movies: [Movie]) {
         self.moviesCollectionView.movies = movies
     }
+
+    // MARK: -  MovieCellSelected Functions
+    func didTapMovieCell(of movie: Movie) {
+        self.presenter.didTapMovieCell(of: movie)
+    }
     
     // MARK: - Functions
+    func setupNavigationBar() {
+        self.navigationItem.title = "Movies"
+    }
+    
     func setupCollectionView() {
         self.moviesCollectionView.delegate = self.moviesCollectionView
         self.moviesCollectionView.dataSource = self.moviesCollectionView
+        self.moviesCollectionView.cellSelected = self
     }
 }
-

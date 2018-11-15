@@ -19,6 +19,8 @@ class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
         }
     }
     
+    var cellSelected: MovieCellSelected!
+    
     // MARK: - UICollectionViewDelegate and UICollectionViewDataSource Functions
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.movies.count
@@ -33,7 +35,7 @@ class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.cellSelected.didTapMovieCell(of: self.movies[indexPath.item])
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout Functions
@@ -42,5 +44,7 @@ class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
         return CGSize(width: collectionView.bounds.width / 2.1, height: 300)
     }
 }
+
+
 
 
