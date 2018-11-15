@@ -12,6 +12,10 @@ class MovieDetailViewController: UIViewController, MovieDetailView {
     
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var movieReleaseYear: UILabel!
+    @IBOutlet weak var movieGenres: UILabel!
+    @IBOutlet weak var movieOverview: UITextView!
     
     // MARK: - Properties
     var presenter: MovieDetailPresentation!
