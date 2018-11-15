@@ -50,7 +50,7 @@ class Movie: Decodable, Encodable {
         let releaseDate: String = try container.decode(String.self, forKey: .releaseDate)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyy"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: releaseDate)
         
         self.init(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: date ?? Date())
