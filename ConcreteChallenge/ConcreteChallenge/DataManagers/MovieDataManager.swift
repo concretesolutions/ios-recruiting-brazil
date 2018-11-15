@@ -47,7 +47,7 @@ class MovieDataManager {
         }.resume()
     }
     
-    static func fetchGenres() {
+    static func fetchGenres(completion: @escaping () -> Void) {
         guard let genresURL = URL(string: self.getGenresURL) else { return }
         var request = URLRequest(url: genresURL)
         request.httpMethod = "GET"
@@ -65,6 +65,7 @@ class MovieDataManager {
                     let genresResponse = try decoder.decode(GenresResponse.self, from: data)
                     self.genres = genresResponse.genres
                     
+                    completion()
                 } catch let decoderError {
                     print("Error decoding json: ", decoderError)
                 }
