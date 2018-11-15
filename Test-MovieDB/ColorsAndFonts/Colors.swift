@@ -9,7 +9,12 @@
 import UIKit
 
 public enum Colors {
+    
+    //MARK: - CASES
+    
     case yellowNavigation, dark, darkYellow
+    
+    //MARK: - PROPERTIES
     
     public var color: UIColor {
         switch self {
@@ -23,6 +28,7 @@ public enum Colors {
     }
 }
 
+//MARK: - EXTENSIONS UICOLOR
 
 extension UIColor {
     

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+//MARK: - POPULAR MOVIES MIDDLE DELEGATE
+
 protocol PopularMoviesMiddleDelegate: class {
     func fetchCompleted()
     func fetchFailed()
@@ -17,6 +19,8 @@ protocol PopularMoviesMiddleDelegate: class {
 }
 
 class PopularMoviesMiddle {
+    
+    //MARK: - PROPERTIES
     
     weak var delegate: PopularMoviesMiddleDelegate?
     var popularMovies: Popular?
@@ -27,9 +31,13 @@ class PopularMoviesMiddle {
     var total = 0
     var isFetchInProgress = false
     
+    //MARK: - INITIALIZERS
+    
     init(delegate: PopularMoviesMiddleDelegate) {
         self.delegate = delegate
     }
+    
+    //MARK: - METHODS
     
     func movieData(at index: Int) -> PopularResults {
         return popularResults[index]
@@ -40,12 +48,10 @@ class PopularMoviesMiddle {
     }
     
     func fetchMovies() {
-        self.currentPage = 0
-        self.currentPage += 1
+    
         guard !isFetchInProgress else { return }
         
         isFetchInProgress = true
-        
         RequestData.getPopularData(page: currentPage, completion: { (popular: Popular) in
             DispatchQueue.main.async {
                 self.isFetchInProgress = false

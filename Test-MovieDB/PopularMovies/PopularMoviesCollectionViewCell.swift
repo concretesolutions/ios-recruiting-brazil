@@ -10,39 +10,64 @@ import UIKit
 
 class PopularMoviesCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - PROPERTIES
     
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var nameOfMovieLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
+    //@IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
+    let indicatorOfActivity = UIActivityIndicatorView()
+    
+    
+    //MARK: - SUPER METHODS
     
     override func prepareForReuse() {
         configure(with: .none, searchData: .none)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        indicatorOfActivity.hidesWhenStopped = true
+        self.addActivityIndicator()
+        //indicatorOfActivity.hidesWhenStopped = true
+    }
+    
+    //MARK: - METHODS
+    
+    func addActivityIndicator() {
+        self.posterImage.addSubview(indicatorOfActivity)
+        indicatorOfActivity.translatesAutoresizingMaskIntoConstraints = false
+        indicatorOfActivity.isHidden = false
+        self.indicatorOfActivity.color = .white
+        indicatorOfActivity.centerXAnchor.constraint(equalTo: self.posterImage.centerXAnchor).isActive = true
+        indicatorOfActivity.centerYAnchor.constraint(equalTo: self.posterImage.centerYAnchor).isActive = true
+        indicatorOfActivity.startAnimating()
     }
     
     func configure(with movie: PopularResults?, searchData: ResultsOfSearchWorker?) {
+        //posterImage.image = nil
+        //posterImage.isHidden = true
+        self.addActivityIndicator()
         if let movie = movie {
             nameOfMovieLabel.text = movie.title
             nameOfMovieLabel.textColor = Colors.darkYellow.color
             nameOfMovieLabel.alpha = 1
-            indicatorOfActivity.stopAnimating()
             posterImage.loadImageFromURLString(urlStirng: movie.poster_path)
+            //indicatorOfActivity.isHidden = true
+            //indicatorOfActivity.stopAnimating()
+            self.indicatorOfActivity.removeFromSuperview()
         } else if let searchData = searchData {
             nameOfMovieLabel.text = searchData.title
             nameOfMovieLabel.textColor = Colors.darkYellow.color
             nameOfMovieLabel.alpha = 1
-            indicatorOfActivity.stopAnimating()
             posterImage.loadImageFromURLString(urlStirng: searchData.poster_path)
+            //indicatorOfActivity.isHidden = true
+            //indicatorOfActivity.stopAnimating()
+            self.indicatorOfActivity.removeFromSuperview()
         } else {
             nameOfMovieLabel.alpha = 1
             posterImage.alpha = 1
-            indicatorOfActivity.startAnimating()
-            
+            self.addActivityIndicator()
+            //indicatorOfActivity.startAnimating()
+            //indicatorOfActivity.isHidden = false
         }
     }
 }

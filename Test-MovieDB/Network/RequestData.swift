@@ -10,12 +10,16 @@ import Foundation
 import UIKit
 
 class RequestData {
+    
+    //MARK: - PROPERTIES
     private static let configuration: URLSessionConfiguration = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 20.0
         return config
     }()
     private static let session = URLSession(configuration: configuration)
+    
+    //MARK: - METHODS
     
     class func getPopularData<T: Codable>(page: Int, completion: @escaping (T) -> Void, onError: @escaping (LoadError) -> Void) {
         

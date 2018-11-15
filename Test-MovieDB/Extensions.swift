@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
+//MARK: - EXTENSIONS UIIMAGEVIEW
+
 extension UIImageView {
+    
+    //MARK: - METHODS
+    
     func loadImageFromURLString(urlStirng: String?) {
         
         guard let imageString = urlStirng else { return }
@@ -29,6 +34,7 @@ extension UIImageView {
                     
                     DispatchQueue.main.async {
                         self.image = UIImage(data: data)
+                        self.isHidden = false
                     }
                 }
             }

@@ -10,10 +10,14 @@ import UIKit
 
 class PopularMoviesTableViewCell: UITableViewCell {
     
+    //MARK: - OUTLETS
+    
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
+    
+    //MARK: - SUPER METHODS
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -26,15 +30,17 @@ class PopularMoviesTableViewCell: UITableViewCell {
         indicatorOfActivity.hidesWhenStopped = true
     }
     
-    func configure(with movie: PopularResults?) {
-        
+    //MARK: - METHODS
+    
+    func configure(with movie: FavoriteMovies?) {
+
         if let movie = movie {
             titleLabel.text = movie.title
-            descriptionLabel.text = movie.overview
+            descriptionLabel.text = movie.description
             titleLabel.alpha = 1
             descriptionLabel.alpha = 1
             indicatorOfActivity.stopAnimating()
-            posterImage.loadImageFromURLString(urlStirng: movie.poster_path)
+            posterImage.loadImageFromURLString(urlStirng: movie.posterPath)
         } else {
             titleLabel.alpha = 1
             //yearLabel.alpha = 1

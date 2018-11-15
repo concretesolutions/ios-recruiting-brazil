@@ -9,10 +9,15 @@
 import Foundation
 
 struct Popular: Codable {
+    
+    //MARK: - PROPERTIES
+    
     let page: Int
     let total_results: Int
     let total_pages: Int
     let results: [PopularResults]
+    
+    //MARK: - INITIALIZERS
     
     init(page: Int, total_results: Int, total_pages: Int, results: [PopularResults]) {
         self.page = page

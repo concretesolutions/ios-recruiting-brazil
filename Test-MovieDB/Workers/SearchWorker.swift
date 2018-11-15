@@ -9,10 +9,15 @@
 import Foundation
 
 struct SearchResultsWorker: Codable {
+    
+    //MARK: - PROPERTIES
+    
     let page: Int
     let results: [ResultsOfSearchWorker]
     let total_pages: Int
     let total_results: Int
+    
+    //MARK: - INITIALIZERS
     
     init(page: Int, results: [ResultsOfSearchWorker], total_pages: Int, total_results: Int) {
         self.page = page

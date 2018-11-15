@@ -10,14 +10,18 @@ import UIKit
 
 class PopularMoviesViewController: UIViewController {
     
+    //MARK: - OUTLETS
     @IBOutlet weak var popularMoviesCollectionView: UICollectionView!
-    //@IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    //MARK: - Properties
     let contentLayoutData = ContentLayoutData()
     let indicatorOfActivity = UIActivityIndicatorView()
-    
     var middle: PopularMoviesMiddle!
+    var detailMiddle: MovieDetailMiddle!
+    var movieDetailWorker: MovieDetailWorker!
     
+    //MARK: - Super methods
     override func viewDidLoad() {
         super.viewDidLoad()
         popularMoviesCollectionView.delegate = self
@@ -27,6 +31,7 @@ class PopularMoviesViewController: UIViewController {
         navigationItem.title = "Movies"
         navigationController?.navigationBar.barTintColor = Colors.yellowNavigation.color
         searchBar.barTintColor = Colors.yellowNavigation.color
+        
         let tf = searchBar.value(forKey: "searchField") as! UITextField
         tf.backgroundColor = Colors.darkYellow.color
         tf.placeholder = "Search"
@@ -44,21 +49,42 @@ class PopularMoviesViewController: UIViewController {
         
     }
     
+    //MARK: - METHODS
+    
     func addActivityIndicator() {
-        self.popularMoviesCollectionView.addSubview(indicatorOfActivity)
-        indicatorOfActivity.translatesAutoresizingMaskIntoConstraints = false
-        indicatorOfActivity.centerXAnchor.constraint(equalTo: self.popularMoviesCollectionView.centerXAnchor).isActive = true
-        indicatorOfActivity.centerYAnchor.constraint(equalTo: self.popularMoviesCollectionView.centerYAnchor).isActive = true
-        indicatorOfActivity.startAnimating()
+        indicatorOfActivity.color = .black
+        if popularMoviesCollectionView.isHidden == false {
+            self.popularMoviesCollectionView.addSubview(indicatorOfActivity)
+            self.indicatorOfActivity.isHidden = false
+            indicatorOfActivity.translatesAutoresizingMaskIntoConstraints = false
+            indicatorOfActivity.centerXAnchor.constraint(equalTo: self.popularMoviesCollectionView.centerXAnchor).isActive = true
+            indicatorOfActivity.centerYAnchor.constraint(equalTo: self.popularMoviesCollectionView.centerYAnchor).isActive = true
+            indicatorOfActivity.startAnimating()
+        } else {
+            self.view.addSubview(indicatorOfActivity)
+            self.indicatorOfActivity.isHidden = false
+            indicatorOfActivity.translatesAutoresizingMaskIntoConstraints = false
+            indicatorOfActivity.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            indicatorOfActivity.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            indicatorOfActivity.startAnimating()
+        }
+        
     }
     
     func loadingError() {
-        let alert = UIAlertController(title: "Ops!", message: "Ocorreu um erro, tente novamente.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ops!", message: "Verifique sua conexão e tente novamente.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Tentar!", style: .default, handler: { _ in
-            guard let searchText = self.searchBar.text else { return }
-            self.middle.searchMovies(searchString: searchText)
+            self.middle.isFetchInProgress = false
+            if self.searchBar.text?.isEmpty == false {
+                guard let searchText = self.searchBar.text else { return }
+                self.middle.searchMovies(searchString: searchText)
+            } else {
+                self.middle.fetchMovies()
+                self.popularMoviesCollectionView.reloadData()
+            }
         }))
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: { _ in
+            self.middle.isFetchInProgress = false
             self.middle.fetchMovies()
         }))
         self.present(alert, animated: true, completion: nil)
@@ -82,6 +108,8 @@ class PopularMoviesViewController: UIViewController {
     }
 }
 
+//MARK: - COLLECTION VIEW DELEGATE
+
 extension PopularMoviesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -99,6 +127,8 @@ extension PopularMoviesViewController: UICollectionViewDelegate {
         }
     }
 }
+
+//MARK: - COLLECTION VIEW DATA SOURCE
 
 extension PopularMoviesViewController: UICollectionViewDataSource {
     
@@ -120,7 +150,27 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
         cell.backgroundColor = .black
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieDetail" && segue.identifier ==  "detailMovie" {
+            self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if searchBar.text?.isEmpty == true {
+            let movie = middle.popularResults[indexPath.row]
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview)
+            performSegue(withIdentifier: "movieDetail", sender: movieDetailWorker)
+        } else {
+            let movie = middle.searchResultArray[indexPath.row]
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview)
+            performSegue(withIdentifier: "detailMovie", sender: movieDetailWorker)
+        }
+    }
 }
+
+//MARK: - MIDDLE DELEGATE
 
 extension PopularMoviesViewController: PopularMoviesMiddleDelegate {
     
@@ -141,7 +191,7 @@ extension PopularMoviesViewController: PopularMoviesMiddleDelegate {
     }
     
     func fetchFailed() {
-        popularMoviesCollectionView.removeFromSuperview()
+        popularMoviesCollectionView.isHidden = true
         indicatorOfActivity.removeFromSuperview()
         indicatorOfActivity.stopAnimating()
         self.loadingError()
@@ -151,6 +201,8 @@ extension PopularMoviesViewController: PopularMoviesMiddleDelegate {
         self.searchResulError()
     }
 }
+
+//MARK: - COLLECTION VIEW DELEGATE FLOW LAYOUT
 
 extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
     
@@ -172,6 +224,8 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+//MARK: - SEARCH BAR DELEGATE
 
 extension PopularMoviesViewController: UISearchBarDelegate {
     
@@ -199,7 +253,6 @@ extension PopularMoviesViewController: UISearchBarDelegate {
         guard let textOfSearchBar = searchBar.text else { return }
         if searchBar.text?.isEmpty == true {
             self.middle.fetchMovies()
-            
         }
         self.middle.searchMovies(searchString: textOfSearchBar)
     }
@@ -209,6 +262,4 @@ extension PopularMoviesViewController: UISearchBarDelegate {
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }
-    
-    
 }

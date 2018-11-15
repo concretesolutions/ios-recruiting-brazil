@@ -9,6 +9,9 @@
 import Foundation
 
 public enum LoadError {
+    
+    //MARK: - CASES
+    
     case url
     case taskError(error: Error)
     case noResponse
