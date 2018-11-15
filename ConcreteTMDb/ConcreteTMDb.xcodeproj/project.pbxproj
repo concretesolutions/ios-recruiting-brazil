@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		EB1BFE4A219C5840000D07B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE49219C5840000D07B8 /* AppDelegate.swift */; };
-		EB1BFE4C219C5840000D07B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE4B219C5840000D07B8 /* ViewController.swift */; };
 		EB1BFE4F219C5840000D07B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1BFE4D219C5840000D07B8 /* Main.storyboard */; };
 		EB1BFE52219C5840000D07B8 /* ConcreteTMDb.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE50219C5840000D07B8 /* ConcreteTMDb.xcdatamodeld */; };
 		EB1BFE54219C5843000D07B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1BFE53219C5843000D07B8 /* Assets.xcassets */; };
 		EB1BFE57219C5843000D07B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1BFE55219C5843000D07B8 /* LaunchScreen.storyboard */; };
 		EB1BFE62219C5843000D07B8 /* ConcreteTMDbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE61219C5843000D07B8 /* ConcreteTMDbTests.swift */; };
 		EB1BFE6D219C5843000D07B8 /* ConcreteTMDbUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE6C219C5843000D07B8 /* ConcreteTMDbUITests.swift */; };
+		EB1BFE7D219D097F000D07B8 /* MoviesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE7C219D097F000D07B8 /* MoviesCollectionView.swift */; };
+		EB1BFE7F219D099B000D07B8 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE7E219D099B000D07B8 /* MoviesCollectionViewCell.swift */; };
+		EB1BFE82219D09DF000D07B8 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE81219D09DF000D07B8 /* MoviesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,6 @@
 /* Begin PBXFileReference section */
 		EB1BFE46219C5840000D07B8 /* ConcreteTMDb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteTMDb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1BFE49219C5840000D07B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EB1BFE4B219C5840000D07B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EB1BFE4E219C5840000D07B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB1BFE51219C5840000D07B8 /* ConcreteTMDb.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConcreteTMDb.xcdatamodel; sourceTree = "<group>"; };
 		EB1BFE53219C5843000D07B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		EB1BFE68219C5843000D07B8 /* ConcreteTMDbUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteTMDbUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1BFE6C219C5843000D07B8 /* ConcreteTMDbUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteTMDbUITests.swift; sourceTree = "<group>"; };
 		EB1BFE6E219C5843000D07B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB1BFE7C219D097F000D07B8 /* MoviesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionView.swift; sourceTree = "<group>"; };
+		EB1BFE7E219D099B000D07B8 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
+		EB1BFE81219D09DF000D07B8 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +103,10 @@
 		EB1BFE48219C5840000D07B8 /* ConcreteTMDb */ = {
 			isa = PBXGroup;
 			children = (
+				EB1BFE80219D09B4000D07B8 /* Controllers */,
+				EB1BFE7B219D094A000D07B8 /* Interface Resources */,
+				EB1BFE7A219D08BD000D07B8 /* Storyboard */,
 				EB1BFE49219C5840000D07B8 /* AppDelegate.swift */,
-				EB1BFE4B219C5840000D07B8 /* ViewController.swift */,
 				EB1BFE4D219C5840000D07B8 /* Main.storyboard */,
 				EB1BFE53219C5843000D07B8 /* Assets.xcassets */,
 				EB1BFE55219C5843000D07B8 /* LaunchScreen.storyboard */,
@@ -126,6 +132,30 @@
 				EB1BFE6E219C5843000D07B8 /* Info.plist */,
 			);
 			path = ConcreteTMDbUITests;
+			sourceTree = "<group>";
+		};
+		EB1BFE7A219D08BD000D07B8 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		EB1BFE7B219D094A000D07B8 /* Interface Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EB1BFE7C219D097F000D07B8 /* MoviesCollectionView.swift */,
+				EB1BFE7E219D099B000D07B8 /* MoviesCollectionViewCell.swift */,
+			);
+			path = "Interface Resources";
+			sourceTree = "<group>";
+		};
+		EB1BFE80219D09B4000D07B8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB1BFE81219D09DF000D07B8 /* MoviesViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB1BFE4C219C5840000D07B8 /* ViewController.swift in Sources */,
 				EB1BFE4A219C5840000D07B8 /* AppDelegate.swift in Sources */,
+				EB1BFE82219D09DF000D07B8 /* MoviesViewController.swift in Sources */,
 				EB1BFE52219C5840000D07B8 /* ConcreteTMDb.xcdatamodeld in Sources */,
+				EB1BFE7D219D097F000D07B8 /* MoviesCollectionView.swift in Sources */,
+				EB1BFE7F219D099B000D07B8 /* MoviesCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
