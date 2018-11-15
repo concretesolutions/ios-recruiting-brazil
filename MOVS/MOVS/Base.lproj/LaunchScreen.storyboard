@@ -18,23 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMc-Qv-mTB">
-                                <rect key="frame" x="119" y="366" width="137" height="80"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="MOVS">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="80" name="BebasNeueBold"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="ALQ-Ov-8IQ">
+                                <rect key="frame" x="122" y="377" width="131" height="58"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.14901960784313725" green="0.2196078431372549" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ZMc-Qv-mTB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="53O-L7-tcC"/>
-                            <constraint firstItem="ZMc-Qv-mTB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="fAe-jC-yL6"/>
+                            <constraint firstItem="ALQ-Ov-8IQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="8YY-SG-v3E"/>
+                            <constraint firstItem="ALQ-Ov-8IQ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="lV2-8v-H0G"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -44,4 +35,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="splash" width="131" height="58"/>
+    </resources>
 </document>

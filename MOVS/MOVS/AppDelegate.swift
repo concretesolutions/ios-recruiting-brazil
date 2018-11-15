@@ -17,6 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let filmsRouter = FilmsRouter()
+        let filmsNavigation = UINavigationController(rootViewController: filmsRouter.presenter.view)
+        let tabBarRouter = TabBarRouter(with: [filmsNavigation])
+        
+        self.window?.rootViewController = tabBarRouter.presenter.view
+        self.window?.makeKeyAndVisible()
         return true
     }
 
