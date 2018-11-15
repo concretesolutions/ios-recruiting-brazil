@@ -21,6 +21,7 @@ public class Movie: NSManagedObject,Decodable {
         case popularity
         case voteAvarage = "vote_average"
         case genresIds = "genre_ids"
+        case overview
     }
     
     // MARK: Decodable
@@ -74,6 +75,9 @@ public class Movie: NSManagedObject,Decodable {
         
         //VoteAvarage
         self.voteAvarage = try container.decode(Double.self, forKey: .voteAvarage)
+        
+        //Overview
+        self.overview = try container.decodeIfPresent(String.self, forKey: .overview)
         
         //Genres
         let genresIdsArray = try container.decodeIfPresent([Int].self, forKey: .genresIds)

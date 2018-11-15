@@ -9,7 +9,7 @@
 import Foundation
 
 class GetPopularMovies: APIRequest {
-    typealias Response = [Movie]
+    typealias Response = ResponseMovies
     
     var endpoint: String {
         return "movie/popular"

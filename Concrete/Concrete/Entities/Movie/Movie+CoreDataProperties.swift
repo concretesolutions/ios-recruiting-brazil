@@ -18,11 +18,12 @@ extension Movie {
     }
 
     @NSManaged public var adult: Bool
+    @NSManaged public var genresIds: NSObject?
     @NSManaged public var id: Int32
     @NSManaged public var popularity: Double
     @NSManaged public var releaseDate: NSDate?
     @NSManaged public var title: String?
     @NSManaged public var voteAvarage: Double
-    @NSManaged public var genresIds: NSObject?
+    @NSManaged public var overview: String?
 
 }

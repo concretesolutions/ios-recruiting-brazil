@@ -5,6 +5,8 @@
 //  Created by Kaique Magno Dos Santos on 11/11/18.
 //  Copyright © 2018 Kaique Magno Dos Santos. All rights reserved.
 //
+// API: https://developers.themoviedb.org/3/movies/get-movie-details
+
 
 import UIKit
 
@@ -43,7 +45,7 @@ class APIManager: NSObject {
     }
     
     //TODO: Prepare fetch request functions
-    func fetch<RequestType>(_ request: RequestType, completion: @escaping (Result<MovieDBResult<RequestType.Response>>) -> Void) where RequestType:APIRequest {
+    func fetch<RequestType>(_ request: RequestType, completion: @escaping (Result<RequestType.Response>) -> Void) where RequestType:APIRequest {
         self.setStatusBar(loading: true)
         let endpoint = self.endpoint(for: request)
         
@@ -57,7 +59,8 @@ class APIManager: NSObject {
                     
                     let decoder = JSONDecoder()
                     decoder.userInfo[CodingUserInfoKey.context] = CoreDataSingleton.shared.persistentContainer.viewContext
-                    let movieDBResponse = try decoder.decode(MovieDBResult<RequestType.Response>.self, from: data)
+                    
+                    let movieDBResponse = try decoder.decode(RequestType.Response.self, from: data)
                     
                     
                     self.setStatusBar(loading: false)
@@ -65,7 +68,21 @@ class APIManager: NSObject {
                     
                 } catch {
                     self.setStatusBar(loading: false)
-                    completion(.failure(error))
+                    
+                    let decoder = JSONDecoder()
+                    if let movieDBError = try? decoder.decode(ResponseError.self, from: data) {
+                        if let htmlResponse = response as? HTTPURLResponse {
+                            let httpError = NSError(domain: endpoint.absoluteString,
+                                                    code: htmlResponse.statusCode,
+                                                    userInfo: ["description" : movieDBError.statusMessage ?? ""]
+                            )
+                            completion(.failure(httpError))
+                        }
+                    }else{
+                        completion(.failure(error))
+                    }
+                    
+                    
                 }
             } else if let error = error {
                 self.setStatusBar(loading: false)
