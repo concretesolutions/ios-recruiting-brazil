@@ -21,7 +21,7 @@ class MovieDetailRouter: MovieDetailWireframe {
         let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
         var viewController = storyboard.instantiateViewController(withIdentifier: "MovieDetail")
         
-        if let MovieDetailViewController = viewController as? MovieDetailViewController {
+        if let MovieDetailViewController = viewController as? MovieDetailTableViewController {
             MovieDetailViewController.presenter = presenter
             presenter.view = MovieDetailViewController
             router.viewController = MovieDetailViewController
