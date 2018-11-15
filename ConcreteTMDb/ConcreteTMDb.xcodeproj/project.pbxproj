@@ -17,6 +17,9 @@
 		EB1BFE7D219D097F000D07B8 /* MoviesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE7C219D097F000D07B8 /* MoviesCollectionView.swift */; };
 		EB1BFE7F219D099B000D07B8 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE7E219D099B000D07B8 /* MoviesCollectionViewCell.swift */; };
 		EB1BFE82219D09DF000D07B8 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE81219D09DF000D07B8 /* MoviesViewController.swift */; };
+		EB1BFE85219D1897000D07B8 /* TMDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE84219D1897000D07B8 /* TMDataManager.swift */; };
+		EB1BFE88219D19D1000D07B8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE87219D19D1000D07B8 /* Movie.swift */; };
+		EB1BFE8B219D1A9C000D07B8 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BFE8A219D1A9C000D07B8 /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		EB1BFE7C219D097F000D07B8 /* MoviesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionView.swift; sourceTree = "<group>"; };
 		EB1BFE7E219D099B000D07B8 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB1BFE81219D09DF000D07B8 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		EB1BFE84219D1897000D07B8 /* TMDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDataManager.swift; sourceTree = "<group>"; };
+		EB1BFE87219D19D1000D07B8 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		EB1BFE8A219D1A9C000D07B8 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 		EB1BFE48219C5840000D07B8 /* ConcreteTMDb */ = {
 			isa = PBXGroup;
 			children = (
+				EB1BFE89219D1A68000D07B8 /* Model Resources */,
+				EB1BFE86219D19C0000D07B8 /* Model */,
+				EB1BFE83219D17E5000D07B8 /* DataManagers */,
 				EB1BFE80219D09B4000D07B8 /* Controllers */,
 				EB1BFE7B219D094A000D07B8 /* Interface Resources */,
 				EB1BFE7A219D08BD000D07B8 /* Storyboard */,
@@ -156,6 +165,30 @@
 				EB1BFE81219D09DF000D07B8 /* MoviesViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EB1BFE83219D17E5000D07B8 /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				EB1BFE84219D1897000D07B8 /* TMDataManager.swift */,
+			);
+			path = DataManagers;
+			sourceTree = "<group>";
+		};
+		EB1BFE86219D19C0000D07B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB1BFE87219D19D1000D07B8 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EB1BFE89219D1A68000D07B8 /* Model Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EB1BFE8A219D1A9C000D07B8 /* Protocols.swift */,
+			);
+			path = "Model Resources";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,11 +322,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB1BFE88219D19D1000D07B8 /* Movie.swift in Sources */,
+				EB1BFE85219D1897000D07B8 /* TMDataManager.swift in Sources */,
 				EB1BFE4A219C5840000D07B8 /* AppDelegate.swift in Sources */,
 				EB1BFE82219D09DF000D07B8 /* MoviesViewController.swift in Sources */,
 				EB1BFE52219C5840000D07B8 /* ConcreteTMDb.xcdatamodeld in Sources */,
 				EB1BFE7D219D097F000D07B8 /* MoviesCollectionView.swift in Sources */,
 				EB1BFE7F219D099B000D07B8 /* MoviesCollectionViewCell.swift in Sources */,
+				EB1BFE8B219D1A9C000D07B8 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
