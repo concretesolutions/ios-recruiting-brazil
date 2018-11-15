@@ -26,6 +26,10 @@ class FavoritesInteractor {
     
     // FROM PRESENTER
     
+    func getMovieID(index: Int) -> Int {
+        return Int(self.moviesVisible[index].id)
+    }
+    
     func fetchFavoriteMovies() {
         self.movies = LocalManager.getMovies()
         self.moviesVisible = self.movies

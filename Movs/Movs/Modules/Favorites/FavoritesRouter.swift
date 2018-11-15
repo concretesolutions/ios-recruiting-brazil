@@ -33,4 +33,16 @@ class FavoritesRouter: NSObject {
         return UIStoryboard(name:"MovieDetailsView",bundle: Bundle.main)
     }
     
+    // FROM PRESENTER
+    
+    func goToMovieDetail(movieID: Int) {
+        let router = MovieDetailsRouter.init(id: movieID)
+        
+        if let navigationController = self.presenter.view.navigationController as? CustomNavigation {
+            navigationController.pushViewController(router.presenter.view, animated: true)
+        }else{
+            self.presenter.view.present(router.presenter.view, animated: true, completion: nil)
+        }
+    }
+    
 }

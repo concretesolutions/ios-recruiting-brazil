@@ -33,7 +33,7 @@ class MoviesRouter: NSObject {
         return UIStoryboard(name:"MoviesVC",bundle: Bundle.main)
     }
     
-    // PRESENT
+    // FROM PRESENTER
     
     func goToMovieDetail(movieID: Int) {
         let router = MovieDetailsRouter.init(id: movieID)

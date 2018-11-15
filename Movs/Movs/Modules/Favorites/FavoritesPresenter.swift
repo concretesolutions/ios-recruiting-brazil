@@ -32,6 +32,11 @@ class FavoritesPresenter: NSObject {
         self.interactor.fetchFavoriteMovies()
     }
     
+    func selectedMovie(at index: Int) {
+        let id = self.interactor.getMovieID(index: index)
+        self.router.goToMovieDetail(movieID: id)
+    }
+    
     // FROM INTERACTOR
     
     func moviesFilterChanged() {

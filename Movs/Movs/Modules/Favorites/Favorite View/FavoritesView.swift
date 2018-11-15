@@ -52,6 +52,13 @@ class FavoritesView: UITableViewController {
         }
     }
     
+    // TABLE VIEW
+    
+    override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        //print("\(indexPath.row) \(self.presenter.interactor.getMovie(at: indexPath.row).title)")
+        self.presenter.selectedMovie(at: indexPath.row)
+    }
+    
 }
 
 
