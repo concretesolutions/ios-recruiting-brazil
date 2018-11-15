@@ -81,7 +81,7 @@ extension MoviesPresenter: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         // Get movie
         let movie = self.interactor.getMovie(at: indexPath.item)
-        cell.awakeFromNib(title: movie.title, favorite: false)
+        cell.awakeFromNib(title: movie.title, favorite: self.interactor.favorite(index: indexPath.item))
         // Load image
         if let image = movie.poster_path {
             let imageURL = ServerURL.imageW500 + image

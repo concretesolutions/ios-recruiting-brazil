@@ -33,6 +33,7 @@ class MovieDetailsView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         self.presenter.loadMovie()
         
         // Setup Loading View
@@ -51,7 +52,7 @@ class MovieDetailsView: UIViewController {
             }
         }
         self.outletMovieTitle.text = title
-        //self.outletFavorite
+        self.favorite = favorite
         self.outletMovieGenre.text = genre
         self.outletMovieYear.text = year
         self.outletMovieOverview.text = overview
@@ -85,7 +86,13 @@ class MovieDetailsView: UIViewController {
     // MARK: - Actions
     
     @IBAction func actionFavorite(_ sender: UIButton) {
-        self.favorite = !self.favorite
+        if self.favorite {
+            self.favorite = false
+            self.presenter.removeFavorite()
+        }else{
+            self.favorite = true
+            self.presenter.favorite()
+        }
     }
     
     

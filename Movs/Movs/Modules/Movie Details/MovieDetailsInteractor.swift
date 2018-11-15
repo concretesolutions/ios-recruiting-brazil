@@ -29,6 +29,14 @@ class MovieDetailsInteractor {
     
     // FROM PRESENTER
     
+    func addToFavorite() {
+        LocalManager.save(movie: movie!)
+    }
+    
+    func removeFavorite() {
+        LocalManager.remove(movieID: (self.movie?.id)!)
+    }
+    
     func fetchMovie() {
         ServerManager.getMovieByID(movieID: self.movieID) { (movieDetail, status) in
             switch status {
@@ -44,6 +52,18 @@ class MovieDetailsInteractor {
 //                self.presenter?.loadedMovies()
             }
         }
+    }
+    
+    func favorite() -> Bool {
+        let movies = LocalManager.fetchMovies()
+        for movie in movies {
+            if let movieLocalID = movie.value(forKey: "id") as? Int {
+                if movieLocalID == self.movie?.id {
+                    return true
+                }
+            }
+        }
+        return false
     }
     
 }

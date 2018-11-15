@@ -80,4 +80,16 @@ class MoviesInteractor {
         self.moviesVisible = self.movies
     }
     
+    func favorite(index: Int) -> Bool {
+        let movies = LocalManager.fetchMovies()
+        for movie in movies {
+            if let movieLocalID = movie.value(forKey: "id") as? Int {
+                if movieLocalID == self.moviesVisible[index].id {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
 }

@@ -23,6 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = app
         window?.makeKeyAndVisible()
+        
+        print("-> Movies LOCAL: \(LocalManager.fetchMovies().count)")
+        let movies = LocalManager.fetchMovies()
+        for movie in movies {
+            print(movie.value(forKey: "title") as! String)
+        }
 
 //        let router = EnterRouter.init()
 //        window = UIWindow(frame: UIScreen.main.bounds)

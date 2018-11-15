@@ -20,7 +20,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var outletActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var outletMovieImage: UIImageView!
     @IBOutlet weak var outletMovieTitle: UILabel!
-    @IBOutlet weak var outletFavorite: UIButton!
+    @IBOutlet weak var outletFavorite: UIImageView!
     
     // MARK: - Setups
     
@@ -51,11 +51,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
         if status {
             // FIXME: - Chamar presenter para REMOVER do ADD
             let imageFull = UIImage.init(named: "favorite_full_icon")
-            self.outletFavorite.setImage(imageFull, for: .normal)
+            self.outletFavorite.image = imageFull
         }else{
             // FIXME: - Chamar presenter para ADD
             let imageGray = UIImage.init(named: "favorite_gray_icon")
-            self.outletFavorite.setImage(imageGray, for: .normal)
+            self.outletFavorite.image = imageGray
         }
     }
 
@@ -69,12 +69,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         if let image = imageURL {
             self.setup(imageURL: image)
         }
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func actionFavorite(_ sender: UIButton) {
-        self.favorite = !self.favorite
     }
     
 }

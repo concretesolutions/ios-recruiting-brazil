@@ -32,6 +32,14 @@ class MovieDetailsPresenter: NSObject {
         self.interactor.fetchMovie()
     }
     
+    func favorite() {
+        self.interactor.addToFavorite()
+    }
+    
+    func removeFavorite() {
+        self.interactor.removeFavorite()
+    }
+    
     // FROM INTERACTOR
     
     func movieLoaded(title: String, favorite: Bool, genre: [Genre], year: String, overview: String, imageURL: String) {
@@ -48,8 +56,9 @@ class MovieDetailsPresenter: NSObject {
         }
         
         let movieYear = String(year.prefix(4))
+        let movieFavorite = self.interactor.favorite()
         
-        self.view.setMovie(title: title, favorite: favorite, genre: movieGenre, year: movieYear, overview: overview, imageURL: imageURL)
+        self.view.setMovie(title: title, favorite: movieFavorite, genre: movieGenre, year: movieYear, overview: overview, imageURL: imageURL)
     }
     
 }

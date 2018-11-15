@@ -49,7 +49,9 @@ struct MovieDetail: Codable {
     let poster_path: String
     let overview: String
     let homepage:String?
+    let id: Int
     private enum CodingKeys: String, CodingKey {
+        case id
         case adult
         case genres
         case title

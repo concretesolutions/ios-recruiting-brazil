@@ -43,6 +43,11 @@ class MoviesView: UIViewController {
         self.presenter.fetchMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.outletMoviesCollection.reloadData()
+    }
+    
     // FROM NAVIGATION
     
     func selectedMovie(at index: Int) {

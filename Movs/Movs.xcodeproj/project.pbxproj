@@ -13,6 +13,7 @@
 		52398782219C396900D070DE /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52398781219C396900D070DE /* MovieDetailsView.swift */; };
 		52398784219C397A00D070DE /* MovieDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52398783219C397A00D070DE /* MovieDetailsInteractor.swift */; };
 		52398786219C398B00D070DE /* MovieDetailsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52398785219C398B00D070DE /* MovieDetailsView.storyboard */; };
+		5261A884219CA0D400EF0212 /* LocalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5261A883219CA0D400EF0212 /* LocalManager.swift */; };
 		52BC96BB2198569000BAA825 /* ServerURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BA2198569000BAA825 /* ServerURL.swift */; };
 		52BC96BD2198569900BAA825 /* ServerKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BC2198569900BAA825 /* ServerKeys.swift */; };
 		52BC96BF219856A100BAA825 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BC96BE219856A100BAA825 /* ServerManager.swift */; };
@@ -72,6 +73,7 @@
 		52398781219C396900D070DE /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
 		52398783219C397A00D070DE /* MovieDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsInteractor.swift; sourceTree = "<group>"; };
 		52398785219C398B00D070DE /* MovieDetailsView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieDetailsView.storyboard; sourceTree = "<group>"; };
+		5261A883219CA0D400EF0212 /* LocalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalManager.swift; sourceTree = "<group>"; };
 		52BC96BA2198569000BAA825 /* ServerURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerURL.swift; sourceTree = "<group>"; };
 		52BC96BC2198569900BAA825 /* ServerKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerKeys.swift; sourceTree = "<group>"; };
 		52BC96BE219856A100BAA825 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
@@ -151,9 +153,18 @@
 			path = "Movie Details";
 			sourceTree = "<group>";
 		};
+		5261A87A219C9F0E00EF0212 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				5261A883219CA0D400EF0212 /* LocalManager.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
 		52BC96B82198567B00BAA825 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				5261A87A219C9F0E00EF0212 /* Local */,
 				52BC96B92198568400BAA825 /* API */,
 			);
 			path = Manager;
@@ -471,6 +482,7 @@
 				52D735702197905C00142C7A /* FavoritesRouter.swift in Sources */,
 				52D73578219790E000142C7A /* FavoritesProtocol.swift in Sources */,
 				52D7356921978FD700142C7A /* MoviesPresenter.swift in Sources */,
+				5261A884219CA0D400EF0212 /* LocalManager.swift in Sources */,
 				52D7356421978E4B00142C7A /* FavoritesView.swift in Sources */,
 				52D735722197906500142C7A /* FavoritesPresenter.swift in Sources */,
 				52BC96C5219867A800BAA825 /* Pallete.swift in Sources */,
