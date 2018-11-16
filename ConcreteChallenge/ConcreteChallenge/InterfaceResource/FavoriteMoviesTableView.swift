@@ -19,6 +19,8 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
         }
     }
     
+    var favoriteMovieRemoved: FavoriteMovieRemoved!
+    
     // MARK: - UITableViewDelegate and UITableViewDataSource Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.favoriteMovies.count
@@ -38,7 +40,9 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            
+            self.favoriteMovieRemoved.didRemoveFavoriteMovie(at: indexPath)
+            self.favoriteMovies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     

@@ -14,6 +14,7 @@ class FavoriteMovieCoreDataManager {
     
     // MARK: - Properties
     static var favoriteMovies: [Movie] = []
+    static var favoriteMoviesNSManagedObject: [NSManagedObject] = []
     
     static func saveFavoriteMovie(movie: Movie, completion: (_ status: Status) -> Void) {
         // Get context
@@ -52,6 +53,8 @@ class FavoriteMovieCoreDataManager {
         request.returnsObjectsAsFaults = false
         do {
             let result = try context.fetch(request)
+            self.favoriteMoviesNSManagedObject = result as! [NSManagedObject]
+            
             self.favoriteMovies = []
             for data in result as! [NSManagedObject] {
                 let id = data.value(forKey: "id") as! Int
@@ -67,6 +70,25 @@ class FavoriteMovieCoreDataManager {
             completion(.success)
         } catch {
             print("Failed")
+            completion(.failed)
+        }
+    }
+    
+    static func removeFavoriteMovie(at indexPath:IndexPath, completion: (_ status: Status) -> Void) {
+        // Get context
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        context.delete(self.favoriteMoviesNSManagedObject[indexPath.row])
+        
+        // Save Data
+        do {
+            try context.save()
+            self.favoriteMoviesNSManagedObject.remove(at: indexPath.row)
+            self.favoriteMovies.remove(at: indexPath.row)
+            completion(.success)
+        } catch {
+            print("Error saving favorite movie into CoreData")
             completion(.failed)
         }
     }

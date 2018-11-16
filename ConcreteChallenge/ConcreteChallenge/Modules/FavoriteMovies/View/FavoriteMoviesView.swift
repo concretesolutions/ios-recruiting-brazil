@@ -8,7 +8,11 @@
 
 import UIKit
 
-class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
+protocol FavoriteMovieRemoved {
+    func didRemoveFavoriteMovie(at indexPath: IndexPath)
+}
+
+class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, FavoriteMovieRemoved {
     
     // MARK: - Outlets
     @IBOutlet weak var favoriteMoviesTableView: FavoriteMoviesTableView!
@@ -39,6 +43,11 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         self.favoriteMoviesTableView.isHidden = true
     }
     
+    // MARK: - FavoriteMovieRemoved Functions
+    func didRemoveFavoriteMovie(at indexPath: IndexPath) {
+        self.presenter.didRemoveFavoriteMovie(at: indexPath)
+    }
+    
     // MARK: - Functions
     func setupNavigationBar() {
         self.navigationItem.title = "Movies"
@@ -48,6 +57,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
     func setupTableView() {
         self.favoriteMoviesTableView.delegate = self.favoriteMoviesTableView
         self.favoriteMoviesTableView.dataSource = self.favoriteMoviesTableView
+        self.favoriteMoviesTableView.favoriteMovieRemoved = self
     }
 }
 

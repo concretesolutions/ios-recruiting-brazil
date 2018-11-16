@@ -32,4 +32,9 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
             self.view?.show(favoriteMovies: favoriteMovies)
         }
     }
+    
+    func didRemoveFavoriteMovie(at indexPath: IndexPath) {
+        self.interactor.removeFavoriteMovie(at: indexPath)
+    }
+    
 }

@@ -29,12 +29,14 @@ protocol FavoriteMoviesPresentation: class {
     
     func viewDidLoad()
     func didRequestFavoriteMovies()
+    func didRemoveFavoriteMovie(at indexPath: IndexPath)
 }
 
 protocol FavoriteMoviesInteractorInput: class {
     var output: FavoriteMoviesInteractorOutput! { get set }
     
     func getFavoriteMovies()
+    func removeFavoriteMovie(at indexPath: IndexPath)
 }
 
 protocol FavoriteMoviesInteractorOutput: class {

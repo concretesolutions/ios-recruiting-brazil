@@ -21,4 +21,11 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
             }
         }
     }
+    
+    func removeFavoriteMovie(at indexPath: IndexPath) {
+        FavoriteMovieCoreDataManager.removeFavoriteMovie(at: indexPath) { (status) in
+
+        }
+    }
+    
 }
