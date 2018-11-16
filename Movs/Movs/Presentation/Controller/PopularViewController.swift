@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PopularMoviesTableViewController: UITableViewController {
+class PopularViewController: UITableViewController {
     // MARK: Behavior IBOutlets
     @IBOutlet var emptySearchView: UIView!
     @IBOutlet var genericErrorView: UIView!
