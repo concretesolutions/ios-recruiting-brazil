@@ -22,11 +22,15 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         self.presenter.viewDidLoad()
         
         self.setupNavigationBar()
+        
+        self.presenter.didRequestFavoriteMovies()
     }
     
     // MARK: - FavoriteMoviesView Functions
     func show(favoriteMovies: [Movie]) {
-        self.presenter.didRequestFavoriteMovies()
+        for movie in favoriteMovies {
+            print(movie.title)
+        }
     }
     
     // MARK: - Functions

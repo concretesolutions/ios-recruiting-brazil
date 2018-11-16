@@ -11,6 +11,10 @@ import CoreData
 
 class FavoriteMovieCoreDataManager {
     
+    
+    // MARK: - Properties
+    static var favoriteMovies: [Movie] = []
+    
     static func saveFavoriteMovie(movie: Movie, completion: (_ status: Status) -> Void) {
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -49,7 +53,14 @@ class FavoriteMovieCoreDataManager {
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
-                print(data.value(forKey: "title") as! String)
+                let id = data.value(forKey: "id") as! Int
+                let title = data.value(forKey: "title") as! String
+                let posterPath = data.value(forKey: "posterPath") as! String
+                let genreIds = data.value(forKey: "genreIds") as! [Int]
+                let overview = data.value(forKey: "overview") as! String
+                let releaseDate = data.value(forKey: "releaseDate") as! Date
+                
+                self.favoriteMovies.append(Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate))
             }
             
             completion(.success)

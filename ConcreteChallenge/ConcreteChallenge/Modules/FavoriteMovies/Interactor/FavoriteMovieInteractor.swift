@@ -15,6 +15,10 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     
     // MARK: - FavoriteMoviesInteractorInput functions
     func getFavoriteMovies() {
-        FavoriteMovieCoreDataManager.getFavoriteMovies()
+        FavoriteMovieCoreDataManager.getFavoriteMovies { (status) in
+            if status == Status.success {
+                self.output.didGetFavoriteMovies(favoriteMovies: FavoriteMovieCoreDataManager.favoriteMovies)
+            }
+        }
     }
 }
