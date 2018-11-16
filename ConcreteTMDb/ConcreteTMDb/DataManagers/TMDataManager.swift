@@ -16,7 +16,7 @@ class TMDataManager {
     func fetchMovies() {
         
         var movies: [Movie] = []
-        let urlString = "https://api.punkapi.com/v2/beers?page=1&per_page=80"
+        let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=e2417760a16d55fdc805d2c23c69022b&language=en-US&page=1"
         
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
@@ -43,6 +43,34 @@ class TMDataManager {
                     print("Error to decode json:", jsonErr)
                 }
             }
-            }.resume()
+        }.resume()
+    }
+    
+    func fetchMovieGenres() {
+        let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=e2417760a16d55fdc805d2c23c69022b&language=en-US"
+        
+        guard let url = URL(string: urlString) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, err) in
+            
+            DispatchQueue.main.async {
+                
+                if let err = err {
+                    print("Failed to get data from url:", err)
+                    return
+                }
+                
+                guard let data = data else { return }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    
+                } catch let jsonErr {
+                    print("Error to decode json:", jsonErr)
+                }
+            }
+        }.resume()
     }
 }

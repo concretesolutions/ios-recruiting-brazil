@@ -11,24 +11,33 @@ import Foundation
 class Movie: Decodable {
     
     // MARK: - Properties
-    let name: String
+    let title: String
+    let overview: String
+    let date: String
     
     // MARK: - Decodable keys
     
     enum MovieDecodableKeys: String, CodingKey {
-        case name
+        case title
+        case overview
+        case date = "release_date"
     }
     
     // MARK: - Inits
     
-    init(name: String) {
-        self.name = name
+    init(title: String, overview: String, date: String) {
+        self.title = title
+        self.overview = overview
+        self.date = date
     }
     
     required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MovieDecodableKeys.self)
-        let name: String = try container.decode(String.self, forKey: .name)
+        
+        let title: String = try container.decode(String.self, forKey: .title)
+        let overview: String = try container.decode(String.self, forKey: .overview)
+        let date: String = try container.decode(String.self, forKey: .date)
      
-        self.init(name: name)
+        self.init(title: title, overview: overview, date: date)
     }
 }
