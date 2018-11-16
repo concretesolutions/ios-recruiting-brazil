@@ -9,19 +9,17 @@
 import RealmSwift
 
 struct Movie {
+    
     var id: Int
     var title: String
     var genres: [Genre]
-//    var genderIds: [Int]
-    var isFavourite: Bool
     var overview: String
     var thumbFilePath: String
     
-    public init(id: Int, title: String, genres: [Genre], isFavourite: Bool, overview: String, thumbFilePath: String) {
+    public init(id: Int, title: String, genres: [Genre], overview: String, thumbFilePath: String) {
         self.id = id
         self.title = title
         self.genres = genres
-        self.isFavourite = isFavourite
         self.overview = overview
         self.thumbFilePath = thumbFilePath
     }
@@ -29,8 +27,7 @@ struct Movie {
     public init(_ movieRlm: MovieRlm) {
         id = movieRlm.id
         title = movieRlm.title
-        genres = movieRlm.genres.map({ return Genre($0)})
-        isFavourite = movieRlm.isFavourite
+        genres = movieRlm.genres.map({ return Genre($0) })
         overview = movieRlm.overview
         thumbFilePath = movieRlm.thumbFilePath
     }
@@ -40,9 +37,33 @@ struct Movie {
             objectRlm.id = self.id
             objectRlm.title = self.title
             genres.forEach({ objectRlm.genres.append($0.rlm()) })
-            objectRlm.isFavourite = self.isFavourite
             objectRlm.overview = self.overview
             objectRlm.thumbFilePath = self.thumbFilePath
         }        
     }
+    
+}
+
+extension Movie: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case genres = "genre_ids"
+        case overview
+        case thumbFilePath = "poster_path"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        overview = try container.decode(String.self, forKey: .overview)
+        thumbFilePath = try container.decode(String.self, forKey: .thumbFilePath)
+        
+        genres = [Genre]()
+        let ids = try container.decode([Int].self, forKey: .genres)
+        ids.forEach({ self.genres.append(Genre(id:$0)) })
+    }
+    
 }

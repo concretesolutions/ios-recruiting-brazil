@@ -13,7 +13,6 @@ class MovieRlm: Object {
     let genres = List<GenreRlm>()
     @objc dynamic var id: Int = 0
     @objc dynamic var title: String = ""
-    @objc dynamic var isFavourite: Bool = false
     @objc dynamic var overview: String = ""
     @objc dynamic var thumbFilePath: String = ""
 //    @objc dynamic var thumbnail: Data

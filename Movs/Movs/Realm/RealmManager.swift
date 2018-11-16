@@ -14,7 +14,8 @@ class RealmManager {
     static let shared = RealmManager()
     private var db: Realm
     
-    private init(){
+    private init() {
+        //FIXME: migration error
         db = try! Realm()
     }
     

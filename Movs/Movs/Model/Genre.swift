@@ -9,8 +9,13 @@
 import RealmSwift
 
 struct Genre {
+    
     var id: Int
-    var name: String
+    var name: String?
+    
+    init(id: Int) {
+        self.id = id
+    }
     
     init(id: Int, name:String) {
         self.id = id
@@ -28,4 +33,13 @@ struct Genre {
             objectRlm.name = self.name
         })
     }
+}
+
+extension Genre: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+    }
+    
 }
