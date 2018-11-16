@@ -17,7 +17,6 @@ protocol MovieDetailWireframe: class {
 
 protocol MovieDetailView {
     var presenter: MovieDetailPresentation! { get set }
-    var movie: MovieDetails? { get set }
     
     func showDetails(of movie: MovieDetails)
     func updateFavoriteButton(to activate:Bool)
@@ -31,14 +30,14 @@ protocol MovieDetailPresentation: class {
     var movie: Movie! { get set }
     
     func viewDidLoad()
-    func didTapFavoriteButton(of movie: MovieDetails)
+    func didTapFavoriteButton()
 }
 
 protocol MovieDetailInteractorInput: class {
     var output: MovieDetailInteractorOutput! { get set }
     
     func fetchMovieDetails(movie: Movie)
-    func addMovieToFavorite(movie: MovieDetails)
+    func addMovieToFavorite(movie: Movie)
 }
 
 protocol MovieDetailInteractorOutput: class {

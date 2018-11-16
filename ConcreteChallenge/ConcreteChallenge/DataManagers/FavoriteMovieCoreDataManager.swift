@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class MovieCoreDataManager {
+class FavoriteMovieCoreDataManager {
     
-    static func saveFavoriteMovie(movie: Movie) {
+    static func saveFavoriteMovie(movie: Movie, completion: (_ status: SaveStatus) -> Void) {
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -32,8 +32,10 @@ class MovieCoreDataManager {
         // Save Data
         do {
             try context.save()
+            completion(.success)
         } catch {
             print("Error saving favorite movie into CoreData")
+            completion(.failed)
         }
     }
     
@@ -53,4 +55,9 @@ class MovieCoreDataManager {
             print("Failed")
         }
     }
+}
+
+enum SaveStatus {
+    case success
+    case failed
 }

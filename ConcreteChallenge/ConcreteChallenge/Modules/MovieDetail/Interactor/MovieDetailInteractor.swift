@@ -37,8 +37,14 @@ class MovieDetailInteractor: MovieDetailInteractorInput {
         }
     }
     
-    func addMovieToFavorite(movie: MovieDetails) {
-        
+    func addMovieToFavorite(movie: Movie) {
+        FavoriteMovieCoreDataManager.saveFavoriteMovie(movie: movie) { (status) in
+            if status == SaveStatus.success {
+                self.output.didAddMovieToFavorite()
+            } else {
+                self.addMovieToFavorite(movie: movie)
+            }
+        }
     }
     
     

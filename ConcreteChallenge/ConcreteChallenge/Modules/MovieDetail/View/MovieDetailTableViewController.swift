@@ -17,27 +17,26 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     @IBOutlet weak var movieReleaseYear: UILabel!
     @IBOutlet weak var movieGenres: UILabel!
     @IBOutlet weak var movieOverview: UITextView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     // MARK: - Actions
     @IBAction func didTapFavoriteButton(_ sender: Any) {
-        guard let movie = self.movie else { return }
-        self.presenter.didTapFavoriteButton(of: movie)
+        self.presenter.didTapFavoriteButton()
     }
     
     // MARK: - Properties
     var presenter: MovieDetailPresentation!
-    var movie: MovieDetails?
     
     // MARK: - Life cycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.viewDidLoad()
+        
+        self.setupTableView()
     }
 
     // MARK: - MovieDetailView Functions
     func showDetails(of movie: MovieDetails) {
-        self.movie = movie
-        
         DispatchQueue.main.async {
             // Image
             self.posterImage.image = movie.posterImage
@@ -105,6 +104,9 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     }
     
     // MARK: - Functions
+    func setupTableView() {
+        self.tableView.allowsSelection = false
+    }
     
 }
 
