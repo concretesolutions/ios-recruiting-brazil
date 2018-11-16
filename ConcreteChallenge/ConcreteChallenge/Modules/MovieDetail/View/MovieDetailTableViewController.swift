@@ -69,6 +69,10 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
         }
     }
     
+    func updateFavoriteButton(to activate: Bool) {
+        
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {

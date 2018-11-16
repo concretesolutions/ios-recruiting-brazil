@@ -34,9 +34,10 @@ class MovieDetailInteractor: MovieDetailInteractorInput {
                 let movieDetail = MovieDetails(movie: movie, posterImage: posterImage, genres: genres)
                 self.output.didFetchMovieDetails(movieDetails: movieDetail)
             }
-            
         }
-        
+    }
+    
+    func addMovieToFavorite(movie: MovieDetails) {
         
     }
     

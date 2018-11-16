@@ -19,6 +19,7 @@ protocol MovieDetailView {
     var presenter: MovieDetailPresentation! { get set }
     
     func showDetails(of movie: MovieDetails)
+    func updateFavoriteButton(to activate:Bool)
 }
 
 protocol MovieDetailPresentation: class {
@@ -29,16 +30,19 @@ protocol MovieDetailPresentation: class {
     var movie: Movie! { get set }
     
     func viewDidLoad()
+    func didTapFavoriteButton(of movie: MovieDetails)
 }
 
 protocol MovieDetailInteractorInput: class {
     var output: MovieDetailInteractorOutput! { get set }
     
     func fetchMovieDetails(movie: Movie)
+    func addMovieToFavorite(movie: MovieDetails)
 }
 
 protocol MovieDetailInteractorOutput: class {
     func didFetchMovieDetails(movieDetails: MovieDetails)
+    func didAddMovieToFavorite()
 }
 
 
