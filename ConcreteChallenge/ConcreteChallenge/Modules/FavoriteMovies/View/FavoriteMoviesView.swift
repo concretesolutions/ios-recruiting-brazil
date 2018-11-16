@@ -11,7 +11,7 @@ import UIKit
 class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
     
     // MARK: - Outlets
-    @IBOutlet weak var favoriteMoviesTableView: UITableView!
+    @IBOutlet weak var favoriteMoviesTableView: FavoriteMoviesTableView!
     
     // MARK: - Properties
     var presenter: FavoriteMoviesPresentation!
@@ -22,6 +22,11 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         self.presenter.viewDidLoad()
         
         self.setupNavigationBar()
+    }
+    
+    // MARK: - FavoriteMoviesView Functions
+    func show(favoriteMovies: [Movie]) {
+        self.presenter.didRequestFavoriteMovies()
     }
     
     // MARK: - Functions

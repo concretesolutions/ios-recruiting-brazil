@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoriteMoviesUITableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Properties
     var favoriteMovies: [Movie] = [] {

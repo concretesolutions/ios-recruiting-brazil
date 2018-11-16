@@ -14,5 +14,7 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     var output: FavoriteMoviesInteractorOutput!
     
     // MARK: - FavoriteMoviesInteractorInput functions
-    
+    func getFavoriteMovies() {
+        FavoriteMovieCoreDataManager.getFavoriteMovies()
+    }
 }

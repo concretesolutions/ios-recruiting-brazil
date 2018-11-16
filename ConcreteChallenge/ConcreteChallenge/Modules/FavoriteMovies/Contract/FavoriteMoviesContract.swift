@@ -17,6 +17,8 @@ protocol FavoriteMoviesWireframe: class {
 
 protocol FavoriteMoviesView {
     var presenter: FavoriteMoviesPresentation! { get set }
+    
+    func show(favoriteMovies: [Movie])
 }
 
 protocol FavoriteMoviesPresentation: class {
@@ -25,14 +27,17 @@ protocol FavoriteMoviesPresentation: class {
     var router: FavoriteMoviesWireframe! { get set }
     
     func viewDidLoad()
+    func didRequestFavoriteMovies()
 }
 
 protocol FavoriteMoviesInteractorInput: class {
     var output: FavoriteMoviesInteractorOutput! { get set }
+    
+    func getFavoriteMovies()
 }
 
 protocol FavoriteMoviesInteractorOutput: class {
-    
+    func didGetFavoriteMovies(favoriteMovies: [Movie])
 }
 
 
