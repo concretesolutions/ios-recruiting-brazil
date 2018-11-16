@@ -26,7 +26,10 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
     
     // MARK: - FavoriteMoviesInteractorOutput functions
     func didGetFavoriteMovies(favoriteMovies: [Movie]) {
-        self.view?.show(favoriteMovies: favoriteMovies)
+        if favoriteMovies.isEmpty {
+            self.view?.showEmptyAlert()
+        } else {
+            self.view?.show(favoriteMovies: favoriteMovies)
+        }
     }
-    
 }

@@ -19,6 +19,7 @@ protocol FavoriteMoviesView {
     var presenter: FavoriteMoviesPresentation! { get set }
     
     func show(favoriteMovies: [Movie])
+    func showEmptyAlert()
 }
 
 protocol FavoriteMoviesPresentation: class {

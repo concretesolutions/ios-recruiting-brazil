@@ -31,8 +31,12 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
     
     // MARK: - FavoriteMoviesView Functions
     func show(favoriteMovies: [Movie]) {
-        print(favoriteMovies)
+        self.favoriteMoviesTableView.isHidden = false
         self.favoriteMoviesTableView.favoriteMovies = favoriteMovies
+    }
+    
+    func showEmptyAlert() {
+        self.favoriteMoviesTableView.isHidden = true
     }
     
     // MARK: - Functions
