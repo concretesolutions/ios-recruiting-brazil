@@ -14,7 +14,7 @@ class Movie: Decodable {
     
     var id: Int
     var title: String
-    var posterPath: String
+    var posterPath: String?
     var year: Int
     var genres: [Genre]
     var overview: String
@@ -30,7 +30,7 @@ class Movie: Decodable {
     }
     
     // MARK: - Initializers
-    init(id: Int, title: String, posterPath: String, year: Int, genres: [Genre], overview: String, isFavorite: Bool = false) {
+    init(id: Int, title: String, posterPath: String?, year: Int, genres: [Genre], overview: String, isFavorite: Bool = false) {
         self.id = id
         self.title = title
         self.posterPath = posterPath
@@ -45,7 +45,7 @@ class Movie: Decodable {
         
         let id: Int = try container.decode(Int.self, forKey: .Id)
         let title: String = try container.decode(String.self, forKey: .Title)
-        let posterPath: String = try container.decode(String.self, forKey: .PosterPath)
+        let posterPath: String? = try? container.decode(String.self, forKey: .PosterPath)
         let releaseDate: String = try container.decode(String.self, forKey: .ReleaseDate)
         let genreIds: [Int] = try container.decode([Int].self, forKey: .GenreIds)
         let overview: String = try container.decode(String.self, forKey: .Overview)
