@@ -19,21 +19,15 @@ class TabBarRouter{
         
         //Instancing Storyboard
         let storyboard = UIStoryboard(name: StoryboardID.tabBar.rawValue, bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.tabBar.rawValue)
+        let viewController: TabBarView = storyboard.instantiateViewController()
         
-        //Instancing View
-        guard let view = viewController as? TabBarView else {
-            print("Error casting to TabBarView in: \(TabBarRouter.self)")
-            return
-        }
-        
-        view.setViewControllers(screens, animated: false)
+        viewController.setViewControllers(screens, animated: false)
         
         //Instancing Interactor
         let interactor = TabBarInteractor()
         
         //Instancing Presenter
-        self.presenter = TabBarPresenter(router: self, interactor: interactor, view: view)
+        self.presenter = TabBarPresenter(router: self, interactor: interactor, view: viewController)
     }
     
 }

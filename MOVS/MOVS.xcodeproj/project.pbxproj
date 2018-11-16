@@ -36,6 +36,13 @@
 		A31E1920219E0AF400E0560B /* Gener+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E191C219E0AF400E0560B /* Gener+CoreDataProperties.swift */; };
 		A31E1921219E0AF400E0560B /* Film+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E191D219E0AF400E0560B /* Film+CoreDataClass.swift */; };
 		A31E1922219E0AF400E0560B /* Film+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E191E219E0AF400E0560B /* Film+CoreDataProperties.swift */; };
+		A31E1945219EE9CB00E0560B /* FilmsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E1944219EE9CB00E0560B /* FilmsDataSource.swift */; };
+		A31E1951219EEFA600E0560B /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E1950219EEFA600E0560B /* ReusableCell.swift */; };
+		A31E1954219EF04000E0560B /* UICollectionView+reusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E1953219EF04000E0560B /* UICollectionView+reusableCell.swift */; };
+		A31E1956219EF0B700E0560B /* UICollectionViewCell+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E1955219EF0B700E0560B /* UICollectionViewCell+ReusableCell.swift */; };
+		A31E1958219EF5DB00E0560B /* ReusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E1957219EF5DB00E0560B /* ReusableIdentifier.swift */; };
+		A31E195C219EF6BF00E0560B /* UIStoryboard+ReusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E195B219EF6BF00E0560B /* UIStoryboard+ReusableIdentifier.swift */; };
+		A31E195E219EF7B500E0560B /* UIViewController+ReusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E195D219EF7B500E0560B /* UIViewController+ReusableIdentifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +98,13 @@
 		A31E191C219E0AF400E0560B /* Gener+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gener+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A31E191D219E0AF400E0560B /* Film+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Film+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A31E191E219E0AF400E0560B /* Film+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Film+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A31E1944219EE9CB00E0560B /* FilmsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsDataSource.swift; sourceTree = "<group>"; };
+		A31E1950219EEFA600E0560B /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
+		A31E1953219EF04000E0560B /* UICollectionView+reusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+reusableCell.swift"; sourceTree = "<group>"; };
+		A31E1955219EF0B700E0560B /* UICollectionViewCell+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+ReusableCell.swift"; sourceTree = "<group>"; };
+		A31E1957219EF5DB00E0560B /* ReusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableIdentifier.swift; sourceTree = "<group>"; };
+		A31E195B219EF6BF00E0560B /* UIStoryboard+ReusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+ReusableIdentifier.swift"; sourceTree = "<group>"; };
+		A31E195D219EF7B500E0560B /* UIViewController+ReusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ReusableIdentifier.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,12 +155,15 @@
 		A31E188D219DBDBC00E0560B /* MOVS */ = {
 			isa = PBXGroup;
 			children = (
-				A31E1923219E0B0800E0560B /* Entitys */,
-				A31E1918219E059000E0560B /* Cells */,
 				A31E188E219DBDBC00E0560B /* AppDelegate.swift */,
+				A31E18DA219DC8F700E0560B /* Modules */,
+				A31E1952219EF02500E0560B /* Extensions */,
+				A31E194F219EEF7900E0560B /* Protocols */,
+				A31E1923219E0B0800E0560B /* Entitys */,
+				A31E1943219EE99900E0560B /* DataSources */,
+				A31E1918219E059000E0560B /* Cells */,
 				A31E18EB219DCCEB00E0560B /* Managers */,
 				A31E18E8219DCA2D00E0560B /* Enums */,
-				A31E18DA219DC8F700E0560B /* Modules */,
 				A31E18BF219DBEA400E0560B /* Supporting files */,
 				A31E189A219DBDBD00E0560B /* LaunchScreen.storyboard */,
 			);
@@ -327,6 +344,34 @@
 			name = Entitys;
 			sourceTree = "<group>";
 		};
+		A31E1943219EE99900E0560B /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				A31E1944219EE9CB00E0560B /* FilmsDataSource.swift */,
+			);
+			name = DataSources;
+			sourceTree = "<group>";
+		};
+		A31E194F219EEF7900E0560B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A31E1950219EEFA600E0560B /* ReusableCell.swift */,
+				A31E1957219EF5DB00E0560B /* ReusableIdentifier.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		A31E1952219EF02500E0560B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A31E1953219EF04000E0560B /* UICollectionView+reusableCell.swift */,
+				A31E1955219EF0B700E0560B /* UICollectionViewCell+ReusableCell.swift */,
+				A31E195B219EF6BF00E0560B /* UIStoryboard+ReusableIdentifier.swift */,
+				A31E195D219EF7B500E0560B /* UIViewController+ReusableIdentifier.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -464,7 +509,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A31E1951219EEFA600E0560B /* ReusableCell.swift in Sources */,
+				A31E195E219EF7B500E0560B /* UIViewController+ReusableIdentifier.swift in Sources */,
+				A31E195C219EF6BF00E0560B /* UIStoryboard+ReusableIdentifier.swift in Sources */,
 				A31E18E3219DC9B600E0560B /* TabBarRouter.swift in Sources */,
+				A31E1945219EE9CB00E0560B /* FilmsDataSource.swift in Sources */,
 				A31E18DF219DC99900E0560B /* TabBarPresenter.swift in Sources */,
 				A31E1907219DF0E400E0560B /* FilmsRouter.swift in Sources */,
 				A31E18E1219DC9AC00E0560B /* TabBarInteractor.swift in Sources */,
@@ -478,9 +527,12 @@
 				A31E18DD219DC93800E0560B /* TabBarView.swift in Sources */,
 				A31E18EA219DCA4800E0560B /* StoryboardIDs.swift in Sources */,
 				A31E1909219DF26E00E0560B /* FilmsInteractor.swift in Sources */,
+				A31E1954219EF04000E0560B /* UICollectionView+reusableCell.swift in Sources */,
 				A31E191A219E05B600E0560B /* MovieCollectionViewCell.swift in Sources */,
 				A31E190B219DF2C100E0560B /* FilmsPresenter.swift in Sources */,
+				A31E1956219EF0B700E0560B /* UICollectionViewCell+ReusableCell.swift in Sources */,
 				A31E1897219DBDBC00E0560B /* MOVS.xcdatamodeld in Sources */,
+				A31E1958219EF5DB00E0560B /* ReusableIdentifier.swift in Sources */,
 				A31E1922219E0AF400E0560B /* Film+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,6 +24,9 @@ class FilmsView: UIViewController {
         
         // Navigation
         self.setNavigationBar()
+        
+        // Load collection
+        self.presenter.viewDidLoad(withCollection: self.outletFilmsCollectionView)
     }
 
     

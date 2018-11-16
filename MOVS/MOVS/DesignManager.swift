@@ -53,6 +53,8 @@ class DesignManager: NSObject {
         tabBar.isTranslucent = false
         tabBar.backgroundImage = UIImage()
         tabBar.shadowImage = UIImage()
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: DesignManager.montserratMedium.withSize(10), NSAttributedString.Key.foregroundColor: PaletColor.darkGray.rawValue], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: DesignManager.montserratMedium.withSize(10), NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
     }
     
     public static func configureNavigation(navigationBar: UINavigationBar){

@@ -8,9 +8,11 @@
 
 import UIKit
 
-class FilmsPresenter{
+class FilmsPresenter: NSObject{
     // MARK: - Variables
     // MARK: Private
+    private var films: [Film] = [Film]()
+    private var collectionDataSource: FilmsDataSource!
     // MARK: Public
     var router:FilmsRouter
     var interactor:FilmsInteractor
@@ -21,13 +23,15 @@ class FilmsPresenter{
         self.router = router
         self.interactor = interactor
         self.view = view
+        super.init()
         self.view.presenter = self
     }
     
     // MARK: - Functions
     // MARK: Private
     // MARK: Public
-    func viewDidLoad() {
-        
+    func viewDidLoad(withCollection collection: UICollectionView) {
+        self.collectionDataSource = FilmsDataSource(withCollection: collection, andFilms: films)
+        collection.dataSource = self.collectionDataSource
     }
 }

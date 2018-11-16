@@ -19,19 +19,13 @@ class FilmsRouter{
         
         //Instancing Storyboard
         let storyboard = UIStoryboard(name: StoryboardID.films.rawValue, bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.films.rawValue)
-        
-        //Instancing View
-        guard let view = viewController as? FilmsView else {
-            print("Error casting to FilmsView in: \(FilmsRouter.self)")
-            return
-        }
+        let viewController: FilmsView = storyboard.instantiateViewController()
         
         //Instancing Interactor
         let interactor = FilmsInteractor()
         
         //Instancing Presenter
-        self.presenter = FilmsPresenter(router: self, interactor: interactor, view: view)
+        self.presenter = FilmsPresenter(router: self, interactor: interactor, view: viewController)
     }
     
 }

@@ -14,6 +14,7 @@ enum PaletColor{
     case esmerald
     case pink
     case gray
+    case darkGray
 }
 
 extension PaletColor{
@@ -30,6 +31,8 @@ extension PaletColor{
                 return UIColor(red: 236/255, green: 43/255, blue: 102/255, alpha: 1)
             case .gray:
                 return UIColor(red: 248/255, green: 248/255, blue: 248/255, alpha: 1)
+            case .darkGray:
+                return UIColor(red: 160/255, green: 160/255, blue: 160/255, alpha: 1)
             }
         }
     }
