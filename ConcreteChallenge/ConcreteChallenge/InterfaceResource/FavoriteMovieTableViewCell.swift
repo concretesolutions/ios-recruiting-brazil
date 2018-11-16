@@ -9,7 +9,14 @@
 import UIKit
 
 class FavoriteMovieTableViewCell: UITableViewCell {
-
+    
+    // MARK: - Outlets
+    @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var titleLabe: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var overviewTextView: UITextView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

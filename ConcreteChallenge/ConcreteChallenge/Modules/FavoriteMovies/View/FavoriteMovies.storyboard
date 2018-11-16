@@ -27,6 +27,56 @@
                                 <rect key="frame" x="16" y="120" width="343" height="527"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="172" id="MVQ-8n-hlE" customClass="FavoriteMovieTableViewCell" customModule="ConcreteChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="172"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MVQ-8n-hlE" id="uVt-Rp-J0X">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="171.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQn-4n-k3t">
+                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="171.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCF-Fj-yPS">
+                                                    <rect key="frame" x="111" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9m-DA-eAB">
+                                                    <rect key="frame" x="286" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pl6-6n-3xV">
+                                                    <rect key="frame" x="111" y="33" width="217" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cQn-4n-k3t" firstAttribute="height" secondItem="uVt-Rp-J0X" secondAttribute="height" id="Bbp-C1-gXp"/>
+                                                <constraint firstItem="cQn-4n-k3t" firstAttribute="top" secondItem="uVt-Rp-J0X" secondAttribute="top" id="Dq7-2U-MwL"/>
+                                                <constraint firstItem="cQn-4n-k3t" firstAttribute="leading" secondItem="uVt-Rp-J0X" secondAttribute="leading" id="Ely-ab-Q0T"/>
+                                                <constraint firstAttribute="bottom" secondItem="cQn-4n-k3t" secondAttribute="bottom" id="I50-es-zoh"/>
+                                                <constraint firstItem="cQn-4n-k3t" firstAttribute="width" secondItem="uVt-Rp-J0X" secondAttribute="width" multiplier="0.3" id="STh-pV-8uZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="overviewTextView" destination="Pl6-6n-3xV" id="Bl0-7s-qsg"/>
+                                            <outlet property="posterImage" destination="cQn-4n-k3t" id="1YA-Xk-iNG"/>
+                                            <outlet property="releaseDateLabel" destination="d9m-DA-eAB" id="8wG-Ee-jM4"/>
+                                            <outlet property="titleLabe" destination="gCF-Fj-yPS" id="lwc-f8-2ma"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
