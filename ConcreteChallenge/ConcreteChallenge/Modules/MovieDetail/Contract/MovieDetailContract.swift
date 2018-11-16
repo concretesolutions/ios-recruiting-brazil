@@ -17,6 +17,7 @@ protocol MovieDetailWireframe: class {
 
 protocol MovieDetailView {
     var presenter: MovieDetailPresentation! { get set }
+    var movie: MovieDetails? { get set }
     
     func showDetails(of movie: MovieDetails)
     func updateFavoriteButton(to activate:Bool)

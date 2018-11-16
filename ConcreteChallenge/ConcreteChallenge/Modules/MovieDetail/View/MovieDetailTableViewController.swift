@@ -10,6 +10,7 @@ import UIKit
 
 class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     
+    
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
@@ -19,10 +20,13 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     
     // MARK: - Actions
     @IBAction func didTapFavoriteButton(_ sender: Any) {
+        guard let movie = self.movie else { return }
+        self.presenter.didTapFavoriteButton(of: movie)
     }
     
     // MARK: - Properties
     var presenter: MovieDetailPresentation!
+    var movie: MovieDetails?
     
     // MARK: - Life cycle Functions
     override func viewDidLoad() {
@@ -32,6 +36,8 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
 
     // MARK: - MovieDetailView Functions
     func showDetails(of movie: MovieDetails) {
+        self.movie = movie
+        
         DispatchQueue.main.async {
             // Image
             self.posterImage.image = movie.posterImage
