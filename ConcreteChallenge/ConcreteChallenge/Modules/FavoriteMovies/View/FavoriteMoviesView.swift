@@ -22,21 +22,26 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         self.presenter.viewDidLoad()
         
         self.setupNavigationBar()
+        self.setupTableView()
         
         self.presenter.didRequestFavoriteMovies()
     }
     
     // MARK: - FavoriteMoviesView Functions
     func show(favoriteMovies: [Movie]) {
-        for movie in favoriteMovies {
-            print(movie.title)
-        }
+        print(favoriteMovies)
+        self.favoriteMoviesTableView.favoriteMovies = favoriteMovies
     }
     
     // MARK: - Functions
     func setupNavigationBar() {
         self.navigationItem.title = "Movies"
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.968627451, green: 0.8078431373, blue: 0.3568627451, alpha: 1)
+    }
+    
+    func setupTableView() {
+        self.favoriteMoviesTableView.delegate = self.favoriteMoviesTableView
+        self.favoriteMoviesTableView.dataSource = self.favoriteMoviesTableView
     }
 }
 

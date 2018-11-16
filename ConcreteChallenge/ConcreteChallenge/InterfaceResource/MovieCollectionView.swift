@@ -29,7 +29,7 @@ class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionViewCell
 
-        cell.setupCell(movie: self.movies[indexPath.row])
+        cell.setupCell(movie: self.movies[indexPath.item])
         
         return cell
     }

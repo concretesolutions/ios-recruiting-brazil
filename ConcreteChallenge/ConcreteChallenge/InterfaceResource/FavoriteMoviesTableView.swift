@@ -25,6 +25,10 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteMovieCell", for: indexPath) as! FavoriteMovieTableViewCell
+        
+        cell.setupCell(movie: self.favoriteMovies[indexPath.row])
+        
+        return cell
     }
 }

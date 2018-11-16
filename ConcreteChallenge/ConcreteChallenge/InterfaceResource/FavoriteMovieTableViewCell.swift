@@ -12,7 +12,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
-    @IBOutlet weak var titleLabe: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var overviewTextView: UITextView!
     
@@ -25,4 +25,29 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    // MARK: - Functions
+    func setupCell(movie: Movie) {
+        
+        // Image
+        ImageDataManager.getImageFrom(imagePath: movie.posterPath) { (image) in
+            DispatchQueue.main.async {
+                self.posterImage.image = image
+            }
+        }
+        
+        // Title
+        self.nameLabel.text = movie.title
+        
+        // Release Year
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([Calendar.Component.year], from: movie.releaseDate)
+        if let year = components.year {
+            self.releaseDateLabel.text = String(describing: year)
+        } else {
+            self.releaseDateLabel.text = "Unavailable"
+        }
+        
+        // Overview
+        self.overviewTextView.text = movie.overview
+    }
 }
