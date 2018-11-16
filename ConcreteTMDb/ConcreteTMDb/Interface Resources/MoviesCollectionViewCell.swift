@@ -10,4 +10,12 @@ import UIKit
 
 class MoviesCollectionViewCell: UICollectionViewCell {
     
+    override func awakeFromNib() {
+        
+    }
+    
+    func setup(movie: Movie) {
+        
+    }
+    
 }

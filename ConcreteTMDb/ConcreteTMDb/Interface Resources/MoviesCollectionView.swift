@@ -8,7 +8,24 @@
 
 import UIKit
 
-class MoviesCollectionView: UICollectionView {
+class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    var movies: [Movie] = []
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.movies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MoviesCollectionViewCell
+        
+        let movie = self.movies[indexPath.row]
+        cell.setup(movie: movie)
+        
+        return cell
+    }
+    
 
+    
 
 }
