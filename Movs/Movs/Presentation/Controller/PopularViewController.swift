@@ -21,6 +21,13 @@ class PopularViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        PopularMovieServices.getPopularMovie(page: 1) { (popularMovie, error) in
+            if popularMovie != nil {
+                print("Total de páginas na request: \(popularMovie?.totalPages  ?? 0)")
+            } else if error != nil {
+                print(error.debugDescription)
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

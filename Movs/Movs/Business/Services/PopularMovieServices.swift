@@ -9,7 +9,7 @@
 import Foundation
 
 struct PopularMovieServices {
-    static func getPopularMovieList(completionHandler: @escaping (PopularMovie?) -> Void) {
-        PopularMovieDAO.getPopularMovieList(completionHandler: completionHandler)
+    static func getPopularMovie(page: Int, completionHandler: @escaping (PopularMovie?, Error?) -> Void) {
+        PopularMovieDAO.getPopularMovie(page: page, completionHandler: completionHandler)
     }
 }
