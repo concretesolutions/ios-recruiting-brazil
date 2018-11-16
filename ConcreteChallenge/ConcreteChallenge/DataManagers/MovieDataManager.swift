@@ -48,6 +48,12 @@ class MovieDataManager {
     }
     
     static func fetchGenres(completion: @escaping () -> Void) {
+        
+        if !self.genres.isEmpty {
+            completion()
+            return
+        }
+        
         guard let genresURL = URL(string: self.getGenresURL) else { return }
         var request = URLRequest(url: genresURL)
         request.httpMethod = "GET"
@@ -72,6 +78,6 @@ class MovieDataManager {
             } else {
                 print("Error requesting genres: ", error as Any)
             }
-            }.resume()
+        }.resume()
     }
 }
