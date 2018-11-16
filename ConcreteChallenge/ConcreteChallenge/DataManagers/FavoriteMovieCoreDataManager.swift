@@ -52,6 +52,7 @@ class FavoriteMovieCoreDataManager {
         request.returnsObjectsAsFaults = false
         do {
             let result = try context.fetch(request)
+            self.favoriteMovies = []
             for data in result as! [NSManagedObject] {
                 let id = data.value(forKey: "id") as! Int
                 let title = data.value(forKey: "title") as! String

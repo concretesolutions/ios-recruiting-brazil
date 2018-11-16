@@ -49,5 +49,6 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         
         // Overview
         self.overviewTextView.text = movie.overview
+        self.overviewTextView.textContainer.lineBreakMode = .byTruncatingTail
     }
 }

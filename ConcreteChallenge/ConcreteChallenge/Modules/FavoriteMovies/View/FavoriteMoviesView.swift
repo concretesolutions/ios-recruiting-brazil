@@ -23,7 +23,9 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         
         self.setupNavigationBar()
         self.setupTableView()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.presenter.didRequestFavoriteMovies()
     }
     
