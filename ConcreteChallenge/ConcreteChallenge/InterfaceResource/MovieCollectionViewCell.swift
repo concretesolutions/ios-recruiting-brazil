@@ -11,7 +11,6 @@ import UIKit
 class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
-    var movie: Movie? = nil
     
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
@@ -30,6 +29,5 @@ class MovieCollectionViewCell: UICollectionViewCell {
             }
         }
         self.nameLabel.text = movie.title
-        self.movie = movie
     }
 }

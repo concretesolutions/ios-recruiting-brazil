@@ -10,6 +10,7 @@ import Foundation
 
 class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractorOutput {
     
+    
     // MARK: - Properties
     var view: PopularMoviesView?
     var interactor: PopularMoviesInteractorInput!
@@ -22,6 +23,10 @@ class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractor
     
     func didRequestMovies() {
         self.interactor.fetchMovies()
+    }
+    
+    func didTapMovieCell(of movie: Movie) {
+        self.router.showMoveDetail(for: movie)
     }
     
     // MARK: - PopularMoviesInteractorOutput functions

@@ -13,6 +13,8 @@ protocol PopularMoviesWireframe: class {
     static var presenter: PopularMoviesPresentation! { get set }
     
     static func assembleModule() -> UIViewController
+    
+    func showMoveDetail(for movie: Movie)
 }
 
 protocol PopularMoviesView {
@@ -28,6 +30,7 @@ protocol PopularMoviesPresentation: class {
     
     func viewDidLoad()
     func didRequestMovies()
+    func didTapMovieCell(of movie: Movie)
 }
 
 protocol PopularMoviesInteractorInput: class {

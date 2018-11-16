@@ -10,6 +10,7 @@ import UIKit
 
 class PopularMoviesRouter: PopularMoviesWireframe {
     
+    
     weak var viewController: UIViewController?
     static var presenter: PopularMoviesPresentation!
     
@@ -27,6 +28,8 @@ class PopularMoviesRouter: PopularMoviesWireframe {
             router.viewController = popularMoviesViewController
         }
         
+        viewController = UINavigationController(rootViewController: viewController)
+        
         presenter.interactor = interactor
         presenter.router = router
         
@@ -34,7 +37,11 @@ class PopularMoviesRouter: PopularMoviesWireframe {
         
         self.presenter = presenter
         
-        viewController = UINavigationController(rootViewController: viewController)
         return viewController
+    }
+    
+    func showMoveDetail(for movie: Movie) {
+        let movieDetailViewController = MovieDetailRouter.assembleModule(with: movie)
+        self.viewController?.navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
 }
