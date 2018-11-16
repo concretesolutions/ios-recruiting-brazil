@@ -50,6 +50,19 @@ class RequestData {
         dataTask.resume()
     }
     
+    class func gerGenres<T: Codable>(id: Int, completion: @escaping (T) -> Void, onError: @escaping (LoadError) -> Void) {
+        let path = "https://api.themoviedb.org/3/genre/movie/list?api_key=ba8157788e70a54b6eb17392403e33c6&language=en-US"
+        
+        guard let url = URL(string: path) else {
+            return onError(.url)
+        }
+        
+        let dataTask = session.dataTask(with: url) { (data, response, error) in
+            self.requestResponse(completion: completion, onError: onError)(data, response, error)
+        }
+        dataTask.resume()
+    }
+    
     class func requestResponse<T: Codable>(completion: @escaping (T) -> Void, onError: @escaping (LoadError) -> Void) -> ((Data?, URLResponse?, Error?) -> Void) {
         
         return { data, response, error in

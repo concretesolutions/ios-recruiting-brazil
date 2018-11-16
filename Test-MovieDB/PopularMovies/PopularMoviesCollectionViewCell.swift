@@ -15,9 +15,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var nameOfMovieLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
-    //@IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
     let indicatorOfActivity = UIActivityIndicatorView()
-    
     
     //MARK: - SUPER METHODS
     
@@ -43,8 +41,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with movie: PopularResults?, searchData: ResultsOfSearchWorker?) {
-        //posterImage.image = nil
-        //posterImage.isHidden = true
+        posterImage.image = nil
         self.addActivityIndicator()
         if let movie = movie {
             nameOfMovieLabel.text = movie.title

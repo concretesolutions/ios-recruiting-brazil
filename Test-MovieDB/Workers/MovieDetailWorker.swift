@@ -15,13 +15,15 @@ struct MovieDetailWorker {
     var yearOfRelease: String
     var isFavorite: Bool
     var description: String
+    var id: Int
     
-    init(posterPath: String?, title: String, genreID: [Int], yearOfRelease: String, isFavorite: Bool, description: String) {
+    init(posterPath: String?, title: String, genreID: [Int], yearOfRelease: String, isFavorite: Bool, description: String, id: Int) {
         self.posterPath = posterPath
         self.title = title
         self.genreID = genreID
         self.yearOfRelease = yearOfRelease
         self.isFavorite = isFavorite
         self.description = description
+        self.id = id
     }
 }

@@ -42,3 +42,7 @@ extension UIImageView {
         dataTask.resume()
     }
 }
+
+extension Notification.Name {
+    static let didReceiveData = Notification.Name("didReceiveData")
+}

@@ -48,7 +48,9 @@ class PopularMoviesMiddle {
     }
     
     func fetchMovies() {
-    
+        if self.currentPage == 0 {
+            self.currentPage += 1
+        }
         guard !isFetchInProgress else { return }
         
         isFetchInProgress = true
@@ -76,9 +78,9 @@ class PopularMoviesMiddle {
     }
         
         func searchMovies(searchString: String) {
-            self.currentPage = 0
-            self.currentPage += 1
-            
+            if self.currentPage == 0 {
+                self.currentPage += 1
+            }
             self.popularResults.removeAll()
             
             guard !isFetchInProgress else { return }

@@ -15,6 +15,7 @@ class PopularMoviesTableViewCell: UITableViewCell {
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var indicatorOfActivity: UIActivityIndicatorView!
     
     //MARK: - SUPER METHODS
@@ -36,14 +37,15 @@ class PopularMoviesTableViewCell: UITableViewCell {
 
         if let movie = movie {
             titleLabel.text = movie.title
-            descriptionLabel.text = movie.description
+            descriptionLabel.text = movie.movieDescription
+            yearLabel.text = convertDateFormat(input: movie.yearOfRelease ?? "")
             titleLabel.alpha = 1
             descriptionLabel.alpha = 1
             indicatorOfActivity.stopAnimating()
             posterImage.loadImageFromURLString(urlStirng: movie.posterPath)
         } else {
             titleLabel.alpha = 1
-            //yearLabel.alpha = 1
+            yearLabel.alpha = 1
             descriptionLabel.alpha = 1
             indicatorOfActivity.startAnimating()
         }

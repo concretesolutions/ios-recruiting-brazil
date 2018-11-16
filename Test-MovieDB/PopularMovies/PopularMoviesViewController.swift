@@ -49,6 +49,16 @@ class PopularMoviesViewController: UIViewController {
         
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MovieDetailViewController
+        //vc.middle.movieToLoad = sender as? MovieDetailWorker
+        detailMiddle = MovieDetailMiddle(delegate: vc)
+        vc.middle = detailMiddle
+        self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
+        
+    }
+    
     //MARK: - METHODS
     
     func addActivityIndicator() {
@@ -119,7 +129,7 @@ extension PopularMoviesViewController: UICollectionViewDelegate {
                 middle.fetchMovies()
             }
         } else {
-            if indexPath.row == middle.popularResults.count - 1 {
+            if indexPath.row == middle.searchResultArray.count - 1 {
                 addActivityIndicator()
                 guard let searchString = searchBar.text else { return }
                 middle.searchMovies(searchString: searchString)
@@ -151,21 +161,15 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "movieDetail" && segue.identifier ==  "detailMovie" {
-            self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if searchBar.text?.isEmpty == true {
             let movie = middle.popularResults[indexPath.row]
-            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview)
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview, id: movie.id)
             performSegue(withIdentifier: "movieDetail", sender: movieDetailWorker)
         } else {
             let movie = middle.searchResultArray[indexPath.row]
-            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview)
-            performSegue(withIdentifier: "detailMovie", sender: movieDetailWorker)
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview, id: movie.id)
+            performSegue(withIdentifier: "movieDetail", sender: movieDetailWorker)
         }
     }
 }
@@ -231,6 +235,7 @@ extension PopularMoviesViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.popularMoviesCollectionView.reloadData()
+        middle.currentPage = 0
         if searchText.isEmpty {
             self.middle.fetchMovies()
         }
@@ -258,7 +263,9 @@ extension PopularMoviesViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        middle.currentPage = 0
         middle.fetchMovies()
+        popularMoviesCollectionView.reloadData()
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }

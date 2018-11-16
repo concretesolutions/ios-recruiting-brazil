@@ -16,9 +16,9 @@ public class FavoriteMovies: NSManagedObject {
     
     var fetchedResultsController: NSFetchedResultsController<FavoriteMovies>!
     var fetchRequest: NSFetchRequest<FavoriteMovies>!
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
+    var favorite: Favorite!
     
     func fetch() {
         let request = FavoriteMovies.fetchRequest() as NSFetchRequest<FavoriteMovies>
@@ -43,6 +43,24 @@ public class FavoriteMovies: NSManagedObject {
         saveMovie.genreID = movie.genreID
         saveMovie.yearOfRelease = movie.yearOfRelease
         saveMovie.id = movie.id
+        appDelegate.saveContext()
+    }
+    
+    func removeFavorite(movie: FavoriteMovies) {
+        context.delete(movie)
+        fetch()
+        appDelegate.saveContext()
+    }
+    
+    func savingFavorite(movie: Favorite) {
+        let saveMovie = FavoriteMovies(entity: FavoriteMovies.entity(), insertInto: context)
+        saveMovie.title = movie.title
+        saveMovie.movieDescription = movie.description
+        saveMovie.posterPath = movie.posterPath
+        saveMovie.isFavorite = movie.isFavorite
+        saveMovie.genreID = movie.genreID
+        saveMovie.yearOfRelease = movie.yearOfRelease
+        saveMovie.id = Int64(movie.id)
         appDelegate.saveContext()
     }
 }
