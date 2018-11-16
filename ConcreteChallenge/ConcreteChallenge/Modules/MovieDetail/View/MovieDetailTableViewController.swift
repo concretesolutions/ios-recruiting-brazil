@@ -16,7 +16,11 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     @IBOutlet weak var movieReleaseYear: UILabel!
     @IBOutlet weak var movieGenres: UILabel!
     @IBOutlet weak var movieOverview: UITextView!
-
+    
+    // MARK: - Actions
+    @IBAction func didTapFavoriteButton(_ sender: Any) {
+    }
+    
     // MARK: - Properties
     var presenter: MovieDetailPresentation!
     
