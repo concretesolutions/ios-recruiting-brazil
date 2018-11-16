@@ -33,7 +33,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="15" maxX="0.0" maxY="15"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridCell" id="79S-Wa-ux0">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridCell" id="79S-Wa-ux0" customClass="MovieCollectionViewCell" customModule="MOVS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="30" width="165" height="248"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -85,6 +85,13 @@
                                             <constraint firstAttribute="bottom" secondItem="dUB-53-seb" secondAttribute="bottom" id="xXM-6X-2lK"/>
                                             <constraint firstItem="dUB-53-seb" firstAttribute="leading" secondItem="79S-Wa-ux0" secondAttribute="leading" id="yw1-O8-Q75"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="outletActivity" destination="wvT-M8-BiV" id="OV4-IF-Hdt"/>
+                                            <outlet property="outletFavoriteImageView" destination="gUm-Aw-z2r" id="kXH-DB-A9n"/>
+                                            <outlet property="outletFilmNameLabel" destination="fUi-31-Wm3" id="BsY-gT-xcN"/>
+                                            <outlet property="outletGradientView" destination="dUB-53-seb" id="5Dz-dn-tsX"/>
+                                            <outlet property="outletPosterImageView" destination="81r-pa-U5t" id="owf-f7-Vqb"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Header" id="lDC-34-AWp">

@@ -25,6 +25,14 @@ class DesignManager: NSObject {
     
     // MARK: - functions
     // MARK: - Public
+    public static func gradient(toView view: UIView){
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor(red: 48/256, green: 48/256, blue: 48/256, alpha: 1), UIColor.white.withAlphaComponent(0)]
+        gradient.zPosition = -1
+        view.layer.addSublayer(gradient)
+    }
+    
     public static func applyShadow(toView view: UIView, color: UIColor = UIColor.black, opacity: Float = DesignManager.shadowOpacity, x: CGFloat = DesignManager.shadowWidth, y: CGFloat = DesignManager.shadowHeight, blur: CGFloat = DesignManager.shadowRadius){
         view.layer.shadowColor = color.cgColor
         view.layer.shadowOpacity = opacity

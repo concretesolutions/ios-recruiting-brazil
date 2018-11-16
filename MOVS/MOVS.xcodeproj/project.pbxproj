@@ -32,6 +32,10 @@
 		A31E1916219DF9EA00E0560B /* Bebas-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A31E1914219DF9E900E0560B /* Bebas-Bold.otf */; };
 		A31E1917219DF9EA00E0560B /* Bebas-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A31E1915219DF9E900E0560B /* Bebas-Regular.otf */; };
 		A31E191A219E05B600E0560B /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E1919219E05B600E0560B /* MovieCollectionViewCell.swift */; };
+		A31E191F219E0AF400E0560B /* Gener+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E191B219E0AF400E0560B /* Gener+CoreDataClass.swift */; };
+		A31E1920219E0AF400E0560B /* Gener+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E191C219E0AF400E0560B /* Gener+CoreDataProperties.swift */; };
+		A31E1921219E0AF400E0560B /* Film+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E191D219E0AF400E0560B /* Film+CoreDataClass.swift */; };
+		A31E1922219E0AF400E0560B /* Film+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E191E219E0AF400E0560B /* Film+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,10 @@
 		A31E1914219DF9E900E0560B /* Bebas-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bebas-Bold.otf"; sourceTree = "<group>"; };
 		A31E1915219DF9E900E0560B /* Bebas-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bebas-Regular.otf"; sourceTree = "<group>"; };
 		A31E1919219E05B600E0560B /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		A31E191B219E0AF400E0560B /* Gener+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gener+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A31E191C219E0AF400E0560B /* Gener+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gener+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A31E191D219E0AF400E0560B /* Film+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Film+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A31E191E219E0AF400E0560B /* Film+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Film+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 		A31E188D219DBDBC00E0560B /* MOVS */ = {
 			isa = PBXGroup;
 			children = (
+				A31E1923219E0B0800E0560B /* Entitys */,
 				A31E1918219E059000E0560B /* Cells */,
 				A31E188E219DBDBC00E0560B /* AppDelegate.swift */,
 				A31E18EB219DCCEB00E0560B /* Managers */,
@@ -307,6 +316,17 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		A31E1923219E0B0800E0560B /* Entitys */ = {
+			isa = PBXGroup;
+			children = (
+				A31E191B219E0AF400E0560B /* Gener+CoreDataClass.swift */,
+				A31E191C219E0AF400E0560B /* Gener+CoreDataProperties.swift */,
+				A31E191D219E0AF400E0560B /* Film+CoreDataClass.swift */,
+				A31E191E219E0AF400E0560B /* Film+CoreDataProperties.swift */,
+			);
+			name = Entitys;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -449,8 +469,11 @@
 				A31E1907219DF0E400E0560B /* FilmsRouter.swift in Sources */,
 				A31E18E1219DC9AC00E0560B /* TabBarInteractor.swift in Sources */,
 				A31E18ED219DCD0000E0560B /* DesignManager.swift in Sources */,
+				A31E1920219E0AF400E0560B /* Gener+CoreDataProperties.swift in Sources */,
 				A31E18EF219DCE0000E0560B /* PaletColors.swift in Sources */,
+				A31E191F219E0AF400E0560B /* Gener+CoreDataClass.swift in Sources */,
 				A31E188F219DBDBC00E0560B /* AppDelegate.swift in Sources */,
+				A31E1921219E0AF400E0560B /* Film+CoreDataClass.swift in Sources */,
 				A31E1901219DEAB600E0560B /* FilmsView.swift in Sources */,
 				A31E18DD219DC93800E0560B /* TabBarView.swift in Sources */,
 				A31E18EA219DCA4800E0560B /* StoryboardIDs.swift in Sources */,
@@ -458,6 +481,7 @@
 				A31E191A219E05B600E0560B /* MovieCollectionViewCell.swift in Sources */,
 				A31E190B219DF2C100E0560B /* FilmsPresenter.swift in Sources */,
 				A31E1897219DBDBC00E0560B /* MOVS.xcdatamodeld in Sources */,
+				A31E1922219E0AF400E0560B /* Film+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
