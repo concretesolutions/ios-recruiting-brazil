@@ -11,6 +11,7 @@ import UIKit
 class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
     
     // MARK: - Outlets
+    @IBOutlet weak var favoriteMoviesTableView: UITableView!
     
     // MARK: - Properties
     var presenter: FavoriteMoviesPresentation!
