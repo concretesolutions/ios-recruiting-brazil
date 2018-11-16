@@ -108,7 +108,7 @@
                         <viewLayoutGuide key="safeArea" id="Erc-YO-YC1"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favoritos" id="qR5-cl-amg">
-                        <barButtonItem key="rightBarButtonItem" image="filter" id="FSz-pt-dF2">
+                        <barButtonItem key="rightBarButtonItem" image="@icons-filter" id="FSz-pt-dF2">
                             <color key="tintColor" name="darkBlue"/>
                         </barButtonItem>
                     </navigationItem>
@@ -132,7 +132,7 @@
         <scene sceneID="RXc-DU-pKG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dbe-1w-xCd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favoritos" image="@tab-favorite" id="6OK-U0-wpu"/>
+                    <tabBarItem key="tabBarItem" title="Favoritos" image="@tabBar-favorite" id="6OK-U0-wpu"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zjm-Z2-EKX">
@@ -150,9 +150,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="@icons-filter" width="26" height="25"/>
         <image name="@popularMovies-placeholder" width="500" height="750"/>
-        <image name="@tab-favorite" width="27" height="27"/>
-        <image name="filter" width="26" height="25"/>
+        <image name="@tabBar-favorite" width="27" height="27"/>
         <namedColor name="darkBlue">
             <color red="0.17647058823529413" green="0.18823529411764706" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

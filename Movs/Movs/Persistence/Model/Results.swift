@@ -18,7 +18,7 @@ struct Results {
     let posterPath: String?
     let originalLanguage: String?
     let originalTitle: String?
-    let genre: [Int]?
+    let genres: [Int]?
     let backdropPath: String?
     let adult: Bool?
     let overview: String?
@@ -36,7 +36,7 @@ extension Results: Codable {
 		case posterPath = "poster_path"
 		case originalLanguage = "original_language"
 		case originalTitle = "original_title"
-		case genre = "genre_ids"
+		case genres = "genre_ids"
 		case backdropPath = "backdrop_path"
 		case adult = "adult"
 		case overview = "overview"
@@ -54,7 +54,7 @@ extension Results: Codable {
 		posterPath = try values.decodeIfPresent(String.self, forKey: .posterPath)
 		originalLanguage = try values.decodeIfPresent(String.self, forKey: .originalLanguage)
 		originalTitle = try values.decodeIfPresent(String.self, forKey: .originalTitle)
-		genre = try values.decodeIfPresent([Int].self, forKey: .genre)
+		genres = try values.decodeIfPresent([Int].self, forKey: .genres)
 		backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
 		adult = try values.decodeIfPresent(Bool.self, forKey: .adult)
 		overview = try values.decodeIfPresent(String.self, forKey: .overview)

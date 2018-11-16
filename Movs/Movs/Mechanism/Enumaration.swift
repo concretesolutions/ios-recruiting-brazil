@@ -14,3 +14,9 @@ enum Behavior {
     GenericError,
     LoadingView
 }
+
+enum APIRoute: String {
+    case base = "https://api.themoviedb.org/3/"
+    case popularMovie = "movie/popular"
+    case genre = "genre/movie/list"
+}

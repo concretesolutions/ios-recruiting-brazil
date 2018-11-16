@@ -18,9 +18,7 @@ struct PopularMovie {
 }
 
 extension PopularMovie: Codable {
-    
 	enum CodingKeys: String, CodingKey {
-
 		case page = "page"
 		case totalResults = "total_results"
 		case totalPages = "total_pages"
