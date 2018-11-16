@@ -19,7 +19,7 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
         }
     }
     
-    // MARK: - UITableViewDataSource Functions
+    // MARK: - UITableViewDelegate and UITableViewDataSource Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.favoriteMovies.count
     }
