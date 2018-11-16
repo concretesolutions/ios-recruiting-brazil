@@ -11,7 +11,7 @@ import CoreData
 
 class FavoriteMovieCoreDataManager {
     
-    static func saveFavoriteMovie(movie: Movie, completion: (_ status: SaveStatus) -> Void) {
+    static func saveFavoriteMovie(movie: Movie, completion: (_ status: Status) -> Void) {
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -39,7 +39,7 @@ class FavoriteMovieCoreDataManager {
         }
     }
     
-    static func getFavoriteMovies() {
+    static func getFavoriteMovies(completion: (_ status: Status) -> Void) {
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -51,13 +51,16 @@ class FavoriteMovieCoreDataManager {
             for data in result as! [NSManagedObject] {
                 print(data.value(forKey: "title") as! String)
             }
+            
+            completion(.success)
         } catch {
             print("Failed")
+            completion(.failed)
         }
     }
 }
 
-enum SaveStatus {
+enum Status {
     case success
     case failed
 }
