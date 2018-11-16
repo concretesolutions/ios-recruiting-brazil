@@ -27,8 +27,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dhr-Fe-c9i">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="393"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dhr-Fe-c9i">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -47,17 +47,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wee-UN-cvt">
-                                                    <rect key="frame" x="16" y="0.0" width="327" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="319" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6W-sO-91w">
+                                                    <rect key="frame" x="342" y="0.0" width="17" height="43.5"/>
+                                                    <state key="normal" image="favorite_gray_icon"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="T6W-sO-91w" firstAttribute="height" secondItem="5vK-5M-T4Z" secondAttribute="height" id="8Ba-3e-tXM"/>
                                                 <constraint firstItem="wee-UN-cvt" firstAttribute="height" secondItem="5vK-5M-T4Z" secondAttribute="height" id="DpG-II-pk0"/>
+                                                <constraint firstItem="T6W-sO-91w" firstAttribute="centerY" secondItem="5vK-5M-T4Z" secondAttribute="centerY" id="Fdk-G8-iU4"/>
                                                 <constraint firstItem="wee-UN-cvt" firstAttribute="leading" secondItem="5vK-5M-T4Z" secondAttribute="leading" constant="16" id="O8g-AF-oIr"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wee-UN-cvt" secondAttribute="trailing" constant="16" id="eUj-kT-INg"/>
+                                                <constraint firstAttribute="trailing" secondItem="T6W-sO-91w" secondAttribute="trailing" constant="16" id="ZhV-pZ-QRq"/>
                                                 <constraint firstItem="wee-UN-cvt" firstAttribute="centerY" secondItem="5vK-5M-T4Z" secondAttribute="centerY" id="mrj-2s-HBu"/>
+                                                <constraint firstItem="wee-UN-cvt" firstAttribute="width" secondItem="5vK-5M-T4Z" secondAttribute="width" multiplier="0.85" id="uyp-bz-QdS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -148,4 +155,7 @@
             <point key="canvasLocation" x="528.79999999999995" y="-46.326836581709152"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite_gray_icon" width="17" height="16"/>
+    </resources>
 </document>
