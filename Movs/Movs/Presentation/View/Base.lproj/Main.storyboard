@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oUZ-Ar-dAN">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,13 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="oUZ-Ar-dAN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WIA-1O-CFK">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="SWu-hX-Di2" kind="relationship" relationship="viewControllers" id="lq9-IV-9gk"/>
+                        <segue destination="8vP-WP-NU6" kind="relationship" relationship="viewControllers" id="XAc-yX-rWh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ng-9i-p79" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -30,11 +32,21 @@
         <scene sceneID="0BD-Vg-Q11">
             <objects>
                 <viewControllerPlaceholder storyboardName="PopularMovies" id="SWu-hX-Di2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Filmes" id="6a1-vX-UBx"/>
+                    <tabBarItem key="tabBarItem" title="Populares" id="6a1-vX-UBx"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0Q-f7-Agc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-104" y="536"/>
+            <point key="canvasLocation" x="1192" y="-121"/>
+        </scene>
+        <!--Favorite-->
+        <scene sceneID="v0c-Ur-MGN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Favorite" id="8vP-WP-NU6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favoritos" id="yp4-aR-5dq"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ze4-dY-6Sb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1212" y="259"/>
         </scene>
     </scenes>
 </document>
