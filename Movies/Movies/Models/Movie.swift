@@ -14,6 +14,7 @@ class Movie: Decodable {
     
     var id: Int
     var title: String
+    var posterPath: String
     var year: Int
     var genres: [Genre]
     var overview: String
@@ -22,15 +23,17 @@ class Movie: Decodable {
     enum MovieKeys: String, CodingKey {
         case Id = "id"
         case Title = "title"
+        case PosterPath = "poster_path"
         case ReleaseDate = "release_date"
         case GenreIds = "genre_ids"
         case Overview = "overview"
     }
     
     // MARK: - Initializers
-    init(id: Int, title: String, year: Int, genres: [Genre], overview: String, isFavorite: Bool = false) {
+    init(id: Int, title: String, posterPath: String, year: Int, genres: [Genre], overview: String, isFavorite: Bool = false) {
         self.id = id
         self.title = title
+        self.posterPath = posterPath
         self.year = year
         self.genres = genres
         self.overview = overview
@@ -42,6 +45,7 @@ class Movie: Decodable {
         
         let id: Int = try container.decode(Int.self, forKey: .Id)
         let title: String = try container.decode(String.self, forKey: .Title)
+        let posterPath: String = try container.decode(String.self, forKey: .PosterPath)
         let releaseDate: String = try container.decode(String.self, forKey: .ReleaseDate)
         let genreIds: [Int] = try container.decode([Int].self, forKey: .GenreIds)
         let overview: String = try container.decode(String.self, forKey: .Overview)
@@ -52,7 +56,7 @@ class Movie: Decodable {
             return Genre(id: id, name: "Genre \(id)")
         }
         
-        self.init(id: id, title: title, year: year, genres: genres, overview: overview)
+        self.init(id: id, title: title, posterPath: posterPath, year: year, genres: genres, overview: overview)
     }
     
     
