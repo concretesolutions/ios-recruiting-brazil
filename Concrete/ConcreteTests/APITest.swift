@@ -70,29 +70,6 @@ class APITest: XCTestCase {
         
         waiter.wait(for: [answerAPIExpectation], timeout: 20.0, enforceOrder: true)
     }
-    
-    
-    func testGetImageMovieRequest() {
-        let waiter = XCTWaiter(delegate: self)
-        let answerAPIExpectation = XCTestExpectation(description: "AnswerAPI")
-        
-        let request = GetImageMovie(movieId: 332467)
-        
-        APIManager.shared.fetch(request) { (response) in
-            switch response {
-            case .success(let dataContainer):
-                XCTAssert(dataContainer.backdrops.count > 0 || dataContainer.posters.count > 0)
-                answerAPIExpectation.fulfill()
-                
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-                answerAPIExpectation.fulfill()
-                print(error.localizedDescription)
-            }
-        }
-        
-        waiter.wait(for: [answerAPIExpectation], timeout: 20.0, enforceOrder: true)
-    }
 
     func testGetGenresRequest() {
         let waiter = XCTWaiter(delegate: self)
