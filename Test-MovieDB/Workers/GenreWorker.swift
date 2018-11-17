@@ -9,7 +9,7 @@
 import Foundation
 
 struct GenreWorker: Codable {
-    var genre: [Genres]
+    var genres: [Genres]
 }
 
 struct Genres: Codable {

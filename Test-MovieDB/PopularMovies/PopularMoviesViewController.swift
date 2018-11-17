@@ -47,14 +47,24 @@ class PopularMoviesViewController: UIViewController {
         middle = PopularMoviesMiddle(delegate: self)
         middle.fetchMovies()
         
+        self.tabBarController?.tabBar.isHidden = false
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        
+        middle.fetchMovies()
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! MovieDetailViewController
         //vc.middle.movieToLoad = sender as? MovieDetailWorker
         detailMiddle = MovieDetailMiddle(delegate: vc)
         vc.middle = detailMiddle
+        vc.middle.fetchGenreID(IDs: movieDetailWorker.genreID)
         self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
         
     }
@@ -255,6 +265,9 @@ extension PopularMoviesViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        if searchBar.text?.isEmpty == true {
+            self.searchResulError()
+        }
         guard let textOfSearchBar = searchBar.text else { return }
         if searchBar.text?.isEmpty == true {
             self.middle.fetchMovies()

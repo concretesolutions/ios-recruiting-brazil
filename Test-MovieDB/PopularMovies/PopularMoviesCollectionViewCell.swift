@@ -14,8 +14,9 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var nameOfMovieLabel: UILabel!
-    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIImageView!
     let indicatorOfActivity = UIActivityIndicatorView()
+    var favoritesMiddle: FavoriteMoviesMiddle!
     
     //MARK: - SUPER METHODS
     
@@ -25,8 +26,16 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addActivityIndicator()
-        //indicatorOfActivity.hidesWhenStopped = true
+        
+        favoritesMiddle = FavoriteMoviesMiddle(delegate: self)
     }
+    
+    //MARK: - Actions
+    
+    @IBAction func saveAsFavorite(_ sender: Any) {
+        
+    }
+    
     
     //MARK: - METHODS
     
@@ -48,23 +57,46 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
             nameOfMovieLabel.textColor = Colors.darkYellow.color
             nameOfMovieLabel.alpha = 1
             posterImage.loadImageFromURLString(urlStirng: movie.poster_path)
-            //indicatorOfActivity.isHidden = true
-            //indicatorOfActivity.stopAnimating()
+            favoritesMiddle.favoriteMovies.filteringData(movieID: movie.id)
+            let fetchedObjects = favoritesMiddle.favoriteMovies.fetchedResultsController.fetchedObjects ?? []
+            if fetchedObjects.isEmpty == true {
+                favoriteButton.image = UIImage(named: "favorite_gray_icon")
+            } else {
+                favoriteButton.image = UIImage(named: "favorite_full_icon")
+            }
             self.indicatorOfActivity.removeFromSuperview()
         } else if let searchData = searchData {
             nameOfMovieLabel.text = searchData.title
             nameOfMovieLabel.textColor = Colors.darkYellow.color
             nameOfMovieLabel.alpha = 1
             posterImage.loadImageFromURLString(urlStirng: searchData.poster_path)
-            //indicatorOfActivity.isHidden = true
-            //indicatorOfActivity.stopAnimating()
+            favoritesMiddle.favoriteMovies.filteringData(movieID: searchData.id)
+            let fetchedObjects = favoritesMiddle.favoriteMovies.fetchedResultsController.fetchedObjects ?? []
+            if fetchedObjects.isEmpty == true {
+                favoriteButton.image = UIImage(named: "favorite_gray_icon")
+            } else {
+                favoriteButton.image = UIImage(named: "favorite_full_icon")
+            }
             self.indicatorOfActivity.removeFromSuperview()
         } else {
             nameOfMovieLabel.alpha = 1
             posterImage.alpha = 1
             self.addActivityIndicator()
-            //indicatorOfActivity.startAnimating()
-            //indicatorOfActivity.isHidden = false
         }
+    }
+}
+
+extension PopularMoviesCollectionViewCell: FavoriteMoviesMiddleDelegate {
+    
+    func favoritesFetched() {
+        
+    }
+    
+    func savedMovie() {
+        
+    }
+    
+    func deletedMovie() {
+        
     }
 }

@@ -71,7 +71,6 @@ class PopularMoviesMiddle {
             }
         }) { (error) in
             DispatchQueue.main.async {
-                print(error)
                 self.delegate?.fetchFailed()
             }
         }
@@ -81,15 +80,17 @@ class PopularMoviesMiddle {
             if self.currentPage == 0 {
                 self.currentPage += 1
             }
+
             self.popularResults.removeAll()
             
             guard !isFetchInProgress else { return }
-            let stringTrimmed = searchString.replacingOccurrences(of: " ", with: "")
+            let stringTrimmed = searchString.replacingOccurrences(of: " ", with: "-")
             
             isFetchInProgress = true
             
             RequestData.getSearchData(searchString: stringTrimmed, page: currentPage, completion: { (searchData: SearchResultsWorker) in
                 DispatchQueue.main.async {
+                    print(stringTrimmed)
                 self.isFetchInProgress = false
                 self.searchResults = SearchResultsWorker(page: searchData.page, results: searchData.results, total_pages: searchData.total_pages, total_results: searchData.total_results)
                     if searchData.total_results == 0 {

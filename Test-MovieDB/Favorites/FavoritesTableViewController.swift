@@ -12,7 +12,7 @@ class FavoritesTableViewController: UIViewController {
     
     @IBOutlet weak var favoritesTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    let filterButtonRightBarButton =  UIBarButtonItem(image: UIImage(named: "FilterIcon"), style: .plain, target: self, action: #selector(filterAction(_:)))
+    @IBOutlet weak var filterButtonRightBarButton: UIBarButtonItem!
     var middle: FavoriteMoviesMiddle!
     var movieDetailWorker: MovieDetailWorker!
     var detailMiddle: MovieDetailMiddle!
@@ -20,8 +20,6 @@ class FavoritesTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.rightBarButtonItem = filterButtonRightBarButton
         
         navigationItem.title = "Movies"
         navigationController?.navigationBar.barTintColor = Colors.yellowNavigation.color
@@ -37,6 +35,8 @@ class FavoritesTableViewController: UIViewController {
         favoritesTableView.delegate = self
         favoritesTableView.dataSource = self
         searchBar.delegate = self
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,18 +46,22 @@ class FavoritesTableViewController: UIViewController {
             alertNoItemsToBeFetched()
             filterButtonRightBarButton.isEnabled = false
         }
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailMovies" {
         let vc = segue.destination as! MovieDetailViewController
         detailMiddle = MovieDetailMiddle(delegate: vc)
         vc.middle = detailMiddle
         vc.middle.favoriteMoviesMiddle = middle
         vc.middle.indexOfMovie = indexToBePassed
+        vc.middle.fetchGenreID(IDs: movieDetailWorker.genreID)
         self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
-        
+        }
     }
     
     func alertNoItemsToBeFetched() {
@@ -67,8 +71,6 @@ class FavoritesTableViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func filterAction(_ sender: String) {
-    }
 }
 
 extension FavoritesTableViewController: UITableViewDelegate {

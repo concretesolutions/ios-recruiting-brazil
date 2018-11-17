@@ -63,5 +63,18 @@ public class FavoriteMovies: NSManagedObject {
         saveMovie.id = Int64(movie.id)
         appDelegate.saveContext()
     }
+    
+    func filteringData(movieID: Int) {
+        let request = FavoriteMovies.fetchRequest() as NSFetchRequest<FavoriteMovies>
+        let sort = NSSortDescriptor(keyPath: \FavoriteMovies.id, ascending: true)
+        request.sortDescriptors = [sort]
+        request.predicate = NSPredicate(format: "id == %@", "\(movieID)")
+        do {
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print(error.description)
+        }
+    }
 }
 

@@ -21,30 +21,57 @@ class MovieDetailViewController: UIViewController {
         button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
         return button
     }()
+    var genreString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
+        
         if middle.movieToLoad.isFavorite == true {
             favoriteButton.isSelected = true
         }
+        
         detailTableView.dataSource = self
         detailTableView.delegate = self
+        
         posterImage.loadImageFromURLString(urlStirng: middle.movieToLoad.posterPath)
+        
         detailTableView.allowsSelection = false
+        
+        checkIfFavorite(id: middle.movieToLoad.id)
+        
+        detailTableView.reloadData()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        genreString = middle.genreString
+        detailTableView.reloadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
+        genreString = ""
+        detailTableView.reloadData()
+    }
+    
+    func checkIfFavorite(id: Int) {
+        middle.favoriteMovie.filteringData(movieID: id)
+        let fetchedObjects = middle.favoriteMovie.fetchedResultsController.fetchedObjects ?? []
+        if fetchedObjects.isEmpty == true {
+            favoriteButton.isSelected = false
+        } else {
+            favoriteButton.isSelected = true
+        }
     }
     
     @objc func buttonSelected() {
         if favoriteButton.isSelected == true {
             favoriteButton.isSelected = false
-            //middle.removeFavorite(movie: middle.movieToLoad)
-            middle.removeFavorite(movie: middle.favoriteMoviesMiddle.favoritesFetched[middle.indexOfMovie])
+            guard let fetchedObjects = middle.favoriteMovie.fetchedResultsController.fetchedObjects else { return }
+            middle.removeFavorite(movie: fetchedObjects[0])
             
         } else if favoriteButton.isSelected == false {
             favoriteButton.isSelected = true
@@ -60,6 +87,8 @@ class MovieDetailViewController: UIViewController {
         guard let returnDate = date else { return "" }
         return dateFormatter.string(from: returnDate)
     }
+    
+    
 }
 
 extension MovieDetailViewController: UITableViewDelegate {
@@ -83,15 +112,15 @@ extension MovieDetailViewController: UITableViewDataSource {
         case 0:
             cell.textLabel?.text = middle.movieToLoad.title
             cell.accessoryView? = favoriteButton
+            cell.textLabel?.numberOfLines = 0
             cell.contentView.addSubview(favoriteButton)
             favoriteButton.translatesAutoresizingMaskIntoConstraints = false
             favoriteButton.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
             favoriteButton.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -10).isActive = true
-            
         case 1:
             cell.textLabel?.text = convertDateFormat(input: middle.movieToLoad.yearOfRelease)
         case 2:
-            cell.textLabel?.text = String(describing: middle.movieToLoad.genreID)
+            cell.textLabel?.text = middle.genreString
         case 3:
             cell.textLabel?.text = middle.movieToLoad.description
             cell.textLabel?.numberOfLines = 0
@@ -104,13 +133,23 @@ extension MovieDetailViewController: UITableViewDataSource {
 
 extension MovieDetailViewController: MovieDetailMiddleDelegate {
     
+    func errorLoadingGenres() {
+        middle.genreString.append("Não conseguiu carregar o gênero do filme")
+    }
+    
     func didSaveMovie() {
         middle.fetchMovies()
-        print("fetchou saving")
     }
     
     func didRemoveMovie() {
         middle.fetchMovies()
-        print("fetchou removing")
+    }
+    
+    func fetchGenres() {
+        for i in middle.genres {
+            if middle.movieToLoad.genreID.contains(i.id) {
+                middle.stringIDs.append(i.name)
+            }
+        }
     }
 }

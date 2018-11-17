@@ -36,35 +36,35 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hph-kw-DND">
-                                                    <rect key="frame" x="0.0" y="0.0" width="154" height="163"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="154" height="154.5"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNk-w4-Upa">
-                                                    <rect key="frame" x="31" y="163" width="94" height="30"/>
+                                                    <rect key="frame" x="30" y="154.5" width="94" height="38.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muX-4P-YPf">
-                                                    <rect key="frame" x="126" y="167" width="23" height="22"/>
-                                                    <state key="normal" image="favorite_gray_icon"/>
-                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JnF-s4-Ciq">
+                                                    <rect key="frame" x="124" y="154.5" width="30" height="38.5"/>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="muX-4P-YPf" secondAttribute="trailing" constant="5" id="3Kx-eo-u7p"/>
                                             <constraint firstAttribute="bottom" secondItem="XNk-w4-Upa" secondAttribute="bottom" id="4et-Ku-LIm"/>
-                                            <constraint firstItem="muX-4P-YPf" firstAttribute="leading" secondItem="XNk-w4-Upa" secondAttribute="trailing" constant="1" id="9P3-di-EkV"/>
-                                            <constraint firstAttribute="trailing" secondItem="XNk-w4-Upa" secondAttribute="trailing" constant="29" id="EmV-Ke-xaM"/>
+                                            <constraint firstItem="XNk-w4-Upa" firstAttribute="height" secondItem="f73-2d-shf" secondAttribute="height" multiplier="0.2" id="4jS-ca-ntP"/>
+                                            <constraint firstItem="JnF-s4-Ciq" firstAttribute="leading" secondItem="XNk-w4-Upa" secondAttribute="trailing" id="6EF-Nu-uf3"/>
+                                            <constraint firstItem="JnF-s4-Ciq" firstAttribute="top" secondItem="hph-kw-DND" secondAttribute="bottom" id="8Ig-pt-lPF"/>
+                                            <constraint firstAttribute="trailing" secondItem="XNk-w4-Upa" secondAttribute="trailing" constant="30" id="EmV-Ke-xaM"/>
                                             <constraint firstItem="hph-kw-DND" firstAttribute="leading" secondItem="f73-2d-shf" secondAttribute="leading" id="Neb-ec-MRq"/>
-                                            <constraint firstItem="muX-4P-YPf" firstAttribute="top" secondItem="hph-kw-DND" secondAttribute="bottom" constant="4" id="Qxb-MS-ISp"/>
                                             <constraint firstAttribute="trailing" secondItem="hph-kw-DND" secondAttribute="trailing" id="RKo-ed-fBi"/>
-                                            <constraint firstItem="XNk-w4-Upa" firstAttribute="leading" secondItem="f73-2d-shf" secondAttribute="leading" constant="31" id="Yjr-WA-G9I"/>
-                                            <constraint firstAttribute="bottom" secondItem="muX-4P-YPf" secondAttribute="bottom" constant="4" id="gxE-gK-9Sr"/>
+                                            <constraint firstItem="XNk-w4-Upa" firstAttribute="leading" secondItem="f73-2d-shf" secondAttribute="leading" constant="30" id="Yjr-WA-G9I"/>
+                                            <constraint firstAttribute="trailing" secondItem="JnF-s4-Ciq" secondAttribute="trailing" id="bD1-Oa-Gqc"/>
                                             <constraint firstItem="hph-kw-DND" firstAttribute="top" secondItem="f73-2d-shf" secondAttribute="top" id="pkd-Np-tBQ"/>
                                             <constraint firstItem="XNk-w4-Upa" firstAttribute="top" secondItem="hph-kw-DND" secondAttribute="bottom" id="rPy-aa-tWl"/>
+                                            <constraint firstAttribute="bottom" secondItem="JnF-s4-Ciq" secondAttribute="bottom" id="ueG-es-S23"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="favoriteButton" destination="muX-4P-YPf" id="sBn-qH-5nq"/>
+                                            <outlet property="favoriteButton" destination="JnF-s4-Ciq" id="izI-E6-DfK"/>
                                             <outlet property="nameOfMovieLabel" destination="XNk-w4-Upa" id="uXW-Hy-DrQ"/>
                                             <outlet property="posterImage" destination="hph-kw-DND" id="Lvq-GB-VYd"/>
                                         </connections>

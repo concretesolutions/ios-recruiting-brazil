@@ -39,7 +39,6 @@ class RequestData {
         
         let realPath = "https://api.themoviedb.org/3/search/movie?api_key=ba8157788e70a54b6eb17392403e33c6&language=en-US&query=\(searchString)&page=\(page)&include_adult=false"
         
-        
         guard let url = URL(string: realPath) else {
             return onError(.url)
         }
@@ -50,7 +49,7 @@ class RequestData {
         dataTask.resume()
     }
     
-    class func gerGenres<T: Codable>(id: Int, completion: @escaping (T) -> Void, onError: @escaping (LoadError) -> Void) {
+    class func gerGenres<T: Codable>(completion: @escaping (T) -> Void, onError: @escaping (LoadError) -> Void) {
         let path = "https://api.themoviedb.org/3/genre/movie/list?api_key=ba8157788e70a54b6eb17392403e33c6&language=en-US"
         
         guard let url = URL(string: path) else {

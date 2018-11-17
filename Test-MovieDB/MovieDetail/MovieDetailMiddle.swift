@@ -12,6 +12,8 @@ import UIKit
 protocol MovieDetailMiddleDelegate: class {
     func didSaveMovie()
     func didRemoveMovie()
+    func errorLoadingGenres()
+    func fetchGenres()
 }
 
 class MovieDetailMiddle {
@@ -22,6 +24,9 @@ class MovieDetailMiddle {
     var favoriteToBeSavedOrDeleted: Favorite!
     var favoriteMoviesMiddle: FavoriteMoviesMiddle!
     var indexOfMovie: Int!
+    var stringIDs: [String] = []
+    var genres: [Genres] = []
+    var genreString = ""
     
     init(delegate: MovieDetailMiddleDelegate) {
         self.delegate = delegate
@@ -36,11 +41,31 @@ class MovieDetailMiddle {
         favoriteMovie.savingFavorite(movie: favoriteToBeSavedOrDeleted)
         NotificationCenter.default.post(name: .didReceiveData, object: nil)
         delegate?.didSaveMovie()
-        print("salvou")
     }
     
     func removeFavorite(movie: FavoriteMovies) {
         favoriteMovie.removeFavorite(movie: movie)
         delegate?.didRemoveMovie()
+    }
+    
+    func fetchGenreID(IDs: [Int]) {
+        genreString = ""
+        RequestData.gerGenres(completion: { (genreWorker: GenreWorker) in
+            DispatchQueue.main.async {
+                self.genres.append(contentsOf: genreWorker.genres)
+                self.delegate?.fetchGenres()
+                for i in self.genres {
+                    if self.movieToLoad.genreID.contains(i.id) {
+                        if self.genreString.isEmpty == true {
+                            self.genreString.append(i.name)
+                        } else if self.genreString.isEmpty == false {
+                            self.genreString.append(", \(i.name)")
+                        }
+                    }
+                }
+            }
+        }) { (error) in
+            self.delegate?.errorLoadingGenres()
+        }
     }
 }
