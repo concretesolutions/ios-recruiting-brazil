@@ -6,18 +6,22 @@
 //  Copyright © 2018 Renan Germano. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class APIDataManager {
     
     // MARK: - Types definition
-    struct RequestURL {
+    private struct RequestURL { ///w300/wdcc8n9BB5gO5Y7zIhHLSzxSTc6.jpg
         private static let apiKey: String = "a843669bd8c7b0e6643bbd5be9dcacb3"
         private static let host: String = "https://api.themoviedb.org/3"
         
         static var readPopular: String { return host + "/movie/popular?api_key=" + apiKey }
         static var readGenres: String { return host + "/genre/movie/list?api_key=" + apiKey }
         
+        private static let imageHost: String = "https://image.tmdb.org/t/p"
+        private static let posterSize: String = "/w300"
+        
+        static func readPosterImage(withCode posterCode: String) -> String { return imageHost + posterSize + posterCode }
     }
     
     // MARK: - Functions
@@ -64,6 +68,24 @@ class APIDataManager {
                         print("Impossible to decode to [Movie] from data.")
                     }
                     
+                }
+            }
+            task.resume()
+        } else {
+            
+        }
+    }
+    
+    static func readPosterImage(withCode posterCode: String, callback: @escaping ((UIImage?)->())) {
+        if let url = URL(string: RequestURL.readPosterImage(withCode: posterCode)) {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                if let data = data {
+                    let image = UIImage(data: data)
+                    callback(image)
                 }
             }
             task.resume()
