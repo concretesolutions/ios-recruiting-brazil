@@ -35,6 +35,8 @@ class PopularTableViewCell: UITableViewCell {
             favoriteIndicatorImage.image = UIImage(named: "@icons-favoriteUnselected")
         }
         popularRankingLabel.text = String(popularRanking)
+        print(data.backdropPath)
+        print(data.posterPath)
     }
 
 }
