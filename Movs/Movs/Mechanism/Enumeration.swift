@@ -19,6 +19,7 @@ enum APIRoute: String {
     case Base = "https://api.themoviedb.org/3/"
     case PopularMovie = "movie/popular"
     case Genre = "genre/movie/list"
+    case ImageW500 = "https://image.tmdb.org/t/p/w500/"
 }
 
 enum ErrorInformation: String, Error {

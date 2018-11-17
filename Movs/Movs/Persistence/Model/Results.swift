@@ -15,11 +15,11 @@ struct Results {
     let voteAverage: Double?
     let title: String?
     let popularity: Double?
-    let posterPath: String?
+    let posterPath: URL?
     let originalLanguage: String?
     let originalTitle: String?
     let genres: [Int]?
-    let backdropPath: String?
+    let backdropPath: URL?
     let adult: Bool?
     let overview: String?
     let releaseDate: String?
@@ -51,11 +51,19 @@ extension Results: Codable {
 		voteAverage = try values.decodeIfPresent(Double.self, forKey: .voteAverage)
 		title = try values.decodeIfPresent(String.self, forKey: .title)
 		popularity = try values.decodeIfPresent(Double.self, forKey: .popularity)
-		posterPath = try values.decodeIfPresent(String.self, forKey: .posterPath)
+        
+        let posterPathString = try values.decodeIfPresent(String.self, forKey: .posterPath)
+        posterPath = "\(APIRoute.ImageW500.rawValue)\(String(describing: posterPathString))".toURL()
+        
+        
 		originalLanguage = try values.decodeIfPresent(String.self, forKey: .originalLanguage)
 		originalTitle = try values.decodeIfPresent(String.self, forKey: .originalTitle)
 		genres = try values.decodeIfPresent([Int].self, forKey: .genres)
-		backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
+        
+        
+		let backdropPathString = try values.decodeIfPresent(String.self, forKey: .backdropPath)
+        backdropPath = "\(APIRoute.ImageW500.rawValue)\(String(describing: backdropPathString))".toURL()
+        
 		adult = try values.decodeIfPresent(Bool.self, forKey: .adult)
 		overview = try values.decodeIfPresent(String.self, forKey: .overview)
 		releaseDate = try values.decodeIfPresent(String.self, forKey: .releaseDate)
