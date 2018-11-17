@@ -12,7 +12,6 @@ class FavoritesTableViewController: UIViewController {
     
     @IBOutlet weak var favoritesTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var filterButtonRightBarButton: UIBarButtonItem!
     var middle: FavoriteMoviesMiddle!
     var movieDetailWorker: MovieDetailWorker!
     var detailMiddle: MovieDetailMiddle!
@@ -44,7 +43,6 @@ class FavoritesTableViewController: UIViewController {
         middle.fetchFavorites()
         if middle.favoritesFetched.count == 0 {
             alertNoItemsToBeFetched()
-            filterButtonRightBarButton.isEnabled = false
         }
         
         self.tabBarController?.tabBar.isHidden = false
@@ -130,6 +128,7 @@ extension FavoritesTableViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         if searchBar.text?.isEmpty == false {
             middle.filteringData(searchString: searchBar.text ?? "A")
         } else {
@@ -138,6 +137,7 @@ extension FavoritesTableViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         middle.fetchFavorites()
     }
     
@@ -149,7 +149,6 @@ extension FavoritesTableViewController: FavoriteMoviesMiddleDelegate {
     func favoritesFetched() {
         if middle.favoritesFetched.count == 0 {
             alertNoItemsToBeFetched()
-            filterButtonRightBarButton.isEnabled = false
         }
         favoritesTableView.reloadData()
     }
@@ -162,7 +161,6 @@ extension FavoritesTableViewController: FavoriteMoviesMiddleDelegate {
         favoritesTableView.reloadData()
         if middle.favoritesFetched.count == 0 {
             alertNoItemsToBeFetched()
-            filterButtonRightBarButton.isEnabled = false
         }
     }
 }

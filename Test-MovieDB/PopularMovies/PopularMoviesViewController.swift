@@ -168,6 +168,7 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
             cell.configure(with: middle.movieData(at: indexPath.row), searchData: nil)
         }
         cell.backgroundColor = .black
+        cell.layer.borderWidth = 1.0
         return cell
     }
     
