@@ -26,8 +26,8 @@ class PopularTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func setData(data: Results, popularRanking: Int, isFavorite: Bool) {
+
+    func setData(data: Result, popularRanking: Int, isFavorite: Bool) {
         movieTitleLabel.text = data.title
         voteAverageLabel.text = "\(data.voteAverage ?? 0.0) de 10"
         if isFavorite {
@@ -37,10 +37,14 @@ class PopularTableViewCell: UITableViewCell {
         }
         popularRankingLabel.text = String(popularRanking)
         if let posterPath = data.posterPath {
-            let endpoint = URL(string: APIRoute.ImageW500.rawValue + posterPath)
-            let placeholder = UIImage(named: "@popularMovies-placeholder")
-            posterImage.kf.setImage(with: endpoint, placeholder: placeholder)
+            setPosterImage(posterPath)
         }
+    }
+    
+    private func setPosterImage(_ posterPath: String) {
+        let endpoint = URL(string: APIRoute.ImageW500.rawValue + posterPath)
+        let placeholder = UIImage(named: "@popularMovies-placeholder")
+        posterImage.kf.setImage(with: endpoint, placeholder: placeholder)
     }
 
 }

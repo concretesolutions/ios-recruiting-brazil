@@ -14,7 +14,7 @@ struct PopularMovie {
     let page: Int?
     let totalResults: Int?
     let totalPages: Int?
-    let results: [Results]?
+    let results: [Result]?
 }
 
 extension PopularMovie: Codable {
@@ -30,7 +30,7 @@ extension PopularMovie: Codable {
 		page = try values.decodeIfPresent(Int.self, forKey: .page)
 		totalResults = try values.decodeIfPresent(Int.self, forKey: .totalResults)
 		totalPages = try values.decodeIfPresent(Int.self, forKey: .totalPages)
-		results = try values.decodeIfPresent([Results].self, forKey: .results)
+		results = try values.decodeIfPresent([Result].self, forKey: .results)
 	}
 
 }

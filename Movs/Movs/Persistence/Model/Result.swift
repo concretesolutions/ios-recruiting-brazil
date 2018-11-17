@@ -8,7 +8,7 @@
 
 import Foundation
 // TODO: Fazer o genre (antes era genreIds) receber um array de String, e no init do decoder fazer uma request em /genre/movie/list para popular o array com os gêneros em string e não em ids
-struct Results {
+struct Result {
     let voteCount: Int?
     let id: Int?
     let video: Bool?
@@ -22,10 +22,10 @@ struct Results {
     let backdropPath: String?
     let adult: Bool?
     let overview: String?
-    let releaseDate: String?
+    let releaseDate: Date?
 }
 
-extension Results: Codable {
+extension Result: Codable {
 	enum CodingKeys: String, CodingKey {
 		case voteCount = "vote_count"
 		case id = "id"
@@ -58,7 +58,10 @@ extension Results: Codable {
         backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
 		adult = try values.decodeIfPresent(Bool.self, forKey: .adult)
 		overview = try values.decodeIfPresent(String.self, forKey: .overview)
-		releaseDate = try values.decodeIfPresent(String.self, forKey: .releaseDate)
+        
+		let releaseDateString = try values.decodeIfPresent(String.self, forKey: .releaseDate)
+        releaseDate = releaseDateString?.dateISO8601()
+        
 	}
 
 }

@@ -22,6 +22,8 @@ class PopularViewController: UITableViewController {
         }
     }
     let popularMovieCellIdentifier = "popularCell"
+    let popularToDescriptionSegue = "PopularToDescription"
+    let heightForRow = CGFloat(200.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,7 @@ class PopularViewController: UITableViewController {
     }
     
     func initialSetup() {
+        tableView.tableFooterView = UIView()
         fetchPopularMovieData(page: 1) { (data) -> Void in
             if data != nil {
                 self.popularMovie = data
@@ -62,8 +65,21 @@ class PopularViewController: UITableViewController {
         return cell!
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let data = popularMovie?.results?[indexPath.row] {
+            performSegue(withIdentifier: popularToDescriptionSegue, sender: data)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DescriptionViewController {
+            vc.result = sender as? Result
+        }
+        
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(200.0)
+        return heightForRow
     }
 
 }
@@ -72,10 +88,9 @@ class PopularViewController: UITableViewController {
 extension PopularViewController {
     private func setBehavior(newBehavior: Behavior) {
         behavior = newBehavior
-        tableView.backgroundView?.isHidden = false
         switch behavior {
         case .PopularMovies:
-            tableView.backgroundView?.isHidden = true
+            tableView.backgroundView = UIView()
         case .EmptySearch:
             tableView.backgroundView = emptySearchView
         case .LoadingView:
