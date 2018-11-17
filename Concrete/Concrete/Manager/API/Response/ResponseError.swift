@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ResponseError: Decodable {
+struct ResponseError: Decodable {
     
     let statusCode:Int
     let statusMessage:String?

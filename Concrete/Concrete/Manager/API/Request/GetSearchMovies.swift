@@ -15,16 +15,6 @@ class GetSearchMovies: APIRequest {
         return "search/movie"
     }
     
-    enum CodingKeys: String, CodingKey {
-        case query
-        case language
-        case page
-        case includeAdult = "include_adult"
-        case region
-        case year
-        case primaryReleaseYear = "primary_release_year"
-    }
-    
     // Parameters
     let query: String?
     let language: String?
