@@ -28,13 +28,26 @@ class FavoritesPresenter: NSObject {
     
     // FROM VIEW
     
+    func hasFilter() -> Bool {
+        return self.interactor.hasFilter()
+    }
+    
+    func reloadMovies() {
+        self.interactor.reloadMovies()
+    }
+    
     func fetchFavoriteMovies() {
         self.interactor.fetchFavoriteMovies()
     }
     
     func selectedMovie(at index: Int) {
-        let id = self.interactor.getMovieID(index: index)
-        self.router.goToMovieDetail(movieID: id)
+        // Remove filter
+        if index == 0 && self.interactor.hasFilter() {
+            self.interactor.filtersEnded()
+        }else{
+            let id = self.interactor.getMovieID(index: index)
+            self.router.goToMovieDetail(movieID: id)
+        }
     }
     
     func searchMovie(containing: String) {
@@ -43,6 +56,23 @@ class FavoritesPresenter: NSObject {
     
     func searchMovieEnded() {
         self.interactor.filterMoviesEnded()
+    }
+    
+    func addFilterGenre(with genre: String) {
+        self.interactor.addFilterGenre(with: genre)
+    }
+    func removeFilterGenre(with genre: String) {
+        self.interactor.removeFilterGenre(with: genre)
+    }
+    
+    func filterGenreChecked(with genreString: String) -> Bool {
+        var checked = false
+        for genre in self.interactor.filter.genre! {
+            if genre.contains(genreString) {
+                checked = true
+            }
+        }
+        return checked
     }
     
     // FROM INTERACTOR
@@ -57,14 +87,40 @@ class FavoritesPresenter: NSObject {
 extension FavoritesPresenter: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.interactor.hasFilter() {
+            return self.interactor.getTotalMovies() + 1
+        }
         return self.interactor.getTotalMovies()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if self.interactor.hasFilter() {
+            // Com filtro
+            if indexPath.row == 0 {
+                // Remove filter
+                return self.cellRemoveFilter(tableView: tableView, indexPath: indexPath)
+            }else{
+                // Outras celulas filmes
+                let index = IndexPath.init(row: indexPath.row, section: indexPath.section)
+                return self.cellMovie(tableView: tableView, indexPath: index, index: -1)
+            }
+        }else{
+            // Celulas de filmes
+            return self.cellMovie(tableView: tableView, indexPath: indexPath, index: 0)
+        }
+    }
+    
+    func cellRemoveFilter(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        // Prepare cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "removeFilter", for: indexPath) as! FavoriteMovieCell
+        return cell
+    }
+    
+    func cellMovie(tableView: UITableView, indexPath: IndexPath, index: Int) -> UITableViewCell {
         // Prepare cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as! FavoriteMovieCell
         // Get movie
-        let movie = self.interactor.getMovie(at: indexPath.row)
+        let movie = self.interactor.getMovie(at: indexPath.row + index)
         cell.awakeFromNib(title: movie.title, year: movie.release_date, overview: movie.overview)
         // Load image
         let imageURL = ServerURL.imageW500 + movie.poster_path

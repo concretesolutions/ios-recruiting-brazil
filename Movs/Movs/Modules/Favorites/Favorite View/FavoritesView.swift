@@ -25,8 +25,10 @@ class FavoritesView: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         // VIPER
-        self.presenter.fetchFavoriteMovies()
+        self.presenter.reloadMovies()
+        self.tableView.reloadData()
     }
     
     // FROM PRESENTER
@@ -43,6 +45,10 @@ class FavoritesView: UITableViewController {
     
     func searchEnded() {
         self.presenter.searchMovieEnded()
+    }
+    
+    func filter() {
+        self.performSegue(withIdentifier: "filter", sender: "filter")
     }
     
     // INTERACTIONs METHODs
@@ -70,6 +76,26 @@ class FavoritesView: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Unfavorite"
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if self.presenter.hasFilter() && indexPath.row == 0 {
+            return 50
+        }else{
+            return 131
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let switchFilter = sender as? String{
+            if switchFilter == "filter" {
+                if let filterSwitchView = segue.destination as? FilterView {
+                    filterSwitchView.presenter = self.presenter
+                }
+            }
+        }
     }
     
 }

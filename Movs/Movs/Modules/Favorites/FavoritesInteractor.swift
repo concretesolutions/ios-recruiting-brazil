@@ -14,15 +14,22 @@ class FavoritesInteractor {
     var presenter: FavoritesPresenter?
     
     // MARK: - Parameters
+    var filter: MovieFilter = MovieFilter(year: [], genre:[]) {
+        didSet {
+            if filter.year == [] && filter.genre == [] {
+                self.filterMoviesEnded()
+            }else{
+                self.filterMovies()
+            }
+        }
+    }
+    
     private var moviesVisible: [MovieLocal] = [] {
         didSet {
             self.presenter?.moviesFilterChanged()
         }
     }
     private var movies: [MovieLocal] = []
-    
-    init() {
-    }
     
     // FROM PRESENTER
     
@@ -63,5 +70,63 @@ class FavoritesInteractor {
         LocalManager.remove(movieID: movieID)
         self.fetchFavoriteMovies()
     }
-   
+    
+    func addFilterGenre(with genre: String) {
+        self.filter.genre?.append(genre)
+    }
+    func addFilterYear(with year: String) {
+        self.filter.year?.append(year)
+    }
+    
+    func removeFilterGenre(with genre: String) {
+        self.filter.genre?.removeAll(where: { (string) -> Bool in
+            return string == genre
+        })
+    }
+    func removeFilterYear(with year: String) {
+        self.filter.year?.removeAll(where: { (string) -> Bool in
+            return string == year
+        })
+    }
+    
+    func hasFilter() -> Bool {
+        if filter.year == [] && filter.genre == [] {
+            return false
+        }
+        return true
+    }
+    
+    func filtersEnded() {
+        self.filter = MovieFilter(year: [], genre:[])
+    }
+    
+    func reloadMovies() {
+        self.fetchFavoriteMovies()
+        self.filterMovies()
+    }
+    
+    func filterMovies() {
+        if filter.year != [] || filter.genre != [] {
+            self.moviesVisible = []
+            for movie in self.movies {
+                var status = false
+                // Filter genre
+                for genre in self.filter.genre! {
+                    if (movie.genre?.contains(genre))! {
+                        status = true
+                    }
+                }
+                // Filter genre
+                //            for year in self.filter.year! {
+                //                if movie.year?.contains(year) {
+                //                    status = true
+                //                }
+                //            }
+                if status {
+                    self.moviesVisible.append(movie)
+                }
+            }
+        }
+    }
+    
 }

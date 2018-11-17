@@ -41,14 +41,14 @@ struct Movie: Codable {
     }
 }
 
-struct MovieDetail: Codable {
+struct MovieDetail: Codable { // FIXME: - Apagar?
     let adult: Bool?
-    let genres: [Genre]?
+    let genres: [Genre]? // FIXME: - Lista ID
     let title: String
     let release_date: String
     let poster_path: String
     let overview: String
-    let homepage:String?
+    let homepage:String?  // FIXME: - Nao precisa
     let id: Int
     private enum CodingKeys: String, CodingKey {
         case id
@@ -62,12 +62,5 @@ struct MovieDetail: Codable {
     }
 }
 
-struct Genre: Codable {
-    let id: Int?
-    let name: String?
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case name
-    }
-}
+
 

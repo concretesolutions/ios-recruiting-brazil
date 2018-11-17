@@ -25,19 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         print("-> Movies LOCAL: \(LocalManager.fetchMovies().count)")
-//        let movies = LocalManager.fetchMovies()
-//        for movie in movies {
-//            print(movie.value(forKey: "title") as! String)
-//        }
-        let movies = LocalManager.getMovies()
-        for movie in movies {
-            print(" - \(movie.title!) - \(movie.image!)")
-        }
-
-//        let router = EnterRouter.init()
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = router.presenter.view
-//        window?.makeKeyAndVisible()
         
         return true
     }

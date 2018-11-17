@@ -23,6 +23,10 @@ class CustomNavigation: UINavigationController {
         viewController.definesPresentationContext = true
         self.navigationBar.prefersLargeTitles = false
         
+        if title == "Favorites" {
+            addFilterButtonOnRight(viewController: viewController)
+        }
+        
         // Search Bar
         setupSearchBar(viewController: viewController)
     }
@@ -37,6 +41,19 @@ class CustomNavigation: UINavigationController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    // MARK: - Navigation Buttons
+    
+    func addFilterButtonOnRight(viewController: UIViewController){
+        let barButton = UIBarButtonItem(image: UIImage(named: "FilterIcon"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.filter))
+        viewController.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    @objc func filter() {
+        if let view = self.viewControllers.first as? FavoritesView {
+            view.filter()
+        }
     }
     
     // MARK: - Search Bar
