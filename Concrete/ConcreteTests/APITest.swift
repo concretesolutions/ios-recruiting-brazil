@@ -94,7 +94,30 @@ class APITest: XCTestCase {
         waiter.wait(for: [answerAPIExpectation], timeout: 20.0, enforceOrder: true)
     }
 
-    
+    func testConfiguration() {
+        let waiter = XCTWaiter(delegate: self)
+        let answerAPIExpectation = XCTestExpectation(description: "AnswerAPI")
+        
+        let request = GetConfiguration()
+        
+        APIManager.shared.fetch(request) { (response) in
+            switch response {
+            case .success(let dataContainer):
+                //TODO: Verify list of total results on the API.
+                XCTAssert(dataContainer.images!.count > 0)
+                answerAPIExpectation.fulfill()
+                
+            case .failure(let error):
+                if let decodingError = error as? DecodingError {
+                    XCTFail(decodingError.errorDescription ?? "No message")
+                }else{
+                    XCTFail(error.localizedDescription)
+                }
+            }
+        }
+        
+        waiter.wait(for: [answerAPIExpectation], timeout: 20.0, enforceOrder: true)
+    }
     
     
     // MARK: - XCTWaiterDelegate
