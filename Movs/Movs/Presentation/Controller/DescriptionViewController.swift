@@ -29,24 +29,24 @@ class DescriptionViewController: UIViewController {
                 setBackdropImage(backdropPath)
             }
             if let releaseDate = data.releaseDate {
-                setYearRelease(date: releaseDate)
+                setYearRelease(releaseDate)
             }
-            getFormatedStringGenres(ids: data.genres)
+            if let ids = data.genres {
+                setFormatedStringGenres(ids)
+            }
         }
     }
     
-    // TODO: Tirar essa busca dos gêneros daqui e fazer uma única busca ao listar todos os filmes... pensar a respeito!
-    private func getFormatedStringGenres(ids: [Int]?) {
-        GenreServices.getGenreList { (genreList, _) in
-            if let arrayData = genreList?.list,
-                let idsList = ids {
-                let genres = arrayData.filter({ (genre) -> Bool in
-                    return idsList.contains(genre.id!)
-                }).map({ (a) -> String in
-                    return a.name!
-                })
-                let genreMessage = "Gêneros: \(genres.joined(separator: ", "))"
-                self.genreListLabel.text = genreMessage
+    private func setFormatedStringGenres(_ movieGenreIds: [Int]) {
+        GenreServices.getGenreList { (newData, _) in
+            if let genreList = newData?.list {
+                let genres = genreList.filter({ (genre) -> Bool in
+                    guard let id = genre.id else {return false}
+                    return movieGenreIds.contains(id)
+                }).map({ (genre) -> String in
+                    return genre.name ?? ""
+                }).joined(separator: ", ")
+                self.genreListLabel.text = "Gêneros: " + genres
             }
         }
     }
@@ -57,10 +57,9 @@ class DescriptionViewController: UIViewController {
         backdropImage.kf.setImage(with: endpoint, placeholder: placeholder)
     }
     
-    private func setYearRelease(date: Date) {
+    private func setYearRelease(_ date: Date) {
         let myCalendar = Calendar(identifier: .gregorian)
         let year = myCalendar.component(.year, from: date)
         releaseDateLabel.text = "Ano de lançamento: \(year)"
     }
-
 }
