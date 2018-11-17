@@ -15,16 +15,16 @@
         <scene sceneID="lCo-nI-dYd">
             <objects>
                 <tableViewController id="a5U-lY-JrT" customClass="PopularViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="UGS-UX-eIu">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UGS-UX-eIu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="200" id="VhR-SI-83V">
-                                <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="200"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="popularCell" rowHeight="200" id="VhR-SI-83V" customClass="PopularTableViewCell" customModule="Movs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VhR-SI-83V" id="Rjg-NV-Ht9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAO-F0-Fsy">
@@ -95,6 +95,13 @@
                                         <constraint firstItem="PAO-F0-Fsy" firstAttribute="height" secondItem="Rjg-NV-Ht9" secondAttribute="height" id="uvL-Zx-oug"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="favoriteIndicatorImage" destination="0CL-6n-unB" id="n6e-DR-YBt"/>
+                                    <outlet property="movieTitleLabel" destination="HY6-KJ-oLo" id="R3S-lO-ag6"/>
+                                    <outlet property="popularRankingLabel" destination="ovT-gj-OIy" id="LCu-tK-dzt"/>
+                                    <outlet property="posterImage" destination="pe1-yn-W2W" id="R1Y-3Q-XHF"/>
+                                    <outlet property="voteAverageLabel" destination="W6f-AI-IJ0" id="YiA-fc-PfU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

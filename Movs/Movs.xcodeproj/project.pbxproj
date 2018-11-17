@@ -24,6 +24,7 @@
 		A4894777219F4C8200EBA07B /* PopularMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4894775219F4C8200EBA07B /* PopularMovie.swift */; };
 		A4894779219F5FDD00EBA07B /* PopularMovieServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4894778219F5FDD00EBA07B /* PopularMovieServices.swift */; };
 		A489477B219F60BB00EBA07B /* PopularMovieDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489477A219F60BB00EBA07B /* PopularMovieDAO.swift */; };
+		A4894780219FBEAC00EBA07B /* PopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489477F219FBEAC00EBA07B /* PopularTableViewCell.swift */; };
 		A4E249B2219F1CF50041C538 /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E249B1219F1CF50041C538 /* Favorite.storyboard */; };
 		A4E249B4219F1F2D0041C538 /* Description.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E249B3219F1F2D0041C538 /* Description.storyboard */; };
 		C0BCFC041AFD506B268E0EEA /* Pods_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E4B106923D2BA7C0524837 /* Pods_MovsUITests.framework */; };
@@ -76,6 +77,7 @@
 		A4894775219F4C8200EBA07B /* PopularMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularMovie.swift; sourceTree = "<group>"; };
 		A4894778219F5FDD00EBA07B /* PopularMovieServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieServices.swift; sourceTree = "<group>"; };
 		A489477A219F60BB00EBA07B /* PopularMovieDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieDAO.swift; sourceTree = "<group>"; };
+		A489477F219FBEAC00EBA07B /* PopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTableViewCell.swift; sourceTree = "<group>"; };
 		A4E249B1219F1CF50041C538 /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
 		A4E249B3219F1F2D0041C538 /* Description.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Description.storyboard; sourceTree = "<group>"; };
 		A890DF3A23E15AE8DD8D597C /* Pods-Movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.debug.xcconfig"; sourceTree = "<group>"; };
@@ -247,8 +249,8 @@
 		A4256124219B11C5009F5498 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A489477E219FBE8E00EBA07B /* Popular */,
 				A40E88332199AB2D00EE4D5B /* ViewController.swift */,
-				A46C908D219BD92100472794 /* PopularViewController.swift */,
 				A46C9092219C7ECB00472794 /* Description.swift */,
 			);
 			path = Controller;
@@ -269,6 +271,15 @@
 				A4894775219F4C8200EBA07B /* PopularMovie.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A489477E219FBE8E00EBA07B /* Popular */ = {
+			isa = PBXGroup;
+			children = (
+				A46C908D219BD92100472794 /* PopularViewController.swift */,
+				A489477F219FBEAC00EBA07B /* PopularTableViewCell.swift */,
+			);
+			path = Popular;
 			sourceTree = "<group>";
 		};
 		A4B3571D219BCBD00065F022 /* fonts */ = {
@@ -519,6 +530,7 @@
 			files = (
 				A40E88342199AB2D00EE4D5B /* ViewController.swift in Sources */,
 				A4894779219F5FDD00EBA07B /* PopularMovieServices.swift in Sources */,
+				A4894780219FBEAC00EBA07B /* PopularTableViewCell.swift in Sources */,
 				A40E883A2199AB2D00EE4D5B /* Movs.xcdatamodeld in Sources */,
 				A46C9093219C7ECB00472794 /* Description.swift in Sources */,
 				A46C908E219BD92100472794 /* PopularViewController.swift in Sources */,
