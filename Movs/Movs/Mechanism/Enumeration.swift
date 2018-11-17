@@ -1,5 +1,5 @@
 //
-//  Enumaration.swift
+//  Enumeration.swift
 //  Movs
 //
 //  Created by Adann Simões on 14/11/18.

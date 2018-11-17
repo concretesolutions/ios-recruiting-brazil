@@ -14,42 +14,33 @@ class PopularViewController: UITableViewController {
     @IBOutlet var genericErrorView: UIView!
     @IBOutlet var loadingView: UIView!
     
-    private func actualBehavior() -> Behavior {
-        return .PopularMovies
+    // MARK: Class Attributes
+    var popularMovie: PopularMovie?
+    var behavior: Behavior = .LoadingView {
+        didSet {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        PopularMovieServices.getPopularMovie(page: 1) { (popularMovie, error) in
-            if popularMovie != nil {
-                print("Total de páginas na request: \(popularMovie?.totalPages  ?? 0)")
-            } else if error != nil {
-                print(error.debugDescription)
+        initialSetup()
+    }
+    
+    func initialSetup() {
+        fetchMovieData(page: 1) { (data) -> Void in
+            if data != nil {
+                self.popularMovie = data
+                self.setBehavior(newBehavior: .PopularMovies)
             }
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        switch  actualBehavior() {
-        case .PopularMovies:
+        if popularMovie != nil {
             return 1
-        case .EmptySearch:
-            tableView.backgroundView = emptySearchView
-        case .GenericError:
-            tableView.backgroundView = genericErrorView
-        case .LoadingView:
-            tableView.backgroundView = loadingView
         }
-        
         return 0
     }
 
@@ -113,4 +104,40 @@ class PopularViewController: UITableViewController {
     }
     */
 
+}
+
+// MARK: Frufru setup
+extension PopularViewController {
+    private func setBehavior(newBehavior: Behavior) {
+        behavior = newBehavior
+        switch behavior {
+        case .PopularMovies:
+            self.tableView.backgroundView?.isHidden = true
+        case .EmptySearch:
+            self.tableView.backgroundView?.isHidden = false
+            self.tableView.backgroundView = emptySearchView
+        case .LoadingView:
+            self.tableView.backgroundView?.isHidden = false
+            self.tableView.backgroundView = loadingView
+        case .GenericError:
+            self.tableView.backgroundView?.isHidden = false
+            self.tableView.backgroundView = genericErrorView
+        }
+    }
+}
+
+// MARK: Service setup
+extension PopularViewController {
+    func fetchMovieData(page: Int, completionHandler: @escaping (PopularMovie?) -> Void) {
+        setBehavior(newBehavior: .LoadingView)
+        PopularMovieServices.getPopularMovie(page: page) { (data, _) in
+            if data != nil {
+                print(data?.totalPages)
+                completionHandler(data)
+            } else {
+                self.setBehavior(newBehavior: .GenericError)
+                completionHandler(nil)
+            }
+        }
+    }
 }
