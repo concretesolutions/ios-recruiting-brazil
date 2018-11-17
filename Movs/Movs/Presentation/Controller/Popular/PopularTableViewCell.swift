@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PopularTableViewCell: UITableViewCell {
     @IBOutlet weak var posterImage: UIImageView!
@@ -35,8 +36,11 @@ class PopularTableViewCell: UITableViewCell {
             favoriteIndicatorImage.image = UIImage(named: "@icons-favoriteUnselected")
         }
         popularRankingLabel.text = String(popularRanking)
-        print(data.backdropPath)
-        print(data.posterPath)
+        if let posterPath = data.posterPath {
+            let endpoint = URL(string: APIRoute.ImageW500.rawValue + posterPath)
+            let placeholder = UIImage(named: "@popularMovies-placeholder")
+            posterImage.kf.setImage(with: endpoint, placeholder: placeholder)
+        }
     }
 
 }

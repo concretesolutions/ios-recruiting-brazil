@@ -53,7 +53,8 @@ class PopularViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: popularMovieCellIdentifier, for: indexPath) as? PopularTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: popularMovieCellIdentifier,
+                                                 for: indexPath) as? PopularTableViewCell
         if let data = popularMovie?.results?[indexPath.row] {
             cell?.setData(data: data, popularRanking: (indexPath.row + 1), isFavorite: false)
         }
@@ -71,18 +72,16 @@ class PopularViewController: UITableViewController {
 extension PopularViewController {
     private func setBehavior(newBehavior: Behavior) {
         behavior = newBehavior
+        tableView.backgroundView?.isHidden = false
         switch behavior {
         case .PopularMovies:
-            self.tableView.backgroundView?.isHidden = true
+            tableView.backgroundView?.isHidden = true
         case .EmptySearch:
-            self.tableView.backgroundView?.isHidden = false
-            self.tableView.backgroundView = emptySearchView
+            tableView.backgroundView = emptySearchView
         case .LoadingView:
-            self.tableView.backgroundView?.isHidden = false
-            self.tableView.backgroundView = loadingView
+            tableView.backgroundView = loadingView
         case .GenericError:
-            self.tableView.backgroundView?.isHidden = false
-            self.tableView.backgroundView = genericErrorView
+            tableView.backgroundView = genericErrorView
         }
     }
 }
