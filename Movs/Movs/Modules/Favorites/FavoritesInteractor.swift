@@ -57,5 +57,11 @@ class FavoritesInteractor {
         let movie = MovieDetail.init(adult: false, genres: nil, title: storedMovie.title!, release_date: storedMovie.year!, poster_path: storedMovie.image!, overview: storedMovie.overview!, homepage: nil, id: Int(storedMovie.id))
         return movie
     }
+    
+    func removeFavoriteMovie(at index: Int) {
+        let movieID = Int(self.moviesVisible[index].id)
+        LocalManager.remove(movieID: movieID)
+        self.fetchFavoriteMovies()
+    }
    
 }

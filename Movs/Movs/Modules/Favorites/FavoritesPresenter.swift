@@ -71,5 +71,12 @@ extension FavoritesPresenter: UITableViewDataSource {
         cell.setup(imageURL: imageURL)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.interactor.removeFavoriteMovie(at: indexPath.row)
+        }
+    }
+    
 }
 
