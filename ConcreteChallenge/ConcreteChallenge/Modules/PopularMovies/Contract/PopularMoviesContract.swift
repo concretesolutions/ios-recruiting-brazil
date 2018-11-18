@@ -21,6 +21,7 @@ protocol PopularMoviesView {
     var presenter: PopularMoviesPresentation! { get set }
     
     func show(movies: [Movie])
+    func showErrorMessage()
     func setActivityIndicator(to activated: Bool)
 }
 
@@ -42,6 +43,7 @@ protocol PopularMoviesInteractorInput: class {
 
 protocol PopularMoviesInteractorOutput: class {
     func didFetch(movies: [Movie])
+    func didFailedToFetchMovies()
 }
 
 

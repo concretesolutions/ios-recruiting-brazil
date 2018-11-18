@@ -35,4 +35,8 @@ class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractor
         self.view?.setActivityIndicator(to: false)
     }
     
+    func didFailedToFetchMovies() {
+        self.view?.setActivityIndicator(to: false)
+        self.view?.showErrorMessage()
+    }    
 }

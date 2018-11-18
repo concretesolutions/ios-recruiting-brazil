@@ -28,10 +28,11 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
                                 }
                             }
                         }
-//
                         self.output.didFetch(movies: MovieDataManager.movies)
                     }
                 })
+            } else {
+                self.output.didFailedToFetchMovies()
             }
         }
     }
