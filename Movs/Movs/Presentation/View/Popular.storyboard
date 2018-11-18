@@ -28,10 +28,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAO-F0-Fsy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="@popularMovies-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="pe1-yn-W2W">
-                                                    <rect key="frame" x="0.0" y="5" width="150" height="190"/>
+                                                    <rect key="frame" x="0.0" y="5" width="150" height="189.66666666666666"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título do Filme, pode ser um nome bem grande." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HY6-KJ-oLo">
                                                     <rect key="frame" x="150" y="5" width="215" height="40.666666666666664"/>
@@ -53,8 +53,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovT-gj-OIy">
-                                                    <rect key="frame" x="348.66666666666669" y="177" width="16.333333333333314" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <rect key="frame" x="345" y="171.66666666666666" width="20" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -180,14 +180,23 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="U3N-Hj-6NJ">
-                            <rect key="frame" x="110" y="85.666666666666671" width="20" height="20"/>
+                            <rect key="frame" x="110" y="76" width="20" height="20"/>
                             <color key="color" name="darkBlue"/>
                         </activityIndicatorView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CARREGANDO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUB-3I-8Be">
+                            <rect key="frame" x="0.0" y="106" width="240" height="14.333333333333329"/>
+                            <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" name="white"/>
                     <constraints>
+                        <constraint firstItem="SUB-3I-8Be" firstAttribute="centerX" secondItem="5aV-7w-vDi" secondAttribute="centerX" id="0rd-K6-7cV"/>
                         <constraint firstItem="U3N-Hj-6NJ" firstAttribute="centerX" secondItem="5aV-7w-vDi" secondAttribute="centerX" id="3Na-3w-Gef"/>
-                        <constraint firstItem="U3N-Hj-6NJ" firstAttribute="centerY" secondItem="5aV-7w-vDi" secondAttribute="centerY" id="3O1-61-1uf"/>
+                        <constraint firstItem="U3N-Hj-6NJ" firstAttribute="centerY" secondItem="5aV-7w-vDi" secondAttribute="centerY" multiplier="0.9" id="3O1-61-1uf"/>
+                        <constraint firstItem="SUB-3I-8Be" firstAttribute="width" secondItem="bGx-eu-WE3" secondAttribute="width" id="U7Z-Tj-lkH"/>
+                        <constraint firstItem="SUB-3I-8Be" firstAttribute="top" secondItem="U3N-Hj-6NJ" secondAttribute="bottom" constant="10" id="yvB-3G-nDA"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="5aV-7w-vDi"/>
                 </view>

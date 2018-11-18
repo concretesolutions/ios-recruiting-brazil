@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DescriptionViewController: UIViewController {
     @IBOutlet weak var backdropImage: UIImageView!
@@ -17,7 +18,10 @@ class DescriptionViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     // MARK: Class attributes
+    var genresString = ""
     var result: Result?
+    // TODO: Na controller anterior popular isFavorite
+    var isFavorite: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,30 @@ class DescriptionViewController: UIViewController {
         }
     }
     
+    @IBAction func favoriteButtonAction(_ sender: UIButton) {
+        switch isFavorite {
+        case true:
+            print("Este filme já foi favoritado :)")
+        // TODO: Chamar um alert avisando que o filme já foi favoritado.
+        case false:
+            if let data = result {
+                saveFavorite(data: data)
+            }
+        }
+    }
+    
+    private func saveFavorite (data: Result) {
+        let newFavorite = data.favoriteConverter(with: genresString)
+        let persistMethod = FavoriteServices.createFavorite
+        persistMethod(newFavorite) { (_, error) in
+            self.isFavorite = true
+            if error != nil {
+            self.isFavorite = false
+                // TODO: Trazer o behavior de erro genérico
+            }
+        }
+    }
+        
     private func setFormatedStringGenres(_ movieGenreIds: [Int]) {
         GenreServices.getGenreList { (newData, _) in
             if let genreList = newData?.list {
@@ -46,7 +74,9 @@ class DescriptionViewController: UIViewController {
                 }).map({ (genre) -> String in
                     return genre.name ?? ""
                 }).joined(separator: ", ")
-                self.genreListLabel.text = "Gêneros: " + genres
+                let genreText = "Gen.: " + genres
+                self.genreListLabel.text = genreText
+                self.genresString = genreText
             }
         }
     }
@@ -60,6 +90,6 @@ class DescriptionViewController: UIViewController {
     private func setYearRelease(_ date: Date) {
         let myCalendar = Calendar(identifier: .gregorian)
         let year = myCalendar.component(.year, from: date)
-        releaseDateLabel.text = "Ano de lançamento: \(year)"
+        releaseDateLabel.text = "Ano: \(year)"
     }
 }

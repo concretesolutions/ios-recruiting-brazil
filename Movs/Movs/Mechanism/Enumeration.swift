@@ -22,8 +22,9 @@ enum APIRoute: String {
     case ImageW500 = "https://image.tmdb.org/t/p/w500"
 }
 
-enum ErrorInformation: String, Error {
+enum Errors: String, Error {
     case InvalidFormat = "Formato Inválido"
+    case DatabaseFailure
 }
 
 enum APIKey: String {

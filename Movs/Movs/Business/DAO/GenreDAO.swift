@@ -26,7 +26,7 @@ struct GenreDAO {
                                         completionHandler(parsedResponse, nil)
                                     }
                                 } catch {
-                                    completionHandler(nil, ErrorInformation.InvalidFormat)
+                                    completionHandler(nil, Errors.InvalidFormat)
                                 }
                             case .failure:
                                 guard let error = response.result.error else {

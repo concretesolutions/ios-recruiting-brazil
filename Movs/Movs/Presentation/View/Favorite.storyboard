@@ -14,7 +14,7 @@
         <!--Favoritos-->
         <scene sceneID="P7w-4d-ckh">
             <objects>
-                <viewController id="GdY-ty-B7K" sceneMemberID="viewController">
+                <viewController id="GdY-ty-B7K" customClass="FavoriteViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LW5-j6-62V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="132" width="375" height="597"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="CdW-g5-m3Y">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="CdW-g5-m3Y" customClass="FavoriteTableViewCell" customModule="Movs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CdW-g5-m3Y" id="dxA-xa-Wmq">
@@ -92,6 +92,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GdY-ty-B7K" id="cIG-sn-NAL"/>
+                                    <outlet property="delegate" destination="GdY-ty-B7K" id="iT5-go-2gH"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,6 +117,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="Yqx-O6-0gC" id="Kmf-yH-lSq"/>
                         <segue destination="5mD-hD-uN0" kind="show" id="1qt-2v-wfp"/>
                     </connections>
                 </viewController>
@@ -131,6 +136,7 @@
         <!--Favoritos-->
         <scene sceneID="RXc-DU-pKG">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n5P-ex-Z7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dbe-1w-xCd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favoritos" image="@tabBar-favorite" id="6OK-U0-wpu"/>
                     <toolbarItems/>
@@ -144,7 +150,6 @@
                         <segue destination="GdY-ty-B7K" kind="relationship" relationship="rootViewController" id="dWf-Qg-fiL"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n5P-ex-Z7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="586" y="-51"/>
         </scene>
