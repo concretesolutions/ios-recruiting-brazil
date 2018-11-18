@@ -46,6 +46,7 @@
 		75DB8C01219D462B0012EC6A /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB8C00219D462B0012EC6A /* Genres.swift */; };
 		75DB8C03219D486A0012EC6A /* GenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB8C02219D486A0012EC6A /* GenresResponse.swift */; };
 		75FB864A21A0EEC000BDB35E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB864921A0EEC000BDB35E /* Enums.swift */; };
+		75FB864D21A10C6800BDB35E /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB864C21A10C6800BDB35E /* UIViewExtension.swift */; };
 		75FEB3D1219F545E003005D2 /* FavoriteMoviesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FEB3D0219F545E003005D2 /* FavoriteMoviesTableView.swift */; };
 		75FEB3D3219F548F003005D2 /* FavoriteMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FEB3D2219F548F003005D2 /* FavoriteMovieTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -113,6 +114,7 @@
 		75DB8C00219D462B0012EC6A /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
 		75DB8C02219D486A0012EC6A /* GenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresResponse.swift; sourceTree = "<group>"; };
 		75FB864921A0EEC000BDB35E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		75FB864C21A10C6800BDB35E /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		75FEB3D0219F545E003005D2 /* FavoriteMoviesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesTableView.swift; sourceTree = "<group>"; };
 		75FEB3D2219F548F003005D2 /* FavoriteMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 		753517B0219780A600CE5DDA /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				75FB864B21A10C5700BDB35E /* Utils */,
 				75FB864821A0EEAC00BDB35E /* Enums */,
 				753517E2219780E700CE5DDA /* Application */,
 				755C64CD219A405900E13B81 /* DataManagers */,
@@ -443,6 +446,14 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		75FB864B21A10C5700BDB35E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				75FB864C21A10C6800BDB35E /* UIViewExtension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -601,6 +612,7 @@
 				75FB864A21A0EEC000BDB35E /* Enums.swift in Sources */,
 				753517B2219780A600CE5DDA /* AppDelegate.swift in Sources */,
 				75FEB3D3219F548F003005D2 /* FavoriteMovieTableViewCell.swift in Sources */,
+				75FB864D21A10C6800BDB35E /* UIViewExtension.swift in Sources */,
 				7535180B2197867100CE5DDA /* FavoriteMoviesView.swift in Sources */,
 				755C64CF219A407000E13B81 /* MovieDataManager.swift in Sources */,
 				753517F7219783A400CE5DDA /* PopularMoviesRouter.swift in Sources */,

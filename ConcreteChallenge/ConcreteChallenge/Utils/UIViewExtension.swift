@@ -70,7 +70,7 @@ public extension UIView {
      */
     @discardableResult public func fadeIn(duration: TimeInterval = 2,
                                           delay: TimeInterval = 0,
-                                          options: UIViewAnimationOptions = .curveLinear,
+                                          options: UIView.AnimationOptions = .curveLinear,
                                           completion: ((Bool) -> Void)? = nil) -> UIView {
         alpha = 0
         UIView.animate(
@@ -110,7 +110,7 @@ public extension UIView {
      */
     @discardableResult public func fadeOut(duration: TimeInterval = 2,
                                            delay: TimeInterval = 0,
-                                           options: UIViewAnimationOptions = .curveLinear,
+                                           options: UIView.AnimationOptions = .curveLinear,
                                            completion: ((Bool) -> Void)? = nil) -> UIView {
         alpha = 1
         UIView.animate(
@@ -169,7 +169,7 @@ public extension UIView {
                                          velocity:CGFloat = 0,
                                          duration: TimeInterval = 1.0,
                                          delay: TimeInterval = 0,
-                                         options: UIViewAnimationOptions = .curveLinear,
+                                         options: UIView.AnimationOptions = .curveLinear,
                                          completion: ((Bool) -> Void)? = nil) -> UIView {
         alpha = 0
         transform = CGAffineTransform(scaleX: fromScale, y: fromScale)
@@ -304,7 +304,7 @@ public extension UIView {
                                            velocity:CGFloat = 0,
                                            duration: TimeInterval = 1.0,
                                            delay: TimeInterval = 0,
-                                           options: UIViewAnimationOptions = .curveLinear,
+                                           options: UIView.AnimationOptions = .curveLinear,
                                            completion: ((Bool) -> Void)? = nil) -> UIView {
         let offset = offsetFor(edge: edge)
         transform = CGAffineTransform(translationX: offset.x + x, y: offset.y + y)
@@ -379,7 +379,7 @@ public extension UIView {
                                             velocity:CGFloat = 0,
                                             duration: TimeInterval = 1.0,
                                             delay: TimeInterval = 0,
-                                            options: UIViewAnimationOptions = .curveLinear,
+                                            options: UIView.AnimationOptions = .curveLinear,
                                             completion: ((Bool) -> Void)? = nil) -> UIView {
         var backwards = CGPoint(x: x, y: y)
         switch edge {
@@ -503,7 +503,7 @@ public extension UIView {
                                         velocity:CGFloat = 0,
                                         duration: TimeInterval = 1.0,
                                         delay: TimeInterval = 0,
-                                        options: UIViewAnimationOptions = .curveLinear,
+                                        options: UIView.AnimationOptions = .curveLinear,
                                         completion: ((Bool) -> Void)? = nil) -> UIView {
         UIView.animate(
             withDuration: duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: options, animations: {
@@ -562,7 +562,7 @@ public extension UIView {
                                           velocity:CGFloat = 0,
                                           duration: TimeInterval = 1.0,
                                           delay: TimeInterval = 0,
-                                          options: UIViewAnimationOptions = .curveLinear,
+                                          options: UIView.AnimationOptions = .curveLinear,
                                           completion: ((Bool) -> Void)? = nil) -> UIView {
         let angleInRadians = angle * .pi / 180
         let rotation = CGAffineTransform(rotationAngle: angleInRadians)
@@ -623,7 +623,7 @@ public extension UIView {
                                          velocity:CGFloat = 0,
                                          duration: TimeInterval = 1.0,
                                          delay: TimeInterval = 0,
-                                         options: UIViewAnimationOptions = .curveLinear,
+                                         options: UIView.AnimationOptions = .curveLinear,
                                          completion: ((Bool) -> Void)? = nil) -> UIView {
         let endScale = CGAffineTransform(scaleX: proportion, y:proportion)
         UIView.animate(
@@ -665,7 +665,7 @@ public extension UIView {
                                           autoreverses: Bool = false) -> UIView {
         let animation = CAKeyframeAnimation(keyPath: "position")
         animation.path = path.cgPath
-        animation.calculationMode = kCAAnimationLinear
+        animation.calculationMode = CAAnimationCalculationMode.linear
         animation.duration = duration
         animation.autoreverses = autoreverses
         animation.repeatCount = repeatCount

@@ -80,7 +80,12 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     }
     
     func updateFavoriteButton(to activate: Bool) {
-        
+        if activate {
+            self.favoriteButton.popOut(toScale: 0, pulseScale: 0, duration: 0.2, delay: 0) { (bool) in
+                self.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+                self.favoriteButton.popIn(fromScale: 0.5, damping: 1, velocity: 0, duration: 0.2, delay: 0, options: UIView.AnimationOptions(), completion: nil)
+            }
+        }
     }
     
     // MARK: - Table view data source
