@@ -13,39 +13,44 @@ class FavoriteViewController: UIViewController {
     
     var favorite: [Favorite]?
     let favoriteCellIdentifier = "favoriteCell"
+    var behavior: Behavior 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initialSetup()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+
+        
+    }
+    
+    private func initialSetup() {
+        fetchFavorite()
+    }
+    
+    private func fetchFavorite() {
         // Get all favorite movies
         FavoriteServices.getAllFavorite { (error, favoriteList) in
             if error == nil {
                 guard let data = favoriteList else {return}
                 self.favorite = data
-//                self.favorite = self.favorite.map({ (fav) -> [Favorite] in
-//                    return fav.sorted(by: { (a, b) -> Bool in
-//                        return a.popularity.compare(b.popularity?) == .orderedDescending
-//                    })
-//                })
+                //                self.favorite = self.favorite.map({ (fav) -> [Favorite] in
+                //                    return fav.sorted(by: { (a, b) -> Bool in
+                //                        return a.popularity.compare(b.popularity?) == .orderedDescending
+                //                    })
+                //                })
                 self.tableView.reloadData()
-                print(self.favorite)
             } else {
                 // TODO: Call generic error behavior, becaouse is not possible to load the favorite movies
             }
         }
-        
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tableView.reloadData()
-        print(self.favorite?.first?.title)
-    }
+    
     // MARK: - Table view data source
 
     

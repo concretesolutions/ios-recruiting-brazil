@@ -35,7 +35,7 @@ class PopularViewController: UITableViewController {
         fetchPopularMovieData(page: 1) { (data) -> Void in
             if data != nil {
                 self.popularMovie = data
-                self.setBehavior(newBehavior: .PopularMovies)
+                self.setBehavior(newBehavior: .Success)
             }
         }
     }
@@ -89,7 +89,7 @@ extension PopularViewController {
     private func setBehavior(newBehavior: Behavior) {
         behavior = newBehavior
         switch behavior {
-        case .PopularMovies:
+        case .Success:
             tableView.backgroundView = UIView()
         case .EmptySearch:
             tableView.backgroundView = emptySearchView

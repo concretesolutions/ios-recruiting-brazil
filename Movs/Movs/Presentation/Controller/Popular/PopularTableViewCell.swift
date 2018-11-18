@@ -28,7 +28,6 @@ class PopularTableViewCell: UITableViewCell {
     }
 
     func setData(data: Result, popularRanking: Int, isFavorite: Bool) {
-        
         movieTitleLabel.text = data.title
         voteAverageLabel.text = "\(data.voteAverage ?? 0.0) de 10"
         if isFavorite {

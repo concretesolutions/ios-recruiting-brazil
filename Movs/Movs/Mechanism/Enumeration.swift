@@ -9,7 +9,7 @@
 import Foundation
 
 enum Behavior {
-    case PopularMovies,
+    case Success,
     EmptySearch,
     GenericError,
     LoadingView
