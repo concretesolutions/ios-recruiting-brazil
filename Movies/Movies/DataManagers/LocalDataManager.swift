@@ -12,6 +12,8 @@ class LocalDatamanager {
     
     // MARK: - Functions
     
+    // MARK: Genres
+    
     static func readGenres() -> [Genre] {
         
         return []
@@ -22,16 +24,22 @@ class LocalDatamanager {
         return []
     }
     
-    static func readMovies() -> [Movie] {
-        
-        return []
-    }
-    
     static func updateGenres(_ genres: [Genre]) {
         
     }
     
-    static func updateFavoriteMovies(_ movies: [Movie]) {
+    // MARK: Favorite Movies
+    
+    static func createFavoriteMovie(_ movie: Movie) {
+        
+    }
+    
+    static func readFavoriteMovies() -> [Movie] {
+        
+        return []
+    }
+    
+    static func deleteFavoriteMovie(_ movie: Movie) {
         
     }
     

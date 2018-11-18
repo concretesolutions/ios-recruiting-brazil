@@ -18,7 +18,6 @@ class Movie: Decodable {
     var year: Int
     var genres: [Genre]
     var overview: String
-    var isFavorite: Bool
     
     enum MovieKeys: String, CodingKey {
         case Id = "id"
@@ -30,14 +29,13 @@ class Movie: Decodable {
     }
     
     // MARK: - Initializers
-    init(id: Int, title: String, posterPath: String?, year: Int, genres: [Genre], overview: String, isFavorite: Bool = false) {
+    init(id: Int, title: String, posterPath: String?, year: Int, genres: [Genre], overview: String) {
         self.id = id
         self.title = title
         self.posterPath = posterPath
         self.year = year
         self.genres = genres
         self.overview = overview
-        self.isFavorite = isFavorite
     }
     
     required convenience init(from decoder: Decoder) throws {
