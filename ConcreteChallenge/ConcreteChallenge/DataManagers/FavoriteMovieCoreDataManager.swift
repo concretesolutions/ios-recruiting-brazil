@@ -16,7 +16,7 @@ class FavoriteMovieCoreDataManager {
     static var favoriteMovies: [Movie] = []
     static var favoriteMoviesNSManagedObject: [NSManagedObject] = []
     
-    static func saveFavoriteMovie(movie: Movie, completion: (_ status: Status) -> Void) {
+    static func saveFavoriteMovie(movie: Movie, completion: (_ status: RequestStatus) -> Void) {
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -44,7 +44,7 @@ class FavoriteMovieCoreDataManager {
         }
     }
     
-    static func getFavoriteMovies(completion: (_ status: Status) -> Void) {
+    static func getFavoriteMovies(completion: (_ status: RequestStatus) -> Void) {
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -74,7 +74,7 @@ class FavoriteMovieCoreDataManager {
         }
     }
     
-    static func removeFavoriteMovie(at indexPath:IndexPath, completion: (_ status: Status) -> Void) {
+    static func removeFavoriteMovie(at indexPath:IndexPath, completion: (_ status: RequestStatus) -> Void) {
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -94,7 +94,3 @@ class FavoriteMovieCoreDataManager {
     }
 }
 
-enum Status {
-    case success
-    case failed
-}
