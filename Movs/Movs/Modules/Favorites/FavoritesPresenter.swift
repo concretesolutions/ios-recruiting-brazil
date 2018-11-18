@@ -42,8 +42,13 @@ class FavoritesPresenter: NSObject {
     
     func selectedMovie(at index: Int) {
         // Remove filter
-        if index == 0 && self.interactor.hasFilter() {
-            self.interactor.filtersEnded()
+        if self.interactor.hasFilter(){
+            if index == 0 {
+                self.interactor.filtersEnded()
+            }else{
+                let id = self.interactor.getMovieID(index: index-1)
+                self.router.goToMovieDetail(movieID: id)
+            }
         }else{
             let id = self.interactor.getMovieID(index: index)
             self.router.goToMovieDetail(movieID: id)
