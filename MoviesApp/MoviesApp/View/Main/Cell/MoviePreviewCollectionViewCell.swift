@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MoviePreviewCollectionViewCell: UICollectionViewCell {
     
     var movie: Movie?
+    var canFavorite = true
     
     @IBOutlet weak var moviePosterImageViewOutlet: UIImageView!
     @IBOutlet weak var movieTitleLabelOutlet: UILabel!
@@ -18,18 +20,45 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
     
     func setupCell(image: UIImage, title: String, movie: Movie){
         
+        var imageUrl = "https://image.tmdb.org/t/p/w200"
+        var imageEndpoint = imageUrl + movie.poster_path
+        print(imageEndpoint)
+        
+        var url = URL(string: imageEndpoint)
+        
+        if MovieDAO.isMovieFavorite(comparedMovie: movie){
+            print(movie.title)
+            print("Is Favorite!")
+            self.favoriteButtonOutlet.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+        }else{
+            print(movie.title)
+            print("Is not Favorite!")
+        }
+        
         self.movie = movie
-        self.moviePosterImageViewOutlet.image = image
+        self.moviePosterImageViewOutlet.kf.setImage(with: url)
         self.movieTitleLabelOutlet.text = title
         
     }
     
     @IBAction func favoriteMovieButtonTapped(_ sender: Any) {
-    
-        if let movie = self.movie{
-            MovieDAO.saveMovieAsFavorite(movie: movie)
+        
+       
+        
+        var favoriteMovies = MovieDAO.readAllFavoriteMovies()
+        
+        for favoriteMovie in favoriteMovies {
+            if favoriteMovie.title == self.movie?.title{
+                self.canFavorite = false
+            }
         }
         
+        if self.canFavorite == true{
+            MovieDAO.saveMovieAsFavorite(movie: self.movie!)
+            self.favoriteButtonOutlet.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+        } else if self.canFavorite == false{
+            print("This movie has already been marked as favorite")
+        }
         
     }
     

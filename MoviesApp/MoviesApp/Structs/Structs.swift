@@ -14,7 +14,6 @@ struct Response: DataObject {
     var results: [Movie]
     var page: Int
     var total_results: Int
-    var dates: Dates
     var total_pages: Int
 }
 

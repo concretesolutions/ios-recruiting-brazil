@@ -15,7 +15,7 @@ public class MovieDAO{
     
     static func getAll(completionHandler: @escaping (DataObject?, Error?) -> Void){
         
-        NetworkManager.makeGetRequest(to: NetworkManager.shared.baseURL, objectType: Response.self, completionHandler: completionHandler)
+        NetworkManager.makeGetRequest(to: NetworkManager.shared.baseURL, page: NetworkManager.shared.initialPage, objectType: Response.self, completionHandler: completionHandler)
         
     }
     
@@ -76,6 +76,49 @@ public class MovieDAO{
         }
         
         return returnArray
+        
+    }
+    
+    static func deleteFavoriteMovie(favoriteMovie: Movie){
+        
+    }
+    
+    static func isMovieFavorite(comparedMovie: Movie) -> Bool{
+        
+        var returnValue = false
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let movie = NSEntityDescription.entity(forEntityName: "Movie", in: context)
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Movie")
+        
+        do {
+            
+            let movies = try context.fetch(request) as! [NSManagedObject]
+            
+            if movies.count > 0 {
+                
+                for movie in movies{
+                    
+                    var title = movie.value(forKey: "title") as! String
+                    
+                    if comparedMovie.title == title{
+                        
+                        print(comparedMovie.title + " + " + title)
+                        
+                        returnValue = true
+                    }
+                }
+            }else{
+                print("No Movie Found")
+            }
+            
+        }catch{
+            print("Erro ao recuperar dados")
+        }
+        
+        return returnValue
         
     }
     

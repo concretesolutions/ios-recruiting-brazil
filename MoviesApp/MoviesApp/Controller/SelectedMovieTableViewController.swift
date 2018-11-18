@@ -19,7 +19,7 @@ class SelectedMovieTableViewController: UITableViewController {
     @IBOutlet weak var movieOverviewOutlet: UITextView!
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = true
+        //self.tabBarController?.tabBar.isHidden = true
     }
 
     override func viewDidLoad() {

@@ -11,16 +11,25 @@ import UIKit
 
 public class NetworkManager{
     
-    static let shared = NetworkManager(baseURL: "https://api.themoviedb.org/3/movie/now_playing?api_key=bd67e085700f352302ea910f619fe7ec&language=en-US&page=1")
+    static let shared = NetworkManager(baseURL: "https://api.themoviedb.org/3/movie/popular?api_key=bd67e085700f352302ea910f619fe7ec&language=en-US&page=", initialPage: "1")
+    
+
+    
     let baseURL: String
+    var initialPage: String
     
     
-    init(baseURL:String) {
+    init(baseURL:String, initialPage: String) {
         self.baseURL = baseURL
+        self.initialPage = initialPage
     }
     
-    static func makeGetRequest<T:DataObject>(to endpoint:String, objectType: T.Type, completionHandler: @escaping (DataObject?, Error?) -> Void) {
-        guard let url = URL(string: endpoint) else {
+    static func makeGetRequest<T:DataObject>(to endpoint:String, page: String, objectType: T.Type, completionHandler: @escaping (DataObject?, Error?) -> Void) {
+        
+        let targetUrl = endpoint + page
+        print(targetUrl)
+        
+        guard let url = URL(string: targetUrl) else {
             print("Error: cannot create URL")
             completionHandler(nil, NSError(domain: "dsa", code: 01, userInfo: nil))
             return

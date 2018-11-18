@@ -63,14 +63,6 @@
                                             <rect key="frame" x="0.0" y="159" width="167" height="47"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGf-fi-TFp">
-                                                    <rect key="frame" x="144" y="16" width="15" height="15"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="favorite_gray_icon"/>
-                                                    <connections>
-                                                        <action selector="favoriteMovieButtonTapped:" destination="lFm-XJ-tb4" eventType="touchUpInside" id="l0g-5f-mok"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-M4-JNo">
                                                     <rect key="frame" x="27" y="8" width="112" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -78,6 +70,14 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGf-fi-TFp">
+                                                    <rect key="frame" x="142" y="11" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="favorite_gray_icon"/>
+                                                    <connections>
+                                                        <action selector="favoriteMovieButtonTapped:" destination="lFm-XJ-tb4" eventType="touchUpInside" id="l0g-5f-mok"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.032299824060000003" green="0.13734543320000001" blue="0.2868577242" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
