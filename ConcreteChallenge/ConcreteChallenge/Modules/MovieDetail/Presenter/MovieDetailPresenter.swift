@@ -34,5 +34,6 @@ class MovieDetailPresenter: MovieDetailPresentation, MovieDetailInteractorOutput
     
     func didAddMovieToFavorite() {
         self.view?.updateFavoriteButton(to: true)
+        self.movie.isFavorite = true
     }
 }
