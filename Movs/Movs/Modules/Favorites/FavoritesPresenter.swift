@@ -63,6 +63,13 @@ class FavoritesPresenter: NSObject {
         self.interactor.filterMoviesEnded()
     }
     
+    func addFilterYear(with year: String) {
+        self.interactor.addFilterYear(with: year)
+    }
+    func removeFilterYear(with year: String) {
+        self.interactor.removeFilterYear(with: year)
+    }
+    
     func addFilterGenre(with genre: String) {
         self.interactor.addFilterGenre(with: genre)
     }
@@ -74,6 +81,15 @@ class FavoritesPresenter: NSObject {
         var checked = false
         for genre in self.interactor.filter.genre! {
             if genre.contains(genreString) {
+                checked = true
+            }
+        }
+        return checked
+    }
+    func filterYearChecked(with yearString: String) -> Bool {
+        var checked = false
+        for genre in self.interactor.filter.year! {
+            if genre.contains(yearString) {
                 checked = true
             }
         }

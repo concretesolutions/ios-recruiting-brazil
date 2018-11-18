@@ -66,8 +66,13 @@ class FavoritesInteractor {
     }
     
     func removeFavoriteMovie(at index: Int) {
-        let movieID = Int(self.moviesVisible[index].id)
+        var movieIndex = index
+        if hasFilter() {
+            movieIndex -= 1
+        }
+        let movieID = Int(self.moviesVisible[movieIndex].id)
         LocalManager.remove(movieID: movieID)
+        self.filtersEnded()
         self.fetchFavoriteMovies()
     }
     
@@ -106,27 +111,39 @@ class FavoritesInteractor {
     }
     
     func filterMovies() {
-        if filter.year != [] || filter.genre != [] {
-            self.moviesVisible = []
-            for movie in self.movies {
-                var status = false
+        
+        self.moviesVisible = []
+        for movie in self.movies {
+            
+            var statusGenre = false
+            if (self.filter.genre?.count)! > 0 {
                 // Filter genre
                 for genre in self.filter.genre! {
                     if (movie.genre?.contains(genre))! {
-                        status = true
+                        statusGenre = true
                     }
                 }
-                // Filter genre
-                //            for year in self.filter.year! {
-                //                if movie.year?.contains(year) {
-                //                    status = true
-                //                }
-                //            }
-                if status {
-                    self.moviesVisible.append(movie)
+            }else{
+                statusGenre = true
+            }
+            
+            var statusYear = false
+            if (self.filter.year?.count)! > 0 {
+                // Filter year
+                for year in self.filter.year! {
+                    if (movie.year?.contains(year))! {
+                        statusYear = true
+                    }
                 }
+            }else{
+                statusYear = true
+            }
+            
+            if statusYear && statusGenre {
+                self.moviesVisible.append(movie)
             }
         }
+        
     }
     
 }

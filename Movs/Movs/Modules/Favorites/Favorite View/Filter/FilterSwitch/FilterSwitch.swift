@@ -12,7 +12,12 @@ class FilterSwitch: UITableViewController {
     
     // VIPER
     var presenter: FavoritesPresenter!
-    var filter: [String] = []
+    var filter: [String] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +57,12 @@ class FilterSwitch: UITableViewController {
     
     func setupYears() {
         self.filter = []
-    }
-    
-    func reload() {
-        self.tableView.reloadData()
+        let currentYear = Calendar.current.component(.year, from: Date())
+        for year in 1890...currentYear {
+            let y = String(year)
+            self.filter.append(y)
+        }
+        self.filter.reverse()
     }
     
     // MARK: - Table view methods
@@ -65,8 +72,13 @@ class FilterSwitch: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath) as! FilterSwitchCell
         // Setup cell
         let genreTitle = self.filter[indexPath.row]
-        let genreChecked = self.presenter.filterGenreChecked(with: genreTitle)
-        cell.awakeFromNib(filterTitle: genreTitle, checked: genreChecked)
+        var checked = false
+        if self.navigationItem.title == "Genres" {
+            checked = self.presenter.filterGenreChecked(with: genreTitle)
+        }else if self.navigationItem.title == "Date" {
+            checked = self.presenter.filterGenreChecked(with: genreTitle)
+        }
+        cell.awakeFromNib(filterTitle: genreTitle, checked: checked)
         // Return
         return cell
     }
@@ -75,9 +87,17 @@ class FilterSwitch: UITableViewController {
         if let cell = tableView.cellForRow(at: indexPath) as? FilterSwitchCell {
             let filterString = self.filter[indexPath.row]
             if cell.checked {
-                self.presenter.removeFilterGenre(with: filterString)
+                if self.navigationItem.title == "Genres" {
+                    self.presenter.removeFilterGenre(with: filterString)
+                }else if self.navigationItem.title == "Date" {
+                    self.presenter.removeFilterYear(with: filterString)
+                }
             }else{
-                self.presenter.addFilterGenre(with: filterString)
+                if self.navigationItem.title == "Genres" {
+                    self.presenter.addFilterGenre(with: filterString)
+                }else if self.navigationItem.title == "Date" {
+                    self.presenter.addFilterYear(with: filterString)
+                }
             }
             cell.changeCheck()
         }
