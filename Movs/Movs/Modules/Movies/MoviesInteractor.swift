@@ -22,11 +22,12 @@ class MoviesInteractor {
     private var movies: [Movie] = []
     
     private var moviePageSearch: Int = 1
-    private var moviePage: Int = 1
+    private var moviePage: Int = 0
     
     // FROM PRESENTER
     
     func fetchMovies() {
+        self.moviePage += 1
         ServerManager.getMovies(page: self.moviePage) { (popularMovies, status) in
             switch status {
                 case .error:
@@ -34,8 +35,8 @@ class MoviesInteractor {
                     self.presenter?.loadingError()
                 case .okay:
                     print("-> Movies: \(popularMovies.count)")
-                    self.movies = popularMovies
-                    self.moviesVisible = popularMovies
+                    self.movies += popularMovies
+                    self.moviesVisible += popularMovies
                     self.presenter?.loadedMovies()
             }
         }

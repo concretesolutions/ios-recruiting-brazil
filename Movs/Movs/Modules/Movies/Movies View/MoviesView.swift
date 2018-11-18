@@ -68,6 +68,19 @@ class MoviesView: UIViewController {
         self.outletMoviesLoading.isHidden = true
         self.outletMoviesError.isHidden = true
         self.outletMoviesNoResults.isHidden = true
+        
+//        let currentSize = self.outletMoviesCollection.numberOfItems(inSection: 0)
+//        let currentDataSourceSize = self.presenter.totalMovies()
+//        print("- \(currentSize) / \(currentDataSourceSize)")
+//        var newMoviesIndex:[IndexPath] = []
+//        for item in currentSize...currentDataSourceSize {
+//            let newIndexPath = IndexPath(item: item, section: 0)
+//            newMoviesIndex.append(newIndexPath)
+//        }
+//        outletMoviesCollection.insertItems(at: newMoviesIndex)
+        
+        //self.outletMoviesCollection.reloadItems(at: newMoviesIndex)
+        
         self.outletMoviesCollection.reloadData()
     }
     
@@ -98,6 +111,12 @@ class MoviesView: UIViewController {
             if searchText.isEmpty {
                 self.navigationItem.searchController?.isActive = false
             }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.presenter.totalMovies() - 1 {
+            self.presenter.fetchMovies()
         }
     }
     
