@@ -8,14 +8,21 @@
 
 import UIKit
 
-class PopularMoviesCollectionViewDelegateFlowLayout: NSObject, UICollectionViewDelegateFlowLayout {
+protocol MovieSelectionDelegate {
+    func didSelect(movie:Movie)
+}
 
+class PopularMoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout {
+
+    var delegate: MovieSelectionDelegate?
+    
     private let movies: [Movie]
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = Style.insets.popularMoviesCollectionView
     
-    init(movies: [Movie]) {
+    init(movies: [Movie], delegate: MovieSelectionDelegate) {
         self.movies = movies
+        self.delegate = delegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -23,6 +30,11 @@ class PopularMoviesCollectionViewDelegateFlowLayout: NSObject, UICollectionViewD
         let availableWidth = UIScreen.main.bounds.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        delegate?.didSelect(movie: movie)
     }
     
 }

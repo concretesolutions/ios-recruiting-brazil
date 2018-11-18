@@ -7,29 +7,55 @@
 //
 
 import UIKit
+import SnapKit
 
 class PopularMoviesViewController: UIViewController {
 
+    //MARK: - Interface
+    lazy var activityIndicator:UIActivityIndicatorView = {
+        var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        activityIndicator.color = Style.colors.secondaryYellow
+        activityIndicator.contentMode = .scaleAspectFit
+        return activityIndicator
+    }()
+    
     //MARK: - Properties
+    let tmdbService = TMDBService()
     let collectionView = PopularMoviesCollectionView()
     var collectionViewDatasource: PopularMoviesCollectionViewDataSource?
-    var collectionViewDelegate: PopularMoviesCollectionViewDelegateFlowLayout?
+    var collectionViewDelegate: PopularMoviesCollectionViewDelegate?
     
-    let tmdbService = TMDBService()
-    var movies = [ //teste
-        Movie(id: 0, title: "Venom", genres: [Genre(id: 878, name: "Science Fiction")], overview: "When Eddie Brock acquires the powers of a symbiote, he will have to release his alter-ego \"Venom\" to save his life.", thumbFilePath: "/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg"),
-        Movie(id: 1, title: "Fantastic Beasts: The Crimes of Grindelwald", genres: [Genre(id: 18, name: "Drama"),Genre(id: 10751, name: "Family"),Genre(id: 14, name: "Fantasy")], overview: "Gellert Grindelwald has escaped imprisonment and has begun gathering followers to his cause—elevating wizards above all non-magical beings. The only one capable of putting a stop to him is the wizard he once called his closest friend, Albus Dumbledore. However, Dumbledore will need to seek help from the wizard who had thwarted Grindelwald once before, his former student Newt Scamander, who agrees to help, unaware of the dangers that lie ahead. Lines are drawn as love and loyalty are tested, even among the truest friends and family, in an increasingly divided wizarding world.", thumbFilePath: "/uyJgTzAsp3Za2TaPiZt2yaKYRIR.jpg"),
-        Movie(id: 2, title: "The Seven Deadly Sins: Prisoners of the Sky", genres: [Genre(id: 28, name: "Action"),Genre(id: 12, name: "Adventure"),Genre(id: 14, name: "Fantasy"),Genre(id: 16, name: "Animation")], overview: "Traveling in search of the rare ingredient, “sky fish”  Meliodas and Hawk arrive at a palace that floats above the clouds. The people there are busy preparing a ceremony, meant to protect their home from a ferocious beast that awakens once every 3,000 years. But before the ritual is complete, the Six Knights of Black—a Demon Clan army—removes the seal on the beast, threatening the lives of everyone in the Sky Palace.", thumbFilePath: "/r6pPUVUKU5eIpYj4oEzidk5ZibB.jpg"),
-        Movie(id: 3, title: "The Equalizer 2", genres: [Genre(id: 53, name: "Thriller"),Genre(id: 28, name: "Action"),Genre(id: 80, name: "Crime")], overview: "Robert McCall, who serves an unflinching justice for the exploited and oppressed, embarks on a relentless, globe-trotting quest for vengeance when a long-time girl friend is murdered.", thumbFilePath: "/cQvc9N6JiMVKqol3wcYrGshsIdZ.jpg")
-    ]
+    //MARK: - UI States Control
+    fileprivate enum LoadingState {
+        case loading
+        case ready
+    }
+    
+    fileprivate enum PresentationState {
+        case initial
+        case showContent
+        case error
+    }
+    
+    fileprivate var loadingState: LoadingState = .loading {
+        didSet {
+            updateLoading(state: loadingState)
+        }
+    }
+    
+    fileprivate var presentationState: PresentationState = .initial {
+        didSet {
+            DispatchQueue.main.async {
+                self.updatePresentation(state: self.presentationState)
+            }
+        }
+    }
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = collectionView
-        
-        getPopularMovies()
-        
+        setupView()
+        getPopularMovies(page: 1)
     }
     
     //MARK: - Setup
@@ -37,25 +63,77 @@ class PopularMoviesViewController: UIViewController {
         collectionViewDatasource = PopularMoviesCollectionViewDataSource(movies: movies, collectionView: collectionView)
         collectionView.dataSource = collectionViewDatasource
         
-        collectionViewDelegate = PopularMoviesCollectionViewDelegateFlowLayout(movies: movies)
+        collectionViewDelegate = PopularMoviesCollectionViewDelegate(movies: movies, delegate: self)
         collectionView.delegate = collectionViewDelegate
         
         collectionView.reloadData()
     }
     
     //MARK: TMDB Service
-    func getPopularMovies() {
-        tmdbService.getPopularMovies(page: 1) { (result) in
+    func getPopularMovies(page: Int) {
+        loadingState = .loading
+        presentationState = .initial
+        tmdbService.getPopularMovies(page: page) { (result) in
             switch result {
             case .success(let movies):
                 self.setupCollectionView(with: movies)
+                self.loadingState = .ready
+                self.presentationState = .showContent
             case .error(let anError):
                 print("Error: \(anError)")
+                self.presentationState = .error
             }
         }
     }
     
+    //MARK: UI States
+    fileprivate func updateLoading(state: LoadingState) {
+        switch state {
+        case .loading:
+            activityIndicator.startAnimating()
+        case .ready:
+            activityIndicator.stopAnimating()
+        }
+    }
     
+    fileprivate func updatePresentation(state: PresentationState) {
+        switch state {
+        case .initial:
+            collectionView.isHidden = true
+            activityIndicator.isHidden = false
+        case .showContent:
+            collectionView.isHidden = false
+            activityIndicator.isHidden = true
+        case .error:
+            collectionView.isHidden = true
+            activityIndicator.isHidden = true
+        }
+    }
     
+}
+
+extension PopularMoviesViewController: MovieSelectionDelegate {
+    func didSelect(movie: Movie) {
+    }
+}
+
+extension PopularMoviesViewController: CodeView {
+    func buildViewHierarchy() {
+        view.addSubview(collectionView)
+        view.addSubview(activityIndicator)
+    }
     
+    func setupConstraints() {
+        collectionView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        activityIndicator.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+    }
 }

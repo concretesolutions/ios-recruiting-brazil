@@ -49,7 +49,9 @@ class TMDBService {
             do {
                 let moviesResponse = try jsonDecoder.decode(MoviesResponse.self, from: data)
                 let results = moviesResponse.results
-                answer(.success(results))
+                DispatchQueue.main.async {
+                    answer(.success(results))
+                }
             } catch let jsonDecoderError as NSError {
                 answer(.error(
                     TMDBServiceError.jsonParse("Failed to parse data as MoviesResponse)", jsonDecoderError)
