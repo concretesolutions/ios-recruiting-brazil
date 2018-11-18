@@ -18,7 +18,7 @@ class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractor
     
     // MARK: - PopularMoviesPresentation functions
     func viewDidLoad() {
-        
+        self.view?.setActivityIndicator(to: true)
     }
     
     func didRequestMovies() {
@@ -32,6 +32,7 @@ class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractor
     // MARK: - PopularMoviesInteractorOutput functions
     func didFetch(movies: [Movie]) {
         self.view?.show(movies: movies)
+        self.view?.setActivityIndicator(to: false)
     }
     
 }

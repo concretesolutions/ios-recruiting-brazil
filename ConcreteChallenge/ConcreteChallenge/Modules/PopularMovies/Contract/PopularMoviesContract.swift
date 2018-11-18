@@ -21,6 +21,7 @@ protocol PopularMoviesView {
     var presenter: PopularMoviesPresentation! { get set }
     
     func show(movies: [Movie])
+    func setActivityIndicator(to activated: Bool)
 }
 
 protocol PopularMoviesPresentation: class {
