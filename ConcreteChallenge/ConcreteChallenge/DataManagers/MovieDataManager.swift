@@ -19,7 +19,12 @@ class MovieDataManager {
     static let getGenresURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0aa2fda064d1eec9e68bccc4220ddf7b&language=en-US"
     
     // MARK: - Functions
-    static func fetchPopularMovies(completion: @escaping () -> Void) {
+    static func fetchPopularMovies(completion: @escaping (_ status: RequestStatus) -> Void) {
+        if !self.movies.isEmpty {
+            completion(.success)
+            return
+        }
+        
         guard let popularMoviesURL = URL(string: self.getPopularMoviesURL) else { return }
         var request = URLRequest(url: popularMoviesURL)
         request.httpMethod = "GET"
@@ -37,9 +42,10 @@ class MovieDataManager {
                     let popularMoviesResponse = try decoder.decode(PopularMoviesResponse.self, from: data)
                     self.movies = popularMoviesResponse.results
 
-                    completion()
+                    completion(.success)
                 } catch let decoderError {
                     print("Error decoding json: ", decoderError)
+                    completion(.failed)
                 }
             } else {
                 print("Error requesting popular movies: ", error as Any)
@@ -47,10 +53,10 @@ class MovieDataManager {
         }.resume()
     }
     
-    static func fetchGenres(completion: @escaping () -> Void) {
+    static func fetchGenres(completion: @escaping (_ status: RequestStatus) -> Void) {
         
         if !self.genres.isEmpty {
-            completion()
+            completion(.success)
             return
         }
         
@@ -71,12 +77,14 @@ class MovieDataManager {
                     let genresResponse = try decoder.decode(GenresResponse.self, from: data)
                     self.genres = genresResponse.genres
                     
-                    completion()
+                    completion(.success)
                 } catch let decoderError {
                     print("Error decoding json: ", decoderError)
+                    completion(.failed)
                 }
             } else {
                 print("Error requesting genres: ", error as Any)
+                completion(.failed)
             }
         }.resume()
     }

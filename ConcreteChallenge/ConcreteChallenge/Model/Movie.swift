@@ -17,6 +17,7 @@ class Movie: Decodable, Encodable {
     let genreIds: [Int]
     let overview: String
     let releaseDate: Date
+    var isFavorite = false
     
     
     // MARK: - Decodable Keys

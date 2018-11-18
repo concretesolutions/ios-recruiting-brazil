@@ -8,9 +8,14 @@
 
 import UIKit
 
-class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
+protocol FavoriteMovieRemoved {
+    func didRemoveFavoriteMovie(at indexPath: IndexPath)
+}
+
+class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, FavoriteMovieRemoved {
     
     // MARK: - Outlets
+    @IBOutlet weak var favoriteMoviesTableView: FavoriteMoviesTableView!
     
     // MARK: - Properties
     var presenter: FavoriteMoviesPresentation!
@@ -21,12 +26,38 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         self.presenter.viewDidLoad()
         
         self.setupNavigationBar()
+        self.setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.presenter.didRequestFavoriteMovies()
+    }
+    
+    // MARK: - FavoriteMoviesView Functions
+    func show(favoriteMovies: [Movie]) {
+        self.favoriteMoviesTableView.isHidden = false
+        self.favoriteMoviesTableView.favoriteMovies = favoriteMovies
+    }
+    
+    func showEmptyAlert() {
+        self.favoriteMoviesTableView.isHidden = true
+    }
+    
+    // MARK: - FavoriteMovieRemoved Functions
+    func didRemoveFavoriteMovie(at indexPath: IndexPath) {
+        self.presenter.didRemoveFavoriteMovie(at: indexPath)
     }
     
     // MARK: - Functions
     func setupNavigationBar() {
         self.navigationItem.title = "Movies"
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.968627451, green: 0.8078431373, blue: 0.3568627451, alpha: 1)
+    }
+    
+    func setupTableView() {
+        self.favoriteMoviesTableView.delegate = self.favoriteMoviesTableView
+        self.favoriteMoviesTableView.dataSource = self.favoriteMoviesTableView
+        self.favoriteMoviesTableView.favoriteMovieRemoved = self
     }
 }
 

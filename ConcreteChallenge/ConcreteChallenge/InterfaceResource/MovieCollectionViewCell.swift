@@ -21,6 +21,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBAction func favoriteButtonTapped(_ sender: Any) {
     }
     
+    // MARK: - UICollectionViewCell Functions
+    override func prepareForReuse() {
+        self.favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+    }
+    
     // MARK: - Functions
     func setupCell(movie: Movie) {
         ImageDataManager.getImageFrom(imagePath: movie.posterPath) { (image) in
@@ -29,5 +34,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
             }
         }
         self.nameLabel.text = movie.title
+        
+        if movie.isFavorite {
+            DispatchQueue.main.async {
+                self.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            }
+        }
     }
 }

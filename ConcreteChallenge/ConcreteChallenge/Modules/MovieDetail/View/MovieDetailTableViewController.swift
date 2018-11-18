@@ -10,13 +10,20 @@ import UIKit
 
 class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     
+    
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieReleaseYear: UILabel!
     @IBOutlet weak var movieGenres: UILabel!
     @IBOutlet weak var movieOverview: UITextView!
-
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    // MARK: - Actions
+    @IBAction func didTapFavoriteButton(_ sender: Any) {
+        self.presenter.didTapFavoriteButton()
+    }
+    
     // MARK: - Properties
     var presenter: MovieDetailPresentation!
     
@@ -24,6 +31,8 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.viewDidLoad()
+        
+        self.setupTableView()
     }
 
     // MARK: - MovieDetailView Functions
@@ -34,6 +43,12 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
             
             // Title
             self.movieTitle.text = movie.title
+            
+            // Favorite Button
+            if movie.isFavorite {
+                self.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+                self.favoriteButton.isUserInteractionEnabled = false
+            }
             
             // Release Year
             let calendar = Calendar.current
@@ -65,6 +80,16 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
         }
     }
     
+    func updateFavoriteButton(to activate: Bool) {
+        if activate {
+            self.favoriteButton.isUserInteractionEnabled = false
+            self.favoriteButton.popOut(toScale: 0, pulseScale: 0, duration: 0.2, delay: 0) { (bool) in
+                self.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+                self.favoriteButton.popIn(fromScale: 0.5, damping: 1, velocity: 0, duration: 0.2, delay: 0, options: UIView.AnimationOptions(), completion: nil)
+            }
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,6 +116,9 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     }
     
     // MARK: - Functions
+    func setupTableView() {
+        self.tableView.allowsSelection = false
+    }
     
 }
 

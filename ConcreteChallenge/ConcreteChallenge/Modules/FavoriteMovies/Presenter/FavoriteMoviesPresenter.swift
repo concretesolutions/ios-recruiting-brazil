@@ -10,6 +10,7 @@ import Foundation
 
 class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInteractorOutput {
     
+    
     // MARK: - Properties
     var view: FavoriteMoviesView?
     var interactor: FavoriteMoviesInteractorInput!
@@ -19,6 +20,21 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
     func viewDidLoad() {
     }
     
+    func didRequestFavoriteMovies() {
+        self.interactor.getFavoriteMovies()
+    }
+    
     // MARK: - FavoriteMoviesInteractorOutput functions
+    func didGetFavoriteMovies(favoriteMovies: [Movie]) {
+        if favoriteMovies.isEmpty {
+            self.view?.showEmptyAlert()
+        } else {
+            self.view?.show(favoriteMovies: favoriteMovies)
+        }
+    }
+    
+    func didRemoveFavoriteMovie(at indexPath: IndexPath) {
+        self.interactor.removeFavoriteMovie(at: indexPath)
+    }
     
 }

@@ -23,9 +23,17 @@ class MovieDetailPresenter: MovieDetailPresentation, MovieDetailInteractorOutput
         self.interactor.fetchMovieDetails(movie: movie)
     }
     
+    func didTapFavoriteButton() {
+        self.interactor.addMovieToFavorite(movie: movie)
+    }
+    
     // MARK: - MovieDetailInteractorOutput functions
     func didFetchMovieDetails(movieDetails: MovieDetails) {
         self.view?.showDetails(of: movieDetails)
     }
     
+    func didAddMovieToFavorite() {
+        self.view?.updateFavoriteButton(to: true)
+        self.movie.isFavorite = true
+    }
 }

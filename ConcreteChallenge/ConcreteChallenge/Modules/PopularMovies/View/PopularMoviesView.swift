@@ -32,6 +32,10 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
         self.presenter.didRequestMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.moviesCollectionView.reloadData()
+    }
+    
     // MARK: - PopularMoviesView Functions
     func show(movies: [Movie]) {
         self.moviesCollectionView.movies = movies
