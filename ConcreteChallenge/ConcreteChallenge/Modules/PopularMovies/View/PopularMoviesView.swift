@@ -17,6 +17,9 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
     
     // MARK: - Outlets
     @IBOutlet weak var moviesCollectionView: MovieCollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var errorImage: UIImageView!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     // MARK: - Properties
     var presenter: PopularMoviesPresentation!
@@ -38,9 +41,28 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
     
     // MARK: - PopularMoviesView Functions
     func show(movies: [Movie]) {
+        self.moviesCollectionView.isHidden = false
         self.moviesCollectionView.movies = movies
     }
+    
+    func showErrorMessage() {
+        DispatchQueue.main.async {
+            self.errorImage.isHidden = false
+            self.errorMessageLabel.isHidden = false            
+        }
+    }
 
+    func setActivityIndicator(to activated: Bool) {
+        if activated {
+            self.activityIndicator.startAnimating()
+        } else {
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true                
+            }
+        }
+    }
+    
     // MARK: -  MovieCellSelected Functions
     func didTapMovieCell(of movie: Movie) {
         self.presenter.didTapMovieCell(of: movie)

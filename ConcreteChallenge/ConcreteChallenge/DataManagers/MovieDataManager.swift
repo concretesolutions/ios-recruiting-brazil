@@ -33,7 +33,10 @@ class MovieDataManager {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if error == nil {
-                guard let data = data else { return }
+                guard let data = data else {
+                    completion(.failed)
+                    return
+                }
                 
                 do {
                     let decoder = JSONDecoder()
@@ -49,6 +52,7 @@ class MovieDataManager {
                 }
             } else {
                 print("Error requesting popular movies: ", error as Any)
+                completion(.failed)
             }
         }.resume()
     }
