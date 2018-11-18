@@ -6,7 +6,6 @@
 //  Copyright © 2018 Erick Lozano Borges. All rights reserved.
 //
 
-
 import RealmSwift
 import Realm
 
