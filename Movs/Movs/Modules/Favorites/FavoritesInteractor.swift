@@ -34,6 +34,7 @@ class FavoritesInteractor {
     // FROM PRESENTER
     
     func filterMovies(containing: String) {
+        self.filtersEnded()
         moviesVisible = []
         for movie in movies {
             if movie.title!.contains(containing) {
