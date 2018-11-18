@@ -44,6 +44,11 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
             // Title
             self.movieTitle.text = movie.title
             
+            // Favorite Button
+            if movie.isFavorite {
+                self.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            }
+            
             // Release Year
             let calendar = Calendar.current
             let components = calendar.dateComponents([Calendar.Component.year], from: movie.releaseDate)

@@ -23,17 +23,22 @@ class MovieDetailInteractor: MovieDetailInteractorInput {
             
             // Get Genres
             var genres: [String] = []
-            MovieDataManager.fetchGenres {
-                for id in movie.genreIds {
-                    if let genre = MovieDataManager.genres.first(where: { $0.id == id }) {
-                        genres.append(genre.name)
+            MovieDataManager.fetchGenres(completion: { (status) in
+                if status == RequestStatus.success {
+                    for id in movie.genreIds {
+                        if let genre = MovieDataManager.genres.first(where: { $0.id == id }) {
+                            genres.append(genre.name)
+                        }
                     }
+                    
+                    // Instantiate new Movie Detail
+                    let movieDetail = MovieDetails(movie: movie, posterImage: posterImage, genres: genres)
+                    if movie.isFavorite {
+                        movieDetail.isFavorite = true
+                    }
+                    self.output.didFetchMovieDetails(movieDetails: movieDetail)
                 }
-                
-                // Instantiate new Movie Detail
-                let movieDetail = MovieDetails(movie: movie, posterImage: posterImage, genres: genres)
-                self.output.didFetchMovieDetails(movieDetails: movieDetail)
-            }
+            })
         }
     }
     

@@ -44,33 +44,35 @@ class FavoriteMovieCoreDataManager {
         }
     }
     
-    static func getFavoriteMovies(completion: (_ status: RequestStatus) -> Void) {
+    static func getFavoriteMovies(completion: @escaping (_ status: RequestStatus) -> Void) {
         // Get context
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
-        request.returnsObjectsAsFaults = false
-        do {
-            let result = try context.fetch(request)
-            self.favoriteMoviesNSManagedObject = result as! [NSManagedObject]
+        DispatchQueue.main.async {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
             
-            self.favoriteMovies = []
-            for data in result as! [NSManagedObject] {
-                let id = data.value(forKey: "id") as! Int
-                let title = data.value(forKey: "title") as! String
-                let posterPath = data.value(forKey: "posterPath") as! String
-                let genreIds = data.value(forKey: "genreIds") as! [Int]
-                let overview = data.value(forKey: "overview") as! String
-                let releaseDate = data.value(forKey: "releaseDate") as! Date
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
+            request.returnsObjectsAsFaults = false
+            do {
+                let result = try context.fetch(request)
+                self.favoriteMoviesNSManagedObject = result as! [NSManagedObject]
                 
-                self.favoriteMovies.append(Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate))
+                self.favoriteMovies = []
+                for data in result as! [NSManagedObject] {
+                    let id = data.value(forKey: "id") as! Int
+                    let title = data.value(forKey: "title") as! String
+                    let posterPath = data.value(forKey: "posterPath") as! String
+                    let genreIds = data.value(forKey: "genreIds") as! [Int]
+                    let overview = data.value(forKey: "overview") as! String
+                    let releaseDate = data.value(forKey: "releaseDate") as! Date
+                    
+                    self.favoriteMovies.append(Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate))
+                }
+                
+                completion(.success)
+            } catch {
+                print("Failed")
+                completion(.failed)
             }
-            
-            completion(.success)
-        } catch {
-            print("Failed")
-            completion(.failed)
         }
     }
     
