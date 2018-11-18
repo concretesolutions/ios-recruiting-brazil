@@ -23,9 +23,15 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     }
     
     func removeFavoriteMovie(at indexPath: IndexPath) {
+        // Update Popular Movies Array
+        if let popularMovie = MovieDataManager.movies.first(where: { (movie) -> Bool in
+            movie.id == FavoriteMovieCoreDataManager.favoriteMovies[indexPath.item].id
+        }) {
+            popularMovie.isFavorite = false
+        }
+        
+        // Remove Movie from Favorites
         FavoriteMovieCoreDataManager.removeFavoriteMovie(at: indexPath) { (status) in
-
         }
     }
-    
 }

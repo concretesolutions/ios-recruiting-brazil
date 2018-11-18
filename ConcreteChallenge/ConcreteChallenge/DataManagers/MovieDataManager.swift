@@ -20,6 +20,11 @@ class MovieDataManager {
     
     // MARK: - Functions
     static func fetchPopularMovies(completion: @escaping (_ status: RequestStatus) -> Void) {
+        if !self.movies.isEmpty {
+            completion(.success)
+            return
+        }
+        
         guard let popularMoviesURL = URL(string: self.getPopularMoviesURL) else { return }
         var request = URLRequest(url: popularMoviesURL)
         request.httpMethod = "GET"
