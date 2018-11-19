@@ -15,7 +15,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
     
     var movie: Movie!
     
-    lazy var testView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame:.zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -31,11 +31,11 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
 extension PopularMoviesCollectionViewCell: CodeView {
     
     func buildViewHierarchy() {
-        contentView.addSubview(testView)
+        contentView.addSubview(imageView)
     }
     
     func setupConstraints() {
-        testView.snp.makeConstraints { (make) in
+        imageView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.top.equalToSuperview()
             make.right.equalToSuperview()
@@ -44,7 +44,7 @@ extension PopularMoviesCollectionViewCell: CodeView {
     }
     
     func setupAdditionalConfiguration() {
-        testView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + movie.thumbFilePath), completed: nil)
+        imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + movie.thumbFilePath), completed: nil)
     }
     
 }

@@ -15,6 +15,7 @@ struct Movie {
     var genres: [Genre]
     var overview: String
     var thumbFilePath: String
+    var thumbnail: UIImage?
     
     public init(id: Int, title: String, genres: [Genre], overview: String, thumbFilePath: String) {
         self.id = id

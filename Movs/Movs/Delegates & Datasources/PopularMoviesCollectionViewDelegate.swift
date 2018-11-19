@@ -13,7 +13,7 @@ protocol MovieSelectionDelegate {
 }
 
 class PopularMoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout {
-
+    
     var delegate: MovieSelectionDelegate?
     
     private let movies: [Movie]
@@ -33,7 +33,11 @@ class PopularMoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movie = movies[indexPath.row]
+        var movie = movies[indexPath.row]
+        //FIXME: movie.thumbnail = placeholder image
+        if let cell = collectionView.cellForItem(at: indexPath) as? PopularMoviesCollectionViewCell {
+            movie.thumbnail = cell.imageView.image
+        }
         delegate?.didSelect(movie: movie)
     }
     
