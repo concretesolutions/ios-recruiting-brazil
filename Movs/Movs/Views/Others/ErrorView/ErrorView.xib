@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="Movs" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="pYz-zO-3KJ"/>
+                <outlet property="imageView" destination="wKQ-BF-eUa" id="E0f-ec-rll"/>
+                <outlet property="textMessage" destination="h7F-M1-lwy" id="X6c-O8-CeD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="M4q-HN-vyB">
+                    <rect key="frame" x="25" y="218.5" width="325" height="230"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sad" translatesAutoresizingMaskIntoConstraints="NO" id="wKQ-BF-eUa">
+                            <rect key="frame" x="37.5" y="0.0" width="250" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="250" id="FR4-Uh-73g"/>
+                                <constraint firstAttribute="height" constant="150" id="ViY-Dy-CTP"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You didn't select any favorites" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7F-M1-lwy">
+                            <rect key="frame" x="0.0" y="170" width="325" height="60"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="h7F-M1-lwy" firstAttribute="width" secondItem="M4q-HN-vyB" secondAttribute="width" id="Hpf-gD-Auv"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="M4q-HN-vyB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BbD-Ad-r8n"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="M4q-HN-vyB" secondAttribute="trailing" constant="25" id="J2d-DM-YcJ"/>
+                <constraint firstItem="M4q-HN-vyB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ymo-9M-6mJ"/>
+                <constraint firstItem="M4q-HN-vyB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="bqM-Hs-1id"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="sad" width="512" height="512"/>
+    </resources>
+</document>
