@@ -84,7 +84,6 @@ class FavoriteServices {
         // execute block in background
         QueueManager.sharedInstance.executeBlock(blockForExecutionInBackground,
                                                  queueType: QueueManager.QueueType.serial)
-        
     }
     
     
@@ -102,6 +101,46 @@ class FavoriteServices {
             do {
                 // save information
                 try FavoriteDAO.update(favorite)
+            } catch let error {
+                raisedError = error
+            }
+            
+            // completion block execution
+            if completion != nil {
+                
+                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(favorite, raisedError)})
+                
+                // execute block in main
+                QueueManager.sharedInstance.executeBlock(blockForExecutionInMain,
+                                                         queueType: QueueManager.QueueType.main)
+                
+            }
+            
+        })
+        
+        // execute block in background
+        QueueManager.sharedInstance.executeBlock(blockForExecutionInBackground,
+                                                 queueType: QueueManager.QueueType.serial)
+        
+    }
+    
+
+    /// Function responsible for delete a favorite movie
+    /// - parameters:
+    ///     - favorite: favorite to be saved
+    ///     - completion: closure to be executed at the end of this method
+    /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
+    static func deleteFavorite(favorite: Favorite, _ completion: ((_ favorite: Favorite, _ error: Error?) -> Void)?) {
+        
+        // block to be executed in background
+        let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
+            // error to be returned in case of failure
+            var raisedError: Error? = nil
+            
+            do {
+                // save information
+                try FavoriteDAO.delete(favorite)
+                
             } catch let error {
                 raisedError = error
             }

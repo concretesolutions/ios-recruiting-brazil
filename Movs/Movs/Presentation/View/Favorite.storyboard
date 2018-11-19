@@ -29,12 +29,15 @@
                                 <state key="normal" title="Remover filtro">
                                     <color key="titleColor" name="lightYellow"/>
                                 </state>
+                                <connections>
+                                    <action selector="removeFilterButtonAction:" destination="GdY-ty-B7K" eventType="touchUpInside" id="Sre-s8-f37"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yqx-O6-0gC">
                                 <rect key="frame" x="0.0" y="132" width="375" height="597"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="CdW-g5-m3Y" customClass="FavoriteTableViewCell" customModule="Movs" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoriteCell" rowHeight="200" id="CdW-g5-m3Y" customClass="FavoriteTableViewCell" customModule="Movs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CdW-g5-m3Y" id="dxA-xa-Wmq">
@@ -54,15 +57,15 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ano: 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEF-Tx-S1V">
-                                                            <rect key="frame" x="150" y="55.666666666666664" width="77.666666666666686" height="20.333333333333336"/>
+                                                            <rect key="frame" x="150" y="50.666666666666664" width="77.666666666666686" height="20.333333333333336"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prh-03-DiN">
-                                                            <rect key="frame" x="150" y="86" width="215" height="81.333333333333314"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prh-03-DiN">
+                                                            <rect key="frame" x="150" y="76" width="215" height="114.66666666666669"/>
                                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis posuere felis. Integer nec sapien eros. Proin id convallis metus. Phasellus sagittis sapien metus.</string>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -71,7 +74,7 @@
                                                         <constraint firstItem="prh-03-DiN" firstAttribute="width" secondItem="C9Q-3g-Ues" secondAttribute="width" id="3ba-eT-Tr5"/>
                                                         <constraint firstItem="q9x-9e-jSC" firstAttribute="centerY" secondItem="9ng-vb-bL1" secondAttribute="centerY" id="DZv-Lv-a9o"/>
                                                         <constraint firstItem="q9x-9e-jSC" firstAttribute="leading" secondItem="9ng-vb-bL1" secondAttribute="leading" id="K9A-nv-3eR"/>
-                                                        <constraint firstItem="prh-03-DiN" firstAttribute="top" secondItem="vEF-Tx-S1V" secondAttribute="bottom" constant="10" id="Lou-hF-Bxa"/>
+                                                        <constraint firstItem="prh-03-DiN" firstAttribute="top" secondItem="vEF-Tx-S1V" secondAttribute="bottom" constant="5" id="Lou-hF-Bxa"/>
                                                         <constraint firstItem="q9x-9e-jSC" firstAttribute="height" secondItem="9ng-vb-bL1" secondAttribute="height" multiplier="0.95" id="PUT-Hu-AXA"/>
                                                         <constraint firstItem="prh-03-DiN" firstAttribute="leading" secondItem="vEF-Tx-S1V" secondAttribute="leading" id="YBa-06-UjO"/>
                                                         <constraint firstAttribute="trailing" secondItem="C9Q-3g-Ues" secondAttribute="trailing" constant="10" id="bfn-s3-iaB"/>
@@ -79,7 +82,7 @@
                                                         <constraint firstItem="C9Q-3g-Ues" firstAttribute="top" secondItem="q9x-9e-jSC" secondAttribute="top" id="teg-rg-KSE"/>
                                                         <constraint firstItem="q9x-9e-jSC" firstAttribute="width" secondItem="9ng-vb-bL1" secondAttribute="width" multiplier="0.4" id="u4o-9r-2C4"/>
                                                         <constraint firstItem="vEF-Tx-S1V" firstAttribute="leading" secondItem="C9Q-3g-Ues" secondAttribute="leading" id="vku-fU-fkz"/>
-                                                        <constraint firstItem="vEF-Tx-S1V" firstAttribute="top" secondItem="C9Q-3g-Ues" secondAttribute="bottom" constant="10" id="wOu-8a-9KH"/>
+                                                        <constraint firstItem="vEF-Tx-S1V" firstAttribute="top" secondItem="C9Q-3g-Ues" secondAttribute="bottom" constant="5" id="wOu-8a-9KH"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -142,7 +145,6 @@
         <!--Favoritos-->
         <scene sceneID="RXc-DU-pKG">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n5P-ex-Z7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dbe-1w-xCd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favoritos" image="@tabBar-favorite" id="6OK-U0-wpu"/>
                     <toolbarItems/>
@@ -156,6 +158,7 @@
                         <segue destination="GdY-ty-B7K" kind="relationship" relationship="rootViewController" id="dWf-Qg-fiL"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n5P-ex-Z7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="586" y="-51"/>
         </scene>

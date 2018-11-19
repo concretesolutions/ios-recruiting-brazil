@@ -13,11 +13,16 @@ class FavoriteViewController: UIViewController {
     
     var favorite: [Favorite]?
     let favoriteCellIdentifier = "favoriteCell"
-    var behavior: Behavior 
+    var behavior: Behavior = .LoadingView {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    
+    let heightForRow = CGFloat(200.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialSetup()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -25,13 +30,25 @@ class FavoriteViewController: UIViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-
-        
+    }
+    
+    override  func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        initialSetup()
     }
     
     private func initialSetup() {
+        tableView.tableFooterView = UIView()
         fetchFavorite()
     }
+    
+    
+    @IBAction func removeFilterButtonAction(_ sender: UIButton) {
+//        if let data = favorite {
+//            deleteFavorite(data: data[1])
+//        }
+    }
+    
     
     private func fetchFavorite() {
         // Get all favorite movies
@@ -44,6 +61,7 @@ class FavoriteViewController: UIViewController {
                 //                        return a.popularity.compare(b.popularity?) == .orderedDescending
                 //                    })
                 //                })
+                self.behavior = .Success
                 self.tableView.reloadData()
             } else {
                 // TODO: Call generic error behavior, becaouse is not possible to load the favorite movies
@@ -115,16 +133,70 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCellIdentifier) as? FavoriteTableViewCell
+        if let data = favorite?[indexPath.row] {
+            cell?.setData(data: data)
+        }
         return cell!
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        if behavior == .Success && favorite != nil {
+            return 1
+        }
         return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if behavior == .Success,
+            let numberOfRows = favorite?.count {
+            return numberOfRows
+        }
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return heightForRow
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Deletando temporariamente um favorito...
+        if let data = favorite?[indexPath.row] {
+            deleteFavorite(data: data)
+            self.favorite?.remove(at: indexPath.row)
+        }
+    }
+    
+}
+
+// MARK: Frufru setup
+extension FavoriteViewController {
+    private func setBehavior(newBehavior: Behavior) {
+        behavior = newBehavior
+        switch behavior {
+        case .Success:
+            tableView.backgroundView = UIView()
+        case .EmptySearch:
+            tableView.backgroundView = UIView()
+            //tableView.backgroundView = emptySearchView
+        case .LoadingView:
+            tableView.backgroundView = UIView()
+            //tableView.backgroundView = loadingView
+        case .GenericError:
+            tableView.backgroundView = UIView()
+            //tableView.backgroundView = genericErrorView
+        }
+    }
+}
+
+// MARK: Service call
+extension FavoriteViewController {
+    private func deleteFavorite(data: Favorite) {
+        FavoriteServices.deleteFavorite(favorite: data) { (_, error) in
+            self.tableView.reloadData()
+            if let err = error {
+                // TODO: avisar que não foi possível deletar o favorito
+            }
+        }
     }
 }
