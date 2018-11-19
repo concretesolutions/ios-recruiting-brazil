@@ -6,6 +6,14 @@ Me chamo Victor Rodrigues, tenho 20 anos e estou no 4 Semestre de Sistemas de In
 
 ---
 
+Pods Usados:
+
+Alamofire
+ObjectMapper
+KingFisher
+
+---
+
 ![Gif](assets/Logo-animado-1.gif)
 
 ## Bem vindo
