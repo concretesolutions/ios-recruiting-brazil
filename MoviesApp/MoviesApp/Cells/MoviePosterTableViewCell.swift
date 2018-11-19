@@ -1,0 +1,30 @@
+//
+//  MoviePosterTableViewCell.swift
+//  MoviesApp
+//
+//  Created by Nicholas Babo on 17/11/18.
+//  Copyright © 2018 Nicholas Babo. All rights reserved.
+//
+
+import UIKit
+import Reusable
+
+class MoviePosterTableViewCell: UITableViewCell, NibReusable {
+    
+    @IBOutlet weak var posterImageView: UIImageView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    func setup(with movie:Movie){
+        self.posterImageView?.download(image: movie.posterPath)
+    }
+
+}
