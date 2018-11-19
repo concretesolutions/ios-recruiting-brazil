@@ -16,6 +16,13 @@ class PopularTableViewCell: UITableViewCell {
     @IBOutlet weak var favoriteIndicatorImage: UIImageView!
     @IBOutlet weak var popularRankingLabel: UILabel!
     
+    var isFavoriteMovie: Bool = false {
+        didSet {
+            if isFavoriteMovie {
+                
+            }
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

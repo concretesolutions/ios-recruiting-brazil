@@ -9,7 +9,7 @@
 import UIKit
 
 extension Result {
-    func favoriteConverter(with genre: String) -> Favorite {
+    func convertResultInFavorite(with genre: String) -> Favorite {
         let favorite = Favorite()
         favorite.releaseDate = self.releaseDate as NSDate?
         favorite.overview = self.overview

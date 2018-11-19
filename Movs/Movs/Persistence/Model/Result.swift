@@ -7,7 +7,7 @@
 //
 
 import Foundation
-// TODO: Fazer o genre (antes era genreIds) receber um array de String, e no init do decoder fazer uma request em /genre/movie/list para popular o array com os gêneros em string e não em ids
+
 struct Result {
     let voteCount: Int?
     let id: Int?

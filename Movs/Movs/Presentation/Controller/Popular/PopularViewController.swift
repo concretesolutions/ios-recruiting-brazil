@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct CustomSegueSender {
+    var result: Result?
+    var behavior: DescriptionBehavior
+}
+
 class PopularViewController: UITableViewController {
     // MARK: Behavior View IBOutlets
     @IBOutlet var emptySearchView: UIView!
@@ -16,24 +21,30 @@ class PopularViewController: UITableViewController {
 
     // MARK: Class Attributes
     var popularMovie: PopularMovie?
+    var favorite = Favorite()
     var behavior: Behavior = .LoadingView {
         didSet {
             self.tableView.reloadData()
         }
     }
+    
     let popularMovieCellIdentifier = "popularCell"
     let popularToDescriptionSegue = "PopularToDescription"
     let heightForRow = CGFloat(200.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialSetup()
     }
     
-    func initialSetup() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dataSetup()
+    }
+    
+    func dataSetup() {
         tableView.tableFooterView = UIView()
-        fetchPopularMovieData(page: 1) { (data) -> Void in
-            if data != nil {
+        fetchPopularMovieData(page: 1) { (popular) -> Void in
+            if let data = popular {
                 self.popularMovie = data
                 self.setBehavior(newBehavior: .Success)
             }
@@ -59,7 +70,9 @@ class PopularViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: popularMovieCellIdentifier,
                                                  for: indexPath) as? PopularTableViewCell
         if let data = popularMovie?.results?[indexPath.row] {
-            cell?.setData(data: data, popularRanking: (indexPath.row + 1), isFavorite: false)
+            isFavorite(result: data, completionHandler: { (status) in
+                cell?.setData(data: data, popularRanking: (indexPath.row + 1), isFavorite: status)
+            })
         }
         
         return cell!
@@ -67,15 +80,25 @@ class PopularViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let data = popularMovie?.results?[indexPath.row] {
-            performSegue(withIdentifier: popularToDescriptionSegue, sender: data)
+            isFavorite(result: data, completionHandler: { (favorite) in
+                var customSender: CustomSegueSender?
+                if favorite {
+                    customSender = CustomSegueSender(result: data, behavior: .Favorite)
+                } else {
+                    customSender = CustomSegueSender(result: data, behavior: .Normal)
+                }
+                
+                self.performSegue(withIdentifier: self.popularToDescriptionSegue, sender: customSender)
+            })
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segueData = sender as? CustomSegueSender else { return }
         if let vc = segue.destination as? DescriptionViewController {
-            vc.result = sender as? Result
+            vc.result = segueData.result
+            vc.behavior = segueData.behavior
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -103,7 +126,7 @@ extension PopularViewController {
 
 // MARK: Service call
 extension PopularViewController {
-    func fetchPopularMovieData(page: Int, completionHandler: @escaping (PopularMovie?) -> Void) {
+    private func fetchPopularMovieData(page: Int, completionHandler: @escaping (PopularMovie?) -> Void) {
         setBehavior(newBehavior: .LoadingView)
         PopularMovieServices.getPopularMovie(page: page) { (data, _) in
             if data != nil {
@@ -112,6 +135,15 @@ extension PopularViewController {
                 self.setBehavior(newBehavior: .GenericError)
                 completionHandler(nil)
             }
+        }
+    }
+    
+    private func isFavorite(result: Result, completionHandler: @escaping (Bool) -> Void) {
+        FavoriteServices.getAllFavorite { (_, data) in
+            guard let status = data?.filter({ (fav) -> Bool in
+                return Int(fav.id) == result.id
+            }).isEmpty else {return}
+            completionHandler(!status)
         }
     }
 }

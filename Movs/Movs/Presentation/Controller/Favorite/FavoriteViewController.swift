@@ -13,6 +13,7 @@ class FavoriteViewController: UIViewController {
     
     var favorite: [Favorite]?
     let favoriteCellIdentifier = "favoriteCell"
+    let favoriteToDescriptionSegue = "favoriteToDescription"
     var behavior: Behavior = .LoadingView {
         didSet {
             self.tableView.reloadData()
@@ -24,31 +25,27 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
     }
     
     override  func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initialSetup()
+        UIView.performWithoutAnimation {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
     }
     
     private func initialSetup() {
         tableView.tableFooterView = UIView()
         fetchFavorite()
+        tableView.layoutIfNeeded()
     }
     
     
     @IBAction func removeFilterButtonAction(_ sender: UIButton) {
-//        if let data = favorite {
-//            deleteFavorite(data: data[1])
-//        }
+
     }
-    
     
     private func fetchFavorite() {
         // Get all favorite movies
@@ -56,6 +53,7 @@ class FavoriteViewController: UIViewController {
             if error == nil {
                 guard let data = favoriteList else {return}
                 self.favorite = data
+                // TODO: Definir uma forma de ordenação para mostrar os favoritos
                 //                self.favorite = self.favorite.map({ (fav) -> [Favorite] in
                 //                    return fav.sorted(by: { (a, b) -> Bool in
                 //                        return a.popularity.compare(b.popularity?) == .orderedDescending
@@ -69,64 +67,13 @@ class FavoriteViewController: UIViewController {
         }
     }
     
-    // MARK: - Table view data source
-
-    
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let vc = segue.destination as? DescriptionViewController {
+            vc.result = sender as? Favorite
+            vc.behavior = .Favorite
+        }
+        
     }
-    */
 
 }
 
@@ -159,11 +106,24 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // Deletando temporariamente um favorito...
         if let data = favorite?[indexPath.row] {
-            deleteFavorite(data: data)
-            self.favorite?.remove(at: indexPath.row)
+            performSegue(withIdentifier: favoriteToDescriptionSegue, sender: data)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            if let data = favorite?[indexPath.row] {
+                deleteFavorite(data: data)
+                self.favorite?.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.layoutIfNeeded()
+            }
+        default:
+            return
         }
     }
     
