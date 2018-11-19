@@ -20,10 +20,10 @@ struct ResponseConfiguration: Decodable {
         let stillSizes:[String]?
     }
     
-    let images: [ImagesConfiguration]?
+    let images: ImagesConfiguration?
     let changeKeys: [String]?
     
-    init (images:[ImagesConfiguration]? = nil, changeKeys:[String]? = nil) {
+    init (images:ImagesConfiguration? = nil, changeKeys:[String]? = nil) {
         self.images = images
         self.changeKeys = changeKeys
     }

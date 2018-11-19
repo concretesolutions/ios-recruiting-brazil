@@ -29,11 +29,12 @@ class HomeTabBarRouter: NSObject {
             return
         }
         
-        view.viewControllers = viewControllers
-        
         //Instancing Interactor
         let interactor = HomeTabBarInteractor()
         //Instancing Presenter
         self.presenter = HomeTabBarPresenter(router: self, interactor: interactor, view: view)
+        
+        //
+        view.viewControllers = viewControllers
     }
 }

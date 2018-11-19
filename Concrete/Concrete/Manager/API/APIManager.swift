@@ -10,7 +10,7 @@
 
 import UIKit
 
-class APIManager: NSObject {
+class APIManager {
     
     // MARK: - Properties
     // MARK: Private
@@ -19,8 +19,8 @@ class APIManager: NSObject {
     private let session = URLSession(configuration: .default)
     
     // MARK: - Init
-    private override init() {
-        super.init()
+    private init() {
+        
     }
     
     // MARK: - Functions
