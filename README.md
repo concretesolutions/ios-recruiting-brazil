@@ -2,15 +2,15 @@
 
 ---
 
-Me chamo Victor Rodrigues, tenho 20 anos e estou no 4 Semestre de Sistemas de Informação, moro em Santos-SP e sou apaixonado por Swift, iOS e Desenvolvimento Mobile, já passei em algumas empresas como a Made In Web e Mobile como estágiario de Dev Junior e no momento estou na Crosoften Tecnologia por home office e vi essa oportunidade que vocês abriram como uma nova porta que eu sempre quis que se abrisse pra mim, já não vai ser a primeira vez que quero fazer parte do time que já é muito bom por sinal.
+Me chamo Victor Rodrigues, tenho 20 anos e estou cursando o 4º Semestre de Sistemas de Informação, resido em Santos/SP e sou um apaixonado por Swift, iOS e Desenvolvimento Mobile, tive experiência profissional na Made In Web e Mobile como estágiario de Desenvolvedor Junior e a atualmente presto serviços na Crosoften Tecnologia  como home office e vislumbrei na Concrete uma oportunidade de aprendizado, crescimento pessoal e profissional, fazer parte dessa empresa é para mim a realização de um sonho e uma importante etapa para minha carreira profissional. 
 
 ---
 
 Pods Usados:
 
-Alamofire
-ObjectMapper
-KingFisher
+- Alamofire
+- ObjectMapper
+- KingFisher
 
 ---
 
