@@ -2,6 +2,10 @@
 
 ---
 
+Me chamo Victor Rodrigues, tenho 20 anos e estou no 4 Semestre de Sistemas de Informação, moro em Santos-SP e sou apaixonado por Swift, iOS e Desenvolvimento Mobile, já passei em algumas empresas como a Made In Web e Mobile como estágiario de Dev Junior e no momento estou na Crosoften Tecnologia por home office e vi essa oportunidade que vocês abriram como uma nova porta que eu sempre quis que se abrisse pra mim, já não vai ser a primeira vez que quero fazer parte do time que já é muito bom por sinal.
+
+---
+
 ![Gif](assets/Logo-animado-1.gif)
 
 ## Bem vindo
