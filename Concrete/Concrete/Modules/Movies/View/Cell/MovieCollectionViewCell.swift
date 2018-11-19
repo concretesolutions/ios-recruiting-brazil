@@ -12,6 +12,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     // MARK: Private
+    private var imagePath:String!
     // MARK: Public
     @IBOutlet weak var outletMovieLabel:UILabel!
     @IBOutlet weak var outletMovieImage:UIImageView!
@@ -42,6 +43,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: Public
+    func cleanData() {
+        self.outletMovieImage.image = #imageLiteral(resourceName: "default-Movie")
+        self.outletMovieLabel.text = "Loading ..."
+    }
+    
     func set(name: String?){
         self.outletMovieLabel.text = name ?? "No Title"
     }
@@ -53,13 +59,17 @@ class MovieCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        
+        self.imagePath = imagePath
         
         ImageManager.shared.fetchImage(from: imagePath) { (result) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.outletMovieImage.image = data
+                    if self.imagePath == imagePath {
+                        self.outletMovieImage.image = data
+                    }else{
+                        self.outletMovieImage.image = #imageLiteral(resourceName: "default-Movie")
+                    }
                 }
             case .failure(let error):
                 Logger.logError(in: self, message: error.localizedDescription)

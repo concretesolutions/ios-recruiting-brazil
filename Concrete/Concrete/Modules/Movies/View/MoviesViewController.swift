@@ -81,6 +81,15 @@ class MoviesViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         self.presenter.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let movieCell = cell as? MovieCollectionViewCell else {
+            Logger.log(in: self, message: "Could not cast cell:\(cell) to MovieCollectionViewCell")
+            return
+        }
+        
+        movieCell.cleanData()
+    }
 }
 
 // MARK: - UICollectionViewFlowLayout
