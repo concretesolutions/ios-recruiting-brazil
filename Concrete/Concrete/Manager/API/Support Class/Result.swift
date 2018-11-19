@@ -13,4 +13,4 @@ public enum Result<Value> {
     case failure(Error)
 }
 
-public typealias ResultCallback<Value> = (Result<Value>) -> Void
+
