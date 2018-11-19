@@ -71,14 +71,14 @@ class FilterSwitch: UITableViewController {
         // Prepare cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath) as! FilterSwitchCell
         // Setup cell
-        let genreTitle = self.filter[indexPath.row]
+        let cellTitle = self.filter[indexPath.row]
         var checked = false
         if self.navigationItem.title == "Genres" {
-            checked = self.presenter.filterGenreChecked(with: genreTitle)
+            checked = self.presenter.filterGenreChecked(with: cellTitle)
         }else if self.navigationItem.title == "Date" {
-            checked = self.presenter.filterGenreChecked(with: genreTitle)
+            checked = self.presenter.filterYearChecked(with: cellTitle)
         }
-        cell.awakeFromNib(filterTitle: genreTitle, checked: checked)
+        cell.awakeFromNib(filterTitle: cellTitle, checked: checked)
         // Return
         return cell
     }
