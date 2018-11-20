@@ -25,27 +25,24 @@ class DescriptionViewController: UIViewController {
     
     // MARK: Class attributes
     var genresString = ""
-    var result: Any?
+    var data: Any?
     var behavior: DescriptionBehavior = .Normal
-    // TODO: Na controller anterior popular isFavorite
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         dataSourceSetup()
-        
+        super.viewWillAppear(animated)
     }
     
     @IBAction func favoriteButtonAction(_ sender: UIButton) {
         switch behavior {
         case .Favorite:
-            print("Este filme já foi favoritado :)")
-        // TODO: Chamar um alert avisando que o filme já foi favoritado.
+            self.customAlert(title: "Favorito", message: "Você já favoritou este filme.", actionTitle: "Ok")
         case .Normal:
-            if let data = result as? Result {
+            if let data = data as? Result {
                 saveFavorite(data: data)
                 behavior = .Favorite
                 favoriteButton.setImage(UIImage(named: "@icons-favoriteSelected"), for: .normal)
@@ -56,48 +53,51 @@ class DescriptionViewController: UIViewController {
     func dataSourceSetup() {
         switch behavior {
         case .Favorite:
-            if let data = result as? Favorite {
-                movieTitleLabel.text = data.title
-                rateAvarageLabel.text = "\(data.voteAverage) de 10"
-                descriptionTextView.text = data.overview
+            /// It is possible retrieve a favorite behavior from Favorite or Result instance
+            if let favorite = data as? Favorite {
+                movieTitleLabel.text = favorite.title
+                rateAvarageLabel.text = "\(favorite.voteAverage) de 10"
+                descriptionTextView.text = favorite.overview
                 favoriteButton.setImage(UIImage(named: "@icons-favoriteSelected"), for: .normal)
-                if let backdropPath = data.backdropPath {
+                if let backdropPath = favorite.backdropPath {
                     setBackdropImage(backdropPath)
                 }
-                if let releaseDate = data.releaseDate {
+                if let releaseDate = favorite.releaseDate {
                     setYearRelease(releaseDate as Date)
                 }
-                if let genre = data.genres {
+                if let genre = favorite.genres {
                     genreListLabel.text = genre
                 }
-            } else if let data = result as? Result {
-                movieTitleLabel.text = data.title
-                rateAvarageLabel.text = "\(data.voteAverage ?? 0.0) de 10"
-                descriptionTextView.text = data.overview
+            } else if let result = data as? Result {
+                movieTitleLabel.text = result.title
+                rateAvarageLabel.text = "\(result.voteAverage ?? 0.0) de 10"
+                descriptionTextView.text = result.overview
                 favoriteButton.setImage(UIImage(named: "@icons-favoriteSelected"), for: .normal)
-                if let backdropPath = data.backdropPath {
+                if let backdropPath = result.backdropPath {
                     setBackdropImage(backdropPath)
                 }
-                if let releaseDate = data.releaseDate {
+                if let releaseDate = result.releaseDate {
                     setYearRelease(releaseDate)
                 }
-                if let ids = data.genres {
+                if let ids = result.genres {
                     setFormatedStringGenres(ids)
                 }
             }
+            
+        /// To normal behavior is just necessary a Result instance
         case .Normal:
-            guard let data = result as? Result else {return}
-            movieTitleLabel.text = data.title
-            rateAvarageLabel.text = "\(data.voteAverage ?? 0.0) de 10"
-            descriptionTextView.text = data.overview
+            guard let result = data as? Result else {return}
+            movieTitleLabel.text = result.title
+            rateAvarageLabel.text = "\(result.voteAverage ?? 0.0) de 10"
+            descriptionTextView.text = result.overview
             favoriteButton.setImage(UIImage(named: "@icons-favoriteUnselected"), for: .normal)
-            if let backdropPath = data.backdropPath {
+            if let backdropPath = result.backdropPath {
                 setBackdropImage(backdropPath)
             }
-            if let releaseDate = data.releaseDate {
+            if let releaseDate = result.releaseDate {
                 setYearRelease(releaseDate)
             }
-            if let ids = data.genres {
+            if let ids = result.genres {
                 setFormatedStringGenres(ids)
             }
         }
@@ -107,13 +107,7 @@ class DescriptionViewController: UIViewController {
     private func saveFavorite (data: Result) {
         let newFavorite = data.convertResultInFavorite(with: genresString)
         let persistMethod = FavoriteServices.createFavorite
-        persistMethod(newFavorite) { (_, error) in
-            
-            
-            if error != nil {
-                self.behavior = .Normal
-                // TODO: Trazer o behavior de erro genérico
-            }
+        persistMethod(newFavorite) { (_, _) in
         }
     }
     

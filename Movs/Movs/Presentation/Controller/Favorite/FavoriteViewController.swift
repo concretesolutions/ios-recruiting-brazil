@@ -69,7 +69,7 @@ class FavoriteViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? DescriptionViewController {
-            vc.result = sender as? Favorite
+            vc.data = sender as? Favorite
             vc.behavior = .Favorite
         }
         

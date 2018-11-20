@@ -32,22 +32,18 @@ class FavoriteDAO {
     /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
     static func findAll() throws -> [Favorite] {
         // list of favorite to be returned
-        var packList: [Favorite]
-        
+        var favorite: [Favorite]
         do {
-            // creating fetch request
-            //let request:NSFetchRequest = NSFetchRequest<favorite>()
             
             let request = NSFetchRequest<Favorite>(entityName: "Favorite")
-            
             // perform search
-            packList = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+            favorite = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
             
         } catch {
             throw Errors.DatabaseFailure
         }
         
-        return packList
+        return favorite
     }
     
     

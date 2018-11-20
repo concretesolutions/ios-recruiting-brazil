@@ -27,6 +27,8 @@ class PopularViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
+    var fetchingMore = false
+    var page = 1
     
     let popularMovieCellIdentifier = "popularCell"
     let popularToDescriptionSegue = "PopularToDescription"
@@ -34,16 +36,16 @@ class PopularViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dataSetup()
     }
     
     func dataSetup() {
         tableView.tableFooterView = UIView()
-        fetchPopularMovieData(page: 1) { (popular) -> Void in
+        fetchPopularMovieData(page: page) { (popular) -> Void in
             if let data = popular {
                 self.popularMovie = data
                 self.setBehavior(newBehavior: .Success)
@@ -96,13 +98,40 @@ class PopularViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let segueData = sender as? CustomSegueSender else { return }
         if let vc = segue.destination as? DescriptionViewController {
-            vc.result = segueData.result
+            vc.data = segueData.result
             vc.behavior = segueData.behavior
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightForRow
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.height && contentHeight != 0.0 {
+            if !fetchingMore {
+                beginBatchFetch()
+            }
+        }
+    }
+    
+    func beginBatchFetch() {
+        fetchingMore = true
+        self.page += 1
+        fetchPopularMovieData(page: page) { (popular) -> Void in
+            if let data = popular {
+                if let oldResults = self.popularMovie?.results,
+                    let newResults = data.results {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0 , execute: {
+                        self.popularMovie?.results? = oldResults + newResults
+                        self.fetchingMore = false
+                    })
+                }
+            }
+        }
+        
     }
 
 }

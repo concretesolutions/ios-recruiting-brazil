@@ -14,7 +14,7 @@ struct PopularMovie {
     let page: Int?
     let totalResults: Int?
     let totalPages: Int?
-    let results: [Result]?
+    var results: [Result]?
 }
 
 extension PopularMovie: Codable {
