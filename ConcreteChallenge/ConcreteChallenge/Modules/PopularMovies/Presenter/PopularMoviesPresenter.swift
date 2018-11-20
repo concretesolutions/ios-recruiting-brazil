@@ -38,5 +38,13 @@ class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractor
     func didFailedToFetchMovies() {
         self.view?.setActivityIndicator(to: false)
         self.view?.showErrorMessage()
-    }    
+    }
+    
+    func didChangeSearchBar(with text: String) {
+        self.interactor.searchMovies(with: text)
+    }
+    
+    func didSearchMovies(filteredMovies: [Movie]) {
+        self.view?.show(movies: filteredMovies)
+    }
 }

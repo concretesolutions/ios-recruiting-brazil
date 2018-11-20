@@ -36,4 +36,8 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
             }
         }
     }
+    
+    func searchMovies(with text: String) {
+        
+    }
 }

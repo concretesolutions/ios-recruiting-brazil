@@ -33,7 +33,7 @@ protocol PopularMoviesPresentation: class {
     func viewDidLoad()
     func didRequestMovies()
     func didTapMovieCell(of movie: Movie)
-    func didChangeSearchTextField(with text: String)
+    func didChangeSearchBar(with text: String)
 }
 
 protocol PopularMoviesInteractorInput: class {
