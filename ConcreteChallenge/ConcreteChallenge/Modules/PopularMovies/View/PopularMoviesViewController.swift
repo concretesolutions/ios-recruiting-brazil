@@ -73,6 +73,8 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCol
     }
     
     func didReachEndOfCollectionView() {
+        // Check if the searc bar is in use.
+        // If it is use it should not fetch more movies
         if self.searchBar.text == "" {
             self.presenter.didRequestMovies()
         }

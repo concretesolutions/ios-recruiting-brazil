@@ -13,6 +13,11 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
     // MARK: - Properties
     var output: PopularMoviesInteractorOutput!
     
+    // If there is an error it will try to request again
+    // Max of 5 times
+    var attempt = 1
+    var maxAttempts = 5
+    
     // MARK: - PopularMoviesInteractorInput Functions
     func fetchMovies() {
         MovieDataManager.fetchPopularMovies { (status) in
@@ -29,10 +34,19 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
                             }
                         }
                         self.output.didFetch(movies: MovieDataManager.movies)
+                        
+                        // Reset attempt counter
+                        self.attempt = 1
                     }
                 })
             } else {
-                self.output.didFailedToFetchMovies()
+                if self.attempt >= self.maxAttempts {
+                    self.output.didFailedToFetchMovies()
+                } else {
+                    // Increment Attempt and Try Again
+                    self.attempt += 1
+                    self.fetchMovies()
+                }
             }
         }
     }

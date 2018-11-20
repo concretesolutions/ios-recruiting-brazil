@@ -14,7 +14,7 @@ class MovieDataManager {
     static var movies: [Movie] = []
     static var genres: [Genre] = []
     
-    static private var page: Int = 1
+    static private var page: Int = 10
     
     // The api_key should be into the info.plist but its here for easy testing
     static private let getPopularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=0aa2fda064d1eec9e68bccc4220ddf7b&language=en-US&page="
@@ -25,6 +25,10 @@ class MovieDataManager {
         guard let popularMoviesURL = URL(string: self.getPopularMoviesURL + String(self.page)) else { return }
         var request = URLRequest(url: popularMoviesURL)
         request.httpMethod = "GET"
+        
+        // Increment page number for the next request
+        // It is here because if there is any errors in one page it will fetch the next page
+        self.page += 1
         
         // Making GET api request
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -40,9 +44,8 @@ class MovieDataManager {
                     
                     // Decode it into a PopularMoviesResponse with Movies
                     let popularMoviesResponse = try decoder.decode(PopularMoviesResponse.self, from: data)
-                    self.movies.append(contentsOf: popularMoviesResponse.results) 
-
-                    self.page += 1
+                    self.movies.append(contentsOf: popularMoviesResponse.results)
+                    
                     completion(.success)
                 } catch let decoderError {
                     print("Error decoding json: ", decoderError)
