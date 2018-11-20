@@ -19,7 +19,7 @@ class Movie: Decodable {
     var genres: [Genre]
     var overview: String
     var posterImage: UIImage?
-    var isFavorite: Bool = false
+    var isFavorite: Bool
     
     enum MovieKeys: String, CodingKey {
         case Id = "id"
@@ -31,13 +31,14 @@ class Movie: Decodable {
     }
     
     // MARK: - Initializers
-    init(id: Int, title: String, posterPath: String?, year: Int, genres: [Genre], overview: String) {
+    init(id: Int, title: String, posterPath: String?, year: Int, genres: [Genre], overview: String, isFavorite: Bool = false) {
         self.id = id
         self.title = title
         self.posterPath = posterPath
         self.year = year
         self.genres = genres
         self.overview = overview
+        self.isFavorite = isFavorite
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -49,14 +50,10 @@ class Movie: Decodable {
         let releaseDate: String = try container.decode(String.self, forKey: .ReleaseDate)
         let genreIds: [Int] = try container.decode([Int].self, forKey: .GenreIds)
         let overview: String = try container.decode(String.self, forKey: .Overview)
-        
         let year: Int = Int(releaseDate.split(separator: "-").first ?? "0000") ?? 0000
-        // TODO: Get genre objects from LocalDataManager
-        let genres: [Genre] = genreIds.map { (id) -> Genre in
-            return Genre(id: id, name: "Genre \(id)")
-        }
-        
-        self.init(id: id, title: title, posterPath: posterPath, year: year, genres: genres, overview: overview)
+        let genres = GenreDataManager.readGenresByIds(genreIds)
+        let isFavorite = MovieDataManager.isFavoriteMovie(id: id)
+        self.init(id: id, title: title, posterPath: posterPath, year: year, genres: genres, overview: overview, isFavorite: isFavorite)
     }
     
     
