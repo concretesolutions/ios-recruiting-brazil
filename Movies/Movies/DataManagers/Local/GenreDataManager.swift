@@ -11,11 +11,19 @@ import CoreData
 
 class GenreDataManager {
     
-    // MARK: - Properties
-    
-    private static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     // MARK: - Aux functions
+    
+    private static var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Movies")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    private static let context = persistentContainer.viewContext
     
     private static func saveContext() {
         if context.hasChanges {

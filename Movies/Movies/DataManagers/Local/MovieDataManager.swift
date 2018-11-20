@@ -11,11 +11,19 @@ import CoreData
 
 class MovieDataManager {
     
-    // MARK: - Properties
-    
-    private static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     // MARK: - Aux functions
+    
+    private static var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Movies")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    private static let context = persistentContainer.viewContext
     
     private static func saveContext() {
         if context.hasChanges {
@@ -122,7 +130,7 @@ class MovieDataManager {
         saveContext()
     }
     
-    static func isFavoriteMovid(id: Int) -> Bool {
+    static func isFavoriteMovie(id: Int) -> Bool {
         var movies: [Movie] = []
         let moviesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MovieModel.entityName)
         moviesRequest.returnsObjectsAsFaults = false
