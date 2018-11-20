@@ -8,14 +8,21 @@
 
 import UIKit
 
+protocol CollectionViewPagingDelegate {
+    func shouldFetchNextPage()
+}
+
 final class PopularMoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     public var movies:[Movie]
+    var delegate: CollectionViewPagingDelegate?
     
-    init(movies: [Movie], collectionView: UICollectionView) {
+    init(movies: [Movie], collectionView: UICollectionView, delegate: CollectionViewPagingDelegate) {
         self.movies = movies
         super.init()
+        self.delegate = delegate
         registerCells(in: collectionView)
+        collectionView.prefetchDataSource = self
     }
     
     private func registerCells(in collectionView: UICollectionView) {
@@ -39,13 +46,14 @@ final class PopularMoviesCollectionViewDataSource: NSObject, UICollectionViewDat
     
 }
 
-extension MutableCollection {
-    mutating func map(transform: (Element) -> Element) {
-        if isEmpty { return }
-        var index = self.startIndex
-        for element in self {
-            self[index] = transform(element)
-            formIndex(after: &index)
+extension PopularMoviesCollectionViewDataSource: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let itemIndex = indexPaths.first!.row
+        print(itemIndex)
+        if itemIndex > (movies.count - 10) {
+            print("Prefetch, itemIndex: \(itemIndex)\n")
+            delegate?.shouldFetchNextPage()
         }
+        
     }
 }

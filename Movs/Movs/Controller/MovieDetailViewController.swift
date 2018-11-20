@@ -55,9 +55,8 @@ class MovieTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            //FIXME: placeholer image
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: ThumbnailTableViewCell.self)
-            cell.setup(thumbImage: movie.thumbnail!)
+            cell.setup(thumbImage: movie.thumbnail ?? UIImage(named: "placeholder_poster")!)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailTableViewCell.self)

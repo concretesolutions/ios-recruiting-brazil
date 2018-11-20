@@ -15,7 +15,7 @@ struct Movie {
     var genres: [Genre]
     var overview: String
     var releaseYear: String
-    var thumbFilePath: String
+    var thumbFilePath: String?
     var thumbnail: UIImage?
     var isFavourite: Bool = false
     
@@ -35,8 +35,7 @@ struct Movie {
         overview = movieRlm.overview
         releaseYear = movieRlm.releaseYear
         thumbFilePath = ""
-        //FIXME: - Placeholder Image
-        thumbnail = UIImage()
+        thumbnail = UIImage(named: "placeholder_poster")!
         if let aThumbData = movieRlm.thumbnailData {
             thumbnail = UIImage(data: aThumbData)
         }
@@ -45,7 +44,11 @@ struct Movie {
     func genresText() -> String {
         var genresText = ""
         self.genres.forEach({genresText.append("\($0.name ?? ""), ")})
-        genresText.removeLast(2)
+        if !(genresText.isEmpty){
+            genresText.removeLast(2)
+        } else {
+            return "No information"
+        }
         return genresText
     }
     
@@ -60,8 +63,7 @@ struct Movie {
             genres.forEach({ objectRlm.genres.append($0.rlm()) })
             objectRlm.overview = self.overview
             objectRlm.releaseYear = self.releaseYear
-            //FIXME: - Default Image
-            objectRlm.thumbnailData = (self.thumbnail ?? UIImage()).jpegData(compressionQuality: 1.0)
+            objectRlm.thumbnailData = (self.thumbnail ?? UIImage(named: "placeholder_poster")!).jpegData(compressionQuality: 1.0)
         }        
     }
     
@@ -83,7 +85,7 @@ extension Movie: Codable {
         id = try container.decode(Int.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         overview = try container.decode(String.self, forKey: .overview)
-        thumbFilePath = try container.decode(String.self, forKey: .thumbFilePath)
+        thumbFilePath = try? container.decode(String.self, forKey: .thumbFilePath)
         
         let releaseDate = try container.decode(String.self, forKey: .releaseYear)
         let index = releaseDate.index(releaseDate.startIndex, offsetBy: 4)

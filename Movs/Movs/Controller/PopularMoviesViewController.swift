@@ -21,16 +21,17 @@ class PopularMoviesViewController: UIViewController {
     }()
     
     //MARK: - Properties
+    var db = RealmManager.shared
     let tmdbService = TMDBService()
     let collectionView = PopularMoviesCollectionView()
     var collectionViewDatasource: PopularMoviesCollectionViewDataSource?
     var collectionViewDelegate: PopularMoviesCollectionViewDelegate?
     
-    var currentPage:Int = 0
+    var currentPage:Int = 1
     var genresList = [Genre]()
     var popularMovies = [Movie]()
     var favouriteMovies = [Movie]()
-    var db = RealmManager.shared
+    var isFetching = false
     
     //MARK: - UI States Control
     fileprivate enum LoadingState {
@@ -70,67 +71,6 @@ class PopularMoviesViewController: UIViewController {
         setupCollectionView(with: self.popularMovies)
     }
     
-    //MARK: - Setup
-    func initalSetup() {
-        getAllGenres()
-    }
-    
-    func setupCollectionView(with movies: [Movie]) {
-        let flaggedMovies = flagFavouriteMovies(movies)
-        collectionViewDatasource = PopularMoviesCollectionViewDataSource(movies: flaggedMovies, collectionView: collectionView)
-        collectionView.dataSource = collectionViewDatasource
-        
-        collectionViewDelegate = PopularMoviesCollectionViewDelegate(movies: flaggedMovies, delegate: self)
-        collectionView.delegate = collectionViewDelegate
-        
-        collectionView.reloadData()
-    }
-    
-    //MARK: Realm
-    func flagFavouriteMovies(_ movies: [Movie]) -> [Movie] {
-        favouriteMovies.removeAll()
-        db.getAll(MovieRlm.self).forEach({ favouriteMovies.append(Movie($0)) })
-        var flaggedMovies = movies
-        for i in 0..<flaggedMovies.count {
-            if let _ = favouriteMovies.first(where: {$0.id == flaggedMovies[i].id}) {
-                flaggedMovies[i].favourite()
-            }
-        }
-        return flaggedMovies
-    }
-    
-    //MARK: TMDB Service
-    func getPopularMovies(page: Int) {
-        loadingState = .loading
-        presentationState = .initial
-        tmdbService.getPopularMovies(page: page) { (result) in
-            switch result {
-            case .success(let movies):
-                self.popularMovies.append(contentsOf: movies)
-                self.setupCollectionView(with: self.popularMovies)
-                self.loadingState = .ready
-                self.presentationState = .showContent
-            case .error(let anError):
-                print("Error: \(anError)")
-                self.presentationState = .error
-            }
-        }
-    }
-    
-    func getAllGenres(){
-        loadingState = .loading
-        tmdbService.getGenres { (result) in
-            switch result {
-            case .success(let genres):
-                self.genresList = genres
-                self.getPopularMovies(page: 1)
-            case .error(let anError):
-                print("Error: \(anError)")
-                self.presentationState = .error
-            }
-        }
-    }
-    
     //MARK: UI States handlers
     fileprivate func updateLoading(state: LoadingState) {
         switch state {
@@ -155,6 +95,69 @@ class PopularMoviesViewController: UIViewController {
         }
     }
     
+    //MARK: - Setup
+    func initalSetup() {
+        getAllGenres()
+    }
+    
+    func setupCollectionView(with movies: [Movie]) {
+        let flaggedMovies = flagFavouriteMovies(movies)
+        collectionViewDatasource = PopularMoviesCollectionViewDataSource(movies: flaggedMovies, collectionView: collectionView, delegate: self)
+        collectionView.dataSource = collectionViewDatasource
+        
+        collectionViewDelegate = PopularMoviesCollectionViewDelegate(movies: flaggedMovies, delegate: self)
+        collectionView.delegate = collectionViewDelegate
+        
+        collectionView.reloadData()
+    }
+    
+    // Setup Datasource Realm
+    func flagFavouriteMovies(_ movies: [Movie]) -> [Movie] {
+        favouriteMovies.removeAll()
+        db.getAll(MovieRlm.self).forEach({ favouriteMovies.append(Movie($0)) })
+        var flaggedMovies = movies
+        for i in 0..<flaggedMovies.count {
+            if let _ = favouriteMovies.first(where: {$0.id == flaggedMovies[i].id}) {
+                flaggedMovies[i].favourite()
+            }
+        }
+        return flaggedMovies
+    }
+    
+    //MARK: TMDB Service
+    func getPopularMovies(page: Int) {
+//        loadingState = .loading
+//        presentationState = .initial
+        isFetching = true
+        tmdbService.getPopularMovies(page: page) { (result) in
+            switch result {
+            case .success(let movies):
+                self.popularMovies.append(contentsOf: movies)
+                self.setupCollectionView(with: self.popularMovies)
+                self.loadingState = .ready
+                self.presentationState = .showContent
+            case .error(let anError):
+                print("Error: \(anError)")
+                self.presentationState = .error
+            }
+            self.isFetching = false
+        }
+    }
+    
+    func getAllGenres(){
+        loadingState = .loading
+        tmdbService.getGenres { (result) in
+            switch result {
+            case .success(let genres):
+                self.genresList = genres
+                self.getPopularMovies(page: 1)
+            case .error(let anError):
+                print("Error: \(anError)")
+                self.presentationState = .error
+            }
+        }
+    }
+    
 }
 
 extension PopularMoviesViewController: MovieSelectionDelegate {
@@ -167,6 +170,16 @@ extension PopularMoviesViewController: MovieSelectionDelegate {
         navigationController?.pushViewController(movieVC, animated: true)
     }
 }
+
+extension PopularMoviesViewController: CollectionViewPagingDelegate {
+    func shouldFetchNextPage() {
+        if !isFetching {
+            currentPage += 1
+            getPopularMovies(page: currentPage)
+        }
+    }
+}
+
 
 extension PopularMoviesViewController: CodeView {
     func buildViewHierarchy() {
@@ -189,6 +202,7 @@ extension PopularMoviesViewController: CodeView {
     }
     
     func setupAdditionalConfiguration() {
+        presentationState = .initial
         view.backgroundColor = Style.colors.white
     }
 }

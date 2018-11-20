@@ -34,11 +34,16 @@ class PopularMoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var movie = movies[indexPath.row]
-        //FIXME: movie.thumbnail = placeholder image
         if let cell = collectionView.cellForItem(at: indexPath) as? PopularMoviesCollectionViewCell {
             movie.thumbnail = cell.imageView.image
+        } else {
+            movie.thumbnail = UIImage(named: "placeholder_poster")!
         }
         delegate?.didSelect(movie: movie)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
     }
     
 }
