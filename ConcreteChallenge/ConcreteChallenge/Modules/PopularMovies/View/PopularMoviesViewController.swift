@@ -51,8 +51,10 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCol
     
     func showErrorMessage() {
         DispatchQueue.main.async {
-            self.errorImage.isHidden = false
-            self.errorMessageLabel.isHidden = false            
+            if self.moviesCollectionView.isHidden == true {
+                self.errorImage.isHidden = false
+                self.errorMessageLabel.isHidden = false
+            }
         }
     }
 
