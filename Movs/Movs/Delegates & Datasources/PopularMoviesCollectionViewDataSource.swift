@@ -43,15 +43,12 @@ final class PopularMoviesCollectionViewDataSource: NSObject, UICollectionViewDat
         return cell
     }
     
-    
 }
 
 extension PopularMoviesCollectionViewDataSource: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let itemIndex = indexPaths.first!.row
-        print(itemIndex)
         if itemIndex > (movies.count - 10) {
-            print("Prefetch, itemIndex: \(itemIndex)\n")
             delegate?.shouldFetchNextPage()
         }
         

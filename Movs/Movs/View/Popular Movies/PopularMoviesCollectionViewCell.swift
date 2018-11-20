@@ -13,8 +13,10 @@ import SDWebImage
 
 class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
     
+    //MARK: - Properties
     var movie: Movie!
     
+    //MARK: Interface
     lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame:.zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,9 +30,8 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
         return view
     }()
     
-    lazy var nameLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = movie.title
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = Style.colors.mainYellow
@@ -43,11 +44,6 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
         let button = UIButton(frame: .zero)
         button.isUserInteractionEnabled = false
         button.imageView?.contentMode = .scaleToFill
-        if movie.isFavourite {
-            button.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
-        } else {
-            button.setImage(UIImage(named: "favorite_empty_icon")!, for: .normal)
-        }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -64,7 +60,7 @@ extension PopularMoviesCollectionViewCell: CodeView {
     func buildViewHierarchy() {
         contentView.addSubview(imageView)
         contentView.addSubview(detailView)
-        detailView.addSubview(nameLabel)
+        detailView.addSubview(titleLabel)
         detailView.addSubview(favouriteButton)
     }
     
@@ -83,7 +79,7 @@ extension PopularMoviesCollectionViewCell: CodeView {
             make.height.equalTo(imageView.snp.height).multipliedBy(0.30)
         }
         
-        nameLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(5)
             make.top.equalToSuperview()
@@ -92,7 +88,7 @@ extension PopularMoviesCollectionViewCell: CodeView {
         }
         
         favouriteButton.snp.makeConstraints { (make) in
-            make.left.equalTo(nameLabel.snp.right).offset(5)
+            make.left.equalTo(titleLabel.snp.right).offset(5)
             make.right.equalToSuperview().inset(5)
             make.bottom.equalToSuperview().inset(5)
         }
@@ -100,7 +96,18 @@ extension PopularMoviesCollectionViewCell: CodeView {
     }
     
     func setupAdditionalConfiguration() {
+        // download thumbnail
         imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + (movie.thumbFilePath ?? "")), placeholderImage: UIImage(named: "placeholder_poster")!, options: .progressiveDownload , completed: nil)
+        
+        // set title label text
+        titleLabel.text = movie.title
+        
+        // set button image
+        if movie.isFavourite {
+            favouriteButton.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
+        } else {
+            favouriteButton.setImage(UIImage(named: "favorite_empty_icon")!, for: .normal)
+        }
     }
     
 }
