@@ -17,47 +17,110 @@ class MoviesCollectionViewController: UICollectionViewController {
     @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
     var movies: [Movie] = []
     
+    var hasLoadedData = false
+    
     var filteredMovies = [Movie]()
+    
+    var canFilter: Bool = false
+    
+    var searchImageView = UIImageView()
+    var searchLabel = UILabel()
+    var hasAddedSearchImage: Bool = false
+    var searchText = ""
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         
-      self.tabBarController?.tabBar.isHidden = false
+        if hasLoadedData == false {
+            
+            self.activityIndicatorOutlet.isHidden = false
+            self.activityIndicatorOutlet.startAnimating()
+            
+            MovieDAO.getAll { (response, error) in
+                if error != nil{
+                    print("Erro ao retornar os dados da API")
+                    return
+                }//>>>>
+                if let responseObj = response as? Response{
+                    
+                    let movies = responseObj.results
+                    
+                    for movie in movies{
+                        if let tempMovie = movie as? Movie{
+                            print("xablau2")
+                            self.movies.append(tempMovie)
+                            print(tempMovie)
+                        }
+                    }
+                    
+                }
+                self.activityIndicatorOutlet.stopAnimating()
+                self.activityIndicatorOutlet.isHidden = true
+                self.collectionView.reloadData()
+                self.canFilter = true
+                self.hasLoadedData = true
+            }//>>>>>
+        }
         
-        //self.activityIndicatorOutlet.isHidden = false
-        //self.activityIndicatorOutlet.startAnimating()
+      self.tabBarController?.tabBar.isHidden = false
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
+        self.searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Movies..."
         
-        MovieDAO.getAll { (response, error) in
-            if error != nil{
-                return
-            }//>>>>
-            if let responseObj = response as? Response{
-                
-                let movies = responseObj.results
-                
-                for movie in movies{
-                    if let tempMovie = movie as? Movie{
-                        print("xablau2")
-                        self.movies.append(tempMovie)
-                        print(tempMovie)
+        
+        if hasLoadedData == false {
+            
+            self.activityIndicatorOutlet.isHidden = false
+            self.activityIndicatorOutlet.startAnimating()
+            
+            MovieDAO.getAll { (response, error) in
+                if error != nil{
+
+                    let errorText = "Um erro inesperado aconteceu. Tente novamente"
+                    let errorLabel = UILabel()
+                    errorLabel.center.x = self.collectionView.center.x
+                    errorLabel.center.y = self.collectionView.center.y
+                    errorLabel.frame.size = CGSize(width: 300, height: 150)
+                    errorLabel.textAlignment = .center
+                    errorLabel.text = errorText
+                    self.collectionView.addSubview(errorLabel)
+                    
+                    
+                    return
+                }//>>>>
+                if let responseObj = response as? Response{
+                    
+                    let movies = responseObj.results
+                    
+                    for movie in movies{
+                        if let tempMovie = movie as? Movie{
+                            print("xablau2")
+                            self.movies.append(tempMovie)
+                            print(tempMovie)
+                        }
                     }
+                    
                 }
-                
-            }
-            self.activityIndicatorOutlet.stopAnimating()
-            self.activityIndicatorOutlet.isHidden = true
-            self.collectionView.reloadData()
-        }//>>>>>
+                self.activityIndicatorOutlet.stopAnimating()
+                self.activityIndicatorOutlet.isHidden = true
+                self.collectionView.reloadData()
+                self.canFilter = true
+                self.hasLoadedData = true
+            }//>>>>>
+        }
+        
         
         self.navigationItem.searchController = searchController
         
@@ -91,9 +154,9 @@ class MoviesCollectionViewController: UICollectionViewController {
         print(self.movies.count)
         
         if isFiltering() {
-            cell?.setupCell(image: UIImage(named: "theMegPoster")!, title: self.filteredMovies[indexPath.row].title, movie: self.filteredMovies[indexPath.row])
+            cell?.setupCell(title: self.filteredMovies[indexPath.row].title, movie: self.filteredMovies[indexPath.row])
         }else{
-            cell?.setupCell(image: UIImage(named: "theMegPoster")!, title: self.movies[indexPath.row].title, movie: self.movies[indexPath.row])
+            cell?.setupCell(title: self.movies[indexPath.row].title, movie: self.movies[indexPath.row])
         }
         
        
@@ -109,6 +172,7 @@ class MoviesCollectionViewController: UICollectionViewController {
             
             if isFiltering(){
                 viewController.movie = self.filteredMovies[indexPath.row]
+                
             }else{
                 viewController.movie = self.movies[indexPath.row]
             }
@@ -121,13 +185,13 @@ class MoviesCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.row == self.movies.count/4*3 {
+        if indexPath.row == self.movies.count-1 {
             print(indexPath.row)
             
-            var InitPage = Int(NetworkManager.shared.initialPage)!
+            let InitPage = Int(NetworkManager.shared.initialPage)!
             print("#############")
             print(InitPage)
-            var newPage = InitPage + 1
+            let newPage = InitPage + 1
             print(newPage)
             NetworkManager.shared.initialPage = String(newPage)
             print(NetworkManager.shared.initialPage)
@@ -164,7 +228,7 @@ class MoviesCollectionViewController: UICollectionViewController {
 
 }
 
-extension MoviesCollectionViewController: UISearchResultsUpdating {
+extension MoviesCollectionViewController: UISearchResultsUpdating, UISearchControllerDelegate {
     // MARK: - UISearchResultsUpdating Delegate
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -178,13 +242,60 @@ extension MoviesCollectionViewController: UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredMovies = movies.filter({( movie : Movie) -> Bool in
+            self.searchText = searchText
+            print(self.searchText)
             return movie.title.lowercased().contains(searchText.lowercased())
         })
         collectionView.reloadData()
     }
     
+
+    
     func isFiltering() -> Bool {
+        
+        print("Filtrando")
+        
+        if (self.filteredMovies.isEmpty == true && !searchBarIsEmpty()) && hasAddedSearchImage == false {
+            print("Sua busca não retornou resultados")
+            
+            let searchText = "Sua busca por \"" + self.searchText + "\" não retornou resultados"
+            self.searchLabel.text = searchText
+            self.searchLabel.textAlignment = .center
+            self.searchLabel.frame.size = CGSize(width: 300, height: 150)
+            self.searchLabel.numberOfLines = 3
+            self.searchLabel.center = self.collectionView.center
+            
+            let searchImage = UIImage(named: "search_icon.png")
+            self.searchImageView = UIImageView(image: searchImage)
+            self.searchImageView.frame.size = CGSize(width: 100, height: 100)
+            self.searchImageView.center.x = self.collectionView.center.x
+            self.searchImageView.center.y = self.collectionView.center.y - 100
+            self.collectionView.addSubview(searchImageView)
+            self.collectionView.addSubview(searchLabel)
+            hasAddedSearchImage = true
+            
+        }
+        
+        if (self.filteredMovies.isEmpty == false && !searchBarIsEmpty()) && hasAddedSearchImage == true {
+            self.searchImageView.removeFromSuperview()
+            self.hasAddedSearchImage = false
+            self.searchLabel.removeFromSuperview()
+        }
+        
+        
         return searchController.isActive && !searchBarIsEmpty()
     }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        print("Dismiss")
+        
+        if self.hasAddedSearchImage == true {
+            self.searchImageView.removeFromSuperview()
+            self.searchLabel.removeFromSuperview()
+        }
+        
+    }
+    
+
     
 }

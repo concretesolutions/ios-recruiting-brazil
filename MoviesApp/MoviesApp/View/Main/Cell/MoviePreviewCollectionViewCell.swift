@@ -18,13 +18,13 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieTitleLabelOutlet: UILabel!
     @IBOutlet weak var favoriteButtonOutlet: UIButton!
     
-    func setupCell(image: UIImage, title: String, movie: Movie){
+    func setupCell(title: String, movie: Movie){
         
-        var imageUrl = "https://image.tmdb.org/t/p/w200"
-        var imageEndpoint = imageUrl + movie.poster_path
+        let imageUrl = "https://image.tmdb.org/t/p/w200"
+        let imageEndpoint = imageUrl + movie.poster_path
         print(imageEndpoint)
         
-        var url = URL(string: imageEndpoint)
+        let url = URL(string: imageEndpoint)
         
         if MovieDAO.isMovieFavorite(comparedMovie: movie){
             print(movie.title)
@@ -43,9 +43,7 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
     
     @IBAction func favoriteMovieButtonTapped(_ sender: Any) {
         
-       
-        
-        var favoriteMovies = MovieDAO.readAllFavoriteMovies()
+        let favoriteMovies = MovieDAO.readAllFavoriteMovies()
         
         for favoriteMovie in favoriteMovies {
             if favoriteMovie.title == self.movie?.title{

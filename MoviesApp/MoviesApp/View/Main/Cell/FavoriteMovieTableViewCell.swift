@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FavoriteMovieTableViewCell: UITableViewCell {
     
@@ -27,11 +28,23 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell(backdropImage: UIImage, title: String, detail:String, release:String){
+    func setupCell(title: String, detail:String, release:String, posterPath: String){
         
-        self.backdropImageOutlet.image = backdropImage
+        let imageUrl = "https://image.tmdb.org/t/p/w200"
+        let imageEndpoint = imageUrl + posterPath
+        
+        print(posterPath)
+        print(imageEndpoint)
+        
+        let url = URL(string: imageEndpoint)
+        
+        self.backdropImageOutlet.kf.setImage(with: url)
         self.movieTitleOutlet.text = title
-        self.movieYearOutlet.text = release
+        
+        var parts = release.components(separatedBy: "-")
+        print(parts)
+        
+        self.movieYearOutlet.text = parts[0]
         self.movieDescriptionOutlet.text = detail
         
     }

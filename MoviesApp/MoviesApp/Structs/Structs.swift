@@ -37,6 +37,12 @@ struct Movie: DataObject{
     
 }
 
+struct Genres: DataObject{
+    
+    var genres: [Genre]
+    
+}
+
 struct Genre: DataObject{
     
     var id: Int

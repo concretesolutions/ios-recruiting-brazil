@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kcx-zx-FvM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eHy-Fb-DqX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Selected Movie Table View Controller-->
+        <!--Movie-->
         <scene sceneID="VCJ-n7-8dp">
             <objects>
                 <tableViewController storyboardIdentifier="selectedMovieViewController" id="kcx-zx-FvM" customClass="SelectedMovieTableViewController" customModule="MoviesApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cwR-bB-xrI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cwR-bB-xrI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,21 +51,30 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUJ-Vc-e2e">
-                                                    <rect key="frame" x="26" y="16" width="343" height="18"/>
+                                                    <rect key="frame" x="26" y="16.5" width="288" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2w-68-aZG">
-                                                    <rect key="frame" x="344" y="17" width="15" height="15"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button" image="favorite_gray_icon"/>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2w-68-aZG">
+                                                    <rect key="frame" x="324" y="13.5" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="2Hs-Fy-ES3"/>
+                                                        <constraint firstAttribute="height" constant="25" id="YX9-q7-0nO"/>
+                                                    </constraints>
+                                                    <state key="normal" image="favorite_gray_icon"/>
+                                                    <connections>
+                                                        <action selector="isFavoriteButtonTapped:" destination="kcx-zx-FvM" eventType="touchUpInside" id="VOv-OO-HZP"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="eUJ-Vc-e2e" firstAttribute="leading" secondItem="fWK-ZL-Bne" secondAttribute="leadingMargin" constant="10" id="Dz2-ix-4ym"/>
-                                                <constraint firstItem="eUJ-Vc-e2e" firstAttribute="trailing" secondItem="fWK-ZL-Bne" secondAttribute="trailingMargin" constant="10" id="EM2-cR-TVw"/>
+                                                <constraint firstItem="s2w-68-aZG" firstAttribute="leading" secondItem="eUJ-Vc-e2e" secondAttribute="trailing" constant="10" id="RsI-Wo-AXh"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="s2w-68-aZG" secondAttribute="trailing" constant="10" id="ZNO-wQ-TC5"/>
+                                                <constraint firstItem="s2w-68-aZG" firstAttribute="top" secondItem="fWK-ZL-Bne" secondAttribute="topMargin" constant="2" id="jTK-LS-35P"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="s2w-68-aZG" secondAttribute="bottom" constant="2" id="m7M-QN-RFa"/>
                                                 <constraint firstItem="eUJ-Vc-e2e" firstAttribute="top" secondItem="fWK-ZL-Bne" secondAttribute="topMargin" constant="5" id="mnK-E1-R5U"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="eUJ-Vc-e2e" secondAttribute="bottom" constant="5" id="nkM-Tv-yjD"/>
                                             </constraints>
@@ -149,7 +158,9 @@
                             <outlet property="delegate" destination="kcx-zx-FvM" id="1x5-RH-xbh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Movie" id="oKC-rj-S3K"/>
                     <connections>
+                        <outlet property="isFavoriteButton" destination="s2w-68-aZG" id="81I-5x-WVz"/>
                         <outlet property="movieGenreOutlet" destination="BdW-CF-eb2" id="i06-Jv-z3e"/>
                         <outlet property="movieImageOutlet" destination="tiD-02-JfP" id="jOO-us-yEs"/>
                         <outlet property="movieOverviewOutlet" destination="gNy-J5-3SV" id="Y5g-b4-bem"/>
@@ -158,6 +169,24 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHc-kw-SKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3658.4000000000001" y="-2529.0854572713647"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Q0w-EM-qTt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eHy-Fb-DqX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9JQ-15-KWG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kcx-zx-FvM" kind="relationship" relationship="rootViewController" id="p9Z-hi-d0K"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GfM-wJ-Ouw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2719.1999999999998" y="-2529.0854572713647"/>
         </scene>

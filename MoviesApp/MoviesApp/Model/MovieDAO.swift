@@ -19,10 +19,13 @@ public class MovieDAO{
         
     }
     
-    
-    static func getIimage(backdrop_path: String, completionHandler: @escaping (UIImage?, Error?) -> Void){
-        NetworkManager.makeImageRequest(to: "https://image.tmdb.org/t/p/w500", imagePath: backdrop_path, completionHandler: completionHandler as! (UIImage?, Error?) -> Void)
+    static func getGenres(completionHandler: @escaping (DataObject?, Error?) -> Void){
+        
+        NetworkManager.makeGenreGetRequest(to: NetworkManager.shared.genreURL, objectType: Genres.self, completionHandler: completionHandler)
+
     }
+    
+    
     
     static func saveMovieAsFavorite(movie: Movie){
             
@@ -30,8 +33,25 @@ public class MovieDAO{
             let context = appDelegate.persistentContainer.viewContext
             let managedMovie = NSEntityDescription.insertNewObject(forEntityName: "Movie", into: context)
         
+            var genresString = ""
+        
+            for genre in movie.genre_ids{
+            
+                if genresString == ""{
+                  genresString += String(genre)
+                }else{
+                  genresString += "|" + String(genre)
+                }
+               
+            }
+        
+            print(genresString)
+        
             managedMovie.setValue(movie.title, forKey: "title")
             managedMovie.setValue(movie.release_date, forKey: "release_date")
+            managedMovie.setValue(genresString, forKey: "genres")
+            managedMovie.setValue(movie.overview, forKey: "overview")
+            managedMovie.setValue(movie.poster_path, forKey: "poster_path")
         
             do {
                 try context.save()
@@ -59,10 +79,22 @@ public class MovieDAO{
             if movies.count > 0 {
                 for movie in movies{
                     
-                    var title = movie.value(forKey: "title") as! String
-                    var release_date = movie.value(forKey: "release_date") as! String
+                    let title = movie.value(forKey: "title") as! String
+                    let release_date = movie.value(forKey: "release_date") as! String
+                    let poster_path = movie.value(forKey: "poster_path") as! String
+                    let overview = movie.value(forKey: "overview") as! String
                     
-                    var returnMovie = Movie.init(vote_count: 0, id: 0, video: false, vote_average: 0, popularity: 0, genre_ids: [1,2], title: title, poster_path: "test", release_date: release_date, overview: "test")
+                    var genres = [Int]()
+                    let genreString = movie.value(forKey: "genres") as! String
+                    
+                    for string in genreString.components(separatedBy: "|") {
+                        print(string)
+                        genres.append(Int(string)!)
+                    }
+                    
+                    print(genres)
+                    
+                    let returnMovie = Movie.init(vote_count: 0, id: 0, video: false, vote_average: 0, popularity: 0, genre_ids: genres, title: title, poster_path: poster_path, release_date: release_date, overview: overview)
                     
                     
                     returnArray.append(returnMovie)
@@ -81,6 +113,29 @@ public class MovieDAO{
     
     static func deleteFavoriteMovie(favoriteMovie: Movie){
         
+        print(favoriteMovie.title)
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Movie")
+        fetchRequest.predicate = NSPredicate(format: "title = %@", favoriteMovie.title)
+        
+        do{
+            let test = try managedContext.fetch(fetchRequest)
+            
+            let objectToDelete = test[0] as! NSManagedObject
+            managedContext.delete(objectToDelete)
+            
+            do{
+                try managedContext.save()
+            }catch{
+                print("error")
+            }
+            
+        }catch{
+            print("error")
+        }
     }
     
     static func isMovieFavorite(comparedMovie: Movie) -> Bool{
@@ -101,12 +156,10 @@ public class MovieDAO{
                 
                 for movie in movies{
                     
-                    var title = movie.value(forKey: "title") as! String
+                    let title = movie.value(forKey: "title") as! String
                     
                     if comparedMovie.title == title{
-                        
                         print(comparedMovie.title + " + " + title)
-                        
                         returnValue = true
                     }
                 }
