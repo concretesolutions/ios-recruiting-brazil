@@ -73,7 +73,9 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCol
     }
     
     func didReachEndOfCollectionView() {
-        print("Chegou ao fim")
+        if self.searchBar.text == "" {
+            self.presenter.didRequestMovies()
+        }
     }
     
     // MARK: - Functions
