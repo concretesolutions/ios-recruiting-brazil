@@ -14,6 +14,7 @@ class FavouriteMoviesViewController: UIViewController {
     let tableView = FavouriteMoviesTableView()
     var tableViewDelegate: FavouriteMoviesTableViewDelegate?
     var tableViewDataSource: FavouriteMoviesTableViewDataSource?
+    let searchController = UISearchController(searchResultsController: nil)
     
     var favouriteMovies = [Movie]()
     
@@ -26,6 +27,7 @@ class FavouriteMoviesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFavouriteMovies()
+        setupSearchBar()
     }
     
     func setupTableView(with movies: [Movie]) {
@@ -80,6 +82,49 @@ extension FavouriteMoviesViewController: CodeView {
         view.backgroundColor = Design.colors.white
         navigationController?.navigationBar.tintColor = Design.colors.dark
         navigationController?.navigationBar.barTintColor = Design.colors.mainYellow
+    }
+    
+}
+
+extension FavouriteMoviesViewController: UISearchBarDelegate {
+    func setupSearchBar() {
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search"
+        searchController.obscuresBackgroundDuringPresentation = true
+        navigationItem.searchController = searchController
+        navigationItem.searchController?.isActive = true
+        definesPresentationContext = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBarIsEmpty() {
+            setupTableView(with: favouriteMovies)
+        } else {
+            filterContentForSearchText(searchText)
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBarIsEmpty() {
+            setupTableView(with: favouriteMovies)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchController.dismiss(animated: true, completion: nil)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        setupTableView(with: favouriteMovies)
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        let filteredMovies = favouriteMovies.filter({$0.title.lowercased().contains(searchText.lowercased())})
+        setupTableView(with: filteredMovies)
     }
     
 }
