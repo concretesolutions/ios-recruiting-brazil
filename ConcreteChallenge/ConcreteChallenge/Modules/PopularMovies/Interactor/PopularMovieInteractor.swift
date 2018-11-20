@@ -38,6 +38,17 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
     }
     
     func searchMovies(with text: String) {
+        var filteredMovies: [Movie] = []
         
+        if text.isEmpty {
+            filteredMovies = MovieDataManager.movies
+        } else {
+            let formattedText = text.lowercased().folding(options: .diacriticInsensitive, locale: .current)
+            filteredMovies = MovieDataManager.movies.filter { (movie) -> Bool in
+                // Looks for matches with Movie Title ignoring case sensitive and Accents
+                movie.title.lowercased().folding(options: .diacriticInsensitive, locale: .current).range(of: formattedText) != nil
+            }
+        }
+        self.output.didSearchMovies(filteredMovies: filteredMovies)
     }
 }

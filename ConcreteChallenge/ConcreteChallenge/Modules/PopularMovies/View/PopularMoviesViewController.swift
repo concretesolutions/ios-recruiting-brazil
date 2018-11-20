@@ -100,6 +100,7 @@ extension PopularMoviesViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         // Erase Search
         self.searchBar.text = nil
+        self.presenter.didChangeSearchBar(with: "")
         
         // Hide cancel button
         self.searchBar.showsCancelButton = false
