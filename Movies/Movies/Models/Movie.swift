@@ -6,7 +6,7 @@
 //  Copyright © 2018 Renan Germano. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Movie: Decodable {
     
@@ -18,6 +18,8 @@ class Movie: Decodable {
     var year: Int
     var genres: [Genre]
     var overview: String
+    var posterImage: UIImage?
+    var isFavorite: Bool = false
     
     enum MovieKeys: String, CodingKey {
         case Id = "id"
