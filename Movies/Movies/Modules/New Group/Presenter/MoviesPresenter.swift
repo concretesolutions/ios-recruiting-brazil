@@ -27,7 +27,11 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     }
     
     func didTapFavoriteButtonTo(movie: Movie) {
-        
+        if movie.isFavorite {
+            self.interactor.unfavorite(movie: movie)
+        } else {
+            self.interactor.favorite(movie: movie)
+        }
     }
     
     func didSearchMoviesWith(name: String) {
@@ -37,7 +41,11 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     // MARK: - MoviesInterectorOutput protocol functions
     
     func didReadMoviesForPage(_ page: Int, _ movies: [Movie]) {
-        self.view?.present(movies: movies)
+        if page == 1 {
+            self.view?.present(movies: movies)
+        } else {
+            
+        }
     }
     
     func didFilterMoviesWithName(_ name: String, _ movies: [Movie]) {
@@ -47,5 +55,5 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     func didRemoveFilter(_ movies: [Movie]) {
         self.view?.present(movies: movies)
     }
-    
+
 }

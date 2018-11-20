@@ -19,12 +19,18 @@ class MovieCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     var movie: Movie!
+    var presenter: MoviesPresentation!
+    private let favoriteFullImage = UIImage(named: "favorite_full_icon")
+    private let favoriteGrayImage = UIImage(named: "favorite_gray_icon")
     
     // MARK: - Util functions
     
     func set(movie: Movie) {
+        
         self.movie = movie
         self.title.text = movie.title
+        self.favoriteButton.addTarget(self, action: #selector(self.didTapFavoriteButton), for: UIControl.Event.touchUpInside)
+        self.setFavoriteButtonImage()
         if let posterImage = movie.posterImage {
             self.poster.image = posterImage
         } else {
@@ -39,9 +45,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func set(image: UIImage) {
-        self.poster.hideActivityIndicator()
-        self.poster.image = image
+    @objc func didTapFavoriteButton() {
+        self.presenter?.didTapFavoriteButtonTo(movie: self.movie)
+        self.setFavoriteButtonImage()
+    }
+    
+    private func setFavoriteButtonImage() {
+        self.favoriteButton.setImage(self.movie.isFavorite ? self.favoriteFullImage : self.favoriteGrayImage, for: .normal)
     }
     
 }

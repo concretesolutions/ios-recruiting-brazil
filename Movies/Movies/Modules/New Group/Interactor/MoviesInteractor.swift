@@ -6,7 +6,7 @@
 //  Copyright © 2018 Renan Germano. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class MoviesInteractor: MoviesUseCase {
     
@@ -31,6 +31,22 @@ class MoviesInteractor: MoviesUseCase {
     
     func removeFilter() {
         output.didRemoveFilter(self.current)
+    }
+    
+    func favorite(movie: Movie) {
+        DispatchQueue.main.async {
+            MovieDataManager.createFavoriteMovie(movie)
+            ImageDataManager.saveImage(posterPath: movie.posterPath ?? "", image: movie.posterImage ?? UIImage())
+        }
+        movie.isFavorite = true
+    }
+    
+    func unfavorite(movie: Movie) {
+        DispatchQueue.main.async {
+            MovieDataManager.deleteFavoriteMovie(withId: movie.id)
+            ImageDataManager.deleteImage(withPosterPath: movie.posterPath ?? "")
+        }
+        movie.isFavorite = false
     }
     
 }

@@ -29,7 +29,7 @@ class MoviesViewController: UIViewController, MoviesView {
         
         self.delegate = MoviesCVDelegate(presenter: self.presenter)
         self.movies.delegate = self.delegate
-        self.dataSource = MoviesCVDataSource(collectionView: self.movies)
+        self.dataSource = MoviesCVDataSource(collectionView: self.movies, presenter: self.presenter)
         self.movies.dataSource = self.dataSource
         self.presenter.viewDidLoad()
         

@@ -16,12 +16,13 @@ class MoviesCVDataSource: NSObject, UICollectionViewDataSource {
     
     private var movies: [Movie] = []
     private weak var collectionView: MoviesCollectionView?
+    private var presenter: MoviesPresentation
     
     // MARK: - Initializers
     
-    init(collectionView: MoviesCollectionView) {
+    init(collectionView: MoviesCollectionView, presenter: MoviesPresentation) {
         self.collectionView = collectionView
-//        self.collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.presenter = presenter
     }
     
     // MARK: - UICollectionViewDataSource protocol functions
@@ -32,8 +33,10 @@ class MoviesCVDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let reusableCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
         if let movieCell = reusableCell as? MovieCollectionViewCell {
             movieCell.set(movie: self.movies[indexPath.row])
+            movieCell.presenter = self.presenter
         }
         
         return reusableCell
@@ -49,17 +52,5 @@ class MoviesCVDataSource: NSObject, UICollectionViewDataSource {
     func add(movies: [Movie]) {
         
     }
-    
-    func set(image: UIImage, forIndex index: Int) {
-        let section = index/2
-        let row = index - (2 * section)
-        let indexPath = IndexPath(row: row, section: section)
-        
-        if let movieCell = self.collectionView?.cellForItem(at: indexPath) as? MovieCollectionViewCell{
-            movieCell.set(image: image)
-        }
-        
-    }
-    
     
 }

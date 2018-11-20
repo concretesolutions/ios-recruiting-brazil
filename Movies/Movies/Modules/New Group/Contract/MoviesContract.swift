@@ -36,6 +36,8 @@ protocol MoviesUseCase {
     func readMoviesFor(page: Int)
     func filterMoviesWith(name: String)
     func removeFilter()
+    func favorite(movie: Movie)
+    func unfavorite(movie: Movie)
 }
 
 protocol MoviesInteractorOutput {
