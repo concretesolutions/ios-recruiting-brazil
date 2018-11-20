@@ -34,7 +34,7 @@ class PopularTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setData(data: Result, popularRanking: Int, isFavorite: Bool) {
+    func setData(data: Result, popularRanking: Int? = nil, isFavorite: Bool) {
         movieTitleLabel.text = data.title
         voteAverageLabel.text = "\(data.voteAverage ?? 0.0) de 10"
         if isFavorite {
@@ -42,7 +42,11 @@ class PopularTableViewCell: UITableViewCell {
         } else {
             favoriteIndicatorImage.image = UIImage(named: "@icons-favoriteUnselected")
         }
-        popularRankingLabel.text = "#" + String(popularRanking)
+        if let ranking = popularRanking {
+            popularRankingLabel.text = "#" + String(ranking)
+        } else {
+            popularRankingLabel.text = ""
+        }
         if let posterPath = data.posterPath {
             setPosterImage(posterPath)
         }
