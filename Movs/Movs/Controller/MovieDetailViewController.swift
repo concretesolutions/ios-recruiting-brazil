@@ -13,6 +13,7 @@ class MovieTableViewController: UITableViewController {
 
     //MARK: - Properties
     var movie: Movie
+    var db = RealmManager.shared
     
     //MARK: Initializers
     init(movie: Movie, style: UITableView.Style = UITableView.Style.plain) {
@@ -60,19 +61,19 @@ class MovieTableViewController: UITableViewController {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailTableViewCell.self)
-            cell.setup(withText: movie.title, withButton: true, withSeparator: true)
+            cell.setup(withText: movie.title, withButton: true, withSeparator: true, delegate: self, isFavourite: movie.isFavourite)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailTableViewCell.self)
-            cell.setup(withText: "2018", withSeparator: true)
+            cell.setup(withText: movie.releaseYear, withSeparator: true)
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailTableViewCell.self)
-            cell.setup(withText: "Action, Adventure", withSeparator: true)
+            cell.setup(withText: movie.genresText(), withSeparator: true)
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailTableViewCell.self)
-            cell.setup(withText: movie.overview, withSeparator: false)
+            cell.setup(withText: movie.overview)
             return cell
         default:
             break
@@ -85,11 +86,11 @@ class MovieTableViewController: UITableViewController {
         case 0:
             return UIScreen.main.bounds.height * 0.4
         case 1:
-            return movie.title.height(withConstrainedWidth: UIScreen.main.bounds.width - 40, font: UIFont.systemFont(ofSize: 17)) + 20
+            return movie.title.height(withConstrainedWidth: UIScreen.main.bounds.width - 80, font: UIFont.systemFont(ofSize: 17)) + 20
         case 2:
-            return "2018".height(withConstrainedWidth: UIScreen.main.bounds.width - 40, font: UIFont.systemFont(ofSize: 17)) + 20
+            return movie.releaseYear.height(withConstrainedWidth: UIScreen.main.bounds.width - 40, font: UIFont.systemFont(ofSize: 17)) + 20
         case 3:
-            return "Action, Adventure".height(withConstrainedWidth: UIScreen.main.bounds.width - 40, font: UIFont.systemFont(ofSize: 17)) + 20
+            return movie.genresText().height(withConstrainedWidth: UIScreen.main.bounds.width - 40, font: UIFont.systemFont(ofSize: 17)) + 20
         case 4:
             return movie.overview.height(withConstrainedWidth: UIScreen.main.bounds.width - 40, font: UIFont.systemFont(ofSize: 17)) + 20
         default:
@@ -100,4 +101,19 @@ class MovieTableViewController: UITableViewController {
 
 }
 
+extension MovieTableViewController: FavouriteCellButtonDelegate {
+    
+    func didPressButton(withFavouriteStatus isFavourite: Bool) {
+        if isFavourite {
+            db.create(movie.rlm())
+            print("Created on Realm")
+        } else {
+            if let deleteMovie = db.get(MovieRlm.self, withPrimaryKey: movie.id) {
+                db.delete(deleteMovie)
+                print("Deleted from Realm")
+            }
+        }
+    }
+    
+}
 

@@ -9,15 +9,11 @@
 import Foundation
 
 struct GenresResponse {
-    
     var genres: [Genre]
-    
 }
 
 extension GenresResponse: Codable {
-    
     enum CodingKeys: String, CodingKey {
         case genres
     }
-    
 }

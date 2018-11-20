@@ -14,8 +14,9 @@ class MovieRlm: Object {
     @objc dynamic var id: Int = 0
     @objc dynamic var title: String = ""
     @objc dynamic var overview: String = ""
-    @objc dynamic var thumbFilePath: String = ""
-//    @objc dynamic var thumbnail: Data
+    @objc dynamic var releaseYear: String = ""
+//    @objc dynamic var thumbFilePath: String = ""
+    @objc dynamic var thumbnailData: Data?
     
     override static func primaryKey() -> String? {
         return "id"

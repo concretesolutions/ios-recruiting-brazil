@@ -38,3 +38,14 @@ final class PopularMoviesCollectionViewDataSource: NSObject, UICollectionViewDat
     
     
 }
+
+extension MutableCollection {
+    mutating func map(transform: (Element) -> Element) {
+        if isEmpty { return }
+        var index = self.startIndex
+        for element in self {
+            self[index] = transform(element)
+            formIndex(after: &index)
+        }
+    }
+}

@@ -35,6 +35,10 @@ class RealmManager {
         return db.objects(type)
     }
     
+    func get<T: Object>(_ type: T.Type , withPrimaryKey primaryKey: Int) -> T? {
+        return db.object(ofType: type, forPrimaryKey: primaryKey)
+    }
+    
     /**
      Remember to get the exact same Object to delete
      */

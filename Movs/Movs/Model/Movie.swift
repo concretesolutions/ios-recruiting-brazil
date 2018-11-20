@@ -14,14 +14,17 @@ struct Movie {
     var title: String
     var genres: [Genre]
     var overview: String
+    var releaseYear: String
     var thumbFilePath: String
     var thumbnail: UIImage?
+    var isFavourite: Bool = false
     
-    public init(id: Int, title: String, genres: [Genre], overview: String, thumbFilePath: String) {
+    public init(id: Int, title: String, genres: [Genre], overview: String, releaseYear: String, thumbFilePath: String) {
         self.id = id
         self.title = title
         self.genres = genres
         self.overview = overview
+        self.releaseYear = releaseYear
         self.thumbFilePath = thumbFilePath
     }
     
@@ -30,7 +33,24 @@ struct Movie {
         title = movieRlm.title
         genres = movieRlm.genres.map({ return Genre($0) })
         overview = movieRlm.overview
-        thumbFilePath = movieRlm.thumbFilePath
+        releaseYear = movieRlm.releaseYear
+        thumbFilePath = ""
+        //FIXME: - Placeholder Image
+        thumbnail = UIImage()
+        if let aThumbData = movieRlm.thumbnailData {
+            thumbnail = UIImage(data: aThumbData)
+        }
+    }
+    
+    func genresText() -> String {
+        var genresText = ""
+        self.genres.forEach({genresText.append("\($0.name ?? ""), ")})
+        genresText.removeLast(2)
+        return genresText
+    }
+    
+    mutating func favourite() {
+        self.isFavourite = true
     }
     
     func rlm() -> MovieRlm {
@@ -39,7 +59,9 @@ struct Movie {
             objectRlm.title = self.title
             genres.forEach({ objectRlm.genres.append($0.rlm()) })
             objectRlm.overview = self.overview
-            objectRlm.thumbFilePath = self.thumbFilePath
+            objectRlm.releaseYear = self.releaseYear
+            //FIXME: - Default Image
+            objectRlm.thumbnailData = (self.thumbnail ?? UIImage()).jpegData(compressionQuality: 1.0)
         }        
     }
     
@@ -53,6 +75,7 @@ extension Movie: Codable {
         case genres = "genre_ids"
         case overview
         case thumbFilePath = "poster_path"
+        case releaseYear = "release_date"
     }
     
     init(from decoder: Decoder) throws {
@@ -61,6 +84,10 @@ extension Movie: Codable {
         title = try container.decode(String.self, forKey: .title)
         overview = try container.decode(String.self, forKey: .overview)
         thumbFilePath = try container.decode(String.self, forKey: .thumbFilePath)
+        
+        let releaseDate = try container.decode(String.self, forKey: .releaseYear)
+        let index = releaseDate.index(releaseDate.startIndex, offsetBy: 4)
+        releaseYear = String(releaseDate[..<index])
         
         genres = [Genre]()
         let ids = try container.decode([Int].self, forKey: .genres)

@@ -9,6 +9,10 @@
 import UIKit
 import Reusable
 
+protocol FavouriteCellButtonDelegate {
+    func didPressButton(withFavouriteStatus isFavourite:Bool)
+}
+
 class DetailTableViewCell: UITableViewCell, Reusable {
 
     //MAR: - Interface
@@ -25,8 +29,12 @@ class DetailTableViewCell: UITableViewCell, Reusable {
     lazy var favouriteButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.imageView?.contentMode = .scaleToFill
-        button.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+        if isFavourite {
+            button.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
+        } else {
+            button.setImage(UIImage(named: "favorite_empty_icon")!, for: .normal)
+        }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -37,27 +45,40 @@ class DetailTableViewCell: UITableViewCell, Reusable {
         return view
     }()
     
+    //MARK: - Properties
     fileprivate var hasButton: Bool = false
-    fileprivate var hasSeparator: Bool = true
+    fileprivate var isFavourite = false
+    fileprivate var hasSeparator: Bool = false
+    fileprivate var delegate: FavouriteCellButtonDelegate?
     
-    func setup(withText text: String, withButton: Bool = false, withSeparator: Bool) {
+    //MARK: - Setup
+    func setup(withText text: String) {
         label.text = text
-        hasButton = withButton
-        hasSeparator = withSeparator
         setupView()
     }
     
-    var tapped = false
-    
+    func setup(withText text: String,
+               withButton: Bool = false,
+               withSeparator: Bool = false,
+               delegate: FavouriteCellButtonDelegate? = nil,
+               isFavourite: Bool = false) {
+        self.hasButton = withButton
+        self.hasSeparator = withSeparator
+        self.isFavourite = isFavourite
+        self.delegate = delegate
+        self.setup(withText: text)
+    }
+
+    //MARK: - Actions
     @objc
     func handleTap() {
-        tapped = !tapped
-        if tapped == false {
+        if isFavourite == false {
             favouriteButton.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
         } else {
             favouriteButton.setImage(UIImage(named: "favorite_empty_icon")!, for: .normal)
         }
-        
+        isFavourite = !isFavourite
+        delegate?.didPressButton(withFavouriteStatus: isFavourite)
     }
 }
 
