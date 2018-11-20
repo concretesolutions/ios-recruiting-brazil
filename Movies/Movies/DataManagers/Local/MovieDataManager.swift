@@ -122,4 +122,26 @@ class MovieDataManager {
         saveContext()
     }
     
+    static func isFavoriteMovid(id: Int) -> Bool {
+        var movies: [Movie] = []
+        let moviesRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MovieModel.entityName)
+        moviesRequest.returnsObjectsAsFaults = false
+        moviesRequest.predicate = NSPredicate(format: "\(MovieModel.id) == %d", id)
+        
+        do {
+            let result = try context.fetch(moviesRequest)
+            if let mos = result as? [NSManagedObject] {
+                for mo in mos {
+                    if let movie = movie(mo) {
+                        movies.append(movie)
+                    }
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return movies.count > 0
+    }
+    
 }
