@@ -8,11 +8,12 @@
 
 import UIKit
 
-protocol MovieCellSelected {
+protocol MovieCollectionViewActions {
     func didTapMovieCell(of movie: Movie)
+    func didReachEndOfCollectionView()
 }
 
-class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCellSelected {
+class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCollectionViewActions {
     
     
     // MARK: - Outlets
@@ -66,9 +67,13 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
         }
     }
     
-    // MARK: -  MovieCellSelected Functions
+    // MARK: -  MoviesCollectionViewActions Functions
     func didTapMovieCell(of movie: Movie) {
         self.presenter.didTapMovieCell(of: movie)
+    }
+    
+    func didReachEndOfCollectionView() {
+        print("Chegou ao fim")
     }
     
     // MARK: - Functions
@@ -84,7 +89,7 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
     func setupCollectionView() {
         self.moviesCollectionView.delegate = self.moviesCollectionView
         self.moviesCollectionView.dataSource = self.moviesCollectionView
-        self.moviesCollectionView.cellSelected = self
+        self.moviesCollectionView.collectionViewActions = self
     }
 }
 
