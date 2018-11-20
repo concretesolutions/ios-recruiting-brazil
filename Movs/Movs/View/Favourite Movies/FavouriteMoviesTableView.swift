@@ -21,6 +21,7 @@ class FavouriteMoviesTableView: UITableView {
     
     private func setupDesing() {
         backgroundColor = Design.colors.white
+        separatorStyle = .none
     }
     
 }

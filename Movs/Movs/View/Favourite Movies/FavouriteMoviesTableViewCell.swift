@@ -66,6 +66,13 @@ extension FavouriteMoviesTableViewCell: CodeView {
     }
     
     func setupConstraints() {
+        contentView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview().priority(.high)
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview().inset(1).priority(.high)
+        }
+        
         thumbnail.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.top.equalToSuperview()
