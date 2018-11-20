@@ -16,8 +16,8 @@ struct Movie {
     var overview: String
     var releaseYear: String
     var thumbFilePath: String?
-    var thumbnail: UIImage?
     var isFavourite: Bool = false
+    var thumbnail: UIImage?
     
     public init(id: Int, title: String, genres: [Genre], overview: String, releaseYear: String, thumbFilePath: String) {
         self.id = id
@@ -35,6 +35,7 @@ struct Movie {
         overview = movieRlm.overview
         releaseYear = movieRlm.releaseYear
         thumbFilePath = ""
+        isFavourite = movieRlm.isFavourite
         thumbnail = UIImage(named: "placeholder_poster")!
         if let aThumbData = movieRlm.thumbnailData {
             thumbnail = UIImage(data: aThumbData)

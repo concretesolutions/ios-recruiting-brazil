@@ -1,5 +1,5 @@
 //
-//  Style.swift
+//  Design.swift
 //  Movs
 //
 //  Created by Erick Lozano Borges on 16/11/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-struct Style {
+struct Design {
     
     struct colors {
         static let dark:UIColor = #colorLiteral(red: 0.1755704284, green: 0.1870377064, blue: 0.2857489586, alpha: 1)

@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 
 protocol FavouriteCellButtonDelegate {
-    func didPressButton(withFavouriteStatus isFavourite:Bool)
+    func didPressButton(withFavouriteStatus shouldFavourite:Bool)
 }
 
 class DetailTableViewCell: UITableViewCell, Reusable {
@@ -20,8 +20,8 @@ class DetailTableViewCell: UITableViewCell, Reusable {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 17)
-        label.textColor = Style.colors.dark
-        label.backgroundColor = Style.colors.white
+        label.textColor = Design.colors.dark
+        label.backgroundColor = Design.colors.white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -41,7 +41,7 @@ class DetailTableViewCell: UITableViewCell, Reusable {
     
     lazy var separator: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = Style.colors.dark
+        view.backgroundColor = Design.colors.dark
         return view
     }()
     

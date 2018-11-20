@@ -13,7 +13,7 @@ class PopularMoviesCollectionView: UICollectionView {
     
     override init(frame: CGRect = .zero, collectionViewLayout layout: UICollectionViewLayout) {
         let aLayout = UICollectionViewFlowLayout()
-        aLayout.sectionInset = Style.insets.popularMoviesCollectionView
+        aLayout.sectionInset = Design.insets.popularMoviesCollectionView
         
         super.init(frame: frame, collectionViewLayout: aLayout)
         
@@ -25,7 +25,7 @@ class PopularMoviesCollectionView: UICollectionView {
     }
     
     private func setupDesing() {
-        backgroundColor = Style.colors.white
+        backgroundColor = Design.colors.white
     }
     
 }

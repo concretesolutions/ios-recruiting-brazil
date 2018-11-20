@@ -10,28 +10,28 @@ import UIKit
 import SnapKit
 
 class PopularMoviesViewController: UIViewController {
+    
+    //MARK: - Properties
+    let db = RealmManager.shared
+    let tmdbService = TMDBService()
+    let collectionView = PopularMoviesCollectionView()
+    var collectionViewDelegate: PopularMoviesCollectionViewDelegate?
+    var collectionViewDatasource: PopularMoviesCollectionViewDataSource?
+    
+    var currentPage:Int = 1
+    var isFetching:Bool = false
+    var genresList = [Genre]()
+    var popularMovies = [Movie]()
+    var favouriteMovies = [Movie]()
 
     //MARK: - Interface
     lazy var activityIndicator:UIActivityIndicatorView = {
         var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicator.color = Style.colors.secondaryYellow
+        activityIndicator.color = Design.colors.secondaryYellow
         activityIndicator.contentMode = .scaleAspectFit
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
-    
-    //MARK: - Properties
-    var db = RealmManager.shared
-    let tmdbService = TMDBService()
-    let collectionView = PopularMoviesCollectionView()
-    var collectionViewDatasource: PopularMoviesCollectionViewDataSource?
-    var collectionViewDelegate: PopularMoviesCollectionViewDelegate?
-    
-    var currentPage:Int = 1
-    var genresList = [Genre]()
-    var popularMovies = [Movie]()
-    var favouriteMovies = [Movie]()
-    var isFetching = false
     
     //MARK: - UI States Control
     fileprivate enum LoadingState {
@@ -203,6 +203,6 @@ extension PopularMoviesViewController: CodeView {
     
     func setupAdditionalConfiguration() {
         presentationState = .initial
-        view.backgroundColor = Style.colors.white
+        view.backgroundColor = Design.colors.white
     }
 }

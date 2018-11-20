@@ -12,11 +12,15 @@ class FavouriteMoviesTableView: UITableView {
 
     override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
-        backgroundColor = UIColor.red
+        setupDesing()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupDesing() {
+        backgroundColor = Design.colors.white
     }
     
 }

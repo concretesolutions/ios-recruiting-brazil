@@ -102,8 +102,8 @@ class MovieTableViewController: UITableViewController {
 
 extension MovieTableViewController: FavouriteCellButtonDelegate {
     
-    func didPressButton(withFavouriteStatus isFavourite: Bool) {
-        if isFavourite {
+    func didPressButton(withFavouriteStatus shouldFavourite: Bool) {
+        if shouldFavourite {
             db.create(movie.rlm())
             print("Created on Realm")
         } else {

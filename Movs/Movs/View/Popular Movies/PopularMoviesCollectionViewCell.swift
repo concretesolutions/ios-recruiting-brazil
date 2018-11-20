@@ -25,7 +25,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
     
     lazy var detailView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = Style.colors.dark.withAlphaComponent(0.9)
+        view.backgroundColor = Design.colors.dark.withAlphaComponent(0.9)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -34,7 +34,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = Style.colors.mainYellow
+        label.textColor = Design.colors.mainYellow
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -8,17 +8,13 @@
 
 import UIKit
 
-protocol MovieSelectionDelegate {
-    func didSelect(movie:Movie)
-}
-
 class PopularMoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     
     var delegate: MovieSelectionDelegate?
     
     private let movies: [Movie]
     private let itemsPerRow: CGFloat = 2
-    private let sectionInsets = Style.insets.popularMoviesCollectionView
+    private let sectionInsets = Design.insets.popularMoviesCollectionView
     
     init(movies: [Movie], delegate: MovieSelectionDelegate) {
         self.movies = movies

@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol CollectionViewPagingDelegate {
-    func shouldFetchNextPage()
-}
-
 final class PopularMoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     public var movies:[Movie]
