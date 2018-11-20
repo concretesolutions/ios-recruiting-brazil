@@ -8,23 +8,46 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController {
+class MoviesViewController: UIViewController, MoviesView {
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var movies: MoviesCollectionView!
+    
+    
+    // MARK: - Properties
+    
+    var presenter: MoviesPresentation!
+    var delegate: MoviesCVDelegate!
+    var dataSource: MoviesCVDataSource!
 
+    // MARK: - Life cicle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.delegate = MoviesCVDelegate(presenter: self.presenter)
+        self.movies.delegate = self.delegate
+        self.dataSource = MoviesCVDataSource(collectionView: self.movies)
+        self.movies.dataSource = self.dataSource
+        self.presenter.viewDidLoad()
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - MoviesView protocol functions
+    
+    func present(movies: [Movie]) {
+        DispatchQueue.main.async {
+            self.dataSource.update(movies: movies)
+        }
     }
-    */
+    
+    func presentNew(movies: [Movie]) {
+        DispatchQueue.main.async {
+            self.dataSource.add(movies: movies)
+        }
+    }
+    
 
 }

@@ -17,5 +17,5 @@ class MoviesCollectionView: UICollectionView {
         // Drawing code
     }
     */
-
+    
 }
