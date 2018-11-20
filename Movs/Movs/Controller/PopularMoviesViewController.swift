@@ -204,5 +204,7 @@ extension PopularMoviesViewController: CodeView {
     func setupAdditionalConfiguration() {
         presentationState = .initial
         view.backgroundColor = Design.colors.white
+        navigationController?.navigationBar.tintColor = Design.colors.dark
+        navigationController?.navigationBar.barTintColor = Design.colors.mainYellow
     }
 }

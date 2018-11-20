@@ -33,7 +33,7 @@ class DetailTableViewCell: UITableViewCell, Reusable {
         if isFavourite {
             button.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
         } else {
-            button.setImage(UIImage(named: "favorite_empty_icon")!, for: .normal)
+            button.setImage(UIImage(named: "favorite_gray_icon")!, for: .normal)
         }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -41,7 +41,7 @@ class DetailTableViewCell: UITableViewCell, Reusable {
     
     lazy var separator: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = Design.colors.dark
+        view.backgroundColor = Design.colors.dark.withAlphaComponent(0.5)
         return view
     }()
     
@@ -75,7 +75,7 @@ class DetailTableViewCell: UITableViewCell, Reusable {
         if isFavourite == false {
             favouriteButton.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
         } else {
-            favouriteButton.setImage(UIImage(named: "favorite_empty_icon")!, for: .normal)
+            favouriteButton.setImage(UIImage(named: "favorite_gray_icon")!, for: .normal)
         }
         isFavourite = !isFavourite
         delegate?.didPressButton(withFavouriteStatus: isFavourite)

@@ -106,7 +106,7 @@ extension PopularMoviesCollectionViewCell: CodeView {
         if movie.isFavourite {
             favouriteButton.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
         } else {
-            favouriteButton.setImage(UIImage(named: "favorite_empty_icon")!, for: .normal)
+            favouriteButton.setImage(UIImage(named: "favorite_gray_icon")!, for: .normal)
         }
     }
     

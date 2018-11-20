@@ -97,6 +97,7 @@ extension FavouriteMoviesTableViewCell: CodeView {
     }
     
     func setupAdditionalConfiguration() {
+        contentView.backgroundColor = Design.colors.lightGray
         thumbnail.image = movie.thumbnail
         titleLabel.text = movie.title
         releaseYearLabel.text = movie.releaseYear

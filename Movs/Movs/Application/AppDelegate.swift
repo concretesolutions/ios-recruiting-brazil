@@ -16,17 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // configure tabbar controller
         let tabBarController = UITabBarController()
+        tabBarController.tabBar.tintColor = Design.colors.dark
+        tabBarController.tabBar.barTintColor = Design.colors.mainYellow
         
         // First Tab Bar View Controller
         let popularMoviesVC = PopularMoviesViewController()
         popularMoviesVC.title = "Popular Movies"
-        popularMoviesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent , tag: 0)
+        popularMoviesVC.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named:"list_icon"), tag: 0)
         
         // Second Tab Bar View Controller
         let favouriteMoviesVC = FavouriteMoviesViewController()
         favouriteMoviesVC.title = "Favourite Movies"
-        favouriteMoviesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        favouriteMoviesVC.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(named:"favorite_empty_icon"), tag: 1)
         
         // Adding navigation controller
         let controllers = [popularMoviesVC, favouriteMoviesVC]
@@ -34,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationController(rootViewController: $0)
         })
         
+        // set root viewController
         window.rootViewController = tabBarController
         self.window = window
         

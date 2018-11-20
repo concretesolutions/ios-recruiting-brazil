@@ -78,6 +78,8 @@ extension FavouriteMoviesViewController: CodeView {
     
     func setupAdditionalConfiguration() {
         view.backgroundColor = Design.colors.white
+        navigationController?.navigationBar.tintColor = Design.colors.dark
+        navigationController?.navigationBar.barTintColor = Design.colors.mainYellow
     }
     
 }
