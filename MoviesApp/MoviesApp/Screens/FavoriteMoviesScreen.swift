@@ -25,10 +25,6 @@ class FavoriteMoviesScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupTableView(withMovies movies:[CDMovie]){
-        self.tableView.setupTableView(with: movies)
-    }
-    
 }
 
 extension FavoriteMoviesScreen: ViewCode{
@@ -44,9 +40,7 @@ extension FavoriteMoviesScreen: ViewCode{
     }
     
     func setupAdditionalConfiguration() {
-        tableView.backgroundColor = Palette.blue
-        tableView.allowsSelection = false
-        tableView.separatorStyle = .none
+
     }
     
     

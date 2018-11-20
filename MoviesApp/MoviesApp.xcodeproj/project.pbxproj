@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AB65B74D5DE8FB017966EA74 /* Pods_MoviesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAAFF7805FA610928088D8DE /* Pods_MoviesApp.framework */; };
 		E32175432197A81A00387A8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32175422197A81A00387A8C /* AppDelegate.swift */; };
-		E32175482197A81A00387A8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E32175462197A81A00387A8C /* Main.storyboard */; };
 		E321754B2197A81A00387A8C /* MoviesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E32175492197A81A00387A8C /* MoviesApp.xcdatamodeld */; };
 		E321754D2197A81B00387A8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E321754C2197A81B00387A8C /* Assets.xcassets */; };
 		E32175502197A81B00387A8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E321754E2197A81B00387A8C /* LaunchScreen.storyboard */; };
@@ -63,7 +62,6 @@
 		CAAFF7805FA610928088D8DE /* Pods_MoviesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoviesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E321753F2197A81A00387A8C /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E32175422197A81A00387A8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E32175472197A81A00387A8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E321754A2197A81A00387A8C /* MoviesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoviesApp.xcdatamodel; sourceTree = "<group>"; };
 		E321754C2197A81B00387A8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E321754F2197A81B00387A8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 		E32175412197A81A00387A8C /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				E33C9817219FB54E004EBCDE /* Screens */,
 				E321757521989D5F00387A8C /* AppDelegate */,
 				E32175782198A39400387A8C /* Appearence */,
 				E321758621990CDB00387A8C /* Cells */,
@@ -173,34 +170,14 @@
 				E32175732197BAF400387A8C /* Delegates */,
 				E32175682197B1B400387A8C /* Models */,
 				E321757421989D5300387A8C /* Network */,
-				E321755E2197ACBE00387A8C /* Favorites */,
-				E321755D2197ACB800387A8C /* Popular Movies */,
+				E33C9817219FB54E004EBCDE /* Screens */,
 				E321757F2199005A00387A8C /* Views */,
-				E32175462197A81A00387A8C /* Main.storyboard */,
 				E321754C2197A81B00387A8C /* Assets.xcassets */,
 				E321754E2197A81B00387A8C /* LaunchScreen.storyboard */,
 				E32175512197A81B00387A8C /* Info.plist */,
 				E32175492197A81A00387A8C /* MoviesApp.xcdatamodeld */,
 			);
 			path = MoviesApp;
-			sourceTree = "<group>";
-		};
-		E321755D2197ACB800387A8C /* Popular Movies */ = {
-			isa = PBXGroup;
-			children = (
-				E32175572197A8A800387A8C /* PopularMoviesViewController.swift */,
-				E32175592197A97400387A8C /* PopularMoviesScreen.swift */,
-			);
-			path = "Popular Movies";
-			sourceTree = "<group>";
-		};
-		E321755E2197ACBE00387A8C /* Favorites */ = {
-			isa = PBXGroup;
-			children = (
-				E32175642197B18C00387A8C /* FavoriteMoviesViewController.swift */,
-				E32175662197B19F00387A8C /* FavoriteMoviesScreen.swift */,
-			);
-			path = Favorites;
 			sourceTree = "<group>";
 		};
 		E321755F2197ACD800387A8C /* Util */ = {
@@ -239,6 +216,8 @@
 		E32175702197B9BC00387A8C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E32175572197A8A800387A8C /* PopularMoviesViewController.swift */,
+				E32175642197B18C00387A8C /* FavoriteMoviesViewController.swift */,
 				E33C9815219FB3A6004EBCDE /* MovieDetailViewController.swift */,
 			);
 			path = Controllers;
@@ -350,6 +329,8 @@
 		E33C9817219FB54E004EBCDE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				E32175592197A97400387A8C /* PopularMoviesScreen.swift */,
+				E32175662197B19F00387A8C /* FavoriteMoviesScreen.swift */,
 				E3CBEBD321A0FB710060B16A /* DetailMovieScreen.swift */,
 			);
 			path = Screens;
@@ -434,7 +415,6 @@
 				E3CBEBE221A111E10060B16A /* MovieDescriptionTableViewCell.xib in Resources */,
 				E32175502197A81B00387A8C /* LaunchScreen.storyboard in Resources */,
 				E321754D2197A81B00387A8C /* Assets.xcassets in Resources */,
-				E32175482197A81A00387A8C /* Main.storyboard in Resources */,
 				E321758B21991C0B00387A8C /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,14 +530,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E32175462197A81A00387A8C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E32175472197A81A00387A8C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E321754E2197A81B00387A8C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -693,7 +665,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 98H8AFME2H;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.babo.nick.MoviesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -709,7 +684,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 98H8AFME2H;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.babo.nick.MoviesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

@@ -20,7 +20,7 @@ enum Result<T> {
 }
 
 protocol MoviesService{
-    func fetchPopularMovies(callback: @escaping  (Result<[Movie]>) -> Void)
+    func fetchPopularMovies(query:String?, callback: @escaping  (Result<[Movie]>) -> Void)
     func fetchGenre(callback: @escaping (Result<[Genre]>) -> Void)
 }
 
@@ -28,15 +28,21 @@ class MoviesServiceImplementation: MoviesService{
     
     var baseUrl:String = "https://api.themoviedb.org/3/"
     
-    func fetchPopularMovies(callback: @escaping (Result<[Movie]>) -> Void) {
-//        let request = "https://api.themoviedb.org/3/movie/popular?api_key=059b457034e531c9b057bd395f9fe913"
+    func fetchPopularMovies(query:String?, callback: @escaping (Result<[Movie]>) -> Void) {
         
-        let popularMoviesRequest = "movie/popular?api_key="
-        let request = self.baseUrl + popularMoviesRequest + MoviesAPIConfig.apikey
+        var request = ""
         
-        let url = URL(string: request)
+        if let query = query?.replacingOccurrences(of: " ", with: "%20"){
+            let queryMoviesRequest = "search/movie?api_key="
+            request = baseUrl + queryMoviesRequest + MoviesAPIConfig.apikey + "&query=" + query
+        }else{
+            let popularMoviesRequest = "movie/popular?api_key="
+            request = baseUrl + popularMoviesRequest + MoviesAPIConfig.apikey
+        }
         
-        let task = URLSession.shared.dataTask(with: url!){ data, response, error in
+        guard let url = URL(string: request) else {return}
+        
+        let task = URLSession.shared.dataTask(with: url){ data, response, error in
             guard let data = data else{
                 return
             }
@@ -56,7 +62,6 @@ class MoviesServiceImplementation: MoviesService{
     }
     
     func fetchGenre(callback: @escaping (Result<[Genre]>) -> Void){
-//        let request = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(MoviesAPIConfig.apikey)&language=en-US"
         let genresRequest = "genre/movie/list?api_key="
         let languageRequest = "&language=en-US"
         let request = self.baseUrl + genresRequest + MoviesAPIConfig.apikey + languageRequest

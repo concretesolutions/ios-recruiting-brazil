@@ -39,6 +39,9 @@ class MoviesTableView:UITableView{
     }
     
     func setupLayout(){
+        self.backgroundColor = Palette.blue
+        self.allowsSelection = false
+        self.separatorStyle = .none
     }
     
     func setupTableView(with movies:[CDMovie]){

@@ -12,7 +12,7 @@ struct MovieResponse: Codable  {
     var results: [Movie]
     
     private enum CodingKeys: String, CodingKey {
-        case results
+        case results = "results"
     }
     
     func encode(to encoder: Encoder) throws {

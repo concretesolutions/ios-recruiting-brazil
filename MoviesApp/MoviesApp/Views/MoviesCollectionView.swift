@@ -33,5 +33,9 @@ class MoviesCollectionView: UICollectionView {
         self.customDelegate = MoviesCollectionDelegate(movies: movies, delegate: selectionDelegate)
         self.customDataSource = MoviesDataSource(movies: movies, collectionView: self, delegate: customDelegate!)
     }
+    
+    func searchFor(text:String){
+        
+    }
 
 }

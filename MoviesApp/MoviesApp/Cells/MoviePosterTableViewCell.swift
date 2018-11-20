@@ -24,7 +24,11 @@ class MoviePosterTableViewCell: UITableViewCell, NibReusable {
     }
     
     func setup(with movie:Movie){
-        self.posterImageView?.download(image: movie.posterPath)
+        if let poster = movie.posterPath{
+            self.posterImageView?.download(image: poster)
+        }else{
+            self.posterImageView.image = UIImage(named: "poster_notAvailable")
+        }
     }
 
 }

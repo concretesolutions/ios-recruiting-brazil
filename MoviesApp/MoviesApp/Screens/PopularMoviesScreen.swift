@@ -16,6 +16,13 @@ class PopularMoviesScreen: UIView {
         return view
     }()
     
+//    lazy var searchBar:UISearchBar = {
+//        let bar = UISearchBar()
+//        bar.placeholder = "Search for Movies..."
+//        bar.translatesAutoresizingMaskIntoConstraints = false
+//        return bar
+//    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -25,19 +32,28 @@ class PopularMoviesScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCollectionView(with movies:[Movie], selectionDelegate:MovieSelectionDelegate){
-        self.collectionView.setupCollectionView(with: movies, selectionDelegate: selectionDelegate)
+    func setup(searchController:UISearchController){
+        searchController.searchBar.tintColor = Palette.blue
+        searchController.searchBar.returnKeyType = .search
+        searchController.searchBar.placeholder = "Search for Movies..."
     }
-
+    
 }
 
 extension PopularMoviesScreen: ViewCode{
     
     func setupViewHierarchy() {
+//        self.addSubview(searchBar)
         self.addSubview(collectionView)
+        
     }
     
     func setupConstraints() {
+//        searchBar.topAnchor.constraint(equalTo: self.topAnchor, constant: 44).isActive = true
+//        searchBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//        searchBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//        searchBar.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true

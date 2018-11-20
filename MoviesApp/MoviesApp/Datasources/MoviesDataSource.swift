@@ -12,6 +12,11 @@ import UIKit
 final class MoviesDataSource:NSObject{
     
     var movies:[Movie] = []
+    
+    //Search
+    var filteredMovies:[Movie] = []
+    var isFiltering = false
+    
     weak var collectionView:UICollectionView?
     weak var delegate:UICollectionViewDelegate?
     
@@ -32,19 +37,29 @@ final class MoviesDataSource:NSObject{
         self.collectionView?.reloadData()
     }
     
+    
+    
 }
 
 extension MoviesDataSource: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return self.movies.count
-        return self.movies.count
+        if isFiltering{
+            return self.filteredMovies.count
+        }else{
+            return self.movies.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MovieCollectionViewCell.self)
         
-        let movie = self.movies[indexPath.item]
+        var movie = self.movies[indexPath.item]
+        if isFiltering{
+            movie = self.filteredMovies[indexPath.item]
+        }
+        
         cell.setup(withMovie: movie)
         
         return cell

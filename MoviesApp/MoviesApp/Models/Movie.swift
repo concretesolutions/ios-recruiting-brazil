@@ -11,20 +11,20 @@ import Foundation
 struct Movie:Codable{
     var id:Int
     var title:String
-    var posterPath:String
+    var posterPath:String?
     var overview:String
     var voteAverage:Float
     var releaseData:String
     var genres:[Int]
     
     enum CodingKeys: String, CodingKey{
-        case id
-        case title
         case posterPath = "poster_path"
         case overview
-        case voteAverage = "vote_average"
         case releaseDate = "release_date"
         case genres = "genre_ids"
+        case id
+        case title
+        case voteAverage = "vote_average"
     }
     
     func encode(to encoder: Encoder) throws {
@@ -42,7 +42,7 @@ struct Movie:Codable{
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decode(Int.self, forKey: .id)
         title = try values.decode(String.self, forKey: .title)
-        posterPath = try values.decode(String.self, forKey: .posterPath)
+        posterPath = try values.decode(String?.self, forKey: .posterPath)
         overview = try values.decode(String.self, forKey: .overview)
         voteAverage = try values.decode(Float.self, forKey: .voteAverage)
         releaseData = try values.decode(String.self, forKey: .releaseDate)

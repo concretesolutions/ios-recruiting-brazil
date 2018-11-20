@@ -30,4 +30,8 @@ struct AppearanceManager{
         return 15.0
     }
     
+    static var navigationHeight:CGFloat{
+        return UINavigationBar.appearance().frame.height
+    }
+    
 }

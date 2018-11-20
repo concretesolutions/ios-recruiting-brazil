@@ -10,7 +10,7 @@ import UIKit
 
 class PopularMoviesViewController: UIViewController {
     
-    let screen = PopularMoviesScreen(frame: UIScreen.main.bounds)
+    let screen = PopularMoviesScreen(frame: .zero)
     
     var service = MoviesServiceImplementation()
     var movies:[Movie] = []
@@ -29,9 +29,10 @@ class PopularMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.definesPresentationContext = true
         self.fetchMovies()
         self.fetchGenres()
+        self.setupSearchBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +49,7 @@ class PopularMoviesViewController: UIViewController {
 extension PopularMoviesViewController {
     func fetchMovies(query: String? = nil) {
 //        loadingState = .loading
-        service.fetchPopularMovies { [weak self] result in
+        service.fetchPopularMovies(query: query) { [weak self] result in
             switch result {
             case .success(let movies):
                 self?.handleFetch(of: movies)
@@ -61,7 +62,8 @@ extension PopularMoviesViewController {
     
     func handleFetch(of movies: [Movie]) {
         self.movies = movies
-        self.screen.setupCollectionView(with: movies, selectionDelegate: self)
+        self.screen.collectionView.setupCollectionView(with: movies, selectionDelegate: self)
+        self.navigationItem.searchController?.searchBar.resignFirstResponder()
     }
     
 }
@@ -88,4 +90,33 @@ extension PopularMoviesViewController: MovieSelectionDelegate{
         let detailController = MovieDetailViewController(movie: movie, genres: self.genres)
         self.navigationController?.pushViewController(detailController, animated: true)
     }
+}
+
+extension PopularMoviesViewController: UISearchBarDelegate{
+    
+    func setupSearchBar(){
+//        self.screen.setupSearchBarDelegate(delegate: self)
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        self.navigationItem.searchController = searchController
+        self.screen.setup(searchController: searchController)
+//        self.navigationItem.titleView = self.screen.searchBar
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text{
+            if !text.isEmpty{
+                fetchMovies(query: text)
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchMovies()
+    }
+    
 }
