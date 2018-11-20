@@ -1,0 +1,19 @@
+platform :ios, '11.0'
+
+target 'MOVS' do
+  use_frameworks!
+
+  # Pods for MOVS
+pod 'SDWebImage', '~> 4.0'
+
+  target 'MOVSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'MOVSUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

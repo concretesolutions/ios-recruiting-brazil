@@ -20,11 +20,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func setup(film: ResponseFilm){
         self.film = film
-        self.outletActivity.startAnimating()
         DesignManager.gradient(toView: self.outletGradientView)
         DesignManager.applyShadow(toView: self)
+        self.outletActivity.alpha = 1
         self.outletFilmNameLabel.text = film.title
-        // TODO: - colocar o poster, parar o activity indicator, conferir se o filme é favorito
+        self.outletPosterImageView.getPoster(forFilm: film, andActivity: self.outletActivity)
     }
     
     @IBAction func favoriteFilm(_ sender: UIButton) {
