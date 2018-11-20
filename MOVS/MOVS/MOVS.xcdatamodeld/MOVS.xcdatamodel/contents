@@ -6,15 +6,15 @@
         <attribute name="poster_path" attributeType="String" syncable="YES"/>
         <attribute name="release_date" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
-        <relationship name="have" toMany="YES" deletionRule="Nullify" destinationEntity="Gener" inverseName="isPart" inverseEntity="Gener" syncable="YES"/>
+        <relationship name="geners" toMany="YES" deletionRule="Nullify" destinationEntity="Gener" inverseName="films" inverseEntity="Gener" syncable="YES"/>
     </entity>
     <entity name="Gener" representedClassName="Gener" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="isPart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Film" inverseName="have" inverseEntity="Film" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="films" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="geners" inverseEntity="Film" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Film" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="Gener" positionX="-54" positionY="9" width="128" height="90"/>
+        <element name="Film" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Gener" positionX="268.7109375" positionY="27.02734375" width="128" height="88"/>
     </elements>
 </model>

@@ -2,7 +2,7 @@
 //  Film+CoreDataProperties.swift
 //  MOVS
 //
-//  Created by Matheus de Vasconcelos on 15/11/18.
+//  Created by Matheus de Vasconcelos on 16/11/18.
 //  Copyright © 2018 Matheus. All rights reserved.
 //
 //
@@ -16,29 +16,29 @@ extension Film {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Film> {
         return NSFetchRequest<Film>(entityName: "Film")
     }
-
+    
     @NSManaged public var id: Int32
-    @NSManaged public var title: String?
     @NSManaged public var overview: String?
     @NSManaged public var poster_path: String?
     @NSManaged public var release_date: String?
-    @NSManaged public var have: NSSet?
+    @NSManaged public var title: String?
+    @NSManaged public var geners: NSSet?
 
 }
 
-// MARK: Generated accessors for have
+// MARK: Generated accessors for geners
 extension Film {
 
-    @objc(addHaveObject:)
-    @NSManaged public func addToHave(_ value: Gener)
+    @objc(addGenersObject:)
+    @NSManaged public func addToGeners(_ value: Gener)
 
-    @objc(removeHaveObject:)
-    @NSManaged public func removeFromHave(_ value: Gener)
+    @objc(removeGenersObject:)
+    @NSManaged public func removeFromGeners(_ value: Gener)
 
-    @objc(addHave:)
-    @NSManaged public func addToHave(_ values: NSSet)
+    @objc(addGeners:)
+    @NSManaged public func addToGeners(_ values: NSSet)
 
-    @objc(removeHave:)
-    @NSManaged public func removeFromHave(_ values: NSSet)
+    @objc(removeGeners:)
+    @NSManaged public func removeFromGeners(_ values: NSSet)
 
 }

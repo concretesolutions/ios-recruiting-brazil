@@ -50,23 +50,27 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUB-53-seb">
                                                     <rect key="frame" x="0.0" y="186" width="165" height="62"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Film name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-31-Wm3">
-                                                            <rect key="frame" x="5" y="30" width="120" height="22"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Film name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-31-Wm3">
+                                                            <rect key="frame" x="5" y="30" width="122" height="22"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="gUm-Aw-z2r">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oc-eo-ssT">
                                                             <rect key="frame" x="130" y="28" width="30" height="26"/>
-                                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </imageView>
+                                                            <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <state key="normal" image="favorite"/>
+                                                            <connections>
+                                                                <action selector="favoriteFilm:" destination="79S-Wa-ux0" eventType="touchUpInside" id="orF-T2-xPm"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="gUm-Aw-z2r" firstAttribute="leading" secondItem="fUi-31-Wm3" secondAttribute="trailing" constant="5" id="77e-br-kIi"/>
-                                                        <constraint firstAttribute="trailing" secondItem="gUm-Aw-z2r" secondAttribute="trailing" constant="5" id="7OU-g6-Xvg"/>
+                                                        <constraint firstItem="1oc-eo-ssT" firstAttribute="leading" secondItem="fUi-31-Wm3" secondAttribute="trailing" constant="3" id="8Nr-US-PGv"/>
                                                         <constraint firstAttribute="bottom" secondItem="fUi-31-Wm3" secondAttribute="bottom" constant="10" id="A69-RX-zkG"/>
-                                                        <constraint firstItem="gUm-Aw-z2r" firstAttribute="centerY" secondItem="fUi-31-Wm3" secondAttribute="centerY" id="n41-5i-vkN"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1oc-eo-ssT" secondAttribute="trailing" constant="5" id="Hji-Ze-jCZ"/>
+                                                        <constraint firstItem="1oc-eo-ssT" firstAttribute="centerY" secondItem="fUi-31-Wm3" secondAttribute="centerY" id="OwI-Mx-SiP"/>
                                                         <constraint firstItem="fUi-31-Wm3" firstAttribute="leading" secondItem="dUB-53-seb" secondAttribute="leading" constant="5" id="qYM-6h-Se0"/>
                                                     </constraints>
                                                 </view>
@@ -87,7 +91,6 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="outletActivity" destination="wvT-M8-BiV" id="OV4-IF-Hdt"/>
-                                            <outlet property="outletFavoriteImageView" destination="gUm-Aw-z2r" id="kXH-DB-A9n"/>
                                             <outlet property="outletFilmNameLabel" destination="fUi-31-Wm3" id="BsY-gT-xcN"/>
                                             <outlet property="outletGradientView" destination="dUB-53-seb" id="5Dz-dn-tsX"/>
                                             <outlet property="outletPosterImageView" destination="81r-pa-U5t" id="owf-f7-Vqb"/>
