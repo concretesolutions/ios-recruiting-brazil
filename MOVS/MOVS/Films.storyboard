@@ -23,14 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bkj-GY-eBf">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bkj-GY-eBf">
                                 <rect key="frame" x="15" y="44" width="345" height="685"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="mKw-KZ-3y2">
                                     <size key="itemSize" width="165" height="248"/>
-                                    <size key="headerReferenceSize" width="50" height="15"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="50" height="50"/>
-                                    <inset key="sectionInset" minX="0.0" minY="15" maxX="0.0" maxY="15"/>
+                                    <inset key="sectionInset" minX="0.0" minY="30" maxX="0.0" maxY="15"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionViewCell" id="79S-Wa-ux0" customClass="MovieCollectionViewCell" customModule="MOVS" customModuleProvider="target">
@@ -102,11 +102,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Header" id="lDC-34-AWp">
-                                    <rect key="frame" x="0.0" y="0.0" width="345" height="15"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionReusableView>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Footer" id="VcJ-zV-wa7">
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="EndCollectionViewCell" id="VcJ-zV-wa7" customClass="EndCollectionViewCell" customModule="MOVS" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="293" width="345" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -119,14 +115,17 @@
                                         <constraint firstItem="AL6-i5-M79" firstAttribute="centerY" secondItem="VcJ-zV-wa7" secondAttribute="centerY" id="2lC-ja-axU"/>
                                         <constraint firstItem="AL6-i5-M79" firstAttribute="centerX" secondItem="VcJ-zV-wa7" secondAttribute="centerX" id="FnK-g3-Bok"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="outletActivityIndicator" destination="AL6-i5-M79" id="0gO-vA-i3R"/>
+                                    </connections>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="bkj-GY-eBf" firstAttribute="top" secondItem="dYr-sl-Zxa" secondAttribute="top" id="0pm-WB-9kX"/>
                             <constraint firstItem="dYr-sl-Zxa" firstAttribute="bottom" secondItem="bkj-GY-eBf" secondAttribute="bottom" id="1uN-Q8-dF6"/>
                             <constraint firstItem="bkj-GY-eBf" firstAttribute="leading" secondItem="dYr-sl-Zxa" secondAttribute="leading" constant="15" id="MBX-v9-Ykh"/>
-                            <constraint firstItem="bkj-GY-eBf" firstAttribute="top" secondItem="dYr-sl-Zxa" secondAttribute="top" id="diP-KG-wht"/>
                             <constraint firstItem="dYr-sl-Zxa" firstAttribute="trailing" secondItem="bkj-GY-eBf" secondAttribute="trailing" constant="15" id="ivd-30-JwI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dYr-sl-Zxa"/>

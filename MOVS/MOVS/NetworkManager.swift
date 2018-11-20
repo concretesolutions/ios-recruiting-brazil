@@ -12,7 +12,7 @@ class NetworkManager: APIClient{
     
     public static let shared: NetworkManager = NetworkManager()
     
-    var page: Int = 1
+    var page: Int = 0
     
     var session: URLSession
     

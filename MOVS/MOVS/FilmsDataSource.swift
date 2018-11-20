@@ -10,13 +10,7 @@ import UIKit
 
 class FilmsDataSource: NSObject, UICollectionViewDataSource {
     
-    var films: [ResponseFilm] = [ResponseFilm]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.collection.reloadData()
-            }
-        }
-    }
+    var films: [ResponseFilm] = [ResponseFilm]()
     
     var collection: UICollectionView!
     
@@ -24,7 +18,6 @@ class FilmsDataSource: NSObject, UICollectionViewDataSource {
     
     init(withCollection collection: UICollectionView){
         super.init()
-        self.getNewMovies()
         collection.dataSource = self
         self.collection = collection
     }
@@ -33,14 +26,20 @@ class FilmsDataSource: NSObject, UICollectionViewDataSource {
         NetworkManager.shared.fetchMovies { (result) in
             switch result{
             case .success(let filmsResponse):
-                NetworkManager.shared.page+=1
-                self.lastRequest = filmsResponse
                 guard let films = filmsResponse.results else {
                     print("Error to cast films from response in: \(FilmsDataSource.self)")
                     return
                 }
-                self.films = films
-                
+                DispatchQueue.main.async {
+                    self.collection.performBatchUpdates({
+                        var indexPaths: [IndexPath] = [IndexPath]()
+                        for i in self.films.count...self.films.count+films.count-1{
+                            indexPaths.append(IndexPath(row: i, section: 0))
+                        }
+                        self.films.append(contentsOf: films)
+                        self.collection.insertItems(at: indexPaths)
+                    }, completion: nil)
+                }
             case .failure(let error):
                 print("Error \(error.localizedDescription) in: \(FilmsDataSource.self)")
             }
@@ -48,7 +47,7 @@ class FilmsDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.films.count
+        return films.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -57,5 +56,13 @@ class FilmsDataSource: NSObject, UICollectionViewDataSource {
         return cell
     }
     
-
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell: EndCollectionViewCell = collectionView.dequeueReusableSupplementaryViewOfKind(ofKind: UICollectionView.elementKindSectionFooter, for: indexPath)
+        cell.outletActivityIndicator.startAnimating()
+        NetworkManager.shared.page+=1
+        getNewMovies()
+        cell.outletActivityIndicator.stopAnimating()
+        return cell
+    }
+    
 }
