@@ -80,3 +80,7 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
         self.moviesCollectionView.cellSelected = self
     }
 }
+
+extension PopularMoviesView: UISearchBarDelegate {
+    
+}

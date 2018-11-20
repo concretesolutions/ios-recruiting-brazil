@@ -33,17 +33,20 @@ protocol PopularMoviesPresentation: class {
     func viewDidLoad()
     func didRequestMovies()
     func didTapMovieCell(of movie: Movie)
+    func didChangeSearchTextField(with text: String)
 }
 
 protocol PopularMoviesInteractorInput: class {
     var output: PopularMoviesInteractorOutput! { get set }
     
     func fetchMovies()
+    func searchMovies(with text: String)
 }
 
 protocol PopularMoviesInteractorOutput: class {
     func didFetch(movies: [Movie])
     func didFailedToFetchMovies()
+    func didSearchMovies(filteredMovies: [Movie])
 }
 
 
