@@ -19,15 +19,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="@LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="ukI-pp-dme">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="@LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="ukI-pp-dme">
+                                <rect key="frame" x="122" y="340.33333333333331" width="131" height="131.33333333333331"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ukI-pp-dme" secondAttribute="height" multiplier="1:1" id="8uz-lK-XsE"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" name="lightYellow"/>
                         <constraints>
-                            <constraint firstItem="ukI-pp-dme" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="31u-TZ-q9A"/>
+                            <constraint firstItem="ukI-pp-dme" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.35" id="31u-TZ-q9A"/>
                             <constraint firstItem="ukI-pp-dme" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ACP-Vo-hsA"/>
-                            <constraint firstItem="ukI-pp-dme" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="JLO-W9-buy"/>
                             <constraint firstItem="ukI-pp-dme" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mUk-yv-c3V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
