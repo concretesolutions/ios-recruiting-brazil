@@ -14,7 +14,7 @@ class MovieDataManager {
     static var movies: [Movie] = []
     static var genres: [Genre] = []
     
-    static private var page: Int = 10
+    static private var page: Int = 1
     
     // The api_key should be into the info.plist but its here for easy testing
     static private let getPopularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=0aa2fda064d1eec9e68bccc4220ddf7b&language=en-US&page="
