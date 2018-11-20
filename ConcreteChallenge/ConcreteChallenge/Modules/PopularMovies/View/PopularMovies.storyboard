@@ -76,9 +76,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-2d-Qpm">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Movie" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-2d-Qpm">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cE7-7i-HcV">
                                 <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
@@ -127,6 +131,7 @@
                         <outlet property="errorImage" destination="nXL-Jv-2dX" id="snD-4g-hxT"/>
                         <outlet property="errorMessageLabel" destination="0e5-Jw-uHm" id="tzY-rq-hcf"/>
                         <outlet property="moviesCollectionView" destination="ffM-gu-sdH" id="mOU-a4-xFh"/>
+                        <outlet property="searchBar" destination="aDg-2d-Qpm" id="LuA-yw-Rmi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ikU-Tx-JOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

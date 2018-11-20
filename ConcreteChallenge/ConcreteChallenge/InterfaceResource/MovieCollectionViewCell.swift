@@ -23,7 +23,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UICollectionViewCell Functions
     override func prepareForReuse() {
+        self.posterImage.image = UIImage()
+        self.nameLabel.text = ""
         self.favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        
+        super.prepareForReuse()
     }
     
     // MARK: - Functions

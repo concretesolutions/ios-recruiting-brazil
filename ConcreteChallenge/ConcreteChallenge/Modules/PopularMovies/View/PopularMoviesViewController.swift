@@ -16,6 +16,7 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
     
     
     // MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var moviesCollectionView: MovieCollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorImage: UIImageView!
@@ -30,6 +31,8 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
         self.presenter.viewDidLoad()
         
         self.setupNavigationBar()
+        
+        self.setupSearchBar()
         
         self.setupCollectionView()
         self.presenter.didRequestMovies()
@@ -74,9 +77,43 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.968627451, green: 0.8078431373, blue: 0.3568627451, alpha: 1)
     }
     
+    func setupSearchBar() {
+        self.searchBar.delegate = self
+    }
+    
     func setupCollectionView() {
         self.moviesCollectionView.delegate = self.moviesCollectionView
         self.moviesCollectionView.dataSource = self.moviesCollectionView
         self.moviesCollectionView.cellSelected = self
     }
 }
+
+extension PopularMoviesViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // Erase Search
+        self.searchBar.text = nil
+        self.presenter.didChangeSearchBar(with: "")
+        
+        // Hide cancel button
+        self.searchBar.showsCancelButton = false
+        
+        // Hide Keyboard
+        self.resignFirstResponder()
+        self.searchBar.endEditing(true)
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.presenter.didChangeSearchBar(with: searchText)
+    }
+    
+}
+
