@@ -50,32 +50,27 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUB-53-seb">
                                                     <rect key="frame" x="0.0" y="186" width="165" height="62"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Film name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-31-Wm3">
-                                                            <rect key="frame" x="5" y="5" width="118" height="52"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Film name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-31-Wm3">
+                                                            <rect key="frame" x="5" y="5" width="120" height="52"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oc-eo-ssT">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="Vcm-nB-WTd">
                                                             <rect key="frame" x="130" y="18" width="30" height="26"/>
+                                                            <color key="tintColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="Uiq-b2-wId"/>
-                                                                <constraint firstAttribute="width" secondItem="1oc-eo-ssT" secondAttribute="height" multiplier="15:13" id="lDA-NZ-e01"/>
+                                                                <constraint firstAttribute="width" constant="30" id="FLZ-hP-c1V"/>
                                                             </constraints>
-                                                            <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <state key="normal" image="favorite"/>
-                                                            <connections>
-                                                                <action selector="favoriteFilm:" destination="79S-Wa-ux0" eventType="touchUpInside" id="orF-T2-xPm"/>
-                                                            </connections>
-                                                        </button>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="Vcm-nB-WTd" secondAttribute="trailing" constant="5" id="5Xe-YF-F5q"/>
                                                         <constraint firstItem="fUi-31-Wm3" firstAttribute="top" secondItem="dUB-53-seb" secondAttribute="top" constant="5" id="5Z1-o6-QN7"/>
-                                                        <constraint firstItem="1oc-eo-ssT" firstAttribute="leading" secondItem="fUi-31-Wm3" secondAttribute="trailing" constant="7" id="8Nr-US-PGv"/>
+                                                        <constraint firstItem="Vcm-nB-WTd" firstAttribute="centerY" secondItem="fUi-31-Wm3" secondAttribute="centerY" id="9Xn-q3-y78"/>
                                                         <constraint firstAttribute="bottom" secondItem="fUi-31-Wm3" secondAttribute="bottom" constant="5" id="A69-RX-zkG"/>
-                                                        <constraint firstAttribute="trailing" secondItem="1oc-eo-ssT" secondAttribute="trailing" constant="5" id="Hji-Ze-jCZ"/>
-                                                        <constraint firstItem="1oc-eo-ssT" firstAttribute="centerY" secondItem="fUi-31-Wm3" secondAttribute="centerY" id="OwI-Mx-SiP"/>
+                                                        <constraint firstItem="Vcm-nB-WTd" firstAttribute="leading" secondItem="fUi-31-Wm3" secondAttribute="trailing" constant="5" id="DB9-rL-J8F"/>
                                                         <constraint firstItem="fUi-31-Wm3" firstAttribute="leading" secondItem="dUB-53-seb" secondAttribute="leading" constant="5" id="qYM-6h-Se0"/>
                                                     </constraints>
                                                 </view>
@@ -96,6 +91,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="outletActivity" destination="wvT-M8-BiV" id="OV4-IF-Hdt"/>
+                                            <outlet property="outletFavoriteImageView" destination="Vcm-nB-WTd" id="KnH-Lg-HXi"/>
                                             <outlet property="outletFilmNameLabel" destination="fUi-31-Wm3" id="BsY-gT-xcN"/>
                                             <outlet property="outletGradientView" destination="dUB-53-seb" id="5Dz-dn-tsX"/>
                                             <outlet property="outletPosterImageView" destination="81r-pa-U5t" id="owf-f7-Vqb"/>

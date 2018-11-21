@@ -16,6 +16,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var outletActivity: UIActivityIndicatorView!
     @IBOutlet weak var outletGradientView: UIView!
     @IBOutlet weak var outletFilmNameLabel: UILabel!
+    @IBOutlet weak var outletFavoriteImageView: UIImageView!
     
     
     func setup(film: ResponseFilm){
@@ -25,9 +26,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.outletActivity.alpha = 1
         self.outletFilmNameLabel.text = film.title
         self.outletPosterImageView.getPoster(forFilm: film, andActivity: self.outletActivity)
-    }
-    
-    @IBAction func favoriteFilm(_ sender: UIButton) {
         
+        //TODO: - check if film is favorite
     }
 }

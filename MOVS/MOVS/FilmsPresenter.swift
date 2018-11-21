@@ -11,7 +11,7 @@ import UIKit
 class FilmsPresenter: NSObject{
     // MARK: - Variables
     // MARK: Private
-    private var collectionDataSource: FilmsDataSource!
+    private var collectionDataSource: CollectionDataSource!
     // MARK: Public
     var router:FilmsRouter
     var interactor:FilmsInteractor
@@ -30,7 +30,7 @@ class FilmsPresenter: NSObject{
     // MARK: Private
     // MARK: Public
     func viewDidLoad(withCollection collection: UICollectionView) {
-        self.collectionDataSource = FilmsDataSource(withCollection: collection)
+        self.collectionDataSource = CollectionDataSource(withCollection: collection)
         collection.dataSource = self.collectionDataSource
     }
 }

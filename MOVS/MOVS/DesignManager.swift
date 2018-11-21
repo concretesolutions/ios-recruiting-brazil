@@ -26,10 +26,16 @@ class DesignManager: NSObject {
     // MARK: - functions
     // MARK: - Public
     public static func gradient(toView view: UIView){
+        for layer in view.layer.sublayers ?? []{
+            if layer.name == "GradientLayer" {
+                return
+            }
+        }
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [UIColor.black.withAlphaComponent(0).cgColor, UIColor.black.cgColor]
         gradient.zPosition = -1
+        gradient.name = "GradientLayer"
         view.layer.addSublayer(gradient)
     }
     

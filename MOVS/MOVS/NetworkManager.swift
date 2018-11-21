@@ -24,9 +24,15 @@ class NetworkManager: APIClient{
         self.init(configuration: .default)
     }
     
+    private func changeUILoader(){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = !UIApplication.shared.isNetworkActivityIndicatorVisible
+    }
+    
     func fetchMovies(completion: @escaping (Result<Response, APIError>) -> Void){
+        changeUILoader()
         fetch { (result) in
             completion(result)
         }
+        changeUILoader()
     }
 }
