@@ -8,11 +8,12 @@
 
 import UIKit
 
-protocol MovieCellSelected {
+protocol MovieCollectionViewActions {
     func didTapMovieCell(of movie: Movie)
+    func didReachEndOfCollectionView()
 }
 
-class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCellSelected {
+class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCollectionViewActions {
     
     
     // MARK: - Outlets
@@ -50,8 +51,10 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
     
     func showErrorMessage() {
         DispatchQueue.main.async {
-            self.errorImage.isHidden = false
-            self.errorMessageLabel.isHidden = false            
+            if self.moviesCollectionView.isHidden == true {
+                self.errorImage.isHidden = false
+                self.errorMessageLabel.isHidden = false
+            }
         }
     }
 
@@ -66,9 +69,17 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
         }
     }
     
-    // MARK: -  MovieCellSelected Functions
+    // MARK: -  MoviesCollectionViewActions Functions
     func didTapMovieCell(of movie: Movie) {
         self.presenter.didTapMovieCell(of: movie)
+    }
+    
+    func didReachEndOfCollectionView() {
+        // Check if the searc bar is in use.
+        // If it is use it should not fetch more movies
+        if self.searchBar.text == "" {
+            self.presenter.didRequestMovies()
+        }
     }
     
     // MARK: - Functions
@@ -84,7 +95,7 @@ class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCel
     func setupCollectionView() {
         self.moviesCollectionView.delegate = self.moviesCollectionView
         self.moviesCollectionView.dataSource = self.moviesCollectionView
-        self.moviesCollectionView.cellSelected = self
+        self.moviesCollectionView.collectionViewActions = self
     }
 }
 

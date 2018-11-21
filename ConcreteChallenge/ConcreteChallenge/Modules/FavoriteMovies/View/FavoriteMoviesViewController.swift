@@ -58,6 +58,8 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
         self.favoriteMoviesTableView.delegate = self.favoriteMoviesTableView
         self.favoriteMoviesTableView.dataSource = self.favoriteMoviesTableView
         self.favoriteMoviesTableView.favoriteMovieRemoved = self
+        
+        self.favoriteMoviesTableView.allowsSelection = false
     }
 }
 
