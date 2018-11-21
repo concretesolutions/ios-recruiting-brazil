@@ -16,12 +16,18 @@ class PopularMoviesScreen: UIView {
         return view
     }()
     
-//    lazy var searchBar:UISearchBar = {
-//        let bar = UISearchBar()
-//        bar.placeholder = "Search for Movies..."
-//        bar.translatesAutoresizingMaskIntoConstraints = false
-//        return bar
-//    }()
+    lazy var activityIndicator:UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var emptySearchView:GenericErrorView = {
+//        var view = EmptySearchView(error: .generic)
+        var view = GenericErrorView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,21 +44,53 @@ class PopularMoviesScreen: UIView {
         searchController.searchBar.placeholder = "Search for Movies..."
     }
     
+    func refreshUI(with state: PresentationState){
+        switch state{
+        case .initial:
+            print("initial")
+        case .loading:
+            self.bringSubviewToFront(activityIndicator)
+            self.activityIndicator.startAnimating()
+            self.emptySearchView.isHidden = true
+        case .ready:
+            self.activityIndicator.stopAnimating()
+            self.emptySearchView.isHidden = true
+        case .error:
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.emptySearchView.setupView(for: .generic)
+                self.emptySearchView.isHidden = false
+                self.bringSubviewToFront(self.emptySearchView)
+            }
+            
+        case .noResults(let query):
+            emptySearchView.setupView(for: .noResults, with: query)
+            self.activityIndicator.stopAnimating()
+            self.bringSubviewToFront(emptySearchView)
+            self.emptySearchView.isHidden = false
+        }
+    }
+    
 }
 
 extension PopularMoviesScreen: ViewCode{
     
     func setupViewHierarchy() {
-//        self.addSubview(searchBar)
+        self.addSubview(activityIndicator)
         self.addSubview(collectionView)
-        
+        self.addSubview(emptySearchView)
     }
     
     func setupConstraints() {
-//        searchBar.topAnchor.constraint(equalTo: self.topAnchor, constant: 44).isActive = true
-//        searchBar.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//        searchBar.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//        searchBar.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        emptySearchView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        emptySearchView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        emptySearchView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        emptySearchView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        
+        activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 400.0)
+        activityIndicator.widthAnchor.constraint(equalToConstant: 400.0)
         
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -61,6 +99,8 @@ extension PopularMoviesScreen: ViewCode{
     }
     
     func setupAdditionalConfiguration() {
+        activityIndicator.style = .whiteLarge
+        activityIndicator.color = Palette.blue
         collectionView.backgroundColor = Palette.white
     }
     

@@ -17,6 +17,5 @@ extension UIImageView{
         guard let imageURL = URL(string: fullString) else {return}
         
         self.sd_setImage(with: imageURL, placeholderImage: nil, options: .retryFailed, completed: nil)
+        }
     }
-    
-}
