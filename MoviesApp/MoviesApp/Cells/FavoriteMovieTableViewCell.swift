@@ -32,7 +32,7 @@ class FavoriteMovieTableViewCell: UITableViewCell, NibReusable {
         self.background.backgroundColor = Palette.blue
         self.title.text = movie.title
         self.year.text = "\(movie.releaseDate?.getYear() ?? 0001)"
-        self.descriptionLabel.text = movie.posterPath
+        self.descriptionLabel.text = movie.overview
         if let poster = movie.posterPath{
             self.posterImageView.download(image: poster)
         }else{

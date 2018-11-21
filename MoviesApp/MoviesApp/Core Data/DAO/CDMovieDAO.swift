@@ -18,6 +18,7 @@ final class CDMovieDAO{
         persistedMovie.posterPath = movie.posterPath
         persistedMovie.voteAverage = movie.voteAverage
         persistedMovie.releaseDate = movie.releaseData
+        persistedMovie.overview = movie.overview
         DatabaseManager.saveContext()
         return persistedMovie
     }

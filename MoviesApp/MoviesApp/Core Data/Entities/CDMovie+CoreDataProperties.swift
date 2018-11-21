@@ -21,5 +21,6 @@ extension CDMovie {
     @NSManaged public var releaseDate: String?
     @NSManaged public var title: String?
     @NSManaged public var voteAverage: Float
+    @NSManaged public var overview: String?
 
 }
