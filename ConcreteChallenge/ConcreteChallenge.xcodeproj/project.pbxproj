@@ -49,6 +49,12 @@
 		75D5B6FE21A668D800E5F188 /* FilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B6F821A668D800E5F188 /* FilterInteractor.swift */; };
 		75D5B6FF21A668D800E5F188 /* FilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B6FA21A668D800E5F188 /* FilterRouter.swift */; };
 		75D5B70221A6691900E5F188 /* FilterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B70121A6691900E5F188 /* FilterContract.swift */; };
+		75D5B70F21A750C400E5F188 /* DateFilterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B70521A750C400E5F188 /* DateFilterContract.swift */; };
+		75D5B71021A750C400E5F188 /* DateFilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B70721A750C400E5F188 /* DateFilterPresenter.swift */; };
+		75D5B71121A750C400E5F188 /* DateFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B70921A750C400E5F188 /* DateFilterTableViewController.swift */; };
+		75D5B71221A750C400E5F188 /* DateFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D5B70A21A750C400E5F188 /* DateFilter.storyboard */; };
+		75D5B71321A750C400E5F188 /* DateFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B70C21A750C400E5F188 /* DateFilterInteractor.swift */; };
+		75D5B71421A750C400E5F188 /* DateFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5B70E21A750C400E5F188 /* DateFilterRouter.swift */; };
 		75DB8C01219D462B0012EC6A /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB8C00219D462B0012EC6A /* Genres.swift */; };
 		75DB8C03219D486A0012EC6A /* GenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB8C02219D486A0012EC6A /* GenresResponse.swift */; };
 		75FB864A21A0EEC000BDB35E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB864921A0EEC000BDB35E /* Enums.swift */; };
@@ -123,6 +129,12 @@
 		75D5B6F821A668D800E5F188 /* FilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		75D5B6FA21A668D800E5F188 /* FilterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterRouter.swift; sourceTree = "<group>"; };
 		75D5B70121A6691900E5F188 /* FilterContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterContract.swift; sourceTree = "<group>"; };
+		75D5B70521A750C400E5F188 /* DateFilterContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFilterContract.swift; sourceTree = "<group>"; };
+		75D5B70721A750C400E5F188 /* DateFilterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFilterPresenter.swift; sourceTree = "<group>"; };
+		75D5B70921A750C400E5F188 /* DateFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFilterTableViewController.swift; sourceTree = "<group>"; };
+		75D5B70A21A750C400E5F188 /* DateFilter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DateFilter.storyboard; sourceTree = "<group>"; };
+		75D5B70C21A750C400E5F188 /* DateFilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFilterInteractor.swift; sourceTree = "<group>"; };
+		75D5B70E21A750C400E5F188 /* DateFilterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFilterRouter.swift; sourceTree = "<group>"; };
 		75DB8C00219D462B0012EC6A /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
 		75DB8C02219D486A0012EC6A /* GenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresResponse.swift; sourceTree = "<group>"; };
 		75FB864921A0EEC000BDB35E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -250,6 +262,7 @@
 				753517FE2197867100CE5DDA /* FavoriteMovies */,
 				7570ACB8219CEC6200AE7C09 /* MovieDetail */,
 				75D5B6F121A668D800E5F188 /* Filter */,
+				75D5B70321A750C400E5F188 /* DateFilter */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -504,6 +517,59 @@
 			path = Contract;
 			sourceTree = "<group>";
 		};
+		75D5B70321A750C400E5F188 /* DateFilter */ = {
+			isa = PBXGroup;
+			children = (
+				75D5B70421A750C400E5F188 /* Contract */,
+				75D5B70D21A750C400E5F188 /* Router */,
+				75D5B70621A750C400E5F188 /* Presenter */,
+				75D5B70821A750C400E5F188 /* View */,
+				75D5B70B21A750C400E5F188 /* Interactor */,
+			);
+			path = DateFilter;
+			sourceTree = "<group>";
+		};
+		75D5B70421A750C400E5F188 /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				75D5B70521A750C400E5F188 /* DateFilterContract.swift */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+		75D5B70621A750C400E5F188 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				75D5B70721A750C400E5F188 /* DateFilterPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		75D5B70821A750C400E5F188 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				75D5B70921A750C400E5F188 /* DateFilterTableViewController.swift */,
+				75D5B70A21A750C400E5F188 /* DateFilter.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		75D5B70B21A750C400E5F188 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				75D5B70C21A750C400E5F188 /* DateFilterInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		75D5B70D21A750C400E5F188 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				75D5B70E21A750C400E5F188 /* DateFilterRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		75FB864821A0EEAC00BDB35E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -625,6 +691,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D5B6FD21A668D800E5F188 /* Filter.storyboard in Resources */,
+				75D5B71221A750C400E5F188 /* DateFilter.storyboard in Resources */,
 				753517BF219780A700CE5DDA /* LaunchScreen.storyboard in Resources */,
 				7535181121978D3100CE5DDA /* PopularMovies.storyboard in Resources */,
 				753517BC219780A700CE5DDA /* Assets.xcassets in Resources */,
@@ -666,8 +733,10 @@
 				75DB8C01219D462B0012EC6A /* Genres.swift in Sources */,
 				755C64CA219A229200E13B81 /* MovieCollectionView.swift in Sources */,
 				75D5B6FC21A668D800E5F188 /* FilterTableViewController.swift in Sources */,
+				75D5B71021A750C400E5F188 /* DateFilterPresenter.swift in Sources */,
 				7535180D2197867100CE5DDA /* FavoriteMoviesRouter.swift in Sources */,
 				753517F92197843000CE5DDA /* PopularMoviesViewController.swift in Sources */,
+				75D5B71121A750C400E5F188 /* DateFilterTableViewController.swift in Sources */,
 				75DB8C03219D486A0012EC6A /* GenresResponse.swift in Sources */,
 				75FEB3D1219F545E003005D2 /* FavoriteMoviesTableView.swift in Sources */,
 				7535180A2197867100CE5DDA /* FavoriteMoviesPresenter.swift in Sources */,
@@ -675,12 +744,15 @@
 				755C64D3219A706400E13B81 /* ImageDataManager.swift in Sources */,
 				753517F52197830800CE5DDA /* PopularMoviesContract.swift in Sources */,
 				757EABBC219D3ADF000D58D2 /* MovieDetails.swift in Sources */,
+				75D5B71421A750C400E5F188 /* DateFilterRouter.swift in Sources */,
 				75D5B70221A6691900E5F188 /* FilterContract.swift in Sources */,
 				7570ACC4219CEC6200AE7C09 /* MovieDetailContract.swift in Sources */,
 				755C64D5219A72D400E13B81 /* PosterImage.swift in Sources */,
+				75D5B70F21A750C400E5F188 /* DateFilterContract.swift in Sources */,
 				75FB864A21A0EEC000BDB35E /* Enums.swift in Sources */,
 				753517B2219780A600CE5DDA /* AppDelegate.swift in Sources */,
 				75D5B6FB21A668D800E5F188 /* FilterPresenter.swift in Sources */,
+				75D5B71321A750C400E5F188 /* DateFilterInteractor.swift in Sources */,
 				75FEB3D3219F548F003005D2 /* FavoriteMovieTableViewCell.swift in Sources */,
 				75FB864D21A10C6800BDB35E /* UIViewExtension.swift in Sources */,
 				7535180B2197867100CE5DDA /* FavoriteMoviesViewController.swift in Sources */,
