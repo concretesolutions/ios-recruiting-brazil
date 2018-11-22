@@ -12,7 +12,7 @@ protocol FilterWireframe: class {
     var viewController: UIViewController? { get set }
     static var presenter: FilterPresentation! { get set }
     
-    static func assembleModule(with movie: Movie) -> UIViewController
+    static func assembleModule() -> UIViewController
 }
 
 protocol FilterView {

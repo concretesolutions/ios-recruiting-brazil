@@ -70,7 +70,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     }
     
     @objc func filterButtonTapped() {
-        
+        self.presenter.didTapFilterButton()
     }
 }
 

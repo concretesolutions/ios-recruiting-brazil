@@ -13,7 +13,7 @@ class FilterRouter: FilterWireframe {
     weak var viewController: UIViewController?
     static var presenter: FilterPresentation!
     
-    static func assembleModule(with movie: Movie) -> UIViewController {
+    static func assembleModule() -> UIViewController {
         let presenter = FilterPresenter()
         let interactor = FilterInteractor()
         let router = FilterRouter()
@@ -26,6 +26,8 @@ class FilterRouter: FilterWireframe {
             presenter.view = FilterViewController
             router.viewController = FilterViewController
         }
+        
+         viewController = UINavigationController(rootViewController: viewController)
         
         presenter.interactor = interactor
         presenter.router = router

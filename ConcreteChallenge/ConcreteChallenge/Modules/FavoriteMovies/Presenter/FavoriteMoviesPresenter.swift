@@ -24,6 +24,10 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
         self.interactor.getFavoriteMovies()
     }
     
+    func didTapFilterButton() {
+        self.router.showFilterScreen()
+    }
+    
     // MARK: - FavoriteMoviesInteractorOutput functions
     func didGetFavoriteMovies(favoriteMovies: [Movie]) {
         if favoriteMovies.isEmpty {

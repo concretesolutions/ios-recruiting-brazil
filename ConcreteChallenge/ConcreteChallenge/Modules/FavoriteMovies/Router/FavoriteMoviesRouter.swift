@@ -37,4 +37,9 @@ class FavoriteMoviesRouter: FavoriteMoviesWireframe {
         viewController = UINavigationController.init(rootViewController: viewController)
         return viewController
     }
+    
+    func showFilterScreen() {
+        let filterViewController = FilterRouter.assembleModule()
+        self.viewController?.present(filterViewController, animated: true, completion: nil)
+    }
 }
