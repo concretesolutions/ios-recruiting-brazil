@@ -27,7 +27,7 @@ class FilterRouter: FilterWireframe {
             router.viewController = FilterViewController
         }
         
-         viewController = UINavigationController(rootViewController: viewController)
+        viewController = UINavigationController(rootViewController: viewController)
         
         presenter.interactor = interactor
         presenter.router = router
