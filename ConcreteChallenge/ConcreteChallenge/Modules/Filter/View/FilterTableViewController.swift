@@ -13,6 +13,12 @@ class FilterTableViewController: UITableViewController, FilterView {
     // MARK: - Outlets
     
     // MARK: - Actions
+    @IBAction func dateButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func genresButtonTapped(_ sender: Any) {
+    }
+    
     
     // MARK: - Properties
     var presenter: FilterPresentation!
