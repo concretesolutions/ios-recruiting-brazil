@@ -21,7 +21,8 @@ struct GenreDAO {
                             case .success:
                                 do {
                                     if let data = response.result.value {
-                                        let jsonProfile = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                        let jsonProfile = try JSONSerialization.data(withJSONObject: data,
+                                                                                     options: .prettyPrinted)
                                         let parsedResponse = try JSONDecoder().decode(GenreList.self, from: jsonProfile)
                                         completionHandler(parsedResponse, nil)
                                     }

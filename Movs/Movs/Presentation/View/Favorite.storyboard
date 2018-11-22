@@ -123,6 +123,9 @@
                     <navigationItem key="navigationItem" title="Favoritos" id="qR5-cl-amg">
                         <barButtonItem key="rightBarButtonItem" image="@icons-filter" id="FSz-pt-dF2">
                             <color key="tintColor" name="darkBlue"/>
+                            <connections>
+                                <segue destination="ZvB-dK-H60" kind="show" id="4MX-ZY-Lqu"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -133,6 +136,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rp4-j2-Ztt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1442.4000000000001" y="-51.724137931034484"/>
+        </scene>
+        <!--Filtering-->
+        <scene sceneID="z6P-Mm-qwS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filtering" id="ZvB-dK-H60" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rIe-h3-6iz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2220" y="-111"/>
         </scene>
         <!--Description-->
         <scene sceneID="bne-No-LkN">

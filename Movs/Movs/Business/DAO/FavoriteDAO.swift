@@ -51,16 +51,13 @@ class FavoriteDAO {
     /// - returns: a list of favorite from database
     /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
     static func delete(_ objToBeDeleted: NSManagedObject) throws {
-//        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
-//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-//        CoreDataManager.sharedInstance.persistentContainer.viewContext.delete(objToBeDeleted)
-        
-        
+
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
         //fetchRequest.predicate = NSPredicate(format: "id = %@", "\(Id)")
         do {
-            guard let fetchedResults =  try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(fetchRequest) as? [NSManagedObject] else { return }
-            
+            //swiftlint:disable line_length
+            guard (try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(fetchRequest) as? [NSManagedObject]) != nil else { return }
+            //swiftlint:enable line_length
                 CoreDataManager.sharedInstance.persistentContainer.viewContext.delete(objToBeDeleted)
                 do {
                     try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()

@@ -156,6 +156,7 @@ extension FavoriteViewController {
             self.tableView.reloadData()
             if let err = error {
                 // TODO: avisar que não foi possível deletar o favorito
+                print(err.localizedDescription)
             }
         }
     }

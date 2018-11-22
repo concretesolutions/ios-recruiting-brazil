@@ -20,7 +20,7 @@ class FavoriteServices {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
-            var raisedError: Error? = nil
+            var raisedError: Error?
             
             do {
                 // save information
@@ -33,7 +33,8 @@ class FavoriteServices {
             // completion block execution
             if completion != nil {
                 
-                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(favorite, raisedError)})
+                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(favorite,
+                                                                                                 raisedError)})
                 
                 // execute block in main
                 QueueManager.sharedInstance.executeBlock(blockForExecutionInMain,
@@ -57,7 +58,7 @@ class FavoriteServices {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
-            var raisedError: Error? = nil
+            var raisedError: Error?
             var favorite: [Favorite]?
             
             do {
@@ -71,7 +72,8 @@ class FavoriteServices {
             // completion block execution
             if completion != nil {
                 
-                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError, favorite)})
+                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError,
+                                                                                                 favorite)})
                 
                 // execute block in main
                 QueueManager.sharedInstance.executeBlock(blockForExecutionInMain,
@@ -96,7 +98,7 @@ class FavoriteServices {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
-            var raisedError: Error? = nil
+            var raisedError: Error?
             
             do {
                 // save information
@@ -108,7 +110,8 @@ class FavoriteServices {
             // completion block execution
             if completion != nil {
                 
-                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(favorite, raisedError)})
+                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(favorite,
+                                                                                                 raisedError)})
                 
                 // execute block in main
                 QueueManager.sharedInstance.executeBlock(blockForExecutionInMain,
@@ -135,7 +138,7 @@ class FavoriteServices {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
-            var raisedError: Error? = nil
+            var raisedError: Error?
             
             do {
                 // save information
@@ -148,7 +151,8 @@ class FavoriteServices {
             // completion block execution
             if completion != nil {
                 
-                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(favorite, raisedError)})
+                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(favorite,
+                                                                                                 raisedError)})
                 
                 // execute block in main
                 QueueManager.sharedInstance.executeBlock(blockForExecutionInMain,

@@ -47,10 +47,12 @@ class PopularViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     func dataSetup() {
         tableView.tableFooterView = UIView()
+        setBehavior(newBehavior: .LoadingView)
         fetchPopularMovieData(page: page) { (popular) -> Void in
             if let data = popular {
                 self.popularMovie = data
@@ -62,13 +64,13 @@ class PopularViewController: UITableViewController {
     private func searchSetup() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Pesquisar Filmes"
+        searchController.searchBar.placeholder = "Pesquisar filmes"
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if popularMovie != nil {
+        if behavior == .Success && popularMovie != nil {
             return 1
         }
         return 0
@@ -91,6 +93,7 @@ class PopularViewController: UITableViewController {
                                                  for: indexPath) as? PopularTableViewCell
         let data: Result
         switch isFiltering() {
+        // TODO: fazer um Dispatch Group para retornar a celular após o resultado de favorito for identificado
         case true:
             data = filteredPopular[indexPath.row]
             isFavorite(result: data, completionHandler: { (status) in
@@ -103,7 +106,6 @@ class PopularViewController: UITableViewController {
                 })
             }
         }
-        
         return cell!
     }
     
@@ -119,7 +121,6 @@ class PopularViewController: UITableViewController {
                 } else {
                     customSender = CustomSegueSender(result: data, behavior: .Normal)
                 }
-                
                 self.performSegue(withIdentifier: self.popularToDescriptionSegue, sender: customSender)
             })
         case false:
@@ -131,7 +132,6 @@ class PopularViewController: UITableViewController {
                     } else {
                         customSender = CustomSegueSender(result: data, behavior: .Normal)
                     }
-                    
                     self.performSegue(withIdentifier: self.popularToDescriptionSegue, sender: customSender)
                 })
             }
@@ -172,7 +172,6 @@ extension PopularViewController {
 // MARK: Service call
 extension PopularViewController {
     private func fetchPopularMovieData(page: Int, completionHandler: @escaping (PopularMovie?) -> Void) {
-        setBehavior(newBehavior: .LoadingView)
         PopularMovieServices.getPopularMovie(page: page) { (data, _) in
             if data != nil {
                 self.setBehavior(newBehavior: .Success)
@@ -186,10 +185,10 @@ extension PopularViewController {
     
     private func isFavorite(result: Result, completionHandler: @escaping (Bool) -> Void) {
         FavoriteServices.getAllFavorite { (_, data) in
-            guard let status = data?.filter({ (fav) -> Bool in
+            guard let favorite = data?.filter({ (fav) -> Bool in
                 return Int(fav.id) == result.id
             }).isEmpty else {return}
-            completionHandler(!status)
+            completionHandler(!favorite)
         }
     }
 }
@@ -213,7 +212,7 @@ extension PopularViewController {
             if let data = popular {
                 if let oldResults = self.popularMovie?.results,
                     let newResults = data.results {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0 , execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                         /// Fetching more results
                         self.popularMovie?.results? = oldResults + newResults
                         self.fetchingMore = false

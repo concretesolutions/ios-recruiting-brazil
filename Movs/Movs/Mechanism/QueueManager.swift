@@ -51,7 +51,7 @@ class QueueManager {
     /// returns: queue in according to the given param
     func getQueue(_ queueType: QueueType) -> OperationQueue {
         // queue to be returned
-        var queueToBeReturned: OperationQueue? = nil
+        var queueToBeReturned: OperationQueue?
         
         // decide which queue
         switch queueType {

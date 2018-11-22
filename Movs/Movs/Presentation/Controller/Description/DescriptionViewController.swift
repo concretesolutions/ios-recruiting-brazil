@@ -50,6 +50,7 @@ class DescriptionViewController: UIViewController {
         }
     }
     
+    //swiftlint:disable cyclomatic_complexity
     func dataSourceSetup() {
         switch behavior {
         case .Favorite:
@@ -101,8 +102,8 @@ class DescriptionViewController: UIViewController {
                 setFormatedStringGenres(ids)
             }
         }
-        
     }
+    //swiftlint:enable cyclomatic_complexity
     
     private func saveFavorite (data: Result) {
         let newFavorite = data.convertResultInFavorite(with: genresString)

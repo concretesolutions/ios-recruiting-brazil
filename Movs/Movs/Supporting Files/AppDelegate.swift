@@ -6,6 +6,7 @@
 //  Copyright © 2018 SAS. All rights reserved.
 //
 
+// TODO: Não esquecer de tirar o team "Adann..." do target
 import UIKit
 
 @UIApplicationMain
