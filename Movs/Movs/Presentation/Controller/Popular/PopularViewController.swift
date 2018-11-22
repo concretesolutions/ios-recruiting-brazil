@@ -48,6 +48,12 @@ class PopularViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        switch behavior {
+        case .GenericError:
+            dataSetup()
+        default:
+            return
+        }
     }
     
     func dataSetup() {
