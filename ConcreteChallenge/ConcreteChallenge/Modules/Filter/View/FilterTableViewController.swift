@@ -23,6 +23,7 @@ class FilterTableViewController: UITableViewController, FilterView {
         self.presenter.viewDidLoad()
         
         self.setupNavigationBar()
+        self.setupTableView()
     }
 
     // MARK: - FilterView Functions
@@ -43,6 +44,10 @@ class FilterTableViewController: UITableViewController, FilterView {
         
     }
     
+    func setupTableView() {
+        self.tableView.tableFooterView = UIView(frame: .zero)
+    }
+    
     // MARK: - Navigation Bar item Functions
     @objc func cancelButtonTapped() {
         self.presenter.didTapCancelButton()
@@ -53,6 +58,14 @@ class FilterTableViewController: UITableViewController, FilterView {
     }
     
     // MARK: - TableView delegate and data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
