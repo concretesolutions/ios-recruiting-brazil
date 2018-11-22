@@ -10,9 +10,11 @@ import RealmSwift
 
 struct Genre {
     
+    //MARK: - Properties
     var id: Int
     var name: String?
     
+    //MARK: - Initializers
     init(id: Int) {
         self.id = id
     }
@@ -27,6 +29,7 @@ struct Genre {
         name = genreRlm.name
     }
     
+    //MARK: - Realm Builder
     func rlm() -> GenreRlm {
         return GenreRlm.build({ (objectRlm) in
             objectRlm.id = self.id
@@ -35,11 +38,10 @@ struct Genre {
     }
 }
 
+//MARK: - Codable
 extension Genre: Codable {
-    
     enum CodingKeys: String, CodingKey {
         case id
         case name
     }
-    
 }

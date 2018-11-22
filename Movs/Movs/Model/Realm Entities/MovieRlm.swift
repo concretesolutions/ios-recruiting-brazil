@@ -16,8 +16,6 @@ class MovieRlm: Object {
     @objc dynamic var overview: String = ""
     @objc dynamic var releaseYear: String = ""
     @objc dynamic var isFavourite: Bool = true
-    //FIXME: MovieRlm should have thumbFilePath?
-//    @objc dynamic var thumbFilePath: String = ""
     @objc dynamic var thumbnailData: Data?
     
     override static func primaryKey() -> String? {

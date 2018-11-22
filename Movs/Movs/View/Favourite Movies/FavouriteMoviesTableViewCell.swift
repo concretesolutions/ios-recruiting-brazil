@@ -11,7 +11,11 @@ import Reusable
 
 class FavouriteMoviesTableViewCell: UITableViewCell, Reusable {
     
+    //MARK: - Properties
+    // Data
     var movie: Movie!
+    
+    //MARK: - Interface
     lazy var thumbnail: UIImageView = {
         let imageView = UIImageView(frame:.zero)
         imageView.contentMode = .scaleAspectFit
@@ -49,6 +53,7 @@ class FavouriteMoviesTableViewCell: UITableViewCell, Reusable {
         return label
     }()
     
+    //MARK: - Setup
     func setup(_ movie: Movie) {
         self.movie = movie
         selectionStyle = .none
@@ -57,6 +62,7 @@ class FavouriteMoviesTableViewCell: UITableViewCell, Reusable {
        
 }
 
+//MARK: - CodeView
 extension FavouriteMoviesTableViewCell: CodeView {
     func buildViewHierarchy() {
         contentView.addSubview(thumbnail)

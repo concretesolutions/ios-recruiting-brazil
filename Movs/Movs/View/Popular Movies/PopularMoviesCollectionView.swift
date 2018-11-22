@@ -11,6 +11,7 @@ import SnapKit
 
 class PopularMoviesCollectionView: UICollectionView {
     
+    //MARK: - Initializers
     override init(frame: CGRect = .zero, collectionViewLayout layout: UICollectionViewLayout) {
         let aLayout = UICollectionViewFlowLayout()
         aLayout.sectionInset = Design.insets.popularMoviesCollectionView
@@ -24,6 +25,7 @@ class PopularMoviesCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Setup
     private func setupDesing() {
         backgroundColor = Design.colors.white
     }

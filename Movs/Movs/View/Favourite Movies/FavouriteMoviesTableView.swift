@@ -10,6 +10,7 @@ import UIKit
 
 class FavouriteMoviesTableView: UITableView {
 
+    //MARK: - Initializers
     override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
         setupDesing()
@@ -19,6 +20,7 @@ class FavouriteMoviesTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Setup
     private func setupDesing() {
         backgroundColor = Design.colors.white
         separatorStyle = .none

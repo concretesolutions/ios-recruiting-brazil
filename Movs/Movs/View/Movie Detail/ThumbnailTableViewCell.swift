@@ -11,6 +11,7 @@ import Reusable
 
 class ThumbnailTableViewCell: UITableViewCell, Reusable {
 
+    //MARK: - Interface
     lazy var thumbnail: UIImageView = {
         let imageView = UIImageView(frame:.zero)
         imageView.contentMode = .scaleAspectFit
@@ -18,12 +19,14 @@ class ThumbnailTableViewCell: UITableViewCell, Reusable {
         return imageView
     }()
     
+    //MARK: - Setup
     func setup(thumbImage:UIImage) {
         thumbnail.image = thumbImage
         setupView()
     }
 }
 
+//MARK: - CodeView
 extension ThumbnailTableViewCell: CodeView {
     func buildViewHierarchy() {
         contentView.addSubview(thumbnail)

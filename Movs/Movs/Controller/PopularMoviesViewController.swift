@@ -12,18 +12,21 @@ import SnapKit
 class PopularMoviesViewController: UIViewController {
     
     //MARK: - Properties
-    let db = RealmManager.shared
-    let tmdbService = TMDBService()
+    // interface
     let collectionView = PopularMoviesCollectionView()
     var collectionViewDelegate: PopularMoviesCollectionViewDelegate?
     var collectionViewDatasource: PopularMoviesCollectionViewDataSource?
-    
+    // Configurations
     var currentPage:Int = 1
     var isFetching:Bool = false
+    // Data
+    let db = RealmManager.shared
     var genresList = [Genre]()
     var popularMovies = [Movie]()
     var favouriteMovies = [Movie]()
-
+    // Services
+    let tmdbService = TMDBService()
+    
     //MARK: - Interface
     lazy var activityIndicator:UIActivityIndicatorView = {
         var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -71,7 +74,7 @@ class PopularMoviesViewController: UIViewController {
         setupCollectionView(with: self.popularMovies)
     }
     
-    //MARK: UI States handlers
+    //MARK: - UI State handlers
     fileprivate func updateLoading(state: LoadingState) {
         switch state {
         case .loading:
@@ -124,10 +127,8 @@ class PopularMoviesViewController: UIViewController {
         return flaggedMovies
     }
     
-    //MARK: TMDB Service
+    //MARK: - TMDB Service
     func getPopularMovies(page: Int) {
-//        loadingState = .loading
-//        presentationState = .initial
         isFetching = true
         tmdbService.getPopularMovies(page: page) { (result) in
             switch result {
@@ -160,17 +161,20 @@ class PopularMoviesViewController: UIViewController {
     
 }
 
+//MARK: - MovieSelectionDelegate
 extension PopularMoviesViewController: MovieSelectionDelegate {
     func didSelect(movie: Movie) {
         var aMovie = movie
         aMovie.genres = movie.genres.map { (movieGenre) -> Genre in
             return genresList.first(where: { $0.id == movieGenre.id }) ?? Genre(id: movieGenre.id)
         }
-        let movieVC = MovieTableViewController(movie: aMovie)
+        let movieVC = MovieDetailTableViewController(movie: aMovie)
+        movieVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(movieVC, animated: true)
     }
 }
 
+//MARK: - CollectionViewPagingDelegate
 extension PopularMoviesViewController: CollectionViewPagingDelegate {
     func shouldFetchNextPage() {
         if !isFetching {
@@ -180,7 +184,7 @@ extension PopularMoviesViewController: CollectionViewPagingDelegate {
     }
 }
 
-
+//MARK: - CodeView
 extension PopularMoviesViewController: CodeView {
     func buildViewHierarchy() {
         view.addSubview(collectionView)

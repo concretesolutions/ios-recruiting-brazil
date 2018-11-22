@@ -14,6 +14,12 @@ protocol FavouriteCellButtonDelegate {
 }
 
 class DetailTableViewCell: UITableViewCell, Reusable {
+    
+    //MARK: - Properties
+    fileprivate var hasButton: Bool = false
+    fileprivate var isFavourite = false
+    fileprivate var hasSeparator: Bool = false
+    fileprivate var delegate: FavouriteCellButtonDelegate?
 
     //MAR: - Interface
     lazy var label: UILabel = {
@@ -44,12 +50,6 @@ class DetailTableViewCell: UITableViewCell, Reusable {
         view.backgroundColor = Design.colors.dark.withAlphaComponent(0.5)
         return view
     }()
-    
-    //MARK: - Properties
-    fileprivate var hasButton: Bool = false
-    fileprivate var isFavourite = false
-    fileprivate var hasSeparator: Bool = false
-    fileprivate var delegate: FavouriteCellButtonDelegate?
     
     //MARK: - Setup
     func setup(withText text: String) {
@@ -82,6 +82,7 @@ class DetailTableViewCell: UITableViewCell, Reusable {
     }
 }
 
+//MARK: - CodeView
 extension DetailTableViewCell: CodeView {
     func buildViewHierarchy() {
         contentView.addSubview(label)

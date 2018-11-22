@@ -14,9 +14,10 @@ import SDWebImage
 class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
     
     //MARK: - Properties
+    // Data
     var movie: Movie!
     
-    //MARK: Interface
+    //MARK: - Interface
     lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame:.zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +49,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
         return button
     }()
     
+    //MARK: - Setup
     func setup(movie: Movie) {
         self.movie = movie
         setupView()
@@ -55,6 +57,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
     
 }
 
+//MARK: - CodeView
 extension PopularMoviesCollectionViewCell: CodeView {
     
     func buildViewHierarchy() {

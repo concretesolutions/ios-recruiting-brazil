@@ -9,9 +9,10 @@
 import UIKit
 import Reusable
 
-class MovieTableViewController: UITableViewController {
+class MovieDetailTableViewController: UITableViewController {
 
     //MARK: - Properties
+    // Data
     var movie: Movie
     var db = RealmManager.shared
     
@@ -43,7 +44,7 @@ class MovieTableViewController: UITableViewController {
         tableView.allowsSelection = false
     }
     
-    // MARK: - Table view data source
+    // MARK: - TableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -100,7 +101,8 @@ class MovieTableViewController: UITableViewController {
 
 }
 
-extension MovieTableViewController: FavouriteCellButtonDelegate {
+//MARK: - FavouriteCellButtonDelegate
+extension MovieDetailTableViewController: FavouriteCellButtonDelegate {
     
     func didPressButton(withFavouriteStatus shouldFavourite: Bool) {
         if shouldFavourite {

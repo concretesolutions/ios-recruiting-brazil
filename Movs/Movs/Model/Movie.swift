@@ -10,6 +10,7 @@ import RealmSwift
 
 struct Movie {
     
+    //MARK: Properties
     var id: Int
     var title: String
     var genres: [Genre]
@@ -19,6 +20,7 @@ struct Movie {
     var isFavourite: Bool = false
     var thumbnail: UIImage?
     
+    //MARK: Initializers
     public init(id: Int, title: String, genres: [Genre], overview: String, releaseYear: String, thumbFilePath: String) {
         self.id = id
         self.title = title
@@ -42,6 +44,12 @@ struct Movie {
         }
     }
     
+    //MARK: - Mutating Methods
+    mutating func favourite() {
+        self.isFavourite = true
+    }
+    
+    //MARK: - Status Methods
     func genresText() -> String {
         var genresText = ""
         self.genres.forEach({genresText.append("\($0.name ?? ""), ")})
@@ -53,10 +61,7 @@ struct Movie {
         return genresText
     }
     
-    mutating func favourite() {
-        self.isFavourite = true
-    }
-    
+    //MARK: - Realm Builder
     func rlm() -> MovieRlm {
         return MovieRlm.build { (objectRlm) in
             objectRlm.id = self.id
@@ -70,6 +75,7 @@ struct Movie {
     
 }
 
+//MARK: - Codable
 extension Movie: Codable {
     
     enum CodingKeys: String, CodingKey {
