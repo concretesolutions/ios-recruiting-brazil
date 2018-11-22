@@ -173,11 +173,25 @@
                             <outlet property="delegate" destination="1WV-QA-5lM" id="H07-6A-hgU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Movies" id="Ggm-KM-1CT"/>
+                    <navigationItem key="navigationItem" title="Movies" id="Ggm-KM-1CT">
+                        <barButtonItem key="leftBarButtonItem" title="Clear Filters" id="yKd-sa-NqB">
+                            <connections>
+                                <action selector="clearFiltersButtonTapped:" destination="1WV-QA-5lM" id="afa-QS-MrH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="FilterIcon" id="e81-ic-uvo">
+                            <connections>
+                                <action selector="filterButtonTapped:" destination="1WV-QA-5lM" id="AAS-Ei-eDR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="clearFiltersButtonOutlet" destination="yKd-sa-NqB" id="Huc-XK-W9T"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GcU-gF-czN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3101.5999999999999" y="659.82008995502258"/>
+            <point key="canvasLocation" x="3172" y="627"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="GNt-hd-Xao">
@@ -225,6 +239,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="FilterIcon" width="17" height="19"/>
         <image name="favorite_empty_icon" width="22" height="21"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="list_icon" width="18" height="10"/>

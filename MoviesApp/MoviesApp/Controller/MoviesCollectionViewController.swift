@@ -19,7 +19,7 @@ class MoviesCollectionViewController: UICollectionViewController {
     
     var hasLoadedData = false
     
-    var filteredMovies = [Movie]()
+    var searchedMovies = [Movie]()
     
     var canFilter: Bool = false
     
@@ -139,7 +139,7 @@ class MoviesCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        
         if isFiltering() {
-            return filteredMovies.count
+            return searchedMovies.count
         }
         
         return movies.count
@@ -154,7 +154,7 @@ class MoviesCollectionViewController: UICollectionViewController {
         print(self.movies.count)
         
         if isFiltering() {
-            cell?.setupCell(title: self.filteredMovies[indexPath.row].title, movie: self.filteredMovies[indexPath.row])
+            cell?.setupCell(title: self.searchedMovies[indexPath.row].title, movie: self.searchedMovies[indexPath.row])
         }else{
             cell?.setupCell(title: self.movies[indexPath.row].title, movie: self.movies[indexPath.row])
         }
@@ -171,7 +171,7 @@ class MoviesCollectionViewController: UICollectionViewController {
         if let viewController = UIStoryboard(name: "Movie", bundle: nil).instantiateViewController(withIdentifier: "selectedMovieViewController") as? SelectedMovieTableViewController {
             
             if isFiltering(){
-                viewController.movie = self.filteredMovies[indexPath.row]
+                viewController.movie = self.searchedMovies[indexPath.row]
                 
             }else{
                 viewController.movie = self.movies[indexPath.row]
@@ -241,7 +241,7 @@ extension MoviesCollectionViewController: UISearchResultsUpdating, UISearchContr
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredMovies = movies.filter({( movie : Movie) -> Bool in
+        searchedMovies = movies.filter({( movie : Movie) -> Bool in
             self.searchText = searchText
             print(self.searchText)
             return movie.title.lowercased().contains(searchText.lowercased())
@@ -255,7 +255,7 @@ extension MoviesCollectionViewController: UISearchResultsUpdating, UISearchContr
         
         print("Filtrando")
         
-        if (self.filteredMovies.isEmpty == true && !searchBarIsEmpty()) && hasAddedSearchImage == false {
+        if (self.searchedMovies.isEmpty == true && !searchBarIsEmpty()) && hasAddedSearchImage == false {
             print("Sua busca não retornou resultados")
             
             let searchText = "Sua busca por \"" + self.searchText + "\" não retornou resultados"
@@ -276,7 +276,7 @@ extension MoviesCollectionViewController: UISearchResultsUpdating, UISearchContr
             
         }
         
-        if (self.filteredMovies.isEmpty == false && !searchBarIsEmpty()) && hasAddedSearchImage == true {
+        if (self.searchedMovies.isEmpty == false && !searchBarIsEmpty()) && hasAddedSearchImage == true {
             self.searchImageView.removeFromSuperview()
             self.hasAddedSearchImage = false
             self.searchLabel.removeFromSuperview()

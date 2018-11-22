@@ -47,8 +47,10 @@ public class MovieDAO{
         
             print(genresString)
         
+            var releaseString = movie.release_date.components(separatedBy: "-")[0]
+        
             managedMovie.setValue(movie.title, forKey: "title")
-            managedMovie.setValue(movie.release_date, forKey: "release_date")
+            managedMovie.setValue(releaseString, forKey: "release_date")
             managedMovie.setValue(genresString, forKey: "genres")
             managedMovie.setValue(movie.overview, forKey: "overview")
             managedMovie.setValue(movie.poster_path, forKey: "poster_path")

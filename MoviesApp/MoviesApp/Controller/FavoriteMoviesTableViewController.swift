@@ -11,7 +11,10 @@ import UIKit
 class FavoriteMoviesTableViewController: UITableViewController {
     
     var movies: [Movie] = []
+    var searchedMovies = [Movie]()
     var filteredMovies = [Movie]()
+    @IBOutlet weak var clearFiltersButtonOutlet: UIBarButtonItem!
+    
     let searchController = UISearchController(searchResultsController: nil)
     
     var searchImageView = UIImageView()
@@ -21,6 +24,57 @@ class FavoriteMoviesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        //Checks for any filtered movies
+        if !(FilterManager.shared.releaseDates.isEmpty) || !(FilterManager.shared.genders.isEmpty){
+            
+            
+            print("Vai rolar um filtro")
+            
+            for movie in self.movies{
+                
+                if FilterManager.shared.genders.contains(where: { (genre) -> Bool in
+                    
+                    for movieGender in movie.genre_ids{
+                        if genre.id == movieGender{
+                            return true
+                        }
+                    }
+                    return false
+                    
+                }){
+                    
+                    if self.filteredMovies.contains(where: { (comparedMovie) -> Bool in
+                        if comparedMovie.title == movie.title{
+                            return true
+                        }
+                        return false
+                    }){
+                        print("Esse filme ja existe no vetor, muito provavelmente proveniente de outro filtor.")
+                    }else{
+                        self.filteredMovies.append(movie)
+                    }
+                    
+                }
+                
+                if FilterManager.shared.releaseDates.contains(movie.release_date){
+                    
+                    if self.filteredMovies.contains(where: { (comparedMovie) -> Bool in
+                        if comparedMovie.title == movie.title {
+                            return true
+                        }
+                        return false
+                    }){
+                        print("Ja existe")
+                    }else{
+                        self.filteredMovies.append(movie)
+                    }
+                }
+            }
+            
+        }else{
+           print("Nenhum filtro aplicado")
+        }
+
         self.tabBarController?.tabBar.isHidden = false
         
         movies = MovieDAO.readAllFavoriteMovies()
@@ -29,6 +83,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         movies = MovieDAO.readAllFavoriteMovies()
         self.tableView.reloadData()
         
@@ -39,6 +94,20 @@ class FavoriteMoviesTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.filteredMovies = []
+    }
+    
+    @IBAction func clearFiltersButtonTapped(_ sender: Any) {
+        
+        FilterManager.shared.genders.removeAll()
+        FilterManager.shared.releaseDates.removeAll()
+        
+        self.tableView.reloadData()
+        
+    }
+    
 
     // MARK: - Table view data source
 
@@ -48,8 +117,13 @@ class FavoriteMoviesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if isFiltering(){
+        if !(FilterManager.shared.releaseDates.isEmpty) || !(FilterManager.shared.genders.isEmpty){
+            print("Vai rolar um filtro")
             return self.filteredMovies.count
+        }
+        
+        if isFiltering(){
+            return self.searchedMovies.count
         }else{
             return self.movies.count
         }
@@ -59,10 +133,19 @@ class FavoriteMoviesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "favoriteMovieTableViewCell", for: indexPath) as! FavoriteMovieTableViewCell
+        
+        if !(FilterManager.shared.releaseDates.isEmpty) || !(FilterManager.shared.genders.isEmpty){
+            
+            cell.setupCell(title: filteredMovies[indexPath.row].title, detail: filteredMovies[indexPath.row].overview, release: filteredMovies[indexPath.row].release_date, posterPath: filteredMovies[indexPath.row].poster_path)
+            
+            return cell
+            
+        }
+        
     
         if isFiltering(){
             
-            cell.setupCell(title: filteredMovies[indexPath.row].title, detail: filteredMovies[indexPath.row].overview, release: filteredMovies[indexPath.row].release_date, posterPath: filteredMovies[indexPath.row].poster_path)
+            cell.setupCell(title: searchedMovies[indexPath.row].title, detail: searchedMovies[indexPath.row].overview, release: searchedMovies[indexPath.row].release_date, posterPath: searchedMovies[indexPath.row].poster_path)
             
         } else {
             
@@ -85,7 +168,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
         if let viewController = UIStoryboard(name: "Movie", bundle: nil).instantiateViewController(withIdentifier: "selectedMovieViewController") as? SelectedMovieTableViewController {
     
             if isFiltering(){
-                viewController.movie = self.filteredMovies[indexPath.row]
+                viewController.movie = self.searchedMovies[indexPath.row]
             }else{
                 viewController.movie = self.movies[indexPath.row]
             }
@@ -101,9 +184,9 @@ class FavoriteMoviesTableViewController: UITableViewController {
         
         if editingStyle == .delete {
             if isFiltering(){
-                print(filteredMovies[indexPath.row].title)
-                MovieDAO.deleteFavoriteMovie(favoriteMovie: filteredMovies[indexPath.row])
-                self.filteredMovies.remove(at: indexPath.row)
+                print(searchedMovies[indexPath.row].title)
+                MovieDAO.deleteFavoriteMovie(favoriteMovie: searchedMovies[indexPath.row])
+                self.searchedMovies.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }else{
                 print(movies[indexPath.row].title)
@@ -114,6 +197,16 @@ class FavoriteMoviesTableViewController: UITableViewController {
         }
         
     }
+    
+    @IBAction func filterButtonTapped(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Filter", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "filterViewController") as! FilterViewController
+        
+        self.navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
 
 }
 
@@ -128,7 +221,7 @@ extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchCo
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredMovies = movies.filter({( movie : Movie) -> Bool in
+        searchedMovies = movies.filter({( movie : Movie) -> Bool in
             self.searchText = searchText
             return movie.title.lowercased().contains(searchText.lowercased())
         })
@@ -137,7 +230,7 @@ extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchCo
     
     func isFiltering() -> Bool {
         
-        if (self.filteredMovies.isEmpty == true && !searchBarIsEmpty()) && hasAddedSearchImage == false {
+        if (self.searchedMovies.isEmpty == true && !searchBarIsEmpty()) && hasAddedSearchImage == false {
             print("Sua busca não retornou resultados")
             
             let searchText = "Sua busca por \"" + self.searchText + "\" não retornou resultados"
@@ -158,7 +251,7 @@ extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchCo
             
         }
         
-        if (self.filteredMovies.isEmpty == false && !searchBarIsEmpty()) && hasAddedSearchImage == true {
+        if (self.searchedMovies.isEmpty == false && !searchBarIsEmpty()) && hasAddedSearchImage == true {
             self.searchImageView.removeFromSuperview()
             self.hasAddedSearchImage = false
             self.searchLabel.removeFromSuperview()
