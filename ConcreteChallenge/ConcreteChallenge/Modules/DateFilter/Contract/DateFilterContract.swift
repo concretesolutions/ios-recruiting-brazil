@@ -17,6 +17,8 @@ protocol DateFilterWireframe: class {
 
 protocol DateFilterView {
     var presenter: DateFilterPresentation! { get set }
+    
+    func showDates(dates: [Date])
 }
 
 protocol DateFilterPresentation: class {
@@ -29,9 +31,12 @@ protocol DateFilterPresentation: class {
 
 protocol DateFilterInteractorInput: class {
     var output: DateFilterInteractorOutput! { get set }
+    
+    func getDates()
 }
 
 protocol DateFilterInteractorOutput: class {
+    func didGetDates(dates: [Date])
 }
 
 

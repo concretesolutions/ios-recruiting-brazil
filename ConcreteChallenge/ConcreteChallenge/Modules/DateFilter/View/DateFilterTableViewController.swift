@@ -26,6 +26,10 @@ class DateFilterTableViewController: UITableViewController, DateFilterView {
     }
 
     // MARK: - DateFilterView Functions
+    func showDates(dates: [Date]) {
+        print(dates)
+    }
+    
     
     // MARK: - Functions
     func setupNavigationBar() {

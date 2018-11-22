@@ -14,4 +14,12 @@ class DateFilterInteractor: DateFilterInteractorInput {
     var output: DateFilterInteractorOutput!
     
     // MARK: - DateFilterInteractorInput Functions
+    func getDates() {
+        var dates: [Date] = []
+        for movie in FavoriteMovieCoreDataManager.favoriteMovies {
+            dates.append(movie.releaseDate)
+        }
+        
+        self.output.didGetDates(dates: dates)
+    }
 }

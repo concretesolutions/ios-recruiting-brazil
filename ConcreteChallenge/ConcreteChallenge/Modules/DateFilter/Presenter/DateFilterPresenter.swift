@@ -10,7 +10,6 @@ import Foundation
 
 class DateFilterPresenter: DateFilterPresentation, DateFilterInteractorOutput {
     
-    
     // MARK: - Properties
     var view: DateFilterView?
     var interactor: DateFilterInteractorInput!
@@ -19,9 +18,11 @@ class DateFilterPresenter: DateFilterPresentation, DateFilterInteractorOutput {
     
     // MARK: - DateFilterPresentation functions
     func viewDidLoad() {
-        
+        self.interactor.getDates()
     }
 
     // MARK: - DateFilterInteractorOutput functions
-
+    func didGetDates(dates: [Date]) {
+        self.view?.showDates(dates: dates)
+    }
 }
