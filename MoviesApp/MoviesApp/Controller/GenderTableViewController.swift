@@ -16,9 +16,7 @@ class GenderTableViewController: UITableViewController {
         super.viewDidLoad()
         
         var movies = MovieDAO.readAllFavoriteMovies()
-        print("######")
-        print(movies[0].genre_ids)
-        
+
         var genresIds = [Int]()
         
         for movie in movies{

@@ -25,24 +25,17 @@ class FavoriteMoviesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         //Checks for any filtered movies
-        if !(FilterManager.shared.releaseDates.isEmpty) || !(FilterManager.shared.genders.isEmpty){
-            
-            
+        if isFiltering(){
             print("Vai rolar um filtro")
-            
             for movie in self.movies{
-                
                 if FilterManager.shared.genders.contains(where: { (genre) -> Bool in
-                    
                     for movieGender in movie.genre_ids{
                         if genre.id == movieGender{
                             return true
                         }
                     }
                     return false
-                    
                 }){
-                    
                     if self.filteredMovies.contains(where: { (comparedMovie) -> Bool in
                         if comparedMovie.title == movie.title{
                             return true
@@ -70,7 +63,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
                     }
                 }
             }
-            
+            self.tableView.reloadData()
         }else{
            print("Nenhum filtro aplicado")
         }
@@ -122,7 +115,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
             return self.filteredMovies.count
         }
         
-        if isFiltering(){
+        if isSearching(){
             return self.searchedMovies.count
         }else{
             return self.movies.count
@@ -141,9 +134,8 @@ class FavoriteMoviesTableViewController: UITableViewController {
             return cell
             
         }
-        
     
-        if isFiltering(){
+        if isSearching(){
             
             cell.setupCell(title: searchedMovies[indexPath.row].title, detail: searchedMovies[indexPath.row].overview, release: searchedMovies[indexPath.row].release_date, posterPath: searchedMovies[indexPath.row].poster_path)
             
@@ -166,12 +158,15 @@ class FavoriteMoviesTableViewController: UITableViewController {
         print(self.movies[indexPath.row].title)
         
         if let viewController = UIStoryboard(name: "Movie", bundle: nil).instantiateViewController(withIdentifier: "selectedMovieViewController") as? SelectedMovieTableViewController {
-    
+            
             if isFiltering(){
+                viewController.movie = self.filteredMovies[indexPath.row]
+            }else if isSearching(){
                 viewController.movie = self.searchedMovies[indexPath.row]
             }else{
                 viewController.movie = self.movies[indexPath.row]
             }
+            
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
@@ -183,7 +178,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            if isFiltering(){
+            if isSearching(){
                 print(searchedMovies[indexPath.row].title)
                 MovieDAO.deleteFavoriteMovie(favoriteMovie: searchedMovies[indexPath.row])
                 self.searchedMovies.remove(at: indexPath.row)
@@ -228,7 +223,13 @@ extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchCo
         tableView.reloadData()
     }
     
-    func isFiltering() -> Bool {
+    func isFiltering() -> Bool{
+        
+        return !FilterManager.shared.genders.isEmpty || !FilterManager.shared.releaseDates.isEmpty
+        
+    }
+    
+    func isSearching() -> Bool {
         
         if (self.searchedMovies.isEmpty == true && !searchBarIsEmpty()) && hasAddedSearchImage == false {
             print("Sua busca não retornou resultados")

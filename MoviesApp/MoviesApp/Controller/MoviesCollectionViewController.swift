@@ -138,7 +138,7 @@ class MoviesCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        
-        if isFiltering() {
+        if isSearching() {
             return searchedMovies.count
         }
         
@@ -153,7 +153,7 @@ class MoviesCollectionViewController: UICollectionViewController {
     
         print(self.movies.count)
         
-        if isFiltering() {
+        if isSearching() {
             cell?.setupCell(title: self.searchedMovies[indexPath.row].title, movie: self.searchedMovies[indexPath.row])
         }else{
             cell?.setupCell(title: self.movies[indexPath.row].title, movie: self.movies[indexPath.row])
@@ -170,7 +170,7 @@ class MoviesCollectionViewController: UICollectionViewController {
         
         if let viewController = UIStoryboard(name: "Movie", bundle: nil).instantiateViewController(withIdentifier: "selectedMovieViewController") as? SelectedMovieTableViewController {
             
-            if isFiltering(){
+            if isSearching(){
                 viewController.movie = self.searchedMovies[indexPath.row]
                 
             }else{
@@ -249,9 +249,7 @@ extension MoviesCollectionViewController: UISearchResultsUpdating, UISearchContr
         collectionView.reloadData()
     }
     
-
-    
-    func isFiltering() -> Bool {
+    func isSearching() -> Bool {
         
         print("Filtrando")
         

@@ -11,6 +11,10 @@ import UIKit
 class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableViewOutlet: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableViewOutlet.reloadData()
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +38,37 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if indexPath.row == 0{
             
-            cell.setupCell(filterTitle: "Date")
+            var contentString = ""
+            
+            for date in FilterManager.shared.releaseDates{
+                
+                if contentString == ""{
+                    contentString += date
+
+                }else{
+                    contentString += ", " + date
+
+                }
+                
+                
+            }
+            
+            cell.setupCell(filterTitle: "Date", filterContent: contentString)
             
         }else if indexPath.row == 1{
             
-            cell.setupCell(filterTitle: "Genres")
+            var contentString = ""
+            for genre in FilterManager.shared.genders{
+                
+                if contentString == ""{
+                    contentString += genre.name
+
+                }else{
+                    contentString += ", " + genre.name
+                }
+            }
+            
+            cell.setupCell(filterTitle: "Genres", filterContent: contentString )
             
         }
         

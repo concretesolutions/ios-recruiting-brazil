@@ -25,9 +25,10 @@ class FilterSelectionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell(filterTitle: String){
+    func setupCell(filterTitle: String, filterContent: String){
         
         self.filterTitleLabelOutlet.text = filterTitle
+        self.filterContentLabelOutlet.text = filterContent
         
     }
 
