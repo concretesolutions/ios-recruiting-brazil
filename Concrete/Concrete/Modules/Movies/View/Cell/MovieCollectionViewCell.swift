@@ -54,18 +54,18 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func set(imagePath: String?){
         //TODO: - Match image to correct cell
-        guard let imagePath = imagePath else {
-            Logger.logError(in: self, message: "Could not get instance from imagePath")
+        guard let imagePathValidated = imagePath else {
+            Logger.logError(in: self, message: "Could not get instance from imagePath:\(imagePath ?? "Nil")")
             return
         }
         
-        self.imagePath = imagePath
+        self.imagePath = imagePathValidated
         
-        ImageManager.shared.fetchImage(from: imagePath) { (result) in
+        ImageManager.shared.fetchImage(from: imagePathValidated) { (result) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    if self.imagePath == imagePath {
+                    if self.imagePath == imagePathValidated {
                         self.outletMovieImage.image = data
                     }else{
                         self.outletMovieImage.image = #imageLiteral(resourceName: "default-Movie")

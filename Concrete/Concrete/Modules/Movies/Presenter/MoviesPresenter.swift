@@ -72,6 +72,23 @@ class MoviesPresenter: NSObject {
             self.interactor.fetchMovies(page: self.interactor.page+1)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if (kind == UICollectionView.elementKindSectionHeader) {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MoviesSearchCollectionReusableView-default", for: indexPath) as? MoviesSearchCollectionReusableView else {
+                Logger.logError(in: self, message: "Could not cast UICollectionReusableView to MoviesSearchCollectionReusableView")
+                return UICollectionReusableView()
+            }
+            
+            headerView.outletSearchBar.delegate = self
+            
+            return headerView
+        }
+        
+        return UICollectionReusableView()
+        
+    }
 }
 
 extension MoviesPresenter: MoviesInteractorDelegate {
@@ -90,6 +107,25 @@ extension MoviesPresenter: MoviesInteractorDelegate {
         DispatchQueue.main.async {
 //            self.router.showAlert(message: error.localizedDescription)
             self.view.collectionView?.refreshControl?.endRefreshing()
+        }
+    }
+}
+
+extension MoviesPresenter: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar.text != nil {
+            searchBar.text = ""
+            self.interactor.cancelSearch()
+        }
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            self.interactor.fetchSearchMovies(query: text)
+        }
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == nil || searchBar.text?.isEmpty ?? false {
+            self.interactor.cancelSearch()
         }
     }
 }

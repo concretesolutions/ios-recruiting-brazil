@@ -90,6 +90,12 @@ class MoviesViewController: UICollectionViewController {
         
         movieCell.cleanData()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell = self.presenter.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+        
+        return cell
+    }
 }
 
 // MARK: - UICollectionViewFlowLayout

@@ -61,7 +61,7 @@ public class Movie: NSManagedObject,Decodable {
         let releaseDateString = try container.decode(String.self, forKey: .releaseDate)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-DD"
         
         let date =  dateFormatter.date(from: releaseDateString)
         if let nsdate = date as NSDate? {

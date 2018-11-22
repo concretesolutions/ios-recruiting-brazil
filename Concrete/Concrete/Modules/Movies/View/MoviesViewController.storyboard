@@ -19,13 +19,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="W6G-O0-QYO">
                             <size key="itemSize" width="187" height="231"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionViewCell-Default" id="7ld-xl-53i" customClass="MovieCollectionViewCell" customModule="Concrete" customModuleProvider="target">
-                                <rect key="frame" x="94" y="0.0" width="187" height="231"/>
+                                <rect key="frame" x="94" y="50" width="187" height="231"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="187" height="231"/>
@@ -41,7 +41,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebC-Uq-rtA">
-                                                        <rect key="frame" x="8" y="8" width="171" height="36.5"/>
+                                                        <rect key="frame" x="8" y="8" width="171" height="36"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -74,13 +74,32 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MoviesSearchCollectionReusableView-default" id="4kI-6g-Q5O" customClass="MoviesSearchCollectionReusableView" customModule="Concrete" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i0c-go-3B5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="i0c-go-3B5" firstAttribute="top" secondItem="4kI-6g-Q5O" secondAttribute="top" id="0tL-lF-10Q"/>
+                                <constraint firstItem="i0c-go-3B5" firstAttribute="leading" secondItem="4kI-6g-Q5O" secondAttribute="leading" id="6Jw-2E-Ngk"/>
+                                <constraint firstAttribute="bottom" secondItem="i0c-go-3B5" secondAttribute="bottom" id="7kj-Bc-8iM"/>
+                                <constraint firstAttribute="trailing" secondItem="i0c-go-3B5" secondAttribute="trailing" id="LOv-nc-mOg"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="outletSearchBar" destination="i0c-go-3B5" id="ezE-dE-yvE"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="jnF-af-p1w" id="nxc-F7-9qP"/>
                             <outlet property="delegate" destination="jnF-af-p1w" id="7kf-C0-JrI"/>
                         </connections>
                     </collectionView>
                     <connections>
-                        <outlet property="outletLoadingView" destination="p9Q-Wc-P6E" id="DXg-Uj-did"/>
+                        <outlet property="outletLoadingView" destination="p9Q-Wc-P6E" id="43M-J2-XPc"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCL-vy-SMH" userLabel="First Responder" sceneMemberID="firstResponder"/>

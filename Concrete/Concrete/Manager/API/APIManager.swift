@@ -49,8 +49,6 @@ class APIManager {
         self.setStatusBar(loading: true)
         let endpoint = self.endpoint(for: request)
         
-        print("Endpoint: \(endpoint)")
-        
         let task = session.dataTask(with: URLRequest(url: endpoint)) { data, response, error in
             if let data = data {
                 do {
