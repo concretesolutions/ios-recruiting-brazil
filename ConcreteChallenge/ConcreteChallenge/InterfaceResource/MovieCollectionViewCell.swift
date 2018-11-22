@@ -32,11 +32,18 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Functions
     func setupCell(movie: Movie) {
-        ImageDataManager.getImageFrom(imagePath: movie.posterPath) { (image) in
-            DispatchQueue.main.async {
-                self.posterImage.image = image                
+        if let posterPath = movie.posterPath {
+            ImageDataManager.getImageFrom(imagePath: posterPath) { (image) in
+                DispatchQueue.main.async {
+                    self.posterImage.image = image
+                    movie.image = image
+                }
             }
+        } else {
+            self.posterImage.image = UIImage(named: "image_unavailable")
+            movie.image = self.posterImage.image
         }
+        
         self.nameLabel.text = movie.title
         
         if movie.isFavorite {
