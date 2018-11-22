@@ -13,6 +13,9 @@ protocol FilterWireframe: class {
     static var presenter: FilterPresentation! { get set }
     
     static func assembleModule() -> UIViewController
+    
+    func exitFilter()
+    func doneFilter()
 }
 
 protocol FilterView {
@@ -25,6 +28,9 @@ protocol FilterPresentation: class {
     var router: FilterWireframe! { get set }
     
     func viewDidLoad()
+    
+    func didTapCancelButton()
+    func didTapDoneButton()
 }
 
 protocol FilterInteractorInput: class {

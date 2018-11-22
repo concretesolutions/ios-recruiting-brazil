@@ -38,4 +38,15 @@ class FilterRouter: FilterWireframe {
         
         return viewController
     }
+    
+    func exitFilter() {
+        self.viewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func doneFilter() {
+        self.viewController?.dismiss(animated: true, completion: {
+            
+        })
+    }
+    
 }

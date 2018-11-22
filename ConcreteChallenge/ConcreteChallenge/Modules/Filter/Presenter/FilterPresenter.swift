@@ -22,6 +22,14 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
         
     }
     
+    func didTapCancelButton() {
+        self.router.exitFilter()
+    }
+    
+    func didTapDoneButton() {
+        self.router.doneFilter()
+    }
+    
     // MARK: - FilterInteractorOutput functions
 
 }

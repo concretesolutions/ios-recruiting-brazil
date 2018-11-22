@@ -45,11 +45,11 @@ class FilterTableViewController: UITableViewController, FilterView {
     
     // MARK: - Navigation Bar item Functions
     @objc func cancelButtonTapped() {
-        
+        self.presenter.didTapCancelButton()
     }
     
     @objc func doneButtonTapped() {
-        
+        self.presenter.didTapDoneButton()
     }
 }
 
