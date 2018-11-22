@@ -36,6 +36,9 @@ class MoviesCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        self.collectionView.reloadData()
+        
+        
         if hasLoadedData == false {
             
             self.activityIndicatorOutlet.isHidden = false
@@ -52,7 +55,6 @@ class MoviesCollectionViewController: UICollectionViewController {
                     
                     for movie in movies{
                         if let tempMovie = movie as? Movie{
-                            print("xablau2")
                             self.movies.append(tempMovie)
                             print(tempMovie)
                         }
@@ -106,7 +108,6 @@ class MoviesCollectionViewController: UICollectionViewController {
                     
                     for movie in movies{
                         if let tempMovie = movie as? Movie{
-                            print("xablau2")
                             self.movies.append(tempMovie)
                             print(tempMovie)
                         }
@@ -189,7 +190,6 @@ class MoviesCollectionViewController: UICollectionViewController {
             print(indexPath.row)
             
             let InitPage = Int(NetworkManager.shared.initialPage)!
-            print("#############")
             print(InitPage)
             let newPage = InitPage + 1
             print(newPage)
@@ -206,7 +206,6 @@ class MoviesCollectionViewController: UICollectionViewController {
                         for movie in movies{
                             if let tempMovie = movie as? Movie{
                                 print(NetworkManager.shared.initialPage)
-                                print("xablau3")
                                 self.movies.append(tempMovie)
                                 print(tempMovie)
                             }

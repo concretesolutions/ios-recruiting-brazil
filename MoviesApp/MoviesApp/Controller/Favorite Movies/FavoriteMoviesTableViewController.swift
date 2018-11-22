@@ -216,6 +216,16 @@ extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchCo
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        
+//        if isFiltering(){
+//            
+//            filteredMovies = movies.filter({ (movie: Movie) -> Bool in
+//                self.searchText = searchText
+//                return movie.title.lowercased().contains(searchText.lowercased())
+//            })
+//            tableView.reloadData()
+//        }
+        
         searchedMovies = movies.filter({( movie : Movie) -> Bool in
             self.searchText = searchText
             return movie.title.lowercased().contains(searchText.lowercased())

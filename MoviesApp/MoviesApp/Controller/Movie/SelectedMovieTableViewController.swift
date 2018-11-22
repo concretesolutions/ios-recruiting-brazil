@@ -61,31 +61,6 @@ class SelectedMovieTableViewController: UITableViewController {
             self.movieGenreOutlet.text = genresString
         }
         
-//        MovieDAO.getAll { (response, error) in
-//            if error == nil{
-//                if let responseObj = response as? Response{
-//
-//                    let movies = responseObj.results
-//                    print(NetworkManager.shared.initialPage)
-//
-//                    for movie in movies{
-//                        if let tempMovie = movie as? Movie{
-//                            print(NetworkManager.shared.initialPage)
-//                            print("xablau3")
-//                            self.movies.append(tempMovie)
-//                            print(tempMovie)
-//                        }
-//                    }
-//
-//                    self.collectionView.reloadData()
-//
-//                }
-//            }else{
-//                print("Couldn't update page")
-//
-//            }
-//        }
-        
         if MovieDAO.isMovieFavorite(comparedMovie: self.movie!){
             self.isFavoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
         }
