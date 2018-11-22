@@ -60,7 +60,7 @@ class FavoriteMovieCoreDataManager {
                 for data in result as! [NSManagedObject] {
                     let id = data.value(forKey: "id") as! Int
                     let title = data.value(forKey: "title") as! String
-                    let posterPath = data.value(forKey: "posterPath") as! String
+                    let posterPath = data.value(forKey: "posterPath") as? String ?? nil
                     let genreIds = data.value(forKey: "genreIds") as! [Int]
                     let overview = data.value(forKey: "overview") as! String
                     let releaseDate = data.value(forKey: "releaseDate") as! Date

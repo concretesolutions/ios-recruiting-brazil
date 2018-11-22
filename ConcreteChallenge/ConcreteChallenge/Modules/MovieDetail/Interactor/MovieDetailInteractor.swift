@@ -18,28 +18,28 @@ class MovieDetailInteractor: MovieDetailInteractorInput {
         
         // Get poster imagem
         var posterImage: UIImage = UIImage()
-        ImageDataManager.getImageFrom(imagePath: movie.posterPath) { (image) in
+        if let image = movie.image {
             posterImage = image
-            
-            // Get Genres
-            var genres: [String] = []
-            MovieDataManager.fetchGenres(completion: { (status) in
-                if status == RequestStatus.success {
-                    for id in movie.genreIds {
-                        if let genre = MovieDataManager.genres.first(where: { $0.id == id }) {
-                            genres.append(genre.name)
-                        }
-                    }
-                    
-                    // Instantiate new Movie Detail
-                    let movieDetail = MovieDetails(movie: movie, posterImage: posterImage, genres: genres)
-                    if movie.isFavorite {
-                        movieDetail.isFavorite = true
-                    }
-                    self.output.didFetchMovieDetails(movieDetails: movieDetail)
-                }
-            })
         }
+        
+        // Get Genres
+        var genres: [String] = []
+        MovieDataManager.fetchGenres(completion: { (status) in
+            if status == RequestStatus.success {
+                for id in movie.genreIds {
+                    if let genre = MovieDataManager.genres.first(where: { $0.id == id }) {
+                        genres.append(genre.name)
+                    }
+                }
+                
+                // Instantiate new Movie Detail
+                let movieDetail = MovieDetails(movie: movie, posterImage: posterImage, genres: genres)
+                if movie.isFavorite {
+                    movieDetail.isFavorite = true
+                }
+                self.output.didFetchMovieDetails(movieDetails: movieDetail)
+            }
+        })
     }
     
     func addMovieToFavorite(movie: Movie) {
