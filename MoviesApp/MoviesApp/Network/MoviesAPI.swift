@@ -20,24 +20,38 @@ enum Result<T> {
 }
 
 protocol MoviesService{
-    func fetchPopularMovies(query:String?, callback: @escaping  (Result<[Movie]>) -> Void)
+    func fetchPopularMovies(query:String?, page:Int?, callback: @escaping  (Result<MovieResponse>) -> Void)
     func fetchGenre(callback: @escaping (Result<[Genre]>) -> Void)
 }
 
 class MoviesServiceImplementation: MoviesService{
     
     var baseUrl:String = "https://api.themoviedb.org/3/"
+    var isFetchInProgress = false
     
-    func fetchPopularMovies(query:String?, callback: @escaping (Result<[Movie]>) -> Void) {
+    func fetchPopularMovies(query:String? = nil, page:Int? = nil, callback: @escaping (Result<MovieResponse>) -> Void) {
+        
+        guard !isFetchInProgress else {
+            return
+        }
+        
+        // 2
+        isFetchInProgress = true
         
         var request = ""
         
         if let query = query?.replacingOccurrences(of: " ", with: "%20"){
             let queryMoviesRequest = "search/movie?api_key="
             request = baseUrl + queryMoviesRequest + MoviesAPIConfig.apikey + "&query=" + query
+            
         }else{
             let popularMoviesRequest = "movie/popular?api_key="
             request = baseUrl + popularMoviesRequest + MoviesAPIConfig.apikey
+            
+            if let page = page{
+                request += "&page=\(page)"
+                print(request)
+            }
         }
         
         guard let url = URL(string: request) else {return}
@@ -51,11 +65,16 @@ class MoviesServiceImplementation: MoviesService{
             
             do{
                 let responseObj = try jsonDecoder.decode(MovieResponse.self, from: data)
-                DispatchQueue.main.async {
-                    callback(.success(responseObj.results))
+                DispatchQueue.main.async { [weak self] in
+                    self?.isFetchInProgress = false
+                    callback(.success(responseObj))
                 }
             }catch{
-                callback(.error(error))
+                DispatchQueue.main.async { [weak self] in
+                    self?.isFetchInProgress = false
+                    callback(.error(error))
+                }
+                
             }
         }
         task.resume()

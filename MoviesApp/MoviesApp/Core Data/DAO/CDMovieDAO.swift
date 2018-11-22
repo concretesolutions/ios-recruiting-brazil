@@ -11,23 +11,29 @@ import CoreData
 
 final class CDMovieDAO{
     
-    static func create(from movie:Movie)->CDMovie{
-        let persistedMovie = CDMovie.newMovie()
-        persistedMovie.id = Int32(movie.id)
-        persistedMovie.title = movie.title
-        persistedMovie.posterPath = movie.posterPath
-        persistedMovie.voteAverage = movie.voteAverage
-        persistedMovie.releaseDate = movie.releaseData
-        persistedMovie.overview = movie.overview
-        DatabaseManager.saveContext()
-        return persistedMovie
+    static func create(from movie:Movie, callback: @escaping (CDMovie?, Error?)->Void){
+        
+        if hasFavoriteMovie(with: movie.id){
+            callback(nil, NSError(domain: "Core Data", code: 200, userInfo: nil))
+        }else{
+            let persistedMovie = CDMovie.newMovie()
+            persistedMovie.id = Int32(movie.id)
+            persistedMovie.title = movie.title
+            persistedMovie.posterPath = movie.posterPath
+            persistedMovie.voteAverage = movie.voteAverage
+            persistedMovie.releaseDate = movie.releaseData
+            persistedMovie.overview = movie.overview
+            DatabaseManager.saveContext()
+            
+            callback(persistedMovie, nil)
+        }
     }
     
     static func getAll() ->[CDMovie]{
         var persistedMovies:[CDMovie] = []
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PersistedEntity.movie)
-
+        
         do{
             persistedMovies = try DatabaseManager.getContext().fetch(fetchRequest) as! [CDMovie]
         }catch let error{

@@ -11,22 +11,28 @@ import UIKit
 
 final class MoviesDataSource:NSObject{
     
-    var movies:[Movie] = []
+    var service = MoviesServiceImplementation()
+    var movies:[Movie] = []{
+        didSet{
+            delegate?.movies = movies
+        }
+    }
+    var currentPage = 1
+    var totalResults:Int
     
-    //Search
-    var filteredMovies:[Movie] = []
-    var isFiltering = false
     
     weak var collectionView:UICollectionView?
-    weak var delegate:UICollectionViewDelegate?
+    weak var delegate:MoviesCollectionDelegate?
     
-    required init(movies:[Movie], collectionView:UICollectionView, delegate:UICollectionViewDelegate) {
+    required init(movies: [Movie], totalResults:Int, collectionView:UICollectionView, delegate:MoviesCollectionDelegate) {
         self.movies = movies
         self.collectionView = collectionView
         self.delegate = delegate
+        self.totalResults = totalResults
         super.init()
         self.collectionView?.register(cellType: MovieCollectionViewCell.self)
         self.collectionView?.dataSource = self
+        self.collectionView?.prefetchDataSource = self
         self.collectionView?.delegate = delegate
         self.collectionView?.reloadData()
         
@@ -37,32 +43,79 @@ final class MoviesDataSource:NSObject{
         self.collectionView?.reloadData()
     }
     
+    private func calculateIndexPathsToReload(from newMovies: [Movie]) -> [IndexPath] {
+        let startIndex = movies.count - movies.count
+        let endIndex = startIndex + newMovies.count
+        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+    }
     
+    func fetchNextPage(){
+        service.fetchPopularMovies(query: nil, page: currentPage+1) { [weak self] result in
+            
+            switch result{
+            case .success(let response):
+                self?.movies.append(contentsOf: response.results)
+                self?.currentPage += 1
+                let indexPathsToReload = self?.calculateIndexPathsToReload(from: response.results)
+                self?.handleFetchOfNewPage(with: indexPathsToReload)
+            case .error(let error):
+                print("Error in fetching new page: \(error.localizedDescription)")
+            }
+            
+        }
+    }
+    
+    func handleFetchOfNewPage(with newIndexPathsToReload:[IndexPath]?){
+        guard let newIndexPathsToReload = newIndexPathsToReload else {
+            collectionView?.reloadData()
+            return
+        }
+        // 2
+        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+        collectionView?.reloadItems(at: indexPathsToReload)
+    }
+
     
 }
 
 extension MoviesDataSource: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isFiltering{
-            return self.filteredMovies.count
-        }else{
-            return self.movies.count
-        }
-        
+        return self.totalResults
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MovieCollectionViewCell.self)
         
-        var movie = self.movies[indexPath.item]
-        if isFiltering{
-            movie = self.filteredMovies[indexPath.item]
+        if isLoadingCell(for: indexPath){
+            cell.setup(withMovie: nil)
+        }else{
+            cell.setup(withMovie: self.movies[indexPath.item])
         }
-        
-        cell.setup(withMovie: movie)
         
         return cell
     }
     
+}
+
+extension MoviesDataSource: UICollectionViewDataSourcePrefetching{
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            self.fetchNextPage()
+        }
+    }
+    
+}
+
+private extension MoviesDataSource {
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= movies.count
+    }
+    
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleItems = collectionView?.indexPathsForVisibleItems ?? []
+        let indexPathsIntersection = Set(indexPathsForVisibleItems).intersection(indexPaths)
+        return Array(indexPathsIntersection)
+    }
 }

@@ -49,21 +49,27 @@
                             <constraint firstItem="p7o-63-YZX" firstAttribute="centerY" secondItem="0uK-Kh-799" secondAttribute="centerY" id="pAY-qH-UzP"/>
                         </constraints>
                     </view>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1VK-rm-W7e">
+                        <rect key="frame" x="82" y="124.5" width="37" height="37"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="yL9-xJ-jZj" firstAttribute="leading" secondItem="Luf-fd-JUJ" secondAttribute="leading" id="3JZ-Fq-b0I"/>
+                <constraint firstItem="1VK-rm-W7e" firstAttribute="centerY" secondItem="Luf-fd-JUJ" secondAttribute="centerY" id="Clo-As-RV0"/>
                 <constraint firstAttribute="trailing" secondItem="yL9-xJ-jZj" secondAttribute="trailing" id="Isd-yw-HMO"/>
                 <constraint firstItem="0uK-Kh-799" firstAttribute="leading" secondItem="Luf-fd-JUJ" secondAttribute="leading" id="Jki-dM-qc1"/>
                 <constraint firstAttribute="bottom" secondItem="0uK-Kh-799" secondAttribute="bottom" id="MkJ-c1-SGB"/>
                 <constraint firstAttribute="bottom" secondItem="yL9-xJ-jZj" secondAttribute="bottom" id="TZ3-DH-xhn"/>
                 <constraint firstItem="0uK-Kh-799" firstAttribute="height" secondItem="yL9-xJ-jZj" secondAttribute="height" multiplier="0.25" id="byB-Ww-sLN"/>
                 <constraint firstAttribute="trailing" secondItem="0uK-Kh-799" secondAttribute="trailing" id="cXz-pZ-dJe"/>
+                <constraint firstItem="1VK-rm-W7e" firstAttribute="centerX" secondItem="Luf-fd-JUJ" secondAttribute="centerX" id="cyk-9R-OXb"/>
                 <constraint firstItem="yL9-xJ-jZj" firstAttribute="top" secondItem="Luf-fd-JUJ" secondAttribute="top" id="eTa-Ot-1Pb"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="d4M-8S-l4X"/>
             <size key="customSize" width="201" height="286"/>
             <connections>
+                <outlet property="activityIndicator" destination="1VK-rm-W7e" id="KFq-8Y-FQv"/>
                 <outlet property="bottomView" destination="0uK-Kh-799" id="JKa-K9-Kix"/>
                 <outlet property="favoriteImage" destination="p7o-63-YZX" id="Syv-lt-j7R"/>
                 <outlet property="imageView" destination="yL9-xJ-jZj" id="FFi-wt-vFv"/>
@@ -73,6 +79,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favorite_full_icon" width="18" height="16"/>
+        <image name="favorite_full_icon" width="62" height="55"/>
     </resources>
 </document>

@@ -16,7 +16,8 @@ class MoviesCollectionView: UICollectionView {
     convenience init() {
         self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         customDelegate = MoviesCollectionDelegate(movies: [], delegate: nil)
-        customDataSource = MoviesDataSource(movies: [], collectionView: self, delegate: customDelegate!)
+        customDataSource = MoviesDataSource(movies: [], totalResults: 0, collectionView: self, delegate: customDelegate!)
+        
         setupLayout()
     }
     
@@ -29,9 +30,9 @@ class MoviesCollectionView: UICollectionView {
         self.collectionViewLayout = layout
     }
     
-    func setupCollectionView(with movies:[Movie], selectionDelegate:MovieSelectionDelegate){
+    func setupCollectionView(with movies:[Movie], totalResults:Int, selectionDelegate:MovieSelectionDelegate){
         self.customDelegate = MoviesCollectionDelegate(movies: movies, delegate: selectionDelegate)
-        self.customDataSource = MoviesDataSource(movies: movies, collectionView: self, delegate: customDelegate!)
+        self.customDataSource = MoviesDataSource(movies: movies, totalResults: totalResults, collectionView: self, delegate: customDelegate!)
     }
     
     func searchFor(text:String){

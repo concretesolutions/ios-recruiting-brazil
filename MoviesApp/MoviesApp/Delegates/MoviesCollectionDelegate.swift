@@ -39,4 +39,6 @@ extension MoviesCollectionDelegate: UICollectionViewDelegateFlowLayout{
         self.delegate?.didSelect(movie: movie)
     }
     
+    
+    
 }

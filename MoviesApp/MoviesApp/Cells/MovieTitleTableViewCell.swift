@@ -19,7 +19,9 @@ class MovieTitleTableViewCell: UITableViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let inset:CGFloat = 27
+        self.favoriteButton.contentEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,8 +45,14 @@ class MovieTitleTableViewCell: UITableViewCell, NibReusable {
     
     @IBAction func tapFavoriteButton(_ sender: Any) {
         if let movie = self.movie{
-            CDMovieDAO.create(from: movie)
-            self.setFavoriteButton(hasFavorited: true)
+            CDMovieDAO.create(from: movie){ movie, error in
+                if error != nil{
+                    print("Error! Persisted Entity Already Exists")                    
+                }else{
+                    self.setFavoriteButton(hasFavorited: true)
+                }
+            }
+            
         }
     }
     

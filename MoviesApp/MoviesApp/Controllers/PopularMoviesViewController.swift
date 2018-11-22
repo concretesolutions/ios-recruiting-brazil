@@ -73,8 +73,8 @@ extension PopularMoviesViewController {
         self.presentationState = .loading
         service.fetchPopularMovies(query: query) { [weak self] result in
             switch result {
-            case .success(let movies):
-                self?.handleFetch(of: movies, withQuery: query)
+            case .success(let response):
+                self?.handleFetch(of: response.results, withQuery: query, totalResults: response.totalResults)
             case .error:
                 self?.presentationState = .error
                 print("handle error in fetching movies")
@@ -82,10 +82,10 @@ extension PopularMoviesViewController {
         }
     }
     
-    func handleFetch(of movies: [Movie], withQuery query:String? = nil) {
+    func handleFetch(of movies: [Movie], withQuery query:String? = nil, totalResults:Int) {
         if movies.count > 0{
             self.movies = movies
-            self.screen.collectionView.setupCollectionView(with: movies, selectionDelegate: self)
+            self.screen.collectionView.setupCollectionView(with: movies, totalResults: totalResults, selectionDelegate: self)
             self.presentationState = .ready
         }else{
             if let query = query{
@@ -147,7 +147,7 @@ extension PopularMoviesViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text{
             if !text.isEmpty{
-                self.screen.collectionView.setupCollectionView(with: [], selectionDelegate: self)
+                self.screen.collectionView.setupCollectionView(with: [], totalResults: 0, selectionDelegate: self)
                 fetchMovies(query: text)
             }
         }

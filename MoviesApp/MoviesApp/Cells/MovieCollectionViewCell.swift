@@ -15,9 +15,16 @@ class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var favoriteImage: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         self.bottomView.backgroundColor = Palette.blue
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.setup(withMovie: nil)
     }
     
     static func size(forWidth width:CGFloat) ->CGSize{
@@ -25,17 +32,22 @@ class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
         return CGSize(width: width, height: height)
     }
     
-    func setup(withMovie movie:Movie){
-        self.title.text = movie.title
-        
-        if let poster = movie.posterPath{
-            self.imageView.download(image: poster)
+    func setup(withMovie movie:Movie?){
+        if let movie = movie{
+            self.title.text = movie.title
+            if let poster = movie.posterPath{
+                self.imageView.download(image: poster)
+            }else{
+                self.imageView.image = UIImage.poster.notAvailable
+            }
+            self.favoriteImage.image = CDMovieDAO.hasFavoriteMovie(with: movie.id) ? UIImage.favorite.fullHeart : UIImage.favorite.grayHeart
+            self.activityIndicator.stopAnimating()
         }else{
+            self.title.text = "Loading..."
             self.imageView.image = UIImage.poster.notAvailable
+            self.favoriteImage.image = UIImage.favorite.grayHeart
+            self.activityIndicator.startAnimating()
         }
-        
-        let favoriteImage = CDMovieDAO.hasFavoriteMovie(with: movie.id) ? UIImage.favorite.fullHeart : UIImage.favorite.grayHeart
-        self.favoriteImage.image = favoriteImage
     }
     
 }
