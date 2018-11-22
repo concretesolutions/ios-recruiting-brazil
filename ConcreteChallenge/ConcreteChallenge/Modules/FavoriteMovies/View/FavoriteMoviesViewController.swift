@@ -50,8 +50,15 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     
     // MARK: - Functions
     func setupNavigationBar() {
+        // Title
         self.navigationItem.title = "Movies"
+        
+        // Color
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.968627451, green: 0.8078431373, blue: 0.3568627451, alpha: 1)
+        
+        // Filter Button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"FilterIcon"), style: .plain, target: self, action: #selector(filterButtonTapped))
+        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     }
     
     func setupTableView() {
@@ -60,6 +67,10 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
         self.favoriteMoviesTableView.favoriteMovieRemoved = self
         
         self.favoriteMoviesTableView.allowsSelection = false
+    }
+    
+    @objc func filterButtonTapped() {
+        
     }
 }
 
