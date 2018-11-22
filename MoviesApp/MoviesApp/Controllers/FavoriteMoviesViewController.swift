@@ -17,7 +17,7 @@ class FavoriteMoviesViewController: UIViewController {
     init(){
         super.init(nibName: nil, bundle: nil)
         self.title = "Favorites"
-        let tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon"), selectedImage: UIImage(named: "favorite_icon"))
+        let tabBarItem = UITabBarItem(title: "Favorites", image: UIImage.icon.favorite, selectedImage: UIImage.icon.favorite)
         self.tabBarItem = tabBarItem
     }
     

@@ -28,9 +28,9 @@ class MovieTitleTableViewCell: UITableViewCell, NibReusable {
     
     func setFavoriteButton(hasFavorited:Bool){
         if hasFavorited{
-            self.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            self.favoriteButton.setImage(UIImage.favorite.fullHeart, for: .normal)
         }else{
-            self.favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+            self.favoriteButton.setImage(UIImage.favorite.grayHeart, for: .normal)
         }
     }
     
@@ -43,13 +43,9 @@ class MovieTitleTableViewCell: UITableViewCell, NibReusable {
     
     @IBAction func tapFavoriteButton(_ sender: Any) {
         if let movie = self.movie{
-            if !isSelected{
-                CDMovieDAO.create(from: movie)
-                self.setFavoriteButton(hasFavorited: true)
-            }
-            
+            CDMovieDAO.create(from: movie)
+            self.setFavoriteButton(hasFavorited: true)
         }
-        
     }
     
     

@@ -40,10 +40,10 @@ class GenericErrorView: UIView {
     func setupView(for error:ErrorType, with query:String? = nil){
         switch error{
         case .generic:
-            imageView.image = UIImage(named: "poster_notAvailable")
+            imageView.image = UIImage.poster.notAvailable
             label.text = "Something went wrong! Please try again later."
         case .noResults:
-            imageView.image = UIImage(named: "Group")
+            imageView.image = UIImage.error.noResults
             label.text = "No Results were found for '\(query!)'."
         }
     }

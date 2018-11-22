@@ -33,7 +33,7 @@ class PopularMoviesViewController: UIViewController {
     init(){
         super.init(nibName: nil, bundle: nil)
         self.title = "Movies"
-        self.tabBarItem = UITabBarItem(title: "Popular Movies", image: UIImage(named: "list_icon"), selectedImage: UIImage(named: "list_icon"))
+        self.tabBarItem = UITabBarItem(title: "Popular Movies", image: UIImage.icon.list, selectedImage: UIImage.icon.list)
     }
     
     required init?(coder aDecoder: NSCoder) {

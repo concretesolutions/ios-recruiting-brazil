@@ -27,13 +27,15 @@ class MovieCollectionViewCell: UICollectionViewCell, NibReusable {
     
     func setup(withMovie movie:Movie){
         self.title.text = movie.title
+        
         if let poster = movie.posterPath{
             self.imageView.download(image: poster)
         }else{
-            self.imageView.image = UIImage(named: "poster_notAvailable")
+            self.imageView.image = UIImage.poster.notAvailable
         }
-        let imageName = CDMovieDAO.hasFavoriteMovie(with: movie.id) ? "favorite_full_icon" : "favorite_gray_icon"
-        self.favoriteImage.image = UIImage(named: imageName)
+        
+        let favoriteImage = CDMovieDAO.hasFavoriteMovie(with: movie.id) ? UIImage.favorite.fullHeart : UIImage.favorite.grayHeart
+        self.favoriteImage.image = favoriteImage
     }
     
 }

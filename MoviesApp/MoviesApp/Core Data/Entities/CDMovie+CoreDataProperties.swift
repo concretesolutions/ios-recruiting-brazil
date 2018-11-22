@@ -2,7 +2,7 @@
 //  CDMovie+CoreDataProperties.swift
 //  
 //
-//  Created by Nicholas Babo on 13/11/18.
+//  Created by Nicholas Babo on 12/11/18.
 //
 //
 
