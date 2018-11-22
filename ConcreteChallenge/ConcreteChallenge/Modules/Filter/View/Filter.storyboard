@@ -27,17 +27,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bW-83-BXK">
-                                                    <rect key="frame" x="16" y="7" width="33" height="30"/>
-                                                    <state key="normal" title="Date"/>
-                                                    <connections>
-                                                        <action selector="dateButtonTapped:" destination="uWE-Oj-a0e" eventType="touchUpInside" id="p8b-nc-wh6"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuG-YU-hgg">
+                                                    <rect key="frame" x="32" y="11.5" width="36" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="0bW-83-BXK" firstAttribute="centerY" secondItem="CiG-PY-UI0" secondAttribute="centerY" id="Xl0-nk-3bw"/>
-                                                <constraint firstItem="0bW-83-BXK" firstAttribute="leading" secondItem="CiG-PY-UI0" secondAttribute="leading" constant="16" id="sBZ-21-9Nf"/>
+                                                <constraint firstItem="uuG-YU-hgg" firstAttribute="centerY" secondItem="CiG-PY-UI0" secondAttribute="centerY" id="YSr-XP-10d"/>
+                                                <constraint firstItem="uuG-YU-hgg" firstAttribute="leading" secondItem="CiG-PY-UI0" secondAttribute="leadingMargin" constant="16" id="u4S-dk-b7F"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -48,17 +47,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgN-fb-wR5">
-                                                    <rect key="frame" x="16" y="7" width="50" height="30"/>
-                                                    <state key="normal" title="Genres"/>
-                                                    <connections>
-                                                        <action selector="genresButtonTapped:" destination="uWE-Oj-a0e" eventType="touchUpInside" id="VLe-om-foA"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSH-q1-e1c">
+                                                    <rect key="frame" x="32" y="11.5" width="55" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="RgN-fb-wR5" firstAttribute="leading" secondItem="A9z-3R-5xU" secondAttribute="leading" constant="16" id="O8d-Vu-8tn"/>
-                                                <constraint firstItem="RgN-fb-wR5" firstAttribute="centerY" secondItem="A9z-3R-5xU" secondAttribute="centerY" id="mZk-wJ-UCg"/>
+                                                <constraint firstItem="YSH-q1-e1c" firstAttribute="centerY" secondItem="A9z-3R-5xU" secondAttribute="centerY" id="Ubn-Lx-AcC"/>
+                                                <constraint firstItem="YSH-q1-e1c" firstAttribute="leading" secondItem="A9z-3R-5xU" secondAttribute="leadingMargin" constant="16" id="vku-ec-a7D"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

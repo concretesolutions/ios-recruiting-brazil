@@ -30,6 +30,15 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
         self.router.doneFilter()
     }
     
+    func didTapDateButton() {
+        self.router.showDateFilter()
+    }
+    
+    func didTapGenreButton() {
+        self.router.showGenreFilter()
+    }
+    
+    
     // MARK: - FilterInteractorOutput functions
 
 }

@@ -13,13 +13,7 @@ class FilterTableViewController: UITableViewController, FilterView {
     // MARK: - Outlets
     
     // MARK: - Actions
-    @IBAction func dateButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func genresButtonTapped(_ sender: Any) {
-    }
-    
-    
+
     // MARK: - Properties
     var presenter: FilterPresentation!
     
@@ -56,6 +50,18 @@ class FilterTableViewController: UITableViewController, FilterView {
     
     @objc func doneButtonTapped() {
         self.presenter.didTapDoneButton()
+    }
+    
+    // MARK: - TableView delegate and data source
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            self.presenter.didTapDateButton()
+        case 1:
+            self.presenter.didTapGenreButton()
+        default:
+            return
+        }
     }
 }
 

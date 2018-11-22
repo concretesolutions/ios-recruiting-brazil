@@ -90,7 +90,7 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
         }
     }
     
-    // MARK: - Table view data source
+    // MARK: - TableView delegate and data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

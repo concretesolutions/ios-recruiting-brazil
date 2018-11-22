@@ -13,6 +13,8 @@ protocol FilterWireframe: class {
     static var presenter: FilterPresentation! { get set }
     
     static func assembleModule() -> UIViewController
+    func showDateFilter()
+    func showGenreFilter()
     
     func exitFilter()
     func doneFilter()
@@ -31,6 +33,8 @@ protocol FilterPresentation: class {
     
     func didTapCancelButton()
     func didTapDoneButton()
+    func didTapDateButton()
+    func didTapGenreButton()
 }
 
 protocol FilterInteractorInput: class {

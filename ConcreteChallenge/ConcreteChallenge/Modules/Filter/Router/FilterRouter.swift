@@ -39,6 +39,15 @@ class FilterRouter: FilterWireframe {
         return viewController
     }
     
+    func showDateFilter() {
+        let dateFilterViewController = DateFilterRouter.assembleModule()
+        self.viewController?.navigationController?.pushViewController(dateFilterViewController, animated: true)
+    }
+    
+    func showGenreFilter() {
+        
+    }
+    
     func exitFilter() {
         self.viewController?.dismiss(animated: true, completion: nil)
     }
