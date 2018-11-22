@@ -29,7 +29,6 @@ class FilterRouter: FilterWireframe {
         
         presenter.interactor = interactor
         presenter.router = router
-        presenter.movie = movie
         
         interactor.output = presenter
         

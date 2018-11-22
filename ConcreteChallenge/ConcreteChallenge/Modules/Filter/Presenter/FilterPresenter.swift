@@ -19,7 +19,7 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
     
     // MARK: - FilterPresentation functions
     func viewDidLoad() {
-        self.interactor.fetchFilters(movie: movie)
+        
     }
     
     // MARK: - FilterInteractorOutput functions

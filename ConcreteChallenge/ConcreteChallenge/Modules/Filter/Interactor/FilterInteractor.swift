@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MovieDetailInteractor: MovieDetailInteractorInput {
+class FilterInteractor: FilterInteractorInput {
     
     // MARK: - Properties
-    var output: MovieDetailInteractorOutput!
+    var output: FilterInteractorOutput!
     
-    // MARK: - MovieDetailInteractorInput Functions
+    // MARK: - FilterInteractorInput Functions
 }
