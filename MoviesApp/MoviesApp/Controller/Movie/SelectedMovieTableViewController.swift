@@ -22,7 +22,10 @@ class SelectedMovieTableViewController: UITableViewController {
     @IBOutlet weak var isFavoriteButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.tabBarController?.tabBar.isHidden = true
+        
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.isTranslucent = true
+       
     }
 
     override func viewDidLoad() {
@@ -58,7 +61,9 @@ class SelectedMovieTableViewController: UITableViewController {
                 }
             }
             
-            self.movieGenreOutlet.text = genresString
+            DispatchQueue.main.async {
+                self.movieGenreOutlet.text = genresString
+            }
         }
         
         if MovieDAO.isMovieFavorite(comparedMovie: self.movie!){

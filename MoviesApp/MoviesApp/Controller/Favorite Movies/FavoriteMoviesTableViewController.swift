@@ -24,8 +24,13 @@ class FavoriteMoviesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        if !isFiltering(){
+            self.clearFiltersButtonOutlet.isEnabled = false
+        }
+        
         //Checks for any filtered movies
         if isFiltering(){
+            self.clearFiltersButtonOutlet.isEnabled = true
             print("Vai rolar um filtro")
             for movie in self.movies{
                 if FilterManager.shared.genders.contains(where: { (genre) -> Bool in
@@ -96,6 +101,8 @@ class FavoriteMoviesTableViewController: UITableViewController {
         
         FilterManager.shared.genders.removeAll()
         FilterManager.shared.releaseDates.removeAll()
+        
+        self.clearFiltersButtonOutlet.isEnabled = false
         
         self.tableView.reloadData()
         

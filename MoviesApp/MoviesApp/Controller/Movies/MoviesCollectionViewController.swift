@@ -30,14 +30,9 @@ class MoviesCollectionViewController: UICollectionViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    
-    
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         
         self.collectionView.reloadData()
-        
         
         if hasLoadedData == false {
             
@@ -61,11 +56,14 @@ class MoviesCollectionViewController: UICollectionViewController {
                     }
                     
                 }
-                self.activityIndicatorOutlet.stopAnimating()
-                self.activityIndicatorOutlet.isHidden = true
-                self.collectionView.reloadData()
-                self.canFilter = true
-                self.hasLoadedData = true
+                
+                DispatchQueue.main.async {
+                    self.activityIndicatorOutlet.stopAnimating()
+                    self.activityIndicatorOutlet.isHidden = true
+                    self.collectionView.reloadData()
+                    self.canFilter = true
+                    self.hasLoadedData = true
+                }
             }//>>>>>
         }
         
@@ -155,9 +153,9 @@ class MoviesCollectionViewController: UICollectionViewController {
         print(self.movies.count)
         
         if isSearching() {
-            cell?.setupCell(title: self.searchedMovies[indexPath.row].title, movie: self.searchedMovies[indexPath.row])
+            cell?.setupCell(movie: self.searchedMovies[indexPath.row])
         }else{
-            cell?.setupCell(title: self.movies[indexPath.row].title, movie: self.movies[indexPath.row])
+            cell?.setupCell(movie: self.movies[indexPath.row])
         }
         
        

@@ -18,7 +18,7 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieTitleLabelOutlet: UILabel!
     @IBOutlet weak var favoriteButtonOutlet: UIButton!
     
-    func setupCell(title: String, movie: Movie){
+    func setupCell(movie: Movie){
         
         let imageUrl = "https://image.tmdb.org/t/p/w200"
         let imageEndpoint = imageUrl + movie.poster_path
@@ -33,11 +33,12 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
         }else{
             print(movie.title)
             print("Is not Favorite!")
+            self.favoriteButtonOutlet.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         }
         
         self.movie = movie
         self.moviePosterImageViewOutlet.kf.setImage(with: url)
-        self.movieTitleLabelOutlet.text = title
+        self.movieTitleLabelOutlet.text = movie.title
         
     }
     

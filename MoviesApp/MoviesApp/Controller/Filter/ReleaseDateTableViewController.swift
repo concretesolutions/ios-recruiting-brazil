@@ -16,6 +16,9 @@ class ReleaseDateTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Date"
+
+        
         var movies = MovieDAO.readAllFavoriteMovies()
         
         for movie in movies{

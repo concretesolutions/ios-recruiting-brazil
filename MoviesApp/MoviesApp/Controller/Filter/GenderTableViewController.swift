@@ -15,6 +15,8 @@ class GenderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Genres"
+        
         var movies = MovieDAO.readAllFavoriteMovies()
 
         var genresIds = [Int]()
@@ -42,7 +44,6 @@ class GenderTableViewController: UITableViewController {
                     }
                 }
             }
-            print(self.genres)
         }
         
         print(genresIds)

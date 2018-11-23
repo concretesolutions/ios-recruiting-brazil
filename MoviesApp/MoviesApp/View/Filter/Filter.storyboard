@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Filter View Controller-->
+        <!--Filters-->
         <scene sceneID="B1T-cO-LFR">
             <objects>
                 <viewController storyboardIdentifier="filterViewController" id="1Pg-L6-d58" customClass="FilterViewController" customModule="MoviesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -68,7 +68,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KOo-3P-VGQ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ivo-f5-H27"/>
+                    <navigationItem key="navigationItem" title="Filters" id="ivo-f5-H27"/>
                     <connections>
                         <outlet property="tableViewOutlet" destination="CJy-e1-JMk" id="YqN-t0-T2f"/>
                     </connections>
@@ -177,6 +177,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kva-D8-qXh">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
