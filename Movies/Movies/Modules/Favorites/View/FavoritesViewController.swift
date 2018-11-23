@@ -50,7 +50,7 @@ class FavoritesViewController: UIViewController, FavoritesView {
     
     func present(movies: [Movie]) {
         DispatchQueue.main.async {
-            self.hideRemoveFilterButton()
+            self.hideActivityIndicator()
             self.dataSource.update(movies: movies)
         }
     }
