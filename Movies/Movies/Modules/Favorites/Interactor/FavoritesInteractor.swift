@@ -17,7 +17,9 @@ class FavoritesInteractor: FavoritesUseCase {
     // MARK: - FavoriteUseCase protocol functions
     
     func readFavoriteMovies() {
-        self.output.didRead(movies: MovieDataManager.readFavoriteMovies())
+        let movies = MovieDataManager.readFavoriteMovies()
+        movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath ?? "") }
+        self.output.didRead(movies: movies)
     }
     
     func removeFilters() {
@@ -25,11 +27,15 @@ class FavoritesInteractor: FavoritesUseCase {
     }
     
     func searchMovies(withTitle title: String) {
-        self.output.didSearchMovies(withTitle: title, MovieDataManager.readFavoriteMovies().filter { return $0.title.contains(title) })
+        let movies = MovieDataManager.readFavoriteMovies()
+        movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath ?? "") }
+        let searchedMovies = movies.filter { return $0.title.contains(title) }
+        self.output.didSearchMovies(withTitle: title, searchedMovies)
     }
     
     func unfavorite(movie: Movie) {
         MovieDataManager.deleteFavoriteMovie(withId: movie.id)
+        ImageDataManager.deleteImage(withPosterPath: movie.posterPath ?? "")
     }
     
     
