@@ -35,6 +35,7 @@
 		CF17C4F021A7CB2C00667760 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4EF21A7CB2C00667760 /* FavoritesPresenter.swift */; };
 		CF17C4F221A7CE6000667760 /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4F121A7CE6000667760 /* FavoritesInteractor.swift */; };
 		CF17C4F421A7CFF500667760 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4F321A7CFF500667760 /* FavoritesRouter.swift */; };
+		CF17C4F921A8B9C900667760 /* MovsTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4F821A8B9C900667760 /* MovsTabbarViewController.swift */; };
 		CF27C3C021999C6B009DF312 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF27C3BF21999C6B009DF312 /* AppDelegate.swift */; };
 		CF27C3C821999C6B009DF312 /* Movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF27C3C621999C6B009DF312 /* Movies.xcdatamodeld */; };
 		CF27C3CA21999C6C009DF312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF27C3C921999C6C009DF312 /* Assets.xcassets */; };
@@ -73,6 +74,7 @@
 		CF17C4EF21A7CB2C00667760 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		CF17C4F121A7CE6000667760 /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
 		CF17C4F321A7CFF500667760 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
+		CF17C4F821A8B9C900667760 /* MovsTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTabbarViewController.swift; sourceTree = "<group>"; };
 		CF27C3BC21999C6B009DF312 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF27C3BF21999C6B009DF312 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF27C3C721999C6B009DF312 /* Movies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movies.xcdatamodel; sourceTree = "<group>"; };
@@ -262,6 +264,14 @@
 			path = Contract;
 			sourceTree = "<group>";
 		};
+		CF17C4F521A8B8FB00667760 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				CF17C4F821A8B9C900667760 /* MovsTabbarViewController.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
 		CF27C3B321999C6B009DF312 = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				CF0C490C21A38C5C0082B289 /* Root */,
+				CF17C4F521A8B8FB00667760 /* Tabbar */,
 				CF0C490921A38C420082B289 /* Movies */,
 				CF0C490B21A38C510082B289 /* Favorites */,
 				CF0C490A21A38C480082B289 /* MovieDetail */,
@@ -428,6 +439,7 @@
 				CF0C493121A3A9FA0082B289 /* MoviesCVDataSource.swift in Sources */,
 				CF0C48F821A264D40082B289 /* ImageDataManager.swift in Sources */,
 				CF17C4E621A7AF5900667760 /* FavoritesTableView.swift in Sources */,
+				CF17C4F921A8B9C900667760 /* MovsTabbarViewController.swift in Sources */,
 				CF17C4EE21A7C4D100667760 /* FavoritesSearchBarDelegate.swift in Sources */,
 				CF0C492921A3947F0082B289 /* IndicatableView.swift in Sources */,
 				CF0C493321A3AA8C0082B289 /* MoviesCollectionView.swift in Sources */,
