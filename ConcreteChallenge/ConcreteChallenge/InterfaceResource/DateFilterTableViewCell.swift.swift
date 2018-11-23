@@ -11,11 +11,7 @@ import UIKit
 class DateFilterTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
-    @IBOutlet weak var posterImage: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var releaseDateLabel: UILabel!
-    @IBOutlet weak var overviewTextView: UITextView!
-    
+    @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
