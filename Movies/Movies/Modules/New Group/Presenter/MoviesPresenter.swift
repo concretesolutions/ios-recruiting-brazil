@@ -19,7 +19,7 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     
     // MARK: - MoviesPresentation protocol functions
     
-    func viewDidLoad() { 
+    func viewDidLoad() {
         self.interactor.getMovies(fromPage: 1)
     }
     
@@ -36,7 +36,7 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     }
     
     func didSearchMovies(withTitle title: String) {
-        
+        self.interactor.searchMovies(withTitle: title)
     }
     
     func didFinishSearch() {

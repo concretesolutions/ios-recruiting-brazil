@@ -12,15 +12,20 @@ class MoviesSearchBarDelegate: NSObject, UISearchBarDelegate {
     
     private var presenter: MoviesPresentation
     private var currentSearch: String = ""
+    private var viewController: UIViewController!
     
-    init(presenter: MoviesPresentation) {
+    init(presenter: MoviesPresentation, viewController: UIViewController) {
         self.presenter = presenter
+        self.viewController = viewController
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
             if text.count == 0 && self.currentSearch.count > 0 {
                 searchBar.resignFirstResponder()
+                self.currentSearch = ""
+                self.viewController.showActivityIndicator()
+                self.presenter.didFinishSearch()
                 return
             }
         }
@@ -34,21 +39,36 @@ class MoviesSearchBarDelegate: NSObject, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
-        searchBar.text = nil
+        searchBar.text = ""
+        self.currentSearch = ""
+        self.viewController.showActivityIndicator()
+        self.presenter.didFinishSearch()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        if let movieTitle = searchBar.text {
-            self.currentSearch = movieTitle
-            if movieTitle.trimmingCharacters(in: CharacterSet(charactersIn: " ")).count > 0 {
-                self.presenter.didSearchMovies(withTitle: movieTitle)
+        if let movieTitle = searchBar.text?.trimmingCharacters(in: CharacterSet(charactersIn: " ")) {
+            if movieTitle.count > 0 {
+                if movieTitle != currentSearch {
+                    self.currentSearch = movieTitle
+                    self.viewController.showActivityIndicator()
+                    self.presenter.didSearchMovies(withTitle: movieTitle)
+                } else {
+                    searchBar.resignFirstResponder()
+                    searchBar.setShowsCancelButton(false, animated: true)
+                }
             } else {
                 searchBar.setShowsCancelButton(false, animated: true)
-                searchBar.text = nil
+                searchBar.text = ""
+                self.currentSearch = ""
+                self.viewController.showActivityIndicator()
+                self.presenter.didFinishSearch()
             }
         } else {
             searchBar.setShowsCancelButton(false, animated: true)
+            self.currentSearch = ""
+            self.viewController.showActivityIndicator()
+            self.presenter.didFinishSearch()
         }
     }
     

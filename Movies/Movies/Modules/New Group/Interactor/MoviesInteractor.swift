@@ -30,7 +30,9 @@ class MoviesInteractor: MoviesUseCase {
     }
     
     func searchMovies(withTitle title: String) {
-        
+        APIDataManager.searchMovies(withTitle: title) {
+            self.output.didSearchMovies(withTitle: title, $0)
+        }
     }
     
     func favorite(movie: Movie) {
