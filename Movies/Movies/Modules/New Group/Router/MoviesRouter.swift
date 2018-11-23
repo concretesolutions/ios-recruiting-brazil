@@ -32,7 +32,7 @@ class MoviesRouter: MoviesWireframe {
         interactor.output = presenter
         
         let storyboard = UIStoryboard(name: "Movies", bundle: nil)
-        var viewController = storyboard.instantiateViewController(withIdentifier: "Movies")
+        let viewController = storyboard.instantiateViewController(withIdentifier: "Movies")
         
         router.view = viewController
         

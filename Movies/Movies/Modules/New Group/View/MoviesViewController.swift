@@ -30,12 +30,15 @@ class MoviesViewController: UIViewController, MoviesView {
         
         self.delegate = MoviesCVDelegate(presenter: self.presenter)
         self.movies.delegate = self.delegate
+        
         self.dataSource = MoviesCVDataSource(collectionView: self.movies, presenter: self.presenter)
         self.movies.dataSource = self.dataSource
+        
         self.searchDelegate = MoviesSearchBarDelegate(presenter: self.presenter)
         self.searchBar.delegate = self.searchDelegate
         
         self.navigationItem.title = "Movies"
+        self.showActivityIndicator()
         
         self.presenter.viewDidLoad()
         
@@ -45,6 +48,7 @@ class MoviesViewController: UIViewController, MoviesView {
     
     func present(movies: [Movie]) {
         DispatchQueue.main.async {
+            self.hideActivityIndicator()
             self.dataSource.update(movies: movies)
         }
     }
