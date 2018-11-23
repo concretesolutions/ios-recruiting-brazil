@@ -39,6 +39,7 @@ protocol FavoritesUseCase {
     var output: FavoritesInteractorOutput! { get set }
     
     func readFavoriteMovies()
+    func removeFilters()
     func searchMovies(withTitle title: String)
     func unfavorite(movie: Movie)
     
@@ -56,6 +57,7 @@ protocol FavoritesWireframe {
     var view: UIViewController? { get set }
     
     func presentMovieDetailsFor(_ movie: Movie)
+    func presentFiltersView()
     
     static func assembleModule() -> UIViewController
     
