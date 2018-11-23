@@ -11,6 +11,11 @@ import Kingfisher
 
 class FavoriteMovieTableViewCell: UITableViewCell {
     
+    
+    @IBOutlet weak var shadowViewOutlet: UIView!
+    @IBOutlet weak var cardViewOutlet: UIView!
+    
+    
     @IBOutlet weak var backdropImageOutlet: UIImageView!
     @IBOutlet weak var movieTitleOutlet: UILabel!
     @IBOutlet weak var movieDescriptionOutlet: UILabel!
@@ -20,6 +25,17 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.shadowViewOutlet.layer.cornerRadius = 10
+        self.shadowViewOutlet.layer.shadowColor = UIColor.black.cgColor
+        self.shadowViewOutlet.layer.shadowOpacity = 0.25
+        self.shadowViewOutlet.layer.shadowOffset = CGSize.zero
+        self.shadowViewOutlet.layer.shadowRadius = 3
+        self.shadowViewOutlet.layer.masksToBounds = false
+        
+        self.cardViewOutlet.layer.cornerRadius = 10
+        self.cardViewOutlet.layer.masksToBounds = true
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

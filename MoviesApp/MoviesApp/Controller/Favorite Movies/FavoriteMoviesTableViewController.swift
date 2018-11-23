@@ -204,6 +204,10 @@ class FavoriteMoviesTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfavorite"
+    }
+    
     @IBAction func filterButtonTapped(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Filter", bundle: nil)

@@ -26,7 +26,7 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
         
         self.shadowViewOutlet.layer.cornerRadius = 10
         self.shadowViewOutlet.layer.shadowColor = UIColor.black.cgColor
-        self.shadowViewOutlet.layer.shadowOpacity = 0.4
+        self.shadowViewOutlet.layer.shadowOpacity = 0.25
         self.shadowViewOutlet.layer.shadowOffset = CGSize.zero
         self.shadowViewOutlet.layer.shadowRadius = 3
         self.shadowViewOutlet.layer.masksToBounds = false
