@@ -9,16 +9,26 @@
 import UIKit
 
 class FavoriteTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var poster: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var year: UILabel!
+    @IBOutlet weak var overview: UILabel!
+    
+    // MARK: - Properties
+    
+    var movie: Movie!
+    
+    // MARK: - Util functions
+    
+    func set(movie: Movie) {
+        self.poster.image = movie.posterImage
+        self.movie = movie
+        self.year.text = "\(movie.year)"
+        self.overview.text = movie.overview
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
 
 }

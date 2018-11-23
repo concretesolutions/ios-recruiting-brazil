@@ -8,6 +8,25 @@
 
 import UIKit
 
-class FavoritesTVDelegate: UITableViewDelegate {
+class FavoritesTVDelegate: NSObject, UITableViewDelegate {
 
+    // MARK: - Properties
+    
+    private var presenter: FavoritesPresentation
+    
+    // MARK: - Initializers
+    
+    init(presenter: FavoritesPresentation) {
+        self.presenter = presenter
+    }
+    
+    // MARK: - UITableViewDelegate protocol functions
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let favoriteCell = tableView.cellForRow(at: indexPath) as? FavoriteTableViewCell {
+            self.presenter.didSelect(movie: favoriteCell.movie)
+        }
+    }
+    
+    
 }
