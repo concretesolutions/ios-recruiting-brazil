@@ -64,7 +64,7 @@ class MovieDetailsView: UIViewController {
     
     func setBackground(image: UIImage)  {
         let backgroundImage = UIImageView(frame: self.outletMoviesLoading.bounds) //(frame: UIScreen.main.bounds)
-        backgroundImage.alpha = 0.2
+        backgroundImage.alpha = 0.03
         backgroundImage.image = image
         backgroundImage.contentMode = .scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0)
@@ -81,7 +81,6 @@ class MovieDetailsView: UIViewController {
             self.outletFavorite.setBackgroundImage(imageGray, for: .normal)
         }
     }
-
     
     // MARK: - Actions
     
