@@ -18,7 +18,7 @@ class APIDataManager {
         static var readPopular: String { return host + "/movie/popular?api_key=" + apiKey }
         static var readGenres: String { return host + "/genre/movie/list?api_key=" + apiKey }
         
-        static func readPopularFor(page: Int) -> String { return "\(readPopular)&page=\(page)" }
+        static func readPopular(forPage page: Int) -> String { return "\(readPopular)&page=\(page)" }
         
         private static let imageHost: String = "https://image.tmdb.org/t/p"
         private static let posterSize: String = "/w300"
@@ -29,7 +29,7 @@ class APIDataManager {
     // MARK: - Functions
     
     static func readPopularFor(page: Int, callback: @escaping ([Movie])->()) {
-        if let url = URL(string: RequestURL.readPopularFor(page: page)) {
+        if let url = URL(string: RequestURL.readPopular(forPage: page)) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
