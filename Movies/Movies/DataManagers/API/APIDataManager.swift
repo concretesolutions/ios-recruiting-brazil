@@ -17,8 +17,10 @@ class APIDataManager {
         
         static var readPopular: String { return host + "/movie/popular?api_key=" + apiKey }
         static var readGenres: String { return host + "/genre/movie/list?api_key=" + apiKey }
+        static var searchMovies: String { return host + "/search/movie?api_key=" + apiKey }
         
-        static func readPopular(forPage page: Int) -> String { return "\(readPopular)&page=\(page)" }
+        static func readPopular(fromPage page: Int) -> String { return "\(readPopular)&page=\(page)" }
+        static func searchMovies(withTitle title: String) -> String { return "\(searchMovies)&query=\(title.lowercased().replacingOccurrences(of: " ", with: "+"))"}
         
         private static let imageHost: String = "https://image.tmdb.org/t/p"
         private static let posterSize: String = "/w300"
@@ -28,8 +30,8 @@ class APIDataManager {
     
     // MARK: - Functions
     
-    static func readPopularFor(page: Int, callback: @escaping ([Movie])->()) {
-        if let url = URL(string: RequestURL.readPopular(forPage: page)) {
+    static func readPopular(fromPage page: Int, callback: @escaping ([Movie])->()) {
+        if let url = URL(string: RequestURL.readPopular(fromPage: page)) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
@@ -51,6 +53,10 @@ class APIDataManager {
         } else {
             
         }
+    }
+    
+    static func searchMovies(withTitle title: String, callback: @escaping ([Movie])->()) {
+        
     }
     
     static func readGenres(callback: @escaping ([Genre])->()) {

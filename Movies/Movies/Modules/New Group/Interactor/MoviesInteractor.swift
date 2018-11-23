@@ -19,7 +19,7 @@ class MoviesInteractor: MoviesUseCase {
     // MARK: - MoviesUseCase protocol functions
     
     func getMovies(fromPage page: Int) {
-        APIDataManager.readPopularFor(page: page) {
+        APIDataManager.readPopular(fromPage: page) {
             self.current.append(contentsOf: $0)
             self.output.didGetMovies(fromPage: page, $0)
         }
