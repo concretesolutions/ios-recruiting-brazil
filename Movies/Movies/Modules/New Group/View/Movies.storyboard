@@ -17,9 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cKX-Ly-v6M">
+                            <searchBar contentMode="redraw" placeholder="enter with a movie title..." translatesAutoresizingMaskIntoConstraints="NO" id="cKX-Ly-v6M">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </searchBar>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FGi-Aw-1X1" customClass="MoviesCollectionView" customModule="Movies" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="76" width="375" height="591"/>

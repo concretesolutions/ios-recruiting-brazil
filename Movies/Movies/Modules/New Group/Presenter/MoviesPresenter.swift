@@ -15,18 +15,19 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     weak var view: MoviesView?
     var router: MoviesWireframe!
     var interactor: MoviesUseCase!
+    private var lastMoviesPage: Int = 1
     
     // MARK: - MoviesPresentation protocol functions
     
     func viewDidLoad() { 
-        self.interactor.readMoviesFor(page: 1)
+        self.interactor.getMovies(fromPage: 1)
     }
     
     func didSelect(movie: Movie) {
         self.router.presentMovieDetailsFor(movie)
     }
     
-    func didTapFavoriteButtonTo(movie: Movie) {
+    func didTapFavoriteButton(forMovie movie: Movie) {
         if movie.isFavorite {
             self.interactor.unfavorite(movie: movie)
         } else {
@@ -34,25 +35,29 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
         }
     }
     
-    func didSearchMoviesWith(name: String) {
+    func didSearchMovies(withTitle title: String) {
         
     }
     
-    // MARK: - MoviesInterectorOutput protocol functions
+    func didFinishSearch() {
+        self.interactor.getCurrentMovies()
+    }
     
-    func didReadMoviesForPage(_ page: Int, _ movies: [Movie]) {
+    // MARK: - MoviesInterectorOutput protocol functions
+    func didGetMovies(fromPage page: Int, _ movies: [Movie]) {
         if page == 1 {
             self.view?.present(movies: movies)
         } else {
-            
+            self.lastMoviesPage = page
+            self.view?.presentNew(movies: movies)
         }
     }
     
-    func didFilterMoviesWithName(_ name: String, _ movies: [Movie]) {
+    func didGetCurrentMovies(_ movies: [Movie]) {
         self.view?.present(movies: movies)
     }
     
-    func didRemoveFilter(_ movies: [Movie]) {
+    func didSearchMovies(withTitle title: String, _ movies: [Movie]) {
         self.view?.present(movies: movies)
     }
 

@@ -21,6 +21,7 @@ class MoviesViewController: UIViewController, MoviesView {
     var presenter: MoviesPresentation!
     var delegate: MoviesCVDelegate!
     var dataSource: MoviesCVDataSource!
+    var searchDelegate: MoviesSearchBarDelegate!
 
     // MARK: - Life cicle functions
     
@@ -31,6 +32,11 @@ class MoviesViewController: UIViewController, MoviesView {
         self.movies.delegate = self.delegate
         self.dataSource = MoviesCVDataSource(collectionView: self.movies, presenter: self.presenter)
         self.movies.dataSource = self.dataSource
+        self.searchDelegate = MoviesSearchBarDelegate(presenter: self.presenter)
+        self.searchBar.delegate = self.searchDelegate
+        
+        self.navigationItem.title = "Movies"
+        
         self.presenter.viewDidLoad()
         
     }

@@ -41,9 +41,9 @@ class MoviesRouter: MoviesWireframe {
             presenter.view = moviesViewController
         }
         
-        viewController = UINavigationController(rootViewController: viewController)
+        let navigation = UINavigationController(rootViewController: viewController)
         
-        return viewController
+        return navigation
         
     }
     

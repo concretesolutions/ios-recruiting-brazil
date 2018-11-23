@@ -46,7 +46,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func didTapFavoriteButton() {
-        self.presenter?.didTapFavoriteButtonTo(movie: self.movie)
+        self.presenter.didTapFavoriteButton(forMovie: self.movie)
         self.setFavoriteButtonImage()
     }
     

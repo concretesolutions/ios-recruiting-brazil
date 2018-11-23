@@ -10,6 +10,7 @@ import UIKit
 
 class MoviesInteractor: MoviesUseCase {
     
+    
     // MARK: - Properties
     
     var output: MoviesInteractorOutput!
@@ -17,20 +18,19 @@ class MoviesInteractor: MoviesUseCase {
     
     // MARK: - MoviesUseCase protocol functions
     
-    func readMoviesFor(page: Int) {
+    func getMovies(fromPage page: Int) {
         APIDataManager.readPopularFor(page: page) {
             self.current.append(contentsOf: $0)
-            self.output.didReadMoviesForPage(page, $0)
+            self.output.didGetMovies(fromPage: page, $0)
         }
     }
     
-    func filterMoviesWith(name: String) {
-        let filtered = self.current.filter { return $0.title.contains(name) }
-        output.didFilterMoviesWithName(name, filtered)
+    func getCurrentMovies() {
+        self.output.didGetCurrentMovies(self.current)
     }
     
-    func removeFilter() {
-        output.didRemoveFilter(self.current)
+    func searchMovies(withTitle title: String) {
+        
     }
     
     func favorite(movie: Movie) {

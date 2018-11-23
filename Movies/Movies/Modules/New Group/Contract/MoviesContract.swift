@@ -24,8 +24,9 @@ protocol MoviesPresentation {
     
     func viewDidLoad()
     func didSelect(movie: Movie)
-    func didTapFavoriteButtonTo(movie: Movie)
-    func didSearchMoviesWith(name: String)
+    func didTapFavoriteButton(forMovie: Movie)
+    func didSearchMovies(withTitle: String)
+    func didFinishSearch()
     
 }
 
@@ -33,18 +34,18 @@ protocol MoviesUseCase {
     
     var output: MoviesInteractorOutput! { get set }
     
-    func readMoviesFor(page: Int)
-    func filterMoviesWith(name: String)
-    func removeFilter()
+    func getMovies(fromPage page: Int)
+    func getCurrentMovies()
+    func searchMovies(withTitle title: String)
     func favorite(movie: Movie)
     func unfavorite(movie: Movie)
 }
 
 protocol MoviesInteractorOutput {
     
-    func didReadMoviesForPage(_ page: Int, _ movies: [Movie])
-    func didFilterMoviesWithName(_ name: String, _ movies: [Movie])
-    func didRemoveFilter(_ movies: [Movie])
+    func didGetMovies(fromPage page: Int, _ movies: [Movie])
+    func didGetCurrentMovies(_ movies: [Movie])
+    func didSearchMovies(withTitle title: String, _ movies: [Movie])
     
 }
 
