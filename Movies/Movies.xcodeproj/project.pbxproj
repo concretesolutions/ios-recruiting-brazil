@@ -24,6 +24,7 @@
 		CF0C493A21A3BF090082B289 /* MoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0C493921A3BF090082B289 /* MoviesInteractor.swift */; };
 		CF0C493C21A3C3B40082B289 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0C493B21A3C3B40082B289 /* MoviesRouter.swift */; };
 		CF0C493E21A4927A0082B289 /* MoviesSearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0C493D21A4927A0082B289 /* MoviesSearchBarDelegate.swift */; };
+		CF17C4E021A7A7C100667760 /* FavoritesContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4DF21A7A7C100667760 /* FavoritesContract.swift */; };
 		CF27C3C021999C6B009DF312 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF27C3BF21999C6B009DF312 /* AppDelegate.swift */; };
 		CF27C3C821999C6B009DF312 /* Movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF27C3C621999C6B009DF312 /* Movies.xcdatamodeld */; };
 		CF27C3CA21999C6C009DF312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF27C3C921999C6C009DF312 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		CF0C493921A3BF090082B289 /* MoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesInteractor.swift; sourceTree = "<group>"; };
 		CF0C493B21A3C3B40082B289 /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
 		CF0C493D21A4927A0082B289 /* MoviesSearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSearchBarDelegate.swift; sourceTree = "<group>"; };
+		CF17C4DF21A7A7C100667760 /* FavoritesContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesContract.swift; sourceTree = "<group>"; };
 		CF27C3BC21999C6B009DF312 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF27C3BF21999C6B009DF312 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF27C3C721999C6B009DF312 /* Movies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movies.xcdatamodel; sourceTree = "<group>"; };
@@ -114,6 +116,11 @@
 		CF0C490B21A38C510082B289 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				CF17C4DE21A7A7B100667760 /* Contract */,
+				CF17C4DD21A7A7AB00667760 /* View */,
+				CF17C4DC21A7A7A500667760 /* Presenter */,
+				CF17C4DB21A7A79D00667760 /* Interactor */,
+				CF17C4DA21A7A79800667760 /* Router */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -189,6 +196,42 @@
 			path = ActivityIndicator;
 			sourceTree = "<group>";
 		};
+		CF17C4DA21A7A79800667760 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		CF17C4DB21A7A79D00667760 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		CF17C4DC21A7A7A500667760 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		CF17C4DD21A7A7AB00667760 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CF17C4DE21A7A7B100667760 /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				CF17C4DF21A7A7C100667760 /* FavoritesContract.swift */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
 		CF27C3B321999C6B009DF312 = {
 			isa = PBXGroup;
 			children = (
@@ -242,9 +285,9 @@
 			isa = PBXGroup;
 			children = (
 				CF0C490C21A38C5C0082B289 /* Root */,
+				CF0C490921A38C420082B289 /* Movies */,
 				CF0C490B21A38C510082B289 /* Favorites */,
 				CF0C490A21A38C480082B289 /* MovieDetail */,
-				CF0C490921A38C420082B289 /* Movies */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -346,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF27C3C821999C6B009DF312 /* Movies.xcdatamodeld in Sources */,
+				CF17C4E021A7A7C100667760 /* FavoritesContract.swift in Sources */,
 				CF0C493C21A3C3B40082B289 /* MoviesRouter.swift in Sources */,
 				CF0C491F21A390920082B289 /* MoviesViewController.swift in Sources */,
 				CF0C493121A3A9FA0082B289 /* MoviesCVDataSource.swift in Sources */,
