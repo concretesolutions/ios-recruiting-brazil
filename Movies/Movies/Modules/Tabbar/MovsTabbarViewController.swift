@@ -45,7 +45,6 @@ class MovsTabbarViewController: UITabBarController {
     // TODO: - Make scroll to the top of view when the user taps in the icon of an already selected tab bar icon
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if let title = item.title {
-            print("Current title: \(self.currentSelectedItemTitle) - Selected now: \(title) \n")
             if title == self.currentSelectedItemTitle {
                 if title == "Movies" {
                     print("Should scroll movies collection view to top.")
