@@ -48,7 +48,7 @@ protocol FavoritesUseCase {
 protocol FavoritesInteractorOutput {
     
     func didRead(movies: [Movie])
-    func didSearchMovies(withTitle title: String)
+    func didSearchMovies(withTitle title: String, _ movies: [Movie])
     
 }
 
