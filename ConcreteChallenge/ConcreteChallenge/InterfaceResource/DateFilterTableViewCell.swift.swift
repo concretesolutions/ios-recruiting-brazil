@@ -23,6 +23,6 @@ class DateFilterTableViewCell: UITableViewCell {
     
     // MARK: - Functions
     func setupCell(date: Date) {
-        
+        self.dateLabel.text = date.year
     }
 }

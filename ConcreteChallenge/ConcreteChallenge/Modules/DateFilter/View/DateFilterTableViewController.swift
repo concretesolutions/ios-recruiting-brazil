@@ -11,6 +11,7 @@ import UIKit
 class DateFilterTableViewController: UITableViewController, DateFilterView {
     
     // MARK: - Outlets
+    @IBOutlet var dateFilterTableView: DateFilterTableView!
     
     // MARK: - Actions
 
@@ -23,11 +24,12 @@ class DateFilterTableViewController: UITableViewController, DateFilterView {
         self.presenter.viewDidLoad()
         
         self.setupNavigationBar()
+        self.setupTableView()
     }
 
     // MARK: - DateFilterView Functions
     func showDates(dates: [Date]) {
-        print(dates)
+        (self.tableView as? DateFilterTableView)?.dates = dates
     }
     
     
@@ -35,6 +37,11 @@ class DateFilterTableViewController: UITableViewController, DateFilterView {
     func setupNavigationBar() {
         // Title
         self.navigationItem.title = "Dates"
+    }
+    
+    func setupTableView() {
+        self.dateFilterTableView.delegate = self.dateFilterTableView
+        self.dateFilterTableView.dataSource = self.dateFilterTableView
     }
     
 }
