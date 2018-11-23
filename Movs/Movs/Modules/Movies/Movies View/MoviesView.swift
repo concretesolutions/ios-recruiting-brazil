@@ -28,6 +28,8 @@ class MoviesView: UIViewController {
         // Setup Collection Delegates
         self.outletMoviesCollection.delegate = self
         self.outletMoviesCollection.dataSource = self.presenter //self.presenter.interactor
+        self.outletMoviesCollection.accessibilityIdentifier = "Movies"
+        
         
         // Setup Error View
         self.outletMoviesError.isHidden = true
@@ -69,15 +71,15 @@ class MoviesView: UIViewController {
         self.outletMoviesError.isHidden = true
         self.outletMoviesNoResults.isHidden = true
         
-//        let currentSize = self.outletMoviesCollection.numberOfItems(inSection: 0)
-//        let currentDataSourceSize = self.presenter.totalMovies()
-//        print("- \(currentSize) / \(currentDataSourceSize)")
-//        var newMoviesIndex:[IndexPath] = []
-//        for item in currentSize...currentDataSourceSize {
-//            let newIndexPath = IndexPath(item: item, section: 0)
-//            newMoviesIndex.append(newIndexPath)
-//        }
-//        outletMoviesCollection.insertItems(at: newMoviesIndex)
+        //        let currentSize = self.outletMoviesCollection.numberOfItems(inSection: 0)
+        //        let currentDataSourceSize = self.presenter.totalMovies()
+        //        print("- \(currentSize) / \(currentDataSourceSize)")
+        //        var newMoviesIndex:[IndexPath] = []
+        //        for item in currentSize...currentDataSourceSize {
+        //            let newIndexPath = IndexPath(item: item, section: 0)
+        //            newMoviesIndex.append(newIndexPath)
+        //        }
+        //        outletMoviesCollection.insertItems(at: newMoviesIndex)
         
         //self.outletMoviesCollection.reloadItems(at: newMoviesIndex)
         
