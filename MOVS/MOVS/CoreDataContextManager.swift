@@ -21,7 +21,7 @@ public class CoreDataContextManager: NSObject{
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        let container = NSPersistentContainer(name: "FinalChallenge")
+        let container = NSPersistentContainer(name: "MOVS")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 print("Error trying to create core data persistent container in: \(CoreDataContextManager.self)")

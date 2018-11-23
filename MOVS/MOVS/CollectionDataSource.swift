@@ -8,52 +8,27 @@
 
 import UIKit
 
-class CollectionDataSource: NSObject, UICollectionViewDataSource {
+class CollectionDataSource: NSObject, UICollectionViewDelegate, CollectionWithSearch {
     
-    var films: [ResponseFilm] = [ResponseFilm]()
+    var collection: UICollectionView
     
-    var collection: UICollectionView!
+    var searchController: UISearchController
     
-    var totalPages: Int! = 1000000
+    var filteredFilms: [ResponseFilm] = [ResponseFilm]()
     
-    init(withCollection collection: UICollectionView){
+    var notFilteredFilms: [ResponseFilm] = [ResponseFilm]()
+    
+    var totalPages: Int = 1
+    
+    var shownIndexes : [IndexPath] = []
+    
+    init(withCollection collection: UICollectionView, andSearchController searchController: UISearchController){
+        self.collection = collection
+        self.searchController = searchController
         super.init()
         collection.dataSource = self
-        self.collection = collection
-    }
-    
-    func getNewMovies(withActivityIndicator activity: UIActivityIndicatorView){
-        
-        if totalPages >= NetworkManager.shared.page {
-            activity.startAnimating()
-            NetworkManager.shared.fetchMovies { (result) in
-                switch result{
-                case .success(let filmsResponse):
-                    guard let films = filmsResponse.results else {
-                        print("Error to cast films from response in: \(CollectionDataSource.self)")
-                        return
-                    }
-                    if let totalPages = filmsResponse.total_pages{
-                        self.totalPages = totalPages
-                    }
-                    DispatchQueue.main.async {
-                        self.collection.performBatchUpdates({
-                            var indexPaths: [IndexPath] = [IndexPath]()
-                            for i in self.films.count...self.films.count+films.count-1{
-                                indexPaths.append(IndexPath(row: i, section: 0))
-                            }
-                            self.films.append(contentsOf: films)
-                            self.collection.insertItems(at: indexPaths)
-                        }, completion: nil)
-                        activity.stopAnimating()
-                    }
-                case .failure(let error):
-                    print("Error \(error.localizedDescription) in: \(CollectionDataSource.self)")
-                }
-            }
-        }else{
-            activity.alpha = 0
-        }
+        collection.delegate = self
+        searchController.searchResultsUpdater = self
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -69,8 +44,67 @@ class CollectionDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell: EndCollectionViewCell = collectionView.dequeueReusableSupplementaryViewOfKind(ofKind: UICollectionView.elementKindSectionFooter, for: indexPath)
         NetworkManager.shared.page+=1
-        getNewMovies(withActivityIndicator: cell.outletActivityIndicator)
+        if isFiltering{
+            let textRequest = self.searchController.searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            getSearchMovie(withText: textRequest, andActivityIndicator: cell.outletActivityIndicator)
+        }else{
+            getNewMovies(withActivityIndicator: cell.outletActivityIndicator)
+        }
         return cell
     }
     
+    func updateSearchResults(for searchController: UISearchController) {
+        updateSearch(for: searchController)
+    }
+    
+    func errorInSearch() {
+        self.collection.alpha = 0
+    }
+    
+    func noFilmsForSearch(withSearch text: String) {
+        self.collection.alpha = 0
+    }
+    
+    // TODO: - Move this to CollectionDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (!shownIndexes.contains(indexPath)) {
+            shownIndexes.append(indexPath)
+            
+            cell.transform = CGAffineTransform(translationX: 0, y: 40)
+            
+            UIView.beginAnimations("rotation", context: nil)
+            UIView.setAnimationDuration(0.5)
+            cell.transform = CGAffineTransform.identity
+            UIView.commitAnimations()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let cell = collection.cellForItem(at: indexPath)
+        
+        UIView.animate(withDuration: 0.2) {
+            cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        let cell = collection.cellForItem(at: indexPath)
+        
+        UIView.animate(withDuration: 0.2) {
+            cell?.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collection.cellForItem(at: indexPath)
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { (true) in
+            UIView.animate(withDuration: 0.2, animations: {
+                cell?.transform = CGAffineTransform.identity
+            })
+        }
+    }
 }

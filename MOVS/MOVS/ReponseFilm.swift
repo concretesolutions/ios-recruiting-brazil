@@ -16,7 +16,7 @@ class ResponseFilm: Decodable {
         case poster_path
         case release_date
         case title
-        case genres
+        case genres_ids
     }
     
     //MARK: - Variables
@@ -25,7 +25,7 @@ class ResponseFilm: Decodable {
     var poster_path: String?
     var release_date: String?
     var title: String?
-    var genres: [GenersResponse]?
+    var genres: [Int]?
     
     //MARK: - Init
     public init(){
@@ -40,7 +40,7 @@ class ResponseFilm: Decodable {
         self.poster_path = try container.decodeIfPresent(String.self, forKey: .poster_path)
         self.release_date = try container.decodeIfPresent(String.self, forKey: .release_date)
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
-        self.genres = try container.decodeIfPresent([GenersResponse].self, forKey: .genres)
+        self.genres = try container.decodeIfPresent([Int].self, forKey: .genres_ids)
     }
     
 }

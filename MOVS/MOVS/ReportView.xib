@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReportView" customModule="MOVS" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="ZYe-4U-tM8" id="gCf-j9-skR"/>
+                <outlet property="label" destination="wiJ-Jo-91v" id="eYx-fc-6Da"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="345" height="204"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Error" translatesAutoresizingMaskIntoConstraints="NO" id="ZYe-4U-tM8">
+                    <rect key="frame" x="101" y="0.0" width="143" height="143"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="143" id="C5e-i9-YIP"/>
+                        <constraint firstAttribute="width" secondItem="ZYe-4U-tM8" secondAttribute="height" id="Sp8-Gs-ey0"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Um erro ocorreu. Por favor, tente novamente" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiJ-Jo-91v">
+                    <rect key="frame" x="0.0" y="156" width="345" height="49"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
+                    <color key="textColor" red="0.10588235294117647" green="0.10588235294117647" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ZYe-4U-tM8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8M9-qe-4V3"/>
+                <constraint firstItem="ZYe-4U-tM8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="CVN-GC-3mM"/>
+                <constraint firstItem="wiJ-Jo-91v" firstAttribute="top" secondItem="ZYe-4U-tM8" secondAttribute="bottom" constant="13" id="MOj-Xo-Qnp"/>
+                <constraint firstItem="wiJ-Jo-91v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="P6q-uF-TdK"/>
+                <constraint firstItem="wiJ-Jo-91v" firstAttribute="centerX" secondItem="ZYe-4U-tM8" secondAttribute="centerX" id="akt-cw-BzE"/>
+                <constraint firstAttribute="trailing" secondItem="wiJ-Jo-91v" secondAttribute="trailing" id="gd3-hI-CHf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="39.200000000000003" y="46.776611694152926"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Error" width="149" height="149"/>
+    </resources>
+</document>

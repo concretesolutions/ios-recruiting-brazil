@@ -12,6 +12,7 @@ protocol API {
     var base: String { get }
     var path: String { get }
     var page: Int { get set }
+    var query: String? {get set }
 }
 
 extension API {
@@ -23,14 +24,25 @@ extension API {
         return URLQueryItem(name: "language", value: "pt-BR")
     }
     
-    var page: URLQueryItem{
+    var pageURL: URLQueryItem{
         return URLQueryItem(name: "page", value: "\(page)")
+    }
+    
+    var queryURL: URLQueryItem? {
+        if let zquery = query {
+            return URLQueryItem(name: "query", value: "\(zquery)")
+        }
+        return nil
     }
     
     var urlComponents: URLComponents {
         var components = URLComponents(string: base)!
         components.path = path
-        components.queryItems = [apiKey, language, page]
+        if let zquery = queryURL {
+            components.queryItems = [apiKey, language, pageURL, zquery]
+        }else{
+            components.queryItems = [apiKey, language, pageURL]
+        }
         return components
     }
     

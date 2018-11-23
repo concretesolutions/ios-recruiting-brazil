@@ -28,5 +28,9 @@ class FilmsRouter{
         self.presenter = FilmsPresenter(router: self, interactor: interactor, view: viewController)
     }
     
+    func goToFilmDetail(withFilm: ResponseFilm){
+        
+    }
+    
 }
 

@@ -12,6 +12,8 @@ class FilmsPresenter: NSObject{
     // MARK: - Variables
     // MARK: Private
     private var collectionDataSource: CollectionDataSource!
+//    private var collectionDelegate
+    
     // MARK: Public
     var router:FilmsRouter
     var interactor:FilmsInteractor
@@ -24,13 +26,15 @@ class FilmsPresenter: NSObject{
         self.view = view
         super.init()
         self.view.presenter = self
+        
     }
     
     // MARK: - Functions
     // MARK: Private
     // MARK: Public
-    func viewDidLoad(withCollection collection: UICollectionView) {
-        self.collectionDataSource = CollectionDataSource(withCollection: collection)
+    func viewDidLoad(withCollection collection: UICollectionView, andSearchController searchController: UISearchController) {
+        self.collectionDataSource = CollectionDataSource(withCollection: collection, andSearchController: searchController)
         collection.dataSource = self.collectionDataSource
     }
+    
 }

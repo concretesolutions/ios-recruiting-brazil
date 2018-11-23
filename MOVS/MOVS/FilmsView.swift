@@ -16,6 +16,7 @@ class FilmsView: UIViewController {
     
     // MARK: - Public
     var presenter: FilmsPresenter!
+    let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -26,7 +27,11 @@ class FilmsView: UIViewController {
         self.setNavigationBar()
         
         // Load collection
-        self.presenter.viewDidLoad(withCollection: self.outletFilmsCollectionView)
+        self.presenter.viewDidLoad(withCollection: self.outletFilmsCollectionView, andSearchController: self.searchController)
+        
+        // Set Search on navigation
+        self.setSearchBar()
+        
     }
 
     
@@ -39,5 +44,13 @@ class FilmsView: UIViewController {
         }
         DesignManager.configureNavigation(navigationBar: navBar)
         navBar.topItem?.title = "Filmes"
+    }
+    
+    func setSearchBar(){
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Nome do filme"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
     }
 }

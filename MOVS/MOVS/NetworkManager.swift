@@ -12,7 +12,11 @@ class NetworkManager: APIClient{
     
     public static let shared: NetworkManager = NetworkManager()
     
+    var path: String = RequestType.feed.rawValue
+    
     var page: Int = 0
+    
+    var query: String?
     
     var session: URLSession
     
@@ -28,8 +32,13 @@ class NetworkManager: APIClient{
         UIApplication.shared.isNetworkActivityIndicatorVisible = !UIApplication.shared.isNetworkActivityIndicatorVisible
     }
     
-    func fetchMovies(completion: @escaping (Result<Response, APIError>) -> Void){
+    func fetchMovies(withRequest request: RequestType, andSearchText text: String? = nil, completion: @escaping (Result<Response, APIError>) -> Void){
         changeUILoader()
+        path = request.rawValue
+        if let searchText = text {
+            query = searchText
+        }
+        
         fetch { (result) in
             completion(result)
         }

@@ -25,10 +25,6 @@ extension APIClient{
         return "https://api.themoviedb.org"
     }
     
-    var path: String{
-        return "/3/movie/popular"
-    }
-    
     func fetch<T: Decodable>(completion: @escaping (Result<T, APIError>) -> Void) {
         session.dataTask(with: requestMovies) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse else {

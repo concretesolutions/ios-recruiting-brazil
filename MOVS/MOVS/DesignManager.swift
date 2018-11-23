@@ -71,7 +71,6 @@ class DesignManager: NSObject {
         navigationBar.tintColor = PaletColor.esmerald.rawValue
         navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular, NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
         navigationBar.titleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular.withSize(20), NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
-        
     }
     
     // MARK: - Private
