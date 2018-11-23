@@ -10,7 +10,12 @@ import UIKit
 
 class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    // MARK: - Properties
+    
     var movies: [Movie] = []
+    weak var movieSelected: MovieCellSelected?
+    
+    // MARK: - UICollectionView DataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.movies.count
@@ -25,7 +30,11 @@ class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
         return cell
     }
     
-
+    // MARK: - UICollectionView Delegate
     
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cellTapped = collectionView.cellForItem(at: indexPath) as? MoviesCollectionViewCell else { return }
+        self.movieSelected?.didTap(at: cellTapped)
+    }
+    
 }

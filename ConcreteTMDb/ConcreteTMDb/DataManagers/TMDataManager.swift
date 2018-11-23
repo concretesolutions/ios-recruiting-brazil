@@ -35,7 +35,8 @@ class TMDataManager {
                 
                 do {
                     let decoder = JSONDecoder()
-                    movies = try decoder.decode([Movie].self, from: data)
+                    let res = try decoder.decode(MovieResponse.self, from: data)
+                    movies = res.results
                     
                     self.dataCompleted?.fetchComplete(for: movies)
                     
