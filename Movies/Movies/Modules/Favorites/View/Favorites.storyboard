@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="OLQ-tR-9xW">
+                            <searchBar contentMode="redraw" placeholder="enter with a movie title..." translatesAutoresizingMaskIntoConstraints="NO" id="OLQ-tR-9xW">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -36,25 +36,20 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xy4-zc-0iG">
                                                     <rect key="frame" x="0.0" y="0.0" width="131.5" height="169.5"/>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5sj-dF-gOC">
-                                                    <rect key="frame" x="139.5" y="8" width="227.5" height="20.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHB-Cs-HEo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="181" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkl-fF-cis">
-                                                            <rect key="frame" x="189" y="0.0" width="38.5" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yZ-W2-PMb">
-                                                    <rect key="frame" x="139.5" y="44.5" width="227.5" height="117"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHB-Cs-HEo">
+                                                    <rect key="frame" x="139.5" y="16" width="227.5" height="24"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkl-fF-cis">
+                                                    <rect key="frame" x="139.5" y="48" width="227.5" height="13.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yZ-W2-PMb">
+                                                    <rect key="frame" x="139.5" y="77.5" width="227.5" height="84"/>
                                                     <string key="text">Something about this movie: this is a very interesting movie. It won a Oscar award. It is really a great movie, and you should watch it! Something else...</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -63,16 +58,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="xy4-zc-0iG" firstAttribute="top" secondItem="nAU-bL-36X" secondAttribute="top" id="1ZS-8m-AKo"/>
-                                                <constraint firstItem="5sj-dF-gOC" firstAttribute="top" secondItem="nAU-bL-36X" secondAttribute="top" constant="8" id="2Ts-g8-fBt"/>
-                                                <constraint firstAttribute="bottom" secondItem="9yZ-W2-PMb" secondAttribute="bottom" constant="8" id="5Uc-jF-EsN"/>
-                                                <constraint firstAttribute="trailing" secondItem="9yZ-W2-PMb" secondAttribute="trailing" constant="8" id="GCX-Jm-Uqb"/>
+                                                <constraint firstAttribute="trailing" secondItem="pkl-fF-cis" secondAttribute="trailing" constant="8" id="2Ux-gV-2G3"/>
+                                                <constraint firstItem="pkl-fF-cis" firstAttribute="top" secondItem="OHB-Cs-HEo" secondAttribute="bottom" constant="8" id="7tz-H8-guq"/>
+                                                <constraint firstAttribute="trailing" secondItem="9yZ-W2-PMb" secondAttribute="trailing" constant="8" id="Dv6-Fe-vfa"/>
                                                 <constraint firstItem="xy4-zc-0iG" firstAttribute="leading" secondItem="nAU-bL-36X" secondAttribute="leading" id="GLL-4u-8GL"/>
                                                 <constraint firstItem="xy4-zc-0iG" firstAttribute="width" secondItem="nAU-bL-36X" secondAttribute="width" multiplier="0.35" id="GvQ-ss-Pdc"/>
-                                                <constraint firstItem="9yZ-W2-PMb" firstAttribute="top" secondItem="5sj-dF-gOC" secondAttribute="bottom" constant="16" id="Pbq-Ic-PW9"/>
-                                                <constraint firstItem="5sj-dF-gOC" firstAttribute="leading" secondItem="xy4-zc-0iG" secondAttribute="trailing" constant="8" id="hbO-sU-2dn"/>
-                                                <constraint firstItem="9yZ-W2-PMb" firstAttribute="leading" secondItem="xy4-zc-0iG" secondAttribute="trailing" constant="8" id="rTy-6Q-lox"/>
-                                                <constraint firstAttribute="trailing" secondItem="5sj-dF-gOC" secondAttribute="trailing" constant="8" id="sc9-gN-7yf"/>
+                                                <constraint firstAttribute="trailing" secondItem="OHB-Cs-HEo" secondAttribute="trailing" constant="8" id="LgE-Of-Gmq"/>
+                                                <constraint firstItem="OHB-Cs-HEo" firstAttribute="top" secondItem="nAU-bL-36X" secondAttribute="top" constant="16" id="Lne-fa-uvY"/>
+                                                <constraint firstItem="OHB-Cs-HEo" firstAttribute="leading" secondItem="xy4-zc-0iG" secondAttribute="trailing" constant="8" id="SMB-EV-ECW"/>
+                                                <constraint firstAttribute="bottom" secondItem="9yZ-W2-PMb" secondAttribute="bottom" constant="8" id="bxG-qW-xwx"/>
+                                                <constraint firstItem="pkl-fF-cis" firstAttribute="leading" secondItem="xy4-zc-0iG" secondAttribute="trailing" constant="8" id="lwc-5Y-E1r"/>
+                                                <constraint firstItem="9yZ-W2-PMb" firstAttribute="leading" secondItem="xy4-zc-0iG" secondAttribute="trailing" constant="8" id="ozH-qk-9zM"/>
                                                 <constraint firstAttribute="bottom" secondItem="xy4-zc-0iG" secondAttribute="bottom" id="v4w-o7-VdW"/>
+                                                <constraint firstItem="9yZ-W2-PMb" firstAttribute="top" secondItem="pkl-fF-cis" secondAttribute="bottom" constant="16" id="yOw-ij-jqd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -105,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sh7-E8-JUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="151"/>
+            <point key="canvasLocation" x="88.799999999999997" y="150.67466266866569"/>
         </scene>
     </scenes>
 </document>

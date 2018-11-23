@@ -24,8 +24,9 @@ class FavoriteTableViewCell: UITableViewCell {
     // MARK: - Util functions
     
     func set(movie: Movie) {
-        self.poster.image = movie.posterImage
         self.movie = movie
+        self.poster.image = movie.posterImage
+        self.title.text = movie.title
         self.year.text = "\(movie.year)"
         self.overview.text = movie.overview
     }
