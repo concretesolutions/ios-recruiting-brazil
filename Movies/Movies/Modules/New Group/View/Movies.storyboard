@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies View Controller-->
+        <!--Movies-->
         <scene sceneID="4DF-j4-rIS">
             <objects>
                 <viewController storyboardIdentifier="Movies" id="tcK-CD-cR7" customClass="MoviesViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,7 +22,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </searchBar>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FGi-Aw-1X1" customClass="MoviesCollectionView" customModule="Movies" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="A9O-RI-pZ0">
                                     <size key="itemSize" width="180" height="250"/>
@@ -91,6 +91,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fbz-Hd-1w8"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="PaH-59-aqw"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="movies" destination="FGi-Aw-1X1" id="3lg-Wk-UYp"/>
                         <outlet property="searchBar" destination="cKX-Ly-v6M" id="G6H-7p-VZK"/>
@@ -104,5 +106,6 @@
     <resources>
         <image name="Movies" width="1024" height="1024"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
+        <image name="list_icon" width="18" height="10"/>
     </resources>
 </document>
