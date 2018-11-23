@@ -27,9 +27,13 @@ class FavoritesInteractor: FavoritesUseCase {
     }
     
     func searchMovies(withTitle title: String) {
+        let clearSearchText = title.trimmingCharacters(in: CharacterSet(charactersIn: " ")).lowercased()
         let movies = MovieDataManager.readFavoriteMovies()
         movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath ?? "") }
-        let searchedMovies = movies.filter { return $0.title.contains(title) }
+        let searchedMovies = movies.filter { movie in
+            let clearTitle = movie.title.trimmingCharacters(in: CharacterSet(charactersIn: " ")).lowercased()
+            return clearTitle.contains(clearSearchText)
+        }
         self.output.didSearchMovies(withTitle: title, searchedMovies)
     }
     
