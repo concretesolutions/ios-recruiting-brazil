@@ -10,14 +10,20 @@ import UIKit
 
 class MoviesSearchBarDelegate: NSObject, UISearchBarDelegate {
     
+    // MARK: - Properties
+    
     private var presenter: MoviesPresentation
     private var currentSearch: String = ""
     private var viewController: UIViewController!
+    
+    // MARK: - Initializers
     
     init(presenter: MoviesPresentation, viewController: UIViewController) {
         self.presenter = presenter
         self.viewController = viewController
     }
+    
+    // MARK: - UISearchBarDelegate protocol functions
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if let text = searchBar.text {

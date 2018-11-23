@@ -44,6 +44,7 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     }
     
     // MARK: - MoviesInterectorOutput protocol functions
+    
     func didGetMovies(fromPage page: Int, _ movies: [Movie]) {
         if page == 1 {
             self.view?.present(movies: movies)

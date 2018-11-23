@@ -12,12 +12,12 @@ class MoviesRouter: MoviesWireframe {
     
     // MARK: - Properties
     
-    var view: UIViewController?
+    weak var view: UIViewController?
     
     // MARK: - MoviesWireframe protocol functions
     
     func presentMovieDetailsFor(_ movie: Movie) {
-        
+        print("MoviesWireframe.presentMoviesDetailFor: \(movie.title)")
     }
     
     static func assembleModule() -> UIViewController {
@@ -36,7 +36,7 @@ class MoviesRouter: MoviesWireframe {
         
         router.view = viewController
         
-        if let moviesViewController = viewController as? MoviesViewController { 
+        if let moviesViewController = viewController as? MoviesView { 
             moviesViewController.presenter = presenter
             presenter.view = moviesViewController
         }

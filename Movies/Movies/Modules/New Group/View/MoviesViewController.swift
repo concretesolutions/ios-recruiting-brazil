@@ -19,9 +19,9 @@ class MoviesViewController: UIViewController, MoviesView {
     // MARK: - Properties
     
     var presenter: MoviesPresentation!
-    var delegate: MoviesCVDelegate!
-    var dataSource: MoviesCVDataSource!
-    var searchDelegate: MoviesSearchBarDelegate!
+    private var delegate: MoviesCVDelegate!
+    private var dataSource: MoviesCVDataSource!
+    private var searchDelegate: MoviesSearchBarDelegate!
 
     // MARK: - Life cicle functions
     
