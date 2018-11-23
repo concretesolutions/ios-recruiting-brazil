@@ -26,7 +26,6 @@ class ImageDataManager {
     private static let context = persistentContainer.viewContext
     
     private static func saveContext() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
