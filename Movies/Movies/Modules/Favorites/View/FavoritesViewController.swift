@@ -9,7 +9,11 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-
+    
+    // MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var favorites: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -1,7 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Favorites View Controller-->
+        <scene sceneID="HKE-3o-FtG">
+            <objects>
+                <viewController storyboardIdentifier="Favorites" id="BjF-8w-WkW" customClass="FavoritesViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="esh-pK-Roj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="OLQ-tR-9xW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zr2-Iw-vP8">
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OLQ-tR-9xW" firstAttribute="trailing" secondItem="C1U-cA-aHC" secondAttribute="trailing" id="EaN-BQ-CiT"/>
+                            <constraint firstItem="zr2-Iw-vP8" firstAttribute="top" secondItem="OLQ-tR-9xW" secondAttribute="bottom" id="MjS-2T-G0I"/>
+                            <constraint firstItem="zr2-Iw-vP8" firstAttribute="leading" secondItem="C1U-cA-aHC" secondAttribute="leading" id="ZhT-Ga-Iko"/>
+                            <constraint firstItem="OLQ-tR-9xW" firstAttribute="leading" secondItem="C1U-cA-aHC" secondAttribute="leading" id="aqa-NV-Dps"/>
+                            <constraint firstItem="C1U-cA-aHC" firstAttribute="trailing" secondItem="zr2-Iw-vP8" secondAttribute="trailing" id="bMn-SK-8bD"/>
+                            <constraint firstItem="OLQ-tR-9xW" firstAttribute="top" secondItem="C1U-cA-aHC" secondAttribute="top" id="ro7-gJ-Ntn"/>
+                            <constraint firstItem="C1U-cA-aHC" firstAttribute="bottom" secondItem="zr2-Iw-vP8" secondAttribute="bottom" id="t7E-gz-HZl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C1U-cA-aHC"/>
+                    </view>
+                    <connections>
+                        <outlet property="favorites" destination="zr2-Iw-vP8" id="pSg-FP-bMy"/>
+                        <outlet property="searchBar" destination="OLQ-tR-9xW" id="6XF-hE-5Uz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sh7-E8-JUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="90" y="151"/>
+        </scene>
+    </scenes>
 </document>
