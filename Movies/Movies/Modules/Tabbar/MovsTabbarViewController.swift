@@ -14,6 +14,7 @@ class MovsTabbarViewController: UITabBarController {
     
     private var moviesPresenter: MoviesPresentation?
     private var favoritesPresenter: FavoritesPresentation?
+    private var currentSelectedIndex: Int = 0
 
     // MARK: - Life cicle functions
     
@@ -31,14 +32,25 @@ class MovsTabbarViewController: UITabBarController {
         
         self.viewControllers = [moviesView, favoritesView]
         
-        self.selectedIndex = 0
+        self.selectedIndex = self.currentSelectedIndex
         
     }
     
     // MARK: - Tabbar functions
     // TODO: - Make scroll to the top of view when the user taps in the icon of an already selected tab bar icon
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
+        if self.selectedIndex == self.currentSelectedIndex {
+            if self.currentSelectedIndex == 0 {
+                print("should scroll movies collection view to top")
+            }
+            if self.currentSelectedIndex == 1 {
+                print("should scroll favorites table view to top")
+            }
+        } else {
+            self.currentSelectedIndex = self.selectedIndex
+        }
     }
+    
+    
 
 }
