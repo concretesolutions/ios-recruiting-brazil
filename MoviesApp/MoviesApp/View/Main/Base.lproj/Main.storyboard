@@ -36,72 +36,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="13" minimumInteritemSpacing="13" id="qDs-1x-V70">
-                            <size key="itemSize" width="167" height="206"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="4" id="qDs-1x-V70">
+                            <size key="itemSize" width="179" height="248"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="13" minY="13" maxX="13" maxY="13"/>
+                            <inset key="sectionInset" minX="6" minY="6" maxX="6" maxY="6"/>
                         </collectionViewFlowLayout>
                         <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="ax7-gH-0mP">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="moviePreviewCell" id="lFm-XJ-tb4" customClass="MoviePreviewCollectionViewCell" customModule="MoviesApp" customModuleProvider="target">
-                                <rect key="frame" x="13" y="13" width="167" height="206"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="moviePreviewCell" id="6XU-qW-r2r" customClass="MoviePreviewCollectionViewCell" customModule="MoviesApp" customModuleProvider="target">
+                                <rect key="frame" x="6" y="6" width="179" height="248"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="167" height="206"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="179" height="248"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TrY-Wb-7vr">
-                                            <rect key="frame" x="0.0" y="0.0" width="167" height="206"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </imageView>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wmv-Ln-Ksy" userLabel="cardView">
-                                            <rect key="frame" x="0.0" y="0.0" width="167" height="206"/>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrI-tX-mej">
+                                            <rect key="frame" x="4" y="5" width="171" height="239"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8K-y4-qS7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="206"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebU-Oe-fXu">
-                                                    <rect key="frame" x="0.0" y="159" width="167" height="47"/>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DUG-el-6Td">
+                                                    <rect key="frame" x="0.0" y="0.0" width="171" height="239"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGf-fi-TFp">
-                                                            <rect key="frame" x="142" y="11" width="25" height="25"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bs0-mS-tbc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="171" height="239"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" image="favorite_gray_icon"/>
-                                                            <connections>
-                                                                <action selector="favoriteMovieButtonTapped:" destination="lFm-XJ-tb4" eventType="touchUpInside" id="l0g-5f-mok"/>
-                                                            </connections>
-                                                        </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-M4-JNo">
-                                                            <rect key="frame" x="25" y="0.0" width="116" height="47"/>
+                                                        </imageView>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eV1-A2-y7D">
+                                                            <rect key="frame" x="0.0" y="187" width="171" height="52"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTV-e1-Yuw">
+                                                                    <rect key="frame" x="146" y="15" width="17" height="22"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <state key="normal" image="favorite_gray_icon"/>
+                                                                    <connections>
+                                                                        <action selector="favoriteMovieButtonTapped:" destination="6XU-qW-r2r" eventType="touchUpInside" id="6b3-On-IcV"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jND-9D-9a4">
+                                                                    <rect key="frame" x="35" y="6" width="100" height="39"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.032299824060000003" green="0.13734543320000001" blue="0.2868577242" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.031372549019607843" green="0.13725490196078433" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.032299824060000003" green="0.13734543320000001" blue="0.2868577242" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="customSize" width="167" height="206"/>
+                                <size key="customSize" width="179" height="248"/>
                                 <connections>
-                                    <outlet property="cardView" destination="Wmv-Ln-Ksy" id="aBe-Hf-YXg"/>
-                                    <outlet property="favoriteButtonOutlet" destination="uGf-fi-TFp" id="dCp-rU-LkF"/>
-                                    <outlet property="moviePosterImageViewOutlet" destination="M8K-y4-qS7" id="LTb-Td-gow"/>
-                                    <outlet property="movieTitleLabelOutlet" destination="d7O-M4-JNo" id="rNi-cz-ogj"/>
+                                    <outlet property="cardView" destination="DUG-el-6Td" id="lvz-Du-Yxj"/>
+                                    <outlet property="favoriteButtonOutlet" destination="jTV-e1-Yuw" id="fhV-x5-GDX"/>
+                                    <outlet property="moviePosterImageViewOutlet" destination="Bs0-mS-tbc" id="Ea4-Uz-X6v"/>
+                                    <outlet property="movieTitleLabelOutlet" destination="jND-9D-9a4" id="wS7-qF-QJa"/>
+                                    <outlet property="shadowViewOutlet" destination="nrI-tX-mej" id="gJR-YP-FN4"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

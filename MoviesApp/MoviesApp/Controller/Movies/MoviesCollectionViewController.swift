@@ -39,32 +39,32 @@ class MoviesCollectionViewController: UICollectionViewController {
             self.activityIndicatorOutlet.isHidden = false
             self.activityIndicatorOutlet.startAnimating()
             
-            MovieDAO.getAll { (response, error) in
-                if error != nil{
-                    print("Erro ao retornar os dados da API")
-                    return
-                }//>>>>
-                if let responseObj = response as? Response{
-                    
-                    let movies = responseObj.results
-                    
-                    for movie in movies{
-                        if let tempMovie = movie as? Movie{
-                            self.movies.append(tempMovie)
-                            print(tempMovie)
-                        }
-                    }
-                    
-                }
-                
-                DispatchQueue.main.async {
-                    self.activityIndicatorOutlet.stopAnimating()
-                    self.activityIndicatorOutlet.isHidden = true
-                    self.collectionView.reloadData()
-                    self.canFilter = true
-                    self.hasLoadedData = true
-                }
-            }//>>>>>
+//            MovieDAO.getAll { (response, error) in
+//                if error != nil{
+//                    print("Erro ao retornar os dados da API")
+//                    return
+//                }//>>>>
+//                if let responseObj = response as? Response{
+//                    
+//                    let movies = responseObj.results
+//                    
+//                    for movie in movies{
+//                        if let tempMovie = movie as? Movie{
+//                            self.movies.append(tempMovie)
+//                            print(tempMovie)
+//                        }
+//                    }
+//                    
+//                }
+//                
+//                DispatchQueue.main.async {
+//                    self.activityIndicatorOutlet.stopAnimating()
+//                    self.activityIndicatorOutlet.isHidden = true
+//                    self.collectionView.reloadData()
+//                    self.canFilter = true
+//                    self.hasLoadedData = true
+//                }
+//            }//>>>>>
         }
         
       self.tabBarController?.tabBar.isHidden = false
@@ -92,7 +92,7 @@ class MoviesCollectionViewController: UICollectionViewController {
                     let errorLabel = UILabel()
                     errorLabel.center.x = self.collectionView.center.x
                     errorLabel.center.y = self.collectionView.center.y
-                    errorLabel.frame.size = CGSize(wgit idth: 300, height: 150)
+                    errorLabel.frame.size = CGSize(width: 300, height: 150)
                     errorLabel.textAlignment = .center
                     errorLabel.text = errorText
                     self.collectionView.addSubview(errorLabel)

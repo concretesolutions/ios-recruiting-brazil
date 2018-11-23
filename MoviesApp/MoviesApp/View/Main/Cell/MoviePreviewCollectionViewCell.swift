@@ -12,6 +12,8 @@ import Kingfisher
 class MoviePreviewCollectionViewCell: UICollectionViewCell {
     
     
+    
+    @IBOutlet weak var shadowViewOutlet: UIView!
     @IBOutlet weak var cardView: UIView!
     var movie: Movie?
     var canFavorite = true
@@ -21,6 +23,13 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var favoriteButtonOutlet: UIButton!
     
     override func awakeFromNib() {
+        
+        self.shadowViewOutlet.layer.cornerRadius = 10
+        self.shadowViewOutlet.layer.shadowColor = UIColor.black.cgColor
+        self.shadowViewOutlet.layer.shadowOpacity = 0.4
+        self.shadowViewOutlet.layer.shadowOffset = CGSize.zero
+        self.shadowViewOutlet.layer.shadowRadius = 3
+        self.shadowViewOutlet.layer.masksToBounds = false
         
         self.cardView.layer.cornerRadius = 10
         self.cardView.layer.masksToBounds = true
