@@ -12,18 +12,16 @@ import UIKit
 
 class CoreDataManager {
     
-    var appDelegate: AppDelegate?
-    var context: NSManagedObjectContext?
-    
     // MARK: - Movie CRUD
     
-    func createFavoriteMovie(with movie: Movie) {
+    static func createFavoriteMovie(with movie: Movie) {
         
-        self.getContext()
-        guard let context = self.context else { return }
+        // Get context
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
         
         // Create Entity
-        guard let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovies", in: context) else { return }
+        guard let entity = NSEntityDescription.entity(forEntityName: "FavoriteMovie", in: context) else { return }
         let newFavoriteMovie = NSManagedObject(entity: entity, insertInto: context)
         
         // Add Data to Entity
@@ -45,14 +43,15 @@ class CoreDataManager {
         }
     }
     
-    func getFavoriteMovies(completion: @escaping ([Movie]) -> Void = {_ in }) {
+    static func getFavoriteMovies(completion: @escaping ([Movie]) -> Void = {_ in }) {
         
-        self.getContext()
-        guard let context = self.context else { return }
+        // Get context
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
         
         var movies: [Movie] = []
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovies")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
         request.returnsObjectsAsFaults = false
         
         do {
@@ -81,10 +80,11 @@ class CoreDataManager {
         }
     }
     
-    func deleteFavoriteMarket(with title: String) {
+    static func deleteFavoriteMarket(with title: String) {
         
-        self.getContext()
-        guard let context = self.context else { return }
+        // Get context
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovies")
         request.returnsObjectsAsFaults = false
@@ -108,14 +108,6 @@ class CoreDataManager {
             print("Error saving favorite market into CoreData")
         }
         
-    }
-    
-    // MARK: - Aux functions
-    
-    private func getContext() {
-        // Get context
-        self.appDelegate = UIApplication.shared.delegate as? AppDelegate
-        self.context = self.appDelegate?.persistentContainer.viewContext
     }
     
 }

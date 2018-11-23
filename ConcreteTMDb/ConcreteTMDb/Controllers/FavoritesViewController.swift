@@ -22,6 +22,17 @@ class FavoritesViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.setupTableView()
+    }
+    
+    func setupTableView() {
+        CoreDataManager.getFavoriteMovies { (movies) in
+            self.favoritesTableView.favoritedMovies = movies
+            self.favoritesTableView.reloadData()
+        }
+    }
+    
 
 
 }

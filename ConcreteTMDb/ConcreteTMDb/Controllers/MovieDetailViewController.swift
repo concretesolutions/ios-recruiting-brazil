@@ -17,7 +17,7 @@ class MovieDetailViewController: UIViewController {
         // Save movie on Core Data
         
         if let movie = self.movieCell?.movie {
-            self.coreDataManager.createFavoriteMovie(with: movie)
+            CoreDataManager.createFavoriteMovie(with: movie)
         }
         
         // Animate Button
@@ -37,7 +37,6 @@ class MovieDetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    let coreDataManager = CoreDataManager()
     var movieCell: MoviesCollectionViewCell?
     
     override func viewDidLoad() {
