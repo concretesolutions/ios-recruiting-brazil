@@ -13,7 +13,8 @@ protocol FavoritesView: class {
     var presenter: FavoritesPresentation { get set }
     
     func present(movies: [Movie])
-    func removeFilterButton()
+    func showRemoveFilterButton()
+    func hideRemoveFilterButton()
     
 }
 
