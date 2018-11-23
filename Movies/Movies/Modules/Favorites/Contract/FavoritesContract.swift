@@ -12,6 +12,9 @@ protocol FavoritesView: class {
     
     var presenter: FavoritesPresentation { get set }
     
+    func present(movies: [Movie])
+    func removeFilterButton()
+    
 }
 
 protocol FavoritesPresentation {
@@ -20,15 +23,30 @@ protocol FavoritesPresentation {
     var router: FavoritesWireframe! { get set }
     var interactor: FavoritesUseCase! { get set }
     
+    func viewDidLoad()
+    func didSelect(movie: Movie)
+    func didUnfavorite(movie: Movie)
+    func didTapRemoveFilterButton()
+    func didSearchMovies(withTitle title: String)
+    func didFinishSearch()
+    func didTapFilterButton()
+    
 }
 
 protocol FavoritesUseCase {
     
     var output: FavoritesInteractorOutput! { get set }
     
+    func readFavoriteMovies()
+    func searchMovies(withTitle title: String)
+    func unfavorite(movie: Movie)
+    
 }
 
 protocol FavoritesInteractorOutput {
+    
+    func didRead(movies: [Movie])
+    func didSearchMovies(withTitle title: String)
     
 }
 
@@ -36,7 +54,7 @@ protocol FavoritesWireframe {
     
     var view: UIViewController? { get set }
     
-    
+    func presentMovieDetailsFor(_ movie: Movie)
     
     static func assembleModule() -> UIViewController
     
