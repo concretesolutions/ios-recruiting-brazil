@@ -66,18 +66,18 @@ class FavoritesViewController: UIViewController, FavoritesView {
     // MARK: - Actions
     
     @objc func didTapFilterButton() {
-        
+        self.presenter.didTapFilterButton()
     }
     
     @objc func didTapHideFilterButton() {
-        
+        self.presenter.didTapRemoveFilterButton()
     }
     
     // MARK: - Aux functions
     
     private func setUpFilterButton() {
         let filterButton = UIBarButtonItem(image: UIImage(named: "FilterIcon"), style: .plain, target: self, action: #selector(self.didTapFilterButton))
-        self.navigationController?.navigationItem.rightBarButtonItem = filterButton
+        self.navigationItem.rightBarButtonItem = filterButton
     }
     
     private func setUpRemoveFilterButton() {
