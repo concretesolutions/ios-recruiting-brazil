@@ -41,7 +41,7 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell, Reusable {
         return label
     }()
     
-    lazy var favouriteButton: UIButton = {
+    lazy var favoriteButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.isUserInteractionEnabled = false
         button.imageView?.contentMode = .scaleToFill
@@ -64,7 +64,7 @@ extension PopularMoviesCollectionViewCell: CodeView {
         contentView.addSubview(imageView)
         contentView.addSubview(detailView)
         detailView.addSubview(titleLabel)
-        detailView.addSubview(favouriteButton)
+        detailView.addSubview(favoriteButton)
     }
     
     func setupConstraints() {
@@ -90,7 +90,7 @@ extension PopularMoviesCollectionViewCell: CodeView {
             make.bottom.equalToSuperview()
         }
         
-        favouriteButton.snp.makeConstraints { (make) in
+        favoriteButton.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right).offset(5)
             make.right.equalToSuperview().inset(5)
             make.bottom.equalToSuperview().inset(5)
@@ -106,10 +106,10 @@ extension PopularMoviesCollectionViewCell: CodeView {
         titleLabel.text = movie.title
         
         // set button image
-        if movie.isFavourite {
-            favouriteButton.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
+        if movie.isFavorite {
+            favoriteButton.setImage(UIImage(named: "favorite_full_icon")!, for: .normal)
         } else {
-            favouriteButton.setImage(UIImage(named: "favorite_gray_icon")!, for: .normal)
+            favoriteButton.setImage(UIImage(named: "favorite_gray_icon")!, for: .normal)
         }
     }
     

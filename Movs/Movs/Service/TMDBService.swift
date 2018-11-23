@@ -8,12 +8,21 @@
 
 import Foundation
 
+enum TMDBQueryType {
+    case popular
+    case search
+}
+
 class TMDBService {
     
+    //MARK: - Properties
     private let session = URLSession.shared
+    private var searchMoviesResponse: MoviesResponse?
+    private var popularMoviesResponse: MoviesResponse?
     
     init (){}
     
+    //MARK: - Querys
     func getPopularMovies(page:Int, answer: @escaping(Result<[Movie]>) -> Void) {
         let endpoint = TMDB.endPoint.popularMovies
         var urlComps = URLComponents(string: endpoint)
@@ -48,6 +57,7 @@ class TMDBService {
             
             do {
                 let moviesResponse = try jsonDecoder.decode(MoviesResponse.self, from: data)
+                self.popularMoviesResponse = moviesResponse
                 let results = moviesResponse.results
                 DispatchQueue.main.async {
                     answer(.success(results))
@@ -67,8 +77,8 @@ class TMDBService {
         
         var queryItems: [URLQueryItem] = [
             URLQueryItem(name: "api_key", value: TMDB.apiKey),
-            URLQueryItem(name: "query", value: query),
-            URLQueryItem(name: "language", value: TMDB.language.english)
+            URLQueryItem(name: "language", value: TMDB.language.english),
+            URLQueryItem(name: "query", value: query)
         ]
         
         if page >= 1 {
@@ -96,6 +106,7 @@ class TMDBService {
             
             do {
                 let moviesResponse = try jsonDecoder.decode(MoviesResponse.self, from: data)
+                self.searchMoviesResponse = moviesResponse
                 let results = moviesResponse.results
                 DispatchQueue.main.async {
                     answer(.success(results))
@@ -151,6 +162,23 @@ class TMDBService {
             }
             
         }.resume()
+    }
+    
+    //MARK: - Status methods
+    func isPageAvailable(page: Int, for queryType: TMDBQueryType) -> Bool {
+        if page == 1 { return true }
+        
+        switch queryType {
+        case .popular:
+            if let totalPages = popularMoviesResponse?.totalPages {
+                return page <= totalPages
+            }
+        case .search:
+            if let totalPages = searchMoviesResponse?.totalPages {
+                return page <= totalPages
+            }
+        }
+        return false
     }
     
 }

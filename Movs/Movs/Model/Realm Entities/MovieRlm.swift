@@ -15,7 +15,7 @@ class MovieRlm: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var overview: String = ""
     @objc dynamic var releaseYear: String = ""
-    @objc dynamic var isFavourite: Bool = true
+    @objc dynamic var isFavorite: Bool = true
     @objc dynamic var thumbnailData: Data?
     
     override static func primaryKey() -> String? {

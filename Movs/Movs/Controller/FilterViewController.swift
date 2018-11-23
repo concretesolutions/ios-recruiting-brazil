@@ -124,6 +124,7 @@ class FilterTableViewController: UITableViewController, MovieFilterDelegate {
     
 }
 
+//MARK: - CodeView
 extension FilterTableViewController: CodeView {
     func buildViewHierarchy() {
         tableFooterContentView.addSubview(applyFilterButton)

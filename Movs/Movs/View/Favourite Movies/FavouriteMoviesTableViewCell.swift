@@ -1,5 +1,5 @@
 //
-//  FavouriteMoviesTableViewCell.swift
+//  FavoriteMoviesTableViewCell.swift
 //  Movs
 //
 //  Created by Erick Lozano Borges on 20/11/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class FavouriteMoviesTableViewCell: UITableViewCell, Reusable {
+class FavoriteMoviesTableViewCell: UITableViewCell, Reusable {
     
     //MARK: - Properties
     // Data
@@ -63,7 +63,7 @@ class FavouriteMoviesTableViewCell: UITableViewCell, Reusable {
 }
 
 //MARK: - CodeView
-extension FavouriteMoviesTableViewCell: CodeView {
+extension FavoriteMoviesTableViewCell: CodeView {
     func buildViewHierarchy() {
         contentView.addSubview(thumbnail)
         contentView.addSubview(titleLabel)

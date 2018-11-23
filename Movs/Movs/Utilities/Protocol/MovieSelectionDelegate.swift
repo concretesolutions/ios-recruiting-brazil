@@ -10,9 +10,9 @@ import Foundation
 
 protocol MovieSelectionDelegate {
     func didSelect(movie:Movie)
-    func unfavouriteSelected(movie:Movie, indexPath: IndexPath)
+    func unfavoriteSelected(movie:Movie, indexPath: IndexPath)
 }
 
 extension MovieSelectionDelegate {
-    func unfavouriteSelected(movie:Movie, indexPath: IndexPath) {}
+    func unfavoriteSelected(movie:Movie, indexPath: IndexPath) {}
 }

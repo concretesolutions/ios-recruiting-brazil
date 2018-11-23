@@ -12,4 +12,5 @@ enum TMDBServiceError: Error {
     case buildURL(String)
     case unwrapData(String)
     case jsonParse(String,Error)
+    case invalidQuery
 }

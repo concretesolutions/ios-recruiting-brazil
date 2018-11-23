@@ -61,7 +61,7 @@ class MovieDetailTableViewController: UITableViewController {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailTableViewCell.self)
-            cell.setup(withText: movie.title, withButton: true, withSeparator: true, delegate: self, isFavourite: movie.isFavourite)
+            cell.setup(withText: movie.title, withButton: true, withSeparator: true, delegate: self, isFavorite: movie.isFavorite)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailTableViewCell.self)
@@ -101,11 +101,11 @@ class MovieDetailTableViewController: UITableViewController {
 
 }
 
-//MARK: - FavouriteCellButtonDelegate
-extension MovieDetailTableViewController: FavouriteCellButtonDelegate {
+//MARK: - FavoriteCellButtonDelegate
+extension MovieDetailTableViewController: FavoriteCellButtonDelegate {
     
-    func didPressButton(withFavouriteStatus shouldFavourite: Bool) {
-        if shouldFavourite {
+    func didPressButton(withFavoriteStatus shouldFavorite: Bool) {
+        if shouldFavorite {
             db.create(movie.rlm())
             print("Created on Realm")
         } else {

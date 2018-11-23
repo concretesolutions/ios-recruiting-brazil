@@ -39,9 +39,6 @@ class RealmManager {
         return db.object(ofType: type, forPrimaryKey: primaryKey)
     }
     
-    /**
-     Remember to get the exact same Object to delete
-     */
     func delete(_ object: Object) {
         try! db.write {
             db.delete(object, cascading: true)

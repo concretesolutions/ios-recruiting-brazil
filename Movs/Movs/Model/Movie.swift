@@ -17,7 +17,7 @@ struct Movie {
     var overview: String
     var releaseYear: String
     var thumbFilePath: String?
-    var isFavourite: Bool = false
+    var isFavorite: Bool = false
     var thumbnail: UIImage?
     
     //MARK: Initializers
@@ -37,7 +37,7 @@ struct Movie {
         overview = movieRlm.overview
         releaseYear = movieRlm.releaseYear
         thumbFilePath = ""
-        isFavourite = movieRlm.isFavourite
+        isFavorite = movieRlm.isFavorite
         thumbnail = UIImage(named: "placeholder_poster")!
         if let aThumbData = movieRlm.thumbnailData {
             thumbnail = UIImage(data: aThumbData)
@@ -45,8 +45,8 @@ struct Movie {
     }
     
     //MARK: - Mutating Methods
-    mutating func favourite() {
-        self.isFavourite = true
+    mutating func favorite() {
+        self.isFavorite = true
     }
     
     //MARK: - Status Methods
@@ -95,9 +95,13 @@ extension Movie: Codable {
         thumbFilePath = try? container.decode(String.self, forKey: .thumbFilePath)
         
         let releaseDate = try container.decode(String.self, forKey: .releaseYear)
-        let index = releaseDate.index(releaseDate.startIndex, offsetBy: 4)
-        releaseYear = String(releaseDate[..<index])
-        
+        if !releaseDate.isEmpty {
+            let index = releaseDate.index(releaseDate.startIndex, offsetBy: 4)
+            releaseYear = String(releaseDate[..<index])
+        } else {
+            releaseYear = "Unknown"
+        }
+
         genres = [Genre]()
         let ids = try container.decode([Int].self, forKey: .genres)
         ids.forEach({ self.genres.append(Genre(id:$0)) })

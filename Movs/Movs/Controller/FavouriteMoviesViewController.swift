@@ -1,5 +1,5 @@
 //
-//  FavouriteMoviesViewController.swift
+//  FavoriteMoviesViewController.swift
 //  Movs
 //
 //  Created by Erick Lozano Borges on 16/11/18.
@@ -12,22 +12,22 @@ protocol MovieFilterDelegate {
     var filter: Filter { get set }
 }
 
-class FavouriteMoviesViewController: UIViewController, MovieFilterDelegate {
+class FavoriteMoviesViewController: UIViewController, MovieFilterDelegate {
     
     //MARK: - Properties
     // Interface
-    let tableView = FavouriteMoviesTableView()
-    var tableViewDelegate: FavouriteMoviesTableViewDelegate?
-    var tableViewDataSource: FavouriteMoviesTableViewDataSource?
+    let tableView = FavoriteMoviesTableView()
+    var tableViewDelegate: FavoriteMoviesTableViewDelegate?
+    var tableViewDataSource: FavoriteMoviesTableViewDataSource?
     // Search Controller
     let searchController = UISearchController(searchResultsController: nil)
     // Data
     let db = RealmManager.shared
     var filter = Filter()
     var searchedMovies = [Movie]()
-    var favouriteMovies = [Movie]()
+    var favoriteMovies = [Movie]()
     
-    //FIXME: interface
+    //MARK: interface
     lazy var tableHeaderContentView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = Design.colors.dark
@@ -64,13 +64,13 @@ class FavouriteMoviesViewController: UIViewController, MovieFilterDelegate {
         super.viewDidLoad()
         presentationState = filter.isEmpty() ? .withoutFilter : .withFilter
         setupView()
-        getFavouriteMovies()
+        getFavoriteMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presentationState = filter.isEmpty() ? .withoutFilter : .withFilter
-        getFavouriteMovies()
+        getFavoriteMovies()
         setupSearchBar()
     }
     
@@ -84,10 +84,10 @@ class FavouriteMoviesViewController: UIViewController, MovieFilterDelegate {
     
     func setupTableView(with movies: [Movie]) {
         let filteredMovies = applyFilter(movies)
-        tableViewDataSource = FavouriteMoviesTableViewDataSource(movies: filteredMovies, tableView: tableView)
+        tableViewDataSource = FavoriteMoviesTableViewDataSource(movies: filteredMovies, tableView: tableView)
         tableView.dataSource = tableViewDataSource
         
-        tableViewDelegate = FavouriteMoviesTableViewDelegate(movies: filteredMovies, delegate: self)
+        tableViewDelegate = FavoriteMoviesTableViewDelegate(movies: filteredMovies, delegate: self)
         tableView.delegate = tableViewDelegate
         
         tableView.reloadData()
@@ -104,7 +104,7 @@ class FavouriteMoviesViewController: UIViewController, MovieFilterDelegate {
         }
         
         if searchBarIsEmpty() {
-            setupTableView(with: favouriteMovies)
+            setupTableView(with: favoriteMovies)
         } else {
             setupTableView(with: searchedMovies)
         }
@@ -114,16 +114,16 @@ class FavouriteMoviesViewController: UIViewController, MovieFilterDelegate {
     }
     
     //MARK: - Realm
-    func getFavouriteMovies() {
-        favouriteMovies.removeAll()
-        db.getAll(MovieRlm.self).forEach({ favouriteMovies.append(Movie($0)) })
-        setupTableView(with: favouriteMovies)
+    func getFavoriteMovies() {
+        favoriteMovies.removeAll()
+        db.getAll(MovieRlm.self).forEach({ favoriteMovies.append(Movie($0)) })
+        setupTableView(with: favoriteMovies)
     }
     
     //MARK: - Navigation
     @objc
     func pushFilterTableViewController() {
-        let filterVC = FilterTableViewController(delegate: self, for: favouriteMovies)
+        let filterVC = FilterTableViewController(delegate: self, for: favoriteMovies)
         filterVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(filterVC, animated: true)
     }
@@ -131,13 +131,13 @@ class FavouriteMoviesViewController: UIViewController, MovieFilterDelegate {
 }
 
 //MARK: - MovieSelectionDelegate
-extension FavouriteMoviesViewController: MovieSelectionDelegate {
+extension FavoriteMoviesViewController: MovieSelectionDelegate {
     func didSelect(movie: Movie) {
         let movieVC = MovieDetailTableViewController(movie: movie)
         navigationController?.pushViewController(movieVC, animated: true)
     }
     
-    func unfavouriteSelected(movie: Movie, indexPath: IndexPath) {
+    func unfavoriteSelected(movie: Movie, indexPath: IndexPath) {
         if let deleteMovie = db.get(MovieRlm.self, withPrimaryKey: movie.id) {
             db.delete(deleteMovie)
             tableViewDataSource?.movies.remove(at: indexPath.row)
@@ -148,19 +148,18 @@ extension FavouriteMoviesViewController: MovieSelectionDelegate {
 }
 
 //MARK: - UISearchBarDelegate
-extension FavouriteMoviesViewController: UISearchBarDelegate {
+extension FavoriteMoviesViewController: UISearchBarDelegate {
     func setupSearchBar() {
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search"
         searchController.obscuresBackgroundDuringPresentation = true
         navigationItem.searchController = searchController
-        navigationItem.searchController?.isActive = true
         definesPresentationContext = true
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBarIsEmpty() {
-            setupTableView(with: favouriteMovies)
+            setupTableView(with: favoriteMovies)
         } else {
             searchForContentContainingText(searchText)
         }
@@ -168,7 +167,7 @@ extension FavouriteMoviesViewController: UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if searchBarIsEmpty() {
-            setupTableView(with: favouriteMovies)
+            setupTableView(with: favoriteMovies)
         } else {
             setupTableView(with: searchedMovies)
         }
@@ -179,7 +178,7 @@ extension FavouriteMoviesViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        setupTableView(with: favouriteMovies)
+        setupTableView(with: favoriteMovies)
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -187,14 +186,14 @@ extension FavouriteMoviesViewController: UISearchBarDelegate {
     }
     
     func searchForContentContainingText(_ searchText: String) {
-        searchedMovies = favouriteMovies.filter({$0.title.lowercased().contains(searchText.lowercased())})
+        searchedMovies = favoriteMovies.filter({$0.title.lowercased().contains(searchText.lowercased())})
         setupTableView(with: searchedMovies)
     }
     
 }
 
 //MARK: - Filter
-extension FavouriteMoviesViewController {
+extension FavoriteMoviesViewController {
     
     func applyFilter(_ movies: [Movie]) -> [Movie] {
         if filter.isEmpty() {
@@ -224,7 +223,7 @@ extension FavouriteMoviesViewController {
 }
 
 //MARK: - CodeView
-extension FavouriteMoviesViewController: CodeView {
+extension FavoriteMoviesViewController: CodeView {
     func buildViewHierarchy() {
         view.addSubview(tableView)
         tableHeaderContentView.addSubview(removeFilterButton)
@@ -240,6 +239,7 @@ extension FavouriteMoviesViewController: CodeView {
         }
         
         if tableView.tableHeaderView != nil {
+            //FIXME: - Constraints invalidas
             tableHeaderContentView.snp.removeConstraints()
             tableHeaderContentView.snp.makeConstraints { (make) in
                 make.width.equalTo(self.tableView.snp.width)

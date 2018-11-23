@@ -28,12 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         popularMoviesVC.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named:"list_icon"), tag: 0)
         
         // Second Tab Bar View Controller
-        let favouriteMoviesVC = FavouriteMoviesViewController()
-        favouriteMoviesVC.title = "Favourite Movies"
-        favouriteMoviesVC.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(named:"favorite_empty_icon"), tag: 1)
+        let favoriteMoviesVC = FavoriteMoviesViewController()
+        favoriteMoviesVC.title = "Favorite Movies"
+        favoriteMoviesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named:"favorite_empty_icon"), tag: 1)
         
         // Adding navigation controller
-        let controllers = [popularMoviesVC, favouriteMoviesVC]
+        let controllers = [popularMoviesVC, favoriteMoviesVC]
         tabBarController.viewControllers = controllers.map({
             UINavigationController(rootViewController: $0)
         })

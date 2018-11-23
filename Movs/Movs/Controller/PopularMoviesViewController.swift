@@ -11,19 +11,23 @@ import SnapKit
 
 class PopularMoviesViewController: UIViewController {
     
+    var searchText: String = ""
+    
     //MARK: - Properties
     // interface
     let collectionView = PopularMoviesCollectionView()
     var collectionViewDelegate: PopularMoviesCollectionViewDelegate?
     var collectionViewDatasource: PopularMoviesCollectionViewDataSource?
+    // Search Controller
+    let searchController = UISearchController(searchResultsController: nil)
     // Configurations
-    var currentPage:Int = 1
-    var isFetching:Bool = false
+    var currentPage: Int = 1
+    var isFetching: Bool = false
     // Data
     let db = RealmManager.shared
     var genresList = [Genre]()
     var popularMovies = [Movie]()
-    var favouriteMovies = [Movie]()
+    var favoriteMovies = [Movie]()
     // Services
     let tmdbService = TMDBService()
     
@@ -37,27 +41,44 @@ class PopularMoviesViewController: UIViewController {
     }()
     
     //MARK: - UI States Control
+    
+    // Loading
     fileprivate enum LoadingState {
         case loading
         case ready
     }
-    
-    fileprivate enum PresentationState {
-        case initial
-        case showContent
-        case error
-    }
-    
+
     fileprivate var loadingState: LoadingState = .loading {
         didSet {
             updateLoading(state: loadingState)
         }
     }
     
-    fileprivate var presentationState: PresentationState = .initial {
+    // Presentation
+    fileprivate enum PresentationState {
+        case loadingContent
+        case showingContent
+        case error
+//        case emptyResult
+//        case noConnection
+    }
+    
+    fileprivate var presentationState: PresentationState = .loadingContent {
         didSet {
             DispatchQueue.main.async {
                 self.updatePresentation(state: self.presentationState)
+            }
+        }
+    }
+    
+    //MARK: - TMDB Service Query Control
+    fileprivate var tmdbQueryType: TMDBQueryType = .popular {
+        didSet {
+            if oldValue != tmdbQueryType {
+                currentPage = 1
+                popularMovies.removeAll()
+                loadingState = .loading
+                presentationState = .loadingContent
             }
         }
     }
@@ -67,6 +88,10 @@ class PopularMoviesViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         initalSetup()
+        
+//        //FIXME - TESTE
+//        let text = "Harry Potter"
+//        searchPopularMovies(containing: text, page: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,10 +111,10 @@ class PopularMoviesViewController: UIViewController {
     
     fileprivate func updatePresentation(state: PresentationState) {
         switch state {
-        case .initial:
+        case .loadingContent:
             collectionView.isHidden = true
             activityIndicator.isHidden = false
-        case .showContent:
+        case .showingContent:
             collectionView.isHidden = false
             activityIndicator.isHidden = true
         case .error:
@@ -100,11 +125,12 @@ class PopularMoviesViewController: UIViewController {
     
     //MARK: - Setup
     func initalSetup() {
+        setupSearchBar()
         getAllGenres()
     }
     
     func setupCollectionView(with movies: [Movie]) {
-        let flaggedMovies = flagFavouriteMovies(movies)
+        let flaggedMovies = flagFavoriteMovies(movies)
         collectionViewDatasource = PopularMoviesCollectionViewDataSource(movies: flaggedMovies, collectionView: collectionView, delegate: self)
         collectionView.dataSource = collectionViewDatasource
         
@@ -115,37 +141,20 @@ class PopularMoviesViewController: UIViewController {
     }
     
     // Setup Datasource Realm
-    func flagFavouriteMovies(_ movies: [Movie]) -> [Movie] {
-        favouriteMovies.removeAll()
-        db.getAll(MovieRlm.self).forEach({ favouriteMovies.append(Movie($0)) })
+    func flagFavoriteMovies(_ movies: [Movie]) -> [Movie] {
+        favoriteMovies.removeAll()
+        db.getAll(MovieRlm.self).forEach({ favoriteMovies.append(Movie($0)) })
         var flaggedMovies = movies
         for i in 0..<flaggedMovies.count {
-            if let _ = favouriteMovies.first(where: {$0.id == flaggedMovies[i].id}) {
-                flaggedMovies[i].favourite()
+            if let _ = favoriteMovies.first(where: {$0.id == flaggedMovies[i].id}) {
+                flaggedMovies[i].favorite()
             }
         }
         return flaggedMovies
     }
     
     //MARK: - TMDB Service
-    func getPopularMovies(page: Int) {
-        isFetching = true
-        tmdbService.getPopularMovies(page: page) { (result) in
-            switch result {
-            case .success(let movies):
-                self.popularMovies.append(contentsOf: movies)
-                self.setupCollectionView(with: self.popularMovies)
-                self.loadingState = .ready
-                self.presentationState = .showContent
-            case .error(let anError):
-                print("Error: \(anError)")
-                self.presentationState = .error
-            }
-            self.isFetching = false
-        }
-    }
-    
-    func getAllGenres(){
+    func getAllGenres() {
         loadingState = .loading
         tmdbService.getGenres { (result) in
             switch result {
@@ -157,6 +166,43 @@ class PopularMoviesViewController: UIViewController {
                 self.presentationState = .error
             }
         }
+    }
+    
+    func getPopularMovies(page: Int) {
+        isFetching = true
+        tmdbQueryType = .popular
+        tmdbService.getPopularMovies(page: page) { (result) in
+            switch result {
+            case .success(let movies):
+                self.popularMovies.append(contentsOf: movies)
+                self.setupCollectionView(with: self.popularMovies)
+                self.loadingState = .ready
+                self.presentationState = .showingContent
+            case .error(let anError):
+                print("Error: \(anError)")
+                self.presentationState = .error
+            }
+            self.isFetching = false
+        }
+    }
+    
+    func searchPopularMovies(containing text: String, page: Int) {
+        isFetching = true
+        tmdbQueryType = .search
+        tmdbService.searchMoviesContaining(text, page: page) { (result) in
+            switch result {
+            case .success(let movies):
+                self.popularMovies.append(contentsOf: movies)
+                self.setupCollectionView(with: self.popularMovies)
+                self.loadingState = .ready
+                self.presentationState = .showingContent
+            case .error(let anError):
+                print("Error: \(anError)")
+                self.presentationState = .error
+            }
+            self.isFetching = false
+        }
+        
     }
     
 }
@@ -179,9 +225,51 @@ extension PopularMoviesViewController: CollectionViewPagingDelegate {
     func shouldFetchNextPage() {
         if !isFetching {
             currentPage += 1
-            getPopularMovies(page: currentPage)
+            switch tmdbQueryType {
+            case .popular:
+                if tmdbService.isPageAvailable(page: currentPage, for: .popular) {
+                    getPopularMovies(page: currentPage)
+                }
+            case .search:
+                if tmdbService.isPageAvailable(page: currentPage, for: .search) {
+                    searchPopularMovies(containing: searchText, page: currentPage)
+                }
+            }
         }
     }
+}
+
+//MARK: - UISearchBarDelegate
+extension PopularMoviesViewController: UISearchBarDelegate {
+    
+    func setupSearchBar() {
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search"
+        searchController.obscuresBackgroundDuringPresentation = true
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchText = searchController.searchBar.text ?? ""
+        if !searchText.isEmpty {
+            searchPopularMovies(containing: searchText, page: 1)
+        }
+        searchController.dismiss(animated: true, completion: nil)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchText = ""
+        getPopularMovies(page: 1)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchText = searchController.searchBar.text ?? ""
+        if searchText.isEmpty{
+            getPopularMovies(page: 1)
+        }
+    }
+    
 }
 
 //MARK: - CodeView
@@ -206,7 +294,7 @@ extension PopularMoviesViewController: CodeView {
     }
     
     func setupAdditionalConfiguration() {
-        presentationState = .initial
+        presentationState = .loadingContent
         view.backgroundColor = Design.colors.white
         navigationController?.navigationBar.tintColor = Design.colors.dark
         navigationController?.navigationBar.barTintColor = Design.colors.mainYellow

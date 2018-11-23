@@ -1,5 +1,5 @@
 //
-//  FavouriteMoviesTableViewDataSource.swift
+//  FavoriteMoviesTableViewDataSource.swift
 //  Movs
 //
 //  Created by Erick Lozano Borges on 20/11/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouriteMoviesTableViewDataSource: NSObject, UITableViewDataSource {
+class FavoriteMoviesTableViewDataSource: NSObject, UITableViewDataSource {
     
     public var movies:[Movie]
     
@@ -19,7 +19,7 @@ class FavouriteMoviesTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     private func registerCells(in tableView: UITableView) {
-        tableView.register(cellType: FavouriteMoviesTableViewCell.self)
+        tableView.register(cellType: FavoriteMoviesTableViewCell.self)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,7 +31,7 @@ class FavouriteMoviesTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FavouriteMoviesTableViewCell.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FavoriteMoviesTableViewCell.self)
         cell.setup(movies[indexPath.row])
         return cell
     }

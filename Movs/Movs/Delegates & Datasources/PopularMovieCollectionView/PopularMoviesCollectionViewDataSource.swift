@@ -47,6 +47,5 @@ extension PopularMoviesCollectionViewDataSource: UICollectionViewDataSourcePrefe
         if itemIndex > (movies.count - 10) {
             delegate?.shouldFetchNextPage()
         }
-        
     }
 }

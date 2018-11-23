@@ -1,5 +1,5 @@
 //
-//  FavouriteMoviesViewTableView.swift
+//  FavoriteMoviesViewTableView.swift
 //  Movs
 //
 //  Created by Erick Lozano Borges on 16/11/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouriteMoviesTableView: UITableView {
+class FavoriteMoviesTableView: UITableView {
 
     //MARK: - Initializers
     override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
