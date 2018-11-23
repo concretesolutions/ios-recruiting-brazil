@@ -14,7 +14,8 @@ class MovsTabbarViewController: UITabBarController {
     
     private var moviesPresenter: MoviesPresentation?
     private var favoritesPresenter: FavoritesPresentation?
-    private var currentSelectedIndex: Int = 0
+    private var itemTitles: [String] = ["Movies", "Favorites"]
+    private var currentSelectedItemTitle: String = ""
 
     // MARK: - Life cicle functions
     
@@ -22,7 +23,10 @@ class MovsTabbarViewController: UITabBarController {
         super.viewDidLoad()
 
         let moviesView = MoviesRouter.assembleModule()
+        moviesView.tabBarItem = UITabBarItem.init(title: self.itemTitles[0], image: UIImage(named: "list_icon"), selectedImage: UIImage(named: "list_icon"))
+        
         let favoritesView = FavoritesRouter.assembleModule()
+        favoritesView.tabBarItem = UITabBarItem.init(title: self.itemTitles[1], image: UIImage(named: "favorite_empty_icon"), selectedImage: UIImage(named: "favorite_empty_icon"))
         
         if let mv = moviesView as? MoviesView,
            let fv = favoritesView as? FavoritesView {
@@ -32,22 +36,25 @@ class MovsTabbarViewController: UITabBarController {
         
         self.viewControllers = [moviesView, favoritesView]
         
-        self.selectedIndex = self.currentSelectedIndex
+        self.selectedIndex = 0
+        self.currentSelectedItemTitle = self.itemTitles[0]
         
     }
     
     // MARK: - Tabbar functions
     // TODO: - Make scroll to the top of view when the user taps in the icon of an already selected tab bar icon
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if self.selectedIndex == self.currentSelectedIndex {
-            if self.currentSelectedIndex == 0 {
-                print("should scroll movies collection view to top")
+        if let title = item.title {
+            if title == self.currentSelectedItemTitle {
+                if title == "Movies" {
+                    print("Should scroll movies collection view to top.")
+                }
+                if title == "Favorites" {
+                    print("Should scroll favorites table view to top.")
+                }
+            } else {
+                self.currentSelectedItemTitle = title
             }
-            if self.currentSelectedIndex == 1 {
-                print("should scroll favorites table view to top")
-            }
-        } else {
-            self.currentSelectedIndex = self.selectedIndex
         }
     }
     
