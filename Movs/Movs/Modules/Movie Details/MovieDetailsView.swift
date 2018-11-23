@@ -74,11 +74,11 @@ class MovieDetailsView: UIViewController {
         if status {
             // FIXME: - Chamar presenter para REMOVER do ADD
             let imageFull = UIImage.init(named: "favorite_full_icon")
-            self.outletFavorite.setImage(imageFull, for: .normal)
+            self.outletFavorite.setBackgroundImage(imageFull, for: .normal)
         }else{
             // FIXME: - Chamar presenter para ADD
             let imageGray = UIImage.init(named: "favorite_gray_icon")
-            self.outletFavorite.setImage(imageGray, for: .normal)
+            self.outletFavorite.setBackgroundImage(imageGray, for: .normal)
         }
     }
 

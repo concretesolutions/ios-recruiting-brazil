@@ -21,12 +21,12 @@
                                 <rect key="frame" x="16" y="28" width="343" height="233.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3T-7N-iVM">
-                                <rect key="frame" x="329" y="275.5" width="30" height="46.5"/>
+                                <rect key="frame" x="319" y="275.5" width="40" height="37.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="cx1-Vf-Ri2"/>
+                                    <constraint firstAttribute="width" constant="40" id="cx1-Vf-Ri2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" image="favorite_gray_icon"/>
+                                <state key="normal" backgroundImage="favorite_gray_icon"/>
                                 <connections>
                                     <action selector="actionFavorite:" destination="kPV-nN-88C" eventType="touchUpInside" id="0Tn-Vv-UWn"/>
                                 </connections>
@@ -52,7 +52,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nYt-la-5qt">
                                 <rect key="frame" x="16" y="468.5" width="343" height="178.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -92,7 +92,7 @@
                             <constraint firstItem="6n9-Uf-kHy" firstAttribute="leading" secondItem="cx5-Lk-cUY" secondAttribute="leading" id="5Ca-4t-1YM"/>
                             <constraint firstItem="cx5-Lk-cUY" firstAttribute="trailing" secondItem="nYt-la-5qt" secondAttribute="trailing" constant="16" id="72e-FZ-Pzj"/>
                             <constraint firstItem="sBK-QL-pEM" firstAttribute="centerY" secondItem="zTR-lU-NoS" secondAttribute="centerY" id="DUb-7l-RNo"/>
-                            <constraint firstItem="Q3T-7N-iVM" firstAttribute="height" secondItem="xhv-f8-lkg" secondAttribute="height" id="E9P-Vz-Dp0"/>
+                            <constraint firstItem="Q3T-7N-iVM" firstAttribute="height" secondItem="xhv-f8-lkg" secondAttribute="height" multiplier="0.8" id="E9P-Vz-Dp0"/>
                             <constraint firstItem="xhv-f8-lkg" firstAttribute="height" secondItem="zMm-7O-vda" secondAttribute="height" multiplier="0.07" id="Hs0-65-vfD"/>
                             <constraint firstItem="be6-HN-7ko" firstAttribute="height" secondItem="G4u-ui-nNN" secondAttribute="height" multiplier="1.8" id="I49-C1-TZf"/>
                             <constraint firstItem="zTR-lU-NoS" firstAttribute="leading" secondItem="cx5-Lk-cUY" secondAttribute="leading" constant="16" id="INH-j0-nHV"/>
@@ -119,6 +119,11 @@
                             <constraint firstItem="6n9-Uf-kHy" firstAttribute="top" secondItem="zMm-7O-vda" secondAttribute="top" id="xKM-Fw-ZWy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cx5-Lk-cUY"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="6n9-Uf-kHy"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="outletActivityIndicator" destination="sBK-QL-pEM" id="YGk-0Y-BXS"/>
