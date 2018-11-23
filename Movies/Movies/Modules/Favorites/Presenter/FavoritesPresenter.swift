@@ -54,5 +54,8 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
         self.view?.present(movies: movies)
     }
     
+    func didSearchMovies(withTitle title: String, _ movies: [Movie]) {
+        self.view?.present(movies: movies)
+    }
     
 }
