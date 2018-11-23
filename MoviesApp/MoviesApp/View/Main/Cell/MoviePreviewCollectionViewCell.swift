@@ -11,12 +11,21 @@ import Kingfisher
 
 class MoviePreviewCollectionViewCell: UICollectionViewCell {
     
+    
+    @IBOutlet weak var cardView: UIView!
     var movie: Movie?
     var canFavorite = true
     
     @IBOutlet weak var moviePosterImageViewOutlet: UIImageView!
     @IBOutlet weak var movieTitleLabelOutlet: UILabel!
     @IBOutlet weak var favoriteButtonOutlet: UIButton!
+    
+    override func awakeFromNib() {
+        
+        self.cardView.layer.cornerRadius = 10
+        self.cardView.layer.masksToBounds = true
+        
+    }
     
     func setupCell(movie: Movie){
         

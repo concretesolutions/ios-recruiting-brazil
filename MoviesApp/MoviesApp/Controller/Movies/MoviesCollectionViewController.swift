@@ -112,11 +112,15 @@ class MoviesCollectionViewController: UICollectionViewController {
                     }
                     
                 }
-                self.activityIndicatorOutlet.stopAnimating()
-                self.activityIndicatorOutlet.isHidden = true
-                self.collectionView.reloadData()
-                self.canFilter = true
-                self.hasLoadedData = true
+                
+                DispatchQueue.main.async {
+                    self.activityIndicatorOutlet.stopAnimating()
+                    self.activityIndicatorOutlet.isHidden = true
+                    self.collectionView.reloadData()
+                    self.canFilter = true
+                    self.hasLoadedData = true
+                }
+               
             }//>>>>>
         }
         
@@ -208,9 +212,11 @@ class MoviesCollectionViewController: UICollectionViewController {
                                 print(tempMovie)
                             }
                         }
+                        
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
 
-                        self.collectionView.reloadData()
-
+                        }
                     }
                 }else{
                     print("Couldn't update page")
