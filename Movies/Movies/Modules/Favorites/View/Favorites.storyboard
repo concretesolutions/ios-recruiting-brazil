@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favorites-->
+        <!--Favorites View Controller-->
         <scene sceneID="HKE-3o-FtG">
             <objects>
                 <viewController storyboardIdentifier="Favorites" id="BjF-8w-WkW" customClass="FavoritesViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +96,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="C1U-cA-aHC"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" id="UlZ-B8-fmg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="favorites" destination="zr2-Iw-vP8" id="ldL-zu-BAL"/>
@@ -108,7 +107,4 @@
             <point key="canvasLocation" x="88.799999999999997" y="150.67466266866569"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="favorite_empty_icon" width="22" height="21"/>
-    </resources>
 </document>
