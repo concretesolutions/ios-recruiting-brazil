@@ -10,15 +10,11 @@ import Foundation
 
 extension Date {
     
-    var year: String {
+    var year: Int? {
         get {
             let calendar = Calendar.current
             let components = calendar.dateComponents([Calendar.Component.year], from: self)
-            if let year = components.year {
-                return String(describing: year)
-            } else {
-                return "Year Unavailable"
-            }
+            return components.year ?? nil
         }
     }
 }
