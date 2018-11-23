@@ -12,6 +12,9 @@ class DateFilterTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     @IBOutlet weak var dateLabel: UILabel!
+
+    // MARK: - Properties
+    var date: Date? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +26,9 @@ class DateFilterTableViewCell: UITableViewCell {
     
     // MARK: - Functions
     func setupCell(date: Date) {
-        self.dateLabel.text = date.year
+        self.date = date
+        if let year = date.year {
+            self.dateLabel.text = String(year)
+        }
     }
 }
