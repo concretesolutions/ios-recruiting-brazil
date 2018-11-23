@@ -24,6 +24,10 @@ class FavoriteMoviesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        self.tabBarController?.tabBar.isTranslucent = false
+
+        self.tabBarController?.tabBar.isHidden = false
+        
         if !isFiltering(){
             self.clearFiltersButtonOutlet.isEnabled = false
         }
@@ -224,14 +228,14 @@ extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchCo
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
-//        if isFiltering(){
-//            
-//            filteredMovies = movies.filter({ (movie: Movie) -> Bool in
-//                self.searchText = searchText
-//                return movie.title.lowercased().contains(searchText.lowercased())
-//            })
-//            tableView.reloadData()
-//        }
+        if isFiltering(){
+            
+            searchedMovies = filteredMovies.filter({ (movie: Movie) -> Bool in
+                self.searchText = searchText
+                return movie.title.lowercased().contains(searchText.lowercased())
+            })
+            tableView.reloadData()
+        }
         
         searchedMovies = movies.filter({( movie : Movie) -> Bool in
             self.searchText = searchText

@@ -15,6 +15,7 @@
 		195E9CB621A7535100E0FB86 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E9CB521A7535100E0FB86 /* Genre.swift */; };
 		195E9CB821A7535E00E0FB86 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195E9CB721A7535E00E0FB86 /* Results.swift */; };
 		19831D6A219BAFC90059225F /* FavoriteMoviesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19831D69219BAFC90059225F /* FavoriteMoviesTableViewController.swift */; };
+		19EE8C5721A831FD00803581 /* KIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EE8C5621A831FD00803581 /* KIF.framework */; };
 		19F25DE12198C8FF0062E10E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F25DE02198C8FF0062E10E /* AppDelegate.swift */; };
 		19F25DE62198C8FF0062E10E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19F25DE42198C8FF0062E10E /* Main.storyboard */; };
 		19F25DE92198C8FF0062E10E /* MoviesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19F25DE72198C8FF0062E10E /* MoviesApp.xcdatamodeld */; };
@@ -66,6 +67,10 @@
 		195E9CB521A7535100E0FB86 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		195E9CB721A7535E00E0FB86 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		19831D69219BAFC90059225F /* FavoriteMoviesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesTableViewController.swift; sourceTree = "<group>"; };
+		19EE8C5021A8311400803581 /* KIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19EE8C5221A8311F00803581 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		19EE8C5421A8312700803581 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		19EE8C5621A831FD00803581 /* KIF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KIF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F25DDD2198C8FF0062E10E /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F25DE02198C8FF0062E10E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19F25DE52198C8FF0062E10E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19EE8C5721A831FD00803581 /* KIF.framework in Frameworks */,
 				70DECBFD687A6737E1443132 /* Pods_MoviesAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +313,10 @@
 		B1D579520163832EA3E4630C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19EE8C5621A831FD00803581 /* KIF.framework */,
+				19EE8C5421A8312700803581 /* QuartzCore.framework */,
+				19EE8C5221A8311F00803581 /* CoreGraphics.framework */,
+				19EE8C5021A8311400803581 /* KIF.framework */,
 				E67FC2B24192553088513FE0 /* Pods_MoviesApp.framework */,
 				AD80420B452C102F4B0A3786 /* Pods_MoviesAppTests.framework */,
 				65712131E7E2396DBAB2B432 /* Pods_MoviesAppUITests.framework */,
@@ -739,10 +749,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CVX58B2KAX;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.Andre.Faruolo.MoviesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -758,10 +765,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CVX58B2KAX;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.Andre.Faruolo.MoviesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -778,11 +782,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CVX58B2KAX;
 				INFOPLIST_FILE = MoviesAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.Andre.Faruolo.MoviesAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -800,11 +800,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CVX58B2KAX;
 				INFOPLIST_FILE = MoviesAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.Andre.Faruolo.MoviesAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -821,11 +817,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CVX58B2KAX;
 				INFOPLIST_FILE = MoviesAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.Andre.Faruolo.MoviesAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -842,11 +834,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CVX58B2KAX;
 				INFOPLIST_FILE = MoviesAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.Andre.Faruolo.MoviesAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

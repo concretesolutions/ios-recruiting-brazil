@@ -92,7 +92,7 @@ class MoviesCollectionViewController: UICollectionViewController {
                     let errorLabel = UILabel()
                     errorLabel.center.x = self.collectionView.center.x
                     errorLabel.center.y = self.collectionView.center.y
-                    errorLabel.frame.size = CGSize(width: 300, height: 150)
+                    errorLabel.frame.size = CGSize(wgit idth: 300, height: 150)
                     errorLabel.textAlignment = .center
                     errorLabel.text = errorText
                     self.collectionView.addSubview(errorLabel)

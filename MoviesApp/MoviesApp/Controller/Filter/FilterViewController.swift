@@ -13,6 +13,10 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableViewOutlet: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        self.tabBarController?.tabBar.isTranslucent = true
+        self.tabBarController?.tabBar.isHidden = true
+        
         self.tableViewOutlet.reloadData()
     }
         
