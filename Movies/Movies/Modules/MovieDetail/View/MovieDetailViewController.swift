@@ -27,8 +27,10 @@ class MovieDetailViewController: UIViewController, MovieDetailView {
             self.movieTitle.text = self.movie.title
             self.year.text = "\(self.movie.year)"
             var genresString = "\(self.movie.genres.first?.name ?? "")"
-            for i in Range(uncheckedBounds: (1, self.movie.genres.count)) {
-                genresString += ", \(self.movie.genres[i].name)"
+            if movie.genres.count > 1 {
+                for i in Range(uncheckedBounds: (1, self.movie.genres.count)) {
+                    genresString += ", \(self.movie.genres[i].name)"
+                }
             }
             self.genres.text = genresString
             self.overview.text = self.movie.overview
@@ -39,6 +41,7 @@ class MovieDetailViewController: UIViewController, MovieDetailView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter.viewDidLoad()
     }
     
     // MARK: - MovieDetailView protocol functions
