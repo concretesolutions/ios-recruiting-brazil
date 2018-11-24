@@ -21,9 +21,9 @@ class FilmDetailView: UIViewController {
         
         //Configure Navigation
         self.title = "Detalhes"
-        self.navigationController?.navigationBar.topItem?.title = ""
         //Load table
         self.presenter.viewDidLoad(withTableView: self.outletTableView)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

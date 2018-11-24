@@ -37,8 +37,9 @@ public class CoreDataContextManager: NSObject{
         if context.hasChanges {
             do {
                 try context.save()
-            } catch {
+            } catch let error{
                 print("Error trying to save core data context in: \(CoreDataContextManager.self)")
+                print(error.localizedDescription)
             }
         }
     }

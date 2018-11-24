@@ -18,6 +18,14 @@ public class Gener: NSManagedObject, Decodable {
         case name
     }
     
+    public convenience init(id: Int32, name: String){
+        let newGenre = NSEntityDescription.entity(forEntityName: "Gener", in: CoreDataContextManager.shared.persistentContainer.viewContext)!
+        self.init(entity: newGenre, insertInto: CoreDataContextManager.shared.persistentContainer.viewContext)
+        
+        self.id = id
+        self.name = name
+    }
+    
     public required convenience init(from decoder: Decoder) throws {
         guard let genre = NSEntityDescription.entity(forEntityName: "Gener", in: CoreDataContextManager.shared.persistentContainer.viewContext) else {
             print("Error trying to decode an Genre")

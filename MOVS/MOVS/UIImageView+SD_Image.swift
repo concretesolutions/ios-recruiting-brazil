@@ -16,7 +16,7 @@ extension UIImageView{
             return
         }
         activity.startAnimating()
-        self.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/original\(posterPath)"), placeholderImage: UIImage(named: "poster_default")) { (image, error, cacheType, url) in
+        self.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)"), placeholderImage: UIImage(named: "poster_default")) { (image, error, cacheType, url) in
             if error == nil {
                 activity.stopAnimating()
                 activity.alpha = 0

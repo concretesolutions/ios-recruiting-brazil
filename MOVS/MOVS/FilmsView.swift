@@ -32,7 +32,12 @@ class FilmsView: UIViewController {
         // Set Search on navigation
         self.setSearchBar()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.presenter.viewWillAppear()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
     
     //MARK: - Functions
     //MARK: - Public
@@ -41,8 +46,8 @@ class FilmsView: UIViewController {
             print("Error to get navBar in: \(FilmsView.self)")
             return
         }
+        self.navigationController?.navigationBar.topItem?.title = "Filmes"
         DesignManager.configureNavigation(navigationController: navBarController)
-        navBarController.navigationBar.topItem?.title = "Filmes"
     }
     
     func setSearchBar(){

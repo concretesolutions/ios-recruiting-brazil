@@ -27,6 +27,12 @@ class MovieCollectionViewCell: UICollectionViewCell, FilmCell {
         self.outletFilmNameLabel.text = film.title
         self.outletPosterImageView.getPoster(forFilm: film, andActivity: self.outletActivity)
         
-        //TODO: - check if film is favorite
+        if let id = film.id {
+            if CoreDataManager<Film>().exist(predicate: NSPredicate(format: "id = %@", "\(id)")){
+                self.outletFavoriteImageView.tintColor = PaletColor.pink.rawValue
+            }else{
+                self.outletFavoriteImageView.tintColor = PaletColor.darkGray.rawValue
+            }
+        }
     }
 }

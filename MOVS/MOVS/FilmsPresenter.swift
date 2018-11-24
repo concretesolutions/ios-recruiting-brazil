@@ -41,6 +41,10 @@ class FilmsPresenter: NSObject, CellSelected{
         collection.delegate = self.collectionDelegate
     }
     
+    func viewWillAppear(){
+        self.collectionDataSource?.collection.reloadData()
+    }
+    
     func goToDetalViewController(withFilm film: ResponseFilm) {
         self.router.goToFilmDetail(withFilm: film)
     }

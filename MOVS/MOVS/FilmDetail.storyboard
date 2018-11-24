@@ -92,6 +92,9 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiC-CB-V1n">
                                                     <rect key="frame" x="330" y="16.666666666666668" width="30" height="26.000000000000004"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="fLF-br-eGR"/>
+                                                    </constraints>
                                                     <color key="tintColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="favorite"/>
                                                     <connections>
@@ -115,6 +118,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="outletFavoriteButton" destination="uiC-CB-V1n" id="Hoq-zv-8jC"/>
                                             <outlet property="outletGenresLabel" destination="icv-TF-dDi" id="Vo7-Bk-cjr"/>
                                             <outlet property="outletTitleLabel" destination="PuS-A3-4PX" id="PqL-mm-P9o"/>
                                             <outlet property="outletYearLabel" destination="wOd-f4-Xbd" id="6Hw-bA-sKX"/>
