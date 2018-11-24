@@ -38,7 +38,7 @@ class MoviePreviewCollectionViewCell: UICollectionViewCell {
     
     func setupCell(movie: Movie){
         
-        let imageUrl = "https://image.tmdb.org/t/p/w200"
+        let imageUrl = "https://image.tmdb.org/t/p/w500"
         let imageEndpoint = imageUrl + movie.poster_path
         print(imageEndpoint)
         

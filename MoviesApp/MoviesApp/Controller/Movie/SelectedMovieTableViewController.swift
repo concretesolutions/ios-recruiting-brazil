@@ -15,6 +15,7 @@ class SelectedMovieTableViewController: UITableViewController {
     var genres = [Genre]()
     
     @IBOutlet weak var movieImageOutlet: UIImageView!
+    @IBOutlet weak var moviePosterOutlet: UIImageView!
     @IBOutlet weak var movieTitleOutlet: UILabel!
     @IBOutlet weak var movieReleaseDateOutlet: UILabel!
     @IBOutlet weak var movieGenreOutlet: UILabel!
@@ -96,6 +97,7 @@ class SelectedMovieTableViewController: UITableViewController {
         let url = URL(string: imageEndpoint)
         
         self.movieImageOutlet.kf.setImage(with: url)
+        self.moviePosterOutlet.kf.setImage(with: url)
         
     }
     

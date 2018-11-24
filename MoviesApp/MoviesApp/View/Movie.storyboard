@@ -28,17 +28,41 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tiD-02-JfP">
-                                                    <rect key="frame" x="16" y="16" width="343" height="232.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="264.5"/>
                                                     <color key="backgroundColor" red="0.89019607840000003" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
+                                                <visualEffectView opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gGd-eF-wkA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="264.5"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5VT-oM-7Y1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="264.5"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-Ts-joG">
+                                                                <rect key="frame" x="94" y="0.0" width="187.5" height="264.5"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="ebs-Ts-joG" secondAttribute="bottom" id="ROf-Nl-IFg"/>
+                                                            <constraint firstItem="ebs-Ts-joG" firstAttribute="top" secondItem="5VT-oM-7Y1" secondAttribute="top" id="XG0-sh-O0W"/>
+                                                            <constraint firstItem="ebs-Ts-joG" firstAttribute="centerY" secondItem="5VT-oM-7Y1" secondAttribute="centerY" id="bOF-lS-mxG"/>
+                                                            <constraint firstItem="ebs-Ts-joG" firstAttribute="width" secondItem="5VT-oM-7Y1" secondAttribute="width" multiplier="0.5" id="l26-Ud-C8U"/>
+                                                            <constraint firstItem="ebs-Ts-joG" firstAttribute="centerX" secondItem="5VT-oM-7Y1" secondAttribute="centerX" id="spe-fi-9pl"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <blurEffect style="light"/>
+                                                </visualEffectView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="tiD-02-JfP" secondAttribute="trailing" constant="16" id="4Ky-Jn-xMR"/>
-                                                <constraint firstAttribute="bottom" secondItem="tiD-02-JfP" secondAttribute="bottom" constant="16" id="IH1-iX-pEc"/>
-                                                <constraint firstItem="tiD-02-JfP" firstAttribute="top" secondItem="Eme-4e-qzY" secondAttribute="top" constant="16" id="eh7-de-foI"/>
-                                                <constraint firstItem="tiD-02-JfP" firstAttribute="leading" secondItem="Eme-4e-qzY" secondAttribute="leading" constant="16" id="kRW-cZ-onU"/>
+                                                <constraint firstAttribute="bottom" secondItem="gGd-eF-wkA" secondAttribute="bottom" id="0oK-wn-wfY"/>
+                                                <constraint firstAttribute="trailing" secondItem="tiD-02-JfP" secondAttribute="trailing" id="4Ky-Jn-xMR"/>
+                                                <constraint firstAttribute="bottom" secondItem="tiD-02-JfP" secondAttribute="bottom" id="IH1-iX-pEc"/>
+                                                <constraint firstItem="tiD-02-JfP" firstAttribute="top" secondItem="Eme-4e-qzY" secondAttribute="top" id="eh7-de-foI"/>
+                                                <constraint firstItem="tiD-02-JfP" firstAttribute="leading" secondItem="Eme-4e-qzY" secondAttribute="leading" id="kRW-cZ-onU"/>
+                                                <constraint firstItem="gGd-eF-wkA" firstAttribute="top" secondItem="Eme-4e-qzY" secondAttribute="top" id="lEQ-io-w4N"/>
                                                 <constraint firstItem="tiD-02-JfP" firstAttribute="centerX" secondItem="Eme-4e-qzY" secondAttribute="centerX" id="nEl-mS-zd8"/>
+                                                <constraint firstItem="gGd-eF-wkA" firstAttribute="leading" secondItem="Eme-4e-qzY" secondAttribute="leading" id="sLv-oD-GXi"/>
+                                                <constraint firstAttribute="trailing" secondItem="gGd-eF-wkA" secondAttribute="trailing" id="wgG-GI-qpW"/>
                                                 <constraint firstItem="tiD-02-JfP" firstAttribute="centerY" secondItem="Eme-4e-qzY" secondAttribute="centerY" id="yHJ-LU-Pfr"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -164,6 +188,7 @@
                         <outlet property="movieGenreOutlet" destination="BdW-CF-eb2" id="i06-Jv-z3e"/>
                         <outlet property="movieImageOutlet" destination="tiD-02-JfP" id="jOO-us-yEs"/>
                         <outlet property="movieOverviewOutlet" destination="gNy-J5-3SV" id="Y5g-b4-bem"/>
+                        <outlet property="moviePosterOutlet" destination="ebs-Ts-joG" id="2Np-Iz-aFy"/>
                         <outlet property="movieReleaseDateOutlet" destination="es6-pd-ILY" id="MWA-0W-MvV"/>
                         <outlet property="movieTitleOutlet" destination="eUJ-Vc-e2e" id="dIT-gl-jzy"/>
                     </connections>
