@@ -36,6 +36,9 @@ class MovieDetailViewController: UIViewController, MovieDetailView {
             self.overview.text = self.movie.overview
         }
     }
+    private let favoriteEmptyIcon = UIImage(named: "favorite_empty_icon")
+    private let favoriteFullIcon = UIImage(named: "favorite_full_item_icon")
+    private var favoriteButton: UIBarButtonItem!
     
     // MARK: - Life cicle functions
     
@@ -44,10 +47,28 @@ class MovieDetailViewController: UIViewController, MovieDetailView {
         self.presenter.viewDidLoad()
     }
     
+    // MARK: - Aux functions
+    
+    private func setFavoriteButton() {
+        
+        self.favoriteButton = UIBarButtonItem(image: self.movie.isFavorite ? self.favoriteFullIcon : self.favoriteEmptyIcon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.didTappFavoriteButton))
+        
+        self.navigationItem.rightBarButtonItem = self.favoriteButton
+        
+    }
+    
     // MARK: - MovieDetailView protocol functions
     
     func present(movie: Movie) {
         self.movie = movie
+        self.setFavoriteButton()
+    }
+    
+    // MARK: - Actions
+    
+    @objc func didTappFavoriteButton() {
+        self.presenter.didTapFavoriteButton(forMovie: self.movie)
+        self.favoriteButton.image = self.movie.isFavorite ? self.favoriteFullIcon : self.favoriteEmptyIcon
     }
 
 }
