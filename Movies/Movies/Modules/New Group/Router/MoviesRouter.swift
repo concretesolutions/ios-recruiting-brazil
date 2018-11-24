@@ -18,6 +18,7 @@ class MoviesRouter: MoviesWireframe {
     
     func presentMovieDetailsFor(_ movie: Movie) {
         print("MoviesWireframe.presentMoviesDetailFor: \(movie.title)")
+        self.view?.navigationController?.pushViewController(MovieDetailRouter.assembleModule(withMovie: movie), animated: true)
     }
     
     static func assembleModule() -> UIViewController {

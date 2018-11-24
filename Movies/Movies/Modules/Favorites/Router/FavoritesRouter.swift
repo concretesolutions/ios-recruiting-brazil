@@ -18,6 +18,7 @@ class FavoritesRouter: FavoritesWireframe {
     
     func presentMovieDetailsFor(_ movie: Movie) {
         print("FavoritesRouter.presentMovieDetailsFor: \(movie.title)")
+        self.view?.navigationController?.pushViewController(MovieDetailRouter.assembleModule(withMovie: movie), animated: true)
     }
     
     func presentFiltersView() {
