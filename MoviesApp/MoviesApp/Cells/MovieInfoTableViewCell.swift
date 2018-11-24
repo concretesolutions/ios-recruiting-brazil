@@ -9,6 +9,11 @@
 import UIKit
 import Reusable
 
+enum MovieInfo{
+    case releaseDate
+    case avarageRating
+}
+
 class MovieInfoTableViewCell: UITableViewCell, NibReusable {
     
     @IBOutlet weak var label: UILabel!
@@ -27,14 +32,18 @@ class MovieInfoTableViewCell: UITableViewCell, NibReusable {
     
     func setup(with movie:Movie, genres:[Genre]){
         self.label.font = self.label.font.withSize(17.0)
+        
         var genresString = ""
-        for genre in genres where movie.genres.contains(genre.id){
-            genresString.append("\(genre.name), ")
+        
+        if movie.genres.count > 0{
+            for genre in genres where movie.genres.contains(genre.id){
+                genresString.append("\(genre.name), ")
+            }
+            genresString.removeLast(2)
+        }else{
+            genresString = "No Genre associated with this movie"
         }
-        
-        genresString.removeLast()
-        genresString.removeLast()
-        
+       
         self.label.text = genresString
     }
     
@@ -43,7 +52,7 @@ class MovieInfoTableViewCell: UITableViewCell, NibReusable {
 
         switch row{
         case 2:
-            self.label.text = "Released in \(movie.releaseData.getYear() ?? 0001)"
+            self.label.text = "Released in \(movie.year)"
         case 3:
             self.label.text = "Average Rating: \(movie.voteAverage)"
         default:

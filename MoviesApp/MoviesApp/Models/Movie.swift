@@ -14,8 +14,12 @@ struct Movie:Codable{
     var posterPath:String?
     var overview:String
     var voteAverage:Float
-    var releaseData:String
+    var releaseDate:String
     var genres:[Int]
+    
+    var year:String{
+        return self.getYear()
+    }
     
     enum CodingKeys: String, CodingKey{
         case posterPath = "poster_path"
@@ -34,7 +38,7 @@ struct Movie:Codable{
         try container.encode(overview, forKey: .overview)
         try container.encode(posterPath, forKey: .posterPath)
         try container.encode(voteAverage, forKey: .voteAverage)
-        try container.encode(releaseData, forKey: .releaseDate)
+        try container.encode(releaseDate, forKey: .releaseDate)
         try container.encode(genres, forKey: .genres)
     }
     
@@ -45,7 +49,14 @@ struct Movie:Codable{
         posterPath = try values.decode(String?.self, forKey: .posterPath)
         overview = try values.decode(String.self, forKey: .overview)
         voteAverage = try values.decode(Float.self, forKey: .voteAverage)
-        releaseData = try values.decode(String.self, forKey: .releaseDate)
+        releaseDate = try values.decode(String.self, forKey: .releaseDate)
         genres = try values.decode([Int].self, forKey: .genres)
+    }
+    
+    func getYear() -> String{
+        if let year = releaseDate.split(separator: "-").first{
+            return String(year)
+        }
+        return ""
     }
 }

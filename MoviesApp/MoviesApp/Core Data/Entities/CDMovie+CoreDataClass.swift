@@ -16,4 +16,13 @@ public class CDMovie: NSManagedObject {
         return NSEntityDescription.insertNewObject(forEntityName: PersistedEntity.movie, into: DatabaseManager.getContext()) as! CDMovie
     }
     
+    func getYear() -> String{
+        if let releaseDate = self.releaseDate{
+            if let year = releaseDate.split(separator: "-").first{
+                return String(year)
+            }
+        }
+        return ""
+    }
+    
 }

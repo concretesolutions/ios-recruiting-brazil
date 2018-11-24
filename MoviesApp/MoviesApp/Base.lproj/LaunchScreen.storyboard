@@ -18,12 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_icon" translatesAutoresizingMaskIntoConstraints="NO" id="XP9-1g-I5B">
-                                <rect key="frame" x="170" y="316" width="35" height="35"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Movs" translatesAutoresizingMaskIntoConstraints="NO" id="XP9-1g-I5B">
+                                <rect key="frame" x="84.5" y="297.5" width="206" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XP9-1g-I5B" secondAttribute="height" multiplier="339:119" id="sKi-KJ-0T1"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="XP9-1g-I5B" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.55" id="9Ws-Yp-juZ"/>
                             <constraint firstItem="XP9-1g-I5B" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dBW-5U-GHC"/>
                             <constraint firstItem="XP9-1g-I5B" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="gHr-rV-drT"/>
                         </constraints>
@@ -36,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="search_icon" width="35" height="35"/>
+        <image name="Movs" width="339" height="119"/>
     </resources>
 </document>

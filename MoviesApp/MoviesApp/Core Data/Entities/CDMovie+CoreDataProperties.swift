@@ -2,7 +2,7 @@
 //  CDMovie+CoreDataProperties.swift
 //  
 //
-//  Created by Nicholas Babo on 12/11/18.
+//  Created by Nicholas Babo on 24/11/18.
 //
 //
 
@@ -13,14 +13,15 @@ import CoreData
 extension CDMovie {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDMovie> {
-        return NSFetchRequest<CDMovie>(entityName: PersistedEntity.movie)
+        return NSFetchRequest<CDMovie>(entityName: "CDMovie")
     }
 
+    @NSManaged public var genres: [String]?
     @NSManaged public var id: Int32
+    @NSManaged public var overview: String?
     @NSManaged public var posterPath: String?
     @NSManaged public var releaseDate: String?
     @NSManaged public var title: String?
     @NSManaged public var voteAverage: Float
-    @NSManaged public var overview: String?
 
 }

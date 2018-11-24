@@ -49,7 +49,7 @@ class PopularMoviesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.screen.collectionView.reloadData()
+//        self.screen.collectionView.reloadData()
         super.viewWillAppear(animated)
     }
     
@@ -93,10 +93,7 @@ extension PopularMoviesViewController {
             }else{
                 self.presentationState = .error
             }
-            
         }
-        
-        //        self.navigationItem.searchController?.searchBar.resignFirstResponder()
     }
     
 }
@@ -131,7 +128,6 @@ extension PopularMoviesViewController: MovieSelectionDelegate{
 extension PopularMoviesViewController: UISearchBarDelegate{
     
     func setupSearchBar(){
-        //        self.screen.setupSearchBarDelegate(delegate: self)
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.definesPresentationContext = true
@@ -141,7 +137,6 @@ extension PopularMoviesViewController: UISearchBarDelegate{
         searchController.searchBar.tintColor = Palette.blue
         self.navigationItem.searchController = searchController
         self.screen.setup(searchController: searchController)
-        //        self.navigationItem.titleView = self.screen.searchBar
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

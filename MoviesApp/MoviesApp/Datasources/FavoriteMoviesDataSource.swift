@@ -13,6 +13,11 @@ import Reusable
 final class FavoriteMoviesDataSource:NSObject{
     
     var movies:[CDMovie] = []
+    
+    //Filtering
+//    var filteredMovies:[CDMovie] = []
+//    var isFiltering = false
+    
     weak var tableView:UITableView?
     weak var delegate:UITableViewDelegate?
     
@@ -38,13 +43,15 @@ final class FavoriteMoviesDataSource:NSObject{
 extension FavoriteMoviesDataSource: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.movies.count
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FavoriteMovieTableViewCell.self)
-        let movie = self.movies[indexPath.row]
+        
+        let movie = movies[indexPath.row]
         cell.setup(with: movie)
+        
         return cell
     }
     
@@ -54,10 +61,12 @@ extension FavoriteMoviesDataSource: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
+            tableView.beginUpdates()
             let movie = self.movies[indexPath.row]
             movies.remove(at: indexPath.row)
             CDMovieDAO.unfavoriteMovie(movie: movie)
-            self.tableView?.reloadData()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
         }
     }
     

@@ -56,8 +56,8 @@ final class MoviesDataSource:NSObject{
             case .success(let response):
                 self?.movies.append(contentsOf: response.results)
                 self?.currentPage += 1
-                let indexPathsToReload = self?.calculateIndexPathsToReload(from: response.results)
-                self?.handleFetchOfNewPage(with: indexPathsToReload)
+//                let indexPathsToReload = self?.calculateIndexPathsToReload(from: response.results)
+                self?.handleFetchOfNewPage()
             case .error(let error):
                 print("Error in fetching new page: \(error.localizedDescription)")
             }
@@ -65,16 +65,16 @@ final class MoviesDataSource:NSObject{
         }
     }
     
-    func handleFetchOfNewPage(with newIndexPathsToReload:[IndexPath]?){
-        guard let newIndexPathsToReload = newIndexPathsToReload else {
-            collectionView?.reloadData()
-            return
-        }
-        // 2
-        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-        collectionView?.reloadItems(at: indexPathsToReload)
+    func handleFetchOfNewPage(){
+//        guard let newIndexPathsToReload = newIndexPathsToReload else {
+//            collectionView?.reloadData()
+//            return
+//        }
+        
+//        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+//        collectionView?.reloadItems(at: indexPathsToReload)
+        collectionView?.reloadData()
     }
-
     
 }
 
@@ -96,6 +96,7 @@ extension MoviesDataSource: UICollectionViewDataSource{
         return cell
     }
     
+    
 }
 
 extension MoviesDataSource: UICollectionViewDataSourcePrefetching{
@@ -113,9 +114,9 @@ private extension MoviesDataSource {
         return indexPath.row >= movies.count
     }
     
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleItems = collectionView?.indexPathsForVisibleItems ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleItems).intersection(indexPaths)
-        return Array(indexPathsIntersection)
-    }
+//    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+//        let indexPathsForVisibleItems = collectionView?.indexPathsForVisibleItems ?? []
+//        let indexPathsIntersection = Set(indexPathsForVisibleItems).intersection(indexPaths)
+//        return Array(indexPathsIntersection)
+//    }
 }

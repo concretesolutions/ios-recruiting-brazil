@@ -48,6 +48,7 @@ extension DetailMovieDataSource:UITableViewDataSource{
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: MovieTitleTableViewCell.self)
+            cell.genres = self.genres
             cell.setup(with: movie)
             return cell
         case 4:

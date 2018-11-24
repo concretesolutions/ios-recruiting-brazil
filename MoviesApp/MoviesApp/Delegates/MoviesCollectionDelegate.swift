@@ -12,6 +12,7 @@ import UIKit
 class MoviesCollectionDelegate: NSObject, UICollectionViewDelegate{
     
     weak var delegate:MovieSelectionDelegate?
+    weak var dataSource:MoviesDataSource?
     var movies:[Movie]
     
     init(movies:[Movie], delegate:MovieSelectionDelegate?){
@@ -38,7 +39,5 @@ extension MoviesCollectionDelegate: UICollectionViewDelegateFlowLayout{
         let movie = self.movies[indexPath.item]
         self.delegate?.didSelect(movie: movie)
     }
-    
-    
     
 }

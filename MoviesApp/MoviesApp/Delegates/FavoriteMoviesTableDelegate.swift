@@ -16,7 +16,7 @@ class FavoriteMoviesTableDelegate: NSObject, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height/5 //fits 5 cells on screen
+        return tableView.frame.height/5
     }
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {

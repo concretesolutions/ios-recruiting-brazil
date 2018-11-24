@@ -11,18 +11,23 @@ import CoreData
 
 final class CDMovieDAO{
     
-    static func create(from movie:Movie, callback: @escaping (CDMovie?, Error?)->Void){
+    static func create(from movie:Movie, genres:[Genre], callback: @escaping (CDMovie?, Error?)->Void){
         
         if hasFavoriteMovie(with: movie.id){
-            callback(nil, NSError(domain: "Core Data", code: 200, userInfo: nil))
+            callback(nil, NSError(domain: "Core Data", code: 406, userInfo: nil))
         }else{
             let persistedMovie = CDMovie.newMovie()
             persistedMovie.id = Int32(movie.id)
             persistedMovie.title = movie.title
             persistedMovie.posterPath = movie.posterPath
             persistedMovie.voteAverage = movie.voteAverage
-            persistedMovie.releaseDate = movie.releaseData
+            persistedMovie.releaseDate = movie.releaseDate
             persistedMovie.overview = movie.overview
+            persistedMovie.genres = []
+            for genre in genres where movie.genres.contains(genre.id){
+                persistedMovie.genres?.append(genre.name)
+            }
+            
             DatabaseManager.saveContext()
             
             callback(persistedMovie, nil)
@@ -63,5 +68,38 @@ final class CDMovieDAO{
     static func unfavoriteMovie(movie: CDMovie){
         DatabaseManager.getContext().delete(movie)
         DatabaseManager.saveContext()
+    }
+    
+    static func getPersistedYears(callback: @escaping ([String], Error?)->Void){
+        var years:[String] = []
+        
+        let persistedMovies = self.getAll()
+        for elem in persistedMovies{
+            let year = elem.getYear()
+            if !years.contains(year){
+                years.append(year)
+            }
+        }
+        years = years.sorted { (year1, year2) -> Bool in
+            year1 < year2
+        }
+        callback(years, nil)
+    }
+    
+    static func getPersistedGenres(callback: @escaping ([String], Error?) -> Void){
+        
+        var genres:[String] = []
+        
+        let persistedMovies = self.getAll()
+        for movie in persistedMovies{
+            if let movieGenres = movie.genres{
+                for persistedGenre in movieGenres{
+                    if !genres.contains(persistedGenre){
+                        genres.append(persistedGenre)
+                    }
+                }
+            }
+        }
+        callback(genres.sorted(), nil)
     }
 }

@@ -12,10 +12,10 @@ import Reusable
 class MovieTitleTableViewCell: UITableViewCell, NibReusable {
     
     @IBOutlet weak var label: UILabel!
-    
     @IBOutlet weak var favoriteButton: UIButton!
     
     var movie:Movie?
+    var genres:[Genre] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +45,7 @@ class MovieTitleTableViewCell: UITableViewCell, NibReusable {
     
     @IBAction func tapFavoriteButton(_ sender: Any) {
         if let movie = self.movie{
-            CDMovieDAO.create(from: movie){ movie, error in
+            CDMovieDAO.create(from: movie, genres: genres){ movie, error in
                 if error != nil{
                     print("Error! Persisted Entity Already Exists")                    
                 }else{

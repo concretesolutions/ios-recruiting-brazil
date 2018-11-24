@@ -41,6 +41,10 @@ extension UIImage{
             return UIImage(named: "favorite_empty_icon")!
         }
         
+        static var filter:UIImage{
+            return UIImage(named: "FilterIcon")!
+        }
+        
     }
     
     enum error{
