@@ -24,14 +24,16 @@ class DateFilterPresenter: DateFilterPresentation, DateFilterInteractorOutput {
     
     func didSelectDate(date: Date) {
         datesFilter.append(date)
-        print(datesFilter)
     }
     
     func didDeselectDate(date: Date) {
         datesFilter.removeAll { (dateFromArray) -> Bool in
             dateFromArray.year == date.year
         }
-        print(datesFilter)
+    }
+    
+    func didTapSaveButton() {
+        self.router.exitWithDateFilter(dates: datesFilter)
     }
     
     // MARK: - DateFilterInteractorOutput functions

@@ -12,11 +12,13 @@ class DateFilterRouter: DateFilterWireframe {
     
     weak var viewController: UIViewController?
     static var presenter: DateFilterPresentation!
+    var filterRouterDelegate: FilterRouterDelegate!
     
-    static func assembleModule() -> UIViewController {
+    static func assembleModule(filterRouterDelegate: FilterRouterDelegate) -> UIViewController {
         let presenter = DateFilterPresenter()
         let interactor = DateFilterInteractor()
         let router = DateFilterRouter()
+        router.filterRouterDelegate = filterRouterDelegate
         
         let storyboard = UIStoryboard(name: "DateFilter", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "DateFilter")
@@ -35,5 +37,10 @@ class DateFilterRouter: DateFilterWireframe {
         self.presenter = presenter
         
         return viewController
+    }
+    
+    func exitWithDateFilter(dates: [Date]) {
+        self.viewController?.navigationController?.popViewController(animated: true)
+        self.filterRouterDelegate.didSetDateFilter(with: dates)
     }
 }

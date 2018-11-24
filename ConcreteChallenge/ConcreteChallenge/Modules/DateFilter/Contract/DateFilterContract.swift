@@ -11,8 +11,11 @@ import UIKit
 protocol DateFilterWireframe: class {
     var viewController: UIViewController? { get set }
     static var presenter: DateFilterPresentation! { get set }
+    var filterRouterDelegate: FilterRouterDelegate! { get set}
     
-    static func assembleModule() -> UIViewController
+    static func assembleModule(filterRouterDelegate: FilterRouterDelegate) -> UIViewController
+    
+    func exitWithDateFilter(dates: [Date])
 }
 
 protocol DateFilterView {
@@ -31,6 +34,7 @@ protocol DateFilterPresentation: class {
     func viewDidLoad()
     func didSelectDate(date: Date)
     func didDeselectDate(date: Date)
+    func didTapSaveButton()
 }
 
 protocol DateFilterInteractorInput: class {

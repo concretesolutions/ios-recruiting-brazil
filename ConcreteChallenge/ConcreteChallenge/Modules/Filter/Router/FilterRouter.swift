@@ -8,7 +8,11 @@
 
 import UIKit
 
-class FilterRouter: FilterWireframe {
+protocol FilterRouterDelegate {
+    func didSetDateFilter(with dates: [Date])
+}
+
+class FilterRouter: FilterWireframe, FilterRouterDelegate {
     
     weak var viewController: UIViewController?
     static var presenter: FilterPresentation!
@@ -40,7 +44,7 @@ class FilterRouter: FilterWireframe {
     }
     
     func showDateFilter() {
-        let dateFilterViewController = DateFilterRouter.assembleModule()
+        let dateFilterViewController = DateFilterRouter.assembleModule(filterRouterDelegate: self)
         self.viewController?.navigationController?.pushViewController(dateFilterViewController, animated: true)
     }
     
@@ -56,6 +60,10 @@ class FilterRouter: FilterWireframe {
         self.viewController?.dismiss(animated: true, completion: {
             
         })
+    }
+    
+    func didSetDateFilter(with dates: [Date]) {
+        print(dates)
     }
     
 }
