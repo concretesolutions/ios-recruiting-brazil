@@ -82,22 +82,19 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let storyboard = UIStoryboard(name: "Filter", bundle: nil)
-        
-        if indexPath.row == 0{
-            
-            let viewController = storyboard.instantiateViewController(withIdentifier: "releaseDateTableViewController") as! ReleaseDateTableViewController
-            self.navigationController?.pushViewController(viewController, animated: true)
-            
-        }else if indexPath.row == 1{
-            
-             let viewController = storyboard.instantiateViewController(withIdentifier: "genderTableViewController") as! GenderTableViewController
-            self.navigationController?.pushViewController(viewController, animated: true)
-            
+        if let storyboard = UIStoryboard(name: "Filter", bundle: nil) as? UIStoryboard{
+            if indexPath.row == 0{
+                
+                let viewController = storyboard.instantiateViewController(withIdentifier: "releaseDateTableViewController") as! ReleaseDateTableViewController
+                self.navigationController?.pushViewController(viewController, animated: true)
+                
+            }else if indexPath.row == 1{
+                
+                let viewController = storyboard.instantiateViewController(withIdentifier: "genderTableViewController") as! GenderTableViewController
+                self.navigationController?.pushViewController(viewController, animated: true)
+                
+            }
         }
-        
     }
-
-
 }
 

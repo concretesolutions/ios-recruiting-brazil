@@ -10,13 +10,14 @@ import UIKit
 
 class FavoriteMoviesTableViewController: UITableViewController {
     
+   //Outlets
+    @IBOutlet weak var clearFiltersButtonOutlet: UIBarButtonItem!
+    
+    //Variables and Constants
     var movies: [Movie] = []
     var searchedMovies = [Movie]()
     var filteredMovies = [Movie]()
-    @IBOutlet weak var clearFiltersButtonOutlet: UIBarButtonItem!
-    
     let searchController = UISearchController(searchResultsController: nil)
-    
     var searchImageView = UIImageView()
     var searchLabel = UILabel()
     var hasAddedSearchImage: Bool = false
@@ -25,9 +26,7 @@ class FavoriteMoviesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         self.tabBarController?.tabBar.isTranslucent = false
-
         self.tabBarController?.tabBar.isHidden = false
-        
         if !isFiltering(){
             self.clearFiltersButtonOutlet.isEnabled = false
         }
@@ -55,11 +54,8 @@ class FavoriteMoviesTableViewController: UITableViewController {
                     }else{
                         self.filteredMovies.append(movie)
                     }
-                    
                 }
-                
                 if FilterManager.shared.releaseDates.contains(movie.release_date){
-                    
                     if self.filteredMovies.contains(where: { (comparedMovie) -> Bool in
                         if comparedMovie.title == movie.title {
                             return true
@@ -76,19 +72,15 @@ class FavoriteMoviesTableViewController: UITableViewController {
         }else{
            print("Nenhum filtro aplicado")
         }
-
         self.tabBarController?.tabBar.isHidden = false
-        
         movies = MovieDAO.readAllFavoriteMovies()
         self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         movies = MovieDAO.readAllFavoriteMovies()
         self.tableView.reloadData()
-        
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -105,15 +97,13 @@ class FavoriteMoviesTableViewController: UITableViewController {
         
         FilterManager.shared.genders.removeAll()
         FilterManager.shared.releaseDates.removeAll()
-        
         self.clearFiltersButtonOutlet.isEnabled = false
-        
         self.tableView.reloadData()
         
     }
     
 
-    // MARK: - Table view data source
+    // Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -149,15 +139,10 @@ class FavoriteMoviesTableViewController: UITableViewController {
         if isSearching(){
             
             cell.setupCell(title: searchedMovies[indexPath.row].title, detail: searchedMovies[indexPath.row].overview, release: searchedMovies[indexPath.row].release_date, posterPath: searchedMovies[indexPath.row].poster_path)
-            
         } else {
-            
             cell.setupCell(title: movies[indexPath.row].title, detail: movies[indexPath.row].overview, release: movies[indexPath.row].release_date, posterPath: movies[indexPath.row].poster_path)
-            
         }
-    
         return cell
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -212,14 +197,12 @@ class FavoriteMoviesTableViewController: UITableViewController {
         
         let storyboard = UIStoryboard(name: "Filter", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "filterViewController") as! FilterViewController
-        
         self.navigationController?.pushViewController(viewController, animated: true)
         
     }
-    
-
 }
 
+// Search Bar
 extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchControllerDelegate{
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -283,13 +266,11 @@ extension FavoriteMoviesTableViewController: UISearchResultsUpdating, UISearchCo
             self.searchLabel.removeFromSuperview()
         }
         
-        
         return searchController.isActive && !searchBarIsEmpty()
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
         print("Dismiss")
-        
         if self.hasAddedSearchImage == true {
             self.searchImageView.removeFromSuperview()
             self.searchLabel.removeFromSuperview()

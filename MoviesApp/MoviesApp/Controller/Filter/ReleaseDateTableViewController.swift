@@ -19,27 +19,25 @@ class ReleaseDateTableViewController: UITableViewController {
         self.navigationItem.title = "Date"
 
         
-        var movies = MovieDAO.readAllFavoriteMovies()
-        
-        for movie in movies{
-            
-            if self.years.contains(movie.release_date.components(separatedBy: "-")[0]){
-                print("Exists")
-            }else{
-                self.years.append(movie.release_date.components(separatedBy: "-")[0])
+        if let movies = MovieDAO.readAllFavoriteMovies() as? [Movie]{
+            for movie in movies{
+                if self.years.contains(movie.release_date.components(separatedBy: "-")[0]){
+                    print("Exists")
+                }else{
+                    self.years.append(movie.release_date.components(separatedBy: "-")[0])
+                }
             }
         }
+        
     }
 
-    // MARK: - Table view data source
+    // Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return years.count
     }
 

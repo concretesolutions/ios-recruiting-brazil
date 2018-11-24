@@ -17,7 +17,6 @@ public class NetworkManager{
     let baseURL: String
     var initialPage: String
     
-    
     init(genreURL: String, baseURL:String, initialPage: String) {
         self.genreURL = genreURL
         self.baseURL = baseURL
@@ -26,14 +25,12 @@ public class NetworkManager{
     
     static func makeGenreGetRequest<T:DataObject>(to endpoint:String, objectType: T.Type, completionHandler: @escaping (DataObject?, Error?) -> Void) {
         
-        
         guard let url = URL(string: endpoint) else {
             print("Error: cannot create URL")
             completionHandler(nil, NSError(domain: "dsa", code: 01, userInfo: nil))
             return
         }
         let urlRequest = URLRequest(url: url)
-        
         let session = URLSession.shared
         let task = session.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) in

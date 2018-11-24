@@ -11,9 +11,7 @@ import Kingfisher
 
 class SelectedMovieTableViewController: UITableViewController {
     
-    var movie: Movie?
-    var genres = [Genre]()
-    
+    //Outlets
     @IBOutlet weak var movieImageOutlet: UIImageView!
     @IBOutlet weak var moviePosterOutlet: UIImageView!
     @IBOutlet weak var movieTitleOutlet: UILabel!
@@ -21,6 +19,10 @@ class SelectedMovieTableViewController: UITableViewController {
     @IBOutlet weak var movieGenreOutlet: UILabel!
     @IBOutlet weak var movieOverviewOutlet: UITextView!
     @IBOutlet weak var isFavoriteButton: UIButton!
+    
+    //Variables and Constants
+    var movie: Movie?
+    var genres = [Genre]()
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -57,7 +59,6 @@ class SelectedMovieTableViewController: UITableViewController {
                             genresString += "," + genreUnit.name
                         }
                         
-                        
                     }
                 }
             }
@@ -74,31 +75,20 @@ class SelectedMovieTableViewController: UITableViewController {
         if let title = self.movie?.title {
             self.movieTitleOutlet.text = title
         }
-        
         if let releaseDate = self.movie?.release_date {
-            
             var parts = releaseDate.components(separatedBy: "-")
             self.movieReleaseDateOutlet.text = parts[0]
-            
         }
-        
-        
-        
         if let overview = self.movie?.overview {
             self.movieOverviewOutlet.text = overview
         }
-        
-        
-        
         let imageUrl = "https://image.tmdb.org/t/p/w500"
         let imageEndpoint = imageUrl + (movie?.poster_path)!
         print(imageEndpoint)
-        
-        let url = URL(string: imageEndpoint)
-        
-        self.movieImageOutlet.kf.setImage(with: url)
-        self.moviePosterOutlet.kf.setImage(with: url)
-        
+        if let url = URL(string: imageEndpoint) {
+            self.movieImageOutlet.kf.setImage(with: url)
+            self.moviePosterOutlet.kf.setImage(with: url)
+        }
     }
     
     @IBAction func isFavoriteButtonTapped(_ sender: Any) {

@@ -16,13 +16,9 @@ class MoviesCollectionViewController: UICollectionViewController {
 
     @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
     var movies: [Movie] = []
-    
     var hasLoadedData = false
-    
     var searchedMovies = [Movie]()
-    
     var canFilter: Bool = false
-    
     var searchImageView = UIImageView()
     var searchLabel = UILabel()
     var hasAddedSearchImage: Bool = false
@@ -34,38 +30,13 @@ class MoviesCollectionViewController: UICollectionViewController {
         
         self.collectionView.reloadData()
         
-        if hasLoadedData == false {
-            
-            self.activityIndicatorOutlet.isHidden = false
-            self.activityIndicatorOutlet.startAnimating()
-            
-//            MovieDAO.getAll { (response, error) in
-//                if error != nil{
-//                    print("Erro ao retornar os dados da API")
-//                    return
-//                }//>>>>
-//                if let responseObj = response as? Response{
-//                    
-//                    let movies = responseObj.results
-//                    
-//                    for movie in movies{
-//                        if let tempMovie = movie as? Movie{
-//                            self.movies.append(tempMovie)
-//                            print(tempMovie)
-//                        }
-//                    }
-//                    
-//                }
-//                
-//                DispatchQueue.main.async {
-//                    self.activityIndicatorOutlet.stopAnimating()
-//                    self.activityIndicatorOutlet.isHidden = true
-//                    self.collectionView.reloadData()
-//                    self.canFilter = true
-//                    self.hasLoadedData = true
-//                }
-//            }//>>>>>
-        }
+//        if hasLoadedData == false {
+//
+//            self.activityIndicatorOutlet.isHidden = false
+//            self.activityIndicatorOutlet.startAnimating()
+//
+//
+//        }
         
       self.tabBarController?.tabBar.isHidden = false
         
@@ -99,7 +70,7 @@ class MoviesCollectionViewController: UICollectionViewController {
                     
                     
                     return
-                }//>>>>
+                }
                 if let responseObj = response as? Response{
                     
                     let movies = responseObj.results
@@ -120,33 +91,24 @@ class MoviesCollectionViewController: UICollectionViewController {
                     self.canFilter = true
                     self.hasLoadedData = true
                 }
-               
-            }//>>>>>
+            }
         }
-        
-        
         self.navigationItem.searchController = searchController
-        
         definesPresentationContext = true
-        
-        
     }
 
 
+    //Collection View
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
         if isSearching() {
             return searchedMovies.count
         }
-        
         return movies.count
-        
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -201,10 +163,8 @@ class MoviesCollectionViewController: UICollectionViewController {
             MovieDAO.getAll { (response, error) in
                 if error == nil{
                     if let responseObj = response as? Response{
-
                         let movies = responseObj.results
                         print(NetworkManager.shared.initialPage)
-
                         for movie in movies{
                             if let tempMovie = movie as? Movie{
                                 print(NetworkManager.shared.initialPage)
@@ -212,25 +172,19 @@ class MoviesCollectionViewController: UICollectionViewController {
                                 print(tempMovie)
                             }
                         }
-                        
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
-
                         }
                     }
                 }else{
                     print("Couldn't update page")
-
                 }
             }
-            
         }
-        
     }
-
-
 }
 
+//Search Bar
 extension MoviesCollectionViewController: UISearchResultsUpdating, UISearchControllerDelegate {
     // MARK: - UISearchResultsUpdating Delegate
     

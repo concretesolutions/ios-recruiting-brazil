@@ -25,8 +25,6 @@ public class MovieDAO{
 
     }
     
-    
-    
     static func saveMovieAsFavorite(movie: Movie){
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -47,7 +45,7 @@ public class MovieDAO{
         
             print(genresString)
         
-            var releaseString = movie.release_date.components(separatedBy: "-")[0]
+        let releaseString = movie.release_date.components(separatedBy: "-")[0]
         
             managedMovie.setValue(movie.title, forKey: "title")
             managedMovie.setValue(releaseString, forKey: "release_date")
@@ -176,7 +174,5 @@ public class MovieDAO{
         return returnValue
         
     }
-    
-    
     
 }

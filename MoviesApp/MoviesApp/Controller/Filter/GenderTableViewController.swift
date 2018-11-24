@@ -13,18 +13,18 @@ class GenderTableViewController: UITableViewController {
     var genres: [Genre] = []
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        
         self.navigationItem.title = "Genres"
-        
-        var movies = MovieDAO.readAllFavoriteMovies()
 
         var genresIds = [Int]()
         
-        for movie in movies{
-            for genreID  in movie.genre_ids{
-                if !(genresIds.contains(genreID)){
-                    genresIds.append(genreID)
+        if let movies = MovieDAO.readAllFavoriteMovies() as? [Movie]{
+            for movie in movies{
+                for genreID  in movie.genre_ids{
+                    if !(genresIds.contains(genreID)){
+                        genresIds.append(genreID)
+                    }
                 }
             }
         }
@@ -46,26 +46,22 @@ class GenderTableViewController: UITableViewController {
             }
         }
         
-        print(genresIds)
-
-        
-        
     }
 
-    // MARK: - Table view data source
-
+    
+    //Table View
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return self.genres.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "genderTableViewCell", for: indexPath) as! GenderTableViewCell
         
         cell.setupView(title: self.genres[indexPath.row].name)
@@ -110,10 +106,6 @@ class GenderTableViewController: UITableViewController {
             print(FilterManager.shared.genders)
             cell.selectedButtonOutlet.isHidden = false
         }
-        
-
-        
-        
     }
 
 }
