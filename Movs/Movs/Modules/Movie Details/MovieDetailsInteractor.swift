@@ -27,7 +27,7 @@ class MovieDetailsInteractor {
         self.movieID = movieID
     }
     
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func addToFavorite() {
         LocalManager.save(movie: movie!)
@@ -42,14 +42,11 @@ class MovieDetailsInteractor {
             switch status {
             case .error:
                 print("-> Error")
-//                self.presenter?.loadingError()
             case .okay:
                 print("-> Movies: \(movieDetail!.title)")
                 if let movie = movieDetail {
                     self.movie = movie
                 }
-//                self.moviesVisible = popularMovies
-//                self.presenter?.loadedMovies()
             }
         }
     }

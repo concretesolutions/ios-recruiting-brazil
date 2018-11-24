@@ -130,7 +130,7 @@
 		52E70ED4219DF9170087526A /* MovieLocal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieLocal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		52FE5E64219B7AC1007B7199 /* MoviesViewNoResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewNoResults.swift; sourceTree = "<group>"; };
 		52FE5E66219BAA11007B7199 /* MoviesViewLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewLoading.swift; sourceTree = "<group>"; };
-		52FF0A5D21A0845600F6CF5A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Genre.swift; path = Movs/Utils/Entities/Genre.swift; sourceTree = SOURCE_ROOT; };
+		52FF0A5D21A0845600F6CF5A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Genre.swift; path = "Movs/Utils/Entities/API Entities/Genre.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +241,16 @@
 				52BC96D52198C7B800BAA825 /* MoviesExtensions.swift */,
 			);
 			path = MoviesCollection;
+			sourceTree = "<group>";
+		};
+		52C7AC3B21A9831200B65631 /* API Entities */ = {
+			isa = PBXGroup;
+			children = (
+				52D7356D2197903700142C7A /* Movie.swift */,
+				52FF0A5D21A0845600F6CF5A /* Genre.swift */,
+				52BC96C62198985200BAA825 /* Popular.swift */,
+			);
+			path = "API Entities";
 			sourceTree = "<group>";
 		};
 		52D13D1121999D0A0011CAC8 /* Movies View */ = {
@@ -374,11 +384,9 @@
 		52D7356C2197901D00142C7A /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				52E70ED2219DF87B0087526A /* LocalObjects */,
-				52BC96C62198985200BAA825 /* Popular.swift */,
-				52D7356D2197903700142C7A /* Movie.swift */,
-				52FF0A5D21A0845600F6CF5A /* Genre.swift */,
 				52D13D122199A1BA0011CAC8 /* ResponseStatus.swift */,
+				52C7AC3B21A9831200B65631 /* API Entities */,
+				52E70ED2219DF87B0087526A /* LocalObjects */,
 				5244F9D321A052F300A3FE8F /* MovieFilter.swift */,
 			);
 			path = Entities;

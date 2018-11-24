@@ -39,10 +39,6 @@ class AppTabBar: UITabBarController {
         let router = FavoritesRouter.init()
         let navigation = CustomNavigation.init(viewController: router.presenter.view, title: "Favorites")
         return navigation
-//        let listenStoryboard = UIStoryboard(name:"FavoritesVC",bundle: Bundle.main)
-//        let view = listenStoryboard.instantiateViewController(withIdentifier: "Favorites")
-//        let navigation = CustomNavigation.init(viewController: view, title: "Favorites")
-//        return navigation
     }
     
 }

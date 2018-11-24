@@ -22,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let app = AppTabBar()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = app
-        window?.makeKeyAndVisible()
-        
-        print("-> Movies LOCAL: \(LocalManager.fetchMovies().count)")
+        window?.makeKeyAndVisible()        
         
         return true
     }

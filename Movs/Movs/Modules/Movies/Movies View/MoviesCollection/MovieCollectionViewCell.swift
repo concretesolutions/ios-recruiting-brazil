@@ -49,18 +49,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func updateFavoriteIcon(status: Bool) {
         if status {
-            // FIXME: - Chamar presenter para REMOVER do ADD
             let imageFull = UIImage.init(named: "favorite_full_icon")
             self.outletFavorite.image = imageFull
         }else{
-            // FIXME: - Chamar presenter para ADD
             let imageGray = UIImage.init(named: "favorite_gray_icon")
             self.outletFavorite.image = imageGray
         }
     }
 
     // MARK: - Reuse
-    // FIXME: - Reusable Favorite Icon
     override func prepareForReuse() {
         super.prepareForReuse()
         

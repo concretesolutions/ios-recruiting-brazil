@@ -26,7 +26,7 @@ class MovieDetailsPresenter: NSObject {
         self.view.presenter = self
     }
     
-    // FROM VIEW
+    // MARK: - FROM VIEW
     
     func loadMovie() {
         self.interactor.fetchMovie()
@@ -40,7 +40,7 @@ class MovieDetailsPresenter: NSObject {
         self.interactor.removeFavorite()
     }
     
-    // FROM INTERACTOR
+    // MARK: - FROM INTERACTOR
     
     func movieLoaded(title: String, favorite: Bool, genre: [Genre], year: String, overview: String, imageURL: String) {
         

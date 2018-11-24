@@ -26,7 +26,7 @@ class FavoritesPresenter: NSObject {
         self.view.presenter = self
     }
     
-    // FROM VIEW
+    // MARK: - FROM VIEW
     
     func hasFilter() -> Bool {
         return self.interactor.hasFilter()
@@ -96,7 +96,7 @@ class FavoritesPresenter: NSObject {
         return checked
     }
     
-    // FROM INTERACTOR
+    // MARK: - FROM INTERACTOR
     
     func moviesFilterChanged() {
         self.view.showFavoriteMovies()

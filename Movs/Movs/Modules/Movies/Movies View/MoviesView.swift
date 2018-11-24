@@ -30,7 +30,6 @@ class MoviesView: UIViewController {
         self.outletMoviesCollection.dataSource = self.presenter //self.presenter.interactor
         self.outletMoviesCollection.accessibilityIdentifier = "Movies"
         
-        
         // Setup Error View
         self.outletMoviesError.isHidden = true
         self.outletMoviesError.setup(movieView: self)
@@ -50,7 +49,7 @@ class MoviesView: UIViewController {
         self.outletMoviesCollection.reloadData()
     }
     
-    // FROM NAVIGATION
+    // MARK: - FROM NAVIGATION
     
     func selectedMovie(at index: Int) {
         self.presenter.selectedMovie(at: index)
@@ -64,24 +63,12 @@ class MoviesView: UIViewController {
         self.presenter.searchMovie(containing: text)
     }
     
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func showPopularMovies() {
         self.outletMoviesLoading.isHidden = true
         self.outletMoviesError.isHidden = true
         self.outletMoviesNoResults.isHidden = true
-        
-        //        let currentSize = self.outletMoviesCollection.numberOfItems(inSection: 0)
-        //        let currentDataSourceSize = self.presenter.totalMovies()
-        //        print("- \(currentSize) / \(currentDataSourceSize)")
-        //        var newMoviesIndex:[IndexPath] = []
-        //        for item in currentSize...currentDataSourceSize {
-        //            let newIndexPath = IndexPath(item: item, section: 0)
-        //            newMoviesIndex.append(newIndexPath)
-        //        }
-        //        outletMoviesCollection.insertItems(at: newMoviesIndex)
-        
-        //self.outletMoviesCollection.reloadItems(at: newMoviesIndex)
         
         self.outletMoviesCollection.reloadData()
     }
@@ -99,7 +86,7 @@ class MoviesView: UIViewController {
         self.outletMoviesNoResults.isHidden = false
     }
     
-    // INTERACTIONs METHODs
+    // MARK: - INTERACTIONs METHODs
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollViewInteractionStarted()
@@ -108,7 +95,7 @@ class MoviesView: UIViewController {
     func scrollViewInteractionStarted() {
         // Recolhe teclado
         self.navigationItem.searchController?.searchBar.endEditing(true)
-        // Interagindo sem texto de pesquisa = Recolhe pesquisa
+        // Interagindo sem texto de pesquisa => Recolhe pesquisa
         if let searchText = self.navigationItem.searchController?.searchBar.text {
             if searchText.isEmpty {
                 self.navigationItem.searchController?.isActive = false

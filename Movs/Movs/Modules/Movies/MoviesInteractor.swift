@@ -24,7 +24,7 @@ class MoviesInteractor {
     private var moviePageSearch: Int = 1
     private var moviePage: Int = 0
     
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func fetchMovies() {
         self.moviePage += 1

@@ -31,7 +31,7 @@ class FavoritesInteractor {
     }
     private var movies: [MovieLocal] = []
     
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func filterMovies(containing: String) {
         self.filtersEnded()

@@ -26,7 +26,7 @@ class MoviesPresenter: NSObject {
         self.view.presenter = self
     }
     
-    // FROM VIEW
+    // MARK: - FROM VIEW
     
     func selectedMovie(at index: Int) {
         let id = self.interactor.getMovieID(index: index)
@@ -49,7 +49,7 @@ class MoviesPresenter: NSObject {
         self.interactor.filterMoviesEnded()
     }
     
-    // FROM INERACTOR
+    // MARK: - FROM INERACTOR
     
     func loadedMovies() {
         self.view.showPopularMovies()

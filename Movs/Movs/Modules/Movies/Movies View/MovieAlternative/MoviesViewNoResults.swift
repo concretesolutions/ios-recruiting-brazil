@@ -22,11 +22,4 @@ class MoviesViewNoResults: UIView {
         self.outletResult.text = message.replacingOccurrences(of: "'<<x>>'", with: "'\(searchText)'")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("-> Reload")
-//        if let view = movieView {
-//            view.presenter.fetchMovies()
-//        }
-    }
-    
 }

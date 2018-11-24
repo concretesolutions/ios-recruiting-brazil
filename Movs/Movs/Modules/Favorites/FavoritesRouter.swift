@@ -28,12 +28,7 @@ class FavoritesRouter: NSObject {
         self.presenter = FavoritesPresenter(router: self, interactor: interactor, view: view)
     }
     
-    // FIXME: - DUPLICADO
-    static var moduleStoryboard: UIStoryboard{
-        return UIStoryboard(name:"MovieDetailsView",bundle: Bundle.main)
-    }
-    
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func goToMovieDetail(movieID: Int) {
         let router = MovieDetailsRouter.init(id: movieID)

@@ -28,9 +28,4 @@ class MovieDetailsRouter: NSObject {
         self.presenter = MovieDetailsPresenter(router: self, interactor: interactor, view: view)
     }
     
-    // FIXME: - DUPLICADO
-    static var moduleStoryboard: UIStoryboard{
-        return UIStoryboard(name:"MovieDetailsView",bundle: Bundle.main)
-    }
-    
 }

@@ -40,7 +40,7 @@ class MovieDetailsView: UIViewController {
         self.outletMoviesLoading.isHidden = false
     }
     
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func setMovie(title: String, favorite: Bool, genre: String, year: String, overview: String, imageURL: String) {
         let imageURL = ServerURL.imageOriginal + imageURL
@@ -72,11 +72,9 @@ class MovieDetailsView: UIViewController {
     
     func updateFavoriteIcon(status: Bool) {
         if status {
-            // FIXME: - Chamar presenter para REMOVER do ADD
             let imageFull = UIImage.init(named: "favorite_full_icon")
             self.outletFavorite.setBackgroundImage(imageFull, for: .normal)
         }else{
-            // FIXME: - Chamar presenter para ADD
             let imageGray = UIImage.init(named: "favorite_gray_icon")
             self.outletFavorite.setBackgroundImage(imageGray, for: .normal)
         }

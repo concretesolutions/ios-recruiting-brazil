@@ -31,13 +31,13 @@ class FavoritesView: UITableViewController {
         self.tableView.reloadData()
     }
     
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func showFavoriteMovies() {
         self.tableView.reloadData()
     }
     
-    // FROM NAVIGATION
+    // MARK: - FROM NAVIGATION
     
     func search(text: String) {
         self.presenter.searchMovie(containing: text)
@@ -51,7 +51,7 @@ class FavoritesView: UITableViewController {
         self.performSegue(withIdentifier: "filter", sender: "filter")
     }
     
-    // INTERACTIONs METHODs
+    // MARK: - INTERACTIONs METHODs
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollViewInteractionStarted()
@@ -68,7 +68,7 @@ class FavoritesView: UITableViewController {
         }
     }
     
-    // TABLE VIEW
+    // MARK: - TABLE VIEW
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.presenter.selectedMovie(at: indexPath.row)

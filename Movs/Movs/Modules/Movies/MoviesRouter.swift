@@ -19,7 +19,7 @@ class MoviesRouter: NSObject {
         let storyboard = UIStoryboard(name: "MoviesVC", bundle: Bundle.main)
         let viewController = storyboard.instantiateViewController(withIdentifier: "Movies")
         guard let view = viewController as? MoviesView else {
-            //Logger.logError(in: self, message: "Could not cast \(viewController) as EnterViewController")
+            print("Error: Could not cast \(viewController) as MoviesView")
             return
         }
         // INTERACTOR
@@ -28,12 +28,7 @@ class MoviesRouter: NSObject {
         self.presenter = MoviesPresenter(router: self, interactor: interactor, view: view)
     }
     
-    // FIXME: - DUPLICADO
-    static var moduleStoryboard: UIStoryboard{
-        return UIStoryboard(name:"MoviesVC",bundle: Bundle.main)
-    }
-    
-    // FROM PRESENTER
+    // MARK: - FROM PRESENTER
     
     func goToMovieDetail(movieID: Int) {
         let router = MovieDetailsRouter.init(id: movieID)
@@ -44,16 +39,6 @@ class MoviesRouter: NSObject {
             self.presenter.view.present(router.presenter.view, animated: true, completion: nil)
         }
     }
-    
-//    func presentLoginScreen(from view: UserPresenterToViewProtocol) {
-//        let loginViewController = LoginRouter.createModule(with: nil)
-//
-//        if let sourceView = view as? UIViewController {
-//            sourceView.present(loginViewController, animated: true, completion: nil)
-//            //sourceView.navigationController?.pushViewController(loginViewController, animated: true)
-//        }
-//
-//    }
     
 }
 
