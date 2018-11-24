@@ -9,10 +9,10 @@
 import Foundation
 
 struct TMDBGenresResponse: Codable {
-  var genres: [Genre]
+    var genres: [Genre]
 }
 
 struct Genre: Codable {
-  var id: Int
-  var name: String
+    var id: Int
+    var name: String
 }

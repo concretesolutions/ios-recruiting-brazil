@@ -9,8 +9,8 @@
 import Foundation
 
 struct TMDBResponse: Codable {
-  var page: Int
-  var results: [CodableMovie]
-  var total_results: Int
-  var total_pages: Int
+    var page: Int
+    var results: [CodableMovie]
+    var total_results: Int
+    var total_pages: Int
 }
