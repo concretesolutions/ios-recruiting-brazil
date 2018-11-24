@@ -8,31 +8,43 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController, MovieDetailView {
     
     // MARK: - Outlets
+    
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var genres: UILabel!
     @IBOutlet weak var overview: UILabel!
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    // MARK: - Properties
+    
+    var presenter: MovieDetailPresentation!
+    private var movie: Movie! {
+        didSet {
+            self.posterImage.image = self.movie.posterImage
+            self.movieTitle.text = self.movie.title
+            self.year.text = "\(self.movie.year)"
+            var genresString = "\(self.movie.genres.first?.name ?? "")"
+            for i in Range(uncheckedBounds: (1, self.movie.genres.count)) {
+                genresString += ", \(self.movie.genres[i].name)"
+            }
+            self.genres.text = genresString
+            self.overview.text = self.movie.overview
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Life cicle functions
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    */
+    
+    // MARK: - MovieDetailView protocol functions
+    
+    func present(movie: Movie) {
+        self.movie = movie
+    }
 
 }
