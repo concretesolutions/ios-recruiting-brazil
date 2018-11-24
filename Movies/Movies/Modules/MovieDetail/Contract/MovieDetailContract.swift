@@ -30,13 +30,17 @@ protocol MovieDetailPresentation {
 protocol MovieDetailUseCase {
     
     var output: MovieDetailInteractorOutput! { get set }
+    var movie: Movie! { get set }
     
+    func getMovie()
     func favorite(movie: Movie)
     func unfavorite(movie: Movie)
     
 }
 
-protocol MovieDetailInteractorOutput { }
+protocol MovieDetailInteractorOutput {
+    func didGet(movie: Movie)
+}
 
 protocol MovieDetailWireframe {
     
