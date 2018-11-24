@@ -37,7 +37,7 @@ class MoviesInteractor {
                     print("-> Movies: \(popularMovies.count)")
                     self.movies += popularMovies
                     self.moviesVisible += popularMovies
-                    self.presenter?.loadedMovies()
+                    //self.presenter?.loadedMovies()
             }
         }
     }
@@ -69,7 +69,7 @@ class MoviesInteractor {
                 print("-> Movies: \(popularMovies.count)")
                 self.moviesVisible = popularMovies
                 if popularMovies.count > 0 {
-                    self.presenter?.loadedMovies()
+                    //self.presenter?.loadedMovies()
                 }else{
                     self.presenter?.noResults()
                 }

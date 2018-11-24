@@ -42,15 +42,25 @@ class MovieDetailsView: UIViewController {
     
     // MARK: - FROM PRESENTER
     
-    func setMovie(title: String, favorite: Bool, genre: String, year: String, overview: String, imageURL: String) {
-        let imageURL = ServerURL.imageOriginal + imageURL
-        self.outletMovieImage.loadImage(imageURL: imageURL) { (movieImage) in
-            if let image = movieImage {
-                self.setBackground(image: image)
-                self.outletMovieImage.image = image
-                self.outletActivityIndicator.stopAnimating()
+    func setMovie(title: String, favorite: Bool, genre: String, year: String, overview: String, imageURL: String?) {
+        
+        // Load image
+        if let image = imageURL {
+            let imageURL = ServerURL.imageOriginal + image
+            self.outletMovieImage.loadImage(imageURL: imageURL) { (movieImage) in
+                if let image = movieImage {
+                    self.setBackground(image: image)
+                    self.outletMovieImage.image = image
+                    self.outletActivityIndicator.stopAnimating()
+                }
             }
+        }else{
+            let placeholder = UIImage.init(named: "Movie Placeholder")!
+            self.setBackground(image: placeholder)
+            self.outletMovieImage.image = placeholder
+            self.outletActivityIndicator.stopAnimating()
         }
+        
         self.outletMovieTitle.text = title
         self.favorite = favorite
         self.outletMovieGenre.text = genre

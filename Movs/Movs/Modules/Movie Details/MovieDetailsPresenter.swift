@@ -42,7 +42,7 @@ class MovieDetailsPresenter: NSObject {
     
     // MARK: - FROM INTERACTOR
     
-    func movieLoaded(title: String, favorite: Bool, genre: [Genre], year: String, overview: String, imageURL: String) {
+    func movieLoaded(title: String, favorite: Bool, genre: [Genre], year: String, overview: String, imageURL: String?) {
         
         var movieGenre = ""
         if !genre.isEmpty {

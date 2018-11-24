@@ -51,10 +51,6 @@ class MoviesPresenter: NSObject {
     
     // MARK: - FROM INERACTOR
     
-    func loadedMovies() {
-        self.view.showPopularMovies()
-    }
-    
     func loadingError() {
         self.view.showError()
     }
@@ -86,6 +82,10 @@ extension MoviesPresenter: UICollectionViewDataSource {
         if let image = movie.poster_path {
             let imageURL = ServerURL.imageW500 + image
             cell.setup(imageURL: imageURL)
+        }else{
+            cell.imageURL = ""
+            cell.outletActivityIndicator.stopAnimating()
+            cell.outletMovieImage.image = UIImage.init(named: "Movie Placeholder")!
         }
         return cell
     }

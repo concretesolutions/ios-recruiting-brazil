@@ -144,8 +144,14 @@ extension FavoritesPresenter: UITableViewDataSource {
         let movie = self.interactor.getMovie(at: indexPath.row + index)
         cell.awakeFromNib(title: movie.title, year: movie.release_date, overview: movie.overview)
         // Load image
-        let imageURL = ServerURL.imageW500 + movie.poster_path
-        cell.setup(imageURL: imageURL)
+        if let image = movie.poster_path {
+            let imageURL = ServerURL.imageW500 + image
+            cell.setup(imageURL: imageURL)
+        }else{
+            cell.imageURL = ""
+            cell.outletActivityIndicator.stopAnimating()
+            cell.outletMovieImage.image = UIImage.init(named: "Movie Placeholder")!
+        }
         return cell
     }
     

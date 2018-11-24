@@ -46,7 +46,7 @@ struct MovieDetail: Codable {
     let genres: [Genre]?
     let title: String
     let release_date: String
-    let poster_path: String
+    let poster_path: String?
     let overview: String
     let homepage:String?  
     let id: Int
