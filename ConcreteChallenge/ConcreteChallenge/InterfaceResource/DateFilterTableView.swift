@@ -40,10 +40,11 @@ class DateFilterTableView: UITableView, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        
+        self.tableViewActions.didSelectDate(date: dates[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         self.cellForRow(at: indexPath)?.accessoryType = .none
+        self.tableViewActions.didDeselectDate(date: dates[indexPath.row])
     }
 }

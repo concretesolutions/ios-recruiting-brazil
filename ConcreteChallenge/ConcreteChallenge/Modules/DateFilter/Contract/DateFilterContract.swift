@@ -26,7 +26,11 @@ protocol DateFilterPresentation: class {
     var interactor: DateFilterInteractorInput! { get set }
     var router: DateFilterWireframe! { get set }
     
+    var datesFilter: [Date] { get set }
+    
     func viewDidLoad()
+    func didSelectDate(date: Date)
+    func didDeselectDate(date: Date)
 }
 
 protocol DateFilterInteractorInput: class {

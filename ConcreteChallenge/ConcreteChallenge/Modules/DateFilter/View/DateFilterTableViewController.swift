@@ -10,6 +10,7 @@ import UIKit
 
 protocol DateFilterTableViewActions {
     func didSelectDate(date: Date)
+    func didDeselectDate(date: Date)
 }
 
 class DateFilterTableViewController: UITableViewController, DateFilterView, DateFilterTableViewActions {
@@ -52,7 +53,12 @@ class DateFilterTableViewController: UITableViewController, DateFilterView, Date
     
     // MARK: - DateFilterTableViewActions functions
     func didSelectDate(date: Date) {
-        
+        self.presenter.didSelectDate(date: date)
     }
+    
+    func didDeselectDate(date: Date) {
+        self.presenter.didDeselectDate(date: date)
+    }
+    
 }
 
