@@ -15,11 +15,27 @@ class DateFilterInteractor: DateFilterInteractorInput {
     
     // MARK: - DateFilterInteractorInput Functions
     func getDates() {
+        // Get all dates
         var dates: [Date] = []
         for movie in FavoriteMovieCoreDataManager.favoriteMovies {
             dates.append(movie.releaseDate)
         }
         
-        self.output.didGetDates(dates: dates)
+        // Remove repeated dates with years
+        var noRepeatedDates: [Date] = []
+        var shouldAdd = true
+        for date in dates {
+            for noRepeatedDate in noRepeatedDates {
+                if noRepeatedDate.year == date.year {
+                    shouldAdd = false
+                }
+            }
+            if shouldAdd {
+                noRepeatedDates.append(date)
+            }
+            shouldAdd = true
+        }
+        
+        self.output.didGetDates(dates: noRepeatedDates)
     }
 }
