@@ -8,12 +8,17 @@
 
 import UIKit
 
-class DateFilterTableViewController: UITableViewController, DateFilterView {
+protocol DateFilterTableViewActions {
+    func didSelectDate(date: Date)
+}
+
+class DateFilterTableViewController: UITableViewController, DateFilterView, DateFilterTableViewActions {
     
     // MARK: - Outlets
     @IBOutlet var dateFilterTableView: DateFilterTableView!
     
     // MARK: - Actions
+    
 
     // MARK: - Properties
     var presenter: DateFilterPresentation!
@@ -42,7 +47,12 @@ class DateFilterTableViewController: UITableViewController, DateFilterView {
     func setupTableView() {
         self.dateFilterTableView.delegate = self.dateFilterTableView
         self.dateFilterTableView.dataSource = self.dateFilterTableView
+        self.dateFilterTableView.tableViewActions = self
     }
     
+    // MARK: - DateFilterTableViewActions functions
+    func didSelectDate(date: Date) {
+        
+    }
 }
 

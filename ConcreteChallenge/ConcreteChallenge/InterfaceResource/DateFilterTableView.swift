@@ -19,7 +19,7 @@ class DateFilterTableView: UITableView, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    var favoriteMovieRemoved: FavoriteMovieRemoved!
+    var tableViewActions: DateFilterTableViewActions!
     
     // MARK: - UITableViewDelegate and UITableViewDataSource Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,7 +40,6 @@ class DateFilterTableView: UITableView, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        
         
     }
     
