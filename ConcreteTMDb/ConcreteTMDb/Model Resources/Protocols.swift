@@ -15,3 +15,7 @@ protocol MovieCellSelected: class {
 protocol MoviesDataFetchCompleted: class {
     func fetchComplete(for movies: [Movie])
 }
+
+protocol GenresDataFetchCompleted: class {
+    func fetchComplete(for genres: [Genre])
+}

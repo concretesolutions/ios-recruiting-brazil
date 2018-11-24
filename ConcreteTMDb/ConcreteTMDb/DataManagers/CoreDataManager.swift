@@ -29,6 +29,7 @@ class CoreDataManager {
         newFavoriteMovie.setValue(movie.overview, forKey: "overview")
         newFavoriteMovie.setValue(movie.date, forKey: "date")
         newFavoriteMovie.setValue(movie.imgUrl, forKey: "imgUrl")
+        newFavoriteMovie.setValue(movie.genres, forKey: "genres")
         
         if let picture = movie.image {
             let imgData = picture.jpegData(compressionQuality: 1.0)
@@ -65,10 +66,11 @@ class CoreDataManager {
                 guard let overview = data.value(forKey: "overview") as? String else { return }
                 guard let date = data.value(forKey: "date") as? String else { return }
                 guard let picture = data.value(forKey: "picture") as? Data else { return }
+                guard let genres = data.value(forKey: "genres") as? [Int] else { return }
                 
                 guard let image = UIImage(data: picture) else { return }
                 
-                let movie = Movie(title: title, overview: overview, date: date, imgUrl: imgUrl, picture: image)
+                let movie = Movie(title: title, overview: overview, date: date, imgUrl: imgUrl, genres: genres, picture: image)
                 movies.append(movie)
                 
             }
@@ -80,13 +82,13 @@ class CoreDataManager {
         }
     }
     
-    static func deleteFavoriteMarket(with title: String) {
+    static func deleteFavoriteMovie(title: String) {
         
         // Get context
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovies")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
         request.returnsObjectsAsFaults = false
         
         do {

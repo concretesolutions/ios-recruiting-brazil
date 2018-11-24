@@ -121,12 +121,20 @@
                                     <action selector="favoriteMovie:" destination="LMC-5Y-BeS" eventType="touchUpInside" id="70L-p9-lTu"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZy-Hp-Mhj">
+                                <rect key="frame" x="105" y="549" width="208" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="5Da-4G-YKp"/>
                     </view>
                     <connections>
                         <outlet property="OutletFavoriteButton" destination="Hhw-7a-xsT" id="1GU-Eo-gO4"/>
+                        <outlet property="OutletMovieGenre" destination="KZy-Hp-Mhj" id="oFt-Pb-T0V"/>
                         <outlet property="OutletMovieImage" destination="5ej-t8-ln3" id="doR-uW-AdA"/>
                         <outlet property="OutletMovieName" destination="EZg-iN-KhE" id="O9q-WH-a2F"/>
                         <outlet property="OutletMovieOverView" destination="MOP-qJ-vje" id="dxi-VG-nFQ"/>

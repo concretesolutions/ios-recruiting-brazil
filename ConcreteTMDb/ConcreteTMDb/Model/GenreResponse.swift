@@ -1,28 +1,28 @@
 //
-//  MovieResponse.swift
+//  GenreResponse.swift
 //  ConcreteTMDb
 //
-//  Created by Pedro Del Rio Ortiz on 22/11/18.
+//  Created by Pedro Del Rio Ortiz on 23/11/18.
 //  Copyright © 2018 Pedro Ortiz. All rights reserved.
 //
 
 import Foundation
 
-struct MovieResponse: Codable {
+struct GenreResponse: Codable {
     
-    var movies: [Movie]
+    var genres: [Genre]
     
     private enum CodingKeys: String, CodingKey {
-        case results
+        case genres
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(movies, forKey: .results)
+        try container.encode(genres, forKey: .genres)
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.movies = try values.decode([Movie].self, forKey: .results)
+        self.genres = try values.decode([Genre].self, forKey: .genres)
     }
 }

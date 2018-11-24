@@ -34,14 +34,17 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var OutletMovieYear: UILabel!
     @IBOutlet weak var OutletMovieOverView: UILabel!
     @IBOutlet weak var OutletFavoriteButton: UIButton!
+    @IBOutlet weak var OutletMovieGenre: UILabel!
     
     // MARK: - Properties
-    
     var movieCell: MoviesCollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.setup()
+        TMDataManager.genresDataCompleted = self
+        TMDataManager.fetchMovieGenres()
     }
     
     private func setup() {
@@ -56,11 +59,27 @@ class MovieDetailViewController: UIViewController {
                 self.movieCell?.movie?.image = image
                 self.OutletMovieImage.image = image
             }
-            
-            
         }
-        
-        
     }
     
+}
+
+extension MovieDetailViewController: GenresDataFetchCompleted {
+    
+    func fetchComplete(for genres: [Genre]) {
+        
+        guard let movie = self.movieCell?.movie else { return }
+        
+        var str: String = ""
+        
+        for genreId in movie.genres {
+            for genre in genres {
+                if genreId == genre.id {
+                    str.append("\(genre.name), ")
+                }
+            }
+        }
+        
+        self.OutletMovieGenre.text = String(str.dropLast().dropLast())
+    }
 }

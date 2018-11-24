@@ -14,7 +14,6 @@ class MoviesViewController: UIViewController {
     @IBOutlet weak var OutletMoviesCollectionView: MoviesCollectionView!
     
     // MARK: - Properties
-    let api = TMDataManager()
     var movieToShow: MoviesCollectionViewCell?
     
     // MARK: - Life Cycle Functions
@@ -24,8 +23,8 @@ class MoviesViewController: UIViewController {
 
         self.setupCollectionView()
         
-        self.api.dataCompleted = self
-        self.api.fetchMovies()
+        TMDataManager.moviesDataCompleted = self
+        TMDataManager.fetchMovies()
     }
     
     func setupCollectionView() {
