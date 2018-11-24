@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
-//        self.window?.rootViewController = MoviesRouter.assembleModule()
-//        self.window?.rootViewController = FavoritesRouter.assembleModule()
-        self.window?.rootViewController = MovsTabbarViewController()
+        if let window = self.window {
+            RootRouter().presentScreen(in: window)
+        }
         return true
     }
 

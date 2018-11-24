@@ -36,6 +36,8 @@
 		CF17C4F221A7CE6000667760 /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4F121A7CE6000667760 /* FavoritesInteractor.swift */; };
 		CF17C4F421A7CFF500667760 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4F321A7CFF500667760 /* FavoritesRouter.swift */; };
 		CF17C4F921A8B9C900667760 /* MovsTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4F821A8B9C900667760 /* MovsTabbarViewController.swift */; };
+		CF17C4FB21A8FAF700667760 /* RootContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4FA21A8FAF700667760 /* RootContract.swift */; };
+		CF17C4FD21A8FB1800667760 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17C4FC21A8FB1800667760 /* RootRouter.swift */; };
 		CF27C3C021999C6B009DF312 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF27C3BF21999C6B009DF312 /* AppDelegate.swift */; };
 		CF27C3C821999C6B009DF312 /* Movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF27C3C621999C6B009DF312 /* Movies.xcdatamodeld */; };
 		CF27C3CA21999C6C009DF312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF27C3C921999C6C009DF312 /* Assets.xcassets */; };
@@ -75,6 +77,8 @@
 		CF17C4F121A7CE6000667760 /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
 		CF17C4F321A7CFF500667760 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
 		CF17C4F821A8B9C900667760 /* MovsTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTabbarViewController.swift; sourceTree = "<group>"; };
+		CF17C4FA21A8FAF700667760 /* RootContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContract.swift; sourceTree = "<group>"; };
+		CF17C4FC21A8FB1800667760 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		CF27C3BC21999C6B009DF312 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF27C3BF21999C6B009DF312 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF27C3C721999C6B009DF312 /* Movies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movies.xcdatamodel; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 		CF0C490C21A38C5C0082B289 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				CF17C4FA21A8FAF700667760 /* RootContract.swift */,
+				CF17C4FC21A8FB1800667760 /* RootRouter.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -438,11 +444,13 @@
 				CF0C491F21A390920082B289 /* MoviesViewController.swift in Sources */,
 				CF0C493121A3A9FA0082B289 /* MoviesCVDataSource.swift in Sources */,
 				CF0C48F821A264D40082B289 /* ImageDataManager.swift in Sources */,
+				CF17C4FD21A8FB1800667760 /* RootRouter.swift in Sources */,
 				CF17C4E621A7AF5900667760 /* FavoritesTableView.swift in Sources */,
 				CF17C4F921A8B9C900667760 /* MovsTabbarViewController.swift in Sources */,
 				CF17C4EE21A7C4D100667760 /* FavoritesSearchBarDelegate.swift in Sources */,
 				CF0C492921A3947F0082B289 /* IndicatableView.swift in Sources */,
 				CF0C493321A3AA8C0082B289 /* MoviesCollectionView.swift in Sources */,
+				CF17C4FB21A8FAF700667760 /* RootContract.swift in Sources */,
 				CF0C48F621A264920082B289 /* MovieDataManager.swift in Sources */,
 				CF0C492821A3947F0082B289 /* Indicatable.swift in Sources */,
 				CF0C491D21A38D650082B289 /* MoviesContract.swift in Sources */,
