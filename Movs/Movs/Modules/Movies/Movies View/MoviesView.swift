@@ -116,10 +116,4 @@ class MoviesView: UIViewController {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == self.presenter.totalMovies() - 1 {
-            self.presenter.fetchMovies()
-        }
-    }
-    
 }
