@@ -244,16 +244,20 @@ extension PopularViewController: UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         // TODO set the empty search
-        switch behavior {
-        case .Success:
+        if behavior == .Success || behavior == .EmptySearch {
             guard let popular = popularMovie?.results else {return}
             filteredPopular = popular.filter({( movie: Result) -> Bool in
                 guard let title = movie.title else {return false}
                 return title.lowercased().contains(searchText.lowercased())
             })
-            tableView.reloadData()
-        default:
-            return
+            /// Call Empty Search behavior if there is not a result for search
+            if isFiltering() && filteredPopular.isEmpty {
+                setBehavior(newBehavior: .EmptySearch)
+                tableView.reloadData()
+            } else {
+                setBehavior(newBehavior: .Success)
+                tableView.reloadData()
+            }
         }
     }
     
