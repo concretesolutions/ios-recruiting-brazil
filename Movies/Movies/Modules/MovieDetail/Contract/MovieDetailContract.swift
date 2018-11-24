@@ -46,6 +46,6 @@ protocol MovieDetailWireframe {
     
     var view: UIViewController? { get set }
     
-    static func assembleModule() -> UIViewController
+    static func assembleModule(withMovie movie: Movie) -> UIViewController
     
 }
