@@ -24,18 +24,29 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDM-dz-yML">
-                                            <rect key="frame" x="16" y="11" width="276" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDM-dz-yML">
+                                            <rect key="frame" x="16" y="11" width="38.5" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="kIU-T4-dlX"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Check_Gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ts0-jS-guU">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check_Gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ts0-jS-guU">
                                             <rect key="frame" x="315" y="11" width="44" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="44" id="fc3-K6-mr3"/>
+                                                <constraint firstAttribute="height" constant="22" id="i6i-5m-VRP"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MDM-dz-yML" firstAttribute="top" secondItem="469-3z-bTZ" secondAttribute="topMargin" id="MPg-QB-NaN"/>
+                                        <constraint firstItem="Ts0-jS-guU" firstAttribute="top" secondItem="469-3z-bTZ" secondAttribute="topMargin" id="c2Z-Xc-Tqs"/>
+                                        <constraint firstItem="Ts0-jS-guU" firstAttribute="trailing" secondItem="469-3z-bTZ" secondAttribute="trailingMargin" id="c6g-qr-DPP"/>
+                                        <constraint firstItem="MDM-dz-yML" firstAttribute="leading" secondItem="469-3z-bTZ" secondAttribute="leadingMargin" id="d3G-jv-mqP"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="outletCheckImage" destination="Ts0-jS-guU" id="U25-HO-ogC"/>
