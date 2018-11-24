@@ -10,13 +10,14 @@ import Foundation
 
 class TMDataManager {
     
+    static var movies: [Movie] = []
+    
     // MARK: - DataSearch delegate, called when assyn data arrives
     static weak var moviesDataCompleted: MoviesDataFetchCompleted?
     static weak var genresDataCompleted: GenresDataFetchCompleted?
     
     static func fetchMovies() {
         
-        var movies: [Movie] = []
         let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=e2417760a16d55fdc805d2c23c69022b&language=en-US&page=1"
         
         guard let url = URL(string: urlString) else { return }
@@ -37,9 +38,9 @@ class TMDataManager {
                 do {
                     let decoder = JSONDecoder()
                     let res = try decoder.decode(MovieResponse.self, from: data)
-                    movies = res.movies
+                    self.movies = res.movies
                     
-                    self.moviesDataCompleted?.fetchComplete(for: movies)
+                    self.moviesDataCompleted?.fetchComplete(for: self.movies)
                     
                 } catch let jsonErr {
                     print("Error to decode json:", jsonErr)

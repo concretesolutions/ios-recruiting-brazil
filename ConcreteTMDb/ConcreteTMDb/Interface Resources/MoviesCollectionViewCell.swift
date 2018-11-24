@@ -13,7 +13,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     // MARK: - Outlets
     @IBOutlet weak var OutletMovieImage: ReusableImageView!
     @IBOutlet weak var OutletMovieName: UILabel!
-    @IBOutlet weak var OutletFavoriteButton: UIButton!
+    @IBOutlet weak var OutletMovieFavoriteImage: UIImageView!
     
     // MARK: - Properties
     
@@ -30,6 +30,14 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     func setup(movie: Movie) {
         self.movie = movie
         self.OutletMovieName.text = movie.title
+        
+        CoreDataManager.getFavoriteMovies { (favoriteMovies) in
+            
+            if favoriteMovies.contains(where: { $0 === movie }) {
+                self.OutletMovieFavoriteImage.image = UIImage(named: "favoriteOn")
+            }
+
+        }
     }
     
     func setupMovieImage() {
