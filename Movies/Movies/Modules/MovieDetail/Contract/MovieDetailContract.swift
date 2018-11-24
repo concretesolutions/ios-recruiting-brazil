@@ -12,6 +12,8 @@ protocol MovieDetailView: class {
     
     var presenter: MovieDetailPresentation! { get set }
     
+    func present(movie: Movie)
+    
 }
 
 protocol MovieDetailPresentation {
@@ -20,22 +22,26 @@ protocol MovieDetailPresentation {
     var router: MovieDetailWireframe! { get set }
     var interactor: MovieDetailUseCase! { get set }
     
+    func viewDidLoad()
+    func didTapFavoriteButton(forMovie movie: Movie)
+    
 }
 
 protocol MovieDetailUseCase {
     
     var output: MovieDetailInteractorOutput! { get set }
     
+    func favorite(movie: Movie)
+    func unfavorite(movie: Movie)
+    
 }
 
-protocol MovieDetailInteractorOutput {
-    
-    
-    
-}
+protocol MovieDetailInteractorOutput { }
 
 protocol MovieDetailWireframe {
     
     var view: UIViewController? { get set }
+    
+    static func assembleModule() -> UIViewController
     
 }
