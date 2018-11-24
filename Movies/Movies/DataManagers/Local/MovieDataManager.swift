@@ -89,6 +89,7 @@ class MovieDataManager {
     
     static func createFavoriteMovie(_ movie: Movie) {
         let _ = managedObject(movie)
+        movie.isFavorite = true
     }
     
     static func readFavoriteMovies() -> [Movie] {
@@ -101,6 +102,7 @@ class MovieDataManager {
             if let mos = result as? [NSManagedObject] {
                 for mo in mos {
                     if let movie = movie(mo) {
+                        movie.isFavorite = true
                         movies.append(movie)
                     }
                 }
