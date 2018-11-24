@@ -8,11 +8,12 @@
 
 import UIKit
 
-class FilmsPresenter: NSObject{
+class FilmsPresenter: NSObject, CellSelected{
+    
     // MARK: - Variables
     // MARK: Private
-    private var collectionDataSource: CollectionDataSource!
-//    private var collectionDelegate
+    private var collectionDataSource: CollectionDataSource?
+    private var collectionDelegate: CollectionDelegate?
     
     // MARK: Public
     var router:FilmsRouter
@@ -35,6 +36,13 @@ class FilmsPresenter: NSObject{
     func viewDidLoad(withCollection collection: UICollectionView, andSearchController searchController: UISearchController) {
         self.collectionDataSource = CollectionDataSource(withCollection: collection, andSearchController: searchController)
         collection.dataSource = self.collectionDataSource
+        self.collectionDelegate = CollectionDelegate()
+        self.collectionDelegate?.cellDelegate = self
+        collection.delegate = self.collectionDelegate
+    }
+    
+    func goToDetalViewController(withFilm film: ResponseFilm) {
+        self.router.goToFilmDetail(withFilm: film)
     }
     
 }

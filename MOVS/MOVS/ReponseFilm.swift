@@ -16,7 +16,7 @@ class ResponseFilm: Decodable {
         case poster_path
         case release_date
         case title
-        case genres_ids
+        case genres_ids = "genre_ids"
     }
     
     //MARK: - Variables

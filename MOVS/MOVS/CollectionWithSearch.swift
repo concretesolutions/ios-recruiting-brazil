@@ -42,10 +42,9 @@ extension CollectionWithSearch{
     }
     
     func getNewMovies(withActivityIndicator activity: UIActivityIndicatorView? = nil){
-        
+        activity?.alpha = 1
+        activity?.startAnimating()
         if totalPages >= NetworkManager.shared.page {
-            activity?.alpha = 1
-            activity?.startAnimating()
             NetworkManager.shared.fetchMovies(withRequest: RequestType.feed) { (result) in
                 self.handleResponse(response: result, andActivity: activity)
             }
@@ -55,9 +54,9 @@ extension CollectionWithSearch{
     }
     
     func getSearchMovie(withText text: String, andActivityIndicator activity: UIActivityIndicatorView? = nil){
+        activity?.alpha = 1
+        activity?.startAnimating()
         if totalPages >= NetworkManager.shared.page {
-            activity?.alpha = 1
-            activity?.startAnimating()
             NetworkManager.shared.fetchMovies(withRequest: RequestType.search, andSearchText: text) { (result) in
                 self.handleResponse(response: result, withText: text, andActivity: activity)
             }
@@ -105,11 +104,12 @@ extension CollectionWithSearch{
         self.totalPages = 1
         self.collection.reloadData()
         self.films = [ResponseFilm]()
+        let cell: EndCollectionViewCell = collection.dequeueReusableSupplementaryViewOfKind(ofKind: UICollectionView.elementKindSectionFooter, for: IndexPath(row: 0, section: 0))
         if isFiltering{
             let textRequest = searchController.searchBar.text!.replacingOccurrences(of: " ", with: "+")
-            getSearchMovie(withText: textRequest)
+            getSearchMovie(withText: textRequest, andActivityIndicator: cell.outletActivityIndicator)
         }else{
-            getNewMovies()
+            getNewMovies(withActivityIndicator: cell.outletActivityIndicator)
         }
     }
 }

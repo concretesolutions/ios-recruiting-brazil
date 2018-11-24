@@ -9,6 +9,7 @@
 import UIKit
 
 class ReportView: UIView {
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     
@@ -24,8 +25,9 @@ class ReportView: UIView {
     
     private func initVariables(){
         Bundle.main.loadNibNamed("ReportView", owner: self, options: nil)
-        self.frame = self.bounds
-        self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        addSubview(contentView)
+        contentView.frame = self.bounds
+        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
 }

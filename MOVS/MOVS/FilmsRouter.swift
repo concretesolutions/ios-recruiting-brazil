@@ -28,8 +28,11 @@ class FilmsRouter{
         self.presenter = FilmsPresenter(router: self, interactor: interactor, view: viewController)
     }
     
-    func goToFilmDetail(withFilm: ResponseFilm){
-        
+    func goToFilmDetail(withFilm film: ResponseFilm){
+        let router = FilmDetailRouter(withFilm: film)
+        if let navigationController = self.presenter.view.navigationController {
+            navigationController.pushViewController(router.presenter.view, animated: true)
+        }
     }
     
 }

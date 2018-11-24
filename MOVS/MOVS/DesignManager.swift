@@ -63,14 +63,15 @@ class DesignManager: NSObject {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: DesignManager.montserratMedium.withSize(10), NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
     }
     
-    public static func configureNavigation(navigationBar: UINavigationBar){
-        navigationBar.shadowImage = UIImage(named: "NavBarShade")
-        navigationBar.isTranslucent = false
-        navigationBar.backgroundColor = PaletColor.gray.rawValue
-        navigationBar.prefersLargeTitles = true
-        navigationBar.tintColor = PaletColor.esmerald.rawValue
-        navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular, NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
-        navigationBar.titleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular.withSize(20), NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
+    public static func configureNavigation(navigationController: UINavigationController){
+        navigationController.navigationBar.shadowImage = UIImage(named: "NavBarShade")
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = PaletColor.gray.rawValue
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.tintColor = PaletColor.esmerald.rawValue
+        navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular, NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
+        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular.withSize(20), NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
+        navigationController.view.backgroundColor = UIColor.white
     }
     
     // MARK: - Private

@@ -31,19 +31,18 @@ class FilmsView: UIViewController {
         
         // Set Search on navigation
         self.setSearchBar()
-        
     }
 
     
     //MARK: - Functions
     //MARK: - Public
     func setNavigationBar(){
-        guard let navBar = self.navigationController?.navigationBar else {
+        guard let navBarController = self.navigationController else {
             print("Error to get navBar in: \(FilmsView.self)")
             return
         }
-        DesignManager.configureNavigation(navigationBar: navBar)
-        navBar.topItem?.title = "Filmes"
+        DesignManager.configureNavigation(navigationController: navBarController)
+        navBarController.navigationBar.topItem?.title = "Filmes"
     }
     
     func setSearchBar(){

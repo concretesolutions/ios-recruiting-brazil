@@ -11,5 +11,6 @@ import Foundation
 enum StoryboardID: String{
     case tabBar = "TabBar"
     case films = "Films"
-    case navigation = "Navigation"
+    case filmDetail = "FilmDetail"
+    
 }

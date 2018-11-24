@@ -44,4 +44,11 @@ class NetworkManager: APIClient{
         }
         changeUILoader()
     }
+    
+    func fetchGenres(completion: @escaping (Result<ResponseGenre, APIError>) -> Void){
+        path = RequestType.genres.rawValue
+        fetch { (result) in
+            completion(result)
+        }
+    }
 }

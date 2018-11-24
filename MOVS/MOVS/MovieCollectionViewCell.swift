@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class MovieCollectionViewCell: UICollectionViewCell, FilmCell {
     
     var film: ResponseFilm?
     
@@ -19,7 +19,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var outletFavoriteImageView: UIImageView!
     
     
-    func setup(film: ResponseFilm){
+    func setup(withFilm film: ResponseFilm){
         self.film = film
         DesignManager.gradient(toView: self.outletGradientView)
         DesignManager.applyShadow(toView: self)
