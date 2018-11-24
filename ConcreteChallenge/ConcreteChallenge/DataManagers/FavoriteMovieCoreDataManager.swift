@@ -15,6 +15,7 @@ class FavoriteMovieCoreDataManager {
     // MARK: - Properties
     static var favoriteMovies: [Movie] = []
     static var favoriteMoviesNSManagedObject: [NSManagedObject] = []
+    static var datesFilter: [Date] = []
     
     static func saveFavoriteMovie(movie: Movie, completion: (_ status: RequestStatus) -> Void) {
         // Get context
