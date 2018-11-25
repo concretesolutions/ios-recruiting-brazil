@@ -20,20 +20,20 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
     
     // MARK: - PopularMoviesInteractorInput Functions
     func fetchMovies() {
-        MovieDataManager.fetchPopularMovies { (status) in
-            if status == RequestStatus.success {
+        MovieDataManager.fetchPopularMovies { (movies) in
+            if let movies = movies {
                 // Get Favorites to check which popular movie is also a favorite
                 FavoriteMovieCoreDataManager.getFavoriteMovies(completion: { (status, _) in
                     if status == RequestStatus.success {
                         // Compare popular and favorite movies to set the favorite flag
-                        for popularMovie in MovieDataManager.movies {
+                        for popularMovie in movies {
                             for favoriteMovie in FavoriteMovieCoreDataManager.favoriteMovies {
                                 if popularMovie.id == favoriteMovie.id {
                                     popularMovie.isFavorite = true
                                 }
                             }
                         }
-                        self.output.didFetch(movies: MovieDataManager.movies)
+                        self.output.didFetch(movies: movies)
                         
                         // Reset attempt counter
                         self.attempt = 1

@@ -21,7 +21,7 @@ class MovieDataManager {
     static private let getGenresURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=0aa2fda064d1eec9e68bccc4220ddf7b&language=en-US"
     
     // MARK: - Functions
-    static func fetchPopularMovies(completion: @escaping (_ status: RequestStatus) -> Void) {
+    static func fetchPopularMovies(completion: @escaping (_ movies: [Movie]?) -> Void) {
         guard let popularMoviesURL = URL(string: self.getPopularMoviesURL + String(self.page)) else { return }
         var request = URLRequest(url: popularMoviesURL)
         request.httpMethod = "GET"
@@ -35,7 +35,7 @@ class MovieDataManager {
             
             if error == nil {
                 guard let data = data else {
-                    completion(.failed)
+                    completion(nil)
                     return
                 }
                 
@@ -46,14 +46,14 @@ class MovieDataManager {
                     let popularMoviesResponse = try decoder.decode(PopularMoviesResponse.self, from: data)
                     self.movies.append(contentsOf: popularMoviesResponse.results)
                     
-                    completion(.success)
+                    completion(self.movies)
                 } catch let decoderError {
                     print("Error decoding json: ", decoderError)
-                    completion(.failed)
+                    completion(nil)
                 }
             } else {
                 print("Error requesting popular movies: ", error as Any)
-                completion(.failed)
+                completion(nil)
             }
         }.resume()
     }
