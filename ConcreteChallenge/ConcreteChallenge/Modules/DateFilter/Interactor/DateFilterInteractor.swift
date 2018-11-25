@@ -38,4 +38,8 @@ class DateFilterInteractor: DateFilterInteractorInput {
         
         self.output.didGetDates(dates: noRepeatedDates)
     }
+    
+    func saveDateFilter(dates: [Date]) {
+        FavoriteMovieCoreDataManager.datesFilter = dates
+    }
 }

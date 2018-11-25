@@ -13,6 +13,8 @@ protocol DateFilterWireframe: class {
     static var presenter: DateFilterPresentation! { get set }
     
     static func assembleModule() -> UIViewController
+    
+    func didTapSaveButton()
 }
 
 protocol DateFilterView {
@@ -31,12 +33,14 @@ protocol DateFilterPresentation: class {
     func viewDidLoad()
     func didSelectDate(date: Date)
     func didDeselectDate(date: Date)
+    func didTapSaveButton()
 }
 
 protocol DateFilterInteractorInput: class {
     var output: DateFilterInteractorOutput! { get set }
     
     func getDates()
+    func saveDateFilter(dates: [Date])
 }
 
 protocol DateFilterInteractorOutput: class {

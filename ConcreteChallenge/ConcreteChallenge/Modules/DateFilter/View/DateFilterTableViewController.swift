@@ -43,12 +43,19 @@ class DateFilterTableViewController: UITableViewController, DateFilterView, Date
     func setupNavigationBar() {
         // Title
         self.navigationItem.title = "Dates"
+        
+        // Right Navigation Item
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
     }
     
     func setupTableView() {
         self.dateFilterTableView.delegate = self.dateFilterTableView
         self.dateFilterTableView.dataSource = self.dateFilterTableView
         self.dateFilterTableView.tableViewActions = self
+    }
+    
+    @objc func saveButtonTapped() {
+        self.presenter.didTapSaveButton()
     }
     
     // MARK: - DateFilterTableViewActions functions
