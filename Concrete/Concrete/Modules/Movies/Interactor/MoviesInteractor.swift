@@ -23,11 +23,12 @@ class MoviesInteractor: NSObject {
     
     //MARK: - Properties
     // MARK: Private
+    //Popular
     private var fetchedMovies = [Movie]()
-    private var searchedMovies = [Movie]()
-    private var lastQuery:String = ""
-    private var searchMoviesPage:Int = 1
     private var popularMoviesPage:Int = 1
+    //Search
+    private var searchedMovies = [Movie]()
+    private var searchMoviesPage:Int = 1
     
     // MARK: Public
     private(set) var pageLastModified:Int = 1
@@ -119,7 +120,6 @@ class MoviesInteractor: NSObject {
         self.status = .normal
     }
     
-    //MARK: Fetch
     func change(status: Status) {
         self.cleanSearchData()
         self.status = status
