@@ -26,6 +26,10 @@ class FavoritesFilterViewController: UIViewController, FavoritesFilterView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Filters"
+        self.setUpCancelButton()
+        self.setUpFilterButton()
+        
         self.presenter.viewDidLoad()
     }
     
@@ -71,6 +75,24 @@ class FavoritesFilterViewController: UIViewController, FavoritesFilterView {
         self.yearsSection.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         self.yearsSection.topAnchor.constraint(equalTo: self.genres.bottomAnchor).isActive = true
         self.yearsSection.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    private func setUpCancelButton() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.didTappCancelButton))
+    }
+    
+    private func setUpFilterButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.didTappCancelButtong))
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func didTappCancelButton() {
+        self.presenter.didPressCancelButton()
+    }
+    
+    @objc private func didTappFilterButton() {
+        self.presenter.didPressFilterButton()
     }
     
     // MARK: - FilterView protocol functions
