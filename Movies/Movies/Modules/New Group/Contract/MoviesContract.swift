@@ -14,6 +14,8 @@ protocol MoviesView: class {
     
     func present(movies: [Movie])
     func presentNew(movies: [Movie])
+    func presentErrorView()
+    func presentEmptyView() 
 }
 
 protocol MoviesPresentation {
