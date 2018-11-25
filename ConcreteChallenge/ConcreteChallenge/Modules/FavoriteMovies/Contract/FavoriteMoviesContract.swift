@@ -22,6 +22,7 @@ protocol FavoriteMoviesView {
     
     func show(favoriteMovies: [Movie])
     func showEmptyAlert()
+    func setRemoveButton(to activate: Bool)
 }
 
 protocol FavoriteMoviesPresentation: class {
@@ -34,6 +35,7 @@ protocol FavoriteMoviesPresentation: class {
     func didRemoveFavoriteMovie(at indexPath: IndexPath)
     func didTapFilterButton()
     func didSetFilters()
+    func didAskForRemoveFilterButton()
 }
 
 protocol FavoriteMoviesInteractorInput: class {
@@ -41,10 +43,12 @@ protocol FavoriteMoviesInteractorInput: class {
     
     func getFavoriteMovies()
     func removeFavoriteMovie(at indexPath: IndexPath)
+    func askForRemoveFilterButton()
 }
 
 protocol FavoriteMoviesInteractorOutput: class {
     func didGetFavoriteMovies(favoriteMovies: [Movie])
+    func didAskForRemoveFilterButton(to activate: Bool)
 }
 
 

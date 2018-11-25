@@ -31,6 +31,10 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
         self.interactor.getFavoriteMovies()
     }
 
+    func didAskForRemoveFilterButton() {
+        self.interactor.askForRemoveFilterButton()
+    }
+    
     // MARK: - FavoriteMoviesInteractorOutput functions
     func didGetFavoriteMovies(favoriteMovies: [Movie]) {
         if favoriteMovies.isEmpty {
@@ -42,5 +46,9 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
     
     func didRemoveFavoriteMovie(at indexPath: IndexPath) {
         self.interactor.removeFavoriteMovie(at: indexPath)
+    }
+    
+    func didAskForRemoveFilterButton(to activate: Bool) {
+        self.view?.setRemoveButton(to: activate)
     }
 }

@@ -31,6 +31,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     
     override func viewWillAppear(_ animated: Bool) {
         self.presenter.didRequestFavoriteMovies()
+        self.presenter.didAskForRemoveFilterButton()
     }
     
     // MARK: - FavoriteMoviesView Functions
@@ -42,7 +43,12 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     func showEmptyAlert() {
         self.favoriteMoviesTableView.isHidden = true
     }
-     
+    
+    func setRemoveButton(to activate: Bool) {
+        self.favoriteMoviesTableView.isRemoveButtonEnabled = activate
+    }
+    
+    
     // MARK: - FavoriteMovieRemoved Functions
     func didRemoveFavoriteMovie(at indexPath: IndexPath) {
         self.presenter.didRemoveFavoriteMovie(at: indexPath)

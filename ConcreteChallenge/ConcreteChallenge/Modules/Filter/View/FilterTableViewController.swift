@@ -57,7 +57,6 @@ class FilterTableViewController: UITableViewController, FilterView {
         
         // Color
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.968627451, green: 0.8078431373, blue: 0.3568627451, alpha: 1)
-        
     }
     
     func setupTableView() {

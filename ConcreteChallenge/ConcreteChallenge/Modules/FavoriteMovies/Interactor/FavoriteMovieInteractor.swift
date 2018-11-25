@@ -34,4 +34,12 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
         FavoriteMovieCoreDataManager.removeFavoriteMovie(at: indexPath) { (status) in
         }
     }
+    
+    func askForRemoveFilterButton() {
+        if FavoriteMovieCoreDataManager.datesFilter.isEmpty {
+            self.output.didAskForRemoveFilterButton(to: false)
+        } else {
+            self.output.didAskForRemoveFilterButton(to: true)
+        }
+    }
 }

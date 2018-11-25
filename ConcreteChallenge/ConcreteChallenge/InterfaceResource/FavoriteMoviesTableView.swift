@@ -19,11 +19,36 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
         }
     }
     
-    var dateFilter: [Date] = []
+    var isRemoveButtonEnabled = false
     
     var favoriteMovieRemoved: FavoriteMovieRemoved!
     
     // MARK: - UITableViewDelegate and UITableViewDataSource Functions
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self.isRemoveButtonEnabled {
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+            view.backgroundColor = .white
+            
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            button.setTitle("Remove Filter", for: .normal)
+            button.backgroundColor = .white
+            button.setTitleColor(.black, for: .normal)
+            
+            view.addSubview(button)
+            return view
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.isRemoveButtonEnabled {
+            return 50
+        } else {
+            return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.favoriteMovies.count
     }
