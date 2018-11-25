@@ -37,7 +37,7 @@ class MovieCollectionViewCell: UICollectionViewCell, CodeView {
     }()
     
     lazy var toggle: ToggleButton = {
-        let toggle = ToggleButton(onImage: UIImage(named: "favorite_full_icon")!, offImage: UIImage(named: "favorite_gray_icon")!)
+        let toggle = FavoriteToggle()
         toggle.translatesAutoresizingMaskIntoConstraints = false
         return toggle
     }()

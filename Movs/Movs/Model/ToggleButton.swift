@@ -51,13 +51,3 @@ public class ToggleButton: UIButton, CodeView {
     
     func setupAdditionalConfiguration() {}
 }
-
-public class FavoriteToggle: ToggleButton {
-    public init() {
-        super.init(onImage: UIImage(named: "favorite_full_icon")!, offImage: UIImage(named: "favorite_gray_icon")!)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
