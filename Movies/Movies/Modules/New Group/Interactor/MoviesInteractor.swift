@@ -19,9 +19,12 @@ class MoviesInteractor: MoviesUseCase {
     // MARK: - MoviesUseCase protocol functions
     
     func getMovies(fromPage page: Int) {
-        APIDataManager.readPopular(fromPage: page) {
-            self.current.append(contentsOf: $0)
-            self.output.didGetMovies(fromPage: page, $0)
+        APIDataManager.readPopular(fromPage: page) { movies, error in
+            if let error = error {
+                
+            }
+            self.current.append(contentsOf: movies)
+            self.output.didGetMovies(fromPage: page, movies)
         }
     }
     
@@ -30,8 +33,11 @@ class MoviesInteractor: MoviesUseCase {
     }
     
     func searchMovies(withTitle title: String) {
-        APIDataManager.searchMovies(withTitle: title) {
-            self.output.didSearchMovies(withTitle: title, $0)
+        APIDataManager.searchMovies(withTitle: title) { movies, error in
+            if let error = error {
+                
+            }
+            self.output.didSearchMovies(withTitle: title, movies)
         }
     }
     
