@@ -9,52 +9,50 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Date Filter Table View Controller-->
-        <scene sceneID="ygb-i2-WC1">
+        <!--Table View Controller-->
+        <scene sceneID="aoR-re-Q3h">
             <objects>
-                <tableViewController storyboardIdentifier="DateFilter" id="xyb-v8-QOF" customClass="DateFilterTableViewController" customModule="ConcreteChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IEU-bN-MLH" customClass="DateFilterTableView" customModule="ConcreteChallenge" customModuleProvider="target">
+                <tableViewController id="iGO-CG-Sl0" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8E-11-H2w" customClass="GenreFilterTableView" customModule="ConcreteChallenge" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="dateFilterCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="dateFilterCell" rowHeight="45" id="HkS-gs-9nG" customClass="DateFilterTableViewCell" customModule="ConcreteChallenge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="45"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GenreFilterCell" id="r6z-i8-2Ge" customClass="GenreFilterTableViewCell" customModule="ConcreteChallenge" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HkS-gs-9nG" id="0eh-cH-uhU">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r6z-i8-2Ge" id="Pzf-Ho-xZW">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8O-aF-rTb">
-                                            <rect key="frame" x="16" y="11" width="36" height="23"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLo-lH-cpy">
+                                            <rect key="frame" x="16" y="11" width="343" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="W8O-aF-rTb" firstAttribute="top" secondItem="0eh-cH-uhU" secondAttribute="topMargin" id="dbt-kF-Eed"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="W8O-aF-rTb" secondAttribute="bottom" id="n0u-SK-ZEH"/>
-                                        <constraint firstItem="W8O-aF-rTb" firstAttribute="leading" secondItem="0eh-cH-uhU" secondAttribute="leadingMargin" id="zyZ-r3-2uP"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zLo-lH-cpy" secondAttribute="bottom" id="D4m-0D-0GX"/>
+                                        <constraint firstItem="zLo-lH-cpy" firstAttribute="top" secondItem="Pzf-Ho-xZW" secondAttribute="topMargin" id="WfS-0n-izD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zLo-lH-cpy" secondAttribute="trailing" id="gqR-GK-z0X"/>
+                                        <constraint firstItem="zLo-lH-cpy" firstAttribute="leading" secondItem="Pzf-Ho-xZW" secondAttribute="leadingMargin" id="wUb-dN-l06"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="dateLabel" destination="W8O-aF-rTb" id="YrX-uy-mMx"/>
+                                    <outlet property="genreLabel" destination="zLo-lH-cpy" id="DDx-wm-7Wn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="xyb-v8-QOF" id="fPh-Ho-InS"/>
-                            <outlet property="delegate" destination="xyb-v8-QOF" id="htg-fc-yuH"/>
+                            <outlet property="dataSource" destination="iGO-CG-Sl0" id="KAU-7D-PXo"/>
+                            <outlet property="delegate" destination="iGO-CG-Sl0" id="mF0-eE-fPK"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="dateFilterTableView" destination="IEU-bN-MLH" id="XZI-L1-6zD"/>
-                    </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6f7-o7-Cw0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="saZ-Fi-wk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="104" y="-381"/>
+            <point key="canvasLocation" x="46" y="-592"/>
         </scene>
     </scenes>
 </document>

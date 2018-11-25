@@ -11,7 +11,8 @@ import UIKit
 class GenreFilterTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
-
+    @IBOutlet weak var genreLabel: UILabel!
+    
     // MARK: - Properties
     var genre: Genre? = nil
     
