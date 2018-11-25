@@ -17,6 +17,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //
+        let request = GetConfiguration()
+        APIManager.shared.fetch(request) { (result) in
+            switch result{
+            case .success(let data):
+                ImageManager.shared.baseURLPath = data.images?.secureBaseUrl
+            case .failure(let error):
+                Logger.logError(in: self, message: error.localizedDescription)
+            }
+        }
+        
+        //
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let moviesRouter = MoviesRouter()
+        let moviesNavigationRouter = UINavigationController(rootViewController: moviesRouter.presenter.view)
+        
+        let homeTabBarRouter = HomeTabBarRouter(viewControllers: [moviesNavigationRouter])
+        
+        self.window?.rootViewController = homeTabBarRouter.presenter.view
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

@@ -10,7 +10,7 @@
 
 import UIKit
 
-class APIManager: NSObject {
+class APIManager {
     
     // MARK: - Properties
     // MARK: Private
@@ -19,8 +19,8 @@ class APIManager: NSObject {
     private let session = URLSession(configuration: .default)
     
     // MARK: - Init
-    private override init() {
-        super.init()
+    private init() {
+        
     }
     
     // MARK: - Functions
@@ -48,8 +48,6 @@ class APIManager: NSObject {
     func fetch<RequestType>(_ request: RequestType, completion: @escaping (Result<RequestType.Response>) -> Void) where RequestType:APIRequest {
         self.setStatusBar(loading: true)
         let endpoint = self.endpoint(for: request)
-        
-        print("Endpoint: \(endpoint)")
         
         let task = session.dataTask(with: URLRequest(url: endpoint)) { data, response, error in
             if let data = data {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HTTPParameter: CustomStringConvertible, Decodable {
+enum HTTPParameter:Decodable {
     case string(String)
     case bool(Bool)
     case int(Int)
@@ -28,7 +28,9 @@ enum HTTPParameter: CustomStringConvertible, Decodable {
             throw APIManager.APIError.decoding
         }
     }
-    
+}
+
+extension HTTPParameter:CustomStringConvertible {
     public var description: String {
         switch self {
         case .string(let string):

@@ -10,6 +10,9 @@ import CoreData
 
 class CoreDataSingleton {
     
+    // MARK: - Properties
+    // MARK: Private
+    // MARK: Public
     static let shared = CoreDataSingleton()
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -39,6 +42,14 @@ class CoreDataSingleton {
         return container
     }()
     
+    // MARK: - Init
+    private init() {
+        
+    }
+    
+    // MARK: - Functions
+    // MARK: Private
+    // MARK: Public
     func saveContext () {
         let context = CoreDataSingleton.shared.persistentContainer.viewContext
         if context.hasChanges {
