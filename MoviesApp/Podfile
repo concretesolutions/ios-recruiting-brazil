@@ -9,6 +9,15 @@ target 'MoviesApp' do
 	pod "Reusable"
    	pod "SnapKit"
 	pod 'SDWebImage', '~> 4.0'
+    
+    target 'MoviesAppTests' do
+        inherit! :search_paths
+        
+        pod "Quick"
+        pod "Nimble"
+        pod 'Nimble-Snapshots'
+    end
+
 
 plugin 'cocoapods-keys', {
   :project => "MoviesApp",

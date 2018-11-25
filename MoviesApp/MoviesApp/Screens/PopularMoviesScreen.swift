@@ -31,7 +31,9 @@ class PopularMoviesScreen: UIView {
     }()
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        let bounds = UIScreen.main.bounds
+        super.init(frame: bounds)
+        self.backgroundColor = Palette.white
         setupView()
     }
     
@@ -47,16 +49,17 @@ class PopularMoviesScreen: UIView {
             self.bringSubviewToFront(activityIndicator)
             self.activityIndicator.startAnimating()
             self.emptySearchView.isHidden = true
+            self.collectionView.isHidden = true
         case .ready:
             self.activityIndicator.stopAnimating()
             self.emptySearchView.isHidden = true
+            self.collectionView.isHidden = false
         case .error:
-            DispatchQueue.main.async { [weak self] in
-                self?.activityIndicator.stopAnimating()
-                self?.emptySearchView.setupView(for: .generic)
-                self?.emptySearchView.isHidden = false
-                self?.bringSubviewToFront((self?.emptySearchView)!)
-            }
+            self.activityIndicator.stopAnimating()
+            self.emptySearchView.setupView(for: .generic)
+            self.emptySearchView.isHidden = false
+            self.collectionView.isHidden = true
+            self.bringSubviewToFront(self.emptySearchView)
             
         case .noResults(let query):
             emptySearchView.setupView(for: .noResults, with: query)

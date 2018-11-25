@@ -26,7 +26,7 @@ class PopularMoviesViewController: UIViewController {
         }
     }
     
-    var service = MoviesServiceImplementation()
+    var service: MoviesService = MoviesServiceImplementation()
     var movies:[Movie] = []
     var genres:[Genre] = []
     
@@ -71,13 +71,12 @@ extension PopularMoviesViewController {
     func fetchMovies(query: String? = nil) {
         self.presentationState = .loading
         let request = query == nil ? APIRequest.fecthPopularMovies : APIRequest.searchMovie
-        service.fetchPopularMovies(request: request, query: query) { [weak self] result in
+        service.fetchPopularMovies(request: request, query: query, page: nil) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.handleFetch(of: response.results, withQuery: query, totalResults: response.totalResults)
             case .error:
                 self?.presentationState = .error
-                print("handle error in fetching movies")
             }
         }
     }

@@ -27,7 +27,7 @@ protocol MoviesService{
 enum APIRequest:String{
     case fecthPopularMovies = "movie/popular"
     case searchMovie = "search/movie"
-    case fetchGenres = ""
+    case fetchGenres = "genre/movie/list"
     case fetchImage = "https://image.tmdb.org/t/p/w500"
 }
 
@@ -88,11 +88,17 @@ class MoviesServiceImplementation: MoviesService{
     }
     
     func fetchGenre(callback: @escaping (Result<[Genre]>) -> Void){
-        let genresRequest = "genre/movie/list?api_key="
-        let languageRequest = "&language=en-US"
-        let request = self.endpoint + genresRequest + MoviesAPIConfig.apikey + languageRequest
+        var components = URLComponents(string: endpoint + APIRequest.fetchGenres.rawValue)
         
-        guard let url = URL(string: request) else {return}
+        let queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "api_key", value: MoviesAPIConfig.apikey),
+            ]
+        
+        components?.queryItems = queryItems
+        guard let url = components?.url else{
+            callback(.error(NSError()))
+            return
+        }
         
         let task = URLSession.shared.dataTask(with: url){ data, response, error in
             guard let data = data else {return}
