@@ -15,15 +15,15 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     
     // MARK: - FavoriteMoviesInteractorInput functions
     func getFavoriteMovies() {
-        FavoriteMovieCoreDataManager.getFavoriteMovies { (status, movies) in
-            if status == RequestStatus.success, let movies = movies {
-                var hasFilter = false
-                if !FavoriteMovieCoreDataManager.datesFilter.isEmpty || !FavoriteMovieCoreDataManager.genresFilter.isEmpty {
-                    hasFilter = true
-                }
-                
-                self.output.didGetFavoriteMovies(favoriteMovies: movies, hasFilter: hasFilter)
+        FavoriteMovieCoreDataManager.getFavoriteMovies { (movies) in
+            guard let movies = movies else { return }
+            
+            var hasFilter = false
+            if !FavoriteMovieCoreDataManager.datesFilter.isEmpty || !FavoriteMovieCoreDataManager.genresFilter.isEmpty {
+                hasFilter = true
             }
+            
+            self.output.didGetFavoriteMovies(favoriteMovies: movies, hasFilter: hasFilter)
         }
     }
     

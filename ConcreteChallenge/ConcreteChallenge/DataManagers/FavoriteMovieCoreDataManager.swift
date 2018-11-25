@@ -45,7 +45,7 @@ class FavoriteMovieCoreDataManager {
         }
     }
     
-    static func getFavoriteMovies(completion: @escaping (_ status: RequestStatus, _ movies: [Movie]?) -> Void) {
+    static func getFavoriteMovies(completion: @escaping (_ movies: [Movie]?) -> Void) {
         // Get context
         DispatchQueue.main.async {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -69,10 +69,10 @@ class FavoriteMovieCoreDataManager {
                     self.favoriteMovies.append(Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate))
                 }
                 
-                completion(.success, self.filterFavoriteMovies())
+                completion(self.filterFavoriteMovies())
             } catch {
                 print("Failed")
-                completion(.failed, nil)
+                completion(nil)
             }
         }
     }
