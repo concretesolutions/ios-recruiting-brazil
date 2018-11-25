@@ -58,10 +58,10 @@ class MovieDataManager {
         }.resume()
     }
     
-    static func fetchGenres(completion: @escaping (_ status: RequestStatus) -> Void) {
+    static func fetchGenres(completion: @escaping (_ genres: [Genre]?) -> Void) {
         
         if !self.genres.isEmpty {
-            completion(.success)
+            completion(self.genres)
             return
         }
         
@@ -82,14 +82,14 @@ class MovieDataManager {
                     let genresResponse = try decoder.decode(GenresResponse.self, from: data)
                     self.genres = genresResponse.genres
                     
-                    completion(.success)
+                    completion(self.genres)
                 } catch let decoderError {
                     print("Error decoding json: ", decoderError)
-                    completion(.failed)
+                    completion(nil)
                 }
             } else {
                 print("Error requesting genres: ", error as Any)
-                completion(.failed)
+                completion(nil)
             }
         }.resume()
     }

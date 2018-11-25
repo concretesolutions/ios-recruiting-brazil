@@ -27,14 +27,14 @@ class GenreFilterInteractor: GenreFilterInteractorInput {
         }
         
         // Get genres based on their ids
-        var genres: [Genre] = []
-        MovieDataManager.fetchGenres { (status) in
-            if status == .success {
-                for genreId in genreIds {
-                    for genre in MovieDataManager.genres {
-                        if genreId == genre.id {
-                            genres.append(genre)
-                        }
+        var genresById: [Genre] = []
+        MovieDataManager.fetchGenres { (genres) in
+            guard let genres = genres else { return }
+            
+            for genreId in genreIds {
+                for genre in genres {
+                    if genreId == genre.id {
+                        genresById.append(genre)
                     }
                 }
             }
@@ -42,7 +42,7 @@ class GenreFilterInteractor: GenreFilterInteractorInput {
             // Remove repeated Genres
             var noRepeatedGenres: [Genre] = []
             var shouldAdd = true
-            for genre in genres {
+            for genre in genresById {
                 for noRepeatedGenre in noRepeatedGenres {
                     if noRepeatedGenre.id == genre.id {
                         shouldAdd = false
