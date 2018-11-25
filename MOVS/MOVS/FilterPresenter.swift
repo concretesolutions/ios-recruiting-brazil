@@ -36,6 +36,27 @@ class FilterPresenter: NSObject {
     func viewWillAppear(){
         self.view.outletTableView.reloadData()
     }
+    
+    func dismissWithFilter(inFavoriteView favoriteView: FavoriteView){
+        favoriteView.presenter.filterWith(year: self.interactor.year, andGenre: self.interactor.genre)
+        self.router.dismissWithFilter(inNavigationController: self.view.navigationController)
+    }
+    
+    func goToFilter(toChoose choose: FilterFavoriteType){
+        if choose == .genre{
+            if let genre = self.interactor.genre {
+                self.router.goToFilter(withChooseType: choose, andOptions: genre as Any)
+            }else{
+                self.router.goToFilter(withChooseType: choose)
+            }
+        }else{
+            if let year = self.interactor.year {
+                self.router.goToFilter(withChooseType: choose, andOptions: year as Any)
+            }else{
+                self.router.goToFilter(withChooseType: choose)
+            }
+        }
+    }
 }
 
 extension FilterPresenter: UITableViewDataSource{

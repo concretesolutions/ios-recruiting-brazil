@@ -26,4 +26,22 @@ class FilterRouter {
         //Instancing Presenter
         self.presenter = FilterPresenter(router: self, interactor: interactor, view: viewController)
     }
+    
+    func goToFilter(withChooseType type: FilterFavoriteType){
+        let filterChoose = FilterChooseRouter(withFilterType: type)
+        if let navigationController = self.presenter.view.navigationController {
+            navigationController.pushViewController(filterChoose.presenter.view, animated: true)
+        }
+    }
+    
+    func goToFilter(withChooseType type: FilterFavoriteType, andOptions option: Any){
+        let filterChoose = FilterChooseRouter(withFilterType: type, andInfo: option)
+        if let navigationController = self.presenter.view.navigationController {
+            navigationController.pushViewController(filterChoose.presenter.view, animated: true)
+        }
+    }
+    
+    func dismissWithFilter(inNavigationController navigationController: UINavigationController?){
+        navigationController?.popViewController(animated: true)
+    }
 }

@@ -68,6 +68,10 @@ class FavoriteView: UIViewController {
     func filterTapped(){
         self.presenter.goToFilter()
     }
+    
+    func createClearFilterButton(){
+        
+    }
 }
 
 extension FavoriteView: UITableViewDelegate{

@@ -49,12 +49,44 @@ class FavoriteInteractor: NSObject{
     }
     
     func reloadData(){
-        self.films = coreDataManager.fetch()
+        if !isFiltering{
+            self.films = coreDataManager.fetch()
+        }
     }
     
     func filterWith(name: String){
         self.films = self.regularFilms.filter({ (film) -> Bool in
             return film.title?.contains(name) ?? false
+        })
+    }
+    
+    func filterWith(year: String?, andGenre genre: Gener?){
+        self.isFiltering = true
+        self.films = self.regularFilms.filter({ (film) -> Bool in
+            var yearCheck: Bool = false
+            var genreCheck: Bool = false
+            
+            if let releaseYear = film.release_date?.split(separator: "-").first, let year = year {
+                if releaseYear == year {
+                    yearCheck = true
+                }
+            }
+            
+            for filmGenre in film.geners?.allObjects as! [Gener]{
+                if filmGenre == genre{
+                    genreCheck = true
+                }
+            }
+            
+            if year == nil{
+                yearCheck = true
+            }
+            
+            if genre == nil{
+                genreCheck = true
+            }
+            
+            return yearCheck && genreCheck
         })
     }
 }

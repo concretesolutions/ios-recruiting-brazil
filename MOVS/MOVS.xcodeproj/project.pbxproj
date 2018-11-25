@@ -72,6 +72,9 @@
 		A37EECDE21AA5CBC000F3867 /* FilterChooseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECDD21AA5CBC000F3867 /* FilterChooseInteractor.swift */; };
 		A37EECE021AA5CCF000F3867 /* FilterChoosePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECDF21AA5CCF000F3867 /* FilterChoosePresenter.swift */; };
 		A37EECE221AA5CE5000F3867 /* FilterChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECE121AA5CE5000F3867 /* FilterChooseView.swift */; };
+		A37EECE421AA6587000F3867 /* FilterFavoriteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECE321AA6587000F3867 /* FilterFavoriteType.swift */; };
+		A37EECE621AA7558000F3867 /* FilterChoose.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A37EECE521AA7558000F3867 /* FilterChoose.storyboard */; };
+		A37EECE821AA8127000F3867 /* FilterChooseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECE721AA8127000F3867 /* FilterChooseTableViewCell.swift */; };
 		A38140F121A75EB7000A45D8 /* CollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38140F021A75EB7000A45D8 /* CollectionDelegate.swift */; };
 		A38140F321A75F3B000A45D8 /* CollectionWithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38140F221A75F3B000A45D8 /* CollectionWithSearch.swift */; };
 		A38140F621A76748000A45D8 /* ReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A38140F521A76748000A45D8 /* ReportView.xib */; };
@@ -185,6 +188,9 @@
 		A37EECDD21AA5CBC000F3867 /* FilterChooseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChooseInteractor.swift; sourceTree = "<group>"; };
 		A37EECDF21AA5CCF000F3867 /* FilterChoosePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChoosePresenter.swift; sourceTree = "<group>"; };
 		A37EECE121AA5CE5000F3867 /* FilterChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChooseView.swift; sourceTree = "<group>"; };
+		A37EECE321AA6587000F3867 /* FilterFavoriteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFavoriteType.swift; sourceTree = "<group>"; };
+		A37EECE521AA7558000F3867 /* FilterChoose.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FilterChoose.storyboard; sourceTree = "<group>"; };
+		A37EECE721AA8127000F3867 /* FilterChooseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChooseTableViewCell.swift; sourceTree = "<group>"; };
 		A38140F021A75EB7000A45D8 /* CollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDelegate.swift; sourceTree = "<group>"; };
 		A38140F221A75F3B000A45D8 /* CollectionWithSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionWithSearch.swift; sourceTree = "<group>"; };
 		A38140F521A76748000A45D8 /* ReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportView.xib; sourceTree = "<group>"; };
@@ -410,6 +416,7 @@
 				A3527AAB21A3C52B009F9790 /* Result.swift */,
 				A3527AB321A3CCD5009F9790 /* APIError.swift */,
 				A369F2E721A607B3005EB8CD /* RequestType.swift */,
+				A37EECE321AA6587000F3867 /* FilterFavoriteType.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -479,6 +486,7 @@
 				A381411C21A89B86000A45D8 /* OverviewTableViewCell.swift */,
 				A37EECBB21AA0877000F3867 /* MovieTableViewCell.swift */,
 				A37EECD421AA5207000F3867 /* FilterTableViewCell.swift */,
+				A37EECE721AA8127000F3867 /* FilterChooseTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -659,6 +667,7 @@
 		A37EECDA21AA5BC1000F3867 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A37EECE521AA7558000F3867 /* FilterChoose.storyboard */,
 				A37EECE121AA5CE5000F3867 /* FilterChooseView.swift */,
 			);
 			name = View;
@@ -855,6 +864,7 @@
 				A31E1899219DBDBD00E0560B /* Assets.xcassets in Resources */,
 				A31E18C7219DC33700E0560B /* Films.storyboard in Resources */,
 				A31E18C9219DC42700E0560B /* Montserrat-Light.otf in Resources */,
+				A37EECE621AA7558000F3867 /* FilterChoose.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +980,7 @@
 				A3D7450C21A97D0B00BFBC56 /* ResponseGenre.swift in Sources */,
 				A37EECE021AA5CCF000F3867 /* FilterChoosePresenter.swift in Sources */,
 				A31E1964219F81C400E0560B /* Film+CoreDataProperties.swift in Sources */,
+				A37EECE821AA8127000F3867 /* FilterChooseTableViewCell.swift in Sources */,
 				A31E199B21A1D95B00E0560B /* ReponseFilm.swift in Sources */,
 				A31E1907219DF0E400E0560B /* FilmsRouter.swift in Sources */,
 				A3527AB421A3CCD5009F9790 /* APIError.swift in Sources */,
@@ -1021,6 +1032,7 @@
 				A31B3F2A21A3F8C4008F3499 /* UIImageView+SD_Image.swift in Sources */,
 				A38140F121A75EB7000A45D8 /* CollectionDelegate.swift in Sources */,
 				A31E1958219EF5DB00E0560B /* ReusableIdentifier.swift in Sources */,
+				A37EECE421AA6587000F3867 /* FilterFavoriteType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

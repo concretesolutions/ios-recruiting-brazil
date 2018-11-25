@@ -27,10 +27,17 @@ class FilterView: UIViewController {
         self.outletTableView.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.presenter.viewWillAppear()
+    }
+    
     //MARK: - Functions
     //MARK: - Actions
     @IBAction func applyFilter(_ sender: UIButton) {
-        
+        if let navController = self.navigationController, navController.viewControllers.count >= 2 {
+            let favoriteView = navController.viewControllers[navController.viewControllers.count - 2] as! FavoriteView
+            self.presenter.dismissWithFilter(inFavoriteView: favoriteView)
+        }
     }
     //MARK: - Public
 }
@@ -44,7 +51,13 @@ extension FilterView: UITableViewDelegate{
         }) { (_) in
             UIView.animate(withDuration: 0.075, animations: {
                 cell?.transform = CGAffineTransform.identity
-            })
+            }) { (_) in
+                if indexPath.row == 0 {
+                    self.presenter.goToFilter(toChoose: FilterFavoriteType.year)
+                }else{
+                    self.presenter.goToFilter(toChoose: FilterFavoriteType.genre)
+                }
+            }
         }
     }
 }

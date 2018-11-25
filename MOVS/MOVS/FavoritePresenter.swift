@@ -57,6 +57,10 @@ class FavoritePresenter: NSObject{
     func goToFilter(){
         self.router.goToFilter()
     }
+    
+    func filterWith(year: String?, andGenre genre: Gener?){
+        self.interactor.filterWith(year: year, andGenre: genre)
+    }
 }
 
 extension FavoritePresenter: UITableViewDataSource, UITableViewDelegate{
