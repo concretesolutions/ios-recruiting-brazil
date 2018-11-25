@@ -25,7 +25,7 @@ extension Result {
             favorite.id = Int32(id)
         }
         
-        // Salvando as info abaixo, mas não estão sendo usadas atualmente
+        // Salving all information
         if let adult = self.adult {
             favorite.adult = adult
         }

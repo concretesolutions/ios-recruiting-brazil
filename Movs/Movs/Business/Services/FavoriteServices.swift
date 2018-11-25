@@ -12,7 +12,7 @@ class FavoriteServices {
     
     /// Function responsible for creating a favorite movie
     /// - parameters:
-    ///     - favorite: favorite to be saved
+    ///     - favorite: favorite to be created
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
     static func createFavorite(favorite: Favorite, _ completion: ((_ favorite: Favorite, _ error: Error?) -> Void)?) {
@@ -130,7 +130,7 @@ class FavoriteServices {
 
     /// Function responsible for delete a favorite movie
     /// - parameters:
-    ///     - favorite: favorite to be saved
+    ///     - favorite: favorite to be deleted
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
     static func deleteFavorite(favorite: Favorite, _ completion: ((_ favorite: Favorite, _ error: Error?) -> Void)?) {

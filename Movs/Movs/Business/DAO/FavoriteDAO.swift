@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class FavoriteDAO {
-    /// Method responsible for saving a favorite into database
+    /// Method responsible for creating a favorite into database
     /// - parameters:
     ///     - objectToBeSaved: favorite to be saved on database
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
@@ -47,9 +47,7 @@ class FavoriteDAO {
     }
     
     
-    /// Method responsible for gettings all favorite from database
-    /// - returns: a list of favorite from database
-    /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
+    /// Method responsible for delete one object from database
     static func delete(_ objToBeDeleted: NSManagedObject) throws {
 
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")

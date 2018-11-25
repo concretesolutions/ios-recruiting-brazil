@@ -42,18 +42,36 @@ class FavoriteViewController: UIViewController {
             fetchFavorite()
         }
     }
+
     
-    
-    
-    private func initialSetup() {
-        tableView.tableFooterView = UIView()
-        removeFilterConstraint.constant = 0
-        fetchFavorite()
-    }
     
     
     @IBAction func removeFilterButtonAction(_ sender: UIButton) {
         setBehavior(newBehavior: .All)
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DescriptionViewController {
+            vc.data = sender as? Favorite
+            vc.behavior = .Favorite
+        } else if let vc = segue.destination as? FilteringViewController {
+            guard let favorite = favorite else { return }
+            vc.favorite = favorite
+            vc.delegate = self
+        }
+        
+    }
+    
+}
+
+// MARK: Data setup
+extension FavoriteViewController {
+    private func initialSetup() {
+        tableView.tableFooterView = UIView()
+        removeFilterConstraint.constant = 0
+        fetchFavorite()
     }
     
     private func fetchFavorite() {
@@ -70,18 +88,21 @@ class FavoriteViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? DescriptionViewController {
-            vc.data = sender as? Favorite
-            vc.behavior = .Favorite
-        } else if let vc = segue.destination as? FilteringViewController {
-            guard let favorite = favorite else { return }
-            vc.favorite = favorite
-            vc.delegate = self
+    private func setBehavior(newBehavior: FavoriteBehavior) {
+        behavior = newBehavior
+        switch behavior {
+        case .GenericError:
+            tableView.backgroundView = UIView()
+        case .All:
+            removeFilterConstraint.constant = 0
+        case .Filtering:
+            removeFilterConstraint.constant = 44
         }
-        
     }
-    
+}
+
+// MARK: Filter Setup
+extension FavoriteViewController {
     func getFilteredFavorite() -> [Favorite]? {
         var favoriteFiltered = [Favorite]()
         
@@ -120,9 +141,9 @@ class FavoriteViewController: UIViewController {
         let year = myCalendar.component(.year, from: date)
         return year
     }
-    
 }
 
+// MARK: Tableview Data source
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCellIdentifier) as? FavoriteTableViewCell
@@ -208,33 +229,22 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension FavoriteViewController {
-    private func setBehavior(newBehavior: FavoriteBehavior) {
-        behavior = newBehavior
-        switch behavior {
-        case .GenericError:
-            tableView.backgroundView = UIView()
-        case .All:
-            removeFilterConstraint.constant = 0
-        case .Filtering:
-            removeFilterConstraint.constant = 44
-        }
-    }
-}
-
 // MARK: Service call
 extension FavoriteViewController {
     private func deleteFavorite(data: Favorite) {
         FavoriteServices.deleteFavorite(favorite: data) { (_, error) in
             self.tableView.reloadData()
             if let err = error {
-                self.customAlert(title: "Erro", message: "Não foi possível deletar este filme favoritado.", actionTitle: "Ok")
+                self.customAlert(title: "Erro",
+                                 message: "Não foi possível deletar este filme favoritado.",
+                                 actionTitle: "Ok")
                 print(err.localizedDescription)
             }
         }
     }
 }
 
+// MARK: Delegate
 extension FavoriteViewController: FilteringDelegate {
     func setFilter(_ filter: Filter) {
         filterApplied = filter

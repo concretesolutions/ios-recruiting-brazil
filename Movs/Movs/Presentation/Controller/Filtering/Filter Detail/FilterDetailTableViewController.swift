@@ -39,6 +39,10 @@ class FilterDetailTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
 
+}
+
+// MARK: TableView Data Source
+extension FilterDetailTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch behavior {
         case .Genre:
@@ -47,7 +51,7 @@ class FilterDetailTableViewController: UITableViewController {
             return year.count
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: filterDetailCellIdentifier,
                                                  for: indexPath) as? FilterDetailTableViewCell
@@ -57,7 +61,7 @@ class FilterDetailTableViewController: UITableViewController {
         case .Year:
             cell?.setData(year: year[indexPath.row])
         }
-
+        
         return cell!
     }
     
@@ -70,5 +74,4 @@ class FilterDetailTableViewController: UITableViewController {
         }
         self.navigationController?.popViewController(animated: true)
     }
-
 }

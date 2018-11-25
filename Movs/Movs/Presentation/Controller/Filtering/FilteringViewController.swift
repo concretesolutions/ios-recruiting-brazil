@@ -38,17 +38,6 @@ class FilteringViewController: UIViewController {
         dataSetup()
     }
     
-    func initialSetup() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
-    }
-    
-    func dataSetup() {
-        filterSelected.genre = getListOfGenres()
-        filterSelected.year = getListOfYears()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FilterDetailTableViewController {
             // Genres
@@ -76,6 +65,21 @@ class FilteringViewController: UIViewController {
     
 }
 
+// MARK: Data setup
+extension FilteringViewController {
+    private func initialSetup() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+    }
+    
+    private func dataSetup() {
+        filterSelected.genre = getListOfGenres()
+        filterSelected.year = getListOfYears()
+    }
+}
+
+// MARK: TableView Data source
 extension FilteringViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfFilters
@@ -117,6 +121,7 @@ extension FilteringViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: Filtering Funcions
 extension FilteringViewController {
     private func getListOfYears() -> [Int] {
         let years = favorite.compactMap { (fav) -> Date? in
@@ -166,6 +171,7 @@ extension FilteringViewController {
     }
 }
 
+// MARK: Delegate
 extension FilteringViewController: FilterDetailDelegate {
     func setSelectedGenre(_ filter: String) {
         genreSelected = filter

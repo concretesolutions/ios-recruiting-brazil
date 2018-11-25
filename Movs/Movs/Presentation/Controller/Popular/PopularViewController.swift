@@ -56,25 +56,18 @@ class PopularViewController: UITableViewController {
         }
     }
     
-    func dataSetup() {
-        tableView.tableFooterView = UIView()
-        setBehavior(newBehavior: .LoadingView)
-        fetchPopularMovieData(page: page) { (popular) -> Void in
-            if let data = popular {
-                self.popularMovie = data
-                self.setBehavior(newBehavior: .Success)
-            }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segueData = sender as? CustomSegueSender else { return }
+        if let vc = segue.destination as? DescriptionViewController {
+            vc.data = segueData.result
+            vc.behavior = segueData.behavior
         }
     }
     
-    private func searchSetup() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Pesquisar filmes"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-    }
-    
+}
+
+// MARK: TableView data source
+extension PopularViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         if behavior == .Success && popularMovie != nil {
             return 1
@@ -99,7 +92,6 @@ class PopularViewController: UITableViewController {
                                                  for: indexPath) as? PopularTableViewCell
         let data: Result
         switch isFiltering() {
-        // TODO: fazer um Dispatch Group para retornar a celular após o resultado de favorito for identificado
         case true:
             data = filteredPopular[indexPath.row]
             isFavorite(result: data, completionHandler: { (status) in
@@ -144,22 +136,32 @@ class PopularViewController: UITableViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let segueData = sender as? CustomSegueSender else { return }
-        if let vc = segue.destination as? DescriptionViewController {
-            vc.data = segueData.result
-            vc.behavior = segueData.behavior
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightForPopularRow
     }
-    
 }
 
-// MARK: Frufru setup
+// MARK: Data setup
 extension PopularViewController {
+    func dataSetup() {
+        tableView.tableFooterView = UIView()
+        setBehavior(newBehavior: .LoadingView)
+        fetchPopularMovieData(page: page) { (popular) -> Void in
+            if let data = popular {
+                self.popularMovie = data
+                self.setBehavior(newBehavior: .Success)
+            }
+        }
+    }
+    
+    private func searchSetup() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Pesquisar filmes"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     private func setBehavior(newBehavior: Behavior) {
         behavior = newBehavior
         switch behavior {
@@ -199,7 +201,7 @@ extension PopularViewController {
     }
 }
 
-/// Infinity Scroll Functions
+// MARK: Infinity Scroll Functions
 extension PopularViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
@@ -230,7 +232,7 @@ extension PopularViewController {
     }
 }
 
-/// Search Functions
+// MARK: Search Functions
 extension PopularViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
@@ -243,7 +245,6 @@ extension PopularViewController: UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        // TODO set the empty search
         if behavior == .Success || behavior == .EmptySearch {
             guard let popular = popularMovie?.results else {return}
             filteredPopular = popular.filter({( movie: Result) -> Bool in

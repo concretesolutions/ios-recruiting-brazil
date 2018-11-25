@@ -23,7 +23,7 @@ class DescriptionViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    // MARK: Class attributes
+    /// Class attributes
     var genresString = ""
     var data: Any?
     var behavior: DescriptionBehavior = .Normal
@@ -50,6 +50,10 @@ class DescriptionViewController: UIViewController {
         }
     }
     
+}
+
+// MARK: Data setup
+extension DescriptionViewController {
     //swiftlint:disable cyclomatic_complexity
     func dataSourceSetup() {
         switch behavior {
@@ -103,8 +107,8 @@ class DescriptionViewController: UIViewController {
             }
         }
     }
-    //swiftlint:enable cyclomatic_complexity
     
+    //swiftlint:enable cyclomatic_complexity
     private func saveFavorite (data: Result) {
         let newFavorite = data.convertResultInFavorite(with: genresString)
         let persistMethod = FavoriteServices.createFavorite
@@ -138,5 +142,4 @@ class DescriptionViewController: UIViewController {
         let year = myCalendar.component(.year, from: date)
         releaseDateLabel.text = "Ano: \(year)"
     }
-    
 }
