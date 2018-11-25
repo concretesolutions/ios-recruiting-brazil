@@ -48,6 +48,7 @@ protocol MoviesInteractorOutput {
     func didGetMovies(fromPage page: Int, _ movies: [Movie])
     func didGetCurrentMovies(_ movies: [Movie])
     func didSearchMovies(withTitle title: String, _ movies: [Movie])
+    func didGet(error: Error)
     
 }
 
