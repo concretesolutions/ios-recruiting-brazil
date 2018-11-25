@@ -8,13 +8,21 @@
 
 import UIKit
 
+enum FavoriteBehavior {
+    case All
+    case Filtering
+    case GenericError
+}
+
 class FavoriteViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var removeFilterConstraint: NSLayoutConstraint!
     
     var favorite: [Favorite]?
+    var filterApplied: Filter?
     let favoriteCellIdentifier = "favoriteCell"
     let favoriteToDescriptionSegue = "favoriteToDescription"
-    var behavior: Behavior = .LoadingView {
+    var behavior: FavoriteBehavior = .All {
         didSet {
             self.tableView.reloadData()
         }
@@ -24,27 +32,28 @@ class FavoriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialSetup()
     }
     
     override  func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        initialSetup()
-        UIView.performWithoutAnimation {
-            tableView.beginUpdates()
-            tableView.endUpdates()
+        tableView.reloadData()
+        if behavior == .All {
+            fetchFavorite()
         }
     }
     
+    
+    
     private func initialSetup() {
         tableView.tableFooterView = UIView()
+        removeFilterConstraint.constant = 0
         fetchFavorite()
-        tableView.layoutIfNeeded()
     }
     
     
     @IBAction func removeFilterButtonAction(_ sender: UIButton) {
-
+        setBehavior(newBehavior: .All)
     }
     
     private func fetchFavorite() {
@@ -53,16 +62,10 @@ class FavoriteViewController: UIViewController {
             if error == nil {
                 guard let data = favoriteList else {return}
                 self.favorite = data
-                // TODO: Definir uma forma de ordenação para mostrar os favoritos
-                //                self.favorite = self.favorite.map({ (fav) -> [Favorite] in
-                //                    return fav.sorted(by: { (a, b) -> Bool in
-                //                        return a.popularity.compare(b.popularity?) == .orderedDescending
-                //                    })
-                //                })
-                self.behavior = .Success
+                self.behavior = .All
                 self.tableView.reloadData()
             } else {
-                // TODO: Call generic error behavior, becaouse is not possible to load the favorite movies
+                self.setBehavior(newBehavior: .GenericError)
             }
         }
     }
@@ -74,34 +77,84 @@ class FavoriteViewController: UIViewController {
         } else if let vc = segue.destination as? FilteringViewController {
             guard let favorite = favorite else { return }
             vc.favorite = favorite
+            vc.delegate = self
         }
         
     }
-
+    
+    func getFilteredFavorite() -> [Favorite]? {
+        var favoriteFiltered = [Favorite]()
+        
+        if let data = favorite,
+            let genreFiltered = filterApplied?.genre?.first {
+            
+            let favoritesWithGenreFilter = data.filter { (fav) -> Bool in
+                guard let genres = fav.genres else { return false }
+                return genres.contains(genreFiltered)
+            }
+            
+            if !favoritesWithGenreFilter.isEmpty {
+                favoriteFiltered.append(contentsOf: favoritesWithGenreFilter)
+            }
+        }
+        
+        if let data = favorite,
+            let yearFiltered = filterApplied?.year?.first {
+            
+            let favoritesWithYearFilter = data.filter { (fav) -> Bool in
+                guard let date = fav.releaseDate else { return false }
+                let year = transformDateInYear(date as Date)
+                return year == yearFiltered
+            }
+            
+            if !favoritesWithYearFilter.isEmpty {
+                favoriteFiltered.append(contentsOf: favoritesWithYearFilter)
+            }
+        }
+        
+        return favoriteFiltered
+    }
+    
+    private func transformDateInYear(_ date: Date) -> Int {
+        let myCalendar = Calendar(identifier: .gregorian)
+        let year = myCalendar.component(.year, from: date)
+        return year
+    }
+    
 }
 
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCellIdentifier) as? FavoriteTableViewCell
-        if let data = favorite?[indexPath.row] {
-            cell?.setData(data: data)
+        
+        switch behavior {
+        case .All:
+            if let data = favorite?[indexPath.row] {
+                cell?.setData(data: data)
+            }
+        case .Filtering:
+            if let filteredData = getFilteredFavorite() {
+                cell?.setData(data: filteredData[indexPath.row])
+            }
+        default:
+            break
         }
+        
         return cell!
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        if behavior == .Success && favorite != nil {
-            return 1
-        }
-        return 0
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if behavior == .Success,
-            let numberOfRows = favorite?.count {
+        switch behavior {
+        case .All:
+            guard let numberOfRows = favorite?.count else { return 0 }
             return numberOfRows
+        case .Filtering:
+            guard let numberOfRows = getFilteredFavorite()?.count else { return 0 }
+            return numberOfRows
+        default:
+            return 0
         }
-        return 0
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -109,8 +162,17 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let data = favorite?[indexPath.row] {
-            performSegue(withIdentifier: favoriteToDescriptionSegue, sender: data)
+        switch behavior {
+        case .All:
+            if let data = favorite?[indexPath.row] {
+                performSegue(withIdentifier: favoriteToDescriptionSegue, sender: data)
+            }
+        case .Filtering:
+            if let data = getFilteredFavorite() {
+                performSegue(withIdentifier: favoriteToDescriptionSegue, sender: data[indexPath.row])
+            }
+        default:
+            break
         }
     }
     
@@ -119,11 +181,25 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            if let data = favorite?[indexPath.row] {
-                deleteFavorite(data: data)
-                self.favorite?.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.layoutIfNeeded()
+            switch behavior {
+            case .All:
+                if let data = favorite?[indexPath.row] {
+                    deleteFavorite(data: data)
+                    self.favorite?.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    tableView.layoutIfNeeded()
+                }
+            case .Filtering:
+                if let data = getFilteredFavorite() {
+                    deleteFavorite(data: data[indexPath.row])
+                    tableView.layoutIfNeeded()
+                    self.favorite?.removeAll(where: { (fav) -> Bool in
+                        fav.id == data[indexPath.row].id
+                    })
+                }
+                tableView.reloadData()
+            default:
+                break
             }
         default:
             return
@@ -132,22 +208,16 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-// MARK: Frufru setup
 extension FavoriteViewController {
-    private func setBehavior(newBehavior: Behavior) {
+    private func setBehavior(newBehavior: FavoriteBehavior) {
         behavior = newBehavior
         switch behavior {
-        case .Success:
-            tableView.backgroundView = UIView()
-        case .EmptySearch:
-            tableView.backgroundView = UIView()
-            //tableView.backgroundView = emptySearchView
-        case .LoadingView:
-            tableView.backgroundView = UIView()
-            //tableView.backgroundView = loadingView
         case .GenericError:
             tableView.backgroundView = UIView()
-            //tableView.backgroundView = genericErrorView
+        case .All:
+            removeFilterConstraint.constant = 0
+        case .Filtering:
+            removeFilterConstraint.constant = 44
         }
     }
 }
@@ -158,9 +228,16 @@ extension FavoriteViewController {
         FavoriteServices.deleteFavorite(favorite: data) { (_, error) in
             self.tableView.reloadData()
             if let err = error {
-                // TODO: avisar que não foi possível deletar o favorito
+                self.customAlert(title: "Erro", message: "Não foi possível deletar este filme favoritado.", actionTitle: "Ok")
                 print(err.localizedDescription)
             }
         }
+    }
+}
+
+extension FavoriteViewController: FilteringDelegate {
+    func setFilter(_ filter: Filter) {
+        filterApplied = filter
+        setBehavior(newBehavior: .Filtering)
     }
 }

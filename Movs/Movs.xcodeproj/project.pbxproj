@@ -46,6 +46,7 @@
 		A4E249B4219F1F2D0041C538 /* Description.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E249B3219F1F2D0041C538 /* Description.storyboard */; };
 		A4E8F4D521AACF5A006783A4 /* FilteringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E8F4D421AACF5A006783A4 /* FilteringTableViewCell.swift */; };
 		A4E8F4D721AB04E1006783A4 /* FilterDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E8F4D621AB04E1006783A4 /* FilterDetailTableViewCell.swift */; };
+		A4E8F4DA21AB1A10006783A4 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E8F4D921AB1A10006783A4 /* Filter.swift */; };
 		C0BCFC041AFD506B268E0EEA /* Pods_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E4B106923D2BA7C0524837 /* Pods_MovsUITests.framework */; };
 		F24EFC7292ED467A726E18A7 /* Pods_MovsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D453FF7455F4DB4905FA029F /* Pods_MovsTests.framework */; };
 		F6F4301AE496113C4F31C77B /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D5E7B39D9D4D5D18729564 /* Pods_Movs.framework */; };
@@ -118,6 +119,7 @@
 		A4E249B3219F1F2D0041C538 /* Description.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Description.storyboard; sourceTree = "<group>"; };
 		A4E8F4D421AACF5A006783A4 /* FilteringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringTableViewCell.swift; sourceTree = "<group>"; };
 		A4E8F4D621AB04E1006783A4 /* FilterDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailTableViewCell.swift; sourceTree = "<group>"; };
+		A4E8F4D921AB1A10006783A4 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		A890DF3A23E15AE8DD8D597C /* Pods-Movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.debug.xcconfig"; sourceTree = "<group>"; };
 		B4E4B106923D2BA7C0524837 /* Pods_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D453FF7455F4DB4905FA029F /* Pods_MovsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,8 +319,7 @@
 			children = (
 				A40E88332199AB2D00EE4D5B /* FilteringViewController.swift */,
 				A4E8F4D421AACF5A006783A4 /* FilteringTableViewCell.swift */,
-				A460253321A6FCC200B13F00 /* FilterDetailTableViewController.swift */,
-				A4E8F4D621AB04E1006783A4 /* FilterDetailTableViewCell.swift */,
+				A4E8F4D821AB17FB006783A4 /* Filter Detail */,
 			);
 			path = Filtering;
 			sourceTree = "<group>";
@@ -339,6 +340,7 @@
 				A489478B219FF0EB00EBA07B /* GenreList.swift */,
 				A4894785219FE67100EBA07B /* Genre.swift */,
 				A489479221A0AE9500EBA07B /* Favorite.swift */,
+				A4E8F4D921AB1A10006783A4 /* Filter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -385,6 +387,15 @@
 				A46C9089219BD18400472794 /* Alcefun-Bold.otf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		A4E8F4D821AB17FB006783A4 /* Filter Detail */ = {
+			isa = PBXGroup;
+			children = (
+				A460253321A6FCC200B13F00 /* FilterDetailTableViewController.swift */,
+				A4E8F4D621AB04E1006783A4 /* FilterDetailTableViewCell.swift */,
+			);
+			path = "Filter Detail";
 			sourceTree = "<group>";
 		};
 		C6AAA5BD012CE463ABBC306B /* Frameworks */ = {
@@ -629,6 +640,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A40E88342199AB2D00EE4D5B /* FilteringViewController.swift in Sources */,
+				A4E8F4DA21AB1A10006783A4 /* Filter.swift in Sources */,
 				A48947A621A1E23F00EBA07B /* FavoriteTableViewCell.swift in Sources */,
 				A48947A321A1DE5400EBA07B /* FavoriteViewController.swift in Sources */,
 				A4894779219F5FDD00EBA07B /* PopularMovieServices.swift in Sources */,
