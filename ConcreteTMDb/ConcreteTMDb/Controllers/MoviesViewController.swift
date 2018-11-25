@@ -36,7 +36,7 @@ class MoviesViewController: UIViewController {
     }
     
     func setupCollectionView() {
-        self.OutletMoviesCollectionView.layer.zPosition = 1
+        self.OutletMoviesCollectionView.layer.zPosition = -1
         self.OutletMoviesCollectionView.loadContent = self
         self.OutletMoviesCollectionView.movieSelected = self
         self.OutletMoviesCollectionView.delegate = self.OutletMoviesCollectionView
@@ -63,7 +63,9 @@ extension MoviesViewController: MoviesDataFetchCompleted {
     func fetchComplete(for movies: [Movie]) {
         self.OutletMoviesCollectionView.movies = movies
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.OutletActivityIndicator.stopAnimating()
             self.OutletMoviesCollectionView.reloadData()
+            self.OutletMoviesCollectionView.layer.zPosition = 1
         }
     }
 }
