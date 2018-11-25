@@ -44,5 +44,4 @@ class PopularMoviesResponse: Decodable {
         
         self.init(page: page, totalResults: totalResults, totalPages: totalPages, results: results)
     }
-    
 }

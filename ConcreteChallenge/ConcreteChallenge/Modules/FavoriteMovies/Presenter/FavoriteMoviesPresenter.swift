@@ -10,7 +10,6 @@ import Foundation
 
 class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInteractorOutput {
     
-    
     // MARK: - Properties
     var view: FavoriteMoviesView?
     var interactor: FavoriteMoviesInteractorInput!
@@ -24,9 +23,26 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
         self.interactor.getFavoriteMovies()
     }
     
+    func didTapFilterButton() {
+        self.router.showFilterScreen()
+    }
+    
+    func didSetFilters() {
+        self.interactor.getFavoriteMovies()
+    }
+
+    func didAskForRemoveFilterButton() {
+        self.interactor.askForRemoveFilterButton()
+    }
+    
+    func didTapRemoveFiltersButton() {
+        self.interactor.removeFilters()
+        self.didAskForRemoveFilterButton()
+    }
+    
     // MARK: - FavoriteMoviesInteractorOutput functions
-    func didGetFavoriteMovies(favoriteMovies: [Movie]) {
-        if favoriteMovies.isEmpty {
+    func didGetFavoriteMovies(favoriteMovies: [Movie], hasFilter: Bool) {
+        if favoriteMovies.isEmpty && !hasFilter {
             self.view?.showEmptyAlert()
         } else {
             self.view?.show(favoriteMovies: favoriteMovies)
@@ -37,4 +53,7 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
         self.interactor.removeFavoriteMovie(at: indexPath)
     }
     
+    func didAskForRemoveFilterButton(to activate: Bool) {
+        self.view?.setRemoveButton(to: activate)
+    }
 }

@@ -8,11 +8,12 @@
 
 import UIKit
 
-protocol FavoriteMovieRemoved {
+protocol FavoriteMoviesTableViewActions {
     func didRemoveFavoriteMovie(at indexPath: IndexPath)
+    func didTapRemoveFilters()
 }
 
-class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, FavoriteMovieRemoved {
+class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, FavoriteMoviesTableViewActions {
     
     // MARK: - Outlets
     @IBOutlet weak var favoriteMoviesTableView: FavoriteMoviesTableView!
@@ -31,6 +32,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     
     override func viewWillAppear(_ animated: Bool) {
         self.presenter.didRequestFavoriteMovies()
+        self.presenter.didAskForRemoveFilterButton()
     }
     
     // MARK: - FavoriteMoviesView Functions
@@ -43,23 +45,46 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
         self.favoriteMoviesTableView.isHidden = true
     }
     
-    // MARK: - FavoriteMovieRemoved Functions
+    func setRemoveButton(to activate: Bool) {
+        self.favoriteMoviesTableView.isRemoveButtonEnabled = activate
+    }
+    
+    
+    // MARK: - FavoriteMoviesTableViewActions Functions
     func didRemoveFavoriteMovie(at indexPath: IndexPath) {
         self.presenter.didRemoveFavoriteMovie(at: indexPath)
     }
     
+    func didTapRemoveFilters() {
+        self.presenter.didTapRemoveFiltersButton()
+    }
+    
+    
     // MARK: - Functions
     func setupNavigationBar() {
+        // Title
         self.navigationItem.title = "Movies"
+        
+        // Filter Button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"FilterIcon"), style: .plain, target: self, action: #selector(filterButtonTapped))
+        self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        
+        // Color
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.968627451, green: 0.8078431373, blue: 0.3568627451, alpha: 1)
+        
     }
     
     func setupTableView() {
         self.favoriteMoviesTableView.delegate = self.favoriteMoviesTableView
         self.favoriteMoviesTableView.dataSource = self.favoriteMoviesTableView
-        self.favoriteMoviesTableView.favoriteMovieRemoved = self
+        self.favoriteMoviesTableView.favoriteMoviesTableViewActions = self
         
         self.favoriteMoviesTableView.allowsSelection = false
+    }
+    
+    // MARK: - Navigation Bar item Functions
+    @objc func filterButtonTapped() {
+        self.presenter.didTapFilterButton()
     }
 }
 

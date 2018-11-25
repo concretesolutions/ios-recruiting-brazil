@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
-class Movie: Decodable, Encodable {
+class Movie: Decodable {
     
     // MARK: - Properties
     let id: Int
     let title: String
-    let posterPath: String
+    let posterPath: String?
+    var image: UIImage? = nil
     let genreIds: [Int]
     let overview: String
     let releaseDate: Date
@@ -31,7 +33,7 @@ class Movie: Decodable, Encodable {
     }
     
     // MARK - Inits
-    init(id: Int, title: String, posterPath: String, genreIds: [Int], overview: String, releaseDate: Date) {
+    init(id: Int, title: String, posterPath: String?, genreIds: [Int], overview: String, releaseDate: Date) {
         self.id = id
         self.title = title
         self.posterPath = posterPath
@@ -45,7 +47,7 @@ class Movie: Decodable, Encodable {
         
         let id: Int = try container.decode(Int.self, forKey: .id)
         let title: String = try container.decode(String.self, forKey: .title)
-        let posterPath: String = try container.decode(String.self, forKey: .posterPath)
+        let posterPath: String? = try? container.decode(String.self, forKey: .posterPath)
         let genreIds: [Int] = try container.decode([Int].self, forKey: .genreIds)
         let overview: String = try container.decode(String.self, forKey: .overview)
         let releaseDate: String = try container.decode(String.self, forKey: .releaseDate)
@@ -54,7 +56,6 @@ class Movie: Decodable, Encodable {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: releaseDate)
         
-        self.init(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: date ?? Date())
+        self.init(id: id, title: title, posterPath: posterPath ?? nil, genreIds: genreIds, overview: overview, releaseDate: date ?? Date())
     }
-
 }

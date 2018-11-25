@@ -15,7 +15,6 @@ protocol MovieCollectionViewActions {
 
 class PopularMoviesViewController: UIViewController, PopularMoviesView, MovieCollectionViewActions {
     
-    
     // MARK: - Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var moviesCollectionView: MovieCollectionView!
@@ -125,6 +124,5 @@ extension PopularMoviesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.presenter.didChangeSearchBar(with: searchText)
     }
-    
 }
 

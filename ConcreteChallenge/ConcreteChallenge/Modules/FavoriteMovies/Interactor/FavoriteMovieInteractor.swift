@@ -15,9 +15,14 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     
     // MARK: - FavoriteMoviesInteractorInput functions
     func getFavoriteMovies() {
-        FavoriteMovieCoreDataManager.getFavoriteMovies { (status) in
-            if status == RequestStatus.success {
-                self.output.didGetFavoriteMovies(favoriteMovies: FavoriteMovieCoreDataManager.favoriteMovies)
+        FavoriteMovieCoreDataManager.getFavoriteMovies { (status, movies) in
+            if status == RequestStatus.success, let movies = movies {
+                var hasFilter = false
+                if !FavoriteMovieCoreDataManager.datesFilter.isEmpty || !FavoriteMovieCoreDataManager.genresFilter.isEmpty {
+                    hasFilter = true
+                }
+                
+                self.output.didGetFavoriteMovies(favoriteMovies: movies, hasFilter: hasFilter)
             }
         }
     }
@@ -33,5 +38,19 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
         // Remove Movie from Favorites
         FavoriteMovieCoreDataManager.removeFavoriteMovie(at: indexPath) { (status) in
         }
+    }
+    
+    func askForRemoveFilterButton() {
+        if FavoriteMovieCoreDataManager.datesFilter.isEmpty && FavoriteMovieCoreDataManager.genresFilter.isEmpty {
+            self.output.didAskForRemoveFilterButton(to: false)
+        } else {
+            self.output.didAskForRemoveFilterButton(to: true)
+        }
+    }
+    
+    func removeFilters() {
+        FavoriteMovieCoreDataManager.datesFilter = []
+        FavoriteMovieCoreDataManager.genresFilter = []
+        self.getFavoriteMovies()
     }
 }

@@ -11,10 +11,11 @@ import CoreData
 
 class FavoriteMovieCoreDataManager {
     
-    
     // MARK: - Properties
     static var favoriteMovies: [Movie] = []
     static var favoriteMoviesNSManagedObject: [NSManagedObject] = []
+    static var datesFilter: [Date] = []
+    static var genresFilter: [Genre] = []
     
     static func saveFavoriteMovie(movie: Movie, completion: (_ status: RequestStatus) -> Void) {
         // Get context
@@ -44,7 +45,7 @@ class FavoriteMovieCoreDataManager {
         }
     }
     
-    static func getFavoriteMovies(completion: @escaping (_ status: RequestStatus) -> Void) {
+    static func getFavoriteMovies(completion: @escaping (_ status: RequestStatus, _ movies: [Movie]?) -> Void) {
         // Get context
         DispatchQueue.main.async {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -60,7 +61,7 @@ class FavoriteMovieCoreDataManager {
                 for data in result as! [NSManagedObject] {
                     let id = data.value(forKey: "id") as! Int
                     let title = data.value(forKey: "title") as! String
-                    let posterPath = data.value(forKey: "posterPath") as! String
+                    let posterPath = data.value(forKey: "posterPath") as? String ?? nil
                     let genreIds = data.value(forKey: "genreIds") as! [Int]
                     let overview = data.value(forKey: "overview") as! String
                     let releaseDate = data.value(forKey: "releaseDate") as! Date
@@ -68,10 +69,10 @@ class FavoriteMovieCoreDataManager {
                     self.favoriteMovies.append(Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate))
                 }
                 
-                completion(.success)
+                completion(.success, self.filterFavoriteMovies())
             } catch {
                 print("Failed")
-                completion(.failed)
+                completion(.failed, nil)
             }
         }
     }
@@ -92,6 +93,75 @@ class FavoriteMovieCoreDataManager {
         } catch {
             print("Error saving favorite movie into CoreData")
             completion(.failed)
+        }
+    }
+    
+    static func filterFavoriteMovies() -> [Movie] {
+        // If the filters are empty return the full array
+        if self.datesFilter.isEmpty && self.genresFilter.isEmpty {
+            return self.favoriteMovies
+        } else {
+            // Filter Main and NSManagedObject Array in case there is any delete when the filters are applied
+            var filteredMovies: [Movie] = self.favoriteMovies
+            
+            // By Date
+            if !self.datesFilter.isEmpty {
+                // Main Array
+                filteredMovies = filteredMovies.filter { (movie) -> Bool in
+                    var append = false
+                    
+                    for date in self.datesFilter {
+                        if date.year == movie.releaseDate.year {
+                            append = true
+                        }
+                    }
+                    return append
+                }
+                
+                // NSManagedObject Array
+                self.favoriteMoviesNSManagedObject = self.favoriteMoviesNSManagedObject.filter({ (movieData) -> Bool in
+                    var append = false
+                    
+                    for date in self.datesFilter {
+                        let releaseDate = movieData.value(forKey: "releaseDate") as! Date
+                        if date.year == releaseDate.year {
+                            append = true
+                        }
+                    }
+                    return append
+                })
+            }
+            
+            // By Genre
+            if !self.genresFilter.isEmpty {
+                // Main Array
+                filteredMovies = filteredMovies.filter { (movie) -> Bool in
+                    var append = false
+                    
+                    for genre in self.genresFilter {
+                        if movie.genreIds.contains(genre.id) {
+                            append = true
+                        }
+                    }
+                    return append
+                }
+                
+                // NSManagedObject Array
+                self.favoriteMoviesNSManagedObject = self.favoriteMoviesNSManagedObject.filter({ (movieData) -> Bool in
+                    var append = false
+                    
+                    for genre in self.genresFilter {
+                        let ids = movieData.value(forKey: "genreIds") as! [Int]
+                        if ids.contains(genre.id) {
+                            append = true
+                        }
+                    }
+                    return append
+                })
+            }
+            
+            
+            return filteredMovies
         }
     }
 }

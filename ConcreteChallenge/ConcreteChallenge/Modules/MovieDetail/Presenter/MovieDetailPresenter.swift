@@ -10,7 +10,6 @@ import Foundation
 
 class MovieDetailPresenter: MovieDetailPresentation, MovieDetailInteractorOutput {
     
-    
     // MARK: - Properties
     var view: MovieDetailView?
     var interactor: MovieDetailInteractorInput!

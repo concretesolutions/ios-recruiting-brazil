@@ -23,7 +23,7 @@ class PopularMoviesInteractor: PopularMoviesInteractorInput {
         MovieDataManager.fetchPopularMovies { (status) in
             if status == RequestStatus.success {
                 // Get Favorites to check which popular movie is also a favorite
-                FavoriteMovieCoreDataManager.getFavoriteMovies(completion: { (status) in
+                FavoriteMovieCoreDataManager.getFavoriteMovies(completion: { (status, _) in
                     if status == RequestStatus.success {
                         // Compare popular and favorite movies to set the favorite flag
                         for popularMovie in MovieDataManager.movies {

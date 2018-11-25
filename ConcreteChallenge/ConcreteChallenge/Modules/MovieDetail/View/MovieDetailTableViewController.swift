@@ -10,7 +10,6 @@ import UIKit
 
 class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     
-    
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
@@ -90,7 +89,7 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
         }
     }
     
-    // MARK: - Table view data source
+    // MARK: - TableView delegate and data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -119,6 +118,5 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     func setupTableView() {
         self.tableView.allowsSelection = false
     }
-    
 }
 
