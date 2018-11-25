@@ -36,7 +36,7 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     }
     
     func askForRemoveFilterButton() {
-        if FavoriteMovieCoreDataManager.datesFilter.isEmpty {
+        if FavoriteMovieCoreDataManager.datesFilter.isEmpty && FavoriteMovieCoreDataManager.genresFilter.isEmpty {
             self.output.didAskForRemoveFilterButton(to: false)
         } else {
             self.output.didAskForRemoveFilterButton(to: true)
@@ -45,6 +45,7 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     
     func removeFilters() {
         FavoriteMovieCoreDataManager.datesFilter = []
+        FavoriteMovieCoreDataManager.genresFilter = []
         self.getFavoriteMovies()
     }
 }

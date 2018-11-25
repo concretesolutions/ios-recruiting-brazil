@@ -98,34 +98,67 @@ class FavoriteMovieCoreDataManager {
     
     static func filterFavoriteMovies() -> [Movie] {
         // If the filters are empty return the full array
-        if self.datesFilter.isEmpty {
+        if self.datesFilter.isEmpty && self.genresFilter.isEmpty {
             return self.favoriteMovies
         } else {
-            // Filter Main Array
-            self.favoriteMovies = self.favoriteMovies.filter { (movie) -> Bool in
-                var append = false
-                
-                for date in self.datesFilter {
-                    if date.year == movie.releaseDate.year {
-                        append = true
+            // Filter Main and NSManagedObject Array in case there is any delete when the filters are applied
+            
+            // By Date
+            if !self.datesFilter.isEmpty {
+                // Main Array
+                self.favoriteMovies = self.favoriteMovies.filter { (movie) -> Bool in
+                    var append = false
+                    
+                    for date in self.datesFilter {
+                        if date.year == movie.releaseDate.year {
+                            append = true
+                        }
                     }
+                    return append
                 }
-                return append
+                
+                // NSManagedObject Array
+                self.favoriteMoviesNSManagedObject = self.favoriteMoviesNSManagedObject.filter({ (movieData) -> Bool in
+                    var append = false
+                    
+                    for date in self.datesFilter {
+                        let releaseDate = movieData.value(forKey: "releaseDate") as! Date
+                        if date.year == releaseDate.year {
+                            append = true
+                        }
+                    }
+                    return append
+                })
             }
             
-            // Filter the NSManagedObject as well in case there ir any
-            // delete when the filters are applied
-            self.favoriteMoviesNSManagedObject = self.favoriteMoviesNSManagedObject.filter({ (movieData) -> Bool in
-                var append = false
-                
-                for date in self.datesFilter {
-                    let releaseDate = movieData.value(forKey: "releaseDate") as! Date
-                    if date.year == releaseDate.year {
-                        append = true
+            // By Genre
+            if !self.genresFilter.isEmpty {
+                // Main Array
+                self.favoriteMovies = self.favoriteMovies.filter { (movie) -> Bool in
+                    var append = false
+                    
+                    for genre in self.genresFilter {
+                        if movie.genreIds.contains(genre.id) {
+                            append = true
+                        }
                     }
+                    return append
                 }
-                return append
-            })
+                
+                // NSManagedObject Array
+                self.favoriteMoviesNSManagedObject = self.favoriteMoviesNSManagedObject.filter({ (movieData) -> Bool in
+                    var append = false
+                    
+                    for genre in self.genresFilter {
+                        let ids = movieData.value(forKey: "genreIds") as! [Int]
+                        if ids.contains(genre.id) {
+                            append = true
+                        }
+                    }
+                    return append
+                })
+            }
+            
             
             return self.favoriteMovies
         }
