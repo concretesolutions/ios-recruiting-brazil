@@ -19,6 +19,8 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
         }
     }
     
+    var dateFilter: [Date] = []
+    
     var favoriteMovieRemoved: FavoriteMovieRemoved!
     
     // MARK: - UITableViewDelegate and UITableViewDataSource Functions

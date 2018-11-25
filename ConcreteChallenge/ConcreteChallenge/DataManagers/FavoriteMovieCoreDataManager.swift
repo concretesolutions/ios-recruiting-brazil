@@ -45,7 +45,7 @@ class FavoriteMovieCoreDataManager {
         }
     }
     
-    static func getFavoriteMovies(completion: @escaping (_ status: RequestStatus) -> Void) {
+    static func getFavoriteMovies(completion: @escaping (_ status: RequestStatus, _ movies: [Movie]?) -> Void) {
         // Get context
         DispatchQueue.main.async {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -69,10 +69,10 @@ class FavoriteMovieCoreDataManager {
                     self.favoriteMovies.append(Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate))
                 }
                 
-                completion(.success)
+                completion(.success, self.filterFavoriteMovies())
             } catch {
                 print("Failed")
-                completion(.failed)
+                completion(.failed, nil)
             }
         }
     }
@@ -93,6 +93,27 @@ class FavoriteMovieCoreDataManager {
         } catch {
             print("Error saving favorite movie into CoreData")
             completion(.failed)
+        }
+    }
+    
+    static func filterFavoriteMovies() -> [Movie] {
+        // If the filters are empty return the full array
+        if self.datesFilter.isEmpty {
+            return self.favoriteMovies
+        } else {
+            var filteredFavoriteMovies: [Movie] = []
+            
+            filteredFavoriteMovies = self.favoriteMovies.filter { (movie) -> Bool in
+                var append = false
+                
+                for date in self.datesFilter {
+                    if date.year == movie.releaseDate.year {
+                        append = true
+                    }
+                }
+                return append
+            }
+            return filteredFavoriteMovies
         }
     }
 }

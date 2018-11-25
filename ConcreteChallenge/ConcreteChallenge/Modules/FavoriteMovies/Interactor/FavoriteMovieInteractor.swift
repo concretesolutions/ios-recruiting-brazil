@@ -15,9 +15,9 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     
     // MARK: - FavoriteMoviesInteractorInput functions
     func getFavoriteMovies() {
-        FavoriteMovieCoreDataManager.getFavoriteMovies { (status) in
-            if status == RequestStatus.success {
-                self.output.didGetFavoriteMovies(favoriteMovies: FavoriteMovieCoreDataManager.favoriteMovies)
+        FavoriteMovieCoreDataManager.getFavoriteMovies { (status, movies) in
+            if status == RequestStatus.success, let movies = movies {
+                self.output.didGetFavoriteMovies(favoriteMovies: movies)
             }
         }
     }

@@ -42,7 +42,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     func showEmptyAlert() {
         self.favoriteMoviesTableView.isHidden = true
     }
-    
+     
     // MARK: - FavoriteMovieRemoved Functions
     func didRemoveFavoriteMovie(at indexPath: IndexPath) {
         self.presenter.didRemoveFavoriteMovie(at: indexPath)

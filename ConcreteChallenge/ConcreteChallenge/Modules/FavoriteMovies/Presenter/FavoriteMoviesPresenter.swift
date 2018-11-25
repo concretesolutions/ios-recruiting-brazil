@@ -10,7 +10,6 @@ import Foundation
 
 class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInteractorOutput {
     
-    
     // MARK: - Properties
     var view: FavoriteMoviesView?
     var interactor: FavoriteMoviesInteractorInput!
@@ -28,6 +27,10 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
         self.router.showFilterScreen()
     }
     
+    func didSetFilters() {
+        self.interactor.getFavoriteMovies()
+    }
+
     // MARK: - FavoriteMoviesInteractorOutput functions
     func didGetFavoriteMovies(favoriteMovies: [Movie]) {
         if favoriteMovies.isEmpty {
@@ -40,5 +43,4 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
     func didRemoveFavoriteMovie(at indexPath: IndexPath) {
         self.interactor.removeFavoriteMovie(at: indexPath)
     }
-    
 }

@@ -15,6 +15,7 @@ protocol FavoriteMoviesWireframe: class {
     static func assembleModule() -> UIViewController
     
     func showFilterScreen()
+    static func didSetFilters()
 }
 
 protocol FavoriteMoviesView {
@@ -33,6 +34,7 @@ protocol FavoriteMoviesPresentation: class {
     func didRequestFavoriteMovies()
     func didRemoveFavoriteMovie(at indexPath: IndexPath)
     func didTapFilterButton()
+    func didSetFilters()
 }
 
 protocol FavoriteMoviesInteractorInput: class {
