@@ -37,6 +37,8 @@ protocol FavoritesFilterUseCase {
     
     var output: FavoritesFilterInteractorOutput! { get set }
     
+    func getGenres()
+    func getYears()
     func add(genre: Genre)
     func remove(genre: Genre)
     func add(year: Int)
@@ -44,7 +46,12 @@ protocol FavoritesFilterUseCase {
     
 }
 
-protocol FavoritesFilterInteractorOutput { }
+protocol FavoritesFilterInteractorOutput {
+    
+    func didGet(genres: [(genre: Genre, isSelected: Bool)])
+    func didGet(years: [(year: Int, isSelected: Bool)])
+    
+}
 
 protocol FavoritesFilterWireframe {
     
