@@ -18,7 +18,7 @@ extension Movie {
     }
 
     @NSManaged public var adult: Bool
-    @NSManaged public var genresIds: NSObject?
+    @NSManaged public var genresIds: [Int]
     @NSManaged public var id: Int32
     @NSManaged public var image: NSData?
     @NSManaged public var overview: String?

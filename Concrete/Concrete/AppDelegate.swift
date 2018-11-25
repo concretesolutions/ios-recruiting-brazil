@@ -29,6 +29,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        let requestGenres = GetGenres()
+        APIManager.shared.fetch(requestGenres) { (result) in
+            switch result{
+            case .success(let data):
+                let genres = data.genres
+                let coreDataManager = CoreDataManager<Genre>()
+                
+                for genre in genres {
+                    let predicate = NSPredicate(format: "id == %i", genre.id)
+                    coreDataManager.insert(object: genre, predicate: predicate)
+                }
+                
+                do {
+                    try coreDataManager.save()
+                }catch{
+                    Logger.logError(in: self, message: "CoreData could not save because \(error.localizedDescription)")
+                }
+                
+            case .failure(let error):
+                Logger.logError(in: self, message: error.localizedDescription)
+            }
+        }
+        
         //
         self.window = UIWindow(frame: UIScreen.main.bounds)
         

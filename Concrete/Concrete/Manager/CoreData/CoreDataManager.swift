@@ -14,21 +14,27 @@ public class CoreDataManager<T:NSManagedObject>:NSObject {
     // MARK: - Properties
     // MARK: Private
     private var modelName = "Concrete"
+    private var context:NSManagedObjectContext
     
     // MARK: - Init
     override init(){
-        super.init()
+        self.context = CoreDataSingleton.shared.persistentContainer.viewContext
         
+        super.init()
     }
     
     // MARK: - Functions
     // MARK: Private
     // MARK: Public
+    
     func get(filter:NSPredicate? = nil) throws -> [T] {
         let entityName = String(describing: T.self)
-        let fetchRequest = NSFetchRequest   <T>(entityName: entityName)
+        let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: entityName)
+        if let predicate = filter{
+            fetchRequest.predicate = predicate
+        }
         
-        return try CoreDataSingleton.shared.persistentContainer.viewContext.fetch(fetchRequest)
+        return try self.context.fetch(fetchRequest)
     }
     
     func exist(predicate:NSPredicate) -> Bool {
@@ -37,28 +43,35 @@ public class CoreDataManager<T:NSManagedObject>:NSObject {
         fetchRequest.predicate = predicate
         do {
             var count = 0
-            count = try CoreDataSingleton.shared.persistentContainer.viewContext.count(for: fetchRequest)
+            count = try self.context.count(for: fetchRequest)
             return count == 1
         } catch {
             return false
         }
     }
     
-    /// Insert an NSManagedObject in the PersistentStore
-    ///
-    /// - Parameters:
-    ///   - object: object which will be insert in the PersistentStore.
-    ///   - predicate: the predicate which must be not fulfill to insert the object. Default value is `nil`
-    func insert(object:T) {
-        let context = CoreDataSingleton.shared.persistentContainer.viewContext
-        
-        context.insert(object)
+    func insert(object:T, predicate:NSPredicate? = nil) {
+        if let predicate = predicate {
+            if !self.exist(predicate: predicate) {
+                self.context.insert(object)
+            }
+        }else{
+            self.context.insert(object)
+        }
+    }
+    
+    func insert(objects:[T]) {
+        for object in objects {
+            self.insert(object: object)
+        }
     }
     
     func delete(object:T) {
-        let context = CoreDataSingleton.shared.persistentContainer.viewContext
+        let context = self.context
         context.delete(object)
     }
+    
+    func save() throws {
+        try self.context.save()
+    }
 }
-
-
