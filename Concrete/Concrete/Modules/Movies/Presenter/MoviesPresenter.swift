@@ -70,7 +70,7 @@ class MoviesPresenter: NSObject {
         
         cell.set(name: movie.title)
         cell.set(imagePath: movie.posterPath)
-        cell.set(isFavorited: movie.isFavorite)
+        cell.set(isFavorite: movie.isFavorite)
         
         return cell
     }
@@ -145,5 +145,16 @@ extension MoviesPresenter: UISearchBarDelegate {
             self.interactor.cancelSearch()
             self.view.collectionView.reloadData()
         }
+    }
+}
+
+extension MoviesPresenter: MovieCollectionViewCellDelegate {
+    func didTap(isFavorited:Bool, in cell:MovieCollectionViewCell) {
+        guard let indexPath = self.view.collectionView.indexPath(for: cell) else {
+            Logger.logError(in: self, message: "")
+            return
+        }
+        let movie = self.interactor.movies[indexPath.row]
+        self.interactor.set(movie: movie, isFavorited: isFavorited)
     }
 }

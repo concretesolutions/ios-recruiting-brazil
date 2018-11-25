@@ -134,4 +134,22 @@ class MoviesInteractor: NSObject {
             self.fetchSearchMovies(query: query, page: page)
         }
     }
+    
+    func set(movie:Movie, isFavorited:Bool) {
+        movie.isFavorite = isFavorited
+        let coreDataManager = CoreDataManager<Movie>()
+        
+        switch isFavorited {
+        case true:
+            coreDataManager.insert(object: movie)
+        case false:
+            coreDataManager.delete(object: movie)
+        }
+        
+        do {
+            try coreDataManager.save()
+        } catch {
+            Logger.logError(in: self, message: "Could not save Movie in CoreData")
+        }
+    }
 }

@@ -8,14 +8,22 @@
 
 import UIKit
 
+protocol MovieCollectionViewCellDelegate:class {
+    func didTap(isFavorited:Bool, in cell:MovieCollectionViewCell)
+}
+
 class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     // MARK: Private
     private var imagePath:String!
+    private var isFavorited = false
     // MARK: Public
     @IBOutlet weak var outletMovieLabel:UILabel!
     @IBOutlet weak var outletMovieImage:UIImageView!
+    @IBOutlet weak var outletFavoriteButton: UIButton!
+    
+    weak var delegate:MovieCollectionViewCellDelegate?
     
     // MARK: - UICollectionViewCell
     override func awakeFromNib() {
@@ -80,7 +88,19 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func set(isFavorited: Bool) {
-        
+    func set(isFavorite:Bool) {
+        self.isFavorited = isFavorite
+        switch self.isFavorited {
+        case true:
+            self.outletFavoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+        case false:
+            self.outletFavoriteButton.setImage(#imageLiteral(resourceName: "favorite_empty_icon"), for: .normal)
+        }
+    }
+    
+    // MARK: - IBActions
+    @IBAction func tapFavorite(_ sender: UIButton) {
+        self.set(isFavorite: !self.isFavorited)
+        self.delegate?.didTap(isFavorited: self.isFavorited, in: self)
     }
 }
