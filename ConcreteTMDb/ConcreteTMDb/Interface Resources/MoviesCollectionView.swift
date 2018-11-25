@@ -14,7 +14,7 @@ class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     
     var movies: [Movie] = []
     weak var movieSelected: MovieCellSelected?
-    var page = 2
+    weak var loadContent: LoadMoreContentAfterPagination?
     
     // MARK: - UICollectionView DataSource
     
@@ -41,9 +41,9 @@ class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         if indexPath.item == self.movies.count - 1 {
-            
-//            TMDataManager.fetchMovies(page: self.page)
-//            self.page += 1
+            if let loadDelegate = self.loadContent {
+                loadDelegate.loadMoreMovies()
+            }
         }
         
     }

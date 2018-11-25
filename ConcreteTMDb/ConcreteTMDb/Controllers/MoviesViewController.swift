@@ -18,6 +18,7 @@ class MoviesViewController: UIViewController {
     
     // MARK: - Properties
     var movieToShow: MoviesCollectionViewCell?
+    var page = 1
     
     // MARK: - Life Cycle Functions
     
@@ -28,11 +29,12 @@ class MoviesViewController: UIViewController {
         self.setupSearch()
         
         TMDataManager.moviesDataCompleted = self
-        TMDataManager.fetchMovies(page: 1)
+        TMDataManager.fetchMovies(page: self.page)
     }
     
     func setupCollectionView() {
         self.OutletMoviesCollectionView.layer.zPosition = 1
+        self.OutletMoviesCollectionView.loadContent = self
         self.OutletMoviesCollectionView.movieSelected = self
         self.OutletMoviesCollectionView.delegate = self.OutletMoviesCollectionView
         self.OutletMoviesCollectionView.dataSource = self.OutletMoviesCollectionView
@@ -56,8 +58,7 @@ class MoviesViewController: UIViewController {
 
 extension MoviesViewController: MoviesDataFetchCompleted {
     func fetchComplete(for movies: [Movie]) {
-        self.OutletMoviesCollectionView.movies.append(contentsOf: movies)
-        
+        self.OutletMoviesCollectionView.movies = movies
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.OutletMoviesCollectionView.reloadData()
         }
@@ -89,7 +90,10 @@ extension MoviesViewController: UISearchBarDelegate {
             self.OutletMoviesCollectionView.movies = moviesSearched
             
             if moviesSearched.count == 0 {
-                self.OutletMoviesCollectionView.layer.zPosition = -1
+        
+                // Empty Search
+                self.presentEmptySearchMessage()
+                
             } else {
                 self.OutletMoviesCollectionView.layer.zPosition = 1
             }
@@ -103,3 +107,25 @@ extension MoviesViewController: UISearchBarDelegate {
         self.OutletSearchBar.resignFirstResponder()
     }
 }
+
+extension MoviesViewController: PresentMessageForException {
+    func presentEmptySearchMessage() {
+        self.OutletMoviesCollectionView.layer.zPosition = -1
+    }
+    
+    func presentGenericErrorMessage() {
+        
+    }
+}
+
+extension MoviesViewController: LoadMoreContentAfterPagination {
+    func loadMoreMovies() {
+        
+        if self.OutletSearchBar.text == "" {
+            self.page += 1
+            TMDataManager.fetchMovies(page: self.page)
+        }
+    }
+}
+
+

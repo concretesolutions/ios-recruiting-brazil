@@ -19,3 +19,12 @@ protocol MoviesDataFetchCompleted: class {
 protocol GenresDataFetchCompleted: class {
     func fetchComplete(for genres: [Genre])
 }
+
+protocol PresentMessageForException: class {
+    func presentEmptySearchMessage()
+    func presentGenericErrorMessage()
+}
+
+protocol LoadMoreContentAfterPagination: class {
+    func loadMoreMovies()
+}
