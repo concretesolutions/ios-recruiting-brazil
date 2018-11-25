@@ -38,7 +38,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
             APIDataManager.readPosterImage(withCode: movie.posterPath ?? "") { image in
                 DispatchQueue.main.async {
                     self.poster.hideActivityIndicator()
-                    movie.posterImage = image ?? UIImage(named: "Movies")
+                    movie.posterImage = image ?? UIImage(named: "default")
                     self.poster.image = movie.posterImage
                 }
             }

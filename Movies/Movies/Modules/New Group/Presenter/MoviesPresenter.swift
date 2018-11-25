@@ -23,6 +23,10 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
         self.interactor.getMovies(fromPage: 1)
     }
     
+    func viewDidAppear() {
+        self.interactor.getCurrentMovies()
+    }
+    
     func didSelect(movie: Movie) {
         self.router.presentMovieDetailsFor(movie)
     }
@@ -40,6 +44,7 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     }
     
     func didFinishSearch() {
+        self.interactor.finishSearch()
         self.interactor.getCurrentMovies()
     }
     
