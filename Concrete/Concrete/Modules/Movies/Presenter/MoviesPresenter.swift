@@ -11,6 +11,8 @@ import UIKit
 class MoviesPresenter: NSObject {
     // MARK: - Variables
     // MARK: Private
+    private var query:String?
+    
     // MARK: Public
     var router: MoviesRouter
     var interactor: MoviesInteractor
@@ -113,19 +115,22 @@ extension MoviesPresenter: MoviesInteractorDelegate {
 
 extension MoviesPresenter: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text != nil {
-            searchBar.text = ""
-            self.interactor.cancelSearch()
-        }
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
+        self.interactor.change(status: .normal)
+        self.view.collectionView.reloadData()
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
-            self.interactor.fetchSearchMovies(query: text)
+            self.query = text
+            self.interactor.change(status: .searching(query: searchBar.text ?? ""))
+            self.interactor.fetchMovies()
         }
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if searchBar.text == nil || searchBar.text?.isEmpty ?? false {
             self.interactor.cancelSearch()
+            self.view.collectionView.reloadData()
         }
     }
 }

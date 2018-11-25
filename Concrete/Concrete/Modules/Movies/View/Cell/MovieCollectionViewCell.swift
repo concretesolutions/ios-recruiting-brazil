@@ -53,7 +53,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     func set(imagePath: String?){
-        //TODO: - Match image to correct cell
+        
         guard let imagePathValidated = imagePath else {
             Logger.logError(in: self, message: "Could not get instance from imagePath:\(imagePath ?? "Nil")")
             return
