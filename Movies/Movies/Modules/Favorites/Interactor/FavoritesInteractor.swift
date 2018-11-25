@@ -18,7 +18,7 @@ class FavoritesInteractor: FavoritesUseCase {
     
     func readFavoriteMovies() {
         let movies = MovieDataManager.readFavoriteMovies()
-        movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath ?? "") }
+        movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath) }
         self.output.didRead(movies: movies)
     }
     
@@ -29,7 +29,7 @@ class FavoritesInteractor: FavoritesUseCase {
     func searchMovies(withTitle title: String) {
         let clearSearchText = title.trimmingCharacters(in: CharacterSet(charactersIn: " ")).lowercased()
         let movies = MovieDataManager.readFavoriteMovies()
-        movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath ?? "") }
+        movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath) }
         let searchedMovies = movies.filter { movie in
             let clearTitle = movie.title.trimmingCharacters(in: CharacterSet(charactersIn: " ")).lowercased()
             return clearTitle.contains(clearSearchText)
@@ -39,10 +39,7 @@ class FavoritesInteractor: FavoritesUseCase {
     
     func unfavorite(movie: Movie) {
         MovieDataManager.deleteFavoriteMovie(withId: movie.id)
-        ImageDataManager.deleteImage(withPosterPath: movie.posterPath ?? "")
+        ImageDataManager.deleteImage(withPosterPath: movie.posterPath)
     }
-    
-    
-    
     
 }

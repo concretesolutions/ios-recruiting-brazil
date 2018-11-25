@@ -33,9 +33,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.setFavoriteButtonImage()
         if let posterImage = movie.posterImage {
             self.poster.image = posterImage
+        } else if movie.isFavorite {
+            self.poster.image = ImageDataManager.readImage(withPosterPath: movie.posterPath)
         } else {
             self.poster.showActivityIndicator()
-            APIDataManager.readPosterImage(withCode: movie.posterPath ?? "") { image in
+            APIDataManager.readPosterImage(withCode: movie.posterPath) { image in
                 DispatchQueue.main.async {
                     self.poster.hideActivityIndicator()
                     movie.posterImage = image ?? UIImage(named: "default")
