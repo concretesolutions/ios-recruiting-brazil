@@ -14,9 +14,16 @@ extension UIColor {
             return #colorLiteral(red: 0.968627451, green: 0.8078431373, blue: 0.3921568627, alpha: 1)
         }
     }
+    
     open class var MovDarkYellow: UIColor {
         get{
             return #colorLiteral(red: 0.8470588235, green: 0.5882352941, blue: 0.1843137255, alpha: 1)
+        }
+    }
+    
+    open class var MovGray: UIColor {
+        get{
+            return #colorLiteral(red: 0.2013017833, green: 0.2660024762, blue: 0.4221146107, alpha: 1)
         }
     }
 }

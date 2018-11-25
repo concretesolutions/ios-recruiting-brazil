@@ -9,7 +9,6 @@
 import UIKit
 
 public class ToggleButton: UIButton, CodeView {
-    
     var isOn: Bool {
         didSet{
             self.setImage((self.isOn ? self.onImage : self.offImage), for: .normal)
@@ -40,9 +39,7 @@ public class ToggleButton: UIButton, CodeView {
         self.toggleAction(self.isOn)
     }
     
-    func buildViewHierarchy() {
-        
-    }
+    func buildViewHierarchy() {}
     
     func setupConstraints() {
         self.imageView?.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +49,15 @@ public class ToggleButton: UIButton, CodeView {
         self.imageView?.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    func setupAdditionalConfiguration() {
-        
+    func setupAdditionalConfiguration() {}
+}
+
+public class FavoriteToggle: ToggleButton {
+    public init() {
+        super.init(onImage: UIImage(named: "favorite_full_icon")!, offImage: UIImage(named: "favorite_gray_icon")!)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }

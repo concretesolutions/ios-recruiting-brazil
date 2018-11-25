@@ -37,10 +37,7 @@ class ImageTableViewCell: UITableViewCell, CodeView {
         self.imageView?.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
         self.imageView?.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
         self.imageView?.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
-//        myImageView.heightAnchor.constraint(equalTo: myImageView.widthAnchor, multiplier: CGFloat(780/439)).isActive = true
     }
     
-    func setupAdditionalConfiguration() {
-        // 🙃
-    }
+    func setupAdditionalConfiguration() {}
 }

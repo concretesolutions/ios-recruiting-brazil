@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "MoviesCell"
 
 class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDataSourcePrefetching, UISearchResultsUpdating, UISearchBarDelegate {
     var moviesTotal: Int =  0
@@ -125,48 +125,6 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
             self.showErrorMessage(description ?? "Generic Error")
         case .empty(let query):
             self.showErrorMessage("No result found for \"\(query)\"")
-        }
-    }
-    
-    // MARK: UICollectionViewDataSource
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.moviesTotal
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MovieCollectionViewCell else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        }
-        
-        if !isLoadingCell(for: indexPath) {
-            let movie = movies[indexPath.row]
-            cell.movie = movie
-            cell.toggle.isOn = FavoriteManager.shared.existsMovie(withID: movie.id)
-            cell.toggle.toggleAction = { isOn in
-                if isOn {
-                    FavoriteManager.shared.favoriteMovie(movie)
-                } else {
-                    FavoriteManager.shared.unfavoriteMovie(withID: movie.id)
-                }
-            }
-        }
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) && !self.isFetching {
-            self.isFetching = true
-            TMDBManager.shared.getNextPage { [weak self](response) in
-                //FIXME:
-                guard let self = self else {return}
-                self.handleDataFetch(response, isUpdating: true)
-            }
         }
     }
     

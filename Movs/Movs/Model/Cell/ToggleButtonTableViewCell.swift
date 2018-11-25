@@ -10,7 +10,7 @@ import UIKit
 
 public class ToggleButtonTableViewCell: UITableViewCell, CodeView {
     lazy var toggle: ToggleButton = {
-        let button = ToggleButton(onImage: UIImage(named: "favorite_full_icon")!, offImage: UIImage(named: "favorite_gray_icon")!)
+        let button = FavoriteToggle()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
