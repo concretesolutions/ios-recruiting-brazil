@@ -30,12 +30,12 @@ class APIDataManager {
     
     // MARK: - Functions
     
-    static func readPopular(fromPage page: Int, callback: @escaping ([Movie]?, Error?)->()) {
+    static func readPopular(fromPage page: Int, callback: @escaping ([Movie], Error?)->()) {
         if let url = URL(string: RequestURL.readPopular(fromPage: page)) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
-                    callback(nil, error)
+                    callback([], error)
                     return
                 }
                 if let data = data {
@@ -56,12 +56,12 @@ class APIDataManager {
         }
     }
     
-    static func searchMovies(withTitle title: String, callback: @escaping ([Movie]?, Error?)->()) {
+    static func searchMovies(withTitle title: String, callback: @escaping ([Movie], Error?)->()) {
         if let url = URL(string: RequestURL.searchMovies(withTitle: title)) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
-                    callback(nil, error)
+                    callback([], error)
                     return
                 }
                 if let data = data {
@@ -82,12 +82,12 @@ class APIDataManager {
         }
     }
     
-    static func readGenres(callback: @escaping ([Genre]?, Error?)->()) {
+    static func readGenres(callback: @escaping ([Genre], Error?)->()) {
         if let url = URL(string: RequestURL.readGenres) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
-                    callback(nil, error)
+                    callback([], error)
                     return
                 }
                 if let data = data {
