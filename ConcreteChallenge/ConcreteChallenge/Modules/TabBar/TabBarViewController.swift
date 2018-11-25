@@ -32,5 +32,4 @@ class TabBarViewController: UITabBarController {
         self.viewControllers = [PopularMoviesRouter.assembleModule(), FavoriteMoviesRouter.assembleModule()]
         self.selectedIndex = 0
     }
-    
 }

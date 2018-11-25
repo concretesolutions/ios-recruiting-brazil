@@ -15,7 +15,6 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
     var interactor: FilterInteractorInput!
     var router: FilterWireframe!
     
-    
     // MARK: - FilterPresentation functions
     func viewDidLoad() {
         
@@ -45,5 +44,4 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
     func didGetDateFilter(dates: [Date]) {
         self.view?.updateDateFilterIndicator(with: dates)
     }
-
 }

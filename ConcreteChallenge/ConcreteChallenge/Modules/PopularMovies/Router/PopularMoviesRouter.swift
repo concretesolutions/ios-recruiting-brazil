@@ -10,7 +10,6 @@ import UIKit
 
 class PopularMoviesRouter: PopularMoviesWireframe {
     
-    
     weak var viewController: UIViewController?
     static var presenter: PopularMoviesPresentation!
     

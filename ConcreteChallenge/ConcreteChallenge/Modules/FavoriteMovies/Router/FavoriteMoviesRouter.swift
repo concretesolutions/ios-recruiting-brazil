@@ -42,8 +42,4 @@ class FavoriteMoviesRouter: FavoriteMoviesWireframe {
         let filterViewController = FilterRouter.assembleModule()
         self.viewController?.present(filterViewController, animated: true, completion: nil)
     }
-    
-    static func didSetFilters() {
-        
-    }
 }

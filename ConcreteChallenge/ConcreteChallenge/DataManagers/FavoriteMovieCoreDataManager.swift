@@ -11,7 +11,6 @@ import CoreData
 
 class FavoriteMovieCoreDataManager {
     
-    
     // MARK: - Properties
     static var favoriteMovies: [Movie] = []
     static var favoriteMoviesNSManagedObject: [NSManagedObject] = []

@@ -10,7 +10,6 @@ import Foundation
 
 class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractorOutput {
     
-    
     // MARK: - Properties
     var view: PopularMoviesView?
     var interactor: PopularMoviesInteractorInput!

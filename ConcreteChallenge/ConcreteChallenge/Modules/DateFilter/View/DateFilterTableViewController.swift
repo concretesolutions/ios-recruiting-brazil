@@ -19,7 +19,6 @@ class DateFilterTableViewController: UITableViewController, DateFilterView, Date
     @IBOutlet var dateFilterTableView: DateFilterTableView!
     
     // MARK: - Actions
-    
 
     // MARK: - Properties
     var presenter: DateFilterPresentation!
@@ -37,7 +36,6 @@ class DateFilterTableViewController: UITableViewController, DateFilterView, Date
     func showDates(dates: [Date]) {
         (self.tableView as? DateFilterTableView)?.dates = dates
     }
-    
     
     // MARK: - Functions
     func setupNavigationBar() {
@@ -66,6 +64,5 @@ class DateFilterTableViewController: UITableViewController, DateFilterView, Date
     func didDeselectDate(date: Date) {
         self.presenter.didDeselectDate(date: date)
     }
-    
 }
 

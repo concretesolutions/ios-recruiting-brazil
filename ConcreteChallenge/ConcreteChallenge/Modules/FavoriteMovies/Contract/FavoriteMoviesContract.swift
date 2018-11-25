@@ -15,7 +15,6 @@ protocol FavoriteMoviesWireframe: class {
     static func assembleModule() -> UIViewController
     
     func showFilterScreen()
-    static func didSetFilters()
 }
 
 protocol FavoriteMoviesView {

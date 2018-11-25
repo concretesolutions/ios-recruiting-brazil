@@ -10,7 +10,6 @@ import UIKit
 
 class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     
-    
     // MARK: - Outlets
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
@@ -119,6 +118,5 @@ class MovieDetailTableViewController: UITableViewController, MovieDetailView {
     func setupTableView() {
         self.tableView.allowsSelection = false
     }
-    
 }
 

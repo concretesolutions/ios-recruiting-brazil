@@ -57,7 +57,5 @@ class Movie: Decodable {
         let date = dateFormatter.date(from: releaseDate)
         
         self.init(id: id, title: title, posterPath: posterPath ?? nil, genreIds: genreIds, overview: overview, releaseDate: date ?? Date())
-        
     }
-
 }

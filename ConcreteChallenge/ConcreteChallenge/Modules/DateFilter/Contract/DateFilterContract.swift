@@ -15,7 +15,6 @@ protocol DateFilterWireframe: class {
     static func assembleModule() -> UIViewController
     
     func didTapSaveButton()
-
 }
 
 protocol DateFilterView {
