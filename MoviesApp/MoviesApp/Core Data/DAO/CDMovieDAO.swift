@@ -48,6 +48,21 @@ final class CDMovieDAO{
         return persistedMovies
     }
     
+    static func fetchMovies(with title:String) -> [CDMovie]{
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PersistedEntity.movie)
+        let predicate = NSPredicate(format: "title contains[c] %@", title)
+        fetchRequest.predicate = predicate
+        
+        do{
+            let movies = try DatabaseManager.getContext().fetch(fetchRequest)
+            return movies as! [CDMovie]
+        }catch{
+            return []
+        }
+        
+    }
+    
     static func hasFavoriteMovie(with id:Int) -> Bool{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PersistedEntity.movie)
         let predicate = NSPredicate(format: "id == \(id)")

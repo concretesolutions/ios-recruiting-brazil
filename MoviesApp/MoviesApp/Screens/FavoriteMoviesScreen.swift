@@ -32,6 +32,12 @@ final class FavoriteMoviesScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setup(searchController:UISearchController){
+        searchController.searchBar.tintColor = Palette.blue
+        searchController.searchBar.returnKeyType = .search
+        searchController.searchBar.placeholder = "Search for Movies..."
+    }
+    
 }
 
 extension FavoriteMoviesScreen: ViewCode{

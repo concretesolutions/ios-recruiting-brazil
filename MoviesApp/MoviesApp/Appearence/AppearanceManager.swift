@@ -26,12 +26,18 @@ struct AppearanceManager{
         tabBarAppearance.barTintColor = Palette.yellow
     }
     
-    static var collectionViewSpacing:CGFloat{
-        return 15.0
+    static func customizeTextField(){
+        let textFieldAppearance = UITextField.appearance()
+        textFieldAppearance.attributedPlaceholder = NSAttributedString(string: "Search for Movies", attributes: [NSAttributedString.Key.foregroundColor : Palette.transparentBlue])
     }
     
-    static var navigationHeight:CGFloat{
-        return UINavigationBar.appearance().frame.height
+    static func customizeSearchBar(){
+        let searchBarAppearance = UISearchBar.appearance()
+        searchBarAppearance.setImage(UIImage.icon.search, for: .search, state: .normal)
+    }
+    
+    static var collectionViewSpacing:CGFloat{
+        return 15.0
     }
     
 }

@@ -34,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AppearanceManager.customizeNavigationBar()
         AppearanceManager.customizeTabBar()
+        AppearanceManager.customizeTextField()
+        AppearanceManager.customizeSearchBar()
         
         self.window = window
         

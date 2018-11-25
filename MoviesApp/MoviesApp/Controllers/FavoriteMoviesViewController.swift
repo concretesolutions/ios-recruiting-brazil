@@ -16,6 +16,7 @@ final class FavoriteMoviesViewController: UIViewController {
     
     let screen = FavoriteMoviesScreen()
     var movies:[CDMovie] = []
+    var titleSearched:String?
     
     var isFiltering = false
     var filteredYears:[String] = []
@@ -36,6 +37,7 @@ final class FavoriteMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchBar()
     }
     
     override func loadView() {
@@ -44,13 +46,8 @@ final class FavoriteMoviesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchPersistedMovies()
+        updateFavoriteMovies(movies: nil)
         super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.isFiltering = false
-        super.viewWillDisappear(animated)
     }
     
     func setupNavbarButton(){
@@ -70,11 +67,20 @@ final class FavoriteMoviesViewController: UIViewController {
 
 extension FavoriteMoviesViewController{
     
-    func fetchPersistedMovies(){
-        if !isFiltering{
-            self.movies = CDMovieDAO.getAll()
-            self.screen.tableView.setupTableView(with: movies)
+    func fetchPersistedMovies() -> [CDMovie]{
+        return CDMovieDAO.getAll()
+    }
+    
+    func updateFavoriteMovies(movies:[CDMovie]?){
+        
+        var updatedMovies = movies != nil ? movies! : fetchPersistedMovies()
+        if let searched = self.titleSearched{
+            updatedMovies = CDMovieDAO.fetchMovies(with: searched)
         }
+        updatedMovies = filterMovies(movies: updatedMovies, years: self.filteredYears, genres: self.filteredGenres)
+        self.movies = updatedMovies
+        self.screen.tableView.setupTableView(with: updatedMovies, filtering: self.isFiltering)
+        
     }
     
 }
@@ -87,7 +93,11 @@ extension FavoriteMoviesViewController: FilterApplier{
         self.filteredYears = years
         self.filteredGenres = genres
         
-        var filteredMovies = self.movies
+        updateFavoriteMovies(movies: nil)
+    }
+    
+    func filterMovies(movies:[CDMovie], years:[String], genres:[String]) -> [CDMovie]{
+        var filteredMovies = movies
         
         if years.count > 0{
             filteredMovies = filteredMovies.filter { (movie) -> Bool in
@@ -106,7 +116,7 @@ extension FavoriteMoviesViewController: FilterApplier{
             }
         }
         
-        self.screen.tableView.setupTableView(with: filteredMovies, filtering: true)
+        return filteredMovies
     }
     
 }
@@ -117,7 +127,41 @@ extension FavoriteMoviesViewController: FilterResetter{
         self.filteredYears = []
         self.filteredGenres = []
         self.isFiltering = false
-        self.fetchPersistedMovies()
+        updateFavoriteMovies(movies: nil)
+    }
+    
+}
+
+//Search Controller/Bar
+extension FavoriteMoviesViewController: UISearchBarDelegate{
+    
+    func setupSearchBar(){
+        self.definesPresentationContext = true
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        self.navigationItem.searchController = searchController
+        self.screen.setup(searchController: searchController)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text{
+            if !text.isEmpty{
+                var movies = CDMovieDAO.fetchMovies(with: text)
+                movies = movies.filter({ (movie) -> Bool in
+                    self.movies.contains(movie)
+                })
+                self.titleSearched = text
+                updateFavoriteMovies(movies: movies)
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.titleSearched = nil
+        updateFavoriteMovies(movies: nil)
     }
     
 }

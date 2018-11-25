@@ -41,7 +41,7 @@ class PopularMoviesScreen: UIView {
     func setup(searchController:UISearchController){
         searchController.searchBar.tintColor = Palette.blue
         searchController.searchBar.returnKeyType = .search
-        searchController.searchBar.placeholder = "Search for Movies..."
+//        searchController.searchBar.placeholder = "Search for Movies..."
     }
     
     func refreshUI(with state: PresentationState){

@@ -12,7 +12,7 @@ import SDWebImage
 extension UIImageView{
     
     func download(image:String){
-        let fullString = "https://image.tmdb.org/t/p/w500\(image)"
+        let fullString = "\(APIRequest.fetchImage.rawValue)\(image)"
         
         guard let imageURL = URL(string: fullString) else {return}
         

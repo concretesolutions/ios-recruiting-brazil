@@ -15,6 +15,7 @@ public enum Palette{
     static let orange = UIColor(red: 217, green: 151, blue: 30, alpha: 1.0)
     
     static let blue = UIColor(red: 45, green: 48, blue: 71, alpha: 1.0)
+    static let transparentBlue = UIColor(red: 45, green: 48, blue: 71, alpha: 0.5)
     
     static let white = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
     

@@ -42,14 +42,13 @@ class PopularMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.definesPresentationContext = true
         self.fetchMovies()
         self.fetchGenres()
         self.setupSearchBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.screen.collectionView.reloadData()
+        self.screen.collectionView.reloadData()
         super.viewWillAppear(animated)
     }
     
@@ -129,13 +128,12 @@ extension PopularMoviesViewController: MovieSelectionDelegate{
 extension PopularMoviesViewController: UISearchBarDelegate{
     
     func setupSearchBar(){
-        
+        self.definesPresentationContext = true
         let searchController = UISearchController(searchResultsController: nil)
         searchController.definesPresentationContext = true
         searchController.searchBar.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.tintColor = Palette.blue
         self.navigationItem.searchController = searchController
         self.screen.setup(searchController: searchController)
     }

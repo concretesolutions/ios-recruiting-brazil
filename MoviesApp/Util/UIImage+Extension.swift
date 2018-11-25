@@ -45,6 +45,10 @@ extension UIImage{
             return UIImage(named: "FilterIcon")!
         }
         
+        static var search:UIImage{
+            return UIImage(named: "search_icon")!
+        }
+        
     }
     
     enum error{

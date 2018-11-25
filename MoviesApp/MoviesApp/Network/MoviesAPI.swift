@@ -28,6 +28,7 @@ enum APIRequest:String{
     case fecthPopularMovies = "movie/popular"
     case searchMovie = "search/movie"
     case fetchGenres = ""
+    case fetchImage = "https://image.tmdb.org/t/p/w500"
 }
 
 class MoviesServiceImplementation: MoviesService{
