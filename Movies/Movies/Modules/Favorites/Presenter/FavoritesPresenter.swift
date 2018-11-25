@@ -37,6 +37,8 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
             self.selectedMovie = nil
             self.selectedMovieIndex = nil
             self.selectedMovieFavoriteState = nil
+        } else {
+            self.interactor.readFavoriteMovies()
         }
     }
     

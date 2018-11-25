@@ -32,5 +32,4 @@ class FavoritesTVDelegate: NSObject, UITableViewDelegate {
         return 190.0
     }
     
-    
 }
