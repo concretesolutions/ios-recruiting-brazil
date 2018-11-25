@@ -15,7 +15,7 @@ protocol FavoritesView: class {
     func present(movies: [Movie])
     func showRemoveFilterButton()
     func hideRemoveFilterButton()
-    
+    func delete(movieAt index: Int)
 }
 
 protocol FavoritesPresentation {
@@ -25,7 +25,8 @@ protocol FavoritesPresentation {
     var interactor: FavoritesUseCase! { get set }
     
     func viewDidLoad()
-    func didSelect(movie: Movie)
+    func viewDidAppear()
+    func didSelect(movie: Movie, index: Int)
     func didUnfavorite(movie: Movie)
     func didTapRemoveFilterButton()
     func didSearchMovies(withTitle title: String)

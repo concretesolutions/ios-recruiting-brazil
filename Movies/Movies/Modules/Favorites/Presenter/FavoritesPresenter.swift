@@ -16,13 +16,36 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
     var router: FavoritesWireframe!
     var interactor: FavoritesUseCase!
     
+    private var selectedMovie: Movie?
+    private var selectedMovieIndex: Int?
+    private var selectedMovieFavoriteState: Bool?
+    
+    
     // MARK: - FavoritesPresentation protocol functions
     
     func viewDidLoad() {
         self.interactor.readFavoriteMovies()
     }
     
-    func didSelect(movie: Movie) {
+    func viewDidAppear() {
+        if let sm = self.selectedMovie,
+           let smi = self.selectedMovieIndex,
+           let smfs = self.selectedMovieFavoriteState {
+            if smfs != sm.isFavorite {
+                self.view?.delete(movieAt: smi)
+            }
+            self.selectedMovie = nil
+            self.selectedMovieIndex = nil
+            self.selectedMovieFavoriteState = nil
+        } else {
+            self.interactor.readFavoriteMovies()
+        }
+    }
+    
+    func didSelect(movie: Movie, index: Int) {
+        self.selectedMovie = movie
+        self.selectedMovieIndex = index
+        self.selectedMovieFavoriteState = movie.isFavorite
         self.router.presentMovieDetailsFor(movie)
     }
     

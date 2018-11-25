@@ -41,11 +41,23 @@ class FavoritesTVDataSource: NSObject, UITableViewDataSource {
         return reusableCell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.presenter.didUnfavorite(movie: self.movies[indexPath.row])
+            self.movies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     // MARK: - Util functions
     
     func update(movies: [Movie]) {
         self.movies = movies
         self.tableView?.reloadData()
+    }
+    
+    func delete(movieAt index: Int) {
+        self.movies.remove(at: index)
     }
     
 }
