@@ -15,7 +15,7 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     weak var view: MoviesView?
     var router: MoviesWireframe!
     var interactor: MoviesUseCase!
-    private var lastMoviesPage: Int = 1
+    private var lastMoviesPage: Int = -1
     
     // MARK: - MoviesPresentation protocol functions
     
@@ -24,7 +24,9 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     }
     
     func viewDidAppear() {
-        self.interactor.getCurrentMovies()
+        if lastMoviesPage != -1 {
+            self.interactor.getCurrentMovies()
+        }
     }
     
     func didSelect(movie: Movie) {
@@ -57,9 +59,9 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
         if page == 1 {
             self.view?.present(movies: movies)
         } else {
-            self.lastMoviesPage = page
             self.view?.presentNew(movies: movies)
         }
+        self.lastMoviesPage = page
     }
     
     func didGetCurrentMovies(_ movies: [Movie]) {

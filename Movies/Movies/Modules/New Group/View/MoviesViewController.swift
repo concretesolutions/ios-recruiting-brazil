@@ -78,13 +78,20 @@ class MoviesViewController: UIViewController, MoviesView {
     }
     
     private func present(view: UIView) {
-        self.hideActivityIndicator()
-        self.errorView.isHidden = true
-        self.emptyView.isHidden = true
-        self.movies.isHidden = true
-        view.isHidden = false
-        view.updateConstraints()
-        
+        DispatchQueue.main.async {
+            self.hideActivityIndicator()
+            if let searchText = self.searchBar.text {
+                if searchText.isEmpty {
+                    self.searchBar.isUserInteractionEnabled = false
+                }
+            } else {
+                self.searchBar.isUserInteractionEnabled = false
+            }
+            self.errorView.isHidden = true
+            self.emptyView.isHidden = true
+            self.movies.isHidden = true
+            view.isHidden = false
+        }
     }
     
     // MARK: - MoviesView protocol functions
@@ -96,6 +103,7 @@ class MoviesViewController: UIViewController, MoviesView {
             self.movies.isHidden = false
             self.hideActivityIndicator()
             self.dataSource.update(movies: movies)
+            self.searchBar.isUserInteractionEnabled = true
         }
     }
     
