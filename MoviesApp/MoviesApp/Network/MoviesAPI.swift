@@ -7,11 +7,9 @@
 //
 
 import Foundation
-import Keys
 
 struct MoviesAPIConfig {
-    fileprivate static let keys = MoviesAppKeys()
-    static let apikey = keys.aPIKey
+    static let apikey = "059b457034e531c9b057bd395f9fe913"
 }
 
 enum Result<T> {
@@ -25,6 +23,7 @@ protocol MoviesService{
 }
 
 enum APIRequest:String{
+    case base = "https://api.themoviedb.org/3/"
     case fecthPopularMovies = "movie/popular"
     case searchMovie = "search/movie"
     case fetchGenres = "genre/movie/list"
@@ -33,7 +32,6 @@ enum APIRequest:String{
 
 class MoviesServiceImplementation: MoviesService{
     
-    var endpoint:String = "https://api.themoviedb.org/3/"
     var isFetchInProgress = false
     
     func fetchPopularMovies(request: APIRequest, query:String? = nil, page:Int? = nil, callback: @escaping (Result<MovieResponse>) -> Void) {
@@ -43,7 +41,7 @@ class MoviesServiceImplementation: MoviesService{
         }
         isFetchInProgress = true
         
-        var components = URLComponents(string: endpoint + request.rawValue)
+        var components = URLComponents(string: APIRequest.base.rawValue + request.rawValue)
         
         var queryItems: [URLQueryItem] = [
             URLQueryItem(name: "api_key", value: MoviesAPIConfig.apikey),
@@ -88,7 +86,7 @@ class MoviesServiceImplementation: MoviesService{
     }
     
     func fetchGenre(callback: @escaping (Result<[Genre]>) -> Void){
-        var components = URLComponents(string: endpoint + APIRequest.fetchGenres.rawValue)
+        var components = URLComponents(string: APIRequest.base.rawValue + APIRequest.fetchGenres.rawValue)
         
         let queryItems: [URLQueryItem] = [
             URLQueryItem(name: "api_key", value: MoviesAPIConfig.apikey),

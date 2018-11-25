@@ -54,6 +54,10 @@ extension UIImage{
     enum error{
         
         static var noResults:UIImage{
+            return UIImage(named: "noResults")!
+        }
+        
+        static var generic:UIImage{
             return UIImage(named: "Group")!
         }
         

@@ -42,7 +42,7 @@ final class FavoriteMoviesScreen: UIView {
         switch state {
         case .ready:
             emptyLabel.isHidden = true
-        case .noResults(let string):
+        case .noResults( _):
             emptyLabel.isHidden = false
         default:
             return
