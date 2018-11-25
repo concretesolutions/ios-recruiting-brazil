@@ -35,10 +35,11 @@ class FavoritesTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
             
             self.favoritedMovies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath] , with: .automatic)
-            
-            
         }
-        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.frame.height * 0.25
     }
     
 
