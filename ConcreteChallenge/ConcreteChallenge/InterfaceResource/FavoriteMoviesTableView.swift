@@ -21,7 +21,7 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
     
     var isRemoveButtonEnabled = false
     
-    var favoriteMovieRemoved: FavoriteMovieRemoved!
+    var favoriteMoviesTableViewActions: FavoriteMoviesTableViewActions!
     
     // MARK: - UITableViewDelegate and UITableViewDataSource Functions
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -33,6 +33,7 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
             button.setTitle("Remove Filter", for: .normal)
             button.backgroundColor = .white
             button.setTitleColor(.black, for: .normal)
+            button.addTarget(self, action: #selector(didTapRemoveFilters), for: .touchUpInside)
             
             view.addSubview(button)
             return view
@@ -67,7 +68,7 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            self.favoriteMovieRemoved.didRemoveFavoriteMovie(at: indexPath)
+            self.favoriteMoviesTableViewActions.didRemoveFavoriteMovie(at: indexPath)
             self.favoriteMovies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -75,5 +76,10 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Unfavorite"
+    }
+    
+    // MARK: - Functions
+    @objc func didTapRemoveFilters() {
+        self.favoriteMoviesTableViewActions.didTapRemoveFilters()
     }
 }

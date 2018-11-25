@@ -36,6 +36,7 @@ protocol FavoriteMoviesPresentation: class {
     func didTapFilterButton()
     func didSetFilters()
     func didAskForRemoveFilterButton()
+    func didTapRemoveFiltersButton()
 }
 
 protocol FavoriteMoviesInteractorInput: class {
@@ -44,6 +45,7 @@ protocol FavoriteMoviesInteractorInput: class {
     func getFavoriteMovies()
     func removeFavoriteMovie(at indexPath: IndexPath)
     func askForRemoveFilterButton()
+    func removeFilters()
 }
 
 protocol FavoriteMoviesInteractorOutput: class {

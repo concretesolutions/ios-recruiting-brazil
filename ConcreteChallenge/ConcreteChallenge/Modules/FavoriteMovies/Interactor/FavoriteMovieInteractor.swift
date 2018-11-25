@@ -42,4 +42,9 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
             self.output.didAskForRemoveFilterButton(to: true)
         }
     }
+    
+    func removeFilters() {
+        FavoriteMovieCoreDataManager.datesFilter = []
+        self.getFavoriteMovies()
+    }
 }

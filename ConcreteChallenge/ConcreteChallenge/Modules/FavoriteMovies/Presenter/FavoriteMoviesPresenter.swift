@@ -35,6 +35,11 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
         self.interactor.askForRemoveFilterButton()
     }
     
+    func didTapRemoveFiltersButton() {
+        self.interactor.removeFilters()
+        self.didAskForRemoveFilterButton()
+    }
+    
     // MARK: - FavoriteMoviesInteractorOutput functions
     func didGetFavoriteMovies(favoriteMovies: [Movie]) {
         if favoriteMovies.isEmpty {

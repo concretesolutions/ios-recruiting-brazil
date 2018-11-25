@@ -8,11 +8,12 @@
 
 import UIKit
 
-protocol FavoriteMovieRemoved {
+protocol FavoriteMoviesTableViewActions {
     func didRemoveFavoriteMovie(at indexPath: IndexPath)
+    func didTapRemoveFilters()
 }
 
-class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, FavoriteMovieRemoved {
+class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, FavoriteMoviesTableViewActions {
     
     // MARK: - Outlets
     @IBOutlet weak var favoriteMoviesTableView: FavoriteMoviesTableView!
@@ -49,10 +50,15 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     }
     
     
-    // MARK: - FavoriteMovieRemoved Functions
+    // MARK: - FavoriteMoviesTableViewActions Functions
     func didRemoveFavoriteMovie(at indexPath: IndexPath) {
         self.presenter.didRemoveFavoriteMovie(at: indexPath)
     }
+    
+    func didTapRemoveFilters() {
+        self.presenter.didTapRemoveFiltersButton()
+    }
+    
     
     // MARK: - Functions
     func setupNavigationBar() {
@@ -71,7 +77,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     func setupTableView() {
         self.favoriteMoviesTableView.delegate = self.favoriteMoviesTableView
         self.favoriteMoviesTableView.dataSource = self.favoriteMoviesTableView
-        self.favoriteMoviesTableView.favoriteMovieRemoved = self
+        self.favoriteMoviesTableView.favoriteMoviesTableViewActions = self
         
         self.favoriteMoviesTableView.allowsSelection = false
     }
