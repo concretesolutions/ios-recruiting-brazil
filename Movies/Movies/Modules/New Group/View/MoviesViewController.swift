@@ -79,14 +79,6 @@ class MoviesViewController: UIViewController, MoviesView {
     
     private func present(view: UIView) {
         DispatchQueue.main.async {
-            self.hideActivityIndicator()
-            if let searchText = self.searchBar.text {
-                if searchText.isEmpty {
-                    self.searchBar.isUserInteractionEnabled = false
-                }
-            } else {
-                self.searchBar.isUserInteractionEnabled = false
-            }
             self.errorView.isHidden = true
             self.emptyView.isHidden = true
             self.movies.isHidden = true

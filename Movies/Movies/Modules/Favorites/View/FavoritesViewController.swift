@@ -22,6 +22,7 @@ class FavoritesViewController: UIViewController, FavoritesView {
     private var delegate: FavoritesTVDelegate!
     private var dataSource: FavoritesTVDataSource!
     private var searchDelegate: FavoritesSearchBarDelegate!
+    private var emptyView: UIView!
     
     // MARK: - Life cicle functions
     
@@ -42,6 +43,7 @@ class FavoritesViewController: UIViewController, FavoritesView {
 
         self.navigationItem.title = "Favorites"
         self.showActivityIndicator()
+        self.setUpEmptyView()
         
         self.presenter.viewDidLoad()
     }
@@ -55,6 +57,9 @@ class FavoritesViewController: UIViewController, FavoritesView {
     
     func present(movies: [Movie]) {
         DispatchQueue.main.async {
+            self.searchBar.isUserInteractionEnabled = true
+            self.emptyView.isHidden = true
+            self.favorites.isHidden = false
             self.hideActivityIndicator()
             self.dataSource.update(movies: movies)
         }
@@ -72,6 +77,21 @@ class FavoritesViewController: UIViewController, FavoritesView {
         DispatchQueue.main.async {
             self.dataSource.delete(movieAt: index)
             self.favorites.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+        }
+    }
+    
+    func presentEmptyView() {
+        DispatchQueue.main.async {
+            self.hideActivityIndicator()
+            if let searchText = self.searchBar.text {
+                if searchText.isEmpty {
+                    self.searchBar.isUserInteractionEnabled = false
+                }
+            } else {
+                self.searchBar.isUserInteractionEnabled = false
+            }
+            self.favorites.isHidden = true
+            self.emptyView.isHidden = false
         }
     }
     
@@ -98,5 +118,25 @@ class FavoritesViewController: UIViewController, FavoritesView {
         self.removeFilterButton.addTarget(self, action: #selector(self.didTapHideFilterButton), for: .touchUpInside)
     }
     
+    private func setUpEmptyView() {
+        self.emptyView = UIView(frame: .zero)
+        self.emptyView.translatesAutoresizingMaskIntoConstraints = false
+        let messageLabel = UILabel(frame: .zero)
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.text = "No registers found."
+        messageLabel.textAlignment = .center
+        messageLabel.numberOfLines = 0
+        self.emptyView.addSubview(messageLabel)
+        messageLabel.leftAnchor.constraint(equalTo: self.emptyView.leftAnchor, constant: 8).isActive = true
+        messageLabel.rightAnchor.constraint(equalTo: self.emptyView.rightAnchor, constant: -8).isActive = true
+        messageLabel.centerYAnchor.constraint(equalTo: self.emptyView.centerYAnchor).isActive = true
+        self.view.addSubview(self.emptyView)
+        self.emptyView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        self.emptyView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        self.emptyView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor).isActive = true
+        self.emptyView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.emptyView.isHidden = true
+    }
 
 }
