@@ -44,7 +44,20 @@ class MoviesPresenter: NSObject {
     
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.interactor.movies.count
+        let numberOfItemsInSection = self.interactor.movies.count
+        
+        if numberOfItemsInSection == 0 {
+            switch self.interactor.status {
+            case .normal:
+                self.view.set(status: .empty)
+            case .searching(_):
+                self.view.set(status: .didNotFoundAnyMovie)
+            }
+        }else{
+            self.view.set(status: .normal)
+        }
+        
+        return numberOfItemsInSection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -107,7 +120,7 @@ extension MoviesPresenter: MoviesInteractorDelegate {
     
     func didFail(error: Error) {
         DispatchQueue.main.async {
-//            self.router.showAlert(message: error.localizedDescription)
+            self.view.set(status: .error)
             self.view.collectionView?.refreshControl?.endRefreshing()
         }
     }

@@ -10,11 +10,33 @@ import UIKit
 
 class MoviesViewController: UICollectionViewController {
 
+    enum Status {
+        case normal
+        case empty
+        case didNotFoundAnyMovie
+        case error
+    }
+    
     // MARK: - Outlets
     @IBOutlet var outletLoadingView: UIView!
     
     // MARK: - Properties
     // MARK: Private
+    private var status:Status = .normal {
+        didSet{
+            switch self.status {
+            case .normal:
+                self.collectionView.backgroundView = nil
+            case .empty:
+                self.collectionView.backgroundView = self.view(with: #imageLiteral(resourceName: "check_icon"), and: "Filme aparecendo")
+            case .didNotFoundAnyMovie:
+                self.collectionView.backgroundView = self.view(with: #imageLiteral(resourceName: "favorite_gray_icon"), and: "Nenhum filme encontrado")
+            case .error:
+                self.collectionView.backgroundView = self.view(with: #imageLiteral(resourceName: "favorite_full_icon"), and: "😱")
+            }
+        }
+    }
+    
     // MARK: Public
     var presenter: MoviesPresenter!
     
@@ -47,7 +69,46 @@ class MoviesViewController: UICollectionViewController {
         
     }
     
-    private func set(isLoading:Bool) {
+    private func view(with image:UIImage, and message:String) -> UIView {
+        let theView = UIView(frame: self.view.frame)
+        theView.translatesAutoresizingMaskIntoConstraints = false
+        theView.backgroundColor = .white
+        theView.widthAnchor.constraint(equalToConstant: self.view.bounds.width).isActive = true
+        theView.heightAnchor.constraint(equalToConstant: self.view.bounds.height).isActive = true
+        
+        let theUIImageView = UIImageView(frame: CGRect.zero)
+        theUIImageView.image = image
+        
+        let theLabel = UILabel(frame: CGRect.zero)
+        theLabel.text = message
+        theLabel.textAlignment = .center
+        
+        let theStackView = UIStackView(arrangedSubviews: [theUIImageView,theLabel])
+        theStackView.translatesAutoresizingMaskIntoConstraints = false
+        theStackView.axis = .vertical
+        theStackView.distribution = .equalSpacing
+        theStackView.alignment = .fill
+        theStackView.spacing = 8
+        
+        //
+        theView.addSubview(theStackView)
+        
+        // - Constraints
+        
+        //UIImageView
+        theUIImageView.heightAnchor.constraint(equalTo: theView.heightAnchor, multiplier: 0.3).isActive = true
+        theUIImageView.widthAnchor.constraint(equalTo: theUIImageView.heightAnchor, multiplier: 1.0).isActive = true
+        
+        //UILabel
+        theStackView.centerYAnchor.constraint(equalTo: theView.centerYAnchor).isActive = true
+        theStackView.centerXAnchor.constraint(equalTo: theView.centerXAnchor).isActive = true
+        
+        //
+        return theView
+    }
+    
+    // MARK: Public
+    func set(isLoading:Bool) {
         if isLoading {
             self.collectionView?.backgroundView = self.outletLoadingView
         }else{
@@ -55,7 +116,9 @@ class MoviesViewController: UICollectionViewController {
         }
     }
     
-    // MARK: Public
+    func set(status:Status) {
+        self.status = status
+    }
     
     
     // MARK: - UICollectionDataSource
@@ -64,7 +127,9 @@ class MoviesViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.presenter.collectionView(collectionView, numberOfItemsInSection: section)
+        let numberOfItemsInSection = self.presenter.collectionView(collectionView, numberOfItemsInSection: section)
+        
+        return numberOfItemsInSection
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

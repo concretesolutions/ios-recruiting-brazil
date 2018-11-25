@@ -119,6 +119,68 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="OrY-Ax-XYO"/>
                 </view>
+                <view contentMode="scaleToFill" id="KFs-eS-3qJ">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SEp-GT-z7m">
+                            <rect key="frame" x="-10.5" y="34.5" width="261" height="59"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="alk-b7-tei">
+                                    <rect key="frame" x="111.5" y="0.0" width="38" height="38.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="alk-b7-tei" secondAttribute="height" id="6a6-nb-WBd"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não foi encontrador nenhum filme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKm-ho-pQ4">
+                                    <rect key="frame" x="0.0" y="38.5" width="261" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="SEp-GT-z7m" firstAttribute="centerX" secondItem="KFs-eS-3qJ" secondAttribute="centerX" id="Q2e-6w-cPd"/>
+                        <constraint firstItem="alk-b7-tei" firstAttribute="height" secondItem="6gT-k9-R8U" secondAttribute="height" multiplier="0.3" id="lhK-fW-WnA"/>
+                        <constraint firstItem="SEp-GT-z7m" firstAttribute="centerY" secondItem="KFs-eS-3qJ" secondAttribute="centerY" id="xFl-1x-gnw"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="6gT-k9-R8U"/>
+                </view>
+                <view contentMode="scaleToFill" id="eHV-wM-ARH">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="JmV-Xr-yHe">
+                            <rect key="frame" x="101.5" y="45.5" width="37" height="37"/>
+                            <color key="color" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="JmV-Xr-yHe" firstAttribute="centerY" secondItem="eHV-wM-ARH" secondAttribute="centerY" id="X9d-vm-0bR"/>
+                        <constraint firstItem="JmV-Xr-yHe" firstAttribute="centerX" secondItem="eHV-wM-ARH" secondAttribute="centerX" id="pMN-aD-MD7"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="13R-Bv-jCP"/>
+                </view>
+                <view contentMode="scaleToFill" id="QB7-ii-f9b">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wMN-Ba-1qT">
+                            <rect key="frame" x="101.5" y="45.5" width="37" height="37"/>
+                            <color key="color" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="wMN-Ba-1qT" firstAttribute="centerY" secondItem="QB7-ii-f9b" secondAttribute="centerY" id="CCO-sO-LXI"/>
+                        <constraint firstItem="wMN-Ba-1qT" firstAttribute="centerX" secondItem="QB7-ii-f9b" secondAttribute="centerX" id="uyJ-nD-fEK"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="zfn-he-k0D"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="16.800000000000001" y="125.4872563718141"/>
         </scene>
