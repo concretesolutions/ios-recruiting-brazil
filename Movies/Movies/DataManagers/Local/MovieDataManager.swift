@@ -13,8 +13,8 @@ class MovieDataManager {
     
     // MARK: - Properties
     
-    var genresFilter: [Genre]  = []
-    var yearsFilter: [Int] = []
+    static var genresFilter: [Genre]  = []
+    static var yearsFilter: [Int] = []
     
     // MARK: - Aux functions
     
