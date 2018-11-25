@@ -11,6 +11,8 @@ import UIKit
 class FilterTableViewController: UITableViewController, FilterView {
     
     // MARK: - Outlets
+    @IBOutlet weak var dateFilterIndicator: UILabel!
+    @IBOutlet weak var genreFilterIndicator: UILabel!
     
     // MARK: - Actions
 
