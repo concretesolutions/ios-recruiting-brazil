@@ -68,7 +68,7 @@ class DesignManager: NSObject {
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.backgroundColor = PaletColor.gray.rawValue
         navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.navigationBar.tintColor = PaletColor.esmerald.rawValue
+        navigationController.navigationBar.tintColor = PaletColor.oceanBlue.rawValue
         navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular, NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
         navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: DesignManager.bebasNeueRegular.withSize(20), NSAttributedString.Key.foregroundColor: PaletColor.esmerald.rawValue]
         navigationController.view.backgroundColor = UIColor.white

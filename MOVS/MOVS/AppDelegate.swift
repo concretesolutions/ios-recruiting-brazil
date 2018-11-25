@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let filmsRouter = FilmsRouter()
         let filmsNavigation = UINavigationController(rootViewController: filmsRouter.presenter.view)
-        let tabBarRouter = TabBarRouter(with: [filmsNavigation])
+        let favoriteFilms = FavoriteRouter()
+        let favoriteNavigation = UINavigationController(rootViewController: favoriteFilms.presenter.view)
+        let tabBarRouter = TabBarRouter(with: [filmsNavigation, favoriteNavigation])
         
         self.window?.rootViewController = tabBarRouter.presenter.view
         self.window?.makeKeyAndVisible()

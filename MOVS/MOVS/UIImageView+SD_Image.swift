@@ -25,4 +25,16 @@ extension UIImageView{
             }
         }
     }
+    
+    func getPoster(forFilm film: Film){
+        guard let posterPath = film.poster_path else {
+            print("Error trying to get poster path image in: \(UIImageView.self)")
+            return
+        }
+        self.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)"), placeholderImage: UIImage(named: "poster_default")) { (image, error, cacheType, url) in
+            if error != nil {
+                print("Error trying to get poster in: \(UIImageView.self)")
+            }
+        }
+    }
 }

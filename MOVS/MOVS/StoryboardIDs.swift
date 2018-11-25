@@ -12,5 +12,5 @@ enum StoryboardID: String{
     case tabBar = "TabBar"
     case films = "Films"
     case filmDetail = "FilmDetail"
-    
+    case favorite = "Favorite"
 }

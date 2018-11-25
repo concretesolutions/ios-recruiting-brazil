@@ -59,6 +59,12 @@
 		A37EECBA21AA038A000F3867 /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A37EECB921AA038A000F3867 /* Favorite.storyboard */; };
 		A37EECBC21AA0877000F3867 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECBB21AA0877000F3867 /* MovieTableViewCell.swift */; };
 		A37EECBE21AA095B000F3867 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECBD21AA095B000F3867 /* FavoriteView.swift */; };
+		A37EECC021AA0ADE000F3867 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECBF21AA0ADE000F3867 /* FavoritePresenter.swift */; };
+		A37EECC221AA0AF8000F3867 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECC121AA0AF8000F3867 /* FavoriteInteractor.swift */; };
+		A37EECC421AA0B0A000F3867 /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECC321AA0B0A000F3867 /* FavoriteRouter.swift */; };
+		A37EECCB21AA4693000F3867 /* FilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECCA21AA4693000F3867 /* FilterRouter.swift */; };
+		A37EECCD21AA46A0000F3867 /* FilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECCC21AA46A0000F3867 /* FilterInteractor.swift */; };
+		A37EECCF21AA46AC000F3867 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECCE21AA46AC000F3867 /* FilterPresenter.swift */; };
 		A38140F121A75EB7000A45D8 /* CollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38140F021A75EB7000A45D8 /* CollectionDelegate.swift */; };
 		A38140F321A75F3B000A45D8 /* CollectionWithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38140F221A75F3B000A45D8 /* CollectionWithSearch.swift */; };
 		A38140F621A76748000A45D8 /* ReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A38140F521A76748000A45D8 /* ReportView.xib */; };
@@ -159,6 +165,12 @@
 		A37EECB921AA038A000F3867 /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
 		A37EECBB21AA0877000F3867 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		A37EECBD21AA095B000F3867 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		A37EECBF21AA0ADE000F3867 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		A37EECC121AA0AF8000F3867 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
+		A37EECC321AA0B0A000F3867 /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
+		A37EECCA21AA4693000F3867 /* FilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRouter.swift; sourceTree = "<group>"; };
+		A37EECCC21AA46A0000F3867 /* FilterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
+		A37EECCE21AA46AC000F3867 /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
 		A38140F021A75EB7000A45D8 /* CollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDelegate.swift; sourceTree = "<group>"; };
 		A38140F221A75F3B000A45D8 /* CollectionWithSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionWithSearch.swift; sourceTree = "<group>"; };
 		A38140F521A76748000A45D8 /* ReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportView.xib; sourceTree = "<group>"; };
@@ -322,6 +334,7 @@
 		A31E18DA219DC8F700E0560B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A37EECC521AA4656000F3867 /* Filter */,
 				A37EECB421AA0323000F3867 /* Favorite */,
 				A381410221A7B4FE000A45D8 /* FilmDetail */,
 				A31E18F0219DDDAA00E0560B /* Film */,
@@ -518,6 +531,7 @@
 		A37EECB521AA0335000F3867 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				A37EECC321AA0B0A000F3867 /* FavoriteRouter.swift */,
 			);
 			name = Router;
 			sourceTree = "<group>";
@@ -525,6 +539,7 @@
 		A37EECB621AA034A000F3867 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				A37EECC121AA0AF8000F3867 /* FavoriteInteractor.swift */,
 			);
 			name = Interactor;
 			sourceTree = "<group>";
@@ -532,6 +547,7 @@
 		A37EECB721AA0352000F3867 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				A37EECBF21AA0ADE000F3867 /* FavoritePresenter.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -541,6 +557,48 @@
 			children = (
 				A37EECB921AA038A000F3867 /* Favorite.storyboard */,
 				A37EECBD21AA095B000F3867 /* FavoriteView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A37EECC521AA4656000F3867 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECC921AA4675000F3867 /* View */,
+				A37EECC821AA4670000F3867 /* Presenter */,
+				A37EECC721AA4664000F3867 /* Interactor */,
+				A37EECC621AA465F000F3867 /* Router */,
+			);
+			name = Filter;
+			sourceTree = "<group>";
+		};
+		A37EECC621AA465F000F3867 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECCA21AA4693000F3867 /* FilterRouter.swift */,
+			);
+			name = Router;
+			sourceTree = "<group>";
+		};
+		A37EECC721AA4664000F3867 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECCC21AA46A0000F3867 /* FilterInteractor.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		A37EECC821AA4670000F3867 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECCE21AA46AC000F3867 /* FilterPresenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A37EECC921AA4675000F3867 /* View */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -856,8 +914,11 @@
 				A31E18E1219DC9AC00E0560B /* TabBarInteractor.swift in Sources */,
 				A381411D21A89B86000A45D8 /* OverviewTableViewCell.swift in Sources */,
 				A31E1965219F81C400E0560B /* Gener+CoreDataClass.swift in Sources */,
+				A37EECCF21AA46AC000F3867 /* FilterPresenter.swift in Sources */,
 				A381411B21A89B7B000A45D8 /* FilmInfoTableViewCell.swift in Sources */,
 				A31E18ED219DCD0000E0560B /* DesignManager.swift in Sources */,
+				A37EECCB21AA4693000F3867 /* FilterRouter.swift in Sources */,
+				A37EECC421AA0B0A000F3867 /* FavoriteRouter.swift in Sources */,
 				A31E18EF219DCE0000E0560B /* PaletColors.swift in Sources */,
 				A381411F21A89D87000A45D8 /* FilmCell.swift in Sources */,
 				A381410121A7B37D000A45D8 /* CellSelected.swift in Sources */,
@@ -868,7 +929,9 @@
 				A31E18EA219DCA4800E0560B /* StoryboardIDs.swift in Sources */,
 				A31E1909219DF26E00E0560B /* FilmsInteractor.swift in Sources */,
 				A31E1966219F81C400E0560B /* Gener+CoreDataProperties.swift in Sources */,
+				A37EECC021AA0ADE000F3867 /* FavoritePresenter.swift in Sources */,
 				A38140F321A75F3B000A45D8 /* CollectionWithSearch.swift in Sources */,
+				A37EECCD21AA46A0000F3867 /* FilterInteractor.swift in Sources */,
 				A31E1954219EF04000E0560B /* UICollectionView+reusableCell.swift in Sources */,
 				A381410E21A7BCC7000A45D8 /* FilmDetailInteractor.swift in Sources */,
 				A3527AAC21A3C52B009F9790 /* Result.swift in Sources */,
@@ -880,6 +943,7 @@
 				A31E190B219DF2C100E0560B /* FilmsPresenter.swift in Sources */,
 				A381412521A8A100000A45D8 /* UITableView+ReusableCell.swift in Sources */,
 				A31E199921A1D85D00E0560B /* NetworkManager.swift in Sources */,
+				A37EECC221AA0AF8000F3867 /* FavoriteInteractor.swift in Sources */,
 				A31E1956219EF0B700E0560B /* UICollectionViewCell+ReusableCell.swift in Sources */,
 				A31E1897219DBDBC00E0560B /* MOVS.xcdatamodeld in Sources */,
 				A369F2E521A5F26F005EB8CD /* SearchProtocol.swift in Sources */,

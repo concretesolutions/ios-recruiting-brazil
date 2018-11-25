@@ -30,7 +30,7 @@ class CollectionDelegate: NSObject, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.075) {
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }
     }
@@ -38,7 +38,7 @@ class CollectionDelegate: NSObject, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.075) {
             cell?.transform = CGAffineTransform.identity
         }
     }
@@ -46,10 +46,10 @@ class CollectionDelegate: NSObject, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionViewCell
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.075, animations: {
             cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { (true) in
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.07, animations: {
                 cell.transform = CGAffineTransform.identity
             }) { (true) in
                 guard let film = cell.film else {
