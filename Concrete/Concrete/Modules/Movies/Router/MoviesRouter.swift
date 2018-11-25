@@ -37,6 +37,12 @@ class MoviesRouter: NSObject {
     
     // MARK: - Go To
     func goToMoviewDetail(movie:Movie) {
-        Logger.log(in: self, message: "Go to MovieDetail of \(movie.title ?? "No title")")
+        let router = MovieDetailRouter(movie: movie)
+        
+        if let navigationController = self.presenter.view.navigationController {
+            navigationController.pushViewController(router.presenter.view, animated: true)
+        }else{
+            self.presenter.view.present(router.presenter.view, animated: true, completion: nil)
+        }
     }
 }

@@ -20,7 +20,7 @@ public class Movie: NSManagedObject,Decodable {
         case releaseDate
         case popularity
         case voteAverage
-        case genresIds
+        case genreIds
         case overview
         case posterPath
     }
@@ -84,12 +84,6 @@ public class Movie: NSManagedObject,Decodable {
         self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
         
         //Genres
-        let genresIdsArray = try container.decodeIfPresent([Int].self, forKey: .genresIds)
-        if let genresIds = genresIdsArray {
-            self.genresIds = NSSet(array: genresIds)
-        }else{
-            self.genresIds = NSSet()
-        }
-        
+        self.genresIds = try container.decode([Int].self, forKey: .genreIds)
     }
 }
