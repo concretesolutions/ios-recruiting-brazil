@@ -37,6 +37,7 @@ class DateFilterRouter: DateFilterWireframe {
     }
     
     func didTapSaveButton() {
+        FilterRouter.didSetDateFilter()
         self.viewController?.navigationController?.popViewController(animated: true)
     }
 }

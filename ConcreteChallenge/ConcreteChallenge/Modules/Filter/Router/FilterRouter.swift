@@ -48,6 +48,10 @@ class FilterRouter: FilterWireframe {
         
     }
     
+    static func didSetDateFilter() {
+        print(FavoriteMovieCoreDataManager.datesFilter)
+    }
+    
     func exitFilter() {
         self.viewController?.dismiss(animated: true, completion: nil)
     }
@@ -58,8 +62,5 @@ class FilterRouter: FilterWireframe {
         })
     }
     
-    func didSetDateFilter(with dates: [Date]) {
-        print(dates)
-    }
     
 }

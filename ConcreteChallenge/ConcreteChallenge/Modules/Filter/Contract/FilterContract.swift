@@ -16,6 +16,8 @@ protocol FilterWireframe: class {
     func showDateFilter()
     func showGenreFilter()
     
+    static func didSetDateFilter()
+    
     func exitFilter()
     func doneFilter()
 }
