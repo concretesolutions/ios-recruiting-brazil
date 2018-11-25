@@ -10,7 +10,7 @@ import UIKit
 
 class PopularMoviesCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     
-    var delegate: MovieSelectionDelegate?
+    weak var delegate: MovieSelectionDelegate?
     
     private let movies: [Movie]
     private let itemsPerRow: CGFloat = 2

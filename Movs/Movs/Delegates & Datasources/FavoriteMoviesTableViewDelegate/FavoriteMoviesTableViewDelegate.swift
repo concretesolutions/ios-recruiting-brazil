@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol MovieUnfavoriteDelegate {
+protocol MovieUnfavoriteDelegate: class {
     func unfavorite(movie:Movie)
 }
 
 class FavoriteMoviesTableViewDelegate: NSObject, UITableViewDelegate {
     
-    var delegate: MovieSelectionDelegate?
+    weak var delegate: MovieSelectionDelegate?
     
     private var movies: [Movie]
     

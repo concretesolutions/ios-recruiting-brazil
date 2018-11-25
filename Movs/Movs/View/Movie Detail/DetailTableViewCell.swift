@@ -9,17 +9,13 @@
 import UIKit
 import Reusable
 
-protocol FavoriteCellButtonDelegate {
-    func didPressButton(withFavoriteStatus shouldFavorite:Bool)
-}
-
 class DetailTableViewCell: UITableViewCell, Reusable {
     
     //MARK: - Properties
     fileprivate var hasButton: Bool = false
     fileprivate var isFavorite = false
     fileprivate var hasSeparator: Bool = false
-    fileprivate var delegate: FavoriteCellButtonDelegate?
+    fileprivate weak var delegate: FavoriteCellButtonDelegate?
 
     //MAR: - Interface
     lazy var label: UILabel = {

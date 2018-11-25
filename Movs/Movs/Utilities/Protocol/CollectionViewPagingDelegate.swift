@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol CollectionViewPagingDelegate {
+protocol CollectionViewPagingDelegate: class {
     func shouldFetchNextPage()
 }

@@ -11,7 +11,7 @@ import UIKit
 class FilterTableViewController: UITableViewController, MovieFilterDelegate {
     
     //MARK: - Properties
-    var delegate: MovieFilterDelegate?
+    weak var delegate: MovieFilterDelegate?
     var descriptions = ["Release Year", "Genre"]
     // Data
     var filter = Filter()
@@ -28,7 +28,7 @@ class FilterTableViewController: UITableViewController, MovieFilterDelegate {
     
     lazy var applyFilterButton: UIButton = {
         let button = UIButton(frame: .zero)
-        button.setTitle("Apply Filter", for: .normal)
+        button.setTitle("Apply", for: .normal)
         button.setTitleColor(Design.colors.dark, for: .normal)
         button.backgroundColor = Design.colors.mainYellow
         button.layer.cornerRadius = 20

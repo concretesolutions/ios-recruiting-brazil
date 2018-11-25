@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol MovieFilterDelegate {
-    var filter: Filter { get set }
-}
-
 class FavoriteMoviesViewController: UIViewController, MovieFilterDelegate {
     
     //MARK: - Properties
@@ -49,6 +45,8 @@ class FavoriteMoviesViewController: UIViewController, MovieFilterDelegate {
     fileprivate enum PresentationState {
         case withFilter
         case withoutFilter
+//        case noFavoriteMovies
+//        case emptyFilterResult
     }
     
     fileprivate var presentationState: PresentationState = .withoutFilter {
@@ -239,7 +237,6 @@ extension FavoriteMoviesViewController: CodeView {
         }
         
         if tableView.tableHeaderView != nil {
-            //FIXME: - Constraints invalidas
             tableHeaderContentView.snp.removeConstraints()
             tableHeaderContentView.snp.makeConstraints { (make) in
                 make.width.equalTo(self.tableView.snp.width)

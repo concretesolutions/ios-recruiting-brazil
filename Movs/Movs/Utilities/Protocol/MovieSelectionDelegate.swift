@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MovieSelectionDelegate {
+protocol MovieSelectionDelegate: class {
     func didSelect(movie:Movie)
     func unfavoriteSelected(movie:Movie, indexPath: IndexPath)
 }

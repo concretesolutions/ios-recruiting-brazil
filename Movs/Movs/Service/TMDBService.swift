@@ -46,6 +46,8 @@ class TMDBService {
         }
         
         let _ = session.dataTask(with: url) { data, response, error in
+            guard error == nil else { answer(.error(error!)); return }
+            
             guard let data = data else {
                 answer(.error(
                     TMDBServiceError.unwrapData("Could not get data from request")
@@ -95,6 +97,8 @@ class TMDBService {
         }
         
         let _ = session.dataTask(with: url) { data, response, error in
+            guard error == nil else { answer(.error(error!)); return }
+            
             guard let data = data else {
                 answer(.error(
                     TMDBServiceError.unwrapData("Could not get data from request")
@@ -139,6 +143,7 @@ class TMDBService {
         }
         
         let _ = session.dataTask(with: url) { data, response, error in
+            guard error == nil else { answer(.error(error!)); return }
             
             guard let data = data else {
                 answer(.error(

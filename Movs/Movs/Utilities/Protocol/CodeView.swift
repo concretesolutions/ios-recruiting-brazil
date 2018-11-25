@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CodeView {
+protocol CodeView: class {
     func buildViewHierarchy()
     func setupConstraints()
     func setupAdditionalConfiguration()

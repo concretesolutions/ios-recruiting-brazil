@@ -11,7 +11,7 @@ import UIKit
 final class PopularMoviesCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     public var movies:[Movie]
-    var delegate: CollectionViewPagingDelegate?
+    weak var delegate: CollectionViewPagingDelegate?
     
     init(movies: [Movie], collectionView: UICollectionView, delegate: CollectionViewPagingDelegate) {
         self.movies = movies

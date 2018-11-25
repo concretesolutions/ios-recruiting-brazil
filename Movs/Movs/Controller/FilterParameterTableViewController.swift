@@ -16,7 +16,7 @@ enum FilterParameterType {
 class FilterParameterTableViewController: UITableViewController {
     
     //MARK: - Properties
-    var delegate: MovieFilterDelegate?
+    weak var delegate: MovieFilterDelegate?
     // Datasources
     var availableGenres = [Genre(id: -1, name:"")]
     var availableReleaseYears = [""]

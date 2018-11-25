@@ -9,16 +9,18 @@
 import UIKit
 import SnapKit
 
+//TODO: - Verificar conexão
+
 class PopularMoviesViewController: UIViewController {
-    
-    var searchText: String = ""
-    
+
     //MARK: - Properties
     // interface
     let collectionView = PopularMoviesCollectionView()
     var collectionViewDelegate: PopularMoviesCollectionViewDelegate?
     var collectionViewDatasource: PopularMoviesCollectionViewDataSource?
+    lazy var exceptionView = ExceptionFeedbackView(delegate: self)
     // Search Controller
+    var searchText: String = ""
     let searchController = UISearchController(searchResultsController: nil)
     // Configurations
     var currentPage: Int = 1
@@ -34,7 +36,7 @@ class PopularMoviesViewController: UIViewController {
     //MARK: - Interface
     lazy var activityIndicator:UIActivityIndicatorView = {
         var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicator.color = Design.colors.secondaryYellow
+        activityIndicator.color = Design.colors.dark
         activityIndicator.contentMode = .scaleAspectFit
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
@@ -56,11 +58,10 @@ class PopularMoviesViewController: UIViewController {
     
     // Presentation
     fileprivate enum PresentationState {
+        case emptyResult
         case loadingContent
         case showingContent
         case error
-//        case emptyResult
-//        case noConnection
     }
     
     fileprivate var presentationState: PresentationState = .loadingContent {
@@ -88,10 +89,6 @@ class PopularMoviesViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         initalSetup()
-        
-//        //FIXME - TESTE
-//        let text = "Harry Potter"
-//        searchPopularMovies(containing: text, page: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,15 +108,24 @@ class PopularMoviesViewController: UIViewController {
     
     fileprivate func updatePresentation(state: PresentationState) {
         switch state {
+        case .emptyResult:
+            collectionView.isHidden = true
+            activityIndicator.isHidden = true
+            exceptionView.isHidden = false
+            exceptionView.exeptionType = .emptyResult(searchText)
         case .loadingContent:
             collectionView.isHidden = true
             activityIndicator.isHidden = false
+            exceptionView.isHidden = true
         case .showingContent:
             collectionView.isHidden = false
             activityIndicator.isHidden = true
+            exceptionView.isHidden = true
         case .error:
             collectionView.isHidden = true
             activityIndicator.isHidden = true
+            exceptionView.isHidden = false
+            exceptionView.exeptionType = .genericError
         }
     }
     
@@ -192,6 +198,11 @@ class PopularMoviesViewController: UIViewController {
         tmdbService.searchMoviesContaining(text, page: page) { (result) in
             switch result {
             case .success(let movies):
+                if movies.isEmpty {
+                    self.isFetching = false
+                    self.presentationState = .emptyResult
+                    return
+                }
                 self.popularMovies.append(contentsOf: movies)
                 self.setupCollectionView(with: self.popularMovies)
                 self.loadingState = .ready
@@ -202,7 +213,7 @@ class PopularMoviesViewController: UIViewController {
             }
             self.isFetching = false
         }
-        
+
     }
     
 }
@@ -272,11 +283,28 @@ extension PopularMoviesViewController: UISearchBarDelegate {
     
 }
 
+//MARK: - ExceptionFeedbackDelegate
+extension PopularMoviesViewController: ExceptionFeedbackDelegate {
+    // can expand to other types of exceptions
+    func handleException(ofType type: ExceptionType) {
+        switch type {
+        case .emptyResult:
+            getPopularMovies(page: 1)
+        case .genericError:
+            currentPage = 1
+            popularMovies.removeAll()
+            presentationState = .loadingContent
+            initalSetup()
+        }
+    }
+}
+
 //MARK: - CodeView
 extension PopularMoviesViewController: CodeView {
     func buildViewHierarchy() {
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
+        view.addSubview(exceptionView)
     }
     
     func setupConstraints() {
@@ -290,6 +318,13 @@ extension PopularMoviesViewController: CodeView {
         activityIndicator.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+        
+        exceptionView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
     
