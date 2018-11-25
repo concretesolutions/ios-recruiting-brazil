@@ -68,7 +68,7 @@ final class FavoriteMoviesViewController: UIViewController {
 extension FavoriteMoviesViewController{
     
     func fetchPersistedMovies() -> [CDMovie]{
-        return CDMovieDAO.getAll()
+        return CDMovieDAO.fetchAll()
     }
     
     func updateFavoriteMovies(movies:[CDMovie]?){
@@ -143,7 +143,6 @@ extension FavoriteMoviesViewController: UISearchBarDelegate{
         searchController.dimsBackgroundDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         self.navigationItem.searchController = searchController
-        self.screen.setup(searchController: searchController)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

@@ -135,7 +135,6 @@ extension PopularMoviesViewController: UISearchBarDelegate{
         searchController.dimsBackgroundDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         self.navigationItem.searchController = searchController
-        self.screen.setup(searchController: searchController)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

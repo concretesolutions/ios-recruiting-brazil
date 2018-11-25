@@ -32,12 +32,6 @@ final class FavoriteMoviesScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(searchController:UISearchController){
-        searchController.searchBar.tintColor = Palette.blue
-        searchController.searchBar.returnKeyType = .search
-        searchController.searchBar.placeholder = "Search for Movies..."
-    }
-    
 }
 
 extension FavoriteMoviesScreen: ViewCode{
@@ -46,10 +40,12 @@ extension FavoriteMoviesScreen: ViewCode{
     }
     
     func setupConstraints() {
-        tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true        
+        tableView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     func setupAdditionalConfiguration() {

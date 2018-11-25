@@ -50,15 +50,16 @@ extension FilterDataSource: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FilterTableViewCell.self)
-//        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-//        cell.textLabel?.text = items[indexPath.row]
+
         let item  = items[indexPath.row]
         cell.setup(for: item)
+        
         if selectedItems.contains(item){
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }else{
             tableView.deselectRow(at: indexPath, animated: false)
         }
+        
         return cell
     }
     

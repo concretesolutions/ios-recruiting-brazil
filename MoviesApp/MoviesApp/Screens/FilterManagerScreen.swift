@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 protocol FilterManagerDelegate: class{
     func setFilter(ofType: FilterType, with items:[String])
@@ -22,7 +23,7 @@ final class FilterManagerScreen: UIView{
     
     var filteredYears:[String] = []{
         didSet{
-            filteredYears = filteredYears.sorted{ $0 < $1 }
+            filteredYears = filteredYears.sorted{ $0 > $1 }
             update(label: yearFilterDescription, with: filteredYears)
         }
     }
@@ -107,42 +108,55 @@ extension FilterManagerScreen: ViewCode{
     }
     
     func setupConstraints() {
-        applyFilterButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30.0).isActive = true
-        applyFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30.0).isActive = true
-        applyFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30.0).isActive = true
-        applyFilterButton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         
-        yearFilterButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30.0).isActive = true
-        yearFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 60.0).isActive = true
-        yearFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60.0).isActive = true
-        yearFilterButton.heightAnchor.constraint(equalTo: genreFilterButton.heightAnchor).isActive = true
+        applyFilterButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30.0)
+            make.leading.equalToSuperview().offset(30.0)
+            make.trailing.equalToSuperview().offset(-30.0)
+            make.height.equalTo(60.0)
+        }
         
-        genreFilterButton.topAnchor.constraint(equalTo: yearFilterButton.bottomAnchor, constant: 30.0).isActive = true
-        genreFilterButton.bottomAnchor.constraint(equalTo: applyFilterButton.topAnchor, constant: -30).isActive = true
-        genreFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 60.0).isActive = true
-        genreFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60.0).isActive = true
-        genreFilterButton.heightAnchor.constraint(equalTo: yearFilterButton.heightAnchor).isActive = true
+        yearFilterButton.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(30.0)
+            make.leading.equalToSuperview().offset(60.0)
+            make.trailing.equalToSuperview().offset(-60.0)
+            make.height.equalTo(genreFilterButton)
+        }
         
-        yearFilterTitle.centerXAnchor.constraint(equalTo: yearFilterButton.centerXAnchor).isActive = true
-        yearFilterTitle.leadingAnchor.constraint(equalTo: yearFilterButton.leadingAnchor, constant: 15.0).isActive = true
-        yearFilterTitle.trailingAnchor.constraint(equalTo: yearFilterButton.trailingAnchor, constant: -15.0).isActive = true
-        yearFilterTitle.centerYAnchor.constraint(equalTo: yearFilterButton.centerYAnchor, constant: -45.0).isActive = true
+        genreFilterButton.snp.makeConstraints { make in
+            make.top.equalTo(yearFilterButton.snp.bottom).offset(30.0)
+            make.leading.equalToSuperview().offset(60.0)
+            make.trailing.equalToSuperview().offset(-60.0)
+            make.bottom.equalTo(applyFilterButton.snp.top).offset(-30.0)
+        }
         
-        genreFilterTitle.centerXAnchor.constraint(equalTo: genreFilterButton.centerXAnchor).isActive = true
-        genreFilterTitle.leadingAnchor.constraint(equalTo: genreFilterButton.leadingAnchor, constant: 15.0).isActive = true
-        genreFilterTitle.trailingAnchor.constraint(equalTo: genreFilterButton.trailingAnchor, constant: -15.0).isActive = true
-        genreFilterTitle.centerYAnchor.constraint(equalTo: genreFilterButton.centerYAnchor, constant: -45.0).isActive = true
+        yearFilterTitle.snp.makeConstraints { make in
+            make.centerX.equalTo(yearFilterButton)
+            make.leading.equalTo(yearFilterButton).offset(15)
+            make.trailing.equalTo(yearFilterButton).offset(-15)
+            make.centerY.equalTo(yearFilterButton).offset(-45)
+        }
         
-        yearFilterDescription.topAnchor.constraint(equalTo: yearFilterTitle.bottomAnchor, constant: 15.0).isActive = true
-        yearFilterDescription.bottomAnchor.constraint(equalTo: yearFilterButton.bottomAnchor, constant: -15.0).isActive = true
-        yearFilterDescription.leadingAnchor.constraint(equalTo: yearFilterButton.leadingAnchor, constant: 15.0).isActive = true
-        yearFilterDescription.trailingAnchor.constraint(equalTo: yearFilterButton.trailingAnchor, constant: -15.0).isActive = true
+        genreFilterTitle.snp.makeConstraints { make in
+            make.centerX.equalTo(genreFilterButton)
+            make.leading.equalTo(genreFilterButton).offset(15)
+            make.trailing.equalTo(genreFilterButton).offset(-15)
+            make.centerY.equalTo(genreFilterButton).offset(-45)
+        }
         
-        genreFilterDescription.topAnchor.constraint(equalTo: genreFilterTitle.bottomAnchor, constant: 15.0).isActive = true
-        genreFilterDescription.bottomAnchor.constraint(equalTo: genreFilterButton.bottomAnchor, constant: -15.0).isActive = true
-        genreFilterDescription.leadingAnchor.constraint(equalTo: genreFilterButton.leadingAnchor, constant: 15.0).isActive = true
-        genreFilterDescription.trailingAnchor.constraint(equalTo: genreFilterButton.trailingAnchor, constant: -15.0).isActive = true
+        yearFilterDescription.snp.makeConstraints { make in
+            make.top.equalTo(yearFilterTitle.snp.bottom).offset(15)
+            make.bottom.equalTo(yearFilterButton).offset(-15)
+            make.leading.equalTo(yearFilterButton).offset(15)
+            make.trailing.equalTo(yearFilterButton).offset(-15)
+        }
         
+        genreFilterDescription.snp.makeConstraints { make in
+            make.top.equalTo(genreFilterTitle.snp.bottom).offset(15)
+            make.bottom.equalTo(genreFilterButton).offset(-15)
+            make.leading.equalTo(genreFilterButton).offset(15)
+            make.trailing.equalTo(genreFilterButton).offset(-15)
+        }
     }
     
     func setupAdditionalConfiguration() {
@@ -158,7 +172,7 @@ extension FilterManagerScreen: ViewCode{
         filteredGenres = filteredGenres.sorted()
         update(label: genreFilterDescription, with: filteredGenres)
         
-        filteredYears = filteredYears.sorted{ $0 < $1 }
+        filteredYears = filteredYears.sorted{ $0 > $1 }
         update(label: yearFilterDescription, with: filteredYears)
         
     }

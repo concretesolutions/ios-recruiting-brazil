@@ -34,7 +34,7 @@ final class CDMovieDAO{
         }
     }
     
-    static func getAll() ->[CDMovie]{
+    static func fetchAll() ->[CDMovie]{
         var persistedMovies:[CDMovie] = []
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PersistedEntity.movie)
@@ -88,16 +88,14 @@ final class CDMovieDAO{
     static func getPersistedYears(callback: @escaping ([String], Error?)->Void){
         var years:[String] = []
         
-        let persistedMovies = self.getAll()
+        let persistedMovies = self.fetchAll()
         for elem in persistedMovies{
             let year = elem.getYear()
             if !years.contains(year){
                 years.append(year)
             }
         }
-        years = years.sorted { (year1, year2) -> Bool in
-            year1 < year2
-        }
+        years = years.sorted{ $0 > $1 }
         callback(years, nil)
     }
     
@@ -105,7 +103,7 @@ final class CDMovieDAO{
         
         var genres:[String] = []
         
-        let persistedMovies = self.getAll()
+        let persistedMovies = self.fetchAll()
         for movie in persistedMovies{
             if let movieGenres = movie.genres{
                 for persistedGenre in movieGenres{

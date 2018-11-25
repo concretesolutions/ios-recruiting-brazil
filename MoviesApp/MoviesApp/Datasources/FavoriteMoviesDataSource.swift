@@ -37,7 +37,7 @@ final class FavoriteMoviesDataSource:NSObject{
     
     func resetFilter(){
         self.isFiltering = false
-        self.updateMovies(CDMovieDAO.getAll())
+        self.updateMovies(CDMovieDAO.fetchAll())
     }
     
     func updateMovies(_ movies:[CDMovie]){

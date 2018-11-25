@@ -34,6 +34,7 @@ struct AppearanceManager{
     static func customizeSearchBar(){
         let searchBarAppearance = UISearchBar.appearance()
         searchBarAppearance.setImage(UIImage.icon.search, for: .search, state: .normal)
+        searchBarAppearance.tintColor = Palette.blue
     }
     
     static var collectionViewSpacing:CGFloat{

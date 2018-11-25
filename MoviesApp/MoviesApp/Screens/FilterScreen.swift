@@ -39,10 +39,12 @@ extension FilterScreen: ViewCode{
     }
     
     func setupConstraints() {
-        tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        tableView.snp.makeConstraints { make in
+            make.leading.equalTo(self)
+            make.trailing.equalTo(self)
+            make.top.equalTo(self)
+            make.bottom.equalTo(self)
+        }
     }
     
     func setupAdditionalConfiguration() {

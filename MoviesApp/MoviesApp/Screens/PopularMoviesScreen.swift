@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PopularMoviesScreen: UIView {
     
@@ -36,12 +37,6 @@ class PopularMoviesScreen: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setup(searchController:UISearchController){
-        searchController.searchBar.tintColor = Palette.blue
-        searchController.searchBar.returnKeyType = .search
-//        searchController.searchBar.placeholder = "Search for Movies..."
     }
     
     func refreshUI(with state: PresentationState){
@@ -82,18 +77,23 @@ extension PopularMoviesScreen: ViewCode{
     }
     
     func setupConstraints() {
-        emptySearchView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        emptySearchView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        emptySearchView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        emptySearchView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        emptySearchView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
         
-        activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
         
-        collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        collectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     func setupAdditionalConfiguration() {

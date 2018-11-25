@@ -57,15 +57,30 @@ extension GenericErrorView: ViewCode{
     }
     
     func setupConstraints() {
-        imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -50.0).isActive = true
-        imageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2).isActive = true
-        imageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2).isActive = true
         
-        label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20.0).isActive = true
-        label.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.7).isActive = true
-        label.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
+        imageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-50)
+            make.height.equalToSuperview().multipliedBy(0.2)
+            make.width.equalTo(self.snp.height).multipliedBy(0.2)
+        }
+        
+        label.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(imageView.snp.bottom).offset(20)
+            make.height.equalTo(imageView).multipliedBy(0.7)
+            make.width.equalToSuperview().multipliedBy(0.8)
+        }
+        
+//        imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -50.0).isActive = true
+//        imageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2).isActive = true
+//        imageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2).isActive = true
+        
+//        label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20.0).isActive = true
+//        label.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.7).isActive = true
+//        label.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
     }
     
     func setupAdditionalConfiguration() {
