@@ -10,7 +10,6 @@ import Foundation
 
 class FilterPresenter: FilterPresentation, FilterInteractorOutput {
     
-    
     // MARK: - Properties
     var view: FilterView?
     var interactor: FilterInteractorInput!
@@ -38,7 +37,13 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
         self.router.showGenreFilter()
     }
     
+    func didSetDateFilter() {
+        self.interactor.getDateFilter()
+    }
     
     // MARK: - FilterInteractorOutput functions
+    func didGetDateFilter(dates: [Date]) {
+        self.view?.updateDateFilterIndicator(with: dates)
+    }
 
 }

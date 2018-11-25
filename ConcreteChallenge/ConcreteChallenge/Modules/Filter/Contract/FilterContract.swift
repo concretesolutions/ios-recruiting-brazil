@@ -24,6 +24,8 @@ protocol FilterWireframe: class {
 
 protocol FilterView {
     var presenter: FilterPresentation! { get set }
+    
+    func updateDateFilterIndicator(with dates: [Date])
 }
 
 protocol FilterPresentation: class {
@@ -37,13 +39,17 @@ protocol FilterPresentation: class {
     func didTapDoneButton()
     func didTapDateButton()
     func didTapGenreButton()
+    func didSetDateFilter()
 }
 
 protocol FilterInteractorInput: class {
     var output: FilterInteractorOutput! { get set }
+    
+    func getDateFilter()
 }
 
 protocol FilterInteractorOutput: class {
+    func didGetDateFilter(dates: [Date])
 }
 
 

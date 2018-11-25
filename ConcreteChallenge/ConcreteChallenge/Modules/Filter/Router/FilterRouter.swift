@@ -49,7 +49,7 @@ class FilterRouter: FilterWireframe {
     }
     
     static func didSetDateFilter() {
-        print(FavoriteMovieCoreDataManager.datesFilter)
+        self.presenter.didSetDateFilter()
     }
     
     func exitFilter() {

@@ -29,6 +29,20 @@ class FilterTableViewController: UITableViewController, FilterView {
     }
 
     // MARK: - FilterView Functions
+    func updateDateFilterIndicator(with dates: [Date]) {
+        // Create String with Dates Year
+        var years = ""
+        for (index, date) in dates.enumerated() {
+            guard let year = date.year else { return }
+            
+            years.append(String(year))
+            if index != dates.count - 1 {
+                years.append(", ")
+            }
+        }
+        
+        self.dateFilterIndicator.text = years
+    }
     
     // MARK: - Functions
     func setupNavigationBar() {
@@ -78,5 +92,10 @@ class FilterTableViewController: UITableViewController, FilterView {
             return
         }
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
+    }
+    
 }
 

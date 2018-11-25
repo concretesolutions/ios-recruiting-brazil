@@ -14,4 +14,8 @@ class FilterInteractor: FilterInteractorInput {
     var output: FilterInteractorOutput!
     
     // MARK: - FilterInteractorInput Functions
+    func getDateFilter() {
+        self.output.didGetDateFilter(dates: FavoriteMovieCoreDataManager.datesFilter)
+    }
+    
 }
