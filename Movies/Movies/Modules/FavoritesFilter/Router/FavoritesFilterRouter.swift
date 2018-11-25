@@ -37,7 +37,7 @@ class FavoritesFilterRouter: FavoritesFilterWireframe {
         presenter.view = view
         router.view = view
         
-        return view
+        return UINavigationController(rootViewController: view)
         
     }
     
