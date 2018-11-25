@@ -23,6 +23,7 @@ protocol FavoritesFilterPresentation {
     var router: FavoritesFilterWireframe! { get set }
     var interactor: FavoritesFilterUseCase! { get set }
     
+    func viewDidLoad()
     func didSelect(genre: Genre)
     func didDeselect(genre: Genre)
     func didSelect(year: Int)
