@@ -12,8 +12,9 @@ struct APISupport {
     static let apiKey = "api_key=24934c88c611524faa7d6c14bed3c866"
     static let baseURL = "https://api.themoviedb.org/3/movie/"
     static let imageBaseUrl = "https://image.tmdb.org/t/p/w500/"
+    static let genreUrl = "https://api.themoviedb.org/3/genre/movie/list?api_key=24934c88c611524faa7d6c14bed3c866&language=en-US"
 }
 
 enum ResourceName: String {
-    case nowPlaying = "now_playing?"
+    case nowPlaying = "now_playing?page="
 }

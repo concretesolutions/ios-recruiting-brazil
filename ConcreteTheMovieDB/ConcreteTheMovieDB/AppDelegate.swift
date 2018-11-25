@@ -7,28 +7,37 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        APIRequest.getMovies { (response) in
-            switch response {
-            case .success(let movies as Result):
-                print(movies.results.first)
-                break
-            case .error(let error):
-                print(error.description)
-                break
-            default:
-                break
-            }
-        }
         return true
     }
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container  = NSPersistentContainer(name: "Favorite")
+        container.loadPersistentStores(completionHandler: {(storeDescription, error) in
+            if let error = error as NSError? {
+                print(error.debugDescription)
+            }
+        })
+        return container
+    }()
+    
+    func saveContext(){
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print("error trying save context")
+            }
+        }
+    }
+    
 }
 
