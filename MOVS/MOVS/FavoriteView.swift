@@ -12,6 +12,7 @@ class FavoriteView: UIViewController {
     // MARK: - Properties
     // MARK: - Outlets
     @IBOutlet weak var outletTableView: UITableView!
+    @IBOutlet weak var outletRemoveButton: UIButton!
     // MARK: - Public
     var presenter: FavoritePresenter!
     var searchController = UISearchController(searchResultsController: nil)
@@ -32,6 +33,9 @@ class FavoriteView: UIViewController {
         
         // Set Delegate
         self.outletTableView.delegate = self
+        
+        getHeightContraint()?.constant = 0
+        self.view.layoutIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,15 +67,36 @@ class FavoriteView: UIViewController {
         definesPresentationContext = true
         self.searchController.searchResultsUpdater = self
     }
+    
+    func showRemoveFilterButton(){
+        UIView.animate(withDuration: 0.25) {
+            self.getHeightContraint()?.constant = 40
+            self.view.layoutIfNeeded()
+        }
+    }
 
+    func getHeightContraint() -> NSLayoutConstraint?{
+        let contraintWithIdentifier = outletRemoveButton.constraints.filter { $0.identifier == "filterButtonHeight" }
+        if let heightContraint = contraintWithIdentifier.first {
+            return heightContraint
+        }
+        return nil
+    }
+    
     @objc
     func filterTapped(){
         self.presenter.goToFilter()
     }
     
-    func createClearFilterButton(){
-        
+    @IBAction func removeFilter(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.25) {
+            self.getHeightContraint()?.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        self.presenter.setIsFiltering(false)
+        self.presenter.reloadData()
     }
+    
 }
 
 extension FavoriteView: UITableViewDelegate{

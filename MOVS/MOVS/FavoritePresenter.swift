@@ -60,6 +60,12 @@ class FavoritePresenter: NSObject{
     
     func filterWith(year: String?, andGenre genre: Gener?){
         self.interactor.filterWith(year: year, andGenre: genre)
+        self.view.showRemoveFilterButton()
+    }
+    
+    func reloadData(){
+        self.interactor.reloadData()
+        self.view.outletTableView.reloadData()
     }
 }
 

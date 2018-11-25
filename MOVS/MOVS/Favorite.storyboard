@@ -29,8 +29,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="147" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vz9-PX-Ywm">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="147" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vz9-PX-Ywm">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MovieTableViewCell" rowHeight="147" id="fCE-TD-Lxh" customClass="MovieTableViewCell" customModule="MOVS" customModuleProvider="target">
@@ -106,19 +106,37 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xr6-bk-G40">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.062745098040000002" green="0.59607843140000005" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" identifier="filterButtonHeight" id="xiz-0E-HqI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                <state key="normal" title="Remover Filtro">
+                                    <color key="titleColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeFilter:" destination="vaI-Mf-X0o" eventType="touchUpInside" id="4Ut-HL-gGn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Vz9-PX-Ywm" firstAttribute="leading" secondItem="9Ns-yb-opx" secondAttribute="leading" id="6TF-hc-guW"/>
                             <constraint firstItem="9Ns-yb-opx" firstAttribute="trailing" secondItem="Vz9-PX-Ywm" secondAttribute="trailing" id="LYF-2U-tpr"/>
-                            <constraint firstItem="Vz9-PX-Ywm" firstAttribute="top" secondItem="9Ns-yb-opx" secondAttribute="top" id="O7i-qM-acf"/>
+                            <constraint firstItem="Vz9-PX-Ywm" firstAttribute="top" secondItem="Xr6-bk-G40" secondAttribute="bottom" id="Qxv-Od-30u"/>
+                            <constraint firstItem="9Ns-yb-opx" firstAttribute="trailing" secondItem="Xr6-bk-G40" secondAttribute="trailing" id="UOx-jh-RRM"/>
+                            <constraint firstItem="Xr6-bk-G40" firstAttribute="leading" secondItem="9Ns-yb-opx" secondAttribute="leading" id="WXk-by-nAx"/>
                             <constraint firstItem="9Ns-yb-opx" firstAttribute="bottom" secondItem="Vz9-PX-Ywm" secondAttribute="bottom" id="XNU-D8-evm"/>
+                            <constraint firstItem="Xr6-bk-G40" firstAttribute="top" secondItem="9Ns-yb-opx" secondAttribute="top" id="usY-2d-NO7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Ns-yb-opx"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favoritos" image="heart" selectedImage="heart" id="g4k-of-QgL"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="outletRemoveButton" destination="Xr6-bk-G40" id="ms4-M0-1ef"/>
                         <outlet property="outletTableView" destination="Vz9-PX-Ywm" id="faU-wI-zsE"/>
                     </connections>
                 </viewController>
