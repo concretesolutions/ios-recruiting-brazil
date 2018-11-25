@@ -17,16 +17,18 @@ class FavoritesFilterInteractor: FavoritesFilterUseCase {
     // MARK: - FavoritesFilterUseCase protocol functions
     
     func getGenres() {
-        let allGenres = GenreDataManager.readGenres()
-        var genres: [GenreFilterItem] = []
-        allGenres.forEach { g in
-            if (MovieDataManager.genresFilter.contains { return $0.id == g.id && $0.name == g.name }) {
-                genres.append((g, true))
-            } else {
-                genres.append((g, false))
+        DispatchQueue.main.async {
+            let allGenres = GenreDataManager.readGenres()
+            var genres: [GenreFilterItem] = []
+            allGenres.forEach { g in
+                if (MovieDataManager.genresFilter.contains { return $0.id == g.id && $0.name == g.name }) {
+                    genres.append((g, true))
+                } else {
+                    genres.append((g, false))
+                }
             }
+            self.output.didGet(genres: genres)
         }
-        self.output.didGet(genres: genres)
     }
     
     func getYears() {

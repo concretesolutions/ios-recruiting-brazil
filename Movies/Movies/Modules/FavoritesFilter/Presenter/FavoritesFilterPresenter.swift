@@ -36,7 +36,6 @@ class FavoritesFilterPresenter: FavoritesFilterPresentation, FavoritesFilterInte
     
     func viewDidLoad() {
         self.interactor.getGenres()
-        self.interactor.getYears()
     }
     
     func didSelect(genre: Genre) {
@@ -65,14 +64,22 @@ class FavoritesFilterPresenter: FavoritesFilterPresentation, FavoritesFilterInte
         self.router.dismiss()
     }
     
+    func didSetGenresSection() {
+        self.interactor.getYears()
+    }
+    
     // MARK: - FavoritesFilterInteractorOutput protocol functions
     
     func didGet(genres: [GenreFilterItem]) {
-        self.view?.set(genres: genres)
+        DispatchQueue.main.async {
+            self.view?.set(genres: genres)
+        }
     }
     
     func didGet(years: [YearFilterItem]) {
-        self.view?.set(years: years)
+        DispatchQueue.main.async {
+            self.view?.set(years: years)
+        }
     }
     
 }

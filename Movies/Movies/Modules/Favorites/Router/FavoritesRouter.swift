@@ -23,6 +23,7 @@ class FavoritesRouter: FavoritesWireframe {
     
     func presentFiltersView() {
         print("FavoritesRouter.presentFiltersView")
+        self.view?.navigationController?.present(FavoritesFilterRouter.assembleModule(), animated: true, completion: nil)
     }
     
     static func assembleModule() -> UIViewController {

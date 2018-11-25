@@ -33,6 +33,7 @@ protocol FavoritesFilterPresentation {
     func didDeselect(year: Int)
     func didPressFilterButton()
     func didPressCancelButton()
+    func didSetGenresSection()
     
 }
 
