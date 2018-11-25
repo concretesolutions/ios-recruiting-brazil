@@ -25,7 +25,7 @@ class PopularMoviesPresenter: PopularMoviesPresentation, PopularMoviesInteractor
     }
     
     func didTapMovieCell(of movie: Movie) {
-        self.router.showMoveDetail(for: movie)
+        self.router.showMovieDetail(for: movie)
     }
     
     // MARK: - PopularMoviesInteractorOutput functions

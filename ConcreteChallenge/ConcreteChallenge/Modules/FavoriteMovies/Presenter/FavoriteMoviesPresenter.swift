@@ -23,6 +23,10 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
         self.interactor.getFavoriteMovies()
     }
     
+    func didTapMovieCell(of movie: Movie) {
+        self.router.showMovieDetail(for: movie)
+    }
+    
     func didTapFilterButton() {
         self.router.showFilterScreen()
     }

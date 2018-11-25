@@ -39,7 +39,7 @@ class PopularMoviesRouter: PopularMoviesWireframe {
         return viewController
     }
     
-    func showMoveDetail(for movie: Movie) {
+    func showMovieDetail(for movie: Movie) {
         let movieDetailViewController = MovieDetailRouter.assembleModule(with: movie)
         self.viewController?.navigationController?.pushViewController(movieDetailViewController, animated: true)
     }

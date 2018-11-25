@@ -66,7 +66,10 @@ class FavoriteMovieCoreDataManager {
                     let overview = data.value(forKey: "overview") as! String
                     let releaseDate = data.value(forKey: "releaseDate") as! Date
                     
-                    self.favoriteMovies.append(Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate))
+                    let favoriteMovie = Movie(id: id, title: title, posterPath: posterPath, genreIds: genreIds, overview: overview, releaseDate: releaseDate)
+                    favoriteMovie.isFavorite = true
+                    
+                    self.favoriteMovies.append(favoriteMovie)
                 }
                 
                 completion(self.filterFavoriteMovies())

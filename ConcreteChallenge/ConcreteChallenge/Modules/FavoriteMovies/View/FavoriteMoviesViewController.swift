@@ -9,6 +9,7 @@
 import UIKit
 
 protocol FavoriteMoviesTableViewActions {
+    func didTapMovieCell(of movie: Movie)
     func didRemoveFavoriteMovie(at indexPath: IndexPath)
     func didTapRemoveFilters()
 }
@@ -51,6 +52,10 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
     
     
     // MARK: - FavoriteMoviesTableViewActions Functions
+    func didTapMovieCell(of movie: Movie) {
+        self.presenter.didTapMovieCell(of: movie)
+    }
+    
     func didRemoveFavoriteMovie(at indexPath: IndexPath) {
         self.presenter.didRemoveFavoriteMovie(at: indexPath)
     }
@@ -79,7 +84,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView, Favori
         self.favoriteMoviesTableView.dataSource = self.favoriteMoviesTableView
         self.favoriteMoviesTableView.favoriteMoviesTableViewActions = self
         
-        self.favoriteMoviesTableView.allowsSelection = false
+        self.favoriteMoviesTableView.allowsSelection = true
     }
     
     // MARK: - Navigation Bar item Functions

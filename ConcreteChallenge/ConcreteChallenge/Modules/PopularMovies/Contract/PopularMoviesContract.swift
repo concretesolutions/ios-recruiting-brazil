@@ -14,7 +14,7 @@ protocol PopularMoviesWireframe: class {
     
     static func assembleModule() -> UIViewController
     
-    func showMoveDetail(for movie: Movie)
+    func showMovieDetail(for movie: Movie)
 }
 
 protocol PopularMoviesView {

@@ -62,6 +62,10 @@ class FavoriteMoviesTableView: UITableView, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.favoriteMoviesTableViewActions.didTapMovieCell(of: self.favoriteMovies[indexPath.row])
+    }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

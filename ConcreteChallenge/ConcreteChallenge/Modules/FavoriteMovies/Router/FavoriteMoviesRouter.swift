@@ -42,4 +42,9 @@ class FavoriteMoviesRouter: FavoriteMoviesWireframe {
         let filterViewController = FilterRouter.assembleModule()
         self.viewController?.present(filterViewController, animated: true, completion: nil)
     }
+    
+    func showMovieDetail(for movie: Movie) {
+        let movieDetailViewController = MovieDetailRouter.assembleModule(with: movie)
+        self.viewController?.navigationController?.pushViewController(movieDetailViewController, animated: true)
+    }
 }
