@@ -58,4 +58,8 @@ class FilterRouter: FilterWireframe {
         })
     }
     
+    func didSetDateFilter(with dates: [Date]) {
+        print(dates)
+    }
+    
 }

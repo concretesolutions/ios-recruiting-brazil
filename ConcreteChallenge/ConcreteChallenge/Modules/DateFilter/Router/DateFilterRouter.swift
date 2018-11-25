@@ -33,7 +33,6 @@ class DateFilterRouter: DateFilterWireframe {
         interactor.output = presenter
         
         self.presenter = presenter
-        
         return viewController
     }
     
