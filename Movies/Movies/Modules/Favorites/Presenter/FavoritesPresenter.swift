@@ -23,9 +23,7 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
     
     // MARK: - FavoritesPresentation protocol functions
     
-    func viewDidLoad() {
-        self.interactor.readFavoriteMovies()
-    }
+    func viewDidLoad() { }
     
     func viewDidAppear() {
         if let sm = self.selectedMovie,
@@ -37,9 +35,8 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
             self.selectedMovie = nil
             self.selectedMovieIndex = nil
             self.selectedMovieFavoriteState = nil
-        } else {
-            self.interactor.readFavoriteMovies()
         }
+        self.interactor.readFavoriteMovies()
     }
     
     func didSelect(movie: Movie, index: Int) {
@@ -74,11 +71,19 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
     // MARK: - FavoritesInteractorOutput protocol functions
     
     func didRead(movies: [Movie]) {
-        self.view?.present(movies: movies)
+        if movies.isEmpty {
+            self.view?.presentEmptyView()
+        } else {
+            self.view?.present(movies: movies)
+        }
     }
     
     func didSearchMovies(withTitle title: String, _ movies: [Movie]) {
-        self.view?.present(movies: movies)
+        if movies.isEmpty {
+            self.view?.presentEmptyView()
+        } else {
+            self.view?.present(movies: movies)
+        }
     }
     
 }

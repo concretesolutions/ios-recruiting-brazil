@@ -16,6 +16,8 @@ protocol FavoritesView: class {
     func showRemoveFilterButton()
     func hideRemoveFilterButton()
     func delete(movieAt index: Int)
+    func presentEmptyView()
+
 }
 
 protocol FavoritesPresentation {
@@ -32,7 +34,7 @@ protocol FavoritesPresentation {
     func didSearchMovies(withTitle title: String)
     func didFinishSearch()
     func didTapFilterButton()
-    
+
 }
 
 protocol FavoritesUseCase {
