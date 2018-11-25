@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        //TODO: Refactor to a better way to save genres
         let requestGenres = GetGenres()
         APIManager.shared.fetch(requestGenres) { (result) in
             switch result{
