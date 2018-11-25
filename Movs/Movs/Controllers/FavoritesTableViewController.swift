@@ -36,6 +36,9 @@ class FavoritesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.favorites = FavoriteManager.shared.favorites
+        
+        self.filteredFavorites = self.filteredFavorites.filter(self.favorites.contains)
+        
         self.tableView.reloadData()
     }
     

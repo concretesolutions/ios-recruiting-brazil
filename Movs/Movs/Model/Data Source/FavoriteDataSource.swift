@@ -70,7 +70,7 @@ extension FavoritesTableViewController {
         if editingStyle == .delete {
             let newIndexPath = IndexPath(row: self.isFiltering ? indexPath.row - 1 : indexPath.row, section: indexPath.section)
             
-            FavoriteManager.shared.unfavoriteMovie(withID: self.favorites[newIndexPath.row].id)
+            FavoriteManager.shared.unfavoriteMovie(withID: self.isFiltering ? self.filteredFavorites[newIndexPath.row].id : self.favorites[indexPath.row].id)
             self.favorites = FavoriteManager.shared.favorites
             
             if isFiltering {
