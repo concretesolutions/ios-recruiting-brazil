@@ -19,6 +19,7 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
     // MARK: - FilterPresentation functions
     func viewDidLoad() {
         self.interactor.getDateFilter()
+        self.interactor.getGenreFilter()
     }
     
     func didTapCancelButton() {
