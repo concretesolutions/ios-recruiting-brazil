@@ -49,7 +49,7 @@ protocol FavoriteMoviesInteractorInput: class {
 }
 
 protocol FavoriteMoviesInteractorOutput: class {
-    func didGetFavoriteMovies(favoriteMovies: [Movie])
+    func didGetFavoriteMovies(favoriteMovies: [Movie], hasFilter: Bool)
     func didAskForRemoveFilterButton(to activate: Bool)
 }
 

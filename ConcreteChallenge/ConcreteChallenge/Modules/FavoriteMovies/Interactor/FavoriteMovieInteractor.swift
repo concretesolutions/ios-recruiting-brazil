@@ -17,7 +17,12 @@ class FavoriteMoviesInteractor: FavoriteMoviesInteractorInput {
     func getFavoriteMovies() {
         FavoriteMovieCoreDataManager.getFavoriteMovies { (status, movies) in
             if status == RequestStatus.success, let movies = movies {
-                self.output.didGetFavoriteMovies(favoriteMovies: movies)
+                var hasFilter = false
+                if !FavoriteMovieCoreDataManager.datesFilter.isEmpty || !FavoriteMovieCoreDataManager.genresFilter.isEmpty {
+                    hasFilter = true
+                }
+                
+                self.output.didGetFavoriteMovies(favoriteMovies: movies, hasFilter: hasFilter)
             }
         }
     }

@@ -41,8 +41,8 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation, FavoriteMoviesInterac
     }
     
     // MARK: - FavoriteMoviesInteractorOutput functions
-    func didGetFavoriteMovies(favoriteMovies: [Movie]) {
-        if favoriteMovies.isEmpty {
+    func didGetFavoriteMovies(favoriteMovies: [Movie], hasFilter: Bool) {
+        if favoriteMovies.isEmpty && !hasFilter {
             self.view?.showEmptyAlert()
         } else {
             self.view?.show(favoriteMovies: favoriteMovies)
