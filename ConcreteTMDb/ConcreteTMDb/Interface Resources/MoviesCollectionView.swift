@@ -14,6 +14,7 @@ class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     
     var movies: [Movie] = []
     weak var movieSelected: MovieCellSelected?
+    var page = 2
     
     // MARK: - UICollectionView DataSource
     
@@ -35,6 +36,16 @@ class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cellTapped = collectionView.cellForItem(at: indexPath) as? MoviesCollectionViewCell else { return }
         self.movieSelected?.didTap(at: cellTapped)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.item == self.movies.count - 1 {
+            
+//            TMDataManager.fetchMovies(page: self.page)
+//            self.page += 1
+        }
+        
     }
     
 }

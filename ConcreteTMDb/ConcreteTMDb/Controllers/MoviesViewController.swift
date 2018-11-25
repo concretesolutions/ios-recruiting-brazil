@@ -13,6 +13,8 @@ class MoviesViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var OutletMoviesCollectionView: MoviesCollectionView!
     @IBOutlet weak var OutletSearchBar: UISearchBar!
+    @IBOutlet weak var OutletEmptySearch: UILabel!
+    @IBOutlet weak var OutletMessageView: UIView!
     
     // MARK: - Properties
     var movieToShow: MoviesCollectionViewCell?
@@ -26,16 +28,18 @@ class MoviesViewController: UIViewController {
         self.setupSearch()
         
         TMDataManager.moviesDataCompleted = self
-        TMDataManager.fetchMovies()
+        TMDataManager.fetchMovies(page: 1)
     }
     
     func setupCollectionView() {
+        self.OutletMoviesCollectionView.layer.zPosition = 1
         self.OutletMoviesCollectionView.movieSelected = self
         self.OutletMoviesCollectionView.delegate = self.OutletMoviesCollectionView
         self.OutletMoviesCollectionView.dataSource = self.OutletMoviesCollectionView
     }
     
     func setupSearch() {
+        self.OutletSearchBar.layer.zPosition = 3
         self.OutletSearchBar.delegate = self
     }
     
@@ -52,8 +56,11 @@ class MoviesViewController: UIViewController {
 
 extension MoviesViewController: MoviesDataFetchCompleted {
     func fetchComplete(for movies: [Movie]) {
-        self.OutletMoviesCollectionView.movies = movies
-        self.OutletMoviesCollectionView.reloadData()
+        self.OutletMoviesCollectionView.movies.append(contentsOf: movies)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.OutletMoviesCollectionView.reloadData()
+        }
     }
 }
 
@@ -80,6 +87,12 @@ extension MoviesViewController: UISearchBarDelegate {
                 movie.title.lowercased().folding(options: .diacriticInsensitive, locale: locale).range(of: formattedText) != nil
             }
             self.OutletMoviesCollectionView.movies = moviesSearched
+            
+            if moviesSearched.count == 0 {
+                self.OutletMoviesCollectionView.layer.zPosition = -1
+            } else {
+                self.OutletMoviesCollectionView.layer.zPosition = 1
+            }
         } else {
             self.OutletMoviesCollectionView.movies = TMDataManager.movies
         }

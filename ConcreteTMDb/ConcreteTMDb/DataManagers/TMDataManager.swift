@@ -16,9 +16,9 @@ class TMDataManager {
     static weak var moviesDataCompleted: MoviesDataFetchCompleted?
     static weak var genresDataCompleted: GenresDataFetchCompleted?
     
-    static func fetchMovies() {
+    static func fetchMovies(page: Int) {
         
-        let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=e2417760a16d55fdc805d2c23c69022b&language=en-US&page=1"
+        let urlString = "https://api.themoviedb.org/3/movie/popular?api_key=e2417760a16d55fdc805d2c23c69022b&language=en-US&page=\(page)"
         
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)

@@ -17,9 +17,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vgI-TE-j57" customClass="MoviesCollectionView" customModule="ConcreteTMDb" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="133" width="414" height="554"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H1L-kq-kgB">
+                                <rect key="frame" x="0.0" y="56" width="414" height="623"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sua busca por &quot;x&quot; não resultou em nenhum resultado" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryp-AC-Ppd">
+                                        <rect key="frame" x="118" y="345" width="179" height="94"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vgI-TE-j57" customClass="MoviesCollectionView" customModule="ConcreteTMDb" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qun-Ud-tg0">
                                     <size key="itemSize" width="174" height="228"/>
@@ -72,10 +85,18 @@
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vgI-TE-j57" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1v4-Da-sXO"/>
+                            <constraint firstItem="vgI-TE-j57" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="5hI-sZ-Rs5"/>
+                            <constraint firstItem="vgI-TE-j57" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="XTh-IO-d0Z"/>
+                            <constraint firstItem="vgI-TE-j57" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mXX-hg-SBO"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="1FW-QZ-77R"/>
                     <connections>
+                        <outlet property="OutletEmptySearch" destination="Ryp-AC-Ppd" id="2bA-XN-0Pj"/>
+                        <outlet property="OutletMessageView" destination="H1L-kq-kgB" id="Oct-4V-GOq"/>
                         <outlet property="OutletMoviesCollectionView" destination="vgI-TE-j57" id="1Zc-Aa-Vgp"/>
                         <outlet property="OutletSearchBar" destination="YS1-i8-SQV" id="8xf-wL-JHI"/>
                         <segue destination="LMC-5Y-BeS" kind="show" identifier="showDetails" id="QlL-eQ-bt2"/>
