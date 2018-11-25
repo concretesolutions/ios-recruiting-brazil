@@ -36,6 +36,18 @@ class DateFilterInteractor: DateFilterInteractorInput {
             shouldAdd = true
         }
         
+        // Sort Array
+        noRepeatedDates = noRepeatedDates.sorted { (date1, date2) -> Bool in
+            var sort = true
+            
+            if let dateYear1 = date1.year, let dateYear2 = date2.year {
+                if dateYear1 > dateYear2 {
+                    sort = false
+                }
+            }
+            return sort
+        }
+        
         self.output.didGetDates(dates: noRepeatedDates)
     }
     
