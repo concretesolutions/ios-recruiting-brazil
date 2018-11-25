@@ -28,7 +28,7 @@ protocol GenreFilterPresentation: class {
     var interactor: GenreFilterInteractorInput! { get set }
     var router: GenreFilterWireframe! { get set }
     
-    var datesFilter: [Date] { get set }
+    var genresFilter: [Genre] { get set }
     
     func viewDidLoad()
     func didSelectGenre(genre: Genre)
@@ -40,7 +40,7 @@ protocol GenreFilterInteractorInput: class {
     var output: GenreFilterInteractorOutput! { get set }
     
     func getGenres()
-    func saveGenreFilter(genre: Genre)
+    func saveGenreFilter(genres: [Genre])
 }
 
 protocol GenreFilterInteractorOutput: class {

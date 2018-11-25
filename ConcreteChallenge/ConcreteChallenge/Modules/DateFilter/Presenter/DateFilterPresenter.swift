@@ -23,11 +23,11 @@ class DateFilterPresenter: DateFilterPresentation, DateFilterInteractorOutput {
     }
     
     func didSelectDate(date: Date) {
-        datesFilter.append(date)
+        self.datesFilter.append(date)
     }
     
     func didDeselectDate(date: Date) {
-        datesFilter.removeAll { (dateFromArray) -> Bool in
+        self.datesFilter.removeAll { (dateFromArray) -> Bool in
             dateFromArray.year == date.year
         }
     }

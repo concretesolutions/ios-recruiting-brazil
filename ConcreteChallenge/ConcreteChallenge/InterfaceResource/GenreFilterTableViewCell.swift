@@ -26,6 +26,6 @@ class GenreFilterTableViewCell: UITableViewCell {
     
     // MARK: - Functions
     func setupCell(genre: Genre) {
-
+        self.genreLabel.text = genre.name
     }
 }

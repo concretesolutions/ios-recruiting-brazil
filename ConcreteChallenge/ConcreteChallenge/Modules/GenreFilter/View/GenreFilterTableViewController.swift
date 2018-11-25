@@ -35,13 +35,13 @@ class GenreFilterTableViewController: UITableViewController, GenreFilterView, Ge
 
     // MARK: - GenreFilterView Functions
     func showGenres(genres: [Genre]) {
-        
+        (self.tableView as? GenreFilterTableView)?.genres = genres
     }
     
     // MARK: - Functions
     func setupNavigationBar() {
         // Title
-        self.navigationItem.title = "Dates"
+        self.navigationItem.title = "Genres"
         
         // Right Navigation Item
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))

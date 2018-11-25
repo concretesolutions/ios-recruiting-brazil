@@ -51,4 +51,6 @@ class MovieDetailInteractor: MovieDetailInteractorInput {
             }
         }
     }
+    
+    
 }

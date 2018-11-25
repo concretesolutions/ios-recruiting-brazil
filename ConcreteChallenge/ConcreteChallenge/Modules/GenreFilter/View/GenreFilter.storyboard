@@ -9,11 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Genre Filter Table View Controller-->
         <scene sceneID="aoR-re-Q3h">
             <objects>
-                <tableViewController storyboardIdentifier="GenreFilter" id="iGO-CG-Sl0" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8E-11-H2w" customClass="GenreFilterTableView" customModule="ConcreteChallenge" customModuleProvider="target">
+                <tableViewController storyboardIdentifier="GenreFilter" id="iGO-CG-Sl0" customClass="GenreFilterTableViewController" customModule="ConcreteChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8E-11-H2w" customClass="GenreFilterTableView" customModule="ConcreteChallenge" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,6 +49,9 @@
                             <outlet property="delegate" destination="iGO-CG-Sl0" id="mF0-eE-fPK"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="genreFilterTableView" destination="S8E-11-H2w" id="Gxd-Bz-Q5A"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="saZ-Fi-wk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

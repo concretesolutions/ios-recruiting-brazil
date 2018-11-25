@@ -15,6 +15,7 @@ class DateFilterInteractor: DateFilterInteractorInput {
     
     // MARK: - DateFilterInteractorInput Functions
     func getDates() {
+        // Get only the dates from the favorite movies
         // Get all dates
         var dates: [Date] = []
         for movie in FavoriteMovieCoreDataManager.favoriteMovies {
