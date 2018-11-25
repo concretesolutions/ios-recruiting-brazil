@@ -34,7 +34,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
         if let posterImage = movie.posterImage {
             self.poster.image = posterImage
         } else if movie.isFavorite {
-            self.poster.image = ImageDataManager.readImage(withPosterPath: movie.posterPath)
+            self.movie.posterImage = ImageDataManager.readImage(withPosterPath: movie.posterPath)
+            self.poster.image = self.movie.posterImage
         } else {
             self.poster.showActivityIndicator()
             APIDataManager.readPosterImage(withCode: movie.posterPath) { image in
