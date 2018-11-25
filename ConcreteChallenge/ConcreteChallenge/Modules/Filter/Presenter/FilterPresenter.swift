@@ -23,6 +23,7 @@ class FilterPresenter: FilterPresentation, FilterInteractorOutput {
     }
     
     func didTapCancelButton() {
+        self.interactor.removeFilters()
         self.router.exitFilter()
     }
     

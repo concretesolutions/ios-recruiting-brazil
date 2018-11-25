@@ -50,6 +50,7 @@ protocol FilterInteractorInput: class {
     
     func getDateFilter()
     func getGenreFilter()
+    func removeFilters()
 }
 
 protocol FilterInteractorOutput: class {
