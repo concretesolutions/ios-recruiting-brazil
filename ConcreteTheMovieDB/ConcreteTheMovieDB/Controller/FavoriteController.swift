@@ -88,6 +88,7 @@ extension FavoriteController: UITableViewDelegate, UITableViewDataSource{
             
             CoreDataManager.deleteData(movie: filterdMovies[indexPath.row])
             favorites.remove(at: indexPath.row)
+            filterdMovies.remove(at: indexPath.row)
             oTableView.deleteRows(at: [indexPath], with: .fade)
             oTableView.reloadData()
             
