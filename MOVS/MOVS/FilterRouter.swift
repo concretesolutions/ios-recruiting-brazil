@@ -8,6 +8,22 @@
 
 import UIKit
 
-class FilterRouter: NSObject {
-
+class FilterRouter {
+    // MARK: - Properties
+    var presenter: FilterPresenter!
+    
+    
+    // MARK: Init
+    init() {
+        
+        //Instancing Storyboard
+        let storyboard = UIStoryboard(name: StoryboardID.filter.rawValue, bundle: Bundle.main)
+        let viewController: FilterView = storyboard.instantiateViewController()
+        
+        //Instancing Interactor
+        let interactor = FilterInteractor()
+        
+        //Instancing Presenter
+        self.presenter = FilterPresenter(router: self, interactor: interactor, view: viewController)
+    }
 }

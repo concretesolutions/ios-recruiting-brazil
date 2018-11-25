@@ -9,5 +9,14 @@
 import UIKit
 
 class FilterInteractor: NSObject {
-
+    // MARK: - Properties
+    // MARK: - Public
+    var genre: Gener?
+    var year: String?
+    // MARK: - Private
+    
+    // MARK: - Init
+    
+    //MARK: - Functions
+    //MARK: - Public
 }

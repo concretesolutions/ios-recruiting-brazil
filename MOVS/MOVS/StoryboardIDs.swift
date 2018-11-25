@@ -13,4 +13,5 @@ enum StoryboardID: String{
     case films = "Films"
     case filmDetail = "FilmDetail"
     case favorite = "Favorite"
+    case filter = "Filter"
 }

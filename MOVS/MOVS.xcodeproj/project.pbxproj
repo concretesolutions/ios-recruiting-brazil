@@ -65,6 +65,13 @@
 		A37EECCB21AA4693000F3867 /* FilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECCA21AA4693000F3867 /* FilterRouter.swift */; };
 		A37EECCD21AA46A0000F3867 /* FilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECCC21AA46A0000F3867 /* FilterInteractor.swift */; };
 		A37EECCF21AA46AC000F3867 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECCE21AA46AC000F3867 /* FilterPresenter.swift */; };
+		A37EECD121AA46D8000F3867 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECD021AA46D8000F3867 /* FilterView.swift */; };
+		A37EECD321AA472A000F3867 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A37EECD221AA472A000F3867 /* Filter.storyboard */; };
+		A37EECD521AA5207000F3867 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECD421AA5207000F3867 /* FilterTableViewCell.swift */; };
+		A37EECDC21AA5CA6000F3867 /* FilterChooseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECDB21AA5CA6000F3867 /* FilterChooseRouter.swift */; };
+		A37EECDE21AA5CBC000F3867 /* FilterChooseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECDD21AA5CBC000F3867 /* FilterChooseInteractor.swift */; };
+		A37EECE021AA5CCF000F3867 /* FilterChoosePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECDF21AA5CCF000F3867 /* FilterChoosePresenter.swift */; };
+		A37EECE221AA5CE5000F3867 /* FilterChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EECE121AA5CE5000F3867 /* FilterChooseView.swift */; };
 		A38140F121A75EB7000A45D8 /* CollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38140F021A75EB7000A45D8 /* CollectionDelegate.swift */; };
 		A38140F321A75F3B000A45D8 /* CollectionWithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38140F221A75F3B000A45D8 /* CollectionWithSearch.swift */; };
 		A38140F621A76748000A45D8 /* ReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A38140F521A76748000A45D8 /* ReportView.xib */; };
@@ -171,6 +178,13 @@
 		A37EECCA21AA4693000F3867 /* FilterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRouter.swift; sourceTree = "<group>"; };
 		A37EECCC21AA46A0000F3867 /* FilterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInteractor.swift; sourceTree = "<group>"; };
 		A37EECCE21AA46AC000F3867 /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
+		A37EECD021AA46D8000F3867 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		A37EECD221AA472A000F3867 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
+		A37EECD421AA5207000F3867 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		A37EECDB21AA5CA6000F3867 /* FilterChooseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChooseRouter.swift; sourceTree = "<group>"; };
+		A37EECDD21AA5CBC000F3867 /* FilterChooseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChooseInteractor.swift; sourceTree = "<group>"; };
+		A37EECDF21AA5CCF000F3867 /* FilterChoosePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChoosePresenter.swift; sourceTree = "<group>"; };
+		A37EECE121AA5CE5000F3867 /* FilterChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChooseView.swift; sourceTree = "<group>"; };
 		A38140F021A75EB7000A45D8 /* CollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDelegate.swift; sourceTree = "<group>"; };
 		A38140F221A75F3B000A45D8 /* CollectionWithSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionWithSearch.swift; sourceTree = "<group>"; };
 		A38140F521A76748000A45D8 /* ReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportView.xib; sourceTree = "<group>"; };
@@ -334,6 +348,7 @@
 		A31E18DA219DC8F700E0560B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A37EECD621AA5B95000F3867 /* FilterChoose */,
 				A37EECC521AA4656000F3867 /* Filter */,
 				A37EECB421AA0323000F3867 /* Favorite */,
 				A381410221A7B4FE000A45D8 /* FilmDetail */,
@@ -463,6 +478,7 @@
 				A381411A21A89B7B000A45D8 /* FilmInfoTableViewCell.swift */,
 				A381411C21A89B86000A45D8 /* OverviewTableViewCell.swift */,
 				A37EECBB21AA0877000F3867 /* MovieTableViewCell.swift */,
+				A37EECD421AA5207000F3867 /* FilterTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -599,6 +615,51 @@
 		A37EECC921AA4675000F3867 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A37EECD221AA472A000F3867 /* Filter.storyboard */,
+				A37EECD021AA46D8000F3867 /* FilterView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A37EECD621AA5B95000F3867 /* FilterChoose */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECDA21AA5BC1000F3867 /* View */,
+				A37EECD921AA5BB7000F3867 /* Presenter */,
+				A37EECD821AA5BB0000F3867 /* Interactor */,
+				A37EECD721AA5BA9000F3867 /* Router */,
+			);
+			name = FilterChoose;
+			sourceTree = "<group>";
+		};
+		A37EECD721AA5BA9000F3867 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECDB21AA5CA6000F3867 /* FilterChooseRouter.swift */,
+			);
+			name = Router;
+			sourceTree = "<group>";
+		};
+		A37EECD821AA5BB0000F3867 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECDD21AA5CBC000F3867 /* FilterChooseInteractor.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		A37EECD921AA5BB7000F3867 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECDF21AA5CCF000F3867 /* FilterChoosePresenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		A37EECDA21AA5BC1000F3867 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A37EECE121AA5CE5000F3867 /* FilterChooseView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -781,6 +842,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A37EECD321AA472A000F3867 /* Filter.storyboard in Resources */,
 				A31E1916219DF9EA00E0560B /* Bebas-Bold.otf in Resources */,
 				A31E189C219DBDBD00E0560B /* LaunchScreen.storyboard in Resources */,
 				A37EECBA21AA038A000F3867 /* Favorite.storyboard in Resources */,
@@ -903,8 +965,10 @@
 				A31E199D21A1D9B000E0560B /* Response.swift in Sources */,
 				A31E1945219EE9CB00E0560B /* CollectionDataSource.swift in Sources */,
 				A31E18DF219DC99900E0560B /* TabBarPresenter.swift in Sources */,
+				A37EECE221AA5CE5000F3867 /* FilterChooseView.swift in Sources */,
 				A381411921A89B69000A45D8 /* CoverTableViewCell.swift in Sources */,
 				A3D7450C21A97D0B00BFBC56 /* ResponseGenre.swift in Sources */,
+				A37EECE021AA5CCF000F3867 /* FilterChoosePresenter.swift in Sources */,
 				A31E1964219F81C400E0560B /* Film+CoreDataProperties.swift in Sources */,
 				A31E199B21A1D95B00E0560B /* ReponseFilm.swift in Sources */,
 				A31E1907219DF0E400E0560B /* FilmsRouter.swift in Sources */,
@@ -934,7 +998,9 @@
 				A37EECCD21AA46A0000F3867 /* FilterInteractor.swift in Sources */,
 				A31E1954219EF04000E0560B /* UICollectionView+reusableCell.swift in Sources */,
 				A381410E21A7BCC7000A45D8 /* FilmDetailInteractor.swift in Sources */,
+				A37EECD121AA46D8000F3867 /* FilterView.swift in Sources */,
 				A3527AAC21A3C52B009F9790 /* Result.swift in Sources */,
+				A37EECDE21AA5CBC000F3867 /* FilterChooseInteractor.swift in Sources */,
 				A37EECBE21AA095B000F3867 /* FavoriteView.swift in Sources */,
 				A3527AAE21A3C56E009F9790 /* API.swift in Sources */,
 				A31E191A219E05B600E0560B /* MovieCollectionViewCell.swift in Sources */,
@@ -945,10 +1011,12 @@
 				A31E199921A1D85D00E0560B /* NetworkManager.swift in Sources */,
 				A37EECC221AA0AF8000F3867 /* FavoriteInteractor.swift in Sources */,
 				A31E1956219EF0B700E0560B /* UICollectionViewCell+ReusableCell.swift in Sources */,
+				A37EECD521AA5207000F3867 /* FilterTableViewCell.swift in Sources */,
 				A31E1897219DBDBC00E0560B /* MOVS.xcdatamodeld in Sources */,
 				A369F2E521A5F26F005EB8CD /* SearchProtocol.swift in Sources */,
 				A381410A21A7BBD9000A45D8 /* FilmDetailView.swift in Sources */,
 				A3527AB621A3E166009F9790 /* EndCollectionViewCell.swift in Sources */,
+				A37EECDC21AA5CA6000F3867 /* FilterChooseRouter.swift in Sources */,
 				A381410C21A7BCB8000A45D8 /* FilmDetailRouter.swift in Sources */,
 				A31B3F2A21A3F8C4008F3499 /* UIImageView+SD_Image.swift in Sources */,
 				A38140F121A75EB7000A45D8 /* CollectionDelegate.swift in Sources */,

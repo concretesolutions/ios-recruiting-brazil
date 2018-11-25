@@ -66,7 +66,7 @@ class FavoriteView: UIViewController {
 
     @objc
     func filterTapped(){
-        
+        self.presenter.goToFilter()
     }
 }
 

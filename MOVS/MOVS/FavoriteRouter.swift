@@ -28,6 +28,9 @@ class FavoriteRouter{
     }
     
     func goToFilter(){
-        
+        let filter = FilterRouter()
+        if let navigationController = self.presenter.view.navigationController {
+            navigationController.pushViewController(filter.presenter.view, animated: true)
+        }
     }
 }
