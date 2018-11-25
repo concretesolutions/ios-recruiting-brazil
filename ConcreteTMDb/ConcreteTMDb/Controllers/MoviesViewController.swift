@@ -13,8 +13,10 @@ class MoviesViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var OutletMoviesCollectionView: MoviesCollectionView!
     @IBOutlet weak var OutletSearchBar: UISearchBar!
-    @IBOutlet weak var OutletEmptySearch: UILabel!
+    @IBOutlet weak var OutletMessage: UILabel!
+    @IBOutlet weak var OutletMessageImage: UIImageView!
     @IBOutlet weak var OutletMessageView: UIView!
+    @IBOutlet weak var OutletActivityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
     var movieToShow: MoviesCollectionViewCell?
@@ -28,7 +30,8 @@ class MoviesViewController: UIViewController {
         self.setupCollectionView()
         self.setupSearch()
         
-        TMDataManager.moviesDataCompleted = self
+        TMDataManager.moviesDataCompletedDelegate = self
+        TMDataManager.exceptionDelegate = self
         TMDataManager.fetchMovies(page: self.page)
     }
     
@@ -92,7 +95,7 @@ extension MoviesViewController: UISearchBarDelegate {
             if moviesSearched.count == 0 {
         
                 // Empty Search
-                self.presentEmptySearchMessage()
+                self.presentEmptySearchMessage(with: searchText)
                 
             } else {
                 self.OutletMoviesCollectionView.layer.zPosition = 1
@@ -109,12 +112,16 @@ extension MoviesViewController: UISearchBarDelegate {
 }
 
 extension MoviesViewController: PresentMessageForException {
-    func presentEmptySearchMessage() {
+    func presentEmptySearchMessage(with searchText: String) {
         self.OutletMoviesCollectionView.layer.zPosition = -1
+        self.OutletMessageImage.image = UIImage(named: "search_icon")
+        self.OutletMessage.text = "Sua busca por \(searchText) não resultou em nenhum resultado"
     }
     
     func presentGenericErrorMessage() {
-        
+        self.OutletMoviesCollectionView.layer.zPosition = -1
+        self.OutletMessageImage.image = UIImage(named: "error_icon")
+        self.OutletMessage.text = "Um erro ocorreu. Por favor, tente novamente."
     }
 }
 

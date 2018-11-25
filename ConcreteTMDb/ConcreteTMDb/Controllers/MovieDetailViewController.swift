@@ -43,7 +43,7 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         
         self.setup()
-        TMDataManager.genresDataCompleted = self
+        TMDataManager.genresDataCompletedDelegate = self
         TMDataManager.fetchMovieGenres()
     }
     

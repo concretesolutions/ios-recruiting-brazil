@@ -13,8 +13,9 @@ class TMDataManager {
     static var movies: [Movie] = []
     
     // MARK: - DataSearch delegate, called when assyn data arrives
-    static weak var moviesDataCompleted: MoviesDataFetchCompleted?
-    static weak var genresDataCompleted: GenresDataFetchCompleted?
+    static weak var moviesDataCompletedDelegate: MoviesDataFetchCompleted?
+    static weak var genresDataCompletedDelegate: GenresDataFetchCompleted?
+    static weak var exceptionDelegate: PresentMessageForException?
     
     static func fetchMovies(page: Int) {
         
@@ -30,6 +31,7 @@ class TMDataManager {
                 
                 if let err = err {
                     print("Failed to get data from url:", err)
+                    self.exceptionDelegate?.presentGenericErrorMessage()
                     return
                 }
                 
@@ -40,7 +42,9 @@ class TMDataManager {
                     let res = try decoder.decode(MovieResponse.self, from: data)
                     self.movies.append(contentsOf: res.movies)
                     
-                    self.moviesDataCompleted?.fetchComplete(for: self.movies)
+                    if let delegate = self.moviesDataCompletedDelegate {
+                        delegate.fetchComplete(for: movies)
+                    }
                     
                 } catch let jsonErr {
                     print("Error to decode json:", jsonErr)
@@ -74,7 +78,9 @@ class TMDataManager {
                     let res = try decoder.decode(GenreResponse.self, from: data)
                     genres = res.genres
                     
-                    self.genresDataCompleted?.fetchComplete(for: genres)
+                    if let delegate = self.genresDataCompletedDelegate {
+                        delegate.fetchComplete(for: genres)
+                    }
                     
                 } catch let jsonErr {
                     print("Error to decode json:", jsonErr)

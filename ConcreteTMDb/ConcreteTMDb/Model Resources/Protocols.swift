@@ -21,7 +21,7 @@ protocol GenresDataFetchCompleted: class {
 }
 
 protocol PresentMessageForException: class {
-    func presentEmptySearchMessage()
+    func presentEmptySearchMessage(with searchText: String)
     func presentGenericErrorMessage()
 }
 
