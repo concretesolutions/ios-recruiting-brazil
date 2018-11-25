@@ -18,10 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Movie" translatesAutoresizingMaskIntoConstraints="NO" id="X98-jo-YNf">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No favorites yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DB5-Dj-czj">
                                 <rect key="frame" x="16" y="321.5" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -29,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="210" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jZk-ec-zvS" customClass="FavoriteMoviesTableView" customModule="ConcreteChallenge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="favoriteMovieCell" rowHeight="196" id="MVQ-8n-hlE" customClass="FavoriteMovieTableViewCell" customModule="ConcreteChallenge" customModuleProvider="target">
@@ -94,16 +90,12 @@
                         <constraints>
                             <constraint firstItem="yhT-t0-tKW" firstAttribute="trailing" secondItem="DB5-Dj-czj" secondAttribute="trailing" constant="16" id="HOW-jK-ygI"/>
                             <constraint firstItem="yhT-t0-tKW" firstAttribute="trailing" secondItem="jZk-ec-zvS" secondAttribute="trailing" id="K9K-46-WL2"/>
-                            <constraint firstItem="X98-jo-YNf" firstAttribute="trailing" secondItem="yhT-t0-tKW" secondAttribute="trailing" id="MB2-Eh-u2x"/>
                             <constraint firstItem="DB5-Dj-czj" firstAttribute="leading" secondItem="yhT-t0-tKW" secondAttribute="leading" constant="16" id="OKH-48-YYr"/>
-                            <constraint firstItem="X98-jo-YNf" firstAttribute="top" secondItem="yhT-t0-tKW" secondAttribute="top" id="RY9-y8-5wc"/>
-                            <constraint firstItem="X98-jo-YNf" firstAttribute="leading" secondItem="yhT-t0-tKW" secondAttribute="leading" id="WjN-oT-zV4"/>
                             <constraint firstItem="jZk-ec-zvS" firstAttribute="leading" secondItem="yhT-t0-tKW" secondAttribute="leading" id="bGY-lx-xfC"/>
                             <constraint firstItem="DB5-Dj-czj" firstAttribute="centerX" secondItem="0PF-ZO-fcK" secondAttribute="centerX" id="dQy-zj-su8"/>
-                            <constraint firstItem="X98-jo-YNf" firstAttribute="width" secondItem="0PF-ZO-fcK" secondAttribute="width" id="dUl-ye-4UV"/>
+                            <constraint firstItem="jZk-ec-zvS" firstAttribute="top" secondItem="yhT-t0-tKW" secondAttribute="top" id="hoS-h5-f4J"/>
                             <constraint firstAttribute="bottom" secondItem="jZk-ec-zvS" secondAttribute="bottom" id="k5V-Oz-g3r"/>
                             <constraint firstItem="DB5-Dj-czj" firstAttribute="centerY" secondItem="0PF-ZO-fcK" secondAttribute="centerY" id="srq-Gz-SA6"/>
-                            <constraint firstItem="jZk-ec-zvS" firstAttribute="top" secondItem="X98-jo-YNf" secondAttribute="bottom" id="uaM-fF-Ve2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yhT-t0-tKW"/>
                     </view>
