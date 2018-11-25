@@ -37,6 +37,7 @@ class GenreFilterRouter: GenreFilterWireframe {
     }
     
     func didTapSaveButton() {
-        
+        FilterRouter.didSetGenreFilter()
+        self.viewController?.navigationController?.popViewController(animated: true)
     }
 }

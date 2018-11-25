@@ -58,7 +58,7 @@ class GenreFilterInteractor: GenreFilterInteractorInput {
     }
     
     func saveGenreFilter(genres: [Genre]) {
-        
+        FavoriteMovieCoreDataManager.genresFilter = genres
     }
 
 }

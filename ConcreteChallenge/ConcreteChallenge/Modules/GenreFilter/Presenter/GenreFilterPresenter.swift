@@ -34,6 +34,7 @@ class GenreFilterPresenter: GenreFilterPresentation, GenreFilterInteractorOutput
     
     func didTapSaveButton() {
         self.interactor.saveGenreFilter(genres: self.genresFilter)
+        self.router.didTapSaveButton()
     }
     
     // MARK: - GenreFilterInteractorOutput functions

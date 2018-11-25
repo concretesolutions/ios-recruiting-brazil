@@ -17,4 +17,8 @@ class FilterInteractor: FilterInteractorInput {
     func getDateFilter() {
         self.output.didGetDateFilter(dates: FavoriteMovieCoreDataManager.datesFilter)
     }
+    
+    func getGenreFilter() {
+        self.output.didGetGenreFilter(genres: FavoriteMovieCoreDataManager.genresFilter)
+    }
 }

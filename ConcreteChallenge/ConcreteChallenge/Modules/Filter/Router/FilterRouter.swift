@@ -53,6 +53,10 @@ class FilterRouter: FilterWireframe {
         self.presenter.didSetDateFilter()
     }
     
+    static func didSetGenreFilter() {
+        self.presenter.didSetGenreFilter()
+    }
+    
     func exitFilter() {
         self.viewController?.dismiss(animated: true, completion: nil)
     }

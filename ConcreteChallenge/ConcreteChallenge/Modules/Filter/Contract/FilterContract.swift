@@ -17,6 +17,7 @@ protocol FilterWireframe: class {
     func showGenreFilter()
     
     static func didSetDateFilter()
+    static func didSetGenreFilter()
     
     func exitFilter()
     func doneFilter()
@@ -26,6 +27,7 @@ protocol FilterView {
     var presenter: FilterPresentation! { get set }
     
     func updateDateFilterIndicator(with dates: [Date])
+    func updateGenreFilterIndicator(with genres: [Genre])
 }
 
 protocol FilterPresentation: class {
@@ -40,16 +42,19 @@ protocol FilterPresentation: class {
     func didTapDateButton()
     func didTapGenreButton()
     func didSetDateFilter()
+    func didSetGenreFilter()
 }
 
 protocol FilterInteractorInput: class {
     var output: FilterInteractorOutput! { get set }
     
     func getDateFilter()
+    func getGenreFilter()
 }
 
 protocol FilterInteractorOutput: class {
     func didGetDateFilter(dates: [Date])
+    func didGetGenreFilter(genres: [Genre])
 }
 
 

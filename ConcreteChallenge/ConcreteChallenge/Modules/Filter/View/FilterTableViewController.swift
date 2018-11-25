@@ -44,6 +44,19 @@ class FilterTableViewController: UITableViewController, FilterView {
         self.dateFilterIndicator.text = years
     }
     
+    func updateGenreFilterIndicator(with genres: [Genre]) {
+        // Create String with Genres Names
+        var genresNames = ""
+        for (index, genre) in genres.enumerated() {
+            genresNames.append(genre.name)
+            if index != genres.count - 1 {
+                genresNames.append(", ")
+            }
+        }
+        
+        self.genreFilterIndicator.text = genresNames
+    }
+    
     // MARK: - Functions
     func setupNavigationBar() {
         // Title
