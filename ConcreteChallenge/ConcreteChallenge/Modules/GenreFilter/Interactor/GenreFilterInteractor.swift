@@ -17,6 +17,7 @@ class GenreFilterInteractor: GenreFilterInteractorInput {
     // MARK: - GenreFilterInteractorInput Functions
     func getGenres() {
         // Get only the genres from the favorite movies
+        
         // Get Favorite Movies Genres Ids
         var genreIds: [Int] = []
         for favoriteMovie in FavoriteMovieCoreDataManager.favoriteMovies {
@@ -37,7 +38,22 @@ class GenreFilterInteractor: GenreFilterInteractorInput {
                     }
                 }
             }
-            self.output.didGetGenres(genres: genres)
+            
+            // Remove repeated Genres
+            var noRepeatedGenres: [Genre] = []
+            var shouldAdd = true
+            for genre in genres {
+                for noRepeatedGenre in noRepeatedGenres {
+                    if noRepeatedGenre.id == genre.id {
+                        shouldAdd = false
+                    }
+                }
+                if shouldAdd {
+                    noRepeatedGenres.append(genre)
+                }
+                shouldAdd = true
+            }
+            self.output.didGetGenres(genres: noRepeatedGenres)
         }
     }
     
