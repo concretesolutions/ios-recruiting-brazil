@@ -34,9 +34,6 @@ final class FilterManagerScreen: UIView{
     }
     var delegate:FilterSelectionDelegate?
     
-    var navBarHeight:CGFloat
-    var tabBarHeight:CGFloat
-    
     lazy var yearFilterButton:UIButton = {
        let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -80,15 +77,11 @@ final class FilterManagerScreen: UIView{
     }()
     
     override init(frame: CGRect) {
-        navBarHeight = 0.0
-        tabBarHeight = 0.0
         super.init(frame: .zero)
         self.setupView()
     }
     
-    init(years:[String], genres:[String], navBarHeight:CGFloat, tabBarHeight:CGFloat){
-        self.navBarHeight = navBarHeight
-        self.tabBarHeight = tabBarHeight
+    init(years:[String], genres:[String]){
         self.filteredYears = years
         self.filteredGenres = genres
         super.init(frame: .zero)
@@ -114,20 +107,20 @@ extension FilterManagerScreen: ViewCode{
     }
     
     func setupConstraints() {
-        applyFilterButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -(30.0 + tabBarHeight)).isActive = true
+        applyFilterButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30.0).isActive = true
         applyFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30.0).isActive = true
         applyFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30.0).isActive = true
         applyFilterButton.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         
-        yearFilterButton.topAnchor.constraint(equalTo: self.topAnchor, constant: (30.0 + navBarHeight + UIApplication.shared.statusBarFrame.height)).isActive = true
-        yearFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30.0).isActive = true
-        yearFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30.0).isActive = true
+        yearFilterButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30.0).isActive = true
+        yearFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 60.0).isActive = true
+        yearFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60.0).isActive = true
         yearFilterButton.heightAnchor.constraint(equalTo: genreFilterButton.heightAnchor).isActive = true
         
         genreFilterButton.topAnchor.constraint(equalTo: yearFilterButton.bottomAnchor, constant: 30.0).isActive = true
         genreFilterButton.bottomAnchor.constraint(equalTo: applyFilterButton.topAnchor, constant: -30).isActive = true
-        genreFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30.0).isActive = true
-        genreFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30.0).isActive = true
+        genreFilterButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 60.0).isActive = true
+        genreFilterButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60.0).isActive = true
         genreFilterButton.heightAnchor.constraint(equalTo: yearFilterButton.heightAnchor).isActive = true
         
         yearFilterTitle.centerXAnchor.constraint(equalTo: yearFilterButton.centerXAnchor).isActive = true
@@ -161,16 +154,23 @@ extension FilterManagerScreen: ViewCode{
         yearFilterButton.addTarget(self, action: #selector(filterByYearTapped), for: .touchDown)
         genreFilterButton.addTarget(self, action: #selector(filterByGenreTapped), for: .touchDown)
         applyFilterButton.addTarget(self, action: #selector(applyFilterTapped), for: .touchDown)
+        
+        filteredGenres = filteredGenres.sorted()
+        update(label: genreFilterDescription, with: filteredGenres)
+        
+        filteredYears = filteredYears.sorted{ $0 < $1 }
+        update(label: yearFilterDescription, with: filteredYears)
+        
     }
     
     func setupLabels(){
         yearFilterTitle.textColor = Palette.white
-        yearFilterTitle.text = "Year"
+        yearFilterTitle.text = "By Year"
         yearFilterTitle.textAlignment = .center
         yearFilterTitle.font = UIFont(name: "Helvetica Neue", size: 30.0)
         
         genreFilterTitle.textColor = Palette.white
-        genreFilterTitle.text = "Genre"
+        genreFilterTitle.text = "By Genre"
         genreFilterTitle.textAlignment = .center
         genreFilterTitle.font = UIFont(name: "Helvetica Neue", size: 30.0)
         

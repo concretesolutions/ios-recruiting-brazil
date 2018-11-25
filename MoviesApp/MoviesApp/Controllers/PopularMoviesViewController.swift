@@ -71,7 +71,8 @@ extension PopularMoviesViewController{
 extension PopularMoviesViewController {
     func fetchMovies(query: String? = nil) {
         self.presentationState = .loading
-        service.fetchPopularMovies(query: query) { [weak self] result in
+        let request = query == nil ? APIRequest.fecthPopularMovies : APIRequest.searchMovie
+        service.fetchPopularMovies(request: request, query: query) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.handleFetch(of: response.results, withQuery: query, totalResults: response.totalResults)

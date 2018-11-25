@@ -16,23 +16,31 @@ protocol FilterSelectionDelegate: class{
 final class FilterManagerViewController: UIViewController {
     
     var screen = FilterManagerScreen()
-    var delegate:FilterApplier?
+    var delegate: FilterApplier?
+    
+    var filteredYears:[String] = []
+    var filteredGenres:[String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let navBarHeight = self.navigationController?.navigationBar.frame.height
-        let tabBarHeight = self.tabBarController?.tabBar.frame.height
-        screen = FilterManagerScreen(years: [], genres: [], navBarHeight: navBarHeight ?? 0.0, tabBarHeight: tabBarHeight ?? 0.0)
-        screen.delegate = self
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        self.view = screen
+        self.navigationItem.largeTitleDisplayMode = .always
         self.title = "Filter"
         // Do any additional setup after loading the view.
     }
     
     override func loadView() {
         screen.delegate = self
+        screen.filteredYears = self.filteredYears
+        screen.filteredGenres = self.filteredGenres
         self.view = screen
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParent{
+            delegate?.applyFilter(withYears: self.filteredYears, andGenres: self.filteredGenres)
+        }
     }
 
 }
@@ -40,7 +48,9 @@ final class FilterManagerViewController: UIViewController {
 extension FilterManagerViewController: FilterSelectionDelegate{
     
     func applyFilter(years: [String], genres: [String]) {
-        delegate?.applyFilter(withYears: years, andGenres: genres)
+//        delegate?.applyFilter(withYears: years, andGenres: genres)
+        self.filteredYears = years
+        self.filteredGenres = genres
         self.navigationController?.popViewController(animated: true)
     }
     

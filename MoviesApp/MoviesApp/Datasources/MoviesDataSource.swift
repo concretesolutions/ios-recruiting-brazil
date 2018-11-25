@@ -50,7 +50,7 @@ final class MoviesDataSource:NSObject{
     }
     
     func fetchNextPage(){
-        service.fetchPopularMovies(query: nil, page: currentPage+1) { [weak self] result in
+        service.fetchPopularMovies(request: APIRequest.fecthPopularMovies, query: nil, page: currentPage+1) { [weak self] result in
             
             switch result{
             case .success(let response):

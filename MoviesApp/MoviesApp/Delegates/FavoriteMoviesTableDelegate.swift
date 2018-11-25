@@ -11,11 +11,23 @@ import UIKit
 
 class FavoriteMoviesTableDelegate: NSObject, UITableViewDelegate{
     
+    var isFiltering:Bool
+    weak var dataSource: FavoriteMoviesDataSource?
+    
+    init(isFiltering:Bool){
+        self.isFiltering = isFiltering
+        super.init()
+    }
+    
     required override init() {
+        self.isFiltering = false
         super.init()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isFiltering && indexPath.row == 0{
+            return 60
+        }
         return tableView.frame.height/5
     }
     
@@ -23,4 +35,10 @@ class FavoriteMoviesTableDelegate: NSObject, UITableViewDelegate{
         return "Unfavorite"
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isFiltering && indexPath.row == 0{
+            (tableView as! MoviesTableView).resetFilters()
+        }
+        
+    }
 }

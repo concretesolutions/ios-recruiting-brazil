@@ -16,7 +16,10 @@ final class FavoriteMoviesViewController: UIViewController {
     
     let screen = FavoriteMoviesScreen()
     var movies:[CDMovie] = []
+    
     var isFiltering = false
+    var filteredYears:[String] = []
+    var filteredGenres:[String] = []
     
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -36,6 +39,7 @@ final class FavoriteMoviesViewController: UIViewController {
     }
     
     override func loadView() {
+        screen.delegate = self
         self.view = screen
     }
     
@@ -57,6 +61,8 @@ final class FavoriteMoviesViewController: UIViewController {
     @objc func filterTapped(){
         let filterManagerVC = FilterManagerViewController()
         filterManagerVC.delegate = self
+        filterManagerVC.filteredYears = self.filteredYears
+        filterManagerVC.filteredGenres = self.filteredGenres
         self.navigationController?.pushViewController(filterManagerVC, animated: true)
     }
     
@@ -76,7 +82,11 @@ extension FavoriteMoviesViewController{
 extension FavoriteMoviesViewController: FilterApplier{
     
     func applyFilter(withYears years: [String], andGenres genres: [String]) {
-        self.isFiltering = true
+        self.isFiltering = !(years.count == 0 && genres.count == 0)
+        
+        self.filteredYears = years
+        self.filteredGenres = genres
+        
         var filteredMovies = self.movies
         
         if years.count > 0{
@@ -96,7 +106,18 @@ extension FavoriteMoviesViewController: FilterApplier{
             }
         }
         
-        self.screen.tableView.setupTableView(with: filteredMovies)
+        self.screen.tableView.setupTableView(with: filteredMovies, filtering: true)
+    }
+    
+}
+
+extension FavoriteMoviesViewController: FilterResetter{
+    
+    func resetFilter() {
+        self.filteredYears = []
+        self.filteredGenres = []
+        self.isFiltering = false
+        self.fetchPersistedMovies()
     }
     
 }

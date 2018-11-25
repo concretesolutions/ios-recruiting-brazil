@@ -13,24 +13,31 @@ import Reusable
 final class FavoriteMoviesDataSource:NSObject{
     
     var movies:[CDMovie] = []
-    
-    //Filtering
-//    var filteredMovies:[CDMovie] = []
-//    var isFiltering = false
+    var isFiltering:Bool
     
     weak var tableView:UITableView?
-    weak var delegate:UITableViewDelegate?
+    weak var delegate:FavoriteMoviesTableDelegate?
     
-    required init(movies:[CDMovie], tableView:UITableView, delegate:UITableViewDelegate) {
+    required init(movies:[CDMovie], filtering:Bool = false, tableView:UITableView, delegate:FavoriteMoviesTableDelegate) {
         self.movies = movies
         self.tableView = tableView
         self.delegate = delegate
+        self.isFiltering = filtering
+        
         super.init()
+        delegate.dataSource = self
+        delegate.isFiltering = filtering
         tableView.register(cellType: FavoriteMovieTableViewCell.self)
+        tableView.register(cellType: RemoveFilterTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = delegate
         tableView.reloadData()
         
+    }
+    
+    func resetFilter(){
+        self.isFiltering = false
+        self.updateMovies(CDMovieDAO.getAll())
     }
     
     func updateMovies(_ movies:[CDMovie]){
@@ -43,13 +50,19 @@ final class FavoriteMoviesDataSource:NSObject{
 extension FavoriteMoviesDataSource: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return isFiltering ? movies.count + 1 : movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FavoriteMovieTableViewCell.self)
         
-        let movie = movies[indexPath.row]
+        if indexPath.row == 0 && isFiltering{
+            let headerCell = tableView.dequeueReusableCell(for: indexPath, cellType: RemoveFilterTableViewCell.self)
+            return headerCell
+        }
+        
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FavoriteMovieTableViewCell.self)
+
+        let movie = isFiltering ? movies[indexPath.row - 1] : movies[indexPath.row]
         cell.setup(with: movie)
         
         return cell

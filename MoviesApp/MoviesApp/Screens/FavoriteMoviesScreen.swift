@@ -8,10 +8,17 @@
 
 import UIKit
 
-class FavoriteMoviesScreen: UIView {
+protocol FilterResetter:class{
+    func resetFilter()
+}
+
+final class FavoriteMoviesScreen: UIView {
+    
+    var delegate:FilterResetter?
 
     lazy var tableView:MoviesTableView = {
         let view = MoviesTableView(tableStyle: .favoriteMovies)
+        view.filterResetterDelegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -40,8 +47,15 @@ extension FavoriteMoviesScreen: ViewCode{
     }
     
     func setupAdditionalConfiguration() {
-
+        tableView.allowsSelection = true
+        tableView.allowsMultipleSelection = false
     }
+}
+
+extension FavoriteMoviesScreen: FilterResetter{
     
+    func resetFilter() {
+        delegate?.resetFilter()
+    }
     
 }

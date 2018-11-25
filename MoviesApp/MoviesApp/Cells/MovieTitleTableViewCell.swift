@@ -47,7 +47,7 @@ class MovieTitleTableViewCell: UITableViewCell, NibReusable {
         if let movie = self.movie{
             CDMovieDAO.create(from: movie, genres: genres){ movie, error in
                 if error != nil{
-                    print("Error! Persisted Entity Already Exists")                    
+                    print("Error! Persisted Object Already Exists")                    
                 }else{
                     self.setFavoriteButton(hasFavorited: true)
                 }

@@ -22,6 +22,7 @@ class MoviesTableView:UITableView{
     fileprivate var customDataSource:UITableViewDataSource?
     fileprivate var customDelegate:UITableViewDelegate?
 
+    var filterResetterDelegate: FilterResetter?
     
     convenience init(tableStyle:TableViewStyle) {
         self.init(frame: .zero)
@@ -32,7 +33,7 @@ class MoviesTableView:UITableView{
             customDataSource = nil
         case .favoriteMovies:
             customDelegate = FavoriteMoviesTableDelegate()
-            customDataSource = FavoriteMoviesDataSource(movies: [], tableView: self, delegate: customDelegate!)
+            customDataSource = FavoriteMoviesDataSource(movies: [], tableView: self, delegate: customDelegate as! FavoriteMoviesTableDelegate)
         }
         
         setupLayout()
@@ -40,16 +41,27 @@ class MoviesTableView:UITableView{
     
     func setupLayout(){
         self.backgroundColor = Palette.blue
-        self.allowsSelection = false
         self.separatorStyle = .none
     }
     
-    func setupTableView(with movies:[CDMovie]){
-        self.customDataSource = FavoriteMoviesDataSource(movies: movies, tableView: self, delegate: customDelegate!)
+}
+
+extension MoviesTableView{
+    
+    func setupTableView(with movies:[CDMovie], filtering:Bool = false){
+        self.customDataSource = FavoriteMoviesDataSource(movies: movies, filtering: filtering, tableView: self, delegate: customDelegate as! FavoriteMoviesTableDelegate)
     }
     
     func setupTableView(with movie:Movie, genres:[Genre]){
         self.customDataSource = DetailMovieDataSource(movie: movie, genres: genres, tableView: self, delegate: customDelegate!)
+    }
+    
+}
+
+extension MoviesTableView{
+    
+    func resetFilters(){
+        filterResetterDelegate?.resetFilter()
     }
     
 }

@@ -56,11 +56,11 @@ class PopularMoviesScreen: UIView {
             self.activityIndicator.stopAnimating()
             self.emptySearchView.isHidden = true
         case .error:
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.emptySearchView.setupView(for: .generic)
-                self.emptySearchView.isHidden = false
-                self.bringSubviewToFront(self.emptySearchView)
+            DispatchQueue.main.async { [weak self] in
+                self?.activityIndicator.stopAnimating()
+                self?.emptySearchView.setupView(for: .generic)
+                self?.emptySearchView.isHidden = false
+                self?.bringSubviewToFront((self?.emptySearchView)!)
             }
             
         case .noResults(let query):
@@ -89,8 +89,6 @@ extension PopularMoviesScreen: ViewCode{
         
         activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        activityIndicator.heightAnchor.constraint(equalToConstant: 400.0)
-        activityIndicator.widthAnchor.constraint(equalToConstant: 400.0)
         
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

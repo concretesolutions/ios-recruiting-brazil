@@ -19,7 +19,9 @@ class FavoriteMovieTableViewCell: UITableViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.selectionStyle = .none
+        self.background.backgroundColor = Palette.blue
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,7 +31,6 @@ class FavoriteMovieTableViewCell: UITableViewCell, NibReusable {
     }
     
     func setup(with movie:CDMovie){
-        self.background.backgroundColor = Palette.blue
         self.title.text = movie.title
         self.year.text = "\(movie.getYear())"
         self.descriptionLabel.text = movie.overview

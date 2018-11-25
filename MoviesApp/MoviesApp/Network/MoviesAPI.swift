@@ -20,41 +20,47 @@ enum Result<T> {
 }
 
 protocol MoviesService{
-    func fetchPopularMovies(query:String?, page:Int?, callback: @escaping  (Result<MovieResponse>) -> Void)
+    func fetchPopularMovies(request:APIRequest, query:String?, page:Int?, callback: @escaping  (Result<MovieResponse>) -> Void)
     func fetchGenre(callback: @escaping (Result<[Genre]>) -> Void)
+}
+
+enum APIRequest:String{
+    case fecthPopularMovies = "movie/popular"
+    case searchMovie = "search/movie"
+    case fetchGenres = ""
 }
 
 class MoviesServiceImplementation: MoviesService{
     
-    var baseUrl:String = "https://api.themoviedb.org/3/"
+    var endpoint:String = "https://api.themoviedb.org/3/"
     var isFetchInProgress = false
     
-    func fetchPopularMovies(query:String? = nil, page:Int? = nil, callback: @escaping (Result<MovieResponse>) -> Void) {
+    func fetchPopularMovies(request: APIRequest, query:String? = nil, page:Int? = nil, callback: @escaping (Result<MovieResponse>) -> Void) {
         
         guard !isFetchInProgress else {
             return
         }
-        
-        // 2
         isFetchInProgress = true
         
-        var request = ""
+        var components = URLComponents(string: endpoint + request.rawValue)
+        
+        var queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "api_key", value: MoviesAPIConfig.apikey),
+        ]
         
         if let query = query?.replacingOccurrences(of: " ", with: "%20"){
-            let queryMoviesRequest = "search/movie?api_key="
-            request = baseUrl + queryMoviesRequest + MoviesAPIConfig.apikey + "&query=" + query
+            queryItems.append(URLQueryItem(name: "query", value: query))
+        }
             
-        }else{
-            let popularMoviesRequest = "movie/popular?api_key="
-            request = baseUrl + popularMoviesRequest + MoviesAPIConfig.apikey
-            
-            if let page = page{
-                request += "&page=\(page)"
-                print(request)
-            }
+        if let page = page{
+            queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
         }
         
-        guard let url = URL(string: request) else {return}
+        components?.queryItems = queryItems
+        guard let url = components?.url else{
+            callback(.error(NSError()))
+            return
+        }
         
         let task = URLSession.shared.dataTask(with: url){ data, response, error in
             guard let data = data else{
@@ -83,7 +89,7 @@ class MoviesServiceImplementation: MoviesService{
     func fetchGenre(callback: @escaping (Result<[Genre]>) -> Void){
         let genresRequest = "genre/movie/list?api_key="
         let languageRequest = "&language=en-US"
-        let request = self.baseUrl + genresRequest + MoviesAPIConfig.apikey + languageRequest
+        let request = self.endpoint + genresRequest + MoviesAPIConfig.apikey + languageRequest
         
         guard let url = URL(string: request) else {return}
         
