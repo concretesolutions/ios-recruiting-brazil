@@ -32,8 +32,10 @@ class MoviesInteractor: MoviesUseCase {
     
     func getCurrentMovies() {
         if let currentSearchResult = self.currentSearchResult {
+            currentSearchResult.map{ $0.isFavorite = MovieDataManager.isFavoriteMovie(id: $0.id)}
             self.output.didGetCurrentMovies(currentSearchResult)
         } else {
+            self.current.map{ $0.isFavorite = MovieDataManager.isFavoriteMovie(id: $0.id)}
             self.output.didGetCurrentMovies(self.current)
         }
         
