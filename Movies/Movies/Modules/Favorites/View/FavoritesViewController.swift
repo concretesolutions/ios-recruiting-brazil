@@ -46,6 +46,11 @@ class FavoritesViewController: UIViewController, FavoritesView {
         self.presenter.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presenter.viewDidAppear()
+    }
+    
     // MARK: - FavoritesView protocol functions
     
     func present(movies: [Movie]) {
@@ -61,6 +66,13 @@ class FavoritesViewController: UIViewController, FavoritesView {
     
     func hideRemoveFilterButton() {
         
+    }
+    
+    func delete(movieAt index: Int) {
+        DispatchQueue.main.async {
+            self.dataSource.delete(movieAt: index)
+            self.favorites.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
+        }
     }
     
     // MARK: - Actions

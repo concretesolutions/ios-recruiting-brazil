@@ -48,4 +48,8 @@ class FavoritesTVDataSource: NSObject, UITableViewDataSource {
         self.tableView?.reloadData()
     }
     
+    func delete(movieAt index: Int) {
+        self.movies.remove(at: index)
+    }
+    
 }

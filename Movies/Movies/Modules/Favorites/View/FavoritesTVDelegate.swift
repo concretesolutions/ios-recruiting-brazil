@@ -24,7 +24,7 @@ class FavoritesTVDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let favoriteCell = tableView.cellForRow(at: indexPath) as? FavoriteTableViewCell {
-            self.presenter.didSelect(movie: favoriteCell.movie)
+            self.presenter.didSelect(movie: favoriteCell.movie, index: indexPath.row)
         }
     }
     
