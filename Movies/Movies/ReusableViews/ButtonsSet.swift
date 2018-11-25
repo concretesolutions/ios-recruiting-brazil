@@ -67,6 +67,20 @@ class ButtonsSet: UIStackView {
     private(set) var buttonBehavior: ButtonBehavior
     private var currentStyles: [String:Style] = [:]
     
+    private var buttons: [UIButton] = []
+    var buttonsSelectedStates: [Bool] = [] {
+        didSet {
+            if self.buttons.count == self.buttonsSelectedStates.count && self.buttonBehavior == .Select {
+                guard let bhs = self.buttonHighlitedStyle else { return }
+                for i in Range(uncheckedBounds: (0, self.buttonNames.count)) {
+                    if self.buttonsSelectedStates[i] {
+                        self.add(style: bhs, to: self.buttons[i], in: .normal)
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: - Initializers
     
     init(width: Float, buttonHeight: Float = 60.0, spacing: Float = 7.0, buttonNames: Set<String>, order: Order = .Otimized, buttonNormalStyle: Style, buttonHighlitedStyle: Style, buttonBehavior: ButtonBehavior = .Click) {
@@ -130,6 +144,7 @@ class ButtonsSet: UIStackView {
         print(namesInFinalOrder)
         var buttons: [UIButton] = namesInFinalOrder.map { (name: String) -> UIButton in
             var button = UIButton()
+            self.buttons.append(button)
             button.setTitle(name.trimmingCharacters(in: CharacterSet(charactersIn: " ")), for: .normal)
             button.backgroundColor = .lightGray
             button.isUserInteractionEnabled = true
