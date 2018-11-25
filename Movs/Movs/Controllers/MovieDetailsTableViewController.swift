@@ -9,16 +9,13 @@
 import UIKit
 
 class MovieDetailsTableViewController: UITableViewController {
-    var movie: CodableMovie
+    var movie: Movie
     
-    init(presenting movie: CodableMovie) {
+    init(presenting movie: Movie) {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
         self.title = "Movie"
-        self.tableView.contentInset = .zero
-        self.tableView.layoutMargins = .zero
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -44,16 +41,26 @@ class MovieDetailsTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             cell = ImageTableViewCell()
-            if let url = URL(string: TMDBManager.imageEndpoint + (movie.poster_path ?? "")) {
+            if let url = URL(string: TMDBManager.imageEndpoint + movie.poster_path) {
                 cell.imageView?.sd_setImage(with: url)
             }
         case 1:
-            cell.textLabel?.text = movie.title
+            cell = ToggleButtonTableViewCell(toggleValue: FavoriteManager.shared.existsMovie(withID: self.movie.id))
+            let castCell = (cell as! ToggleButtonTableViewCell)
+            castCell.toggle.toggleAction = { isOn in
+                let favoriteManager = FavoriteManager.shared
+                
+                if isOn {
+                    favoriteManager.favoriteMovie(self.movie)
+                } else {
+                    favoriteManager.unfavoriteMovie(withID: self.movie.id)
+                }
+            }
+            castCell.label.text = movie.title
         case 2:
             cell.textLabel?.text = movie.release_date
         case 3:
-            let names = TMDBManager.shared.genreNames(forIds: movie.genre_ids)
-            cell.textLabel?.text = names.joined(separator: ", ")
+            cell.textLabel?.text = movie.genre_names
         case 4:
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = movie.overview
@@ -66,7 +73,7 @@ class MovieDetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return (UIScreen.main.bounds.width - 32) * (3/2)
+            return (UIScreen.main.bounds.width) * (3/2)
         } else {
             return self.tableView.rowHeight
         }

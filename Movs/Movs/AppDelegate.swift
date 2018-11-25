@@ -20,20 +20,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         
         //MARK:
-        let moviesView = MoviesCollectionViewController()
-        moviesView.title = "Movies"
-        moviesView.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), selectedImage: UIImage(named: "list_icon"))
+        let moviesView: MoviesCollectionViewController = {
+            let vc = MoviesCollectionViewController()
+            vc.title = "Movies"
+            vc.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), selectedImage: UIImage(named: "list_icon"))
+            return vc
+        }()
         
-        let navigation = UINavigationController(rootViewController: moviesView)
-        navigation.navigationBar.barTintColor = .MovYellow
-        navigation.navigationBar.isTranslucent = false
+        let navigation1: UINavigationController = {
+            let vc = UINavigationController(rootViewController: moviesView)
+            vc.navigationBar.barTintColor = .MovYellow
+            vc.navigationBar.isTranslucent = false
+            return vc
+        }()
         
-        let view2 = UIViewController()
-        view2.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_gray_icon"), selectedImage: UIImage(named: "favorite_gray_icon"))
-        view2.view.backgroundColor = .green
+        let favorites: FavoritesTableViewController = {
+            let vc = FavoritesTableViewController()
+            vc.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon"), selectedImage: UIImage(named: "favorite_empty_icon"))
+            vc.title = "Favorites"
+            return vc
+        }()
+        
+        let navigation2: UINavigationController = {
+            let vc = UINavigationController(rootViewController: favorites)
+            vc.navigationBar.barTintColor = .MovYellow
+            vc.navigationBar.isTranslucent = false
+            return vc
+        }()
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [navigation, view2]
+        tabBarController.viewControllers = [navigation1, navigation2]
         tabBarController.tabBar.barTintColor = .MovYellow
         tabBarController.tabBar.isTranslucent = false
         

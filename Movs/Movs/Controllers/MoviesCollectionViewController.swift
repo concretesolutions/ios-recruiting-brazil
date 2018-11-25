@@ -12,14 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDataSourcePrefetching, UISearchResultsUpdating, UISearchBarDelegate {
     var moviesTotal: Int =  0
-    var movies: [CodableMovie]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-            }
-        }
-    }
+    var movies = [Movie]()
     var isFetching: Bool = false
     
     var searchController: UISearchController!
@@ -71,10 +64,13 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
         self.loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.collectionView.reloadData()
+    }
+    
     // MARK: - custom methods
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        guard let movies = self.movies else { return true }
         return indexPath.row >= movies.count
     }
     
@@ -109,10 +105,21 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
         switch response {
         case .result(let moviesResponse):
             self.moviesTotal = moviesResponse.total_results
+            
+            let results = moviesResponse.results.map { (movie) -> Movie in
+                var newMovie = Movie(from: movie)
+                newMovie.genre_names = TMDBManager.shared.genreNames(forIds: movie.genre_ids).joined(separator: ", ")
+                return newMovie
+            }
             if isUpdating {
-                self.movies?.append(contentsOf: moviesResponse.results)
+                self.movies.append(contentsOf: results)
             } else {
-                self.movies = moviesResponse.results
+                self.movies = results
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                }
             }
         case .error(let description):
             self.showErrorMessage(description ?? "Generic Error")
@@ -132,12 +139,21 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let movies = self.movies, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MovieCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MovieCollectionViewCell else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         }
         
         if !isLoadingCell(for: indexPath) {
-            cell.movie = movies[indexPath.row]
+            let movie = movies[indexPath.row]
+            cell.movie = movie
+            cell.toggle.isOn = FavoriteManager.shared.existsMovie(withID: movie.id)
+            cell.toggle.toggleAction = { isOn in
+                if isOn {
+                    FavoriteManager.shared.favoriteMovie(movie)
+                } else {
+                    FavoriteManager.shared.unfavoriteMovie(withID: movie.id)
+                }
+            }
         }
         
         return cell
@@ -175,40 +191,9 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movies = self.movies else { return }
-        
         let detailView = MovieDetailsTableViewController(presenting: movies[indexPath.row])
         detailView.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailView, animated: true)
     }
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
     
 }
