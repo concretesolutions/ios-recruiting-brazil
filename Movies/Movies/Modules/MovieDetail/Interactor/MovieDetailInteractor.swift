@@ -24,7 +24,7 @@ class MovieDetailInteractor: MovieDetailUseCase {
     func favorite(movie: Movie) {
         DispatchQueue.main.async {
             MovieDataManager.createFavoriteMovie(movie)
-            ImageDataManager.saveImage(posterPath: movie.posterPath ?? "", image: movie.posterImage ?? UIImage())
+            ImageDataManager.saveImage(posterPath: movie.posterPath, image: movie.posterImage ?? UIImage())
         }
         movie.isFavorite = true
     }
@@ -32,7 +32,7 @@ class MovieDetailInteractor: MovieDetailUseCase {
     func unfavorite(movie: Movie) {
         DispatchQueue.main.async {
             MovieDataManager.deleteFavoriteMovie(withId: movie.id)
-            ImageDataManager.deleteImage(withPosterPath: movie.posterPath ?? "")
+            ImageDataManager.deleteImage(withPosterPath: movie.posterPath)
         }
         movie.isFavorite = false
     }

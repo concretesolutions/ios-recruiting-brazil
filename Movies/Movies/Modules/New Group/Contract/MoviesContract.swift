@@ -25,6 +25,7 @@ protocol MoviesPresentation {
     var interactor: MoviesUseCase! { get set }
     
     func viewDidLoad()
+    func viewDidAppear()
     func didSelect(movie: Movie)
     func didTapFavoriteButton(forMovie: Movie)
     func didSearchMovies(withTitle: String)
@@ -39,6 +40,7 @@ protocol MoviesUseCase {
     func getMovies(fromPage page: Int)
     func getCurrentMovies()
     func searchMovies(withTitle title: String)
+    func finishSearch()
     func favorite(movie: Movie)
     func unfavorite(movie: Movie)
 }

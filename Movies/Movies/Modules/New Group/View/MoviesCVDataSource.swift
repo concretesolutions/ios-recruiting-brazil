@@ -35,6 +35,7 @@ class MoviesCVDataSource: NSObject, UICollectionViewDataSource {
         let reusableCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         if let movieCell = reusableCell as? MovieCollectionViewCell {
+            movieCell.poster.image = nil
             movieCell.set(movie: self.movies[indexPath.row])
             movieCell.presenter = self.presenter
         }

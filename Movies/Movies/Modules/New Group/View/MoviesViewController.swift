@@ -49,6 +49,11 @@ class MoviesViewController: UIViewController, MoviesView {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presenter.viewDidAppear()
+    }
+    
     // MARK: - Aux functions
     
     private func createView(withMessage message: String) -> UIView {
