@@ -22,6 +22,12 @@ final class FavoriteMoviesScreen: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    lazy var emptyLabel:UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,11 +38,23 @@ final class FavoriteMoviesScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateUI(with state: PresentationState){
+        switch state {
+        case .ready:
+            emptyLabel.isHidden = true
+        case .noResults(let string):
+            emptyLabel.isHidden = false
+        default:
+            return
+        }
+    }
+    
 }
 
 extension FavoriteMoviesScreen: ViewCode{
     func setupViewHierarchy() {
-        self.addSubview(self.tableView)
+        addSubview(tableView)
+        addSubview(emptyLabel)
     }
     
     func setupConstraints() {
@@ -46,11 +64,22 @@ extension FavoriteMoviesScreen: ViewCode{
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.equalToSuperview().offset(30)
+            make.trailing.equalToSuperview().offset(-30)
+        }
     }
     
     func setupAdditionalConfiguration() {
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = false
+        
+        emptyLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 20.0)
+        emptyLabel.textColor = Palette.white
+        emptyLabel.text = "No Favorites were found"
+        emptyLabel.textAlignment = .center
     }
 }
 

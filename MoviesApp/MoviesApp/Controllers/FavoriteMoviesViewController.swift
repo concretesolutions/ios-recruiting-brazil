@@ -22,6 +22,12 @@ final class FavoriteMoviesViewController: UIViewController {
     var filteredYears:[String] = []
     var filteredGenres:[String] = []
     
+    var presentationState:PresentationState = .initial{
+        didSet{
+            refreshUI(presentation: presentationState)
+        }
+    }
+    
     init(){
         super.init(nibName: nil, bundle: nil)
         self.title = "Favorites"
@@ -55,12 +61,8 @@ final class FavoriteMoviesViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [filter]
     }
     
-    @objc func filterTapped(){
-        let filterManagerVC = FilterManagerViewController()
-        filterManagerVC.delegate = self
-        filterManagerVC.filteredYears = self.filteredYears
-        filterManagerVC.filteredGenres = self.filteredGenres
-        self.navigationController?.pushViewController(filterManagerVC, animated: true)
+    func refreshUI(presentation: PresentationState){
+        self.screen.updateUI(with: presentation)
     }
     
 }
@@ -80,6 +82,7 @@ extension FavoriteMoviesViewController{
         updatedMovies = filterMovies(movies: updatedMovies, years: self.filteredYears, genres: self.filteredGenres)
         self.movies = updatedMovies
         self.screen.tableView.setupTableView(with: updatedMovies, filtering: self.isFiltering)
+        self.presentationState = updatedMovies.count > 0 ? .ready : .noResults("")
         
     }
     
@@ -117,6 +120,14 @@ extension FavoriteMoviesViewController: FilterApplier{
         }
         
         return filteredMovies
+    }
+    
+    @objc func filterTapped(){
+        let filterManagerVC = FilterManagerViewController()
+        filterManagerVC.delegate = self
+        filterManagerVC.filteredYears = self.filteredYears
+        filterManagerVC.filteredGenres = self.filteredGenres
+        self.navigationController?.pushViewController(filterManagerVC, animated: true)
     }
     
 }
