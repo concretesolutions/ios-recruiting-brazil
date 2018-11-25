@@ -16,5 +16,8 @@ class HomeTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         self.presenter.viewDidLoad()
+        
+        self.tabBar.barStyle = .default
+        self.tabBar.barTintColor = UIColor.white
     }
 }

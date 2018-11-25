@@ -66,7 +66,8 @@ class MoviesViewController: UICollectionViewController {
     }
     
     private func setupLayout() {
-        
+        self.title = "Popular"
+        self.navigationController!.tabBarItem = UITabBarItem(title: "Popular", image: nil, selectedImage: nil)
     }
     
     private func view(with image:UIImage, and message:String) -> UIView {
