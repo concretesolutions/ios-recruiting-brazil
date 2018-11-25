@@ -46,6 +46,7 @@ class FilterRouter: FilterWireframe {
     
     func showGenreFilter() {
         let genreFilterViewController = GenreFilterRouter.assembleModule()
+        self.viewController?.navigationController?.pushViewController(genreFilterViewController, animated: true)
     }
     
     static func didSetDateFilter() {
