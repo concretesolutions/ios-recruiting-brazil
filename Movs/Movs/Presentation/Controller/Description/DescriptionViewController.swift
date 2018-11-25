@@ -121,9 +121,8 @@ class DescriptionViewController: UIViewController {
                 }).map({ (genre) -> String in
                     return genre.name ?? ""
                 }).joined(separator: ", ")
-                let genreText = "Gen.: " + genres
-                self.genreListLabel.text = genreText
-                self.genresString = genreText
+                self.genreListLabel.text = genres
+                self.genresString = genres
             }
         }
     }

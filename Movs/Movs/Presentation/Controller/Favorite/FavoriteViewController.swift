@@ -71,6 +71,9 @@ class FavoriteViewController: UIViewController {
         if let vc = segue.destination as? DescriptionViewController {
             vc.data = sender as? Favorite
             vc.behavior = .Favorite
+        } else if let vc = segue.destination as? FilteringViewController {
+            guard let favorite = favorite else { return }
+            vc.favorite = favorite
         }
         
     }

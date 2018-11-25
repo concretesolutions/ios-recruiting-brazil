@@ -44,6 +44,8 @@
 		A48947A621A1E23F00EBA07B /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48947A521A1E23F00EBA07B /* FavoriteTableViewCell.swift */; };
 		A4E249B2219F1CF50041C538 /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E249B1219F1CF50041C538 /* Favorite.storyboard */; };
 		A4E249B4219F1F2D0041C538 /* Description.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E249B3219F1F2D0041C538 /* Description.storyboard */; };
+		A4E8F4D521AACF5A006783A4 /* FilteringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E8F4D421AACF5A006783A4 /* FilteringTableViewCell.swift */; };
+		A4E8F4D721AB04E1006783A4 /* FilterDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E8F4D621AB04E1006783A4 /* FilterDetailTableViewCell.swift */; };
 		C0BCFC041AFD506B268E0EEA /* Pods_MovsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E4B106923D2BA7C0524837 /* Pods_MovsUITests.framework */; };
 		F24EFC7292ED467A726E18A7 /* Pods_MovsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D453FF7455F4DB4905FA029F /* Pods_MovsTests.framework */; };
 		F6F4301AE496113C4F31C77B /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D5E7B39D9D4D5D18729564 /* Pods_Movs.framework */; };
@@ -114,6 +116,8 @@
 		A48947A521A1E23F00EBA07B /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		A4E249B1219F1CF50041C538 /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
 		A4E249B3219F1F2D0041C538 /* Description.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Description.storyboard; sourceTree = "<group>"; };
+		A4E8F4D421AACF5A006783A4 /* FilteringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringTableViewCell.swift; sourceTree = "<group>"; };
+		A4E8F4D621AB04E1006783A4 /* FilterDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailTableViewCell.swift; sourceTree = "<group>"; };
 		A890DF3A23E15AE8DD8D597C /* Pods-Movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.debug.xcconfig"; sourceTree = "<group>"; };
 		B4E4B106923D2BA7C0524837 /* Pods_MovsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D453FF7455F4DB4905FA029F /* Pods_MovsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,8 +251,8 @@
 		A4256120219B1197009F5498 /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				A4256122219B11AA009F5498 /* DAO */,
 				A4256121219B11A3009F5498 /* Services */,
+				A4256122219B11AA009F5498 /* DAO */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -312,7 +316,9 @@
 			isa = PBXGroup;
 			children = (
 				A40E88332199AB2D00EE4D5B /* FilteringViewController.swift */,
+				A4E8F4D421AACF5A006783A4 /* FilteringTableViewCell.swift */,
 				A460253321A6FCC200B13F00 /* FilterDetailTableViewController.swift */,
+				A4E8F4D621AB04E1006783A4 /* FilterDetailTableViewCell.swift */,
 			);
 			path = Filtering;
 			sourceTree = "<group>";
@@ -639,11 +645,13 @@
 				A456517B21A39BF0009B4B9B /* UIViewController+CustomAlert.swift in Sources */,
 				A4894777219F4C8200EBA07B /* PopularMovie.swift in Sources */,
 				A46C9091219C6F6A00472794 /* Enumeration.swift in Sources */,
+				A4E8F4D721AB04E1006783A4 /* FilterDetailTableViewCell.swift in Sources */,
 				A4894776219F4C8200EBA07B /* Result.swift in Sources */,
 				A489479A21A0B1B800EBA07B /* FavoriteServices.swift in Sources */,
 				A489479C21A0B3CA00EBA07B /* FavoriteDAO.swift in Sources */,
 				A489479421A0AE9500EBA07B /* Favorite.swift in Sources */,
 				A40E88322199AB2D00EE4D5B /* AppDelegate.swift in Sources */,
+				A4E8F4D521AACF5A006783A4 /* FilteringTableViewCell.swift in Sources */,
 				A489478A219FE84B00EBA07B /* GenreDAO.swift in Sources */,
 				A460253421A6FCC200B13F00 /* FilterDetailTableViewController.swift in Sources */,
 				A489479621A0AED900EBA07B /* CoreDataManager.swift in Sources */,

@@ -8,39 +8,52 @@
 
 import UIKit
 
-class FilterDetailTableViewController: UITableViewController {
+private enum FilterBehavior {
+    case Genre
+    case Year
+}
 
+class FilterDetailTableViewController: UITableViewController {
+    var genre = [String]()
+    var year = [Int]()
+    private var behavior: FilterBehavior = .Genre
+    
+    let filterDetailCellIdentifier = "filterDetail"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        
+        if !genre.isEmpty {
+            behavior = .Genre
+        } else if !year.isEmpty {
+            behavior = .Year
+        }
+        
+        tableView.tableFooterView = UIView()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        switch behavior {
+        case .Genre:
+            return genre.count
+        case .Year:
+            return year.count
+        }
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: filterDetailCellIdentifier,
+                                                 for: indexPath) as? FilterDetailTableViewCell
+        
+        switch behavior {
+        case .Genre:
+            cell?.setData(genre: genre[indexPath.row])
+        case .Year:
+            cell?.setData(year: year[indexPath.row])
+        }
 
-        // Configure the cell...
-
-        return cell
+        return cell!
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
