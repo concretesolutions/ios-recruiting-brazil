@@ -8,12 +8,15 @@
 
 import UIKit
 
+typealias GenreFilterItem = (genre: Genre, isSelected: Bool)
+typealias YearFilterItem = (year: Int, isSelected: Bool)
+
 protocol FavoritesFilterView: class {
     
     var presenter: FavoritesFilterPresentation! { get set }
     
-    func set(genres: [(genre: Genre, isSelected: Bool)])
-    func set(years: [(year: Int, isSelected: Bool)])
+    func set(genres: [GenreFilterItem])
+    func set(years: [YearFilterItem])
     
 }
 
@@ -48,8 +51,8 @@ protocol FavoritesFilterUseCase {
 
 protocol FavoritesFilterInteractorOutput {
     
-    func didGet(genres: [(genre: Genre, isSelected: Bool)])
-    func didGet(years: [(year: Int, isSelected: Bool)])
+    func didGet(genres: [GenreFilterItem])
+    func didGet(years: [YearFilterItem])
     
 }
 

@@ -67,11 +67,11 @@ class FavoritesFilterPresenter: FavoritesFilterPresentation, FavoritesFilterInte
     
     // MARK: - FavoritesFilterInteractorOutput protocol functions
     
-    func didGet(genres: [(genre: Genre, isSelected: Bool)]) {
+    func didGet(genres: [GenreFilterItem]) {
         self.view?.set(genres: genres)
     }
     
-    func didGet(years: [(year: Int, isSelected: Bool)]) {
+    func didGet(years: [YearFilterItem]) {
         self.view?.set(years: years)
     }
     

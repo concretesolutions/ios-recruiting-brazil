@@ -7,3 +7,38 @@
 //
 
 import Foundation
+
+class FavoritesFilterInteractor: FavoritesFilterUseCase {
+    
+    // MARK: - Properties
+    
+    var output: FavoritesFilterInteractorOutput!
+    
+    // MARK: - FavoritesFilterUseCase protocol functions
+    
+    func getGenres() {
+        
+    }
+    
+    func getYears() {
+        
+    }
+    
+    func add(genre: Genre) {
+        
+    }
+    
+    func remove(genre: Genre) {
+        
+    }
+    
+    func add(year: Int) {
+        
+    }
+    
+    func remove(year: Int) {
+        
+    }
+    
+    
+}

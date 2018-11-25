@@ -75,7 +75,7 @@ class FavoritesFilterViewController: UIViewController, FavoritesFilterView {
     
     // MARK: - FilterView protocol functions
     
-    func set(genres: [(genre: Genre, isSelected: Bool)]) {
+    func set(genres: [GenreFilterItem]) {
         self.setUpGenresSection()
         
         let titles = genres.map { return $0.genre.name }
@@ -97,7 +97,7 @@ class FavoritesFilterViewController: UIViewController, FavoritesFilterView {
         self.genres.delegate = self.genresDelegate
     }
     
-    func set(years: [(year: Int, isSelected: Bool)]) {
+    func set(years: [YearFilterItem]) {
         self.setUpYearsSection()
         
         let titles = years.map { return String($0.year) }
