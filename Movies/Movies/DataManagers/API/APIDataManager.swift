@@ -30,11 +30,12 @@ class APIDataManager {
     
     // MARK: - Functions
     
-    static func readPopular(fromPage page: Int, callback: @escaping ([Movie])->()) {
+    static func readPopular(fromPage page: Int, callback: @escaping ([Movie], Error?)->()) {
         if let url = URL(string: RequestURL.readPopular(fromPage: page)) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
+                    callback([], error)
                     return
                 }
                 if let data = data {
@@ -42,7 +43,7 @@ class APIDataManager {
                     
                     do {
                         let result = try decoder.decode(PopularResult.self, from: data)
-                        callback(result.results)
+                        callback(result.results, nil)
                     } catch {
                         print("Impossible to decode to [Movie] from data.")
                     }
@@ -51,15 +52,16 @@ class APIDataManager {
             }
             task.resume()
         } else {
-            
+            callback([], nil)
         }
     }
     
-    static func searchMovies(withTitle title: String, callback: @escaping ([Movie])->()) {
+    static func searchMovies(withTitle title: String, callback: @escaping ([Movie], Error?)->()) {
         if let url = URL(string: RequestURL.searchMovies(withTitle: title)) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
+                    callback([], error)
                     return
                 }
                 if let data = data {
@@ -67,7 +69,7 @@ class APIDataManager {
                     
                     do {
                         let result = try decoder.decode(PopularResult.self, from: data)
-                        callback(result.results)
+                        callback(result.results, nil)
                     } catch {
                         print("Impossible to decode to [Movie] from data.")
                     }
@@ -76,15 +78,16 @@ class APIDataManager {
             }
             task.resume()
         } else {
-            
+            callback([], nil)
         }
     }
     
-    static func readGenres(callback: @escaping ([Genre])->()) {
+    static func readGenres(callback: @escaping ([Genre], Error?)->()) {
         if let url = URL(string: RequestURL.readGenres) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
+                    callback([], error)
                     return
                 }
                 if let data = data {
@@ -92,7 +95,7 @@ class APIDataManager {
                     
                     do {
                         let result = try decoder.decode(GenresResult.self, from: data)
-                        callback(result.genres)
+                        callback(result.genres, nil)
                     } catch {
                         print("Impossible to decode to [Movie] from data.")
                     }
@@ -101,7 +104,7 @@ class APIDataManager {
             }
             task.resume()
         } else {
-            
+            callback([], nil)
         }
     }
     

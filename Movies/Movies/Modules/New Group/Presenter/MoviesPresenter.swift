@@ -46,6 +46,9 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     // MARK: - MoviesInterectorOutput protocol functions
     
     func didGetMovies(fromPage page: Int, _ movies: [Movie]) {
+        if movies.isEmpty && page > 1 {
+            self.view?.presentEmptyView()
+        }
         if page == 1 {
             self.view?.present(movies: movies)
         } else {
@@ -55,11 +58,23 @@ class MoviesPresenter: MoviesPresentation, MoviesInteractorOutput {
     }
     
     func didGetCurrentMovies(_ movies: [Movie]) {
-        self.view?.present(movies: movies)
+        if movies.isEmpty {
+            self.view?.presentEmptyView()
+        } else {
+            self.view?.present(movies: movies)
+        }
     }
     
     func didSearchMovies(withTitle title: String, _ movies: [Movie]) {
-        self.view?.present(movies: movies)
+        if movies.isEmpty {
+            self.view?.presentEmptyView()
+        } else {
+            self.view?.present(movies: movies)
+        }
+    }
+    
+    func didGet(error: Error) {
+        self.view?.presentErrorView()
     }
 
 }
