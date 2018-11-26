@@ -79,6 +79,7 @@ class MoviesViewController: UIViewController, MoviesView {
     
     private func present(view: UIView) {
         DispatchQueue.main.async {
+            self.hideActivityIndicator()
             self.errorView.isHidden = true
             self.emptyView.isHidden = true
             self.movies.isHidden = true
@@ -90,10 +91,10 @@ class MoviesViewController: UIViewController, MoviesView {
     
     func present(movies: [Movie]) {
         DispatchQueue.main.async {
+            self.hideActivityIndicator()
             self.errorView.isHidden = true
             self.emptyView.isHidden = true
             self.movies.isHidden = false
-            self.hideActivityIndicator()
             self.dataSource.update(movies: movies)
             self.searchBar.isUserInteractionEnabled = true
         }

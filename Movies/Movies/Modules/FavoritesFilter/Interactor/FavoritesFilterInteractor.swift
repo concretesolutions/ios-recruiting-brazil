@@ -32,7 +32,7 @@ class FavoritesFilterInteractor: FavoritesFilterUseCase {
     }
     
     func getYears() {
-        let allYears = MovieDataManager.readFavoriteMovieYears()
+        let allYears = Set(MovieDataManager.readFavoriteMovieYears())
         var years: [YearFilterItem] = []
         allYears.forEach { y in
             if MovieDataManager.yearsFilter.contains(y) {

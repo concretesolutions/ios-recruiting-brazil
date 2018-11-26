@@ -35,6 +35,7 @@ class MovieDataManager {
             do {
                 try context.save()
             } catch {
+                print("error while saving context: \(error)")
                 print(error.localizedDescription)
             }
         }
@@ -63,7 +64,10 @@ class MovieDataManager {
             GenreDataManager.updateGenres(movie.genres)
             var genresMOs: [NSManagedObject] = []
             movie.genres.forEach {
-                if let mo = GenreDataManager.managedObject($0, false) {
+                if let mo = GenreDataManager.genresMOs[$0.id] {
+                    genresMOs.append(mo)
+                } else if let mo = GenreDataManager.readGenreByIdReturninMO($0.id) {
+                    saveContext()
                     genresMOs.append(mo)
                 }
             }

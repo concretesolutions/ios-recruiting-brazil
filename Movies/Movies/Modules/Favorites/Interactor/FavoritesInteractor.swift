@@ -17,13 +17,14 @@ class FavoritesInteractor: FavoritesUseCase {
     // MARK: - FavoriteUseCase protocol functions
     
     func readFavoriteMovies() {
-        let movies = MovieDataManager.readFavoriteMovies()
+        var movies = MovieDataManager.readFavoriteMovies()
         movies.forEach { $0.posterImage = ImageDataManager.readImage(withPosterPath: $0.posterPath) }
         self.output.didRead(movies: movies)
     }
     
     func removeFilters() {
-        
+        MovieDataManager.genresFilter.removeAll()
+        MovieDataManager.yearsFilter.removeAll()
     }
     
     func searchMovies(withTitle title: String) {
@@ -40,6 +41,10 @@ class FavoritesInteractor: FavoritesUseCase {
     func unfavorite(movie: Movie) {
         MovieDataManager.deleteFavoriteMovie(withId: movie.id)
         ImageDataManager.deleteImage(withPosterPath: movie.posterPath)
+    }
+    
+    func checkIfHasFilters() {
+        self.output.didCheckIfHasFilters(!MovieDataManager.genresFilter.isEmpty || !MovieDataManager.yearsFilter.isEmpty)
     }
     
 }

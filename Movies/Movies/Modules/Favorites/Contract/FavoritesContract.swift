@@ -45,6 +45,7 @@ protocol FavoritesUseCase {
     func removeFilters()
     func searchMovies(withTitle title: String)
     func unfavorite(movie: Movie)
+    func checkIfHasFilters()
     
 }
 
@@ -52,6 +53,7 @@ protocol FavoritesInteractorOutput {
     
     func didRead(movies: [Movie])
     func didSearchMovies(withTitle title: String, _ movies: [Movie])
+    func didCheckIfHasFilters(_ has: Bool)
     
 }
 

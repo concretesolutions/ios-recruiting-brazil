@@ -23,6 +23,8 @@ class FavoritesViewController: UIViewController, FavoritesView {
     private var dataSource: FavoritesTVDataSource!
     private var searchDelegate: FavoritesSearchBarDelegate!
     private var emptyView: UIView!
+    private var favoritesTop: NSLayoutConstraint!
+    private var favoritesTopToRemoveFiltersButton: NSLayoutConstraint!
     
     // MARK: - Life cicle functions
     
@@ -40,10 +42,14 @@ class FavoritesViewController: UIViewController, FavoritesView {
         
         self.setUpFilterButton()
         self.setUpRemoveFilterButton()
+        self.setUpFavorites()
 
         self.navigationItem.title = "Favorites"
         self.showActivityIndicator()
         self.setUpEmptyView()
+        
+        self.favoritesTop = self.favorites.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor)
+        self.favoritesTop.isActive = true
         
         self.presenter.viewDidLoad()
     }
@@ -66,11 +72,23 @@ class FavoritesViewController: UIViewController, FavoritesView {
     }
     
     func showRemoveFilterButton() {
-        
+        DispatchQueue.main.async {
+            self.removeFilterButton.isHidden = false
+            self.favoritesTop.isActive = false
+            self.favoritesTop = self.favorites.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor)
+            self.favoritesTopToRemoveFiltersButton.isActive = true
+            self.favorites.updateConstraints()
+        }
     }
     
     func hideRemoveFilterButton() {
-        
+        DispatchQueue.main.async {
+            self.removeFilterButton.isHidden = true
+            self.favoritesTop.isActive = true
+            self.favoritesTopToRemoveFiltersButton.isActive = false
+            self.favoritesTopToRemoveFiltersButton = self.favorites.topAnchor.constraint(equalTo: self.removeFilterButton.bottomAnchor, constant: 8)
+            self.favorites.updateConstraints()
+        }
     }
     
     func delete(movieAt index: Int) {
@@ -113,9 +131,27 @@ class FavoritesViewController: UIViewController, FavoritesView {
     }
     
     private func setUpRemoveFilterButton() {
-        self.removeFilterButton = UIButton(type: .system)
-        self.removeFilterButton.setTitle("remove filters", for: .normal)
+        self.removeFilterButton = UIButton(frame: .zero)
+        self.removeFilterButton.setTitle("Remove filters", for: .normal)
         self.removeFilterButton.addTarget(self, action: #selector(self.didTapHideFilterButton), for: .touchUpInside)
+        self.removeFilterButton.layer.borderWidth = 3
+        self.removeFilterButton.layer.cornerRadius = 8
+        self.removeFilterButton.layer.borderColor = UIColor(displayP3Red: 247/256, green: 206/256, blue: 91/256, alpha: 1).cgColor
+        self.removeFilterButton.titleLabel?.textColor = UIColor(displayP3Red: 247/256, green: 206/256, blue: 91/256, alpha: 1)
+        self.removeFilterButton.backgroundColor = .white
+        self.removeFilterButton.setTitleColor(UIColor(displayP3Red: 247/256, green: 206/256, blue: 91/256, alpha: 1), for: .normal)
+        
+        self.removeFilterButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.removeFilterButton)
+        self.removeFilterButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 8).isActive = true
+        self.removeFilterButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -8).isActive = true
+        self.removeFilterButton.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 8).isActive = true
+        self.removeFilterButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        self.removeFilterButton.isHidden = true
+    }
+    
+    private func setUpFavorites() {
+        self.favoritesTopToRemoveFiltersButton = self.favorites.topAnchor.constraint(equalTo: self.removeFilterButton.bottomAnchor, constant: 8)
     }
     
     private func setUpEmptyView() {

@@ -39,19 +39,19 @@ class FavoritesFilterPresenter: FavoritesFilterPresentation, FavoritesFilterInte
     }
     
     func didSelect(genre: Genre) {
-        self.interactor.add(genre: genre)
+        self.currentAddedGenres.append(genre)
     }
     
     func didDeselect(genre: Genre) {
-        self.interactor.remove(genre: genre)
+        self.currentRemovedGenres.append(genre)
     }
     
     func didSelect(year: Int) {
-        self.interactor.add(year: year)
+        self.currentAddedYears.append(year)
     }
     
     func didDeselect(year: Int) {
-        self.interactor.remove(year: year)
+        self.currentRemovedYears.append(year)
     }
     
     func didPressFilterButton() {
@@ -77,6 +77,7 @@ class FavoritesFilterPresenter: FavoritesFilterPresentation, FavoritesFilterInte
     }
     
     func didGet(years: [YearFilterItem]) {
+        print("did get years: \(years)")
         DispatchQueue.main.async {
             self.view?.set(years: years)
         }
