@@ -17,6 +17,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //
+        let request = GetConfiguration()
+        APIManager.shared.fetch(request) { (result) in
+            switch result{
+            case .success(let data):
+                ImageManager.shared.baseURLPath = data.images?.secureBaseUrl
+            case .failure(let error):
+                Logger.logError(in: self, message: error.localizedDescription)
+            }
+        }
+        
+        //TODO: Refactor to a better way to save genres
+        let requestGenres = GetGenres()
+        APIManager.shared.fetch(requestGenres) { (result) in
+            switch result{
+            case .success(let data):
+                let genres = data.genres
+                let coreDataManager = CoreDataManager<Genre>()
+                
+                for genre in genres {
+                    let predicate = NSPredicate(format: "id == %i", genre.id)
+                    coreDataManager.insert(object: genre, predicate: predicate)
+                }
+                
+                do {
+                    try coreDataManager.save()
+                }catch{
+                    Logger.logError(in: self, message: "CoreData could not save because \(error.localizedDescription)")
+                }
+                
+            case .failure(let error):
+                Logger.logError(in: self, message: error.localizedDescription)
+            }
+        }
+        
+        //
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let moviesRouter = MoviesRouter()
+        let moviesNavigationRouter = UINavigationController(rootViewController: moviesRouter.presenter.view)
+        
+        let favoritesRouter = FavoritesRouter()
+        let favoritesNavigationRouter = UINavigationController(rootViewController: favoritesRouter.presenter.view)
+        
+        let homeTabBarRouter = HomeTabBarRouter(viewControllers: [moviesNavigationRouter, favoritesNavigationRouter])
+        
+        self.window?.rootViewController = homeTabBarRouter.presenter.view
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Favorites Collection View Controller-->
+        <scene sceneID="zMi-KJ-vwh">
+            <objects>
+                <collectionViewController storyboardIdentifier="FavoritesCollectionViewController" id="j5x-ba-Dol" customClass="FavoritesCollectionViewController" customModule="Concrete" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Jbs-vo-kTH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fWc-Qu-CcK">
+                            <size key="itemSize" width="364" height="280"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoritesCollectionViewCell-dafult" id="Wi5-6A-WKv" customClass="FavoritesCollectionViewCell" customModule="Concrete" customModuleProvider="target">
+                                <rect key="frame" x="5.5" y="0.0" width="364" height="280"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="364" height="280"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e3F-Ob-Vbe">
+                                            <rect key="frame" x="0.0" y="0.0" width="364" height="280"/>
+                                        </imageView>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJo-o9-R3g">
+                                            <rect key="frame" x="0.0" y="217" width="364" height="63"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ctL-8k-cRC">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="63"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOz-Tn-7dl">
+                                                        <rect key="frame" x="8" y="8" width="348" height="47"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="eOz-Tn-7dl" secondAttribute="bottom" constant="8" id="37f-0c-nba"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eOz-Tn-7dl" secondAttribute="trailing" constant="8" id="LEH-sw-nvs"/>
+                                                    <constraint firstItem="eOz-Tn-7dl" firstAttribute="top" secondItem="ctL-8k-cRC" secondAttribute="top" constant="8" id="dec-nB-QRm"/>
+                                                    <constraint firstItem="eOz-Tn-7dl" firstAttribute="leading" secondItem="ctL-8k-cRC" secondAttribute="leading" constant="8" id="kvI-15-2xI"/>
+                                                </constraints>
+                                            </view>
+                                            <blurEffect style="light"/>
+                                        </visualEffectView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6C-LU-7Ld">
+                                            <rect key="frame" x="326" y="28" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="dWz-dN-pq8"/>
+                                                <constraint firstAttribute="height" constant="30" id="jXf-Mz-eVy"/>
+                                            </constraints>
+                                            <state key="normal" image="favorite_empty_icon"/>
+                                            <connections>
+                                                <action selector="tapFavorite:" destination="Wi5-6A-WKv" eventType="touchUpInside" id="xdx-5d-vrA"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="e3F-Ob-Vbe" secondAttribute="trailing" id="UfE-xJ-mjh"/>
+                                    <constraint firstItem="f6C-LU-7Ld" firstAttribute="trailing" secondItem="Wi5-6A-WKv" secondAttribute="trailingMargin" id="WKB-14-xnH"/>
+                                    <constraint firstItem="HJo-o9-R3g" firstAttribute="leading" secondItem="Wi5-6A-WKv" secondAttribute="leading" id="Wdp-c3-hPX"/>
+                                    <constraint firstAttribute="trailing" secondItem="HJo-o9-R3g" secondAttribute="trailing" id="Z4r-lg-fcp"/>
+                                    <constraint firstAttribute="bottom" secondItem="e3F-Ob-Vbe" secondAttribute="bottom" id="bAP-pl-vur"/>
+                                    <constraint firstItem="HJo-o9-R3g" firstAttribute="height" secondItem="Wi5-6A-WKv" secondAttribute="height" multiplier="0.225" id="fS8-4t-Ibe"/>
+                                    <constraint firstItem="e3F-Ob-Vbe" firstAttribute="top" secondItem="Wi5-6A-WKv" secondAttribute="top" id="gi9-Qz-R1q"/>
+                                    <constraint firstAttribute="bottom" secondItem="HJo-o9-R3g" secondAttribute="bottom" id="ieX-sj-APy"/>
+                                    <constraint firstItem="f6C-LU-7Ld" firstAttribute="top" secondItem="Wi5-6A-WKv" secondAttribute="topMargin" id="ve6-Zy-e54"/>
+                                    <constraint firstItem="e3F-Ob-Vbe" firstAttribute="leading" secondItem="Wi5-6A-WKv" secondAttribute="leading" id="wmi-H9-fhQ"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="outletFavoriteButton" destination="f6C-LU-7Ld" id="dut-6p-emT"/>
+                                    <outlet property="outletMovieImage" destination="e3F-Ob-Vbe" id="FOA-L6-wiI"/>
+                                    <outlet property="outletMovieLabel" destination="eOz-Tn-7dl" id="KOX-Qm-bHp"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="j5x-ba-Dol" id="d4O-Dz-OOz"/>
+                            <outlet property="delegate" destination="j5x-ba-Dol" id="3zy-4T-bZO"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cim-kL-KGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="61.600000000000001" y="70.614692653673174"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+    </resources>
+</document>
