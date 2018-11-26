@@ -12,7 +12,7 @@ class MovieDetailRouter: MovieDetailWireframe {
     
     // MARK: - Properties
     
-    var view: UIViewController?
+    weak var view: UIViewController?
     
     // MARK: - MoviewDetailWireframe protocol functions
     

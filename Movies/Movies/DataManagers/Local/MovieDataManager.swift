@@ -11,6 +11,11 @@ import CoreData
 
 class MovieDataManager {
     
+    // MARK: - Properties
+    
+    static var genresFilter: [Genre]  = []
+    static var yearsFilter: [Int] = []
+    
     // MARK: - Aux functions
     
     private static var persistentContainer: NSPersistentContainer = {
@@ -30,6 +35,7 @@ class MovieDataManager {
             do {
                 try context.save()
             } catch {
+                print("error while saving context: \(error)")
                 print(error.localizedDescription)
             }
         }
@@ -58,7 +64,10 @@ class MovieDataManager {
             GenreDataManager.updateGenres(movie.genres)
             var genresMOs: [NSManagedObject] = []
             movie.genres.forEach {
-                if let mo = GenreDataManager.managedObject($0, false) {
+                if let mo = GenreDataManager.genresMOs[$0.id] {
+                    genresMOs.append(mo)
+                } else if let mo = GenreDataManager.readGenreByIdReturninMO($0.id) {
+                    saveContext()
                     genresMOs.append(mo)
                 }
             }
@@ -112,6 +121,27 @@ class MovieDataManager {
         }
         
         return movies
+    }
+    
+    static func readFavoriteMovieYears() -> [Int] {
+        var years: [Int] = []
+        let yearsRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MovieModel.entityName)
+        yearsRequest.propertiesToFetch = [MovieModel.year]
+        
+        do {
+            let result = try context.fetch(yearsRequest)
+            if let mos = result as? [NSManagedObject] {
+                for mo in mos {
+                    if let year = mo.value(forKey: MovieModel.year) as? Int {
+                        years.append(year)
+                    }
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return years
     }
     
     static func deleteFavoriteMovie(withId id: Int) {

@@ -37,6 +37,7 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
             self.selectedMovieFavoriteState = nil
         }
         self.interactor.readFavoriteMovies()
+        self.interactor.checkIfHasFilters()
     }
     
     func didSelect(movie: Movie, index: Int) {
@@ -75,6 +76,7 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
             self.view?.presentEmptyView()
         } else {
             self.view?.present(movies: movies)
+//            self.interactor.checkIfHasFilters()
         }
     }
     
@@ -83,6 +85,15 @@ class FavoritesPresenter: FavoritesPresentation, FavoritesInteractorOutput {
             self.view?.presentEmptyView()
         } else {
             self.view?.present(movies: movies)
+        }
+    }
+    
+    func didCheckIfHasFilters(_ has: Bool) {
+        print("did check if has filters: \(has)")
+        if has {
+            self.view?.showRemoveFilterButton()
+        } else {
+            self.view?.hideRemoveFilterButton()
         }
     }
     
