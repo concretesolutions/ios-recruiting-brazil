@@ -16,10 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        APIDataManager.readGenres() { genres, error in
+            if let error = error {
+                print("Error while trying to read genres from MoviesDB API: \(error.localizedDescription)")
+            } else {
+                GenreDataManager.updateGenres(genres)
+            }
+        }
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = MoviesRouter.assembleModule()
-        
+        if let window = self.window {
+            RootRouter().presentScreen(in: window)
+        }
         return true
     }
 

@@ -14,6 +14,8 @@ protocol MoviesView: class {
     
     func present(movies: [Movie])
     func presentNew(movies: [Movie])
+    func presentErrorView()
+    func presentEmptyView() 
 }
 
 protocol MoviesPresentation {
@@ -23,6 +25,7 @@ protocol MoviesPresentation {
     var interactor: MoviesUseCase! { get set }
     
     func viewDidLoad()
+    func viewDidAppear()
     func didSelect(movie: Movie)
     func didTapFavoriteButton(forMovie: Movie)
     func didSearchMovies(withTitle: String)
@@ -37,6 +40,7 @@ protocol MoviesUseCase {
     func getMovies(fromPage page: Int)
     func getCurrentMovies()
     func searchMovies(withTitle title: String)
+    func finishSearch()
     func favorite(movie: Movie)
     func unfavorite(movie: Movie)
 }
@@ -46,6 +50,7 @@ protocol MoviesInteractorOutput {
     func didGetMovies(fromPage page: Int, _ movies: [Movie])
     func didGetCurrentMovies(_ movies: [Movie])
     func didSearchMovies(withTitle title: String, _ movies: [Movie])
+    func didGet(error: Error)
     
 }
 

@@ -11,6 +11,8 @@ import CoreData
 
 class GenreDataManager {
     
+    static var genresMOs: [Int:NSManagedObject] = [:]
+    
     // MARK: - Aux functions
     
     private static var persistentContainer: NSPersistentContainer = {
@@ -48,7 +50,10 @@ class GenreDataManager {
             let object = NSManagedObject(entity: entity, insertInto: context)
             object.setValue(genre.id, forKey: GenreModel.id)
             object.setValue(genre.name, forKey: GenreModel.name)
-            if saving { saveContext() }
+            if saving {
+                saveContext()
+                genresMOs[genre.id] = object
+            }
             return object
         }
         return nil
@@ -79,7 +84,6 @@ class GenreDataManager {
         } catch {
             print(error.localizedDescription)
         }
-        
         return genres
     }
     
@@ -100,11 +104,38 @@ class GenreDataManager {
         return nil
     }
     
+    static func readGenreByIdReturninMO(_ id: Int) -> NSManagedObject? {
+        let genresRequest = NSFetchRequest<NSFetchRequestResult>(entityName: GenreModel.entityName)
+        genresRequest.returnsObjectsAsFaults = false
+        genresRequest.predicate = NSPredicate(format: "\(GenreModel.id) == %d", id)
+        
+        do {
+            let result = try context.fetch(genresRequest)
+            if let mos = result as? [NSManagedObject],
+                let mo = mos.first {
+                return mo
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
+    
     static func readGenresByIds(_ ids: [Int]) -> [Genre] {
         var genres: [Genre] = []
         for id in ids {
             if let genre = readGenreById(id) {
                 genres.append(genre)
+            }
+        }
+        return genres
+    }
+    
+    static func readGenresByIdsReturningMOs(_ ids: [Int]) -> [NSManagedObject] {
+        var genres: [NSManagedObject] = []
+        for id in ids {
+            if let mo = readGenreByIdReturninMO(id) {
+                genres.append(mo)
             }
         }
         return genres
