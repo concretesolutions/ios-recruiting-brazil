@@ -14,15 +14,15 @@ class MovieDetailViewController: UIViewController {
     
     @IBAction func favoriteMovie(_ sender: Any) {
         
-        // Save movie on Core Data
-        
-        if let movie = self.movieCell?.movie {
-            CoreDataManager.createFavoriteMovie(with: movie)
+        if !self.favorite {
+            // Save movie on Core Data
+            if let movie = self.movieCell?.movie {
+                CoreDataManager.createFavoriteMovie(with: movie)
+            }
+            
+            // Animate Button
+            self.OutletFavoriteButton.setImage(UIImage(named: "favoriteOn"), for: .normal)
         }
-        
-        // Animate Button
-        
-        self.OutletFavoriteButton.setImage(UIImage(named: "favoriteOn"), for: .normal)
         
     }
     
@@ -38,6 +38,7 @@ class MovieDetailViewController: UIViewController {
     
     // MARK: - Properties
     var movieCell: MoviesCollectionViewCell?
+    var favorite: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,13 @@ class MovieDetailViewController: UIViewController {
             self.OutletMovieName.text = movie.title
             self.OutletMovieYear.text = movie.date
             self.OutletMovieOverView.text = movie.overview
+            
+            CoreDataManager.getFavoriteMovies { (favoriteMovies) in
+                if favoriteMovies.contains(where: { $0.title == movie.title }) {
+                    self.OutletFavoriteButton.setImage(UIImage(named: "favoriteOn"), for: .normal)
+                    self.favorite = true
+                }
+            }
             
             if let image = self.movieCell?.OutletMovieImage.image {
                 self.movieCell?.movie?.image = image

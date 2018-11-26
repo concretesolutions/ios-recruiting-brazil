@@ -35,6 +35,10 @@ class MoviesViewController: UIViewController {
         TMDataManager.fetchMovies(page: self.page)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.OutletMoviesCollectionView.reloadData()
+    }
+    
     func setupCollectionView() {
         self.OutletMoviesCollectionView.layer.zPosition = -1
         self.OutletMoviesCollectionView.loadContent = self

@@ -24,7 +24,6 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     }
     
     override func awakeFromNib() {
-        
     }
     
     func setup(movie: Movie) {
@@ -32,11 +31,9 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         self.OutletMovieName.text = movie.title
         
         CoreDataManager.getFavoriteMovies { (favoriteMovies) in
-            
-            if favoriteMovies.contains(where: { $0 === movie }) {
+            if favoriteMovies.contains(where: { $0.title == movie.title }) {
                 self.OutletMovieFavoriteImage.image = UIImage(named: "favoriteOn")
             }
-
         }
     }
     

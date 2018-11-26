@@ -32,7 +32,6 @@ class FavoritesViewController: UIViewController {
             self.favoritesTableView.reloadData()
         }
     }
-    
-
 
 }
+

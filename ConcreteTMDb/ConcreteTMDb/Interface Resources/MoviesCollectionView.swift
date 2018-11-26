@@ -25,6 +25,8 @@ class MoviesCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MoviesCollectionViewCell
         
+        cell.OutletMovieFavoriteImage.image = nil
+        
         let movie = self.movies[indexPath.row]
         cell.setup(movie: movie)
         

@@ -11,6 +11,7 @@ import Foundation
 class TMDataManager {
     
     static var movies: [Movie] = []
+    static var genres: [Genre] = []
     
     // MARK: - DataSearch delegate, called when assyn data arrives
     static weak var moviesDataCompletedDelegate: MoviesDataFetchCompleted?
@@ -55,7 +56,6 @@ class TMDataManager {
     
     static func fetchMovieGenres() {
        
-        var genres: [Genre] = []
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=e2417760a16d55fdc805d2c23c69022b&language=en-US"
         
         guard let url = URL(string: urlString) else { return }
@@ -76,10 +76,10 @@ class TMDataManager {
                 do {
                     let decoder = JSONDecoder()
                     let res = try decoder.decode(GenreResponse.self, from: data)
-                    genres = res.genres
+                    self.genres = res.genres
                     
                     if let delegate = self.genresDataCompletedDelegate {
-                        delegate.fetchComplete(for: genres)
+                        delegate.fetchComplete(for: self.genres)
                     }
                     
                 } catch let jsonErr {

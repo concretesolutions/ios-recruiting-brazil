@@ -29,12 +29,11 @@ class FavoritesTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
             let favoriteMovieToDelete = self.favoritedMovies[indexPath.row]
             CoreDataManager.deleteFavoriteMovie(title: favoriteMovieToDelete.title)
             
             self.favoritedMovies.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath] , with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     

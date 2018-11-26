@@ -28,3 +28,13 @@ protocol PresentMessageForException: class {
 protocol LoadMoreContentAfterPagination: class {
     func loadMoreMovies()
 }
+
+protocol ApplyFilter: class {
+    func applyDateFilter(dates: [Int])
+    func applyGenreFilter(genres: [Genre])
+}
+
+protocol SearchFavoriteByFilter: class {
+    func searchWith(dates: [Int])
+    func searchWith(genres: [Genre])
+}
