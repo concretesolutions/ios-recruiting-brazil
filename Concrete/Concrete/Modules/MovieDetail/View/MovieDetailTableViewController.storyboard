@@ -47,17 +47,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc8-0w-qCX">
-                                        <rect key="frame" x="329" y="16" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="Dlv-0Z-VBM"/>
-                                            <constraint firstAttribute="height" constant="30" id="KG3-d3-zCP"/>
-                                        </constraints>
-                                        <state key="normal" image="favorite_empty_icon"/>
-                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Dc8-0w-qCX" firstAttribute="top" secondItem="CVf-J6-pvV" secondAttribute="topMargin" constant="8" id="3ES-mr-JPV"/>
                                     <constraint firstAttribute="trailing" secondItem="cGf-MH-aqS" secondAttribute="trailing" id="4Kc-6J-ZbG"/>
                                     <constraint firstItem="aUb-z4-B87" firstAttribute="top" secondItem="wga-LZ-0mr" secondAttribute="bottom" constant="8" id="5oa-1E-WqV"/>
                                     <constraint firstItem="efd-Mw-xEB" firstAttribute="trailing" secondItem="CVf-J6-pvV" secondAttribute="trailingMargin" id="69U-gO-LGB"/>
@@ -73,7 +64,6 @@
                                     <constraint firstItem="wga-LZ-0mr" firstAttribute="trailing" secondItem="CVf-J6-pvV" secondAttribute="trailingMargin" id="c29-1d-Y6j"/>
                                     <constraint firstItem="wga-LZ-0mr" firstAttribute="top" secondItem="efd-Mw-xEB" secondAttribute="bottom" constant="8" id="dUj-h2-VUj"/>
                                     <constraint firstItem="RUC-0v-Ee7" firstAttribute="top" secondItem="cGf-MH-aqS" secondAttribute="bottom" constant="8" id="eJU-Le-IVS"/>
-                                    <constraint firstItem="Dc8-0w-qCX" firstAttribute="trailing" secondItem="CVf-J6-pvV" secondAttribute="trailingMargin" constant="-8" id="ejH-IS-Zry"/>
                                     <constraint firstItem="aUb-z4-B87" firstAttribute="trailing" secondItem="CVf-J6-pvV" secondAttribute="trailingMargin" id="gD9-r7-VMt"/>
                                     <constraint firstItem="RUC-0v-Ee7" firstAttribute="trailing" secondItem="CVf-J6-pvV" secondAttribute="trailingMargin" id="lyj-Nb-8eA"/>
                                     <constraint firstItem="cGf-MH-aqS" firstAttribute="leading" secondItem="CVf-J6-pvV" secondAttribute="leading" id="qtD-Gm-V75"/>
@@ -93,7 +83,6 @@
                     </view>
                     <connections>
                         <outlet property="outletAge" destination="efd-Mw-xEB" id="KZY-LN-kqq"/>
-                        <outlet property="outletFavoriteButton" destination="Dc8-0w-qCX" id="3jj-Ih-1fB"/>
                         <outlet property="outletGenre" destination="wga-LZ-0mr" id="G2c-cP-IFA"/>
                         <outlet property="outletOverview" destination="aUb-z4-B87" id="bvG-2D-cIn"/>
                         <outlet property="outletPoster" destination="cGf-MH-aqS" id="vjw-Kk-teh"/>
@@ -105,7 +94,4 @@
             <point key="canvasLocation" x="-570.39999999999998" y="-283.80809595202402"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="favorite_empty_icon" width="22" height="21"/>
-    </resources>
 </document>

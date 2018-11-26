@@ -1,57 +1,24 @@
 //
-//  MoviesViewController.swift
+//  FavoritesCollectionViewController.swift
 //  Concrete
 //
-//  Created by Kaique Magno Dos Santos on 17/11/18.
+//  Created by Kaique Magno Dos Santos on 25/11/18.
 //  Copyright © 2018 Kaique Magno Dos Santos. All rights reserved.
 //
 
 import UIKit
 
-class MoviesViewController: UICollectionViewController {
 
-    enum Status {
-        case normal
-        case empty
-        case didNotFoundAnyMovie
-        case error
-    }
-    
-    // MARK: - Outlets
-    @IBOutlet var outletLoadingView: UIView!
-    
+class FavoritesCollectionViewController: UICollectionViewController {
+
     // MARK: - Properties
     // MARK: Private
-    private var status:Status = .normal {
-        didSet{
-            switch self.status {
-            case .normal:
-                self.collectionView.backgroundView = nil
-            case .empty:
-                self.collectionView.backgroundView = self.view(with: #imageLiteral(resourceName: "check_icon"), and: "Filme aparecendo")
-            case .didNotFoundAnyMovie:
-                self.collectionView.backgroundView = self.view(with: #imageLiteral(resourceName: "favorite_gray_icon"), and: "Nenhum filme encontrado")
-            case .error:
-                self.collectionView.backgroundView = self.view(with: #imageLiteral(resourceName: "favorite_full_icon"), and: "😱")
-            }
-        }
-    }
-    
     // MARK: Public
-    var presenter: MoviesPresenter!
+    var presenter:FavoritesPresenter!
     
-    var isLoading: Bool = false {
-        didSet {
-            self.set(isLoading: self.isLoading)
-        }
-    }
-    
-    // MARK: - UICollectionViewController
+    // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.setupLayout()
-        self.setupRefreshControl()
         
         self.presenter.viewDidLoad()
     }
@@ -64,18 +31,6 @@ class MoviesViewController: UICollectionViewController {
     
     // MARK: - Functions
     // MARK: Private
-    private func setupRefreshControl(){
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self.presenter, action: #selector(MoviesPresenter.reload), for: .valueChanged)
-        refresh.tintColor = #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
-        self.collectionView?.refreshControl = refresh
-    }
-    
-    private func setupLayout() {
-        self.title = "Popular"
-        self.navigationController!.tabBarItem = UITabBarItem(title: "Popular", image: nil, selectedImage: nil)
-    }
-    
     private func view(with image:UIImage, and message:String) -> UIView {
         let theView = UIView(frame: self.view.frame)
         theView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,63 +70,34 @@ class MoviesViewController: UICollectionViewController {
     }
     
     // MARK: Public
-    func set(isLoading:Bool) {
-        if isLoading {
-            self.collectionView?.backgroundView = self.outletLoadingView
-        }else{
-            self.collectionView?.backgroundView = nil
-        }
-    }
     
-    func set(status:Status) {
-        self.status = status
-    }
-    
-    
-    // MARK: - UICollectionDataSource
+    // MARK: - UICollectionViewDataSource
+
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        // #warning Incomplete implementation, return the number of sections
+        return self.presenter.numberOfSections(in: collectionView)
     }
-    
+
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfItemsInSection = self.presenter.collectionView(collectionView, numberOfItemsInSection: section)
-        
-        return numberOfItemsInSection
+        // #warning Incomplete implementation, return the number of items
+        return self.presenter.collectionView(collectionView, numberOfItemsInSection: section)
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.presenter.collectionView(collectionView, cellForItemAt: indexPath)
         
+    
         return cell
     }
     
-    // MARK: - UICollectionDelegate
+    // MARK: - UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.presenter.collectionView(collectionView, didSelectItemAt: indexPath)
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.presenter.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let movieCell = cell as? MovieCollectionViewCell else {
-            Logger.log(in: self, message: "Could not cast cell:\(cell) to MovieCollectionViewCell")
-            return
-        }
-        
-        movieCell.cleanData()
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = self.presenter.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
-        
-        return cell
-    }
 }
 
-// MARK: - UICollectionViewFlowLayout
-extension MoviesViewController: UICollectionViewDelegateFlowLayout {
+extension FavoritesCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -197,5 +123,4 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
                             bottom: spacing,
                             right: spacing)
     }
-    
 }

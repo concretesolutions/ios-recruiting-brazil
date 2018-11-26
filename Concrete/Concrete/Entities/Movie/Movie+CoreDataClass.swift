@@ -25,7 +25,33 @@ public class Movie: NSManagedObject,Decodable {
         case posterPath
     }
     
-    // MARK: Decodable
+    // MARK: - Properties
+    var isFavorited:Bool{
+        get{
+            let coreDataManager = CoreDataManager<Movie>()
+            
+            return coreDataManager.exist(predicate: NSPredicate(format: "id == %i", self.id))
+        }
+        set{
+            let coreDataManager = CoreDataManager<Movie>()
+            
+            switch newValue {
+            case true:
+                coreDataManager.insert(object: self, predicate: NSPredicate(format: "id == %i", self.id))
+            case false:
+                coreDataManager.delete(object: self)
+            }
+            
+            
+            do {
+                try coreDataManager.save()
+            } catch {
+                Logger.logError(in: self, message: "Could not save Movie in CoreData")
+            }
+        }
+    }
+    
+    // MARK: Init
     public convenience required init(from decoder: Decoder) throws {
         
         // Create NSEntityDescription with NSManagedObjectContext

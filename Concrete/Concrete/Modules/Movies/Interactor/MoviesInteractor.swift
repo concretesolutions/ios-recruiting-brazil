@@ -109,12 +109,29 @@ class MoviesInteractor: NSObject {
     }
     
     private func cleanSearchData() {
+        self.searchMoviesPage = 1
+        self.pageLastModified = 1
         self.searchedMovies = [Movie]()
-        self.searchMoviesPage = 0
-        self.pageLastModified = 0
+    }
+    
+    private func cleanPopularData() {
+        self.pageLastModified = 1
+        self.popularMoviesPage = 1
+        self.fetchedMovies = [Movie]()
+    }
+    
+    private func cleanAll() {
+        self.cleanSearchData()
+        self.cleanPopularData()
     }
     
     //MARK: Public
+    func reload() {
+        self.cleanAll()
+        
+        self.fetchMovies()
+    }
+    
     func cancelSearch() {
         self.cleanSearchData()
         self.status = .normal
@@ -136,20 +153,6 @@ class MoviesInteractor: NSObject {
     }
     
     func set(movie:Movie, isFavorited:Bool) {
-        movie.isFavorite = isFavorited
-        let coreDataManager = CoreDataManager<Movie>()
-        
-        switch isFavorited {
-        case true:
-            coreDataManager.insert(object: movie)
-        case false:
-            coreDataManager.delete(object: movie)
-        }
-        
-        do {
-            try coreDataManager.save()
-        } catch {
-            Logger.logError(in: self, message: "Could not save Movie in CoreData")
-        }
+        movie.isFavorited = isFavorited
     }
 }

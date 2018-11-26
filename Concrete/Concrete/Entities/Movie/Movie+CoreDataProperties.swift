@@ -27,6 +27,5 @@ extension Movie {
     @NSManaged public var releaseDate: NSDate?
     @NSManaged public var title: String?
     @NSManaged public var voteAverage: Double
-    @NSManaged public var isFavorite: Bool
 
 }

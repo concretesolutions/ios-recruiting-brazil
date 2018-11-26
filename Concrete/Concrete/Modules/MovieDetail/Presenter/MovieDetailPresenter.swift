@@ -34,7 +34,6 @@ class MovieDetailPresenter: NSObject {
         self.view.set(title: self.interactor.movie.title!)
         self.view.set(overview: self.interactor.movie.overview!)
         self.view.set(age: self.interactor.movie.releaseDate!)
-        self.view.set(isFavorite: self.interactor.movie.isFavorite)
         self.view.set(genreTitles: self.interactor.genreTitles())
         
         ImageManager.shared.fetchImage(from: self.interactor.movie.posterPath!) { (result) in
@@ -45,5 +44,9 @@ class MovieDetailPresenter: NSObject {
                 self.router.showAlert(message:error.localizedDescription)
             }
         }
+    }
+    
+    func didSet(isFavorite:Bool) {
+        self.interactor.movie.isFavorited = isFavorite
     }
 }

@@ -38,8 +38,13 @@ class MoviesPresenter: NSObject {
         //
     }
     
+    func viewWillAppear() {
+        self.reload()
+    }
+    
+    
     @objc func reload() {
-        self.interactor.fetchMovies()
+        self.interactor.reload()
     }
     
     // MARK: - UICollectionViewDataSource
@@ -70,7 +75,9 @@ class MoviesPresenter: NSObject {
         
         cell.set(name: movie.title)
         cell.set(imagePath: movie.posterPath)
-        cell.set(isFavorite: movie.isFavorite)
+        cell.set(isFavorite: movie.isFavorited)
+        
+        cell.delegate = self
         
         return cell
     }

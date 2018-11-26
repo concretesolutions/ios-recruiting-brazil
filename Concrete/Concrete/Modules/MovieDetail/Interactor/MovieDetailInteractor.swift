@@ -24,7 +24,7 @@ class MovieDetailInteractor {
     // MARK: Private
     // MARK: Public
     func set(favorite:Bool) {
-        self.movie.isFavorite = favorite
+        self.movie.isFavorited = favorite
     }
     
     func genreTitles() -> [String] {

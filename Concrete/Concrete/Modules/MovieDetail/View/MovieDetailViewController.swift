@@ -16,10 +16,10 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var outletAge: UILabel!
     @IBOutlet weak var outletGenre: UILabel!
     @IBOutlet weak var outletOverview: UITextView!
-    @IBOutlet weak var outletFavoriteButton: UIButton!
     
     // MARK: - Properties
     // MARK: Private
+    private var isFavorited:Bool = false
     // MARK: Public
     var presenter:MovieDetailPresenter!
     
@@ -58,13 +58,5 @@ class MovieDetailViewController: UIViewController {
         self.outletPoster.image = poster
     }
     
-    func set(isFavorite:Bool) {
-        switch isFavorite {
-        case true:
-            self.outletFavoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
-        case false:
-            self.outletFavoriteButton.setImage(#imageLiteral(resourceName: "favorite_empty_icon"), for: .normal)
-        }
-    }
     
 }
