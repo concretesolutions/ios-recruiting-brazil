@@ -58,9 +58,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let moviesRouter = MoviesRouter()
         let moviesNavigationRouter = UINavigationController(rootViewController: moviesRouter.presenter.view)
+        moviesNavigationRouter.tabBarItem = UITabBarItem(title: "Popular", image: nil, selectedImage: nil)
+        moviesNavigationRouter.navigationBar.barTintColor = .black
+        moviesNavigationRouter.navigationBar.barStyle = .black
         
         let favoritesRouter = FavoritesRouter()
         let favoritesNavigationRouter = UINavigationController(rootViewController: favoritesRouter.presenter.view)
+        favoritesNavigationRouter.navigationBar.barTintColor = .black
+        favoritesNavigationRouter.navigationBar.barStyle = .black
+        favoritesNavigationRouter.tabBarItem = UITabBarItem(title: "Favorites", image: nil, selectedImage: nil)
         
         let homeTabBarRouter = HomeTabBarRouter(viewControllers: [moviesNavigationRouter, favoritesNavigationRouter])
         
