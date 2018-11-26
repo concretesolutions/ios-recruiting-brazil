@@ -20,11 +20,15 @@ class FavoritesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Favorites"
+        
+        
         self.presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         
         self.presenter.viewWillAppear()
     }
