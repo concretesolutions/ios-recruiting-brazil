@@ -1,0 +1,456 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A5A322721B39E6700A08E0D /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A322621B39E6700A08E0D /* MovieDetailViewController.swift */; };
+		4A754CAE21B40ED80004E249 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A754CAD21B40ED80004E249 /* Movie.swift */; };
+		4A754CB021B428C30004E249 /* MovieAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A754CAF21B428C30004E249 /* MovieAPIClient.swift */; };
+		4A754CB621B440A90004E249 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A754CB521B440A90004E249 /* Configuration.swift */; };
+		4AA533D221B40A210037CD9C /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA533D121B40A210037CD9C /* MovieCell.swift */; };
+		4AFE2D1421B39A120090A71E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE2D1321B39A120090A71E /* AppDelegate.swift */; };
+		4AFE2D1621B39A120090A71E /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE2D1521B39A120090A71E /* MoviesViewController.swift */; };
+		4AFE2D1921B39A120090A71E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE2D1721B39A120090A71E /* Main.storyboard */; };
+		4AFE2D1B21B39A140090A71E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE2D1A21B39A140090A71E /* Assets.xcassets */; };
+		4AFE2D1E21B39A140090A71E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE2D1C21B39A140090A71E /* LaunchScreen.storyboard */; };
+		4AFE2D2621B39B1D0090A71E /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE2D2521B39B1D0090A71E /* FavoritesViewController.swift */; };
+		4B51BDD27CEA0FB1E994000E /* Pods_MoviesC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70217F6303107E2036BA3520 /* Pods_MoviesC.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		21A1CEE0CDD3B68EFAA0FEA6 /* Pods-MoviesC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesC.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesC/Pods-MoviesC.release.xcconfig"; sourceTree = "<group>"; };
+		4A5A322621B39E6700A08E0D /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		4A754CAD21B40ED80004E249 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		4A754CAF21B428C30004E249 /* MovieAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIClient.swift; sourceTree = "<group>"; };
+		4A754CB521B440A90004E249 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		4AA533D121B40A210037CD9C /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		4AFE2D1021B39A120090A71E /* MoviesC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AFE2D1321B39A120090A71E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4AFE2D1521B39A120090A71E /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		4AFE2D1821B39A120090A71E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4AFE2D1A21B39A140090A71E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4AFE2D1D21B39A140090A71E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4AFE2D1F21B39A140090A71E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AFE2D2521B39B1D0090A71E /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		6BE5644E3314C4725CEAC3B2 /* Pods-MoviesC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesC/Pods-MoviesC.debug.xcconfig"; sourceTree = "<group>"; };
+		70217F6303107E2036BA3520 /* Pods_MoviesC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoviesC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4AFE2D0D21B39A120090A71E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B51BDD27CEA0FB1E994000E /* Pods_MoviesC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A754CB121B43AF60004E249 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4A754CAD21B40ED80004E249 /* Movie.swift */,
+				4AA533D121B40A210037CD9C /* MovieCell.swift */,
+				4A754CB521B440A90004E249 /* Configuration.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A754CB221B43AFC0004E249 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4A754CAF21B428C30004E249 /* MovieAPIClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4A754CB321B43B040004E249 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AFE2D2521B39B1D0090A71E /* FavoritesViewController.swift */,
+				4A5A322621B39E6700A08E0D /* MovieDetailViewController.swift */,
+				4AFE2D1521B39A120090A71E /* MoviesViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4AFE2D0721B39A110090A71E = {
+			isa = PBXGroup;
+			children = (
+				4AFE2D1221B39A120090A71E /* MoviesC */,
+				4AFE2D1121B39A120090A71E /* Products */,
+				AD6122C7594D770BF79CCE2D /* Pods */,
+				B32D915C95B134EE6862C393 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4AFE2D1121B39A120090A71E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4AFE2D1021B39A120090A71E /* MoviesC.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4AFE2D1221B39A120090A71E /* MoviesC */ = {
+			isa = PBXGroup;
+			children = (
+				4AFE2D1321B39A120090A71E /* AppDelegate.swift */,
+				4A754CB321B43B040004E249 /* ViewControllers */,
+				4A754CB221B43AFC0004E249 /* Networking */,
+				4A754CB121B43AF60004E249 /* Model */,
+				4AFE2D1721B39A120090A71E /* Main.storyboard */,
+				4AFE2D1A21B39A140090A71E /* Assets.xcassets */,
+				4AFE2D1C21B39A140090A71E /* LaunchScreen.storyboard */,
+				4AFE2D1F21B39A140090A71E /* Info.plist */,
+			);
+			path = MoviesC;
+			sourceTree = "<group>";
+		};
+		AD6122C7594D770BF79CCE2D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6BE5644E3314C4725CEAC3B2 /* Pods-MoviesC.debug.xcconfig */,
+				21A1CEE0CDD3B68EFAA0FEA6 /* Pods-MoviesC.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B32D915C95B134EE6862C393 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70217F6303107E2036BA3520 /* Pods_MoviesC.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4AFE2D0F21B39A120090A71E /* MoviesC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AFE2D2221B39A140090A71E /* Build configuration list for PBXNativeTarget "MoviesC" */;
+			buildPhases = (
+				54F3BCA2F8A86BD65BFFAF62 /* [CP] Check Pods Manifest.lock */,
+				4AFE2D0C21B39A120090A71E /* Sources */,
+				4AFE2D0D21B39A120090A71E /* Frameworks */,
+				4AFE2D0E21B39A120090A71E /* Resources */,
+				17DF60507E99D6B09BBEFD3C /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MoviesC;
+			productName = MoviesC;
+			productReference = 4AFE2D1021B39A120090A71E /* MoviesC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4AFE2D0821B39A110090A71E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Isabel Lima";
+				TargetAttributes = {
+					4AFE2D0F21B39A120090A71E = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 4AFE2D0B21B39A110090A71E /* Build configuration list for PBXProject "MoviesC" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4AFE2D0721B39A110090A71E;
+			productRefGroup = 4AFE2D1121B39A120090A71E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4AFE2D0F21B39A120090A71E /* MoviesC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4AFE2D0E21B39A120090A71E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AFE2D1E21B39A140090A71E /* LaunchScreen.storyboard in Resources */,
+				4AFE2D1B21B39A140090A71E /* Assets.xcassets in Resources */,
+				4AFE2D1921B39A120090A71E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17DF60507E99D6B09BBEFD3C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MoviesC/Pods-MoviesC-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoviesC/Pods-MoviesC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		54F3BCA2F8A86BD65BFFAF62 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MoviesC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4AFE2D0C21B39A120090A71E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A5A322721B39E6700A08E0D /* MovieDetailViewController.swift in Sources */,
+				4AFE2D1621B39A120090A71E /* MoviesViewController.swift in Sources */,
+				4A754CAE21B40ED80004E249 /* Movie.swift in Sources */,
+				4A754CB021B428C30004E249 /* MovieAPIClient.swift in Sources */,
+				4AFE2D2621B39B1D0090A71E /* FavoritesViewController.swift in Sources */,
+				4AA533D221B40A210037CD9C /* MovieCell.swift in Sources */,
+				4A754CB621B440A90004E249 /* Configuration.swift in Sources */,
+				4AFE2D1421B39A120090A71E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4AFE2D1721B39A120090A71E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AFE2D1821B39A120090A71E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4AFE2D1C21B39A140090A71E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AFE2D1D21B39A140090A71E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4AFE2D2021B39A140090A71E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4AFE2D2121B39A140090A71E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4AFE2D2321B39A140090A71E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BE5644E3314C4725CEAC3B2 /* Pods-MoviesC.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MoviesC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = isabellima.com.MoviesC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4AFE2D2421B39A140090A71E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21A1CEE0CDD3B68EFAA0FEA6 /* Pods-MoviesC.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MoviesC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = isabellima.com.MoviesC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4AFE2D0B21B39A110090A71E /* Build configuration list for PBXProject "MoviesC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AFE2D2021B39A140090A71E /* Debug */,
+				4AFE2D2121B39A140090A71E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AFE2D2221B39A140090A71E /* Build configuration list for PBXNativeTarget "MoviesC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AFE2D2321B39A140090A71E /* Debug */,
+				4AFE2D2421B39A140090A71E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4AFE2D0821B39A110090A71E /* Project object */;
+}
