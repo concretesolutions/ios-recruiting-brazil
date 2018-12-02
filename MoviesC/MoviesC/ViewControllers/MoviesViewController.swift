@@ -8,12 +8,15 @@
 
 import UIKit
 import Alamofire
+import Nuke
 
 class MoviesViewController: UIViewController {
     
     var movies = [Movie]()
+    private var currentPage = 1
+    
     let client = MovieAPIClient()
-    private var currentPage = 2
+    let preheater = ImagePreheater()
     
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     
@@ -30,6 +33,7 @@ class MoviesViewController: UIViewController {
         
         moviesCollectionView.delegate = self
         moviesCollectionView.dataSource = self
+        moviesCollectionView.prefetchDataSource = self
         
         
         // UIRefreshControl setup
@@ -45,6 +49,7 @@ class MoviesViewController: UIViewController {
     }
     
     @objc private func refreshMovies() {
+        currentPage = 1
         loadMovies(refresh: true)
     }
     
@@ -60,10 +65,9 @@ class MoviesViewController: UIViewController {
                             self.movies.append(movie)
                         }
                     }
-                    
-                    self.moviesCollectionView.refreshControl?.endRefreshing()
-                    self.moviesCollectionView.reloadData()
                 }
+                self.moviesCollectionView.refreshControl?.endRefreshing()
+                self.moviesCollectionView.reloadData()
                 
             }
         }
@@ -95,6 +99,36 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     private func isCollectionViewAtTheEnd(_ indexPath: IndexPath) -> Bool {
         return indexPath.row == self.movies.count - 1
+    }
+    
+}
+
+// MARK: Prefetching Methods
+
+extension MoviesViewController: UICollectionViewDataSourcePrefetching {
+    
+    func imagesURLFor(indexPaths: [IndexPath]) -> [URL] {
+        return indexPaths.compactMap { indexPath in
+            guard indexPath.row < self.movies.count else { return nil }
+            return self.movies[indexPath.row].posterUrl()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let urlsToPreheat: [URL] = imagesURLFor(indexPaths: indexPaths)
+        print(urlsToPreheat)
+        preheater.startPreheating(with: urlsToPreheat)
+        
+        // In case indexPaths are on the next page
+        let needsFetch = indexPaths.contains { $0.row >= self.movies.count }
+        if needsFetch {
+            fetchNextPage()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        let urlsToStopPreheating: [URL] = imagesURLFor(indexPaths: indexPaths)
+        preheater.stopPreheating(with: urlsToStopPreheating)
     }
     
 }
