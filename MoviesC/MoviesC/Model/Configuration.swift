@@ -31,7 +31,6 @@ class APISettings {
     
     private init() {
         client.fetchConfiguration { config in
-            print(config)
             self.configuration = config
         }
     }

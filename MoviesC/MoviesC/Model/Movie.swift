@@ -23,6 +23,11 @@ struct Movie: Codable {
         case genreIds = "genre_ids"
         case releaseDate = "release_date"
     }
-    
+}
+
+extension Movie: Equatable {
+    static func ==(lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
