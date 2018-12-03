@@ -19,6 +19,12 @@ class MovieDetailViewController: UIViewController {
     }
     
     let client = MovieAPIClient()
+    var favMovies = [Int]()
+    var isFav: Bool = false {
+        didSet {
+            navButtonIsFull(isFav)
+        }
+    }
     
     @IBOutlet weak var posterImageView: UIImageView! {
         didSet {
@@ -39,12 +45,41 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = movie?.title
-        
+
+        loadFavorites()
         loadDetail()
     }
     
     @IBAction func favoriteTapped(_ sender: UIBarButtonItem) {
+        guard let id = movie?.id else { return }
+        isFav = !isFav
+        favorite(movie: id)
+        
     }
+
+    private func favorite(movie id: Int) {
+        if isFav {
+            favMovies.append(id)
+        } else {
+            guard let index: Int = favMovies.firstIndex(of: id) else { return }
+            favMovies.remove(at: index)
+        }
+        
+        UserDefaults.standard.set(favMovies, forKey: "favMovies")
+    }
+    
+    private func loadFavorites() {
+        if let array = UserDefaults.standard.array(forKey: "favMovies") as? [Int] {
+            favMovies = array
+            guard let id = movie?.id else { return }
+            isFav = favMovies.contains(id) ? true : false
+        }
+    }
+    
+    func navButtonIsFull(_ state: Bool) {
+        self.navigationItem.rightBarButtonItem?.image = state ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_empty_icon")
+    }
+    
     
     private func loadDetail() {
         let activityIndicator = displayActivityIndicator(on: view)
