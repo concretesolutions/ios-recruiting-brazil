@@ -30,8 +30,13 @@ class APISettings {
     let client = MovieAPIClient()
     
     private init() {
-        client.fetchConfiguration { config in
-            self.configuration = config
+        client.fetchConfiguration { response in
+            switch response {
+            case .success(let configuration):
+                self.configuration = configuration
+            case .failure( _):
+                print("Error fetching configuration")
+            }
         }
     }
 }

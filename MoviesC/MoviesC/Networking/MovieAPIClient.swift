@@ -48,19 +48,43 @@ class MovieAPIClient {
                 completion(.success(pagedResponse))
                 
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
                 completion(.failure(error))
             }
         }
     }
     
-    func fetchConfiguration(completion: @escaping (Configuration) -> Void) {
+    func fetchMovie(with id: Int, completion: @escaping (Result<Detail>) -> Void) {
+        let req = Alamofire.request(baseURL.appendingPathComponent("movie/\(id)"), parameters: ["api_key": apiKey])
+        
+        req.validate().responseData { (dataResponse) in
+            switch dataResponse.result {
+            case .success(let value):
+                let decoder = JSONDecoder()
+                let movieResponse = try! decoder.decode(Detail.self, from: value)
+                completion(.success(movieResponse))
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchConfiguration(completion: @escaping (Result<Configuration>) -> Void) {
         let req = Alamofire.request(baseURL.appendingPathComponent("configuration"), parameters: ["api_key": apiKey])
         
         req.validate().responseData { dataResponse in
-            let decoder = JSONDecoder()
-            let response = try! decoder.decode(Configuration.self, from: dataResponse.data!)
-            completion(response)
+            switch dataResponse.result {
+            case .success(let value):
+                let decoder = JSONDecoder()
+                let response = try! decoder.decode(Configuration.self, from: value)
+                completion(.success(response))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+
         }
     }
 
