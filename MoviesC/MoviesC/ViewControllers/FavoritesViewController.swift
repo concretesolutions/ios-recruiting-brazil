@@ -88,14 +88,20 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func unfavoriteMovie(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Unfavorite") { (action, view, completion) in
-            // TODO: remove movie from favMovies
-            // remove movie from user defaults
+            self.unfavorite(indexPath)
             self.favoritesTableView.deleteRows(at: [indexPath], with: .right)
             completion(true)
+            
         }
-        action.image = UIImage(imageLiteralResourceName: "favorite_empty_icon")
+        action.image = UIImage(imageLiteralResourceName: "unfavorite_icon")
         action.backgroundColor = .red
         return action
+    }
+    
+    func unfavorite(_ index: IndexPath) {
+        favMovies.remove(at: index.row)
+        favMoviesIds.remove(at: index.row)
+        UserDefaults.standard.set(favMoviesIds, forKey: "favMovies")
     }
     
     
