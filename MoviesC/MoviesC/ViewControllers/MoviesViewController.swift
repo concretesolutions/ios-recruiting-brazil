@@ -19,6 +19,7 @@ class MoviesViewController: UIViewController {
     let preheater = ImagePreheater()
     
     @IBOutlet weak var moviesCollectionView: UICollectionView!
+    @IBOutlet weak var messageLabel: UILabel!
     
     
     // MARK: iOS Lifecycle Methods
@@ -54,21 +55,29 @@ class MoviesViewController: UIViewController {
     }
     
     private func loadMovies(refresh: Bool = false) {
-        client.fetchPopularMovies(page: currentPage) { page in
+        client.fetchPopularMovies(page: currentPage) { response in
             
-            DispatchQueue.main.async {
-                if refresh {
-                    self.movies = page.results
-                } else {
-                    page.results.forEach { movie in
-                        if !self.movies.contains(movie) {
-                            self.movies.append(movie)
+            switch response {
+            case .success(let pagedResponse):
+                self.moviesCollectionView.isHidden = false
+                self.messageLabel.isHidden = true
+                DispatchQueue.main.async {
+                    if refresh {
+                        self.movies = pagedResponse.results
+                    } else {
+                        pagedResponse.results.forEach { movie in
+                            if !self.movies.contains(movie) {
+                                self.movies.append(movie)
+                            }
                         }
                     }
+                    self.moviesCollectionView.refreshControl?.endRefreshing()
+                    self.moviesCollectionView.reloadData()
+                    
                 }
-                self.moviesCollectionView.refreshControl?.endRefreshing()
-                self.moviesCollectionView.reloadData()
-                
+            case .failure(let error):
+                self.moviesCollectionView.isHidden = true
+                self.messageLabel.isHidden = false
             }
         }
     }
@@ -86,7 +95,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionCell
         cell.movie = movies[indexPath.row]
         return cell
         
@@ -116,7 +125,6 @@ extension MoviesViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let urlsToPreheat: [URL] = imagesURLFor(indexPaths: indexPaths)
-        print(urlsToPreheat)
         preheater.startPreheating(with: urlsToPreheat)
         
         // In case indexPaths are on the next page

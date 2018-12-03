@@ -21,9 +21,11 @@ struct PagedResponse<T: Codable> : Codable {
         case totalResults = "total_results"
         case results
     }
-    
-    
-    
+}
+
+enum Result<Value> {
+    case success(Value)
+    case failure(Error)
 }
 
 class MovieAPIClient {
@@ -33,7 +35,7 @@ class MovieAPIClient {
     
     init() {}
 
-    func fetchPopularMovies(page: Int = 1, completion: @escaping (PagedResponse<Movie>) -> Void) {
+    func fetchPopularMovies(page: Int = 1, completion: @escaping (Result<PagedResponse<Movie>>) -> Void) {
         
         let req = Alamofire.request(baseURL.appendingPathComponent("movie/popular"), parameters: ["page": page, "api_key": apiKey])
 
@@ -43,10 +45,11 @@ class MovieAPIClient {
     
                 let decoder = JSONDecoder()
                 let pagedResponse = try! decoder.decode(PagedResponse<Movie>.self, from: value)
-                completion(pagedResponse)
+                completion(.success(pagedResponse))
                 
             case .failure(let error):
-                print(error) // TODO: display error feedback
+                print(error)
+                completion(.failure(error))
             }
         }
     }
@@ -60,4 +63,5 @@ class MovieAPIClient {
             completion(response)
         }
     }
+
 }

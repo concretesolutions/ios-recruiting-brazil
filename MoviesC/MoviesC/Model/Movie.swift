@@ -33,12 +33,13 @@ struct Movie: Codable {
             //TODO: Show error screen
             fatalError("Invalid base URL supplied by API")
         }
-        // TODO: choose poster size (maybe implement an enum with possible values)
-        guard let imageSize = configuration.images.posterSizes.first else {
-            //TODO: Implement "image unavailable" default image
-            fatalError("No image sizes available")
-        }
         
+        var imageSize = ""
+        if configuration.images.posterSizes.contains("w500") {
+            imageSize = "w300"
+        } else {
+            imageSize = configuration.images.posterSizes.first ?? "w300"
+        }
         let url = baseImageURL.appendingPathComponent(imageSize).appendingPathComponent(posterPath)
         
         return url
