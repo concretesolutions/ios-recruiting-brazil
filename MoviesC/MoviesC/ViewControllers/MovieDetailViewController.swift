@@ -77,7 +77,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     func navButtonIsFull(_ state: Bool) {
-        self.navigationItem.rightBarButtonItem?.image = state ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_empty_icon")
+        self.navigationItem.rightBarButtonItem?.image = state ? UIImage(named: "full_icon") : UIImage(named: "favorite_empty_icon")
     }
     
     
@@ -106,7 +106,7 @@ class MovieDetailViewController: UIViewController {
         titleLabel.text = movie?.title
         guard let genres = detail?.genres, let releaseDate = movie?.releaseDate else { return }
         genresLabel.text = names(of: genres).joined(separator: ", ")
-        yearLabel.text = getYear(from: releaseDate)
+        yearLabel.setYear(from: releaseDate)
     }
     
 }

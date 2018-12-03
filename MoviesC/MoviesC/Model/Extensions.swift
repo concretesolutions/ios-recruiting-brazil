@@ -28,11 +28,13 @@ extension UIViewController {
         }
     }
     
-    func getYear(from date: String) -> String {
+}
+
+extension UILabel {
+    func setYear(from date: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "y-MM-dd"
-        guard let date = dateFormatter.date(from: date) else { return "" }
-        return String(Calendar.current.component(.year, from: date))
+        guard let date = dateFormatter.date(from: date) else { return }
+        self.text = String(Calendar.current.component(.year, from: date))
     }
-    
 }
