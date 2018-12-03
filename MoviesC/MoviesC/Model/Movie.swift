@@ -14,7 +14,6 @@ struct Movie: Codable {
     let posterPath: String
     let genreIds: [Int]
     let releaseDate: String
-    var isFavorite: Bool? = false
     
     private enum CodingKeys: String, CodingKey {
         case id

@@ -14,8 +14,8 @@ class MoviesViewController: UIViewController {
     
     var movies = [Movie]()
     private var currentPage = 1
-    
     let client = MovieAPIClient()
+    
     let preheater = ImagePreheater()
     
     @IBOutlet weak var moviesCollectionView: UICollectionView!
@@ -23,11 +23,6 @@ class MoviesViewController: UIViewController {
     
     
     // MARK: iOS Lifecycle Methods
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +70,7 @@ class MoviesViewController: UIViewController {
                     self.moviesCollectionView.reloadData()
                     
                 }
-            case .failure(let error):
+            case .failure( _):
                 self.moviesCollectionView.isHidden = true
                 self.messageLabel.isHidden = false
             }
@@ -101,12 +96,29 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        showMovie(at: indexPath)
+    }
+    
+    func showMovie(at indexPath: IndexPath) {
+        guard let movieVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "movieDetails") as? MovieDetailViewController else { fatalError("could not instantiate movies view controller") }
+        guard let navigator = navigationController else {
+            fatalError("navigation controller is nil")
+        }
+        
+        movieVC.movie = movies[indexPath.row]
+        navigator.pushViewController(movieVC, animated: true)
+    }
+    
+    // MARK: Paging logic
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard isCollectionViewAtTheEnd(indexPath) else { return }
+        guard isPageAtTheEnd(indexPath) else { return }
         fetchNextPage()
     }
     
-    private func isCollectionViewAtTheEnd(_ indexPath: IndexPath) -> Bool {
+    private func isPageAtTheEnd(_ indexPath: IndexPath) -> Bool {
         return indexPath.row == self.movies.count - 1
     }
     
@@ -125,6 +137,8 @@ extension MoviesViewController: UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let urlsToPreheat: [URL] = imagesURLFor(indexPaths: indexPaths)
+        
+        // Nuke's preheater manages all the image load requests. If a duplicate request is made, Nuke will not allow it and instead add another observer for the existing request.
         preheater.startPreheating(with: urlsToPreheat)
         
         // In case indexPaths are on the next page
@@ -137,21 +151,6 @@ extension MoviesViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         let urlsToStopPreheating: [URL] = imagesURLFor(indexPaths: indexPaths)
         preheater.stopPreheating(with: urlsToStopPreheating)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        showMovie(at: indexPath)
-    }
-    
-    func showMovie(at indexPath: IndexPath) {
-        guard let movieVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "movieDetails") as? MovieDetailViewController else { fatalError("could not instantiate movies view controller") }
-        guard let navigator = navigationController else {
-            fatalError("navigation controller is nil")
-        }
-        
-        movieVC.movie = movies[indexPath.row]
-        navigator.pushViewController(movieVC, animated: true)
     }
     
 }

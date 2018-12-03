@@ -9,6 +9,20 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+        <array key="SF-Pro-Text-Regular.otf">
+            <string>SFProText-Regular</string>
+        </array>
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
+        </array>
+        <array key="SFCompactDisplay-Regular.otf">
+            <string>SFCompactDisplay-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Favorites-->
         <scene sceneID="ETJ-bP-cAW">
@@ -34,23 +48,23 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Titulo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PW9-Ym-uQH">
-                                                    <rect key="frame" x="140" y="11" width="43" height="21"/>
+                                                    <rect key="frame" x="140" y="11" width="45" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="conteudo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKO-IG-Z4x">
-                                                    <rect key="frame" x="140" y="57" width="73" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="conteudo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="OKO-IG-Z4x">
+                                                    <rect key="frame" x="140" y="57" width="72" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2008" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AwK-gC-j4Y">
-                                                    <rect key="frame" x="264" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="264" y="11" width="32" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="SFCompactDisplay-Regular" family="SF Compact Display" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -116,19 +130,19 @@
                                                         <constraint firstAttribute="height" constant="200" id="eSj-du-UTA"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWi-qi-BuV">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWi-qi-BuV">
                                                     <rect key="frame" x="0.0" y="208.5" width="148" height="19.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19" id="zvP-9l-pJQ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="XWi-qi-BuV" firstAttribute="firstBaseline" secondItem="1TG-e2-taP" secondAttribute="baseline" constant="24.5" symbolType="layoutAnchor" id="4bK-MC-1PR"/>
+                                            <constraint firstItem="XWi-qi-BuV" firstAttribute="firstBaseline" secondItem="1TG-e2-taP" secondAttribute="baseline" constant="23.5" symbolType="layoutAnchor" id="4bK-MC-1PR"/>
                                             <constraint firstItem="1TG-e2-taP" firstAttribute="top" secondItem="RBg-5U-igO" secondAttribute="top" id="9tK-tX-pg2"/>
                                             <constraint firstItem="XWi-qi-BuV" firstAttribute="leading" secondItem="1TG-e2-taP" secondAttribute="leading" id="GLB-Ba-aIo"/>
                                             <constraint firstItem="XWi-qi-BuV" firstAttribute="centerX" secondItem="1TG-e2-taP" secondAttribute="centerX" id="gOJ-AW-Epk"/>
@@ -142,12 +156,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Um erro ocorreu ao carregar os filmes. Por favor, tente novamente." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hG8-wo-eZn">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Um erro ocorreu ao carregar os filmes. Por favor, tente novamente." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="hG8-wo-eZn">
                                 <rect key="frame" x="60" y="284.5" width="200" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="AJd-bZ-Rlj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -183,13 +197,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ErI-f0-U7U">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ErI-f0-U7U">
                                 <rect key="frame" x="0.0" y="64" width="320" height="227"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBU-4K-sQf">
-                                <rect key="frame" x="16" y="319" width="261" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="Um nome de filme bem grande pra ver o que acontece" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JBU-4K-sQf">
+                                <rect key="frame" x="16" y="301" width="250" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="YLV-Lk-Mf2"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="unV-BW-4Xg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="nlk-fQ-x1h">
+                                <rect key="frame" x="16" y="416.5" width="275" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="vc1-pc-HAa"/>
+                                </constraints>
+                                <string key="text">uma descrição de filme bem grande sabe vamos ver então como é que vai ficar isso aí okay tá massa e acho que a fonte tá grande tamb'me</string>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2008" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="euQ-Uo-66O">
+                                <rect key="frame" x="270" y="311" width="33" height="16"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Ação, animação, comédia, terror, suspense, drama, ficcão" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-fP-s91">
+                                <rect key="frame" x="16" y="387.5" width="280" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="0d9-Gz-hVV"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="br0-mD-RUq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFCompactDisplay-Regular" family="SF Compact Display" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -197,21 +240,43 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ErI-f0-U7U" firstAttribute="centerX" secondItem="BhN-uH-Xg0" secondAttribute="centerX" id="3jA-rq-rtg"/>
+                            <constraint firstItem="l4Z-fP-s91" firstAttribute="leading" secondItem="JBU-4K-sQf" secondAttribute="leading" id="68Y-7n-0H0"/>
                             <constraint firstItem="ErI-f0-U7U" firstAttribute="width" secondItem="7TC-b0-i1q" secondAttribute="width" id="9wy-xW-9al"/>
+                            <constraint firstItem="euQ-Uo-66O" firstAttribute="leading" relation="lessThanOrEqual" secondItem="JBU-4K-sQf" secondAttribute="trailing" constant="193" id="BgD-s0-B9s"/>
+                            <constraint firstItem="JBU-4K-sQf" firstAttribute="firstBaseline" secondItem="ErI-f0-U7U" secondAttribute="baseline" constant="35.5" symbolType="layoutAnchor" id="CA2-rI-KH9"/>
+                            <constraint firstItem="nlk-fQ-x1h" firstAttribute="leading" secondItem="l4Z-fP-s91" secondAttribute="leading" id="EVd-Ke-vcf"/>
                             <constraint firstItem="ErI-f0-U7U" firstAttribute="top" secondItem="BhN-uH-Xg0" secondAttribute="top" id="H3A-KQ-Jgz"/>
+                            <constraint firstItem="BhN-uH-Xg0" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="l4Z-fP-s91" secondAttribute="trailing" constant="10" id="MiN-CI-VSe"/>
+                            <constraint firstItem="BhN-uH-Xg0" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nlk-fQ-x1h" secondAttribute="trailing" symbolic="YES" id="NY9-J7-Sn0"/>
+                            <constraint firstItem="JBU-4K-sQf" firstAttribute="leading" secondItem="BhN-uH-Xg0" secondAttribute="leading" constant="16" id="QUF-nv-jvR"/>
                             <constraint firstItem="ErI-f0-U7U" firstAttribute="height" secondItem="7TC-b0-i1q" secondAttribute="height" multiplier="0.4" id="aS3-W2-xpx"/>
+                            <constraint firstItem="BhN-uH-Xg0" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nlk-fQ-x1h" secondAttribute="bottom" constant="10" id="b86-ff-5L0"/>
+                            <constraint firstItem="l4Z-fP-s91" firstAttribute="firstBaseline" secondItem="JBU-4K-sQf" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="gS8-dv-tPh"/>
+                            <constraint firstItem="euQ-Uo-66O" firstAttribute="top" secondItem="JBU-4K-sQf" secondAttribute="top" constant="10" id="iep-M0-42e"/>
+                            <constraint firstItem="nlk-fQ-x1h" firstAttribute="width" secondItem="7TC-b0-i1q" secondAttribute="width" multiplier="0.86" id="k4I-Mg-Ygf"/>
+                            <constraint firstItem="nlk-fQ-x1h" firstAttribute="firstBaseline" secondItem="l4Z-fP-s91" secondAttribute="baseline" constant="28" id="mfp-dW-BL2"/>
+                            <constraint firstItem="BhN-uH-Xg0" firstAttribute="trailing" secondItem="euQ-Uo-66O" secondAttribute="trailing" constant="17" id="sCc-3B-dOC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BhN-uH-Xg0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie" largeTitleDisplayMode="never" id="yTL-xS-0wN"/>
+                    <navigationItem key="navigationItem" title="Movie" largeTitleDisplayMode="never" id="yTL-xS-0wN">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="favorite_empty_icon" id="dLA-M9-k4Z">
+                            <connections>
+                                <action selector="favoriteTapped:" destination="FLL-pV-2o3" id="bA8-ep-tjC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="genresLabel" destination="l4Z-fP-s91" id="SSI-Gx-Jjd"/>
+                        <outlet property="overviewLabel" destination="nlk-fQ-x1h" id="YXx-tb-qEU"/>
                         <outlet property="posterImageView" destination="ErI-f0-U7U" id="qn5-bw-DBP"/>
                         <outlet property="titleLabel" destination="JBU-4K-sQf" id="Ewq-wk-Jde"/>
+                        <outlet property="yearLabel" destination="euQ-Uo-66O" id="ry7-ey-a5z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S04-b1-HW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1472.8" y="-640.02998500749629"/>
+            <point key="canvasLocation" x="1471.875" y="-640.14084507042253"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Pbd-ks-sEl">
@@ -221,6 +286,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.85098039219999999" green="0.59215686270000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="wuu-Uq-fId" kind="relationship" relationship="viewControllers" id="4By-Sr-JYo"/>
@@ -244,9 +310,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.97647058819999999" green="0.63137254899999995" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="18"/>
                             <color key="textColor" red="0.1764705882352941" green="0.18823529411764706" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="30"/>
                             <color key="textColor" red="0.1764705882" green="0.18823529410000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -271,9 +339,11 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
                             <color key="textColor" red="0.1764705882" green="0.18823529410000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="30"/>
                             <color key="textColor" red="0.1764705882" green="0.18823529410000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -287,5 +357,8 @@
             <point key="canvasLocation" x="-316" y="24.7376311844078"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+    </resources>
     <color key="tintColor" red="0.85098039215686272" green="0.59215686274509804" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
 </document>
