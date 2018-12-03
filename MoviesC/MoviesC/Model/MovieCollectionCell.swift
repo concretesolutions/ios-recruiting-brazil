@@ -1,5 +1,5 @@
 //
-//  MovieCell.swift
+//  MovieCollectionCell.swift
 //  MoviesC
 //
 //  Created by Isabel Lima on 02/12/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Nuke
 
-class MovieCell: UICollectionViewCell {
+class MovieCollectionCell: UICollectionViewCell {
     
     var movie: Movie? {
         didSet {
