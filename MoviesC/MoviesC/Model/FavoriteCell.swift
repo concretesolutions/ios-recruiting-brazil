@@ -6,4 +6,13 @@
 //  Copyright © 2018 Isabel Lima. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class FavoriteCell: UITableViewCell {
+    
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+}

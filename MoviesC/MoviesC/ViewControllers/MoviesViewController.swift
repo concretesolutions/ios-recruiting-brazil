@@ -139,5 +139,20 @@ extension MoviesViewController: UICollectionViewDataSourcePrefetching {
         preheater.stopPreheating(with: urlsToStopPreheating)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        showMovie(at: indexPath)
+    }
+    
+    func showMovie(at indexPath: IndexPath) {
+        guard let movieVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "movieDetails") as? MovieDetailViewController else { fatalError("could not instantiate movies view controller") }
+        guard let navigator = navigationController else {
+            fatalError("navigation controller is nil")
+        }
+        
+        movieVC.movie = movies[indexPath.row]
+        navigator.pushViewController(movieVC, animated: true)
+    }
+    
 }
 
