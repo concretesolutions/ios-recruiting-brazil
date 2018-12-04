@@ -21,7 +21,11 @@ class MovieCollectionCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var posterImageView: UIImageView! {
+        didSet {
+            posterImageView.applyDropshadow()
+        }
+    }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteImageView: UIImageView!
     
