@@ -29,7 +29,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var posterImageView: UIImageView! {
         didSet {
             guard let movie = movie else { return }
-            let url = movie.posterUrl()
+            let url = MovieAPIClient.imageURL(with: movie.posterPath)
             Nuke.loadImage(with: url, options: ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.5)), into: posterImageView)
         }
     }

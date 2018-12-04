@@ -131,7 +131,7 @@ extension MoviesViewController: UICollectionViewDataSourcePrefetching {
     func imagesURLFor(indexPaths: [IndexPath]) -> [URL] {
         return indexPaths.compactMap { indexPath in
             guard indexPath.row < self.movies.count else { return nil }
-            return self.movies[indexPath.row].posterUrl()
+            return MovieAPIClient.imageURL(with: self.movies[indexPath.row].posterPath)
         }
     }
     

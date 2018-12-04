@@ -14,7 +14,7 @@ class MovieCollectionCell: UICollectionViewCell {
     var movie: Movie? {
         didSet {
             guard let movie = movie else { return }
-            let url = movie.posterUrl()
+            let url = MovieAPIClient.imageURL(with: movie.posterPath)
             // Use Nuke to make the download request for images. It also caches the downloaded images and manages requests asynchronously
             Nuke.loadImage(with: url, options: ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.5)), into: posterImageView)
             titleLabel.text = movie.title

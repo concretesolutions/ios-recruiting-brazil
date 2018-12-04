@@ -18,7 +18,7 @@ class FavoriteCell: UITableViewCell {
             overviewLabel.text = movie.overview
             dateLabel.setYear(from: movie.releaseDate)
             overviewLabel.text = movie.overview
-            let url = movie.posterUrl()
+            let url = MovieAPIClient.imageURL(with: movie.posterPath)
             Nuke.loadImage(with: url, options: ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.5)), into: posterImageView)
         }
     }

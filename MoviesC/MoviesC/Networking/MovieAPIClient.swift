@@ -87,5 +87,27 @@ class MovieAPIClient {
 
         }
     }
+    
+    static func imageURL(with path: String) -> URL {
+        guard let configuration = APISettings.shared.configuration else {
+            return URL(string: "https://image.tmdb.org/t/p/w500/")!.appendingPathComponent(path)
+        }
+        
+        guard let baseImageURL = URL(string: configuration.images.baseURL) else {
+            //TODO: Show error screen
+            fatalError("Invalid base URL supplied by API")
+        }
+        
+        var imageSize = ""
+        if configuration.images.posterSizes.contains("w500") {
+            imageSize = "w300"
+        } else {
+            imageSize = configuration.images.posterSizes.first ?? "w300"
+        }
+        let url = baseImageURL.appendingPathComponent(imageSize).appendingPathComponent(path)
+        
+        return url
+        
+    }
 
 }
