@@ -28,6 +28,13 @@ class MoviesViewController: UIViewController {
     
     // MARK: iOS Lifecycle Methods
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadPreviouslyFavoritedMovies()
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,6 +96,10 @@ class MoviesViewController: UIViewController {
     private func loadPreviouslyFavoritedMovies() {
         if let array = UserDefaults.standard.array(forKey: "favMovies") as? [Int] {
             favMoviesIds = array
+            
+            DispatchQueue.main.async {
+                self.moviesCollectionView.reloadData()
+            }
         }
     }
     
