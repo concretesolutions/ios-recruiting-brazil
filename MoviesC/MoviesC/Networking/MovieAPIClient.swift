@@ -30,7 +30,7 @@ enum Result<Value> {
 
 class MovieAPIClient {
     
-    private let baseURL: URL = URL(string: "https://api.themoviedb.org/3/")!
+    private let baseURL: URL = URL(string: "https://api.themoviedb.org/3/")! 
     private let apiKey = "72276e5f1c91b4d55037d5c35ffbdfe1"
     
     init() {}

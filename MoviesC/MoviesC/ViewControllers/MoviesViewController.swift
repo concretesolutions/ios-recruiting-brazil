@@ -229,7 +229,8 @@ extension MoviesViewController: UICollectionViewDataSourcePrefetching {
 extension MoviesViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
-        filter(with: searchController.searchBar.text!)
+        guard let text = searchController.searchBar.text else { return }
+        filter(with: text)
     }
 }
 
