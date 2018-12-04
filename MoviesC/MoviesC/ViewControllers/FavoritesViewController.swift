@@ -87,7 +87,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        showMovie(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -105,16 +104,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         action.image = UIImage(imageLiteralResourceName: "unfavorite_icon")
         action.backgroundColor = .red
         return action
-    }
-    
-    func showMovie(at indexPath: IndexPath) {
-        guard let movieVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "movieDetails") as? MovieDetailViewController else { fatalError("could not instantiate movies view controller") }
-        guard let navigator = navigationController else {
-            fatalError("navigation controller is nil")
-        }
-        
-        movieVC.movie = isFiltering() ? filteredMovies[indexPath.row] : movies[indexPath.row]
-        navigator.pushViewController(movieVC, animated: true)
     }
     
     func unfavorite(_ index: IndexPath) {
