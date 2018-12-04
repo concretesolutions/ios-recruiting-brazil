@@ -13,6 +13,7 @@ import Nuke
 class MoviesViewController: UIViewController {
     
     var movies = [Movie]()
+    var favMoviesIds = [Int]()
     private var currentPage = 1
     let client = MovieAPIClient()
     
@@ -26,6 +27,8 @@ class MoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadPreviouslyFavoritedMovies()
         
         moviesCollectionView.delegate = self
         moviesCollectionView.dataSource = self
@@ -77,7 +80,15 @@ class MoviesViewController: UIViewController {
         }
     }
     
+    private func loadPreviouslyFavoritedMovies() {
+        if let array = UserDefaults.standard.array(forKey: "favMovies") as? [Int] {
+            favMoviesIds = array
+        }
+    }
     
+    private func isFavorite(_ index: Int) -> Bool {
+        return !favMoviesIds.contains(movies[index].id)
+    }
 }
 
 // MARK: UICollectionView Delegate and DataSource Methods
@@ -91,7 +102,10 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionCell
+        
         cell.movie = movies[indexPath.row]
+        cell.favoriteImageView.isHidden = isFavorite(indexPath.row)
+        
         return cell
         
     }

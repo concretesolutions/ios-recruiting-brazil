@@ -33,16 +33,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eoI-xL-Urt">
-                                <rect key="frame" x="8" y="111" width="304" height="408"/>
+                                <rect key="frame" x="0.0" y="111" width="320" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" rowHeight="172" id="ec4-a4-Iwp" customClass="FavoriteCell" customModule="MoviesC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="304" height="172"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="172"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ec4-a4-Iwp" id="ARx-YE-3Uh">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="172"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="172"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="animais fantasticamente fantasticos " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PW9-Ym-uQH">
@@ -107,7 +107,7 @@
                         <constraints>
                             <constraint firstItem="eoI-xL-Urt" firstAttribute="bottom" secondItem="y0L-SB-AnM" secondAttribute="bottom" id="C2R-kw-g8r"/>
                             <constraint firstItem="eoI-xL-Urt" firstAttribute="centerX" secondItem="y0L-SB-AnM" secondAttribute="centerX" id="fLh-AT-bMX"/>
-                            <constraint firstItem="eoI-xL-Urt" firstAttribute="width" secondItem="mp7-Pp-cXo" secondAttribute="width" multiplier="0.95" id="heT-Ty-DLQ"/>
+                            <constraint firstItem="eoI-xL-Urt" firstAttribute="width" secondItem="mp7-Pp-cXo" secondAttribute="width" id="heT-Ty-DLQ"/>
                             <constraint firstItem="eoI-xL-Urt" firstAttribute="centerY" secondItem="y0L-SB-AnM" secondAttribute="centerY" id="j1h-Xn-zov"/>
                             <constraint firstItem="y0L-SB-AnM" firstAttribute="top" secondItem="eoI-xL-Urt" secondAttribute="top" id="xFv-qR-che"/>
                         </constraints>
@@ -154,7 +154,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWi-qi-BuV">
-                                                    <rect key="frame" x="0.0" y="208" width="148" height="19"/>
+                                                    <rect key="frame" x="0.0" y="208.5" width="148" height="19.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19" id="zvP-9l-pJQ"/>
                                                     </constraints>
@@ -162,17 +162,27 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_full_icon" translatesAutoresizingMaskIntoConstraints="NO" id="buK-QA-LRC">
+                                                    <rect key="frame" x="121" y="5" width="22" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="0dc-j6-xSf"/>
+                                                        <constraint firstAttribute="width" constant="22" id="fOa-DR-T81"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="XWi-qi-BuV" firstAttribute="firstBaseline" secondItem="1TG-e2-taP" secondAttribute="baseline" constant="23.5" symbolType="layoutAnchor" id="4bK-MC-1PR"/>
                                             <constraint firstItem="1TG-e2-taP" firstAttribute="top" secondItem="RBg-5U-igO" secondAttribute="top" id="9tK-tX-pg2"/>
                                             <constraint firstItem="XWi-qi-BuV" firstAttribute="leading" secondItem="1TG-e2-taP" secondAttribute="leading" id="GLB-Ba-aIo"/>
+                                            <constraint firstItem="buK-QA-LRC" firstAttribute="top" secondItem="1TG-e2-taP" secondAttribute="top" constant="5" id="eWi-ik-OXm"/>
                                             <constraint firstItem="XWi-qi-BuV" firstAttribute="centerX" secondItem="1TG-e2-taP" secondAttribute="centerX" id="gOJ-AW-Epk"/>
                                             <constraint firstAttribute="trailing" secondItem="1TG-e2-taP" secondAttribute="trailing" id="hJ3-FZ-p0r"/>
+                                            <constraint firstItem="buK-QA-LRC" firstAttribute="trailing" secondItem="1TG-e2-taP" secondAttribute="trailing" constant="-5" id="mcd-M3-vrA"/>
                                             <constraint firstItem="1TG-e2-taP" firstAttribute="leading" secondItem="RBg-5U-igO" secondAttribute="leading" id="ugt-ps-2f6"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="favoriteImageView" destination="buK-QA-LRC" id="Noi-Aa-Rq4"/>
                                             <outlet property="posterImageView" destination="1TG-e2-taP" id="1wc-9Q-1qk"/>
                                             <outlet property="titleLabel" destination="XWi-qi-BuV" id="oXs-4v-97w"/>
                                         </connections>
@@ -210,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WzQ-mt-0ix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="623.20000000000005" y="-640.02998500749629"/>
+            <point key="canvasLocation" x="622.5" y="-640.14084507042253"/>
         </scene>
         <!--Movie-->
         <scene sceneID="2Zk-vM-fAS">
@@ -273,7 +283,7 @@
                             <constraint firstItem="JBU-4K-sQf" firstAttribute="leading" secondItem="BhN-uH-Xg0" secondAttribute="leading" constant="16" id="QUF-nv-jvR"/>
                             <constraint firstItem="ErI-f0-U7U" firstAttribute="height" secondItem="7TC-b0-i1q" secondAttribute="height" multiplier="0.4" id="aS3-W2-xpx"/>
                             <constraint firstItem="BhN-uH-Xg0" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nlk-fQ-x1h" secondAttribute="bottom" constant="10" id="b86-ff-5L0"/>
-                            <constraint firstItem="l4Z-fP-s91" firstAttribute="firstBaseline" secondItem="JBU-4K-sQf" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="gS8-dv-tPh"/>
+                            <constraint firstItem="l4Z-fP-s91" firstAttribute="firstBaseline" secondItem="JBU-4K-sQf" secondAttribute="baseline" constant="20" symbolType="layoutAnchor" id="gS8-dv-tPh"/>
                             <constraint firstItem="euQ-Uo-66O" firstAttribute="top" secondItem="JBU-4K-sQf" secondAttribute="top" constant="10" id="iep-M0-42e"/>
                             <constraint firstItem="nlk-fQ-x1h" firstAttribute="width" secondItem="7TC-b0-i1q" secondAttribute="width" multiplier="0.86" id="k4I-Mg-Ygf"/>
                             <constraint firstItem="nlk-fQ-x1h" firstAttribute="firstBaseline" secondItem="l4Z-fP-s91" secondAttribute="baseline" constant="28" id="mfp-dW-BL2"/>
@@ -381,6 +391,7 @@
     </scenes>
     <resources>
         <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="favorite_full_icon" width="18" height="16"/>
     </resources>
     <color key="tintColor" red="0.85098039215686272" green="0.59215686274509804" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
 </document>

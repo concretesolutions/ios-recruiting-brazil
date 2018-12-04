@@ -23,6 +23,7 @@ class MovieCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var favoriteImageView: UIImageView!
     
     override func prepareForReuse() {
         super.prepareForReuse()
