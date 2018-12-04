@@ -234,3 +234,10 @@ extension MoviesViewController: UISearchResultsUpdating {
 }
 
 
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension MoviesViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.width / 2 - 15, height: self.view.frame.height / 2 - 150)
+    }
+}

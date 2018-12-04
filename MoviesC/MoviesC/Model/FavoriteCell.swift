@@ -23,7 +23,11 @@ class FavoriteCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var posterImageView: UIImageView! {
+        didSet {
+            posterImageView.applyDropshadow()
+        }
+    }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
