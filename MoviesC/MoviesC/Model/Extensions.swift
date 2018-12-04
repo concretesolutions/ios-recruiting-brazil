@@ -38,3 +38,12 @@ extension UILabel {
         self.text = String(Calendar.current.component(.year, from: date))
     }
 }
+
+extension UIView {
+    func applyDropshadow(on selectedView: UIView) {
+        selectedView.layer.shadowColor = UIColor.black.cgColor
+        selectedView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        selectedView.layer.shadowOpacity = 0.2
+        selectedView.layer.shadowRadius = 4.0
+    }
+}

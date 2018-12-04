@@ -26,15 +26,28 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+
+    @IBOutlet weak var backdropImageView: UIImageView! {
+        didSet {
+            guard let movie = movie, let backdrop = movie.backdropPath else { return }
+            let url = MovieAPIClient.imageURL(with: backdrop)
+            Nuke.loadImage(with: url, into: backdropImageView)
+        }
+    }
     @IBOutlet weak var posterImageView: UIImageView! {
         didSet {
             guard let movie = movie else { return }
             let url = MovieAPIClient.imageURL(with: movie.posterPath)
             Nuke.loadImage(with: url, options: ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.5)), into: posterImageView)
+            applyDropshadow(on: posterImageView)
         }
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            applyDropshadow(on: titleLabel)
+        }
+    }
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var genresLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
@@ -105,7 +118,7 @@ class MovieDetailViewController: UIViewController {
         overviewLabel.text = detail?.overview
         titleLabel.text = movie?.title
         guard let genres = detail?.genres, let releaseDate = movie?.releaseDate else { return }
-        genresLabel.text = names(of: genres).joined(separator: ", ")
+        genresLabel.text = names(of: genres).joined(separator: " | ")
         yearLabel.setYear(from: releaseDate)
     }
     
