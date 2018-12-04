@@ -77,9 +77,16 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavoriteCell
         
         cell.movie = favMovies[indexPath.row]
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+    
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let unfavoriteAction = unfavoriteMovie(at: indexPath)
