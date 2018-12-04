@@ -100,7 +100,7 @@ class MovieAPIClient {
         
         var imageSize = ""
         if configuration.images.posterSizes.contains("w500") {
-            imageSize = "w300"
+            imageSize = "w500"
         } else {
             imageSize = configuration.images.posterSizes.first ?? "w300"
         }
