@@ -14,10 +14,13 @@ class MoviesViewController: UIViewController {
     
     var movies = [Movie]()
     var favMoviesIds = [Int]()
-    private var currentPage = 1
-    let client = MovieAPIClient()
+    var filteredMovies = [Movie]()
     
+    private var currentPage = 1
+    
+    let client = MovieAPIClient()
     let preheater = ImagePreheater()
+    let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var messageLabel: UILabel!
@@ -39,7 +42,10 @@ class MoviesViewController: UIViewController {
         moviesCollectionView.refreshControl = UIRefreshControl()
         moviesCollectionView.refreshControl?.addTarget(self, action: #selector(refreshMovies), for: .valueChanged)
         moviesCollectionView.refreshControl?.beginRefreshing()
+        
         loadMovies()
+        
+        setupSearchController()
     }
     
     private func fetchNextPage() {
@@ -87,7 +93,43 @@ class MoviesViewController: UIViewController {
     }
     
     private func isFavorite(_ index: Int) -> Bool {
-        return !favMoviesIds.contains(movies[index].id)
+        let movie = isFiltering() ? filteredMovies[index].id : movies[index].id
+        return !favMoviesIds.contains(movie)
+    }
+    
+    // SearchController Helper Methods
+    
+    private func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    private func filter(with searchText: String) {
+        filteredMovies = movies.filter { movie in
+            return movie.title.lowercased().contains(searchText.lowercased())
+        }
+        if filteredMovies.count == 0 && !searchBarIsEmpty() {
+            messageLabel.text = "Sua busca por \(searchText) não produziu resultados. :("
+            messageLabel.isHidden = false
+            moviesCollectionView.isHidden = true
+        } else {
+            moviesCollectionView.isHidden = false
+            messageLabel.isHidden = true
+            moviesCollectionView.reloadData()
+        }
+        
+    }
+    
+    private func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search popular movies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 }
 
@@ -97,13 +139,15 @@ class MoviesViewController: UIViewController {
 extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return isFiltering() ? filteredMovies.count : movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionCell
         
-        cell.movie = movies[indexPath.row]
+        let movie = isFiltering() ? filteredMovies[indexPath.row] : movies[indexPath.row]
+        
+        cell.movie = movie
         cell.favoriteImageView.isHidden = isFavorite(indexPath.row)
         
         return cell
@@ -121,7 +165,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             fatalError("navigation controller is nil")
         }
         
-        movieVC.movie = movies[indexPath.row]
+        movieVC.movie = isFiltering() ? filteredMovies[indexPath.row] : movies[indexPath.row]
         navigator.pushViewController(movieVC, animated: true)
     }
     
@@ -168,4 +212,14 @@ extension MoviesViewController: UICollectionViewDataSourcePrefetching {
     }
     
 }
+
+// MARK: UISearchResultsUpdating Delegate
+
+extension MoviesViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        filter(with: searchController.searchBar.text!)
+    }
+}
+
 

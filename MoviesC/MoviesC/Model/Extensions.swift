@@ -40,10 +40,10 @@ extension UILabel {
 }
 
 extension UIView {
-    func applyDropshadow(on selectedView: UIView) {
-        selectedView.layer.shadowColor = UIColor.black.cgColor
-        selectedView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        selectedView.layer.shadowOpacity = 0.2
-        selectedView.layer.shadowRadius = 4.0
+    func applyDropshadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 4.0
     }
 }

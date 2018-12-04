@@ -39,13 +39,13 @@ class MovieDetailViewController: UIViewController {
             guard let movie = movie else { return }
             let url = MovieAPIClient.imageURL(with: movie.posterPath)
             Nuke.loadImage(with: url, options: ImageLoadingOptions(transition: ImageLoadingOptions.Transition.fadeIn(duration: 0.5)), into: posterImageView)
-            applyDropshadow(on: posterImageView)
+            posterImageView.applyDropshadow()
         }
     }
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
-            applyDropshadow(on: titleLabel)
+            titleLabel.applyDropshadow()
         }
     }
     @IBOutlet weak var overviewLabel: UILabel!
