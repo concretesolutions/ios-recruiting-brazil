@@ -49,6 +49,8 @@ class PopularMoviesViewController: UIViewController {
         
         self.tabBarController?.tabBar.isHidden = false
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReloadCollectionView(_:)), name: .reloadTable, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,15 +63,17 @@ class PopularMoviesViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! MovieDetailViewController
-        //vc.middle.movieToLoad = sender as? MovieDetailWorker
         detailMiddle = MovieDetailMiddle(delegate: vc)
         vc.middle = detailMiddle
-        vc.middle.fetchGenreID(IDs: movieDetailWorker.genreID)
         self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
         
     }
     
     //MARK: - METHODS
+    
+    @objc func onDidReloadCollectionView(_ notification: Notification) {
+         popularMoviesCollectionView.reloadData()
+    }
     
     func addActivityIndicator() {
         indicatorOfActivity.color = .black
@@ -175,11 +179,11 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if searchBar.text?.isEmpty == true {
             let movie = middle.popularResults[indexPath.row]
-            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview, id: movie.id)
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: middle.parseGenres(ids: movie.genre_ids), yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview, id: movie.id)
             performSegue(withIdentifier: "movieDetail", sender: movieDetailWorker)
         } else {
             let movie = middle.searchResultArray[indexPath.row]
-            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: movie.genre_ids, yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview, id: movie.id)
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.poster_path, title: movie.title, genreID: middle.parseGenres(ids: movie.genre_ids), yearOfRelease: movie.release_date, isFavorite: false, description: movie.overview, id: movie.id)
             performSegue(withIdentifier: "movieDetail", sender: movieDetailWorker)
         }
     }
@@ -188,6 +192,16 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
 //MARK: - MIDDLE DELEGATE
 
 extension PopularMoviesViewController: PopularMoviesMiddleDelegate {
+    
+    
+    func fetchGenres() {
+        print("deu fetch")
+    }
+    
+    func errorLoadingGenres() {
+        
+    }
+    
     
     func fetchCompleted() {
         popularMoviesCollectionView.isHidden = false

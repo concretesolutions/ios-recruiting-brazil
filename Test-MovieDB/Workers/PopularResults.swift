@@ -43,3 +43,27 @@ struct PopularResults: Codable {
     let video: Bool
     let vote_average: Double
 }
+
+struct PopularMovie {
+    
+}
+
+struct PopularMovieDetailed {
+    let posterPath: String?
+    var overview: String
+    var releaseDate: String
+    var genreIDs: (([Int]) -> String)
+    var id: Int
+    var originalTitle: String
+    var title: String
+    
+    init(posterPath: String?, overview: String, releaseDate: String, genreIDs: @escaping (([Int]) -> String), id: Int, originalTitle: String, title: String) {
+        self.posterPath = posterPath
+        self.overview = overview
+        self.releaseDate = releaseDate
+        self.genreIDs = genreIDs
+        self.id = id
+        self.originalTitle = originalTitle
+        self.title = title
+    }
+}

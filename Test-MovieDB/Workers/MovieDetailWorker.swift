@@ -11,13 +11,13 @@ import Foundation
 struct MovieDetailWorker {
     var posterPath: String?
     var title: String
-    var genreID: [Int]
+    var genreID: String
     var yearOfRelease: String
     var isFavorite: Bool
     var description: String
     var id: Int
     
-    init(posterPath: String?, title: String, genreID: [Int], yearOfRelease: String, isFavorite: Bool, description: String, id: Int) {
+    init(posterPath: String?, title: String, genreID: String, yearOfRelease: String, isFavorite: Bool, description: String, id: Int) {
         self.posterPath = posterPath
         self.title = title
         self.genreID = genreID

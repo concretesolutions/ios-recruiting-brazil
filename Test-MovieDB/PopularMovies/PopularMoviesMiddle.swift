@@ -16,6 +16,8 @@ protocol PopularMoviesMiddleDelegate: class {
     func fetchFailed()
     func fetchWithNewPageResults(paths: [IndexPath])
     func searchResultNil()
+    func fetchGenres()
+    func errorLoadingGenres()
 }
 
 class PopularMoviesMiddle {
@@ -30,11 +32,17 @@ class PopularMoviesMiddle {
     var currentPage = 1
     var total = 0
     var isFetchInProgress = false
+    var stringIDs: [String] = []
+    var genres: [Genres] = []
+    var genreString = ""
+    var popularMovieDetailed: PopularMovieDetailed?
+    var popularMovieDetailedArray: [PopularMovieDetailed] = []
     
     //MARK: - INITIALIZERS
     
     init(delegate: PopularMoviesMiddleDelegate) {
         self.delegate = delegate
+        self.fetchGenres()
     }
     
     //MARK: - METHODS
@@ -48,6 +56,7 @@ class PopularMoviesMiddle {
     }
     
     func fetchMovies() {
+        
         if self.currentPage == 0 {
             self.currentPage += 1
         }
@@ -55,27 +64,61 @@ class PopularMoviesMiddle {
         
         isFetchInProgress = true
         RequestData.getPopularData(page: currentPage, completion: { (popular: Popular) in
+                
+                DispatchQueue.main.async {
+                    self.isFetchInProgress = false
+                    self.popularMovies = Popular(page: popular.page, total_results: popular.total_results, total_pages: popular.total_pages, results: popular.results)
+                    
+                    if self.currentPage < popular.total_pages {
+                        self.currentPage += 1
+                        self.popularResults.append(contentsOf: popular.results)
+                    
+                    }
+                    if self.currentPage <= 2 {
+                        self.delegate?.fetchCompleted()
+                    } else {
+                        let indexPathToReload = self.pathsToReload(from: popular.results)
+                        self.delegate?.fetchWithNewPageResults(paths: indexPathToReload)
+                    }
+                }
+            }) { (error) in
+                DispatchQueue.main.async {
+                    self.delegate?.fetchFailed()
+                }
+            }
+    }
+    
+    func fetchGenres() {
+        RequestData.gerGenres(completion: { (genreWorker: GenreWorker) in
             DispatchQueue.main.async {
-                self.isFetchInProgress = false
-                self.popularMovies = Popular(page: popular.page, total_results: popular.total_results, total_pages: popular.total_pages, results: popular.results)
-                if self.currentPage < popular.total_pages {
-                    self.currentPage += 1
-                    self.popularResults.append(contentsOf: popular.results)
-                }
-                if self.currentPage <= 2 {
-                    self.delegate?.fetchCompleted()
-                } else {
-                    let indexPathToReload = self.pathsToReload(from: popular.results)
-                    self.delegate?.fetchWithNewPageResults(paths: indexPathToReload)
-                }
+                self.genres.append(contentsOf: genreWorker.genres)
+                self.delegate?.fetchGenres()
+                print(genreWorker.genres)
             }
         }) { (error) in
-            DispatchQueue.main.async {
-                self.delegate?.fetchFailed()
-            }
+            self.delegate?.errorLoadingGenres()
         }
     }
+    
+    func parseGenres(ids: [Int]) -> String {
+        var genreString = ""
         
+        for i in ids {
+            for j in genres {
+                if j.id == i {
+                    if genreString.isEmpty == true {
+                        genreString.append(j.name)
+                    } else if genreString.isEmpty == false {
+                        genreString += ", \(j.name)"
+                    }
+                }
+            }
+        }
+        
+        return genreString
+        
+    }
+    
         func searchMovies(searchString: String) {
             if self.currentPage == 0 {
                 self.currentPage += 1

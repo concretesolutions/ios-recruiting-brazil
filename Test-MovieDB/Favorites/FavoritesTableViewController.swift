@@ -57,7 +57,7 @@ class FavoritesTableViewController: UIViewController {
         vc.middle = detailMiddle
         vc.middle.favoriteMoviesMiddle = middle
         vc.middle.indexOfMovie = indexToBePassed
-        vc.middle.fetchGenreID(IDs: movieDetailWorker.genreID)
+        //vc.middle.fetchGenreID(IDs: movieDetailWorker.genreID )
         self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
         }
     }
@@ -102,12 +102,12 @@ extension FavoritesTableViewController: UITableViewDataSource {
         if searchBar.text?.isEmpty == true {
             let movie = middle.favoritesFetched[indexPath.row]
             indexToBePassed = indexPath.row
-            movieDetailWorker = MovieDetailWorker(posterPath: movie.posterPath, title: movie.title ?? "", genreID: movie.genreID ?? [], yearOfRelease: movie.yearOfRelease ?? "", isFavorite: true, description: movie.movieDescription ?? "", id: Int(movie.id))
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.posterPath, title: movie.title ?? "", genreID: movie.genreID ?? "", yearOfRelease: movie.yearOfRelease ?? "", isFavorite: true, description: movie.movieDescription ?? "", id: Int(movie.id))
             performSegue(withIdentifier: "detailMovies", sender: movieDetailWorker)
         } else {
             let movie = middle.favoritesFetched[indexPath.row]
             indexToBePassed = indexPath.row
-            movieDetailWorker = MovieDetailWorker(posterPath: movie.posterPath, title: movie.title ?? "", genreID: movie.genreID ?? [], yearOfRelease: movie.yearOfRelease ?? "", isFavorite: true, description: movie.movieDescription ?? "", id: Int(movie.id))
+            movieDetailWorker = MovieDetailWorker(posterPath: movie.posterPath, title: movie.title ?? "", genreID: movie.genreID ?? "", yearOfRelease: movie.yearOfRelease ?? "", isFavorite: true, description: movie.movieDescription ?? "", id: Int(movie.id))
             performSegue(withIdentifier: "detailMovies", sender: movieDetailWorker)
         }
     }

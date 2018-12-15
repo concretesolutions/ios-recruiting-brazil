@@ -45,4 +45,5 @@ extension UIImageView {
 
 extension Notification.Name {
     static let didReceiveData = Notification.Name("didReceiveData")
+    static let reloadTable = Notification.Name("reloadCollection")
 }

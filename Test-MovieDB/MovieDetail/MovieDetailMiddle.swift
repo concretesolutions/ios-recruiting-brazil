@@ -47,25 +47,4 @@ class MovieDetailMiddle {
         favoriteMovie.removeFavorite(movie: movie)
         delegate?.didRemoveMovie()
     }
-    
-    func fetchGenreID(IDs: [Int]) {
-        genreString = ""
-        RequestData.gerGenres(completion: { (genreWorker: GenreWorker) in
-            DispatchQueue.main.async {
-                self.genres.append(contentsOf: genreWorker.genres)
-                self.delegate?.fetchGenres()
-                for i in self.genres {
-                    if self.movieToLoad.genreID.contains(i.id) {
-                        if self.genreString.isEmpty == true {
-                            self.genreString.append(i.name)
-                        } else if self.genreString.isEmpty == false {
-                            self.genreString.append(", \(i.name)")
-                        }
-                    }
-                }
-            }
-        }) { (error) in
-            self.delegate?.errorLoadingGenres()
-        }
-    }
 }

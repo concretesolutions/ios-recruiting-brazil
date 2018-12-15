@@ -13,11 +13,11 @@ struct Favorite {
     var description: String
     var posterPath: String?
     var isFavorite: Bool
-    var genreID: [Int]
+    var genreID: String
     var yearOfRelease: String
     var id: Int
     
-    init(title: String, description: String, posterPath: String?, isFavorite: Bool, genreID: [Int], yearOfRelease: String, id: Int) {
+    init(title: String, description: String, posterPath: String?, isFavorite: Bool, genreID: String, yearOfRelease: String, id: Int) {
         self.title = title
         self.description = description
         self.posterPath = posterPath

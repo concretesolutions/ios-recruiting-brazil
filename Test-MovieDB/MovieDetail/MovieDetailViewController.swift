@@ -120,7 +120,8 @@ extension MovieDetailViewController: UITableViewDataSource {
         case 1:
             cell.textLabel?.text = convertDateFormat(input: middle.movieToLoad.yearOfRelease)
         case 2:
-            cell.textLabel?.text = middle.genreString
+            cell.textLabel?.text = middle.movieToLoad.genreID
+            cell.textLabel?.numberOfLines = 0
         case 3:
             cell.textLabel?.text = middle.movieToLoad.description
             cell.textLabel?.numberOfLines = 0
@@ -139,17 +140,15 @@ extension MovieDetailViewController: MovieDetailMiddleDelegate {
     
     func didSaveMovie() {
         middle.fetchMovies()
+        NotificationCenter.default.post(name: .reloadTable, object: nil)
     }
     
     func didRemoveMovie() {
         middle.fetchMovies()
+        NotificationCenter.default.post(name: .reloadTable, object: nil)
     }
     
     func fetchGenres() {
-        for i in middle.genres {
-            if middle.movieToLoad.genreID.contains(i.id) {
-                middle.stringIDs.append(i.name)
-            }
-        }
+
     }
 }
