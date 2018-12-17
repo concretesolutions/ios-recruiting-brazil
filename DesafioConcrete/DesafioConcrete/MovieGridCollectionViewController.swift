@@ -12,7 +12,11 @@ private let reuseIdentifier = "MovieCell"
 
 class MovieGridCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let movies = ["Thor", "Iron Man", "Avengers", "Roma", "Call me by your name"]
+    let movies = [Movie(title: "Thor"),
+                  Movie(title: "Iron Man"),
+                  Movie(title: "Avengers"),
+                  Movie(title: "Roma"),
+                  Movie(title: "Call me by your name")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +54,7 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
     
         // Configure the cell
-        cell.movieTitleLabel.text = movies[indexPath.row]
+        cell.movie = movies[indexPath.row]
     
         return cell
     }

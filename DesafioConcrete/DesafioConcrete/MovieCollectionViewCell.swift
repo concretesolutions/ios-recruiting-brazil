@@ -14,4 +14,12 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var moviePosterImageView: UIImageView!
     @IBOutlet weak var favoriteIconImageView: UIImageView!
     
+    var movie: Movie? {
+        didSet {
+            if let movie = movie {
+                self.movieTitleLabel.text = movie.title
+            }
+        }
+    }
+    
 }
