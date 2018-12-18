@@ -60,6 +60,11 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
     }
 
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "toMovieDetails", sender: nil)
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
