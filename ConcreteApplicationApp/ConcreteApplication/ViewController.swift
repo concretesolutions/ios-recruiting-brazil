@@ -9,15 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let tmdbManager = TMDBManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        APIManager.shared.getAllMovies { (objects, error) in
-            print(objects)
+        tmdbManager.getPopularMovies(page: 1) { (result) in
+            print(result)
         }
+        
     }
-
-
+    
 }
 

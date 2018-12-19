@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC15623921CACE47008E7884 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15623821CACE47008E7884 /* Result.swift */; };
+		EC15623B21CACE9F008E7884 /* TMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15623A21CACE9F008E7884 /* TMDBManager.swift */; };
+		EC15623E21CAD23D008E7884 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15623D21CAD23D008E7884 /* Genre.swift */; };
+		EC15624021CAD25B008E7884 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15623F21CAD25B008E7884 /* Movie.swift */; };
+		EC15624221CAD813008E7884 /* TMDBResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15624121CAD813008E7884 /* TMDBResponse.swift */; };
+		EC15624521CADC84008E7884 /* TMDBConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15624421CADC84008E7884 /* TMDBConfig.swift */; };
 		ECDFE7BD219C44DC00B5FEC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */; };
 		ECDFE7BF219C44DC00B5FEC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7BE219C44DC00B5FEC4 /* ViewController.swift */; };
 		ECDFE7C2219C44DC00B5FEC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDFE7C0219C44DC00B5FEC4 /* Main.storyboard */; };
@@ -15,7 +21,6 @@
 		ECDFE7CA219C44DE00B5FEC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDFE7C8219C44DE00B5FEC4 /* LaunchScreen.storyboard */; };
 		ECDFE7D5219C44DE00B5FEC4 /* ConcreteApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7D4219C44DE00B5FEC4 /* ConcreteApplicationTests.swift */; };
 		ECDFE7E0219C44DE00B5FEC4 /* ConcreteApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7DF219C44DE00B5FEC4 /* ConcreteApplicationUITests.swift */; };
-		ECDFE7EF219C45A600B5FEC4 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7EE219C45A600B5FEC4 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC15623821CACE47008E7884 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		EC15623A21CACE9F008E7884 /* TMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBManager.swift; sourceTree = "<group>"; };
+		EC15623D21CAD23D008E7884 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		EC15623F21CAD25B008E7884 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		EC15624121CAD813008E7884 /* TMDBResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBResponse.swift; sourceTree = "<group>"; };
+		EC15624421CADC84008E7884 /* TMDBConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBConfig.swift; sourceTree = "<group>"; };
 		ECDFE7B9219C44DC00B5FEC4 /* ConcreteApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECDFE7BE219C44DC00B5FEC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +61,6 @@
 		ECDFE7DB219C44DE00B5FEC4 /* ConcreteApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcreteApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDFE7DF219C44DE00B5FEC4 /* ConcreteApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcreteApplicationUITests.swift; sourceTree = "<group>"; };
 		ECDFE7E1219C44DE00B5FEC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ECDFE7EE219C45A600B5FEC4 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +88,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC15623C21CAD028008E7884 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC15623D21CAD23D008E7884 /* Genre.swift */,
+				EC15623F21CAD25B008E7884 /* Movie.swift */,
+				EC15624121CAD813008E7884 /* TMDBResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC15624321CADC3E008E7884 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EC15624421CADC84008E7884 /* TMDBConfig.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		ECDFE7B0219C44DB00B5FEC4 = {
 			isa = PBXGroup;
 			children = (
-				ECDFE7ED219C458E00B5FEC4 /* APIManager */,
+				EC15624321CADC3E008E7884 /* Utils */,
+				EC15623C21CAD028008E7884 /* Model */,
+				ECDFE7ED219C458E00B5FEC4 /* Network */,
 				ECDFE7BB219C44DC00B5FEC4 /* ConcreteApplication */,
 				ECDFE7D3219C44DE00B5FEC4 /* ConcreteApplicationTests */,
 				ECDFE7DE219C44DE00B5FEC4 /* ConcreteApplicationUITests */,
@@ -131,12 +161,13 @@
 			path = ConcreteApplicationUITests;
 			sourceTree = "<group>";
 		};
-		ECDFE7ED219C458E00B5FEC4 /* APIManager */ = {
+		ECDFE7ED219C458E00B5FEC4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				ECDFE7EE219C45A600B5FEC4 /* APIManager.swift */,
+				EC15623821CACE47008E7884 /* Result.swift */,
+				EC15623A21CACE9F008E7884 /* TMDBManager.swift */,
 			);
-			path = APIManager;
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,10 +301,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECDFE7EF219C45A600B5FEC4 /* APIManager.swift in Sources */,
+				EC15624221CAD813008E7884 /* TMDBResponse.swift in Sources */,
+				EC15624521CADC84008E7884 /* TMDBConfig.swift in Sources */,
+				EC15623921CACE47008E7884 /* Result.swift in Sources */,
 				ECDFE7BF219C44DC00B5FEC4 /* ViewController.swift in Sources */,
 				ECDFE7BD219C44DC00B5FEC4 /* AppDelegate.swift in Sources */,
+				EC15623B21CACE9F008E7884 /* TMDBManager.swift in Sources */,
 				ECDFE7C5219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld in Sources */,
+				EC15624021CAD25B008E7884 /* Movie.swift in Sources */,
+				EC15623E21CAD23D008E7884 /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
