@@ -11,7 +11,6 @@ import SDWebImage
 
 extension UIImageView{
     func downloadImage(with path: String){
-        //FIXME:- pass correct placeholer UIImage
-        self.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500" + path), placeholderImage: UIImage(), options: .progressiveDownload)
+        self.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w300" + path), placeholderImage: UIImage(named: "Splash"), options: .progressiveDownload)
     }
 }

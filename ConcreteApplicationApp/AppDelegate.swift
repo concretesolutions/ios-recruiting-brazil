@@ -19,14 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         
+        //FIXME:- pass the correct color
         let tabBarController = UITabBarController()
         tabBarController.tabBar.tintColor = .black
         tabBarController.tabBar.barTintColor = .yellow
         
         let moviesGrid = MoviesGridViewController()
         moviesGrid.title = "Movies"
-        //FIXME:- pass correct image
-        moviesGrid.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(), tag: 0)
+        moviesGrid.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "favorite_empty_icon"), tag: 0)
         
         let controllers = [moviesGrid]
         tabBarController.viewControllers = controllers.map({
