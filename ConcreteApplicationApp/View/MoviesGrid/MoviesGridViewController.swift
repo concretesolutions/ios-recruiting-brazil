@@ -28,9 +28,12 @@ extension CodeView{
 
 class MoviesGridViewController: UIViewController {
 
+    let collectionView = MoviesGridCollectionView()
+//    let collectionViewDataSource: MoviesGridCollectionDataSource?
+    //FIXME:- create collection delegate and setup collection in willAppear
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Reusable
 
 final class MoviesGridCollectionDataSource: NSObject, UICollectionViewDataSource{
     
@@ -16,8 +17,7 @@ final class MoviesGridCollectionDataSource: NSObject, UICollectionViewDataSource
     required init(movies:[Movie], collectionView: UICollectionView) {
         self.movies = movies
         super.init()
-        //FIXME: register cell
-        
+        collectionView.register(cellType: MoviesGridCollectionViewCell.self)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -25,9 +25,9 @@ final class MoviesGridCollectionDataSource: NSObject, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //FIXME:- finish implementation, call cell from pod reusable
-        //let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: Mov.self)
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MoviesGridCollectionViewCell.self)
+        cell.setup(movie: movies[indexPath.row])
+        return cell
     }
     
     

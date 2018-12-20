@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Reusable
 
-class MoviesGridCollectionViewCell: UICollectionViewCell {
+class MoviesGridCollectionViewCell: UICollectionViewCell, Reusable {
     
     var movie: Movie!
     
@@ -32,7 +33,7 @@ extension MoviesGridCollectionViewCell: CodeView{
     }
     
     func setupConstraints() {
-        
+        //FIXME:- try it with SnapKit
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
