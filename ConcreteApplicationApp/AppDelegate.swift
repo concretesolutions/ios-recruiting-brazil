@@ -17,10 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        //FIXME: Customize navigationBar
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = .black
+        navigationBarAppearace.barTintColor = Design.Colors.clearYellow
         
         let tabBarController = UITabBarController()
         tabBarController.tabBar.tintColor = .black
@@ -34,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.viewControllers = controllers.map({
             UINavigationController(rootViewController: $0)
         })
-
         
         window.rootViewController = tabBarController
         self.window = window

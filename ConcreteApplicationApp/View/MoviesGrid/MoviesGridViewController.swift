@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class MoviesGridViewController: UIViewController {
-
+    
     //CollectionView
     let collectionView = MoviesGridCollectionView()
     var collectionViewDataSource: MoviesGridCollectionDataSource?
@@ -29,14 +29,10 @@ class MoviesGridViewController: UIViewController {
             case .success(let movies):
                 self.handleFetchOf(movies: movies)
             case .error:
-            print("error")
-            //FIXME:- display error
+                print("error")
+                //FIXME:- display error
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
     }
     
     func handleFetchOf(movies:[Movie]){
@@ -45,14 +41,12 @@ class MoviesGridViewController: UIViewController {
     
     
     func setupCollectionView(with movies: [Movie]){
-        
         self.collectionView.isHidden = false
         collectionViewDataSource = MoviesGridCollectionDataSource(movies: movies, collectionView: self.collectionView)
         self.collectionView.dataSource = collectionViewDataSource
         collectionViewDelegate = MoviesGridCollectionDelegate(movies: movies)
         self.collectionView.delegate = collectionViewDelegate
         self.collectionView.reloadData()
-        
     }
     
 }
@@ -72,8 +66,6 @@ extension MoviesGridViewController: CodeView{
         }
     }
     
-    func setupAdditionalConfiguration() {
-        //
-    }
+    func setupAdditionalConfiguration() {}
     
 }

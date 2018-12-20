@@ -34,15 +34,16 @@ final class MoviesGridCollectionDataSource: NSObject, UICollectionViewDataSource
 class MoviesGridCollectionDelegate: NSObject, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
     let movies:[Movie]!
+    let numberOfItems = 2
     
     init(movies: [Movie]){
         self.movies = movies
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //FIXME:- change size
-        let width = UIScreen.main.bounds.width * 0.45
-        return CGSize(width: width, height: width)
+        let items = CGFloat(numberOfItems)
+        let width = (UIScreen.main.bounds.width - Design.Insets.moviesGridCollection.right * (items + 1)) / items
+        return CGSize(width: width, height: width * 1.50)
     }
     
     
