@@ -8,12 +8,48 @@
 
 import UIKit
 
+protocol CodeView{
+    func buildViewHierarchy()
+    func setupConstraints()
+    func setupAdditionalConfiguration()
+    func setupView()
+}
+
+extension CodeView{
+    func setupView(){
+         buildViewHierarchy()
+         setupConstraints()
+         setupAdditionalConfiguration()
+    }
+    
+    func setupAdditionalConfiguration() {}
+    
+}
+
 class MoviesGridViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
+}
+
+extension MoviesGridViewController: CodeView{
+    func buildViewHierarchy() {
+        //
+    }
+    
+    func setupConstraints() {
+        //
+    }
+    
+    func setupAdditionalConfiguration() {
+        //
+    }
+    
+    func setupView() {
+        //
+    }
+    
     
 }
