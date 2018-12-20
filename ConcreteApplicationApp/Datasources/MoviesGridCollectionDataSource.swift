@@ -40,7 +40,8 @@ class MoviesGridCollectionDelegate: NSObject, UICollectionViewDelegate,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width * 0.4
+        //FIXME:- change size
+        let width = UIScreen.main.bounds.width * 0.45
         return CGSize(width: width, height: width)
     }
     

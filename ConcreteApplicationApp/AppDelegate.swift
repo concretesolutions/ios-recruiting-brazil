@@ -17,16 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        //FIXME: Customize navigationBar
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         
-        //FIXME:- pass the correct color
+        
         let tabBarController = UITabBarController()
         tabBarController.tabBar.tintColor = .black
-        tabBarController.tabBar.barTintColor = .yellow
+        tabBarController.tabBar.barTintColor = Design.Colors.clearYellow
         
         let moviesGrid = MoviesGridViewController()
         moviesGrid.title = "Movies"
-        moviesGrid.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "favorite_empty_icon"), tag: 0)
+        moviesGrid.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
         
         let controllers = [moviesGrid]
         tabBarController.viewControllers = controllers.map({

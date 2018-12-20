@@ -13,8 +13,7 @@ class MoviesGridCollectionView: UICollectionView{
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()
-        //FIXME:- make it in a struct
-        layout.sectionInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        layout.sectionInset = Design.Insets.moviesGridCollection
         
         super.init(frame: frame, collectionViewLayout: layout)
         self.backgroundColor = .white
