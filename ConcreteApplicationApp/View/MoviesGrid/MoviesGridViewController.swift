@@ -9,32 +9,12 @@
 import UIKit
 import SnapKit
 
-//FIXME:- change protocol file
-protocol CodeView{
-    func buildViewHierarchy()
-    func setupConstraints()
-    func setupAdditionalConfiguration()
-    func setupView()
-}
-
-extension CodeView{
-    func setupView(){
-         buildViewHierarchy()
-         setupConstraints()
-         setupAdditionalConfiguration()
-    }
-    
-    func setupAdditionalConfiguration() {}
-    
-}
-
 class MoviesGridViewController: UIViewController {
 
     //CollectionView
     let collectionView = MoviesGridCollectionView()
     var collectionViewDataSource: MoviesGridCollectionDataSource?
     var collectionViewDelegate: MoviesGridCollectionDelegate?
-    //FIXME:- create collection delegate and setup collection in willAppear
     //TMDB API
     let tmdb = TMDBManager()
     //Properties

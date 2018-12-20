@@ -15,15 +15,14 @@ class MoviesGridCollectionViewCell: UICollectionViewCell, Reusable {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.backgroundColor = .red
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     func setup(movie: Movie){
         self.movie = movie
-        //FIXME:- Extension to download Image
         setupView()
+        imageView.downloadImage(with: movie.posterPath ?? "")
     }
 }
 
