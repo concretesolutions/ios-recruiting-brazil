@@ -14,10 +14,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tmdbManager.getPopularMovies(page: 1) { (result) in
-            print(result)
+        tmdbManager.getGenres { (genres) in
+            print(genres)
         }
-        
     }
     
 }

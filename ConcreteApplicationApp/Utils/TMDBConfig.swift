@@ -19,6 +19,7 @@ struct TMDBConfig{
     
     struct endPoint{
         static let popular = "https://api.themoviedb.org/3/movie/popular"
+        static let genres = "https://api.themoviedb.org/3/genre/movie/list"
     }
     
 }

@@ -8,10 +8,6 @@
 
 import Foundation
 
-public enum TMDBError:Error{
-    case buildingURL(String)
-}
-
 class TMDBManager{
     
     private var popularMoviesResponse: TMDBResponse?
@@ -33,18 +29,14 @@ class TMDBManager{
         urlComponents?.queryItems = queryItems
         
         guard let url = urlComponents?.url else{
-            //FIXME: create error
-            print("could not create URL")
-            completion(.error(TMDBError.buildingURL("xxx")))
+            completion(.error(TMDBError.buildingURL("error creating URL for endpoint:\(endPoint)")))
             return
         }
         
         _ = URLSession.shared.dataTask(with: url) { data, response, error in
             
             guard let data = data else{
-                //FIXME: create error
-                print("could not get data")
-                completion(.error(TMDBError.buildingURL("xxx")))
+                completion(.error(TMDBError.gettingData("error getting data with error:\(error?.localizedDescription ?? "")")))
                 return
             }
             
@@ -52,14 +44,46 @@ class TMDBManager{
             
             do{
                 let moviesResponse = try jsonDecoder.decode(TMDBResponse.self, from: data)
-                self.popularMoviesResponse = moviesResponse
-                let results = moviesResponse.results
                 DispatchQueue.main.async {
-                    completion(.success(results))
+                    completion(.success(moviesResponse.results))
                 }
             } catch {
-                //FIXME:- change error
-                completion(.error(TMDBError.buildingURL(error.localizedDescription)))
+                completion(.error(TMDBError.jsonSerialization(error.localizedDescription)))
+            }
+            
+            }.resume()
+    }
+    
+    func getGenres(completion: @escaping (Result<[Genre]>) -> Void){
+        let endPoint = TMDBConfig.endPoint.genres
+        var urlComponents = URLComponents(string: endPoint)
+        
+        var queryItems:[URLQueryItem] = []
+        queryItems.append(contentsOf: authParams)
+        
+        urlComponents?.queryItems = queryItems
+        
+        guard let url = urlComponents?.url else{
+            completion(.error(TMDBError.buildingURL("error creating URL for endpoint:\(endPoint)")))
+            return
+        }
+        
+        _ = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            guard let data = data else{
+                completion(.error(TMDBError.gettingData("error getting data with error:\(error?.localizedDescription ?? "")")))
+                return
+            }
+            
+            let jsonDecoder = JSONDecoder()
+            
+            do{
+                let genresResponse = try jsonDecoder.decode(GenreResponse.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(genresResponse.genres))
+                }
+            } catch {
+                completion(.error(TMDBError.jsonSerialization(error.localizedDescription)))
             }
             
             }.resume()
