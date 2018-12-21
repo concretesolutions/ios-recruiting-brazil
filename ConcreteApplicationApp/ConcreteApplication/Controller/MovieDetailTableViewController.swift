@@ -22,6 +22,7 @@ class MovieDetailTableViewController: UITableViewController {
     init(movie: Movie, style: UITableView.Style) {
         self.movie = movie
         super.init(style: style)
+        self.title = "Movie"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,7 +48,8 @@ extension MovieDetailTableViewController {
         return 5
     }
     
-    func createGenresString() -> String{
+    func createGenresString(for movie: Movie) -> String{
+        let movie = movie
         var genresDescription = ""
         for genre in movie.genres{
             if genre.id == movie.genres.last?.id{
@@ -81,7 +83,7 @@ extension MovieDetailTableViewController {
             return descriptionCell
         case 3:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)
-            descriptionCell.setup(movieDetail:createGenresString())
+            descriptionCell.setup(movieDetail:createGenresString(for: self.movie))
             return descriptionCell
         case 4:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)
@@ -101,7 +103,7 @@ extension MovieDetailTableViewController {
         case 2:
             return movie.releaseYear.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
         case 3:
-            let movieGenres = self.createGenresString()
+            let movieGenres = self.createGenresString(for: self.movie)
             return movieGenres.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
         case 4:
             return movie.overview.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
