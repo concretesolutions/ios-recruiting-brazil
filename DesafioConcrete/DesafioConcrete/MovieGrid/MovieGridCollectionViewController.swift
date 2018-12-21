@@ -13,22 +13,59 @@ private let reuseIdentifier = "MovieCell"
 
 class MovieGridCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    
     @IBOutlet weak var errorView: UIView!
     var movies: [Movie]? = []
+    var filteredMovies: [Movie] = []
+    
+    let searchController = UISearchController(searchResultsController: nil)
     var loadingMoviesActivityIndicator: UIActivityIndicatorView!
     var page = 1
     var isLoadingNextPage = false
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(MovieGridCollectionViewController.handleRefresh(_:)),
+                                 for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        reload()
+        refreshControl.endRefreshing()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSearchController()
+        
+        self.collectionView.addSubview(self.refreshControl)
+        
         errorView.isHidden = true
         addActivityIndicator()
-        loadPage()
+        loadPage(reload: false)
     }
     
-    func loadPage() {
+    func setupSearchController() {
+        offset = UIOffset(horizontal: (searchController.searchBar.frame.width - placeholderWidth) / 2, vertical: 0)
+        searchController.searchBar.setPositionAdjustment(offset, for: .search)
+        searchController.searchBar.delegate = self
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    func reload() {
+        page = 1
+        loadPage(reload: true)
+    }
+    
+    func loadPage(reload: Bool) {
         let client = TMDBClient()
         client.loadMovies(pageNumber: page) { (response, error) in
             guard response != nil else {
@@ -45,7 +82,11 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
             }
             
             let movies = response?.results?.map(Movie.init(movieResult:))
-            self.movies! += movies ?? []
+            if reload {
+                self.movies = movies
+            } else {
+                self.movies! += movies ?? []
+            }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.loadingMoviesActivityIndicator.stopAnimating()
@@ -144,8 +185,49 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == (movies?.count)! - 1 {
             page = page + 1
-            loadPage()
+            loadPage(reload: false)
         }
     }
 
+    // MARK: - Private instance methods
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredMovies = movies!.filter({( movie : Movie) -> Bool in
+            return movie.title!.lowercased().contains(searchText.lowercased())
+        })
+        
+        collectionView.reloadData()
+    }
+    
+    let placeholderWidth: CGFloat = 130 // Replace with whatever value works for your placeholder text
+    var offset = UIOffset()
+}
+
+extension MovieGridCollectionViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+
+extension MovieGridCollectionViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        let noOffset = UIOffset(horizontal: 0, vertical: 0)
+        searchBar.setPositionAdjustment(noOffset, for: .search)
+        
+        return true
+    }
+    
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setPositionAdjustment(offset, for: .search)
+        
+        return true
+    }
 }
