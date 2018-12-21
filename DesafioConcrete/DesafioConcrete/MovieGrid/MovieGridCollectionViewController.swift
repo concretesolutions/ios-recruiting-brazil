@@ -114,7 +114,12 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
         // Pass the selected object to the new view controller.
         let destinationVC = segue.destination as! MovieDetailsTableViewController
         let indexPath = sender as! IndexPath
-        destinationVC.movie = movies?[indexPath.row]
+        
+        if isFiltering() {
+            destinationVC.movie = filteredMovies[indexPath.row]
+        } else {
+            destinationVC.movie = movies?[indexPath.row]
+        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -127,14 +132,25 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return movies?.count ?? 0
+        if isFiltering() {
+            return filteredMovies.count
+        } else {
+            return movies?.count ?? 0
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
     
         // Configure the cell
-        if let movie = movies?[indexPath.row] {
+        var movie: Movie?
+        if isFiltering() {
+            movie = filteredMovies[indexPath.row]
+        } else {
+            movie = movies?[indexPath.row]
+        }
+        
+        if let movie = movie {
             cell.movieTitleLabel.text = movie.title
             
             if let movieId = movie.id, UserFavorites.shared.favorites.contains(movieId) {
@@ -150,7 +166,6 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
             } else {
                 cell.moviePosterImageView.image = nil
             }
-            
         }
     
         return cell
@@ -175,7 +190,7 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
         let heightPercentageOfScreen: CGFloat = 618 / 2001
         let cellHeight = self.collectionView.frame.height * heightPercentageOfScreen
         
-        return CGSize(width: cellWidth, height: cellHeight)
+        return CGSize(width: cellWidth, height: cellHeight + 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -202,6 +217,10 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
         })
         
         collectionView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
     
     let placeholderWidth: CGFloat = 130 // Replace with whatever value works for your placeholder text
