@@ -151,5 +151,8 @@ extension MoviesGridViewController: MoviesSelectionDelegate{
     func didSelectMovie(movie: Movie) {
         //FIXME: create other screen passing movie
         print("selected movie \(movie.title)")
+        let movieDetailController = MovieDetailTableViewController(movie: movie, style: .grouped)
+        movieDetailController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(movieDetailController, animated: true)
     }
 }

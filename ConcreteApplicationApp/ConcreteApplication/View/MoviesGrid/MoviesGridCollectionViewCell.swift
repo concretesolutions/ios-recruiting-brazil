@@ -8,6 +8,7 @@
 
 import UIKit
 import Reusable
+import SDWebImage
 
 class MoviesGridCollectionViewCell: UICollectionViewCell, Reusable {
     
