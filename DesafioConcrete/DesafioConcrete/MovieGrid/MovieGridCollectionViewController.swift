@@ -12,30 +12,59 @@ private let reuseIdentifier = "MovieCell"
 
 class MovieGridCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let movies = [Movie(title: "Thor"),
-                  Movie(title: "Iron Man"),
-                  Movie(title: "Avengers"),
-                  Movie(title: "Roma"),
-                  Movie(title: "Call me by your name")]
-
+    
+    @IBOutlet weak var errorView: UIView!
+    var movies: [Movie]?
+    var loadingMoviesActivityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Do any additional setup after loading the view.
+        
+        errorView.isHidden = true
+        addActivityIndicator()
+    
+        let client = TMDBClient()
+        client.loadMovies { (response, error) in
+            guard response != nil else {
+                DispatchQueue.main.async {
+                    self.loadingMoviesActivityIndicator.stopAnimating()
+                    self.errorView.isHidden = false
+                }
+                
+                return
+            }
+            
+            let movies = response?.results?.map(Movie.init(movieResult:))
+            self.movies = movies
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.loadingMoviesActivityIndicator.stopAnimating()
+            }
+        }
     }
-
-    /*
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated) // clears selection
+        collectionView.reloadData()
+    }
+    
+    func addActivityIndicator() {
+        loadingMoviesActivityIndicator = UIActivityIndicatorView(style: .gray)
+        loadingMoviesActivityIndicator.center = view.center
+        loadingMoviesActivityIndicator.startAnimating()
+        view.addSubview(loadingMoviesActivityIndicator)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        let destinationVC = segue.destination as! MovieDetailsTableViewController
+        let indexPath = sender as! IndexPath
+        destinationVC.movie = movies?[indexPath.row]
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -47,14 +76,31 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return movies.count
+        return movies?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
     
         // Configure the cell
-        cell.movie = movies[indexPath.row]
+        if let movie = movies?[indexPath.row] {
+            cell.movieTitleLabel.text = movie.title
+            
+            if let movieId = movie.id, UserFavorites.shared.favorites.contains(movieId) {
+                cell.favoriteIconImageView.image = UIImage(named: "favorite_full_icon")
+            } else {
+                cell.favoriteIconImageView.image = UIImage(named: "favorite_gray_icon")
+            }
+            
+            if let posterPath = movie.posterPath {
+                let imageURL = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
+                let data = try? Data(contentsOf: imageURL!)
+                cell.moviePosterImageView.image = UIImage(data: data!)
+            } else {
+                cell.moviePosterImageView.image = nil
+            }
+            
+        }
     
         return cell
     }
@@ -63,37 +109,8 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "toMovieDetails", sender: nil)
+        performSegue(withIdentifier: "toMovieDetails", sender: indexPath)
     }
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
     
     // MARK: - UICollectionViewDelegateFlowLayout
     

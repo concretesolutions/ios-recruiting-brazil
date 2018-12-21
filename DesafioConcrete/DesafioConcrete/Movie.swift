@@ -10,21 +10,33 @@ import Foundation
 
 public class Movie {
     let id: Int?
-    let title: String
-    let posterURL: URL?
+    let title: String?
+    let posterPath: String?
     let description: String?
+    let genres: [Int]?
+    let releaseDate: String?
     
-    init(title: String) {
-        self.id = nil
-        self.title = title
-        self.posterURL = nil
-        self.description = nil
-    }
-    
-    init(id: Int, title: String, posterURL: URL, description: String) {
+    init(id: Int, title: String, posterPath: String, description: String, genres: [Int], releaseDate: String) {
         self.id = id
         self.title = title
-        self.posterURL = posterURL
+        self.posterPath = posterPath
         self.description = description
+        self.genres = genres
+        self.releaseDate = releaseDate
+    }
+    
+    init(movieResult: MovieResult) {
+        self.id = movieResult.id
+        self.title = movieResult.title
+        self.posterPath = movieResult.poster_path
+        self.description = movieResult.overview
+        self.genres = movieResult.genre_ids
+        
+        if let releaseDate = movieResult.release_date {
+            let index = releaseDate.index(releaseDate.startIndex, offsetBy: 4)
+            self.releaseDate = String(releaseDate[..<index])
+        } else {
+            self.releaseDate = nil
+        }
     }
 }
