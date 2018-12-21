@@ -15,13 +15,13 @@ class MoviesGridViewController: UIViewController {
     let collectionView = MoviesGridCollectionView()
     var collectionViewDataSource: MoviesGridCollectionDataSource?
     var collectionViewDelegate: MoviesGridCollectionDelegate?
+    
     var activityIndicator = ActivityIndicator(frame: .zero)
+    var errorView = ErrorView(frame: .zero)
     //TMDB API
     let tmdb = TMDBManager()
     //Properties
     var movies:[Movie] = []
-    
-    //FIXME:- learn about fileprivate
     
     fileprivate enum LoadingState{
         case loading
@@ -36,13 +36,17 @@ class MoviesGridViewController: UIViewController {
     
     fileprivate var loadingState: LoadingState = .ready {
         didSet{
-            refreshLoading(state: loadingState)
+            DispatchQueue.main.async {
+                self.refreshLoading(state: self.loadingState)
+            }
         }
     }
     
     fileprivate var presentationState: PresentationState = .loadingContent{
         didSet{
-            refreshUI(for: presentationState)
+            DispatchQueue.main.async {
+                self.refreshUI(for: self.presentationState)
+            }
         }
     }
     
@@ -53,15 +57,13 @@ class MoviesGridViewController: UIViewController {
         
         loadingState = .loading
         presentationState = .loadingContent
-        tmdb.getPopularMovies(page: 1) { (result) in
+        tmdb.getPopularMovies(page: 0) { (result) in
             self.loadingState = .ready
             switch result{
             case .success(let movies):
                 self.handleFetchOf(movies: movies)
             case .error:
                 self.presentationState = .error
-                print("error")
-                //FIXME:- display error
             }
         }
     }
@@ -89,6 +91,7 @@ extension MoviesGridViewController: CodeView{
     func buildViewHierarchy() {
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
+        view.addSubview(errorView)
     }
     
     func setupConstraints() {
@@ -99,6 +102,12 @@ extension MoviesGridViewController: CodeView{
             make.bottom.equalToSuperview()
         }
         activityIndicator.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        errorView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.top.equalToSuperview()
@@ -115,10 +124,8 @@ extension MoviesGridViewController{
         switch state{
         case .loading:
             activityIndicator.startAnimating()
-            print("start activity Indicator")
         case .ready:
-            activityIndicator.stopAnimating()
-            print("stop activity Indicator")
+                self.activityIndicator.stopAnimating()
         }
     }
     
@@ -128,10 +135,17 @@ extension MoviesGridViewController{
             print("display loading state")
             collectionView.isHidden = true
             activityIndicator.isHidden = false
+            errorView.isHidden = true
         case .displayingContent:
             print("display content")
+            collectionView.isHidden = false
+            activityIndicator.isHidden = true
+            errorView.isHidden = true
         case .error:
             print("error state")
+            collectionView.isHidden = true
+            activityIndicator.isHidden = true
+            errorView.isHidden = false
         }
     }
     
