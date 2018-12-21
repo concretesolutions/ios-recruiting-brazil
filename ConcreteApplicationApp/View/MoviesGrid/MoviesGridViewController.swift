@@ -57,7 +57,7 @@ class MoviesGridViewController: UIViewController {
         
         loadingState = .loading
         presentationState = .loadingContent
-        tmdb.getPopularMovies(page: 0) { (result) in
+        tmdb.getPopularMovies(page: 1) { (result) in
             self.loadingState = .ready
             switch result{
             case .success(let movies):
@@ -78,7 +78,7 @@ class MoviesGridViewController: UIViewController {
         self.collectionView.isHidden = false
         collectionViewDataSource = MoviesGridCollectionDataSource(movies: movies, collectionView: self.collectionView)
         self.collectionView.dataSource = collectionViewDataSource
-        collectionViewDelegate = MoviesGridCollectionDelegate(movies: movies)
+        collectionViewDelegate = MoviesGridCollectionDelegate(movies: movies, delegate: self)
         self.collectionView.delegate = collectionViewDelegate
         self.collectionView.reloadData()
     }
@@ -145,5 +145,11 @@ extension MoviesGridViewController{
             errorView.isHidden = false
         }
     }
-    
+}
+
+extension MoviesGridViewController: MoviesSelectionDelegate{
+    func didSelectMovie(movie: Movie) {
+        //FIXME: create other screen passing movie
+        print("selected movie \(movie.title)")
+    }
 }

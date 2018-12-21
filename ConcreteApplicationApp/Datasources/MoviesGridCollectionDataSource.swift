@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 import Reusable
 
+protocol MoviesSelectionDelegate: class {
+    func didSelectMovie(movie: Movie)
+}
+
+
 final class MoviesGridCollectionDataSource: NSObject, UICollectionViewDataSource{
     
     var movies:[Movie] = []
@@ -35,15 +40,21 @@ class MoviesGridCollectionDelegate: NSObject, UICollectionViewDelegate,UICollect
     
     let movies:[Movie]!
     let numberOfItems = 2
+    let moviesDelegate: MoviesSelectionDelegate?
     
-    init(movies: [Movie]){
+    init(movies: [Movie], delegate: MoviesSelectionDelegate){
         self.movies = movies
+        self.moviesDelegate = delegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let items = CGFloat(numberOfItems)
         let width = (UIScreen.main.bounds.width - Design.Insets.moviesGridCollection.right * (items + 1)) / items
         return CGSize(width: width, height: width * 1.50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        moviesDelegate?.didSelectMovie(movie: movies[indexPath.row])
     }
     
     
