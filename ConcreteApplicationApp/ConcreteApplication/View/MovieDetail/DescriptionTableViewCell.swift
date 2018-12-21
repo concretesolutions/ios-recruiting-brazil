@@ -37,7 +37,7 @@ extension DescriptionTableViewCell: CodeView{
             //FIXME: Adjust Constraints if needed
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().inset(20)
         }
         
     }
@@ -46,6 +46,7 @@ extension DescriptionTableViewCell: CodeView{
         label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 16.0)
     }
     
     

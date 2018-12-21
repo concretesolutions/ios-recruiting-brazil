@@ -38,7 +38,7 @@ extension MoviePosterTableViewCell: CodeView{
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.8)
         }
     }
     
