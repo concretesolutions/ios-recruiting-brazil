@@ -13,13 +13,35 @@ class FilterSettingsViewController: UIViewController, UITableViewDelegate {
     var dateFilter: String?
     var genreFilter: String?
 
+    var datePreviewLabel: UILabel?
+    var genrePreviewLabel: UILabel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.tabBarController?.tabBar.isHidden = true
+
+        if let datePreviewLabel = datePreviewLabel {
+            if let chosenDate = FilterSettings.shared.date {
+                datePreviewLabel.isHidden = false
+                datePreviewLabel.text = chosenDate
+            } else {
+                datePreviewLabel.isHidden = true
+            }
+        }
+
+        if let genrePreviewLabel = genrePreviewLabel {
+            if let chosenGenre = FilterSettings.shared.genre, let chosenGenreName = TMDBConfiguration.shared.genres?[chosenGenre] {
+                genrePreviewLabel.isHidden = false
+                genrePreviewLabel.text = chosenGenreName
+            } else {
+                genrePreviewLabel.isHidden = true
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,9 +60,16 @@ class FilterSettingsViewController: UIViewController, UITableViewDelegate {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "embedSettingsTable" {
-            let embeddedTableVC = segue.destination as! UITableViewController
+            let embeddedTableVC = segue.destination as! FilterSettingsTableViewController
             embeddedTableVC.tableView.delegate = self
+    
+            datePreviewLabel = embeddedTableVC.datePreview
+            genrePreviewLabel = embeddedTableVC.genrePreview
         }
     }
 
+    @IBAction func applyFilters(_ sender: Any) {
+        FilterSettings.shared.isOn = true
+        self.navigationController?.popViewController(animated: true)
+    }
 }

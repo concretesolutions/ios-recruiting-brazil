@@ -33,6 +33,7 @@ class MovieResult: Codable {
     let release_date: String?
     let genre_ids: [Int]?
     let poster_path: String?
+    let genres: [Genre]?
 }
 
 class TMDBClient {

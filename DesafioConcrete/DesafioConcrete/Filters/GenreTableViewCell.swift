@@ -11,6 +11,7 @@ import UIKit
 class GenreTableViewCell: UITableViewCell {
 
     @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var genreLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

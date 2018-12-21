@@ -11,6 +11,7 @@ import UIKit
 class DateTableViewCell: UITableViewCell {
 
     @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

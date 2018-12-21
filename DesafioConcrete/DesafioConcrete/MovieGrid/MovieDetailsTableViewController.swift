@@ -28,7 +28,7 @@ class MovieDetailsTableViewController: UITableViewController {
         self.descriptionLabel.text = movie?.description
         self.yearLabel.text = movie?.releaseDate
         
-        if let movieGenres = movie?.genres, let genreList = TMDBConfiguration.shared.genres {
+        if let movieGenres = movie?.genres_ids, let genreList = TMDBConfiguration.shared.genres {
             var genreText = ""
             for (offset, genre) in movieGenres.enumerated() {
                 if offset > 0 {

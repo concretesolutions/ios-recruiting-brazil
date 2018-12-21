@@ -10,21 +10,60 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
     
+    @IBOutlet var headerView: UIView!
+    
     var favoriteMovies: [Movie] = []
-
+    var filteredMovies: [Movie] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         favoriteMovies = []
+        filteredMovies = []
+        
+        if FilterSettings.shared.isOn == false {
+            tableView.tableHeaderView = nil
+        } else {
+            tableView.tableHeaderView = headerView
+        }
         
         let client = TMDBClient()
         
         for favorite in UserFavorites.shared.favorites {
             client.loadMovieDetails(movieId: favorite) { (result, error) in
                 if let result = result {
-                    self.favoriteMovies.append(Movie(movieResult: result))
+                    let movie = Movie(movieResult: result)
+                    self.favoriteMovies.append(movie)
+                    
+                    var shouldFilterByDate = false
+                    if let filterDate = FilterSettings.shared.date {
+                        if movie.releaseDate != filterDate {
+                            shouldFilterByDate = true
+                        }
+                    }
+                    
+                    var shouldFilterByGenre = false
+                    if let filterGenre = FilterSettings.shared.genre {
+                        if let movieGenres = movie.genres {
+                            shouldFilterByGenre = true
+                            
+                            for genre in movieGenres {
+                                if case genre.id = filterGenre {
+                                    shouldFilterByGenre = false
+                                    break
+                                }
+                            }
+                        } else {
+                            shouldFilterByGenre = true
+                        }
+                    }
+                    
+                    if !shouldFilterByDate && !shouldFilterByGenre {
+                        self.filteredMovies.append(movie)
+                    }
+                    
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
@@ -42,13 +81,24 @@ class FavoritesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteMovies.count
+        if FilterSettings.shared.isOn {
+            return filteredMovies.count
+        } else {
+            return favoriteMovies.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteMovieTableViewCell
 
-        let movie = favoriteMovies[indexPath.row]
+        var movie: Movie
+        
+        if FilterSettings.shared.isOn {
+            movie = filteredMovies[indexPath.row]
+        } else {
+            movie = favoriteMovies[indexPath.row]
+        }
+        
         cell.titleLabel.text = movie.title
         cell.releaseDateLabel.text = movie.releaseDate
         cell.descriptionLabel.text = movie.description
@@ -71,11 +121,20 @@ class FavoritesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let deleteAction = UITableViewRowAction(style: .normal, title: "Unfavorite") { (rowAction, indexPath) in
-            if let unfavoritedMovieId = self.favoriteMovies[indexPath.row].id {
-                UserFavorites.shared.remove(id: unfavoritedMovieId)
-            }
             
-            self.favoriteMovies.remove(at: indexPath.row)
+            if FilterSettings.shared.isOn {
+                if let unfavoritedMovieId = self.filteredMovies[indexPath.row].id {
+                    UserFavorites.shared.remove(id: unfavoritedMovieId)
+                }
+                
+                self.filteredMovies.remove(at: indexPath.row)
+            } else {
+                if let unfavoritedMovieId = self.favoriteMovies[indexPath.row].id {
+                    UserFavorites.shared.remove(id: unfavoritedMovieId)
+                }
+                
+                self.favoriteMovies.remove(at: indexPath.row)
+            }
             
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -87,5 +146,11 @@ class FavoritesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
     }
-
+    
+    @IBAction func removeFilters(_ sender: Any) {
+        FilterSettings.shared.isOn = false
+        tableView.tableHeaderView = nil
+        tableView.reloadData()
+    }
+    
 }
