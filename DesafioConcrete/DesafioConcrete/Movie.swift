@@ -25,7 +25,7 @@ public class Movie {
         self.genres_ids = movieResult.genre_ids
         self.genres = movieResult.genres
         
-        if let releaseDate = movieResult.release_date {
+        if let releaseDate = movieResult.release_date, releaseDate.count >= 4 {
             let index = releaseDate.index(releaseDate.startIndex, offsetBy: 4)
             self.releaseDate = String(releaseDate[..<index])
         } else {

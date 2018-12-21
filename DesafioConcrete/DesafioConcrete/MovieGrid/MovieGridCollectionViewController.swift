@@ -15,19 +15,28 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
     
     
     @IBOutlet weak var errorView: UIView!
-    var movies: [Movie]?
+    var movies: [Movie]? = []
     var loadingMoviesActivityIndicator: UIActivityIndicatorView!
+    var page = 1
+    var isLoadingNextPage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         errorView.isHidden = true
         addActivityIndicator()
+        loadPage()
+    }
     
+    func loadPage() {
         let client = TMDBClient()
-        client.loadMovies { (response, error) in
+        client.loadMovies(pageNumber: page) { (response, error) in
             guard response != nil else {
                 DispatchQueue.main.async {
+                    if self.page < response?.total_pages ?? 0 {
+                        self.isLoadingNextPage = true
+                    }
+                    
                     self.loadingMoviesActivityIndicator.stopAnimating()
                     self.errorView.isHidden = false
                 }
@@ -36,7 +45,7 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
             }
             
             let movies = response?.results?.map(Movie.init(movieResult:))
-            self.movies = movies
+            self.movies! += movies ?? []
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.loadingMoviesActivityIndicator.stopAnimating()
@@ -130,6 +139,13 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == (movies?.count)! - 1 {
+            page = page + 1
+            loadPage()
+        }
     }
 
 }
