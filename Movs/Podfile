@@ -1,0 +1,19 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!
+
+target 'Movs' do
+  # Pods for Movs
+  pod 'Alamofire', '~> 4.8'
+  pod 'AlamofireImage', '~> 3.5'
+  target 'MovsTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'MovsUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
