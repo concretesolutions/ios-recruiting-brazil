@@ -15,7 +15,7 @@ class MoviesGridViewController: UIViewController {
     let collectionView = MoviesGridCollectionView()
     var collectionViewDataSource: MoviesGridCollectionDataSource?
     var collectionViewDelegate: MoviesGridCollectionDelegate?
-    
+    //Auxiliar Views
     var activityIndicator = ActivityIndicator(frame: .zero)
     var errorView = ErrorView(frame: .zero)
     //TMDB API
@@ -116,7 +116,7 @@ extension MoviesGridViewController: CodeView{
     }
 }
 
-//MARK:- handling with UI changings
+//MARK:- Handling with UI changings
 
 extension MoviesGridViewController{
     
@@ -132,17 +132,14 @@ extension MoviesGridViewController{
     fileprivate func refreshUI(for presentationState: PresentationState){
         switch presentationState{
         case .loadingContent:
-            print("display loading state")
             collectionView.isHidden = true
             activityIndicator.isHidden = false
             errorView.isHidden = true
         case .displayingContent:
-            print("display content")
             collectionView.isHidden = false
             activityIndicator.isHidden = true
             errorView.isHidden = true
         case .error:
-            print("error state")
             collectionView.isHidden = true
             activityIndicator.isHidden = true
             errorView.isHidden = false
