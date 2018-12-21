@@ -22,6 +22,7 @@ class MoviesGridViewController: UIViewController {
     let tmdb = TMDBManager()
     //Properties
     var movies:[Movie] = []
+    var genres:[Genre] = []
     
     fileprivate enum LoadingState{
         case loading
@@ -54,14 +55,34 @@ class MoviesGridViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        
+
         loadingState = .loading
         presentationState = .loadingContent
-        tmdb.getPopularMovies(page: 1) { (result) in
+        self.fetchGenres()
+        
+    }
+    
+    func fetchMovies(page: Int){
+        tmdb.getPopularMovies(page: page) { (result) in
             self.loadingState = .ready
             switch result{
             case .success(let movies):
                 self.handleFetchOf(movies: movies)
+            case .error:
+                self.presentationState = .error
+            }
+        }
+    }
+    
+    func fetchGenres(){
+        loadingState = .loading
+        presentationState = .loadingContent
+        tmdb.getGenres { (result) in
+            self.loadingState = .ready
+            switch result{
+            case .success(let genres):
+                self.genres = genres
+                self.fetchMovies(page: 1)
             case .error:
                 self.presentationState = .error
             }
@@ -149,7 +170,14 @@ extension MoviesGridViewController{
 
 extension MoviesGridViewController: MoviesSelectionDelegate{
     func didSelectMovie(movie: Movie) {
-        let movieDetailController = MovieDetailTableViewController(movie: movie, style: .grouped)
+        var selectedMovie = movie
+        var movieGenres:[Genre] = []
+        for genre in movie.genres{
+            movieGenres.append(contentsOf: self.genres.filter{$0.id == genre.id})
+        }
+        
+        selectedMovie.genres = movieGenres
+        let movieDetailController = MovieDetailTableViewController(movie: selectedMovie, style: .grouped)
         movieDetailController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(movieDetailController, animated: true)
     }

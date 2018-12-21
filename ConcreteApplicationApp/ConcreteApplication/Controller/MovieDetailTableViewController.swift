@@ -47,6 +47,18 @@ extension MovieDetailTableViewController {
         return 5
     }
     
+    func createGenresString() -> String{
+        var genresDescription = ""
+        for genre in movie.genres{
+            if genre.id == movie.genres.last?.id{
+                genresDescription += "\(genre.name ?? "")"
+            }else{
+                genresDescription += "\(genre.name ?? ""), "
+            }
+        }
+        return genresDescription
+    }
+    
 }
 
 //MARK:- Delegate
@@ -69,8 +81,7 @@ extension MovieDetailTableViewController {
             return descriptionCell
         case 3:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)
-            //FIXME: create logic to pass genres
-            descriptionCell.setup(movieDetail:"genre")
+            descriptionCell.setup(movieDetail:createGenresString())
             return descriptionCell
         case 4:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)
@@ -88,10 +99,10 @@ extension MovieDetailTableViewController {
         case 1:
             return movie.title.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
         case 2:
-           return movie.releaseYear.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
+            return movie.releaseYear.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
         case 3:
-            //FIXME: change to calculate genre height properly
-            return movie.title.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
+            let movieGenres = self.createGenresString()
+            return movieGenres.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
         case 4:
             return movie.overview.height(width: UIScreen.main.bounds.width , widthOffset: 40.0, font: UIFont.systemFont(ofSize: 16.0)) + 20
         default:
