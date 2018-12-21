@@ -27,8 +27,6 @@
 		EC313D2921CC779500A6848A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC313D2821CC779500A6848A /* ActivityIndicator.swift */; };
 		EC313D2B21CC7CD100A6848A /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC313D2A21CC7CD100A6848A /* ErrorView.swift */; };
 		ECDFE7BD219C44DC00B5FEC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */; };
-		ECDFE7BF219C44DC00B5FEC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7BE219C44DC00B5FEC4 /* ViewController.swift */; };
-		ECDFE7C2219C44DC00B5FEC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDFE7C0219C44DC00B5FEC4 /* Main.storyboard */; };
 		ECDFE7C5219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7C3219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld */; };
 		ECDFE7C7219C44DE00B5FEC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDFE7C6219C44DE00B5FEC4 /* Assets.xcassets */; };
 		ECDFE7CA219C44DE00B5FEC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDFE7C8219C44DE00B5FEC4 /* LaunchScreen.storyboard */; };
@@ -83,8 +81,6 @@
 		EC313D2A21CC7CD100A6848A /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ECDFE7B9219C44DC00B5FEC4 /* ConcreteApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ECDFE7BE219C44DC00B5FEC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ECDFE7C1219C44DC00B5FEC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ECDFE7C4219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConcreteApplication.xcdatamodel; sourceTree = "<group>"; };
 		ECDFE7C6219C44DE00B5FEC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECDFE7C9219C44DE00B5FEC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -174,8 +170,6 @@
 			children = (
 				EC313D1621CB3B2500A6848A /* MoviesGrid */,
 				ECDFE7C8219C44DE00B5FEC4 /* LaunchScreen.storyboard */,
-				ECDFE7C0219C44DC00B5FEC4 /* Main.storyboard */,
-				ECDFE7BE219C44DC00B5FEC4 /* ViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +177,7 @@
 		EC313D1321CB394E00A6848A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EC313D1121CB343100A6848A /* MoviesGridViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -190,7 +185,6 @@
 		EC313D1621CB3B2500A6848A /* MoviesGrid */ = {
 			isa = PBXGroup;
 			children = (
-				EC313D1121CB343100A6848A /* MoviesGridViewController.swift */,
 				EC313D1721CB3B4300A6848A /* MoviesGridCollectionViewCell.swift */,
 				EC313D1C21CB460D00A6848A /* MoviesGridCollectionView.swift */,
 				EC313D2821CC779500A6848A /* ActivityIndicator.swift */,
@@ -226,15 +220,6 @@
 		ECDFE7B0219C44DB00B5FEC4 = {
 			isa = PBXGroup;
 			children = (
-				EC313D2121CBFAF300A6848A /* Extensions */,
-				EC313D1E21CBFA5C00A6848A /* Protocols */,
-				EC313D1921CB455700A6848A /* Datasources */,
-				EC313D1321CB394E00A6848A /* Controller */,
-				ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */,
-				EC313D1021CB330000A6848A /* View */,
-				EC15624321CADC3E008E7884 /* Utils */,
-				EC15623C21CAD028008E7884 /* Model */,
-				ECDFE7ED219C458E00B5FEC4 /* Network */,
 				ECDFE7BB219C44DC00B5FEC4 /* ConcreteApplication */,
 				ECDFE7D3219C44DE00B5FEC4 /* ConcreteApplicationTests */,
 				ECDFE7DE219C44DE00B5FEC4 /* ConcreteApplicationUITests */,
@@ -257,6 +242,15 @@
 		ECDFE7BB219C44DC00B5FEC4 /* ConcreteApplication */ = {
 			isa = PBXGroup;
 			children = (
+				ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */,
+				EC15623C21CAD028008E7884 /* Model */,
+				EC313D1021CB330000A6848A /* View */,
+				EC313D1321CB394E00A6848A /* Controller */,
+				ECDFE7ED219C458E00B5FEC4 /* Network */,
+				EC313D1921CB455700A6848A /* Datasources */,
+				EC313D1E21CBFA5C00A6848A /* Protocols */,
+				EC313D2121CBFAF300A6848A /* Extensions */,
+				EC15624321CADC3E008E7884 /* Utils */,
 				ECDFE7CB219C44DE00B5FEC4 /* Info.plist */,
 				ECDFE7C6219C44DE00B5FEC4 /* Assets.xcassets */,
 				ECDFE7C3219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld */,
@@ -401,7 +395,6 @@
 			files = (
 				ECDFE7CA219C44DE00B5FEC4 /* LaunchScreen.storyboard in Resources */,
 				ECDFE7C7219C44DE00B5FEC4 /* Assets.xcassets in Resources */,
-				ECDFE7C2219C44DC00B5FEC4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +510,6 @@
 				EC313D1D21CB460D00A6848A /* MoviesGridCollectionView.swift in Sources */,
 				EC313D2721CC09D100A6848A /* Design.swift in Sources */,
 				EC313D1221CB343100A6848A /* MoviesGridViewController.swift in Sources */,
-				ECDFE7BF219C44DC00B5FEC4 /* ViewController.swift in Sources */,
 				ECDFE7BD219C44DC00B5FEC4 /* AppDelegate.swift in Sources */,
 				EC15623B21CACE9F008E7884 /* TMDBManager.swift in Sources */,
 				EC313D2B21CC7CD100A6848A /* ErrorView.swift in Sources */,
@@ -560,14 +552,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		ECDFE7C0219C44DC00B5FEC4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECDFE7C1219C44DC00B5FEC4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ECDFE7C8219C44DE00B5FEC4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
