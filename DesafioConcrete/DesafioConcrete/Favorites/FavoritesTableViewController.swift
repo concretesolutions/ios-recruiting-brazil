@@ -15,8 +15,11 @@ class FavoritesTableViewController: UITableViewController {
     var favoriteMovies: [Movie] = []
     var filteredMovies: [Movie] = []
     
+    var loadingMoviesActivityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addActivityIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +68,7 @@ class FavoritesTableViewController: UITableViewController {
                     }
                     
                     DispatchQueue.main.async {
+                        self.loadingMoviesActivityIndicator.stopAnimating()
                         self.tableView.reloadData()
                     }
                 } else {
@@ -72,6 +76,13 @@ class FavoritesTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    func addActivityIndicator() {
+        loadingMoviesActivityIndicator = UIActivityIndicatorView(style: .gray)
+        loadingMoviesActivityIndicator.center = view.center
+        loadingMoviesActivityIndicator.startAnimating()
+        view.addSubview(loadingMoviesActivityIndicator)
     }
 
     // MARK: - Table view data source
@@ -105,8 +116,7 @@ class FavoritesTableViewController: UITableViewController {
         
         if let posterPath = movie.posterPath {
             let imageURL = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
-            let data = try? Data(contentsOf: imageURL!)
-            cell.posterImageView.image = UIImage(data: data!)
+            cell.posterImageView.kf.setImage(with: imageURL)
         } else {
             cell.posterImageView.image = nil
         }
@@ -125,6 +135,12 @@ class FavoritesTableViewController: UITableViewController {
             if FilterSettings.shared.isOn {
                 if let unfavoritedMovieId = self.filteredMovies[indexPath.row].id {
                     UserFavorites.shared.remove(id: unfavoritedMovieId)
+                    
+                    for (offset, movie) in self.favoriteMovies.enumerated() {
+                        if unfavoritedMovieId == movie.id {
+                            self.favoriteMovies.remove(at: offset)
+                        }
+                    }
                 }
                 
                 self.filteredMovies.remove(at: indexPath.row)

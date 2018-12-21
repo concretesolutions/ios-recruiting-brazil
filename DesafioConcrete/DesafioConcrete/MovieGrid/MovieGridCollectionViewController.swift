@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private let reuseIdentifier = "MovieCell"
 
@@ -94,8 +95,8 @@ class MovieGridCollectionViewController: UICollectionViewController, UICollectio
             
             if let posterPath = movie.posterPath {
                 let imageURL = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
-                let data = try? Data(contentsOf: imageURL!)
-                cell.moviePosterImageView.image = UIImage(data: data!)
+                cell.moviePosterImageView.kf.indicatorType = .activity
+                cell.moviePosterImageView.kf.setImage(with: imageURL)
             } else {
                 cell.moviePosterImageView.image = nil
             }

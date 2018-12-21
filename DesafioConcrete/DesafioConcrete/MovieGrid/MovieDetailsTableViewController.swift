@@ -54,8 +54,7 @@ class MovieDetailsTableViewController: UITableViewController {
         
         if let posterPath = movie?.posterPath {
             let imageURL = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
-            let data = try? Data(contentsOf: imageURL!)
-            self.posterImageView.image = UIImage(data: data!)
+            self.posterImageView.kf.setImage(with: imageURL)
         } else {
             self.posterImageView.image = nil
         }

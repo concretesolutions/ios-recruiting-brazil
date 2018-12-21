@@ -14,7 +14,7 @@ class UserFavorites {
     var favorites: [Int] = []
     
     private init() {
-        favorites = UserDefaults.standard.object(forKey: "favorites") as! [Int]
+        favorites = UserDefaults.standard.object(forKey: "favorites") as? [Int] ?? []
     }
     
     func add(id: Int) {
