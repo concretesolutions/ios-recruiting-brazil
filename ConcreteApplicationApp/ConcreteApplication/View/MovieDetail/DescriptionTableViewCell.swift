@@ -34,7 +34,6 @@ extension DescriptionTableViewCell: CodeView{
     func setupConstraints() {
         
         label.snp.makeConstraints { (make) in
-            //FIXME: Adjust Constraints if needed
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)

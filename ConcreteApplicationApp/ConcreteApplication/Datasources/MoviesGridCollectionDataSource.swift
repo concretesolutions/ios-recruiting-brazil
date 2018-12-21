@@ -38,7 +38,7 @@ final class MoviesGridCollectionDataSource: NSObject, UICollectionViewDataSource
 
 class MoviesGridCollectionDelegate: NSObject, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
-    let movies:[Movie]!
+    var movies:[Movie]!
     let numberOfItems = 2
     let moviesDelegate: MoviesSelectionDelegate?
     
@@ -54,6 +54,9 @@ class MoviesGridCollectionDelegate: NSObject, UICollectionViewDelegate,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? MoviesGridCollectionViewCell{
+            movies[indexPath.row].poster = cell.imageView.image
+        }
         moviesDelegate?.didSelectMovie(movie: movies[indexPath.row])
     }
     

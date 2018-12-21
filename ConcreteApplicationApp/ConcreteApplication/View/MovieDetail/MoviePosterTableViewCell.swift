@@ -34,7 +34,6 @@ extension MoviePosterTableViewCell: CodeView{
     func setupConstraints() {
         
         poster.snp.makeConstraints { (make) in
-            //FIXME:- change constraints if needed
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
@@ -43,7 +42,7 @@ extension MoviePosterTableViewCell: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        poster.contentMode = .scaleAspectFit
+        poster.contentMode = .scaleToFill
     }
     
 }
