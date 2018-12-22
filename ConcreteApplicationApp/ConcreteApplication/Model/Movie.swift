@@ -33,6 +33,8 @@ struct Movie{
         self.releaseYear = releaseYear
         self.genres = genres
     }
+    
+    //FIXME: create realm function
 }
 
 extension Movie:Codable{

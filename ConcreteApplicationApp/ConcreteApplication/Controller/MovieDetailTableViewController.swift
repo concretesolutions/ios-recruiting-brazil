@@ -75,7 +75,7 @@ extension MovieDetailTableViewController {
             return posterCell
         case 1:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)
-            descriptionCell.setup(movieDetail: movie.title, isFavorite: movie.isFavorite)
+            descriptionCell.setup(movieDetail: movie.title, isFavorite: movie.isFavorite, delegate: self)
             return descriptionCell
         case 2:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)
@@ -111,4 +111,13 @@ extension MovieDetailTableViewController {
             return 0
         }
     }
+}
+
+extension MovieDetailTableViewController: FavoriteMovieDelegate{
+   
+    func changeFavoriteStatus() {
+        //FIXME:- convert Movie to MovieRealm
+//        RealmManager.shared.update(object: self.movie)
+    }
+    
 }

@@ -10,10 +10,6 @@ import UIKit
 import Reusable
 import SDWebImage
 
-protocol FavoriteMovieDelegate{
-    func favorite(movie: Movie)
-}
-
 class MoviesGridCollectionViewCell: UICollectionViewCell, Reusable {
     
     var movie: Movie!

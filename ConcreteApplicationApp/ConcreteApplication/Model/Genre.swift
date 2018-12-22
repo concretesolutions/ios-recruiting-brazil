@@ -6,7 +6,7 @@
 //  Copyright © 2018 Bruno Cruz. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
 struct Genre{
     
@@ -21,6 +21,14 @@ struct Genre{
         self.id = id
         self.name = name
     }
+    
+    func realm() -> GenreRealm{
+        return GenreRealm.build({ (genreRealm) in
+            genreRealm.id = self.id
+            genreRealm.name = self.name ?? ""
+        })
+    }
+    
 }
 
 extension Genre: Codable{
