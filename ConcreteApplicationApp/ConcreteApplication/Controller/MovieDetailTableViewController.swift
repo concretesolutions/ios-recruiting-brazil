@@ -75,7 +75,7 @@ extension MovieDetailTableViewController {
             return posterCell
         case 1:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)
-            descriptionCell.setup(movieDetail: movie.title)
+            descriptionCell.setup(movieDetail: movie.title, isFavorite: movie.isFavorite)
             return descriptionCell
         case 2:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)

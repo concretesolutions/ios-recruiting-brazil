@@ -99,7 +99,7 @@ extension MoviesGridCollectionViewCell: CodeView{
         if movie.isFavorite{
             favoriteView.image = UIImage(named: "favorite_full_icon")
         }else{
-            favoriteView.image = UIImage(named: "favorite_empty_icon")
+            favoriteView.image = UIImage(named: "favorite_gray_icon")
         }
         
     }

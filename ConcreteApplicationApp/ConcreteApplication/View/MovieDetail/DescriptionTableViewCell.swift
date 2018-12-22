@@ -11,7 +11,8 @@ import SnapKit
 import Reusable
 
 class DescriptionTableViewCell: UITableViewCell, Reusable {
-
+    
+    var isFavorite:Bool = false
     
     lazy var label: UILabel = {
         let label = UILabel(frame: .zero)
@@ -19,16 +20,32 @@ class DescriptionTableViewCell: UITableViewCell, Reusable {
         return label
     }()
     
+    lazy var button: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     func setup(movieDetail: String){
         label.text = movieDetail
+        button.isHidden = true
         setupView()
     }
+    
+    func setup(movieDetail: String, isFavorite: Bool){
+        self.isFavorite = isFavorite
+        label.text = movieDetail
+        button.isHidden = false
+        setupView()
+    }
+
     
 }
 
 extension DescriptionTableViewCell: CodeView{
     func buildViewHierarchy() {
         contentView.addSubview(label)
+        contentView.addSubview(button)
     }
     
     func setupConstraints() {
@@ -39,6 +56,13 @@ extension DescriptionTableViewCell: CodeView{
             make.trailing.equalToSuperview().inset(20)
         }
         
+        button.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(20)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
+        }
+        
     }
     
     func setupAdditionalConfiguration() {
@@ -46,6 +70,15 @@ extension DescriptionTableViewCell: CodeView{
         label.textAlignment = .left
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16.0)
+        
+        button.contentMode = .scaleAspectFit
+        //FIXME:- check if it is working properly after favorite movie
+        if isFavorite{
+            button.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+        }else{
+            button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        }
+        
     }
     
     
