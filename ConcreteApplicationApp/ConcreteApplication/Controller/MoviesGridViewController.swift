@@ -11,6 +11,8 @@ import SnapKit
 
 class MoviesGridViewController: UIViewController {
     
+    //FIXME:- Create status of empty search
+    
     //CollectionView
     let collectionView = MoviesGridCollectionView()
     var collectionViewDataSource: MoviesGridCollectionDataSource?
