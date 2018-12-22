@@ -1,4 +1,9 @@
 PODS:
+  - Realm (3.13.0):
+    - Realm/Headers (= 3.13.0)
+  - Realm/Headers (3.13.0)
+  - RealmSwift (3.13.0):
+    - Realm (= 3.13.0)
   - Reusable (4.0.5):
     - Reusable/Storyboard (= 4.0.5)
     - Reusable/View (= 4.0.5)
@@ -10,21 +15,26 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
+  - RealmSwift
   - Reusable (~> 4.0)
   - SDWebImage (~> 4.3.3)
   - SnapKit (~> 4.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Realm
+    - RealmSwift
     - Reusable
     - SDWebImage
     - SnapKit
 
 SPEC CHECKSUMS:
+  Realm: 5edd2ee65406aef591a4f9895de5a3440e51b3d8
+  RealmSwift: be5ebc7930e37cd3376b41cec7f21984528aaa16
   Reusable: 188be1a54ac0691bc66e5bb24ec6eb91971b315b
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: c986aa01f4b7ee4d3f5e519c7d6c13fc418c0f7f
+PODFILE CHECKSUM: 6897875574378c96f5658ea016253f71ff3a318c
 
 COCOAPODS: 1.5.3

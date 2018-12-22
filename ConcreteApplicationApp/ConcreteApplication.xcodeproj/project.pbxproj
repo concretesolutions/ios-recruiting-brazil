@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7F17EBA00EB6655363540D03 /* Pods_ConcreteApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 951316161695E70939BB1F3B /* Pods_ConcreteApplicationTests.framework */; };
 		9C9EF31A3677AC47D3D1F36C /* Pods_ConcreteApplicationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667756F6E8210A15FEA0EA1B /* Pods_ConcreteApplicationUITests.framework */; };
+		EC00AD9A21CEEAF4006BBED0 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC00AD9921CEEAF4006BBED0 /* RealmManager.swift */; };
+		EC00AD9D21CEF214006BBED0 /* MovieRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC00AD9C21CEF214006BBED0 /* MovieRealm.swift */; };
+		EC00AD9F21CEF3E8006BBED0 /* GenreRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC00AD9E21CEF3E8006BBED0 /* GenreRealm.swift */; };
 		EC15623921CACE47008E7884 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15623821CACE47008E7884 /* Result.swift */; };
 		EC15623B21CACE9F008E7884 /* TMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15623A21CACE9F008E7884 /* TMDBManager.swift */; };
 		EC15623E21CAD23D008E7884 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC15623D21CAD23D008E7884 /* Genre.swift */; };
@@ -31,7 +34,6 @@
 		EC313D3221CD3E2500A6848A /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC313D3121CD3E2500A6848A /* DescriptionTableViewCell.swift */; };
 		EC313D3421CD430D00A6848A /* String + Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC313D3321CD430D00A6848A /* String + Height.swift */; };
 		ECDFE7BD219C44DC00B5FEC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */; };
-		ECDFE7C5219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7C3219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld */; };
 		ECDFE7C7219C44DE00B5FEC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDFE7C6219C44DE00B5FEC4 /* Assets.xcassets */; };
 		ECDFE7CA219C44DE00B5FEC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDFE7C8219C44DE00B5FEC4 /* LaunchScreen.storyboard */; };
 		ECDFE7D5219C44DE00B5FEC4 /* ConcreteApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDFE7D4219C44DE00B5FEC4 /* ConcreteApplicationTests.swift */; };
@@ -66,6 +68,9 @@
 		70FDE7A10DAEF4458136AAEE /* Pods-ConcreteApplicationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteApplicationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConcreteApplicationTests/Pods-ConcreteApplicationTests.release.xcconfig"; sourceTree = "<group>"; };
 		951316161695E70939BB1F3B /* Pods_ConcreteApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42A184B28C89F4C732F28A4 /* Pods-ConcreteApplicationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteApplicationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConcreteApplicationUITests/Pods-ConcreteApplicationUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EC00AD9921CEEAF4006BBED0 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		EC00AD9C21CEF214006BBED0 /* MovieRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRealm.swift; sourceTree = "<group>"; };
+		EC00AD9E21CEF3E8006BBED0 /* GenreRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRealm.swift; sourceTree = "<group>"; };
 		EC15623821CACE47008E7884 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		EC15623A21CACE9F008E7884 /* TMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBManager.swift; sourceTree = "<group>"; };
 		EC15623D21CAD23D008E7884 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
@@ -89,7 +94,6 @@
 		EC313D3321CD430D00A6848A /* String + Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Height.swift"; sourceTree = "<group>"; };
 		ECDFE7B9219C44DC00B5FEC4 /* ConcreteApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ECDFE7C4219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ConcreteApplication.xcdatamodel; sourceTree = "<group>"; };
 		ECDFE7C6219C44DE00B5FEC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECDFE7C9219C44DE00B5FEC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECDFE7CB219C44DE00B5FEC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -150,6 +154,24 @@
 				1483D72A11ACF7A045D99600 /* Pods-ConcreteApplicationUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EC00AD9821CEEADF006BBED0 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				EC00AD9B21CEF1DD006BBED0 /* Model */,
+				EC00AD9921CEEAF4006BBED0 /* RealmManager.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		EC00AD9B21CEF1DD006BBED0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EC00AD9C21CEF214006BBED0 /* MovieRealm.swift */,
+				EC00AD9E21CEF3E8006BBED0 /* GenreRealm.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EC15623C21CAD028008E7884 /* Model */ = {
@@ -262,6 +284,7 @@
 		ECDFE7BB219C44DC00B5FEC4 /* ConcreteApplication */ = {
 			isa = PBXGroup;
 			children = (
+				EC00AD9821CEEADF006BBED0 /* Realm */,
 				ECDFE7BC219C44DC00B5FEC4 /* AppDelegate.swift */,
 				EC15623C21CAD028008E7884 /* Model */,
 				EC313D1021CB330000A6848A /* View */,
@@ -273,7 +296,6 @@
 				EC15624321CADC3E008E7884 /* Utils */,
 				ECDFE7CB219C44DE00B5FEC4 /* Info.plist */,
 				ECDFE7C6219C44DE00B5FEC4 /* Assets.xcassets */,
-				ECDFE7C3219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld */,
 			);
 			path = ConcreteApplication;
 			sourceTree = "<group>";
@@ -478,12 +500,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ConcreteApplication/Pods-ConcreteApplication-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -522,6 +548,7 @@
 				EC15624221CAD813008E7884 /* TMDBResponse.swift in Sources */,
 				EC313D3221CD3E2500A6848A /* DescriptionTableViewCell.swift in Sources */,
 				EC313D2921CC779500A6848A /* ActivityIndicator.swift in Sources */,
+				EC00AD9D21CEF214006BBED0 /* MovieRealm.swift in Sources */,
 				EC15624521CADC84008E7884 /* TMDBConfig.swift in Sources */,
 				EC313D3421CD430D00A6848A /* String + Height.swift in Sources */,
 				EC313D1521CB398000A6848A /* MoviesGridCollectionDataSource.swift in Sources */,
@@ -532,10 +559,11 @@
 				EC313D1D21CB460D00A6848A /* MoviesGridCollectionView.swift in Sources */,
 				EC313D2721CC09D100A6848A /* Design.swift in Sources */,
 				EC313D1221CB343100A6848A /* MoviesGridViewController.swift in Sources */,
+				EC00AD9F21CEF3E8006BBED0 /* GenreRealm.swift in Sources */,
 				ECDFE7BD219C44DC00B5FEC4 /* AppDelegate.swift in Sources */,
 				EC15623B21CACE9F008E7884 /* TMDBManager.swift in Sources */,
 				EC313D2B21CC7CD100A6848A /* ErrorView.swift in Sources */,
-				ECDFE7C5219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld in Sources */,
+				EC00AD9A21CEEAF4006BBED0 /* RealmManager.swift in Sources */,
 				EC15624021CAD25B008E7884 /* Movie.swift in Sources */,
 				EC313D2D21CD32CE00A6848A /* MovieDetailTableViewController.swift in Sources */,
 				EC313D3021CD347900A6848A /* MoviePosterTableViewCell.swift in Sources */,
@@ -863,19 +891,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		ECDFE7C3219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				ECDFE7C4219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodel */,
-			);
-			currentVersion = ECDFE7C4219C44DC00B5FEC4 /* ConcreteApplication.xcdatamodel */;
-			path = ConcreteApplication.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = ECDFE7B1219C44DB00B5FEC4 /* Project object */;
 }
