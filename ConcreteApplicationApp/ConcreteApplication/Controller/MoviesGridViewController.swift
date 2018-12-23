@@ -56,25 +56,20 @@ class MoviesGridViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.fetchGenres()
-        
         setupView()
-
         loadingState = .loading
         presentationState = .loadingContent
         
+        self.fetchGenres()
     }
     
-    //FIXME:- Think about a better function calls in viewWilAppear
+    
     override func viewWillAppear(_ animated: Bool) {
-        
-        self.fetchGenres()
-        
-        setupView()
         
         loadingState = .loading
         presentationState = .loadingContent
         
+        self.getMoviesFromRealm()
     }
     
     func fetchGenres(){
@@ -106,6 +101,7 @@ class MoviesGridViewController: UIViewController {
     }
     
     func getMoviesFromRealm(){
+        self.clearFavoriteMovies()
         let favoritedMovies = RealmManager.shared.getAll(objectsOf: MovieRealm.self)
         for favoritedMovie in favoritedMovies{
             for (index,movie) in self.movies.enumerated(){
@@ -117,10 +113,17 @@ class MoviesGridViewController: UIViewController {
         self.handleFetchOf(movies: self.movies)
     }
     
+    func clearFavoriteMovies(){
+        for (index,_) in self.movies.enumerated(){
+                self.movies[index].isFavorite = false
+        }
+    }
+    
     
     func handleFetchOf(movies:[Movie]){
         self.setupCollectionView(with: movies)
         self.presentationState = .displayingContent
+        self.loadingState = .ready
     }
     
     
@@ -173,9 +176,9 @@ extension MoviesGridViewController{
     fileprivate func refreshLoading(state: LoadingState){
         switch state{
         case .loading:
-            activityIndicator.startAnimating()
+            self.activityIndicator.startAnimating()
         case .ready:
-                self.activityIndicator.stopAnimating()
+            self.activityIndicator.stopAnimating()
         }
     }
     
