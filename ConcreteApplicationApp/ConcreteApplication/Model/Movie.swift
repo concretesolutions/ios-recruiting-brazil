@@ -34,7 +34,21 @@ struct Movie{
         self.genres = genres
     }
     
-    //FIXME: create realm function
+    func realm() -> MovieRealm{
+        return MovieRealm.build({ (movieRealm) in
+            movieRealm.id = self.id
+            movieRealm.title = self.title
+            movieRealm.posterPath = self.posterPath ?? ""
+            movieRealm.overview = self.overview
+            movieRealm.releaseYear = self.releaseYear
+            movieRealm.poster = (self.poster ?? UIImage(named: "placeholder_poster")!).jpegData(compressionQuality: 1.0)
+            for genre in self.genres{
+                movieRealm.genres.append(genre.realm())
+            }
+            
+        })
+    }
+    
 }
 
 extension Movie:Codable{

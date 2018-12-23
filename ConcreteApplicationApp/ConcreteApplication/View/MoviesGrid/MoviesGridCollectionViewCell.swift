@@ -91,7 +91,6 @@ extension MoviesGridCollectionViewCell: CodeView{
         view.backgroundColor = Design.Colors.darkBlue
         favoriteView.contentMode = .center
         
-        //FIXME:- check if it is working properly after favorite a movie
         if movie.isFavorite{
             favoriteView.image = UIImage(named: "favorite_full_icon")
         }else{

@@ -17,6 +17,7 @@ class MovieRealm: Object{
     @objc dynamic var overview: String = ""
     @objc dynamic var releaseYear: String = ""
     @objc dynamic var isFavorite = false
+    @objc dynamic var poster : Data?
     
     override static func primaryKey() -> String{
         return "id"

@@ -114,10 +114,15 @@ extension MovieDetailTableViewController {
 }
 
 extension MovieDetailTableViewController: FavoriteMovieDelegate{
-   
-    func changeFavoriteStatus() {
-        //FIXME:- convert Movie to MovieRealm
-//        RealmManager.shared.update(object: self.movie)
+    
+    func changeFavorite(to status: Bool) {
+        if status == true{
+            RealmManager.shared.save(object: self.movie.realm())
+        }else{
+            if let movieToDelete = RealmManager.shared.get(objectOf: MovieRealm.self, with: self.movie.id){
+                RealmManager.shared.delete(object: movieToDelete)
+            }
+        }
     }
     
 }

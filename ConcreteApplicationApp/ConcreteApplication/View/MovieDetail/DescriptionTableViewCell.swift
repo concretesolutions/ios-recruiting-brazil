@@ -11,7 +11,7 @@ import SnapKit
 import Reusable
 
 protocol FavoriteMovieDelegate: class {
-    func changeFavoriteStatus()
+    func changeFavorite(to status: Bool)
 }
 
 class DescriptionTableViewCell: UITableViewCell, Reusable {
@@ -53,7 +53,7 @@ class DescriptionTableViewCell: UITableViewCell, Reusable {
         }else{
             button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         }
-        self.favoriteDelegate?.changeFavoriteStatus()
+        self.favoriteDelegate?.changeFavorite(to: self.isFavorite)
     }
 
     
@@ -90,7 +90,6 @@ extension DescriptionTableViewCell: CodeView{
         
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
-        //FIXME:- check if it is working properly after favorite movie
         if isFavorite{
             button.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
         }else{

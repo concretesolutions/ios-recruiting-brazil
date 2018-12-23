@@ -56,24 +56,25 @@ class MoviesGridViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.fetchGenres()
+        
         setupView()
 
         loadingState = .loading
         presentationState = .loadingContent
-        self.fetchGenres()
         
     }
     
-    func fetchMovies(page: Int){
-        tmdb.getPopularMovies(page: page) { (result) in
-            self.loadingState = .ready
-            switch result{
-            case .success(let movies):
-                self.handleFetchOf(movies: movies)
-            case .error:
-                self.presentationState = .error
-            }
-        }
+    //FIXME:- Think about a better function calls in viewWilAppear
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.fetchGenres()
+        
+        setupView()
+        
+        loadingState = .loading
+        presentationState = .loadingContent
+        
     }
     
     func fetchGenres(){
@@ -90,6 +91,32 @@ class MoviesGridViewController: UIViewController {
             }
         }
     }
+    
+    func fetchMovies(page: Int){
+        tmdb.getPopularMovies(page: page) { (result) in
+            self.loadingState = .ready
+            switch result{
+            case .success(let movies):
+                self.movies = movies
+                self.getMoviesFromRealm()
+            case .error:
+                self.presentationState = .error
+            }
+        }
+    }
+    
+    func getMoviesFromRealm(){
+        let favoritedMovies = RealmManager.shared.getAll(objectsOf: MovieRealm.self)
+        for favoritedMovie in favoritedMovies{
+            for (index,movie) in self.movies.enumerated(){
+                if favoritedMovie.id == movie.id{
+                    self.movies[index].isFavorite = true
+                }
+            }
+        }
+        self.handleFetchOf(movies: self.movies)
+    }
+    
     
     func handleFetchOf(movies:[Movie]){
         self.setupCollectionView(with: movies)
