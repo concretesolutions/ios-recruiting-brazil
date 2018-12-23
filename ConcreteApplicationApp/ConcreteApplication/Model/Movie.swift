@@ -34,6 +34,21 @@ struct Movie{
         self.genres = genres
     }
     
+    public init(realmObject: MovieRealm){
+        self.id = realmObject.id
+        self.title = realmObject.title
+        self.posterPath = realmObject.posterPath
+        self.overview = realmObject.overview
+        self.releaseYear = realmObject.releaseYear
+        self.genres = []
+        realmObject.genres.forEach({self.genres.append(Genre(realmObject: $0))})
+        if let posterImageData = realmObject.poster{
+            self.poster = UIImage(data: posterImageData)
+        }else{
+            self.poster = UIImage(named: "errorIcon")
+        }
+    }
+    
     func realm() -> MovieRealm{
         return MovieRealm.build({ (movieRealm) in
             movieRealm.id = self.id

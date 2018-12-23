@@ -32,7 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         moviesGrid.title = "Movies"
         moviesGrid.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
         
-        let controllers = [moviesGrid]
+        let favoriteMovies = FavoriteMoviesTableViewController()
+        favoriteMovies.title = "Movies"
+        favoriteMovies.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon"), tag: 1)
+        
+        let controllers = [moviesGrid, favoriteMovies]
         tabBarController.viewControllers = controllers.map({
             UINavigationController(rootViewController: $0)
         })

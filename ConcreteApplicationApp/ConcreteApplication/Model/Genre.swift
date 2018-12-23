@@ -29,6 +29,11 @@ struct Genre{
         })
     }
     
+    public init(realmObject: GenreRealm){
+        self.id = realmObject.id
+        self.name = realmObject.name
+    }
+    
 }
 
 extension Genre: Codable{
