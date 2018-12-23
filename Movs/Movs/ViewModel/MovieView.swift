@@ -30,7 +30,7 @@ class MovieView: UIViewController, UISearchBarDelegate, UICollectionViewDataSour
         core.initCoreData()
         apiKey = UserDefaults.standard.string(forKey: "apiKey")!
         //getting the data
-        data(url: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey!)&page=1")
+        data(url: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey!)&page=1", mySearchString: "")
         myGrid() // Creting the collectionView
         UserDefaults.standard.removeObject(forKey: "IdRow")
         searchBarMethod() //Creating the searchBar
@@ -39,18 +39,26 @@ class MovieView: UIViewController, UISearchBarDelegate, UICollectionViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //After backing to Movies tag, is called this method to refresh the list
-        data(url: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey!)&page=1")
+        data(url: "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey!)&page=1", mySearchString: "")
     }
     
     //Method to get the JSON and convert to list
-    func data(url:String) {
+    func data(url:String, mySearchString:String) {
         self.dataJSON.getData(url: url) {(output) in
-            for list in output {
-                self.arrayMovies.append(Movies(id: list["id"] as! Int, name: list["title"] as! String, imageUrl: list["poster_path"] as! String))
-                DispatchQueue.main.async {
-                    self.colView!.reloadData()
+            if (output.count>0) {
+                for list in output {
+                    let jsonId = list["id"]  as? Int ?? 0
+                    let jsonTitle = list["title"] as? String ?? ""
+                    let jsonPoster = list["poster_path"] as? String ?? ""
+                    self.arrayMovies.append(Movies(id: jsonId, name: jsonTitle, imageUrl: jsonPoster))
+                    DispatchQueue.main.async {
+                        self.colView!.reloadData()
+                    }
                 }
+            } else {
+                self.creatingMensage(icon: "search_icon.png", mensage:"Sua busca por \"\(mySearchString)\" não resultou em nenhum resultado")
             }
+            
         }
     }
 
@@ -123,7 +131,7 @@ class MovieView: UIViewController, UISearchBarDelegate, UICollectionViewDataSour
         labelError?.isHidden=true
         
         let myUrl = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey!)&page=1"
-        data(url: myUrl)
+        data(url: myUrl, mySearchString: "")
         self.mySearchBar?.text = ""
         self.mySearchBar?.showsCancelButton = false
         self.mySearchBar?.endEditing(true)
@@ -138,27 +146,19 @@ class MovieView: UIViewController, UISearchBarDelegate, UICollectionViewDataSour
         }
         let mySearchString:String = (mySearchBar?.text)!
         if (mySearchBar?.text == "") {
-            imageError?.isHidden=true
-            labelError?.isHidden=true
             creatingMensage(icon: "error.png", mensage:"Ocorreu um erro. Por favor, tente novamente")
-        } else if (arrayMovies.count==0){
-            imageError?.isHidden=true
-            labelError?.isHidden=true
-            creatingMensage(icon: "search_icon.png", mensage:"Sua busca por \"\(mySearchString)\" não resultou em nenhum resultado")
         } else {
-            imageError?.isHidden=true
-            labelError?.isHidden=true
-            
             let textForUrl:String = mySearchString.replacingOccurrences(of: " ", with: "+")
             let myUrl = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey!)&query=\(textForUrl)"
-            data(url: myUrl)
-            print(myUrl)
+            data(url: myUrl, mySearchString: mySearchString)
         }
         self.view.endEditing(true)
     }
     
     //when called it draw the mensage error in the screen
     func creatingMensage(icon:String, mensage:String){
+        imageError?.isHidden=true
+        labelError?.isHidden=true
         let screenSize: CGRect = UIScreen.main.bounds
         imageError = UIImageView(frame: CGRect(x: (screenSize.width * 0.5)-50,
                                                y: (screenSize.height * 0.3),

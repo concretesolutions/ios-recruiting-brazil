@@ -163,7 +163,13 @@ class DetailsView: UIViewController {
                 print(output["poster_path"]!)
                 let getResultsGenres = output["genres"] as! [[String: Any]]
                 let strGenres = self.getAllGenres(genres:getResultsGenres)
-                self.drawItemns(pathImage:output["poster_path"] as! String, movieTitle: output["original_title"] as! String, releaseDate: output["release_date"] as! String, movieGenres: strGenres, movieOverview: output["overview"] as! String)
+                
+                let jsonPoster = output["poster_path"] as? String ?? ""
+                let original_title = output["original_title"] as? String ?? ""
+                let release_date = output["release_date"] as? String ?? ""
+                let overview = output["overview"] as? String ?? ""
+                
+                self.drawItemns(pathImage: jsonPoster, movieTitle:original_title, releaseDate: release_date, movieGenres: strGenres, movieOverview: overview)
             }
         }
     }
