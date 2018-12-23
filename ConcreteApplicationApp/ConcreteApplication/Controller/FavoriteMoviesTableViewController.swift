@@ -20,11 +20,13 @@ class FavoriteMoviesTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         getFavoriteMovies()
+        self.tableView.reloadData()
     }
     
     
     func getFavoriteMovies(){
-        //FIXME:- test if it is working properly
+        //FIXME:- improve forEach
+        self.favoritedMovies = []
         let favoriteMoviesRealm = RealmManager.shared.getAll(objectsOf: MovieRealm.self)
         favoriteMoviesRealm.forEach { (movieRealm) in
             self.favoritedMovies.append(Movie(realmObject: movieRealm))
@@ -33,6 +35,8 @@ class FavoriteMoviesTableViewController: UITableViewController {
     
     
     func setupTableView(){
+        self.tableView.separatorStyle = .singleLine
+        self.tableView.separatorColor = Design.Colors.white
         self.tableView.allowsSelection = false
         self.tableView.register(cellType: FavoriteMovieTableViewCell.self)
     }
@@ -61,6 +65,6 @@ extension FavoriteMoviesTableViewController{
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIScreen.main.bounds.height * 0.15
+        return UIScreen.main.bounds.height * 0.18
     }
 }

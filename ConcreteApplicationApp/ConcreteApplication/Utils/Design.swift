@@ -15,6 +15,7 @@ struct Design{
         static let darkBlue = UIColor(red: 45/255, green: 48/255, blue: 71/255, alpha: 1.0)
         static let darkYellow = UIColor(red: 217/255, green: 151/255, blue: 30/255, alpha: 1.0)
         static let white = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+        static let gray = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 0.5)
     }
     
     struct Insets {
