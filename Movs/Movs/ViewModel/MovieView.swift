@@ -148,6 +148,8 @@ class MovieView: UIViewController, UISearchBarDelegate, UICollectionViewDataSour
         if (mySearchBar?.text == "") {
             creatingMensage(icon: "error.png", mensage:"Ocorreu um erro. Por favor, tente novamente")
         } else {
+            imageError?.isHidden=true
+            labelError?.isHidden=true
             let textForUrl:String = mySearchString.replacingOccurrences(of: " ", with: "+")
             let myUrl = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey!)&query=\(textForUrl)"
             data(url: myUrl, mySearchString: mySearchString)
