@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Reusable
 
-//FIXME:- change protocol position
+
 protocol MoviesSelectionDelegate: class {
     func didSelectMovie(movie: Movie)
 }
