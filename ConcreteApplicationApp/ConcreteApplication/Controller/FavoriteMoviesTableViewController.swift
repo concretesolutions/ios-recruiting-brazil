@@ -11,9 +11,9 @@ import Reusable
 import RealmSwift
 
 class FavoriteMoviesTableViewController: UITableViewController {
-
+    
     var favoritedMovies:[Movie] = []
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -25,12 +25,9 @@ class FavoriteMoviesTableViewController: UITableViewController {
     
     
     func getFavoriteMovies(){
-        //FIXME:- improve forEach
         self.favoritedMovies = []
         let favoriteMoviesRealm = RealmManager.shared.getAll(objectsOf: MovieRealm.self)
-        favoriteMoviesRealm.forEach { (movieRealm) in
-            self.favoritedMovies.append(Movie(realmObject: movieRealm))
-        }
+        favoriteMoviesRealm.forEach({self.favoritedMovies.append(Movie(realmObject: $0))})
     }
     
     
@@ -52,7 +49,7 @@ extension FavoriteMoviesTableViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.favoritedMovies.count
     }
-
+    
 }
 
 //MARK:- delegate
@@ -67,4 +64,21 @@ extension FavoriteMoviesTableViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UIScreen.main.bounds.height * 0.18
     }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let unfavoriteAction = UITableViewRowAction(style: .destructive, title: "Unfavorite") { (action, indexPath) in
+            if let movieToDelete = RealmManager.shared.get(objectOf: MovieRealm.self, with: self.favoritedMovies[indexPath.row].id){
+                RealmManager.shared.delete(object: movieToDelete)
+                self.favoritedMovies.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        return[unfavoriteAction]
+    }
+    
+    
+    
+    
+    
 }
