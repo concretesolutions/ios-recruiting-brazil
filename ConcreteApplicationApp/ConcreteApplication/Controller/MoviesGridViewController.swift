@@ -25,6 +25,7 @@ class MoviesGridViewController: UIViewController {
     //Properties
     var movies:[Movie] = []
     var genres:[Genre] = []
+    var currentPage = 0
     
     fileprivate enum LoadingState{
         case loading
@@ -81,6 +82,7 @@ class MoviesGridViewController: UIViewController {
             case .success(let genres):
                 self.genres = genres
                 self.fetchMovies(page: 1)
+                self.currentPage = 1
             case .error:
                 self.presentationState = .error
             }
@@ -92,10 +94,12 @@ class MoviesGridViewController: UIViewController {
             self.loadingState = .ready
             switch result{
             case .success(let movies):
-                self.movies = movies
+                self.movies.append(contentsOf: movies)
                 self.getMoviesFromRealm()
-            case .error:
+            case .error(let error):
+                //FIXME:- treating error when scrolls too fast
                 self.presentationState = .error
+                print(error.localizedDescription)
             }
         }
     }
@@ -115,7 +119,7 @@ class MoviesGridViewController: UIViewController {
     
     func clearFavoriteMovies(){
         for (index,_) in self.movies.enumerated(){
-                self.movies[index].isFavorite = false
+            self.movies[index].isFavorite = false
         }
     }
     
@@ -129,7 +133,7 @@ class MoviesGridViewController: UIViewController {
     
     func setupCollectionView(with movies: [Movie]){
         self.collectionView.isHidden = false
-        collectionViewDataSource = MoviesGridCollectionDataSource(movies: movies, collectionView: self.collectionView)
+        collectionViewDataSource = MoviesGridCollectionDataSource(movies: movies, collectionView: self.collectionView, pagingDelegate: self)
         self.collectionView.dataSource = collectionViewDataSource
         collectionViewDelegate = MoviesGridCollectionDelegate(movies: movies, delegate: self)
         self.collectionView.delegate = collectionViewDelegate
@@ -200,6 +204,7 @@ extension MoviesGridViewController{
     }
 }
 
+//MARK:- delegates
 extension MoviesGridViewController: MoviesSelectionDelegate{
     func didSelectMovie(movie: Movie) {
         var selectedMovie = movie
@@ -213,4 +218,17 @@ extension MoviesGridViewController: MoviesSelectionDelegate{
         movieDetailController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(movieDetailController, animated: true)
     }
+}
+
+extension MoviesGridViewController: MoviesGridPagingDelegate{
+    
+    func shouldFetch(page: Int) {
+        if page == self.currentPage + 1{
+            print("fetch now page \(self.currentPage + 1)")
+            self.currentPage += 1
+            self.fetchMovies(page: self.currentPage)
+        }
+        
+    }
+    
 }
