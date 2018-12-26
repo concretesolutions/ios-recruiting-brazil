@@ -18,7 +18,7 @@ class MoviesGridViewController: UIViewController {
     var collectionViewDataSource: MoviesGridCollectionDataSource?
     var collectionViewDelegate: MoviesGridCollectionDelegate?
     //Auxiliar Views
-    var activityIndicator = ActivityIndicator(frame: .zero)
+    lazy var activityIndicator = ActivityIndicator(frame: .zero)
     var errorView = ErrorView(frame: .zero)
     //TMDB API
     let tmdb = TMDBManager()
@@ -27,10 +27,6 @@ class MoviesGridViewController: UIViewController {
     var genres:[Genre] = []
     var currentPage = 0
     
-    fileprivate enum LoadingState{
-        case loading
-        case ready
-    }
     
     fileprivate enum PresentationState{
         case loadingContent
@@ -38,13 +34,6 @@ class MoviesGridViewController: UIViewController {
         case error
     }
     
-    fileprivate var loadingState: LoadingState = .ready {
-        didSet{
-            DispatchQueue.main.async {
-                self.refreshLoading(state: self.loadingState)
-            }
-        }
-    }
     
     fileprivate var presentationState: PresentationState = .loadingContent{
         didSet{
@@ -58,26 +47,20 @@ class MoviesGridViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        loadingState = .loading
         presentationState = .loadingContent
-        
         self.fetchGenres()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         
-        loadingState = .loading
         presentationState = .loadingContent
-        
         self.getMoviesFromRealm()
     }
     
     func fetchGenres(){
-        loadingState = .loading
-        presentationState = .loadingContent
         tmdb.getGenres { (result) in
-            self.loadingState = .ready
+            self.presentationState = .loadingContent
             switch result{
             case .success(let genres):
                 self.genres = genres
@@ -91,7 +74,6 @@ class MoviesGridViewController: UIViewController {
     
     func fetchMovies(page: Int){
         tmdb.getPopularMovies(page: page) { (result) in
-            self.loadingState = .ready
             switch result{
             case .success(let movies):
                 self.movies.append(contentsOf: movies)
@@ -127,12 +109,10 @@ class MoviesGridViewController: UIViewController {
     func handleFetchOf(movies:[Movie]){
         self.setupCollectionView(with: movies)
         self.presentationState = .displayingContent
-        self.loadingState = .ready
     }
     
     
     func setupCollectionView(with movies: [Movie]){
-        self.collectionView.isHidden = false
         collectionViewDataSource = MoviesGridCollectionDataSource(movies: movies, collectionView: self.collectionView, pagingDelegate: self)
         self.collectionView.dataSource = collectionViewDataSource
         collectionViewDelegate = MoviesGridCollectionDelegate(movies: movies, delegate: self)
@@ -177,15 +157,6 @@ extension MoviesGridViewController: CodeView{
 
 extension MoviesGridViewController{
     
-    fileprivate func refreshLoading(state: LoadingState){
-        switch state{
-        case .loading:
-            self.activityIndicator.startAnimating()
-        case .ready:
-            self.activityIndicator.stopAnimating()
-        }
-    }
-    
     fileprivate func refreshUI(for presentationState: PresentationState){
         switch presentationState{
         case .loadingContent:
@@ -228,7 +199,6 @@ extension MoviesGridViewController: MoviesGridPagingDelegate{
             self.currentPage += 1
             self.fetchMovies(page: self.currentPage)
         }
-        
     }
     
 }

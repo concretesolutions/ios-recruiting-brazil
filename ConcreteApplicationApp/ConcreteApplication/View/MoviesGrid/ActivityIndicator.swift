@@ -16,6 +16,7 @@ class ActivityIndicator: UIActivityIndicatorView{
         self.contentMode = .scaleAspectFit
         self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.startAnimating()
     }
     
     required init(coder: NSCoder) {
