@@ -20,6 +20,7 @@ class MoviesGridViewController: UIViewController {
     //Auxiliar Views
     lazy var activityIndicator = ActivityIndicator(frame: .zero)
     var errorView = ErrorView(frame: .zero)
+    lazy var emptySearchView = EmptySearchView(frame: .zero)
     //SearchController
     let searchController = UISearchController(searchResultsController: nil)
     //TMDB API
@@ -34,6 +35,7 @@ class MoviesGridViewController: UIViewController {
         case loadingContent
         case displayingContent
         case error
+        case emptySearch
     }
     
     
@@ -131,6 +133,7 @@ extension MoviesGridViewController: CodeView{
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
         view.addSubview(errorView)
+        view.addSubview(emptySearchView)
     }
     
     func setupConstraints() {
@@ -152,6 +155,12 @@ extension MoviesGridViewController: CodeView{
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        emptySearchView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
 }
 
@@ -165,14 +174,22 @@ extension MoviesGridViewController{
             collectionView.isHidden = true
             activityIndicator.isHidden = false
             errorView.isHidden = true
+            emptySearchView.isHidden = true
         case .displayingContent:
             collectionView.isHidden = false
             activityIndicator.isHidden = true
             errorView.isHidden = true
+            emptySearchView.isHidden = true
         case .error:
             collectionView.isHidden = true
             activityIndicator.isHidden = true
             errorView.isHidden = false
+            emptySearchView.isHidden = true
+        case .emptySearch:
+            collectionView.isHidden = true
+            activityIndicator.isHidden = true
+            errorView.isHidden = true
+            emptySearchView.isHidden = false
         }
     }
 }
@@ -217,7 +234,11 @@ extension MoviesGridViewController: UISearchBarDelegate{
             handleFetchOf(movies: self.movies)
         }else{
         let filteredMovies = self.movies.filter({$0.title.range(of: searchBar.text ?? "", options: .caseInsensitive) != nil})
-        handleFetchOf(movies: filteredMovies)
+            if filteredMovies.count == 0{
+                self.presentationState = .emptySearch
+            }else{
+                handleFetchOf(movies: filteredMovies)
+            }
         }
         searchController.dismiss(animated: true, completion: nil)
     }
