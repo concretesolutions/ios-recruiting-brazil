@@ -10,10 +10,6 @@
 import UIKit
 import SnapKit
 
-protocol EmptySearchDelegate: class {
-    func searched(for text: String)
-}
-
 class EmptySearchView: UIView{
     
     override init(frame: CGRect) {
@@ -40,7 +36,7 @@ class EmptySearchView: UIView{
     var text: String = "" {
         didSet{
             DispatchQueue.main.async {
-                self.label.text = self.text
+                self.label.text = "Sua busca por \"\(self.text)\" não resultou em nenhum resultado."
             }
         }
     }
