@@ -11,8 +11,6 @@ import SnapKit
 
 class MoviesGridViewController: UIViewController {
     
-    //FIXME:- Create status of empty search
-    
     //CollectionView
     let collectionView = MoviesGridCollectionView()
     var collectionViewDataSource: MoviesGridCollectionDataSource?
@@ -235,6 +233,7 @@ extension MoviesGridViewController: UISearchBarDelegate{
         }else{
         let filteredMovies = self.movies.filter({$0.title.range(of: searchBar.text ?? "", options: .caseInsensitive) != nil})
             if filteredMovies.count == 0{
+                self.emptySearchView.text = searchBar.text ?? ""
                 self.presentationState = .emptySearch
             }else{
                 handleFetchOf(movies: filteredMovies)

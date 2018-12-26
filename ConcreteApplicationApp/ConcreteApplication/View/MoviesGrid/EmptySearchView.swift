@@ -10,9 +10,11 @@
 import UIKit
 import SnapKit
 
+protocol EmptySearchDelegate: class {
+    func searched(for text: String)
+}
+
 class EmptySearchView: UIView{
-    
-    var text = "Sua busca não retornou resultados."
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,6 +37,14 @@ class EmptySearchView: UIView{
         return imageView
     }()
     
+    var text: String = "" {
+        didSet{
+            DispatchQueue.main.async {
+                self.label.text = self.text
+            }
+        }
+    }
+
 }
 
 extension EmptySearchView: CodeView{
@@ -68,11 +78,8 @@ extension EmptySearchView: CodeView{
         label.font = UIFont.systemFont(ofSize: 25.0)
         label.numberOfLines = 0
         label.textColor = .black
-        label.text = self.text
         
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "search_icon")
     }
-    
-    
 }
