@@ -71,7 +71,7 @@ extension MovieDetailTableViewController {
         switch indexPath.row {
         case 0:
             let posterCell = tableView.dequeueReusableCell(for: indexPath, cellType: MoviePosterTableViewCell.self)
-            posterCell.setup(posterImage: movie.poster ?? UIImage(named: "errorIcon")!)
+            posterCell.setup(posterImage: movie.poster ?? UIImage(named: "Splash")!)
             return posterCell
         case 1:
             let descriptionCell = tableView.dequeueReusableCell(for: indexPath, cellType: DescriptionTableViewCell.self)

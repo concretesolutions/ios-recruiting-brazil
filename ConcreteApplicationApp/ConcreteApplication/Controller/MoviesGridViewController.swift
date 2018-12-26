@@ -79,7 +79,6 @@ class MoviesGridViewController: UIViewController {
                 self.movies.append(contentsOf: movies)
                 self.getMoviesFromRealm()
             case .error(let error):
-                //FIXME:- treating error when scrolls too fast
                 self.presentationState = .error
                 print(error.localizedDescription)
             }

@@ -45,7 +45,7 @@ struct Movie{
         if let posterImageData = realmObject.poster{
             self.poster = UIImage(data: posterImageData)
         }else{
-            self.poster = UIImage(named: "errorIcon")
+            self.poster = UIImage(named: "Splash")
         }
     }
     
@@ -56,7 +56,7 @@ struct Movie{
             movieRealm.posterPath = self.posterPath ?? ""
             movieRealm.overview = self.overview
             movieRealm.releaseYear = self.releaseYear
-            movieRealm.poster = (self.poster ?? UIImage(named: "placeholder_poster")!).jpegData(compressionQuality: 1.0)
+            movieRealm.poster = (self.poster ?? UIImage(named: "Splash")!).jpegData(compressionQuality: 1.0)
             for genre in self.genres{
                 movieRealm.genres.append(genre.realm())
             }
@@ -82,7 +82,7 @@ extension Movie:Codable{
         id = try container.decode(Int.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         overview = try container.decode(String.self, forKey: .overview)
-        posterPath = try container.decode(String.self, forKey: .posterPath)
+        posterPath = try? container.decode(String.self, forKey: .posterPath)
         
         let releaseDate = try container.decode(String.self, forKey: .releaseYear)
         if !releaseDate.isEmpty {

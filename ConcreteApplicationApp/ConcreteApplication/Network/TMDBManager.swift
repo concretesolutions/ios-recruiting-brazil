@@ -48,6 +48,7 @@ class TMDBManager{
                     completion(.success(moviesResponse.results))
                 }
             } catch {
+//                print(String.init(data: data, encoding: String.Encoding.utf8)!)
                 completion(.error(TMDBError.jsonSerialization(error.localizedDescription)))
             }
             
