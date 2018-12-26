@@ -20,6 +20,8 @@ class MoviesGridViewController: UIViewController {
     //Auxiliar Views
     lazy var activityIndicator = ActivityIndicator(frame: .zero)
     var errorView = ErrorView(frame: .zero)
+    //SearchController
+    let searchController = UISearchController(searchResultsController: nil)
     //TMDB API
     let tmdb = TMDBManager()
     //Properties
@@ -47,6 +49,7 @@ class MoviesGridViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupSearchBar()
         presentationState = .loadingContent
         self.fetchGenres()
     }
@@ -194,10 +197,29 @@ extension MoviesGridViewController: MoviesGridPagingDelegate{
     
     func shouldFetch(page: Int) {
         if page == self.currentPage + 1{
-            print("fetch now page \(self.currentPage + 1)")
             self.currentPage += 1
             self.fetchMovies(page: self.currentPage)
         }
     }
     
+}
+
+extension MoviesGridViewController: UISearchBarDelegate{
+    
+    func setupSearchBar(){
+        self.searchController.searchBar.delegate = self
+        navigationItem.searchController = self.searchController
+        definesPresentationContext = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.text?.isEmpty ?? true{
+            handleFetchOf(movies: self.movies)
+        }else{
+        let filteredMovies = self.movies.filter({$0.title.range(of: searchBar.text ?? "", options: .caseInsensitive) != nil})
+        handleFetchOf(movies: filteredMovies)
+        }
+        searchController.dismiss(animated: true, completion: nil)
+    }
+
 }
