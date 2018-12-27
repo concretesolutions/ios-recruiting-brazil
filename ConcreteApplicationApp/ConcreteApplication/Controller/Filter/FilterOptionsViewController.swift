@@ -120,10 +120,10 @@ extension FilterOptionsViewController: UITableViewDelegate {
         
         switch indexPath.row {
         case 0:
-            let filterParameters = FilterParametersTableViewController(parameters: self.releasedYearsParameters, option: filterOptions[indexPath.row], style: .grouped, delegate: self)
+            let filterParameters = FilterParametersTableViewController(parameters: self.releasedYearsParameters, option: filterOptions[indexPath.row], style: .grouped, delegate: self, selectedParameter: filter.releaseYear ?? "")
             self.navigationController?.pushViewController(filterParameters, animated: true)
         case 1:
-            let filterParameters = FilterParametersTableViewController(parameters: self.genresParameters, option: filterOptions[indexPath.row] , style: .grouped, delegate: self)
+            let filterParameters = FilterParametersTableViewController(parameters: self.genresParameters, option: filterOptions[indexPath.row] , style: .grouped, delegate: self, selectedParameter: filter.genre ?? "")
             self.navigationController?.pushViewController(filterParameters, animated: true)
         default:
             break

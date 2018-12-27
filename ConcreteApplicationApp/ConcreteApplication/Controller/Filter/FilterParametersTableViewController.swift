@@ -18,11 +18,13 @@ class FilterParametersTableViewController: UITableViewController {
     var parameters:[String] = []
     var delegate: FilterDelegate?
     var option: FilterOptions!
+    var selectedParameter: String!
 
-    init(parameters: [String], option: FilterOptions , style: UITableView.Style, delegate: FilterDelegate) {
+    init(parameters: [String], option: FilterOptions , style: UITableView.Style, delegate: FilterDelegate, selectedParameter: String) {
         self.parameters = parameters
         self.option = option
         self.delegate = delegate
+        self.selectedParameter = selectedParameter
         super.init(style: style)
         self.title = option.rawValue
         self.tableView.backgroundColor = .white
@@ -48,8 +50,12 @@ class FilterParametersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        var isSelected = false
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FilterTableViewCell.self)
-        cell.setupParameter(with: parameters[indexPath.row])
+        if selectedParameter == parameters[indexPath.row]{
+            isSelected = true
+        }
+        cell.setupParameter(with: parameters[indexPath.row], isSelecetd: isSelected)
         return cell
     }
     

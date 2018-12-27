@@ -11,7 +11,7 @@ import SnapKit
 import Reusable
 
 class FilterTableViewCell: UITableViewCell, Reusable {
-
+    
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel(frame: .zero)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -34,17 +34,18 @@ class FilterTableViewCell: UITableViewCell, Reusable {
     func setupOption(with text: String, parameter: String){
         self.titleLabel.text = text
         self.parameterLabel.text = parameter
-        self.arrowImageView.isHidden = false
         self.parameterLabel.isHidden = false
-        self.titleLabel.isHidden = false
+        arrowImageView.image = UIImage(named: "arrowIcon")
         setupView()
     }
     
-    func setupParameter(with text: String){
+    func setupParameter(with text: String, isSelecetd: Bool){
         self.titleLabel.text = text
-        self.arrowImageView.isHidden = true
         self.parameterLabel.isHidden = true
-        self.titleLabel.isHidden = false
+        arrowImageView.image = UIImage(named: "check_icon")
+        DispatchQueue.main.async {
+            self.arrowImageView.isHidden = !isSelecetd
+        }
         setupView()
     }
     
@@ -81,7 +82,6 @@ extension FilterTableViewCell: CodeView {
     func setupAdditionalConfiguration() {
         self.titleLabel.textColor = .black
         self.titleLabel.numberOfLines = 1
-        arrowImageView.image = UIImage(named: "arrowIcon")
         arrowImageView.contentMode = .scaleAspectFit
         self.parameterLabel.numberOfLines = 1
         self.parameterLabel.textColor = Design.Colors.darkYellow
