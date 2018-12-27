@@ -17,15 +17,31 @@ class FavoriteMoviesViewController: UIViewController {
     
     var favoritedMovies:[Movie] = []
     
+    fileprivate enum PresentationState{
+        case withFilter
+        case withoutFilter
+    }
+    
+    fileprivate var presentationState: PresentationState = .withoutFilter{
+        didSet{
+            print("change to \(presentationState)")
+            //FIXME:- create method to change UI
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presentationState = .withoutFilter
         setupView()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getFavoriteMovies()
         self.tableView.reloadData()
+        if presentationState == .withoutFilter{
+        getFavoriteMovies()
+        }
     }
     
     func getFavoriteMovies(){
@@ -45,7 +61,7 @@ class FavoriteMoviesViewController: UIViewController {
     
     @objc
     func pushFilterOptions(){
-        let filterViewController = FilterOptionsViewController(movies: favoritedMovies)
+        let filterViewController = FilterOptionsViewController(movies: favoritedMovies, delegate: self)
         filterViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(filterViewController, animated: true)
     }
@@ -82,6 +98,15 @@ extension FavoriteMoviesViewController: UnfavoriteMovieDelegate{
             tableViewDataSource?.favoritedMovies.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+    
+}
+
+extension FavoriteMoviesViewController: FilterDelegate{
+    
+    func updateMovies(with filteredMovies: [Movie]) {
+        self.presentationState = .withFilter
+        self.setupTableView(with: filteredMovies)
     }
     
 }

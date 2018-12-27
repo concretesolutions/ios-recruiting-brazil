@@ -24,6 +24,7 @@ class FilterOptionsViewController: UIViewController {
     var releasedYearsParameters:[String] = []
     var filter = Filter()
     var movies:[Movie] = []
+    var delegate: FilterDelegate?
     
     
     lazy var button: UIButton = {
@@ -37,11 +38,11 @@ class FilterOptionsViewController: UIViewController {
         
         setupView()
         setupTableView()
-        
     }
     
-    init(movies: [Movie]) {
+    init(movies: [Movie], delegate: FilterDelegate) {
         super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
         self.getParameters(for: movies)
         self.movies = movies
     }
@@ -97,10 +98,8 @@ class FilterOptionsViewController: UIViewController {
             return matchedYear && matchedGenre
         })
         
-        for movie in filteredMovies{
-            print(movie.title)
-        }
-        
+        self.delegate?.updateMovies(with: filteredMovies)
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

@@ -9,9 +9,15 @@
 import UIKit
 import Reusable
 
-protocol FilterDelegate {
+protocol FilterDelegate: class {
     func updateParameter(for option: FilterOptions, with value: String)
+    func updateMovies(with filteredMovies:[Movie])
 }
+extension FilterDelegate{
+    func updateParameter(for option: FilterOptions, with value: String){}
+    func updateMovies(with filteredMovies:[Movie]){}
+}
+
 
 class FilterParametersTableViewController: UITableViewController {
 
@@ -58,7 +64,6 @@ class FilterParametersTableViewController: UITableViewController {
         cell.setupParameter(with: parameters[indexPath.row], isSelecetd: isSelected)
         return cell
     }
-    
     
     //MARK:- TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
