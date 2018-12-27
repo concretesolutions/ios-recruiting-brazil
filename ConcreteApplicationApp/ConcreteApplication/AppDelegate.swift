@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         moviesGrid.title = "Movies"
         moviesGrid.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
         
-        let favoriteMovies = FavoriteMoviesTableViewController()
+        let favoriteMovies = FavoriteMoviesViewController()
         favoriteMovies.title = "Movies"
         favoriteMovies.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon"), tag: 1)
         
