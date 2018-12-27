@@ -14,7 +14,11 @@ final class MovieListScreen: UIViewController {
 
     // MARK: - Properties
     private let dataPresenter = MoviesDataPresenter()
-    private var models = [Movie]()
+    private var models = [Movie]() {
+        didSet {
+            moviesCollectionView.reloadData()
+        }
+    }
 }
 
 // MARK: - Lifecycle
@@ -29,7 +33,7 @@ extension MovieListScreen {
 // MARK: - Private
 extension MovieListScreen {
     private func setupUI() {
-
+		// TO DO
     }
 
     private func fetchData() {
@@ -48,7 +52,9 @@ extension MovieListScreen: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		return UICollectionViewCell()
+        let cell = UICollectionViewCell()
+        cell.backgroundColor = .red
+		return cell
     }
 }
 

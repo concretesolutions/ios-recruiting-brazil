@@ -6,6 +6,32 @@
 //  Copyright © 2018 bmaf. All rights reserved.
 //
 
-final class Service {
+import Alamofire
 
+final class Service {
+    // MARK: - Singleton
+    static let shared = Service()
+    private init() {}
+}
+
+// MARK: - Public
+extension Service {
+    func retrieveMovieListData(completion: @escaping (Data) -> Void) {
+        let urlString = Constants.Integration.baseurl + Constants.Integration.apikey
+
+        guard let url = URL(string: urlString) else { return }
+
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard error == nil,
+                let usableData = data else {
+                    return
+            }
+
+            DispatchQueue.main.async {
+                completion(usableData)
+            }
+        }
+
+        task.resume()
+    }
 }

@@ -6,11 +6,14 @@
 //  Copyright © 2018 bmaf. All rights reserved.
 //
 
-struct Movie {
-    let title: String
-    let imageurl: String
-    let year: String
-    let category: String
-    let movieDescription: String
-    var isFavourite: Bool
+struct Movie: Codable {
+    let name: String
+    let movieId: Int
+    let description: String
+
+    enum CodingKeys: String, CodingKey {
+        case name = "original_title"
+        case movieId = "id"
+        case description = "overview"
+    }
 }
