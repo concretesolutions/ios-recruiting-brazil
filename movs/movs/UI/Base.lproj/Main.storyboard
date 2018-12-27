@@ -86,11 +86,83 @@
                     <connections>
                         <outlet property="moviesCollectionView" destination="ZPT-5K-aFj" id="Tse-U0-8dM"/>
                         <outlet property="searchBar" destination="Z6B-Eq-PNh" id="K9n-E6-ssg"/>
+                        <segue destination="BAy-iw-0ED" kind="show" identifier="detailsSegue" id="Z7X-e2-UeN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCO-oQ-1kY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="50" y="-73"/>
+            <point key="canvasLocation" x="23" y="-73"/>
+        </scene>
+        <!--Movie-->
+        <scene sceneID="Dso-eA-9Yd">
+            <objects>
+                <viewController title="Movie" id="BAy-iw-0ED" customClass="DetailsScreen" customModule="movs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4dZ-W4-1Mv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m9Q-Cu-ZA5">
+                                <rect key="frame" x="16" y="76" width="343" height="274.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="m9Q-Cu-ZA5" secondAttribute="height" multiplier="1:0.8" id="bmz-LL-xnB"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2008" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-IH-YPO">
+                                <rect key="frame" x="16" y="407" width="41" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action, adventure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SQ-3A-TGe">
+                                <rect key="frame" x="16" y="444" width="135" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nC1-LM-9pI">
+                                <rect key="frame" x="16" y="481" width="343" height="174"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thor" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPJ-FD-TTa">
+                                <rect key="frame" x="16" y="370.5" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="m9Q-Cu-ZA5" firstAttribute="leading" secondItem="2Kw-0d-i8P" secondAttribute="leading" constant="16" id="0yf-aa-Yvi"/>
+                            <constraint firstItem="hPJ-FD-TTa" firstAttribute="top" secondItem="m9Q-Cu-ZA5" secondAttribute="bottom" constant="20" id="Ag1-0B-I1M"/>
+                            <constraint firstItem="ck2-IH-YPO" firstAttribute="top" secondItem="hPJ-FD-TTa" secondAttribute="bottom" constant="16" id="Bg6-DW-qAy"/>
+                            <constraint firstItem="hPJ-FD-TTa" firstAttribute="leading" secondItem="m9Q-Cu-ZA5" secondAttribute="leading" id="E3S-3J-ncU"/>
+                            <constraint firstItem="m9Q-Cu-ZA5" firstAttribute="top" secondItem="2Kw-0d-i8P" secondAttribute="top" constant="12" id="FVe-Nk-TQU"/>
+                            <constraint firstItem="2Kw-0d-i8P" firstAttribute="trailing" secondItem="m9Q-Cu-ZA5" secondAttribute="trailing" constant="16" id="Ko7-dh-oMQ"/>
+                            <constraint firstItem="2Kw-0d-i8P" firstAttribute="trailing" secondItem="hPJ-FD-TTa" secondAttribute="trailing" constant="16" id="LDu-LI-aF5"/>
+                            <constraint firstItem="ck2-IH-YPO" firstAttribute="leading" secondItem="hPJ-FD-TTa" secondAttribute="leading" id="PZx-pP-cAK"/>
+                            <constraint firstItem="2Kw-0d-i8P" firstAttribute="trailing" secondItem="nC1-LM-9pI" secondAttribute="trailing" constant="16" id="Rw2-un-d0E"/>
+                            <constraint firstItem="9SQ-3A-TGe" firstAttribute="top" secondItem="ck2-IH-YPO" secondAttribute="bottom" constant="16" id="bLB-2q-Pyf"/>
+                            <constraint firstItem="2Kw-0d-i8P" firstAttribute="bottom" secondItem="nC1-LM-9pI" secondAttribute="bottom" constant="12" id="cL1-rS-CiK"/>
+                            <constraint firstItem="9SQ-3A-TGe" firstAttribute="leading" secondItem="ck2-IH-YPO" secondAttribute="leading" id="ft5-ln-z7n"/>
+                            <constraint firstItem="nC1-LM-9pI" firstAttribute="leading" secondItem="2Kw-0d-i8P" secondAttribute="leading" constant="16" id="rMu-BK-Xby"/>
+                            <constraint firstItem="nC1-LM-9pI" firstAttribute="top" secondItem="9SQ-3A-TGe" secondAttribute="bottom" constant="16" id="vUd-tY-nR5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2Kw-0d-i8P"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionTextView" destination="nC1-LM-9pI" id="FAZ-kB-dHJ"/>
+                        <outlet property="genreLabel" destination="9SQ-3A-TGe" id="c86-VW-YZD"/>
+                        <outlet property="movieImageView" destination="m9Q-Cu-ZA5" id="jgQ-IR-NJ4"/>
+                        <outlet property="titleLabel" destination="hPJ-FD-TTa" id="Li0-My-lkA"/>
+                        <outlet property="yearLabel" destination="ck2-IH-YPO" id="Aqt-gU-RZw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bcU-9W-LJV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="744.79999999999995" y="-73.313343328335833"/>
         </scene>
     </scenes>
     <resources>

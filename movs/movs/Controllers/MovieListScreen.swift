@@ -35,6 +35,17 @@ extension MovieListScreen {
         setupUI()
         fetchData()
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailsSegue" {
+            guard let movie = sender as? Movie,
+                let screen = segue.destination as? DetailsScreen else {
+                    return
+            }
+
+			screen.setup(movie: movie)
+        }
+    }
 }
 
 // MARK: - Private
@@ -47,10 +58,6 @@ extension MovieListScreen {
         dataPresenter.getMovies { [weak self] movies in
             self?.allModels = movies
         }
-    }
-
-    private func navigateToDetails(movie: Movie) {
-
     }
 }
 
@@ -73,7 +80,8 @@ extension MovieListScreen: UICollectionViewDataSource {
 extension MovieListScreen: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        navigateToDetails(movie: filteredModels[indexPath.row])
+        performSegue(withIdentifier: "detailsSegue",
+                     sender: filteredModels[indexPath.row])
     }
 
     func collectionView(_ collectionView: UICollectionView,
