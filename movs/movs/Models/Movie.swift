@@ -11,6 +11,6 @@ struct Movie {
     let imageurl: String
     let year: String
     let category: String
-    let _description: String
+    let movieDescription: String
     var isFavourite: Bool
 }
