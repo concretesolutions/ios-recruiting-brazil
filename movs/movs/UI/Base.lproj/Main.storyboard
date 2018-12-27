@@ -37,6 +37,9 @@
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Z6B-Eq-PNh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bj0-FF-Z5J" id="eAv-68-oix"/>
+                                </connections>
                             </searchBar>
                             <tabBar contentMode="scaleToFill" itemPositioning="fill" translatesAutoresizingMaskIntoConstraints="NO" id="Qej-8p-KDy">
                                 <rect key="frame" x="0.0" y="618" width="375" height="49"/>
@@ -82,6 +85,7 @@
                     <navigationItem key="navigationItem" title="Movies" id="QJg-u9-pnb"/>
                     <connections>
                         <outlet property="moviesCollectionView" destination="ZPT-5K-aFj" id="Tse-U0-8dM"/>
+                        <outlet property="searchBar" destination="Z6B-Eq-PNh" id="K9n-E6-ssg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCO-oQ-1kY" userLabel="First Responder" sceneMemberID="firstResponder"/>

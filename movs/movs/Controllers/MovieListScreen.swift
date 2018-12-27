@@ -11,10 +11,17 @@ import UIKit
 final class MovieListScreen: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
+    @IBOutlet private weak var searchBar: UISearchBar!
 
     // MARK: - Properties
     private let dataPresenter = MoviesDataPresenter()
-    private var models = [Movie]() {
+    private var allModels = [Movie]() {
+        didSet {
+            filteredModels = allModels
+        }
+    }
+
+    private var filteredModels = [Movie]() {
         didSet {
             moviesCollectionView.reloadData()
         }
@@ -38,8 +45,12 @@ extension MovieListScreen {
 
     private func fetchData() {
         dataPresenter.getMovies { [weak self] movies in
-            self?.models = movies
+            self?.allModels = movies
         }
+    }
+
+    private func navigateToDetails(movie: Movie) {
+
     }
 }
 
@@ -47,21 +58,37 @@ extension MovieListScreen {
 extension MovieListScreen: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-		return models.count
+		return filteredModels.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MovieListCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-		cell.setup(movie: models[indexPath.row])
+		cell.setup(movie: filteredModels[indexPath.row])
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegate
-extension MovieListScreen: UICollectionViewDelegate {
+extension MovieListScreen: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-		// TO DO
+        navigateToDetails(movie: filteredModels[indexPath.row])
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+		let cellWidth = (collectionView.frame.size.width / 2) - 10
+        return CGSize(width: cellWidth, height: collectionView.frame.size.height / 2)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension MovieListScreen: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredModels = searchText.isEmpty ? allModels : allModels.filter({ movie -> Bool in
+            return movie.name.range(of: searchText, options: .caseInsensitive) != nil
+        })
     }
 }
