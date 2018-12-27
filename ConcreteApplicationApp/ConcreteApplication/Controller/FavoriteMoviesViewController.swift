@@ -43,6 +43,14 @@ class FavoriteMoviesViewController: UIViewController {
         self.tableView.reloadData()
     }
     
+    @objc
+    func pushFilterOptions(){
+        //FIXME:- push filter screen
+        let filterViewController = FilterOptionsViewController()
+        filterViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(filterViewController, animated: true)
+    }
+    
 }
 
 extension FavoriteMoviesViewController: CodeView{
@@ -59,6 +67,10 @@ extension FavoriteMoviesViewController: CodeView{
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview()
         }
+    }
+    
+    func setupAdditionalConfiguration() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "FilterIcon"), style: .plain, target: self, action: #selector(pushFilterOptions))
     }
     
 }
