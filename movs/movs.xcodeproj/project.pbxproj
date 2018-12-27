@@ -17,6 +17,8 @@
 		02699E1821D45B9900682ECF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02699E1721D45B9900682ECF /* Movie.swift */; };
 		02D8056A21D46088008B0406 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D8056921D46088008B0406 /* Constants.swift */; };
 		02D8056C21D462D8008B0406 /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D8056B21D462D8008B0406 /* MoviesResponse.swift */; };
+		02D8056E21D464A3008B0406 /* MovieListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02D8056D21D464A3008B0406 /* MovieListCell.xib */; };
+		02D8057021D464DA008B0406 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D8056F21D464DA008B0406 /* MovieListCell.swift */; };
 		E2B722A0B7239F0481871B7F /* Pods_movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1770F855B2D0C7B98B6E16 /* Pods_movs.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		02699E1721D45B9900682ECF /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		02D8056921D46088008B0406 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		02D8056B21D462D8008B0406 /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
+		02D8056D21D464A3008B0406 /* MovieListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieListCell.xib; sourceTree = "<group>"; };
+		02D8056F21D464DA008B0406 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		3A1770F855B2D0C7B98B6E16 /* Pods_movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1600F9B3E310FE883E469B0 /* Pods-movs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movs.release.xcconfig"; path = "Pods/Target Support Files/Pods-movs/Pods-movs.release.xcconfig"; sourceTree = "<group>"; };
 		BEA07F5C3463F7A773F068BB /* Pods-movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-movs/Pods-movs.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			children = (
 				02699DFB21D4542D00682ECF /* Main.storyboard */,
 				02699E0021D4542F00682ECF /* LaunchScreen.storyboard */,
+				02D8056D21D464A3008B0406 /* MovieListCell.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 			children = (
 				02699DF721D4542D00682ECF /* AppDelegate.swift */,
 				02699E0D21D459E800682ECF /* MovieListScreen.swift */,
+				02D8056F21D464DA008B0406 /* MovieListCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D8056E21D464A3008B0406 /* MovieListCell.xib in Resources */,
 				02699E0221D4542F00682ECF /* LaunchScreen.storyboard in Resources */,
 				02699DFF21D4542F00682ECF /* Assets.xcassets in Resources */,
 				02699DFD21D4542D00682ECF /* Main.storyboard in Resources */,
@@ -261,10 +268,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-movs/Pods-movs-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -280,6 +289,7 @@
 			files = (
 				02699DF821D4542D00682ECF /* AppDelegate.swift in Sources */,
 				02699E1521D45A5700682ECF /* Service.swift in Sources */,
+				02D8057021D464DA008B0406 /* MovieListCell.swift in Sources */,
 				02699E1121D45A4200682ECF /* MoviesDataPresenter.swift in Sources */,
 				02D8056C21D462D8008B0406 /* MoviesResponse.swift in Sources */,
 				02699E0E21D459E800682ECF /* MovieListScreen.swift in Sources */,
