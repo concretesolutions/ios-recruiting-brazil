@@ -45,8 +45,7 @@ class FavoriteMoviesViewController: UIViewController {
     
     @objc
     func pushFilterOptions(){
-        //FIXME:- push filter screen
-        let filterViewController = FilterOptionsViewController()
+        let filterViewController = FilterOptionsViewController(movies: favoritedMovies)
         filterViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(filterViewController, animated: true)
     }

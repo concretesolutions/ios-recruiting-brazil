@@ -15,6 +15,9 @@ class FilterOptionsViewController: UIViewController {
     var tableView = UITableView(frame: .zero, style: .grouped)
     let filterOptions = ["Date", "Genres"]
     var parameters = ["1","2","3","4","5","6"]
+    var genresParameters:[String] = []
+    var releasedYearsParameters:[String] = []
+    
     
     lazy var button: UIButton = {
         let button = UIButton(frame: .zero)
@@ -26,12 +29,43 @@ class FilterOptionsViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        setupTableView()
+        
+    }
+    
+    init(movies: [Movie]) {
+        super.init(nibName: nil, bundle: nil)
+        self.getParameters(for: movies)
+    }
+    
+    func setupTableView(){
         self.title = "Filter"
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .white
         self.view.backgroundColor = self.tableView.backgroundColor
         self.tableView.register(cellType: FilterTableViewCell.self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getParameters(for movies: [Movie]){
+        self.genresParameters = []
+        self.releasedYearsParameters = []
+        
+        movies.forEach { (movie) in
+            movie.genres.forEach({
+                if !self.genresParameters.contains($0.name ?? ""){
+                    self.genresParameters.append($0.name ?? "")
+                }
+            })
+            
+            if !self.releasedYearsParameters.contains(movie.releaseYear){
+                self.releasedYearsParameters.append(movie.releaseYear)
+            }
+        }
     }
     
 }
@@ -78,8 +112,18 @@ extension FilterOptionsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let filterParameters = FilterParametersTableViewController(parameters: self.parameters, style: .grouped)
-        self.navigationController?.pushViewController(filterParameters, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            let filterParameters = FilterParametersTableViewController(parameters: self.releasedYearsParameters, title: filterOptions[indexPath.row], style: .grouped)
+            self.navigationController?.pushViewController(filterParameters, animated: true)
+        case 1:
+            let filterParameters = FilterParametersTableViewController(parameters: self.genresParameters, title: filterOptions[indexPath.row] , style: .grouped)
+            self.navigationController?.pushViewController(filterParameters, animated: true)
+        default:
+            break
+        }
+        
     }
     
 }

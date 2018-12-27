@@ -13,9 +13,10 @@ class FilterParametersTableViewController: UITableViewController {
 
     var parameters:[String] = []
 
-    init(parameters: [String], style: UITableView.Style) {
+    init(parameters: [String], title: String , style: UITableView.Style) {
         self.parameters = parameters
         super.init(style: style)
+        self.title = title
         self.tableView.backgroundColor = .white
     }
     
