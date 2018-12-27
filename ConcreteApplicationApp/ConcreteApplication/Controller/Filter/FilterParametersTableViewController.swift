@@ -34,12 +34,12 @@ class FilterParametersTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(cellType: FilterTableViewCell.self)
     }
 
+    //MARK:- TableView DataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -59,6 +59,8 @@ class FilterParametersTableViewController: UITableViewController {
         return cell
     }
     
+    
+    //MARK:- TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.updateParameter(for: self.option, with: parameters[indexPath.row])
         self.navigationController?.popViewController(animated: true)

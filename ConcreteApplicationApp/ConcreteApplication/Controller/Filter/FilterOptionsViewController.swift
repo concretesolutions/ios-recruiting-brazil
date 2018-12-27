@@ -23,6 +23,7 @@ class FilterOptionsViewController: UIViewController {
     var genresParameters:[String] = []
     var releasedYearsParameters:[String] = []
     var filter = Filter()
+    var movies:[Movie] = []
     
     
     lazy var button: UIButton = {
@@ -42,6 +43,7 @@ class FilterOptionsViewController: UIViewController {
     init(movies: [Movie]) {
         super.init(nibName: nil, bundle: nil)
         self.getParameters(for: movies)
+        self.movies = movies
     }
     
     func setupTableView(){
@@ -71,6 +73,34 @@ class FilterOptionsViewController: UIViewController {
                 self.releasedYearsParameters.append(movie.releaseYear)
             }
         }
+    }
+    
+    @objc
+    func applyFilter(){
+        
+        let filteredMovies = self.movies.filter({ (movie) -> Bool in
+            var matchedYear = false
+            var matchedGenre = false
+            
+            if let releasedYearFilter = self.filter.releaseYear {
+                matchedYear = movie.releaseYear == releasedYearFilter
+            }else{
+                matchedYear = true
+            }
+            
+            if let genreFilter = self.filter.genre{
+                matchedGenre = movie.genres.contains(where: {$0.name?.lowercased() == genreFilter.lowercased()})
+            }else{
+                matchedGenre = true
+            }
+            
+            return matchedYear && matchedGenre
+        })
+        
+        for movie in filteredMovies{
+            print(movie.title)
+        }
+        
     }
     
 }
@@ -105,6 +135,7 @@ extension FilterOptionsViewController: CodeView {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = Design.Colors.clearYellow
         button.layer.cornerRadius = 10.0
+        button.addTarget(self, action: #selector(applyFilter), for: .touchUpInside)
     }
     
 }
