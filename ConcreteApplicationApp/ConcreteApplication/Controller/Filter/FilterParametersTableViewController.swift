@@ -9,14 +9,22 @@
 import UIKit
 import Reusable
 
+protocol FilterDelegate {
+    func updateParameter(for option: FilterOptions, with value: String)
+}
+
 class FilterParametersTableViewController: UITableViewController {
 
     var parameters:[String] = []
+    var delegate: FilterDelegate?
+    var option: FilterOptions!
 
-    init(parameters: [String], title: String , style: UITableView.Style) {
+    init(parameters: [String], option: FilterOptions , style: UITableView.Style, delegate: FilterDelegate) {
         self.parameters = parameters
+        self.option = option
+        self.delegate = delegate
         super.init(style: style)
-        self.title = title
+        self.title = option.rawValue
         self.tableView.backgroundColor = .white
     }
     
@@ -30,8 +38,6 @@ class FilterParametersTableViewController: UITableViewController {
         tableView.register(cellType: FilterTableViewCell.self)
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -39,7 +45,6 @@ class FilterParametersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.parameters.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -48,6 +53,9 @@ class FilterParametersTableViewController: UITableViewController {
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.updateParameter(for: self.option, with: parameters[indexPath.row])
+        self.navigationController?.popViewController(animated: true)
+    }
 
 }

@@ -31,8 +31,9 @@ class FilterTableViewCell: UITableViewCell, Reusable {
         return arrowImageView
     }()
 
-    func setupOption(with text: String){
+    func setupOption(with text: String, parameter: String){
         self.titleLabel.text = text
+        self.parameterLabel.text = parameter
         self.arrowImageView.isHidden = false
         self.parameterLabel.isHidden = false
         self.titleLabel.isHidden = false
@@ -84,9 +85,8 @@ extension FilterTableViewCell: CodeView {
         arrowImageView.contentMode = .scaleAspectFit
         self.parameterLabel.numberOfLines = 1
         self.parameterLabel.textColor = Design.Colors.darkYellow
-        //FIXME:- remove static text
-        self.parameterLabel.text = "2008"
         self.parameterLabel.font = UIFont.boldSystemFont(ofSize: 15.0)
+        self.selectionStyle = .none
     }
     
     

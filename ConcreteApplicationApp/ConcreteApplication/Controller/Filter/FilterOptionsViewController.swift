@@ -10,13 +10,19 @@ import UIKit
 import Reusable
 import SnapKit
 
+enum FilterOptions: String, CaseIterable{
+    case date = "Date"
+    case genre = "Genres"
+}
+
 class FilterOptionsViewController: UIViewController {
     
     var tableView = UITableView(frame: .zero, style: .grouped)
-    let filterOptions = ["Date", "Genres"]
+    let filterOptions = FilterOptions.allCases
     var parameters = ["1","2","3","4","5","6"]
     var genresParameters:[String] = []
     var releasedYearsParameters:[String] = []
+    var filter = Filter()
     
     
     lazy var button: UIButton = {
@@ -61,7 +67,6 @@ class FilterOptionsViewController: UIViewController {
                     self.genresParameters.append($0.name ?? "")
                 }
             })
-            
             if !self.releasedYearsParameters.contains(movie.releaseYear){
                 self.releasedYearsParameters.append(movie.releaseYear)
             }
@@ -115,10 +120,10 @@ extension FilterOptionsViewController: UITableViewDelegate {
         
         switch indexPath.row {
         case 0:
-            let filterParameters = FilterParametersTableViewController(parameters: self.releasedYearsParameters, title: filterOptions[indexPath.row], style: .grouped)
+            let filterParameters = FilterParametersTableViewController(parameters: self.releasedYearsParameters, option: filterOptions[indexPath.row], style: .grouped, delegate: self)
             self.navigationController?.pushViewController(filterParameters, animated: true)
         case 1:
-            let filterParameters = FilterParametersTableViewController(parameters: self.genresParameters, title: filterOptions[indexPath.row] , style: .grouped)
+            let filterParameters = FilterParametersTableViewController(parameters: self.genresParameters, option: filterOptions[indexPath.row] , style: .grouped, delegate: self)
             self.navigationController?.pushViewController(filterParameters, animated: true)
         default:
             break
@@ -135,9 +140,30 @@ extension FilterOptionsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var parameter = ""
+        switch indexPath.row {
+        case 0:
+            parameter = filter.releaseYear ?? ""
+        case 1:
+            parameter = filter.genre ?? ""
+        default:
+            parameter = ""
+        }
+        
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FilterTableViewCell.self)
-        cell.setupOption(with: filterOptions[indexPath.row])
+        cell.setupOption(with: filterOptions[indexPath.row].rawValue, parameter: parameter)
+        
         return cell
+    }
+    
+}
+
+extension FilterOptionsViewController: FilterDelegate {
+    
+    func updateParameter(for option: FilterOptions, with value: String) {
+        self.filter.updateParameter(of: option, with: value)
+        self.tableView.reloadData()
     }
     
 }
