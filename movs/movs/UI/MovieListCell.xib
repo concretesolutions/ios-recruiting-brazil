@@ -13,26 +13,39 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieListCell" id="5v1-Fb-t00" customClass="MovieListCell" customModule="movs" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="146" height="132"/>
+            <rect key="frame" x="0.0" y="0.0" width="166" height="152"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="146" height="132"/>
+                <rect key="frame" x="0.0" y="0.0" width="166" height="152"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oYz-K3-XNn">
-                        <rect key="frame" x="0.0" y="0.0" width="146" height="132"/>
+                        <rect key="frame" x="0.0" y="0.0" width="166" height="152"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffW-Xn-Uo6">
+                        <rect key="frame" x="136" y="124" width="17" height="22"/>
+                        <state key="normal" image="favorite_gray_icon"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="ffW-Xn-Uo6" secondAttribute="bottom" constant="6" id="4E6-2O-jd9"/>
                 <constraint firstItem="oYz-K3-XNn" firstAttribute="leading" secondItem="5v1-Fb-t00" secondAttribute="leading" id="JtD-3l-2mS"/>
                 <constraint firstAttribute="bottom" secondItem="oYz-K3-XNn" secondAttribute="bottom" id="X1Y-d4-2y2"/>
                 <constraint firstAttribute="trailing" secondItem="oYz-K3-XNn" secondAttribute="trailing" id="cLE-hL-Ib3"/>
                 <constraint firstItem="oYz-K3-XNn" firstAttribute="top" secondItem="5v1-Fb-t00" secondAttribute="top" id="fzc-zv-biR"/>
+                <constraint firstAttribute="trailing" secondItem="ffW-Xn-Uo6" secondAttribute="trailing" constant="13" id="mmM-LU-32n"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Oqo-8U-6xO"/>
-            <size key="customSize" width="146" height="132"/>
-            <point key="canvasLocation" x="172.80000000000001" y="-42.278860569715143"/>
+            <size key="customSize" width="166" height="152"/>
+            <connections>
+                <outlet property="favouriteButton" destination="ffW-Xn-Uo6" id="riN-rz-7Xw"/>
+                <outlet property="movieImageView" destination="oYz-K3-XNn" id="xbn-p4-wPQ"/>
+            </connections>
+            <point key="canvasLocation" x="188.80000000000001" y="-33.283358320839582"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="favorite_gray_icon" width="17" height="16"/>
+    </resources>
 </document>

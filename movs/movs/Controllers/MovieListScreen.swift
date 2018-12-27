@@ -33,7 +33,7 @@ extension MovieListScreen {
 // MARK: - Private
 extension MovieListScreen {
     private func setupUI() {
-		// TO DO
+        moviesCollectionView.register(MovieListCell.self)
     }
 
     private func fetchData() {
@@ -52,9 +52,9 @@ extension MovieListScreen: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = UICollectionViewCell()
-        cell.backgroundColor = .red
-		return cell
+        let cell: MovieListCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+		cell.setup(movie: models[indexPath.row])
+        return cell
     }
 }
 

@@ -10,5 +10,6 @@ enum Constants {
     enum Integration {
         static let apikey = "21b8ff9ef8b9ae187b8fd090e799fc60"
         static let baseurl = "https://api.themoviedb.org/3/movie/popular?api_key="
+        static let imageurl = "http://image.tmdb.org/t/p/w185/"
     }
 }
