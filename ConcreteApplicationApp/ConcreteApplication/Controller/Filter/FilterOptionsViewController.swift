@@ -14,6 +14,7 @@ class FilterOptionsViewController: UIViewController {
     
     var tableView = UITableView(frame: .zero, style: .grouped)
     let filterOptions = ["Date", "Genres"]
+    var parameters = ["1","2","3","4","5","6"]
     
     lazy var button: UIButton = {
         let button = UIButton(frame: .zero)
@@ -30,7 +31,7 @@ class FilterOptionsViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .white
         self.view.backgroundColor = self.tableView.backgroundColor
-        self.tableView.register(cellType: FilterOptionsTableViewCell.self)
+        self.tableView.register(cellType: FilterTableViewCell.self)
     }
     
 }
@@ -76,6 +77,11 @@ extension FilterOptionsViewController: UITableViewDelegate {
         return UIScreen.main.bounds.height * 0.05
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let filterParameters = FilterParametersTableViewController(parameters: self.parameters, style: .grouped)
+        self.navigationController?.pushViewController(filterParameters, animated: true)
+    }
+    
 }
 
 extension FilterOptionsViewController: UITableViewDataSource {
@@ -85,8 +91,8 @@ extension FilterOptionsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FilterOptionsTableViewCell.self)
-        cell.setup(with: filterOptions[indexPath.row])
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: FilterTableViewCell.self)
+        cell.setupOption(with: filterOptions[indexPath.row])
         return cell
     }
     

@@ -28,7 +28,8 @@
 		EC1BB20321D45A17006E9C4B /* MoviesGridCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1BB20221D45A17006E9C4B /* MoviesGridCollectionDelegate.swift */; };
 		EC1BB20521D45A76006E9C4B /* FavoriteMoviesTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1BB20421D45A76006E9C4B /* FavoriteMoviesTableViewDelegate.swift */; };
 		EC1BB20B21D45E61006E9C4B /* FilterOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1BB20A21D45E61006E9C4B /* FilterOptionsViewController.swift */; };
-		EC1BB20E21D45FB2006E9C4B /* FilterOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1BB20D21D45FB2006E9C4B /* FilterOptionsTableViewCell.swift */; };
+		EC1BB20E21D45FB2006E9C4B /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1BB20D21D45FB2006E9C4B /* FilterTableViewCell.swift */; };
+		EC1BB21121D544A2006E9C4B /* FilterParametersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1BB21021D544A2006E9C4B /* FilterParametersTableViewController.swift */; };
 		EC313D0D21CB301800A6848A /* GenreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC313D0C21CB301800A6848A /* GenreResponse.swift */; };
 		EC313D0F21CB318300A6848A /* TMDBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC313D0E21CB318300A6848A /* TMDBError.swift */; };
 		EC313D1221CB343100A6848A /* MoviesGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC313D1121CB343100A6848A /* MoviesGridViewController.swift */; };
@@ -95,7 +96,8 @@
 		EC1BB20221D45A17006E9C4B /* MoviesGridCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridCollectionDelegate.swift; sourceTree = "<group>"; };
 		EC1BB20421D45A76006E9C4B /* FavoriteMoviesTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesTableViewDelegate.swift; sourceTree = "<group>"; };
 		EC1BB20A21D45E61006E9C4B /* FilterOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionsViewController.swift; sourceTree = "<group>"; };
-		EC1BB20D21D45FB2006E9C4B /* FilterOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionsTableViewCell.swift; sourceTree = "<group>"; };
+		EC1BB20D21D45FB2006E9C4B /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		EC1BB21021D544A2006E9C4B /* FilterParametersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParametersTableViewController.swift; sourceTree = "<group>"; };
 		EC313D0C21CB301800A6848A /* GenreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreResponse.swift; sourceTree = "<group>"; };
 		EC313D0E21CB318300A6848A /* TMDBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBError.swift; sourceTree = "<group>"; };
 		EC313D1121CB343100A6848A /* MoviesGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				EC1BB20A21D45E61006E9C4B /* FilterOptionsViewController.swift */,
+				EC1BB21021D544A2006E9C4B /* FilterParametersTableViewController.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -254,7 +257,7 @@
 		EC1BB20C21D45F8B006E9C4B /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				EC1BB20D21D45FB2006E9C4B /* FilterOptionsTableViewCell.swift */,
+				EC1BB20D21D45FB2006E9C4B /* FilterTableViewCell.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -641,12 +644,13 @@
 				EC313D2B21CC7CD100A6848A /* ErrorView.swift in Sources */,
 				EC1BB20B21D45E61006E9C4B /* FilterOptionsViewController.swift in Sources */,
 				EC00AD9A21CEEAF4006BBED0 /* RealmManager.swift in Sources */,
-				EC1BB20E21D45FB2006E9C4B /* FilterOptionsTableViewCell.swift in Sources */,
+				EC1BB20E21D45FB2006E9C4B /* FilterTableViewCell.swift in Sources */,
 				EC15624021CAD25B008E7884 /* Movie.swift in Sources */,
 				EC313D2D21CD32CE00A6848A /* MovieDetailTableViewController.swift in Sources */,
 				EC313D3021CD347900A6848A /* MoviePosterTableViewCell.swift in Sources */,
 				EC00ADA121CEFF44006BBED0 /* Object+Build.swift in Sources */,
 				EC15623E21CAD23D008E7884 /* Genre.swift in Sources */,
+				EC1BB21121D544A2006E9C4B /* FilterParametersTableViewController.swift in Sources */,
 				EC1BB1FC21D44CE8006E9C4B /* FavoriteMoviesTableView.swift in Sources */,
 				EC313D2021CBFA7100A6848A /* CodeView.swift in Sources */,
 			);
