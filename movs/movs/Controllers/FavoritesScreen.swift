@@ -51,6 +51,14 @@ extension FavoritesScreen {
             self.models = movies
         }
     }
+
+    private func unfavorited(movie: Movie) {
+        dataPresenter.favoritedAction(movie.movieId)
+        fetchData()
+
+        let notificationName = Notification.Name("test")
+        NotificationCenter.default.post(Notification(name: notificationName))
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -76,9 +84,11 @@ extension FavoritesScreen: SwipeTableViewCellDelegate {
                    for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
 
-        let unfavoriteAction = SwipeAction(style: .destructive,
-                                           title: "Unfavorite") { action, indexPath in
-
+        let unfavoriteAction
+            = SwipeAction(style: .destructive,
+                          title: "Unfavorite") { [weak self] action, indexPath in
+                guard let `self` = self else { return }
+                self.unfavorited(movie: self.models[indexPath.row])
         }
 
         return [unfavoriteAction]

@@ -27,6 +27,10 @@ final class MovieListScreen: UIViewController {
             moviesCollectionView.reloadData()
         }
     }
+
+    deinit {
+		NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // MARK: - Lifecycle
@@ -66,6 +70,11 @@ extension MovieListScreen {
         navigationController?.navigationBar.tintColor = .black
         searchBar.backgroundColor = .yellowConcrete
         tabBarController?.tabBar.unselectedItemTintColor = .black
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didReceiveUpdateNotification(_:)),
+                                               name: NSNotification.Name(rawValue: "test"),
+                                               object: nil)
     }
 
     private func fetchData() {
@@ -118,6 +127,13 @@ extension MovieListScreen: UISearchBarDelegate {
 // MARK: - DetailsScreenDelegate
 extension MovieListScreen: DetailsScreenDelegate {
     func changedFavoriteStatus() {
+		mustBeUpdated = true
+    }
+}
+
+// MARK: - ObjC
+extension MovieListScreen {
+    @objc func didReceiveUpdateNotification(_ notification: Notification) {
 		mustBeUpdated = true
     }
 }
