@@ -18,6 +18,7 @@ class FavoriteMoviesViewController: UIViewController {
     var tableViewDataSource: FavoriteMoviesTableViewDataSource?
     
     var favoritedMovies:[Movie] = []
+    var filteredMovies:[Movie] = []
     
     fileprivate enum PresentationState{
         case withFilter
@@ -152,7 +153,12 @@ extension FavoriteMoviesViewController: CodeView{
 extension FavoriteMoviesViewController: UnfavoriteMovieDelegate{
     
     func deleteRowAt(indexPath: IndexPath) {
-        if let movieToDelete = RealmManager.shared.get(objectOf: MovieRealm.self, with: self.favoritedMovies[indexPath.row].id){
+        
+        var movies:[Movie] = self.favoritedMovies
+        if presentationState == .withFilter{
+            movies = filteredMovies
+        }
+        if let movieToDelete = RealmManager.shared.get(objectOf: MovieRealm.self, with: movies[indexPath.row].id){
             RealmManager.shared.delete(object: movieToDelete)
             tableViewDataSource?.favoritedMovies.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -165,6 +171,7 @@ extension FavoriteMoviesViewController: FilterDelegate{
     
     func updateMovies(with filteredMovies: [Movie]) {
         self.presentationState = .withFilter
+        self.filteredMovies = filteredMovies
         self.setupTableView(with: filteredMovies)
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
