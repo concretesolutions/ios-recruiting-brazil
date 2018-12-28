@@ -24,10 +24,15 @@ class FavoriteMoviesViewController: UIViewController {
     
     fileprivate var presentationState: PresentationState = .withoutFilter{
         didSet{
-            print("change to \(presentationState)")
-            //FIXME:- create method to change UI
+            changePresentationState(to: presentationState)
         }
     }
+    
+    lazy var button: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +44,6 @@ class FavoriteMoviesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
-        if presentationState == .withoutFilter{
-        getFavoriteMovies()
-        }
     }
     
     func getFavoriteMovies(){
@@ -66,25 +68,80 @@ class FavoriteMoviesViewController: UIViewController {
         self.navigationController?.pushViewController(filterViewController, animated: true)
     }
     
+    fileprivate func changePresentationState(to state: PresentationState){
+        switch state {
+        case .withFilter:
+            
+            setupView()
+            self.updateViewConstraints()
+            break
+        case .withoutFilter:
+            getFavoriteMovies()
+            self.setupView()
+        }
+    }
+    
+    @objc
+    func removeFilter(){
+        self.presentationState = .withoutFilter
+    }
+    
 }
 
 extension FavoriteMoviesViewController: CodeView{
     
     func buildViewHierarchy() {
+        view.addSubview(button)
         view.addSubview(tableView)
     }
     
     func setupConstraints() {
         
-        tableView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.leading.equalToSuperview()
+        tableView.snp.removeConstraints()
+        button.snp.removeConstraints()
+        
+        if self.presentationState == .withoutFilter{
+        
+            tableView.snp.makeConstraints { (make) in
+                make.height.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.leading.equalToSuperview()
+            }
+            
+            button.snp.makeConstraints { (make) in
+                make.bottom.equalTo(tableView.snp.top)
+                make.trailing.equalToSuperview()
+                make.leading.equalToSuperview()
+                make.height.equalTo(0)
+            }
+        }else{
+            
+            tableView.snp.makeConstraints { (make) in
+                make.height.equalToSuperview().multipliedBy(0.8)
+                make.bottom.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.leading.equalToSuperview()
+            }
+    
+            button.snp.makeConstraints { (make) in
+                make.bottom.equalTo(tableView.snp.top)
+                make.trailing.equalToSuperview()
+                make.leading.equalToSuperview()
+                make.height.equalToSuperview().multipliedBy(0.1)
+            }
         }
+        
     }
     
     func setupAdditionalConfiguration() {
+        
+        button.setTitle("Remove Filter", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        button.setTitleColor(Design.Colors.darkYellow, for: .normal)
+        button.backgroundColor = Design.Colors.darkBlue
+        button.addTarget(self, action: #selector(removeFilter), for: .touchUpInside)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "FilterIcon"), style: .plain, target: self, action: #selector(pushFilterOptions))
     }
     
