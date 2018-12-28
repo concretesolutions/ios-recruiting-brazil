@@ -19,6 +19,8 @@ final class DetailsScreen: UIViewController {
 
     // MARK: - Properties
     private var movie: Movie!
+    private let dataPresenter = MoviesDataPresenter()
+    private var genres = [Genre]()
 }
 
 // MARK: - Public
@@ -38,7 +40,37 @@ extension DetailsScreen {
 
         titleLabel.text = movie.name
         yearLabel.text = String(movie.releaseDate.prefix(4))
-        genreLabel.text = "test"
         descriptionTextView.text = movie.description
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+		fetchGenres()
+    }
+}
+
+// MARK: - Private
+extension DetailsScreen {
+    private func fetchGenres() {
+        dataPresenter.getGenres { [weak self] genres in
+            guard let `self` = self else { return }
+            self.genres = genres
+            self.setupGenres()
+        }
+    }
+
+    private func setupGenres() {
+		var genreString = ""
+        movie.genres.forEach { genreId in
+            let genreName = genres.first(where: { genre -> Bool in
+                return genre.identifier == genreId
+            })?.name
+
+            genreString.append(genreName!)
+            genreString.append(", ")
+        }
+
+		genreString.removeLast(2)
+        genreLabel.text = genreString
     }
 }

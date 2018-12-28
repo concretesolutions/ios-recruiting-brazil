@@ -16,8 +16,9 @@ final class Service {
 
 // MARK: - Public
 extension Service {
-    func retrieveMovieListData(completion: @escaping (Data) -> Void) {
-        let urlString = Constants.Integration.baseurl + Constants.Integration.apikey
+    func retrieveData(endpoint: String,
+                      completion: @escaping (Data) -> Void) {
+        let urlString = Constants.Integration.baseurl + endpoint + Constants.Integration.apikey
 
         guard let url = URL(string: urlString) else { return }
 

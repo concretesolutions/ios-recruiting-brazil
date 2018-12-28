@@ -52,6 +52,10 @@ extension MovieListScreen {
 extension MovieListScreen {
     private func setupUI() {
         moviesCollectionView.register(MovieListCell.self)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .black
+        searchBar.backgroundColor = .yellowConcrete
+        tabBarController?.tabBar.unselectedItemTintColor = .black
     }
 
     private func fetchData() {

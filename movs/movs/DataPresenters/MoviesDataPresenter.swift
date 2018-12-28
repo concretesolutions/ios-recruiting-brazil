@@ -16,9 +16,19 @@ final class MoviesDataPresenter {
 // MARK: - Public
 extension MoviesDataPresenter {
     func getMovies(completion: @escaping ([Movie]) -> Void) {
-        service.retrieveMovieListData { data in
+        service.retrieveData(endpoint: Constants.Integration.popularMoviesEndpoint) { data in
             if let encodedData = try? JSONDecoder().decode(MoviesResponse.self, from: data) {
                 completion(encodedData.results)
+            } else {
+                print("Something went wrong on the Serialization.")
+            }
+        }
+    }
+
+    func getGenres(completion: @escaping ([Genre]) -> Void) {
+        service.retrieveData(endpoint: Constants.Integration.genresEndpoint) { data in
+            if let encodedData = try? JSONDecoder().decode(GenresResponse.self, from: data) {
+                completion(encodedData.genres)
             } else {
                 print("Something went wrong on the Serialization.")
             }
