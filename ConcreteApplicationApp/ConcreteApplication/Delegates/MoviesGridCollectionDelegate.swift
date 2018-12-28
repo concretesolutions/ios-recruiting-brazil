@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Reusable
 
-class MoviesGridCollectionDelegate: NSObject, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
+final class MoviesGridCollectionDelegate: NSObject, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
     var movies:[Movie]!
     let numberOfItems = 2

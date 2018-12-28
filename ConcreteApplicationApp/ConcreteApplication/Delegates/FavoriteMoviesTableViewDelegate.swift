@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Reusable
 
-class FavoriteMoviesTableViewDelegate: NSObject, UITableViewDelegate {
+final class FavoriteMoviesTableViewDelegate: NSObject, UITableViewDelegate {
     
     var favoritedMovies:[Movie] = []
     var delegate: UnfavoriteMovieDelegate?

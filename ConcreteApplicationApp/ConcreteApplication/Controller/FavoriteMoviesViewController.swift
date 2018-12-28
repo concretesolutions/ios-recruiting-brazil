@@ -11,6 +11,8 @@ import SnapKit
 
 class FavoriteMoviesViewController: UIViewController {
     
+    //FIXME:- unfavoriting movie when filter is applied is not working
+    
     var tableView = FavoriteMoviesTableView()
     var tableViewDelegate: FavoriteMoviesTableViewDelegate?
     var tableViewDataSource: FavoriteMoviesTableViewDataSource?
@@ -43,7 +45,9 @@ class FavoriteMoviesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        if presentationState == .withoutFilter{
+            self.getFavoriteMovies()
+        }
     }
     
     func getFavoriteMovies(){
@@ -71,9 +75,7 @@ class FavoriteMoviesViewController: UIViewController {
     fileprivate func changePresentationState(to state: PresentationState){
         switch state {
         case .withFilter:
-            
             setupView()
-            self.updateViewConstraints()
             break
         case .withoutFilter:
             getFavoriteMovies()
@@ -164,6 +166,7 @@ extension FavoriteMoviesViewController: FilterDelegate{
     func updateMovies(with filteredMovies: [Movie]) {
         self.presentationState = .withFilter
         self.setupTableView(with: filteredMovies)
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
 }
