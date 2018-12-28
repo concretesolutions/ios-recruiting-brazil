@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteListCell" rowHeight="108" id="3an-Qu-HGm" customClass="FavoriteListCell" customModule="movs" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FavoriteListCell" rowHeight="108" id="3an-Qu-HGm" customClass="FavoriteListCell" customModule="movs" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3an-Qu-HGm" id="lAZ-4S-6Hl">
@@ -22,11 +22,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="87" height="107.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="87" id="99T-xL-a8B"/>
+                            <constraint firstAttribute="height" constant="107.5" id="eic-eY-J0w"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ar5-89-gGM">
-                        <rect key="frame" x="104" y="11" width="36" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thor" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ar5-89-gGM">
+                        <rect key="frame" x="104" y="11" width="37" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -38,13 +39,15 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bla bla bla bla..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQy-JP-6DR">
                         <rect key="frame" x="104" y="32" width="255" height="65"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" red="0.79885418653488161" green="0.79885418653488161" blue="0.79885418653488161" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="45D-je-iLa" firstAttribute="centerY" secondItem="Ar5-89-gGM" secondAttribute="centerY" id="2Gp-YT-GQl"/>
+                    <constraint firstItem="45D-je-iLa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ar5-89-gGM" secondAttribute="trailing" constant="4" id="ECW-Ib-B6I"/>
                     <constraint firstItem="sQy-JP-6DR" firstAttribute="top" secondItem="Ar5-89-gGM" secondAttribute="bottom" id="EiB-dc-Sjz"/>
                     <constraint firstItem="6Gn-Ob-WCg" firstAttribute="leading" secondItem="lAZ-4S-6Hl" secondAttribute="leading" id="Fuf-lT-wSI"/>
                     <constraint firstItem="sQy-JP-6DR" firstAttribute="leading" secondItem="6Gn-Ob-WCg" secondAttribute="trailing" constant="17" id="JgU-MT-yi0"/>

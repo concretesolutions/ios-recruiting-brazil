@@ -43,6 +43,7 @@ extension FavoritesScreen {
         navigationController?.navigationBar.shadowImage = UIImage()
         searchBar.backgroundColor = .yellowConcrete
         moviesTableView.register(FavoriteListCell.self)
+        moviesTableView.tableFooterView = UIView()
     }
 
     private func fetchData() {
@@ -62,7 +63,7 @@ extension FavoritesScreen: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: FavoriteListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-		cell.textLabel?.text = models[indexPath.row].name
+        cell.setup(movie: models[indexPath.row])
         cell.delegate = self
         return cell
     }
