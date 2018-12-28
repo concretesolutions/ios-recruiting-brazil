@@ -10,7 +10,7 @@
 import UIKit
 import SnapKit
 
-class EmptySearchView: UIView{
+final class EmptySearchView: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)

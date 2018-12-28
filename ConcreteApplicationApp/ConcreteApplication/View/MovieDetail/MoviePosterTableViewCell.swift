@@ -10,8 +10,7 @@ import UIKit
 import Reusable
 import SnapKit
 
-class MoviePosterTableViewCell: UITableViewCell, Reusable {
-
+final class MoviePosterTableViewCell: UITableViewCell, Reusable {
 
     lazy var poster: UIImageView = {
         let poster = UIImageView(frame: .zero)

@@ -14,12 +14,11 @@ protocol UnfavoriteMovieDelegate {
     func deleteRowAt(indexPath: IndexPath)
 }
 
-
 final class FavoriteMoviesTableViewDataSource: NSObject, UITableViewDataSource {
     
     var favoritedMovies:[Movie] = []
     
-    required init(favoritedMovies: [Movie], tableView: UITableView) {
+    init(favoritedMovies: [Movie], tableView: UITableView) {
         self.favoritedMovies = favoritedMovies
         super.init()
         tableView.register(cellType: FavoriteMovieTableViewCell.self)

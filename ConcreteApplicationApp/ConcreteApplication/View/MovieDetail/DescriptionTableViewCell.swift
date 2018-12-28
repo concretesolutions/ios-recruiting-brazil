@@ -14,7 +14,7 @@ protocol FavoriteMovieDelegate: class {
     func changeFavorite(to status: Bool)
 }
 
-class DescriptionTableViewCell: UITableViewCell, Reusable {
+final class DescriptionTableViewCell: UITableViewCell, Reusable {
     
     var isFavorite:Bool = false
     var favoriteDelegate: FavoriteMovieDelegate?

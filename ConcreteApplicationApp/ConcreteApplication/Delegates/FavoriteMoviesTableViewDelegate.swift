@@ -15,7 +15,7 @@ final class FavoriteMoviesTableViewDelegate: NSObject, UITableViewDelegate {
     var favoritedMovies:[Movie] = []
     var delegate: UnfavoriteMovieDelegate?
     
-    required init(favoritedMovies: [Movie], delegate: UnfavoriteMovieDelegate) {
+    init(favoritedMovies: [Movie], delegate: UnfavoriteMovieDelegate) {
         self.favoritedMovies = favoritedMovies
         self.delegate = delegate
         super.init()

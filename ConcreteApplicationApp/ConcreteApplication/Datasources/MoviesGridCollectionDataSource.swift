@@ -23,7 +23,7 @@ final class MoviesGridCollectionDataSource: NSObject, UICollectionViewDataSource
     var movies:[Movie] = []
     var pagingDelegate: MoviesGridPagingDelegate?
     
-    required init(movies:[Movie], collectionView: UICollectionView, pagingDelegate: MoviesGridPagingDelegate) {
+    init(movies:[Movie], collectionView: UICollectionView, pagingDelegate: MoviesGridPagingDelegate) {
         self.movies = movies
         self.pagingDelegate = pagingDelegate
         super.init()

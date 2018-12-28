@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 import SDWebImage
 
-class MoviesGridCollectionViewCell: UICollectionViewCell, Reusable {
+final class MoviesGridCollectionViewCell: UICollectionViewCell, Reusable {
     
     var movie: Movie!
     var favoriteMovieDelegate: FavoriteMovieDelegate!
