@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024AA6C121D6B25600AA8C08 /* FavoriteListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024AA6C021D6B25600AA8C08 /* FavoriteListCell.swift */; };
+		024AA6C321D6B26300AA8C08 /* FavoriteListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 024AA6C221D6B26300AA8C08 /* FavoriteListCell.xib */; };
 		02699DF821D4542D00682ECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02699DF721D4542D00682ECF /* AppDelegate.swift */; };
 		02699DFD21D4542D00682ECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02699DFB21D4542D00682ECF /* Main.storyboard */; };
 		02699DFF21D4542F00682ECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02699DFE21D4542F00682ECF /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		024AA6C021D6B25600AA8C08 /* FavoriteListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListCell.swift; sourceTree = "<group>"; };
+		024AA6C221D6B26300AA8C08 /* FavoriteListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteListCell.xib; sourceTree = "<group>"; };
 		02699DF421D4542D00682ECF /* movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02699DF721D4542D00682ECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02699DFC21D4542D00682ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 				02699E0021D4542F00682ECF /* LaunchScreen.storyboard */,
 				02D8056D21D464A3008B0406 /* MovieListCell.xib */,
 				02FE12CA21D5C8E700CDD164 /* FilterListCell.xib */,
+				024AA6C221D6B26300AA8C08 /* FavoriteListCell.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 				02FE12C621D5B1A500CDD164 /* FavoritesScreen.swift */,
 				02FE12C821D5BE1C00CDD164 /* FilterListScreen.swift */,
 				02FE12CC21D5C90600CDD164 /* FilterListCell.swift */,
+				024AA6C021D6B25600AA8C08 /* FavoriteListCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 				02699DFF21D4542F00682ECF /* Assets.xcassets in Resources */,
 				02699DFD21D4542D00682ECF /* Main.storyboard in Resources */,
 				02FE12CB21D5C8E700CDD164 /* FilterListCell.xib in Resources */,
+				024AA6C321D6B26300AA8C08 /* FavoriteListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,11 +321,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-movs/Pods-movs-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -333,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02D8057821D4707B008B0406 /* DetailsScreen.swift in Sources */,
+				024AA6C121D6B25600AA8C08 /* FavoriteListCell.swift in Sources */,
 				02FE12C721D5B1A500CDD164 /* FavoritesScreen.swift in Sources */,
 				02D8057621D46702008B0406 /* ReusableCell.swift in Sources */,
 				02FE12CF21D5C95000CDD164 /* TableViewCell+Extension.swift in Sources */,

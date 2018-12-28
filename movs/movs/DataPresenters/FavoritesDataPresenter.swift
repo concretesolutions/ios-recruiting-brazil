@@ -11,8 +11,10 @@ import Foundation
 final class FavoritesDataPresenter {
     // MARK: - Singleton
     static let shared = FavoritesDataPresenter()
-
     private init() {}
+
+    // MARK: - Properties
+    private let service = Service.shared
 }
 
 // MARK: - Public
@@ -42,5 +44,27 @@ extension FavoritesDataPresenter {
         }
 
         UserDefaults.standard.synchronize()
+    }
+
+    func getFavoriteMovies(completion: @escaping ([Movie]) -> Void) {
+        service.retrieveData(endpoint: Constants.Integration.popularMoviesEndpoint) { [weak self] data in
+            guard let `self` = self else { return }
+
+            if let encodedData = try? JSONDecoder().decode(MoviesResponse.self, from: data) {
+                completion(self.filterFavorites(movies: encodedData.results))
+            } else {
+                print("Something went wrong on the Serialization.")
+            }
+        }
+    }
+}
+
+// MARK: - Private
+extension FavoritesDataPresenter {
+    private func filterFavorites(movies: [Movie]) -> [Movie] {
+        let filtered = movies.filter { movie -> Bool in
+            return isFavorite(movie.movieId)
+        }
+        return filtered
     }
 }
