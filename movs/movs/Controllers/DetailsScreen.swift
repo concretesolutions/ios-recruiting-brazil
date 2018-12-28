@@ -16,10 +16,12 @@ final class DetailsScreen: UIViewController {
     @IBOutlet private weak var yearLabel: UILabel!
     @IBOutlet private weak var genreLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
+    @IBOutlet private weak var favoriteButton: UIButton!
 
     // MARK: - Properties
     private var movie: Movie!
     private let dataPresenter = MoviesDataPresenter()
+    private let favoritesDataPresenter = FavoritesDataPresenter.shared
     private var genres = [Genre]()
 }
 
@@ -41,6 +43,9 @@ extension DetailsScreen {
         titleLabel.text = movie.name
         yearLabel.text = String(movie.releaseDate.prefix(4))
         descriptionTextView.text = movie.description
+
+        let isFavorite = favoritesDataPresenter.isFavorite(movie.movieId)
+        favoriteButton.tintColor = isFavorite ? .yellowConcrete : .lightGray
     }
 
     override func viewDidLoad() {
@@ -72,5 +77,15 @@ extension DetailsScreen {
 
 		genreString.removeLast(2)
         genreLabel.text = genreString
+    }
+}
+
+// MARK: - IBActions
+extension DetailsScreen {
+    @IBAction private func tappedFavorite(_ sender: Any) {
+        favoritesDataPresenter.favoritedAction(movie.movieId)
+
+        let isFavorite = favoritesDataPresenter.isFavorite(movie.movieId)
+        favoriteButton.tintColor = isFavorite ? .yellowConcrete : .lightGray
     }
 }

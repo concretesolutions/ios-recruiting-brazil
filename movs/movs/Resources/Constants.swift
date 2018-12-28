@@ -14,4 +14,8 @@ enum Constants {
         static let genresEndpoint = "/genre/movie/list"
         static let imageurl = "http://image.tmdb.org/t/p/w185/"
     }
+
+    enum LocalStorage {
+        static let favorites = "FAVORITES_USER_DEFAULTS"
+    }
 }

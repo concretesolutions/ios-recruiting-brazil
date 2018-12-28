@@ -12,15 +12,18 @@ import Kingfisher
 final class MovieListCell: UICollectionViewCell {
     // MARK: - IBOutlets
     @IBOutlet private weak var movieImageView: UIImageView!
-    @IBOutlet private weak var favouriteButton: UIButton!
+    @IBOutlet private weak var favoriteButton: UIButton!
 
     // MARK: - Properties
+    private let favoriteDataPresenter = FavoritesDataPresenter.shared
     private var movie: Movie! {
         didSet {
 			let imageUrl = Constants.Integration.imageurl + movie.imagePath
 
             movieImageView.kf.setImage(with: URL(string: imageUrl))
-            // fav button
+
+            let isFavorite = favoriteDataPresenter.isFavorite(movie.movieId)
+            favoriteButton.tintColor = isFavorite ? .yellowConcrete : .white
         }
     }
 }
@@ -29,5 +32,15 @@ final class MovieListCell: UICollectionViewCell {
 extension MovieListCell {
     func setup(movie: Movie) {
 		self.movie = movie
+    }
+}
+
+// MARK: - IBAction
+extension MovieListCell {
+    @IBAction private func tappedFavorite(_ sender: Any) {
+		favoriteDataPresenter.favoritedAction(movie.movieId)
+
+        let isFavorite = favoriteDataPresenter.isFavorite(movie.movieId)
+        favoriteButton.tintColor = isFavorite ? .yellowConcrete : .white
     }
 }
