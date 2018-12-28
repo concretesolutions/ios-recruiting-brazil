@@ -9,6 +9,10 @@
 import UIKit
 import Kingfisher
 
+protocol DetailsScreenDelegate: class {
+    func changedFavoriteStatus()
+}
+
 final class DetailsScreen: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var movieImageView: UIImageView!
@@ -23,6 +27,9 @@ final class DetailsScreen: UIViewController {
     private let dataPresenter = MoviesDataPresenter()
     private let favoritesDataPresenter = FavoritesDataPresenter.shared
     private var genres = [Genre]()
+
+    // MARK: - Delegate
+    weak var delegate: DetailsScreenDelegate?
 }
 
 // MARK: - Public
@@ -87,5 +94,7 @@ extension DetailsScreen {
 
         let isFavorite = favoritesDataPresenter.isFavorite(movie.movieId)
         favoriteButton.tintColor = isFavorite ? .yellowConcrete : .lightGray
+
+		delegate?.changedFavoriteStatus()
     }
 }

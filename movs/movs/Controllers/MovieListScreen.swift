@@ -15,6 +15,7 @@ final class MovieListScreen: UIViewController {
 
     // MARK: - Properties
     private let dataPresenter = MoviesDataPresenter()
+    private var mustBeUpdated = false
     private var allModels = [Movie]() {
         didSet {
             filteredModels = allModels
@@ -43,7 +44,16 @@ extension MovieListScreen {
                     return
             }
 
+            screen.delegate = self
 			screen.setup(movie: movie)
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if mustBeUpdated == true {
+            moviesCollectionView.reloadData()
+            mustBeUpdated = false
         }
     }
 }
@@ -102,5 +112,12 @@ extension MovieListScreen: UISearchBarDelegate {
         filteredModels = searchText.isEmpty ? allModels : allModels.filter({ movie -> Bool in
             return movie.name.range(of: searchText, options: .caseInsensitive) != nil
         })
+    }
+}
+
+// MARK: - DetailsScreenDelegate
+extension MovieListScreen: DetailsScreenDelegate {
+    func changedFavoriteStatus() {
+		mustBeUpdated = true
     }
 }
