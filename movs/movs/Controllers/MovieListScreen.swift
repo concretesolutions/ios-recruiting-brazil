@@ -71,10 +71,11 @@ extension MovieListScreen {
         searchBar.backgroundColor = .yellowConcrete
         tabBarController?.tabBar.unselectedItemTintColor = .black
 
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didReceiveUpdateNotification(_:)),
-                                               name: NSNotification.Name(rawValue: "test"),
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didReceiveUpdateNotification(_:)),
+            name: NSNotification.Name(rawValue: Constants.Notifications.updateList),
+            object: nil)
     }
 
     private func fetchData() {

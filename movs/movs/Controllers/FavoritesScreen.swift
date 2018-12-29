@@ -13,14 +13,23 @@ final class FavoritesScreen: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var moviesTableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var removeFiltersButton: UIButton!
 
     // MARK: - Properties
-    private var models = [Movie]() {
+    private var filterIsSet = false
+	private let dataPresenter = FavoritesDataPresenter.shared
+    private var allModels = [Movie]() {
+        didSet {
+            filteredModels = allModels
+        }
+    }
+
+    private var filteredModels = [Movie]() {
         didSet {
             moviesTableView.reloadData()
         }
     }
-    private let dataPresenter = FavoritesDataPresenter.shared
 }
 
 // MARK: - Lifecycle
@@ -33,6 +42,13 @@ extension FavoritesScreen {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchData()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "filterListSegue" {
+            guard let screen = segue.destination as? FilterListScreen else { return }
+            screen.delegate = self
+        }
     }
 }
 
@@ -48,7 +64,7 @@ extension FavoritesScreen {
 
     private func fetchData() {
         dataPresenter.getFavoriteMovies { movies in
-            self.models = movies
+            self.allModels = movies
         }
     }
 
@@ -56,8 +72,14 @@ extension FavoritesScreen {
         dataPresenter.favoritedAction(movie.movieId)
         fetchData()
 
-        let notificationName = Notification.Name("test")
+        let notificationName = Notification.Name(Constants.Notifications.updateList)
         NotificationCenter.default.post(Notification(name: notificationName))
+    }
+
+    private func setFilter(_ status: Bool) {
+		removeFiltersButton.isHidden = !status
+        let topForFilterOn: CGFloat = 35.0
+        tableViewTopConstraint.constant = status ? topForFilterOn : 0.0
     }
 }
 
@@ -65,15 +87,24 @@ extension FavoritesScreen {
 extension FavoritesScreen: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return models.count
+        return filteredModels.count
     }
 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: FavoriteListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.setup(movie: models[indexPath.row])
+        cell.setup(movie: filteredModels[indexPath.row])
         cell.delegate = self
         return cell
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension FavoritesScreen: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredModels = searchText.isEmpty ? allModels : allModels.filter({ movie -> Bool in
+            return movie.name.range(of: searchText, options: .caseInsensitive) != nil
+        })
     }
 }
 
@@ -88,9 +119,23 @@ extension FavoritesScreen: SwipeTableViewCellDelegate {
             = SwipeAction(style: .destructive,
                           title: "Unfavorite") { [weak self] action, indexPath in
                 guard let `self` = self else { return }
-                self.unfavorited(movie: self.models[indexPath.row])
+                self.unfavorited(movie: self.filteredModels[indexPath.row])
         }
 
         return [unfavoriteAction]
+    }
+}
+
+// MARK: - FilterListScreenDelegate
+extension FavoritesScreen: FilterListScreenDelegate {
+    func appliedFilters() {
+		setFilter(true)
+    }
+}
+
+// MARK: - IBActions
+extension FavoritesScreen {
+    @IBAction private func tappedRemoveFilters(_ sender: Any) {
+        setFilter(false)
     }
 }

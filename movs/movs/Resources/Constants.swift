@@ -18,4 +18,8 @@ enum Constants {
     enum LocalStorage {
         static let favorites = "FAVORITES_USER_DEFAULTS"
     }
+
+    enum Notifications {
+        static let updateList = "UPDATE_LIST"
+    }
 }

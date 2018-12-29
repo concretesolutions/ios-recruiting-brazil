@@ -11,13 +11,37 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterListCell" id="tLY-cH-Cfq" customClass="FilterListCell" customModule="movs" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FilterListCell" id="tLY-cH-Cfq" customClass="FilterListCell" customModule="movs" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tLY-cH-Cfq" id="VAo-jk-fxX">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpn-m3-O6x">
+                        <rect key="frame" x="343" y="11.5" width="8" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLw-KD-dh2">
+                        <rect key="frame" x="16" y="11.5" width="8" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="jpn-m3-O6x" secondAttribute="trailing" constant="8" id="3Kt-qe-omW"/>
+                    <constraint firstItem="jLw-KD-dh2" firstAttribute="leading" secondItem="VAo-jk-fxX" secondAttribute="leadingMargin" id="8fE-Zb-54h"/>
+                    <constraint firstItem="jLw-KD-dh2" firstAttribute="centerY" secondItem="VAo-jk-fxX" secondAttribute="centerY" id="Xjw-9c-r75"/>
+                    <constraint firstItem="jpn-m3-O6x" firstAttribute="centerY" secondItem="VAo-jk-fxX" secondAttribute="centerY" id="dJy-3E-9EC"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="selectedFilter" destination="jpn-m3-O6x" id="mau-Cf-xko"/>
+                <outlet property="titleLabel" destination="jLw-KD-dh2" id="MFn-mR-AaH"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

@@ -65,7 +65,7 @@
                                 <color key="barTintColor" red="0.98061245679999998" green="0.83647745849999999" blue="0.31979921459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="bj0-FF-Z5J" id="06H-kh-mJg"/>
+                                    <outlet property="delegate" destination="ly5-gU-ZUb" id="hOq-ti-vEs"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dst-ru-z9w">
@@ -76,14 +76,29 @@
                                     <outlet property="delegate" destination="ly5-gU-ZUb" id="4i2-2S-9JY"/>
                                 </connections>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5l-zw-ZA0">
+                                <rect key="frame" x="0.0" y="56" width="375" height="0.0"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <state key="normal" title="Remove filters">
+                                    <color key="titleColor" red="0.98061245679999998" green="0.83647745849999999" blue="0.23171196629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedRemoveFilters:" destination="ly5-gU-ZUb" eventType="touchUpInside" id="Zw3-zs-fqX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pkc-fu-Hqt" firstAttribute="trailing" secondItem="dst-ru-z9w" secondAttribute="trailing" id="57U-qw-4Px"/>
+                            <constraint firstItem="dst-ru-z9w" firstAttribute="top" secondItem="U5l-zw-ZA0" secondAttribute="bottom" id="8Lc-3A-IQe"/>
                             <constraint firstItem="XAC-SU-Riu" firstAttribute="top" secondItem="pkc-fu-Hqt" secondAttribute="top" id="G3O-k6-7Lc"/>
+                            <constraint firstItem="U5l-zw-ZA0" firstAttribute="top" secondItem="XAC-SU-Riu" secondAttribute="bottom" id="Pwc-hj-FGO"/>
                             <constraint firstItem="pkc-fu-Hqt" firstAttribute="bottom" secondItem="dst-ru-z9w" secondAttribute="bottom" id="ZPn-Jz-rZU"/>
+                            <constraint firstItem="pkc-fu-Hqt" firstAttribute="trailing" secondItem="U5l-zw-ZA0" secondAttribute="trailing" id="ZjA-bh-THK"/>
+                            <constraint firstItem="dst-ru-z9w" firstAttribute="top" secondItem="XAC-SU-Riu" secondAttribute="bottom" id="aO9-UD-0pD"/>
                             <constraint firstItem="dst-ru-z9w" firstAttribute="leading" secondItem="pkc-fu-Hqt" secondAttribute="leading" id="ajA-hC-5Ex"/>
-                            <constraint firstItem="dst-ru-z9w" firstAttribute="top" secondItem="XAC-SU-Riu" secondAttribute="bottom" id="aut-Tt-03x"/>
+                            <constraint firstItem="U5l-zw-ZA0" firstAttribute="leading" secondItem="pkc-fu-Hqt" secondAttribute="leading" id="ig4-D1-yVl"/>
                             <constraint firstItem="XAC-SU-Riu" firstAttribute="leading" secondItem="pkc-fu-Hqt" secondAttribute="leading" id="ozR-w7-rwZ"/>
                             <constraint firstItem="XAC-SU-Riu" firstAttribute="trailing" secondItem="pkc-fu-Hqt" secondAttribute="trailing" id="sH1-EM-1zd"/>
                         </constraints>
@@ -94,18 +109,20 @@
                         <barButtonItem key="rightBarButtonItem" image="FilterIcon" id="VQT-oX-9Tu">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="Oa3-S2-uxc" kind="show" id="1Hx-sK-rSV"/>
+                                <segue destination="Oa3-S2-uxc" kind="show" identifier="filterListSegue" id="1Hx-sK-rSV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="moviesTableView" destination="dst-ru-z9w" id="H6a-mk-n49"/>
+                        <outlet property="removeFiltersButton" destination="U5l-zw-ZA0" id="43H-pT-H0I"/>
                         <outlet property="searchBar" destination="XAC-SU-Riu" id="4B1-AB-Dhw"/>
+                        <outlet property="tableViewTopConstraint" destination="aO9-UD-0pD" id="QRM-Xe-XhV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RWe-Ak-P5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="153" y="1126"/>
+            <point key="canvasLocation" x="152.80000000000001" y="1125.7871064467768"/>
         </scene>
         <!--Filter-->
         <scene sceneID="1g5-Wg-vuI">
@@ -130,6 +147,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tappedApplyFilters:" destination="Oa3-S2-uxc" eventType="touchUpInside" id="hx3-Is-bAt"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0sl-La-GU8">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="277"/>
@@ -154,27 +174,101 @@
                     </view>
                     <connections>
                         <outlet property="filtersTableView" destination="0sl-La-GU8" id="bd7-OI-djx"/>
-                        <segue destination="Ckb-pc-QG0" kind="show" identifier="filterSegue" id="5xB-qe-59S"/>
+                        <segue destination="Ckb-pc-QG0" kind="show" identifier="filterDateSegue" id="5xB-qe-59S"/>
+                        <segue destination="0D3-u6-Dsv" kind="show" identifier="filterGenresSegue" id="pwk-nt-l92"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="02o-fS-9lm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="877.60000000000002" y="1125.7871064467768"/>
         </scene>
-        <!--View Controller-->
+        <!--Date-->
         <scene sceneID="6xq-y3-tku">
             <objects>
-                <viewController id="Ckb-pc-QG0" sceneMemberID="viewController">
+                <viewController title="Date" id="Ckb-pc-QG0" customClass="FilterDateScreen" customModule="movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fkE-Gq-Riy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YTb-3z-MZM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Lll-ZK-2rj">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lll-ZK-2rj" id="Rf6-fJ-zFf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ckb-pc-QG0" id="xyY-rZ-ZqJ"/>
+                                    <outlet property="delegate" destination="Ckb-pc-QG0" id="6ep-3D-cM6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YTb-3z-MZM" firstAttribute="leading" secondItem="RlD-Gj-TUa" secondAttribute="leading" id="Cpa-CJ-HdI"/>
+                            <constraint firstItem="RlD-Gj-TUa" firstAttribute="bottom" secondItem="YTb-3z-MZM" secondAttribute="bottom" id="caC-5Q-K6w"/>
+                            <constraint firstItem="YTb-3z-MZM" firstAttribute="top" secondItem="RlD-Gj-TUa" secondAttribute="top" id="ngc-em-AQz"/>
+                            <constraint firstItem="RlD-Gj-TUa" firstAttribute="trailing" secondItem="YTb-3z-MZM" secondAttribute="trailing" id="pWS-1P-EWD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="RlD-Gj-TUa"/>
                     </view>
+                    <connections>
+                        <outlet property="datesTableView" destination="YTb-3z-MZM" id="Mac-Tx-IHY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLT-fP-vhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1631" y="1126"/>
+            <point key="canvasLocation" x="1655" y="868"/>
+        </scene>
+        <!--Genres-->
+        <scene sceneID="4cP-hD-4ft">
+            <objects>
+                <viewController title="Genres" id="0D3-u6-Dsv" customClass="FilterGenresScreen" customModule="movs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U8E-gE-cIL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="obH-Lq-zEX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="r6E-Fq-O5N">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r6E-Fq-O5N" id="sks-Uz-uFY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0D3-u6-Dsv" id="gzi-bP-FwO"/>
+                                    <outlet property="delegate" destination="0D3-u6-Dsv" id="lbN-5d-ppj"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="obH-Lq-zEX" firstAttribute="top" secondItem="U8E-gE-cIL" secondAttribute="top" id="0ws-C4-jaG"/>
+                            <constraint firstItem="obH-Lq-zEX" firstAttribute="leading" secondItem="v4S-Dp-oVZ" secondAttribute="leading" id="Cay-xa-JVl"/>
+                            <constraint firstItem="v4S-Dp-oVZ" firstAttribute="bottom" secondItem="obH-Lq-zEX" secondAttribute="bottom" id="L6W-WX-ufp"/>
+                            <constraint firstAttribute="trailing" secondItem="obH-Lq-zEX" secondAttribute="trailing" id="vmA-fT-ngM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="v4S-Dp-oVZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="genresTableView" destination="obH-Lq-zEX" id="oRv-IP-flJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MzB-bq-dPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1654" y="1516"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="EF4-zQ-nGz">

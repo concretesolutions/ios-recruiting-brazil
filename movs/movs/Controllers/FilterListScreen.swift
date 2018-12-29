@@ -8,12 +8,25 @@
 
 import UIKit
 
+protocol FilterListScreenDelegate: class {
+    func appliedFilters()
+}
+
 final class FilterListScreen: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var filtersTableView: UITableView!
 
     // MARK: - Properties
-    private let filters = ["Date", "Genders"]
+    private var filters = [FilterSegue]()
+
+    // MARK: - Delegate
+    weak var delegate: FilterListScreenDelegate?
+
+    struct FilterSegue {
+        let name: String
+        let segueId: String
+        let selected: String
+    }
 }
 
 // MARK: - Lifecycle
@@ -22,6 +35,16 @@ extension FilterListScreen {
         super.viewDidLoad()
         setupUI()
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == filters[0].segueId {
+            guard let screen = segue.destination as? FilterDateScreen else { return }
+            screen.delegate = self
+        } else if segue.identifier == filters[1].segueId {
+            guard let screen = segue.destination as? FilterGenresScreen else { return }
+            screen.delegate = self
+        }
+    }
 }
 
 // MARK: - Private
@@ -29,6 +52,9 @@ extension FilterListScreen {
     private func setupUI() {
 		filtersTableView.tableFooterView = UIView()
         filtersTableView.register(FilterListCell.self)
+
+        filters = [FilterSegue(name: "Date", segueId: "filterDateSegue", selected: ""),
+                   FilterSegue(name: "Genres", segueId: "filterGenresSegue", selected: "")]
     }
 }
 
@@ -42,7 +68,7 @@ extension FilterListScreen: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: FilterListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.textLabel!.text = filters[indexPath.row]
+        cell.setup(title: filters[indexPath.row].name, filter: "")
         return cell
     }
 }
@@ -51,6 +77,29 @@ extension FilterListScreen: UITableViewDataSource {
 extension FilterListScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-		// TO DO
+		performSegue(withIdentifier: filters[indexPath.row].segueId,
+                     sender: nil)
+    }
+}
+
+// MARK: - IBActions
+extension FilterListScreen {
+    @IBAction private func tappedApplyFilters(_ sender: Any) {
+        delegate?.appliedFilters()
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - FilterDateScreenDelegate
+extension FilterListScreen: FilterDateScreenDelegate {
+    func didSelectDate(_ dateString: String) {
+
+    }
+}
+
+// MARK: - FilterGenresScreenDelegate
+extension FilterListScreen: FilterGenresScreenDelegate {
+    func didSelectGenre(_ genre: Genre) {
+
     }
 }
