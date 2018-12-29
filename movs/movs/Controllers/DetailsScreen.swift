@@ -58,6 +58,8 @@ extension DetailsScreen {
     override func viewDidLoad() {
         super.viewDidLoad()
 		fetchGenres()
+
+        favoriteButton.accessibilityIdentifier = "FAVORITE_ACCESSIBILITY"
     }
 }
 

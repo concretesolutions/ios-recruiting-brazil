@@ -35,6 +35,14 @@ extension MovieListCell {
     }
 }
 
+// MARK: - Lifecycle
+extension MovieListCell {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        favoriteButton.accessibilityIdentifier = "FAVORITE_ACCESSIBILITY"
+    }
+}
+
 // MARK: - IBAction
 extension MovieListCell {
     @IBAction private func tappedFavorite(_ sender: Any) {
