@@ -17,9 +17,10 @@ final class Service {
 // MARK: - Public
 extension Service {
     func retrieveData(endpoint: String,
+                      optional: String = "",
                       completion: @escaping (Data) -> Void,
                       error: @escaping () -> Void) {
-        let urlString = Constants.Integration.baseurl + endpoint + Constants.Integration.apikey
+        let urlString = Constants.Integration.baseurl + endpoint + Constants.Integration.apikey + optional
 
         guard let url = URL(string: urlString) else { return }
 

@@ -11,12 +11,14 @@ import Foundation
 final class MoviesDataPresenter {
     // MARK: - Properties
     private let service = Service.shared
+    private var currentPage = 1
 }
 
 // MARK: - Public
 extension MoviesDataPresenter {
     func getMovies(completion: @escaping ([Movie]) -> Void, error: @escaping () -> Void) {
         service.retrieveData(endpoint: Constants.Integration.popularMoviesEndpoint,
+                             optional: "&page=\(currentPage)",
                              completion: { data in
                 if let encodedData = try? JSONDecoder().decode(MoviesResponse.self, from: data) {
                     completion(encodedData.results)
@@ -26,6 +28,8 @@ extension MoviesDataPresenter {
         }) {
             error()
         }
+
+        currentPage += 1
     }
 
     func getGenres(completion: @escaping ([Genre]) -> Void, error: @escaping () -> Void) {

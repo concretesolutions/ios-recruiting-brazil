@@ -83,12 +83,14 @@ extension MovieListScreen {
     private func fetchData() {
 		SVProgressHUD.show()
         dataPresenter.getMovies(completion: { [weak self] movies in
-            self?.allModels = movies
+            self?.allModels.append(contentsOf: movies)
             SVProgressHUD.dismiss()
         }) {
             SVProgressHUD.dismiss()
             SVProgressHUD.showError(withStatus: Constants.General.errorMessage)
         }
+
+        moviesCollectionView.prefetchDataSource = self
     }
 }
 
@@ -120,6 +122,18 @@ extension MovieListScreen: UICollectionViewDelegate, UICollectionViewDelegateFlo
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 		let cellWidth = (collectionView.frame.size.width / 2) - 10
         return CGSize(width: cellWidth, height: collectionView.frame.size.height / 2)
+    }
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+extension MovieListScreen: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView,
+                        prefetchItemsAt indexPaths: [IndexPath]) {
+        if (searchBar.text?.isEmpty)! {
+            dataPresenter.getMovies(completion: { [weak self] movies in
+                self?.allModels.append(contentsOf: movies)
+            }) {}
+        }
     }
 }
 
