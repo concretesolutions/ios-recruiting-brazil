@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 protocol FilterGenresScreenDelegate: class {
     func didSelectGenre(_ genre: Genre)
@@ -39,10 +40,13 @@ extension FilterGenresScreen {
 // MARK: - Private
 extension FilterGenresScreen {
     private func fetchData() {
+        SVProgressHUD.show()
         moviesDataPresenter.getGenres(completion: { genres in
             self.genres = genres
+            SVProgressHUD.dismiss()
         }) {
-            // TO DO
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: Constants.General.errorMessage)
         }
     }
 }

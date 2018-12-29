@@ -39,7 +39,7 @@ extension MovieListCell {
 extension MovieListCell {
     override func awakeFromNib() {
         super.awakeFromNib()
-        favoriteButton.accessibilityIdentifier = "FAVORITE_ACCESSIBILITY"
+        favoriteButton.accessibilityIdentifier = Constants.Accessibility.favorite
     }
 }
 

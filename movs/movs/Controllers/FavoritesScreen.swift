@@ -8,6 +8,7 @@
 
 import UIKit
 import SwipeCellKit
+import SVProgressHUD
 
 final class FavoritesScreen: UIViewController {
     // MARK: - IBOutlets
@@ -63,10 +64,13 @@ extension FavoritesScreen {
     }
 
     private func fetchData() {
+        SVProgressHUD.show()
         dataPresenter.getFavoriteMovies(completion: { movies in
             self.allModels = movies
+            SVProgressHUD.dismiss()
         }) {
-            // TO DO
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: Constants.General.errorMessage)
         }
     }
 

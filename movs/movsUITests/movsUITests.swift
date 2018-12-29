@@ -20,9 +20,10 @@ class MovsUITests: XCTestCase {
     }
 
     func testMovieGridFlow() {
-        app.collectionViews.element(boundBy: 0).buttons["FAVORITE_ACCESSIBILITY"].firstMatch.tap()
+        app.collectionViews.element(boundBy: 0)
+            .buttons[Constants.Accessibility.favorite].firstMatch.tap()
 		app.collectionViews.cells.element(boundBy: 0).tap()
-        app.buttons["FAVORITE_ACCESSIBILITY"].tap()
+        app.buttons[Constants.Accessibility.favorite].tap()
 		app.navigationBars.buttons.element(boundBy: 0).tap()
     }
 
@@ -31,7 +32,7 @@ class MovsUITests: XCTestCase {
 
         if !app.tables.cells.element(boundBy: 0).exists {
             app.tabBars.buttons["Movies"].tap()
-            app.collectionViews.element(boundBy: 0).buttons["FAVORITE_ACCESSIBILITY"].firstMatch.tap()
+            app.collectionViews.element(boundBy: 0).buttons[Constants.Accessibility.favorite].firstMatch.tap()
             app.tabBars.buttons["Favorites"].tap()
         }
 

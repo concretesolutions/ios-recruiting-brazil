@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SVProgressHUD
 
 protocol DetailsScreenDelegate: class {
     func changedFavoriteStatus()
@@ -59,19 +60,22 @@ extension DetailsScreen {
         super.viewDidLoad()
 		fetchGenres()
 
-        favoriteButton.accessibilityIdentifier = "FAVORITE_ACCESSIBILITY"
+        favoriteButton.accessibilityIdentifier = Constants.Accessibility.favorite
     }
 }
 
 // MARK: - Private
 extension DetailsScreen {
     private func fetchGenres() {
+        SVProgressHUD.show()
         dataPresenter.getGenres(completion: { [weak self] genres in
             guard let `self` = self else { return }
             self.genres = genres
             self.setupGenres()
+            SVProgressHUD.dismiss()
         }) {
-            // TO DO
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: Constants.General.errorMessage)
         }
     }
 

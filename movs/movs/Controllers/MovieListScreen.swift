@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class MovieListScreen: UIViewController {
     // MARK: - IBOutlets
@@ -79,10 +80,13 @@ extension MovieListScreen {
     }
 
     private func fetchData() {
+		SVProgressHUD.show()
         dataPresenter.getMovies(completion: { [weak self] movies in
             self?.allModels = movies
+            SVProgressHUD.dismiss()
         }) {
-            // TO DO
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: Constants.General.errorMessage)
         }
     }
 }

@@ -1,20 +1,23 @@
 platform :ios, '9.0'
 
+
+def shared_pods
+    pod 'SwiftLint'
+    pod 'Alamofire'
+    pod 'Kingfisher'
+    pod 'SwipeCellKit'
+    pod 'SVProgressHUD'
+end
+
 target 'movs' do
   use_frameworks!
 
-pod 'SwiftLint'
-pod 'Alamofire'
-pod 'Kingfisher'
-pod 'SwipeCellKit'
+shared_pods
 
 end
 
 target 'movsUITests' do
 
-pod 'SwiftLint'
-pod 'Alamofire'
-pod 'Kingfisher'
-pod 'SwipeCellKit'
+shared_pods
 
 end

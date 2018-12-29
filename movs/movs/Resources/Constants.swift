@@ -22,4 +22,12 @@ enum Constants {
     enum Notifications {
         static let updateList = "UPDATE_LIST"
     }
+
+    enum Accessibility {
+        static let favorite = "FAVORITE_ACCESSIBILITY"
+    }
+
+    enum General {
+        static let errorMessage = "Oh snap, something went wrong :("
+    }
 }
