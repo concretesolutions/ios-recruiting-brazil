@@ -46,15 +46,18 @@ extension FavoritesDataPresenter {
         UserDefaults.standard.synchronize()
     }
 
-    func getFavoriteMovies(completion: @escaping ([Movie]) -> Void) {
-        service.retrieveData(endpoint: Constants.Integration.popularMoviesEndpoint) { [weak self] data in
-            guard let `self` = self else { return }
+    func getFavoriteMovies(completion: @escaping ([Movie]) -> Void, error: @escaping () -> Void) {
+        service.retrieveData(endpoint: Constants.Integration.popularMoviesEndpoint,
+                             completion: { [weak self] data in
+                guard let `self` = self else { return }
 
-            if let encodedData = try? JSONDecoder().decode(MoviesResponse.self, from: data) {
-                completion(self.filterFavorites(movies: encodedData.results))
-            } else {
-                print("Something went wrong on the Serialization.")
-            }
+                if let encodedData = try? JSONDecoder().decode(MoviesResponse.self, from: data) {
+                    completion(self.filterFavorites(movies: encodedData.results))
+                } else {
+                    error()
+                }
+        }) {
+            error()
         }
     }
 }

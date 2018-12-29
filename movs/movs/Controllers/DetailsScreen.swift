@@ -64,10 +64,12 @@ extension DetailsScreen {
 // MARK: - Private
 extension DetailsScreen {
     private func fetchGenres() {
-        dataPresenter.getGenres { [weak self] genres in
+        dataPresenter.getGenres(completion: { [weak self] genres in
             guard let `self` = self else { return }
             self.genres = genres
             self.setupGenres()
+        }) {
+            // TO DO
         }
     }
 

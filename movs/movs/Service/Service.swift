@@ -17,14 +17,19 @@ final class Service {
 // MARK: - Public
 extension Service {
     func retrieveData(endpoint: String,
-                      completion: @escaping (Data) -> Void) {
+                      completion: @escaping (Data) -> Void,
+                      error: @escaping () -> Void) {
         let urlString = Constants.Integration.baseurl + endpoint + Constants.Integration.apikey
 
         guard let url = URL(string: urlString) else { return }
 
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard error == nil,
+        let task = URLSession.shared.dataTask(with: url) { data, _, errorObject in
+            guard errorObject == nil,
                 let usableData = data else {
+                    DispatchQueue.main.async {
+                        error()
+                    }
+
                     return
             }
 

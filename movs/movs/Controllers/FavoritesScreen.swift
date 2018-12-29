@@ -63,8 +63,10 @@ extension FavoritesScreen {
     }
 
     private func fetchData() {
-        dataPresenter.getFavoriteMovies { movies in
+        dataPresenter.getFavoriteMovies(completion: { movies in
             self.allModels = movies
+        }) {
+            // TO DO
         }
     }
 

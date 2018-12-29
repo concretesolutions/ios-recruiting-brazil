@@ -39,8 +39,10 @@ extension FilterGenresScreen {
 // MARK: - Private
 extension FilterGenresScreen {
     private func fetchData() {
-        moviesDataPresenter.getGenres { genres in
+        moviesDataPresenter.getGenres(completion: { genres in
             self.genres = genres
+        }) {
+            // TO DO
         }
     }
 }

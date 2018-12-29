@@ -79,8 +79,10 @@ extension MovieListScreen {
     }
 
     private func fetchData() {
-        dataPresenter.getMovies { [weak self] movies in
+        dataPresenter.getMovies(completion: { [weak self] movies in
             self?.allModels = movies
+        }) {
+            // TO DO
         }
     }
 }
