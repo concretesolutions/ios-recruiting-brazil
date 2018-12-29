@@ -26,6 +26,7 @@ final class MovieListScreen: UIViewController {
     private var filteredModels = [Movie]() {
         didSet {
             moviesCollectionView.reloadData()
+            moviesCollectionView.isHidden = filteredModels.count == 0
         }
     }
 

@@ -305,6 +305,12 @@
                                     <outlet property="delegate" destination="bj0-FF-Z5J" id="eAv-68-oix"/>
                                 </connections>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results were found for this search :(" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61S-z8-kwm">
+                                <rect key="frame" x="39" y="267" width="297" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZPT-5K-aFj">
                                 <rect key="frame" x="0.0" y="56" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,12 +330,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZPT-5K-aFj" firstAttribute="top" secondItem="Z6B-Eq-PNh" secondAttribute="bottom" id="6nF-c3-Rya"/>
+                            <constraint firstItem="61S-z8-kwm" firstAttribute="leading" secondItem="BK8-DO-jXL" secondAttribute="leading" constant="39" id="GgX-Xp-BCb"/>
                             <constraint firstItem="BK8-DO-jXL" firstAttribute="trailing" secondItem="ZPT-5K-aFj" secondAttribute="trailing" id="JYg-r7-BrK"/>
                             <constraint firstItem="Z6B-Eq-PNh" firstAttribute="leading" secondItem="BK8-DO-jXL" secondAttribute="leading" id="Kdl-UK-XwB"/>
                             <constraint firstItem="ZPT-5K-aFj" firstAttribute="leading" secondItem="BK8-DO-jXL" secondAttribute="leading" id="V6Z-Tm-o31"/>
+                            <constraint firstItem="61S-z8-kwm" firstAttribute="centerY" secondItem="BK8-DO-jXL" secondAttribute="centerY" id="b0x-HP-UXj"/>
+                            <constraint firstItem="BK8-DO-jXL" firstAttribute="trailing" secondItem="61S-z8-kwm" secondAttribute="trailing" constant="39" id="eVP-MD-Sl4"/>
                             <constraint firstItem="Z6B-Eq-PNh" firstAttribute="trailing" secondItem="BK8-DO-jXL" secondAttribute="trailing" id="lpp-Mh-uki"/>
                             <constraint firstItem="BK8-DO-jXL" firstAttribute="bottom" secondItem="ZPT-5K-aFj" secondAttribute="bottom" id="rjM-vy-Ve3"/>
                             <constraint firstItem="Z6B-Eq-PNh" firstAttribute="top" secondItem="BK8-DO-jXL" secondAttribute="top" id="u7q-fq-xnc"/>
+                            <constraint firstItem="61S-z8-kwm" firstAttribute="centerX" secondItem="BK8-DO-jXL" secondAttribute="centerX" id="u9X-r4-rEK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BK8-DO-jXL"/>
                     </view>
