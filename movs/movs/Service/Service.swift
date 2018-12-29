@@ -6,7 +6,7 @@
 //  Copyright © 2018 bmaf. All rights reserved.
 //
 
-import Alamofire
+import Foundation
 
 final class Service {
     // MARK: - Singleton
