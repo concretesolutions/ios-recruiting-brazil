@@ -1,0 +1,22 @@
+platform :ios, '9.0'
+
+
+def shared_pods
+    pod 'SwiftLint'
+    pod 'Kingfisher'
+    pod 'SwipeCellKit'
+    pod 'SVProgressHUD'
+end
+
+target 'movs' do
+  use_frameworks!
+
+shared_pods
+
+end
+
+target 'movsUITests' do
+
+shared_pods
+
+end
