@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterListScreenDelegate: class {
-    func appliedFilters()
+    func appliedFilters(date: String, genre: String)
 }
 
 final class FilterListScreen: UIViewController {
@@ -25,7 +25,7 @@ final class FilterListScreen: UIViewController {
     struct FilterSegue {
         let name: String
         let segueId: String
-        let selected: String
+        var selected: String
     }
 }
 
@@ -68,7 +68,8 @@ extension FilterListScreen: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: FilterListCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.setup(title: filters[indexPath.row].name, filter: "")
+        cell.setup(title: filters[indexPath.row].name,
+                   filter: filters[indexPath.row].selected)
         return cell
     }
 }
@@ -85,7 +86,8 @@ extension FilterListScreen: UITableViewDelegate {
 // MARK: - IBActions
 extension FilterListScreen {
     @IBAction private func tappedApplyFilters(_ sender: Any) {
-        delegate?.appliedFilters()
+        delegate?.appliedFilters(date: filters[0].selected,
+                                 genre: filters[1].selected)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -93,13 +95,15 @@ extension FilterListScreen {
 // MARK: - FilterDateScreenDelegate
 extension FilterListScreen: FilterDateScreenDelegate {
     func didSelectDate(_ dateString: String) {
-
+        filters[0].selected = dateString
+        filtersTableView.reloadData()
     }
 }
 
 // MARK: - FilterGenresScreenDelegate
 extension FilterListScreen: FilterGenresScreenDelegate {
     func didSelectGenre(_ genre: Genre) {
-
+        filters[1].selected = genre.name
+        filtersTableView.reloadData()
     }
 }
