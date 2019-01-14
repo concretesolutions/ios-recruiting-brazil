@@ -22,7 +22,12 @@
 		2F3112FD21E669230052C44C /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3112FC21E669230052C44C /* MovieModel.swift */; };
 		2F3CCA0621E771B8009FE28B /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3CCA0521E771B8009FE28B /* MoviesViewModel.swift */; };
 		2F3CCA0921E781E4009FE28B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3CCA0821E781E4009FE28B /* DetailsViewController.swift */; };
+		2F4A176021E90CA0009D019C /* FavoriteMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A175F21E90CA0009D019C /* FavoriteMoviesViewController.swift */; };
+		2F4A176221E9141A009D019C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4A176121E9141A009D019C /* libsqlite3.0.tbd */; };
+		2F4A176421E9147E009D019C /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A176321E9147E009D019C /* DBManager.swift */; };
 		2F5E117721E7BB14004F7571 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E117621E7BB14004F7571 /* DetailsViewModel.swift */; };
+		2F77CCBD21EA7E3B0095B29D /* FavoriteMoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F77CCBC21EA7E3B0095B29D /* FavoriteMoviesTableViewCell.swift */; };
+		2FE8EAFD21EBA81100E4401A /* FavoriteMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE8EAFC21EBA81100E4401A /* FavoriteMoviesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +69,12 @@
 		2F3112FC21E669230052C44C /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		2F3CCA0521E771B8009FE28B /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		2F3CCA0821E781E4009FE28B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		2F4A175F21E90CA0009D019C /* FavoriteMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesViewController.swift; sourceTree = "<group>"; };
+		2F4A176121E9141A009D019C /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		2F4A176321E9147E009D019C /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		2F5E117621E7BB14004F7571 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		2F77CCBC21EA7E3B0095B29D /* FavoriteMoviesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesTableViewCell.swift; sourceTree = "<group>"; };
+		2FE8EAFC21EBA81100E4401A /* FavoriteMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesViewModel.swift; sourceTree = "<group>"; };
 		57650664B9F14C12962D810F /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
 		CEBD7C7B65B4974AB51D9302 /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F4A176221E9141A009D019C /* libsqlite3.0.tbd in Frameworks */,
 				071A83B51D896F0C60503BFA /* Pods_Movies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +167,7 @@
 			children = (
 				2F3112F221E6623F0052C44C /* RequestMaker.swift */,
 				2F3112F421E663040052C44C /* Parser.swift */,
+				2F4A176321E9147E009D019C /* DBManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -163,6 +175,7 @@
 		2F3112F021E662190052C44C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2F4A175E21E90C7E009D019C /* FavoriteMoviesView */,
 				2F3CCA0721E781B6009FE28B /* MovieDetailsView */,
 				2F3112F621E6644D0052C44C /* MoviesView */,
 			);
@@ -204,6 +217,24 @@
 			path = MovieDetailsView;
 			sourceTree = "<group>";
 		};
+		2F4A175E21E90C7E009D019C /* FavoriteMoviesView */ = {
+			isa = PBXGroup;
+			children = (
+				2F77CCBB21EA7E1C0095B29D /* Cell */,
+				2F4A175F21E90CA0009D019C /* FavoriteMoviesViewController.swift */,
+				2FE8EAFC21EBA81100E4401A /* FavoriteMoviesViewModel.swift */,
+			);
+			path = FavoriteMoviesView;
+			sourceTree = "<group>";
+		};
+		2F77CCBB21EA7E1C0095B29D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2F77CCBC21EA7E3B0095B29D /* FavoriteMoviesTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		97134BF4938CA447620FABD9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +247,7 @@
 		9FC7B894EC17157958F3D833 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F4A176121E9141A009D019C /* libsqlite3.0.tbd */,
 				21CD5990B348AE5B0C5133D7 /* Pods_Movies.framework */,
 			);
 			name = Frameworks;
@@ -383,6 +415,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Movies/Pods-Movies-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -390,6 +423,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -405,13 +439,17 @@
 			files = (
 				2F3112FD21E669230052C44C /* MovieModel.swift in Sources */,
 				2F3112F521E663040052C44C /* Parser.swift in Sources */,
+				2F4A176021E90CA0009D019C /* FavoriteMoviesViewController.swift in Sources */,
 				2F3CCA0921E781E4009FE28B /* DetailsViewController.swift in Sources */,
 				2F132E0621E6540100A5CD85 /* ViewController.swift in Sources */,
 				2F3112F821E664CD0052C44C /* MoviesViewController.swift in Sources */,
 				2F3112FB21E668120052C44C /* MoviesCollectionViewCell.swift in Sources */,
+				2F4A176421E9147E009D019C /* DBManager.swift in Sources */,
 				2F3112F321E6623F0052C44C /* RequestMaker.swift in Sources */,
 				2F5E117721E7BB14004F7571 /* DetailsViewModel.swift in Sources */,
 				2F132E0421E6540100A5CD85 /* AppDelegate.swift in Sources */,
+				2FE8EAFD21EBA81100E4401A /* FavoriteMoviesViewModel.swift in Sources */,
+				2F77CCBD21EA7E3B0095B29D /* FavoriteMoviesTableViewCell.swift in Sources */,
 				2F3CCA0621E771B8009FE28B /* MoviesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

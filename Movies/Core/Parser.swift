@@ -45,4 +45,25 @@ class Parser{
         let JSONresponse = response as? [String : Any]
         genres = JSONresponse?["genres"] as? [[String : Any]]
     }
+    
+    //MARK: Parsing thing from Database
+    func parseGenresID(fromDatabase genresToParse: String) -> [Int]{
+        var genresIDArray = [Int]()
+        
+        let stringGenresId = genresToParse.components(separatedBy: ", ")
+        
+        stringGenresId.forEach{ genreID in
+            if(genreID != ""){
+                genresIDArray.append(Int(genreID)!)
+            }
+        }
+        
+        return genresIDArray
+    }
+    
+   /* func parseGenres(fromDatabase genresToParse: String) -> [String]{
+        var genresArray = [String]()
+
+        return genresArray
+    }*/
 }

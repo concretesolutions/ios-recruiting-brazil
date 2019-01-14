@@ -16,9 +16,11 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var movieGenresLabel: UILabel!
     @IBOutlet weak var moviePopularityLabel: UILabel!
     @IBOutlet weak var movieDescriptionLabel: UILabel!
+    @IBOutlet weak var FavoritesButton: UIButton!
     
     var selectedMovie: MovieModel?
     var model: DetailsViewModel?
+    var isFavorite: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,25 +37,42 @@ class DetailsViewController: UIViewController {
         movieDescriptionLabel.text = selectedMovie?.overview
         movieDescriptionLabel.sizeToFit()
         
-        model?.getGenres(forMovie: selectedMovie!)
-        
-        var genresString = NSMutableString()
-        selectedMovie?.genresStringArray.forEach { genre in
-            genresString.append("\(genre), ")
+        if(selectedMovie?.genresStringSet.count == 0){
+            model?.getGenres(forMovie: selectedMovie!)
         }
-//        genresString.deleteCharacters(in: NSRange(location: genresString.length - 3, length: genresString.length-1) )
+        let genresString = NSMutableString()
+        selectedMovie?.genresStringSet.forEach { genre in
+            if (genre != ""){
+                genresString.append("\(genre), ")
+            }
+        }
         let genreToDisplay = genresString.substring(to: genresString.length-2)
         movieGenresLabel.text = genreToDisplay as String
+        
+        isFavorite = model!.verifyIfFavorite(selectedMovie: selectedMovie!)
+        if (isFavorite){
+            FavoritesButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+        } else {
+            FavoritesButton.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+        }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func didPressFavoritesButton(_ sender: Any) {
+        if (!isFavorite){
+            FavoritesButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            model?.addToFavorites(selectedMovie: selectedMovie!)
+        } else {
+            let deleteMenu = UIAlertController(title: "Remove From Favorites", message: "Are you sure you want to remove \(selectedMovie!.title) from your favorites?", preferredStyle: UIAlertController.Style.actionSheet)
+            let removeAction = UIAlertAction(title: "Remove", style: UIAlertAction.Style.destructive, handler: { (action) in
+                self.model?.remove(fromFavorites: self.selectedMovie!)
+                self.FavoritesButton.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
+            
+            deleteMenu.addAction(removeAction)
+            deleteMenu.addAction(cancelAction)
+            
+            self.present(deleteMenu, animated: true, completion: nil)
+        }
     }
-    */
-
 }

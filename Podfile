@@ -6,4 +6,5 @@ use_frameworks!
 target 'Movies' do
   pod 'AlamofireImage'
   pod 'Alamofire'
+  pod 'FMDB'
 end

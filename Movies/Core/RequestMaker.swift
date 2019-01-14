@@ -10,12 +10,11 @@ import Foundation
 import Alamofire
 import AlamofireImage
 
-@objc protocol RequestDelegate: class{
-    @objc optional func didLoadPopularMovies(movies:[MovieModel] )
-    @objc optional func didLoadPopularMoviesWithThumbnail(movies:[MovieModel])
-    /*@objc optional func didFailToLoadCategories(withError error: Error)
-    @objc optional func didLoadJoke(loadedJoke: Joke)
-    @objc optional func didFailToLoadJoke(withError error: Error)*/
+protocol RequestDelegate: class{
+    func didLoadPopularMovies(movies:[MovieModel] )
+    func didLoadPopularMoviesWithThumbnail(movies:[MovieModel])
+    func didFailToLoadPopularMovies(withError error: Error)
+    func didFailToLoadGenres(withError error: Error)
 }
 
 class RequestMaker {
@@ -32,10 +31,9 @@ class RequestMaker {
                 
             case .success(let JSON):
                 let moviesArray = self.responseParser.parseMovies(response: JSON)
-                self.delegate?.didLoadPopularMovies!(movies: moviesArray)
-//                print("Success:\(JSON)")
+                self.delegate?.didLoadPopularMovies(movies: moviesArray)
             case .failure(let error):
-//                self.delegate?.didFailToLoadCategories!(withError: error)
+                self.delegate?.didFailToLoadPopularMovies(withError: error)
                 print("Error:\(error.localizedDescription)")
             }
         }
@@ -48,7 +46,7 @@ class RequestMaker {
                 movie.isThumbnailLoaded = true
             })
             if (movie.isEqual(movies.last)){
-                self.delegate?.didLoadPopularMoviesWithThumbnail!(movies: movies)
+                self.delegate?.didLoadPopularMoviesWithThumbnail(movies: movies)
             }
         }
     }
@@ -68,13 +66,9 @@ class RequestMaker {
             switch response.result{
                 
             case .success(let JSON):
-                //let moviesArray = responseParser.parseMovies(response: JSON)
-                //self.delegate?.didLoadPopularMovies!(movies: moviesArray)
                 self.responseParser.parseGenres(response: JSON)
-                print("Success:\(JSON)")
             case .failure(let error):
-                //                self.delegate?.didFailToLoadCategories!(withError: error)
-                print("Error:\(error.localizedDescription)")
+                self.delegate?.didFailToLoadGenres(withError: error)
             }
         }
     }
