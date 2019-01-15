@@ -17,7 +17,6 @@ class FavoriteMoviesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func setupForMovie(Movie: MovieModel) {
@@ -26,11 +25,4 @@ class FavoriteMoviesTableViewCell: UITableViewCell {
         movieYearLabel.text = "\(Movie.releaseYear.year!)"
         moviePosterImageView.image = Movie.thumbnail
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

@@ -14,6 +14,7 @@ class Parser{
     
     var genres: [[String: Any]]?
     
+    //MARK: Parsing information from the API
     func parseMovies(response: Any) -> [MovieModel] {
         let JSONresponse = response as? [String : Any]
         let values = JSONresponse?["results"] as? [[String : Any]]
@@ -46,7 +47,7 @@ class Parser{
         genres = JSONresponse?["genres"] as? [[String : Any]]
     }
     
-    //MARK: Parsing thing from Database
+    //MARK: Parsing information from Database
     func parseGenresID(fromDatabase genresToParse: String) -> [Int]{
         var genresIDArray = [Int]()
         
@@ -60,10 +61,4 @@ class Parser{
         
         return genresIDArray
     }
-    
-   /* func parseGenres(fromDatabase genresToParse: String) -> [String]{
-        var genresArray = [String]()
-
-        return genresArray
-    }*/
 }

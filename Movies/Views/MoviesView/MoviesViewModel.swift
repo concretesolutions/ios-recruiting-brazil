@@ -58,5 +58,4 @@ class MoviesViewModel: RequestDelegate{
         pageToRequest = pageToRequest + 1
         self.requestMaker.requestPopular(pageToRequest: pageToRequest)
     }
-    
 }

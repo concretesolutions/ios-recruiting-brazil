@@ -13,15 +13,9 @@ class FavoriteMoviesViewController: UITableViewController {
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
     
     var model: FavoriteMoviesViewModel?
-    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchController.searchResultsUpdater = self as? UISearchResultsUpdating
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Favorites"
-        definesPresentationContext = true
         
         loadingActivityIndicator.startAnimating()
         loadingActivityIndicator.hidesWhenStopped = true;
@@ -31,7 +25,7 @@ class FavoriteMoviesViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         model?.verifyIfFavoritesIsUpdated()
         self.tabBarController?.navigationItem.title = "Favorites"
-        self.tabBarController?.navigationItem.searchController = searchController
+        self.tabBarController?.navigationItem.searchController = nil
         self.tableView.reloadData()
     }
     
@@ -82,7 +76,6 @@ class FavoriteMoviesViewController: UITableViewController {
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedCell = sender as! FavoriteMoviesTableViewCell
         let selectedCellIndexPath = self.tableView.indexPath(for: selectedCell)

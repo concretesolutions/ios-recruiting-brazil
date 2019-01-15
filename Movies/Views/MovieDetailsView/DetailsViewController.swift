@@ -32,7 +32,7 @@ class DetailsViewController: UIViewController {
         posterImageViewController.image = selectedMovie?.thumbnail
         movieNameLabel.text = selectedMovie?.title
         movieYearLabel.text = "\(selectedMovie!.releaseYear.year!)"
-        movieGenresLabel.text = "Haha"
+        movieGenresLabel.text = "Loading Genres..."
         moviePopularityLabel.text = "Popularity: \(selectedMovie!.popularity)"
         movieDescriptionLabel.text = selectedMovie?.overview
         movieDescriptionLabel.sizeToFit()
@@ -46,6 +46,7 @@ class DetailsViewController: UIViewController {
                 genresString.append("\(genre), ")
             }
         }
+        
         let genreToDisplay = genresString.substring(to: genresString.length-2)
         movieGenresLabel.text = genreToDisplay as String
         
