@@ -87,8 +87,8 @@ class DBManager {
                     let thumbPath = haveFavoritesSaved.string(forColumn: "thumbnailPath")
                     let isThumbnailLoaded = haveFavoritesSaved.bool(forColumn: "isThumbnailLoaded")
                     let releaseDateString = haveFavoritesSaved.string(forColumn: "releaseDateString")
-                    let genresID = haveFavoritesSaved.string(forColumn: "genresID") //Attention
-                    let genresString = haveFavoritesSaved.string(forColumn: "genresString") //Attention
+                    let genresID = haveFavoritesSaved.string(forColumn: "genresID")
+                    let genresString = haveFavoritesSaved.string(forColumn: "genresString")
                     
                     let parsedGenresID = infoParser.parseGenresID(fromDatabase: genresID!)
                     let parsedGenres = genresString?.components(separatedBy: ",")
@@ -214,19 +214,4 @@ class DBManager {
         }
         return isFavorite
     }
-    /* My Prototypes
-    
-     open func removeFromFavorites(movie: MovieModel) {
-     
-     }
-     
-     Precisa desses??
-     open func createFavoritesTable {
-     
-     }
-     
-     open func createVersionTable {
-     
-     }
-     */
 }

@@ -72,7 +72,7 @@ class MoviesViewController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MoviesCollectionViewCell else {
             fatalError("Not a category cell")
         }
-        let movieToSetup: MovieModel?//model?.moviesArray[indexPath.row]
+        let movieToSetup: MovieModel?
         if (isFiltering()) {
             movieToSetup = filteredMovies[indexPath.row]
         } else {

@@ -29,6 +29,12 @@ class DetailsViewController: UIViewController {
         
         self.navigationItem.title = "\(selectedMovie!.title)"
         
+        setupMovieInfo()
+        setupGenreInfo()
+        setupFavoriteInfo()
+    }
+
+    func setupMovieInfo(){
         posterImageViewController.image = selectedMovie?.thumbnail
         movieNameLabel.text = selectedMovie?.title
         movieYearLabel.text = "\(selectedMovie!.releaseYear.year!)"
@@ -36,7 +42,9 @@ class DetailsViewController: UIViewController {
         moviePopularityLabel.text = "Popularity: \(selectedMovie!.popularity)"
         movieDescriptionLabel.text = selectedMovie?.overview
         movieDescriptionLabel.sizeToFit()
-        
+    }
+    
+    func setupGenreInfo(){
         if(selectedMovie?.genresStringSet.count == 0){
             model?.getGenres(forMovie: selectedMovie!)
         }
@@ -49,7 +57,9 @@ class DetailsViewController: UIViewController {
         
         let genreToDisplay = genresString.substring(to: genresString.length-2)
         movieGenresLabel.text = genreToDisplay as String
-        
+    }
+    
+    func setupFavoriteInfo(){
         isFavorite = model!.verifyIfFavorite(selectedMovie: selectedMovie!)
         if (isFavorite){
             FavoritesButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
@@ -57,7 +67,7 @@ class DetailsViewController: UIViewController {
             FavoritesButton.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
         }
     }
-
+    
     @IBAction func didPressFavoritesButton(_ sender: Any) {
         if (!isFavorite){
             FavoritesButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
