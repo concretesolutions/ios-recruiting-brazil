@@ -4,6 +4,9 @@ platform :ios, '12.0'
 def test_pods
     pod 'Quick'
     pod 'Nimble'
+    pod 'Nimble-Snapshots'
+    pod 'KIF'
+    pod 'KIF-Quick'
 end
 
 
@@ -14,6 +17,12 @@ target 'PhilmaXXX' do
   # Pods for PhilmaXXX
   pod 'Kingfisher'
   pod 'Eureka'
+
+  target 'PhilmaXXXTests' do
+    inherit! :search_paths
+
+    test_pods
+  end
 
 end
 

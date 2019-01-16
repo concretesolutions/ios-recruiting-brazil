@@ -69,7 +69,7 @@ final class FavoritesFilterVC: FormViewController {
 					to.selectableRowCellSetup = { cell, row in
 						if let item = row.selectableValue {
 							row.title = item.yearDescription
-						}
+                        }
 					}
 				})
 		form = form

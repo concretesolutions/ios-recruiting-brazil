@@ -1,26 +1,45 @@
 PODS:
-  - Alamofire (4.7.3)
-  - Eureka (4.3.0)
-  - Kingfisher (4.10.0)
-  - Moya (11.0.2):
-    - Moya/Core (= 11.0.2)
-  - Moya/Core (11.0.2):
+  - Alamofire (4.8.0)
+  - Eureka (4.3.1)
+  - iOSSnapshotTestCase (4.0.1):
+    - iOSSnapshotTestCase/SwiftSupport (= 4.0.1)
+  - iOSSnapshotTestCase/Core (4.0.1)
+  - iOSSnapshotTestCase/SwiftSupport (4.0.1):
+    - iOSSnapshotTestCase/Core
+  - KIF (3.7.4):
+    - KIF/Core (= 3.7.4)
+  - KIF-Quick (1.1.0):
+    - KIF (~> 3.0)
+    - Quick (~> 1.0)
+  - KIF/Core (3.7.4)
+  - Kingfisher (5.1.0)
+  - Moya (12.0.1):
+    - Moya/Core (= 12.0.1)
+  - Moya/Core (12.0.1):
     - Alamofire (~> 4.1)
-    - Result (~> 3.0)
+    - Result (~> 4.0)
   - Nimble (7.3.1)
+  - Nimble-Snapshots (6.9.0):
+    - Nimble-Snapshots/Core (= 6.9.0)
+  - Nimble-Snapshots/Core (6.9.0):
+    - iOSSnapshotTestCase (~> 4.0)
+    - Nimble (~> 7.0)
   - Quick (1.3.2)
-  - Realm (3.11.1):
-    - Realm/Headers (= 3.11.1)
-  - Realm/Headers (3.11.1)
-  - RealmSwift (3.11.1):
-    - Realm (= 3.11.1)
-  - Result (3.2.4)
+  - Realm (3.13.1):
+    - Realm/Headers (= 3.13.1)
+  - Realm/Headers (3.13.1)
+  - RealmSwift (3.13.1):
+    - Realm (= 3.13.1)
+  - Result (4.1.0)
 
 DEPENDENCIES:
   - Eureka
+  - KIF
+  - KIF-Quick
   - Kingfisher
   - Moya
   - Nimble
+  - Nimble-Snapshots
   - Quick
   - Realm
   - RealmSwift
@@ -29,25 +48,33 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Eureka
+    - iOSSnapshotTestCase
+    - KIF
+    - KIF-Quick
     - Kingfisher
     - Moya
     - Nimble
+    - Nimble-Snapshots
     - Quick
     - Realm
     - RealmSwift
     - Result
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  Eureka: 6d711cb30ca333b4bc893110285a722ae3840114
-  Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
-  Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Eureka: 28ea296f06710f6745266b71f17862048941a32d
+  iOSSnapshotTestCase: f3b2b7e606fe03fdbe49af84316bd235df32dc44
+  KIF: f3d01c109ee9d1cfe6b0f2bb2aa278e807e971e2
+  KIF-Quick: da968bbfad615fd96c0d5eb4d8fd484ecdc26814
+  Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
+  Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
+  Nimble-Snapshots: 79394f8d0aea3df54bd5ff78ee9dff05a523a09c
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
-  Realm: 037c5919b9ceb59d6beed5d3b031096856b119b3
-  RealmSwift: c9580133e73ef40ed340401af2dbc9a5790dfea7
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
+  RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
 
-PODFILE CHECKSUM: a9a9ba3c85d8e9995256cfd52692464121057e17
+PODFILE CHECKSUM: 06544a3beda3e8a6b3252069034a034f43c8ac1b
 
 COCOAPODS: 1.5.3
