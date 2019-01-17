@@ -24,6 +24,11 @@ class FavoritesListViewController: UIViewController {
     
     @IBAction func removeFilterPressed(_ sender: Any) {
     }
+    
+    @IBAction func filterButtonPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: self.segueID, sender: self)
+    }
+    
 }
 
 extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegate{
