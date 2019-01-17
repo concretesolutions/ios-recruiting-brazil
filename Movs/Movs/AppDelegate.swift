@@ -22,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Settins.savePosterSize(size: posterSize)
             }
         }
+        
+        TMDBHelper.shared.getListOfGenres { (error, genres) in
+            if let genres = genres{
+                LocalDataHelper.shared.genres = genres
+            }
+        }
         return true
     }
 
