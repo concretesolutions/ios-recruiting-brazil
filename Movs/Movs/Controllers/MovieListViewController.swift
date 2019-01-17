@@ -19,6 +19,12 @@ class MovieListViewController: UIViewController {
         self.moviesCollection.delegate = self
         self.moviesCollection.dataSource = self
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        TMDBHelper.shared.getListOfMovies { (error, movies) in
+            print(movies)
+        }
+    }
 }
 
 extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

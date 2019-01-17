@@ -12,36 +12,28 @@ fileprivate let POSTER_SIZE_KEY = "poster_size_key"
 fileprivate let BASE_URL_KEY = "base_url_key"
 
 class Settins {
-    var posterSize: String?{
-        get{
-            let defaults = UserDefaults.standard
-            guard let size = defaults.string(forKey: POSTER_SIZE_KEY) else{
-                return nil
-            }
-            return size
-        }
-        set(value){
-            let defaults = UserDefaults.standard
-            defaults.set(value, forKey: POSTER_SIZE_KEY)
-        }
+    static let defaults = UserDefaults.standard
+    
+    class func savePosterSize(size: String) {
+        defaults.set(size, forKey: POSTER_SIZE_KEY)
     }
     
-    var baseUrl: String?{
-        get{
-            let defaults = UserDefaults.standard
-            guard let url = defaults.string(forKey: BASE_URL_KEY) else{
-                return nil
-            }
-            return url
+    class func getPosterSize() -> String? {
+        guard let size = defaults.string(forKey: POSTER_SIZE_KEY) else {
+            return nil
         }
-        set(value){
-            let defaults = UserDefaults.standard
-            defaults.set(value, forKey: BASE_URL_KEY)
-        }
+        return size
     }
     
-    init(posterSize: String, baseUrl: String){
-        self.posterSize = posterSize
-        self.baseUrl = baseUrl
+    
+    class func saveBaseUrl(baseUrl: String) {
+        defaults.set(baseUrl, forKey: BASE_URL_KEY)
+    }
+    
+    class func getBaseUrl() -> String? {
+        guard let baseUrl = defaults.string(forKey: BASE_URL_KEY) else {
+            return nil
+        }
+        return baseUrl
     }
 }
