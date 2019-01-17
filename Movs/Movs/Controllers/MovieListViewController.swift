@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieListViewController: UIViewController {
     
     @IBOutlet weak var moviesCollection: UICollectionView!
     private let cellID = "movieCollectionCellID"
     private let segueID = "listOfMoviesToMovieDetail"
+    private var movieList: [MovieModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +23,11 @@ class MovieListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        TMDBHelper.shared.getListOfMovies { (error, movies) in
-            print(movies)
+        TMDBHelper.shared.getListOfMovies { [unowned self] (error, movies) in
+            if let movies = movies{
+                self.movieList = movies
+                self.moviesCollection.reloadData()
+            }
         }
     }
 }
@@ -31,11 +36,20 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellID, for: indexPath) as! MovieCollectionViewCell
         
+        let movie = self.movieList[indexPath.row]
+        cell.movieName.text = movie.title
+        cell .movieFavoImage.image = movie.favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
+        let paceholder = #imageLiteral(resourceName: "placeholder")
+        if let url = URL(string: movie.posterURl ?? ""){
+            cell.movieImage.kf.setImage(with: url, placeholder: paceholder)
+        }else{
+            cell.movieImage.image = paceholder
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.movieList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
