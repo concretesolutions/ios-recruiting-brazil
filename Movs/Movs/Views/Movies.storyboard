@@ -131,15 +131,8 @@
                                             <constraint firstAttribute="height" constant="360" id="d9t-Im-ATq"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_full_icon" translatesAutoresizingMaskIntoConstraints="NO" id="rAl-UT-SXa">
-                                        <rect key="frame" x="290" y="400" width="20" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="NZI-ys-PGr"/>
-                                            <constraint firstAttribute="height" constant="20" id="wpp-f8-xRc"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isso é o nome do filme " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3x-Ak-1tg">
-                                        <rect key="frame" x="10" y="400" width="270" height="21"/>
+                                        <rect key="frame" x="10" y="400" width="176" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="3oK-r8-C5v"/>
                                         </constraints>
@@ -174,6 +167,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIL-hJ-1Hu">
+                                        <rect key="frame" x="290" y="400" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Bug-7t-Sbz"/>
+                                            <constraint firstAttribute="width" constant="20" id="IHu-IO-8fc"/>
+                                        </constraints>
+                                        <state key="normal" image="favorite_full_icon"/>
+                                        <connections>
+                                            <action selector="movieFavoButtonPressed:" destination="ry7-Eq-Nsm" eventType="touchUpInside" id="RtS-NH-8Yp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="0HB-mq-q5W" secondAttribute="trailing" constant="10" id="1jc-ZM-DlW"/>
@@ -183,15 +187,14 @@
                                     <constraint firstAttribute="trailing" secondItem="Sc2-fJ-OGR" secondAttribute="trailing" constant="10" id="9d2-Ic-4bs"/>
                                     <constraint firstAttribute="trailing" secondItem="V2V-6y-8Jf" secondAttribute="trailing" constant="10" id="GdM-TX-u1W"/>
                                     <constraint firstItem="0HB-mq-q5W" firstAttribute="top" secondItem="aS9-BR-jSx" secondAttribute="bottom" constant="30" id="Jvc-Kr-P8j"/>
-                                    <constraint firstAttribute="trailing" secondItem="rAl-UT-SXa" secondAttribute="trailing" constant="10" id="Mcq-Lr-XoD"/>
                                     <constraint firstAttribute="trailing" secondItem="aS9-BR-jSx" secondAttribute="trailing" constant="10" id="NVU-33-Lo4"/>
-                                    <constraint firstItem="rAl-UT-SXa" firstAttribute="top" secondItem="V2V-6y-8Jf" secondAttribute="bottom" constant="20" id="Zkd-S7-eEk"/>
-                                    <constraint firstItem="rAl-UT-SXa" firstAttribute="leading" secondItem="R3x-Ak-1tg" secondAttribute="trailing" constant="10" id="alm-UZ-fck"/>
+                                    <constraint firstItem="cIL-hJ-1Hu" firstAttribute="top" secondItem="V2V-6y-8Jf" secondAttribute="bottom" constant="20" id="W4U-sb-owI"/>
                                     <constraint firstItem="V2V-6y-8Jf" firstAttribute="top" secondItem="fQv-sF-vyi" secondAttribute="top" constant="20" id="dXJ-X7-i8F"/>
                                     <constraint firstItem="Sc2-fJ-OGR" firstAttribute="leading" secondItem="fQv-sF-vyi" secondAttribute="leading" constant="10" id="dqV-QG-3wi"/>
                                     <constraint firstItem="aS9-BR-jSx" firstAttribute="top" secondItem="Sc2-fJ-OGR" secondAttribute="bottom" constant="30" id="gIR-g7-8eH"/>
                                     <constraint firstItem="0HB-mq-q5W" firstAttribute="leading" secondItem="fQv-sF-vyi" secondAttribute="leading" constant="10" id="kNw-dW-9e3"/>
                                     <constraint firstItem="V2V-6y-8Jf" firstAttribute="centerX" secondItem="fQv-sF-vyi" secondAttribute="centerX" id="lCo-w2-65h"/>
+                                    <constraint firstAttribute="trailing" secondItem="cIL-hJ-1Hu" secondAttribute="trailing" constant="10" id="p4e-cI-JXZ"/>
                                     <constraint firstItem="R3x-Ak-1tg" firstAttribute="leading" secondItem="fQv-sF-vyi" secondAttribute="leading" constant="10" id="vB9-Hd-ZMa"/>
                                     <constraint firstItem="aS9-BR-jSx" firstAttribute="leading" secondItem="fQv-sF-vyi" secondAttribute="leading" constant="10" id="viC-Wt-GcT"/>
                                     <constraint firstItem="Sc2-fJ-OGR" firstAttribute="top" secondItem="R3x-Ak-1tg" secondAttribute="bottom" constant="30" id="x9e-Cs-Mrt"/>
@@ -210,7 +213,7 @@
                     <size key="freeformSize" width="320" height="750"/>
                     <connections>
                         <outlet property="movieCategory" destination="aS9-BR-jSx" id="TJl-11-AtA"/>
-                        <outlet property="movieFavoImage" destination="rAl-UT-SXa" id="7lI-pd-NwG"/>
+                        <outlet property="movieFavoButton" destination="cIL-hJ-1Hu" id="Bpi-j1-nvm"/>
                         <outlet property="moviePoster" destination="V2V-6y-8Jf" id="KWN-nZ-e0v"/>
                         <outlet property="movieSinopse" destination="0HB-mq-q5W" id="YFO-4s-iGY"/>
                         <outlet property="movieTitle" destination="R3x-Ak-1tg" id="vAO-uJ-PVX"/>

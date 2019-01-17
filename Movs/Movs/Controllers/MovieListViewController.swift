@@ -15,6 +15,7 @@ class MovieListViewController: UIViewController {
     private let cellID = "movieCollectionCellID"
     private let segueID = "listOfMoviesToMovieDetail"
     private var movieList: [MovieModel] = []
+    private var selecteMovie: MovieModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,11 @@ class MovieListViewController: UIViewController {
                 self.moviesCollection.reloadData()
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MovieDetailViewController
+        vc.movie = self.selecteMovie
     }
 }
 
@@ -53,6 +59,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selecteMovie = self.movieList[indexPath.row]
         self.performSegue(withIdentifier: self.segueID, sender: self)
     }
     

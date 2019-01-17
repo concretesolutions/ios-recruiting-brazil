@@ -27,10 +27,10 @@ class MovieModel {
     var id: Int
     
     init(json: JSON) {
+        self.favority = false
         self.title = json[JSON_TITLE_KEY].stringValue
         self.description = json[JSON_DESCRIPTION_KEY].stringValue
         self.genresIds = json[JSON_GENRES_IDS_KEY].arrayValue.map({$0.intValue})
-        self.favority = false
         self.id = json[JSON_ID_KEY].intValue
         
         let posterPath = json[JSON_POSTER_KEY].stringValue
