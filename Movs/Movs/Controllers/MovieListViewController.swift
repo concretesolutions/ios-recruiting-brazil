@@ -46,7 +46,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.movieName.text = movie.title
         cell .movieFavoImage.image = movie.favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
         let paceholder = #imageLiteral(resourceName: "placeholder")
-        if let url = URL(string: movie.posterURl ?? ""){
+        if let url = URL(string: movie.posterURl){
             cell.movieImage.kf.setImage(with: url, placeholder: paceholder)
         }else{
             cell.movieImage.image = paceholder

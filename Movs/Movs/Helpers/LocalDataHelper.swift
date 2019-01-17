@@ -9,5 +9,13 @@
 import Foundation
 class LocalDataHelper {
     static let shared = LocalDataHelper()
-    var genres: [GenreModel] = []
+    private var genres: [GenreModel] = []
+    
+    func saveGenres(genres: [GenreModel]){
+        self.genres = genres
+    }
+    
+    func getGenres() -> [GenreModel]{
+        return self.genres
+    }
 }

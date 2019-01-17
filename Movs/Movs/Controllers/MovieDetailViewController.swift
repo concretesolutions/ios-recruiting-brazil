@@ -32,11 +32,15 @@ class MovieDetailViewController: UIViewController {
         self.movieFavoButton.setImage(imageFav, for: .normal)
         
         let paceholder = #imageLiteral(resourceName: "placeholder")
-        if let url = URL(string: movie.posterURl ?? ""){
+        if let url = URL(string: movie.posterURl){
             self.moviePoster.kf.setImage(with: url, placeholder: paceholder)
-        }else{
-            self.moviePoster.image = paceholder
-        }
+        }else{ self.moviePoster.image = paceholder }
+        
+        let genres: [String] = LocalDataHelper.shared.getGenres().filter { [unowned self] (genre) -> Bool in
+            return self.movie.genresIds.contains(genre.id)
+        }.map({$0.name})
+        
+        self.movieCategory.text = genres.joined(separator: ", ")
     }
     
     @IBAction func movieFavoButtonPressed(_ sender: Any) {

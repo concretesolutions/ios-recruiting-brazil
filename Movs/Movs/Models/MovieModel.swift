@@ -19,11 +19,10 @@ fileprivate let JSON_DATE_KEY = "release_date"
 class MovieModel {
     var title: String
     var year: String
-    var genres: [String]?
     var genresIds: [Int]
     var description: String
     var favority: Bool
-    var posterURl: String?
+    var posterURl: String
     var id: Int
     
     init(json: JSON) {
@@ -35,7 +34,7 @@ class MovieModel {
         
         let posterPath = json[JSON_POSTER_KEY].stringValue
         
-        self.posterURl = nil
+        self.posterURl = ""
         if let posterSize = Settins.getPosterSize(), let baseURL = Settins.getBaseUrl(){
             self.posterURl = "\(baseURL)\(posterSize)\(posterPath)"
         }

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         TMDBHelper.shared.getListOfGenres { (error, genres) in
             if let genres = genres{
-                LocalDataHelper.shared.genres = genres
+                LocalDataHelper.shared.saveGenres(genres: genres)
             }
         }
         return true
