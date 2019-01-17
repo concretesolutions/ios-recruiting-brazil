@@ -23,9 +23,13 @@
 		15FFC3D121F0282A005F356A /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFC3D021F0282A005F356A /* FilterViewController.swift */; };
 		15FFC3D321F02CA9005F356A /* FilterValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFC3D221F02CA9005F356A /* FilterValueTableViewCell.swift */; };
 		15FFC3D521F02D83005F356A /* FilterValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFC3D421F02D83005F356A /* FilterValueViewController.swift */; };
+		15FFC3D821F101AE005F356A /* TMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFC3D721F101AE005F356A /* TMDBHelper.swift */; };
+		15FFC3DA21F10A78005F356A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFC3D921F10A78005F356A /* Settings.swift */; };
+		7E62A87FD83106C1BB9A0C3D /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0416E4A805D9EF37DA2F1D94 /* Pods_Movs.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0416E4A805D9EF37DA2F1D94 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1569955321EFD6EB0085D015 /* Movies.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Movies.storyboard; sourceTree = "<group>"; };
 		1569955521EFD78E0085D015 /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		1569955B21EFE3380085D015 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +48,10 @@
 		15FFC3D021F0282A005F356A /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		15FFC3D221F02CA9005F356A /* FilterValueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterValueTableViewCell.swift; sourceTree = "<group>"; };
 		15FFC3D421F02D83005F356A /* FilterValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterValueViewController.swift; sourceTree = "<group>"; };
+		15FFC3D721F101AE005F356A /* TMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBHelper.swift; sourceTree = "<group>"; };
+		15FFC3D921F10A78005F356A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		1E5C360902B22860CA7CD5C6 /* Pods-Movs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.release.xcconfig"; sourceTree = "<group>"; };
+		B9CCD464C7B090AA2CAFF5B8 /* Pods-Movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E62A87FD83106C1BB9A0C3D /* Pods_Movs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,12 +98,13 @@
 			path = Res;
 			sourceTree = "<group>";
 		};
-		1569956121EFE9350085D015 /* Utils */ = {
+		1569956121EFE9350085D015 /* Extras */ = {
 			isa = PBXGroup;
 			children = (
 				1569955F21EFE92E0085D015 /* Extensions.swift */,
+				15FFC3D921F10A78005F356A /* Settings.swift */,
 			);
-			path = Utils;
+			path = Extras;
 			sourceTree = "<group>";
 		};
 		15FEEA5521EFD5A90063CB33 = {
@@ -102,6 +112,8 @@
 			children = (
 				15FEEA6021EFD5A90063CB33 /* Movs */,
 				15FEEA5F21EFD5A90063CB33 /* Products */,
+				88C87A87BF567601B646D0FD /* Pods */,
+				478EFEA4B9FE6AE23D555D07 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,7 +128,8 @@
 		15FEEA6021EFD5A90063CB33 /* Movs */ = {
 			isa = PBXGroup;
 			children = (
-				1569956121EFE9350085D015 /* Utils */,
+				15FFC3D621F10189005F356A /* Helpers */,
+				1569956121EFE9350085D015 /* Extras */,
 				1569955A21EFD9780085D015 /* Res */,
 				1569955821EFD9240085D015 /* Controllers */,
 				1569955721EFD8140085D015 /* Views */,
@@ -137,6 +150,31 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		15FFC3D621F10189005F356A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				15FFC3D721F101AE005F356A /* TMDBHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		478EFEA4B9FE6AE23D555D07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0416E4A805D9EF37DA2F1D94 /* Pods_Movs.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		88C87A87BF567601B646D0FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B9CCD464C7B090AA2CAFF5B8 /* Pods-Movs.debug.xcconfig */,
+				1E5C360902B22860CA7CD5C6 /* Pods-Movs.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +182,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 15FEEA7021EFD5AC0063CB33 /* Build configuration list for PBXNativeTarget "Movs" */;
 			buildPhases = (
+				9F7FF16DBBA4449F3E7C7906 /* [CP] Check Pods Manifest.lock */,
 				15FEEA5A21EFD5A90063CB33 /* Sources */,
 				15FEEA5B21EFD5A90063CB33 /* Frameworks */,
 				15FEEA5C21EFD5A90063CB33 /* Resources */,
+				12A59D64191A53ADC3114541 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -205,6 +245,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		12A59D64191A53ADC3114541 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Movs/Pods-Movs-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Movs/Pods-Movs-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F7FF16DBBA4449F3E7C7906 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Movs-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		15FEEA5A21EFD5A90063CB33 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -212,6 +307,7 @@
 			files = (
 				1569955E21EFE3750085D015 /* FavoritesListViewController.swift in Sources */,
 				15FFC3BA21EFFC43005F356A /* MovieDetailViewController.swift in Sources */,
+				15FFC3DA21F10A78005F356A /* Settings.swift in Sources */,
 				1569955C21EFE3380085D015 /* MovieListViewController.swift in Sources */,
 				15FFC3D121F0282A005F356A /* FilterViewController.swift in Sources */,
 				15FFC3C921EFFFDF005F356A /* MovieCollectionViewCell.swift in Sources */,
@@ -220,6 +316,7 @@
 				15FFC3CF21F02713005F356A /* FilterTableViewCell.swift in Sources */,
 				15FFC3CD21F01053005F356A /* FavoMovieTableViewCell.swift in Sources */,
 				1569956021EFE92E0085D015 /* Extensions.swift in Sources */,
+				15FFC3D821F101AE005F356A /* TMDBHelper.swift in Sources */,
 				15FFC3D321F02CA9005F356A /* FilterValueTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +461,7 @@
 		};
 		15FEEA7121EFD5AC0063CB33 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9CCD464C7B090AA2CAFF5B8 /* Pods-Movs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -381,6 +479,7 @@
 		};
 		15FEEA7221EFD5AC0063CB33 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E5C360902B22860CA7CD5C6 /* Pods-Movs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
