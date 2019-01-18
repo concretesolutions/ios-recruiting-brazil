@@ -29,22 +29,23 @@ class LocalDataHelper {
         }
     }
     
-    func saveMovie(movie: MovieModel){
+    func saveMovie(movie: MovieModel, block:(_ movie: MovieModel)->Void){
         if let realm = try? Realm(){
             try? realm.write {
                 realm.add(movie, update: true)
+                block(movie)
             }
         }
     }
     
-    func getListOfSaveMovies()->[MovieModel]{
+    func getListOfSaveMovies(_ block: (_ movies:[MovieModel])->Void){
         var array: [MovieModel] = []
         if let realm = try? Realm(){
             let arrayRealm = realm.objects(MovieModel.self)
             array = Array(arrayRealm)
-            return array
+            block(array)
         }else{
-            return []
+            block([])
         }
     }
 }

@@ -21,7 +21,6 @@ class MovieModel: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var year: String!
     @objc dynamic var sinopse: String!
-    @objc dynamic var favority: Bool = false
     @objc dynamic var posterURl: String!
     @objc dynamic var id: Int = 0
     var genresIds: List<Int> = List<Int>()

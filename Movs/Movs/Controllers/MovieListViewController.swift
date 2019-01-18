@@ -25,8 +25,9 @@ class MovieListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         self.savedMovies = LocalDataHelper.shared.getListOfSaveMovies()
-        print(self.savedMovies[0].title)
+        LocalDataHelper.shared.getListOfSaveMovies({ [unowned self] (movies) in
+            self.savedMovies = movies
+        })
         
         TMDBHelper.shared.getListOfMovies { [unowned self] (error, movies) in
             if let movies = movies{
@@ -48,7 +49,8 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
         
         let movie = self.movieList[indexPath.row]
         cell.movieName.text = movie.title
-        cell .movieFavoImage.image = movie.favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
+        let favority = self.savedMovies.map({$0.id}).contains(movie.id)
+        cell.movieFavoImage.image = favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
         let paceholder = #imageLiteral(resourceName: "placeholder")
         if let url = URL(string: movie.posterURl){
             cell.movieImage.kf.setImage(with: url, placeholder: paceholder)

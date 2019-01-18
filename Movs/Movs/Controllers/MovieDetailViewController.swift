@@ -18,6 +18,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieFavoButton: UIButton!
     
     var movie: MovieModel!
+    private var favority: Bool = false
     
     override func viewDidLoad() {
     }
@@ -27,9 +28,11 @@ class MovieDetailViewController: UIViewController {
         self.movieYear.text = self.movie.year
         self.movieSinopse.text = self.movie.sinopse
         
-        let imageFav = movie.favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
-        
-        self.movieFavoButton.setImage(imageFav, for: .normal)
+        LocalDataHelper.shared.getListOfSaveMovies { [unowned self] (movies) in
+            self.favority = movies.map({$0.id}).contains(self.movie.id)
+            let imageFav = favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
+            self.movieFavoButton.setImage(imageFav, for: .normal)
+        }
         
         let paceholder = #imageLiteral(resourceName: "placeholder")
         if let url = URL(string: movie.posterURl){
@@ -44,6 +47,13 @@ class MovieDetailViewController: UIViewController {
     }
     
     @IBAction func movieFavoButtonPressed(_ sender: Any) {
-        LocalDataHelper.shared.saveMovie(movie: movie)
+        if favority == false{
+            LocalDataHelper.shared.saveMovie(movie: self.movie) { [unowned self] (movie) in
+                self.movie = movie
+                self.favority = true
+                let imageFav = self.favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
+                self.movieFavoButton.setImage(imageFav, for: .normal)
+            }
+        }
     }
 }
