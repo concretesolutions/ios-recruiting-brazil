@@ -25,7 +25,7 @@ class MovieDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.movieTitle.text = self.movie.title
         self.movieYear.text = self.movie.year
-        self.movieSinopse.text = self.movie.description
+        self.movieSinopse.text = self.movie.sinopse
         
         let imageFav = movie.favority ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
         
@@ -44,5 +44,6 @@ class MovieDetailViewController: UIViewController {
     }
     
     @IBAction func movieFavoButtonPressed(_ sender: Any) {
+        LocalDataHelper.shared.saveMovie(movie: movie)
     }
 }

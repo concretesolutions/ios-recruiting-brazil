@@ -16,6 +16,7 @@ class MovieListViewController: UIViewController {
     private let segueID = "listOfMoviesToMovieDetail"
     private var movieList: [MovieModel] = []
     private var selecteMovie: MovieModel!
+    private var savedMovies: [MovieModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,9 @@ class MovieListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+         self.savedMovies = LocalDataHelper.shared.getListOfSaveMovies()
+        print(self.savedMovies[0].title)
+        
         TMDBHelper.shared.getListOfMovies { [unowned self] (error, movies) in
             if let movies = movies{
                 self.movieList = movies
