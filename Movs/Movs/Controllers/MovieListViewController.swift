@@ -11,6 +11,7 @@ import Kingfisher
 
 class MovieListViewController: UIViewController {
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var moviesCollection: UICollectionView!
     private let cellID = "movieCollectionCellID"
     private let segueID = "listOfMoviesToMovieDetail"
@@ -29,11 +30,13 @@ class MovieListViewController: UIViewController {
             self.savedMovies = movies
         })
         
+        self.indicator.startAnimating()
         TMDBHelper.shared.getListOfMovies { [unowned self] (error, movies) in
             if let movies = movies{
                 self.movieList = movies
                 self.moviesCollection.reloadData()
             }
+            self.indicator.stopAnimating()
         }
     }
     

@@ -94,11 +94,16 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RvT-E6-68k">
+                                <rect key="frame" x="150" y="281.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="RvT-E6-68k" firstAttribute="centerX" secondItem="TAL-O1-YSz" secondAttribute="centerX" id="8Ax-rw-hGM"/>
                             <constraint firstItem="TAL-O1-YSz" firstAttribute="leading" secondItem="KpE-EM-bmt" secondAttribute="leading" constant="8" id="BE5-hf-NM8"/>
                             <constraint firstItem="KpE-EM-bmt" firstAttribute="bottom" secondItem="TAL-O1-YSz" secondAttribute="bottom" constant="8" id="HQV-q9-0km"/>
+                            <constraint firstItem="RvT-E6-68k" firstAttribute="centerY" secondItem="TAL-O1-YSz" secondAttribute="centerY" id="NrG-NO-bXn"/>
                             <constraint firstItem="KpE-EM-bmt" firstAttribute="trailing" secondItem="TAL-O1-YSz" secondAttribute="trailing" constant="8" id="QON-8t-WZ5"/>
                             <constraint firstItem="TAL-O1-YSz" firstAttribute="top" secondItem="KpE-EM-bmt" secondAttribute="top" constant="8" id="lWD-sP-k7m"/>
                         </constraints>
@@ -106,6 +111,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="bwN-9B-4CO"/>
                     <connections>
+                        <outlet property="indicator" destination="RvT-E6-68k" id="LlD-Mp-8B0"/>
                         <outlet property="moviesCollection" destination="TAL-O1-YSz" id="IE6-83-Ce7"/>
                         <segue destination="ry7-Eq-Nsm" kind="show" identifier="listOfMoviesToMovieDetail" id="BMH-2x-v58"/>
                     </connections>
