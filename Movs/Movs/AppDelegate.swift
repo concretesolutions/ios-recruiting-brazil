@@ -16,10 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        TMDBHelper.shared.getConfigurations { (error, baseUrl, posterSize) in
-            if let baseUrl = baseUrl, let posterSize = posterSize{
-                Settins.saveBaseUrl(baseUrl: baseUrl)
-                Settins.savePosterSize(size: posterSize)
+        if Settins.getBaseUrl() == nil || Settins.getPosterSize() == nil{
+            TMDBHelper.shared.getConfigurations { (error, baseUrl, posterSize) in
+                if let baseUrl = baseUrl, let posterSize = posterSize{
+                    Settins.saveBaseUrl(baseUrl: baseUrl)
+                    Settins.savePosterSize(size: posterSize)
+                }
             }
         }
         

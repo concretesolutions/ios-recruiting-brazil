@@ -7,15 +7,25 @@
 //
 
 import Foundation
+import RealmSwift
+
 class LocalDataHelper {
     static let shared = LocalDataHelper()
-    private var genres: [GenreModel] = []
     
     func saveGenres(genres: [GenreModel]){
-        self.genres = genres
+        if let realm = try? Realm(){
+            try? realm.write {
+                realm.add(genres, update: true)
+            }
+        }
     }
     
     func getGenres() -> [GenreModel]{
-        return self.genres
+        if let realm = try? Realm(){
+            let array = Array(realm.objects(GenreModel.self))
+            return array
+        }else{
+            return []
+        }
     }
 }
