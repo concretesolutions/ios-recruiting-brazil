@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FavoMovieTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var moviePoster: UIView!
+    @IBOutlet weak var moviePoster: UIImageView!
     @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var movieSinopse: UILabel!
     @IBOutlet weak var movieYear: UILabel!
