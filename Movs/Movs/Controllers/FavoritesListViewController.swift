@@ -25,7 +25,10 @@ class FavoritesListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.loadTableView()
+        LocalDataHelper.shared.getListOfSaveMovies { (movies) in
+            self.movies = movies
+            self.moviesTableView.reloadData()
+        }
     }
     
     @IBAction func removeFilterPressed(_ sender: Any) {
@@ -34,14 +37,6 @@ class FavoritesListViewController: UIViewController {
     @IBAction func filterButtonPressed(_ sender: Any) {
         self.performSegue(withIdentifier: self.segueID, sender: self)
     }
-    
-    func loadTableView(){
-        LocalDataHelper.shared.getListOfSaveMovies { (movies) in
-            self.movies = movies
-            self.moviesTableView.reloadData()
-        }
-    }
-    
 }
 
 extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegate{
@@ -68,8 +63,13 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let unfavorite = UITableViewRowAction(style: .destructive, title: "unfavorite") { (action, indexPath) in
-            print(indexPath.row)
+        
+        let unfavorite = UITableViewRowAction(style: .destructive, title: "unfavorite") { [unowned self] (action, indexPath) in
+            let movieToRemove = self.movies[indexPath.row]
+            LocalDataHelper.shared.deleteMovie(movie: movieToRemove, block: { [unowned self] (movies) in
+                self.movies = movies
+                self.moviesTableView.reloadData()
+            })
         }
         
         return [unfavorite]

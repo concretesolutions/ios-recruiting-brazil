@@ -48,4 +48,16 @@ class LocalDataHelper {
             block([])
         }
     }
+    
+    func deleteMovie(movie: MovieModel, block:(_ movies: [MovieModel])->Void){
+        var array: [MovieModel] = []
+        if let realm = try? Realm(){
+            try? realm.write {
+                realm.delete(movie)
+                let arrayRealm = realm.objects(MovieModel.self)
+                array = Array(arrayRealm)
+                block(array)
+            }
+        }
+    }
 }
