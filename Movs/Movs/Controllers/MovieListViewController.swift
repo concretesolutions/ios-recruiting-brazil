@@ -27,7 +27,13 @@ class MovieListViewController: UIViewController {
         self.moviesCollection.delegate = self
         self.moviesCollection.dataSource = self
         
+        self.navigationController?.navigationBar.barTintColor = UIColor.RGBColor(247, green: 206, blue: 91)
+        
         self.backErrorView = Bundle.main.loadNibNamed(backError, owner: nil, options: nil)?.first as? UIView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

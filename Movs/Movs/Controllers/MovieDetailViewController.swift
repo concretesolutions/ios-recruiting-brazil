@@ -21,9 +21,12 @@ class MovieDetailViewController: UIViewController {
     private var favority: Bool = false
     
     override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+        
         self.movieTitle.text = self.movie.title
         self.movieYear.text = self.movie.year
         self.movieSinopse.text = self.movie.sinopse

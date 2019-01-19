@@ -22,6 +22,8 @@ class FavoritesListViewController: UIViewController {
         super.viewDidLoad()
         self.moviesTableView.delegate = self
         self.moviesTableView.dataSource = self
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.RGBColor(247, green: 206, blue: 91)
     }
     
     override func viewDidAppear(_ animated: Bool) {
