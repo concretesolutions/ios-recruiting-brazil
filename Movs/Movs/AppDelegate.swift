@@ -16,7 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        configure()
+        
         return true
+    }
+    
+    func configure() {
+        let factoryBuilder = FactoryBuilder { (fb) in
+            fb.networking = Networking()
+            
+        }
+        
+        let factory = Factory(builder: factoryBuilder)
+        let router = Router()
+        ManagerCenter.configure(config: ManagerConfiguration(factory: factory, router: router))
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
