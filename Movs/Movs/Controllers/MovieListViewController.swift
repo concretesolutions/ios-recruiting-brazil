@@ -19,10 +19,15 @@ class MovieListViewController: UIViewController {
     private var selecteMovie: MovieModel!
     private var savedMovies: [MovieModel] = []
     
+    private let backError = "ErrorView"
+    private var backErrorView: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.moviesCollection.delegate = self
         self.moviesCollection.dataSource = self
+        
+        self.backErrorView = Bundle.main.loadNibNamed(backError, owner: nil, options: nil)?.first as? UIView
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,9 +37,16 @@ class MovieListViewController: UIViewController {
         
         self.indicator.startAnimating()
         TMDBHelper.shared.getListOfMovies { [unowned self] (error, movies) in
-            if let movies = movies{
-                self.movieList = movies
-                self.moviesCollection.reloadData()
+            if let error = error{
+                print(error.localizedDescription)
+                self.moviesCollection.backgroundView = self.backErrorView
+            }else{
+                if let movies = movies{
+                    self.movieList = movies
+                    self.moviesCollection.reloadData()
+                }else{
+                    self.moviesCollection.backgroundView = self.backErrorView
+                }
             }
             self.indicator.stopAnimating()
         }
