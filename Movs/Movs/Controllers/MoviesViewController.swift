@@ -7,15 +7,34 @@
 //
 
 import UIKit
+import RxSwift
 
-class MoviesViewController: UIViewController {
+class MoviesViewController: UIViewController, BaseController {
 
+    var baseViewModel: BaseViewModelProtocol! {
+        didSet {
+            viewModel = (baseViewModel as! MoviesViewModelProtocol)
+        }
+    }
+    
+    var viewModel: MoviesViewModelProtocol!
+    let disposeBag: DisposeBag = DisposeBag()
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureCollectionView()
+        
+        viewModel.dataSource.asObservable()
+            .subscribe(onNext: { (value) in
+                
+            }, onError: { (error) in
+                
+            }).disposed(by: disposeBag)
+        
+        
     }
     
     func configureCollectionView() {
@@ -26,7 +45,7 @@ class MoviesViewController: UIViewController {
 
 extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1 //TODO: Mudar para o datasource count
+        return viewModel.numberOfItensInSection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) ->
@@ -34,7 +53,18 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell: UICollectionViewCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.moviesCellIdentifier, for: indexPath) as! MoviesCollectionViewCell
         
+//            cell.configure(viewModel.getMovie(index: indexPath.item))
+            
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO: send the user to another page
     }
 }
 
+extension MoviesViewController: StoryboardItem {
+    static func containerStoryboard() -> ApplicationStoryboard {
+        return ApplicationStoryboard.main
+    }
+}

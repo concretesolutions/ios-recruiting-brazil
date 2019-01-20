@@ -27,6 +27,10 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         return cell
     }
-    
-    
+}
+
+extension FavoritesViewController: StoryboardItem {
+    static func containerStoryboard() -> ApplicationStoryboard {
+        return ApplicationStoryboard.main
+    }
 }

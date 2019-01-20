@@ -17,19 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        window = UIWindow(frame: UIScreen.main.bounds)
         configure()
+        ManagerCenter.shared.router.window = window
         
+        ManagerCenter.shared.router.window = self.window
+        ManagerCenter.shared.router.changeRoot(to: .splash)
         return true
     }
     
     func configure() {
         let factoryBuilder = FactoryBuilder { (fb) in
             fb.networking = Networking()
-            
+            fb.dataStore = DataStore()
         }
         
         let factory = Factory(builder: factoryBuilder)
-        let router = Router()
+        let vmFactory: ViewModelFactory = ViewModelFactory(factory: factory)
+        let router = Router(viewModelFactory: vmFactory)
         ManagerCenter.configure(config: ManagerConfiguration(factory: factory, router: router))
     }
 
