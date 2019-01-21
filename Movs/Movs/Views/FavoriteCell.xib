@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteCell" rowHeight="264" id="bs8-E2-sec" customClass="FavoriteCell" customModule="Movs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="278"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bs8-E2-sec" id="NpT-4O-ORQ">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="277.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-e3-LNS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="200" id="0Mg-7V-F1I"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Thor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkT-cv-Cih">
+                        <rect key="frame" x="8" y="208" width="301" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qlx-Um-6L3">
+                        <rect key="frame" x="317" y="208" width="50" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="yuq-xW-AOJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Action, Fantasy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFi-Qv-obO">
+                        <rect key="frame" x="8" y="237" width="359" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Qlx-Um-6L3" firstAttribute="leading" secondItem="FkT-cv-Cih" secondAttribute="trailing" constant="8" id="1Wa-1N-EzP"/>
+                    <constraint firstItem="Qlx-Um-6L3" firstAttribute="trailing" secondItem="NpT-4O-ORQ" secondAttribute="trailingMargin" constant="8" id="2bF-Rt-b3O"/>
+                    <constraint firstItem="FkT-cv-Cih" firstAttribute="leading" secondItem="NpT-4O-ORQ" secondAttribute="leading" constant="8" id="313-Yu-duR"/>
+                    <constraint firstAttribute="bottom" secondItem="gFi-Qv-obO" secondAttribute="bottom" constant="8" id="3a3-BS-Nk6"/>
+                    <constraint firstItem="tQc-e3-LNS" firstAttribute="leading" secondItem="NpT-4O-ORQ" secondAttribute="leading" id="5Lj-Ur-smS"/>
+                    <constraint firstAttribute="trailing" secondItem="gFi-Qv-obO" secondAttribute="trailing" constant="8" id="5gV-x7-i4H"/>
+                    <constraint firstItem="gFi-Qv-obO" firstAttribute="top" secondItem="FkT-cv-Cih" secondAttribute="bottom" constant="8" id="7lR-WN-x1D"/>
+                    <constraint firstItem="gFi-Qv-obO" firstAttribute="leading" secondItem="NpT-4O-ORQ" secondAttribute="leading" constant="8" id="TfO-4f-hP0"/>
+                    <constraint firstItem="FkT-cv-Cih" firstAttribute="top" secondItem="tQc-e3-LNS" secondAttribute="bottom" constant="8" id="Y4p-up-F7f"/>
+                    <constraint firstAttribute="trailing" secondItem="tQc-e3-LNS" secondAttribute="trailing" id="Ysz-CY-Dou"/>
+                    <constraint firstItem="tQc-e3-LNS" firstAttribute="top" secondItem="NpT-4O-ORQ" secondAttribute="top" id="dTH-mq-y6U"/>
+                    <constraint firstItem="Qlx-Um-6L3" firstAttribute="top" secondItem="tQc-e3-LNS" secondAttribute="bottom" constant="8" id="scz-Om-Gan"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dropbackImage" destination="tQc-e3-LNS" id="B6R-y3-bHW"/>
+                <outlet property="genres" destination="gFi-Qv-obO" id="LDQ-Fs-0Ud"/>
+                <outlet property="movieTitle" destination="FkT-cv-Cih" id="PYt-8S-qHM"/>
+                <outlet property="year" destination="Qlx-Um-6L3" id="UfR-fj-dHd"/>
+            </connections>
+            <point key="canvasLocation" x="-258.39999999999998" y="207.79610194902551"/>
+        </tableViewCell>
+    </objects>
+</document>
