@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MoviesCollectionViewCell: UICollectionViewCell {
+class MovieCell: UICollectionViewCell {
     
 }

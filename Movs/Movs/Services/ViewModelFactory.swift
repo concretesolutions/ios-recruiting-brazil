@@ -33,11 +33,13 @@ class ViewModelFactory: ViewModelFactoryProtocol {
             viewModel = MoviesViewModel()
             break
         case .favorites:
-            
+            viewModel = FavoritesViewModel()
             break
         case .splash:
             viewModel = SplashViewModel()
             break
+        case .movieDetail:
+            viewModel = MovieDetailViewModel(movie: data as! Movie)
         default:
             break
         }

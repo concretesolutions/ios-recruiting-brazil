@@ -8,7 +8,29 @@
 
 import Foundation
 
-protocol DataStoreProtocol { }
+public typealias PropertyValuePair = (name: String, value: Any)
+public protocol PropertyValueType {
+    var propertyValuePair: PropertyValuePair { get }
+}
+
+enum DefaultPropertyValue: PropertyValueType {
+    var propertyValuePair: PropertyValuePair {
+        return ("", 0)
+    }
+}
+
+protocol QueryType {
+    associatedtype Descriptor
+    var predicate: NSPredicate? { get }
+    var sortDescriptors: [Descriptor] { get }
+}
+
+protocol DataStoreProtocol {
+    func create<T>(_ value: T, update: Bool) throws where T : Persistable
+    func saveRealmArray<T>(_ objects: [T]) throws where T: Persistable
+    func read<T>(_ type: T.Type, matching query: T.Query?) -> [T] where T : Persistable
+    func delete<T>(_ value: T) throws where T : Persistable 
+}
 
 protocol FactoryProtocol {
     var networking: NetworkingProtocol { get }
