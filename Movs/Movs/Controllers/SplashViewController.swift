@@ -20,8 +20,8 @@ class SplashViewController: UIViewController, BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getSession {
-            print("Aew")
+        viewModel.getGenres { [weak self] (genres) in
+            self!.viewModel.saveGenres(genres: genres)
             ManagerCenter.shared.router.changeRoot(to: .tabbar)
         }
     }
@@ -29,8 +29,6 @@ class SplashViewController: UIViewController, BaseController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-    //TODO: Do some kind of animation for the screen maybe... with some timeout...
 
 }
 

@@ -9,25 +9,43 @@
 import Foundation
 
 protocol SplashViewModelProtocol: BaseViewModelProtocol {
-    func getSession(completion: @escaping () -> ())
+    func getGenres(completion: @escaping ([Genre]) -> ())
+    func saveGenres(genres: [Genre])
 }
 
 class SplashViewModel: SplashViewModelProtocol {
     
-    func getSession(completion: @escaping () -> ()) {
+    func saveGenres(genres: [Genre]) {
+        do {
+            let dataStore = ManagerCenter.shared.factory.dataStore
+            try dataStore.saveRealmArray(genres)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getGenres(completion: @escaping ([Genre]) -> ()) {
         let networking = ManagerCenter.shared.factory.networking
-        let url = URL(string: Constants.baseUrl + Constants.authenticationUrl + Constants.apiKey)!
-//        let url = URL(string: "https://api.themoviedb.org/3/authentication/token/new?api_key=9576766894aacad34639098206e95594")!
+        let url = URL(string: Constants.baseUrl + Constants.genresUrl + Constants.apiKey)!
         networking.get(url) { (data, response, error) in
             if error != nil {
                 //TODO: Treat the error of not authenticated.
             }else {
-                if let dataResponse = data {
-                    let requestedToken = dataResponse.jsonResponse()
-                    //TODO: Request the session
-                    DispatchQueue.main.async {
-                        completion()
+                do {
+                    if let dataResponse = data {
+                        let decoder = JSONDecoder()
+                        let genreList = try decoder.decode(GenreList.self, from: dataResponse)
+                        
+//                        let dataStore = ManagerCenter.shared.factory.dataStore
+//                        try dataStore.saveRealmArray(genreList.genres)
+                        
+                        DispatchQueue.main.async {
+                            
+                            completion(genreList.genres)
+                        }
                     }
+                } catch let errorParser {
+                    print(errorParser.localizedDescription)
                 }
             }
         }

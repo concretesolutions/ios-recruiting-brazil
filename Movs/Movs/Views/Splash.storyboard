@@ -18,17 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Splash Screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Dm-HQ-z1d">
-                                <rect key="frame" x="152.5" y="442.5" width="109.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen" translatesAutoresizingMaskIntoConstraints="NO" id="xWN-ru-EvB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Dm-HQ-z1d" firstAttribute="centerX" secondItem="VfU-rw-58h" secondAttribute="centerX" id="6Fe-FP-1he"/>
-                            <constraint firstItem="6Dm-HQ-z1d" firstAttribute="centerY" secondItem="VfU-rw-58h" secondAttribute="centerY" id="p8Y-Z4-2os"/>
+                            <constraint firstItem="xWN-ru-EvB" firstAttribute="leading" secondItem="VfU-rw-58h" secondAttribute="leading" id="CFX-HS-Zc2"/>
+                            <constraint firstItem="VfU-rw-58h" firstAttribute="trailing" secondItem="xWN-ru-EvB" secondAttribute="trailing" id="P52-8i-eLK"/>
+                            <constraint firstAttribute="bottom" secondItem="xWN-ru-EvB" secondAttribute="bottom" id="qe5-FY-9se"/>
+                            <constraint firstItem="xWN-ru-EvB" firstAttribute="top" secondItem="V5N-sN-qRa" secondAttribute="top" id="rEn-E5-3HJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VfU-rw-58h"/>
                     </view>
@@ -38,4 +37,7 @@
             <point key="canvasLocation" x="249" y="116"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch_screen" width="1125" height="2001"/>
+    </resources>
 </document>

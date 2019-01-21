@@ -26,9 +26,13 @@ class MoviesViewModel: MoviesViewModelProtocol {
     init() {
         self.dataSource = Variable([])
         getPopularMovies { (movies) in
-            self.dataSource = Variable(movies)
+            self.dataSource.value.append(contentsOf: movies)
         }
     }
+    
+//    func loadData() {
+//        dataSource.value = self.getFavoriteds()
+//    }
     
     func getMovie(index: Int) -> Movie {
         return self.dataSource.value[index]
@@ -50,9 +54,9 @@ class MoviesViewModel: MoviesViewModelProtocol {
                 } catch let errorParser {
                     print(errorParser.localizedDescription)
                 }
-                
             }
         }
     }
+    
 }
 

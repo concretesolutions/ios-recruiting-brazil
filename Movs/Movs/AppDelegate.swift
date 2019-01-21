@@ -10,12 +10,17 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var navigationBarAppearence = UINavigationBar.appearance()
+        navigationBarAppearence.tintColor = UIColor.white
+        navigationBarAppearence.barTintColor = UIColor.rgb(red: 247, green: 206, blue: 91)
+        navigationBarAppearence.isTranslucent = false
+        UITabBar.appearance().barTintColor = UIColor.rgb(red: 247, green: 206, blue: 91)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         configure()
