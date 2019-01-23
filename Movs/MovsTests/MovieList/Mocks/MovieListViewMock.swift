@@ -13,7 +13,7 @@ import RxTest
 
 @testable import Movs
 
-class MovieListViewMock: MoviesDisplayer & MoviesViewModelActuator {
+class MovieListViewMock: MoviesViewModelOutput & MoviesViewModelInput {
     let errors: TestableObserver<Void>
     let triggers: TestableObservable<Void>
     let movies: TestableObserver<[MovieViewModel]>

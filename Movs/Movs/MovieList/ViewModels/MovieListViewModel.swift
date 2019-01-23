@@ -10,11 +10,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-protocol MoviesViewModelActuator {
+protocol MoviesViewModelInput: class {
     func trigger() -> Driver<Void>
 }
 
-protocol MoviesDisplayer {
+protocol MoviesViewModelOutput: class {
     func display(error: Driver<Void>)
     func display(movies: Driver<[MovieViewModel]>)
 }
@@ -23,17 +23,23 @@ class MovieListViewModel {
     private let page = BehaviorSubject(value: 1)
     private let dataProvider: MoviesProvider
     private let disposeBag = DisposeBag()
-
-    init(view: MoviesViewModelActuator & MoviesDisplayer, dataProvider: MoviesProvider) {
+    private weak var view: (MoviesViewModelInput & MoviesViewModelOutput)?
+    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider) {
         self.dataProvider = dataProvider
+        self.view = view
+        setupBinds()
+    }
+
+    func setupBinds() {
+        guard let view = view else { return }
         let pages = requestPage(trigger: view.trigger().asObservable())
 
         setupPaging(with: pages)
 
         let moviesDriver = pages.map { $0.results }
-                                .map { $0.map(self.movieViewModel)}
-                                .reduce([MovieViewModel](), accumulator: +)
-                                .asDriver(onErrorJustReturn: [])
+            .map { $0.map(self.movieViewModel)}
+            .scan([MovieViewModel](), accumulator: +)
+            .asDriver(onErrorJustReturn: [])
 
         let errorsDriver = pages.materialize()
             .filter { event in
@@ -48,7 +54,6 @@ class MovieListViewModel {
 
         view.display(error: errorsDriver)
         view.display(movies: moviesDriver)
-
     }
 
     func requestPage(trigger: Observable<Void>) -> Observable<MoviesPage> {

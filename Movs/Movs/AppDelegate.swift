@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         if let window = window {
-            let rootViewController = PopularMoviesViewController()
+            let rootViewController = PopularMoviesCoordinator().create()
             window.rootViewController = rootViewController
             window.makeKeyAndVisible()
         }

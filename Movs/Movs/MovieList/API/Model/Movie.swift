@@ -24,7 +24,8 @@ struct Movie: Codable {
 
     enum CodingKeys: String, CodingKey {
         case voteCount = "vote_count"
-        case identifier, video
+        case identifier = "id"
+        case video
         case voteAverage = "vote_average"
         case title, popularity
         case posterPath = "poster_path"

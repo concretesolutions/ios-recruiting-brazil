@@ -48,7 +48,7 @@ extension TheMovieDBAPI: TargetType {
         }
     }
 
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return nil
     }
 }

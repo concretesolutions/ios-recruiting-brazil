@@ -1,12 +1,11 @@
 //
-//  TheMovieDBDataProvider.swift
+//  MoviesProvider.swift
 //  Movs
 //
-//  Created by Filipe Jordão on 22/01/19.
+//  Created by Filipe Jordão on 23/01/19.
 //  Copyright © 2019 Filipe Jordão. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
 protocol MoviesProvider {
