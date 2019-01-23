@@ -13,6 +13,7 @@ import RxBlocking
 import RxSwift
 import RxTest
 import RxCocoa
+import Moya
 @testable import Movs
 
 class MovieListViewModelSpec: QuickSpec {
