@@ -21,6 +21,8 @@ class PopularMoviesViewController: UIViewController {
         super.loadView()
         view = collectionView
         view.backgroundColor = .white
+
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         collectionView.register(PopularMovieCell.self, forCellWithReuseIdentifier: PopularMovieCell.reuseId)
     }
 

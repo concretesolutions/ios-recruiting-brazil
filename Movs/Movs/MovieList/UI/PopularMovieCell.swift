@@ -45,6 +45,8 @@ extension PopularMovieCell: ViewConfiguration {
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
 
+        favoriteImage.image = #imageLiteral(resourceName: "favorite_full_icon")
+
         containerView.backgroundColor = #colorLiteral(red: 0.177366823, green: 0.1865139008, blue: 0.2772154808, alpha: 1)
     }
 
@@ -69,8 +71,8 @@ extension PopularMovieCell: ViewConfiguration {
         }
 
         favoriteImage.snp.makeConstraints { make in
-            make.bottom.right.top.equalTo(containerView)
-            make.width.equalTo(containerHeight)
+            make.bottom.right.top.equalTo(containerView).inset(10)
+            make.width.equalTo(favoriteImage.snp.height)
         }
     }
 }
