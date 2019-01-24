@@ -17,6 +17,13 @@
 		902C0E1821F9293B00F4C804 /* UIView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E1721F9293B00F4C804 /* UIView+Configuration.swift */; };
 		902C0E1B21F934EE00F4C804 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E1A21F934EE00F4C804 /* TabBarCoordinator.swift */; };
 		902C0E1D21F9387600F4C804 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E1C21F9387600F4C804 /* UIColor+Extensions.swift */; };
+		902C0E3021F9CAD200F4C804 /* LoadConfigCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E2F21F9CAD200F4C804 /* LoadConfigCoordinator.swift */; };
+		902C0E3321F9CB0C00F4C804 /* LoadConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E3221F9CB0C00F4C804 /* LoadConfigView.swift */; };
+		902C0E3521F9CCC300F4C804 /* LoadConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E3421F9CCC300F4C804 /* LoadConfigViewController.swift */; };
+		902C0E3821F9CD7200F4C804 /* LoadConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E3721F9CD7200F4C804 /* LoadConfigViewModel.swift */; };
+		902C0E3B21F9D29100F4C804 /* TheMovieDBConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E3A21F9D29100F4C804 /* TheMovieDBConfig.swift */; };
+		902C0E3D21F9D36900F4C804 /* ConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E3C21F9D36900F4C804 /* ConfigProvider.swift */; };
+		902C0E4021F9D3A900F4C804 /* TheMovieDBConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E3F21F9D3A900F4C804 /* TheMovieDBConfigProvider.swift */; };
 		902DB28721F72A010069A199 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DB28621F72A000069A199 /* AppDelegate.swift */; };
 		902DB28921F72A010069A199 /* PopularMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DB28821F72A010069A199 /* PopularMoviesViewController.swift */; };
 		902DB28E21F72A020069A199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 902DB28D21F72A020069A199 /* Assets.xcassets */; };
@@ -55,6 +62,13 @@
 		902C0E1721F9293B00F4C804 /* UIView+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Configuration.swift"; sourceTree = "<group>"; };
 		902C0E1A21F934EE00F4C804 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		902C0E1C21F9387600F4C804 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		902C0E2F21F9CAD200F4C804 /* LoadConfigCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadConfigCoordinator.swift; sourceTree = "<group>"; };
+		902C0E3221F9CB0C00F4C804 /* LoadConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadConfigView.swift; sourceTree = "<group>"; };
+		902C0E3421F9CCC300F4C804 /* LoadConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadConfigViewController.swift; sourceTree = "<group>"; };
+		902C0E3721F9CD7200F4C804 /* LoadConfigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadConfigViewModel.swift; sourceTree = "<group>"; };
+		902C0E3A21F9D29100F4C804 /* TheMovieDBConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBConfig.swift; sourceTree = "<group>"; };
+		902C0E3C21F9D36900F4C804 /* ConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigProvider.swift; sourceTree = "<group>"; };
+		902C0E3F21F9D3A900F4C804 /* TheMovieDBConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDBConfigProvider.swift; sourceTree = "<group>"; };
 		902DB28321F72A000069A199 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902DB28621F72A000069A199 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		902DB28821F72A010069A199 /* PopularMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +186,52 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		902C0E2E21F9CAB000F4C804 /* LoadConfig */ = {
+			isa = PBXGroup;
+			children = (
+				902C0E3921F9D27900F4C804 /* API */,
+				902C0E3621F9CD6500F4C804 /* ViewModels */,
+				902C0E3121F9CAFB00F4C804 /* UI */,
+				902C0E2F21F9CAD200F4C804 /* LoadConfigCoordinator.swift */,
+				902C0E3421F9CCC300F4C804 /* LoadConfigViewController.swift */,
+			);
+			path = LoadConfig;
+			sourceTree = "<group>";
+		};
+		902C0E3121F9CAFB00F4C804 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				902C0E3221F9CB0C00F4C804 /* LoadConfigView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		902C0E3621F9CD6500F4C804 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				902C0E3721F9CD7200F4C804 /* LoadConfigViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		902C0E3921F9D27900F4C804 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				902C0E3E21F9D39400F4C804 /* Models */,
+				902C0E3C21F9D36900F4C804 /* ConfigProvider.swift */,
+				902C0E3F21F9D3A900F4C804 /* TheMovieDBConfigProvider.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		902C0E3E21F9D39400F4C804 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				902C0E3A21F9D29100F4C804 /* TheMovieDBConfig.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		902DB27A21F72A000069A199 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +255,7 @@
 		902DB28521F72A000069A199 /* Movs */ = {
 			isa = PBXGroup;
 			children = (
+				902C0E2E21F9CAB000F4C804 /* LoadConfig */,
 				902C0E1921F934C200F4C804 /* TabBar */,
 				902C0E1621F9292200F4C804 /* Common */,
 				902C0E0821F8114000F4C804 /* Extensions */,
@@ -515,11 +576,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902C0E3021F9CAD200F4C804 /* LoadConfigCoordinator.swift in Sources */,
 				903F160021F7EAB9005C3B8F /* TheMovieDBProvider.swift in Sources */,
 				902C0E1D21F9387600F4C804 /* UIColor+Extensions.swift in Sources */,
 				902DB28921F72A010069A199 /* PopularMoviesViewController.swift in Sources */,
 				902C0E0D21F814A000F4C804 /* PopularMovieCell.swift in Sources */,
+				902C0E4021F9D3A900F4C804 /* TheMovieDBConfigProvider.swift in Sources */,
 				902DB28721F72A010069A199 /* AppDelegate.swift in Sources */,
+				902C0E3B21F9D29100F4C804 /* TheMovieDBConfig.swift in Sources */,
+				902C0E3821F9CD7200F4C804 /* LoadConfigViewModel.swift in Sources */,
+				902C0E3321F9CB0C00F4C804 /* LoadConfigView.swift in Sources */,
+				902C0E3D21F9D36900F4C804 /* ConfigProvider.swift in Sources */,
 				903F15F521F7D38A005C3B8F /* MovieListViewModel.swift in Sources */,
 				902C0E1821F9293B00F4C804 /* UIView+Configuration.swift in Sources */,
 				903F15FC21F7E11B005C3B8F /* MoviesPage.swift in Sources */,
@@ -527,6 +594,7 @@
 				902C0E0A21F8114F00F4C804 /* UICollectionView+Extensions.swift in Sources */,
 				903F15F721F7D431005C3B8F /* MovieViewModel.swift in Sources */,
 				902C0E1B21F934EE00F4C804 /* TabBarCoordinator.swift in Sources */,
+				902C0E3521F9CCC300F4C804 /* LoadConfigViewController.swift in Sources */,
 				902C0E1221F9272E00F4C804 /* MoviesProvider.swift in Sources */,
 				903F15F921F7E09E005C3B8F /* Movie.swift in Sources */,
 				902C0E0721F807B400F4C804 /* TheMovieDBAPI.swift in Sources */,

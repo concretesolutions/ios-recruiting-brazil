@@ -30,7 +30,7 @@ class PopularMovieCell: UICollectionViewCell {
 
     func setup(with viewModel: MovieViewModel) {
         titleLabel.text = viewModel.title
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(viewModel.image)") else { return }
+        guard let url = viewModel.image else { return }
         Nuke.loadImage(with: url, into: imageView)
     }
 }
