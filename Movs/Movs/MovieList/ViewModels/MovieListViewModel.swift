@@ -82,7 +82,7 @@ class MovieListViewModel {
     }
 
     func movieViewModel(from movie: Movie) -> MovieViewModel {
-        let url = URL(string: "\(config.images.secureBaseURL)w500\(movie.posterPath)")
-        return MovieViewModel(model: movie, title: movie.title, image: url)
+        
+        return MovieViewModel(model: movie, title: movie.title, image: config.images.safeImageURL(for: movie.posterPath))
     }
 }

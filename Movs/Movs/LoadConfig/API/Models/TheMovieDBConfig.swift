@@ -19,4 +19,8 @@ struct Images: Codable {
         case baseURL = "base_url"
         case secureBaseURL = "secure_base_url"
     }
+
+    func safeImageURL(for image: String) -> URL? {
+        return URL(string: "\(secureBaseURL)w500\(image)")
+    }
 }
