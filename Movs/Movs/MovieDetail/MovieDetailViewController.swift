@@ -22,7 +22,7 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let viewModel = viewModel else { return }
-
+        title = viewModel.title
         movieDetailView.genresLabel.text = viewModel.genres
         movieDetailView.titleLabel.text = viewModel.title
         movieDetailView.overviewLabel.text = viewModel.overview
