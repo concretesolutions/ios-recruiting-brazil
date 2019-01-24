@@ -26,7 +26,7 @@ class MovieListViewModelSpec: QuickSpec {
                                          disposeBag: disposeBag,
                                          triggerEvents: [.next(10, Void()),
                                                          .next(20, Void())])
-        
+
         let pages = [MoviesPage(page: 1, totalResults: 3, totalPages: 3, results: [Movie(voteCount: 0,
                                                                                          identifier: 0,
                                                                                          video: false,
