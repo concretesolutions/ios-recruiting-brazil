@@ -14,10 +14,10 @@ class MovieDetailViewModel {
     let genres: String
     let overview: String
 
-    init(movie: Movie) {
+    init(movie: Movie, config: TheMovieDBConfig) {
         title = movie.title
         genres = movie.genreIDS.map(String.init).joined(separator: ", ")
         overview = movie.overview
-        image = URL(string: movie.posterPath)
+        image = config.images.safeImageURL(for: movie.posterPath)
     }
 }

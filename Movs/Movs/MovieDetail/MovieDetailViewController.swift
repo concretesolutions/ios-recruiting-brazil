@@ -26,9 +26,8 @@ class MovieDetailViewController: UIViewController {
         movieDetailView.genresLabel.text = viewModel.genres
         movieDetailView.titleLabel.text = viewModel.title
         movieDetailView.overviewLabel.text = viewModel.overview
-        guard let image = viewModel.image,
-            let url = URL(string: "https://image.tmdb.org/t/p/w500/\(image)") else { return }
-        Nuke.loadImage(with: url, into: movieDetailView.imageView)
+        guard let image = viewModel.image else { return }
+        Nuke.loadImage(with: image, into: movieDetailView.imageView)
 
     }
 }

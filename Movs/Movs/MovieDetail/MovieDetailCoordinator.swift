@@ -9,8 +9,14 @@
 import UIKit
 
 class MovieDetailCoordinator {
+    let config: TheMovieDBConfig
+
+    init(config: TheMovieDBConfig) {
+        self.config = config
+    }
+
     func create(with movie: Movie) -> UIViewController {
-        let viewModel = MovieDetailViewModel(movie: movie)
+        let viewModel = MovieDetailViewModel(movie: movie, config: config)
         let detailVc = MovieDetailViewController()
         detailVc.hidesBottomBarWhenPushed = true
         detailVc.viewModel = viewModel

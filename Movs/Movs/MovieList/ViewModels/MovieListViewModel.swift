@@ -23,10 +23,13 @@ class MovieListViewModel {
     private let page = BehaviorSubject(value: 1)
     private let dataProvider: MoviesProvider
     private let disposeBag = DisposeBag()
+
     private weak var view: (MoviesViewModelInput & MoviesViewModelOutput)?
-    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider) {
+    private let config: TheMovieDBConfig
+    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider, config: TheMovieDBConfig) {
         self.dataProvider = dataProvider
         self.view = view
+        self.config = config
         setupBinds()
     }
 
@@ -79,6 +82,7 @@ class MovieListViewModel {
     }
 
     func movieViewModel(from movie: Movie) -> MovieViewModel {
-        return MovieViewModel(model: movie, title: movie.title, image: movie.posterPath)
+        
+        return MovieViewModel(model: movie, title: movie.title, image: config.images.safeImageURL(for: movie.posterPath))
     }
 }
