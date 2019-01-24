@@ -79,6 +79,6 @@ class MovieListViewModel {
     }
 
     func movieViewModel(from movie: Movie) -> MovieViewModel {
-        return MovieViewModel(title: movie.title, image: movie.posterPath)
+        return MovieViewModel(model: movie, title: movie.title, image: movie.posterPath)
     }
 }

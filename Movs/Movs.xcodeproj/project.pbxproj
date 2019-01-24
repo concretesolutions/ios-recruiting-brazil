@@ -16,6 +16,7 @@
 		902C0E1221F9272E00F4C804 /* MoviesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E1121F9272E00F4C804 /* MoviesProvider.swift */; };
 		902C0E1821F9293B00F4C804 /* UIView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E1721F9293B00F4C804 /* UIView+Configuration.swift */; };
 		902C0E1B21F934EE00F4C804 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E1A21F934EE00F4C804 /* TabBarCoordinator.swift */; };
+		902C0E1D21F9387600F4C804 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902C0E1C21F9387600F4C804 /* UIColor+Extensions.swift */; };
 		902DB28721F72A010069A199 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DB28621F72A000069A199 /* AppDelegate.swift */; };
 		902DB28921F72A010069A199 /* PopularMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902DB28821F72A010069A199 /* PopularMoviesViewController.swift */; };
 		902DB28E21F72A020069A199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 902DB28D21F72A020069A199 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		902C0E1121F9272E00F4C804 /* MoviesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesProvider.swift; sourceTree = "<group>"; };
 		902C0E1721F9293B00F4C804 /* UIView+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Configuration.swift"; sourceTree = "<group>"; };
 		902C0E1A21F934EE00F4C804 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		902C0E1C21F9387600F4C804 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		902DB28321F72A000069A199 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902DB28621F72A000069A199 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		902DB28821F72A010069A199 /* PopularMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				902C0E0921F8114F00F4C804 /* UICollectionView+Extensions.swift */,
 				902C0E1721F9293B00F4C804 /* UIView+Configuration.swift */,
+				902C0E1C21F9387600F4C804 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -141,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				903F15FF21F7EAB9005C3B8F /* TheMovieDBProvider.swift */,
-				902C0E0621F807B400F4C804 /* TheMovieDBAPI.swift */,
 			);
 			path = Concrete;
 			sourceTree = "<group>";
@@ -149,6 +151,7 @@
 		902C0E1621F9292200F4C804 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				902C0E2121F93AC300F4C804 /* API */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -159,6 +162,14 @@
 				902C0E1A21F934EE00F4C804 /* TabBarCoordinator.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		902C0E2121F93AC300F4C804 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				902C0E0621F807B400F4C804 /* TheMovieDBAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		902DB27A21F72A000069A199 = {
@@ -505,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				903F160021F7EAB9005C3B8F /* TheMovieDBProvider.swift in Sources */,
+				902C0E1D21F9387600F4C804 /* UIColor+Extensions.swift in Sources */,
 				902DB28921F72A010069A199 /* PopularMoviesViewController.swift in Sources */,
 				902C0E0D21F814A000F4C804 /* PopularMovieCell.swift in Sources */,
 				902DB28721F72A010069A199 /* AppDelegate.swift in Sources */,

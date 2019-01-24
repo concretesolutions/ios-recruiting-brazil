@@ -11,8 +11,11 @@ import UIKit
 class TabBarCoordinator {
     func create() -> UIViewController {
         let tabBar = UITabBarController()
-        tabBar.tabBar.barTintColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
-        tabBar.viewControllers = [PopularMoviesCoordinator().create()]
+        tabBar.tabBar.barTintColor = .movsYellow
+        tabBar.tabBar.tintColor = .movsBlack
+        tabBar.tabBar.unselectedItemTintColor = .movsGray
+        tabBar.viewControllers = [PopularMoviesCoordinator().create(),
+                                  PopularMoviesCoordinator().create()]
 
         return tabBar
     }

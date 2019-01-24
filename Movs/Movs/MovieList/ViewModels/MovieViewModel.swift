@@ -9,6 +9,7 @@
 import Foundation
 
 struct MovieViewModel {
+    let model: Movie
     let title: String
     let image: String
 }

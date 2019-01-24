@@ -19,6 +19,8 @@ class PopularMoviesViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
+        title = "Popular"
+
         view = collectionView
         view.backgroundColor = .white
 

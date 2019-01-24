@@ -47,7 +47,7 @@ extension PopularMovieCell: ViewConfiguration {
 
         favoriteImage.image = #imageLiteral(resourceName: "favorite_full_icon")
 
-        containerView.backgroundColor = #colorLiteral(red: 0.177366823, green: 0.1865139008, blue: 0.2772154808, alpha: 1)
+        containerView.backgroundColor = .movsBlue
     }
 
     func setupHierarchy() {

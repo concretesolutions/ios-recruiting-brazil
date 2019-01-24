@@ -13,8 +13,12 @@ class PopularMoviesCoordinator {
         let viewController = PopularMoviesViewController()
         let provider = TheMovieDBProvider()
         let navVc = UINavigationController(rootViewController: viewController)
-        navVc.navigationBar.barTintColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+
+        navVc.navigationBar.barTintColor = .movsYellow
+
         _ = MovieListViewModel(view: viewController, dataProvider: provider)
+
+        viewController.tabBarItem = UITabBarItem(title: viewController.title, image: #imageLiteral(resourceName: "list_icon"), selectedImage: nil)
 
         return navVc
     }
