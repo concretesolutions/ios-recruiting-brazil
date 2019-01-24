@@ -11,6 +11,7 @@ import Moya
 
 enum TheMovieDBAPI {
     case top(page: Int)
+    case configuration
 }
 
 extension TheMovieDBAPI: TargetType {
@@ -22,12 +23,14 @@ extension TheMovieDBAPI: TargetType {
         switch self {
         case .top:
             return "/movie/popular"
+        case .configuration:
+            return "/configuration"
         }
     }
 
     var method: Moya.Method {
         switch self {
-        case .top:
+        case .top, .configuration:
             return .get
         }
     }
@@ -42,6 +45,13 @@ extension TheMovieDBAPI: TargetType {
             var parameters = [String: Any]()
 
             parameters["page"] = page
+            parameters["api_key"] = "1dbb7d290ce2cb88ef8c311f67afd994"
+
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+
+        case .configuration:
+            var parameters = [String: Any]()
+
             parameters["api_key"] = "1dbb7d290ce2cb88ef8c311f67afd994"
 
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)

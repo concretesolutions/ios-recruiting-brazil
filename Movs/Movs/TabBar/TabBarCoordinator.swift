@@ -9,13 +9,13 @@
 import UIKit
 
 class TabBarCoordinator {
-    func create() -> UIViewController {
+    func create(with config: TheMovieDBConfig) -> UIViewController {
         let tabBar = UITabBarController()
         tabBar.tabBar.barTintColor = .movsYellow
         tabBar.tabBar.tintColor = .movsBlack
         tabBar.tabBar.unselectedItemTintColor = .movsGray
-        tabBar.viewControllers = [PopularMoviesCoordinator().create(),
-                                  PopularMoviesCoordinator().create()]
+        tabBar.viewControllers = [PopularMoviesCoordinator(config: config).create(),
+                                  PopularMoviesCoordinator(config: config).create()]
 
         return tabBar
     }
