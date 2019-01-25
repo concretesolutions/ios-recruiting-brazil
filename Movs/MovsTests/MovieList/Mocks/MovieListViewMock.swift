@@ -26,7 +26,7 @@ class MovieListViewMock: MoviesViewModelOutput & MoviesViewModelInput {
         self.disposeBag = disposeBag
     }
 
-    func trigger() -> Driver<Void> {
+    func requestContent() -> Driver<Void> {
         return triggers.asDriver(onErrorJustReturn: Void())
 
     }

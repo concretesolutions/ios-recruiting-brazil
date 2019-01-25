@@ -30,13 +30,32 @@ extension FavoritesViewController: ViewConfiguration {
         view = tableView
         tableView.register(FavoriteMovieCell.self, forCellReuseIdentifier: FavoriteMovieCell.identifier)
         tableView.rowHeight = 150
+
+        tableView.rx.setDelegate(self)
+                    .disposed(by: disposeBag)
     }
 }
 
 extension FavoritesViewController: FavoritesViewModelInput {
-    func triggers() -> Observable<Void> {
-        return rx.sentMessage(#selector(self.viewDidAppear))
+    func remove() -> Observable<FavoriteMovieViewModel> {
+        return tableView.rx.itemDeleted
+                    .map(tableView.cellForRow)
+                    .map {$0 as? FavoriteMovieCell }
+                    .flatMap { $0?.viewModel.map(Observable.just) ?? Observable.empty() }
+    }
+
+    func loadTrigger() -> Observable<Void> {
+        return rx.sentMessage(#selector(self.viewWillAppear))
             .map { _ in Void() }
+    }
+}
+
+extension FavoritesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return [UITableViewRowAction(style: .destructive, title: "Unfavorite") { _, indexPath in
+            tableView.dataSource?.tableView!(tableView, commit: .delete, forRowAt: indexPath)
+            return
+            }]
     }
 }
 

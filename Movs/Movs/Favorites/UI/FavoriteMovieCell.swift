@@ -12,7 +12,7 @@ import Nuke
 
 class FavoriteMovieCell: UITableViewCell {
     static let identifier = "FavoriteMovieCell"
-    let toImageMargin = 15
+    let horizontalMargin = 10
     let toTopMargin = 20
     var viewModel: FavoriteMovieViewModel?
 
@@ -43,6 +43,10 @@ class FavoriteMovieCell: UITableViewCell {
 }
 
 extension FavoriteMovieCell: ViewConfiguration {
+    func setupViews() {
+        overviewLabel.numberOfLines = 0
+    }
+
     func setupHierarchy() {
         [coverImageView, titleLabel, yearLabel, overviewLabel].forEach(contentView.addSubview)
     }
@@ -50,24 +54,24 @@ extension FavoriteMovieCell: ViewConfiguration {
     func setupConstraints() {
         coverImageView.snp.makeConstraints { make in
             make.left.top.bottom.equalTo(contentView)
-            make.width.equalTo(coverImageView.snp.height)
+            make.width.equalTo(coverImageView.snp.height).dividedBy(1.5)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.left.equalTo(coverImageView.snp.right).offset(toImageMargin)
-            make.top.equalTo(contentView)
-            
+            make.left.equalTo(coverImageView.snp.right).offset(horizontalMargin)
+            make.top.equalTo(contentView).offset(toTopMargin)
+
         }
 
         yearLabel.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right)
-            make.top.equalTo(contentView).offset(toTopMargin)
-            make.right.equalTo(contentView)
+            make.top.bottom.equalTo(titleLabel)
+            make.right.equalTo(contentView).inset(horizontalMargin)
         }
 
         overviewLabel.snp.makeConstraints { make in
-            make.left.equalTo(coverImageView.snp.right).offset(toImageMargin)
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.left.equalTo(coverImageView.snp.right).offset(horizontalMargin)
+            make.top.equalTo(titleLabel.snp.bottom).offset(toTopMargin)
             make.bottom.right.equalTo(contentView)
         }
     }

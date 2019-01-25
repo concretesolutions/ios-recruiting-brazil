@@ -38,11 +38,16 @@ class PopularMoviesViewController: UIViewController {
 }
 
 extension PopularMoviesViewController: MoviesViewModelInput, MoviesViewModelOutput {
-    func didAppearBind() -> Observable<Void> {
-        return rx.sentMessage(#selector(viewDidAppear)).map { _ in Void() }
+    func requestUpdate() -> Driver<Void> {
+        return willAppearBind()
+            .asDriver { _ in Driver<Void>.empty() }
     }
 
-    func trigger() -> Driver<Void> {
+    func willAppearBind() -> Observable<Void> {
+        return rx.sentMessage(#selector(viewWillAppear)).map { _ in Void() }
+    }
+
+    func requestContent() -> Driver<Void> {
         return collectionView.isNearBottom()
                              .filter { $0 == true }
                              .map { _ in Void() }

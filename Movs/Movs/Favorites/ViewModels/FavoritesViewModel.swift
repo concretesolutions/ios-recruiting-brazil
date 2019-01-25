@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 
 protocol FavoritesViewModelInput {
-    func triggers() -> Observable<Void>
+    func loadTrigger() -> Observable<Void>
+    func remove() -> Observable<FavoriteMovieViewModel>
 }
 
 protocol FavoritesViewModelOutput {
@@ -20,16 +21,17 @@ protocol FavoritesViewModelOutput {
 
 class FavoritesViewModel {
     typealias View = FavoritesViewModelInput & FavoritesViewModelOutput
+    private let disposeBag = DisposeBag()
 
     private let view: View
     private let store: FavoriteStore
     private let config: MovsConfig
-    
+
     init(view: View, favoriteStore: FavoriteStore, config: MovsConfig) {
         self.store = favoriteStore
         self.view = view
         self.config = config
-
+        setupRemoval()
         setupBind()
     }
 
@@ -41,8 +43,21 @@ class FavoritesViewModel {
         view.favorites(favorites)
     }
 
+    func setupRemoval() {
+        view.remove()
+            .map { $0.model }
+            .subscribe(onNext: { [weak self] model in
+                guard let strongSelf = self else { return }
+                strongSelf.store.drop(movie: model)
+            })
+            .disposed(by: disposeBag)
+    }
+
     func requestMovies() -> Observable<[Movie]> {
-        return view.triggers()
+        let didRemove = view.remove().map { _ in Void() }
+
+        return Observable
+            .merge(view.loadTrigger(), didRemove)
             .flatMap { [weak self] _ -> Observable<[Movie]> in
                 guard let strongSelf = self else { return Observable.empty() }
                 let movies = strongSelf.store.fetch()

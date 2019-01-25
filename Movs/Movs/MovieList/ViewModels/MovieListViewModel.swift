@@ -11,7 +11,8 @@ import RxCocoa
 import RxSwift
 
 protocol MoviesViewModelInput: class {
-    func trigger() -> Driver<Void>
+    func requestUpdate() -> Driver<Void>
+    func requestContent() -> Driver<Void>
 }
 
 protocol MoviesViewModelOutput: class {
@@ -39,7 +40,7 @@ class MovieListViewModel {
 
     func setupBinds() {
         guard let view = view else { return }
-        let pages = requestPage(trigger: view.trigger().asObservable())
+        let pages = requestPage(trigger: view.requestContent().asObservable())
 
         pages.subscribe(onNext: { page in
             page.results.forEach(self.favoriteStore.update)
@@ -48,10 +49,17 @@ class MovieListViewModel {
 
         setupPaging(with: pages)
 
-        let moviesDriver = pages.map { $0.results }
+        let movies = pages.map { $0.results }
             .map { $0.map(self.movieViewModel)}
             .scan([MovieViewModel](), accumulator: +)
-            .asDriver(onErrorJustReturn: [])
+
+        let favorites = view.requestUpdate()
+                            .asObservable()
+                            .map(favoriteStore.fetch)
+
+        let moviesDriver = Observable.combineLatest(movies, favorites)
+                                    .map(setFavorite)
+                                    .asDriver { _ in Driver<[MovieViewModel]>.empty() }
 
         let errorsDriver = pages.materialize()
             .filter { event in
@@ -97,5 +105,16 @@ class MovieListViewModel {
                               title: movie.title,
                               image: config.imageUrl(movie.posterPath),
                               isFavorite: isFavorite)
+    }
+
+    func setFavorite(viewModels: [MovieViewModel], favorites: [Movie]) -> [MovieViewModel] {
+        return
+            viewModels.map { vm in
+                let isFavorite = favoriteStore.contains(movie: vm.model)
+                return MovieViewModel(model: vm.model,
+                                      title: vm.title,
+                                      image: vm.image,
+                                      isFavorite: isFavorite)
+            }
     }
 }
