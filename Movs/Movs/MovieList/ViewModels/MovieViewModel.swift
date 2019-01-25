@@ -17,9 +17,4 @@ struct MovieViewModel {
     let title: String
     let image: URL?
     var isFavorite: Bool
-
-    weak var delegate: MovieViewModelDelegate?
-
-    func setupListening() {
-    }
 }

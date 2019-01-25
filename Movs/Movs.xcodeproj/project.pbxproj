@@ -47,6 +47,11 @@
 		90BAE44721FA8D9200ADCDEE /* MovsGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE44621FA8D9200ADCDEE /* MovsGenre.swift */; };
 		90BAE44921FA8FF500ADCDEE /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE44821FA8FF500ADCDEE /* UserDefaults+Extensions.swift */; };
 		90BAE44D21FA967800ADCDEE /* MovsFavoriteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE44C21FA967800ADCDEE /* MovsFavoriteStore.swift */; };
+		90BAE45021FAB01100ADCDEE /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE44F21FAB01100ADCDEE /* FavoritesCoordinator.swift */; };
+		90BAE45221FAB01E00ADCDEE /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE45121FAB01E00ADCDEE /* FavoritesViewController.swift */; };
+		90BAE45521FB289900ADCDEE /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE45421FB289900ADCDEE /* FavoritesViewModel.swift */; };
+		90BAE45721FB291F00ADCDEE /* FavoriteMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE45621FB291F00ADCDEE /* FavoriteMovieViewModel.swift */; };
+		90BAE45A21FB2D3000ADCDEE /* FavoriteMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAE45921FB2D3000ADCDEE /* FavoriteMovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +111,11 @@
 		90BAE44621FA8D9200ADCDEE /* MovsGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsGenre.swift; sourceTree = "<group>"; };
 		90BAE44821FA8FF500ADCDEE /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		90BAE44C21FA967800ADCDEE /* MovsFavoriteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsFavoriteStore.swift; sourceTree = "<group>"; };
+		90BAE44F21FAB01100ADCDEE /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		90BAE45121FAB01E00ADCDEE /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		90BAE45421FB289900ADCDEE /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		90BAE45621FB291F00ADCDEE /* FavoriteMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewModel.swift; sourceTree = "<group>"; };
+		90BAE45921FB2D3000ADCDEE /* FavoriteMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCell.swift; sourceTree = "<group>"; };
 		AA80CEC96008E48DFCB7FE44 /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD264CB3F6D1954A17265413 /* Pods-Movs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movs/Pods-Movs.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,6 +317,7 @@
 		902DB28521F72A000069A199 /* Movs */ = {
 			isa = PBXGroup;
 			children = (
+				90BAE44E21FAAFF400ADCDEE /* Favorites */,
 				902C0E2E21F9CAB000F4C804 /* LoadConfig */,
 				902C0E2521F93D0500F4C804 /* MovieDetail */,
 				902C0E1921F934C200F4C804 /* TabBar */,
@@ -394,6 +405,34 @@
 				90BAE44C21FA967800ADCDEE /* MovsFavoriteStore.swift */,
 			);
 			path = LocalStore;
+			sourceTree = "<group>";
+		};
+		90BAE44E21FAAFF400ADCDEE /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				90BAE45821FB2D2000ADCDEE /* UI */,
+				90BAE45321FB288B00ADCDEE /* ViewModels */,
+				90BAE44F21FAB01100ADCDEE /* FavoritesCoordinator.swift */,
+				90BAE45121FAB01E00ADCDEE /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		90BAE45321FB288B00ADCDEE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				90BAE45421FB289900ADCDEE /* FavoritesViewModel.swift */,
+				90BAE45621FB291F00ADCDEE /* FavoriteMovieViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		90BAE45821FB2D2000ADCDEE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				90BAE45921FB2D3000ADCDEE /* FavoriteMovieCell.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		B131B4E08AFE42F26C4CEDE9 /* Pods */ = {
@@ -657,16 +696,20 @@
 				902C0E3021F9CAD200F4C804 /* LoadConfigCoordinator.swift in Sources */,
 				903F160021F7EAB9005C3B8F /* TheMovieDBProvider.swift in Sources */,
 				902C0E2D21F948FE00F4C804 /* MovieDetailViewModel.swift in Sources */,
+				90BAE45721FB291F00ADCDEE /* FavoriteMovieViewModel.swift in Sources */,
 				902C0E1D21F9387600F4C804 /* UIColor+Extensions.swift in Sources */,
 				902DB28921F72A010069A199 /* PopularMoviesViewController.swift in Sources */,
 				902C0E0D21F814A000F4C804 /* PopularMovieCell.swift in Sources */,
 				90BAE44721FA8D9200ADCDEE /* MovsGenre.swift in Sources */,
+				90BAE45021FAB01100ADCDEE /* FavoritesCoordinator.swift in Sources */,
+				90BAE45221FAB01E00ADCDEE /* FavoritesViewController.swift in Sources */,
 				902C0E4021F9D3A900F4C804 /* TheMovieDBConfigProvider.swift in Sources */,
 				902DB28721F72A010069A199 /* AppDelegate.swift in Sources */,
 				902C0E3B21F9D29100F4C804 /* TheMovieDBConfig.swift in Sources */,
 				90BAE43E21FA7F3B00ADCDEE /* Genres.swift in Sources */,
 				902C0E3821F9CD7200F4C804 /* LoadConfigViewModel.swift in Sources */,
 				902C0E3321F9CB0C00F4C804 /* LoadConfigView.swift in Sources */,
+				90BAE45521FB289900ADCDEE /* FavoritesViewModel.swift in Sources */,
 				902C0E3D21F9D36900F4C804 /* ConfigProvider.swift in Sources */,
 				903F15F521F7D38A005C3B8F /* MovieListViewModel.swift in Sources */,
 				902C0E1821F9293B00F4C804 /* UIView+Configuration.swift in Sources */,
@@ -684,6 +727,7 @@
 				90BAE44D21FA967800ADCDEE /* MovsFavoriteStore.swift in Sources */,
 				902C0E1221F9272E00F4C804 /* MoviesProvider.swift in Sources */,
 				90BAE44521FA8C4C00ADCDEE /* MovsConfigStore.swift in Sources */,
+				90BAE45A21FB2D3000ADCDEE /* FavoriteMovieCell.swift in Sources */,
 				903F15F921F7E09E005C3B8F /* Movie.swift in Sources */,
 				902C0E0721F807B400F4C804 /* TheMovieDBAPI.swift in Sources */,
 			);

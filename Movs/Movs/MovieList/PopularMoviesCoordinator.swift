@@ -16,6 +16,7 @@ class PopularMoviesCoordinator {
 
     func create() -> UIViewController {
         let viewController = PopularMoviesViewController()
+        viewController.title = "Popular"
         let provider = TheMovieDBProvider()
         let navVc = UINavigationController(rootViewController: viewController)
         viewController.coordinator = self
