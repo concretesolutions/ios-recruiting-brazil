@@ -18,4 +18,11 @@ class TheMovieDBConfigProvider: ConfigProvider {
                           .map(TheMovieDBConfig.self)
                           .asObservable()
     }
+
+    func genres() -> Observable<GenresResponse> {
+        return provider.rx.request(.genres)
+                          .map(GenresResponse.self)
+                          .asObservable()
+    }
+
 }

@@ -9,9 +9,9 @@
 import UIKit
 
 class MovieDetailCoordinator {
-    let config: TheMovieDBConfig
+    let config: MovsConfig
 
-    init(config: TheMovieDBConfig) {
+    init(config: MovsConfig) {
         self.config = config
     }
 

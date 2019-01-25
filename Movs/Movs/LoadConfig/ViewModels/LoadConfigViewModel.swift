@@ -15,27 +15,46 @@ protocol LoadConfigViewModelInput {
 }
 
 protocol LoadConfigViewModelOutput {
-    func finishedLoading(_ trigger: Observable<TheMovieDBConfig>)
-    func error(_ trigger: Driver<Void>)
+    func finishedLoading(_ trigger: Observable<MovsConfig>)
 }
 
 class LoadConfigViewModel {
+    typealias View = LoadConfigViewModelInput & LoadConfigViewModelOutput
     let configProvider: ConfigProvider
+    let configStore: ConfigStore
     let disposeBag = DisposeBag()
 
-    init(view: LoadConfigViewModelInput & LoadConfigViewModelOutput, configProvider: ConfigProvider) {
+    init(view: View, configProvider: ConfigProvider, configStore: ConfigStore) {
         self.configProvider = configProvider
+        self.configStore = configStore
 
-        let result = request(view.trigger().asObservable())
+        let result = handleError(on: request(view.trigger().asObservable()))
 
-        let finished = result.map { _ in Void() }
-                             .asDriver(onErrorJustReturn: Void())
+        result.subscribe(onNext: { configStore.store(config: $0) })
+              .disposed(by: disposeBag)
 
         view.finishedLoading(result)
-        view.error(finished)
     }
 
-    func request(_ observable: Observable<Void>) -> Observable<TheMovieDBConfig> {
-        return observable.flatMap(configProvider.config)
+    func request(_ observable: Observable<Void>) -> Observable<MovsConfig> {
+        let genres = observable.flatMap(configProvider.genres)
+        let config = observable.flatMap(configProvider.config)
+
+        return
+            Observable.zip(genres, config)
+            .map { genres, config in
+                let movsGenres = genres.genres.map { MovsGenre(id: $0.id, name: $0.name) }
+                let imageProvider = config.images.secureBaseURL
+
+                return MovsConfig(imageProvider: imageProvider, genres: movsGenres)
+            }
+    }
+
+    func handleError(on observable: Observable<MovsConfig>) -> Observable<MovsConfig> {
+        return observable
+            .catchError { _ in
+                let config = self.configStore.config()
+                return config.map(Observable.just) ?? Observable.empty()
+            }
     }
 }

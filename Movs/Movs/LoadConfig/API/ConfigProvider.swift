@@ -11,4 +11,5 @@ import RxSwift
 
 protocol ConfigProvider {
     func config() -> Observable<TheMovieDBConfig>
+    func genres() -> Observable<GenresResponse>
 }

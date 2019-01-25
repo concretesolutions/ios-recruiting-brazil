@@ -9,8 +9,8 @@
 import UIKit
 
 class PopularMoviesCoordinator {
-    let config: TheMovieDBConfig
-    init(config: TheMovieDBConfig) {
+    let config: MovsConfig
+    init(config: MovsConfig) {
         self.config = config
     }
 

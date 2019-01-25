@@ -29,7 +29,7 @@ extension LoadConfigViewController: LoadConfigViewModelInput {
 }
 
 extension LoadConfigViewController: LoadConfigViewModelOutput {
-    func finishedLoading(_ trigger: Observable<TheMovieDBConfig>) {
+    func finishedLoading(_ trigger: Observable<MovsConfig>) {
         guard let coordinator = coordinator else { return }
         coordinator.next(from: self, with: trigger)
     }
