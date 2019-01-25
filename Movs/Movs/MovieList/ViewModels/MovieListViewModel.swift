@@ -22,13 +22,15 @@ protocol MoviesViewModelOutput: class {
 class MovieListViewModel {
     private let page = BehaviorSubject(value: 1)
     private let dataProvider: MoviesProvider
+    private let favoriteStore: FavoriteStore
     private let disposeBag = DisposeBag()
 
     private weak var view: (MoviesViewModelInput & MoviesViewModelOutput)?
     private let config: MovsConfig
 
-    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider, config: MovsConfig) {
+    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider, config: MovsConfig, favoriteStore: FavoriteStore) {
         self.dataProvider = dataProvider
+        self.favoriteStore = favoriteStore
         self.view = view
         self.config = config
         setupBinds()
@@ -37,6 +39,11 @@ class MovieListViewModel {
     func setupBinds() {
         guard let view = view else { return }
         let pages = requestPage(trigger: view.trigger().asObservable())
+
+        pages.subscribe(onNext: { page in
+            page.results.forEach(self.favoriteStore.update)
+        })
+        .disposed(by: disposeBag)
 
         setupPaging(with: pages)
 
@@ -83,7 +90,8 @@ class MovieListViewModel {
     }
 
     func movieViewModel(from movie: Movie) -> MovieViewModel {
-        
-        return MovieViewModel(model: movie, title: movie.title, image: config.imageUrl(movie.posterPath))
+        let isFavorite = favoriteStore.contains(movie: movie)
+
+        return MovieViewModel(model: movie, title: movie.title, image: config.imageUrl(movie.posterPath), isFavorite: isFavorite)
     }
 }

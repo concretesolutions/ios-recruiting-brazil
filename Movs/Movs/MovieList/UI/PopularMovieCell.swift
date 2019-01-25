@@ -34,8 +34,14 @@ class PopularMovieCell: UICollectionViewCell {
         self.viewModel = viewModel
 
         titleLabel.text = viewModel.title
+        setupFavorite(viewModel.isFavorite)
+
         guard let url = viewModel.image else { return }
         Nuke.loadImage(with: url, into: imageView)
+    }
+
+    func setupFavorite(_ isFavorite: Bool) {
+        favoriteImage.image = isFavorite ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
     }
 }
 
@@ -49,7 +55,7 @@ extension PopularMovieCell: ViewConfiguration {
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
 
-        favoriteImage.image = #imageLiteral(resourceName: "favorite_full_icon")
+        favoriteImage.image = #imageLiteral(resourceName: "favorite_gray_icon")
 
         containerView.backgroundColor = .movsBlue
     }

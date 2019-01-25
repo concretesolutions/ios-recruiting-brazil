@@ -12,4 +12,5 @@ struct MovieViewModel {
     let model: Movie
     let title: String
     let image: URL?
+    var isFavorite: Bool
 }
