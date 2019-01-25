@@ -9,6 +9,6 @@
 import Foundation
 
 struct MovsGenre: Codable {
-    let id: Int
+    let identifier: Int
     let name: String
 }

@@ -8,9 +8,18 @@
 
 import Foundation
 
+protocol MovieViewModelDelegate: class {
+    func updateFavorite(_ isFavorite: Bool)
+}
+
 struct MovieViewModel {
     let model: Movie
     let title: String
     let image: URL?
     var isFavorite: Bool
+
+    weak var delegate: MovieViewModelDelegate?
+
+    func setupListening() {
+    }
 }

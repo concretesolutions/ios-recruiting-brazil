@@ -13,6 +13,17 @@ class MovieDetailView: UIView {
     let titleLabel = UILabel()
     let genresLabel = UILabel()
     let overviewLabel = UITextView()
+    let favoriteButton = UIButton()
+
+    var favoriteAction: (() -> Void)? {
+        didSet {
+            favoriteButton.addTarget(self, action: #selector(didPressFavorite), for: .touchUpInside)
+        }
+    }
+
+    @objc func didPressFavorite() {
+        favoriteAction?()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,18 +33,29 @@ class MovieDetailView: UIView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setFavorite(_ isFavorite: Bool) {
+        if isFavorite {
+            favoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+        } else {
+            favoriteButton.setImage(#imageLiteral(resourceName: "favorite_empty_icon"), for: .normal)
+        }
+    }
 }
 
 extension MovieDetailView: ViewConfiguration {
     func setupViews() {
         overviewLabel.isEditable = false
-        [imageView, titleLabel, genresLabel, overviewLabel].forEach {
+
+        favoriteButton.setImage(#imageLiteral(resourceName: "favorite_empty_icon"), for: .normal)
+
+        [imageView, titleLabel, genresLabel, overviewLabel, favoriteButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 
     func setupHierarchy() {
-        [imageView, titleLabel, genresLabel, overviewLabel].forEach(addSubview)
+        [imageView, titleLabel, genresLabel, overviewLabel, favoriteButton].forEach(addSubview)
     }
 
     func setupConstraints() {
@@ -57,6 +79,11 @@ extension MovieDetailView: ViewConfiguration {
         overviewLabel.snp.makeConstraints { make in
             make.top.equalTo(genresLabel.snp.bottom)
             make.left.right.bottom.equalTo(self)
+        }
+
+        favoriteButton.snp.makeConstraints { make in
+            make.top.right.bottom.equalTo(titleLabel)
+            make.width.equalTo(favoriteButton.snp.height)
         }
     }
 }

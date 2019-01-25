@@ -13,6 +13,11 @@ struct GenresResponse: Codable {
 }
 
 struct Genre: Codable {
-    let id: Int
+    let identifier: Int
     let name: String
+
+    enum CodingKeys: String, CodingKey {
+        case identifier = "id"
+        case name
+    }
 }

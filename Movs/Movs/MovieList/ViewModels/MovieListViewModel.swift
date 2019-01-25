@@ -20,15 +20,16 @@ protocol MoviesViewModelOutput: class {
 }
 
 class MovieListViewModel {
+    typealias View = MoviesViewModelInput & MoviesViewModelOutput
     private let page = BehaviorSubject(value: 1)
     private let dataProvider: MoviesProvider
     private let favoriteStore: FavoriteStore
     private let disposeBag = DisposeBag()
 
-    private weak var view: (MoviesViewModelInput & MoviesViewModelOutput)?
+    private weak var view: View?
     private let config: MovsConfig
 
-    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider, config: MovsConfig, favoriteStore: FavoriteStore) {
+    init(view: View, dataProvider: MoviesProvider, config: MovsConfig, favoriteStore: FavoriteStore) {
         self.dataProvider = dataProvider
         self.favoriteStore = favoriteStore
         self.view = view
@@ -92,6 +93,9 @@ class MovieListViewModel {
     func movieViewModel(from movie: Movie) -> MovieViewModel {
         let isFavorite = favoriteStore.contains(movie: movie)
 
-        return MovieViewModel(model: movie, title: movie.title, image: config.imageUrl(movie.posterPath), isFavorite: isFavorite)
+        return MovieViewModel(model: movie,
+                              title: movie.title,
+                              image: config.imageUrl(movie.posterPath),
+                              isFavorite: isFavorite)
     }
 }

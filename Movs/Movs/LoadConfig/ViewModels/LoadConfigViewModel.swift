@@ -28,7 +28,7 @@ class LoadConfigViewModel {
         self.configProvider = configProvider
         self.configStore = configStore
 
-        let result = handleError(on: request(view.trigger().asObservable()))
+        let result = handleError(on: request(view.trigger().debug("erour").asObservable()))
 
         result.subscribe(onNext: { configStore.store(config: $0) })
               .disposed(by: disposeBag)
@@ -43,7 +43,7 @@ class LoadConfigViewModel {
         return
             Observable.zip(genres, config)
             .map { genres, config in
-                let movsGenres = genres.genres.map { MovsGenre(id: $0.id, name: $0.name) }
+                let movsGenres = genres.genres.map { MovsGenre(identifier: $0.identifier, name: $0.name) }
                 let imageProvider = config.images.secureBaseURL
 
                 return MovsConfig(imageProvider: imageProvider, genres: movsGenres)
