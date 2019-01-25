@@ -25,8 +25,9 @@ class MovieListViewModel {
     private let disposeBag = DisposeBag()
 
     private weak var view: (MoviesViewModelInput & MoviesViewModelOutput)?
-    private let config: TheMovieDBConfig
-    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider, config: TheMovieDBConfig) {
+    private let config: MovsConfig
+
+    init(view: MoviesViewModelInput & MoviesViewModelOutput, dataProvider: MoviesProvider, config: MovsConfig) {
         self.dataProvider = dataProvider
         self.view = view
         self.config = config
@@ -83,6 +84,6 @@ class MovieListViewModel {
 
     func movieViewModel(from movie: Movie) -> MovieViewModel {
         
-        return MovieViewModel(model: movie, title: movie.title, image: config.images.safeImageURL(for: movie.posterPath))
+        return MovieViewModel(model: movie, title: movie.title, image: config.imageUrl(movie.posterPath))
     }
 }

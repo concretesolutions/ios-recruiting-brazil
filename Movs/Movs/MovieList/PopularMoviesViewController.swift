@@ -14,6 +14,7 @@ class PopularMoviesViewController: UIViewController {
     private lazy var collectionView = {
         return UICollectionView(frame: .zero, collectionViewLayout: collectionLayout())
     }()
+    var coordinator: PopularMoviesCoordinator?
 
     private let disposeBag = DisposeBag()
 
@@ -57,6 +58,19 @@ extension PopularMoviesViewController: MoviesViewModelInput, MoviesViewModelOutp
                                              cellType: PopularMovieCell.self),
                      curriedArgument: setupCell)
               .disposed(by: disposeBag)
+
+        collectionView.rx.itemSelected
+            .debug("selected")
+            .map {idx -> MovieViewModel? in
+            guard let cell = self.collectionView.cellForItem(at: idx) as? PopularMovieCell else { return nil }
+
+            return cell.viewModel
+        }
+        .subscribe(onNext: {[weak self] viewModel in
+            guard let strongSelf = self else { return }
+            strongSelf.coordinator?.next(on: strongSelf, with: viewModel!)
+        })
+        .disposed(by: disposeBag)
     }
 
     func setupCell(idx: Int, viewModel: MovieViewModel, cell: PopularMovieCell) {

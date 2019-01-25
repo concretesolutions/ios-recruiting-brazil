@@ -16,12 +16,13 @@ class LoadConfigCoordinator {
         let loadVc = LoadConfigViewController()
         loadVc.coordinator = self
         let configProvider = TheMovieDBConfigProvider()
-        _ = LoadConfigViewModel(view: loadVc, configProvider: configProvider)
+        let configStore = MovsConfigStore()
+        _ = LoadConfigViewModel(view: loadVc, configProvider: configProvider, configStore: configStore)
 
         return loadVc
     }
 
-    func next(from viewController: UIViewController, with config: Observable<TheMovieDBConfig>) {
+    func next(from viewController: UIViewController, with config: Observable<MovsConfig>) {
         config.subscribe(onNext: { config in
             let tabBarVc = TabBarCoordinator().create(with: config)
             tabBarVc.modalTransitionStyle = .crossDissolve

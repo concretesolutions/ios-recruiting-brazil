@@ -9,7 +9,7 @@
 import UIKit
 
 class TabBarCoordinator {
-    func create(with config: TheMovieDBConfig) -> UIViewController {
+    func create(with config: MovsConfig) -> UIViewController {
         let tabBar = UITabBarController()
         tabBar.tabBar.barTintColor = .movsYellow
         tabBar.tabBar.tintColor = .movsBlack

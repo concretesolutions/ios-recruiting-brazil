@@ -19,6 +19,8 @@ class PopularMovieCell: UICollectionViewCell {
     let favoriteImage = UIImageView()
     let containerView = UIView()
 
+    var viewModel: MovieViewModel?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
@@ -29,6 +31,8 @@ class PopularMovieCell: UICollectionViewCell {
     }
 
     func setup(with viewModel: MovieViewModel) {
+        self.viewModel = viewModel
+
         titleLabel.text = viewModel.title
         guard let url = viewModel.image else { return }
         Nuke.loadImage(with: url, into: imageView)
