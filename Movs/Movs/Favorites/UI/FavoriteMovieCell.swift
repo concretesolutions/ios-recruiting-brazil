@@ -45,6 +45,7 @@ class FavoriteMovieCell: UITableViewCell {
 extension FavoriteMovieCell: ViewConfiguration {
     func setupViews() {
         overviewLabel.numberOfLines = 0
+        yearLabel.textAlignment = .right
     }
 
     func setupHierarchy() {
@@ -66,6 +67,7 @@ extension FavoriteMovieCell: ViewConfiguration {
         yearLabel.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right)
             make.top.bottom.equalTo(titleLabel)
+            make.width.greaterThanOrEqualTo(100)
             make.right.equalTo(contentView).inset(horizontalMargin)
         }
 

@@ -66,10 +66,18 @@ class FavoritesViewModel {
     }
 
     func viewModels(from movies: [Movie]) -> [FavoriteMovieViewModel] {
-        return movies.map { FavoriteMovieViewModel(model: $0,
-                                                   title: $0.title,
-                                                   year: $0.releaseDate,
-                                                   image: $0.posterPath.map(config.imageUrl),
-                                                   overview: $0.overview) }
+        return movies.map { movie in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+
+            let date = formatter.date(from: movie.releaseDate)
+            let year = date.map { Calendar.current.component(.year, from: $0) }
+                           .map(String.init) ?? ""
+            
+            return FavoriteMovieViewModel(model: movie,
+                                          title: movie.title,
+                                          year: year,
+                                          image: movie.posterPath.map(config.imageUrl),
+                                          overview: movie.overview) }
     }
 }

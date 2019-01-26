@@ -26,7 +26,6 @@ class PopularMoviesViewController: UIViewController {
         view.backgroundColor = .white
 
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundView = LoadingView(frame: .zero)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         collectionView.register(PopularMovieCell.self, forCellWithReuseIdentifier: PopularMovieCell.reuseId)
     }
@@ -66,6 +65,7 @@ extension PopularMoviesViewController: MoviesViewModelInput, MoviesViewModelOutp
     }
 
     func display(movies: Driver<[MovieViewModel]>) {
+        collectionView.backgroundView = LoadingView(frame: .zero)
         movies.drive(onNext: { [weak self] vms in
             guard let strongSelf = self else { return }
             if !vms.isEmpty {
