@@ -46,8 +46,6 @@ class MovieDetailView: UIView {
 extension MovieDetailView: ViewConfiguration {
     func setupViews() {
         overviewLabel.isEditable = false
-        
-
         favoriteButton.setImage(#imageLiteral(resourceName: "favorite_empty_icon"), for: .normal)
 
         [imageView, titleLabel, genresLabel, overviewLabel, favoriteButton].forEach {

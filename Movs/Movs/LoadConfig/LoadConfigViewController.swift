@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class LoadConfigViewController: UIViewController {
+    let disposeBag = DisposeBag()
     let loadConfigView = LoadConfigView()
     var coordinator: LoadConfigCoordinator?
 
@@ -35,6 +36,21 @@ extension LoadConfigViewController: LoadConfigViewModelOutput {
     }
 
     func error(_ trigger: Driver<Void>) {
-        
+        trigger.drive(onNext: { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.showError()
+        })
+        .disposed(by: disposeBag)
+    }
+
+    func showError() {
+        let alert = UIAlertController(title: "Ooops",
+                                      message: "Algo de errado aconteceu. Tente novamente mais tarde.",
+                                      preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "ok", style: .default)
+
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 }

@@ -16,6 +16,7 @@ protocol LoadConfigViewModelInput {
 
 protocol LoadConfigViewModelOutput {
     func finishedLoading(_ trigger: Observable<MovsConfig>)
+    func error(_ trigger: Driver<Void>)
 }
 
 class LoadConfigViewModel {
@@ -28,12 +29,15 @@ class LoadConfigViewModel {
         self.configProvider = configProvider
         self.configStore = configStore
 
-        let result = handleError(on: request(view.trigger().asObservable()))
+        let req = request(view.trigger().asObservable())
+        let result = handleError(on: req)
+        let errors = setupError(on: req)
 
         result.subscribe(onNext: { configStore.store(config: $0) })
               .disposed(by: disposeBag)
 
         view.finishedLoading(result)
+        view.error(errors)
     }
 
     func request(_ observable: Observable<Void>) -> Observable<MovsConfig> {
@@ -56,5 +60,18 @@ class LoadConfigViewModel {
                 let config = self.configStore.config()
                 return config.map(Observable.just) ?? Observable.empty()
             }
+    }
+
+    func setupError(on observable: Observable<MovsConfig>) -> Driver<Void> {
+        return observable.materialize()
+            .filter { event in
+                if case .error = event {
+                    return true
+                }
+                return false
+            }
+            .dematerialize()
+            .map { _ in Void() }
+            .asDriver(onErrorJustReturn: Void())
     }
 }

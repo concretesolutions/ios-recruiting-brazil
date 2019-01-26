@@ -73,7 +73,7 @@ class FavoritesViewModel {
             let date = formatter.date(from: movie.releaseDate)
             let year = date.map { Calendar.current.component(.year, from: $0) }
                            .map(String.init) ?? ""
-            
+
             return FavoriteMovieViewModel(model: movie,
                                           title: movie.title,
                                           year: year,
