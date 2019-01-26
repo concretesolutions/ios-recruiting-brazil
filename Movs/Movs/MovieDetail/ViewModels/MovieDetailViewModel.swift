@@ -35,7 +35,7 @@ class MovieDetailViewModel {
             .joined(separator: ", ")
 
         overview = movie.overview
-        image = config.imageUrl(movie.posterPath)
+        image = movie.posterPath.map(config.imageUrl)
         isFavorite = favoriteStore.contains(movie: movie)
     }
 

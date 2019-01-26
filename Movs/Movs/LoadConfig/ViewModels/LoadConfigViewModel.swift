@@ -28,7 +28,7 @@ class LoadConfigViewModel {
         self.configProvider = configProvider
         self.configStore = configStore
 
-        let result = handleError(on: request(view.trigger().debug("erour").asObservable()))
+        let result = handleError(on: request(view.trigger().asObservable()))
 
         result.subscribe(onNext: { configStore.store(config: $0) })
               .disposed(by: disposeBag)

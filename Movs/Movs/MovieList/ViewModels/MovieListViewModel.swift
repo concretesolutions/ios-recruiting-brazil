@@ -59,7 +59,7 @@ class MovieListViewModel {
 
         let moviesDriver = Observable.combineLatest(movies, favorites)
                                     .map(setFavorite)
-                                    .asDriver { _ in Driver<[MovieViewModel]>.empty() }
+                                    .asDriver(onErrorJustReturn: [])
 
         let errorsDriver = pages.materialize()
             .filter { event in
@@ -83,8 +83,7 @@ class MovieListViewModel {
 
     func setupPaging(with pages: Observable<MoviesPage>) {
         pages.map(nextPage)
-            .filter {$0 != nil}
-            .map { $0 ?? 0 }
+            .flatMap { $0.map(Observable.just) ?? Observable.empty() }
             .catchErrorJustReturn((try? page.value()) ?? 0)
             .bind(to: page)
             .disposed(by: disposeBag)
@@ -103,17 +102,17 @@ class MovieListViewModel {
 
         return MovieViewModel(model: movie,
                               title: movie.title,
-                              image: config.imageUrl(movie.posterPath),
+                              image: movie.posterPath.map(config.imageUrl),
                               isFavorite: isFavorite)
     }
 
     func setFavorite(viewModels: [MovieViewModel], favorites: [Movie]) -> [MovieViewModel] {
         return
-            viewModels.map { vm in
-                let isFavorite = favoriteStore.contains(movie: vm.model)
-                return MovieViewModel(model: vm.model,
-                                      title: vm.title,
-                                      image: vm.image,
+            viewModels.map { viewModel in
+                let isFavorite = favoriteStore.contains(movie: viewModel.model)
+                return MovieViewModel(model: viewModel.model,
+                                      title: viewModel.title,
+                                      image: viewModel.image,
                                       isFavorite: isFavorite)
             }
     }

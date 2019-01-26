@@ -15,20 +15,29 @@ import RxTest
 
 class MovieListViewMock: MoviesViewModelOutput & MoviesViewModelInput {
     let errors: TestableObserver<Void>
-    let triggers: TestableObservable<Void>
+    let contentRequest: TestableObservable<Void>
+    let updateRequest: TestableObservable<Void>
     let movies: TestableObserver<[MovieViewModel]>
     let disposeBag: DisposeBag
 
-    init(scheduler: TestScheduler, disposeBag: DisposeBag, triggerEvents: [Recorded<Event<Void>>]) {
+    init(scheduler: TestScheduler,
+         disposeBag: DisposeBag,
+         triggerEvents: [Recorded<Event<Void>>],
+         updateEvents: [Recorded<Event<Void>>]) {
+
         errors = scheduler.createObserver(Void.self)
         movies = scheduler.createObserver([MovieViewModel].self)
-        triggers = scheduler.createColdObservable(triggerEvents)
+        contentRequest = scheduler.createColdObservable(triggerEvents)
+        updateRequest = scheduler.createColdObservable(updateEvents)
         self.disposeBag = disposeBag
     }
 
-    func requestContent() -> Driver<Void> {
-        return triggers.asDriver(onErrorJustReturn: Void())
+    func requestUpdate() ->  Driver<Void> {
+        return updateRequest.asDriver(onErrorJustReturn: Void())
+    }
 
+    func requestContent() -> Driver<Void> {
+        return contentRequest.asDriver(onErrorJustReturn: Void())
     }
 
     func display(error: Driver<Void>) {

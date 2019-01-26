@@ -52,10 +52,12 @@ extension FavoritesViewController: FavoritesViewModelInput {
 
 extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return [UITableViewRowAction(style: .destructive, title: "Unfavorite") { _, indexPath in
+        let action = UITableViewRowAction(style: .destructive, title: "Unfavorite") { _, indexPath in
             tableView.dataSource?.tableView!(tableView, commit: .delete, forRowAt: indexPath)
             return
-            }]
+        }
+
+        return [action]
     }
 }
 
@@ -66,15 +68,17 @@ extension FavoritesViewController: FavoritesViewModelOutput {
                      curriedArgument: setupCell)
             .disposed(by: disposeBag)
 
-        tableView.rx.itemSelected
-            .map {idx -> FavoriteMovieViewModel? in
-                guard let cell = self.tableView.cellForRow(at: idx) as? FavoriteMovieCell else { return nil }
+        setupItemSelection()
+    }
 
-                return cell.viewModel
-            }
+    func setupItemSelection() {
+        tableView.rx.itemSelected
+            .map(tableView.cellForRow)
+            .map { $0 as? FavoriteMovieCell }
+            .flatMap { $0?.viewModel.map(Observable.just) ?? Observable.empty() }
             .subscribe(onNext: {[weak self] viewModel in
                 guard let strongSelf = self else { return }
-                strongSelf.coordinator?.next(on: strongSelf, with: viewModel!)
+                strongSelf.coordinator?.next(on: strongSelf, with: viewModel)
             })
             .disposed(by: disposeBag)
     }

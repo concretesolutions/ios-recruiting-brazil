@@ -69,7 +69,7 @@ class FavoritesViewModel {
         return movies.map { FavoriteMovieViewModel(model: $0,
                                                    title: $0.title,
                                                    year: $0.releaseDate,
-                                                   image: config.imageUrl($0.posterPath),
+                                                   image: $0.posterPath.map(config.imageUrl),
                                                    overview: $0.overview) }
     }
 }

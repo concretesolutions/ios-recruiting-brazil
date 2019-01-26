@@ -25,6 +25,8 @@ class PopularMoviesViewController: UIViewController {
         view = collectionView
         view.backgroundColor = .white
 
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundView = LoadingView(frame: .zero)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         collectionView.register(PopularMovieCell.self, forCellWithReuseIdentifier: PopularMovieCell.reuseId)
     }
@@ -55,27 +57,37 @@ extension PopularMoviesViewController: MoviesViewModelInput, MoviesViewModelOutp
     }
 
     func display(error: Driver<Void>) {
-
+        error.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.collectionView.backgroundView = ErrorView(frame: .zero)
+        })
+        .disposed(by: disposeBag)
     }
 
     func display(movies: Driver<[MovieViewModel]>) {
+        movies.drive(onNext: { [weak self] vms in
+            guard let strongSelf = self else { return }
+            if !vms.isEmpty {
+                strongSelf.collectionView.backgroundView = nil
+            }
+        })
+            .disposed(by: disposeBag)
+
         movies.drive(collectionView.rx.items(cellIdentifier: PopularMovieCell.reuseId,
                                              cellType: PopularMovieCell.self),
                      curriedArgument: setupCell)
-              .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
 
         collectionView.rx.itemSelected
-            .debug("selected")
-            .map {idx -> MovieViewModel? in
-            guard let cell = self.collectionView.cellForItem(at: idx) as? PopularMovieCell else { return nil }
-
-            return cell.viewModel
-        }
-        .subscribe(onNext: {[weak self] viewModel in
-            guard let strongSelf = self else { return }
-            strongSelf.coordinator?.next(on: strongSelf, with: viewModel!)
-        })
-        .disposed(by: disposeBag)
+            .map(collectionView.cellForItem)
+            .map { $0 as? PopularMovieCell }
+            .flatMap { $0?.viewModel.map(Observable.just) ?? Observable.empty()}
+            .subscribe(onNext: {[weak self] viewModel in
+                guard let strongSelf = self else { return }
+                strongSelf.coordinator?.next(on: strongSelf, with: viewModel)
+            })
+            .disposed(by: disposeBag)
     }
 
     func setupCell(idx: Int, viewModel: MovieViewModel, cell: PopularMovieCell) {
@@ -96,6 +108,7 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (view.frame.width / 2) - 10
         let height = width * 1.5
+
         return CGSize(width: width, height: height)
     }
 }

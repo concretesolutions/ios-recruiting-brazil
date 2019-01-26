@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol MovieViewModelDelegate: class {
-    func updateFavorite(_ isFavorite: Bool)
-}
-
 struct MovieViewModel {
     let model: Movie
     let title: String

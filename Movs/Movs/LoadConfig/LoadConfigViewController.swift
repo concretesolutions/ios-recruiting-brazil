@@ -35,6 +35,6 @@ extension LoadConfigViewController: LoadConfigViewModelOutput {
     }
 
     func error(_ trigger: Driver<Void>) {
-
+        
     }
 }
