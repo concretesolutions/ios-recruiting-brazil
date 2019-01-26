@@ -26,9 +26,17 @@ class MovieDetailViewController: UIViewController {
         movieDetailView.genresLabel.text = viewModel.genres
         movieDetailView.titleLabel.text = viewModel.title
         movieDetailView.overviewLabel.text = viewModel.overview
+        movieDetailView.setFavorite(viewModel.isFavorite)
         guard let image = viewModel.image else { return }
         Nuke.loadImage(with: image, into: movieDetailView.imageView)
 
+        movieDetailView.favoriteAction = viewModel.toggleFavorite
+    }
+}
+
+extension MovieDetailViewController: MovieDetailViewModelDelegate {
+    func updateFavorite(_ isFavorite: Bool) {
+        movieDetailView.setFavorite(isFavorite)
     }
 }
 

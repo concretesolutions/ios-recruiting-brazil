@@ -43,7 +43,7 @@ class LoadConfigViewModel {
         return
             Observable.zip(genres, config)
             .map { genres, config in
-                let movsGenres = genres.genres.map { MovsGenre(id: $0.id, name: $0.name) }
+                let movsGenres = genres.genres.map { MovsGenre(identifier: $0.identifier, name: $0.name) }
                 let imageProvider = config.images.secureBaseURL
 
                 return MovsConfig(imageProvider: imageProvider, genres: movsGenres)

@@ -25,7 +25,8 @@ class MovieListViewModelSpec: QuickSpec {
         let viewMock = MovieListViewMock(scheduler: scheduler,
                                          disposeBag: disposeBag,
                                          triggerEvents: [.next(10, Void()),
-                                                         .next(20, Void())])
+                                                         .next(20, Void())],
+                                         updateEvents: [])
 
         let pages = [MoviesPage(page: 1, totalResults: 3, totalPages: 3, results: [Movie(voteCount: 0,
                                                                                          identifier: 0,
@@ -69,8 +70,12 @@ class MovieListViewModelSpec: QuickSpec {
                                                                                          adult: false,
                                                                                          overview: "",
                                                                                          releaseDate: "")])]
+
+        let config = MovsConfig(imageProvider: URL(string: "https://google.com.br")!, genres: [MovsGenre(identifier: 10, name: "terror")])
+        let favoriteStore = 
         let dataProviderMock = MoviesProviderSuccessMock(pages: pages)
-        _ = MovieListViewModel(view: viewMock, dataProvider: dataProviderMock)
+
+        _ = MovieListViewModel(view: viewMock, dataProvider: dataProviderMock, config: config)
 
         scheduler.start()
         it("") {

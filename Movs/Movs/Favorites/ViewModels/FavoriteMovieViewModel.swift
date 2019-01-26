@@ -1,16 +1,17 @@
 //
-//  MovieViewModel.swift
+//  FavoriteMovieViewModel.swift
 //  Movs
 //
-//  Created by Filipe Jordão on 22/01/19.
+//  Created by Filipe Jordão on 25/01/19.
 //  Copyright © 2019 Filipe Jordão. All rights reserved.
 //
 
 import Foundation
 
-struct MovieViewModel {
+struct FavoriteMovieViewModel {
     let model: Movie
     let title: String
+    let year: String
     let image: URL?
-    var isFavorite: Bool
+    let overview: String
 }

@@ -46,7 +46,7 @@ class MovsFavoriteStore: FavoriteStore {
 
     func drop(movie: Movie) {
         let dropped = fetch().filter { $0.identifier != movie.identifier }
-        store(movies: dropped)
+        defaults.set(dropped, for: key)
     }
 
     func contains(movie: Movie) -> Bool {

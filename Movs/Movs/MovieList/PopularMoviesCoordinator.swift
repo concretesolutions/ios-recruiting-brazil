@@ -16,13 +16,17 @@ class PopularMoviesCoordinator {
 
     func create() -> UIViewController {
         let viewController = PopularMoviesViewController()
+        viewController.title = "Popular"
         let provider = TheMovieDBProvider()
         let navVc = UINavigationController(rootViewController: viewController)
         viewController.coordinator = self
 
         navVc.navigationBar.barTintColor = .movsYellow
 
-        _ = MovieListViewModel(view: viewController, dataProvider: provider, config: config)
+        _ = MovieListViewModel(view: viewController,
+                               dataProvider: provider,
+                               config: config,
+                               favoriteStore: MovsFavoriteStore())
 
         viewController.tabBarItem = UITabBarItem(title: viewController.title, image: #imageLiteral(resourceName: "list_icon"), selectedImage: nil)
 

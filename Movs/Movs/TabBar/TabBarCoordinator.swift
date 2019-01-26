@@ -15,7 +15,7 @@ class TabBarCoordinator {
         tabBar.tabBar.tintColor = .movsBlack
         tabBar.tabBar.unselectedItemTintColor = .movsGray
         tabBar.viewControllers = [PopularMoviesCoordinator(config: config).create(),
-                                  PopularMoviesCoordinator(config: config).create()]
+                                  FavoritesCoordinator(config: config).create()]
 
         return tabBar
     }
