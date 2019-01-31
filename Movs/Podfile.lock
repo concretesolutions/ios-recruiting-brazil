@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.0)
+  - Keys (1.0.1)
   - Moya (12.0.1):
     - Moya/Core (= 12.0.1)
   - Moya/Core (12.0.1):
@@ -15,14 +16,13 @@ PODS:
     - SDWebImage/Core (= 4.4.3)
   - SDWebImage/Core (4.4.3)
   - SnapKit (4.0.1)
-  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - Keys (from `Pods/CocoaPodsKeys`)
   - Moya
   - Reusable
   - SDWebImage (~> 4.0)
   - SnapKit (~> 4.0.0)
-  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -32,17 +32,20 @@ SPEC REPOS:
     - Reusable
     - SDWebImage
     - SnapKit
-    - SVProgressHUD
+
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   Reusable: 188be1a54ac0691bc66e5bb24ec6eb91971b315b
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: f880497ecf19b1b7382a140359db47a139854f61
+PODFILE CHECKSUM: 0f19f43e5c34f7615f760437608129c51748c21e
 
 COCOAPODS: 1.5.3
