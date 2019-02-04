@@ -1,5 +1,5 @@
 //
-//  CoreDataContextManager.swift
+//  ContextManager.swift
 //  Movs
 //
 //  Created by Brendoon Ryos on 03/02/19.
@@ -8,10 +8,9 @@
 
 import CoreData
 
-class CoreDataContextManager: NSObject {
+class ContextManager: NSObject {
   
   // MARK: - Core Data stack
-  static let shared = CoreDataContextManager()
   
   lazy var persistentContainer: NSPersistentContainer = {
     /*
@@ -20,23 +19,24 @@ class CoreDataContextManager: NSObject {
      application to it. This property is optional since there are legitimate
      error conditions that could cause the creation of the store to fail.
      */
-    let container = NSPersistentContainer(name: "MOVS")
+    let container = NSPersistentContainer(name: "MovsDatabase")
     container.loadPersistentStores(completionHandler: { (_, error) in
+      container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
       if let error = error as NSError? {
-        print("Error trying to create core data persistent container in: \(CoreDataContextManager.self)")
+        print("Error trying to create core data persistent container in: \(ContextManager.self)")
       }
     })
     return container
   }()
   
   // MARK: - Core Data Saving support
-  public func saveContext () {
-    let context = CoreDataContextManager.shared.persistentContainer.viewContext
+  func saveContext () {
+    let context = persistentContainer.viewContext
     if context.hasChanges {
       do {
         try context.save()
       } catch let error{
-        print("Error trying to save core data context in: \(CoreDataContextManager.self)")
+        print("Error trying to save core data context in: \(ContextManager.self)")
         print(error.localizedDescription)
       }
     }

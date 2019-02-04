@@ -12,5 +12,18 @@ import CoreData
 
 @objc(CDMovie)
 public class CDMovie: NSManagedObject {
-
+  
+  convenience init(movie: Movie, genres: [Genre], context: NSManagedObjectContext) {
+    let newMovie = NSEntityDescription.entity(forEntityName: "CDMovie", in: context)!
+    self.init(entity: newMovie, insertInto: context)
+    self.id = Int32(movie.id)
+    self.title = movie.title
+    self.overview = movie.overview
+    self.posterPath = movie.posterPath
+    self.releaseDate = movie.releaseDate
+    genres.forEach {
+      let genre = CDGenre(id: $0.id, name: $0.name, context: context)
+      self.addToGenres(genre)
+    }
+  }
 }

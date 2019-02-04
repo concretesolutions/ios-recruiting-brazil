@@ -22,7 +22,6 @@ extension CDMovie {
     @NSManaged public var releaseDate: String?
     @NSManaged public var id: Int32
     @NSManaged public var overview: String?
-    @NSManaged public var isFavorite: Bool
     @NSManaged public var genres: NSSet?
 
 }

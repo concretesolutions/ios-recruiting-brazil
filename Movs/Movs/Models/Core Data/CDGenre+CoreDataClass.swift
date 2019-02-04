@@ -13,4 +13,10 @@ import CoreData
 @objc(CDGenre)
 public class CDGenre: NSManagedObject {
 
+  convenience init(id: Int, name: String, context: NSManagedObjectContext) {
+    let newMovie = NSEntityDescription.entity(forEntityName: "CDGenre", in: context)!
+    self.init(entity: newMovie, insertInto: context)
+    self.id = Int32(id)
+    self.name = name
+  }
 }
