@@ -75,6 +75,8 @@ extension MovsAPI: TargetType {
     case .searchForMovie(let query, let page):
       let params: [String: Any] = authParams.merging(["query": query, "page": "\(page)"]) { (_, new) in new }
       return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+    case .fetchGenres:
+      return .requestParameters(parameters: authParams, encoding: URLEncoding.queryString)
     default:
       return .requestPlain
     }
