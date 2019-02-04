@@ -29,8 +29,35 @@ enum Movies {
     }
     
     struct ViewModel {
-      let movie: Movie
-      let genres: [Genre]
+      private let movie: Movie
+      private let genres: [Genre]
+      
+      var title: String {
+        return movie.title
+      }
+      
+      var genresString: String {
+        let genreTitles: [String] = genres.compactMap { $0.name }
+        return genreTitles.joined(separator: ", ")
+      }
+      
+      var backdropPath: String? {
+        return movie.backdropPath
+      }
+      
+      var year: String? {
+        let dateComponets = movie.releaseDate.components(separatedBy: "-")
+        return dateComponets.first
+      }
+      
+      var overview: String {
+        return movie.overview
+      }
+      
+      init(movie: Movie, genres: [Genre]) {
+        self.movie = movie
+        self.genres = genres
+      }
     }
   }
   
