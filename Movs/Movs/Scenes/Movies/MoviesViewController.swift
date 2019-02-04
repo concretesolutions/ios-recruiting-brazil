@@ -37,7 +37,6 @@ class MoviesViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
     self.title = "Movies"
     self.tabBarItem = UITabBarItem(title: self.title, image: UIImage(named: self.title!.lowercased()), tag: 0)
-    self.modalTransitionStyle = .coverVertical
     setup()
   }
   
@@ -69,6 +68,11 @@ class MoviesViewController: UIViewController {
     fetchMovies()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    moviesView.collectionView.reloadData()
+  }
+  
   override func loadView() {
     self.view = moviesView
   }
@@ -76,6 +80,15 @@ class MoviesViewController: UIViewController {
   func configCollection() {
     moviesView.collectionView.prefetchDataSource = self
     moviesView.collectionView.setSelectionHandler(fetchGenres)
+    moviesView.errorView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refresh)))
+  }
+  
+  @objc func refresh() {
+    fetchMovies()
+  }
+  
+  func dismissHandler() {
+    moviesView.collectionView.reloadData()
   }
   
   // MARK: Fetch Movies
@@ -117,17 +130,13 @@ extension MoviesViewController: MoviesDisplayLogic {
   
   func displayMovieDetails(viewModel: Movies.Details.ViewModel) {
     self.router?.routeToMovieDetails()
-    
-    let movie = viewModel.movie
-    print(movie.title)
-    print(movie.originalTitle)
   }
 }
 
 // MARK: - UICollectionViewDataSourcePrefetching
 extension MoviesViewController: UICollectionViewDataSourcePrefetching {
   func isLoadingCell(for tag: Int) -> Bool {
-    print(tag + 3, currentCount - 1)
+//    print(tag + 3, currentCount - 1)
     return tag + 3 >= currentCount - 1
   }
 
@@ -159,6 +168,9 @@ extension MoviesViewController: UISearchBarDelegate {
     searchingState = .begin
     if !searchText.isEmpty {
       fetchMovies(searchText)
+    } else {
+      searchingState = .ended
+      interactor?.fetchLocalMovies()
     }
   }
   

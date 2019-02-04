@@ -34,6 +34,7 @@ final class MovieCollectionViewCell: UICollectionViewCell, Reusable {
     super.prepareForReuse()
     gridView.imageView.image = nil
     gridView.titleLabel.text = nil
+    gridView.favoriteButton.setBackgroundImage(UIImage(named: "unfavorite"), for: .normal)
     gridView.activityIndicator.stopAnimating()
   }
   
@@ -41,7 +42,10 @@ final class MovieCollectionViewCell: UICollectionViewCell, Reusable {
     if hasPoster {
       gridView.imageView.download(image: item.posterPath, activityIndicator: gridView.activityIndicator)
     } else {
-      gridView.imageView.image = UIImage(named: "noImage")
+      gridView.imageView.image = UIImage(named: "noPoster")
+    }
+    if item.isFavorite {
+      gridView.favoriteButton.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
     }
     gridView.titleLabel.text = item.title
   }
@@ -62,6 +66,7 @@ extension MovieCollectionViewCell: ViewCode {
   }
   
   func configureViews() {
+    gridView.favoriteButton.isUserInteractionEnabled = false
     layer.shadowColor = ColorPalette.black.withAlphaComponent(0.6).cgColor
     layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
     layer.shadowOpacity = 0.8

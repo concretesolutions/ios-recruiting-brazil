@@ -25,7 +25,6 @@ protocol MoviesDataStore {
   var selectedGenres: [Genre] { get set }
   var currentPage: Int { get set }
   var totalPages: Int { get set }
-  var totalResults: Int { get set }
 }
 
 class MoviesInteractor: MoviesBusinessLogic, MoviesDataStore {
@@ -39,7 +38,6 @@ class MoviesInteractor: MoviesBusinessLogic, MoviesDataStore {
   var selectedGenres: [Genre] = []
   var totalPages: Int = 0
   var currentPage: Int = 0
-  var totalResults: Int = 0
   
   var isFetchInProgress = false
   
@@ -59,14 +57,18 @@ class MoviesInteractor: MoviesBusinessLogic, MoviesDataStore {
       worker?.fetchMovies(request: newRequest, completion: { result in
         switch result {
         case .success(let data):
+          data.results.forEach {
+            $0.isFavorite = DatabaseManager<CDMovie>().exist(id: $0.id)
+          }
           self.movies.mergeElements(newElements: data.results)
           self.totalPages = data.totalPages
-          self.totalResults = data.totalResults
           let response = Movies.Popular.Response(data: data)
           self.presenter?.presentMovies(response: response)
         case .error(let error):
-          let response = Movies.Popular.Response(error: error)
-          self.presenter?.presentErrorMessage(response: response)
+          if self.movies.count == 0 {
+            let response = Movies.Popular.Response(error: error)
+            self.presenter?.presentErrorMessage(response: response)
+          }
         }
         DispatchQueue.main.async { self.isFetchInProgress = false }
       })
@@ -88,7 +90,7 @@ class MoviesInteractor: MoviesBusinessLogic, MoviesDataStore {
     } else {
       var genres: [Genre] = []
       let movie = request.movie!
-      for genre in self.genres where movie.genreIds.contains(genre.id){
+      for genre in self.genres where movie.genreIds.contains(genre.id) {
         genres.append(genre)
       }
       self.selectedGenres = genres

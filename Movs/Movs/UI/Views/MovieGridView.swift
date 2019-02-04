@@ -21,7 +21,7 @@ class MovieGridView: UIView {
     return view
   }()
   
-  lazy var containerView: UIImageView = {
+  lazy var shadowView: UIImageView = {
     let view = UIImageView(frame: .zero)
     view.clipsToBounds = true
     view.contentMode = .scaleAspectFill
@@ -38,10 +38,18 @@ class MovieGridView: UIView {
     return label
   }()
   
-  lazy var favoriteImageView: UIImageView = {
-    let view = UIImageView(frame: .zero)
-    view.image = UIImage(named: "unfavorite")
-    view.contentMode = .scaleAspectFit
+  lazy var favoriteButton: UIButton = {
+    let button = UIButton(frame: .zero)
+    button.setBackgroundImage(UIImage(named: "unfavorite"), for: .normal)
+    button.contentMode = .scaleAspectFit
+    return button
+  }()
+  
+  lazy var containerView: UIStackView = {
+    let view = UIStackView(frame: .zero)
+    view.axis = .horizontal
+    view.distribution = .fill
+    view.spacing = 0
     return view
   }()
   
@@ -58,10 +66,9 @@ class MovieGridView: UIView {
 extension MovieGridView: ViewCode {
   func buildViewHierarchy() {
     addSubview(imageView)
-    addSubview(containerView)
+    addSubview(shadowView)
     addSubview(activityIndicator)
-    containerView.addSubview(favoriteImageView)
-    containerView.addSubview(titleLabel)
+    addSubview(containerView)
   }
   
   func setupConstraints() {
@@ -76,25 +83,29 @@ extension MovieGridView: ViewCode {
       make.center.equalToSuperview()
     }
     
-    containerView.snp.makeConstraints { make in
+    shadowView.snp.makeConstraints { make in
       make.height.equalTo(80)
       make.leading.equalToSuperview()
       make.trailing.equalToSuperview()
       make.bottom.equalToSuperview()
     }
-    let width: CGFloat = 45.0
-    let spacing: CGFloat = -2.5
-    favoriteImageView.snp.makeConstraints { make in
+    
+    let width: CGFloat = 50.0
+    favoriteButton.snp.makeConstraints { make in
       make.size.equalTo(CGSize(width: width, height: width))
-      make.trailing.equalTo(spacing)
-      make.bottom.equalTo(spacing)
     }
     
-    titleLabel.snp.makeConstraints { make in
-      make.centerY.lessThanOrEqualTo(self.favoriteImageView)
-      make.bottom.equalTo(spacing)
-      make.leading.equalTo(-2*spacing)
-      make.trailing.equalTo(spacing - width)
+    let spacing: CGFloat = -2.5
+    containerView.snp.makeConstraints { make in
+      make.height.equalTo(width)
+      make.leading.equalTo(-4*spacing)
+      make.trailing.equalTo(spacing)
+      make.bottom.lessThanOrEqualTo(2*spacing)
     }
+  }
+  
+  func configureViews() {
+    containerView.addArrangedSubview(titleLabel)
+    containerView.addArrangedSubview(favoriteButton)
   }
 }

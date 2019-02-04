@@ -73,4 +73,8 @@ extension MoviesDelegate: UICollectionViewDelegate, UICollectionViewDelegateFlow
     let width = collectionView.bounds.width
     return MovieCollectionViewCell.size(for: width)
   }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    return CGSize(width: collectionView.frame.width, height: MovieCollectionReusableView.height())
+  }
 }

@@ -25,26 +25,23 @@ class MoviesRouter: NSObject, MoviesRoutingLogic, MoviesDataPassing {
   var dataStore: MoviesDataStore?
   
   // MARK: Routing
-  
   func routeToMovieDetails() {
     let destinationVC = MovieDetailsViewController()
     var destinationDS = destinationVC.router!.dataStore!
+    
+    destinationVC.dismissHandler = viewController?.dismissHandler
     passDataToMovieDetails(source: dataStore!, destination: &destinationDS)
     navigateToMovieDetails(source: viewController!, destination: destinationVC)
   }
 
   // MARK: Navigation
-  
   func navigateToMovieDetails(source: MoviesViewController, destination: MovieDetailsViewController) {
-//    source.navigationController?.pushViewController(destination, animated: true)
     source.present(destination, animated: true)
-//    source.show(destination, sender: nil)
   }
   
   // MARK: Passing data
   func passDataToMovieDetails(source: MoviesDataStore, destination: inout MovieDetailsDataStore) {
     destination.movie = source.selectedMovie
     destination.genres = source.selectedGenres
-//    destination.name = source.name
   }
 }

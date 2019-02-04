@@ -11,6 +11,8 @@ import UIKit
 class MoviesDataSource: NSObject {
   
   weak var collectionView: MoviesCollectionView?
+  private var searchingState: SearchingState = .none
+  
   var items: [Movie] = [] {
     didSet {
       filteredItems = items
@@ -30,6 +32,7 @@ class MoviesDataSource: NSObject {
   }
   
   func updateItems(_ items: [Movie], searchingState: SearchingState = .none) {
+    self.searchingState = searchingState
     switch searchingState {
     case .begin:
       self.filteredItems = items
@@ -43,7 +46,7 @@ class MoviesDataSource: NSObject {
   private func setup() {
     collectionView?.dataSource = self
     collectionView?.register(cellType: MovieCollectionViewCell.self)
-    collectionView?.reloadData()
+    collectionView?.register(MovieCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: MovieCollectionReusableView.self))
   }
 }
 
@@ -61,5 +64,16 @@ extension MoviesDataSource: UICollectionViewDataSource {
     cell.setup(with: movie, hasPoster: movie.posterPath != .none)
     
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: MovieCollectionReusableView.self), for: indexPath) as! MovieCollectionReusableView
+    
+    if searchingState != .begin {
+      footer.activityIndicator.startAnimating()
+    } else {
+      footer.activityIndicator.stopAnimating()
+    }
+    return footer
   }
 }
