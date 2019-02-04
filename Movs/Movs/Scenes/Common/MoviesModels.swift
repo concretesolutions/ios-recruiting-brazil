@@ -17,9 +17,11 @@ enum Movies {
   enum Details {
     struct Request {
       let movie: Movie?
+      let genres: [Genre]?
       
-      init(movie: Movie? = .none) {
+      init(movie: Movie? = .none, genres: [Genre]? = .none) {
         self.movie = movie
+        self.genres = genres
       }
     }
     
@@ -31,6 +33,10 @@ enum Movies {
     struct ViewModel {
       private let movie: Movie
       private let genres: [Genre]
+      
+      var id: Int {
+        return movie.id
+      }
       
       var title: String {
         return movie.title
