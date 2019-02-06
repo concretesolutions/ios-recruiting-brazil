@@ -12,30 +12,79 @@
 
 import UIKit
 
-protocol FavoriteMoviesBusinessLogic
-{
-  func doSomething(request: FavoriteMovies.Something.Request)
+protocol FavoriteMoviesBusinessLogic {
+  func fetchFavoriteMovies(request: FavoriteMovies.Show.Request)
+  func fetchLocalMovies()
+  func unfavoriteMovie(request: FavoriteMovies.Delete.Request)
 }
 
-protocol FavoriteMoviesDataStore
-{
-  //var name: String { get set }
+protocol FavoriteMoviesDataStore {
+  var movies: [CDMovie] { get set }
 }
 
-class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataStore
-{
+class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataStore {
   var presenter: FavoriteMoviesPresentationLogic?
   var worker: FavoriteMoviesWorker?
-  //var name: String = ""
   
-  // MARK: Do something
+  var movies: [CDMovie] = []
   
-  func doSomething(request: FavoriteMovies.Something.Request)
-  {
-    worker = FavoriteMoviesWorker()
-    worker?.doSomeWork()
+  // MARK: Fetch Favorite Movies
+  func fetchFavoriteMovies(request: FavoriteMovies.Show.Request) {
+    if request.query == .none {
+      worker = FavoriteMoviesWorker()
+      worker?.fetchFavoriteMovies(completion: { movies in
+        if movies.isEmpty {
+          let response = FavoriteMovies.Show.Response(error: .empty)
+          self.presenter?.presentErrorMessage(response: response)
+        } else {
+          self.movies.mergeElements(newElements: movies)
+          let response = FavoriteMovies.Show.Response(movies: movies)
+          self.presenter?.presentFavoriteMovies(response: response)
+        }
+      })
+    } else {
+      searchForMovie(request: request)
+    }
+  }
+  
+  // MARK: Fetch Local Movies
+  func fetchLocalMovies() {
+    if movies.isEmpty {
+      let response = FavoriteMovies.Show.Response(error: .empty)
+      self.presenter?.presentErrorMessage(response: response)
+    } else  {
+      let response = FavoriteMovies.Show.Response(movies: movies)
+      self.presenter?.presentFavoriteMovies(response: response)
+    }
+  }
+  
+  // MARK: Unfavorite Movie
+  func unfavoriteMovie(request: FavoriteMovies.Delete.Request) {
+    worker?.unfavoriteMovie(request: request, completion: { movies in
+      self.movies = movies
+      if movies.isEmpty {
+        let response = FavoriteMovies.Show.Response(error: .empty)
+        self.presenter?.presentErrorMessage(response: response)
+      } else {
+        let response = FavoriteMovies.Show.Response(movies: movies)
+        self.presenter?.presentFavoriteMovies(response: response)
+      }
+    })
+  }
+  
+  // MARK: Search for a movie
+  private func searchForMovie(request: FavoriteMovies.Show.Request) {
+    let query = request.query!.lowercased()
+    let filteredMovies = self.movies.filter {
+      $0.title!.lowercased().contains(query)
+    }
     
-    let response = FavoriteMovies.Something.Response()
-    presenter?.presentSomething(response: response)
+    if filteredMovies.isEmpty {
+      let response = FavoriteMovies.Show.Response(error: .search(query: request.query!))
+      presenter?.presentErrorMessage(response: response)
+    } else {
+      let response = FavoriteMovies.Show.Response(movies: filteredMovies)
+      presenter?.presentFavoriteMovies(response: response)
+    }
   }
 }

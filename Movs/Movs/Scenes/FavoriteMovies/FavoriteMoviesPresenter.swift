@@ -12,20 +12,23 @@
 
 import UIKit
 
-protocol FavoriteMoviesPresentationLogic
-{
-  func presentSomething(response: FavoriteMovies.Something.Response)
+protocol FavoriteMoviesPresentationLogic {
+  func presentFavoriteMovies(response: FavoriteMovies.Show.Response)
+  func presentErrorMessage(response: FavoriteMovies.Show.Response)
 }
 
-class FavoriteMoviesPresenter: FavoriteMoviesPresentationLogic
-{
+class FavoriteMoviesPresenter: FavoriteMoviesPresentationLogic {
   weak var viewController: FavoriteMoviesDisplayLogic?
   
-  // MARK: Do something
+  // MARK: Present Favorite Movies
+  func presentFavoriteMovies(response: FavoriteMovies.Show.Response) {
+    let viewModel = FavoriteMovies.Show.ViewModel(movies: response.movies)
+    viewController?.displayFavoriteMovies(viewModel: viewModel)
+  }
   
-  func presentSomething(response: FavoriteMovies.Something.Response)
-  {
-    let viewModel = FavoriteMovies.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+  // MARK: Present Error Message
+  func presentErrorMessage(response: FavoriteMovies.Show.Response) {
+    let viewModel = FavoriteMovies.Show.ViewModel(error: response.error)
+    viewController?.displayErrorMessage(viewModel: viewModel)
   }
 }

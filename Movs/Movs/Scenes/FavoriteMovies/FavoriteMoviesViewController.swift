@@ -12,34 +12,32 @@
 
 import UIKit
 
-protocol FavoriteMoviesDisplayLogic: class
-{
-  func displaySomething(viewModel: FavoriteMovies.Something.ViewModel)
+protocol FavoriteMoviesDisplayLogic: class {
+  func displayFavoriteMovies(viewModel: FavoriteMovies.Show.ViewModel)
+  func displayErrorMessage(viewModel: FavoriteMovies.Show.ViewModel)
 }
 
-class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
-{
+class FavoriteMoviesViewController: UIViewController {
   var interactor: FavoriteMoviesBusinessLogic?
   var router: (NSObjectProtocol & FavoriteMoviesRoutingLogic & FavoriteMoviesDataPassing)?
+  
+  let favoriteMoviesView = FavoriteMoviesView()
 
   // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+  init() {
+    super.init(nibName: nil, bundle: nil)
+    self.title = "Favorites"
+    self.tabBarItem = UITabBarItem(title: self.title, image: UIImage(named: self.title!.lowercased()), tag: 0)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
-  
-  private func setup()
-  {
+  private func setup() {
     let viewController = self
     let interactor = FavoriteMoviesInteractor()
     let presenter = FavoriteMoviesPresenter()
@@ -52,38 +50,77 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
     router.dataStore = interactor
   }
   
-  // MARK: Routing
+  // MARK: View lifecycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupSearchBar()
+    setupTableView()
+  }
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    DispatchQueue.main.async {
+      self.fetchFavoriteMovies()
     }
   }
   
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomething()
+  override func loadView() {
+    self.view = favoriteMoviesView
   }
   
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = FavoriteMovies.Something.Request()
-    interactor?.doSomething(request: request)
+  func setupTableView() {
+    favoriteMoviesView.tableView.setDeletionHandler(deleteFavoriteMovie)
   }
   
-  func displaySomething(viewModel: FavoriteMovies.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
+  // MARK: Fetch Favorite Movies
+  func fetchFavoriteMovies(_ query: String? = .none) {
+    let request = FavoriteMovies.Show.Request(query: query)
+    interactor?.fetchFavoriteMovies(request: request)
+  }
+  
+  func deleteFavoriteMovie(_ movie: CDMovie) {
+    let request = FavoriteMovies.Delete.Request(movie: movie)
+    interactor?.unfavoriteMovie(request: request)
+  }
+}
+
+extension FavoriteMoviesViewController: FavoriteMoviesDisplayLogic {
+  func displayFavoriteMovies(viewModel: FavoriteMovies.Show.ViewModel) {
+    favoriteMoviesView.errorView.setup(with: .none)
+    favoriteMoviesView.tableView.updateItems(viewModel.movies)
+    favoriteMoviesView.isUserInteractionEnabled = true
+  }
+  
+  func displayErrorMessage(viewModel: FavoriteMovies.Show.ViewModel) {
+    favoriteMoviesView.tableView.updateItems(viewModel.movies)
+    favoriteMoviesView.errorView.setup(with: viewModel.error)
+    favoriteMoviesView.isUserInteractionEnabled = false
+  }
+}
+
+// MARK: - UISearchBarDelegate
+extension FavoriteMoviesViewController: UISearchBarDelegate {
+  
+  func setupSearchBar(){
+    self.definesPresentationContext = true
+    let searchController = UISearchController(searchResultsController: nil)
+    searchController.definesPresentationContext = true
+    searchController.searchBar.delegate = self
+    searchController.searchBar.tintColor = ColorPalette.black
+    searchController.dimsBackgroundDuringPresentation = false
+    searchController.obscuresBackgroundDuringPresentation = false
+    self.navigationItem.searchController = searchController
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if !searchText.isEmpty {
+      fetchFavoriteMovies(searchText)
+    } else {
+      interactor?.fetchLocalMovies()
+    }
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    interactor?.fetchLocalMovies()
   }
 }

@@ -12,20 +12,43 @@
 
 import UIKit
 
-enum FavoriteMovies
-{
+enum FavoriteMovies {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+  enum Show {
+    struct Request {
+      let query: String?
+      
+      init(query: String? = .none) {
+        self.query = query
+      }
     }
-    struct Response
-    {
+    struct Response {
+      let movies: [CDMovie]
+      let error: ErrorType
+      
+      init(movies: [CDMovie] = [], error: ErrorType = .none) {
+        self.movies = movies
+        self.error = error
+      }
     }
-    struct ViewModel
-    {
+    struct ViewModel {
+      let movies: [CDMovie]
+      let error: ErrorType
+      
+      init(movies: [CDMovie] = [], error: ErrorType = .none) {
+        self.movies = movies
+        self.error = error
+      }
     }
   }
+  
+  enum Delete {
+    struct Request {
+      let movie: CDMovie
+    }
+    struct Response {}
+    struct ViewModel {}
+  }
+  
 }

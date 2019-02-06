@@ -11,6 +11,7 @@ import UIKit
 enum ErrorType {
   case search(query: String)
   case server
+  case empty
   case none
   
   var description: String {
@@ -19,6 +20,8 @@ enum ErrorType {
       return "search"
     case .server:
       return "server"
+    case .empty:
+      return "favoriteLarge"
     default:
       return ""
     }
@@ -50,12 +53,16 @@ class ErrorView: UIView {
   
   func setup(with errorType: ErrorType) {
     alpha = 1
+    isUserInteractionEnabled = false
     iconImageView.image = UIImage(named: errorType.description)
     switch errorType {
     case .search(let query):
       messageLabel.text = "Your search for \"\(query)\" found no results."
     case .server:
       messageLabel.text = "An error occurred. Please, try again."
+      isUserInteractionEnabled = true
+    case .empty:
+      messageLabel.text = "You don't have any favorite movies yet."
     default:
       alpha = 0
       messageLabel.text = nil

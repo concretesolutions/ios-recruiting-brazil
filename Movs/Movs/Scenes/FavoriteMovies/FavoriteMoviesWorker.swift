@@ -12,9 +12,22 @@
 
 import UIKit
 
-class FavoriteMoviesWorker
-{
-  func doSomeWork()
-  {
+class FavoriteMoviesWorker {
+  
+  private let databaseManager: DatabaseManager<CDMovie>
+  
+  init(databaseManager: DatabaseManager<CDMovie> = DatabaseManager<CDMovie>()) {
+    self.databaseManager = databaseManager
+  }
+  
+  func fetchFavoriteMovies(completion: @escaping ([CDMovie]) -> ()) {
+    let movies = databaseManager.fetch()
+    completion(movies)
+  }
+  
+  func unfavoriteMovie(request: FavoriteMovies.Delete.Request, completion: @escaping ([CDMovie]) -> ()) {
+    databaseManager.delete(object: request.movie)
+    let movie = databaseManager.fetch()
+    completion(movie)
   }
 }
