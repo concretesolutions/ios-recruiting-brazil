@@ -8,10 +8,7 @@
 
 import UIKit
 
-class MoviesDataSource: NSObject {
-  
-  weak var collectionView: MoviesCollectionView?
-  private var searchingState: SearchingState = .none
+class MoviesDataSource: NSObject, ItemsCollectionViewDataSource {
   
   var items: [Movie] = [] {
     didSet {
@@ -25,10 +22,17 @@ class MoviesDataSource: NSObject {
     }
   }
   
-  init(collectionView: MoviesCollectionView) {
+  weak var collectionView: UICollectionView?
+  
+  weak var delegate: UICollectionViewDelegate?
+  
+  private var searchingState: SearchingState = .begin
+  
+  required init(collectionView: UICollectionView, delegate: UICollectionViewDelegate) {
     self.collectionView = collectionView
+    self.delegate = delegate
     super.init()
-    setup()
+    self.setupCollectionView()
   }
   
   func updateItems(_ items: [Movie], searchingState: SearchingState = .none) {
@@ -43,8 +47,7 @@ class MoviesDataSource: NSObject {
     }
   }
   
-  private func setup() {
-    collectionView?.dataSource = self
+  func registerCollection() {
     collectionView?.register(cellType: MovieCollectionViewCell.self)
     collectionView?.register(MovieCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: MovieCollectionReusableView.self))
   }
@@ -61,7 +64,7 @@ extension MoviesDataSource: UICollectionViewDataSource {
     cell.tag = indexPath.row
     let movie = filteredItems[indexPath.row]
     
-    cell.setup(with: movie, hasPoster: movie.posterPath != .none)
+    cell.setup(with: movie)
     
     return cell
   }

@@ -8,7 +8,6 @@
 
 import UIKit
 import Reusable
-import SnapKit
 
 final class MovieCollectionViewCell: UICollectionViewCell, Reusable {
   let gridView = MovieGridView()
@@ -38,8 +37,8 @@ final class MovieCollectionViewCell: UICollectionViewCell, Reusable {
     gridView.activityIndicator.stopAnimating()
   }
   
-  func setup(with item: Movie, hasPoster: Bool = true) {
-    if hasPoster {
+  func setup(with item: Movie) {
+    if item.posterPath != .none {
       gridView.imageView.download(image: item.posterPath, activityIndicator: gridView.activityIndicator)
     } else {
       gridView.imageView.image = UIImage(named: "noPoster")
@@ -67,10 +66,7 @@ extension MovieCollectionViewCell: ViewCode {
   
   func configureViews() {
     gridView.favoriteButton.isUserInteractionEnabled = false
-    layer.shadowColor = ColorPalette.black.withAlphaComponent(0.6).cgColor
-    layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-    layer.shadowOpacity = 0.8
-    layer.shadowRadius = 4
+    addShadow()
     backgroundColor = .gray
   }
 }

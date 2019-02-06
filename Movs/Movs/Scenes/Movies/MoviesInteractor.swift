@@ -16,6 +16,7 @@ protocol MoviesBusinessLogic {
   func fetchMovies(request: Movies.Popular.Request)
   func fetchLocalMovies()
   func fetchGenres(request: Movies.Details.Request)
+  func reloadData() 
 }
 
 protocol MoviesDataStore {
@@ -65,13 +66,19 @@ class MoviesInteractor: MoviesBusinessLogic, MoviesDataStore {
           let response = Movies.Popular.Response(data: data)
           self.presenter?.presentMovies(response: response)
         case .error(let error):
-          if self.movies.count == 0 {
+          if self.movies.isEmpty {
             let response = Movies.Popular.Response(error: error)
             self.presenter?.presentErrorMessage(response: response)
           }
         }
         DispatchQueue.main.async { self.isFetchInProgress = false }
       })
+    }
+  }
+  
+  func reloadData() {
+    movies.forEach {
+      $0.isFavorite = DatabaseManager<CDMovie>().exist(id: $0.id)
     }
   }
   
@@ -107,7 +114,7 @@ class MoviesInteractor: MoviesBusinessLogic, MoviesDataStore {
       $0.title.lowercased().contains(query) || $0.originalTitle.lowercased().contains(query)
     }
     
-    if filteredMovies.count == 0 {
+    if filteredMovies.isEmpty {
       let response = Movies.Popular.Response(data: .none, error: .search(query: request.query!))
       presenter?.presentErrorMessage(response: response)
     } else {
@@ -121,6 +128,9 @@ class MoviesInteractor: MoviesBusinessLogic, MoviesDataStore {
   
   // MARK: Fetch local movies
   func fetchLocalMovies() {
+    self.movies.forEach {
+      $0.isFavorite = DatabaseManager<CDMovie>().exist(id: $0.id)
+    }
     let data = MoviesData(page: 1, totalResults: movies.count, totalPages: totalPages, results: movies)
     let response = Movies.Popular.Response(data: data, error: .none)
     presenter?.presentMovies(response: response)

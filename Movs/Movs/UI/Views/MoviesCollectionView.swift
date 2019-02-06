@@ -11,7 +11,6 @@ import UIKit
 class MoviesCollectionView: UICollectionView {
   
   fileprivate var didSelectItem: ((Movie) -> ())?
-  fileprivate var prefetchHandler: (() -> ())?
   fileprivate var customDataSource: MoviesDataSource?
   fileprivate var customDelegate: MoviesDelegate?
 
@@ -26,8 +25,8 @@ class MoviesCollectionView: UICollectionView {
   
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
-    customDataSource = MoviesDataSource(collectionView: self)
     customDelegate = MoviesDelegate(collectionView: self)
+    customDataSource = MoviesDataSource(collectionView: self, delegate: customDelegate!)
   }
   
   required init?(coder aDecoder: NSCoder) {

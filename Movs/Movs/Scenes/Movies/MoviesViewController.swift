@@ -70,7 +70,10 @@ class MoviesViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    moviesView.collectionView.reloadData()
+    DispatchQueue.main.async {
+      self.searchingState = .ended
+      self.interactor?.fetchLocalMovies()
+    }
   }
   
   override func loadView() {
