@@ -19,7 +19,7 @@ class DatabaseManager<T:NSManagedObject>: NSObject {
   }
   
   // MARK: - Init
-  init(contextManager: ContextManager = ContextManager()) {
+  init(contextManager: ContextManager = ContextManager.shared) {
     self.contextManager = contextManager
     super.init()
   }
