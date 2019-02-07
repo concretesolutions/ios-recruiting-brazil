@@ -12,30 +12,26 @@
 
 import UIKit
 
-protocol FilterMoviesBusinessLogic
-{
-  func doSomething(request: FilterMovies.Something.Request)
+protocol FilterMoviesBusinessLogic {
+  func fetchFilterValues(request: FilterMovies.Request)
 }
 
-protocol FilterMoviesDataStore
-{
-  //var name: String { get set }
+protocol FilterMoviesDataStore {
+  var genres: [String] { get set }
+  var dates: [String] { get set }
 }
 
-class FilterMoviesInteractor: FilterMoviesBusinessLogic, FilterMoviesDataStore
-{
+class FilterMoviesInteractor: FilterMoviesBusinessLogic, FilterMoviesDataStore {
   var presenter: FilterMoviesPresentationLogic?
   var worker: FilterMoviesWorker?
-  //var name: String = ""
+  
+  var genres: [String] = []
+  var dates: [String] = []
   
   // MARK: Do something
   
-  func doSomething(request: FilterMovies.Something.Request)
-  {
-    worker = FilterMoviesWorker()
-    worker?.doSomeWork()
-    
-    let response = FilterMovies.Something.Response()
-    presenter?.presentSomething(response: response)
+  func fetchFilterValues(request: FilterMovies.Request) {
+    let response = FilterMovies.Response.init(genres: genres, dates: dates)
+    presenter?.presentFilterValues(response: response)
   }
 }

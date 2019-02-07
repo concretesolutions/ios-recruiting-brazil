@@ -12,34 +12,33 @@
 
 import UIKit
 
-protocol FilterMoviesDisplayLogic: class
-{
-  func displaySomething(viewModel: FilterMovies.Something.ViewModel)
+protocol FilterMoviesDisplayLogic: class {
+  func displayFilterValues(viewModel: FilterMovies.ViewModel)
 }
 
-class FilterMoviesViewController: UIViewController, FilterMoviesDisplayLogic
-{
+class FilterMoviesViewController: UIViewController {
   var interactor: FilterMoviesBusinessLogic?
   var router: (NSObjectProtocol & FilterMoviesRoutingLogic & FilterMoviesDataPassing)?
+  
+  let filterMoviesView = FilterMoviesView()
+  var applyFilter: ((String, String) -> ())? = .none
+  var date: String! = "None"
+  var genre: String! = "None"
 
   // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+  init() {
+    super.init(nibName: nil, bundle: nil)
+    self.title = "Filter"
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder)
-  {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
   
   // MARK: Setup
-  
-  private func setup()
-  {
+  private func setup() {
     let viewController = self
     let interactor = FilterMoviesInteractor()
     let presenter = FilterMoviesPresenter()
@@ -52,38 +51,54 @@ class FilterMoviesViewController: UIViewController, FilterMoviesDisplayLogic
     router.dataStore = interactor
   }
   
-  // MARK: Routing
+  // MARK: View lifecycle
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupView()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    fetchFilterValues()
+  }
+  
+  override func loadView() {
+    self.view = filterMoviesView
+  }
+  
+  func setupView() {
+    filterMoviesView.applyButton.addTarget(self, action: #selector(applyButtonPressed), for: .touchUpInside)
+    filterMoviesView.tableView.setFilterHandler(filterHandler)
+  }
+  
+  // MARK: Fetch Filter Values
+  func fetchFilterValues() {
+    let request = FilterMovies.Request()
+    interactor?.fetchFilterValues(request: request)
+  }
+  
+  func filterHandler(_ date: String,_ genre: String) {
+    self.date = date
+    self.genre = genre
+    
+    if date == "None" && genre == "None" {
+      filterMoviesView.applyButton.backgroundColor = .gray
+    } else {
+      filterMoviesView.applyButton.backgroundColor = ColorPalette.yellow
     }
   }
   
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomething()
+  @objc func applyButtonPressed(_ sender: UIButton) {
+    if !(date == "None" && genre == "None") {
+      applyFilter?(date, genre)
+    }
+    self.navigationController?.popViewController(animated: true)
   }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = FilterMovies.Something.Request()
-    interactor?.doSomething(request: request)
-  }
-  
-  func displaySomething(viewModel: FilterMovies.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
+}
+
+extension FilterMoviesViewController: FilterMoviesDisplayLogic {
+  func displayFilterValues(viewModel: FilterMovies.ViewModel) {
+    filterMoviesView.tableView.update(genres: viewModel.genres, dates: viewModel.dates)
   }
 }

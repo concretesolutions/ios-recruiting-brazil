@@ -9,13 +9,31 @@
 import UIKit
 
 class FilterMoviesTableView: UITableView {
+  
+  fileprivate var customDataSource: FilterMoviesDataSource?
+  fileprivate var customDelegate: FilterMoviesDelegate?
+  convenience init() {
+    self.init(frame: .zero, style: .plain)
+  }
+  
+  override init(frame: CGRect, style: UITableView.Style) {
+    super.init(frame: frame, style: style)
+    customDelegate = FilterMoviesDelegate(tableView: self)
+    customDataSource = FilterMoviesDataSource(tableView: self, delegate: customDelegate!)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+extension FilterMoviesTableView {
+  
+  func setFilterHandler(_ handler: @escaping (String, String) -> ()) {
+    customDataSource?.handler = handler
+  }
+  
+  func update(genres: [String], dates: [String]) {
+    customDataSource?.update(genres: genres, dates: dates)
+  }
 }

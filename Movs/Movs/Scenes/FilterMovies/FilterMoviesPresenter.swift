@@ -12,20 +12,16 @@
 
 import UIKit
 
-protocol FilterMoviesPresentationLogic
-{
-  func presentSomething(response: FilterMovies.Something.Response)
+protocol FilterMoviesPresentationLogic {
+  func presentFilterValues(response: FilterMovies.Response)
 }
 
-class FilterMoviesPresenter: FilterMoviesPresentationLogic
-{
+class FilterMoviesPresenter: FilterMoviesPresentationLogic {
   weak var viewController: FilterMoviesDisplayLogic?
   
-  // MARK: Do something
-  
-  func presentSomething(response: FilterMovies.Something.Response)
-  {
-    let viewModel = FilterMovies.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+  // MARK: Present Filter Values
+  func presentFilterValues(response: FilterMovies.Response) {
+    let viewModel = FilterMovies.ViewModel(genres: response.genres, dates: response.dates)
+    viewController?.displayFilterValues(viewModel: viewModel)
   }
 }

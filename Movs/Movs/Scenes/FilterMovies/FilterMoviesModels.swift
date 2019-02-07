@@ -12,20 +12,16 @@
 
 import UIKit
 
-enum FilterMovies
-{
+enum FilterMovies {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
-    }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
+  struct Request {}
+  struct Response {
+    let genres: [String]
+    let dates: [String]
+  }
+  struct ViewModel {
+    let genres: [String]
+    let dates: [String]
   }
 }
