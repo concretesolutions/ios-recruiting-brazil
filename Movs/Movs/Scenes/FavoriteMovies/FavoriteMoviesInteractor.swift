@@ -14,25 +14,47 @@ import UIKit
 
 protocol FavoriteMoviesBusinessLogic {
   func fetchFavoriteMovies(request: FavoriteMovies.Show.Request)
-  func fetchLocalMovies()
+  func fetchLocalMovies(request: FavoriteMovies.Show.Request)
   func unfavoriteMovie(request: FavoriteMovies.Delete.Request)
+  func applyFilter(request: FavoriteMovies.Filter.Request)
 }
 
 protocol FavoriteMoviesDataStore {
   var movies: [CDMovie] { get set }
+  var filteredMovies: [CDMovie] { get set }
+  var dates: [String] { get set }
+  var genres: [String] { get set }
 }
 
 class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataStore {
   var presenter: FavoriteMoviesPresentationLogic?
   var worker: FavoriteMoviesWorker?
   
-  var movies: [CDMovie] = []
+  var movies: [CDMovie] = [] {
+    didSet {
+      movies.forEach {
+        genres.mergeElements(newElements: $0.genres ?? [])
+        if let dateComponets = $0.releaseDate?.components(separatedBy: "-") {
+          if !dates.contains(dateComponets.first!) {
+            dates.append(dateComponets.first!)
+          }
+        }
+      }
+    }
+  }
+  
+  var filteredMovies: [CDMovie] = []
+  
+  var dates: [String] = []
+  var genres: [String] = []
+  
   
   // MARK: Fetch Favorite Movies
   func fetchFavoriteMovies(request: FavoriteMovies.Show.Request) {
-    if request.query == .none {
+    if request.query == .none && !request.isFiltering {
       worker = FavoriteMoviesWorker()
       worker?.fetchFavoriteMovies(completion: { movies in
+        self.movies = movies
         if movies.isEmpty {
           let response = FavoriteMovies.Show.Response(error: .empty)
           self.presenter?.presentErrorMessage(response: response)
@@ -48,13 +70,18 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataS
   }
   
   // MARK: Fetch Local Movies
-  func fetchLocalMovies() {
+  func fetchLocalMovies(request: FavoriteMovies.Show.Request) {
     if movies.isEmpty {
       let response = FavoriteMovies.Show.Response(error: .empty)
       self.presenter?.presentErrorMessage(response: response)
     } else  {
-      let response = FavoriteMovies.Show.Response(movies: movies)
-      self.presenter?.presentFavoriteMovies(response: response)
+      if request.isFiltering {
+        let response = FavoriteMovies.Show.Response(movies: filteredMovies)
+        self.presenter?.presentFavoriteMovies(response: response)
+      } else {
+        let response = FavoriteMovies.Show.Response(movies: movies)
+        self.presenter?.presentFavoriteMovies(response: response)
+      }
     }
   }
   
@@ -66,8 +93,14 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataS
         let response = FavoriteMovies.Show.Response(error: .empty)
         self.presenter?.presentErrorMessage(response: response)
       } else {
-        let response = FavoriteMovies.Show.Response(movies: movies)
-        self.presenter?.presentFavoriteMovies(response: response)
+        if request.isFiltering {
+          self.filteredMovies = self.filteredMovies.filter { $0.id != request.movie.id }
+          let response = FavoriteMovies.Show.Response(movies: self.filteredMovies)
+          self.presenter?.presentFavoriteMovies(response: response)
+        } else {
+          let response = FavoriteMovies.Show.Response(movies: movies)
+          self.presenter?.presentFavoriteMovies(response: response)
+        }
       }
     })
   }
@@ -75,8 +108,16 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataS
   // MARK: Search for a movie
   private func searchForMovie(request: FavoriteMovies.Show.Request) {
     let query = request.query!.lowercased()
-    let filteredMovies = self.movies.filter {
-      $0.title!.lowercased().contains(query)
+    var filteredMovies: [CDMovie] = []
+    
+    if request.isFiltering {
+      filteredMovies = self.filteredMovies.filter {
+        $0.title!.lowercased().contains(query)
+      }
+    } else {
+      filteredMovies = self.movies.filter {
+        $0.title!.lowercased().contains(query)
+      }
     }
     
     if filteredMovies.isEmpty {
@@ -86,5 +127,23 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataS
       let response = FavoriteMovies.Show.Response(movies: filteredMovies)
       presenter?.presentFavoriteMovies(response: response)
     }
+  }
+  
+  // MARK: Apply Filter
+  func applyFilter(request: FavoriteMovies.Filter.Request) {
+    var filteredMovies: [CDMovie] = []
+    if request.date != "None" {
+      if request.genre != "None" {
+        filteredMovies = self.movies.filter { $0.releaseDate!.contains(request.date) && $0.genres!.contains(request.genre) }
+      } else {
+        filteredMovies = self.movies.filter { $0.releaseDate!.contains(request.date) }
+      }
+    } else {
+      filteredMovies = self.movies.filter { $0.genres!.contains(request.genre) }
+    }
+    
+    self.filteredMovies = filteredMovies
+    let response = FavoriteMovies.Show.Response(movies: filteredMovies)
+    presenter?.presentFavoriteMovies(response: response)
   }
 }

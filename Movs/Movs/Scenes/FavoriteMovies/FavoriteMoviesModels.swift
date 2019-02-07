@@ -18,9 +18,11 @@ enum FavoriteMovies {
   enum Show {
     struct Request {
       let query: String?
+      let isFiltering: Bool
       
-      init(query: String? = .none) {
+      init(query: String? = .none, isFiltering: Bool = false) {
         self.query = query
+        self.isFiltering = isFiltering
       }
     }
     struct Response {
@@ -46,8 +48,24 @@ enum FavoriteMovies {
   enum Delete {
     struct Request {
       let movie: CDMovie
+      let isFiltering: Bool
+      init(movie: CDMovie, isFiltering: Bool = false) {
+        self.movie = movie
+        self.isFiltering = isFiltering
+      }
     }
     struct Response {}
+    struct ViewModel {}
+  }
+  
+  enum Filter {
+    struct Request {
+      let date: String
+      let genre: String
+    }
+    struct Response {
+      let movies: [CDMovie]
+    }
     struct ViewModel {}
   }
   

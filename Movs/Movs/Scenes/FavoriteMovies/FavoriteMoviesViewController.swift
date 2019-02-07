@@ -22,11 +22,13 @@ class FavoriteMoviesViewController: UIViewController {
   var router: (NSObjectProtocol & FavoriteMoviesRoutingLogic & FavoriteMoviesDataPassing)?
   
   let favoriteMoviesView = FavoriteMoviesView()
+  var isFiltering = false
 
   // MARK: Object lifecycle
   init() {
     super.init(nibName: nil, bundle: nil)
     self.title = "Favorites"
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(filterButtonPressed))
     self.tabBarItem = UITabBarItem(title: self.title, image: UIImage(named: self.title!.lowercased()), tag: 0)
     setup()
   }
@@ -59,8 +61,10 @@ class FavoriteMoviesViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    DispatchQueue.main.async {
-      self.fetchFavoriteMovies()
+    if !isFiltering {
+      DispatchQueue.main.async {
+        self.fetchFavoriteMovies()
+      }
     }
   }
   
@@ -70,17 +74,43 @@ class FavoriteMoviesViewController: UIViewController {
   
   func setupTableView() {
     favoriteMoviesView.tableView.setDeletionHandler(deleteFavoriteMovie)
+    favoriteMoviesView.tableView.headerButton.addTarget(self, action: #selector(removeFilter), for: .touchUpInside)
+  }
+  
+  @objc func filterButtonPressed() {
+    router?.routeToFilterMovies()
   }
   
   // MARK: Fetch Favorite Movies
-  func fetchFavoriteMovies(_ query: String? = .none) {
-    let request = FavoriteMovies.Show.Request(query: query)
+  func fetchFavoriteMovies(_ query: String? = .none, isFiltering: Bool = false) {
+    let request = FavoriteMovies.Show.Request(query: query, isFiltering: isFiltering)
     interactor?.fetchFavoriteMovies(request: request)
   }
   
+  // MARK: Delete Favorite Movie
   func deleteFavoriteMovie(_ movie: CDMovie) {
-    let request = FavoriteMovies.Delete.Request(movie: movie)
+    let request = FavoriteMovies.Delete.Request(movie: movie, isFiltering: isFiltering)
     interactor?.unfavoriteMovie(request: request)
+  }
+  
+  // MARK: Fetch Favorite Movies for a genre and/or date
+  func fetchFavoriteMovies(for date: String, genre: String) {
+    isFiltering = true
+    favoriteMoviesView.tableView.showHeader()
+    let request = FavoriteMovies.Filter.Request(date: date, genre: genre)
+    interactor?.applyFilter(request: request)
+  }
+  
+  // MARK: Fetch Local and/or Filtered Movies
+  func fetchLocalMovies() {
+    let request = FavoriteMovies.Show.Request(isFiltering: isFiltering)
+    interactor?.fetchLocalMovies(request: request)
+  }
+  
+  @objc func removeFilter() {
+    isFiltering = false
+    favoriteMoviesView.tableView.hideHeader()
+    fetchFavoriteMovies()
   }
 }
 
@@ -114,13 +144,13 @@ extension FavoriteMoviesViewController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if !searchText.isEmpty {
-      fetchFavoriteMovies(searchText)
+      fetchFavoriteMovies(searchText, isFiltering: isFiltering)
     } else {
-      interactor?.fetchLocalMovies()
+      fetchLocalMovies()
     }
   }
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    interactor?.fetchLocalMovies()
+    fetchLocalMovies()
   }
 }

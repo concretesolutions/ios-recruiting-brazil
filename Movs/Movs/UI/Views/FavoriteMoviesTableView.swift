@@ -14,18 +14,39 @@ class FavoriteMoviesTableView: UITableView {
   fileprivate var customDataSource: FavoriteMoviesDataSource?
   fileprivate var customDelegate: FavoriteMoviesDelegate?
   
+  lazy var headerButton: UIButton = {
+    let button = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: self.frame.width, height: 0)))
+    button.backgroundColor = ColorPalette.yellow
+    button.setTitle("Remove Filter", for: .normal)
+    button.setTitleColor(ColorPalette.black, for: .normal)
+    button.titleLabel?.font = UIFont(name: FontNames.bold, size: 20)
+    button.alpha = 0
+    return button
+  }()
+  
   convenience init() {
     self.init(frame: .zero, style: .plain)
   }
   
   override init(frame: CGRect, style: UITableView.Style) {
     super.init(frame: frame, style: style)
+    tableHeaderView = headerButton
     customDelegate = FavoriteMoviesDelegate(tableView: self)
     customDataSource = FavoriteMoviesDataSource(tableView: self, delegate: customDelegate!)
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func showHeader() {
+    headerButton.frame.size.height = 45
+    headerButton.alpha = 1
+  }
+  
+  func hideHeader() {
+    headerButton.frame.size.height = 0
+    headerButton.alpha = 0
   }
 }
 

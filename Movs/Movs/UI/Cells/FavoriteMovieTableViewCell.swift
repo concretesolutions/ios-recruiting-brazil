@@ -36,7 +36,7 @@ class FavoriteMovieTableViewCell: UITableViewCell, Reusable {
   
   lazy var titleLabel: UILabel = {
     let label = UILabel(frame: .zero)
-    label.font = UIFont.boldSystemFont(ofSize: 20)
+    label.font = UIFont(name: FontNames.medium, size: 20)
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.2
     label.numberOfLines = 3
@@ -45,14 +45,14 @@ class FavoriteMovieTableViewCell: UITableViewCell, Reusable {
   
   lazy var yearLabel: UILabel = {
     let label = UILabel(frame: .zero)
-    label.font = UIFont.systemFont(ofSize: 20)
+    label.font = UIFont(name: FontNames.regular, size: 20)
     label.textAlignment = .right
     return label
   }()
   
   lazy var overviewLabel: UILabel = {
     let label = UILabel(frame: .zero)
-    label.font = UIFont.systemFont(ofSize: 17)
+    label.font = UIFont(name: FontNames.light, size: 17)
     label.numberOfLines = 4
     label.textColor = .darkGray
     return label
@@ -105,7 +105,7 @@ extension FavoriteMovieTableViewCell: ViewCode {
   }
   
   func setupConstraints() {
-    let spacing: CGFloat = 15
+    var spacing: CGFloat = 15
     background.snp.makeConstraints { make in
       make.leading.equalTo(spacing)
       make.trailing.equalTo(-spacing)
@@ -134,11 +134,12 @@ extension FavoriteMovieTableViewCell: ViewCode {
       make.height.equalTo(height)
     }
     
+    spacing = 10
     containerView.snp.makeConstraints { make in
-      make.leading.equalTo(width + 10)
-      make.trailing.equalTo(-10)
-      make.top.equalTo(10)
-      make.bottom.lessThanOrEqualTo(-10)
+      make.leading.equalTo(width + spacing)
+      make.trailing.equalTo(-spacing)
+      make.top.equalTo(spacing)
+      make.bottom.lessThanOrEqualTo(-spacing)
     }
   }
   

@@ -12,49 +12,36 @@
 
 import UIKit
 
-@objc protocol FavoriteMoviesRoutingLogic
-{
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol FavoriteMoviesRoutingLogic {
+  func routeToFilterMovies()
 }
 
-protocol FavoriteMoviesDataPassing
-{
+protocol FavoriteMoviesDataPassing {
   var dataStore: FavoriteMoviesDataStore? { get }
 }
 
-class FavoriteMoviesRouter: NSObject, FavoriteMoviesRoutingLogic, FavoriteMoviesDataPassing
-{
+class FavoriteMoviesRouter: NSObject, FavoriteMoviesRoutingLogic, FavoriteMoviesDataPassing {
   weak var viewController: FavoriteMoviesViewController?
   var dataStore: FavoriteMoviesDataStore?
   
   // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+  func routeToFilterMovies() {
+    let destinationVC = FilterMoviesViewController()
+    var destinationDS = destinationVC.router!.dataStore!
+    
+    destinationVC.applyFilter = viewController?.fetchFavoriteMovies
+    passDataToFilterMovies(source: dataStore!, destination: &destinationDS)
+    navigateToFilterMovies(source: viewController!, destination: destinationVC)
+  }
 
   // MARK: Navigation
-  
-  //func navigateToSomewhere(source: FavoriteMoviesViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
+  func navigateToFilterMovies(source: FavoriteMoviesViewController, destination: FilterMoviesViewController) {
+    source.show(destination, sender: nil)
+  }
   
   // MARK: Passing data
-  
-  //func passDataToSomewhere(source: FavoriteMoviesDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+  func passDataToFilterMovies(source: FavoriteMoviesDataStore, destination: inout FilterMoviesDataStore) {
+    destination.dates = source.dates
+    destination.genres = source.genres
+  }
 }
