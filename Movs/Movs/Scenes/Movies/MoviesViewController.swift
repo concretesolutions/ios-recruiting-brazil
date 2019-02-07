@@ -103,14 +103,8 @@ class MoviesViewController: UIViewController {
     interactor?.fetchMovies(request: request)
   }
   
-  // MARK: Fetch all Genres
-  func fetchGenres() {
-    let request = Movies.Details.Request()
-    interactor?.fetchGenres(request: request)
-  }
-  
-  // MARK: Fetch Genres for a given movie
-  func fetchGenres(for movie: Movie) {
+  // MARK: Fetch Genres
+  func fetchGenres(for movie: Movie? = .none) {
     let request = Movies.Details.Request(movie: movie)
     interactor?.fetchGenres(request: request)
   }

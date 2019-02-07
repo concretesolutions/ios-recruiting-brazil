@@ -33,6 +33,7 @@ class ErrorView: UIView {
     let label = UILabel(frame: .zero)
     label.numberOfLines = 0
     label.textAlignment = .center
+    label.font =  UIFont(name: FontNames.regular, size: 20)
     return label
   }()
   
@@ -54,7 +55,9 @@ class ErrorView: UIView {
   func setup(with errorType: ErrorType) {
     alpha = 1
     isUserInteractionEnabled = false
-    iconImageView.image = UIImage(named: errorType.description)
+    if !errorType.description.isEmpty {
+      iconImageView.image = UIImage(named: errorType.description)
+    }
     switch errorType {
     case .search(let query):
       messageLabel.text = "Your search for \"\(query)\" found no results."

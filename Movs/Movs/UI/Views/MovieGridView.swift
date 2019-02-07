@@ -32,6 +32,7 @@ class MovieGridView: UIView {
   lazy var titleLabel: UILabel = {
     let label = UILabel(frame: .zero)
     label.textColor = ColorPalette.white
+    label.font = UIFont(name: FontNames.regular, size: 20)
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.2
     label.numberOfLines = 3

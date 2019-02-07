@@ -19,21 +19,21 @@ class MovieDetailsView: UIView {
   
   lazy var yearLabel: UILabel = {
     let label = UILabel(frame: .zero)
-    label.font = UIFont.systemFont(ofSize: 20)
+    label.font = UIFont(name: FontNames.regular, size: 20)
     return label
   }()
   
   lazy var genresLabel: UILabel = {
     let label = UILabel(frame: .zero)
     label.numberOfLines = 0
-    label.font = UIFont.boldSystemFont(ofSize: 20)
+    label.font = UIFont(name: FontNames.medium, size: 20)
     return label
   }()
   
   lazy var overviewLabel: UILabel = {
     let label = UILabel(frame: .zero)
     label.numberOfLines = 20
-    label.font = UIFont.systemFont(ofSize: 18)
+    label.font = UIFont(name: FontNames.regular, size: 18)
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.2
     return label
@@ -111,7 +111,7 @@ extension MovieDetailsView: ViewCode {
   }
   
   func configureViews() {
-    gridView.titleLabel.font = UIFont.systemFont(ofSize: 24)
+    gridView.titleLabel.font = UIFont(name: FontNames.regular, size: 24)
     containerView.addArrangedSubview(yearLabel)
     containerView.addArrangedSubview(genresLabel)
     containerView.addArrangedSubview(overviewLabel)
