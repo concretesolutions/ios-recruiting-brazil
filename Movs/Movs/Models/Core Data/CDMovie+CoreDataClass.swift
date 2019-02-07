@@ -21,9 +21,9 @@ public class CDMovie: NSManagedObject {
     self.overview = movie.overview
     self.posterPath = movie.posterPath
     self.releaseDate = movie.releaseDate
+    self.genres = []
     genres.forEach {
-      let genre = CDGenre(id: $0.id, name: $0.name, context: context)
-      self.addToGenres(genre)
+      self.genres?.append($0.name)
     }
   }
 }

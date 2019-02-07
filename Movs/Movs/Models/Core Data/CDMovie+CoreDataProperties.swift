@@ -22,23 +22,6 @@ extension CDMovie {
     @NSManaged public var releaseDate: String?
     @NSManaged public var id: Int32
     @NSManaged public var overview: String?
-    @NSManaged public var genres: NSSet?
-
-}
-
-// MARK: Generated accessors for genres
-extension CDMovie {
-
-    @objc(addGenresObject:)
-    @NSManaged public func addToGenres(_ value: CDGenre)
-
-    @objc(removeGenresObject:)
-    @NSManaged public func removeFromGenres(_ value: CDGenre)
-
-    @objc(addGenres:)
-    @NSManaged public func addToGenres(_ values: NSSet)
-
-    @objc(removeGenres:)
-    @NSManaged public func removeFromGenres(_ values: NSSet)
+    @NSManaged public var genres: [String]?
 
 }
