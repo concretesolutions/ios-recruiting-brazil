@@ -70,12 +70,12 @@
 <tr class="covered">
 <td class="num">12</td>
 <td class="src"><pre><code class="objc">  func download(image url: String?, activityIndicator: UIActivityIndicatorView) {</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">13</td>
 <td class="src"><pre><code class="objc">    guard let url = url else {</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="missed">
 <td class="num">14</td>
@@ -95,47 +95,47 @@
 <tr class="covered">
 <td class="num">17</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">18</td>
 <td class="src"><pre><code class="objc">    activityIndicator.startAnimating()</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">19</td>
 <td class="src"><pre><code class="objc">    let request = MovsAPI.fetchImage(named: url)</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">20</td>
 <td class="src"><pre><code class="objc">    let path = request.path</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">    let fullURL = request.baseURL.appendingPathComponent(path)</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc">    self.sd_setImage(with: fullURL, placeholderImage: .none, options: [.retryFailed, .progressiveDownload, .scaleDownLargeImages, .highPriority, .continueInBackground]) { (_, _, _, _) in</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">23</td>
 <td class="src"><pre><code class="objc">      activityIndicator.stopAnimating()</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">24</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">25</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="never">
 <td class="num">26</td>

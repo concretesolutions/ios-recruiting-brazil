@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "Movie.swift" : </span><span class="cov_low">42.50%</span>
+<span>Coverage for "Movie.swift" : </span><span class="cov_medium">85.00%</span>
 </h2>
-<h4 class="cov_subtitle">(17 of 40 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(17 of 20 relevant lines covered)</h4>
 <h4 class="cov_filepath">Movs/Models/Movie.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -64,7 +64,7 @@
 </tr>
 <tr class="never">
 <td class="num">11</td>
-<td class="src"><pre><code class="objc">class Movie: Codable {</code></pre></td>
+<td class="src"><pre><code class="objc">class Movie: Decodable {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
@@ -235,230 +235,120 @@
 <tr class="covered">
 <td class="num">45</td>
 <td class="src"><pre><code class="objc">  required init(from decoder: Decoder) throws {</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">46</td>
 <td class="src"><pre><code class="objc">    let container = try decoder.container(keyedBy: CodingKeys.self)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">47</td>
 <td class="src"><pre><code class="objc">    voteCount = try container.decode(Int.self, forKey: .voteCount)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">48</td>
 <td class="src"><pre><code class="objc">    id = try container.decode(Int.self, forKey: .id)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">49</td>
 <td class="src"><pre><code class="objc">    video  = try container.decode(Bool.self, forKey: .video)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">50</td>
 <td class="src"><pre><code class="objc">    voteAverage = try container.decode(Double.self, forKey: .voteAverage)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">51</td>
 <td class="src"><pre><code class="objc">    title = try container.decode(String.self, forKey: .title)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">52</td>
 <td class="src"><pre><code class="objc">    popularity = try container.decode(Double.self, forKey: .popularity)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">53</td>
 <td class="src"><pre><code class="objc">    posterPath = try? container.decode(String.self, forKey: .posterPath)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">54</td>
 <td class="src"><pre><code class="objc">    originalLanguage = try container.decode(String.self, forKey: .originalLanguage)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">55</td>
 <td class="src"><pre><code class="objc">    originalTitle = try container.decode(String.self, forKey: .originalTitle)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">56</td>
 <td class="src"><pre><code class="objc">    genreIds = try container.decode([Int].self, forKey: .genreIds)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">57</td>
 <td class="src"><pre><code class="objc">    backdropPath = try? container.decode(String.self, forKey: .backdropPath)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">58</td>
 <td class="src"><pre><code class="objc">    adult = try container.decode(Bool.self, forKey: .adult)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">59</td>
 <td class="src"><pre><code class="objc">    overview = try container.decode(String.self, forKey: .overview)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">60</td>
 <td class="src"><pre><code class="objc">    releaseDate = try container.decode(String.self, forKey: .releaseDate)</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="covered">
 <td class="num">61</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">20x</td>
+<td class="coverage">300x</td>
 </tr>
 <tr class="never">
 <td class="num">62</td>
-<td class="src"><pre><code class="objc">  </code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">63</td>
-<td class="src"><pre><code class="objc">  func encode(to encoder: Encoder) throws {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">64</td>
-<td class="src"><pre><code class="objc">    var container = encoder.container(keyedBy: CodingKeys.self)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">65</td>
-<td class="src"><pre><code class="objc">    try container.encode(voteCount, forKey: .voteCount)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">66</td>
-<td class="src"><pre><code class="objc">    try container.encode(id, forKey: .id)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">67</td>
-<td class="src"><pre><code class="objc">    try container.encode(video, forKey: .video)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">68</td>
-<td class="src"><pre><code class="objc">    try container.encode(voteAverage, forKey: .voteAverage)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">69</td>
-<td class="src"><pre><code class="objc">    try container.encode(title, forKey: .title)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">70</td>
-<td class="src"><pre><code class="objc">    try container.encode(popularity, forKey: .popularity)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">71</td>
-<td class="src"><pre><code class="objc">    try container.encode(posterPath, forKey: .posterPath)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">72</td>
-<td class="src"><pre><code class="objc">    try container.encode(originalLanguage, forKey: .originalLanguage)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">73</td>
-<td class="src"><pre><code class="objc">    try container.encode(originalTitle, forKey: .originalTitle)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">74</td>
-<td class="src"><pre><code class="objc">    try container.encode(genreIds, forKey: .genreIds)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">75</td>
-<td class="src"><pre><code class="objc">    try container.encode(backdropPath, forKey: .backdropPath)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">76</td>
-<td class="src"><pre><code class="objc">    try container.encode(adult, forKey: .voteAverage)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">77</td>
-<td class="src"><pre><code class="objc">    try container.encode(overview, forKey: .overview)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">78</td>
-<td class="src"><pre><code class="objc">    try container.encode(releaseDate, forKey: .releaseDate)</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">79</td>
-<td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="never">
-<td class="num">80</td>
-<td class="src"><pre><code class="objc">  </code></pre></td>
-<td class="coverage"></td>
-</tr>
-<tr class="missed">
-<td class="num">81</td>
-<td class="src"><pre><code class="objc">  func isFavorite(_ value: Bool) {</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">82</td>
-<td class="src"><pre><code class="objc">    self.isFavorite = value</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="missed">
-<td class="num">83</td>
-<td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">!</td>
-</tr>
-<tr class="never">
-<td class="num">84</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">85</td>
+<td class="num">63</td>
 <td class="src"><pre><code class="objc"></code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="never">
-<td class="num">86</td>
+<td class="num">64</td>
 <td class="src"><pre><code class="objc">extension Movie: Equatable {</code></pre></td>
 <td class="coverage"></td>
 </tr>
 <tr class="missed">
-<td class="num">87</td>
+<td class="num">65</td>
 <td class="src"><pre><code class="objc">  static func ==(lhs: Movie, rhs: Movie) -&gt; Bool {</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">88</td>
-<td class="src"><pre><code class="objc">    return lhs.title == rhs.title &amp;&amp; lhs.originalTitle == rhs.originalTitle</code></pre></td>
+<td class="num">66</td>
+<td class="src"><pre><code class="objc">    return lhs.id == rhs.id</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="missed">
-<td class="num">89</td>
+<td class="num">67</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
 <td class="coverage">!</td>
 </tr>
 <tr class="never">
-<td class="num">90</td>
+<td class="num">68</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

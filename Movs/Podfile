@@ -13,18 +13,18 @@ target 'Movs' do
     ]}
 
   # Pods for Movs
-  pod "Reusable"
+  pod 'Reusable'
   pod 'SnapKit', '~> 4.0.0'
   pod 'Moya'
   pod 'SDWebImage', '~> 4.0'
 
-  #target 'MovsTests' do
+  target 'MovsTests' do
     inherit! :search_paths
     # Pods for testing
-    #pod 'Quick'
-    #pod 'Nimble'
+    pod 'Quick'
+    pod 'Nimble'
 
-  #end
+  end
 
   #target 'MovsUITests' do
     inherit! :search_paths

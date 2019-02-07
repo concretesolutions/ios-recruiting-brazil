@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MovsAPI+Testing.swift" : </span><span class="cov_low">0.00%</span>
+<span>Coverage for "MovsAPI+Testing.swift" : </span><span class="cov_high">90.00%</span>
 </h2>
-<h4 class="cov_subtitle">(0 of 3 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(9 of 10 relevant lines covered)</h4>
 <h4 class="cov_filepath">Movs/Services/MovsAPI+Testing.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -67,23 +67,83 @@
 <td class="src"><pre><code class="objc">extension MovsAPI {</code></pre></td>
 <td class="coverage"></td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">12</td>
 <td class="src"><pre><code class="objc">  var sampleData: Data {</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">21x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">13</td>
-<td class="src"><pre><code class="objc">    return Data()</code></pre></td>
-<td class="coverage">!</td>
+<td class="src"><pre><code class="objc">    switch self {</code></pre></td>
+<td class="coverage">21x</td>
+</tr>
+<tr class="covered">
+<td class="num">14</td>
+<td class="src"><pre><code class="objc">    case .fetchGenres:</code></pre></td>
+<td class="coverage">21x</td>
+</tr>
+<tr class="covered">
+<td class="num">15</td>
+<td class="src"><pre><code class="objc">      return stubbedResponse("GenresData")</code></pre></td>
+<td class="coverage">7x</td>
+</tr>
+<tr class="covered">
+<td class="num">16</td>
+<td class="src"><pre><code class="objc">    case .fetchPopularMovies:</code></pre></td>
+<td class="coverage">21x</td>
+</tr>
+<tr class="covered">
+<td class="num">17</td>
+<td class="src"><pre><code class="objc">      return stubbedResponse("MoviesData")</code></pre></td>
+<td class="coverage">14x</td>
+</tr>
+<tr class="covered">
+<td class="num">18</td>
+<td class="src"><pre><code class="objc">    default:</code></pre></td>
+<td class="coverage">21x</td>
 </tr>
 <tr class="missed">
-<td class="num">14</td>
-<td class="src"><pre><code class="objc">  }</code></pre></td>
+<td class="num">19</td>
+<td class="src"><pre><code class="objc">      return Data()</code></pre></td>
 <td class="coverage">!</td>
+</tr>
+<tr class="covered">
+<td class="num">20</td>
+<td class="src"><pre><code class="objc">    }</code></pre></td>
+<td class="coverage">21x</td>
+</tr>
+<tr class="covered">
+<td class="num">21</td>
+<td class="src"><pre><code class="objc">  }</code></pre></td>
+<td class="coverage">21x</td>
 </tr>
 <tr class="never">
-<td class="num">15</td>
+<td class="num">22</td>
+<td class="src"><pre><code class="objc">  </code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">23</td>
+<td class="src"><pre><code class="objc">  func stubbedResponse(_ filename: String, bundle: Bundle = .main) -&gt; Data! {</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">24</td>
+<td class="src"><pre><code class="objc">    let path = bundle.path(forResource: filename, ofType: "json")</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">25</td>
+<td class="src"><pre><code class="objc">    return (try? Data(contentsOf: URL(fileURLWithPath: path!)))</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">26</td>
+<td class="src"><pre><code class="objc">  }</code></pre></td>
+<td class="coverage"></td>
+</tr>
+<tr class="never">
+<td class="num">27</td>
 <td class="src"><pre><code class="objc">}</code></pre></td>
 <td class="coverage"></td>
 </tr>

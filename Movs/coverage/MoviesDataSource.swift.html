@@ -7,9 +7,9 @@
 <body>
 <header><div class="row"><a href="index.html"><img src="logo.jpg" alt="Slather logo"></a></div></header><div class="row"><div id="reports">
 <h2 class="cov_title">
-<span>Coverage for "MoviesDataSource.swift" : </span><span class="cov_high">95.92%</span>
+<span>Coverage for "MoviesDataSource.swift" : </span><span class="cov_high">97.96%</span>
 </h2>
-<h4 class="cov_subtitle">(47 of 49 relevant lines covered)</h4>
+<h4 class="cov_subtitle">(48 of 49 relevant lines covered)</h4>
 <h4 class="cov_filepath">Movs/Scenes/Movies/MoviesDataSource.swift</h4>
 <table class="source_code">
 <tr class="never">
@@ -80,17 +80,17 @@
 <tr class="covered">
 <td class="num">14</td>
 <td class="src"><pre><code class="objc">    didSet {</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">15</td>
 <td class="src"><pre><code class="objc">      filteredItems = items</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">16</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="never">
 <td class="num">17</td>
@@ -110,17 +110,17 @@
 <tr class="covered">
 <td class="num">20</td>
 <td class="src"><pre><code class="objc">    didSet {</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">21</td>
 <td class="src"><pre><code class="objc">      collectionView?.reloadData()</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">22</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="never">
 <td class="num">23</td>
@@ -165,32 +165,32 @@
 <tr class="covered">
 <td class="num">31</td>
 <td class="src"><pre><code class="objc">  required init(collectionView: UICollectionView, delegate: UICollectionViewDelegate) {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">32</td>
 <td class="src"><pre><code class="objc">    self.collectionView = collectionView</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">33</td>
 <td class="src"><pre><code class="objc">    self.delegate = delegate</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">34</td>
 <td class="src"><pre><code class="objc">    super.init()</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">35</td>
 <td class="src"><pre><code class="objc">    self.setupCollectionView()</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">36</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="never">
 <td class="num">37</td>
@@ -200,22 +200,22 @@
 <tr class="covered">
 <td class="num">38</td>
 <td class="src"><pre><code class="objc">  func updateItems(_ items: [Movie], searchingState: SearchingState = .none) {</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">39</td>
 <td class="src"><pre><code class="objc">    self.searchingState = searchingState</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">40</td>
 <td class="src"><pre><code class="objc">    switch searchingState {</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">41</td>
 <td class="src"><pre><code class="objc">    case .begin:</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="missed">
 <td class="num">42</td>
@@ -225,7 +225,7 @@
 <tr class="covered">
 <td class="num">43</td>
 <td class="src"><pre><code class="objc">    case .ended:</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">44</td>
@@ -235,22 +235,22 @@
 <tr class="covered">
 <td class="num">45</td>
 <td class="src"><pre><code class="objc">    default:</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">46</td>
 <td class="src"><pre><code class="objc">      self.items.append(contentsOf: items)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">47</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="covered">
 <td class="num">48</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">7x</td>
 </tr>
 <tr class="never">
 <td class="num">49</td>
@@ -260,22 +260,22 @@
 <tr class="covered">
 <td class="num">50</td>
 <td class="src"><pre><code class="objc">  func registerCollection() {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">51</td>
 <td class="src"><pre><code class="objc">    collectionView?.register(cellType: MovieCollectionViewCell.self)</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">52</td>
 <td class="src"><pre><code class="objc">    collectionView?.register(MovieCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: MovieCollectionReusableView.self))</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">53</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="never">
 <td class="num">54</td>
@@ -300,17 +300,17 @@
 <tr class="covered">
 <td class="num">58</td>
 <td class="src"><pre><code class="objc">  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -&gt; Int {</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">59</td>
 <td class="src"><pre><code class="objc">    return filteredItems.count</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="covered">
 <td class="num">60</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">2x</td>
+<td class="coverage">6x</td>
 </tr>
 <tr class="never">
 <td class="num">61</td>
@@ -320,47 +320,47 @@
 <tr class="covered">
 <td class="num">62</td>
 <td class="src"><pre><code class="objc">  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -&gt; UICollectionViewCell {</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">63</td>
 <td class="src"><pre><code class="objc">    let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MovieCollectionViewCell.self)</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">64</td>
 <td class="src"><pre><code class="objc">    cell.tag = indexPath.row</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">65</td>
 <td class="src"><pre><code class="objc">    let movie = filteredItems[indexPath.row]</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">66</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">67</td>
 <td class="src"><pre><code class="objc">    cell.setup(with: movie)</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">68</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">69</td>
 <td class="src"><pre><code class="objc">    return cell</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="covered">
 <td class="num">70</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">4x</td>
+<td class="coverage">5x</td>
 </tr>
 <tr class="never">
 <td class="num">71</td>
@@ -370,32 +370,32 @@
 <tr class="covered">
 <td class="num">72</td>
 <td class="src"><pre><code class="objc">  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -&gt; UICollectionReusableView {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">73</td>
 <td class="src"><pre><code class="objc">    let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: MovieCollectionReusableView.self), for: indexPath) as! MovieCollectionReusableView</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">74</td>
 <td class="src"><pre><code class="objc">    </code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">75</td>
 <td class="src"><pre><code class="objc">    if searchingState != .begin {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
-<tr class="missed">
+<tr class="covered">
 <td class="num">76</td>
 <td class="src"><pre><code class="objc">      footer.activityIndicator.startAnimating()</code></pre></td>
-<td class="coverage">!</td>
+<td class="coverage">1x</td>
 </tr>
 <tr class="covered">
 <td class="num">77</td>
 <td class="src"><pre><code class="objc">    } else {</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">78</td>
@@ -405,17 +405,17 @@
 <tr class="covered">
 <td class="num">79</td>
 <td class="src"><pre><code class="objc">    }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">80</td>
 <td class="src"><pre><code class="objc">    return footer</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="covered">
 <td class="num">81</td>
 <td class="src"><pre><code class="objc">  }</code></pre></td>
-<td class="coverage">1x</td>
+<td class="coverage">2x</td>
 </tr>
 <tr class="never">
 <td class="num">82</td>
