@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let tabController = UITabBarController()
     
     let moviesVC = MoviesViewController()
-    let favoritesVC = FavoritesViewController()
+    let favoritesVC = FavoriteMoviesViewController()
     
     let moviesNavigationController = UINavigationController(rootViewController: moviesVC)
     let favoritesNavigationController = UINavigationController(rootViewController: favoritesVC)
