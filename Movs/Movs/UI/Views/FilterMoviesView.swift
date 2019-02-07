@@ -45,7 +45,7 @@ extension FilterMoviesView: ViewCode {
   }
   
   func setupConstraints() {
-    let height = 470
+    let height = UIScreen.main.bounds.height * 0.7
     tableView.snp.makeConstraints { make in
       make.leading.equalToSuperview()
       make.trailing.equalToSuperview()
@@ -53,7 +53,7 @@ extension FilterMoviesView: ViewCode {
       make.height.equalTo(height)
     }
     
-    let spacing = 15
+    let spacing: CGFloat = 15
     applyButton.snp.makeConstraints { make in
       make.leading.equalTo(spacing)
       make.trailing.equalTo(-spacing)
