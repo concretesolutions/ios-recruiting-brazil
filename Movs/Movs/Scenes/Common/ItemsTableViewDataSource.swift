@@ -25,7 +25,6 @@ extension ItemsTableViewDataSource {
     registerTableView()
     self.tableView?.dataSource = self
     self.tableView?.delegate = self.delegate
-    self.tableView?.reloadData()
   }
   
   func registerTableView() {
