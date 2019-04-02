@@ -1,28 +1,26 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '11.0'
+platform :ios, '11.0'
+use_frameworks!
 
+def base_pods
+    pod 'Alamofire'
+    pod 'RxSwift',   '~> 4.3.1'
+    pod 'RxCocoa',   '~> 4.3.1'
+    pod 'SDWebImage/WebP'
+    pod 'Fabric', '~> 1.9.0'
+    pod 'Crashlytics', '~> 3.12.0'
+    pod 'Firebase/Core'
+    pod 'lottie-ios'
+end
 target 'Movs' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  pod 'Alamofire'
-  pod 'RxSwift',   '~> 4.3.1'
-  pod 'RxCocoa',   '~> 4.3.1'
-  pod 'SDWebImage/WebP'
-  pod 'Fabric', '~> 1.9.0'
-  pod 'Crashlytics', '~> 3.12.0'
-  pod 'Firebase/Core'
-  pod 'lottie-ios'
-  
-  target 'MovsTests' do
-#      use_frameworks!
-      inherit! :search_paths
-      # Pods for testing
-  end
-  
-  target 'MovsUITests' do
-      inherit! :search_paths
-      # Pods for testing
-  end
-
+    base_pods
+    target 'MovsTests' do
+        inherit! :search_paths
+        # Pods for testing
+    end
+    
+    target 'MovsUITests' do
+        inherit! :complete
+        # Pods for UI testing
+    end
 end

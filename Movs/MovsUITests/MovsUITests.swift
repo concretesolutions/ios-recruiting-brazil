@@ -32,8 +32,9 @@ class MovsUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.tabBars.buttons["Favorites"].tap()
-        app.navigationBars["Favorites"].otherElements["Favorites"].tap()
+        let favorite = app.navigationBars["Favorites"].otherElements["Favorites"]
         
+        XCTAssertTrue(favorite.exists)
         
     }
 
