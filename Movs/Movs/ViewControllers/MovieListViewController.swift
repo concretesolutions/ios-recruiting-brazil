@@ -54,7 +54,6 @@ class MovieListViewController: UIViewController {
     private func setupPopularMoviesViewModelObserver() {
         popularMoviesViewModel.moviesObservable
             .subscribe(onNext: { movies in
-                self.vwLoading.isHidden = false
                 self.collectionView.reloadData()
                 print(movies)
                 self.vwLoading.isHidden = movies.count > 0
@@ -92,6 +91,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
         
         cell.movieViewModel = movieViewModel
         
+        favoriteMoviesId = defaults.array(forKey: "favoriteMoviesId") as? [Int] ?? []
         if favoriteMoviesId.contains(movieViewModel.id) {
             cell.btFavorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
         } else {

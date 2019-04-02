@@ -28,9 +28,11 @@ class MovieCell: UICollectionViewCell {
     
     func updateUI(){
         lbMovieTitle.text = movieViewModel.title
-        //TODO: check if movie is favorited
-        btFavorite.setImage(isFavorited ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon"), for: .normal)
-        
+    
+        let favoriteMoviesId = defaults.array(forKey: "favoriteMoviesId") as? [Int] ?? []
+        btFavorite.setImage(favoriteMoviesId.contains(movieViewModel.id) ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon"), for: .normal)
+    
+        print(movieViewModel.title)
         
         self.imgMovie.lock(duration: 0)
         self.imgMovie.image = nil
@@ -72,14 +74,15 @@ class MovieCell: UICollectionViewCell {
     }
     
     fileprivate func addMovieToFavorites(){
-        
+        FirebaseAnalyticsHelper.addFavoriteEventLogger(movieId: movieViewModel!.id, movieTitle:movieViewModel!.title)
+        movieViewModel.isFavorited = true
         FavoriteMovie.addFavoriteMovie(movieViewModel: movieViewModel!)
-        
         markMovieAsFavorite()
     }
     
     fileprivate func removeMovieFromFavorites() {
-        
+        FirebaseAnalyticsHelper.removeFavoriteEventLogger(movieId: movieViewModel!.id, movieTitle:movieViewModel!.title)
+        movieViewModel.isFavorited = false
         FavoriteMovie.removeFavoriteMovie(id: movieViewModel!.id)
         unmarkMovieAsFavorite()
     }

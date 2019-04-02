@@ -93,16 +93,17 @@ class MovieDetailViewController: UIViewController {
     }
     
     fileprivate func addMovieToFavorites(){
-        
         FavoriteMovie.addFavoriteMovie(movieViewModel: movieViewModel!)
-        
+        movieViewModel!.isFavorited = true
         markMovieAsFavorite()
+        FirebaseAnalyticsHelper.addFavoriteEventLogger(movieId: movieViewModel!.id, movieTitle:movieViewModel!.title )
     }
     
     fileprivate func removeMovieFromFavorites() {
-        
         FavoriteMovie.removeFavoriteMovie(id: movieViewModel!.id)
+        movieViewModel!.isFavorited = false
         unmarkMovieAsFavorite()
+        FirebaseAnalyticsHelper.removeFavoriteEventLogger(movieId: movieViewModel!.id, movieTitle:movieViewModel!.title )
     }
     
     fileprivate func setupNavBar(){

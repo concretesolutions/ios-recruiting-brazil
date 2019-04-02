@@ -79,6 +79,8 @@ class MovieViewModel {
         return movie.coverPath
     }
     
+    var isFavorited: Bool = false
+    
     var genres: String {
         var genres: String = ""
         

@@ -198,8 +198,8 @@ extension FavoriteListViewController: UITableViewDelegate, UITableViewDataSource
             
             let selectedMovie = self.filteredFavoriteMovies[indexPath.row]
             
+            FirebaseAnalyticsHelper.removeFavoriteEventLogger(movieId: Int(selectedMovie.id), movieTitle:selectedMovie.title ?? "")
             FavoriteMovie.removeFavoriteMovie(id: Int(selectedMovie.id))
-            
             getFavoriteMovies()
             
         }
