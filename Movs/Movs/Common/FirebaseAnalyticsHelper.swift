@@ -17,12 +17,7 @@ class FirebaseAnalyticsHelper {
             "id": movieId as NSObject,
             "title": movieTitle as NSObject
         ])
-        
-//        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//            AnalyticsParameterItemID: "id-\(movieId)",
-//            AnalyticsParameterItemName: movieTitle,
-//            AnalyticsParameterContentType: "addFavorite"
-//            ])
+
     }
     
     static func removeFavoriteEventLogger(movieId: Int, movieTitle: String){
@@ -30,10 +25,9 @@ class FirebaseAnalyticsHelper {
             "id": movieId as NSObject,
             "title": movieTitle as NSObject
         ])
-//        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-//            AnalyticsParameterItemID: "id-\(movieId)",
-//            AnalyticsParameterItemName: movieTitle,
-//            AnalyticsParameterContentType: "removeFavorite"
-//            ])
+    }
+    
+    static func isNotConnectedEventLogger(){
+        Analytics.logEvent("isNotConnected", parameters: nil)
     }
 }

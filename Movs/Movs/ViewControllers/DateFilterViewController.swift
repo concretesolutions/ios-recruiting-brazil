@@ -15,14 +15,17 @@ protocol DateCellDelegate {
 
 class DateFilterViewController: UIViewController, DateCellDelegate {
     
+    //MARK: Variables
     var filterDelegate: FilterDelegate!
     var dateSelected: String = ""
     
     var dates: [String] = []
     var uniqueDates: [String] = []
     
+    //MARK: IB Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: UIViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +35,7 @@ class DateFilterViewController: UIViewController, DateCellDelegate {
         tableView.tableFooterView = UIView(frame: .zero)
     }
     
+    //MARK: other methods
     func selectDate(date: String) {
         if(self.filterDelegate != nil){ //Just to be safe.
             self.filterDelegate.selectDate(date: date)
@@ -61,6 +65,8 @@ class DateFilterViewController: UIViewController, DateCellDelegate {
 }
 
 extension DateFilterViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    //MARK: UITableViewController stubs
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return uniqueDates.count
     }

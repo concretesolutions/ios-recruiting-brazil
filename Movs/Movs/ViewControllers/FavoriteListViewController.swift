@@ -16,6 +16,7 @@ protocol FavoriteDelegate {
 
 class FavoriteListViewController: UIViewController, FavoriteDelegate {
     
+    //MARK: Variables
     var isFiltered: Bool = false
     var filteredFavoriteMovies: [FavoriteMovie] = []
     var favoriteMovies: [FavoriteMovie] = []
@@ -23,6 +24,7 @@ class FavoriteListViewController: UIViewController, FavoriteDelegate {
     var dateSelected: String = ""
     var searchedText: String = ""
     
+    //MARK: IB Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightVwRemoveFilter: NSLayoutConstraint!
     @IBOutlet weak var lbFilters: UILabel!
@@ -79,6 +81,7 @@ class FavoriteListViewController: UIViewController, FavoriteDelegate {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
+    //MARK: other methods
     fileprivate func getFavoriteMovies(){
         vwEmptyFilteredList.isHidden = true
         isFiltered = false
@@ -181,6 +184,8 @@ class FavoriteListViewController: UIViewController, FavoriteDelegate {
 }
 
 extension FavoriteListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    //MARK: UITableViewController stubs
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredFavoriteMovies.count
     }

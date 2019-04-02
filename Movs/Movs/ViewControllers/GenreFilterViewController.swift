@@ -14,18 +14,22 @@ protocol GenreCellDelegate {
 
 class GenreFilterViewController: UIViewController, GenreCellDelegate {
     
+    //MARK: Variables
     var filterDelegate: FilterDelegate!
     var genreSelected: String = ""
-    
-    @IBOutlet weak var tableView: UITableView!
     var genres = Defines.genres
     
+    //MARK: IB Outlets
+    @IBOutlet weak var tableView: UITableView!
+    
+    //MARK: UIViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView(frame: .zero)
     }
     
+    //MARK: Filter Delegate
     func selectGenre(genre: String) {
         if(self.filterDelegate != nil){ //Just to be safe.
             self.filterDelegate.selectGenre(genre: genre)
@@ -36,6 +40,8 @@ class GenreFilterViewController: UIViewController, GenreCellDelegate {
 }
 
 extension GenreFilterViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    //MARK: UITableViewController stubs
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return genres.count
     }

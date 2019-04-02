@@ -12,6 +12,7 @@ import RxSwift
 
 class MovieDetailViewController: UIViewController {
 
+    //MARK: Variables
     let defaults = UserDefaults.standard
     let disposeBag = DisposeBag()
     
@@ -19,6 +20,7 @@ class MovieDetailViewController: UIViewController {
     var isFavorited: Bool = false
     var favoriteMoviesId: [Int] = []
     
+    //MARK: IB Outlets
     @IBOutlet weak var imgMovie: UIImageView!
     @IBOutlet weak var lbMovieTitle: UILabel!
     @IBOutlet weak var lbMovieYear: UILabel!
@@ -26,6 +28,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var lbDescription: UILabel!
     @IBOutlet weak var btFavorite: UIButton!
     
+    //MARK: IB Actions
     @IBAction func addOrRemoveFavorite(_ sender: UIButton) {
         favoriteMoviesId = defaults.array(forKey: "favoriteMoviesId") as? [Int] ?? []
         
@@ -37,7 +40,7 @@ class MovieDetailViewController: UIViewController {
         
     }
     
-    
+    //MARK: UIViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +51,7 @@ class MovieDetailViewController: UIViewController {
         
     }
     
+    //MARK: setup UI
     fileprivate func setupUI() {
         
         self.lbMovieTitle.text = movieViewModel?.title
@@ -82,6 +86,7 @@ class MovieDetailViewController: UIViewController {
     
     }
     
+    //MARK: other methods
     fileprivate func markMovieAsFavorite(){
         isFavorited = true
         btFavorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
@@ -110,14 +115,4 @@ class MovieDetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

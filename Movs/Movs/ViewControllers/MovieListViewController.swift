@@ -29,19 +29,29 @@ class MovieListViewController: UIViewController {
         super.viewDidLoad()
 
         vwError.isHidden = true
-        
-        let loadingAnimation = LOTAnimationView(name: "loading")
-        loadingAnimation.frame = CGRect(x: 0, y: 0, width: vwLoadingAnimation.frame.size.width, height: vwLoadingAnimation.frame.size.height)
-        loadingAnimation.contentMode = .scaleAspectFit
-        loadingAnimation.loopAnimation = true
-        vwLoadingAnimation.addSubview(loadingAnimation)
-        loadingAnimation.play(completion: { finished in
-            print("rodando animacao")
-        })
-        
         vwLoading.isHidden = false
         
-        setupPopularMoviesViewModelObserver()
+        if !Reachability.isConnectedToNetwork(){
+            print("Internet Connection not Available!")
+            vwLoading.isHidden = true
+            vwError.isHidden = false
+            FirebaseAnalyticsHelper.isNotConnectedEventLogger()
+        }else{
+            print("Internet Connection Available!")
+            vwError.isHidden = true
+            let loadingAnimation = LOTAnimationView(name: "loading")
+            loadingAnimation.frame = CGRect(x: 0, y: 0, width: vwLoadingAnimation.frame.size.width, height: vwLoadingAnimation.frame.size.height)
+            loadingAnimation.contentMode = .scaleAspectFit
+            loadingAnimation.loopAnimation = true
+            vwLoadingAnimation.addSubview(loadingAnimation)
+            loadingAnimation.play(completion: { finished in
+                print("rodando animacao")
+            })
+            
+            vwLoading.isHidden = false
+            
+            setupPopularMoviesViewModelObserver()
+        }
         
     }
     
@@ -64,8 +74,6 @@ class MovieListViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-    
-    
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

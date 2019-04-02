@@ -110,6 +110,24 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="EMh-9d-WoO"/>
                                         </connections>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdM-nH-rRL" userLabel="vwLoading">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sY8-Fc-b54">
+                                                <rect key="frame" x="167" y="322.5" width="80" height="80"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="fbb-OC-Yhu"/>
+                                                    <constraint firstAttribute="height" constant="80" id="r0u-t2-Laf"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="sY8-Fc-b54" firstAttribute="centerY" secondItem="sdM-nH-rRL" secondAttribute="centerY" id="1k5-FR-L1j"/>
+                                            <constraint firstItem="sY8-Fc-b54" firstAttribute="centerX" secondItem="sdM-nH-rRL" secondAttribute="centerX" id="p6C-ip-MbI"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0H1-SA-4bk" userLabel="vwError">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                         <subviews>
@@ -147,24 +165,6 @@
                                             <constraint firstItem="o0l-uY-qUh" firstAttribute="centerY" secondItem="0H1-SA-4bk" secondAttribute="centerY" id="HvG-uX-tWu"/>
                                             <constraint firstAttribute="trailing" secondItem="o0l-uY-qUh" secondAttribute="trailing" constant="30" id="OtP-ny-gU8"/>
                                             <constraint firstItem="o0l-uY-qUh" firstAttribute="leading" secondItem="0H1-SA-4bk" secondAttribute="leading" constant="30" id="zIZ-7P-kYk"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdM-nH-rRL" userLabel="vwLoading">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sY8-Fc-b54">
-                                                <rect key="frame" x="167" y="322.5" width="80" height="80"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="fbb-OC-Yhu"/>
-                                                    <constraint firstAttribute="height" constant="80" id="r0u-t2-Laf"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="sY8-Fc-b54" firstAttribute="centerY" secondItem="sdM-nH-rRL" secondAttribute="centerY" id="1k5-FR-L1j"/>
-                                            <constraint firstItem="sY8-Fc-b54" firstAttribute="centerX" secondItem="sdM-nH-rRL" secondAttribute="centerX" id="p6C-ip-MbI"/>
                                         </constraints>
                                     </view>
                                 </subviews>

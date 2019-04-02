@@ -63,7 +63,7 @@ class FilterViewController: UIViewController, FilterDelegate {
 
 extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     
-    //MARK: UITableView protocol stubs
+    //MARK: UITableViewController stubs
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filters.count
     }
