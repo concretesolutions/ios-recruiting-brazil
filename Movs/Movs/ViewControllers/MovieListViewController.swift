@@ -10,12 +10,7 @@ import UIKit
 import RxSwift
 import Lottie
 
-protocol MovieDelegate {
-    func showErrorView()
-    func showLoadingView(show: Bool)
-}
-
-class MovieListViewController: UIViewController, MovieDelegate {
+class MovieListViewController: UIViewController {
 
     //MARK: Variables
     private var favoriteMoviesId: [Int] = []
@@ -57,12 +52,16 @@ class MovieListViewController: UIViewController, MovieDelegate {
     
     //MARK: - Rx Setup
     private func setupPopularMoviesViewModelObserver() {
-        popularMoviesViewModel.delegate = self
         popularMoviesViewModel.moviesObservable
             .subscribe(onNext: { movies in
+                self.vwLoading.isHidden = false
                 self.collectionView.reloadData()
                 print(movies)
-//                self.vwLoading.isHidden = true
+                self.vwLoading.isHidden = movies.count > 0
+                
+            }, onError: { error in
+                print(error)
+                self.vwError.isHidden = false
             })
             .disposed(by: disposeBag)
     }
@@ -77,15 +76,6 @@ class MovieListViewController: UIViewController, MovieDelegate {
             }
         }
     }
-
-    func showErrorView(){
-        vwError.isHidden = false
-    }
-    
-    func showLoadingView(show: Bool){
-        vwLoading.isHidden = !show
-    }
-    
 }
 
 extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -103,7 +93,9 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.movieViewModel = movieViewModel
         
         if favoriteMoviesId.contains(movieViewModel.id) {
-            cell.imgFavorite.image = UIImage(named: "favorite_full_icon")
+            cell.btFavorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+        } else {
+            cell.btFavorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         }
         
         return cell

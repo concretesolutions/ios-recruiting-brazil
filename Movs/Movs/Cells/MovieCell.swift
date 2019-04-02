@@ -13,12 +13,12 @@ class MovieCell: UICollectionViewCell {
     
     static let identifier = "MovieCell"
     private let disposeBag = DisposeBag()
-    
+    private let defaults = UserDefaults.standard
     var isFavorited: Bool = false
+    
     @IBOutlet weak var imgMovie: UIImageView!
     @IBOutlet weak var lbMovieTitle: UILabel!
-    @IBOutlet weak var imgFavorite: UIImageView!
-    
+    @IBOutlet weak var btFavorite: UIButton!
     
     var movieViewModel: MovieViewModel! {
         didSet {
@@ -29,7 +29,7 @@ class MovieCell: UICollectionViewCell {
     func updateUI(){
         lbMovieTitle.text = movieViewModel.title
         //TODO: check if movie is favorited
-        imgFavorite.image = isFavorited ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon")
+        btFavorite.setImage(isFavorited ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_gray_icon"), for: .normal)
         
         
         self.imgMovie.lock(duration: 0)
@@ -49,7 +49,38 @@ class MovieCell: UICollectionViewCell {
             self.imgMovie.unlock()
         }).disposed(by: disposeBag)
         
-        
     }
     
+    @IBAction func addToFavorite(_ sender: UIButton) {
+        let favoriteMoviesId = defaults.array(forKey: "favoriteMoviesId") as? [Int] ?? []
+        
+        if favoriteMoviesId.contains(movieViewModel!.id) {
+            removeMovieFromFavorites()
+        } else {
+            addMovieToFavorites()
+        }
+    }
+    
+    fileprivate func markMovieAsFavorite(){
+        isFavorited = true
+        btFavorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+    }
+    
+    fileprivate func unmarkMovieAsFavorite(){
+        isFavorited = false
+        btFavorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+    }
+    
+    fileprivate func addMovieToFavorites(){
+        
+        FavoriteMovie.addFavoriteMovie(movieViewModel: movieViewModel!)
+        
+        markMovieAsFavorite()
+    }
+    
+    fileprivate func removeMovieFromFavorites() {
+        
+        FavoriteMovie.removeFavoriteMovie(id: movieViewModel!.id)
+        unmarkMovieAsFavorite()
+    }
 }
