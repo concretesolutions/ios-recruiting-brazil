@@ -10,8 +10,9 @@ import RxSwift
 import RxCocoa
 
 class PopularMoviesViewModel {
+    
     //MARK: Variables
-    private var movieList = BehaviorRelay<[Movie]>(value: [])
+    var movieList = BehaviorRelay<[Movie]>(value: [])
     private var page = 0
     
     //MARK: - RXObservable

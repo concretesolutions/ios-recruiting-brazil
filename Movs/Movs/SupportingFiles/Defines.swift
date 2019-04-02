@@ -17,6 +17,7 @@ struct Defines {
     
     static let key = "1f54bd990f1cdfb230adb312546d765d"
     
+    static let genres: [String] = ["Action","Adventure","Animation","Comedy","Crime","Documentary","Drama","Family","Fantasy","History","Horror","Music","Mystery","Romance","Science Fiction","TV Movie","Thriller","War","Western"]
 }
 
 enum ServiceError : Error {

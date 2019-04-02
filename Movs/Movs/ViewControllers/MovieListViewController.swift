@@ -8,44 +8,61 @@
 
 import UIKit
 import RxSwift
+import Lottie
 
-class MovieListViewController: UIViewController {
+protocol MovieDelegate {
+    func showErrorView()
+    func showLoadingView(show: Bool)
+}
 
-    var favoriteMovies: [MovieViewModel] = []
-    let defaults = UserDefaults.standard
-    
+class MovieListViewController: UIViewController, MovieDelegate {
+
     //MARK: Variables
+    private var favoriteMoviesId: [Int] = []
+    private let defaults = UserDefaults.standard
     private let disposeBag = DisposeBag()
     private let popularMoviesViewModel = PopularMoviesViewModel()
     
+    //MARK: IB Outlets
+    @IBOutlet weak var vwLoading: UIView!
+    @IBOutlet weak var vwLoadingAnimation: UIView!
+    @IBOutlet weak var vwError: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    //MARK: UIViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        setupNavBar()
+        vwError.isHidden = true
+        
+        let loadingAnimation = LOTAnimationView(name: "loading")
+        loadingAnimation.frame = CGRect(x: 0, y: 0, width: vwLoadingAnimation.frame.size.width, height: vwLoadingAnimation.frame.size.height)
+        loadingAnimation.contentMode = .scaleAspectFit
+        loadingAnimation.loopAnimation = true
+        vwLoadingAnimation.addSubview(loadingAnimation)
+        loadingAnimation.play(completion: { finished in
+            print("rodando animacao")
+        })
+        
+        vwLoading.isHidden = false
         
         setupPopularMoviesViewModelObserver()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        favoriteMovies = defaults.array(forKey: "favoriteMovies") as? [MovieViewModel] ?? []
+        favoriteMoviesId = defaults.array(forKey: "favoriteMoviesId") as? [Int] ?? []
         collectionView.reloadData()
-    }
-    
-    func setupNavBar(){
-        let searchController = UISearchController(searchResultsController: nil)
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     //MARK: - Rx Setup
     private func setupPopularMoviesViewModelObserver() {
+        popularMoviesViewModel.delegate = self
         popularMoviesViewModel.moviesObservable
             .subscribe(onNext: { movies in
                 self.collectionView.reloadData()
                 print(movies)
+//                self.vwLoading.isHidden = true
             })
             .disposed(by: disposeBag)
     }
@@ -53,8 +70,6 @@ class MovieListViewController: UIViewController {
     
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? MovieDetailViewController {
             if let movieViewModel = sender as? MovieViewModel {
@@ -63,9 +78,19 @@ class MovieListViewController: UIViewController {
         }
     }
 
+    func showErrorView(){
+        vwError.isHidden = false
+    }
+    
+    func showLoadingView(show: Bool){
+        vwLoading.isHidden = !show
+    }
+    
 }
 
 extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    // MARK: - CollectionView stubs
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return popularMoviesViewModel.count
     }
@@ -77,7 +102,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
         
         cell.movieViewModel = movieViewModel
         
-        if favoriteMovies.contains(where: {$0.id == movieViewModel.id}) {
+        if favoriteMoviesId.contains(movieViewModel.id) {
             cell.imgFavorite.image = UIImage(named: "favorite_full_icon")
         }
         
@@ -93,7 +118,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDat
         let yourWidth = collectionView.bounds.width/2.0
         let yourHeight = yourWidth
         
-        return CGSize(width: yourWidth, height: yourHeight)
+        return CGSize(width: yourWidth, height: yourHeight * 1.5)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

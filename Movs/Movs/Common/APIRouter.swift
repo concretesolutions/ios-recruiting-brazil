@@ -25,7 +25,6 @@ class APIRouter {
         
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "GET"
-        //request.httpBody = try JSONSerialization.data(withJSONObject: parametros, options: .prettyPrinted)
         request.timeoutInterval = 20
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         

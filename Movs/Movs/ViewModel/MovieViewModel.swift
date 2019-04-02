@@ -72,17 +72,29 @@ class MovieViewModel {
     }
     
     var releaseDate: String {
-        return movie.releaseDate
+        return getYearFrom(dateString: movie.releaseDate)
     }
     
-    var categories: String {
-        var categories: String = ""
+    var coverPath: String? {
+        return movie.coverPath
+    }
+    
+    var genres: String {
+        var genres: String = ""
         
-        for category in movie.genre {
-            categories = (categories == "") ? Genre.getGenreBy(id: category)
-                : categories + ", " + Genre.getGenreBy(id: category)
+        for genre in movie.genre {
+            genres = (genres == "") ? Genre.getGenreBy(id: genre)
+                : genres + ", " + Genre.getGenreBy(id: genre)
         }
         
-        return categories
+        return genres
+    }
+    
+    fileprivate func getYearFrom(dateString: String) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: dateString)
+        dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: date!)
     }
 }

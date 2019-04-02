@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreData
 import RxSwift
 
 class MovieDetailViewController: UIViewController {
 
     let defaults = UserDefaults.standard
     let disposeBag = DisposeBag()
+    
     var movieViewModel: MovieViewModel?
     var isFavorited: Bool = false
     var favoriteMoviesId: [Int] = []
@@ -28,12 +30,8 @@ class MovieDetailViewController: UIViewController {
         favoriteMoviesId = defaults.array(forKey: "favoriteMoviesId") as? [Int] ?? []
         
         if favoriteMoviesId.contains(movieViewModel!.id) {
-            favoriteMoviesId = favoriteMoviesId.filter { $0 != movieViewModel!.id }
-            defaults.set(favoriteMoviesId, forKey: "favoriteMoviesId")
-            removeMoviesFromFavorites()
+            removeMovieFromFavorites()
         } else {
-            favoriteMoviesId.append(movieViewModel!.id)
-            defaults.set(favoriteMoviesId, forKey: "favoriteMoviesId")
             addMovieToFavorites()
         }
         
@@ -50,11 +48,11 @@ class MovieDetailViewController: UIViewController {
         
     }
     
-    func setupUI() {
+    fileprivate func setupUI() {
         
         self.lbMovieTitle.text = movieViewModel?.title
         self.lbMovieYear.text = movieViewModel?.releaseDate
-        self.lbGenres.text = movieViewModel?.categories
+        self.lbGenres.text = movieViewModel?.genres
         self.lbDescription.text = movieViewModel?.description
         
         self.imgMovie.lock(duration: 0)
@@ -76,24 +74,38 @@ class MovieDetailViewController: UIViewController {
         
         favoriteMoviesId = defaults.array(forKey: "favoriteMoviesId") as? [Int] ?? []
         if favoriteMoviesId.contains(movieViewModel!.id) {
-            addMovieToFavorites()
-        } else {
-            removeMoviesFromFavorites()
+            markMovieAsFavorite()
+        }
+        else {
+            unmarkMovieAsFavorite()
         }
     
     }
     
-    func addMovieToFavorites(){
+    fileprivate func markMovieAsFavorite(){
         isFavorited = true
         btFavorite.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
     }
     
-    func removeMoviesFromFavorites() {
+    fileprivate func unmarkMovieAsFavorite(){
         isFavorited = false
         btFavorite.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
     }
     
-    func setupNavBar(){
+    fileprivate func addMovieToFavorites(){
+        
+        FavoriteMovie.addFavoriteMovie(movieViewModel: movieViewModel!)
+        
+        markMovieAsFavorite()
+    }
+    
+    fileprivate func removeMovieFromFavorites() {
+        
+        FavoriteMovie.removeFavoriteMovie(id: movieViewModel!.id)
+        unmarkMovieAsFavorite()
+    }
+    
+    fileprivate func setupNavBar(){
         navigationItem.largeTitleDisplayMode = .never
     }
     
