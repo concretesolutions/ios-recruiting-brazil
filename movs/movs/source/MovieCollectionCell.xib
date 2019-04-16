@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MovieCollectionCell" customModule="movs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="178" height="209"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUY-Rx-6TI">
+                    <rect key="frame" x="68" y="174" width="42" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="favorite_empty_icon" translatesAutoresizingMaskIntoConstraints="NO" id="i3Z-ZU-ttd">
+                    <rect key="frame" x="128" y="159" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="UUI-qd-QKs"/>
+                        <constraint firstAttribute="width" constant="50" id="r8b-sP-ZZE"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMM-LO-qXc">
+                    <rect key="frame" x="0.0" y="0.0" width="178" height="159"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="i3Z-ZU-ttd" firstAttribute="top" secondItem="lMM-LO-qXc" secondAttribute="bottom" id="8l7-dy-2y5"/>
+                <constraint firstItem="nUY-Rx-6TI" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="GSc-fy-sao"/>
+                <constraint firstItem="i3Z-ZU-ttd" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="L2b-iy-dx7"/>
+                <constraint firstItem="lMM-LO-qXc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="LZE-RJ-d5y"/>
+                <constraint firstItem="i3Z-ZU-ttd" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Lcs-vS-hau"/>
+                <constraint firstItem="nUY-Rx-6TI" firstAttribute="centerY" secondItem="i3Z-ZU-ttd" secondAttribute="centerY" id="gPq-9A-MUp"/>
+                <constraint firstItem="lMM-LO-qXc" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="jhi-iF-8hW"/>
+                <constraint firstItem="lMM-LO-qXc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xCz-Sp-1R3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="favoriteImage" destination="i3Z-ZU-ttd" id="DCf-db-nJl"/>
+                <outlet property="imageView" destination="lMM-LO-qXc" id="Wa9-r4-Bff"/>
+                <outlet property="titleLabel" destination="nUY-Rx-6TI" id="tJv-tX-enf"/>
+            </connections>
+            <point key="canvasLocation" x="-19.199999999999999" y="-51.724137931034484"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+    </resources>
+</document>
