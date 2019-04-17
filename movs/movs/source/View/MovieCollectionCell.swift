@@ -39,4 +39,9 @@ class MovieCollectionCell: UICollectionViewCell {
             .resume()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
 }
