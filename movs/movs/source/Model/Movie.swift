@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Movie: Codable {
+struct Movie: Codable {
     
     let title: String
     let overview: String

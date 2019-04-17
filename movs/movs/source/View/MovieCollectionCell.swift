@@ -21,11 +21,8 @@ class MovieCollectionCell: UICollectionViewCell {
     }
     
     private func setImage(with path: String) {
-        guard let url = URL(string: path) else {
-            imageView.isHidden = true
-            return
-        }
-        imageView.isHidden = false
+        imageView.clipsToBounds = true
+        let url = URL(string: "https://image.tmdb.org/t/p/w500/")!.appendingPathComponent(path)
         URLSession.shared
             .dataTask(with: url) { (data, response, error) in
                 guard error == nil else {
