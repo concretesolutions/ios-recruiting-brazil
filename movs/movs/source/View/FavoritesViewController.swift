@@ -51,17 +51,3 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
 }
-
-extension FavoritesViewController: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard !presenter.isRequesting else { return }
-        let height = scrollView.frame.size.height
-        let contentYoffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if distanceFromBottom < height {
-            presenter.getNewPage()
-        }
-    }
-    
-}

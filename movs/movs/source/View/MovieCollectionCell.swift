@@ -16,8 +16,18 @@ class MovieCollectionCell: UICollectionViewCell {
     
     func setup(with movie: Movie, favorite: Bool = false) {
         titleLabel.text = movie.title
+        roundBorders()
         guard let imagePath = movie.imagePath else { return }
         setImage(with: imagePath)
+    }
+    
+    private func roundBorders() {
+        let layer = CAShapeLayer()
+        layer.bounds = contentView.frame
+        layer.position = contentView.center
+        layer.path = UIBezierPath(roundedRect: contentView.bounds, byRoundingCorners: [.bottomLeft , .bottomRight], cornerRadii: CGSize(width: 10, height: 10)).cgPath
+        contentView.layer.backgroundColor = UIColor.green.cgColor
+        contentView.layer.mask = layer
     }
     
     private func setImage(with path: String) {

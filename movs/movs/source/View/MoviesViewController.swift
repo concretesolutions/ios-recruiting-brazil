@@ -7,44 +7,48 @@
 //
 
 import UIKit
-import RxSwift
 
 class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var movies: [Movie] = []
-    var disposeBag = DisposeBag()
+    var presenter: MoviesPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        getMovies()
+        
+        presenter = MoviesPresenter(vc: self)
+        presenter.getMovies()
     }
     
-    fileprivate func getMovies() {
-//        AlamoRemoteSource()
-//            .getTopMovies()
-//            .asObservable()
-//            .subscribe(onNext: { response in
-//                self.movies = response.results
-//                DispatchQueue.main.async {
-//                    self.collectionView.reloadData()
-//                }
-//            })
-//            .disposed(by: disposeBag)
+    func updateData() {
+        collectionView.reloadData()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return presenter.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionCell
-        cell.setup(with: movies[indexPath.row])
+        cell.setup(with: presenter.movies[indexPath.row])
         return cell
     }
 
 }
 
+extension MoviesViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !presenter.isRequesting else { return }
+        let height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            presenter.getNewPage()
+        }
+    }
+    
+}

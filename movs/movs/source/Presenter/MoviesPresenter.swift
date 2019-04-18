@@ -1,45 +1,44 @@
 //
-//  FavoritesPresenter.swift
+//  MoviesPresenter.swift
 //  movs
 //
 //  Created by Lorien Moisyn on 17/04/19.
-//  Copyright © 2019 Lorien. All rights reserved.
+//  Copyright © 2019 Auspex. All rights reserved.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 
-class FavoritesPresenter {
+class MoviesPresenter {
     
-    var favorites: [Movie] = []
-    var favoritesVC: FavoritesViewController?
-    var repository: AlamoRemoteSource?
+    var movies: [Movie] = []
+    var moviesVC: MoviesViewController!
+    var repository: AlamoRemoteSource!
     var disposeBag = DisposeBag()
-    
     var pageIndex = 1
     var isRequesting = false
-
-    init(vc: FavoritesViewController) {
-        favoritesVC = vc
+    
+    init(vc: MoviesViewController) {
+        moviesVC = vc
         repository = AlamoRemoteSource()
     }
     
     func getNewPage() {
         pageIndex += 1
-        getFavorites()
+        getMovies()
     }
     
-    func getFavorites() {
+    func getMovies() {
         isRequesting = true
-        repository?
+        repository
             .getTopMovies(at: pageIndex)
             .do(onSuccess: { (movies) in
-                self.favorites += movies
+                self.movies += movies
             })
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { _ in
-                self.favoritesVC?.updateData()
+                self.moviesVC.updateData()
             }, onCompleted: {
                 self.isRequesting = false
             })
