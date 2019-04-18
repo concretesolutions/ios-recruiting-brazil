@@ -2,8 +2,8 @@
 //  UIColor+Additions.swift
 //  movs
 //
-//  Created by Auspex on 16/04/19.
-//  Copyright © 2019 Auspex. All rights reserved.
+//  Created by Lorien on 16/04/19.
+//  Copyright © 2019 Lorien. All rights reserved.
 //
 
 import UIKit

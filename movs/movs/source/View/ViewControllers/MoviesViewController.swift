@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Rswift
 import RxSwift
 
 class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -25,16 +24,16 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     fileprivate func getMovies() {
-        AlamoRemoteSource()
-            .getTopMovies()
-            .asObservable()
-            .subscribe(onNext: { response in
-                self.movies = response.results
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            })
-            .disposed(by: disposeBag)
+//        AlamoRemoteSource()
+//            .getTopMovies()
+//            .asObservable()
+//            .subscribe(onNext: { response in
+//                self.movies = response.results
+//                DispatchQueue.main.async {
+//                    self.collectionView.reloadData()
+//                }
+//            })
+//            .disposed(by: disposeBag)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

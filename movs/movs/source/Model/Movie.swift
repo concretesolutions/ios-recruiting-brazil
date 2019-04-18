@@ -10,7 +10,7 @@ import UIKit
 
 struct Movie: Codable {
     
-    let title: String
+    let title: String!
     let overview: String
     let date: String
     let genreIds: [Int]
