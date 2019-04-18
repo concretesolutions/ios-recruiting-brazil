@@ -13,13 +13,21 @@ import RxCocoa
 class FavoritesPresenter {
     
     var favorites: [Movie] = []
-    var favoritesVC: FavoritesViewController?
+    var moviesVC: MoviesViewController?
 
-    init(vc: FavoritesViewController) {
-        favoritesVC = vc
+    init(vc: MoviesViewController) {
+        moviesVC = vc
     }
     
     func getFavorites() {
+        //TODO:
+    }
+    
+    func markAsFavorite(_ movie: Movie) {
+        //TODO:
+    }
+    
+    func unfavorite(_ movie: Movie) {
         //TODO:
     }
     

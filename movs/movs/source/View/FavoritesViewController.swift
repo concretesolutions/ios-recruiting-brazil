@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FavoritesViewController: UIViewController, MoviesViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,6 +31,10 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.reloadData()
     }
 
+}
+
+extension FavoritesViewController:  UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter?.favorites.count ?? 0
     }

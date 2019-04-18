@@ -13,13 +13,13 @@ import RxCocoa
 class MoviesPresenter {
     
     var movies: [Movie] = []
-    var moviesVC: MoviesViewController!
+    var moviesVC: MoviesCollectionViewController!
     var repository: AlamoRemoteSource!
     var disposeBag = DisposeBag()
     var pageIndex = 1
     var isRequesting = false
     
-    init(vc: MoviesViewController) {
+    init(vc: MoviesCollectionViewController) {
         moviesVC = vc
         repository = AlamoRemoteSource()
     }
