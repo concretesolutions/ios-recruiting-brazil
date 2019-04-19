@@ -10,6 +10,6 @@ import Foundation
 
 protocol MoviesViewController {
 
-    func updateData()
+    func updateLayout()
     
 }

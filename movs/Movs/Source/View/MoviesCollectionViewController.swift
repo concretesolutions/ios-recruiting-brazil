@@ -27,8 +27,17 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
         favoritesPresenter.getFavorites()
     }
     
-    func updateData() {
+    func updateLayout() {
         collectionView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard
+            let destination = segue.destination as? MovieDetailsViewController,
+            let cell = sender as? UICollectionViewCell
+            else { return }
+        let index = collectionView.indexPath(for: cell)?.row ?? 0
+        destination.movie = presenter.movies[index]
     }
 
 }

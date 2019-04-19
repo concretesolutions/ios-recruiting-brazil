@@ -23,6 +23,10 @@ class FavoritesPresenter {
         //TODO:
     }
     
+    func isFavorite(_ movie: Movie) -> Bool {
+        return true
+    }
+    
     func markAsFavorite(_ movie: Movie) {
         //TODO:
     }

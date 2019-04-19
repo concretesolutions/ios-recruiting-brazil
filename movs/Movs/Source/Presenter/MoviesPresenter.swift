@@ -38,7 +38,7 @@ class MoviesPresenter {
             })
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { _ in
-                self.moviesVC.updateData()
+                self.moviesVC.updateLayout()
             }, onCompleted: {
                 self.isRequesting = false
             })

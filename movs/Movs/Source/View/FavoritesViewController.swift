@@ -27,7 +27,7 @@ class FavoritesViewController: UIViewController, MoviesViewController {
         presenter.getFavorites()
     }
     
-    func updateData() {
+    func updateLayout() {
         tableView.reloadData()
     }
 
