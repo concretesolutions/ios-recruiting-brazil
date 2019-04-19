@@ -46,10 +46,13 @@ extension FavoritesViewController:  UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfavorite"
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             presenter.unfavorite(presenter.favorites[indexPath.row])
-            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
