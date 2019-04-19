@@ -12,14 +12,14 @@ class FavoritesViewController: UIViewController, MoviesViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var presenter: FavoritesPresenter!
+    var presenter: MoviesPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
 
-        presenter = FavoritesPresenter(vc: self)
+        presenter = MoviesPresenter(vc: self)
         presenter.getFavorites()
     }
     

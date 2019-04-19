@@ -8,8 +8,9 @@
 
 import UIKit
 
-struct Movie: Codable {
+class Movie: Codable {
     
+    let id: Int!
     let title: String!
     let overview: String
     let date: String
@@ -19,6 +20,7 @@ struct Movie: Codable {
     var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
+        case id
         case title
         case overview
         case date = "release_date"

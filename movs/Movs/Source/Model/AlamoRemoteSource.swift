@@ -33,6 +33,7 @@ class AlamoRemoteSource {
                 return try JSONDecoder().decode(Response<Movie>.self, from: tuple.0!)
             }
             .map({ (response) in
+                DataModel.sharedInstance.movies += response.results
                 return response.results
             })
             .do(onError: { error in

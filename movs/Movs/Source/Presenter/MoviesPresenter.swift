@@ -12,14 +12,17 @@ import RxCocoa
 
 class MoviesPresenter {
     
+    let dm = DataModel.sharedInstance
+
     var movies: [Movie] = []
-    var moviesVC: MoviesCollectionViewController!
+    var favorites: [Movie] = []
+    var moviesVC: MoviesViewController!
     var repository: AlamoRemoteSource!
     var disposeBag = DisposeBag()
     var pageIndex = 1
     var isRequesting = false
     
-    init(vc: MoviesCollectionViewController) {
+    init(vc: MoviesViewController) {
         moviesVC = vc
         repository = AlamoRemoteSource()
     }
@@ -35,6 +38,13 @@ class MoviesPresenter {
             .getTopMovies(at: pageIndex)
             .do(onSuccess: { (movies) in
                 self.movies += movies
+                self.movies.forEach{
+                    if self.isFavorite($0) {
+                        self.markAsFavorite($0)
+                        return
+                    }
+                }
+                DataModel.sharedInstance.movies = self.movies
             })
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { _ in
@@ -43,6 +53,34 @@ class MoviesPresenter {
                 self.isRequesting = false
             })
             .disposed(by: disposeBag)
+    }
+    
+    func getFavorites() {
+        movies.forEach{
+            if isFavorite($0) {
+                markAsFavorite($0)
+                return
+            }
+        }
+        moviesVC?.updateLayout()
+    }
+    
+    func isFavorite(_ movie: Movie) -> Bool {
+        return dm.favoriteIds.contains(movie.id)
+    }
+    
+    func markAsFavorite(_ movie: Movie) {
+        movie.isFavorite = true
+        favorites.append(movie)
+        dm.favoriteIds.insert(movie.id)
+        moviesVC?.updateLayout()
+    }
+    
+    func unfavorite(_ movie: Movie) {
+        movie.isFavorite = false
+        favorites = favorites.filter{ $0.id != movie.id}
+        dm.favoriteIds.remove(movie.id)
+        moviesVC?.updateLayout()
     }
     
 }

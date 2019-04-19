@@ -172,24 +172,12 @@
                                                             <constraint firstAttribute="width" constant="60" id="CAb-Bk-soW"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzq-Ic-pTn">
-                                                        <rect key="frame" x="40" y="0.0" width="60" height="132"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                        <state key="normal" title="Like?"/>
-                                                        <connections>
-                                                            <action selector="didTapFavoriteButton:" destination="uY5-XR-DPo" eventType="touchUpInside" id="dMy-0r-9dJ"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="hzq-Ic-pTn" firstAttribute="height" secondItem="AjY-dH-reH" secondAttribute="height" id="KgI-56-9xB"/>
-                                                    <constraint firstItem="hzq-Ic-pTn" firstAttribute="width" secondItem="AjY-dH-reH" secondAttribute="width" id="YM9-6O-LjB"/>
                                                     <constraint firstItem="AjY-dH-reH" firstAttribute="top" secondItem="UtU-nn-TNJ" secondAttribute="top" id="bd9-wE-oq2"/>
                                                     <constraint firstItem="AjY-dH-reH" firstAttribute="centerX" secondItem="UtU-nn-TNJ" secondAttribute="centerX" id="eMj-03-bvG"/>
-                                                    <constraint firstItem="hzq-Ic-pTn" firstAttribute="centerY" secondItem="AjY-dH-reH" secondAttribute="centerY" id="fCs-VM-Bz1"/>
                                                     <constraint firstAttribute="bottom" secondItem="AjY-dH-reH" secondAttribute="bottom" id="kBq-pe-bra"/>
-                                                    <constraint firstItem="hzq-Ic-pTn" firstAttribute="centerX" secondItem="AjY-dH-reH" secondAttribute="centerX" id="xYo-Yk-n31"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -201,8 +189,15 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hoje emda didjdd sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka skdk" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pM-6K-itj">
-                                <rect key="frame" x="16" y="384" width="343" height="61"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNH-Et-9Ke" userLabel="Like?">
+                                <rect key="frame" x="259.5" y="228.5" width="60" height="132"/>
+                                <state key="normal" title="Like"/>
+                                <connections>
+                                    <action selector="didTapFavoriteButton:" destination="uY5-XR-DPo" eventType="touchUpInside" id="E1a-nj-1nh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoje emda didjdd sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka sakkka skdk" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pM-6K-itj">
+                                <rect key="frame" x="16" y="384" width="343" height="56"/>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -211,9 +206,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6pM-6K-itj" firstAttribute="leading" secondItem="zcH-Wh-Svy" secondAttribute="leading" id="69f-gf-rb8"/>
+                            <constraint firstItem="KNH-Et-9Ke" firstAttribute="height" secondItem="AjY-dH-reH" secondAttribute="height" id="7Cp-hU-Dr7"/>
+                            <constraint firstItem="KNH-Et-9Ke" firstAttribute="centerY" secondItem="AjY-dH-reH" secondAttribute="centerY" id="OrO-wa-s8Y"/>
+                            <constraint firstItem="KNH-Et-9Ke" firstAttribute="width" secondItem="AjY-dH-reH" secondAttribute="width" id="SKa-J8-7Ox"/>
                             <constraint firstItem="6pM-6K-itj" firstAttribute="trailing" secondItem="zcH-Wh-Svy" secondAttribute="trailing" id="UgO-Fm-3nC"/>
                             <constraint firstItem="m7F-22-7R2" firstAttribute="trailing" secondItem="zcH-Wh-Svy" secondAttribute="trailing" constant="16" id="YxC-Lg-7EJ"/>
                             <constraint firstItem="6pM-6K-itj" firstAttribute="top" secondItem="zcH-Wh-Svy" secondAttribute="bottom" constant="23.5" id="ZUy-23-56j"/>
+                            <constraint firstItem="KNH-Et-9Ke" firstAttribute="centerX" secondItem="AjY-dH-reH" secondAttribute="centerX" id="fHL-su-UiS"/>
                             <constraint firstItem="VLT-Wc-59U" firstAttribute="width" secondItem="5d7-o2-cr3" secondAttribute="width" multiplier="0.5" id="gKd-S8-6um"/>
                             <constraint firstItem="zcH-Wh-Svy" firstAttribute="leading" secondItem="m7F-22-7R2" secondAttribute="leading" constant="16" id="hEv-e5-xDZ"/>
                             <constraint firstItem="zcH-Wh-Svy" firstAttribute="top" secondItem="m7F-22-7R2" secondAttribute="top" constant="29" id="meg-O2-vtm"/>
@@ -222,6 +221,7 @@
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="6pM-6K-itj" id="BhZ-fH-Lul"/>
+                        <outlet property="favoriteButton" destination="KNH-Et-9Ke" id="T1i-Xf-39Y"/>
                         <outlet property="favoriteImageView" destination="AjY-dH-reH" id="Ytm-6i-NRh"/>
                         <outlet property="imageView" destination="VLT-Wc-59U" id="zCG-8W-Qwv"/>
                         <outlet property="titleLabel" destination="kCt-4X-lZf" id="Rq0-mt-flP"/>

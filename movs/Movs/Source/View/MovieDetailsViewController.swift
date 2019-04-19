@@ -15,22 +15,28 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var favoriteImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     let isFavoriteImage = UIImage(named: "favorite_full_icon")!
-    let isNotFavoriteImage = UIImage(named: "favorite_empty_icon")!
+    let isNotFavoriteImage = UIImage(named: "favorite_gray_icon")!
     var movie: Movie!
-    var presenter: FavoritesPresenter!
+    var presenter: MoviesPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        presenter = FavoritesPresenter(vc: self)
+        presenter = MoviesPresenter(vc: self)
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
         yearLabel.text = String(movie.date.split(separator: "-")[0])
         movie.isFavorite = presenter.isFavorite(movie)
+        updateLayout()
         guard let imagePath = movie.imagePath else { return }
         setImage(with: imagePath)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        guard let moviesVC = parent?.children.first as? MoviesCollectionViewController else { return }
+        moviesVC.presenter.getFavorites()
     }
     
     private func setImage(with path: String) {
@@ -61,7 +67,8 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
     }
     
     func updateLayout() {
-        favoriteImageView.image = presenter.isFavorite(movie) ? isFavoriteImage : isNotFavoriteImage
+        favoriteImageView.image = movie.isFavorite ? isFavoriteImage : isNotFavoriteImage
+        favoriteButton.setTitle(movie.isFavorite ? "Unlike" : "Like", for: .normal)
     }
 
 }

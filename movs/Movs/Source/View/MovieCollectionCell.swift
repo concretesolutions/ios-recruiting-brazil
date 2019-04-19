@@ -14,9 +14,13 @@ class MovieCollectionCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteImage: UIImageView!
     
-    func setup(with movie: Movie, favorite: Bool = false) {
+    let isFavoriteImage = UIImage(named: "favorite_full_icon")!
+    let isNotFavoriteImage = UIImage(named: "favorite_gray_icon")!
+    
+    func setup(with movie: Movie) {
         titleLabel.text = movie.title
         roundBorders()
+        favoriteImage.image = movie.isFavorite ? isFavoriteImage : isNotFavoriteImage
         guard let imagePath = movie.imagePath else { return }
         setImage(with: imagePath)
     }
