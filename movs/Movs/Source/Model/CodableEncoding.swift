@@ -19,12 +19,12 @@ public protocol CodableEncoding {
 public extension CodableEncoding {
     
     func encode<T>(_ urlRequest: Alamofire.URLRequestConvertible, with encodable: T?) -> Observable<URLRequest> where T : Encodable {
-        return Observable.create { ob -> Disposable in
+        return Observable.create { observable -> Disposable in
             do {
-                ob.onNext(try self.encode(urlRequest, with: encodable))
-                ob.onCompleted()
+                observable.onNext(try self.encode(urlRequest, with: encodable))
+                observable.onCompleted()
             } catch {
-                ob.onError(error)
+                observable.onError(error)
             }
             return Disposables.create()
         }

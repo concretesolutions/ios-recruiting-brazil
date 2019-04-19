@@ -18,6 +18,7 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
+        collectionView.delegate = self
         
         presenter = MoviesPresenter(vc: self)
         presenter.getMovies()
@@ -32,7 +33,7 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
 
 }
 
-extension MoviesCollectionViewController: UICollectionViewDataSource {
+extension MoviesCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter.movies.count

@@ -15,9 +15,7 @@
 		D070AFC62267EEF600833BA4 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFB52267EEF600833BA4 /* UIColor+Additions.swift */; };
 		D070AFC72267EEF600833BA4 /* CodableEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFB72267EEF600833BA4 /* CodableEncoding.swift */; };
 		D070AFC82267EEF600833BA4 /* DataRequest+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFB82267EEF600833BA4 /* DataRequest+Additions.swift */; };
-		D070AFC92267EEF600833BA4 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFB92267EEF600833BA4 /* RestError.swift */; };
 		D070AFCA2267EEF600833BA4 /* AlamoRemoteSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFBA2267EEF600833BA4 /* AlamoRemoteSource.swift */; };
-		D070AFCB2267EEF600833BA4 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFBB2267EEF600833BA4 /* HTTPStatusCode.swift */; };
 		D070AFCC2267EEF600833BA4 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFBD2267EEF600833BA4 /* Movie.swift */; };
 		D070AFCD2267EEF600833BA4 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFBE2267EEF600833BA4 /* Response.swift */; };
 		D070AFCE2267EEF600833BA4 /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D070AFC02267EEF600833BA4 /* MovieCollectionCell.swift */; };
@@ -67,9 +65,7 @@
 		D070AFB52267EEF600833BA4 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		D070AFB72267EEF600833BA4 /* CodableEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableEncoding.swift; sourceTree = "<group>"; };
 		D070AFB82267EEF600833BA4 /* DataRequest+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+Additions.swift"; sourceTree = "<group>"; };
-		D070AFB92267EEF600833BA4 /* RestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
 		D070AFBA2267EEF600833BA4 /* AlamoRemoteSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamoRemoteSource.swift; sourceTree = "<group>"; };
-		D070AFBB2267EEF600833BA4 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		D070AFBD2267EEF600833BA4 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D070AFBE2267EEF600833BA4 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D070AFC02267EEF600833BA4 /* MovieCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
@@ -114,7 +110,7 @@
 		23B5F60322654A820043DAAE = {
 			isa = PBXGroup;
 			children = (
-				23B5F60E22654A820043DAAE /* movs */,
+				23B5F60E22654A820043DAAE /* Movs */,
 				23B5F60D22654A820043DAAE /* Products */,
 				CE4C0B0C6FD412E38206BEED /* Pods */,
 				D87E1331733006B90A2CC407 /* Frameworks */,
@@ -131,24 +127,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		23B5F60E22654A820043DAAE /* movs */ = {
+		23B5F60E22654A820043DAAE /* Movs */ = {
 			isa = PBXGroup;
 			children = (
 				23B5F61D22654A840043DAAE /* Info.plist */,
 				23B5F60F22654A820043DAAE /* AppDelegate.swift */,
-				D070AFB42267EEF600833BA4 /* source */,
-				23B5F64022654E5D0043DAAE /* resources */,
+				D070AFB42267EEF600833BA4 /* Source */,
+				23B5F64022654E5D0043DAAE /* Resources */,
 			);
-			path = movs;
+			path = Movs;
 			sourceTree = "<group>";
 		};
-		23B5F64022654E5D0043DAAE /* resources */ = {
+		23B5F64022654E5D0043DAAE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				23B5F61822654A840043DAAE /* Assets.xcassets */,
 				23B5F61A22654A840043DAAE /* LaunchScreen.storyboard */,
 			);
-			path = resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CE4C0B0C6FD412E38206BEED /* Pods */ = {
@@ -164,33 +160,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		D070AFB42267EEF600833BA4 /* source */ = {
+		D070AFB42267EEF600833BA4 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D070AFB52267EEF600833BA4 /* UIColor+Additions.swift */,
-				D070AFB62267EEF600833BA4 /* RequestUtils */,
 				D070AFBC2267EEF600833BA4 /* Model */,
 				D070AFBF2267EEF600833BA4 /* View */,
 				D070AFD9226815B500833BA4 /* Presenter */,
 			);
-			path = source;
-			sourceTree = "<group>";
-		};
-		D070AFB62267EEF600833BA4 /* RequestUtils */ = {
-			isa = PBXGroup;
-			children = (
-				D070AFB72267EEF600833BA4 /* CodableEncoding.swift */,
-				D070AFB82267EEF600833BA4 /* DataRequest+Additions.swift */,
-				D070AFB92267EEF600833BA4 /* RestError.swift */,
-				D070AFBA2267EEF600833BA4 /* AlamoRemoteSource.swift */,
-				D070AFBB2267EEF600833BA4 /* HTTPStatusCode.swift */,
-			);
-			path = RequestUtils;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		D070AFBC2267EEF600833BA4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D070AFB72267EEF600833BA4 /* CodableEncoding.swift */,
+				D070AFB82267EEF600833BA4 /* DataRequest+Additions.swift */,
+				D070AFBA2267EEF600833BA4 /* AlamoRemoteSource.swift */,
 				D070AFBD2267EEF600833BA4 /* Movie.swift */,
 				D070AFBE2267EEF600833BA4 /* Response.swift */,
 			);
@@ -206,6 +191,7 @@
 				D070AFC42267EEF600833BA4 /* FavoritesViewController.swift */,
 				D070AFD72267FA4800833BA4 /* FavoriteTableViewCell.swift */,
 				D070AFC12267EEF600833BA4 /* Main.storyboard */,
+				D070AFB52267EEF600833BA4 /* UIColor+Additions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,7 +298,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 23B5F60722654A820043DAAE /* Build configuration list for PBXProject "movs" */;
+			buildConfigurationList = 23B5F60722654A820043DAAE /* Build configuration list for PBXProject "Movs" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -464,7 +450,6 @@
 				23B5F61022654A820043DAAE /* AppDelegate.swift in Sources */,
 				D070AFCA2267EEF600833BA4 /* AlamoRemoteSource.swift in Sources */,
 				D070AFD42267EF3700833BA4 /* FavoritesPresenter.swift in Sources */,
-				D070AFC92267EEF600833BA4 /* RestError.swift in Sources */,
 				D070AFC72267EEF600833BA4 /* CodableEncoding.swift in Sources */,
 				D070AFD82267FA4800833BA4 /* FavoriteTableViewCell.swift in Sources */,
 				D070AFCD2267EEF600833BA4 /* Response.swift in Sources */,
@@ -474,7 +459,6 @@
 				D070AFCE2267EEF600833BA4 /* MovieCollectionCell.swift in Sources */,
 				D070AFC82267EEF600833BA4 /* DataRequest+Additions.swift in Sources */,
 				D070AFCC2267EEF600833BA4 /* Movie.swift in Sources */,
-				D070AFCB2267EEF600833BA4 /* HTTPStatusCode.swift in Sources */,
 				D070AFD12267EEF600833BA4 /* MoviesCollectionViewController.swift in Sources */,
 				D070AFDB2268162D00833BA4 /* MoviesPresenter.swift in Sources */,
 			);
@@ -651,6 +635,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 256Q5VC7FE;
 				INFOPLIST_FILE = movs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -669,6 +654,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 256Q5VC7FE;
 				INFOPLIST_FILE = movs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -766,7 +752,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		23B5F60722654A820043DAAE /* Build configuration list for PBXProject "movs" */ = {
+		23B5F60722654A820043DAAE /* Build configuration list for PBXProject "Movs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				23B5F63422654A840043DAAE /* Debug */,
