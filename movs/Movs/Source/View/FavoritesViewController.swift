@@ -20,10 +20,9 @@ class FavoritesViewController: UIViewController, MoviesViewController {
         tableView.dataSource = self
 
         presenter = MoviesPresenter(vc: self)
-        presenter.getFavorites()
     }
     
-    @IBAction func reload(_ sender: Any) {
+    override func viewWillAppear(_ animated: Bool) {
         presenter.getFavorites()
     }
     
@@ -40,16 +39,16 @@ extension FavoritesViewController:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? FavoriteTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell") as? FavoriteTableViewCell else {
             return UITableViewCell()
         }
-        cell.setTitle(presenter.favorites[indexPath.row].title)
+        cell.setup(with: presenter.favorites[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            presenter.favorites.remove(at: indexPath.row)
+            presenter.unfavorite(presenter.favorites[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

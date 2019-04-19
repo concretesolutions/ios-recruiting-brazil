@@ -38,16 +38,15 @@ class MoviesPresenter {
             .getTopMovies(at: pageIndex)
             .do(onSuccess: { (movies) in
                 self.movies += movies
+            })
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { _ in
                 self.movies.forEach{
                     if self.isFavorite($0) {
                         self.markAsFavorite($0)
                         return
                     }
                 }
-                DataModel.sharedInstance.movies = self.movies
-            })
-            .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { _ in
                 self.moviesVC.updateLayout()
             }, onCompleted: {
                 self.isRequesting = false
@@ -56,6 +55,11 @@ class MoviesPresenter {
     }
     
     func getFavorites() {
+        guard !movies.isEmpty else {
+            favorites = dm.movies.filter { dm.favoriteIds.contains($0.id) }
+            moviesVC.updateLayout()
+            return
+        }
         movies.forEach{
             if isFavorite($0) {
                 markAsFavorite($0)

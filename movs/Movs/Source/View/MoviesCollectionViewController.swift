@@ -13,7 +13,6 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var presenter: MoviesPresenter!
-//    var favoritesPresenter: FavoritesPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +22,6 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
         presenter = MoviesPresenter(vc: self)
         presenter.getFavorites()
         presenter.getMovies()
-        
-//        favoritesPresenter = FavoritesPresenter(vc: self)
-//        favoritesPresenter.getFavorites()
     }
     
     func updateLayout() {

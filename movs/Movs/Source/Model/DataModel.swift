@@ -18,8 +18,6 @@ class DataModel {
     func getFavoritesFromDevice() {
         guard let ids = UserDefaults.standard.object(forKey: "favoriteIds") as? [Int] else { return }
         ids.forEach{ favoriteIds.insert($0) }
-//        favorites = movies.filter { favoriteIds.contains($0.id) }
-//        favorites.forEach{ $0.isFavorite = true }
     }
     
     func saveFavoritesInDevice() {
