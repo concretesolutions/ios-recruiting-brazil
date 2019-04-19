@@ -15,7 +15,7 @@ struct Movie: Codable {
     let date: String
     let genreIds: [Int]
     let imagePath: String?
-    
+
     var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {

@@ -14,6 +14,7 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var favoriteImageView: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     let isFavoriteImage = UIImage(named: "favorite_full_icon")!
     let isNotFavoriteImage = UIImage(named: "favorite_empty_icon")!
@@ -22,9 +23,11 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         presenter = FavoritesPresenter(vc: self)
         titleLabel.text = movie.title
-//        yearLabel.text = movie.
+        descriptionLabel.text = movie.overview
+        yearLabel.text = String(movie.date.split(separator: "-")[0])
         movie.isFavorite = presenter.isFavorite(movie)
         guard let imagePath = movie.imagePath else { return }
         setImage(with: imagePath)
