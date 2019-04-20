@@ -31,6 +31,8 @@ class MovieCollectionCell: UICollectionViewCell {
         layer.position = contentView.center
         layer.path = UIBezierPath(roundedRect: contentView.bounds, byRoundingCorners: [.bottomLeft , .bottomRight], cornerRadii: CGSize(width: 10, height: 10)).cgPath
         contentView.layer.backgroundColor = UIColor.green.cgColor
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.darkBlue.cgColor
         contentView.layer.mask = layer
     }
     

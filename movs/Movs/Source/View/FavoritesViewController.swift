@@ -29,6 +29,19 @@ class FavoritesViewController: UIViewController, MoviesViewController {
     func updateLayout() {
         tableView.reloadData()
     }
+    
+    func showErrorLayout() {
+        tableView.isHidden = true
+        let errorLabel = UILabel(frame: view.frame)
+        errorLabel.textColor = .red
+        errorLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        errorLabel.textAlignment = .center
+        errorLabel.text = """
+        Um erro ocorreu. Por
+        favor, tente novamente.
+        """
+        view.addSubview(UILabel(frame: view.frame))
+    }
 
 }
 

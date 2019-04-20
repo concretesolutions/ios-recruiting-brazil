@@ -69,7 +69,7 @@
                                                             <rect key="frame" x="0.0" y="20" width="160" height="194"/>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.87682524179158783" green="0.87682524179158783" blue="0.87682524179158783" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="htL-KH-OgG" firstAttribute="leading" secondItem="cdv-n5-Vxs" secondAttribute="leading" id="1Jf-9m-S5X"/>
                                                         <constraint firstItem="chQ-gQ-yHM" firstAttribute="leading" secondItem="cdv-n5-Vxs" secondAttribute="leading" constant="10" id="NAk-6P-E2l"/>
@@ -163,11 +163,17 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wi1-T9-RFj">
+                                                <rect key="frame" x="5" y="135.5" width="129.5" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UtU-nn-TNJ">
-                                                <rect key="frame" x="0.0" y="135.5" width="139.5" height="132"/>
+                                                <rect key="frame" x="0.0" y="160" width="139.5" height="107.5"/>
                                                 <subviews>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="favorite_full_icon" translatesAutoresizingMaskIntoConstraints="NO" id="AjY-dH-reH">
-                                                        <rect key="frame" x="40" y="0.0" width="60" height="132"/>
+                                                        <rect key="frame" x="40" y="0.0" width="60" height="107.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="CAb-Bk-soW"/>
                                                         </constraints>
@@ -185,12 +191,13 @@
                                             <constraint firstAttribute="trailing" secondItem="Q0y-p0-m3Y" secondAttribute="trailing" constant="5" id="8SX-Ro-k49"/>
                                             <constraint firstAttribute="trailing" secondItem="kCt-4X-lZf" secondAttribute="trailing" id="Afj-yA-AcY"/>
                                             <constraint firstItem="kCt-4X-lZf" firstAttribute="leading" secondItem="q5E-sJ-2L7" secondAttribute="leading" id="gme-9L-x5T"/>
+                                            <constraint firstItem="wi1-T9-RFj" firstAttribute="leading" secondItem="Q0y-p0-m3Y" secondAttribute="leading" id="wI9-69-med"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNH-Et-9Ke" userLabel="Like?">
-                                <rect key="frame" x="259.5" y="228.5" width="60" height="132"/>
+                                <rect key="frame" x="259.5" y="253" width="60" height="107.5"/>
                                 <state key="normal" title="Like"/>
                                 <connections>
                                     <action selector="didTapFavoriteButton:" destination="uY5-XR-DPo" eventType="touchUpInside" id="E1a-nj-1nh"/>
@@ -223,6 +230,7 @@
                         <outlet property="descriptionLabel" destination="6pM-6K-itj" id="BhZ-fH-Lul"/>
                         <outlet property="favoriteButton" destination="KNH-Et-9Ke" id="T1i-Xf-39Y"/>
                         <outlet property="favoriteImageView" destination="AjY-dH-reH" id="Ytm-6i-NRh"/>
+                        <outlet property="genresLabel" destination="wi1-T9-RFj" id="tgZ-E3-gId"/>
                         <outlet property="imageView" destination="VLT-Wc-59U" id="zCG-8W-Qwv"/>
                         <outlet property="titleLabel" destination="kCt-4X-lZf" id="Rq0-mt-flP"/>
                         <outlet property="yearLabel" destination="Q0y-p0-m3Y" id="Ffd-6u-MO1"/>

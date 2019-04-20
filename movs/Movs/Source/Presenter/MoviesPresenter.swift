@@ -38,6 +38,8 @@ class MoviesPresenter {
             .getTopMovies(at: pageIndex)
             .do(onSuccess: { (movies) in
                 self.movies += movies
+            }, onError: { error in
+                self.moviesVC.showErrorLayout()
             })
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { _ in

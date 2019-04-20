@@ -13,6 +13,7 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var genresLabel: UILabel!
     @IBOutlet weak var favoriteImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -32,6 +33,10 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
         updateLayout()
         guard let imagePath = movie.imagePath else { return }
         setImage(with: imagePath)
+    }
+    
+    func showErrorLayout() {
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
