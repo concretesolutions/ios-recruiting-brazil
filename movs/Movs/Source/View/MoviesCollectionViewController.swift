@@ -15,18 +15,20 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
     var presenter: MoviesPresenter!
     var isSearching = false
     var errorLabel: UILabel!
+    var indicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        addSearchBar()
+        addErrorLabel()
+        addActivityIndicator()
+        
         presenter = MoviesPresenter(vc: self)
         presenter.getFavorites()
         presenter.getMovies()
-        
-        addSearchBar()
-        addErrorLabel()
     }
     
     private func addSearchBar() {
@@ -46,7 +48,15 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
         errorLabel.textAlignment = .center
     }
     
+    private func addActivityIndicator() {
+        indicator = UIActivityIndicatorView(frame: .zero)
+        indicator.style = .gray
+        indicator.center = view.center
+        view.addSubview(indicator)
+    }
+    
     func updateLayout() {
+        indicator.stopAnimating()
         collectionView.reloadData()
         guard let errorLabel = errorLabel else { return }
         errorLabel.isHidden = true
@@ -120,6 +130,7 @@ extension MoviesCollectionViewController: UIScrollViewDelegate {
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
+            indicator.startAnimating()
             presenter.getNewPage()
         }
     }
