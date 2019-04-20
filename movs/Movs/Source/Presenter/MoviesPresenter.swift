@@ -22,6 +22,7 @@ class MoviesPresenter {
     var disposeBag = DisposeBag()
     var pageIndex = 1
     var isRequesting = false
+    var filtered = false
     
     init(vc: BaseViewController) {
         moviesVC = vc
@@ -91,11 +92,21 @@ class MoviesPresenter {
         moviesVC?.updateLayout()
     }
     
-    func getGenres(for movie: Movie) -> String {
+    func getGenres(for movie: Movie) -> [String] {
         let genres = dm.genres.filter{ movie.genreIds.contains($0.id) }
-        var names: [String] = []
-        genres.forEach{ names.append($0.name) }
-        return names.joined(separator: " / ")
+        var genreNames: [String] = []
+        genres.forEach{ genreNames.append($0.name) }
+        return genreNames
+    }
+    
+    func filterUsingGenres(_ genreNames: [String]) {
+        filtered = true
+        getFavorites()
+        favorites = favorites.filter{ movie in
+            let movieGenres = self.getGenres(for: movie)
+            return !Set(genreNames).intersection(movieGenres).isEmpty
+        }
+        moviesVC.updateLayout()
     }
     
 }

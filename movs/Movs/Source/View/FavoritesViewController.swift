@@ -23,6 +23,7 @@ class FavoritesViewController: UIViewController, BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        guard !presenter.filtered else { return }
         presenter.getFavorites()
     }
     

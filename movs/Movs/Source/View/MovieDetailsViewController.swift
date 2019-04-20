@@ -29,7 +29,8 @@ class MovieDetailsViewController: UIViewController, BaseViewController {
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
         yearLabel.text = String(movie.date.split(separator: "-")[0])
-        genresLabel.text = presenter.getGenres(for: movie)
+        let genreNames = presenter.getGenres(for: movie)
+        genresLabel.text = genreNames.joined(separator: " / ")
         movie.isFavorite = presenter.isFavorite(movie)
         updateLayout()
         guard let imagePath = movie.imagePath else { return }

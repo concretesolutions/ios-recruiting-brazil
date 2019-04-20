@@ -28,6 +28,9 @@
 		D0DDA5042269861100ACF0DC /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDA5032269861100ACF0DC /* MovieDetailsViewController.swift */; };
 		D0DDA5082269953F00ACF0DC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDA5072269953F00ACF0DC /* DataModel.swift */; };
 		D0DDA50A226A403200ACF0DC /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDA509226A403200ACF0DC /* Genre.swift */; };
+		D0DDA50C226B7CC200ACF0DC /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDA50B226B7CC200ACF0DC /* FilterViewController.swift */; };
+		D0DDA510226B999400ACF0DC /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDA50F226B999400ACF0DC /* FilterPresenter.swift */; };
+		D0DDA512226BA02C00ACF0DC /* GenresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDA511226BA02C00ACF0DC /* GenresViewController.swift */; };
 		F50E4F84D09E25AB4930A56F /* Pods_movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0257600F7EBD3AC14206136D /* Pods_movs.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +83,9 @@
 		D0DDA5032269861100ACF0DC /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		D0DDA5072269953F00ACF0DC /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		D0DDA509226A403200ACF0DC /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		D0DDA50B226B7CC200ACF0DC /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		D0DDA50F226B999400ACF0DC /* FilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPresenter.swift; sourceTree = "<group>"; };
+		D0DDA511226BA02C00ACF0DC /* GenresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresViewController.swift; sourceTree = "<group>"; };
 		F3FD08BC69B109D489C11CB2 /* Pods_movsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_movsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -194,11 +200,13 @@
 				D070AFC12267EEF600833BA4 /* Main.storyboard */,
 				D070AFDC226824B500833BA4 /* BaseViewController.swift */,
 				D070AFC52267EEF600833BA4 /* MoviesCollectionViewController.swift */,
-				D070AFC02267EEF600833BA4 /* MovieCollectionCell.swift */,
 				D070AFC42267EEF600833BA4 /* FavoritesViewController.swift */,
+				D0DDA50B226B7CC200ACF0DC /* FilterViewController.swift */,
+				D0DDA5032269861100ACF0DC /* MovieDetailsViewController.swift */,
+				D070AFC02267EEF600833BA4 /* MovieCollectionCell.swift */,
 				D070AFD72267FA4800833BA4 /* FavoriteTableViewCell.swift */,
 				D070AFB52267EEF600833BA4 /* UIColor+Additions.swift */,
-				D0DDA5032269861100ACF0DC /* MovieDetailsViewController.swift */,
+				D0DDA511226BA02C00ACF0DC /* GenresViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				D070AFDA2268162D00833BA4 /* MoviesPresenter.swift */,
+				D0DDA50F226B999400ACF0DC /* FilterPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -409,6 +418,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -418,6 +428,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -455,9 +466,12 @@
 			files = (
 				23B5F61022654A820043DAAE /* AppDelegate.swift in Sources */,
 				D070AFCA2267EEF600833BA4 /* AlamoRemoteSource.swift in Sources */,
+				D0DDA512226BA02C00ACF0DC /* GenresViewController.swift in Sources */,
 				D070AFC72267EEF600833BA4 /* CodableEncoding.swift in Sources */,
+				D0DDA50C226B7CC200ACF0DC /* FilterViewController.swift in Sources */,
 				D070AFD82267FA4800833BA4 /* FavoriteTableViewCell.swift in Sources */,
 				D0DDA5082269953F00ACF0DC /* DataModel.swift in Sources */,
+				D0DDA510226B999400ACF0DC /* FilterPresenter.swift in Sources */,
 				D0DDA5042269861100ACF0DC /* MovieDetailsViewController.swift in Sources */,
 				D070AFCD2267EEF600833BA4 /* Response.swift in Sources */,
 				D0DDA50A226A403200ACF0DC /* Genre.swift in Sources */,
