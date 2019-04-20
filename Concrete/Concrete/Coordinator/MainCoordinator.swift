@@ -12,11 +12,11 @@ import UIKit
 class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    
+
     init (navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
         navigationController.delegate = self
         let viewC = MoviesViewController.instantiate()
@@ -24,7 +24,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         viewC.coordinator = self
         navigationController.pushViewController(viewC, animated: true)
     }
-    
+
     func startBookmarks() {
         navigationController.delegate = self
         let viewC = BookmarksViewController.instantiate()
@@ -32,7 +32,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         viewC.coordinator = self
         navigationController.pushViewController(viewC, animated: true)
     }
-    
+
     func childDidFinish(_ child: Coordinator?) {
         for (index, coordinator) in
             childCoordinators.enumerated() {

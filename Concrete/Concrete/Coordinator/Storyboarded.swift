@@ -19,7 +19,7 @@ extension Storyboarded where Self: UIViewController {
         guard let viewC = storyboard.instantiateViewController(withIdentifier: idx) as? Self else {
             fatalError("failed to load \(idx) storyboard file.")
         }
-        
+
         return viewC
     }
 }

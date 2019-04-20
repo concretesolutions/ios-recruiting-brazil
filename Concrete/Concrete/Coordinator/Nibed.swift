@@ -13,7 +13,7 @@ protocol Nibed {
 }
 
 extension Nibed where Self: UIViewController {
-    
+
     static func instantiate() -> Self {
         let idx = String(describing: self)
         return Self(nibName: idx, bundle: .main)

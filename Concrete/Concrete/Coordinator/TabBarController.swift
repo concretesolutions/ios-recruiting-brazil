@@ -11,7 +11,7 @@ import UIKit
 class TabBarController: UITabBarController {
     let movies = MainCoordinator(navigationController: UINavigationController())
     let bookmarks = MainCoordinator(navigationController: UINavigationController())
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         movies.start()
