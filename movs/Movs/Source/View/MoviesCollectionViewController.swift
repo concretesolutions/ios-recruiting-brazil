@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesCollectionViewController: UIViewController, MoviesViewController {
+class MoviesCollectionViewController: UIViewController, BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -43,26 +43,29 @@ class MoviesCollectionViewController: UIViewController, MoviesViewController {
         view.addSubview(errorLabel)
         errorLabel.isHidden = true
         errorLabel.textColor = .red
-        errorLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        errorLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         errorLabel.numberOfLines = 0
         errorLabel.textAlignment = .center
     }
-    
+
     private func addActivityIndicator() {
         indicator = UIActivityIndicatorView(frame: .zero)
         indicator.style = .gray
         indicator.center = view.center
         view.addSubview(indicator)
+        indicator.startAnimating()
     }
     
     func updateLayout() {
         indicator.stopAnimating()
+        collectionView.isHidden = false
         collectionView.reloadData()
         guard let errorLabel = errorLabel else { return }
         errorLabel.isHidden = true
     }
     
     func showErrorLayout() {
+        collectionView.isHidden = true
         showErrorLayout(searchText: nil)
     }
     

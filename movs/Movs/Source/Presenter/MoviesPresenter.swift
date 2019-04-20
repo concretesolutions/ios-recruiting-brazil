@@ -17,13 +17,13 @@ class MoviesPresenter {
     var movies: [Movie] = []
     var genres: [Genre] = []
     var favorites: [Movie] = []
-    var moviesVC: MoviesViewController!
+    var moviesVC: BaseViewController!
     var repository: AlamoRemoteSource!
     var disposeBag = DisposeBag()
     var pageIndex = 1
     var isRequesting = false
     
-    init(vc: MoviesViewController) {
+    init(vc: BaseViewController) {
         moviesVC = vc
         repository = AlamoRemoteSource()
     }
@@ -39,15 +39,16 @@ class MoviesPresenter {
             .getTopMovies(at: pageIndex)
             .do(onSuccess: { (movies) in
                 self.movies += movies
-            }, onError: { error in
-                self.moviesVC.showErrorLayout()
             })
             .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { _ in
+            .drive(onNext: { movies in
+                guard !movies.isEmpty else {
+                    self.moviesVC.showErrorLayout()
+                    return
+                }
                 self.movies.forEach{
                     if self.isFavorite($0) {
                         self.markAsFavorite($0)
-                        return
                     }
                 }
                 self.moviesVC.updateLayout()

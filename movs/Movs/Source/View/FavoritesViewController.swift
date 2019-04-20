@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController, MoviesViewController {
+class FavoritesViewController: UIViewController, BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,16 +31,7 @@ class FavoritesViewController: UIViewController, MoviesViewController {
     }
     
     func showErrorLayout() {
-        tableView.isHidden = true
-        let errorLabel = UILabel(frame: view.frame)
-        errorLabel.textColor = .red
-        errorLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
-        errorLabel.textAlignment = .center
-        errorLabel.text = """
-        Um erro ocorreu. Por
-        favor, tente novamente.
-        """
-        view.addSubview(UILabel(frame: view.frame))
+        
     }
 
 }

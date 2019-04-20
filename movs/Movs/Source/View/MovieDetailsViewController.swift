@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailsViewController: UIViewController, MoviesViewController {
+class MovieDetailsViewController: UIViewController, BaseViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

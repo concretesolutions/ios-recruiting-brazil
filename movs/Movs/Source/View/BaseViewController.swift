@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MoviesViewController {
+protocol BaseViewController {
 
     func updateLayout()
     func showErrorLayout()
