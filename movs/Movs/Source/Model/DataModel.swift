@@ -7,13 +7,27 @@
 //
 
 import Foundation
+import RxSwift
 
 class DataModel {
     
     static var sharedInstance = DataModel()
     
     var movies: [Movie] = []
+    var genres: [Genre] = []
     var favoriteIds: Set<Int> = []
+    var disposeBag = DisposeBag()
+    
+    func getGenres() {
+        AlamoRemoteSource()
+            .getGenres()
+            .do(onSuccess: { (genres) in
+                self.genres = genres
+            })
+            .asDriver(onErrorJustReturn: [])
+            .drive()
+            .disposed(by: disposeBag)
+    }
     
     func getFavoritesFromDevice() {
         guard let ids = UserDefaults.standard.object(forKey: "favoriteIds") as? [Int] else { return }

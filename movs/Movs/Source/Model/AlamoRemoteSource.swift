@@ -30,11 +30,36 @@ class AlamoRemoteSource {
                     .responseData(queue: DispatchQueue.global())
             }
             .map { tuple in
-                return try JSONDecoder().decode(Response<Movie>.self, from: tuple.0!)
+                return try JSONDecoder().decode(ResponseMovies<Movie>.self, from: tuple.0!)
             }
             .map({ (response) in
                 DataModel.sharedInstance.movies += response.results
                 return response.results
+            })
+            .do(onError: { error in
+                print("Error: \(error)")
+            })
+            .asSingle()
+    }
+    
+    func getGenres() -> Single<[Genre]> {
+        var request = URLRequest(url: baseURL.appendingPathComponent("genre/movie/list"))
+        request.httpMethod = "GET"
+        parameters.removeAll()
+        parameters["api_key"] = "c0ff0f1a3f08240ea2419ef0b323ef53"
+        
+        return URLEncoding.default
+            .encode(request, with: parameters)
+            .flatMap { request in
+                self.manager
+                    .request(request)
+                    .responseData(queue: DispatchQueue.global())
+            }
+            .map { tuple in
+                return try JSONDecoder().decode(ResponseGenres<Genre>.self, from: tuple.0!)
+            }
+            .map({ (response) in
+                return response.genres
             })
             .do(onError: { error in
                 print("Error: \(error)")

@@ -15,6 +15,7 @@ class MoviesPresenter {
     let dm = DataModel.sharedInstance
 
     var movies: [Movie] = []
+    var genres: [Genre] = []
     var favorites: [Movie] = []
     var moviesVC: MoviesViewController!
     var repository: AlamoRemoteSource!
@@ -87,6 +88,13 @@ class MoviesPresenter {
         favorites = favorites.filter{ $0.id != movie.id}
         dm.favoriteIds.remove(movie.id)
         moviesVC?.updateLayout()
+    }
+    
+    func getGenres(for movie: Movie) -> String {
+        let genres = dm.genres.filter{ movie.genreIds.contains($0.id) }
+        var names: [String] = []
+        genres.forEach{ names.append($0.name) }
+        return names.joined(separator: " / ")
     }
     
 }

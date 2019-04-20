@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .darkBlue
         
         DataModel.sharedInstance.getFavoritesFromDevice()
+        DataModel.sharedInstance.getGenres()
         
         return true
     }

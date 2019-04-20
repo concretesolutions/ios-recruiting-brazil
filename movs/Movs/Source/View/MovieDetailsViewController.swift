@@ -29,14 +29,11 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
         titleLabel.text = movie.title
         descriptionLabel.text = movie.overview
         yearLabel.text = String(movie.date.split(separator: "-")[0])
+        genresLabel.text = presenter.getGenres(for: movie)
         movie.isFavorite = presenter.isFavorite(movie)
         updateLayout()
         guard let imagePath = movie.imagePath else { return }
         setImage(with: imagePath)
-    }
-    
-    func showErrorLayout() {
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +71,10 @@ class MovieDetailsViewController: UIViewController, MoviesViewController {
     func updateLayout() {
         favoriteImageView.image = movie.isFavorite ? isFavoriteImage : isNotFavoriteImage
         favoriteButton.setTitle(movie.isFavorite ? "Unlike" : "Like", for: .normal)
+    }
+    
+    func showErrorLayout() {
+        
     }
 
 }
