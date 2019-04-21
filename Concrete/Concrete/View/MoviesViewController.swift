@@ -23,7 +23,7 @@ class MoviesViewController: UIViewController, Storyboarded {
         self.title = "Movies"
         fetchData(page: 1)
 
-        self.collectionViewMovies.register(UINib(nibName: "MovieCell", bundle: .main),
+        collectionViewMovies.register(UINib(nibName: "MovieCell", bundle: .main),
                                          forCellWithReuseIdentifier: "movieCell")
     }
 
@@ -33,7 +33,7 @@ class MoviesViewController: UIViewController, Storyboarded {
 
     private func fetchData(page: Int) {
         if Reachability.isConnectedToNetwork() {
-            self.isLoading = true
+            isLoading = true
             serviceManager.loadMovies(page: "\(page)") { (response, _) in
                 if response != nil {
                     print(response as Any)
@@ -50,8 +50,8 @@ class MoviesViewController: UIViewController, Storyboarded {
 
     func setViewModel(response: Movies?) {
 
-        if let count = viewModelData?.count {
-            if count == 0 {
+        if let model = viewModelData {
+            if model.isEmpty {
                 if let movies = response?.results {
                     viewModelData = movies.map({ return MovieViewModel(item: $0)})
                 }
@@ -63,7 +63,7 @@ class MoviesViewController: UIViewController, Storyboarded {
             }
         }
 
-        self.collectionViewMovies.reloadData()
+        collectionViewMovies.reloadData()
     }
 }
 
@@ -72,8 +72,8 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collectionViewMovies.frame.width / 2 - 17,
-                      height: self.collectionViewMovies.frame.width / 2 - 17)
+        return CGSize(width: collectionViewMovies.frame.width / 2 - 15,
+                      height: collectionViewMovies.frame.width / 2 + 45)
     }
 }
 
@@ -81,7 +81,7 @@ extension MoviesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        if let count = self.viewModelData?.count {
+        if let count = viewModelData?.count {
             return count
         }
 
@@ -92,7 +92,7 @@ extension MoviesViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell",
                                                          for: indexPath) as? MovieCell {
-            if let cellData = self.viewModelData?[indexPath.row] {
+            if let cellData = viewModelData?[indexPath.row] {
                 cell.setCellData(cellData: cellData)
             }
 

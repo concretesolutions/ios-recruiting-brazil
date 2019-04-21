@@ -20,7 +20,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func start() {
         navigationController.delegate = self
         let viewC = MoviesViewController.instantiate()
-        viewC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+        viewC.tabBarItem = UITabBarItem(title: "Movies", image: UIImage.init(named: "list_icon"), tag: 0)
         viewC.coordinator = self
         navigationController.pushViewController(viewC, animated: true)
     }
@@ -28,7 +28,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func startBookmarks() {
         navigationController.delegate = self
         let viewC = BookmarksViewController.instantiate()
-        viewC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+        viewC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage.init(named: "favorite_gray_icon"), tag: 0)
         viewC.coordinator = self
         navigationController.pushViewController(viewC, animated: true)
     }

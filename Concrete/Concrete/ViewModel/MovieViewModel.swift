@@ -10,8 +10,10 @@ import UIKit
 
 class MovieViewModel {
     var title: String?
+    var image: String?
 
     init (item: Result) {
         self.title = item.originalTitle
+        self.image = item.posterPath
     }
 }

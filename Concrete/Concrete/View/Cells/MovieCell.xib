@@ -19,27 +19,65 @@
                 <rect key="frame" x="0.0" y="0.0" width="211" height="216"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7zQ-Se-Ojc">
+                        <rect key="frame" x="6" y="6" width="199" height="204"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="095-Q8-bN0">
+                        <rect key="frame" x="6" y="6" width="199" height="204"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCG-Ud-Wuk">
-                        <rect key="frame" x="86" y="104" width="39.5" height="18"/>
+                        <rect key="frame" x="86" y="183" width="39.5" height="18"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eo-Ym-lbk" userLabel="star" customClass="DesignableButton" customModule="Concrete" customModuleProvider="target">
+                        <rect key="frame" x="165" y="16" width="30" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="0.3045537243150685" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="4aW-z2-Jfc"/>
+                            <constraint firstAttribute="height" constant="30" id="HVb-dK-K17"/>
+                        </constraints>
+                        <state key="normal" image="favorite_empty_icon"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="095-Q8-bN0" firstAttribute="centerX" secondItem="7zQ-Se-Ojc" secondAttribute="centerX" id="0Ss-Sg-6Q4"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dCG-Ud-Wuk" secondAttribute="trailing" constant="10" id="4PT-7c-ifN"/>
                 <constraint firstItem="dCG-Ud-Wuk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zce-5E-whB" secondAttribute="leading" constant="10" id="4Xb-aY-yQs"/>
-                <constraint firstItem="dCG-Ud-Wuk" firstAttribute="centerY" secondItem="FwO-WG-FXc" secondAttribute="centerY" id="gAa-8T-KL8"/>
+                <constraint firstAttribute="trailing" secondItem="9eo-Ym-lbk" secondAttribute="trailing" constant="16" id="B7J-vi-Lot"/>
+                <constraint firstAttribute="bottom" secondItem="7zQ-Se-Ojc" secondAttribute="bottom" constant="6" id="RHS-98-qt1"/>
+                <constraint firstAttribute="trailing" secondItem="7zQ-Se-Ojc" secondAttribute="trailing" constant="6" id="SWO-jE-l8D"/>
+                <constraint firstItem="095-Q8-bN0" firstAttribute="width" secondItem="7zQ-Se-Ojc" secondAttribute="width" id="Ty9-No-Uvk"/>
+                <constraint firstItem="095-Q8-bN0" firstAttribute="height" secondItem="7zQ-Se-Ojc" secondAttribute="height" id="Z5n-0D-tF5"/>
+                <constraint firstAttribute="bottom" secondItem="dCG-Ud-Wuk" secondAttribute="bottom" constant="15" id="atN-Bz-CSo"/>
+                <constraint firstItem="9eo-Ym-lbk" firstAttribute="top" secondItem="zce-5E-whB" secondAttribute="top" constant="16" id="igQ-ly-qT8"/>
+                <constraint firstItem="7zQ-Se-Ojc" firstAttribute="leading" secondItem="zce-5E-whB" secondAttribute="leading" constant="6" id="kkj-Rq-CYD"/>
                 <constraint firstItem="dCG-Ud-Wuk" firstAttribute="centerX" secondItem="FwO-WG-FXc" secondAttribute="centerX" id="rhS-Ta-rKe"/>
+                <constraint firstItem="7zQ-Se-Ojc" firstAttribute="top" secondItem="zce-5E-whB" secondAttribute="top" constant="6" id="vet-HS-bNO"/>
+                <constraint firstItem="095-Q8-bN0" firstAttribute="centerY" secondItem="7zQ-Se-Ojc" secondAttribute="centerY" id="xNU-Mp-PXE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="FwO-WG-FXc"/>
             <size key="customSize" width="562" height="478"/>
             <connections>
+                <outlet property="buttonStar" destination="9eo-Ym-lbk" id="TL2-MC-2jr"/>
+                <outlet property="imageViewMovie" destination="095-Q8-bN0" id="FpG-dU-UZx"/>
+                <outlet property="imageViewShadow" destination="7zQ-Se-Ojc" id="i30-eC-3OU"/>
                 <outlet property="labelTitle" destination="dCG-Ud-Wuk" id="cdh-yr-vPI"/>
             </connections>
             <point key="canvasLocation" x="-71.739130434782609" y="166.74107142857142"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+    </resources>
 </document>

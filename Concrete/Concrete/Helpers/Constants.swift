@@ -17,4 +17,8 @@ struct ConstUrl {
     static func url(page: String) -> String {
         return "https://api.themoviedb.org/3/movie/popular?api_key=ce366837ba5968caa2ede95e28c38fcd&language=en-US&page=\(page)"
     }
+
+    static func urlImage(image: String) -> String {
+        return "https://image.tmdb.org/t/p/w500\(image)"
+    }
 }
