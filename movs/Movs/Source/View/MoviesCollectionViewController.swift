@@ -12,6 +12,7 @@ class MoviesCollectionViewController: UIViewController, BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let searchBar = UISearchBar()
     var presenter: MoviesPresenter!
     var isSearching = false
     var errorLabel: UILabel!
@@ -32,7 +33,6 @@ class MoviesCollectionViewController: UIViewController, BaseViewController {
     }
     
     private func addSearchBar() {
-        let searchBar = UISearchBar()
         searchBar.delegate = self
         searchBar.barStyle = .blackOpaque
         navigationItem.titleView = searchBar
@@ -121,6 +121,10 @@ extension MoviesCollectionViewController: UICollectionViewDataSource, UICollecti
         isSearching = false
         presenter.movies = DataModel.sharedInstance.movies
         updateLayout()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
     }
     
 }

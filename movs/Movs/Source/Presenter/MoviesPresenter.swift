@@ -94,7 +94,6 @@ class MoviesPresenter {
     }
     
     func filteredBy(genreNames: [String]) -> [Movie]{
-        getFavorites()
         let filtered = favorites.filter{ movie in
             let movieGenres = self.getGenres(for: movie)
             return !Set(genreNames).intersection(movieGenres).isEmpty
@@ -103,7 +102,6 @@ class MoviesPresenter {
     }
     
     func filteredBy(years: [String]) -> [Movie]{
-        getFavorites()
         let filtered = favorites.filter{ movie in
             let movieYear = String(movie.date.split(separator: "-")[0])
             return years.contains(movieYear)
