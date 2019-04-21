@@ -36,7 +36,9 @@ extension BaseFilterViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? FilterTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? FilterTableViewCell else {
+            return UITableViewCell()
+        }
         let text = presenter.data[indexPath.row]
         cell.textLabel!.text = text
         cell.checkedImageView.isHidden = !selected.contains(text)
