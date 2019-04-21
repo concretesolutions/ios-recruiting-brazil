@@ -21,7 +21,10 @@ class MovieCollectionCell: UICollectionViewCell {
         titleLabel.text = movie.title
         roundBorders()
         favoriteImage.image = movie.isFavorite ? isFavoriteImage : isNotFavoriteImage
-        guard let imagePath = movie.imagePath else { return }
+        guard let imagePath = movie.imagePath else {
+            print("imagePath nulo")
+            return
+        }
         setImage(with: imagePath)
     }
     

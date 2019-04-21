@@ -36,23 +36,21 @@ extension BaseFilterViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? FilterTableViewCell else { return UITableViewCell() }
         let text = presenter.data[indexPath.row]
         cell.textLabel!.text = text
-        if selected.contains(text) {
-            addCheckMark(in: cell)
-        }
+        cell.checkedImageView.isHidden = !selected.contains(text)
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) as? FilterTableViewCell else { return }
         guard isSelected(cell) else {
             select(cell)
             return
         }
-        unselect(cell)
+        deselect(cell)
     }
     
     private func isSelected(_ cell: UITableViewCell) -> Bool {
@@ -60,23 +58,16 @@ extension BaseFilterViewController: UITableViewDataSource, UITableViewDelegate {
         return selected.contains(text)
     }
     
-    private func select(_ cell: UITableViewCell) {
-        addCheckMark(in: cell)
+    private func select(_ cell: FilterTableViewCell) {
+        cell.checkedImageView.isHidden = false
         guard let text = cell.textLabel?.text else { return }
         selected.append(text)
     }
     
-    private func unselect(_ cell: UITableViewCell) {
-        //TODO:
-    }
-    
-    private func addCheckMark(in cell: UITableViewCell) {
-        let imageView = UIImageView(image: UIImage(named: "check_icon") ?? UIImage())
-        cell.addSubview(imageView)
-        imageView.snp.makeConstraints { (make) in
-            make.trailing.equalTo(cell).offset(-10)
-            make.centerY.equalTo(cell)
-        }
+    private func deselect(_ cell: FilterTableViewCell) {
+        cell.checkedImageView.isHidden = true
+        guard let text = cell.textLabel?.text else { return }
+        selected.removeAll { $0 == text }
     }
     
 }

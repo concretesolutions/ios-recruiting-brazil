@@ -39,7 +39,7 @@ class MovieDetailsViewController: UIViewController, BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         guard let moviesVC = parent?.children.first as? MoviesCollectionViewController else { return }
-        moviesVC.presenter.getFavorites()
+        moviesVC.presenter.setFavorites()
     }
     
     private func setImage(with path: String) {
@@ -67,6 +67,7 @@ class MovieDetailsViewController: UIViewController, BaseViewController {
         } else {
             presenter.markAsFavorite(movie)
         }
+        updateLayout()
     }
     
     func updateLayout() {

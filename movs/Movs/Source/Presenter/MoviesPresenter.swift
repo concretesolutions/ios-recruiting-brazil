@@ -49,12 +49,7 @@ class MoviesPresenter {
                     self.moviesVC.showErrorLayout()
                     return
                 }
-                self.movies.forEach{
-                    if self.isFavorite($0) {
-                        self.markAsFavorite($0)
-                    }
-                }
-                self.moviesVC.updateLayout()
+                self.setFavorites()
             }, onCompleted: {
                 self.isRequesting = false
             })
@@ -62,18 +57,16 @@ class MoviesPresenter {
     }
     
     func getFavorites() {
-        guard !movies.isEmpty else {
-            favorites = dm.movies.filter { dm.favoriteIds.contains($0.id) }
-            moviesVC.updateLayout()
-            return
-        }
+        favorites = dm.movies.filter { dm.favoriteIds.contains($0.id) }
+    }
+    
+    func setFavorites() {
         movies.forEach{
             if isFavorite($0) {
                 markAsFavorite($0)
-                return
             }
         }
-        moviesVC?.updateLayout()
+        moviesVC.updateLayout()
     }
     
     func isFavorite(_ movie: Movie) -> Bool {
@@ -84,7 +77,6 @@ class MoviesPresenter {
         movie.isFavorite = true
         favorites.append(movie)
         dm.favoriteIds.insert(movie.id)
-        moviesVC?.updateLayout()
     }
     
     func unfavorite(_ movie: Movie) {
