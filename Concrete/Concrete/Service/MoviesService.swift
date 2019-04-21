@@ -31,4 +31,26 @@ class MoviesService {
             }
         }
     }
+
+    func loadGenres(callback: @escaping (Genres?, Error?) -> Void) {
+        let URL = ConstUrl.urlGenres()
+        AF.request(URL).responseDecodable { (response: DataResponse<Genres>) in
+
+            guard response.error == nil else {
+                print("🥶: \(String(describing: response.error))")
+                callback(nil, response.error)
+                return
+            }
+
+            if let data = response.data {
+                do {
+                    let response = try JSONDecoder().decode(Genres.self, from: data)
+                    callback(response, nil)
+                } catch let error {
+                    print("Error creating current news from JSON because: \(error.localizedDescription)")
+                    callback(nil, error)
+                }
+            }
+        }
+    }
 }

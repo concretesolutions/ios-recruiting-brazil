@@ -14,6 +14,5 @@ class BookmarksViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Favorites"
     }
 }

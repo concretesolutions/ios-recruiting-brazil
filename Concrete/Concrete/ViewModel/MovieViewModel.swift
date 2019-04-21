@@ -11,9 +11,27 @@ import UIKit
 class MovieViewModel {
     var title: String?
     var image: String?
+    var year: String?
+    var genres: String?
+    var synopsis: String?
 
     init (item: Result) {
-        self.title = item.originalTitle
-        self.image = item.posterPath
+        title = item.title
+        image = item.posterPath
+        year = setYear(date: item.releaseDate)
+        genres = setGenres(ids: item.genreIDS)
+        synopsis = item.overview
+    }
+
+    private func setGenres(ids: [Int]) -> String {
+        for idGenre in ids {
+            print(idGenre)
+        }
+
+        return "Drama"
+    }
+
+    private func setYear(date: String) -> String {
+        return date[0..<4]
     }
 }

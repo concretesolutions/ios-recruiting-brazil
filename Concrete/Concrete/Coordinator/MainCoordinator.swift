@@ -20,7 +20,8 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func start() {
         navigationController.delegate = self
         let viewC = MoviesViewController.instantiate()
-        viewC.tabBarItem = UITabBarItem(title: "Movies", image: UIImage.init(named: "list_icon"), tag: 0)
+        viewC.tabBarItem = UITabBarItem(title: "mainCoordinatorTabMovies".localized(),
+                                        image: UIImage.init(named: "list_icon"), tag: 0)
         viewC.coordinator = self
         navigationController.pushViewController(viewC, animated: true)
     }
@@ -28,8 +29,16 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func startBookmarks() {
         navigationController.delegate = self
         let viewC = BookmarksViewController.instantiate()
-        viewC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage.init(named: "favorite_gray_icon"), tag: 0)
+        viewC.tabBarItem = UITabBarItem(title: "mainCoordinatorTabFavorites".localized(),
+                                        image: UIImage.init(named: "favorite_gray_icon"), tag: 0)
         viewC.coordinator = self
+        navigationController.pushViewController(viewC, animated: true)
+    }
+
+    func createDetails(to movie: MovieViewModel) {
+        let viewC = DetailsViewController.instantiate()
+        viewC.coordinator = self
+        viewC.viewModel = movie
         navigationController.pushViewController(viewC, animated: true)
     }
 

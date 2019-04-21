@@ -20,7 +20,6 @@ class MoviesViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Movies"
         fetchData(page: 1)
 
         collectionViewMovies.register(UINib(nibName: "MovieCell", bundle: .main),
@@ -34,6 +33,11 @@ class MoviesViewController: UIViewController, Storyboarded {
     private func fetchData(page: Int) {
         if Reachability.isConnectedToNetwork() {
             isLoading = true
+
+            serviceManager.loadGenres { (response, _) in
+                print(response)
+            }
+
             serviceManager.loadMovies(page: "\(page)") { (response, _) in
                 if response != nil {
                     print(response as Any)
@@ -100,5 +104,13 @@ extension MoviesViewController: UICollectionViewDataSource {
         }
 
         return MovieCell()
+    }
+}
+
+extension MoviesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let movie = viewModelData?[indexPath.row] {
+            coordinator?.createDetails(to: movie)
+        }
     }
 }

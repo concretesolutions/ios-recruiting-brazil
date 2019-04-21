@@ -15,7 +15,11 @@ struct ConstUrl {
     }
 
     static func url(page: String) -> String {
-        return "https://api.themoviedb.org/3/movie/popular?api_key=ce366837ba5968caa2ede95e28c38fcd&language=en-US&page=\(page)"
+        return "urlListMovies".localized() + page
+    }
+
+    static func urlGenres() -> String {
+        return "urlListGenres".localized()
     }
 
     static func urlImage(image: String) -> String {
