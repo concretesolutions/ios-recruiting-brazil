@@ -33,7 +33,15 @@ class FavoritesViewController: UIViewController, BaseViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let filterVC = segue.destination as? FilterTypesTableViewController else { return }
+        guard let filterVC = segue.destination as? FilterTypesTableViewController else {
+            guard
+                let detailsVC = segue.destination as? MovieDetailsViewController,
+                let cell = sender as? UITableViewCell
+                else { return }
+            let index = tableView.indexPath(for: cell)?.row ?? 0
+            detailsVC.movie = presenter.favorites[index]
+            return
+        }
         filterVC.genreNames = presenter.genreFilters
         filterVC.years = presenter.yearFilters
     }
