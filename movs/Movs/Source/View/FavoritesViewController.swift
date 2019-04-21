@@ -23,8 +23,18 @@ class FavoritesViewController: UIViewController, BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard !presenter.filtered else { return }
+        guard !presenter.isFiltering else { return }
         presenter.getFavorites()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.isFiltering = false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let filterVC = segue.destination as? FilterTypesTableViewController else { return }
+        filterVC.genreNames = presenter.genreFilters
+        filterVC.years = presenter.yearFilters
     }
     
     func updateLayout() {

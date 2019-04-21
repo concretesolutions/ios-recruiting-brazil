@@ -1,5 +1,5 @@
 //
-//  GenresViewController.swift
+//  YearsViewController.swift
 //  movs
 //
 //  Created by Lorien Moisyn on 20/04/19.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-class GenresViewController: BaseFilterViewController {
+class YearsViewController: BaseFilterViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.getGenres()
+        presenter.getYears()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         parent?.children.forEach{
             guard let filterVC = $0 as? FilterTypesTableViewController else { return }
-            filterVC.genreNames = selected
+            filterVC.years = selected
         }
     }
     

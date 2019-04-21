@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class FilterViewController: UIViewController {
+class BaseFilterViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,18 +23,13 @@ class FilterViewController: UIViewController {
         presenter = FilterPresenter(vc: self)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        guard let favoritesVC = navigationController?.children.first as? FavoritesViewController else { return }
-        favoritesVC.presenter.filterUsingGenres(selected)
-    }
-    
     func updateLayout() {
         tableView.reloadData()
     }
 
 }
 
-extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
+extension BaseFilterViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.data.count
@@ -42,21 +37,46 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel!.text = presenter.data[indexPath.row]
+        let text = presenter.data[indexPath.row]
+        cell.textLabel!.text = text
+        if selected.contains(text) {
+            addCheckMark(in: cell)
+        }
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        let imageView = UIImageView(image: UIImage(named: "check_icon") ?? UIImage())
-        cell?.addSubview(imageView)
-        imageView.snp.makeConstraints { (make) in
-            make.trailing.equalTo(cell!).offset(-10)
-            make.centerY.equalTo(cell!)
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        guard isSelected(cell) else {
+            select(cell)
+            return
         }
-        guard let text = cell?.textLabel?.text else { return }
+        unselect(cell)
+    }
+    
+    private func isSelected(_ cell: UITableViewCell) -> Bool {
+        guard let text = cell.textLabel?.text else { return false }
+        return selected.contains(text)
+    }
+    
+    private func select(_ cell: UITableViewCell) {
+        addCheckMark(in: cell)
+        guard let text = cell.textLabel?.text else { return }
         selected.append(text)
+    }
+    
+    private func unselect(_ cell: UITableViewCell) {
+        //TODO:
+    }
+    
+    private func addCheckMark(in cell: UITableViewCell) {
+        let imageView = UIImageView(image: UIImage(named: "check_icon") ?? UIImage())
+        cell.addSubview(imageView)
+        imageView.snp.makeConstraints { (make) in
+            make.trailing.equalTo(cell).offset(-10)
+            make.centerY.equalTo(cell)
+        }
     }
     
 }

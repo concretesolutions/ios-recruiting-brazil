@@ -11,10 +11,10 @@ import Foundation
 class FilterPresenter {
     
     var data: [String] = []
-    var filterVC: FilterViewController!
+    var filterVC: BaseFilterViewController!
     var dm = DataModel.sharedInstance
     
-    init(vc: FilterViewController) {
+    init(vc: BaseFilterViewController) {
         filterVC = vc
     }
     
@@ -27,8 +27,9 @@ class FilterPresenter {
     func getYears() {
         data.removeAll()
         dm.movies.forEach{
-            if !data.contains($0.title) {
-                data.append($0.title)
+            let year = String($0.date.split(separator: "-")[0])
+            if !data.contains(year) {
+                data.append(year)
             }
         }
         filterVC.updateLayout()

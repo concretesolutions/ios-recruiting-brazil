@@ -17,12 +17,14 @@ class MoviesPresenter {
     var movies: [Movie] = []
     var genres: [Genre] = []
     var favorites: [Movie] = []
+    var genreFilters: [String] = []
+    var yearFilters: [String] = []
     var moviesVC: BaseViewController!
     var repository: AlamoRemoteSource!
     var disposeBag = DisposeBag()
     var pageIndex = 1
     var isRequesting = false
-    var filtered = false
+    var isFiltering = false
     
     init(vc: BaseViewController) {
         moviesVC = vc
@@ -99,13 +101,34 @@ class MoviesPresenter {
         return genreNames
     }
     
-    func filterUsingGenres(_ genreNames: [String]) {
-        filtered = true
+    func filteredBy(genreNames: [String]) -> [Movie]{
         getFavorites()
-        favorites = favorites.filter{ movie in
+        let filtered = favorites.filter{ movie in
             let movieGenres = self.getGenres(for: movie)
             return !Set(genreNames).intersection(movieGenres).isEmpty
         }
+        return filtered
+    }
+    
+    func filteredBy(years: [String]) -> [Movie]{
+        getFavorites()
+        let filtered = favorites.filter{ movie in
+            let movieYear = String(movie.date.split(separator: "-")[0])
+            return years.contains(movieYear)
+        }
+        return filtered
+    }
+    
+    func combineFilters(genres: [String], years: [String]) {
+        isFiltering = true
+        genreFilters = genres
+        yearFilters = years
+        let filteredByGenre = genres.isEmpty ? favorites : filteredBy(genreNames: genres)
+        let filteredByYear = years.isEmpty ? favorites : filteredBy(years: years)
+        let filteredByBoth = filteredByGenre.filter{ movie in
+            filteredByYear.contains(where: { $0.id == movie.id })
+        }
+        favorites = filteredByBoth
         moviesVC.updateLayout()
     }
     
