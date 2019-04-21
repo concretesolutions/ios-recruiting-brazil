@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MoviesCollectionViewController: UIViewController, BaseViewController {
 
@@ -17,6 +18,7 @@ class MoviesCollectionViewController: UIViewController, BaseViewController {
     var isSearching = false
     var errorLabel: UILabel!
     var indicator: UIActivityIndicatorView!
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,10 @@ class MoviesCollectionViewController: UIViewController, BaseViewController {
         presenter = MoviesPresenter(vc: self)
         presenter.getFavorites()
         presenter.getMovies()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateLayout()
     }
     
     private func addSearchBar() {
@@ -105,7 +111,25 @@ extension MoviesCollectionViewController: UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionCell else { return UICollectionViewCell() }
         cell.setup(with: presenter.movies[indexPath.row])
+        cell.favoriteButton.rx
+            .tap
+            .asDriver()
+            .drive(onNext: { _ in
+                self.favoriteButtonAction(cell: cell)
+            })
+            .disposed(by: cell.disposeBag)
         return cell
+    }
+    
+    private func favoriteButtonAction(cell: MovieCollectionCell) {
+        let index = collectionView.indexPath(for: cell)?.row ?? 0
+        let movie = presenter.movies[index]
+        if !movie.isFavorite {
+            presenter.markAsFavorite(movie)
+        } else {
+            presenter.unfavorite(movie)
+        }
+        updateLayout()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

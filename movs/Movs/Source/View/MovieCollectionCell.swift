@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import RxSwift
 
 class MovieCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteImage: UIImageView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     let isFavoriteImage = UIImage(named: "favorite_full_icon")!
     let isNotFavoriteImage = UIImage(named: "favorite_gray_icon")!
+    
+    var disposeBag = DisposeBag()
     
     func setup(with movie: Movie) {
         titleLabel.text = movie.title
@@ -61,6 +65,7 @@ class MovieCollectionCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+        disposeBag = DisposeBag()
     }
     
 }

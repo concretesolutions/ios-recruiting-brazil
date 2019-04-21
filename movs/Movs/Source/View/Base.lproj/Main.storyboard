@@ -55,16 +55,25 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="htL-KH-OgG">
                                                             <rect key="frame" x="0.0" y="20" width="160" height="194"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2P0-sP-Z34">
+                                                            <rect key="frame" x="113.5" y="214" width="50" height="66"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="dy3-iR-yZg"/>
+                                                            </constraints>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="htL-KH-OgG" firstAttribute="leading" secondItem="cdv-n5-Vxs" secondAttribute="leading" id="1Jf-9m-S5X"/>
+                                                        <constraint firstItem="2P0-sP-Z34" firstAttribute="centerY" secondItem="qC4-uZ-FZf" secondAttribute="centerY" id="6bR-4A-gOQ"/>
+                                                        <constraint firstItem="2P0-sP-Z34" firstAttribute="centerX" secondItem="qC4-uZ-FZf" secondAttribute="centerX" id="KO0-nS-Ozq"/>
                                                         <constraint firstItem="chQ-gQ-yHM" firstAttribute="leading" secondItem="cdv-n5-Vxs" secondAttribute="leading" constant="10" id="NAk-6P-E2l"/>
                                                         <constraint firstItem="htL-KH-OgG" firstAttribute="trailing" secondItem="cdv-n5-Vxs" secondAttribute="trailing" id="WPS-f9-pxb"/>
                                                         <constraint firstItem="chQ-gQ-yHM" firstAttribute="centerY" secondItem="qC4-uZ-FZf" secondAttribute="centerY" id="XSP-rH-bP1"/>
                                                         <constraint firstItem="htL-KH-OgG" firstAttribute="top" secondItem="cdv-n5-Vxs" secondAttribute="top" id="l4u-31-XYx"/>
                                                         <constraint firstItem="qC4-uZ-FZf" firstAttribute="top" secondItem="htL-KH-OgG" secondAttribute="bottom" id="nEq-oA-q95"/>
                                                         <constraint firstItem="cdv-n5-Vxs" firstAttribute="bottom" secondItem="qC4-uZ-FZf" secondAttribute="bottom" id="nni-7N-oM7"/>
+                                                        <constraint firstItem="2P0-sP-Z34" firstAttribute="height" secondItem="qC4-uZ-FZf" secondAttribute="height" id="onL-TZ-XoJ"/>
                                                         <constraint firstItem="qC4-uZ-FZf" firstAttribute="leading" secondItem="chQ-gQ-yHM" secondAttribute="trailing" id="qzD-u6-Ayh"/>
                                                         <constraint firstItem="cdv-n5-Vxs" firstAttribute="trailing" secondItem="qC4-uZ-FZf" secondAttribute="trailing" constant="10" id="zcj-jx-CzR"/>
                                                     </constraints>
@@ -79,6 +88,7 @@
                                             <constraint firstItem="htJ-Z8-Dzk" firstAttribute="leading" secondItem="cbf-0j-7Jt" secondAttribute="leading" id="Zl4-dY-I8a"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="favoriteButton" destination="2P0-sP-Z34" id="eIP-Kx-C1U"/>
                                             <outlet property="favoriteImage" destination="qC4-uZ-FZf" id="Cks-Ud-q0x"/>
                                             <outlet property="imageView" destination="htL-KH-OgG" id="GBn-lt-OJl"/>
                                             <outlet property="titleLabel" destination="chQ-gQ-yHM" id="f0S-8n-TP5"/>
@@ -529,6 +539,6 @@
         <image name="list_icon" width="18" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9EN-k6-2W6"/>
+        <segue reference="rVq-9a-CqS"/>
     </inferredMetricsTieBreakers>
 </document>
