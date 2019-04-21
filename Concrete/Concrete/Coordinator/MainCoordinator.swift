@@ -35,11 +35,9 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 
     func childDidFinish(_ child: Coordinator?) {
         for (index, coordinator) in
-            childCoordinators.enumerated() {
-                if coordinator === child {
-                    childCoordinators.remove(at: index)
-                    break
-                }
+            childCoordinators.enumerated() where coordinator === child {
+                childCoordinators.remove(at: index)
+                break
         }
     }
 }

@@ -9,5 +9,9 @@
 import UIKit
 
 class MovieViewModel {
+    var title: String?
 
+    init (item: Result) {
+        self.title = item.originalTitle
+    }
 }

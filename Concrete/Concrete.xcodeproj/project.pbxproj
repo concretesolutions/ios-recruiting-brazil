@@ -27,6 +27,10 @@
 		EB7F1760226ACF1100227F9E /* Nibed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F175F226ACF1100227F9E /* Nibed.swift */; };
 		EB7F1762226ACF2700227F9E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F1761226ACF2700227F9E /* TabBarController.swift */; };
 		EB7F1764226ACF3900227F9E /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F1763226ACF3900227F9E /* MainCoordinator.swift */; };
+		EBE58B62226BCF780081E2AE /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = EBE58B61226BCF780081E2AE /* test.json */; };
+		EBE58B64226BD17D0081E2AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE58B63226BD17D0081E2AE /* Constants.swift */; };
+		EBE58B67226BFA880081E2AE /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE58B66226BFA880081E2AE /* MovieCell.swift */; };
+		EBE58B69226BFA9C0081E2AE /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE58B68226BFA9C0081E2AE /* MovieCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,10 @@
 		EB7F175F226ACF1100227F9E /* Nibed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nibed.swift; sourceTree = "<group>"; };
 		EB7F1761226ACF2700227F9E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EB7F1763226ACF3900227F9E /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		EBE58B61226BCF780081E2AE /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		EBE58B63226BD17D0081E2AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EBE58B66226BFA880081E2AE /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		EBE58B68226BFA9C0081E2AE /* MovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		FDF67CD81D40623BDAE06E41 /* Pods_Concrete.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Concrete.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -175,6 +183,7 @@
 		EB7F1731226ACC4400227F9E /* ConcreteTests */ = {
 			isa = PBXGroup;
 			children = (
+				EBE58B60226BCF400081E2AE /* StubData */,
 				EB7F1732226ACC4400227F9E /* ConcreteTests.swift */,
 				EB7F1734226ACC4400227F9E /* Info.plist */,
 			);
@@ -194,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				EB7F1751226ACD8A00227F9E /* Reachability.swift */,
+				EBE58B63226BD17D0081E2AE /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -229,6 +239,7 @@
 		EB7F174F226ACD4800227F9E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EBE58B65226BFA5F0081E2AE /* Cells */,
 				EB7F171F226ACC4300227F9E /* MoviesViewController.swift */,
 				EB7F1759226ACE6400227F9E /* BookmarksViewController.swift */,
 			);
@@ -241,6 +252,23 @@
 				EB7F1755226ACE1200227F9E /* MoviesService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		EBE58B60226BCF400081E2AE /* StubData */ = {
+			isa = PBXGroup;
+			children = (
+				EBE58B61226BCF780081E2AE /* test.json */,
+			);
+			path = StubData;
+			sourceTree = "<group>";
+		};
+		EBE58B65226BFA5F0081E2AE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EBE58B66226BFA880081E2AE /* MovieCell.swift */,
+				EBE58B68226BFA9C0081E2AE /* MovieCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +383,7 @@
 			files = (
 				EB7F1728226ACC4400227F9E /* LaunchScreen.storyboard in Resources */,
 				EB7F1725226ACC4400227F9E /* Assets.xcassets in Resources */,
+				EBE58B69226BFA9C0081E2AE /* MovieCell.xib in Resources */,
 				EB7F1723226ACC4300227F9E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +392,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE58B62226BCF780081E2AE /* test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE58B67226BFA880081E2AE /* MovieCell.swift in Sources */,
 				EB7F175C226ACEE700227F9E /* Coordinator.swift in Sources */,
 				EB7F1764226ACF3900227F9E /* MainCoordinator.swift in Sources */,
 				EB7F175A226ACE6400227F9E /* BookmarksViewController.swift in Sources */,
@@ -523,6 +554,7 @@
 				EB7F1720226ACC4300227F9E /* MoviesViewController.swift in Sources */,
 				EB7F1756226ACE1200227F9E /* MoviesService.swift in Sources */,
 				EB7F1760226ACF1100227F9E /* Nibed.swift in Sources */,
+				EBE58B64226BD17D0081E2AE /* Constants.swift in Sources */,
 				EB7F1754226ACDCD00227F9E /* Movie.swift in Sources */,
 				EB7F175E226ACEFD00227F9E /* Storyboarded.swift in Sources */,
 				EB7F171E226ACC4300227F9E /* AppDelegate.swift in Sources */,
