@@ -37,6 +37,10 @@ class DetailsViewController: UIViewController, Storyboarded {
             labelDate.text = year
         }
 
+        if let genre = viewModel?.genres {
+            labelGenre.text = genre
+        }
+
         if let synopsis = viewModel?.synopsis {
             labelSynopsis.text = synopsis
         }

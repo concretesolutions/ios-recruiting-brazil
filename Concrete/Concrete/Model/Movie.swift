@@ -17,7 +17,7 @@ struct Movies: Codable {
 }
 
 struct Result: Codable {
-    let voteCount, id: Int
+    let voteCount, idMovie: Int
     let video: Bool
     let voteAverage: Double
     let title: String
@@ -31,7 +31,8 @@ struct Result: Codable {
 
     enum CodingKeys: String, CodingKey {
         case voteCount = "vote_count"
-        case id, video
+        case idMovie = "id"
+        case video
         case voteAverage = "vote_average"
         case title, popularity
         case posterPath = "poster_path"

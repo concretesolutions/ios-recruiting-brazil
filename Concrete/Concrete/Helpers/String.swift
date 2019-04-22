@@ -17,8 +17,8 @@ extension String {
         return count
     }
 
-    subscript (i: Int) -> String {
-        return self[i ..< i + 1]
+    subscript (int: Int) -> String {
+        return self[int ..< int + 1]
     }
 
     func substring(fromIndex: Int) -> String {
@@ -29,9 +29,9 @@ extension String {
         return self[0 ..< max(0, toIndex)]
     }
 
-    subscript (r: Range<Int>) -> String {
-        let range = Range(uncheckedBounds: (lower: max(0, min(length, r.lowerBound)),
-                                            upper: min(length, max(0, r.upperBound))))
+    subscript (ran: Range<Int>) -> String {
+        let range = Range(uncheckedBounds: (lower: max(0, min(length, ran.lowerBound)),
+                                            upper: min(length, max(0, ran.upperBound))))
         let start = index(startIndex, offsetBy: range.lowerBound)
         let end = index(start, offsetBy: range.upperBound - range.lowerBound)
         return String(self[start ..< end])

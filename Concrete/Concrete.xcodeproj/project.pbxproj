@@ -11,6 +11,7 @@
 		5681576153C1FE7982A3CE74 /* Pods_ConcreteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241049D2C9FD033E55FF5F3A /* Pods_ConcreteUITests.framework */; };
 		DFCAC41FA52E1953BBFCCAA8 /* Pods_ConcreteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A537CA203F40961D8C71CE /* Pods_ConcreteTests.framework */; };
 		EB10919F226CF71000418320 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10919E226CF71000418320 /* Genres.swift */; };
+		EB1091A6226D2E9800418320 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091A5226D2E9800418320 /* DBManager.swift */; };
 		EB7F171E226ACC4300227F9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F171D226ACC4300227F9E /* AppDelegate.swift */; };
 		EB7F1720226ACC4300227F9E /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F171F226ACC4300227F9E /* MoviesViewController.swift */; };
 		EB7F1723226ACC4300227F9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7F1721226ACC4300227F9E /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 		B3415F92BAFDEA154C3C69D9 /* Pods-ConcreteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConcreteUITests/Pods-ConcreteUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D9B8256573BDF1229DF99648 /* Pods-Concrete.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Concrete.release.xcconfig"; path = "Pods/Target Support Files/Pods-Concrete/Pods-Concrete.release.xcconfig"; sourceTree = "<group>"; };
 		EB10919E226CF71000418320 /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		EB1091A5226D2E9800418320 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		EB7F171A226ACC4300227F9E /* Concrete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concrete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7F171D226ACC4300227F9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7F171F226ACC4300227F9E /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EB1091A0226D2A1700418320 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				EB1091A5226D2E9800418320 /* DBManager.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		EB7F1711226ACC4300227F9E = {
 			isa = PBXGroup;
 			children = (
@@ -179,8 +189,9 @@
 				EB7F174C226ACD1600227F9E /* Model */,
 				EB7F174D226ACD2100227F9E /* ViewModel */,
 				EB7F174F226ACD4800227F9E /* View */,
-				EB7F1750226ACD5400227F9E /* Service */,
 				EB7F174E226ACD3800227F9E /* Coordinator */,
+				EB1091A0226D2A1700418320 /* Database */,
+				EB7F1750226ACD5400227F9E /* Service */,
 				EB7F174B226ACD0C00227F9E /* Helpers */,
 				EB7F171D226ACC4300227F9E /* AppDelegate.swift */,
 				EB7F1726226ACC4400227F9E /* LaunchScreen.storyboard */,
@@ -482,6 +493,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Concrete/Pods-Concrete-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -489,6 +502,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,6 +591,7 @@
 				EB10919F226CF71000418320 /* Genres.swift in Sources */,
 				EBE58B6B226C2A650081E2AE /* DesignableButton.swift in Sources */,
 				EBE58B64226BD17D0081E2AE /* Constants.swift in Sources */,
+				EB1091A6226D2E9800418320 /* DBManager.swift in Sources */,
 				EB7F1754226ACDCD00227F9E /* Movie.swift in Sources */,
 				EB7F175E226ACEFD00227F9E /* Storyboarded.swift in Sources */,
 				EB7F171E226ACC4300227F9E /* AppDelegate.swift in Sources */,

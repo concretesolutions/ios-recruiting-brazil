@@ -2,6 +2,11 @@ PODS:
   - Alamofire (5.0.0-beta.4)
   - Nimble (8.0.1)
   - Quick (2.0.0)
+  - Realm (3.14.0):
+    - Realm/Headers (= 3.14.0)
+  - Realm/Headers (3.14.0)
+  - RealmSwift (3.14.0):
+    - Realm (= 3.14.0)
   - SDWebImage (5.0.0):
     - SDWebImage/Core (= 5.0.0)
   - SDWebImage/Core (5.0.0)
@@ -11,6 +16,7 @@ DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.4)
   - Nimble
   - Quick
+  - RealmSwift
   - SDWebImage
   - SwiftLint
 
@@ -19,6 +25,8 @@ SPEC REPOS:
     - Alamofire
     - Nimble
     - Quick
+    - Realm
+    - RealmSwift
     - SDWebImage
     - SwiftLint
 
@@ -26,9 +34,11 @@ SPEC CHECKSUMS:
   Alamofire: 6458d95477bc40adf10129f22c67cfb014162dc8
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Quick: ce1276c7c27ba2da3cb2fd0cde053c3648b3b22d
+  Realm: 221b25919bb5a010a3c597d707f8df3492dcd93a
+  RealmSwift: 28f22dfa6a27b9a778cfb09471558b6afcf1022c
   SDWebImage: 5de80a0302de9e377e62f47d2fa1304efff0e55f
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: 1b1710ee03c9ec2b64abb59462a50b7e87128aca
+PODFILE CHECKSUM: e7710d9126928310a2f1ca49e63f65a7489b62ec
 
 COCOAPODS: 1.5.3

@@ -6,13 +6,18 @@
 //  Copyright © 2019 Vinicius Brito. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RealmSwift
 
 struct Genres: Codable {
     let genres: [Genre]
 }
 
-struct Genre: Codable {
-    let id: Int
-    let name: String
+class Genre: Object, Codable {
+    @objc dynamic var id: Int
+    @objc dynamic var name: String
+
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

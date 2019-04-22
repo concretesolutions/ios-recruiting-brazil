@@ -35,18 +35,22 @@ class MoviesViewController: UIViewController, Storyboarded {
             isLoading = true
 
             serviceManager.loadGenres { (response, _) in
-                print(response)
+                print(response ?? "")
+                if let genres = response {
+                    DBManager.sharedInstance.registerGenres(genres: genres)
+
+                    self.serviceManager.loadMovies(page: "\(page)") { (response, _) in
+                        if response != nil {
+                            print(response as Any)
+                            self.setViewModel(response: response)
+                        } else {
+                            print("error")
+                        }
+                        self.isLoading = false
+                    }
+                }
             }
 
-            serviceManager.loadMovies(page: "\(page)") { (response, _) in
-                if response != nil {
-                    print(response as Any)
-                    self.setViewModel(response: response)
-                } else {
-                    print("error")
-                }
-                self.isLoading = false
-            }
         } else {
             showAlertInternet()
         }

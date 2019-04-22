@@ -24,11 +24,17 @@ class MovieViewModel {
     }
 
     private func setGenres(ids: [Int]) -> String {
-        for idGenre in ids {
-            print(idGenre)
+        if !ids.isEmpty {
+                var stringGenres = DBManager.sharedInstance.getGenreName(by: ids.first!)
+
+                for index in 1..<ids.count {
+                    stringGenres += ", \(DBManager.sharedInstance.getGenreName(by: ids[index]))"
+                }
+
+            return stringGenres
         }
 
-        return "Drama"
+        return ""
     }
 
     private func setYear(date: String) -> String {
