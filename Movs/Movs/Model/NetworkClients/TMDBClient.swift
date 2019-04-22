@@ -11,7 +11,8 @@ import Foundation
 class TMDBClient {
     
     //Network Stack
-    private static let tmdbApiUrl = "https://api.themoviedb.org/3/movie/popular?api_key=3d3a97b3f7d3075c078e242196e44533"
+    private static let tmdbBaseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=3d3a97b3f7d3075c078e242196e44533"
+    private static let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w500"
     
     private static let sessionConfiguration: URLSessionConfiguration = {
         let config = URLSessionConfiguration.default
@@ -28,7 +29,7 @@ class TMDBClient {
         
         
         //Adding the url inside the URL object
-        guard let url = URL(string: tmdbApiUrl) else {
+        guard let url = URL(string: tmdbBaseUrl) else {
             onError(.url)
             return
         }

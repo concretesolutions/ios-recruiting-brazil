@@ -21,6 +21,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             }
         }
     }
+    let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w500"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +33,17 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        //let sv = UIViewController.displaySpinner(onView: self.view)
+        //URLCache
+        let memoryCapacity = 500 * 1024 * 1024
+        let diskCapacity = 500 * 1024 * 1024
+        let urlCache = URLCache(memoryCapacity: memoryCapacity, diskCapacity: diskCapacity, diskPath: "disk")
+        //URLCache.shared.cachedResponse(for: <#T##URLRequest#>)
+        
         
         TMDBClient.loadMovies(onComplete: { (movies) in
             self.moviesArray = movies.results
             
         }) { (error) in
-            //UIViewController.removeSpinner(spinner: sv)
             print(error)
 //            switch error {
 //            case .invalidJSON
@@ -65,8 +70,12 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCollectionViewCell {
             let movie = moviesArray[indexPath.item]
             
+            let imageUrl = URL(string:tmdbBaseImageURL+movie.poster_path)!
+            let data = try? Data(contentsOf: imageUrl)
+            
             cell.cellLabel.text = movie.title
-            //cell.cellImage.image = UIImage(named: "placeholder.png")
+            cell.cellImage.image = UIImage(data: data!)
+            
             
             return cell
         }
