@@ -50,5 +50,21 @@ class DetailsViewController: UIViewController, Storyboarded {
             imageViewMovie.sd_setImage(with:
                 URL(string: ConstUrl.urlImage(image: image)), placeholderImage: UIImage(named: ""))
         }
+
+        if let idMovie = viewModel?.idMovie {
+            if DBManager.sharedInstance.checkBookmarkedItemFromKey(pKey: idMovie) {
+                buttonBookmark.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            }
+        }
+    }
+
+    @IBAction func bookmark(_ sender: Any) {
+        if let idMovie = viewModel?.idMovie {
+            if DBManager.sharedInstance.changeBookmarkedItemFromKey(pKey: idMovie) {
+                buttonBookmark.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            } else {
+                buttonBookmark.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            }
+        }
     }
 }

@@ -59,6 +59,15 @@ class DBManager {
         }
     }
 
+    func changeBookmarkedItemFromKey(pKey: Int) -> Bool {
+        if let result = database.object(ofType: Result.self, forPrimaryKey: pKey) {
+            checkAndChangeState(movie: result)
+            return checkBookmarkedItem(movie: result)
+        }
+
+        return false
+    }
+
     func registerItem(movie: Result) {
         try! database.write {
             database.add(movie, update: true)

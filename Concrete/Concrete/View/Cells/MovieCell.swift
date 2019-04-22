@@ -55,7 +55,6 @@ class MovieCell: UICollectionViewCell {
                 buttonStar.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
             }
         }
-
     }
 
     private func setShadow() {

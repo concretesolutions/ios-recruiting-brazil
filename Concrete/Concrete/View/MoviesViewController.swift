@@ -28,6 +28,11 @@ class MoviesViewController: UIViewController, Storyboarded {
                                          forCellWithReuseIdentifier: "movieCell")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.collectionViewMovies.reloadData()
+    }
+
     private func showAlertInternet() {
 
     }
