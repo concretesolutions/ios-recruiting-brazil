@@ -28,6 +28,16 @@ class DetailsViewController: UIViewController, Storyboarded {
         fillScreen()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if let idMovie = viewModel?.idMovie {
+            if DBManager.sharedInstance.checkBookmarkedItemFromKey(pKey: idMovie) {
+                buttonBookmark.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            } else {
+                buttonBookmark.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            }
+        }
+    }
+
     private func fillScreen() {
         if let title = viewModel?.title {
             labelTitle.text = title
@@ -49,12 +59,6 @@ class DetailsViewController: UIViewController, Storyboarded {
             print(ConstUrl.urlImage(image: image))
             imageViewMovie.sd_setImage(with:
                 URL(string: ConstUrl.urlImage(image: image)), placeholderImage: UIImage(named: ""))
-        }
-
-        if let idMovie = viewModel?.idMovie {
-            if DBManager.sharedInstance.checkBookmarkedItemFromKey(pKey: idMovie) {
-                buttonBookmark.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
-            }
         }
     }
 

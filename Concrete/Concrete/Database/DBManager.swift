@@ -76,8 +76,8 @@ class DBManager {
 
     func getBookmarkItens() -> [Result] {
         let results = database.objects(Result.self).filter("isBookmarked == true")
-        let games = Array(results)
-        return games
+        let movies = Array(results)
+        return movies
     }
 
     func checkBookmarkedItem(movie: Result) -> Bool {

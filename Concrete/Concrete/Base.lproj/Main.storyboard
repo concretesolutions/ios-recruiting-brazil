@@ -59,24 +59,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yu5-oE-IdQ">
-                                <rect key="frame" x="125.5" y="111" width="69" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9xc-at-xHJ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="A8z-5O-IH7">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="IB0-VQ-SJP" id="eUT-7k-3ZQ"/>
+                                    <outlet property="delegate" destination="IB0-VQ-SJP" id="ZPj-4K-ylh"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Yu5-oE-IdQ" firstAttribute="top" secondItem="ivy-SG-grv" secondAttribute="top" constant="91" id="EEg-9b-JYd"/>
-                            <constraint firstItem="Yu5-oE-IdQ" firstAttribute="centerX" secondItem="ivy-SG-grv" secondAttribute="centerX" id="Umj-6b-Hjq"/>
+                            <constraint firstItem="9xc-at-xHJ" firstAttribute="trailing" secondItem="ivy-SG-grv" secondAttribute="trailing" id="0Av-Dm-koV"/>
+                            <constraint firstItem="9xc-at-xHJ" firstAttribute="leading" secondItem="ivy-SG-grv" secondAttribute="leading" id="FMx-LU-aeH"/>
+                            <constraint firstItem="9xc-at-xHJ" firstAttribute="top" secondItem="PBd-FA-Kwf" secondAttribute="top" id="uQQ-yS-ajQ"/>
+                            <constraint firstItem="9xc-at-xHJ" firstAttribute="bottom" secondItem="ivy-SG-grv" secondAttribute="bottom" id="zwe-c5-Iux"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ivy-SG-grv"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionViewMovies" destination="9xc-at-xHJ" id="rdh-sT-0dR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQ5-E3-OhN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="555" y="86"/>
+            <point key="canvasLocation" x="555" y="85.563380281690144"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="bBv-f1-ROs">

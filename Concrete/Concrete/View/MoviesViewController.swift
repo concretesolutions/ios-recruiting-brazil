@@ -16,7 +16,6 @@ class MoviesViewController: UIViewController, Storyboarded {
     private var isLoading = false
     private let serviceManager = MoviesService()
     var viewModelData: [MovieViewModel]? = []
-    var arrayResponse: Movies?
 
     private var page = 1
 
@@ -67,14 +66,10 @@ class MoviesViewController: UIViewController, Storyboarded {
         if let model = viewModelData {
             if model.isEmpty {
                 if let movies = response?.results {
-                    arrayResponse = response
                     viewModelData = movies.map({ return MovieViewModel(item: $0)})
                 }
             } else {
                 if let movies = response?.results {
-                    if let results = response?.results {
-                        arrayResponse?.results.append(contentsOf: results)
-                    }
                     viewModelData?.append(contentsOf: movies.map({
                         return MovieViewModel(item: $0) }))
                 }
@@ -85,8 +80,9 @@ class MoviesViewController: UIViewController, Storyboarded {
     }
 
     @objc func bookmark(_ sender: UIButton) {
-        if let movie = arrayResponse?.results[sender.tag] {
-            DBManager.sharedInstance.checkAndChangeState(movie: movie)
+        if let idMovie = viewModelData?[sender.tag].idMovie {
+            if DBManager.sharedInstance.changeBookmarkedItemFromKey(pKey: idMovie) {}
+
             let indexPath = IndexPath(row: sender.tag, section: 0)
             collectionViewMovies.reloadItems(at: [indexPath])
         }
