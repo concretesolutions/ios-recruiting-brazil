@@ -16,6 +16,8 @@ class MoviesViewController: UIViewController, Storyboarded {
     private var isLoading = false
     private let serviceManager = MoviesService()
     var viewModelData: [MovieViewModel]? = []
+    var arrayResponse: Movies?
+
     private var page = 1
 
     override func viewDidLoad() {
@@ -41,7 +43,6 @@ class MoviesViewController: UIViewController, Storyboarded {
 
                     self.serviceManager.loadMovies(page: "\(page)") { (response, _) in
                         if response != nil {
-                            print(response as Any)
                             self.setViewModel(response: response)
                         } else {
                             print("error")
@@ -61,10 +62,14 @@ class MoviesViewController: UIViewController, Storyboarded {
         if let model = viewModelData {
             if model.isEmpty {
                 if let movies = response?.results {
+                    arrayResponse = response
                     viewModelData = movies.map({ return MovieViewModel(item: $0)})
                 }
             } else {
                 if let movies = response?.results {
+                    if let results = response?.results {
+                        arrayResponse?.results.append(contentsOf: results)
+                    }
                     viewModelData?.append(contentsOf: movies.map({
                         return MovieViewModel(item: $0) }))
                 }
@@ -72,6 +77,14 @@ class MoviesViewController: UIViewController, Storyboarded {
         }
 
         collectionViewMovies.reloadData()
+    }
+
+    @objc func bookmark(_ sender: UIButton) {
+        if let movie = arrayResponse?.results[sender.tag] {
+            DBManager.sharedInstance.checkAndChangeState(movie: movie)
+            let indexPath = IndexPath(row: sender.tag, section: 0)
+            collectionViewMovies.reloadItems(at: [indexPath])
+        }
     }
 }
 
@@ -102,6 +115,8 @@ extension MoviesViewController: UICollectionViewDataSource {
                                                          for: indexPath) as? MovieCell {
             if let cellData = viewModelData?[indexPath.row] {
                 cell.setCellData(cellData: cellData)
+                cell.buttonStar.tag = indexPath.row
+                cell.buttonStar.addTarget(self, action: #selector(bookmark(_:)), for: .touchUpInside)
             }
 
             return cell

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Realm
 
 class MovieViewModel {
     var title: String?
@@ -14,13 +15,15 @@ class MovieViewModel {
     var year: String?
     var genres: String?
     var synopsis: String?
+    var idMovie: Int?
 
     init (item: Result) {
         title = item.title
         image = item.posterPath
         year = setYear(date: item.releaseDate)
-        genres = setGenres(ids: item.genreIDS)
+        genres = setGenres(ids: item.genreIDS ?? [])
         synopsis = item.overview
+        idMovie = item.idMovie
     }
 
     private func setGenres(ids: [Int]) -> String {

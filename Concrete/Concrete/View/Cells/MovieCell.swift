@@ -19,6 +19,7 @@ class MovieCell: UICollectionViewCell {
         imageViewMovie.layer.sublayers = nil
         imageViewMovie.image = nil
         labelTitle.text = ""
+        buttonStar.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
 
         if let title = cellData.title {
             labelTitle.text = title
@@ -31,6 +32,7 @@ class MovieCell: UICollectionViewCell {
         }
 
         setShadow()
+        checkBookmark(cellData: cellData)
 
         imageViewMovie.layer.cornerRadius = 8
         imageViewMovie.clipsToBounds = true
@@ -47,7 +49,16 @@ class MovieCell: UICollectionViewCell {
         imageViewMovie.layer.insertSublayer(gradient, at: 0)
     }
 
-    private func setShadow () {
+    private func checkBookmark(cellData: MovieViewModel) {
+        if let idMovie = cellData.idMovie {
+            if DBManager.sharedInstance.checkBookmarkedItemFromKey(pKey: idMovie) {
+                buttonStar.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            }
+        }
+
+    }
+
+    private func setShadow() {
         imageViewShadow.backgroundColor = UIColor.black
         imageViewShadow.layer.cornerRadius = 8
         imageViewShadow.layer.shadowColor = UIColor.black.cgColor

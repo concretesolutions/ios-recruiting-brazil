@@ -2,11 +2,12 @@
 //
 //   let movies = try? newJSONDecoder().decode(Movies.self, from: jsonData)
 
-import Foundation
+import UIKit
+import RealmSwift
 
 struct Movies: Codable {
     let page, totalResults, totalPages: Int
-    let results: [Result]
+    var results: [Result]
 
     enum CodingKeys: String, CodingKey {
         case page
@@ -16,30 +17,40 @@ struct Movies: Codable {
     }
 }
 
-struct Result: Codable {
-    let voteCount, idMovie: Int
-    let video: Bool
-    let voteAverage: Double
-    let title: String
-    let popularity: Double
-    let posterPath: String
-    let originalTitle: String
-    let genreIDS: [Int]
-    let backdropPath: String
-    let adult: Bool
-    let overview, releaseDate: String
+class Result: Object, Codable {
+    @objc dynamic var idMovie: Int = 0
+    @objc dynamic var overview: String?
+    @objc dynamic var title: String = ""
+    @objc dynamic var posterPath: String = ""
+    @objc dynamic var isBookmarked: Bool = false
+    dynamic var genreIDS: [Int]?
+    @objc dynamic var releaseDate: String = ""
 
     enum CodingKeys: String, CodingKey {
-        case voteCount = "vote_count"
         case idMovie = "id"
-        case video
-        case voteAverage = "vote_average"
-        case title, popularity
+        case title
         case posterPath = "poster_path"
-        case originalTitle = "original_title"
         case genreIDS = "genre_ids"
-        case backdropPath = "backdrop_path"
-        case adult, overview
+        case overview
         case releaseDate = "release_date"
+    }
+
+    override class func primaryKey() -> String? {
+        return "idMovie"
+    }
+
+    public required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        releaseDate = try container.decodeIfPresent(String.self, forKey: .releaseDate) ?? ""
+        idMovie = try container.decodeIfPresent(Int.self, forKey: .idMovie) ?? 0
+        title = try container.decodeIfPresent(String.self, forKey: .title) ?? ""
+        posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath) ?? ""
+        genreIDS = try container.decodeIfPresent([Int].self, forKey: .genreIDS)
+        overview = try container.decodeIfPresent(String.self, forKey: .overview)
+    }
+
+    func encode(to encoder: Encoder) throws {
+
     }
 }
