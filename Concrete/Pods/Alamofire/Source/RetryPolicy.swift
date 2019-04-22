@@ -298,8 +298,7 @@ open class RetryPolicy: RequestInterceptor {
         exponentialBackoffScale: Double = RetryPolicy.defaultExponentialBackoffScale,
         retryableHTTPMethods: Set<HTTPMethod> = RetryPolicy.defaultRetryableHTTPMethods,
         retryableHTTPStatusCodes: Set<Int> = RetryPolicy.defaultRetryableHTTPStatusCodes,
-        retryableURLErrorCodes: Set<URLError.Code> = RetryPolicy.defaultRetryableURLErrorCodes)
-    {
+        retryableURLErrorCodes: Set<URLError.Code> = RetryPolicy.defaultRetryableURLErrorCodes) {
         precondition(exponentialBackoffBase >= 2, "The `exponentialBackoffBase` must be a minimum of 2.")
 
         self.retryLimit = retryLimit
@@ -314,8 +313,7 @@ open class RetryPolicy: RequestInterceptor {
         _ request: Request,
         for session: Session,
         dueTo error: Error,
-        completion: @escaping (RetryResult) -> Void)
-    {
+        completion: @escaping (RetryResult) -> Void) {
         if
             request.retryCount < retryLimit,
             let httpMethod = request.request?.method,
@@ -361,8 +359,7 @@ open class ConnectionLostRetryPolicy: RetryPolicy {
         retryLimit: UInt = RetryPolicy.defaultRetryLimit,
         exponentialBackoffBase: UInt = RetryPolicy.defaultExponentialBackoffBase,
         exponentialBackoffScale: Double = RetryPolicy.defaultExponentialBackoffScale,
-        retryableHTTPMethods: Set<HTTPMethod> = RetryPolicy.defaultRetryableHTTPMethods)
-    {
+        retryableHTTPMethods: Set<HTTPMethod> = RetryPolicy.defaultRetryableHTTPMethods) {
         super.init(
             retryLimit: retryLimit,
             exponentialBackoffBase: exponentialBackoffBase,

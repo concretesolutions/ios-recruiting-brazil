@@ -35,10 +35,11 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(viewC, animated: true)
     }
 
-    func createDetails(to movie: MovieViewModel) {
+    func createDetails(to viewModel: MovieViewModel, movie: Result) {
         let viewC = DetailsViewController.instantiate()
         viewC.coordinator = self
-        viewC.viewModel = movie
+        viewC.viewModel = viewModel
+        viewC.movie = movie
         navigationController.pushViewController(viewC, animated: true)
     }
 

@@ -83,8 +83,7 @@ extension Request {
         statusCode acceptableStatusCodes: S,
         response: HTTPURLResponse)
         -> ValidationResult
-        where S.Iterator.Element == Int
-    {
+        where S.Iterator.Element == Int {
         if acceptableStatusCodes.contains(response.statusCode) {
             return .success(Void())
         } else {
@@ -100,8 +99,7 @@ extension Request {
         response: HTTPURLResponse,
         data: Data?)
         -> ValidationResult
-        where S.Iterator.Element == String
-    {
+        where S.Iterator.Element == String {
         guard let data = data, data.count > 0 else { return .success(Void()) }
 
         guard

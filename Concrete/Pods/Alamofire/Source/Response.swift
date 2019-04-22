@@ -250,8 +250,7 @@ public struct DownloadResponse<Value> {
         resumeData: Data?,
         metrics: URLSessionTaskMetrics?,
         serializationDuration: TimeInterval,
-        result: AFResult<Value>)
-    {
+        result: AFResult<Value>) {
         self.request = request
         self.response = response
         self.fileURL = fileURL

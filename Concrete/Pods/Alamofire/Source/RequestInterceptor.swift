@@ -95,8 +95,7 @@ extension RequestInterceptor {
         _ request: Request,
         for session: Session,
         dueTo error: Error,
-        completion: @escaping (RetryResult) -> Void)
-    {
+        completion: @escaping (RetryResult) -> Void) {
         completion(.doNotRetry)
     }
 }
@@ -131,8 +130,7 @@ open class Retrier: RequestInterceptor {
         _ request: Request,
         for session: Session,
         dueTo error: Error,
-        completion: @escaping (RetryResult) -> Void)
-    {
+        completion: @escaping (RetryResult) -> Void) {
         retryHandler(request, session, error, completion)
     }
 }
@@ -166,8 +164,7 @@ open class Interceptor: RequestInterceptor {
         _ urlRequest: URLRequest,
         for session: Session,
         using adapters: [RequestAdapter],
-        completion: @escaping (AFResult<URLRequest>) -> Void)
-    {
+        completion: @escaping (AFResult<URLRequest>) -> Void) {
         var pendingAdapters = adapters
 
         guard !pendingAdapters.isEmpty else { completion(.success(urlRequest)); return }
@@ -188,8 +185,7 @@ open class Interceptor: RequestInterceptor {
         _ request: Request,
         for session: Session,
         dueTo error: Error,
-        completion: @escaping (RetryResult) -> Void)
-    {
+        completion: @escaping (RetryResult) -> Void) {
         retry(request, for: session, dueTo: error, using: retriers, completion: completion)
     }
 
@@ -198,8 +194,7 @@ open class Interceptor: RequestInterceptor {
         for session: Session,
         dueTo error: Error,
         using retriers: [RequestRetrier],
-        completion: @escaping (RetryResult) -> Void)
-    {
+        completion: @escaping (RetryResult) -> Void) {
         var pendingRetriers = retriers
 
         guard !pendingRetriers.isEmpty else { completion(.doNotRetry); return }

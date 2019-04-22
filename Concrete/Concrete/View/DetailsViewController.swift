@@ -20,6 +20,7 @@ class DetailsViewController: UIViewController, Storyboarded {
 
     weak var coordinator: MainCoordinator?
     weak var viewModel: MovieViewModel?
+    weak var movie: Result?
 
     private let serviceManager = MoviesService()
 
@@ -28,7 +29,7 @@ class DetailsViewController: UIViewController, Storyboarded {
         fillScreen()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if let idMovie = viewModel?.idMovie {
             if DBManager.sharedInstance.checkBookmarkedItemFromKey(pKey: idMovie) {
                 buttonBookmark.setImage(UIImage(named: "favorite_full_icon"), for: .normal)

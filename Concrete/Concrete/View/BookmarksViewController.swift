@@ -12,6 +12,7 @@ class BookmarksViewController: UIViewController, Storyboarded {
 
     weak var coordinator: MainCoordinator?
     var viewModelData: [MovieViewModel]? = []
+    var arrayMovies: [Result] = []
 
     @IBOutlet weak var collectionViewMovies: UICollectionView!
 
@@ -31,6 +32,7 @@ class BookmarksViewController: UIViewController, Storyboarded {
 
         let arrayResult = DBManager.sharedInstance.getBookmarkItens()
         if !arrayResult.isEmpty {
+            arrayMovies = arrayResult
             setViewModel(response: arrayResult)
         } else {
             viewModelData = []
@@ -47,6 +49,7 @@ class BookmarksViewController: UIViewController, Storyboarded {
     @objc func bookmark(_ sender: UIButton) {
         if let idMovie = viewModelData?[sender.tag].idMovie {
             if DBManager.sharedInstance.changeBookmarkedItemFromKey(pKey: idMovie) {}
+            fetchData()
             self.collectionViewMovies.reloadData()
         }
     }
@@ -92,8 +95,13 @@ extension BookmarksViewController: UICollectionViewDataSource {
 
 extension BookmarksViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let movie = viewModelData?[indexPath.row] {
-            coordinator?.createDetails(to: movie)
+        if let viewModel = viewModelData?[indexPath.row] {
+            let result = arrayMovies.filter({ $0.idMovie == viewModel.idMovie})
+            if !result.isEmpty {
+                if let res = result.first {
+                    coordinator?.createDetails(to: viewModel, movie: res)
+                }
+            }
         }
     }
 }

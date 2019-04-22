@@ -475,7 +475,6 @@ open class Request {
         return self
     }
 
-
     /// Resumes the `Request`.
     ///
     /// - Returns: The `Request`.

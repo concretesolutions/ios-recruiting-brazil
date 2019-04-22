@@ -138,8 +138,7 @@ extension DataRequest {
         queue: DispatchQueue = .main,
         responseSerializer: Serializer,
         completionHandler: @escaping (DataResponse<Serializer.SerializedObject>) -> Void)
-        -> Self
-    {
+        -> Self {
         appendResponseSerializer {
             let start = CFAbsoluteTimeGetCurrent()
             let result = AFResult { try responseSerializer.serialize(request: self.request,
@@ -208,10 +207,9 @@ extension DownloadRequest {
     public func response(
         queue: DispatchQueue = .main,
         completionHandler: @escaping (DownloadResponse<URL?>) -> Void)
-        -> Self
-    {
+        -> Self {
         appendResponseSerializer {
-            let result = AFResult(value: self.fileURL , error: self.error)
+            let result = AFResult(value: self.fileURL, error: self.error)
             let response = DownloadResponse(request: self.request,
                                             response: self.response,
                                             fileURL: self.fileURL,
@@ -239,8 +237,7 @@ extension DownloadRequest {
         queue: DispatchQueue = .main,
         responseSerializer: T,
         completionHandler: @escaping (DownloadResponse<T.SerializedObject>) -> Void)
-        -> Self
-    {
+        -> Self {
         appendResponseSerializer {
             let start = CFAbsoluteTimeGetCurrent()
             let result = AFResult { try responseSerializer.serializeDownload(request: self.request,
@@ -311,8 +308,7 @@ extension DataRequest {
     public func responseData(
         queue: DispatchQueue = .main,
         completionHandler: @escaping (DataResponse<Data>) -> Void)
-        -> Self
-    {
+        -> Self {
         return response(queue: queue,
                         responseSerializer: DataResponseSerializer(),
                         completionHandler: completionHandler)
@@ -366,8 +362,7 @@ extension DownloadRequest {
     public func responseData(
         queue: DispatchQueue = .main,
         completionHandler: @escaping (DownloadResponse<Data>) -> Void)
-        -> Self
-    {
+        -> Self {
         return response(
             queue: queue,
             responseSerializer: DataResponseSerializer(),
@@ -467,8 +462,7 @@ extension DownloadRequest {
         queue: DispatchQueue = .main,
         encoding: String.Encoding? = nil,
         completionHandler: @escaping (DownloadResponse<String>) -> Void)
-        -> Self
-    {
+        -> Self {
         return response(
             queue: queue,
             responseSerializer: StringResponseSerializer(encoding: encoding),
@@ -555,8 +549,7 @@ extension DownloadRequest {
         queue: DispatchQueue = .main,
         options: JSONSerialization.ReadingOptions = .allowFragments,
         completionHandler: @escaping (DownloadResponse<Any>) -> Void)
-        -> Self
-    {
+        -> Self {
         return response(queue: queue,
                         responseSerializer: JSONResponseSerializer(options: options),
                         completionHandler: completionHandler)
