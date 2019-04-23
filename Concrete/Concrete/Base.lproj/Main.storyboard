@@ -43,6 +43,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="SFR-qo-hDm">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="jdM-4P-VOR">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="reload:" destination="BYZ-38-t0r" id="L5i-iR-j7a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionViewMovies" destination="8Mm-G5-ck1" id="iAw-pe-Fcv"/>
                     </connections>

@@ -24,6 +24,7 @@
 
 import Foundation
 
+
 /// An order-preserving and case-insensitive representation of HTTP headers.
 public struct HTTPHeaders {
     private var headers = [HTTPHeader]()
@@ -412,7 +413,7 @@ extension Collection where Element == String {
 
 extension URLRequest {
     /// Returns `allHTTPHeaderFields` as `HTTPHeaders`.
-    public var httpHeaders: HTTPHeaders {
+    public var headers: HTTPHeaders {
         get { return allHTTPHeaderFields.map(HTTPHeaders.init) ?? HTTPHeaders() }
         set { allHTTPHeaderFields = newValue.dictionary }
     }
@@ -420,14 +421,14 @@ extension URLRequest {
 
 extension HTTPURLResponse {
     /// Returns `allHeaderFields` as `HTTPHeaders`.
-    public var httpHeaders: HTTPHeaders {
+    public var headers: HTTPHeaders {
         return (allHeaderFields as? [String: String]).map(HTTPHeaders.init) ?? HTTPHeaders()
     }
 }
 
 extension URLSessionConfiguration {
     /// Returns `httpAdditionalHeaders` as `HTTPHeaders`.
-    public var httpHeaders: HTTPHeaders {
+    public var headers: HTTPHeaders {
         get { return (httpAdditionalHeaders as? [String: String]).map(HTTPHeaders.init) ?? HTTPHeaders() }
         set { httpAdditionalHeaders = newValue.dictionary }
     }

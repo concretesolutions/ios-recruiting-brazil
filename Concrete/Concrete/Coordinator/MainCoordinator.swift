@@ -20,6 +20,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func start() {
         navigationController.delegate = self
         navigationController.navigationBar.barTintColor = UIColor(rgb: Const.mainColor)
+        navigationController.navigationBar.tintColor = .black
 
         let viewC = MoviesViewController.instantiate()
         viewC.tabBarItem = UITabBarItem(title: "mainCoordinatorTabMovies".localized(),
@@ -31,6 +32,8 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
     func startBookmarks() {
         navigationController.delegate = self
         navigationController.navigationBar.barTintColor = UIColor(rgb: Const.mainColor)
+        navigationController.navigationBar.tintColor = .black
+
         let viewC = BookmarksViewController.instantiate()
         viewC.tabBarItem = UITabBarItem(title: "mainCoordinatorTabFavorites".localized(),
                                         image: UIImage.init(named: "favorite_gray_icon"), tag: 0)

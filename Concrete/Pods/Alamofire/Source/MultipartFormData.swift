@@ -91,6 +91,9 @@ open class MultipartFormData {
 
     // MARK: - Properties
 
+    /// Default memory threshold used when encoding `MultipartFormData`, in bytes.
+    public static let encodingMemoryThreshold: UInt64 = 10_000_000
+
     /// The `Content-Type` header value containing the boundary used to generate the `multipart/form-data`.
     open lazy var contentType: String = "multipart/form-data; boundary=\(self.boundary)"
 
@@ -240,7 +243,8 @@ open class MultipartFormData {
             }
 
             bodyContentLength = fileSize.uint64Value
-        } catch {
+        }
+        catch {
             setBodyPartError(withReason: .bodyPartFileSizeQueryFailedWithError(forURL: fileURL, error: error))
             return
         }
@@ -276,7 +280,8 @@ open class MultipartFormData {
         withLength length: UInt64,
         name: String,
         fileName: String,
-        mimeType: String) {
+        mimeType: String)
+    {
         let headers = contentHeaders(withName: name, fileName: fileName, mimeType: mimeType)
         append(stream, withLength: length, headers: headers)
     }

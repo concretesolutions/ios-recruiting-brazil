@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class MoviesViewController: UIViewController, Storyboarded {
+class MoviesViewController: UIViewController, Storyboarded, NVActivityIndicatorViewable {
 
     @IBOutlet weak var collectionViewMovies: UICollectionView!
 
@@ -43,6 +44,8 @@ class MoviesViewController: UIViewController, Storyboarded {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "moviesViewControllerSearchTitle".localized()
+        searchController.searchBar.tintColor = .black
+
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -52,7 +55,9 @@ class MoviesViewController: UIViewController, Storyboarded {
             isLoading = true
 
             serviceManager.loadGenres { (response, _) in
-                print(response ?? "")
+
+                self.startAnimating(CGSize(width: 30, height: 30), message: "moviesViewControllerLoading".localized())
+
                 if let genres = response {
                     DBManager.sharedInstance.registerGenres(genres: genres)
 
@@ -60,15 +65,18 @@ class MoviesViewController: UIViewController, Storyboarded {
                         if response != nil {
                             self.setViewModel(response: response)
                         } else {
-                            print("error")
+                            self.showGenericAlert()
+                            self.collectionViewMovies.reloadData()
                         }
                         self.isLoading = false
+                        NVActivityIndicatorPresenter.sharedInstance.stopAnimating(nil)
                     }
                 }
             }
 
         } else {
             showAlertInternet()
+            collectionViewMovies.reloadData()
         }
     }
 
@@ -115,7 +123,6 @@ class MoviesViewController: UIViewController, Storyboarded {
         }
 
         viewModelDataUnfiltred = viewModelData
-
         collectionViewMovies.reloadData()
     }
 
@@ -130,7 +137,7 @@ class MoviesViewController: UIViewController, Storyboarded {
             viewModelData = viewModelDataUnfiltred
         }
     }
-    
+
     @IBAction func reload(_ sender: Any) {
         if Reachability.isConnectedToNetwork() {
             self.viewModelData = []
@@ -165,9 +172,20 @@ extension MoviesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         if let count = viewModelData?.count {
+            if count == 0 {
+                if isFiltering() {
+                    collectionViewMovies.setEmptyMessage("moviesViewControllerSearchEmpty".localized())
+                } else if !Reachability.isConnectedToNetwork() {
+                    collectionViewMovies.setEmptyMessage("moviesViewControllerReload".localized())
+                }
+            } else {
+                collectionViewMovies.restore()
+            }
+
             return count
         }
 
+        collectionViewMovies.setEmptyMessage("moviesViewControllerGenericEmpty".localized())
         return 0
     }
 

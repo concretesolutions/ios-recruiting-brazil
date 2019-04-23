@@ -16,6 +16,7 @@
 		EB1091AC226EA3E400418320 /* MoviesViewControllerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091AB226EA3E400418320 /* MoviesViewControllerSpecs.swift */; };
 		EB1091AE226EAE3E00418320 /* NewsSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091AD226EAE3E00418320 /* NewsSpecs.swift */; };
 		EB1091B0226EB0E000418320 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091AF226EB0E000418320 /* Colors.swift */; };
+		EB1091B2226EC47900418320 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091B1226EC47900418320 /* CollectionView.swift */; };
 		EB7F171E226ACC4300227F9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F171D226ACC4300227F9E /* AppDelegate.swift */; };
 		EB7F1720226ACC4300227F9E /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F171F226ACC4300227F9E /* MoviesViewController.swift */; };
 		EB7F1723226ACC4300227F9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7F1721226ACC4300227F9E /* Main.storyboard */; };
@@ -75,6 +76,7 @@
 		EB1091AB226EA3E400418320 /* MoviesViewControllerSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewControllerSpecs.swift; sourceTree = "<group>"; };
 		EB1091AD226EAE3E00418320 /* NewsSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSpecs.swift; sourceTree = "<group>"; };
 		EB1091AF226EB0E000418320 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EB1091B1226EC47900418320 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		EB7F171A226ACC4300227F9E /* Concrete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concrete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7F171D226ACC4300227F9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7F171F226ACC4300227F9E /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				EBE58B6A226C2A640081E2AE /* DesignableButton.swift */,
 				EBE58B70226CBC030081E2AE /* String.swift */,
 				EB1091AF226EB0E000418320 /* Colors.swift */,
+				EB1091B1226EC47900418320 /* CollectionView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Concrete/Pods-Concrete-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -530,6 +534,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -616,6 +621,7 @@
 				EB7F1720226ACC4300227F9E /* MoviesViewController.swift in Sources */,
 				EB7F1756226ACE1200227F9E /* MoviesService.swift in Sources */,
 				EBE58B6D226CBA740081E2AE /* DetailsViewController.swift in Sources */,
+				EB1091B2226EC47900418320 /* CollectionView.swift in Sources */,
 				EB7F1760226ACF1100227F9E /* Nibed.swift in Sources */,
 				EB10919F226CF71000418320 /* Genres.swift in Sources */,
 				EBE58B6B226C2A650081E2AE /* DesignableButton.swift in Sources */,

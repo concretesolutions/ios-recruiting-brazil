@@ -66,9 +66,15 @@ extension BookmarksViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         if let count = viewModelData?.count {
+            if count == 0 {
+                    collectionViewMovies.setEmptyMessage("bookmarksViewControllerEmpty".localized())
+            } else {
+                collectionViewMovies.restore()
+            }
             return count
         }
 
+        collectionViewMovies.setEmptyMessage("moviesViewControllerGenericEmpty".localized())
         return 0
     }
 
