@@ -19,7 +19,7 @@ class DetailsViewController: UIViewController, Storyboarded {
     @IBOutlet weak var imageViewMovie: UIImageView!
 
     weak var coordinator: MainCoordinator?
-    weak var viewModel: MovieViewModel?
+    var viewModel: MovieViewModel?
     weak var movie: Result?
 
     private let serviceManager = MoviesService()

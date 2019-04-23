@@ -12,6 +12,8 @@
 		DFCAC41FA52E1953BBFCCAA8 /* Pods_ConcreteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A537CA203F40961D8C71CE /* Pods_ConcreteTests.framework */; };
 		EB10919F226CF71000418320 /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10919E226CF71000418320 /* Genres.swift */; };
 		EB1091A6226D2E9800418320 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091A5226D2E9800418320 /* DBManager.swift */; };
+		EB1091AA226EA34100418320 /* ViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091A9226EA34100418320 /* ViewControllerSpec.swift */; };
+		EB1091AC226EA3E400418320 /* MoviesViewControllerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1091AB226EA3E400418320 /* MoviesViewControllerSpecs.swift */; };
 		EB7F171E226ACC4300227F9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F171D226ACC4300227F9E /* AppDelegate.swift */; };
 		EB7F1720226ACC4300227F9E /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F171F226ACC4300227F9E /* MoviesViewController.swift */; };
 		EB7F1723226ACC4300227F9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7F1721226ACC4300227F9E /* Main.storyboard */; };
@@ -67,6 +69,8 @@
 		D9B8256573BDF1229DF99648 /* Pods-Concrete.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Concrete.release.xcconfig"; path = "Pods/Target Support Files/Pods-Concrete/Pods-Concrete.release.xcconfig"; sourceTree = "<group>"; };
 		EB10919E226CF71000418320 /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
 		EB1091A5226D2E9800418320 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		EB1091A9226EA34100418320 /* ViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSpec.swift; sourceTree = "<group>"; };
+		EB1091AB226EA3E400418320 /* MoviesViewControllerSpecs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewControllerSpecs.swift; sourceTree = "<group>"; };
 		EB7F171A226ACC4300227F9E /* Concrete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concrete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7F171D226ACC4300227F9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7F171F226ACC4300227F9E /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +165,22 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
+		EB1091A7226EA31A00418320 /* ViewControllersTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB1091A9226EA34100418320 /* ViewControllerSpec.swift */,
+				EB1091AB226EA3E400418320 /* MoviesViewControllerSpecs.swift */,
+			);
+			path = ViewControllersTests;
+			sourceTree = "<group>";
+		};
+		EB1091A8226EA32B00418320 /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
 		EB7F1711226ACC4300227F9E = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +226,8 @@
 		EB7F1731226ACC4400227F9E /* ConcreteTests */ = {
 			isa = PBXGroup;
 			children = (
+				EB1091A8226EA32B00418320 /* ModelTests */,
+				EB1091A7226EA31A00418320 /* ViewControllersTests */,
 				EBE58B60226BCF400081E2AE /* StubData */,
 				EB7F1732226ACC4400227F9E /* ConcreteTests.swift */,
 				EB7F1734226ACC4400227F9E /* Info.plist */,
@@ -606,6 +628,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB7F1733226ACC4400227F9E /* ConcreteTests.swift in Sources */,
+				EB1091AA226EA34100418320 /* ViewControllerSpec.swift in Sources */,
+				EB1091AC226EA3E400418320 /* MoviesViewControllerSpecs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
