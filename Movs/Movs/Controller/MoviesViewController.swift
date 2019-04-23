@@ -21,8 +21,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             }
         }
     }
-    let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w500"
-    let posterImageCache = URLCache.shared
+    let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w185"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +32,6 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Search Bar on Navigation Controller
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
-        
-        //URLCache
-        
-        
         
         
         
@@ -71,14 +66,27 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             let movie = moviesArray[indexPath.item]
             let imageUrl = URL(string:tmdbBaseImageURL+movie.poster_path)!
             let imageRequest = URLRequest(url: imageUrl)
+            let imageCache = URLCache.shared
             
-            posterImageCache.cachedResponse(for: imageRequest)
-            let data = self.posterImageCache.cachedResponse(for: imageRequest)?.data
-            let image = UIImage(data: data!)
-            
-            cell.cellImage.image = image
-            cell.cellLabel.text = movie.title
-            
+            if let data = imageCache.cachedResponse(for: imageRequest)?.data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    cell.cellImage.image = image
+                    cell.cellLabel.text = movie.title
+                }
+            } else {
+                URLSession.shared.dataTask(with: imageRequest, completionHandler: { (data, response, error) in
+                    if let data = data, let response = response, ((response as? HTTPURLResponse)?.statusCode ?? 500) < 300, let image = UIImage(data: data) {
+                        let cachedData = CachedURLResponse(response: response, data: data)
+                        imageCache.storeCachedResponse(cachedData, for: imageRequest)
+                        
+                        DispatchQueue.main.async {
+                            cell.cellImage.image = image
+                            cell.cellLabel.text = movie.title
+                        }
+                        
+                    }
+                }).resume()
+            }
             
             
             return cell

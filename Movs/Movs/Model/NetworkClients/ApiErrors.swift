@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ApiError {
+enum ApiErrors {
     //Unable to create url
     case url
     

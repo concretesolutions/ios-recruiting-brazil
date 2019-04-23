@@ -12,7 +12,7 @@ class TMDBClient {
     
     //Network Stack
     private static let tmdbBaseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=3d3a97b3f7d3075c078e242196e44533"
-    private static let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w185"
+    
     
     private static let sessionConfiguration: URLSessionConfiguration = {
         let config = URLSessionConfiguration.default
@@ -22,9 +22,11 @@ class TMDBClient {
         return config
     }()
     
+    let imageCache = URLCache.shared
+    
     private static let session = URLSession(configuration: sessionConfiguration)
     
-    class func loadMovies(onComplete: @escaping (Movie) -> Void, onError: @escaping (ApiError) -> Void) {
+    class func loadMovies(onComplete: @escaping (Movie) -> Void, onError: @escaping (ApiErrors) -> Void) {
         //Adding Spinning to View
         
         
@@ -62,5 +64,35 @@ class TMDBClient {
         }
         dataTask.resume()
     }
+    
+//    class func loadImages(url: URL?, onComplete: @escaping (Data) -> Void, onError: @escaping (ApiErrors) -> Void){
+//        guard let imageUrl = url else {
+//            onError(.url)
+//            return
+//        }
+//        let request = URLRequest(url: imageUrl)
+//        let imageCache = URLCache.shared
+//        imageCache.cachedResponse(for: request)
+//        let dataTask = session.dataTask(with: request) { (data, response, error) in
+//            if error == nil {
+//                guard let response = response as? HTTPURLResponse else {
+//                    onError(.noResponse)
+//                    return
+//                }
+//                if response.statusCode == 200 {
+//                    guard let imageData = data else {
+//                        onError(.noData)
+//                        return
+//                    }
+//                    onComplete(imageData)
+//                } else {
+//                    onError(.responseStatusCode(code: response.statusCode))
+//                }
+//            } else {
+//                onError(.taskError(error: error!))
+//            }
+//        }
+//        dataTask.resume()
+//    }
     
 }
