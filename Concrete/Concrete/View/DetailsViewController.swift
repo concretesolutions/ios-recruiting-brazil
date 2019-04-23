@@ -30,8 +30,8 @@ class DetailsViewController: UIViewController, Storyboarded {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if let idMovie = viewModel?.idMovie {
-            if DBManager.sharedInstance.checkBookmarkedItemFromKey(pKey: idMovie) {
+        if let movie = viewModel {
+            if DBManager.sharedInstance.checkBookmarkedItem(movie: movie) {
                 buttonBookmark.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
             } else {
                 buttonBookmark.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
@@ -64,8 +64,8 @@ class DetailsViewController: UIViewController, Storyboarded {
     }
 
     @IBAction func bookmark(_ sender: Any) {
-        if let idMovie = viewModel?.idMovie {
-            if DBManager.sharedInstance.changeBookmarkedItemFromKey(pKey: idMovie) {
+        if let movie = viewModel {
+            if DBManager.sharedInstance.changeStateAndCheck(movie: movie) {
                 buttonBookmark.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
             } else {
                 buttonBookmark.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)

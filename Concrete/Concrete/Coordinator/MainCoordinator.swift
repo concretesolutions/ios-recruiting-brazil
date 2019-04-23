@@ -19,6 +19,8 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 
     func start() {
         navigationController.delegate = self
+        navigationController.navigationBar.barTintColor = UIColor(rgb: Const.mainColor)
+
         let viewC = MoviesViewController.instantiate()
         viewC.tabBarItem = UITabBarItem(title: "mainCoordinatorTabMovies".localized(),
                                         image: UIImage.init(named: "list_icon"), tag: 0)
@@ -28,6 +30,7 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
 
     func startBookmarks() {
         navigationController.delegate = self
+        navigationController.navigationBar.barTintColor = UIColor(rgb: Const.mainColor)
         let viewC = BookmarksViewController.instantiate()
         viewC.tabBarItem = UITabBarItem(title: "mainCoordinatorTabFavorites".localized(),
                                         image: UIImage.init(named: "favorite_gray_icon"), tag: 0)
@@ -35,11 +38,10 @@ class MainCoordinator: NSObject, Coordinator, UINavigationControllerDelegate {
         navigationController.pushViewController(viewC, animated: true)
     }
 
-    func createDetails(to viewModel: MovieViewModel, movie: Result) {
+    func createDetails(to viewModel: MovieViewModel) {
         let viewC = DetailsViewController.instantiate()
         viewC.coordinator = self
         viewC.viewModel = viewModel
-        viewC.movie = movie
         navigationController.pushViewController(viewC, animated: true)
     }
 

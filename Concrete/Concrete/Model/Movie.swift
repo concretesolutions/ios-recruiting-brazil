@@ -17,14 +17,13 @@ struct Movies: Codable {
     }
 }
 
-class Result: Object, Codable {
-    @objc dynamic var idMovie: Int = 0
-    @objc dynamic var overview: String?
-    @objc dynamic var title: String = ""
-    @objc dynamic var posterPath: String = ""
-    @objc dynamic var isBookmarked: Bool = false
-    dynamic var genreIDS: [Int]?
-    @objc dynamic var releaseDate: String = ""
+class Result: Codable {
+    let idMovie: Int?
+    let overview: String?
+    let title: String?
+    let posterPath: String?
+    let genreIDS: [Int]?
+    let releaseDate: String?
 
     enum CodingKeys: String, CodingKey {
         case idMovie = "id"
@@ -33,24 +32,5 @@ class Result: Object, Codable {
         case genreIDS = "genre_ids"
         case overview
         case releaseDate = "release_date"
-    }
-
-    override class func primaryKey() -> String? {
-        return "idMovie"
-    }
-
-    public required convenience init(from decoder: Decoder) throws {
-        self.init()
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        releaseDate = try container.decodeIfPresent(String.self, forKey: .releaseDate) ?? ""
-        idMovie = try container.decodeIfPresent(Int.self, forKey: .idMovie) ?? 0
-        title = try container.decodeIfPresent(String.self, forKey: .title) ?? ""
-        posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath) ?? ""
-        genreIDS = try container.decodeIfPresent([Int].self, forKey: .genreIDS)
-        overview = try container.decodeIfPresent(String.self, forKey: .overview)
-    }
-
-    func encode(to encoder: Encoder) throws {
-
     }
 }

@@ -50,10 +50,9 @@ class MovieCell: UICollectionViewCell {
     }
 
     private func checkBookmark(cellData: MovieViewModel) {
-        if let idMovie = cellData.idMovie {
-            if DBManager.sharedInstance.checkBookmarkedItemFromKey(pKey: idMovie) {
-                buttonStar.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
-            }
+        let movie = cellData
+        if DBManager.sharedInstance.checkBookmarkedItem(movie: movie) {
+            buttonStar.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
         }
     }
 

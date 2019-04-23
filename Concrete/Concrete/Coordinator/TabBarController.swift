@@ -16,6 +16,9 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         movies.start()
         bookmarks.startBookmarks()
+        UITabBar.appearance().barTintColor = UIColor(rgb: Const.mainColor)
+        UITabBar.appearance().tintColor = UIColor.black
+        UITabBar.appearance().unselectedItemTintColor = UIColor.gray
         viewControllers = [movies.navigationController, bookmarks.navigationController]
     }
 }

@@ -39,48 +39,14 @@ class DBManager {
         return ""
     }
 
-    private func getDBObject(movie: Result) -> Result {
-        let pKey = movie.idMovie
-        let result = database.object(ofType: Result.self, forPrimaryKey: pKey)
-        if result != nil {
-            return result!
-        } else {
-            registerItem(movie: movie)
-            return getDBObject(movie: movie)
-        }
-    }
-
-    func checkBookmarkedItemFromKey(pKey: Int) -> Bool {
-        let result = database.object(ofType: Result.self, forPrimaryKey: pKey)
-        if let isBooked = result {
-            return isBooked.isBookmarked
-        } else {
-            return false
-        }
-    }
-
-    func changeBookmarkedItemFromKey(pKey: Int) -> Bool {
-        if let result = database.object(ofType: Result.self, forPrimaryKey: pKey) {
-            checkAndChangeState(movie: result)
-            return checkBookmarkedItem(movie: result)
-        }
-
-        return false
-    }
-
-    func registerItem(movie: Result) {
-        try! database.write {
-            database.add(movie, update: true)
-        }
-    }
-
-    func getBookmarkItens() -> [Result] {
-        let results = database.objects(Result.self).filter("isBookmarked == true")
+    //Bookmarks
+    func getBookmarkItens() -> [MovieViewModel] {
+        let results = database.objects(MovieViewModel.self).filter("isBookmarked == true")
         let movies = Array(results)
         return movies
     }
 
-    func checkBookmarkedItem(movie: Result) -> Bool {
+    func checkBookmarkedItem(movie: MovieViewModel) -> Bool {
         let object = getDBObject(movie: movie)
         if object.isBookmarked == true {
             return true
@@ -89,7 +55,7 @@ class DBManager {
         return false
     }
 
-    func checkAndChangeState(movie: Result) {
+    func changeState(movie: MovieViewModel) {
         if checkBookmarkedItem(movie: movie) {
             deleteItem(movie: movie)
         } else {
@@ -97,7 +63,29 @@ class DBManager {
         }
     }
 
-    func addItem(movie: Result) {
+    func changeStateAndCheck(movie: MovieViewModel) -> Bool {
+        changeState(movie: movie)
+        return checkBookmarkedItem(movie: movie)
+    }
+
+    private func getDBObject(movie: MovieViewModel) -> MovieViewModel {
+        let pKey = movie.idMovie
+        let result = database.object(ofType: MovieViewModel.self, forPrimaryKey: pKey)
+        if result != nil {
+            return result!
+        } else {
+            registerItem(movie: movie)
+            return getDBObject(movie: movie)
+        }
+    }
+
+    private func registerItem(movie: MovieViewModel) {
+        try! database.write {
+            database.add(movie, update: true)
+        }
+    }
+
+    private func addItem(movie: MovieViewModel) {
         let object = getDBObject(movie: movie)
         try! database.write {
             object.isBookmarked = true
@@ -105,7 +93,7 @@ class DBManager {
         }
     }
 
-    func deleteItem(movie: Result) {
+    private func deleteItem(movie: MovieViewModel) {
         let object = getDBObject(movie: movie)
         try! database.write {
             object.isBookmarked = false

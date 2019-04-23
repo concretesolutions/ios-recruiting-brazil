@@ -18,7 +18,6 @@ class MoviesViewController: UIViewController, Storyboarded {
     var viewModelData: [MovieViewModel]? = []
     var viewModelDataUnfiltred: [MovieViewModel]? = []
     var viewModelDataFiltered: [MovieViewModel]? = []
-    var arrayMovies: [Result] = []
 
     let searchController = UISearchController(searchResultsController: nil)
 
@@ -28,6 +27,8 @@ class MoviesViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         configureView()
         fetchData(page: 1)
+
+        self.title = "mainCoordinatorTabMovies".localized()
 
         collectionViewMovies.register(UINib(nibName: "MovieCell", bundle: .main),
                                          forCellWithReuseIdentifier: "movieCell")
@@ -41,7 +42,7 @@ class MoviesViewController: UIViewController, Storyboarded {
     private func configureView() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Procurar filmes"
+        searchController.searchBar.placeholder = "moviesViewControllerSearchTitle".localized()
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -72,7 +73,17 @@ class MoviesViewController: UIViewController, Storyboarded {
     }
 
     private func showAlertInternet() {
+        showGenericAlert(message: "alertErrorInternet".localized())
+    }
 
+    private func showGenericAlert(title: String = "alertTitle".localized(),
+                                  message: String = "alertError".localized()) {
+
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "alertOk".localized(), style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 
     func searchBarIsEmpty() -> Bool {
@@ -93,12 +104,10 @@ class MoviesViewController: UIViewController, Storyboarded {
         if let model = viewModelData {
             if model.isEmpty {
                 if let movies = response?.results {
-                    arrayMovies = movies
                     viewModelData = movies.map({ return MovieViewModel(item: $0)})
                 }
             } else {
                 if let movies = response?.results {
-                    arrayMovies.append(contentsOf: movies)
                     viewModelData?.append(contentsOf: movies.map({
                         return MovieViewModel(item: $0) }))
                 }
@@ -121,20 +130,23 @@ class MoviesViewController: UIViewController, Storyboarded {
             viewModelData = viewModelDataUnfiltred
         }
     }
+    
+    @IBAction func reload(_ sender: Any) {
+        if Reachability.isConnectedToNetwork() {
+            self.viewModelData = []
+            self.page = 1
+            fetchData(page: self.page)
+        } else {
+            showAlertInternet()
+        }
+    }
 
     @objc func bookmark(_ sender: UIButton) {
-
-        if let idM = viewModelData?[sender.tag].idMovie {
-            let result = arrayMovies.filter({ $0.idMovie == idM})
-
-            if !result.isEmpty {
-                if let res = result.first {
-                    DBManager.sharedInstance.checkAndChangeState(movie: res)
-                    let indexPath = IndexPath(row: sender.tag, section: 0)
-                    collectionViewMovies.reloadItems(at: [indexPath])
-                }
+    if let vMdata = viewModelData?[sender.tag] {
+                DBManager.sharedInstance.changeState(movie: vMdata)
+                let indexPath = IndexPath(row: sender.tag, section: 0)
+                collectionViewMovies.reloadItems(at: [indexPath])
             }
-        }
     }
 }
 
@@ -179,12 +191,7 @@ extension MoviesViewController: UICollectionViewDataSource {
 extension MoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let viewModel = viewModelData?[indexPath.row] {
-            let result = arrayMovies.filter({ $0.idMovie == viewModel.idMovie})
-            if !result.isEmpty {
-                if let res = result.first {
-                    coordinator?.createDetails(to: viewModel, movie: res)
-                }
-            }
+            coordinator?.createDetails(to: viewModel)
         }
     }
 

@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct Const {
+    static let mainColor = 0xF7CE5B
+}
+
 struct ConstUrl {
 
     struct Cells {
