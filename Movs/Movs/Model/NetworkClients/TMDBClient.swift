@@ -12,7 +12,7 @@ class TMDBClient {
     
     //Network Stack
     private static let tmdbBaseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=3d3a97b3f7d3075c078e242196e44533"
-    private static let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w500"
+    private static let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w185"
     
     private static let sessionConfiguration: URLSessionConfiguration = {
         let config = URLSessionConfiguration.default
@@ -52,11 +52,9 @@ class TMDBClient {
                         onComplete(movies)
                     } catch {
                         onError(.invalidJSON)
-                        print("Houve um erro ao fazer o decode dos dados.....", error.localizedDescription)
                     }
                 } else {
                     onError(.responseStatusCode(code: response.statusCode))
-                    print("Servidor não está respondendo status 200!")
                 }
             } else {
                 onError(.taskError(error: error!))
@@ -64,4 +62,5 @@ class TMDBClient {
         }
         dataTask.resume()
     }
+    
 }

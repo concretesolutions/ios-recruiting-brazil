@@ -12,7 +12,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellLabel: UILabel!
-    @IBOutlet weak var cellFavoriteButton: UIButton!
+    @IBOutlet weak var cellFavoriteImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -22,6 +22,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w500"
+    let posterImageCache = URLCache.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +35,9 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         navigationItem.hidesSearchBarWhenScrolling = false
         
         //URLCache
-        let memoryCapacity = 500 * 1024 * 1024
-        let diskCapacity = 500 * 1024 * 1024
-        let urlCache = URLCache(memoryCapacity: memoryCapacity, diskCapacity: diskCapacity, diskPath: "disk")
-        //URLCache.shared.cachedResponse(for: <#T##URLRequest#>)
+        
+        
+        
         
         
         TMDBClient.loadMovies(onComplete: { (movies) in
@@ -69,12 +69,16 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCollectionViewCell {
             let movie = moviesArray[indexPath.item]
-            
             let imageUrl = URL(string:tmdbBaseImageURL+movie.poster_path)!
-            let data = try? Data(contentsOf: imageUrl)
+            let imageRequest = URLRequest(url: imageUrl)
             
+            posterImageCache.cachedResponse(for: imageRequest)
+            let data = self.posterImageCache.cachedResponse(for: imageRequest)?.data
+            let image = UIImage(data: data!)
+            
+            cell.cellImage.image = image
             cell.cellLabel.text = movie.title
-            cell.cellImage.image = UIImage(data: data!)
+            
             
             
             return cell
@@ -82,12 +86,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         return UICollectionViewCell()
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = view.bounds.width
-//        let cellDimension = (width / 2) - 15
-//        
-//        return CGSize(width: cellDimension, height: cellDimension)
-//    }
+    
     
     /*
     // MARK: - Navigation
