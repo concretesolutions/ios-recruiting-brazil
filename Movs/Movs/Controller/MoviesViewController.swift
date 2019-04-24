@@ -23,6 +23,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w185"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,6 +64,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCollectionViewCell {
+            //let sv = UIViewController.displaySpinner(onView: self.view)
             let movie = moviesArray[indexPath.item]
             let imageUrl = URL(string:tmdbBaseImageURL+movie.poster_path)!
             let imageRequest = URLRequest(url: imageUrl)
@@ -72,8 +74,11 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 DispatchQueue.main.async {
                     cell.cellImage.image = image
                     cell.cellLabel.text = movie.title
+                    
                 }
+                //UIViewController.removeSpinner(spinner: sv)
             } else {
+                //UIViewController.displaySpinner(onView: self.view)
                 URLSession.shared.dataTask(with: imageRequest, completionHandler: { (data, response, error) in
                     if let data = data, let response = response, ((response as? HTTPURLResponse)?.statusCode ?? 500) < 300, let image = UIImage(data: data) {
                         let cachedData = CachedURLResponse(response: response, data: data)
@@ -82,13 +87,11 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
                         DispatchQueue.main.async {
                             cell.cellImage.image = image
                             cell.cellLabel.text = movie.title
+                            //UIViewController.removeSpinner(spinner: sv)
                         }
-                        
                     }
                 }).resume()
             }
-            
-            
             return cell
         }
         return UICollectionViewCell()

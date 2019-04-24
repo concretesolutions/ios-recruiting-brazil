@@ -27,8 +27,6 @@ class TMDBClient {
     private static let session = URLSession(configuration: sessionConfiguration)
     
     class func loadMovies(onComplete: @escaping (Movie) -> Void, onError: @escaping (ApiErrors) -> Void) {
-        //Adding Spinning to View
-        
         
         //Adding the url inside the URL object
         guard let url = URL(string: tmdbBaseUrl) else {
