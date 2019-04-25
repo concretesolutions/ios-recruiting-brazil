@@ -21,7 +21,8 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             }
         }
     }
-    let tmdbBaseImageURL = "https://image.tmdb.org/t/p/w185"
+    let tmdbBasePosterImageURL = "https://image.tmdb.org/t/p/w342"
+    var resultToPass: Results!
     
     
     override func viewDidLoad() {
@@ -66,7 +67,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCollectionViewCell {
             //let sv = UIViewController.displaySpinner(onView: self.view)
             let movie = moviesArray[indexPath.item]
-            let imageUrl = URL(string:tmdbBaseImageURL+movie.poster_path)!
+            let imageUrl = URL(string:tmdbBasePosterImageURL+movie.poster_path)!
             let imageRequest = URLRequest(url: imageUrl)
             let imageCache = URLCache.shared
             
@@ -98,7 +99,14 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        resultToPass = moviesArray[indexPath.item]
         performSegue(withIdentifier: "toMovieDetailsView", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailsVC = segue.destination as? DetailsViewController {
+            detailsVC.selectedMovie = resultToPass
+        }
     }
 
 }
