@@ -26,7 +26,7 @@ class TMDBClient {
     
     private static let session = URLSession(configuration: sessionConfiguration)
     
-    class func loadMovies(onComplete: @escaping (Movie) -> Void, onError: @escaping (ApiErrors) -> Void) {
+    class func loadMovies(onComplete: @escaping (Api) -> Void, onError: @escaping (ApiErrors) -> Void) {
         
         //Adding the url inside the URL object
         guard let url = URL(string: tmdbBaseUrl) else {
@@ -48,7 +48,7 @@ class TMDBClient {
                     //Tratando os dados recebidos do servidor
                     guard let data = data else {return}
                     do {
-                        let movies = try JSONDecoder().decode(Movie.self, from: data)
+                        let movies = try JSONDecoder().decode(Api.self, from: data)
                         onComplete(movies)
                     } catch {
                         onError(.invalidJSON)

@@ -14,7 +14,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var collectionView: UICollectionView!
     
     //Variables
-    var moviesArray = [Results]() {
+    var moviesArray = [Movie]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -22,7 +22,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     let tmdbBasePosterImageURL = "https://image.tmdb.org/t/p/w342"
-    var resultToPass: Results!
+    var resultToPass: Movie!
     
     
     override func viewDidLoad() {

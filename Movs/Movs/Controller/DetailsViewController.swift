@@ -19,7 +19,7 @@ class DetailsViewController: UIViewController {
     
     
     //Variables
-    var selectedMovie: Results!
+    var selectedMovie: Movie!
     let tmdbBaseBackdropImageURL = "https://image.tmdb.org/t/p/w780"
     
     
@@ -32,9 +32,16 @@ class DetailsViewController: UIViewController {
         movieDetailImage.image = UIImage(data: imageData!)
         movieDetailTitlelabel.text = "Title:  \(selectedMovie.title)"
         movieDetailYearLabel.text = "Release Date:  \(selectedMovie.release_date)"
+        genres()
         movieDetailGenreLabel.text = "Genre:  ..."
         movieDetailTextView.textContainer.lineFragmentPadding = 0
         movieDetailTextView.text = "Overview:  \(selectedMovie.overview)"
+    }
+    
+    func genres() {
+        for genre in selectedMovie.genre_ids {
+            print(genre)
+        }
     }
     
 

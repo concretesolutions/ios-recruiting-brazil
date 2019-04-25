@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Api: Codable {
     var page: Int
     var total_results: Int
     var total_pages: Int
-    var results: [Results]
+    var results: [Movie]
 }
 
-struct Results: Codable {
+struct Movie: Codable {
     var vote_count: Int
     var id: Int
     var video: Bool
@@ -31,6 +31,11 @@ struct Results: Codable {
     var release_date: String
 }
 
-struct GenreIds: Codable {
-    var genreIds: [Int]
+struct Genre: Codable {
+    var genreIds: [GenreData]
+}
+
+struct GenreData: Codable {
+    var id: Int
+    var name: String
 }
