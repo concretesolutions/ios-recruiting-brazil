@@ -63,34 +63,41 @@ class TMDBClient {
         dataTask.resume()
     }
     
-//    class func loadImages(url: URL?, onComplete: @escaping (Data) -> Void, onError: @escaping (ApiErrors) -> Void){
-//        guard let imageUrl = url else {
-//            onError(.url)
-//            return
-//        }
-//        let request = URLRequest(url: imageUrl)
-//        let imageCache = URLCache.shared
-//        imageCache.cachedResponse(for: request)
-//        let dataTask = session.dataTask(with: request) { (data, response, error) in
-//            if error == nil {
-//                guard let response = response as? HTTPURLResponse else {
-//                    onError(.noResponse)
-//                    return
-//                }
-//                if response.statusCode == 200 {
-//                    guard let imageData = data else {
-//                        onError(.noData)
-//                        return
-//                    }
-//                    onComplete(imageData)
-//                } else {
-//                    onError(.responseStatusCode(code: response.statusCode))
-//                }
-//            } else {
-//                onError(.taskError(error: error!))
-//            }
-//        }
-//        dataTask.resume()
-//    }
+    class func loadApi(url: String, onComplete: @escaping (Genre) -> Void, onError: @escaping (ApiErrors) -> Void) {
+        
+        //Adding the url inside the URL object
+        guard let url = URL(string: url) else {
+            onError(.url)
+            return
+        }
+        
+        //Configurando o Datatask da session
+        let dataTask = session.dataTask(with: url) { (data, response, error) in
+            
+            //Tratando erros de acesso à rede do app, se existir um erro, não é viável continuar o processo de requesição
+            if error == nil {
+                //Tratando o status code que o servidor vai retornar
+                guard let response = response as? HTTPURLResponse else {
+                    onError(.noResponse)
+                    return
+                }
+                if response.statusCode == 200 {
+                    //Tratando os dados recebidos do servidor
+                    guard let data = data else {return}
+                    do {
+                        let dataDecoded = try JSONDecoder().decode(Genre.self, from: data)
+                        onComplete(dataDecoded)
+                    } catch {
+                        onError(.invalidJSON)
+                    }
+                } else {
+                    onError(.responseStatusCode(code: response.statusCode))
+                }
+            } else {
+                onError(.taskError(error: error!))
+            }
+        }
+        dataTask.resume()
+    }
     
 }

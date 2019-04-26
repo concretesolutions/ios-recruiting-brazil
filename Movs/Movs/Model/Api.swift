@@ -32,7 +32,7 @@ struct Movie: Codable {
 }
 
 struct Genre: Codable {
-    var genreIds: [GenreData]
+    var genres: [GenreData]
 }
 
 struct GenreData: Codable {

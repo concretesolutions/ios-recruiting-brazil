@@ -21,6 +21,10 @@ class DetailsViewController: UIViewController {
     //Variables
     var selectedMovie: Movie!
     let tmdbBaseBackdropImageURL = "https://image.tmdb.org/t/p/w780"
+    let tmdbBaseGenreURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=3d3a97b3f7d3075c078e242196e44533&language=en-US"
+    var genresArray = [GenreData]()
+    var genre1 = ""
+    var genre2 = ""
     
     
     override func viewDidLoad() {
@@ -28,21 +32,24 @@ class DetailsViewController: UIViewController {
 
         let backdropImageURL = URL(string: tmdbBaseBackdropImageURL+selectedMovie.backdrop_path)!
         let imageData = try? Data(contentsOf: backdropImageURL)
+        TMDBClient.loadApi(url: tmdbBaseGenreURL, onComplete: { (genre) in
+            self.genresArray = genre.genres
+        }) { (error) in
+            print(error)
+        }
         
         movieDetailImage.image = UIImage(data: imageData!)
         movieDetailTitlelabel.text = "Title:  \(selectedMovie.title)"
         movieDetailYearLabel.text = "Release Date:  \(selectedMovie.release_date)"
         genres()
-        movieDetailGenreLabel.text = "Genre:  ..."
+        movieDetailGenreLabel.text = "Genre:  \(genre1), \(genre2)"
         movieDetailTextView.textContainer.lineFragmentPadding = 0
         movieDetailTextView.text = "Overview:  \(selectedMovie.overview)"
     }
     
     func genres() {
-        for genre in selectedMovie.genre_ids {
-            print(genre)
+        genre1 = "\(selectedMovie.genre_ids.count)" 
         }
-    }
     
 
     /*
