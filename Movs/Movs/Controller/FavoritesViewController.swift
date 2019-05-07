@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var favoriteTableView: UITableView!
     
+    var currentFavorite: FavoriteMovie?
+    var managedContext: NSManagedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +25,12 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

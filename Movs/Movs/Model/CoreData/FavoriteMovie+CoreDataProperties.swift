@@ -21,6 +21,5 @@ extension FavoriteMovie {
     @NSManaged public var release_date: String?
     @NSManaged public var overview: String?
     @NSManaged public var poster: NSData?
-    @NSManaged public var list: List?
 
 }

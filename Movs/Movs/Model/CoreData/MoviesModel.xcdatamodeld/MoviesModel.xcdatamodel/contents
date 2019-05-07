@@ -5,13 +5,8 @@
         <attribute name="poster" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="release_date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" syncable="YES"/>
-    </entity>
-    <entity name="List" representedClassName="List" syncable="YES">
-        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FavoriteMovie" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FavoriteMovie" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="List" positionX="-463.57421875" positionY="-15.01171875" width="128" height="58"/>
+        <element name="FavoriteMovie" positionX="-63" positionY="-18" width="128" height="103"/>
     </elements>
 </model>

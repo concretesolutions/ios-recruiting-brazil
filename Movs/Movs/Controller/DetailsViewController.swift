@@ -66,7 +66,7 @@ class DetailsViewController: UIViewController {
     }
     
     private func saveToCoreData() {
-        let favorite = FavoriteMovie(context: managedContext)
+        let favorite = FavoriteMovie()
         favorite.title = selectedMovie.title
         favorite.release_date = selectedMovie.release_date
         favorite.overview = selectedMovie.overview

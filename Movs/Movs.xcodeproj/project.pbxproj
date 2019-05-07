@@ -19,8 +19,6 @@
 		F43A5AEB22673D53009A00D6 /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A5AEA22673D53009A00D6 /* TMDBClient.swift */; };
 		F4401B8E227076B5006E24E4 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4401B8D227076B5006E24E4 /* DetailsViewController.swift */; };
 		F4B4F89D227E54A3007DB263 /* MoviesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4B4F89B227E54A3007DB263 /* MoviesModel.xcdatamodeld */; };
-		F4B4F8AA227E6F96007DB263 /* List+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4F8A6227E6F96007DB263 /* List+CoreDataClass.swift */; };
-		F4B4F8AB227E6F96007DB263 /* List+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4F8A7227E6F96007DB263 /* List+CoreDataProperties.swift */; };
 		F4B4F8AC227E6F96007DB263 /* FavoriteMovie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4F8A8227E6F96007DB263 /* FavoriteMovie+CoreDataClass.swift */; };
 		F4B4F8AD227E6F96007DB263 /* FavoriteMovie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4F8A9227E6F96007DB263 /* FavoriteMovie+CoreDataProperties.swift */; };
 		F4B4F8AF227F92AA007DB263 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4F8AE227F92AA007DB263 /* FavoritesViewController.swift */; };
@@ -65,8 +63,6 @@
 		F43A5AEA22673D53009A00D6 /* TMDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		F4401B8D227076B5006E24E4 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		F4B4F89C227E54A3007DB263 /* MoviesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoviesModel.xcdatamodel; sourceTree = "<group>"; };
-		F4B4F8A6227E6F96007DB263 /* List+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataClass.swift"; sourceTree = "<group>"; };
-		F4B4F8A7227E6F96007DB263 /* List+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F4B4F8A8227E6F96007DB263 /* FavoriteMovie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMovie+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F4B4F8A9227E6F96007DB263 /* FavoriteMovie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMovie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F4B4F8AE227F92AA007DB263 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -194,8 +190,6 @@
 		F4FE2C2E22785F1C00960F1D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				F4B4F8A6227E6F96007DB263 /* List+CoreDataClass.swift */,
-				F4B4F8A7227E6F96007DB263 /* List+CoreDataProperties.swift */,
 				F4B4F8A8227E6F96007DB263 /* FavoriteMovie+CoreDataClass.swift */,
 				F4B4F8A9227E6F96007DB263 /* FavoriteMovie+CoreDataProperties.swift */,
 				F4FE2C2F22785F4400960F1D /* CoreDataStack.swift */,
@@ -335,14 +329,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4B4F8AB227E6F96007DB263 /* List+CoreDataProperties.swift in Sources */,
 				F43A5AEB22673D53009A00D6 /* TMDBClient.swift in Sources */,
 				F4401B8E227076B5006E24E4 /* DetailsViewController.swift in Sources */,
 				F4DC8106226BAAD90063FD15 /* ApiErrors.swift in Sources */,
 				F4B4F8AC227E6F96007DB263 /* FavoriteMovie+CoreDataClass.swift in Sources */,
 				F4B4F89D227E54A3007DB263 /* MoviesModel.xcdatamodeld in Sources */,
 				F40C5BE52266B4B400BCBD6B /* AppDelegate.swift in Sources */,
-				F4B4F8AA227E6F96007DB263 /* List+CoreDataClass.swift in Sources */,
 				F4FE2C3022785F4400960F1D /* CoreDataStack.swift in Sources */,
 				F422EF2B226A09F10092775A /* MovieCollectionViewCell.swift in Sources */,
 				F4B4F8B1227F94C7007DB263 /* FavoritesTableViewCell.swift in Sources */,
