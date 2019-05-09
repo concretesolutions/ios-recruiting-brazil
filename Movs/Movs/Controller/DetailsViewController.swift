@@ -19,10 +19,13 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var movieDetailTextView: UITextView!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    //Core Data Variables
+    var managedContext: NSManagedObjectContext!
+    var stackContext = CoreDataStack(modelName: "MoviesModel").managedContext
+    var favoriteMovieToSave: FavoriteMovie?
     
     
     //Variables
-    var managedContext: NSManagedObjectContext!
     var selectedMovie: Movie!
     let tmdbBaseBackdropImageURL = "https://image.tmdb.org/t/p/w780"
     let tmdbBaseGenreURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=3d3a97b3f7d3075c078e242196e44533&language=en-US"
@@ -49,6 +52,20 @@ class DetailsViewController: UIViewController {
         movieDetailGenreLabel.text = "Genre:  \(genre1), \(genre2)"
         movieDetailTextView.textContainer.lineFragmentPadding = 0
         movieDetailTextView.text = "Overview:  \(selectedMovie.overview)"
+        
+        //Core Data
+        let movieTitle = selectedMovie.title
+        let movieFetch: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
+        movieFetch.predicate = NSPredicate(format: "%K==%@", #keyPath(FavoriteMovie.title), movieTitle)
+        
+        do {
+            let results = try stackContext.fetch(movieFetch)
+            if results.count > 0 {
+                favoriteButton.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
+            }
+        } catch let error as NSError{
+            print("Fetch error:\(error) description:\(error.userInfo)")
+        }
     }
     
     func genres() {
@@ -58,30 +75,22 @@ class DetailsViewController: UIViewController {
     @IBAction func addToFavorite(_ sender: UIButton) {
         
         if favoriteButton.imageView?.image == UIImage(named: "favorite_empty_icon.png") {
-            favoriteButton.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
             saveToCoreData()
-        } else {
-            favoriteButton.setImage(UIImage(named: "favorite_empty_icon.png"), for: .normal)
+            favoriteButton.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
         }
     }
     
     private func saveToCoreData() {
-        let favorite = FavoriteMovie()
-        favorite.title = selectedMovie.title
-        favorite.release_date = selectedMovie.release_date
-        favorite.overview = selectedMovie.overview
-        
         do {
-            try managedContext.save()
+            favoriteMovieToSave = FavoriteMovie(context: stackContext)
+            favoriteMovieToSave?.title = selectedMovie.title
+            favoriteMovieToSave?.release_date = selectedMovie.release_date
+            favoriteMovieToSave?.overview = selectedMovie.overview
+            try stackContext.save()
         } catch let error as NSError {
-            print("Save error: \(error)")
+            print("Erro ao salvar: \(error) description: \(error.userInfo)")
         }
     }
-    
-    private func deleteFromCoreData() {
-        
-    }
-
     /*
     // MARK: - Navigation
 

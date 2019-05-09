@@ -13,13 +13,13 @@ class CoreDataStack {
     
     private let modelName: String
     
-    lazy var managedContext: NSManagedObjectContext = {
-        return self.storeContainer.viewContext
-    }()
-    
     init(modelName: String) {
         self.modelName = modelName
     }
+    
+    lazy var managedContext: NSManagedObjectContext = {
+        return self.storeContainer.viewContext
+    }()
     
     private lazy var storeContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: self.modelName)
@@ -39,5 +39,7 @@ class CoreDataStack {
         } catch let error as NSError {
             print("Unresolved error \(error), \(error.userInfo)")
         }
+        
+        managedContext.persistentStoreCoordinator?.persistentStores
     }
 }

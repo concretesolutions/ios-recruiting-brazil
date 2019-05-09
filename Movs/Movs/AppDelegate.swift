@@ -13,19 +13,27 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     //CoreData
-    lazy var coreDataStack = CoreDataStack(modelName: "MoviesModel")
+    var coreDataStack = CoreDataStack(modelName: "MoviesModel")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //CoreData
-        guard let navController = window?.rootViewController as? UINavigationController, let viewController = navController.topViewController as? DetailsViewController else {
+        
+        //CoreData on DetailsViewController
+        guard let detailNavController = window?.rootViewController as? UINavigationController, let detailViewController = detailNavController.topViewController as? DetailsViewController else {
             return true
         }
         
-        //CoreData
-        viewController.managedContext = coreDataStack.managedContext
+        //CoreData on FavoriteViewController
+        guard let favNavController = window?.rootViewController as? UINavigationController, let favoriteViewController = favNavController.topViewController as? FavoritesViewController else {
+            return true
+        }
+        
+        //CoreData to ViewControllers
+        detailViewController.managedContext = coreDataStack.managedContext
+        //favoriteViewController.managedContext = coreDataStack.managedContext
         return true
     }
 

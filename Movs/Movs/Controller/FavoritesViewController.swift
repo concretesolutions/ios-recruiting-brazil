@@ -11,29 +11,55 @@ import CoreData
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    //Outlets
     @IBOutlet weak var favoriteTableView: UITableView!
     
-    var currentFavorite: FavoriteMovie?
-    var managedContext: NSManagedObjectContext!
+    
+    //variables
+    var stackContext = CoreDataStack(modelName: "MoviesModel").managedContext
+    var movieFromCoreData = [FavoriteMovie]()
+    var rows: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
+        favoriteTableView.reloadData()
         
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
         
+        let movieFetch: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
         
+        do {
+            let results = try stackContext.fetch(movieFetch)
+            movieFromCoreData = results
+        } catch let error as NSError{
+            print("Fetch error:\(error) description:\(error.userInfo)")
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        favoriteTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return movieFromCoreData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? FavoritesTableViewCell {
+            let movie = movieFromCoreData[indexPath.row]
+            
+            cell.favoriteCellTitle.text = movie.title
+            cell.favoriteCellReleaseDate.text = movie.release_date
+            cell.favoriteCellOverview.text = movie.overview
+            
+            return cell
+        }
         return UITableViewCell()
     }
     
