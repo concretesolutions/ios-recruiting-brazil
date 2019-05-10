@@ -28,6 +28,7 @@ class DetailsViewController: UIViewController {
     //Variables
     var selectedMovie: Movie!
     let tmdbBaseBackdropImageURL = "https://image.tmdb.org/t/p/w780"
+    let tmdbBasePosterImageURL = "https://image.tmdb.org/t/p/w342"
     let tmdbBaseGenreURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=3d3a97b3f7d3075c078e242196e44533&language=en-US"
     var genresArray = [GenreData]()
     var genre1 = ""
@@ -86,7 +87,15 @@ class DetailsViewController: UIViewController {
             favoriteMovieToSave?.title = selectedMovie.title
             favoriteMovieToSave?.release_date = selectedMovie.release_date
             favoriteMovieToSave?.overview = selectedMovie.overview
+            
+            let imageUrl = URL(string:tmdbBasePosterImageURL+selectedMovie.poster_path)!
+            let imageRequest = URLRequest(url: imageUrl)
+            let imageCache = URLCache.shared
+            let data = imageCache.cachedResponse(for: imageRequest)?.data
+            let image = UIImage(data: data!)
+            favoriteMovieToSave?.poster = image
             try stackContext.save()
+            
         } catch let error as NSError {
             print("Erro ao salvar: \(error) description: \(error.userInfo)")
         }

@@ -26,7 +26,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
-        favoriteTableView.reloadData()
         
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -41,11 +40,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        favoriteTableView.reloadData()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movieFromCoreData.count
     }
@@ -57,6 +51,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.favoriteCellTitle.text = movie.title
             cell.favoriteCellReleaseDate.text = movie.release_date
             cell.favoriteCellOverview.text = movie.overview
+            cell.favoriteCellImage.image = movie.poster as? UIImage
             
             return cell
         }
