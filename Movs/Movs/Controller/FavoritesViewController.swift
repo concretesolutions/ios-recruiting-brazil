@@ -9,11 +9,10 @@
 import UIKit
 import CoreData
 
-class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
 
     //Outlets
     @IBOutlet weak var favoriteTableView: UITableView!
-    
     
     //variables
     var stackContext = CoreDataStack(modelName: "MoviesModel").managedContext
@@ -22,21 +21,16 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
         
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
-        
-        let movieFetch: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
-        
-        do {
-            let results = try stackContext.fetch(movieFetch)
-            moviesFromCoreData = results
-        } catch let error as NSError{
-            print("Fetch error:\(error) description:\(error.userInfo)")
-        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchAndReloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,8 +39,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? FavoritesTableViewCell {
-            let movie = moviesFromCoreData[indexPath.row]
             
+            let movie = moviesFromCoreData[indexPath.row]
             cell.favoriteCellTitle.text = movie.title
             cell.favoriteCellReleaseDate.text = movie.release_date
             cell.favoriteCellOverview.text = movie.overview
@@ -75,8 +69,15 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    
-    
-    
-
+    private func fetchAndReloadData() {
+        let movieFetch: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
+        
+        do {
+            let results = try stackContext.fetch(movieFetch)
+            moviesFromCoreData = results
+            self.favoriteTableView.reloadData()
+        } catch let error as NSError{
+            print("Fetch error:\(error) description:\(error.userInfo)")
+        }
+    }
 }
