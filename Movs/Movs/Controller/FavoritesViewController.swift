@@ -17,8 +17,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //variables
     var stackContext = CoreDataStack(modelName: "MoviesModel").managedContext
-    var movieFromCoreData = [FavoriteMovie]()
-    var rows: Int?
+    var moviesFromCoreData = [FavoriteMovie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,19 +33,19 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         
         do {
             let results = try stackContext.fetch(movieFetch)
-            movieFromCoreData = results
+            moviesFromCoreData = results
         } catch let error as NSError{
             print("Fetch error:\(error) description:\(error.userInfo)")
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieFromCoreData.count
+        return moviesFromCoreData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? FavoritesTableViewCell {
-            let movie = movieFromCoreData[indexPath.row]
+            let movie = moviesFromCoreData[indexPath.row]
             
             cell.favoriteCellTitle.text = movie.title
             cell.favoriteCellReleaseDate.text = movie.release_date
@@ -58,15 +57,26 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         return UITableViewCell()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfavorite"
     }
-    */
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let movie = moviesFromCoreData[indexPath.row]
+        if editingStyle == .delete {
+            moviesFromCoreData.remove(at: indexPath.row)
+        }
+        stackContext.delete(movie)
+        do {
+            try stackContext.save()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } catch let error as NSError {
+            print("Saving error: \(error), description: \(error.userInfo)")
+        }
+    }
+    
+    
+    
+    
 
 }
