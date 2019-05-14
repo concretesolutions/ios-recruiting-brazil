@@ -31,26 +31,17 @@ class DetailsViewController: UIViewController {
     let tmdbBasePosterImageURL = "https://image.tmdb.org/t/p/w342"
     let tmdbBaseGenreURL = "https://api.themoviedb.org/3/genre/movie/list?api_key=3d3a97b3f7d3075c078e242196e44533&language=en-US"
     var genresArray = [GenreData]()
-    var genre1 = ""
-    var genre2 = ""
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let backdropImageURL = URL(string: tmdbBaseBackdropImageURL+selectedMovie.backdrop_path)!
         let imageData = try? Data(contentsOf: backdropImageURL)
-        TMDBClient.loadApi(url: tmdbBaseGenreURL, onComplete: { (genre) in
-            self.genresArray = genre.genres
-        }) { (error) in
-            print(error)
-        }
         
         movieDetailImage.image = UIImage(data: imageData!)
         movieDetailTitlelabel.text = "Title:  \(selectedMovie.title)"
         movieDetailYearLabel.text = "Release Date:  \(selectedMovie.release_date)"
         genres()
-        movieDetailGenreLabel.text = "Genre:  \(genre1), \(genre2)"
         movieDetailTextView.textContainer.lineFragmentPadding = 0
         movieDetailTextView.text = "Overview:  \(selectedMovie.overview)"
         
@@ -70,8 +61,37 @@ class DetailsViewController: UIViewController {
     }
     
     func genres() {
-        genre1 = "\(selectedMovie.genre_ids.count)" 
+        var names = [String]()
+        let url = URL(string: tmdbBaseGenreURL)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: url!) { (data, response, error) in
+            guard let jsonData = data else {
+                print("Error, no data")
+                return
+            }
+            do {
+                let json = try JSONDecoder().decode(Genre.self, from: jsonData)
+                self.genresArray = json.genres
+                for genre in self.genresArray {
+                    for genreId in self.selectedMovie.genre_ids {
+                        if genreId == genre.id {
+                            names.append(genre.name)
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    if names.indices.contains(1) {
+                        self.movieDetailGenreLabel.text = "Genres: \(names[0]), \(names[1])"
+                    } else {
+                        self.movieDetailGenreLabel.text = "Genres: \(names[0])"
+                    }
+                }
+            } catch {
+                print(error)
+            }
         }
+        dataTask.resume()
+    }
     
     @IBAction func addToFavorite(_ sender: UIButton) {
         

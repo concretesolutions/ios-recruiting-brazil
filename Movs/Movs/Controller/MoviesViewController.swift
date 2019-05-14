@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -34,8 +35,6 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Search Bar on Navigation Controller
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
-        
-        
         
         TMDBClient.loadMovies(onComplete: { (movies) in
             self.moviesArray = movies.results
@@ -70,13 +69,27 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             let imageUrl = URL(string:tmdbBasePosterImageURL+movie.poster_path)!
             let imageRequest = URLRequest(url: imageUrl)
             let imageCache = URLCache.shared
+            //CoreData
+//            let stackContext = CoreDataStack(modelName: "MoviesModel").managedContext
+//            let movieFetch: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
+//            
+//            do {
+//                let results = try stackContext.fetch(movieFetch)
+//                for movieOnResults in results {
+//                    if movieOnResults.title == movie.title {
+//                        cell.cellFavoriteImage.image = UIImage(named: "favorite_full_icon.png")
+//                    }
+//                }
+//            } catch {
+//                
+//            }
             
             if let data = imageCache.cachedResponse(for: imageRequest)?.data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
                     cell.cellImage.image = image
                     cell.cellLabel.text = movie.title
-                    
                 }
+                    
                 //UIViewController.removeSpinner(spinner: sv)
             } else {
                 //UIViewController.displaySpinner(onView: self.view)
@@ -108,6 +121,22 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
             detailsVC.selectedMovie = resultToPass
         }
     }
+    
+//    private func fetchAndMatchCoreData() {
+//        //Core Data
+//        var stackContext = CoreDataStack(modelName: "MoviesModel").managedContext
+//        let movieFetch: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
+//        //movieFetch.predicate = NSPredicate(format: "%K==%@", #keyPath(FavoriteMovie.title), movieTitle)
+//
+//        do {
+//            let results = try stackContext.fetch(movieFetch)
+//            if results.count > 0 {
+//                favoriteButton.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
+//            }
+//        } catch let error as NSError{
+//            print("Fetch error:\(error) description:\(error.userInfo)")
+//        }
+//    }
 
 }
 
