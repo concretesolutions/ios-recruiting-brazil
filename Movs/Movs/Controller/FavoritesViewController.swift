@@ -42,7 +42,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             
             let movie = moviesFromCoreData[indexPath.row]
             cell.favoriteCellTitle.text = movie.title
-            cell.favoriteCellReleaseDate.text = movie.release_date
+            cell.favoriteCellReleaseDate.text = movie.release_date?.maxLength(length: 4)
             cell.favoriteCellOverview.text = movie.overview
             cell.favoriteCellImage.image = movie.poster as? UIImage
             
@@ -80,4 +80,19 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             print("Fetch error:\(error) description:\(error.userInfo)")
         }
     }
+}
+
+extension String {
+    func maxLength(length: Int) -> String {
+        var str = self
+        let nsString = str as NSString
+        if nsString.length >= length {
+            str = nsString.substring(with:
+                NSRange(
+                    location: 0,
+                    length: nsString.length > length ? length : nsString.length)
+            )
+        }
+        return  str
+}
 }
