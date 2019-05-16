@@ -12,8 +12,6 @@ class TMDBClient {
     
     //Network Stack
     private static let tmdbBaseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=3d3a97b3f7d3075c078e242196e44533"
-    
-    
     private static let sessionConfiguration: URLSessionConfiguration = {
         let config = URLSessionConfiguration.default
         config.allowsCellularAccess = true
@@ -27,6 +25,7 @@ class TMDBClient {
     private static let session = URLSession(configuration: sessionConfiguration)
     
     class func loadMovies(onComplete: @escaping (Api) -> Void, onError: @escaping (ApiErrors) -> Void) {
+        
         
         //Adding the url inside the URL object
         guard let url = URL(string: tmdbBaseUrl) else {

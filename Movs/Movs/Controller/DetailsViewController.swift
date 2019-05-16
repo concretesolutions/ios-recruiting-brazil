@@ -20,10 +20,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     
     //Core Data Variables
-    var managedContext: NSManagedObjectContext!
     var stackContext = CoreDataStack(modelName: "MoviesModel").managedContext
     var favoriteMovieToSave: FavoriteMovie?
-    
     
     //Variables
     var selectedMovie: Movie!
@@ -38,14 +36,13 @@ class DetailsViewController: UIViewController {
         let backdropImageURL = URL(string: tmdbBaseBackdropImageURL+selectedMovie.backdrop_path)!
         let imageData = try? Data(contentsOf: backdropImageURL)
         
+        genres()
         movieDetailImage.image = UIImage(data: imageData!)
         movieDetailTitlelabel.text = "Title:  \(selectedMovie.title)"
         movieDetailYearLabel.text = "Release Date:  \(selectedMovie.release_date)"
-        genres()
         movieDetailTextView.textContainer.lineFragmentPadding = 0
         movieDetailTextView.text = "Overview:  \(selectedMovie.overview)"
         
-        //Core Data
         let movieTitle = selectedMovie.title
         let movieFetch: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
         movieFetch.predicate = NSPredicate(format: "%K==%@", #keyPath(FavoriteMovie.title), movieTitle)
@@ -60,7 +57,7 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    func genres() {
+    private func genres() {
         var names = [String]()
         let url = URL(string: tmdbBaseGenreURL)
         let session = URLSession.shared
