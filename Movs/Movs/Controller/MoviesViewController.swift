@@ -105,7 +105,6 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let detailsVC = segue.destination as? DetailsViewController {
             detailsVC.selectedMovie = resultToPass
         }
@@ -134,3 +133,6 @@ extension UIViewController {
         }
     }
 }
+
+////UIViewController.displaySpinner(onView: self.view)
+//UIViewController.removeSpinner(spinner: sv)

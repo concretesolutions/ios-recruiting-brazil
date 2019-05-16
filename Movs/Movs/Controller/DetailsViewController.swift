@@ -32,7 +32,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let backdropImageURL = URL(string: tmdbBaseBackdropImageURL+selectedMovie.backdrop_path)!
         let imageData = try? Data(contentsOf: backdropImageURL)
         
@@ -55,6 +55,8 @@ class DetailsViewController: UIViewController {
         } catch let error as NSError{
             print("Fetch error:\(error) description:\(error.userInfo)")
         }
+        
+        
     }
     
     private func genres() {
