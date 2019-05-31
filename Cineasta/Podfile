@@ -1,0 +1,17 @@
+platform :ios, '12.0'
+
+use_frameworks!
+
+def shared_pods
+
+    pod 'Alamofire'
+    pod 'Kingfisher'
+    pod 'SwiftLint'
+    
+end
+
+target 'Cineasta' do
+    
+    shared_pods
+
+end

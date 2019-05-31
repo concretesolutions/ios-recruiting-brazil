@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7405B5519662B840A9903FAA /* Pods_Cineasta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA0D9CF194FAC0BAAEADF81 /* Pods_Cineasta.framework */; };
+		EDA5097E22A1C68B00C4FBEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA5097D22A1C68B00C4FBEF /* AppDelegate.swift */; };
+		EDA5098022A1C68B00C4FBEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA5097F22A1C68B00C4FBEF /* ViewController.swift */; };
+		EDA5098322A1C68B00C4FBEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA5098122A1C68B00C4FBEF /* Main.storyboard */; };
+		EDA5098622A1C68B00C4FBEF /* Cineasta.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EDA5098422A1C68B00C4FBEF /* Cineasta.xcdatamodeld */; };
+		EDA5098822A1C68D00C4FBEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDA5098722A1C68D00C4FBEF /* Assets.xcassets */; };
+		EDA5098B22A1C68D00C4FBEF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA5098922A1C68D00C4FBEF /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		32233CE61C4A2201C799DFEC /* Pods-Cineasta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cineasta.release.xcconfig"; path = "Target Support Files/Pods-Cineasta/Pods-Cineasta.release.xcconfig"; sourceTree = "<group>"; };
+		5EA0D9CF194FAC0BAAEADF81 /* Pods_Cineasta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cineasta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97FDBFF29C58DF67C1C57F2F /* Pods-Cineasta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cineasta.debug.xcconfig"; path = "Target Support Files/Pods-Cineasta/Pods-Cineasta.debug.xcconfig"; sourceTree = "<group>"; };
+		EDA5097A22A1C68B00C4FBEF /* Cineasta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cineasta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDA5097D22A1C68B00C4FBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EDA5097F22A1C68B00C4FBEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EDA5098222A1C68B00C4FBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EDA5098522A1C68B00C4FBEF /* Cineasta.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cineasta.xcdatamodel; sourceTree = "<group>"; };
+		EDA5098722A1C68D00C4FBEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EDA5098A22A1C68D00C4FBEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EDA5098C22A1C68D00C4FBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EDA5097722A1C68B00C4FBEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7405B5519662B840A9903FAA /* Pods_Cineasta.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D3327A45D928333C06C6D5FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5EA0D9CF194FAC0BAAEADF81 /* Pods_Cineasta.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EDA5097122A1C68B00C4FBEF = {
+			isa = PBXGroup;
+			children = (
+				EDA5097C22A1C68B00C4FBEF /* Cineasta */,
+				EDA5097B22A1C68B00C4FBEF /* Products */,
+				F74483266D9F2C12D339A8A5 /* Pods */,
+				D3327A45D928333C06C6D5FF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EDA5097B22A1C68B00C4FBEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EDA5097A22A1C68B00C4FBEF /* Cineasta.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EDA5097C22A1C68B00C4FBEF /* Cineasta */ = {
+			isa = PBXGroup;
+			children = (
+				EDDAD41422A1DFE400F042E1 /* AppStart */,
+				EDDAD41522A1DFEC00F042E1 /* CoreData */,
+				EDDAD41622A1DFF400F042E1 /* Helper */,
+				EDDAD41722A1DFFD00F042E1 /* Model */,
+				EDDAD41A22A1E02B00F042E1 /* Resource */,
+				EDDAD41822A1E00400F042E1 /* Scene */,
+				EDDAD41922A1E01B00F042E1 /* Service */,
+				EDA5098C22A1C68D00C4FBEF /* Info.plist */,
+			);
+			path = Cineasta;
+			sourceTree = "<group>";
+		};
+		EDDAD41422A1DFE400F042E1 /* AppStart */ = {
+			isa = PBXGroup;
+			children = (
+				EDA5098922A1C68D00C4FBEF /* LaunchScreen.storyboard */,
+				EDA5097D22A1C68B00C4FBEF /* AppDelegate.swift */,
+			);
+			path = AppStart;
+			sourceTree = "<group>";
+		};
+		EDDAD41522A1DFEC00F042E1 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				EDA5098422A1C68B00C4FBEF /* Cineasta.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		EDDAD41622A1DFF400F042E1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		EDDAD41722A1DFFD00F042E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EDDAD41822A1E00400F042E1 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				EDA5098122A1C68B00C4FBEF /* Main.storyboard */,
+				EDA5097F22A1C68B00C4FBEF /* ViewController.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		EDDAD41922A1E01B00F042E1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		EDDAD41A22A1E02B00F042E1 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				EDA5098722A1C68D00C4FBEF /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		F74483266D9F2C12D339A8A5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				97FDBFF29C58DF67C1C57F2F /* Pods-Cineasta.debug.xcconfig */,
+				32233CE61C4A2201C799DFEC /* Pods-Cineasta.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EDA5097922A1C68B00C4FBEF /* Cineasta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDA5098F22A1C68D00C4FBEF /* Build configuration list for PBXNativeTarget "Cineasta" */;
+			buildPhases = (
+				EDE59806285AEDE4B1FE8CA3 /* [CP] Check Pods Manifest.lock */,
+				EDA5097622A1C68B00C4FBEF /* Sources */,
+				EDA5097722A1C68B00C4FBEF /* Frameworks */,
+				EDA5097822A1C68B00C4FBEF /* Resources */,
+				20DA71660759349B1FA29110 /* [CP] Embed Pods Frameworks */,
+				EDA5099222A1CA0F00C4FBEF /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cineasta;
+			productName = Cineasta;
+			productReference = EDA5097A22A1C68B00C4FBEF /* Cineasta.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EDA5097222A1C68B00C4FBEF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = TCS;
+				TargetAttributes = {
+					EDA5097922A1C68B00C4FBEF = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = EDA5097522A1C68B00C4FBEF /* Build configuration list for PBXProject "Cineasta" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EDA5097122A1C68B00C4FBEF;
+			productRefGroup = EDA5097B22A1C68B00C4FBEF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EDA5097922A1C68B00C4FBEF /* Cineasta */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EDA5097822A1C68B00C4FBEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDA5098B22A1C68D00C4FBEF /* LaunchScreen.storyboard in Resources */,
+				EDA5098822A1C68D00C4FBEF /* Assets.xcassets in Resources */,
+				EDA5098322A1C68B00C4FBEF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20DA71660759349B1FA29110 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cineasta/Pods-Cineasta-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cineasta/Pods-Cineasta-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDA5099222A1CA0F00C4FBEF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		EDE59806285AEDE4B1FE8CA3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cineasta-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EDA5097622A1C68B00C4FBEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDA5098022A1C68B00C4FBEF /* ViewController.swift in Sources */,
+				EDA5098622A1C68B00C4FBEF /* Cineasta.xcdatamodeld in Sources */,
+				EDA5097E22A1C68B00C4FBEF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EDA5098122A1C68B00C4FBEF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDA5098222A1C68B00C4FBEF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EDA5098922A1C68D00C4FBEF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDA5098A22A1C68D00C4FBEF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EDA5098D22A1C68D00C4FBEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EDA5098E22A1C68D00C4FBEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EDA5099022A1C68D00C4FBEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97FDBFF29C58DF67C1C57F2F /* Pods-Cineasta.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 34J349V9U7;
+				INFOPLIST_FILE = Cineasta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.cineasta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		EDA5099122A1C68D00C4FBEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32233CE61C4A2201C799DFEC /* Pods-Cineasta.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 34J349V9U7;
+				INFOPLIST_FILE = Cineasta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.cineasta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EDA5097522A1C68B00C4FBEF /* Build configuration list for PBXProject "Cineasta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDA5098D22A1C68D00C4FBEF /* Debug */,
+				EDA5098E22A1C68D00C4FBEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EDA5098F22A1C68D00C4FBEF /* Build configuration list for PBXNativeTarget "Cineasta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDA5099022A1C68D00C4FBEF /* Debug */,
+				EDA5099122A1C68D00C4FBEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EDA5098422A1C68B00C4FBEF /* Cineasta.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EDA5098522A1C68B00C4FBEF /* Cineasta.xcdatamodel */,
+			);
+			currentVersion = EDA5098522A1C68B00C4FBEF /* Cineasta.xcdatamodel */;
+			path = Cineasta.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = EDA5097222A1C68B00C4FBEF /* Project object */;
+}
