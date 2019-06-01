@@ -8,13 +8,60 @@
 
 /* Begin PBXBuildFile section */
 		025C304422A2B017000160DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C304322A2B017000160DE /* AppDelegate.swift */; };
-		025C304622A2B017000160DE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C304522A2B017000160DE /* TabBarViewController.swift */; };
 		025C304922A2B017000160DE /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C304722A2B017000160DE /* TabBar.storyboard */; };
 		025C304C22A2B017000160DE /* GPSMovies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 025C304A22A2B017000160DE /* GPSMovies.xcdatamodeld */; };
 		025C304E22A2B018000160DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 025C304D22A2B018000160DE /* Assets.xcassets */; };
 		025C305122A2B018000160DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C304F22A2B018000160DE /* LaunchScreen.storyboard */; };
 		025C305C22A2B018000160DE /* GPSMoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C305B22A2B018000160DE /* GPSMoviesTests.swift */; };
 		025C306722A2B019000160DE /* GPSMoviesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C306622A2B019000160DE /* GPSMoviesUITests.swift */; };
+		025C308822A2B95B000160DE /* ExtensionUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308722A2B95A000160DE /* ExtensionUiView.swift */; };
+		025C308922A2B95B000160DE /* ExtensionUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308722A2B95A000160DE /* ExtensionUiView.swift */; };
+		025C308A22A2B95B000160DE /* ExtensionUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308722A2B95A000160DE /* ExtensionUiView.swift */; };
+		025C308F22A2B9B9000160DE /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308B22A2B9B8000160DE /* MessageHelper.swift */; };
+		025C309022A2B9B9000160DE /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308B22A2B9B8000160DE /* MessageHelper.swift */; };
+		025C309122A2B9B9000160DE /* MessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308B22A2B9B8000160DE /* MessageHelper.swift */; };
+		025C309222A2B9B9000160DE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308C22A2B9B8000160DE /* Alert.swift */; };
+		025C309322A2B9B9000160DE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308C22A2B9B8000160DE /* Alert.swift */; };
+		025C309422A2B9B9000160DE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308C22A2B9B8000160DE /* Alert.swift */; };
+		025C309522A2B9B9000160DE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308D22A2B9B8000160DE /* Reachability.swift */; };
+		025C309622A2B9B9000160DE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308D22A2B9B8000160DE /* Reachability.swift */; };
+		025C309722A2B9B9000160DE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308D22A2B9B8000160DE /* Reachability.swift */; };
+		025C309822A2B9B9000160DE /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308E22A2B9B9000160DE /* ErrorService.swift */; };
+		025C309922A2B9B9000160DE /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308E22A2B9B9000160DE /* ErrorService.swift */; };
+		025C309A22A2B9B9000160DE /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C308E22A2B9B9000160DE /* ErrorService.swift */; };
+		025C309C22A2BA4D000160DE /* Messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025C309B22A2BA4D000160DE /* Messages.plist */; };
+		025C309D22A2BA4D000160DE /* Messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025C309B22A2BA4D000160DE /* Messages.plist */; };
+		025C309E22A2BA4D000160DE /* Messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025C309B22A2BA4D000160DE /* Messages.plist */; };
+		025C30B322A2BF55000160DE /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30B122A2BF55000160DE /* TabBarPresenter.swift */; };
+		025C30B422A2BF55000160DE /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30B122A2BF55000160DE /* TabBarPresenter.swift */; };
+		025C30B522A2BF55000160DE /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30B122A2BF55000160DE /* TabBarPresenter.swift */; };
+		025C30B622A2BF55000160DE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30B222A2BF55000160DE /* TabBarViewController.swift */; };
+		025C30B722A2BF55000160DE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30B222A2BF55000160DE /* TabBarViewController.swift */; };
+		025C30B822A2BF55000160DE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30B222A2BF55000160DE /* TabBarViewController.swift */; };
+		025C30BF22A2C1D4000160DE /* MovieListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30BD22A2C1D4000160DE /* MovieListPresenter.swift */; };
+		025C30C022A2C1D4000160DE /* MovieListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30BD22A2C1D4000160DE /* MovieListPresenter.swift */; };
+		025C30C122A2C1D4000160DE /* MovieListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30BD22A2C1D4000160DE /* MovieListPresenter.swift */; };
+		025C30C222A2C1D4000160DE /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30BE22A2C1D4000160DE /* MovieListViewController.swift */; };
+		025C30C322A2C1D4000160DE /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30BE22A2C1D4000160DE /* MovieListViewController.swift */; };
+		025C30C422A2C1D4000160DE /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30BE22A2C1D4000160DE /* MovieListViewController.swift */; };
+		025C30C622A2C210000160DE /* Movie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C30C522A2C210000160DE /* Movie.storyboard */; };
+		025C30C722A2C210000160DE /* Movie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C30C522A2C210000160DE /* Movie.storyboard */; };
+		025C30C822A2C210000160DE /* Movie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C30C522A2C210000160DE /* Movie.storyboard */; };
+		025C30CD22A2C276000160DE /* MovieDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30CB22A2C276000160DE /* MovieDetailPresenter.swift */; };
+		025C30CE22A2C276000160DE /* MovieDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30CB22A2C276000160DE /* MovieDetailPresenter.swift */; };
+		025C30CF22A2C276000160DE /* MovieDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30CB22A2C276000160DE /* MovieDetailPresenter.swift */; };
+		025C30D022A2C276000160DE /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30CC22A2C276000160DE /* MovieDetailViewController.swift */; };
+		025C30D122A2C276000160DE /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30CC22A2C276000160DE /* MovieDetailViewController.swift */; };
+		025C30D222A2C276000160DE /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30CC22A2C276000160DE /* MovieDetailViewController.swift */; };
+		025C30D622A2C2EB000160DE /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C30D522A2C2EB000160DE /* Favorite.storyboard */; };
+		025C30D722A2C2EB000160DE /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C30D522A2C2EB000160DE /* Favorite.storyboard */; };
+		025C30D822A2C2EB000160DE /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C30D522A2C2EB000160DE /* Favorite.storyboard */; };
+		025C30DB22A2C306000160DE /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30D922A2C305000160DE /* FavoritePresenter.swift */; };
+		025C30DC22A2C306000160DE /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30D922A2C305000160DE /* FavoritePresenter.swift */; };
+		025C30DD22A2C306000160DE /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30D922A2C305000160DE /* FavoritePresenter.swift */; };
+		025C30DE22A2C306000160DE /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30DA22A2C306000160DE /* FavoriteViewController.swift */; };
+		025C30DF22A2C306000160DE /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30DA22A2C306000160DE /* FavoriteViewController.swift */; };
+		025C30E022A2C306000160DE /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C30DA22A2C306000160DE /* FavoriteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +84,6 @@
 /* Begin PBXFileReference section */
 		025C304022A2B017000160DE /* GPSMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C304322A2B017000160DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		025C304522A2B017000160DE /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		025C304822A2B017000160DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TabBar.storyboard; sourceTree = "<group>"; };
 		025C304B22A2B017000160DE /* GPSMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GPSMovies.xcdatamodel; sourceTree = "<group>"; };
 		025C304D22A2B018000160DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +95,22 @@
 		025C306222A2B019000160DE /* GPSMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GPSMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C306622A2B019000160DE /* GPSMoviesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSMoviesUITests.swift; sourceTree = "<group>"; };
 		025C306822A2B019000160DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		025C308722A2B95A000160DE /* ExtensionUiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUiView.swift; sourceTree = "<group>"; };
+		025C308B22A2B9B8000160DE /* MessageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHelper.swift; sourceTree = "<group>"; };
+		025C308C22A2B9B8000160DE /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		025C308D22A2B9B8000160DE /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		025C308E22A2B9B9000160DE /* ErrorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorService.swift; sourceTree = "<group>"; };
+		025C309B22A2BA4D000160DE /* Messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Messages.plist; sourceTree = "<group>"; };
+		025C30B122A2BF55000160DE /* TabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresenter.swift; sourceTree = "<group>"; };
+		025C30B222A2BF55000160DE /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		025C30BD22A2C1D4000160DE /* MovieListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListPresenter.swift; sourceTree = "<group>"; };
+		025C30BE22A2C1D4000160DE /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		025C30C522A2C210000160DE /* Movie.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Movie.storyboard; sourceTree = "<group>"; };
+		025C30CB22A2C276000160DE /* MovieDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailPresenter.swift; sourceTree = "<group>"; };
+		025C30CC22A2C276000160DE /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		025C30D522A2C2EB000160DE /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
+		025C30D922A2C305000160DE /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		025C30DA22A2C306000160DE /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +161,13 @@
 		025C304222A2B017000160DE /* GPSMovies */ = {
 			isa = PBXGroup;
 			children = (
+				025C307422A2B07F000160DE /* AppStart */,
+				025C307522A2B08A000160DE /* CoreData */,
 				025C307A22A2B0D1000160DE /* Service */,
 				025C307922A2B0C9000160DE /* Model */,
 				025C307822A2B0AF000160DE /* Helper */,
-				025C307722A2B0A3000160DE /* Source */,
 				025C307622A2B096000160DE /* Resource */,
-				025C307522A2B08A000160DE /* CoreData */,
-				025C307422A2B07F000160DE /* AppStart */,
+				025C307722A2B0A3000160DE /* Source */,
 			);
 			path = GPSMovies;
 			sourceTree = "<group>";
@@ -148,6 +210,7 @@
 		025C307622A2B096000160DE /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				025C309B22A2BA4D000160DE /* Messages.plist */,
 				025C304D22A2B018000160DE /* Assets.xcassets */,
 				025C305222A2B018000160DE /* Info.plist */,
 			);
@@ -168,6 +231,11 @@
 		025C307822A2B0AF000160DE /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				025C308C22A2B9B8000160DE /* Alert.swift */,
+				025C308E22A2B9B9000160DE /* ErrorService.swift */,
+				025C308B22A2B9B8000160DE /* MessageHelper.swift */,
+				025C308D22A2B9B8000160DE /* Reachability.swift */,
+				025C308622A2B93B000160DE /* Extension */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -207,7 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				025C304722A2B017000160DE /* TabBar.storyboard */,
-				025C304522A2B017000160DE /* TabBarViewController.swift */,
+				025C30B222A2BF55000160DE /* TabBarViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,6 +283,7 @@
 		025C307E22A2B1E2000160DE /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				025C30B122A2BF55000160DE /* TabBarPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -222,6 +291,8 @@
 		025C307F22A2B30C000160DE /* MovieList */ = {
 			isa = PBXGroup;
 			children = (
+				025C30B922A2C19A000160DE /* View */,
+				025C30BA22A2C1A3000160DE /* Presenter */,
 			);
 			path = MovieList;
 			sourceTree = "<group>";
@@ -229,6 +300,8 @@
 		025C308022A2B318000160DE /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
+				025C30CA22A2C259000160DE /* View */,
+				025C30C922A2C252000160DE /* Presenter */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -236,8 +309,84 @@
 		025C308122A2B33D000160DE /* FavoriteMovies */ = {
 			isa = PBXGroup;
 			children = (
+				025C30D422A2C2A2000160DE /* View */,
+				025C30D322A2C29A000160DE /* Presenter */,
 			);
 			path = FavoriteMovies;
+			sourceTree = "<group>";
+		};
+		025C308622A2B93B000160DE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				025C308722A2B95A000160DE /* ExtensionUiView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		025C30B922A2C19A000160DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				025C30BB22A2C1AD000160DE /* Main */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		025C30BA22A2C1A3000160DE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				025C30BC22A2C1B8000160DE /* Main */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		025C30BB22A2C1AD000160DE /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				025C30C522A2C210000160DE /* Movie.storyboard */,
+				025C30BE22A2C1D4000160DE /* MovieListViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		025C30BC22A2C1B8000160DE /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				025C30BD22A2C1D4000160DE /* MovieListPresenter.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		025C30C922A2C252000160DE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				025C30CB22A2C276000160DE /* MovieDetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		025C30CA22A2C259000160DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				025C30CC22A2C276000160DE /* MovieDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		025C30D322A2C29A000160DE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				025C30D922A2C305000160DE /* FavoritePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		025C30D422A2C2A2000160DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				025C30D522A2C2EB000160DE /* Favorite.storyboard */,
+				025C30DA22A2C306000160DE /* FavoriteViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +493,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025C30C622A2C210000160DE /* Movie.storyboard in Resources */,
+				025C309C22A2BA4D000160DE /* Messages.plist in Resources */,
+				025C30D622A2C2EB000160DE /* Favorite.storyboard in Resources */,
 				025C305122A2B018000160DE /* LaunchScreen.storyboard in Resources */,
 				025C304E22A2B018000160DE /* Assets.xcassets in Resources */,
 				025C304922A2B017000160DE /* TabBar.storyboard in Resources */,
@@ -354,6 +506,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025C309D22A2BA4D000160DE /* Messages.plist in Resources */,
+				025C30C722A2C210000160DE /* Movie.storyboard in Resources */,
+				025C30D722A2C2EB000160DE /* Favorite.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +516,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025C309E22A2BA4D000160DE /* Messages.plist in Resources */,
+				025C30C822A2C210000160DE /* Movie.storyboard in Resources */,
+				025C30D822A2C2EB000160DE /* Favorite.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,9 +529,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C304622A2B017000160DE /* TabBarViewController.swift in Sources */,
+				025C30CD22A2C276000160DE /* MovieDetailPresenter.swift in Sources */,
+				025C308822A2B95B000160DE /* ExtensionUiView.swift in Sources */,
+				025C308F22A2B9B9000160DE /* MessageHelper.swift in Sources */,
 				025C304C22A2B017000160DE /* GPSMovies.xcdatamodeld in Sources */,
+				025C30DE22A2C306000160DE /* FavoriteViewController.swift in Sources */,
+				025C30D022A2C276000160DE /* MovieDetailViewController.swift in Sources */,
 				025C304422A2B017000160DE /* AppDelegate.swift in Sources */,
+				025C30DB22A2C306000160DE /* FavoritePresenter.swift in Sources */,
+				025C309522A2B9B9000160DE /* Reachability.swift in Sources */,
+				025C309222A2B9B9000160DE /* Alert.swift in Sources */,
+				025C309822A2B9B9000160DE /* ErrorService.swift in Sources */,
+				025C30C222A2C1D4000160DE /* MovieListViewController.swift in Sources */,
+				025C30B622A2BF55000160DE /* TabBarViewController.swift in Sources */,
+				025C30B322A2BF55000160DE /* TabBarPresenter.swift in Sources */,
+				025C30BF22A2C1D4000160DE /* MovieListPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +551,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025C30B722A2BF55000160DE /* TabBarViewController.swift in Sources */,
+				025C30C322A2C1D4000160DE /* MovieListViewController.swift in Sources */,
+				025C30C022A2C1D4000160DE /* MovieListPresenter.swift in Sources */,
+				025C308922A2B95B000160DE /* ExtensionUiView.swift in Sources */,
+				025C30D122A2C276000160DE /* MovieDetailViewController.swift in Sources */,
+				025C30B422A2BF55000160DE /* TabBarPresenter.swift in Sources */,
+				025C309622A2B9B9000160DE /* Reachability.swift in Sources */,
 				025C305C22A2B018000160DE /* GPSMoviesTests.swift in Sources */,
+				025C30CE22A2C276000160DE /* MovieDetailPresenter.swift in Sources */,
+				025C309322A2B9B9000160DE /* Alert.swift in Sources */,
+				025C30DF22A2C306000160DE /* FavoriteViewController.swift in Sources */,
+				025C309022A2B9B9000160DE /* MessageHelper.swift in Sources */,
+				025C30DC22A2C306000160DE /* FavoritePresenter.swift in Sources */,
+				025C309922A2B9B9000160DE /* ErrorService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +572,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025C30B822A2BF55000160DE /* TabBarViewController.swift in Sources */,
+				025C30C422A2C1D4000160DE /* MovieListViewController.swift in Sources */,
+				025C30C122A2C1D4000160DE /* MovieListPresenter.swift in Sources */,
+				025C308A22A2B95B000160DE /* ExtensionUiView.swift in Sources */,
+				025C30D222A2C276000160DE /* MovieDetailViewController.swift in Sources */,
+				025C30B522A2BF55000160DE /* TabBarPresenter.swift in Sources */,
+				025C309722A2B9B9000160DE /* Reachability.swift in Sources */,
 				025C306722A2B019000160DE /* GPSMoviesUITests.swift in Sources */,
+				025C30CF22A2C276000160DE /* MovieDetailPresenter.swift in Sources */,
+				025C309422A2B9B9000160DE /* Alert.swift in Sources */,
+				025C30E022A2C306000160DE /* FavoriteViewController.swift in Sources */,
+				025C309122A2B9B9000160DE /* MessageHelper.swift in Sources */,
+				025C30DD22A2C306000160DE /* FavoritePresenter.swift in Sources */,
+				025C309A22A2B9B9000160DE /* ErrorService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

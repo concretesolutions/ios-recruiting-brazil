@@ -1,5 +1,5 @@
 //
-//  TabBarViewController.swift
+//  FavoriteViewController.swift
 //  GPSMovies
 //
 //  Created by Gilson Santos on 01/06/19.
@@ -8,33 +8,33 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+class FavoriteViewController: UIViewController {
     
     // MARK: OUTLETS
     
     // MARK: CONSTANTS
     
     // MARK: VARIABLES
-    private var presenter: TabBarPresenter!
-    private lazy var viewData:TabBarViewData = TabBarViewData()
+    private var presenter: FavoritePresenter!
+    private lazy var viewData:FavoriteViewData = FavoriteViewData()
     
     // MARK: IBACTIONS
 }
 
 //MARK: - LIFE CYCLE -
-extension TabBarViewController {
+extension FavoriteViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter = TabBarPresenter(viewDelegate: self)
+        self.presenter = FavoritePresenter(viewDelegate: self)
     }
 }
 
 //MARK: - DELEGATE PRESENTER -
-extension TabBarViewController: TabBarViewDelegate {
+extension FavoriteViewController: FavoriteViewDelegate {
 
 }
 
 //MARK: - AUX METHODS -
-extension TabBarViewController {
+extension FavoriteViewController {
 
 }

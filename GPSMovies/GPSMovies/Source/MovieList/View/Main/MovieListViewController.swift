@@ -1,5 +1,5 @@
 //
-//  TabBarViewController.swift
+//  MovieListViewController.swift
 //  GPSMovies
 //
 //  Created by Gilson Santos on 01/06/19.
@@ -8,33 +8,33 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+class MovieListViewController: UIViewController {
     
     // MARK: OUTLETS
     
     // MARK: CONSTANTS
     
     // MARK: VARIABLES
-    private var presenter: TabBarPresenter!
-    private lazy var viewData:TabBarViewData = TabBarViewData()
+    private var presenter: MovieListPresenter!
+    private lazy var viewData:MovieListViewData = MovieListViewData()
     
     // MARK: IBACTIONS
 }
 
 //MARK: - LIFE CYCLE -
-extension TabBarViewController {
+extension MovieListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter = TabBarPresenter(viewDelegate: self)
+        self.presenter = MovieListPresenter(viewDelegate: self)
     }
 }
 
 //MARK: - DELEGATE PRESENTER -
-extension TabBarViewController: TabBarViewDelegate {
+extension MovieListViewController: MovieListViewDelegate {
 
 }
 
 //MARK: - AUX METHODS -
-extension TabBarViewController {
+extension MovieListViewController {
 
 }
