@@ -12,13 +12,32 @@
         <!--Movie List View Controller-->
         <scene sceneID="uh6-ra-CVN">
             <objects>
-                <viewController id="VGh-hU-crd" customClass="MovieListViewController" customModule="GPSMovies" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RQk-xY-5ev">
+                <viewController storyboardIdentifier="movieViewController" id="VGh-hU-crd" customClass="MovieListViewController" customModule="GPSMovies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RQk-xY-5ev" userLabel="ViewMain">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p04-L9-2Cs">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="VGh-hU-crd" id="pnI-7H-Jvv"/>
+                                    <outlet property="delegate" destination="VGh-hU-crd" id="X4o-fQ-eid"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98520690200000005" green="0.58382290599999997" blue="0.0087244687599999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VxN-bB-7f9" firstAttribute="trailing" secondItem="p04-L9-2Cs" secondAttribute="trailing" id="F36-zc-H3I"/>
+                            <constraint firstItem="p04-L9-2Cs" firstAttribute="leading" secondItem="VxN-bB-7f9" secondAttribute="leading" id="WjK-pa-Yga"/>
+                            <constraint firstItem="p04-L9-2Cs" firstAttribute="top" secondItem="VxN-bB-7f9" secondAttribute="top" constant="50" id="riU-F1-1TU"/>
+                            <constraint firstItem="VxN-bB-7f9" firstAttribute="bottom" secondItem="p04-L9-2Cs" secondAttribute="bottom" id="w6S-Gm-jPC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="VxN-bB-7f9"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="p04-L9-2Cs" id="Tux-XS-yOP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Af-Mr-aa8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
