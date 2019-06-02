@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -86,6 +86,8 @@
 		025C310222A353DF000160DE /* madMax.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 025C310122A353DA000160DE /* madMax.jpg */; };
 		025C310322A353DF000160DE /* madMax.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 025C310122A353DA000160DE /* madMax.jpg */; };
 		025C310422A353DF000160DE /* madMax.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 025C310122A353DA000160DE /* madMax.jpg */; };
+		025C310722A35C70000160DE /* MovieElementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C310522A35C70000160DE /* MovieElementCollectionViewCell.swift */; };
+		025C310822A35C70000160DE /* MovieElementCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025C310622A35C70000160DE /* MovieElementCollectionViewCell.xib */; };
 		34E36C367B7156C2BA68026E /* Pods_GPSMoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F385B5D32E66029D47623EC8 /* Pods_GPSMoviesTests.framework */; };
 		505FAF32D8ADA9F277B44B83 /* Pods_GPSMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D8A49EC09ADA09A797ED1C /* Pods_GPSMovies.framework */; };
 		A2AD5E8C8F53C8D397C00937 /* Pods_GPSMoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EFCE92183803044B78DC4DD /* Pods_GPSMoviesUITests.framework */; };
@@ -146,6 +148,8 @@
 		025C30F922A346A6000160DE /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		025C30FA22A346A6000160DE /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
 		025C310122A353DA000160DE /* madMax.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = madMax.jpg; sourceTree = "<group>"; };
+		025C310522A35C70000160DE /* MovieElementCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieElementCollectionViewCell.swift; sourceTree = "<group>"; };
+		025C310622A35C70000160DE /* MovieElementCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieElementCollectionViewCell.xib; sourceTree = "<group>"; };
 		1F55794A90E3CF941305D566 /* Pods-GPSMoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSMoviesUITests.debug.xcconfig"; path = "Target Support Files/Pods-GPSMoviesUITests/Pods-GPSMoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2259A708A70A12993397B700 /* Pods-GPSMoviesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSMoviesUITests.release.xcconfig"; path = "Target Support Files/Pods-GPSMoviesUITests/Pods-GPSMoviesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8EFCE92183803044B78DC4DD /* Pods_GPSMoviesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPSMoviesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -379,6 +383,8 @@
 			children = (
 				025C30BB22A2C1AD000160DE /* Main */,
 				025C30F822A34669000160DE /* MovieCell */,
+				025C310522A35C70000160DE /* MovieElementCollectionViewCell.swift */,
+				025C310622A35C70000160DE /* MovieElementCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,7 +504,6 @@
 				1F55794A90E3CF941305D566 /* Pods-GPSMoviesUITests.debug.xcconfig */,
 				2259A708A70A12993397B700 /* Pods-GPSMoviesUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -610,6 +615,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025C310822A35C70000160DE /* MovieElementCollectionViewCell.xib in Resources */,
 				025C30C622A2C210000160DE /* Movie.storyboard in Resources */,
 				025C310222A353DF000160DE /* madMax.jpg in Resources */,
 				025C30EB22A3074B000160DE /* FavoriteTableViewCell.xib in Resources */,
@@ -748,6 +754,7 @@
 				025C30CD22A2C276000160DE /* MovieDetailPresenter.swift in Sources */,
 				025C308822A2B95B000160DE /* ExtensionUiView.swift in Sources */,
 				025C308F22A2B9B9000160DE /* MessageHelper.swift in Sources */,
+				025C310722A35C70000160DE /* MovieElementCollectionViewCell.swift in Sources */,
 				025C304C22A2B017000160DE /* GPSMovies.xcdatamodeld in Sources */,
 				025C30DE22A2C306000160DE /* FavoriteViewController.swift in Sources */,
 				025C30D022A2C276000160DE /* MovieDetailViewController.swift in Sources */,

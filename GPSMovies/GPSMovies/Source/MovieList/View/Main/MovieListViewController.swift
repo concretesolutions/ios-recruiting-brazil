@@ -12,7 +12,8 @@ class MovieListViewController: UIViewController {
     
     // MARK: OUTLETS
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: CONSTANTS
     
     // MARK: VARIABLES
@@ -36,22 +37,26 @@ extension MovieListViewController: MovieListViewDelegate {
 
 }
 
-extension MovieListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+extension MovieListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell")!
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MovieElementCollectionViewCell", for: indexPath)
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = self.collectionView.bounds.width
+        let cellWidth = (width - 30) / 2
+        return CGSize(width: cellWidth, height: cellWidth / 0.6)
+    }
 }
 
 //MARK: - AUX METHODS -
 extension MovieListViewController {
     private func registerCell() {
-        self.tableView.register(UINib(nibName: "MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieTableViewCell")
+        self.collectionView.register(UINib(nibName: "MovieElementCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieElementCollectionViewCell")
     }
 }
