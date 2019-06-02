@@ -11,6 +11,7 @@ import UIKit
 class FavoriteViewController: UIViewController {
     
     // MARK: OUTLETS
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: CONSTANTS
     
@@ -26,6 +27,7 @@ extension FavoriteViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = FavoritePresenter(viewDelegate: self)
+        self.registerCell()
     }
 }
 
@@ -34,7 +36,22 @@ extension FavoriteViewController: FavoriteViewDelegate {
 
 }
 
+extension FavoriteViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell")!
+        return cell
+    }
+    
+    
+}
+
 //MARK: - AUX METHODS -
 extension FavoriteViewController {
-
+    private func registerCell() {
+        self.tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteTableViewCell")
+    }
 }

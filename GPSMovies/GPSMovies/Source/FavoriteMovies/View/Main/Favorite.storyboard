@@ -16,9 +16,28 @@
                     <view key="view" contentMode="scaleToFill" id="9ZY-my-ea5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2gj-V1-7A8">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="34a-vY-EgM" id="PxX-2b-J1r"/>
+                                    <outlet property="delegate" destination="34a-vY-EgM" id="bWY-na-Z8j"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2gj-V1-7A8" firstAttribute="top" secondItem="0Lo-6K-Kku" secondAttribute="top" constant="20" id="Jqt-DK-ipP"/>
+                            <constraint firstItem="0Lo-6K-Kku" firstAttribute="bottom" secondItem="2gj-V1-7A8" secondAttribute="bottom" id="UIH-Xb-nah"/>
+                            <constraint firstItem="2gj-V1-7A8" firstAttribute="leading" secondItem="0Lo-6K-Kku" secondAttribute="leading" id="WmJ-SF-MKE"/>
+                            <constraint firstItem="0Lo-6K-Kku" firstAttribute="trailing" secondItem="2gj-V1-7A8" secondAttribute="trailing" id="Y0f-Zq-NQo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0Lo-6K-Kku"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="2gj-V1-7A8" id="cUZ-AY-dyD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UrO-6y-Fk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
