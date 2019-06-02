@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-dR-X3O" userLabel="ViewMain">
                         <rect key="frame" x="0.0" y="0.0" width="104" height="170"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="madMax.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
                                 <rect key="frame" x="0.0" y="0.0" width="104" height="119"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -105,13 +105,16 @@
             <size key="customSize" width="104" height="170"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                    <real key="value" value="8"/>
+                    <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="imageMovie" destination="ERb-4U-lxx" id="UA9-k0-BSk"/>
+                <outlet property="labelDate" destination="Qg5-lT-Dq7" id="KOZ-zC-lA1"/>
+                <outlet property="labelNameMovie" destination="8Hp-Jh-9Ns" id="1zW-Zz-mgf"/>
+                <outlet property="viewRating" destination="zHp-Li-0ge" id="NRW-VS-JJp"/>
+            </connections>
             <point key="canvasLocation" x="55.072463768115945" y="64.285714285714278"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="madMax.jpg" width="500" height="750"/>
-    </resources>
 </document>

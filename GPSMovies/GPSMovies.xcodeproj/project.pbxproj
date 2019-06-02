@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0203091122A46A0200FD6CF5 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091022A46A0200FD6CF5 /* MovieService.swift */; };
+		0203091322A46AB400FD6CF5 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091222A46AB400FD6CF5 /* MovieModel.swift */; };
+		0203091422A46AB400FD6CF5 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091222A46AB400FD6CF5 /* MovieModel.swift */; };
+		0203091522A46AB400FD6CF5 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091222A46AB400FD6CF5 /* MovieModel.swift */; };
+		0203091722A46BF300FD6CF5 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091622A46BF300FD6CF5 /* GenreModel.swift */; };
+		0203091822A46BF300FD6CF5 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091622A46BF300FD6CF5 /* GenreModel.swift */; };
+		0203091922A46BF300FD6CF5 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091622A46BF300FD6CF5 /* GenreModel.swift */; };
+		0203091B22A46E2200FD6CF5 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091A22A46E2200FD6CF5 /* MainService.swift */; };
+		0203091C22A46E2200FD6CF5 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091A22A46E2200FD6CF5 /* MainService.swift */; };
+		0203091D22A46E2200FD6CF5 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203091A22A46E2200FD6CF5 /* MainService.swift */; };
 		025C304422A2B017000160DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C304322A2B017000160DE /* AppDelegate.swift */; };
 		025C304922A2B017000160DE /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025C304722A2B017000160DE /* TabBar.storyboard */; };
 		025C304C22A2B017000160DE /* GPSMovies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 025C304A22A2B017000160DE /* GPSMovies.xcdatamodeld */; };
@@ -105,6 +115,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0203091022A46A0200FD6CF5 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		0203091222A46AB400FD6CF5 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		0203091622A46BF300FD6CF5 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
+		0203091A22A46E2200FD6CF5 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		025C304022A2B017000160DE /* GPSMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C304322A2B017000160DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		025C304822A2B017000160DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TabBar.storyboard; sourceTree = "<group>"; };
@@ -289,6 +303,8 @@
 		025C307922A2B0C9000160DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0203091222A46AB400FD6CF5 /* MovieModel.swift */,
+				0203091622A46BF300FD6CF5 /* GenreModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,6 +312,8 @@
 		025C307A22A2B0D1000160DE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				0203091A22A46E2200FD6CF5 /* MainService.swift */,
+				0203091022A46A0200FD6CF5 /* MovieService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -737,9 +755,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0203091322A46AB400FD6CF5 /* MovieModel.swift in Sources */,
 				025C30E822A3074B000160DE /* FavoriteTableViewCell.swift in Sources */,
 				025C30CD22A2C276000160DE /* MovieDetailPresenter.swift in Sources */,
 				025C308822A2B95B000160DE /* ExtensionUiView.swift in Sources */,
+				0203091B22A46E2200FD6CF5 /* MainService.swift in Sources */,
 				025C308F22A2B9B9000160DE /* MessageHelper.swift in Sources */,
 				025C310722A35C70000160DE /* MovieElementCollectionViewCell.swift in Sources */,
 				025C304C22A2B017000160DE /* GPSMovies.xcdatamodeld in Sources */,
@@ -751,6 +771,8 @@
 				025C309222A2B9B9000160DE /* Alert.swift in Sources */,
 				025C309822A2B9B9000160DE /* ErrorService.swift in Sources */,
 				025C30C222A2C1D4000160DE /* MovieListViewController.swift in Sources */,
+				0203091722A46BF300FD6CF5 /* GenreModel.swift in Sources */,
+				0203091122A46A0200FD6CF5 /* MovieService.swift in Sources */,
 				025C30E222A2DDF3000160DE /* TabBarAnimatedTransitioning.swift in Sources */,
 				025C30B622A2BF55000160DE /* TabBarViewController.swift in Sources */,
 				025C30F122A309AD000160DE /* FavoriteCollectionViewCell.swift in Sources */,
@@ -763,10 +785,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0203091422A46AB400FD6CF5 /* MovieModel.swift in Sources */,
 				025C30F222A309AD000160DE /* FavoriteCollectionViewCell.swift in Sources */,
+				0203091822A46BF300FD6CF5 /* GenreModel.swift in Sources */,
 				025C30B722A2BF55000160DE /* TabBarViewController.swift in Sources */,
 				025C30C322A2C1D4000160DE /* MovieListViewController.swift in Sources */,
 				025C30C022A2C1D4000160DE /* MovieListPresenter.swift in Sources */,
+				0203091C22A46E2200FD6CF5 /* MainService.swift in Sources */,
 				025C308922A2B95B000160DE /* ExtensionUiView.swift in Sources */,
 				025C30D122A2C276000160DE /* MovieDetailViewController.swift in Sources */,
 				025C30B422A2BF55000160DE /* TabBarPresenter.swift in Sources */,
@@ -787,10 +812,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0203091522A46AB400FD6CF5 /* MovieModel.swift in Sources */,
 				025C30F322A309AD000160DE /* FavoriteCollectionViewCell.swift in Sources */,
+				0203091922A46BF300FD6CF5 /* GenreModel.swift in Sources */,
 				025C30B822A2BF55000160DE /* TabBarViewController.swift in Sources */,
 				025C30C422A2C1D4000160DE /* MovieListViewController.swift in Sources */,
 				025C30C122A2C1D4000160DE /* MovieListPresenter.swift in Sources */,
+				0203091D22A46E2200FD6CF5 /* MainService.swift in Sources */,
 				025C308A22A2B95B000160DE /* ExtensionUiView.swift in Sources */,
 				025C30D222A2C276000160DE /* MovieDetailViewController.swift in Sources */,
 				025C30B522A2BF55000160DE /* TabBarPresenter.swift in Sources */,

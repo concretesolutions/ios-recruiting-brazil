@@ -28,22 +28,43 @@ extension MovieListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = MovieListPresenter(viewDelegate: self)
+        self.presenter.getPopularMovies()
         self.registerCell()
     }
 }
 
 //MARK: - DELEGATE PRESENTER -
 extension MovieListViewController: MovieListViewDelegate {
-
+    func showLoading() {
+        
+    }
+    
+    func hideLoading() {
+        
+    }
+    
+    func showError() {
+        
+    }
+    
+    func showEmptyList() {
+        
+    }
+    
+    func setViewData(viewData: MovieListViewData) {
+        self.viewData = viewData
+        self.collectionView.reloadData()
+    }
 }
 
 extension MovieListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return self.viewData.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MovieElementCollectionViewCell", for: indexPath)
+        guard let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MovieElementCollectionViewCell", for: indexPath) as? MovieElementCollectionViewCell else { return UICollectionViewCell() }
+        cell.prepareCell(viewData: self.viewData.movies[indexPath.row])
         return cell
     }
     
