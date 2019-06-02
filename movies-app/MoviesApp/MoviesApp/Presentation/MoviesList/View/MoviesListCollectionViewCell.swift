@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MoviesListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageViewPoster: UIImageView!
@@ -19,5 +20,15 @@ class MoviesListCollectionViewCell: UICollectionViewCell {
     
     static func instanceOfNib() -> UINib {
         return UINib(nibName: MoviesListCollectionViewCell.reusableIdentifier, bundle: Bundle.main)
+    }
+    
+    func setData(for movie: Movie) {
+        guard let image = URL(string: APIData.imagePath + movie.image!) else { return }
+        
+        imageViewPoster.sd_setImage(with: image, completed: nil)
+        
+        if let title = movie.title {
+            labelTitle.text = title
+        }
     }
 }

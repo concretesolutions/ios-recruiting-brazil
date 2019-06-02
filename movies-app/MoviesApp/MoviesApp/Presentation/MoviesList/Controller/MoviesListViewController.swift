@@ -13,12 +13,25 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var collectionViewMovies: UICollectionView!
     
     private let numberOfSections = 1
+    private static let heightOfCell: CGFloat = 250
+    private static let spaceBetweenCell: CGFloat = 4
+    
+    private lazy var requester = MoviesListRequester()
     private var movies: [Movie] = []
-    private static let heightOfCell: CGFloat = 200
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewDelegateAndDataSource()
+        getPopularMovies()
+    }
+    
+    func getPopularMovies() {
+        requester.getPopularMoviesList(path: APIData.mountPathForRequest(), responseRequest: { moviesList in
+            if let movies = moviesList.movies {
+                self.movies = movies
+                self.collectionViewMovies.reloadData()
+            }
+        })
     }
 }
 
@@ -34,27 +47,25 @@ extension MoviesListViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return movies.count
-        
-        return 20
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesListCollectionViewCell.reusableIdentifier, for: indexPath) as? MoviesListCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.labelTitle.text = "teste"
+        cell.setData(for: movies[indexPath.row])
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionViewMovies.bounds.width / 2) - 8
+        let width = (collectionViewMovies.bounds.width / 2) - MoviesListViewController.spaceBetweenCell
         let height = MoviesListViewController.heightOfCell
         
         return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return MoviesListViewController.spaceBetweenCell
     }
 }
