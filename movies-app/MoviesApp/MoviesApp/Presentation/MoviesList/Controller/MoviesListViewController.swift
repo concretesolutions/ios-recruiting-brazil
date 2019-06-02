@@ -22,6 +22,7 @@ class MoviesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewDelegateAndDataSource()
+        setColorForNavigationItem()
         getPopularMovies()
     }
     
@@ -67,5 +68,12 @@ extension MoviesListViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return MoviesListViewController.spaceBetweenCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        let movieDetailsViewController = MovieDetailsViewController(movie: movie)
+        
+        self.navigationController?.pushViewController(movieDetailsViewController, animated: true)
     }
 }
