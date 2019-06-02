@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class FavoriteCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
