@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -54,7 +53,25 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzi-t2-6F4" userLabel="ViewStar">
                                                 <rect key="frame" x="0.0" y="92.5" width="192" height="47.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0X-c0-mNd" userLabel="ViewRating" customClass="CosmosView" customModule="Cosmos">
+                                                        <rect key="frame" x="0.0" y="27.5" width="192" height="20"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                                <real key="value" value="4"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="A0X-c0-mNd" secondAttribute="trailing" id="0QG-2h-RDa"/>
+                                                    <constraint firstItem="A0X-c0-mNd" firstAttribute="leading" secondItem="dzi-t2-6F4" secondAttribute="leading" id="FFP-wJ-z7j"/>
+                                                    <constraint firstAttribute="bottom" secondItem="A0X-c0-mNd" secondAttribute="bottom" id="XGt-Gs-yOu"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -92,7 +109,6 @@
                     <constraint firstAttribute="trailing" secondItem="omX-D2-ykt" secondAttribute="trailing" id="jdw-V0-zIg"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <point key="canvasLocation" x="137.68115942028987" y="105.46875"/>
         </tableViewCell>
     </objects>
