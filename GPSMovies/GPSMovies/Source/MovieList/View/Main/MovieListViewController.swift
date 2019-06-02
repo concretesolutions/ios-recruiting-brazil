@@ -69,9 +69,7 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.collectionView.bounds.width
-        let cellWidth = (width - 30) / 2
-        return CGSize(width: cellWidth, height: cellWidth / 0.6)
+         return CGSize(width: self.view.frame.width * 0.46, height: self.view.frame.height * 0.39)
     }
 }
 

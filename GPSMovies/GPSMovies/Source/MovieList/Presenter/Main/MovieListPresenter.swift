@@ -91,7 +91,7 @@ extension MovieListPresenter {
         element.releaseDate = resultModel.releaseDate ?? ""
         element.rating = resultModel.voteAverage ?? 0.0
         if let posterPath = resultModel.posterPath {
-            element.urlImage = "https://image.tmdb.org/t/p/w300\(posterPath)"
+            element.urlImage = "https://image.tmdb.org/t/p/w500\(posterPath)"
         }
         self.viewData.movies.append(element)
     }
