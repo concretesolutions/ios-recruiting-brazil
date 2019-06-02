@@ -13,22 +13,59 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieElementCollectionViewCell" customModule="GPSMovies" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+            <rect key="frame" x="0.0" y="0.0" width="104" height="170"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+                <rect key="frame" x="0.0" y="0.0" width="104" height="170"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-dR-X3O" userLabel="ViewMain">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+                        <rect key="frame" x="0.0" y="0.0" width="104" height="170"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="madMax.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="112"/>
+                                <rect key="frame" x="0.0" y="0.0" width="104" height="119"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yN4-Xz-bkA">
-                                <rect key="frame" x="0.0" y="112" width="100" height="48"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yN4-Xz-bkA" userLabel="ViewDescription">
+                                <rect key="frame" x="0.0" y="119" width="104" height="51"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tBE-oj-swb">
+                                        <rect key="frame" x="5" y="5" width="94" height="41"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mad Max" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hp-Jh-9Ns">
+                                                <rect key="frame" x="0.0" y="0.0" width="94" height="10.5"/>
+                                                <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="14"/>
+                                                <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/05/2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg5-lT-Dq7">
+                                                <rect key="frame" x="0.0" y="15.5" width="94" height="10"/>
+                                                <fontDescription key="fontDescription" name="ArialHebrew-Light" family="Arial Hebrew" pointSize="12"/>
+                                                <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHp-Li-0ge" userLabel="ViewStar" customClass="CosmosView" customModule="Cosmos">
+                                                <rect key="frame" x="0.0" y="30.5" width="94" height="10.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tBE-oj-swb" secondAttribute="trailing" constant="5" id="Ncz-La-QVd"/>
+                                    <constraint firstAttribute="bottom" secondItem="tBE-oj-swb" secondAttribute="bottom" constant="5" id="Ya2-kF-f7m"/>
+                                    <constraint firstItem="tBE-oj-swb" firstAttribute="top" secondItem="yN4-Xz-bkA" secondAttribute="top" constant="5" id="lx3-uU-0YO"/>
+                                    <constraint firstItem="tBE-oj-swb" firstAttribute="leading" secondItem="yN4-Xz-bkA" secondAttribute="leading" constant="5" id="uUx-8z-UWH"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -65,12 +102,13 @@
                 <constraint firstItem="pHa-dR-X3O" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="luH-Zt-VvP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="104" height="170"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                     <real key="value" value="8"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="57.971014492753625" y="60.9375"/>
+            <point key="canvasLocation" x="55.072463768115945" y="64.285714285714278"/>
         </collectionViewCell>
     </objects>
     <resources>
