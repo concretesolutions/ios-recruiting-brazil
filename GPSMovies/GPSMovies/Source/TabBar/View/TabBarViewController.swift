@@ -85,7 +85,7 @@ extension TabBarViewController {
         let item = UITabBarItem(title: viewData.name.rawValue, image: viewData.imageTabBar.imageNotSelected?.withRenderingMode(.alwaysOriginal), selectedImage: viewData.imageTabBar.imageSelected?.withRenderingMode(.alwaysOriginal))
         let attibutes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10)]
         item.setTitleTextAttributes(attibutes, for: .normal)
-        item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 5)
+        item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 2)
         return item
     }
     
