@@ -69,14 +69,23 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3eP-fz-2QD">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="166.5"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNG-Oa-9Wc" userLabel="ViewFavorite" customClass="AnimationView" customModule="Lottie">
+                                                <rect key="frame" x="245" y="91.5" width="70" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="Bjc-em-SvX"/>
+                                                    <constraint firstAttribute="width" constant="70" id="VgU-S9-4ke"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="3eP-fz-2QD" secondAttribute="bottom" id="B2V-zO-kTr"/>
                                             <constraint firstItem="3eP-fz-2QD" firstAttribute="centerX" secondItem="2AJ-eU-7T0" secondAttribute="centerX" id="LoC-GV-bJq"/>
                                             <constraint firstItem="3eP-fz-2QD" firstAttribute="centerY" secondItem="2AJ-eU-7T0" secondAttribute="centerY" id="kMy-em-g8R"/>
                                             <constraint firstItem="3eP-fz-2QD" firstAttribute="leading" secondItem="2AJ-eU-7T0" secondAttribute="leading" id="ox2-cR-fk7"/>
+                                            <constraint firstAttribute="trailing" secondItem="cNG-Oa-9Wc" secondAttribute="trailing" constant="5" id="r5E-Fm-hRk"/>
                                             <constraint firstAttribute="trailing" secondItem="3eP-fz-2QD" secondAttribute="trailing" id="tuS-EE-fEn"/>
                                             <constraint firstItem="3eP-fz-2QD" firstAttribute="top" secondItem="2AJ-eU-7T0" secondAttribute="top" id="uZj-lO-X41"/>
+                                            <constraint firstAttribute="bottom" secondItem="cNG-Oa-9Wc" secondAttribute="bottom" constant="5" id="zcM-Lz-m2i"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTM-t8-99Z" userLabel="ViewLeft">
@@ -85,18 +94,11 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZ7-5V-MPw">
                                                 <rect key="frame" x="0.0" y="0.0" width="112" height="156"/>
                                             </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNG-Oa-9Wc" userLabel="ViewFavorite" customClass="AnimationView" customModule="Lottie">
-                                                <rect key="frame" x="5" y="176" width="102" height="94"/>
-                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="qZ7-5V-MPw" firstAttribute="top" secondItem="fTM-t8-99Z" secondAttribute="top" id="CK1-x7-BKb"/>
                                             <constraint firstItem="qZ7-5V-MPw" firstAttribute="leading" secondItem="fTM-t8-99Z" secondAttribute="leading" id="CwO-CC-TWc"/>
-                                            <constraint firstItem="cNG-Oa-9Wc" firstAttribute="height" secondItem="fTM-t8-99Z" secondAttribute="height" multiplier="0.3" id="HdZ-QU-Tdl"/>
-                                            <constraint firstItem="cNG-Oa-9Wc" firstAttribute="leading" secondItem="fTM-t8-99Z" secondAttribute="leading" constant="5" id="LZu-YM-l5c"/>
-                                            <constraint firstItem="cNG-Oa-9Wc" firstAttribute="top" secondItem="qZ7-5V-MPw" secondAttribute="bottom" constant="20" id="Tr4-mP-3cr"/>
                                             <constraint firstItem="qZ7-5V-MPw" firstAttribute="height" secondItem="fTM-t8-99Z" secondAttribute="height" multiplier="0.5" id="exr-hM-s8I"/>
-                                            <constraint firstAttribute="trailing" secondItem="cNG-Oa-9Wc" secondAttribute="trailing" constant="5" id="kpd-Iy-Epo"/>
                                             <constraint firstAttribute="trailing" secondItem="qZ7-5V-MPw" secondAttribute="trailing" id="kud-gx-3zX"/>
                                         </constraints>
                                     </view>
@@ -113,19 +115,19 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome do filme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NP5-wU-yKe">
-                                                        <rect key="frame" x="0.0" y="48.5" width="193" height="16.5"/>
-                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                                        <rect key="frame" x="0.0" y="48.5" width="193" height="18.5"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                         <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data de lancamento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbv-mm-YrE">
-                                                        <rect key="frame" x="0.0" y="73" width="193" height="14"/>
-                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                        <rect key="frame" x="0.0" y="75" width="193" height="16.5"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c61-uj-dFy" userLabel="ViewRating" customClass="CosmosView" customModule="Cosmos">
-                                                        <rect key="frame" x="0.0" y="95" width="193" height="20"/>
+                                                        <rect key="frame" x="0.0" y="99.5" width="193" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Fso-ll-XqA"/>
                                                         </constraints>
@@ -133,13 +135,17 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
                                                                 <integer key="value" value="10"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                                                <integer key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kdA-WU-Fvy">
-                                                        <rect key="frame" x="0.0" y="123" width="193" height="189.5"/>
+                                                        <rect key="frame" x="0.0" y="127.5" width="193" height="185"/>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                 </subviews>
