@@ -17,9 +17,16 @@ struct MovieListViewData {
 
 struct MovieElement {
     var title = ""
+    var urlImageCover = ""
+    var detail = MovieDetail()
+}
+
+struct MovieDetail {
     var releaseDate = ""
     var rating = 0.0
-    var urlImage = ""
+    var urlImagePost = ""
+    var description = ""
+    var isFavorited = false
 }
 
 //MARK: - VIEW DELEGATE -
@@ -88,10 +95,13 @@ extension MovieListPresenter {
     private func parseModelElementFromViewData(resultModel: Results) {
         var element = MovieElement()
         element.title = resultModel.title ?? ""
-        element.releaseDate = resultModel.releaseDate ?? ""
-        element.rating = resultModel.voteAverage ?? 0.0
-        if let posterPath = resultModel.posterPath {
-            element.urlImage = "https://image.tmdb.org/t/p/w500\(posterPath)"
+        element.detail.releaseDate = resultModel.releaseDate ?? ""
+        element.detail.rating = resultModel.voteAverage ?? 0.0
+        if let coverPath = resultModel.posterPath {
+            element.urlImageCover = "https://image.tmdb.org/t/p/w500\(coverPath)"
+        }
+        if let posterPath = resultModel.backdropPath {
+            element.detail.urlImagePost = "https://image.tmdb.org/t/p/w500\(posterPath)"
         }
         self.viewData.movies.append(element)
     }

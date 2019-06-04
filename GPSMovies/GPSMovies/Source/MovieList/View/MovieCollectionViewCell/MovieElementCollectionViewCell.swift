@@ -27,10 +27,10 @@ class MovieElementCollectionViewCell: UICollectionViewCell {
 
 extension MovieElementCollectionViewCell {
     func prepareCell(viewData: MovieElement) {
-        if viewData.urlImage.isEmpty {
+        if viewData.urlImageCover.isEmpty {
             self.imageMovie.image = UIImage()
         }else {
-            self.downloadImage(urlString: viewData.urlImage)
+            self.downloadImage(urlString: viewData.urlImageCover)
         }
         self.labelNameMovie.text = viewData.title
     }
