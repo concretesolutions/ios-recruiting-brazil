@@ -39,7 +39,9 @@ extension MovieDetailViewController {
         super.viewDidLoad()
         self.presenter = MovieDetailPresenter(viewDelegate: self)
         self.addGesture()
+        self.setupFavoriteView()
         self.prepareView()
+        
     }
 }
 
@@ -50,6 +52,11 @@ extension MovieDetailViewController: MovieDetailViewDelegate {
 
 //MARK: - AUX METHODS -
 extension MovieDetailViewController {
+    
+    private func setupFavoriteView() {
+        let animation = Animation.named("favourite_app_icon")
+        viewFavorite.animation = animation
+    }
     
     private func prepareView() {
         self.downloadImage(urlString: self.viewData.detail.urlImagePost, imageView: self.imagePoster)
@@ -62,6 +69,7 @@ extension MovieDetailViewController {
         if self.viewData.detail.isFavorited {
             self.viewFavorite.play()
         }else {
+            self.viewFavorite.shouldRasterizeWhenIdle = true
             self.viewFavorite.stop()
         }
     }
@@ -72,9 +80,13 @@ extension MovieDetailViewController {
     }
     
     @objc private func addAndRemoveFavorite() {
-        let animation = Animation.named("favourite_app_icon")
-        viewFavorite.animation = animation
-        self.viewFavorite.play()
+        if self.viewData.detail.isFavorited {
+            self.viewFavorite.stop()
+            self.viewData.detail.isFavorited = false
+        }else {
+            self.viewFavorite.play()
+            self.viewData.detail.isFavorited = true
+        }
     }
     
     private func downloadImage(urlString: String, imageView: UIImageView) {

@@ -81,9 +81,10 @@ extension MovieListViewController: UICollectionViewDelegate {
 //MARK: - DELEGATE - UICollectionViewDelegateFlowLayout -
 extension MovieListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.collectionView.bounds.width - 30
-        let widthCell = width / 2
-        return CGSize(width: widthCell, height: self.view.frame.height * 0.39)
+//        let width = self.collectionView.bounds.width
+//        let widthCell = width * 0.44
+//        return CGSize(width: widthCell, height: self.view.frame.height * 0.39)
+        return CGSize(width: self.view.frame.width * 0.44, height: self.view.frame.height * 0.39)
     }
 }
 

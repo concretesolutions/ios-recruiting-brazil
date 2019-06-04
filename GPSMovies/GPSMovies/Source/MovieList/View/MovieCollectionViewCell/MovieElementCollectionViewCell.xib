@@ -1,44 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieElementCollectionViewCell" customModule="GPSMovies" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="104" height="182"/>
+            <rect key="frame" x="0.0" y="0.0" width="190" height="357"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="104" height="182"/>
+                <rect key="frame" x="0.0" y="0.0" width="190" height="357"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-dR-X3O" userLabel="ViewMain">
-                        <rect key="frame" x="0.0" y="0.0" width="104" height="182"/>
+                        <rect key="frame" x="0.0" y="0.0" width="190" height="357"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="madMax.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
-                                <rect key="frame" x="0.0" y="0.0" width="104" height="127.5"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mad Max" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hp-Jh-9Ns">
-                                <rect key="frame" x="0.0" y="132.5" width="104" height="13"/>
-                                <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="12"/>
-                                <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Js0-8e-u6d" userLabel="ViewImage">
+                                <rect key="frame" x="5" y="5" width="180" height="292.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="madMax.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="284.5"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ERb-4U-lxx" firstAttribute="top" secondItem="Js0-8e-u6d" secondAttribute="top" id="5an-Ju-e75"/>
+                                    <constraint firstItem="ERb-4U-lxx" firstAttribute="leading" secondItem="Js0-8e-u6d" secondAttribute="leading" id="Gye-JE-jPV"/>
+                                    <constraint firstAttribute="bottom" secondItem="ERb-4U-lxx" secondAttribute="bottom" constant="8" id="wyy-LW-Ep3"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKk-34-KE1" userLabel="ViewTitle">
+                                <rect key="frame" x="5" y="292.5" width="180" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mad Max" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hp-Jh-9Ns">
+                                        <rect key="frame" x="5" y="2" width="170" height="46"/>
+                                        <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="12"/>
+                                        <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8Hp-Jh-9Ns" firstAttribute="leading" secondItem="UKk-34-KE1" secondAttribute="leading" constant="5" id="8Sc-jW-0EA"/>
+                                    <constraint firstAttribute="bottom" secondItem="8Hp-Jh-9Ns" secondAttribute="bottom" constant="2" id="9Du-Kk-3U7"/>
+                                    <constraint firstItem="8Hp-Jh-9Ns" firstAttribute="top" secondItem="UKk-34-KE1" secondAttribute="top" constant="2" id="K3r-9A-0yH"/>
+                                    <constraint firstAttribute="trailing" secondItem="8Hp-Jh-9Ns" secondAttribute="trailing" constant="5" id="xdb-tG-DgQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ERb-4U-lxx" firstAttribute="leading" secondItem="pHa-dR-X3O" secondAttribute="leading" id="9sf-Cj-15F"/>
-                            <constraint firstItem="ERb-4U-lxx" firstAttribute="top" secondItem="pHa-dR-X3O" secondAttribute="top" id="Mfb-ob-PQa"/>
-                            <constraint firstItem="8Hp-Jh-9Ns" firstAttribute="top" secondItem="ERb-4U-lxx" secondAttribute="bottom" constant="5" id="TGj-fY-wvf"/>
-                            <constraint firstItem="8Hp-Jh-9Ns" firstAttribute="leading" secondItem="pHa-dR-X3O" secondAttribute="leading" id="a3Z-rD-EaG"/>
-                            <constraint firstAttribute="trailing" secondItem="ERb-4U-lxx" secondAttribute="trailing" id="h7f-Va-BqC"/>
-                            <constraint firstAttribute="trailing" secondItem="8Hp-Jh-9Ns" secondAttribute="trailing" id="hAe-a2-wIm"/>
+                            <constraint firstAttribute="trailing" secondItem="Js0-8e-u6d" secondAttribute="trailing" constant="5" id="C3P-ra-VgQ"/>
+                            <constraint firstItem="8Hp-Jh-9Ns" firstAttribute="width" secondItem="ERb-4U-lxx" secondAttribute="width" constant="-10" id="E7X-Vw-5th"/>
+                            <constraint firstItem="UKk-34-KE1" firstAttribute="leading" secondItem="pHa-dR-X3O" secondAttribute="leading" constant="5" id="Hhy-IK-yzi"/>
+                            <constraint firstItem="UKk-34-KE1" firstAttribute="height" secondItem="pHa-dR-X3O" secondAttribute="height" multiplier="0.14" id="JkP-v2-z10"/>
+                            <constraint firstAttribute="trailing" secondItem="UKk-34-KE1" secondAttribute="trailing" constant="5" id="Szi-Bn-3Ef"/>
+                            <constraint firstItem="Js0-8e-u6d" firstAttribute="height" secondItem="pHa-dR-X3O" secondAttribute="height" multiplier="0.82" id="TVx-yh-cj5"/>
+                            <constraint firstItem="Js0-8e-u6d" firstAttribute="top" secondItem="pHa-dR-X3O" secondAttribute="top" constant="5" id="bRc-JN-am8"/>
+                            <constraint firstItem="Js0-8e-u6d" firstAttribute="leading" secondItem="UKk-34-KE1" secondAttribute="leading" id="j16-Fr-ESf"/>
+                            <constraint firstItem="UKk-34-KE1" firstAttribute="top" secondItem="Js0-8e-u6d" secondAttribute="bottom" constant="-5" id="xfl-aO-Ydj"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -49,16 +72,11 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="ERb-4U-lxx" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="0JW-kO-jhM"/>
-                <constraint firstItem="pHa-dR-X3O" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="36c-OF-9HF"/>
-                <constraint firstItem="pHa-dR-X3O" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GER-Eb-ETH"/>
-                <constraint firstAttribute="bottom" secondItem="pHa-dR-X3O" secondAttribute="bottom" id="Mr3-4R-ag9"/>
-                <constraint firstAttribute="trailing" secondItem="pHa-dR-X3O" secondAttribute="trailing" id="O59-fz-IpF"/>
-                <constraint firstItem="ERb-4U-lxx" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.7" id="OA5-a3-lLb"/>
-                <constraint firstItem="pHa-dR-X3O" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="lfG-qS-49n"/>
-                <constraint firstItem="pHa-dR-X3O" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="luH-Zt-VvP"/>
+                <constraint firstAttribute="bottom" secondItem="pHa-dR-X3O" secondAttribute="bottom" id="CoE-Ae-WGY"/>
+                <constraint firstItem="pHa-dR-X3O" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Dty-Sa-5fS"/>
+                <constraint firstItem="pHa-dR-X3O" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SSD-Lc-UvW"/>
+                <constraint firstAttribute="trailing" secondItem="pHa-dR-X3O" secondAttribute="trailing" id="btT-k4-hYv"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="104" height="182"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -69,7 +87,7 @@
                 <outlet property="imageMovie" destination="ERb-4U-lxx" id="UA9-k0-BSk"/>
                 <outlet property="labelNameMovie" destination="8Hp-Jh-9Ns" id="1zW-Zz-mgf"/>
             </connections>
-            <point key="canvasLocation" x="55.072463768115945" y="67.633928571428569"/>
+            <point key="canvasLocation" x="55.072463768115945" y="67.299107142857139"/>
         </collectionViewCell>
     </objects>
     <resources>
