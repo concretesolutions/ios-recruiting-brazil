@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import Lottie
 
 class MovieDetailViewController: UIViewController {
     
@@ -20,7 +21,8 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var viewRating: CosmosView!
     @IBOutlet weak var textFieldDescription: UITextView!
-
+    @IBOutlet weak var viewFavorite: AnimationView!
+    
     // MARK: CONSTANTS
     
     // MARK: VARIABLES
@@ -35,6 +37,8 @@ extension MovieDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = MovieDetailPresenter(viewDelegate: self)
+        self.addGesture()
+        self.viewFavorite.stop()
     }
 }
 
@@ -45,5 +49,14 @@ extension MovieDetailViewController: MovieDetailViewDelegate {
 
 //MARK: - AUX METHODS -
 extension MovieDetailViewController {
-
+    private func addGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.addAndRemoveFavorite))
+        self.viewFavorite.addGestureRecognizer(tap)
+    }
+    
+    @objc private func addAndRemoveFavorite() {
+        let animation = Animation.named("favourite_app_icon")
+        viewFavorite.animation = animation
+        self.viewFavorite.play()
+    }
 }
