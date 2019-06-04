@@ -45,17 +45,17 @@
                     <navigationItem key="navigationItem" title="GPSMovies" id="u0e-be-gH5"/>
                     <connections>
                         <outlet property="collectionView" destination="cIb-P5-sXc" id="jGg-JZ-aWV"/>
-                        <segue destination="pqY-d7-4mc" kind="show" id="u45-61-ngb"/>
+                        <segue destination="pqY-d7-4mc" kind="show" identifier="segueDetailMovie" id="u45-61-ngb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Af-Mr-aa8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="847.82608695652175" y="48.883928571428569"/>
         </scene>
-        <!--View Controller-->
+        <!--Movie Detail View Controller-->
         <scene sceneID="RKS-ob-b1n">
             <objects>
-                <viewController id="pqY-d7-4mc" sceneMemberID="viewController">
+                <viewController id="pqY-d7-4mc" customClass="MovieDetailViewController" customModule="GPSMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O7T-bJ-PF0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,6 +186,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nck-CX-Eci"/>
                     </view>
+                    <connections>
+                        <outlet property="imagePoster" destination="3eP-fz-2QD" id="MUh-nQ-wg9"/>
+                        <outlet property="imageSmall" destination="qZ7-5V-MPw" id="8dD-tv-8VX"/>
+                        <outlet property="labelDate" destination="tbv-mm-YrE" id="whb-e1-Ock"/>
+                        <outlet property="labelNameMovie" destination="NP5-wU-yKe" id="ZKc-Cl-54T"/>
+                        <outlet property="labelRating" destination="ARR-bM-CiE" id="A9l-nz-dRg"/>
+                        <outlet property="textFieldDescription" destination="kdA-WU-Fvy" id="IYd-qz-np9"/>
+                        <outlet property="viewRating" destination="c61-uj-dFy" id="abH-Iu-rDZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDy-87-esV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

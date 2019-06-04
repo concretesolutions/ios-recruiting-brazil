@@ -15,6 +15,7 @@ class MovieListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: CONSTANTS
+    private let SEGUEDETAILMOVIE = "segueDetailMovie"
     
     // MARK: VARIABLES
     private var presenter: MovieListPresenter!
@@ -57,7 +58,8 @@ extension MovieListViewController: MovieListViewDelegate {
     }
 }
 
-extension MovieListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+//MARK: - DATASOURCE - UICollectionViewDataSource -
+extension MovieListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.viewData.movies.count
     }
@@ -67,13 +69,24 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
         cell.prepareCell(viewData: self.viewData.movies[indexPath.row])
         return cell
     }
-    
+}
+
+//MARK: - DELEGATE - UICollectionViewDelegate -
+extension MovieListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: nil)
+    }
+}
+
+//MARK: - DELEGATE - UICollectionViewDelegateFlowLayout -
+extension MovieListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.collectionView.bounds.width - 30
         let widthCell = width / 2
-         return CGSize(width: widthCell, height: self.view.frame.height * 0.39)
+        return CGSize(width: widthCell, height: self.view.frame.height * 0.39)
     }
 }
+
 
 //MARK: - AUX METHODS -
 extension MovieListViewController {
