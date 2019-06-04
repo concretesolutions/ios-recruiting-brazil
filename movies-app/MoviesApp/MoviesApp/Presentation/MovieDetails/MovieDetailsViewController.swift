@@ -6,6 +6,7 @@
 //  Copyright © 2019 Gabriel Pereira. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import SDWebImage
 
@@ -16,7 +17,9 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var labelMovieGender: UILabel!
     @IBOutlet weak var labelMovieDescription: UILabel!
     
+    private lazy var requester = MoviesDetailsRequester()
     private var movie: Movie?
+    private var genres: [Genre] = []
     
     init(movie: Movie) {
         self.movie = movie
@@ -31,6 +34,15 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         setColorForNavigationItem()
         renderDataOfMovie()
+        getListOfGenres()
+    }
+    
+    func getListOfGenres() {
+        requester.getGenresList(path: APIData.mountPathForRequest(path: APIData.Endpoints.genresList), responseRequest: { data in
+            if let genres = data.genres {
+                self.genres = genres
+            }
+        })
     }
     
     func renderDataOfMovie() {
@@ -41,9 +53,9 @@ class MovieDetailsViewController: UIViewController {
     }
     
     func setDataForMovie(movie: Movie) {
-        guard let image = URL(string: APIData.imagePath + movie.image!) else { return }
-        
-        imageViewPoster.sd_setImage(with: image, completed: nil)
+        if let image = URL(string: APIData.imagePath + movie.image!) {
+            imageViewPoster.sd_setImage(with: image, completed: nil)
+        }
         
         if let title = movie.title {
             labelMovieTitle.text = title

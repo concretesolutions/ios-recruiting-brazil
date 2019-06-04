@@ -14,7 +14,9 @@ struct APIData {
     static let imagePath = "https://image.tmdb.org/t/p/w500"
     
     struct Endpoints {
-        static let popularMovies = "https://api.themoviedb.org/3/movie/popular"
+        static let basePath = "https://api.themoviedb.org/3"
+        static let popularMovies = "\(Endpoints.basePath)/movie/popular"
+        static let genresList = "\(Endpoints.basePath)/genre/movie/list"
     }
     
     static func mountPathForRequest(path: String = Endpoints.popularMovies, page: Int = 1) -> String {

@@ -16,6 +16,7 @@ struct Movie: Codable {
     let originalTitle: String?
     let description: String?
     let releaseDate: String?
+    let genres: [Int]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -25,6 +26,7 @@ struct Movie: Codable {
         case originalTitle = "original_title"
         case description = "overview"
         case releaseDate = "release_date"
+        case genres = "genre_ids"
     }
     
     init(from decoder: Decoder) throws {
@@ -37,5 +39,6 @@ struct Movie: Codable {
         originalTitle = try values.decodeIfPresent(String.self, forKey: .originalTitle)
         description = try values.decodeIfPresent(String.self, forKey: .description)
         releaseDate = try values.decodeIfPresent(String.self, forKey: .releaseDate)
+        genres = try values.decodeIfPresent([Int].self, forKey: .genres)
     }
 }
