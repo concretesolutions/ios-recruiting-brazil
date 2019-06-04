@@ -48,6 +48,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="fOd-CE-QXz" kind="relationship" relationship="viewControllers" id="Iuk-8a-57a"/>
+                        <segue destination="zca-Js-Fvl" kind="relationship" relationship="viewControllers" id="0cc-8c-6Tq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6zb-eA-FqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,10 +114,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVT-Hd-8Hb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3340" y="-392.65367316341832"/>
+            <point key="canvasLocation" x="3438" y="-739"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="C9L-tH-sxY">
+            <objects>
+                <viewController id="zca-Js-Fvl" customClass="FavoritesViewController" customModule="MoviesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s0x-B8-JDW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9nn-Jy-idO">
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9nn-Jy-idO" firstAttribute="bottom" secondItem="QKK-6O-k9a" secondAttribute="bottom" id="4IX-Fr-VEq"/>
+                            <constraint firstItem="9nn-Jy-idO" firstAttribute="top" secondItem="QKK-6O-k9a" secondAttribute="top" id="K0J-ys-Ahn"/>
+                            <constraint firstItem="9nn-Jy-idO" firstAttribute="leading" secondItem="QKK-6O-k9a" secondAttribute="leading" id="MbX-I9-Lmu"/>
+                            <constraint firstItem="9nn-Jy-idO" firstAttribute="trailing" secondItem="QKK-6O-k9a" secondAttribute="trailing" id="pO9-MV-YfC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QKK-6O-k9a"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" id="UHJ-TU-4Q3"/>
+                    <connections>
+                        <outlet property="tableViewFavorites" destination="9nn-Jy-idO" id="joZ-57-zz1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7B6-m0-Bh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3437.5999999999999" y="80.50974512743629"/>
         </scene>
     </scenes>
     <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
         <image name="list_icon" width="18" height="10"/>
     </resources>
 </document>

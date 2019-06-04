@@ -6,4 +6,10 @@
 //  Copyright © 2019 Gabriel Pereira. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UITableViewCell {
+    @nonobjc static var reusableIdentifier: String {
+        return String(describing: self)
+    }
+}
