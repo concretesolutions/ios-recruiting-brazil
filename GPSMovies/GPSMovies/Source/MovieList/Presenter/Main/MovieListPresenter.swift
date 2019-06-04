@@ -103,6 +103,7 @@ extension MovieListPresenter {
         if let posterPath = resultModel.backdropPath {
             element.detail.urlImagePost = "https://image.tmdb.org/t/p/w500\(posterPath)"
         }
+        element.detail.description = resultModel.overview ?? ""
         self.viewData.movies.append(element)
     }
 }

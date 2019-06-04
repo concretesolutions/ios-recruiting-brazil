@@ -74,7 +74,7 @@ extension MovieListViewController: UICollectionViewDataSource {
 //MARK: - DELEGATE - UICollectionViewDelegate -
 extension MovieListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: nil)
+        self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: self.viewData.movies[indexPath.row])
     }
 }
 
@@ -92,5 +92,11 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout {
 extension MovieListViewController {
     private func registerCell() {
         self.collectionView.register(UINib(nibName: "MovieElementCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieElementCollectionViewCell")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElement {
+            controller.viewData = viewData
+        }
     }
 }
