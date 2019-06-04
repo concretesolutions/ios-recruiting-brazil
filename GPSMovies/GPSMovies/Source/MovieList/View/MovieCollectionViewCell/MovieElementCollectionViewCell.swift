@@ -7,15 +7,12 @@
 //
 
 import UIKit
-import Cosmos
 import Kingfisher
 
 class MovieElementCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var labelNameMovie: UILabel!
-    @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var viewRating: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,8 +33,6 @@ extension MovieElementCollectionViewCell {
             self.downloadImage(urlString: viewData.urlImage)
         }
         self.labelNameMovie.text = viewData.title
-        self.labelDate.text = viewData.releaseDate
-        self.viewRating.rating = viewData.rating
     }
     
     private func downloadImage(urlString: String) {

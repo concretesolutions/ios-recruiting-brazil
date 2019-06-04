@@ -22,68 +22,23 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-dR-X3O" userLabel="ViewMain">
                         <rect key="frame" x="0.0" y="0.0" width="104" height="182"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="madMax.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="madMax.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
                                 <rect key="frame" x="0.0" y="0.0" width="104" height="127.5"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yN4-Xz-bkA" userLabel="ViewDescription">
-                                <rect key="frame" x="0.0" y="127.5" width="104" height="54.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tBE-oj-swb">
-                                        <rect key="frame" x="5" y="5" width="94" height="44.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mad Max" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hp-Jh-9Ns">
-                                                <rect key="frame" x="0.0" y="0.0" width="94" height="11.5"/>
-                                                <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="14"/>
-                                                <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/05/2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg5-lT-Dq7">
-                                                <rect key="frame" x="0.0" y="16.5" width="94" height="11.5"/>
-                                                <fontDescription key="fontDescription" name="ArialHebrew-Light" family="Arial Hebrew" pointSize="12"/>
-                                                <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHp-Li-0ge" userLabel="ViewStar" customClass="CosmosView" customModule="Cosmos">
-                                                <rect key="frame" x="0.0" y="33" width="94" height="11.5"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="tBE-oj-swb" secondAttribute="trailing" constant="5" id="Ncz-La-QVd"/>
-                                    <constraint firstAttribute="bottom" secondItem="tBE-oj-swb" secondAttribute="bottom" constant="5" id="Ya2-kF-f7m"/>
-                                    <constraint firstItem="tBE-oj-swb" firstAttribute="top" secondItem="yN4-Xz-bkA" secondAttribute="top" constant="5" id="lx3-uU-0YO"/>
-                                    <constraint firstItem="tBE-oj-swb" firstAttribute="leading" secondItem="yN4-Xz-bkA" secondAttribute="leading" constant="5" id="uUx-8z-UWH"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mad Max" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hp-Jh-9Ns">
+                                <rect key="frame" x="0.0" y="132.5" width="104" height="13"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="12"/>
+                                <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="yN4-Xz-bkA" secondAttribute="bottom" id="5fO-z4-dvk"/>
                             <constraint firstItem="ERb-4U-lxx" firstAttribute="leading" secondItem="pHa-dR-X3O" secondAttribute="leading" id="9sf-Cj-15F"/>
                             <constraint firstItem="ERb-4U-lxx" firstAttribute="top" secondItem="pHa-dR-X3O" secondAttribute="top" id="Mfb-ob-PQa"/>
-                            <constraint firstItem="yN4-Xz-bkA" firstAttribute="top" secondItem="ERb-4U-lxx" secondAttribute="bottom" id="TSN-Ww-uIB"/>
-                            <constraint firstItem="yN4-Xz-bkA" firstAttribute="leading" secondItem="pHa-dR-X3O" secondAttribute="leading" id="U2m-Fq-dbI"/>
-                            <constraint firstAttribute="trailing" secondItem="yN4-Xz-bkA" secondAttribute="trailing" id="dIc-43-aJf"/>
+                            <constraint firstItem="8Hp-Jh-9Ns" firstAttribute="top" secondItem="ERb-4U-lxx" secondAttribute="bottom" constant="5" id="TGj-fY-wvf"/>
+                            <constraint firstItem="8Hp-Jh-9Ns" firstAttribute="leading" secondItem="pHa-dR-X3O" secondAttribute="leading" id="a3Z-rD-EaG"/>
                             <constraint firstAttribute="trailing" secondItem="ERb-4U-lxx" secondAttribute="trailing" id="h7f-Va-BqC"/>
-                            <constraint firstItem="yN4-Xz-bkA" firstAttribute="height" secondItem="pHa-dR-X3O" secondAttribute="height" multiplier="0.3" id="yPA-Ns-KDe"/>
+                            <constraint firstAttribute="trailing" secondItem="8Hp-Jh-9Ns" secondAttribute="trailing" id="hAe-a2-wIm"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -112,9 +67,7 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="imageMovie" destination="ERb-4U-lxx" id="UA9-k0-BSk"/>
-                <outlet property="labelDate" destination="Qg5-lT-Dq7" id="KOZ-zC-lA1"/>
                 <outlet property="labelNameMovie" destination="8Hp-Jh-9Ns" id="1zW-Zz-mgf"/>
-                <outlet property="viewRating" destination="zHp-Li-0ge" id="NRW-VS-JJp"/>
             </connections>
             <point key="canvasLocation" x="55.072463768115945" y="67.633928571428569"/>
         </collectionViewCell>
