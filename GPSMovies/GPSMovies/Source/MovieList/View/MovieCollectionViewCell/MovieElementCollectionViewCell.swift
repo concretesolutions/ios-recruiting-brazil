@@ -43,13 +43,14 @@ extension MovieElementCollectionViewCell {
             self.imageMovie.kf.indicatorType = .activity
             
             self.imageMovie.kf.setImage(with: resource, placeholder: nil, options: [.transition(.fade(0.8)), .cacheOriginalImage, .processor(processor)], progressBlock: nil) { (result) in
-                switch result {
-                case .success(let imageResult):
-                    self.imageMovie.image = imageResult.image
-                    break
-                case .failure(_):
-                    self.imageMovie.image = UIImage()
-                    break
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        break
+                    case .failure(_):
+                        self.imageMovie.image = UIImage()
+                        break
+                    }
                 }
             }
         }

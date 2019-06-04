@@ -41,7 +41,7 @@ extension MovieDetailViewController {
         self.addGesture()
         self.setupFavoriteView()
         self.prepareView()
-        
+        self.fadeOutImage()
     }
 }
 
@@ -98,17 +98,30 @@ extension MovieDetailViewController {
             imageView.kf.indicatorType = .activity
             
             imageView.kf.setImage(with: resource, placeholder: nil, options: [.transition(.fade(0.8)), .cacheOriginalImage, .processor(processor)], progressBlock: nil) { (result) in
-                switch result {
-                case .success(let imageResult):
-                    imageView.image = imageResult.image
-                    break
-                case .failure(_):
-                    imageView.image = UIImage()
-                    break
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        break
+                    case .failure(_):
+                        imageView.image = UIImage()
+                        break
+                    }
                 }
             }
         }
     }
+    
+    func fadeOutImage() {
+        let mask = CAGradientLayer()
+        mask.startPoint = CGPoint(x: 1.0, y: 0.375)
+        mask.endPoint = CGPoint(x: 1.0, y: 0.0)
+        let whiteColor = UIColor.white
+        mask.colors = [whiteColor.withAlphaComponent(0.0).cgColor,whiteColor.withAlphaComponent(1.0),whiteColor.withAlphaComponent(1.0).cgColor]
+        mask.locations = [NSNumber(value: 0.0),NSNumber(value: 0.2),NSNumber(value: 1.0)]
+        mask.frame = view.bounds
+        imagePoster.layer.mask = mask
+    }
+    
     
     
 }
