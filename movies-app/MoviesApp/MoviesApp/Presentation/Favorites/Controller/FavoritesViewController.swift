@@ -16,6 +16,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewDelegateAndDataSource()
+        registerNibForTableViewCell()
     }
 }
 
@@ -23,6 +24,10 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableViewDelegateAndDataSource() {
         self.tableViewFavorites.delegate = self
         self.tableViewFavorites.dataSource = self
+    }
+    
+    func registerNibForTableViewCell() {
+        tableViewFavorites.registerNibForTableViewCell(FavoritesTableViewCell.self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
