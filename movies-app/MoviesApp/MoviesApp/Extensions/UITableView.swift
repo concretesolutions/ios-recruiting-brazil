@@ -13,4 +13,9 @@ extension UITableView {
         self.register(UINib(nibName: T.reusableIdentifier, bundle: nil),
                       forCellReuseIdentifier: T.reusableIdentifier)
     }
+    
+    func removeSpaces() {
+        self.layoutMargins = .zero
+        self.separatorInset = .zero
+    }
 }

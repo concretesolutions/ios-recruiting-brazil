@@ -17,6 +17,7 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         tableViewDelegateAndDataSource()
         registerNibForTableViewCell()
+        tableViewFavorites.removeSpaces()
     }
 }
 
