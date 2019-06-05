@@ -42,6 +42,33 @@ class ManageData {
         }
     }
     
+    func deleteMovieFromCoreData(movie: Movie) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: ManageData.entityName)
+        
+        if let title = movie.title {
+            print(title)
+            fetchRequest.predicate = NSPredicate(format: "title = %@", title)
+        }
+        
+        do {
+            let test = try managedContext.fetch(fetchRequest)
+            let objectToDelete = test[0] as! NSManagedObject
+            
+            managedContext.delete(objectToDelete)
+            
+            do {
+                try managedContext.save()
+            } catch {
+                print(error)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     func resetAllRecords(in entity : String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         

@@ -15,6 +15,7 @@ class FavoritesViewController: UIViewController {
     private static let numberOfSections = 1
     private static let heightForRow: CGFloat = 150
     private var movies: [Movie] = []
+    private var manageData = ManageData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,5 +82,17 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setData(for: movies[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            manageData.deleteMovieFromCoreData(movie: movies[indexPath.row])
+            movies.remove(at: indexPath.row)
+            tableViewFavorites.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
