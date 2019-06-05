@@ -14,12 +14,11 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var imageViewPoster: UIImageView!
     @IBOutlet weak var labelMovieTitle: UILabel!
     @IBOutlet weak var labelMovieYear: UILabel!
-    @IBOutlet weak var labelMovieGender: UILabel!
+    @IBOutlet weak var labelMovieGenre: UILabel!
     @IBOutlet weak var labelMovieDescription: UILabel!
     
     private lazy var requester = MoviesDetailsRequester()
     private var movie: Movie?
-    private var genres: [Genre] = []
     
     init(movie: Movie) {
         self.movie = movie
@@ -40,9 +39,30 @@ class MovieDetailsViewController: UIViewController {
     func getListOfGenres() {
         requester.getGenresList(path: APIData.mountPathForRequest(path: APIData.Endpoints.genresList), responseRequest: { data in
             if let genres = data.genres {
-                self.genres = genres
+                self.labelMovieGenre.text = self.setGenresForMovie(genres: genres)
             }
         })
+    }
+    
+    func setGenresForMovie(genres: [Genre]) -> String {
+        guard let genresIdentifiers = movie?.genres else { return String() }
+        var movieGenres = String()
+        
+        for (index, identifier) in genresIdentifiers.enumerated() {
+            for genre in genres {
+                guard let genreName = genre.name else { return String() }
+                
+                if identifier == genre.id {
+                    if index < genresIdentifiers.count - 1 {
+                        movieGenres += "\(genreName), "
+                    } else {
+                        movieGenres += "\(genreName)"
+                    }
+                }
+            }
+        }
+        
+        return movieGenres
     }
     
     func renderDataOfMovie() {
