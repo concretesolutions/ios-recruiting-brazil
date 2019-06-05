@@ -82,7 +82,9 @@ class MovieDetailsViewController: UIViewController {
         }
         
         if let year = movie.releaseDate {
-            labelMovieYear.text = year
+            let index = year.index(year.startIndex, offsetBy: 4)
+            
+            labelMovieYear.text = String(year.prefix(upTo: index))
         }
         
         if let description = movie.description {
