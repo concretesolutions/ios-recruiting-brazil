@@ -57,6 +57,19 @@ extension MovieDataBase {
     
 }
 
+extension MovieDataBase {
+    
+    private func parseModelFromDataBase(model: MovieElementModel) {
+        guard let id = model.id else { return }
+        let movieDB = MovieDB(context: PersistentManager.shared.context)
+        movieDB.id = id
+        
+        
+        
+    }
+    
+}
+
 
 
 
