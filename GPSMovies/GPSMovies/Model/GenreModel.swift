@@ -13,6 +13,6 @@ class GenreModel : Codable {
 }
 
 class Genres : Codable {
-    var id : Int?
+    var id : Int64?
     var name : String?
 }

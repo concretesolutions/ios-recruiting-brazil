@@ -32,7 +32,7 @@ class MovieElementModel : Codable {
     var posterPath : String?
     var originalLanguage : String?
     var originalTitle : String?
-    var genreIds : [Int]?
+    var genreIds : [Int64]?
     var backdropPath : String?
     var adult : Bool?
     var overview : String?

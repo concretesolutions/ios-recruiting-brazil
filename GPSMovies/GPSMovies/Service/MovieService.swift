@@ -12,7 +12,7 @@ import Alamofire
 final class MovieService: MainService {
     
     private let GETPOPULARMOVIES = "/movie/popular"
-    private let GETGENRE = ""
+    private let GETGENRE = "/genre/movie/list"
     
     func getPopularMovies(page: Int, completion: @escaping (ResultSwift<MovieModel, ErrorType>) -> Void) {
         
@@ -38,7 +38,7 @@ final class MovieService: MainService {
         
         let urlGet = "\(self.getHost())\(self.GETGENRE)"
         
-        Alamofire.request(urlGet, method: .get).validate().responseJSON { (response) in
+        Alamofire.request(urlGet, method: .get, parameters: self.getParametersBasic(), encoding: URLEncoding(destination: .queryString)).validate().responseJSON { (response) in
             switch response.result{
             case .success:
                 guard let data = response.data else { completion(.failure(.generic)); return }

@@ -96,7 +96,7 @@ extension MovieListViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElement {
+        if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElementViewData {
             controller.viewData = viewData
         }
     }

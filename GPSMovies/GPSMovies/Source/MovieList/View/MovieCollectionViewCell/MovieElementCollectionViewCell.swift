@@ -26,7 +26,7 @@ class MovieElementCollectionViewCell: UICollectionViewCell {
 }
 
 extension MovieElementCollectionViewCell {
-    func prepareCell(viewData: MovieElement) {
+    func prepareCell(viewData: MovieElementViewData) {
         if viewData.urlImageCover.isEmpty {
             self.imageMovie.image = UIImage()
         }else {

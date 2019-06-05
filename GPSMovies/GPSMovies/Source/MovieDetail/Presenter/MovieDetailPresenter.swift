@@ -9,7 +9,7 @@
 import Foundation
 
 //MARK: - STRUCT VIEW DATA -
-struct MovieDetailViewData {
+struct TempMovieDetailViewData {
     
 }
 
@@ -22,7 +22,7 @@ protocol MovieDetailViewDelegate: NSObjectProtocol {
 class MovieDetailPresenter {
     
     private weak var viewDelegate: MovieDetailViewDelegate?
-    private lazy var viewData = MovieDetailViewData()
+    private lazy var viewData = TempMovieDetailViewData()
     
     init(viewDelegate: MovieDetailViewDelegate) {
         self.viewDelegate = viewDelegate
@@ -31,11 +31,13 @@ class MovieDetailPresenter {
 
 //SERVICE
 extension MovieDetailPresenter {
-    
+   
 }
 
 //AUX METHODS
 extension MovieDetailPresenter {
+    
+    
     
 }
 

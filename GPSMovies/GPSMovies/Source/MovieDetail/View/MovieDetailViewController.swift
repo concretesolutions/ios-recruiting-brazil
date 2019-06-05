@@ -28,7 +28,7 @@ class MovieDetailViewController: UIViewController {
     
     // MARK: VARIABLES
     private var presenter: MovieDetailPresenter!
-    public lazy var viewData = MovieElement()
+    public lazy var viewData = MovieElementViewData()
     
     // MARK: IBACTIONS
 }

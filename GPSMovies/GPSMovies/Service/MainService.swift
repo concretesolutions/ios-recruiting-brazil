@@ -22,10 +22,15 @@ class MainService {
     }
     
     func getParameters(in page: Int) -> [String: Any] {
+        var parameter = self.getParametersBasic()
+        parameter["page"] = page
+        return parameter
+    }
+    
+    func getParametersBasic() -> [String: Any] {
         var parameter = Dictionary<String, Any>()
         parameter["api_key"] = self.getApiKey()
         parameter["language"] = "pt-BR"
-        parameter["page"] = page
         return parameter
     }
 }

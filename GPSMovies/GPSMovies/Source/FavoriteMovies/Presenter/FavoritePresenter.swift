@@ -15,7 +15,7 @@ struct FavoriteViewData {
 
 struct GenereViewData {
     var nameGenere = ""
-    var movies = [MovieElement]()
+    var movies = [MovieElementViewData]()
 }
 
 //MARK: - VIEW DELEGATE -
