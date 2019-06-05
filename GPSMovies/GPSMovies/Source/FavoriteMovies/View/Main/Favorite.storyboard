@@ -9,39 +9,66 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favorite View Controller-->
+        <!--Meus Favoritos-->
         <scene sceneID="UsB-yQ-b8Z">
             <objects>
-                <viewController storyboardIdentifier="favoriteViewController" id="34a-vY-EgM" customClass="FavoriteViewController" customModule="GPSMovies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="34a-vY-EgM" customClass="FavoriteViewController" customModule="GPSMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9ZY-my-ea5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2gj-V1-7A8">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="34a-vY-EgM" id="PxX-2b-J1r"/>
                                     <outlet property="delegate" destination="34a-vY-EgM" id="bWY-na-Z8j"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.42352941179999998" green="0.75294117650000003" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2gj-V1-7A8" firstAttribute="top" secondItem="0Lo-6K-Kku" secondAttribute="top" constant="20" id="Jqt-DK-ipP"/>
-                            <constraint firstItem="0Lo-6K-Kku" firstAttribute="bottom" secondItem="2gj-V1-7A8" secondAttribute="bottom" id="UIH-Xb-nah"/>
+                            <constraint firstItem="2gj-V1-7A8" firstAttribute="top" secondItem="0Lo-6K-Kku" secondAttribute="top" id="Jqt-DK-ipP"/>
+                            <constraint firstAttribute="bottom" secondItem="2gj-V1-7A8" secondAttribute="bottom" id="UIH-Xb-nah"/>
                             <constraint firstItem="2gj-V1-7A8" firstAttribute="leading" secondItem="0Lo-6K-Kku" secondAttribute="leading" id="WmJ-SF-MKE"/>
                             <constraint firstItem="0Lo-6K-Kku" firstAttribute="trailing" secondItem="2gj-V1-7A8" secondAttribute="trailing" id="Y0f-Zq-NQo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Lo-6K-Kku"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Meus Favoritos" id="ZGY-7K-aIh"/>
                     <connections>
                         <outlet property="tableView" destination="2gj-V1-7A8" id="cUZ-AY-dyD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UrO-6y-Fk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-122" y="74"/>
+            <point key="canvasLocation" x="786.95652173913049" y="73.660714285714278"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jbc-RT-0Ml">
+            <objects>
+                <navigationController storyboardIdentifier="favoriteViewController" automaticallyAdjustsScrollViewInsets="NO" id="39t-IU-mGf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xto-vM-1cA">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Tzd-Pj-2F0">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="34a-vY-EgM" kind="relationship" relationship="rootViewController" id="Lqf-yu-JLR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CTX-aa-tbb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-123.18840579710145" y="73.660714285714278"/>
         </scene>
     </scenes>
 </document>

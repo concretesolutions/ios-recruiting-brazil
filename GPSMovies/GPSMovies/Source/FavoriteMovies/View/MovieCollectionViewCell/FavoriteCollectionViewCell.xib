@@ -21,24 +21,22 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aM8-RA-MJ4" userLabel="ViewMain">
                         <rect key="frame" x="0.0" y="0.0" width="180" height="252"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8qm-Fh-OQq">
-                                <rect key="frame" x="0.0" y="0.0" width="180" height="233"/>
-                                <color key="backgroundColor" red="0.98520690200000005" green="0.58382290599999997" blue="0.0087244687599999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="madMax.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="8qm-Fh-OQq">
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="229.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQk-lC-Wz3">
-                                <rect key="frame" x="0.0" y="238" width="180" height="14"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQk-lC-Wz3">
+                                <rect key="frame" x="5" y="234.5" width="170" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="8qm-Fh-OQq" secondAttribute="trailing" id="8x3-gc-eW8"/>
                             <constraint firstAttribute="height" constant="252" id="Bxg-Oj-jkp"/>
-                            <constraint firstAttribute="trailing" secondItem="YQk-lC-Wz3" secondAttribute="trailing" id="OvE-9c-03V"/>
+                            <constraint firstAttribute="trailing" secondItem="YQk-lC-Wz3" secondAttribute="trailing" constant="5" id="OvE-9c-03V"/>
                             <constraint firstItem="YQk-lC-Wz3" firstAttribute="top" secondItem="8qm-Fh-OQq" secondAttribute="bottom" constant="5" id="Ovk-H2-hBh"/>
-                            <constraint firstItem="YQk-lC-Wz3" firstAttribute="leading" secondItem="aM8-RA-MJ4" secondAttribute="leading" id="RzP-kA-zWY"/>
+                            <constraint firstItem="YQk-lC-Wz3" firstAttribute="leading" secondItem="aM8-RA-MJ4" secondAttribute="leading" constant="5" id="RzP-kA-zWY"/>
                             <constraint firstAttribute="width" constant="180" id="jAg-wx-lyf"/>
                             <constraint firstItem="8qm-Fh-OQq" firstAttribute="leading" secondItem="aM8-RA-MJ4" secondAttribute="leading" id="pBD-uX-334"/>
                             <constraint firstItem="8qm-Fh-OQq" firstAttribute="top" secondItem="aM8-RA-MJ4" secondAttribute="top" id="pDq-4t-Jlk"/>
@@ -57,4 +55,7 @@
             <point key="canvasLocation" x="-81" y="93"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="madMax.jpg" width="500" height="750"/>
+    </resources>
 </document>
