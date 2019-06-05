@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="GenreDB" representedClassName="GenreDB" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MovieDB" inverseName="genres" inverseEntity="MovieDB" syncable="YES"/>
     </entity>
     <entity name="MovieDB" representedClassName="MovieDB" syncable="YES" codeGenerationType="class">
         <attribute name="coverPath" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,10 +13,10 @@
         <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="relaseDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GenreDB" syncable="YES"/>
+        <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GenreDB" inverseName="movies" inverseEntity="GenreDB" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GenreDB" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="GenreDB" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="MovieDB" positionX="-54" positionY="9" width="128" height="165"/>
     </elements>
 </model>

@@ -12,6 +12,7 @@ import Alamofire
 final class MovieService: MainService {
     
     private let GETPOPULARMOVIES = "/movie/popular"
+    private let GETGENRE = ""
     
     func getPopularMovies(page: Int, completion: @escaping (ResultSwift<MovieModel, ErrorType>) -> Void) {
         
@@ -33,4 +34,23 @@ final class MovieService: MainService {
         }
     }
     
+    func getGenre(completion: @escaping (ResultSwift<GenreModel, ErrorType>) -> Void) {
+        
+        let urlGet = "\(self.getHost())\(self.GETGENRE)"
+        
+        Alamofire.request(urlGet, method: .get).validate().responseJSON { (response) in
+            switch response.result{
+            case .success:
+                guard let data = response.data else { completion(.failure(.generic)); return }
+                do{
+                    let genre = try JSONDecoder().decode(GenreModel.self, from: data)
+                    completion(.success(genre))
+                }catch{
+                    completion(.failure(.generic))
+                }
+            case .failure:
+                completion(.failure(.generic))
+            }
+        }
+    }
 }

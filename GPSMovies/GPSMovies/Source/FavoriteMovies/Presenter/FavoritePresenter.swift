@@ -28,23 +28,29 @@ class FavoritePresenter {
     
     private weak var viewDelegate: FavoriteViewDelegate?
     private lazy var viewData = FavoriteViewData()
+    private var dataBase: GenreDataBase!
     
     init(viewDelegate: FavoriteViewDelegate) {
         self.viewDelegate = viewDelegate
+        self.dataBase = GenreDataBase()
     }
 }
 
-//SERVICE
+//MARK: - SERVICE -
+extension FavoritePresenter {
+    
+    func getFavoriteMovies() {
+        
+    }
+    
+}
+
+//MARK: - UX METHODS -
 extension FavoritePresenter {
     
 }
 
-//AUX METHODS
-extension FavoritePresenter {
-    
-}
-
-//DATABASE
+//MARK: - DATABASE -
 extension FavoritePresenter {
     
 }

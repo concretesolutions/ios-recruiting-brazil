@@ -64,8 +64,6 @@ extension MovieDataBase {
         let movieDB = MovieDB(context: PersistentManager.shared.context)
         movieDB.id = id
         
-        
-        
     }
     
 }
