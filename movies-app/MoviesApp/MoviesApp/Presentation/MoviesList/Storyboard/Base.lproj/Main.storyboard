@@ -63,18 +63,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="IUm-Xl-yej">
-                                <rect key="frame" x="0.0" y="116" width="375" height="50"/>
-                                <color key="backgroundColor" red="0.95584136249999996" green="0.86264288430000002" blue="0.55287206170000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="16n-xA-Ajg"/>
-                                </constraints>
-                                <color key="tintColor" red="0.95584136247634888" green="0.86264288425445557" blue="0.55287206172943115" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="barTintColor" red="0.95192617177963257" green="0.85871690511703491" blue="0.54895037412643433" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Y1o-qg-irC">
-                                <rect key="frame" x="0.0" y="166" width="375" height="452"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jNk-DM-L58">
                                     <size key="itemSize" width="50" height="50"/>
@@ -96,25 +86,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="IUm-Xl-yej" firstAttribute="leading" secondItem="cRJ-bu-bJr" secondAttribute="leading" id="JZk-z6-7xr"/>
-                            <constraint firstItem="IUm-Xl-yej" firstAttribute="trailing" secondItem="cRJ-bu-bJr" secondAttribute="trailing" id="MKa-L5-NaZ"/>
-                            <constraint firstItem="Y1o-qg-irC" firstAttribute="top" secondItem="IUm-Xl-yej" secondAttribute="bottom" id="Tmc-DN-azN"/>
+                            <constraint firstItem="Y1o-qg-irC" firstAttribute="top" secondItem="cRJ-bu-bJr" secondAttribute="top" id="f0o-bF-yCh"/>
                             <constraint firstItem="Y1o-qg-irC" firstAttribute="leading" secondItem="cRJ-bu-bJr" secondAttribute="leading" id="hS8-oh-zob"/>
                             <constraint firstItem="Y1o-qg-irC" firstAttribute="bottom" secondItem="cRJ-bu-bJr" secondAttribute="bottom" id="jNS-Gj-AGd"/>
                             <constraint firstItem="Y1o-qg-irC" firstAttribute="trailing" secondItem="cRJ-bu-bJr" secondAttribute="trailing" id="jNb-6D-Y1v"/>
-                            <constraint firstItem="IUm-Xl-yej" firstAttribute="top" secondItem="cRJ-bu-bJr" secondAttribute="top" id="xzh-DH-P4F"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cRJ-bu-bJr"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="1Z5-xf-FoN"/>
                     <connections>
                         <outlet property="collectionViewMovies" destination="Y1o-qg-irC" id="0Ov-b2-eYo"/>
-                        <outlet property="searchBarMovies" destination="IUm-Xl-yej" id="r3N-2f-AkH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVT-Hd-8Hb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3438" y="-739"/>
+            <point key="canvasLocation" x="3437.5999999999999" y="-739.88005997001505"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="C9L-tH-sxY">

@@ -9,7 +9,6 @@
 import UIKit
 
 class MoviesListViewController: UIViewController {
-    @IBOutlet weak var searchBarMovies: UISearchBar!
     @IBOutlet weak var collectionViewMovies: UICollectionView!
     
     private let numberOfSections = 1
