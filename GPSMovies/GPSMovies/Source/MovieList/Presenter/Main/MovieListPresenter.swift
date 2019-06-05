@@ -92,7 +92,7 @@ extension MovieListPresenter {
         }
     }
     
-    private func parseModelElementFromViewData(resultModel: Results) {
+    private func parseModelElementFromViewData(resultModel: MovieElementModel) {
         var element = MovieElement()
         element.title = resultModel.title ?? ""
         element.detail.releaseDate = resultModel.releaseDate ?? ""

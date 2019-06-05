@@ -1,5 +1,5 @@
 //
-//  MovieDataBase.swift
+//  GenreDataBase.swift
 //  GPSMovies
 //
 //  Created by Gilson Santos on 04/06/19.
@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import CoreData
 
-class MovieDataBase {
+class GenreDataBase {
     
 }

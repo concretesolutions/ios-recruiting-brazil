@@ -10,7 +10,12 @@ import Foundation
 
 //MARK: - STRUCT VIEW DATA -
 struct FavoriteViewData {
-    
+    var favoritesMovies = [GenereViewData]()
+}
+
+struct GenereViewData {
+    var nameGenere = ""
+    var movies = [MovieElement]()
 }
 
 //MARK: - VIEW DELEGATE -

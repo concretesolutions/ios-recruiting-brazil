@@ -12,7 +12,7 @@ class MovieModel : Codable {
     var page : Int?
     var totalResults : Int?
     var totalPages : Int?
-    var results : [Results]?
+    var results : [MovieElementModel]?
     
     enum CodingKeys: String, CodingKey {
         case page = "page"
@@ -22,9 +22,9 @@ class MovieModel : Codable {
     }
 }
 
-class Results : Codable {
+class MovieElementModel : Codable {
     var voteCount : Int?
-    var id : Int?
+    var id : Int64?
     var video : Bool?
     var voteAverage : Double?
     var title : String?

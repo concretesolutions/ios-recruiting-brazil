@@ -42,6 +42,7 @@ extension MovieDetailViewController {
         self.setupFavoriteView()
         self.prepareView()
         self.fadeOutImage()
+        self.navigationController?.navigationBar.tintColor = .white
     }
 }
 
