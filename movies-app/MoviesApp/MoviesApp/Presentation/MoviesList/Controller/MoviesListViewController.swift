@@ -56,6 +56,7 @@ extension MoviesListViewController: UICollectionViewDelegate, UICollectionViewDa
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesListCollectionViewCell.reusableIdentifier, for: indexPath) as? MoviesListCollectionViewCell else { return UICollectionViewCell() }
         
         cell.setData(for: movies[indexPath.row])
+        cell.setCurrentMovie(movie: movies[indexPath.row])
         
         return cell
     }

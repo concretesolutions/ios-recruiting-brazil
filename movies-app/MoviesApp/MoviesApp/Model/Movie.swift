@@ -41,4 +41,15 @@ struct Movie: Codable {
         releaseDate = try values.decodeIfPresent(String.self, forKey: .releaseDate)
         genres = try values.decodeIfPresent([Int].self, forKey: .genres)
     }
+    
+    init(id: Int? = nil, title: String, rating: Double? = nil, image: String, originalTitle: String? = nil, description: String, releaseDate: String, genres: [Int]? = nil) {
+        self.id = id
+        self.title = title
+        self.rating = rating
+        self.image = image
+        self.originalTitle = originalTitle
+        self.description = description
+        self.releaseDate = releaseDate
+        self.genres = genres
+    }
 }

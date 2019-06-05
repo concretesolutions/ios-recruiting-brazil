@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FavoritesTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewFavoritePoster: UIImageView!
@@ -20,5 +21,25 @@ class FavoritesTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func setData(for movie: Movie) {
+        guard let image = URL(string: APIData.imagePath + movie.image!) else { return }
+        
+        imageViewFavoritePoster.sd_setImage(with: image, completed: nil)
+        
+        if let title = movie.title {
+            labelFavoriteTitle.text = title
+        }
+        
+        if let year = movie.releaseDate {
+            let index = year.index(year.startIndex, offsetBy: 4)
+            
+            labelFavoriteReleaseYear.text = String(year.prefix(upTo: index))
+        }
+        
+        if let description = movie.description {
+            labelFavoriteDescription.text = description
+        }
     }
 }

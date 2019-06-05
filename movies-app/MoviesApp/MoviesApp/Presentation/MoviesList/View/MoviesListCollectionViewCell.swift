@@ -14,12 +14,19 @@ class MoviesListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var buttonFavorite: UIButton!
     
+    private let manageData = ManageData()
+    private var movie: Movie?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     static func instanceOfNib() -> UINib {
         return UINib(nibName: MoviesListCollectionViewCell.reusableIdentifier, bundle: Bundle.main)
+    }
+    
+    func setCurrentMovie(movie: Movie) {
+        self.movie = movie
     }
     
     func setData(for movie: Movie) {
@@ -29,6 +36,12 @@ class MoviesListCollectionViewCell: UICollectionViewCell {
         
         if let title = movie.title {
             labelTitle.text = title
+        }
+    }
+    
+    @IBAction func actionSaveMovieOnFavorite(_ sender: UIButton) {
+        if let movieToBeSaved = movie {
+            manageData.createData(movie: movieToBeSaved)
         }
     }
 }
