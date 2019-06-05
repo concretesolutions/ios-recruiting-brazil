@@ -33,6 +33,8 @@
 		9BA42E3122A632C300DF9173 /* FavoritesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA42E2F22A632C300DF9173 /* FavoritesTableViewCell.xib */; };
 		9BA42E3422A6337700DF9173 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA42E3322A6337700DF9173 /* UITableViewCell.swift */; };
 		9BA42E3622A73CB200DF9173 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA42E3522A73CB200DF9173 /* UITableView.swift */; };
+		9BA42E3922A73FB000DF9173 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA42E3722A73FB000DF9173 /* ErrorViewController.swift */; };
+		9BA42E3A22A73FB000DF9173 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BA42E3822A73FB000DF9173 /* ErrorViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		9BA42E2F22A632C300DF9173 /* FavoritesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesTableViewCell.xib; sourceTree = "<group>"; };
 		9BA42E3322A6337700DF9173 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		9BA42E3522A73CB200DF9173 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		9BA42E3722A73FB000DF9173 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		9BA42E3822A73FB000DF9173 /* ErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
 		B2560A45C7B13108769F8A6B /* Pods_MoviesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoviesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AA7B7EE7742C97B16E20A5 /* Pods-MoviesApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesApp.release.xcconfig"; path = "Target Support Files/Pods-MoviesApp/Pods-MoviesApp.release.xcconfig"; sourceTree = "<group>"; };
 		D6F733FA0408610ECA6805C8 /* Pods-MoviesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesApp.debug.xcconfig"; path = "Target Support Files/Pods-MoviesApp/Pods-MoviesApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				9BA42E1322A47C8E00DF9173 /* MovieDetails */,
 				9BA42E0722A43F3D00DF9173 /* MoviesList */,
 				9BA42E2922A630B300DF9173 /* Favorites */,
+				9BA42E3B22A73FB600DF9173 /* Error */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -317,6 +322,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9BA42E3B22A73FB600DF9173 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				9BA42E3722A73FB000DF9173 /* ErrorViewController.swift */,
+				9BA42E3822A73FB000DF9173 /* ErrorViewController.xib */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		E4A75B30748CE4B58F3496D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,6 +426,7 @@
 			files = (
 				9B03A45E22A0CCF4009BB0F0 /* LaunchScreen.storyboard in Resources */,
 				9BA42E3122A632C300DF9173 /* FavoritesTableViewCell.xib in Resources */,
+				9BA42E3A22A73FB000DF9173 /* ErrorViewController.xib in Resources */,
 				9B03A45B22A0CCF4009BB0F0 /* Assets.xcassets in Resources */,
 				9BA42E0422A437F400DF9173 /* MoviesListCollectionViewCell.xib in Resources */,
 				9B03A45922A0CCF3009BB0F0 /* Main.storyboard in Resources */,
@@ -511,6 +526,7 @@
 				9BA42DFD22A41A4500DF9173 /* Colors.swift in Sources */,
 				9BA42E2122A6221000DF9173 /* Genre.swift in Sources */,
 				9BA42E0622A43E7C00DF9173 /* UICollectionViewCell.swift in Sources */,
+				9BA42E3922A73FB000DF9173 /* ErrorViewController.swift in Sources */,
 				9BA42E1022A469CC00DF9173 /* APIData.swift in Sources */,
 				9BA42E0E22A4657B00DF9173 /* MoviesListRequester.swift in Sources */,
 				9B03A45422A0CCF2009BB0F0 /* AppDelegate.swift in Sources */,

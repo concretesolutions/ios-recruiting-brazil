@@ -30,6 +30,8 @@ class MoviesListViewController: UIViewController {
             if let movies = moviesList.movies {
                 self.movies = movies
                 self.collectionViewMovies.reloadData()
+            } else {
+                self.present(ErrorViewController(), animated: true, completion: nil)
             }
         })
     }
