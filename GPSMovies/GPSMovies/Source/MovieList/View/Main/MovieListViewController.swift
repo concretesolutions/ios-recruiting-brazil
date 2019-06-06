@@ -29,7 +29,7 @@ extension MovieListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = MovieListPresenter(viewDelegate: self)
-        self.presenter.getPopularMovies()
+        self.presenter.callServices()
         self.registerCell()
     }
 }

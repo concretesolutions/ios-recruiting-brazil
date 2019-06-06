@@ -12,21 +12,27 @@ import Foundation
 struct MovieListViewData {
     var currentPage = 1
     var totalPages = 1
-    var movies = [MovieElement]()
+    var movies = [MovieElementViewData]()
 }
 
-struct MovieElement {
+struct MovieElementViewData {
     var title = ""
     var urlImageCover = ""
-    var detail = MovieDetail()
+    var detail = MovieDetailViewData()
 }
 
-struct MovieDetail {
+struct MovieDetailViewData {
     var releaseDate = ""
     var rating = 0.0
     var urlImagePost = ""
     var description = ""
     var isFavorited = false
+    var genres = [GenreViewData]()
+}
+
+struct GenreViewData {
+    var id: Int64 = 0
+    var name = ""
 }
 
 //MARK: - VIEW DELEGATE -
@@ -44,6 +50,7 @@ class MovieListPresenter {
     private weak var viewDelegate: MovieListViewDelegate?
     private lazy var viewData = MovieListViewData()
     private var service: MovieService!
+    private var genreViewDataList = [GenreViewData]()
     
     init(viewDelegate: MovieListViewDelegate) {
         self.viewDelegate = viewDelegate
@@ -53,13 +60,20 @@ class MovieListPresenter {
 
 //SERVICE
 extension MovieListPresenter {
-    func getPopularMovies() {
+    
+    public func callServices() {
         self.viewDelegate?.showLoading()
         if !Reachability.isConnectedToNetwork() {
             self.viewDelegate?.hideLoading()
             self.viewDelegate?.showError()
             return
         }
+        self.getGenres {
+            self.getPopularMovies()
+        }
+    }
+    
+    private func getPopularMovies() {
         self.service.getPopularMovies(page: 1) { (result) in
             DispatchQueue.main.async {
                 switch result {
@@ -79,6 +93,23 @@ extension MovieListPresenter {
             }
         }
     }
+    
+    private func getGenres(completion: @escaping () -> Void) {
+        self.service.getGenre { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let genreModel):
+                    self.parseGenreModelFromViewData(model: genreModel)
+                    self.createGenreDataBase(model: genreModel)
+                    break
+                case .failure(_):
+                    break
+                }
+                completion()
+                return
+            }
+        }
+    }
 }
 
 //AUX METHODS
@@ -93,7 +124,7 @@ extension MovieListPresenter {
     }
     
     private func parseModelElementFromViewData(resultModel: MovieElementModel) {
-        var element = MovieElement()
+        var element = MovieElementViewData()
         element.title = resultModel.title ?? ""
         element.detail.releaseDate = resultModel.releaseDate ?? ""
         element.detail.rating = resultModel.voteAverage ?? 0.0
@@ -104,11 +135,38 @@ extension MovieListPresenter {
             element.detail.urlImagePost = "https://image.tmdb.org/t/p/w500\(posterPath)"
         }
         element.detail.description = resultModel.overview ?? ""
+        if let genreIdList = resultModel.genreIds, genreIdList.count > 0 {
+            genreIdList.forEach { (genreIdRow) in
+                if let genreViewData = self.getGenreViewDataById(id: genreIdRow) {
+                     element.detail.genres.append(genreViewData)
+                }
+            }
+        }
         self.viewData.movies.append(element)
     }
+    
+    private func parseGenreModelFromViewData(model: GenreModel) {
+        self.genreViewDataList.removeAll()
+        if let genreList = model.genres, genreList.count > 0 {
+            genreList.forEach { (genreRow) in
+                let genreViewData = GenreViewData(id: genreRow.id ?? 0, name: genreRow.name ?? "")
+                self.genreViewDataList.append(genreViewData)
+            }
+        }
+    }
+    
+    private func getGenreViewDataById(id: Int64) -> GenreViewData? {
+        return self.genreViewDataList.filter({$0.id == id}).first
+    }
+    
 }
 
 //DATABASE
 extension MovieListPresenter {
+    
+    private func createGenreDataBase(model: GenreModel) {
+        GenreDataBase().createOrUpdateGenreDataBase(model: model)
+    }
+    
     
 }
