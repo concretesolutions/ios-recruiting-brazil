@@ -61,4 +61,9 @@ extension GenreDataBase {
         genreDB.name = model.name
         PersistentManager.shared.saveContext()
     }
+    
+    private func parseFromModel(genreDB: [GenreDB]) -> GenreModel {
+        let genreModel = GenreModel()
+        
+    }
 }

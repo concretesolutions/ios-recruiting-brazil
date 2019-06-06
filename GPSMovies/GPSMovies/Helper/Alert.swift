@@ -1,10 +1,3 @@
-//
-//  Alert.swift
-//  GitHubRepository
-//
-//  Created by Gilson Santos on 28/11/18.
-//  Copyright © 2018 Gilson Santos. All rights reserved.
-//
 
 import UIKit
 

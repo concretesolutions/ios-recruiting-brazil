@@ -1,9 +1,3 @@
-//
-//  Reachability.swift
-//  MeuTim
-//
-//  Copyright © 2016 Tim. All rights reserved.
-//
 
 import Foundation
 import SystemConfiguration

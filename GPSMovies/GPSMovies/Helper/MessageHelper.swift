@@ -1,10 +1,3 @@
-//
-//  MessageHelper.swift
-//  GitHubRepository
-//
-//  Created by Gilson Santos on 26/11/18.
-//  Copyright © 2018 Gilson Santos. All rights reserved.
-//
 
 import Foundation
 

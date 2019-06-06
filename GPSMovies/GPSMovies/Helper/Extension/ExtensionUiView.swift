@@ -1,10 +1,3 @@
-//
-//  extensionUiView.swift
-//  CarMonitor
-//
-//  Created by Gilson Santos on 19/11/18.
-//  Copyright © 2018 Gilson Santos. All rights reserved.
-//
 
 import UIKit
 

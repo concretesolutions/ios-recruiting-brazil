@@ -158,7 +158,6 @@ extension MovieListPresenter {
     private func getGenreViewDataById(id: Int64) -> GenreViewData? {
         return self.genreViewDataList.filter({$0.id == id}).first
     }
-    
 }
 
 //DATABASE
@@ -168,5 +167,7 @@ extension MovieListPresenter {
         GenreDataBase().createOrUpdateGenreDataBase(model: model)
     }
     
-    
+    private func getGenresDataBase() -> [GenreModel] {
+        
+    }
 }
