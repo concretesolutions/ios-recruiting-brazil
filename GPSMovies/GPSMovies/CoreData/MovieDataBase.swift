@@ -32,7 +32,7 @@ extension MovieDataBase {
     }
     
     public func isFavoriteMovie(idMovie: Int64) -> Bool {
-        return self.getMovieById(id: idMovie) == nil
+        return self.getMovieById(id: idMovie) != nil
     }
     
     private func getMovieById(id: Int64) -> MovieDB?{

@@ -11,6 +11,7 @@ import Cosmos
 import Lottie
 import Kingfisher
 
+
 class MovieDetailViewController: UIViewController {
     
     // MARK: OUTLETS
@@ -29,6 +30,7 @@ class MovieDetailViewController: UIViewController {
     // MARK: VARIABLES
     private var presenter: MovieDetailPresenter!
     public lazy var viewData = MovieElementViewData()
+    public var selectedFavorite: ((_ index: Int64) -> Void)?
     
     // MARK: IBACTIONS
 }
@@ -80,14 +82,14 @@ extension MovieDetailViewController {
     }
     
     @objc private func addAndRemoveFavorite() {
+        guard !self.viewFavorite.isAnimationPlaying else { return }
         if self.viewData.detail.isFavorited {
             self.viewFavorite.stop()
-            self.viewData.detail.isFavorited = false
         }else {
             self.viewFavorite.play()
-            self.viewData.detail.isFavorited = true
         }
         self.presenter.addMovieFavorite(movieViewData: self.viewData)
+        self.selectedFavorite?(self.viewData.id)
     }
     
     private func downloadImage(urlString: String, imageView: UIImageView) {

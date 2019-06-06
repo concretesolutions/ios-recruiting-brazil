@@ -98,6 +98,14 @@ extension MovieListViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElementViewData {
             controller.viewData = viewData
+            controller.selectedFavorite = self.selecteFavorite
         }
+    }
+    
+    private func selecteFavorite(id: Int64) {
+        guard let index = self.viewData.movies.firstIndex(where: {$0.id == id}) else { return }
+        self.viewData.movies[index].detail.isFavorited = !self.viewData.movies[index].detail.isFavorited
+        let indexPath = IndexPath(row: index, section: 0)
+        let cell = self.collectionView.cellForItem(at: indexPath)
     }
 }
