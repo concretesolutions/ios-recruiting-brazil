@@ -134,7 +134,9 @@ extension MovieListPresenter {
         element.id = resultModel.id ?? 0
         element.title = resultModel.title ?? ""
         element.detail.releaseDate = resultModel.releaseDate ?? ""
-        element.detail.rating = resultModel.voteAverage ?? 0.0
+        if let rating = resultModel.voteAverage {
+            element.detail.rating = rating / 2
+        }
         if let coverPath = resultModel.posterPath {
             element.urlImageCover = "https://image.tmdb.org/t/p/w500\(coverPath)"
         }
