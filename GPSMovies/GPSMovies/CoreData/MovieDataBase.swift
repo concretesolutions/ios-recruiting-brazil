@@ -20,13 +20,19 @@ extension MovieDataBase {
         if let movieResult = self.getMovieById(id: id){
             self.removeMovieDataBase(movieResult)
         }else{
-            
-            //create DB
+            self.parseModelFromDataBase(model: model)
         }
     }
     
-    public func fetchMoviesDataBase() -> [MovieDB]?{
-        return self.getMovieList()
+    public func fetchMoviesDataBase() -> [MovieElementModel]?{
+        if let movieListDB = self.getMovieList(), movieListDB.count > 0 {
+            return self.parseDataBaseFromModel(moviesDB: movieListDB)
+        }
+        return nil
+    }
+    
+    public func isFavoriteMovie(idMovie: Int64) -> Bool {
+        return self.getMovieById(id: idMovie) == nil
     }
     
     private func getMovieById(id: Int64) -> MovieDB?{
@@ -54,18 +60,46 @@ extension MovieDataBase {
         PersistentManager.shared.context.delete(dataBase)
         PersistentManager.shared.saveContext()
     }
-    
 }
 
 extension MovieDataBase {
     
     private func parseModelFromDataBase(model: MovieElementModel) {
         guard let id = model.id else { return }
+        let genreDataBase = GenreDataBase()
         let movieDB = MovieDB(context: PersistentManager.shared.context)
         movieDB.id = id
-        
+        movieDB.title = model.title
+        movieDB.coverPath = model.backdropPath
+        movieDB.posterPath = model.posterPath
+        movieDB.overview = model.overview
+        movieDB.rating = model.voteAverage ?? 0.0
+        movieDB.relaseDate = model.releaseDate
+        if let genreIds = model.genreIds, genreIds.count > 0 {
+            genreIds.forEach { (genreIdRow) in
+                if let genreDB = genreDataBase.fetchGenreDataBaseById(id: genreIdRow) {
+                    movieDB.addToGenres(genreDB)
+                }
+            }
+        }
+        PersistentManager.shared.saveContext()
     }
     
+    private func parseDataBaseFromModel(moviesDB: [MovieDB]) -> [MovieElementModel] {
+        var moviesModelList = [MovieElementModel]()
+        moviesDB.forEach { (movieRow) in
+            let movieModel = MovieElementModel()
+            movieModel.id = movieRow.id
+            movieModel.title = movieRow.title
+            movieModel.backdropPath = movieRow.coverPath
+            movieModel.posterPath = movieRow.posterPath
+            movieModel.overview = movieRow.overview
+            movieModel.voteAverage = movieRow.rating
+            movieModel.releaseDate = movieRow.relaseDate
+            moviesModelList.append(movieModel)
+        }
+        return moviesModelList
+    }
 }
 
 

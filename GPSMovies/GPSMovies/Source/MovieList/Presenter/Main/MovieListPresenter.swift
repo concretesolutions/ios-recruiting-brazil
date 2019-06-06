@@ -16,6 +16,7 @@ struct MovieListViewData {
 }
 
 struct MovieElementViewData {
+    var id: Int64 = 0
     var title = ""
     var urlImageCover = ""
     var detail = MovieDetailViewData()
@@ -51,6 +52,7 @@ class MovieListPresenter {
     private lazy var viewData = MovieListViewData()
     private var service: MovieService!
     private var genreViewDataList = [GenreViewData]()
+    private var favoriteMovies: [MovieElementModel]!
     
     init(viewDelegate: MovieListViewDelegate) {
         self.viewDelegate = viewDelegate
@@ -72,6 +74,8 @@ extension MovieListPresenter {
             self.getPopularMovies()
         }
     }
+    
+   
     
     private func getPopularMovies() {
         self.service.getPopularMovies(page: 1) { (result) in
@@ -103,6 +107,8 @@ extension MovieListPresenter {
                     self.createGenreDataBase(model: genreModel)
                     break
                 case .failure(_):
+                    let genreModelDB = self.getGenresDataBase()
+                    self.parseGenreModelFromViewData(model: genreModelDB)
                     break
                 }
                 completion()
@@ -125,6 +131,7 @@ extension MovieListPresenter {
     
     private func parseModelElementFromViewData(resultModel: MovieElementModel) {
         var element = MovieElementViewData()
+        element.id = resultModel.id ?? 0
         element.title = resultModel.title ?? ""
         element.detail.releaseDate = resultModel.releaseDate ?? ""
         element.detail.rating = resultModel.voteAverage ?? 0.0
@@ -142,6 +149,7 @@ extension MovieListPresenter {
                 }
             }
         }
+        element.detail.isFavorited = self.getFavoriteStatus(idMovie: element.id)
         self.viewData.movies.append(element)
     }
     
@@ -167,7 +175,11 @@ extension MovieListPresenter {
         GenreDataBase().createOrUpdateGenreDataBase(model: model)
     }
     
-    private func getGenresDataBase() -> [GenreModel] {
-        
+    private func getGenresDataBase() -> GenreModel {
+        return GenreDataBase().fetchMoviesDataBase() ?? GenreModel()
+    }
+    
+    private func getFavoriteStatus(idMovie: Int64) -> Bool {
+        return MovieDataBase().isFavoriteMovie(idMovie: idMovie)
     }
 }

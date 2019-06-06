@@ -70,7 +70,6 @@ extension MovieDetailViewController {
         if self.viewData.detail.isFavorited {
             self.viewFavorite.play()
         }else {
-            self.viewFavorite.shouldRasterizeWhenIdle = true
             self.viewFavorite.stop()
         }
     }
@@ -88,6 +87,7 @@ extension MovieDetailViewController {
             self.viewFavorite.play()
             self.viewData.detail.isFavorited = true
         }
+        self.presenter.addMovieFavorite(movieViewData: self.viewData)
     }
     
     private func downloadImage(urlString: String, imageView: UIImageView) {

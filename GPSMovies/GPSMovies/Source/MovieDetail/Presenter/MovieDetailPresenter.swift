@@ -31,14 +31,28 @@ class MovieDetailPresenter {
 
 //SERVICE
 extension MovieDetailPresenter {
+    public func addMovieFavorite(movieViewData: MovieElementViewData) {
+        let model = self.parseViewDataFromModel(movieViewData: movieViewData)
+        MovieDataBase().createOrRemoveMovieDataBase(model: model)
+    }
+    
    
+ 
 }
 
 //AUX METHODS
 extension MovieDetailPresenter {
-    
-    
-    
+    private func parseViewDataFromModel(movieViewData: MovieElementViewData) -> MovieElementModel {
+        let model = MovieElementModel()
+        model.id = movieViewData.id
+        model.title = movieViewData.title
+        model.backdropPath = movieViewData.detail.urlImagePost
+        model.posterPath = movieViewData.urlImageCover
+        model.overview = movieViewData.detail.description
+        model.voteAverage = movieViewData.detail.rating
+        model.releaseDate = movieViewData.detail.releaseDate
+        return model
+    }
 }
 
 //DATABASE

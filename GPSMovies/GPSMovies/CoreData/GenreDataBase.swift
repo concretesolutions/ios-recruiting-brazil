@@ -26,8 +26,15 @@ extension GenreDataBase {
         }
     }
     
-    public func fetchMoviesDataBase() -> [GenreDB]? {
-        return self.getGenreList()
+    public func fetchMoviesDataBase() -> GenreModel? {
+        if let genreListDB = self.getGenreList() {
+            return self.parseFromModel(genresDB: genreListDB)
+        }
+        return nil
+    }
+    
+    public func fetchGenreDataBaseById(id: Int64) -> GenreDB? {
+        return self.getGenreById(id: id)
     }
 }
 
@@ -62,8 +69,15 @@ extension GenreDataBase {
         PersistentManager.shared.saveContext()
     }
     
-    private func parseFromModel(genreDB: [GenreDB]) -> GenreModel {
+    private func parseFromModel(genresDB: [GenreDB]) -> GenreModel {
         let genreModel = GenreModel()
-        
+        genreModel.genres = [Genres]()
+        genresDB.forEach { (genreRow) in
+            let genreElement = Genres()
+            genreElement.id = genreRow.id
+            genreElement.name = genreRow.name
+            genreModel.genres?.append(genreElement)
+        }
+        return genreModel
     }
 }
