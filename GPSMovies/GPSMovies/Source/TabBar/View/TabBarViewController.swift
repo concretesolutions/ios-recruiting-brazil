@@ -44,7 +44,10 @@ extension TabBarViewController: TabBarViewDelegate {
 extension TabBarViewController: UITabBarControllerDelegate {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-//            HapticAlert.hapticReturn(style: .medium)
+        if let navigation = self.selectedViewController as? UINavigationController, navigation.viewControllers.count > 1 {
+            navigation.popToRootViewController(animated: false)
+        }
+            HapticAlert.hapticReturn(style: .medium)
             if let subView = self.tabBar.subviews.filter({($0.subviews.first as? UIImageView)?.image == item.selectedImage}).first?.subviews.first {
                 UIView.animate(withDuration: 0.1, animations: {
                     subView.transform = .init(scaleX: 1.5, y: 1.5)

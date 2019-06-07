@@ -82,6 +82,7 @@ extension MovieDetailViewController {
     }
     
     @objc private func addAndRemoveFavorite() {
+        HapticAlert.hapticReturn(style: .medium)
         guard !self.viewFavorite.isAnimationPlaying else { return }
         if self.viewData.detail.isFavorited {
             self.viewFavorite.stop()

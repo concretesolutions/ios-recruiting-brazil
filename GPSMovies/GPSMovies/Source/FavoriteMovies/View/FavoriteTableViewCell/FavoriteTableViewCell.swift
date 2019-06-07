@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+
+
 class FavoriteTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelTitle: UILabel!
@@ -35,6 +38,12 @@ extension FavoriteTableViewCell: UICollectionViewDataSource {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MovieElementCollectionViewCell", for: indexPath) as! MovieElementCollectionViewCell
         cell.prepareCell(viewData: self.viewData.movies[indexPath.row])
         return cell
+    }
+}
+
+extension FavoriteTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }
 
