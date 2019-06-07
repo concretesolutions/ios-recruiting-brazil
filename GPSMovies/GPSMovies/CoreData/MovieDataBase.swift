@@ -32,7 +32,7 @@ extension MovieDataBase {
     }
     
     public func isFavoriteMovie(idMovie: Int64) -> Bool {
-        return self.getMovieById(id: idMovie) != nil
+        return self.isExistMovie(id: idMovie)
     }
     
     private func getMovieById(id: Int64) -> MovieDB?{
@@ -46,6 +46,16 @@ extension MovieDataBase {
             return nil
         }
         return nil
+    }
+    
+    private func isExistMovie(id: Int64) -> Bool {
+        self.fetchRequest.predicate = NSPredicate(format: "id == %@", String(describing: id))
+        do {
+            let result = try PersistentManager.shared.context.count(for: self.fetchRequest)
+           return result > 0
+        } catch {
+            return false
+        }
     }
     
     private func getMovieList() -> [MovieDB]?{
@@ -75,9 +85,9 @@ extension MovieDataBase {
         movieDB.overview = model.overview
         movieDB.rating = model.voteAverage ?? 0.0
         movieDB.relaseDate = model.releaseDate
-        if let genreIds = model.genreIds, genreIds.count > 0 {
-            genreIds.forEach { (genreIdRow) in
-                if let genreDB = genreDataBase.fetchGenreDataBaseById(id: genreIdRow) {
+        if let genres = model.genreModel?.genres, genres.count > 0 {
+            genres.forEach { (genreIdRow) in
+                if let genreDB = genreDataBase.fetchGenreDataBaseById(id: genreIdRow.id ?? 0) {
                     movieDB.addToGenres(genreDB)
                 }
             }
@@ -96,6 +106,9 @@ extension MovieDataBase {
             movieModel.overview = movieRow.overview
             movieModel.voteAverage = movieRow.rating
             movieModel.releaseDate = movieRow.relaseDate
+            if let genreDB = movieRow.genres?.allObjects as? [GenreDB], genreDB.count > 0 {
+                movieModel.genreModel = GenreDataBase().fetchGenreDataBaseByModel(genreModel: genreDB)
+            }
             moviesModelList.append(movieModel)
         }
         return moviesModelList

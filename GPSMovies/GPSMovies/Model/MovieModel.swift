@@ -38,6 +38,8 @@ class MovieElementModel : Codable {
     var overview : String?
     var releaseDate : String?
     
+    var genreModel: GenreModel?
+    
     enum CodingKeys: String, CodingKey {
         case voteCount = "vote_count"
         case id = "id"

@@ -36,6 +36,10 @@ extension GenreDataBase {
     public func fetchGenreDataBaseById(id: Int64) -> GenreDB? {
         return self.getGenreById(id: id)
     }
+    
+    public func fetchGenreDataBaseByModel(genreModel: [GenreDB]) -> GenreModel  {
+        return self.parseFromModel(genresDB: genreModel)
+    }
 }
 
 extension GenreDataBase {

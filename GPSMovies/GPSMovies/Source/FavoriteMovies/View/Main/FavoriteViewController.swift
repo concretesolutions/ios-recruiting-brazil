@@ -29,20 +29,31 @@ extension FavoriteViewController {
         self.presenter = FavoritePresenter(viewDelegate: self)
         self.registerCell()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.presenter.getFavoriteMovies()
+    }
 }
 
 //MARK: - DELEGATE PRESENTER -
 extension FavoriteViewController: FavoriteViewDelegate {
+    func setViewData(viewData: FavoriteViewData) {
+        self.viewData = viewData
+        self.tableView.reloadData()
+    }
+    
 
 }
 
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.viewData.favoritesMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell")!
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell") as! FavoriteTableViewCell
+        cell.prepareCell(viewData: self.viewData.favoritesMovies[indexPath.row])
         return cell
     }
     

@@ -51,7 +51,22 @@ extension MovieDetailPresenter {
         model.overview = movieViewData.detail.description
         model.voteAverage = movieViewData.detail.rating
         model.releaseDate = movieViewData.detail.releaseDate
+        if movieViewData.detail.genres.count > 0 {
+            model.genreModel = self.getGenreModelList(genreViewDataList: movieViewData.detail.genres)
+        }
         return model
+    }
+    
+    private func getGenreModelList(genreViewDataList: [GenreViewData]) -> GenreModel {
+        let genreModel = GenreModel()
+        genreModel.genres = [Genres]()
+        genreViewDataList.forEach { (genreViewDataRow) in
+            let genre = Genres()
+            genre.id = genreViewDataRow.id
+            genre.name = genreViewDataRow.name
+            genreModel.genres?.append(genre)
+        }
+        return genreModel
     }
 }
 

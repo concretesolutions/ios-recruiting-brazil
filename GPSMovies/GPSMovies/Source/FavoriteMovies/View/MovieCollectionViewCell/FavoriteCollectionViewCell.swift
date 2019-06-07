@@ -7,11 +7,52 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FavoriteCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var imageMovie: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        self.imageMovie.kf.cancelDownloadTask()
+//        self.imageMovie.image = nil
+    }
 
+}
+
+extension FavoriteCollectionViewCell {
+    func prepareCell(viewData: MovieElementViewData) {
+        if viewData.urlImageCover.isEmpty {
+            self.imageMovie.image = UIImage()
+        }else {
+            self.downloadImage(urlString: viewData.urlImageCover)
+        }
+//        self.labelNameMovie.text = viewData.title
+    }
+    
+    private func downloadImage(urlString: String) {
+        if let url:URL = URL(string: urlString){
+            let resource = ImageResource(downloadURL: url, cacheKey: urlString)
+            let processor = DownsamplingImageProcessor(size: self.imageMovie.bounds.size)
+                >> RoundCornerImageProcessor(cornerRadius: 0)
+            self.imageMovie.kf.indicatorType = .activity
+            
+            self.imageMovie.kf.setImage(with: resource, placeholder: nil, options: [.transition(.fade(0.8)), .cacheOriginalImage, .processor(processor)], progressBlock: nil) { (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        break
+                    case .failure(_):
+                        self.imageMovie.image = UIImage()
+                        break
+                    }
+                }
+            }
+        }
+    }
 }

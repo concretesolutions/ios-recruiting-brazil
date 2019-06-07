@@ -10,7 +10,10 @@ import UIKit
 
 class FavoriteTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    public lazy var viewData = RatingViewData()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,11 +28,12 @@ class FavoriteTableViewCell: UITableViewCell {
 
 extension FavoriteTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.viewData.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath)
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
+        cell.prepareCell(viewData: self.viewData.movies[indexPath.row])
         return cell
     }
 }
@@ -37,5 +41,11 @@ extension FavoriteTableViewCell: UICollectionViewDataSource {
 extension FavoriteTableViewCell {
     private func registerCell() {
         self.collectionView.register(UINib(nibName: "FavoriteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FavoriteCollectionViewCell")
+    }
+    
+    public func prepareCell(viewData: RatingViewData) {
+        self.viewData = viewData
+        self.labelTitle.text = viewData.labelRating
+        self.collectionView.reloadData()
     }
 }
