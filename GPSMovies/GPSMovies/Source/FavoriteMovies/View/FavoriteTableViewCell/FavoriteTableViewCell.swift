@@ -32,7 +32,7 @@ extension FavoriteTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MovieElementCollectionViewCell", for: indexPath) as! MovieElementCollectionViewCell
         cell.prepareCell(viewData: self.viewData.movies[indexPath.row])
         return cell
     }
@@ -40,7 +40,7 @@ extension FavoriteTableViewCell: UICollectionViewDataSource {
 
 extension FavoriteTableViewCell {
     private func registerCell() {
-        self.collectionView.register(UINib(nibName: "FavoriteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FavoriteCollectionViewCell")
+        self.collectionView.register(UINib(nibName: "MovieElementCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieElementCollectionViewCell")
     }
     
     public func prepareCell(viewData: RatingViewData) {

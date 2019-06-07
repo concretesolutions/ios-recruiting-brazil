@@ -9,8 +9,8 @@
 import Foundation
 
 enum RatingMovie: String {
-    case upToFiveStars = "De 4.0 a 5.0 estrelas"
-    case upToFourStars = "De 3.0 a 4.0 estrelas"
+    case upToFiveStars = "Até 5.0 estrelas"
+    case upToFourStars = "Até 4.0 estrelas"
     case upToThreeStars = "Até 3.0 estrelas"
     case none = "Sem avaliação"
 }
