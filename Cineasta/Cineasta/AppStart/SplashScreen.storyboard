@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xcg-Ns-xe4">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="LuckiestGuy-Regular.ttf">
+            <string>LuckiestGuy-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="a6R-Zq-vug">
+            <objects>
+                <viewController id="Xcg-Ns-xe4" customClass="SplashScreenViewController" customModule="Cineasta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bGL-sV-BIA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KzB-pY-66c">
+                                <rect key="frame" x="20" y="352.5" width="374" height="201"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_popcorn" translatesAutoresizingMaskIntoConstraints="NO" id="apA-xV-bAd">
+                                        <rect key="frame" x="114.5" y="0.0" width="145" height="145"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="apA-xV-bAd" secondAttribute="height" multiplier="1:1" id="00j-5Q-kuq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CINEASTA" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="24" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qn7-ZP-Saa">
+                                        <rect key="frame" x="104" y="161" width="166" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Qn7-ZP-Saa" secondAttribute="height" multiplier="99:24" id="mzo-9h-EWc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LuckiestGuy-Regular" family="Luckiest Guy" pointSize="70"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="apA-xV-bAd" firstAttribute="centerX" secondItem="KzB-pY-66c" secondAttribute="centerX" id="JVa-0F-guh"/>
+                                    <constraint firstItem="Qn7-ZP-Saa" firstAttribute="top" secondItem="apA-xV-bAd" secondAttribute="bottom" constant="16" id="Jmp-kW-Y8X"/>
+                                    <constraint firstItem="Qn7-ZP-Saa" firstAttribute="centerX" secondItem="KzB-pY-66c" secondAttribute="centerX" id="dhd-5W-Mfm"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qn7-ZP-Saa" secondAttribute="bottom" id="eRP-BY-h71"/>
+                                    <constraint firstItem="apA-xV-bAd" firstAttribute="top" secondItem="KzB-pY-66c" secondAttribute="top" id="yWp-Ie-x0B"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Qn7-ZP-Saa" firstAttribute="width" secondItem="bGL-sV-BIA" secondAttribute="width" multiplier="0.4" id="0MX-6U-akG"/>
+                            <constraint firstItem="KzB-pY-66c" firstAttribute="centerY" secondItem="ydB-kx-YgK" secondAttribute="centerY" id="0Zo-GN-Mec"/>
+                            <constraint firstItem="apA-xV-bAd" firstAttribute="width" secondItem="bGL-sV-BIA" secondAttribute="width" multiplier="0.35" id="P06-gF-FqF"/>
+                            <constraint firstItem="KzB-pY-66c" firstAttribute="leading" secondItem="ydB-kx-YgK" secondAttribute="leading" constant="20" id="eSr-EX-uOv"/>
+                            <constraint firstItem="ydB-kx-YgK" firstAttribute="trailing" secondItem="KzB-pY-66c" secondAttribute="trailing" constant="20" id="w05-DD-4Cf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ydB-kx-YgK"/>
+                    </view>
+                    <connections>
+                        <outlet property="appNameLabel" destination="Qn7-ZP-Saa" id="0dx-Nu-5Yx"/>
+                        <outlet property="splashImageView" destination="apA-xV-bAd" id="tQx-td-iHm"/>
+                        <segue destination="j07-xe-cKE" kind="show" identifier="showHome" id="mIy-H2-9a7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="niT-jW-cEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114" y="102"/>
+        </scene>
+        <!--TabBar-->
+        <scene sceneID="Q1I-MU-N0p">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TabBar" id="j07-xe-cKE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OwI-PT-Nmg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="947" y="102"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icn_popcorn" width="100" height="100"/>
+    </resources>
+</document>

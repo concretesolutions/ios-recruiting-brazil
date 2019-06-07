@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-Regular.ttf">
+            <string>SourceSansPro-Regular</string>
+        </array>
+        <array key="SourceSansPro-SemiBold.ttf">
+            <string>SourceSansPro-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="MovieTableViewCell" customModule="Cineasta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="209"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="208.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DdH-q2-Emt">
+                        <rect key="frame" x="16" y="16" width="288" height="192.5"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagetest" translatesAutoresizingMaskIntoConstraints="NO" id="gSo-mq-STK">
+                                <rect key="frame" x="0.0" y="0.0" width="96" height="192.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="SeC-LQ-EDd"/>
+                                    <constraint firstAttribute="height" constant="192.5" id="u5I-yU-ely"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vingadores: Ultimato" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrO-Al-vNd">
+                                <rect key="frame" x="112" y="24" width="170" height="21.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 de abril de 2019" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkG-ND-2Cs">
+                                <rect key="frame" x="112" y="45.5" width="170" height="19"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="15"/>
+                                <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iem-ZB-R7a">
+                                <rect key="frame" x="112" y="76.5" width="170" height="65.5"/>
+                                <string key="text">Após os eventos devastadores de Vingadores: Guerra Infinita, o universo está em ruínas devido aos esforços do Titã Louco, Thanos. Com a ajuda de aliados remanescentes…</string>
+                                <fontDescription key="fontDescription" name="SourceSansPro-Regular" family="Source Sans Pro" pointSize="13"/>
+                                <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_favorites" translatesAutoresizingMaskIntoConstraints="NO" id="1fY-vr-dd0">
+                                <rect key="frame" x="256" y="160.5" width="16" height="16"/>
+                                <color key="tintColor" red="0.90980392160000001" green="0.30196078430000001" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="0L1-os-3ig"/>
+                                    <constraint firstAttribute="width" constant="16" id="6fw-Bv-s3l"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KrO-Al-vNd" secondAttribute="trailing" constant="6" id="0bx-Rj-6jQ"/>
+                            <constraint firstItem="gSo-mq-STK" firstAttribute="leading" secondItem="DdH-q2-Emt" secondAttribute="leading" id="12E-W8-7dM"/>
+                            <constraint firstAttribute="trailing" secondItem="fkG-ND-2Cs" secondAttribute="trailing" constant="6" id="2p9-cH-bHU"/>
+                            <constraint firstAttribute="bottom" secondItem="1fY-vr-dd0" secondAttribute="bottom" constant="16" id="3a1-qY-nb8"/>
+                            <constraint firstItem="Iem-ZB-R7a" firstAttribute="top" secondItem="fkG-ND-2Cs" secondAttribute="bottom" constant="12" id="3oE-XK-AiS"/>
+                            <constraint firstAttribute="trailing" secondItem="Iem-ZB-R7a" secondAttribute="trailing" constant="6" id="3wE-Tx-6lX"/>
+                            <constraint firstItem="gSo-mq-STK" firstAttribute="top" secondItem="DdH-q2-Emt" secondAttribute="top" id="4h5-3h-WRG"/>
+                            <constraint firstAttribute="trailing" secondItem="1fY-vr-dd0" secondAttribute="trailing" constant="16" id="5EO-92-3dd"/>
+                            <constraint firstItem="fkG-ND-2Cs" firstAttribute="top" secondItem="KrO-Al-vNd" secondAttribute="bottom" id="Isb-Tm-4HQ"/>
+                            <constraint firstItem="1fY-vr-dd0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Iem-ZB-R7a" secondAttribute="bottom" constant="12" id="W7m-sf-Gsf"/>
+                            <constraint firstItem="fkG-ND-2Cs" firstAttribute="leading" secondItem="gSo-mq-STK" secondAttribute="trailing" constant="16" id="bS8-yF-pms"/>
+                            <constraint firstItem="KrO-Al-vNd" firstAttribute="leading" secondItem="gSo-mq-STK" secondAttribute="trailing" constant="16" id="jas-Da-Xri"/>
+                            <constraint firstAttribute="bottom" secondItem="gSo-mq-STK" secondAttribute="bottom" id="kb0-Ys-GRg"/>
+                            <constraint firstItem="Iem-ZB-R7a" firstAttribute="leading" secondItem="gSo-mq-STK" secondAttribute="trailing" constant="16" id="r8R-jQ-9wT"/>
+                            <constraint firstItem="KrO-Al-vNd" firstAttribute="top" secondItem="DdH-q2-Emt" secondAttribute="top" constant="24" id="wMX-JC-I3n"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="DdH-q2-Emt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="0fb-29-9Js"/>
+                    <constraint firstAttribute="trailing" secondItem="DdH-q2-Emt" secondAttribute="trailing" constant="16" id="Anh-lv-RJR"/>
+                    <constraint firstAttribute="bottom" secondItem="DdH-q2-Emt" secondAttribute="bottom" id="Dk3-Aj-4lZ"/>
+                    <constraint firstItem="DdH-q2-Emt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="rWl-ME-Nuq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cardView" destination="DdH-q2-Emt" id="Fel-5T-pFP"/>
+                <outlet property="isFavoriteImageView" destination="1fY-vr-dd0" id="tgJ-zP-XmP"/>
+                <outlet property="overViewLabel" destination="Iem-ZB-R7a" id="YbC-7J-epP"/>
+                <outlet property="posterImageView" destination="gSo-mq-STK" id="POl-bZ-EYT"/>
+                <outlet property="releaseDateLabel" destination="fkG-ND-2Cs" id="54r-Ei-aVJ"/>
+                <outlet property="titleLabel" destination="KrO-Al-vNd" id="gvX-uK-857"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icn_favorites" width="28" height="23"/>
+        <image name="imagetest" width="185" height="278"/>
+    </resources>
+</document>

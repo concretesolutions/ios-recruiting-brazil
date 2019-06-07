@@ -13,14 +13,14 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Cineasta")
-        container.loadPersistentStores(completionHandler: { (_, _) in })
-        return container
-    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let labelFont = UIFont(name: "SourceSansPro-Regular", size: 14.0)
+        UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = labelFont
+        let textFieldFont = UIFont(name: "SourceSansPro-Regular", size: 14.0)
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = textFieldFont
+        UINavigationBar.appearance().shadowImage = UIImage()
+        URLCache.shared = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
         return true
     }
 
@@ -45,21 +45,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
-    }
-}
-
-// MARK: - CORE DATA -
-extension AppDelegate {
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
     }
 }

@@ -1,19 +1,64 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="LuckiestGuy-Regular.ttf">
+            <string>LuckiestGuy-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOf-6A-O7g">
+                                <rect key="frame" x="20" y="214.5" width="280" height="159"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_popcorn" translatesAutoresizingMaskIntoConstraints="NO" id="sY1-LU-LEN">
+                                        <rect key="frame" x="84" y="0.0" width="112" height="112"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="sY1-LU-LEN" secondAttribute="height" multiplier="1:1" id="hjf-b6-9XN"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CINEASTA" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="24" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o7o-ia-YeZ">
+                                        <rect key="frame" x="76" y="128" width="128" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="o7o-ia-YeZ" secondAttribute="height" multiplier="99:24" id="rPI-GY-fIC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LuckiestGuy-Regular" family="Luckiest Guy" pointSize="70"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="o7o-ia-YeZ" secondAttribute="bottom" id="FXg-GY-lJH"/>
+                                    <constraint firstItem="o7o-ia-YeZ" firstAttribute="centerX" secondItem="rOf-6A-O7g" secondAttribute="centerX" id="FbT-h4-pbv"/>
+                                    <constraint firstItem="sY1-LU-LEN" firstAttribute="top" secondItem="rOf-6A-O7g" secondAttribute="top" id="GYp-85-Zu6"/>
+                                    <constraint firstItem="sY1-LU-LEN" firstAttribute="centerX" secondItem="rOf-6A-O7g" secondAttribute="centerX" id="cGS-lx-OY8"/>
+                                    <constraint firstItem="o7o-ia-YeZ" firstAttribute="top" secondItem="sY1-LU-LEN" secondAttribute="bottom" constant="16" id="vJM-kQ-SYE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sY1-LU-LEN" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.35" id="Drf-Mp-2Nj"/>
+                            <constraint firstItem="rOf-6A-O7g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="JCd-V7-DBq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rOf-6A-O7g" secondAttribute="trailing" constant="20" id="Z3b-Iy-ird"/>
+                            <constraint firstItem="o7o-ia-YeZ" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.4" id="brI-k6-DTC"/>
+                            <constraint firstItem="rOf-6A-O7g" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="rAz-SX-6uJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -22,4 +67,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icn_popcorn" width="100" height="100"/>
+    </resources>
 </document>

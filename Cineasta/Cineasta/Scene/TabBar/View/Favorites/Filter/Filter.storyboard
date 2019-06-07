@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GA9-Qx-u38">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceSansPro-SemiBold.ttf">
+            <string>SourceSansPro-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Filter View Controller-->
+        <scene sceneID="ghF-wN-wkI">
+            <objects>
+                <viewController id="GA9-Qx-u38" customClass="FilterViewController" customModule="Cineasta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dIk-ch-Be8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILTRAR POR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2f-BO-QvO">
+                                <rect key="frame" x="32" y="74" width="256" height="21.5"/>
+                                <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIf-es-PrN">
+                                <rect key="frame" x="272" y="34" width="28" height="28"/>
+                                <state key="normal" image="icn_close">
+                                    <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeFilterViewController:" destination="GA9-Qx-u38" eventType="touchUpInside" id="bCf-M5-PJZ"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dol-Wb-YKo">
+                                <rect key="frame" x="20" y="115.5" width="280" height="352.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="3k9-gW-0ki">
+                                    <size key="itemSize" width="105" height="39"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="GA9-Qx-u38" id="8J5-Tv-AdI"/>
+                                    <outlet property="delegate" destination="GA9-Qx-u38" id="Vcq-3q-EKf"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzh-ug-AOv">
+                                <rect key="frame" x="32" y="488" width="256" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="NZn-Ed-elR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SourceSansPro-SemiBold" family="Source Sans Pro" pointSize="16"/>
+                                <state key="normal" title="APLICAR">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="applyFilter:" destination="GA9-Qx-u38" eventType="touchUpInside" id="mmg-82-yG0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zLO-Qz-C4r" firstAttribute="trailing" secondItem="c2f-BO-QvO" secondAttribute="trailing" constant="32" id="0KE-OR-ZWb"/>
+                            <constraint firstItem="zLO-Qz-C4r" firstAttribute="trailing" secondItem="oIf-es-PrN" secondAttribute="trailing" constant="20" id="63f-rR-M7e"/>
+                            <constraint firstAttribute="trailing" secondItem="Dol-Wb-YKo" secondAttribute="trailing" constant="20" id="7Z3-Kh-1mn"/>
+                            <constraint firstItem="Dol-Wb-YKo" firstAttribute="top" secondItem="c2f-BO-QvO" secondAttribute="bottom" constant="20" id="H0j-MY-BMb"/>
+                            <constraint firstItem="c2f-BO-QvO" firstAttribute="top" secondItem="oIf-es-PrN" secondAttribute="bottom" constant="12" id="Pby-La-Zdf"/>
+                            <constraint firstItem="oIf-es-PrN" firstAttribute="top" secondItem="zLO-Qz-C4r" secondAttribute="top" constant="14" id="Si6-RR-EmN"/>
+                            <constraint firstItem="zLO-Qz-C4r" firstAttribute="trailing" secondItem="bzh-ug-AOv" secondAttribute="trailing" constant="32" id="WqR-Bh-p0i"/>
+                            <constraint firstItem="zLO-Qz-C4r" firstAttribute="bottom" secondItem="bzh-ug-AOv" secondAttribute="bottom" constant="32" id="fcP-tb-KvP"/>
+                            <constraint firstItem="bzh-ug-AOv" firstAttribute="leading" secondItem="zLO-Qz-C4r" secondAttribute="leading" constant="32" id="gf3-6n-ozb"/>
+                            <constraint firstItem="c2f-BO-QvO" firstAttribute="leading" secondItem="zLO-Qz-C4r" secondAttribute="leading" constant="32" id="iIE-1v-FC9"/>
+                            <constraint firstItem="Dol-Wb-YKo" firstAttribute="leading" secondItem="zLO-Qz-C4r" secondAttribute="leading" constant="20" id="qev-WO-Qae"/>
+                            <constraint firstItem="bzh-ug-AOv" firstAttribute="top" secondItem="Dol-Wb-YKo" secondAttribute="bottom" constant="20" id="xeF-qz-6ht"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zLO-Qz-C4r"/>
+                    </view>
+                    <connections>
+                        <outlet property="filterCollectionView" destination="Dol-Wb-YKo" id="dKB-fK-XBb"/>
+                        <outlet property="filterCollectionViewFlowLayout" destination="3k9-gW-0ki" id="GcC-pO-rll"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cz8-GL-KCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="183.75" y="53.87323943661972"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icn_close" width="28" height="28"/>
+    </resources>
+</document>

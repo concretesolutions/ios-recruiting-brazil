@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="LuckiestGuy-Regular.ttf">
+            <string>LuckiestGuy-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="FilterCollectionViewCell" customModule="Cineasta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="167" height="28"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="167" height="28"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wGz-5P-kcq">
+                        <rect key="frame" x="0.0" y="0.0" width="167" height="28"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AÇÃO TERROR" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRZ-ZO-VRt">
+                                <rect key="frame" x="12" y="0.0" width="139" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Jze-FY-dI6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LuckiestGuy-Regular" family="Luckiest Guy" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="CRZ-ZO-VRt" secondAttribute="bottom" id="64z-KE-prO"/>
+                            <constraint firstItem="CRZ-ZO-VRt" firstAttribute="top" secondItem="wGz-5P-kcq" secondAttribute="top" id="HEh-ke-cHH"/>
+                            <constraint firstAttribute="trailing" secondItem="CRZ-ZO-VRt" secondAttribute="trailing" constant="16" id="cfH-Vv-y5S"/>
+                            <constraint firstItem="CRZ-ZO-VRt" firstAttribute="leading" secondItem="wGz-5P-kcq" secondAttribute="leading" constant="12" id="gJj-WB-V79"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="wGz-5P-kcq" secondAttribute="trailing" id="58l-iA-4Im"/>
+                <constraint firstAttribute="bottom" secondItem="wGz-5P-kcq" secondAttribute="bottom" id="7aI-Th-v04"/>
+                <constraint firstItem="wGz-5P-kcq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MT8-Pm-qyE"/>
+                <constraint firstItem="wGz-5P-kcq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="m9e-cL-jJ7"/>
+            </constraints>
+            <size key="customSize" width="167" height="63"/>
+            <connections>
+                <outlet property="genreNameLabel" destination="CRZ-ZO-VRt" id="UMN-jv-mFm"/>
+                <outlet property="mainView" destination="wGz-5P-kcq" id="tS2-Lq-ySr"/>
+            </connections>
+            <point key="canvasLocation" x="171.73913043478262" y="105.46875"/>
+        </collectionViewCell>
+    </objects>
+</document>
