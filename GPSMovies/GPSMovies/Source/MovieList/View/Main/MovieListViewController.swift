@@ -17,6 +17,7 @@ class MovieListViewController: UIViewController {
     @IBOutlet weak var viewLoadingOrError: UIView!
     @IBOutlet weak var viewImageLoading: AnimationView!
     @IBOutlet weak var viewImageError: AnimationView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: CONSTANTS
     private let SEGUEDETAILMOVIE = "segueDetailMovie"
@@ -24,7 +25,9 @@ class MovieListViewController: UIViewController {
     // MARK: VARIABLES
     private var presenter: MovieListPresenter!
     private lazy var viewData:MovieListViewData = MovieListViewData()
+    private lazy var moviesSearch = [MovieElementViewData]()
     private var isLoading = false
+    private var isUsingSearchBar = false
     
     // MARK: IBACTIONS
     
@@ -103,12 +106,13 @@ extension MovieListViewController: MovieListViewDelegate {
 //MARK: - DATASOURCE - UICollectionViewDataSource -
 extension MovieListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewData.movies.count
+        return self.isUsingSearchBar ? self.moviesSearch.count : self.viewData.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "MovieElementCollectionViewCell", for: indexPath) as? MovieElementCollectionViewCell else { return UICollectionViewCell() }
-        cell.prepareCell(viewData: self.viewData.movies[indexPath.row])
+        let movie = self.isUsingSearchBar ? self.moviesSearch[indexPath.row] : self.viewData.movies[indexPath.row]
+        cell.prepareCell(viewData: movie)
         return cell
     }
 }
@@ -116,7 +120,8 @@ extension MovieListViewController: UICollectionViewDataSource {
 //MARK: - DELEGATE - UICollectionViewDelegate -
 extension MovieListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: self.viewData.movies[indexPath.row])
+        let movie = self.isUsingSearchBar ? self.moviesSearch[indexPath.row] : self.viewData.movies[indexPath.row]
+        self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: movie)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -134,6 +139,42 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: - DELEGATE UISearchBarDelegate -
+extension MovieListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.isUsingSearchBar = !searchText.isEmpty
+        self.moviesSearch = self.viewData.movies.filter({$0.title.lowercased().contains(searchText.lowercased())})
+        self.collectionView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.text = ""
+        self.moviesSearch.removeAll()
+        self.searchBar.endEditing(true)
+        self.isUsingSearchBar = false
+        self.collectionView.reloadData()
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        self.addGestureHideKeyBoard()
+        return true
+    }
+    
+//    func setEmpty(){
+//        if self.searchMovies.count == 0, self.isFiltering(){
+//            self.favoritesTableView.alpha = 0.5
+//            self.emptyView.isHidden = false
+//            self.emptyView.setAnimation(named: "search")
+//            self.emptyView.play()
+//            self.emptyView.loopAnimation = true
+//            self.labelEmpty.text = "No movies with this name were found"
+//        }else{
+//            self.favoritesTableView.alpha = 1.0
+//            self.emptyView.isHidden = true
+//            self.emptyView.pause()
+//        }
+//    }
+}
 
 //MARK: - AUX METHODS -
 extension MovieListViewController {
@@ -167,10 +208,20 @@ extension MovieListViewController {
         }
     }
     
+    @objc private func hideKeyBoard() {
+        self.view.endEditing(true)
+        self.view.gestureRecognizers?.removeAll()
+    }
+    
     private func setupView() {
         let animationLoading = Animation.named("loading")
         viewImageLoading.animation = animationLoading
         let animationError = Animation.named("error")
         self.viewImageError.animation = animationError
+    }
+    
+    private func addGestureHideKeyBoard() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyBoard))
+        self.view.addGestureRecognizer(tap)
     }
 }

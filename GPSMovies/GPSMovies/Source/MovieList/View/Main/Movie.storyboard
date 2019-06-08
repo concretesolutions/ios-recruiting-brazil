@@ -17,7 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCC-Ih-d67" userLabel="ViewLoadingOrError">
+                            <searchBar contentMode="redraw" barStyle="black" placeholder="Filtrar filmes" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lMI-ps-xAx">
+                                <rect key="frame" x="0.0" y="64" width="320" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="VGh-hU-crd" id="83c-5M-0Qq"/>
+                                </connections>
+                            </searchBar>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCC-Ih-d67" userLabel="ViewLoadingOrError">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gO0-mw-fYr" userLabel="ViewImageLoading" customClass="AnimationView" customModule="Lottie">
@@ -40,7 +54,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cIb-P5-sXc">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="448"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="qYj-jv-zrM">
                                     <size key="itemSize" width="190" height="357"/>
@@ -58,12 +72,15 @@
                         <color key="backgroundColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="cIb-P5-sXc" secondAttribute="bottom" id="Cqi-Ez-2o1"/>
+                            <constraint firstItem="lMI-ps-xAx" firstAttribute="top" secondItem="VxN-bB-7f9" secondAttribute="top" id="DYx-jr-yWi"/>
+                            <constraint firstItem="lMI-ps-xAx" firstAttribute="leading" secondItem="VxN-bB-7f9" secondAttribute="leading" id="F5G-Mc-qYs"/>
                             <constraint firstItem="CCC-Ih-d67" firstAttribute="top" secondItem="RQk-xY-5ev" secondAttribute="top" id="JlM-QH-9wx"/>
-                            <constraint firstItem="cIb-P5-sXc" firstAttribute="top" secondItem="VxN-bB-7f9" secondAttribute="top" id="LK6-xY-yu4"/>
+                            <constraint firstItem="cIb-P5-sXc" firstAttribute="top" secondItem="lMI-ps-xAx" secondAttribute="bottom" id="K9x-ia-0AZ"/>
                             <constraint firstItem="VxN-bB-7f9" firstAttribute="bottom" secondItem="CCC-Ih-d67" secondAttribute="bottom" id="Xlt-Od-f33"/>
                             <constraint firstItem="CCC-Ih-d67" firstAttribute="trailing" secondItem="VxN-bB-7f9" secondAttribute="trailing" id="aYU-Li-OFu"/>
                             <constraint firstItem="cIb-P5-sXc" firstAttribute="trailing" secondItem="VxN-bB-7f9" secondAttribute="trailing" id="lpf-vf-szb"/>
                             <constraint firstItem="cIb-P5-sXc" firstAttribute="leading" secondItem="VxN-bB-7f9" secondAttribute="leading" id="lvu-dw-0Bd"/>
+                            <constraint firstItem="VxN-bB-7f9" firstAttribute="trailing" secondItem="lMI-ps-xAx" secondAttribute="trailing" id="sAn-dg-9TF"/>
                             <constraint firstItem="CCC-Ih-d67" firstAttribute="leading" secondItem="VxN-bB-7f9" secondAttribute="leading" id="xMd-an-rBh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VxN-bB-7f9"/>
@@ -79,6 +96,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="cIb-P5-sXc" id="jGg-JZ-aWV"/>
+                        <outlet property="searchBar" destination="lMI-ps-xAx" id="hx7-Tr-G4o"/>
                         <outlet property="viewImageError" destination="wja-Qc-c4U" id="KxU-Kx-Yha"/>
                         <outlet property="viewImageLoading" destination="gO0-mw-fYr" id="Fsn-n3-T1h"/>
                         <outlet property="viewLoadingOrError" destination="CCC-Ih-d67" id="iiS-9F-Gup"/>
@@ -87,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Af-Mr-aa8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="847.82608695652175" y="48.883928571428569"/>
+            <point key="canvasLocation" x="847.5" y="48.591549295774648"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="RKS-ob-b1n">
