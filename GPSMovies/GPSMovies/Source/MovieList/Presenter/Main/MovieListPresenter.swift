@@ -42,6 +42,7 @@ protocol MovieListViewDelegate: NSObjectProtocol {
     func showError()
     func showEmptyList()
     func setViewData(viewData: MovieListViewData)
+    func setViewDataOfNextPage(viewData: MovieListViewData)
 }
 
 //MARK: - PRESENTER CLASS -
@@ -75,11 +76,13 @@ extension MovieListPresenter {
     }
     
     public func getMovies(for page: Int) {
+        self.genreViewDataList.removeAll()
+        self.viewData.movies.removeAll()
         if !Reachability.isConnectedToNetwork() {
             self.viewDelegate?.showError()
             return
         }
-        self.getPopularMovies(pageNumber: page)
+        self.getMovieOfPage(pageNumber: page)
     }
 }
 
@@ -101,6 +104,21 @@ extension MovieListPresenter {
                     self.viewDelegate?.showError()
                     break
                 }
+            }
+        }
+    }
+    
+    private func getMovieOfPage(pageNumber: Int) {
+        self.service.getPopularMovies(page: pageNumber) { (result) in
+            switch result {
+            case .success(let movieList):
+                self.parseModelFromViewData(model: movieList)
+                if self.viewData.movies.count > 0 {
+                    self.viewDelegate?.setViewDataOfNextPage(viewData: self.viewData)
+                }
+                break
+            default:
+                break
             }
         }
     }

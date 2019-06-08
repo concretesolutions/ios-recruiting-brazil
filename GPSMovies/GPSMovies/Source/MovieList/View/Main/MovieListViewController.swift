@@ -46,6 +46,7 @@ extension MovieListViewController {
 
 //MARK: - DELEGATE PRESENTER -
 extension MovieListViewController: MovieListViewDelegate {
+    
     func showLoading() {
         self.collectionView.isHidden = true
         UIView.animate(withDuration: 0.4, animations: {
@@ -81,6 +82,13 @@ extension MovieListViewController: MovieListViewDelegate {
             self.viewLoadingOrError.isHidden = true
             self.collectionView.alpha = 1
         }
+    }
+    
+    func setViewDataOfNextPage(viewData: MovieListViewData) {
+        self.viewData.currentPage = viewData.currentPage
+        self.viewData.totalPages = viewData.totalPages
+        self.viewData.movies += viewData.movies
+        self.collectionView.reloadData()
     }
 }
 
