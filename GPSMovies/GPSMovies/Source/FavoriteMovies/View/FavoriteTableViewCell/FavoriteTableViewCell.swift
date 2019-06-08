@@ -9,7 +9,9 @@
 import UIKit
 
 
-
+protocol FavoriteTableViewCellDelegate: NSObjectProtocol {
+    func showDetail(movieSelected: MovieElementViewData)
+}
 
 class FavoriteTableViewCell: UITableViewCell {
     
@@ -17,6 +19,7 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     public lazy var viewData = RatingViewData()
+    public weak var delegate: FavoriteTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,7 +46,7 @@ extension FavoriteTableViewCell: UICollectionViewDataSource {
 
 extension FavoriteTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.delegate?.showDetail(movieSelected: self.viewData.movies[indexPath.row])
     }
 }
 

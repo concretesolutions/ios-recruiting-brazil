@@ -14,6 +14,7 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: CONSTANTS
+    private let SEGUEDETAILMOVIE = "segueDetailMovie"
     
     // MARK: VARIABLES
     private var presenter: FavoritePresenter!
@@ -58,15 +59,26 @@ extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell") as! FavoriteTableViewCell
         cell.prepareCell(viewData: self.viewData.favoritesMovies[indexPath.row])
+        cell.delegate = self
         return cell
     }
-    
-    
+}
+
+extension FavoriteViewController: FavoriteTableViewCellDelegate {
+    func showDetail(movieSelected: MovieElementViewData) {
+        self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: movieSelected)
+    }
 }
 
 //MARK: - AUX METHODS -
 extension FavoriteViewController {
     private func registerCell() {
         self.tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteTableViewCell")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElementViewData {
+            controller.viewData = viewData
+        }
     }
 }

@@ -37,11 +37,20 @@
                     <navigationItem key="navigationItem" title="Meus Favoritos" id="ZGY-7K-aIh"/>
                     <connections>
                         <outlet property="tableView" destination="2gj-V1-7A8" id="cUZ-AY-dyD"/>
+                        <segue destination="Jm2-6x-Den" kind="show" identifier="segueDetailMovie" id="K4z-A7-k3l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UrO-6y-Fk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="786.95652173913049" y="73.660714285714278"/>
+        </scene>
+        <!--detailViewController-->
+        <scene sceneID="xnA-15-3rE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Movie" referencedIdentifier="detailViewController" id="Jm2-6x-Den" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o7A-g6-Mhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1795" y="-183"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jbc-RT-0Ml">
