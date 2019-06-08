@@ -28,6 +28,7 @@ struct RatingViewData {
 //MARK: - VIEW DELEGATE -
 protocol FavoriteViewDelegate: NSObjectProtocol {
     func setViewData(viewData: FavoriteViewData)
+    func showEmptyList()
 }
 
 //MARK: - PRESENTER CLASS -
@@ -52,7 +53,7 @@ extension FavoritePresenter {
             self.parseModelFromViewData(modelElementList: movies)
             self.viewDelegate?.setViewData(viewData: self.viewData)
         }else {
-            // emptyList
+            self.viewDelegate?.showEmptyList()
         }
         
     }

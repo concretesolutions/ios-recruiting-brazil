@@ -38,12 +38,16 @@ extension FavoriteViewController {
 
 //MARK: - DELEGATE PRESENTER -
 extension FavoriteViewController: FavoriteViewDelegate {
+    
     func setViewData(viewData: FavoriteViewData) {
         self.viewData = viewData
         self.tableView.reloadData()
     }
     
-
+    func showEmptyList() {
+        self.viewData.favoritesMovies.removeAll()
+        self.tableView.reloadData()
+    }
 }
 
 extension FavoriteViewController: UITableViewDataSource {
