@@ -39,7 +39,6 @@ struct GenreViewData {
 //MARK: - VIEW DELEGATE -
 protocol MovieListViewDelegate: NSObjectProtocol {
     func showLoading()
-    func hideLoading()
     func showError()
     func showEmptyList()
     func setViewData(viewData: MovieListViewData)
@@ -66,19 +65,20 @@ extension MovieListPresenter {
         self.genreViewDataList.removeAll()
         self.viewData.movies.removeAll()
         self.viewDelegate?.showLoading()
-        if !Reachability.isConnectedToNetwork() {
-            self.viewDelegate?.hideLoading()
-            self.viewDelegate?.showError()
-            return
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (_) in
+            if !Reachability.isConnectedToNetwork() {
+                self.viewDelegate?.showError()
+                return
+            }
+            self.getGenres {
+                self.getPopularMovies(pageNumber: 1)
+            }
         }
-        self.getGenres {
-            self.getPopularMovies(pageNumber: 1)
-        }
+        
     }
     
     public func getMovies(for page: Int) {
         if !Reachability.isConnectedToNetwork() {
-            self.viewDelegate?.hideLoading()
             self.viewDelegate?.showError()
             return
         }
@@ -104,7 +104,6 @@ extension MovieListPresenter {
                     self.viewDelegate?.showError()
                     break
                 }
-                self.viewDelegate?.hideLoading()
             }
         }
     }

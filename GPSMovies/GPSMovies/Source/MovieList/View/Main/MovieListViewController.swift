@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Lottie
 
 class MovieListViewController: UIViewController {
     
     // MARK: OUTLETS
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var viewLoadingOrError: UIView!
+    @IBOutlet weak var viewImageLoading: AnimationView!
     
     // MARK: CONSTANTS
     private let SEGUEDETAILMOVIE = "segueDetailMovie"
@@ -37,21 +40,32 @@ extension MovieListViewController {
         self.presenter.callServices()
         self.registerCell()
         self.registerObserver()
+        self.setupView()
     }
 }
 
 //MARK: - DELEGATE PRESENTER -
 extension MovieListViewController: MovieListViewDelegate {
     func showLoading() {
-        
-    }
-    
-    func hideLoading() {
-        
+        self.collectionView.isHidden = true
+        UIView.animate(withDuration: 0.4, animations: {
+            self.viewLoadingOrError.isHidden = false
+        }) { (_) in
+            self.viewImageLoading.play()
+            self.viewImageLoading.loopMode = .loop
+        }
     }
     
     func showError() {
-        
+        let animation = Animation.named("error")
+       
+        UIView.animate(withDuration: 0.4, animations: {
+            self.viewImageLoading.animation = animation
+            self.viewImageLoading.play()
+        }) { (_) in
+            
+            
+        }
     }
     
     func showEmptyList() {
@@ -61,6 +75,12 @@ extension MovieListViewController: MovieListViewDelegate {
     func setViewData(viewData: MovieListViewData) {
         self.viewData = viewData
         self.collectionView.reloadData()
+        self.collectionView.alpha = 0
+        self.collectionView.isHidden = false
+        UIView.animate(withDuration: 0.4) {
+            self.viewLoadingOrError.isHidden = true
+            self.collectionView.alpha = 1
+        }
     }
 }
 
@@ -129,5 +149,10 @@ extension MovieListViewController {
         }else {
             cell.hideFavorite()
         }
+    }
+    
+    private func setupView() {
+        let animation = Animation.named("loading")
+        viewImageLoading.animation = animation
     }
 }

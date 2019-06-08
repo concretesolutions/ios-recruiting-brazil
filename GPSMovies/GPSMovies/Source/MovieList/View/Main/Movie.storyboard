@@ -17,6 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCC-Ih-d67" userLabel="ViewLoadingOrError">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gO0-mw-fYr" userLabel="ViewImageLoading" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="96" y="220" width="128" height="128"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="gO0-mw-fYr" firstAttribute="centerY" secondItem="CCC-Ih-d67" secondAttribute="centerY" id="NBF-0h-8o8"/>
+                                    <constraint firstItem="gO0-mw-fYr" firstAttribute="height" secondItem="CCC-Ih-d67" secondAttribute="height" multiplier="0.226" id="Rml-ev-tgz"/>
+                                    <constraint firstItem="gO0-mw-fYr" firstAttribute="width" secondItem="CCC-Ih-d67" secondAttribute="width" multiplier="0.4" id="UC2-WF-Oem"/>
+                                    <constraint firstItem="gO0-mw-fYr" firstAttribute="centerX" secondItem="CCC-Ih-d67" secondAttribute="centerX" id="sg0-k9-j1a"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cIb-P5-sXc">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -36,15 +51,21 @@
                         <color key="backgroundColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="cIb-P5-sXc" secondAttribute="bottom" id="Cqi-Ez-2o1"/>
+                            <constraint firstItem="CCC-Ih-d67" firstAttribute="top" secondItem="RQk-xY-5ev" secondAttribute="top" id="JlM-QH-9wx"/>
                             <constraint firstItem="cIb-P5-sXc" firstAttribute="top" secondItem="VxN-bB-7f9" secondAttribute="top" id="LK6-xY-yu4"/>
+                            <constraint firstItem="VxN-bB-7f9" firstAttribute="bottom" secondItem="CCC-Ih-d67" secondAttribute="bottom" id="Xlt-Od-f33"/>
+                            <constraint firstItem="CCC-Ih-d67" firstAttribute="trailing" secondItem="VxN-bB-7f9" secondAttribute="trailing" id="aYU-Li-OFu"/>
                             <constraint firstItem="cIb-P5-sXc" firstAttribute="trailing" secondItem="VxN-bB-7f9" secondAttribute="trailing" id="lpf-vf-szb"/>
                             <constraint firstItem="cIb-P5-sXc" firstAttribute="leading" secondItem="VxN-bB-7f9" secondAttribute="leading" id="lvu-dw-0Bd"/>
+                            <constraint firstItem="CCC-Ih-d67" firstAttribute="leading" secondItem="VxN-bB-7f9" secondAttribute="leading" id="xMd-an-rBh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VxN-bB-7f9"/>
                     </view>
                     <navigationItem key="navigationItem" title="GPSMovies" id="u0e-be-gH5"/>
                     <connections>
                         <outlet property="collectionView" destination="cIb-P5-sXc" id="jGg-JZ-aWV"/>
+                        <outlet property="viewImageLoading" destination="gO0-mw-fYr" id="Fsn-n3-T1h"/>
+                        <outlet property="viewLoadingOrError" destination="CCC-Ih-d67" id="iiS-9F-Gup"/>
                         <segue destination="pqY-d7-4mc" kind="show" identifier="segueDetailMovie" id="u45-61-ngb"/>
                     </connections>
                 </viewController>
