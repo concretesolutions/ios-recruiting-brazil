@@ -28,6 +28,12 @@ class MovieListViewController: UIViewController {
     
     // MARK: IBACTIONS
     
+    @IBAction func refresh(_ sender: UIBarButtonItem) {
+        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+       self.presenter.callServices()
+    }
+    
+    
     deinit {
         self.removeObserver()
     }
@@ -150,7 +156,7 @@ extension MovieListViewController {
     }
     
     @objc func selecteFavorite(_ notification: Notification) {
-        guard let object = notification.object as? [String: Int64], let id = object["id"] as? Int64, let index = self.viewData.movies.firstIndex(where: {$0.id == id}) else { return }
+        guard let object = notification.object as? [String: Int64], let id = object["id"], let index = self.viewData.movies.firstIndex(where: {$0.id == id}) else { return }
         self.viewData.movies[index].detail.isFavorited = !self.viewData.movies[index].detail.isFavorited
         let indexPath = IndexPath(row: index, section: 0)
         guard let cell = self.collectionView.cellForItem(at: indexPath) as? MovieElementCollectionViewCell else { return }
