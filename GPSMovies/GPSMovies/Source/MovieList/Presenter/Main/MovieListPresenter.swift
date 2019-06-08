@@ -71,7 +71,7 @@ extension MovieListPresenter {
             return
         }
         self.getGenres {
-            self.getPopularMovies(pageNumber: 1)
+            self.getInitialPopularMovies()
         }
     }
     
@@ -88,8 +88,8 @@ extension MovieListPresenter {
 
 //MARK: - SERVICE -
 extension MovieListPresenter {
-    private func getPopularMovies(pageNumber: Int) {
-        self.service.getPopularMovies(page: pageNumber) { (result) in
+    private func getInitialPopularMovies() {
+        self.service.getPopularMovies(page: 1) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let movieList):

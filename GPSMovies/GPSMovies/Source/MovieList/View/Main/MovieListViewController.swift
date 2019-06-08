@@ -16,6 +16,7 @@ class MovieListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewLoadingOrError: UIView!
     @IBOutlet weak var viewImageLoading: AnimationView!
+    @IBOutlet weak var viewImageError: AnimationView!
     
     // MARK: CONSTANTS
     private let SEGUEDETAILMOVIE = "segueDetailMovie"
@@ -49,6 +50,7 @@ extension MovieListViewController: MovieListViewDelegate {
     
     func showLoading() {
         self.collectionView.isHidden = true
+        self.viewImageError.isHidden = true
         UIView.animate(withDuration: 0.4, animations: {
             self.viewLoadingOrError.isHidden = false
         }) { (_) in
@@ -58,14 +60,14 @@ extension MovieListViewController: MovieListViewDelegate {
     }
     
     func showError() {
-        let animation = Animation.named("error")
-       
+        self.viewImageLoading.play()
+        self.viewImageError.alpha = 0
+        self.viewImageError.isHidden = false
         UIView.animate(withDuration: 0.4, animations: {
-            self.viewImageLoading.animation = animation
-            self.viewImageLoading.play()
+            self.viewImageLoading.alpha = 0
+            self.viewImageError.alpha = 1
         }) { (_) in
-            
-            
+            self.viewImageError.play()
         }
     }
     
@@ -160,7 +162,9 @@ extension MovieListViewController {
     }
     
     private func setupView() {
-        let animation = Animation.named("loading")
-        viewImageLoading.animation = animation
+        let animationLoading = Animation.named("loading")
+        viewImageLoading.animation = animationLoading
+        let animationError = Animation.named("error")
+        self.viewImageError.animation = animationError
     }
 }

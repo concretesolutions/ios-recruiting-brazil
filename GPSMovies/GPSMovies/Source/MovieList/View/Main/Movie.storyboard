@@ -23,12 +23,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gO0-mw-fYr" userLabel="ViewImageLoading" customClass="AnimationView" customModule="Lottie">
                                         <rect key="frame" x="96" y="220" width="128" height="128"/>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wja-Qc-c4U" userLabel="ViewImageError" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="96" y="220" width="128" height="128"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="wja-Qc-c4U" firstAttribute="centerY" secondItem="CCC-Ih-d67" secondAttribute="centerY" id="0LC-Eh-1XO"/>
+                                    <constraint firstItem="wja-Qc-c4U" firstAttribute="width" secondItem="CCC-Ih-d67" secondAttribute="width" multiplier="0.4" id="7Kh-SR-z7g"/>
+                                    <constraint firstItem="wja-Qc-c4U" firstAttribute="centerX" secondItem="CCC-Ih-d67" secondAttribute="centerX" id="7ht-m6-yHg"/>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="centerY" secondItem="CCC-Ih-d67" secondAttribute="centerY" id="NBF-0h-8o8"/>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="height" secondItem="CCC-Ih-d67" secondAttribute="height" multiplier="0.226" id="Rml-ev-tgz"/>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="width" secondItem="CCC-Ih-d67" secondAttribute="width" multiplier="0.4" id="UC2-WF-Oem"/>
+                                    <constraint firstItem="wja-Qc-c4U" firstAttribute="height" secondItem="CCC-Ih-d67" secondAttribute="height" multiplier="0.226" id="YBV-uW-zfc"/>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="centerX" secondItem="CCC-Ih-d67" secondAttribute="centerX" id="sg0-k9-j1a"/>
                                 </constraints>
                             </view>
@@ -64,6 +71,7 @@
                     <navigationItem key="navigationItem" title="GPSMovies" id="u0e-be-gH5"/>
                     <connections>
                         <outlet property="collectionView" destination="cIb-P5-sXc" id="jGg-JZ-aWV"/>
+                        <outlet property="viewImageError" destination="wja-Qc-c4U" id="KxU-Kx-Yha"/>
                         <outlet property="viewImageLoading" destination="gO0-mw-fYr" id="Fsn-n3-T1h"/>
                         <outlet property="viewLoadingOrError" destination="CCC-Ih-d67" id="iiS-9F-Gup"/>
                         <segue destination="pqY-d7-4mc" kind="show" identifier="segueDetailMovie" id="u45-61-ngb"/>
