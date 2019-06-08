@@ -66,13 +66,17 @@ extension MovieListPresenter {
         self.genreViewDataList.removeAll()
         self.viewData.movies.removeAll()
         self.viewDelegate?.showLoading()
-        if !Reachability.isConnectedToNetwork() {
-            self.viewDelegate?.showError()
-            return
+        
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (_) in
+            if !Reachability.isConnectedToNetwork() {
+                self.viewDelegate?.showError()
+                return
+            }
+            self.getGenres {
+                self.getInitialPopularMovies()
+            }
         }
-        self.getGenres {
-            self.getInitialPopularMovies()
-        }
+        
     }
     
     public func getMovies(for page: Int) {

@@ -32,7 +32,11 @@ class MovieListViewController: UIViewController {
     // MARK: IBACTIONS
     
     @IBAction func refresh(_ sender: UIBarButtonItem) {
-        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        self.isUsingSearchBar = false
+        self.moviesSearch.removeAll()
+        if self.viewLoadingOrError.isHidden {
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
        self.presenter.callServices()
     }
     
@@ -60,8 +64,10 @@ extension MovieListViewController: MovieListViewDelegate {
     func showLoading() {
         self.collectionView.isHidden = true
         self.viewImageError.isHidden = true
+        self.viewImageLoading.isHidden = false
         UIView.animate(withDuration: 0.4, animations: {
             self.viewLoadingOrError.isHidden = false
+            self.viewImageLoading.alpha = 1
         }) { (_) in
             self.viewImageLoading.play()
             self.viewImageLoading.loopMode = .loop
@@ -69,8 +75,8 @@ extension MovieListViewController: MovieListViewDelegate {
     }
     
     func showError() {
-        self.viewImageLoading.play()
         self.viewImageError.alpha = 0
+        self.viewImageLoading.isHidden = true
         self.viewImageError.isHidden = false
         UIView.animate(withDuration: 0.4, animations: {
             self.viewImageLoading.alpha = 0
@@ -157,6 +163,9 @@ extension MovieListViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         self.addGestureHideKeyBoard()
+        if !self.viewLoadingOrError.isHidden {
+            return false
+        }
         return true
     }
     
