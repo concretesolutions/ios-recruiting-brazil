@@ -60,10 +60,11 @@ class MovieListPresenter {
     }
 }
 
-//SERVICE
+//MARK: - METHODS PUBLICS -
 extension MovieListPresenter {
-    
     public func callServices() {
+        self.genreViewDataList.removeAll()
+        self.viewData.movies.removeAll()
         self.viewDelegate?.showLoading()
         if !Reachability.isConnectedToNetwork() {
             self.viewDelegate?.hideLoading()
@@ -71,14 +72,24 @@ extension MovieListPresenter {
             return
         }
         self.getGenres {
-            self.getPopularMovies()
+            self.getPopularMovies(pageNumber: 1)
         }
     }
     
-   
-    
-    private func getPopularMovies() {
-        self.service.getPopularMovies(page: 1) { (result) in
+    public func getMovies(for page: Int) {
+        if !Reachability.isConnectedToNetwork() {
+            self.viewDelegate?.hideLoading()
+            self.viewDelegate?.showError()
+            return
+        }
+        self.getPopularMovies(pageNumber: page)
+    }
+}
+
+//MARK: - SERVICE -
+extension MovieListPresenter {
+    private func getPopularMovies(pageNumber: Int) {
+        self.service.getPopularMovies(page: pageNumber) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let movieList):
@@ -121,7 +132,6 @@ extension MovieListPresenter {
 //AUX METHODS
 extension MovieListPresenter {
     private func parseModelFromViewData(model: MovieModel) {
-        self.viewData.movies.removeAll()
         self.viewData.currentPage = model.page ?? 1
         self.viewData.totalPages = model.totalPages ?? 1
         if let results = model.results, results.count > 0 {
@@ -156,7 +166,6 @@ extension MovieListPresenter {
     }
     
     private func parseGenreModelFromViewData(model: GenreModel) {
-        self.genreViewDataList.removeAll()
         if let genreList = model.genres, genreList.count > 0 {
             genreList.forEach { (genreRow) in
                 let genreViewData = GenreViewData(id: genreRow.id ?? 0, name: genreRow.name ?? "")

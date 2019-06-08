@@ -20,6 +20,7 @@ class MovieListViewController: UIViewController {
     // MARK: VARIABLES
     private var presenter: MovieListPresenter!
     private lazy var viewData:MovieListViewData = MovieListViewData()
+    private var isLoading = false
     
     // MARK: IBACTIONS
 }
@@ -75,6 +76,13 @@ extension MovieListViewController: UICollectionViewDataSource {
 extension MovieListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: self.viewData.movies[indexPath.row])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.viewData.movies.count - 10, !self.isLoading, self.viewData.totalPages != self.viewData.currentPage {
+            self.viewData.currentPage += 1
+            self.presenter.getMovies(for: self.viewData.currentPage)
+        }
     }
 }
 
