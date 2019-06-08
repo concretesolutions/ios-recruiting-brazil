@@ -30,7 +30,6 @@ class MovieDetailViewController: UIViewController {
     // MARK: VARIABLES
     private var presenter: MovieDetailPresenter!
     public lazy var viewData = MovieElementViewData()
-    public var selectedFavorite: ((_ index: Int64) -> Void)?
     
     // MARK: IBACTIONS
 }
@@ -90,7 +89,8 @@ extension MovieDetailViewController {
             self.viewFavorite.play()
         }
         self.presenter.addMovieFavorite(movieViewData: self.viewData)
-        self.selectedFavorite?(self.viewData.id)
+        let id: [String: Int64] = ["id": self.viewData.id]
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "observerFavorite"), object: id)
     }
     
     private func downloadImage(urlString: String, imageView: UIImageView) {

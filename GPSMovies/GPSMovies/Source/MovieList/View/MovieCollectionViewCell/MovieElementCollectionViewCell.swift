@@ -8,14 +8,17 @@
 
 import UIKit
 import Kingfisher
+import Lottie
 
 class MovieElementCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var labelNameMovie: UILabel!
+    @IBOutlet weak var viewFavorite: AnimationView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setupFavoriteView()
     }
     
     override func prepareForReuse() {
@@ -33,6 +36,16 @@ extension MovieElementCollectionViewCell {
             self.downloadImage(urlString: viewData.urlImageCover)
         }
         self.labelNameMovie.text = viewData.title
+        if viewData.detail.isFavorited {
+            self.showFavorite()
+        }else {
+            self.hideFavorite()
+        }
+    }
+    
+    private func setupFavoriteView() {
+        let animation = Animation.named("favourite_app_icon")
+        viewFavorite.animation = animation
     }
     
     private func downloadImage(urlString: String) {
@@ -54,5 +67,15 @@ extension MovieElementCollectionViewCell {
                 }
             }
         }
+    }
+    
+    public func showFavorite() {
+        self.viewFavorite.isHidden = false
+        self.viewFavorite.play()
+    }
+    
+    public func hideFavorite() {
+        self.viewFavorite.stop()
+        self.viewFavorite.isHidden = true
     }
 }

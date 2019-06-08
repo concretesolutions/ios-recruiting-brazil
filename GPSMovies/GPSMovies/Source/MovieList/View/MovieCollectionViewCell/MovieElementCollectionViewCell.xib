@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,10 +26,17 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ERb-4U-lxx">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="284.5"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CkE-ja-FcA" userLabel="ViewFavorite" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="110" y="214.5" width="70" height="70"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ERb-4U-lxx" firstAttribute="top" secondItem="Js0-8e-u6d" secondAttribute="top" id="5an-Ju-e75"/>
+                                    <constraint firstAttribute="trailing" secondItem="CkE-ja-FcA" secondAttribute="trailing" id="Cem-Gn-w7v"/>
                                     <constraint firstItem="ERb-4U-lxx" firstAttribute="leading" secondItem="Js0-8e-u6d" secondAttribute="leading" id="Gye-JE-jPV"/>
+                                    <constraint firstItem="CkE-ja-FcA" firstAttribute="width" secondItem="Js0-8e-u6d" secondAttribute="width" multiplier="0.39" id="WEA-dB-Dez"/>
+                                    <constraint firstItem="CkE-ja-FcA" firstAttribute="bottom" secondItem="ERb-4U-lxx" secondAttribute="bottom" id="bcQ-P6-4kh"/>
+                                    <constraint firstItem="CkE-ja-FcA" firstAttribute="height" secondItem="Js0-8e-u6d" secondAttribute="height" multiplier="0.24" id="vAZ-um-vj0"/>
                                     <constraint firstAttribute="bottom" secondItem="ERb-4U-lxx" secondAttribute="bottom" constant="8" id="wyy-LW-Ep3"/>
                                 </constraints>
                             </view>
@@ -86,8 +92,9 @@
             <connections>
                 <outlet property="imageMovie" destination="ERb-4U-lxx" id="UA9-k0-BSk"/>
                 <outlet property="labelNameMovie" destination="8Hp-Jh-9Ns" id="1zW-Zz-mgf"/>
+                <outlet property="viewFavorite" destination="CkE-ja-FcA" id="j1m-3h-VZk"/>
             </connections>
-            <point key="canvasLocation" x="55.072463768115945" y="67.299107142857139"/>
+            <point key="canvasLocation" x="54.375" y="67.077464788732399"/>
         </collectionViewCell>
     </objects>
 </document>

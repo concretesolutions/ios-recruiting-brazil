@@ -23,6 +23,10 @@ class MovieListViewController: UIViewController {
     private var isLoading = false
     
     // MARK: IBACTIONS
+    
+    deinit {
+        self.removeObserver()
+    }
 }
 
 //MARK: - LIFE CYCLE -
@@ -32,6 +36,7 @@ extension MovieListViewController {
         self.presenter = MovieListPresenter(viewDelegate: self)
         self.presenter.callServices()
         self.registerCell()
+        self.registerObserver()
     }
 }
 
@@ -100,17 +105,29 @@ extension MovieListViewController {
         self.collectionView.register(UINib(nibName: "MovieElementCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MovieElementCollectionViewCell")
     }
     
+    private func registerObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.selecteFavorite(_:)), name: Notification.Name(rawValue: "observerFavorite"), object: nil)
+    }
+    
+    private func removeObserver() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "observerFavorite"), object: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElementViewData {
             controller.viewData = viewData
-            controller.selectedFavorite = self.selecteFavorite
         }
     }
     
-    private func selecteFavorite(id: Int64) {
-        guard let index = self.viewData.movies.firstIndex(where: {$0.id == id}) else { return }
+    @objc func selecteFavorite(_ notification: Notification) {
+        guard let object = notification.object as? [String: Int64], let id = object["id"] as? Int64, let index = self.viewData.movies.firstIndex(where: {$0.id == id}) else { return }
         self.viewData.movies[index].detail.isFavorited = !self.viewData.movies[index].detail.isFavorited
         let indexPath = IndexPath(row: index, section: 0)
-        let cell = self.collectionView.cellForItem(at: indexPath)
+        guard let cell = self.collectionView.cellForItem(at: indexPath) as? MovieElementCollectionViewCell else { return }
+        if self.viewData.movies[index].detail.isFavorited {
+            cell.showFavorite()
+        }else {
+            cell.hideFavorite()
+        }
     }
 }
