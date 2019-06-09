@@ -23,12 +23,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gO0-mw-fYr" userLabel="ViewContainerLottie" customClass="AnimationView" customModule="Lottie">
                                         <rect key="frame" x="110" y="202" width="100" height="100"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desculpe, ocorreu um erro inesperado. Tente novamente." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzg-j7-l6n">
+                                        <rect key="frame" x="30" y="307" width="260" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="height" secondItem="CCC-Ih-d67" secondAttribute="height" multiplier="0.198" id="3Fn-do-iuW"/>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="width" secondItem="CCC-Ih-d67" secondAttribute="width" multiplier="0.314" id="851-LH-QLh"/>
+                                    <constraint firstItem="Gzg-j7-l6n" firstAttribute="leading" secondItem="CCC-Ih-d67" secondAttribute="leading" constant="30" id="Hra-qE-1L7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gzg-j7-l6n" secondAttribute="trailing" constant="30" id="Srr-w9-fCJ"/>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="centerY" secondItem="CCC-Ih-d67" secondAttribute="centerY" id="hCb-4b-qKV"/>
+                                    <constraint firstItem="Gzg-j7-l6n" firstAttribute="top" secondItem="gO0-mw-fYr" secondAttribute="bottom" constant="5" id="hmy-Vm-thh"/>
                                     <constraint firstItem="gO0-mw-fYr" firstAttribute="centerX" secondItem="CCC-Ih-d67" secondAttribute="centerX" id="mFV-CI-JVt"/>
                                 </constraints>
                             </view>
@@ -107,6 +116,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="cIb-P5-sXc" id="jGg-JZ-aWV"/>
+                        <outlet property="labelError" destination="Gzg-j7-l6n" id="4EI-5W-5JJ"/>
                         <outlet property="searchBar" destination="lMI-ps-xAx" id="hx7-Tr-G4o"/>
                         <outlet property="viewContainerLottie" destination="gO0-mw-fYr" id="Fsn-n3-T1h"/>
                         <outlet property="viewEmprySearch" destination="8mn-Oc-HEk" id="b9q-f6-06F"/>

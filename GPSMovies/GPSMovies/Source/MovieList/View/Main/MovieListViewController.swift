@@ -19,6 +19,7 @@ class MovieListViewController: UIViewController {
     @IBOutlet weak var viewSuccess: UIView!
     @IBOutlet weak var viewEmprySearch: AnimationView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var labelError: UILabel!
     
     // MARK: CONSTANTS
     private let SEGUEDETAILMOVIE = "segueDetailMovie"
@@ -64,12 +65,14 @@ extension MovieListViewController: MovieListViewDelegate {
     
     func showLoading() {
         self.viewSuccess.isHidden = true
+        self.labelError.isHidden = true
         LottieHelper.showAnimateion(for: .loading, lottieView: self.viewContainerLottie, in: self.viewLoadingOrError)
         self.viewContainerLottie.loopMode = .loop
     }
     
     func showError() {
         self.viewSuccess.isHidden = true
+        self.labelError.isHidden = false
         LottieHelper.showAnimateion(for: .error, lottieView: self.viewContainerLottie, in: self.viewLoadingOrError)
         viewContainerLottie.loopMode = .autoReverse
     }
@@ -162,6 +165,7 @@ extension MovieListViewController: UISearchBarDelegate {
     }
     
     func showEmptyMessage() {
+        self.labelError.isHidden = true
         LottieHelper.showAnimateion(for: .searchEmpty, lottieView: self.viewEmprySearch, in: self.viewEmprySearch)
         self.viewEmprySearch.loopMode = .autoReverse
         self.collectionView.isHidden = true
