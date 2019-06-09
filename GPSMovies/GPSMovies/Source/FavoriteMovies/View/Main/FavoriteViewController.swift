@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Lottie
 
 class FavoriteViewController: UIViewController {
     
     // MARK: OUTLETS
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewEmpty: UIView!
+    @IBOutlet weak var viewImageEmpty: AnimationView!
     
     // MARK: CONSTANTS
     private let SEGUEDETAILMOVIE = "segueDetailMovie"
@@ -53,6 +56,7 @@ extension FavoriteViewController: FavoriteViewDelegate {
     func showEmptyList() {
         self.viewData.favoritesMovies.removeAll()
         self.tableView.reloadData()
+        self.showEmptyView()
     }
 }
 
@@ -82,6 +86,8 @@ extension FavoriteViewController: FilterMoviesDelegate {
         if genre?.name == "Todos" && endDate == nil{
             self.isFilter = false
             self.tableView.reloadData()
+            self.tableView.isHidden = false
+            LottieHelper.hideAnimateion(lottieView: self.viewImageEmpty, in: self.viewEmpty)
             return
         }
         var search = RatingViewData()
@@ -94,6 +100,12 @@ extension FavoriteViewController: FilterMoviesDelegate {
         self.viewDataFiltered.favoritesMovies.append(search)
         self.isFilter = true
         self.tableView.reloadData()
+        if search.movies.count == 0 {
+            self.showEmptySearch()
+        } else {
+            self.tableView.isHidden = false
+            LottieHelper.hideAnimateion(lottieView: self.viewImageEmpty, in: self.viewEmpty)
+        }
     }
 }
 
@@ -128,5 +140,15 @@ extension FavoriteViewController {
             viewDataTemp += moviesFilter
         }
         return viewDataTemp
+    }
+    
+    private func showEmptyView() {
+        LottieHelper.showAnimateion(for: .searchEmpty, lottieView: self.viewImageEmpty, in: self.viewEmpty)
+        self.tableView.isHidden = true
+    }
+    
+    private func showEmptySearch() {
+        LottieHelper.showAnimateion(for: .searchEmpty, lottieView: self.viewImageEmpty, in: self.viewEmpty)
+        self.tableView.isHidden = true
     }
 }

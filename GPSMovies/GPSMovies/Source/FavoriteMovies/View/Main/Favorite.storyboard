@@ -17,6 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptw-ga-YQ0" userLabel="ViewEmpty">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mh6-v7-YbR" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="96" y="184" width="128" height="136"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Mh6-v7-YbR" firstAttribute="width" secondItem="ptw-ga-YQ0" secondAttribute="width" multiplier="0.4" id="EiG-xP-V0q"/>
+                                    <constraint firstItem="Mh6-v7-YbR" firstAttribute="centerX" secondItem="ptw-ga-YQ0" secondAttribute="centerX" id="T9C-dy-G4S"/>
+                                    <constraint firstItem="Mh6-v7-YbR" firstAttribute="height" secondItem="ptw-ga-YQ0" secondAttribute="height" multiplier="0.27" id="jEp-yJ-4xf"/>
+                                    <constraint firstItem="Mh6-v7-YbR" firstAttribute="centerY" secondItem="ptw-ga-YQ0" secondAttribute="centerY" id="nVM-Qv-PDM"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2gj-V1-7A8">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -27,10 +42,14 @@
                             </tableView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="0Lo-6K-Kku" firstAttribute="bottom" secondItem="ptw-ga-YQ0" secondAttribute="bottom" id="2ae-Xl-6yt"/>
+                            <constraint firstItem="ptw-ga-YQ0" firstAttribute="leading" secondItem="0Lo-6K-Kku" secondAttribute="leading" id="Jcy-0T-Pce"/>
                             <constraint firstItem="2gj-V1-7A8" firstAttribute="top" secondItem="0Lo-6K-Kku" secondAttribute="top" id="Jqt-DK-ipP"/>
+                            <constraint firstItem="ptw-ga-YQ0" firstAttribute="top" secondItem="0Lo-6K-Kku" secondAttribute="top" id="T17-ZF-VvB"/>
                             <constraint firstAttribute="bottom" secondItem="2gj-V1-7A8" secondAttribute="bottom" id="UIH-Xb-nah"/>
                             <constraint firstItem="2gj-V1-7A8" firstAttribute="leading" secondItem="0Lo-6K-Kku" secondAttribute="leading" id="WmJ-SF-MKE"/>
                             <constraint firstItem="0Lo-6K-Kku" firstAttribute="trailing" secondItem="2gj-V1-7A8" secondAttribute="trailing" id="Y0f-Zq-NQo"/>
+                            <constraint firstItem="0Lo-6K-Kku" firstAttribute="trailing" secondItem="ptw-ga-YQ0" secondAttribute="trailing" id="ww2-7z-gDV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Lo-6K-Kku"/>
                     </view>
@@ -44,6 +63,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2gj-V1-7A8" id="cUZ-AY-dyD"/>
+                        <outlet property="viewEmpty" destination="ptw-ga-YQ0" id="GcK-Ws-7kM"/>
+                        <outlet property="viewImageEmpty" destination="Mh6-v7-YbR" id="UWY-uN-0k1"/>
                         <segue destination="Jm2-6x-Den" kind="show" identifier="segueDetailMovie" id="K4z-A7-k3l"/>
                         <segue destination="SHR-B2-i4Y" kind="presentation" identifier="segueFilter" id="t4j-VH-U01"/>
                     </connections>
@@ -89,7 +110,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7o-aD-wc0" userLabel="Picker View Date">
-                                        <rect key="frame" x="0.0" y="121" width="320" height="114"/>
+                                        <rect key="frame" x="0.0" y="121" width="320" height="113.5"/>
                                         <connections>
                                             <outlet property="dataSource" destination="SHR-B2-i4Y" id="1nh-3r-nbZ"/>
                                             <outlet property="delegate" destination="SHR-B2-i4Y" id="E3s-UH-wn9"/>
@@ -115,7 +136,7 @@
                                         </connections>
                                     </button>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sXJ-Mp-R3y">
-                                        <rect key="frame" x="0.0" y="276" width="320" height="113"/>
+                                        <rect key="frame" x="0.0" y="275.5" width="320" height="113.5"/>
                                         <date key="date" timeIntervalSinceReferenceDate="581782371.80687904">
                                             <!--2019-06-09 14:12:51 +0000-->
                                         </date>
