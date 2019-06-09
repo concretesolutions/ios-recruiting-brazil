@@ -79,11 +79,17 @@ extension FavoriteViewController: FavoriteTableViewCellDelegate {
 extension FavoriteViewController: FilterMoviesDelegate {
     func applyFilter(endDate: Date?, genre: GenreViewData?) {
         self.viewDataFiltered.favoritesMovies.removeAll()
+        if genre?.name == "Todos" && endDate == nil{
+            self.isFilter = false
+            self.tableView.reloadData()
+            return
+        }
         var search = RatingViewData()
         search.labelRating = "Resultado da busca: "
-        self.viewData.favoritesMovies.forEach { (viewDataRow) in
-            let moviesFilter = viewDataRow.movies.filter({$0.detail.genres.filter({$0.id == genre?.id}).count > 0})
-            search.movies += moviesFilter
+        if let dateFilter = endDate {
+            search.movies += self.filterDate(date: dateFilter)
+        }else if let genreFilter = genre {
+            search.movies += self.filterGenre(genre: genreFilter)
         }
         self.viewDataFiltered.favoritesMovies.append(search)
         self.isFilter = true
@@ -104,5 +110,23 @@ extension FavoriteViewController {
             controller.delegate = self
             controller.genreList = self.presenter.getGenresViewData().sorted(by: {$0.name < $1.name})
         }
+    }
+    
+    private func filterDate(date: Date) -> [MovieElementViewData] {
+        var viewDataTemp = [MovieElementViewData]()
+        self.viewData.favoritesMovies.forEach { (viewDataRow) in
+            let moviesFilter = viewDataRow.movies.filter({$0.detail.releaseDate.replacingOccurrences(of: "Lançamento: ", with: "").getDateFormatter() <= date})
+            viewDataTemp += moviesFilter
+        }
+        return viewDataTemp
+    }
+    
+    private func filterGenre(genre: GenreViewData) -> [MovieElementViewData] {
+        var viewDataTemp = [MovieElementViewData]()
+        self.viewData.favoritesMovies.forEach { (viewDataRow) in
+            let moviesFilter = viewDataRow.movies.filter({$0.detail.genres.filter({$0.id == genre.id}).count > 0})
+            viewDataTemp += moviesFilter
+        }
+        return viewDataTemp
     }
 }
