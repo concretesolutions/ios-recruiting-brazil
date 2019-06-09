@@ -150,6 +150,7 @@ extension MovieListViewController: UISearchBarDelegate {
         self.searchBar.endEditing(true)
         self.isUsingSearchBar = false
         self.collectionView.reloadData()
+        self.hideEmptyMessage()
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
