@@ -58,6 +58,9 @@ extension TabBarViewController: UITabBarControllerDelegate {
         }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let navigation = viewController as? UINavigationController, let favoriteController = navigation.viewControllers.first as? FavoriteViewController {
+            favoriteController.isFilter = false
+        }
         return true
     }
     

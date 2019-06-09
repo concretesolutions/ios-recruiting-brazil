@@ -20,7 +20,7 @@ class FavoriteViewController: UIViewController {
     private var presenter: FavoritePresenter!
     private lazy var viewData = FavoriteViewData()
     private lazy var viewDataFiltered = FavoriteViewData()
-    private var isFilter = false
+    public var isFilter = false
     // MARK: IBACTIONS
     @IBAction func showFilter(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: self.SEGUEFILTER, sender: nil)
@@ -84,7 +84,6 @@ extension FavoriteViewController: FilterMoviesDelegate {
         })
         self.isFilter = true
         self.tableView.reloadData()
-        print("conlllll")
     }
 }
 
