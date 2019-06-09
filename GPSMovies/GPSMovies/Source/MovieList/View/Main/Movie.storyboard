@@ -49,6 +49,9 @@
                                             <outlet property="delegate" destination="VGh-hU-crd" id="83c-5M-0Qq"/>
                                         </connections>
                                     </searchBar>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mn-Oc-HEk" userLabel="ViewEmpty" customClass="AnimationView" customModule="Lottie">
+                                        <rect key="frame" x="96" y="189" width="128" height="126"/>
+                                    </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cIb-P5-sXc">
                                         <rect key="frame" x="0.0" y="56" width="320" height="448"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="qYj-jv-zrM">
@@ -71,8 +74,12 @@
                                     <constraint firstItem="cIb-P5-sXc" firstAttribute="top" secondItem="lMI-ps-xAx" secondAttribute="bottom" id="QHz-tL-tdK"/>
                                     <constraint firstItem="lMI-ps-xAx" firstAttribute="leading" secondItem="d3X-f5-70A" secondAttribute="leading" id="daZ-d6-DmE"/>
                                     <constraint firstAttribute="bottom" secondItem="cIb-P5-sXc" secondAttribute="bottom" id="drn-JO-26u"/>
+                                    <constraint firstItem="8mn-Oc-HEk" firstAttribute="width" secondItem="d3X-f5-70A" secondAttribute="width" multiplier="0.4" id="f7A-Ls-7Lc"/>
                                     <constraint firstItem="lMI-ps-xAx" firstAttribute="top" secondItem="d3X-f5-70A" secondAttribute="top" id="jjF-yr-xA7"/>
+                                    <constraint firstItem="8mn-Oc-HEk" firstAttribute="centerY" secondItem="d3X-f5-70A" secondAttribute="centerY" id="kYd-l0-Ppz"/>
                                     <constraint firstItem="cIb-P5-sXc" firstAttribute="leading" secondItem="d3X-f5-70A" secondAttribute="leading" id="pF9-XH-7Fr"/>
+                                    <constraint firstItem="8mn-Oc-HEk" firstAttribute="height" secondItem="d3X-f5-70A" secondAttribute="height" multiplier="0.25" id="qsn-cA-oAq"/>
+                                    <constraint firstItem="8mn-Oc-HEk" firstAttribute="centerX" secondItem="d3X-f5-70A" secondAttribute="centerX" id="sTA-tp-y84"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -102,6 +109,7 @@
                         <outlet property="collectionView" destination="cIb-P5-sXc" id="jGg-JZ-aWV"/>
                         <outlet property="searchBar" destination="lMI-ps-xAx" id="hx7-Tr-G4o"/>
                         <outlet property="viewContainerLottie" destination="gO0-mw-fYr" id="Fsn-n3-T1h"/>
+                        <outlet property="viewEmprySearch" destination="8mn-Oc-HEk" id="b9q-f6-06F"/>
                         <outlet property="viewLoadingOrError" destination="CCC-Ih-d67" id="iiS-9F-Gup"/>
                         <outlet property="viewSuccess" destination="d3X-f5-70A" id="ntd-yx-T6q"/>
                         <segue destination="pqY-d7-4mc" kind="show" identifier="segueDetailMovie" id="u45-61-ngb"/>

@@ -17,6 +17,7 @@ class MovieListViewController: UIViewController {
     @IBOutlet weak var viewLoadingOrError: UIView!
     @IBOutlet weak var viewContainerLottie: AnimationView!
     @IBOutlet weak var viewSuccess: UIView!
+    @IBOutlet weak var viewEmprySearch: AnimationView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: CONSTANTS
@@ -132,9 +133,15 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout {
 //MARK: - DELEGATE UISearchBarDelegate -
 extension MovieListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.moviesSearch.removeAll()
         self.isUsingSearchBar = !searchText.isEmpty
         self.moviesSearch = self.viewData.movies.filter({$0.title.lowercased().contains(searchText.lowercased())})
         self.collectionView.reloadData()
+        if self.moviesSearch.count == 0, self.isUsingSearchBar {
+            self.showEmptyMessage()
+        }else {
+            self.hideEmptyMessage()
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -153,20 +160,16 @@ extension MovieListViewController: UISearchBarDelegate {
         return true
     }
     
-//    func setEmpty(){
-//        if self.searchMovies.count == 0, self.isFiltering(){
-//            self.favoritesTableView.alpha = 0.5
-//            self.emptyView.isHidden = false
-//            self.emptyView.setAnimation(named: "search")
-//            self.emptyView.play()
-//            self.emptyView.loopAnimation = true
-//            self.labelEmpty.text = "No movies with this name were found"
-//        }else{
-//            self.favoritesTableView.alpha = 1.0
-//            self.emptyView.isHidden = true
-//            self.emptyView.pause()
-//        }
-//    }
+    func showEmptyMessage() {
+        LottieHelper.showAnimateion(for: .searchEmpty, lottieView: self.viewEmprySearch, in: self.viewEmprySearch)
+        self.viewEmprySearch.loopMode = .autoReverse
+        self.collectionView.isHidden = true
+    }
+    
+    private func hideEmptyMessage() {
+        LottieHelper.hideAnimateion(lottieView: self.viewEmprySearch, in: self.viewEmprySearch)
+        self.collectionView.isHidden = false
+    }
 }
 
 //MARK: - AUX METHODS -
