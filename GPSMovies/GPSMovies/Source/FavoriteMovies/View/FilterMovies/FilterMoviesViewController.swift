@@ -42,6 +42,7 @@ class FilterMoviesViewController: UIViewController {
     
     @IBAction func filterAction(_ sender: Any) {
         self.delegate?.applyFilter(endDate: self.dateSelected, genre: self.genreSelected)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func done(_ sender: UIButton) {
@@ -61,7 +62,7 @@ extension FilterMoviesViewController: UIPickerViewDataSource {
 
 extension FilterMoviesViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let label = row == 0 ? "Selecione um Gênero" : self.genreList[row].name
+        let label = row == 0 ? "Todos" : self.genreList[row].name
         let attributedString = NSAttributedString(string: label, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         return attributedString
     }

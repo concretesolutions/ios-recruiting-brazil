@@ -18,8 +18,9 @@ class FavoriteViewController: UIViewController {
     private let SEGUEFILTER = "segueFilter"
     // MARK: VARIABLES
     private var presenter: FavoritePresenter!
-    private lazy var viewData:FavoriteViewData = FavoriteViewData()
-    
+    private lazy var viewData = FavoriteViewData()
+    private lazy var viewDataFiltered = FavoriteViewData()
+    private var isFilter = false
     // MARK: IBACTIONS
     @IBAction func showFilter(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: self.SEGUEFILTER, sender: nil)
@@ -57,12 +58,13 @@ extension FavoriteViewController: FavoriteViewDelegate {
 
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewData.favoritesMovies.count
+        return !self.isFilter ? self.viewData.favoritesMovies.count : self.viewDataFiltered.favoritesMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell") as! FavoriteTableViewCell
-        cell.prepareCell(viewData: self.viewData.favoritesMovies[indexPath.row])
+        let viewData = !self.isFilter ? self.viewData.favoritesMovies[indexPath.row] : self.viewDataFiltered.favoritesMovies[indexPath.row]
+        cell.prepareCell(viewData: viewData)
         cell.delegate = self
         return cell
     }
@@ -76,7 +78,13 @@ extension FavoriteViewController: FavoriteTableViewCellDelegate {
 
 extension FavoriteViewController: FilterMoviesDelegate {
     func applyFilter(endDate: Date?, genre: GenreViewData?) {
-        
+        self.viewDataFiltered.favoritesMovies.removeAll()
+        self.viewDataFiltered.favoritesMovies = self.viewData.favoritesMovies.filter({
+            $0.movies.filter({$0.detail.genres.contains(where: {$0.id == genre?.id})}).count > 0
+        })
+        self.isFilter = true
+        self.tableView.reloadData()
+        print("conlllll")
     }
 }
 
