@@ -41,11 +41,14 @@ class FilterMoviesViewController: UIViewController {
     }
     
     @IBAction func filterAction(_ sender: Any) {
+        HapticAlert.hapticReturn(style: .medium)
+        self.buttonSearch.pulseAnimation(scaleX: 0.8, scaleY: 0.8, timer: 0, alpha: nil, nil)
         self.delegate?.applyFilter(endDate: self.dateSelected, genre: self.genreSelected)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func done(_ sender: UIButton) {
+        HapticAlert.hapticReturn(style: .medium)
         self.dismiss(animated: true, completion: nil)
     }
 }

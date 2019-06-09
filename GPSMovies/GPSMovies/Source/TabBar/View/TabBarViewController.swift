@@ -95,11 +95,4 @@ extension TabBarViewController {
         item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 2)
         return item
     }
-    
-    private func setupTabBar() {
-//        self.tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
-//        self.tabBar.layer.shadowRadius = 7
-//        self.tabBar.layer.shadowColor = UIColor.tDarkGrey().cgColor
-//        self.tabBar.layer.shadowOpacity = 0.7
-    }
 }

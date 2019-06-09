@@ -13,6 +13,7 @@ class GenreDataBase {
     private var fetchRequest:NSFetchRequest<GenreDB> = GenreDB.fetchRequest()
 }
 
+//MARK: - METHODS PUBLICS -
 extension GenreDataBase {
     public func createOrUpdateGenreDataBase(model: GenreModel) {
         guard let genresList = model.genres, genresList.count > 0 else { return }
@@ -42,6 +43,7 @@ extension GenreDataBase {
     }
 }
 
+//MARK: - METHODS AUX -
 extension GenreDataBase {
     private func getGenreById(id: Int64) -> GenreDB? {
         self.fetchRequest.predicate = NSPredicate(format: "id == %@", String(describing: id))
@@ -65,6 +67,7 @@ extension GenreDataBase {
     }
 }
 
+//MARK: - PARSE MODEL FROM DATABASE -
 extension GenreDataBase {
     private func parseFromDataBase(model: Genres, genreDB: GenreDB) {
         guard let id = model.id else { return }
@@ -72,7 +75,10 @@ extension GenreDataBase {
         genreDB.name = model.name
         PersistentManager.shared.saveContext()
     }
-    
+}
+
+//MARK: - PARSE DATABASE FROM MODEL -
+extension GenreDataBase {
     private func parseFromModel(genresDB: [GenreDB]) -> GenreModel {
         let genreModel = GenreModel()
         genreModel.genres = [Genres]()

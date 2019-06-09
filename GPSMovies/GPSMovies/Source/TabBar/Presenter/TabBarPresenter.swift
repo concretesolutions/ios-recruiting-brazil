@@ -75,7 +75,7 @@ class TabBarPresenter {
     }
 }
 
-//SERVICE
+//MARK: - SERVICE -
 extension TabBarPresenter {
     func getTabBarItens() {
         self.createTabBar()
@@ -83,7 +83,7 @@ extension TabBarPresenter {
     }
 }
 
-//AUX METHODS
+//MARK: - AUX METHODS -
 extension TabBarPresenter {
     private func createTabBar() {
         self.viewData.tabaBarItens.removeAll()
@@ -108,9 +108,4 @@ extension TabBarPresenter {
         let imageTabBar = ImageTabBar(imageNameNormal: imageNotSelectedName, imageNameSelected: imageSelectedName)
         return TabBarItem(name: nameMenu, storyBoard: storyBoardName, viewControllerIdentifier: controllerId, imageTabBar: imageTabBar)
     }
-}
-
-//DATABASE
-extension TabBarPresenter {
-    
 }

@@ -1,9 +1,9 @@
 //
 //  TabBarAnimatedTransitioning.swift
-//  MeuTim
+//  GPSMovies
 //
-//  Created by Gilson Santos on 10/04/19.
-//  Copyright © 2019 Tim. All rights reserved.
+//  Created by Gilson Santos on 01/06/19.
+//  Copyright (c) 2019 Gilson Santos. All rights reserved.
 //
 
 import Foundation
@@ -14,11 +14,9 @@ final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let destination = transitionContext.view(forKey: UITransitionContextViewKey.to) else { return }
         destination.alpha = 0.0
-//        destination.transform = .init(scaleX: 1.5, y: 1.5)
         transitionContext.containerView.addSubview(destination)
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             destination.alpha = 1.0
-//            destination.transform = .identity
         }, completion: { transitionContext.completeTransition($0) })
     }
     

@@ -13,6 +13,7 @@ class MovieDataBase {
     private var fetchRequest:NSFetchRequest<MovieDB> = MovieDB.fetchRequest()
 }
 
+//MARK: - METHODS PUBLICS -
 extension MovieDataBase {
     
     public func createOrRemoveMovieDataBase(model: MovieElementModel){
@@ -34,7 +35,10 @@ extension MovieDataBase {
     public func isFavoriteMovie(idMovie: Int64) -> Bool {
         return self.isExistMovie(id: idMovie)
     }
-    
+}
+
+//MARK: - METHODS AUX -
+extension MovieDataBase {
     private func getMovieById(id: Int64) -> MovieDB?{
         self.fetchRequest.predicate = NSPredicate(format: "id == %@", String(describing: id))
         do {
@@ -52,7 +56,7 @@ extension MovieDataBase {
         self.fetchRequest.predicate = NSPredicate(format: "id == %@", String(describing: id))
         do {
             let result = try PersistentManager.shared.context.count(for: self.fetchRequest)
-           return result > 0
+            return result > 0
         } catch {
             return false
         }
@@ -72,8 +76,8 @@ extension MovieDataBase {
     }
 }
 
+//MARK: - PARSE MODEL FROM DATABASE -
 extension MovieDataBase {
-    
     private func parseModelFromDataBase(model: MovieElementModel) {
         guard let id = model.id else { return }
         let genreDataBase = GenreDataBase()
@@ -94,7 +98,10 @@ extension MovieDataBase {
         }
         PersistentManager.shared.saveContext()
     }
-    
+}
+
+//MARK: - PARSE DATABASE FROM MODEL -
+extension MovieDataBase {
     private func parseDataBaseFromModel(moviesDB: [MovieDB]) -> [MovieElementModel] {
         var moviesModelList = [MovieElementModel]()
         moviesDB.forEach { (movieRow) in
@@ -114,7 +121,3 @@ extension MovieDataBase {
         return moviesModelList
     }
 }
-
-
-
-

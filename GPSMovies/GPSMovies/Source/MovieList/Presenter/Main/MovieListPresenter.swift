@@ -40,7 +40,6 @@ struct GenreViewData {
 protocol MovieListViewDelegate: NSObjectProtocol {
     func showLoading()
     func showError()
-    func showEmptyList()
     func setViewData(viewData: MovieListViewData)
     func setViewDataOfNextPage(viewData: MovieListViewData)
 }
@@ -101,7 +100,7 @@ extension MovieListPresenter {
                     if self.viewData.movies.count > 0 {
                         self.viewDelegate?.setViewData(viewData: self.viewData)
                     }else {
-                        self.viewDelegate?.showEmptyList()
+                        self.viewDelegate?.showError()
                     }
                     break
                 case .failure(_):

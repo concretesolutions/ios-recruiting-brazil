@@ -12,7 +12,6 @@ import Lottie
 class MovieListViewController: UIViewController {
     
     // MARK: OUTLETS
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewLoadingOrError: UIView!
     @IBOutlet weak var viewContainerLottie: AnimationView!
@@ -32,7 +31,6 @@ class MovieListViewController: UIViewController {
     private var isUsingSearchBar = false
     
     // MARK: IBACTIONS
-    
     @IBAction func refresh(_ sender: UIBarButtonItem) {
         self.isUsingSearchBar = false
         self.moviesSearch.removeAll()
@@ -42,6 +40,22 @@ class MovieListViewController: UIViewController {
        self.presenter.callServices()
     }
     
+    @objc func selecteFavorite(_ notification: Notification) {
+        guard let object = notification.object as? [String: Int64], let id = object["id"], let index = self.viewData.movies.firstIndex(where: {$0.id == id}) else { return }
+        self.viewData.movies[index].detail.isFavorited = !self.viewData.movies[index].detail.isFavorited
+        let indexPath = IndexPath(row: index, section: 0)
+        guard let cell = self.collectionView.cellForItem(at: indexPath) as? MovieElementCollectionViewCell else { return }
+        if self.viewData.movies[index].detail.isFavorited {
+            cell.showFavorite()
+        }else {
+            cell.hideFavorite()
+        }
+    }
+    
+    @objc private func hideKeyBoard() {
+        self.view.endEditing(true)
+        self.view.gestureRecognizers?.removeAll()
+    }
     
     deinit {
         self.removeObserver()
@@ -74,10 +88,6 @@ extension MovieListViewController: MovieListViewDelegate {
         self.labelError.isHidden = false
         LottieHelper.showAnimateion(for: .error, lottieView: self.viewContainerLottie, in: self.viewLoadingOrError)
         viewContainerLottie.loopMode = .autoReverse
-    }
-    
-    func showEmptyList() {
-        
     }
     
     func setViewData(viewData: MovieListViewData) {
@@ -194,23 +204,6 @@ extension MovieListViewController {
         if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElementViewData {
             controller.viewData = viewData
         }
-    }
-    
-    @objc func selecteFavorite(_ notification: Notification) {
-        guard let object = notification.object as? [String: Int64], let id = object["id"], let index = self.viewData.movies.firstIndex(where: {$0.id == id}) else { return }
-        self.viewData.movies[index].detail.isFavorited = !self.viewData.movies[index].detail.isFavorited
-        let indexPath = IndexPath(row: index, section: 0)
-        guard let cell = self.collectionView.cellForItem(at: indexPath) as? MovieElementCollectionViewCell else { return }
-        if self.viewData.movies[index].detail.isFavorited {
-            cell.showFavorite()
-        }else {
-            cell.hideFavorite()
-        }
-    }
-    
-    @objc private func hideKeyBoard() {
-        self.view.endEditing(true)
-        self.view.gestureRecognizers?.removeAll()
     }
     
     private func addGestureHideKeyBoard() {
