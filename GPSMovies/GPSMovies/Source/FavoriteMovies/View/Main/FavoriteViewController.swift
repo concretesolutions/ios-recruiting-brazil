@@ -152,11 +152,13 @@ extension FavoriteViewController {
     
     private func showEmptyView() {
         LottieHelper.showAnimateion(for: .empty, lottieView: self.viewImageEmpty, in: self.viewEmpty)
+        self.viewImageEmpty.loopMode = .loop
         self.tableView.isHidden = true
     }
     
     private func showEmptySearch() {
         LottieHelper.showAnimateion(for: .searchEmpty, lottieView: self.viewImageEmpty, in: self.viewEmpty)
+        self.viewImageEmpty.loopMode = .playOnce
         self.tableView.isHidden = true
     }
 }
