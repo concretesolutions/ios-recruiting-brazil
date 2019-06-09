@@ -56,7 +56,6 @@ extension MovieListViewController {
         self.presenter.callServices()
         self.registerCell()
         self.registerObserver()
-        self.setupView()
     }
 }
 
@@ -212,13 +211,6 @@ extension MovieListViewController {
     @objc private func hideKeyBoard() {
         self.view.endEditing(true)
         self.view.gestureRecognizers?.removeAll()
-    }
-    
-    private func setupView() {
-//        let animationLoading = Animation.named("loading")
-//        viewContainerLottie.animation = animationLoading
-//        let animationError = Animation.named("error")
-//        self.viewImageError.animation = animationError
     }
     
     private func addGestureHideKeyBoard() {
