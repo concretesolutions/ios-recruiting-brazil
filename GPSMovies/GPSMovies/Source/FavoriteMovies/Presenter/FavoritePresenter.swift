@@ -66,7 +66,7 @@ extension FavoritePresenter {
     
 }
 
-//MARK: - UX METHODS -
+//MARK: - AUX METHODS -
 extension FavoritePresenter {
     
     private func parseModelFromViewData(modelElementList: [MovieElementModel]) {

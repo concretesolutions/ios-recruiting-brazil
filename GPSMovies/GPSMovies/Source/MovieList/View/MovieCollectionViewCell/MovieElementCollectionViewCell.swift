@@ -11,11 +11,15 @@ import Kingfisher
 import Lottie
 
 class MovieElementCollectionViewCell: UICollectionViewCell {
-
+    // MARK: OUTLETS
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var labelNameMovie: UILabel!
     @IBOutlet weak var viewFavorite: AnimationView!
     
+}
+
+//MARK: - LIFE CYCLE -
+extension MovieElementCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setupFavoriteView()
@@ -28,6 +32,7 @@ class MovieElementCollectionViewCell: UICollectionViewCell {
     }
 }
 
+//MARK: - AUX METHODS -
 extension MovieElementCollectionViewCell {
     func prepareCell(viewData: MovieElementViewData) {
         if viewData.urlImageCover.isEmpty {

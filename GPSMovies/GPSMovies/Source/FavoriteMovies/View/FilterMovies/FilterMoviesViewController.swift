@@ -9,32 +9,24 @@
 import UIKit
 
 
-
+//MARK: - DELEGATE  -
 protocol FilterMoviesDelegate: NSObjectProtocol {
     func applyFilter(endDate: Date?, genre: GenreViewData?)
 }
 
 class FilterMoviesViewController: UIViewController {
-    
+    // MARK: OUTLETS
     @IBOutlet weak var pickerViewGenre: UIPickerView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var buttonSearch: UIButton!
     
+    // MARK: VARIABLES
     lazy var genreList = [GenreViewData]()
     weak var delegate: FilterMoviesDelegate?
     private var dateSelected: Date?
     private var genreSelected: GenreViewData?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupView()
-    }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.setupButton()
-    }
-    
+    // MARK: IBACTIONS
     @IBAction func selectedDate(_ sender: UIDatePicker) {
         self.dateSelected = sender.date
         self.buttonSearch.isEnableButton(true)
@@ -53,6 +45,20 @@ class FilterMoviesViewController: UIViewController {
     }
 }
 
+//MARK: - LIFE CYCLE -
+extension FilterMoviesViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.setupButton()
+    }
+}
+
+// MARK: - DATASOURCE UIPickerViewDataSource -
 extension FilterMoviesViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -63,6 +69,7 @@ extension FilterMoviesViewController: UIPickerViewDataSource {
     }
 }
 
+// MARK: - DELEGATE UIPickerViewDelegate -
 extension FilterMoviesViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let label = row == 0 ? "Todos" : self.genreList[row].name
@@ -80,6 +87,7 @@ extension FilterMoviesViewController: UIPickerViewDelegate {
     }
 }
 
+// MARK: - AUX METHODS -
 extension FilterMoviesViewController {
     private func setupView() {
         self.buttonSearch.isEnableButton(false)

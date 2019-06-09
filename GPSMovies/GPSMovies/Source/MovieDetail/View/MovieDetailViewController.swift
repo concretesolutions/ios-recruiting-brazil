@@ -39,18 +39,13 @@ class MovieDetailViewController: UIViewController {
 extension MovieDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter = MovieDetailPresenter(viewDelegate: self)
+        self.presenter = MovieDetailPresenter()
         self.addGesture()
         self.setupFavoriteView()
         self.prepareView()
         self.fadeOutImage()
         self.navigationController?.navigationBar.tintColor = .white
     }
-}
-
-//MARK: - DELEGATE PRESENTER -
-extension MovieDetailViewController: MovieDetailViewDelegate {
-
 }
 
 //MARK: - AUX METHODS -
@@ -136,7 +131,4 @@ extension MovieDetailViewController {
         mask.frame = view.bounds
         imagePoster.layer.mask = mask
     }
-    
-    
-    
 }

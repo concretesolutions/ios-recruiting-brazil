@@ -65,6 +65,7 @@ extension FavoriteViewController: FavoriteViewDelegate {
     }
 }
 
+//MARK: - DATASOURCE UITableViewDataSource -
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return !self.isFilter ? self.viewData.favoritesMovies.count : self.viewDataFiltered.favoritesMovies.count
@@ -79,12 +80,14 @@ extension FavoriteViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - DELEGATE FavoriteTableViewCellDelegate -
 extension FavoriteViewController: FavoriteTableViewCellDelegate {
     func showDetail(movieSelected: MovieElementViewData) {
         self.performSegue(withIdentifier: self.SEGUEDETAILMOVIE, sender: movieSelected)
     }
 }
 
+//MARK: - DELEGATE FilterMoviesDelegate -
 extension FavoriteViewController: FilterMoviesDelegate {
     func applyFilter(endDate: Date?, genre: GenreViewData?) {
         self.viewDataFiltered.favoritesMovies.removeAll()

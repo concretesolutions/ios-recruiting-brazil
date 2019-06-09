@@ -146,7 +146,7 @@ extension MovieListPresenter {
     }
 }
 
-//AUX METHODS
+//MARK: - AUX METHODS - 
 extension MovieListPresenter {
     private func parseModelFromViewData(model: MovieModel) {
         self.viewData.currentPage = model.page ?? 1

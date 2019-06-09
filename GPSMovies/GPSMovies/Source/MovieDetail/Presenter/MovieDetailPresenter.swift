@@ -13,23 +13,12 @@ struct TempMovieDetailViewData {
     
 }
 
-//MARK: - VIEW DELEGATE -
-protocol MovieDetailViewDelegate: NSObjectProtocol {
-    
-}
-
 //MARK: - PRESENTER CLASS -
 class MovieDetailPresenter {
-    
-    private weak var viewDelegate: MovieDetailViewDelegate?
     private lazy var viewData = TempMovieDetailViewData()
-    
-    init(viewDelegate: MovieDetailViewDelegate) {
-        self.viewDelegate = viewDelegate
-    }
 }
 
-//SERVICE
+//MARK: - SERVICE -
 extension MovieDetailPresenter {
     public func addMovieFavorite(movieViewData: MovieElementViewData) {
         let model = self.parseViewDataFromModel(movieViewData: movieViewData)
@@ -37,7 +26,7 @@ extension MovieDetailPresenter {
     }
 }
 
-//AUX METHODS
+//MARK: - AUX METHODS -
 extension MovieDetailPresenter {
     private func parseViewDataFromModel(movieViewData: MovieElementViewData) -> MovieElementModel {
         let model = MovieElementModel()
@@ -65,9 +54,4 @@ extension MovieDetailPresenter {
         }
         return genreModel
     }
-}
-
-//DATABASE
-extension MovieDetailPresenter {
-    
 }
