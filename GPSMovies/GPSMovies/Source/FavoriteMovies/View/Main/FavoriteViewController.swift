@@ -15,12 +15,16 @@ class FavoriteViewController: UIViewController {
     
     // MARK: CONSTANTS
     private let SEGUEDETAILMOVIE = "segueDetailMovie"
-    
+    private let SEGUEFILTER = "segueFilter"
     // MARK: VARIABLES
     private var presenter: FavoritePresenter!
     private lazy var viewData:FavoriteViewData = FavoriteViewData()
     
     // MARK: IBACTIONS
+    @IBAction func showFilter(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: self.SEGUEFILTER, sender: nil)
+    }
+    
 }
 
 //MARK: - LIFE CYCLE -
@@ -70,6 +74,12 @@ extension FavoriteViewController: FavoriteTableViewCellDelegate {
     }
 }
 
+extension FavoriteViewController: FilterMoviesDelegate {
+    func applyFilter(endDate: Date?, genre: GenreViewData?) {
+        
+    }
+}
+
 //MARK: - AUX METHODS -
 extension FavoriteViewController {
     private func registerCell() {
@@ -79,6 +89,9 @@ extension FavoriteViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? MovieDetailViewController, let viewData = sender as? MovieElementViewData {
             controller.viewData = viewData
+        } else if let controller = segue.destination as? FilterMoviesViewController {
+            controller.delegate = self
+            controller.genreList = self.presenter.getGenresViewData()
         }
     }
 }

@@ -37,7 +37,6 @@ class FavoritePresenter {
     private weak var viewDelegate: FavoriteViewDelegate?
     private lazy var viewData = FavoriteViewData()
     private var dataBase: GenreDataBase!
-    private var genreViewDataList = [GenreViewData]()
     
     init(viewDelegate: FavoriteViewDelegate) {
         self.viewDelegate = viewDelegate
@@ -47,7 +46,6 @@ class FavoritePresenter {
 
 //MARK: - SERVICE -
 extension FavoritePresenter {
-    
     func getFavoriteMovies() {
         if let movies = self.getFavoriteMoviesInDB(), movies.count > 0 {
             self.parseModelFromViewData(modelElementList: movies)
@@ -55,7 +53,15 @@ extension FavoritePresenter {
         }else {
             self.viewDelegate?.showEmptyList()
         }
-        
+    }
+    
+    func getGenresViewData() -> [GenreViewData] {
+        var genreViewDataList = [GenreViewData]()
+        let genresModel = self.getGenresDataBase()
+        genresModel.genres?.forEach({ (genreRow) in
+            genreViewDataList.append(self.parseGenreModelFromViewData(genreModel: genreRow))
+        })
+        return genreViewDataList
     }
     
 }
@@ -85,7 +91,7 @@ extension FavoritePresenter {
         element.title = resultModel.title ?? ""
         element.detail.releaseDate = resultModel.releaseDate ?? ""
         if let rating = resultModel.voteAverage {
-            element.detail.rating = rating / 2
+            element.detail.rating = rating
         }
         if let coverPath = resultModel.posterPath {
             element.urlImageCover = coverPath

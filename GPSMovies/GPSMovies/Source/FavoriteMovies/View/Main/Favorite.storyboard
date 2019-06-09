@@ -34,7 +34,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Lo-6K-Kku"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Meus Favoritos" id="ZGY-7K-aIh"/>
+                    <navigationItem key="navigationItem" title="Meus Favoritos" id="ZGY-7K-aIh">
+                        <barButtonItem key="leftBarButtonItem" title="Filtrar" id="WHw-Qm-YIm">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="showFilter:" destination="34a-vY-EgM" id="jS8-kF-5Vj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="2gj-V1-7A8" id="cUZ-AY-dyD"/>
                         <segue destination="Jm2-6x-Den" kind="show" identifier="segueDetailMovie" id="K4z-A7-k3l"/>
@@ -53,10 +60,10 @@
             </objects>
             <point key="canvasLocation" x="1525" y="-371"/>
         </scene>
-        <!--View Controller-->
+        <!--Filter Movies View Controller-->
         <scene sceneID="RAD-uP-oZM">
             <objects>
-                <viewController id="SHR-B2-i4Y" sceneMemberID="viewController">
+                <viewController id="SHR-B2-i4Y" customClass="FilterMoviesViewController" customModule="GPSMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bgU-xK-Qjc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,28 +71,82 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lis-3D-mtA" userLabel="ViewMain">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pC1-k4-Ib8" userLabel="Picker View Genre">
-                                        <rect key="frame" x="0.0" y="118" width="320" height="131"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvy-Rz-A2g">
+                                        <rect key="frame" x="22" y="30" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="CMm-fN-QUu"/>
+                                            <constraint firstAttribute="height" constant="50" id="Qbk-EO-Z86"/>
+                                        </constraints>
+                                        <state key="normal" image="image-done"/>
+                                        <connections>
+                                            <action selector="done:" destination="SHR-B2-i4Y" eventType="touchUpInside" id="KKA-QT-oCu"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Por Genero" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="db1-4W-9OY">
+                                        <rect key="frame" x="20" y="100" width="300" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7o-aD-wc0" userLabel="Picker View Date">
+                                        <rect key="frame" x="0.0" y="121" width="320" height="113.5"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="SHR-B2-i4Y" id="1nh-3r-nbZ"/>
+                                            <outlet property="delegate" destination="SHR-B2-i4Y" id="E3s-UH-wn9"/>
+                                        </connections>
                                     </pickerView>
-                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7o-aD-wc0" userLabel="Picker View Date">
-                                        <rect key="frame" x="0.0" y="290" width="320" height="137"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpt-dp-zMx">
-                                        <rect key="frame" x="102" y="470" width="127" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Com data de lançamento até:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kw1-AC-2YM">
+                                        <rect key="frame" x="20" y="254.5" width="300" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpt-dp-zMx">
+                                        <rect key="frame" x="30" y="419" width="260" height="48"/>
                                         <color key="backgroundColor" red="1" green="0.1019250594" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="lpt-dp-zMx" secondAttribute="height" multiplier="65:12" id="ZTz-2u-ioi"/>
+                                        </constraints>
                                         <state key="normal" title="Buscar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="filterAction:" destination="SHR-B2-i4Y" eventType="touchUpInside" id="h2m-Ru-dyP"/>
+                                        </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image-done" translatesAutoresizingMaskIntoConstraints="NO" id="2fK-wG-WVC" userLabel="imageDone">
-                                        <rect key="frame" x="32" y="28" width="55" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sXJ-Mp-R3y">
+                                        <rect key="frame" x="0.0" y="275.5" width="320" height="113.5"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="581782371.80687904">
+                                            <!--2019-06-09 14:12:51 +0000-->
+                                        </date>
+                                        <locale key="locale" localeIdentifier="pt_BR"/>
+                                        <connections>
+                                            <action selector="selectedDate:" destination="SHR-B2-i4Y" eventType="valueChanged" id="viL-FJ-sHB"/>
+                                        </connections>
+                                    </datePicker>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.80053367080000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sXJ-Mp-R3y" secondAttribute="trailing" id="4Za-4s-8a2"/>
+                                    <constraint firstItem="C7o-aD-wc0" firstAttribute="height" secondItem="Lis-3D-mtA" secondAttribute="height" multiplier="0.2" id="4jM-MP-0kE"/>
+                                    <constraint firstItem="C7o-aD-wc0" firstAttribute="top" secondItem="db1-4W-9OY" secondAttribute="bottom" id="Etx-4z-g4f"/>
+                                    <constraint firstItem="sXJ-Mp-R3y" firstAttribute="leading" secondItem="Lis-3D-mtA" secondAttribute="leading" id="Raw-Jz-q9x"/>
+                                    <constraint firstItem="db1-4W-9OY" firstAttribute="leading" secondItem="Lis-3D-mtA" secondAttribute="leading" constant="20" id="Twe-eY-D2Q"/>
+                                    <constraint firstItem="fvy-Rz-A2g" firstAttribute="leading" secondItem="Lis-3D-mtA" secondAttribute="leading" constant="22" id="W5O-WH-XYo"/>
+                                    <constraint firstAttribute="trailing" secondItem="kw1-AC-2YM" secondAttribute="trailing" id="Z1x-Gb-KqU"/>
+                                    <constraint firstItem="db1-4W-9OY" firstAttribute="top" secondItem="fvy-Rz-A2g" secondAttribute="bottom" constant="20" id="aNr-su-H8Q"/>
+                                    <constraint firstItem="kw1-AC-2YM" firstAttribute="leading" secondItem="Lis-3D-mtA" secondAttribute="leading" constant="20" id="aW5-KG-y1K"/>
+                                    <constraint firstItem="sXJ-Mp-R3y" firstAttribute="top" secondItem="kw1-AC-2YM" secondAttribute="bottom" id="baP-hB-uEi"/>
+                                    <constraint firstAttribute="trailing" secondItem="db1-4W-9OY" secondAttribute="trailing" id="cUJ-6m-hej"/>
+                                    <constraint firstItem="fvy-Rz-A2g" firstAttribute="top" secondItem="Lis-3D-mtA" secondAttribute="top" constant="30" id="dQt-D0-eGh"/>
+                                    <constraint firstItem="C7o-aD-wc0" firstAttribute="leading" secondItem="Lis-3D-mtA" secondAttribute="leading" id="fPM-9R-L8S"/>
+                                    <constraint firstAttribute="trailing" secondItem="lpt-dp-zMx" secondAttribute="trailing" constant="30" id="jOC-oj-1c2"/>
+                                    <constraint firstItem="lpt-dp-zMx" firstAttribute="top" secondItem="sXJ-Mp-R3y" secondAttribute="bottom" constant="30" id="jYm-XM-bhL"/>
+                                    <constraint firstItem="sXJ-Mp-R3y" firstAttribute="height" secondItem="C7o-aD-wc0" secondAttribute="height" id="mjq-ms-1lk"/>
+                                    <constraint firstItem="lpt-dp-zMx" firstAttribute="leading" secondItem="Lis-3D-mtA" secondAttribute="leading" constant="30" id="qHO-ve-fGs"/>
+                                    <constraint firstAttribute="trailing" secondItem="C7o-aD-wc0" secondAttribute="trailing" id="uVD-92-aqa"/>
+                                    <constraint firstItem="kw1-AC-2YM" firstAttribute="top" secondItem="C7o-aD-wc0" secondAttribute="bottom" constant="20" id="vak-6V-2f4"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,10 +158,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1zo-Kc-IcD"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonSearch" destination="lpt-dp-zMx" id="u85-Ep-zpe"/>
+                        <outlet property="datePicker" destination="sXJ-Mp-R3y" id="ND7-A0-WmX"/>
+                        <outlet property="pickerViewGenre" destination="C7o-aD-wc0" id="43j-a7-wjg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rny-AY-2Ij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2063" y="73"/>
+            <point key="canvasLocation" x="2062.5" y="72.887323943661968"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jbc-RT-0Ml">

@@ -43,4 +43,15 @@ extension UIView {
             self.layer.shadowOpacity = newValue
         }
     }
+    
+    public func pulseAnimation(scaleX:CGFloat, scaleY:CGFloat, timer:Double, alpha:CGFloat?, _ complete:((_ result:Bool?)-> Void)?){
+        UIView.animate(withDuration: timer, animations: {
+            self.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+            self.alpha = alpha == nil ? 1 : alpha!
+        }) { (result) in
+            self.transform = .identity
+            complete?(result)
+        }
+    }
+
 }

@@ -25,6 +25,12 @@
 		0218038622A6CE8600C793CE /* video_cam.json in Resources */ = {isa = PBXBuildFile; fileRef = 0218037F22A6CE8600C793CE /* video_cam.json */; };
 		0218038F22A72A2700C793CE /* MovieElementCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025C310622A35C70000160DE /* MovieElementCollectionViewCell.xib */; };
 		0218039022A72A2700C793CE /* MovieElementCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025C310622A35C70000160DE /* MovieElementCollectionViewCell.xib */; };
+		021B019C22AD4E3600E044D3 /* FilterMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B019B22AD4E3600E044D3 /* FilterMoviesViewController.swift */; };
+		021B019D22AD4E3600E044D3 /* FilterMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B019B22AD4E3600E044D3 /* FilterMoviesViewController.swift */; };
+		021B019E22AD4E3600E044D3 /* FilterMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B019B22AD4E3600E044D3 /* FilterMoviesViewController.swift */; };
+		021B01A022AD570300E044D3 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B019F22AD570300E044D3 /* ExtensionUIButton.swift */; };
+		021B01A122AD570300E044D3 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B019F22AD570300E044D3 /* ExtensionUIButton.swift */; };
+		021B01A222AD570300E044D3 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B019F22AD570300E044D3 /* ExtensionUIButton.swift */; };
 		0243DF9822AB0F6500624113 /* HapticAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243DF9722AB0F6500624113 /* HapticAlert.swift */; };
 		0243DF9922AB0F6500624113 /* HapticAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243DF9722AB0F6500624113 /* HapticAlert.swift */; };
 		0243DF9A22AB0F6500624113 /* HapticAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243DF9722AB0F6500624113 /* HapticAlert.swift */; };
@@ -157,6 +163,8 @@
 		0218037C22A6CE8600C793CE /* favourite_app_icon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = favourite_app_icon.json; sourceTree = "<group>"; };
 		0218037D22A6CE8600C793CE /* emoji_wink.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoji_wink.json; sourceTree = "<group>"; };
 		0218037F22A6CE8600C793CE /* video_cam.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = video_cam.json; sourceTree = "<group>"; };
+		021B019B22AD4E3600E044D3 /* FilterMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMoviesViewController.swift; sourceTree = "<group>"; };
+		021B019F22AD570300E044D3 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		0243DF9722AB0F6500624113 /* HapticAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticAlert.swift; sourceTree = "<group>"; };
 		024E7BCB22A7485B004D0658 /* GenreDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDataBase.swift; sourceTree = "<group>"; };
 		024E7BCF22A748DB004D0658 /* PersistentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentManager.swift; sourceTree = "<group>"; };
@@ -252,6 +260,14 @@
 				0218037F22A6CE8600C793CE /* video_cam.json */,
 			);
 			path = LottieJSON;
+			sourceTree = "<group>";
+		};
+		021B019A22AD4DFF00E044D3 /* FilterMovies */ = {
+			isa = PBXGroup;
+			children = (
+				021B019B22AD4E3600E044D3 /* FilterMoviesViewController.swift */,
+			);
+			path = FilterMovies;
 			sourceTree = "<group>";
 		};
 		025C303722A2B017000160DE = {
@@ -450,6 +466,7 @@
 			children = (
 				025C308722A2B95A000160DE /* ExtensionUiView.swift */,
 				02F5319F22ACB74400280C62 /* ExtensionString.swift */,
+				021B019F22AD570300E044D3 /* ExtensionUIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -516,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				025C30F722A3445A000160DE /* Main */,
+				021B019A22AD4DFF00E044D3 /* FilterMovies */,
 				025C30E522A30722000160DE /* FavoriteTableViewCell */,
 			);
 			path = View;
@@ -830,8 +848,10 @@
 				0203091B22A46E2200FD6CF5 /* MainService.swift in Sources */,
 				025C308F22A2B9B9000160DE /* MessageHelper.swift in Sources */,
 				025C310722A35C70000160DE /* MovieElementCollectionViewCell.swift in Sources */,
+				021B019C22AD4E3600E044D3 /* FilterMoviesViewController.swift in Sources */,
 				0243DF9822AB0F6500624113 /* HapticAlert.swift in Sources */,
 				025C304C22A2B017000160DE /* GPSMovies.xcdatamodeld in Sources */,
+				021B01A022AD570300E044D3 /* ExtensionUIButton.swift in Sources */,
 				025C30DE22A2C306000160DE /* FavoriteViewController.swift in Sources */,
 				025C30D022A2C276000160DE /* MovieDetailViewController.swift in Sources */,
 				02F531A022ACB74400280C62 /* ExtensionString.swift in Sources */,
@@ -865,8 +885,10 @@
 				025C30C322A2C1D4000160DE /* MovieListViewController.swift in Sources */,
 				025C30C022A2C1D4000160DE /* MovieListPresenter.swift in Sources */,
 				0243DF9922AB0F6500624113 /* HapticAlert.swift in Sources */,
+				021B019D22AD4E3600E044D3 /* FilterMoviesViewController.swift in Sources */,
 				02A5FB8922A841A900D4DDEE /* GPSMovies.xcdatamodeld in Sources */,
 				0203091C22A46E2200FD6CF5 /* MainService.swift in Sources */,
+				021B01A122AD570300E044D3 /* ExtensionUIButton.swift in Sources */,
 				025C308922A2B95B000160DE /* ExtensionUiView.swift in Sources */,
 				025C30D122A2C276000160DE /* MovieDetailViewController.swift in Sources */,
 				02F531A122ACB74400280C62 /* ExtensionString.swift in Sources */,
@@ -900,8 +922,10 @@
 				025C30C422A2C1D4000160DE /* MovieListViewController.swift in Sources */,
 				025C30C122A2C1D4000160DE /* MovieListPresenter.swift in Sources */,
 				0243DF9A22AB0F6500624113 /* HapticAlert.swift in Sources */,
+				021B019E22AD4E3600E044D3 /* FilterMoviesViewController.swift in Sources */,
 				02A5FB8A22A841AA00D4DDEE /* GPSMovies.xcdatamodeld in Sources */,
 				0203091D22A46E2200FD6CF5 /* MainService.swift in Sources */,
+				021B01A222AD570300E044D3 /* ExtensionUIButton.swift in Sources */,
 				025C308A22A2B95B000160DE /* ExtensionUiView.swift in Sources */,
 				025C30D222A2C276000160DE /* MovieDetailViewController.swift in Sources */,
 				02F531A222ACB74400280C62 /* ExtensionString.swift in Sources */,
