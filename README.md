@@ -19,6 +19,10 @@ GPSMovies é um aplicativo para busca de filmes populares, que inclusive já ade
 
 Apesar de utilizar no projeto o gerenciador de dependências Cocoapods, os frameworks já foram adicionados ao repositório, afim de facilitar sua instalação.
 
+## Observação
+
+Visando melhorar um pouco a experência nos testes foi adicionado propositalmente um Timer de 2 segundos.
+
 ## Credits
 
 GPSMovies foi desenvolvido por Gilson Santos (gilsonsantosti@gmail.com)
