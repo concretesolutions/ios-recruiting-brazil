@@ -26,6 +26,7 @@ class FavoriteViewController: UIViewController {
     public var isFilter = false
     // MARK: IBACTIONS
     @IBAction func showFilter(_ sender: UIBarButtonItem) {
+        guard self.viewData.favoritesMovies.count > 0 else { return }
         self.performSegue(withIdentifier: self.SEGUEFILTER, sender: nil)
     }
     
@@ -41,7 +42,9 @@ extension FavoriteViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.presenter.getFavoriteMovies()
+        if !self.isFilter {
+            self.presenter.getFavoriteMovies()
+        }
     }
 }
 
@@ -51,6 +54,8 @@ extension FavoriteViewController: FavoriteViewDelegate {
     func setViewData(viewData: FavoriteViewData) {
         self.viewData = viewData
         self.tableView.reloadData()
+        self.viewEmpty.isHidden = true
+       self.tableView.isHidden = false
     }
     
     func showEmptyList() {
@@ -143,7 +148,7 @@ extension FavoriteViewController {
     }
     
     private func showEmptyView() {
-        LottieHelper.showAnimateion(for: .searchEmpty, lottieView: self.viewImageEmpty, in: self.viewEmpty)
+        LottieHelper.showAnimateion(for: .empty, lottieView: self.viewImageEmpty, in: self.viewEmpty)
         self.tableView.isHidden = true
     }
     

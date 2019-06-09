@@ -15,6 +15,7 @@ enum TypeAnimation: String {
     case error = "error"
     case favorite = "favourite_app_icon"
     case searchEmpty = "search"
+    case empty = "empty"
 }
 
 class LottieHelper {
