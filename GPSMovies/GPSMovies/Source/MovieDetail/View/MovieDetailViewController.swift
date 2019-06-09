@@ -21,6 +21,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var labelRating: UILabel!
     @IBOutlet weak var labelNameMovie: UILabel!
     @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelGenres: UILabel!
     @IBOutlet weak var viewRating: CosmosView!
     @IBOutlet weak var textFieldDescription: UITextView!
     @IBOutlet weak var viewFavorite: AnimationView!
@@ -68,11 +69,21 @@ extension MovieDetailViewController {
         self.labelDate.text = self.viewData.detail.releaseDate
         self.viewRating.rating = self.viewData.detail.rating
         self.textFieldDescription.text = self.viewData.detail.description
+        self.labelGenres.text = self.getGenresNames()
         if self.viewData.detail.isFavorited {
             self.viewFavorite.play()
         }else {
             self.viewFavorite.stop()
         }
+    }
+    
+    private func getGenresNames() -> String {
+        var genresName = ""
+        let separator = ","
+        self.viewData.detail.genres.forEach { (genreRow) in
+            genresName += "\(genreRow.name)\(self.viewData.detail.genres.last?.id != genreRow.id ? separator : ".")\n"
+        }
+        return genresName
     }
     
     private func addGesture() {

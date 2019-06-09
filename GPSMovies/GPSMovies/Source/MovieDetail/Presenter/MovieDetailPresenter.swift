@@ -35,9 +35,6 @@ extension MovieDetailPresenter {
         let model = self.parseViewDataFromModel(movieViewData: movieViewData)
         MovieDataBase().createOrRemoveMovieDataBase(model: model)
     }
-    
-   
- 
 }
 
 //AUX METHODS

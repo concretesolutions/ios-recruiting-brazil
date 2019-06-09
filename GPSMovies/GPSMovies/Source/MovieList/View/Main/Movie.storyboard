@@ -152,10 +152,20 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZ7-5V-MPw">
                                                 <rect key="frame" x="0.0" y="0.0" width="112" height="152"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gq3-AE-eZy">
+                                                <rect key="frame" x="5" y="172" width="107" height="14"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                                <color key="textColor" red="0.87843137250000003" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="qZ7-5V-MPw" firstAttribute="top" secondItem="fTM-t8-99Z" secondAttribute="top" id="CK1-x7-BKb"/>
                                             <constraint firstItem="qZ7-5V-MPw" firstAttribute="leading" secondItem="fTM-t8-99Z" secondAttribute="leading" id="CwO-CC-TWc"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gq3-AE-eZy" secondAttribute="bottom" id="DHG-r0-p46"/>
+                                            <constraint firstAttribute="trailing" secondItem="gq3-AE-eZy" secondAttribute="trailing" id="ERd-xC-WiR"/>
+                                            <constraint firstItem="gq3-AE-eZy" firstAttribute="top" secondItem="qZ7-5V-MPw" secondAttribute="bottom" constant="20" id="NG4-VD-5HY"/>
+                                            <constraint firstItem="gq3-AE-eZy" firstAttribute="leading" secondItem="fTM-t8-99Z" secondAttribute="leading" constant="5" id="Old-Ql-vFM"/>
                                             <constraint firstItem="qZ7-5V-MPw" firstAttribute="height" secondItem="fTM-t8-99Z" secondAttribute="height" multiplier="0.5" id="exr-hM-s8I"/>
                                             <constraint firstAttribute="trailing" secondItem="qZ7-5V-MPw" secondAttribute="trailing" id="kud-gx-3zX"/>
                                         </constraints>
@@ -247,6 +257,7 @@
                         <outlet property="imagePoster" destination="3eP-fz-2QD" id="MUh-nQ-wg9"/>
                         <outlet property="imageSmall" destination="qZ7-5V-MPw" id="8dD-tv-8VX"/>
                         <outlet property="labelDate" destination="tbv-mm-YrE" id="whb-e1-Ock"/>
+                        <outlet property="labelGenres" destination="gq3-AE-eZy" id="uOo-aj-d0J"/>
                         <outlet property="labelNameMovie" destination="NP5-wU-yKe" id="ZKc-Cl-54T"/>
                         <outlet property="labelRating" destination="ARR-bM-CiE" id="A9l-nz-dRg"/>
                         <outlet property="textFieldDescription" destination="kdA-WU-Fvy" id="IYd-qz-np9"/>
@@ -256,7 +267,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDy-87-esV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1982.608695652174" y="48.883928571428569"/>
+            <point key="canvasLocation" x="1981.875" y="48.591549295774648"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="D2d-1k-kJI">
