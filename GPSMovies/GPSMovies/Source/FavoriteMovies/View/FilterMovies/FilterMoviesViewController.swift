@@ -68,13 +68,11 @@ extension FilterMoviesViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard row > 0 else {
-            if self.dateSelected == nil {
-                self.buttonSearch.isEnableButton(false)
-            }
-            return
+        if row == 0 {
+            self.genreSelected = GenreViewData(id: 0, name: "Todos")
+        }else {
+            self.genreSelected = self.genreList[row]
         }
-        self.genreSelected = self.genreList[row]
         self.buttonSearch.isEnableButton(true)
     }
 }
