@@ -79,9 +79,13 @@ extension FavoriteViewController: FavoriteTableViewCellDelegate {
 extension FavoriteViewController: FilterMoviesDelegate {
     func applyFilter(endDate: Date?, genre: GenreViewData?) {
         self.viewDataFiltered.favoritesMovies.removeAll()
-        self.viewDataFiltered.favoritesMovies = self.viewData.favoritesMovies.filter({
-            $0.movies.filter({$0.detail.genres.contains(where: {$0.id == genre?.id})}).count > 0
-        })
+        var search = RatingViewData()
+        search.labelRating = "Resultado da busca: "
+        self.viewData.favoritesMovies.forEach { (viewDataRow) in
+            let moviesFilter = viewDataRow.movies.filter({$0.detail.genres.filter({$0.id == genre?.id}).count > 0})
+            search.movies += moviesFilter
+        }
+        self.viewDataFiltered.favoritesMovies.append(search)
         self.isFilter = true
         self.tableView.reloadData()
     }
@@ -98,7 +102,7 @@ extension FavoriteViewController {
             controller.viewData = viewData
         } else if let controller = segue.destination as? FilterMoviesViewController {
             controller.delegate = self
-            controller.genreList = self.presenter.getGenresViewData()
+            controller.genreList = self.presenter.getGenresViewData().sorted(by: {$0.name < $1.name})
         }
     }
 }
