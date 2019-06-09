@@ -23,7 +23,6 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         dateFormatter.locale = Locale(identifier: "pt-BR")
-        let d = dateFormatter.date(from: self) ?? Date()
         return dateFormatter.date(from: self) ?? Date()
     }
 }
