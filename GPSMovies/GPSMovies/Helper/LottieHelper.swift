@@ -18,24 +18,27 @@ enum TypeAnimation: String {
 
 class LottieHelper {
     
-    class func showAnimateion(for type: TypeAnimation, in view: AnimationView) {
+    class func showAnimateion(for type: TypeAnimation, lottieView: AnimationView, in contaierView: UIView) {
         let animation = Animation.named(type.rawValue)
-        view.animation = animation
-        view.alpha = 0
-        view.isHidden = false
+        lottieView.animation = animation
+        contaierView.isHidden = false
+        lottieView.alpha = 0
+        lottieView.isHidden = false
         UIView.animate(withDuration: 0.4, animations: {
-            view.alpha = 1
+            lottieView.alpha = 1
         }) { (_) in
-            view.play()
+            lottieView.play()
         }
     }
     
-    class func hideAnimateion(in view: AnimationView) {
+    class func hideAnimateion(lottieView: AnimationView, in contaierView: UIView) {
         UIView.animate(withDuration: 0.4, animations: {
-            view.alpha = 0
+            contaierView.alpha = 0
         }) { (_) in
-            view.stop()
-            view.isHidden = true
+            lottieView.stop()
+            lottieView.isHidden = true
+            contaierView.isHidden = true
+            contaierView.alpha = 1
         }
     }
 }

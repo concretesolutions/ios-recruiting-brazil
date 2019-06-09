@@ -15,8 +15,8 @@ class MovieListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var viewLoadingOrError: UIView!
-    @IBOutlet weak var viewImageLoading: AnimationView!
-    @IBOutlet weak var viewImageError: AnimationView!
+    @IBOutlet weak var viewContainerLottie: AnimationView!
+    @IBOutlet weak var viewSuccess: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: CONSTANTS
@@ -62,28 +62,15 @@ extension MovieListViewController {
 extension MovieListViewController: MovieListViewDelegate {
     
     func showLoading() {
-        self.collectionView.isHidden = true
-        self.viewImageError.isHidden = true
-        self.viewImageLoading.isHidden = false
-        UIView.animate(withDuration: 0.4, animations: {
-            self.viewLoadingOrError.isHidden = false
-            self.viewImageLoading.alpha = 1
-        }) { (_) in
-            self.viewImageLoading.play()
-            self.viewImageLoading.loopMode = .loop
-        }
+        self.viewSuccess.isHidden = true
+        LottieHelper.showAnimateion(for: .loading, lottieView: self.viewContainerLottie, in: self.viewLoadingOrError)
+        self.viewContainerLottie.loopMode = .loop
     }
     
     func showError() {
-        self.viewImageError.alpha = 0
-        self.viewImageLoading.isHidden = true
-        self.viewImageError.isHidden = false
-        UIView.animate(withDuration: 0.4, animations: {
-            self.viewImageLoading.alpha = 0
-            self.viewImageError.alpha = 1
-        }) { (_) in
-            self.viewImageError.play()
-        }
+        self.viewSuccess.isHidden = true
+        LottieHelper.showAnimateion(for: .error, lottieView: self.viewContainerLottie, in: self.viewLoadingOrError)
+        viewContainerLottie.loopMode = .autoReverse
     }
     
     func showEmptyList() {
@@ -93,12 +80,9 @@ extension MovieListViewController: MovieListViewDelegate {
     func setViewData(viewData: MovieListViewData) {
         self.viewData = viewData
         self.collectionView.reloadData()
-        self.collectionView.alpha = 0
+        LottieHelper.hideAnimateion(lottieView: self.viewContainerLottie, in: self.viewLoadingOrError)
         self.collectionView.isHidden = false
-        UIView.animate(withDuration: 0.4) {
-            self.viewLoadingOrError.isHidden = true
-            self.collectionView.alpha = 1
-        }
+        self.viewSuccess.isHidden = false
     }
     
     func setViewDataOfNextPage(viewData: MovieListViewData) {
@@ -223,10 +207,10 @@ extension MovieListViewController {
     }
     
     private func setupView() {
-        let animationLoading = Animation.named("loading")
-        viewImageLoading.animation = animationLoading
-        let animationError = Animation.named("error")
-        self.viewImageError.animation = animationError
+//        let animationLoading = Animation.named("loading")
+//        viewContainerLottie.animation = animationLoading
+//        let animationError = Animation.named("error")
+//        self.viewImageError.animation = animationError
     }
     
     private func addGestureHideKeyBoard() {
