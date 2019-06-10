@@ -33,8 +33,10 @@ class MovieListViewController: UIViewController {
     // MARK: IBACTIONS
     @IBAction func refresh(_ sender: UIBarButtonItem) {
         self.isUsingSearchBar = false
+        self.searchBar.text = ""
+        self.hideKeyBoard()
         self.moviesSearch.removeAll()
-        if self.viewLoadingOrError.isHidden {
+        if self.viewLoadingOrError.isHidden, self.viewEmprySearch.isHidden {
             self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
        self.presenter.callServices()
