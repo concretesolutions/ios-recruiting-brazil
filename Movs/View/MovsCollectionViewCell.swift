@@ -9,6 +9,6 @@
 import UIKit
 
 class MovsCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var imageView: UIImageView!
     
 }
