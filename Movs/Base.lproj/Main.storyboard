@@ -53,9 +53,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="0P4-Op-ool"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" id="8g9-NT-rRF"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" id="8g9-NT-rRF"/>
                     <connections>
-                        <outlet property="favTabBarItem" destination="8g9-NT-rRF" id="a8c-07-wCc"/>
                         <outlet property="favsTableView" destination="py1-bk-NQB" id="hnd-6E-JRr"/>
                     </connections>
                 </viewController>
@@ -82,7 +81,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mcell" id="gir-1U-GUv">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="mcell" id="gir-1U-GUv">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -96,12 +95,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BMH-fu-hiK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Movies" id="hAL-OB-a5G">
-                        <color key="badgeColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="hAL-OB-a5G"/>
                     <connections>
                         <outlet property="movCollectionView" destination="Pjn-ne-4dn" id="883-Vf-UXX"/>
-                        <outlet property="movTabBarItem" destination="hAL-OB-a5G" id="djO-jK-dRB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYf-il-4eS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -147,4 +143,8 @@
             <point key="canvasLocation" x="-315" y="77"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="list_icon" width="18" height="10"/>
+    </resources>
 </document>

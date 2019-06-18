@@ -10,14 +10,16 @@ import UIKit
 
 class FavsViewController: UIViewController {
 
-    @IBOutlet weak var favTabBarItem: UITabBarItem!
+// MARK: - Properties
     @IBOutlet weak var favsTableView: UITableView!
+    private let reuseIdentifier = "fcell"
+
     
+// MARK: - System Delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         favsTableView.delegate = self
         favsTableView.dataSource = self
-        favTabBarItem.selectedImage = (UIImage(named: "favorite_empty_icon"))
     }
 
 }
@@ -25,11 +27,11 @@ class FavsViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension FavsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fcell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         cell.textLabel?.text = "TESTE"
         cell.detailTextLabel?.text = "testinho"
         return cell
