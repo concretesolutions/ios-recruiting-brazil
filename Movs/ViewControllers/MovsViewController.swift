@@ -11,12 +11,11 @@ import UIKit
 class MovsViewController: UIViewController {
     
 // MARK: - Properties
-    var movies: [Movie] = []
-
     @IBOutlet weak var movCollectionView: UICollectionView!
     private let reuseIdentifier = "mcell"
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 5.0, right: 10.0)
     private let itemsPerRow: CGFloat = 2
+    var movies = [String]()
     
 // MARK: - System Delegates
     override func viewDidLoad() {
@@ -29,7 +28,11 @@ class MovsViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension MovsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        if (movies.count > 0) {
+            return (movies.count / 2)
+        }else {
+            return 4
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,6 +42,9 @@ extension MovsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovsCollectionViewCell
         cell.backgroundColor = .black
+        if (movies.count > 0) {
+            cell.titleLabel.text = movies[indexPath.row]
+        }
         return cell
     }
 }

@@ -10,17 +10,18 @@ import Foundation
 
 final class TheMovieDBClient {
     private lazy var corpoURL: URL = {
-        return URL(string: "https://api.themoviedb.org/3/")!
+        return URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=6009379178c6cf65ffc7468b6598440f&language=pt-BR&page=1")!
     }()
     
     var session: URLSession = URLSession.shared
+    //let urlReq = "movie/popular?api_key=6009379178c6cf65ffc7468b6598440f&language=pt-BR&page=1"
     
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
-    func fetchPopularMovies(with request: PopularMoviesRequest, completion: @escaping (Result<MoviesResponse, ResponseError>) -> Void) {
-        let urlRequest = URLRequest(url: corpoURL.appendingPathComponent(request.path))
+    func fetchPopularMovies(completion: @escaping (Result<MoviesResponse, ResponseError>) -> Void) {
+        let urlRequest = URLRequest(url: corpoURL)
         let encodedURLRequest = urlRequest
         session.dataTask(with: encodedURLRequest, completionHandler: { data, response, error in
             guard

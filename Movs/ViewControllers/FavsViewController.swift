@@ -13,7 +13,8 @@ class FavsViewController: UIViewController {
 // MARK: - Properties
     @IBOutlet weak var favsTableView: UITableView!
     private let reuseIdentifier = "fcell"
-
+    var tableRows = 3
+    var movies = [String]()
     
 // MARK: - System Delegates
     override func viewDidLoad() {
@@ -27,13 +28,15 @@ class FavsViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension FavsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return tableRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         cell.textLabel?.text = "TESTE"
-        cell.detailTextLabel?.text = "testinho"
+        if (movies.count > 0) {
+            cell.detailTextLabel?.text = movies[indexPath.row]
+        }
         return cell
     }
 }
