@@ -8,36 +8,23 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController, UITabBarControllerDelegate, MoviesViewModelDelegate {
-
+class TabBarViewController: UITabBarController, Alerts {
 // MARK: - Properties
     var viewModel: MoviesViewModel!
     
-// MARK: - System Delegates
+// MARK: - Main ViewController Delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         viewModel = MoviesViewModel(delegate: self)
+        viewModel.fetchPopularMovies()
     }
-    
-    
-    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-        print("fetched")
-        print("Movies = \(viewModel.movie(at: 2))")
-        
-    }
-    
-    func onFetchFailed(with reason: String) {
-        print("fail razao = \(reason)")
-    }
-    
+
+}
+
+// MARK: - TabBarViewController Delegates
+extension TabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let firstVC = viewController as? MovsViewController {
-            //firstVC.doSomeAction()
-            viewModel.fetchPopularMovies()
-            print("FAZER")
-        }
-        
         if viewController is MovsViewController {
             print("First tab")
             let movVC = viewController as? MovsViewController
@@ -46,24 +33,32 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate, Movi
         } else if viewController is FavsViewController {
             print("Second tab")
             let favVC = viewController as? FavsViewController
-            favVC?.tableRows = viewModel.currentCount
             favVC?.movies = viewModel.moviesTitles()
             favVC?.favsTableView.reloadData()
         }
     }
+}
+
+// MARK: - TabBarViewController Delegates
+extension TabBarViewController: MoviesViewModelDelegate {
+    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+        let rootVC = self.selectedViewController
+        if rootVC is MovsViewController {
+            let movVC = rootVC as? MovsViewController
+            movVC?.movies = viewModel.moviesTitles()
+            movVC?.movCollectionView.reloadData()
+        } else if rootVC is FavsViewController {
+            let favVC = rootVC as? FavsViewController
+            favVC?.movies = viewModel.moviesTitles()
+            favVC?.favsTableView.reloadData()
+        }
+        
+    }
     
-    // alternate method if you need the tab bar item
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        // ...
+    func onFetchFailed(with reason: String) {
+        print("fail razao = \(reason)")
+        let title = "Alerta"
+        let action = UIAlertAction(title: "OK", style: .default)
+        displayAlert(with: title , message: reason, actions: [action])
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

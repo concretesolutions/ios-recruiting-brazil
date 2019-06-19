@@ -9,14 +9,12 @@
 import UIKit
 
 class FavsViewController: UIViewController {
-
 // MARK: - Properties
     @IBOutlet weak var favsTableView: UITableView!
     private let reuseIdentifier = "fcell"
-    var tableRows = 3
     var movies = [String]()
     
-// MARK: - System Delegates
+// MARK: - Main ViewController Delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         favsTableView.delegate = self
@@ -28,7 +26,11 @@ class FavsViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension FavsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableRows
+        if (movies.count > 0) {
+            return movies.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,6 +42,7 @@ extension FavsViewController: UITableViewDataSource {
         return cell
     }
 }
+
 // MARK: - UITableViewDelegate
 extension FavsViewController: UITableViewDelegate {
     

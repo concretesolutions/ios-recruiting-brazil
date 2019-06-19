@@ -9,15 +9,15 @@
 import UIKit
 
 class MovsViewController: UIViewController {
-    
 // MARK: - Properties
     @IBOutlet weak var movCollectionView: UICollectionView!
     private let reuseIdentifier = "mcell"
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 5.0, right: 10.0)
     private let itemsPerRow: CGFloat = 2
+    let numOfSects = 2
     var movies = [String]()
     
-// MARK: - System Delegates
+// MARK: - Main ViewController Delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         movCollectionView.dataSource = self
@@ -25,36 +25,47 @@ class MovsViewController: UIViewController {
     }
 
 }
+
 // MARK: - UICollectionViewDataSource
 extension MovsViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if (movies.count > 0) {
-            return (movies.count / 2)
+        let numOfMovs = movies.count
+        if (numOfMovs > 0) {
+            if (numOfMovs % 2 == 0) {
+                return (numOfMovs / 2)
+            } else{
+                return ((numOfMovs + 1) / 2)
+            }
         }else {
             return 4
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return numOfSects
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovsCollectionViewCell
         cell.backgroundColor = .black
         if (movies.count > 0) {
-            cell.titleLabel.text = movies[indexPath.row]
+            if (indexPath.row == 0) {
+                cell.titleLabel.text = movies[(indexPath.section * 2)]
+            } else{
+                cell.titleLabel.text = movies[((indexPath.section * 2) + 1)]
+            }
         }
         return cell
     }
 }
+
 // MARK: - UICollectionViewDelegate
 extension MovsViewController: UICollectionViewDelegate {
 
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension MovsViewController : UICollectionViewDelegateFlowLayout {
+extension MovsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
