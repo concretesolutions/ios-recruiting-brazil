@@ -47,6 +47,14 @@ final class MoviesViewModel {
         return titles
     }
     
+    func postersImages() -> [String] {
+        var paths = [String]()
+        for index in 0..<movies.count {
+            paths.append(movies[index].posterImage)
+        }
+        return paths
+    }
+    
     func fetchPopularMovies() {
         guard !isFetchInProgress else {
             return
@@ -65,7 +73,6 @@ final class MoviesViewModel {
                 DispatchQueue.main.async {
                     self.currentPage += 1
                     self.isFetchInProgress = false
-                    //self.total = response.total
                     self.movies.append(contentsOf: response.movies)
                     
                     if response.page > 1 {

@@ -16,12 +16,29 @@ class MovsViewController: UIViewController {
     private let itemsPerRow: CGFloat = 2
     let numOfSects = 2
     var movies = [String]()
+    var posters = [String]()
     
 // MARK: - Main ViewController Delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         movCollectionView.dataSource = self
         movCollectionView.delegate = self
+    }
+    
+    func fetchMoviePoster(posterPath: String, completion: @escaping (_ result: UIImage?, _ error: Error?) -> Void) {
+        //        func fetchMoviesBanner(bannerpath: String, completion: @escaping (Result<MovieBannerResponse, ResponseError>) -> Void) {
+        let url = "https://image.tmdb.org/t/p/w500" + posterPath
+        print("IMAGE URL = \(url)")
+        let imageURL = URL(string: url)!
+        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+            if error == nil {
+                let downloadedImage = UIImage(data: data!)
+                completion(downloadedImage, nil)
+            } else {
+                completion(nil, error)
+            }
+            }.resume()
+        
     }
 
 }
@@ -49,10 +66,19 @@ extension MovsViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovsCollectionViewCell
         cell.backgroundColor = .black
         if (movies.count > 0) {
+            var cellIndex: Int
             if (indexPath.row == 0) {
-                cell.titleLabel.text = movies[(indexPath.section * 2)]
+                cellIndex = (indexPath.section * 2)
             } else{
-                cell.titleLabel.text = movies[((indexPath.section * 2) + 1)]
+                cellIndex = ((indexPath.section * 2) + 1)
+            }
+            cell.titleLabel.text = movies[cellIndex]
+            fetchMoviePoster(posterPath: posters[cellIndex]) { (img, er) in
+                if er == nil {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = img
+                    }
+                }
             }
         }
         return cell

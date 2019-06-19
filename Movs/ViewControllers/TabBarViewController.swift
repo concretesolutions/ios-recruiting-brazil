@@ -42,10 +42,12 @@ extension TabBarViewController: UITabBarControllerDelegate {
 // MARK: - TabBarViewController Delegates
 extension TabBarViewController: MoviesViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+        
         let rootVC = self.selectedViewController
         if rootVC is MovsViewController {
             let movVC = rootVC as? MovsViewController
             movVC?.movies = viewModel.moviesTitles()
+            movVC?.posters = viewModel.postersImages()
             movVC?.movCollectionView.reloadData()
         } else if rootVC is FavsViewController {
             let favVC = rootVC as? FavsViewController
