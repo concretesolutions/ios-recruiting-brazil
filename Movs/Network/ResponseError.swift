@@ -15,9 +15,9 @@ enum ResponseError: Error {
     var reason: String {
         switch self {
         case .rede:
-            return "Ocorreu um erro ao receber dados"
+            return "Ocorreu um erro ao receber os dados da rede. Verifique sua conexão e arraste a tela para baixo para atualizar"
         case .decoding:
-            return "Ocorreu um erro ao decodificar dados"
+            return "Ocorreu um erro ao decodificar os dados da rede. Tente novamente mais tarde."
         }
     }
 }

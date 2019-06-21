@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MoviesViewModelDelegate: class {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
@@ -17,6 +18,7 @@ final class MoviesViewModel {
     private weak var delegate: MoviesViewModelDelegate?
     
     private var movies: [Movie] = []
+    var moviesPosters: [UIImage] = []
     private var currentPage = 1
     private var total = 0
     private var isFetchInProgress = false
@@ -39,30 +41,12 @@ final class MoviesViewModel {
         return movies[index]
     }
     
-    func moviesTitles() -> [String] {
-        var titles = [String]()
-        for index in 0..<movies.count {
-            titles.append(movies[index].title)
-        }
-        return titles
-    }
-    
-    func postersImages() -> [String] {
-        var paths = [String]()
-        for index in 0..<movies.count {
-            paths.append(movies[index].posterImage)
-        }
-        return paths
-    }
-    
     func fetchPopularMovies() {
         guard !isFetchInProgress else {
             return
         }
-        
         isFetchInProgress = true
-        
-        client.fetchPopularMovies() { result in
+        client.fetchPopularMovies(page: currentPage) { result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -72,20 +56,23 @@ final class MoviesViewModel {
             case .success(let response):
                 DispatchQueue.main.async {
                     self.currentPage += 1
-                    self.isFetchInProgress = false
+                    self.total = response.movies.count
                     self.movies.append(contentsOf: response.movies)
-                    
-                    if response.page > 1 {
-                        let indexPathsToReload = self.calculateIndexPathsToReload(from: response.movies)
-                        self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                    } else {
-                        self.delegate?.onFetchCompleted(with: .none)
-                    }
+                    self.isFetchInProgress = false
+                }
+                if response.page > 1 {
+                    let indexPathsToReload = self.calculateIndexPathsToReload(from: response.movies)
+                    self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                } else {
+                    self.delegate?.onFetchCompleted(with: .none)
                 }
             }
         }
     }
-    
+
+  
+
+
     private func calculateIndexPathsToReload(from newMovies: [Movie]) -> [IndexPath] {
         let startIndex = movies.count - newMovies.count
         let endIndex = startIndex + newMovies.count
