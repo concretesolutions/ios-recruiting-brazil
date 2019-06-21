@@ -43,7 +43,7 @@ class TableViewController: UIViewController, Alerts {
 // MARK: - UITableViewDataSource
 extension TableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.totalCount
+        return viewModel.currentCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

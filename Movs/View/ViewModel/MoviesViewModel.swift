@@ -16,9 +16,7 @@ protocol MoviesViewModelDelegate: class {
 
 final class MoviesViewModel {
     private weak var delegate: MoviesViewModelDelegate?
-    
     private var movies: [Movie] = []
-    var moviesPosters: [UIImage] = []
     private var currentPage = 1
     private var total = 0
     private var isFetchInProgress = false
@@ -30,7 +28,7 @@ final class MoviesViewModel {
     }
     
     var totalCount: Int {
-        return total
+        return 20
     }
     
     var currentCount: Int {
@@ -70,13 +68,10 @@ final class MoviesViewModel {
         }
     }
 
-  
-
-
     private func calculateIndexPathsToReload(from newMovies: [Movie]) -> [IndexPath] {
         let startIndex = movies.count - newMovies.count
         let endIndex = startIndex + newMovies.count
-        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+        return (startIndex..<endIndex).map { IndexPath(row: $0, section: $0) }
     }
     
 }

@@ -33,14 +33,17 @@ class CollectionViewController: UIViewController, Alerts {
     }
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= viewModel.currentCount
+        let soma = (indexPath.section * (indexPath.row + 1))
+//        print("IndexPathes somados = \(soma)")
+//        print("Current count somados = \(viewModel.currentCount)")
+        return soma >= viewModel.currentCount
     }
     
     func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-//        let indexPathsForVisibleRows = collectionView.indexPathsForVisibleRows ?? []
         let indexPathsForVisibleRows = collectionView.indexPathsForVisibleItems
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
+//        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+//        print("indexPathes to reload = \(Array(indexPathsIntersection))")
+        return indexPathsForVisibleRows
     }
     
 }
@@ -79,13 +82,28 @@ extension CollectionViewController: UICollectionViewDataSource {
         return cell
     }
     
-}
-
-// MARK: - UICollectionViewDataSourcePrefetching
-extension CollectionViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
-            viewModel.fetchPopularMovies()
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var cellIndex: Int = 0
+        if (indexPath.row == 0) {
+            cellIndex = (indexPath.section * 2)
+        } else{
+            cellIndex = ((indexPath.section * 2) + 1)
+        }
+        let urlToPass = viewModel.movie(at: cellIndex).posterUrl
+        let titleToPass = viewModel.movie(at: cellIndex).title
+        let yearToPass = viewModel.movie(at: cellIndex).releaseDate
+        let overviewToPass = viewModel.movie(at: cellIndex).overview
+        let movieDetailVC = storyboard?.instantiateViewController(withIdentifier: "movieDetailVC") as! MovieViewController
+        movieDetailVC.movieTitle = titleToPass
+        movieDetailVC.posterUrl = urlToPass
+        movieDetailVC.yearNum = yearToPass
+        movieDetailVC.descripText = overviewToPass
+        if let navVC = self.navigationController {
+            navVC.pushViewController(movieDetailVC, animated: true)
+        }
+        else {
+            let navVC = UINavigationController(rootViewController: movieDetailVC)
+            present(navVC, animated: true, completion: nil)
         }
     }
     
@@ -102,9 +120,13 @@ extension CollectionViewController: MoviesViewModelDelegate {
             }
             return
         }
-        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-//        collectionView.reloadRows(at: indexPathsToReload, with: .automatic)
-        collectionView.reloadItems(at: indexPathsToReload)
+        DispatchQueue.main.async {
+            let indexPathsToReload = self.visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+            //        collectionView.reloadRows(at: indexPathsToReload, with: .automatic)
+            //        collectionView.reloadSections(IndexSet)
+            print("indexPathsToReload: \(indexPathsToReload)")
+            self.collectionView.reloadItems(at: indexPathsToReload)
+        }
     }
     
     func onFetchFailed(with reason: String) {
@@ -118,8 +140,13 @@ extension CollectionViewController: MoviesViewModelDelegate {
     }
 }
 
-// MARK: - UICollectionViewDelegate
-extension CollectionViewController: UICollectionViewDelegate {
+// MARK: - UICollectionViewDataSourcePrefetching
+extension CollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            viewModel.fetchPopularMovies()
+        }
+    }
     
 }
 
@@ -139,5 +166,10 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
+    
+}
+
+// MARK: - UICollectionViewDelegate
+extension CollectionViewController: UICollectionViewDelegate {
     
 }
