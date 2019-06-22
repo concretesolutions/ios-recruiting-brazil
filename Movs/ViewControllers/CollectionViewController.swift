@@ -30,6 +30,7 @@ class CollectionViewController: UIViewController, Alerts {
         collectionView.delegate = self
         viewModel = MoviesViewModel(delegate: self)
         viewModel.fetchPopularMovies()
+        viewModel.fetchMoviesGenres()
     }
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
@@ -44,6 +45,17 @@ class CollectionViewController: UIViewController, Alerts {
 //        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
 //        print("indexPathes to reload = \(Array(indexPathsIntersection))")
         return indexPathsForVisibleRows
+    }
+    
+    func findGens(genIds: [Int]) -> String {
+        var str = ""
+        for i in 0..<genIds.count {
+            str.append(contentsOf: viewModel.findGen(from: genIds[i]))
+            if i != (genIds.count - 1) {
+                str.append(contentsOf: ", ")
+            }
+        }
+        return str
     }
     
 }
@@ -89,19 +101,14 @@ extension CollectionViewController: UICollectionViewDataSource {
         } else{
             cellIndex = ((indexPath.section * 2) + 1)
         }
-        let urlToPass = viewModel.movie(at: cellIndex).posterUrl
-        let titleToPass = viewModel.movie(at: cellIndex).title
-        let yearToPass = viewModel.movie(at: cellIndex).releaseDate
-        let overviewToPass = viewModel.movie(at: cellIndex).overview
-        let movieDetailVC = storyboard?.instantiateViewController(withIdentifier: "movieDetailVC") as! MovieViewController
-        movieDetailVC.movieTitle = titleToPass
-        movieDetailVC.posterUrl = urlToPass
-        movieDetailVC.yearNum = yearToPass
-        movieDetailVC.descripText = overviewToPass
+        let movieToPresent = viewModel.movie(at: cellIndex)
+        let cats = findGens(genIds: movieToPresent.generedIds)
+        let movieDetailVC = storyboard?.instantiateViewController(withIdentifier: "movieDetailVC") as! DetailMovieViewController
+        movieDetailVC.movie = movieToPresent
+        movieDetailVC.genres = cats
         if let navVC = self.navigationController {
             navVC.pushViewController(movieDetailVC, animated: true)
-        }
-        else {
+        }else {
             let navVC = UINavigationController(rootViewController: movieDetailVC)
             present(navVC, animated: true, completion: nil)
         }

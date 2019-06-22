@@ -17,6 +17,7 @@ protocol MoviesViewModelDelegate: class {
 final class MoviesViewModel {
     private weak var delegate: MoviesViewModelDelegate?
     private var movies: [Movie] = []
+    private var genres: [Genres] = []
     private var currentPage = 1
     private var total = 0
     private var isFetchInProgress = false
@@ -37,6 +38,15 @@ final class MoviesViewModel {
     
     func movie(at index: Int) -> Movie {
         return movies[index]
+    }
+    
+    func findGen(from id: Int) -> String {
+        for index in 0..<genres.count  {
+            if genres[index].id == id {
+                return genres[index].name
+            }
+        }
+        return ""
     }
     
     func fetchPopularMovies() {
@@ -63,6 +73,21 @@ final class MoviesViewModel {
                     self.delegate?.onFetchCompleted(with: indexPathsToReload)
                 } else {
                     self.delegate?.onFetchCompleted(with: .none)
+                }
+            }
+        }
+    }
+    
+    func fetchMoviesGenres() {
+        client.fetchMoviesGenres() { result in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.delegate?.onFetchFailed(with: error.reason)
+                }
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.genres.append(contentsOf: response.genres)
                 }
             }
         }
