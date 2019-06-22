@@ -20,10 +20,9 @@ class TableViewController: UIViewController, Alerts {
     override func viewDidLoad() {
         super.viewDidLoad()
         indicatorView.isHidden = false
+        indicatorView.hidesWhenStopped = true
         indicatorView.startAnimating()
-        //tableView.isHidden = true
         tableView.dataSource = self
-        tableView.prefetchDataSource = self
         getFavMovies()
     }
     
@@ -51,6 +50,9 @@ class TableViewController: UIViewController, Alerts {
         } else{
             indicatorView.stopAnimating()
             indicatorView.isHidden = true
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             displayAlert(with: "Alerta", message: "Nenhum filme favoritado ainda.", actions: [action])
         }
@@ -73,14 +75,30 @@ extension TableViewController: UITableViewDataSource {
         }
         return cell
     }
-}
-
-// MARK: - UITableViewDataSourcePrefetching
-extension TableViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        if indexPaths.contains(where: isLoadingCell) {
-//            viewModel.fetchPopularMovies()
-//        }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            print("\(String(describing: favMovies[indexPath.row].title))")
+            let title = favMovies[indexPath.row].title!
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let managedObjCont = appDelegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
+            let predicate = NSPredicate(format: "title == %@", title)
+            fetchRequest.predicate = predicate
+            do {
+                let items = try managedObjCont.fetch(fetchRequest) as! [FavMovie]
+                for item in items {
+                    managedObjCont.delete(item)
+                }
+                try managedObjCont.save()
+            } catch {
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                displayAlert(with: "Alerta", message: "Erro ao apagar filme da lista de favoritos", actions: [action])
+            }
+            getFavMovies()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 }
-

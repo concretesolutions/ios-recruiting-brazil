@@ -70,6 +70,7 @@ class DetailMovieViewController: UIViewController, Alerts {
             movieToSave.setValue(movie.title, forKey: "title")
             movieToSave.setValue(movie.overview, forKey: "overview")
             movieToSave.setValue(movie.releaseDate, forKey: "year")
+            movieToSave.setValue(movie.posterUrl, forKey: "posterUrl")
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
             fetchRequest.includesPropertyValues = false
             do {
@@ -79,25 +80,7 @@ class DetailMovieViewController: UIViewController, Alerts {
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 displayAlert(with: "Alerta" , message: "Erro ao salvar filme como favorito", actions: [action])
             }
-        
-        
-        //MARK: APAGAR TUDO
-//        do {
-//            let items = try managedObjCont.fetch(fetchRequest) as! [NSManagedObject]
-//
-//            for item in items {
-//                managedObjCont.delete(item)
-//            }
-//
-//            // Save Changes
-//            try managedObjCont.save()
-//            print("DEU BOM")
-//
-//        } catch {
-//            print("DEU ERRO")
-//        }
         }
-
 }
 
     private func checkIfFav(id: Int) {

@@ -15,6 +15,7 @@ class FavsTableViewCell: UITableViewCell {
     @IBOutlet weak var overviewTextView: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -24,7 +25,6 @@ class FavsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         posterImageView.image = #imageLiteral(resourceName: "placeholder")
-        //activityIndicator.hidesWhenStopped = true
     }
     
     func setCell(with movie: FavMovie?) {
@@ -32,7 +32,25 @@ class FavsTableViewCell: UITableViewCell {
             titleLabel?.text = movie.title
             overviewTextView.text = movie.overview
             yearLabel.text = movie.year
-            //activityIndicator.startAnimating()
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+            posterImageView.loadImageWithUrl(posterUrl: movie.posterUrl!) { result in
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
+                        
+                    }
+                    print("Erro ao baixar imagem: \(error.reason)")
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
+                        self.posterImageView.image = response.banner
+                    }
+                }
+            }
         }
     }
     
