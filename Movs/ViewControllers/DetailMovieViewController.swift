@@ -70,14 +70,14 @@ class DetailMovieViewController: UIViewController, Alerts {
             movieToSave.setValue(movie.title, forKey: "title")
             movieToSave.setValue(movie.overview, forKey: "overview")
             movieToSave.setValue(movie.releaseDate, forKey: "year")
-            movieToSave.setValue(movie.id, forKey: "id")
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
             fetchRequest.includesPropertyValues = false
             do {
                 try managedObjCont.save()
                 self.favButton.isSelected = true
             } catch _ as NSError {
-                displayAlert(with: "Alerta" , message: "Erro ao salvar filme como favorito", actions: nil)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                displayAlert(with: "Alerta" , message: "Erro ao salvar filme como favorito", actions: [action])
             }
         
         
@@ -112,7 +112,8 @@ class DetailMovieViewController: UIViewController, Alerts {
                 isFav = true
             }
         } catch {
-            displayAlert(with: "Alerta", message: "Erro ao consultar lista de filmes favoritos")
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            displayAlert(with: "Alerta", message: "Erro ao consultar lista de filmes favoritos", actions: [action])
             favButton.isEnabled = false
         }
         if isFav {

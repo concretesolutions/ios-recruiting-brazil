@@ -9,16 +9,32 @@
 import UIKit
 
 class FavsTableViewCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var overviewTextView: UITextView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        setCell(with: .none)
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        posterImageView.image = #imageLiteral(resourceName: "placeholder")
+        //activityIndicator.hidesWhenStopped = true
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func setCell(with movie: FavMovie?) {
+        if let movie = movie {
+            titleLabel?.text = movie.title
+            overviewTextView.text = movie.overview
+            yearLabel.text = movie.year
+            //activityIndicator.startAnimating()
+        }
     }
-
+    
+    
 }
