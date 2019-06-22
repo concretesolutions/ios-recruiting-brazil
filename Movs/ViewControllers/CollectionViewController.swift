@@ -30,7 +30,7 @@ class CollectionViewController: UIViewController, Alerts {
         collectionView.delegate = self
         viewModel = MoviesViewModel(delegate: self)
         viewModel.fetchPopularMovies()
-        viewModel.fetchMoviesGenres()
+//        viewModel.fetchMoviesGenres()
     }
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {

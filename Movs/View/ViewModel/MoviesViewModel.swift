@@ -54,40 +54,36 @@ final class MoviesViewModel {
             return
         }
         isFetchInProgress = true
-        client.fetchPopularMovies(page: currentPage) { result in
-            switch result {
-            case .failure(let error):
+        client.fetchPopularMovies(page: currentPage) { resultMov in
+            switch resultMov {
+            case .failure(let errorMov):
                 DispatchQueue.main.async {
                     self.isFetchInProgress = false
-                    self.delegate?.onFetchFailed(with: error.reason)
+                    self.delegate?.onFetchFailed(with: errorMov.reason)
                 }
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self.currentPage += 1
-                    self.total = response.movies.count
-                    self.movies.append(contentsOf: response.movies)
-                    self.isFetchInProgress = false
-                }
-                if response.page > 1 {
-                    let indexPathsToReload = self.calculateIndexPathsToReload(from: response.movies)
-                    self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                } else {
-                    self.delegate?.onFetchCompleted(with: .none)
-                }
-            }
-        }
-    }
-    
-    func fetchMoviesGenres() {
-        client.fetchMoviesGenres() { result in
-            switch result {
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.delegate?.onFetchFailed(with: error.reason)
-                }
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self.genres.append(contentsOf: response.genres)
+            case .success(let responseMov):
+                self.client.fetchMoviesGenres() { resultGen in
+                    switch resultGen {
+                    case .failure(let errorGen):
+                        DispatchQueue.main.async {
+                            self.isFetchInProgress = false
+                            self.delegate?.onFetchFailed(with: errorGen.reason)
+                        }
+                    case .success(let responseGen):
+                        DispatchQueue.main.async {
+                            self.genres.append(contentsOf: responseGen.genres)
+                            self.currentPage += 1
+                            self.total = responseMov.movies.count
+                            self.movies.append(contentsOf: responseMov.movies)
+                            self.isFetchInProgress = false
+                        }
+                        if responseMov.page > 1 {
+                            let indexPathsToReload = self.calculateIndexPathsToReload(from: responseMov.movies)
+                            self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                            } else {
+                                self.delegate?.onFetchCompleted(with: .none)
+                        }
+                    }
                 }
             }
         }

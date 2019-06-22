@@ -176,11 +176,14 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbN-sT-eHf">
                                                                                 <rect key="frame" x="310" y="0.0" width="25" height="50.5"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="25" id="em9-Gj-tRq"/>
+                                                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="25" id="em9-Gj-tRq"/>
                                                                                     <constraint firstAttribute="width" constant="25" id="tuA-DY-9BY"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="favorite_empty_icon"/>
                                                                                 <state key="selected" image="favorite_full_icon"/>
+                                                                                <connections>
+                                                                                    <action selector="favoriteMovie:" destination="2Pb-GI-584" eventType="touchUpInside" id="TiI-Cc-FDl"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>

@@ -34,6 +34,7 @@ class DetailMovieViewController: UIViewController {
     func configView() {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        
         movieTitleLabel.text = movie.title
         yearLabel.text = movie.releaseDate
         categLabel.text = genres
@@ -56,7 +57,11 @@ class DetailMovieViewController: UIViewController {
                 }
             }
         }
-        
     }
+    
+    @IBAction func favoriteMovie(_ sender: AnyObject) {
+        print("Favorite Movie with id: \(movie.id)")
+    }
+    
 
 }
