@@ -30,13 +30,10 @@ class CollectionViewController: UIViewController, Alerts {
         collectionView.delegate = self
         viewModel = MoviesViewModel(delegate: self)
         viewModel.fetchPopularMovies()
-//        viewModel.fetchMoviesGenres()
     }
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
         let soma = (indexPath.section * (indexPath.row + 1))
-//        print("IndexPathes somados = \(soma)")
-//        print("Current count somados = \(viewModel.currentCount)")
         return soma >= viewModel.currentCount
     }
     
@@ -48,14 +45,14 @@ class CollectionViewController: UIViewController, Alerts {
     }
     
     func findGens(genIds: [Int]) -> String {
-        var str = ""
+        var finalGenString = ""
         for i in 0..<genIds.count {
-            str.append(contentsOf: viewModel.findGen(from: genIds[i]))
+            finalGenString.append(contentsOf: viewModel.findGen(from: genIds[i]))
             if i != (genIds.count - 1) {
-                str.append(contentsOf: ", ")
+                finalGenString.append(contentsOf: ", ")
             }
         }
-        return str
+        return finalGenString
     }
     
 }
@@ -129,9 +126,9 @@ extension CollectionViewController: MoviesViewModelDelegate {
         }
         DispatchQueue.main.async {
             let indexPathsToReload = self.visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-            //        collectionView.reloadRows(at: indexPathsToReload, with: .automatic)
-            //        collectionView.reloadSections(IndexSet)
-            print("indexPathsToReload: \(indexPathsToReload)")
+//            collectionView.reloadRows(at: indexPathsToReload, with: .automatic)
+//            collectionView.reloadSections(IndexSet)
+//            print("indexPathsToReload: \(indexPathsToReload)")
             self.collectionView.reloadItems(at: indexPathsToReload)
         }
     }
