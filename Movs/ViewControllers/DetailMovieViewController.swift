@@ -34,6 +34,9 @@ class DetailMovieViewController: UIViewController, Alerts {
     }
     
     func configView() {
+        movieTitleLabel.layer.addBorders(.bottom)
+        yearLabel.layer.addBorders(.bottom)
+        categLabel.layer.addBorders(.bottom)
         checkIfFav(id: movie.id)
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
@@ -63,6 +66,7 @@ class DetailMovieViewController: UIViewController, Alerts {
     
     @IBAction func favoriteMovie(_ sender: AnyObject) {
         if isFav == false {
+            isFav = true
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             let managedObjCont = appDelegate.persistentContainer.viewContext
             let entity = NSEntityDescription.entity(forEntityName: "FavMovie", in: managedObjCont)
@@ -78,6 +82,7 @@ class DetailMovieViewController: UIViewController, Alerts {
                 self.favButton.isSelected = true
             } catch _ as NSError {
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                isFav = false
                 displayAlert(with: "Alerta" , message: "Erro ao salvar filme como favorito", actions: [action])
             }
         }
@@ -111,3 +116,5 @@ class DetailMovieViewController: UIViewController, Alerts {
 
 
 }
+
+

@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class MovsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var favButton: UIButton!
+    var isFav = false
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -24,10 +27,12 @@ class MovsCollectionViewCell: UICollectionViewCell {
         activityIndicator.hidesWhenStopped = true
     }
     
+    
+    //MARK: Configure cell
     func setCell(with movie: Movie?) {
         if let movie = movie {
-            
             titleLabel?.text = movie.title
+            checkIfFav(title: movie.title)
             imageView.loadImageWithUrl(posterUrl: movie.posterUrl) { result in
                 switch result {
                 case .failure(let error):
@@ -44,6 +49,31 @@ class MovsCollectionViewCell: UICollectionViewCell {
             }
         } else {
             activityIndicator.startAnimating()
+        }
+    }
+    
+    //MARK: CoreData
+    private func checkIfFav(title: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedObjCont = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
+        let predicate = NSPredicate(format: "title == %@", "\(title)")
+        fetchRequest.predicate = predicate
+        do {
+            let result = try managedObjCont.fetch(fetchRequest)
+            for _ in result as! [NSManagedObject] {
+                isFav = true
+            }
+        } catch {
+            favButton.isEnabled = false
+        }
+        if isFav {
+            favButton.isEnabled = true
+            favButton.isSelected = true
+            
+        } else {
+            favButton.isEnabled = true
+            favButton.isSelected = false
         }
     }
     

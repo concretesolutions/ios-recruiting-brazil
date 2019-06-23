@@ -37,3 +37,13 @@ extension UIImageView {
     }
     
 }
+
+extension CALayer {
+    func addBorders(_ edge: UIRectEdge) {
+        let subLayer = CALayer()
+        subLayer.frame = CGRect(x: 0, y: frame.height - CGFloat(0.5), width: frame.width, height: CGFloat(0.5))
+        subLayer.backgroundColor = UIColor.lightGray.cgColor
+        self.addSublayer(subLayer)
+        
+    }
+}
