@@ -29,7 +29,7 @@ final class MoviesViewModel {
     }
     
     var totalCount: Int {
-        return 20
+        return total
     }
     
     var currentCount: Int {
@@ -73,26 +73,16 @@ final class MoviesViewModel {
                         DispatchQueue.main.async {
                             self.genres.append(contentsOf: responseGen.genres)
                             self.currentPage += 1
-                            self.total = responseMov.movies.count
+                            self.total = responseMov.totalResults
                             self.movies.append(contentsOf: responseMov.movies)
                             self.isFetchInProgress = false
+                            self.delegate?.onFetchCompleted(with: .none)
                         }
-                        if responseMov.page > 1 {
-                            let indexPathsToReload = self.calculateIndexPathsToReload(from: responseMov.movies)
-                            self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                            } else {
-                                self.delegate?.onFetchCompleted(with: .none)
-                        }
+                        
                     }
                 }
             }
         }
-    }
-
-    private func calculateIndexPathsToReload(from newMovies: [Movie]) -> [IndexPath] {
-        let startIndex = movies.count - newMovies.count
-        let endIndex = startIndex + newMovies.count
-        return (startIndex..<endIndex).map { IndexPath(row: $0, section: $0) }
     }
     
 }

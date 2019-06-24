@@ -58,7 +58,6 @@ final class TheMovieDBClient {
         }
         urlComponents?.queryItems = queryItems
         urlRequest.url = urlComponents?.url
-        print(urlRequest)
         session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             guard
                 let httpResponse = response as? HTTPURLResponse, httpResponse.hasSuccessStatusCode,

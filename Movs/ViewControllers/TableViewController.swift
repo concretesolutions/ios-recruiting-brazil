@@ -78,7 +78,6 @@ extension TableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            print("\(String(describing: favMovies[indexPath.row].title))")
             let title = favMovies[indexPath.row].title!
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             let managedObjCont = appDelegate.persistentContainer.viewContext

@@ -33,15 +33,14 @@ class CollectionViewController: UIViewController, Alerts {
     }
     
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        let soma = (indexPath.section * (indexPath.row + 1))
+        let soma = (indexPath.section * 2) + 3 // Aqui eu chamo o fectch 3 celulas antes de chegar no final da collection
         return soma >= viewModel.currentCount
     }
     
     func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
         let indexPathsForVisibleRows = collectionView.indexPathsForVisibleItems
-//        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-//        print("indexPathes to reload = \(Array(indexPathsIntersection))")
-        return indexPathsForVisibleRows
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
     }
     
     func findGens(genIds: [Int]) -> String {
@@ -59,7 +58,11 @@ class CollectionViewController: UIViewController, Alerts {
 // MARK: - UICollectionViewDataSource
 extension CollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numOfSects
+        if viewModel.currentCount > 0 {
+            return numOfSects
+        }else{
+            return 0
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -116,20 +119,10 @@ extension CollectionViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDataSourcePrefetching
 extension CollectionViewController: MoviesViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-        guard let newIndexPathsToReload = newIndexPathsToReload else {
-            DispatchQueue.main.async {
-                self.indicatorView.stopAnimating()
-                self.indicatorView.isHidden = true
-                self.collectionView.reloadData()
-            }
-            return
-        }
         DispatchQueue.main.async {
-            let indexPathsToReload = self.visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-//            collectionView.reloadRows(at: indexPathsToReload, with: .automatic)
-//            collectionView.reloadSections(IndexSet)
-//            print("indexPathsToReload: \(indexPathsToReload)")
-            self.collectionView.reloadItems(at: indexPathsToReload)
+            self.indicatorView.stopAnimating()
+            self.indicatorView.isHidden = true
+            self.collectionView.reloadData()
         }
     }
     
