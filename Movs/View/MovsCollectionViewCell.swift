@@ -18,12 +18,14 @@ class MovsCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        favButton.isSelected = false
         setCell(with: .none)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         imageView.image = #imageLiteral(resourceName: "placeholder")
+        favButton.isSelected = false
         activityIndicator.hidesWhenStopped = true
     }
     
@@ -32,14 +34,14 @@ class MovsCollectionViewCell: UICollectionViewCell {
     func setCell(with movie: Movie?) {
         if let movie = movie {
             titleLabel?.text = movie.title
-            checkIfFav(title: movie.title)
+            checkIfFav(id: Int32(movie.id))
             imageView.loadImageWithUrl(posterUrl: movie.posterUrl) { result in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
                     }
-                    print("Erro ao baixar imagem: \(error.reason)")
+                    debugPrint("Erro ao baixar imagem: \(error.reason)")
                 case .success(let response):
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
@@ -53,11 +55,11 @@ class MovsCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: CoreData
-    private func checkIfFav(title: String) {
+    private func checkIfFav(id: Int32) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedObjCont = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
-        let predicate = NSPredicate(format: "title == %@", "\(title)")
+        let predicate = NSPredicate(format: "id == %d", id)
         fetchRequest.predicate = predicate
         do {
             let result = try managedObjCont.fetch(fetchRequest)
@@ -65,16 +67,17 @@ class MovsCollectionViewCell: UICollectionViewCell {
                 isFav = true
             }
         } catch {
-            favButton.isEnabled = false
+            debugPrint("Deus erro ao verificar se é favorito na celula do collection")
         }
         if isFav {
-            favButton.isEnabled = true
-            favButton.isSelected = true
+            DispatchQueue.main.async {
+                self.favButton.isSelected = true
+            }
             
-        } else {
-            favButton.isEnabled = true
-            favButton.isSelected = false
         }
+//        else {
+//            favButton.isSelected = false
+//        }
     }
     
     

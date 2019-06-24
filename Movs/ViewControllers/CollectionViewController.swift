@@ -32,8 +32,15 @@ class CollectionViewController: UIViewController, Alerts {
         viewModel.fetchPopularMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        let soma = (indexPath.section * 2) + 3 // Aqui eu chamo o fectch 3 celulas antes de chegar no final da collection
+        let soma = (indexPath.section * 2) + 3
         return soma >= viewModel.currentCount
     }
     
@@ -81,6 +88,7 @@ extension CollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collection, for: indexPath) as! MovsCollectionViewCell
         if (viewModel.currentCount > 0) {
+            cell.favButton.isSelected = false
             var cellIndex: Int = 0
             if (indexPath.row == 0) {
                 cellIndex = (indexPath.section * 2)

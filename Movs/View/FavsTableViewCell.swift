@@ -42,7 +42,7 @@ class FavsTableViewCell: UITableViewCell {
                         self.activityIndicator.isHidden = true
                         
                     }
-                    print("Erro ao baixar imagem: \(error.reason)")
+                    debugPrint("Erro ao baixar imagem: \(error.reason)")
                 case .success(let response):
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()

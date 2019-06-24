@@ -53,7 +53,7 @@ class DetailMovieViewController: UIViewController, Alerts {
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
                     }
-                    print("Erro ao baixar imagem: \(error.reason)")
+                    debugPrint("Erro ao baixar imagem: \(error.reason)")
                 case .success(let response):
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
@@ -75,6 +75,8 @@ class DetailMovieViewController: UIViewController, Alerts {
             movieToSave.setValue(movie.overview, forKey: "overview")
             movieToSave.setValue(movie.releaseDate, forKey: "year")
             movieToSave.setValue(movie.posterUrl, forKey: "posterUrl")
+            let idToSave = Int32(movie.id)
+            movieToSave.setValue(idToSave, forKey: "id")
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
             fetchRequest.includesPropertyValues = false
             do {
@@ -92,7 +94,7 @@ class DetailMovieViewController: UIViewController, Alerts {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedObjCont = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavMovie")
-        let predicate = NSPredicate(format: "title == %@", "\(movie.title)")
+        let predicate = NSPredicate(format: "id == %d", Int32(movie.id))
         fetchRequest.predicate = predicate
         do {
             let result = try managedObjCont.fetch(fetchRequest)
