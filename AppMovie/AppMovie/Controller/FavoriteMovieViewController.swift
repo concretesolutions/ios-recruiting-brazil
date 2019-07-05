@@ -50,7 +50,7 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     
     func configureViewComponents(){
         //Navigation Controller
-        self.navigationItem.title = "Movies"
+        self.navigationItem.title = "Favoritos"
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.backgroundColor = UIColor.mainColor()

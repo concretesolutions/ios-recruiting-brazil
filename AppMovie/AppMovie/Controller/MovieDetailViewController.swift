@@ -45,10 +45,10 @@ class MovieDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         titleMovies.text = movieCell?.title
-        //        genersTxt.text = genero
         dateMovies.text = movieCell?.release_date
-        //genersTxt.text = genero
         descriptionTxt?.text = movieCell?.overview
+        configureGenersId()
+        genersTxt.text = genero
         
         titulo = String(movieCell!.title)
         descricao = String(movieCell!.overview)
@@ -68,7 +68,44 @@ class MovieDetailViewController: UIViewController {
         //configureComponents()
     }
     
-    
+    func configureGenersId(){
+        switch(movieCell?.genre_ids[0]){
+        case (28):
+            genero = "Action"
+        case (12):
+            genero = "Adventure"
+        case (16):
+            genero = "Animation"
+        case (35):
+            genero = "Comedy"
+        case (80):
+            genero = "Crime"
+        case (99):
+            genero = "Documentary"
+        case (18):
+            genero = "Drama"
+        case (10751):
+            genero = "Family"
+        case (14):
+            genero = "Fantasy"
+        case (36):
+            genero = "History"
+        case (27):
+            genero = "Horror"
+        case (10402):
+            genero = "Music"
+        case (9648):
+            genero = "Mystery"
+        case (10749):
+            genero = "Romance"
+        case (878):
+            genero = "Science Fiction"
+        case (10752):
+            genero = "War"
+        default:
+            genero = "Unknow"
+        }
+    }
     
     @IBAction func favoriteBtnPressed(_ sender: Any) {
         self.save { (complete) in
