@@ -15,6 +15,7 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     @IBOutlet weak var favoriteTableView: UITableView!
+    @IBOutlet weak var movieSearch: UISearchBar!
     
     var movies: [MovieEntity] = []
     
@@ -31,6 +32,7 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewWillAppear(animated)
         fetchCoreDataObjects()
         favoriteTableView.reloadData()
+        configureViewComponents()
     }
     
     func fetchCoreDataObjects() {
@@ -41,6 +43,31 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
                 } else {
                     favoriteTableView.isHidden = true
                 }
+            }
+        }
+    }
+    
+    func configureViewComponents(){
+        //Navigation Controller
+        self.navigationItem.title = "Movies"
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor.mainColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mainColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.mainDarkBlue()
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainDarkBlue(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
+        //
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        //Search
+        movieSearch.barTintColor = UIColor.mainColor()
+        movieSearch.tintColor = UIColor.mainOrange()
+        movieSearch.showsCancelButton = false
+        for v:UIView in movieSearch.subviews.first!.subviews {
+            if v.isKind(of: UITextField.classForCoder()) {
+                (v as! UITextField).tintColor = UIColor.white
+                (v as! UITextField).backgroundColor = UIColor.mainOrange()
             }
         }
     }
