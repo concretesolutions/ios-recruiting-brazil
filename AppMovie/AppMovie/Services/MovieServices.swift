@@ -41,64 +41,6 @@ class MovieServices {
             }
         }
     }
-    
-//    func getMoviesbyPage(page:Int, completionHandler: @escaping ([Result]) -> Void ) {
-//        Alamofire.request("\(URL_NOWPLAYING)&page=\(page)", method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-//
-//            let arrayMovies = [Result]()
-//
-//            if response.result.error == nil {
-//                guard let data = response.data else { return }
-//
-//                do {
-//                    let decoder = JSONDecoder()
-//                    let decodedMovies = try decoder.decode(Movies.self, from: data)
-//                    //print(decodedMovies)
-//
-//                    completionHandler(decodedMovies.results)
-//                } catch let error {
-//                    print(error)
-//                    completionHandler(arrayMovies)
-//                    debugPrint(response.result.error as Any)
-//                }
-//            } else {
-//                debugPrint(response.result.error as Any)
-//            }
-//        }
-//    }
-    
-//    func getMoviesbyPage(page:Int, completionHandler: @escaping ([Result]) -> Void ) {
-//        Alamofire.request("\(URL_NOWPLAYING)&page=\(page)", method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response:DataResponse<Any>) in
-//            print("\(URL_NOWPLAYING)&page=\(page)")
-//
-//            let arrayStatements = [Result]()
-//
-//            if response.result.error == nil {
-//                guard let data = response.data else { return }
-//                print(response.result.value)
-//
-//                do {
-//                    let decoder = JSONDecoder()
-//                    let decodedMovie = try decoder.decode(Movies.self, from: data)
-//                    print(decodedMovie)
-//
-//                    completionHandler(decodedMovie.results)
-//                    //completion(true)
-//                    //   print(completionHandler(decodedUserAcconts))
-//                } catch let error {
-//                    print(error)
-//                    completionHandler(arrayStatements)
-//                    debugPrint(response.result.error as Any)
-//                }
-//            } else {
-//                //  completion(false)
-//                debugPrint(response.result.error as Any)
-//            }
-//
-//        } // FIM DA
-//
-//    }
-    
 }
 
 

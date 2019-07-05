@@ -123,25 +123,21 @@ extension MovieSearchViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCell
-        
         cell.movie = movie[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //let movieCell = inSearchMode ? filteredMovie[indexPath.row] : movie[indexPath.row]
         let movieCell = movie[indexPath.row]
-        
         self.performSegue(withIdentifier: "toDetail", sender: movieCell)
-        //showDetailViewController(withMovie: movieCell)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == movie.count - 8 && !isLoading && pageCount <= totalPages {
             pageCount += 1
             loadMovies()
-            print("carregando")
         }
     }
     

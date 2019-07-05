@@ -62,8 +62,6 @@ class MovieCell: UICollectionViewCell {
     
     func configureViewComponents() {
         //        self.clipsToBounds = true
-        //
-        //
         //        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         //        self.addGestureRecognizer(longPressGesture)
         //

@@ -14,7 +14,6 @@ typealias CompletionHandler = (_ Success: Bool, _ errorMessage :String?) -> ()
 // URL Constants
 let SEARCH_URL = "https://api.themoviedb.org/3/search/movie?api_key=d27ffb8c19b10c648282cde73175e74a&query="
 let URL_NOWPLAYING = "https://api.themoviedb.org/3/movie/now_playing?api_key=d27ffb8c19b10c648282cde73175e74a&language=pt-BR"
-//&page=<PAGE>
 let BASE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=d27ffb8c19b10c648282cde73175e74a&language=en-US&page=1"
 let URL_IMG = "https://image.tmdb.org/t/p/w500"
 
