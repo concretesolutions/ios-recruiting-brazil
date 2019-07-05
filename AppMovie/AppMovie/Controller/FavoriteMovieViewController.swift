@@ -73,6 +73,7 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    //MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
@@ -109,6 +110,7 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     
 }
 
+//MARK: - CoreData Remove
 extension FavoriteMovieViewController{
     
     func removeMovie(atIndexPath indexPath: IndexPath) {

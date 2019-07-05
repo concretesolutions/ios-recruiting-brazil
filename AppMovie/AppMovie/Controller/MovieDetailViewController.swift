@@ -50,15 +50,16 @@ class MovieDetailViewController: UIViewController {
         configureGenersId()
         genersTxt.text = genero
         
-        titulo = String(movieCell!.title)
-        descricao = String(movieCell!.overview)
-        imagem = String(movieCell!.poster_path)
-        dataMovie = String(movieCell!.release_date)
+        titulo = movieCell?.title
+        descricao = movieCell?.overview
+        imagem = movieCell?.poster_path
+        dataMovie = movieCell?.release_date
         
         status = false
         
         detailImage.kf.indicatorType = .activity
-        let stringImage = movieCell!.poster_path
+        //let stringImage = movie?.poster_path
+        guard let stringImage = movieCell?.poster_path else {return}
         let Image = "\(URL_IMG)\(stringImage)" ?? ""
         if let image = URL(string: Image){
             detailImage.kf.indicatorType = .activity
@@ -69,7 +70,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     func configureGenersId(){
-        switch(movieCell?.genre_ids[0]){
+        switch(movieCell?.genre_ids![0]){
         case (28):
             genero = "Action"
         case (12):
@@ -116,7 +117,7 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
-    
+    //MARK: - COREDATA SAVE
     func save(completion: (_ finished: Bool) -> ()) {
         guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
         let movie = MovieEntity(context: managedContext)

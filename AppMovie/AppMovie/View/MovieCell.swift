@@ -28,7 +28,8 @@ class MovieCell: UICollectionViewCell {
         didSet{
             titleLabel.text = movie?.title
             movieImage.kf.indicatorType = .activity
-            let stringImage = movie!.poster_path
+            //let stringImage = movie?.poster_path
+            guard let stringImage = movie?.poster_path else {return}
             let Image = "\(URL_IMG)\(stringImage)" ?? ""
             if let image = URL(string: Image){
                 movieImage.kf.indicatorType = .activity

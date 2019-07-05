@@ -16,27 +16,28 @@ struct Movies: Codable {
 
 // MARK: - Result
 struct Result: Codable {
-    let vote_count: Int
-    let id: Int
-    let video: Bool
-    let vote_average: Double
-    let title: String
-    let popularity: Double
-    let poster_path: String
-    let original_language: OriginalLanguage
-    let original_title: String
-    let genre_ids: [Int]
+    let vote_count: Int?
+    let id: Int?
+    let video: Bool?
+    let vote_average: Double?
+    let title: String?
+    let popularity: Double?
+    let poster_path: String?
+    let original_language: OriginalLanguage?
+    let original_title: String?
+    let genre_ids: [Int]?
     let backdrop_path: String?
-    let adult: Bool
-    let overview: String
-    let release_date: String
+    let adult: Bool?
+    let overview: String?
+    let release_date: String?
 }
 
 enum OriginalLanguage: String, Codable {
     case da = "da"
     case en = "en"
     case fr = "fr"
-    //    case en = "en"
-    //    case ja = "ja"
-    //    case tl = "tl"
+    case ja = "ja"
+    case ko = "ko"
+    case es = "es"
+    case tl = "tl"
 }

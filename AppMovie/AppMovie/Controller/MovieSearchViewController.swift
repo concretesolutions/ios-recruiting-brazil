@@ -19,6 +19,10 @@ class MovieSearchViewController: UIViewController {
     var filteredMovie = [Result]()
     var inSearchMode = false
     
+    var isLoading = false
+    var pageCount: Int = 1
+    var totalPages: Int = 46
+    
     //Mark: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +79,7 @@ class MovieSearchViewController: UIViewController {
     
     // MARK: - API
     func api(){
-        MovieServices.instance.getMovies{ movies in
+        MovieServices.instance.getMovies(page: pageCount){ movies in
             DispatchQueue.main.async {
                 self.movie = movies
                 self.movieCollection.reloadData()
@@ -89,6 +93,19 @@ class MovieSearchViewController: UIViewController {
     //        controller.movie = movie
     //        self.navigationController?.pushViewController(controller, animated: true)
     //    }
+    
+    func loadMovies(){
+        print("LoadMovies")
+        print(pageCount)
+        MovieServices.instance.getMovies(page: pageCount){ movies in
+            self.isLoading = false
+            print(movies)
+            DispatchQueue.main.async {
+                self.movie += movies
+                self.movieCollection.reloadData()
+            }
+        }
+    }
     
 }
 
@@ -118,6 +135,14 @@ extension MovieSearchViewController: UICollectionViewDataSource{
         
         self.performSegue(withIdentifier: "toDetail", sender: movieCell)
         //showDetailViewController(withMovie: movieCell)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == movie.count - 8 && !isLoading && pageCount <= totalPages {
+            pageCount += 1
+            loadMovies()
+            print("carregando")
+        }
     }
     
     
