@@ -34,6 +34,13 @@ struct Result: Codable {
 
 enum OriginalLanguage: String, Codable {
     case da = "da"
+    case de = "de"
+    case ta = "ta"
+    case nl = "nl"
+    case sv = "sv"
+    case it = "it"
+    case zh = "zh"
+    case hr = "hr"
     case en = "en"
     case fr = "fr"
     case ja = "ja"
