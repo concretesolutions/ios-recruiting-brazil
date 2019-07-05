@@ -22,7 +22,7 @@ class MovieSearchViewController: UIViewController {
     //Mark: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        api()
+        
         configureViewComponents()
         
         movieCollection.delegate = self
@@ -34,9 +34,16 @@ class MovieSearchViewController: UIViewController {
         api()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toDetail"){
+            let vc : MovieDetailViewController = segue.destination as! MovieDetailViewController
+            vc.movieCell = sender as! Result
+        }
+    }
+    
     func configureViewComponents(){
         //Navigation Controller
-        self.navigationItem.title = "Filmes"
+        self.navigationItem.title = "Movies"
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.backgroundColor = UIColor.mainColor()
@@ -68,18 +75,22 @@ class MovieSearchViewController: UIViewController {
     
     // MARK: - API
     func api(){
-        
         MovieServices.instance.getMovies{ movies in
             DispatchQueue.main.async {
                 self.movie = movies
+                
                 self.movieCollection.reloadData()
                 print(movies)
             }
-            
         }
-        
     }
     
+    //MARK: _ HELPER FUNCTIONS
+//    func showDetailViewController(withMovie movie: Result) {
+//        let controller = MovieDetailViewController()
+//        controller.movie = movie
+//        self.navigationController?.pushViewController(controller, animated: true)
+//    }
     
 }
 
@@ -100,6 +111,15 @@ extension MovieSearchViewController: UICollectionViewDataSource{
         
         cell.movie = movie[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        //let movieCell = inSearchMode ? filteredMovie[indexPath.row] : movie[indexPath.row]
+        let movieCell = movie[indexPath.row]
+        
+        self.performSegue(withIdentifier: "toDetail", sender: movieCell)
+       //showDetailViewController(withMovie: movieCell)
     }
     
     

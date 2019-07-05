@@ -9,11 +9,12 @@
 import UIKit
 import Kingfisher
 
-protocol MovieCellDelegate {
-    func presentDetailMovieView(withMovie movie: Result)
-}
+//protocol MovieCellDelegate {
+//    func presentDetailMovieView(withMovie movie: Result)
+//}
 
 class MovieCell: UICollectionViewCell {
+   // var delegate: MovieCellDelegate?
     
     //Mark: - Properties
     @IBOutlet weak var movieImage: UIImageView!
@@ -22,12 +23,11 @@ class MovieCell: UICollectionViewCell {
     @IBOutlet weak var favoriteImage: UIImageView!
     
     
-    var delegate: MovieCellDelegate?
+    
     
     var movie: Result? {
         didSet{
             titleLabel.text = movie?.title
-            print(titleLabel)
             movieImage.kf.indicatorType = .activity
             let stringImage = movie!.poster_path
             let Image = "\(URL_IMG)\(stringImage)" ?? ""
@@ -74,28 +74,29 @@ class MovieCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         //custom logic goes here
-        configureViewComponents()
+       // configureViewComponents()
     }
     
     // MARK: - Selectors
     
-    @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
-        print("Handle Press...")
-        guard let movie = self.movie else { return }
-        if sender.state == .began {
-            delegate?.presentDetailMovieView(withMovie: movie)
-        }
-    }
+//    @objc func handleLongPress(sender: UILongPressGestureRecognizer) {
+//        print("Handle Press...")
+//        guard let movie = self.movie else { return }
+//        if sender.state == .began {
+//            delegate?.presentDetailMovieView(withMovie: movie)
+//        }
+//    }
+    
     
     // MARK: - Helper Functions
     
     func configureViewComponents() {
-        self.clipsToBounds = true
-        
-        
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        self.addGestureRecognizer(longPressGesture)
-        
+//        self.clipsToBounds = true
+//        
+//        
+//        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+//        self.addGestureRecognizer(longPressGesture)
+//        
     }
     
 

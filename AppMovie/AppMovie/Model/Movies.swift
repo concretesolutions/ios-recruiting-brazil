@@ -20,7 +20,7 @@ struct Result: Codable {
     let id: Int
     let video: Bool
     let vote_average: Double
-    let title: String?
+    let title: String
     let popularity: Double
     let poster_path: String
     let original_language: OriginalLanguage
@@ -33,7 +33,10 @@ struct Result: Codable {
 }
 
 enum OriginalLanguage: String, Codable {
+    case da = "da"
     case en = "en"
-    case ja = "ja"
-    case tl = "tl"
+    case fr = "fr"
+//    case en = "en"
+//    case ja = "ja"
+//    case tl = "tl"
 }
