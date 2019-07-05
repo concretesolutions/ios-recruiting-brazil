@@ -28,7 +28,7 @@ class MovieServices {
                 do {
                     let decoder = JSONDecoder()
                     let decodedMovies = try decoder.decode(Movies.self, from: data)
-                      print(decodedMovies)
+                    //print(decodedMovies)
                     
                     completionHandler(decodedMovies.results)
                 } catch let error {

@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 
 class MovieDetailViewController: UIViewController {
-
+    
     //Mark: Proprietes
-
+    
     @IBOutlet weak var detailImage: UIImageView!
     @IBOutlet weak var titleMovies: UILabel!
     @IBOutlet weak var dateMovies: UILabel!
@@ -31,7 +31,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     var movieCell : Result?
-   
+    
     
     var status: Bool!
     // geners: String
@@ -43,18 +43,18 @@ class MovieDetailViewController: UIViewController {
         
         self.navigationItem.title = "Movies"
         // Do any additional setup after loading the view.
-       
-       titleMovies.text = movieCell?.title
-//        genersTxt.text = genero
+        
+        titleMovies.text = movieCell?.title
+        //        genersTxt.text = genero
         dateMovies.text = movieCell?.release_date
-       //genersTxt.text = genero
-       descriptionTxt?.text = movieCell?.overview
+        //genersTxt.text = genero
+        descriptionTxt?.text = movieCell?.overview
         
         titulo = String(movieCell!.title)
         descricao = String(movieCell!.overview)
         imagem = String(movieCell!.poster_path)
         dataMovie = String(movieCell!.release_date)
-       
+        
         status = false
         
         detailImage.kf.indicatorType = .activity
@@ -69,9 +69,8 @@ class MovieDetailViewController: UIViewController {
     }
     
     
-
+    
     @IBAction func favoriteBtnPressed(_ sender: Any) {
-        print(titulo)
         self.save { (complete) in
             if complete {
                 favoriteBtn.isSelected = true
@@ -105,5 +104,5 @@ class MovieDetailViewController: UIViewController {
         let alert = UIAlertController(title: text, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         self.present(alert, animated: true) }
-
+    
 }

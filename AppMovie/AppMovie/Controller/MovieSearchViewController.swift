@@ -78,19 +78,17 @@ class MovieSearchViewController: UIViewController {
         MovieServices.instance.getMovies{ movies in
             DispatchQueue.main.async {
                 self.movie = movies
-                
                 self.movieCollection.reloadData()
-                print(movies)
             }
         }
     }
     
     //MARK: _ HELPER FUNCTIONS
-//    func showDetailViewController(withMovie movie: Result) {
-//        let controller = MovieDetailViewController()
-//        controller.movie = movie
-//        self.navigationController?.pushViewController(controller, animated: true)
-//    }
+    //    func showDetailViewController(withMovie movie: Result) {
+    //        let controller = MovieDetailViewController()
+    //        controller.movie = movie
+    //        self.navigationController?.pushViewController(controller, animated: true)
+    //    }
     
 }
 
@@ -119,7 +117,7 @@ extension MovieSearchViewController: UICollectionViewDataSource{
         let movieCell = movie[indexPath.row]
         
         self.performSegue(withIdentifier: "toDetail", sender: movieCell)
-       //showDetailViewController(withMovie: movieCell)
+        //showDetailViewController(withMovie: movieCell)
     }
     
     
@@ -132,19 +130,19 @@ extension MovieSearchViewController: UICollectionViewDelegateFlowLayout{
         
         return CGSize.init(width: width, height: height)
     }
-
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets.init(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     }
-
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10.0
     }
-
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10.0
     }
-
+    
     //    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
     //
     //        if (self.currentYear != nil || self.currentGenre != nil){
@@ -153,7 +151,7 @@ extension MovieSearchViewController: UICollectionViewDelegateFlowLayout{
     //            return CGSize.zero
     //        }
     //    }
-
+    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize.zero
     }

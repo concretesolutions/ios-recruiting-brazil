@@ -13,12 +13,13 @@ let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
 class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
+    //MARK: - PROPERTIES
     @IBOutlet weak var favoriteTableView: UITableView!
     @IBOutlet weak var movieSearch: UISearchBar!
     
     var movies: [MovieEntity] = []
     
+    //MARK: -INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
