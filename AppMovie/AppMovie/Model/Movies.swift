@@ -23,7 +23,7 @@ struct Result: Codable {
     let title: String?
     let popularity: Double?
     let poster_path: String?
-    let original_language: OriginalLanguage?
+    let original_language: String?
     let original_title: String?
     let genre_ids: [Int]?
     let backdrop_path: String?
@@ -40,7 +40,12 @@ enum OriginalLanguage: String, Codable {
     case sv = "sv"
     case it = "it"
     case zh = "zh"
+    case hi = "hi"
+    case ml = "ml"
     case hr = "hr"
+    case no = "no"
+    case id = "id"
+    case tr = "tr"
     case en = "en"
     case fr = "fr"
     case ja = "ja"
