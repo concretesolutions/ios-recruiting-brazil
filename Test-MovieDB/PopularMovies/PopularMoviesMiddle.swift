@@ -64,8 +64,9 @@ class PopularMoviesMiddle {
         
         isFetchInProgress = true
         RequestData.getPopularData(page: currentPage, completion: { (popular: Popular) in
-                
-                DispatchQueue.main.async {
+
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.isFetchInProgress = false
                     self.popularMovies = Popular(page: popular.page, total_results: popular.total_results, total_pages: popular.total_pages, results: popular.results)
                     
@@ -82,7 +83,8 @@ class PopularMoviesMiddle {
                     }
                 }
             }) { (error) in
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.delegate?.fetchFailed()
                 }
             }
@@ -90,13 +92,17 @@ class PopularMoviesMiddle {
     
     func fetchGenres() {
         RequestData.gerGenres(completion: { (genreWorker: GenreWorker) in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.genres.append(contentsOf: genreWorker.genres)
                 self.delegate?.fetchGenres()
                 print(genreWorker.genres)
             }
         }) { (error) in
-            self.delegate?.errorLoadingGenres()
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.errorLoadingGenres()
+            }
         }
     }
     
@@ -132,8 +138,8 @@ class PopularMoviesMiddle {
             isFetchInProgress = true
             
             RequestData.getSearchData(searchString: stringTrimmed, page: currentPage, completion: { (searchData: SearchResultsWorker) in
-                DispatchQueue.main.async {
-                    print(stringTrimmed)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                 self.isFetchInProgress = false
                 self.searchResults = SearchResultsWorker(page: searchData.page, results: searchData.results, total_pages: searchData.total_pages, total_results: searchData.total_results)
                     if searchData.total_results == 0 {
@@ -151,8 +157,8 @@ class PopularMoviesMiddle {
                     }
                 }
             }) { (error) in
-                DispatchQueue.main.async {
-                    print(error)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.delegate?.fetchFailed()
                 }
             }

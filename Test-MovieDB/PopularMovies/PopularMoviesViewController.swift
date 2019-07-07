@@ -11,8 +11,8 @@ import UIKit
 class PopularMoviesViewController: UIViewController {
     
     //MARK: - OUTLETS
-    @IBOutlet weak var popularMoviesCollectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var popularMoviesCollectionView: PopularMoviesCollectionView!
+    @IBOutlet weak var searchBar: MySearchBar!
     
     //MARK: - Properties
     let contentLayoutData = ContentLayoutData()
@@ -30,12 +30,6 @@ class PopularMoviesViewController: UIViewController {
         
         navigationItem.title = "Movies"
         navigationController?.navigationBar.barTintColor = Colors.yellowNavigation.color
-        searchBar.barTintColor = Colors.yellowNavigation.color
-        
-        let tf = searchBar.value(forKey: "searchField") as! UITextField
-        tf.backgroundColor = Colors.darkYellow.color
-        tf.placeholder = "Search"
-        
         tabBarController?.tabBar.barTintColor = Colors.yellowNavigation.color
         
         popularMoviesCollectionView.isHidden = true
@@ -171,8 +165,6 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
         } else {
             cell.configure(with: middle.movieData(at: indexPath.row), searchData: nil)
         }
-        cell.backgroundColor = .black
-        cell.layer.borderWidth = 1.0
         return cell
     }
     

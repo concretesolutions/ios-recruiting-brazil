@@ -25,6 +25,10 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.backgroundColor = .black
+        self.layer.borderWidth = 1.0
+        
         self.addActivityIndicator()
         
         favoritesMiddle = FavoriteMoviesMiddle(delegate: self)
