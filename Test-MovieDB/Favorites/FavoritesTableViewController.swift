@@ -10,8 +10,8 @@ import UIKit
 
 class FavoritesTableViewController: UIViewController {
     
-    @IBOutlet weak var favoritesTableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var favoritesTableView: FavoriteMoviesTableView!
+    @IBOutlet weak var searchBar: MySearchBar!
     var middle: FavoriteMoviesMiddle!
     var movieDetailWorker: MovieDetailWorker!
     var detailMiddle: MovieDetailMiddle!
@@ -22,11 +22,6 @@ class FavoritesTableViewController: UIViewController {
         
         navigationItem.title = "Movies"
         navigationController?.navigationBar.barTintColor = Colors.yellowNavigation.color
-        searchBar.barTintColor = Colors.yellowNavigation.color
-        
-        let tf = searchBar.value(forKey: "searchField") as! UITextField
-        tf.backgroundColor = Colors.darkYellow.color
-        tf.placeholder = "Search"
         
         middle = FavoriteMoviesMiddle(delegate: self)
         middle.fetchFavorites()
@@ -41,7 +36,7 @@ class FavoritesTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         middle.fetchFavorites()
-        if middle.favoritesFetched.count == 0 {
+        if middle.quantityOfFavorites == 0 {
             alertNoItemsToBeFetched()
         }
         
@@ -79,7 +74,7 @@ extension FavoritesTableViewController: UITableViewDelegate {
 
 extension FavoritesTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return middle.favoritesFetched.count
+        return middle.quantityOfFavorites
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,7 +85,7 @@ extension FavoritesTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let toBeDeleted = middle.favoritesFetched[indexPath.row]
+            let toBeDeleted = middle.favorites[indexPath.row]
             middle.delete(movie: toBeDeleted)
             middle.fetchFavorites()
         }
@@ -100,12 +95,12 @@ extension FavoritesTableViewController: UITableViewDataSource {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = false
         if searchBar.text?.isEmpty == true {
-            let movie = middle.favoritesFetched[indexPath.row]
+            let movie = middle.favorites[indexPath.row]
             indexToBePassed = indexPath.row
             movieDetailWorker = MovieDetailWorker(posterPath: movie.posterPath, title: movie.title ?? "", genreID: movie.genreID ?? "", yearOfRelease: movie.yearOfRelease ?? "", isFavorite: true, description: movie.movieDescription ?? "", id: Int(movie.id))
             performSegue(withIdentifier: "detailMovies", sender: movieDetailWorker)
         } else {
-            let movie = middle.favoritesFetched[indexPath.row]
+            let movie = middle.favorites[indexPath.row]
             indexToBePassed = indexPath.row
             movieDetailWorker = MovieDetailWorker(posterPath: movie.posterPath, title: movie.title ?? "", genreID: movie.genreID ?? "", yearOfRelease: movie.yearOfRelease ?? "", isFavorite: true, description: movie.movieDescription ?? "", id: Int(movie.id))
             performSegue(withIdentifier: "detailMovies", sender: movieDetailWorker)
@@ -147,7 +142,7 @@ extension FavoritesTableViewController: UISearchBarDelegate {
 extension FavoritesTableViewController: FavoriteMoviesMiddleDelegate {
     
     func favoritesFetched() {
-        if middle.favoritesFetched.count == 0 {
+        if middle.quantityOfFavorites == 0 {
             alertNoItemsToBeFetched()
         }
         favoritesTableView.reloadData()
@@ -159,7 +154,7 @@ extension FavoritesTableViewController: FavoriteMoviesMiddleDelegate {
     
     func deletedMovie() {
         favoritesTableView.reloadData()
-        if middle.favoritesFetched.count == 0 {
+        if middle.quantityOfFavorites == 0 {
             alertNoItemsToBeFetched()
         }
     }

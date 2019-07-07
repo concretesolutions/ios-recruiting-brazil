@@ -19,8 +19,16 @@ protocol FavoriteMoviesMiddleDelegate: class {
 class FavoriteMoviesMiddle {
     
     let favoriteMovies = FavoriteMovies()
-    var favoritesFetched: [FavoriteMovies] = []
+    private var favoritesFetched: [FavoriteMovies] = []
     weak var delegate: FavoriteMoviesMiddleDelegate?
+    
+    var quantityOfFavorites: Int {
+        return favoritesFetched.count
+    }
+    
+    var favorites: [FavoriteMovies] {
+        return favoritesFetched
+    }
     
     init(delegate: FavoriteMoviesMiddleDelegate) {
         self.delegate = delegate
@@ -32,7 +40,7 @@ class FavoriteMoviesMiddle {
     }
     
     func movieData(at index: Int) -> FavoriteMovies {
-        return favoritesFetched[index]
+        return favorites[index]
     }
     
     func filteringData(searchString: String) {

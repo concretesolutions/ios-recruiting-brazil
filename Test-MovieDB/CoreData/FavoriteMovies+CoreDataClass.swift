@@ -30,7 +30,7 @@ public class FavoriteMovies: NSManagedObject {
             try fetchedResultsController.performFetch()
             fetchedResultsController.delegate = self as? NSFetchedResultsControllerDelegate
         } catch let error as NSError {
-            print(error)
+            print("porra de erro \(error.localizedDescription)")
         }
     }
     
@@ -73,7 +73,7 @@ public class FavoriteMovies: NSManagedObject {
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
-            print(error.description)
+            print("porra de erro \(error.localizedDescription)")
         }
     }
 }
