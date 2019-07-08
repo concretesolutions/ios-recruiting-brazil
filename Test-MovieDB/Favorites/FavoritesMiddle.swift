@@ -43,6 +43,41 @@ class FavoriteMoviesMiddle {
         return favorites[index]
     }
     
+    func filterByPeriodAndGenre(genre: Int?, period: Int?) {
+        let request = FavoriteMovies.fetchRequest() as NSFetchRequest<FavoriteMovies>
+        let sort = NSSortDescriptor(keyPath: \FavoriteMovies.title, ascending: true)
+        request.sortDescriptors = [sort]
+        
+        if genre == nil && period != nil {
+            guard let newPeriod = period else { return }
+            let predicate = NSPredicate(format: "yearOfRelease = %@", String(newPeriod))
+            request.predicate = predicate
+            
+        } else if period == nil && genre != nil {
+            guard let newGenre = genre else { return }
+            let predicate = NSPredicate(format: "id = %i", newGenre)
+            request.predicate = predicate
+            
+        } else if period != nil && genre != nil {
+            if let predGenre = genre, let predPedio = period {
+                let genrePredicate = NSPredicate(format: "id = %i", predGenre)
+                let periodPredicate = NSPredicate(format: "yearOfRelease = %@", String(predPedio))
+                let predicates = NSCompoundPredicate(type: .and, subpredicates: [genrePredicate, periodPredicate])
+                request.predicate = predicates
+            }
+        }
+
+        do {
+            favoriteMovies.fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: favoriteMovies.context, sectionNameKeyPath: nil, cacheName: nil)
+            try favoriteMovies.fetchedResultsController.performFetch()
+            favoritesFetched = favoriteMovies.fetchedResultsController.fetchedObjects ?? []
+            delegate?.favoritesFetched()
+        } catch let error as NSError {
+            print(error.description)
+        }
+        
+    }
+    
     func filteringData(searchString: String) {
         let request = FavoriteMovies.fetchRequest() as NSFetchRequest<FavoriteMovies>
         let sort = NSSortDescriptor(keyPath: \FavoriteMovies.title, ascending: true)

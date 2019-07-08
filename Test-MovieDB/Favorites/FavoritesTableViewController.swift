@@ -31,6 +31,8 @@ class FavoritesTableViewController: UIViewController {
         searchBar.delegate = self
         
         self.tabBarController?.tabBar.isHidden = false
+        
+        setupFilterButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,17 +45,18 @@ class FavoritesTableViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailMovies" {
-        let vc = segue.destination as! MovieDetailViewController
-        detailMiddle = MovieDetailMiddle(delegate: vc)
-        vc.middle = detailMiddle
-        vc.middle.favoriteMoviesMiddle = middle
-        vc.middle.indexOfMovie = indexToBePassed
-        //vc.middle.fetchGenreID(IDs: movieDetailWorker.genreID )
-        self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
+            let vc = segue.destination as! MovieDetailViewController
+            detailMiddle = MovieDetailMiddle(delegate: vc)
+            vc.middle = detailMiddle
+            vc.middle.favoriteMoviesMiddle = middle
+            vc.middle.indexOfMovie = indexToBePassed
+            self.detailMiddle.movieToLoad = sender as? MovieDetailWorker
+        } else if segue.identifier == "filter" {
+            let vc = segue.destination as! FilterViewController
+            vc.delegate = self
+            vc.middle = FilterMiddle(delegate: vc)
         }
     }
     
@@ -62,6 +65,15 @@ class FavoritesTableViewController: UIViewController {
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(alertAction)
         self.present(alert, animated: true)
+    }
+    
+    func setupFilterButton() {
+        let filterButton = UIBarButtonItem(image: UIImage(named: "FilterIcon"), style: .plain, target: self, action: #selector(filter))
+        self.navigationItem.rightBarButtonItem = filterButton
+    }
+    
+    @objc func filter() {
+        self.performSegue(withIdentifier: "filter", sender: String())
     }
     
 }
@@ -158,4 +170,12 @@ extension FavoritesTableViewController: FavoriteMoviesMiddleDelegate {
             alertNoItemsToBeFetched()
         }
     }
+}
+
+extension FavoritesTableViewController: FilterViewControllerDelegate {
+    
+    func didApplyFilter(with id: Int?, and period: Int?) {
+        self.middle.filterByPeriodAndGenre(genre: id, period: period)
+    }
+    
 }

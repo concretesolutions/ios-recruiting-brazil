@@ -96,7 +96,6 @@ class PopularMoviesMiddle {
                 guard let self = self else { return }
                 self.genres.append(contentsOf: genreWorker.genres)
                 self.delegate?.fetchGenres()
-                print(genreWorker.genres)
             }
         }) { (error) in
             DispatchQueue.main.async { [weak self] in
