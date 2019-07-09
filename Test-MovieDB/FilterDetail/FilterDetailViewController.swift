@@ -9,9 +9,9 @@
 import UIKit
 
 protocol FilterDetailViewControllerDelegate: class {
-    func selectedGenre(id: Int)
+    func selectedGenre(id: String)
     func selectedPeriod(date: Int)
-    func deselectedGenre(id: Int)
+    func deselectedGenre(id: String)
     func deselectedPeriod(date: Int)
 }
 
@@ -28,15 +28,16 @@ class FilterDetailViewController: UIViewController {
         
         if middle.filter == .genre {
             middle.requestGenres()
+            self.filterTableView.allowsMultipleSelection = false
         } else {
             middle.requestDates()
+            self.filterTableView.allowsMultipleSelection = false
         }
     }
     
     func setupTableView() {
         self.filterTableView.delegate = self
         self.filterTableView.dataSource = self
-        self.filterTableView.allowsMultipleSelection = false
     }
 
 }
@@ -45,7 +46,7 @@ extension FilterDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.middle.filter == .genre {
-            delegate?.selectedGenre(id: self.middle.data.genres[indexPath.row].id)
+            delegate?.selectedGenre(id: self.middle.data.genres[indexPath.row].name)
         } else {
             delegate?.selectedPeriod(date: self.middle.data.dates[indexPath.row])
         }
@@ -53,7 +54,7 @@ extension FilterDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if self.middle.filter == .genre {
-            delegate?.deselectedGenre(id: self.middle.data.genres[indexPath.row].id)
+            delegate?.deselectedGenre(id: self.middle.data.genres[indexPath.row].name)
         } else {
             delegate?.deselectedPeriod(date: self.middle.data.dates[indexPath.row])
         }

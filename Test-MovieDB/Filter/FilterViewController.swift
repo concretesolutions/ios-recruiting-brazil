@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterViewControllerDelegate: class {
-    func didApplyFilter(with id: Int?, and period: Int?)
+    func didApplyFilter(with id: String?, and period: Int?)
 }
 
 class FilterViewController: UIViewController {
@@ -34,8 +34,10 @@ class FilterViewController: UIViewController {
     
     
     @IBAction func applyButtonAction(_ sender: ApplyButton) {
-        delegate?.didApplyFilter(with: self.middle.genres, and: self.middle.period)
         self.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.delegate?.didApplyFilter(with: self.middle.genres, and: self.middle.period)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,6 +67,12 @@ extension FilterViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filter", for: indexPath) as! FilterTableViewCell
         cell.textLabel?.text = middle.rowNames[indexPath.row]
         cell.accessoryType = .disclosureIndicator
+        if indexPath.row == 0 {
+            cell.detailTextLabel?.text = String(describing: middle.period)
+        } else {
+            cell.detailTextLabel?.text = middle.genres
+        }
+        
         return cell
     }
 }
@@ -76,22 +84,26 @@ extension FilterViewController: FilterMiddleDelegate {
 extension FilterViewController: FilterDetailViewControllerDelegate {
     
     
-    func deselectedGenre(id: Int) {
+    func deselectedGenre(id: String) {
         self.middle.genres = nil
+        self.genreAndDatesTableView.reloadData()
     }
     
     func deselectedPeriod(date: Int) {
         self.middle.period = nil
+        self.genreAndDatesTableView.reloadData()
     }
     
     
-    func selectedGenre(id: Int) {
+    func selectedGenre(id: String) {
         self.middle.genres = id
+        self.genreAndDatesTableView.reloadData()
         
     }
     
     func selectedPeriod(date: Int) {
         self.middle.period = date
+        self.genreAndDatesTableView.reloadData()
     }
     
 }

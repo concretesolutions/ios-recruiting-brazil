@@ -43,25 +43,29 @@ class FavoriteMoviesMiddle {
         return favorites[index]
     }
     
-    func filterByPeriodAndGenre(genre: Int?, period: Int?) {
+    func filterByPeriodAndGenre(genre: String?, period: Int?) {
         let request = FavoriteMovies.fetchRequest() as NSFetchRequest<FavoriteMovies>
         let sort = NSSortDescriptor(keyPath: \FavoriteMovies.title, ascending: true)
         request.sortDescriptors = [sort]
         
         if genre == nil && period != nil {
             guard let newPeriod = period else { return }
-            let predicate = NSPredicate(format: "yearOfRelease = %@", String(newPeriod))
+            let predicate = NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [#keyPath(FavoriteMovies.yearOfRelease), String(newPeriod)])
             request.predicate = predicate
             
         } else if period == nil && genre != nil {
             guard let newGenre = genre else { return }
-            let predicate = NSPredicate(format: "id = %i", newGenre)
-            request.predicate = predicate
+            let predicate = NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [#keyPath(FavoriteMovies.genreID), newGenre])
+            
+            let commaPredicate = NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [#keyPath(FavoriteMovies.genreID), "\(newGenre),"])
+            
+            let predicates = NSCompoundPredicate(type: .or, subpredicates: [predicate, commaPredicate])
+            request.predicate = predicates
             
         } else if period != nil && genre != nil {
             if let predGenre = genre, let predPedio = period {
-                let genrePredicate = NSPredicate(format: "id = %i", predGenre)
-                let periodPredicate = NSPredicate(format: "yearOfRelease = %@", String(predPedio))
+                let genrePredicate = NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [#keyPath(FavoriteMovies.genreID), predGenre])
+                let periodPredicate = NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [#keyPath(FavoriteMovies.yearOfRelease), String(predPedio)])
                 let predicates = NSCompoundPredicate(type: .and, subpredicates: [genrePredicate, periodPredicate])
                 request.predicate = predicates
             }
@@ -108,4 +112,14 @@ class FavoriteMoviesMiddle {
         favoriteMovies.removeFavorite(movie: movie)
         delegate?.deletedMovie()
     }
+    
+    func convertDateFormat(input: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: input)
+        dateFormatter.dateFormat = "yyyy"
+        guard let returnDate = date else { return "" }
+        return dateFormatter.string(from: returnDate)
+    }
+    
 }

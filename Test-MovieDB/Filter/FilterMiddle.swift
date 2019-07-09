@@ -16,7 +16,7 @@ class FilterMiddle {
     
     private let tableViewData = FilterData()
     weak var delegate: FilterMiddleDelegate?
-    var genres: Int?
+    var genres: String?
     var period: Int?
     
     var rowNames: [String] {

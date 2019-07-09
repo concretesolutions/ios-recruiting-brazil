@@ -45,6 +45,10 @@ class FavoritesTableViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailMovies" {
             let vc = segue.destination as! MovieDetailViewController
@@ -174,7 +178,7 @@ extension FavoritesTableViewController: FavoriteMoviesMiddleDelegate {
 
 extension FavoritesTableViewController: FilterViewControllerDelegate {
     
-    func didApplyFilter(with id: Int?, and period: Int?) {
+    func didApplyFilter(with id: String?, and period: Int?) {
         self.middle.filterByPeriodAndGenre(genre: id, period: period)
     }
     
