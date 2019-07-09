@@ -12,6 +12,6 @@ class DataProvider {
     static let shared = DataProvider()
 
     var remoteDataProvider: MoviesProvider = RemoteMoviesProvider()
-//    var localProvider: 
+    var favoritesProvider: FavoritesProvider = UserDefaultsFavoriteProvider()
     
 }

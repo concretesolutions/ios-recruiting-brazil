@@ -10,8 +10,7 @@ import Foundation
 
 
 protocol FavoritesProvider {
-    func addNew(withId id: Int)
-    func delete(withId id: Int)
+    func addNew(withId id: Int) -> [Int]
+    func delete(withId id: Int) -> [Int]
     func getAllIds() -> [Int]
-    
 }

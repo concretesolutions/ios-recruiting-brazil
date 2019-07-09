@@ -9,27 +9,32 @@
 import Foundation
 
 class UserDefaultsFavoriteProvider {
-    let defaults = UserDefaults.standard
-    let identifier = "favorites_ids"
+    private let defaults = UserDefaults.standard
+    private let identifier = "favorites_ids"
 }
 
 extension UserDefaultsFavoriteProvider: FavoritesProvider {
-    func addNew(withId id: Int) {
+    func addNew(withId id: Int) -> [Int] {
         guard let value = self.defaults.value(forKey: self.identifier),
             var allIds = value as? [Int] else {
                 let ids = [id]
                 self.defaults.setValue(ids, forKey: self.identifier)
-                return
+                return ids
+        }
+        if allIds.contains(id) {
+            return allIds
+        } else {
+            allIds.append(id)
+            self.defaults.setValue(allIds, forKey: self.identifier)
+            return allIds
         }
         
-        allIds.append(id)
-        self.defaults.setValue(allIds, forKey: self.identifier)
     }
     
-    func delete(withId id: Int) {
+    func delete(withId id: Int) -> [Int] {
         guard let value = self.defaults.value(forKey: self.identifier),
             var allIds = value as? [Int] else {
-                return
+                return []
         }
         
         allIds = allIds.filter { (element) -> Bool in
@@ -37,7 +42,7 @@ extension UserDefaultsFavoriteProvider: FavoritesProvider {
         }
         
         self.defaults.setValue(allIds, forKey: self.identifier)
-
+        return allIds
         
     }
     
