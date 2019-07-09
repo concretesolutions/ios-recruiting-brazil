@@ -14,6 +14,25 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.setupViewControllers()
+        self.setupVisual()
+    }
+    
+    func setupViewControllers() {
+        let popular = PopularMoviesViewController()
+        popular.tabBarItem = UITabBarItem(title: "Movies", image: #imageLiteral(resourceName: "list_icon"), tag: 0)
+        
+        let favorites = FavoritesMoviesViewController()
+        favorites.tabBarItem = UITabBarItem(title: "Favorites", image: #imageLiteral(resourceName: "favorite_empty_icon"), tag: 1)
+
+        let tabBarViewControllers = [popular,
+                                      favorites]
+        
+        self.viewControllers = tabBarViewControllers
+    }
+    
+    func setupVisual() {
+        self.tabBar.barTintColor = .yellow
     }
     
 
