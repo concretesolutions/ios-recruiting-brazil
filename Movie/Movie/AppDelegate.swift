@@ -20,10 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //setup navigation and begin the app
         let root = TabBarController()
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = root
-        window?.makeKeyAndVisible()
+        let navigationController = NavigationViewController()
+        navigationController.pushViewController(root, animated: false)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
         
         return true
     }

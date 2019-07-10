@@ -13,4 +13,5 @@ protocol FavoritesProvider {
     func addNew(withId id: Int) -> [Int]
     func delete(withId id: Int) -> [Int]
     func getAllIds() -> [Int]
+    func isFavorite(_ id: Int) -> Bool
 }

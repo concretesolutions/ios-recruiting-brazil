@@ -55,4 +55,13 @@ extension UserDefaultsFavoriteProvider: FavoritesProvider {
         return allIds
     }
     
+    func isFavorite(_ id: Int) -> Bool {
+        guard let value = self.defaults.value(forKey: self.identifier),
+            let allIds = value as? [Int] else {
+                return false
+        }
+        
+        return allIds.contains(id)
+    }
+    
 }
