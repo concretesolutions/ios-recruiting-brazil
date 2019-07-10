@@ -12,10 +12,16 @@ class NavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar.isHidden = false
-        self.navigationBar.tintColor = .yellow
-        self.navigationBar.topItem?.title = "Movie"
+        
+        
     }
-  
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        DispatchQueue.main.async {
+            self.navigationBar.isHidden = false
+            self.navigationBar.tintColor = .yellow
+            self.navigationBar.topItem?.title = "Movie"
+        }
+    }
 }

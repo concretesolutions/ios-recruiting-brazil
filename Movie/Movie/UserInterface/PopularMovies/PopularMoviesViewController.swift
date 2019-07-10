@@ -21,14 +21,43 @@ class PopularMoviesViewController: UIViewController {
         }
     }
     
+    let searchBar = UISearchBar()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.view.backgroundColor = .white
         self.viewModel.delegate = self
         self.viewModel.fetchMovies()
+        self.setupNavigationAndSearchBar()
         self.setupCollectionView()
         
+        
     }
+    
+    fileprivate func setupNavigationAndSearchBar() {
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.barStyle = .black
+        self.navigationController?.navigationBar.barTintColor = .yellow
+        
+        self.searchBar.placeholder = "Search"
+        self.searchBar.delegate = self
+        self.searchBar.frame = CGRect(x: 0, y: 0, width: (navigationController?.view.bounds.size.width)!, height: 64)
+        self.searchBar.barStyle = .default
+        self.searchBar.isTranslucent = false
+        self.searchBar.barTintColor = .yellow
+        view.addSubview(self.searchBar)
+        self.searchBar.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(self.view)
+        }
+        
+    }
+
     
     fileprivate func setupCollectionView() {
         self.collectionView.delegate = self
@@ -47,7 +76,8 @@ class PopularMoviesViewController: UIViewController {
         self.collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCollectionViewCell")
         
         self.collectionView.snp.makeConstraints { (make) in
-            make.top.left.bottom.right.equalTo(self.view)
+            make.left.bottom.right.equalTo(self.view)
+            make.top.equalTo(self.searchBar.snp.bottom)
         }
     }
  
@@ -68,9 +98,21 @@ extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionVie
     
 }
 
+extension PopularMoviesViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.viewModel.filterBySearch(searchText)
+    }
+}
+
+
 extension PopularMoviesViewController: PopularMoviesDelegate {
     func updateCellsViewModels(_ cellsViewModels: [MovieCollectionViewCellViewModel]) {
         self.cellsViewModels = cellsViewModels
     }
    
 }
+

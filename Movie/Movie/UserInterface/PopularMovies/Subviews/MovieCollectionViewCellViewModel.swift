@@ -51,5 +51,10 @@ class MovieCollectionViewCellViewModel {
         self.delegate?.updateUIFavoriteState()
     }
     
+    func isOnSearch(_ searchText: String) -> Bool {
+        return self.movie.title!.uppercased().contains(searchText.uppercased())
+        
+    }
+    
     
 }
