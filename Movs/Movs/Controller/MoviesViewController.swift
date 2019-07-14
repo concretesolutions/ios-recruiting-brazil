@@ -31,8 +31,15 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
-        navigationItem.hidesSearchBarWhenScrolling = false
+//        let searchController = UISearchController(searchResultsController: nil)
+//        navigationItem.hidesSearchBarWhenScrolling = false
+//        searchController.searchResultsUpdater = nil
+//        searchController.obscuresBackgroundDuringPresentation = false
+//        searchController.searchBar.placeholder = "Search Movies"
+//        navigationItem.searchController = searchController
+//        definesPresentationContext = true
+//        UISearchBar.appearance().tintColor = UIColor.black
+        
         
         TMDBClient.loadMovies(onComplete: { (movies) in
             self.moviesArray = movies.results
@@ -55,6 +62,7 @@ class MoviesViewController: UIViewController, UICollectionViewDelegate, UICollec
 //                <#code#>
 //            }
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -133,6 +141,3 @@ extension UIViewController {
         }
     }
 }
-
-////UIViewController.displaySpinner(onView: self.view)
-//UIViewController.removeSpinner(spinner: sv)
