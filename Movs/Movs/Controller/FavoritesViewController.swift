@@ -23,9 +23,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
 
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
-        
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
-        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
