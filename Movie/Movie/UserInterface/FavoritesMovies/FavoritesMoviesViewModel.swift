@@ -40,6 +40,12 @@ class FavoritesMoviesViewModel {
         }
     }
     
+    func removeFavorite(with cellViewModel: FavoriteTableViewCellViewModel) {
+        
+        let _ = DataProvider.shared.favoritesProvider.delete(withId: cellViewModel.movieId)
+        
+    }
+    
     func filterBySearch(_ searchText: String) {
         self.filteredCellsViewModels = self.cellsViewModels.filter({ (model) -> Bool in
             return !searchText.isEmpty ? model.isOnSearch(searchText) : true

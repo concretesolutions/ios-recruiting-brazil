@@ -17,11 +17,7 @@ class FavoritesMoviesViewController: UIViewController {
     
     var viewModel = FavoritesMoviesViewModel()
     
-    var cellsViewModels: [FavoriteTableViewCellViewModel] = [] {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
+    var cellsViewModels: [FavoriteTableViewCellViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +40,31 @@ class FavoritesMoviesViewController: UIViewController {
         self.searchBar.placeholder = "Search"
         self.searchBar.delegate = self
         self.searchBar.frame = CGRect(x: 0, y: 0, width: (navigationController?.view.bounds.size.width)!, height: 64)
-        self.searchBar.barStyle = .default
-        self.searchBar.isTranslucent = false
+        self.searchBar.barStyle = .blackTranslucent
         self.searchBar.barTintColor = ApplicationColors.yellow.uiColor
+        
+        let accessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 44))
+        accessoryView.backgroundColor = .black
+        let doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 70))
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.titleLabel?.textColor = ApplicationColors.yellow.uiColor
+        doneButton.addTarget(self, action: #selector(self.closeKeyboard), for: .touchUpInside)
+        accessoryView.addSubview(doneButton)
+        doneButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.right.equalToSuperview().inset(15)
+        }
+        
+        self.searchBar.inputAccessoryView = accessoryView
         view.addSubview(self.searchBar)
         self.searchBar.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(self.view)
         }
         
+    }
+    
+    @objc func closeKeyboard() {
+        self.view.endEditing(true)
     }
     
     func setupTableView() {
@@ -89,12 +102,26 @@ extension FavoritesMoviesViewController: UITableViewDelegate, UITableViewDataSou
         return 120
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            self.viewModel.removeFavorite(with: self.cellsViewModels[indexPath.row])
+            self.cellsViewModels.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfavorite"
+    }
+    
 }
 
 
 extension FavoritesMoviesViewController: FavoritesMoviesDelegate {
     func updateCellsViewModels(_ cellsViewModels: [FavoriteTableViewCellViewModel]) {
         self.cellsViewModels = cellsViewModels
+        self.tableView.reloadData()
     }
     
 }

@@ -24,6 +24,9 @@ class FavoriteTableViewCellViewModel {
         self.setupComponents()
     }
     
+    var movieId: Int {
+        return self.movie.id!
+    }
     
     func setupComponents() {
         self.name = self.movie.title!

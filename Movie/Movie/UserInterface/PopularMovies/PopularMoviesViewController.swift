@@ -44,20 +44,38 @@ class PopularMoviesViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barStyle = .black
         self.navigationController?.navigationBar.barTintColor = ApplicationColors.yellow.uiColor
-
+        
         self.searchBar.placeholder = "Search"
         self.searchBar.delegate = self
         self.searchBar.frame = CGRect(x: 0, y: 0, width: (navigationController?.view.bounds.size.width)!, height: 64)
-        self.searchBar.barStyle = .default
-        self.searchBar.isTranslucent = false
+        self.searchBar.barStyle = .blackTranslucent
         self.searchBar.barTintColor = ApplicationColors.yellow.uiColor
+        
+        let accessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 44))
+        accessoryView.backgroundColor = .black
+        let doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 70))
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.titleLabel?.textColor = ApplicationColors.yellow.uiColor
+        doneButton.addTarget(self, action: #selector(self.closeKeyboard), for: .touchUpInside)
+        accessoryView.addSubview(doneButton)
+        doneButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.right.equalToSuperview().inset(15)
+        }
+        
+        self.searchBar.inputAccessoryView = accessoryView
         view.addSubview(self.searchBar)
         self.searchBar.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(self.view)
         }
         
+        
     }
 
+    @objc func closeKeyboard() {
+        self.view.endEditing(true)
+    }
+    
     
     fileprivate func setupCollectionView() {
         self.collectionView.delegate = self
