@@ -43,14 +43,14 @@ class PopularMoviesViewController: UIViewController {
     fileprivate func setupNavigationAndSearchBar() {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barStyle = .black
-        self.navigationController?.navigationBar.barTintColor = .yellow
-        
+        self.navigationController?.navigationBar.barTintColor = ApplicationColors.yellow.uiColor
+
         self.searchBar.placeholder = "Search"
         self.searchBar.delegate = self
         self.searchBar.frame = CGRect(x: 0, y: 0, width: (navigationController?.view.bounds.size.width)!, height: 64)
         self.searchBar.barStyle = .default
         self.searchBar.isTranslucent = false
-        self.searchBar.barTintColor = .yellow
+        self.searchBar.barTintColor = ApplicationColors.yellow.uiColor
         view.addSubview(self.searchBar)
         self.searchBar.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(self.view)

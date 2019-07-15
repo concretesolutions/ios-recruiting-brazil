@@ -37,14 +37,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func setupVisualComponents() {
+    private func setupVisualComponents() {
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.favoriteButton)
 
         
         self.backgroundView = UIView(frame: .zero)
-        self.backgroundView?.backgroundColor = .blue
+        self.backgroundView?.backgroundColor = ApplicationColors.blue.uiColor
         self.backgroundView?.snp.makeConstraints({ (make) in
             make.top.left.right.bottom.equalTo(self.contentView).inset(5)
         })
@@ -59,6 +59,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.titleLabel.numberOfLines = 0
         self.titleLabel.adjustsFontForContentSizeCategory = true
         self.titleLabel.minimumScaleFactor = 0.5
+        self.titleLabel.textColor = .white
         self.titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.imageView.snp.bottom)
             make.left.equalTo(self.imageView).offset(10)

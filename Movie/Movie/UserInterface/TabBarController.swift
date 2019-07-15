@@ -32,7 +32,7 @@ class TabBarController: UITabBarController {
     }
     
     func setupVisual() {
-        self.tabBar.barTintColor = .yellow
+        self.tabBar.barTintColor = ApplicationColors.yellow.uiColor
     }
     
     
