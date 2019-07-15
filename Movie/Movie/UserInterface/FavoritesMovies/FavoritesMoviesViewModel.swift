@@ -19,10 +19,19 @@ class FavoritesMoviesViewModel {
         }
     }
     
+    
     var filteredCellsViewModels:  [FavoriteTableViewCellViewModel] = [] {
         didSet {
             self.delegate?.updateCellsViewModels(self.filteredCellsViewModels)
         }
+    }
+    
+    func getDetailsViewModel(cellViewModel: FavoriteTableViewCellViewModel) -> MovieDetailsViewModel? {
+        let selectedMovie = self.filteredCellsViewModels.filter { (model) -> Bool in
+            return model.movieId == cellViewModel.movieId
+        }.first?.movie
+        guard let movie = selectedMovie else {return nil}
+        return MovieDetailsViewModel(movie: movie)
     }
     
     func fetchMovies() {

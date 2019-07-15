@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MovieCollectionViewCellViewModel {
-    private var movie: Movie
+    var movie: Movie
     var image: UIImage!
     var name: String!
     var isFavorited: Bool!
@@ -21,6 +21,9 @@ class MovieCollectionViewCellViewModel {
         self.setupComponents()
     }
     
+    var movieId: Int {
+        return self.movie.id!
+    }
     
     func setupComponents() {
         self.name = self.movie.title!

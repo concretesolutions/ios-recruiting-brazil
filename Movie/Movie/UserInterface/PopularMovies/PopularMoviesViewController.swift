@@ -112,6 +112,16 @@ extension PopularMoviesViewController: UICollectionViewDelegate, UICollectionVie
         cell.viewModel = self.cellsViewModels[indexPath.row]
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewModel = self.viewModel.getDetailsViewModel(cellViewModel: self.cellsViewModels[indexPath.row])
+        let detailsView = MovieDetailsViewController()
+        detailsView.viewModel = viewModel
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(detailsView, animated: true)
+            
+        }
+    }
    
     
 }

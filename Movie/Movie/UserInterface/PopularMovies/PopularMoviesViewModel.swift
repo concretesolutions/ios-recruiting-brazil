@@ -25,6 +25,14 @@ class PopularMoviesViewModel {
         }
     }
     
+    func getDetailsViewModel(cellViewModel: MovieCollectionViewCellViewModel) -> MovieDetailsViewModel? {
+        let selectedMovie = self.filteredCellsViewModels.filter { (model) -> Bool in
+            return model.movieId == cellViewModel.movieId
+            }.first?.movie
+        guard let movie = selectedMovie else {return nil}
+        return MovieDetailsViewModel(movie: movie)
+    }
+    
     func fetchMovies() {
         DataProvider.shared.remoteDataProvider.getPopularMovies(page: 1) { (movies, error) in
             if let _ = error {

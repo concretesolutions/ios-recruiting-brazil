@@ -11,7 +11,7 @@ import UIKit
 import SwiftDate
 
 class FavoriteTableViewCellViewModel {
-    private var movie: Movie
+    var movie: Movie
     var image: UIImage!
     var name: String!
     var year: String!

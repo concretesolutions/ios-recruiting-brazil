@@ -70,7 +70,8 @@ class FavoritesMoviesViewController: UIViewController {
     func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.allowsSelection = false
+        self.tableView.allowsSelection = true
+        
         self.tableView.separatorColor = .white
         self.tableView.separatorInset = UIEdgeInsets.zero
         self.view.addSubview(self.tableView)
@@ -108,6 +109,16 @@ extension FavoritesMoviesViewController: UITableViewDelegate, UITableViewDataSou
             self.viewModel.removeFavorite(with: self.cellsViewModels[indexPath.row])
             self.cellsViewModels.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewModel = self.viewModel.getDetailsViewModel( cellViewModel: self.cellsViewModels[indexPath.row])
+        let detailsView = MovieDetailsViewController()
+        detailsView.viewModel = viewModel
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(detailsView, animated: true)
+
         }
     }
     
