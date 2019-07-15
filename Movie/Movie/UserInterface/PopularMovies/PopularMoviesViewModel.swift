@@ -36,7 +36,7 @@ class PopularMoviesViewModel {
     func fetchMovies() {
         DataProvider.shared.remoteDataProvider.getPopularMovies(page: 1) { (movies, error) in
             if let _ = error {
-                // show error message
+                self.delegate?.showAlertWith(title: "Error", andMessage: "Sorry! Could not fetch movies")
             } else if let movies = movies {
                 let cellsViewModels = movies.map({ (movie) -> MovieCollectionViewCellViewModel in
                     return MovieCollectionViewCellViewModel(movie: movie)

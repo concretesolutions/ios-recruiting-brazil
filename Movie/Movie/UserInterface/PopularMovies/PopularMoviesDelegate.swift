@@ -10,4 +10,5 @@ import Foundation
 
 protocol PopularMoviesDelegate {
     func updateCellsViewModels(_ cellsViewModels:[MovieCollectionViewCellViewModel])
+    func showAlertWith(title: String, andMessage message: String)
 }

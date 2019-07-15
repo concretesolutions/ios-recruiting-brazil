@@ -12,5 +12,6 @@ import Foundation
     
 protocol FavoritesMoviesDelegate {
     func updateCellsViewModels(_ cellsViewModels:[FavoriteTableViewCellViewModel])
+    func showAlertWith(title: String, andMessage message: String) 
 }
 

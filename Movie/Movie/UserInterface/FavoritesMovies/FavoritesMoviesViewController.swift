@@ -130,6 +130,21 @@ extension FavoritesMoviesViewController: UITableViewDelegate, UITableViewDataSou
 
 
 extension FavoritesMoviesViewController: FavoritesMoviesDelegate {
+    func showAlertWith(title: String, andMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                print("Your name: \(name)")
+            }
+        }))
+        
+        self.present(alert, animated: true)
+        
+    }
+    
     func updateCellsViewModels(_ cellsViewModels: [FavoriteTableViewCellViewModel]) {
         self.cellsViewModels = cellsViewModels
         self.tableView.reloadData()

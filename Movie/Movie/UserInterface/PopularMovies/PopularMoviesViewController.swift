@@ -138,6 +138,20 @@ extension PopularMoviesViewController: UISearchBarDelegate {
 
 
 extension PopularMoviesViewController: PopularMoviesDelegate {
+    func showAlertWith(title: String, andMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                print("Your name: \(name)")
+            }
+        }))
+        
+        self.present(alert, animated: true)
+    }
+    
     func updateCellsViewModels(_ cellsViewModels: [MovieCollectionViewCellViewModel]) {
         self.cellsViewModels = cellsViewModels
     }
