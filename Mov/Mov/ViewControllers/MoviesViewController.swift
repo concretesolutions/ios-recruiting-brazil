@@ -13,20 +13,42 @@ class MoviesViewController: UIViewController {
     
     let screen = MoviesViewControllerScreen()
 
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func loadView() {
         self.view = screen
         self.view.backgroundColor = .green
+        
+        setupSearchController()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
+        
 
+
+    }
 
 }
 
+extension MoviesViewController: UISearchResultsUpdating {
+    
+    func setupSearchController(){
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.tintColor = UIColor(red:0.18, green:0.19, blue:0.27, alpha:1.00)
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
+        // https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
+    }
+}
 
 
 
