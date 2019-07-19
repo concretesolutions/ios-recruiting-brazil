@@ -16,8 +16,8 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
-    @IBOutlet weak var voteAverage: UILabel!
     @IBOutlet weak var favButton: UIButton!
+    @IBOutlet weak var voteAverage: UILabel!
     
     var downloadTask: URLSessionDownloadTask?
     
@@ -114,8 +114,8 @@ class MovieDetailViewController: UIViewController {
     }
     
     // MARK: -Action (Favorite/UnFavourite Movie into CoreData)
-    @IBAction func favMovie(_ sender: UIButton) {
-        
+    
+    @IBAction func favMovie(_ sender: Any) {
         //MARK: -UnFavourite
         for data in favMovies {
             if data.value(forKey: "title") as? String == titleLabel.text {
@@ -172,6 +172,7 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+    
     // MARK: -Update the Interface for Movies
     func updateUI() {
         retrieveCoreData()
@@ -190,7 +191,11 @@ class MovieDetailViewController: UIViewController {
             yearLabel.text = "No Results"
         }
         
-        voteAverage.text = String(format:"%.1f", (selectedMovie?.vote_average!)!)
+        if let vote = selectedMovie?.vote_average {
+            voteAverage.text = String(format:"%.1f", vote)
+        } else {
+            voteAverage.text = "0"
+        }
         
         dataSource.getGenreRequest(completion: { success in
             if !success {
