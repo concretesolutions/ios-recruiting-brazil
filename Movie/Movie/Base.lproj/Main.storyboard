@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="1457" y="164"/>
         </scene>
-        <!--View Controller-->
+        <!--Movie View Controller-->
         <scene sceneID="GYd-rZ-ivG">
             <objects>
-                <viewController id="9xM-lS-Wgm" sceneMemberID="viewController">
+                <viewController id="9xM-lS-Wgm" customClass="MovieViewController" customModule="Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9ve-aD-AQ2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,10 +51,13 @@
                         <viewLayoutGuide key="safeArea" id="wB4-Ey-iea"/>
                     </view>
                     <navigationItem key="navigationItem" id="iye-FH-6tn"/>
+                    <connections>
+                        <outlet property="collectionView" destination="rZx-pr-ynw" id="aej-4S-gLA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ypY-6p-ueU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1456.875" y="-512.32394366197184"/>
+            <point key="canvasLocation" x="1457" y="-512"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Mwg-YU-vld">
