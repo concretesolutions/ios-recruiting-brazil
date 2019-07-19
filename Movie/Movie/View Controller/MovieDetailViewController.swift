@@ -16,8 +16,8 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
-    @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var voteAverage: UILabel!
+    @IBOutlet weak var favButton: UIButton!
     
     var downloadTask: URLSessionDownloadTask?
     
