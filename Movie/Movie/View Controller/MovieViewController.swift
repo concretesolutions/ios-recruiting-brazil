@@ -165,7 +165,7 @@ extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSou
         // Layout subviews, this will let labels on this cell to set preferredMaxLayoutWidth
         cell!.layoutIfNeeded()
         
-        var size = cell!.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        var size = cell!.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         // Still need to force the width, since width can be smalled due to break mode of labels
         size.width = targetWidth
         return size
