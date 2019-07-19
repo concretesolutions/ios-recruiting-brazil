@@ -9,7 +9,17 @@
 import UIKit
 import SnapKit
 
-final class MoviesViewControllerScreen: UIView {
+class MoviesViewControllerScreen: UIView {
+    
+    
+    lazy var layoutCell = MovieCollectionViewCellScreen()
+    
+    
+    lazy var movieCollectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layoutCell)
+        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
+        return view
+    }()
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
@@ -27,23 +37,18 @@ final class MoviesViewControllerScreen: UIView {
 
 
 extension MoviesViewControllerScreen: CodeView{
+    
     func buidViewHirarchy() {
-        //adicionar view
-        
+        addSubview(movieCollectionView)
     }
     
     func setupContraints() {
-        // configurar constraints
-        
-        
-        
+        movieCollectionView.snp.makeConstraints { (make) in
+            make.top.bottom.left.right.equalToSuperview()
+        }
     }
     
     func setupAdditionalConfiguration() {
-        // setup adicional
-        
-        
-        
         
     }
     

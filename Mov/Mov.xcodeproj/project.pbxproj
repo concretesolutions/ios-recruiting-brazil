@@ -17,6 +17,8 @@
 		D47B2DCE22E0D91400F46E28 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DCD22E0D91400F46E28 /* CodeView.swift */; };
 		D47B2DD122E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD022E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift */; };
 		D47B2DD422E0E60C00F46E28 /* MovTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */; };
+		D47B2DD922E140EF00F46E28 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */; };
+		D47B2DDD22E1417000F46E28 /* MovieCollectionViewCellScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DDC22E1417000F46E28 /* MovieCollectionViewCellScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		D47B2DCD22E0D91400F46E28 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		D47B2DD022E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControllerScreen.swift; sourceTree = "<group>"; };
 		D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovTabBarController.swift; sourceTree = "<group>"; };
+		D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		D47B2DDC22E1417000F46E28 /* MovieCollectionViewCellScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCellScreen.swift; sourceTree = "<group>"; };
 		E05B046D2A065F41330FEEC1 /* Pods-Mov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.release.xcconfig"; path = "Target Support Files/Pods-Mov/Pods-Mov.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				D47B2DB422E0D46C00F46E28 /* AppDelegate.swift */,
+				D47B2DD722E1409E00F46E28 /* ViewComponents */,
 				D47B2DD222E0E5B000F46E28 /* Controllers */,
 				D47B2DC622E0D59400F46E28 /* ViewControllers */,
 				D47B2DC722E0D5A900F46E28 /* Screens */,
@@ -101,8 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				D47B2DCD22E0D91400F46E28 /* CodeView.swift */,
-				D47B2DCA22E0D8A500F46E28 /* MoviesViewControllerScreen.swift */,
-				D47B2DD022E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift */,
+				D47B2DDA22E1411600F46E28 /* ViewController */,
+				D47B2DDB22E1412C00F46E28 /* Components */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -113,6 +118,31 @@
 				D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D47B2DD722E1409E00F46E28 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */,
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		D47B2DDA22E1411600F46E28 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D47B2DCA22E0D8A500F46E28 /* MoviesViewControllerScreen.swift */,
+				D47B2DD022E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D47B2DDB22E1412C00F46E28 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D47B2DDC22E1417000F46E28 /* MovieCollectionViewCellScreen.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		F5CF319B1C30E775D715FC20 /* Pods */ = {
@@ -239,12 +269,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47B2DD422E0E60C00F46E28 /* MovTabBarController.swift in Sources */,
+				D47B2DDD22E1417000F46E28 /* MovieCollectionViewCellScreen.swift in Sources */,
 				D47B2DB722E0D46C00F46E28 /* MoviesViewController.swift in Sources */,
 				D47B2DD122E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift in Sources */,
 				D47B2DC922E0D60900F46E28 /* FavoritesViewController.swift in Sources */,
 				D47B2DCB22E0D8A500F46E28 /* MoviesViewControllerScreen.swift in Sources */,
 				D47B2DCE22E0D91400F46E28 /* CodeView.swift in Sources */,
 				D47B2DB522E0D46C00F46E28 /* AppDelegate.swift in Sources */,
+				D47B2DD922E140EF00F46E28 /* MovieCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
