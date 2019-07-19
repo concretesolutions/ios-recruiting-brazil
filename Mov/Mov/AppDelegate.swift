@@ -19,11 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         
         
-        //Aqui seria a tabar
-       // let controller = MoviesViewController()
-       // window.rootViewController = controller
-        
-        
         let tabBarController = MovTabBarController()
         window.rootViewController = tabBarController
         

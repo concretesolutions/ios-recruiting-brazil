@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class MovieCollectionViewCell2: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let view = UIImageView()
@@ -20,6 +20,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
+        
         setupViews()
     }
     

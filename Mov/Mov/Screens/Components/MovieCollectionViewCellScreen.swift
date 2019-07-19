@@ -18,7 +18,9 @@ final class MovieCollectionViewCellScreen: UICollectionViewFlowLayout {
         super.init()
         setupView()
         
-        self.itemSize = CGSize(width: 60, height: 30)
+   
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +38,62 @@ extension MovieCollectionViewCellScreen: CodeView{
     }
     
     func setupContraints() {
-        // configurar constraints
+        
+        
+        
+        
+    }
+    
+    func setupAdditionalConfiguration() {
+        // setup adicional
+        
+        
+    }
+    
+    
+}
+
+
+
+import UIKit
+import SnapKit
+
+final class MovieCollectionViewCellScreen2: UIView {
+    
+    var button: UIButton = {
+        let view = UIButton(frame: .zero)
+        view.backgroundColor = .red
+        view.setTitle("Aperte", for: .normal)
+        return view
+    }()
+    
+    override init(frame: CGRect = .zero) {
+        super.init(frame: frame)
+        
+        setupView()
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+}
+
+
+extension MovieCollectionViewCellScreen2: CodeView{
+    func buidViewHirarchy() {
+        //adicionar view
+        
+    }
+    
+    func setupContraints() {
+        button.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.left.equalToSuperview().inset(15)
+            make.right.equalToSuperview().inset(15)
+        }
         
         
         

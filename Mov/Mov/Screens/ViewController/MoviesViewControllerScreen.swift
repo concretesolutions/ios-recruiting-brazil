@@ -16,8 +16,14 @@ class MoviesViewControllerScreen: UIView {
     
     
     lazy var movieCollectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layoutCell)
-        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
+ 
+        let view = UICollectionView(frame: self.frame, collectionViewLayout: UICollectionViewFlowLayout())
+        view.register(FreelancerCell.self, forCellWithReuseIdentifier: "MovieCell")
+        view.showsVerticalScrollIndicator = false
+        view.backgroundColor = UIColor.white
+        
+        
+        
         return view
     }()
     
@@ -44,8 +50,12 @@ extension MoviesViewControllerScreen: CodeView{
     
     func setupContraints() {
         movieCollectionView.snp.makeConstraints { (make) in
-            make.top.bottom.left.right.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
         }
+        
+        
     }
     
     func setupAdditionalConfiguration() {
