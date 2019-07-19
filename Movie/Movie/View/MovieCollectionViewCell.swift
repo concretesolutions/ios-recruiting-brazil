@@ -8,12 +8,11 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UITableViewCell {
+class MovieCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var posterImage: UIImageView!
-    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var date: UILabel!
     var downloadTask: URLSessionDownloadTask?
     
     override func awakeFromNib() {
