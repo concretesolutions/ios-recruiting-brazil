@@ -41,7 +41,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = screen.movieCollectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         
         cell.backgroundColor = UIColor(red:0.18, green:0.19, blue:0.27, alpha:1.00)
         

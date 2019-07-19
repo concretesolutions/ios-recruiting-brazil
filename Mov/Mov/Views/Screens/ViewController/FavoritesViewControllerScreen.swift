@@ -13,7 +13,8 @@ final class FavoritesViewControllerScreen: UIView {
     
     lazy var favoritesTableView: UITableView = {
         let view = UITableView(frame: .zero)
-        view.register(UITableViewCell.self, forCellReuseIdentifier: "FavoritesCell")
+        view.register(FavoriteTableViewCell.self, forCellReuseIdentifier: "FavoritesCell")
+        view.separatorColor = .white
         return view
     }()
     

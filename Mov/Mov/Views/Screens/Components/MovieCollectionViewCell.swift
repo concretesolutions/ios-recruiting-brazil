@@ -11,9 +11,9 @@ import SnapKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
-    let imageView: UIImageView = {
+    let movieImage: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleToFill
         view.image = #imageLiteral(resourceName: "thor6")
         return view
     }()
@@ -51,7 +51,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 extension MovieCollectionViewCell: CodeView{
     func buidViewHirarchy() {
         
-        addSubview(imageView)
+        addSubview(movieImage)
         addSubview(title)
         addSubview(favoriteButton)
         
@@ -59,7 +59,7 @@ extension MovieCollectionViewCell: CodeView{
     
     func setupContraints() {
         
-        imageView.snp.makeConstraints { (make) in
+        movieImage.snp.makeConstraints { (make) in
             make.top.right.left.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.8)
         }
@@ -72,7 +72,7 @@ extension MovieCollectionViewCell: CodeView{
         }
         
         favoriteButton.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview().multipliedBy(1.8)
+            make.centerX.equalToSuperview().multipliedBy(1.75)
             make.centerY.equalToSuperview().multipliedBy(1.8)
             make.height.equalTo(18)
             make.width.equalTo(18)
