@@ -7,40 +7,6 @@
 //
 
 import UIKit
-
-class MovieCollectionViewCell2: UICollectionViewCell {
-    
-    let imageView: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        
-        
-        setupViews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupViews() {
-        self.addSubview(imageView)
-        
-        imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-        imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2/3, constant: -10).isActive = true
-        imageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/2, constant: -10).isActive = true
-    }
-
-    
-}
-
-import UIKit
 import SnapKit
 
 class MovieCollectionViewCell: UICollectionViewCell {

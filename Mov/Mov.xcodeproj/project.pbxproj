@@ -18,7 +18,6 @@
 		D47B2DD122E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD022E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift */; };
 		D47B2DD422E0E60C00F46E28 /* MovTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */; };
 		D47B2DD922E140EF00F46E28 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */; };
-		D47B2DDD22E1417000F46E28 /* MovieCollectionViewCellScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DDC22E1417000F46E28 /* MovieCollectionViewCellScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		D47B2DD022E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControllerScreen.swift; sourceTree = "<group>"; };
 		D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovTabBarController.swift; sourceTree = "<group>"; };
 		D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
-		D47B2DDC22E1417000F46E28 /* MovieCollectionViewCellScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCellScreen.swift; sourceTree = "<group>"; };
 		E05B046D2A065F41330FEEC1 /* Pods-Mov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.release.xcconfig"; path = "Target Support Files/Pods-Mov/Pods-Mov.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,24 +80,13 @@
 			isa = PBXGroup;
 			children = (
 				D47B2DB422E0D46C00F46E28 /* AppDelegate.swift */,
-				D47B2DD722E1409E00F46E28 /* ViewComponents */,
+				D47B2DE422E24EF000F46E28 /* Views */,
 				D47B2DD222E0E5B000F46E28 /* Controllers */,
-				D47B2DC622E0D59400F46E28 /* ViewControllers */,
-				D47B2DC722E0D5A900F46E28 /* Screens */,
 				D47B2DBB22E0D46F00F46E28 /* Assets.xcassets */,
 				D47B2DBD22E0D46F00F46E28 /* LaunchScreen.storyboard */,
 				D47B2DC022E0D46F00F46E28 /* Info.plist */,
 			);
 			path = Mov;
-			sourceTree = "<group>";
-		};
-		D47B2DC622E0D59400F46E28 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				D47B2DB622E0D46C00F46E28 /* MoviesViewController.swift */,
-				D47B2DC822E0D60900F46E28 /* FavoritesViewController.swift */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		D47B2DC722E0D5A900F46E28 /* Screens */ = {
@@ -115,6 +102,8 @@
 		D47B2DD222E0E5B000F46E28 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D47B2DB622E0D46C00F46E28 /* MoviesViewController.swift */,
+				D47B2DC822E0D60900F46E28 /* FavoritesViewController.swift */,
 				D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */,
 			);
 			path = Controllers;
@@ -123,7 +112,6 @@
 		D47B2DD722E1409E00F46E28 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
-				D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -140,9 +128,18 @@
 		D47B2DDB22E1412C00F46E28 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D47B2DDC22E1417000F46E28 /* MovieCollectionViewCellScreen.swift */,
+				D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		D47B2DE422E24EF000F46E28 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D47B2DC722E0D5A900F46E28 /* Screens */,
+				D47B2DD722E1409E00F46E28 /* ViewComponents */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F5CF319B1C30E775D715FC20 /* Pods */ = {
@@ -269,7 +266,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47B2DD422E0E60C00F46E28 /* MovTabBarController.swift in Sources */,
-				D47B2DDD22E1417000F46E28 /* MovieCollectionViewCellScreen.swift in Sources */,
 				D47B2DB722E0D46C00F46E28 /* MoviesViewController.swift in Sources */,
 				D47B2DD122E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift in Sources */,
 				D47B2DC922E0D60900F46E28 /* FavoritesViewController.swift in Sources */,

@@ -11,10 +11,6 @@ import SnapKit
 
 class MoviesViewControllerScreen: UIView {
     
-    
-    lazy var layoutCell = MovieCollectionViewCellScreen()
-    
-    
     lazy var movieCollectionView: UICollectionView = {
  
         let view = UICollectionView(frame: self.frame, collectionViewLayout: UICollectionViewFlowLayout())

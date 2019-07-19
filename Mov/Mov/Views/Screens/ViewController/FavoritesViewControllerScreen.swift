@@ -11,6 +11,12 @@ import SnapKit
 
 final class FavoritesViewControllerScreen: UIView {
     
+    lazy var favoritesTableView: UITableView = {
+        let view = UITableView(frame: .zero)
+        view.register(UITableViewCell.self, forCellReuseIdentifier: "FavoritesCell")
+        return view
+    }()
+    
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         
@@ -28,15 +34,13 @@ final class FavoritesViewControllerScreen: UIView {
 
 extension FavoritesViewControllerScreen: CodeView{
     func buidViewHirarchy() {
-        //adicionar view
-        
+        addSubview(favoritesTableView)
     }
     
     func setupContraints() {
-        // configurar constraints
-        
-        
-        
+        favoritesTableView.snp.makeConstraints { (make) in
+            make.top.bottom.left.right.equalToSuperview()
+        }
     }
     
     func setupAdditionalConfiguration() {
