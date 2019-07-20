@@ -31,9 +31,9 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         screen.movieCollectionView.dataSource = self
         
         setupSearchController()
-     
         
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
@@ -54,6 +54,17 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width*0.435, height: 200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        toMovieDetails()
+    }
+    
+    func toMovieDetails() {
+        let movieDetails = MovieDetailsViewController()
+        movieDetails.view.backgroundColor = .white
+        self.navigationController?.pushViewController(movieDetails, animated:
+            true)
     }
     
     override var prefersStatusBarHidden: Bool {

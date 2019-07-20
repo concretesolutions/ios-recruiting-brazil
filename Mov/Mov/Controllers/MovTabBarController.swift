@@ -24,6 +24,8 @@ class MovTabBarController: UITabBarController, UITabBarControllerDelegate{
     
     func setTabs(){
         
+        
+        
         let moviesViewController = MoviesViewController()
         moviesViewController.title = "Movies"
         moviesViewController.tabBarItem.image = UIImage(named: "list_icon")

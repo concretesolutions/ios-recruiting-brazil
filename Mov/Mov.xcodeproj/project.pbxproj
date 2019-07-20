@@ -19,6 +19,8 @@
 		D47B2DD422E0E60C00F46E28 /* MovTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */; };
 		D47B2DD922E140EF00F46E28 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */; };
 		D47B2DE622E2555200F46E28 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DE522E2555200F46E28 /* FavoriteTableViewCell.swift */; };
+		D47B2DE822E28C1F00F46E28 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DE722E28C1F00F46E28 /* MovieDetailsViewController.swift */; };
+		D47B2DEA22E28C3F00F46E28 /* MovieDetailsViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DE922E28C3F00F46E28 /* MovieDetailsViewControllerScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovTabBarController.swift; sourceTree = "<group>"; };
 		D47B2DD822E140EF00F46E28 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		D47B2DE522E2555200F46E28 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		D47B2DE722E28C1F00F46E28 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		D47B2DE922E28C3F00F46E28 /* MovieDetailsViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewControllerScreen.swift; sourceTree = "<group>"; };
 		E05B046D2A065F41330FEEC1 /* Pods-Mov.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.release.xcconfig"; path = "Target Support Files/Pods-Mov/Pods-Mov.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				D47B2DCD22E0D91400F46E28 /* CodeView.swift */,
-				D47B2DDA22E1411600F46E28 /* ViewController */,
+				D47B2DDA22E1411600F46E28 /* Views */,
 				D47B2DDB22E1412C00F46E28 /* Components */,
 			);
 			path = Screens;
@@ -107,6 +111,7 @@
 				D47B2DB622E0D46C00F46E28 /* MoviesViewController.swift */,
 				D47B2DC822E0D60900F46E28 /* FavoritesViewController.swift */,
 				D47B2DD322E0E60C00F46E28 /* MovTabBarController.swift */,
+				D47B2DE722E28C1F00F46E28 /* MovieDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -118,13 +123,14 @@
 			path = ViewComponents;
 			sourceTree = "<group>";
 		};
-		D47B2DDA22E1411600F46E28 /* ViewController */ = {
+		D47B2DDA22E1411600F46E28 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				D47B2DCA22E0D8A500F46E28 /* MoviesViewControllerScreen.swift */,
 				D47B2DD022E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift */,
+				D47B2DE922E28C3F00F46E28 /* MovieDetailsViewControllerScreen.swift */,
 			);
-			path = ViewController;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D47B2DDB22E1412C00F46E28 /* Components */ = {
@@ -268,8 +274,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D47B2DE822E28C1F00F46E28 /* MovieDetailsViewController.swift in Sources */,
 				D47B2DD422E0E60C00F46E28 /* MovTabBarController.swift in Sources */,
 				D47B2DB722E0D46C00F46E28 /* MoviesViewController.swift in Sources */,
+				D47B2DEA22E28C3F00F46E28 /* MovieDetailsViewControllerScreen.swift in Sources */,
 				D47B2DD122E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift in Sources */,
 				D47B2DC922E0D60900F46E28 /* FavoritesViewController.swift in Sources */,
 				D47B2DE622E2555200F46E28 /* FavoriteTableViewCell.swift in Sources */,
@@ -418,6 +426,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A975LQD622;
 				INFOPLIST_FILE = Mov/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -437,6 +446,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A975LQD622;
 				INFOPLIST_FILE = Mov/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
