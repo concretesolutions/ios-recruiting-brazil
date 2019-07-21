@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9E372FE839583A7F7069F540 /* Pods_Mov.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D914180BA766E9D0F759AC /* Pods_Mov.framework */; };
-		D451C01722E3338700A724AA /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451C01622E3338700A724AA /* Movie.swift */; };
+		D454B73022E4E0490071A9CF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D454B72F22E4E0490071A9CF /* Movie.swift */; };
+		D454B73722E4E2300071A9CF /* RequestMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = D454B73622E4E2300071A9CF /* RequestMovies.swift */; };
+		D454B73922E4E2600071A9CF /* SalvedDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D454B73822E4E2600071A9CF /* SalvedDatas.swift */; };
 		D47B2DB522E0D46C00F46E28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DB422E0D46C00F46E28 /* AppDelegate.swift */; };
 		D47B2DB722E0D46C00F46E28 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47B2DB622E0D46C00F46E28 /* MoviesViewController.swift */; };
 		D47B2DBC22E0D46F00F46E28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D47B2DBB22E0D46F00F46E28 /* Assets.xcassets */; };
@@ -27,7 +29,9 @@
 /* Begin PBXFileReference section */
 		31CF4154E216028AC1B8E9CD /* Pods-Mov.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mov.debug.xcconfig"; path = "Target Support Files/Pods-Mov/Pods-Mov.debug.xcconfig"; sourceTree = "<group>"; };
 		38D914180BA766E9D0F759AC /* Pods_Mov.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mov.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D451C01622E3338700A724AA /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		D454B72F22E4E0490071A9CF /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Movie.swift; path = "../../../../../.Trash/ios-recruiting-brazil-master/Mov/Mov/Models/Movie.swift"; sourceTree = "<group>"; };
+		D454B73622E4E2300071A9CF /* RequestMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMovies.swift; sourceTree = "<group>"; };
+		D454B73822E4E2600071A9CF /* SalvedDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalvedDatas.swift; sourceTree = "<group>"; };
 		D47B2DB122E0D46C00F46E28 /* Mov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mov.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47B2DB422E0D46C00F46E28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D47B2DB622E0D46C00F46E28 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
@@ -66,12 +70,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D451C01522E3336F00A724AA /* New Group */ = {
+		D451C01522E3336F00A724AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D451C01622E3338700A724AA /* Movie.swift */,
+				D454B72F22E4E0490071A9CF /* Movie.swift */,
 			);
-			path = "New Group";
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D454B73522E4E20F0071A9CF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D454B73622E4E2300071A9CF /* RequestMovies.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D47B2DA822E0D46C00F46E28 = {
@@ -96,12 +108,14 @@
 			isa = PBXGroup;
 			children = (
 				D47B2DB422E0D46C00F46E28 /* AppDelegate.swift */,
-				D451C01522E3336F00A724AA /* New Group */,
+				D454B73522E4E20F0071A9CF /* Network */,
+				D451C01522E3336F00A724AA /* Models */,
 				D47B2DE422E24EF000F46E28 /* Views */,
 				D47B2DD222E0E5B000F46E28 /* Controllers */,
 				D47B2DBB22E0D46F00F46E28 /* Assets.xcassets */,
 				D47B2DBD22E0D46F00F46E28 /* LaunchScreen.storyboard */,
 				D47B2DC022E0D46F00F46E28 /* Info.plist */,
+				D454B73822E4E2600071A9CF /* SalvedDatas.swift */,
 			);
 			path = Mov;
 			sourceTree = "<group>";
@@ -287,11 +301,13 @@
 			files = (
 				D47B2DE822E28C1F00F46E28 /* MovieDetailsViewController.swift in Sources */,
 				D47B2DD422E0E60C00F46E28 /* MovTabBarController.swift in Sources */,
-				D451C01722E3338700A724AA /* Movie.swift in Sources */,
+				D454B73022E4E0490071A9CF /* Movie.swift in Sources */,
 				D47B2DB722E0D46C00F46E28 /* MoviesViewController.swift in Sources */,
 				D47B2DEA22E28C3F00F46E28 /* MovieDetailsViewControllerScreen.swift in Sources */,
 				D47B2DD122E0DD6D00F46E28 /* FavoritesViewControllerScreen.swift in Sources */,
+				D454B73722E4E2300071A9CF /* RequestMovies.swift in Sources */,
 				D47B2DC922E0D60900F46E28 /* FavoritesViewController.swift in Sources */,
+				D454B73922E4E2600071A9CF /* SalvedDatas.swift in Sources */,
 				D47B2DE622E2555200F46E28 /* FavoriteTableViewCell.swift in Sources */,
 				D47B2DCB22E0D8A500F46E28 /* MoviesViewControllerScreen.swift in Sources */,
 				D47B2DCE22E0D91400F46E28 /* CodeView.swift in Sources */,

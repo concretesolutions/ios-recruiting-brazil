@@ -12,7 +12,7 @@ import SnapKit
 class MoviesViewControllerScreen: UIView {
     
     lazy var movieCollectionView: UICollectionView = {
- 
+        
         let view = UICollectionView(frame: self.frame, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         view.showsVerticalScrollIndicator = false

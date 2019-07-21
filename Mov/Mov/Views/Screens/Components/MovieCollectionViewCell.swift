@@ -27,11 +27,12 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let favoriteButton: UIButton = {
-        let view = UIButton()
-        view.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+    let favoriteButton: UIImageView = {
+        let view = UIImageView()
         return view
     }()
+    
+    
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)

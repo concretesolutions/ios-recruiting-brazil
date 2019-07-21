@@ -23,13 +23,11 @@ final class MovieDetailsViewControllerScreen: UIView {
         view.font = UIFont.systemFont(ofSize: 18)
         view.textColor = .black
         view.textAlignment = .left
-        view.text = "title"
         return view
     }()
     
     let favoriteButton: UIButton = {
         let view = UIButton()
-        view.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
         return view
     }()
     
@@ -38,7 +36,6 @@ final class MovieDetailsViewControllerScreen: UIView {
         view.font = UIFont.systemFont(ofSize: 18)
         view.textColor = .black
         view.textAlignment = .left
-        view.text = "2001"
         return view
     }()
     
@@ -47,7 +44,6 @@ final class MovieDetailsViewControllerScreen: UIView {
         view.font = UIFont.systemFont(ofSize: 18)
         view.textColor = .black
         view.textAlignment = .left
-        view.text = "Ação"
         return view
     }()
     
@@ -57,7 +53,6 @@ final class MovieDetailsViewControllerScreen: UIView {
         view.textColor = .black
         view.textAlignment = .left
         view.numberOfLines = 0
-        view.text = "init(coder:) has not been implemented init(coder:) has not been implemented init(coder:) has not been implemented init(coder:) has not been implemented init(coder:) has not been implemented init(coder:) has not been implemented"
         return view
     }()
     
@@ -143,5 +138,8 @@ extension MovieDetailsViewControllerScreen: CodeView{
     }
     
     
+    
+    
 }
+
 

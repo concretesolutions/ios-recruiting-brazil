@@ -35,7 +35,7 @@ class FavoriteTableViewCell: UITableViewCell {
         view.text = "2001"
         return view
     }()
-   
+    
     let movieDescription: UILabel = {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 12)
@@ -50,7 +50,7 @@ class FavoriteTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
-
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,5 +106,6 @@ extension FavoriteTableViewCell: CodeView{
         
         
     }
-
+    
 }
+
