@@ -19,7 +19,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     let network = RequestMovies.shared
     
     let userDefaults = SalvedDatas.shared
-    
+    var filteredCandies = [Result]()
     
     override func loadView() {
         
@@ -68,6 +68,14 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         loadFavorites() //AJUSTAR, gamb
+        
+        
+        
+        if isFiltering() {
+            return filteredCandies.count
+        }
+        
+        
         if let results = network.results{
             print(results.count)
             return results.count
@@ -82,18 +90,24 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         
+        var movie: Result
+        if isFiltering() {
+            movie = filteredCandies[indexPath.row]
+        }else{
+            movie = network.results![indexPath.row]
+        }
+        
         cell.backgroundColor = UIColor(red:0.18, green:0.19, blue:0.27, alpha:1.00)
         
-        if let results = network.results, let title = results[indexPath.row].title, let fav = favoriteMovies[title]{
-            
+        if let title = movie.title, let fav = favoriteMovies[title]{
             cell.title.text = title
             cell.favoriteButton.image = fav ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
-            
+        }
             
             //  print(results[indexPath.row].title ?? 0)
             //   requestImage(imageView: cell.movieImage, key: results[indexPath.row].posterPath!)
             
-        }
+        
         
         
         //   print(network.results)
@@ -116,11 +130,17 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         movieDetails.view.backgroundColor = .white
         movieDetails.moviesViewController = self
         
-        if let results = network.results{
-            movieDetails.movie = results[row]
-            self.navigationController?.pushViewController(movieDetails, animated:
-                true)
+        
+        if isFiltering() {
+            movieDetails.movie = filteredCandies[row]
+        }else{
+            if let results = network.results{
+                movieDetails.movie = results[row]
+            }
         }
+        
+        self.navigationController?.pushViewController(movieDetails, animated:
+            true)
         
     }
     
@@ -175,7 +195,29 @@ extension MoviesViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
         // TODO
+        filterContentForSearchText(searchController.searchBar.text!)
+
         // https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        
+        if let results = network.results{
+            filteredCandies = results.filter({( movie : Result) -> Bool in
+                return movie.title!.lowercased().contains(searchText.lowercased())
+            })
+        }
+        
+        screen.movieCollectionView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
 }
 
