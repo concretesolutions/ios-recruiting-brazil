@@ -33,7 +33,7 @@ final class MovieDetailsViewControllerScreen: UIView {
     
     let year: UILabel = {
         let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 18)
+        view.font = UIFont.systemFont(ofSize: 15)
         view.textColor = .black
         view.textAlignment = .left
         return view
@@ -41,7 +41,7 @@ final class MovieDetailsViewControllerScreen: UIView {
     
     let genre: UILabel = {
         let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 18)
+        view.font = UIFont.systemFont(ofSize: 15)
         view.textColor = .black
         view.textAlignment = .left
         return view
@@ -49,7 +49,7 @@ final class MovieDetailsViewControllerScreen: UIView {
     
     let movieDescription: UILabel = {
         let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 14)
+        view.font = UIFont.systemFont(ofSize: 12)
         view.textColor = .black
         view.textAlignment = .left
         view.numberOfLines = 0
@@ -94,7 +94,7 @@ extension MovieDetailsViewControllerScreen: CodeView{
             make.top.equalTo(movieImage.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().inset(40)
-            make.height.equalTo(14)
+            make.height.equalTo(22)
         }
         
         favoriteButton.snp.makeConstraints { (make) in

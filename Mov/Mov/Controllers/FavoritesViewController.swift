@@ -78,10 +78,26 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         cell.title.text = moviesFilter[indexPath.row].title ?? "title not found"
         cell.movieDescription.text = moviesFilter[indexPath.row].overview ?? "description not found"
         cell.year.text = moviesFilter[indexPath.row].releaseDate ?? "????"
-        
-        
         cell.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1.00)
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
+        if let key = moviesFilter[indexPath.row].posterPath{
+            let imageURL = URL(string: "https://image.tmdb.org/t/p/w500" + key)!
+            let dataTask = URLSession.shared.dataTask(with: imageURL) { (data, responde, error) in
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+                if let data = data {
+                    DispatchQueue.main.async {
+                        cell.movieImage.image = UIImage(data: data)
+                    }
+                }
+            }
+            dataTask.resume()
+        }else{
+            cell.movieImage.image = #imageLiteral(resourceName: "thor6")
+        }
+        
         
         return cell
         

@@ -20,9 +20,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let title: UILabel = {
         let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 14)
+        view.font = UIFont.systemFont(ofSize: 11)
         view.textColor = UIColor(red:0.97, green:0.71, blue:0.17, alpha:1.00)
-        view.textAlignment = .center
+        view.textAlignment = .left
+        view.numberOfLines = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -66,10 +67,10 @@ extension MovieCollectionViewCell: CodeView{
         }
         
         title.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().multipliedBy(1.8)
-            make.height.equalTo(20)
-            make.width.equalToSuperview().multipliedBy(0.6)
+            make.left.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview().inset(5)
+            make.top.equalTo(movieImage.snp.bottom).offset(5)
+            make.right.equalTo(favoriteButton.snp.left).inset(8)
         }
         
         favoriteButton.snp.makeConstraints { (make) in

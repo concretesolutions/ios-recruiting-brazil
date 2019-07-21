@@ -33,7 +33,7 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         screen.title.text = movie.title ?? "Título não econtrado"
         screen.year.text = movie.releaseDate ?? "Data não econtrada"
-        screen.genre.text = String(movie.genreIDS?.description ?? "Gênero não encontrado")
+        screen.genre.text = movie.genreIDS?.description ?? "Gênero não encontrado"
         screen.movieDescription.text = movie.overview ?? "Descrição não econtrada"
         
         setsFavoriteButton()

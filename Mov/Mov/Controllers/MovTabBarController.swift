@@ -32,11 +32,11 @@ class MovTabBarController: UITabBarController, UITabBarControllerDelegate{
         
         
         moviesViewController.title = "Movies"
-        moviesViewController.tabBarItem.image = UIImage(named: "list_icon")
+        moviesViewController.tabBarItem.image = #imageLiteral(resourceName: "list_icon")
         // moviesViewController.tabBarItem.selectedImage = UIImage(named: "list_icon")
         
         favoritesViewController.title = "Favorites"
-        favoritesViewController.tabBarItem.image = UIImage(named: "favorite_emply_icon")
+        favoritesViewController.tabBarItem.image = #imageLiteral(resourceName: "favorite_gray_icon")
         // favoritesViewController.tabBarItem.selectedImage = UIImage(named: "favorite_emply_icon")
         
         

@@ -19,7 +19,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     let network = RequestMovies.shared
     
     let userDefaults = SalvedDatas.shared
-    var filteredCandies = [Result]()
+    var filteredMovie = [Result]()
     
     override func loadView() {
         
@@ -44,6 +44,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     func loadData(){
         network.request()
     }
+
     
     func loadFavorites(){
         
@@ -67,12 +68,11 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        loadFavorites() //AJUSTAR, gamb
-        
+        loadFavorites() //AJUSTAR, para teste, criar thread para esperar retorno do request
         
         
         if isFiltering() {
-            return filteredCandies.count
+            return filteredMovie.count
         }
         
         
@@ -92,7 +92,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         var movie: Result
         if isFiltering() {
-            movie = filteredCandies[indexPath.row]
+            movie = filteredMovie[indexPath.row]
         }else{
             movie = network.results![indexPath.row]
         }
@@ -103,14 +103,25 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
             cell.title.text = title
             cell.favoriteButton.image = fav ? #imageLiteral(resourceName: "favorite_full_icon") : #imageLiteral(resourceName: "favorite_gray_icon")
         }
-            
-            //  print(results[indexPath.row].title ?? 0)
-            //   requestImage(imageView: cell.movieImage, key: results[indexPath.row].posterPath!)
-            
         
+        if let key = movie.posterPath{
+            let imageURL = URL(string: "https://image.tmdb.org/t/p/w500" + key)!
+            let dataTask = URLSession.shared.dataTask(with: imageURL) { (data, responde, error) in
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+                if let data = data {
+                    DispatchQueue.main.async {
+                        cell.movieImage.image = UIImage(data: data)
+                    }
+                }
+            }
+            dataTask.resume()
+        }else{
+            cell.movieImage.image = #imageLiteral(resourceName: "thor6")
+        }
         
-        
-        //   print(network.results)
+       
         
         return cell
         
@@ -132,7 +143,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         
         if isFiltering() {
-            movieDetails.movie = filteredCandies[row]
+            movieDetails.movie = filteredMovie[row]
         }else{
             if let results = network.results{
                 movieDetails.movie = results[row]
@@ -152,31 +163,6 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         return true
     }
     
-    func requestImage(imageView: UIImageView, key: String) {
-        
-        imageView.image = #imageLiteral(resourceName: "Splash")
-        
-        /*  let imageURL = URL(string: "https://image.tmdb.org/t/p/w500" + key)!
-         
-         let dataTask = URLSession.shared.dataTask(with: imageURL) { (data, responde, error) in
-         if let error = error{
-         print(error.localizedDescription)
-         }
-         
-         
-         if let data = data {
-         DispatchQueue.main.async {
-         imageView.image = UIImage(data: data)
-         }
-         }
-         
-         
-         }
-         
-         dataTask.resume()*/
-        
-    }
-    
     
 }
 
@@ -194,21 +180,18 @@ extension MoviesViewController: UISearchResultsUpdating {
     
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
-        // TODO
         filterContentForSearchText(searchController.searchBar.text!)
 
-        // https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
     }
     
     func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
         if let results = network.results{
-            filteredCandies = results.filter({( movie : Result) -> Bool in
+            filteredMovie = results.filter({( movie : Result) -> Bool in
                 return movie.title!.lowercased().contains(searchText.lowercased())
             })
         }
