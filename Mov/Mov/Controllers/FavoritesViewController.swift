@@ -13,6 +13,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     let screen = FavoritesViewControllerScreen()
     let network = RequestMovies.shared
     let userDefaults = SalvedDatas.shared
+    var moviesFilter: [Result] = []
     
     override func loadView() {
         self.view = screen
@@ -25,12 +26,15 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         screen.favoritesTableView.dataSource = self
         
         loadData()
-        
-        print(filterMovies())
+        filterData()
     }
     
     func loadData(){
         network.request()
+    }
+    
+    func filterData(){
+        moviesFilter = filterMovies()
     }
     
     func filterMovies() -> [Result]{
@@ -63,15 +67,12 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterMovies().count
+        return moviesFilter.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoriteTableViewCell
-        
-        let moviesFilter = filterMovies()
-        print(moviesFilter)
         
         
         cell.title.text = moviesFilter[indexPath.row].title ?? "title not found"
@@ -90,7 +91,34 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         return 120
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            removeFavoriteSalve(movie: moviesFilter[indexPath.row])
+            moviesFilter.remove(at: indexPath.row)
+            screen.favoritesTableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .default, title: "Unfavorite") { (action, indexPath) in
+            self.screen.favoritesTableView.dataSource?.tableView!(self.screen.favoritesTableView, commit: .delete, forRowAt: indexPath)
+            return
+        }
+        //deleteButton.backgroundColor = UIColor.black
+        return [deleteButton]
+    }
+    
+    func removeFavoriteSalve(movie: Result){
+        
+        if let title = movie.title{
+            favoriteMovies[title] = false
+            
+            var favoriteMoviesUserDefaults = userDefaults.favoriteMovies
+            favoriteMoviesUserDefaults = favoriteMoviesUserDefaults.filter{$0 != title}
+            userDefaults.favoriteMovies = favoriteMoviesUserDefaults
+        }
+        
+    }
     
     
     

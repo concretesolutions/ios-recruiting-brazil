@@ -10,6 +10,11 @@ import UIKit
 
 class MovTabBarController: UITabBarController, UITabBarControllerDelegate{
     
+    
+    let moviesViewController = MoviesViewController()
+    let favoritesViewController = FavoritesViewController()
+
+    
     override func viewDidLoad(){
         super.viewDidLoad()
         self.delegate = self
@@ -26,12 +31,10 @@ class MovTabBarController: UITabBarController, UITabBarControllerDelegate{
         
         
         
-        let moviesViewController = MoviesViewController()
         moviesViewController.title = "Movies"
         moviesViewController.tabBarItem.image = UIImage(named: "list_icon")
         // moviesViewController.tabBarItem.selectedImage = UIImage(named: "list_icon")
         
-        let favoritesViewController = FavoritesViewController()
         favoritesViewController.title = "Favorites"
         favoritesViewController.tabBarItem.image = UIImage(named: "favorite_emply_icon")
         // favoritesViewController.tabBarItem.selectedImage = UIImage(named: "favorite_emply_icon")
@@ -39,6 +42,26 @@ class MovTabBarController: UITabBarController, UITabBarControllerDelegate{
         
         let controllers = [moviesViewController, favoritesViewController]
         self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
+        
+        
+    }
+    
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+                
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 0 {
+           
+            print(favoriteMovies)
+            
+            moviesViewController.loadFavorites()
+            moviesViewController.screen.movieCollectionView.reloadData()
+            
+        }else if tabBarIndex == 1{
+            favoritesViewController.filterData()
+            favoritesViewController.screen.favoritesTableView.reloadData()
+            
+        }
         
         
     }
