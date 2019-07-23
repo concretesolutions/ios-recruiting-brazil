@@ -241,4 +241,3 @@ extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
 }
-

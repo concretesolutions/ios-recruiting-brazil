@@ -18,7 +18,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
     }
     
     // Cancel the pending download

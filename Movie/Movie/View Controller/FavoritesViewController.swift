@@ -16,7 +16,7 @@ class FavoritesViewController: UIViewController {
     let kHorizontalInsets: CGFloat = 10.0
     let kVerticalInsets: CGFloat = 10.0
     
-    var favMovies = MovieDetailViewController()
+    var movieDetail = MovieDetailViewController()
     
     var searchController = UISearchController(searchResultsController: nil)
     
@@ -83,7 +83,7 @@ class FavoritesViewController: UIViewController {
             NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
         
         do {
-            favMovies.favMovies = try managedContext.fetch(fetchRequest)
+            movieDetail.favMovies = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -136,7 +136,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favMovies.favMovies.count
+        return movieDetail.favMovies.count
     }
     
     // MARK: -SearchBar for Favorite Movies
@@ -154,7 +154,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
                 fetchRequest.predicate = predicate
                 
                 do {
-                    favMovies.favMovies = try context.fetch(fetchRequest) as! [NSManagedObject]
+                    movieDetail.favMovies = try context.fetch(fetchRequest) as! [NSManagedObject]
                 } catch {
                     print("error")
                 }
@@ -171,7 +171,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
                     NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
                 
                 do {
-                    favMovies.favMovies = try managedContext.fetch(fetchRequest)
+                    movieDetail.favMovies = try managedContext.fetch(fetchRequest)
                 } catch let error as NSError {
                     print("Could not fetch. \(error), \(error.userInfo)")
                 }
@@ -186,7 +186,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
                 fetchRequest.predicate = predicate
                 
                 do {
-                    favMovies.favMovies = try context.fetch(fetchRequest) as! [NSManagedObject]
+                    movieDetail.favMovies = try context.fetch(fetchRequest) as! [NSManagedObject]
                 } catch {
                     print("error")
                 }
@@ -203,7 +203,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
                     NSFetchRequest<NSManagedObject>(entityName: "FavoriteMovies")
                 
                 do {
-                    favMovies.favMovies = try managedContext.fetch(fetchRequest)
+                    movieDetail.favMovies = try managedContext.fetch(fetchRequest)
                 } catch let error as NSError {
                     print("Could not fetch. \(error), \(error.userInfo)")
                 }
@@ -218,7 +218,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
         retrieveData()
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifiers.favMovieCell, for: indexPath) as! FavoriteMovieCollectionViewCell
         
-        let fav = favMovies.favMovies[indexPath.row]
+        let fav = movieDetail.favMovies[indexPath.row]
         
         cell.configure(for: fav)
         cell.layoutIfNeeded()
@@ -229,7 +229,7 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
         let movieDetail = MovieDetailViewController()
-        movieDetail.selectedFavMovie? = favMovies.favMovies[indexPath.row]
+        movieDetail.selectedFavMovie? = movieDetail.favMovies[indexPath.row]
         
         performSegue(withIdentifier: "MovieDetail", sender: indexPath)
         
@@ -241,10 +241,8 @@ extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDat
             
             let detailViewController = segue.destination as! MovieDetailViewController
             let indexPath = sender as! IndexPath
-            let fav = favMovies.favMovies[indexPath.row]
+            let fav = movieDetail.favMovies[indexPath.row]
             detailViewController.selectedFavMovie = fav
         }
     }
 }
-
-

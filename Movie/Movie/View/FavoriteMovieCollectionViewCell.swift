@@ -28,6 +28,7 @@ class FavoriteMovieCollectionViewCell: UICollectionViewCell {
         }
         
         if let data = result.value(forKeyPath: "posterPath") as? NSData {
+            posterImage.layer.cornerRadius = 10.0
             posterImage.image = UIImage(data: data as Data)
         }
         
@@ -36,7 +37,7 @@ class FavoriteMovieCollectionViewCell: UICollectionViewCell {
             let index = year.index(year.startIndex, offsetBy: 4)
             yearLabel.text = String(year.prefix(upTo: index))
         } else {
-            yearLabel.text = "No Results"
+            yearLabel.text = ""
         }
     }
 }

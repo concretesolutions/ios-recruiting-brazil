@@ -115,7 +115,8 @@ class MovieDetailViewController: UIViewController {
     
     // MARK: -Action (Favorite/UnFavourite Movie into CoreData)
     
-    @IBAction func favMovie(_ sender: Any) {
+    @IBAction func favMovie(_ sender: UIButton) {
+        retrieveCoreData()
         //MARK: -UnFavourite
         for data in favMovies {
             if data.value(forKey: "title") as? String == titleLabel.text {
