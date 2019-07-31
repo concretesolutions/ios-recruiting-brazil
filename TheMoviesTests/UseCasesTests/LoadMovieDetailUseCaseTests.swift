@@ -32,11 +32,11 @@ class LoadMovieDetailUseCaseTests: QuickSpec {
                     let useCase = LoadMovieDetailUseCase(memoryRepository: spy)
                     
                     waitUntil { done in
-                        useCase.loadMovieDetailStream.subscribe(onNext: { _ in
+                        useCase.resultStream.subscribe(onNext: { _ in
                             done()
                         }).disposed(by: disposeBag)
                         
-                        useCase.run(with: 0)
+                        useCase.run(0)
                     }
                     
                     expect(spy.callGetMoviesFromIdCount) == 1

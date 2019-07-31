@@ -11,25 +11,17 @@ import UIKit
 import Swinject
 
 /// Carrega os anos dos filmes já armazenados em cache
-final class LoadMoviesYearUseCase {
-        
+final class LoadMoviesYearUseCase: UseCase<Void, Set<String>> {
+    
     private var memoryRepository: MovieMemoryRepositoryProtocol
     private var disposeBag = DisposeBag()
-    
-    // Outputs
-    private let yearsLoadedPublisher = PublishSubject<Bool>()
-    var yearsLoadedStream: Observable <Bool> {
-        get {
-            return yearsLoadedPublisher.asObservable()
-        }
-    }
     
     init(memoryRepository: MovieMemoryRepositoryProtocol) {
         
         self.memoryRepository = memoryRepository
     }
     
-    func run() -> Set<String>{
-        return self.memoryRepository.getMoviesYear()
+    override func run(_ params: Void...) {
+        resultPublisher.onNext(self.memoryRepository.getMoviesYear())
     }
 }

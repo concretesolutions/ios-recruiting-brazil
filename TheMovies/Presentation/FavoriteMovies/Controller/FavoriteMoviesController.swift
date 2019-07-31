@@ -13,7 +13,7 @@ final class FavoriteMoviesController: UIViewController, StreamControllerProtocol
     
     //MARK: - Variables -
     private var disposeBag = DisposeBag()
-    private var presenter: FavoriteMoviesPresenter
+    private var presenter: FavoriteMoviesPresenterProtocol
     
     //MARK: - Filter Variables -
     private var favorites = BehaviorSubject<[Movie]>(value: [])
@@ -25,7 +25,7 @@ final class FavoriteMoviesController: UIViewController, StreamControllerProtocol
     private var customView = FavoriteMoviesView()
     
     //MARK: - Constructor -
-    init(presenter: FavoriteMoviesPresenter) {
+    init(presenter: FavoriteMoviesPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         

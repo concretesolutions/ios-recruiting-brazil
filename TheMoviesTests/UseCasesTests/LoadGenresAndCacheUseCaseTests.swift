@@ -36,7 +36,7 @@ class LoadGenresAndCacheUseCaseTests: QuickSpec {
                     let useCase = LoadGenresAndCacheUseCase(memoryRepository: genreMemorySpy, networkRepository: genreNetworkSpy)
                     
                     waitUntil { done in
-                        useCase.genresLoadedStream.subscribe(onNext: { _ in
+                        useCase.resultStream.subscribe(onNext: { _ in
                             done()
                         }).disposed(by: disposeBag)
                         

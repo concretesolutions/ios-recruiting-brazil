@@ -12,27 +12,19 @@ import RxSwift
 
 
 /// Caso de uso responsável por carregar filmes do respositória na memória
-final class LoadMoviesFromCacheUseCase {
+final class LoadMoviesFromCacheUseCase: UseCase<Void, Array<Movie>> {
     
     private var memoryRepository: MovieMemoryRepositoryProtocol
     private var disposeBag = DisposeBag()
     
     private var lastPageRequested = 1
     
-    // Outputs
-    private let moviesLoadedPublisher = PublishSubject<[Movie]>()
-    var moviesLoadedStream: Observable <[Movie]> {
-        get {
-            return moviesLoadedPublisher.asObservable()
-        }
-    }
-    
     init(memoryRepository: MovieMemoryRepositoryProtocol) {
         
         self.memoryRepository = memoryRepository
     }
     
-    func run(){
-        self.moviesLoadedPublisher.onNext(self.memoryRepository.getAllMovies())
+    override func run(_ params: Void...){
+        self.resultPublisher.onNext(self.memoryRepository.getAllMovies())
     }
 }

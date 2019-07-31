@@ -33,6 +33,7 @@ final class MoviesGridController: UIViewController, StreamControllerProtocol {
         self.presenter = presenter
         
         super.init(nibName: nil, bundle: nil)
+        alert.view.accessibilityLabel = "MoviesGridLoadingAlert"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,7 +82,7 @@ final class MoviesGridController: UIViewController, StreamControllerProtocol {
         }
         
         // Realiza o carregamento de 10 páginas
-        for _ in 0...10 {
+        for _ in 0..<10 {
             presenter.loadNewPageMoviesFromNetwork()
             
             loadingCount += 1
@@ -140,20 +141,23 @@ extension MoviesGridController {
 extension MoviesGridController {
     func setupLocalStreams() {
         filteredMovies.bind(to: gridMoviesView.collectionView.rx.items(cellIdentifier: "MoviesGridCell")) {
-            row, data, cell in
+            [weak self] row, data, cell in
             
-            let movieCell = cell as! MoviesGridCell
-            movieCell.label.text = data.title
-            movieCell.image.image = data.image
-            movieCell.id = data.id
-            movieCell.favorite.image = !data.liked ? UIImage(named: "favorite_gray_icon")! : UIImage(named: "favorite_full_icon")!
-            
+            self?.setupCell(data: data, cell: cell as! MoviesGridCell)
         }.disposed(by: disposeBag)
         
         movies.observeOn(MainScheduler.instance).bind { [weak self](movies) in
             self?.setFeedbackViewState(movies: movies)
             self?.filteredMovies.onNext(movies)
         }.disposed(by: disposeBag)
+    }
+    
+    func setupCell(data: Movie, cell: MoviesGridCell) {
+        let movieCell = cell
+        movieCell.label.text = data.title
+        movieCell.image.image = data.image
+        movieCell.id = data.id
+        movieCell.favorite.image = !data.liked ? UIImage(named: "favorite_gray_icon")! : UIImage(named: "favorite_full_icon")!
     }
     
     func setFeedbackViewState(movies: [Movie], error: Bool = false) {

@@ -28,7 +28,7 @@ class LoadMoviesYearUseCaseTests: QuickSpec {
                 it("Carrega todos os filmes da memória") {
                     let useCase = LoadMoviesYearUseCase(memoryRepository: spy)
                     
-                    _ = useCase.run()
+                    useCase.run()
                     
                     expect(spy.callGetMoviesYearCount) == 1
                 }

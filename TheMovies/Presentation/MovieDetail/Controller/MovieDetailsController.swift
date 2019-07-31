@@ -12,13 +12,13 @@ import RxSwift
 final class MovieDetailsController: UIViewController {
     
     private var disposeBag = DisposeBag()
-    private var presenter: MovieDetailsPresenter
+    private var presenter: MovieDetailsPresenterProtocol
     
     var id = 0
     
     private var detailsView = MovieDetailsView()
     
-    init(presenter: MovieDetailsPresenter) {
+    init(presenter: MovieDetailsPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         
@@ -49,7 +49,7 @@ final class MovieDetailsController: UIViewController {
     }
     
     /// Configura a navigation bar
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         self.navigationController?.navigationBar.tintColor = .white
         self.detailsView.setGradientBackground(colorTop: .clear, colorBottom: .white)
         self.navigationController?.navigationBar.barStyle = .black
@@ -57,7 +57,7 @@ final class MovieDetailsController: UIViewController {
     
     
     /// Atribui o estado inicial para a navigation bar
-    func setNavigationBarToDefault() {
+    private func setNavigationBarToDefault() {
         self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.popViewController(animated: true)
     }
@@ -77,7 +77,7 @@ extension MovieDetailsController {
         }.disposed(by: disposeBag)
     }
     
-    func fillInfo(with movie: Movie) {
+    private func fillInfo(with movie: Movie) {
         var genreNames = ""
         for genre in movie.genres {
             genreNames += genre.name + ", "
@@ -103,7 +103,7 @@ extension MovieDetailsController {
         }.disposed(by: disposeBag)
     }
     
-    func favoriteMovie() {
+    private func favoriteMovie() {
         self.presenter.favoriteMovieButtonWasTapped(id: self.id)
     }
 }

@@ -10,19 +10,10 @@
 import RxSwift
 
 /// Este caso de uso é responsável por carregar os detalhes de um filme
-final class LoadMovieDetailUseCase {
+final class LoadMovieDetailUseCase: UseCase<Int, Array<Movie>> {
     
     private var memoryRepository: MovieMemoryRepositoryProtocol
     private var disposeBag = DisposeBag()
-    
-    private let loadMovieDetailPublisher = PublishSubject<[Movie]>()
-    
-    /// Fluxo: Retorna todos os filmes que contém o id previamente informado assim que todos forem carregados
-    var loadMovieDetailStream: Observable <[Movie]> {
-        get {
-            return loadMovieDetailPublisher.asObservable()
-        }
-    }
     
     init(memoryRepository: MovieMemoryRepositoryProtocol) {
         self.memoryRepository = memoryRepository
@@ -32,8 +23,13 @@ final class LoadMovieDetailUseCase {
     /// Carrega os detalhes de um filme
     ///
     /// - Parameter id: Identificação do filme
-    func run(with id: Int){
-        self.loadMovieDetailPublisher.onNext(self.memoryRepository.getMovie(from: id))
+    override func run(_ params: Int...){
+        
+        guard let id = params.first else {
+            fatalError("This use case needs the parameter id")
+        }
+        
+        self.resultPublisher.onNext(self.memoryRepository.getMovie(from: id))
     }
 }
 

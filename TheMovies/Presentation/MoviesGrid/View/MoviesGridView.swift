@@ -15,6 +15,7 @@ final class MoviesGridView: UIView {
     private(set) var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.accessibilityLabel = "GridMoviesCollectionView"
         view.register(MoviesGridCell.self, forCellWithReuseIdentifier: "MoviesGridCell")
         return view
     }()
@@ -36,6 +37,7 @@ final class MoviesGridView: UIView {
     //MARK:- Constructors -
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.accessibilityLabel = "MoviesGridView"
         setupUIElements()
     }
     
@@ -57,6 +59,8 @@ final class MoviesGridView: UIView {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         
+        feedbackView.isHidden = true
+        
         self.addSubview(collectionView)
         self.addSubview(searchBar)
         self.addSubview(feedbackView)
@@ -73,13 +77,12 @@ final class MoviesGridView: UIView {
         offsetView.snp.makeConstraints { (ConstraintMaker) in
             ConstraintMaker.width.equalTo(searchBar)
             ConstraintMaker.height.equalTo(searchBar).offset(10)
-            
         }
         
         collectionView.snp.makeConstraints {
             (ConstraintMaker) in
             
-            ConstraintMaker.bottom.left.right.equalTo(guide)
+            ConstraintMaker.bottom.left.right.equalToSuperview()
             ConstraintMaker.top.equalTo(searchBar.snp.bottom).inset(10)
         }
         

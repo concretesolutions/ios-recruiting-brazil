@@ -9,25 +9,17 @@
 import RxSwift
 
 /// Este caso de uso carrega todos os filmes favoritados da memória
-final class LoadFavoriteMoviesUseCase {
+class LoadFavoriteMoviesUseCase: UseCase<[Movie], [Movie]> {
     
     private var memoryRepository: MovieMemoryRepositoryProtocol
     private var disposeBag = DisposeBag()
-    
-    private let moviesLoadedPublisher = PublishSubject<[Movie]>()
-    /// Fluxo: É chamado após o carregamento de todos os filmes favoritados
-    var moviesLoadedStream: Observable <[Movie]> {
-        get {
-            return moviesLoadedPublisher.asObservable()
-        }
-    }
     
     init(memoryRepository: MovieMemoryRepositoryProtocol) {
         self.memoryRepository = memoryRepository
     }
     
-    func run(){
+    override func run(_ params: [Movie]...) {
         let favoriteMovies = self.memoryRepository.getAllFavoriteMovies()
-        moviesLoadedPublisher.onNext(favoriteMovies)
+        resultPublisher.onNext(favoriteMovies)
     }
 }

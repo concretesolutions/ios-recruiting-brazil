@@ -11,19 +11,11 @@ import RxCocoa
 
 
 /// Carrega todos os Gêneros da API e salva em cache na memória
-final class LoadGenresAndCacheUseCase {
+final class LoadGenresAndCacheUseCase: UseCase<Void, Bool> {
     
     private var memoryRepository: GenreMemoryRepositoryProtocol
     private var networkRepository: GenreNetworkRepositoryProtocol
     private var disposeBag = DisposeBag()
-    
-    // Outputs
-    private let genresLoadedPublisher = PublishSubject<Bool>()
-    var genresLoadedStream: Observable <Bool> {
-        get {
-            return genresLoadedPublisher.asObservable()
-        }
-    }
     
     init(memoryRepository: GenreMemoryRepositoryProtocol,
          networkRepository: GenreNetworkRepositoryProtocol) {
@@ -31,13 +23,15 @@ final class LoadGenresAndCacheUseCase {
         self.memoryRepository = memoryRepository
         self.networkRepository = networkRepository
         
+        super.init()
+        
         self.networkRepository.getGenresStream.bind { [weak self] (genres) in
             self?.memoryRepository.cache(genres: genres)
-            self?.genresLoadedPublisher.onNext(true)
+            self?.resultPublisher.onNext(true)
         }.disposed(by: disposeBag)
     }
     
-    func run(){
+    override func run(_ params: Void...){
         self.networkRepository.getGenres()
     }
 }

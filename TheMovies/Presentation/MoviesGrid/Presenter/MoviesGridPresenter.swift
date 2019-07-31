@@ -21,10 +21,10 @@ protocol MoviesGridPresenterProtocol {
 
 final class MoviesGridPresenter: MoviesGridPresenterProtocol {
     
-    private let loadMoviesUseCase: LoadMoviesFromNetworkAndCacheUseCase
-    private let showMovieDetailsUseCase: ShowMovieDetailsUserCase
-    private let loadGenresAndCacheUseCase: LoadGenresAndCacheUseCase
-    private let loadMoviesFromCacheUseCase: LoadMoviesFromCacheUseCase
+    private let loadMoviesUseCase: UseCase<Void, Array<Movie>>
+    private let showMovieDetailsUseCase: UseCase<Int, Bool>
+    private let loadGenresAndCacheUseCase: UseCase<Void, Bool>
+    private let loadMoviesFromCacheUseCase: UseCase<Void, Array<Movie>>
     
     private let disposeBag = DisposeBag()
     
@@ -45,17 +45,17 @@ final class MoviesGridPresenter: MoviesGridPresenterProtocol {
         }
     }
     
-    init(loadMoviesUseCase: LoadMoviesFromNetworkAndCacheUseCase,
-         showMovieDetailsUseCase: ShowMovieDetailsUserCase,
-         loadGenresAndCacheUseCase: LoadGenresAndCacheUseCase,
-         loadMoviesFromCacheUseCase: LoadMoviesFromCacheUseCase) {
+    init(loadMoviesUseCase: UseCase<Void, Array<Movie>>,
+         showMovieDetailsUseCase: UseCase<Int, Bool>,
+         loadGenresAndCacheUseCase: UseCase<Void, Bool>,
+         loadMoviesFromCacheUseCase: UseCase<Void, Array<Movie>>) {
         self.loadMoviesUseCase = loadMoviesUseCase
         self.showMovieDetailsUseCase = showMovieDetailsUseCase
         self.loadGenresAndCacheUseCase = loadGenresAndCacheUseCase
         self.loadMoviesFromCacheUseCase = loadMoviesFromCacheUseCase
         
-        self.loadMoviesUseCase.moviesLoadedStream.bind(to: loadMoviesPublisher).disposed(by: disposeBag)
-        self.loadMoviesFromCacheUseCase.moviesLoadedStream.bind(to: reloadMoviesPublisher).disposed(by: disposeBag)
+        self.loadMoviesUseCase.resultStream.bind(to: loadMoviesPublisher).disposed(by: disposeBag)
+        self.loadMoviesFromCacheUseCase.resultStream.bind(to: reloadMoviesPublisher).disposed(by: disposeBag)
     }
     
     
@@ -73,7 +73,7 @@ final class MoviesGridPresenter: MoviesGridPresenterProtocol {
     ///
     /// - Parameter id: Índice da célula que foi clicada
     func movieCellWasTapped(id: Int) {
-        showMovieDetailsUseCase.run(with: id)
+        showMovieDetailsUseCase.run(id)
     }
     
     /// Realiza o cache dos gêneros

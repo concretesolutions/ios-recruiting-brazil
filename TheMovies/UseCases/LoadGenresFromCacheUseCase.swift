@@ -10,25 +10,17 @@ import RxSwift
 import RxCocoa
 
 /// Carrega todos os generos do cache
-final class LoadGenresFromCacheUseCase {
+final class LoadGenresFromCacheUseCase: UseCase<Void, Array<Genre>> {
     
     private var memoryRepository: GenreMemoryRepositoryProtocol
     private var disposeBag = DisposeBag()
-    
-    // Outputs
-    private let genresLoadedPublisher = PublishSubject<[Genre]>()
-    var genresLoadedStream: Observable <[Genre]> {
-        get {
-            return genresLoadedPublisher.asObservable()
-        }
-    }
     
     init(memoryRepository: GenreMemoryRepositoryProtocol) {
         
         self.memoryRepository = memoryRepository
     }
     
-    func run(){
-        genresLoadedPublisher.onNext(self.memoryRepository.getAll())
+    override func run(_ params: Void...){
+        self.resultPublisher.onNext(self.memoryRepository.getAll())
     }
 }

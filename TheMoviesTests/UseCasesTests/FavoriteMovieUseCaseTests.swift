@@ -22,7 +22,7 @@ class FavoriteMovieUseCaseTests: QuickSpec {
             beforeEach {
                 disposeBag = DisposeBag()
                 mockStore = MovieStoreMock()
-                spy = MovieMemoryRepositorySpy(with: mockStore.mock)
+                spy = MovieMemoryRepositorySpy()
             }
             
             afterEach {
@@ -36,11 +36,11 @@ class FavoriteMovieUseCaseTests: QuickSpec {
                     let useCase = ToogleFavoriteMovieStateUseCase(memoryRepository: spy)
                     
                     waitUntil { done in
-                        useCase.movieFavoritedStream.bind { (value) in
+                        useCase.resultStream.bind { (value) in
                             done()
                         }.disposed(by: disposeBag)
                         
-                        useCase.run(with: mockStore.mock.first!.id)
+                        useCase.run(mockStore.mock.first!.id)
                     }
                     
                     expect(spy.callSetFavoriteMovieCount) == 1

@@ -44,53 +44,18 @@ final class Movie {
         case imageNotFound
     }
     
-    init(id: Int, title: String, image: UIImage, releaseDate: String, overview: String, genres: [Genre]) {
+    init(id: Int, title: String, image: UIImage, releaseDate: String, overview: String, genres: [Genre], liked: Bool = false) {
         self.id = id
         self.title = title
         self.image = image
         self.releaseDate = releaseDate
         self.overview = overview
         self.genres = genres
+        self.liked = liked
     }
     
     func setFavorite(value: Bool) {
         self.liked = value
-    }
-    
-    static func build(with entity: MovieEntity, genreRepository: GenreMemoryRepositoryProtocol) -> Observable<Movie> {
-        return Observable.create {
-            observer -> Disposable in
-            
-            var image: UIImage = UIImage()
-
-            let url = URL(string: NetworkConstants.baseImageURL + entity.posterPath)!
-            if let data = try? Data(contentsOf: url) {
-                image = UIImage(data: data)!
-            } else {
-                observer.onError(MovieError.imageNotFound)
-            }
-            
-            var genres = [Genre]()
-            
-            for genreId in entity.genreIds {
-                guard let genre = genreRepository.getGenre(with: genreId) else {
-                    observer.onError(MovieError.genreNotFound)
-                    return Disposables.create()
-                }
-                
-                genres.append(genre)
-            }
-            
-            let movie = Movie(id: entity.id,
-                              title: entity.title,
-                              image: image,
-                              releaseDate: entity.releaseDate,
-                              overview: entity.overview,
-                              genres: genres)
-
-            observer.onNext(movie)
-            return Disposables.create()
-        }
     }
 }
 

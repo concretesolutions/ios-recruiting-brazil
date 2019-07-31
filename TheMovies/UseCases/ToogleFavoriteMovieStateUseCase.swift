@@ -9,8 +9,7 @@
 import RxSwift
 
 /// Favorita/Desfavorita um filme
-final class ToogleFavoriteMovieStateUseCase {
-    
+final class ToogleFavoriteMovieStateUseCase: UseCase<Int, Movie> {
     private var memoryRepository: MovieMemoryRepositoryProtocol
     private var disposeBag = DisposeBag()
     
@@ -18,23 +17,21 @@ final class ToogleFavoriteMovieStateUseCase {
         case MovieNotFound
     }
     
-    // Outputs
-    private let movieFavoritedPublisher = PublishSubject<Movie>()
-    var movieFavoritedStream: Observable <Movie> {
-        get {
-            return movieFavoritedPublisher.asObservable()
-        }
-    }
-    
     init(memoryRepository: MovieMemoryRepositoryProtocol) {
         self.memoryRepository = memoryRepository
     }
     
-    func run(with id: Int){
+    override func run(_ params: Int...){
+        
+        guard let id = params.first else {
+            fatalError("This use case needs the parameter id(Int)")
+        }
+        
         guard let result = self.memoryRepository.setFavoriteMovie(id: id) else {
-            movieFavoritedPublisher.onError(FavoriteMovieUseCaseError.MovieNotFound)
+            resultPublisher.onError(FavoriteMovieUseCaseError.MovieNotFound)
             return
         }
-        movieFavoritedPublisher.onNext(result)
+        
+        resultPublisher.onNext(result)
     }
 }

@@ -39,7 +39,7 @@ class LoadMoviesFromNetworkAndCacheUseCaseTests: QuickSpec {
                     let useCase = LoadMoviesFromNetworkAndCacheUseCase(memoryRepository: movieMemorySpy, networkRepository: movieNetworkSpy, convertMovieEntityToModelUseCase: convertUseCase)
                     
                     waitUntil { done in
-                        useCase.moviesLoadedStream.subscribe(onNext: { _ in
+                        useCase.resultStream.subscribe(onNext: { _ in
                             done()
                         }).disposed(by: disposeBag)
                         
@@ -54,7 +54,7 @@ class LoadMoviesFromNetworkAndCacheUseCaseTests: QuickSpec {
                     let useCase = LoadMoviesFromNetworkAndCacheUseCase(memoryRepository: movieMemorySpy, networkRepository: movieNetworkSpy, convertMovieEntityToModelUseCase: convertUseCase)
                     
                     waitUntil { done in
-                        useCase.moviesLoadedStream.subscribe(onNext: { _ in
+                        useCase.resultStream.subscribe(onNext: { _ in
                             done()
                         }).disposed(by: disposeBag)
                         

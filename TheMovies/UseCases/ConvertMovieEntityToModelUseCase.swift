@@ -9,7 +9,7 @@
 import RxSwift
 
 /// Converte uma MovieEntity em uma instância do tipo Movie
-final class ConvertMovieEntityToModelUseCase {
+final class ConvertMovieEntityToModelUseCase: UseCase<Array<MovieEntity>, Array<Movie>> {
     
     private var genreMemoryRepository: GenreMemoryRepositoryProtocol
     
@@ -17,14 +17,19 @@ final class ConvertMovieEntityToModelUseCase {
         self.genreMemoryRepository = genreMemoryRepository
     }
     
-    func run(movies: [MovieEntity]) -> [Movie] {
+    override func run(_ params: [MovieEntity]...) {
+        
+        guard let movies = params.first else {
+            fatalError("This use case needs the parameter movies entity")
+        }
+        
         var moviesAux = [Movie]()
         for movieEntity in movies {
             let movie = convert(entity: movieEntity)
             moviesAux.append(movie)
         }
         
-        return moviesAux
+        resultPublisher.onNext(moviesAux)
     }
     
     private func convert(entity: MovieEntity) -> Movie {

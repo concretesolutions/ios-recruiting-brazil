@@ -32,7 +32,7 @@ class LoadFavoriteMoviesUseTests: QuickSpec {
                     let useCase = LoadFavoriteMoviesUseCase(memoryRepository: spy)
                     
                     waitUntil { done in
-                        useCase.moviesLoadedStream.subscribe(onNext: { _ in
+                        useCase.resultStream.subscribe(onNext: { _ in
                             done()
                         }).disposed(by: disposeBag)
                         

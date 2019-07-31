@@ -19,16 +19,18 @@ protocol FavoriteMoviesPresenterProtocol {
     func unfavoriteMovieButtonWasTapped(id: Int)
     func loadMoviesYear()
     func loadMoviesGenres()
+    func filterResults(with date: String,
+                       and genre: String)
 }
 
 final class FavoriteMoviesPresenter: FavoriteMoviesPresenterProtocol {
     
     private var disposeBag = DisposeBag()
     
-    private var loadFavoriteMoviesUseCase: LoadFavoriteMoviesUseCase
-    private var favoriteMovieUseCase: ToogleFavoriteMovieStateUseCase
-    private var loadMoviesYearUseCase: LoadMoviesYearUseCase
-    private var loadGenresFromCacheUseCase: LoadGenresFromCacheUseCase
+    private var loadFavoriteMoviesUseCase: UseCase<[Movie], [Movie]>
+    private var favoriteMovieUseCase: UseCase<Int, Movie>
+    private var loadMoviesYearUseCase: UseCase<Void, Set<String>>
+    private var loadGenresFromCacheUseCase: UseCase<Void, [Genre]>
     
     private var loadFavoriteMoviesPublisher = BehaviorSubject<[Movie]>(value: [])
     var loadFavoriteMoviesStream: Observable<[Movie]> {
@@ -65,23 +67,24 @@ final class FavoriteMoviesPresenter: FavoriteMoviesPresenterProtocol {
         }
     }
     
-    init(loadFavoriteMoviesUseCase: LoadFavoriteMoviesUseCase,
-         favoriteMovieUseCase: ToogleFavoriteMovieStateUseCase,
-         loadMoviesYearUseCase: LoadMoviesYearUseCase,
-         loadGenresFromCacheUseCase: LoadGenresFromCacheUseCase) {
+    init(loadFavoriteMoviesUseCase: UseCase<[Movie], [Movie]>,
+         favoriteMovieUseCase: UseCase<Int, Movie>,
+         loadMoviesYearUseCase: UseCase<Void, Set<String>>,
+         loadGenresFromCacheUseCase: UseCase<Void, [Genre]>) {
         self.loadFavoriteMoviesUseCase = loadFavoriteMoviesUseCase
         self.favoriteMovieUseCase = favoriteMovieUseCase
         self.loadMoviesYearUseCase = loadMoviesYearUseCase
         self.loadGenresFromCacheUseCase = loadGenresFromCacheUseCase
         
-        self.loadFavoriteMoviesUseCase.moviesLoadedStream.bind(to: loadFavoriteMoviesPublisher).disposed(by: disposeBag)
-        self.loadGenresFromCacheUseCase.genresLoadedStream.bind {
+        self.loadFavoriteMoviesUseCase.resultStream.bind(to: loadFavoriteMoviesPublisher).disposed(by: disposeBag)
+        self.loadGenresFromCacheUseCase.resultStream.bind {
             [weak self] genres in
             self?.publishGenreNames(genres: genres)
         }.disposed(by: disposeBag)
-        self.favoriteMovieUseCase.movieFavoritedStream.bind(to: movieUnfavoritedPublisher).disposed(by: disposeBag)
+        self.favoriteMovieUseCase.resultStream.bind(to: movieUnfavoritedPublisher).disposed(by: disposeBag)
+        self.loadMoviesYearUseCase.resultStream.bind(to: self.loadMoviesYearPublisher).disposed(by: disposeBag)
+        
     }
-    
     
     fileprivate func publishGenreNames(genres: [Genre]) {
         var genreAux = [String]()
@@ -101,13 +104,13 @@ final class FavoriteMoviesPresenter: FavoriteMoviesPresenterProtocol {
     ///
     /// - Parameter id: identicação do filme
     func unfavoriteMovieButtonWasTapped(id: Int) {
-        self.favoriteMovieUseCase.run(with: id)
+        self.favoriteMovieUseCase.run(id)
     }
     
     
     /// Carrega todos os anos dos filmes já guardados no cache
     func loadMoviesYear() {
-        self.loadMoviesYearPublisher.onNext(self.loadMoviesYearUseCase.run())
+        self.loadMoviesYearUseCase.run()
     }
     
     /// Carrega todos os generos dos filmes

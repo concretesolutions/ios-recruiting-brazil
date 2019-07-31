@@ -22,10 +22,10 @@ class MovieMemoryRepositorySpy: MovieMemoryRepositoryProtocol {
     var callGetMoviesYearCount = 0
     
     private var isPageLoaded = false
-    private var mock = [Movie]()
-    init(isPageLoaded: Bool = false, with mock: [Movie] = []) {
+    private var store: MovieStoreMock
+    init(isPageLoaded: Bool = false, with store: MovieStoreMock = MovieStoreMock()) {
         self.isPageLoaded = isPageLoaded
-        self.mock = mock
+        self.store = store
     }
     
     func cache(page: Int, movies: [Movie]) {
@@ -59,7 +59,7 @@ class MovieMemoryRepositorySpy: MovieMemoryRepositoryProtocol {
     
     func setFavoriteMovie(id: Int) -> Movie? {
         self.callSetFavoriteMovieCount+=1
-        return self.mock.first
+        return self.store.mock.first
     }
     
     func getMoviesYear() -> Set<String> {

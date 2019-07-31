@@ -19,8 +19,8 @@ protocol MovieDetailsPresenterProtocol {
 final class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     
     private var disposeBag = DisposeBag()
-    private var loadMovieDetailUseCase: LoadMovieDetailUseCase
-    private var favoriteMovieUseCase: ToogleFavoriteMovieStateUseCase
+    private var loadMovieDetailUseCase: UseCase<Int, [Movie]>
+    private var favoriteMovieUseCase: UseCase<Int, Movie>
     
     
     /// Fluxo de retorno: É chamado quando os detalhes do filme especificado for carregado
@@ -39,13 +39,13 @@ final class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
         }
     }
     
-    init(loadMovieDetailUseCase: LoadMovieDetailUseCase,
-         favoriteMovieUseCase: ToogleFavoriteMovieStateUseCase) {
+    init(loadMovieDetailUseCase: UseCase<Int, [Movie]>,
+         favoriteMovieUseCase: UseCase<Int, Movie>) {
         self.loadMovieDetailUseCase = loadMovieDetailUseCase
         self.favoriteMovieUseCase = favoriteMovieUseCase
         
-        self.loadMovieDetailUseCase.loadMovieDetailStream.bind(to: loadMovieDetailPublisher).disposed(by: disposeBag)
-        self.favoriteMovieUseCase.movieFavoritedStream.bind(to: movieWasFavoritedPublisher).disposed(by: disposeBag)
+        self.loadMovieDetailUseCase.resultStream.bind(to: loadMovieDetailPublisher).disposed(by: disposeBag)
+        self.favoriteMovieUseCase.resultStream.bind(to: movieWasFavoritedPublisher).disposed(by: disposeBag)
     }
     
     
@@ -53,7 +53,7 @@ final class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     ///
     /// - Parameter id: identificação do filme a ser carregado
     func loadMovieDetail(id: Int) {
-        self.loadMovieDetailUseCase.run(with: id)
+        self.loadMovieDetailUseCase.run(id)
     }
     
     
@@ -61,6 +61,6 @@ final class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     ///
     /// - Parameter id: identificação do filme a ser favoritado
     func favoriteMovieButtonWasTapped(id: Int) {
-        self.favoriteMovieUseCase.run(with: id)
+        self.favoriteMovieUseCase.run(id)
     }
 }

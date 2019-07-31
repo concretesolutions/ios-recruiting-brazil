@@ -8,6 +8,7 @@
 
 import Quick
 import Nimble
+import RxSwift
 @testable import TheMovies
 
 class ConvertMovieEntityToModelUseCaseTests: QuickSpec {
@@ -16,15 +17,18 @@ class ConvertMovieEntityToModelUseCaseTests: QuickSpec {
         describe("Use Case") {
             var mockStore: MovieEntityStoreMock!
             var spy: GenreMemoryRepositorySpy!
+            var disposeBag: DisposeBag!
             
             beforeEach {
                 mockStore = MovieEntityStoreMock()
                 spy = GenreMemoryRepositorySpy()
+                disposeBag = DisposeBag()
             }
             
             afterEach {
                 mockStore = nil
                 spy = nil
+                disposeBag = nil
             }
             
             describe("Logic") {
@@ -32,11 +36,17 @@ class ConvertMovieEntityToModelUseCaseTests: QuickSpec {
                     
                     let useCase = ConvertMovieEntityToModelUseCase(genreMemoryRepository: spy)
                     
-                    let results = useCase.run(movies: mockStore.mock)
+                    waitUntil { done in
+                        useCase.resultStream.bind(onNext: { (movies) in
+                            expect(movies.count) == mockStore.mock.count
+                            expect(movies.first!.title) == mockStore.mock.first!.title
+                            done()
+                        }).disposed(by: disposeBag)
+                        
+                        useCase.run(mockStore.mock)
+                    }
                     
                     expect(spy.callGetGenreCount) == mockStore.mock.count
-                    expect(results.count) == mockStore.mock.count
-                    expect(results.first!.title) == mockStore.mock.first!.title
                 }
             }
         }
