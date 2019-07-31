@@ -13,10 +13,15 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Fetch CocoaPods Specs
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+
       # Install CocoaPods
       - run:
           name: Install CocoaPods
-          command: pod install
+          command: pod install --verbose
 
       # Build the app and run tests
       - run:
@@ -24,7 +29,7 @@ jobs:
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 6
-            SCAN_SCHEME: WebTests
+            SCAN_SCHEME: TheMovies
 
       # Collect XML test results data to show in the UI,
       # and save the same XML files under test-results folder
