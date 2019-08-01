@@ -7,3 +7,9 @@
 //
 
 import Foundation
+import RealmSwift
+
+class Movie: Object {
+    @objc dynamic var name = ""
+    @objc dynamic var image: Data? = nil
+}

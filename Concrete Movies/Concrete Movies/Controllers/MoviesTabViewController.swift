@@ -8,14 +8,18 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class MoviesTabViewController: ViewController {
     @IBOutlet weak var movieTabBarItem: UITabBarItem!
     @IBOutlet weak var moviesTabCollectionView: UICollectionView!
+    var images: [UIImage] = []
+    var movieTitles: [String] = []
     
     override func viewDidLoad() {
         collectionViewInitialSetup()
         collectionViewSetLayout()
+        makeMoviesRequest()
     }
 }
 
@@ -37,7 +41,7 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 186, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -46,7 +50,11 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         collectionView.register(UINib(nibName: "MoviesTabCollection", bundle: Bundle(for: MoviesTabCollection.self)), forCellWithReuseIdentifier: "MoviesTabCollection")
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesTabCollection", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesTabCollection", for: indexPath) as! MoviesTabCollection
+        if(self.images.first != nil && self.movieTitles.first != nil) {
+            cell.movieTitle.text = movieTitles[indexPath.item]
+            cell.movieImage.image = images[indexPath.item]
+        }
         return cell
     }
     
@@ -61,6 +69,38 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
             return header
         } else {
             assert(false)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
+        performSegue(withIdentifier: "MovieDetails", sender: self)
+    }
+}
+
+extension MoviesTabViewController: ImageDelegate {
+    func makeMoviesRequest() {
+        let request = MoviesGridRequest()
+        request.imageDelegate = self
+        request.moviesRequest()
+    }
+    
+    func GetMovieImage() {
+        getData()
+        self.moviesTabCollectionView.reloadData()
+    }
+}
+
+extension MoviesTabViewController {
+    func getData() {
+        let realm = try! Realm()
+        let images = realm.objects(Movie.self)
+        images.forEach { (movie) in
+            guard let data = movie.image else { return }
+            guard let image = UIImage(data: data) else { return }
+            self.images.append(image)
+            let text = movie.name
+            self.movieTitles.append(text)
         }
     }
 }

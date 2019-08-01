@@ -11,7 +11,6 @@ import UIKit
 
 class FavoritesTabViewController: ViewController, UITableViewDelegate {
     @IBOutlet weak var favoritesBarItem: UITabBarItem!
-
     override func viewDidLoad() {
     }
 }

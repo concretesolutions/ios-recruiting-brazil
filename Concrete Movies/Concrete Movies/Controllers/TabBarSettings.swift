@@ -12,7 +12,6 @@ import UIKit
 class TabBarSettings: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBar.barTintColor = .orange
         self.tabBar.items?[0].image = UIImage(named: "list_icon")
         self.tabBar.items?[1].image = UIImage(named: "favorite_full_icon")
     }

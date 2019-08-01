@@ -9,10 +9,13 @@
 import UIKit
 
 class MoviesTabCollection: UICollectionViewCell {
-
+    @IBOutlet weak var movieImage: UIImageView!
+    @IBOutlet weak var movieTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        movieImage.contentMode = .scaleToFill
+        self.sendSubviewToBack(movieImage)
     }
 
 }

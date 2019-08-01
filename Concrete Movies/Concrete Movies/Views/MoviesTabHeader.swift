@@ -9,11 +9,10 @@
 import UIKit
 
 class MoviesTabHeader: UICollectionReusableView {
-
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .orange
-        // Initialization code
     }
     
 }

@@ -19,27 +19,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="423" height="184.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOi-Sn-EHo">
-                        <rect key="frame" x="184" y="26" width="86" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="1Go-eO-f3H">
+                        <rect key="frame" x="0.0" y="84" width="423" height="56"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="1Go-eO-f3H" secondAttribute="height" multiplier="423:56" id="7Wo-XN-BX5"/>
+                        </constraints>
+                        <textInputTraits key="textInputTraits"/>
+                    </searchBar>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOi-Sn-EHo">
+                        <rect key="frame" x="168" y="38" width="54.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="1Go-eO-f3H">
-                        <rect key="frame" x="0.0" y="84" width="423" height="56"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </searchBar>
                 </subviews>
-                <color key="backgroundColor" red="1" green="0.52543916769999999" blue="0.066651682709999993" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.93367904424667358" green="0.77693289518356323" blue="0.34127980470657349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="1Go-eO-f3H" secondAttribute="bottom" constant="44.5" id="Idw-Aj-ed4"/>
-                    <constraint firstItem="1Go-eO-f3H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="a1o-Sn-3RH"/>
-                    <constraint firstAttribute="trailing" secondItem="1Go-eO-f3H" secondAttribute="trailing" id="ufN-Wc-AyQ"/>
+                    <constraint firstItem="tOi-Sn-EHo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="168" id="9h2-d2-lSR"/>
+                    <constraint firstAttribute="bottom" secondItem="1Go-eO-f3H" secondAttribute="bottom" constant="44.5" id="Hy5-Ud-msb"/>
+                    <constraint firstAttribute="trailing" secondItem="1Go-eO-f3H" secondAttribute="trailing" id="k8u-Oq-h4D"/>
+                    <constraint firstItem="tOi-Sn-EHo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="38" id="n75-EY-T9h"/>
+                    <constraint firstItem="1Go-eO-f3H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="szO-GL-v7r"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="searchBar" destination="1Go-eO-f3H" id="EAv-tr-5HI"/>
+            </connections>
             <point key="canvasLocation" x="155.79710144927537" y="156.36160714285714"/>
         </tableViewCell>
     </objects>
