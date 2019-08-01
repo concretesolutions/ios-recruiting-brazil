@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,11 @@
 		BF36F8F622F2434E00AA25C1 /* MoviesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F8F522F2434E00AA25C1 /* MoviesTabViewController.swift */; };
 		BF36F8F822F2435E00AA25C1 /* FavoritesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F8F722F2435E00AA25C1 /* FavoritesTabViewController.swift */; };
 		BF36F8FC22F24D7F00AA25C1 /* TabBarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F8FB22F24D7F00AA25C1 /* TabBarSettings.swift */; };
+		BF36F90022F25D1F00AA25C1 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F8FF22F25D1F00AA25C1 /* Movie.swift */; };
+		BF36F90322F260D000AA25C1 /* MoviesTabHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F90122F260D000AA25C1 /* MoviesTabHeader.swift */; };
+		BF36F90422F260D000AA25C1 /* MoviesTabHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF36F90222F260D000AA25C1 /* MoviesTabHeader.xib */; };
+		BF36F90B22F2753500AA25C1 /* MoviesTabCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F90922F2753500AA25C1 /* MoviesTabCollection.swift */; };
+		BF36F90C22F2753500AA25C1 /* MoviesTabCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF36F90A22F2753500AA25C1 /* MoviesTabCollection.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		BF36F8F522F2434E00AA25C1 /* MoviesTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTabViewController.swift; sourceTree = "<group>"; };
 		BF36F8F722F2435E00AA25C1 /* FavoritesTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTabViewController.swift; sourceTree = "<group>"; };
 		BF36F8FB22F24D7F00AA25C1 /* TabBarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSettings.swift; sourceTree = "<group>"; };
+		BF36F8FF22F25D1F00AA25C1 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		BF36F90122F260D000AA25C1 /* MoviesTabHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTabHeader.swift; sourceTree = "<group>"; };
+		BF36F90222F260D000AA25C1 /* MoviesTabHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesTabHeader.xib; sourceTree = "<group>"; };
+		BF36F90922F2753500AA25C1 /* MoviesTabCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTabCollection.swift; sourceTree = "<group>"; };
+		BF36F90A22F2753500AA25C1 /* MoviesTabCollection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesTabCollection.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,6 @@
 				143EB92DCADA7CCCF7EE2812 /* Pods-Concrete Movies.debug.xcconfig */,
 				234A4C633BD177ECC41D42AD /* Pods-Concrete Movies.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -93,6 +102,7 @@
 		BF36F8F022F23E6A00AA25C1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF36F8FF22F25D1F00AA25C1 /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -100,6 +110,10 @@
 		BF36F8F122F23E7000AA25C1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BF36F90122F260D000AA25C1 /* MoviesTabHeader.swift */,
+				BF36F90222F260D000AA25C1 /* MoviesTabHeader.xib */,
+				BF36F90922F2753500AA25C1 /* MoviesTabCollection.swift */,
+				BF36F90A22F2753500AA25C1 /* MoviesTabCollection.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,7 +198,9 @@
 			files = (
 				BF36F8E922F23BF300AA25C1 /* LaunchScreen.storyboard in Resources */,
 				BF36F8E622F23BF300AA25C1 /* Assets.xcassets in Resources */,
+				BF36F90C22F2753500AA25C1 /* MoviesTabCollection.xib in Resources */,
 				BF36F8E422F23BF300AA25C1 /* Main.storyboard in Resources */,
+				BF36F90422F260D000AA25C1 /* MoviesTabHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,11 +253,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF36F90322F260D000AA25C1 /* MoviesTabHeader.swift in Sources */,
 				BF36F8F822F2435E00AA25C1 /* FavoritesTabViewController.swift in Sources */,
 				BF36F8F622F2434E00AA25C1 /* MoviesTabViewController.swift in Sources */,
+				BF36F90022F25D1F00AA25C1 /* Movie.swift in Sources */,
 				BF36F8FC22F24D7F00AA25C1 /* TabBarSettings.swift in Sources */,
 				BF36F8E122F23BF300AA25C1 /* ViewController.swift in Sources */,
 				BF36F8DF22F23BF300AA25C1 /* AppDelegate.swift in Sources */,
+				BF36F90B22F2753500AA25C1 /* MoviesTabCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
