@@ -34,7 +34,7 @@ class MoviesTabViewController: ViewController {
 extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionViewInitialSetup() {
-        SwiftSpinner.show("Getting popular movies...")
+        SwiftSpinner.show("Just a minute...🍿")
         moviesTabCollectionView.delegate = self
         moviesTabCollectionView.dataSource = self
     }
@@ -122,7 +122,7 @@ extension MoviesTabViewController {
         }
         let indexPath = IndexPath(item: index, section: 0)
         self.moviesTabCollectionView.reloadItems(at: [indexPath])
-        if index > 10 {
+        if index > 15 {
             SwiftSpinner.hide()
         }
     }
