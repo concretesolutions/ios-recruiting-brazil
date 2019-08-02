@@ -13,9 +13,7 @@ import RealmSwift
 class FavoritesTabViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var favoritesBarItem: UITabBarItem!
     @IBOutlet weak var favoritesTableView: UITableView!
-    var year: [String] = []
-    var details: [String] = []
-    var favorite: [Bool] = []
+    var movieFavorites: [String:Movie] = ["test" : Movie()]
     
     override func viewWillAppear(_ animated: Bool) {
         self.getFavorites()
@@ -37,34 +35,31 @@ class FavoritesTabViewController: ViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         favoritesTableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: Bundle(for: FavoriteTableViewCell.self)), forCellReuseIdentifier: "FavoriteTableViewCell")
         let cell = favoritesTableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell") as! FavoriteTableViewCell
-        if(details.first != nil) {
-            cell.favoriteMovieDetails.text = details[indexPath.item]
-        }
-        if(year.first != nil) {
-            cell.favoriteMovieYear.text = year[indexPath.item]
+        
+        let key = String(indexPath.item)
+        if(self.movieFavorites[key] != nil) {
+            cell.favoriteMovieDetails.text = self.movieFavorites[key]?.details
+            cell.favoriteMovieYear.text = self.movieFavorites[key]?.date
         }
         return cell
     }
 }
 
-extension FavoritesTabViewController: CollectionViewCellDelegate {
+extension FavoritesTabViewController {
     
     func getFavorites() {
-        let realm = try! Realm()
-        let objects = realm.objects(Movie.self)
-        objects.forEach { (movie) in
-            if(movie.favorite) {
-                self.year.append(movie.date)
-                self.details.append(movie.details)
+        do {
+            let realm = try Realm()
+            let objects = realm.objects(Movie.self)
+            for(index,movie) in objects.enumerated() {
+                if(movie.favorite) {
+                    self.movieFavorites[String(index)] = movie
+                }
             }
+        } catch {
+            print("realm error")
         }
+        
         self.favoritesTableView.reloadData()
-    }
-    
-    func reloadView() {
-        getFavorites()
-        DispatchQueue.main.async {
-            self.favoritesTableView.reloadData()
-        }
     }
 }

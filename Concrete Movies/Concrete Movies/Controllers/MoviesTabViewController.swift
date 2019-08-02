@@ -17,6 +17,7 @@ class MoviesTabViewController: ViewController {
     @IBOutlet var moviesTabView: UIView!
     
     var movieDict: [String:Movie] = ["test" : Movie()]
+    var indexes: [Int] = []
 
     override func viewWillAppear(_ animated: Bool) {
         moviesTabCollectionView.reloadData()
@@ -63,7 +64,18 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
             cell.movieTitle.text = self.movieDict[key]?.name
             cell.movieImage.image = UIImage(data: self.movieDict[key]!.image!)
             cell.id = self.movieDict[key]!.id
+            if(self.movieDict[key]!.favorite) {
+                cell.favoriteButton.isSelected = true
+                DispatchQueue.main.async {
+                    cell.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .selected)
+                    cell.favoriteButton.layoutIfNeeded()
+                }
+            } else {
+                cell.favoriteButton.isSelected = false
+            }
         }
+        
+        cell.viewCellDelegate = self
         return cell
     }
     
@@ -101,22 +113,44 @@ extension MoviesTabViewController: ImageDelegate {
 
 extension MoviesTabViewController {
     func getData(_ index: Int, _ movieID: Int) {
-        do {
-            let realm = try Realm()
-            let images = realm.objects(Movie.self)
-            images.forEach { (movie) in
-                if(movie.id == movieID) {
-                    self.movieDict[String(index)] = movie
-                }
+        indexes.append(index)
+        let images = queryDatabase()
+        images.forEach { (movie) in
+            if(movie.id == movieID) {
+                self.movieDict[String(index)] = movie
             }
-        } catch {
-            print("realm error")
         }
-        
         let indexPath = IndexPath(item: index, section: 0)
         self.moviesTabCollectionView.reloadItems(at: [indexPath])
         if index > 10 {
             SwiftSpinner.hide()
+        }
+    }
+    
+    func queryDatabase() -> [Movie] {
+        var movies: [Movie] = []
+        do {
+            let realm = try Realm()
+            let result = realm.objects(Movie.self)
+            result.forEach { (movie) in
+                movies.append(movie)
+            }
+            return movies
+        } catch {
+            print("realm error")
+            return [Movie()]
+        }
+    }
+}
+
+extension MoviesTabViewController: CollectionViewCellDelegate {
+    
+    func reloadView() {
+        let moviesResult = self.queryDatabase()
+        for(index, movie) in moviesResult.enumerated() {
+            self.movieDict[String(indexes[index])] = movie
+            let indexPath = IndexPath(item: index, section: 0)
+            self.moviesTabCollectionView.reloadItems(at: [indexPath])
         }
     }
 }

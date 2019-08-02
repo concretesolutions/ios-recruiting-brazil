@@ -29,19 +29,23 @@ class MoviesTabCollection: UICollectionViewCell {
     }
     
     @IBAction func favoriteButtonPressed(_ sender: Any) {
-        let realm = try! Realm()
-        let objects = realm.objects(Movie.self)
-        objects.forEach { (movie) in
-            if(movie.id == self.id) {
-                try! realm.write {
-                    let updatedObject = movie
-                    updatedObject.favorite = true
-                    realm.add(updatedObject, update: .modified)
-                    favoriteButton.imageView?.image = UIImage(named: "favorite_full_icon")
-                    viewCellDelegate?.reloadView()
+        do {
+            let realm = try Realm()
+            let objects = realm.objects(Movie.self)
+            try objects.forEach { (movie) in
+                if(movie.id == self.id) {
+                    try realm.write {
+                        let updatedObject = movie
+                        updatedObject.favorite = !movie.favorite
+                        realm.add(updatedObject, update: .modified)
+                        viewCellDelegate?.reloadView()
+                    }
                 }
             }
+        } catch {
+            print("realm write error")
         }
+        
     }
     
 
