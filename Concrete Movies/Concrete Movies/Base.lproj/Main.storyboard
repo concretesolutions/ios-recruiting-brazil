@@ -17,17 +17,25 @@
                     <view key="view" contentMode="scaleToFill" id="rZN-6N-Hfg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LAF-ml-cyi">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gNa-eA-LqJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" selectedImage="favorite_full_icon" id="KBs-Xg-aBn"/>
                     <connections>
                         <outlet property="favoritesBarItem" destination="KBs-Xg-aBn" id="Xpy-5m-S1j"/>
+                        <outlet property="favoritesTableView" destination="LAF-ml-cyi" id="2be-wE-DPU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="At1-41-1b9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1971" y="343"/>
+            <point key="canvasLocation" x="1969.5652173913045" y="342.85714285714283"/>
         </scene>
         <!--Movies-->
         <scene sceneID="cdI-ig-VWz">
@@ -57,6 +65,7 @@
                     <connections>
                         <outlet property="movieTabBarItem" destination="Fpn-ew-NRH" id="FuC-7f-7zO"/>
                         <outlet property="moviesTabCollectionView" destination="dgi-hU-Opv" id="sgC-Y1-vTp"/>
+                        <outlet property="moviesTabView" destination="ciw-oK-Qgm" id="vrk-Ei-eK2"/>
                         <segue destination="Iog-5z-yFW" kind="presentation" identifier="MovieDetails" id="oVF-59-1jB"/>
                     </connections>
                 </viewController>
@@ -67,7 +76,6 @@
         <!--Movie Details-->
         <scene sceneID="x6f-oh-Q1i">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QXz-vW-RVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Iog-5z-yFW" customClass="MovieDetails" customModule="Concrete_Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ATr-Aw-bzj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -94,6 +102,7 @@
                         <segue destination="cTM-M9-zS8" kind="show" identifier="&quot;GoBackToMovieList" id="6St-4c-0hZ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QXz-vW-RVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3081" y="-305"/>
         </scene>
@@ -121,6 +130,6 @@
         <image name="favorite_full_icon" width="18" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6St-4c-0hZ"/>
+        <segue reference="Aaz-dP-Ius"/>
     </inferredMetricsTieBreakers>
 </document>

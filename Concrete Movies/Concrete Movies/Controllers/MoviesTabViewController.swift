@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 import RealmSwift
+import SwiftSpinner
 
 class MoviesTabViewController: ViewController {
     @IBOutlet weak var movieTabBarItem: UITabBarItem!
     @IBOutlet weak var moviesTabCollectionView: UICollectionView!
-    var images: [UIImage] = []
-    var movieTitles: [String] = []
+    @IBOutlet var moviesTabView: UIView!
+    
+    var movieDict: [String:Movie] = ["test" : Movie()]
+
+    override func viewWillAppear(_ animated: Bool) {
+        moviesTabCollectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         collectionViewInitialSetup()
@@ -27,9 +33,9 @@ class MoviesTabViewController: ViewController {
 extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionViewInitialSetup() {
+        SwiftSpinner.show("Getting popular movies...")
         moviesTabCollectionView.delegate = self
         moviesTabCollectionView.dataSource = self
-        moviesTabCollectionView.reloadData()
     }
     
     func collectionViewSetLayout() {
@@ -45,15 +51,18 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         collectionView.register(UINib(nibName: "MoviesTabCollection", bundle: Bundle(for: MoviesTabCollection.self)), forCellWithReuseIdentifier: "MoviesTabCollection")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesTabCollection", for: indexPath) as! MoviesTabCollection
-        if(self.images.first != nil && self.movieTitles.first != nil) {
-            cell.movieTitle.text = movieTitles[indexPath.item]
-            cell.movieImage.image = images[indexPath.item]
+        
+        let key = String(indexPath.item)
+        if((self.movieDict[key]) != nil) {
+            cell.movieTitle.text = self.movieDict[key]?.name
+            cell.movieImage.image = UIImage(data: self.movieDict[key]!.image!)
+            cell.id = self.movieDict[key]!.id
         }
         return cell
     }
@@ -85,22 +94,29 @@ extension MoviesTabViewController: ImageDelegate {
         request.moviesRequest()
     }
     
-    func GetMovieImage() {
-        getData()
-        self.moviesTabCollectionView.reloadData()
+    func GetMovieImage(_ index: Int, _ movieID: Int) {
+        getData(index, movieID)
     }
 }
 
 extension MoviesTabViewController {
-    func getData() {
-        let realm = try! Realm()
-        let images = realm.objects(Movie.self)
-        images.forEach { (movie) in
-            guard let data = movie.image else { return }
-            guard let image = UIImage(data: data) else { return }
-            self.images.append(image)
-            let text = movie.name
-            self.movieTitles.append(text)
+    func getData(_ index: Int, _ movieID: Int) {
+        do {
+            let realm = try Realm()
+            let images = realm.objects(Movie.self)
+            images.forEach { (movie) in
+                if(movie.id == movieID) {
+                    self.movieDict[String(index)] = movie
+                }
+            }
+        } catch {
+            print("realm error")
+        }
+        
+        let indexPath = IndexPath(item: index, section: 0)
+        self.moviesTabCollectionView.reloadItems(at: [indexPath])
+        if index > 10 {
+            SwiftSpinner.hide()
         }
     }
 }

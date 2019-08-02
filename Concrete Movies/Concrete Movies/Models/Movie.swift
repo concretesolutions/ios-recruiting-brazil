@@ -10,6 +10,14 @@ import Foundation
 import RealmSwift
 
 class Movie: Object {
+    @objc dynamic var id = 0
     @objc dynamic var name = ""
     @objc dynamic var image: Data? = nil
+    @objc dynamic var details: String = ""
+    @objc dynamic var date: String = "N/A"
+    @objc dynamic var favorite: Bool = false
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }

@@ -13,7 +13,7 @@ import SwiftyJSON
 import RealmSwift
 
 protocol ImageDelegate {
-    func GetMovieImage()
+    func GetMovieImage(_ index: Int, _ id: Int)
 }
 
 class MoviesGridRequest {
@@ -24,33 +24,36 @@ class MoviesGridRequest {
         AF.request(url).responseJSON { (response) in
             let text = try! JSON(data: response.data!)
             let moviesID = text["results"]
-            moviesID.forEach({ (tuple) in
-                let id = tuple.1["id"]
-                let newURL = "https://api.themoviedb.org/3/movie/\(id)/images?api_key=c2193f885ea03e9769b9fbd857ae8c49&"
-                AF.request(newURL).responseJSON(completionHandler: { (dataResponse) in
+
+            for(index,tuple) in moviesID.enumerated() {
+                let filePath = tuple.1["poster_path"].string ?? ""
+                let imageURL = "https://image.tmdb.org/t/p/original\(filePath)"
+                
+                AF.request(imageURL).response(completionHandler: { (response) in
                     
-                    let data = try! JSON(data: dataResponse.data!)
-                    let filePath = data["posters"].first?.1["file_path"] ?? ""
-                    let imageURL = "https://image.tmdb.org/t/p/original/\(filePath)"
-                    
-                    AF.request(imageURL).response(completionHandler: { (response) in
-                        
-                        guard let data = response.data else { return }
-                        let movie = Movie()
-                        movie.image = data
-                        movie.name = tuple.1["title"].string ?? ""
-                        self.persistData(movie)
-                    })
+                    guard let data = response.data else { return }
+                    let movie = Movie()
+                    movie.image = data
+                    movie.name = tuple.1["title"].string ?? ""
+                    movie.details = tuple.1["overview"].string ?? ""
+                    movie.favorite = false
+                    movie.date = tuple.1["release_date"].string ?? "N/A"
+                    movie.id = tuple.1["id"].int ?? -1
+                    self.persistData(movie)
+                    self.imageDelegate?.GetMovieImage(index, movie.id)
                 })
-            })
-            self.imageDelegate?.GetMovieImage()
+            }
         }
     }
     
     func persistData(_ movie: Movie) {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(movie)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(movie, update: .modified)
+            }
+        } catch {
+            print("error")
         }
     }
 }
