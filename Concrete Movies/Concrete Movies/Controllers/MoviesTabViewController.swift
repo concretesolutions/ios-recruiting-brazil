@@ -11,6 +11,10 @@ import UIKit
 import RealmSwift
 import SwiftSpinner
 
+protocol MovieDetailsDelegate {
+    func sendMovieDetails(_ movie: Movie)
+}
+
 class MoviesTabViewController: ViewController {
     @IBOutlet weak var movieTabBarItem: UITabBarItem!
     @IBOutlet weak var moviesTabCollectionView: UICollectionView!
@@ -18,6 +22,7 @@ class MoviesTabViewController: ViewController {
     
     var movieDict: [String:Movie] = ["test" : Movie()]
     var indexes: [Int] = []
+    var movieDetails: MovieDetailsDelegate? = nil
 
     override func viewWillAppear(_ animated: Bool) {
         moviesTabCollectionView.reloadData()
@@ -94,8 +99,11 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
-        performSegue(withIdentifier: "MovieDetails", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "MovieDetails")
+        present(vc, animated: true) {
+            self.movieDetails?.sendMovieDetails(self.movieDict[String(indexPath.item)]!)
+        }
     }
 }
 

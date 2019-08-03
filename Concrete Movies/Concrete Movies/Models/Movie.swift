@@ -16,6 +16,7 @@ class Movie: Object {
     @objc dynamic var details: String = ""
     @objc dynamic var date: String = "N/A"
     @objc dynamic var favorite: Bool = false
+    let genre = List<Genre>()
     
     override static func primaryKey() -> String? {
         return "id"

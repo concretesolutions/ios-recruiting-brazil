@@ -18,9 +18,12 @@ protocol ImageDelegate {
 
 class MoviesGridRequest {
     var imageDelegate: ImageDelegate? = nil
+    var genreList: [Int:List<Genre>] = [-1:List<Genre>()]
+    let moviedbURL = "https://api.themoviedb.org/3"
+    let apiKey = "?api_key=c2193f885ea03e9769b9fbd857ae8c49&"
     
     func moviesRequest() {
-        let url = "https://api.themoviedb.org/3/movie/popular?api_key=c2193f885ea03e9769b9fbd857ae8c49&"
+        let url = "\(self.moviedbURL)/movie/popular\(self.apiKey))"
         AF.request(url).responseJSON { (response) in
             let text = try! JSON(data: response.data!)
             let moviesID = text["results"]
@@ -28,7 +31,6 @@ class MoviesGridRequest {
             for(index,tuple) in moviesID.enumerated() {
                 let filePath = tuple.1["poster_path"].string ?? ""
                 let imageURL = "https://image.tmdb.org/t/p/original\(filePath)"
-                
                 AF.request(imageURL).response(completionHandler: { (response) in
                     
                     guard let data = response.data else { return }
@@ -39,17 +41,33 @@ class MoviesGridRequest {
                     movie.favorite = false
                     movie.date = tuple.1["release_date"].string ?? "N/A"
                     movie.id = tuple.1["id"].int ?? -1
-                    self.persistData(movie)
-                    self.imageDelegate?.GetMovieImage(index, movie.id)
+                    let genres = tuple.1["genre_ids"].array ?? []
+                    genres.forEach({ (genreId) in
+                        let genreURL = "\(self.moviedbURL)/genre/\(String(describing: genreId.int!))\(self.apiKey)"
+                        AF.request(genreURL).response(completionHandler: { (genreResponse) in
+                            let genreData = JSON(genreResponse.data!)
+                            let genreDataName = genreData["name"].string
+                            let genre = Genre()
+                            genre.id = genreId.int ?? 0
+                            genre.name = genreDataName ?? ""
+                            self.genreList[index] = List<Genre>()
+                            self.genreList[index]!.append(genre)
+                            self.persistData(movie,(self.genreList[index]) ?? List<Genre>())
+                            self.imageDelegate?.GetMovieImage(index, movie.id)
+                        })
+                    })
                 })
             }
         }
     }
     
-    func persistData(_ movie: Movie) {
+    func persistData(_ movie: Movie, _ genre: List<Genre>) {
         do {
             let realm = try Realm()
             try realm.write {
+                genre.forEach({ (genreInstance) in
+                    movie.genre.append(genreInstance)
+                })
                 realm.add(movie, update: .modified)
             }
         } catch {
