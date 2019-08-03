@@ -15,6 +15,10 @@ protocol MovieDetailsDelegate {
     func sendMovieDetails(_ movie: Movie)
 }
 
+protocol MovieSearchBarDelegate {
+    func sendMovieToSearchBar(_ movies: [Movie])
+}
+
 class MoviesTabViewController: ViewController {
     @IBOutlet weak var movieTabBarItem: UITabBarItem!
     @IBOutlet weak var moviesTabCollectionView: UICollectionView!
@@ -23,6 +27,7 @@ class MoviesTabViewController: ViewController {
     var movieDict: [String:Movie] = ["test" : Movie()]
     var indexes: [Int] = []
     var movieDetails: MovieDetailsDelegate? = nil
+    var movieSearchBar: MovieSearchBarDelegate? = nil
 
     override func viewWillAppear(_ animated: Bool) {
         moviesTabCollectionView.reloadData()
@@ -66,6 +71,7 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
         
         let key = String(indexPath.item)
         if((self.movieDict[key]) != nil) {
+            cell.isHidden = false
             cell.movieTitle.text = self.movieDict[key]?.name
             cell.movieImage.image = UIImage(data: self.movieDict[key]!.image!)
             cell.id = self.movieDict[key]!.id
@@ -78,6 +84,10 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
             } else {
                 cell.favoriteButton.isSelected = false
             }
+        } else {
+            cell.movieTitle.text = ""
+            cell.movieImage.image = UIImage(named: "check_icon")!
+            cell.isHidden = true
         }
         
         cell.viewCellDelegate = self
@@ -85,13 +95,14 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 50, height: 50)
+        return CGSize(width: 185, height: 185)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             collectionView.register(UINib(nibName: "MoviesTabHeader", bundle: Bundle(for: MoviesTabHeader.self)), forSupplementaryViewOfKind: kind, withReuseIdentifier: "MoviesTabHeader")
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MoviesTabHeader", for: indexPath)
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MoviesTabHeader", for: indexPath) as! MoviesTabHeader
+            self.movieSearchBar = header
             return header
         } else {
             assert(false)
@@ -130,6 +141,7 @@ extension MoviesTabViewController {
         }
         let indexPath = IndexPath(item: index, section: 0)
         self.moviesTabCollectionView.reloadItems(at: [indexPath])
+        self.movieSearchBar?.sendMovieToSearchBar(images)
         if index > 15 {
             SwiftSpinner.hide()
         }
@@ -160,5 +172,6 @@ extension MoviesTabViewController: CollectionViewCellDelegate {
             let indexPath = IndexPath(item: index, section: 0)
             self.moviesTabCollectionView.reloadItems(at: [indexPath])
         }
+        self.movieSearchBar?.sendMovieToSearchBar(moviesResult)
     }
 }
