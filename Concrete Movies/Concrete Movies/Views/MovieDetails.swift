@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import RealmSwift
 
+protocol FavoriteFromMovieTabDelegate {
+    func renewFavorites(_ index: Int, _ movie: Movie)
+}
+
 class MovieDetails: ViewController {
     @IBOutlet weak var movieDetailsImage: UIImageView!
     @IBOutlet weak var movieDetailsTitle: UILabel!
@@ -18,11 +22,18 @@ class MovieDetails: ViewController {
     @IBOutlet weak var movieDetailsOverview: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    var favoritesFromMovieTab: FavoriteFromMovieTabDelegate? = nil
+    
     @IBAction func dismissMovieDetails(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     var movieDetailsInfo: Movie? = nil
+    var movieDetailsIndex: Int = 0
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        favoritesFromMovieTab?.renewFavorites(self.movieDetailsIndex, self.movieDetailsInfo ?? Movie())
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         let vc = self.presentingViewController as! TabBarSettings
@@ -40,7 +51,7 @@ class MovieDetails: ViewController {
 
 extension MovieDetails: MovieDetailsDelegate {
     
-    func sendMovieDetails(_ movie: Movie) {
+    func sendMovieDetails(_ movie: Movie, _ index: Int) {
         movieDetailsImage.image = UIImage(data: movie.image!)
         movieDetailsTitle.text = movie.name
         let dateFormatter = DateFormatter()
@@ -58,6 +69,7 @@ extension MovieDetails: MovieDetailsDelegate {
         movieDetailsGenre.text = text
         self.movieDetailsInfo = movie
         queryObjects()
+        self.movieDetailsIndex = index
     }
 }
 

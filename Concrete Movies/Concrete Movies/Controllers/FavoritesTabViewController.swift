@@ -10,11 +10,33 @@ import Foundation
 import UIKit
 import RealmSwift
 
+protocol FavoriteTabDelegate {
+    func renewFavorites(_ index: Int, _ movie: Movie)
+}
+
 class FavoritesTabViewController: ViewController {
     @IBOutlet weak var favoritesBarItem: UITabBarItem!
     @IBOutlet weak var favoritesTableView: UITableView!
     var movieFavorites: [String:Movie] = ["test" : Movie()]
-    var movieIndex: [Int:Int] = [0:0]
+    var removedMovies: [Int] = []
+    
+    var favoritesTab: FavoriteTabDelegate? = nil
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let vc = self.tabBarController as! TabBarSettings
+        let moviesTabVC = vc.children.first as! MoviesTabViewController
+        removedMovies.forEach { (movieID) in
+            let index = moviesTabVC.indexes[movieID]
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    moviesTabVC.movieDict[String(index!)]?.favorite = false
+                }
+            } catch {
+                print("realm error")
+            }
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.getFavorites()
@@ -29,7 +51,7 @@ class FavoritesTabViewController: ViewController {
 
 extension FavoritesTabViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieFavorites.count - 1
+        return movieFavorites.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -49,7 +71,6 @@ extension FavoritesTabViewController: UITableViewDelegate, UITableViewDataSource
             cell.favoriteMovieDetails.text = ""
             cell.favoriteMovieYear.text = ""
             cell.favoriteMovieImage.image = UIImage()
-            //self.removeFavorites(self.movieFavorites[key]!)
             self.movieFavorites.removeValue(forKey: key)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
             tableView.reloadData()
@@ -60,10 +81,12 @@ extension FavoritesTabViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let action = UITableViewRowAction(style: UITableViewRowAction.Style.default, title: "Delete") { (action, indexPath) in
             tableView.beginUpdates()
-            self.removeFavorites(self.movieFavorites[String(indexPath.item)]!)
+            let movie = self.movieFavorites[String(indexPath.item)]!
+            self.removeFavorites(movie)
             self.movieFavorites.removeValue(forKey: String(indexPath.item))
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
             tableView.endUpdates()
+            self.removedMovies.append(movie.id)
         }
         return [action]
     }
@@ -87,10 +110,11 @@ extension FavoritesTabViewController {
             var index = 0
             let realm = try Realm()
             let objects = realm.objects(Movie.self)
+            self.movieFavorites.removeAll()
+            self.removedMovies.removeAll()
             objects.forEach({ (movie) in
                 if(movie.favorite) {
                     self.movieFavorites[String(index)] = movie
-                    self.movieIndex[movie.id] = index
                     index += 1
                 }
             })
@@ -103,6 +127,6 @@ extension FavoritesTabViewController {
 
 extension FavoritesTabViewController: FavoriteCellDelegate {
     func removeFavoriteCell(_ movieID: Int) {
-       // self.movieFavorites
+       print("removed")
     }
 }

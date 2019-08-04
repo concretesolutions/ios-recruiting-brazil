@@ -12,7 +12,7 @@ import RealmSwift
 import SwiftSpinner
 
 protocol MovieDetailsDelegate {
-    func sendMovieDetails(_ movie: Movie)
+    func sendMovieDetails(_ movie: Movie, _ index: Int)
 }
 
 protocol MovieSearchBarDelegate {
@@ -26,7 +26,7 @@ class MoviesTabViewController: ViewController {
     
     var movieDict: [String:Movie] = ["test" : Movie()]
     var movieFavorites : [String:Bool] = ["test" : false]
-    var indexes: [Int] = []
+    var indexes: [Int:Int] = [0:0]
     var movieDetails: MovieDetailsDelegate? = nil
     var movieSearchBar: MovieSearchBarDelegate? = nil
     
@@ -120,9 +120,10 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "MovieDetails")
+        let vc = storyboard.instantiateViewController(withIdentifier: "MovieDetails") as! MovieDetails
+        vc.favoritesFromMovieTab = self
         present(vc, animated: true) {
-            self.movieDetails?.sendMovieDetails(self.movieDict[String(indexPath.item)]!)
+            self.movieDetails?.sendMovieDetails(self.movieDict[String(indexPath.item)]!, indexPath.item)
         }
     }
 }
@@ -141,7 +142,7 @@ extension MoviesTabViewController: ImageDelegate {
 
 extension MoviesTabViewController {
     func getData(_ index: Int, _ movieID: Int) {
-        indexes.append(index)
+        indexes[movieID] = index
         let images = queryDatabase()
         images.forEach { (movie) in
             if(movie.id == movieID) {
@@ -179,5 +180,13 @@ extension MoviesTabViewController: CollectionViewCellDelegate {
         self.moviesTabCollectionView.reloadItems(at: [indexPath])
         let moviesResult = self.queryDatabase()
         self.movieSearchBar?.sendMovieToSearchBar(moviesResult)
+    }
+}
+
+extension MoviesTabViewController: FavoriteFromMovieTabDelegate {
+    
+    func renewFavorites(_ index: Int, _ movie: Movie) {
+        self.movieDict[String(index)] = movie
+        self.moviesTabCollectionView.reloadData()
     }
 }

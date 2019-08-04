@@ -27,21 +27,25 @@ extension MoviesTabHeader: UISearchBarDelegate {
         let vc = self.window?.rootViewController?.children[0] as? MoviesTabViewController
         vc?.movieDict.removeAll()
         var newIndex = 0
+        var indexes: [Int] = []
         movies.forEach { (movie) in
             vc?.movieDict[String(newIndex)] = movie
             newIndex += 1
+            indexes.append(vc?.indexes[movie.id] ?? 0)
         }
-        vc?.moviesTabCollectionView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        let vc = self.window?.rootViewController?.children[0] as? MoviesTabViewController
+        vc?.moviesTabCollectionView.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
     }
 }
 
