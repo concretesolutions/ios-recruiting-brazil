@@ -25,9 +25,12 @@ class MoviesTabViewController: ViewController {
     @IBOutlet var moviesTabView: UIView!
     
     var movieDict: [String:Movie] = ["test" : Movie()]
+    var movieFavorites : [String:Bool] = ["test" : false]
     var indexes: [Int] = []
     var movieDetails: MovieDetailsDelegate? = nil
     var movieSearchBar: MovieSearchBarDelegate? = nil
+    
+    let device = UIDevice.current
 
     override func viewWillAppear(_ animated: Bool) {
         moviesTabCollectionView.reloadData()
@@ -58,7 +61,7 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 150, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -68,7 +71,7 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         collectionView.register(UINib(nibName: "MoviesTabCollection", bundle: Bundle(for: MoviesTabCollection.self)), forCellWithReuseIdentifier: "MoviesTabCollection")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesTabCollection", for: indexPath) as! MoviesTabCollection
-        
+        cell.tag = indexPath.item
         let key = String(indexPath.item)
         if((self.movieDict[key]) != nil) {
             cell.isHidden = false
@@ -79,10 +82,12 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
                 cell.favoriteButton.isSelected = true
                 DispatchQueue.main.async {
                     cell.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .selected)
+                    self.movieFavorites[String(indexPath.item)] = true
                     cell.favoriteButton.layoutIfNeeded()
                 }
             } else {
                 cell.favoriteButton.isSelected = false
+                self.movieFavorites[String(indexPath.item)] = false
             }
         } else {
             cell.movieTitle.text = ""
@@ -95,6 +100,10 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if(self.device.orientation.isLandscape) {
+            let frame = self.view.frame.maxX
+            return CGSize(width: frame , height: 185)
+        }
         return CGSize(width: 185, height: 185)
     }
     
@@ -165,13 +174,10 @@ extension MoviesTabViewController {
 
 extension MoviesTabViewController: CollectionViewCellDelegate {
     
-    func reloadView() {
+    func reloadView(_ index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        self.moviesTabCollectionView.reloadItems(at: [indexPath])
         let moviesResult = self.queryDatabase()
-        for(index, movie) in moviesResult.enumerated() {
-            self.movieDict[String(indexes[index])] = movie
-            let indexPath = IndexPath(item: index, section: 0)
-            self.moviesTabCollectionView.reloadItems(at: [indexPath])
-        }
         self.movieSearchBar?.sendMovieToSearchBar(moviesResult)
     }
 }

@@ -12,6 +12,7 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var favoriteMovieYear: UILabel!
     @IBOutlet weak var favoriteMovieDetails: UILabel!
     @IBOutlet weak var favoriteMovieImage: UIImageView!
+    @IBOutlet weak var frameView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -10,7 +10,11 @@ import UIKit
 import RealmSwift
 
 protocol CollectionViewCellDelegate {
-    func reloadView()
+    func reloadView(_ index: Int)
+}
+
+protocol FavoriteCellDelegate {
+    func removeFavoriteCell(_ movieID: Int)
 }
 
 class MoviesTabCollection: UICollectionViewCell {
@@ -21,6 +25,7 @@ class MoviesTabCollection: UICollectionViewCell {
     
     var id: Int = 0
     var viewCellDelegate: CollectionViewCellDelegate? = nil
+    var favoriteCellDelegate: FavoriteCellDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,15 +43,13 @@ class MoviesTabCollection: UICollectionViewCell {
                         let updatedObject = movie
                         updatedObject.favorite = !movie.favorite
                         realm.add(updatedObject, update: .modified)
-                        viewCellDelegate?.reloadView()
+                        viewCellDelegate?.reloadView(self.tag)
+                        favoriteCellDelegate?.removeFavoriteCell(movie.id)
                     }
                 }
             }
         } catch {
             print("realm write error")
         }
-        
     }
-    
-
 }
