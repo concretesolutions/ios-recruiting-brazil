@@ -100,8 +100,9 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        collectionView.reloadData()
         if(self.device.orientation.isLandscape) {
-            let frame = self.view.frame.maxX
+            var frame = self.view.frame.maxY
             return CGSize(width: frame , height: 185)
         }
         return CGSize(width: 185, height: 185)
@@ -111,6 +112,8 @@ extension MoviesTabViewController: UICollectionViewDelegate,UICollectionViewData
         if kind == UICollectionView.elementKindSectionHeader {
             collectionView.register(UINib(nibName: "MoviesTabHeader", bundle: Bundle(for: MoviesTabHeader.self)), forSupplementaryViewOfKind: kind, withReuseIdentifier: "MoviesTabHeader")
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MoviesTabHeader", for: indexPath) as! MoviesTabHeader
+            let frame = self.view.frame.maxX
+            header.headerView.frame = CGRect(x: 0, y: 0, width: frame, height: 185)
             self.movieSearchBar = header
             return header
         } else {

@@ -11,6 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import RealmSwift
+import NotificationBannerSwift
 
 protocol ImageDelegate {
     func GetMovieImage(_ index: Int, _ id: Int)
@@ -71,6 +72,13 @@ class MoviesGridRequest {
                 realm.add(movie, update: .modified)
             }
         } catch {
+            //let banner = NotificationBanner(title: "Oops...", subtitle: "something happened", style: .warning)
+            let banner = FloatingNotificationBanner(title: "Oops...", subtitle: "something happened", style: .danger)
+            if (!banner.isDisplaying) {
+                
+                banner.show()
+            }
+            banner.dismiss()
             print("error")
         }
     }

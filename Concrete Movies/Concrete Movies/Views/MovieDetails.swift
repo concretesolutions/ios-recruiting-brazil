@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import RealmSwift
+import SwiftSpinner
 
 protocol FavoriteFromMovieTabDelegate {
     func renewFavorites(_ index: Int, _ movie: Movie)
@@ -40,6 +41,7 @@ class MovieDetails: ViewController {
         let moviesTabVC = vc.children.first as! MoviesTabViewController
         moviesTabVC.movieDetails = self
         favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .selected)
+        SwiftSpinner.show("Loading Movie")
     }
     @IBAction func movieDetailsFavoriteButtonPressed(_ sender: UIButton) {
         DispatchQueue.main.async {
@@ -70,6 +72,7 @@ extension MovieDetails: MovieDetailsDelegate {
         self.movieDetailsInfo = movie
         queryObjects()
         self.movieDetailsIndex = index
+        SwiftSpinner.hide()
     }
 }
 

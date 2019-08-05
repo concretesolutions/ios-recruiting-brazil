@@ -11,6 +11,7 @@ import UIKit
 class MoviesTabHeader: UICollectionReusableView {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var movieSearchBar: UISearchBar!
+    @IBOutlet weak var headerView: UIView!
     
     var movies: [Movie] = []
     
@@ -32,6 +33,12 @@ extension MoviesTabHeader: UISearchBarDelegate {
             vc?.movieDict[String(newIndex)] = movie
             newIndex += 1
             indexes.append(vc?.indexes[movie.id] ?? 0)
+        }
+        if (movies.first == nil) {
+            let movie = Movie()
+            movie.image = UIImage(named: "search_icon")?.pngData()
+            movie.name = "Please try again"
+            vc?.movieDict["0"] = movie
         }
     }
     
