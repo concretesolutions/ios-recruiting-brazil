@@ -22,6 +22,7 @@ class MovieDetails: ViewController {
     @IBOutlet weak var movieDetailsGenre: UILabel!
     @IBOutlet weak var movieDetailsOverview: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var labelsView: UIView!
     
     var favoritesFromMovieTab: FavoriteFromMovieTabDelegate? = nil
     
