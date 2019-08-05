@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tuY-6p-DfK">
-    <device id="retina4_0" orientation="landscape">
+    <device id="retina6_1" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="n7v-dZ-4yr" customClass="FavoritesTabViewController" customModule="Concrete_Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rZN-6N-Hfg">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LAF-ml-cyi">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="288"/>
+                                <rect key="frame" x="44" y="0.0" width="808" height="344"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -47,11 +47,11 @@
             <objects>
                 <viewController id="cTM-M9-zS8" customClass="MoviesTabViewController" customModule="Concrete_Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ciw-oK-Qgm">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dgi-hU-Opv">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="44" y="0.0" width="808" height="393"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kTD-CR-h9q">
                                     <size key="itemSize" width="50" height="50"/>
@@ -88,11 +88,11 @@
             <objects>
                 <viewController storyboardIdentifier="MovieDetails" id="Iog-5z-yFW" customClass="MovieDetails" customModule="Concrete_Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ATr-Aw-bzj">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="ebj-Eb-q25">
-                                <rect key="frame" x="-244" y="22" width="812" height="44"/>
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="ebj-Eb-q25">
+                                <rect key="frame" x="-453" y="22" width="867" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="812" id="beG-xe-6kk">
                                         <variation key="heightClass=regular" constant="867"/>
@@ -127,7 +127,7 @@
                                 </variation>
                             </navigationBar>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ryM-lr-Dp9" userLabel="labels">
-                                <rect key="frame" x="0.0" y="477" width="817" height="3"/>
+                                <rect key="frame" x="5" y="477" width="886" height="3"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Nw-fU-roP">
                                         <rect key="frame" x="20" y="20" width="360" height="21"/>
@@ -215,6 +215,7 @@
                                 <exclude reference="Phh-fs-gfN"/>
                                 <exclude reference="3km-Lq-Cie"/>
                                 <exclude reference="90a-yA-eKL"/>
+                                <exclude reference="KyQ-Bf-zA6"/>
                                 <exclude reference="M1I-gB-UWr"/>
                                 <exclude reference="R5v-kp-XOU"/>
                                 <exclude reference="bTY-0N-DcH"/>
@@ -265,13 +266,15 @@
                             <mask key="constraints">
                                 <include reference="Nkr-3G-Mxt"/>
                                 <exclude reference="7Op-hL-tUu"/>
+                                <include reference="lyq-bL-d2s"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
                                 <exclude reference="3km-Lq-Cie"/>
-                                <exclude reference="KyQ-Bf-zA6"/>
+                                <include reference="KyQ-Bf-zA6"/>
                                 <exclude reference="M1I-gB-UWr"/>
+                                <exclude reference="lyq-bL-d2s"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
