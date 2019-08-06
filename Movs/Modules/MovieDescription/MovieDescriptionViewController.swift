@@ -35,7 +35,7 @@ final class MovieDescriptionViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if let movie = movie {
-            if UserSaves.isFavorite(movie: movie) {
+            if UserSaves().isFavorite(movie: movie) {
                 self.favoriteIcon.image = favoriteIconHighlighted
             }
             else {
@@ -74,7 +74,7 @@ extension MovieDescriptionViewController: MovieDescriptionView {
         self.releaseDate.text = movie.formatDateString()
         self.genres.text = genres
         self.movieDescription.text = movie.movieDescription
-        if UserSaves.isFavorite(movie: movie) {
+        if UserSaves().isFavorite(movie: movie) {
             self.favoriteIcon.image = favoriteIconHighlighted
         }
         else {

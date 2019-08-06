@@ -29,7 +29,7 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
     //MARK: - Functions
     private func filterMovies(filters: Dictionary<String, String>) -> [MovieEntity] {
         
-        let movies = UserSaves.favoriteMovies
+        let movies = UserSaves().getAllFavoriteMovies()
         
         // Values to search in movies
         var date = ""

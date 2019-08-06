@@ -18,8 +18,8 @@ final class FavoriteMoviesInteractor {
 extension FavoriteMoviesInteractor: FavoriteMoviesUseCase {
     
     func fetchFavoriteMovies() {
-        let movies = UserSaves.favoriteMovies
-        let posters = UserSaves.posters
+        let movies = UserSaves().getAllFavoriteMovies()
+        let posters = UserSaves().getAllPosters()
         
         output.fetchedFavoriteMovies(movies, posters: posters)
         

@@ -18,6 +18,7 @@ final class MovieDescriptionPresenter {
     var movie: MovieEntity!
     var genres: [GenreEntity]!
     var poster: PosterEntity?
+    var bank = UserSaves()
     
 }
 
@@ -29,23 +30,18 @@ extension MovieDescriptionPresenter: MovieDescriptionPresentation {
     }
     
     func didFavoriteMovie() {
-        if !(UserSaves.favoriteMovies.contains(where: { (movie) -> Bool in
+        if !(bank.getAllFavoriteMovies().contains(where: { (movie) -> Bool in
             self.movie.id == movie.id
         })) {
-            UserSaves.favoriteMovies.append(movie)
+            bank.add(movie: movie)
             if let poster = poster {
-                UserSaves.posters.append(poster)
+                bank.add(poster: poster)
             }
             
             //LocalDataSaving.store(data: movie, forKey: "FavoredMovie")
         }
         else {
-            UserSaves.favoriteMovies.removeAll { (movie) -> Bool in
-                self.movie.id == movie.id
-            }
-            UserSaves.posters.removeAll { (poster) -> Bool in
-                self.movie.id == poster.movieId
-            }
+            bank.remove(movie: movie, withPoster: true)
             //LocalDataSaving.remove(data: movie, forKey: "FavoredMovie")
         }
     }
