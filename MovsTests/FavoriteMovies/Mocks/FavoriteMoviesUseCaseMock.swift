@@ -13,11 +13,16 @@ import Foundation
 class FavoriteMoviesUseCaseMock: FavoriteMoviesUseCase {
     
     var hasCalledFetchFavoriteMovies: Bool = false
-    
+    var hasCalledRemoveFavoriteMovie: Bool = false
+
     var output: FavoriteMoviesInteractorOutput!
     
     func fetchFavoriteMovies() {
         hasCalledFetchFavoriteMovies = true
+    }
+    
+    func removeFavoriteMovie(movie: MovieEntity, withPoster: Bool) {
+        hasCalledRemoveFavoriteMovie = true
     }
     
     

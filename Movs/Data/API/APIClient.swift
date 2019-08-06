@@ -76,7 +76,7 @@ enum Host: String {
 class APIClient {
 
     //MARK: - Properties
-    static var baseURL: URL { return URL(string: "https://api.themoviedb.org/3")!}
+    //static var baseURL: URL { return URL(string: "https://api.themoviedb.org/3")!}
     static var apiKey = { return "6ebf41d1cc47e9dba214a246b25d7a1f" }
     
     //static private let apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZWJmNDFkMWNjNDdlOWRiYTIxNGEyNDZiMjVkN2ExZiIsInN1YiI6IjVkMzYzYjMxMjVjZDg1MDAxNzliY2ZkOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5UUmfxHH0E5Y4KQc4j3X3PKMZO2blshaGgik8kJh2M"

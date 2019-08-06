@@ -23,7 +23,7 @@ protocol FilterFavoriteView: class {
 protocol FilterFavoritePresentation: class {
     var view: FilterFavoriteView? { get set }
     var router: FilterFavoriteWireframe! { get set }
-    var movies: [MovieEntity]? { get set }
+    var movies: [MovieEntity] { get set }
     
     func viewDidLoad()
     func didEnterFilters(_ filter: Dictionary<String, String>)

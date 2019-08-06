@@ -22,9 +22,8 @@ final class FavoriteMoviesPresenter {
     }*/
     
     //MARK: - Properties
-    var favoriteMovies: [MovieEntity]?
-    var posters: [PosterEntity]?
-    var bank = UserSaves()
+    var favoriteMovies: [MovieEntity] = []
+    var posters: [PosterEntity] = []
     
 }
 
@@ -33,7 +32,7 @@ extension FavoriteMoviesPresenter: FavoriteMoviesPresentation {
     
     func viewDidLoad() {
         if filteredMovies.count > 0 {
-            view?.showFavoriteMoviesList(filteredMovies, posters: posters!, isFilterActive: true)
+            view?.showFavoriteMoviesList(filteredMovies, posters: posters, isFilterActive: true)
         }
         else {
             interactor.fetchFavoriteMovies()
@@ -42,13 +41,13 @@ extension FavoriteMoviesPresenter: FavoriteMoviesPresentation {
     
     func didEnterSearch(_ search: String) {
         if !search.isEmpty {
-            let filteredMovies = bank.getAllFavoriteMovies().filter { (movie) -> Bool in
+            let filteredMovies = favoriteMovies.filter { (movie) -> Bool in
                 if (movie.title?.contains(search))! {
                     return true
                 }
                 return false
             }
-            let filteredPosters = bank.getAllPosters().filter { (poster) -> Bool in
+            let filteredPosters = posters.filter { (poster) -> Bool in
                 if filteredMovies.contains(where: { (movie) -> Bool in
                     movie.id == poster.movieId
                 }) {
@@ -59,15 +58,16 @@ extension FavoriteMoviesPresenter: FavoriteMoviesPresentation {
             view?.showFavoriteMoviesList(filteredMovies, posters: filteredPosters, isFilterActive: false)
         }
         else {
-            self.view?.showFavoriteMoviesList(bank.getAllFavoriteMovies(), posters: bank.getAllPosters(), isFilterActive: false)
+            self.view?.showFavoriteMoviesList(favoriteMovies, posters: posters, isFilterActive: false)
         }
     }
     
     func didDeleteFavorite(movie: MovieEntity) {
-        bank.remove(movie: movie, withPoster: true)
+        interactor.removeFavoriteMovie(movie: movie, withPoster: true)
+        interactor.fetchFavoriteMovies()
         
-        if bank.count > 0 {
-            self.view?.showFavoriteMoviesList(bank.getAllFavoriteMovies(), posters: bank.getAllPosters(), isFilterActive: false)
+        if favoriteMovies.count > 0 {
+            self.view?.showFavoriteMoviesList(favoriteMovies, posters: posters, isFilterActive: false)
         }
         else {
             self.view?.showNoContentScreen(image: UIImage(named: "favorite_full_icon"), message: "Sorry! You don't have any favorite movies at the moment.")
@@ -79,7 +79,7 @@ extension FavoriteMoviesPresenter: FavoriteMoviesPresentation {
     }
     
     func didPressFilter() {
-        router.presentFilterSelection(movies: bank.getAllFavoriteMovies())
+        router.presentFilterSelection(movies: favoriteMovies)
     }
 }
 

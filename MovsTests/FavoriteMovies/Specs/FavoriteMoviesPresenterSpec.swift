@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import Quick
 import Nimble
 import Nimble_Snapshots
@@ -20,6 +21,7 @@ class FavoriteMoviesPresenterSpec: QuickSpec {
         var interactor: FavoriteMoviesUseCaseMock!
         var router: FavoriteMoviesWireframeMock!
         var movie: MovieEntity!
+        var genres: GenresEntity!
         
         beforeEach {
             sut = FavoriteMoviesPresenter()
@@ -27,11 +29,42 @@ class FavoriteMoviesPresenterSpec: QuickSpec {
             interactor = FavoriteMoviesUseCaseMock()
             router = FavoriteMoviesWireframeMock()
             movie = MovieEntityMock.createMovieEntityInstance()
+            genres = GenresEntityMock.createGenresEntityInstance()
             
             sut.view = view
             sut.interactor = interactor
             sut.router = router
-            UserSaves().add(movie: movie)
+            
+            sut.favoriteMovies = []
+            sut.posters = []
+            GenresEntity.setAllGenres(genres.genres)
+        }
+        
+        describe("Load") {
+            context("If there is a filter", {
+                it("has to show filtered movies", closure: {
+                    sut.filteredMovies.append(movie)
+                    sut.viewDidLoad()
+                    guard let sutView = sut.view as? FavoriteMoviesViewMock
+                        else {
+                            fail()
+                            return
+                    }
+                    expect(sutView.hasCalledShowFavoriteMoviesList).to(beTrue())
+                })
+            })
+            context("If there is no filter", {
+                it("has fetch data from interactor", closure: {
+                    sut.viewDidLoad()
+                    guard let sutInteractor = sut.interactor as? FavoriteMoviesUseCaseMock
+                        else {
+                            fail()
+                            return
+                    }
+                    expect(sutInteractor.hasCalledFetchFavoriteMovies).to(beTrue())
+                })
+            })
+            
         }
         
         describe("Movie search") {
@@ -62,18 +95,42 @@ class FavoriteMoviesPresenterSpec: QuickSpec {
         }
         
         describe("Delete favorite movie") {
-            it("Has to delete selected movie from favorites", closure: {
-                UserSaves().add(movie: movie)
-                
-                sut.didDeleteFavorite(movie: movie)
-                
-                let movies = UserSaves().getAllFavoriteMovies()
-                let result = movies.contains(where: { (mov) -> Bool in
-                    mov.id == movie.id
+            context("If there are favorite movies", closure: {
+                it("Has to show movies at view", closure: {
+                    sut.favoriteMovies.append(movie)
+                    sut.didDeleteFavorite(movie: movie)
+                    guard let sutView = sut.view as? FavoriteMoviesViewMock
+                        else {
+                            fail()
+                            return
+                    }
+                    expect(sutView.hasCalledShowFavoriteMoviesList).to(beTrue())
+                })
+            })
+            context("If there is no more favorite movies", {
+                it("Has to call no content screen", closure: {
+                    sut.didDeleteFavorite(movie: movie)
+                    guard let sutView = sut.view as? FavoriteMoviesViewMock
+                        else {
+                            fail()
+                            return
+                    }
+                    expect(sutView.hasCalledShowNoContentScreen).to(beTrue())
                 })
                 
-                expect(result).to(beFalse())
             })
+                
+//                UserSaves().add(movie: movie)
+//
+//                sut.didDeleteFavorite(movie: movie)
+//
+//                let movies = UserSaves().getAllFavoriteMovies()
+//                let result = movies.contains(where: { (mov) -> Bool in
+//                    mov.id == movie.id
+//                })
+//
+//                expect(result).to(beFalse())
+           
         }
         
         context("If a movie cell is clicked") {
@@ -97,6 +154,52 @@ class FavoriteMoviesPresenterSpec: QuickSpec {
                         return
                 }
                 expect(sutRouter.hasCalledPresentFilterSelection).to(beTrue())
+            })
+        }
+        
+        describe("Interactor sent favorite movies list") {
+            context("If there are movies in list") {
+                it("Has to show movies at view", closure: {
+                    var movies: [MovieEntity]! = []
+                    movies.append(movie)
+                    var posters: [PosterEntity]! = []
+                    posters.append(PosterEntity(poster: UIImage()))
+                    sut.fetchedFavoriteMovies(movies, posters: posters)
+                    
+                    guard let sutView = sut.view as? FavoriteMoviesViewMock
+                        else {
+                            fail()
+                            return
+                    }
+                    expect(sutView.hasCalledShowFavoriteMoviesList).to(beTrue())
+                })
+            }
+            context("If there aren't movies in list") {
+                it("Has to show no content screen", closure: {
+                    let movies: [MovieEntity] = []
+                    let posters: [PosterEntity] = []
+                    sut.fetchedFavoriteMovies(movies, posters: posters)
+                    
+                    guard let sutView = sut.view as? FavoriteMoviesViewMock
+                        else {
+                            fail()
+                            return
+                    }
+                    expect(sutView.hasCalledShowNoContentScreen).to(beTrue())
+                })
+            }
+        }
+        
+        describe("Interactor failed to send data") {
+            it("Has to show no content screen with error", closure: {
+                sut.fetchedFavoriteMoviesFailed()
+                
+                guard let sutView = sut.view as? FavoriteMoviesViewMock
+                    else {
+                        fail()
+                        return
+                }
+                expect(sutView.hasCalledShowNoContentScreen).to(beTrue())
             })
         }
         

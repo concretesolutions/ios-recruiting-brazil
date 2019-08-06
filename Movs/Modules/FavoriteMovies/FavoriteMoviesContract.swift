@@ -39,6 +39,7 @@ protocol FavoriteMoviesUseCase: class {
     var output: FavoriteMoviesInteractorOutput! { get set }
     
     func fetchFavoriteMovies()
+    func removeFavoriteMovie(movie: MovieEntity, withPoster: Bool)
 }
 
 protocol FavoriteMoviesInteractorOutput: class {

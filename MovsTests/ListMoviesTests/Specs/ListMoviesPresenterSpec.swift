@@ -41,6 +41,14 @@ class ListMoviesPresenterSpec: QuickSpec {
 //            })
 //        }
         
+        describe("Posters") {
+            it("Has to call update view at poster set", closure: {
+                sut.posters.append(PosterEntity(poster: UIImage()))
+                
+                expect(view.hasCalledUpdatePosters).to(beTrue())
+            })
+        }
+        
         describe("Movie search") {
             context("If search is empty", {
                 it("Has to show movies without filters", closure: {
@@ -92,6 +100,60 @@ class ListMoviesPresenterSpec: QuickSpec {
             })
         }
 
+        describe("Interactor sent genres list") {
+            it("Has to atribute to genres allocation", closure: {
+                let countBefore = (GenresEntity.getAllGenres()?.count)!
+                
+                var genres: GenresEntity!
+                genres = GenresEntityMock.createGenresEntityInstance()
+                sut.fetchedGenres(genres)
+                
+                let countAfter = (GenresEntity.getAllGenres()?.count)!
+                expect(countAfter) >= countBefore
+                
+            })
+        }
         
+        describe("Interactor sent movies list") {
+            it("Has to atribute to local variable", closure: {
+                let countBefore = sut.movies.count
+                
+                var movies: [MovieEntity] = []
+                movies.append(MovieEntityMock.createMovieEntityInstance()!)
+                sut.fetchedMovies(movies)
+                
+                let countAfter = sut.movies.count
+                expect(countAfter) > countBefore
+                
+            })
+        }
+        
+        describe("Interactor failed to send movies list") {
+            it("Has to show no content screen with error message", closure: {
+                sut.fetchedMoviesFailed()
+                
+                guard let sutView = sut.view as? ListMoviesViewMock
+                    else {
+                        fail()
+                        return
+                }
+                expect(sutView.hasCalledShowNoContentScreen).to(beTrue())
+                
+            })
+        }
+        
+        describe("Interactor sent poster") {
+            it("Has to atribute to local variable", closure: {
+                let countBefore = sut.posters.count
+                
+                var poster: PosterEntity!
+                poster = PosterEntity(poster: UIImage())
+                sut.fetchedPoster(poster)
+                
+                let countAfter = sut.posters.count
+                expect(countAfter) > countBefore
+                
+            })
+        }
     }
 }

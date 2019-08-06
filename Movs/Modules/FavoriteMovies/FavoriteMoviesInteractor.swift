@@ -12,14 +12,17 @@ final class FavoriteMoviesInteractor {
     
     //MARK: - Contract Properties
     weak var output: FavoriteMoviesInteractorOutput!
+    
+    //MARK: - Properties
+    let bank = UserSaves()
 }
 
 //MARK: - Contract Functions
 extension FavoriteMoviesInteractor: FavoriteMoviesUseCase {
     
     func fetchFavoriteMovies() {
-        let movies = UserSaves().getAllFavoriteMovies()
-        let posters = UserSaves().getAllPosters()
+        let movies = bank.getAllFavoriteMovies()
+        let posters = bank.getAllPosters()
         
         output.fetchedFavoriteMovies(movies, posters: posters)
         
@@ -31,4 +34,9 @@ extension FavoriteMoviesInteractor: FavoriteMoviesUseCase {
         //        }
         
     }
+    
+    func removeFavoriteMovie(movie: MovieEntity, withPoster: Bool) {
+        bank.remove(movie: movie, withPoster: withPoster)
+    }
+
 }

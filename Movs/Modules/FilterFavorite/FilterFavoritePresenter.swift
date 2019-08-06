@@ -14,11 +14,12 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
     weak var view: FilterFavoriteView?
     var router: FilterFavoriteWireframe!
 
-    var movies: [MovieEntity]?
+    var movies: [MovieEntity] = []
     
     //MARK: - Contract Functions
     func viewDidLoad() {
-        view?.showAvaliableFilters(movies: self.movies!)
+        view?.showAvaliableFilters(movies: self.movies)
+        movies = UserSaves().getAllFavoriteMovies()
     }
     
     func didEnterFilters(_ filter: Dictionary<String, String>) {
@@ -29,7 +30,7 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
     //MARK: - Functions
     private func filterMovies(filters: Dictionary<String, String>) -> [MovieEntity] {
         
-        let movies = UserSaves().getAllFavoriteMovies()
+        //let movies = UserSaves().getAllFavoriteMovies()
         
         // Values to search in movies
         var date = ""
@@ -46,23 +47,23 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
         var filteredMovies: [MovieEntity] = []
         
         if genreName != "" && date != "" {
-            filteredMovies = filterMoviesWithGenreAndDate(movies: movies, genreName: genreName, date: date)
+            filteredMovies = filterMoviesWithGenreAndDate(genreName: genreName, date: date)
         }
         else if genreName != "" && date == ""  {
-            filteredMovies = filterMoviesWithGenre(movies: movies, genreName: genreName)
+            filteredMovies = filterMoviesWithGenre(genreName: genreName)
         }
         else if  genreName == "" && date != "" {
-            filteredMovies = filterMoviesWithDate(movies: movies, date: date)
+            filteredMovies = filterMoviesWithDate(date: date)
         }
         
         return filteredMovies
 
     }
     
-    private func filterMoviesWithGenreAndDate(movies: [MovieEntity], genreName: String, date: String) -> [MovieEntity] {
+    private func filterMoviesWithGenreAndDate(genreName: String, date: String) -> [MovieEntity] {
         var filteredMovies: [MovieEntity] = []
         
-        for (index, item) in movies.enumerated() {
+        for item in movies {
             var genres: [GenreEntity] = []
             if let genreIds = item.genresIds {
                 genres = GenreEntity.gatherMovieGenres(genresIds: genreIds)
@@ -74,16 +75,15 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
                 filteredMovies.append(item)
             }
             if !(item.formatDateString() == date) {
-                filteredMovies.remove(at: index)
+                filteredMovies.removeLast()
             }
         }
         
         return filteredMovies
     }
     
-    private func filterMoviesWithGenre(movies: [MovieEntity], genreName: String) -> [MovieEntity] {
+    private func filterMoviesWithGenre(genreName: String) -> [MovieEntity] {
         var filteredMovies: [MovieEntity] = []
-
         for item in movies {
             
             var genres: [GenreEntity] = []
@@ -100,7 +100,7 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
          return filteredMovies
     }
     
-    private func filterMoviesWithDate(movies: [MovieEntity], date: String) -> [MovieEntity] {
+    private func filterMoviesWithDate(date: String) -> [MovieEntity] {
         var filteredMovies: [MovieEntity] = []
         for item in movies {
             if item.formatDateString() == date {
