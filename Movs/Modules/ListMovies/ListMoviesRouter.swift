@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ListMoviesRouter: ListMoviesWireframe {
+final class ListMoviesRouter: ListMoviesWireframe {
     
     //MARK: - Properties
     var viewController: UIViewController?
@@ -19,9 +19,7 @@ class ListMoviesRouter: ListMoviesWireframe {
         let movieDescriptionViewController = MovieDescriptionRouter.assembleModule(movie: movie, genres: genres, poster: poster)
         viewController?.navigationController?.pushViewController(movieDescriptionViewController, animated: true)
     }
-    
-    func presentFavoriteMovies() { }
-    
+        
     static func assembleModule() -> UIViewController {
         let view: ListMoviesViewController?
         view = UIStoryboard(name: "ListMovies", bundle: nil).instantiateViewController(withIdentifier: "ListMovies") as? ListMoviesViewController

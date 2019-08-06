@@ -21,7 +21,7 @@ class MovieEntity: NSObject, NSCoding, Entity {
     //MARK: - Enumeration
     enum MovieEntityKeys: String, CodingKey {
         case id = "id"
-        case title = "original_title"
+        case title = "title"
         case releaseDate = "release_date"
         case genresIds = "genre_ids"
         case poster = "poster_path"

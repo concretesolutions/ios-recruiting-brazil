@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ListMoviesPresenter: ListMoviesPresentation {
+final class ListMoviesPresenter {
     
     //MARK: - Contract Properties
     weak var view: ListMoviesView?
@@ -35,7 +35,11 @@ class ListMoviesPresenter: ListMoviesPresentation {
         }
     }
     
-    //MARK: - Contract Functions
+}
+
+//MARK: - Contract Functions
+extension ListMoviesPresenter: ListMoviesPresentation {
+    
     func viewDidLoad() {
         interactor.fetchGenres()
         interactor.fetchMovies()
@@ -68,7 +72,6 @@ class ListMoviesPresenter: ListMoviesPresentation {
         }
         router.presentMovieDescription(movie: movie, genres: GenreEntity.gatherMovieGenres(genresIds: movie.genresIds!), poster: posterToSend)
     }
-    
 }
 
 //MARK: -
@@ -78,8 +81,6 @@ extension ListMoviesPresenter: ListMoviesInteractorOutput {
     func fetchedGenres(_ genres: GenresEntity) {
         GenresEntity.setAllGenres(genres.genres)
     }
-    
-    func fetchedGenresFailed() { }
     
     func fetchedMovies(_ movies: [MovieEntity]) {
         self.movies.append(contentsOf: movies)
@@ -93,6 +94,4 @@ extension ListMoviesPresenter: ListMoviesInteractorOutput {
         self.posters.append(poster)
     }
     
-    func fetchedPosterFailed() { }
-
 }

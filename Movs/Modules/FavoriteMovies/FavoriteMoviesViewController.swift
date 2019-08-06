@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
+final class FavoriteMoviesViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var errorImage: UIImageView!
@@ -28,7 +28,7 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
                 clearFilterButton.isHidden = false
             }
             else {
-                presenter.filters = nil
+                presenter.filteredMovies = []
                 clearFilterButton.frame.size = CGSize(width: clearFilterButton.frame.width, height: 0)
                 clearFilterButton.isHidden = true
             }
@@ -64,7 +64,28 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         favoriteMoviesTableView.backgroundColor = ColorPalette.background.uiColor
     }
     
-    //MARK: - Contract Functions
+    //MARK: - Functions
+    @IBAction func didSelectFilterButton(_ sender: UIBarButtonItem) {
+        if favoriteMovies.count > 0 {
+            presenter.didPressFilter()
+        }
+        else {
+            let alert = UIAlertController(title: nil, message: "There are no movies to filter.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
+    
+    @IBAction func didSelectClearFilter(_ sender: UIButton) {
+        self.isFilterActive = false
+        presenter.viewDidLoad()
+    }
+    
+}
+
+//MARK: - Contract Functions
+extension FavoriteMoviesViewController: FavoriteMoviesView {
+    
     func showNoContentScreen(image: UIImage?, message: String) {
         DispatchQueue.main.async {
             if !self.searchBar.searchBarText.isFirstResponder {
@@ -80,7 +101,10 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         }
     }
     
-    func showFavoriteMoviesList(_ movies: [MovieEntity], posters: [PosterEntity]) {
+    func showFavoriteMoviesList(_ movies: [MovieEntity], posters: [PosterEntity], isFilterActive: Bool) {
+        if isFilterActive {
+            self.isFilterActive = true
+        }
         self.searchBar.isHidden = false
         self.favoriteMoviesTableView.isHidden = false
         self.errorImage.isHidden = true
@@ -150,24 +174,6 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesView {
         
         self.view.updateConstraints()
     }
-    
-    //MARK: - Functions
-    @IBAction func didSelectFilterButton(_ sender: UIBarButtonItem) {
-        if favoriteMovies.count > 0 {
-            presenter.didPressFilter()
-        }
-        else {
-            let alert = UIAlertController(title: nil, message: "There are no movies to filter.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-        }
-    }
-    
-    @IBAction func didSelectClearFilter(_ sender: UIButton) {
-        self.isFilterActive = false
-        presenter.viewDidLoad()
-    }
-    
 }
 
 //MARK: - Table View Extension Functions

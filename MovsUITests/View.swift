@@ -1,14 +1,14 @@
 //
-//  MovsUITests.swift
+//  View.swift
 //  MovsUITests
 //
-//  Created by Bruno Chagas on 30/07/19.
+//  Created by Bruno Chagas on 02/08/19.
 //  Copyright © 2019 Bruno Chagas. All rights reserved.
 //
 
 import XCTest
 
-class MovsUITests: XCTestCase {
+class View: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

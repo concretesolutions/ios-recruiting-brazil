@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+final class MovieCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
     @IBOutlet var poster: UIImageView!
@@ -40,7 +40,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
             self.addConstraints([
                 NSLayoutConstraint(item: poster, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0),
                 NSLayoutConstraint(item: poster, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0),
-                //NSLayoutConstraint(item: poster, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0),
                 NSLayoutConstraint(item: poster, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0),
                 NSLayoutConstraint(item: poster, attribute: .height, relatedBy: .equal, toItem: poster, attribute: .width, multiplier: 1.0, constant: 0)
                 

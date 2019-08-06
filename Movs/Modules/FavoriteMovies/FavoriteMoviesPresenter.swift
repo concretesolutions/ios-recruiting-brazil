@@ -8,25 +8,34 @@
 
 import UIKit
 
-class FavoriteMoviesPresenter: FavoriteMoviesPresentation {
+final class FavoriteMoviesPresenter {
     
     //MARK: - Contract Properties
     weak var view: FavoriteMoviesView?
     var interactor: FavoriteMoviesUseCase!
     var router: FavoriteMoviesWireframe!
     
-    var filters: Dictionary<String, String>?
+    var filteredMovies: [MovieEntity] = [] /*{
+        didSet {
+            view?.showFavoriteMoviesList(filteredMovies, posters: posters!, isFilterActive: true)
+        }
+    }*/
     
     //MARK: - Properties
     var favoriteMovies: [MovieEntity]?
     var posters: [PosterEntity]?
     
-    //MARK: - Contract Functions
+}
+
+//MARK: - Contract Functions
+extension FavoriteMoviesPresenter: FavoriteMoviesPresentation {
+    
     func viewDidLoad() {
-        interactor.fetchFavoriteMovies()
-        if filters != nil {
-            filterMovies()
-            self.view?.isFilterActive = true
+        if filteredMovies.count > 0 {
+            view?.showFavoriteMoviesList(filteredMovies, posters: posters!, isFilterActive: true)
+        }
+        else {
+            interactor.fetchFavoriteMovies()
         }
     }
     
@@ -46,10 +55,10 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation {
                 }
                 return false
             }
-            view?.showFavoriteMoviesList(filteredMovies, posters: filteredPosters)
+            view?.showFavoriteMoviesList(filteredMovies, posters: filteredPosters, isFilterActive: false)
         }
         else {
-            self.view?.showFavoriteMoviesList(UserSaves.favoriteMovies, posters: UserSaves.posters)
+            self.view?.showFavoriteMoviesList(UserSaves.favoriteMovies, posters: UserSaves.posters, isFilterActive: false)
         }
     }
     
@@ -62,7 +71,7 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation {
         }
         
         if UserSaves.favoriteMovies.count > 0 {
-            self.view?.showFavoriteMoviesList(UserSaves.favoriteMovies, posters: UserSaves.posters)
+            self.view?.showFavoriteMoviesList(UserSaves.favoriteMovies, posters: UserSaves.posters, isFilterActive: false)
         }
         else {
             self.view?.showNoContentScreen(image: UIImage(named: "favorite_full_icon"), message: "Sorry! You don't have any favorite movies at the moment.")
@@ -76,73 +85,6 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentation {
     func didPressFilter() {
         router.presentFilterSelection(movies: UserSaves.favoriteMovies)
     }
-    
-    //MARK: - Functions
-    func filterMovies() {
-        var date = ""
-        var genreName = ""
-        if let filters = filters {
-            for (key, value) in filters {
-                if key == "Date" {
-                    date = value
-                }
-                else {
-                    genreName = value
-                }
-            }
-            var filteredMovies: [MovieEntity] = []
-            
-            for (index, item) in favoriteMovies!.enumerated() {
-                
-                var genres: [GenreEntity] = []
-                if let genreIds = item.genresIds {
-                    genres = GenreEntity.gatherMovieGenres(genresIds: genreIds)
-                }
-                
-                // Case genre and date filters aren't empty
-                if genreName != "" && date != "" {
-                    if genres.contains(where: { (genre) -> Bool in
-                        genre.name == genreName
-                    }) {
-                        filteredMovies.append(item)
-                    }
-                    if !(item.formatDateString() == date) {
-                        filteredMovies.remove(at: index)
-                    }
-                    
-                }
-                // Case date filter is empty
-                else if genreName != "" && date == "" {
-                    if genres.contains(where: { (genre) -> Bool in
-                        genre.name == genreName
-                    }) {
-                        filteredMovies.append(item)
-                    }
-                }
-                // Case genre filter is empty
-                else if genreName == "" && date != "" {
-                    if item.formatDateString() == date {
-                        filteredMovies.append(item)
-                    }
-                }
-            }
-            
-            var filteredPosters: [PosterEntity] = []
-            
-            for item in posters! {
-                if let movieId = item.movieId {
-                    if favoriteMovies!.contains(where: { (movie) -> Bool in
-                        movie.id == movieId
-                    }) {
-                        filteredPosters.append(item)
-                    }
-                }
-            }
-            
-            view?.showFavoriteMoviesList(filteredMovies, posters: filteredPosters)
-        }
-    }
-    
 }
 
 extension FavoriteMoviesPresenter: FavoriteMoviesInteractorOutput {
@@ -152,7 +94,7 @@ extension FavoriteMoviesPresenter: FavoriteMoviesInteractorOutput {
         if movies.count > 0 {
             self.favoriteMovies = movies
             self.posters = posters
-            self.view?.showFavoriteMoviesList(movies, posters: posters)
+            self.view?.showFavoriteMoviesList(movies, posters: posters, isFilterActive: false)
         }
         else {
             self.view?.showNoContentScreen(image: UIImage(named: "favorite_full_icon"), message: "Sorry! You don't have any favorite movies at the moment.")

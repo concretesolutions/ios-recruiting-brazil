@@ -49,11 +49,16 @@ protocol ListMoviesInteractorOutput: class {
     
 }
 
+extension ListMoviesInteractorOutput {
+    func fetchedGenresFailed() { }
+    func fetchedMoviesFailed() { }
+    func fetchedPosterFailed() { }
+}
+
 protocol ListMoviesWireframe: class {
     var viewController: UIViewController? { get set }
     
     func presentMovieDescription(movie: MovieEntity, genres: [GenreEntity], poster: PosterEntity?)
-    func presentFavoriteMovies()
     
     static func assembleModule() -> UIViewController
 }

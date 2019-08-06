@@ -8,19 +8,15 @@
 
 import UIKit
 
-class FilterFavoriteRouter: FilterFavoriteWireframe {
+final class FilterFavoriteRouter: FilterFavoriteWireframe {
     
     //MARK: - Contract Properties
     var viewController: UIViewController?
     
     //MARK: - Contract Functions
-    func presentFilteredFavoriteMovies(filters: Dictionary<String, String>) {
-        
-        let views = viewController?.navigationController?.viewControllers
-        if let view = views?[views!.count - 2] as? FavoriteMoviesViewController {
-            view.presenter.filters = filters
-        }
+    func presentFilteredFavoriteMovies(filteredMovies: [MovieEntity]) {
         viewController?.navigationController?.popViewController(animated: true)
+        FavoriteMoviesRouter.favoriteMoviesFiltered(filteredMovies, favoriteView: viewController!)
     }
     
     static func assembleModule(movies: [MovieEntity]) -> UIViewController {

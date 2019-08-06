@@ -43,7 +43,7 @@ protocol FilterFavoritePresentation: class {
 protocol FilterFavoriteWireframe: class {
     var viewController: UIViewController? { get set }
 
-    func presentFilteredFavoriteMovies(filters: Dictionary<String, String>)
+    func presentFilteredFavoriteMovies(filteredMovies: [MovieEntity])
     
     static func assembleModule(movies: [MovieEntity]) -> UIViewController
 }

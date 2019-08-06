@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchBarView: UIView {
+final class SearchBarView: UIView {
     // MARK: - Outlets
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var searchBarText: UISearchBar!

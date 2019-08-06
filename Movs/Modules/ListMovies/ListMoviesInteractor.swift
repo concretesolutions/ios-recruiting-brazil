@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class ListMoviesInteractor: ListMoviesUseCase {
+final class ListMoviesInteractor {
     
     //MARK: - Contract Properties
     weak var output: ListMoviesInteractorOutput!
@@ -18,7 +18,11 @@ class ListMoviesInteractor: ListMoviesUseCase {
     private let disposeBag = DisposeBag()
     private var moviesRequestPage: Int = 1
     
-    //MARK: - Contract Functions
+}
+
+//MARK: - Contract Functions
+extension ListMoviesInteractor: ListMoviesUseCase {
+    
     func fetchGenres() {
         APIClient
             .fetchData(host: .TMDB_API, url: APICallMethods.getGenres, type: GenresEntity.self)
@@ -61,8 +65,7 @@ class ListMoviesInteractor: ListMoviesUseCase {
                             self.output.fetchedPosterFailed()
                     })
                     .disposed(by: disposeBag)
-                }
             }
+        }
     }
-    
 }

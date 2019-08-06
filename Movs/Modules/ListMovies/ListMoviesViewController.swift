@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListMoviesViewController: UIViewController, ListMoviesView {
+final class ListMoviesViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var searchBar: SearchBarView!
@@ -48,14 +48,31 @@ class ListMoviesViewController: UIViewController, ListMoviesView {
         self.errorImage.isHidden = true
         self.errorMessage.isHidden = true
         
+        createActivityIndicator()
+        activityIndicator?.startAnimating()
+    }
+    
+    //MARK: - Functions
+    func createActivityIndicator() {
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.frame.width / 2 - 10, y: self.view.frame.height / 2 - 40, width: 30, height: 30))
         activityIndicator?.color = .black
-        activityIndicator?.startAnimating()
         self.view.addSubview(activityIndicator!)
         self.view.bringSubviewToFront(activityIndicator!)
     }
     
-    //MARK: - Contract Functions
+    
+    /**
+     Check if it's ok to fetch more data.
+     */
+    func canFetchData() {
+        if searchBar.searchBarText.text!.isEmpty {
+            self.presenter.interactor.fetchMovies()
+        }
+    }
+}
+
+//MARK: - Contract Functions
+extension ListMoviesViewController: ListMoviesView {
     func showNoContentScreen(image: UIImage?, message: String) {
         DispatchQueue.main.async {
             self.movieCollectionView.isHidden = true
@@ -102,7 +119,7 @@ class ListMoviesViewController: UIViewController, ListMoviesView {
         self.movieCollectionView.translatesAutoresizingMaskIntoConstraints = false
         self.errorMessage.translatesAutoresizingMaskIntoConstraints = false
         self.errorImage.translatesAutoresizingMaskIntoConstraints = false
-
+        
         //MARK: Search bar constraints
         if let searchBar = self.searchBar {
             self.view.addConstraints([
@@ -147,17 +164,6 @@ class ListMoviesViewController: UIViewController, ListMoviesView {
         
         self.view.updateConstraints()
     }
-    
-    //MARK: - Functions
-    
-    /**
-     Check if it's ok to fetch more data.
-     */
-    func canFetchData() {
-        if searchBar.searchBarText.text!.isEmpty {
-            self.presenter.interactor.fetchMovies()
-        }
-    }
 }
 
 //MARK: - Collection View Extension Functions
@@ -179,7 +185,7 @@ extension ListMoviesViewController: UICollectionViewDataSource, UICollectionView
         })
         
         let width = (collectionView.frame.size.width / 2) - 5
-        let height = (collectionView.frame.size.height / 2.2) - 5
+        let height = CGFloat(225.0)
         cell.frame.size = CGSize(width: width, height: height)
         cell.layer.cornerRadius = 10
         cell.clipsToBounds = true

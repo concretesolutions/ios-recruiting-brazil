@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MovieDescriptionPresenter: MovieDescriptionPresentation {
+final class MovieDescriptionPresenter {
     
     //MARK: - Contract Properties
     weak var view: MovieDescriptionView?
@@ -19,7 +19,11 @@ class MovieDescriptionPresenter: MovieDescriptionPresentation {
     var genres: [GenreEntity]!
     var poster: PosterEntity?
     
-    //MARK: - Contract Functions
+}
+
+//MARK: - Contract Functions
+extension MovieDescriptionPresenter: MovieDescriptionPresentation {
+    
     func viewDidLoad() {
         view?.showMovieDescription(movie: movie, genres: GenreEntity.convertMovieGenresToString(genres: genres), poster: poster)
     }
@@ -45,6 +49,4 @@ class MovieDescriptionPresenter: MovieDescriptionPresentation {
             //LocalDataSaving.remove(data: movie, forKey: "FavoredMovie")
         }
     }
-    
-    
 }

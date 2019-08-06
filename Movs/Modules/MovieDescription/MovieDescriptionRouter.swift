@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDescriptionRouter: MovieDescriptionWireframe {
+final class MovieDescriptionRouter: MovieDescriptionWireframe {
     
     //MARK: - Contract Functions
     static func assembleModule(movie: MovieEntity, genres: [GenreEntity], poster: PosterEntity?) -> UIViewController {
@@ -27,7 +27,4 @@ class MovieDescriptionRouter: MovieDescriptionWireframe {
         return view!
         
     }
-    
-    
-    
 }

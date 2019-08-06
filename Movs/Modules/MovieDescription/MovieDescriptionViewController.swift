@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MovieDescriptionViewController: UIViewController, MovieDescriptionView {
+final class MovieDescriptionViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var poster: UIImageView!
@@ -57,9 +57,14 @@ class MovieDescriptionViewController: UIViewController, MovieDescriptionView {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didFavoriteMovie(_:)))
         favoriteIcon.addGestureRecognizer(tapGestureRecognizer)
     }
-    
-    //MARK: - Contract Functions
-    func showNoContentScreen() { }
+}
+
+//MARK: - Contract Functions
+extension MovieDescriptionViewController: MovieDescriptionView {
+
+    func showNoContentScreen() {
+        
+    }
     
     func showMovieDescription(movie: MovieEntity, genres: String, poster: PosterEntity?) {
         self.movie = movie
@@ -81,9 +86,9 @@ class MovieDescriptionViewController: UIViewController, MovieDescriptionView {
         let tappadIcon = sender?.view as! UIImageView
         
         if tappadIcon.image == favoriteIconNonHighlighted {
-        
+            
             let alert = UIAlertController(title: nil, message: "Do you wish to favorite this movie?", preferredStyle: .alert)
-
+            
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (alert) in
                 tappadIcon.image = self.favoriteIconHighlighted
                 self.presenter.didFavoriteMovie()
@@ -93,14 +98,14 @@ class MovieDescriptionViewController: UIViewController, MovieDescriptionView {
             
             self.present(alert, animated: true)
         }
-        
+            
         else {
             self.favoriteIcon.image = self.favoriteIconNonHighlighted
             self.presenter.didFavoriteMovie()
         }
         
     }
-
+    
     func adjustConstraints() {
         poster.translatesAutoresizingMaskIntoConstraints = false
         movieTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -129,7 +134,7 @@ class MovieDescriptionViewController: UIViewController, MovieDescriptionView {
                 NSLayoutConstraint(item: movieTitle, attribute: .trailing, relatedBy: .equal, toItem: favoriteIcon, attribute: .leading, multiplier: 1.0, constant: -10),
                 NSLayoutConstraint(item: movieTitle, attribute: .top, relatedBy: .equal, toItem: poster, attribute: .bottom, multiplier: 1.0, constant: 20),
                 NSLayoutConstraint(item: movieTitle, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 30)
-            ])
+                ])
         }
         
         //MARK: Favorite icon constraints
@@ -201,10 +206,6 @@ class MovieDescriptionViewController: UIViewController, MovieDescriptionView {
                 NSLayoutConstraint(item: movieDescription, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 150)
                 ])
         }
-        
         self.view.updateConstraints()
-        
     }
-    
-    
 }

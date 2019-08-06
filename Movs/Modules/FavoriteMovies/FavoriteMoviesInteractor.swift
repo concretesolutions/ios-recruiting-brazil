@@ -8,24 +8,27 @@
 
 import UIKit
 
-class FavoriteMoviesInteractor: FavoriteMoviesUseCase {
+final class FavoriteMoviesInteractor {
     
     //MARK: - Contract Properties
     weak var output: FavoriteMoviesInteractorOutput!
+}
+
+//MARK: - Contract Functions
+extension FavoriteMoviesInteractor: FavoriteMoviesUseCase {
     
-    //MARK: - Contract Functions
     func fetchFavoriteMovies() {
         let movies = UserSaves.favoriteMovies
         let posters = UserSaves.posters
         
         output.fetchedFavoriteMovies(movies, posters: posters)
         
-//        if let movies = LocalDataSaving.retrieve(forKey: "FavoredMovie") as? [MovieEntity] {
-//            output.fetchedFavoriteMovies(movies)
-//        }
-//        else {
-//            output.fetchedFavoriteMoviesFailed()
-//        }
+        //        if let movies = LocalDataSaving.retrieve(forKey: "FavoredMovie") as? [MovieEntity] {
+        //            output.fetchedFavoriteMovies(movies)
+        //        }
+        //        else {
+        //            output.fetchedFavoriteMoviesFailed()
+        //        }
         
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FavoriteMovieTableViewCell: UITableViewCell {
+final class FavoriteMovieTableViewCell: UITableViewCell {
     
     //MARK: - Outlets
     @IBOutlet var movieTitle: UILabel!

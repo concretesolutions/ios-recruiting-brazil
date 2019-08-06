@@ -11,9 +11,9 @@ import UIKit
 /**
  This class defines the root view controller to the app delegate window
 */
-class RootRouter {
+final class RootRouter {
     
-    func presentArticlesScreen(in window: UIWindow) {
+    func presentMoviesScreen(in window: UIWindow) {
         window.makeKeyAndVisible()
         window.rootViewController = TabBarController()
     }

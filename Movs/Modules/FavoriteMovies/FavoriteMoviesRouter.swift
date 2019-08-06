@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoriteMoviesRouter: FavoriteMoviesWireframe {
+final class FavoriteMoviesRouter: FavoriteMoviesWireframe {
     
     //MARK: - Contract Properties
     weak var viewController: UIViewController?
@@ -18,16 +18,13 @@ class FavoriteMoviesRouter: FavoriteMoviesWireframe {
         let movieDescriptionViewController = MovieDescriptionRouter.assembleModule(movie: movie, genres: genres, poster: poster)
         viewController?.navigationController?.pushViewController(movieDescriptionViewController, animated: true)
     }
-    
-    func presentMoviesList() { }
-    
+        
     func presentFilterSelection(movies: [MovieEntity]) {
         let filterFavoriteViewController = FilterFavoriteRouter.assembleModule(movies: movies)
         viewController?.navigationController?.pushViewController(filterFavoriteViewController, animated: true)
     }
     
     static func assembleModule() -> UIViewController {
-        
         let view = UIStoryboard(name: "FavoriteMovies", bundle: nil).instantiateViewController(withIdentifier: "FavoriteMovies") as? FavoriteMoviesViewController
         
         let presenter = FavoriteMoviesPresenter()
@@ -49,6 +46,16 @@ class FavoriteMoviesRouter: FavoriteMoviesWireframe {
         interactor.output = presenter
         
         return navigation
+    }
+    
+    static func favoriteMoviesFiltered(_ movies: [MovieEntity], favoriteView: UIViewController) {
+        
+        let favView = favoriteView.navigationController?.viewControllers.first(where: { (view) -> Bool in
+            view is FavoriteMoviesViewController
+        }) as? FavoriteMoviesViewController
+        
+        favView?.presenter.filteredMovies = movies
+        
     }
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilterFavoriteViewController: UIViewController, FilterFavoriteView {
+final class FilterFavoriteViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var filterTableView: UITableView!
@@ -37,10 +37,21 @@ class FilterFavoriteViewController: UIViewController, FilterFavoriteView {
         pickerView.isHidden = true
         pickerView.backgroundColor = .lightGray
         
-        
     }
     
-    //MARK: - Contract Functions
+    //MARK: - Functions
+    @IBAction func didClickApplyFilter(_ sender: UIButton) {
+        if sender.isEnabled {
+            let dict: Dictionary<String, String> = ["Date" : dateFilter, "Genre" : genreFilter]
+            presenter.didEnterFilters(dict)
+        }
+    }
+    
+}
+
+//MARK: - Contract Functions
+extension FilterFavoriteViewController: FilterFavoriteView {
+    
     func showAvaliableFilters(movies: [MovieEntity]) {
         self.movies = movies
     }
@@ -82,15 +93,6 @@ class FilterFavoriteViewController: UIViewController, FilterFavoriteView {
         
         self.view.updateConstraints()
     }
-    
-    //MARK: - Functions
-    @IBAction func didClickApplyFilter(_ sender: UIButton) {
-        if sender.isEnabled {
-            let dict: Dictionary<String, String> = ["Date" : dateFilter, "Genre" : genreFilter]
-            presenter.didEnterFilters(dict)
-        }
-    }
-    
 }
 
 //MARK: - Table View Extension Functions

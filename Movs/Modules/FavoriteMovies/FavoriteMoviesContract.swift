@@ -17,7 +17,7 @@ protocol FavoriteMoviesView: class {
     var isFilterActive: Bool! { get set }
     
     func showNoContentScreen(image: UIImage?, message: String)
-    func showFavoriteMoviesList(_ movies: [MovieEntity], posters: [PosterEntity])
+    func showFavoriteMoviesList(_ movies: [MovieEntity], posters: [PosterEntity], isFilterActive: Bool)
     func adjustConstraints()
 }
 
@@ -26,8 +26,8 @@ protocol FavoriteMoviesPresentation: class {
     var interactor: FavoriteMoviesUseCase! { get set }
     var router: FavoriteMoviesWireframe! { get set }
     
-    var filters: Dictionary<String, String>? { get set }
-    
+    var filteredMovies: [MovieEntity] { get set }
+        
     func viewDidLoad()
     func didEnterSearch(_ search: String)
     func didSelectMovie(_ movie: MovieEntity, poster: PosterEntity?)
@@ -50,7 +50,6 @@ protocol FavoriteMoviesWireframe: class {
     var viewController: UIViewController? { get set }
 
     func presentFavoriteMovieDescription(movie: MovieEntity, genres: [GenreEntity], poster: PosterEntity?)
-    func presentMoviesList()
     func presentFilterSelection(movies: [MovieEntity])
     
     static func assembleModule() -> UIViewController
