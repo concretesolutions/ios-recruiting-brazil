@@ -1,0 +1,914 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2916F90566E527F486390ECF /* Pods_Lyriks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63166F6CEC8B8137A1BB432 /* Pods_Lyriks.framework */; };
+		64C02142B83060CE7C2A7E48 /* Pods_LyriksTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC9B9FB02F137EE289B024C /* Pods_LyriksTests.framework */; };
+		FB15668D22EF8CC4002CDF68 /* MainCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB15668C22EF8CC4002CDF68 /* MainCollectionLayout.swift */; };
+		FB15669122F0C97D002CDF68 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB15669022F0C97D002CDF68 /* Video.swift */; };
+		FB15669522F2249A002CDF68 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB15669422F2249A002CDF68 /* Typography.swift */; };
+		FB15669722F23EDE002CDF68 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB15669622F23EDE002CDF68 /* CustomTabBarController.swift */; };
+		FB15669B22F246AF002CDF68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB15669A22F246AF002CDF68 /* Color.swift */; };
+		FB1566A522F24C4E002CDF68 /* broadway-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB1566A422F24C4E002CDF68 /* broadway-regular.ttf */; };
+		FB1566A922F24D45002CDF68 /* Silentina-Movie.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB1566A722F24D45002CDF68 /* Silentina-Movie.ttf */; };
+		FB1566AA22F24D45002CDF68 /* Silentina-Film.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB1566A822F24D45002CDF68 /* Silentina-Film.ttf */; };
+		FB1566AE22F357D5002CDF68 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566AD22F357D5002CDF68 /* DetailViewController.swift */; };
+		FB1566B022F357FB002CDF68 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566AF22F357FB002CDF68 /* FavoritesViewController.swift */; };
+		FB1566B222F3581C002CDF68 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566B122F3581C002CDF68 /* SearchViewController.swift */; };
+		FB1566B422F37864002CDF68 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566B322F37864002CDF68 /* DetailsViewModel.swift */; };
+		FB1566B822F4ACA5002CDF68 /* CoreDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566B722F4ACA5002CDF68 /* CoreDataAPI.swift */; };
+		FB1566BF22F52676002CDF68 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566BE22F52676002CDF68 /* DetailView.swift */; };
+		FB1566C122F53C31002CDF68 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566C022F53C31002CDF68 /* Genre.swift */; };
+		FB1566C322F54616002CDF68 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB1566C222F54616002CDF68 /* Launch Screen.storyboard */; };
+		FB1566C522F5987B002CDF68 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566C422F5987B002CDF68 /* FilterView.swift */; };
+		FB1566CA22F59B77002CDF68 /* SimplePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566C922F59B77002CDF68 /* SimplePicker.swift */; };
+		FB1566CE22F5ADF9002CDF68 /* DataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566CD22F5ADF9002CDF68 /* DataFormatter.swift */; };
+		FB1566D022F607A7002CDF68 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566CF22F607A7002CDF68 /* MainTableViewCell.swift */; };
+		FB1566D422F60A94002CDF68 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566D322F60A94002CDF68 /* MainTableView.swift */; };
+		FB1566D622F60B99002CDF68 /* TableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566D522F60B99002CDF68 /* TableViewCellModel.swift */; };
+		FB1566D822F61112002CDF68 /* Paging.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1566D722F61112002CDF68 /* Paging.swift */; };
+		FB32F15322F7580800453486 /* MovieMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32F15222F7580800453486 /* MovieMock.swift */; };
+		FB32F15522F7583200453486 /* WebMovieMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32F15422F7583200453486 /* WebMovieMock.swift */; };
+		FB32F16022F8AD3200453486 /* LyriksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32F15F22F8AD3200453486 /* LyriksUITests.swift */; };
+		FB32F16B22F8B1DD00453486 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB32F16A22F8B1DD00453486 /* SnapshotHelper.swift */; };
+		FBF8340E22EE292900168350 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8340D22EE292900168350 /* AppDelegate.swift */; };
+		FBF8341022EE292900168350 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8340F22EE292900168350 /* ViewController.swift */; };
+		FBF8341622EE292900168350 /* Lyriks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FBF8341422EE292900168350 /* Lyriks.xcdatamodeld */; };
+		FBF8341822EE292A00168350 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBF8341722EE292A00168350 /* Assets.xcassets */; };
+		FBF8342622EE292A00168350 /* LyriksSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8342522EE292A00168350 /* LyriksSpec.swift */; };
+		FBF8343122EE327E00168350 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8343022EE327E00168350 /* MovieAPI.swift */; };
+		FBF8343322EE38A500168350 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8343222EE38A500168350 /* Movie.swift */; };
+		FBF8343522EE3CFF00168350 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8343422EE3CFF00168350 /* Error.swift */; };
+		FBF8343822EE5FA900168350 /* MainMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8343622EE5FA900168350 /* MainMovieCollectionViewCell.swift */; };
+		FBF8343D22EE803100168350 /* MainCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8343C22EE803100168350 /* MainCollectionView.swift */; };
+		FBF8343F22EE87E600168350 /* ViewCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8343E22EE87E600168350 /* ViewCoding.swift */; };
+		FBF8344122EE929B00168350 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8344022EE929B00168350 /* UIView+Constraint.swift */; };
+		FBF8344322EE953100168350 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF8344222EE953100168350 /* CollectionCellViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FB32F16222F8AD3200453486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FBF8340222EE292900168350 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBF8340922EE292900168350;
+			remoteInfo = Lyriks;
+		};
+		FBF8342222EE292A00168350 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FBF8340222EE292900168350 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBF8340922EE292900168350;
+			remoteInfo = Lyriks;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0EDBFF35302B2A56261CD034 /* Pods-Lyriks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lyriks.release.xcconfig"; path = "Target Support Files/Pods-Lyriks/Pods-Lyriks.release.xcconfig"; sourceTree = "<group>"; };
+		35D6315247F0CDE6B3732989 /* Pods-LyriksTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriksTests.release.xcconfig"; path = "Target Support Files/Pods-LyriksTests/Pods-LyriksTests.release.xcconfig"; sourceTree = "<group>"; };
+		BCDDCEAE55001E35D98C7D37 /* Pods-Lyriks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lyriks.debug.xcconfig"; path = "Target Support Files/Pods-Lyriks/Pods-Lyriks.debug.xcconfig"; sourceTree = "<group>"; };
+		C63166F6CEC8B8137A1BB432 /* Pods_Lyriks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lyriks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBF9EFCF0C8CF8BD43DB5B8C /* Pods-LyriksTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LyriksTests.debug.xcconfig"; path = "Target Support Files/Pods-LyriksTests/Pods-LyriksTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EDC9B9FB02F137EE289B024C /* Pods_LyriksTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LyriksTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB15668C22EF8CC4002CDF68 /* MainCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionLayout.swift; sourceTree = "<group>"; };
+		FB15669022F0C97D002CDF68 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		FB15669422F2249A002CDF68 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		FB15669622F23EDE002CDF68 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		FB15669A22F246AF002CDF68 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		FB1566A422F24C4E002CDF68 /* broadway-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "broadway-regular.ttf"; sourceTree = "<group>"; };
+		FB1566A722F24D45002CDF68 /* Silentina-Movie.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Silentina-Movie.ttf"; sourceTree = "<group>"; };
+		FB1566A822F24D45002CDF68 /* Silentina-Film.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Silentina-Film.ttf"; sourceTree = "<group>"; };
+		FB1566AD22F357D5002CDF68 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FB1566AF22F357FB002CDF68 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		FB1566B122F3581C002CDF68 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		FB1566B322F37864002CDF68 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		FB1566B722F4ACA5002CDF68 /* CoreDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAPI.swift; sourceTree = "<group>"; };
+		FB1566BE22F52676002CDF68 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		FB1566C022F53C31002CDF68 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		FB1566C222F54616002CDF68 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		FB1566C422F5987B002CDF68 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		FB1566C922F59B77002CDF68 /* SimplePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePicker.swift; sourceTree = "<group>"; };
+		FB1566CD22F5ADF9002CDF68 /* DataFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFormatter.swift; sourceTree = "<group>"; };
+		FB1566CF22F607A7002CDF68 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		FB1566D322F60A94002CDF68 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
+		FB1566D522F60B99002CDF68 /* TableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellModel.swift; sourceTree = "<group>"; };
+		FB1566D722F61112002CDF68 /* Paging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paging.swift; sourceTree = "<group>"; };
+		FB32F15222F7580800453486 /* MovieMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMock.swift; sourceTree = "<group>"; };
+		FB32F15422F7583200453486 /* WebMovieMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMovieMock.swift; sourceTree = "<group>"; };
+		FB32F15D22F8AD3200453486 /* LyriksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LyriksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB32F15F22F8AD3200453486 /* LyriksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyriksUITests.swift; sourceTree = "<group>"; };
+		FB32F16122F8AD3200453486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB32F16A22F8B1DD00453486 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		FBF8340A22EE292900168350 /* Lyriks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lyriks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBF8340D22EE292900168350 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FBF8340F22EE292900168350 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FBF8341522EE292900168350 /* Lyriks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lyriks.xcdatamodel; sourceTree = "<group>"; };
+		FBF8341722EE292A00168350 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FBF8341C22EE292A00168350 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBF8342122EE292A00168350 /* LyriksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LyriksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBF8342522EE292A00168350 /* LyriksSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyriksSpec.swift; sourceTree = "<group>"; };
+		FBF8342722EE292A00168350 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBF8343022EE327E00168350 /* MovieAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
+		FBF8343222EE38A500168350 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		FBF8343422EE3CFF00168350 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		FBF8343622EE5FA900168350 /* MainMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBF8343C22EE803100168350 /* MainCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionView.swift; sourceTree = "<group>"; };
+		FBF8343E22EE87E600168350 /* ViewCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoding.swift; sourceTree = "<group>"; };
+		FBF8344022EE929B00168350 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
+		FBF8344222EE953100168350 /* CollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB32F15A22F8AD3200453486 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBF8340722EE292900168350 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2916F90566E527F486390ECF /* Pods_Lyriks.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBF8341E22EE292A00168350 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64C02142B83060CE7C2A7E48 /* Pods_LyriksTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		662CDEDC0AF55421E46708A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BCDDCEAE55001E35D98C7D37 /* Pods-Lyriks.debug.xcconfig */,
+				0EDBFF35302B2A56261CD034 /* Pods-Lyriks.release.xcconfig */,
+				EBF9EFCF0C8CF8BD43DB5B8C /* Pods-LyriksTests.debug.xcconfig */,
+				35D6315247F0CDE6B3732989 /* Pods-LyriksTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6CE300D832BADE9BEDDB2D35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C63166F6CEC8B8137A1BB432 /* Pods_Lyriks.framework */,
+				EDC9B9FB02F137EE289B024C /* Pods_LyriksTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB1566B522F38F00002CDF68 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566AD22F357D5002CDF68 /* DetailViewController.swift */,
+				FB1566B122F3581C002CDF68 /* SearchViewController.swift */,
+				FB15669622F23EDE002CDF68 /* CustomTabBarController.swift */,
+				FB1566AF22F357FB002CDF68 /* FavoritesViewController.swift */,
+				FBF8340F22EE292900168350 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FB1566B622F38F38002CDF68 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566B322F37864002CDF68 /* DetailsViewModel.swift */,
+				FBF8344222EE953100168350 /* CollectionCellViewModel.swift */,
+				FB1566D522F60B99002CDF68 /* TableViewCellModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FB1566B922F4ACB3002CDF68 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566B722F4ACA5002CDF68 /* CoreDataAPI.swift */,
+				FBF8343022EE327E00168350 /* MovieAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		FB1566BA22F4ACCE002CDF68 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566A422F24C4E002CDF68 /* broadway-regular.ttf */,
+				FB1566A722F24D45002CDF68 /* Silentina-Movie.ttf */,
+				FB1566A822F24D45002CDF68 /* Silentina-Film.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		FB1566BB22F4DDC1002CDF68 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566D222F6092E002CDF68 /* Collection */,
+				FB1566D122F6091D002CDF68 /* Table */,
+				FB1566BE22F52676002CDF68 /* DetailView.swift */,
+				FB1566C222F54616002CDF68 /* Launch Screen.storyboard */,
+				FB1566C422F5987B002CDF68 /* FilterView.swift */,
+				FB1566C922F59B77002CDF68 /* SimplePicker.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB1566C722F599E2002CDF68 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				FB15668C22EF8CC4002CDF68 /* MainCollectionLayout.swift */,
+				FBF8344022EE929B00168350 /* UIView+Constraint.swift */,
+				FBF8343E22EE87E600168350 /* ViewCoding.swift */,
+				FB1566CD22F5ADF9002CDF68 /* DataFormatter.swift */,
+				FB1566D722F61112002CDF68 /* Paging.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		FB1566D122F6091D002CDF68 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566CF22F607A7002CDF68 /* MainTableViewCell.swift */,
+				FB1566D322F60A94002CDF68 /* MainTableView.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		FB1566D222F6092E002CDF68 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				FBF8343622EE5FA900168350 /* MainMovieCollectionViewCell.swift */,
+				FBF8343C22EE803100168350 /* MainCollectionView.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		FB32F15822F75A1700453486 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				FB32F15222F7580800453486 /* MovieMock.swift */,
+				FB32F15422F7583200453486 /* WebMovieMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		FB32F15E22F8AD3200453486 /* LyriksUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FB32F16922F8AE9B00453486 /* fastlane */,
+				FB32F15F22F8AD3200453486 /* LyriksUITests.swift */,
+				FB32F16122F8AD3200453486 /* Info.plist */,
+			);
+			path = LyriksUITests;
+			sourceTree = "<group>";
+		};
+		FB32F16922F8AE9B00453486 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				FB32F16A22F8B1DD00453486 /* SnapshotHelper.swift */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
+		FBF8340122EE292900168350 = {
+			isa = PBXGroup;
+			children = (
+				FBF8340C22EE292900168350 /* Lyriks */,
+				FBF8342422EE292A00168350 /* LyriksTests */,
+				FB32F15E22F8AD3200453486 /* LyriksUITests */,
+				FBF8340B22EE292900168350 /* Products */,
+				662CDEDC0AF55421E46708A2 /* Pods */,
+				6CE300D832BADE9BEDDB2D35 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FBF8340B22EE292900168350 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FBF8340A22EE292900168350 /* Lyriks.app */,
+				FBF8342122EE292A00168350 /* LyriksTests.xctest */,
+				FB32F15D22F8AD3200453486 /* LyriksUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FBF8340C22EE292900168350 /* Lyriks */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566BB22F4DDC1002CDF68 /* View */,
+				FB1566B922F4ACB3002CDF68 /* API */,
+				FB1566B622F38F38002CDF68 /* ViewModel */,
+				FB1566B522F38F00002CDF68 /* Controllers */,
+				FBF8343B22EE7FFE00168350 /* Model */,
+				FBF8343A22EE7FC500168350 /* Assets */,
+				FB1566C722F599E2002CDF68 /* Tools */,
+				FBF8340D22EE292900168350 /* AppDelegate.swift */,
+				FBF8341C22EE292A00168350 /* Info.plist */,
+				FBF8341422EE292900168350 /* Lyriks.xcdatamodeld */,
+			);
+			path = Lyriks;
+			sourceTree = "<group>";
+		};
+		FBF8342422EE292A00168350 /* LyriksTests */ = {
+			isa = PBXGroup;
+			children = (
+				FB32F15822F75A1700453486 /* Mocks */,
+				FBF8342522EE292A00168350 /* LyriksSpec.swift */,
+				FBF8342722EE292A00168350 /* Info.plist */,
+			);
+			path = LyriksTests;
+			sourceTree = "<group>";
+		};
+		FBF8343A22EE7FC500168350 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FB1566BA22F4ACCE002CDF68 /* Font */,
+				FB15669422F2249A002CDF68 /* Typography.swift */,
+				FB15669A22F246AF002CDF68 /* Color.swift */,
+				FBF8341722EE292A00168350 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		FBF8343B22EE7FFE00168350 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FBF8343222EE38A500168350 /* Movie.swift */,
+				FBF8343422EE3CFF00168350 /* Error.swift */,
+				FB15669022F0C97D002CDF68 /* Video.swift */,
+				FB1566C022F53C31002CDF68 /* Genre.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB32F15C22F8AD3200453486 /* LyriksUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB32F16422F8AD3200453486 /* Build configuration list for PBXNativeTarget "LyriksUITests" */;
+			buildPhases = (
+				FB32F15922F8AD3200453486 /* Sources */,
+				FB32F15A22F8AD3200453486 /* Frameworks */,
+				FB32F15B22F8AD3200453486 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB32F16322F8AD3200453486 /* PBXTargetDependency */,
+			);
+			name = LyriksUITests;
+			productName = LyriksUITests;
+			productReference = FB32F15D22F8AD3200453486 /* LyriksUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		FBF8340922EE292900168350 /* Lyriks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBF8342A22EE292A00168350 /* Build configuration list for PBXNativeTarget "Lyriks" */;
+			buildPhases = (
+				0F7C6E0FE0CF579214B5A2CF /* [CP] Check Pods Manifest.lock */,
+				FBF8340622EE292900168350 /* Sources */,
+				FBF8340722EE292900168350 /* Frameworks */,
+				FBF8340822EE292900168350 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lyriks;
+			productName = Lyriks;
+			productReference = FBF8340A22EE292900168350 /* Lyriks.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FBF8342022EE292A00168350 /* LyriksTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBF8342D22EE292A00168350 /* Build configuration list for PBXNativeTarget "LyriksTests" */;
+			buildPhases = (
+				287DB7CEA8171EB385A01E4A /* [CP] Check Pods Manifest.lock */,
+				FBF8341D22EE292A00168350 /* Sources */,
+				FBF8341E22EE292A00168350 /* Frameworks */,
+				FBF8341F22EE292A00168350 /* Resources */,
+				C615B9A3D637EA5D470283B8 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FBF8342322EE292A00168350 /* PBXTargetDependency */,
+			);
+			name = LyriksTests;
+			productName = LyriksTests;
+			productReference = FBF8342122EE292A00168350 /* LyriksTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FBF8340222EE292900168350 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Eduardo Pereira";
+				TargetAttributes = {
+					FB32F15C22F8AD3200453486 = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = FBF8340922EE292900168350;
+					};
+					FBF8340922EE292900168350 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					FBF8342022EE292A00168350 = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = FBF8340922EE292900168350;
+					};
+				};
+			};
+			buildConfigurationList = FBF8340522EE292900168350 /* Build configuration list for PBXProject "Lyriks" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FBF8340122EE292900168350;
+			productRefGroup = FBF8340B22EE292900168350 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FBF8340922EE292900168350 /* Lyriks */,
+				FBF8342022EE292A00168350 /* LyriksTests */,
+				FB32F15C22F8AD3200453486 /* LyriksUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FB32F15B22F8AD3200453486 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBF8340822EE292900168350 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB1566C322F54616002CDF68 /* Launch Screen.storyboard in Resources */,
+				FBF8341822EE292A00168350 /* Assets.xcassets in Resources */,
+				FB1566A522F24C4E002CDF68 /* broadway-regular.ttf in Resources */,
+				FB1566AA22F24D45002CDF68 /* Silentina-Film.ttf in Resources */,
+				FB1566A922F24D45002CDF68 /* Silentina-Movie.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBF8341F22EE292A00168350 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F7C6E0FE0CF579214B5A2CF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lyriks-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		287DB7CEA8171EB385A01E4A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LyriksTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C615B9A3D637EA5D470283B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LyriksTests/Pods-LyriksTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LyriksTests/Pods-LyriksTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LyriksTests/Pods-LyriksTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB32F15922F8AD3200453486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB32F16022F8AD3200453486 /* LyriksUITests.swift in Sources */,
+				FB32F16B22F8B1DD00453486 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBF8340622EE292900168350 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB15669522F2249A002CDF68 /* Typography.swift in Sources */,
+				FB1566AE22F357D5002CDF68 /* DetailViewController.swift in Sources */,
+				FB1566C122F53C31002CDF68 /* Genre.swift in Sources */,
+				FBF8341022EE292900168350 /* ViewController.swift in Sources */,
+				FB1566C522F5987B002CDF68 /* FilterView.swift in Sources */,
+				FB1566D622F60B99002CDF68 /* TableViewCellModel.swift in Sources */,
+				FB15669722F23EDE002CDF68 /* CustomTabBarController.swift in Sources */,
+				FB1566B222F3581C002CDF68 /* SearchViewController.swift in Sources */,
+				FB1566BF22F52676002CDF68 /* DetailView.swift in Sources */,
+				FBF8341622EE292900168350 /* Lyriks.xcdatamodeld in Sources */,
+				FBF8340E22EE292900168350 /* AppDelegate.swift in Sources */,
+				FB1566D422F60A94002CDF68 /* MainTableView.swift in Sources */,
+				FB1566D022F607A7002CDF68 /* MainTableViewCell.swift in Sources */,
+				FB1566B422F37864002CDF68 /* DetailsViewModel.swift in Sources */,
+				FB15669B22F246AF002CDF68 /* Color.swift in Sources */,
+				FBF8343822EE5FA900168350 /* MainMovieCollectionViewCell.swift in Sources */,
+				FB1566B822F4ACA5002CDF68 /* CoreDataAPI.swift in Sources */,
+				FB1566CE22F5ADF9002CDF68 /* DataFormatter.swift in Sources */,
+				FB15668D22EF8CC4002CDF68 /* MainCollectionLayout.swift in Sources */,
+				FBF8343F22EE87E600168350 /* ViewCoding.swift in Sources */,
+				FB1566B022F357FB002CDF68 /* FavoritesViewController.swift in Sources */,
+				FB1566D822F61112002CDF68 /* Paging.swift in Sources */,
+				FBF8343122EE327E00168350 /* MovieAPI.swift in Sources */,
+				FBF8343522EE3CFF00168350 /* Error.swift in Sources */,
+				FBF8344322EE953100168350 /* CollectionCellViewModel.swift in Sources */,
+				FB1566CA22F59B77002CDF68 /* SimplePicker.swift in Sources */,
+				FB15669122F0C97D002CDF68 /* Video.swift in Sources */,
+				FBF8344122EE929B00168350 /* UIView+Constraint.swift in Sources */,
+				FBF8343322EE38A500168350 /* Movie.swift in Sources */,
+				FBF8343D22EE803100168350 /* MainCollectionView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBF8341D22EE292A00168350 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB32F15322F7580800453486 /* MovieMock.swift in Sources */,
+				FBF8342622EE292A00168350 /* LyriksSpec.swift in Sources */,
+				FB32F15522F7583200453486 /* WebMovieMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FB32F16322F8AD3200453486 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBF8340922EE292900168350 /* Lyriks */;
+			targetProxy = FB32F16222F8AD3200453486 /* PBXContainerItemProxy */;
+		};
+		FBF8342322EE292A00168350 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBF8340922EE292900168350 /* Lyriks */;
+			targetProxy = FBF8342222EE292A00168350 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FB32F16522F8AD3200453486 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6LU9H3DMX;
+				INFOPLIST_FILE = LyriksUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Eduardo.LyriksUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Lyriks;
+			};
+			name = Debug;
+		};
+		FB32F16622F8AD3200453486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6LU9H3DMX;
+				INFOPLIST_FILE = LyriksUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Eduardo.LyriksUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Lyriks;
+			};
+			name = Release;
+		};
+		FBF8342822EE292A00168350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FBF8342922EE292A00168350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FBF8342B22EE292A00168350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCDDCEAE55001E35D98C7D37 /* Pods-Lyriks.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6LU9H3DMX;
+				INFOPLIST_FILE = Lyriks/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Eduardo.Lyriks;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FBF8342C22EE292A00168350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EDBFF35302B2A56261CD034 /* Pods-Lyriks.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6LU9H3DMX;
+				INFOPLIST_FILE = Lyriks/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Eduardo.Lyriks;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FBF8342E22EE292A00168350 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBF9EFCF0C8CF8BD43DB5B8C /* Pods-LyriksTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6LU9H3DMX;
+				INFOPLIST_FILE = LyriksTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Eduardo.LyriksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lyriks.app/Lyriks";
+			};
+			name = Debug;
+		};
+		FBF8342F22EE292A00168350 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35D6315247F0CDE6B3732989 /* Pods-LyriksTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6LU9H3DMX;
+				INFOPLIST_FILE = LyriksTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Eduardo.LyriksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lyriks.app/Lyriks";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FB32F16422F8AD3200453486 /* Build configuration list for PBXNativeTarget "LyriksUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB32F16522F8AD3200453486 /* Debug */,
+				FB32F16622F8AD3200453486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBF8340522EE292900168350 /* Build configuration list for PBXProject "Lyriks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBF8342822EE292A00168350 /* Debug */,
+				FBF8342922EE292A00168350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBF8342A22EE292A00168350 /* Build configuration list for PBXNativeTarget "Lyriks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBF8342B22EE292A00168350 /* Debug */,
+				FBF8342C22EE292A00168350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBF8342D22EE292A00168350 /* Build configuration list for PBXNativeTarget "LyriksTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBF8342E22EE292A00168350 /* Debug */,
+				FBF8342F22EE292A00168350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FBF8341422EE292900168350 /* Lyriks.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FBF8341522EE292900168350 /* Lyriks.xcdatamodel */,
+			);
+			currentVersion = FBF8341522EE292900168350 /* Lyriks.xcdatamodel */;
+			path = Lyriks.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = FBF8340222EE292900168350 /* Project object */;
+}
