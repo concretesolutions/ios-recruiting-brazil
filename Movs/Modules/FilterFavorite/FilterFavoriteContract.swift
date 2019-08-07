@@ -29,17 +29,6 @@ protocol FilterFavoritePresentation: class {
     func didEnterFilters(_ filter: Dictionary<String, String>)
 }
 
-//protocol FilterFavoriteUseCase: class {
-//    var output: FilterFavoriteInteractorOutput! { get set }
-//
-//    //func fetchFavoriteMovies()
-//}
-//
-//protocol FilterFavoriteInteractorOutput: class {
-//    func fetchedFavoriteMovies(_ : [MovieEntity])
-//    func fetchedFavoriteMoviesFailed()
-//}
-
 protocol FilterFavoriteWireframe: class {
     var viewController: UIViewController? { get set }
 

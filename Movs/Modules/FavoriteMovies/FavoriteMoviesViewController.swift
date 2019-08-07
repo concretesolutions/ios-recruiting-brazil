@@ -24,13 +24,11 @@ final class FavoriteMoviesViewController: UIViewController {
     var isFilterActive: Bool! {
         didSet {
             if isFilterActive {
-                clearFilterButton.frame.size = CGSize(width: clearFilterButton.frame.width, height: 70)
-                clearFilterButton.isHidden = false
+                clearFilterButton.isEnabled = true
             }
             else {
                 presenter.filteredMovies = []
-                clearFilterButton.frame.size = CGSize(width: clearFilterButton.frame.width, height: 0)
-                clearFilterButton.isHidden = true
+                clearFilterButton.isEnabled = false
             }
         }
     }
@@ -53,10 +51,11 @@ final class FavoriteMoviesViewController: UIViewController {
         self.view.backgroundColor = ColorPalette.background.uiColor
         
         searchBar.searchBarText.delegate = self
-        
-        clearFilterButton.frame.size = CGSize(width: clearFilterButton.frame.width, height: 0)
-        clearFilterButton.backgroundColor = ColorPalette.darkBlue.uiColor
-        clearFilterButton.isHidden = true
+
+        clearFilterButton.backgroundColor = ColorPalette.darkYellow.uiColor
+        clearFilterButton.setTitleColor(ColorPalette.textGray.uiColor, for: .disabled)
+        clearFilterButton.setTitleColor(ColorPalette.blue.uiColor, for: .normal)
+        clearFilterButton.isEnabled = false
         
         self.errorImage.isHidden = true
         self.errorText.isHidden = true
@@ -138,7 +137,7 @@ extension FavoriteMoviesViewController: FavoriteMoviesView {
                 NSLayoutConstraint(item: clearFilterButton, attribute: .leading, relatedBy: .equal, toItem: self.view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1.0, constant: 0),
                 NSLayoutConstraint(item: clearFilterButton, attribute: .trailing, relatedBy: .equal, toItem: self.view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1.0, constant: 0),
                 NSLayoutConstraint(item: clearFilterButton, attribute: .top, relatedBy: .equal, toItem: searchBar, attribute: .bottom, multiplier: 1.0, constant: 0),
-                NSLayoutConstraint(item: clearFilterButton, attribute: .height, relatedBy: .lessThanOrEqual, toItem: nil, attribute: .height, multiplier: 1.0, constant: 70)
+                NSLayoutConstraint(item: clearFilterButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 50)
                 ])
         }
         

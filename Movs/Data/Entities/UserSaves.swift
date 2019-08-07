@@ -14,9 +14,6 @@ import Foundation
 class UserSaves {
     
     //MARK: - Properties
-    //fileprivate static var favoriteMovies: [MovieEntity] = []
-    //fileprivate static var posters: [PosterEntity] = []
-    
     var count: Int {
         return storage.count
     }
@@ -33,29 +30,22 @@ class UserSaves {
      - Returns: Value Bool indicating movie's existence in user saves.
      */
     func isFavorite(movie movieId: Int) -> Bool {
-//        return UserSaves.favoriteMovies.contains { (mov) -> Bool in
-//            movie.id == mov.id
-//        }
         return storage.isFavorite(movie: movieId)
     }
     
     func getAllFavoriteMovies() -> [MovieEntity] {
-        //return UserSaves.favoriteMovies
         return storage.retrieveAllMovies()!
     }
     
     func getAllPosters() -> [PosterEntity] {
-        //return UserSaves.posters
         return storage.retrieveAllPosters()
     }
     
     func add(movie: MovieEntity) {
-        //UserSaves.favoriteMovies.append(movie)
         storage.store(movie: movie)
     }
     
     func add(poster: PosterEntity) {
-        //UserSaves.posters.append(poster)
         storage.store(poster: poster)
     }
     

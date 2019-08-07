@@ -23,26 +23,11 @@ protocol MovieDescriptionView: class {
 protocol MovieDescriptionPresentation: class {
     var view: MovieDescriptionView? { get set }
     var router: MovieDescriptionWireframe! { get set }
-    //var interactor: MovieDescriptionUseCase! { get set }
-    //var movie: MovieEntity { get set }
     
     func viewDidLoad()
     func didFavoriteMovie()
 }
 
-//protocol MovieDescriptionUseCase: class {
-//    var output: MovieDescriptionInteractorOutput! { get set }
-//}
-//
-//protocol MovieDescriptionInteractorOutput: class {
-//
-//}
-
 protocol MovieDescriptionWireframe: class {
-//    var viewController: UIViewController? { get set }
-
-//    func presentFavoriteMovies()
-//    func presentMoviesList()
-    
     static func assembleModule(movie: MovieEntity, genres: [GenreEntity], poster: PosterEntity?) -> UIViewController
 }

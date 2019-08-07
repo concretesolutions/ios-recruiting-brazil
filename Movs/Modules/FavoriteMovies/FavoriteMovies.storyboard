@@ -29,7 +29,7 @@
         <!--FavoriteMovies-->
         <scene sceneID="SFz-me-YBL">
             <objects>
-                <viewController storyboardIdentifier="FavoriteMovies" title="FavoriteMovies" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aNF-UP-kf3" customClass="FavoriteMoviesViewController" customModule="ConcreteChallenge_BrunoChagas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteMovies" title="FavoriteMovies" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aNF-UP-kf3" customClass="FavoriteMoviesViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ER1-a7-4tk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,7 +50,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteMovieCell" rowHeight="108" id="sMV-i8-ohn" customClass="FavoriteMovieTableViewCell" customModule="ConcreteChallenge_BrunoChagas" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteMovieCell" rowHeight="108" id="sMV-i8-ohn" customClass="FavoriteMovieTableViewCell" customModule="Movs" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sMV-i8-ohn" id="sea-6T-pIj">
@@ -71,7 +71,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dsdfsdfsdwjeiojrogkldjflskdfjslkdfjsdlfjsdjsdlnknvagsdofijsdiofjsdiofjsdoifjsoga" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="1cj-zI-yZJ" userLabel="Description">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dsdfsdfsdwjeiojrogkldjflskdfjslkdfjsdlfjsdjsdlnknvagsdofijsdiofjsdiofjsdoifjsoga" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="1cj-zI-yZJ" userLabel="Description">
                                                     <rect key="frame" x="129" y="40" width="198" height="57"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -97,7 +97,7 @@
                                     <outlet property="delegate" destination="aNF-UP-kf3" id="X1X-6k-aCz"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSc-Jo-x3N" userLabel="SearchBarView" customClass="SearchBarView" customModule="ConcreteChallenge_BrunoChagas" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSc-Jo-x3N" userLabel="SearchBarView" customClass="SearchBarView" customModule="Movs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="42" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.83914811639999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -106,6 +106,7 @@
                                 <rect key="frame" x="16" y="116" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="Clear Filter">
                                     <color key="titleColor" red="1" green="0.83914811639999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>

@@ -90,22 +90,6 @@ class MovieEntity: NSObject, Codable, Entity {
         }
         return "Unknown"
     }
-
-    /**
-     Transfoms an instance from this object into a dictionary.
-     
-     - Returns: A dictionary.
-     */
-//    func toDict() -> [String:Any] {
-//        var dict = [String:Any]()
-//        let otherSelf = Mirror(reflecting: self)
-//        for child in otherSelf.children {
-//            if let key = child.label {
-//                dict[key] = child.value
-//            }
-//        }
-//        return dict
-//    }
 }
 
 extension CodingUserInfoKey {

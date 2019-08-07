@@ -25,14 +25,6 @@ extension FavoriteMoviesInteractor: FavoriteMoviesUseCase {
         let posters = bank.getAllPosters()
         
         output.fetchedFavoriteMovies(movies, posters: posters)
-        
-        //        if let movies = LocalDataSaving.retrieve(forKey: "FavoredMovie") as? [MovieEntity] {
-        //            output.fetchedFavoriteMovies(movies)
-        //        }
-        //        else {
-        //            output.fetchedFavoriteMoviesFailed()
-        //        }
-        
     }
     
     func removeFavoriteMovie(movie: MovieEntity, withPoster: Bool) {

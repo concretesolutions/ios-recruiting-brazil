@@ -30,8 +30,6 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
     //MARK: - Functions
     private func filterMovies(filters: Dictionary<String, String>) -> [MovieEntity] {
         
-        //let movies = UserSaves().getAllFavoriteMovies()
-        
         // Values to search in movies
         var date = ""
         var genreName = ""
@@ -114,12 +112,3 @@ final class FilterFavoritePresenter: FilterFavoritePresentation {
     
 }
 
-//for item in posters! {
-//    if let movieId = item.movieId {
-//        if favoriteMovies!.contains(where: { (movie) -> Bool in
-//            movie.id == movieId
-//        }) {
-//            filteredPosters.append(item)
-//        }
-//    }
-//}

@@ -176,9 +176,7 @@ class LocalDataSaving {
         
         do {
             let result = try? managedContext.fetch(fetchRequestMovies)
-//                else {
-//                    return false
-//            }
+
             if result!.count > 0 {
                 return true
             }
