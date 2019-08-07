@@ -19,12 +19,26 @@ class ListMoviesViewControllerSpec: QuickSpec {
         var presenter: ListMoviesPresentationMock!
         
         beforeEach {
-            sut = ListMoviesViewController()
+            sut = UIStoryboard(name: "ListMovies", bundle: nil).instantiateViewController(withIdentifier: "ListMovies") as? ListMoviesViewController
             presenter = ListMoviesPresentationMock()
             sut.presenter = presenter
+            sut.view.didMoveToWindow()
         }
         
-        
+        describe("View") {
+            it("Has to show list movies view", closure: {
+                var movies: [MovieEntity] = []
+                movies.append(MovieEntityMock.createMovieEntityInstance()!)
+                sut.showMoviesList(movies)
+                                
+                expect(sut.view) == snapshot("ListMoviesView", usesDrawRect: false)
+            })
+            
+            it("Has to show view with no content") {
+                sut.showNoContentScreen(image: UIImage(named: "search_icon"), message: "No movies available")
+                expect(sut.view) == snapshot("ListMoviesViewWithNoContent", usesDrawRect: false)
+            }
+        }
         
     }
 }

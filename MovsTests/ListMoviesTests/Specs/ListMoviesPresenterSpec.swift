@@ -32,18 +32,9 @@ class ListMoviesPresenterSpec: QuickSpec {
             sut.movies.append(MovieEntityMock.createMovieEntityInstance()!)
         }
         
-//        describe("") {
-//            it("", closure: {
-//                var view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-//                view.backgroundColor = .black
-//                expect(view) == recordSnapshot("generic_view", usesDrawRect: false)
-//            })
-//        }
-        
         describe("Posters") {
             it("Has to call update view at poster set", closure: {
                 sut.posters.append(PosterEntity(poster: UIImage()))
-                
                 expect(view.hasCalledUpdatePosters).to(beTrue())
             })
         }

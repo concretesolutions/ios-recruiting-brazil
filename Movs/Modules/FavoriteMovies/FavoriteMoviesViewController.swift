@@ -40,13 +40,14 @@ final class FavoriteMoviesViewController: UIViewController {
     //MARK: - View Start Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            presenter.viewDidLoad()
+        presenter.viewDidLoad()
     }
     
     override func viewDidLoad() {
+        adjustConstraints()
         super.viewDidLoad()
         presenter.viewDidLoad()
-        adjustConstraints()
+        
         self.navigationController?.navigationBar.layer.zPosition = -1
         self.view.backgroundColor = ColorPalette.background.uiColor
         
@@ -86,7 +87,7 @@ final class FavoriteMoviesViewController: UIViewController {
 extension FavoriteMoviesViewController: FavoriteMoviesView {
     
     func showNoContentScreen(image: UIImage?, message: String) {
-        DispatchQueue.main.async {
+        //DispatchQueue.main.async {
             if !self.searchBar.searchBarText.isFirstResponder {
                 self.searchBar.isHidden = true
             }
@@ -97,21 +98,23 @@ extension FavoriteMoviesViewController: FavoriteMoviesView {
             
             self.errorText.isHidden = false
             self.errorText.text = message
-        }
+        //}
     }
     
     func showFavoriteMoviesList(_ movies: [MovieEntity], posters: [PosterEntity], isFilterActive: Bool) {
-        if isFilterActive {
-            self.isFilterActive = true
-        }
-        self.searchBar.isHidden = false
-        self.favoriteMoviesTableView.isHidden = false
-        self.errorImage.isHidden = true
-        self.errorText.isHidden = true
-        
-        self.favoriteMovies = movies
-        self.posters = posters
-        favoriteMoviesTableView.reloadData()
+        //DispatchQueue.main.async {
+            if isFilterActive {
+                self.isFilterActive = true
+            }
+            self.searchBar.isHidden = false
+            self.favoriteMoviesTableView.isHidden = false
+            self.errorImage.isHidden = true
+            self.errorText.isHidden = true
+            
+            self.favoriteMovies = movies
+            self.posters = posters
+            self.favoriteMoviesTableView.reloadData()
+        //}
     }
     
     func adjustConstraints() {
