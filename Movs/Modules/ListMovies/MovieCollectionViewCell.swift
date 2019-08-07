@@ -80,7 +80,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
             self.movieTitle.text = name
         }
         
-        if UserSaves().isFavorite(movie: movie) {
+        if UserSaves().isFavorite(movie: movie.id!) {
             self.favoriteIcon.image = UIImage(imageLiteralResourceName: "favorite_gray_icon")
         }
         else {

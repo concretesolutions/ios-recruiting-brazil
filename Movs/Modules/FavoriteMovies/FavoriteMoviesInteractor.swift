@@ -36,7 +36,7 @@ extension FavoriteMoviesInteractor: FavoriteMoviesUseCase {
     }
     
     func removeFavoriteMovie(movie: MovieEntity, withPoster: Bool) {
-        bank.remove(movie: movie, withPoster: withPoster)
+        bank.remove(movie: movie.id!, withPoster: withPoster)
     }
 
 }

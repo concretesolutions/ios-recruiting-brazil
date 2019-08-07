@@ -14,12 +14,14 @@ import Foundation
 class UserSaves {
     
     //MARK: - Properties
-    fileprivate static var favoriteMovies: [MovieEntity] = []
-    fileprivate static var posters: [PosterEntity] = []
+    //fileprivate static var favoriteMovies: [MovieEntity] = []
+    //fileprivate static var posters: [PosterEntity] = []
     
     var count: Int {
-        return UserSaves.favoriteMovies.count
+        return storage.count
     }
+    
+    let storage = LocalDataSaving()
     
     //MARK: - Functions
     
@@ -30,38 +32,41 @@ class UserSaves {
      
      - Returns: Value Bool indicating movie's existence in user saves.
      */
-    func isFavorite(movie: MovieEntity) -> Bool {
-        return UserSaves.favoriteMovies.contains { (mov) -> Bool in
-            movie.id == mov.id
-        }
+    func isFavorite(movie movieId: Int) -> Bool {
+//        return UserSaves.favoriteMovies.contains { (mov) -> Bool in
+//            movie.id == mov.id
+//        }
+        return storage.isFavorite(movie: movieId)
     }
     
     func getAllFavoriteMovies() -> [MovieEntity] {
-        return UserSaves.favoriteMovies
+        //return UserSaves.favoriteMovies
+        return storage.retrieveAllMovies()!
     }
     
     func getAllPosters() -> [PosterEntity] {
-        return UserSaves.posters
+        //return UserSaves.posters
+        return storage.retrieveAllPosters()
     }
     
     func add(movie: MovieEntity) {
-        UserSaves.favoriteMovies.append(movie)
+        //UserSaves.favoriteMovies.append(movie)
+        storage.store(movie: movie)
     }
     
     func add(poster: PosterEntity) {
-        UserSaves.posters.append(poster)
+        //UserSaves.posters.append(poster)
+        storage.store(poster: poster)
     }
     
-    func remove(movie: MovieEntity, withPoster poster: Bool) {
-        UserSaves.favoriteMovies.removeAll { (mov) -> Bool in
-            mov.id == movie.id
-        }
-        
-        if poster {
-            UserSaves.posters.removeAll { (post) -> Bool in
-                post.movieId == movie.id
-            }
-        }
+    func remove(movie movieId: Int, withPoster poster: Bool) {
+        storage.delete(movie: movieId)
+        storage.delete(poster: movieId)
+    }
+    
+    func removeAll() {
+        storage.deleteAllMovies()
+        storage.deleteAllPosters()
     }
     
 }

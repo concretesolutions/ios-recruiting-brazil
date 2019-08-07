@@ -34,7 +34,7 @@ final class ListMoviesViewController: UIViewController {
         self.adjustConstraints()
         super.viewDidLoad()
         self.presenter.viewDidLoad()
-        
+
         self.view.backgroundColor = ColorPalette.background.uiColor
         
         self.navigationController?.navigationBar.layer.zPosition = -1

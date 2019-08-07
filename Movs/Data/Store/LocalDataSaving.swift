@@ -7,79 +7,194 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 class LocalDataSaving {
+    let appDelegate: AppDelegate!
+    let managedContext: NSManagedObjectContext!
     
-    static let userDefaults = UserDefaults.standard
+    init() {
+        appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        managedContext = appDelegate.persistentContainer.viewContext
+    }
     
-    static func store(data: MovieEntity, forKey key: String) {
+    //MARK: - CRUD movies
+    func store(movie: MovieEntity) {
         
-        let encoder = PropertyListEncoder()
-        encoder.outputFormat = .xml
+        let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
+        fetchRequestMovies.predicate = NSPredicate(format: "id == %@", String(movie.id!))
         
-        //LocalDataSaving.createDirectory()
-        
-        //var favoriteMovies = [Int : MovieEntity]()
-        //favoriteMovies[1] = data
-        //let dict = favoriteMovies as NSDictionary
-        
-        
-
-        //let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("FavoriteMovies.plist")
-        
-        let dictionary:[String:String] = ["key1" : "value1"]
-        let path = Bundle.main.url(forResource: "FavoriteMovies", withExtension: "plist")
+        var result: [Any]? = nil
         do {
-            let encodedData: Data = try NSKeyedArchiver.archivedData(withRootObject: dictionary, requiringSecureCoding: false)
-            try encodedData.write(to: path!, options: .atomic)
-        } catch {
+            result = try? managedContext.fetch(fetchRequestMovies)
+        }
+        
+        if result != nil && result!.count == 0 {
+            let favoriteMovieEntity = NSEntityDescription.entity(forEntityName: "Movies", in: managedContext)!
+            let favoriteMovie = NSManagedObject(entity: favoriteMovieEntity, insertInto: managedContext)
+            favoriteMovie.setValue(Int64(movie.id!), forKey: "id")
+            favoriteMovie.setValue(movie.title, forKey: "title")
+            favoriteMovie.setValue(movie.releaseDate, forKey: "releaseDate")
+            favoriteMovie.setValue(movie.genresIds, forKey: "genreIds")
+            favoriteMovie.setValue(movie.poster, forKey: "poster")
+            favoriteMovie.setValue(movie.movieDescription, forKey: "movieDescription")
+            
+            do{
+                try managedContext.save()
+            } catch let error {
+                print(error)
+            }
+        }
+
+    }
+    
+    func retrieveAllMovies() -> [MovieEntity]? {
+        let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
+        var movies: [MovieEntity] = []
+        
+        do {
+            let result = try? managedContext.fetch(fetchRequestMovies)
+            for item in result as! [NSManagedObject] {
+                let movie = MovieEntity()
+                movie.id = item.value(forKey: "id") as? Int
+                movie.title = item.value(forKey: "title") as? String
+                movie.releaseDate = item.value(forKey: "releaseDate") as? String
+                movie.genresIds = item.value(forKey: "genreIds") as? [Int]
+                movie.poster = item.value(forKey: "poster") as? String
+                movie.movieDescription = item.value(forKey: "movieDescription") as? String
+                movies.append(movie)
+                
+            }
+        }
+        return movies
+    }
+    
+    func delete(movie movieId: Int) {
+        let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
+        fetchRequestMovies.predicate = NSPredicate(format: "id == %@", String(movieId))
+        do {
+            let result = try? managedContext.fetch(fetchRequestMovies)
+            for item in result as! [NSManagedObject] {
+                managedContext.delete(item)
+            }
+            try managedContext.save()
+        }
+        catch {
             print(error)
         }
-        //let succeed = NSKeyedArchiver.archiveRootObject(dictionary, toFile: (path?.absoluteString)!)
-        //print(succeed)
-//        
-//        do {
-//            let encodedData = data.toDict() as NSDictionary
-//            //let encodedData = try encoder.encode(data)
-//            //let encodedData: Data = try NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: false)
-//            
-//            try encodedData.write(to: path!)
-////            LocalDataSaving.userDefaults.set(encodedData, forKey: key)
-////            LocalDataSaving.userDefaults.synchronize()
-//        } catch {
-//            print(error)
-//        }
-
     }
     
-    static func retrieve(forKey key: String) -> Any? {
+    func deleteAllMovies() {
+        let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
+        do {
+            let result = try? managedContext.fetch(fetchRequestMovies)
+            for item in result as! [NSManagedObject] {
+                managedContext.delete(item)
+            }
+            try managedContext.save()
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    //MARK: - CRUD posters
+    func store(poster: PosterEntity) {
         
-        if let path = Bundle.main.path(forResource: "FavoriteMovies", ofType: "plist"),
-            let xml = FileManager.default.contents(atPath: path)
-            //let movie = try? PropertyListDecoder().decode(MovieEntity.self, from: xml)
-        {
-            print(xml.description)
+        let fetchRequestPosters = NSFetchRequest<NSFetchRequestResult>(entityName: "Posters")
+        fetchRequestPosters.predicate = NSPredicate(format: "movieId == %@", String(poster.movieId!))
+        
+        var result: [Any]? = nil
+        do {
+            result = try? managedContext.fetch(fetchRequestPosters)
         }
         
-//        if let decodedData = LocalDataSaving.userDefaults.data(forKey: key) {
-//            do {
-//                let decodedType = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decodedData)
-////                let decodedType = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [handler(type.self) as! AnyObject.Type], from: decodedData)
-//                return decodedType
-//            } catch {
-//                print("Retrieving data failed")
-//            }
-//        }
-        return nil
+        if result != nil && result!.count == 0  {
+            let posterEntity = NSEntityDescription.entity(forEntityName: "Posters", in: managedContext)!
+            let image = NSManagedObject(entity: posterEntity, insertInto: managedContext)
+            image.setValue(poster.movieId, forKey: "movieId")
+            image.setValue(poster.poster?.jpegData(compressionQuality: 100), forKey: "poster")
+            
+            do{
+                try managedContext.save()
+            } catch let error {
+                print(error)
+            }
+        }
     }
     
-    static func createDirectory(){
-        let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("FavoriteMovies")
-        if !fileManager.fileExists(atPath: paths){
-            try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
-        }else{
-            print("Already dictionary created.")
+    func retrieveAllPosters() -> [PosterEntity] {
+        let fetchRequestPosters = NSFetchRequest<NSFetchRequestResult>(entityName: "Posters")
+        var posters: [PosterEntity] = []
+        
+        do {
+            let result = try? managedContext.fetch(fetchRequestPosters)
+            for item in result as! [NSManagedObject] {
+                let poster = PosterEntity(poster: UIImage(data: item.value(forKey: "poster") as! Data)!)
+                poster.movieId = item.value(forKey: "movieId") as? Int
+                posters.append(poster)
+            }
+        }
+        return posters
+    }
+    
+    func delete(poster movieId: Int) {
+        let fetchRequestPosters = NSFetchRequest<NSFetchRequestResult>(entityName: "Posters")
+        fetchRequestPosters.predicate = NSPredicate(format: "movieId == %@", String(movieId))
+        do {
+            let result = try? managedContext.fetch(fetchRequestPosters)
+            for item in result as! [NSManagedObject] {
+                managedContext.delete(item)
+            }
+            try managedContext.save()
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func deleteAllPosters() {
+        let fetchRequestPosters = NSFetchRequest<NSFetchRequestResult>(entityName: "Posters")
+        do {
+            let result = try? managedContext.fetch(fetchRequestPosters)
+            for item in result as! [NSManagedObject] {
+                managedContext.delete(item)
+            }
+            try managedContext.save()
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    //MARK: - Filters
+    func isFavorite(movie movieId: Int) -> Bool {
+        let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
+        fetchRequestMovies.fetchLimit = 1
+        fetchRequestMovies.predicate = NSPredicate(format: "id == %@", String(movieId))
+        
+        do {
+            let result = try? managedContext.fetch(fetchRequestMovies)
+//                else {
+//                    return false
+//            }
+            if result!.count > 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    var count: Int {
+        let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
+        
+        do {
+            guard let result = try? managedContext.fetch(fetchRequestMovies)
+                else {
+                    return 0
+            }
+            return result.count
         }
     }
 }

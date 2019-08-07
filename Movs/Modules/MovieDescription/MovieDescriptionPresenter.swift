@@ -37,12 +37,9 @@ extension MovieDescriptionPresenter: MovieDescriptionPresentation {
             if let poster = poster {
                 bank.add(poster: poster)
             }
-            
-            //LocalDataSaving.store(data: movie, forKey: "FavoredMovie")
         }
         else {
-            bank.remove(movie: movie, withPoster: true)
-            //LocalDataSaving.remove(data: movie, forKey: "FavoredMovie")
+            bank.remove(movie: movie.id!, withPoster: true)
         }
     }
 }

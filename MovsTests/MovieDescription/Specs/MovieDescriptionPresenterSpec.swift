@@ -33,7 +33,7 @@ class MovieDescriptionPresenterSpec: QuickSpec {
                         mov.id == movie.id
                     })
                     
-                    if sut.bank.isFavorite(movie: movie) {
+                    if sut.bank.isFavorite(movie: movie.id!) {
                         expect(result).to(beTrue())
                     }
                     else {

@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import Quick
 import Nimble
-import Nimble_Snapshots
 
 @testable import Movs
 
