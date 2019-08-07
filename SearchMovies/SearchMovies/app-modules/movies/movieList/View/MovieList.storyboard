@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wDW-O1-JN9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Movies-->
+        <scene sceneID="aR5-f4-VjN">
+            <objects>
+                <viewController id="iQb-sM-zqv" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I2I-yY-dNH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgy-Qj-9Tj" userLabel="viewContent">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jzc-ne-S0g">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="jzc-ne-S0g" secondAttribute="trailing" id="aOM-Q9-X7s"/>
+                                    <constraint firstItem="jzc-ne-S0g" firstAttribute="top" secondItem="jgy-Qj-9Tj" secondAttribute="top" id="far-vf-d7O"/>
+                                    <constraint firstItem="jzc-ne-S0g" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="gng-GV-aih"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Aec-4H-ZK8" firstAttribute="trailing" secondItem="jgy-Qj-9Tj" secondAttribute="trailing" id="Cpv-NE-jYx"/>
+                            <constraint firstItem="Aec-4H-ZK8" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="kFy-QB-CoY"/>
+                            <constraint firstItem="jgy-Qj-9Tj" firstAttribute="top" secondItem="Aec-4H-ZK8" secondAttribute="top" id="sBs-D7-LcA"/>
+                            <constraint firstItem="Aec-4H-ZK8" firstAttribute="bottom" secondItem="jgy-Qj-9Tj" secondAttribute="bottom" id="sOQ-VT-eXw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Aec-4H-ZK8"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="Kxd-CE-ubT"/>
+                    <navigationItem key="navigationItem" title="Movies" id="0AE-VF-eAk"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yGT-4X-wfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792.79999999999995" y="47.226386806596707"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2mX-zw-LtM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wDW-O1-JN9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TW4-Nw-pKr">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iQb-sM-zqv" kind="relationship" relationship="rootViewController" id="r7D-71-CQf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mna-PF-tdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-146.40000000000001" y="47.226386806596707"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="list_icon" width="18" height="10"/>
+    </resources>
+</document>
