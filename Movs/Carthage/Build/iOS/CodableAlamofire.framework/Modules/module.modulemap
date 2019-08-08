@@ -1,0 +1,11 @@
+framework module CodableAlamofire {
+  umbrella header "CodableAlamofire.h"
+
+  export *
+  module * { export * }
+}
+
+module CodableAlamofire.Swift {
+    header "CodableAlamofire-Swift.h"
+    requires objc
+}
