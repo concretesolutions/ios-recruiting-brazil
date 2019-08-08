@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>IMDB_BASE_URL_IMAGE</key>
+	<string>$(IMDB_BASE_URL_IMAGE)</string>
 	<key>IMDB_BASE_URL</key>
 	<string>$(IMDB_BASE_URL)</string>
 	<key>SEARCH_MOVIES_APPKEY_IMDB</key>

@@ -11,5 +11,8 @@ import Foundation
 struct Constants {
     static let appKey:String = (Bundle.main.infoDictionary!["SEARCH_MOVIES_APPKEY_IMDB"] as! String).fromBase64()!
     static let imdbBaseUrl:String = (Bundle.main.infoDictionary!["IMDB_BASE_URL"] as! String).fromBase64()!
+    static let imdbBaseUrlImage:String = (Bundle.main.infoDictionary!["IMDB_BASE_URL_IMAGE"] as! String).fromBase64()!
     static let imdbLanguageDefault:String = "en-US"
+    
+     
 }

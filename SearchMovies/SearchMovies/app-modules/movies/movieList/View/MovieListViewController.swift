@@ -62,7 +62,7 @@ extension MovieListViewController : UICollectionViewDataSource, UICollectionView
             collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MovieListCollectionViewCell
         let movie:MovieListData = self.movies![indexPath.row]
         
-        cell.fill(title: movie.name, urlPhotoImage: "\(Constants.imdbBaseUrl)\(movie.imageUrl)")
+        cell.fill(title: movie.name, urlPhotoImage: "\(Constants.imdbBaseUrlImage)\(movie.imageUrl)")
         
         return cell
     }

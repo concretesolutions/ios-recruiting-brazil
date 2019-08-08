@@ -28,7 +28,7 @@ class StringExtensionTests: XCTestCase {
     func testEncodeBase64String() {
         // let str:String = "viana.leonardo.Bluemerang-Color"
         //https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
-        let str:String = "https://api.themoviedb.org/3/"
+        let str:String = "http://image.tmdb.org/t/p/w185/"
         let strBaseEncode:String? = str.toBase64()
         XCTAssertTrue(strBaseEncode != nil)
     }
