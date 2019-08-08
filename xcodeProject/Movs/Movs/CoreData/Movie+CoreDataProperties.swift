@@ -2,7 +2,7 @@
 //  Movie+CoreDataProperties.swift
 //  Movs
 //
-//  Created by Henrique Campos de Freitas on 07/08/19.
+//  Created by Henrique Campos de Freitas on 08/08/19.
 //  Copyright © 2019 Henrique Campos de Freitas. All rights reserved.
 //
 //
@@ -17,10 +17,10 @@ extension Movie {
         return NSFetchRequest<Movie>(entityName: "Movie")
     }
 
+    @NSManaged public var attrCover: NSData?
     @NSManaged public var attrName: String?
     @NSManaged public var attrRelease: NSDate?
     @NSManaged public var attrSynopsis: String?
-    @NSManaged public var attrCover: NSData?
     @NSManaged public var genres: NSSet?
 
 }
