@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BE4E0D9D22FB251300749A76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E0D9C22FB251300749A76 /* AppDelegate.swift */; };
-		BE4E0D9F22FB251300749A76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E0D9E22FB251300749A76 /* ViewController.swift */; };
 		BE4E0DA222FB251400749A76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4E0DA022FB251400749A76 /* Main.storyboard */; };
 		BE4E0DA522FB251400749A76 /* Movs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE4E0DA322FB251400749A76 /* Movs.xcdatamodeld */; };
 		BE4E0DA722FB252B00749A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE4E0DA622FB252B00749A76 /* Assets.xcassets */; };
@@ -45,7 +44,6 @@
 /* Begin PBXFileReference section */
 		BE4E0D9922FB251300749A76 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4E0D9C22FB251300749A76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BE4E0D9E22FB251300749A76 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BE4E0DA122FB251400749A76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE4E0DA422FB251400749A76 /* Movs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movs.xcdatamodel; sourceTree = "<group>"; };
 		BE4E0DA622FB252B00749A76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			children = (
 				BE4E0DE622FB29A000749A76 /* CoreData */,
 				BE4E0D9C22FB251300749A76 /* AppDelegate.swift */,
-				BE4E0D9E22FB251300749A76 /* ViewController.swift */,
 				BE4E0DA022FB251400749A76 /* Main.storyboard */,
 				BE4E0DA622FB252B00749A76 /* Assets.xcassets */,
 				BE4E0DA822FB252C00749A76 /* LaunchScreen.storyboard */,
@@ -285,7 +282,6 @@
 			files = (
 				BE4E0DEF22FB29A000749A76 /* Movie+CoreDataClass.swift in Sources */,
 				BE4E0DF122FB29A000749A76 /* Genre+CoreDataClass.swift in Sources */,
-				BE4E0D9F22FB251300749A76 /* ViewController.swift in Sources */,
 				BE4E0DEB22FB29A000749A76 /* Genre+CoreDataProperties.swift in Sources */,
 				BE4E0DA522FB251400749A76 /* Movs.xcdatamodeld in Sources */,
 				BE4E0DED22FB29A000749A76 /* Movie+CoreDataProperties.swift in Sources */,
@@ -471,6 +467,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TBAP6YWNDY;
 				INFOPLIST_FILE = Movs/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -478,7 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = heriquecfreitas.Movs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -489,6 +486,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TBAP6YWNDY;
 				INFOPLIST_FILE = Movs/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,7 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = heriquecfreitas.Movs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
