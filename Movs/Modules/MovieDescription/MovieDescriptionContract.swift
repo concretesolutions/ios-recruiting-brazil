@@ -20,6 +20,10 @@ protocol MovieDescriptionView: class {
     func adjustConstraints()
 }
 
+extension MovieDescriptionView {
+    func showNoContentScreen() {}
+}
+
 protocol MovieDescriptionPresentation: class {
     var view: MovieDescriptionView? { get set }
     var router: MovieDescriptionWireframe! { get set }

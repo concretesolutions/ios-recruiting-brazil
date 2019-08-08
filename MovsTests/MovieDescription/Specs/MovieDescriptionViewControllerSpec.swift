@@ -30,13 +30,28 @@ class MovieDescriptionViewControllerSpec: QuickSpec {
                 let movie = MovieEntityMock.createMovieEntityInstance()!
                 let genres = GenreEntity.gatherMovieGenres(genresIds: movie.genresIds!)
                 let genresString = GenreEntity.convertMovieGenresToString(genres: genres)
-                let poster = PosterEntity(poster: UIImage(named: "search_icon")!)
+                let poster = PosterEntity(poster: UIImage(named: "Icon-20.png")!)
                 
                 sut.showMovieDescription(movie: movie, genres: genresString, poster: poster)
                                 
                 expect(sut.view) == snapshot("MovieDescriptionView", usesDrawRect: false)
             })
+            
+            it("Has clicked favorite icon") {
+                let image = sut.favoriteIcon!
+                let gesture = image.gestureRecognizers![0] as! UITapGestureRecognizer
+                sut.viewDidAppear(false)
+                sut.didFavoriteMovie(gesture)
+                guard let sutPresenter = sut.presenter as? MovieDescriptionPresentationMock
+                    else {
+                        fail()
+                        return
+                }
+                expect(sutPresenter.hasCalledDidFavoriteMovie).to(beTrue())
+            }
         }
+        
+        
     }
 }
 

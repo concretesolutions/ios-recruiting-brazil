@@ -20,7 +20,7 @@ class LocalDataSaving {
     }
     
     //MARK: - CRUD movies
-    func store(movie: MovieEntity) {
+    func store(movie: MovieEntity) -> Bool {
         
         let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
         fetchRequestMovies.predicate = NSPredicate(format: "id == %@", String(movie.id!))
@@ -43,10 +43,10 @@ class LocalDataSaving {
             do{
                 try managedContext.save()
             } catch let error {
-                print(error)
+                return false
             }
         }
-
+        return true
     }
     
     func retrieveAllMovies() -> [MovieEntity]? {
@@ -70,7 +70,7 @@ class LocalDataSaving {
         return movies
     }
     
-    func delete(movie movieId: Int) {
+    func delete(movie movieId: Int) -> Bool {
         let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
         fetchRequestMovies.predicate = NSPredicate(format: "id == %@", String(movieId))
         do {
@@ -81,11 +81,12 @@ class LocalDataSaving {
             try managedContext.save()
         }
         catch {
-            print(error)
+            return false
         }
+        return true
     }
     
-    func deleteAllMovies() {
+    func deleteAllMovies() -> Bool {
         let fetchRequestMovies = NSFetchRequest<NSFetchRequestResult>(entityName: "Movies")
         do {
             let result = try? managedContext.fetch(fetchRequestMovies)
@@ -95,12 +96,13 @@ class LocalDataSaving {
             try managedContext.save()
         }
         catch {
-            print(error)
+            return false
         }
+        return true
     }
     
     //MARK: - CRUD posters
-    func store(poster: PosterEntity) {
+    func store(poster: PosterEntity) -> Bool {
         
         let fetchRequestPosters = NSFetchRequest<NSFetchRequestResult>(entityName: "Posters")
         fetchRequestPosters.predicate = NSPredicate(format: "movieId == %@", String(poster.movieId!))
@@ -118,10 +120,11 @@ class LocalDataSaving {
             
             do{
                 try managedContext.save()
-            } catch let error {
-                print(error)
+            } catch {
+                return false
             }
         }
+        return true
     }
     
     func retrieveAllPosters() -> [PosterEntity] {
@@ -139,7 +142,7 @@ class LocalDataSaving {
         return posters
     }
     
-    func delete(poster movieId: Int) {
+    func delete(poster movieId: Int) -> Bool {
         let fetchRequestPosters = NSFetchRequest<NSFetchRequestResult>(entityName: "Posters")
         fetchRequestPosters.predicate = NSPredicate(format: "movieId == %@", String(movieId))
         do {
@@ -150,11 +153,12 @@ class LocalDataSaving {
             try managedContext.save()
         }
         catch {
-            print(error)
+            return false
         }
+        return true
     }
     
-    func deleteAllPosters() {
+    func deleteAllPosters() -> Bool {
         let fetchRequestPosters = NSFetchRequest<NSFetchRequestResult>(entityName: "Posters")
         do {
             let result = try? managedContext.fetch(fetchRequestPosters)
@@ -164,8 +168,9 @@ class LocalDataSaving {
             try managedContext.save()
         }
         catch {
-            print(error)
+            return false
         }
+        return true
     }
     
     //MARK: - Filters

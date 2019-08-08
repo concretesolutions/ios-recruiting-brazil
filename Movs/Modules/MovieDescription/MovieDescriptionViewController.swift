@@ -61,10 +61,6 @@ final class MovieDescriptionViewController: UIViewController {
 
 //MARK: - Contract Functions
 extension MovieDescriptionViewController: MovieDescriptionView {
-
-    func showNoContentScreen() {
-        
-    }
     
     func showMovieDescription(movie: MovieEntity, genres: String, poster: PosterEntity?) {
         self.movie = movie

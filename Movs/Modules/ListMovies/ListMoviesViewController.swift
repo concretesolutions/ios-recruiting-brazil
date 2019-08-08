@@ -94,7 +94,7 @@ extension ListMoviesViewController: ListMoviesView {
     
     func showMoviesList(_ movies: [MovieEntity]) {
         self.movies = movies
-        DispatchQueue.main.async {
+       DispatchQueue.main.async {
             self.movieCollectionView.isHidden = false
             self.searchBar.isHidden = false
             self.errorMessage.isHidden = true
@@ -169,10 +169,14 @@ extension ListMoviesViewController: ListMoviesView {
 //MARK: - Collection View Extension Functions
 extension ListMoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return movies.count / 2
+        return (movies.count / 2) + (movies.count % 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let numberType = (movies.count % 2)
+        if numberType == 1 && section == (movies.count / 2){
+            return 1
+        }
         return 2
     }
     
@@ -222,6 +226,7 @@ extension ListMoviesViewController: UICollectionViewDataSource, UICollectionView
     
     private func cellDistributionPosition(indexPath: IndexPath) -> Int {
         var position: Int = 0
+                
         if indexPath.item == 0 {
             position = indexPath.section + indexPath.section
         }
