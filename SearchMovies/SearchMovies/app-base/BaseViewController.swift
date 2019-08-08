@@ -23,15 +23,18 @@ class BaseViewController: UIViewController {
         }
     }
     
-    func showPainelView(show:Bool, emptyPainelView:UIView, contentView:UIView){
+    func showPainelView(painelView:DisplayInformationView, contentView:UIView, description:String, typeReturn:GenericResult.typeReturn){
         DispatchQueue.main.async {
-            emptyPainelView.isHidden = !show
-            if show {
-                contentView.bringSubviewToFront(emptyPainelView)
-            }
-            else {
-                contentView.sendSubviewToBack(emptyPainelView)
-            }
+            painelView.isHidden = false
+            painelView.fill(description: description, typeReturn: typeReturn)
+            contentView.bringSubviewToFront(painelView)
+        }
+    }
+    
+    func hidePainelView(painelView:DisplayInformationView, contentView:UIView){
+        DispatchQueue.main.async {
+            painelView.isHidden = true
+            contentView.sendSubviewToBack(painelView)
         }
     }
 }

@@ -13,7 +13,7 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         MainRouter.setModule(self)
-      
+       self.navigationController?.navigationBar.styleDefault()
     }
     
 

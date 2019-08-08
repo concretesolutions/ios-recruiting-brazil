@@ -21,10 +21,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgy-Qj-9Tj" userLabel="viewContent">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jzc-ne-S0g">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFu-RO-7Ct" userLabel="viewSearch">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="jzc-ne-S0g">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.80000000000000004" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="jzc-ne-S0g" secondAttribute="trailing" id="5g8-vh-enK"/>
+                                            <constraint firstItem="jzc-ne-S0g" firstAttribute="leading" secondItem="dFu-RO-7Ct" secondAttribute="leading" id="7gH-A9-E35"/>
+                                            <constraint firstItem="jzc-ne-S0g" firstAttribute="top" secondItem="dFu-RO-7Ct" secondAttribute="top" id="RAv-6E-slQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="jzc-ne-S0g" secondAttribute="bottom" id="dYb-pX-lgM"/>
+                                            <constraint firstAttribute="height" constant="60" id="pzM-0c-1Ec"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YM2-NI-XFP" userLabel="viewDisplayInformation" customClass="DisplayInformationView" customModule="SearchMovies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="56" width="375" height="498"/>
                                         <color key="backgroundColor" red="0.72336632010000002" green="0.039813429259999998" blue="0.20885028480000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -53,16 +66,16 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="kBW-he-YMy" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="6dd-Fe-7zB"/>
+                                    <constraint firstItem="kBW-he-YMy" firstAttribute="top" secondItem="dFu-RO-7Ct" secondAttribute="bottom" constant="-4" id="7Cn-81-XQo"/>
                                     <constraint firstAttribute="trailing" secondItem="YM2-NI-XFP" secondAttribute="trailing" id="Apy-9b-rmw"/>
+                                    <constraint firstItem="YM2-NI-XFP" firstAttribute="top" secondItem="dFu-RO-7Ct" secondAttribute="bottom" constant="-4" id="EIf-dI-tyg"/>
                                     <constraint firstAttribute="trailing" secondItem="kBW-he-YMy" secondAttribute="trailing" id="EMY-jI-qwK"/>
+                                    <constraint firstItem="dFu-RO-7Ct" firstAttribute="top" secondItem="jgy-Qj-9Tj" secondAttribute="top" id="Fu4-xw-DPK"/>
                                     <constraint firstAttribute="bottom" secondItem="kBW-he-YMy" secondAttribute="bottom" id="HNM-Yk-Ftw"/>
+                                    <constraint firstItem="dFu-RO-7Ct" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="S2k-ka-rDN"/>
+                                    <constraint firstAttribute="trailing" secondItem="dFu-RO-7Ct" secondAttribute="trailing" id="VVn-zj-uXX"/>
                                     <constraint firstAttribute="bottom" secondItem="YM2-NI-XFP" secondAttribute="bottom" id="XVA-D6-Mf0"/>
-                                    <constraint firstAttribute="trailing" secondItem="jzc-ne-S0g" secondAttribute="trailing" id="aOM-Q9-X7s"/>
                                     <constraint firstItem="YM2-NI-XFP" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="dY6-cQ-CTM"/>
-                                    <constraint firstItem="YM2-NI-XFP" firstAttribute="top" secondItem="jzc-ne-S0g" secondAttribute="bottom" id="dcP-El-I6b"/>
-                                    <constraint firstItem="jzc-ne-S0g" firstAttribute="top" secondItem="jgy-Qj-9Tj" secondAttribute="top" id="far-vf-d7O"/>
-                                    <constraint firstItem="jzc-ne-S0g" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="gng-GV-aih"/>
-                                    <constraint firstItem="kBW-he-YMy" firstAttribute="top" secondItem="jzc-ne-S0g" secondAttribute="bottom" id="y08-5y-o9l"/>
                                 </constraints>
                             </view>
                         </subviews>

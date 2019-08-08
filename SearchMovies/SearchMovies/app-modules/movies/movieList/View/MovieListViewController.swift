@@ -13,7 +13,9 @@ class MovieListViewController: BaseViewController {
     //MARK: Properties
     var presenter:ViewToMovieListPresenterProtocol?
     var cellIdentifier:String = "cellItem"
-    private var movies:[MovieListData]?
+    private var movies:[MovieListData]!
+    private var filteredData:[MovieListData]!
+    private var isFiltered:Bool = false
     //MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -25,9 +27,13 @@ class MovieListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         MovieListRouter.setModule(self)
+        self.movies = [MovieListData]()
+        self.filteredData = [MovieListData]()
+        self.searchBar.styleDefault()
         self.navigationController?.navigationBar.styleDefault()
         self.collectionView.register(UINib(nibName: "MovieListCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: cellIdentifier)
-        self.display.isHidden = false
+        self.hidePainelView(painelView: self.display, contentView: self.viewContent)
+        self.searchBar.delegate = self
         self.showActivityIndicator()
         self.presenter?.loadMovies()
     }
@@ -38,8 +44,8 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
     func returnMoviesError(message: String) {
         self.hideActivityIndicator()
         DispatchQueue.main.async {
-            self.display.fill(description: "Um erro ocorreu, tente novamente mais tarde", typeReturn: .error)
-            self.showPainelView(show: true, emptyPainelView: self.display, contentView: self.viewContent)
+           
+            self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Um erro ocorreu, tente novamente mais tarde", typeReturn: .error)
         }
     }
     
@@ -49,6 +55,7 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
         
  
         DispatchQueue.main.async {
+            self.hidePainelView(painelView: self.display, contentView: self.viewContent)
             
             if (self.movies?.count)! > 0 {
                 self.collectionView.delegate = self
@@ -58,7 +65,9 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
             else {
                 self.display.fill(description: "Sua busca não resultou nenhum resultado", typeReturn: .success)
                 
-                self.showPainelView(show: true, emptyPainelView: self.display, contentView: self.viewContent)
+                 self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca não resultou nenhum resultado", typeReturn: .success)
+                
+                
             }
         }
     }
@@ -66,13 +75,13 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
 
 extension MovieListViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (self.movies?.count)!
+        return self.isFiltered ? self.filteredData.count : self.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:MovieListCollectionViewCell =
             collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MovieListCollectionViewCell
-        let movie:MovieListData = self.movies![indexPath.row]
+        let movie:MovieListData = self.isFiltered ? self.filteredData[indexPath.row] : self.movies[indexPath.row]
         
         cell.fill(title: movie.name, urlPhotoImage: "\(Constants.imdbBaseUrlImage)\(movie.imageUrl)")
         
@@ -80,3 +89,30 @@ extension MovieListViewController : UICollectionViewDataSource, UICollectionView
     }
 }
 
+extension MovieListViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+              if searchText.count == 0 {
+       
+            self.isFiltered = false
+        }
+        else {
+            self.isFiltered = true
+            self.filteredData = [MovieListData]()
+            for result in self.movies {
+                let nameRange:Range? = result.name.uppercased().range(of: searchText.uppercased())
+                if  nameRange != nil{
+                    self.filteredData.append(result)
+                }
+            }
+        }
+        self.hidePainelView(painelView: self.display, contentView: self.viewContent)
+       
+        
+        self.collectionView.reloadData()
+        if self.filteredData.count == 0 && self.isFiltered {
+            DispatchQueue.main.async {
+                 self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca por \(searchText) não resultou nenhum resultado", typeReturn: .success)
+            }
+        }
+    }
+}
