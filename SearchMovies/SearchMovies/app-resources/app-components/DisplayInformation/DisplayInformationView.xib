@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DisplayInformationView" customModule="SearchMovies" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="8Mp-mw-3fQ" id="sHd-5A-uTh"/>
+                <outlet property="iconImage" destination="IZm-Gr-Lbc" id="XNV-zE-3xn"/>
+                <outlet property="viewContent" destination="LAn-Lq-36j" id="NiW-Ga-oLg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAn-Lq-36j" userLabel="viewContent">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error_icon" translatesAutoresizingMaskIntoConstraints="NO" id="IZm-Gr-Lbc" userLabel="imageIcon">
+                            <rect key="frame" x="112.5" y="200" width="150" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="PNn-Tu-57u"/>
+                                <constraint firstAttribute="width" constant="150" id="tCB-90-93U"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mp-mw-3fQ">
+                            <rect key="frame" x="100" y="371" width="175" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="IZm-Gr-Lbc" firstAttribute="centerX" secondItem="LAn-Lq-36j" secondAttribute="centerX" id="8y0-r4-9jF"/>
+                        <constraint firstAttribute="trailing" secondItem="8Mp-mw-3fQ" secondAttribute="trailing" constant="100" id="WMK-Xg-XzN"/>
+                        <constraint firstItem="8Mp-mw-3fQ" firstAttribute="top" secondItem="IZm-Gr-Lbc" secondAttribute="bottom" constant="21" id="aVh-gY-Cue"/>
+                        <constraint firstItem="IZm-Gr-Lbc" firstAttribute="top" secondItem="LAn-Lq-36j" secondAttribute="top" constant="200" id="bIw-Ob-5bp"/>
+                        <constraint firstItem="8Mp-mw-3fQ" firstAttribute="leading" secondItem="LAn-Lq-36j" secondAttribute="leading" constant="100" id="g5J-nd-Dym"/>
+                        <constraint firstItem="8Mp-mw-3fQ" firstAttribute="centerX" secondItem="LAn-Lq-36j" secondAttribute="centerX" id="u1D-3z-qm1"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="LAn-Lq-36j" secondAttribute="trailing" id="8Bh-NL-GrE"/>
+                <constraint firstItem="LAn-Lq-36j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Q88-bv-Udh"/>
+                <constraint firstItem="LAn-Lq-36j" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eM9-LY-tcr"/>
+                <constraint firstAttribute="bottom" secondItem="LAn-Lq-36j" secondAttribute="bottom" id="iMe-7e-1bf"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="error_icon" width="128" height="128"/>
+    </resources>
+</document>

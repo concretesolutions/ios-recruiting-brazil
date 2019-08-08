@@ -25,6 +25,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YM2-NI-XFP" userLabel="viewDisplayInformation" customClass="DisplayInformationView" customModule="SearchMovies" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="498"/>
+                                        <color key="backgroundColor" red="0.72336632010000002" green="0.039813429259999998" blue="0.20885028480000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kBW-he-YMy">
                                         <rect key="frame" x="0.0" y="56" width="375" height="498"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,9 +53,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="kBW-he-YMy" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="6dd-Fe-7zB"/>
+                                    <constraint firstAttribute="trailing" secondItem="YM2-NI-XFP" secondAttribute="trailing" id="Apy-9b-rmw"/>
                                     <constraint firstAttribute="trailing" secondItem="kBW-he-YMy" secondAttribute="trailing" id="EMY-jI-qwK"/>
                                     <constraint firstAttribute="bottom" secondItem="kBW-he-YMy" secondAttribute="bottom" id="HNM-Yk-Ftw"/>
+                                    <constraint firstAttribute="bottom" secondItem="YM2-NI-XFP" secondAttribute="bottom" id="XVA-D6-Mf0"/>
                                     <constraint firstAttribute="trailing" secondItem="jzc-ne-S0g" secondAttribute="trailing" id="aOM-Q9-X7s"/>
+                                    <constraint firstItem="YM2-NI-XFP" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="dY6-cQ-CTM"/>
+                                    <constraint firstItem="YM2-NI-XFP" firstAttribute="top" secondItem="jzc-ne-S0g" secondAttribute="bottom" id="dcP-El-I6b"/>
                                     <constraint firstItem="jzc-ne-S0g" firstAttribute="top" secondItem="jgy-Qj-9Tj" secondAttribute="top" id="far-vf-d7O"/>
                                     <constraint firstItem="jzc-ne-S0g" firstAttribute="leading" secondItem="jgy-Qj-9Tj" secondAttribute="leading" id="gng-GV-aih"/>
                                     <constraint firstItem="kBW-he-YMy" firstAttribute="top" secondItem="jzc-ne-S0g" secondAttribute="bottom" id="y08-5y-o9l"/>
@@ -72,7 +80,9 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="kBW-he-YMy" id="8ff-5d-7Pd"/>
+                        <outlet property="display" destination="YM2-NI-XFP" id="Iya-Wx-KC2"/>
                         <outlet property="searchBar" destination="jzc-ne-S0g" id="ksd-hw-Tbn"/>
+                        <outlet property="viewContent" destination="jgy-Qj-9Tj" id="bsa-G2-cCK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGT-4X-wfd" userLabel="First Responder" sceneMemberID="firstResponder"/>

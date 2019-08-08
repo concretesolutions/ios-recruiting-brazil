@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		355980D322FCCB240083D681 /* DisplayInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 355980D222FCCB240083D681 /* DisplayInformationView.xib */; };
+		355980D522FCCDFF0083D681 /* DisplayInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355980D422FCCDFF0083D681 /* DisplayInformationView.swift */; };
+		355980D722FCD2CE0083D681 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355980D622FCD2CE0083D681 /* UIColorExtension.swift */; };
+		355980D922FCD4F10083D681 /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355980D822FCD4F10083D681 /* UINavigationBarExtension.swift */; };
 		35AD4B5222FB895200296432 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD4B5122FB895200296432 /* AppDelegate.swift */; };
 		35AD4B5422FB895200296432 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD4B5322FB895200296432 /* ViewController.swift */; };
 		35AD4B5C22FB895400296432 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35AD4B5A22FB895400296432 /* LaunchScreen.storyboard */; };
@@ -57,6 +61,10 @@
 /* Begin PBXFileReference section */
 		11505574045E45AA0093ABB3 /* Pods-SearchMovies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMovies.release.xcconfig"; path = "Pods/Target Support Files/Pods-SearchMovies/Pods-SearchMovies.release.xcconfig"; sourceTree = "<group>"; };
 		127EC95466B779695DBCEF84 /* Pods-SearchMoviesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMoviesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SearchMoviesTests/Pods-SearchMoviesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		355980D222FCCB240083D681 /* DisplayInformationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayInformationView.xib; sourceTree = "<group>"; };
+		355980D422FCCDFF0083D681 /* DisplayInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayInformationView.swift; sourceTree = "<group>"; };
+		355980D622FCD2CE0083D681 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		355980D822FCD4F10083D681 /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
 		35AD4B4E22FB895200296432 /* SearchMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AD4B5122FB895200296432 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35AD4B5322FB895200296432 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +128,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		355980D022FCCAFA0083D681 /* app-components */ = {
+			isa = PBXGroup;
+			children = (
+				355980D122FCCB040083D681 /* DisplayInformation */,
+			);
+			path = "app-components";
+			sourceTree = "<group>";
+		};
+		355980D122FCCB040083D681 /* DisplayInformation */ = {
+			isa = PBXGroup;
+			children = (
+				355980D222FCCB240083D681 /* DisplayInformationView.xib */,
+				355980D422FCCDFF0083D681 /* DisplayInformationView.swift */,
+			);
+			path = DisplayInformation;
+			sourceTree = "<group>";
+		};
 		35AD4B4522FB895200296432 = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +382,7 @@
 		35AD4BA622FB964C00296432 /* app-resources */ = {
 			isa = PBXGroup;
 			children = (
+				355980D022FCCAFA0083D681 /* app-components */,
 				35AD4BA722FB967400296432 /* Assets.xcassets */,
 			);
 			path = "app-resources";
@@ -377,6 +403,8 @@
 			children = (
 				35AD4BB122FB9E9300296432 /* StringExtension.swift */,
 				35AD4BC322FBC08300296432 /* UIImageViewExtension.swift */,
+				355980D622FCD2CE0083D681 /* UIColorExtension.swift */,
+				355980D822FCD4F10083D681 /* UINavigationBarExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -488,6 +516,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				355980D322FCCB240083D681 /* DisplayInformationView.xib in Resources */,
 				35AD4B7B22FB8B9500296432 /* Main.storyboard in Resources */,
 				35AD4B5C22FB895400296432 /* LaunchScreen.storyboard in Resources */,
 				35AD4BA822FB967400296432 /* Assets.xcassets in Resources */,
@@ -624,7 +653,9 @@
 				35AD4BB822FBA59100296432 /* MovieListResult.swift in Sources */,
 				35AD4B9B22FB90AE00296432 /* BaseViewController.swift in Sources */,
 				35AD4BBA22FBAE6700296432 /* GenericResult.swift in Sources */,
+				355980D522FCCDFF0083D681 /* DisplayInformationView.swift in Sources */,
 				35AD4B9D22FB911B00296432 /* MovieListProtocols.swift in Sources */,
+				355980D722FCD2CE0083D681 /* UIColorExtension.swift in Sources */,
 				35AD4BBC22FBB12600296432 /* DefaultDataResponse.swift in Sources */,
 				35AD4BC222FBB9C200296432 /* MovieListCollectionViewCell.swift in Sources */,
 				35AD4BA122FB91E600296432 /* MovieListIteractor.swift in Sources */,
@@ -635,6 +666,7 @@
 				35AD4BAA22FB9A0F00296432 /* RequestApi.swift in Sources */,
 				35AD4B7F22FB8C9700296432 /* MainTabBarController.swift in Sources */,
 				35AD4BB222FB9E9300296432 /* StringExtension.swift in Sources */,
+				355980D922FCD4F10083D681 /* UINavigationBarExtension.swift in Sources */,
 				35AD4BAD22FB9A5700296432 /* Resource.swift in Sources */,
 				35AD4BAF22FB9DA000296432 /* Constants.swift in Sources */,
 			);

@@ -22,4 +22,16 @@ class BaseViewController: UIViewController {
             MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
+    
+    func showPainelView(show:Bool, emptyPainelView:UIView, contentView:UIView){
+        DispatchQueue.main.async {
+            emptyPainelView.isHidden = !show
+            if show {
+                contentView.bringSubviewToFront(emptyPainelView)
+            }
+            else {
+                contentView.sendSubviewToBack(emptyPainelView)
+            }
+        }
+    }
 }

@@ -14,5 +14,6 @@ struct Constants {
     static let imdbBaseUrlImage:String = (Bundle.main.infoDictionary!["IMDB_BASE_URL_IMAGE"] as! String).fromBase64()!
     static let imdbLanguageDefault:String = "en-US"
     
-     
+    static let backgroundColorHexDefaultApp:String = "#f5cc5b"
+    static let backgroundColorHexFilter:String = "#d9941e"
 }
