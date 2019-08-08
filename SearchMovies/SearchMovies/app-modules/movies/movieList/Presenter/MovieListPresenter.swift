@@ -16,15 +16,19 @@ class MovieListPresenter: ViewToMovieListPresenterProtocol {
     var route: PresenterToMovieListRouterProtocol?
     
     func loadMovies() {
-        
+        self.iteractor?.loadMovies()
     }
     
     
 }
 
 extension MovieListPresenter: IteractorToMovieListPresenterProtocol {
+    func returnMoviesError(message: String) {
+        self.view?.returnMoviesError(message: message)
+    }
+    
     func returnMovies(movies: [MovieListData]) {
-         
+         self.view?.returnMovies(movies: movies)
     }
     
     

@@ -8,7 +8,18 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 class BaseViewController: UIViewController {
     
+    
+    func showActivityIndicator() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+    }
+    
+    func hideActivityIndicator() {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
 }

@@ -11,7 +11,7 @@ import Foundation
 class MovieListService {
     func getMovies(appKey:String, pageNumber:Int, completion: @escaping (_ result: GenericResult) -> Void ) {
         
-        let urlStr:String = "\(Constants.imdbBaseUrl)/movie/popular?api_key=\(Constants.appKey)&language=\(Constants.imdbLanguageDefault)"
+        let urlStr:String = "\(Constants.imdbBaseUrl)movie/popular?api_key=\(Constants.appKey)&language=\(Constants.imdbLanguageDefault)&page=\(String(pageNumber))"
         let url:URL = URL(string: urlStr)!
         let resorceObject:Resource = Resource(url: url, dataObject: nil)
         

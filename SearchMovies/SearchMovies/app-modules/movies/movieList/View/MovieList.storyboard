@@ -13,7 +13,7 @@
         <!--Movies-->
         <scene sceneID="aR5-f4-VjN">
             <objects>
-                <viewController id="iQb-sM-zqv" sceneMemberID="viewController">
+                <viewController id="iQb-sM-zqv" customClass="MovieListViewController" customModule="SearchMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I2I-yY-dNH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,17 +29,17 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="498"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mwi-QM-47n">
-                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="itemSize" width="160" height="224"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="t3E-K5-hLi">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellItem" id="t3E-K5-hLi">
+                                                <rect key="frame" x="10" y="10" width="160" height="224"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="224"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
                                             </collectionViewCell>
@@ -70,6 +70,10 @@
                     <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="Kxd-CE-ubT"/>
                     <navigationItem key="navigationItem" title="Movies" id="0AE-VF-eAk"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="kBW-he-YMy" id="8ff-5d-7Pd"/>
+                        <outlet property="searchBar" destination="jzc-ne-S0g" id="ksd-hw-Tbn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGT-4X-wfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

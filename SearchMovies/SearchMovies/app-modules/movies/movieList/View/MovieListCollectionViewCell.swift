@@ -16,10 +16,10 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var favoriteButton: UIButton!
     
     //MARK: Functions
-    func fill(title:String, photoImage:UIImage) {
+    func fill(title:String, urlPhotoImage:String) {
         DispatchQueue.main.async {
             self.titleLabel.text = title
-            self.photoImage.image = photoImage
+            self.photoImage.downloaded(from: urlPhotoImage)
         }
     }
     
