@@ -26,8 +26,10 @@ protocol PresenterToMovieListRouterProtocol:class {
 
 protocol IteractorToMovieListPresenterProtocol:class {
     func returnMovies(movies:[MovieListData])
+    func returnMoviesError(message:String)
 }
 
 protocol PresenterToMovieListViewProtocol:class {
     func returnMovies(movies:[MovieListData])
+    func returnMoviesError(message:String)
 }
