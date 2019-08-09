@@ -11,7 +11,8 @@ import UIKit
 
 extension UITabBar {
     func styleDefault() {
+        
         self.tintColor = UIColor.black
-        self.barTintColor = UIColor.hexStringToUIColor(hex: Constants.backgroundColorHexDefaultApp)
+         self.barTintColor = UIColor.hexStringToUIColor(hex: Constants.backgroundColorHexDefaultApp)
     }
 }
