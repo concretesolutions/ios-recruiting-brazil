@@ -23,13 +23,36 @@ class MovieDetailsPresenter: ViewToMovieDetailsPresenterProtocol {
         self.view?.returnloadGenerNames(genders: genders)
     }
     
-    
+    func loadMovieDetails(id: Int) {
+        self.iteractor?.loadMovieDetails(id: id)
+    }
 }
 
 extension MovieDetailsPresenter : IteractorToMovieDetailsPresenterProtocol {
-    func returnMainMenu(menuList: [MainMenu]) {
-         
+    func returnMovieDetails(details: MovieDetailsData) {
+       
+        self.iteractor?.loadMovieReleaseDates(id: details.id)
+       
+    }
+    
+    func returnMovieDetailsError(messageError: String) {
+        self.view?.returnMovieDetailsError(messageError: messageError)
+    }
+    
+    func returnDateRelease(releaseDate: ReleaseDateList) {
+        let release:[DataReleaseDate] = releaseDate.resultsRelease.map { (item) -> DataReleaseDate in
+            return item.releases.first!
+        }
+        
+        
+        
+    }
+    
+    func returnDateReleaseError(messageError: String) {
+        
     }
     
     
 }
+    
+

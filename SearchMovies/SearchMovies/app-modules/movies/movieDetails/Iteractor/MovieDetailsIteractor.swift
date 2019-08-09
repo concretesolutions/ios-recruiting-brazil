@@ -9,11 +9,26 @@
 import Foundation
 
 class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
+  
     var presenter: IteractorToMovieDetailsPresenterProtocol?
     
-    func loadMainMenu() {
+    func loadMovieDetails(id: Int) {
+        let service:MovieDetailsService = MovieDetailsService()
+        service.getMovieDetail(appKey: Constants.appKey, id: id) { (result) in
+            if result.typeReturnService == .success {
+                let objectReturn:MovieDetailsData = result.objectReturn as! MovieDetailsData
+                self.presenter?.returnMovieDetails(details: objectReturn)
+            }
+            else {
+                self.presenter?.returnMovieDetailsError(messageError: result.messageReturn!)
+            }
+        }
+    }
+    
+    func loadMovieReleaseDates(id: Int) {
         
     }
+    
     
     
 }
