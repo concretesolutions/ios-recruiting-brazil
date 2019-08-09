@@ -18,6 +18,10 @@ class MovieListPresenter: ViewToMovieListPresenterProtocol {
     func loadMovies(page: Int) {
         self.iteractor?.loadMovies(page: page)
     }
+    
+    func loadGenrers() {
+        self.iteractor?.loadGenrers()
+    }
 }
 
 extension MovieListPresenter: IteractorToMovieListPresenterProtocol {
@@ -29,5 +33,12 @@ extension MovieListPresenter: IteractorToMovieListPresenterProtocol {
          self.view?.returnMovies(movies: movies)
     }
     
+    func returnLoadGenrers(genres: [GenreData]) {
+        self.view?.returnLoadGenrers(genres: genres)
+    }
+    
+    func returnLoadGenrersError(message: String) {
+        self.view?.returnMoviesError(message: message)
+    }
     
 }

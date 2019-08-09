@@ -23,5 +23,17 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
         }
     }
     
+    func loadGenrers() {
+        let serviceGenre:GenreService = GenreService()
+        serviceGenre.getGenres(appKey: Constants.appKey) { (result) in
+            if result.typeReturnService == .success {
+                let objectReturn:GenreListData = result.objectReturn as! GenreListData
+                self.presenter?.returnLoadGenrers(genres: objectReturn.genres)
+            }
+            else {
+                self.presenter?.returnMoviesError(message: result.messageReturn!)
+            }
+        }
+    }
     
 }

@@ -23,7 +23,27 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2r-44-W3f" userLabel="viewContent">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ovO-qJ-pOu">
+                                                <rect key="frame" x="20" y="20" width="335" height="267"/>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHK-OK-nxu">
+                                                <rect key="frame" x="25" y="287" width="330" height="380"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="fHK-OK-nxu" firstAttribute="leading" secondItem="V2r-44-W3f" secondAttribute="leading" constant="25" id="5cE-Aq-MBg"/>
+                                            <constraint firstAttribute="trailing" secondItem="ovO-qJ-pOu" secondAttribute="trailing" constant="20" id="9Eg-YD-gRT"/>
+                                            <constraint firstAttribute="trailing" secondItem="fHK-OK-nxu" secondAttribute="trailing" constant="20" id="TA9-AJ-Q8r"/>
+                                            <constraint firstItem="ovO-qJ-pOu" firstAttribute="height" secondItem="V2r-44-W3f" secondAttribute="height" multiplier="0.4" id="TaM-od-gw6"/>
+                                            <constraint firstItem="ovO-qJ-pOu" firstAttribute="centerX" secondItem="V2r-44-W3f" secondAttribute="centerX" id="UGW-ke-dgD"/>
+                                            <constraint firstItem="ovO-qJ-pOu" firstAttribute="leading" secondItem="V2r-44-W3f" secondAttribute="leading" constant="20" id="gmT-AI-Ubf"/>
+                                            <constraint firstItem="ovO-qJ-pOu" firstAttribute="top" secondItem="V2r-44-W3f" secondAttribute="top" constant="20" id="gnV-4l-5Cc"/>
+                                            <constraint firstItem="fHK-OK-nxu" firstAttribute="top" secondItem="ovO-qJ-pOu" secondAttribute="bottom" id="iV2-dj-WhW"/>
+                                            <constraint firstAttribute="bottom" secondItem="fHK-OK-nxu" secondAttribute="bottom" id="mLd-tq-LXv"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -70,4 +90,7 @@
             <point key="canvasLocation" x="-76" y="76.911544227886068"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="error_icon" width="128" height="128"/>
+    </resources>
 </document>

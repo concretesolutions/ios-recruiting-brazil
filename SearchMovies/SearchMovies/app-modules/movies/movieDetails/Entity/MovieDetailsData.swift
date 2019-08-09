@@ -9,12 +9,14 @@
 import Foundation
 
 struct MovieDetailsData {
+    var id:Int
     var name:String
     var year:Int
     var movieType:String
     var description:String
     
-    init(name:String, year:Int, movieType:String, description:String) {
+    init(id:Int, name:String, year:Int, movieType:String, description:String) {
+        self.id = id
         self.name = name
         self.year = year
         self.movieType = movieType

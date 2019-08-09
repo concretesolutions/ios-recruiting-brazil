@@ -38,8 +38,23 @@ class MovieListViewController: BaseViewController {
         self.searchBar.delegate = self
         self.showActivityIndicator()
         self.presenter?.loadMovies(page: page)
+        self.presenter?.loadGenrers()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
         
-        
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            if self.movies.count <= self.totalItens {
+                
+                DispatchQueue.main.async {
+                    self.page = self.page + 1
+                    self.showActivityIndicator()
+                    self.presenter?.loadMovies(page: self.page)
+                }
+            }
+        }
     }
     
 }
@@ -74,29 +89,17 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
                 self.collectionView.setContentOffset(CGPoint.zero, animated: false)
             }
             else {
-                self.display.fill(description: "Sua busca não resultou nenhum resultado", typeReturn: .success)
-                
                  self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca não resultou nenhum resultado", typeReturn: .success)
-                
-                
             }
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if offsetY > contentHeight - scrollView.frame.size.height {
-            if self.movies.count <= self.totalItens {
-                
-                DispatchQueue.main.async {
-                    self.page = self.page + 1
-                    self.showActivityIndicator()
-                    self.presenter?.loadMovies(page: self.page)
-                }
-            }
-        }
+    func returnLoadGenrers(genres: [GenreData]) {
+        SingletonProperties.shared.genres = genres
+    }
+    
+    func returnLoadGenrersError(message: String) {
+        self.showPainelView(painelView: self.display, contentView: self.viewContent, description: message, typeReturn: .error)
     }
 }
 
@@ -114,14 +117,6 @@ extension MovieListViewController : UICollectionViewDataSource, UICollectionView
         
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if indexPath.row == self.movies.count - 1  && self.movies.count < self.totalItens {
-//            page = page + 1
-//            self.showActivityIndicator()
-//            self.presenter?.loadMovies(page: page)
-//        }
-//    }
 }
 
 extension MovieListViewController : UISearchBarDelegate {

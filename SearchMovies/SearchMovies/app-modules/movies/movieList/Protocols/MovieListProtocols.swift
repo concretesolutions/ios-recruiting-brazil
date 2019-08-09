@@ -13,11 +13,13 @@ protocol ViewToMovieListPresenterProtocol:class {
     var iteractor:PresenterToMovieListIteractorProtocol?{get set}
     var route:PresenterToMovieListRouterProtocol?{get set}
     func loadMovies(page:Int)
+    func loadGenrers()
 }
 
 protocol PresenterToMovieListIteractorProtocol:class {
     var presenter:IteractorToMovieListPresenterProtocol? {get set}
     func loadMovies(page:Int)
+    func loadGenrers()
 }
 
 protocol PresenterToMovieListRouterProtocol:class {
@@ -27,9 +29,13 @@ protocol PresenterToMovieListRouterProtocol:class {
 protocol IteractorToMovieListPresenterProtocol:class {
     func returnMovies(movies:[MovieListData])
     func returnMoviesError(message:String)
+    func returnLoadGenrers(genres:[GenreData])
+    func returnLoadGenrersError(message:String)
 }
 
 protocol PresenterToMovieListViewProtocol:class {
     func returnMovies(movies:[MovieListData])
     func returnMoviesError(message:String)
+    func returnLoadGenrers(genres:[GenreData])
+    func returnLoadGenrersError(message:String)
 }
