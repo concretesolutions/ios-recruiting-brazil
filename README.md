@@ -33,7 +33,7 @@ Esse app é resultado do desafio proposto pela Concrete Solutions, como parte de
 - Ao Aplicar o filtro, retornar a tela de favoritos e fazer um filtro local usando as informações selecionadas referentes a data de lançamento e gênero;
 - Testes unitários no projeto;
 - Testes funcionais.
-- Pipeline Automatizado
+- Pipeline Automatizado (com alguns problemas relacionados provavelmente a versão do xcode)
 
 ## Frameworks externas e APIs utilizadas
 
