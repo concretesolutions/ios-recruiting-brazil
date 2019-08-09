@@ -9,6 +9,8 @@
 
 Movs é um aplicativo que trás informações dos filmes mais populares direto do The Movie DB. 
 
+<img src="assets/IMG_2542.PNG" alt="alt text" width="280" height="500">             <img src="assets/IMG_2543.PNG" alt="alt text" width="280" height="500">             <img src="assets/IMG_2544.PNG" alt="alt text" width="280" height="500">
+
 ## Features
 
 Com esse app é possível navegar por uma lista de filmes frequentemente atualizada, assim como pesquisar o que deseja, ver informações detalhadas e escolher seus filmes favoritos.
