@@ -15,8 +15,12 @@ class MovieDetailsPresenter: ViewToMovieDetailsPresenterProtocol {
     
     var route: PresenterToMovieDetailsRouterProtocol?
     
-    func loadMainMenu() {
-         
+    func loadGenerNames(ids: [Int]) {
+        let genders:[String] = (SingletonProperties.shared.genres?.map({ (result) -> String in
+            return result.name
+        }))!
+        
+        self.view?.returnloadGenerNames(genders: genders)
     }
     
     

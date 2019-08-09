@@ -11,6 +11,7 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
     //MARK: Properties
     var presenter:ViewToMovieDetailsPresenterProtocol?
+    var movieId:Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         MovieDetailsRouter.setModule(self)
@@ -21,8 +22,10 @@ class MovieDetailsViewController: UIViewController {
 }
 
 extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
-    func returnMainMenu(menuList: [MainMenu]) {
-        
+    func returnloadGenerNames(genders: [String]) {
+        DispatchQueue.main.async {
+            let strGender:String = genders.joined(separator: ", ")
+        }
     }
     
     

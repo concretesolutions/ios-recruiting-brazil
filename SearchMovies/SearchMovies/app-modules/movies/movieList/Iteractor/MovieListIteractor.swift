@@ -15,7 +15,7 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
         service.getMovies(appKey: Constants.appKey, pageNumber: page) { (result) in
             if result.typeReturnService == .success {
                 let objectReturn:MovieListResult = result.objectReturn as! MovieListResult
-                self.presenter?.returnMovies(movies: objectReturn.movies)
+                self.presenter?.returnMovies(movies: objectReturn.movies, moviesTotal: objectReturn.moviesTotal)
             }
             else {
                 self.presenter?.returnMoviesError(message: result.messageReturn!)

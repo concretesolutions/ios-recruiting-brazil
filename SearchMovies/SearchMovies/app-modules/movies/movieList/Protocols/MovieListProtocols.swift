@@ -27,14 +27,14 @@ protocol PresenterToMovieListRouterProtocol:class {
 }
 
 protocol IteractorToMovieListPresenterProtocol:class {
-    func returnMovies(movies:[MovieListData])
+    func returnMovies(movies:[MovieListData], moviesTotal:Int)
     func returnMoviesError(message:String)
     func returnLoadGenrers(genres:[GenreData])
     func returnLoadGenrersError(message:String)
 }
 
 protocol PresenterToMovieListViewProtocol:class {
-    func returnMovies(movies:[MovieListData])
+    func returnMovies(movies:[MovieListData], moviesTotal: Int)
     func returnMoviesError(message:String)
     func returnLoadGenrers(genres:[GenreData])
     func returnLoadGenrersError(message:String)

@@ -41,16 +41,28 @@ class MovieListViewController: BaseViewController {
         self.presenter?.loadGenrers()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieDetailsSegue" {
+            let navigation:UINavigationController = (segue.destination as! UINavigationController)
+            let viewCtr:MovieDetailsViewController = (navigation.viewControllers[0] as! MovieDetailsViewController)
+            
+            if sender is MovieListData {
+                viewCtr.movieId = (sender as! MovieListData).id
+            }
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.size.height {
-            if self.movies.count <= self.totalItens {
+            if self.movies.count < self.totalItens {
                 
                 DispatchQueue.main.async {
                     self.page = self.page + 1
                     self.showActivityIndicator()
+                    self.collectionView.setContentOffset(CGPoint.zero, animated: false)
                     self.presenter?.loadMovies(page: self.page)
                 }
             }
@@ -68,7 +80,10 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
         }
     }
     
-    func returnMovies(movies: [MovieListData]) {
+    func returnMovies(movies: [MovieListData], moviesTotal: Int) {
+        
+        self.totalItens = moviesTotal
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.hideActivityIndicator()
         }
@@ -82,11 +97,10 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
             self.hidePainelView(painelView: self.display, contentView: self.viewContent)
             
             if (self.movies?.count)! > 0 {
-                self.totalItens = self.totalItens + self.movies.count
                 self.collectionView.delegate = self
                 self.collectionView.dataSource = self
                 self.collectionView.reloadData()
-                self.collectionView.setContentOffset(CGPoint.zero, animated: false)
+                
             }
             else {
                  self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca não resultou nenhum resultado", typeReturn: .success)
@@ -116,6 +130,11 @@ extension MovieListViewController : UICollectionViewDataSource, UICollectionView
         cell.fill(title: movie.name, urlPhotoImage: "\(Constants.imdbBaseUrlImage)\(movie.imageUrl)")
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie:MovieListData = self.isFiltered ? self.filteredData[indexPath.row] : self.movies[indexPath.row]
+        self.presenter?.route?.pushToScreen(self, segue: "movieDetailsSegue", param: movie as AnyObject)
     }
 }
 

@@ -12,7 +12,7 @@ protocol ViewToMovieDetailsPresenterProtocol:class {
     var view:PresenterToMovieDetailsViewProtocol?{get set}
     var iteractor:PresenterToMovieDetailsIteractorProtocol?{get set}
     var route:PresenterToMovieDetailsRouterProtocol?{get set}
-    func loadMainMenu()
+    func loadGenerNames(ids:[Int])
 }
 
 protocol PresenterToMovieDetailsIteractorProtocol:class {
@@ -29,5 +29,5 @@ protocol IteractorToMovieDetailsPresenterProtocol:class {
 }
 
 protocol PresenterToMovieDetailsViewProtocol:class {
-    func returnMainMenu(menuList:[MainMenu])
+    func returnloadGenerNames(genders:[String])
 }

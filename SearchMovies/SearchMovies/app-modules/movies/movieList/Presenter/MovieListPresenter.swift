@@ -29,8 +29,10 @@ extension MovieListPresenter: IteractorToMovieListPresenterProtocol {
         self.view?.returnMoviesError(message: message)
     }
     
-    func returnMovies(movies: [MovieListData]) {
-         self.view?.returnMovies(movies: movies)
+    
+    
+    func returnMovies(movies: [MovieListData], moviesTotal: Int) {
+        self.view?.returnMovies(movies: movies, moviesTotal: moviesTotal)
     }
     
     func returnLoadGenrers(genres: [GenreData]) {
