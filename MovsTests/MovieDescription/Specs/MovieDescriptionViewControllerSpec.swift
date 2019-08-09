@@ -36,19 +36,31 @@ class MovieDescriptionViewControllerSpec: QuickSpec {
                                 
                 expect(sut.view) == snapshot("MovieDescriptionView", usesDrawRect: false)
             })
-            
-            it("Has clicked favorite icon") {
-                let image = sut.favoriteIcon!
-                let gesture = image.gestureRecognizers![0] as! UITapGestureRecognizer
-                sut.viewDidAppear(false)
-                sut.didFavoriteMovie(gesture)
-                guard let sutPresenter = sut.presenter as? MovieDescriptionPresentationMock
-                    else {
-                        fail()
-                        return
+            context("If movie is favorite") {
+                it("Has clicked favorite icon") {
+                    sut.favoriteIcon.image = UIImage(imageLiteralResourceName: "favorite_full_icon")
+                    let image = sut.favoriteIcon!
+                    let gesture = image.gestureRecognizers![0] as! UITapGestureRecognizer
+                    sut.viewDidAppear(false)
+                    sut.didFavoriteMovie(gesture)
+                    guard let sutPresenter = sut.presenter as? MovieDescriptionPresentationMock
+                        else {
+                            fail()
+                            return
+                    }
+                    expect(sutPresenter.hasCalledDidFavoriteMovie).to(beTrue())
                 }
-                expect(sutPresenter.hasCalledDidFavoriteMovie).to(beTrue())
             }
+            context("If movie is not favorite") {
+                it("Has clicked favorite icon") {
+                    sut.favoriteIcon.image = UIImage(imageLiteralResourceName: "favorite_empty_icon")
+                    let image = sut.favoriteIcon!
+                    let gesture = image.gestureRecognizers![0] as! UITapGestureRecognizer
+                    sut.viewDidAppear(false)
+                    sut.didFavoriteMovie(gesture)
+                }
+            }
+
         }
         
         

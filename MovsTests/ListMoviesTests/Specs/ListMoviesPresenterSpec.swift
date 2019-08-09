@@ -92,6 +92,7 @@ class ListMoviesPresenterSpec: QuickSpec {
 
         describe("Interactor sent genres list") {
             it("Has to atribute to genres allocation", closure: {
+                GenresEntity.setAllGenres([])
                 let countBefore = (GenresEntity.getAllGenres()?.count)!
                 
                 var genres: GenresEntity!

@@ -35,28 +35,5 @@ class ListMoviesRouterSpec: QuickSpec {
             })
         }
         
-//        context("If you are at list movies view controller and click on a movie") {
-//            it("Has to transitionate from list movies view controller to movie description view controller", closure: {
-//                guard let movie = MovieEntityMock.createMovieEntityInstance()
-//                else {
-//                    fail()
-//                    return
-//                }
-//                guard let genre = GenreEntityMock.createGenreEntityInstance()
-//                else {
-//                    fail()
-//                    return
-//                }
-//                var genres: [GenreEntity] = []
-//                genres.append(genre)
-//                
-//                let poster = PosterEntity(poster: UIImage())
-//                poster.movieId = movie.id
-//                
-//                sut.presentMovieDescription(movie: movie, genres: genres, poster: poster)
-//                
-//                expect(sut.viewController?.navigationController?.topViewController is MovieDescriptionViewController).to(beTrue())
-//            })
-//        }
     }
 }

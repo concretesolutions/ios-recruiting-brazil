@@ -41,22 +41,22 @@ class UserSaves {
         return storage.retrieveAllPosters()
     }
     
-    func add(movie: MovieEntity) -> Bool? {
+    @discardableResult func add(movie: MovieEntity) -> Bool? {
         return storage.store(movie: movie)
     }
     
-    func add(poster: PosterEntity) -> Bool? {
+    @discardableResult func add(poster: PosterEntity) -> Bool? {
         return storage.store(poster: poster)
     }
     
-    func remove(movie movieId: Int, withPoster poster: Bool) -> Bool? {
+    @discardableResult func remove(movie movieId: Int, withPoster poster: Bool) -> Bool? {
         let resultMovie = storage.delete(movie: movieId)
         let resultPoster = storage.delete(poster: movieId)
         
         return resultMovie && resultPoster
     }
     
-    func removeAll() -> Bool? {
+    @discardableResult func removeAll() -> Bool? {
         let resultMovie = storage.deleteAllMovies()
         let resultPoster = storage.deleteAllPosters()
         

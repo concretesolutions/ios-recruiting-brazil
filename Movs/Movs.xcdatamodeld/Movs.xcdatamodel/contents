@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="19A512f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14877.5" systemVersion="19A512f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Movies" representedClassName="Movies" syncable="YES" codeGenerationType="class">
-        <attribute name="genreIds" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" customClassName="Int" syncable="YES"/>
-        <attribute name="movieDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="poster" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="releaseDate" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="genreIds" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" customClassName="Int"/>
+        <attribute name="movieDescription" optional="YES" attributeType="String"/>
+        <attribute name="poster" optional="YES" attributeType="String"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Posters" representedClassName="Posters" syncable="YES" codeGenerationType="class">
-        <attribute name="movieId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="poster" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="movieId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="poster" optional="YES" attributeType="Binary"/>
     </entity>
     <elements>
-        <element name="Movies" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Movies" positionX="-63" positionY="-18" width="128" height="133"/>
         <element name="Posters" positionX="-54" positionY="36" width="128" height="75"/>
     </elements>
 </model>

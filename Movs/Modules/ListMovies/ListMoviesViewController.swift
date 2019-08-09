@@ -204,7 +204,7 @@ extension ListMoviesViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section == (movies.count / 2) - 1 {
+        if indexPath.section == (movies.count / 2) - 2 {
             self.canFetchData()
         }
     }
@@ -219,7 +219,8 @@ extension ListMoviesViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.size.width / 2) - 5
-        let height = (collectionView.frame.size.height / 2.1) - 5
+        //let height = (collectionView.frame.size.height / 2.1) - 5
+        let height = CGFloat(235)
         return CGSize(width: width, height: height)
     }
     

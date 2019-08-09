@@ -42,7 +42,7 @@ class LocalDataSaving {
             
             do{
                 try managedContext.save()
-            } catch let error {
+            } catch {
                 return false
             }
         }

@@ -33,6 +33,17 @@ class FilterFavoriteViewControllerSpec: QuickSpec {
                                 
                 expect(sut.view) == snapshot("FilterFavoriteView", usesDrawRect: false)
             })
+            
+            it("Has clicked apply filter") {
+                sut.applyFilterButton.isEnabled = true
+                sut.didClickApplyFilter(sut.applyFilterButton)
+                guard let sutPresenter = sut.presenter as? FilterFavoritePresentationMock
+                    else {
+                        fail()
+                        return
+                }
+                expect(sutPresenter.hasCalledDidEnterFilters).to(beTrue())
+            }
         }
     }
 }
