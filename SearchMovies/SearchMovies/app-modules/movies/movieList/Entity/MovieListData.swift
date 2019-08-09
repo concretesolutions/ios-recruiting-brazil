@@ -13,12 +13,14 @@ struct MovieListData {
     var name:String
     var isFavorite:Bool
     var imageUrl:String
+    var genreIds:[Int]
     
-    init(id:Int, name:String, isFavorite:Bool, imageUrl:String) {
+    init(id:Int, name:String, isFavorite:Bool, imageUrl:String, genreIds:[Int]) {
         self.id = id
         self.name = name
         self.isFavorite = isFavorite
         self.imageUrl = imageUrl
+        self.genreIds = genreIds
     }
 }
 
@@ -28,6 +30,7 @@ extension MovieListData :Decodable {
         case id
         case name = "title"
         case imageUrl = "poster_path"
+        case genreIds = "genre_ids"
     }
     
     init(from decoder:Decoder) throws {
@@ -35,8 +38,9 @@ extension MovieListData :Decodable {
         let codeDecodable = try container.decode(Int.self, forKey: .id)
         let nameDecodable = try container.decode(String.self, forKey: .name)
         let urlDecodable = try container.decode(String.self, forKey: .imageUrl)
+        let genreIdsDecodable = try container.decode([Int].self, forKey: .genreIds)
         
-        self.init(id: codeDecodable, name: nameDecodable, isFavorite: false, imageUrl: urlDecodable)
+        self.init(id: codeDecodable, name: nameDecodable, isFavorite: false, imageUrl: urlDecodable, genreIds: genreIdsDecodable)
     }
     
 }

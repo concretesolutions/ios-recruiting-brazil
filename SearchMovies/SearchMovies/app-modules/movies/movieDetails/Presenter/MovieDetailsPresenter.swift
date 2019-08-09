@@ -15,11 +15,22 @@ class MovieDetailsPresenter: ViewToMovieDetailsPresenterProtocol {
     var route: PresenterToMovieDetailsRouterProtocol?
     //MARK: Functions
     func loadGenerNames(ids: [Int]) {
-        let genders:[String] = (SingletonProperties.shared.genres?.map({ (result) -> String in
-            return result.name
+        var genders:[String] = (SingletonProperties.shared.genres?.map({ (result) -> String in
+            if ids.contains(result.id) {
+                return result.name
+            }
+            else {
+                return ""
+            }
         }))!
         
-        self.view?.returnloadGenerNames(genders: genders)
+        genders = genders.removeDuplicates()
+        genders.removeAll { (result) -> Bool in
+            return result == ""
+        }
+        
+        
+        self.view?.returnloadGenerNames(genders: genders.removeDuplicates())
     }
     
     func loadMovieDetails(id: Int) {

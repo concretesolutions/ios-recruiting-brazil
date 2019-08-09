@@ -48,6 +48,7 @@ class MovieListViewController: BaseViewController {
             
             if sender is MovieListData {
                 viewCtr.movieId = (sender as! MovieListData).id
+                viewCtr.genrerIds = (sender as! MovieListData).genreIds
             }
         }
     }

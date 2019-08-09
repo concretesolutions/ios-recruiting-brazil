@@ -24,9 +24,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoU-hd-0zy" userLabel="viewContent">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrr-pv-wOt">
-                            <rect key="frame" x="10" y="14.5" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrr-pv-wOt">
+                            <rect key="frame" x="10" y="15.5" width="320" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -47,6 +47,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="920-EY-8C1" firstAttribute="leading" secondItem="wrr-pv-wOt" secondAttribute="trailing" constant="10" id="0oG-tl-OBs"/>
                         <constraint firstItem="920-EY-8C1" firstAttribute="centerY" secondItem="uoU-hd-0zy" secondAttribute="centerY" id="6zX-Ih-rzc"/>
                         <constraint firstAttribute="bottom" secondItem="GZ6-S7-8wf" secondAttribute="bottom" id="7Pl-Ws-0l4"/>
                         <constraint firstItem="wrr-pv-wOt" firstAttribute="leading" secondItem="uoU-hd-0zy" secondAttribute="leading" constant="10" id="8cG-eR-r5m"/>

@@ -12,6 +12,7 @@ class MovieDetailsViewController: BaseViewController {
     //MARK: Properties
     var presenter:ViewToMovieDetailsPresenterProtocol?
     var movieId:Int!
+    var genrerIds:[Int]!
     //MARK:Properties
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var titleTextCell: TextCellView!
@@ -28,6 +29,7 @@ class MovieDetailsViewController: BaseViewController {
         self.navigationController?.navigationBar.styleDefault()
         self.showActivityIndicator()
         self.presenter?.loadMovieDetails(id: self.movieId)
+        self.presenter?.loadGenerNames(ids: self.genrerIds)
     }
  
     //MARK: Actions
@@ -67,7 +69,7 @@ extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
     
     func returnloadGenerNames(genders: [String]) {
         DispatchQueue.main.async {
-            let strGender:String = genders.joined(separator: ", ")
+            let strGender:String = genders.count > 0 ? genders.joined(separator: ", ") : genders[0]
             self.genderTextCell.fill(description: strGender, showImage: false, isFavorite: false)
         }
     }
