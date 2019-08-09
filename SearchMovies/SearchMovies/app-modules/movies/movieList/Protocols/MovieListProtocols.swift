@@ -12,12 +12,12 @@ protocol ViewToMovieListPresenterProtocol:class {
     var view:PresenterToMovieListViewProtocol?{get set}
     var iteractor:PresenterToMovieListIteractorProtocol?{get set}
     var route:PresenterToMovieListRouterProtocol?{get set}
-    func loadMovies()
+    func loadMovies(page:Int)
 }
 
 protocol PresenterToMovieListIteractorProtocol:class {
     var presenter:IteractorToMovieListPresenterProtocol? {get set}
-    func loadMovies()
+    func loadMovies(page:Int)
 }
 
 protocol PresenterToMovieListRouterProtocol:class {

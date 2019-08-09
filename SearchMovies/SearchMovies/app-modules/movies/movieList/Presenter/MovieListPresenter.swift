@@ -15,11 +15,9 @@ class MovieListPresenter: ViewToMovieListPresenterProtocol {
     
     var route: PresenterToMovieListRouterProtocol?
     
-    func loadMovies() {
-        self.iteractor?.loadMovies()
+    func loadMovies(page: Int) {
+        self.iteractor?.loadMovies(page: page)
     }
-    
-    
 }
 
 extension MovieListPresenter: IteractorToMovieListPresenterProtocol {

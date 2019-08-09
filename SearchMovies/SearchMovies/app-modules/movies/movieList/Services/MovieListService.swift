@@ -31,34 +31,5 @@ class MovieListService {
  
             completion(GenericResult(objectReturn: movies as AnyObject, messageReturn: "", typeReturnService: .success))
         }
-  
-        
-        
-        //https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
     }
 }
-
-
-/*
- func getReceipts( _ startDate:String?, _ endDate:String?, _ order:String, completion: @escaping ( _ success: Bool, _ result: AnyObject?) -> Void ) {
- var result: AnyObject!
- let request: WSRequest = WSRequest(Endpoints.receipt().get)
- request.appendUrlQuery(["Inicio":startDate])
- request.appendUrlQuery(["Fim":endDate])
- request.appendUrlQuery(["Ordem":order])
- WebService.shared.requestWithoutErrorTreatment(request) { response in
- guard let data = response.data else { return }
- do {
- if response.statusCode == 200 {
- result = try JSONDecoder().decode(ReceiptDataList.self, from: data) as AnyObject
- }
- else {
- result = try JSONDecoder().decode(GenericModelReturn.self, from: data) as AnyObject
- }
- completion(true, result)
- } catch {
- completion(false, GenericModelReturn.genericError() as AnyObject)
- }
- }
- }
- */

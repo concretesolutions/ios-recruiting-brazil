@@ -16,6 +16,8 @@ class MovieListViewController: BaseViewController {
     private var movies:[MovieListData]!
     private var filteredData:[MovieListData]!
     private var isFiltered:Bool = false
+    private var page:Int = 1
+    private var totalItens:Int = 0
     //MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -35,7 +37,9 @@ class MovieListViewController: BaseViewController {
         self.hidePainelView(painelView: self.display, contentView: self.viewContent)
         self.searchBar.delegate = self
         self.showActivityIndicator()
-        self.presenter?.loadMovies()
+        self.presenter?.loadMovies(page: page)
+        
+        
     }
     
 }
@@ -50,17 +54,24 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
     }
     
     func returnMovies(movies: [MovieListData]) {
-        self.hideActivityIndicator()
-        self.movies = movies
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.hideActivityIndicator()
+        }
+
+        for item in movies {
+                self.movies.append(item)
+            }
+
+       DispatchQueue.main.async {
         
- 
-        DispatchQueue.main.async {
             self.hidePainelView(painelView: self.display, contentView: self.viewContent)
             
             if (self.movies?.count)! > 0 {
+                self.totalItens = self.totalItens + self.movies.count
                 self.collectionView.delegate = self
                 self.collectionView.dataSource = self
                 self.collectionView.reloadData()
+                self.collectionView.setContentOffset(CGPoint.zero, animated: false)
             }
             else {
                 self.display.fill(description: "Sua busca não resultou nenhum resultado", typeReturn: .success)
@@ -68,6 +79,22 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
                  self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca não resultou nenhum resultado", typeReturn: .success)
                 
                 
+            }
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            if self.movies.count <= self.totalItens {
+                
+                DispatchQueue.main.async {
+                    self.page = self.page + 1
+                    self.showActivityIndicator()
+                    self.presenter?.loadMovies(page: self.page)
+                }
             }
         }
     }
@@ -87,6 +114,14 @@ extension MovieListViewController : UICollectionViewDataSource, UICollectionView
         
         return cell
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if indexPath.row == self.movies.count - 1  && self.movies.count < self.totalItens {
+//            page = page + 1
+//            self.showActivityIndicator()
+//            self.presenter?.loadMovies(page: page)
+//        }
+//    }
 }
 
 extension MovieListViewController : UISearchBarDelegate {
