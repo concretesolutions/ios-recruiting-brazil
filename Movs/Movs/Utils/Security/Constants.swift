@@ -10,6 +10,8 @@ import Foundation
 
 struct Constants {
   
-  static let kSalt: [UInt8] = [83, 49, 103, 77, 48, 98, 49, 108, 51, 64, 50, 48, 49, 57]
+  static let kSalt: [UInt8] = [77, 48, 118, 115, 64, 50, 48, 49, 57]
+  
+  static let kMovieApiKey: [UInt8] = [46, 5, 68, 67, 118, 83, 3, 1, 1, 44, 81, 18, 70, 36, 83, 8, 8, 10, 41, 8, 66, 68, 33, 4, 81, 7, 0, 43, 9, 64, 18, 37]
   
 }

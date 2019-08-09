@@ -36,9 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   fileprivate func initRootViewController() {
     let splashController = SplashViewController()
-    let rootController = BaseNavigationViewController(rootViewController: splashController)
-    
-    self.changeRootViewController(rootController)
+    self.changeRootViewController(splashController)
   }
   
   // MARK: - Init methods

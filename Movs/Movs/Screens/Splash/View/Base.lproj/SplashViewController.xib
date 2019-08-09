@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="Movs" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="Woi-8R-B36" id="3be-aN-hG4"/>
+                <outlet property="view" destination="wUf-E5-gtr" id="PVF-H8-cUu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="wUf-E5-gtr">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsx-MO-OpU">
+                    <rect key="frame" x="150" y="314.5" width="75" height="38.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                    <color key="textColor" red="0.1764705882" green="0.18823529410000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Woi-8R-B36">
+                    <rect key="frame" x="169" y="575" width="37" height="37"/>
+                    <color key="color" red="0.1764705882" green="0.18823529410000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="VXR-M1-yUd" firstAttribute="bottom" secondItem="Woi-8R-B36" secondAttribute="bottom" constant="55" id="0IU-Na-7OT"/>
+                <constraint firstItem="Wsx-MO-OpU" firstAttribute="centerX" secondItem="wUf-E5-gtr" secondAttribute="centerX" id="4Nl-uQ-a8l"/>
+                <constraint firstItem="Woi-8R-B36" firstAttribute="centerX" secondItem="wUf-E5-gtr" secondAttribute="centerX" id="SC7-2C-DEy"/>
+                <constraint firstItem="Wsx-MO-OpU" firstAttribute="centerY" secondItem="wUf-E5-gtr" secondAttribute="centerY" id="njR-dn-XSP"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXR-M1-yUd"/>
+        </view>
+    </objects>
+</document>

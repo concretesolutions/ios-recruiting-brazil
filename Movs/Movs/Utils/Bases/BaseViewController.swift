@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias AlertCallback = (() -> Void)
+
 class BaseViewController: UIViewController {
   
   var navigationBarTintColor: UIColor = .white {
@@ -37,6 +39,22 @@ class BaseViewController: UIViewController {
     let customButton = UIBarButtonItem(title: "Fechar", style: .plain, target: target, action: action)
 
     self.navigationItem.rightBarButtonItem = customButton
+  }
+  
+  func showErrorMessage(_ message: String, tryAgainCallback: AlertCallback? = nil) {
+    let alert = UIAlertController(title: "Ops!", message: message, preferredStyle: .alert)
+
+    let closeAction = UIAlertAction(title: "close".localized(), style: .cancel, handler: nil)
+    
+    let tryAgainAction = UIAlertAction(title: "try-again".localized(), style: .default) { _ in
+      guard let handler = tryAgainCallback else { return }
+      handler()
+    }
+    
+    alert.addAction(closeAction)
+    alert.addAction(tryAgainAction)
+
+    self.present(alert, animated: true, completion: nil)
   }
   
 }

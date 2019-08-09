@@ -9,6 +9,10 @@
 import Foundation
 
 class Obfuscator {
+  
+  class func generateSalt(with saltKey: String) -> [UInt8] {
+    return [UInt8] (saltKey.utf8)
+  }
 
   // MARK: - Variables
   

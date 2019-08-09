@@ -9,22 +9,76 @@
 import UIKit
 
 class SplashViewController: BaseViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+  
+  // MARK: - Outlets
+  
+  @IBOutlet weak fileprivate var activityIndicator: UIActivityIndicatorView!
+  
+  // MARK: - Private properties
+  
+  fileprivate var state: ViewState = .normal {
+    didSet {
+      self.setupView()
     }
+  }
+  
+  fileprivate var viewModel: SplashViewModel!
+  
+  // MARK: - Initializers
+  
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    viewModel = SplashViewModel(with: self)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    viewModel = SplashViewModel(with: self)
+  }
+  
+  // MARK: - Life cycle
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    DispatchQueue.main.async { [weak self] in
+      self?.loadSettings()
     }
-    */
+  }
+  
+  // MARK: - Private methods
+  
+  fileprivate func loadSettings() {
+    self.state = .loading
+    viewModel.fetchSettings()
+  }
+  
+  fileprivate func setupView() {
+    switch state {
+    case .loading: self.activityIndicator.startAnimating()
+    default: self.activityIndicator.stopAnimating()
+    }
+  }
+  
+  fileprivate func goToHome() {
+    print("Show movies list")
+  }
 
+}
+
+extension SplashViewController: SplashViewModelDelegate {
+  
+  func loadSettingsSuccess() {
+    self.state = .normal
+    self.goToHome()
+  }
+  
+  func loadingSettingsError(_ error: String) {
+    self.state = .error
+    
+    self.showErrorMessage(error, tryAgainCallback: { [weak self] in
+      self?.loadSettings()
+    })
+  }
+  
 }
