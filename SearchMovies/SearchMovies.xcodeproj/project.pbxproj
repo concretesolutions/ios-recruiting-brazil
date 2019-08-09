@@ -27,6 +27,7 @@
 		351F8B6E22FE121000B0E8E4 /* FavoritesListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351F8B6D22FE121000B0E8E4 /* FavoritesListRouter.swift */; };
 		351F8B7022FE177500B0E8E4 /* FavoritesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 351F8B6F22FE177500B0E8E4 /* FavoritesTableViewCell.xib */; };
 		351F8B7222FE1F8300B0E8E4 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351F8B7122FE1F8300B0E8E4 /* FavoritesTableViewCell.swift */; };
+		351F8B7622FE217800B0E8E4 /* SearchMoviesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 351F8B7422FE217800B0E8E4 /* SearchMoviesModel.xcdatamodeld */; };
 		355980D322FCCB240083D681 /* DisplayInformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 355980D222FCCB240083D681 /* DisplayInformationView.xib */; };
 		355980D522FCCDFF0083D681 /* DisplayInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355980D422FCCDFF0083D681 /* DisplayInformationView.swift */; };
 		355980D722FCD2CE0083D681 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355980D622FCD2CE0083D681 /* UIColorExtension.swift */; };
@@ -110,6 +111,7 @@
 		351F8B6D22FE121000B0E8E4 /* FavoritesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListRouter.swift; sourceTree = "<group>"; };
 		351F8B6F22FE177500B0E8E4 /* FavoritesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesTableViewCell.xib; sourceTree = "<group>"; };
 		351F8B7122FE1F8300B0E8E4 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		351F8B7522FE217800B0E8E4 /* SearchMoviesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SearchMoviesModel.xcdatamodel; sourceTree = "<group>"; };
 		355980D222FCCB240083D681 /* DisplayInformationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayInformationView.xib; sourceTree = "<group>"; };
 		355980D422FCCDFF0083D681 /* DisplayInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayInformationView.swift; sourceTree = "<group>"; };
 		355980D622FCD2CE0083D681 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -306,6 +308,14 @@
 			children = (
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		351F8B7322FE215600B0E8E4 /* app-repository */ = {
+			isa = PBXGroup;
+			children = (
+				351F8B7422FE217800B0E8E4 /* SearchMoviesModel.xcdatamodeld */,
+			);
+			path = "app-repository";
 			sourceTree = "<group>";
 		};
 		355980D022FCCAFA0083D681 /* app-components */ = {
@@ -633,6 +643,7 @@
 		35AD4BA622FB964C00296432 /* app-resources */ = {
 			isa = PBXGroup;
 			children = (
+				351F8B7322FE215600B0E8E4 /* app-repository */,
 				355980D022FCCAFA0083D681 /* app-components */,
 				35AD4BA722FB967400296432 /* Assets.xcassets */,
 			);
@@ -918,6 +929,7 @@
 				351F8B4822FDAC0A00B0E8E4 /* SingletonProperties.swift in Sources */,
 				351F8B6C22FE103200B0E8E4 /* FavoritesListPresenter.swift in Sources */,
 				35AD4B5422FB895200296432 /* ViewController.swift in Sources */,
+				351F8B7622FE217800B0E8E4 /* SearchMoviesModel.xcdatamodeld in Sources */,
 				35AD4BB822FBA59100296432 /* MovieListResult.swift in Sources */,
 				35AD4B9B22FB90AE00296432 /* BaseViewController.swift in Sources */,
 				35AD4BBA22FBAE6700296432 /* GenericResult.swift in Sources */,
@@ -1223,6 +1235,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		351F8B7422FE217800B0E8E4 /* SearchMoviesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				351F8B7522FE217800B0E8E4 /* SearchMoviesModel.xcdatamodel */,
+			);
+			currentVersion = 351F8B7522FE217800B0E8E4 /* SearchMoviesModel.xcdatamodel */;
+			path = SearchMoviesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 35AD4B4622FB895200296432 /* Project object */;
 }
