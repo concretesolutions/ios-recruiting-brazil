@@ -20,4 +20,11 @@ extension String {
         }
         return data.base64EncodedString(options: .init(rawValue: 0))
     }
+    
+    func toDate(format:String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)!
+    }
 }

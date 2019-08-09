@@ -16,4 +16,6 @@ struct Constants {
     
     static let backgroundColorHexDefaultApp:String = "#f5cc5b"
     static let backgroundColorHexFilter:String = "#d9941e"
+    
+    static let jsonDateFormat:String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 }

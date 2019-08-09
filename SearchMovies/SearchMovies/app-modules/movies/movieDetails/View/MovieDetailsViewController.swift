@@ -15,10 +15,12 @@ class MovieDetailsViewController: BaseViewController {
     var genrerIds:[Int]!
     //MARK:Properties
     @IBOutlet weak var movieImage: UIImageView!
+    @IBOutlet weak var display: DisplayInformationView!
     @IBOutlet weak var titleTextCell: TextCellView!
     @IBOutlet weak var genderTextCell: TextCellView!
     @IBOutlet weak var overViewLabel: UILabel!
     @IBOutlet weak var yearTextCell: TextCellView!
+    @IBOutlet weak var viewContent: UIView!
     //MARK: Life cicle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,7 @@ class MovieDetailsViewController: BaseViewController {
         self.showActivityIndicator()
         self.presenter?.loadMovieDetails(id: self.movieId)
         self.presenter?.loadGenerNames(ids: self.genrerIds)
+        self.presenter?.loadMovieReleaseDates(id: self.movieId)
     }
  
     //MARK: Actions
@@ -44,6 +47,9 @@ extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
     
     func returnDateReleaseError(messageError: String) {
         self.hideActivityIndicator()
+        DispatchQueue.main.async {
+            self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Um erro ocorreu, tente novamente mais tarde", typeReturn: .error)
+        }
     }
     
     
@@ -64,7 +70,10 @@ extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
     }
     
     func returnMovieDetailsError(messageError: String) {
-        
+        self.hideActivityIndicator()
+        DispatchQueue.main.async {
+            self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Um erro ocorreu, tente novamente mais tarde", typeReturn: .error)
+        }
     }
     
     func returnloadGenerNames(genders: [String]) {

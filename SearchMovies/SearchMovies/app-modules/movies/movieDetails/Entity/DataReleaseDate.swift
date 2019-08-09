@@ -9,10 +9,10 @@
 import Foundation
 
 struct DataReleaseDate {
-    var releaseDate:Date
+    var releaseDate:String
     var releaseYear:Int
     
-    init(releaseDate:Date, releaseYear:Int) {
+    init(releaseDate:String, releaseYear:Int) {
         self.releaseDate = releaseDate
         self.releaseYear = releaseYear
     }
@@ -25,8 +25,8 @@ extension DataReleaseDate : Decodable {
     
     init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let releaseDateDecodable = try container.decode(Date.self, forKey: .releaseDate)
- 
-        self.init(releaseDate: releaseDateDecodable, releaseYear: releaseDateDecodable.Year())
+        let releaseDateDecodable = try container.decode(String.self, forKey: .releaseDate)
+        let releaseYear:Int = releaseDateDecodable.toDate(format: Constants.jsonDateFormat).Year()
+        self.init(releaseDate: releaseDateDecodable, releaseYear: releaseYear)
     }
 }

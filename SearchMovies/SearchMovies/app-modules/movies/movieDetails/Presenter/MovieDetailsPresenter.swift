@@ -36,6 +36,10 @@ class MovieDetailsPresenter: ViewToMovieDetailsPresenterProtocol {
     func loadMovieDetails(id: Int) {
         self.iteractor?.loadMovieDetails(id: id)
     }
+    
+    func loadMovieReleaseDates(id: Int) {
+        self.iteractor?.loadMovieReleaseDates(id: id)
+    }
 }
 
 extension MovieDetailsPresenter : IteractorToMovieDetailsPresenterProtocol {

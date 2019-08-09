@@ -11,9 +11,10 @@ import Foundation
 class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
   
     var presenter: IteractorToMovieDetailsPresenterProtocol?
+    let service:MovieDetailsService = MovieDetailsService()
     
     func loadMovieDetails(id: Int) {
-        let service:MovieDetailsService = MovieDetailsService()
+        
         service.getMovieDetail(appKey: Constants.appKey, id: id) { (result) in
             if result.typeReturnService == .success {
                 let objectReturn:MovieDetailsData = result.objectReturn as! MovieDetailsData
@@ -26,9 +27,14 @@ class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
     }
     
     func loadMovieReleaseDates(id: Int) {
-        
+        service.getMovieDetailReleaseDate(appKey: Constants.appKey, id: id) { (result) in
+            if result.typeReturnService == .success {
+                let objectReturn:ReleaseDateList = result.objectReturn as! ReleaseDateList
+                self.presenter?.returnDateRelease(releaseDate: objectReturn)
+            }
+            else {
+                self.presenter?.returnDateReleaseError(messageError: result.messageReturn!)
+            }
+        }
     }
-    
-    
-    
 }

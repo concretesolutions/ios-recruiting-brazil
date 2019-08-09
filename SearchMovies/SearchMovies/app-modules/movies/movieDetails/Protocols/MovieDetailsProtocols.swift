@@ -14,6 +14,7 @@ protocol ViewToMovieDetailsPresenterProtocol:class {
     var route:PresenterToMovieDetailsRouterProtocol?{get set}
     func loadGenerNames(ids:[Int])
     func loadMovieDetails(id:Int)
+    func loadMovieReleaseDates(id:Int)
 }
 
 protocol PresenterToMovieDetailsIteractorProtocol:class {

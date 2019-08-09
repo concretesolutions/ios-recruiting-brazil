@@ -9,10 +9,10 @@
 import Foundation
 
 struct ReleaseDateListItens {
-    var id:Int
+    var id:String
     var releases:[DataReleaseDate]
     
-    init(id:Int, releases:[DataReleaseDate]) {
+    init(id:String, releases:[DataReleaseDate]) {
         self.id = id
         self.releases = releases
     }
@@ -26,7 +26,7 @@ extension ReleaseDateListItens : Decodable {
     
     init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let codeDecodable = try container.decode(Int.self, forKey: .id)
+        let codeDecodable = try container.decode(String.self, forKey: .id)
         let releasesDecodable = try container.decode([DataReleaseDate].self, forKey: .releases)
         
         self.init(id:codeDecodable, releases: releasesDecodable)
