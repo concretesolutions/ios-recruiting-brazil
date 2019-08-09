@@ -53,6 +53,11 @@ class SplashViewController: BaseViewController {
     viewModel.fetchSettings()
   }
   
+  fileprivate func loadGenres() {
+    self.state = .loading
+    viewModel.fetchGenres()
+  }
+  
   fileprivate func setupView() {
     switch state {
     case .loading: self.activityIndicator.startAnimating()
@@ -69,8 +74,8 @@ class SplashViewController: BaseViewController {
 extension SplashViewController: SplashViewModelDelegate {
   
   func loadSettingsSuccess() {
-    self.state = .normal
-    self.goToHome()
+    // Start load of genres list
+    self.loadGenres()
   }
   
   func loadingSettingsError(_ error: String) {
@@ -78,6 +83,19 @@ extension SplashViewController: SplashViewModelDelegate {
     
     self.showErrorMessage(error, tryAgainCallback: { [weak self] in
       self?.loadSettings()
+    })
+  }
+  
+  func loadGenresSuccess() {
+    self.state = .normal
+    self.goToHome()
+  }
+  
+  func loadGenresError(_ error: String) {
+    self.state = .error
+    
+    self.showErrorMessage(error, tryAgainCallback: { [weak self] in
+      self?.loadGenres()
     })
   }
   

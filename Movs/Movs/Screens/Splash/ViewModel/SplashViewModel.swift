@@ -11,15 +11,21 @@ import Foundation
 protocol SplashViewModelDelegate {
   func loadSettingsSuccess()
   func loadingSettingsError(_ error: String)
+  func loadGenresSuccess()
+  func loadGenresError(_ error: String)
 }
 
 struct SplashViewModel {
   
   fileprivate var delegate: SplashViewModelDelegate!
   
+  // MARK: - Life cycle
+  
   init(with delegate: SplashViewModelDelegate) {
     self.delegate = delegate
   }
+  
+  // MARK: - Public methods
   
   func fetchSettings() {
     SettingServices.shared.fetchSettings { result in
@@ -30,6 +36,17 @@ struct SplashViewModel {
     }
   }
   
+  func fetchGenres() {
+    GenreServices.shared.fetchGenres { result in
+      switch result {
+      case .success(let genres): self.genresSuccess(genres)
+      case .error(let error): self.genreError(error)
+      }
+    }
+  }
+  
+  // MARK: - Private methods
+  
   fileprivate func success(_ settings: Settings) {
     // Store loaded settings in application Singleton
     MovsSingleton.shared.globalSettings = settings
@@ -39,6 +56,20 @@ struct SplashViewModel {
   }
   
   fileprivate func error(_ error: String) {
+    guard let delegate = self.delegate else { return }
+    delegate.loadingSettingsError(error)
+  }
+  
+  fileprivate func genresSuccess(_ genres: [Genre]) {
+    // Store loaded genres list in application Singleton
+    MovsSingleton.shared.genres.removeAll()
+    MovsSingleton.shared.genres.append(contentsOf: genres)
+
+    guard let delegate = self.delegate else { return }
+    delegate.loadGenresSuccess()
+  }
+  
+  fileprivate func genreError(_ error: String) {
     guard let delegate = self.delegate else { return }
     delegate.loadingSettingsError(error)
   }

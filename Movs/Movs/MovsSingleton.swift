@@ -13,6 +13,7 @@ class MovsSingleton {
   static let shared = MovsSingleton()
   
   var globalSettings: Settings?
+  var genres: [Genre] = []
   
   private init() {}
   
