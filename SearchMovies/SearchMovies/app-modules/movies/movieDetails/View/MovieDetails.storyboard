@@ -24,7 +24,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2r-44-W3f" userLabel="viewContent">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ovO-qJ-pOu">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ovO-qJ-pOu">
                                                 <rect key="frame" x="20" y="20" width="335" height="267"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rjz-oW-AYf">
@@ -48,7 +48,7 @@
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jav-bP-qs0">
-                                                <rect key="frame" x="20" y="497" width="42" height="20.5"/>
+                                                <rect key="frame" x="20" y="497" width="335" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -65,6 +65,7 @@
                                             <constraint firstItem="ovO-qJ-pOu" firstAttribute="leading" secondItem="V2r-44-W3f" secondAttribute="leading" constant="20" id="gmT-AI-Ubf"/>
                                             <constraint firstItem="ovO-qJ-pOu" firstAttribute="top" secondItem="V2r-44-W3f" secondAttribute="top" constant="20" id="gnV-4l-5Cc"/>
                                             <constraint firstItem="jav-bP-qs0" firstAttribute="top" secondItem="rjz-oW-AYf" secondAttribute="bottom" constant="10" id="hBQ-PA-pLx"/>
+                                            <constraint firstAttribute="trailing" secondItem="jav-bP-qs0" secondAttribute="trailing" constant="20" id="mWX-GC-NiP"/>
                                             <constraint firstAttribute="trailing" secondItem="rjz-oW-AYf" secondAttribute="trailing" id="pvT-Qc-yrW"/>
                                         </constraints>
                                     </view>
@@ -89,7 +90,8 @@
                         <viewLayoutGuide key="safeArea" id="R21-j4-32u"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movie" id="FH3-yw-9hh">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Ebu-IR-pYu">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="back_icon" id="Ebu-IR-pYu">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="didBackButtonTap:" destination="iWt-nW-NVo" id="fOL-nh-iU2"/>
                             </connections>
@@ -97,7 +99,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="genderTextCell" destination="6S1-Kg-ITS" id="ELY-hU-pWh"/>
-                        <outlet property="moveImage" destination="ovO-qJ-pOu" id="O4C-ya-zoD"/>
+                        <outlet property="movieImage" destination="ovO-qJ-pOu" id="HG5-Qy-ju2"/>
                         <outlet property="overViewLabel" destination="jav-bP-qs0" id="nKC-Dx-d14"/>
                         <outlet property="titleTextCell" destination="7fv-bV-RWe" id="jeo-KC-KeS"/>
                         <outlet property="yearTextCell" destination="04K-Vt-6bk" id="y8U-vc-tuo"/>
@@ -127,6 +129,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="error_icon" width="128" height="128"/>
+        <image name="back_icon" width="11" height="18"/>
     </resources>
 </document>

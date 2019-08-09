@@ -26,5 +26,7 @@ class MovieDetailsRouter: PresenterToMovieDetailsRouterProtocol {
         view.performSegue(withIdentifier: segue, sender: nil)
     }
     
-    
+    func dismiss(_ view: MovieDetailsViewController, animated: Bool) {
+        view.dismiss(animated: animated, completion: nil)
+    }
 }

@@ -9,12 +9,11 @@
 import Foundation
 
 class MovieDetailsPresenter: ViewToMovieDetailsPresenterProtocol {
+    //MARK: Properties
     weak var view: PresenterToMovieDetailsViewProtocol?
-    
     var iteractor: PresenterToMovieDetailsIteractorProtocol?
-    
     var route: PresenterToMovieDetailsRouterProtocol?
-    
+    //MARK: Functions
     func loadGenerNames(ids: [Int]) {
         let genders:[String] = (SingletonProperties.shared.genres?.map({ (result) -> String in
             return result.name
@@ -30,9 +29,7 @@ class MovieDetailsPresenter: ViewToMovieDetailsPresenterProtocol {
 
 extension MovieDetailsPresenter : IteractorToMovieDetailsPresenterProtocol {
     func returnMovieDetails(details: MovieDetailsData) {
-       
-        self.iteractor?.loadMovieReleaseDates(id: details.id)
-       
+        self.view?.returnMovieDetails(details: details)
     }
     
     func returnMovieDetailsError(messageError: String) {
@@ -44,15 +41,12 @@ extension MovieDetailsPresenter : IteractorToMovieDetailsPresenterProtocol {
             return item.releases.first!
         }
         
-        
-        
+        self.view?.returnDateRelease(releaseDate: release.first!)
     }
     
     func returnDateReleaseError(messageError: String) {
-        
+       
     }
-    
-    
 }
     
 

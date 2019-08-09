@@ -40,9 +40,14 @@ class TextCellView: UIView {
         }
     }
     
-    func fill(description:String, isFavorite:Bool) {
+    func showImage(showImage:Bool) {
+        self.iconImage.isHidden = !showImage
+    }
+    
+    func fill(description:String, showImage:Bool,  isFavorite:Bool) {
         self.descriptionLabel.text = description
         let imageName:String = isFavorite ? "favorite_full_icon" : "favorite_gray_icon"
         self.iconImage.image = UIImage(named: imageName)
+        self.iconImage.isHidden = !showImage
     }
 }
