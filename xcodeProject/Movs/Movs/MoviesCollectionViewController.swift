@@ -13,12 +13,13 @@ protocol MovieCollectionViewLayoutListener {
 }
 
 class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieRequestListener {
+    private let cellAspectRatio: CGFloat = 1.5
     private let maxCellsPerRow : CGFloat = 4.0
-    private let cellMinWidth: CGFloat = 160.0
+    private let cellMinWidth: CGFloat = 140.0
     private let minCellSpacing: CGFloat = 10.0
     private let cellSpacingPercent: CGFloat = 0.06
     
-    private var movieCellWidth: CGFloat = 0.0
+    private var movieCellSize = CGSize(width: 0.0, height: 0.0)
     
     private let infiteScrollReloadMargin = 4
     
@@ -52,7 +53,8 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
         let totalSpacing = cellSpacing * (cellsPerRow + 1.0)
         let spacingPerCell = totalSpacing / cellsPerRow
         
-        self.movieCellWidth = fullCellWidth - spacingPerCell
+        let movieCellWidth = fullCellWidth - spacingPerCell
+        self.movieCellSize = CGSize(width: movieCellWidth, height: movieCellWidth * self.cellAspectRatio)
         
         layout.sectionInset = UIEdgeInsets(top: cellSpacing, left: cellSpacing, bottom: cellSpacing, right: cellSpacing)
         layout.minimumLineSpacing = cellSpacing
@@ -60,7 +62,7 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
         
         for cell in self.collectionView.visibleCells {
             if let movieCell = cell as? MovieCollectionViewCell {
-                movieCell.onCollectionViewLayoutUpdate(cellWidth: self.movieCellWidth)
+                movieCell.onCollectionViewLayoutUpdate(cellSize: self.movieCellSize)
             }
         }
     }
@@ -69,7 +71,7 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
 //DelegateFlowLayout
 extension MoviesCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.movieCellWidth, height: self.movieCellWidth)
+        return self.movieCellSize
     }
 }
 

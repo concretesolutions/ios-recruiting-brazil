@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
-    private let titleViewHeightMultiplier: CGFloat = 0.25
+    private let titleViewHeightMultiplier: CGFloat = 0.20
     @IBOutlet weak var cover: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var favorite: UIImageView!
@@ -23,18 +23,18 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.titleView.insertSubview(self.gradientView, at: 0)
     }
     
-    func onCollectionViewLayoutUpdate(cellWidth: CGFloat) {
-        self.buildGradientView(cellWidth: cellWidth)
+    func onCollectionViewLayoutUpdate(cellSize: CGSize) {
+        self.buildGradientView(cellSize: cellSize)
     }
     
-    private func buildGradientView(cellWidth: CGFloat) {
+    private func buildGradientView(cellSize: CGSize) {
         self.gradientView.removeFromSuperview()
         
         self.gradientView = UIView()
         let gradientLayer = CAGradientLayer()
         
-        let frameHeight = cellWidth * titleViewHeightMultiplier
-        let gradientFrame = CGRect(x: 0.0, y: 0.0, width: cellWidth, height: frameHeight)
+        let frameHeight = cellSize.height * titleViewHeightMultiplier
+        let gradientFrame = CGRect(x: 0.0, y: 0.0, width: cellSize.width, height: frameHeight)
         
         self.gradientView.frame = gradientFrame
         gradientLayer.frame = gradientFrame
