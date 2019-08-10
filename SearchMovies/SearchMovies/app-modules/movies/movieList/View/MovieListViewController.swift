@@ -37,6 +37,12 @@ class MovieListViewController: BaseViewController {
         self.collectionView.register(UINib(nibName: "MovieListCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: cellIdentifier)
         self.hidePainelView(painelView: self.display, contentView: self.viewContent)
         self.searchBar.delegate = self
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.showActivityIndicator()
         self.presenter?.loadGenrers()
         self.presenter?.loadFavorites()

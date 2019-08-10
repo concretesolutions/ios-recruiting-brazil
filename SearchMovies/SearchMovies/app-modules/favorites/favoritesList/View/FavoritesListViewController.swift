@@ -78,6 +78,14 @@ extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
     func returnFavoritesError(message: String) {
          self.showPainelView(painelView: self.display, contentView: self.viewContent, description: message, typeReturn: .error)
     }
+    
+    func returnRemoveFavorites() {
+        self.presenter?.loadFavorites()
+    }
+    
+    func returnRemoveFavoritesError(message: String) {
+        self.showPainelView(painelView: self.display, contentView: self.viewContent, description: message, typeReturn: .error)
+    }
 }
 
 extension FavoritesListViewController : UITableViewDataSource, UITableViewDelegate {
@@ -98,7 +106,20 @@ extension FavoritesListViewController : UITableViewDataSource, UITableViewDelega
         return 120
     }
     
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favorite:FavoritesDetailsData = self.isFiltered ? self.filteredData[indexPath.row] : self.favoritesList[indexPath.row]
+        
+        let deleteAction:UIContextualAction! = UIContextualAction(style: .normal, title: "Unfavorite") { (action, view, success) in
+             self.presenter?.remove(favorite: favorite)
+        }
+        
+        deleteAction.backgroundColor = UIColor.red
+        
+        let configuration:UISwipeActionsConfiguration! = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        
+        return configuration
+    }
 }
 
 extension FavoritesListViewController : UISearchBarDelegate {

@@ -18,6 +18,10 @@ class FavoritesListPresenter: ViewToFavoritesListPresenterProtocol {
     func loadFavorites() {
         self.iteractor?.loadFavorites()
     }
+    
+    func remove(favorite: FavoritesDetailsData) {
+        self.iteractor?.remove(favorite: favorite)
+    }
 }
 
 extension FavoritesListPresenter : IteractorToFavoritesListPresenterProtocol {
@@ -26,6 +30,14 @@ extension FavoritesListPresenter : IteractorToFavoritesListPresenterProtocol {
     }
     
     func returnFavoritesError(message: String) {
+        self.view?.returnFavoritesError(message: message)
+    }
+    
+    func returnRemoveFavorites() {
+        self.view?.returnRemoveFavorites()
+    }
+    
+    func returnRemoveFavoritesError(message: String) {
         self.view?.returnFavoritesError(message: message)
     }
 }

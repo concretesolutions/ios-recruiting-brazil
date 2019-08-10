@@ -13,12 +13,13 @@ protocol ViewToFavoritesListPresenterProtocol:class {
     var iteractor:PresenterToFavoritesListIteractorProtocol?{get set}
     var route:PresenterToFavoritesListRouterProtocol?{get set}
     func loadFavorites()
-   
+    func remove(favorite:FavoritesDetailsData)
 }
 
 protocol PresenterToFavoritesListIteractorProtocol:class {
     var presenter:IteractorToFavoritesListPresenterProtocol? {get set}
     func loadFavorites()
+    func remove(favorite:FavoritesDetailsData)
 }
 
 protocol PresenterToFavoritesListRouterProtocol:class {
@@ -28,10 +29,13 @@ protocol PresenterToFavoritesListRouterProtocol:class {
 protocol IteractorToFavoritesListPresenterProtocol:class {
     func returnFavorites(favorites:[FavoritesDetailsData])
     func returnFavoritesError(message:String)
-  
+    func returnRemoveFavorites()
+    func returnRemoveFavoritesError(message:String)
 }
 
 protocol PresenterToFavoritesListViewProtocol:class {
     func returnFavorites(favorites:[FavoritesDetailsData])
     func returnFavoritesError(message:String)
+    func returnRemoveFavorites()
+    func returnRemoveFavoritesError(message:String)
 }

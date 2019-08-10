@@ -15,4 +15,9 @@ class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
         let favorites:[FavoritesDetailsData] = repository.loadFavorites()
         self.presenter?.returnFavorites(favorites: favorites)
     }
+    
+    func remove(favorite: FavoritesDetailsData) {
+        repository.remove(favorites: favorite)
+        self.presenter?.returnRemoveFavorites()
+    }
 }
