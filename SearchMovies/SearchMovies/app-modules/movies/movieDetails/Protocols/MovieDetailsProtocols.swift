@@ -15,12 +15,14 @@ protocol ViewToMovieDetailsPresenterProtocol:class {
     func loadGenerNames(ids:[Int])
     func loadMovieDetails(id:Int)
     func loadMovieReleaseDates(id:Int)
+    func actionInFavoriteMovie(isFavorite:Bool, favoriteMovie:FavoritesDetailsData)
 }
 
 protocol PresenterToMovieDetailsIteractorProtocol:class {
     var presenter:IteractorToMovieDetailsPresenterProtocol? {get set}
     func loadMovieDetails(id:Int)
     func loadMovieReleaseDates(id:Int)
+    func actionInFavoriteMovie(isFavorite:Bool, favoriteMovie:FavoritesDetailsData)
 }
 
 protocol PresenterToMovieDetailsRouterProtocol:class {
@@ -33,6 +35,7 @@ protocol IteractorToMovieDetailsPresenterProtocol:class {
     func returnMovieDetailsError(messageError:String)
     func returnDateRelease(releaseDate:ReleaseDateList)
     func returnDateReleaseError(messageError:String)
+    func returnActionInFavoriteMovie(isFavorite:Bool)
 }
 
 protocol PresenterToMovieDetailsViewProtocol:class {
@@ -41,4 +44,5 @@ protocol PresenterToMovieDetailsViewProtocol:class {
     func returnMovieDetailsError(messageError:String)
     func returnDateRelease(releaseDate:DataReleaseDate)
     func returnDateReleaseError(messageError:String)
+    func returnActionInFavoriteMovie(isFavorite:Bool)
 }

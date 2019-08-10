@@ -9,8 +9,6 @@
 import Foundation
 
 class MovieListPresenter: ViewToMovieListPresenterProtocol {
-    
-    
     weak var view: PresenterToMovieListViewProtocol?
     
     var iteractor: PresenterToMovieListIteractorProtocol?
@@ -29,14 +27,14 @@ class MovieListPresenter: ViewToMovieListPresenterProtocol {
         self.iteractor?.loadFavorites()
     }
     
-    func existsInFavorites(moveId: Int) {
+    func existsInFavorites(movieId: Int) {
       
         if  SingletonProperties.shared.favorites!.count == 0 {
             self.view?.returnExistsInFavorites(isFavorite: false)
             return
         }
         
-        let isExists:Bool = SingletonProperties.shared.favorites!.contains(where: { favorite in favorite.id == moveId })
+        let isExists:Bool = SingletonProperties.shared.favorites!.contains(where: { favorite in favorite.id == movieId })
         
         self.view?.returnExistsInFavorites(isFavorite: isExists)
     }
@@ -46,8 +44,6 @@ extension MovieListPresenter: IteractorToMovieListPresenterProtocol {
     func returnMoviesError(message: String) {
         self.view?.returnMoviesError(message: message)
     }
-    
-    
     
     func returnMovies(movies: [MovieListData], moviesTotal: Int) {
         self.view?.returnMovies(movies: movies, moviesTotal: moviesTotal)
@@ -68,5 +64,4 @@ extension MovieListPresenter: IteractorToMovieListPresenterProtocol {
     func returnLoadFavorites(favoritemovies: [FavoritesDetailsData]) {
         SingletonProperties.shared.favorites = favoritemovies
     }
-    
 }

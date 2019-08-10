@@ -51,6 +51,7 @@ class MovieListViewController: BaseViewController {
             if sender is MovieListData {
                 viewCtr.movieId = (sender as! MovieListData).id
                 viewCtr.genrerIds = (sender as! MovieListData).genreIds
+                viewCtr.isFavoriteMovie = (sender as! MovieListData).isFavorite
             }
         }
     }
@@ -75,6 +76,10 @@ class MovieListViewController: BaseViewController {
 }
 
 extension MovieListViewController : PresenterToMovieListViewProtocol {
+    func returnActionInFavoriteMovie(isFavorite: Bool, movieId: Int) {
+        
+    }
+    
     func returnMoviesError(message: String) {
         self.hideActivityIndicator()
         DispatchQueue.main.async {
@@ -133,11 +138,11 @@ extension MovieListViewController : UICollectionViewDataSource, UICollectionView
         let cell:MovieListCollectionViewCell =
             collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MovieListCollectionViewCell
         let movie:MovieListData = self.isFiltered ? self.filteredData[indexPath.row] : self.movies[indexPath.row]
-        
-        self.presenter?.existsInFavorites(moveId: movie.id)
+        cell.tag = movie.id
+        self.presenter?.existsInFavorites(movieId: movie.id)
         
         cell.fill(title: movie.name, urlPhotoImage: "\(Constants.imdbBaseUrlImage)\(movie.imageUrl)", isFavoriteMovie: self.isFavoriteMovie)
-        
+        self.movies[indexPath.row].isFavorite = self.isFavoriteMovie
         return cell
     }
     
@@ -172,11 +177,5 @@ extension MovieListViewController : UISearchBarDelegate {
                  self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca por \(searchText) não resultou nenhum resultado", typeReturn: .success)
             }
         }
-    }
-}
-
-extension MovieListViewController: MovieListCollectionViewCellDelegate {
-    func didFavoriteButtonTap(isFavorite: Bool) {
-        
     }
 }

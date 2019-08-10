@@ -15,7 +15,8 @@ protocol ViewToMovieListPresenterProtocol:class {
     func loadMovies(page:Int)
     func loadGenrers()
     func loadFavorites()
-    func existsInFavorites(moveId:Int)
+    func existsInFavorites(movieId:Int)
+   
 }
 
 protocol PresenterToMovieListIteractorProtocol:class {
@@ -23,6 +24,7 @@ protocol PresenterToMovieListIteractorProtocol:class {
     func loadMovies(page:Int)
     func loadGenrers()
     func loadFavorites()
+   
 }
 
 protocol PresenterToMovieListRouterProtocol:class {
@@ -36,7 +38,6 @@ protocol IteractorToMovieListPresenterProtocol:class {
     func returnLoadGenrersError(message:String)
     func returnExistsInFavorites(isFavorite:Bool)
     func returnLoadFavorites(favoritemovies:[FavoritesDetailsData])
-  
 }
 
 protocol PresenterToMovieListViewProtocol:class {

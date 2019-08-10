@@ -9,7 +9,14 @@
 import Foundation
 import UIKit
 
+protocol TextCellViewDelegate:class  {
+    func didIconTap(tag:Int)
+}
+
 class TextCellView: UIView {
+    //MARK: Properties
+    weak var delegate:TextCellViewDelegate?
+    
     //MARK: Outlets
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -50,4 +57,19 @@ class TextCellView: UIView {
         self.iconImage.image = UIImage(named: imageName)
         self.iconImage.isHidden = !showImage
     }
+    
+    func alterImage(image:UIImage) {
+        self.iconImage.image = image
+    }
+    
+    func getDescription() -> String {
+        return self.descriptionLabel.text!
+    }
+    
+    //MARK: Actions
+    @IBAction func didIconTap(_ sender: UITapGestureRecognizer) {
+        guard let delegateIconTap = self.delegate else {return}
+        delegateIconTap.didIconTap(tag: self.tag)
+    }
+    
 }

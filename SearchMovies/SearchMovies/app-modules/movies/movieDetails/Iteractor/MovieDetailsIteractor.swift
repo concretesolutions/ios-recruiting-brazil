@@ -37,4 +37,27 @@ class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
             }
         }
     }
+    
+    func actionInFavoriteMovie(isFavorite: Bool, favoriteMovie:FavoritesDetailsData) {
+        let repositoryFavorite:FavoritesRepository = FavoritesRepository()
+        let favoriteList:[FavoritesDetailsData] = repositoryFavorite.loadFavorites()
+        if favoriteList.count == 0 {
+            //save favorite movie
+            let result = repositoryFavorite.save(favorites: favoriteMovie)
+            self.presenter?.returnActionInFavoriteMovie(isFavorite: result)
+            return
+        }
+        
+        let isExists:Bool = favoriteList.contains(where: { favorite in favorite.id == favoriteMovie.id })
+        
+        if isExists {
+            //remove
+         
+        }
+        else {
+            //save
+            let result = repositoryFavorite.save(favorites: favoriteMovie)
+            self.presenter?.returnActionInFavoriteMovie(isFavorite: result)
+        }
+    }
 }

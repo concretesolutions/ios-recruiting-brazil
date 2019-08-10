@@ -9,14 +9,7 @@
 import Foundation
 import UIKit
 
-protocol MovieListCollectionViewCellDelegate:class {
-    func didFavoriteButtonTap(isFavorite:Bool)
-}
-
 class MovieListCollectionViewCell: UICollectionViewCell {
-    //MARK: Properties
-    weak var delegate:MovieListCollectionViewCellDelegate?
-    private var isFavoriteMovie:Bool!
     //MARK: Outlets
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,10 +20,9 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         DispatchQueue.main.async {
             self.titleLabel.text = title
             self.photoImage.downloaded(from: urlPhotoImage)
-            self.isFavoriteMovie = isFavoriteMovie
             let imageNameFavorite:String = isFavoriteMovie ? "favorite_full_icon" : "favorite_gray_icon"
             let imageFavorite:UIImage = UIImage(named: imageNameFavorite)!
-            self.favoriteButton.imageView?.image = imageFavorite
+            self.favoriteButton.setImage(imageFavorite, for: .normal)
         }
     }
     
@@ -41,11 +33,4 @@ class MovieListCollectionViewCell: UICollectionViewCell {
             self.favoriteButton.imageView?.image = imageFavorite
         }
     }
-    
-    //MARK: Action
-    @IBAction func didFavoriteButtonTap(_ sender: UIButton) {
-        guard let delegateButton = self.delegate else {return}
-        delegateButton.didFavoriteButtonTap(isFavorite: self.isFavoriteMovie)
-    }
-    
 }

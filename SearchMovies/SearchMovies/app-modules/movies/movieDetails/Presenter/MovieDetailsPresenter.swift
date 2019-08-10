@@ -40,9 +40,17 @@ class MovieDetailsPresenter: ViewToMovieDetailsPresenterProtocol {
     func loadMovieReleaseDates(id: Int) {
         self.iteractor?.loadMovieReleaseDates(id: id)
     }
+    
+    func actionInFavoriteMovie(isFavorite: Bool, favoriteMovie: FavoritesDetailsData) {
+        self.iteractor?.actionInFavoriteMovie(isFavorite: isFavorite, favoriteMovie: favoriteMovie)
+    }
 }
 
 extension MovieDetailsPresenter : IteractorToMovieDetailsPresenterProtocol {
+    func returnActionInFavoriteMovie(isFavorite: Bool) {
+        self.view?.returnActionInFavoriteMovie(isFavorite: isFavorite)
+    }
+    
     func returnMovieDetails(details: MovieDetailsData) {
         self.view?.returnMovieDetails(details: details)
     }

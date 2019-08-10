@@ -61,13 +61,31 @@ class CoreData {
         var store:AnyObject?
         do {
             let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-            store = try managedObjectContext.fetch(request) as AnyObject //managedObjectContext.execute(request)
+            store = try managedObjectContext.fetch(request) as AnyObject 
         }
         catch {
             print("Error fetch context")
             abort()
         }
         return store
+    }
+    
+    func executeFetchRequest(entityName:String, predicate:NSPredicate) -> AnyObject? {
+        var store:AnyObject?
+        do {
+            let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            request.predicate = predicate
+            store = try managedObjectContext.fetch(request) as AnyObject
+        }
+        catch {
+            print("Error fetch context")
+            abort()
+        }
+        return store
+    }
+    
+    func remove(objectToDelete:NSManagedObject) {
+         managedObjectContext.delete(objectToDelete)
     }
 }
 

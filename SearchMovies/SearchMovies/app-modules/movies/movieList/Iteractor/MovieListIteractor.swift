@@ -41,4 +41,5 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
         let favoriteList:[FavoritesDetailsData] = repositoryFavorite.loadFavorites()
         self.presenter?.returnLoadFavorites(favoritemovies: favoriteList)
     }
-}
+    
+ }

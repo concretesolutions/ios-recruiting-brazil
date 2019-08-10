@@ -13,6 +13,8 @@ class MovieDetailsViewController: BaseViewController {
     var presenter:ViewToMovieDetailsPresenterProtocol?
     var movieId:Int!
     var genrerIds:[Int]!
+    var isFavoriteMovie:Bool!
+    private var posterPath:String! = ""
     //MARK:Properties
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var display: DisplayInformationView!
@@ -28,6 +30,10 @@ class MovieDetailsViewController: BaseViewController {
         self.titleTextCell.showImage(showImage: true)
         self.genderTextCell.showImage(showImage: false)
         self.yearTextCell.showImage(showImage: false)
+        self.titleTextCell.tag = 1
+        self.genderTextCell.tag = 2
+        self.yearTextCell.tag = 3
+        self.titleTextCell.delegate = self
         self.navigationController?.navigationBar.styleDefault()
         self.showActivityIndicator()
         self.presenter?.loadMovieDetails(id: self.movieId)
@@ -43,6 +49,15 @@ class MovieDetailsViewController: BaseViewController {
 }
 
 extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
+    func returnActionInFavoriteMovie(isFavorite: Bool) {
+        self.hideActivityIndicator()
+        DispatchQueue.main.async {
+            let imageName:String = isFavorite ? "favorite_full_icon" : "favorite_gray_icon"
+            let image:UIImage = UIImage(named: imageName)!
+            self.titleTextCell.alterImage(image: image)
+        }
+    }
+    
      
     
     func returnDateReleaseError(messageError: String) {
@@ -56,7 +71,9 @@ extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
     func returnMovieDetails(details: MovieDetailsData) {
         self.hideActivityIndicator()
         DispatchQueue.main.async {
-            self.movieImage.downloaded(from: "\(Constants.imdbBaseUrlImage)\(details.imageUrl)")
+            self.posterPath = "\(Constants.imdbBaseUrlImage)\(details.imageUrl)"
+            self.movieImage.downloaded(from: self.posterPath)
+            
             self.titleTextCell.fill(description: details.name, showImage: true, isFavorite: false)
             self.overViewLabel.text = details.description
         }
@@ -80,6 +97,16 @@ extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
         DispatchQueue.main.async {
             let strGender:String = genders.count > 0 ? genders.joined(separator: ", ") : genders[0]
             self.genderTextCell.fill(description: strGender, showImage: false, isFavorite: false)
+        }
+    }
+}
+
+extension MovieDetailsViewController : TextCellViewDelegate {
+    func didIconTap(tag: Int) {
+        if tag == self.titleTextCell.tag {
+            self.showActivityIndicator()
+            let favorite:FavoritesDetailsData = FavoritesDetailsData(id: self.movieId, name: self.titleTextCell.getDescription(), posterPath: self.posterPath, year: Int(self.yearTextCell.getDescription())!, overView: self.overViewLabel.text!)
+            self.presenter?.actionInFavoriteMovie(isFavorite: self.isFavoriteMovie, favoriteMovie: favorite)
         }
     }
     
