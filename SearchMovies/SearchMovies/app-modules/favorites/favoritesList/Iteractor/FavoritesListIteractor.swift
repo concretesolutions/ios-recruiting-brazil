@@ -10,14 +10,9 @@ import Foundation
 
 class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
     var presenter: IteractorToFavoritesListPresenterProtocol?
-    
-    func loadMovies(page: Int) {
-        
+    let repository:FavoritesRepository = FavoritesRepository()
+    func loadFavorites() {
+        let favorites:[FavoritesDetailsData] = repository.loadFavorites()
+        self.presenter?.returnFavorites(favorites: favorites)
     }
-    
-    func loadGenrers() {
-        
-    }
-    
-    
 }

@@ -17,12 +17,12 @@ class FavoritesTableViewCell: UITableViewCell {
     @IBOutlet weak var yearLabel: UILabel!
     
     //MARK: Functions
-    func fill(name:String, descripton:String, year:String, imageIcon:UIImage) {
+    func fill(name:String, descripton:String, year:String, imageIconUrl:String) {
         DispatchQueue.main.async {
             self.nameLabel.text = name
             self.descriptionLabel.text = descripton
             self.yearLabel.text = year
-            self.imageIcon.image = imageIcon
+            self.imageIcon.downloaded(from: imageIconUrl)
         }
     }
 }

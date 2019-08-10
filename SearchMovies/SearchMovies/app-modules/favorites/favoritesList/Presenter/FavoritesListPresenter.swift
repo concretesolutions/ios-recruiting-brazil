@@ -9,39 +9,23 @@
 import Foundation
 
 class FavoritesListPresenter: ViewToFavoritesListPresenterProtocol {
-    weak var view: PresenterToFavoritesListViewProtocol?
+    var view: PresenterToFavoritesListViewProtocol?
     
     var iteractor: PresenterToFavoritesListIteractorProtocol?
     
     var route: PresenterToFavoritesListRouterProtocol?
     
-    func loadMovies(page: Int) {
-        
+    func loadFavorites() {
+        self.iteractor?.loadFavorites()
     }
-    
-    func loadGenrers() {
-        
-    }
-    
-    
 }
 
 extension FavoritesListPresenter : IteractorToFavoritesListPresenterProtocol {
-    func returnMovies(movies: [MovieListData], moviesTotal: Int) {
-        
+    func returnFavorites(favorites: [FavoritesDetailsData]) {
+        self.view?.returnFavorites(favorites: favorites)
     }
     
-    func returnMoviesError(message: String) {
-        
+    func returnFavoritesError(message: String) {
+        self.view?.returnFavoritesError(message: message)
     }
-    
-    func returnLoadGenrers(genres: [GenreData]) {
-        
-    }
-    
-    func returnLoadGenrersError(message: String) {
-         
-    }
-    
-    
 }

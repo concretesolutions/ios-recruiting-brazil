@@ -44,12 +44,33 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yhs-bb-lor" userLabel="removeFilterView">
                                         <rect key="frame" x="0.0" y="60" width="375" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YL5-ag-7zn">
+                                                <rect key="frame" x="131" y="8.5" width="113" height="33"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                <state key="normal" title="Remove Filter">
+                                                    <color key="titleColor" red="0.96078431369999995" green="0.80000000000000004" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="au5-AE-v67" userLabel="viewSeparator">
+                                                <rect key="frame" x="0.0" y="49" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.96078431372549022" green="0.80000000000000004" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="uY5-nr-uZK"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <constraints>
+                                            <constraint firstItem="au5-AE-v67" firstAttribute="leading" secondItem="Yhs-bb-lor" secondAttribute="leading" id="5f1-rt-XYf"/>
+                                            <constraint firstItem="YL5-ag-7zn" firstAttribute="centerY" secondItem="Yhs-bb-lor" secondAttribute="centerY" id="8Zw-1p-zCY"/>
                                             <constraint firstAttribute="height" constant="50" id="URL-x2-9pr"/>
+                                            <constraint firstAttribute="bottom" secondItem="au5-AE-v67" secondAttribute="bottom" id="Xjl-KO-iyf"/>
+                                            <constraint firstItem="YL5-ag-7zn" firstAttribute="centerX" secondItem="Yhs-bb-lor" secondAttribute="centerX" id="Zkj-1D-FAG"/>
+                                            <constraint firstAttribute="trailing" secondItem="au5-AE-v67" secondAttribute="trailing" id="t9a-uJ-s3R"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="De8-At-rxI" userLabel="tableView">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="De8-At-rxI" userLabel="tableView">
                                         <rect key="frame" x="0.0" y="110" width="375" height="444"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
@@ -57,7 +78,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4pM-17-wwd" id="SHL-jc-znR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -101,7 +122,10 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="display" destination="kc3-LB-58g" id="v5I-as-AKB"/>
+                        <outlet property="heightFilterConstraint" destination="URL-x2-9pr" id="rPM-l2-gqt"/>
                         <outlet property="searchBar" destination="wMg-Ct-l3z" id="f7h-bc-Dkm"/>
+                        <outlet property="tableView" destination="De8-At-rxI" id="rcP-E4-PH6"/>
+                        <outlet property="viewContent" destination="2wM-5P-3OI" id="3wd-ve-QrA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0p-n2-Lrm" userLabel="First Responder" sceneMemberID="firstResponder"/>

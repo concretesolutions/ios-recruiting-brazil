@@ -52,7 +52,7 @@ class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
         
         if isExists {
             //remove
-         
+            repositoryFavorite.remove(favorites: favoriteMovie)
         }
         else {
             //save
