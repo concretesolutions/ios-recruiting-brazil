@@ -13,6 +13,7 @@ protocol MovieCollectionViewLayoutListener {
 }
 
 class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieRequestListener {
+    
     private let cellAspectRatio: CGFloat = 1.5
     private let maxCellsPerRow : CGFloat = 4.0
     private let cellMinWidth: CGFloat = 140.0
@@ -41,6 +42,12 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
     func onRequestFromScrollFinished() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+        }
+    }
+    
+    func onImageRequestFinished(forMovieAt index: Int) {
+        DispatchQueue.main.async {
+            self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
         }
     }
     
@@ -94,9 +101,14 @@ extension MoviesCollectionViewController {
         guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionViewCell else {
             return UICollectionViewCell()
         }
-        movieCell.title.text = MovieRequestHandler.shared.allMovies[indexPath.item].attrName
+        
+        let movie = MovieRequestHandler.shared.allMovies[indexPath.item]
+        movieCell.title.text = movie.attrName
         movieCell.favorite.image = [UIImage(named: "Favorite"), UIImage(named: "Favorite"), UIImage(named: "FavoriteFilled")].randomElement() as! UIImage
-        movieCell.cover.backgroundColor = [UIColor.green, UIColor.red, UIColor.blue, UIColor.gray].randomElement()
+        if let movieCoverData = movie.attrCover {
+            movieCell.cover.image = UIImage(data: movieCoverData)
+        }
+        
         return movieCell
     }
     

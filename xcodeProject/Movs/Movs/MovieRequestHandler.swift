@@ -16,6 +16,7 @@ enum RequestModifier {
 
 protocol MovieRequestListener {
     func onRequestFromScrollFinished()
+    func onImageRequestFinished(forMovieAt index: Int)
 }
 
 class MovieRequestHandler {
@@ -23,6 +24,7 @@ class MovieRequestHandler {
     
     private let tmdbApiKey = "4bd981f7a4be201da0f68bb309a6bc59"
     private let movieRequestURL = "https://api.themoviedb.org/3/movie/popular"
+    private let imageRequestURL = "https://image.tmdb.org/t/p/w500"
     
     var allMovies: Array<Movie> = []
     let favoriteMovies: Array<Movie> = []
@@ -51,8 +53,25 @@ class MovieRequestHandler {
                     self.allMovies.append(contentsOf: movies)
                     self.isRequestingFromScroll = false
                     listener.onRequestFromScrollFinished()
+                    self.requestImages(listener: listener)
                 }
             }.resume()
+        }
+    }
+    
+    func requestImages(listener: MovieRequestListener) {
+        for (index, movie) in self.allMovies.enumerated() {
+            if movie.attrCover != nil || movie.attrCoverPath == nil {
+                continue
+            }
+            if let url = URL(string: "\(self.imageRequestURL)/\(movie.attrCoverPath!)") {
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    if let data = data {
+                        movie.attrCover = data
+                        listener.onImageRequestFinished(forMovieAt: index)
+                    }
+                }.resume()
+            }
         }
     }
     

@@ -36,6 +36,7 @@ class MovieParser {
                 for decMovie in decMovies.results {
                     let movie = Movie(entity: movieEntity, insertInto: managedContext)
                     movie.attrName = decMovie.title
+                    movie.attrCoverPath = decMovie.poster_path
                     movies.append(movie)
                 }
             } catch let error {
