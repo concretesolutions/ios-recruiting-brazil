@@ -52,7 +52,7 @@ class FavoritesListViewController: BaseViewController {
         if segue.identifier == "filterSelectSegue" {
             let navigation:UINavigationController = (segue.destination as! UINavigationController)
             let viewCtr:FilterSelectViewController = (navigation.viewControllers[0] as! FilterSelectViewController)
-            
+            viewCtr.delegate = self
             if sender is [FilterSelectData] {
                 viewCtr.listFilter = (sender as! [FilterSelectData])
             }
@@ -90,6 +90,7 @@ class FavoritesListViewController: BaseViewController {
 
 extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
     func returnApplyFilter(favorites: [FavoritesDetailsData]) {
+        self.heightFilterConstraint.constant = 50
         self.showResults(favorites: favorites)
     }
     
@@ -178,6 +179,7 @@ extension FavoritesListViewController : UISearchBarDelegate {
 
 extension FavoritesListViewController: FilterSelectViewControllerDelegate {
     func applyFilter(filters: [FilterReturn]) {
-        
+        self.showActivityIndicator()
+        self.presenter?.applyFilter(filters: filters)
     }
 }

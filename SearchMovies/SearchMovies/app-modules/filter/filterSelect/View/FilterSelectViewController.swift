@@ -42,7 +42,7 @@ class FilterSelectViewController: UIViewController {
         guard let delegateApply = self.delegate else {return}
         var results:[FilterReturn] = (self.listFilter?.map{object in
             if object.filterValue != "" {
-                return FilterReturn(filterName: object.filterName, filterValue: object.filterValue)
+                return FilterReturn(filterName: object.filterEntityName, filterValue: object.filterValue)
             }
             else {
                 return FilterReturn(filterName: "", filterValue: "")
@@ -50,7 +50,7 @@ class FilterSelectViewController: UIViewController {
             })!
         
         results.removeAll { (object) -> Bool in
-            return object.filterName != ""
+            return object.filterName == ""
         }
         
         delegateApply.applyFilter(filters: results)
