@@ -117,6 +117,9 @@
                     <navigationItem key="navigationItem" title="Movies" id="ka8-dV-XMn">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="FilterIcon" id="Ikk-0F-A9N">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="didFilterButtonTap:" destination="U9d-8C-2bh" id="a3x-9N-Cw2"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -126,11 +129,20 @@
                         <outlet property="searchBar" destination="wMg-Ct-l3z" id="f7h-bc-Dkm"/>
                         <outlet property="tableView" destination="De8-At-rxI" id="rcP-E4-PH6"/>
                         <outlet property="viewContent" destination="2wM-5P-3OI" id="3wd-ve-QrA"/>
+                        <segue destination="RLG-Fe-Svd" kind="show" identifier="filterSelectSegue" id="IFW-Eh-fLV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0p-n2-Lrm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="960.79999999999995" y="-47.226386806596707"/>
+        </scene>
+        <!--FilterSelect-->
+        <scene sceneID="GmI-Rr-Tfg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FilterSelect" id="RLG-Fe-Svd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="46u-ah-Chq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1587" y="-301"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XoZ-RL-L1F">

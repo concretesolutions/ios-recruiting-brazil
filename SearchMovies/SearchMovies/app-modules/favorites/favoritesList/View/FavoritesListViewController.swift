@@ -44,16 +44,27 @@ class FavoritesListViewController: BaseViewController {
         self.presenter?.loadFavorites()
     }
 
-    /*
+ 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "filterSelectSegue" {
+            let navigation:UINavigationController = (segue.destination as! UINavigationController)
+            let viewCtr:FilterSelectViewController = (navigation.viewControllers[0] as! FilterSelectViewController)
+            
+            if sender is [FilterSelectData] {
+                viewCtr.listFilter = (sender as! [FilterSelectData])
+            }
+        }
     }
-    */
-
+    
+    //MARK: Actions
+    @IBAction func didFilterButtonTap(_ sender: UIBarButtonItem) {
+        let listFilter:[FilterSelectData] = [FilterSelectData(filterName: "Date", filterValue: ""),
+                                             FilterSelectData(filterName: "Genres", filterValue: "")]
+        
+        self.presenter?.route?.pushToScreen(self, segue: "filterSelectSegue", param: listFilter as AnyObject)
+    }
+    
 }
 
 extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
