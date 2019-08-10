@@ -103,8 +103,11 @@ extension MoviesCollectionViewController {
         }
         
         let movie = MovieRequestHandler.shared.allMovies[indexPath.item]
-        movieCell.title.text = movie.attrName
-        movieCell.favorite.image = [UIImage(named: "Favorite"), UIImage(named: "Favorite"), UIImage(named: "FavoriteFilled")].randomElement() as! UIImage
+        
+        movieCell.titleLoopLabel.label.text = movie.attrName
+        movieCell.titleLoopLabel.triggerAnimationIfNeeded()
+        
+        movieCell.favorite.image = [UIImage(named: "FavoriteGray"), UIImage(named: "FavoriteFilled")].randomElement() as! UIImage
         if let movieCoverData = movie.attrCover {
             movieCell.cover.image = UIImage(data: movieCoverData)
         }

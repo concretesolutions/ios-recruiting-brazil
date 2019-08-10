@@ -9,34 +9,44 @@
 import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
-    private let titleViewHeightMultiplier: CGFloat = 0.20
     @IBOutlet weak var cover: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var favorite: UIImageView!
-    @IBOutlet weak var titleView: UIView!
     
-    private var gradientView = UIView()
+    private let titleViewHeightMultiplier: CGFloat = 0.20
+    private var titleGradientView = UIView()
+    @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var titleLoopLabel: LoopScrollLabel!
+    
+    private let favoriteGradientViewSize = 72.0
+    private var favoriteGradientView = UIView()
+    @IBOutlet weak var favorite: UIImageView!
+    @IBOutlet weak var favoriteView: UIView! {
+        didSet {
+            self.favoriteView.backgroundColor = UIColor.clear
+            self.buildFavoriteGradientView()
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleView.backgroundColor = UIColor.clear
-        self.titleView.insertSubview(self.gradientView, at: 0)
+        self.titleView.insertSubview(self.titleGradientView, at: 0)
     }
     
     func onCollectionViewLayoutUpdate(cellSize: CGSize) {
-        self.buildGradientView(cellSize: cellSize)
+        self.buildTitleGradientView(cellSize: cellSize)
     }
     
-    private func buildGradientView(cellSize: CGSize) {
-        self.gradientView.removeFromSuperview()
+    private func buildTitleGradientView(cellSize: CGSize) {
+        self.titleGradientView.removeFromSuperview()
         
-        self.gradientView = UIView()
+        self.titleGradientView = UIView()
         let gradientLayer = CAGradientLayer()
         
         let frameHeight = cellSize.height * titleViewHeightMultiplier
         let gradientFrame = CGRect(x: 0.0, y: 0.0, width: cellSize.width, height: frameHeight)
         
-        self.gradientView.frame = gradientFrame
+        self.titleGradientView.frame = gradientFrame
         gradientLayer.frame = gradientFrame
         
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
@@ -50,7 +60,32 @@ class MovieCollectionViewCell: UICollectionViewCell {
             bgColor.cgColor
         ]
         
-        self.gradientView.layer.addSublayer(gradientLayer)
-        self.titleView.insertSubview(self.gradientView, at: 0)
+        self.titleGradientView.layer.addSublayer(gradientLayer)
+        self.titleView.insertSubview(self.titleGradientView, at: 0)
+    }
+    
+    private func buildFavoriteGradientView() {
+        self.favoriteGradientView.removeFromSuperview()
+        
+        self.favoriteGradientView = UIView()
+        let gradientLayer = CAGradientLayer()
+        
+        let gradientFrame = CGRect(x: 0.0, y: 0.0, width: favoriteGradientViewSize, height: favoriteGradientViewSize)
+        
+        self.favoriteGradientView.frame = gradientFrame
+        gradientLayer.frame = gradientFrame
+        
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.1, y: -0.1)
+        gradientLayer.locations = [0.0, 1.0]
+        
+        let bgColor = UIColor(red: 0.137, green: 0.137, blue: 0.215, alpha: 1.0)
+        gradientLayer.colors = [
+            bgColor.withAlphaComponent(0.0).cgColor,
+            bgColor.cgColor
+        ]
+        
+        self.favoriteGradientView.layer.addSublayer(gradientLayer)
+        self.favoriteView.insertSubview(self.favoriteGradientView, at: 0)
     }
 }
