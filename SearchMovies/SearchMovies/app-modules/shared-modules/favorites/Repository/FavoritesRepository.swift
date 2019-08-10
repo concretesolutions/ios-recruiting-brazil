@@ -55,15 +55,17 @@ class FavoritesRepository {
         return favorite
     }
     
-    func loadFavorites() -> [FavoritesDetailsData]{
+    func loadFavorites(predicate:NSPredicate?) -> [FavoritesDetailsData]{
         
-        let resultFetch = self.coreData.executeFetchRequest(entityName: entityName)
+        let resultFetch = predicate == nil ? self.coreData.executeFetchRequest(entityName: entityName) : self.coreData.executeFetchRequest(entityName: entityName, predicate: predicate!)
         let resultListObject:[NSManagedObject] = resultFetch as! [NSManagedObject]
         let favoritesList:[FavoritesDetailsData] = resultListObject.map { object in
              return FavoritesDetailsData(id: object.value(forKey: "id") as! Int, name: object.value(forKey: "name") as! String, posterPath: object.value(forKey: "posterPath") as! String, year: object.value(forKey: "year") as! Int, overView: object.value(forKey: "overview") as! String, genres: object.value(forKey: "genres") as! String)
         }
         return favoritesList
     }
+    
+    
     
     func remove(favorites:FavoritesDetailsData) {
         let objectToDelete =  self.mapperObject(favorites: favorites, toSave: false)

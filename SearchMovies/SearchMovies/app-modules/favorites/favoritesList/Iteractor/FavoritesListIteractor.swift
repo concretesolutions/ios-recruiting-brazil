@@ -12,7 +12,7 @@ class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
     var presenter: IteractorToFavoritesListPresenterProtocol?
     let repository:FavoritesRepository = FavoritesRepository()
     func loadFavorites() {
-        let favorites:[FavoritesDetailsData] = repository.loadFavorites()
+        let favorites:[FavoritesDetailsData] = repository.loadFavorites(predicate: nil)
         self.presenter?.returnFavorites(favorites: favorites)
     }
     
@@ -22,6 +22,34 @@ class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
     }
     
     func applyFilter(filters: [FilterReturn]) {
-        
+        var predicate:NSPredicate? = nil
+        var favorites:[FavoritesDetailsData]?
+        if filters.count == 1 {
+            
+            switch filters.first?.filterName {
+            case "year":
+                predicate = NSPredicate(format: "year == %d", Int((filters.first?.filterValue)!)!)
+            case "genres":
+                predicate = NSPredicate(format: "genres in %@", (filters.first?.filterValue)!)
+            default:
+                break
+            }
+            
+            
+        }
+        else {
+            switch filters.first?.filterName {
+            case "year":
+                predicate = NSPredicate(format: "year == %d && genres in %@", Int((filters.first?.filterValue)!)!, filters[1].filterValue)
+            case "genres":
+                predicate = NSPredicate(format: "genres in %@ && year == %d", (filters.first?.filterValue)!, Int(filters[1].filterValue)! )
+            default:
+                break
+            }
+           
+        }
+        favorites = repository.loadFavorites(predicate: predicate)
+       
+        self.presenter?.returnFavorites(favorites: favorites!)
     }
 }

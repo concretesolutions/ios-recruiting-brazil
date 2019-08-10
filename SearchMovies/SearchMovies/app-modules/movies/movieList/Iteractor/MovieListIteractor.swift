@@ -38,7 +38,7 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
  
     func loadFavorites() {
         let repositoryFavorite:FavoritesRepository = FavoritesRepository()
-        let favoriteList:[FavoritesDetailsData] = repositoryFavorite.loadFavorites()
+        let favoriteList:[FavoritesDetailsData] = repositoryFavorite.loadFavorites(predicate: nil)
         self.presenter?.returnLoadFavorites(favoritemovies: favoriteList)
     }
     

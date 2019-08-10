@@ -40,7 +40,7 @@ class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
     
     func actionInFavoriteMovie(isFavorite: Bool, favoriteMovie:FavoritesDetailsData) {
         let repositoryFavorite:FavoritesRepository = FavoritesRepository()
-        let favoriteList:[FavoritesDetailsData] = repositoryFavorite.loadFavorites()
+        let favoriteList:[FavoritesDetailsData] = repositoryFavorite.loadFavorites(predicate: nil)
         if favoriteList.count == 0 {
             //save favorite movie
             let result = repositoryFavorite.save(favorites: favoriteMovie)
