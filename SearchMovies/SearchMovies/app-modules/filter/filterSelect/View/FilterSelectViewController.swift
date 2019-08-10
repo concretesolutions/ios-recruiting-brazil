@@ -32,15 +32,17 @@ class FilterSelectViewController: UIViewController {
     }
     
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "filterResultSegue" {
+            let navigation:UINavigationController = (segue.destination as! UINavigationController)
+            let viewCtr:FilterResultViewController = (navigation.viewControllers[0] as! FilterResultViewController)
+            
+            if sender is FilterSelectData {
+                viewCtr.listFilter = (sender as! FilterSelectData).resultData
+            }
+        }
     }
-    */
 
 }
 
@@ -58,7 +60,10 @@ extension FilterSelectViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let objFilter:FilterSelectData = self.listFilter![indexPath.row]
+        self.presenter?.route?.pushToScreen(self, segue: "filterResultSegue", param: objFilter as AnyObject)
+    }
 }
 
 extension FilterSelectViewController: PresenterToFilterSelectViewProtocol {

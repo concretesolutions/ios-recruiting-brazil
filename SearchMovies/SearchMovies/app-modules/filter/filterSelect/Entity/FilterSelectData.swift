@@ -9,11 +9,15 @@
 import Foundation
 
 struct FilterSelectData {
+    var id:Int
     var filterName:String
     var filterValue:String
+    var resultData:[FilterResultData]
     
-    init(filterName:String, filterValue:String) {
+    init(id:Int, filterName:String, filterValue:String, resultData:[FilterResultData]) {
+        self.id = id
         self.filterName = filterName
         self.filterValue = filterValue
+        self.resultData = resultData
     }
 }

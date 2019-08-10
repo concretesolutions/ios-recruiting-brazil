@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellItem" textLabel="rvI-8I-sym" detailTextLabel="NmT-6r-t2F" style="IBUITableViewCellStyleValue1" id="mIm-6G-Qf2">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellItem" textLabel="rvI-8I-sym" detailTextLabel="NmT-6r-t2F" style="IBUITableViewCellStyleValue1" id="mIm-6G-Qf2">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mIm-6G-Qf2" id="sLi-gh-VQD">
@@ -80,11 +80,20 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="fwJ-TJ-5BQ" id="xLL-s5-Lib"/>
+                        <segue destination="eqH-O0-3im" kind="show" identifier="filterResultSegue" id="Afu-q5-gv5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAl-46-oX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1200.8" y="-265.81709145427288"/>
+        </scene>
+        <!--FilterResult-->
+        <scene sceneID="75E-4d-9th">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FilterResult" id="eqH-O0-3im" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xk6-2t-jn3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1897" y="-466"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XtA-DQ-vdw">

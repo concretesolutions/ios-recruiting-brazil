@@ -15,6 +15,7 @@ class FavoritesListViewController: BaseViewController {
     private var cellIdentifier:String = "cellItem"
     private var filteredData:[FavoritesDetailsData]!
     private var isFiltered:Bool = false
+    private var filterDataList:[FilterSelectData]?
     //MARK: Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var viewContent: UIView!
@@ -22,6 +23,7 @@ class FavoritesListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightFilterConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     //MARK:Life cicle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +61,9 @@ class FavoritesListViewController: BaseViewController {
     
     //MARK: Actions
     @IBAction func didFilterButtonTap(_ sender: UIBarButtonItem) {
-        let listFilter:[FilterSelectData] = [FilterSelectData(filterName: "Date", filterValue: ""),
-                                             FilterSelectData(filterName: "Genres", filterValue: "")]
         
-        self.presenter?.route?.pushToScreen(self, segue: "filterSelectSegue", param: listFilter as AnyObject)
+        self.presenter?.mapObjectFilter(favorites: self.favoritesList)
+        self.presenter?.route?.pushToScreen(self, segue: "filterSelectSegue", param: self.filterDataList as AnyObject)
     }
     
 }
@@ -76,6 +77,8 @@ extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
             self.hidePainelView(painelView: self.display, contentView: self.viewContent)
             
             if self.favoritesList.count == 0 {
+                self.filterButton.isEnabled = false
+                self.filterButton.image = nil
                 self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Não há filmes adicionados em seu favoritos", typeReturn: .success)
                 return
             }
@@ -96,6 +99,10 @@ extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
     
     func returnRemoveFavoritesError(message: String) {
         self.showPainelView(painelView: self.display, contentView: self.viewContent, description: message, typeReturn: .error)
+    }
+    
+    func returnMapObjectFilter(filter: [FilterSelectData]) {
+        self.filterDataList = filter
     }
 }
 
