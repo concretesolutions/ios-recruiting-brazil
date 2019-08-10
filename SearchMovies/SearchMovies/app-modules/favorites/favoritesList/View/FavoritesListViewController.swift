@@ -34,10 +34,15 @@ class FavoritesListViewController: BaseViewController {
         self.tableView.register(UINib(nibName: "FavoritesTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.heightFilterConstraint.constant = 0
+        self.searchBar.delegate = self
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.showActivityIndicator()
         self.presenter?.loadFavorites()
     }
-    
 
     /*
     // MARK: - Navigation
@@ -77,7 +82,7 @@ extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
 
 extension FavoritesListViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.favoritesList.count
+        return self.isFiltered ? self.filteredData.count : self.favoritesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,4 +99,32 @@ extension FavoritesListViewController : UITableViewDataSource, UITableViewDelega
     }
     
     
+}
+
+extension FavoritesListViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0 {
+            
+            self.isFiltered = false
+        }
+        else {
+            self.isFiltered = true
+            self.filteredData = [FavoritesDetailsData]()
+            for result in self.favoritesList {
+                let nameRange:Range? = result.name.uppercased().range(of: searchText.uppercased())
+                if  nameRange != nil{
+                    self.filteredData.append(result)
+                }
+            }
+        }
+        self.hidePainelView(painelView: self.display, contentView: self.viewContent)
+        
+        
+        self.tableView.reloadData()
+        if self.filteredData.count == 0 && self.isFiltered {
+            DispatchQueue.main.async {
+                self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca por \(searchText) não resultou nenhum resultado", typeReturn: .success)
+            }
+        }
+    }
 }
