@@ -12,7 +12,7 @@ protocol MovieCollectionViewLayoutListener {
     func onCollectionViewLayoutUpdate(cellWidth: CGFloat)
 }
 
-class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieRequestListener {
     private let maxCellsPerRow : CGFloat = 4.0
     private let cellMinWidth: CGFloat = 160.0
     private let minCellSpacing: CGFloat = 10.0
@@ -20,17 +20,26 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
     
     private var movieCellWidth: CGFloat = 0.0
     
+    private let infiteScrollReloadMargin = 4
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let layout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = layout
         self.updateLayout(layout)
+        MovieRequestHandler.shared.requestMoviesFromScroll(listener: self)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if let collectionViewLayout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             self.updateLayout(collectionViewLayout)
+        }
+    }
+    
+    func onRequestFromScrollFinished() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
     
@@ -64,16 +73,26 @@ extension MoviesCollectionViewController {
     }
 }
 
+//Delegate
+extension MoviesCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (indexPath.item >= MovieRequestHandler.shared.allMovies.count - self.infiteScrollReloadMargin) {
+            MovieRequestHandler.shared.requestMoviesFromScroll(listener: self)
+        }
+    }
+}
+
 // DataSource
 extension MoviesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 11
+        return MovieRequestHandler.shared.allMovies.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionViewCell else {
             return UICollectionViewCell()
         }
+        movieCell.title.text = MovieRequestHandler.shared.allMovies[indexPath.item].attrName
         movieCell.favorite.image = [UIImage(named: "Favorite"), UIImage(named: "Favorite"), UIImage(named: "FavoriteFilled")].randomElement() as! UIImage
         movieCell.cover.backgroundColor = [UIColor.green, UIColor.red, UIColor.blue, UIColor.gray].randomElement()
         return movieCell
