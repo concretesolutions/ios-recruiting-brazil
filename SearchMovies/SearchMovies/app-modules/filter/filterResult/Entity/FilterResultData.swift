@@ -11,10 +11,12 @@ import Foundation
 struct FilterResultData {
     var id:Int
     var value:String
+    var parentId:Int
     
-    init(id:Int, value:String) {
+    init(id:Int, value:String, parentId:Int) {
         self.id = id
         self.value = value
+        self.parentId = parentId
     }
 }
 

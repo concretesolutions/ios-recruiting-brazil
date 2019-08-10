@@ -25,13 +25,13 @@ class FavoritesListPresenter: ViewToFavoritesListPresenterProtocol {
     
     func mapObjectFilter(favorites:[FavoritesDetailsData]) {
         let resultGenres:[FilterResultData] = (SingletonProperties.shared.genres?.map { result in
-            return FilterResultData(id: result.id, value: result.name)
+            return FilterResultData(id: result.id, value: result.name, parentId: 1)
             })!
         var resultDate:[FilterResultData] = favorites.map { result in
-            return FilterResultData(id: result.id, value: String(result.year))
+            return FilterResultData(id: result.id, value: String(result.year), parentId: 2)
         }
         
-        resultDate = resultDate.removeDuplicates()
+        resultDate = resultDate.unique { $0.value }
         let listFilter:[FilterSelectData] = [FilterSelectData(id: 1, filterName: "Date", filterValue: "", resultData: resultDate),
                                              FilterSelectData(id: 2, filterName: "Genres", filterValue: "", resultData: resultGenres)]
         

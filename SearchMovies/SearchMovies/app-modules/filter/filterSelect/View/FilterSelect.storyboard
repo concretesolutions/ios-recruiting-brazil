@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-TJ-5BQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="553"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cellItem" textLabel="rvI-8I-sym" detailTextLabel="NmT-6r-t2F" style="IBUITableViewCellStyleValue1" id="mIm-6G-Qf2">
@@ -51,12 +51,40 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndT-Cg-MyI" userLabel="viewFooter">
+                                        <rect key="frame" x="0.0" y="553" width="375" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TqW-y3-ouQ">
+                                                <rect key="frame" x="56.5" y="0.0" width="262.5" height="50"/>
+                                                <color key="backgroundColor" red="0.96078431369999995" green="0.80000000000000004" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Apply">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didApplyButtonTap:" destination="pd7-0U-7OA" eventType="touchUpInside" id="Cug-p1-ZVV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="TqW-y3-ouQ" firstAttribute="height" secondItem="ndT-Cg-MyI" secondAttribute="height" id="7Mt-rY-V2V"/>
+                                            <constraint firstItem="TqW-y3-ouQ" firstAttribute="width" secondItem="ndT-Cg-MyI" secondAttribute="width" multiplier="0.7" id="F2Z-bg-ZET"/>
+                                            <constraint firstAttribute="height" constant="50" id="GdH-3v-bY9"/>
+                                            <constraint firstItem="TqW-y3-ouQ" firstAttribute="centerY" secondItem="ndT-Cg-MyI" secondAttribute="centerY" id="jl1-xf-eCG"/>
+                                            <constraint firstItem="TqW-y3-ouQ" firstAttribute="centerX" secondItem="ndT-Cg-MyI" secondAttribute="centerX" id="xaT-SV-ZPr"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="ndT-Cg-MyI" firstAttribute="top" secondItem="fwJ-TJ-5BQ" secondAttribute="bottom" id="5ey-p5-FJe"/>
+                                    <constraint firstAttribute="bottom" secondItem="ndT-Cg-MyI" secondAttribute="bottom" id="F6Y-Jz-Qgm"/>
                                     <constraint firstItem="fwJ-TJ-5BQ" firstAttribute="top" secondItem="nTH-db-OGb" secondAttribute="top" id="FIk-6i-QGu"/>
                                     <constraint firstAttribute="trailing" secondItem="fwJ-TJ-5BQ" secondAttribute="trailing" id="c3P-Ep-9xZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="fwJ-TJ-5BQ" secondAttribute="bottom" id="kDG-cr-dZe"/>
+                                    <constraint firstItem="ndT-Cg-MyI" firstAttribute="leading" secondItem="nTH-db-OGb" secondAttribute="leading" id="lk6-iF-K3o"/>
+                                    <constraint firstAttribute="trailing" secondItem="ndT-Cg-MyI" secondAttribute="trailing" id="tsC-YE-YkI"/>
                                     <constraint firstItem="fwJ-TJ-5BQ" firstAttribute="leading" secondItem="nTH-db-OGb" secondAttribute="leading" id="vZv-i0-uUu"/>
                                 </constraints>
                             </view>
@@ -79,6 +107,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="applyButton" destination="TqW-y3-ouQ" id="Ixm-1y-66G"/>
                         <outlet property="tableView" destination="fwJ-TJ-5BQ" id="xLL-s5-Lib"/>
                         <segue destination="eqH-O0-3im" kind="show" identifier="filterResultSegue" id="Afu-q5-gv5"/>
                     </connections>

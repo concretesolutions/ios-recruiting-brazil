@@ -16,6 +16,7 @@ class FilterSelectViewController: UIViewController {
     //MARK:Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var applyButton: UIButton!
     //MARK:Life cicle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class FilterSelectViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.tableHeaderView = UIView(frame: CGRect.zero)
+        self.applyButton.layer.cornerRadius = 5
     }
     
     //MARK: Actions
@@ -31,15 +33,18 @@ class FilterSelectViewController: UIViewController {
         self.presenter?.route?.dismiss(self, animated: true)
     }
     
+    @IBAction func didApplyButtonTap(_ sender: UIButton) {
+    }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "filterResultSegue" {
             let navigation:UINavigationController = (segue.destination as! UINavigationController)
             let viewCtr:FilterResultViewController = (navigation.viewControllers[0] as! FilterResultViewController)
-            
+            viewCtr.delegate = self
             if sender is FilterSelectData {
                 viewCtr.listFilter = (sender as! FilterSelectData).resultData
+                viewCtr.parentId = (sender as! FilterSelectData).id
             }
         }
     }
@@ -67,5 +72,22 @@ extension FilterSelectViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 extension FilterSelectViewController: PresenterToFilterSelectViewProtocol {
+    
+}
+
+extension FilterSelectViewController: FilterResultViewControllerDelegate {
+    func returnSelectObject(value: String, parentId: Int) {
+        for i in 0..<(self.listFilter?.count)! {
+            if self.listFilter![i].id == parentId {
+                self.listFilter![i].filterValue = value
+                break
+            }
+        }
+    
+        self.tableView.reloadData()
+    }
+    
+    
+    
     
 }
