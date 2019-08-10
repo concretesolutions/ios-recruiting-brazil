@@ -10,5 +10,6 @@ import Foundation
 class SingletonProperties {
     static let shared = SingletonProperties()
     var genres:[GenreData]?
+    var favorites:[FavoritesDetailsData]?
     init() {}
 }

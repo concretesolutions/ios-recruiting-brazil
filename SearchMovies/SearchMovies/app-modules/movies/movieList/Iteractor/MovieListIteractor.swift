@@ -35,5 +35,10 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
             }
         }
     }
-    
+ 
+    func loadFavorites() {
+        let repositoryFavorite:FavoritesRepository = FavoritesRepository()
+        let favoriteList:[FavoritesDetailsData] = repositoryFavorite.loadFavorites()
+        self.presenter?.returnLoadFavorites(favoritemovies: favoriteList)
+    }
 }

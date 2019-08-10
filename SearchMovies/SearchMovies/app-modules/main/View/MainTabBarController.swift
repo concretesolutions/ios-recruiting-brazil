@@ -13,6 +13,7 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         MainRouter.setModule(self)
+        SingletonProperties.shared.favorites = [FavoritesDetailsData]()
         self.navigationController?.navigationBar.styleDefault()
         self.tabBar.styleDefault()
     }

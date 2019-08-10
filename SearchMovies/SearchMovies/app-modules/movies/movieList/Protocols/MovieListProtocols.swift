@@ -14,12 +14,15 @@ protocol ViewToMovieListPresenterProtocol:class {
     var route:PresenterToMovieListRouterProtocol?{get set}
     func loadMovies(page:Int)
     func loadGenrers()
+    func loadFavorites()
+    func existsInFavorites(moveId:Int)
 }
 
 protocol PresenterToMovieListIteractorProtocol:class {
     var presenter:IteractorToMovieListPresenterProtocol? {get set}
     func loadMovies(page:Int)
     func loadGenrers()
+    func loadFavorites()
 }
 
 protocol PresenterToMovieListRouterProtocol:class {
@@ -31,6 +34,9 @@ protocol IteractorToMovieListPresenterProtocol:class {
     func returnMoviesError(message:String)
     func returnLoadGenrers(genres:[GenreData])
     func returnLoadGenrersError(message:String)
+    func returnExistsInFavorites(isFavorite:Bool)
+    func returnLoadFavorites(favoritemovies:[FavoritesDetailsData])
+  
 }
 
 protocol PresenterToMovieListViewProtocol:class {
@@ -38,4 +44,5 @@ protocol PresenterToMovieListViewProtocol:class {
     func returnMoviesError(message:String)
     func returnLoadGenrers(genres:[GenreData])
     func returnLoadGenrersError(message:String)
+    func returnExistsInFavorites(isFavorite:Bool)
 }

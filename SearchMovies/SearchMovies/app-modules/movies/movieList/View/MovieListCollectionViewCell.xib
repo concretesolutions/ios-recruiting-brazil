@@ -62,6 +62,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEN-P9-IGz" userLabel="favoriteButton">
                                                 <rect key="frame" x="9.5" y="14" width="17" height="22"/>
                                                 <state key="normal" image="favorite_gray_icon"/>
+                                                <connections>
+                                                    <action selector="didFavoriteButtonTap:" destination="oMg-A3-ba2" eventType="touchUpInside" id="wJC-Mh-Alr"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

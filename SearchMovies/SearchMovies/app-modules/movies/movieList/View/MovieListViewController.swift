@@ -18,6 +18,7 @@ class MovieListViewController: BaseViewController {
     private var isFiltered:Bool = false
     private var page:Int = 1
     private var totalItens:Int = 0
+    private var isFavoriteMovie:Bool!
     //MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -37,8 +38,9 @@ class MovieListViewController: BaseViewController {
         self.hidePainelView(painelView: self.display, contentView: self.viewContent)
         self.searchBar.delegate = self
         self.showActivityIndicator()
-        self.presenter?.loadMovies(page: page)
         self.presenter?.loadGenrers()
+        self.presenter?.loadFavorites()
+        self.presenter?.loadMovies(page: page)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,6 +118,10 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
     func returnLoadGenrersError(message: String) {
         self.showPainelView(painelView: self.display, contentView: self.viewContent, description: message, typeReturn: .error)
     }
+    
+    func returnExistsInFavorites(isFavorite: Bool) {
+        self.isFavoriteMovie = isFavorite
+    }
 }
 
 extension MovieListViewController : UICollectionViewDataSource, UICollectionViewDelegate {
@@ -128,7 +134,9 @@ extension MovieListViewController : UICollectionViewDataSource, UICollectionView
             collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MovieListCollectionViewCell
         let movie:MovieListData = self.isFiltered ? self.filteredData[indexPath.row] : self.movies[indexPath.row]
         
-        cell.fill(title: movie.name, urlPhotoImage: "\(Constants.imdbBaseUrlImage)\(movie.imageUrl)")
+        self.presenter?.existsInFavorites(moveId: movie.id)
+        
+        cell.fill(title: movie.name, urlPhotoImage: "\(Constants.imdbBaseUrlImage)\(movie.imageUrl)", isFavoriteMovie: self.isFavoriteMovie)
         
         return cell
     }
@@ -164,5 +172,11 @@ extension MovieListViewController : UISearchBarDelegate {
                  self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca por \(searchText) não resultou nenhum resultado", typeReturn: .success)
             }
         }
+    }
+}
+
+extension MovieListViewController: MovieListCollectionViewCellDelegate {
+    func didFavoriteButtonTap(isFavorite: Bool) {
+        
     }
 }
