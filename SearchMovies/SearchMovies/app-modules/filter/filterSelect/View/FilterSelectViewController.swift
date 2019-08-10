@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol FilterSelectViewControllerDelegate:class {
+    func applyFilter(filters:[FilterReturn])
+}
+
 class FilterSelectViewController: UIViewController {
     //MARK:Properties
     var presenter:ViewToFilterSelectPresenterProtocol?
     var listFilter:[FilterSelectData]?
     private var cellIdentifier:String = "cellItem"
+    weak var delegate:FilterSelectViewControllerDelegate?
     //MARK:Outlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,6 +39,22 @@ class FilterSelectViewController: UIViewController {
     }
     
     @IBAction func didApplyButtonTap(_ sender: UIButton) {
+        guard let delegateApply = self.delegate else {return}
+        var results:[FilterReturn] = (self.listFilter?.map{object in
+            if object.filterValue != "" {
+                return FilterReturn(filterName: object.filterName, filterValue: object.filterValue)
+            }
+            else {
+                return FilterReturn(filterName: "", filterValue: "")
+            }
+            })!
+        
+        results.removeAll { (object) -> Bool in
+            return object.filterName != ""
+        }
+        
+        delegateApply.applyFilter(filters: results)
+        self.presenter?.route?.dismiss(self, animated: true)
     }
     
     // MARK: - Navigation

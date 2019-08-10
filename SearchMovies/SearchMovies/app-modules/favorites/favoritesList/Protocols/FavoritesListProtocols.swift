@@ -15,12 +15,14 @@ protocol ViewToFavoritesListPresenterProtocol:class {
     func loadFavorites()
     func remove(favorite:FavoritesDetailsData)
     func mapObjectFilter(favorites:[FavoritesDetailsData])
+    func applyFilter(filters:[FilterReturn])
 }
 
 protocol PresenterToFavoritesListIteractorProtocol:class {
     var presenter:IteractorToFavoritesListPresenterProtocol? {get set}
     func loadFavorites()
     func remove(favorite:FavoritesDetailsData)
+    func applyFilter(filters:[FilterReturn])
 }
 
 protocol PresenterToFavoritesListRouterProtocol:class {
@@ -32,6 +34,7 @@ protocol IteractorToFavoritesListPresenterProtocol:class {
     func returnFavoritesError(message:String)
     func returnRemoveFavorites()
     func returnRemoveFavoritesError(message:String)
+    func returnApplyFilter(favorites:[FavoritesDetailsData])
 }
 
 protocol PresenterToFavoritesListViewProtocol:class {
@@ -40,4 +43,5 @@ protocol PresenterToFavoritesListViewProtocol:class {
     func returnRemoveFavorites()
     func returnRemoveFavoritesError(message:String)
     func returnMapObjectFilter(filter:[FilterSelectData])
+    func returnApplyFilter(favorites:[FavoritesDetailsData])
 }

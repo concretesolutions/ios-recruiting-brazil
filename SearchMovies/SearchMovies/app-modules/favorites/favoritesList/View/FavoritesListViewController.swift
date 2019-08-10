@@ -66,10 +66,7 @@ class FavoritesListViewController: BaseViewController {
         self.presenter?.route?.pushToScreen(self, segue: "filterSelectSegue", param: self.filterDataList as AnyObject)
     }
     
-}
-
-extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
-    func returnFavorites(favorites: [FavoritesDetailsData]) {
+    private func showResults(favorites: [FavoritesDetailsData]) {
         self.hideActivityIndicator()
         DispatchQueue.main.async {
             self.favoritesList = favorites
@@ -87,6 +84,17 @@ extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
             self.tableView.dataSource = self
             self.tableView.reloadData()
         }
+    }
+    
+}
+
+extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
+    func returnApplyFilter(favorites: [FavoritesDetailsData]) {
+        self.showResults(favorites: favorites)
+    }
+    
+    func returnFavorites(favorites: [FavoritesDetailsData]) {
+        self.showResults(favorites: favorites)
     }
     
     func returnFavoritesError(message: String) {
@@ -165,5 +173,11 @@ extension FavoritesListViewController : UISearchBarDelegate {
                 self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Sua busca por \(searchText) não resultou nenhum resultado", typeReturn: .success)
             }
         }
+    }
+}
+
+extension FavoritesListViewController: FilterSelectViewControllerDelegate {
+    func applyFilter(filters: [FilterReturn]) {
+        
     }
 }

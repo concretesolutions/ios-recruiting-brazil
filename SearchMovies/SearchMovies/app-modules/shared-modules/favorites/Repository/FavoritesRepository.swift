@@ -27,6 +27,7 @@ class FavoritesRepository {
             objectToSave!.setValue(favorites.posterPath, forKey: "posterPath")
             objectToSave!.setValue(favorites.overView, forKey: "overview")
             objectToSave!.setValue(favorites.year, forKey: "year")
+            objectToSave!.setValue(favorites.genres, forKey: "genres")
         }
         else {
             let predicate:NSPredicate = NSPredicate(format: "id = %d", favorites.id)
@@ -50,7 +51,7 @@ class FavoritesRepository {
         let predicate:NSPredicate = NSPredicate(format: "id = %d", id)
         let resultFetch = self.coreData.executeFetchRequest(entityName: entityName, predicate: predicate)
         let resultObject:NSManagedObject = (resultFetch as! [NSManagedObject]).first!
-        let favorite:FavoritesDetailsData = FavoritesDetailsData(id: resultObject.value(forKey: "id") as! Int, name: resultObject.value(forKey: "name") as! String, posterPath: resultObject.value(forKey: "posterPath") as! String, year: resultObject.value(forKey: "year") as! Int, overView: resultObject.value(forKey: "overview") as! String)
+        let favorite:FavoritesDetailsData = FavoritesDetailsData(id: resultObject.value(forKey: "id") as! Int, name: resultObject.value(forKey: "name") as! String, posterPath: resultObject.value(forKey: "posterPath") as! String, year: resultObject.value(forKey: "year") as! Int, overView: resultObject.value(forKey: "overview") as! String, genres: resultObject.value(forKey: "genres") as! String)
         return favorite
     }
     
@@ -59,7 +60,7 @@ class FavoritesRepository {
         let resultFetch = self.coreData.executeFetchRequest(entityName: entityName)
         let resultListObject:[NSManagedObject] = resultFetch as! [NSManagedObject]
         let favoritesList:[FavoritesDetailsData] = resultListObject.map { object in
-             return FavoritesDetailsData(id: object.value(forKey: "id") as! Int, name: object.value(forKey: "name") as! String, posterPath: object.value(forKey: "posterPath") as! String, year: object.value(forKey: "year") as! Int, overView: object.value(forKey: "overview") as! String)
+             return FavoritesDetailsData(id: object.value(forKey: "id") as! Int, name: object.value(forKey: "name") as! String, posterPath: object.value(forKey: "posterPath") as! String, year: object.value(forKey: "year") as! Int, overView: object.value(forKey: "overview") as! String, genres: object.value(forKey: "genres") as! String)
         }
         return favoritesList
     }

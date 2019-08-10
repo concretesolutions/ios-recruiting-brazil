@@ -13,12 +13,14 @@ struct FavoritesDetailsData {
     var posterPath:String
     var year:Int
     var overView:String
+    var genres:String
     
-    init(id:Int, name:String, posterPath:String, year:Int, overView:String) {
+    init(id:Int, name:String, posterPath:String, year:Int, overView:String, genres:String) {
         self.id = id
         self.name = name
         self.posterPath = posterPath
         self.year = year
         self.overView = overView
+        self.genres = genres
     }
 }

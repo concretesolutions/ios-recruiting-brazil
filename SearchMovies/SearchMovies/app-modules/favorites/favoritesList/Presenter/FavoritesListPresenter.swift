@@ -32,10 +32,14 @@ class FavoritesListPresenter: ViewToFavoritesListPresenterProtocol {
         }
         
         resultDate = resultDate.unique { $0.value }
-        let listFilter:[FilterSelectData] = [FilterSelectData(id: 1, filterName: "Date", filterValue: "", resultData: resultDate),
-                                             FilterSelectData(id: 2, filterName: "Genres", filterValue: "", resultData: resultGenres)]
+        let listFilter:[FilterSelectData] = [FilterSelectData(id: 1, filterName: "Date", filterValue: "", filterEntityName: "year", resultData: resultDate),
+                                             FilterSelectData(id: 2, filterName: "Genres", filterValue: "", filterEntityName: "genres", resultData: resultGenres)]
         
         self.view?.returnMapObjectFilter(filter: listFilter)
+    }
+    
+    func applyFilter(filters: [FilterReturn]) {
+        self.iteractor?.applyFilter(filters: filters)
     }
 }
 
@@ -54,5 +58,9 @@ extension FavoritesListPresenter : IteractorToFavoritesListPresenterProtocol {
     
     func returnRemoveFavoritesError(message: String) {
         self.view?.returnFavoritesError(message: message)
+    }
+    
+    func returnApplyFilter(favorites: [FavoritesDetailsData]) {
+        self.view?.returnApplyFilter(favorites: favorites)
     }
 }

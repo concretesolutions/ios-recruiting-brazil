@@ -20,4 +20,8 @@ class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
         repository.remove(favorites: favorite)
         self.presenter?.returnRemoveFavorites()
     }
+    
+    func applyFilter(filters: [FilterReturn]) {
+        
+    }
 }

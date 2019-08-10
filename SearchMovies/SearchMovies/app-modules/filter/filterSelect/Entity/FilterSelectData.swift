@@ -12,12 +12,14 @@ struct FilterSelectData {
     var id:Int
     var filterName:String
     var filterValue:String
+    var filterEntityName:String
     var resultData:[FilterResultData]
     
-    init(id:Int, filterName:String, filterValue:String, resultData:[FilterResultData]) {
+    init(id:Int, filterName:String, filterValue:String, filterEntityName:String, resultData:[FilterResultData]) {
         self.id = id
         self.filterName = filterName
         self.filterValue = filterValue
+        self.filterEntityName = filterEntityName
         self.resultData = resultData
     }
 }

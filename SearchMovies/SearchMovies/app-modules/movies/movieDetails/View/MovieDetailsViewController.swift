@@ -118,7 +118,7 @@ extension MovieDetailsViewController : TextCellViewDelegate {
     func didIconTap(tag: Int) {
         if tag == self.titleTextCell.tag {
             self.showActivityIndicator()
-            let favorite:FavoritesDetailsData = FavoritesDetailsData(id: self.movieId, name: self.titleTextCell.getDescription(), posterPath: self.posterPath, year: Int(self.yearTextCell.getDescription())!, overView: self.overViewLabel.text!)
+            let favorite:FavoritesDetailsData = FavoritesDetailsData(id: self.movieId, name: self.titleTextCell.getDescription(), posterPath: self.posterPath, year: Int(self.yearTextCell.getDescription())!, overView: self.overViewLabel.text!, genres: self.genderTextCell.getDescription())
             self.presenter?.actionInFavoriteMovie(isFavorite: self.isFavoriteMovie, favoriteMovie: favorite)
         }
     }
