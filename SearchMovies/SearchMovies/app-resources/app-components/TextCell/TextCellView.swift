@@ -59,7 +59,9 @@ class TextCellView: UIView {
     }
     
     func alterImage(image:UIImage) {
-        self.iconImage.image = image
+        DispatchQueue.main.async {
+            self.iconImage.image = image
+        }
     }
     
     func getDescription() -> String {

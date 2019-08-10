@@ -86,6 +86,7 @@ class CoreData {
     
     func remove(objectToDelete:NSManagedObject) {
          managedObjectContext.delete(objectToDelete)
+         self.saveContext()
     }
 }
 

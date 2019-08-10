@@ -39,6 +39,16 @@ class MovieDetailsViewController: BaseViewController {
         self.presenter?.loadMovieDetails(id: self.movieId)
         self.presenter?.loadGenerNames(ids: self.genrerIds)
         self.presenter?.loadMovieReleaseDates(id: self.movieId)
+        self.alterImage()
+    }
+    
+    private func alterImage() {
+        DispatchQueue.main.async {
+            let imageName:String = self.isFavoriteMovie ? "favorite_full_icon" : "favorite_gray_icon"
+            let image:UIImage = UIImage(named: imageName)!
+            self.titleTextCell.alterImage(image: image)
+        }
+        
     }
  
     //MARK: Actions
@@ -51,11 +61,14 @@ class MovieDetailsViewController: BaseViewController {
 extension MovieDetailsViewController : PresenterToMovieDetailsViewProtocol {
     func returnActionInFavoriteMovie(isFavorite: Bool) {
         self.hideActivityIndicator()
-        DispatchQueue.main.async {
-            let imageName:String = isFavorite ? "favorite_full_icon" : "favorite_gray_icon"
-            let image:UIImage = UIImage(named: imageName)!
-            self.titleTextCell.alterImage(image: image)
-        }
+        self.isFavoriteMovie = isFavorite
+        self.alterImage()
+//        DispatchQueue.main.async {
+//            self.alterImage()
+////            let imageName:String = isFavorite ? "favorite_full_icon" : "favorite_gray_icon"
+////            let image:UIImage = UIImage(named: imageName)!
+////            self.titleTextCell.alterImage(image: image)
+//        }
     }
     
      

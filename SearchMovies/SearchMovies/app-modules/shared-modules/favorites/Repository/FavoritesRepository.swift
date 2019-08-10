@@ -47,7 +47,7 @@ class FavoritesRepository {
     }
     
     func getFavorite(id:Int) -> FavoritesDetailsData {
-        let predicate:NSPredicate = NSPredicate(format: "id = %@", id)
+        let predicate:NSPredicate = NSPredicate(format: "id = %d", id)
         let resultFetch = self.coreData.executeFetchRequest(entityName: entityName, predicate: predicate)
         let resultObject:NSManagedObject = (resultFetch as! [NSManagedObject]).first!
         let favorite:FavoritesDetailsData = FavoritesDetailsData(id: resultObject.value(forKey: "id") as! Int, name: resultObject.value(forKey: "name") as! String, posterPath: resultObject.value(forKey: "posterPath") as! String, year: resultObject.value(forKey: "year") as! Int, overView: resultObject.value(forKey: "overview") as! String)
