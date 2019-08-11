@@ -18,14 +18,33 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     private let favoriteGradientViewSize = 72.0
     private var favoriteGradientView = UIView()
-    @IBOutlet weak var favorite: UIImageView!
     @IBOutlet weak var favoriteView: UIView! {
         didSet {
             self.favoriteView.backgroundColor = UIColor.clear
             self.buildFavoriteGradientView()
         }
     }
+    @IBOutlet weak var favorite: UIImageView! {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.toggleFavorite))
+            self.favorite.addGestureRecognizer(tap)
+        }
+    }
     
+    weak var movie: Movie? = nil {
+        didSet {
+            guard let movie = self.movie else {
+                return
+            }
+            
+            self.titleLoopLabel.label.text = movie.attrName
+            self.titleLoopLabel.triggerAnimationIfNeeded()
+            self.setFavoriteImage(isFavorite: movie.attrFavorite)
+            if let movieCoverData = movie.attrCover {
+                self.cover.image = UIImage(data: movieCoverData)
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -87,5 +106,21 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         self.favoriteGradientView.layer.addSublayer(gradientLayer)
         self.favoriteView.insertSubview(self.favoriteGradientView, at: 0)
+    }
+    
+    @objc private func toggleFavorite() {
+        guard let movie = self.movie else {
+            return
+        }
+        movie.attrFavorite = !movie.attrFavorite
+        self.setFavoriteImage(isFavorite: movie.attrFavorite)
+    }
+    
+    private func setFavoriteImage(isFavorite: Bool) {
+        if isFavorite {
+            self.favorite.image = UIImage(named: "FavoriteFilled")
+        } else {
+            self.favorite.image = UIImage(named: "FavoriteGray")
+        }
     }
 }

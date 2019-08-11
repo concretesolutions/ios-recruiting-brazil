@@ -14,8 +14,10 @@ class LoopScrollLabel: UIView {
     private let speedFactor: Int = 5
     
     @IBOutlet weak var label: UILabel!
+    var originalFrame: CGRect? = nil
     
     public func triggerAnimationIfNeeded() {
+        self.removeAnimation()
         guard let label = self.label else {
             return
         }
@@ -30,14 +32,14 @@ class LoopScrollLabel: UIView {
     }
     
     func animateLabelScroll(_ label: UILabel, _ widthDiff: CGFloat) {
-        self.removeAnimation()
         
         guard let labelText = label.text else {
             return
         }
         
-        let originalFrame = label.frame
         let sizeThatFits = label.sizeThatFits(CGSize.zero)
+        let originalFrame = label.frame
+        self.originalFrame = originalFrame
         
         let animationDuration = TimeInterval(labelText.count / self.speedFactor)
         
@@ -54,5 +56,8 @@ class LoopScrollLabel: UIView {
     
     func removeAnimation() {
         self.layer.removeAllAnimations()
+        if self.originalFrame != nil {
+            label?.frame = self.originalFrame!
+        }
     }
 }
