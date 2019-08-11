@@ -25,6 +25,9 @@
 		80D281D922CF0A0900558DE6 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D281D822CF0A0900558DE6 /* MovieDetailViewController.swift */; };
 		80D281DB22CF155000558DE6 /* FavoriteMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D281DA22CF155000558DE6 /* FavoriteMovieCell.swift */; };
 		80D281DD22CF1D8800558DE6 /* FavoriteMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D281DC22CF1D8800558DE6 /* FavoriteMovieViewController.swift */; };
+		80E299F522FFB95D0013BDE8 /* MovieSearchCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E299F422FFB95D0013BDE8 /* MovieSearchCollectionViewDataSource.swift */; };
+		80E299F722FFC97C0013BDE8 /* MovieSearchCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E299F622FFC97C0013BDE8 /* MovieSearchCollectionViewDelegate.swift */; };
+		80E299F922FFCDE60013BDE8 /* MovieSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E299F822FFCDE60013BDE8 /* MovieSelectionDelegate.swift */; };
 		C31D9F9BC33C7E23040FCB4A /* Pods_AppMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A7B2DDFEF522E17905C8E5 /* Pods_AppMovie.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +75,9 @@
 		80D281D822CF0A0900558DE6 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		80D281DA22CF155000558DE6 /* FavoriteMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCell.swift; sourceTree = "<group>"; };
 		80D281DC22CF1D8800558DE6 /* FavoriteMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewController.swift; sourceTree = "<group>"; };
+		80E299F422FFB95D0013BDE8 /* MovieSearchCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		80E299F622FFC97C0013BDE8 /* MovieSearchCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		80E299F822FFCDE60013BDE8 /* MovieSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSelectionDelegate.swift; sourceTree = "<group>"; };
 		A1260A3E95D0CA685C46B0C4 /* Pods-AppMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppMovie.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppMovie/Pods-AppMovie.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +123,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		801AAB4C22FE0534001C38AC /* Datasources */ = {
+			isa = PBXGroup;
+			children = (
+				80E299F422FFB95D0013BDE8 /* MovieSearchCollectionViewDataSource.swift */,
+				80E299F622FFC97C0013BDE8 /* MovieSearchCollectionViewDelegate.swift */,
+				80E299F822FFCDE60013BDE8 /* MovieSelectionDelegate.swift */,
+			);
+			path = Datasources;
+			sourceTree = "<group>";
+		};
 		80782E9A22CE6E9F00C64EF9 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +158,7 @@
 		80782EA522CE6E9F00C64EF9 /* AppMovie */ = {
 			isa = PBXGroup;
 			children = (
+				801AAB4C22FE0534001C38AC /* Datasources */,
 				8014BBF822CED29700E5AE8A /* Services */,
 				80782ED722CE6F4F00C64EF9 /* Model */,
 				80782ED822CE6F5500C64EF9 /* View */,
@@ -386,12 +403,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-AppMovie/Pods-AppMovie-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,13 +429,16 @@
 				80782EDE22CE731000C64EF9 /* Constants.swift in Sources */,
 				80D281D722CEE7D400558DE6 /* MovieCell.swift in Sources */,
 				8014BBFA22CED2BD00E5AE8A /* MovieServices.swift in Sources */,
+				80E299F522FFB95D0013BDE8 /* MovieSearchCollectionViewDataSource.swift in Sources */,
 				80D281DB22CF155000558DE6 /* FavoriteMovieCell.swift in Sources */,
 				80D281D922CF0A0900558DE6 /* MovieDetailViewController.swift in Sources */,
 				80D281DD22CF1D8800558DE6 /* FavoriteMovieViewController.swift in Sources */,
+				80E299F922FFCDE60013BDE8 /* MovieSelectionDelegate.swift in Sources */,
 				80782EAF22CE6E9F00C64EF9 /* AppMovie.xcdatamodeld in Sources */,
 				80782EE022CE732D00C64EF9 /* Protocols.swift in Sources */,
 				80782EA722CE6E9F00C64EF9 /* AppDelegate.swift in Sources */,
 				80782EE222CE8CDA00C64EF9 /* App.swift in Sources */,
+				80E299F722FFC97C0013BDE8 /* MovieSearchCollectionViewDelegate.swift in Sources */,
 				80782EDC22CE730300C64EF9 /* Extensions.swift in Sources */,
 				8014BBF422CEC49E00E5AE8A /* MovieSearchViewController.swift in Sources */,
 			);

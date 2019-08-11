@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol MovieSelectionDelegate: class {
+    func didSelect(movie: Result)
+}
