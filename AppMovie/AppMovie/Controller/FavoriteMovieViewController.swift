@@ -11,7 +11,7 @@ import CoreData
 
 let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
-class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FavoriteMovieViewController: UIViewController {
     
     //MARK: - PROPERTIES
     @IBOutlet weak var favoriteTableView: UITableView!
@@ -25,8 +25,6 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,7 +71,14 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    //MARK: - TableView
+    @IBAction func moviesBtnPressed(_ sender: Any) {
+        dismissDetail()
+    }
+    
+}
+
+//MARK: - TableView
+extension FavoriteMovieViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
@@ -103,11 +108,6 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         
         return [deleteAction]
     }
-    
-    @IBAction func moviesBtnPressed(_ sender: Any) {
-        dismissDetail()
-    }
-    
 }
 
 //MARK: - CoreData Remove
