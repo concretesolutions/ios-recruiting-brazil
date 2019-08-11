@@ -112,7 +112,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
         guard let movie = self.movie else {
             return
         }
+
         movie.isFavorite = !movie.isFavorite
+        if movie.isFavorite {
+            movie.addToFavorites()
+        } else {
+            movie.removeFromFavorites()
+        }
+        
         self.setFavoriteImage(isFavorite: movie.isFavorite)
     }
     
