@@ -90,7 +90,7 @@ extension MovieListViewController : PresenterToMovieListViewProtocol {
         self.hideActivityIndicator()
         DispatchQueue.main.async {
            
-            self.showPainelView(painelView: self.display, contentView: self.viewContent, description: "Um erro ocorreu, tente novamente mais tarde", typeReturn: .error)
+            self.showPainelView(painelView: self.display, contentView: self.viewContent, description: Constants.defaultMessageError, typeReturn: .error)
         }
     }
     

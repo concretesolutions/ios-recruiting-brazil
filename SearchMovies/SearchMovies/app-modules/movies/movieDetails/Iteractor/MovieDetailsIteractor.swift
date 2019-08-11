@@ -15,6 +15,11 @@ class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
     
     func loadMovieDetails(id: Int) {
         
+        if !Reachability.isConnectedToNetwork() {
+            self.presenter?.returnMovieDetailsError(messageError: Constants.defaultMessageError)
+            return
+        }
+        
         service.getMovieDetail(appKey: Constants.appKey, id: id) { (result) in
             if result.typeReturnService == .success {
                 let objectReturn:MovieDetailsData = result.objectReturn as! MovieDetailsData
@@ -27,6 +32,12 @@ class MovieDetailsIteractor: PresenterToMovieDetailsIteractorProtocol {
     }
     
     func loadMovieReleaseDates(id: Int) {
+        
+        if !Reachability.isConnectedToNetwork() {
+            self.presenter?.returnDateReleaseError(messageError: Constants.defaultMessageError)
+            return
+        }
+        
         service.getMovieDetailReleaseDate(appKey: Constants.appKey, id: id) { (result) in
             if result.typeReturnService == .success {
                 let objectReturn:ReleaseDateList = result.objectReturn as! ReleaseDateList

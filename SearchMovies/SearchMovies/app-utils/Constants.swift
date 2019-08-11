@@ -18,4 +18,5 @@ struct Constants {
     static let backgroundColorHexFilter:String = "#d9941e"
     
     static let jsonDateFormat:String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    static let defaultMessageError:String = "Um erro ocorreu, tente novamente mais tarde"
 }

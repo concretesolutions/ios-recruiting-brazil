@@ -12,6 +12,12 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
     var presenter: IteractorToMovieListPresenterProtocol?
     let service:MovieListService = MovieListService()
     func loadMovies(page:Int) {
+        
+        if !Reachability.isConnectedToNetwork() {
+            self.presenter?.returnMoviesError(message: Constants.defaultMessageError)
+            return
+        }
+        
         service.getMovies(appKey: Constants.appKey, pageNumber: page) { (result) in
             if result.typeReturnService == .success {
                 let objectReturn:MovieListResult = result.objectReturn as! MovieListResult
@@ -24,6 +30,12 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
     }
     
     func loadGenrers() {
+        
+        if !Reachability.isConnectedToNetwork() {
+            self.presenter?.returnLoadGenrersError(message: Constants.defaultMessageError)
+            return
+        }
+        
         let serviceGenre:GenreService = GenreService()
         serviceGenre.getGenres(appKey: Constants.appKey) { (result) in
             if result.typeReturnService == .success {
@@ -31,7 +43,7 @@ class MovieListIteractor: PresenterToMovieListIteractorProtocol {
                 self.presenter?.returnLoadGenrers(genres: objectReturn.genres)
             }
             else {
-                self.presenter?.returnMoviesError(message: result.messageReturn!)
+                self.presenter?.returnLoadGenrersError(message: result.messageReturn!)
             }
         }
     }
