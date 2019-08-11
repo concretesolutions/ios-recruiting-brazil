@@ -21,6 +21,8 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
     
     private let infiteScrollReloadMargin = 4
     
+    var moviesData: Array<MovieObject> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let layout = UICollectionViewFlowLayout()
@@ -36,15 +38,18 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
         }
     }
     
-    func onRequestFromScrollFinished() {
+    func onRequestFromScrollFinished(_ fetchedMovies: Array<MovieObject>) {
+        self.moviesData.append(contentsOf: fetchedMovies)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
     
-    func onImageRequestFinished(forMovieAt index: Int) {
-        DispatchQueue.main.async {
-            self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+    func onImageRequestFinished(for movieObject: MovieObject) {
+        if let movieIndex = movieObject.findIndex(in: self.moviesData) {
+            DispatchQueue.main.async {
+                self.collectionView.reloadItems(at: [IndexPath(item: movieIndex, section: 0)])
+            }
         }
     }
     
@@ -82,7 +87,7 @@ extension MoviesCollectionViewController {
 //Delegate
 extension MoviesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (indexPath.item >= MovieRequestHandler.shared.allMovies.count - self.infiteScrollReloadMargin) {
+        if (indexPath.item >= self.moviesData.count - self.infiteScrollReloadMargin) {
             MovieRequestHandler.shared.requestMoviesFromScroll(listener: self)
         }
     }
@@ -91,7 +96,7 @@ extension MoviesCollectionViewController {
 // DataSource
 extension MoviesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MovieRequestHandler.shared.allMovies.count
+        return self.moviesData.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -99,8 +104,7 @@ extension MoviesCollectionViewController {
             return UICollectionViewCell()
         }
         
-        movieCell.movie = MovieRequestHandler.shared.allMovies[indexPath.item]
-        
+        movieCell.movie = self.moviesData[indexPath.item]
         return movieCell
     }
     

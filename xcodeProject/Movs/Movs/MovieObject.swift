@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol MovieUpdateListener {
+    func onFavoriteUpdate()
+}
+
 class MovieObject {
     let id: Int
     let title: String
@@ -16,6 +20,11 @@ class MovieObject {
     let posterPath: String?
     var poster: Data? = nil
     var isFavorite: Bool
+    
+    private var updateListeners: Array<MovieUpdateListener> = []
+    func registerAsListener(_ updateListener: MovieUpdateListener) {
+        self.updateListeners.append(updateListener)
+    }
         
     init(id: Int, title: String, posterPath: String?, release: Date, overview: String) {
         self.id = id
@@ -23,16 +32,32 @@ class MovieObject {
         self.posterPath = posterPath
         self.release = release
         self.overview = overview
-        self.isFavorite = FavoriteMovieFetcher.fetch(byId: self.id) != nil
+        self.isFavorite = FavoriteMovieCRUD.fetch(byId: self.id) != nil
     }
     
-    func addToFavorites() {
-        FavoriteMovieFetcher.add(from: self)
+    func findIndex(in array: Array<MovieObject>) -> Int? {
+        do {
+            return array.firstIndex(where: { cursor -> Bool in
+                return cursor.id == self.id
+            })
+        } catch _ {
+            return nil
+        }
     }
     
-    func removeFromFavorites() {
-        if let favoriteMovie = FavoriteMovieFetcher.fetch(byId: self.id) {
-            FavoriteMovieFetcher.delete(favoriteMovie)
+    func addToFavorites(shouldTriggerListeners: Bool = true) {
+        self.isFavorite = true
+        FavoriteMovieCRUD.add(from: self, shouldTriggerListeners: shouldTriggerListeners)
+        for updateListener in updateListeners {
+            updateListener.onFavoriteUpdate()
+        }
+    }
+    
+    func removeFromFavorites(shouldTriggerListeners: Bool = true) {
+        self.isFavorite = false
+        FavoriteMovieCRUD.delete(self, shouldTriggerListeners: shouldTriggerListeners)
+        for updateListener in updateListeners {
+            updateListener.onFavoriteUpdate()
         }
     }
 }

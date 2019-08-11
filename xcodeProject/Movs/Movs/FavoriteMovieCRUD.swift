@@ -11,10 +11,11 @@ import UIKit
 import CoreData
 
 protocol FavoriteMovieUpdateListener {
-    func onFavoriteMoviesUpdate()
+    func onFavoriteMoviesInsert(_ movieObject: MovieObject)
+    func onFavoriteMoviesDelete(_ movieObject: MovieObject)
 }
 
-class FavoriteMovieFetcher {
+class FavoriteMovieCRUD {
     static var managedContext: NSManagedObjectContext? = nil
     
     private static var updateListeners: Array<FavoriteMovieUpdateListener> = []
@@ -40,6 +41,7 @@ class FavoriteMovieFetcher {
         let fetchRequest = NSFetchRequest<FavoriteMovie>(entityName: "FavoriteMovie")
         let predicate = NSPredicate(format: "attrId = \(id)")
         fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
         do {
             let results = try managedContext?.fetch(fetchRequest)
             return results?.first
@@ -49,7 +51,7 @@ class FavoriteMovieFetcher {
         }
     }
     
-    static func add(from movieObject: MovieObject) {
+    static func add(from movieObject: MovieObject, shouldTriggerListeners: Bool = true) {
         guard let managedContext = self.managedContext, let movieEntity = NSEntityDescription.entity(forEntityName: "FavoriteMovie", in: managedContext) else { return }
         
         let favoriteMovie = FavoriteMovie(entity: movieEntity, insertInto: managedContext)
@@ -59,17 +61,24 @@ class FavoriteMovieFetcher {
         favoriteMovie.attrOverview = movieObject.overview
         favoriteMovie.attrPoster = movieObject.poster
         favoriteMovie.attrPosterPath = movieObject.posterPath
+        favoriteMovie.createdAt = Date()
         
-        for updateListener in updateListeners {
-            updateListener.onFavoriteMoviesUpdate()
+        if shouldTriggerListeners {
+            for updateListener in updateListeners {
+                updateListener.onFavoriteMoviesInsert(movieObject)
+            }
         }
     }
     
-    static func delete(_ favoriteMovieObject: FavoriteMovie) {
-        self.managedContext?.delete(favoriteMovieObject)
-        
-        for updateListener in updateListeners {
-            updateListener.onFavoriteMoviesUpdate()
+    static func delete(_ movieObject: MovieObject, shouldTriggerListeners: Bool = true) {
+        if let favoriteMovie = self.fetch(byId: movieObject.id) {
+            self.managedContext?.delete(favoriteMovie)
+            
+            if shouldTriggerListeners {
+                for updateListener in updateListeners {
+                    updateListener.onFavoriteMoviesDelete(movieObject)
+                }
+            }
         }
     }
 }

@@ -15,8 +15,8 @@ enum RequestModifier {
 }
 
 protocol MovieRequestListener {
-    func onRequestFromScrollFinished()
-    func onImageRequestFinished(forMovieAt index: Int)
+    func onRequestFromScrollFinished(_ fetchedMovies: Array<MovieObject>)
+    func onImageRequestFinished(for movieObject: MovieObject)
 }
 
 class MovieRequestHandler {
@@ -25,8 +25,6 @@ class MovieRequestHandler {
     private let tmdbApiKey = "4bd981f7a4be201da0f68bb309a6bc59"
     private let movieRequestURL = "https://api.themoviedb.org/3/movie/popular"
     private let imageRequestURL = "https://image.tmdb.org/t/p/w500"
-    
-    var allMovies: Array<MovieObject> = []
     
     var currentPage = 1
     var isRequestingFromScroll = false
@@ -47,27 +45,26 @@ class MovieRequestHandler {
         ]
         if let url = self.buildGETURL(from: self.movieRequestURL, withParameters: parameters) {
             URLSession.shared.dataTask(with: url) { data, resposnse, error in
+                self.isRequestingFromScroll = false
                 if let data = data {
                     let movies = MovieParser.parseAll(from: data)
-                    self.allMovies.append(contentsOf: movies)
-                    self.isRequestingFromScroll = false
-                    listener.onRequestFromScrollFinished()
-                    self.requestImages(listener: listener)
+                    listener.onRequestFromScrollFinished(movies)
+                    self.requestImages(for: movies, listener: listener)
                 }
             }.resume()
         }
     }
     
-    func requestImages(listener: MovieRequestListener) {
-        for (index, movie) in self.allMovies.enumerated() {
-            if movie.poster != nil || movie.posterPath == nil {
+    func requestImages(for movies: Array<MovieObject>, listener: MovieRequestListener) {
+        for movieObject in movies {
+            if movieObject.posterPath == nil {
                 continue
             }
-            if let url = URL(string: "\(self.imageRequestURL)/\(movie.posterPath!)") {
+            if let url = URL(string: "\(self.imageRequestURL)/\(movieObject.posterPath!)") {
                 URLSession.shared.dataTask(with: url) { data, response, error in
                     if let data = data {
-                        movie.poster = data
-                        listener.onImageRequestFinished(forMovieAt: index)
+                        movieObject.poster = data
+                        listener.onImageRequestFinished(for: movieObject)
                     }
                 }.resume()
             }

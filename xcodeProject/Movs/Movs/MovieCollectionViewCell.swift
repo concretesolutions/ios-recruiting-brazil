@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class MovieCollectionViewCell: UICollectionViewCell, MovieUpdateListener {
     @IBOutlet weak var poster: UIImageView!
     
     private let titleViewHeightMultiplier: CGFloat = 0.20
@@ -37,9 +37,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
                 return
             }
             
+            movie.registerAsListener(self)
+            
             self.titleLoopLabel.label.text = movie.title
             self.titleLoopLabel.triggerAnimationIfNeeded()
-            self.setFavoriteImage(isFavorite: movie.isFavorite)
+            self.setFavoriteImage()
             if let posterData = movie.poster {
                 self.poster.image = UIImage(data: posterData)
             }
@@ -113,18 +115,23 @@ class MovieCollectionViewCell: UICollectionViewCell {
             return
         }
 
-        movie.isFavorite = !movie.isFavorite
-        if movie.isFavorite {
+        if !movie.isFavorite {
             movie.addToFavorites()
         } else {
             movie.removeFromFavorites()
         }
-        
-        self.setFavoriteImage(isFavorite: movie.isFavorite)
     }
     
-    private func setFavoriteImage(isFavorite: Bool) {
-        if isFavorite {
+    func onFavoriteUpdate() {
+        self.setFavoriteImage()
+    }
+    
+    func setFavoriteImage() {
+        guard let movie = self.movie else {
+            return
+        }
+        
+        if movie.isFavorite {
             self.favorite.image = UIImage(named: "FavoriteFilled")
         } else {
             self.favorite.image = UIImage(named: "FavoriteGray")

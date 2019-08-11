@@ -7,6 +7,7 @@
         <attribute name="attrPosterPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="attrRelease" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="attrTitle" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" minCount="1" deletionRule="Deny" destinationEntity="Genre" syncable="YES"/>
     </entity>
     <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
@@ -14,6 +15,6 @@
     </entity>
     <elements>
         <element name="Genre" positionX="-63" positionY="-18" width="128" height="60"/>
-        <element name="FavoriteMovie" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="FavoriteMovie" positionX="-54" positionY="-9" width="128" height="165"/>
     </elements>
 </model>

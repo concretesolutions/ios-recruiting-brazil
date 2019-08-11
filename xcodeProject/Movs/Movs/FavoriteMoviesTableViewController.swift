@@ -14,16 +14,23 @@ class FavoriteMoviesTableViewController: UITableViewController, FavoriteMovieUpd
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.updateMoviesData(reloadingTableView: false)
-        FavoriteMovieFetcher.registerAsListener(self)
+        self.getMoviesData(shouldReloadData: false)
+        FavoriteMovieCRUD.registerAsListener(self)
     }
     
-    func onFavoriteMoviesUpdate() {
-        self.updateMoviesData(reloadingTableView: true)
+    func onFavoriteMoviesInsert(_ movieObject: MovieObject) {
+        self.favoriteMoviesData.append(movieObject)
+        self.tableView.reloadData()
+    }
+    func onFavoriteMoviesDelete(_ movieObject: MovieObject) {
+        if let unfavoritedMovieIndex = movieObject.findIndex(in: self.favoriteMoviesData) {
+            self.favoriteMoviesData.remove(at: unfavoritedMovieIndex)
+            self.tableView.reloadData()
+        }
     }
     
-    func updateMoviesData(reloadingTableView: Bool) {
-        favoriteMoviesData = FavoriteMovieFetcher.fetchAll().compactMap { favoriteMovie -> MovieObject? in
+    func getMoviesData(shouldReloadData: Bool) {
+        self.favoriteMoviesData = FavoriteMovieCRUD.fetchAll().compactMap { favoriteMovie -> MovieObject? in
             if let title = favoriteMovie.attrTitle,
                 let release = favoriteMovie.attrRelease,
                 let overview = favoriteMovie.attrOverview
@@ -35,9 +42,27 @@ class FavoriteMoviesTableViewController: UITableViewController, FavoriteMovieUpd
                 return nil
             }
         }
-        
-        if reloadingTableView {
+        if shouldReloadData {
             self.tableView.reloadData()
+        }
+    }
+}
+
+//Delegate
+extension FavoriteMoviesTableViewController {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfavorite"
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let movieCell = self.tableView(tableView, cellForRowAt: indexPath) as? FavoriteMoviesTableViewCell {
+                movieCell.movie?.removeFromFavorites()
+            }
         }
     }
 }
