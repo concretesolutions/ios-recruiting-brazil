@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var cover: UIImageView!
+    @IBOutlet weak var poster: UIImageView!
     
     private let titleViewHeightMultiplier: CGFloat = 0.20
     private var titleGradientView = UIView()
@@ -31,17 +31,17 @@ class MovieCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    weak var movie: Movie? = nil {
+    weak var movie: MovieObject? = nil {
         didSet {
             guard let movie = self.movie else {
                 return
             }
             
-            self.titleLoopLabel.label.text = movie.attrName
+            self.titleLoopLabel.label.text = movie.title
             self.titleLoopLabel.triggerAnimationIfNeeded()
-            self.setFavoriteImage(isFavorite: movie.attrFavorite)
-            if let movieCoverData = movie.attrCover {
-                self.cover.image = UIImage(data: movieCoverData)
+            self.setFavoriteImage(isFavorite: movie.isFavorite)
+            if let posterData = movie.poster {
+                self.poster.image = UIImage(data: posterData)
             }
         }
     }
@@ -112,8 +112,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
         guard let movie = self.movie else {
             return
         }
-        movie.attrFavorite = !movie.attrFavorite
-        self.setFavoriteImage(isFavorite: movie.attrFavorite)
+        movie.isFavorite = !movie.isFavorite
+        self.setFavoriteImage(isFavorite: movie.isFavorite)
     }
     
     private func setFavoriteImage(isFavorite: Bool) {

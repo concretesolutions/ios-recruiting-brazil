@@ -26,8 +26,7 @@ class MovieRequestHandler {
     private let movieRequestURL = "https://api.themoviedb.org/3/movie/popular"
     private let imageRequestURL = "https://image.tmdb.org/t/p/w500"
     
-    var allMovies: Array<Movie> = []
-    let favoriteMovies: Array<Movie> = []
+    var allMovies: Array<MovieObject> = []
     
     var currentPage = 1
     var isRequestingFromScroll = false
@@ -61,13 +60,13 @@ class MovieRequestHandler {
     
     func requestImages(listener: MovieRequestListener) {
         for (index, movie) in self.allMovies.enumerated() {
-            if movie.attrCover != nil || movie.attrCoverPath == nil {
+            if movie.poster != nil {
                 continue
             }
-            if let url = URL(string: "\(self.imageRequestURL)/\(movie.attrCoverPath!)") {
+            if let url = URL(string: "\(self.imageRequestURL)/\(movie.posterPath)") {
                 URLSession.shared.dataTask(with: url) { data, response, error in
                     if let data = data {
-                        movie.attrCover = data
+                        movie.poster = data
                         listener.onImageRequestFinished(forMovieAt: index)
                     }
                 }.resume()
