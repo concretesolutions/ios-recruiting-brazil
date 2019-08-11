@@ -8,12 +8,13 @@
 
 import UIKit
 import Kingfisher
+import Reusable
 
 //protocol MovieCellDelegate {
 //    func presentDetailMovieView(withMovie movie: Result)
 //}
 
-class MovieCell: UICollectionViewCell {
+class MovieCell: UICollectionViewCell, Reusable {
     // var delegate: MovieCellDelegate?
     
     //Mark: - Properties
