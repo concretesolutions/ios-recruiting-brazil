@@ -30,7 +30,7 @@ class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
             case "year":
                 predicate = NSPredicate(format: "year == %d", Int((filters.first?.filterValue)!)!)
             case "genres":
-                predicate = NSPredicate(format: "genres in %@", (filters.first?.filterValue)!)
+                predicate = NSPredicate(format: "genres contains[c] %@", (filters.first?.filterValue)!)
             default:
                 break
             }
@@ -40,9 +40,9 @@ class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
         else {
             switch filters.first?.filterName {
             case "year":
-                predicate = NSPredicate(format: "year == %d && genres in %@", Int((filters.first?.filterValue)!)!, filters[1].filterValue)
+                predicate = NSPredicate(format: "year == %d && genres contains[c] %@", Int((filters.first?.filterValue)!)!, filters[1].filterValue)
             case "genres":
-                predicate = NSPredicate(format: "genres in %@ && year == %d", (filters.first?.filterValue)!, Int(filters[1].filterValue)! )
+                predicate = NSPredicate(format: "genres contains[c] %@ && year == %d", (filters.first?.filterValue)!, Int(filters[1].filterValue)! )
             default:
                 break
             }
@@ -50,6 +50,6 @@ class FavoritesListIteractor: PresenterToFavoritesListIteractorProtocol {
         }
         favorites = repository.loadFavorites(predicate: predicate)
        
-        self.presenter?.returnFavorites(favorites: favorites!)
+        self.presenter?.returnApplyFilter(favorites: favorites!)
     }
 }

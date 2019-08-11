@@ -15,6 +15,7 @@ class FavoritesListViewController: BaseViewController {
     private var cellIdentifier:String = "cellItem"
     private var filteredData:[FavoritesDetailsData]!
     private var isFiltered:Bool = false
+    private var isApplyFilter:Bool = false
     private var filterDataList:[FilterSelectData]?
     //MARK: Outlets
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,8 +43,11 @@ class FavoritesListViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.showActivityIndicator()
-        self.presenter?.loadFavorites()
+        if !self.isApplyFilter {
+            self.showActivityIndicator()
+            self.presenter?.loadFavorites()
+        }
+        
     }
 
  
@@ -57,13 +61,6 @@ class FavoritesListViewController: BaseViewController {
                 viewCtr.listFilter = (sender as! [FilterSelectData])
             }
         }
-    }
-    
-    //MARK: Actions
-    @IBAction func didFilterButtonTap(_ sender: UIBarButtonItem) {
-        
-        self.presenter?.mapObjectFilter(favorites: self.favoritesList)
-        self.presenter?.route?.pushToScreen(self, segue: "filterSelectSegue", param: self.filterDataList as AnyObject)
     }
     
     private func showResults(favorites: [FavoritesDetailsData]) {
@@ -86,10 +83,24 @@ class FavoritesListViewController: BaseViewController {
         }
     }
     
+    //MARK: Actions
+    @IBAction func didFilterButtonTap(_ sender: UIBarButtonItem) {
+        
+        self.presenter?.mapObjectFilter(favorites: self.favoritesList)
+        self.presenter?.route?.pushToScreen(self, segue: "filterSelectSegue", param: self.filterDataList as AnyObject)
+    }
+    
+    @IBAction func didRemoveFilterButtonTap(_ sender: UIButton) {
+        self.isApplyFilter = false
+        self.heightFilterConstraint.constant = 0
+        self.showActivityIndicator()
+        self.presenter?.loadFavorites()
+    }
 }
 
 extension FavoritesListViewController: PresenterToFavoritesListViewProtocol {
     func returnApplyFilter(favorites: [FavoritesDetailsData]) {
+        self.isApplyFilter = true
         self.heightFilterConstraint.constant = 50
         self.showResults(favorites: favorites)
     }
