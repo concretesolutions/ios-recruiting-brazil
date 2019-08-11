@@ -12,31 +12,72 @@ typealias AlertCallback = (() -> Void)
 
 class BaseViewController: UIViewController {
   
-  var navigationBarTintColor: UIColor = .white {
-    didSet {
-      self.navigationController?.navigationBar.tintColor = navigationBarTintColor
-    }
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureNavigationBar()
+    configureTitleNavigationBar()
   }
   
   // MARK: - Customization methods
   
-  internal func configureNavigationBar(_ color: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {
-//    guard let navigationController = self.navigationController else { return }
-//
-//    let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "SF Compact Rounded", size: 20)!, .foregroundColor: color]
-//
-//    navigationController.navigationBar.titleTextAttributes = attributes
+  internal func configureTitleNavigationBar(_ titleColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {
+    guard let navigationController = self.navigationController else { return }
+
+    let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 20, weight: .medium), .foregroundColor: titleColor]
+
+    navigationController.navigationBar.titleTextAttributes = attributes
+  }
+  
+  internal func configureNavigationBar(tintColor navigationBarTintColor: UIColor, barColor navigationBarBackgroundColor: UIColor, translucent: Bool = false, removeShadow: Bool = true) {
+    guard let navigationController = self.navigationController else { return }
+    
+    navigationController.navigationBar.tintColor = navigationBarTintColor
+    navigationController.navigationBar.barTintColor = navigationBarBackgroundColor
+    navigationController.navigationBar.isTranslucent = translucent
+
+    if removeShadow {
+      navigationController.navigationBar.shadowImage = UIImage()
+      navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+
+    }
+  }
+  
+  fileprivate func makeAttributedPlaceHolder(with placeholder: String, and color: UIColor) -> NSAttributedString {
+    let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14, weight: .semibold), .foregroundColor: color]
+
+    let attributedString = NSAttributedString(string: placeholder, attributes: attributes)
+    
+    return attributedString
+  }
+  
+  func configureSearchField(in searchBar: UISearchBar, with backgroundColor: UIColor, and tintColor: UIColor) {
+    guard let searchField = searchBar.value(forKey: "_searchField") as? UITextField else { return }
+
+    searchField.clearButtonMode = .whileEditing
+    searchField.roundedCorners(10)
+    searchField.backgroundColor = backgroundColor
+    searchField.textColor = tintColor
+    searchField.attributedPlaceholder = self.makeAttributedPlaceHolder(with: "search".localized(), and: tintColor)
+
+    // Search Icon
+    guard let searchIcon = searchField.leftView as? UIImageView else { return }
+
+    searchIcon.image = searchIcon.image?.withRenderingMode(.alwaysTemplate)
+    searchIcon.tintColor = tintColor
+    
+    // Clear Button
+    guard let clearButton = searchField.value(forKey: "clearButton") as? UIButton else { return }
+    
+    clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
+    clearButton.tintColor = tintColor
+
+    // Adjustment offsets
+    searchBar.centeredPlaceHolder()
   }
   
   // MARK: - Navigation
   
-  func addRightBarButtonItem(with target: Any?, action: Selector?) {
-    let customButton = UIBarButtonItem(title: "Fechar", style: .plain, target: target, action: action)
+  func addRightBarButtonItem(with icon: UIImage, target: Any?, action: Selector?) {
+    let customButton = UIBarButtonItem(image: icon, style: .plain, target: target, action: action)
 
     self.navigationItem.rightBarButtonItem = customButton
   }
@@ -55,6 +96,12 @@ class BaseViewController: UIViewController {
     alert.addAction(tryAgainAction)
 
     self.present(alert, animated: true, completion: nil)
+  }
+  
+  // MARK: - Commom methods
+  
+  @objc internal func filterAction() {
+    
   }
   
 }

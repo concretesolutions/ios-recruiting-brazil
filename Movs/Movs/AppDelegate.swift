@@ -39,6 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.changeRootViewController(splashController)
   }
   
+  fileprivate func changeRootViewController(_ rootViewController: UIViewController) {
+    guard let window = self.window else { return }
+    window.rootViewController = rootViewController
+    
+    UIView.transition(with: window, duration: 0.5, options: UIView.AnimationOptions.transitionCrossDissolve, animations: {
+    }, completion: nil)
+  }
+  
   // MARK: - Init methods
   
   fileprivate func initWindow() {
@@ -48,12 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // MARK: - Commom methods
   
-  func changeRootViewController(_ rootViewController: UIViewController) {
-    guard let window = self.window else { return }
-    window.rootViewController = rootViewController
-    
-    UIView.transition(with: window, duration: 0.5, options: UIView.AnimationOptions.transitionCrossDissolve, animations: {
-    }, completion: nil)
+  func makeRootViewController(_ viewController: BaseViewController, with withNavigationController: Bool = true) {
+    if withNavigationController {
+      let rootController = BaseNavigationViewController(rootViewController: viewController)
+      
+      self.changeRootViewController(rootController)
+    } else {
+      self.changeRootViewController(viewController)
+    }
   }
   
 }

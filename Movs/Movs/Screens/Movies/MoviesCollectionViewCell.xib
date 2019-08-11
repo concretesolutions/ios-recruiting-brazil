@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MoviesCell" id="gTV-IL-0wX" customClass="MoviesCollectionViewCell" customModule="Movs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="166" height="205"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="166" height="205"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="iQm-CK-WzP">
+                        <rect key="frame" x="0.0" y="0.0" width="166" height="205"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4b6-BP-hLM">
+                        <rect key="frame" x="0.0" y="159" width="166" height="46"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5E-1T-aRL">
+                                <rect key="frame" x="32" y="14.5" width="102" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.99607843137254903" green="0.83921568627450982" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpe-RA-Wne">
+                                <rect key="frame" x="139" y="12" width="17" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="17" id="d0J-ba-fKw"/>
+                                    <constraint firstAttribute="height" constant="22" id="wfY-Id-4PI"/>
+                                </constraints>
+                                <state key="normal" image="unfaved-icon"/>
+                                <state key="selected" image="faved-icon"/>
+                                <state key="highlighted" image="faved-icon"/>
+                                <connections>
+                                    <action selector="favedClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="kAc-sk-sEt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.17254901960784313" green="0.19215686274509802" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="f5E-1T-aRL" firstAttribute="centerX" secondItem="4b6-BP-hLM" secondAttribute="centerX" id="Kg1-Pt-x9T"/>
+                            <constraint firstAttribute="trailing" secondItem="wpe-RA-Wne" secondAttribute="trailing" constant="10" id="Qcx-uJ-rc9"/>
+                            <constraint firstAttribute="height" constant="46" id="UbP-Dg-iE0"/>
+                            <constraint firstItem="wpe-RA-Wne" firstAttribute="leading" secondItem="f5E-1T-aRL" secondAttribute="trailing" constant="5" id="ZXE-Ub-xRO"/>
+                            <constraint firstItem="wpe-RA-Wne" firstAttribute="centerY" secondItem="4b6-BP-hLM" secondAttribute="centerY" id="qvM-xi-FSk"/>
+                            <constraint firstItem="f5E-1T-aRL" firstAttribute="centerY" secondItem="4b6-BP-hLM" secondAttribute="centerY" id="z6j-lE-jCs"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4b6-BP-hLM" secondAttribute="trailing" id="68N-fz-aIQ"/>
+                <constraint firstAttribute="trailing" secondItem="iQm-CK-WzP" secondAttribute="trailing" id="7cX-hO-4Qd"/>
+                <constraint firstAttribute="bottom" secondItem="4b6-BP-hLM" secondAttribute="bottom" id="NZ7-0Z-DCz"/>
+                <constraint firstItem="iQm-CK-WzP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="a2W-gH-5Jb"/>
+                <constraint firstItem="4b6-BP-hLM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="as1-Sh-wds"/>
+                <constraint firstAttribute="bottom" secondItem="iQm-CK-WzP" secondAttribute="bottom" id="m1o-AN-4nw"/>
+                <constraint firstItem="iQm-CK-WzP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="v49-gW-HXF"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="212" height="229"/>
+            <connections>
+                <outlet property="movieFaved" destination="wpe-RA-Wne" id="tgK-ki-vrI"/>
+                <outlet property="movieName" destination="f5E-1T-aRL" id="YbE-kH-3O4"/>
+                <outlet property="moviePoster" destination="iQm-CK-WzP" id="BSI-MW-Oep"/>
+            </connections>
+            <point key="canvasLocation" x="-91" y="98"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="faved-icon" width="18" height="16"/>
+        <image name="movie-placeholder" width="600" height="850"/>
+        <image name="unfaved-icon" width="17" height="16"/>
+    </resources>
+</document>
