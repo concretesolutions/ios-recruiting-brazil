@@ -60,10 +60,10 @@ class MovieRequestHandler {
     
     func requestImages(listener: MovieRequestListener) {
         for (index, movie) in self.allMovies.enumerated() {
-            if movie.poster != nil {
+            if movie.poster != nil || movie.posterPath == nil {
                 continue
             }
-            if let url = URL(string: "\(self.imageRequestURL)/\(movie.posterPath)") {
+            if let url = URL(string: "\(self.imageRequestURL)/\(movie.posterPath!)") {
                 URLSession.shared.dataTask(with: url) { data, response, error in
                     if let data = data {
                         movie.poster = data

@@ -2,9 +2,10 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FavoriteMovie" representedClassName="FavoriteMovie" syncable="YES" codeGenerationType="class">
         <attribute name="attrId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="attrOverview" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="attrPoster" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="attrPosterPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="attrRelease" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="attrSynopsis" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="attrTitle" attributeType="String" syncable="YES"/>
         <relationship name="genres" optional="YES" toMany="YES" minCount="1" deletionRule="Deny" destinationEntity="Genre" syncable="YES"/>
     </entity>
@@ -13,6 +14,6 @@
     </entity>
     <elements>
         <element name="Genre" positionX="-63" positionY="-18" width="128" height="60"/>
-        <element name="FavoriteMovie" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="FavoriteMovie" positionX="-54" positionY="-9" width="128" height="150"/>
     </elements>
 </model>

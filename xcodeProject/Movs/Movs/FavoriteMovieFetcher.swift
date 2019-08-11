@@ -10,8 +10,17 @@ import Foundation
 import UIKit
 import CoreData
 
+protocol FavoriteMovieUpdateListener {
+    func onFavoriteMoviesUpdate()
+}
+
 class FavoriteMovieFetcher {
     static var managedContext: NSManagedObjectContext? = nil
+    
+    private static var updateListeners: Array<FavoriteMovieUpdateListener> = []
+    static func registerAsListener(_ updateListener: FavoriteMovieUpdateListener) {
+        self.updateListeners.append(updateListener)
+    }
     
     static func fetchAll() -> [FavoriteMovie] {
         let fetchRequest = NSFetchRequest<FavoriteMovie>(entityName: "FavoriteMovie")
@@ -46,10 +55,21 @@ class FavoriteMovieFetcher {
         let favoriteMovie = FavoriteMovie(entity: movieEntity, insertInto: managedContext)
         favoriteMovie.attrId = Int32(movieObject.id)
         favoriteMovie.attrTitle = movieObject.title
+        favoriteMovie.attrRelease = movieObject.release
+        favoriteMovie.attrOverview = movieObject.overview
         favoriteMovie.attrPoster = movieObject.poster
+        favoriteMovie.attrPosterPath = movieObject.posterPath
+        
+        for updateListener in updateListeners {
+            updateListener.onFavoriteMoviesUpdate()
+        }
     }
     
     static func delete(_ favoriteMovieObject: FavoriteMovie) {
         self.managedContext?.delete(favoriteMovieObject)
+        
+        for updateListener in updateListeners {
+            updateListener.onFavoriteMoviesUpdate()
+        }
     }
 }

@@ -11,14 +11,18 @@ import Foundation
 class MovieObject {
     let id: Int
     let title: String
-    var posterPath: String
+    let release: Date
+    let overview: String
+    let posterPath: String?
     var poster: Data? = nil
     var isFavorite: Bool
         
-    init(id: Int, title: String, posterPath: String) {
+    init(id: Int, title: String, posterPath: String?, release: Date, overview: String) {
         self.id = id
         self.title = title
         self.posterPath = posterPath
+        self.release = release
+        self.overview = overview
         self.isFavorite = FavoriteMovieFetcher.fetch(byId: self.id) != nil
     }
     
