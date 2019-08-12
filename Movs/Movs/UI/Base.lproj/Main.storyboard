@@ -1,24 +1,192 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xo6-PG-dSZ">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PopularMoviesListViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar clipsSubviews="YES" contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Jqj-Xe-B7c">
+                                <rect key="frame" x="0.0" y="140" width="414" height="56"/>
+                                <color key="barTintColor" name="AppColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VmW-va-csv">
+                                <rect key="frame" x="0.0" y="196" width="414" height="617"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="l0c-US-6je">
+                                    <size key="itemSize" width="160" height="209"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="12" minY="12" maxX="12" maxY="12"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="xGs-3e-3QB" customClass="MovieCollectionViewCell" customModule="Movs" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="12" width="160" height="209"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="209"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eGB-A8-Er1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="156"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="156" id="UrK-K9-3YO"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dro-jh-y5D">
+                                                    <rect key="frame" x="0.0" y="156" width="160" height="53"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                                    <color key="textColor" name="AppColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" name="FontColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="eGB-A8-Er1" secondAttribute="trailing" id="5Bb-xO-uGm"/>
+                                            <constraint firstItem="eGB-A8-Er1" firstAttribute="top" secondItem="xGs-3e-3QB" secondAttribute="top" id="HWz-WR-V0l"/>
+                                            <constraint firstItem="eGB-A8-Er1" firstAttribute="leading" secondItem="xGs-3e-3QB" secondAttribute="leading" id="LNT-z3-FVl"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dro-jh-y5D" secondAttribute="trailing" id="Lgd-fi-dWT"/>
+                                            <constraint firstAttribute="bottom" secondItem="Dro-jh-y5D" secondAttribute="bottom" id="Ohj-ZV-FoF"/>
+                                            <constraint firstItem="Dro-jh-y5D" firstAttribute="top" secondItem="eGB-A8-Er1" secondAttribute="bottom" id="Zo0-zx-GpF"/>
+                                            <constraint firstItem="Dro-jh-y5D" firstAttribute="leading" secondItem="xGs-3e-3QB" secondAttribute="leading" id="qJK-xq-Ico"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="77n-sX-3Sw"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="0QI-Sq-isT"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="VmW-va-csv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7y1-gC-LVx"/>
+                            <constraint firstItem="Jqj-Xe-B7c" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="GD8-bq-O7c"/>
+                            <constraint firstItem="Jqj-Xe-B7c" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MbP-Ih-Chl"/>
+                            <constraint firstItem="Jqj-Xe-B7c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YEc-Bh-FzT"/>
+                            <constraint firstItem="VmW-va-csv" firstAttribute="top" secondItem="Jqj-Xe-B7c" secondAttribute="bottom" id="qJd-Fa-Jdy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VmW-va-csv" secondAttribute="trailing" id="wCq-WD-qlX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VmW-va-csv" secondAttribute="bottom" id="x5i-JN-uSa"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Movies" id="uOJ-7t-q5J"/>
+                    <connections>
+                        <outlet property="collectionView" destination="VmW-va-csv" id="8es-0v-7wO"/>
+                        <outlet property="searchBar" destination="Jqj-Xe-B7c" id="0ym-Ib-Yhp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1952.1739130434785" y="138.61607142857142"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="VsL-YY-yvD">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Xo6-PG-dSZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7cG-mG-cqs">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="FontColor"/>
+                        <color key="barTintColor" name="AppColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="oix-IJ-ljb" kind="relationship" relationship="viewControllers" id="46e-tm-RnP"/>
+                        <segue destination="OdJ-3k-ZzX" kind="relationship" relationship="viewControllers" id="XU5-zW-u7A"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sr5-Rp-akA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ihw-Lp-A0n">
+            <objects>
+                <viewController id="tFG-GJ-abA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K4p-Zc-hcy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="IBe-IN-fDe"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5z8-A7-fiy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BMm-OR-hbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1952" y="871"/>
+        </scene>
+        <!--Movies-->
+        <scene sceneID="ddH-Ch-TFW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oix-IJ-ljb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="cmh-bj-LRu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LT0-Zf-h2H">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>
+                            <color key="textColor" red="0.1764705882352941" green="0.18823529411764706" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textShadowColor" red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jnu-1e-zwl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="shG-WU-zDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="138.61607142857142"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="Foj-xL-wzU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OdJ-3k-ZzX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_gray_icon" id="dIh-9i-rJy"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eeS-F5-cqQ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tFG-GJ-abA" kind="relationship" relationship="rootViewController" id="T6j-GI-8ll"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Og3-Dg-xda" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042" y="871"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite_gray_icon" width="17" height="16"/>
+        <image name="list_icon" width="18" height="10"/>
+        <namedColor name="AppColor">
+            <color red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="FontColor">
+            <color red="0.17647058823529413" green="0.18823529411764706" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
