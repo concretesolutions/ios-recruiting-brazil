@@ -63,6 +63,12 @@ class FavoriteMovieCRUD {
         favoriteMovie.attrPosterPath = movieObject.posterPath
         favoriteMovie.createdAt = Date()
         
+        for genreObject in movieObject.genres {
+            if let genre = GenreCRUD.fetch(byId: genreObject.id) {
+                favoriteMovie.addToGenres(genre)
+            }
+        }
+        
         if shouldTriggerListeners {
             for updateListener in updateListeners {
                 updateListener.onFavoriteMoviesInsert(movieObject)

@@ -24,18 +24,18 @@ class MovieDetailViewController: UIViewController, MovieUpdateListener {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .never
         
-        self.title = self.movieObject?.title ?? ""
-        
-        self.genresLabel.text = "Action; Adventure"
-        self.overviewLabel.text = self.movieObject?.overview ?? ""
-        
         guard let movie = self.movieObject else {
             return
         }
-        
         movie.registerAsListener(self)
         
-        self.releaseLabel.text = String(Calendar.current.component(.year, from: movie.release))
+        self.title = movie.title
+        self.genresLabel.text = movie.genresDescription()
+        self.overviewLabel.text = movie.overview
+        
+        if let release = movie.release {
+            self.releaseLabel.text = String(Calendar.current.component(.year, from: release))
+        }
         
         if let posterData = movie.poster {
             self.posterImage.image = UIImage(data: posterData)

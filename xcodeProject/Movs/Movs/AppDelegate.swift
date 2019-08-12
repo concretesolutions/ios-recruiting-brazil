@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FavoriteMovieCRUD.managedContext = self.persistentContainer.viewContext
         GenreCRUD.managedContext = self.persistentContainer.viewContext
+        MovieRequestHandler.shared.requestGenres()
         return true
     }
 

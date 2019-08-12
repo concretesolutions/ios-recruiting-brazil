@@ -16,4 +16,9 @@ class GenreObject {
         self.id = id
         self.name = name
     }
+    
+    init(from genre: Genre) {
+        self.id = Int(genre.attrId)
+        self.name = genre.attrName!
+    }
 }

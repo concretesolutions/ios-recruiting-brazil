@@ -17,6 +17,7 @@ class MovieParser {
         let poster_path: String?
         let release_date: String?
         let overview: String?
+        let genre_ids: Array<Int>?
     }
     class DecodableMovies: Decodable {
         let results: Array<DecodableMovie>
@@ -33,7 +34,16 @@ class MovieParser {
             for decMovie in decMovies.results {
                 let overview = decMovie.overview ?? ""
                 if let release = releaseDateFormatter.date(from: decMovie.release_date ?? "") {
-                    movies.append(MovieObject(id: decMovie.id, title: decMovie.title, posterPath: decMovie.poster_path, release: release, overview: overview))
+                    let movieObject = MovieObject(id: decMovie.id, title: decMovie.title, posterPath: decMovie.poster_path, release: release, overview: overview)
+                    
+                    for genreId in decMovie.genre_ids ?? [] {
+                        if let genre = GenreCRUD.fetch(byId: genreId) {
+                            movieObject.addGenre(GenreObject(from: genre))
+                        }
+                    }
+                    
+                    movies.append(movieObject)
+                    
                 } else {
                     print("Invalid date for \(decMovie.id): \(decMovie.release_date ?? "nil value")")
                 }

@@ -33,16 +33,7 @@ class FavoriteMoviesTableViewController: UITableViewController, FavoriteMovieUpd
     
     func getMoviesData(shouldReloadData: Bool) {
         self.favoriteMoviesData = FavoriteMovieCRUD.fetchAll().compactMap { favoriteMovie -> MovieObject? in
-            if let title = favoriteMovie.attrTitle,
-                let release = favoriteMovie.attrRelease,
-                let overview = favoriteMovie.attrOverview
-            {
-                let movieObject = MovieObject(id: Int(favoriteMovie.attrId), title: title, posterPath: favoriteMovie.attrPosterPath, release: release, overview: overview)
-                movieObject.poster = favoriteMovie.attrPoster
-                return movieObject
-            } else {
-                return nil
-            }
+            return MovieObject(from: favoriteMovie)
         }
         if shouldReloadData {
             self.tableView.reloadData()

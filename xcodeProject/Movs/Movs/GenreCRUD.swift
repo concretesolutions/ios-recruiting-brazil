@@ -30,8 +30,8 @@ class GenreCRUD {
         
         if self.fetch(byId: genreObject.id) == nil {
             let genre = Genre(entity: genreEntity, insertInto: managedContext)
-            favoriteMovie.attrId = Int32(genreObject.id)
-            favoriteMovie.attrName = genreObject.name
+            genre.attrId = Int32(genreObject.id)
+            genre.attrName = genreObject.name
         }
     }
 }

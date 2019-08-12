@@ -51,7 +51,11 @@ class FavoriteMoviesTableViewCell: UITableViewCell {
             }
             
             self.titleLabel.text = movie.title
-            self.releaseLabel.text = String(Calendar.current.component(.year, from: movie.release))
+            
+            if let release = movie.release {
+                self.releaseLabel.text = String(Calendar.current.component(.year, from: release))
+            }
+            
             self.overviewLabel.text = movie.overview
             if let posterData = movie.poster {
                 self.posterImage.image = UIImage(data: posterData)
