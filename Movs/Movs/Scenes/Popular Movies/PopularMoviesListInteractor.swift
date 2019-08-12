@@ -13,7 +13,7 @@
 import UIKit
 
 protocol PopularMoviesListBusinessLogic {
-	func doSomething(request: PopularMoviesList.Something.Request)
+	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request)
 }
 
 protocol PopularMoviesListDataStore {
@@ -26,14 +26,14 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 	var worker: PopularMoviesListWorker?
 	//var name: String = ""
 	
-	// MARK: Do something
+	// MARK: - Get Popular Movies
 	
-	func doSomething(request: PopularMoviesList.Something.Request) {
+	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request) {
 		
 //		worker = PopularMoviesListWorker()
 //		worker?.doSomeWork()
 		
-		let response = PopularMoviesList.Something.Response()
-		presenter?.presentSomething(response: response)
+		let response = PopularMoviesList.GetPopularMovies.Response()
+		presenter?.presentPopularMovies(response: response)
 	}
 }

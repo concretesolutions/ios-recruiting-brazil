@@ -37,6 +37,10 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="12" minY="12" maxX="12" maxY="12"/>
                                 </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="WIH-c0-8zq">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="617"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="xGs-3e-3QB" customClass="MovieCollectionViewCell" customModule="Movs" customModuleProvider="target">
                                         <rect key="frame" x="12" y="12" width="160" height="209"/>
@@ -69,6 +73,10 @@
                                             <constraint firstItem="Dro-jh-y5D" firstAttribute="top" secondItem="eGB-A8-Er1" secondAttribute="bottom" id="Zo0-zx-GpF"/>
                                             <constraint firstItem="Dro-jh-y5D" firstAttribute="leading" secondItem="xGs-3e-3QB" secondAttribute="leading" id="qJK-xq-Ico"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="posterImageView" destination="eGB-A8-Er1" id="QdF-j3-DKV"/>
+                                            <outlet property="titleLabel" destination="Dro-jh-y5D" id="0KQ-xW-UDo"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -91,6 +99,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="uOJ-7t-q5J"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="WIH-c0-8zq" id="Ous-Nn-pbJ"/>
                         <outlet property="collectionView" destination="VmW-va-csv" id="8es-0v-7wO"/>
                         <outlet property="searchBar" destination="Jqj-Xe-B7c" id="0ym-Ib-Yhp"/>
                     </connections>
@@ -105,6 +114,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Xo6-PG-dSZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7cG-mG-cqs">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="FontColor"/>
                         <color key="barTintColor" name="AppColor"/>

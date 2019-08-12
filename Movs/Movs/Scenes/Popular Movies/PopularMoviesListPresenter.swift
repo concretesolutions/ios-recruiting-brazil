@@ -13,7 +13,7 @@
 import UIKit
 
 protocol PopularMoviesListPresentationLogic {
-	func presentSomething(response: PopularMoviesList.Something.Response)
+	func presentPopularMovies(response: PopularMoviesList.GetPopularMovies.Response)
 }
 
 class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
@@ -22,9 +22,9 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 	
 	// MARK: Do something
 	
-	func presentSomething(response: PopularMoviesList.Something.Response) {
+	func presentPopularMovies(response: PopularMoviesList.GetPopularMovies.Response) {
 		
-		let viewModel = PopularMoviesList.Something.ViewModel()
-		viewController?.displaySomething(viewModel: viewModel)
+		let viewModel = PopularMoviesList.GetPopularMovies.ViewModel()
+		viewController?.displayPopularMovies(viewModel: viewModel)
 	}
 }

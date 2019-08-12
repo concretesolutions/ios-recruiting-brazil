@@ -13,7 +13,7 @@
 import UIKit
 
 protocol PopularMoviesListDisplayLogic: class {
-	func displaySomething(viewModel: PopularMoviesList.Something.ViewModel)
+	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel)
 }
 
 class PopularMoviesListViewController: UIViewController, PopularMoviesListDisplayLogic {
@@ -74,39 +74,49 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 		
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		
-		doSomething()
+		getPopularMovies()
 	}
 	
-	// MARK: Do something
+	// MARK: - Outlets & Vars
 	
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	let cellIdentifier = "MovieCell"
+	var movies:[Movie] = []
+	var nextPage = 1
 	
-	func doSomething() {
+	// MARK: - Get Popular Movies
+	
+	func getPopularMovies() {
 		
-		let request = PopularMoviesList.Something.Request()
-		interactor?.doSomething(request: request)
+		let request = PopularMoviesList.GetPopularMovies.Request()
+		interactor?.getPopularMovies(request: request)
 	}
 	
-	func displaySomething(viewModel: PopularMoviesList.Something.ViewModel) {
+	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel) {
 		
-		//nameTextField.text = viewModel.name
 	}
 }
 
 extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 1
+		return movies.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
+		let movie = movies[indexPath.row]
 		
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MovieCollectionViewCell
+		if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MovieCollectionViewCell {
+			
+			cell.config(withMovie: movie)
+			
+			return cell
+		}
 		
-		return cell
+		return UICollectionViewCell()
 	}
 }

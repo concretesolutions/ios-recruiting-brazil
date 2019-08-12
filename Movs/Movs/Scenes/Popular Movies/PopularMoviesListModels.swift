@@ -14,9 +14,9 @@ import UIKit
 
 enum PopularMoviesList {
 	
-	// MARK: Use cases
+	// MARK: Get popular movies
 	
-	enum Something {
+	enum GetPopularMovies {
 		
 		struct Request {
 			
