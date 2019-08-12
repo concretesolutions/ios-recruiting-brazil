@@ -23,9 +23,9 @@ class FavoriteMoviesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        self.navigationItem.searchController = searchController
+        //let searchController = UISearchController(searchResultsController: nil)
+        //searchController.searchResultsUpdater = self
+        //self.navigationItem.searchController = searchController
         
         self.getMoviesData(shouldReloadData: false)
         FavoriteMovieCRUD.registerAsListener(self)

@@ -59,13 +59,9 @@ class MovieObject {
     }
     
     func findIndex(in array: Array<MovieObject>) -> Int? {
-        do {
-            return array.firstIndex(where: { cursor -> Bool in
-                return cursor.id == self.id
-            })
-        } catch _ {
-            return nil
-        }
+        return array.firstIndex(where: { cursor -> Bool in
+            return cursor.id == self.id
+        })
     }
     
     func addGenre(_ genreObject: GenreObject) {

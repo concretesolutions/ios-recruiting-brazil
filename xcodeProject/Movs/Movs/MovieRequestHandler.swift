@@ -15,43 +15,65 @@ enum RequestModifier {
 }
 
 protocol MovieRequestListener {
-    func onRequestFromScrollFinished(_ fetchedMovies: Array<MovieObject>)
+    func onMoviesRequestFinished(_ fetchedMovies: Array<MovieObject>)
+    func onMoviesRequestFinished(_ fetchedMovies: Array<MovieObject>, withSearchTerm searchTerm: String)
     func onImageRequestFinished(for movieObject: MovieObject)
 }
 
 class MovieRequestHandler {
     static let shared = MovieRequestHandler()
     
+    private var searchTerm = ""
+    static func createSearchInstance(forTerm searchTerm: String) -> MovieRequestHandler {
+        let searchInstance = MovieRequestHandler()
+        searchInstance.searchTerm = searchTerm
+        return searchInstance
+    }
+    
     private let tmdbApiKey = "4bd981f7a4be201da0f68bb309a6bc59"
     
     private let movieRequestURL = "https://api.themoviedb.org/3/movie/popular"
+    private let searchRequestURL = "https://api.themoviedb.org/3/search/movie"
     private let imageRequestURL = "https://image.tmdb.org/t/p/w500"
     private let genreRequestURL = "https://api.themoviedb.org/3/genre/list"
     
-    var currentPage = 1
+    var currentPage = 0
     var isRequestingFromScroll = false
     
-    //func requestMovies(with requestModifier: RequestModifier? = nil) {
-        //let url = self.buildGETURL(from: self.movieRequestURL)
-    //}
-    
-    func requestMoviesFromScroll(listener: MovieRequestListener) {
+    func requestMovies(listener: MovieRequestListener) {
         if self.isRequestingFromScroll {
             return
         }
         self.isRequestingFromScroll = true
         
         self.currentPage += 1
-        let parameters = [
-            "page": String(self.currentPage)
-        ]
-        if let url = self.buildGETURL(from: self.movieRequestURL, withParameters: parameters) {
-            URLSession.shared.dataTask(with: url) { data, resposnse, error in
+        
+        let url: URL?
+        if self.searchTerm.isEmpty {
+            let parameters = [
+                "page": String(self.currentPage)
+            ]
+            url = self.buildGETURL(from: self.movieRequestURL, withParameters: parameters)
+        } else {
+            let parameters = [
+                "page": String(self.currentPage),
+                "query": searchTerm.replacingOccurrences(of: " ", with: "+").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            ]
+            url = self.buildGETURL(from: self.searchRequestURL, withParameters: parameters)
+        }
+        
+        if url != nil {
+            URLSession.shared.dataTask(with: url!) { data, resposnse, error in
                 self.isRequestingFromScroll = false
                 if let data = data {
                     let movies = MovieParser.parseAll(from: data)
-                    listener.onRequestFromScrollFinished(movies)
                     self.requestImages(for: movies, listener: listener)
+                    
+                    if self.searchTerm.isEmpty {
+                        listener.onMoviesRequestFinished(movies)
+                    } else {
+                        listener.onMoviesRequestFinished(movies, withSearchTerm: self.searchTerm)
+                    }
                 }
             }.resume()
         }
