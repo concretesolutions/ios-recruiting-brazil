@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum RequestModifier {
     case SEARCH
@@ -38,13 +39,13 @@ class MovieRequestHandler {
     private let genreRequestURL = "https://api.themoviedb.org/3/genre/list"
     
     var currentPage = 0
-    var isRequestingFromScroll = false
+    var isRequesting = false
     
     func requestMovies(listener: MovieRequestListener) {
-        if self.isRequestingFromScroll {
+        if self.isRequesting {
             return
         }
-        self.isRequestingFromScroll = true
+        self.isRequesting = true
         
         self.currentPage += 1
         
@@ -64,7 +65,18 @@ class MovieRequestHandler {
         
         if url != nil {
             URLSession.shared.dataTask(with: url!) { data, resposnse, error in
-                self.isRequestingFromScroll = false
+                self.isRequesting = false
+                if error != nil {
+                    let alert = UIAlertController(title: "Network error",
+                                                  message: "An error occoured while fetching movies data. Please check your network status and try again.",
+                                                  preferredStyle: .alert)
+                    DispatchQueue.main.async {
+                        if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+                            alert.show(rootVC, sender: self)
+                        }
+                    }
+                    print(error!.localizedDescription)
+                }
                 if let data = data {
                     let movies = MovieParser.parseAll(from: data)
                     self.requestImages(for: movies, listener: listener)

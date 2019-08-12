@@ -35,8 +35,8 @@ class MoviesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.searchController.searchResultsUpdater = self
-        //self.navigationItem.searchController = self.searchController
+        self.searchController.searchResultsUpdater = self
+        self.navigationItem.searchController = self.searchController
         
         let layout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = layout
@@ -142,6 +142,7 @@ extension MoviesCollectionViewController {
             } else {
                 MovieRequestHandler.shared.requestMovies(listener: self)
             }
+            self.collectionView.reloadSections([1])
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -161,20 +162,35 @@ extension MoviesCollectionViewController {
 // DataSource
 extension MoviesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.visibleMovies().count
+        switch section {
+        case 0:
+            return max(self.visibleMovies().count, 1)
+        case 1:
+            return MovieRequestHandler.shared.isRequesting ? 1 : 0
+        default:
+            return 1
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionViewCell else {
-            return UICollectionViewCell()
+        if indexPath.section == 0 {
+            if self.visibleMovies().count == 0 {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: "NoDataCell", for: indexPath)
+            } else {
+                guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionViewCell else {
+                    return UICollectionViewCell()
+                }
+                
+                movieCell.movie = self.visibleMovies()[indexPath.item]
+                return movieCell
+            }
+        } else if indexPath.section == 1 {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingCell", for: indexPath)
         }
-        
-        movieCell.movie = self.visibleMovies()[indexPath.item]
-        return movieCell
+        return UICollectionViewCell()
     }
     
-    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
 }
