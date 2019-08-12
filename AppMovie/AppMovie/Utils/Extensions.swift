@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import Kingfisher
 
 var cache = [String: UIImage]()
 
-extension UIImageView {
+    extension UIImageView {
+        func download(image url: String) {
+            guard let imageURL = URL(string:url) else {
+                return
+            }
+            self.kf.setImage(with: ImageResource(downloadURL: imageURL))
+        }
+    }
     
-    
-}
+
 
 extension UIImage{
     /** Cria uma imagem flat num tamanho específico.*/

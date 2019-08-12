@@ -95,15 +95,15 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate {
     }
     
     func didSelect(movie: Result) {
-        print("DidSelect")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController else {
+            fatalError("should be a controller of type CharacterViewController")
+        }
+        
+        controller.movieCell = movie
+        navigationController?.pushViewController(controller, animated: true)
     }
     
-    //MARK: _ HELPER FUNCTIONS
-    //    func showDetailViewController(withMovie movie: Result) {
-    //        let controller = MovieDetailViewController()
-    //        controller.movie = movie
-    //        self.navigationController?.pushViewController(controller, animated: true)
-    //    }
     
     func loadMovies(){
         print("LoadMovies")
