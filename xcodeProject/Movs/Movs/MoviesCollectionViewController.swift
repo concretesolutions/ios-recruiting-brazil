@@ -9,8 +9,7 @@
 import UIKit
 
 
-class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieRequestListener {
-    
+class MoviesCollectionViewController: UICollectionViewController {
     private let movieSelectionSegue = "MovieSelectionSegue"
     
     private let cellAspectRatio: CGFloat = 1.5
@@ -25,8 +24,19 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
     
     var moviesData: Array<MovieObject> = []
     
+    var searchApplied = false
+    var filteredMovieData: Array<MovieObject> = []
+    func visibleMovies() -> Array<MovieObject> {
+        return self.searchApplied ? self.filteredMovieData : self.moviesData
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        self.navigationItem.searchController = searchController
+        
         let layout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = layout
         self.updateLayout(layout)
@@ -37,21 +47,6 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
         super.viewDidLayoutSubviews()
         if let collectionViewLayout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             self.updateLayout(collectionViewLayout)
-        }
-    }
-    
-    func onRequestFromScrollFinished(_ fetchedMovies: Array<MovieObject>) {
-        self.moviesData.append(contentsOf: fetchedMovies)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-    
-    func onImageRequestFinished(for movieObject: MovieObject) {
-        if let movieIndex = movieObject.findIndex(in: self.moviesData) {
-            DispatchQueue.main.async {
-                self.collectionView.reloadItems(at: [IndexPath(item: movieIndex, section: 0)])
-            }
         }
     }
     
@@ -79,8 +74,43 @@ class MoviesCollectionViewController: UICollectionViewController, UICollectionVi
     }
 }
 
-//DelegateFlowLayout
-extension MoviesCollectionViewController {
+extension MoviesCollectionViewController: MovieRequestListener {
+    func onRequestFromScrollFinished(_ fetchedMovies: Array<MovieObject>) {
+        self.moviesData.append(contentsOf: fetchedMovies)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func onImageRequestFinished(for movieObject: MovieObject) {
+        if let movieIndex = movieObject.findIndex(in: self.moviesData) {
+            DispatchQueue.main.async {
+                self.collectionView.reloadItems(at: [IndexPath(item: movieIndex, section: 0)])
+            }
+        }
+    }
+}
+
+extension MoviesCollectionViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchTerm = searchController.searchBar.text, !searchTerm.isEmpty {
+            self.searchApplied = true
+            self.filteredMovieData = self.moviesData.filter { movieObject -> Bool in
+                return movieObject.title.lowercased().contains(searchTerm.lowercased())
+            }
+        }
+        else {
+            self.searchApplied = false
+            self.filteredMovieData = []
+        }
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+}
+
+
+extension MoviesCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return self.movieCellSize
     }
@@ -89,7 +119,7 @@ extension MoviesCollectionViewController {
 //Delegate
 extension MoviesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (indexPath.item >= self.moviesData.count - self.infiteScrollReloadMargin) {
+        if (!self.searchApplied && indexPath.item >= self.visibleMovies().count - self.infiteScrollReloadMargin) {
             MovieRequestHandler.shared.requestMoviesFromScroll(listener: self)
         }
     }
@@ -110,7 +140,7 @@ extension MoviesCollectionViewController {
 // DataSource
 extension MoviesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.moviesData.count
+        return self.visibleMovies().count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,7 +148,7 @@ extension MoviesCollectionViewController {
             return UICollectionViewCell()
         }
         
-        movieCell.movie = self.moviesData[indexPath.item]
+        movieCell.movie = self.visibleMovies()[indexPath.item]
         return movieCell
     }
     

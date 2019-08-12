@@ -9,26 +9,26 @@
 import Foundation
 import UIKit
 
-class FavoriteMoviesTableViewController: UITableViewController, FavoriteMovieUpdateListener {
+class FavoriteMoviesTableViewController: UITableViewController {
     private let favoriteMovieSelectionSegue = "FavoriteMovieSelectionSegue"
     
     var favoriteMoviesData: Array<MovieObject> = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.getMoviesData(shouldReloadData: false)
-        FavoriteMovieCRUD.registerAsListener(self)
+    var searchApplied = false
+    var filteredMovieData: Array<MovieObject> = []
+    func visibleMovies() -> Array<MovieObject> {
+        return self.searchApplied ? self.filteredMovieData : self.favoriteMoviesData
     }
     
-    func onFavoriteMoviesInsert(_ movieObject: MovieObject) {
-        self.favoriteMoviesData.append(movieObject)
-        self.tableView.reloadData()
-    }
-    func onFavoriteMoviesDelete(_ movieObject: MovieObject) {
-        if let unfavoritedMovieIndex = movieObject.findIndex(in: self.favoriteMoviesData) {
-            self.favoriteMoviesData.remove(at: unfavoritedMovieIndex)
-            self.tableView.reloadData()
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        self.navigationItem.searchController = searchController
+        
+        self.getMoviesData(shouldReloadData: false)
+        FavoriteMovieCRUD.registerAsListener(self)
     }
     
     func getMoviesData(shouldReloadData: Bool) {
@@ -38,6 +38,36 @@ class FavoriteMoviesTableViewController: UITableViewController, FavoriteMovieUpd
         if shouldReloadData {
             self.tableView.reloadData()
         }
+    }
+}
+
+extension FavoriteMoviesTableViewController: FavoriteMovieUpdateListener {
+    func onFavoriteMoviesInsert(_ movieObject: MovieObject) {
+        self.favoriteMoviesData.append(movieObject)
+        self.tableView.reloadData()
+    }
+    
+    func onFavoriteMoviesDelete(_ movieObject: MovieObject) {
+        if let unfavoritedMovieIndex = movieObject.findIndex(in: self.favoriteMoviesData) {
+            self.favoriteMoviesData.remove(at: unfavoritedMovieIndex)
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension FavoriteMoviesTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchTerm = searchController.searchBar.text, !searchTerm.isEmpty {
+            self.searchApplied = true
+            self.filteredMovieData = self.favoriteMoviesData.filter { movieObject -> Bool in
+                return movieObject.title.lowercased().contains(searchTerm.lowercased())
+            }
+        }
+        else {
+            self.searchApplied = false
+            self.filteredMovieData = []
+        }
+        self.tableView.reloadData()
     }
 }
 
@@ -76,14 +106,14 @@ extension FavoriteMoviesTableViewController {
 //DataSource
 extension FavoriteMoviesTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.favoriteMoviesData.count
+        return self.visibleMovies().count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let favoriteMovieCell = tableView.dequeueReusableCell(withIdentifier: "FavoriteMoviesTableViewCell", for: indexPath) as? FavoriteMoviesTableViewCell else {
             return UITableViewCell()
         }
-        favoriteMovieCell.movie = favoriteMoviesData[indexPath.item]
+        favoriteMovieCell.movie = visibleMovies()[indexPath.item]
         return favoriteMovieCell
     }
     
