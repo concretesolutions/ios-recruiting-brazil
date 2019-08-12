@@ -23,8 +23,10 @@ class MovieRequestHandler {
     static let shared = MovieRequestHandler()
     
     private let tmdbApiKey = "4bd981f7a4be201da0f68bb309a6bc59"
+    
     private let movieRequestURL = "https://api.themoviedb.org/3/movie/popular"
     private let imageRequestURL = "https://image.tmdb.org/t/p/w500"
+    private let genreRequestURL = "https://api.themoviedb.org/3/genre/list"
     
     var currentPage = 1
     var isRequestingFromScroll = false
@@ -68,6 +70,18 @@ class MovieRequestHandler {
                     }
                 }.resume()
             }
+        }
+    }
+    
+    func requestGenres() {
+        if let url = self.buildGETURL(from: self.genreRequestURL) {
+            URLSession.shared.dataTask(with: url) { data, resposnse, error in
+                if let data = data {
+                    for genre in GenreParser.parseAll(from: data) {
+                        GenreCRUD.add(from: genre)
+                    }
+                }
+            }.resume()
         }
     }
     

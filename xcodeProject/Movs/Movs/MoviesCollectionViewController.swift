@@ -11,6 +11,8 @@ import UIKit
 
 class MoviesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MovieRequestListener {
     
+    private let movieSelectionSegue = "MovieSelectionSegue"
+    
     private let cellAspectRatio: CGFloat = 1.5
     private let maxCellsPerRow : CGFloat = 4.0
     private let cellMinWidth: CGFloat = 140.0
@@ -89,6 +91,18 @@ extension MoviesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (indexPath.item >= self.moviesData.count - self.infiteScrollReloadMargin) {
             MovieRequestHandler.shared.requestMoviesFromScroll(listener: self)
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == movieSelectionSegue {
+            if let movieDetailVC = segue.destination as? MovieDetailViewController, let movieObject = sender as? MovieObject {
+                movieDetailVC.movieObject = movieObject
+            }
+        }
+    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let movieCell = self.collectionView(collectionView, cellForItemAt: indexPath) as? MovieCollectionViewCell {
+            performSegue(withIdentifier: movieSelectionSegue, sender: movieCell.movie)
         }
     }
 }

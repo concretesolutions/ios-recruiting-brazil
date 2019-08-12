@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class FavoriteMoviesTableViewController: UITableViewController, FavoriteMovieUpdateListener {
+    private let favoriteMovieSelectionSegue = "FavoriteMovieSelectionSegue"
+    
     var favoriteMoviesData: Array<MovieObject> = []
     
     override func viewDidLoad() {
@@ -63,6 +65,19 @@ extension FavoriteMoviesTableViewController {
             if let movieCell = self.tableView(tableView, cellForRowAt: indexPath) as? FavoriteMoviesTableViewCell {
                 movieCell.movie?.removeFromFavorites()
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == favoriteMovieSelectionSegue {
+            if let movieDetailVC = segue.destination as? MovieDetailViewController, let movieObject = sender as? MovieObject {
+                movieDetailVC.movieObject = movieObject
+            }
+        }
+    }    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let movieCell = self.tableView(tableView, cellForRowAt: indexPath) as? FavoriteMoviesTableViewCell {
+            performSegue(withIdentifier: favoriteMovieSelectionSegue, sender: movieCell.movie)
         }
     }
 }

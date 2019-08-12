@@ -11,10 +11,11 @@
         <relationship name="genres" optional="YES" toMany="YES" minCount="1" deletionRule="Deny" destinationEntity="Genre" syncable="YES"/>
     </entity>
     <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
-        <attribute name="attrName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="attrId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="attrName" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Genre" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="Genre" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="FavoriteMovie" positionX="-54" positionY="-9" width="128" height="165"/>
     </elements>
 </model>
