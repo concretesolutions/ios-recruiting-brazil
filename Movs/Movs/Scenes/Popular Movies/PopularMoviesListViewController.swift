@@ -91,7 +91,7 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	
 	func getPopularMovies() {
 		
-		let request = PopularMoviesList.GetPopularMovies.Request()
+		let request = PopularMoviesList.GetPopularMovies.Request(page: nextPage)
 		interactor?.getPopularMovies(request: request)
 	}
 	

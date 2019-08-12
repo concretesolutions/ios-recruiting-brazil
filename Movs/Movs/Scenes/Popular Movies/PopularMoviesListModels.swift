@@ -19,15 +19,23 @@ enum PopularMoviesList {
 	enum GetPopularMovies {
 		
 		struct Request {
-			
+			let page:Int
 		}
 		
 		struct Response {
-			
+			let result:PopularMoviesResult?
+			let error:Error?
 		}
 		
 		struct ViewModel {
-			
+			let movies:[MovieView]?
+			let error:Error?
 		}
 	}
+}
+
+struct MovieView {
+	
+	let title		:String
+	let posterUrl	:String
 }

@@ -24,16 +24,25 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 	
 	var presenter: PopularMoviesListPresentationLogic?
 	var worker: PopularMoviesListWorker?
-	//var name: String = ""
 	
 	// MARK: - Get Popular Movies
 	
 	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request) {
 		
-//		worker = PopularMoviesListWorker()
-//		worker?.doSomeWork()
-		
-		let response = PopularMoviesList.GetPopularMovies.Response()
-		presenter?.presentPopularMovies(response: response)
+		worker = PopularMoviesListWorker(PopularMoviesNetworkWorker())
+		worker?.getPopularMovies(request.page, completion: { (result, error) in
+
+			var response:PopularMoviesList.GetPopularMovies.Response
+			
+			if error == nil {
+				
+				response = PopularMoviesList.GetPopularMovies.Response(result: result, error: nil)
+			}else{
+				
+				response = PopularMoviesList.GetPopularMovies.Response(result: nil, error: error)
+			}
+			
+			self.presenter?.presentPopularMovies(response: response)
+		})
 	}
 }

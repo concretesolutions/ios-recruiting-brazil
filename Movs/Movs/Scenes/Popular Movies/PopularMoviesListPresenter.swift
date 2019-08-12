@@ -20,11 +20,33 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 	
 	weak var viewController: PopularMoviesListDisplayLogic?
 	
-	// MARK: Do something
+	// MARK: - Get Popular Movies
 	
 	func presentPopularMovies(response: PopularMoviesList.GetPopularMovies.Response) {
 		
-		let viewModel = PopularMoviesList.GetPopularMovies.ViewModel()
+		var viewModel:PopularMoviesList.GetPopularMovies.ViewModel
+		
+		if response.error == nil {
+			
+			let moviesView = getMoviesView(response.result?.results ?? [])
+			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: moviesView, error: nil)
+		}else{
+			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: nil, error: response.error)
+		}
+	
 		viewController?.displayPopularMovies(viewModel: viewModel)
+	}
+	
+	private func getMoviesView(_ movies:[Movie]) -> [MovieView] {
+		
+		var moviesView:[MovieView] = []
+		
+		for movie in movies {
+			
+			let movieView = MovieView(title: movie.title ?? "", posterUrl: movie.poster ?? "")
+			moviesView.append(movieView)
+		}
+		
+		return moviesView
 	}
 }

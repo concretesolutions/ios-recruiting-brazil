@@ -10,11 +10,17 @@ import Foundation
 
 struct PopularMoviesResult: Codable, CustomStringConvertible {
 	
-	let page	    : Int?
-	let total_pages : Int?
-	let results		: [Movie]?
+	let page	    	: Int?
+	let total_pages 	: Int?
+	let results			: [Movie]?
 	
 	var description: String {
 		return "Page \(page ?? 0) of \(total_pages ?? 0) pages."
 	}
+}
+
+struct ResultError: Codable {
+	
+	let status_code		: Int?
+	let status_message 	: String?
 }

@@ -27,6 +27,7 @@
 		927F3E3323012229008446EC /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F3E3223012229008446EC /* Genre.swift */; };
 		927F3E352301241F008446EC /* PopularMoviesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F3E342301241F008446EC /* PopularMoviesResult.swift */; };
 		927F3E38230127B7008446EC /* UIImageView+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F3E37230127B7008446EC /* UIImageView+Network.swift */; };
+		927F3E3C23012E8D008446EC /* PopularMoviesNetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F3E3B23012E8D008446EC /* PopularMoviesNetworkWorker.swift */; };
 		999EB7005298E90AC7746357 /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFA66778329C2D27E71DC2D /* Pods_Movs.framework */; };
 		D3F3F3A1403785134B4FFA2C /* Pods_MovsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029D0AD562BC241CCB35D0C /* Pods_MovsTests.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,7 @@
 		927F3E3223012229008446EC /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		927F3E342301241F008446EC /* PopularMoviesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesResult.swift; sourceTree = "<group>"; };
 		927F3E37230127B7008446EC /* UIImageView+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Network.swift"; sourceTree = "<group>"; };
+		927F3E3B23012E8D008446EC /* PopularMoviesNetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesNetworkWorker.swift; sourceTree = "<group>"; };
 		9EFA66778329C2D27E71DC2D /* Pods_Movs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B33511FC3F76F35B6BF3FB5D /* Pods-MovsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovsTests/Pods-MovsTests.release.xcconfig"; sourceTree = "<group>"; };
 		BA56199024879119DCC9330E /* Pods-MovsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovsTests/Pods-MovsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		927F3E2E23011E6B008446EC /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				927F3E3B23012E8D008446EC /* PopularMoviesNetworkWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				921F219C230104D4007DE317 /* PopularMoviesListRouter.swift in Sources */,
 				927F3E2D230119A5008446EC /* APIKey.swift in Sources */,
 				921F216F2300E4F7007DE317 /* Movs.xcdatamodeld in Sources */,
+				927F3E3C23012E8D008446EC /* PopularMoviesNetworkWorker.swift in Sources */,
 				927F3E3323012229008446EC /* Genre.swift in Sources */,
 				927F3E38230127B7008446EC /* UIImageView+Network.swift in Sources */,
 				921F21A223010BB4007DE317 /* MovieCollectionViewCell.swift in Sources */,

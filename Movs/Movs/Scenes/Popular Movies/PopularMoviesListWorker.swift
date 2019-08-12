@@ -21,20 +21,22 @@ class PopularMoviesListWorker {
 		self.PopularMoviesListWorker = PopularMoviesListWorker
 	}
 	
-//	func getData(completion:@escaping(ReturnData?,Error?) -> Void) {
-//
-//		PopularMoviesListWorker.getData { (data: () throws -> ReturnData) in
-//
-//			do{
-//				let returnData = try data()
-//				completion(returnData,nil)
-//			}catch let error{
-//				completion(nil, error)
-//			}
-//		}
-//	}
+	func getPopularMovies(_ page:Int, completion:@escaping(PopularMoviesResult?,Error?) -> Void) {
+
+		PopularMoviesListWorker.getPopularMovies(page) { (movies: () throws -> PopularMoviesResult) in
+
+			do{
+				let movies = try movies()
+				
+				completion(movies,nil)
+			}catch let error{
+				
+				completion(nil, error)
+			}
+		}
+	}
 }
 
 protocol PopularMoviesListWorkerProtocol {
-//	func getData(completion:@escaping(() throws -> ReturnData) -> Void)
+	func getPopularMovies(_ page:Int, completion:@escaping(() throws -> PopularMoviesResult) -> Void)
 }

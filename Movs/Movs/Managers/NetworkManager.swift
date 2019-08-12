@@ -78,7 +78,6 @@ class NetworkManager {
         Alamofire.request(url).validate().responseJSON { response in
             
             NSLog("Requesting: \(url.urlRequest!)")
-            
             switch response.result {
             case .success:
                 let data = response.data
