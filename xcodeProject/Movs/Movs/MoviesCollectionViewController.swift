@@ -35,8 +35,8 @@ class MoviesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.searchController.searchResultsUpdater = self
-        self.navigationItem.searchController = self.searchController
+        //self.searchController.searchResultsUpdater = self
+        //self.navigationItem.searchController = self.searchController
         
         let layout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = layout
