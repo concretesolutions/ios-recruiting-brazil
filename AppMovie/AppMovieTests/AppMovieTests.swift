@@ -6,8 +6,21 @@
 //  Copyright © 2019 ely.assumpcao.ndiaye. All rights reserved.
 //
 
+import Quick
+import Nimble
 import XCTest
 @testable import AppMovie
+
+
+class FirstSpec: QuickSpec {
+    override func spec() {
+        describe("Describle First Spec Test") {
+            it("Should be true") {
+                expect(true).to(beTruthy())
+            }
+        }
+    }
+}
 
 class AppMovieTests: XCTestCase {
 

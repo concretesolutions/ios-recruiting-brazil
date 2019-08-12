@@ -31,25 +31,3 @@ struct Result: Codable {
     let overview: String?
     let release_date: String?
 }
-
-enum OriginalLanguage: String, Codable {
-    case da = "da"
-    case de = "de"
-    case ta = "ta"
-    case nl = "nl"
-    case sv = "sv"
-    case it = "it"
-    case zh = "zh"
-    case hi = "hi"
-    case ml = "ml"
-    case hr = "hr"
-    case no = "no"
-    case id = "id"
-    case tr = "tr"
-    case en = "en"
-    case fr = "fr"
-    case ja = "ja"
-    case ko = "ko"
-    case es = "es"
-    case tl = "tl"
-}
