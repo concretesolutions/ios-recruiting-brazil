@@ -26,47 +26,45 @@ class MovieDetailViewController: UIViewController {
     var dataMovie: String!
     var genero: String!
     
-    var movie: Result? {
-        didSet {}
-    }
-    
     var movieCell : Result?
-    
     
     var status: Bool!
     // geners: String
     
-    
     //MARK: -Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.title = "Movies"
         // Do any additional setup after loading the view.
         
-        titleMovies.text = movieCell?.title
-        dateMovies.text = movieCell?.release_date
-        descriptionTxt?.text = movieCell?.overview
-        configureGenersId()
-        genersTxt.text = genero
-        
-        titulo = movieCell?.title
-        descricao = movieCell?.overview
-        imagem = movieCell?.poster_path
-        dataMovie = movieCell?.release_date
-        
-        status = false
-        
-        detailImage.kf.indicatorType = .activity
-        //let stringImage = movie?.poster_path
-        guard let stringImage = movieCell?.poster_path else {return}
-        let Image = "\(URL_IMG)\(stringImage)" ?? ""
-        if let image = URL(string: Image){
-            detailImage.kf.indicatorType = .activity
-            detailImage.kf.setImage(with: image)
+        configureComponents()
+    }
+    
+    func configureComponents() {
+        guard let movieCell = self.movieCell else {
+            titleMovies.text = "Error on Movie"
+            navigationItem.title = "Error"
+            return
         }
         
-        //configureComponents()
+        titleMovies.text = movieCell.title
+        dateMovies.text = movieCell.release_date
+        descriptionTxt?.text = movieCell.overview!.isEmpty ? "No description" : movieCell.overview
+        configureGenersId()
+        genersTxt.text = genero
+
+        detailImage.kf.indicatorType = .activity
+        //let stringImage = movie?.poster_path
+        guard let stringImage = movieCell.poster_path else {return}
+        let Image = "\(URL_IMG)\(stringImage)" ?? ""
+        detailImage.download(image: Image )
+        
+        titulo = movieCell.title
+        descricao = movieCell.overview
+        imagem = movieCell.poster_path
+        dataMovie = movieCell.release_date
+        
+        status = false
     }
     
     func configureGenersId(){
