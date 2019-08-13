@@ -19,7 +19,7 @@ final class MovieSearchCollectionViewDataSource: NSObject, UICollectionViewDataS
     }
     
     private func registerCells(in collectionView: UICollectionView){
-        collectionView.register(cellType: MovieCell.self)
+        collectionView.register(cellType: CellMovie.self)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -27,8 +27,10 @@ final class MovieSearchCollectionViewDataSource: NSObject, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCell
-        cell.movie = movies[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(for: indexPath,
+                                                      cellType: CellMovie.self)
+        let movie = movies[indexPath.row]
+        cell.setup(movie: movie)
         return cell
     }
     
