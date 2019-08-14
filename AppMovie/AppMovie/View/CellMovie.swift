@@ -18,20 +18,6 @@ class  CellMovie: UICollectionViewCell, NibReusable {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteImage: UIImageView!
     
-    //    var movie: Result? {
-    //        didSet{
-    //            titleLabel.text = movie?.title
-    //            movieImage.kf.indicatorType = .activity
-    //            //let stringImage = movie?.poster_path
-    //            guard let stringImage = movie?.poster_path else {return}
-    //            let Image = "\(URL_IMG)\(stringImage)" ?? ""
-    //            if let image = URL(string: Image){
-    //                movieImage.kf.indicatorType = .activity
-    //                movieImage.kf.setImage(with: image)
-    //            }
-    //        }
-    //    }
-    
     // MARK: - Init
     func setup(movie: Result){
         titleLabel.text = movie.title
