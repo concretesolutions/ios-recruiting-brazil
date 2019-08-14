@@ -20,11 +20,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
 		titleLabel.text = ""
 	}
 	
-	func config(withMovie movie:Movie) {
+	func config(withMovie movie:MovieView) {
 		
 		titleLabel.text = movie.title ?? "-"
 		
-		if let posterUrl = movie.poster {
+		if let posterUrl = movie.posterUrl {
 			
 			let completePosterUrl = "\(imageUrl)\(posterUrl)"
 			posterImageView.setImage(withUrl: completePosterUrl)

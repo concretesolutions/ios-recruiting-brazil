@@ -11,12 +11,13 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 protocol PopularMoviesListDisplayLogic: class {
 	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel)
 }
 
-class PopularMoviesListViewController: UIViewController, PopularMoviesListDisplayLogic {
+class PopularMoviesListViewController: UIViewController, PopularMoviesListDisplayLogic, NVActivityIndicatorViewable {
 	
 	var interactor: PopularMoviesListBusinessLogic?
 	var router: (NSObjectProtocol & PopularMoviesListRoutingLogic & PopularMoviesListDataPassing)?
@@ -71,7 +72,6 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
-		
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		
 		getPopularMovies()
@@ -81,15 +81,17 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var collectionView: UICollectionView!
-	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	let cellIdentifier = "MovieCell"
-	var movies:[Movie] = []
+	var movies:[MovieView] = []
 	var nextPage = 1
 	
 	// MARK: - Get Popular Movies
 	
 	func getPopularMovies() {
+		
+		let size = CGSize(width: 30, height: 30)
+		startAnimating(size, message: "Fetching movies...", type: .ballRotateChase, fadeInAnimation: nil)
 		
 		let request = PopularMoviesList.GetPopularMovies.Request(page: nextPage)
 		interactor?.getPopularMovies(request: request)
@@ -97,6 +99,26 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	
 	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel) {
 		
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+			self.stopAnimating(nil)
+		}
+		
+		if viewModel.error == nil, let movies = viewModel.movies {
+			
+			nextPage += 1
+			self.movies += movies
+			
+			DispatchQueue.main.async {
+				self.collectionView.reloadData()
+			}
+		}else{
+			
+			let errorView = ErrorView(forView: collectionView, withMessage: "Um erro ocorreu. Por favor, tente novamente.")
+			
+			DispatchQueue.main.async {
+				self.collectionView.addSubview(errorView)
+			}
+		}
 	}
 }
 
@@ -112,8 +134,7 @@ extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectio
 		
 		if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MovieCollectionViewCell {
 			
-			cell.config(withMovie: movie)
-			
+			cell.config(withMovie: movie)			
 			return cell
 		}
 		

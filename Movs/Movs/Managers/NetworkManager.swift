@@ -11,7 +11,7 @@
 import Foundation
 import Alamofire
 
-public enum MovsRequests: URLRequestConvertible {
+enum MovsRequests: URLRequestConvertible {
 
     static let baseURLPath 				= "https://api.themoviedb.org"
     static let baseURI                  = "/3"
@@ -19,35 +19,35 @@ public enum MovsRequests: URLRequestConvertible {
 	
     case popularMovies(Int)
     
-    var method: HTTPMethod {
+    private var method: HTTPMethod {
         switch self {
         case .popularMovies:
             return .get
         }
     }
     
-    var baseURL: String{
+    private var baseURL: String{
         switch self{
         case .popularMovies:
             return MovsRequests.completeURL
         }
     }
     
-    var path: String {
+    private var path: String {
         switch self {
         case .popularMovies:
             return "/movie/popular"
         }
     }
     
-    var parameters: [String: Any]? {
+    private var parameters: [String: Any]? {
         switch self {
         case .popularMovies(let page):
             return ["api_key": apiKey,"language":"en-US","page":page]
         }
     }
     
-    var headers:HTTPHeaders {
+    private var headers:HTTPHeaders {
         switch self {
         case .popularMovies:
             return ["Content-Type":"application/x-www-form-urlencoded"]
@@ -71,7 +71,7 @@ public enum MovsRequests: URLRequestConvertible {
     }
 }
 
-class NetworkManager {
+final class NetworkManager {
     
     static func request(withURL url:URLRequestConvertible, callback:@escaping (Data?,DataResponse<Any>?,Error?)->Void) {
         

@@ -36,6 +36,6 @@ enum PopularMoviesList {
 
 struct MovieView {
 	
-	let title		:String
-	let posterUrl	:String
+	let title		:String?
+	let posterUrl	:String?
 }

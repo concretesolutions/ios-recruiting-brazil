@@ -43,7 +43,7 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 		
 		for movie in movies {
 			
-			let movieView = MovieView(title: movie.title ?? "", posterUrl: movie.poster ?? "")
+			let movieView = MovieView(title: movie.title, posterUrl: movie.poster)
 			moviesView.append(movieView)
 		}
 		
