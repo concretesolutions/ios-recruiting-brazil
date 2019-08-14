@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieSearchViewController: UIViewController, MovieSelectionDelegate {
+class MovieSearchViewController: UIViewController, MovieSelectionDelegate, MoviePagingDelegate {
    
     //Mark: - Properties
     @IBOutlet weak var movieSearch: UISearchBar!
@@ -31,17 +31,7 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate {
         super.viewDidLoad()
         
         configureViewComponents()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         api()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "toDetail"){
-            let vc : MovieDetailViewController = segue.destination as! MovieDetailViewController
-            vc.movieCell = sender as? Result
-        }
     }
     
     func configureViewComponents(){
@@ -75,7 +65,7 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate {
     }
     
     func setupCollectionView(with movies: [Result]){
-        collectionViewDataSource = MovieSearchCollectionViewDataSource(movies: movies, collectionView: movieCollection)
+        collectionViewDataSource = MovieSearchCollectionViewDataSource(movies: movies, collectionView: movieCollection, delegate: self)
         collectionViewDelegate = MovieSearchCollectionViewDelegate(movies: movies, delegate: self)
         
         movieCollection.dataSource = collectionViewDataSource
@@ -85,10 +75,11 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate {
     
     // MARK: - API
     func api(){
-        MovieServices.instance.getMovies(page: pageCount){ movies in
+        MovieServices.instance.getMovies(page: pageCount){ [weak self] movies in
             DispatchQueue.main.async {
+                guard let self = self else { return }
                 self.movie = movies
-                self.setupCollectionView(with: movies)
+                self.setupCollectionView(with: self.movie)
                 //self.movieCollection.reloadData()
             }
         }
@@ -104,16 +95,17 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    
-    func loadMovies(){
+    func loadMovies() {
         print("LoadMovies")
+        pageCount += 1
         print(pageCount)
-        MovieServices.instance.getMovies(page: pageCount){ movies in
+        MovieServices.instance.getMovies(page: pageCount){ [weak self] movies in
+            guard let self = self else { return }
             self.isLoading = false
             print(movies)
             DispatchQueue.main.async {
                 self.movie += movies
-                self.movieCollection.reloadData()
+                self.setupCollectionView(with: self.movie)
             }
         }
     }
