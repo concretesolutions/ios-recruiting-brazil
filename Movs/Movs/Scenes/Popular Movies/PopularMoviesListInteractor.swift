@@ -14,16 +14,20 @@ import UIKit
 
 protocol PopularMoviesListBusinessLogic {
 	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request)
+	func storeMovieId(request: PopularMoviesList.ShowMovieDetail.Request)
 }
 
 protocol PopularMoviesListDataStore {
-	//var name: String { get set }
+	var movie: Movie? { get set }
 }
 
 class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMoviesListDataStore {
 	
 	var presenter: PopularMoviesListPresentationLogic?
 	var worker: PopularMoviesListWorker?
+	var movie: Movie?
+	
+	private var movies:[Movie] = []
 	
 	// MARK: - Get Popular Movies
 	
@@ -36,13 +40,32 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 			
 			if error == nil {
 				
-				response = PopularMoviesList.GetPopularMovies.Response(result: result, error: nil)
+				if let movies = result?.results {
+					
+					self.movies += movies
+					
+					let hasNextPage = result?.total_pages ?? 0 > request.page
+					response = PopularMoviesList.GetPopularMovies.Response(movies: movies, hasNextPage: hasNextPage, error: nil)
+				}else{
+					
+					response = PopularMoviesList.GetPopularMovies.Response(movies: [], hasNextPage: false, error: nil)
+				}
 			}else{
 				
-				response = PopularMoviesList.GetPopularMovies.Response(result: nil, error: error)
+				response = PopularMoviesList.GetPopularMovies.Response(movies: nil, hasNextPage: true, error: error)
 			}
 			
 			self.presenter?.presentPopularMovies(response: response)
 		})
+	}
+	
+	// MARK: - Show Movie Detail
+	
+	func storeMovieId(request: PopularMoviesList.ShowMovieDetail.Request) {
+		
+		self.movie = movies.filter { $0.id == request.movieId }.first
+		
+		let response = PopularMoviesList.ShowMovieDetail.Response()
+		self.presenter?.presentMovieDetail(response: response)
 	}
 }

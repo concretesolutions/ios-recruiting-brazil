@@ -20,7 +20,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 		titleLabel.text = ""
 	}
 	
-	func config(withMovie movie:MovieView) {
+	func config(withMovie movie:MovieViewModel) {
 		
 		titleLabel.text = movie.title ?? "-"
 		

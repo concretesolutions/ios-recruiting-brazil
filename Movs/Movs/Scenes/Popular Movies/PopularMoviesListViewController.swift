@@ -15,6 +15,7 @@ import NVActivityIndicatorView
 
 protocol PopularMoviesListDisplayLogic: class {
 	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel)
+	func displayMovieDetail(viewModel: PopularMoviesList.ShowMovieDetail.ViewModel)
 }
 
 class PopularMoviesListViewController: UIViewController, PopularMoviesListDisplayLogic, NVActivityIndicatorViewable {
@@ -83,7 +84,7 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	@IBOutlet weak var collectionView: UICollectionView!
 	
 	let cellIdentifier = "MovieCell"
-	var movies:[MovieView] = []
+	var movies:[MovieViewModel] = []
 	var nextPage = 1
 	
 	// MARK: - Get Popular Movies
@@ -120,6 +121,13 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 			}
 		}
 	}
+	
+	// MARK: - Show Movie Detail
+	
+	func displayMovieDetail(viewModel: PopularMoviesList.ShowMovieDetail.ViewModel) {
+		
+		self.performSegue(withIdentifier: "MovieDetail", sender: nil)
+	}
 }
 
 extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -139,5 +147,16 @@ extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectio
 		}
 		
 		return UICollectionViewCell()
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		
+		let cell = collectionView.cellForItem(at: indexPath)
+		cell?.isSelected = false
+		
+		let movie = movies[indexPath.row]
+		
+		let request = PopularMoviesList.ShowMovieDetail.Request(movieId: movie.id)
+		self.interactor?.storeMovieId(request: request)
 	}
 }

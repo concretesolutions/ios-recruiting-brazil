@@ -23,19 +23,37 @@ enum PopularMoviesList {
 		}
 		
 		struct Response {
-			let result:PopularMoviesResult?
+			let movies:[Movie]?
+			let hasNextPage:Bool
 			let error:Error?
 		}
 		
 		struct ViewModel {
-			let movies:[MovieView]?
+			let movies:[MovieViewModel]?
 			let error:Error?
+		}
+	}
+	
+	enum ShowMovieDetail {
+		
+		struct Request {
+			let movieId: Int?
+		}
+		
+		struct Response {
+			
+			
+		}
+		
+		struct ViewModel {
+			
 		}
 	}
 }
 
-struct MovieView {
+struct MovieViewModel {
 	
+	let id			:Int?
 	let title		:String?
 	let posterUrl	:String?
 }

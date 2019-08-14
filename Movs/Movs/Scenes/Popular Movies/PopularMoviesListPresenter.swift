@@ -14,6 +14,7 @@ import UIKit
 
 protocol PopularMoviesListPresentationLogic {
 	func presentPopularMovies(response: PopularMoviesList.GetPopularMovies.Response)
+	func presentMovieDetail(response: PopularMoviesList.ShowMovieDetail.Response)
 }
 
 class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
@@ -28,7 +29,7 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 		
 		if response.error == nil {
 			
-			let moviesView = getMoviesView(response.result?.results ?? [])
+			let moviesView = getMoviesView(response.movies ?? [])
 			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: moviesView, error: nil)
 		}else{
 			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: nil, error: response.error)
@@ -37,16 +38,24 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 		viewController?.displayPopularMovies(viewModel: viewModel)
 	}
 	
-	private func getMoviesView(_ movies:[Movie]) -> [MovieView] {
+	private func getMoviesView(_ movies:[Movie]) -> [MovieViewModel] {
 		
-		var moviesView:[MovieView] = []
+		var moviesView:[MovieViewModel] = []
 		
 		for movie in movies {
 			
-			let movieView = MovieView(title: movie.title, posterUrl: movie.poster)
-			moviesView.append(movieView)
+			let movieViewModel = MovieViewModel(id: movie.id,title: movie.title, posterUrl: movie.poster)
+			moviesView.append(movieViewModel)
 		}
 		
 		return moviesView
+	}
+	
+	// MARK: - Show Movie Detail
+	
+	func presentMovieDetail(response: PopularMoviesList.ShowMovieDetail.Response) {
+		
+		let viewModel = PopularMoviesList.ShowMovieDetail.ViewModel()
+		self.viewController?.displayMovieDetail(viewModel: viewModel)
 	}
 }

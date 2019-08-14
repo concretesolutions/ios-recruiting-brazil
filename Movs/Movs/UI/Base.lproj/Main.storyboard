@@ -97,11 +97,28 @@
                     <connections>
                         <outlet property="collectionView" destination="VmW-va-csv" id="8es-0v-7wO"/>
                         <outlet property="searchBar" destination="Jqj-Xe-B7c" id="0ym-Ib-Yhp"/>
+                        <segue destination="sih-ii-Ss1" kind="show" identifier="MovieDetail" id="kDQ-K9-8VU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1952.1739130434785" y="138.61607142857142"/>
+        </scene>
+        <!--Movie-->
+        <scene sceneID="uhn-HP-iCe">
+            <objects>
+                <viewController id="sih-ii-Ss1" customClass="MovieDetailViewController" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8A5-Zb-pht">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="jSn-rn-upE"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Movie" id="bOg-dq-UF5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jWj-mf-vOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2762" y="138"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="VsL-YY-yvD">
@@ -148,6 +165,7 @@
                     <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LT0-Zf-h2H">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>

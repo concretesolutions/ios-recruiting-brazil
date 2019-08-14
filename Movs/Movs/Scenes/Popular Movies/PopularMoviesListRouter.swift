@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol PopularMoviesListRoutingLogic {
-	//func routeToSomewhere(segue: UIStoryboardSegue?)
+	func routeToMovieDetail(segue: UIStoryboardSegue?)
 }
 
 protocol PopularMoviesListDataPassing {
@@ -25,33 +25,22 @@ class PopularMoviesListRouter: NSObject, PopularMoviesListRoutingLogic, PopularM
 	weak var viewController: PopularMoviesListViewController?
 	var dataStore: PopularMoviesListDataStore?
 	
-	// MARK: Routing
+	// MARK: - Routing
 	
-//	func routeToSomewhere(segue: UIStoryboardSegue?) {
-//		if let segue = segue {
-//
-//			let destinationVC = segue.destination as! SomewhereViewController
-//			var destinationDS = destinationVC.router!.dataStore!
-//			passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//		} else {
-//
-//			let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//			let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-//			var destinationDS = destinationVC.router!.dataStore!
-//			passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//			navigateToSomewhere(source: viewController!, destination: destinationVC)
-//		}
-//	}
-//	
-//	MARK: Navigation
-//
-//	func navigateToSomewhere(source: PopularMoviesListViewController, destination: SomewhereViewController) {
-//		source.show(destination, sender: nil)
-//	}
-//
-//	MARK: Passing data
-//	
-//	func passDataToSomewhere(source: PopularMoviesListDataStore, destination: inout SomewhereDataStore) {
-//		destination.name = source.name
-//	}
+	func routeToMovieDetail(segue: UIStoryboardSegue?) {
+		
+		if let segue = segue {
+
+			let destinationVC = segue.destination as! MovieDetailViewController
+			var destinationDS = destinationVC.router!.dataStore!
+			passDataToMovieDetail(source: dataStore!, destination: &destinationDS)
+		}
+	}
+	
+	//MARK: - Passing data
+	
+	func passDataToMovieDetail(source: PopularMoviesListDataStore, destination: inout MovieDetailDataStore) {
+		
+		destination.movie = source.movie
+	}
 }
