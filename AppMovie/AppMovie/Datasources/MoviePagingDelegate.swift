@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol MoviePagingDelegate: class {
+    func loadMovies()
+}
