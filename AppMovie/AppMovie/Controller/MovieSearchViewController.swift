@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MovieSearchViewController: UIViewController, MovieSelectionDelegate, MoviePagingDelegate {
-   
+class MovieSearchViewController: UIViewController {
+    
     //Mark: - Properties
     @IBOutlet weak var movieSearch: UISearchBar!
     @IBOutlet weak var movieCollection: UICollectionView!
@@ -64,6 +64,7 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate, Movie
         }
     }
     
+    // MARK: - SETUP COLLECTIONVIEW
     func setupCollectionView(with movies: [Result]){
         collectionViewDataSource = MovieSearchCollectionViewDataSource(movies: movies, collectionView: movieCollection, delegate: self)
         collectionViewDelegate = MovieSearchCollectionViewDelegate(movies: movies, delegate: self)
@@ -80,11 +81,13 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate, Movie
                 guard let self = self else { return }
                 self.movie = movies
                 self.setupCollectionView(with: self.movie)
-                //self.movieCollection.reloadData()
             }
         }
     }
-    
+}
+
+// MARK: - Protocol Delegate DidSelect
+extension MovieSearchViewController: MovieSelectionDelegate{
     func didSelect(movie: Result) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController else {
@@ -94,7 +97,10 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate, Movie
         controller.movieCell = movie
         navigationController?.pushViewController(controller, animated: true)
     }
-    
+}
+
+// MARK: - Protocol Delegate Paging
+extension MovieSearchViewController: MoviePagingDelegate{
     func loadMovies() {
         print("LoadMovies")
         pageCount += 1
@@ -109,11 +115,9 @@ class MovieSearchViewController: UIViewController, MovieSelectionDelegate, Movie
             }
         }
     }
-    
 }
 
 // MARK: - UISearchDelate
-
 extension MovieSearchViewController: UISearchBarDelegate{
     
 }
