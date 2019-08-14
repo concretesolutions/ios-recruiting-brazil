@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MovieSearchCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+final class MovieSearchCollectionViewDelegate: NSObject,UICollectionViewDelegate,  UICollectionViewDelegateFlowLayout {
     
     weak var delegate: MovieSelectionDelegate?
     
@@ -38,14 +38,6 @@ final class MovieSearchCollectionViewDelegate: NSObject, UICollectionViewDelegat
         return 10.0
     }
     
-    //    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    //
-    //        if (self.currentYear != nil || self.currentGenre != nil){
-    //            return CGSize.init(width: collectionView.frame.size.width, height: 40.0)
-    //        }else{
-    //            return CGSize.zero
-    //        }
-    //    }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize.zero
@@ -58,14 +50,6 @@ final class MovieSearchCollectionViewDelegate: NSObject, UICollectionViewDelegat
         delegate?.didSelect(movie: movieCell)
         //self.performSegue(withIdentifier: "toDetail", sender: movieCell)
         
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if indexPath.row == movie.count - 8 && !isLoading && pageCount <= totalPages {
-//            pageCount += 1
-//            loadMovies()
-//        }
-        print("WillDisplay")
     }
     
 }

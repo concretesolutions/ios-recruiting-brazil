@@ -10,12 +10,16 @@ import UIKit
 
 final class MovieSearchCollectionViewDataSource: NSObject, UICollectionViewDataSource{
     
+    weak var delegate: MoviePagingDelegate?
+    
     let movies:[Result]
     
-    init(movies: [Result], collectionView:UICollectionView) {
+    init(movies: [Result], collectionView:UICollectionView,delegate: MoviePagingDelegate) {
         self.movies = movies
         super.init()
         registerCells(in: collectionView)
+        self.delegate = delegate
+        collectionView.prefetchDataSource = self
     }
     
     private func registerCells(in collectionView: UICollectionView){
@@ -34,5 +38,15 @@ final class MovieSearchCollectionViewDataSource: NSObject, UICollectionViewDataS
         return cell
     }
     
-    
+}
+
+extension MovieSearchCollectionViewDataSource: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        print("Prefetch")
+        let itemIndex = indexPaths.first!.row
+        if itemIndex > (movies.count - 10) {
+            delegate?.loadMovies()
+        }
+        
+    }
 }
