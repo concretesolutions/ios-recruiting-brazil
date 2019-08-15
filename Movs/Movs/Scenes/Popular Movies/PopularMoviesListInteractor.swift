@@ -15,6 +15,7 @@ import UIKit
 protocol PopularMoviesListBusinessLogic {
 	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request)
 	func storeMovieId(request: PopularMoviesList.ShowMovieDetail.Request)
+	func getGenres(request: PopularMoviesList.GetGenresList.Request)
 }
 
 protocol PopularMoviesListDataStore {
@@ -67,5 +68,20 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 		
 		let response = PopularMoviesList.ShowMovieDetail.Response()
 		self.presenter?.presentMovieDetail(response: response)
+	}
+	
+	// MARK: - Get Genre List
+	
+	var genreWorker: GenresWorker = GenresWorker(GenresNetworkWorker())
+	
+	func getGenres(request: PopularMoviesList.GetGenresList.Request) {
+		
+		genreWorker.getGenresList(completionHandler: { (genreData, error) in
+			
+			if error == nil, let genreData = genreData {
+				
+				Genre.add(genres: genreData)
+			}
+		})
 	}
 }

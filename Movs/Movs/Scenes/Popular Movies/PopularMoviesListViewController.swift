@@ -76,6 +76,7 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		
 		getPopularMovies()
+		getGenres()
 	}
 	
 	// MARK: - Outlets & Vars
@@ -89,7 +90,7 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	
 	// MARK: - Get Popular Movies
 	
-	func getPopularMovies() {
+	private func getPopularMovies() {
 		
 		let size = CGSize(width: 30, height: 30)
 		startAnimating(size, message: "Fetching movies...", type: .ballRotateChase, fadeInAnimation: nil)
@@ -127,6 +128,14 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	func displayMovieDetail(viewModel: PopularMoviesList.ShowMovieDetail.ViewModel) {
 		
 		self.performSegue(withIdentifier: "MovieDetail", sender: nil)
+	}
+	
+	// MARK: - Get Genres
+	
+	private func getGenres() {
+		
+		let request = PopularMoviesList.GetGenresList.Request()
+		self.interactor?.getGenres(request: request)
 	}
 }
 

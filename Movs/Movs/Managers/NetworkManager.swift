@@ -18,17 +18,18 @@ enum MovsRequests: URLRequestConvertible {
     static let completeURL              = "\(MovsRequests.baseURLPath)\(MovsRequests.baseURI)"
 	
     case popularMovies(Int)
+	case genres
     
     private var method: HTTPMethod {
         switch self {
-        case .popularMovies:
+        case .popularMovies, .genres:
             return .get
         }
     }
     
     private var baseURL: String{
         switch self{
-        case .popularMovies:
+        case .popularMovies, .genres:
             return MovsRequests.completeURL
         }
     }
@@ -37,19 +38,23 @@ enum MovsRequests: URLRequestConvertible {
         switch self {
         case .popularMovies:
             return "/movie/popular"
+		case .genres:
+			return "/genre/movie/list"
         }
     }
     
     private var parameters: [String: Any]? {
         switch self {
-        case .popularMovies(let page):
-            return ["api_key": apiKey,"language":"en-US","page":page]
+		case .popularMovies(let page):
+			return ["api_key": apiKey,"language":"en-US","page":page]
+		case .genres:
+			return ["api_key": apiKey,"language":"en-US"]
         }
     }
     
     private var headers:HTTPHeaders {
         switch self {
-        case .popularMovies:
+        case .popularMovies, .genres:
             return ["Content-Type":"application/x-www-form-urlencoded"]
         }
     }

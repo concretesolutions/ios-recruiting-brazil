@@ -34,6 +34,8 @@ enum PopularMoviesList {
 		}
 	}
 	
+	// MARK: Show Movie Detail
+	
 	enum ShowMovieDetail {
 		
 		struct Request {
@@ -46,6 +48,24 @@ enum PopularMoviesList {
 		}
 		
 		struct ViewModel {
+			
+		}
+	}
+	
+	// MARK: Get Genre List
+	
+	enum GetGenresList{
+		
+		struct Request
+		{
+			
+		}
+		struct Response
+		{
+			var genres:GenresResult
+		}
+		struct ViewModel
+		{
 			
 		}
 	}

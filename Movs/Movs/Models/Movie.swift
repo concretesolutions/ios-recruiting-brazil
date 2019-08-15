@@ -17,7 +17,6 @@ struct Movie: Codable, Equatable, CustomStringConvertible {
 	let backdrop	: String?
 	let date		: String?
 	let genre_ids	: [Int]?
-	let genres		: [Genre]?
 	let overview	: String?
 	let id			: Int?
 	
@@ -27,7 +26,6 @@ struct Movie: Codable, Equatable, CustomStringConvertible {
 		case id
 		case overview
 		case genre_ids
-		case genres
 		case poster 	= "poster_path"
 		case backdrop 	= "backdrop_path"
 		case date 		= "release_date"
