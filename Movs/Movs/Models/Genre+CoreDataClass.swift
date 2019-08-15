@@ -33,7 +33,6 @@ public class Genre: NSManagedObject {
 		NSLog("Genres saved!")
 	}
 	
-	
 	/// Return a list of genre saved in coredata as a struct, the same struct used to parse the API data.
 	///
 	/// - Parameter ids: Genres ids to get in coredata

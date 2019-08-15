@@ -111,14 +111,88 @@
                     <view key="view" contentMode="scaleToFill" id="8A5-Zb-pht">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fLa-2N-Eva">
+                                <rect key="frame" x="0.0" y="64" width="320" height="175"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="175" id="88P-Gd-R1e"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2008" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccC-dP-VXw">
+                                <rect key="frame" x="8" y="247" width="36" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Action, Adventure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-Ow-0cw">
+                                <rect key="frame" x="8" y="283" width="304" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="teJ-Nk-psN">
+                                <rect key="frame" x="0.0" y="204" width="320" height="35"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thor" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="tpP-bC-J89">
+                                        <rect key="frame" x="6" y="0.0" width="308" height="35"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="tpP-bC-J89" firstAttribute="top" secondItem="teJ-Nk-psN" secondAttribute="top" id="2wW-T4-gbp"/>
+                                    <constraint firstAttribute="trailing" secondItem="tpP-bC-J89" secondAttribute="trailing" constant="6" id="71x-bB-84q"/>
+                                    <constraint firstAttribute="bottom" secondItem="tpP-bC-J89" secondAttribute="bottom" id="KGX-So-Rvx"/>
+                                    <constraint firstItem="tpP-bC-J89" firstAttribute="leading" secondItem="teJ-Nk-psN" secondAttribute="leading" constant="6" id="myq-Z1-Gs8"/>
+                                    <constraint firstAttribute="height" constant="35" id="wXU-tc-sgw"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ag-ZA-V5S">
+                                <rect key="frame" x="266" y="239" width="54" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="da8-7r-agZ"/>
+                                    <constraint firstAttribute="height" constant="35" id="w7d-x4-BJG"/>
+                                </constraints>
+                                <state key="normal" image="favorite_empty_icon"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXB-hr-C41">
+                                <rect key="frame" x="8" y="310.5" width="304" height="200.5"/>
+                                <string key="text">The powerful, but arrogant god Thor, is cast out of Asgard to live amongst humans in Midgard (Earth), where he soon becomes one of their finest defenders.</string>
+                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5Ag-ZA-V5S" firstAttribute="trailing" secondItem="jSn-rn-upE" secondAttribute="trailing" id="0Wy-cs-UN5"/>
+                            <constraint firstItem="jSn-rn-upE" firstAttribute="bottom" secondItem="mXB-hr-C41" secondAttribute="bottom" constant="8" id="6OH-Im-eH3"/>
+                            <constraint firstItem="ccC-dP-VXw" firstAttribute="leading" secondItem="SpC-Ow-0cw" secondAttribute="leading" id="8CB-wV-TRd"/>
+                            <constraint firstItem="teJ-Nk-psN" firstAttribute="trailing" secondItem="fLa-2N-Eva" secondAttribute="trailing" id="BEd-Ix-RTZ"/>
+                            <constraint firstItem="5Ag-ZA-V5S" firstAttribute="top" secondItem="fLa-2N-Eva" secondAttribute="bottom" id="ECe-ri-iiz"/>
+                            <constraint firstItem="teJ-Nk-psN" firstAttribute="leading" secondItem="fLa-2N-Eva" secondAttribute="leading" id="KJw-hL-oV6"/>
+                            <constraint firstItem="fLa-2N-Eva" firstAttribute="leading" secondItem="jSn-rn-upE" secondAttribute="leading" id="MDT-4H-Wg9"/>
+                            <constraint firstItem="jSn-rn-upE" firstAttribute="trailing" secondItem="SpC-Ow-0cw" secondAttribute="trailing" constant="8" id="Nd6-pq-lUf"/>
+                            <constraint firstItem="fLa-2N-Eva" firstAttribute="trailing" secondItem="jSn-rn-upE" secondAttribute="trailing" id="OlM-jo-G8b"/>
+                            <constraint firstItem="teJ-Nk-psN" firstAttribute="bottom" secondItem="fLa-2N-Eva" secondAttribute="bottom" id="SZq-56-Cl4"/>
+                            <constraint firstItem="SpC-Ow-0cw" firstAttribute="top" secondItem="5Ag-ZA-V5S" secondAttribute="bottom" constant="9" id="Yrr-6X-z0M"/>
+                            <constraint firstItem="SpC-Ow-0cw" firstAttribute="leading" secondItem="jSn-rn-upE" secondAttribute="leading" constant="8" id="ZWJ-Qd-9rW"/>
+                            <constraint firstItem="fLa-2N-Eva" firstAttribute="top" secondItem="jSn-rn-upE" secondAttribute="top" id="aYs-Dy-aaw"/>
+                            <constraint firstItem="5Ag-ZA-V5S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ccC-dP-VXw" secondAttribute="trailing" constant="8" symbolic="YES" id="fdp-tB-bzj"/>
+                            <constraint firstItem="ccC-dP-VXw" firstAttribute="top" secondItem="teJ-Nk-psN" secondAttribute="bottom" constant="8" symbolic="YES" id="khW-08-mUE"/>
+                            <constraint firstItem="jSn-rn-upE" firstAttribute="trailing" secondItem="mXB-hr-C41" secondAttribute="trailing" constant="8" id="kmz-rb-mAm"/>
+                            <constraint firstItem="mXB-hr-C41" firstAttribute="leading" secondItem="jSn-rn-upE" secondAttribute="leading" constant="8" id="tQP-gY-P2a"/>
+                            <constraint firstItem="mXB-hr-C41" firstAttribute="top" secondItem="SpC-Ow-0cw" secondAttribute="bottom" constant="9" id="xBD-np-x12"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jSn-rn-upE"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movie" id="bOg-dq-UF5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jWj-mf-vOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2762" y="138"/>
+            <point key="canvasLocation" x="2761.875" y="137.32394366197184"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="VsL-YY-yvD">
@@ -203,6 +277,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="list_icon" width="18" height="10"/>
         <namedColor name="AppColor">
