@@ -7,6 +7,15 @@
 //
 
 
+
+struct Populares: Codable{
+    var page: Int
+    var results: [Movie]?
+    var total_results: Int
+    var total_pages: Int
+}
+
+
 //Movie in the API
 class Movie: Codable{
     let poster_path: String?

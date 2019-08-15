@@ -20,20 +20,90 @@ class MovieGridCell: UICollectionViewCell{
         setupView()
     }
     
+    private lazy var imageView: UIImageView = {
+        let image = UIImageView()
+        return image
+    }()
+    
+    private lazy var verticalContainer: UIStackView = {
+        let view = UIStackView(frame: .zero)
+        view.axis = .vertical
+        view.spacing = 5
+        return view
+    }()
+    
+    private lazy var horizonalContainer: UIStackView = {
+        let view = UIStackView(frame: .zero)
+        view.axis = .horizontal
+        view.spacing = 8
+        return view
+    }()
+    
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Custom cell"
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var favImage: UIImageView = {
+        let favImage = UIImageView()
+        favImage.contentMode = .scaleAspectFit
+        return favImage
+    }()
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
 }
 
+//MARK: - Feeds the data to the elements
+extension MovieGridCell {
+    func configure(withViewModel viewModel: MoviePresentable){
+        nameLabel.text = viewModel.name
+        imageView.image = viewModel.bannerImage
+    }
+}
 
 //MARK: - Extension to define the cell constraints
 extension MovieGridCell: CodeView{
     func buildViewHierarchy() {
-
+        verticalContainer.addSubview(imageView)
+        verticalContainer.addSubview(horizonalContainer)
+        horizonalContainer.addSubview(nameLabel)
+        horizonalContainer.addSubview(favImage)
+        addSubview(verticalContainer)
     }
     
     func setupConstrains() {
+        
+        verticalContainer.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(5)
+            make.right.equalToSuperview().inset(5)
+        }
+        
+        imageView.snp.makeConstraints { (make) in
+            make.top.right.left.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.7)
+        }
+        
+        horizonalContainer.snp.makeConstraints { (make) in
+            make.right.bottom.left.equalToSuperview()
+            make.top.equalTo(imageView.snp.bottom)
+        }
+        
+        nameLabel.snp.makeConstraints { (make) in
+            make.left.bottom.top.equalToSuperview()
+            make.right.equalToSuperview().inset(50)
+        }
+        
+        favImage.snp.makeConstraints { (make) in
+            make.right.centerY.equalToSuperview().inset(5)
+            make.height.width.equalTo(30)
+        }
         
     }
     

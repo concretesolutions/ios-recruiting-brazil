@@ -27,7 +27,6 @@ class MovieGridView: UIView{
     }
 }
 
-
 //MARK: - Extension to define the cell constraints
 extension MovieGridView: CodeView{
     func buildViewHierarchy() {

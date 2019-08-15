@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
         
-        let root = MovieGridController()
+        let tabBar = TabBarController()
         
         self.window = window
-        window.rootViewController = root
+        window.rootViewController = tabBar
         return true
     }
 
