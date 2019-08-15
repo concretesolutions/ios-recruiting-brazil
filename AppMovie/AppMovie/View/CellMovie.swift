@@ -24,7 +24,7 @@ class  CellMovie: UICollectionViewCell, NibReusable {
         movieImage.kf.indicatorType = .activity
         //let stringImage = movie?.poster_path
         guard let stringImage = movie.poster_path else {return}
-        let Image = "\(URL_IMG)\(stringImage)" ?? ""
+        let Image = "\(URL_IMG)\(stringImage)" 
         if let image = URL(string: Image){
             movieImage.kf.indicatorType = .activity
             movieImage.kf.setImage(with: image)

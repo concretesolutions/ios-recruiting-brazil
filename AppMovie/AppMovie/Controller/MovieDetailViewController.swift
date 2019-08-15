@@ -49,14 +49,14 @@ class MovieDetailViewController: UIViewController {
         
         titleMovies.text = movieCell.title
         dateMovies.text = movieCell.release_date
-        descriptionTxt?.text = movieCell.overview!.isEmpty ? "No description" : movieCell.overview
+        descriptionTxt.text = movieCell.overview!.isEmpty ? "No description" : movieCell.overview
         configureGenersId()
         genersTxt.text = genero
 
         detailImage.kf.indicatorType = .activity
         //let stringImage = movie?.poster_path
         guard let stringImage = movieCell.poster_path else {return}
-        let Image = "\(URL_IMG)\(stringImage)" ?? ""
+        let Image = "\(URL_IMG)\(stringImage)"
         detailImage.download(image: Image )
         
         titulo = movieCell.title
