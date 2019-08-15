@@ -53,6 +53,7 @@ class MovieSearchViewControllerSpec: QuickSpec {
                 // let nav = storyboard.instantiateInitialViewController() as! UINavigationController
                 
                 sut = controller
+                print(sut)
                 //  sut = nav.topViewController as! MovieSearchViewController
                 let test = MovieServiceMock()
                 print(test.moviesS)

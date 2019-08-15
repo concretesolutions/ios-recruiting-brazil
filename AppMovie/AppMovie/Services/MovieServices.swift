@@ -10,9 +10,13 @@ import Foundation
 
 import Alamofire
 
-class MovieServices {
+protocol MovieService {
+    func getMovies(page:Int,completionHandler: @escaping ([Result]) -> Void )
+}
+
+class MovieServiceImpl: MovieService {
     
-    static let instance = MovieServices()
+    static let instance = MovieServiceImpl()
     
     var movies = [Movies]()
     

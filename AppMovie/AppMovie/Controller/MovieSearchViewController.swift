@@ -26,6 +26,8 @@ class MovieSearchViewController: UIViewController {
     var collectionViewDataSource: MovieSearchCollectionViewDataSource?
     var collectionViewDelegate: MovieSearchCollectionViewDelegate?
     
+    var service: MovieService = MovieServiceImpl()
+    
     //Mark: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +78,7 @@ class MovieSearchViewController: UIViewController {
     
     // MARK: - API
     func api(){
-        MovieServices.instance.getMovies(page: pageCount){ [weak self] movies in
+        service.getMovies(page: pageCount){ [weak self] movies in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.movie = movies
@@ -105,7 +107,7 @@ extension MovieSearchViewController: MoviePagingDelegate{
         print("LoadMovies")
         pageCount += 1
         print(pageCount)
-        MovieServices.instance.getMovies(page: pageCount){ [weak self] movies in
+        service.getMovies(page: pageCount){ [weak self] movies in
             guard let self = self else { return }
             self.isLoading = false
             print(movies)
