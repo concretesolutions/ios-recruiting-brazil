@@ -11,7 +11,10 @@ import Foundation
 extension Date {
   
   func format(with pattern: String) -> String {
-    return ""
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = pattern
+
+    return dateFormatter.string(from: self)
   }
   
 }

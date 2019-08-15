@@ -66,7 +66,7 @@ class SplashViewController: BaseViewController {
   }
   
   fileprivate func goToHome() {
-    let moviesController = FavoritesViewController()
+    let moviesController = MoviesViewController()
     appdelegate.makeRootViewController(moviesController)
   }
 

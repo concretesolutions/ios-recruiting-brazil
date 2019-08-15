@@ -14,8 +14,11 @@ extension String {
     return NSLocalizedString(self, comment: "")
   }
   
-  func toDate() -> Date {
-    return Date()
+  func toDate(_ pattern: String = "yyyy-MM-dd") -> Date {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = pattern
+
+    return dateFormatter.date(from: self) ?? Date()
   }
 
 }

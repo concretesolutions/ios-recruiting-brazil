@@ -129,7 +129,10 @@ extension MoviesViewController: UISearchBarDelegate {
 extension MoviesViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+    let movieDetailViewModel = viewModel.makeMovieDetail(at: indexPath)
+    let movieDetailController = MovieDetailViewController(with: movieDetailViewModel)
+
+    self.navigationController?.pushViewController(movieDetailController, animated: true)
   }
   
 }

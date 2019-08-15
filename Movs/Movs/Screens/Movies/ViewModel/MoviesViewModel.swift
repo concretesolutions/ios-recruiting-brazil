@@ -36,6 +36,16 @@ struct MoviesViewModel {
     }
   }
   
+  func makeMovieDetail(at index: IndexPath) -> MovieDetailViewModel {
+    let datasource = MovieDetailDatasource()
+    let viewModel = MovieDetailViewModel(with: datasource)
+    let movie = self.dataSource.movies[index.row]
+    
+    datasource.movie = movie
+    
+    return viewModel
+  }
+  
   // MARK: - Private methods
   
   fileprivate func success(_ moviesList: MoviesList) {
