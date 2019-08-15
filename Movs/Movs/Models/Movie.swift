@@ -15,7 +15,7 @@ struct Movie: Codable, Equatable, CustomStringConvertible {
     let title		: String?
 	let poster		: String?
 	let backdrop	: String?
-	let date		: String?
+	let date		: Date?
 	let genre_ids	: [Int]?
 	let overview	: String?
 	let id			: Int?

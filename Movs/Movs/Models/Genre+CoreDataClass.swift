@@ -55,4 +55,26 @@ public class Genre: NSManagedObject {
 			return (nil,error)
 		}
 	}
+	
+	static func getGenresNames(withIds ids:[Int]) -> String {
+		
+		var genresNames:[String] = []
+		if let genres = Genre.getGenreData(withIds: ids).0 {
+			
+			genresNames = genres.map{ return $0.name }
+		}
+		
+		var formatedGenresNames = ""
+		for index in 0..<genresNames.count {
+			
+			if index > 0 {
+				formatedGenresNames += " | \(genresNames[index])"
+				continue
+			}
+			
+			formatedGenresNames = genresNames[index]
+		}
+	
+		return formatedGenresNames
+	}
 }

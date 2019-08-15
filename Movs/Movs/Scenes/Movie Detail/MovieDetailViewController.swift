@@ -13,7 +13,8 @@
 import UIKit
 
 protocol MovieDetailDisplayLogic: class {
-	func displaySomething(viewModel: MovieDetail.Something.ViewModel)
+	func displayMovieDetail(viewModel: MovieDetail.ShowDetail.ViewModel)
+//	func displayFavoriteStatus(viewModel: )
 }
 
 class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
@@ -71,21 +72,44 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
-		doSomething()
+		getMovieDetail()
 	}
 	
 	// MARK: - Outlets & Vars
 	
-	// MARK: - Do something
+	@IBOutlet weak var movieImageView: UIImageView!
+	@IBOutlet weak var titleLabel: UILabel!
 	
-	func doSomething() {
+	@IBOutlet weak var yearLabel: UILabel!
+	@IBOutlet weak var genresLabel: UILabel!
+	@IBOutlet weak var movieOverviewLabel: UILabel!
+	
+	@IBOutlet weak var favoriteButton: UIButton!
+	
+	// MARK: - IBActions
+	
+	@IBAction func favorite(_ sender: UIButton) {
 		
-		let request = MovieDetail.Something.Request()
-		interactor?.doSomething(request: request)
+		
 	}
 	
-	func displaySomething(viewModel: MovieDetail.Something.ViewModel) {
+	// MARK: - Show Movie Detail
+	
+	private func getMovieDetail() {
 		
-		//nameTextField.text = viewModel.name
+		let request = MovieDetail.ShowDetail.Request()
+		interactor?.getMovieDetail(request: request)
+	}
+	
+	func displayMovieDetail(viewModel: MovieDetail.ShowDetail.ViewModel) {
+
+		let movie = viewModel.movieDetail
+		let imageUrl = "https://image.tmdb.org/t/p/w500\(movie.backdropUrl)"
+		
+		movieImageView.setImage(withUrl:imageUrl)
+		titleLabel.text = movie.title
+		yearLabel.text = movie.year
+		genresLabel.text = movie.genres
+		movieOverviewLabel.text = movie.overview
 	}
 }

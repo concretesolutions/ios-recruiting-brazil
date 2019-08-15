@@ -13,18 +13,24 @@
 import UIKit
 
 protocol MovieDetailPresentationLogic {
-	func presentSomething(response: MovieDetail.Something.Response)
+	func presentMovieDetail(response: MovieDetail.ShowDetail.Response)
 }
 
 class MovieDetailPresenter: MovieDetailPresentationLogic {
 	
 	weak var viewController: MovieDetailDisplayLogic?
 	
-	// MARK: Do something
+	// MARK: - Show Movie Detail
 	
-	func presentSomething(response: MovieDetail.Something.Response) {
+	func presentMovieDetail(response: MovieDetail.ShowDetail.Response) {
 		
-		let viewModel = MovieDetail.Something.ViewModel()
-		viewController?.displaySomething(viewModel: viewModel)
+		let movie = response.movie
+		
+		let viewModel = MovieDetail.ShowDetail.ViewModel(movieDetail: MovieDetailViewModel(title: movie.title ?? "",
+																						   backdropUrl: movie.backdrop ?? "",
+																						   year: movie.date?.getYear() ?? "",
+																						   genres: Genre.getGenresNames(withIds: movie.genre_ids ?? []),
+																						   overview: response.movie.overview ?? ""))
+		viewController?.displayMovieDetail(viewModel: viewModel)
 	}
 }

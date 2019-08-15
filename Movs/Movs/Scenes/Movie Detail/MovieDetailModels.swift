@@ -14,20 +14,29 @@ import UIKit
 
 enum MovieDetail {
 	
-	// MARK: Use cases
+	// MARK: - Show Detail
 	
-	enum Something {
+	enum ShowDetail {
 		
 		struct Request {
 			
 		}
 		
 		struct Response {
-			
+			let movie: Movie
 		}
 		
 		struct ViewModel {
-			
+			let movieDetail: MovieDetailViewModel
 		}
 	}
+}
+
+struct MovieDetailViewModel {
+	
+	let title		:String
+	let backdropUrl	:String
+	let year		:String
+	let genres		:String
+	let overview	:String
 }

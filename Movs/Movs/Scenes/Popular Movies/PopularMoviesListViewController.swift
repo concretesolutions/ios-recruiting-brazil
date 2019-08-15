@@ -166,6 +166,6 @@ extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectio
 		let movie = movies[indexPath.row]
 		
 		let request = PopularMoviesList.ShowMovieDetail.Request(movieId: movie.id)
-		self.interactor?.storeMovieId(request: request)
+		self.interactor?.storeMovie(request: request)
 	}
 }

@@ -20,6 +20,7 @@ class PopularMoviesNetworkWorker:PopularMoviesListWorkerProtocol {
 				
 				do {
 					let decoder = JSONDecoder()
+					decoder.dateDecodingStrategy = .formatted(DateFormatter.ymd)
 					let result = try decoder.decode(PopularMoviesResult.self, from: data)
 					
 					completion { return result }

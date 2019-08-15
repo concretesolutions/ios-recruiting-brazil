@@ -14,7 +14,7 @@ import UIKit
 
 protocol PopularMoviesListBusinessLogic {
 	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request)
-	func storeMovieId(request: PopularMoviesList.ShowMovieDetail.Request)
+	func storeMovie(request: PopularMoviesList.ShowMovieDetail.Request)
 	func getGenres(request: PopularMoviesList.GetGenresList.Request)
 }
 
@@ -62,7 +62,7 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 	
 	// MARK: - Show Movie Detail
 	
-	func storeMovieId(request: PopularMoviesList.ShowMovieDetail.Request) {
+	func storeMovie(request: PopularMoviesList.ShowMovieDetail.Request) {
 		
 		self.movie = movies.filter { $0.id == request.movieId }.first
 		
