@@ -31,6 +31,11 @@
 		0F460BB922FCE70E00A231A2 /* SettingServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F460BB822FCE70E00A231A2 /* SettingServices.swift */; };
 		0F460BBD22FCE7A100A231A2 /* Commoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F460BBC22FCE7A100A231A2 /* Commoms.swift */; };
 		0F460BBE22FCEA2200A231A2 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F460BC022FCEA2200A231A2 /* SplashViewController.xib */; };
+		0F77E5EA23022C1300BDFF83 /* GenericListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F77E5E923022C1300BDFF83 /* GenericListViewModel.swift */; };
+		0F77E5F123022C5100BDFF83 /* GenericListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F77E5EF23022C5100BDFF83 /* GenericListViewController.swift */; };
+		0F77E5F223022C5100BDFF83 /* GenericListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F77E5F023022C5100BDFF83 /* GenericListViewController.xib */; };
+		0F77E5F423022C6600BDFF83 /* GenericListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F77E5F323022C6600BDFF83 /* GenericListDatasource.swift */; };
+		0F77E5F623022C9100BDFF83 /* GenericListParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F77E5F523022C9100BDFF83 /* GenericListParams.swift */; };
 		0F8ED69222FD824C00FB9DBF /* MovsSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ED69122FD824C00FB9DBF /* MovsSingleton.swift */; };
 		0F8ED69422FD860900FB9DBF /* Strings+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ED69322FD860900FB9DBF /* Strings+extensions.swift */; };
 		0F8ED69722FD882500FB9DBF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F8ED69922FD882500FB9DBF /* Localizable.strings */; };
@@ -48,6 +53,20 @@
 		0F8ED6B722FEF38600FB9DBF /* MoviesDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ED6B622FEF38600FB9DBF /* MoviesDatasource.swift */; };
 		0F8ED6BB22FF959500FB9DBF /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ED6B922FF959500FB9DBF /* MoviesCollectionViewCell.swift */; };
 		0F8ED6BC22FF959600FB9DBF /* MoviesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8ED6BA22FF959500FB9DBF /* MoviesCollectionViewCell.xib */; };
+		0FC2BEA42300501B0009184A /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEA32300501B0009184A /* FavoritesViewModel.swift */; };
+		0FC2BEAC230050A50009184A /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEAA230050A50009184A /* FavoritesViewController.swift */; };
+		0FC2BEAD230050A50009184A /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC2BEAB230050A50009184A /* FavoritesViewController.xib */; };
+		0FC2BEAF230050B20009184A /* FavoritesDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEAE230050B20009184A /* FavoritesDatasource.swift */; };
+		0FC2BEB2230050C40009184A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEB0230050C40009184A /* FavoritesTableViewCell.swift */; };
+		0FC2BEB3230050C40009184A /* FavoritesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC2BEB1230050C40009184A /* FavoritesTableViewCell.xib */; };
+		0FC2BEB5230060E00009184A /* Date+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEB4230060E00009184A /* Date+extensions.swift */; };
+		0FC2BEB72300634C0009184A /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEB62300634C0009184A /* FilterViewModel.swift */; };
+		0FC2BEBF23017A310009184A /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEBD23017A310009184A /* FilterViewController.swift */; };
+		0FC2BEC023017A310009184A /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC2BEBE23017A310009184A /* FilterViewController.xib */; };
+		0FC2BEC223017A430009184A /* FilterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEC123017A430009184A /* FilterDatasource.swift */; };
+		0FC2BEC523017A540009184A /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEC323017A540009184A /* FilterTableViewCell.swift */; };
+		0FC2BEC623017A540009184A /* FilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC2BEC423017A540009184A /* FilterTableViewCell.xib */; };
+		0FC2BEC82301831F0009184A /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2BEC72301831F0009184A /* Filters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +121,11 @@
 		0F460BBF22FCEA2200A231A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SplashViewController.xib; sourceTree = "<group>"; };
 		0F460BC222FCEA2C00A231A2 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SplashViewController.strings"; sourceTree = "<group>"; };
 		0F460BC422FCEA3200A231A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SplashViewController.strings; sourceTree = "<group>"; };
+		0F77E5E923022C1300BDFF83 /* GenericListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericListViewModel.swift; sourceTree = "<group>"; };
+		0F77E5EF23022C5100BDFF83 /* GenericListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericListViewController.swift; sourceTree = "<group>"; };
+		0F77E5F023022C5100BDFF83 /* GenericListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericListViewController.xib; sourceTree = "<group>"; };
+		0F77E5F323022C6600BDFF83 /* GenericListDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericListDatasource.swift; sourceTree = "<group>"; };
+		0F77E5F523022C9100BDFF83 /* GenericListParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericListParams.swift; sourceTree = "<group>"; };
 		0F8ED69122FD824C00FB9DBF /* MovsSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsSingleton.swift; sourceTree = "<group>"; };
 		0F8ED69322FD860900FB9DBF /* Strings+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+extensions.swift"; sourceTree = "<group>"; };
 		0F8ED69822FD882500FB9DBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -120,6 +144,20 @@
 		0F8ED6B622FEF38600FB9DBF /* MoviesDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDatasource.swift; sourceTree = "<group>"; };
 		0F8ED6B922FF959500FB9DBF /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MoviesCollectionViewCell.swift; path = ../MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F8ED6BA22FF959500FB9DBF /* MoviesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MoviesCollectionViewCell.xib; path = ../MoviesCollectionViewCell.xib; sourceTree = "<group>"; };
+		0FC2BEA32300501B0009184A /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		0FC2BEAA230050A50009184A /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		0FC2BEAB230050A50009184A /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
+		0FC2BEAE230050B20009184A /* FavoritesDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDatasource.swift; sourceTree = "<group>"; };
+		0FC2BEB0230050C40009184A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		0FC2BEB1230050C40009184A /* FavoritesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesTableViewCell.xib; sourceTree = "<group>"; };
+		0FC2BEB4230060E00009184A /* Date+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extensions.swift"; sourceTree = "<group>"; };
+		0FC2BEB62300634C0009184A /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		0FC2BEBD23017A310009184A /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		0FC2BEBE23017A310009184A /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		0FC2BEC123017A430009184A /* FilterDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDatasource.swift; sourceTree = "<group>"; };
+		0FC2BEC323017A540009184A /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		0FC2BEC423017A540009184A /* FilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterTableViewCell.xib; sourceTree = "<group>"; };
+		0FC2BEC72301831F0009184A /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +254,7 @@
 				0F8ED6B022FE35FF00FB9DBF /* NSObject+extensions.swift */,
 				0F8ED6B222FEE81900FB9DBF /* UIView+extensions.swift */,
 				0F8ED6B422FEEC7900FB9DBF /* UISearchBar+extensions.swift */,
+				0FC2BEB4230060E00009184A /* Date+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -274,6 +313,9 @@
 			children = (
 				0F3D9E4622FC48F90043149B /* Splash */,
 				0F8ED6A322FE2F0600FB9DBF /* Movies */,
+				0FC2BEA52300501E0009184A /* Favorites */,
+				0FC2BEB82300635F0009184A /* Filter */,
+				0F77E5EB23022C1700BDFF83 /* GenericList */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -336,6 +378,42 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		0F77E5EB23022C1700BDFF83 /* GenericList */ = {
+			isa = PBXGroup;
+			children = (
+				0F77E5EE23022C2D00BDFF83 /* Datasource */,
+				0F77E5ED23022C2900BDFF83 /* View */,
+				0F77E5EC23022C2000BDFF83 /* ViewModel */,
+			);
+			path = GenericList;
+			sourceTree = "<group>";
+		};
+		0F77E5EC23022C2000BDFF83 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F77E5E923022C1300BDFF83 /* GenericListViewModel.swift */,
+				0F77E5F523022C9100BDFF83 /* GenericListParams.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F77E5ED23022C2900BDFF83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F77E5EF23022C5100BDFF83 /* GenericListViewController.swift */,
+				0F77E5F023022C5100BDFF83 /* GenericListViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F77E5EE23022C2D00BDFF83 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				0F77E5F323022C6600BDFF83 /* GenericListDatasource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
 		0F8ED6A322FE2F0600FB9DBF /* Movies */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +455,97 @@
 			children = (
 				0F8ED6B922FF959500FB9DBF /* MoviesCollectionViewCell.swift */,
 				0F8ED6BA22FF959500FB9DBF /* MoviesCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0FC2BEA52300501E0009184A /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEA7230050320009184A /* Cell */,
+				0FC2BEA8230050390009184A /* Datasource */,
+				0FC2BEA92300504A0009184A /* View */,
+				0FC2BEA6230050270009184A /* ViewModel */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		0FC2BEA6230050270009184A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEA32300501B0009184A /* FavoritesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0FC2BEA7230050320009184A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEB0230050C40009184A /* FavoritesTableViewCell.swift */,
+				0FC2BEB1230050C40009184A /* FavoritesTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0FC2BEA8230050390009184A /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEAE230050B20009184A /* FavoritesDatasource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		0FC2BEA92300504A0009184A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEAA230050A50009184A /* FavoritesViewController.swift */,
+				0FC2BEAB230050A50009184A /* FavoritesViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0FC2BEB82300635F0009184A /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEBC230063830009184A /* Cell */,
+				0FC2BEBB2300637D0009184A /* Datasource */,
+				0FC2BEBA230063760009184A /* View */,
+				0FC2BEB9230063680009184A /* ViewModel */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		0FC2BEB9230063680009184A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEB62300634C0009184A /* FilterViewModel.swift */,
+				0FC2BEC72301831F0009184A /* Filters.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0FC2BEBA230063760009184A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEBD23017A310009184A /* FilterViewController.swift */,
+				0FC2BEBE23017A310009184A /* FilterViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0FC2BEBB2300637D0009184A /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEC123017A430009184A /* FilterDatasource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		0FC2BEBC230063830009184A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2BEC323017A540009184A /* FilterTableViewCell.swift */,
+				0FC2BEC423017A540009184A /* FilterTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -488,10 +657,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F8ED69722FD882500FB9DBF /* Localizable.strings in Resources */,
+				0FC2BEB3230050C40009184A /* FavoritesTableViewCell.xib in Resources */,
 				0F3D9DFD22FC36DD0043149B /* LaunchScreen.storyboard in Resources */,
+				0F77E5F223022C5100BDFF83 /* GenericListViewController.xib in Resources */,
+				0FC2BEC623017A540009184A /* FilterTableViewCell.xib in Resources */,
 				0F3D9DFA22FC36DD0043149B /* Assets.xcassets in Resources */,
 				0F460BBE22FCEA2200A231A2 /* SplashViewController.xib in Resources */,
+				0FC2BEAD230050A50009184A /* FavoritesViewController.xib in Resources */,
 				0F8ED6A822FE2F1B00FB9DBF /* MoviesViewController.xib in Resources */,
+				0FC2BEC023017A310009184A /* FilterViewController.xib in Resources */,
 				0F8ED6BC22FF959600FB9DBF /* MoviesCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,33 +716,47 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F460BB022FCE3FF00A231A2 /* APIOperations.swift in Sources */,
+				0FC2BEC82301831F0009184A /* Filters.swift in Sources */,
 				0F3D9E3722FC463C0043149B /* Constants.swift in Sources */,
 				0F8ED6AD22FE316C00FB9DBF /* MoviesList.swift in Sources */,
 				0F460BB322FCE53B00A231A2 /* Settings.swift in Sources */,
 				0F460BBD22FCE7A100A231A2 /* Commoms.swift in Sources */,
 				0F8ED6B122FE35FF00FB9DBF /* NSObject+extensions.swift in Sources */,
 				0F8ED6A222FE2F0300FB9DBF /* MoviesViewModel.swift in Sources */,
+				0F77E5F423022C6600BDFF83 /* GenericListDatasource.swift in Sources */,
 				0F460BB622FCE5FB00A231A2 /* SplashViewModel.swift in Sources */,
 				0F3D9DF822FC36DB0043149B /* Movs.xcdatamodeld in Sources */,
 				0F8ED6BB22FF959500FB9DBF /* MoviesCollectionViewCell.swift in Sources */,
+				0FC2BEBF23017A310009184A /* FilterViewController.swift in Sources */,
+				0FC2BEB72300634C0009184A /* FilterViewModel.swift in Sources */,
+				0FC2BEAC230050A50009184A /* FavoritesViewController.swift in Sources */,
 				0F3D9DF022FC36DB0043149B /* AppDelegate.swift in Sources */,
 				0F8ED6A022FE2AA800FB9DBF /* GenreServices.swift in Sources */,
+				0F77E5EA23022C1300BDFF83 /* GenericListViewModel.swift in Sources */,
+				0FC2BEC523017A540009184A /* FilterTableViewCell.swift in Sources */,
 				0F8ED6B522FEEC7900FB9DBF /* UISearchBar+extensions.swift in Sources */,
 				0F8ED69E22FE2A6100FB9DBF /* Genre.swift in Sources */,
 				0F8ED6AB22FE2F3D00FB9DBF /* Movies.swift in Sources */,
 				0F3D9E3E22FC47760043149B /* BaseNavigationViewController.swift in Sources */,
+				0FC2BEA42300501B0009184A /* FavoritesViewModel.swift in Sources */,
 				0F8ED6A722FE2F1B00FB9DBF /* MoviesViewController.swift in Sources */,
 				0F8ED69422FD860900FB9DBF /* Strings+extensions.swift in Sources */,
 				0F3D9E2122FC3C8C0043149B /* UIColor+extensions.swift in Sources */,
+				0F77E5F623022C9100BDFF83 /* GenericListParams.swift in Sources */,
 				0F3D9E4122FC47AB0043149B /* BaseViewController.swift in Sources */,
 				0F3D9E3422FC45F70043149B /* Obfuscator.swift in Sources */,
 				0F3D9E3A22FC466E0043149B /* SecurityManager.swift in Sources */,
+				0FC2BEAF230050B20009184A /* FavoritesDatasource.swift in Sources */,
+				0F77E5F123022C5100BDFF83 /* GenericListViewController.swift in Sources */,
+				0FC2BEB5230060E00009184A /* Date+extensions.swift in Sources */,
 				0F460BAE22FCE37D00A231A2 /* ServicesBase.swift in Sources */,
 				0F460BB922FCE70E00A231A2 /* SettingServices.swift in Sources */,
+				0FC2BEC223017A430009184A /* FilterDatasource.swift in Sources */,
 				0F8ED69222FD824C00FB9DBF /* MovsSingleton.swift in Sources */,
 				0F8ED6B722FEF38600FB9DBF /* MoviesDatasource.swift in Sources */,
 				0F8ED6AF22FE328600FB9DBF /* MovieServices.swift in Sources */,
 				0F8ED6B322FEE81900FB9DBF /* UIView+extensions.swift in Sources */,
+				0FC2BEB2230050C40009184A /* FavoritesTableViewCell.swift in Sources */,
 				0F3D9E3C22FC46B20043149B /* Bundle+extensions.swift in Sources */,
 				0F3D9E4422FC48F30043149B /* SplashViewController.swift in Sources */,
 			);

@@ -76,32 +76,34 @@ class BaseViewController: UIViewController {
   
   // MARK: - Navigation
   
-  func addRightBarButtonItem(with icon: UIImage, target: Any?, action: Selector?) {
+  func addRightBarButtonItem(with icon: UIImage, iconTintColor: UIColor? = nil, target: Any?, action: Selector?) {
     let customButton = UIBarButtonItem(image: icon, style: .plain, target: target, action: action)
+    
+    if let tintColor = iconTintColor {
+      customButton.tintColor = tintColor
+    }
 
     self.navigationItem.rightBarButtonItem = customButton
   }
   
-  func showErrorMessage(_ message: String, tryAgainCallback: AlertCallback? = nil) {
+  func showErrorMessage(_ message: String, withTryAgainButton: Bool = true, tryAgainCallback: AlertCallback? = nil) {
     let alert = UIAlertController(title: "Ops!", message: message, preferredStyle: .alert)
 
     let closeAction = UIAlertAction(title: "close".localized(), style: .cancel, handler: nil)
     
-    let tryAgainAction = UIAlertAction(title: "try-again".localized(), style: .default) { _ in
-      guard let handler = tryAgainCallback else { return }
-      handler()
-    }
-    
     alert.addAction(closeAction)
-    alert.addAction(tryAgainAction)
+    
+    if withTryAgainButton {
+      let tryAgainAction = UIAlertAction(title: "try-again".localized(), style: .default) { _ in
+        guard let handler = tryAgainCallback else { return }
+        handler()
+      }
+      
+      
+      alert.addAction(tryAgainAction)
+    }
 
     self.present(alert, animated: true, completion: nil)
   }
-  
-  // MARK: - Commom methods
-  
-  @objc internal func filterAction() {
-    
-  }
-  
+
 }

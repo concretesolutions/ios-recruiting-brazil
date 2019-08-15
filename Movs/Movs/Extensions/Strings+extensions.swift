@@ -14,4 +14,8 @@ extension String {
     return NSLocalizedString(self, comment: "")
   }
   
+  func toDate() -> Date {
+    return Date()
+  }
+
 }

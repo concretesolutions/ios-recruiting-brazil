@@ -15,6 +15,23 @@ class MovsSingleton {
   var globalSettings: Settings?
   var genres: [Genre] = []
   
+  var avaliableDates: [String] {
+    return self.generateDates()
+  }
+  
   private init() {}
+  
+  fileprivate func generateDates() -> [String] {
+    var dates = [String]()
+    let calendar = Calendar.current
+
+    let actualYear = calendar.component(.year, from: Date())
+    
+    for year in 1900...actualYear {
+      dates.append("\(year)")
+    }
+    
+    return dates.reversed()
+  }
   
 }
