@@ -73,17 +73,13 @@ class APIController{
     }
     
     //Fetch the image of a specified movie
-    func downloadImage(path: String?, completion: @escaping (UIImage?) -> Void){
-        
-        guard let path = path else {return}
+    func downloadImage(path: String, completion: @escaping (UIImage?) -> Void){
         guard let url = URL(string: ApiPaths.image.path + path) else {return}
         
         getImageData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             if let image = UIImage(data: data){
                 completion(image)
-            }else{
-                completion(UIImage(named: "Splash"))
             }
         }
     }

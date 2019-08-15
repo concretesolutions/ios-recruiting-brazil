@@ -46,10 +46,10 @@ class MovieGridCell: UICollectionViewCell{
         return label
     }()
     
-    private lazy var favImage: UIImageView = {
-        let favImage = UIImageView()
-        favImage.contentMode = .scaleAspectFit
-        return favImage
+    private lazy var favImageDisplay: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        return view
     }()
     
     
@@ -61,9 +61,10 @@ class MovieGridCell: UICollectionViewCell{
 
 //MARK: - Feeds the data to the elements
 extension MovieGridCell {
-    func configure(withViewModel viewModel: MoviePresentable){
+    func configure(withViewModel viewModel: MoviePresentable,favImage: String){
         nameLabel.text = viewModel.name
         imageView.image = viewModel.bannerImage
+        favImageDisplay.image = UIImage(named: favImage)
     }
 }
 
@@ -73,7 +74,7 @@ extension MovieGridCell: CodeView{
         verticalContainer.addSubview(imageView)
         verticalContainer.addSubview(horizonalContainer)
         horizonalContainer.addSubview(nameLabel)
-        horizonalContainer.addSubview(favImage)
+        horizonalContainer.addSubview(favImageDisplay)
         addSubview(verticalContainer)
     }
     
@@ -100,7 +101,7 @@ extension MovieGridCell: CodeView{
             make.right.equalToSuperview().inset(50)
         }
         
-        favImage.snp.makeConstraints { (make) in
+        favImageDisplay.snp.makeConstraints { (make) in
             make.right.centerY.equalToSuperview().inset(5)
             make.height.width.equalTo(30)
         }

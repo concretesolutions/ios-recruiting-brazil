@@ -38,13 +38,17 @@ class SimplifiedMovie: MoviePresentable{
         let prefixDate = movie.release_date.prefix(4)
         self.date = String(prefixDate)
         
-        loadImage(path: movie.poster_path) { (image) in
-            self.bannerImage = image
+        if let path = movie.poster_path {
+            loadImage(path: path) { (image) in
+                self.bannerImage = image
+            }
+        }else{
+            self.bannerImage = UIImage(named: "Splash")
         }
     }
     
     //Loads the movie banner from the api
-    func loadImage(path: String?, completion: @escaping (UIImage) -> Void ){
+    func loadImage(path: String, completion: @escaping (UIImage) -> Void ){
         APIController.sharedAccess.downloadImage(path: path) { (fetchedImage) in
             DispatchQueue.main.async {
                 if let image = fetchedImage{

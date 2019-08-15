@@ -26,6 +26,10 @@ class MovieGridController: UIViewController {
         refreshData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        refreshData()
+    }
+    
     func refreshData() {
         DispatchQueue.main.async { [weak self] in
             self?.screen.gridView.reloadData()
@@ -34,6 +38,16 @@ class MovieGridController: UIViewController {
     }
 }
 
+//MARK: - Calls the details screen when a movie is selected
+extension MovieGridController{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMovie = viewModel.movies[indexPath.row]
+        
+        let detailsVC = DetailsController()
+        detailsVC.viewModel.movie = selectedMovie
+        navigationController?.pushViewController(detailsVC, animated: true)
+    }
+}
 
 //MARK: - Collection DataSource Methods
 extension MovieGridController: UICollectionViewDataSource{
@@ -44,10 +58,12 @@ extension MovieGridController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieGridCell.reuseIdentifier, for: indexPath) as! MovieGridCell
         let movie = viewModel.movies[indexPath.row]
-        cell.configure(withViewModel: movie)
+        let favImage = viewModel.checkFavorite(movieID: movie.id)
+        cell.configure(withViewModel: movie, favImage: favImage)
         return cell
     }
 }
+
 
 
 //MARK: - Collection Layout Methods
@@ -63,6 +79,7 @@ extension MovieGridController: UICollectionViewDelegate, UICollectionViewDelegat
         }
     }
     
+    // Distance to the screen sides
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(10)
     }

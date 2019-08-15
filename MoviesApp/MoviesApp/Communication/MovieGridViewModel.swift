@@ -37,4 +37,14 @@ extension MovieGridViewModel {
             completion(true)
         }
     }
+    
+    //Check if a movie is a favorite to display in the grid
+    func checkFavorite(movieID: Int) -> String{
+        let isFavorite = FavoriteCRUD.sharedCRUD.checkFavoriteMovies(movieId: "\(movieID)")
+        if isFavorite{
+            return "favorite_gray_icon"
+        }else{
+            return "favorite_empty_icon"
+        }
+    }
 }

@@ -23,7 +23,6 @@ class TabBarController: UITabBarController {
         mainController.tabBarItem.image = UIImage(named: "list_icon")
         mainController.tabBarItem.selectedImage = UIImage(named: "list_icon")
         
-        
         let favController = UINavigationController(rootViewController: FavoriteController())
         favController.tabBarItem.image = UIImage(named: "favorite_empty_icon")
         favController.tabBarItem.selectedImage = UIImage(named: "favorite_empty_icon")
