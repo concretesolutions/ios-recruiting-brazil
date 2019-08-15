@@ -1,0 +1,19 @@
+target 'MoviesApp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for MoviesApp
+  pod 'SnapKit', '~> 5.0.0'
+  pod 'SwipeCellKit'
+
+  target 'MoviesAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'MoviesAppUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
