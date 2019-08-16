@@ -92,11 +92,14 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	
 	private func getPopularMovies() {
 		
-		let size = CGSize(width: 30, height: 30)
-		startAnimating(size, message: "Fetching movies...", type: .ballRotateChase, fadeInAnimation: nil)
-		
-		let request = PopularMoviesList.GetPopularMovies.Request(page: nextPage)
-		interactor?.getPopularMovies(request: request)
+		if nextPage > 0 {
+			
+			let size = CGSize(width: 30, height: 30)
+			startAnimating(size, message: "Fetching movies...", type: .ballRotateChase, fadeInAnimation: nil)
+			
+			let request = PopularMoviesList.GetPopularMovies.Request(page: nextPage)
+			interactor?.getPopularMovies(request: request)
+		}
 	}
 	
 	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel) {
@@ -107,7 +110,12 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 		
 		if viewModel.error == nil, let movies = viewModel.movies {
 			
-			nextPage += 1
+			if viewModel.hasNextPage {
+				nextPage += 1
+			}else{
+				nextPage = 0
+			}
+			
 			self.movies += movies
 			
 			DispatchQueue.main.async {
@@ -116,6 +124,7 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 		}else{
 			
 			let errorView = ErrorView(forView: collectionView, withMessage: "Um erro ocorreu. Por favor, tente novamente.")
+			errorView.tag = 99
 			
 			DispatchQueue.main.async {
 				self.collectionView.addSubview(errorView)

@@ -30,6 +30,7 @@ enum PopularMoviesList {
 		
 		struct ViewModel {
 			let movies:[MovieViewModel]?
+			let hasNextPage:Bool
 			let error:Error?
 		}
 	}

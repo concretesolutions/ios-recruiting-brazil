@@ -30,9 +30,9 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 		if response.error == nil {
 			
 			let moviesView = getMoviesView(response.movies ?? [])
-			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: moviesView, error: nil)
+			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: moviesView, hasNextPage: response.hasNextPage, error: nil)
 		}else{
-			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: nil, error: response.error)
+			viewModel = PopularMoviesList.GetPopularMovies.ViewModel(movies: nil, hasNextPage: response.hasNextPage, error: response.error)
 		}
 	
 		viewController?.displayPopularMovies(viewModel: viewModel)
