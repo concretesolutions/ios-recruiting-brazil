@@ -18,7 +18,8 @@ class DetailsController: UIViewController {
         
         screen.configure(detailedMovie: viewModel.movie!, genreNames: viewModel.detailsGenres())
       
-        let favoriteButton = UIBarButtonItem(image: UIImage(named: viewModel.checkFavorite(movieID: viewModel.movie!.id)), style: .plain, target: self, action: #selector(addFavoriteAction))
+        let buttonImage = viewModel.checkFavorite(movieID: viewModel.movie!.id)
+        let favoriteButton = UIBarButtonItem(image: UIImage(named: buttonImage), style: .plain, target: self, action: #selector(addFavoriteAction))
         navigationItem.rightBarButtonItem = favoriteButton
     }
     

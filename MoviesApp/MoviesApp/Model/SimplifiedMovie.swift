@@ -29,16 +29,16 @@ class SimplifiedMovie: MoviePresentable{
     var genres: [Genre]
     var date: String
     
-    init(movie: Movie) {
-        self.id = movie.id
-        self.name = movie.original_title
-        self.description = movie.overview
-        self.genres = APIController.allGenres.filter {movie.genre_ids.contains($0.id)}
+    init(movieID: Int,movieTitle: String,movieOverview: String,movieGenres: [Int],movieDate: String,posterPath: String?) {
+        self.id = movieID
+        self.name = movieTitle
+        self.description = movieOverview
+        self.genres = APIController.allGenres.filter {movieGenres.contains($0.id)}
         
-        let prefixDate = movie.release_date.prefix(4)
+        let prefixDate = movieDate.prefix(4)
         self.date = String(prefixDate)
         
-        if let path = movie.poster_path {
+        if let path = posterPath {
             loadImage(path: path) { (image) in
                 self.bannerImage = image
             }

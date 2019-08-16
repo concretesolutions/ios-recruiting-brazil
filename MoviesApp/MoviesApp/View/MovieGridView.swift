@@ -22,15 +22,14 @@ class MovieGridView: UIView{
         return view
     }()
     
-//    lazy var loadIndicator: UIActivityIndicatorView = {
-//        let view = UIActivityIndicatorView(frame: .zero)
-//        view.color = .red
-//        return view
-//    }()
-    
     
     lazy var errorLabel: UILabel = {
         let view = UILabel()
+        view.text = "Error loading movies."
+        view.font = UIFont.systemFont(ofSize: 50)
+        view.numberOfLines = 0
+        view.textAlignment = .center
+        view.textColor = .black
         view.isHidden = false
         return view
     }()

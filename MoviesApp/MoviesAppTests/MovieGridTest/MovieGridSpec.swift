@@ -6,7 +6,6 @@
 //  Copyright © 2019 Eric Winston. All rights reserved.
 //
 
-import XCTest
 import Quick
 import Nimble
 import Nimble_Snapshots
@@ -15,16 +14,16 @@ import Nimble_Snapshots
 
 class MovieGridSpec: QuickSpec{
     
+    var view = MovieGridController()
+    
     override func spec() {
-        describe("the MovieGrid UI") {
-            it("should have the expected look and fell"){
+        describe("Creating a simplified movie") {
+            it(""){
                 let frame = UIScreen.main.bounds
                 let view =  MovieGridView(frame: frame)
                 
                 expect(view) == snapshot("MovieGridView")
             }
         }
-        
-        
     }
 }

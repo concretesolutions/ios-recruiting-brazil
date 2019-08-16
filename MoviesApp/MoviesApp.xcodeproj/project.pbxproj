@@ -16,6 +16,9 @@
 		432AF3692305D0ED0091634C /* MovieGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432AF3682305D0ED0091634C /* MovieGridViewModel.swift */; };
 		432AF36B2305D1360091634C /* MovieGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432AF36A2305D1360091634C /* MovieGridView.swift */; };
 		436C457223070D10006A44E9 /* MovieGridSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C457123070D10006A44E9 /* MovieGridSpec.swift */; };
+		436C457523074286006A44E9 /* MovieGridSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C457423074286006A44E9 /* MovieGridSnapshots.swift */; };
+		436C457823074431006A44E9 /* MovieSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C457723074431006A44E9 /* MovieSpec.swift */; };
+		436C457A2307460D006A44E9 /* MovieMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C45792307460D006A44E9 /* MovieMock.swift */; };
 		43A24B002305D35A00B01B28 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A24AFF2305D35A00B01B28 /* Movie.swift */; };
 		43A24B042305D57A00B01B28 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A24B032305D57A00B01B28 /* CodeView.swift */; };
 		43A24B062305DAC000B01B28 /* SimplifiedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A24B052305DAC000B01B28 /* SimplifiedMovie.swift */; };
@@ -64,6 +67,9 @@
 		432AF3682305D0ED0091634C /* MovieGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridViewModel.swift; sourceTree = "<group>"; };
 		432AF36A2305D1360091634C /* MovieGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridView.swift; sourceTree = "<group>"; };
 		436C457123070D10006A44E9 /* MovieGridSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridSpec.swift; sourceTree = "<group>"; };
+		436C457423074286006A44E9 /* MovieGridSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridSnapshots.swift; sourceTree = "<group>"; };
+		436C457723074431006A44E9 /* MovieSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSpec.swift; sourceTree = "<group>"; };
+		436C45792307460D006A44E9 /* MovieMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMock.swift; sourceTree = "<group>"; };
 		43A24AFF2305D35A00B01B28 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		43A24B032305D57A00B01B28 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		43A24B052305DAC000B01B28 /* SimplifiedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedMovie.swift; sourceTree = "<group>"; };
@@ -147,7 +153,8 @@
 		432AF3452305CB550091634C /* MoviesAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				436C457123070D10006A44E9 /* MovieGridSpec.swift */,
+				436C4576230743E6006A44E9 /* MovieTest */,
+				436C457323074203006A44E9 /* MovieGridTest */,
 				432AF3482305CB550091634C /* Info.plist */,
 			);
 			path = MoviesAppTests;
@@ -209,6 +216,24 @@
 				43A24B032305D57A00B01B28 /* CodeView.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		436C457323074203006A44E9 /* MovieGridTest */ = {
+			isa = PBXGroup;
+			children = (
+				436C457123070D10006A44E9 /* MovieGridSpec.swift */,
+				436C457423074286006A44E9 /* MovieGridSnapshots.swift */,
+			);
+			path = MovieGridTest;
+			sourceTree = "<group>";
+		};
+		436C4576230743E6006A44E9 /* MovieTest */ = {
+			isa = PBXGroup;
+			children = (
+				436C457723074431006A44E9 /* MovieSpec.swift */,
+				436C45792307460D006A44E9 /* MovieMock.swift */,
+			);
+			path = MovieTest;
 			sourceTree = "<group>";
 		};
 		D01EAE9F08606E674B43BAA0 /* Pods */ = {
@@ -449,6 +474,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436C457A2307460D006A44E9 /* MovieMock.swift in Sources */,
+				436C457523074286006A44E9 /* MovieGridSnapshots.swift in Sources */,
+				436C457823074431006A44E9 /* MovieSpec.swift in Sources */,
 				436C457223070D10006A44E9 /* MovieGridSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

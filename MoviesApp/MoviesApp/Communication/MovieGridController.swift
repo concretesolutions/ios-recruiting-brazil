@@ -25,17 +25,15 @@ class MovieGridController: UIViewController {
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         refreshData()
+        
+        if viewModel.movies.count == 0{
+            screen.errorLabel.isHidden = false
+        }else{
+            screen.errorLabel.isHidden = true
+        }
     }
-    
-//    func didLoadAllMovies(){
-//        refreshData()
-//        screen.loadIndicator.stopAnimating()
-//        screen.loadIndicator.isHidden = true
-//        screen.gridView.isHidden = false
-//    }
     
     func refreshData() {
         DispatchQueue.main.async { [weak self] in
@@ -72,7 +70,6 @@ extension MovieGridController: UICollectionViewDataSource{
         return cell
     }
 }
-
 
 
 //MARK: - Collection Layout Methods
