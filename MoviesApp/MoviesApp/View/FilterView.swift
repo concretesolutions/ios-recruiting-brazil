@@ -43,12 +43,13 @@ extension FilterView: CodeView{
         
         picker.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
+            make.top.equalToSuperview().offset(175)
             make.height.equalToSuperview().multipliedBy(0.4)
         }
         
         applyButton.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
+            make.left.equalTo(snp_leftMargin)
+            make.right.equalTo(snp_rightMargin)
             make.top.equalTo(picker.snp.bottom).offset(50)
             make.height.equalToSuperview().multipliedBy(0.1)
         }
