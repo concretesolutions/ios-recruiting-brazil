@@ -12,11 +12,14 @@ class DetailsController: UIViewController {
     let screen = DetailsView()
     let viewModel = DetailsViewModel()
     
+    
     override func viewDidLoad() {
         self.view = screen
         
         screen.configure(detailedMovie: viewModel.movie!, genreNames: viewModel.detailsGenres())
-        screen.button.addTarget(self, action: #selector(addFavoriteAction), for: .touchUpInside)
+      
+        let favoriteButton = UIBarButtonItem(image: UIImage(named: viewModel.checkFavorite(movieID: viewModel.movie!.id)), style: .plain, target: self, action: #selector(addFavoriteAction))
+        navigationItem.rightBarButtonItem = favoriteButton
     }
     
     @objc func addFavoriteAction(){

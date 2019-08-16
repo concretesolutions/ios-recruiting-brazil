@@ -28,28 +28,11 @@ class DetailsView: UIView {
         return view
     }()
     
-    lazy var horizonalContainer: UIStackView = {
-        let view = UIStackView(frame: .zero)
-        view.axis = .horizontal
-        view.backgroundColor = .white
-        view.spacing = 5
-        return view
-    }()
-    
-    
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.textAlignment = .center
         view.numberOfLines = 0
         return view
-    }()
-    
-    let button: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
-        button.imageView?.sizeToFit()
-        button.backgroundColor = .red
-        return button
     }()
     
     lazy var genresLabel: UILabel = {
@@ -88,10 +71,7 @@ extension DetailsView{
 //MARK: - Extension to define the cell constraints
 extension DetailsView: CodeView{
     func buildViewHierarchy() {
-        addSubview(imageView)
-        horizonalContainer.addSubview(titleLabel)
-        horizonalContainer.addSubview(button)
-        verticalContainer.addSubview(horizonalContainer)
+        verticalContainer.addSubview(titleLabel)
         verticalContainer.addSubview(genresLabel)
         imageView.addSubview(verticalContainer)
         addSubview(imageView)
@@ -106,28 +86,14 @@ extension DetailsView: CodeView{
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.bottom.equalTo(genresLabel.snp.top)
             make.top.equalToSuperview().offset(10)
-            make.width.equalToSuperview().multipliedBy(0.8)
-        }
-        
-        button.snp.makeConstraints { (make) in
-            make.right.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalTo(genresLabel.snp.top)
-            make.left.equalTo(titleLabel.snp.right)
-        }
-        
-        horizonalContainer.snp.makeConstraints { (make) in
-            make.right.left.equalToSuperview()
-            make.bottom.equalTo(genresLabel.snp.top)
-            make.top.equalToSuperview()
         }
         
         genresLabel.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(horizonalContainer.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom)
             make.bottom.equalTo(verticalContainer.snp.bottom)
         }
         

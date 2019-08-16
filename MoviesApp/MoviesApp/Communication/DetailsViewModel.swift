@@ -12,6 +12,7 @@ import UIKit
 class DetailsViewModel{
     var movie: SimplifiedMovie?
     var isFavorite: Bool = false
+    var displayImage: String = ""
     
     //Transformes the genres list in a simple string
     func detailsGenres() -> String {
@@ -37,6 +38,17 @@ class DetailsViewModel{
             }
         }else{
             print("Ja foi favoritado")
+        }
+    }
+    
+    //Check if a movie is a favorite to display in the grid
+    func checkFavorite(movieID: Int) -> String{
+        let check = FavoriteCRUD.sharedCRUD.checkFavoriteMovies(movieId: "\(movieID)")
+        if check{
+            isFavorite = true
+            return "favorite_gray_icon"
+        }else{
+            return "favorite_empty_icon"
         }
     }
 }
