@@ -36,9 +36,10 @@ class MovieSearchViewController: UIViewController {
         api()
     }
     
-    func setupView(service: MovieService){
-        self.service = service
-    }
+    /*SetupView Inject Dependence(MOCKS...)
+     func setupView(service: MovieService){
+     self.service = service
+     }*/
     
     func configureViewComponents(){
         //Navigation Controller
@@ -52,10 +53,6 @@ class MovieSearchViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainDarkBlue(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
         //
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
-        //TODO: left bar button
-        //        let rightButton : UIBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "IconFilter"), style: .plain, target: self, action: #selector(self.actionFilter(sender:)))
-        //        self.navigationItem.rightBarButtonItem = rightButton
         
         
         //Search
@@ -83,9 +80,9 @@ class MovieSearchViewController: UIViewController {
     // MARK: - API
     func api(){
         service.getMovies(page: pageCount){ [weak self] movies in
-                guard let self = self else { return }
-                self.movie = movies
-             DispatchQueue.main.async {
+            guard let self = self else { return }
+            self.movie = movies
+            DispatchQueue.main.async {
                 self.setupCollectionView(with: self.movie)
             }
         }

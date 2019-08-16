@@ -9,7 +9,6 @@
 import Quick
 import Nimble
 import Nimble_Snapshots
-import XCTest
 @testable import AppMovie
 
 class MovieSearchViewControllerSpec: QuickSpec {
@@ -20,29 +19,19 @@ class MovieSearchViewControllerSpec: QuickSpec {
             
             beforeEach {
                 
-//                let tabBarController:UITabBarController = self.window?.rootViewController as! UITabBarController
-//                let navBar = tabBarController.viewControllers?[0] as! UINavigationController
-//                let controller = navBar.topViewController as! MovieSearchViewController
-//                controller.setupView(service: MovieServiceImpl())
-                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let tab = storyboard.instantiateInitialViewController() as! UITabBarController
                 let nav = tab.viewControllers?[0] as! UINavigationController
-                sut = nav.topViewController as! MovieSearchViewController
-                
-            
+                sut = nav.topViewController as? MovieSearchViewController
                 print(sut)
-                //  sut = nav.topViewController as! MovieSearchViewController
-                // sut.service = MovieServiceMock()
-                sut.setupView(service: MovieServiceMock())
-                sut.api()
-                print(sut.movie.count)
+                
+                sut.service = MovieServiceMock()
+                /*Metodo usando Injecao de Dependencia
+                 sut.setupView(service: MovieServiceMock()) */
+                
                 _ = sut.view
                 print(sut.movie.count)
-                let test = MovieServiceMock()
-                //print(test.moviesS)
                 
-                //_ = sut.view
             }
             
             it("should have a valid instance") {
@@ -53,7 +42,7 @@ class MovieSearchViewControllerSpec: QuickSpec {
                 expect(sut.movie.count).to(equal(20))
             }
             
-            describe("CharactersViewController UI") {
+            describe("MoviesSearchViewController UI") {
                 it("should have the expected calling ui") {
                     expect(sut.view) == recordSnapshot()
                 } }
