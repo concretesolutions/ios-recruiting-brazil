@@ -14,7 +14,7 @@ import UIKit
 
 protocol MovieDetailDisplayLogic: class {
 	func displayMovieDetail(viewModel: MovieDetail.ShowDetail.ViewModel)
-//	func displayFavoriteStatus(viewModel: )
+	func displayFavoriteStatus(viewModel: MovieDetail.FavoriteMovie.ViewModel)
 }
 
 class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
@@ -53,26 +53,13 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
 		router.dataStore = interactor
 	}
 	
-	// MARK: - Routing
-	
-//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//		if let scene = segue.identifier {
-//
-//			let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-//
-//			if let router = router, router.responds(to: selector) {
-//				router.perform(selector, with: segue)
-//			}
-//		}
-//	}
-	
 	// MARK: - View lifecycle
 	
 	override func viewDidLoad() {
 		
 		super.viewDidLoad()
 		getMovieDetail()
+		getFavoriteStatus()
 	}
 	
 	// MARK: - Outlets & Vars
@@ -90,7 +77,7 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
 	
 	@IBAction func favorite(_ sender: UIButton) {
 		
-		
+		interactor?.favoriteMovie(request: MovieDetail.FavoriteMovie.Request())
 	}
 	
 	// MARK: - Show Movie Detail
@@ -111,5 +98,21 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
 		yearLabel.text = movie.year
 		genresLabel.text = movie.genres
 		movieOverviewLabel.text = movie.overview
+	}
+	
+	// MARK: - Favorite Movie
+	
+	private func getFavoriteStatus() {
+		
+		interactor?.getFavoriteStatus(request: MovieDetail.FavoriteMovie.Request())
+	}
+	
+	func displayFavoriteStatus(viewModel: MovieDetail.FavoriteMovie.ViewModel) {
+		
+		let imageName = viewModel.isFavorited ? "favorite_full_icon" : "favorite_empty_icon"
+		
+		DispatchQueue.main.async {
+			self.favoriteButton.setImage(UIImage(named: imageName), for: .normal)
+		}
 	}
 }

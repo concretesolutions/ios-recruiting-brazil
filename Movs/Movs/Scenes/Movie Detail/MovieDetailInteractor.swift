@@ -14,6 +14,8 @@ import UIKit
 
 protocol MovieDetailBusinessLogic {
 	func getMovieDetail(request: MovieDetail.ShowDetail.Request)
+	func favoriteMovie(request: MovieDetail.FavoriteMovie.Request)
+	func getFavoriteStatus(request: MovieDetail.FavoriteMovie.Request)
 }
 
 protocol MovieDetailDataStore {
@@ -33,6 +35,46 @@ class MovieDetailInteractor: MovieDetailBusinessLogic, MovieDetailDataStore {
 		if let movie = self.movie {
 			let response = MovieDetail.ShowDetail.Response(movie: movie)
 			presenter?.presentMovieDetail(response: response)
+		}
+	}
+	
+	// MARK: - Favorite Movie
+	
+	func favoriteMovie(request: MovieDetail.FavoriteMovie.Request) {
+		
+		if let movie = self.movie {
+			
+			var response:MovieDetail.FavoriteMovie.Response
+			
+			if let result = FavoriteMovie.getFavoriteMovies(withIds: [movie.id ?? 0]).1, result.count > 0, let favoriteMovie = result.first {
+				
+				_ = CoreDataManager.sharedInstance.deleteInCoreData(object: favoriteMovie)
+				response = MovieDetail.FavoriteMovie.Response(isFavorited: false)
+			}else{
+			
+				FavoriteMovie.add(movie: movie)
+				response = MovieDetail.FavoriteMovie.Response(isFavorited: true)
+			}
+			
+			presenter?.presentFavoriteStatus(response: response)
+		}
+	}
+	
+	func getFavoriteStatus(request: MovieDetail.FavoriteMovie.Request) {
+		
+		if let movie = self.movie {
+			
+			var response:MovieDetail.FavoriteMovie.Response
+			
+			if let result = FavoriteMovie.getFavoriteMovies(withIds: [movie.id ?? 0]).1, result.count > 0 {
+				
+				response = MovieDetail.FavoriteMovie.Response(isFavorited: true)
+			}else{
+				
+				response = MovieDetail.FavoriteMovie.Response(isFavorited: false)
+			}
+			
+			presenter?.presentFavoriteStatus(response: response)
 		}
 	}
 }

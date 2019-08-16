@@ -39,4 +39,24 @@ struct Movie: Codable, Equatable, CustomStringConvertible {
     var description: String {
         return "\(title ?? "-")"
     }
+	
+	static func getMovieData(ofFavoriteMovies movies:[FavoriteMovie]) -> [Movie] {
+		
+		var moviesData:[Movie] = []
+		
+		for movie in movies {
+			
+			let movieData:Movie = Movie(title: movie.title,
+										poster: movie.posterUrl,
+										backdrop: movie.backdropUrl,
+										date: movie.date as Date?,
+										genre_ids: movie.genre_ids as? [Int] ?? [],
+										overview: movie.overview,
+										id: Int(movie.id))
+			
+			moviesData.append(movieData)
+		}
+		
+		return moviesData
+	}
 }

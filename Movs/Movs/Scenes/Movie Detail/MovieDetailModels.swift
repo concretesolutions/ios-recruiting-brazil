@@ -30,6 +30,23 @@ enum MovieDetail {
 			let movieDetail: MovieDetailViewModel
 		}
 	}
+	
+	// MARK: - Favorite Movie
+	
+	enum FavoriteMovie {
+		
+		struct Request {
+			
+		}
+		
+		struct Response {
+			let isFavorited:Bool
+		}
+		
+		struct ViewModel {
+			let isFavorited:Bool
+		}
+	}
 }
 
 struct MovieDetailViewModel {

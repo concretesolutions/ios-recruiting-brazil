@@ -14,6 +14,7 @@ import UIKit
 
 protocol MovieDetailPresentationLogic {
 	func presentMovieDetail(response: MovieDetail.ShowDetail.Response)
+	func presentFavoriteStatus(response: MovieDetail.FavoriteMovie.Response)
 }
 
 class MovieDetailPresenter: MovieDetailPresentationLogic {
@@ -32,5 +33,12 @@ class MovieDetailPresenter: MovieDetailPresentationLogic {
 																						   genres: Genre.getGenresNames(withIds: movie.genre_ids ?? []),
 																						   overview: response.movie.overview ?? ""))
 		viewController?.displayMovieDetail(viewModel: viewModel)
+	}
+	
+	// MARK: - Favorite Movie
+	
+	func presentFavoriteStatus(response: MovieDetail.FavoriteMovie.Response) {
+		
+		viewController?.displayFavoriteStatus(viewModel: MovieDetail.FavoriteMovie.ViewModel(isFavorited: response.isFavorited))
 	}
 }

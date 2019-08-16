@@ -56,6 +56,11 @@ public class Genre: NSManagedObject {
 		}
 	}
 	
+	
+	/// Return a formatted string with the genres names
+	///
+	/// - Parameter ids: Genres ids
+	/// - Returns: The genres names sparated by |
 	static func getGenresNames(withIds ids:[Int]) -> String {
 		
 		var genresNames:[String] = []

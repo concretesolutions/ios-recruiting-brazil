@@ -93,9 +93,11 @@ class CoreDataManager{
         
         let context = self.persistentContainer.viewContext
         context.delete(object)
+		NSLog("Deleting object...")
         
         do {
             try context.save()
+			NSLog("Object deleted!")
         } catch let error {
             success = false
             NSLog(error.localizedDescription)
