@@ -57,17 +57,33 @@ enum PopularMoviesList {
 	
 	enum GetGenresList{
 		
-		struct Request
-		{
+		struct Request {
 			
 		}
-		struct Response
-		{
+		struct Response {
+			
 			var genres:GenresResult
 		}
-		struct ViewModel
-		{
+		struct ViewModel{
 			
+		}
+	}
+	
+	// MARK: - Filtered Movies
+	
+	enum FilteredMovies{
+		
+		struct Request {
+			let text:String
+			let popularMovies:[MovieViewModel]
+		}
+		struct Response {
+			let text:String
+			let filteredMovies:[MovieViewModel]
+		}
+		struct ViewModel {
+			let text:String
+			let filteredMovies:[MovieViewModel]
 		}
 	}
 }

@@ -109,6 +109,8 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
 		
 		if viewModel.error == nil {
 			
+			self.tableView.viewWithTag(99)?.removeFromSuperview()
+			
 			self.favoriteMovies = viewModel.favoriteMovies ?? []
 			
 			DispatchQueue.main.async {
@@ -118,9 +120,12 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
 			
 			DispatchQueue.main.async {
 			
+				self.resetContent()
+				
 				self.view.layoutIfNeeded()
-				let errorView = ErrorView(forView: self.tableView, withMessage: "Um erro ocorreu. Por favor, tente novamente.")
+				let errorView = ErrorView(forView: self.tableView, withMessage: "An error ocurred. Please, try again.")
 				errorView.tag = 99
+				
 				self.tableView.addSubview(errorView)
 			}
 		}

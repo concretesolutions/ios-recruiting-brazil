@@ -15,6 +15,7 @@ import UIKit
 protocol PopularMoviesListPresentationLogic {
 	func presentPopularMovies(response: PopularMoviesList.GetPopularMovies.Response)
 	func presentMovieDetail(response: PopularMoviesList.ShowMovieDetail.Response)
+	func presentFilteredMovies(response: PopularMoviesList.FilteredMovies.Response)
 }
 
 class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
@@ -57,5 +58,12 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 		
 		let viewModel = PopularMoviesList.ShowMovieDetail.ViewModel()
 		self.viewController?.displayMovieDetail(viewModel: viewModel)
+	}
+	
+	// MARK: - Filtered Movies
+	
+	func presentFilteredMovies(response: PopularMoviesList.FilteredMovies.Response) {
+		
+		viewController?.displayFilteredMovies(viewModel: PopularMoviesList.FilteredMovies.ViewModel(text: response.text, filteredMovies: response.filteredMovies))
 	}
 }

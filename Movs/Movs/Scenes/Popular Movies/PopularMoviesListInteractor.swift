@@ -16,6 +16,7 @@ protocol PopularMoviesListBusinessLogic {
 	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request)
 	func storeMovie(request: PopularMoviesList.ShowMovieDetail.Request)
 	func getGenres(request: PopularMoviesList.GetGenresList.Request)
+	func getFilteredMovies(request: PopularMoviesList.FilteredMovies.Request)
 }
 
 protocol PopularMoviesListDataStore {
@@ -83,5 +84,15 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 				Genre.add(genres: genreData)
 			}
 		})
+	}
+	
+	// MARK: - Filtered Movies
+	
+	func getFilteredMovies(request: PopularMoviesList.FilteredMovies.Request) {
+		
+		let filteredMovies = request.popularMovies.filter{ $0.title?.uppercased().contains(request.text.uppercased()) ?? false }
+		
+		let response = PopularMoviesList.FilteredMovies.Response(text: request.text, filteredMovies: filteredMovies)
+		presenter?.presentFilteredMovies(response: response)
 	}
 }

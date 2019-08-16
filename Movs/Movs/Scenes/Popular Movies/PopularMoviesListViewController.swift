@@ -16,6 +16,7 @@ import NVActivityIndicatorView
 protocol PopularMoviesListDisplayLogic: class {
 	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel)
 	func displayMovieDetail(viewModel: PopularMoviesList.ShowMovieDetail.ViewModel)
+	func displayFilteredMovies(viewModel: PopularMoviesList.FilteredMovies.ViewModel)
 }
 
 class PopularMoviesListViewController: UIViewController, PopularMoviesListDisplayLogic, NVActivityIndicatorViewable {
@@ -86,7 +87,9 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	
 	let cellIdentifier = "MovieCell"
 	var movies:[MovieViewModel] = []
+	var filteredMovies:[MovieViewModel] = []
 	var nextPage = 1
+	var filtering = false
 	
 	// MARK: - Get Popular Movies
 	
@@ -123,8 +126,7 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 			}
 		}else{
 			
-			let errorView = ErrorView(forView: collectionView, withMessage: "Um erro ocorreu. Por favor, tente novamente.")
-			errorView.tag = 99
+			let errorView = ErrorView(forView: collectionView, withMessage: "An error ocurred. Please, try again.")
 			
 			DispatchQueue.main.async {
 				self.collectionView.addSubview(errorView)
@@ -146,17 +148,59 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 		let request = PopularMoviesList.GetGenresList.Request()
 		self.interactor?.getGenres(request: request)
 	}
+	
+	// MARK: - Filter
+	
+	private func getFilteredMovies(withName name:String) {
+		
+		let request = PopularMoviesList.FilteredMovies.Request(text:name, popularMovies: movies)
+		interactor?.getFilteredMovies(request: request)
+	}
+	
+	func displayFilteredMovies(viewModel: PopularMoviesList.FilteredMovies.ViewModel) {
+		
+		filteredMovies = viewModel.filteredMovies
+		filtering = true
+		
+		if filteredMovies.count > 0 {
+			
+			collectionView.viewWithTag(99)?.removeFromSuperview()
+			
+			DispatchQueue.main.async {
+				self.collectionView.reloadData()
+			}
+		}else{
+			
+			clearCollection()
+			
+			let notFoundView = NotFoundView(forView: collectionView, withMessage: "Your search by \"\(viewModel.text)\" didn't return any movie.")
+			notFoundView.tag = 99
+			
+			DispatchQueue.main.async {
+				self.collectionView.addSubview(notFoundView)
+			}
+		}
+	}
+	
+	private func clearCollection() {
+		
+		filteredMovies = []
+		
+		DispatchQueue.main.async {
+			self.collectionView.reloadData()
+		}
+	}
 }
 
 extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return movies.count
+		return filtering ? filteredMovies.count : movies.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let movie = movies[indexPath.row]
+		let movie = filtering ? filteredMovies[indexPath.row] : movies[indexPath.row]
 		
 		if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MovieCollectionViewCell {
 			
@@ -172,9 +216,22 @@ extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectio
 		let cell = collectionView.cellForItem(at: indexPath)
 		cell?.isSelected = false
 		
-		let movie = movies[indexPath.row]
+		let movie = filtering ? filteredMovies[indexPath.row] : movies[indexPath.row]
 		
 		let request = PopularMoviesList.ShowMovieDetail.Request(movieId: movie.id)
 		self.interactor?.storeMovie(request: request)
+	}
+}
+
+extension PopularMoviesListViewController: UISearchBarDelegate {
+	
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		
+		if !searchText.isEmpty {
+			getFilteredMovies(withName: searchText)
+		}else{
+			filtering = false
+			collectionView.reloadData()
+		}
 	}
 }
