@@ -73,12 +73,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarItem2?.selectedImage = UIImage.init(named: "favorite_empty_icon")?.withRenderingMode(.alwaysTemplate)
         tabBarItem2?.image = UIImage.init(named: "favorite_empty_icon")?.withRenderingMode(.alwaysTemplate)
         
+        let navBar = tabBarController.viewControllers?[0] as! UINavigationController
+        let controller = navBar.topViewController as! MovieSearchViewController
+        controller.setupView(service: MovieServiceImpl())
         // Change the title color of tab bar items
         //tabBarItem1?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : App.Style.color2, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0)], for: .normal)
         //tabBarItem2?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : App.Style.color2, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0)], for: .normal)
         //
         //tabBarItem1?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.gray, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0)], for: .highlighted)
         //tabBarItem2?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.gray, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12.0)], for: .highlighted)
+        
+        
         
     }
 
