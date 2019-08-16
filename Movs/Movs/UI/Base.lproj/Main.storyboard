@@ -60,19 +60,29 @@
                                                     <color key="textColor" name="AppColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_full_icon" translatesAutoresizingMaskIntoConstraints="NO" id="z42-gW-2Sm">
+                                                    <rect key="frame" x="106" y="4" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="jMz-Vp-xhB"/>
+                                                        <constraint firstAttribute="width" constant="30" id="tOD-WW-DEN"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" name="FontColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="eGB-A8-Er1" secondAttribute="trailing" id="5Bb-xO-uGm"/>
+                                            <constraint firstAttribute="trailing" secondItem="z42-gW-2Sm" secondAttribute="trailing" constant="4" id="9uH-9Q-QD5"/>
                                             <constraint firstItem="eGB-A8-Er1" firstAttribute="top" secondItem="xGs-3e-3QB" secondAttribute="top" id="HWz-WR-V0l"/>
                                             <constraint firstItem="eGB-A8-Er1" firstAttribute="leading" secondItem="xGs-3e-3QB" secondAttribute="leading" id="LNT-z3-FVl"/>
                                             <constraint firstAttribute="trailing" secondItem="Dro-jh-y5D" secondAttribute="trailing" id="Lgd-fi-dWT"/>
                                             <constraint firstAttribute="bottom" secondItem="Dro-jh-y5D" secondAttribute="bottom" id="Ohj-ZV-FoF"/>
                                             <constraint firstItem="Dro-jh-y5D" firstAttribute="top" secondItem="eGB-A8-Er1" secondAttribute="bottom" id="Zo0-zx-GpF"/>
+                                            <constraint firstItem="z42-gW-2Sm" firstAttribute="top" secondItem="xGs-3e-3QB" secondAttribute="top" constant="4" id="msU-Fd-jWj"/>
                                             <constraint firstItem="Dro-jh-y5D" firstAttribute="leading" secondItem="xGs-3e-3QB" secondAttribute="leading" id="qJK-xq-Ico"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="favoriteView" destination="z42-gW-2Sm" id="4SD-EP-EGy"/>
                                             <outlet property="posterImageView" destination="eGB-A8-Er1" id="QdF-j3-DKV"/>
                                             <outlet property="titleLabel" destination="Dro-jh-y5D" id="0KQ-xW-UDo"/>
                                         </connections>
@@ -370,6 +380,7 @@
     </scenes>
     <resources>
         <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="favorite_full_icon" width="18" height="16"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="list_icon" width="18" height="10"/>
         <namedColor name="AppColor">

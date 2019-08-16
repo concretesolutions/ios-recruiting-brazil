@@ -92,41 +92,27 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
 	
 	private func getFavoriteMovies() {
 		
-		resetContent()
 		interactor?.getFavoriteMovies(request: FavoriteMovies.GetFavoriteMovies.Request())
-	}
-	
-	private func resetContent() {
-		
-		favoriteMovies = []
-		
-		DispatchQueue.main.async {
-			self.tableView.reloadData()
-		}
 	}
 	
 	func displayFavoriteMovies(viewModel: FavoriteMovies.GetFavoriteMovies.ViewModel) {
 		
 		if viewModel.error == nil {
 			
-			self.tableView.viewWithTag(99)?.removeFromSuperview()
-			
 			self.favoriteMovies = viewModel.favoriteMovies ?? []
 			
 			DispatchQueue.main.async {
+				self.tableView.backgroundView = nil
 				self.tableView.reloadData()
 			}
 		} else {
 			
 			DispatchQueue.main.async {
-			
-				self.resetContent()
 				
 				self.view.layoutIfNeeded()
 				let errorView = ErrorView(forView: self.tableView, withMessage: "An error ocurred. Please, try again.")
-				errorView.tag = 99
 				
-				self.tableView.addSubview(errorView)
+				self.tableView.backgroundView = errorView
 			}
 		}
 	}
@@ -135,7 +121,6 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
 	
 	private func unfavorite(movieWithId id:Int) {
 		
-		resetContent()
 		interactor?.unfavoriteMovie(request: FavoriteMovies.UnfavoriteMovie.Request(id: id))
 	}
 	

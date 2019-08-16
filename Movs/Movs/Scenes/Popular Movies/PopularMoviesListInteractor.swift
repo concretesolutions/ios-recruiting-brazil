@@ -17,6 +17,7 @@ protocol PopularMoviesListBusinessLogic {
 	func storeMovie(request: PopularMoviesList.ShowMovieDetail.Request)
 	func getGenres(request: PopularMoviesList.GetGenresList.Request)
 	func getFilteredMovies(request: PopularMoviesList.FilteredMovies.Request)
+	func getFavoritedMovies(request: PopularMoviesList.RefreshFavoriteStatus.Request)
 }
 
 protocol PopularMoviesListDataStore {
@@ -94,5 +95,32 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 		
 		let response = PopularMoviesList.FilteredMovies.Response(text: request.text, filteredMovies: filteredMovies)
 		presenter?.presentFilteredMovies(response: response)
+	}
+	
+	// MARK: - Refresh Favorite Status
+	
+	func getFavoritedMovies(request: PopularMoviesList.RefreshFavoriteStatus.Request) {
+		
+		let favoriteMovies = (FavoriteMovie.getFavoriteMovies().0 ?? []).map { $0.id ?? 0 }
+		let popularMovies = request.movies.map { $0.id ?? 0 }
+		
+		let commonMovies = popularMovies.filter { favoriteMovies.contains($0) }
+		
+		var result:[MovieViewModel] = []
+		
+		for movie in request.movies {
+			
+			var newMovie = movie
+			
+			if commonMovies.contains(movie.id ?? 0) {
+				newMovie.favoriteStatus = true
+			}else{
+				newMovie.favoriteStatus = false
+			}
+			
+			result.append(newMovie)
+		}
+		
+		presenter?.presentFavoritedMovies(response: PopularMoviesList.RefreshFavoriteStatus.Response(movies: result))
 	}
 }

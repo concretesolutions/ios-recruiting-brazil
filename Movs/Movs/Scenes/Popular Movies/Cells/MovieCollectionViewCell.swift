@@ -12,12 +12,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
 	@IBOutlet weak var posterImageView: UIImageView!
 	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var favoriteView: UIView!
 	
 	let imageUrl = "https://image.tmdb.org/t/p/w500"
 	
 	override func prepareForReuse() {
 		posterImageView.image = nil
 		titleLabel.text = ""
+		favoriteView.isHidden = true
 	}
 	
 	func config(withMovie movie:MovieViewModel) {
@@ -28,6 +30,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
 			
 			let completePosterUrl = "\(imageUrl)\(posterUrl)"
 			posterImageView.setImage(withUrl: completePosterUrl)
+		}
+		
+		if movie.favoriteStatus == true {
+			favoriteView.isHidden = false
 		}
 	}
 }

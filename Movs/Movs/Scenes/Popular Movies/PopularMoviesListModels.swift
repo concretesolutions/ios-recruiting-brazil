@@ -86,6 +86,26 @@ enum PopularMoviesList {
 			let filteredMovies:[MovieViewModel]
 		}
 	}
+	
+	// MARK: - Refresh Favorite Status
+	
+	enum RefreshFavoriteStatus {
+		
+		struct Request {
+			
+			let movies: [MovieViewModel]
+		}
+		
+		struct Response {
+			
+			let movies: [MovieViewModel]
+		}
+		
+		struct ViewModel {
+			
+			let movies: [MovieViewModel]
+		}
+	}
 }
 
 struct MovieViewModel {
@@ -93,4 +113,5 @@ struct MovieViewModel {
 	let id			:Int?
 	let title		:String?
 	let posterUrl	:String?
+	var favoriteStatus :Bool = false
 }

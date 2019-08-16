@@ -17,6 +17,7 @@ protocol PopularMoviesListDisplayLogic: class {
 	func displayPopularMovies(viewModel: PopularMoviesList.GetPopularMovies.ViewModel)
 	func displayMovieDetail(viewModel: PopularMoviesList.ShowMovieDetail.ViewModel)
 	func displayFilteredMovies(viewModel: PopularMoviesList.FilteredMovies.ViewModel)
+	func displayFavoriteStatus(viewModel: PopularMoviesList.RefreshFavoriteStatus.ViewModel)
 }
 
 class PopularMoviesListViewController: UIViewController, PopularMoviesListDisplayLogic, NVActivityIndicatorViewable {
@@ -80,6 +81,12 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 		getGenres()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		refreshFavoriteStatus()
+	}
+	
 	// MARK: - Outlets & Vars
 	
 	@IBOutlet weak var searchBar: UISearchBar!
@@ -90,6 +97,15 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 	var filteredMovies:[MovieViewModel] = []
 	var nextPage = 1
 	var filtering = false
+	
+	private func clearCollection() {
+		
+		filteredMovies = []
+		
+		DispatchQueue.main.async {
+			self.collectionView.reloadData()
+		}
+	}
 	
 	// MARK: - Get Popular Movies
 	
@@ -121,15 +137,13 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 			
 			self.movies += movies
 			
-			DispatchQueue.main.async {
-				self.collectionView.reloadData()
-			}
+			refreshFavoriteStatus()
 		}else{
 			
 			let errorView = ErrorView(forView: collectionView, withMessage: "An error ocurred. Please, try again.")
 			
 			DispatchQueue.main.async {
-				self.collectionView.addSubview(errorView)
+				self.collectionView.backgroundView = errorView
 			}
 		}
 	}
@@ -164,9 +178,9 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 		
 		if filteredMovies.count > 0 {
 			
-			collectionView.viewWithTag(99)?.removeFromSuperview()
-			
 			DispatchQueue.main.async {
+				
+				self.collectionView.backgroundView = nil
 				self.collectionView.reloadData()
 			}
 		}else{
@@ -174,19 +188,26 @@ class PopularMoviesListViewController: UIViewController, PopularMoviesListDispla
 			clearCollection()
 			
 			let notFoundView = NotFoundView(forView: collectionView, withMessage: "Your search by \"\(viewModel.text)\" didn't return any movie.")
-			notFoundView.tag = 99
 			
 			DispatchQueue.main.async {
-				self.collectionView.addSubview(notFoundView)
+				self.collectionView.backgroundView = notFoundView
 			}
 		}
 	}
 	
-	private func clearCollection() {
+	// MARK: - Refresh Favorite Status
+	
+	private func refreshFavoriteStatus() {
 		
-		filteredMovies = []
+		interactor?.getFavoritedMovies(request: PopularMoviesList.RefreshFavoriteStatus.Request(movies: movies))
+	}
+	
+	func displayFavoriteStatus(viewModel: PopularMoviesList.RefreshFavoriteStatus.ViewModel) {
+		
+		self.movies = viewModel.movies
 		
 		DispatchQueue.main.async {
+			self.collectionView.backgroundView = nil
 			self.collectionView.reloadData()
 		}
 	}

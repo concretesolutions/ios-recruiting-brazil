@@ -16,6 +16,7 @@ protocol PopularMoviesListPresentationLogic {
 	func presentPopularMovies(response: PopularMoviesList.GetPopularMovies.Response)
 	func presentMovieDetail(response: PopularMoviesList.ShowMovieDetail.Response)
 	func presentFilteredMovies(response: PopularMoviesList.FilteredMovies.Response)
+	func presentFavoritedMovies(response: PopularMoviesList.RefreshFavoriteStatus.Response)
 }
 
 class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
@@ -45,7 +46,7 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 		
 		for movie in movies {
 			
-			let movieViewModel = MovieViewModel(id: movie.id,title: movie.title, posterUrl: movie.poster)
+			let movieViewModel = MovieViewModel(id: movie.id,title: movie.title, posterUrl: movie.poster, favoriteStatus: false)
 			moviesView.append(movieViewModel)
 		}
 		
@@ -65,5 +66,12 @@ class PopularMoviesListPresenter: PopularMoviesListPresentationLogic {
 	func presentFilteredMovies(response: PopularMoviesList.FilteredMovies.Response) {
 		
 		viewController?.displayFilteredMovies(viewModel: PopularMoviesList.FilteredMovies.ViewModel(text: response.text, filteredMovies: response.filteredMovies))
+	}
+	
+	// MARK: - Refresh Favorite Status
+	
+	func presentFavoritedMovies(response: PopularMoviesList.RefreshFavoriteStatus.Response) {
+		
+		viewController?.displayFavoriteStatus(viewModel: PopularMoviesList.RefreshFavoriteStatus.ViewModel(movies: response.movies))
 	}
 }
