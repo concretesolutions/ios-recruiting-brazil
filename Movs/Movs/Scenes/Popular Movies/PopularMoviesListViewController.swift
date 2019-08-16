@@ -221,6 +221,17 @@ extension PopularMoviesListViewController: UICollectionViewDelegate, UICollectio
 		let request = PopularMoviesList.ShowMovieDetail.Request(movieId: movie.id)
 		self.interactor?.storeMovie(request: request)
 	}
+	
+	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		
+		if !filtering {
+			
+			if indexPath.row == movies.count - 1 {
+				
+				getPopularMovies()
+			}
+		}
+	}
 }
 
 extension PopularMoviesListViewController: UISearchBarDelegate {
