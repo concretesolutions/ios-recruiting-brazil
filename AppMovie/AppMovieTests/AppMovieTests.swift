@@ -12,18 +12,19 @@ import XCTest
 @testable import AppMovie
 
 
-class MovieServiceMock: MovieServices {
+class MovieServiceMock: MovieService {
     
-    let moviesS: [Result]
+    let movieX: [Result]
     private let jsonHelper: JsonHelper
     
-    override init() {
+    init() {
         self.jsonHelper = JsonHelper()
-        self.moviesS = jsonHelper.decodeJson()
+        self.movieX = jsonHelper.decodeJson()
         //print(self.moviesS)
     }
-    override func getMovies(page:Int,completionHandler: @escaping ([Result]) -> Void ) {
-        // .success(self.moviesS)
+    
+    func getMovies(page: Int, completionHandler: @escaping ([Result]) -> Void) {
+         completionHandler(self.movieX)
     }
 }
 
@@ -55,8 +56,14 @@ class MovieSearchViewControllerSpec: QuickSpec {
                 sut = controller
                 print(sut)
                 //  sut = nav.topViewController as! MovieSearchViewController
+               // sut.service = MovieServiceMock()
+                sut.setupView(service: MovieServiceMock())
+                sut.api()
+                print(sut.movie.count)
+                _ = sut.view
+                print(sut.movie.count)
                 let test = MovieServiceMock()
-                print(test.moviesS)
+                //print(test.moviesS)
                 
                 //_ = sut.view
             }

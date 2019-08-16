@@ -36,6 +36,10 @@ class MovieSearchViewController: UIViewController {
         api()
     }
     
+    func setupView(service: MovieService){
+        self.service = service
+    }
+    
     func configureViewComponents(){
         //Navigation Controller
         self.navigationItem.title = "Movies"
@@ -79,9 +83,9 @@ class MovieSearchViewController: UIViewController {
     // MARK: - API
     func api(){
         service.getMovies(page: pageCount){ [weak self] movies in
-            DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.movie = movies
+             DispatchQueue.main.async {
                 self.setupCollectionView(with: self.movie)
             }
         }
