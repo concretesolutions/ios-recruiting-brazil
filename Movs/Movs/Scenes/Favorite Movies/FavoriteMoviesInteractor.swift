@@ -15,6 +15,7 @@ import UIKit
 protocol FavoriteMoviesBusinessLogic {
 	func getFavoriteMovies(request: FavoriteMovies.GetFavoriteMovies.Request)
 	func unfavoriteMovie(request: FavoriteMovies.UnfavoriteMovie.Request)
+	func storeMovie(request: FavoriteMovies.ShowMovieDetail.Request)
 }
 
 protocol FavoriteMoviesDataStore {
@@ -63,6 +64,21 @@ class FavoriteMoviesInteractor: FavoriteMoviesBusinessLogic, FavoriteMoviesDataS
 	
 	func unfavoriteMovie(request: FavoriteMovies.UnfavoriteMovie.Request) {
 		
+		if let result = FavoriteMovie.getFavoriteMovies(withIds: [request.id]).1, result.count > 0, let favoriteMovie = result.first {
+			
+			if CoreDataManager.sharedInstance.deleteInCoreData(object: favoriteMovie) {
+				getFavoriteMovies(request: FavoriteMovies.GetFavoriteMovies.Request())
+			}
+		}
+	}
+	
+	// MARK: - Show Movie Detail
+	
+	func storeMovie(request: FavoriteMovies.ShowMovieDetail.Request) {
 		
+		self.movie = movies.filter { $0.id == request.movieId }.first
+		
+		let response = FavoriteMovies.ShowMovieDetail.Response()
+		self.presenter?.presentMovieDetail(response: response)
 	}
 }

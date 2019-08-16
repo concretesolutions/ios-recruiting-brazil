@@ -310,6 +310,7 @@
                     <navigationItem key="navigationItem" title="Movies" id="RZL-Vz-Rqk"/>
                     <connections>
                         <outlet property="tableView" destination="37f-qO-Vn6" id="Rp1-yg-otw"/>
+                        <segue destination="sih-ii-Ss1" kind="show" identifier="FavoriteMovieDetail" id="vik-Px-WhZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMm-OR-hbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -351,6 +352,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eeS-F5-cqQ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -374,4 +376,7 @@
             <color red="0.17647058823529413" green="0.18823529411764706" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vik-Px-WhZ"/>
+    </inferredMetricsTieBreakers>
 </document>

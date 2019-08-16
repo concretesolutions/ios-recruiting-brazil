@@ -14,6 +14,7 @@ import UIKit
 
 protocol FavoriteMoviesPresentationLogic {
 	func presentFavoriteMovies(response: FavoriteMovies.GetFavoriteMovies.Response)
+	func presentMovieDetail(response: FavoriteMovies.ShowMovieDetail.Response)
 }
 
 class FavoriteMoviesPresenter: FavoriteMoviesPresentationLogic {
@@ -52,5 +53,12 @@ class FavoriteMoviesPresenter: FavoriteMoviesPresentationLogic {
 		}
 		
 		return moviesView
+	}
+	
+	// MARK: - Show Movie Detail
+	
+	func presentMovieDetail(response: FavoriteMovies.ShowMovieDetail.Response) {
+		
+		viewController?.displayMovieDetail(viewModel: FavoriteMovies.ShowMovieDetail.ViewModel())
 	}
 }

@@ -62,6 +62,12 @@ class MovieDetailViewController: UIViewController, MovieDetailDisplayLogic {
 		getFavoriteStatus()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		getFavoriteStatus()
+	}
+	
 	// MARK: - Outlets & Vars
 	
 	@IBOutlet weak var movieImageView: UIImageView!

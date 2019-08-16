@@ -14,6 +14,7 @@ import UIKit
 
 protocol FavoriteMoviesDisplayLogic: class {
 	func displayFavoriteMovies(viewModel: FavoriteMovies.GetFavoriteMovies.ViewModel)
+	func displayMovieDetail(viewModel: FavoriteMovies.ShowMovieDetail.ViewModel)
 }
 
 class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic {
@@ -91,9 +92,17 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
 	
 	private func getFavoriteMovies() {
 		
+		resetContent()
+		interactor?.getFavoriteMovies(request: FavoriteMovies.GetFavoriteMovies.Request())
+	}
+	
+	private func resetContent() {
+		
 		favoriteMovies = []
 		
-		interactor?.getFavoriteMovies(request: FavoriteMovies.GetFavoriteMovies.Request())
+		DispatchQueue.main.async {
+			self.tableView.reloadData()
+		}
 	}
 	
 	func displayFavoriteMovies(viewModel: FavoriteMovies.GetFavoriteMovies.ViewModel) {
@@ -115,6 +124,21 @@ class FavoriteMoviesViewController: UIViewController, FavoriteMoviesDisplayLogic
 				self.tableView.addSubview(errorView)
 			}
 		}
+	}
+	
+	// MARK: - Unfavorite Movie
+	
+	private func unfavorite(movieWithId id:Int) {
+		
+		resetContent()
+		interactor?.unfavoriteMovie(request: FavoriteMovies.UnfavoriteMovie.Request(id: id))
+	}
+	
+	// MARK: - Show Movie Detail
+	
+	func displayMovieDetail(viewModel: FavoriteMovies.ShowMovieDetail.ViewModel) {
+		
+		self.performSegue(withIdentifier: "FavoriteMovieDetail", sender: nil)
 	}
 	
 }
@@ -140,17 +164,23 @@ extension FavoriteMoviesViewController: UITableViewDelegate, UITableViewDataSour
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-//		let cell = collectionView.cellForItem(at: indexPath)
-//		cell?.isSelected = false
-//		
-//		let movie = movies[indexPath.row]
-//		
-//		let request = PopularMoviesList.ShowMovieDetail.Request(movieId: movie.id)
-//		self.interactor?.storeMovie(request: request)
-//		
-//		
-//		let id = favoriteMovies[indexPath.row].id ?? 0
-//		
-//		interactor?.unfavoriteMovie(request: FavoriteMovies.UnfavoriteMovie.Request(id: id))
+		let cell = tableView.cellForRow(at: indexPath)
+		cell?.isSelected = false
+		
+		let movie = favoriteMovies[indexPath.row]
+		
+		let request = FavoriteMovies.ShowMovieDetail.Request(movieId: movie.id)
+		self.interactor?.storeMovie(request: request)
+	}
+	
+	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		
+		let unfavoriteAction = UITableViewRowAction(style: .default, title: "Unfavorite") { (action, indexpath) in
+			
+			let movieId = self.favoriteMovies[indexPath.row].id ?? 0
+			self.unfavorite(movieWithId: movieId)
+		}
+		
+		return [unfavoriteAction]
 	}
 }

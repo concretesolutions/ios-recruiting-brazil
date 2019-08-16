@@ -49,6 +49,23 @@ enum FavoriteMovies {
 			let success:Bool
 		}
 	}
+	
+	// MARK: Show Movie Detail
+	
+	enum ShowMovieDetail {
+		
+		struct Request {
+			let movieId: Int?
+		}
+		
+		struct Response {
+			
+		}
+		
+		struct ViewModel {
+			
+		}
+	}
 }
 
 struct FavoriteMovieViewModel {
