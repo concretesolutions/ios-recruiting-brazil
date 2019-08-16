@@ -47,8 +47,8 @@ extension FavoriteViewModel{
     }
     
     //Delete a favorite in a specific row
-    func deleteFavorite(at indexPath: IndexPath){
-        FavoriteCRUD.sharedCRUD.deleteFavorite(index: indexPath)
+    func deleteFavorite(movie: Favorite, at indexPath: IndexPath){
+        FavoriteCRUD.sharedCRUD.deleteFavorite(movieForDeletion: movie)
         favorites.remove(at: indexPath.row)
         images.remove(at: indexPath.row)
     }

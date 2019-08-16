@@ -22,13 +22,20 @@ class MovieGridController: UIViewController {
         
         screen.gridView.delegate = self
         screen.gridView.dataSource = self
+        
     }
-    
     
     
     override func viewWillAppear(_ animated: Bool) {
         refreshData()
     }
+    
+//    func didLoadAllMovies(){
+//        refreshData()
+//        screen.loadIndicator.stopAnimating()
+//        screen.loadIndicator.isHidden = true
+//        screen.gridView.isHidden = false
+//    }
     
     func refreshData() {
         DispatchQueue.main.async { [weak self] in
@@ -60,6 +67,8 @@ extension MovieGridController: UICollectionViewDataSource{
         let movie = viewModel.movies[indexPath.row]
         let favImage = viewModel.checkFavorite(movieID: movie.id)
         cell.configure(withViewModel: movie, favImage: favImage)
+    
+        
         return cell
     }
 }
@@ -71,11 +80,8 @@ extension MovieGridController: UICollectionViewDelegate, UICollectionViewDelegat
     // Loads more movies when the scrool gets near the end
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if(indexPath.row == viewModel.movies.count - 4){
-            viewModel.loadMovies { [weak self] (hasLoaded) in
-                if hasLoaded {
-                    self?.refreshData()
-                }
-            }
+            viewModel.loadMovies()
+            refreshData()
         }
     }
     

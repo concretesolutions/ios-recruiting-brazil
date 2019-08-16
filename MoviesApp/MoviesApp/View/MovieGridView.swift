@@ -22,6 +22,19 @@ class MovieGridView: UIView{
         return view
     }()
     
+//    lazy var loadIndicator: UIActivityIndicatorView = {
+//        let view = UIActivityIndicatorView(frame: .zero)
+//        view.color = .red
+//        return view
+//    }()
+    
+    
+    lazy var errorLabel: UILabel = {
+        let view = UILabel()
+        view.isHidden = false
+        return view
+    }()
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -31,12 +44,18 @@ class MovieGridView: UIView{
 extension MovieGridView: CodeView{
     func buildViewHierarchy() {
         addSubview(gridView)
+        addSubview(errorLabel)
     }
     
     func setupConstrains() {
         gridView.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalToSuperview()
         }
+        
+        errorLabel.snp.makeConstraints { (make) in
+            make.left.right.top.bottom.equalToSuperview()
+        }
+
     }
     
     func setupAdditionalConfiguration() {

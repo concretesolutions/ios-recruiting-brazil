@@ -88,10 +88,11 @@ extension FavoriteController: SwipeTableViewCellDelegate{
         guard orientation == .right else { return nil }
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") {[weak self](action, indexPath) in
-            self?.viewModel.deleteFavorite(at: indexPath)
+            if let deleteMovie = self?.viewModel.favorites[indexPath.row] {
+                self?.viewModel.deleteFavorite(movie: deleteMovie, at: indexPath)
+            }
         }
-        
-        deleteAction.image = UIImage(named: "delete-icon")
+    
         return [deleteAction]
     }
     

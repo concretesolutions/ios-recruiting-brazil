@@ -11,15 +11,11 @@ import UIKit
 //MARK: - The connecetion of the MovieGrid screen
 //The head of the class
 class MovieGridViewModel{
-    public var movies = [SimplifiedMovie]()
+    var movies: [SimplifiedMovie] = []
     public var pageCount = 0
     
     init() {
-        loadMovies { (hasLoaded) in
-            if !hasLoaded {
-                fatalError("Error loading movies")
-            }
-        }
+        loadMovies()
     }
 }
 
@@ -27,14 +23,17 @@ class MovieGridViewModel{
 extension MovieGridViewModel {
     
     //Loads the movies from the API
-    func loadMovies(completion: @escaping (Bool) -> Void){
+    func loadMovies(){
         pageCount += 1
-        APIController.sharedAccess.fetchData(path: ApiPaths.movies(page: pageCount), type: Populares.self) { [weak self] (fetchedMovies) in
+        
+        var tempMovies = [SimplifiedMovie]()
+        
+        APIController.sharedAccess.fetchData(path: ApiPaths.movies(page: pageCount), type: Populares.self) { [weak self] (fetchedMovies,error) in
             guard let checkMovies = fetchedMovies.results else {fatalError("Error fetching the movies form the API")}
             checkMovies.forEach({ (movie) in
-                self?.movies.append(SimplifiedMovie(movie: movie))
+                tempMovies.append(SimplifiedMovie(movie: movie))
             })
-            completion(true)
+            self?.movies.append(contentsOf: tempMovies)
         }
     }
     
@@ -46,5 +45,9 @@ extension MovieGridViewModel {
         }else{
             return "favorite_empty_icon"
         }
+    }
+    
+    func showError(){
+        
     }
 }

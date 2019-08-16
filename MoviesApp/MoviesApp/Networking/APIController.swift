@@ -37,14 +37,14 @@ class APIController{
     static let sharedAccess = APIController()
     
     private init() {
-        fetchData(path: ApiPaths.genre, type: Genres.self) { (allGen) in
+        fetchData(path: ApiPaths.genre, type: Genres.self) { (allGen,error)  in
             APIController.allGenres = allGen.genres
         }
     }
     
     
     // Fetch the popular movies in the API
-    func fetchData<T:Codable>(path: ApiPaths,type: T.Type,completion: @escaping (T) -> Void){
+    func fetchData<T:Codable>(path: ApiPaths,type: T.Type,completion: @escaping (T,Error?) -> Void){
         
         let postData = NSData(data: ("{}".data(using: String.Encoding.utf8) ?? nil)!)
         guard let url = URL(string: path.path) else {return}
@@ -62,13 +62,12 @@ class APIController{
                 guard let data = data else{return}
                 do{
                     let result = try JSONDecoder().decode(T.self, from: data)
-                    completion(result)
+                    completion(result,error)
                 }catch{
                     print("\(error)")
                 }
             }
         })
-        
         dataTask.resume()
     }
     

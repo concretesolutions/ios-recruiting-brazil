@@ -93,9 +93,8 @@ class FavoriteCRUD{
     
     
     //MARK - Delete a movie
-    func deleteFavorite(index: IndexPath){
-        let deleteFavorite = favorites[index.row]
-        context.delete(deleteFavorite)
+    func deleteFavorite(movieForDeletion: Favorite){
+        context.delete(movieForDeletion)
         saveData()
     }
 }
