@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // MARK: - Commom methods
   
-  func makeRootViewController(_ viewController: BaseViewController, with withNavigationController: Bool = true) {
+  func makeRootViewController(_ viewController: UIViewController, with withNavigationController: Bool = true) {
     if withNavigationController {
       let rootController = BaseNavigationViewController(rootViewController: viewController)
       

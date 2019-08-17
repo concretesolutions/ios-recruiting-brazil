@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0788672306CEED00A4CD58 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0788662306CEED00A4CD58 /* DashboardViewModel.swift */; };
+		0F07886D2306CF1800A4CD58 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F07886C2306CF1800A4CD58 /* DashboardViewController.swift */; };
 		0F3D9DF022FC36DB0043149B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D9DEF22FC36DB0043149B /* AppDelegate.swift */; };
 		0F3D9DF822FC36DB0043149B /* Movs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F3D9DF622FC36DB0043149B /* Movs.xcdatamodeld */; };
 		0F3D9DFA22FC36DD0043149B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F3D9DF922FC36DD0043149B /* Assets.xcassets */; };
@@ -93,6 +95,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F0788662306CEED00A4CD58 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		0F07886C2306CF1800A4CD58 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		0F3D9DEC22FC36DB0043149B /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F3D9DEF22FC36DB0043149B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F3D9DF722FC36DB0043149B /* Movs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movs.xcdatamodel; sourceTree = "<group>"; };
@@ -200,6 +204,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F0788692306CEF700A4CD58 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				0F07886B2306CF0600A4CD58 /* View */,
+				0F07886A2306CEFE00A4CD58 /* ViewModel */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		0F07886A2306CEFE00A4CD58 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F0788662306CEED00A4CD58 /* DashboardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F07886B2306CF0600A4CD58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F07886C2306CF1800A4CD58 /* DashboardViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0F3D9DE322FC36DB0043149B = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +358,7 @@
 				0FC2BEB82300635F0009184A /* Filter */,
 				0F77E5EB23022C1700BDFF83 /* GenericList */,
 				0F698E8A2304DEB800F242F8 /* MovieDetail */,
+				0F0788692306CEF700A4CD58 /* Dashboard */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -781,6 +811,7 @@
 				0F8ED6AD22FE316C00FB9DBF /* MoviesList.swift in Sources */,
 				0F698E912304DF0C00F242F8 /* MovieDetailViewController.swift in Sources */,
 				0F460BB322FCE53B00A231A2 /* Settings.swift in Sources */,
+				0F0788672306CEED00A4CD58 /* DashboardViewModel.swift in Sources */,
 				0F460BBD22FCE7A100A231A2 /* Commoms.swift in Sources */,
 				0F8ED6B122FE35FF00FB9DBF /* NSObject+extensions.swift in Sources */,
 				0F8ED6A222FE2F0300FB9DBF /* MoviesViewModel.swift in Sources */,
@@ -791,6 +822,7 @@
 				0FC2BEBF23017A310009184A /* FilterViewController.swift in Sources */,
 				0FC2BEB72300634C0009184A /* FilterViewModel.swift in Sources */,
 				0F698E972304DF2300F242F8 /* MovieDetailTableViewCell.swift in Sources */,
+				0F07886D2306CF1800A4CD58 /* DashboardViewController.swift in Sources */,
 				0FC2BEAC230050A50009184A /* FavoritesViewController.swift in Sources */,
 				0F3D9DF022FC36DB0043149B /* AppDelegate.swift in Sources */,
 				0F8ED6A022FE2AA800FB9DBF /* GenreServices.swift in Sources */,
