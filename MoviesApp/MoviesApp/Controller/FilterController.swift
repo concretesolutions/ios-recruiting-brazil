@@ -13,8 +13,6 @@ class FilterController: UIViewController{
     let viewModel = FilterViewModel()
     
     override func viewDidLoad() {
-        self.view = screen
-        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Filters"
         

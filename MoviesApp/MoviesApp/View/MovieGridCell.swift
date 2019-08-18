@@ -109,7 +109,7 @@ extension MovieGridCell: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UIColor(red: 90/255, green: 80/255, blue: 15/255, alpha: 1)
+        backgroundColor = UsedColor.purple.color
     }
 }
 

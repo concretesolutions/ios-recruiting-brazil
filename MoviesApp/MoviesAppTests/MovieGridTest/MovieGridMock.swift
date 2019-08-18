@@ -15,10 +15,10 @@ class MovieGridMock: MovieGridInterface{
     var isFavorite = true
     
     var movies: [SimplifiedMovie] = [
-    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", posterPath: nil),
-    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", posterPath: nil),
-    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", posterPath: nil),
-    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", posterPath: nil)
+        SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil),
+    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil),
+    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil),
+    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil)
     ]
     
     func loadMovies() {

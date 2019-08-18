@@ -124,6 +124,6 @@ extension FavoriteCell: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UIColor(red: 247/255, green: 206/255, blue: 190/255, alpha: 1)
+        backgroundColor = UsedColor.pink.color
     }
 }

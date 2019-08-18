@@ -53,7 +53,8 @@ extension FavoriteView: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UIColor(red: 247/255, green: 206/255, blue: 190/255, alpha: 1)
+        backgroundColor = UsedColor.blue.color
+        table.backgroundColor = UsedColor.blue.color
         table.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
     }
 }

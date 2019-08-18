@@ -32,7 +32,7 @@ class DetailsView: UIView {
         let view = UIButton(frame: .zero)
         view.backgroundColor = .red
         view.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
-        view.setImage(UIImage(named: "favorite_full_icon"), for: .selected)
+        view.setImage(UIImage(named: "favorite_gray_icon"), for: .selected)
         return view
     }()
     
@@ -84,10 +84,10 @@ extension DetailsView: CodeView{
         verticalContainer.addSubview(titleLabel)
         verticalContainer.addSubview(genresLabel)
         imageView.addSubview(verticalContainer)
-        imageView.addSubview(favButton)
         bringSubviewToFront(favButton)
         addSubview(imageView)
         addSubview(descLabel)
+        addSubview(favButton)
     }
     
     func setupConstrains() {
@@ -100,8 +100,8 @@ extension DetailsView: CodeView{
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalTo(genresLabel.snp.top)
-            make.top.equalToSuperview().offset(10)
+            make.height.equalToSuperview().multipliedBy(0.5)
+            make.top.equalToSuperview().offset(2)
         }
         
         genresLabel.snp.makeConstraints { (make) in
@@ -120,8 +120,9 @@ extension DetailsView: CodeView{
         
         favButton.snp.makeConstraints { (make) in
             make.left.equalTo(verticalContainer.snp.right)
-            make.right.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.25)
+            make.right.equalToSuperview()
+            make.bottom.equalTo(imageView.snp.bottom)
+            make.height.equalToSuperview().multipliedBy(0.125)
         }
         
         
@@ -133,7 +134,7 @@ extension DetailsView: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UIColor(red: 247/255, green: 206/255, blue: 190/255, alpha: 1)
+        backgroundColor = UsedColor.blue.color
     }
 }
 

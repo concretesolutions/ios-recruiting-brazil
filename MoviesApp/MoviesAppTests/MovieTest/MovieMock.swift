@@ -13,5 +13,5 @@ import Foundation
 
 class MovieMock{
     
-    let mock = SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", posterPath: nil)
+    let mock = SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil)
 }

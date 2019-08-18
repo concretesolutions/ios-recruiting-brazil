@@ -13,8 +13,8 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.barTintColor = UIColor(red: 247/255, green: 206/255, blue: 190/255, alpha: 1)
-        navigationController?.navigationBar.backgroundColor = UIColor(red: 247/255, green: 206/255, blue: 190/255, alpha: 1)
+        tabBar.barTintColor = UsedColor.pink.color
+        navigationController?.navigationBar.backgroundColor = UsedColor.pink.color
         setupTabBar()
     }
     

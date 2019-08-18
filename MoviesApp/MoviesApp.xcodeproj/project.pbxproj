@@ -21,6 +21,7 @@
 		436C457A2307460D006A44E9 /* MovieMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C45792307460D006A44E9 /* MovieMock.swift */; };
 		438227702309DD8500CEB1EE /* MovieGridMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4382276F2309DD8500CEB1EE /* MovieGridMock.swift */; };
 		438227732309E21E00CEB1EE /* CRUDMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438227722309E21E00CEB1EE /* CRUDMock.swift */; };
+		43822775230A086500CEB1EE /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43822774230A086500CEB1EE /* ColorScheme.swift */; };
 		43A24B002305D35A00B01B28 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A24AFF2305D35A00B01B28 /* Movie.swift */; };
 		43A24B042305D57A00B01B28 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A24B032305D57A00B01B28 /* CodeView.swift */; };
 		43A24B062305DAC000B01B28 /* SimplifiedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A24B052305DAC000B01B28 /* SimplifiedMovie.swift */; };
@@ -74,6 +75,7 @@
 		436C45792307460D006A44E9 /* MovieMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMock.swift; sourceTree = "<group>"; };
 		4382276F2309DD8500CEB1EE /* MovieGridMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridMock.swift; sourceTree = "<group>"; };
 		438227722309E21E00CEB1EE /* CRUDMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDMock.swift; sourceTree = "<group>"; };
+		43822774230A086500CEB1EE /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		43A24AFF2305D35A00B01B28 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		43A24B032305D57A00B01B28 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		43A24B052305DAC000B01B28 /* SimplifiedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedMovie.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		432AF32D2305CB550091634C /* MoviesApp */ = {
 			isa = PBXGroup;
 			children = (
+				43822776230A0D6200CEB1EE /* ViewModel */,
 				432AF35F2305CBF20091634C /* Controller */,
 				432AF3612305CC0E0091634C /* View */,
 				432AF3602305CBFD0091634C /* Networking */,
@@ -170,13 +173,9 @@
 			children = (
 				43A24B0B2305F6C200B01B28 /* TabBarController.swift */,
 				432AF3642305CFEE0091634C /* MovieGridController.swift */,
-				432AF3682305D0ED0091634C /* MovieGridViewModel.swift */,
 				43A24B112306006B00B01B28 /* DetailsController.swift */,
-				43A24B13230600E200B01B28 /* DetailsViewModel.swift */,
 				43A24B0D2305F6F400B01B28 /* FavoriteController.swift */,
-				43EB8135230621E3007B5204 /* FavoriteViewModel.swift */,
 				43EB813B2306234E007B5204 /* FilterController.swift */,
-				43EB813D2306236E007B5204 /* FilterViewModel.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -219,6 +218,7 @@
 			children = (
 				432AF32E2305CB550091634C /* AppDelegate.swift */,
 				43A24B032305D57A00B01B28 /* CodeView.swift */,
+				43822774230A086500CEB1EE /* ColorScheme.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -248,6 +248,17 @@
 				438227722309E21E00CEB1EE /* CRUDMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		43822776230A0D6200CEB1EE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				432AF3682305D0ED0091634C /* MovieGridViewModel.swift */,
+				43A24B13230600E200B01B28 /* DetailsViewModel.swift */,
+				43EB8135230621E3007B5204 /* FavoriteViewModel.swift */,
+				43EB813D2306236E007B5204 /* FilterViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D01EAE9F08606E674B43BAA0 /* Pods */ = {
@@ -474,6 +485,7 @@
 				432AF32F2305CB550091634C /* AppDelegate.swift in Sources */,
 				432AF3652305CFEE0091634C /* MovieGridController.swift in Sources */,
 				43EB813E2306236E007B5204 /* FilterViewModel.swift in Sources */,
+				43822775230A086500CEB1EE /* ColorScheme.swift in Sources */,
 				43A24B002305D35A00B01B28 /* Movie.swift in Sources */,
 				43A24B0C2305F6C200B01B28 /* TabBarController.swift in Sources */,
 				43A24B162306012200B01B28 /* DetailsView.swift in Sources */,
