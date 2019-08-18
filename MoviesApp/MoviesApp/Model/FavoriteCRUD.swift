@@ -9,7 +9,16 @@
 import UIKit
 import CoreData
 
-class FavoriteCRUD{
+
+protocol FavoriteCRUDInterface{
+    func addFavorite(movie: SimplifiedMovie)
+    func loadData() throws -> [Favorite]
+    func saveData()
+    func checkFavoriteMovie(movieId: String) -> Bool
+    func deleteFavorite(movieForDeletion: Favorite)
+}
+
+class FavoriteCRUD: FavoriteCRUDInterface{
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var favorites = [Favorite]()
@@ -56,7 +65,7 @@ class FavoriteCRUD{
     }
     
     //MARK - Filter the database by id
-    func checkFavoriteMovies(movieId: String) -> Bool{
+    func checkFavoriteMovie(movieId: String) -> Bool{
         let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
         let predicate = NSPredicate(format: "id == %@", movieId)
         
@@ -71,26 +80,6 @@ class FavoriteCRUD{
         }
         return !movie.isEmpty
     }
-    
-    
-    //MARK - Get a movie from the database
-    func filterFavorites(format: String,filter: String) -> [Favorite]{
-        let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
-        let predicate = NSPredicate(format: format, filter)
-        
-        request.predicate = predicate
-        
-        var filter = [Favorite]()
-        
-        do{
-            filter = try context.fetch(request)
-        }catch{
-            print("Error fetching data from contect")
-        }
-        
-        return filter
-    }
-    
     
     //MARK - Delete a movie
     func deleteFavorite(movieForDeletion: Favorite){

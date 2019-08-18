@@ -29,7 +29,7 @@ class SimplifiedMovie: MoviePresentable{
     var genres: [Genre] = []
     var date: String = ""
     
-    init(movieID: Int,movieTitle: String,movieOverview: String,movieGenres: [Int],movieDate: String,posterPath: String?) {
+    init(movieID: Int,movieTitle: String,movieOverview: String,movieGenres: [Int],movieDate: String,image: UIImage?) {
      
         self.id = movieID
         self.name = movieTitle
@@ -37,13 +37,15 @@ class SimplifiedMovie: MoviePresentable{
         self.date = getYear(date: movieDate)
         self.genres = getGenres(genres: movieGenres)
         
-        if let path = posterPath {
-            loadImage(path: path) { (image) in
-                self.bannerImage = image
-            }
+        if let image = image {
+            self.bannerImage = image
         }else{
             self.bannerImage = UIImage(named: "Splash")
         }
+    }
+    
+    convenience init(){
+        self.init(movieID: 0,movieTitle: "",movieOverview: "",movieGenres: [],movieDate: "",image: nil)
     }
     
     
@@ -58,16 +60,4 @@ class SimplifiedMovie: MoviePresentable{
         return APIController.allGenres.filter {genres.contains($0.id)}
     }
     
-    //Loads the movie banner from the api
-    func loadImage(path: String, completion: @escaping (UIImage?) -> Void ){
-        APIController.sharedAccess.downloadImage(path: path) { (fetchedImage) in
-            DispatchQueue.main.async {
-                if let image = fetchedImage{
-                    completion(image)
-                }else{
-                    completion(nil)
-                }
-            }
-        }
-    }
 }

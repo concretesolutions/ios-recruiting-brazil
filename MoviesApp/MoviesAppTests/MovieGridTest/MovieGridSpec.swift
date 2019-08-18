@@ -14,15 +14,11 @@ import Nimble_Snapshots
 
 class MovieGridSpec: QuickSpec{
     
-    var view = MovieGridController()
+    var view = MovieGridViewModel()
     
     override func spec() {
-        describe("Creating a simplified movie") {
-            it(""){
-                let frame = UIScreen.main.bounds
-                let view =  MovieGridView(frame: frame)
-                
-                expect(view) == snapshot("MovieGridView")
+        describe("Movie search") {
+            it("search a movie by id to know if is a favorite"){
             }
         }
     }

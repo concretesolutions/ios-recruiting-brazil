@@ -34,12 +34,11 @@ class MovieGridController: UIViewController {
         screen.gridView.delegate = self
         screen.gridView.dataSource = self
         
-        screen.loadRoll.stopAnimating()
+        screen.loadRoll.startAnimating()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         screen.gridView.reloadData()
-    
     }
 }
 
@@ -54,8 +53,6 @@ extension MovieGridController: ReturnMovies{
         }
     }
 }
-
-
 
 
 //MARK: - Calls the details screen when a movie is selected

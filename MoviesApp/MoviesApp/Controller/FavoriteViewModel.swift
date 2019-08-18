@@ -59,8 +59,12 @@ extension FavoriteViewModel{
         images.removeAll()
         
         if let text = movieName{
-            filterMoveis = FavoriteCRUD.sharedCRUD.filterFavorites(format: "title CONTAINS %@", filter: text)
+            filterMoveis = favorites.filter{
+                favorite in
+                return ((favorite.title?.contains(text))!)
+            }
         }
+        
         favorites = filterMoveis
         loadImages(favs: favorites)
     }

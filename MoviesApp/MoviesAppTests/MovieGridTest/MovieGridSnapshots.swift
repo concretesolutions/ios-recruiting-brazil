@@ -16,9 +16,12 @@ import Nimble_Snapshots
 class MovieGridSnapshots: QuickSpec{
     
     override func spec() {
-        describe("the movies") {
-            it("should have the expected look and fell"){
+        describe("Visual check") {
+            it("Should look like this"){
+                let frame = UIScreen.main.bounds
+                let view =  MovieGridView(frame: frame)
                 
+                expect(view) == snapshot("MovieGridView")
             }
         }
     }

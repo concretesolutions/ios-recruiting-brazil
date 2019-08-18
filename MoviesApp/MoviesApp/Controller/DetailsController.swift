@@ -12,18 +12,21 @@ class DetailsController: UIViewController {
     let screen = DetailsView()
     let viewModel = DetailsViewModel()
     
+    let favoriteButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         self.view = screen
         
-        screen.configure(detailedMovie: viewModel.movie!, genreNames: viewModel.detailsGenres())
-      
-        let buttonImage = viewModel.checkFavorite(movieID: viewModel.movie!.id)
-        let favoriteButton = UIBarButtonItem(image: UIImage(named: buttonImage), style: .plain, target: self, action: #selector(addFavoriteAction))
-        navigationItem.rightBarButtonItem = favoriteButton
+        viewModel.checkFavorite(movieID: viewModel.movie.id)
+        screen.configure(detailedMovie: viewModel.movie, genreNames: viewModel.detailsGenres(), isFavorite: viewModel.isFavorite)
+        
+        screen.favButton.addTarget(self, action: #selector(addFavoriteAction), for: .touchUpInside)        
     }
     
     @objc func addFavoriteAction(){
+        print("adentrou")
         viewModel.addFavorite()
+        screen.favButton.isSelected = viewModel.isFavorite
     }
+
 }
