@@ -46,26 +46,17 @@ class APIController{
     // Fetch the popular movies in the API
     func fetchData<T:Codable>(path: ApiPaths,type: T.Type,completion: @escaping (T,Error?) -> Void){
         
-        let postData = NSData(data: ("{}".data(using: String.Encoding.utf8) ?? nil)!)
         guard let url = URL(string: path.path) else {return}
-        let request = NSMutableURLRequest(url: url,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        request.httpMethod = "GET"
-        request.httpBody = postData as Data
+        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy,timeoutInterval: 10.0)
         
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print("\(String(describing: error))")
-            } else {
-                guard let data = data else{return}
-                do{
-                    let result = try JSONDecoder().decode(T.self, from: data)
-                    completion(result,error)
-                }catch{
-                    print("\(error)")
-                }
+        let dataTask = session.dataTask(with: request,completionHandler: { (data, response, error) -> Void in
+            guard let data = data else{return}
+            do{
+                let result = try JSONDecoder().decode(T.self, from: data)
+                completion(result,error)
+            }catch{
+                print("\(error)")
             }
         })
         dataTask.resume()

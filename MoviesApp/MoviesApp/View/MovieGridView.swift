@@ -22,15 +22,20 @@ class MovieGridView: UIView{
         return view
     }()
     
+    lazy var loadRoll: UIActivityIndicatorView = {
+       let view = UIActivityIndicatorView(frame: .zero)
+       view.tintColor = .red
+       return view
+    }()
     
     lazy var errorLabel: UILabel = {
         let view = UILabel()
-        view.text = "Error loading movies."
+        view.text = "Loading movies."
         view.font = UIFont.systemFont(ofSize: 50)
         view.numberOfLines = 0
         view.textAlignment = .center
         view.textColor = .black
-        view.isHidden = false
+        view.isHidden = true
         return view
     }()
     
@@ -44,6 +49,8 @@ extension MovieGridView: CodeView{
     func buildViewHierarchy() {
         addSubview(gridView)
         addSubview(errorLabel)
+        addSubview(loadRoll)
+        bringSubviewToFront(loadRoll)
     }
     
     func setupConstrains() {
@@ -53,6 +60,10 @@ extension MovieGridView: CodeView{
         
         errorLabel.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalToSuperview()
+        }
+        
+        loadRoll.snp.makeConstraints { (make) in
+            make.right.left.top.bottom.equalToSuperview()
         }
 
     }

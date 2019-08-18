@@ -8,11 +8,22 @@
 
 import UIKit
 
+
+// Protocol to get the data from the filters
+protocol ReturnMovies: class{
+    func refreshMovieData()
+}
+
+
 //MARK: - Controller of the MovieGrid Screen
 class MovieGridController: UIViewController {
     
     let screen = MovieGridView()
     let viewModel = MovieGridViewModel()
+    
+    override func loadView() {
+        viewModel.refresh = self
+    }
     
     override func viewDidLoad(){
         self.view = screen
@@ -23,25 +34,29 @@ class MovieGridController: UIViewController {
         screen.gridView.delegate = self
         screen.gridView.dataSource = self
         
+        screen.loadRoll.stopAnimating()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        refreshData()
-        
-        if viewModel.movies.count == 0{
-            screen.errorLabel.isHidden = false
-        }else{
-            screen.errorLabel.isHidden = true
-        }
-    }
+    override func viewDidAppear(_ animated: Bool) {
+        screen.gridView.reloadData()
     
-    func refreshData() {
+    }
+}
+
+
+extension MovieGridController: ReturnMovies{
+    func refreshMovieData() {
         DispatchQueue.main.async { [weak self] in
             self?.screen.gridView.reloadData()
-            self?.screen.gridView.layoutIfNeeded()
+            self?.screen.loadRoll.stopAnimating()
+            self?.screen.loadRoll.isHidden = true
+            self?.screen.gridView.isHidden = false
         }
     }
 }
+
+
+
 
 //MARK: - Calls the details screen when a movie is selected
 extension MovieGridController{
@@ -66,7 +81,6 @@ extension MovieGridController: UICollectionViewDataSource{
         let favImage = viewModel.checkFavorite(movieID: movie.id)
         cell.configure(withViewModel: movie, favImage: favImage)
     
-        
         return cell
     }
 }
@@ -78,7 +92,6 @@ extension MovieGridController: UICollectionViewDelegate, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if(indexPath.row == viewModel.movies.count - 4){
             viewModel.loadMovies()
-            refreshData()
         }
     }
     

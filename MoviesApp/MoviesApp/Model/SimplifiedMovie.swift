@@ -22,21 +22,20 @@ protocol MoviePresentable {
 
 //MARK: - Validates the movie and filter the unused parts
 class SimplifiedMovie: MoviePresentable{
-    var id: Int
-    var name: String
+    var id: Int = 0
+    var name: String = ""
     var bannerImage: UIImage?
-    var description: String
-    var genres: [Genre]
-    var date: String
+    var description: String = ""
+    var genres: [Genre] = []
+    var date: String = ""
     
     init(movieID: Int,movieTitle: String,movieOverview: String,movieGenres: [Int],movieDate: String,posterPath: String?) {
+     
         self.id = movieID
         self.name = movieTitle
         self.description = movieOverview
-        self.genres = APIController.allGenres.filter {movieGenres.contains($0.id)}
-        
-        let prefixDate = movieDate.prefix(4)
-        self.date = String(prefixDate)
+        self.date = getYear(date: movieDate)
+        self.genres = getGenres(genres: movieGenres)
         
         if let path = posterPath {
             loadImage(path: path) { (image) in
@@ -47,12 +46,26 @@ class SimplifiedMovie: MoviePresentable{
         }
     }
     
+    
+    //Transform the date in a year
+    func getYear(date: String) -> String{
+        let prefixDate = date.prefix(4)
+        return String(prefixDate)
+    }
+    
+    //Transforms the ids in genres
+    func getGenres(genres: [Int]) -> [Genre]{
+        return APIController.allGenres.filter {genres.contains($0.id)}
+    }
+    
     //Loads the movie banner from the api
-    func loadImage(path: String, completion: @escaping (UIImage) -> Void ){
+    func loadImage(path: String, completion: @escaping (UIImage?) -> Void ){
         APIController.sharedAccess.downloadImage(path: path) { (fetchedImage) in
             DispatchQueue.main.async {
                 if let image = fetchedImage{
                     completion(image)
+                }else{
+                    completion(nil)
                 }
             }
         }

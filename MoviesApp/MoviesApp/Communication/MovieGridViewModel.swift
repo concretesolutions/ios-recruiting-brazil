@@ -11,8 +11,14 @@ import UIKit
 //MARK: - The connecetion of the MovieGrid screen
 //The head of the class
 class MovieGridViewModel{
-    var movies: [SimplifiedMovie] = []
     public var pageCount = 0
+    weak var refresh: ReturnMovies?
+    
+    var movies: [SimplifiedMovie] = [] {
+        didSet{
+            refresh?.refreshMovieData()
+        }
+    }
     
     init() {
         loadMovies()
@@ -30,13 +36,14 @@ extension MovieGridViewModel {
     //Loads the movies from the API
     func loadMovies(){
         pageCount += 1
-        
         var tempMovies = [SimplifiedMovie]()
         
         APIController.sharedAccess.fetchData(path: ApiPaths.movies(page: pageCount), type: Populares.self) { [weak self] (fetchedMovies,error) in
             guard let checkMovies = fetchedMovies.results else {fatalError("Error fetching the movies form the API")}
             checkMovies.forEach({ (movie) in
+                
                 tempMovies.append(SimplifiedMovie(movieID: movie.id, movieTitle: movie.title, movieOverview: movie.overview, movieGenres: movie.genre_ids, movieDate: movie.release_date, posterPath: movie.poster_path))
+                
             })
             self?.movies.append(contentsOf: tempMovies)
         }
@@ -50,9 +57,5 @@ extension MovieGridViewModel {
         }else{
             return "favorite_empty_icon"
         }
-    }
-    
-    func showError(){
-        
     }
 }
