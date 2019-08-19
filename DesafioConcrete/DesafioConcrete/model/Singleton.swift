@@ -13,6 +13,7 @@ final class Singleton {
     
     var movies:Array<Movie> = Array<Movie>()
     var genres:Array<Genre> = Array<Genre>()
+    var preferidos:Array<Movie> = Array<Movie>()
     
     private init() {
         

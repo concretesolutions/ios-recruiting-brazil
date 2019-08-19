@@ -8,7 +8,7 @@
 import Foundation
 
 struct Genre:Codable {
-    var id:String
+    var id:Int
     var name:String
     
     enum CodingKeys: String, CodingKey {
@@ -19,7 +19,7 @@ struct Genre:Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.id = try values.decode(String.self, forKey: .id)
+        self.id = try values.decode(Int.self, forKey: .id)
         self.name = try values.decode(String.self, forKey: .name)
     }
 }

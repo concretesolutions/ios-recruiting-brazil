@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="JD1-Kk-6Ca" customClass="PopularesCell" customModule="DesafioConcrete" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="123" height="265"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="123" height="265"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="siF-Kg-ame">
+                        <rect key="frame" x="0.0" y="0.0" width="123" height="184.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="123" id="QSR-pC-xpl"/>
+                            <constraint firstAttribute="width" secondItem="siF-Kg-ame" secondAttribute="height" multiplier="2:3" id="ugC-xA-JYY"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Velozes e Furiosos: Hobbs &amp; Shaw, 2019" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbq-Ex-HDT">
+                        <rect key="frame" x="0.0" y="184.5" width="123" height="80.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.89321169020000002" blue="0.12757426999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-zY-0ft">
+                        <rect key="frame" x="51" y="82.5" width="20" height="20"/>
+                    </activityIndicatorView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.15686274509803921" green="0.16470588235294117" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="siF-Kg-ame" firstAttribute="top" secondItem="JD1-Kk-6Ca" secondAttribute="top" id="6Cl-gb-FPV"/>
+                <constraint firstItem="b5B-zY-0ft" firstAttribute="centerX" secondItem="siF-Kg-ame" secondAttribute="centerX" id="7Nn-qm-N32"/>
+                <constraint firstItem="sbq-Ex-HDT" firstAttribute="trailing" secondItem="siF-Kg-ame" secondAttribute="trailing" id="TUb-c5-D05"/>
+                <constraint firstItem="sbq-Ex-HDT" firstAttribute="leading" secondItem="siF-Kg-ame" secondAttribute="leading" id="bFS-XL-oG7"/>
+                <constraint firstAttribute="bottom" secondItem="sbq-Ex-HDT" secondAttribute="bottom" id="kcQ-jb-3t6"/>
+                <constraint firstItem="sbq-Ex-HDT" firstAttribute="top" secondItem="siF-Kg-ame" secondAttribute="bottom" id="lzH-J7-TpR"/>
+                <constraint firstAttribute="trailing" secondItem="siF-Kg-ame" secondAttribute="trailing" id="nse-3n-iQU"/>
+                <constraint firstItem="siF-Kg-ame" firstAttribute="leading" secondItem="JD1-Kk-6Ca" secondAttribute="leading" id="pEq-5s-YEi"/>
+                <constraint firstItem="b5B-zY-0ft" firstAttribute="centerY" secondItem="siF-Kg-ame" secondAttribute="centerY" id="qGG-a0-5hK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Cc6-Sj-wl8"/>
+            <size key="customSize" width="121" height="276"/>
+            <connections>
+                <outlet property="img" destination="siF-Kg-ame" id="oAc-RE-CRY"/>
+                <outlet property="nomeTv" destination="sbq-Ex-HDT" id="RvZ-ox-30R"/>
+                <outlet property="progress" destination="b5B-zY-0ft" id="a47-de-6e7"/>
+            </connections>
+            <point key="canvasLocation" x="-86.5" y="165"/>
+        </collectionViewCell>
+    </objects>
+</document>

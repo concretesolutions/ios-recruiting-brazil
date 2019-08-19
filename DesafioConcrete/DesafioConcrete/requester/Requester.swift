@@ -10,7 +10,21 @@ import Foundation
 
 class Requester {
     
-    func requestPopular(page: Int) {
+    func requestPopular(page: Int, callback:@escaping () -> ()) {
+        Endpoints.shared.makeRequest(apiUrl: Endpoints.shared.getPopularMovies(page: page), method: .get) { (response) in
+            if(response?.result.isSuccess)! {
+                do {
+                    let decoder = JSONDecoder()
+                    let movies = try decoder.decode(MovieResponse.self, from: (response?.data)!)
+                    Singleton.shared.movies.append(contentsOf: movies.results)
+                    callback()
+                }  catch let (error) {
+                    print(error)
+                }
+            } else {
+                print("Erro ao recuperar os filmes")
+            }
+        }
     }
     
     func requestGenreList() {
@@ -18,15 +32,13 @@ class Requester {
             if(response?.result.isSuccess)! {
                 do {
                     let decoder = JSONDecoder()
-                    var genres = try decoder.decode(GenreResponse.self, from: (response?.data)!)
+                    let genres = try decoder.decode(GenreResponse.self, from: (response?.data)!)
                     Singleton.shared.genres = genres.results
-                    print(Singleton.shared.genres)
                 } catch let (error){
                     print(error)
                 }
-                
             } else {
-                
+                print("Erro ao recuperar os gêneros")
             }
         })
         
