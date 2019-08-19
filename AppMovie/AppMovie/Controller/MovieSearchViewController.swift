@@ -34,6 +34,7 @@ class MovieSearchViewController: UIViewController {
         
         configureViewComponents()
         api()
+        setupSearchBar()
     }
     
     /*SetupView Inject Dependence(MOCKS...)
@@ -57,7 +58,7 @@ class MovieSearchViewController: UIViewController {
         
         //Search
         movieSearch.barTintColor = UIColor.mainColor()
-        movieSearch.tintColor = UIColor.mainOrange()
+        movieSearch.tintColor = UIColor.mainDarkBlue()
         movieSearch.showsCancelButton = false
         for v:UIView in movieSearch.subviews.first!.subviews {
             if v.isKind(of: UITextField.classForCoder()) {
@@ -89,7 +90,7 @@ class MovieSearchViewController: UIViewController {
     }
 }
 
-// MARK: - Protocol Delegate DidSelect
+// MARK: - Protocol MOVIE SELECTION DELEGATE
 extension MovieSearchViewController: MovieSelectionDelegate{
     func didSelect(movie: Result) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -123,5 +124,41 @@ extension MovieSearchViewController: MoviePagingDelegate{
 
 // MARK: - UISearchDelate
 extension MovieSearchViewController: UISearchBarDelegate{
+    func setupSearchBar() {
+        self.movieSearch.delegate = self
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        movieSearch.resignFirstResponder()
+        let query = searchBar.text ?? ""
+        print(searchBar.text)
+        if !query.isEmpty {
+            print(query)
+            //fetchMovie(query: query)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        movieSearch.showsCancelButton = false
+        print("Cancel")
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        movieSearch.showsCancelButton = true
+        if searchText.isEmpty {
+            inSearchMode = false
+            //carrega view
+            self.setupCollectionView(with: self.movie)
+        } else {
+            inSearchMode = true
+            print(searchText)
+            filteredMovie = movie.filter({ $0.title?.range(of: searchText) != nil })
+            //filter({$0.title.lowercased().contains(searchText.lowercased())})
+            print(filteredMovie)
+            self.setupCollectionView(with: self.filteredMovie)
+        }
+    }
     
 }
