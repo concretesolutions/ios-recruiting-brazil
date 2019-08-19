@@ -44,7 +44,7 @@ class MovieSearchViewControllerSpec: QuickSpec {
             
             describe("MoviesSearchViewController UI") {
                 it("should have the expected calling ui") {
-                    expect(sut.view) == recordSnapshot()
+                    expect(sut.view) == snapshot()
                 } }
         }
     }

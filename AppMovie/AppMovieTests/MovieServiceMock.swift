@@ -9,16 +9,16 @@
 
 class MovieServiceMock: MovieService {
     
-    let movieX: [Result]
+    let movies: [Result]
     private let jsonHelper: JsonHelper
     
     init() {
         self.jsonHelper = JsonHelper()
-        self.movieX = jsonHelper.decodeJson()
+        self.movies = jsonHelper.decodeJson()
         //print(self.moviesS)
     }
     
     func getMovies(page: Int, completionHandler: @escaping ([Result]) -> Void) {
-        completionHandler(self.movieX)
+        completionHandler(self.movies)
     }
 }

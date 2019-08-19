@@ -19,18 +19,22 @@ class FavoriteMovieViewController: UIViewController {
     
     var movies: [MovieEntity] = []
     
+    var tableViewDataSource: FavoriteMovieTableViewDataSource?
+    var tableViewDelegate: FavoriteMovieTableViewDelegate?
+    
     //MARK: -INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        favoriteTableView.delegate = self
-        favoriteTableView.dataSource = self
+//        favoriteTableView.delegate = self
+//        favoriteTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchCoreDataObjects()
-        favoriteTableView.reloadData()
+        //favoriteTableView.reloadData()
+        self.setupTableView(with: self.movies)
         configureViewComponents()
     }
     
@@ -44,6 +48,16 @@ class FavoriteMovieViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    //MARK - SETUP TABLEVIEW
+    func setupTableView(with movie: [MovieEntity]) {
+        tableViewDataSource = FavoriteMovieTableViewDataSource(movies: movie, tableView: favoriteTableView)
+        tableViewDelegate = FavoriteMovieTableViewDelegate(movies: movie, delegate: self)
+        
+        favoriteTableView.dataSource = tableViewDataSource
+        favoriteTableView.delegate = tableViewDelegate
+        favoriteTableView.reloadData()
     }
     
     func configureViewComponents(){
@@ -77,41 +91,19 @@ class FavoriteMovieViewController: UIViewController {
     
 }
 
-//MARK: - TableView
-extension FavoriteMovieViewController:  UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteMovieCell") as? FavoriteMovieCell else { return UITableViewCell() }
-        let movie = movies[indexPath.row]
-        cell.configureCell(movie: movie)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Unfavorite") { (rowAction, indexPath) in
-            self.removeMovie(atIndexPath: indexPath)
-            self.fetchCoreDataObjects()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-        deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-        
-        return [deleteAction]
-    }
-}
-
 //MARK: - CoreData Remove
-extension FavoriteMovieViewController{
+extension FavoriteMovieViewController: MovieSelectionDelegate{
+    
+    func didSelect(movie: Result) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController else {
+            fatalError("should be a controller of type MovieDetailViewController")
+        }
+        
+        controller.movieCell = movie
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     
     func removeMovie(atIndexPath indexPath: IndexPath) {
         guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
@@ -124,6 +116,9 @@ extension FavoriteMovieViewController{
         } catch {
             debugPrint("Could not remove: \(error.localizedDescription)")
         }
+        
+        self.fetchCoreDataObjects()
+        tableViewDataSource?.movies.remove(at: indexPath.row)
     }
     
     func fetch(completion: (_ complete: Bool) -> ()) {

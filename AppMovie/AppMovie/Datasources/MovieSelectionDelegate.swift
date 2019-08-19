@@ -10,4 +10,5 @@ import Foundation
 
 protocol MovieSelectionDelegate: class {
     func didSelect(movie: Result)
+    func removeMovie(atIndexPath: IndexPath)
 }

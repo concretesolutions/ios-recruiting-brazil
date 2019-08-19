@@ -100,6 +100,7 @@ extension MovieSearchViewController: MovieSelectionDelegate{
         controller.movieCell = movie
         navigationController?.pushViewController(controller, animated: true)
     }
+    func removeMovie(atIndexPath: IndexPath) {}
 }
 
 // MARK: - Protocol Delegate Paging
