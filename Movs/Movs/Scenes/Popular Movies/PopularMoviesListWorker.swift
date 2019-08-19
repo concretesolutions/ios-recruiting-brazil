@@ -14,16 +14,16 @@ import UIKit
 
 class PopularMoviesListWorker {
 	
-	var PopularMoviesListWorker:PopularMoviesListWorkerProtocol
+	var popularMoviesListWorker:PopularMoviesListWorkerProtocol
 	
-	init(_ PopularMoviesListWorker:PopularMoviesListWorkerProtocol) {
+	init(_ popularMoviesListWorker:PopularMoviesListWorkerProtocol) {
 		
-		self.PopularMoviesListWorker = PopularMoviesListWorker
+		self.popularMoviesListWorker = popularMoviesListWorker
 	}
 	
 	func getPopularMovies(_ page:Int, completion:@escaping(PopularMoviesResult?,Error?) -> Void) {
 
-		PopularMoviesListWorker.getPopularMovies(page) { (movies: () throws -> PopularMoviesResult) in
+		popularMoviesListWorker.getPopularMovies(page) { (movies: () throws -> PopularMoviesResult) in
 
 			do{
 				let movies = try movies()

@@ -27,7 +27,7 @@ protocol PopularMoviesListDataStore {
 class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMoviesListDataStore {
 	
 	var presenter: PopularMoviesListPresentationLogic?
-	var worker: PopularMoviesListWorker?
+	var worker: PopularMoviesListWorker = PopularMoviesListWorker(PopularMoviesNetworkWorker())
 	var movie: Movie?
 	
 	private var movies:[Movie] = []
@@ -36,8 +36,7 @@ class PopularMoviesListInteractor: PopularMoviesListBusinessLogic, PopularMovies
 	
 	func getPopularMovies(request: PopularMoviesList.GetPopularMovies.Request) {
 		
-		worker = PopularMoviesListWorker(PopularMoviesNetworkWorker())
-		worker?.getPopularMovies(request.page, completion: { (result, error) in
+		worker.getPopularMovies(request.page, completion: { (result, error) in
 
 			var response:PopularMoviesList.GetPopularMovies.Response
 			

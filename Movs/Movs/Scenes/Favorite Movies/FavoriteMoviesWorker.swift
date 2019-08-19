@@ -14,16 +14,16 @@ import UIKit
 
 class FavoriteMoviesWorker {
 	
-	var FavoriteMoviesWorker:FavoriteMoviesWorkerProtocol
+	var favoriteMoviesWorker:FavoriteMoviesWorkerProtocol
 	
-	init(_ FavoriteMoviesWorker:FavoriteMoviesWorkerProtocol) {
+	init(_ favoriteMoviesWorker:FavoriteMoviesWorkerProtocol) {
 		
-		self.FavoriteMoviesWorker = FavoriteMoviesWorker
+		self.favoriteMoviesWorker = favoriteMoviesWorker
 	}
 	
 	func getFavoriteMovies(completion:@escaping([Movie]?,Error?) -> Void) {
 
-		FavoriteMoviesWorker.getFavoriteMovies { (data: () throws -> [Movie]) in
+		favoriteMoviesWorker.getFavoriteMovies { (data: () throws -> [Movie]) in
 
 			do{
 				let returnData = try data()

@@ -14,11 +14,11 @@ import UIKit
 
 class MovieDetailWorker {
 	
-	var MovieDetailWorker:MovieDetailWorkerProtocol
+	var movieDetailWorker:MovieDetailWorkerProtocol
 	
-	init(_ MovieDetailWorker:MovieDetailWorkerProtocol) {
+	init(_ movieDetailWorker:MovieDetailWorkerProtocol) {
 		
-		self.MovieDetailWorker = MovieDetailWorker
+		self.movieDetailWorker = movieDetailWorker
 	}
 	
 //	func getData(completion:@escaping(ReturnData?,Error?) -> Void) {
