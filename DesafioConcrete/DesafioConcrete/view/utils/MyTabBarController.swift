@@ -15,6 +15,15 @@ class MyTabBarController : UITabBarController {
         self.tabBar.barTintColor = UIColor.black
         self.tabBar.tintColor = UIColor.yellow
         self.tabBar.unselectedItemTintColor = UIColor.white
+        
+        let offset:CGFloat = 6
+        
+        if let items = tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsetsMake(offset, 0, -offset, 0);
+            }
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

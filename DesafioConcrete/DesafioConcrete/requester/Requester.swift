@@ -33,7 +33,7 @@ class Requester {
                 do {
                     let decoder = JSONDecoder()
                     let genres = try decoder.decode(GenreResponse.self, from: (response?.data)!)
-                    Singleton.shared.genres = genres.results
+                    Singleton.shared.genres = Dictionary(uniqueKeysWithValues: genres.results.map{ ($0.id, $0) })
                 } catch let (error){
                     print(error)
                 }
@@ -41,7 +41,6 @@ class Requester {
                 print("Erro ao recuperar os gêneros")
             }
         })
-        
     }
     
 }

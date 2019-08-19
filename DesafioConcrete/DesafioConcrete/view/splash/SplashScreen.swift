@@ -29,9 +29,9 @@ class SplashScreen: UIViewController {
         let tabBarController = MyTabBarController()
         
         tabBarController.viewControllers = [nav1, nav2]
-        nav1.tabBarItem.title = "Populares"
+//        nav1.tabBarItem.title = "Populares"
         nav1.tabBarItem.image = UIImage(named: "list_icon.png")
-        nav2.tabBarItem.title = "Favoritos"
+//        nav2.tabBarItem.title = "Favoritos"
         nav2.tabBarItem.image = UIImage(named: "favorite_empty_icon.png")
         
         AppDelegate.sharedInstance().window?.rootViewController = tabBarController

@@ -12,14 +12,17 @@ struct Movie:Codable {
     var id:Int
     var title:String
     var posterPath:String
+    var backdropPath: String
     var genreIds: Array<Int>
     var overview: String
     var releaseDate:String
+    var isFavorite:Bool
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
         case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
         case genreIds = "genre_ids"
         case overview = "overview"
         case releaseDate = "release_date"
@@ -31,9 +34,11 @@ struct Movie:Codable {
         self.id = try values.decode(Int.self, forKey: .id)
         self.title = try values.decode(String.self, forKey: .title)
         self.posterPath = try values.decode(String.self, forKey: .posterPath)
+        self.backdropPath = try values.decode(String.self,forKey: .backdropPath)
         self.genreIds = try values.decode(Array<Int>.self, forKey: .genreIds)
         self.overview = try values.decode(String.self, forKey: .overview)
         self.releaseDate = try values.decode(String.self, forKey: .releaseDate)
+        self.isFavorite = false
     }
 }
 
