@@ -57,7 +57,7 @@ class SimplifiedMovie: MoviePresentable{
     
     //Transforms the ids in genres
     func getGenres(genres: [Int]) -> [Genre]{
-        return APIController.allGenres.filter {genres.contains($0.id)}
+        return APIClient.allGenres.filter {genres.contains($0.id)}
     }
     
 }

@@ -20,11 +20,15 @@ class TabBarController: UITabBarController {
     
     //Set the items in the tab bar
     func setupTabBar(){
-        let mainController = UINavigationController(rootViewController: MovieGridController())
+        
+        let crud = FavoriteCRUD()
+        let apiAcess = APIClient()
+        
+        let mainController = UINavigationController(rootViewController: MovieGridController(crud: crud, apiAcess: apiAcess))
         mainController.tabBarItem.image = UIImage(named: "list_icon")
         mainController.tabBarItem.selectedImage = UIImage(named: "list_icon")
         
-        let favController = UINavigationController(rootViewController: FavoriteController())
+        let favController = UINavigationController(rootViewController: FavoriteController(crud: crud))
         favController.tabBarItem.image = UIImage(named: "favorite_empty_icon")
         favController.tabBarItem.selectedImage = UIImage(named: "favorite_empty_icon")
         

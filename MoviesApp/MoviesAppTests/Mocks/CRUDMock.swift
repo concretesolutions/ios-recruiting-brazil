@@ -16,7 +16,6 @@ class CRUDMock: FavoriteCRUDInterface{
     var hasLoadData: Bool = false
     var hasSavedData: Bool = false
     var hasCheckedFav: Bool = false
-    var hasFiterFav: Bool = false
     var hasDeletedFav: Bool = false
     
     
@@ -40,11 +39,6 @@ class CRUDMock: FavoriteCRUDInterface{
         }else{
             return false
         }
-    }
-    
-    func filterFavorites(format: String, filter: String) -> [Favorite] {
-        hasFiterFav = true
-        return []
     }
     
     func deleteFavorite(movieForDeletion: Favorite) {

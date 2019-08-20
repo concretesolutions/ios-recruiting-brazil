@@ -24,7 +24,7 @@ class FilterViewModel{
         years.append(contentsOf: df.years(1980...2019).reversed())
         
         genres.append("Nenhum")
-        for genre in APIController.allGenres{
+        for genre in APIClient.allGenres{
             genres.append(genre.name)
         }
     }

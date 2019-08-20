@@ -29,16 +29,19 @@ enum ApiPaths{
     }
 }
 
+protocol APIClientInterface{
+  func fetchData<T:Codable>(path: ApiPaths,type: T.Type,completion: @escaping (T,Error?) -> Void)
+  func downloadImage(path: String, completion: @escaping (UIImage?) -> Void)
+  func getImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ())
+}
+
 //MARK: - API Acess Methods
-class APIController{
-    
-    
+class APIClient: APIClientInterface{
     static var allGenres: [Genre] = [Genre]()
-    static let sharedAccess = APIController()
     
-    private init() {
+     init() {
         fetchData(path: ApiPaths.genre, type: Genres.self) { (allGen,error)  in
-            APIController.allGenres = allGen.genres
+            APIClient.allGenres = allGen.genres
         }
     }
     

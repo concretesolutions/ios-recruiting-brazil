@@ -13,25 +13,24 @@ import Nimble
 
 class MovieSpec: QuickSpec{
     
-    var movieMock = MovieMock()
-    
-    
     override func spec() {
+        let movieMock = MovieMock()
+        
         describe("Check data validation in the movie") {
             it("has to be equal to the formated value"){
-                expect(self.movieMock.mock.date) == "2019"
+                expect(movieMock.mock.date) == "2019"
             }
         }
         
         describe("Check gender validation in the movie") {
-            it("should be a gender array"){
-                expect(self.movieMock.mock.genres[0].name) == "Action"
+            it("should have a name"){
+                expect(movieMock.mock.genres[0].name) == "Action"
             }
         }
         
         describe("Check image validation in the movie") {
             it("should not be a nil result"){
-                expect(self.movieMock.mock.bannerImage).notTo(beNil())
+                expect(movieMock.mock.bannerImage).notTo(beNil())
             }
         }
     }

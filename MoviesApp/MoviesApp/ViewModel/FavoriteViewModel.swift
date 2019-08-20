@@ -13,10 +13,12 @@ import UIKit
 class FavoriteViewModel{
     public var favorites = [Favorite]()
     public var images = [UIImage]()
+    var crud: FavoriteCRUDInterface
     
     var isFiltering: Bool
     
-    init() {
+    init(crud: FavoriteCRUDInterface) {
+        self.crud = crud
         isFiltering = false
         loadFavorites()
     }
@@ -30,7 +32,7 @@ extension FavoriteViewModel{
         images.removeAll()
         
         do{
-            favorites = try FavoriteCRUD.sharedCRUD.loadData()
+            favorites = try crud.loadData()
             loadImages(favs: favorites)
         }catch{
             print("Nenhum favorito cadastrado")
@@ -48,7 +50,7 @@ extension FavoriteViewModel{
     
     //Delete a favorite in a specific row
     func deleteFavorite(movie: Favorite, at indexPath: IndexPath){
-        FavoriteCRUD.sharedCRUD.deleteFavorite(movieForDeletion: movie)
+        crud.deleteFavorite(movieForDeletion: movie)
         favorites.remove(at: indexPath.row)
         images.remove(at: indexPath.row)
     }
@@ -70,7 +72,7 @@ extension FavoriteViewModel{
     }
     
     //Filter the favorites by the filters in the filter screen
-    func filterScreenFilter(filters: [String]){
+    func filterFavorites(filters: [String]){
         isFiltering = true
         var filterFavs = [Favorite]()
         

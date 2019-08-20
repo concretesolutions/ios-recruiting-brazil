@@ -17,7 +17,16 @@ protocol ReturnFilter: class{
 
 class FavoriteController: UIViewController{
     let screen = FavoriteView()
-    let viewModel = FavoriteViewModel()
+    let viewModel: FavoriteViewModel
+    
+    init(crud: FavoriteCRUDInterface) {
+        viewModel = FavoriteViewModel(crud: crud)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         self.view = screen
@@ -59,7 +68,7 @@ extension FavoriteController: ReturnFilter{
     
     //Returns from the filter screen
     func getFiltersData(filters: [String]) {
-        viewModel.filterScreenFilter(filters: filters)
+        viewModel.filterFavorites(filters: filters)
         screen.table.reloadData()
     }
 }

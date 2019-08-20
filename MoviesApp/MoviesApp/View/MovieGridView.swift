@@ -24,7 +24,7 @@ class MovieGridView: UIView{
     
     lazy var loadRoll: UIActivityIndicatorView = {
        let view = UIActivityIndicatorView(frame: .zero)
-       view.tintColor = .red
+       view.tintColor = .black
        return view
     }()
     

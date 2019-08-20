@@ -46,7 +46,7 @@ class DetailsView: UIView {
     lazy var genresLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.textAlignment = .center
-        view.numberOfLines = 1
+        view.numberOfLines = 0
         return view
     }()
     

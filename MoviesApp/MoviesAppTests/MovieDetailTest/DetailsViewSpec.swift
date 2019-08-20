@@ -1,10 +1,11 @@
 //
-//  MovieGridSpec.swift
+//  DetailsViewSpec.swift
 //  MoviesAppTests
 //
-//  Created by Eric Winston on 8/16/19.
+//  Created by Eric Winston on 8/19/19.
 //  Copyright © 2019 Eric Winston. All rights reserved.
 //
+
 
 import Foundation
 import Quick
@@ -13,20 +14,16 @@ import Nimble_Snapshots
 
 @testable import MoviesApp
 
-class MovieGridSpec: QuickSpec{
+class DetailSpec: QuickSpec{
     
     override func spec() {
-        let crudMock = CRUDMock()
-        let apiMock = APIClientMock()
-        let viewModel = MovieGridViewModel(crud: crudMock,apiAcess: apiMock)
-      
+        let viewModel = MovieGridMock()
+        
+        beforeEach{
+        }
         
         describe("Check if a movie is favorite") {
-            it("has to be equal to true"){
-                
-                let movie = MovieMock()
-                viewModel.movies.append(movie.mock)
-                
+            it("has to be equal to the string"){
                 expect(viewModel.checkFavorite(movieID: viewModel.movies[0].id)).to(beTrue())
             }
         }

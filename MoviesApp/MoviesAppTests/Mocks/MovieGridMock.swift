@@ -10,27 +10,28 @@ import Foundation
 
 @testable import MoviesApp
 
+
 class MovieGridMock: MovieGridInterface{
+    
     var pageCount: Int = 0
     var isFavorite = true
     
     var movies: [SimplifiedMovie] = [
-        SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil),
+    SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil),
     SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil),
     SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil),
     SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil)
     ]
     
     func loadMovies() {
-        pageCount += pageCount
+        pageCount += 1
     }
     
-    func checkFavorite(movieID: Int) -> String {
+    func checkFavorite(movieID: Int) -> Bool {
         if movieID == 429617{
-            return "Favorite"
+            return true
         }else{
-            return "Not"
+            return false
         }
     }
-    
 }

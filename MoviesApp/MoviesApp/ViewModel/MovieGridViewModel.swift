@@ -8,12 +8,11 @@
 import UIKit
 
 
-protocol MovieGridInterface{
+protocol MovieGridInterface: class{
     var pageCount: Int {get set}
     var movies: [SimplifiedMovie] {get set}
-    
     func loadMovies()
-    func checkFavorite(movieID: Int) -> String
+    func checkFavorite(movieID: Int) -> Bool
 }
 
 
@@ -21,7 +20,10 @@ protocol MovieGridInterface{
 //The head of the class
 class MovieGridViewModel{
     public var pageCount = 0
-    weak var refresh: ReturnMovies?
+    weak var refresh: MovieGridViewModelDelegate?
+    var crud: FavoriteCRUDInterface
+    var apiAcess: APIClientInterface
+    
     
     var movies: [SimplifiedMovie] = [] {
         didSet{
@@ -29,7 +31,9 @@ class MovieGridViewModel{
         }
     }
     
-    init() {
+    init(crud: FavoriteCRUDInterface, apiAcess: APIClientInterface) {
+        self.crud = crud
+        self.apiAcess = apiAcess
         loadMovies()
     }
 }
@@ -40,7 +44,7 @@ extension MovieGridViewModel: MovieGridInterface{
     
     //Loads the movie banner from the api
     func loadImage(path: String, completion: @escaping (UIImage) -> Void ){
-        APIController.sharedAccess.downloadImage(path: path) { (fetchedImage) in
+        apiAcess.downloadImage(path: path) { (fetchedImage) in
             if let image = fetchedImage{
                 completion(image)
             }
@@ -51,8 +55,7 @@ extension MovieGridViewModel: MovieGridInterface{
     func loadMovies(){
         pageCount += 1
         var tempImage = UIImage()
-        
-        APIController.sharedAccess.fetchData(path: ApiPaths.movies(page: pageCount), type: Populares.self) { [weak self] (fetchedMovies,error) in
+        apiAcess.fetchData(path: ApiPaths.movies(page: pageCount), type: Populares.self) { [weak self] (fetchedMovies,error) in
             guard let checkMovies = fetchedMovies.results else {fatalError("Error fetching the movies form the API")}
             checkMovies.forEach({ (movie) in
                 if let path = movie.poster_path{
@@ -67,12 +70,8 @@ extension MovieGridViewModel: MovieGridInterface{
     }
     
     //Check if a movie is a favorite to display in the grid
-    func checkFavorite(movieID: Int) -> String{
-        let isFavorite = FavoriteCRUD.sharedCRUD.checkFavoriteMovie(movieId: "\(movieID)")
-        if isFavorite{
-            return "favorite_gray_icon"
-        }else{
-            return "favorite_empty_icon"
-        }
+    func checkFavorite(movieID: Int) -> Bool{
+        let isFavorite = crud.checkFavoriteMovie(movieId: "\(movieID)")
+        return isFavorite
     }
 }

@@ -61,10 +61,15 @@ class MovieGridCell: UICollectionViewCell{
 
 //MARK: - Feeds the data to the elements
 extension MovieGridCell {
-    func configure(withViewModel viewModel: MoviePresentable,favImage: String){
+    func configure(withViewModel viewModel: MoviePresentable,isFavorite: Bool){
         nameLabel.text = viewModel.name
         imageView.image = viewModel.bannerImage
-        favImageDisplay.image = UIImage(named: favImage)
+        
+        if isFavorite {
+            favImageDisplay.image = UIImage(named: "favorite_gray_icon")
+        }else{
+            favImageDisplay.image = UIImage(named: "favorite_empty_icon")
+        }
     }
 }
 

@@ -22,10 +22,6 @@ class FavoriteCRUD: FavoriteCRUDInterface{
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var favorites = [Favorite]()
-    static let sharedCRUD = FavoriteCRUD()
-    
-    private init(){
-    }
     
     //MARK - Add new favorite in database
     func addFavorite(movie: SimplifiedMovie){
