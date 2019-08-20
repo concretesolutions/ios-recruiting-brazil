@@ -67,7 +67,7 @@ class FavoriteCell: SwipeTableViewCell{
 
 //MARK: - Feeds the data to the elements
 extension FavoriteCell {
-    func configure(withViewModel favorite: Favorite,image: UIImage){
+    func configure(withFavorite favorite: Favorite,image: UIImage){
         nameLabel.text = favorite.title
         descLabel.text = favorite.overview
         posterView.image = image
@@ -124,6 +124,6 @@ extension FavoriteCell: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UsedColor.pink.color
+        backgroundColor = .white
     }
 }

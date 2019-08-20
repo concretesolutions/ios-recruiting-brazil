@@ -9,6 +9,8 @@
 
 import UIKit
 
+
+//MARK: - Protocols
 protocol FavoriteInterface{
     func loadFavorites()
     func loadImages(favs: [Favorite])
@@ -18,7 +20,7 @@ protocol FavoriteInterface{
 }
 
 
-//MARK: - The head of the class
+//MARK: - Init
 class FavoriteViewModel{
     public var favorites = [Favorite]()
     public var images = [UIImage]()
@@ -34,7 +36,7 @@ class FavoriteViewModel{
 }
 
 
-//MARK: - Screen methods
+//MARK: - METHODS
 extension FavoriteViewModel: FavoriteInterface{
     //Loads all the favorites and translate the data to images
     func loadFavorites(){
@@ -104,7 +106,6 @@ extension FavoriteViewModel: FavoriteInterface{
             loadImages(favs: favorites)
         }else{
             favorites.removeAll()
-            print("Nenhum resultado para o filtro")
         }
     }
     

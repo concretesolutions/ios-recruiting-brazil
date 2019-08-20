@@ -30,15 +30,16 @@ class DetailsView: UIView {
     
     lazy var favButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.backgroundColor = .red
-        view.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
-        view.setImage(UIImage(named: "favorite_gray_icon"), for: .selected)
+        view.backgroundColor = UsedColor.blue.color
+        view.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        view.setImage(UIImage(named: "favorite_full_icon"), for: .selected)
         return view
     }()
     
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.textAlignment = .center
+        view.textColor = UsedColor.yellow.color
         view.numberOfLines = 0
         return view
     }()
@@ -46,13 +47,14 @@ class DetailsView: UIView {
     lazy var genresLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.textAlignment = .center
+        view.textColor = UsedColor.yellow.color
         view.numberOfLines = 0
         return view
     }()
     
     lazy var verticalContainer: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = .white
+        view.backgroundColor = UsedColor.blue.color
         return view
     }()
     
@@ -92,8 +94,9 @@ extension DetailsView: CodeView{
     
     func setupConstrains() {
         imageView.snp.makeConstraints { (make) in
-            make.right.left.equalToSuperview()
-            make.top.equalTo(snp_topMargin)
+            make.right.equalToSuperview().inset(10)
+            make.left.equalToSuperview().offset(10)
+            make.top.equalTo(snp_topMargin).offset(10)
             make.height.equalToSuperview().multipliedBy(0.5)
         }
         
@@ -120,7 +123,7 @@ extension DetailsView: CodeView{
         
         favButton.snp.makeConstraints { (make) in
             make.left.equalTo(verticalContainer.snp.right)
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().inset(10)
             make.bottom.equalTo(imageView.snp.bottom)
             make.height.equalToSuperview().multipliedBy(0.125)
         }
@@ -134,7 +137,7 @@ extension DetailsView: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UsedColor.blue.color
+        backgroundColor = .white
     }
 }
 

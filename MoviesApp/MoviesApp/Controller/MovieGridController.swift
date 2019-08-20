@@ -9,18 +9,18 @@
 import UIKit
 
 
-// Protocol to get the data from the filters
+//MARK: - Protocols
 protocol MovieGridViewModelDelegate: class{
     func refreshMovieData()
 }
 
 
-//MARK: - Controller of the MovieGrid Screen
 class MovieGridController: UIViewController {
     
     let screen = MovieGridView()
     let viewModel: MovieGridViewModel
     
+    //MARK: - Inits
     init(crud: FavoriteCRUDInterface, apiAcess: APIClientInterface) {
         viewModel = MovieGridViewModel(crud: crud,apiAcess: apiAcess)
         super.init(nibName: nil, bundle: nil)
@@ -31,10 +31,10 @@ class MovieGridController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - View cycle functions
     override func viewDidLoad(){
         self.view = screen
         
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Movies"
         
         screen.gridView.delegate = self
@@ -48,19 +48,21 @@ class MovieGridController: UIViewController {
 }
 
 
+//MARK: - View Model delegate
 extension MovieGridController: MovieGridViewModelDelegate{
     func refreshMovieData() {
         DispatchQueue.main.async { [weak self] in
             self?.screen.gridView.reloadData()
             self?.screen.loadRoll.stopAnimating()
             self?.screen.loadRoll.isHidden = true
+            self?.screen.loadingLabel.isHidden = true
             self?.screen.gridView.isHidden = false
         }
     }
 }
 
 
-//MARK: - Calls the details screen when a movie is selected
+//MARK: - Transition
 extension MovieGridController{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovie = viewModel.movies[indexPath.row]
@@ -70,7 +72,7 @@ extension MovieGridController{
     }
 }
 
-//MARK: - Collection DataSource Methods
+//MARK: - CollectionView DataSource
 extension MovieGridController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.movies.count
@@ -87,7 +89,7 @@ extension MovieGridController: UICollectionViewDataSource{
 }
 
 
-//MARK: - Collection Layout Methods
+//MARK: - CollectionView Layout
 extension MovieGridController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     // Loads more movies when the scrool gets near the end
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -97,13 +99,12 @@ extension MovieGridController: UICollectionViewDelegate, UICollectionViewDelegat
     }
     
     // Distance to the screen sides
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(10)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 5,left: 5,bottom: 0,right: 5)
     }
-    
     // Set the size of the cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 280)
+        return CGSize(width: 170, height: 280)
     }
 }
 

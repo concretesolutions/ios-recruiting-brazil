@@ -9,12 +9,14 @@
 
 import UIKit
 
+//MARK: - Interface
 protocol DetailsInterface{
     func detailsGenres() -> String
     func addFavorite()
     func checkFavorite(movieID: Int)
 }
 
+//MARK: - Init
 class DetailsViewModel: DetailsInterface{
     var movie: PresentableMovieInterface
     var isFavorite: Bool = false
@@ -26,6 +28,7 @@ class DetailsViewModel: DetailsInterface{
         self.movie = movie
     }
 
+//MARK: - Methods
     
     //Transformes the genres list in a simple string
     func detailsGenres() -> String {

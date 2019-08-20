@@ -8,17 +8,17 @@
 
 import UIKit
 
-//MARK: - Tab Bar Configuration
+
 class TabBarController: UITabBarController {
     
+    //MARK: - View cycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.barTintColor = UsedColor.pink.color
-        navigationController?.navigationBar.backgroundColor = UsedColor.pink.color
+        tabBar.barTintColor = UsedColor.yellow.color
         setupTabBar()
     }
     
-    //Set the items in the tab bar
+    //MARK: - Tab Bar Configuration
     func setupTabBar(){
         
         let crud = FavoriteCRUD()
@@ -26,10 +26,12 @@ class TabBarController: UITabBarController {
         
         let mainController = UINavigationController(rootViewController: MovieGridController(crud: crud, apiAcess: apiAcess))
         mainController.tabBarItem.image = UIImage(named: "list_icon")
+        mainController.tabBarItem.title = "Movies"
         mainController.tabBarItem.selectedImage = UIImage(named: "list_icon")
         
         let favController = UINavigationController(rootViewController: FavoriteController(crud: crud))
         favController.tabBarItem.image = UIImage(named: "favorite_empty_icon")
+        favController.tabBarItem.title = "Favorites"
         favController.tabBarItem.selectedImage = UIImage(named: "favorite_empty_icon")
         
         viewControllers = [mainController,favController]

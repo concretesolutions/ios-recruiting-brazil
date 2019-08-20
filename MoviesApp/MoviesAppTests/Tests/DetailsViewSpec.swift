@@ -19,6 +19,7 @@ class DetailSpec: QuickSpec{
         let movie = MovieMock()
         let crud = CRUDMock()
         let viewModel = DetailsViewModel(crud: crud, movie: movie)
+        let controller = DetailsController(crud: crud, selectedMovie: movie)
       
         describe("Create a presentable genres string") {
             it("has to present the genres in the movie"){
@@ -30,6 +31,7 @@ class DetailSpec: QuickSpec{
             it("has to call the function addFavorite"){
                 viewModel.addFavorite()
                 expect(crud.hasAddFavorite).to(beTrue())
+                expect(crud.hasSavedData).to(beTrue())
             }
         }
         
@@ -37,6 +39,13 @@ class DetailSpec: QuickSpec{
             it("has to call the function checkFavorite"){
                 viewModel.checkFavorite(movieID: movie.id)
                 expect(crud.hasCheckedFav).to(beTrue())
+            }
+        }
+        
+        describe("Check if the view is loading") {
+            it("view has to be equal to equal to the DetailView"){
+                controller.viewDidLoad()
+                expect(controller.view) == controller.screen
             }
         }
     }

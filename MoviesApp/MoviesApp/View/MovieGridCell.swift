@@ -41,7 +41,8 @@ class MovieGridCell: UICollectionViewCell{
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Custom cell"
+        label.textColor = UsedColor.yellow.color
+        label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
         return label
     }()
@@ -66,9 +67,9 @@ extension MovieGridCell {
         imageView.image = viewModel.bannerImage
         
         if isFavorite {
-            favImageDisplay.image = UIImage(named: "favorite_gray_icon")
+            favImageDisplay.image = UIImage(named: "favorite_full_icon")
         }else{
-            favImageDisplay.image = UIImage(named: "favorite_empty_icon")
+            favImageDisplay.image = UIImage(named: "favorite_gray_icon")
         }
     }
 }
@@ -92,7 +93,9 @@ extension MovieGridCell: CodeView{
         }
         
         imageView.snp.makeConstraints { (make) in
-            make.top.right.left.equalToSuperview()
+            make.top.equalToSuperview().offset(5)
+            make.right.equalToSuperview().inset(5)
+            make.left.equalToSuperview().offset(5)
             make.height.equalToSuperview().multipliedBy(0.7)
         }
         
@@ -114,7 +117,7 @@ extension MovieGridCell: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UsedColor.purple.color
+        backgroundColor = UsedColor.blue.color
     }
 }
 

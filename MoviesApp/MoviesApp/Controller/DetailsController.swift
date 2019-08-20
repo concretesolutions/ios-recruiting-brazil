@@ -12,6 +12,7 @@ class DetailsController: UIViewController {
     let screen = DetailsView()
     let viewModel: DetailsViewModel
     
+    // MARK: - Inits
     init(crud: FavoriteCRUDInterface, selectedMovie: PresentableMovieInterface) {
         viewModel = DetailsViewModel(crud: crud,movie: selectedMovie)
         super.init(nibName: nil, bundle: nil)
@@ -21,13 +22,18 @@ class DetailsController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View cycle functions
     override func viewDidLoad() {
         self.view = screen
+        
+        navigationItem.title = "Details"
+        
         viewModel.checkFavorite(movieID: viewModel.movie.id)
         screen.configure(detailedMovie: viewModel.movie, genreNames: viewModel.detailsGenres(), isFavorite: viewModel.isFavorite)
         screen.favButton.addTarget(self, action: #selector(addFavoriteAction), for: .touchUpInside)        
     }
     
+    // MARK: - Input
     @objc func addFavoriteAction(){
         viewModel.addFavorite()
         screen.favButton.isSelected = viewModel.isFavorite

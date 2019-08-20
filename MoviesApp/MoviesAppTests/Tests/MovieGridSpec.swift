@@ -19,6 +19,7 @@ class MovieGridSpec: QuickSpec{
         let crudMock = CRUDMock()
         let apiMock = APIClientMock()
         let viewModel = MovieGridViewModel(crud: crudMock,apiAcess: apiMock)
+        let controller = MovieGridController(crud: crudMock, apiAcess: apiMock)
       
         
         describe("Check if a movie is favorite") {
@@ -33,6 +34,13 @@ class MovieGridSpec: QuickSpec{
             it("has to call the function"){
                 viewModel.loadMovies()
                 expect(viewModel.pageCount) != 0
+            }
+        }
+        
+        describe("Check if the view is loading") {
+            it("view has to be equal to equal to the MovieGridView"){
+               controller.viewDidLoad()
+               expect(controller.view) == controller.screen
             }
         }
     }

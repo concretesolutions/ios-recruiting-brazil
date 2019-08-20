@@ -40,6 +40,7 @@ class SimplifiedMovie: PresentableMovieInterface{
         self.date = getYear(completeDate: movieDate)
         self.genres = getGenres(genresIDS: movieGenres)
         
+        
         if let image = image {
             self.bannerImage = image
         }else{
@@ -54,7 +55,7 @@ class SimplifiedMovie: PresentableMovieInterface{
     
     //Transform the date in a year
     func getYear(completeDate: String) -> String{
-        let prefixDate = date.prefix(4)
+        let prefixDate = completeDate.prefix(4)
         return String(prefixDate)
     }
     

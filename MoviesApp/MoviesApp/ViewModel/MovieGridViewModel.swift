@@ -8,6 +8,7 @@
 import UIKit
 
 
+//MARK: - Interface
 protocol MovieGridInterface: class{
     var pageCount: Int {get set}
     var movies: [PresentableMovieInterface] {get set}
@@ -16,8 +17,7 @@ protocol MovieGridInterface: class{
 }
 
 
-//MARK: - The connecetion of the MovieGrid screen
-//The head of the class
+//MARK: - Init
 class MovieGridViewModel{
     public var pageCount = 0
     weak var refresh: MovieGridViewModelDelegate?
@@ -39,7 +39,7 @@ class MovieGridViewModel{
 }
 
 
-//MARK: - Focus on the apresentation of the movies in the API
+//MARK: - Methods
 extension MovieGridViewModel: MovieGridInterface{
     
     //Loads the movie banner from the api

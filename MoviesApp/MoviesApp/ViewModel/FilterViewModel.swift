@@ -9,7 +9,7 @@
 
 import UIKit
 
-//MARK: - The head of the class
+//MARK: - Init
 class FilterViewModel{
     var filters = ["Date","Genre"]
     var results = ["Nenhum","Nenhum"]
@@ -32,6 +32,7 @@ class FilterViewModel{
 
 
 
+//MARK: - Methods
 // Function to get a list of all the years utilizing the DateFormatter
 extension DateFormatter {
     func years<R: RandomAccessCollection>(_ range: R) -> [String] where R.Iterator.Element == Int {

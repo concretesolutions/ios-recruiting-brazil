@@ -14,6 +14,9 @@ import Nimble_Snapshots
 
 class DetailsSnapshot: QuickSpec{
     
+    let crud = CRUDMock()
+    let movie = MovieMock()
+    
     override func spec() {
         describe("Detail Screen Visual check") {
             it("Should look like this"){

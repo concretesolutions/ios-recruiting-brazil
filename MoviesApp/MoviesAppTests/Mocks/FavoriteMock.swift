@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
+
 @testable import MoviesApp
 
-class FavoriteMock {
+class FavoriteMock{
     var favorites = [Favorite]()
     var images = [UIImage]()
     

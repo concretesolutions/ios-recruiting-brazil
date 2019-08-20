@@ -13,7 +13,6 @@ class FilterController: UIViewController{
     let viewModel = FilterViewModel()
     
     override func viewDidLoad() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Filters"
         
         self.view = screen
@@ -32,7 +31,7 @@ class FilterController: UIViewController{
 
 
 
-//MARK: - The picker delegate and datasource methods
+//MARK: -  Picker Methods
 extension FilterController: UIPickerViewDelegate, UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return viewModel.filters.count

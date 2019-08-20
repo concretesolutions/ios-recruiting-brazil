@@ -24,18 +24,18 @@ class MovieGridView: UIView{
     
     lazy var loadRoll: UIActivityIndicatorView = {
        let view = UIActivityIndicatorView(frame: .zero)
-       view.tintColor = .black
+       view.color = .black
        return view
     }()
     
-    lazy var errorLabel: UILabel = {
+    lazy var loadingLabel: UILabel = {
         let view = UILabel()
         view.text = "Loading movies."
-        view.font = UIFont.systemFont(ofSize: 50)
+        view.font = UIFont.systemFont(ofSize: 35)
         view.numberOfLines = 0
         view.textAlignment = .center
         view.textColor = .black
-        view.isHidden = true
+        view.isHidden = false
         return view
     }()
     
@@ -48,7 +48,7 @@ class MovieGridView: UIView{
 extension MovieGridView: CodeView{
     func buildViewHierarchy() {
         addSubview(gridView)
-        addSubview(errorLabel)
+        addSubview(loadingLabel)
         addSubview(loadRoll)
         bringSubviewToFront(loadRoll)
     }
@@ -58,8 +58,10 @@ extension MovieGridView: CodeView{
             make.left.right.top.bottom.equalToSuperview()
         }
         
-        errorLabel.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalToSuperview()
+        loadingLabel.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().multipliedBy(0.5)
+            make.height.equalToSuperview().multipliedBy(0.2)
         }
         
         loadRoll.snp.makeConstraints { (make) in
@@ -69,7 +71,7 @@ extension MovieGridView: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        gridView.backgroundColor = UsedColor.green.color
+        gridView.backgroundColor = .white
         gridView.register(MovieGridCell.self, forCellWithReuseIdentifier: MovieGridCell.reuseIdentifier)
     }
 }

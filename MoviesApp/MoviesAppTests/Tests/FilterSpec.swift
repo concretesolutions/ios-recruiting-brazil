@@ -7,3 +7,22 @@
 //
 
 import Foundation
+import Quick
+import Nimble
+
+@testable import MoviesApp
+
+class FilterSpec: QuickSpec{
+    
+    override func spec() {
+        
+        let controller = FilterController()
+        
+        describe("Check if the view is loading") {
+            it("view has to be equal to equal to the FilterView"){
+                controller.viewDidLoad()
+                expect(controller.view) == controller.screen
+            }
+        }
+    }
+}

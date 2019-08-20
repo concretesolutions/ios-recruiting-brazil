@@ -20,6 +20,7 @@ class CRUDMock: FavoriteCRUDInterface{
     
     func addFavorite(movie: PresentableMovieInterface) {
         hasAddFavorite = true
+        saveData()
     }
 
     func loadData() throws -> [Favorite] {
@@ -42,6 +43,7 @@ class CRUDMock: FavoriteCRUDInterface{
     
     func deleteFavorite(movieForDeletion: Favorite) {
         hasDeletedFav = true
+        saveData()
     }
     
 }

@@ -19,6 +19,7 @@ class FavoriteSpec: QuickSpec{
         let mock = FavoriteMock()
         let crud = CRUDMock()
         let viewModel = FavoriteViewModel(crud: crud)
+        let controller = FavoriteController(crud: crud)
         
         beforeEach {
             viewModel.favorites = mock.favorites
@@ -40,10 +41,19 @@ class FavoriteSpec: QuickSpec{
             }
         }
         
-        describe("Check if is filtering movies") {
-            it("has to remove all the favorites from the array"){
-      //          viewModel.searchFavorites(search: "nada")
-      //          expect(viewModel.favorites.count) == 0
+        describe("Check filter by name") {
+            it("has to call the delete favorite function"){
+                let fav = Favorite()
+                viewModel.deleteFavorite(movie: fav, at: 0)
+                expect(crud.hasDeletedFav).to(beTrue())
+            }
+        }
+        
+        
+        describe("Check if the view is loading") {
+            it("view has to be equal to equal to the FavoriteView"){
+                controller.viewDidLoad()
+                expect(controller.view) == controller.screen
             }
         }
     }
