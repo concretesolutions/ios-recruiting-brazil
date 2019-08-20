@@ -16,10 +16,7 @@ class PopularView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.title = "Populares"
-        navigationController?.navigationBar.barTintColor = UIColor.black
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.yellow]
         
         self.progress?.startAnimating()
         
@@ -39,7 +36,7 @@ class PopularView: UIViewController {
 //
 //        self.collectionView?.frame.size = CGSize(width: width, height: view.frame.size.height)
 
-        let requester = Requester()
+        let requester = Requester(vc: self)
         requester.requestGenreList()
         requester.requestPopular(page: 1) {
             self.collectionView?.reloadData()

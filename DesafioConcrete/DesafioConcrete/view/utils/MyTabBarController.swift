@@ -13,7 +13,7 @@ class MyTabBarController : UITabBarController {
         super.viewDidLoad()
         
         self.tabBar.barTintColor = UIColor.black
-        self.tabBar.tintColor = UIColor.yellow
+        self.tabBar.tintColor = UIColor.customYellow
         self.tabBar.unselectedItemTintColor = UIColor.white
         
         let offset:CGFloat = 6
@@ -24,6 +24,14 @@ class MyTabBarController : UITabBarController {
                 item.imageInsets = UIEdgeInsetsMake(offset, 0, -offset, 0);
             }
         }
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        let navigationController1 =  self.viewControllers![0] as? UINavigationController
+        navigationController1!.popToRootViewController(animated: false)
+        
+        let navigationController2 =  self.viewControllers![1] as? UINavigationController
+        navigationController2!.popToRootViewController(animated: false)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

@@ -18,8 +18,6 @@ class FavoritosView: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Favoritos"
-        navigationController?.navigationBar.barTintColor = UIColor.black
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.yellow]
         
         self.tableView?.register(UINib.init(nibName: "FavoritosCell", bundle: nil), forCellReuseIdentifier: "FavoritosCell")
     }
@@ -64,14 +62,30 @@ extension FavoritosView: UITableViewDelegate {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            tableView.beginUpdates()
+//            Singleton.shared.rmvFavoritos(id: preferidos[indexPath.row].id)
+//            preferidos.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+//            tableView.endUpdates()
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Remover") { (action, indexPath) in
+            // delete item at indexPath
             tableView.beginUpdates()
-            Singleton.shared.rmvFavoritos(id: preferidos[indexPath.row].id)
-            preferidos.remove(at: indexPath.row)
+            Singleton.shared.rmvFavoritos(id: self.preferidos[indexPath.row].id)
+            self.preferidos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
             tableView.endUpdates()
         }
+        
+        return [delete]
+        
     }
+    
 }
 

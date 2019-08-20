@@ -25,7 +25,7 @@ class DetalhesView: UIViewController {
         super.viewDidLoad()
         
         self.progress?.startAnimating()
-        self.navigationController?.navigationBar.tintColor = UIColor.yellow
+        self.navigationController?.navigationBar.tintColor = UIColor.customYellow
         
         if let m = movie {
             let url = Endpoints.shared.imageBaseUrl + "w780" + m.backdropPath
@@ -46,6 +46,12 @@ class DetalhesView: UIViewController {
                 favoriteBT?.setImage(UIImage(named: "favorite_gray_icon.png"), for: .normal)
             }
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        sinopseTv?.contentOffset = .zero
     }
     
     override func viewDidAppear(_ animated: Bool) {

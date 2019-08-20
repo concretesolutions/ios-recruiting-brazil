@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 class Requester {
+    
+    var view:UIViewController?
     
     func requestPopular(page: Int, callback:@escaping () -> ()) {
         Endpoints.shared.makeRequest(apiUrl: Endpoints.shared.getPopularMovies(page: page), method: .get) { (response) in
@@ -20,9 +23,11 @@ class Requester {
                     callback()
                 }  catch let (error) {
                     print(error)
+                    print("JSON Decode Error: requestPopular")
                 }
             } else {
                 print("Erro ao recuperar os filmes")
+                Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos filmes populares, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self.view!)
             }
         }
     }
@@ -36,11 +41,17 @@ class Requester {
                     Singleton.shared.genres = Dictionary(uniqueKeysWithValues: genres.results.map{ ($0.id, $0) })
                 } catch let (error){
                     print(error)
+                    print("JSON Decode Error: requestGenre")
                 }
             } else {
                 print("Erro ao recuperar os gêneros")
+                Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos gêneros, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self.view!)
             }
         })
+    }
+    
+    init(vc: UIViewController) {
+        self.view = vc
     }
     
 }
