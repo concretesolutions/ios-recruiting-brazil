@@ -82,7 +82,7 @@ class MovieSearchViewController: UIViewController {
     func api(){
         service.getMovies(page: pageCount){ [weak self] movies in
             guard let self = self else { return }
-            self.movie = movies
+            self.movie += movies
             DispatchQueue.main.async {
                 self.setupCollectionView(with: self.movie)
             }
@@ -110,14 +110,17 @@ extension MovieSearchViewController: MoviePagingDelegate{
         print("LoadMovies")
         pageCount += 1
         print(pageCount)
-        service.getMovies(page: pageCount){ [weak self] movies in
-            guard let self = self else { return }
-            self.isLoading = false
-            print(movies)
-            DispatchQueue.main.async {
-                self.movie += movies
-                self.setupCollectionView(with: self.movie)
-            }
+        if (inSearchMode == false){
+//            service.getMovies(page: pageCount){ [weak self] movies in
+//                guard let self = self else { return }
+//                self.isLoading = false
+//                print(movies)
+//                DispatchQueue.main.async {
+//                    self.movie += movies
+//                    self.setupCollectionView(with: self.movie)
+//                }
+//            }
+            api()
         }
     }
 }
@@ -134,7 +137,15 @@ extension MovieSearchViewController: UISearchBarDelegate{
         print(searchBar.text)
         if !query.isEmpty {
             print(query)
-            //fetchMovie(query: query)
+            service.getMoviesByQuery(query: query){ [weak self] movies in
+                guard let self = self else { return }
+                self.isLoading = false
+                print(movies)
+                DispatchQueue.main.async {
+                    self.filteredMovie += movies
+                    self.setupCollectionView(with: self.filteredMovie)
+                }
+            }
         }
     }
     
@@ -143,18 +154,18 @@ extension MovieSearchViewController: UISearchBarDelegate{
         searchBar.text = ""
         movieSearch.showsCancelButton = false
         print("Cancel")
+        self.setupCollectionView(with: self.movie)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        movieSearch.showsCancelButton = true
         if searchText.isEmpty {
             inSearchMode = false
-            //carrega view
             self.setupCollectionView(with: self.movie)
         } else {
+            movieSearch.showsCancelButton = true
             inSearchMode = true
             print(searchText)
-            filteredMovie = movie.filter({ $0.title?.range(of: searchText) != nil })
+            filteredMovie = movie.filter({ $0.title?.lowercased().range(of: searchText.lowercased()) != nil })
             //filter({$0.title.lowercased().contains(searchText.lowercased())})
             print(filteredMovie)
             self.setupCollectionView(with: self.filteredMovie)
