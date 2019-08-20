@@ -19,7 +19,7 @@ class MovieGridSnapshots: QuickSpec{
         
         let movie = MovieMock()
         
-        describe("Visual check") {
+        describe("Movie Grid Visual check") {
             it("Should look like this"){
                 let frame = UIScreen.main.bounds
                 let view =  MovieGridView(frame: frame)
@@ -28,10 +28,11 @@ class MovieGridSnapshots: QuickSpec{
             }
         }
         
-        describe("Visual check") {
+        describe("Movie Grid Cell Visual check") {
             it("Should look like this"){
                 let cell = MovieGridCell()
-                cell.configure(withViewModel: movie.mock, isFavorite: true)
+                
+                cell.configure(withViewModel: movie, isFavorite: true)
                 cell.frame = CGRect(x: 0, y: 0, width: 180, height: 280)
                 let view =  cell
                 

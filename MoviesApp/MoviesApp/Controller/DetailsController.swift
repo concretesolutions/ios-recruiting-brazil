@@ -12,7 +12,7 @@ class DetailsController: UIViewController {
     let screen = DetailsView()
     let viewModel: DetailsViewModel
     
-    init(crud: FavoriteCRUDInterface, selectedMovie: SimplifiedMovie) {
+    init(crud: FavoriteCRUDInterface, selectedMovie: PresentableMovieInterface) {
         viewModel = DetailsViewModel(crud: crud,movie: selectedMovie)
         super.init(nibName: nil, bundle: nil)
     }

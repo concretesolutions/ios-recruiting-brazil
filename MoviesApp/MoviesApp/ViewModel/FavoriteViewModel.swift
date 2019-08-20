@@ -9,6 +9,15 @@
 
 import UIKit
 
+protocol FavoriteInterface{
+    func loadFavorites()
+    func loadImages(favs: [Favorite])
+    func deleteFavorite(movie: Favorite, at row: Int)
+    func searchFavorites(search: String?)
+    func filterFavorites(filters: [String])
+}
+
+
 //MARK: - The head of the class
 class FavoriteViewModel{
     public var favorites = [Favorite]()
@@ -26,7 +35,7 @@ class FavoriteViewModel{
 
 
 //MARK: - Screen methods
-extension FavoriteViewModel{
+extension FavoriteViewModel: FavoriteInterface{
     //Loads all the favorites and translate the data to images
     func loadFavorites(){
         images.removeAll()
@@ -49,24 +58,23 @@ extension FavoriteViewModel{
     }
     
     //Delete a favorite in a specific row
-    func deleteFavorite(movie: Favorite, at indexPath: IndexPath){
+    func deleteFavorite(movie: Favorite, at row: Int){
         crud.deleteFavorite(movieForDeletion: movie)
-        favorites.remove(at: indexPath.row)
-        images.remove(at: indexPath.row)
+        favorites.remove(at: row)
+        images.remove(at: row)
     }
     
     //Filter the favorites in the screen by a input
-    func filterByName(movieName: String?){
+    func searchFavorites(search: String?){
         var filterMoveis = [Favorite]()
         images.removeAll()
         
-        if let text = movieName{
+        if let text = search{
             filterMoveis = favorites.filter{
                 favorite in
                 return ((favorite.title?.contains(text))!)
             }
         }
-        
         favorites = filterMoveis
         loadImages(favs: favorites)
     }

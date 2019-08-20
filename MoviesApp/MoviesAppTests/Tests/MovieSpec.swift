@@ -18,19 +18,13 @@ class MovieSpec: QuickSpec{
         
         describe("Check data validation in the movie") {
             it("has to be equal to the formated value"){
-                expect(movieMock.mock.date) == "2019"
-            }
-        }
-        
-        describe("Check gender validation in the movie") {
-            it("should have a name"){
-                expect(movieMock.mock.genres[0].name) == "Action"
+                expect(movieMock.getYear(completeDate: "2019-09-01")) == "2019"
             }
         }
         
         describe("Check image validation in the movie") {
             it("should not be a nil result"){
-                expect(movieMock.mock.bannerImage).notTo(beNil())
+                expect(movieMock.getGenres(genresIDS: [28,12])).toNot(beNil())
             }
         }
     }

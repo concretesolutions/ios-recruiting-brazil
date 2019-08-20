@@ -10,7 +10,7 @@ import UIKit
 
 protocol MovieGridInterface: class{
     var pageCount: Int {get set}
-    var movies: [SimplifiedMovie] {get set}
+    var movies: [PresentableMovieInterface] {get set}
     func loadMovies()
     func checkFavorite(movieID: Int) -> Bool
 }
@@ -25,7 +25,7 @@ class MovieGridViewModel{
     var apiAcess: APIClientInterface
     
     
-    var movies: [SimplifiedMovie] = [] {
+    var movies: [PresentableMovieInterface] = [] {
         didSet{
             refresh?.refreshMovieData()
         }

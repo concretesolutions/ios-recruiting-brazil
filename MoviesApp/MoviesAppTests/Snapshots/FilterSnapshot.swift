@@ -1,8 +1,8 @@
 //
-//  MovieDetailSnapshot.swift
+//  FilterSanpshot.swift
 //  MoviesAppTests
 //
-//  Created by Eric Winston on 8/19/19.
+//  Created by Eric Winston on 8/20/19.
 //  Copyright © 2019 Eric Winston. All rights reserved.
 //
 
@@ -12,15 +12,14 @@ import Nimble_Snapshots
 
 @testable import MoviesApp
 
-class DetailsSnapshot: QuickSpec{
-    
+class FilterSnapshot: QuickSpec{
+
     override func spec() {
-        describe("Visual check") {
+        describe("Filter Screen Visual check") {
             it("Should look like this"){
                 let frame = UIScreen.main.bounds
-                let view =  DetailsView(frame: frame)
-                
-                expect(view) == snapshot("MovieGridView")
+                let view =  FilterView(frame: frame)
+                expect(view) == snapshot("FilterView")
             }
         }
     }

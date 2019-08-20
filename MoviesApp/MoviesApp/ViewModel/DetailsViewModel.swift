@@ -16,12 +16,12 @@ protocol DetailsInterface{
 }
 
 class DetailsViewModel: DetailsInterface{
-    var movie: SimplifiedMovie
+    var movie: PresentableMovieInterface
     var isFavorite: Bool = false
     var displayImage: String = ""
     var crud: FavoriteCRUDInterface
     
-    init(crud: FavoriteCRUDInterface,movie: SimplifiedMovie) {
+    init(crud: FavoriteCRUDInterface,movie: PresentableMovieInterface) {
         self.crud = crud
         self.movie = movie
     }

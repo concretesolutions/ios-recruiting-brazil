@@ -98,7 +98,7 @@ extension FavoriteController: SwipeTableViewCellDelegate{
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") {[weak self](action, indexPath) in
             if let deleteMovie = self?.viewModel.favorites[indexPath.row] {
-                self?.viewModel.deleteFavorite(movie: deleteMovie, at: indexPath)
+                self?.viewModel.deleteFavorite(movie: deleteMovie, at: indexPath.row)
             }
         }
     
@@ -119,7 +119,7 @@ extension FavoriteController: UISearchBarDelegate{
     
     // Search by a string input
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.filterByName(movieName: searchBar.text)
+        viewModel.searchFavorites(search: searchBar.text)
         screen.table.reloadData()
     }
     

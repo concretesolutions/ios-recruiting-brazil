@@ -11,7 +11,7 @@ import CoreData
 
 
 protocol FavoriteCRUDInterface{
-    func addFavorite(movie: SimplifiedMovie)
+    func addFavorite(movie: PresentableMovieInterface)
     func loadData() throws -> [Favorite]
     func saveData()
     func checkFavoriteMovie(movieId: String) -> Bool
@@ -24,7 +24,7 @@ class FavoriteCRUD: FavoriteCRUDInterface{
     var favorites = [Favorite]()
     
     //MARK - Add new favorite in database
-    func addFavorite(movie: SimplifiedMovie){
+    func addFavorite(movie: PresentableMovieInterface){
         
         var genNames: [String] = []
         

@@ -67,7 +67,7 @@ class DetailsView: UIView {
 
 //MARK: - Extension to define the cell constraints
 extension DetailsView{
-    func configure(detailedMovie: SimplifiedMovie,genreNames: String,isFavorite: Bool){
+    func configure(detailedMovie: PresentableMovieInterface,genreNames: String,isFavorite: Bool){
         descLabel.text = detailedMovie.description
         genresLabel.text = genreNames
         titleLabel.text = detailedMovie.name

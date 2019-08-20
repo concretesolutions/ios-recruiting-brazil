@@ -10,18 +10,21 @@
 import UIKit
 
 //MARK: - Protocol with the used parts of the movie in the application
-protocol MoviePresentable {
+protocol PresentableMovieInterface {
     var id: Int {get}
     var name: String {get}
     var bannerImage: UIImage? {get}
     var description: String {get}
     var genres: [Genre] {get}
     var date: String {get}
+    
+    func getYear(completeDate: String) -> String
+    func getGenres(genresIDS: [Int]) -> [Genre]
 }
 
 
 //MARK: - Validates the movie and filter the unused parts
-class SimplifiedMovie: MoviePresentable{
+class SimplifiedMovie: PresentableMovieInterface{
     var id: Int = 0
     var name: String = ""
     var bannerImage: UIImage?
@@ -34,8 +37,8 @@ class SimplifiedMovie: MoviePresentable{
         self.id = movieID
         self.name = movieTitle
         self.description = movieOverview
-        self.date = getYear(date: movieDate)
-        self.genres = getGenres(genres: movieGenres)
+        self.date = getYear(completeDate: movieDate)
+        self.genres = getGenres(genresIDS: movieGenres)
         
         if let image = image {
             self.bannerImage = image
@@ -50,14 +53,14 @@ class SimplifiedMovie: MoviePresentable{
     
     
     //Transform the date in a year
-    func getYear(date: String) -> String{
+    func getYear(completeDate: String) -> String{
         let prefixDate = date.prefix(4)
         return String(prefixDate)
     }
     
     //Transforms the ids in genres
-    func getGenres(genres: [Int]) -> [Genre]{
-        return APIClient.allGenres.filter {genres.contains($0.id)}
+    func getGenres(genresIDS: [Int]) -> [Genre]{
+        return APIClient.allGenres.filter {genresIDS.contains($0.id)}
     }
     
 }

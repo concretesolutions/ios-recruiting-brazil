@@ -8,9 +8,34 @@
 
 
 import Foundation
+import UIKit
 
 @testable import MoviesApp
 
-class MovieMock{
-    let mock = SimplifiedMovie(movieID: 429617, movieTitle: "Nada", movieOverview: "Alo", movieGenres: [28,12], movieDate: "2019859", image: nil)
+class MovieMock: PresentableMovieInterface{
+    var id: Int
+    var name: String
+    var bannerImage: UIImage?
+    var description: String
+    var genres: [Genre]
+    var date: String
+    
+    var genMock = GenreMock()
+    
+    init() {
+        self.id = 429627
+        self.name = "Filme"
+        self.bannerImage = nil
+        self.description = "Nenhuma"
+        self.date = "2019878"
+        self.genres = genMock.genres
+    }
+    
+    func getYear(completeDate: String) -> String {
+        return "2019"
+    }
+    
+    func getGenres(genresIDS: [Int]) -> [Genre] {
+        return genMock.genres
+    }
 }

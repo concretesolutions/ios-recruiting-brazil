@@ -61,7 +61,7 @@ class MovieGridCell: UICollectionViewCell{
 
 //MARK: - Feeds the data to the elements
 extension MovieGridCell {
-    func configure(withViewModel viewModel: MoviePresentable,isFavorite: Bool){
+    func configure(withViewModel viewModel: PresentableMovieInterface,isFavorite: Bool){
         nameLabel.text = viewModel.name
         imageView.image = viewModel.bannerImage
         

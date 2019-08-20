@@ -23,10 +23,8 @@ class MovieGridSpec: QuickSpec{
         
         describe("Check if a movie is favorite") {
             it("has to be equal to true"){
-                
                 let movie = MovieMock()
-                viewModel.movies.append(movie.mock)
-                
+                viewModel.movies.append(movie)
                 expect(viewModel.checkFavorite(movieID: viewModel.movies[0].id)).to(beTrue())
             }
         }

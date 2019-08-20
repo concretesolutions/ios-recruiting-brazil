@@ -12,17 +12,16 @@ import Foundation
 
 class CRUDMock: FavoriteCRUDInterface{
     
-    var hasAddFavorite: Bool = false
-    var hasLoadData: Bool = false
-    var hasSavedData: Bool = false
-    var hasCheckedFav: Bool = false
-    var hasDeletedFav: Bool = false
+    public var hasAddFavorite: Bool = false
+    public var hasLoadData: Bool = false
+    public var hasSavedData: Bool = false
+    public var hasCheckedFav: Bool = false
+    public var hasDeletedFav: Bool = false
     
-    
-    func addFavorite(movie: SimplifiedMovie) {
+    func addFavorite(movie: PresentableMovieInterface) {
         hasAddFavorite = true
     }
-    
+
     func loadData() throws -> [Favorite] {
         hasLoadData = true
         return []
@@ -34,7 +33,7 @@ class CRUDMock: FavoriteCRUDInterface{
     
     func checkFavoriteMovie(movieId: String) -> Bool {
         hasCheckedFav = true
-        if movieId == "429617"{
+        if movieId == "429627"{
             return true
         }else{
             return false
