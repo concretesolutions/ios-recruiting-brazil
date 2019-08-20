@@ -17,15 +17,15 @@ class DetalhesView: UIViewController {
     @IBOutlet var titleLb: UILabel?
     @IBOutlet var anoLb: UILabel?
     @IBOutlet var generosLb: UILabel?
-    @IBOutlet var sinopseLb: UILabel?
+    @IBOutlet var sinopseTv: UITextView?
     
     var movie:Movie?
-    var movieArrIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.progress?.startAnimating()
+        self.navigationController?.navigationBar.tintColor = UIColor.yellow
         
         if let m = movie {
             let url = Endpoints.shared.imageBaseUrl + "w780" + m.backdropPath
@@ -36,9 +36,21 @@ class DetalhesView: UIViewController {
             titleLb?.text = m.title
             anoLb?.text = formatarData(valor: m.releaseDate, formatoAtual: "yyyy-MM-dd", formatoNovo: "yyyy")
             generosLb?.text = listGenres(genreIds: m.genreIds)
-            sinopseLb?.text = m.overview
+            sinopseTv?.text = m.overview
             
-            if(m.isFavorite) {
+            if(Singleton.shared.isFavorite(id: m.id)) {
+                favoriteBT?.isSelected = true
+                favoriteBT?.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
+            } else {
+                favoriteBT?.isSelected = false
+                favoriteBT?.setImage(UIImage(named: "favorite_gray_icon.png"), for: .normal)
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let m = movie {
+            if(Singleton.shared.isFavorite(id: m.id)) {
                 favoriteBT?.isSelected = true
                 favoriteBT?.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
             } else {
@@ -57,14 +69,14 @@ class DetalhesView: UIViewController {
     }
     
     @IBAction func favoritar() {
-        if(favoriteBT?.isSelected)! {
+        if Singleton.shared.isFavorite(id: (movie?.id)!) {
             favoriteBT?.isSelected = false
             favoriteBT?.setImage(UIImage(named: "favorite_gray_icon.png"), for: .normal)
-            Singleton.shared.rmvFavoritos(id: (movie?.id)!, index: movieArrIndex!)
+            Singleton.shared.rmvFavoritos(id: (movie?.id)!)
         } else {
             favoriteBT?.isSelected = true
             favoriteBT?.setImage(UIImage(named: "favorite_full_icon.png"), for: .normal)
-            Singleton.shared.addFavoritos(movie: movie!, index: movieArrIndex!)
+            Singleton.shared.addFavoritos(movie: movie!)
         }
     }
 

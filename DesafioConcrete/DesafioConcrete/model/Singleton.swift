@@ -11,22 +11,34 @@ final class Singleton {
     
     static public let shared = Singleton()
     
-    var movies:Array<Movie> = Array<Movie>()
+    var populares:Array<Movie> = Array<Movie>()
     var genres:Dictionary<Int, Genre> = Dictionary<Int, Genre>()
     var preferidos:Dictionary<Int, Movie> = Dictionary<Int, Movie>()
+    var updatePref:Bool = false
     
     private init() {
-        
+        if Storage.fileExists("preferidos.json", in: .documents) {
+            preferidos = Storage.retrieve("preferidos.json", from: .documents, as: Dictionary<Int, Movie>.self)
+        }
     }
     
-    func addFavoritos(movie: Movie, index: Int) {
+    func addFavoritos(movie: Movie) {
         preferidos[movie.id] = movie
-        movies[index].isFavorite = true
+        updatePref = true
+        Storage.store(preferidos, to: .documents, as: "preferidos.json")
     }
     
-    func rmvFavoritos(id: Int, index: Int) {
+    func rmvFavoritos(id: Int) {
         preferidos.removeValue(forKey: id)
-        movies[index].isFavorite = false
+        updatePref = true
+        Storage.store(preferidos, to: .documents, as: "preferidos.json")
+    }
+    
+    func isFavorite(id: Int) -> Bool {
+        if let key = preferidos[id] {
+            return true
+        }
+        return false
     }
     
 }

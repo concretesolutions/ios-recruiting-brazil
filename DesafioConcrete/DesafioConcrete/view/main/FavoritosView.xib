@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoritosView" customModule="DesafioConcrete" customModuleProvider="target">
             <connections>
-                <outlet property="progress" destination="DJy-rW-obV" id="BKz-ny-6rq"/>
                 <outlet property="tableView" destination="y2a-OJ-iyG" id="Nf2-ZA-yuJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,15 +29,10 @@
                         <outlet property="delegate" destination="-1" id="iRl-Xy-Wbs"/>
                     </connections>
                 </tableView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DJy-rW-obV">
-                    <rect key="frame" x="177" y="333.5" width="20" height="20"/>
-                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="y2a-OJ-iyG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Bp5-aq-OYA"/>
-                <constraint firstItem="DJy-rW-obV" firstAttribute="centerX" secondItem="y2a-OJ-iyG" secondAttribute="centerX" id="KM5-gq-kKJ"/>
-                <constraint firstItem="DJy-rW-obV" firstAttribute="centerY" secondItem="y2a-OJ-iyG" secondAttribute="centerY" id="Z5k-Aq-Tks"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y2a-OJ-iyG" secondAttribute="trailing" id="dMv-gs-aDG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="y2a-OJ-iyG" secondAttribute="bottom" id="scU-M6-3u8"/>
                 <constraint firstItem="y2a-OJ-iyG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="uO7-hq-5Qb"/>

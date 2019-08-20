@@ -47,16 +47,22 @@ class PopularView: UIViewController {
             self.progress?.isHidden = true
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationItem.title = "Populares"
+    }
 }
+
 
 extension PopularView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Singleton.shared.movies.count
+        return Singleton.shared.populares.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularesCell", for: indexPath) as! PopularesCell
-        cell.configure(with: Singleton.shared.movies[indexPath.row])
+        cell.configure(with: Singleton.shared.populares[indexPath.row])
         return cell
     }
 }
@@ -64,11 +70,10 @@ extension PopularView: UICollectionViewDataSource {
 extension PopularView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = indexPath.row
-        let movie = Singleton.shared.movies[item]
+        let movie = Singleton.shared.populares[item]
         
         let vc = DetalhesView(nibName: "DetalhesView", bundle: nil)
         vc.movie = movie
-        vc.movieArrIndex = item
         self.navigationController!.pushViewController(vc, animated: false)
     }
 }

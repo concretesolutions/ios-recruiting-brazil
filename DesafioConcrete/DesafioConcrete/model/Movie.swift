@@ -16,7 +16,6 @@ struct Movie:Codable {
     var genreIds: Array<Int>
     var overview: String
     var releaseDate:String
-    var isFavorite:Bool
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -38,7 +37,6 @@ struct Movie:Codable {
         self.genreIds = try values.decode(Array<Int>.self, forKey: .genreIds)
         self.overview = try values.decode(String.self, forKey: .overview)
         self.releaseDate = try values.decode(String.self, forKey: .releaseDate)
-        self.isFavorite = false
     }
 }
 

@@ -16,7 +16,7 @@ class Requester {
                 do {
                     let decoder = JSONDecoder()
                     let movies = try decoder.decode(MovieResponse.self, from: (response?.data)!)
-                    Singleton.shared.movies.append(contentsOf: movies.results)
+                    Singleton.shared.populares.append(contentsOf: movies.results)
                     callback()
                 }  catch let (error) {
                     print(error)
