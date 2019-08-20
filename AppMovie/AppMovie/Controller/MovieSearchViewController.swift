@@ -33,8 +33,12 @@ class MovieSearchViewController: UIViewController {
         super.viewDidLoad()
         
         configureViewComponents()
-        api()
+        
         setupSearchBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        api()
     }
     
     /*SetupView Inject Dependence(MOCKS...)
@@ -78,13 +82,25 @@ class MovieSearchViewController: UIViewController {
         movieCollection.reloadData()
     }
     
-    // MARK: - API
+    // MARK: - API Services
     func api(){
         service.getMovies(page: pageCount){ [weak self] movies in
             guard let self = self else { return }
             self.movie += movies
             DispatchQueue.main.async {
                 self.setupCollectionView(with: self.movie)
+            }
+        }
+    }
+    
+    func apiWithQuery(query: String){
+        service.getMoviesByQuery(query: query){ [weak self] movies in
+            guard let self = self else { return }
+            self.isLoading = false
+            print(movies)
+            DispatchQueue.main.async {
+                self.filteredMovie += movies
+                self.setupCollectionView(with: self.filteredMovie)
             }
         }
     }
@@ -111,15 +127,6 @@ extension MovieSearchViewController: MoviePagingDelegate{
         pageCount += 1
         print(pageCount)
         if (inSearchMode == false){
-//            service.getMovies(page: pageCount){ [weak self] movies in
-//                guard let self = self else { return }
-//                self.isLoading = false
-//                print(movies)
-//                DispatchQueue.main.async {
-//                    self.movie += movies
-//                    self.setupCollectionView(with: self.movie)
-//                }
-//            }
             api()
         }
     }
@@ -137,15 +144,7 @@ extension MovieSearchViewController: UISearchBarDelegate{
         print(searchBar.text)
         if !query.isEmpty {
             print(query)
-            service.getMoviesByQuery(query: query){ [weak self] movies in
-                guard let self = self else { return }
-                self.isLoading = false
-                print(movies)
-                DispatchQueue.main.async {
-                    self.filteredMovie += movies
-                    self.setupCollectionView(with: self.filteredMovie)
-                }
-            }
+            apiWithQuery(query: query)
         }
     }
     
