@@ -22,9 +22,9 @@ class TabBarController: UITabBarController {
     func setupTabBar(){
         
         let crud = FavoriteCRUD()
-        let apiAcess = APIClient()
+        let apiAccess = APIClient()
         
-        let mainController = UINavigationController(rootViewController: MovieGridController(crud: crud, apiAcess: apiAcess))
+        let mainController = UINavigationController(rootViewController: MovieGridController(crud: crud, apiAccess: apiAccess))
         mainController.tabBarItem.image = UIImage(named: "list_icon")
         mainController.tabBarItem.title = "Movies"
         mainController.tabBarItem.selectedImage = UIImage(named: "list_icon")

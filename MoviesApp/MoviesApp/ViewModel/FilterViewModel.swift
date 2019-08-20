@@ -20,10 +20,10 @@ class FilterViewModel{
     
     init() {
         let df = DateFormatter()
-        years.append("Nenhum")
+        years.append("None")
         years.append(contentsOf: df.years(1980...2019).reversed())
         
-        genres.append("Nenhum")
+        genres.append("None")
         for genre in APIClient.allGenres{
             genres.append(genre.name)
         }

@@ -22,7 +22,7 @@ class MovieGridViewModel{
     public var pageCount = 0
     weak var refresh: MovieGridViewModelDelegate?
     var crud: FavoriteCRUDInterface
-    var apiAcess: APIClientInterface
+    var apiAccess: APIClientInterface
     
     
     var movies: [PresentableMovieInterface] = [] {
@@ -31,9 +31,9 @@ class MovieGridViewModel{
         }
     }
     
-    init(crud: FavoriteCRUDInterface, apiAcess: APIClientInterface) {
+    init(crud: FavoriteCRUDInterface, apiAccess: APIClientInterface) {
         self.crud = crud
-        self.apiAcess = apiAcess
+        self.apiAccess = apiAccess
         loadMovies()
     }
 }
@@ -44,7 +44,7 @@ extension MovieGridViewModel: MovieGridInterface{
     
     //Loads the movie banner from the api
     func loadImage(path: String, completion: @escaping (UIImage) -> Void ){
-        apiAcess.downloadImage(path: path) { (fetchedImage) in
+        apiAccess.downloadImage(path: path) { (fetchedImage) in
             if let image = fetchedImage{
                 completion(image)
             }
@@ -55,17 +55,22 @@ extension MovieGridViewModel: MovieGridInterface{
     func loadMovies(){
         pageCount += 1
         var tempImage = UIImage()
-        apiAcess.fetchData(path: ApiPaths.movies(page: pageCount), type: Populares.self) { [weak self] (fetchedMovies,error) in
+        apiAccess.fetchData(path: ApiPaths.movies(page: pageCount), type: Populares.self) { [weak self] (fetchedMovies,error) in
             guard let checkMovies = fetchedMovies.results else {fatalError("Error fetching the movies form the API")}
-            checkMovies.forEach({ (movie) in
-                if let path = movie.poster_path{
-                    self?.loadImage(path: path, completion: { [weak self] (image) in
-                        tempImage = image
-                        self?.movies.append(SimplifiedMovie(movieID: movie.id, movieTitle: movie.title, movieOverview: movie.overview, movieGenres: movie.genre_ids, movieDate: movie.release_date, image: tempImage))
-                    
-                    })
-                }
-            })
+    
+            if error == nil {
+                checkMovies.forEach({ (movie) in
+                    if let path = movie.poster_path{
+                        self?.loadImage(path: path, completion: { [weak self] (image) in
+                            tempImage = image
+                            self?.movies.append(SimplifiedMovie(movieID: movie.id, movieTitle: movie.title, movieOverview: movie.overview, movieGenres: movie.genre_ids, movieDate: movie.release_date, image: tempImage))
+                            
+                        })
+                    }
+                })
+            }else{
+                self?.movies = []
+            }
         }
     }
     

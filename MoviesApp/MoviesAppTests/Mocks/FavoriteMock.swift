@@ -19,15 +19,13 @@ class FavoriteMock{
     init() {
         createFavorite()
         createFavorite()
-        
-        let img = UIImage(named: "check_icon")
-        let img2 = UIImage(named: "check_icon")
-        images.append(contentsOf: [img!,img2!])
     }
     
     
     func createFavorite(){
         let newFavorite = Favorite()
+        let img = UIImage()
         favorites.append(newFavorite)
+        images.append(img)
     }
 }

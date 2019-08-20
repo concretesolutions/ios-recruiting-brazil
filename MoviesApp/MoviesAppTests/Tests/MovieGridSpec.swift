@@ -18,10 +18,9 @@ class MovieGridSpec: QuickSpec{
     override func spec() {
         let crudMock = CRUDMock()
         let apiMock = APIClientMock()
-        let viewModel = MovieGridViewModel(crud: crudMock,apiAcess: apiMock)
-        let controller = MovieGridController(crud: crudMock, apiAcess: apiMock)
+        let viewModel = MovieGridViewModel(crud: crudMock,apiAccess: apiMock)
+        let controller = MovieGridController(crud: crudMock, apiAccess: apiMock)
       
-        
         describe("Check if a movie is favorite") {
             it("has to be equal to true"){
                 let movie = MovieMock()
@@ -33,7 +32,7 @@ class MovieGridSpec: QuickSpec{
         describe("Check if is loading the movies") {
             it("has to call the function"){
                 viewModel.loadMovies()
-                expect(viewModel.pageCount) != 0
+                expect(apiMock.hasFetchedData).to(beTrue())
             }
         }
         

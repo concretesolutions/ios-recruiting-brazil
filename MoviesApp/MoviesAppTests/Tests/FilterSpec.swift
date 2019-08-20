@@ -19,7 +19,7 @@ class FilterSpec: QuickSpec{
         let controller = FilterController()
         
         describe("Check if the view is loading") {
-            it("view has to be equal to equal to the FilterView"){
+            it("view has to be equal to the FilterView"){
                 controller.viewDidLoad()
                 expect(controller.view) == controller.screen
             }

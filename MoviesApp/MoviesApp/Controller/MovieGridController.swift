@@ -21,8 +21,8 @@ class MovieGridController: UIViewController {
     let viewModel: MovieGridViewModel
     
     //MARK: - Inits
-    init(crud: FavoriteCRUDInterface, apiAcess: APIClientInterface) {
-        viewModel = MovieGridViewModel(crud: crud,apiAcess: apiAcess)
+    init(crud: FavoriteCRUDInterface, apiAccess: APIClientInterface) {
+        viewModel = MovieGridViewModel(crud: crud,apiAccess: apiAccess)
         super.init(nibName: nil, bundle: nil)
         viewModel.refresh = self
     }
