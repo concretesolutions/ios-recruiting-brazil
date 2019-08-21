@@ -12,8 +12,11 @@ class PopularView: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView?
     @IBOutlet var progress: UIActivityIndicatorView?
+    
     private var page = 1
     private var requester:Requester?
+    private var searchTask: DispatchWorkItem?
+    private var shouldLoadMore = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +85,7 @@ extension PopularView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if (indexPath.row == Singleton.shared.populares.count - 1 ) {
+        if (indexPath.row == Singleton.shared.populares.count - 1 && shouldLoadMore) {
             showLoading()
             requester?.requestPopular(page: page) { success in
                 if (success) {
@@ -106,5 +109,34 @@ extension PopularView: UICollectionViewDelegate {
         let vc = DetalhesView(nibName: "DetalhesView", bundle: nil)
         vc.movie = movie
         self.navigationController!.pushViewController(vc, animated: false)
+    }
+}
+
+extension PopularView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // to limit network activity, reload half a second after last key press.
+        self.searchTask?.cancel()
+        
+        // Replace previous task with a new one
+        let task = DispatchWorkItem { [weak self] in
+            self?.reload(searchText)
+        }
+        self.searchTask = task
+        
+        // Execute task in 0.75 seconds (if not cancelled !)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75, execute: task)
+    }
+    
+    func reload(_ text: String) {
+        showLoading()
+        if(text == "") {
+            shouldLoadMore = true                   //desabilita scroll load
+            Singleton.shared.resetPopulares()
+        } else {
+            shouldLoadMore = false                  //habilita scroll load
+            Singleton.shared.findMovie(nome: text)
+        }
+        collectionView?.reloadData()
+        hideLoading()
     }
 }

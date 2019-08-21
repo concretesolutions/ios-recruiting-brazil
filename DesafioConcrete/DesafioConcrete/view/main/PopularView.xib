@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xur-83-6O3">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="ojX-Rk-ltp">
                         <size key="itemSize" width="123" height="265"/>
@@ -37,18 +37,29 @@
                     </connections>
                 </collectionView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rqr-H6-Zrx">
-                    <rect key="frame" x="169.5" y="325.5" width="37" height="37"/>
+                    <rect key="frame" x="169.5" y="353" width="37" height="37"/>
                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="7CG-KP-fe4">
+                    <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                    <color key="barTintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="VAF-zi-sap"/>
+                    </connections>
+                </searchBar>
             </subviews>
-            <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
             <constraints>
                 <constraint firstItem="xur-83-6O3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6Mp-kt-vhh"/>
-                <constraint firstItem="rqr-H6-Zrx" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="JO0-Bs-plA"/>
+                <constraint firstItem="7CG-KP-fe4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="8Uc-gr-P8x"/>
+                <constraint firstItem="rqr-H6-Zrx" firstAttribute="centerY" secondItem="xur-83-6O3" secondAttribute="centerY" id="JO0-Bs-plA"/>
+                <constraint firstItem="xur-83-6O3" firstAttribute="top" secondItem="7CG-KP-fe4" secondAttribute="bottom" id="dw5-sU-GSn"/>
                 <constraint firstItem="xur-83-6O3" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="eWs-j4-UzS"/>
                 <constraint firstItem="xur-83-6O3" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="k9e-5Z-dxZ"/>
-                <constraint firstItem="xur-83-6O3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="r1h-sB-Jsp"/>
-                <constraint firstItem="rqr-H6-Zrx" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="xx9-HF-zBW"/>
+                <constraint firstItem="7CG-KP-fe4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="p5w-Wq-fXp"/>
+                <constraint firstItem="7CG-KP-fe4" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="pVC-nF-QP2"/>
+                <constraint firstItem="rqr-H6-Zrx" firstAttribute="centerX" secondItem="xur-83-6O3" secondAttribute="centerX" id="xx9-HF-zBW"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="26.5" y="52.5"/>

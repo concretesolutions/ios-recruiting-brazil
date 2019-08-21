@@ -12,6 +12,7 @@ final class Singleton {
     static public let shared = Singleton()
     
     var populares:Array<Movie> = Array<Movie>()
+    var backupPopulares:Array<Movie> = Array<Movie>()
     var genres:Dictionary<Int, Genre> = Dictionary<Int, Genre>()
     var preferidos:Dictionary<Int, Movie> = Dictionary<Int, Movie>()
     var updatePref:Bool = false
@@ -39,6 +40,24 @@ final class Singleton {
             return true
         }
         return false
+    }
+    
+    func findMovie(nome: String) {
+        if backupPopulares.isEmpty {
+            backupPopulares = populares
+        }
+        var aux = Array<Movie>()
+        for m in backupPopulares {
+            if(m.title.contains(nome)) {
+                aux.append(m)
+            }
+        }
+        populares = aux
+    }
+    
+    func resetPopulares() {
+        populares = backupPopulares
+        backupPopulares.removeAll()
     }
     
 }
