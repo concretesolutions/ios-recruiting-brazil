@@ -20,7 +20,7 @@ class PopularView: UIViewController {
         
         self.navigationItem.title = "Populares"
         
-        self.progress?.startAnimating()
+        showLoading()
         
         self.collectionView?.register(UINib.init(nibName: "PopularesCell", bundle: nil), forCellWithReuseIdentifier: "PopularesCell")
         
@@ -35,21 +35,36 @@ class PopularView: UIViewController {
         
         layout.sectionInset.left = (width - viewWidth)/2
         layout.sectionInset.right = (width - viewWidth)/2
-//
-//        self.collectionView?.frame.size = CGSize(width: width, height: view.frame.size.height)
+        
         requester = Requester(vc: self)
-        requester?.requestGenreList()
-        requester?.requestPopular(page: page) {
-            self.page += 1
-            self.collectionView?.reloadData()
-            self.progress?.stopAnimating()
-            self.progress?.isHidden = true
+        requester?.requestGenreList(didFail: {
+            Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos gêneros, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self)
+        })
+        
+        requester?.requestPopular(page: page) { success in
+            if (success) {
+                self.page += 1
+                self.collectionView?.reloadData()
+            } else {
+                Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos filmes populares, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self)
+            }
+            self.hideLoading()
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationItem.title = "Populares"
+    }
+    
+    func showLoading() {
+        self.progress?.isHidden = false
+        self.progress?.startAnimating()
+    }
+    
+    func hideLoading() {
+        self.progress?.isHidden = true
+        self.progress?.stopAnimating()
     }
 }
 
@@ -61,20 +76,22 @@ extension PopularView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularesCell", for: indexPath) as! PopularesCell
-        cell.configure(with: Singleton.shared.populares[indexPath.row])
+        cell.configure(with: Singleton.shared.populares[indexPath.row], index: indexPath.row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (indexPath.row == Singleton.shared.populares.count - 1 ) {
-            self.progress?.startAnimating()
-            self.progress?.isHidden = false
-            requester?.requestPopular(page: page) {
-                sleep(1)
-                self.page += 1
-                self.collectionView?.reloadData()
-                self.progress?.stopAnimating()
-                self.progress?.isHidden = true
+            showLoading()
+            requester?.requestPopular(page: page) { success in
+                if (success) {
+                    sleep(1)
+                    self.page += 1
+                    self.collectionView?.reloadData()
+                } else {
+                    Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos filmes populares, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self)
+                }
+                self.hideLoading()
             }
         }
     }

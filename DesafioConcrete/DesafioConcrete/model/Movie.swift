@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Movie:Codable {
     var id:Int
@@ -15,7 +16,8 @@ struct Movie:Codable {
     var backdropPath: String
     var genreIds: Array<Int>
     var overview: String
-    var releaseDate:String
+    var releaseDate: String
+    var posterImage: UIImage?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"

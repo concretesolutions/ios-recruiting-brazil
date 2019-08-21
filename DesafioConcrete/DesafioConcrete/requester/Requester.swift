@@ -11,28 +11,28 @@ import UIKit
 
 class Requester {
     
-    var view:UIViewController?
+    var view:PopularView?
     
-    func requestPopular(page: Int, callback:@escaping () -> ()) {
+    func requestPopular(page: Int, callback:@escaping (_ success: Bool) -> ()) {
         Endpoints.shared.makeRequest(apiUrl: Endpoints.shared.getPopularMovies(page: page), method: .get) { (response) in
             if(response?.result.isSuccess)! {
                 do {
                     let decoder = JSONDecoder()
                     let movies = try decoder.decode(MovieResponse.self, from: (response?.data)!)
                     Singleton.shared.populares.append(contentsOf: movies.results)
-                    callback()
+                    callback(true)
                 }  catch let (error) {
                     print(error)
                     print("JSON Decode Error: requestPopular")
                 }
             } else {
                 print("Erro ao recuperar os filmes")
-                Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos filmes populares, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self.view!)
+                callback(false)
             }
         }
     }
     
-    func requestGenreList() {
+    func requestGenreList(didFail:@escaping () -> ()) {
         Endpoints.shared.makeRequest(apiUrl: Endpoints.shared.getGenreList(), method: .get, callback: { (response) in
             if(response?.result.isSuccess)! {
                 do {
@@ -45,12 +45,12 @@ class Requester {
                 }
             } else {
                 print("Erro ao recuperar os gêneros")
-                Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos gêneros, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self.view!)
+                didFail()
             }
         })
     }
     
-    init(vc: UIViewController) {
+    init(vc: PopularView) {
         self.view = vc
     }
     
