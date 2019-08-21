@@ -56,5 +56,12 @@ class FavoriteSpec: QuickSpec{
                 expect(controller.view) == controller.screen
             }
         }
+        
+        describe("Check if the view is loading") {
+            it("view has to be equal to equal to the FavoriteView"){
+                controller.viewDidLoad()
+                expect(controller.view) == controller.screen
+            }
+        }
     }
 }
