@@ -9,10 +9,8 @@
 
 App criado com as funcionalidades de apresentação dos filmes populares disponiveis na API do TheMovieDB podendo adicionar favoritos com persistencia local e fazer filtros sobre os mesmos, foi utilizada a arquitetura MVVM para o desenvolvimento.
 
-![Image of Yaktocat](assets/flow/grid.png)
-![Image of Yaktocat](assets/flow/detail.png)
-![Image of Yaktocat](assets/flow/favorite.png)
-![Image of Yaktocat](assets/flow/filter.png)
+
+<img src="assets/flow/Grid.PNG" alt="alt text" width="280" height="500"> <img src="assets/flow/Details.PNG" alt="alt text" width="280" height="500"> <img src="assets/flow/Favorite.PNG" alt="alt text" width="280" height="500"> <img src="assets/flow/Filter.PNG" alt="alt text" width="280" height="500">
 
 
 # Features ..
