@@ -55,6 +55,7 @@ class PopularView: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationItem.title = "Populares"
+        collectionView?.reloadData()
     }
     
     func showLoading() {
