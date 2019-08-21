@@ -14,7 +14,7 @@ class PopularView: UIViewController {
     @IBOutlet var progress: UIActivityIndicatorView?
     private var page = 1
     private var requester:Requester?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

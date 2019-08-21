@@ -6,14 +6,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Baskerville.ttc">
-            <string>Baskerville-Italic</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashScreen" customModule="DesafioConcrete" customModuleProvider="target">
             <connections>
@@ -28,17 +24,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToJ-nN-YgW">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ih9-0a-bvq">
-                            <rect key="frame" x="108" y="287.5" width="159.5" height="73.5"/>
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="65"/>
-                            <color key="textColor" red="1" green="0.78431372549019607" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="yyO-Jf-fg8">
+                            <rect key="frame" x="37.5" y="173.5" width="300" height="300"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="G5T-ve-D1Z"/>
+                                <constraint firstAttribute="width" secondItem="yyO-Jf-fg8" secondAttribute="height" multiplier="1:1" id="MR1-t2-Zkx"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="Ih9-0a-bvq" firstAttribute="centerX" secondItem="ToJ-nN-YgW" secondAttribute="centerX" id="Hcd-Sg-cIr"/>
-                        <constraint firstItem="Ih9-0a-bvq" firstAttribute="centerY" secondItem="ToJ-nN-YgW" secondAttribute="centerY" id="aSW-st-Rmd"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yyO-Jf-fg8" secondAttribute="trailing" id="LPx-tQ-4hu"/>
+                        <constraint firstItem="yyO-Jf-fg8" firstAttribute="centerY" secondItem="ToJ-nN-YgW" secondAttribute="centerY" id="YAb-uf-2cP"/>
+                        <constraint firstItem="yyO-Jf-fg8" firstAttribute="centerX" secondItem="ToJ-nN-YgW" secondAttribute="centerX" id="aBo-ZD-o61"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yyO-Jf-fg8" secondAttribute="trailing" constant="32" id="giM-Xs-a0x"/>
                     </constraints>
                 </view>
             </subviews>
@@ -53,4 +52,7 @@
             <point key="canvasLocation" x="26.5" y="52.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="iTunesArtwork@2x.png" width="1024" height="1024"/>
+    </resources>
 </document>
