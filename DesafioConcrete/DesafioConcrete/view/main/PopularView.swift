@@ -12,6 +12,8 @@ class PopularView: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView?
     @IBOutlet var progress: UIActivityIndicatorView?
+    private var page = 1
+    private var requester:Requester?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +37,10 @@ class PopularView: UIViewController {
         layout.sectionInset.right = (width - viewWidth)/2
 //
 //        self.collectionView?.frame.size = CGSize(width: width, height: view.frame.size.height)
-
-        let requester = Requester(vc: self)
-        requester.requestGenreList()
-        requester.requestPopular(page: 1) {
+        requester = Requester(vc: self)
+        requester?.requestGenreList()
+        requester?.requestPopular(page: page) {
+            self.page += 1
             self.collectionView?.reloadData()
             self.progress?.stopAnimating()
             self.progress?.isHidden = true
@@ -61,6 +63,20 @@ extension PopularView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularesCell", for: indexPath) as! PopularesCell
         cell.configure(with: Singleton.shared.populares[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (indexPath.row == Singleton.shared.populares.count - 1 ) {
+            self.progress?.startAnimating()
+            self.progress?.isHidden = false
+            requester?.requestPopular(page: page) {
+                sleep(1)
+                self.page += 1
+                self.collectionView?.reloadData()
+                self.progress?.stopAnimating()
+                self.progress?.isHidden = true
+            }
+        }
     }
 }
 
