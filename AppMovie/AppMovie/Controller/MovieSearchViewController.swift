@@ -50,13 +50,6 @@ class MovieSearchViewController: UIViewController {
         //Navigation Controller
         self.navigationItem.title = "Movies"
         self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.backgroundColor = UIColor.mainColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainColor()
-        self.navigationController?.navigationBar.tintColor = UIColor.mainDarkBlue()
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainDarkBlue(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
-        //
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         

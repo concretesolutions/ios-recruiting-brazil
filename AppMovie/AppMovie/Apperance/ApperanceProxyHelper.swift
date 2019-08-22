@@ -7,3 +7,19 @@
 //
 
 import Foundation
+import UIKit
+
+struct ApperanceProxyHelper {
+    
+    static func customizeNavigationBar() {
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.isTranslucent = false
+        navigationBarAppearace.backgroundColor = UIColor.mainColor()
+        navigationBarAppearace.barTintColor = UIColor.mainColor()
+        navigationBarAppearace.tintColor = UIColor.mainDarkBlue()
+        navigationBarAppearace.shadowImage = nil
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainDarkBlue(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
+        
+    }
+    
+}
