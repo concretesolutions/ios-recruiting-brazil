@@ -44,7 +44,9 @@ extension MovieSearchCollectionViewDataSource: UICollectionViewDataSourcePrefetc
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         print("Prefetch")
         let itemIndex = indexPaths.first!.row
-        if itemIndex > (movies.count - 10) {
+        print(itemIndex)
+        print(movies.count)
+        if itemIndex > (movies.count - 30) {
             delegate?.loadMovies()
         }
         
