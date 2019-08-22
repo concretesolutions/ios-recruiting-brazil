@@ -16,6 +16,7 @@ class FavoriteMovieViewController: UIViewController {
     //MARK: - PROPERTIES
     @IBOutlet weak var favoriteTableView: UITableView!
     @IBOutlet weak var movieSearch: UISearchBar!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var movies: [MovieEntity] = []
     
@@ -25,22 +26,27 @@ class FavoriteMovieViewController: UIViewController {
     //MARK: -INIT
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchCoreDataObjects()
+        self.setupTableView(with: self.movies)
         
-//        favoriteTableView.delegate = self
-//        favoriteTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchCoreDataObjects()
-        //favoriteTableView.reloadData()
-        self.setupTableView(with: self.movies)
         configureViewComponents()
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        favoriteTableView.isHidden = true
     }
     
     func fetchCoreDataObjects() {
         self.fetch { (complete) in
             if complete {
+                activityIndicator.stopAnimating()
+                activityIndicator.isHidden = true
                 if movies.count >= 1 {
                     favoriteTableView.isHidden = false
                 } else {
@@ -64,12 +70,6 @@ class FavoriteMovieViewController: UIViewController {
         //Navigation Controller
         self.navigationItem.title = "Favoritos"
         self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.backgroundColor = UIColor.mainColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor.mainColor()
-        self.navigationController?.navigationBar.tintColor = UIColor.mainDarkBlue()
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainDarkBlue(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
         //
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
@@ -116,9 +116,9 @@ extension FavoriteMovieViewController: MovieSelectionDelegate{
         } catch {
             debugPrint("Could not remove: \(error.localizedDescription)")
         }
-        
-        self.fetchCoreDataObjects()
         tableViewDataSource?.movies.remove(at: indexPath.row)
+        self.fetchCoreDataObjects()
+        
     }
     
     func fetch(completion: (_ complete: Bool) -> ()) {
