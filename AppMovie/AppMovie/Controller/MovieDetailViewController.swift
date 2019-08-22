@@ -68,7 +68,9 @@ class MovieDetailViewController: UIViewController {
     }
     
     func configureGenersId(){
-        switch(movieCell?.genre_ids![0]){
+         guard let geners = movieCell?.genre_ids else {return}
+        if geners.count < 0 {genero = "Unknow"}
+        switch(geners[0]){
         case (28):
             genero = "Action"
         case (12):
@@ -99,6 +101,8 @@ class MovieDetailViewController: UIViewController {
             genero = "Romance"
         case (878):
             genero = "Science Fiction"
+        case (10752):
+            genero = "War"
         case (10752):
             genero = "War"
         default:
