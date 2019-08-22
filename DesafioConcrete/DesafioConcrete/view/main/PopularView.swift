@@ -46,7 +46,7 @@ class PopularView: UIViewController {
             Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos gêneros, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self)
         })
         
-        requester?.requestPopular(page: page) { success in
+        requester?.requestPopular(page: page, callback: { success in
             if (success) {
                 self.page += 1
                 self.collectionView?.reloadData()
@@ -54,7 +54,10 @@ class PopularView: UIViewController {
                 Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos filmes populares, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self)
             }
             self.hideLoading()
-        }
+        }, jsonErrorCallback: {
+            self.page += 1
+            Alerta.alerta("A página não pôde ser recuperada", msg: "A página seguinte será recuperada na próxima rolagem", view: self)
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,7 +92,7 @@ extension PopularView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (indexPath.row == Singleton.shared.populares.count - 1 && shouldLoadMore) {
             showLoading()
-            requester?.requestPopular(page: page) { success in
+            requester?.requestPopular(page: page, callback: { success in
                 if (success) {
                     sleep(1)
                     self.page += 1
@@ -98,7 +101,11 @@ extension PopularView: UICollectionViewDataSource {
                     Alerta.alerta("Aconteceu algo inesperado", msg: "Houve uma falha na requisição dos filmes populares, isso pode ser devido ao servidor ou algum problema na sua conexão", view: self)
                 }
                 self.hideLoading()
-            }
+            }, jsonErrorCallback: {
+                self.page += 1
+                Alerta.alerta("A página não pôde ser recuperada", msg: "A página seguinte será recuperada na próxima rolagem", view: self)
+                self.hideLoading()
+            })
         }
     }
 }

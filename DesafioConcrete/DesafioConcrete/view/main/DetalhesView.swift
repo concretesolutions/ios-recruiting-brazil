@@ -11,6 +11,7 @@ import UIKit
 class DetalhesView: UIViewController {
     
     @IBOutlet var imgView: UIImageView?
+    @IBOutlet var notfoundImgView: UIImageView?
     @IBOutlet var favoriteBT:UIButton?
     @IBOutlet var progress:UIActivityIndicatorView?
     
@@ -26,11 +27,17 @@ class DetalhesView: UIViewController {
         
         self.progress?.startAnimating()
         self.navigationController?.navigationBar.tintColor = UIColor.customYellow
+        notfoundImgView?.isHidden = true
         
         if let m = movie {
-            let url = Endpoints.shared.imageBaseUrl + "w780" + m.backdropPath
-            imgView?.load(url: url) {
-                self.progress?.isHidden = true
+            if m.backdropPath != "Not Found" {
+                let url = Endpoints.shared.imageBaseUrl + "w780" + m.backdropPath
+                imgView?.load(url: url) {
+                    self.progress?.isHidden = true
+                }
+            } else {
+                notfoundImgView?.isHidden = false
+                imgView?.isHidden = true
             }
             
             titleLb?.text = m.title

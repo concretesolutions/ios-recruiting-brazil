@@ -13,7 +13,7 @@ class Requester {
     
     var view:PopularView?
     
-    func requestPopular(page: Int, callback:@escaping (_ success: Bool) -> ()) {
+    func requestPopular(page: Int, callback:@escaping (_ success: Bool) -> (), jsonErrorCallback:@escaping () -> ()) {
         Endpoints.shared.makeRequest(apiUrl: Endpoints.shared.getPopularMovies(page: page), method: .get) { (response) in
             if(response?.result.isSuccess)! {
                 do {
@@ -22,8 +22,9 @@ class Requester {
                     Singleton.shared.populares.append(contentsOf: movies.results)
                     callback(true)
                 }  catch let (error) {
-                    print(error)
+                    print("error")
                     print("JSON Decode Error: requestPopular")
+                    jsonErrorCallback()
                 }
             } else {
                 print("Erro ao recuperar os filmes")

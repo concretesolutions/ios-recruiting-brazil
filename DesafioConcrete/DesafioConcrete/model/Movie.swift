@@ -35,7 +35,11 @@ struct Movie:Codable {
         self.id = try values.decode(Int.self, forKey: .id)
         self.title = try values.decode(String.self, forKey: .title)
         self.posterPath = try values.decode(String.self, forKey: .posterPath)
-        self.backdropPath = try values.decode(String.self,forKey: .backdropPath)
+        if let backdropImgAux = try values.decode(String?.self, forKey: .backdropPath) {
+            self.backdropPath = backdropImgAux
+        } else {
+            self.backdropPath = "Not Found"
+        }
         self.genreIds = try values.decode(Array<Int>.self, forKey: .genreIds)
         self.overview = try values.decode(String.self, forKey: .overview)
         self.releaseDate = try values.decode(String.self, forKey: .releaseDate)
