@@ -19,6 +19,8 @@ class FavoriteMovieViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var movies: [MovieEntity] = []
+    var inSearchMode = false
+    var filteredMovieFromEntity = [MovieEntity]()
     
     var tableViewDataSource: FavoriteMovieTableViewDataSource?
     var tableViewDelegate: FavoriteMovieTableViewDelegate?
@@ -26,6 +28,7 @@ class FavoriteMovieViewController: UIViewController {
     //MARK: -INIT
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchBar()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -56,6 +59,21 @@ class FavoriteMovieViewController: UIViewController {
         }
     }
     
+    func fetch(completion: (_ complete: Bool) -> ()) {
+        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+        
+        let fetchRequest = NSFetchRequest<MovieEntity>(entityName: "MovieEntity")
+        
+        do {
+            movies = try managedContext.fetch(fetchRequest)
+            print("Successfully fetched data.")
+            completion(true)
+        } catch {
+            debugPrint("Could not fetch: \(error.localizedDescription)")
+            completion(false)
+        }
+    }
+    
     //MARK - SETUP TABLEVIEW
     func setupTableView(with movie: [MovieEntity]) {
         tableViewDataSource = FavoriteMovieTableViewDataSource(movies: movie, tableView: favoriteTableView)
@@ -76,7 +94,7 @@ class FavoriteMovieViewController: UIViewController {
         //Search
         movieSearch.barTintColor = UIColor.mainColor()
         movieSearch.tintColor = UIColor.mainOrange()
-        movieSearch.showsCancelButton = false
+        movieSearch.showsCancelButton = true
         for v:UIView in movieSearch.subviews.first!.subviews {
             if v.isKind(of: UITextField.classForCoder()) {
                 (v as! UITextField).tintColor = UIColor.white
@@ -91,7 +109,7 @@ class FavoriteMovieViewController: UIViewController {
     
 }
 
-//MARK: - CoreData Remove
+//MARK: - CoreData PROTOCOLO SELECTION DELEGATE REMOVE AND CLICK DETAILS
 extension FavoriteMovieViewController: MovieSelectionDelegate{
     
     func didSelect(movie: Result) {
@@ -121,18 +139,35 @@ extension FavoriteMovieViewController: MovieSelectionDelegate{
         
     }
     
-    func fetch(completion: (_ complete: Bool) -> ()) {
-        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
-        
-        let fetchRequest = NSFetchRequest<MovieEntity>(entityName: "MovieEntity")
-        
-        do {
-            movies = try managedContext.fetch(fetchRequest)
-            print("Successfully fetched data.")
-            completion(true)
-        } catch {
-            debugPrint("Could not fetch: \(error.localizedDescription)")
-            completion(false)
+}
+
+extension FavoriteMovieViewController: UISearchBarDelegate{
+    func setupSearchBar() {
+        self.movieSearch.delegate = self
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        movieSearch.showsCancelButton = false
+        print("Cancel")
+        self.setupTableView(with: self.movies)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            inSearchMode = false
+            self.setupTableView(with: self.movies)
+        } else {
+            movieSearch.showsCancelButton = true
+            inSearchMode = true
+            print(searchText)
+            filteredMovieFromEntity = movies.filter({ $0.movieTitle?.lowercased().range(of: searchText.lowercased()) != nil })
+            //filter({$0.title.lowercased().contains(searchText.lowercased())})
+            print(filteredMovieFromEntity)
+            self.setupTableView(with: self.filteredMovieFromEntity)
         }
     }
+    
 }
+

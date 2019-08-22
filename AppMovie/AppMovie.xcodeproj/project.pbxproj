@@ -28,7 +28,7 @@
 		80782EE022CE732D00C64EF9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80782EDF22CE732D00C64EF9 /* Protocols.swift */; };
 		80782EE222CE8CDA00C64EF9 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80782EE122CE8CDA00C64EF9 /* App.swift */; };
 		80A1E50F2309774B00077604 /* FavotireMovieTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A1E50E2309774B00077604 /* FavotireMovieTableViewDelegate.swift */; };
-		80A1E51123097D2100077604 /* MovieDeletingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A1E51023097D2100077604 /* MovieDeletingDelegate.swift */; };
+		80B7D683230ED28000892D8F /* ApperanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B7D682230ED28000892D8F /* ApperanceProxyHelper.swift */; };
 		80D21C5323059378002D0C5B /* JsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D21C5223059378002D0C5B /* JsonHelper.swift */; };
 		80D21C542305A03E002D0C5B /* return.json in Resources */ = {isa = PBXBuildFile; fileRef = 802E4F9123049053003A8256 /* return.json */; };
 		80D281D922CF0A0900558DE6 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D281D822CF0A0900558DE6 /* MovieDetailViewController.swift */; };
@@ -90,7 +90,7 @@
 		80782EDF22CE732D00C64EF9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		80782EE122CE8CDA00C64EF9 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		80A1E50E2309774B00077604 /* FavotireMovieTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavotireMovieTableViewDelegate.swift; sourceTree = "<group>"; };
-		80A1E51023097D2100077604 /* MovieDeletingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDeletingDelegate.swift; sourceTree = "<group>"; };
+		80B7D682230ED28000892D8F /* ApperanceProxyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApperanceProxyHelper.swift; sourceTree = "<group>"; };
 		80D21C5223059378002D0C5B /* JsonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonHelper.swift; sourceTree = "<group>"; };
 		80D281D822CF0A0900558DE6 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		80D281DC22CF1D8800558DE6 /* FavoriteMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewController.swift; sourceTree = "<group>"; };
@@ -155,7 +155,6 @@
 				80D6B306230733C7001096F8 /* CollectionView */,
 				80E299F822FFCDE60013BDE8 /* MovieSelectionDelegate.swift */,
 				80534D3A230339090095EFDD /* MoviePagingDelegate.swift */,
-				80A1E51023097D2100077604 /* MovieDeletingDelegate.swift */,
 			);
 			path = Datasources;
 			sourceTree = "<group>";
@@ -203,6 +202,7 @@
 		80782EA522CE6E9F00C64EF9 /* AppMovie */ = {
 			isa = PBXGroup;
 			children = (
+				80B7D681230ED25100892D8F /* Apperance */,
 				801AAB4C22FE0534001C38AC /* Datasources */,
 				8014BBF822CED29700E5AE8A /* Services */,
 				80782ED722CE6F4F00C64EF9 /* Model */,
@@ -277,6 +277,14 @@
 				80782EDF22CE732D00C64EF9 /* Protocols.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		80B7D681230ED25100892D8F /* Apperance */ = {
+			isa = PBXGroup;
+			children = (
+				80B7D682230ED28000892D8F /* ApperanceProxyHelper.swift */,
+			);
+			path = Apperance;
 			sourceTree = "<group>";
 		};
 		80D6B306230733C7001096F8 /* CollectionView */ = {
@@ -543,10 +551,10 @@
 				8014BBF722CED1CA00E5AE8A /* Movies.swift in Sources */,
 				80D6B30923073972001096F8 /* FavoriteMovieTableViewDataSource.swift in Sources */,
 				80D932B823096CE10083FB18 /* CellFavoriteMovie.swift in Sources */,
-				80A1E51123097D2100077604 /* MovieDeletingDelegate.swift in Sources */,
 				80782EDE22CE731000C64EF9 /* Constants.swift in Sources */,
 				80534D3B230339090095EFDD /* MoviePagingDelegate.swift in Sources */,
 				80A1E50F2309774B00077604 /* FavotireMovieTableViewDelegate.swift in Sources */,
+				80B7D683230ED28000892D8F /* ApperanceProxyHelper.swift in Sources */,
 				8014BBFA22CED2BD00E5AE8A /* MovieServices.swift in Sources */,
 				80E299F522FFB95D0013BDE8 /* MovieSearchCollectionViewDataSource.swift in Sources */,
 				80D281D922CF0A0900558DE6 /* MovieDetailViewController.swift in Sources */,
