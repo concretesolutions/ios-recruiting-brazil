@@ -20,5 +20,9 @@ extension String {
 
     return dateFormatter.date(from: self) ?? Date()
   }
+  
+  func trim() -> String {
+    return self.replacingOccurrences(of: " ", with: "")
+  }
 
 }

@@ -21,6 +21,9 @@ class MovieDetailTableViewCell: UITableViewCell {
   
   fileprivate let placeholder = #imageLiteral(resourceName: "movie-placeholder")
   fileprivate let globalSettings = MovsSingleton.shared.globalSettings!
+  fileprivate var movie: Movies!
+  
+  var delegate: MoviesActionDelegate!
   
   // MARK: - Lifecycle
   
@@ -38,6 +41,8 @@ class MovieDetailTableViewCell: UITableViewCell {
   // MARK: - Setup
   
   func setup(with movie: Movies) {
+    self.movie = movie
+
     movieNameLabel.text = movie.title
     favedButton.isSelected = movie.faved
     movieYearLabel.text = movie.releaseAt.toDate().format(with: "yyyy")
@@ -57,6 +62,19 @@ class MovieDetailTableViewCell: UITableViewCell {
   // MARK: - Actions
   
   @IBAction fileprivate func favedClick(_ sender: UIButton) {
+    let isFaved = sender.isSelected
+    
+    delegate.handlerFavorite(movie, isFaved: isFaved) { [weak self] success in
+      if !success {
+        self?.delegate.notifyActionError("faved-action-error".localized())
+        return
+      }
+      
+      self?.handlerFavorite(sender)
+    }
+  }
+  
+  fileprivate func handlerFavorite(_ sender: UIButton) {
     UIView.transition(with: sender, duration: 0.8, options: .transitionCrossDissolve, animations: {
       sender.isSelected = !sender.isSelected
     }, completion: nil)

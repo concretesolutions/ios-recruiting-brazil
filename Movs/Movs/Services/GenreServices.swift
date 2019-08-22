@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import CodableAlamofire
 
-typealias GenreServicesCallback = ((Result<[Genre]>) -> Void)
+typealias GenreServicesCallback = ((Result<[Genres]>) -> Void)
 
 class GenreServices: ServicesBase {
   
@@ -24,7 +24,7 @@ class GenreServices: ServicesBase {
     // Append the language at 'params' to request
     defaultParams["language"] = language
 
-    Alamofire.request(url, method: .get, parameters: defaultParams).responseDecodableObject(keyPath: "genres", decoder: decoder) { (response: DataResponse<[Genre]>) in
+    Alamofire.request(url, method: .get, parameters: defaultParams).responseDecodableObject(keyPath: "genres", decoder: decoder) { (response: DataResponse<[Genres]>) in
       
       switch response.result {
       case .success(let genres):

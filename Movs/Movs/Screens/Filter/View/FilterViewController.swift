@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FilterDelegate {
+  func onApplyFilter(with filters: Filters)
+}
+
 class FilterViewController: BaseViewController {
 
   // MARK: - Outlets
@@ -19,6 +23,7 @@ class FilterViewController: BaseViewController {
   
   fileprivate var viewModel: FilterViewModel!
   fileprivate var datasource: FilterDatasource = FilterDatasource()
+  fileprivate var delegate: FilterDelegate?
   
   // MARK: - Initializers
   
@@ -29,6 +34,12 @@ class FilterViewController: BaseViewController {
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    viewModel = FilterViewModel(with: self, datasource: datasource)
+  }
+  
+  init(with delegate: FilterDelegate) {
+    super.init(nibName: nil, bundle: nil)
+    self.delegate = delegate
     viewModel = FilterViewModel(with: self, datasource: datasource)
   }
   
@@ -63,7 +74,10 @@ class FilterViewController: BaseViewController {
   // MARK: - Actions
   
   @IBAction fileprivate func applyFilterClick() {
-    print("apply")
+    self.navigationController?.popViewController(animated: true)
+
+    guard let delegate = self.delegate else { return }
+    delegate.onApplyFilter(with: datasource.filtersApplyed)
   }
   
 }

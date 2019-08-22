@@ -9,6 +9,11 @@
 import UIKit
 import Kingfisher
 
+protocol MoviesActionDelegate {
+  func handlerFavorite(_ movie: Movies, isFaved: Bool, callback: @escaping ((Bool) -> Void))
+  func notifyActionError(_ error: String)
+}
+
 class MoviesCollectionViewCell: UICollectionViewCell {
 
   // MARK: - Outlets
@@ -19,6 +24,9 @@ class MoviesCollectionViewCell: UICollectionViewCell {
   
   fileprivate let placeholder = #imageLiteral(resourceName: "movie-placeholder")
   fileprivate let globalSettings = MovsSingleton.shared.globalSettings!
+  fileprivate var movie: Movies!
+  
+  var delegate: MoviesActionDelegate!
   
   // MARK: - Setup
   
@@ -31,7 +39,10 @@ class MoviesCollectionViewCell: UICollectionViewCell {
   }
   
   func setup(with movie: Movies) {
+    self.movie = movie
+
     movieName.text = movie.title
+    movieFaved.isSelected = movie.faved
 
     // Loading the movie poster
     let path = movie.poster
@@ -47,6 +58,19 @@ class MoviesCollectionViewCell: UICollectionViewCell {
   // MARK: - Actions
   
   @IBAction fileprivate func favedClick(_ sender: UIButton) {
+    let isFaved = sender.isSelected
+
+    delegate.handlerFavorite(movie, isFaved: isFaved) { [weak self] success in
+      if !success {
+        self?.delegate.notifyActionError("faved-action-error".localized())
+        return
+      }
+
+      self?.handlerFavorite(sender)
+    }
+  }
+  
+  fileprivate func handlerFavorite(_ sender: UIButton) {
     UIView.transition(with: sender, duration: 0.8, options: .transitionCrossDissolve, animations: {
       sender.isSelected = !sender.isSelected
     }, completion: nil)

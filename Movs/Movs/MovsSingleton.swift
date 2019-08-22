@@ -13,7 +13,8 @@ class MovsSingleton {
   static let shared = MovsSingleton()
   
   var globalSettings: Settings?
-  var genres: [Genre] = []
+  var genres: [Genres] = []
+  var allMovies: [Movies] = []
   
   var avaliableDates: [String] {
     return self.generateDates()

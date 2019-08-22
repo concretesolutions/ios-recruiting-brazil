@@ -10,9 +10,10 @@ import Foundation
 
 protocol SplashViewModelDelegate {
   func loadSettingsSuccess()
-  func loadingSettingsError(_ error: String)
+  func loadSettingsError(_ error: String)
   func loadGenresSuccess()
   func loadGenresError(_ error: String)
+  func favoritesLoaded()
 }
 
 struct SplashViewModel {
@@ -45,6 +46,12 @@ struct SplashViewModel {
     }
   }
   
+  func fectchFavorites() {
+    DataManager.shared.loadFavedMovies {
+      self.delegate.favoritesLoaded()
+    }
+  }
+  
   // MARK: - Private methods
   
   fileprivate func success(_ settings: Settings) {
@@ -57,10 +64,10 @@ struct SplashViewModel {
   
   fileprivate func error(_ error: String) {
     guard let delegate = self.delegate else { return }
-    delegate.loadingSettingsError(error)
+    delegate.loadSettingsError(error)
   }
   
-  fileprivate func genresSuccess(_ genres: [Genre]) {
+  fileprivate func genresSuccess(_ genres: [Genres]) {
     // Store loaded genres list in application Singleton
     MovsSingleton.shared.genres.removeAll()
     MovsSingleton.shared.genres.append(contentsOf: genres)
@@ -71,7 +78,7 @@ struct SplashViewModel {
   
   fileprivate func genreError(_ error: String) {
     guard let delegate = self.delegate else { return }
-    delegate.loadingSettingsError(error)
+    delegate.loadSettingsError(error)
   }
   
 }

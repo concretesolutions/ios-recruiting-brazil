@@ -21,9 +21,8 @@ internal class ServicesBase: NSObject {
   // MARK: - Commom methods
 
   func parseError(_ error: Error) -> String {
-    // FIXME: in18 this message
     if error._code == NSURLErrorTimedOut {
-      return "Atingimos o tempo limite para sua solicitação. Por favor, tente novamente!"
+      return "timeout-error".localized()
     }
 
     return error.localizedDescription

@@ -11,6 +11,7 @@ import UIKit
 class MovieDetailDatasource: NSObject, UITableViewDataSource {
   
   var movie: Movies?
+  var delegate: MoviesActionDelegate!
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
@@ -26,6 +27,8 @@ class MovieDetailDatasource: NSObject, UITableViewDataSource {
     }
     
     cell.selectionStyle = .none
+    
+    cell.delegate = delegate
     cell.setup(with: movie)
     
     return cell

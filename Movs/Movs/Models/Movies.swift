@@ -19,7 +19,9 @@ struct Movies: Decodable {
   let releaseAt: String
   
   // Attribute to control if the movie is faved on local database
-  var faved: Bool = false
+  var faved: Bool {
+    return DataManager.shared.favedMovies.contains(id)
+  }
   
   // Attribute to list genres of movie
   var genresList: String {

@@ -12,9 +12,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoritesViewController" customModule="Movs" customModuleProvider="target">
             <connections>
-                <outlet property="filterContainerHeightConstraint" destination="3mc-1r-tBS" id="yms-40-HQA"/>
+                <outlet property="activityIndicator" destination="pbw-GF-Lgn" id="e7x-ll-Paw"/>
+                <outlet property="favoritesEmptyLabel" destination="LZg-ah-1cJ" id="wyo-Zf-OuK"/>
+                <outlet property="favoritesEmptyView" destination="sFZ-BU-Oel" id="DrV-aM-a7V"/>
+                <outlet property="filterContainerHeightConstraint" destination="2II-Au-cZ9" id="pBF-uS-zY1"/>
+                <outlet property="filterEmptyLabel" destination="WFZ-8a-bm6" id="fb1-wq-PZI"/>
+                <outlet property="filterEmptyView" destination="rsZ-5j-Z4O" id="nBr-d0-nN9"/>
                 <outlet property="removeFilterButton" destination="Ie9-Ww-fDb" id="43q-jc-ukc"/>
                 <outlet property="searchBar" destination="mAz-Rv-BrQ" id="fiS-AN-ILD"/>
+                <outlet property="searchEmptyLabel" destination="AB5-ry-qIj" id="JzN-uA-e5n"/>
+                <outlet property="searchEmptyView" destination="x8h-l7-VlQ" id="Tyw-4k-0Rm"/>
                 <outlet property="tableView" destination="usV-Ke-ZAe" id="fsS-ob-tXV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,6 +41,9 @@
                             </constraints>
                             <color key="tintColor" red="0.4941176471" green="0.47843137250000001" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="bru-80-PZ6"/>
+                            </connections>
                         </searchBar>
                     </subviews>
                     <color key="backgroundColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -44,23 +54,26 @@
                         <constraint firstAttribute="height" constant="44" id="qq9-HZ-qrJ"/>
                     </constraints>
                 </view>
-                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ek-9s-7Z3">
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ek-9s-7Z3">
                     <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ie9-Ww-fDb">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                             <color key="backgroundColor" red="0.17254901959999999" green="0.19215686269999999" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="2II-Au-cZ9"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                             <state key="normal" title="Remove Filter">
                                 <color key="titleColor" red="0.96470588235294119" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="removeFiltersClick" destination="-1" eventType="touchUpInside" id="XRe-gV-50P"/>
+                            </connections>
                         </button>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" id="3mc-1r-tBS"/>
-                    </constraints>
                 </stackView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="usV-Ke-ZAe">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="usV-Ke-ZAe">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,21 +82,129 @@
                         <outlet property="delegate" destination="-1" id="uCb-jP-PPy"/>
                     </connections>
                 </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pbw-GF-Lgn">
+                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                    <color key="color" red="1" green="0.63137254899999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFZ-BU-Oel" userLabel="Favories Empty View">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pPk-Rc-kDu">
+                            <rect key="frame" x="49.5" y="277.5" width="276.5" height="68"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab-faved-icon" translatesAutoresizingMaskIntoConstraints="NO" id="m9y-n1-grw">
+                                    <rect key="frame" x="120.5" y="0.0" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="35" id="DKc-Ef-tfM"/>
+                                        <constraint firstAttribute="height" constant="35" id="arM-m4-PSG"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você não favoritou nenhum filme ainda." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZg-ah-1cJ">
+                                    <rect key="frame" x="0.0" y="50" width="276.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="pPk-Rc-kDu" firstAttribute="centerY" secondItem="sFZ-BU-Oel" secondAttribute="centerY" id="FEz-cM-R2i"/>
+                        <constraint firstItem="pPk-Rc-kDu" firstAttribute="centerX" secondItem="sFZ-BU-Oel" secondAttribute="centerX" id="Gfh-S0-8Vn"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x8h-l7-VlQ">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="EET-xc-vBa">
+                            <rect key="frame" x="81" y="268.5" width="213.5" height="86"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-icon" translatesAutoresizingMaskIntoConstraints="NO" id="D7V-VX-lv6">
+                                    <rect key="frame" x="89" y="0.0" width="35" height="35"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AB5-ry-qIj">
+                                    <rect key="frame" x="0.0" y="50" width="213.5" height="36"/>
+                                    <string key="text">Nenhum resultado encontrado
+para o termo pesquisado.</string>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="EET-xc-vBa" firstAttribute="centerY" secondItem="x8h-l7-VlQ" secondAttribute="centerY" id="Puc-Cu-f95"/>
+                        <constraint firstItem="EET-xc-vBa" firstAttribute="centerX" secondItem="x8h-l7-VlQ" secondAttribute="centerX" id="dF3-Xc-WQg"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsZ-5j-Z4O">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Lah-TN-Hna">
+                            <rect key="frame" x="81" y="268.5" width="213.5" height="86"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ire-bY-UN0">
+                                    <rect key="frame" x="89" y="0.0" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="6So-uW-gyt"/>
+                                        <constraint firstAttribute="width" constant="35" id="a3Y-Nb-mAd"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFZ-8a-bm6">
+                                    <rect key="frame" x="0.0" y="50" width="213.5" height="36"/>
+                                    <string key="text">Nenhum resultado encontrado
+para o filtro aplicado.</string>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Lah-TN-Hna" firstAttribute="centerY" secondItem="rsZ-5j-Z4O" secondAttribute="centerY" id="T1f-Ct-DsW"/>
+                        <constraint firstItem="Lah-TN-Hna" firstAttribute="centerX" secondItem="rsZ-5j-Z4O" secondAttribute="centerX" id="laN-7B-pHf"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="rsZ-5j-Z4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5KV-H8-V51"/>
+                <constraint firstItem="x8h-l7-VlQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9rh-Vt-2gw"/>
                 <constraint firstItem="usV-Ke-ZAe" firstAttribute="top" secondItem="8ek-9s-7Z3" secondAttribute="bottom" id="HHM-8f-NL6"/>
+                <constraint firstItem="x8h-l7-VlQ" firstAttribute="top" secondItem="nak-Zf-Xet" secondAttribute="bottom" id="JyX-QG-hMn"/>
+                <constraint firstItem="pbw-GF-Lgn" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="KFC-qt-u6w"/>
                 <constraint firstItem="nak-Zf-Xet" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="KyJ-5c-B2e"/>
+                <constraint firstItem="pbw-GF-Lgn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MAk-Yd-5wh"/>
+                <constraint firstAttribute="trailing" secondItem="sFZ-BU-Oel" secondAttribute="trailing" id="RvB-it-Rqx"/>
+                <constraint firstItem="sFZ-BU-Oel" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="a2b-ZB-UQT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="usV-Ke-ZAe" secondAttribute="bottom" id="b83-KF-fSk"/>
+                <constraint firstItem="rsZ-5j-Z4O" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="bOd-wW-fti"/>
                 <constraint firstItem="8ek-9s-7Z3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cjX-gT-i8J"/>
+                <constraint firstItem="sFZ-BU-Oel" firstAttribute="top" secondItem="nak-Zf-Xet" secondAttribute="bottom" id="d3x-D6-jfP"/>
                 <constraint firstItem="nak-Zf-Xet" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="dCQ-bp-r05"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x8h-l7-VlQ" secondAttribute="trailing" id="dqe-ES-Nqj"/>
                 <constraint firstItem="usV-Ke-ZAe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eLD-9Y-7Yh"/>
+                <constraint firstItem="rsZ-5j-Z4O" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="gFI-7h-XoQ"/>
                 <constraint firstItem="nak-Zf-Xet" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hga-wh-qGp"/>
+                <constraint firstItem="x8h-l7-VlQ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="lFs-Aj-vq5"/>
+                <constraint firstItem="rsZ-5j-Z4O" firstAttribute="top" secondItem="8ek-9s-7Z3" secondAttribute="bottom" id="ljl-HL-eux"/>
                 <constraint firstItem="8ek-9s-7Z3" firstAttribute="top" secondItem="nak-Zf-Xet" secondAttribute="bottom" id="tiJ-e0-kv5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="usV-Ke-ZAe" secondAttribute="trailing" id="vXy-F6-nh1"/>
+                <constraint firstAttribute="bottom" secondItem="sFZ-BU-Oel" secondAttribute="bottom" id="ycf-Qr-uxU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8ek-9s-7Z3" secondAttribute="trailing" id="ygT-7T-EWc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="135.38230884557723"/>
         </view>
     </objects>
+    <resources>
+        <image name="filter-icon" width="17" height="19"/>
+        <image name="search-icon" width="35" height="35"/>
+        <image name="tab-faved-icon" width="22" height="21"/>
+    </resources>
 </document>

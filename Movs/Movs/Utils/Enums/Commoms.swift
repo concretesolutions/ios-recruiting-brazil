@@ -9,7 +9,11 @@
 import Foundation
 
 enum ViewState {
-  case normal, loading, error
+  case normal
+  case loading
+  case searching(hasResult: Bool)
+  case filter(hasResult: Bool)
+  case error
 }
 
 enum Result<Value> {

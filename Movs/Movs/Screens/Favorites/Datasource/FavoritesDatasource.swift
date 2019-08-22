@@ -25,12 +25,24 @@ class FavoritesDatasource: NSObject, UITableViewDataSource {
     }
   }
   
+  var filterEnable: Bool = false {
+    didSet {
+      if filterEnable {
+        allMovies.removeAll()
+        allMovies.append(contentsOf: movies)
+      } else {
+        self.movies.removeAll()
+        self.movies.append(contentsOf: allMovies)
+      }
+    }
+  }
+  
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10 //movies.count
+    return movies.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,6 +51,9 @@ class FavoritesDatasource: NSObject, UITableViewDataSource {
     }
     
     cell.selectionStyle = .none
+    
+    let movie = movies[indexPath.row]
+    cell.setup(with: movie)
 
     return cell
   }
@@ -46,9 +61,5 @@ class FavoritesDatasource: NSObject, UITableViewDataSource {
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     return true
   }
-  
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    
-  }
-  
+
 }

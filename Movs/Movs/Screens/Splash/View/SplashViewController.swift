@@ -58,6 +58,11 @@ class SplashViewController: BaseViewController {
     viewModel.fetchGenres()
   }
   
+  fileprivate func loadFavorites() {
+    self.state = .loading
+    viewModel.fectchFavorites()
+  }
+  
   fileprivate func setupView() {
     switch state {
     case .loading: self.activityIndicator.startAnimating()
@@ -79,7 +84,7 @@ extension SplashViewController: SplashViewModelDelegate {
     self.loadGenres()
   }
   
-  func loadingSettingsError(_ error: String) {
+  func loadSettingsError(_ error: String) {
     self.state = .error
     
     self.showErrorMessage(error, tryAgainCallback: { [weak self] in
@@ -88,8 +93,8 @@ extension SplashViewController: SplashViewModelDelegate {
   }
   
   func loadGenresSuccess() {
-    self.state = .normal
-    self.goToHome()
+    // Start load of favorites list
+    self.loadFavorites()
   }
   
   func loadGenresError(_ error: String) {
@@ -98,6 +103,11 @@ extension SplashViewController: SplashViewModelDelegate {
     self.showErrorMessage(error, tryAgainCallback: { [weak self] in
       self?.loadGenres()
     })
+  }
+  
+  func favoritesLoaded() {
+    self.state = .normal
+    self.goToHome()
   }
   
 }

@@ -16,13 +16,19 @@ class FavoritesViewController: BaseViewController {
   @IBOutlet weak fileprivate var searchBar: UISearchBar!
   @IBOutlet weak fileprivate var tableView: UITableView!
   @IBOutlet weak fileprivate var removeFilterButton: UIButton!
+  @IBOutlet weak fileprivate var searchEmptyView: UIView!
+  @IBOutlet weak fileprivate var searchEmptyLabel: UILabel!
+  @IBOutlet weak fileprivate var filterEmptyView: UIView!
+  @IBOutlet weak fileprivate var filterEmptyLabel: UILabel!
+  @IBOutlet weak fileprivate var favoritesEmptyView: UIView!
+  @IBOutlet weak fileprivate var favoritesEmptyLabel: UILabel!
   @IBOutlet weak var filterContainerHeightConstraint: NSLayoutConstraint! // 52
   
   // MARK: - Private properties
   
   fileprivate var state: ViewState = .normal {
     didSet {
-      //      self.setupView()
+      self.setupView()
     }
   }
   
@@ -47,14 +53,24 @@ class FavoritesViewController: BaseViewController {
     super.viewDidLoad()
     self.customizeNavigationBar()
     self.configureTableView()
+    self.configureEmptyView()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+
+    let elegibleToLoad = !self.datasource.inSearch && !self.datasource.filterEnable
     
     DispatchQueue.main.async { [weak self] in
-      self?.loadFavoriteMovies()
+      if elegibleToLoad {
+        self?.loadFavoriteMovies()
+      }
     }
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    self.searchBar.endEditing(true)
   }
   
   // MARK: - Private methods
@@ -71,6 +87,12 @@ class FavoritesViewController: BaseViewController {
     self.removeFilterButton.setTitle("clear-filter".localized(), for: .normal)
   }
   
+  fileprivate func configureEmptyView() {
+    favoritesEmptyLabel.text = "empty-favorites-label".localized()
+    searchEmptyLabel.text = "empty-search-label".localized()
+    filterEmptyLabel.text = "empty-filter-label".localized()
+  }
+  
   fileprivate func loadFavoriteMovies() {
     self.state = .loading
     viewModel.fetchFavorites()
@@ -78,7 +100,21 @@ class FavoritesViewController: BaseViewController {
   
   fileprivate func setupView() {
     switch state {
-    case .loading: self.activityIndicator.startAnimating()
+    case .loading:
+      self.searchEmptyView.isHidden = true
+      self.favoritesEmptyView.isHidden = true
+      self.tableView.isHidden = true
+      self.activityIndicator.startAnimating()
+      
+    case .normal:
+      self.activityIndicator.stopAnimating()
+      self.searchEmptyView.isHidden = true
+      self.handlerEmptyView()
+      self.tableView.isHidden = false
+      
+    case .searching(let hasResult): self.endSearch(hasResult: hasResult)
+    case .filter(let hasResult): self.handlerFilter(hasResult: hasResult)
+      
     default: self.activityIndicator.stopAnimating()
     }
   }
@@ -106,10 +142,38 @@ class FavoritesViewController: BaseViewController {
   fileprivate func goToFilters() {
     guard let navigationController = self.navigationController else { return }
 
-    let filterController = FilterViewController()
+    let filterController = FilterViewController(with: self)
     filterController.hidesBottomBarWhenPushed = true
     
     navigationController.pushViewController(filterController, animated: true)
+  }
+  
+  fileprivate func handlerEmptyView() {
+    favoritesEmptyView.isHidden = viewModel.hasFavorites
+  }
+  
+  fileprivate func endSearch(hasResult: Bool) {
+    searchEmptyView.isHidden = hasResult
+  }
+  
+  fileprivate func handlerFilter(hasResult: Bool) {
+    filterEmptyView.isHidden = hasResult
+  }
+  
+  fileprivate func performSearch(_ term: String) {
+    viewModel.search(with: term)
+  }
+  
+  @IBAction fileprivate func removeFiltersClick() {
+    self.filterContainerHeightConstraint.constant = 0
+    
+    UIView.animate(withDuration: 0.5, animations: {}) { [weak self] finished in
+      if finished {
+        self?.removeFilterButton.isHidden = true
+      }
+    }
+    
+    viewModel.clearFilter()
   }
   
 }
@@ -117,6 +181,7 @@ class FavoritesViewController: BaseViewController {
 extension FavoritesViewController: FavoritesViewModelDelegate {
   
   func loadFavoritesSuccess() {
+    self.state = .normal
     tableView.reloadData()
   }
   
@@ -126,6 +191,34 @@ extension FavoritesViewController: FavoritesViewModelDelegate {
     self.showErrorMessage(error, tryAgainCallback: { [weak self] in
       self?.loadFavoriteMovies()
     })
+  }
+  
+  func searchWithResult() {
+    self.state = .searching(hasResult: true)
+    self.tableView.reloadData()
+  }
+  
+  func searchEmpty() {
+    self.state = .searching(hasResult: false)
+  }
+  
+  func filterWithResult() {
+    self.state = .filter(hasResult: true)
+    self.tableView.reloadData()
+  }
+  
+  func filterEmpty() {
+    self.state = .filter(hasResult: false)
+  }
+  
+  func clearSearch() {
+    self.state = .searching(hasResult: true)
+    self.tableView.reloadData()
+  }
+  
+  func clearFilter() {
+    self.state = .filter(hasResult: true)
+    self.tableView.reloadData()
   }
   
 }
@@ -140,9 +233,30 @@ extension FavoritesViewController: UISearchBarDelegate {
   func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
     if searchBar.text!.isEmpty {
       searchBar.centeredPlaceHolder()
+      
+      if datasource.inSearch {
+        viewModel.clearSearch()
+      }
     }
     
     return true
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    guard let searchText = searchBar.text, !searchText.trim().isEmpty else {
+      self.showErrorMessage("empty-search-error".localized(), withTryAgainButton: false)
+      return
+    }
+    
+    searchBar.endEditing(true)
+    
+    self.performSearch(searchText)
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if datasource.inSearch && searchText.isEmpty {
+      viewModel.clearSearch()
+    }
   }
   
 }
@@ -150,7 +264,16 @@ extension FavoritesViewController: UISearchBarDelegate {
 extension FavoritesViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-    let deleteButton = UITableViewRowAction(style: .destructive, title: "unfaved-action-title".localized()) { (action, indexPath) in
+    let deleteButton = UITableViewRowAction(style: .destructive, title: "unfaved-action-title".localized()) { [weak self] (action, indexPath) in
+      
+      self?.viewModel.removeFavorite(at: indexPath)
+
+      tableView.beginUpdates()
+      tableView.deleteRows(at: [indexPath], with: .automatic)
+      tableView.reloadData()
+      tableView.endUpdates()
+      
+      self?.handlerEmptyView()
 
       return
     }
@@ -172,7 +295,25 @@ extension FavoritesViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let movieDetailViewModel = viewModel.makeMovieDetail(at: indexPath)
+    let movieDetailController = MovieDetailViewController(with: movieDetailViewModel)
     
+    self.navigationController?.pushViewController(movieDetailController, animated: true)
   }
 
+}
+
+extension FavoritesViewController: FilterDelegate {
+  
+  func onApplyFilter(with filters: Filters) {
+    self.removeFilterButton.isHidden = false
+
+    UIView.animate(withDuration: 0.5) {
+      self.filterContainerHeightConstraint.constant = 52
+    }
+    
+    // Applying selected filters
+    viewModel.applyFilter(filters)
+  }
+  
 }

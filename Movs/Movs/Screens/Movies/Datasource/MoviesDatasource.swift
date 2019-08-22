@@ -10,9 +10,12 @@ import UIKit
 
 class MoviesDatasource: NSObject, UICollectionViewDataSource {
 
+  fileprivate var allMovies: [Movies] = []
+  
+  var delegate: MoviesActionDelegate!
   var movies: [Movies] = []
-  var allMovies: [Movies] = []
   var currentPage: Int = 1
+  var totalPages: Int = 0
 
   var inSearch: Bool = false {
     didSet {
@@ -40,6 +43,8 @@ class MoviesDatasource: NSObject, UICollectionViewDataSource {
     }
     
     let movie = movies[indexPath.row]
+
+    cell.delegate = delegate
     cell.setup(with: movie)
 
     return cell

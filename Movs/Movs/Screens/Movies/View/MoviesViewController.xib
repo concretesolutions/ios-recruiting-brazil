@@ -12,8 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoviesViewController" customModule="Movs" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="Y9c-97-faK" id="Jaf-9w-n9v"/>
                 <outlet property="collectionView" destination="u1S-Sc-bXy" id="oTj-92-zMb"/>
                 <outlet property="searchBar" destination="IlI-5b-NVh" id="wLM-qk-cm5"/>
+                <outlet property="searchEmptyLabel" destination="80a-4V-CeB" id="DB3-XY-JhH"/>
+                <outlet property="searchEmptyView" destination="kgn-nv-4Fd" id="kgy-Sg-ICa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -58,18 +61,58 @@
                         <outlet property="delegate" destination="-1" id="2aZ-AV-MjO"/>
                     </connections>
                 </collectionView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-97-faK">
+                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                    <color key="color" red="1" green="0.63137254899999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgn-nv-4Fd">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="6Vi-mo-K5v">
+                            <rect key="frame" x="81" y="268.5" width="213.5" height="86"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-icon" translatesAutoresizingMaskIntoConstraints="NO" id="b7I-08-GJM">
+                                    <rect key="frame" x="89" y="0.0" width="35" height="35"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80a-4V-CeB">
+                                    <rect key="frame" x="0.0" y="50" width="213.5" height="36"/>
+                                    <string key="text">Nenhum resultado encontrado
+para o termo pesquisado.</string>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="6Vi-mo-K5v" firstAttribute="centerX" secondItem="kgn-nv-4Fd" secondAttribute="centerX" id="2aM-rO-wBu"/>
+                        <constraint firstItem="6Vi-mo-K5v" firstAttribute="centerY" secondItem="kgn-nv-4Fd" secondAttribute="centerY" id="laK-sX-FaQ"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="kgn-nv-4Fd" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="2nT-5a-da9"/>
                 <constraint firstItem="Kiv-5V-sTT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2qs-ai-FVF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="u1S-Sc-bXy" secondAttribute="bottom" id="B3C-f7-BeR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="u1S-Sc-bXy" secondAttribute="trailing" id="GHu-R3-n5I"/>
                 <constraint firstItem="u1S-Sc-bXy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OBr-JC-iwm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kgn-nv-4Fd" secondAttribute="trailing" id="RbE-dv-qrm"/>
+                <constraint firstItem="Y9c-97-faK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="SPA-fx-9gU"/>
+                <constraint firstItem="kgn-nv-4Fd" firstAttribute="top" secondItem="Kiv-5V-sTT" secondAttribute="bottom" id="aIz-bK-1ou"/>
                 <constraint firstItem="Kiv-5V-sTT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ac2-EZ-XNq"/>
                 <constraint firstItem="u1S-Sc-bXy" firstAttribute="top" secondItem="Kiv-5V-sTT" secondAttribute="bottom" id="auN-4S-Lbz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Kiv-5V-sTT" secondAttribute="trailing" id="hHR-l6-ITM"/>
+                <constraint firstItem="Y9c-97-faK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="lm5-lZ-aqQ"/>
+                <constraint firstItem="kgn-nv-4Fd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="umm-me-plL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="136.28185907046478"/>
         </view>
     </objects>
+    <resources>
+        <image name="search-icon" width="35" height="35"/>
+    </resources>
 </document>
