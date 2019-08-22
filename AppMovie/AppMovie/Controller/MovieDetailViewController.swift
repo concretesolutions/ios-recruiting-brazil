@@ -69,7 +69,7 @@ class MovieDetailViewController: UIViewController {
     
     func configureGenersId(){
          guard let geners = movieCell?.genre_ids else {return}
-        if geners.count < 0 {genero = "Unknow"}
+        if geners.isEmpty {return genero = "Unknow"}
         switch(geners[0]){
         case (28):
             genero = "Action"
