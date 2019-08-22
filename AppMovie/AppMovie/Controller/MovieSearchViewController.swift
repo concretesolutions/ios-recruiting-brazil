@@ -86,7 +86,7 @@ class MovieSearchViewController: UIViewController {
     func api(){
         service.getMovies(page: pageCount){ [weak self] movies in
             guard let self = self else { return }
-            self.movie += movies
+            self.movie.append(contentsOf: movies)
             DispatchQueue.main.async {
                 self.setupCollectionView(with: self.movie)
             }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MovieDeletingDelegate: class {
+protocol CustomTabBarDelegate: class {
 //    removeMovie(atIndexPath: indexPath)
 //    fetchCoreDataObjects()
 }
