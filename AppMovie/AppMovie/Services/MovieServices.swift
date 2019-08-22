@@ -33,8 +33,9 @@ class MovieServiceImpl: MovieService {
                     let decoder = JSONDecoder()
                     let decodedMovies = try decoder.decode(Movies.self, from: data)
                     //print(decodedMovies)
-                    
+                    DispatchQueue.main.async {
                     completionHandler(decodedMovies.results)
+                    }
                 } catch let error {
                     print(error)
                     completionHandler(arrayMovies)
@@ -58,8 +59,9 @@ class MovieServiceImpl: MovieService {
                     let decoder = JSONDecoder()
                     let decodedMovies = try decoder.decode(Movies.self, from: data)
                     //print(decodedMovies)
-                    
+                     DispatchQueue.main.async {
                     completionHandler(decodedMovies.results)
+                    }
                 } catch let error {
                     print(error)
                     completionHandler(arrayMovies)
