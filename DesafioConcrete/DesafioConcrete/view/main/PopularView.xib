@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopularView" customModule="DesafioConcrete" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="xur-83-6O3" id="sKQ-VQ-ok2"/>
+                <outlet property="noResultLb" destination="z35-hD-dWW" id="H9O-XA-NkJ"/>
                 <outlet property="progress" destination="rqr-H6-Zrx" id="YYk-bx-9B6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -48,15 +49,25 @@
                         <outlet property="delegate" destination="-1" id="VAF-zi-sap"/>
                     </connections>
                 </searchBar>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nenhum resultado encontrado" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z35-hD-dWW">
+                    <rect key="frame" x="71" y="361" width="233" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.7843137255" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
             <constraints>
                 <constraint firstItem="xur-83-6O3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6Mp-kt-vhh"/>
                 <constraint firstItem="7CG-KP-fe4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="8Uc-gr-P8x"/>
+                <constraint firstItem="z35-hD-dWW" firstAttribute="centerY" secondItem="xur-83-6O3" secondAttribute="centerY" id="H42-lm-gBf"/>
                 <constraint firstItem="rqr-H6-Zrx" firstAttribute="centerY" secondItem="xur-83-6O3" secondAttribute="centerY" id="JO0-Bs-plA"/>
+                <constraint firstItem="z35-hD-dWW" firstAttribute="centerX" secondItem="xur-83-6O3" secondAttribute="centerX" id="Km7-d0-h2h"/>
+                <constraint firstItem="z35-hD-dWW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="N8I-ou-lio"/>
                 <constraint firstItem="xur-83-6O3" firstAttribute="top" secondItem="7CG-KP-fe4" secondAttribute="bottom" id="dw5-sU-GSn"/>
                 <constraint firstItem="xur-83-6O3" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="eWs-j4-UzS"/>
                 <constraint firstItem="xur-83-6O3" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="k9e-5Z-dxZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="z35-hD-dWW" secondAttribute="trailing" constant="32" id="kHe-HI-0xy"/>
                 <constraint firstItem="7CG-KP-fe4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="p5w-Wq-fXp"/>
                 <constraint firstItem="7CG-KP-fe4" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="pVC-nF-QP2"/>
                 <constraint firstItem="rqr-H6-Zrx" firstAttribute="centerX" secondItem="xur-83-6O3" secondAttribute="centerX" id="xx9-HF-zBW"/>

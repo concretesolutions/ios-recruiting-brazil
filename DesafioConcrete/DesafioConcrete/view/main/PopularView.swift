@@ -12,6 +12,7 @@ class PopularView: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView?
     @IBOutlet var progress: UIActivityIndicatorView?
+    @IBOutlet var noResultLb: UILabel?
     
     private var page = 1
     private var requester:Requester?
@@ -22,6 +23,7 @@ class PopularView: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Populares"
+        noResultLb?.isHidden = true
         
         showLoading()
         
@@ -132,9 +134,14 @@ extension PopularView: UISearchBarDelegate {
         if(text == "") {
             shouldLoadMore = true                   //desabilita scroll load
             Singleton.shared.resetPopulares()
+            noResultLb?.isHidden = true
         } else {
             shouldLoadMore = false                  //habilita scroll load
-            Singleton.shared.findMovie(nome: text)
+            if Singleton.shared.findMovie(nome: text) {
+                noResultLb?.isHidden = true
+            } else {
+                noResultLb?.isHidden = false                
+            }
         }
         collectionView?.reloadData()
         hideLoading()

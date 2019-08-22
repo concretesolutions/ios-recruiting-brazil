@@ -42,7 +42,7 @@ final class Singleton {
         return false
     }
     
-    func findMovie(nome: String) {
+    func findMovie(nome: String) -> Bool {
         if backupPopulares.isEmpty {
             backupPopulares = populares
         }
@@ -53,6 +53,11 @@ final class Singleton {
             }
         }
         populares = aux
+        
+        if(populares.isEmpty) {
+            return false
+        }
+        return true
     }
     
     func resetPopulares() {
