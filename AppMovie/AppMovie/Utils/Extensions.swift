@@ -133,6 +133,11 @@ extension UIViewController {
         
         dismiss(animated: false, completion: nil)
     }
+    
+    func EmptyTextField(text: String, message: String?){
+        let alert = UIAlertController(title: text, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true) }
 }
 
 

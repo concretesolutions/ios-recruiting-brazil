@@ -94,7 +94,7 @@ class FavoriteMovieViewController: UIViewController {
         //Search
         movieSearch.barTintColor = UIColor.mainColor()
         movieSearch.tintColor = UIColor.mainOrange()
-        movieSearch.showsCancelButton = true
+        movieSearch.showsCancelButton = false
         for v:UIView in movieSearch.subviews.first!.subviews {
             if v.isKind(of: UITextField.classForCoder()) {
                 (v as! UITextField).tintColor = UIColor.white
@@ -102,6 +102,8 @@ class FavoriteMovieViewController: UIViewController {
             }
         }
     }
+    
+
     
     @IBAction func moviesBtnPressed(_ sender: Any) {
         dismissDetail()
@@ -165,9 +167,19 @@ extension FavoriteMovieViewController: UISearchBarDelegate{
             filteredMovieFromEntity = movies.filter({ $0.movieTitle?.lowercased().range(of: searchText.lowercased()) != nil })
             //filter({$0.title.lowercased().contains(searchText.lowercased())})
             print(filteredMovieFromEntity)
+            if verifyisContainsTheMovie(){
+                EmptyTextField(text: "Not Found", message: "Filme não encontrado na lista de favoritos")
+                self.setupTableView(with: self.movies)
+                return
+            }
             self.setupTableView(with: self.filteredMovieFromEntity)
         }
     }
+    
+    func verifyisContainsTheMovie() -> Bool {
+        return filteredMovieFromEntity.isEmpty
+    }
+    
     
 }
 

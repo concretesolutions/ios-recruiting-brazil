@@ -29,7 +29,6 @@ class MovieDetailViewController: UIViewController {
     var movieCell : Result?
     
     var status: Bool!
-    // geners: String
     
     //MARK: -Init
     override func viewDidLoad() {
@@ -52,7 +51,7 @@ class MovieDetailViewController: UIViewController {
         descriptionTxt.text = movieCell.overview!.isEmpty ? "No description" : movieCell.overview
         configureGenersId()
         genersTxt.text = genero
-
+        
         detailImage.kf.indicatorType = .activity
         //let stringImage = movie?.poster_path
         guard let stringImage = movieCell.poster_path else {return}
@@ -68,7 +67,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     func configureGenersId(){
-         guard let geners = movieCell?.genre_ids else {return}
+        guard let geners = movieCell?.genre_ids else {return}
         if geners.isEmpty {return genero = "Unknow"}
         switch(geners[0]){
         case (28):
@@ -114,7 +113,7 @@ class MovieDetailViewController: UIViewController {
         self.save { (complete) in
             if complete {
                 favoriteBtn.isSelected = true
-                self.EmptyTextField(text: "Adicionado", message: "Este filme foi adicionado aos favoritos!")
+                EmptyTextField(text: "Adicionado", message: "Este filme foi adicionado aos favoritos!")
             }
         }
     }
@@ -135,14 +134,8 @@ class MovieDetailViewController: UIViewController {
             completion(true)
         } catch {
             debugPrint("Could not save: \(error.localizedDescription)")
-            self.EmptyTextField(text: "Pay Atention", message: error.localizedDescription)
+            EmptyTextField(text: "Pay Atention", message: error.localizedDescription)
             completion(false)
         }
     }
-    
-    func EmptyTextField(text: String, message: String?){
-        let alert = UIAlertController(title: text, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true) }
-    
 }
