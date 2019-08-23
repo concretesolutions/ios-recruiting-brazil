@@ -33,7 +33,6 @@ class MovieSearchViewController: UIViewController {
         super.viewDidLoad()
         
         configureViewComponents()
-        
         setupSearchBar()
     }
     
@@ -51,7 +50,6 @@ class MovieSearchViewController: UIViewController {
         self.navigationItem.title = "Movies"
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
         
         //Search
         movieSearch.barTintColor = UIColor.mainColor()
@@ -93,6 +91,11 @@ class MovieSearchViewController: UIViewController {
             print(movies)
             DispatchQueue.main.async {
                 self.filteredMovie += movies
+                if(movies.isEmpty){
+                    self.EmptyTextField(text: "Not Found", message: "Filme não encontrado na lista de favoritos")
+                     self.setupCollectionView(with: self.movie)
+                    return
+                }
                 self.setupCollectionView(with: self.filteredMovie)
             }
         }
