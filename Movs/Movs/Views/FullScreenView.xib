@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FullScreenView" customModule="Movs" customModuleProvider="target">
+            <connections>
+                <outlet property="imgFoto" destination="PA5-9W-GUu" id="cq4-hh-2eS"/>
+                <outlet property="masterView" destination="iN0-l3-epB" id="Wzi-y6-YTl"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="349" height="473"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cym-AI-Duc">
+                    <rect key="frame" x="0.0" y="0.0" width="349" height="473"/>
+                    <subviews>
+                        <visualEffectView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gj-cf-ped">
+                            <rect key="frame" x="0.0" y="0.0" width="349" height="473"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7EO-mk-9MH">
+                                <rect key="frame" x="0.0" y="0.0" width="349" height="473"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <blurEffect style="light"/>
+                        </visualEffectView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgPlaceholder.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="PA5-9W-GUu">
+                            <rect key="frame" x="0.0" y="0.0" width="349" height="473"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="PA5-9W-GUu" firstAttribute="top" secondItem="cym-AI-Duc" secondAttribute="top" id="K8i-cl-vL1"/>
+                        <constraint firstAttribute="trailing" secondItem="5Gj-cf-ped" secondAttribute="trailing" id="Wli-Ds-4i1"/>
+                        <constraint firstItem="PA5-9W-GUu" firstAttribute="leading" secondItem="cym-AI-Duc" secondAttribute="leading" id="a6x-r9-gWd"/>
+                        <constraint firstAttribute="trailing" secondItem="PA5-9W-GUu" secondAttribute="trailing" id="aKg-di-gRL"/>
+                        <constraint firstItem="5Gj-cf-ped" firstAttribute="top" secondItem="cym-AI-Duc" secondAttribute="top" id="eOu-X5-YJK"/>
+                        <constraint firstItem="5Gj-cf-ped" firstAttribute="leading" secondItem="cym-AI-Duc" secondAttribute="leading" id="ekU-cy-v7Y"/>
+                        <constraint firstAttribute="bottom" secondItem="5Gj-cf-ped" secondAttribute="bottom" id="iFB-7N-xYW"/>
+                        <constraint firstAttribute="bottom" secondItem="PA5-9W-GUu" secondAttribute="bottom" id="yej-Fz-s32"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="cym-AI-Duc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NYc-Pg-Rfs"/>
+                <constraint firstItem="cym-AI-Duc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TVo-eM-KHi"/>
+                <constraint firstAttribute="trailing" secondItem="cym-AI-Duc" secondAttribute="trailing" id="idk-Sd-NLd"/>
+                <constraint firstAttribute="bottom" secondItem="cym-AI-Duc" secondAttribute="bottom" id="u6R-Ge-DJb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="84.782608695652186" y="-29.799107142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="imgPlaceholder.jpeg" width="1200" height="1200"/>
+    </resources>
+</document>
