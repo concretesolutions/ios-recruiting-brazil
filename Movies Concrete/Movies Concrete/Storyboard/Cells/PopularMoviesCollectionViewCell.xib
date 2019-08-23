@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="CKw-9k-mQu" customClass="PopularMoviesCollectionViewCell" customModule="Movies_Concrete" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="253"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="170" height="253"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reileao" translatesAutoresizingMaskIntoConstraints="NO" id="oC1-SY-mu3">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="211"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="170" id="2R5-vR-jLl"/>
+                            <constraint firstAttribute="height" constant="211" id="C1P-8n-CL5"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O Rei Leão" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Skc-sW-SM3">
+                        <rect key="frame" x="6" y="219" width="158" height="26"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <color key="textColor" red="1" green="0.9999879599" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_empty" translatesAutoresizingMaskIntoConstraints="NO" id="54x-Gk-qho">
+                        <rect key="frame" x="132" y="9" width="32" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="S6S-7J-nKq"/>
+                            <constraint firstAttribute="height" constant="26" id="neh-jv-X6R"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.057522543170000003" green="0.057522543170000003" blue="0.057522543170000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="Skc-sW-SM3" firstAttribute="leading" secondItem="CKw-9k-mQu" secondAttribute="leading" constant="6" id="3xr-NJ-x9X"/>
+                <constraint firstItem="oC1-SY-mu3" firstAttribute="top" secondItem="CKw-9k-mQu" secondAttribute="top" id="EB5-m5-JpZ"/>
+                <constraint firstItem="oC1-SY-mu3" firstAttribute="leading" secondItem="CKw-9k-mQu" secondAttribute="leading" id="On5-C4-7NW"/>
+                <constraint firstAttribute="trailing" secondItem="oC1-SY-mu3" secondAttribute="trailing" id="PH8-fe-Sjo"/>
+                <constraint firstItem="Skc-sW-SM3" firstAttribute="top" secondItem="oC1-SY-mu3" secondAttribute="bottom" constant="8" id="RKI-Pf-74K"/>
+                <constraint firstItem="54x-Gk-qho" firstAttribute="top" secondItem="CKw-9k-mQu" secondAttribute="top" constant="9" id="fij-4E-bKc"/>
+                <constraint firstAttribute="trailing" secondItem="Skc-sW-SM3" secondAttribute="trailing" constant="6" id="giF-dt-hCr"/>
+                <constraint firstAttribute="bottom" secondItem="Skc-sW-SM3" secondAttribute="bottom" constant="8" id="m3E-JL-eZj"/>
+                <constraint firstAttribute="trailing" secondItem="54x-Gk-qho" secondAttribute="trailing" constant="6" id="r1R-EB-nju"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Nvl-xt-6LU"/>
+            <size key="customSize" width="170" height="253"/>
+            <connections>
+                <outlet property="favoriteAction" destination="54x-Gk-qho" id="QoN-59-Uwf"/>
+                <outlet property="imgMovie" destination="oC1-SY-mu3" id="RuF-wV-zKe"/>
+                <outlet property="titleMovie" destination="Skc-sW-SM3" id="Hgp-bf-sTn"/>
+            </connections>
+            <point key="canvasLocation" x="60.869565217391312" y="112.83482142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="heart_empty" width="64" height="64"/>
+        <image name="reileao" width="450" height="600"/>
+    </resources>
+</document>
