@@ -15,12 +15,11 @@ class Movie: Mappable {
   var posterPath: String?
   var overview: String?
   var releaseDate: String?
-  //  var genre: [Int]
+  var genreList: [Int]!
   
   required init?(map: Map){
     
   }
-  
   
   init(title: String, posterPath: String, overview: String, releaseDate: String ) {
     self.title = title
@@ -33,9 +32,9 @@ class Movie: Mappable {
     
     title <- map["title"]
     posterPath <- map["poster_path"]
-    posterPath <- map["description"]
     overview <- map["overview"]
     releaseDate <- map["release_date"]
+    genreList <- map["genre_ids"]
   }
   
 }

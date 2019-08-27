@@ -16,8 +16,11 @@ class FavoritesViewController: UIViewController {
   
   // MARK: Members
   
+  var favorites : [Movie] = []
+  
+  let coverPath = API.API_PATH_MOVIES_IMAGE
   @IBOutlet weak var favoritesTableView: UITableView!
-//  weak var delegate: FavoritesViewControllerDelegate?
+  //  weak var delegate: FavoritesViewControllerDelegate?
   
   
   // MARK: Lifecycle
@@ -25,36 +28,59 @@ class FavoritesViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    self.navigationController?.navigationBar
-//    self.navigationItem.title = "My Favorites"
-    
-    self.navigationController?.setNavigationBarHidden(false, animated: true)
-    
+    favoritesTableView.separatorStyle = .none
     favoritesTableView.dataSource = self
     favoritesTableView.delegate = self
+    
     favoritesTableView.register(UINib(nibName: "FavoriteMoviesTableViewCell", bundle: nil),
                                 forCellReuseIdentifier: "FavoriteMoviesTableViewCell")
     
+    favoritesTableView.register(UINib(nibName: "EmptyTableViewCell", bundle: nil),
+                                forCellReuseIdentifier: "EmptyTableViewCell")
+    
   }
-
   
 }
+
 
 // MARK: Extensions
 
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate  {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    return 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = favoritesTableView.dequeueReusableCell(withIdentifier: "FavoriteMoviesTableViewCell", for: indexPath) as! FavoriteMoviesTableViewCell
     
-    cell.titleMovie.text = "O Rei Leão"
-    cell.yearMovie.text = "2019"
-    cell.plotMovie.text = "Simba (Donald Glover) é um jovem leão cujo destino é se tornar o rei da selva. Entretanto, uma armadilha elaborada por seu tio Scar (Chiwetel Ejiofor) faz com que Mufasa (James Earl Jones), o atual rei, morra ao tentar salvar o filhote. Consumido pela culpa, Simba deixa o reino rumo a um local distante, onde encontra amigos que o ensinam a mais uma vez ter prazer pela vida."
+    var auxCell: UITableViewCell?
     
-    return cell
+    if favorites.count == 0 {
+      let cell = favoritesTableView.dequeueReusableCell(withIdentifier: "EmptyTableViewCell", for: indexPath)
+      auxCell = cell
+    } else {
+      let cell = favoritesTableView.dequeueReusableCell(withIdentifier: "FavoriteMoviesTableViewCell", for: indexPath) as! FavoriteMoviesTableViewCell
+
+      let movie = favorites[indexPath.row]
+      cell.titleMovie.text = movie.title
+      cell.plotMovie.text = movie.overview
+
+      let year = movie.releaseDate!
+      cell.yearMovie.text = String(year.prefix(4))
+
+      let coverUrl = movie.posterPath
+      let fullUrl = coverPath + coverUrl!
+      if let url = URL(string: fullUrl) {
+        cell.imgMovie.kf.setImage(with: url)
+      }
+      auxCell = cell
+    }
+    
+    return auxCell!
+
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //    articlesTableView.deselectRow(at: indexPath, animated: true)
   }
   
 }
