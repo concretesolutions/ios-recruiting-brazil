@@ -20,10 +20,6 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var descriptionTxt: UITextView!
     @IBOutlet weak var favoriteBtn: UIButton!
     
-    var titulo: String!
-    var descricao: String!
-    var imagem: String!
-    var dataMovie: String!
     var genero: String!
     
     var movieCell : Result?
@@ -57,11 +53,6 @@ class MovieDetailViewController: UIViewController {
         guard let stringImage = movieCell.poster_path else {return}
         let Image = "\(URL_IMG)\(stringImage)"
         detailImage.download(image: Image )
-        
-        titulo = movieCell.title
-        descricao = movieCell.overview
-        imagem = movieCell.poster_path
-        dataMovie = movieCell.release_date
         
         status = false
     }
@@ -109,33 +100,39 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+     //MARK: - COREDATA SAVE
     @IBAction func favoriteBtnPressed(_ sender: Any) {
-        self.save { (complete) in
-            if complete {
-                favoriteBtn.isSelected = true
-                EmptyTextField(text: "Adicionado", message: "Este filme foi adicionado aos favoritos!")
-            }
+        guard let movie = movieCell else {
+            return
         }
+        let manegerCoreData = ManegerCoreData()
+        manegerCoreData.save(bindToMovieEntity(movie), successCompletion: {
+            self.favoriteBtn.isSelected = true
+            self.movieCell?.isFavorite = true
+            print(self.movieCell?.isFavorite)
+            self.EmptyTextField(text: "Adicionado", message: "Este filme foi adicionado aos favoritos!")
+        }) { (error) in
+            self.favoriteBtn.isSelected = false
+            self.EmptyTextField(text: "Errroouuu", message: "Este filme não foi adicionado aos favoritos!")
+        }
+        
     }
     
-    //MARK: - COREDATA SAVE
-    func save(completion: (_ finished: Bool) -> ()) {
-        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
-        let movie = MovieEntity(context: managedContext)
+    private func bindToMovieEntity(_ movie: Result) -> MovieEntity {
+        let movie = MovieEntity(context: getCoreDataContext())
         
-        movie.movieDescription = descricao
-        movie.movieTitle = titulo
-        movie.movieDate = dataMovie
-        movie.movieImage = imagem
+        movie.movieDescription = movieCell?.overview
+        movie.movieTitle = movieCell?.title
+        movie.movieDate = movieCell?.release_date
+        movie.movieImage = movieCell?.poster_path
+        movie.movieIsFavorite = true
         
-        do {
-            try managedContext.save()
-            print("Successfully saved data.")
-            completion(true)
-        } catch {
-            debugPrint("Could not save: \(error.localizedDescription)")
-            EmptyTextField(text: "Pay Atention", message: error.localizedDescription)
-            completion(false)
-        }
+        return movie
     }
+    
+    func getCoreDataContext() -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
 }

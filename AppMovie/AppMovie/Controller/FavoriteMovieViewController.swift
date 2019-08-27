@@ -45,35 +45,25 @@ class FavoriteMovieViewController: UIViewController {
         favoriteTableView.isHidden = true
     }
     
+    //MARK - CALL FETCH BY COREDATA
     func fetchCoreDataObjects() {
-        self.fetch { (complete) in
-            if complete {
-                activityIndicator.stopAnimating()
-                activityIndicator.isHidden = true
-                if movies.count >= 1 {
-                    favoriteTableView.isHidden = false
-                } else {
-                    favoriteTableView.isHidden = true
-                }
+        let manegerCoreData = ManegerCoreData()
+        manegerCoreData.fetch(MovieEntity.self, successCompletion: { (movieEntity) in
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            self.movies = movieEntity
+            if self.movies.count >= 1 {
+                self.favoriteTableView.isHidden = false
+            } else {
+                self.favoriteTableView.isHidden = true
             }
+            
+        }) { (error) in
+            print("Could't load favorite movies.")
+            self.favoriteTableView.isHidden = true
         }
     }
-    
-    func fetch(completion: (_ complete: Bool) -> ()) {
-        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
-        
-        let fetchRequest = NSFetchRequest<MovieEntity>(entityName: "MovieEntity")
-        
-        do {
-            movies = try managedContext.fetch(fetchRequest)
-            print("Successfully fetched data.")
-            completion(true)
-        } catch {
-            debugPrint("Could not fetch: \(error.localizedDescription)")
-            completion(false)
-        }
-    }
-    
+
     //MARK - SETUP TABLEVIEW
     func setupTableView(with movie: [MovieEntity]) {
         tableViewDataSource = FavoriteMovieTableViewDataSource(movies: movie, tableView: favoriteTableView)
@@ -102,8 +92,6 @@ class FavoriteMovieViewController: UIViewController {
             }
         }
     }
-    
-
     
     @IBAction func moviesBtnPressed(_ sender: Any) {
         dismissDetail()
