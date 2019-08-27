@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,9 @@
 		8EA5E99523149648008F22FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EA5E99423149648008F22FE /* Assets.xcassets */; };
 		8EA5E99823149648008F22FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA5E99623149648008F22FE /* LaunchScreen.storyboard */; };
 		8EA5E9A323149649008F22FE /* MovieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5E9A223149649008F22FE /* MovieAppTests.swift */; };
+		8EE5F0902315A00800DDF311 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE5F08E2315A00800DDF311 /* HomeVC.swift */; };
+		8EE5F0912315A00800DDF311 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EE5F08F2315A00800DDF311 /* HomeVC.xib */; };
+		8EE5F0932315A6A500DDF311 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE5F0922315A6A500DDF311 /* Movie.swift */; };
 		E9E367EF772A487A26130DFB /* Pods_MovieAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134BD120144E3639DE71CF66 /* Pods_MovieAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,9 @@
 		8EA5E99E23149649008F22FE /* MovieAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA5E9A223149649008F22FE /* MovieAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppTests.swift; sourceTree = "<group>"; };
 		8EA5E9A423149649008F22FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EE5F08E2315A00800DDF311 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		8EE5F08F2315A00800DDF311 /* HomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
+		8EE5F0922315A6A500DDF311 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		CE78BD841492F6E151A7A082 /* Pods-MovieAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MovieAppTests/Pods-MovieAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2438251E6425A4B69FF8EE0 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E630D9E2C894F6709F6C6BE0 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,7 +82,6 @@
 				CE78BD841492F6E151A7A082 /* Pods-MovieAppTests.debug.xcconfig */,
 				039CC0038483A3DA85686648 /* Pods-MovieAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -138,6 +143,7 @@
 		8EA5E9AF2314A5C1008F22FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8EE5F0922315A6A500DDF311 /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,6 +166,8 @@
 		8EA5E9B22314A621008F22FE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8EE5F08E2315A00800DDF311 /* HomeVC.swift */,
+				8EE5F08F2315A00800DDF311 /* HomeVC.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -249,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA5E99823149648008F22FE /* LaunchScreen.storyboard in Resources */,
+				8EE5F0912315A00800DDF311 /* HomeVC.xib in Resources */,
 				8EA5E99523149648008F22FE /* Assets.xcassets in Resources */,
 				8EA5E99023149645008F22FE /* Main.storyboard in Resources */,
 			);
@@ -333,8 +342,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA5E98D23149645008F22FE /* ViewController.swift in Sources */,
+				8EE5F0902315A00800DDF311 /* HomeVC.swift in Sources */,
 				8EA5E98B23149645008F22FE /* AppDelegate.swift in Sources */,
 				8EA5E99323149645008F22FE /* MovieApp.xcdatamodeld in Sources */,
+				8EE5F0932315A6A500DDF311 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
