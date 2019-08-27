@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MovieRequest{
+class MovieRequest: Codable{
     
     var page: Int
     var totalResult: Int
