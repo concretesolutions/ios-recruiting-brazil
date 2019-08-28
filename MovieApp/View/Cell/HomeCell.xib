@@ -26,19 +26,26 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5e-KC-dko">
-                        <rect key="frame" x="8" y="190" width="102" height="39"/>
+                        <rect key="frame" x="8" y="190" width="42" height="39"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoI-QH-NOq">
+                        <rect key="frame" x="58" y="192" width="50" height="35"/>
+                        <state key="normal" image="favorite_empty_icon"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="s5e-KC-dko" firstAttribute="top" secondItem="ved-1R-URt" secondAttribute="bottom" constant="5" id="0Wf-sp-pjJ"/>
+                <constraint firstAttribute="trailing" secondItem="EoI-QH-NOq" secondAttribute="trailing" constant="10" id="2Gq-SG-cF4"/>
                 <constraint firstItem="ved-1R-URt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="AiZ-qO-ac3"/>
                 <constraint firstAttribute="bottom" secondItem="s5e-KC-dko" secondAttribute="bottom" constant="8" id="EfM-Tn-WSi"/>
+                <constraint firstAttribute="bottom" secondItem="EoI-QH-NOq" secondAttribute="bottom" constant="10" id="Rxg-HR-aQ8"/>
+                <constraint firstItem="EoI-QH-NOq" firstAttribute="leading" secondItem="s5e-KC-dko" secondAttribute="trailing" constant="8" id="TWJ-jH-hR5"/>
                 <constraint firstItem="s5e-KC-dko" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="XsG-ML-abK"/>
-                <constraint firstAttribute="trailing" secondItem="s5e-KC-dko" secondAttribute="trailing" constant="8" id="gbu-0b-0S3"/>
+                <constraint firstItem="EoI-QH-NOq" firstAttribute="centerY" secondItem="s5e-KC-dko" secondAttribute="centerY" id="hpc-Ir-j1s"/>
                 <constraint firstAttribute="trailing" secondItem="ved-1R-URt" secondAttribute="trailing" id="qW6-3e-3pR"/>
                 <constraint firstItem="ved-1R-URt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="r2j-Kj-T1e"/>
             </constraints>
@@ -51,4 +58,7 @@
             <point key="canvasLocation" x="218.84057971014494" y="82.03125"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+    </resources>
 </document>

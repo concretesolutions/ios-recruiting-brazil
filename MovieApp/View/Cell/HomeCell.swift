@@ -21,6 +21,7 @@ class HomeCell: UICollectionViewCell {
     
     func setCell(movie: Movie){
     
+        
         topoIv.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath)"), completed: nil)
         titleLb.text = movie.title
         
