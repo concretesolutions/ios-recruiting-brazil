@@ -43,28 +43,18 @@ class MoviesServices: NSObject {
     //    }
   }
   
-  
-  
-  
-  //  func getGenreMovies(data: MovieDetailViewController) {
-  //
-  //    let urlGenreMovies =  API.API_PATH_GENRE
-  //
-  //    Alamofire.request(urlGenreMovies).validate().responseJSON { response in
-  //      let json = response.result.value as! [String : Any]
-  //      guard let genre = Mapper<GenreData>().map(JSON: json) else { return }
-  //      data.genreList.append(contentsOf: genre.genres)
-  //
-  //    }
-  //  }
+  func getGenreMovies(data: MovieDetailViewController) {
+    
+    let urlGenreMovies =  API.API_PATH_GENRE
+    
+    Alamofire.request(urlGenreMovies).validate().responseJSON { response in
+      let json = response.result.value as! [String : Any]
+      guard let genre = Mapper<GenreData>().map(JSON: json) else { return }
+      data.genreList.append(contentsOf: genre.genres)
+    }
+  }
   
 }
 
-
-//if error == nil {
-//  completion?(nil, nil, cache)
-//} else {
-//  completion?(nil, error, cache)
-//}
 
 

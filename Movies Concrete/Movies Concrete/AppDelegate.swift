@@ -12,9 +12,32 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  var movieTabNavigationController : UINavigationController!
+  var favoriteTabNavigationControoller : UINavigationController!
+  
+  let navigation = UINavigationController()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.makeKeyAndVisible()
+    
+    let tabBarController = UITabBarController()
+    
+    movieTabNavigationController = UINavigationController.init(rootViewController: PopularMoviesViewController())
+    movieTabNavigationController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
+    
+    favoriteTabNavigationControoller = UINavigationController.init(rootViewController: FavoritesMoviesViewController())
+    favoriteTabNavigationControoller.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon"), tag: 0)
 
+    tabBarController.viewControllers = [movieTabNavigationController, favoriteTabNavigationControoller]
+    
+    UINavigationBar.appearance().barTintColor = Colors.colorDetail
+    UINavigationBar.appearance().tintColor = Colors.colorBackground
+    UITabBar.appearance().tintColor = Colors.colorBackground
+    UITabBar.appearance().barTintColor = Colors.colorDetail
+    
+    self.window?.rootViewController = tabBarController
     
     return true
   }

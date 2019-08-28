@@ -19,19 +19,18 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var favoriteAction: UIButton!
   
   var movie: Movie!
-  
   weak var delegate : MoviesViewControllerDelegate!
   
+
   @IBAction func addFavorite(_ sender: Any) {
     if favoriteAction.isSelected {
       favoriteAction.setImage(UIImage(named: "heart_empty"), for: .normal)
       favoriteAction.isSelected = false
+      self.delegate?.removeFavorite(movie: movie)
     } else {
       favoriteAction.setImage(UIImage(named: "heart_full"), for: .normal)
       favoriteAction.isSelected = true
+      self.delegate?.addFavorite(movie: movie)
     }
-    self.delegate?.addFavorite(movie: movie)
   }
-  
-
 }

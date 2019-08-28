@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class Genre: Mappable {
+class Genre: Mappable, Codable {
   
   var id: Int?
   var name: String?

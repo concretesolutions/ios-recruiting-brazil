@@ -10,22 +10,21 @@ import UIKit
 import Kingfisher
 
 protocol MovieDetailViewControllerDelegate: class {
-  func didTapInfo()
-  func showRepoDetail(url: String)
+  func addFavorite(movie: Movie)
+  func removeFavorite(movie: Movie)
 }
 
 class MovieDetailViewController: UIViewController {
   
   // MARK: Members
-  
-  var name = ""
-  var date = ""
-  var plot = ""
-  var url = ""
+ 
+  var movie: Movie!
   var type: [Int]!
   var genreList = [Genre]()
   var movieGenre = [String]()
   var request = MoviesServices()
+  let coverPath = API.API_PATH_MOVIES_IMAGE
+  
   weak var delegate: MovieDetailViewControllerDelegate?
   
   @IBOutlet weak var cover: UIImageView!
@@ -40,27 +39,23 @@ class MovieDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    getGenre()
-    fillDetails()
+    titleMovie.text = movie.title
+    overview.text = movie.overview
     
-  }
-  
-  // MARK: Functions
-  
-  func getGenre() {
+    type = movie.genreList
     movieGenre = GenreMapper.getGenreData(genresId: type)
-  }
-
-  func fillDetails() {
-    titleMovie.text = name
-    yearMovie.text = date
-    overview.text = plot
     genre.text = movieGenre.joined(separator: ", ")
     
-    if let urlCover = URL(string: url) {
+    let year = movie.releaseDate!
+    yearMovie.text = String(year.prefix(4))
+    
+    let coverUrl = movie.posterPath
+    let fullUrl = coverPath + coverUrl!
+    if let urlCover = URL(string: fullUrl) {
       cover.kf.setImage(with: urlCover)
     }
   }
+  
   
   //  MARK: Actions
   
@@ -68,13 +63,30 @@ class MovieDetailViewController: UIViewController {
     if favoriteAction.isSelected {
       favoriteAction.setImage(UIImage(named: "heart_empty"), for: .normal)
       favoriteAction.isSelected = false
+      self.delegate?.removeFavorite(movie: movie)
     } else {
       favoriteAction.setImage(UIImage(named: "heart_full"), for: .normal)
       favoriteAction.isSelected = true
+      self.delegate?.addFavorite(movie: movie)
     }
   }
   
   @IBAction func backButton(_ sender: Any) {
     self.dismiss(animated: false, completion: nil)
+  }
+}
+
+/*
+ * Delegates
+ */
+extension MovieDetailViewController: MovieDetailViewControllerDelegate {
+  func addFavorite(movie: Movie) {
+    FavoriteMovie.shared.addFavorite(movie: movie)
+    print("add favorite")
+  }
+  
+  func removeFavorite(movie: Movie) {
+    //    print("removeu")
+    //    print(SessionHelper.getFavorites())
   }
 }
