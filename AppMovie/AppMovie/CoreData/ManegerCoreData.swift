@@ -45,6 +45,37 @@ class ManegerCoreData {
         return nil
     }
     
+//    func isFavorite(id: String) -> Bool {
+//    let fetchRequest = NSFetchRequest<MovieEntity>(entityName: "MovieEntity")
+//    do {
+//    
+//    let list = try context.fetch(fetchRequest)
+//        if (id == list.m)
+//    return list
+//    } catch {
+//    print("error 321")
+//    }
+//    return nil
+//    }
+    
+    //MARK - Filter the database by id
+    func checkFavoriteMovie(movieId: String) -> Bool{
+        let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+        print("MovieIdCheck\(movieId)")
+        let predicate = NSPredicate(format: "moveId == %@", movieId)
+        
+        request.predicate = predicate
+        
+        var movie = [MovieEntity]()
+        
+        do{
+            movie = try context.fetch(request)
+        }catch{
+            print("Error fetching data from contect")
+        }
+        return !movie.isEmpty
+    }
+    
     func fetchObj(completion: (_ complete: Bool) -> ()) {
         //guard let managedContext = context else { return }
         
@@ -74,8 +105,6 @@ class ManegerCoreData {
         do {
             let movieEntity = try context.fetch(fetchRequest)
             print("Successfully fetched data.")
-            print(movieEntity)
-            print("Nova fetch")
             if movieEntity.count > 0 {
                 successCompletion(movieEntity)
                 return

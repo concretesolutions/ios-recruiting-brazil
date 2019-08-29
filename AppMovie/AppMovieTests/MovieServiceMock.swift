@@ -8,6 +8,9 @@
 @testable import AppMovie
 
 class MovieServiceMock: MovieService {
+    func getMoviesByQuery(query: String, completionHandler: @escaping ([Result]) -> Void) {
+    }
+    
     
     let movies: [Result]
     private let jsonHelper: JsonHelper

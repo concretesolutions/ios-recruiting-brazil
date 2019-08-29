@@ -55,6 +55,10 @@ class MovieDetailViewController: UIViewController {
         detailImage.download(image: Image )
         
         status = false
+        
+        if (movieCell.isFavorite == true){
+            self.favoriteBtn.isSelected = true
+        }
     }
     
     func configureGenersId(){
@@ -102,25 +106,29 @@ class MovieDetailViewController: UIViewController {
     
      //MARK: - COREDATA SAVE
     @IBAction func favoriteBtnPressed(_ sender: Any) {
-        guard let movie = movieCell else {
-            return
-        }
+        guard let movie = movieCell else {return}
         let manegerCoreData = ManegerCoreData()
-        manegerCoreData.save(bindToMovieEntity(movie), successCompletion: {
-            self.favoriteBtn.isSelected = true
-            self.movieCell?.isFavorite = true
-            print(self.movieCell?.isFavorite)
-            self.EmptyTextField(text: "Adicionado", message: "Este filme foi adicionado aos favoritos!")
-        }) { (error) in
-            self.favoriteBtn.isSelected = false
-            self.EmptyTextField(text: "Errroouuu", message: "Este filme não foi adicionado aos favoritos!")
+        let predicate = NSPredicate(format: "id = %@", argumentArray: [movieCell?.id])
+        print(movieCell?.isFavorite)
+        if (movieCell?.isFavorite != true){
+            manegerCoreData.save(bindToMovieEntity(movie), successCompletion: {
+                self.favoriteBtn.isSelected = true
+                self.movieCell?.isFavorite = true
+                print(self.movieCell?.isFavorite)
+                print(self.movieCell?.id)
+                self.EmptyTextField(text: "Adicionado", message: "Este filme foi adicionado aos favoritos!")
+            }) { (error) in
+                self.favoriteBtn.isSelected = false
+                self.EmptyTextField(text: "Errroouuu", message: "Este filme não foi adicionado aos favoritos!")
+            }
         }
+        else { self.EmptyTextField(text: "Ja adicionado", message: "Este filme já está adicionado aos favoritos!") }
         
     }
     
     private func bindToMovieEntity(_ movie: Result) -> MovieEntity {
         let movie = MovieEntity(context: getCoreDataContext())
-        
+        movie.moveId = movieCell?.id ?? 0
         movie.movieDescription = movieCell?.overview
         movie.movieTitle = movieCell?.title
         movie.movieDate = movieCell?.release_date

@@ -30,9 +30,15 @@ class MovieSearchViewControllerSpec: QuickSpec {
                  sut.setupView(service: MovieServiceMock()) */
                 
                 _ = sut.view
+                sut.beginAppearanceTransition(true, animated: false)
+                //                sut.loadView()
                 print(sut.movie.count)
                 
             }
+            
+//            describe("configureViewComponents", {
+//                
+//            })
             
             it("should have a valid instance") {
                 expect(sut).toNot(beNil())
@@ -44,7 +50,7 @@ class MovieSearchViewControllerSpec: QuickSpec {
             
             describe("MoviesSearchViewController UI") {
                 it("should have the expected calling ui") {
-                    expect(sut.view) == snapshot()
+                    expect(sut.view) == recordSnapshot()
                 } }
         }
     }

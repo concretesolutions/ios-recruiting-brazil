@@ -29,5 +29,22 @@ class  CellMovie: UICollectionViewCell, NibReusable {
             movieImage.kf.indicatorType = .activity
             movieImage.kf.setImage(with: image)
         }
+        
+        if (movie.isFavorite == true) {
+            favoriteImage.image = UIImage(named:"favorite_full_icon")
+        } else {
+            favoriteImage.image = UIImage(named:"favorite_gray_icon")
+        }
+        
+    }
+    
+    public func setFavoriteButtonSelection(_ isSelected:Bool) {
+        // set button image
+        print(isSelected)
+        if (isSelected == true) {
+            favoriteImage.image = UIImage(named:"favorite_full_icon")
+        } else {
+            favoriteImage.image = UIImage(named:"favorite_gray_icon")
+        }
     }
 }

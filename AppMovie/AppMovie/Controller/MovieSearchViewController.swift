@@ -31,13 +31,13 @@ class MovieSearchViewController: UIViewController {
     //Mark: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        api()
         configureViewComponents()
         setupSearchBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        api()
+        self.setupCollectionView(with: self.movie)
     }
     
     /*SetupView Inject Dependence(MOCKS...)
@@ -65,12 +65,28 @@ class MovieSearchViewController: UIViewController {
     
     // MARK: - SETUP COLLECTIONVIEW
     func setupCollectionView(with movies: [Result]){
-        collectionViewDataSource = MovieSearchCollectionViewDataSource(movies: movies, collectionView: movieCollection, delegate: self)
-        collectionViewDelegate = MovieSearchCollectionViewDelegate(movies: movies, delegate: self)
+        let checkedMovies = checkIsFavoriteMovie(movies: movies)
+        collectionViewDataSource = MovieSearchCollectionViewDataSource(movies: checkedMovies, collectionView: movieCollection, delegate: self)
+        collectionViewDelegate = MovieSearchCollectionViewDelegate(movies: checkedMovies, delegate: self)
         
         movieCollection.dataSource = collectionViewDataSource
         movieCollection.delegate = collectionViewDelegate
         movieCollection.reloadData()
+    }
+    
+    // MARK - Verify FROM  Coredata  IS FAVORITE
+    func checkIsFavoriteMovie(movies: [Result]) -> [Result] {
+        /// favoriteMovies.removeAll()/
+        var checkedMovies = movies
+        let manegerCoreData = ManegerCoreData()
+        
+        for i in 0..<checkedMovies.count {
+            let isFavorite = manegerCoreData.checkFavoriteMovie(movieId: "\(checkedMovies[i].id)")
+            if (isFavorite == true){
+                checkedMovies[i].setIsFavorite()}
+            print("ValidaCore\(isFavorite)")
+        }
+        return checkedMovies
     }
     
     // MARK: - API Services
@@ -88,11 +104,10 @@ class MovieSearchViewController: UIViewController {
         service.getMoviesByQuery(query: query){ [weak self] movies in
             guard let self = self else { return }
             self.isLoading = false
-            print(movies)
             DispatchQueue.main.async {
                 self.filteredMovie += movies
                 if(movies.isEmpty){
-                    self.EmptyTextField(text: "Not Found", message: "Filme não encontrado na lista de favoritos")
+                    self.EmptyTextField(text: "Not Found", message: "Filme não encontrado na lista de filmes Populares")
                      self.setupCollectionView(with: self.movie)
                     return
                 }
