@@ -18,9 +18,10 @@ struct API {
 }
 
 struct Colors {
-  static let colorDetail = #colorLiteral(red: 0.9767984748, green: 0.8299098611, blue: 0.3731835485, alpha: 1)
-  static let colorBackground = #colorLiteral(red: 0.161847204, green: 0.1613378525, blue: 0.1622509658, alpha: 1)
+  static let colorDetail = #colorLiteral(red: 0.1098039216, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
+  static let colorSmallDetail = #colorLiteral(red: 0.9767984748, green: 0.8299098611, blue: 0.3731835485, alpha: 1)
+  static let colorBackground = #colorLiteral(red: 0.1622036099, green: 0.1622084081, blue: 0.1622058451, alpha: 1)
   static let colorWhite = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-  static let colorRed = #colorLiteral(red: 0.8588235294, green: 0.1803921569, blue: 0.1803921569, alpha: 1)
+  static let colorGray = #colorLiteral(red: 0.08143205196, green: 0.08118005842, blue: 0.08163464814, alpha: 1)
 }
 

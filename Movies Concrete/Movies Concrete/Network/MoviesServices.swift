@@ -12,7 +12,7 @@ import ObjectMapper
 
 class MoviesServices: NSObject {
   
-  func getPopularMovies(data: MoviesViewController, collectionView: UICollectionView, page: Int) {
+  func getPopularMovies(data: PopularMoviesViewController, collectionView: UICollectionView, page: Int) {
     
     let nextPage = page
     let urlPopularMovies =  API.API_PATH_MOVIES + String(nextPage)
@@ -26,35 +26,27 @@ class MoviesServices: NSObject {
         data.total_page = movies.total_pages
         data.moviesList.append(contentsOf: movies.results)
         collectionView.reloadData()
-        
       case .failure(let error):
         print(error)
-        
       }
     })
-    
-    //    Alamofire.request(urlPopularMovies).validate().responseJSON { response in
-    //      let json = response.result.value as! [String : Any]
-    //      guard let movies = Mapper<MoviesData>().map(JSON: json) else { return }
-    //      data.currentPage = movies.page
-    //      data.total_page = movies.total_pages
-    //      data.moviesList.append(contentsOf: movies.results)
-    //      collectionView.reloadData()
-    //    }
   }
   
-  func getGenreMovies(data: MovieDetailViewController) {
+  func getGenreMovies() {
     
-    let urlGenreMovies =  API.API_PATH_GENRE
+    let urlGenreMovies = API.API_PATH_GENRE
     
-    Alamofire.request(urlGenreMovies).validate().responseJSON { response in
-      let json = response.result.value as! [String : Any]
-      guard let genre = Mapper<GenreData>().map(JSON: json) else { return }
-      data.genreList.append(contentsOf: genre.genres)
-    }
+    Alamofire.request(urlGenreMovies).validate(statusCode: 200..<299).responseJSON(completionHandler: { response in
+      switch response.result {
+      case  .success(_):
+        let json = response.result.value as! [String : Any]
+        guard let genre = Mapper<GenreData>().map(JSON: json) else { return }
+        SessionHelper.saveGenres(genres: genre.genres)
+      case .failure(let error):
+        print(error)
+      }
+    })
   }
-  
 }
-
 
 

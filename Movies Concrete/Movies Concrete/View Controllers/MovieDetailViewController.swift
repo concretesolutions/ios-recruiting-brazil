@@ -9,23 +9,19 @@
 import UIKit
 import Kingfisher
 
-protocol MovieDetailViewControllerDelegate: class {
-  func addFavorite(movie: Movie)
-  func removeFavorite(movie: Movie)
-}
-
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: TMViewController {
   
   // MARK: Members
- 
+  
   var movie: Movie!
   var type: [Int]!
+  var genres = [Genre]()
   var genreList = [Genre]()
   var movieGenre = [String]()
   var request = MoviesServices()
   let coverPath = API.API_PATH_MOVIES_IMAGE
   
-  weak var delegate: MovieDetailViewControllerDelegate?
+  private let movieDetailPresenter = DetailPresenter()
   
   @IBOutlet weak var cover: UIImageView!
   @IBOutlet weak var titleMovie: UILabel!
@@ -39,12 +35,47 @@ class MovieDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.navigationItem.title = "Detail"
+    self.navigationController?.navigationBar.tintColor = UIColor.white
+    
+    self.movieDetailPresenter.attachView(self)
+    
+    fillDetails()
+    
+  }
+  
+  //  MARK: Functions
+  
+  //  present
+  func mapGenres() -> [String] {
+    var genresName = [String]()
+    self.movieDetailPresenter.getGenresMovies()
+    genres = SessionHelper.getGenres()
+    
+    for genres in genres {
+      for id in type {
+        if id == genres.id {
+          genresName.append(genres.name!)
+        }
+      }
+    }
+    return genresName
+  }
+  
+  func fillDetails() {
+    
     titleMovie.text = movie.title
     overview.text = movie.overview
     
     type = movie.genreList
-    movieGenre = GenreMapper.getGenreData(genresId: type)
+    movieGenre = mapGenres()
     genre.text = movieGenre.joined(separator: ", ")
+    
+    if SessionHelper.isFavorite(id: movie.id) {
+      favoriteAction.setImage(UIImage(named: "heart_full"), for: .normal)
+    } else {
+      favoriteAction.setImage(UIImage(named: "heart_empty"), for: .normal)
+    }
     
     let year = movie.releaseDate!
     yearMovie.text = String(year.prefix(4))
@@ -56,37 +87,30 @@ class MovieDetailViewController: UIViewController {
     }
   }
   
-  
   //  MARK: Actions
   
-  @IBAction func addFavorite(_ sender: Any) {
+  @IBAction func favoriteAction(_ sender: Any) {
     if favoriteAction.isSelected {
       favoriteAction.setImage(UIImage(named: "heart_empty"), for: .normal)
       favoriteAction.isSelected = false
-      self.delegate?.removeFavorite(movie: movie)
+      //      SessionHelper.removeFavoriteMovie(id: movie.id)
     } else {
       favoriteAction.setImage(UIImage(named: "heart_full"), for: .normal)
       favoriteAction.isSelected = true
-      self.delegate?.addFavorite(movie: movie)
+      SessionHelper.addFavoriteMovie(movie: movie)
     }
-  }
-  
-  @IBAction func backButton(_ sender: Any) {
-    self.dismiss(animated: false, completion: nil)
   }
 }
 
+// MARK: Extensions
+
 /*
- * Delegates
+ * Protocol
  */
-extension MovieDetailViewController: MovieDetailViewControllerDelegate {
-  func addFavorite(movie: Movie) {
-    FavoriteMovie.shared.addFavorite(movie: movie)
-    print("add favorite")
+
+extension MovieDetailViewController: DetailProtocol {
+  func showError(with message: String) {
+    showErrorMessage(text: message)
   }
   
-  func removeFavorite(movie: Movie) {
-    //    print("removeu")
-    //    print(SessionHelper.getFavorites())
-  }
 }

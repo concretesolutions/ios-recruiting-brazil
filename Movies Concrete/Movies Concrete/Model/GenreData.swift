@@ -17,11 +17,9 @@ class GenreData: Mappable {
   }
   
   init() {
-    
   }
   
   func mapping(map: Map) {
     genres <- map["genres"]
   }
-  
 }

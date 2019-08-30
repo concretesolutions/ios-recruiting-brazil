@@ -11,11 +11,10 @@ import ObjectMapper
 
 class Genre: Mappable, Codable {
   
-  var id: Int?
-  var name: String?
+  var id: Int!
+  var name: String!
   
   required init?(map: Map){
-    
   }
   
   init(id: Int, name: String ) {
@@ -28,5 +27,4 @@ class Genre: Mappable, Codable {
     id <- map["id"]
     name <- map["name"]
   }
-  
 }

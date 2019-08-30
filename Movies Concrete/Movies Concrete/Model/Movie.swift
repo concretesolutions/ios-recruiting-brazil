@@ -10,34 +10,34 @@ import Foundation
 import ObjectMapper
 
 class Movie: Mappable, Codable {
-
-  var title: String?
+  var id: Int!
+  var title: String!
   var posterPath: String?
   var overview: String?
   var releaseDate: String?
-  var genreList: [Int]!
-  var isFavorite: Bool?
+  var genreList: [Int]?
+  var genresName: [String]!
   
   required init?(map: Map){
     
   }
   
-  init(title: String, posterPath: String, overview: String, releaseDate: String, genreList: [Int], isFavorite: Bool) {
+  init(title: String, posterPath: String, overview: String, releaseDate: String, genreList: [Int], genresName: [String], id: Int) {
+    self.id = id
     self.title = title
     self.posterPath = posterPath
     self.overview = overview
     self.releaseDate = releaseDate
     self.genreList = genreList
-    self.isFavorite = isFavorite
+    self.genresName = genresName
   }
   
   func mapping(map: Map) {
-    
+    id <- map["id"]
     title <- map["title"]
     posterPath <- map["poster_path"]
     overview <- map["overview"]
     releaseDate <- map["release_date"]
     genreList <- map["genre_ids"]
   }
-  
 }

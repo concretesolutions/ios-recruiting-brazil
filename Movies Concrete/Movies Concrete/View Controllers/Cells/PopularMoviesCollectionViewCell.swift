@@ -8,10 +8,6 @@
 
 import UIKit
 
-//protocol MoviesViewControllerDelegate: class {
-//  func addFavorite()
-//}
-
 class PopularMoviesCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var imgMovie: UIImageView!
@@ -19,9 +15,8 @@ class PopularMoviesCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var favoriteAction: UIButton!
   
   var movie: Movie!
-  weak var delegate : MoviesViewControllerDelegate!
+  weak var delegate : PopularMoviesViewControllerDelegate!
   
-
   @IBAction func addFavorite(_ sender: Any) {
     if favoriteAction.isSelected {
       favoriteAction.setImage(UIImage(named: "heart_empty"), for: .normal)

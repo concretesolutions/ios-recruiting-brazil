@@ -20,7 +20,6 @@ class MoviesData: Mappable {
   }
   
   init() {
-    
   }
   
   func mapping(map: Map) {
@@ -29,7 +28,6 @@ class MoviesData: Mappable {
     total_results <- map["total_results"]
     total_pages <- map["total_pages"]
   }
-  
 }
 
 
