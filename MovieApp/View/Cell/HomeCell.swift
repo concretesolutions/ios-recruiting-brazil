@@ -9,10 +9,20 @@
 import UIKit
 import SDWebImage
 
+
+protocol HomeCellDelegate {
+    func onClickFavoriteCell(index: Int)
+}
+
 class HomeCell: UICollectionViewCell {
     
     @IBOutlet weak var topoIv: UIImageView!
     @IBOutlet weak var titleLb: UILabel!
+    
+    
+    var cellDelegate: HomeCellDelegate?
+    var index: IndexPath?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,5 +36,10 @@ class HomeCell: UICollectionViewCell {
         titleLb.text = movie.title
         
     }
+
+    @IBAction func bottonFavoriteTapped(_ sender: Any) {
+        cellDelegate?.onClickFavoriteCell(index: (index?.item)!)
+    }
+
 
 }

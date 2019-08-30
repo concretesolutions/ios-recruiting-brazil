@@ -29,5 +29,24 @@ class MovieController{
         
     }
     
+    func getLocalMovie() -> MovieController? {
+        
+        if let path = Bundle.main.path(forResource: "movie", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                
+                let movie = try? JSONDecoder().decode(MovieRequest.self, from: data)
+                
+                self.arrayMovieDB = movie?.results ?? []
+                
+                return self
+                
+            } catch {
+                return nil
+            }
+        }
+        return nil
+    }
+    
     
 }

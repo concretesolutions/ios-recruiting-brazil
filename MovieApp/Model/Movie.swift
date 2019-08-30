@@ -20,8 +20,9 @@ class Movie: Codable{
     var backdropPath: String
     var adult: Bool
     var overview: String
+    var releaseDate: String
     
-    init(voteCount: Int,idMovie: Int,voteAverage: Float,title: String,popularity:Float,posterPath:String,genreIds:[Int],backdropPath:String,adult:Bool,overview:String) {
+    init(voteCount: Int,idMovie: Int,voteAverage: Float,title: String,popularity:Float,posterPath:String,genreIds:[Int],backdropPath:String,adult:Bool,overview:String,releaseDate: String) {
         
         self.voteCount = voteCount
         self.idMovie = idMovie
@@ -33,6 +34,7 @@ class Movie: Codable{
         self.backdropPath = backdropPath
         self.adult = adult
         self.overview = overview
+        self.releaseDate = releaseDate
     }
     
     enum CodingKeys: String, CodingKey {
@@ -44,6 +46,7 @@ class Movie: Codable{
         case genreIds = "genre_ids"
         case backdropPath = "backdrop_path"
         case adult, overview
+        case releaseDate = "release_date"
     }
     
 }

@@ -6,11 +6,14 @@ target 'MovieApp' do
   use_frameworks!
 
   # Pods for MovieApp
+  pod 'Alamofire'
+  pod 'SDWebImage'
 
   target 'MovieAppTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Quick'
+    pod 'Nimble'
+    pod 'Nimble-Snapshots'
   end
-	pod 'Alamofire'
-  	pod 'SDWebImage'
 end
