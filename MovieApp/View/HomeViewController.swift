@@ -15,24 +15,39 @@ class HomeViewController: UIViewController {
     var selected:Int = 0
     var datamanager = DataManager()
     var controller = MovieController()
+    var favoriteArray: [MovieFavorite] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.register(UINib(nibName: "HomeCell", bundle: nil), forCellWithReuseIdentifier: "HomeCell")
         
         controller.getMoviesAPI { (sucesso) in
             if sucesso {
                 self.collectionView.reloadData()
-                print("Sucesso")
             }else{
                 print("Deu ruim")
             }
         }
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        datamanager.loadData { (arrayMovie) in
+            if arrayMovie!.count > 0{
+                self.favoriteArray = arrayMovie!
+                self.collectionView.reloadData()
+            }else{
+                print("Ruim")
+            }
+        }
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailSegue"{
@@ -42,7 +57,6 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension HomeViewController: UICollectionViewDataSource{
@@ -52,7 +66,12 @@ extension HomeViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as? HomeCell{
-           cell.setCell(movie: controller.arrayMovieDB[indexPath.item])
+            if favoriteArray.contains(where: {$0.id == controller.arrayMovieDB[indexPath.item].idMovie}) {
+                cell.setCell(movie: controller.arrayMovieDB[indexPath.item], isFavorite: true)
+            } else {
+                cell.setCell(movie: controller.arrayMovieDB[indexPath.item], isFavorite: false)
+            }
+
            cell.cellDelegate = self
            cell.index = indexPath
            return cell
@@ -82,13 +101,23 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout{
     
 }
 extension HomeViewController: HomeCellDelegate{
-    func onClickFavoriteCell(index: Int) {
+    func onClickFavoriteCell(index: Int, isFavorite: Bool) {
         print("\(index) foi clicado")
-        datamanager.saveInformation(movie: controller.arrayMovieDB[index]) { (sucess) in
-            if sucess{
-                print("Sucesso")
-            }else{
-                print("Sorry")
+        if isFavorite {
+            datamanager.saveInformation(movie: controller.arrayMovieDB[index]) { (sucess) in
+                if sucess{
+                    print("Sucesso")
+                }else{
+                    print("Sorry")
+                }
+            }
+        } else {
+            datamanager.deletePerson(movie: controller.arrayMovieDB[index]) { (sucess) in
+                if sucess {
+                    print("sdad")
+                } else {
+                    print("deu ruim")
+                }
             }
         }
     }

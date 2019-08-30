@@ -10,19 +10,19 @@ import Foundation
 
 class Movie: Codable{
     
-    var voteCount: Int
+    var voteCount: Int?
     var idMovie: Int
-    var voteAverage: Float
+    var voteAverage: Float?
     var title: String
-    var popularity: Float
+    var popularity: Float?
     var posterPath: String
-    var genreIds: [Int]
-    var backdropPath: String
-    var adult: Bool
+    var genreIds: [Int]?
+    var backdropPath: String?
+    var adult: Bool?
     var overview: String
     var releaseDate: String
     
-    init(voteCount: Int,idMovie: Int,voteAverage: Float,title: String,popularity:Float,posterPath:String,genreIds:[Int],backdropPath:String,adult:Bool,overview:String,releaseDate: String) {
+    init(voteCount: Int? = nil, idMovie: Int,voteAverage: Float? = nil,title: String,popularity:Float? = nil,posterPath:String,genreIds:[Int]? = nil,backdropPath:String? = nil,adult:Bool? = nil,overview:String,releaseDate: String) {
         
         self.voteCount = voteCount
         self.idMovie = idMovie

@@ -22,12 +22,13 @@ class DataManager: NSObject {
     }()
     
     
-    func loadData( completion: ([NSManagedObject]?)->Void ) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieApp")
+    func loadData( completion: ([MovieFavorite]?)->Void ) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieFavorite")
         let context = persistentContainer.viewContext
         do {
             let results = try context.fetch(fetchRequest)
-            completion(results as? [NSManagedObject])
+            var arrayMovie = results as? [MovieFavorite] ?? []
+            completion(arrayMovie)
         }catch{
             print("Deu ruim")
             completion(nil)
@@ -54,10 +55,11 @@ class DataManager: NSObject {
         }
     }
     
+    //precisar procurar no coredata um objeto do tipo MovieFavorite que tenha id == o moview.idMovie q tem tipo Movie
     func deletePerson(movie: Movie, completion: (Bool)-> Void) {
         let context = persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieApp")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieFavorite")
         fetchRequest.predicate = NSPredicate(format: "id == %@", movie.idMovie)
         
         do {

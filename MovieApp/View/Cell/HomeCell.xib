@@ -33,6 +33,9 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoI-QH-NOq">
                         <rect key="frame" x="58" y="192" width="50" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Ik2-t2-ics"/>
+                        </constraints>
                         <state key="normal" image="favorite_empty_icon"/>
                         <connections>
                             <action selector="bottonFavoriteTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="1qG-Uj-Z1W"/>
@@ -46,6 +49,7 @@
                 <constraint firstItem="ved-1R-URt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="AiZ-qO-ac3"/>
                 <constraint firstAttribute="bottom" secondItem="s5e-KC-dko" secondAttribute="bottom" constant="8" id="EfM-Tn-WSi"/>
                 <constraint firstAttribute="bottom" secondItem="EoI-QH-NOq" secondAttribute="bottom" constant="10" id="Rxg-HR-aQ8"/>
+                <constraint firstItem="EoI-QH-NOq" firstAttribute="top" secondItem="ved-1R-URt" secondAttribute="bottom" constant="7" id="Svy-zJ-ZlO"/>
                 <constraint firstItem="EoI-QH-NOq" firstAttribute="leading" secondItem="s5e-KC-dko" secondAttribute="trailing" constant="8" id="TWJ-jH-hR5"/>
                 <constraint firstItem="s5e-KC-dko" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="XsG-ML-abK"/>
                 <constraint firstItem="EoI-QH-NOq" firstAttribute="centerY" secondItem="s5e-KC-dko" secondAttribute="centerY" id="hpc-Ir-j1s"/>
@@ -55,6 +59,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="118" height="237"/>
             <connections>
+                <outlet property="favoriteButton" destination="EoI-QH-NOq" id="NjR-2H-i6r"/>
                 <outlet property="titleLb" destination="s5e-KC-dko" id="Kys-Kd-Tph"/>
                 <outlet property="topoIv" destination="ved-1R-URt" id="Vwx-Ng-wu7"/>
             </connections>
