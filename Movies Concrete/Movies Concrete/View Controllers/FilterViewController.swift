@@ -14,8 +14,8 @@ class FilterViewController: TMViewController {
   
   let request = MoviesServices()
   var data = MovieDetailViewController()
-  var genre: [String] = []
-  var filter: [String] = []
+  var genre: [(Int, String)] = []
+  var filter: [Int] = []
   var index = 0
   
   private let filterPresenter = FilterPresenter()
@@ -45,7 +45,7 @@ class FilterViewController: TMViewController {
     self.filterPresenter.getGenresMovies()
     let genres = SessionHelper.getGenres()
     for i in genres {
-      genre.append(i.name)
+      genre.append((Int(i.id), String(i.name)))
     }
   }
   
@@ -81,23 +81,26 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell")
-    cell?.textLabel?.text = genre[indexPath.row]
+    cell?.textLabel?.text = genre[indexPath.row].1
     cell?.textLabel?.textColor = Colors.colorWhite
     
     return cell!
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell")
-    filter.append(genre[indexPath.row])
+    _ = tableView.dequeueReusableCell(withIdentifier: "filterCell")
+    filter.append(genre[indexPath.row].0)
     selectFilter()
   }
   
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell")
     cell?.textLabel?.highlightedTextColor = Colors.colorWhite
-    
-    //      self.deselectFilter()
+    for (index, filteredMovie) in filter.enumerated() {
+      if genre[indexPath.row].0 == filteredMovie {
+        filter.remove(at: index)
+      }
+    }
   }
 }
 

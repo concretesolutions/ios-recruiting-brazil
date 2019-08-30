@@ -62,7 +62,6 @@ class PopularMoviesViewController: TMViewController {
     collectionView.register(UINib(nibName: "PopularMoviesCollectionViewCell", bundle: nil),
                             forCellWithReuseIdentifier: "PopularMoviesCollectionViewCell")
   }
-  
 }
 
 // Extensions

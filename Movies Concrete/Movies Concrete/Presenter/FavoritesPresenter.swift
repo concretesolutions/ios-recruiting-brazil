@@ -26,7 +26,8 @@ class FavoritesPresenter {
   }
   
   //  MARK: Functions
-    
+  
+  
   func setupGenresMovies() {
     if Reachability.isConnectedToNetwork() {
       self.request.getGenreMovies()

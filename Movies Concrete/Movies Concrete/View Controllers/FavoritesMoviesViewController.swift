@@ -18,10 +18,10 @@ class FavoritesMoviesViewController: TMViewController {
   
   var favorites: [Movie] = []
   var genres: [Genre] = []
-  var moviesFilter: [String] = []
+  var moviesFilter: [Int] = []
   var genresName: [String] = []
   var filteredData: [Movie] = []
-  var filteredMovies = [Movie]()
+  var filteredMovies: [Movie] = []
   let request = MoviesServices()
   var isFilterOn: Bool = false
   let coverPath = API.API_PATH_MOVIES_IMAGE
@@ -47,16 +47,12 @@ class FavoritesMoviesViewController: TMViewController {
     tableView.reloadData()
   }
   
+  
+  // MARK: Functions
+  
   func setupView() {
-    
     self.favoritesPresenter.attachView(self)
     self.favoritesPresenter.setupGenresMovies()
-    
-    if favorites.count == 0 {
-      showErrorMessage(text: "You don't have favorite movies yet")
-    } else {
-      hideErrorMessage()
-    }
     
     genres = SessionHelper.getGenres()
     
@@ -64,11 +60,27 @@ class FavoritesMoviesViewController: TMViewController {
     let data = favorites
     filteredData = data
     
+    if isFilterOn {
+      setupFilters()
+    }
+    
     getFavorites()
     setupTableView()
   }
   
-  // MARK: Functions
+  func setupFilters() {
+    for movie in favorites {
+      if let movieGenres = movie.genreList {
+        for genre in moviesFilter {
+          for movieId in movieGenres {
+            if genre == movieId {
+              filteredMovies.append(movie)
+            }
+          }
+        }
+      }
+    }
+  }
   
   func setupTableView() {
     tableView.dataSource = self
@@ -135,6 +147,8 @@ extension FavoritesMoviesViewController: UITableViewDataSource, UITableViewDeleg
       
       if isFiltering() {
         movie = filteredData[indexPath.row]
+      } else if isFilterOn {
+        movie = filteredMovies[indexPath.row]
       } else {
         movie = favorites[indexPath.row]
       }
@@ -151,13 +165,6 @@ extension FavoritesMoviesViewController: UITableViewDataSource, UITableViewDeleg
       
       cell.genreMovie.text = genresName.joined(separator: ", ")
       movie.genresName = genresName
-      
-//      if isFilterOn {
-//        for i in moviesFilter {
-//          let movies = genresName.filter({$0.contains(i)})
-//          filteredMovies.append()
-//        }
-//      }
       
       genresName.removeAll()
       
