@@ -41,12 +41,10 @@ class MovieDetailViewController: TMViewController {
     self.movieDetailPresenter.attachView(self)
     
     fillDetails()
-    
   }
   
   //  MARK: Functions
   
-  //  present
   func mapGenres() -> [String] {
     var genresName = [String]()
     self.movieDetailPresenter.getGenresMovies()
@@ -97,7 +95,11 @@ class MovieDetailViewController: TMViewController {
     } else {
       favoriteAction.setImage(UIImage(named: "heart_full"), for: .normal)
       favoriteAction.isSelected = true
-      SessionHelper.addFavoriteMovie(movie: movie)
+      if SessionHelper.isFavorite(id: movie.id) {
+        showAlert(title: "Atention", message: "Movie already added to favorite", action: "OK")
+      } else {
+        SessionHelper.addFavoriteMovie(movie: movie)
+      }
     }
   }
 }

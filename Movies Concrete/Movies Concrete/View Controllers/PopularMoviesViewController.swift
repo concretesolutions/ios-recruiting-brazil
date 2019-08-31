@@ -211,12 +211,14 @@ extension PopularMoviesViewController: PopularProtocol {
  */
 extension PopularMoviesViewController: PopularMoviesViewControllerDelegate {
   func addFavorite(movie: Movie) {
-//    if SessionHelper.isFavorite(id: movie.id) {
+    if SessionHelper.isFavorite(id: movie.id) {
+      showAlert(title: "Atention", message: "Movie already added to favorite", action: "OK")
+    } else {
       SessionHelper.addFavoriteMovie(movie: movie)
-//    }
+    }
   }
   
   func removeFavorite(movie: Movie) {
-    SessionHelper.removeFavoriteMovie(id: movie.id)
+//    SessionHelper.removeFavoriteMovie(id: movie.id)
   }
 }

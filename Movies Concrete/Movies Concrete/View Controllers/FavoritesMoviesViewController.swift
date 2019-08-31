@@ -44,9 +44,9 @@ class FavoritesMoviesViewController: TMViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
+    setupFilters()
     tableView.reloadData()
   }
-  
   
   // MARK: Functions
   
@@ -60,9 +60,7 @@ class FavoritesMoviesViewController: TMViewController {
     let data = favorites
     filteredData = data
     
-    if isFilterOn {
-      setupFilters()
-    }
+//    setupFilters()
     
     getFavorites()
     setupTableView()
@@ -203,7 +201,7 @@ extension FavoritesMoviesViewController: UITableViewDataSource, UITableViewDeleg
     } else {
       movie = favorites[indexPath.row]
     }
-    
+  
     movieDetailViewController.movie = movie
     
     self.navigationController?.pushViewController(movieDetailViewController, animated: true)

@@ -83,22 +83,29 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell")
     cell?.textLabel?.text = genre[indexPath.row].1
     cell?.textLabel?.textColor = Colors.colorWhite
+  
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = UIColor.black
+    cell?.selectedBackgroundView = backgroundView
     
     return cell!
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    _ = tableView.dequeueReusableCell(withIdentifier: "filterCell")
+    let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell")
     filter.append(genre[indexPath.row].0)
     selectFilter()
   }
   
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell")
-    cell?.textLabel?.highlightedTextColor = Colors.colorWhite
-    for (index, filteredMovie) in filter.enumerated() {
-      if genre[indexPath.row].0 == filteredMovie {
-        filter.remove(at: index)
+    if let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") {
+      for (index, filteredMovie) in filter.enumerated() {
+        if genre[indexPath.row].0 == filteredMovie {
+          filter.remove(at: index)
+        }
+      }
+      if filter.count == 0 {
+        deselectFilter()
       }
     }
   }
