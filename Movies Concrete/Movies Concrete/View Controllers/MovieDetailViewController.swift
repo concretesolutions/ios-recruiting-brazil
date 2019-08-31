@@ -46,7 +46,6 @@ class MovieDetailViewController: TMViewController {
   
   //  MARK: Functions
   
-  //  present
   func mapGenres() -> [String] {
     var genresName = [String]()
     self.movieDetailPresenter.getGenresMovies()
