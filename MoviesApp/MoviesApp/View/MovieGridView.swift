@@ -71,7 +71,7 @@ extension MovieGridView: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        gridView.backgroundColor = .white
+        gridView.backgroundColor = UsedColors.black.color
         gridView.register(MovieGridCell.self, forCellWithReuseIdentifier: MovieGridCell.reuseIdentifier)
     }
 }

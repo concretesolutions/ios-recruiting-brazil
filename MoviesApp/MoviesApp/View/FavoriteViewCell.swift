@@ -41,6 +41,7 @@ class FavoriteCell: SwipeTableViewCell{
     let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textColor = UsedColors.gold.color
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -48,6 +49,7 @@ class FavoriteCell: SwipeTableViewCell{
     let descLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 5
+        label.textColor = UsedColors.gold.color
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -55,6 +57,7 @@ class FavoriteCell: SwipeTableViewCell{
     let yearLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textColor = UsedColors.gold.color
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -124,6 +127,6 @@ extension FavoriteCell: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = .white
+        backgroundColor = UsedColors.black.color
     }
 }

@@ -41,7 +41,7 @@ class MovieGridCell: UICollectionViewCell{
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UsedColor.yellow.color
+        label.textColor = UsedColors.gold.color
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
         return label
@@ -117,7 +117,7 @@ extension MovieGridCell: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = UsedColor.blue.color
+        backgroundColor = UsedColors.black.color
     }
 }
 

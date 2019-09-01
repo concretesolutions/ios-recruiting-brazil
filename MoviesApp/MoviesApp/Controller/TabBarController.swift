@@ -14,7 +14,8 @@ class TabBarController: UITabBarController {
     //MARK: - View cycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.barTintColor = UsedColor.yellow.color
+        tabBar.barTintColor = UsedColors.gold.color
+        tabBar.tintColor = UsedColors.black.color
         setupTabBar()
     }
     

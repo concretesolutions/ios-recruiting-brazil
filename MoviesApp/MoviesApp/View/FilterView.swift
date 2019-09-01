@@ -27,8 +27,8 @@ class FilterView: UIView{
     let applyButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setTitle("Apply", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = UsedColor.yellow.color
+        button.setTitleColor(UsedColors.black.color, for: .normal)
+        button.backgroundColor = UsedColors.gold.color
         return button
     }()
     
@@ -57,7 +57,7 @@ extension FilterView: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = .white
+        backgroundColor = UsedColors.black.color
         
     }
 }

@@ -46,6 +46,21 @@ extension FilterController: UIPickerViewDelegate, UIPickerViewDataSource{
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        
+        let atribute = [NSAttributedString.Key.foregroundColor: UsedColors.gold.color]
+        
+        if component == 1 {
+            let value = viewModel.genres[row]
+            let title = NSMutableAttributedString(string: value, attributes: atribute)
+            return title
+        }else{
+            let value = viewModel.years[row]
+            let title = NSMutableAttributedString(string: value, attributes: atribute)
+            return title
+        }
+    }
+    
     //Populate the picker with the data
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 1 {

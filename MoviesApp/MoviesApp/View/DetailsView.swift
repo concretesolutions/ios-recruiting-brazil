@@ -30,7 +30,7 @@ class DetailsView: UIView {
     
     lazy var favButton: UIButton = {
         let view = UIButton(frame: .zero)
-        view.backgroundColor = UsedColor.blue.color
+        view.backgroundColor = UsedColors.black.color
         view.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         view.setImage(UIImage(named: "favorite_full_icon"), for: .selected)
         return view
@@ -39,7 +39,9 @@ class DetailsView: UIView {
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.textAlignment = .center
-        view.textColor = UsedColor.yellow.color
+        view.font = UIFont.boldSystemFont(ofSize: 20)
+        view.adjustsFontSizeToFitWidth = true
+        view.textColor = UsedColors.black.color
         view.numberOfLines = 0
         return view
     }()
@@ -47,20 +49,22 @@ class DetailsView: UIView {
     lazy var genresLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.textAlignment = .center
-        view.textColor = UsedColor.yellow.color
+        view.textColor = UsedColors.black.color
+        view.adjustsFontSizeToFitWidth = true
         view.numberOfLines = 0
         return view
     }()
     
     lazy var verticalContainer: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = UsedColor.blue.color
+        view.backgroundColor = UsedColors.gold.color
         return view
     }()
     
     lazy var descLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.adjustsFontSizeToFitWidth = true
+        view.textColor = UsedColors.gold.color
         view.numberOfLines = 0
         return view
     }()
@@ -130,14 +134,15 @@ extension DetailsView: CodeView{
         
         
         descLabel.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview().offset(5)
-            make.top.equalTo(imageView.snp.bottom)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().inset(5)
+            make.top.equalTo(verticalContainer.snp.bottom).offset(10)
             make.bottom.equalTo(snp.bottomMargin)
         }
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = .white
+        backgroundColor = UsedColors.black.color
     }
 }
 

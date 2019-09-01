@@ -29,8 +29,8 @@ class FavoriteView: UIView{
     lazy var removeFilterButton: UIButton = {
         let view = UIButton()
         view.setTitle("Remove filters", for: .normal)
-        view.setTitleColor(UsedColor.yellow.color, for: .normal)
-        view.backgroundColor = UsedColor.blue.color
+        view.setTitleColor(UsedColors.black.color, for: .normal)
+        view.backgroundColor = UsedColors.gold.color
         return view
     }()
     
@@ -39,6 +39,7 @@ class FavoriteView: UIView{
         let view = UITableView()
         view.rowHeight = 120
         view.separatorStyle = .singleLine
+        view.separatorColor = UsedColors.gold.color
         return view
     }()
     
@@ -87,7 +88,7 @@ extension FavoriteView: CodeView{
         
         removeFilterButton.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(snp_topMargin)
+            make.top.equalTo(snp_topMargin).offset(10)
             make.height.equalToSuperview().multipliedBy(0.1)
         }
         
@@ -99,8 +100,8 @@ extension FavoriteView: CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = .white
-        table.backgroundColor = .white
+        backgroundColor = UsedColors.black.color
+        table.backgroundColor = UsedColors.black.color
         table.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
     }
 }

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let navigationAppearence = UINavigationBar.appearance()
-        navigationAppearence.barTintColor = UsedColor.yellow.color
+        navigationAppearence.barTintColor = UsedColors.gold.color
         navigationAppearence.prefersLargeTitles = true
 
         return true
