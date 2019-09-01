@@ -152,7 +152,6 @@ extension MovieSearchViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         movieSearch.resignFirstResponder()
         let query = searchBar.text ?? ""
-        print(searchBar.text)
         if !query.isEmpty {
             print(query)
             apiWithQuery(query: query)

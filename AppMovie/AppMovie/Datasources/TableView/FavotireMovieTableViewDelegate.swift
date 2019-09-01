@@ -29,10 +29,6 @@ final class FavoriteMovieTableViewDelegate: NSObject, UITableViewDelegate{
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Unfavorite") { (rowAction, indexPath) in
             self.delegate?.removeMovie(atIndexPath: indexPath)
-            
-            //            self.removeMovie(atIndexPath: indexPath)
-            //            self.fetchCoreDataObjects()
-            
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)

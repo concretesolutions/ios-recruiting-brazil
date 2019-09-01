@@ -108,14 +108,10 @@ class MovieDetailViewController: UIViewController {
     @IBAction func favoriteBtnPressed(_ sender: Any) {
         guard let movie = movieCell else {return}
         let manegerCoreData = ManegerCoreData()
-        let predicate = NSPredicate(format: "id = %@", argumentArray: [movieCell?.id])
-        print(movieCell?.isFavorite)
         if (movieCell?.isFavorite != true){
             manegerCoreData.save(bindToMovieEntity(movie), successCompletion: {
                 self.favoriteBtn.isSelected = true
                 self.movieCell?.isFavorite = true
-                print(self.movieCell?.isFavorite)
-                print(self.movieCell?.id)
                 self.EmptyTextField(text: "Adicionado", message: "Este filme foi adicionado aos favoritos!")
             }) { (error) in
                 self.favoriteBtn.isSelected = false
