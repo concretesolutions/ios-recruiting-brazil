@@ -213,6 +213,7 @@
                     <navigationItem key="navigationItem" title="Movies" id="Dy7-Ce-b8g"/>
                     <connections>
                         <outlet property="tableView" destination="IIB-EE-Wmh" id="Gen-0w-fB1"/>
+                        <segue destination="VLZ-qs-gZ2" kind="show" identifier="favoriteSegue" id="aUi-Tz-Yju"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6V-zv-pqV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -248,4 +249,7 @@
             <color red="0.96862745098039216" green="0.80784313725490198" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aUi-Tz-Yju"/>
+    </inferredMetricsTieBreakers>
 </document>

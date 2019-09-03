@@ -30,7 +30,7 @@ class DetailsViewController: UIViewController {
     func setMovieDetails(){
         
         guard let movie = self.movie else {return}
-        detailTopoIv.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500\(movie.backdropPath)"), completed: nil)
+        detailTopoIv.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500\(movie.backdropPath!)"), completed: nil)
         titleDetails.text = movie.title
         yearDetailLb.text = movie.releaseDate
         typeDetailLb.text = ""

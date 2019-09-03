@@ -27,7 +27,7 @@ class DataManager: NSObject {
         let context = persistentContainer.viewContext
         do {
             let results = try context.fetch(fetchRequest)
-            var arrayMovie = results as? [MovieFavorite] ?? []
+            let arrayMovie = results as? [MovieFavorite] ?? []
             completion(arrayMovie)
         }catch{
             print("Deu ruim")
@@ -39,19 +39,21 @@ class DataManager: NSObject {
         let context = persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "MovieFavorite", in: context)!
         
-        let movieFav = NSManagedObject(entity: entity, insertInto: context)
-        
-        movieFav.setValue(movie.title, forKey: "title")
-        movieFav.setValue(movie.posterPath, forKey: "url")
-        movieFav.setValue(movie.releaseDate, forKey: "year")
-        movieFav.setValue(movie.overview, forKey: "overview")
-        movieFav.setValue(movie.idMovie, forKey: "id")
-        do {
-            try context.save()
-            completion(true)
-        }catch{
-            print("deu ruim")
-            completion(false)
+        if let movieFav = NSManagedObject(entity: entity, insertInto: context) as? MovieFavorite {
+            
+            movieFav.title = movie.title
+            movieFav.url = movie.posterPath
+            movieFav.year = movie.releaseDate
+            movieFav.overview = movie.overview
+            movieFav.id = Int64(movie.idMovie)
+            movieFav.urlBackDrop = movie.backdropPath
+            do {
+                try context.save()
+                completion(true)
+            }catch{
+                print("deu ruim")
+                completion(false)
+            }
         }
     }
     
@@ -60,7 +62,7 @@ class DataManager: NSObject {
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieFavorite")
-        fetchRequest.predicate = NSPredicate(format: "id == %@", movie.idMovie)
+        fetchRequest.predicate = NSPredicate(format: "id == %d", movie.idMovie)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -68,7 +70,6 @@ class DataManager: NSObject {
             if let object = objectToDelete {
                 context.delete(object)
             }
-            
             do{
                 try context.save()
                 completion(true)
@@ -76,26 +77,9 @@ class DataManager: NSObject {
                 print("Deu Ruim")
                 completion(false)
             }
-            
-            
         }catch{
             print("Deu Ruim")
             completion(false)
         }
     }
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

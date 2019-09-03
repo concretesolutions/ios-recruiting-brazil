@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         
         datamanager.loadData { (arrayMovie) in
-            if arrayMovie!.count > 0{
+            if arrayMovie!.count >= 0{
                 self.favoriteArray = arrayMovie!
                 self.collectionView.reloadData()
             }else{
@@ -103,7 +103,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout{
 extension HomeViewController: HomeCellDelegate{
     func onClickFavoriteCell(index: Int, isFavorite: Bool) {
         print("\(index) foi clicado")
-        if isFavorite {
+        if !isFavorite {
             datamanager.saveInformation(movie: controller.arrayMovieDB[index]) { (sucess) in
                 if sucess{
                     print("Sucesso")
