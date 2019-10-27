@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum APIError: String, Error {
+enum APIError: String {
     case requestFailed = "An error has occurred, please try again."
 }
 

@@ -12,6 +12,7 @@ class MoviesListViewController: UIViewController {
 
     private var moviesCollectionView = MoviesListCollectionView()
     private var loadingIndicator = UIActivityIndicatorView(style: .large)
+    private var errorView = MessageView()
     
     var viewModel = MoviesListViewModel()
     
@@ -20,6 +21,9 @@ class MoviesListViewController: UIViewController {
 
         self.view.addSubview(self.moviesCollectionView)
         self.view.addSubview(self.loadingIndicator)
+        self.view.addSubview(self.errorView)
+        self.toggleErrorMessage(show: false)
+        
         self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.moviesCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -28,7 +32,12 @@ class MoviesListViewController: UIViewController {
             self.moviesCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
             self.loadingIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            
+            self.errorView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.errorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.errorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.errorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
         self.moviesCollectionView.dataSource = self
         self.moviesCollectionView.delegate = self
@@ -36,8 +45,13 @@ class MoviesListViewController: UIViewController {
         
         self.viewModel.fetchMovies()
     }
-    
 
+    func toggleErrorMessage(show: Bool) {
+        UIView.animate(withDuration: 0.5) {
+            self.errorView.alpha = show ? 1 : 0
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -86,11 +100,12 @@ extension MoviesListViewController: MoviesListDelegate {
     
     func moviesListUpdated() {
         self.moviesCollectionView.reloadData()
+        self.toggleErrorMessage(show: false)
     }
     
     func errorFetchingMovies(error: APIError) {
-        // TODO
+        self.errorView.viewModel = MessageViewModel(withImageNamed: "error", andMessage: error.rawValue)
+        self.toggleErrorMessage(show: true)
     }
-    
     
 }
