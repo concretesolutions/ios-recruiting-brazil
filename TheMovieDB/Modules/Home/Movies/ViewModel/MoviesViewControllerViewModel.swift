@@ -19,10 +19,10 @@ class MoviesViewControllerViewModel {
             delegate.changeScreenStatus(type: .error)
             delegate.setError(message: message)
         }
-        func onSucess(movies: MovieListResponse) {
+        func onSuccess(movies: MovieListResponse) {
             delegate.setMoviesList(movies: movies)
             delegate.changeScreenStatus(type: .normal)
         }
-        API.MovieService().getMoviePopular(page: page, onError: onError(message:), onSuccess: onSucess(movies:))
+        API.MovieService().getMoviePopular(page: page, onError: onError(message:), onSuccess: onSuccess(movies:))
     }
 }

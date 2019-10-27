@@ -25,6 +25,7 @@ struct API {
     static let imageUrlBase = URL(string: "https://image.tmdb.org/t/p/")
     private static let urlBase = URL(string: "https://api.themoviedb.org/3/")
     internal static let getMoviePopularEndPoint = "movie/popular?api_key={apiKey}&language=en-US&page={page}"
+    internal static let getGenreListEndPoint = "genre/movie/list?api_key={apiKey}&language=en-US"
     
     internal static func request<T: Codable>(body: T? = nil,
                                              url: String,

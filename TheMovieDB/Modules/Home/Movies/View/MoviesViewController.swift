@@ -124,7 +124,10 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let view = DetailsViewController()
-        navigationController?.pushViewController(view, animated: true)
+        if let movie = moviesList?.results?[indexPath.row] {
+            let view = DetailsViewController()
+            view.configure(with: movie)
+            navigationController?.pushViewController(view, animated: true)
+        }
     }
 }

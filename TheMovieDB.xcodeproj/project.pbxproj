@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F25D53B23664A2C00B7CC26 /* GenreListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F25D53A23664A2C00B7CC26 /* GenreListResponse.swift */; };
+		0F25D53D23664A6200B7CC26 /* GenreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F25D53C23664A6200B7CC26 /* GenreResponse.swift */; };
+		0F25D5402366541F00B7CC26 /* DetailsViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F25D53F2366541F00B7CC26 /* DetailsViewControllerViewModel.swift */; };
+		0F25D5422366544B00B7CC26 /* DetailsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F25D5412366544B00B7CC26 /* DetailsViewControllerProtocol.swift */; };
 		0F449CC52362A1D000FBCD86 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F449CC42362A1D000FBCD86 /* StringExtensions.swift */; };
 		0F449CC92362A74100FBCD86 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F449CC72362A74100FBCD86 /* SplashViewController.swift */; };
 		0F449CCA2362A74100FBCD86 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F449CC82362A74100FBCD86 /* SplashViewController.xib */; };
@@ -63,6 +67,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F25D53A23664A2C00B7CC26 /* GenreListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListResponse.swift; sourceTree = "<group>"; };
+		0F25D53C23664A6200B7CC26 /* GenreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreResponse.swift; sourceTree = "<group>"; };
+		0F25D53F2366541F00B7CC26 /* DetailsViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerViewModel.swift; sourceTree = "<group>"; };
+		0F25D5412366544B00B7CC26 /* DetailsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerProtocol.swift; sourceTree = "<group>"; };
 		0F449CC42362A1D000FBCD86 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		0F449CC72362A74100FBCD86 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0F449CC82362A74100FBCD86 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
@@ -141,6 +149,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F25D53E2366540800B7CC26 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F25D53F2366541F00B7CC26 /* DetailsViewControllerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0F449CC22362A19400FBCD86 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +309,7 @@
 		0F47860B2362835D0031F673 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				0F25D53E2366540800B7CC26 /* ViewModel */,
 				0F4786242362854D0031F673 /* View */,
 				0F478618236284C90031F673 /* DetailsViewController.xib */,
 			);
@@ -337,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				0F478617236284C90031F673 /* DetailsViewController.swift */,
+				0F25D5412366544B00B7CC26 /* DetailsViewControllerProtocol.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -432,6 +450,8 @@
 				0FFE707C2365F6C8009CF6B9 /* MovieListResponse.swift */,
 				0FFE707E2365F7B0009CF6B9 /* MovieResponse.swift */,
 				0FFE70802365FAB3009CF6B9 /* ErrorResponse.swift */,
+				0F25D53A23664A2C00B7CC26 /* GenreListResponse.swift */,
+				0F25D53C23664A6200B7CC26 /* GenreResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -707,14 +727,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F449CC52362A1D000FBCD86 /* StringExtensions.swift in Sources */,
+				0F25D5402366541F00B7CC26 /* DetailsViewControllerViewModel.swift in Sources */,
 				0FCB470D2363E1020091406B /* Colors.swift in Sources */,
 				0F478615236284AD0031F673 /* FilterViewController.swift in Sources */,
+				0F25D53B23664A2C00B7CC26 /* GenreListResponse.swift in Sources */,
+				0F25D5422366544B00B7CC26 /* DetailsViewControllerProtocol.swift in Sources */,
 				0FD5E8CD2364F2640017E004 /* MovieCollectionViewCell.swift in Sources */,
 				0FFDBE73236636F50014AF74 /* MoviesViewControllerViewModel.swift in Sources */,
 				0FD5E8D523650EDA0017E004 /* FavoriteTableViewCell.swift in Sources */,
 				0F47862823628BA00031F673 /* SceneDelegate.swift in Sources */,
 				0FFE70762365E267009CF6B9 /* API.swift in Sources */,
 				0F449CC92362A74100FBCD86 /* SplashViewController.swift in Sources */,
+				0F25D53D23664A6200B7CC26 /* GenreResponse.swift in Sources */,
 				0FFDBE75236637C70014AF74 /* MoviesViewControllerProtocol.swift in Sources */,
 				0F4785D423627A240031F673 /* AppDelegate.swift in Sources */,
 				0FFE70792365EA5E009CF6B9 /* MovieService.swift in Sources */,

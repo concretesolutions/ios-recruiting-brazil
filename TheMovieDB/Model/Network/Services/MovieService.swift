@@ -14,5 +14,9 @@ extension API {
             let endPoint = getMoviePopularEndPoint.replacingOccurrences(of: "{page}", with: String(page))
             API.request(url: endPoint, httpMethod: .get, onError: onError, onSuccess: onSuccess)
         }
+        
+        func getGenreList(onError: @escaping (String) -> Void, onSuccess: @escaping (GenreListResponse) -> Void) {
+            API.request(url: getGenreListEndPoint, httpMethod: .get, onError: onError, onSuccess: onSuccess)
+        }
     }
 }
