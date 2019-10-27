@@ -28,6 +28,8 @@ class MovieDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .systemBackground
+        self.title = "Movie"
         
         self.posterView.contentMode = .scaleAspectFill
         self.posterView.clipsToBounds = true
@@ -36,11 +38,6 @@ class MovieDetailsViewController: UIViewController {
         self.yearLbl.font = UIFont.preferredFont(forTextStyle: .headline)
         self.descriptionView.isEditable = false
         self.descriptionView.font = UIFont.preferredFont(forTextStyle: .body)
-        
-        // testing viewModel:
-        let movie = Movie(withTitle: "Steve Universe: The Movie", andPoster: "stevenPoster", andReleaseDate: "2019-10-18", andGenreIds: [80, 19, 53], andOverview: "Two years after the events of 'Change Your Mind', Steven (now 16 years old) and his friends are ready to enjoy the rest of their lives peacefully. However, all of that changes when a new sinister Gem arrives, armed with a giant drill that saps the life force of all living things on Earth. In their biggest challenge ever, the Crystal Gems must work together to save all organic life on Earth within 48 hours.")
-        let prevVM = MovieCellViewModel(with: movie)
-        self.viewModel = MovieDetailsViewModel(with: prevVM)
 
         self.view.addSubviews([self.posterView, self.titleLbl, self.yearLbl, self.genresLbl, self.descriptionView])
         UIView.translatesAutoresizingMaskIntoConstraints(to: [self.posterView, self.titleLbl, self.yearLbl, self.genresLbl, self.descriptionView])

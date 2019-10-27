@@ -12,6 +12,8 @@ class MoviesListViewModel {
     
     weak var delegate: MoviesListDelegate?
     
+    var onMovieSelected: ((MovieCellViewModel)->())?
+    
     private var cellViewModels: [MovieCellViewModel] = [] {
         didSet {
             self.delegate?.moviesListUpdated()
@@ -28,9 +30,24 @@ class MoviesListViewModel {
         }
     }
     
+    private var movieService: MovieServiceProtocol
+    
+    init(withService movieService: MovieServiceProtocol) {
+        self.movieService = movieService
+    }
+    
+    func getViewModelForCell(at indexPath: IndexPath) -> MovieCellViewModel? {
+        let index = indexPath.row
+        if index < 0 || index > self.numberOfCells {
+            return nil
+        }
+        
+        return cellViewModels[index]
+    }
+    
     func fetchMovies() {
         self.isLoadingList = true
-        TMDBMovieService.shared.fectchPopularMovies { (error: APIError?, movies: [Movie]) in
+        movieService.fectchPopularMovies { (error: APIError?, movies: [Movie]) in
             DispatchQueue.main.async {
                 if let error = error {
                     self.delegate?.errorFetchingMovies(error: error)
@@ -43,12 +60,9 @@ class MoviesListViewModel {
         }
     }
     
-    func getViewModelForCell(at indexPath: IndexPath) -> MovieCellViewModel? {
-        let index = indexPath.row
-        if index < 0 || index > self.numberOfCells {
-            return nil
+    func selectMovie(at indexPath: IndexPath) {
+        if let cellVM = self.getViewModelForCell(at: indexPath) {
+            self.onMovieSelected?(cellVM)
         }
-        
-        return cellViewModels[index]
     }
 }
