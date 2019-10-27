@@ -12,5 +12,10 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configView()
+    }
+    
+    private func configView() {
+        title = "movie".localized
     }
 }
