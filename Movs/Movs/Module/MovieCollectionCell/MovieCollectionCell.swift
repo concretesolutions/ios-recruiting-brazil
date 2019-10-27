@@ -12,12 +12,19 @@ class MovieCollectionCell: UICollectionViewCell {
     
     private let posterImgView = UIImageView()
     private var titleLabel = UILabel()
+    private var loadingIndicator = UIActivityIndicatorView(style: .medium)
     
     var viewModel: MovieCellViewModel? {
         didSet {
             self.titleLabel.text = viewModel!.titleText
             viewModel!.fetchPoster { posterImg in
                 self.posterImgView.image = posterImg
+                
+                self.posterImgView.alpha = 0.0
+                UIView.animate(withDuration: 0.5) {
+                    self.loadingIndicator.stopAnimating()
+                    self.posterImgView.alpha = 1.0
+                }
             }
         }
     }
@@ -34,21 +41,29 @@ class MovieCollectionCell: UICollectionViewCell {
         self.titleLabel.textAlignment = .center
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         
+        self.addSubview(self.loadingIndicator)
+        self.loadingIndicator.startAnimating()
         
         self.posterImgView.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.posterImgView.topAnchor.constraint(equalTo: self.topAnchor),
             self.posterImgView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.posterImgView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.posterImgView.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor),
+            
             self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            self.titleLabel.heightAnchor.constraint(equalToConstant: 40)
+            self.titleLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            self.loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.loadingIndicator.topAnchor.constraint(equalTo: self.topAnchor),
+            self.loadingIndicator.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor)
         ])
         
-        self.backgroundColor = .yellow
+        self.backgroundColor = .secondarySystemBackground
         self.clipsToBounds = true
     }
     
