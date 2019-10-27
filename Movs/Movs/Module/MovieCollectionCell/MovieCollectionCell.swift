@@ -44,9 +44,7 @@ class MovieCollectionCell: UICollectionViewCell {
         self.addSubview(self.loadingIndicator)
         self.loadingIndicator.startAnimating()
         
-        self.posterImgView.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        UIView.translatesAutoresizingMaskIntoConstraints(to: [self.posterImgView, self.titleLabel, self.loadingIndicator])
         NSLayoutConstraint.activate([
             self.posterImgView.topAnchor.constraint(equalTo: self.topAnchor),
             self.posterImgView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
