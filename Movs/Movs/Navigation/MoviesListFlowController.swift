@@ -17,10 +17,12 @@ class MoviesListFlowController: UINavigationController {
     }()
     
     private lazy var moviesListVC = MoviesListViewController(with: self.moviesListViewModel)
-    private lazy var movieService = TMDBMovieService.shared
+    private var movieService: MovieServiceProtocol
     
-    init() {
+    init(withService service: MovieServiceProtocol) {
+        self.movieService = service
         super.init(nibName: nil, bundle: nil)
+        
         self.viewControllers = [self.moviesListVC]
         
         self.navigationBar.barTintColor = UIColor.appYellow
