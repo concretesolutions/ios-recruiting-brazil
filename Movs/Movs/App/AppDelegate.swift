@@ -11,10 +11,20 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+//    var window: UIWindow?
+//    var mainTabBarController: UITabBarController!
+//    var mainFlowController: TabBarFlowController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+//        mainTabBarController = UITabBarController()
+//
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        window?.rootViewController = mainTabBarController
+//        window?.makeKeyAndVisible()
+//
+//        mainFlowController = TabBarFlowController(with: mainTabBarController)
+        
         return true
     }
 

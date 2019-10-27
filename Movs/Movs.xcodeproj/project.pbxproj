@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6700B40A23649BAE005C1586 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6700B40923649BAE005C1586 /* AppDelegate.swift */; };
 		6700B40C23649BAE005C1586 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6700B40B23649BAE005C1586 /* SceneDelegate.swift */; };
-		6700B41123649BAE005C1586 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6700B40F23649BAE005C1586 /* Main.storyboard */; };
 		6700B41323649BB2005C1586 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6700B41223649BB2005C1586 /* Assets.xcassets */; };
 		6700B41623649BB2005C1586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6700B41423649BB2005C1586 /* LaunchScreen.storyboard */; };
 		6700B42123649BB3005C1586 /* MovsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6700B42023649BB3005C1586 /* MovsTests.swift */; };
@@ -29,6 +28,9 @@
 		6790D161236611AE000C3BB4 /* UIView+AddSubviewsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D160236611AE000C3BB4 /* UIView+AddSubviewsArray.swift */; };
 		6790D1632366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D1622366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift */; };
 		6790D16523662158000C3BB4 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D16423662158000C3BB4 /* MovieDetailsViewModel.swift */; };
+		6790D16823663AA1000C3BB4 /* TabBarFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D16723663AA1000C3BB4 /* TabBarFlowController.swift */; };
+		6790D16A23663E58000C3BB4 /* MoviesListFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D16923663E58000C3BB4 /* MoviesListFlowController.swift */; };
+		6790D16E2366433B000C3BB4 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D16D2366433B000C3BB4 /* UIColor+AppColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +54,6 @@
 		6700B40623649BAE005C1586 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6700B40923649BAE005C1586 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6700B40B23649BAE005C1586 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6700B41023649BAE005C1586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6700B41223649BB2005C1586 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6700B41523649BB2005C1586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6700B41723649BB2005C1586 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +78,9 @@
 		6790D160236611AE000C3BB4 /* UIView+AddSubviewsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviewsArray.swift"; sourceTree = "<group>"; };
 		6790D1622366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+translatesAutoresizingMaskIntoConstraints.swift"; sourceTree = "<group>"; };
 		6790D16423662158000C3BB4 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
+		6790D16723663AA1000C3BB4 /* TabBarFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowController.swift; sourceTree = "<group>"; };
+		6790D16923663E58000C3BB4 /* MoviesListFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListFlowController.swift; sourceTree = "<group>"; };
+		6790D16D2366433B000C3BB4 /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +131,9 @@
 		6700B40823649BAE005C1586 /* Movs */ = {
 			isa = PBXGroup;
 			children = (
-				6700B43923649CC2005C1586 /* App */,
 				6790D14F2365C87E000C3BB4 /* Utils */,
+				6700B43923649CC2005C1586 /* App */,
+				6790D16623663A4C000C3BB4 /* Navigation */,
 				6700B4412364AD53005C1586 /* Model */,
 				6700B4442364B505005C1586 /* Service */,
 				6700B43A23649F35005C1586 /* Module */,
@@ -162,7 +167,6 @@
 				6700B41723649BB2005C1586 /* Info.plist */,
 				6700B40923649BAE005C1586 /* AppDelegate.swift */,
 				6700B40B23649BAE005C1586 /* SceneDelegate.swift */,
-				6700B40F23649BAE005C1586 /* Main.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -246,8 +250,18 @@
 			children = (
 				6790D160236611AE000C3BB4 /* UIView+AddSubviewsArray.swift */,
 				6790D1622366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift */,
+				6790D16D2366433B000C3BB4 /* UIColor+AppColors.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6790D16623663A4C000C3BB4 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				6790D16723663AA1000C3BB4 /* TabBarFlowController.swift */,
+				6790D16923663E58000C3BB4 /* MoviesListFlowController.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,7 +370,6 @@
 			files = (
 				6700B41623649BB2005C1586 /* LaunchScreen.storyboard in Resources */,
 				6700B41323649BB2005C1586 /* Assets.xcassets in Resources */,
-				6700B41123649BAE005C1586 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,17 +395,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				6790D161236611AE000C3BB4 /* UIView+AddSubviewsArray.swift in Sources */,
+				6790D16E2366433B000C3BB4 /* UIColor+AppColors.swift in Sources */,
 				6700B44B2364C126005C1586 /* MovieCollectionCell.swift in Sources */,
 				6790D1552365DB29000C3BB4 /* MoviesListDelegate.swift in Sources */,
 				6700B40A23649BAE005C1586 /* AppDelegate.swift in Sources */,
 				6790D1572365DE46000C3BB4 /* MoviesListCollectionView.swift in Sources */,
 				6700B40C23649BAE005C1586 /* SceneDelegate.swift in Sources */,
 				6790D15B2365F3A2000C3BB4 /* MessageView.swift in Sources */,
+				6790D16823663AA1000C3BB4 /* TabBarFlowController.swift in Sources */,
 				6700B4462364B53C005C1586 /* MovieServiceProtocol.swift in Sources */,
 				6790D1632366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift in Sources */,
 				6790D16523662158000C3BB4 /* MovieDetailsViewModel.swift in Sources */,
 				6790D14E2365C3D9000C3BB4 /* MovieCellViewModel.swift in Sources */,
 				6790D1512365C8AD000C3BB4 /* CompletionBlock.swift in Sources */,
+				6790D16A23663E58000C3BB4 /* MoviesListFlowController.swift in Sources */,
 				6700B43D2364A06B005C1586 /* MoviesListViewController.swift in Sources */,
 				6790D15E2365F7F7000C3BB4 /* MovieDetailsViewController.swift in Sources */,
 				6790D1532365D01E000C3BB4 /* MoviesListViewModel.swift in Sources */,
@@ -433,14 +449,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6700B40F23649BAE005C1586 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6700B41023649BAE005C1586 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6700B41423649BB2005C1586 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
