@@ -10,16 +10,35 @@ import Foundation
 
 class MoviesListViewModel {
     
-    private var cellViewModels: [MovieCellViewModel] = []
+    weak var delegate: MoviesListDelegate?
+    
+    private var cellViewModels: [MovieCellViewModel] = [] {
+        didSet {
+            self.delegate?.moviesListUpdated()
+        }
+    }
+    
     var numberOfCells: Int {
         return cellViewModels.count
     }
     
-    func fetchMovies(completion: @escaping ()->()) {
-        TMDBMovieService.shared.fectchPopularMovies { (sucess: Bool, error: APIError?, movies: [Movie]) in
+    private(set) var isLoadingList: Bool = false {
+        didSet {
+            self.delegate?.toggleLoading(self.isLoadingList)
+        }
+    }
+    
+    func fetchMovies() {
+        self.isLoadingList = true
+        TMDBMovieService.shared.fectchPopularMovies { (error: APIError?, movies: [Movie]) in
             DispatchQueue.main.async {
+                if let error = error {
+                    self.delegate?.errorFetchingMovies(error: error)
+                    return
+                }
+            
+                self.isLoadingList = false
                 self.cellViewModels = movies.map({ MovieCellViewModel(with: $0) })
-                completion()
             }
         }
     }

@@ -11,6 +11,7 @@ import UIKit
 class MoviesListViewController: UIViewController {
 
     private var moviesCollectionView = MoviesListCollectionView()
+    private var loadingIndicator = UIActivityIndicatorView(style: .large)
     
     var viewModel = MoviesListViewModel()
     
@@ -18,18 +19,22 @@ class MoviesListViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.addSubview(self.moviesCollectionView)
+        self.view.addSubview(self.loadingIndicator)
+        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.moviesCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.moviesCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.moviesCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.moviesCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            self.moviesCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
+            self.loadingIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
         self.moviesCollectionView.dataSource = self
         self.moviesCollectionView.delegate = self
+        self.viewModel.delegate = self
         
-        self.viewModel.fetchMovies {
-            self.moviesCollectionView.reloadData()
-        }
+        self.viewModel.fetchMovies()
     }
     
 
@@ -63,6 +68,28 @@ extension MoviesListViewController: UICollectionViewDataSource, UICollectionView
         }
         
         return cell
+    }
+}
+
+extension MoviesListViewController: MoviesListDelegate {
+    func toggleLoading(_ isLoading: Bool) {
+        if isLoading {
+            self.loadingIndicator.startAnimating()
+        } else {
+            self.loadingIndicator.stopAnimating()
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            self.moviesCollectionView.alpha = isLoading ? 0 : 1
+        }
+    }
+    
+    func moviesListUpdated() {
+        self.moviesCollectionView.reloadData()
+    }
+    
+    func errorFetchingMovies(error: APIError) {
+        // TODO
     }
     
     

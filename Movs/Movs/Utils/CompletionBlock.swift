@@ -8,5 +8,5 @@
 
 import UIKit
 
-typealias MoviesListCompletionBlock = (_ success: Bool, _ error: APIError?, _ movies: [Movie]) -> ()
+typealias MoviesListCompletionBlock = (_ error: APIError?, _ movies: [Movie]) -> ()
 typealias MoviePosterCompletionBlock = (_ poster: UIImage) -> ()
