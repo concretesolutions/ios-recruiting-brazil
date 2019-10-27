@@ -27,6 +27,7 @@ class MoviesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Popular Movies"
 
         self.view.addSubviews([self.moviesCollectionView, self.loadingIndicator, self.errorView])
         self.toggleErrorMessage(show: false)
