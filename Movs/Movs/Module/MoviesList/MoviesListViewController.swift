@@ -19,9 +19,7 @@ class MoviesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(self.moviesCollectionView)
-        self.view.addSubview(self.loadingIndicator)
-        self.view.addSubview(self.errorView)
+        self.view.addSubviews([self.moviesCollectionView, self.loadingIndicator, self.errorView])
         self.toggleErrorMessage(show: false)
         
         self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
