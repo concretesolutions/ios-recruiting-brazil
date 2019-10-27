@@ -16,6 +16,16 @@ class MovieDetailsViewController: UIViewController {
     private let genresLbl = UILabel()
     private let descriptionView = UITextView()
     
+    var viewModel: MovieDetailsViewModel! {
+        didSet {
+            self.posterView.image = self.viewModel.posterImg
+            self.titleLbl.text = self.viewModel.titleText
+            self.yearLbl.text = self.viewModel.yearText
+            self.genresLbl.text = self.viewModel.genresText
+            self.descriptionView.text = self.viewModel.descriptionText
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,12 +37,10 @@ class MovieDetailsViewController: UIViewController {
         self.descriptionView.isEditable = false
         self.descriptionView.font = UIFont.preferredFont(forTextStyle: .body)
         
-        // testing block:
-        self.posterView.image = UIImage(named: "stevenPoster")
-        self.titleLbl.text = "Steven Universe: The Movie"
-        self.yearLbl.text = "2019"
-        self.genresLbl.text = "Animation, Drama"
-        self.descriptionView.text = "Two years after the events of 'Change Your Mind', Steven (now 16 years old) and his friends are ready to enjoy the rest of their lives peacefully. However, all of that changes when a new sinister Gem arrives, armed with a giant drill that saps the life force of all living things on Earth. In their biggest challenge ever, the Crystal Gems must work together to save all organic life on Earth within 48 hours."
+        // testing viewModel:
+        let movie = Movie(withTitle: "Steve Universe: The Movie", andPoster: "stevenPoster", andReleaseDate: "2019-10-18", andGenreIds: [80, 19, 53], andOverview: "Two years after the events of 'Change Your Mind', Steven (now 16 years old) and his friends are ready to enjoy the rest of their lives peacefully. However, all of that changes when a new sinister Gem arrives, armed with a giant drill that saps the life force of all living things on Earth. In their biggest challenge ever, the Crystal Gems must work together to save all organic life on Earth within 48 hours.")
+        let prevVM = MovieCellViewModel(with: movie)
+        self.viewModel = MovieDetailsViewModel(with: prevVM)
 
         self.view.addSubviews([self.posterView, self.titleLbl, self.yearLbl, self.genresLbl, self.descriptionView])
         UIView.translatesAutoresizingMaskIntoConstraints(to: [self.posterView, self.titleLbl, self.yearLbl, self.genresLbl, self.descriptionView])

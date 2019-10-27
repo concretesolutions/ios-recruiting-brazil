@@ -14,5 +14,6 @@ enum APIError: String {
 
 protocol MovieServiceProtocol {
     static var shared: MovieServiceProtocol { get }
+    var popularMovies: [Movie] { get }
     func fectchPopularMovies(completition: @escaping MoviesListCompletionBlock)
 }

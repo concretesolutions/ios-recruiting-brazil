@@ -9,11 +9,11 @@
 import UIKit
 
 class MovieCellViewModel {
-    private var movie: Movie
+    private(set) var movie: Movie
     
     let titleText: String
-    var posterImage: UIImage?
-    var isLoadingPoster: Bool = true // TODO: add placeholder image
+    var posterImage: UIImage = UIImage(named: "stevenPoster")! // TODO: add placeholder image
+    var isLoadingPoster: Bool = true
     
     init(with movie: Movie) {
         self.movie = movie
@@ -25,9 +25,10 @@ class MovieCellViewModel {
         // TODO: fetch poster from URL
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.isLoadingPoster = false
-            self.posterImage = UIImage(named: "stevenPoster")
-            // TODO: if poster retrival fails, retrun placeholder image
-            completion(self.posterImage!)
+            if let image = UIImage(named: "stevenPoster") {
+                self.posterImage = image
+            }
+            completion(self.posterImage)
         }
     }
 }
