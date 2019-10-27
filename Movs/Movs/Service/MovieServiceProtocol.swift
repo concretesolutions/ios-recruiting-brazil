@@ -13,5 +13,6 @@ enum APIError: String, Error {
 }
 
 protocol MovieServiceProtocol {
-    func fectchPopularMovies(completed: @escaping (_ success: Bool, _ error: APIError?, _ movies: [Movie]) -> ())
+    static var shared: MovieServiceProtocol { get }
+    func fectchPopularMovies(completition: @escaping MoviesListCompletionBlock)
 }

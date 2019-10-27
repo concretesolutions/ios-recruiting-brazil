@@ -9,7 +9,10 @@
 import Foundation
 
 class TMDBMovieService: MovieServiceProtocol {
-    func fectchPopularMovies(completed: @escaping (Bool, APIError?, [Movie]) -> ()) {
+    private init() {}
+    static private(set) var shared: MovieServiceProtocol = TMDBMovieService()
+    
+    func fectchPopularMovies(completition: @escaping (Bool, APIError?, [Movie]) -> ()) {
         // TODO: implement API request
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let movies = [
@@ -18,7 +21,7 @@ class TMDBMovieService: MovieServiceProtocol {
                 Movie(withTitle: "Steve Universe", andPoster: "stevenPoster"),
                 Movie(withTitle: "Steve", andPoster: "stevenPoster"),
             ]
-            completed(true, nil, movies)
+            completition(true, nil, movies)
         }
     }
 }

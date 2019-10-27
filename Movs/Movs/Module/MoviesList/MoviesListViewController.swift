@@ -10,7 +10,9 @@ import UIKit
 
 class MoviesListViewController: UIViewController {
 
-    var moviesCollectionView = MoviesListCollectionView()
+    private var moviesCollectionView = MoviesListCollectionView()
+    
+    var viewModel = MoviesListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,10 @@ class MoviesListViewController: UIViewController {
         ])
         self.moviesCollectionView.dataSource = self
         self.moviesCollectionView.delegate = self
+        
+        self.viewModel.fetchMovies {
+            self.moviesCollectionView.reloadData()
+        }
     }
     
 
@@ -46,12 +52,16 @@ extension MoviesListViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return viewModel.numberOfCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesListCollectionView.MOVIE_CELL_IDENTIFIER, for: indexPath)
-//        cell.backgroundColor = .blue
+        
+        if let cellViewModel = self.viewModel.getViewModelForCell(at: indexPath), cell is MovieCollectionCell {
+            (cell as! MovieCollectionCell).viewModel = cellViewModel
+        }
+        
         return cell
     }
     
