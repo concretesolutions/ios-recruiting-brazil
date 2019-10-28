@@ -111,4 +111,13 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let unfavoriteAction = UIContextualAction(style: .destructive, title: "Unfavorite") { (_, _, completionHandler) in
+            self.viewModel.unfavoriteMovie(at: indexPath, completion: completionHandler)
+        }
+        let actionsConfiguration = UISwipeActionsConfiguration(actions: [unfavoriteAction])
+//        actionsConfiguration.performsFirstActionWithFullSwipe = true
+        return actionsConfiguration
+    }
+    
 }

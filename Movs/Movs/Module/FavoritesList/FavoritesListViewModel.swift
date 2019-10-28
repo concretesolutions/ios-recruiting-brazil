@@ -75,4 +75,14 @@ class FavoritesListViewModel {
         }
     }
     
+    func unfavoriteMovie(at indexPath: IndexPath, completion: @escaping (Bool)->()) {
+        guard let viewModel = self.getViewModelForCell(at: indexPath) else {
+            completion(false)
+            return
+        }
+        self.movieService.toggleFavorite(for: viewModel.movie) { (success, _) in
+            completion(success)
+        }
+    }
+    
 }
