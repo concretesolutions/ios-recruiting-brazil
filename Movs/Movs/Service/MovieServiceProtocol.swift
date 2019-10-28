@@ -15,6 +15,8 @@ enum APIError: String {
 protocol MovieServiceProtocol {
     static var shared: MovieServiceProtocol { get }
     var popularMovies: [Movie] { get }
+    var favoriteMovies: [Movie] { get }
+    
     func fetchPopularMovies(completion: @escaping MoviesListCompletionBlock)
     func fetchFavoriteMovies(completion: @escaping MoviesListCompletionBlock)
     func toggleFavorite(for movie: Movie, completion: SuccessOrErrorCompletionBlock?)

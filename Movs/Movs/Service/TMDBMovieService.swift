@@ -49,6 +49,7 @@ class TMDBMovieService: MovieServiceProtocol {
         }
         
         movie.isFavorite = !movie.isFavorite
+        NotificationCenter.default.post(name: .didUpdateFavoritesList, object: self)
         
         // call calback with success status and/or error
         completion?(true, nil)

@@ -33,6 +33,10 @@ class FavoritesListViewModel {
         self.movieService = service
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func getViewModelForCell(at indexPath: IndexPath) -> FavoriteMovieCellViewModel? {
         let index = indexPath.row
         if index < 0 || index > self.cellCount {
@@ -53,7 +57,15 @@ class FavoritesListViewModel {
             
                 self.isLoadingList = false
                 self.cellViewModels = movies.map({ FavoriteMovieCellViewModel(with: $0) })
+                
+                NotificationCenter.default.addObserver(self, selector: #selector(self.updateFavoritesList), name: .didUpdateFavoritesList, object: nil)
             }
+        }
+    }
+    
+    @objc private func updateFavoritesList() {
+        DispatchQueue.main.async {
+            self.cellViewModels = self.movieService.favoriteMovies.map({ FavoriteMovieCellViewModel(with: $0) })
         }
     }
     
