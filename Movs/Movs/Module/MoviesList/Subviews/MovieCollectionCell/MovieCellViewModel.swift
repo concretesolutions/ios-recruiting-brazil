@@ -15,20 +15,32 @@ class MovieCellViewModel {
     private(set) var posterImage: UIImage = UIImage(named: "stevenPoster")! // TODO: add placeholder image
     private(set) var isLoadingPoster: Bool = true
     
+    private var imageUrl: URL
+    
     init(with movie: Movie) {
         self.movie = movie
         self.titleText = movie.title
+        
+        let baseImgUrl = "https://image.tmdb.org/t/p/w500"
+        imageUrl = URL(string: baseImgUrl + movie.posterPath)!
     }
     
     func fetchPoster(completion: @escaping MoviePosterCompletionBlock) {
         self.isLoadingPoster = true
-        // TODO: fetch poster from URL
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.isLoadingPoster = false
-            if let image = UIImage(named: "stevenPoster") {
-                self.posterImage = image
+        
+        self.getData(from: self.imageUrl) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() {
+                self.isLoadingPoster = false
+                if let image = UIImage(data: data) {
+                    self.posterImage = image
+                }
+                completion(self.posterImage)
             }
-            completion(self.posterImage)
         }
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
 }

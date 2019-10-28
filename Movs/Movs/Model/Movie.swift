@@ -8,26 +8,26 @@
 
 import Foundation
 
-class Movie {
-    let id: UUID
+class Movie: Codable {
+    let id: Int
     let title: String
     let posterPath: String
-    let releaseDate: Date?
-    let genreIds: [Int]
-    let overview: String
-    var isFavorite: Bool
-    
-    init(withTitle title: String, andPoster posterPath: String, andReleaseDate dateStr: String, andGenreIds genreIds: [Int], andOverview overview: String, isFavorite: Bool = false) {
-        self.id = UUID()
-        self.title = title
-        self.posterPath = posterPath
-        
+    let releaseDateStr: String
+    var releaseDate: Date? {
         let dateFormartter = DateFormatter()
         dateFormartter.dateFormat = "yyyy-MM-dd"
-        self.releaseDate = dateFormartter.date(from: dateStr)
-        
-        self.genreIds = genreIds
-        self.overview = overview
-        self.isFavorite = isFavorite
+        return dateFormartter.date(from: self.releaseDateStr)
+    }
+    let genreIds: [Int]
+    let overview: String
+    var isFavorite: Bool = false
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case posterPath = "poster_path"
+        case releaseDateStr = "release_date"
+        case genreIds = "genre_ids"
+        case overview
     }
 }
