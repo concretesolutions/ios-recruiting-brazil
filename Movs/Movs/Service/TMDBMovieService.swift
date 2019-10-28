@@ -18,6 +18,8 @@ class TMDBMovieService: MovieServiceProtocol {
     
     private(set) var popularMovies: [Movie] = []
     private(set) var favoriteMovies: [Movie] = []
+    private var fetchedFavoriteMovies: Bool = false
+    private var favoriteIds: [Int : Bool] = [:]
     
     private func urlRequestFor(path: String) -> URLRequest {
         var urlComponents = URLComponents()
@@ -44,7 +46,13 @@ class TMDBMovieService: MovieServiceProtocol {
         }
     }()
     
+    // MARK: Actions
+    
     func fetchPopularMovies(completion: @escaping MoviesListCompletionBlock) {
+        if !self.fetchedFavoriteMovies {
+            self.fetchFavoriteMovies(completion: nil)
+        }
+        
         let request = self.urlRequestFor(path: "/movie/popular")
         
         let task = self.urlSession.dataTask(with: request) { (responseData, response, responseError) in
@@ -55,7 +63,8 @@ class TMDBMovieService: MovieServiceProtocol {
                     let decoder = JSONDecoder()
                     do {
                         let response = try decoder.decode(APIResponse.self, from: jsonData)
-                        self.popularMovies = response.results
+                        let movies = self.syncMoviesWithFavorites(response.results)
+                        self.popularMovies = movies
                         completion(nil, self.popularMovies)
                     } catch {
                         completion(.genericError, [])
@@ -66,10 +75,10 @@ class TMDBMovieService: MovieServiceProtocol {
         task.resume()
     }
     
-    func fetchFavoriteMovies(completion: @escaping MoviesListCompletionBlock) {
+    func fetchFavoriteMovies(completion: MoviesListCompletionBlock?) {
         let fileExists = FileManager.default.fileExists(atPath: self.favoritsDocumentUrl.path)
-        if !fileExists {
-            completion(nil, self.favoriteMovies)
+        if !fileExists || self.fetchedFavoriteMovies {
+            completion?(nil, self.favoriteMovies)
             return
         }
         
@@ -79,11 +88,13 @@ class TMDBMovieService: MovieServiceProtocol {
             let movies = try decoder.decode([Movie].self, from: data)
             for movie in movies {
                 movie.isFavorite = true
+                self.favoriteIds[movie.id] = true
             }
             self.favoriteMovies = movies
-            completion(nil, self.favoriteMovies)
+            self.fetchedFavoriteMovies = true
+            completion?(nil, self.favoriteMovies)
         } catch {
-            completion(.genericError, [])
+            completion?(.genericError, [])
         }
     }
     
@@ -98,11 +109,14 @@ class TMDBMovieService: MovieServiceProtocol {
         }
         
         movie.isFavorite = !movie.isFavorite
+        self.favoriteIds[movie.id] = movie.isFavorite
         NotificationCenter.default.post(name: .didUpdateFavoritesList, object: self)
         
         self.saveFavoritesToDisk(completion: completion)
         completion?(true, nil)
     }
+    
+    // MARK: Private fuctions
     
     private func saveFavoritesToDisk(completion: SuccessOrErrorCompletionBlock?) {
         let encoder = JSONEncoder()
@@ -114,5 +128,15 @@ class TMDBMovieService: MovieServiceProtocol {
         } catch {
             completion?(false, .genericError)
         }
+    }
+    
+    private func syncMoviesWithFavorites(_ movies: [Movie]) -> [Movie] {
+        for movie in movies {
+            let isFavorite = self.favoriteIds[movie.id] ?? false
+            if isFavorite {
+                movie.isFavorite = true
+            }
+        }
+        return movies
     }
 }
