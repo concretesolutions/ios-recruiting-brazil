@@ -22,7 +22,7 @@ class TabBarFlowController {
         moviesFlowController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
         let favoritesFlowController = FavoritesFlowController(withService: self.movieService)
         favoritesFlowController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon"), tag: 1)
-        self.tabController.setViewControllers([favoritesFlowController, moviesFlowController], animated: true)
+        self.tabController.setViewControllers([moviesFlowController, favoritesFlowController], animated: true)
         
         self.tabController.tabBar.barTintColor = UIColor.appYellow
         self.tabController.tabBar.tintColor = UIColor.appDarkBlue

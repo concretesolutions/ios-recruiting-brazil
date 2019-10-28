@@ -37,8 +37,8 @@
 		6790D17A23671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17923671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift */; };
 		6790D17C23671ED3000C3BB4 /* Date+YearString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17B23671ED3000C3BB4 /* Date+YearString.swift */; };
 		6790D17E236720B2000C3BB4 /* FavoritesListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17D236720B2000C3BB4 /* FavoritesListDelegate.swift */; };
-		6790D18123672C1E000C3BB4 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D18023672C1E000C3BB4 /* MessageView.swift */; };
-		6790D18323672C3E000C3BB4 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D18223672C3E000C3BB4 /* MessageViewModel.swift */; };
+		6790D18523673869000C3BB4 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D18423673869000C3BB4 /* MessageView.swift */; };
+		6790D1872367387B000C3BB4 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D1862367387B000C3BB4 /* MessageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,8 +95,8 @@
 		6790D17923671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCellViewModel.swift; sourceTree = "<group>"; };
 		6790D17B23671ED3000C3BB4 /* Date+YearString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+YearString.swift"; sourceTree = "<group>"; };
 		6790D17D236720B2000C3BB4 /* FavoritesListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListDelegate.swift; sourceTree = "<group>"; };
-		6790D18023672C1E000C3BB4 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		6790D18223672C3E000C3BB4 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		6790D18423673869000C3BB4 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		6790D1862367387B000C3BB4 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +190,7 @@
 		6700B43A23649F35005C1586 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				6790D17F23672B11000C3BB4 /* MessageView */,
 				6700B43B23649FCA005C1586 /* MoviesList */,
 				6790D15C2365F7D1000C3BB4 /* MovieDetails */,
 				6790D17123665783000C3BB4 /* FavoritesList */,
@@ -200,7 +201,6 @@
 		6700B43B23649FCA005C1586 /* MoviesList */ = {
 			isa = PBXGroup;
 			children = (
-				6790D17F23672B11000C3BB4 /* MessageView */,
 				6790D1562365DD46000C3BB4 /* Subviews */,
 				6700B43C2364A06B005C1586 /* MoviesListViewController.swift */,
 				6790D1522365D01E000C3BB4 /* MoviesListViewModel.swift */,
@@ -306,8 +306,8 @@
 		6790D17F23672B11000C3BB4 /* MessageView */ = {
 			isa = PBXGroup;
 			children = (
-				6790D18023672C1E000C3BB4 /* MessageView.swift */,
-				6790D18223672C3E000C3BB4 /* MessageViewModel.swift */,
+				6790D18423673869000C3BB4 /* MessageView.swift */,
+				6790D1862367387B000C3BB4 /* MessageViewModel.swift */,
 			);
 			path = MessageView;
 			sourceTree = "<group>";
@@ -454,17 +454,17 @@
 				6790D17823671B3D000C3BB4 /* FavoritesListViewModel.swift in Sources */,
 				6790D1632366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift in Sources */,
 				6790D16523662158000C3BB4 /* MovieDetailsViewModel.swift in Sources */,
+				6790D18523673869000C3BB4 /* MessageView.swift in Sources */,
 				6790D14E2365C3D9000C3BB4 /* MovieCellViewModel.swift in Sources */,
 				6790D1702366574D000C3BB4 /* FavoritesFlowController.swift in Sources */,
 				6790D17C23671ED3000C3BB4 /* Date+YearString.swift in Sources */,
 				6790D17E236720B2000C3BB4 /* FavoritesListDelegate.swift in Sources */,
 				6790D173236657A9000C3BB4 /* FavoritesListViewController.swift in Sources */,
+				6790D1872367387B000C3BB4 /* MessageViewModel.swift in Sources */,
 				6790D17623665E45000C3BB4 /* FavoriteMovieTableCell.swift in Sources */,
-				6790D18323672C3E000C3BB4 /* MessageViewModel.swift in Sources */,
 				6790D1512365C8AD000C3BB4 /* CompletionBlock.swift in Sources */,
 				6790D16A23663E58000C3BB4 /* MoviesListFlowController.swift in Sources */,
 				6700B43D2364A06B005C1586 /* MoviesListViewController.swift in Sources */,
-				6790D18123672C1E000C3BB4 /* MessageView.swift in Sources */,
 				6790D15E2365F7F7000C3BB4 /* MovieDetailsViewController.swift in Sources */,
 				6790D17A23671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift in Sources */,
 				6790D1532365D01E000C3BB4 /* MoviesListViewModel.swift in Sources */,
