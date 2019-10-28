@@ -29,8 +29,8 @@ class MoviesListViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Popular Movies"
 
-        self.view.addSubviews([self.moviesCollectionView, self.loadingIndicator, self.errorView])
-        self.toggleErrorMessage(show: false)
+        self.errorView.addAsSubview(to: self.view)
+        self.view.addSubviews([self.moviesCollectionView, self.loadingIndicator])
         
         self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -40,24 +40,13 @@ class MoviesListViewController: UIViewController {
             self.moviesCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
             self.loadingIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            
-            self.errorView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.errorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            self.errorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.errorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
         self.moviesCollectionView.dataSource = self
         self.moviesCollectionView.delegate = self
         self.viewModel.delegate = self
         
         self.viewModel.fetchMovies()
-    }
-
-    func toggleErrorMessage(show: Bool) {
-        UIView.animate(withDuration: 0.5) {
-            self.errorView.alpha = show ? 1 : 0
-        }
     }
 
 }
@@ -77,12 +66,11 @@ extension MoviesListViewController: MoviesListDelegate {
     
     func moviesListUpdated() {
         self.moviesCollectionView.reloadData()
-        self.toggleErrorMessage(show: false)
+        self.errorView.toggle(show: false)
     }
     
     func errorFetchingMovies(error: APIError) {
         self.errorView.viewModel = MessageViewModel(withImageNamed: "error", andMessage: error.rawValue)
-        self.toggleErrorMessage(show: true)
     }
     
 }

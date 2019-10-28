@@ -27,7 +27,7 @@ class TMDBMovieService: MovieServiceProtocol {
         }
     }
     
-    func fectchFavoriteMovies(completition: @escaping MoviesListCompletionBlock) {
+    func fetchFavoriteMovies(completition: @escaping MoviesListCompletionBlock) {
         // TODO: implement API request
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.popularMovies = [

@@ -44,7 +44,7 @@ class FavoritesListViewModel {
     
     func fetchFavorites() {
         self.isLoadingList = true
-        self.movieService.fetchPopularMovies { (error: APIError?, movies: [Movie]) in
+        self.movieService.fetchFavoriteMovies { (error: APIError?, movies: [Movie]) in
             DispatchQueue.main.async {
                 if let error = error {
                     self.delegate?.errorFetchingMovies(error: error)

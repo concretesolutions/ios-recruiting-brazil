@@ -49,10 +49,9 @@ class FavoritesListViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Favorite Movies"
         self.view.backgroundColor = .systemBackground
+        self.errorView.addAsSubview(to: self.view)
 
-        self.view.addSubviews([self.tableView, self.loadingIndicator, self.errorView])
-        self.toggleErrorMessage(show: false)
-        
+        self.view.addSubviews([self.tableView, self.loadingIndicator])
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -60,28 +59,18 @@ class FavoritesListViewController: UIViewController {
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
             self.loadingIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            
-            self.errorView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.errorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            self.errorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.errorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
         
         self.viewModel.delegate = self
         self.viewModel.fetchFavorites()
     }
     
-    func toggleErrorMessage(show: Bool) {
-        UIView.animate(withDuration: 0.5) {
-            self.errorView.alpha = show ? 1 : 0
-        }
-    }
-    
 }
 
 extension FavoritesListViewController: FavoritesListDelegate {
     func favoritesListUpdated() {
+        self.errorView.toggle(show: false)
         self.tableView.reloadData()
     }
     
@@ -99,10 +88,7 @@ extension FavoritesListViewController: FavoritesListDelegate {
     
     func errorFetchingMovies(error: APIError) {
         self.errorView.viewModel = MessageViewModel(withImageNamed: "error", andMessage: error.rawValue)
-        self.toggleErrorMessage(show: true)
     }
-    
-    
 }
 
 extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegate {

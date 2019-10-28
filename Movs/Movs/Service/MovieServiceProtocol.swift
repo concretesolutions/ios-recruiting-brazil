@@ -16,5 +16,5 @@ protocol MovieServiceProtocol {
     static var shared: MovieServiceProtocol { get }
     var popularMovies: [Movie] { get }
     func fetchPopularMovies(completition: @escaping MoviesListCompletionBlock)
-    func fectchFavoriteMovies(completition: @escaping MoviesListCompletionBlock)
+    func fetchFavoriteMovies(completition: @escaping MoviesListCompletionBlock)
 }
