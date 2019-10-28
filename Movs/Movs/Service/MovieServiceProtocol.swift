@@ -17,4 +17,5 @@ protocol MovieServiceProtocol {
     var popularMovies: [Movie] { get }
     func fetchPopularMovies(completion: @escaping MoviesListCompletionBlock)
     func fetchFavoriteMovies(completion: @escaping MoviesListCompletionBlock)
+    func toggleFavorite(for movie: Movie, completion: SuccessOrErrorCompletionBlock?)
 }

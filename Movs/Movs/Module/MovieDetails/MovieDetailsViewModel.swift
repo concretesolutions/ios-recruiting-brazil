@@ -16,6 +16,7 @@ class MovieDetailsViewModel {
     private(set) var yearText: String = ""
     private(set) var genresText: String
     private(set) var descriptionText: String
+    private(set) var favoriteBtnImg: UIImage
     
     private var movieService: MovieServiceProtocol
     
@@ -33,5 +34,13 @@ class MovieDetailsViewModel {
         
         self.genresText = "Animation, Musical" // TODO: get genre strings from API
         self.descriptionText = self.movie.overview
+        
+        self.favoriteBtnImg = movie.isFavorite ? UIImage(systemName: "heart.fill")! : UIImage(systemName: "heart")!
+    }
+    
+    func onFavoriteTapped() {
+        // TODO: change favorite status via service
+        self.movieService.toggleFavorite(for: self.movie, completion: nil)
+        self.favoriteBtnImg = movie.isFavorite ? UIImage(systemName: "heart.fill")! : UIImage(systemName: "heart")!
     }
 }

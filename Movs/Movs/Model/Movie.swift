@@ -15,7 +15,7 @@ class Movie {
     let releaseDate: Date?
     let genreIds: [Int]
     let overview: String
-    let isFavorite: Bool
+    var isFavorite: Bool
     
     init(withTitle title: String, andPoster posterPath: String, andReleaseDate dateStr: String, andGenreIds genreIds: [Int], andOverview overview: String, isFavorite: Bool = false) {
         self.id = UUID()

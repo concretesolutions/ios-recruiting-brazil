@@ -23,13 +23,29 @@ class MovieDetailsViewController: UIViewController {
             self.yearLbl.text = self.viewModel.yearText
             self.genresLbl.text = self.viewModel.genresText
             self.descriptionView.text = self.viewModel.descriptionText
+            
+            self.navigationItem.rightBarButtonItem = self.favoriteBtn
         }
+    }
+    
+    private lazy var favoriteBtn: UIBarButtonItem = {
+        let image = self.viewModel.favoriteBtnImg
+        let favoriteBtn = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(MovieDetailsViewController.favoriteTapped))
+        return favoriteBtn
+    }()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        self.view.backgroundColor = .systemBackground
+        self.title = "Movie"
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
-        self.title = "Movie"
         
         self.posterView.contentMode = .scaleAspectFill
         self.posterView.clipsToBounds = true
@@ -66,15 +82,9 @@ class MovieDetailsViewController: UIViewController {
         ])
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func favoriteTapped() {
+        self.viewModel.onFavoriteTapped()
+        self.navigationItem.rightBarButtonItem?.image = self.viewModel.favoriteBtnImg
     }
-    */
 
 }
