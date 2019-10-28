@@ -15,20 +15,21 @@ class TMDBMovieService: MovieServiceProtocol {
     private(set) var popularMovies: [Movie] = []
     private(set) var favoriteMovies: [Movie] = []
     
-    private lazy var popularMoviesUrl: URL = {
+    private func urlFor(path: String) -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.themoviedb.org"
-        urlComponents.path = "/3/movie/popular"
+        urlComponents.path = "/3\(path)"
         let apiKeyItem = URLQueryItem(name: "api_key", value: "fc6b049905f30ded698536f6721cc0b1")
         urlComponents.queryItems = [apiKeyItem]
         guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
         print("URL:", url)
         return url
-    }()
+    }
     
     func fetchPopularMovies(completion: @escaping MoviesListCompletionBlock) {
-        let request = URLRequest(url: self.popularMoviesUrl)
+        let url = self.urlFor(path: "/movie/popular")
+        let request = URLRequest(url: url)
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
