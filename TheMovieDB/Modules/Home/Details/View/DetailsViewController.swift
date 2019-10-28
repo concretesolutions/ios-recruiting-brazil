@@ -10,12 +10,17 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
+    // MARK: - Constants
+    let favoriteUncheckedImage = UIImage(named: "favorite_gray_icon")
+    let favoriteCheckedImage = UIImage(named: "favorite_full_icon")
+    
     // MARK: - IBOutlets
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var movieYearLabel: UILabel!
     @IBOutlet weak var movieGenrerLabel: UILabel!
     @IBOutlet weak var movieDescLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     // MARK: - Variables
     var viewModel: DetailsViewControllerViewModel!
@@ -45,8 +50,14 @@ class DetailsViewController: UIViewController {
         movieGenrerLabel.text = String(movie.genreIds?[0] ?? 0)
         movieDescLabel.text = movie.overview
         
+        setFavoritedButton(status: movie.isFavorited)
         downloadImage(from: movie)
         viewModel.requestGenre(from: movie)
+    }
+    
+    private func setFavoritedButton(status: Bool) {
+        let image = status ? favoriteCheckedImage : favoriteUncheckedImage
+        favoriteButton.setBackgroundImage(image, for: .normal)
     }
     
     private func downloadImage(from movie: MovieResponse) {
@@ -59,7 +70,19 @@ class DetailsViewController: UIViewController {
 
 // MARK: - DetailsViewControllerProtocol
 extension DetailsViewController: DetailsViewControllerProtocol {
+    func setFavoritedMovie(status: Bool) {
+        movie.isFavorited = status
+        setFavoritedButton(status: status)
+    }
+    
     func setMovie(genre: String) {
         movieGenrerLabel.text = genre
+    }
+}
+
+// MARK: - User Action
+extension DetailsViewController {
+    @IBAction func didTapFavoriteButton(_ sender: UIButton) {
+        viewModel.didTapFavoriteButton(movie: movie)
     }
 }

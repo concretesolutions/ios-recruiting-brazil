@@ -8,4 +8,5 @@
 
 protocol DetailsViewControllerProtocol {
     func setMovie(genre: String)
+    func setFavoritedMovie(status: Bool)
 }

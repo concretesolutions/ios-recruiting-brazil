@@ -10,6 +10,9 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
+    let favoriteUncheckedImage = UIImage(named: "favorite_gray_icon")
+    let favoriteCheckedImage = UIImage(named: "favorite_full_icon")
+    
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieLabel: UILabel!
     @IBOutlet weak var favoriteImage: UIImageView!
@@ -21,6 +24,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func configureCell(with movie: MovieResponse) {
         movieLabel.text = movie.title
+        favoriteImage.image = movie.isFavorited ? favoriteCheckedImage : favoriteUncheckedImage
         downloadImage(from: movie)
     }
     

@@ -22,4 +22,19 @@ class FavoriteTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    func configureCell(with movie: MovieResponse) {
+        titleLabel.text = movie.title
+        yearLabel.text = movie.releaseDate?.getYearFromDate()
+        descLabel.text = movie.overview
+        
+        downloadImage(from: movie)
+    }
+    
+    private func downloadImage(from movie: MovieResponse) {
+        let endPoint = "\(API.ImageSize.w200.rawValue)\(movie.posterPath ?? "")"
+        if let url = URL(string: endPoint, relativeTo: API.imageUrlBase) {
+            movieImage.af_setImage(withURL: url)
+        }
+    }
 }

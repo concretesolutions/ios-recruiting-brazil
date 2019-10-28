@@ -22,6 +22,7 @@ struct MovieResponse: Codable {
     var voteAverage: Float?
     var overview: String?
     var releaseDate: String?
+    var isFavorited = false
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"

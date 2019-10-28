@@ -43,6 +43,13 @@ class MoviesViewController: UIViewController {
         viewModel.requestPopularMovies(page: 1)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if moviesList != nil {
+            viewModel.filterFavoritedMovies(moviesList!)
+        }
+    }
+    
     private func configView() {
         navigationItem.searchController?.searchResultsUpdater = self
     }

@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController" customModule="TheMovieDB" customModuleProvider="target">
             <connections>
+                <outlet property="favoriteButton" destination="bKv-sa-pi6" id="Pte-uC-q7X"/>
                 <outlet property="movieDescLabel" destination="NND-h1-IV1" id="PhO-ng-ehh"/>
                 <outlet property="movieGenrerLabel" destination="bV8-US-DbX" id="WQ6-FE-CB9"/>
                 <outlet property="movieImage" destination="9vw-br-sJ9" id="ejZ-zk-4rC"/>
@@ -88,17 +89,20 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_gray_icon" translatesAutoresizingMaskIntoConstraints="NO" id="P50-yr-gSU">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKv-sa-pi6">
                                     <rect key="frame" x="334" y="438" width="25" height="25"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="25" id="Rev-aI-63k"/>
-                                        <constraint firstAttribute="width" constant="25" id="rZr-Nj-2cb"/>
+                                        <constraint firstAttribute="height" constant="25" id="PEh-Jy-ljZ"/>
+                                        <constraint firstAttribute="width" constant="25" id="X7K-r9-DYZ"/>
                                     </constraints>
-                                </imageView>
+                                    <state key="normal" backgroundImage="favorite_gray_icon"/>
+                                    <connections>
+                                        <action selector="didTapFavoriteButton:" destination="-1" eventType="touchUpInside" id="aj0-at-wjr"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstItem="P50-yr-gSU" firstAttribute="leading" secondItem="X33-HC-p2c" secondAttribute="trailing" constant="4" id="4tG-Tf-CoR"/>
                                 <constraint firstItem="QhI-AG-vjk" firstAttribute="top" secondItem="X33-HC-p2c" secondAttribute="bottom" constant="16" id="9CZ-DT-2TC"/>
                                 <constraint firstItem="Scb-gu-Bc3" firstAttribute="top" secondItem="AfL-f4-y70" secondAttribute="bottom" constant="16" id="9k7-gp-keh"/>
                                 <constraint firstItem="Scb-gu-Bc3" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="AWS-vi-jMm"/>
@@ -109,22 +113,23 @@
                                 <constraint firstAttribute="trailing" secondItem="QhI-AG-vjk" secondAttribute="trailing" constant="16" id="F6D-pC-2oS"/>
                                 <constraint firstAttribute="trailing" secondItem="9vw-br-sJ9" secondAttribute="trailing" constant="16" id="Gt6-5z-bkd"/>
                                 <constraint firstItem="X33-HC-p2c" firstAttribute="top" secondItem="9vw-br-sJ9" secondAttribute="bottom" constant="32" id="MGf-Y6-tHR"/>
-                                <constraint firstAttribute="trailing" secondItem="P50-yr-gSU" secondAttribute="trailing" constant="16" id="Mkb-8Z-aBU"/>
                                 <constraint firstItem="NND-h1-IV1" firstAttribute="top" secondItem="Zw2-MG-1J5" secondAttribute="bottom" constant="16" id="MuT-LA-8jL"/>
                                 <constraint firstItem="Zw2-MG-1J5" firstAttribute="top" secondItem="bV8-US-DbX" secondAttribute="bottom" constant="6" id="Oq8-ml-Dwc"/>
                                 <constraint firstAttribute="trailing" secondItem="Scb-gu-Bc3" secondAttribute="trailing" constant="16" id="P4s-8q-65Q"/>
-                                <constraint firstItem="P50-yr-gSU" firstAttribute="centerY" secondItem="X33-HC-p2c" secondAttribute="centerY" id="Qyq-5h-M6w"/>
+                                <constraint firstAttribute="trailing" secondItem="bKv-sa-pi6" secondAttribute="trailing" constant="16" id="SkE-oL-gYV"/>
                                 <constraint firstItem="9vw-br-sJ9" firstAttribute="top" secondItem="urd-Ra-ek5" secondAttribute="top" constant="8" id="aRL-aY-8yQ"/>
                                 <constraint firstItem="QhI-AG-vjk" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="cfw-JI-BQa"/>
                                 <constraint firstItem="Zw2-MG-1J5" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="dKM-Tr-IrE"/>
                                 <constraint firstItem="9vw-br-sJ9" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="eZb-FY-Kax"/>
                                 <constraint firstAttribute="trailing" secondItem="AfL-f4-y70" secondAttribute="trailing" constant="16" id="hh0-XT-bBj"/>
                                 <constraint firstItem="AfL-f4-y70" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="kNR-KV-Mqm"/>
+                                <constraint firstItem="bKv-sa-pi6" firstAttribute="centerY" secondItem="X33-HC-p2c" secondAttribute="centerY" id="kZ8-Cj-ekr"/>
                                 <constraint firstAttribute="trailing" secondItem="Zw2-MG-1J5" secondAttribute="trailing" constant="16" id="kjm-3C-pu9"/>
                                 <constraint firstItem="bV8-US-DbX" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="lq5-6g-Kvz"/>
                                 <constraint firstItem="NND-h1-IV1" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="puR-6N-uDZ"/>
                                 <constraint firstItem="X33-HC-p2c" firstAttribute="leading" secondItem="urd-Ra-ek5" secondAttribute="leading" constant="16" id="yA9-ig-3gu"/>
                                 <constraint firstItem="AfL-f4-y70" firstAttribute="top" secondItem="QhI-AG-vjk" secondAttribute="bottom" constant="16" id="zgA-dB-1CX"/>
+                                <constraint firstItem="bKv-sa-pi6" firstAttribute="leading" secondItem="X33-HC-p2c" secondAttribute="trailing" constant="4" id="znH-Pv-jPW"/>
                             </constraints>
                         </view>
                     </subviews>
