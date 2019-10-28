@@ -12,8 +12,8 @@ class MovieCellViewModel {
     private(set) var movie: Movie
     
     let titleText: String
-    var posterImage: UIImage = UIImage(named: "stevenPoster")! // TODO: add placeholder image
-    var isLoadingPoster: Bool = true
+    private(set) var posterImage: UIImage = UIImage(named: "stevenPoster")! // TODO: add placeholder image
+    private(set) var isLoadingPoster: Bool = true
     
     init(with movie: Movie) {
         self.movie = movie

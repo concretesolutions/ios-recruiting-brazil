@@ -28,9 +28,7 @@ class MovieDetailsViewModel {
         self.titleText = movie.title
         
         if let releaseDate = self.movie.releaseDate {
-            let calendar = Calendar.current
-            let year = calendar.component(.year, from: releaseDate)
-            self.yearText = "\(year)"
+            self.yearText = releaseDate.yearString
         }
         
         self.genresText = "Animation, Musical" // TODO: get genre strings from API

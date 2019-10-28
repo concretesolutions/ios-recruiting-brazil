@@ -33,6 +33,18 @@ class FavoriteMovieTableCell: UITableViewCell {
         return separator
     }()
     
+    var viewModel: FavoriteMovieCellViewModel? {
+        didSet {
+            guard let viewModel = self.viewModel else {
+                return
+            }
+            self.posterImgView.image = viewModel.posterImage
+            self.titleLbl.text = viewModel.titleText
+            self.yearLbl.text = viewModel.yearText
+            self.descriptionLbl.text = viewModel.descriptionText
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .secondarySystemBackground
@@ -41,10 +53,6 @@ class FavoriteMovieTableCell: UITableViewCell {
         self.descriptionLbl.numberOfLines = 0
         self.descriptionLbl.lineBreakMode = .byTruncatingTail
         UIView.translatesAutoresizingMaskIntoConstraints(to: [self.titleLbl, self.yearLbl, self.descriptionLbl])
-        
-        self.titleLbl.text = "Steven Universe"
-        self.yearLbl.text = "2019"
-        self.descriptionLbl.text = "Two years after the events of 'Change Your Mind', Steven (now 16 years old) and his friends are ready to enjoy the rest of their lives peacefully. However, all of that changes when a new sinister Gem arrives, armed with a giant drill that saps the life force of all living things on Earth. In their biggest challenge ever, the Crystal Gems must work together to save all organic life on Earth within 48 hours."
         
         NSLayoutConstraint.activate([
             self.posterImgView.topAnchor.constraint(equalTo: self.topAnchor),

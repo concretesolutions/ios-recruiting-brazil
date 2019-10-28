@@ -34,6 +34,10 @@
 		6790D1702366574D000C3BB4 /* FavoritesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D16F2366574D000C3BB4 /* FavoritesFlowController.swift */; };
 		6790D173236657A9000C3BB4 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D172236657A9000C3BB4 /* FavoritesListViewController.swift */; };
 		6790D17623665E45000C3BB4 /* FavoriteMovieTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17523665E45000C3BB4 /* FavoriteMovieTableCell.swift */; };
+		6790D17823671B3D000C3BB4 /* FavoritesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17723671B3D000C3BB4 /* FavoritesListViewModel.swift */; };
+		6790D17A23671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17923671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift */; };
+		6790D17C23671ED3000C3BB4 /* Date+YearString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17B23671ED3000C3BB4 /* Date+YearString.swift */; };
+		6790D17E236720B2000C3BB4 /* FavoritesListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17D236720B2000C3BB4 /* FavoritesListDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +91,10 @@
 		6790D16F2366574D000C3BB4 /* FavoritesFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesFlowController.swift; sourceTree = "<group>"; };
 		6790D172236657A9000C3BB4 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
 		6790D17523665E45000C3BB4 /* FavoriteMovieTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieTableCell.swift; sourceTree = "<group>"; };
+		6790D17723671B3D000C3BB4 /* FavoritesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewModel.swift; sourceTree = "<group>"; };
+		6790D17923671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCellViewModel.swift; sourceTree = "<group>"; };
+		6790D17B23671ED3000C3BB4 /* Date+YearString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+YearString.swift"; sourceTree = "<group>"; };
+		6790D17D236720B2000C3BB4 /* FavoritesListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +266,7 @@
 				6790D160236611AE000C3BB4 /* UIView+AddSubviewsArray.swift */,
 				6790D1622366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift */,
 				6790D16D2366433B000C3BB4 /* UIColor+AppColors.swift */,
+				6790D17B23671ED3000C3BB4 /* Date+YearString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,6 +286,8 @@
 			children = (
 				6790D17423665E28000C3BB4 /* FavoriteMovieTableCell */,
 				6790D172236657A9000C3BB4 /* FavoritesListViewController.swift */,
+				6790D17723671B3D000C3BB4 /* FavoritesListViewModel.swift */,
+				6790D17D236720B2000C3BB4 /* FavoritesListDelegate.swift */,
 			);
 			path = FavoritesList;
 			sourceTree = "<group>";
@@ -285,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				6790D17523665E45000C3BB4 /* FavoriteMovieTableCell.swift */,
+				6790D17923671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift */,
 			);
 			path = FavoriteMovieTableCell;
 			sourceTree = "<group>";
@@ -429,16 +441,20 @@
 				6790D15B2365F3A2000C3BB4 /* MessageView.swift in Sources */,
 				6790D16823663AA1000C3BB4 /* TabBarFlowController.swift in Sources */,
 				6700B4462364B53C005C1586 /* MovieServiceProtocol.swift in Sources */,
+				6790D17823671B3D000C3BB4 /* FavoritesListViewModel.swift in Sources */,
 				6790D1632366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift in Sources */,
 				6790D16523662158000C3BB4 /* MovieDetailsViewModel.swift in Sources */,
 				6790D14E2365C3D9000C3BB4 /* MovieCellViewModel.swift in Sources */,
 				6790D1702366574D000C3BB4 /* FavoritesFlowController.swift in Sources */,
+				6790D17C23671ED3000C3BB4 /* Date+YearString.swift in Sources */,
+				6790D17E236720B2000C3BB4 /* FavoritesListDelegate.swift in Sources */,
 				6790D173236657A9000C3BB4 /* FavoritesListViewController.swift in Sources */,
 				6790D17623665E45000C3BB4 /* FavoriteMovieTableCell.swift in Sources */,
 				6790D1512365C8AD000C3BB4 /* CompletionBlock.swift in Sources */,
 				6790D16A23663E58000C3BB4 /* MoviesListFlowController.swift in Sources */,
 				6700B43D2364A06B005C1586 /* MoviesListViewController.swift in Sources */,
 				6790D15E2365F7F7000C3BB4 /* MovieDetailsViewController.swift in Sources */,
+				6790D17A23671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift in Sources */,
 				6790D1532365D01E000C3BB4 /* MoviesListViewModel.swift in Sources */,
 				6700B4432364B377005C1586 /* Movie.swift in Sources */,
 				6700B4482364B8FC005C1586 /* TMDBMovieService.swift in Sources */,

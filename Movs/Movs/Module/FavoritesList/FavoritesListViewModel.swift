@@ -1,42 +1,39 @@
 //
-//  MoviesListViewModel.swift
+//  FavoritesListViewModel.swift
 //  Movs
 //
-//  Created by Bruno Barbosa on 27/10/19.
+//  Created by Bruno Barbosa on 28/10/19.
 //  Copyright © 2019 Bruno Barbosa. All rights reserved.
 //
 
 import Foundation
 
-class MoviesListViewModel {
+class FavoritesListViewModel {
+    private var movieService: MovieServiceProtocol
+    weak var delegate: FavoritesListDelegate?
+    var onMovieSelected: ((FavoriteMovieCellViewModel)->())?
     
-    weak var delegate: MoviesListDelegate?
-    
-    var onMovieSelected: ((MovieCellViewModel)->())?
-    
-    private var cellViewModels: [MovieCellViewModel] = [] {
+    private(set) var cellViewModels: [FavoriteMovieCellViewModel] = [] {
         didSet {
-            self.delegate?.moviesListUpdated()
+            self.delegate?.favoritesListUpdated()
         }
     }
     
     var cellCount: Int {
-        return cellViewModels.count
+        return self.cellViewModels.count
     }
     
-    private(set) var isLoadingList: Bool = false {
+    var isLoadingList: Bool = true {
         didSet {
             self.delegate?.toggleLoading(self.isLoadingList)
         }
     }
     
-    private var movieService: MovieServiceProtocol
-    
-    init(withService movieService: MovieServiceProtocol) {
-        self.movieService = movieService
+    init(withService service: MovieServiceProtocol) {
+        self.movieService = service
     }
     
-    func getViewModelForCell(at indexPath: IndexPath) -> MovieCellViewModel? {
+    func getViewModelForCell(at indexPath: IndexPath) -> FavoriteMovieCellViewModel? {
         let index = indexPath.row
         if index < 0 || index > self.cellCount {
             return nil
@@ -45,9 +42,9 @@ class MoviesListViewModel {
         return cellViewModels[index]
     }
     
-    func fetchMovies() {
+    func fetchFavorites() {
         self.isLoadingList = true
-        movieService.fetchPopularMovies { (error: APIError?, movies: [Movie]) in
+        self.movieService.fetchPopularMovies { (error: APIError?, movies: [Movie]) in
             DispatchQueue.main.async {
                 if let error = error {
                     self.delegate?.errorFetchingMovies(error: error)
@@ -55,7 +52,7 @@ class MoviesListViewModel {
                 }
             
                 self.isLoadingList = false
-                self.cellViewModels = movies.map({ MovieCellViewModel(with: $0) })
+                self.cellViewModels = movies.map({ FavoriteMovieCellViewModel(with: $0) })
             }
         }
     }
@@ -65,4 +62,5 @@ class MoviesListViewModel {
             self.onMovieSelected?(cellVM)
         }
     }
+    
 }
