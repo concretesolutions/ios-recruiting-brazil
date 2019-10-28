@@ -33,6 +33,7 @@
 		6790D16E2366433B000C3BB4 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D16D2366433B000C3BB4 /* UIColor+AppColors.swift */; };
 		6790D1702366574D000C3BB4 /* FavoritesFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D16F2366574D000C3BB4 /* FavoritesFlowController.swift */; };
 		6790D173236657A9000C3BB4 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D172236657A9000C3BB4 /* FavoritesListViewController.swift */; };
+		6790D17623665E45000C3BB4 /* FavoriteMovieTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D17523665E45000C3BB4 /* FavoriteMovieTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		6790D16D2366433B000C3BB4 /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		6790D16F2366574D000C3BB4 /* FavoritesFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesFlowController.swift; sourceTree = "<group>"; };
 		6790D172236657A9000C3BB4 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
+		6790D17523665E45000C3BB4 /* FavoriteMovieTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				6700B43B23649FCA005C1586 /* MoviesList */,
-				6700B4492364C10E005C1586 /* MovieCollectionCell */,
 				6790D15C2365F7D1000C3BB4 /* MovieDetails */,
 				6790D17123665783000C3BB4 /* FavoritesList */,
 			);
@@ -235,6 +236,7 @@
 		6790D1562365DD46000C3BB4 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				6700B4492364C10E005C1586 /* MovieCollectionCell */,
 				6700B43E2364A867005C1586 /* MoviesListCollectionView.swift */,
 				6790D15A2365F3A2000C3BB4 /* MessageView.swift */,
 			);
@@ -273,9 +275,18 @@
 		6790D17123665783000C3BB4 /* FavoritesList */ = {
 			isa = PBXGroup;
 			children = (
+				6790D17423665E28000C3BB4 /* FavoriteMovieTableCell */,
 				6790D172236657A9000C3BB4 /* FavoritesListViewController.swift */,
 			);
 			path = FavoritesList;
+			sourceTree = "<group>";
+		};
+		6790D17423665E28000C3BB4 /* FavoriteMovieTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				6790D17523665E45000C3BB4 /* FavoriteMovieTableCell.swift */,
+			);
+			path = FavoriteMovieTableCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -423,6 +434,7 @@
 				6790D14E2365C3D9000C3BB4 /* MovieCellViewModel.swift in Sources */,
 				6790D1702366574D000C3BB4 /* FavoritesFlowController.swift in Sources */,
 				6790D173236657A9000C3BB4 /* FavoritesListViewController.swift in Sources */,
+				6790D17623665E45000C3BB4 /* FavoriteMovieTableCell.swift in Sources */,
 				6790D1512365C8AD000C3BB4 /* CompletionBlock.swift in Sources */,
 				6790D16A23663E58000C3BB4 /* MoviesListFlowController.swift in Sources */,
 				6700B43D2364A06B005C1586 /* MoviesListViewController.swift in Sources */,

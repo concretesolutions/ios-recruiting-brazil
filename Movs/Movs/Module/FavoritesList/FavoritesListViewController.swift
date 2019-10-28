@@ -10,22 +10,47 @@ import UIKit
 
 class FavoritesListViewController: UIViewController {
 
+    static let FAVORITES_CELL_IDENTIFIER = "favoritesCell"
+    
+    private lazy var tableView: UITableView = { [weak self] in
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
+        
+        tableView.register(FavoriteMovieTableCell.self, forCellReuseIdentifier: FavoritesListViewController.FAVORITES_CELL_IDENTIFIER)
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
+        self.title = "Favorite Movies"
+        self.view.backgroundColor = .systemBackground
 
-        // Do any additional setup after loading the view.
+        self.view.addSubview(self.tableView)
+        NSLayoutConstraint.activate([
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
     }
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesListViewController.FAVORITES_CELL_IDENTIFIER, for: indexPath)
+        return cell
+    }
+    
+    
 }
