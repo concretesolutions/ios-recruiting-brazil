@@ -63,8 +63,7 @@ class TMDBMovieService: MovieServiceProtocol {
                     let decoder = JSONDecoder()
                     do {
                         let response = try decoder.decode(APIResponse.self, from: jsonData)
-                        let movies = self.syncMoviesWithFavorites(response.results)
-                        self.popularMovies = movies
+                        self.popularMovies = response.results
                         completion(nil, self.popularMovies)
                     } catch {
                         completion(.genericError, [])
@@ -86,10 +85,6 @@ class TMDBMovieService: MovieServiceProtocol {
         do {
             let data = try Data(contentsOf: self.favoritsDocumentUrl)
             let movies = try decoder.decode([Movie].self, from: data)
-            for movie in movies {
-                movie.isFavorite = true
-                self.favoriteIds[movie.id] = true
-            }
             self.favoriteMovies = movies
             self.fetchedFavoriteMovies = true
             completion?(nil, self.favoriteMovies)
@@ -99,8 +94,8 @@ class TMDBMovieService: MovieServiceProtocol {
     }
     
     func toggleFavorite(for movie: Movie, completion: SuccessOrErrorCompletionBlock?) {
-        // TODO: save favorite status
-        if (movie.isFavorite) {
+        var isFavorite = self.isFavorite(movie: movie)
+        if (isFavorite) {
             self.favoriteMovies.removeAll { (curMovie) -> Bool in
                 curMovie.id == movie.id
             }
@@ -108,12 +103,17 @@ class TMDBMovieService: MovieServiceProtocol {
             self.favoriteMovies.append(movie)
         }
         
-        movie.isFavorite = !movie.isFavorite
-        self.favoriteIds[movie.id] = movie.isFavorite
+        isFavorite = !isFavorite
+        self.favoriteIds[movie.id] = isFavorite
         NotificationCenter.default.post(name: .didUpdateFavoritesList, object: self)
         
         self.saveFavoritesToDisk(completion: completion)
         completion?(true, nil)
+    }
+    
+    func isFavorite(movie: Movie) -> Bool {
+        let isFavorite = self.favoriteIds[movie.id] ?? false
+        return isFavorite
     }
     
     // MARK: Private fuctions
@@ -128,15 +128,5 @@ class TMDBMovieService: MovieServiceProtocol {
         } catch {
             completion?(false, .genericError)
         }
-    }
-    
-    private func syncMoviesWithFavorites(_ movies: [Movie]) -> [Movie] {
-        for movie in movies {
-            let isFavorite = self.favoriteIds[movie.id] ?? false
-            if isFavorite {
-                movie.isFavorite = true
-            }
-        }
-        return movies
     }
 }

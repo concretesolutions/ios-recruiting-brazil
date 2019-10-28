@@ -20,7 +20,7 @@ class Movie: Codable {
     }
     let genreIds: [Int]
     let overview: String
-    var isFavorite: Bool = false
+//    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id
