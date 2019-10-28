@@ -31,7 +31,7 @@ class MoviesViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     
     // MARK: - Variables
-    var moviesList: MovieListResponse?
+    var moviesList = MovieListResponse()
     var viewModel: MoviesViewControllerViewModel!
     
     // MARK: - Life Cycle
@@ -40,13 +40,13 @@ class MoviesViewController: UIViewController {
         configView()
         configMovieCollectionView()
         viewModel = MoviesViewControllerViewModel(delegate: self)
-        viewModel.requestPopularMovies(page: 1)
+        viewModel.requestPopularMovies(page: 1, showLoading: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if moviesList != nil {
-            viewModel.filterFavoritedMovies(moviesList!)
+        if moviesList.results != nil {
+            viewModel.updateFavoritedMovies(moviesList)
         }
     }
     
@@ -99,6 +99,18 @@ extension MoviesViewController: MoviesViewControllerProtocol {
         movieCollectionView.reloadData()
     }
     
+    func appendMoviesList(movies: MovieListResponse) {
+        if let results = movies.results {
+            if moviesList.results == nil {
+                moviesList.results = results
+            } else {
+                moviesList.results?.append(contentsOf: results)
+            }
+            moviesList.page = movies.page
+            movieCollectionView.reloadData()
+        }
+    }
+    
     func setError(message: String) {
         errorLabel.text = message
     }
@@ -113,7 +125,7 @@ extension MoviesViewController: UISearchResultsUpdating {
 // MARK: - MovieCollectionView
 extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesList?.results?.count ?? 0
+        return moviesList.results?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -124,14 +136,17 @@ extension MoviesViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MovieCollectionViewCell
-        if let movie = moviesList?.results?[indexPath.row] {
+        if let movie = moviesList.results?[indexPath.row] {
             cell.configureCell(with: movie)
+        }
+        if indexPath.row > (moviesList.results?.count ?? 0) - 10 {
+            viewModel.requestPopularMovies(page: (moviesList.page ?? 1) + 1, showLoading: false)
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let movie = moviesList?.results?[indexPath.row] {
+        if let movie = moviesList.results?[indexPath.row] {
             let view = DetailsViewController()
             view.configure(with: movie)
             navigationController?.pushViewController(view, animated: true)

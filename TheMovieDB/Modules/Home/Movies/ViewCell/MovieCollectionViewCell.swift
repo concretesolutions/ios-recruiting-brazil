@@ -34,6 +34,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func downloadImage(from movie: MovieResponse) {
+        movieImage.image = UIImage(named: "logo")
         let endPoint = "\(API.ImageSize.w500.rawValue)\(movie.posterPath ?? "")"
         if let url = URL(string: endPoint, relativeTo: API.imageUrlBase) {
             movieImage.af_setImage(withURL: url)

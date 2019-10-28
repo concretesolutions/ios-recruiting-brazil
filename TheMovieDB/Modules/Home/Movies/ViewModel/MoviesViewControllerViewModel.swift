@@ -10,13 +10,18 @@ class MoviesViewControllerViewModel {
     var delegate: MoviesViewControllerProtocol!
     var dao: SQLiteManager!
     var favoritedMovies: [MovieResponse]?
+    var isRequesting = false
     
     init(delegate: MoviesViewControllerProtocol) {
         self.delegate = delegate
         dao = SQLiteManager()
     }
     
-    func filterFavoritedMovies(_ movies: MovieListResponse) {
+    func updateFavoritedMovies(_ movies: MovieListResponse) {
+        delegate.setMoviesList(movies: filterFavoritedMovies(movies))
+    }
+    
+    private func filterFavoritedMovies(_ movies: MovieListResponse) -> MovieListResponse {
         if movies.results != nil {
             favoritedMovies = dao.selectFavoritedMovies()
             var moviesTemp = movies
@@ -31,23 +36,31 @@ class MoviesViewControllerViewModel {
                     }
                 }
             }
-            delegate.setMoviesList(movies: moviesTemp)
             delegate.changeScreenStatus(type: .normal)
+            return moviesTemp
         } else {
             delegate.changeScreenStatus(type: .empty)
+            return movies
         }
     }
     
     // MARK: - Request
-    func requestPopularMovies(page: Int) {
-        delegate.changeScreenStatus(type: .loading)
-        func onError(message: String) {
-            delegate.changeScreenStatus(type: .error)
-            delegate.setError(message: message)
+    func requestPopularMovies(page: Int, showLoading: Bool) {
+        if !isRequesting {
+            isRequesting = true
+            if showLoading {
+                delegate.changeScreenStatus(type: .loading)
+            }
+            func onError(message: String) {
+                delegate.changeScreenStatus(type: .error)
+                delegate.setError(message: message)
+                isRequesting = false
+            }
+            func onSuccess(movies: MovieListResponse) {
+                delegate.appendMoviesList(movies: filterFavoritedMovies(movies))
+                isRequesting = false
+            }
+            API.MovieService().getMoviePopular(page: page, onError: onError(message:), onSuccess: onSuccess(movies:))
         }
-        func onSuccess(movies: MovieListResponse) {
-            filterFavoritedMovies(movies)
-        }
-        API.MovieService().getMoviePopular(page: page, onError: onError(message:), onSuccess: onSuccess(movies:))
     }
 }

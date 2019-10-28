@@ -9,5 +9,6 @@
 protocol MoviesViewControllerProtocol {
     func changeScreenStatus(type: MoviesViewController.ScreenStatus)
     func setMoviesList(movies: MovieListResponse)
+    func appendMoviesList(movies: MovieListResponse)
     func setError(message: String)
 }
