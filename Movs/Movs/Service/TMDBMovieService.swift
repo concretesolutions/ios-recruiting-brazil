@@ -35,6 +35,14 @@ class TMDBMovieService: MovieServiceProtocol {
         let session = URLSession(configuration: config)
         return session
     }()
+    private lazy var favoritsDocumentUrl: URL = {
+        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            return url.appendingPathComponent("favorites.json")
+        } else {
+            fatalError("Could not retrieve documents directory")
+            // TODO: deal with this error
+        }
+    }()
     
     func fetchPopularMovies(completion: @escaping MoviesListCompletionBlock) {
         let request = self.urlRequestFor(path: "/movie/popular")
@@ -42,7 +50,7 @@ class TMDBMovieService: MovieServiceProtocol {
         let task = self.urlSession.dataTask(with: request) { (responseData, response, responseError) in
             DispatchQueue.main.async {
                 if let _ = responseError {
-                    completion(.requestFailed, [])
+                    completion(.genericError, [])
                 } else if let jsonData = responseData {
                     let decoder = JSONDecoder()
                     do {
@@ -50,7 +58,7 @@ class TMDBMovieService: MovieServiceProtocol {
                         self.popularMovies = response.results
                         completion(nil, self.popularMovies)
                     } catch {
-                        completion(.requestFailed, [])
+                        completion(.genericError, [])
                     }
                 }
             }
@@ -59,11 +67,23 @@ class TMDBMovieService: MovieServiceProtocol {
     }
     
     func fetchFavoriteMovies(completion: @escaping MoviesListCompletionBlock) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.favoriteMovies = [
-                // TODO: get favorite movies from local disk
-            ]
+        let fileExists = FileManager.default.fileExists(atPath: self.favoritsDocumentUrl.path)
+        if !fileExists {
             completion(nil, self.favoriteMovies)
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: self.favoritsDocumentUrl)
+            let movies = try decoder.decode([Movie].self, from: data)
+            for movie in movies {
+                movie.isFavorite = true
+            }
+            self.favoriteMovies = movies
+            completion(nil, self.favoriteMovies)
+        } catch {
+            completion(.genericError, [])
         }
     }
     
@@ -80,7 +100,19 @@ class TMDBMovieService: MovieServiceProtocol {
         movie.isFavorite = !movie.isFavorite
         NotificationCenter.default.post(name: .didUpdateFavoritesList, object: self)
         
-        // call calback with success status and/or error
+        self.saveFavoritesToDisk(completion: completion)
         completion?(true, nil)
+    }
+    
+    private func saveFavoritesToDisk(completion: SuccessOrErrorCompletionBlock?) {
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(self.favoriteMovies)
+            try data.write(to: self.favoritsDocumentUrl)
+            completion?(true, nil)
+            
+        } catch {
+            completion?(false, .genericError)
+        }
     }
 }

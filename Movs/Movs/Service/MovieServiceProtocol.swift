@@ -9,7 +9,7 @@
 import Foundation
 
 enum APIError: String {
-    case requestFailed = "An error has occurred, please try again."
+    case genericError = "An error has occurred, please try again."
 }
 
 protocol MovieServiceProtocol {
