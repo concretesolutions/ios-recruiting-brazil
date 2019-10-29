@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Movie: Codable {
+class Movie: Codable, Equatable {
     let id: Int
     let title: String
     let posterPath: String
@@ -38,5 +38,9 @@ class Movie: Codable {
         self.releaseDateStr = releaseDateStr
         self.genreIds = genreIds
         self.overview = overview
+    }
+    
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
     }
 }
