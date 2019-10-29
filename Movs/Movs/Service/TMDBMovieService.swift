@@ -88,6 +88,11 @@ class TMDBMovieService: MovieServiceProtocol {
         do {
             let data = try Data(contentsOf: self.favoritsDocumentUrl)
             let movies = try decoder.decode([Movie].self, from: data)
+            
+            for movie in movies {
+                self.favoriteIds[movie.id] = true
+            }
+            
             self.favoriteMovies = movies
             self.fetchedFavoriteMovies = true
             completion?(nil, self.favoriteMovies)
