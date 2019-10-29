@@ -42,6 +42,8 @@
 		6790D18923675DF8000C3BB4 /* Notification.Name+AppNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D18823675DF8000C3BB4 /* Notification.Name+AppNotifications.swift */; };
 		6790D1902367869B000C3BB4 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D18F2367869B000C3BB4 /* APIResponse.swift */; };
 		67CFB24D2367B9ED00BBA203 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CFB24C2367B9ED00BBA203 /* Genre.swift */; };
+		67CFB2502367D2F500BBA203 /* PosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CFB24F2367D2F500BBA203 /* PosterImageView.swift */; };
+		67CFB2522367D37800BBA203 /* PosterImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CFB2512367D37800BBA203 /* PosterImageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		6790D18823675DF8000C3BB4 /* Notification.Name+AppNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+AppNotifications.swift"; sourceTree = "<group>"; };
 		6790D18F2367869B000C3BB4 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		67CFB24C2367B9ED00BBA203 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		67CFB24F2367D2F500BBA203 /* PosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageView.swift; sourceTree = "<group>"; };
+		67CFB2512367D37800BBA203 /* PosterImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +200,7 @@
 		6700B43A23649F35005C1586 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				67CFB24E2367D2D100BBA203 /* PosterImageView */,
 				6790D17F23672B11000C3BB4 /* MessageView */,
 				6700B43B23649FCA005C1586 /* MoviesList */,
 				6790D15C2365F7D1000C3BB4 /* MovieDetails */,
@@ -319,6 +324,15 @@
 				6790D1862367387B000C3BB4 /* MessageViewModel.swift */,
 			);
 			path = MessageView;
+			sourceTree = "<group>";
+		};
+		67CFB24E2367D2D100BBA203 /* PosterImageView */ = {
+			isa = PBXGroup;
+			children = (
+				67CFB24F2367D2F500BBA203 /* PosterImageView.swift */,
+				67CFB2512367D37800BBA203 /* PosterImageViewModel.swift */,
+			);
+			path = PosterImageView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,6 +476,7 @@
 				6700B4462364B53C005C1586 /* MovieServiceProtocol.swift in Sources */,
 				6790D17823671B3D000C3BB4 /* FavoritesListViewModel.swift in Sources */,
 				6790D1632366161D000C3BB4 /* UIView+translatesAutoresizingMaskIntoConstraints.swift in Sources */,
+				67CFB2502367D2F500BBA203 /* PosterImageView.swift in Sources */,
 				6790D16523662158000C3BB4 /* MovieDetailsViewModel.swift in Sources */,
 				6790D18523673869000C3BB4 /* MessageView.swift in Sources */,
 				6790D14E2365C3D9000C3BB4 /* MovieCellViewModel.swift in Sources */,
@@ -479,6 +494,7 @@
 				6700B43D2364A06B005C1586 /* MoviesListViewController.swift in Sources */,
 				6790D15E2365F7F7000C3BB4 /* MovieDetailsViewController.swift in Sources */,
 				6790D17A23671C6E000C3BB4 /* FavoriteMovieCellViewModel.swift in Sources */,
+				67CFB2522367D37800BBA203 /* PosterImageViewModel.swift in Sources */,
 				6790D1532365D01E000C3BB4 /* MoviesListViewModel.swift in Sources */,
 				6700B4432364B377005C1586 /* Movie.swift in Sources */,
 				6700B4482364B8FC005C1586 /* TMDBMovieService.swift in Sources */,

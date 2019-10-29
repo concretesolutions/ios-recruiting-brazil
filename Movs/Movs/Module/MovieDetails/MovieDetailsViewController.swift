@@ -10,7 +10,7 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
 
-    private let posterView = UIImageView()
+    private let posterView = PosterImageView()
     private let titleLbl = UILabel()
     private let yearLbl = UILabel()
     private let genresLbl = UILabel()
@@ -18,7 +18,7 @@ class MovieDetailsViewController: UIViewController {
     
     var viewModel: MovieDetailsViewModel! {
         didSet {
-            self.posterView.image = self.viewModel.posterImg
+            self.posterView.viewModel = PosterImageViewModel(with: self.viewModel.movie)
             self.titleLbl.text = self.viewModel.titleText
             self.yearLbl.text = self.viewModel.yearText
             self.genresLbl.text = self.viewModel.genresText
@@ -47,8 +47,6 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.posterView.contentMode = .scaleAspectFill
-        self.posterView.clipsToBounds = true
         self.titleLbl.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         self.titleLbl.numberOfLines = 2
         self.yearLbl.font = UIFont.preferredFont(forTextStyle: .headline)

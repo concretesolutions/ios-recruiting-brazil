@@ -12,7 +12,6 @@ class FavoriteMovieCellViewModel {
     private(set) var movie: Movie
     
     let titleText: String
-    private(set) var posterImage: UIImage = UIImage(named: "stevenPoster")! // TODO: add placeholder
     let descriptionText: String
     private(set) var yearText: String = ""
     

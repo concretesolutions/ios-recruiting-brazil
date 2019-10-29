@@ -33,7 +33,7 @@ class FavoritesFlowController: UINavigationController {
     }
     
     func onMovieSelected(_ cellViewModel: FavoriteMovieCellViewModel) {
-        let detailsViewModel = MovieDetailsViewModel(with: self.movieService, posterImg: cellViewModel.posterImage, andMovie: cellViewModel.movie)
+        let detailsViewModel = MovieDetailsViewModel(with: self.movieService, andMovie: cellViewModel.movie)
         let detailsVC = MovieDetailsViewController()
         detailsVC.viewModel = detailsViewModel
         

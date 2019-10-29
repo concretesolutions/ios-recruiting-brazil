@@ -10,9 +10,8 @@ import UIKit
 
 class MovieCollectionCell: UICollectionViewCell {
     
-    private let posterImgView = UIImageView()
+    private let posterImgView = PosterImageView()
     private var titleLabel = UILabel()
-    private var loadingIndicator = UIActivityIndicatorView(style: .medium)
     private lazy var favoriteIconView: UIImageView = {
         let image = UIImage(systemName: "heart.fill")
         let imgView = UIImageView(image: image)
@@ -31,19 +30,11 @@ class MovieCollectionCell: UICollectionViewCell {
     
     var viewModel: MovieCellViewModel? {
         didSet {
-            self.titleLabel.text = viewModel!.titleText
+            guard let viewModel = self.viewModel else { return }
             
-            self.favoriteIconView.alpha = self.viewModel!.isFavorite ? 1 : 0
-            
-            self.viewModel!.fetchPoster { posterImg in
-                self.posterImgView.image = posterImg
-                
-                self.posterImgView.alpha = 0.0
-                UIView.animate(withDuration: 0.5) {
-                    self.loadingIndicator.stopAnimating()
-                    self.posterImgView.alpha = 1.0
-                }
-            }
+            self.titleLabel.text = viewModel.titleText
+            self.favoriteIconView.alpha = viewModel.isFavorite ? 1 : 0
+            self.posterImgView.viewModel = PosterImageViewModel(with: viewModel.movie)
         }
     }
     
@@ -59,14 +50,10 @@ class MovieCollectionCell: UICollectionViewCell {
         self.titleLabel.textAlignment = .center
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         
-        self.addSubview(self.loadingIndicator)
-        self.loadingIndicator.color = UIColor.white
-        self.loadingIndicator.startAnimating()
-        
         self.addSubview(self.favoriteIconView)
         self.bringSubviewToFront(self.favoriteIconView)
         
-        UIView.translatesAutoresizingMaskIntoConstraintsToFalse(to: [self, self.posterImgView, self.titleLabel, self.loadingIndicator])
+        UIView.translatesAutoresizingMaskIntoConstraintsToFalse(to: [self, self.posterImgView, self.titleLabel])
         NSLayoutConstraint.activate([
             self.posterImgView.topAnchor.constraint(equalTo: self.topAnchor),
             self.posterImgView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -77,10 +64,6 @@ class MovieCollectionCell: UICollectionViewCell {
             self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
             self.titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             self.titleLabel.heightAnchor.constraint(equalToConstant: 40),
-            
-            self.loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.loadingIndicator.topAnchor.constraint(equalTo: self.topAnchor),
-            self.loadingIndicator.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor),
             
             self.favoriteIconView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
             self.favoriteIconView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),

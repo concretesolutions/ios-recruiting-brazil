@@ -34,7 +34,7 @@ class MoviesListFlowController: UINavigationController {
     }
     
     func onMovieSelected(_ cellViewModel: MovieCellViewModel) {
-        let detailsViewModel = MovieDetailsViewModel(with: self.movieService, posterImg: cellViewModel.posterImage, andMovie: cellViewModel.movie)
+        let detailsViewModel = MovieDetailsViewModel(with: self.movieService, andMovie: cellViewModel.movie)
         let detailsVC = MovieDetailsViewController()
         detailsVC.viewModel = detailsViewModel
         

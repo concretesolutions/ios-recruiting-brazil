@@ -10,16 +10,7 @@ import UIKit
 
 class FavoriteMovieTableCell: UITableViewCell {
 
-    private lazy var posterImgView: UIImageView = {
-        let imgView = UIImageView()
-        imgView.contentMode = .scaleAspectFill
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.clipsToBounds = true
-        
-        imgView.image = UIImage(named: "stevenPoster")
-        
-        return imgView
-    }()
+    private lazy var posterImgView = PosterImageView()
     
     private let titleLbl = UILabel()
     private let yearLbl = UILabel()
@@ -38,7 +29,7 @@ class FavoriteMovieTableCell: UITableViewCell {
             guard let viewModel = self.viewModel else {
                 return
             }
-            self.posterImgView.image = viewModel.posterImage
+            self.posterImgView.viewModel = PosterImageViewModel(with: viewModel.movie)
             self.titleLbl.text = viewModel.titleText
             self.yearLbl.text = viewModel.yearText
             self.descriptionLbl.text = viewModel.descriptionText
