@@ -30,4 +30,13 @@ class Movie: Codable {
         case genreIds = "genre_ids"
         case overview
     }
+    
+    init(id: Int, title: String, posterPath: String, releaseDateStr: String, genreIds: [Int], overview: String) {
+        self.id = id
+        self.title = title
+        self.posterPath = posterPath
+        self.releaseDateStr = releaseDateStr
+        self.genreIds = genreIds
+        self.overview = overview
+    }
 }
