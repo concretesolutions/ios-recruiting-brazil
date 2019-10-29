@@ -13,11 +13,29 @@ class MovieCollectionCell: UICollectionViewCell {
     private let posterImgView = UIImageView()
     private var titleLabel = UILabel()
     private var loadingIndicator = UIActivityIndicatorView(style: .medium)
+    private lazy var favoriteIconView: UIImageView = {
+        let image = UIImage(systemName: "heart.fill")
+        let imgView = UIImageView(image: image)
+        imgView.tintColor = UIColor.appYellow
+        imgView.contentMode = .scaleAspectFit
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imgView.layer.shadowColor = UIColor.black.cgColor
+        imgView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        imgView.layer.shadowOpacity = 0.7
+        imgView.layer.shadowRadius = 2
+        imgView.clipsToBounds = false
+        
+        return imgView
+    }()
     
     var viewModel: MovieCellViewModel? {
         didSet {
             self.titleLabel.text = viewModel!.titleText
-            viewModel!.fetchPoster { posterImg in
+            
+            self.favoriteIconView.alpha = self.viewModel!.isFavorite ? 1 : 0
+            
+            self.viewModel!.fetchPoster { posterImg in
                 self.posterImgView.image = posterImg
                 
                 self.posterImgView.alpha = 0.0
@@ -45,7 +63,10 @@ class MovieCollectionCell: UICollectionViewCell {
         self.loadingIndicator.color = UIColor.white
         self.loadingIndicator.startAnimating()
         
-        UIView.translatesAutoresizingMaskIntoConstraintsToFalse(to: [self.posterImgView, self.titleLabel, self.loadingIndicator])
+        self.addSubview(self.favoriteIconView)
+        self.bringSubviewToFront(self.favoriteIconView)
+        
+        UIView.translatesAutoresizingMaskIntoConstraintsToFalse(to: [self, self.posterImgView, self.titleLabel, self.loadingIndicator])
         NSLayoutConstraint.activate([
             self.posterImgView.topAnchor.constraint(equalTo: self.topAnchor),
             self.posterImgView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -59,7 +80,12 @@ class MovieCollectionCell: UICollectionViewCell {
             
             self.loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.loadingIndicator.topAnchor.constraint(equalTo: self.topAnchor),
-            self.loadingIndicator.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor)
+            self.loadingIndicator.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor),
+            
+            self.favoriteIconView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            self.favoriteIconView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
+            self.favoriteIconView.heightAnchor.constraint(equalToConstant: 30),
+            self.favoriteIconView.widthAnchor.constraint(equalToConstant: 30),
         ])
         
         self.backgroundColor = UIColor.appDarkBlue

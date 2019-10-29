@@ -9,6 +9,6 @@
 import UIKit
 
 extension UIColor {
-    static var appYellow = UIColor(named: "yellow")
-    static var appDarkBlue = UIColor(named: "darkBlue")
+    static var appYellow = UIColor(named: "yellow")!
+    static var appDarkBlue = UIColor(named: "darkBlue")!
 }

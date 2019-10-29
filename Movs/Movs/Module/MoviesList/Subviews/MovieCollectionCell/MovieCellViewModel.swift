@@ -15,12 +15,17 @@ class MovieCellViewModel {
     private(set) var posterImage: UIImage = UIImage(named: "stevenPoster")! // TODO: add placeholder image
     private(set) var isLoadingPoster: Bool = true
     
-    private var imageUrl: URL
+    var isFavorite: Bool {
+        return self.movieService.isFavorite(movie: self.movie)
+    }
     
-    init(with movie: Movie) {
+    private var imageUrl: URL
+    private var movieService: MovieServiceProtocol
+    
+    init(with movie: Movie, andService service: MovieServiceProtocol) {
         self.movie = movie
         self.titleText = movie.title
-        
+        self.movieService = service
         let baseImgUrl = "https://image.tmdb.org/t/p/w500"
         imageUrl = URL(string: baseImgUrl + movie.posterPath)!
     }

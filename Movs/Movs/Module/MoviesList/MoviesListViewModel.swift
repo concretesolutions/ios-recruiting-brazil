@@ -16,7 +16,7 @@ class MoviesListViewModel {
     
     private var cellViewModels: [MovieCellViewModel] = [] {
         didSet {
-            self.delegate?.moviesListUpdated()
+            self.updateList()
         }
     }
     
@@ -34,6 +34,12 @@ class MoviesListViewModel {
     
     init(withService movieService: MovieServiceProtocol) {
         self.movieService = movieService
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateList), name: .didUpdateFavoritesList, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func getViewModelForCell(at indexPath: IndexPath) -> MovieCellViewModel? {
@@ -55,7 +61,7 @@ class MoviesListViewModel {
                 }
             
                 self.isLoadingList = false
-                self.cellViewModels = movies.map({ MovieCellViewModel(with: $0) })
+                self.cellViewModels = movies.map({ MovieCellViewModel(with: $0, andService: self.movieService) })
             }
         }
     }
@@ -64,5 +70,9 @@ class MoviesListViewModel {
         if let cellVM = self.getViewModelForCell(at: indexPath) {
             self.onMovieSelected?(cellVM)
         }
+    }
+    
+    @objc private func updateList() {
+        self.delegate?.moviesListUpdated()
     }
 }
