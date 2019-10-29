@@ -14,7 +14,7 @@ class MovieDetailsViewModel {
     private(set) var posterImg: UIImage?
     private(set) var titleText: String
     private(set) var yearText: String = ""
-    private(set) var genresText: String
+    private(set) var genresText: String = ""
     private(set) var descriptionText: String
     private(set) var favoriteBtnImg: UIImage?
     
@@ -36,9 +36,9 @@ class MovieDetailsViewModel {
             self.yearText = releaseDate.yearString
         }
         
-        self.genresText = "Animation, Musical" // TODO: get genre strings from API
         self.descriptionText = self.movie.overview
         
+        self.genresText = self.movieService.getGenresString(for: movie)
         self.favoriteBtnImg = self.isFavorite ? UIImage(systemName: "heart.fill")! : UIImage(systemName: "heart")!
     }
     

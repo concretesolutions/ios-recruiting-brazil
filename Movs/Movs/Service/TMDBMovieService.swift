@@ -13,11 +13,14 @@ struct APIConfiguration {
 }
 
 class TMDBMovieService: MovieServiceProtocol {
-    private init() {}
+    private init() {
+        self.fetchGenresList()
+    }
     static private(set) var shared: MovieServiceProtocol = TMDBMovieService()
     
     private(set) var popularMovies: [Movie] = []
     private(set) var favoriteMovies: [Movie] = []
+    private(set) var genres: [Int : Genre] = [:]
     private var fetchedFavoriteMovies: Bool = false
     private var favoriteIds: [Int : Bool] = [:]
     
@@ -46,7 +49,7 @@ class TMDBMovieService: MovieServiceProtocol {
         }
     }()
     
-    // MARK: Actions
+    // MARK: MovieServiceProtocol functions
     
     func fetchPopularMovies(completion: @escaping MoviesListCompletionBlock) {
         if !self.fetchedFavoriteMovies {
@@ -116,6 +119,13 @@ class TMDBMovieService: MovieServiceProtocol {
         return isFavorite
     }
     
+    func getGenresString(for movie: Movie) -> String {
+        let movieGenres:[String] = movie.genreIds.map { (genreId) -> String in
+            return self.genres[genreId]?.name ?? ""
+        }
+        return movieGenres.joined(separator: ", ")
+    }
+    
     // MARK: Private fuctions
     
     private func saveFavoritesToDisk(completion: SuccessOrErrorCompletionBlock?) {
@@ -128,5 +138,31 @@ class TMDBMovieService: MovieServiceProtocol {
         } catch {
             completion?(false, .genericError)
         }
+    }
+    
+    private func fetchGenresList() {
+        let request = self.urlRequestFor(path: "/genre/movie/list")
+        
+        let task = self.urlSession.dataTask(with: request) { (responseData, response, responseError) in
+            DispatchQueue.main.async {
+                if let error = responseError {
+                    // TODO: handle this error
+                    print("genres response error", error)
+                } else if let jsonData = responseData {
+                    let decoder = JSONDecoder()
+                    do {
+                        let response = try decoder.decode(GenreResponse.self, from: jsonData)
+                        let genres = response.genres
+                        for genre in genres {
+                            self.genres[genre.id] = genre
+                        }
+                    } catch {
+                        // TODO: handle this error
+                        print("genres catch error ", error)
+                    }
+                }
+            }
+        }
+        task.resume()
     }
 }
