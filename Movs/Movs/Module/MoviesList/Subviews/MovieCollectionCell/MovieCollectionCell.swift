@@ -34,25 +34,26 @@ class MovieCollectionCell: UICollectionViewCell {
         
         self.addSubview(self.posterImgView)
         self.posterImgView.contentMode = .scaleAspectFill
+        self.posterImgView.clipsToBounds = true
         
         self.addSubview(self.titleLabel)
-        self.titleLabel.backgroundColor = UIColor(named: "darkBlue")
-        self.titleLabel.textColor = UIColor(named: "yellow")
+        self.titleLabel.textColor = UIColor.appYellow
         self.titleLabel.textAlignment = .center
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         
         self.addSubview(self.loadingIndicator)
+        self.loadingIndicator.color = UIColor.white
         self.loadingIndicator.startAnimating()
         
-        UIView.translatesAutoresizingMaskIntoConstraints(to: [self.posterImgView, self.titleLabel, self.loadingIndicator])
+        UIView.translatesAutoresizingMaskIntoConstraintsToFalse(to: [self.posterImgView, self.titleLabel, self.loadingIndicator])
         NSLayoutConstraint.activate([
             self.posterImgView.topAnchor.constraint(equalTo: self.topAnchor),
             self.posterImgView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.posterImgView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.posterImgView.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor),
             
-            self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
             self.titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             self.titleLabel.heightAnchor.constraint(equalToConstant: 40),
             
@@ -61,7 +62,7 @@ class MovieCollectionCell: UICollectionViewCell {
             self.loadingIndicator.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor)
         ])
         
-        self.backgroundColor = .secondarySystemBackground
+        self.backgroundColor = UIColor.appDarkBlue
         self.clipsToBounds = true
     }
     

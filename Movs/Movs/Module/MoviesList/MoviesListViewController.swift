@@ -78,7 +78,7 @@ extension MoviesListViewController: MoviesListDelegate {
 extension MoviesListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = self.moviesCollectionView.cellSize
-        return CGSize(width: size, height: size)
+        return CGSize(width: size, height: size*1.5)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

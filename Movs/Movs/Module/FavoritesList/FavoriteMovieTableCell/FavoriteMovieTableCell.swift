@@ -52,7 +52,7 @@ class FavoriteMovieTableCell: UITableViewCell {
         self.titleLbl.font = UIFont.preferredFont(forTextStyle: .headline)
         self.descriptionLbl.numberOfLines = 0
         self.descriptionLbl.lineBreakMode = .byTruncatingTail
-        UIView.translatesAutoresizingMaskIntoConstraints(to: [self.titleLbl, self.yearLbl, self.descriptionLbl])
+        UIView.translatesAutoresizingMaskIntoConstraintsToFalse(to: [self.titleLbl, self.yearLbl, self.descriptionLbl])
         
         NSLayoutConstraint.activate([
             self.posterImgView.topAnchor.constraint(equalTo: self.topAnchor),

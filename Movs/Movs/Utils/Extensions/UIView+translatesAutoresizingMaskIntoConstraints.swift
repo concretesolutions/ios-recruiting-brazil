@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    static func translatesAutoresizingMaskIntoConstraints(_ translates: Bool = false, to views: [UIView]) {
+    static func translatesAutoresizingMaskIntoConstraintsToFalse(_ translates: Bool = false, to views: [UIView]) {
         for view in views {
             view.translatesAutoresizingMaskIntoConstraints = translates
         }

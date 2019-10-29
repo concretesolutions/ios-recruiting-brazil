@@ -56,7 +56,7 @@ class MovieDetailsViewController: UIViewController {
         self.descriptionView.font = UIFont.preferredFont(forTextStyle: .body)
 
         self.view.addSubviews([self.posterView, self.titleLbl, self.yearLbl, self.genresLbl, self.descriptionView])
-        UIView.translatesAutoresizingMaskIntoConstraints(to: [self.posterView, self.titleLbl, self.yearLbl, self.genresLbl, self.descriptionView])
+        UIView.translatesAutoresizingMaskIntoConstraintsToFalse(to: [self.posterView, self.titleLbl, self.yearLbl, self.genresLbl, self.descriptionView])
         // TODO: maybe set the poster's height relative to the superview's height?
         NSLayoutConstraint.activate([
             self.posterView.topAnchor.constraint(equalTo: self.view.topAnchor),
