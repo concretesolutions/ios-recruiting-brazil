@@ -28,12 +28,12 @@ class FavoriteCell: UITableViewCell {
     }()
     
     let overViewLabel: UILabel = {
-        let title = UILabel(frame: .zero)
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.numberOfLines = 0
-        title.textColor = .white
-        title.font.withSize(13)
-        return title
+        let overview = UILabel(frame: .zero)
+        overview.translatesAutoresizingMaskIntoConstraints = false
+        overview.numberOfLines = 0
+        overview.textColor = .white
+        overview.font.withSize(13)
+        return overview
     }()
     
     func setupCell(movie: MovieSave) {
@@ -43,7 +43,6 @@ class FavoriteCell: UITableViewCell {
         if let url2 = URL(string: url){
              favoriteImage.sd_setImage(with: url2, completed: nil)
         }
-//        self.favoriteImage.image = UIImage(named: "a")
         self.titleLabel.text = movie.title
         self.overViewLabel.text = movie.overview
         setupConst()

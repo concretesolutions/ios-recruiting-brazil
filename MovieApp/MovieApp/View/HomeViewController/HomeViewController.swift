@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class HomeViewController: BaseViewController, FavoritableDelegate {
     let controller = MovieController()
     
@@ -26,23 +27,26 @@ class HomeViewController: BaseViewController, FavoritableDelegate {
         self.navigationController?.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.font: UIFont(name: "Futura", size: 30)!,
              NSAttributedString.Key.foregroundColor: UIColor.orange]
-        controller.delegate = self
+        
         self.tabBarController?.delegate = self
+        controller.getAllGenres()
+        controller.delegate = self
+        controller.getMovies()
         setupCollection()
         setupSearchBar()
         self.startAnimating()
-        controller.getMovies()
-        controller.getAllGenres()
         
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.collectionView.reloadData()
+        
     }
     
     func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
+        searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
@@ -64,7 +68,7 @@ class HomeViewController: BaseViewController, FavoritableDelegate {
         self.collectionView.showsVerticalScrollIndicator = false
         self.collectionView.showsHorizontalScrollIndicator = false
         
-        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "qualquercoisa")
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "movieCell")
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -79,7 +83,6 @@ extension HomeViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let tabBarIndex = tabBarController.selectedIndex
-
         if tabBarIndex == 0 {
             self.collectionView.setContentOffset(CGPoint(x: 0, y: -100), animated: true)
         }
@@ -97,21 +100,31 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: MovieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "qualquercoisa", for: indexPath) as? MovieCell else { return UICollectionViewCell()}
+        
+        guard let cell: MovieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as? MovieCell else { return UICollectionViewCell()}
+        
+        
         if controller.getSearchActive() {
-            let movie = controller.getMovieFilter(index: indexPath.item)
+            let movieFilter = controller.getMovieFilter(index: indexPath.item)
+            cell.setupCell(movie: movieFilter, index: indexPath.item, isFavorite: isInCoreData(movie: movieFilter))
+            cell.delegate = self
+            return cell
+        }else {
+            let movie = controller.getMovie(index: indexPath.item)
             cell.setupCell(movie: movie, index: indexPath.item, isFavorite: isInCoreData(movie: movie))
             cell.delegate = self
             return cell
         }
-        let movie = controller.getMovie(index: indexPath.item)
-        cell.setupCell(movie: movie, index: indexPath.item, isFavorite: isInCoreData(movie: movie))
-        cell.delegate = self
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let viewController = DetailViewController()
+        
+        if controller.getSearchActive() {
+            viewController.movie = controller.getMovieFilter(index: indexPath.item)
+            navigationController?.pushViewController(viewController, animated: true)
+            return
+        }
         viewController.movie = controller.getMovie(index: indexPath.item)
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -127,7 +140,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension HomeViewController: UISearchControllerDelegate,UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         let searchString = searchController.searchBar.text
         controller.filterMovies(name: searchString ?? "")
@@ -137,10 +150,6 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         controller.setSearchFalse()
         self.dismiss(animated: true)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.view.endEditing(true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -166,14 +175,21 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
 }
 
 extension HomeViewController: MovieControllerDelegate {
+    func error(type: TypeError) {
+        self.stopAnimating()
+        self.addError(type: type)
+    }
+    
     func didFinishRequest() {
         collectionView.reloadData()
+        self.dismissError()
         self.stopAnimating()
         
     }
     
     func finishRefresh() {
         collectionView.reloadData()
+        self.dismissError()
         self.stopAnimating()
     }
 }
@@ -187,8 +203,13 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController: MovieCellDelegate {
     func tapped(index: Int) {
-        save(movie: controller.getMovie(index: index))
-        self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        if controller.getSearchActive() {
+            save(movie: controller.getMovieFilter(index: index))
+            self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        }else {
+            save(movie: controller.getMovie(index: index))
+            self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        }
     }
     
     

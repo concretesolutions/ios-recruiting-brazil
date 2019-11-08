@@ -10,6 +10,7 @@ import Foundation
 protocol MovieControllerDelegate: class {
     func didFinishRequest()
     func finishRefresh()
+    func error(type: TypeError)
 }
 
 class MovieController {
@@ -30,7 +31,10 @@ class MovieController {
                         self.delegate?.finishRefresh()
                         
                     }
+                }else {
+                    self.delegate?.error(type: .failureRequest)
                 }
+                
             }
         }
     }
@@ -46,6 +50,7 @@ class MovieController {
                         self.delegate?.didFinishRequest()
                     }
                 }else {
+                    self.delegate?.error(type: .failureRequest)
                 }
                 self.fetchMore = true
             }
