@@ -122,6 +122,9 @@ class DetailViewController: UIViewController {
         if let movieSelected = movie, let detailController = controller {
             detailController.saveMovie(movie: movieSelected)
             favoriteButton.isSelected = detailController.isFavorite(movie: movieSelected)
+        }else if let movieSelectedSave = movieSave {
+            controller?.saveMovieCoreData(movie: movieSelectedSave)
+            favoriteButton.isSelected = controller?.isFavoriteMovieSave(movie: movieSelectedSave) ?? false
         }
     }
     
@@ -144,6 +147,7 @@ class DetailViewController: UIViewController {
             self.textView.text = movieSelect.overview
             self.movieDateRelease.text = controller?.dataFormatter(movie: nil, movieSave: movieSelect)
             self.genresLabel.text = movieSelect.genres
+            self.favoriteButton.isSelected = controller?.isFavoriteMovieSave(movie: movieSelect) ?? false
         }
 
         

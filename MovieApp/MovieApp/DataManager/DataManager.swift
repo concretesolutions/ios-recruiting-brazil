@@ -25,6 +25,25 @@ class DataManager {
 
     var arrayMovieSave:[MovieSave] = []
     var arrayGenresSave:[Genres] = []
+    
+    func saveMovieCoreData(movie: MovieSave) {
+        let context = persistentContainer.viewContext
+        let movieSave = MovieSave(context: context)
+        
+        movieSave.title = movie.title
+        movieSave.releaseDate = movie.releaseDate
+        movieSave.overview = movie.overview
+        movieSave.imageURL = movie.imageURL
+        movieSave.genres = movie.genres
+        movieSave.id = movie.id
+        
+        do {
+            try context.save()
+        }catch {
+            print("Error - DataManager - saveMovie() ")
+        }
+        
+    }
 
     func saveMovie(movieToSave: Movie, genres: String) {
 

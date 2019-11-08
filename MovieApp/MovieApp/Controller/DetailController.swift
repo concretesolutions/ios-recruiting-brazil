@@ -14,6 +14,39 @@ class DetailController {
     var movie: Movie?
     let dataManager: DataManager = DataManager()
     
+    func isFavoriteMovieSave(movie: MovieSave) -> Bool {
+         var array:[MovieSave]  = []
+         dataManager.loadMovie { (arrayCoreData) in
+             array = arrayCoreData
+         }
+        let arraySaved = array.filter{$0.id == movie.id}
+        return arraySaved.count > 0
+     }
+     
+    
+    func saveMovieCoreData(movie: MovieSave) {
+        dataManager.loadMovie { (arrayCoreData) in
+            let arraySaved = arrayCoreData.filter{$0.id == movie.id}
+            if arraySaved.count > 0 {
+                dataManager.delete(id: movie.objectID) { (success) in
+                    if success {
+                        print("Removeu")
+                    }
+                }
+            }else {
+                dataManager.saveMovieCoreData(movie: movie)
+            }
+        }
+    }
+    
+    func deleteMovieSave(movie: MovieSave) {
+        dataManager.delete(id: movie.objectID) { (success) in
+            if success {
+                print("removeu")
+            }
+        }
+    }
+    
     func saveMovie(movie: Movie) {
         dataManager.loadMovie { (arrayCoreData) in
             let arraySaved = arrayCoreData.filter{$0.id == Int64(movie.id)}
@@ -50,7 +83,6 @@ class DetailController {
         } else if let movieSelectedSave = movieSave, let date = dateFormatterGet.date(from: movieSelectedSave.releaseDate ?? "") {
             return dateFormatterPrint.string(from: date)
         } else {
-            print("There was an error decoding the string")
             return ""
         }
     }

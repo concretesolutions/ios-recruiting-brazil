@@ -81,7 +81,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableView.deselectRow(at: indexPath, animated: false)
         let viewController = DetailViewController()
         viewController.movieSave = controller.getMovie(index: indexPath.item)
-        self.present(viewController, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     
