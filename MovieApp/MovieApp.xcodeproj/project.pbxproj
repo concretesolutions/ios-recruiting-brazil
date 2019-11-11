@@ -27,7 +27,7 @@
 		196D401D2374F0B40025AC9F /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D401C2374F0B40025AC9F /* ApiManager.swift */; };
 		196D401F2374F0D30025AC9F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D401E2374F0D30025AC9F /* DataManager.swift */; };
 		196D40222374F0E20025AC9F /* MovieSave.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 196D40202374F0E20025AC9F /* MovieSave.xcdatamodeld */; };
-		196D40242374F1B70025AC9F /* UIView + Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D40232374F1B70025AC9F /* UIView + Shadow.swift */; };
+		196D40242374F1B70025AC9F /* StyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D40232374F1B70025AC9F /* StyleView.swift */; };
 		196D40262374F2130025AC9F /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 196D40252374F2130025AC9F /* loading.json */; };
 		D90D87FF050CD20A4E175CE8 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259E1BD4EF76CF2D097FDE2F /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
@@ -55,7 +55,7 @@
 		196D401C2374F0B40025AC9F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		196D401E2374F0D30025AC9F /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		196D40212374F0E20025AC9F /* MovieSave.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieSave.xcdatamodel; sourceTree = "<group>"; };
-		196D40232374F1B70025AC9F /* UIView + Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Shadow.swift"; sourceTree = "<group>"; };
+		196D40232374F1B70025AC9F /* StyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleView.swift; sourceTree = "<group>"; };
 		196D40252374F2130025AC9F /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		259E1BD4EF76CF2D097FDE2F /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7082779FB7D66F4AA79A2C /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -74,6 +74,83 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19564699237A06A10064587C /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1956469C237A06F00064587C /* Controller */,
+				196D3FFB2374ED610025AC9F /* View */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		1956469A237A06AB0064587C /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				195646A0237A07760064587C /* View */,
+				1956469F237A07620064587C /* Controller */,
+			);
+			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		1956469B237A06B30064587C /* FavoriteViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1956469E237A07070064587C /* Controller */,
+				1956469D237A07000064587C /* View */,
+			);
+			path = FavoriteViewController;
+			sourceTree = "<group>";
+		};
+		1956469C237A06F00064587C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				196D40122374F0060025AC9F /* MovieController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1956469D237A07000064587C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				196D40082374EEE80025AC9F /* FavoriteViewController.swift */,
+				196D400A2374EF120025AC9F /* FavoriteCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1956469E237A07070064587C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				196D40142374F0140025AC9F /* FavoriteController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1956469F237A07620064587C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				196D40162374F01E0025AC9F /* DetailController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		195646A0237A07760064587C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				196D40062374EEA20025AC9F /* DetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		195646A1237A078C0064587C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				196D40042374EE590025AC9F /* BaseViewController.swift */,
+				196D40232374F1B70025AC9F /* StyleView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		196D3FD72374EB090025AC9F = {
 			isa = PBXGroup;
 			children = (
@@ -95,11 +172,12 @@
 		196D3FE22374EB090025AC9F /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				1956469B237A06B30064587C /* FavoriteViewController */,
+				1956469A237A06AB0064587C /* DetailViewController */,
+				19564699237A06A10064587C /* HomeViewController */,
 				196D40192374F0880025AC9F /* DataManager */,
 				196D40182374F0830025AC9F /* Networking */,
 				196D3FF92374EC1E0025AC9F /* Model */,
-				196D3FF82374EC1C0025AC9F /* View */,
-				196D3FFA2374EC230025AC9F /* Controller */,
 				196D3FF72374EC170025AC9F /* Resources */,
 				196D3FF12374EB0A0025AC9F /* Info.plist */,
 			);
@@ -109,26 +187,14 @@
 		196D3FF72374EC170025AC9F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				195646A1237A078C0064587C /* Utils */,
 				196D40252374F2130025AC9F /* loading.json */,
 				196D3FE32374EB090025AC9F /* AppDelegate.swift */,
 				196D3FE52374EB090025AC9F /* SceneDelegate.swift */,
 				196D3FEC2374EB0A0025AC9F /* Assets.xcassets */,
 				196D3FEE2374EB0A0025AC9F /* LaunchScreen.storyboard */,
-				196D40232374F1B70025AC9F /* UIView + Shadow.swift */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		196D3FF82374EC1C0025AC9F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				196D40032374EE230025AC9F /* Cells */,
-				196D3FFD2374ED840025AC9F /* DetailViewController */,
-				196D3FFC2374ED7E0025AC9F /* FavoriteViewController */,
-				196D3FFB2374ED610025AC9F /* HomeViewController */,
-				196D40042374EE590025AC9F /* BaseViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		196D3FF92374EC1E0025AC9F /* Model */ = {
@@ -141,47 +207,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		196D3FFA2374EC230025AC9F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				196D40122374F0060025AC9F /* MovieController.swift */,
-				196D40142374F0140025AC9F /* FavoriteController.swift */,
-				196D40162374F01E0025AC9F /* DetailController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		196D3FFB2374ED610025AC9F /* HomeViewController */ = {
-			isa = PBXGroup;
-			children = (
-				196D40012374EE0D0025AC9F /* HomeViewController.swift */,
-			);
-			path = HomeViewController;
-			sourceTree = "<group>";
-		};
-		196D3FFC2374ED7E0025AC9F /* FavoriteViewController */ = {
-			isa = PBXGroup;
-			children = (
-				196D40082374EEE80025AC9F /* FavoriteViewController.swift */,
-			);
-			path = FavoriteViewController;
-			sourceTree = "<group>";
-		};
-		196D3FFD2374ED840025AC9F /* DetailViewController */ = {
-			isa = PBXGroup;
-			children = (
-				196D40062374EEA20025AC9F /* DetailViewController.swift */,
-			);
-			path = DetailViewController;
-			sourceTree = "<group>";
-		};
-		196D40032374EE230025AC9F /* Cells */ = {
+		196D3FFB2374ED610025AC9F /* View */ = {
 			isa = PBXGroup;
 			children = (
 				196D3FFE2374EDB20025AC9F /* MovieCell.swift */,
-				196D400A2374EF120025AC9F /* FavoriteCell.swift */,
+				196D40012374EE0D0025AC9F /* HomeViewController.swift */,
 			);
-			path = Cells;
+			path = View;
 			sourceTree = "<group>";
 		};
 		196D40182374F0830025AC9F /* Networking */ = {
@@ -339,7 +371,7 @@
 				196D40052374EE590025AC9F /* BaseViewController.swift in Sources */,
 				196D3FE42374EB090025AC9F /* AppDelegate.swift in Sources */,
 				196D401B2374F09D0025AC9F /* API.swift in Sources */,
-				196D40242374F1B70025AC9F /* UIView + Shadow.swift in Sources */,
+				196D40242374F1B70025AC9F /* StyleView.swift in Sources */,
 				196D40222374F0E20025AC9F /* MovieSave.xcdatamodeld in Sources */,
 				196D40112374EFAF0025AC9F /* Genre.swift in Sources */,
 				196D40152374F0140025AC9F /* FavoriteController.swift in Sources */,
