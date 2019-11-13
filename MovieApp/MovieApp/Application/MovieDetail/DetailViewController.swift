@@ -11,8 +11,7 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
     
-    var movie: Movie?
-    var movieData: MovieData?
+    var movie: Movie
     var controller: DetailController?
     var genre: String?
     
@@ -98,7 +97,7 @@ class DetailViewController: UIViewController {
         text.backgroundColor = .white
         text.font = UIFont(name: Strings.fontProject, size: 18)
         text.textColor = .darkGray
-
+        
         return text
     }()
     
@@ -106,11 +105,6 @@ class DetailViewController: UIViewController {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
         
-    }
-    
-    init(movie: MovieData) {
-        self.movieData = movie
-        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -128,47 +122,28 @@ class DetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let detailController = controller, let movie = movie {
+        if let detailController = controller {
             favoriteButton.isSelected = detailController.isFavorite(movie: movie)
-        }else if let movieCore = movieData, let detailController = controller {
-            favoriteButton.isSelected = detailController.isFavoriteMovieData(movie: movieCore)
         }
     }
     
     @objc func saveMovie() {
-        if let detailController = controller, let movie = movie {
+        if let detailController = controller {
             detailController.saveMovie(movie: movie)
             favoriteButton.isSelected = detailController.isFavorite(movie: movie)
-        }else if let movieSelectedSave = movieData {
-            controller?.saveMovieCoreData(movie: movieSelectedSave)
-            favoriteButton.isSelected = controller?.isFavoriteMovieData(movie: movieSelectedSave) ?? false
         }
     }
     
     func setupMovie() {
-        
-        if let movieSelect = movieData {
-            self.titleLabel.text = movieSelect.title
-            let url = API.imageURL + (movieSelect.imageURL ?? "")
-            guard let urlTeste: URL = URL(string: url) else {return}
-            self.imageMovie.sd_setImage(with: urlTeste, completed: nil)
-            self.textView.text = movieSelect.overview
-            self.movieDateRelease.text = controller?.dataFormatter(movie: nil, movieData: movieSelect)
-            self.genresLabel.text = movieSelect.genres
-            self.favoriteButton.isSelected = controller?.isFavoriteMovieData(movie: movieSelect) ?? false
-        }else if let movie = movie {
-            self.titleLabel.text = movie.title
-            let url = API.imageURL + (movie.backdropPath ?? "")
-            guard let urlTeste: URL = URL(string: url) else {return}
-            self.imageMovie.sd_setImage(with: urlTeste, completed: nil)
-            self.textView.text = movie.overview
-            self.movieDateRelease.text = controller?.dataFormatter(movie: movie, movieData: nil)
-            self.genresLabel.text = controller?.getGenre(movie: movie)
-        }
-
-        
+        self.titleLabel.text = movie.title
+        let url = API.imageURL + (movie.backdropPath ?? "")
+        guard let urlTeste: URL = URL(string: url) else {return}
+        self.imageMovie.sd_setImage(with: urlTeste, completed: nil)
+        self.textView.text = movie.overview
+        self.movieDateRelease.text = controller?.dataFormatter(movie: movie, movieData: nil)
+        self.genresLabel.text = controller?.getGenre(movie: movie)
     }
-    
+
     func setupUI() {
         // MARK: - Screen
         
@@ -222,8 +197,8 @@ class DetailViewController: UIViewController {
         textView.leadingAnchor.constraint(equalTo: viewBackground.leadingAnchor, constant: 16).isActive = true
         textView.trailingAnchor.constraint(equalTo: viewBackground.trailingAnchor, constant: -16).isActive = true
         textView.bottomAnchor.constraint(equalTo: viewBackground.bottomAnchor, constant: -16).isActive = true
-
+        
     }
-    
+
 }
 

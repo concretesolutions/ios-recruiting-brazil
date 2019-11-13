@@ -54,7 +54,7 @@ class FavoriteViewController: UIViewController {
 }
 
 extension FavoriteViewController: FavoriteDataSourceDelegate {
-    func editStyle(movie: MovieData) {
+    func editStyle(movie: Movie) {
         controller.delete(movie: movie) { (success) in
             if success {
                 controller.getMovies()
@@ -63,7 +63,7 @@ extension FavoriteViewController: FavoriteDataSourceDelegate {
         }
     }
     
-    func didSelected(movie: MovieData) {
+    func didSelected(movie: Movie) {
         let viewController = DetailViewController(movie: movie)
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -71,7 +71,7 @@ extension FavoriteViewController: FavoriteDataSourceDelegate {
 }
 
 extension FavoriteViewController: FavoriteControllerDelegate {
-    func showMovies(movies: [MovieData]) {
+    func showMovies(movies: [Movie]) {
         dataSource.updateMovies(movies: movies)
     }
 }

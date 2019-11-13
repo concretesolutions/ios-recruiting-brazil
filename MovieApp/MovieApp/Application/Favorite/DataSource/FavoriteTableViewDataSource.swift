@@ -9,15 +9,15 @@
 import UIKit
 
 protocol FavoriteDataSourceDelegate: class {
-    func didSelected(movie: MovieData)
-    func editStyle(movie: MovieData)
+    func didSelected(movie: Movie)
+    func editStyle(movie: Movie)
 }
 
 final class FavoriteTableViewDataSource: NSObject {
     
     private weak var tableView: UITableView?
     private let delegate: FavoriteDataSourceDelegate
-    private var movies:[MovieData] = []
+    private var movies:[Movie] = []
     
     init(tableView: UITableView, delegate: FavoriteDataSourceDelegate) {
         self.delegate = delegate
@@ -38,7 +38,7 @@ final class FavoriteTableViewDataSource: NSObject {
         tableView?.delegate = self
     }
     
-    func updateMovies(movies: [MovieData]) {
+    func updateMovies(movies: [Movie]) {
         self.movies = movies
         tableView?.reloadData()
     }

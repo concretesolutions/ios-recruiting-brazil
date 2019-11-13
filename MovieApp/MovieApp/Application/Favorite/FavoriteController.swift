@@ -9,27 +9,37 @@
 import Foundation
 
 protocol FavoriteControllerDelegate {
-    func showMovies(movies: [MovieData])
+    func showMovies(movies: [Movie])
 }
 
 class FavoriteController {
     
     var dataManager = MovieDataManager()
     var delegate: FavoriteControllerDelegate?
-
+    
     func getMovies() {
+        var movies:[Movie] = []
         dataManager.loadMovie { (arrayMovie) in
-            delegate?.showMovies(movies: arrayMovie)
+            arrayMovie.forEach { (movie) in
+                movies.append(Movie(movie: movie))
+            }
+            delegate?.showMovies(movies: movies)
         }
     }
     
-    func delete(movie: MovieData, completion: (Bool) -> Void) {
-        dataManager.delete(id: movie.objectID) { (success) in
-            if success {
-                completion(true)
-                return
+    func delete(movie: Movie, completion: (Bool) -> Void) {
+        var movies:[MovieData] = []
+        dataManager.loadMovie { (moviesData) in
+            movies = moviesData.filter({$0.id == Int64(movie.id)})
+        }
+        if let movieSelected = movies.first {
+            dataManager.delete(id: movieSelected.objectID) { (success) in
+                if success {
+                    completion(true)
+                    return
+                }
+                completion(false)
             }
-            completion(false)
         }
     }
     

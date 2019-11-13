@@ -5,15 +5,17 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="MovieData" representedClassName="MovieData" syncable="YES" codeGenerationType="class">
-        <attribute name="genres" optional="YES" attributeType="String"/>
+        <attribute name="backdropPath" optional="YES" attributeType="String"/>
+        <attribute name="genres" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
+        <attribute name="genresLabel" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="posterPath" optional="YES" attributeType="String"/>
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Genres" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MovieData" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Genres" positionX="0" positionY="0" width="128" height="73"/>
+        <element name="MovieData" positionX="0" positionY="0" width="128" height="163"/>
     </elements>
 </model>

@@ -32,8 +32,10 @@ class MovieDataManager {
         movieData.title = movie.title
         movieData.releaseDate = movie.releaseDate
         movieData.overview = movie.overview
-        movieData.imageURL = movie.imageURL
+        movieData.backdropPath = movie.backdropPath
         movieData.genres = movie.genres
+        movieData.genresLabel = movie.genresLabel
+        movieData.posterPath = movie.posterPath
         movieData.id = movie.id
         
         do {
@@ -44,6 +46,13 @@ class MovieDataManager {
         
     }
     
+//    func movieDataToMovie(movies: [MovieData]) -> Movie {
+//        let context = persistentContainer.viewContext
+//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieData")
+//        let result = try? context.fetch(request)
+//        let moviesData = result as? [MovieData] ?? []
+//    }
+//
     func saveMovie(movieToSave: Movie, genres: String) {
         
         let context = persistentContainer.viewContext
@@ -52,8 +61,10 @@ class MovieDataManager {
         movie.title = movieToSave.title
         movie.releaseDate = movieToSave.releaseDate
         movie.overview = movieToSave.overview
-        movie.imageURL = movieToSave.backdropPath
-        movie.genres = genres
+        movie.backdropPath = movieToSave.backdropPath
+        movie.genres = movieToSave.genreIDS
+        movie.genresLabel = genres
+        movie.posterPath = movieToSave.posterPath
         movie.id = Int64(movieToSave.id)
         
         do {

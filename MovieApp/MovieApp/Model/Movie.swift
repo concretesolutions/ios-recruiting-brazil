@@ -17,6 +17,21 @@ class Movie: Codable {
     let title: String
     let overview, releaseDate: String
     var isFavorite: Bool = false
+    
+    init(movie: MovieData) {
+        self.posterPath = movie.posterPath ?? ""
+        self.id = Int(movie.id)
+        self.backdropPath = movie.backdropPath ?? ""
+        self.genreIDS = movie.genres ?? []
+        self.title = movie.title ?? ""
+        self.overview = movie.overview ?? ""
+        self.releaseDate = movie.releaseDate ?? ""
+        self.isFavorite = true
+    
+        
+        
+        
+    }
 
     enum CodingKeys: String, CodingKey {
         case posterPath = "poster_path"

@@ -36,9 +36,9 @@ class FavoriteCell: UITableViewCell {
         return overview
     }()
     
-    func setupCell(movie: MovieData) {
+    func setupCell(movie: Movie) {
         self.backgroundColor = .background
-        let url = API.imageURL + (movie.imageURL ?? "")
+        let url = API.imageURL + (movie.backdropPath ?? "")
 
         if let url2 = URL(string: url){
              favoriteImage.sd_setImage(with: url2, completed: nil)
