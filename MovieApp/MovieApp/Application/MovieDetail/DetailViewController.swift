@@ -48,8 +48,8 @@ class DetailViewController: UIViewController {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.numberOfLines = 1
         title.textColor = .darkGray
-        title.font = UIFont(name: "Futura", size: 20)
-        title.text = "Sinopse"
+        title.font = UIFont(name: Strings.fontProject, size: 20)
+        title.text = Strings.detailSinops
         return title
     }()
     
@@ -59,7 +59,7 @@ class DetailViewController: UIViewController {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.numberOfLines = 0
         title.textColor = .orange
-        title.font = UIFont(name: "Futura", size: 15)
+        title.font = UIFont(name: Strings.fontProject, size: 15)
         return title
     }()
     
@@ -69,8 +69,8 @@ class DetailViewController: UIViewController {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.numberOfLines = 1
         title.textColor = .darkGray
-        title.font = UIFont(name: "Futura", size: 15)
-        title.text = "Release: "
+        title.font = UIFont(name: Strings.fontProject, size: 15)
+        title.text = Strings.detailRelease
         return title
     }()
     
@@ -79,7 +79,7 @@ class DetailViewController: UIViewController {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.numberOfLines = 1
         title.textColor = .darkGray
-        title.font = UIFont(name: "Futura", size: 15)
+        title.font = UIFont(name: Strings.fontProject, size: 15)
         return title
     }()
     
@@ -96,11 +96,26 @@ class DetailViewController: UIViewController {
         text.translatesAutoresizingMaskIntoConstraints = false
         text.allowsEditingTextAttributes = false
         text.backgroundColor = .white
-        text.font = UIFont(name: "Futura", size: 18)
+        text.font = UIFont(name: Strings.fontProject, size: 18)
         text.textColor = .darkGray
 
         return text
     }()
+    
+    init(movie: Movie) {
+        self.movie = movie
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    init(movie: MovieSave) {
+        self.movieSave = movie
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,15 +128,17 @@ class DetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let movieSelected = movie, let detailController = controller {
-            favoriteButton.isSelected = detailController.isFavorite(movie: movieSelected)
+        if let detailController = controller, let movie = movie {
+            favoriteButton.isSelected = detailController.isFavorite(movie: movie)
+        }else if let movieCore = movieSave, let detailController = controller {
+            favoriteButton.isSelected = detailController.isFavoriteMovieSave(movie: movieCore)
         }
     }
     
     @objc func saveMovie() {
-        if let movieSelected = movie, let detailController = controller {
-            detailController.saveMovie(movie: movieSelected)
-            favoriteButton.isSelected = detailController.isFavorite(movie: movieSelected)
+        if let detailController = controller, let movie = movie {
+            detailController.saveMovie(movie: movie)
+            favoriteButton.isSelected = detailController.isFavorite(movie: movie)
         }else if let movieSelectedSave = movieSave {
             controller?.saveMovieCoreData(movie: movieSelectedSave)
             favoriteButton.isSelected = controller?.isFavoriteMovieSave(movie: movieSelectedSave) ?? false
@@ -129,15 +146,6 @@ class DetailViewController: UIViewController {
     }
     
     func setupMovie() {
-        if let movieSelect = movie {
-            self.titleLabel.text = movieSelect.title
-            let url = API.imageURL + (movieSelect.backdropPath ?? "")
-            guard let urlTeste: URL = URL(string: url) else {return}
-            self.imageMovie.sd_setImage(with: urlTeste, completed: nil)
-            self.textView.text = movieSelect.overview
-            self.movieDateRelease.text = controller?.dataFormatter(movie: movieSelect, movieSave: nil)
-            self.genresLabel.text = controller?.getGenre(movie: movie)
-        }
         
         if let movieSelect = movieSave {
             self.titleLabel.text = movieSelect.title
@@ -148,6 +156,14 @@ class DetailViewController: UIViewController {
             self.movieDateRelease.text = controller?.dataFormatter(movie: nil, movieSave: movieSelect)
             self.genresLabel.text = movieSelect.genres
             self.favoriteButton.isSelected = controller?.isFavoriteMovieSave(movie: movieSelect) ?? false
+        }else if let movie = movie {
+            self.titleLabel.text = movie.title
+            let url = API.imageURL + (movie.backdropPath ?? "")
+            guard let urlTeste: URL = URL(string: url) else {return}
+            self.imageMovie.sd_setImage(with: urlTeste, completed: nil)
+            self.textView.text = movie.overview
+            self.movieDateRelease.text = controller?.dataFormatter(movie: movie, movieSave: nil)
+            self.genresLabel.text = controller?.getGenre(movie: movie)
         }
 
         
@@ -156,7 +172,7 @@ class DetailViewController: UIViewController {
     func setupUI() {
         // MARK: - Screen
         
-        self.view.backgroundColor = UIColor(red: 0.951, green: 0.949, blue: 0.968, alpha: 1.0)
+        self.view.backgroundColor = .background
         
         
         self.view.addSubview(imageMovie)

@@ -15,8 +15,6 @@ protocol MovieCellDelegate: class {
 }
 
 class MovieCell: UICollectionViewCell {
-    
-    let dataManager = DataManager()
     var movie: Movie?
     var index: Int?
     weak var delegate: MovieCellDelegate?

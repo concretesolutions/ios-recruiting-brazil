@@ -47,9 +47,9 @@ class BaseViewController: UIViewController {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textAlignment = .center
-        view.font = UIFont(name: "Futura", size: 25)
+        view.font = UIFont(name: Strings.fontProject, size: 25)
         view.textColor = .black
-        view.text = "Warning !"
+        view.text = Strings.msgError
         return view
     }()
     
@@ -57,7 +57,7 @@ class BaseViewController: UIViewController {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textAlignment = .center
-        view.font = UIFont(name: "Futura", size: 15)
+        view.font = UIFont(name: Strings.fontProject, size: 15)
         view.textColor = .black
         return view
     }()
@@ -76,7 +76,7 @@ class BaseViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0.999, green: 0.498, blue: 0.009, alpha: 1.0)
         view.layer.cornerRadius = 15
         view.tintColor = .black
-        view.setTitle("Close", for: .normal)
+        view.setTitle(Strings.titleButton, for: .normal)
         return view
     }()
     
@@ -116,12 +116,13 @@ class BaseViewController: UIViewController {
     }
     
     func addError(type: TypeError) {
+        self.stopAnimating()
         self.blackUIView.isHidden = false
         self.viewBackground.isHidden = false
         
         self.view.addSubview(blackUIView)
         self.blackUIView.addSubview(viewBackground)
-        self.viewBackground.addSubview(blackUIView)
+        self.viewBackground.addSubview(redUIView)
         self.viewBackground.addSubview(errorLabel)
         self.viewBackground.addSubview(errorImage)
         self.viewBackground.addSubview(descLabel)
@@ -129,11 +130,11 @@ class BaseViewController: UIViewController {
         
         switch type {
         case .failureRequest:
-            self.descLabel.text = "An error has ocurred: Failure to Request"
+            self.descLabel.text = Strings.failureToRequest
         case .noInternet:
-            self.descLabel.text = "An error has ocurred: No Internet"
+            self.descLabel.text = Strings.noInternet
         case .notFound:
-            self.descLabel.text = "Your search for returned no results"
+            self.descLabel.text = Strings.notFound
             
         }
         

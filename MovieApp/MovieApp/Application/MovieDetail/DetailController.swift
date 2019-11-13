@@ -12,11 +12,12 @@ import Foundation
 class DetailController {
     
     var movie: Movie?
-    let dataManager: DataManager = DataManager()
+    let movieDataManager = MovieDataManager()
+    let genreDataManager = GenreDataManager()
     
     func isFavoriteMovieSave(movie: MovieSave) -> Bool {
          var array:[MovieSave]  = []
-         dataManager.loadMovie { (arrayCoreData) in
+         movieDataManager.loadMovie { (arrayCoreData) in
              array = arrayCoreData
          }
         let arraySaved = array.filter{$0.id == movie.id}
@@ -25,22 +26,22 @@ class DetailController {
      
     
     func saveMovieCoreData(movie: MovieSave) {
-        dataManager.loadMovie { (arrayCoreData) in
+        movieDataManager.loadMovie { (arrayCoreData) in
             let arraySaved = arrayCoreData.filter{$0.id == movie.id}
             if arraySaved.count > 0 {
-                dataManager.delete(id: movie.objectID) { (success) in
+                movieDataManager.delete(id: movie.objectID) { (success) in
                     if success {
                         print("Removeu")
                     }
                 }
             }else {
-                dataManager.saveMovieCoreData(movie: movie)
+                movieDataManager.saveMovieCoreData(movie: movie)
             }
         }
     }
     
     func deleteMovieSave(movie: MovieSave) {
-        dataManager.delete(id: movie.objectID) { (success) in
+        movieDataManager.delete(id: movie.objectID) { (success) in
             if success {
                 print("removeu")
             }
@@ -48,23 +49,23 @@ class DetailController {
     }
     
     func saveMovie(movie: Movie) {
-        dataManager.loadMovie { (arrayCoreData) in
+        movieDataManager.loadMovie { (arrayCoreData) in
             let arraySaved = arrayCoreData.filter{$0.id == Int64(movie.id)}
             if arraySaved.count > 0 {
-                dataManager.delete(id: arraySaved.first!.objectID) { (success) in
+                movieDataManager.delete(id: arraySaved.first!.objectID) { (success) in
                     if success {
                         print("Removeu")
                     }
                 }
             }else {
-                dataManager.saveMovie(movieToSave: movie, genres: dataManager.getGenreString(movie: movie))
+                movieDataManager.saveMovie(movieToSave: movie, genres: genreDataManager.getGenreString(movie: movie))
             }
         }
     }
     
     func isFavorite(movie: Movie) -> Bool {
         var array:[MovieSave]  = []
-        dataManager.loadMovie { (arrayCoreData) in
+        movieDataManager.loadMovie { (arrayCoreData) in
             array = arrayCoreData
         }
         let arraySaved = array.filter{$0.id == Int64(movie.id)}
@@ -89,7 +90,7 @@ class DetailController {
     
     func getGenre(movie: Movie?) -> String {
         if let movieSelected = movie {
-            return dataManager.getGenreString(movie: movieSelected)
+            return genreDataManager.getGenreString(movie: movieSelected)
         }
         return ""
     }

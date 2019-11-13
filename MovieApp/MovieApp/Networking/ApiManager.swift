@@ -11,40 +11,8 @@ import Foundation
 import Alamofire
 
 class ApiManager {
-    
-    func getMovies(completion: @escaping (_ result: [Movie]?, _ error: Bool) -> Void) {
-        let url = API.baseURL + API.movie + API.popular
-        let parameters: Parameters = ["api_key":API.apiKey, "page": 1]
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in
-            if response.response?.statusCode == 200 {
-                print("Deu certo !! :) - ApiManager - getMovies() \n \(String(describing: response.result.value))")
-                
-                guard let data = response.data else {
-                    completion(nil, true)
-                    return
-                }
-                
-                do {
-                    let result = try JSONDecoder().decode(Result.self, from: data)
-                    completion(result.movieList, false)
-                    return
-                }catch {
-                    print("Error - JSONDecoder() - ApiManager - getMovies()")
-                    completion(nil, true)
-                    return
-                }
-                
-            }else {
-                print("Não deu 200 :c - ApiManager - getMovies()")
-                completion(nil,true)
-                return
-            }
-        }
-        
-    }
-    
-    func loadMoreMovies(page: Int, completion: @escaping (_ result: [Movie]?, _ error: Bool) -> Void) {
+    func loadMovies(page: Int, completion: @escaping (_ result: [Movie]?, _ error: Bool) -> Void) {
         let url = API.baseURL + API.movie + API.popular
         let parameters: Parameters = ["api_key":API.apiKey, "page": page]
         

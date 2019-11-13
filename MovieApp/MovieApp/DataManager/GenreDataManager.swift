@@ -1,17 +1,15 @@
 //
-//  DataManager.swift
+//  GenreDataManager.swift
 //  MovieApp
 //
-//  Created by Giuliano Accorsi on 07/11/19.
+//  Created by Giuliano Accorsi on 11/11/19.
 //  Copyright © 2019 Giuliano Accorsi. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-
-class DataManager {
-
+class GenreDataManager {
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MovieSave")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -22,47 +20,8 @@ class DataManager {
         })
         return container
     }()
-
-    var arrayMovieSave:[MovieSave] = []
-    var arrayGenresSave:[Genres] = []
     
-    func saveMovieCoreData(movie: MovieSave) {
-        let context = persistentContainer.viewContext
-        let movieSave = MovieSave(context: context)
-        
-        movieSave.title = movie.title
-        movieSave.releaseDate = movie.releaseDate
-        movieSave.overview = movie.overview
-        movieSave.imageURL = movie.imageURL
-        movieSave.genres = movie.genres
-        movieSave.id = movie.id
-        
-        do {
-            try context.save()
-        }catch {
-            print("Error - DataManager - saveMovie() ")
-        }
-        
-    }
-
-    func saveMovie(movieToSave: Movie, genres: String) {
-
-        let context = persistentContainer.viewContext
-        let movie = MovieSave(context: context)
-        
-        movie.title = movieToSave.title
-        movie.releaseDate = movieToSave.releaseDate
-        movie.overview = movieToSave.overview
-        movie.imageURL = movieToSave.backdropPath
-        movie.genres = genres
-        movie.id = Int64(movieToSave.id)
-        
-        do {
-            try context.save()
-        }catch {
-            print("Error - DataManager - saveMovie() ")
-        }
-    }
+    var genres:[Genres] = []
     
     func saveGenres(genresToSave: [Genre]) {
         var arrayCoreData:[Genres] = []
@@ -93,29 +52,8 @@ class DataManager {
         let context = persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Genres")
         let result = try? context.fetch(request)
-        arrayGenresSave = result as? [Genres] ?? []
-        completion(arrayGenresSave)
-    }
-
-    func loadMovie(completion: ([MovieSave])-> Void) {
-        let context = persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieSave")
-        let result = try? context.fetch(request)
-        arrayMovieSave = result as? [MovieSave] ?? []
-        completion(arrayMovieSave)
-    }
-
-    func delete(id: NSManagedObjectID, completion: (Bool) -> Void) -> Void {
-        let context = persistentContainer.viewContext
-        let obj = context.object(with: id)
-
-        context.delete(obj)
-        do {
-            try context.save()
-            completion(true)
-        }catch {
-            completion(false)
-        }
+        genres = result as? [Genres] ?? []
+        completion(genres)
     }
     
     func getGenreString(movie: Movie?) -> String {
