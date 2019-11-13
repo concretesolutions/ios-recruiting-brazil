@@ -12,7 +12,7 @@ import CoreData
 class MovieDataManager {
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "MovieSave")
+        let container = NSPersistentContainer(name: "MovieData")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 
@@ -22,24 +22,23 @@ class MovieDataManager {
         return container
     }()
     
-    var arrayMovieSave:[MovieSave] = []
+    var arrayMovieData: [MovieData] = []
     
-    
-    func saveMovieCoreData(movie: MovieSave) {
+    func saveMovieCoreData(movie: MovieData) {
         
         let context = persistentContainer.viewContext
-        let movieSave = MovieSave(context: context)
+        let movieData = MovieData(context: context)
         
-        movieSave.title = movie.title
-        movieSave.releaseDate = movie.releaseDate
-        movieSave.overview = movie.overview
-        movieSave.imageURL = movie.imageURL
-        movieSave.genres = movie.genres
-        movieSave.id = movie.id
+        movieData.title = movie.title
+        movieData.releaseDate = movie.releaseDate
+        movieData.overview = movie.overview
+        movieData.imageURL = movie.imageURL
+        movieData.genres = movie.genres
+        movieData.id = movie.id
         
         do {
             try context.save()
-        }catch {
+        } catch {
             print("Error - DataManager - saveMovie() ")
         }
         
@@ -48,7 +47,7 @@ class MovieDataManager {
     func saveMovie(movieToSave: Movie, genres: String) {
         
         let context = persistentContainer.viewContext
-        let movie = MovieSave(context: context)
+        let movie = MovieData(context: context)
         
         movie.title = movieToSave.title
         movie.releaseDate = movieToSave.releaseDate
@@ -59,41 +58,41 @@ class MovieDataManager {
         
         do {
             try context.save()
-        }catch {
+        } catch {
             print("Error - DataManager - saveMovie() ")
         }
     }
     
-    func loadMovie(completion: ([MovieSave])-> Void) {
+    func loadMovie(completion: ([MovieData]) -> Void) {
         let context = persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieSave")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieData")
         let result = try? context.fetch(request)
-        arrayMovieSave = result as? [MovieSave] ?? []
-        completion(arrayMovieSave)
+        arrayMovieData = result as? [MovieData] ?? []
+        completion(arrayMovieData)
     }
     
     func delete(id: NSManagedObjectID, completion: (Bool) -> Void) -> Void {
         let context = persistentContainer.viewContext
-        let obj = context.object(with: id)
+        let object = context.object(with: id)
         
-        context.delete(obj)
+        context.delete(object)
         do {
             try context.save()
             completion(true)
-        }catch {
+        } catch {
             completion(false)
         }
     }
     
     func mergeMovies(movies: [Movie]) -> [Movie] {
         loadMovie { (movieCore) in
-            self.arrayMovieSave = movieCore
+            self.arrayMovieData = movieCore
         }
         
         var moviesWithFavoretes: [Movie] = []
         movies.forEach { (movie) in
             
-            let movieFavorite = arrayMovieSave.first {
+            let movieFavorite = arrayMovieData.first {
                 return $0.id == Int64(movie.id)
             }
             
@@ -107,11 +106,11 @@ class MovieDataManager {
     
     func isMovieFavorite(id: Int) -> Bool {
         loadMovie { (movieCore) in
-            self.arrayMovieSave = movieCore
+            self.arrayMovieData = movieCore
         }
         
-        let movie = arrayMovieSave.first { (movieSave) -> Bool in
-            return movieSave.id == Int64(id)
+        let movie = arrayMovieData.first { (movieData) -> Bool in
+            return movieData.id == Int64(id)
         }
         return movie != nil
     }

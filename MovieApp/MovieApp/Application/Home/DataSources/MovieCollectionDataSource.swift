@@ -10,6 +10,7 @@
 import UIKit
 
 protocol MovieDataSourceDelegate: class {
+    
     func didScroll()
     func didSelected(movie: Movie)
     func favoriteMovie(movie: Movie)
@@ -27,7 +28,6 @@ final class MovieCollectionDataSource: NSObject {
         self.collectionView = collectionView
         registerCells()
         setupDataSource()
-        
     }
     
     private func registerCells() {
@@ -51,6 +51,7 @@ final class MovieCollectionDataSource: NSObject {
 }
 
 extension MovieCollectionDataSource: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screeWidth: CGFloat = UIScreen.main.bounds.width / 2 - 15
         return CGSize(width: screeWidth, height: 1.5 * screeWidth)
@@ -58,6 +59,7 @@ extension MovieCollectionDataSource: UICollectionViewDelegateFlowLayout {
 }
 
 extension MovieCollectionDataSource: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate.didSelected(movie: movies[indexPath.item])
     }
@@ -71,6 +73,7 @@ extension MovieCollectionDataSource: UICollectionViewDelegate {
 }
 
 extension MovieCollectionDataSource: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }

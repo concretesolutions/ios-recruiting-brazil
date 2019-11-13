@@ -11,10 +11,12 @@ import UIKit
 import SDWebImage
 
 protocol MovieCellDelegate: class {
+    
     func tapped(index: Int)
 }
 
 class MovieCell: UICollectionViewCell {
+    
     var movie: Movie?
     var index: Int?
     weak var delegate: MovieCellDelegate?
@@ -48,22 +50,20 @@ class MovieCell: UICollectionViewCell {
     }()
     
     func setupCell(movie: Movie, index: Int, isFavorite: Bool) {
+        
         self.movie = movie
         self.index = index
-        
-        
+        self.titleLabel.text = movie.title
         let url = API.imageURL + movie.posterPath
-        
         if let url2 = URL(string: url){
              imageView.sd_setImage(with: url2, completed: nil)
         }
-        titleLabel.text = movie.title
         favoriteButton.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         favoriteButton.isSelected = isFavorite
-        setupConst()
+        setupLayout()
     }
     
-    func setupConst() {
+    func setupLayout() {
         
         self.contentView.addSubview(imageView)
         self.contentView.addSubview(viewBackground)

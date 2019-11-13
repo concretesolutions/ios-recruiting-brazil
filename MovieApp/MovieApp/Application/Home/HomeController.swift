@@ -22,18 +22,15 @@ class HomeController: NSObject {
     var fetchMore: Bool = true
     var indexPageRequest = 1
     
-    
     init(delegate: HomeControllerDelegate) {
         self.delegate = delegate
         super.init()
     }
     
-    
     func getMovies() {
         if fetchMore {
             self.fetchMore = false
             ApiManager().loadMovies(page: self.indexPageRequest) { (movies, error) in
-        
                 if let movieList = movies {
                     self.movies.append(contentsOf: movieList)
                     self.indexPageRequest += 1
@@ -89,5 +86,4 @@ class HomeController: NSObject {
             fetchMore = false
         }
     }
-    
 }

@@ -67,8 +67,6 @@ class HomeViewController: BaseViewController {
         searchDataSource = MovieSearchBarDataSource(searchController: searchController, delegate: self)
         self.startAnimating()
     }
-    
-
     private func setupLayout() {
         view.addSubview(collectionView)
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -76,7 +74,6 @@ class HomeViewController: BaseViewController {
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    
 }
 
 extension HomeViewController: UITabBarControllerDelegate {
@@ -87,10 +84,10 @@ extension HomeViewController: UITabBarControllerDelegate {
             self.collectionView.setContentOffset(CGPoint(x: 0, y: -100), animated: true)
         }
     }
-    
 }
 
 extension HomeViewController: MovieDataSourceDelegate {
+    
     func didSelected(movie: Movie) {
         let viewController = DetailViewController(movie: movie)
         navigationController?.pushViewController(viewController, animated: true)
@@ -99,7 +96,6 @@ extension HomeViewController: MovieDataSourceDelegate {
     func favoriteMovie(movie: Movie) {
         controller.saveMovie(movie: movie)
         collectionView.reloadData()
-        
     }
     
     func didScroll() {
@@ -109,6 +105,7 @@ extension HomeViewController: MovieDataSourceDelegate {
 }
 
 extension HomeViewController: HomeControllerDelegate {
+    
     func showMovies(movies: [Movie]) {
         dataSource.updateMovies(movies: movies)
     }
@@ -116,10 +113,10 @@ extension HomeViewController: HomeControllerDelegate {
     func error(type: TypeError) {
         addError(type: type)
     }
-
 }
 
 extension HomeViewController: MovieSearchBarDataSourceDelegate {
+    
     func updateSearchResult(text: String) {
         controller.filterMovies(text: text)
     }

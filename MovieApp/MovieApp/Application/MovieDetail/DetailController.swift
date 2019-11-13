@@ -15,8 +15,8 @@ class DetailController {
     let movieDataManager = MovieDataManager()
     let genreDataManager = GenreDataManager()
     
-    func isFavoriteMovieSave(movie: MovieSave) -> Bool {
-         var array:[MovieSave]  = []
+    func isFavoriteMovieData(movie: MovieData) -> Bool {
+         var array:[MovieData]  = []
          movieDataManager.loadMovie { (arrayCoreData) in
              array = arrayCoreData
          }
@@ -25,7 +25,7 @@ class DetailController {
      }
      
     
-    func saveMovieCoreData(movie: MovieSave) {
+    func saveMovieCoreData(movie: MovieData) {
         movieDataManager.loadMovie { (arrayCoreData) in
             let arraySaved = arrayCoreData.filter{$0.id == movie.id}
             if arraySaved.count > 0 {
@@ -40,7 +40,7 @@ class DetailController {
         }
     }
     
-    func deleteMovieSave(movie: MovieSave) {
+    func deleteMovieData(movie: MovieData) {
         movieDataManager.delete(id: movie.objectID) { (success) in
             if success {
                 print("removeu")
@@ -64,7 +64,7 @@ class DetailController {
     }
     
     func isFavorite(movie: Movie) -> Bool {
-        var array:[MovieSave]  = []
+        var array:[MovieData]  = []
         movieDataManager.loadMovie { (arrayCoreData) in
             array = arrayCoreData
         }
@@ -72,7 +72,7 @@ class DetailController {
         return arraySaved.count > 0
     }
     
-    func dataFormatter(movie: Movie?, movieSave: MovieSave?) -> String {
+    func dataFormatter(movie: Movie?, movieData: MovieData?) -> String {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
         
@@ -81,7 +81,7 @@ class DetailController {
         
         if let movieSelected = movie, let date = dateFormatterGet.date(from: movieSelected.releaseDate) {
             return dateFormatterPrint.string(from: date)
-        } else if let movieSelectedSave = movieSave, let date = dateFormatterGet.date(from: movieSelectedSave.releaseDate ?? "") {
+        } else if let movieSelectedSave = movieData, let date = dateFormatterGet.date(from: movieSelectedSave.releaseDate ?? "") {
             return dateFormatterPrint.string(from: date)
         } else {
             return ""

@@ -20,6 +20,7 @@ class MovieSearchBarDataSource: NSObject {
     private let searchController: UISearchController
     
     init(searchController: UISearchController, delegate: MovieSearchBarDataSourceDelegate) {
+        
         self.searchController = searchController
         self.delegate = delegate
         

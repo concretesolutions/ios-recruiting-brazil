@@ -94,8 +94,6 @@ class BaseViewController: UIViewController {
         starAnimationView.loopMode = .loop
         starAnimationView.play()
         self.view.addSubview(starAnimationView)
-        
-        
     }
     
     @objc func buttonTapped() {
@@ -106,8 +104,6 @@ class BaseViewController: UIViewController {
     func stopAnimating() {
         starAnimationView.stop()
         starAnimationView.isHidden = true
-        
-        
     }
     
     func dismissError() {

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FavoriteControllerDelegate {
-    func showMovies(movies: [MovieSave])
+    func showMovies(movies: [MovieData])
 }
 
 class FavoriteController {
@@ -23,7 +23,7 @@ class FavoriteController {
         }
     }
     
-    func delete(movie: MovieSave, completion: (Bool) -> Void) {
+    func delete(movie: MovieData, completion: (Bool) -> Void) {
         dataManager.delete(id: movie.objectID) { (success) in
             if success {
                 completion(true)

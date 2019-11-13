@@ -12,7 +12,7 @@ import SDWebImage
 class DetailViewController: UIViewController {
     
     var movie: Movie?
-    var movieSave: MovieSave?
+    var movieData: MovieData?
     var controller: DetailController?
     var genre: String?
     
@@ -108,8 +108,8 @@ class DetailViewController: UIViewController {
         
     }
     
-    init(movie: MovieSave) {
-        self.movieSave = movie
+    init(movie: MovieData) {
+        self.movieData = movie
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -130,8 +130,8 @@ class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
         if let detailController = controller, let movie = movie {
             favoriteButton.isSelected = detailController.isFavorite(movie: movie)
-        }else if let movieCore = movieSave, let detailController = controller {
-            favoriteButton.isSelected = detailController.isFavoriteMovieSave(movie: movieCore)
+        }else if let movieCore = movieData, let detailController = controller {
+            favoriteButton.isSelected = detailController.isFavoriteMovieData(movie: movieCore)
         }
     }
     
@@ -139,30 +139,30 @@ class DetailViewController: UIViewController {
         if let detailController = controller, let movie = movie {
             detailController.saveMovie(movie: movie)
             favoriteButton.isSelected = detailController.isFavorite(movie: movie)
-        }else if let movieSelectedSave = movieSave {
+        }else if let movieSelectedSave = movieData {
             controller?.saveMovieCoreData(movie: movieSelectedSave)
-            favoriteButton.isSelected = controller?.isFavoriteMovieSave(movie: movieSelectedSave) ?? false
+            favoriteButton.isSelected = controller?.isFavoriteMovieData(movie: movieSelectedSave) ?? false
         }
     }
     
     func setupMovie() {
         
-        if let movieSelect = movieSave {
+        if let movieSelect = movieData {
             self.titleLabel.text = movieSelect.title
             let url = API.imageURL + (movieSelect.imageURL ?? "")
             guard let urlTeste: URL = URL(string: url) else {return}
             self.imageMovie.sd_setImage(with: urlTeste, completed: nil)
             self.textView.text = movieSelect.overview
-            self.movieDateRelease.text = controller?.dataFormatter(movie: nil, movieSave: movieSelect)
+            self.movieDateRelease.text = controller?.dataFormatter(movie: nil, movieData: movieSelect)
             self.genresLabel.text = movieSelect.genres
-            self.favoriteButton.isSelected = controller?.isFavoriteMovieSave(movie: movieSelect) ?? false
+            self.favoriteButton.isSelected = controller?.isFavoriteMovieData(movie: movieSelect) ?? false
         }else if let movie = movie {
             self.titleLabel.text = movie.title
             let url = API.imageURL + (movie.backdropPath ?? "")
             guard let urlTeste: URL = URL(string: url) else {return}
             self.imageMovie.sd_setImage(with: urlTeste, completed: nil)
             self.textView.text = movie.overview
-            self.movieDateRelease.text = controller?.dataFormatter(movie: movie, movieSave: nil)
+            self.movieDateRelease.text = controller?.dataFormatter(movie: movie, movieData: nil)
             self.genresLabel.text = controller?.getGenre(movie: movie)
         }
 
