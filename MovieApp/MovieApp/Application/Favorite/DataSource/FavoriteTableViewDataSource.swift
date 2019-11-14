@@ -28,7 +28,6 @@ final class FavoriteTableViewDataSource: NSObject {
         setupDataSource()
         
     }
-    
     private func registerCells() {
         tableView?.register(FavoriteCell.self, forCellReuseIdentifier: Strings.favoriteCell)
     }

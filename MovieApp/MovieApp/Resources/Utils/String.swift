@@ -21,4 +21,9 @@ struct Strings {
     static let noInternet = "An error has ocurred: No Internet"
     static let notFound = "Your search for returned no results"
     static let movieCell = "movieCell"
+    static let filterCell = "filterCell"
+    static let filterDetailCell = "filterDetailCell"
+    static let labelGenreFilter = "Genres"
+    static let labelYearFilter = "Years"
+    
 }

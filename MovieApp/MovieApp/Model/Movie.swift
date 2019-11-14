@@ -27,10 +27,6 @@ class Movie: Codable {
         self.overview = movie.overview ?? ""
         self.releaseDate = movie.releaseDate ?? ""
         self.isFavorite = true
-    
-        
-        
-        
     }
 
     enum CodingKeys: String, CodingKey {

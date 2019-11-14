@@ -35,6 +35,12 @@
 		196D40262374F2130025AC9F /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 196D40252374F2130025AC9F /* loading.json */; };
 		196DD06E237A4A3900201584 /* GenreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196DD06D237A4A3900201584 /* GenreDataManager.swift */; };
 		196DD070237A4A4500201584 /* MovieDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196DD06F237A4A4500201584 /* MovieDataManager.swift */; };
+		19736FE8237C591600457F3B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19736FE7237C591600457F3B /* FilterViewController.swift */; };
+		19736FEB237C5BBB00457F3B /* FilterTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19736FEA237C5BBB00457F3B /* FilterTableViewDataSource.swift */; };
+		19736FF1237C791F00457F3B /* FilterDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19736FF0237C791F00457F3B /* FilterDetailController.swift */; };
+		19736FF3237C793800457F3B /* FilterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19736FF2237C793800457F3B /* FilterDetailViewController.swift */; };
+		19736FF5237C794400457F3B /* FilterDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19736FF4237C794400457F3B /* FilterDetailDataSource.swift */; };
+		19736FF8237C7DE700457F3B /* FilterDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19736FF7237C7DE700457F3B /* FilterDetailCell.swift */; };
 		D90D87FF050CD20A4E175CE8 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 259E1BD4EF76CF2D097FDE2F /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +75,12 @@
 		196D40252374F2130025AC9F /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		196DD06D237A4A3900201584 /* GenreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDataManager.swift; sourceTree = "<group>"; };
 		196DD06F237A4A4500201584 /* MovieDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataManager.swift; sourceTree = "<group>"; };
+		19736FE7237C591600457F3B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		19736FEA237C5BBB00457F3B /* FilterTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewDataSource.swift; sourceTree = "<group>"; };
+		19736FF0237C791F00457F3B /* FilterDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailController.swift; sourceTree = "<group>"; };
+		19736FF2237C793800457F3B /* FilterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailViewController.swift; sourceTree = "<group>"; };
+		19736FF4237C794400457F3B /* FilterDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailDataSource.swift; sourceTree = "<group>"; };
+		19736FF7237C7DE700457F3B /* FilterDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailCell.swift; sourceTree = "<group>"; };
 		259E1BD4EF76CF2D097FDE2F /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7082779FB7D66F4AA79A2C /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		FF0054D6D904C5DD2A0DEACD /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -100,6 +112,8 @@
 				19564699237A06A10064587C /* Home */,
 				1956469A237A06AB0064587C /* MovieDetail */,
 				1956469B237A06B30064587C /* Favorite */,
+				19736FE6237C58E500457F3B /* Filter */,
+				19736FEE237C78E000457F3B /* FilterDetail */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -252,6 +266,50 @@
 			path = DataManager;
 			sourceTree = "<group>";
 		};
+		19736FE6237C58E500457F3B /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				19736FE7237C591600457F3B /* FilterViewController.swift */,
+				19736FE9237C5BA500457F3B /* DataSource */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		19736FE9237C5BA500457F3B /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				19736FEA237C5BBB00457F3B /* FilterTableViewDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		19736FEE237C78E000457F3B /* FilterDetail */ = {
+			isa = PBXGroup;
+			children = (
+				19736FF0237C791F00457F3B /* FilterDetailController.swift */,
+				19736FF2237C793800457F3B /* FilterDetailViewController.swift */,
+				19736FF6237C7DCE00457F3B /* Views */,
+				19736FEF237C790C00457F3B /* DataSource */,
+			);
+			path = FilterDetail;
+			sourceTree = "<group>";
+		};
+		19736FEF237C790C00457F3B /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				19736FF4237C794400457F3B /* FilterDetailDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		19736FF6237C7DCE00457F3B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				19736FF7237C7DE700457F3B /* FilterDetailCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2D0C1B062C517DA603AC88CB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,11 +444,15 @@
 			files = (
 				196D401D2374F0B40025AC9F /* ApiManager.swift in Sources */,
 				196D400D2374EF830025AC9F /* Result.swift in Sources */,
+				19736FF1237C791F00457F3B /* FilterDetailController.swift in Sources */,
 				196D40052374EE590025AC9F /* BaseViewController.swift in Sources */,
 				196D3FE42374EB090025AC9F /* AppDelegate.swift in Sources */,
 				196D401B2374F09D0025AC9F /* API.swift in Sources */,
+				19736FF3237C793800457F3B /* FilterDetailViewController.swift in Sources */,
+				19736FF5237C794400457F3B /* FilterDetailDataSource.swift in Sources */,
 				196D40242374F1B70025AC9F /* StyleView.swift in Sources */,
 				1912D51C237A2986002E41E0 /* UIColor + CustomColor.swift in Sources */,
+				19736FF8237C7DE700457F3B /* FilterDetailCell.swift in Sources */,
 				196DD070237A4A4500201584 /* MovieDataManager.swift in Sources */,
 				196DD06E237A4A3900201584 /* GenreDataManager.swift in Sources */,
 				196D40222374F0E20025AC9F /* MovieData.xcdatamodeld in Sources */,
@@ -398,12 +460,14 @@
 				196D40152374F0140025AC9F /* FavoriteController.swift in Sources */,
 				196D3FFF2374EDB20025AC9F /* MovieCell.swift in Sources */,
 				196D400F2374EF950025AC9F /* Movie.swift in Sources */,
+				19736FEB237C5BBB00457F3B /* FilterTableViewDataSource.swift in Sources */,
 				1912D519237A2924002E41E0 /* String.swift in Sources */,
 				196D40092374EEE80025AC9F /* FavoriteViewController.swift in Sources */,
 				196D40172374F01E0025AC9F /* DetailController.swift in Sources */,
 				196D40072374EEA20025AC9F /* DetailViewController.swift in Sources */,
 				195646A4237A08820064587C /* MovieCollectionDataSource.swift in Sources */,
 				196D40132374F0060025AC9F /* HomeController.swift in Sources */,
+				19736FE8237C591600457F3B /* FilterViewController.swift in Sources */,
 				196D400B2374EF120025AC9F /* FavoriteCell.swift in Sources */,
 				196D3FE62374EB090025AC9F /* SceneDelegate.swift in Sources */,
 				1952412F237B8A9E0003B439 /* FavoriteTableViewDataSource.swift in Sources */,

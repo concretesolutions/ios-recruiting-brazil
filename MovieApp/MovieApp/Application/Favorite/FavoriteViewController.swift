@@ -20,17 +20,34 @@ class FavoriteViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
+    
+    let filterButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "icons8-filter"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-filter_filled"), for: .selected)
+        return button
+    }()
+    
+    
     private lazy var dataSource = FavoriteTableViewDataSource(tableView: self.tableView, delegate: self)
     
     override func loadView() {
         super.loadView()
         setupView()
         setupLayout()
+        filterButton.addTarget(self, action: #selector(filterMovie), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         controller.getMovies()
         tableView.reloadData()
+    }
+    
+    @objc func filterMovie() {
+        let viewController = FilterViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func setupView() {

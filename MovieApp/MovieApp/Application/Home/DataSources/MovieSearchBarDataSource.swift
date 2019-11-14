@@ -16,36 +16,37 @@ protocol MovieSearchBarDataSourceDelegate: class {
 
 class MovieSearchBarDataSource: NSObject {
     
-    private weak var delegate: MovieSearchBarDataSourceDelegate?
+    private let delegate: MovieSearchBarDataSourceDelegate
     private let searchController: UISearchController
     
     init(searchController: UISearchController, delegate: MovieSearchBarDataSourceDelegate) {
-        
         self.searchController = searchController
         self.delegate = delegate
         
         super.init()
-        
         setupSearchBar()
     }
     
     private func setupSearchBar() {
+        self.searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
     }
     
 }
 
-extension MovieSearchBarDataSource: UISearchResultsUpdating, UISearchBarDelegate {
+extension MovieSearchBarDataSource: UISearchControllerDelegate,UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchString = searchController.searchBar.text ?? ""
-        self.delegate?.updateSearchResult(text: searchString)
+        self.delegate.updateSearchResult(text: searchString)
 
     }
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.delegate?.cancelButton()
+        self.delegate.cancelButton()
     }
 
 }

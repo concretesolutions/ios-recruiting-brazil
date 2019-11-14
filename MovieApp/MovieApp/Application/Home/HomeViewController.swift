@@ -46,6 +46,7 @@ class HomeViewController: BaseViewController {
         setupLayout()
         controller.getAllGenres()
         controller.getMovies()
+        setupSearch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,10 +62,6 @@ class HomeViewController: BaseViewController {
              NSAttributedString.Key.foregroundColor: UIColor.orange]
         
         self.tabBarController?.delegate = self
-        
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        searchDataSource = MovieSearchBarDataSource(searchController: searchController, delegate: self)
         self.startAnimating()
     }
     private func setupLayout() {
@@ -73,6 +70,12 @@ class HomeViewController: BaseViewController {
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    private func setupSearch() {
+        searchDataSource = MovieSearchBarDataSource(searchController: searchController, delegate: self)
+        definesPresentationContext = true
+        navigationItem.searchController = searchController
     }
 }
 
