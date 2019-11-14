@@ -25,5 +25,6 @@ struct Strings {
     static let filterDetailCell = "filterDetailCell"
     static let labelGenreFilter = "Genres"
     static let labelYearFilter = "Years"
+    static let userDefaultsKey = "MovieDateKey"
     
 }

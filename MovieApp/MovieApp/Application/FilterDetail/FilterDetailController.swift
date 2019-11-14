@@ -40,7 +40,9 @@ class FilterDetailController {
         var yearMovies:[String] = []
         movieManager.loadMovie { (arrayMovie) in
             arrayMovie.forEach { (movie) in
-                yearMovies.append(transformDateInString(movie: movie))
+                if !yearMovies.contains(transformDateInString(movie: movie)) {
+                    yearMovies.append(transformDateInString(movie: movie))
+                }
             }
         }
         delegate?.updateMovies(genreDate: yearMovies)

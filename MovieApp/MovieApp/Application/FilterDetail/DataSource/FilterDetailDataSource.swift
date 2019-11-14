@@ -64,6 +64,21 @@ extension FilterDetailDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+               cell.accessoryType = .checkmark
+//            let movieDateSelected = movieGenreDate[indexPath.row]
+//            UserDefaults.standard.set(movieDateSelected, forKey: Strings.userDefaultsKey)
+           }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.accessoryType = .none
+//                let movieDateSelected = movieGenreDate[indexPath.row]
+//                UserDefaults.standard.set(movieDateSelected, forKey: Strings.userDefaultsKey)
+            }
+        }
     }
     
 }
