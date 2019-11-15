@@ -17,7 +17,7 @@ final class FavoriteTableViewDataSource: NSObject {
     
     private weak var tableView: UITableView?
     private let delegate: FavoriteDataSourceDelegate
-    private var movies:[Movie] = []
+    private var movies: [Movie] = []
     
     init(tableView: UITableView, delegate: FavoriteDataSourceDelegate) {
         self.delegate = delegate
@@ -28,6 +28,7 @@ final class FavoriteTableViewDataSource: NSObject {
         setupDataSource()
         
     }
+    
     private func registerCells() {
         tableView?.register(FavoriteCell.self, forCellReuseIdentifier: Strings.favoriteCell)
     }
@@ -55,9 +56,11 @@ extension FavoriteTableViewDataSource: UITableViewDelegate {
             delegate.editStyle(movie: movies[indexPath.row])
         }
     }
+    
 }
 
 extension FavoriteTableViewDataSource: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }

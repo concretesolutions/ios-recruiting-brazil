@@ -21,7 +21,7 @@ final class FilterTableViewDataSource: NSObject {
     
     private weak var tableView: UITableView?
     private let delegate: FilterDataSourceDelegate
-    private var movies:[Movie] = []
+    private var movies: [Movie] = []
 
     
     init(tableView: UITableView, delegate: FilterDataSourceDelegate) {
@@ -48,14 +48,10 @@ final class FilterTableViewDataSource: NSObject {
         tableView?.reloadData()
     }
     
-    func test() {
-        
-    }
-    
 }
 
-
 extension FilterTableViewDataSource: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return TableViewCase.numberOfRows.rawValue
     }
@@ -81,7 +77,6 @@ extension FilterTableViewDataSource: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate.didSelected(index: indexPath.row)
         self.tableView?.deselectRow(at: indexPath, animated: true)
-        
     }
     
 }

@@ -11,8 +11,10 @@ import CoreData
 
 class MovieDataManager {
     
+    private let movieData: String = "MovieData"
+    
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "MovieData")
+        let container = NSPersistentContainer(name: movieData)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 
@@ -45,14 +47,7 @@ class MovieDataManager {
         }
         
     }
-    
-//    func movieDataToMovie(movies: [MovieData]) -> Movie {
-//        let context = persistentContainer.viewContext
-//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieData")
-//        let result = try? context.fetch(request)
-//        let moviesData = result as? [MovieData] ?? []
-//    }
-//
+
     func saveMovie(movieToSave: Movie, genres: String) {
         
         let context = persistentContainer.viewContext
@@ -76,13 +71,13 @@ class MovieDataManager {
     
     func loadMovie(completion: ([MovieData]) -> Void) {
         let context = persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieData")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: movieData)
         let result = try? context.fetch(request)
         arrayMovieData = result as? [MovieData] ?? []
         completion(arrayMovieData)
     }
     
-    func delete(id: NSManagedObjectID, completion: (Bool) -> Void) -> Void {
+    func delete(id: NSManagedObjectID, completion: (Bool) -> Void) {
         let context = persistentContainer.viewContext
         let object = context.object(with: id)
         
@@ -125,4 +120,5 @@ class MovieDataManager {
         }
         return movie != nil
     }
+    
 }

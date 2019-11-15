@@ -29,46 +29,35 @@ class DetailController {
         movieDataManager.loadMovie { (arrayCoreData) in
             let arraySaved = arrayCoreData.filter{$0.id == movie.id}
             if arraySaved.count > 0 {
-                movieDataManager.delete(id: movie.objectID) { (success) in
-                    if success {
-                        print("Removeu")
-                    }
-                }
-            }else {
+                movieDataManager.delete(id: movie.objectID) { (success) in }
+            } else {
                 movieDataManager.saveMovieCoreData(movie: movie)
             }
         }
     }
     
     func deleteMovieData(movie: MovieData) {
-        movieDataManager.delete(id: movie.objectID) { (success) in
-            if success {
-                print("removeu")
-            }
-        }
+        movieDataManager.delete(id: movie.objectID) { _ in  }
     }
     
     func saveMovie(movie: Movie) {
         movieDataManager.loadMovie { (arrayCoreData) in
             let arraySaved = arrayCoreData.filter{$0.id == Int64(movie.id)}
             if arraySaved.count > 0 {
-                movieDataManager.delete(id: arraySaved.first!.objectID) { (success) in
-                    if success {
-                        print("Removeu")
-                    }
-                }
-            }else {
-                movieDataManager.saveMovie(movieToSave: movie, genres: genreDataManager.getGenreString(movie: movie))
+                movieDataManager.delete(id: arraySaved.first!.objectID) { _ in }
+            } else {
+                movieDataManager.saveMovie(movieToSave: movie,
+                                           genres: genreDataManager.getGenreString(movie: movie))
             }
         }
     }
     
     func isFavorite(movie: Movie) -> Bool {
-        var array:[MovieData]  = []
+        var array: [MovieData] = []
         movieDataManager.loadMovie { (arrayCoreData) in
             array = arrayCoreData
         }
-        let arraySaved = array.filter{$0.id == Int64(movie.id)}
+        let arraySaved = array.filter{ $0.id == Int64(movie.id) }
         return arraySaved.count > 0
     }
     

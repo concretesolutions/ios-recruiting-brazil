@@ -39,11 +39,12 @@ class FavoriteController {
                 }
             }
         }
+        
         delegate?.showMovies(movies: genresAndYears)
     }
     
     func filterGenres(text: String) {
-        var genres:[Movie] = []
+        var genres: [Movie] = []
         
         genreDataManager.loadGenres { (arrayGenres) in
             movieManager.loadMovie { (arrayMovie) in
@@ -64,13 +65,12 @@ class FavoriteController {
     }
     
     func getYears(text: String) {
-        var yearMovies:[Movie] = []
+        var yearMovies: [Movie] = []
         movieManager.loadMovie { (arrayMovie) in
             arrayMovie.forEach { (movie) in
                 if transformDateInString(movie: movie) == text {
                     yearMovies.append(Movie(movie: movie))
                 }
-                
             }
         }
         delegate?.showMovies(movies: yearMovies)
@@ -90,7 +90,7 @@ class FavoriteController {
     }
     
     func getMovies() {
-        var movies:[Movie] = []
+        var movies: [Movie] = []
         movieManager.loadMovie { (arrayMovie) in
             arrayMovie.forEach { (movie) in
                 movies.append(Movie(movie: movie))
@@ -100,7 +100,7 @@ class FavoriteController {
     }
     
     func delete(movie: Movie, completion: (Bool) -> Void) {
-        var movies:[MovieData] = []
+        var movies: [MovieData] = []
         movieManager.loadMovie { (moviesData) in
             movies = moviesData.filter({$0.id == Int64(movie.id)})
         }

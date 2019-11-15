@@ -16,7 +16,7 @@ final class FilterDetailDataSource: NSObject {
     
     private weak var tableView: UITableView?
     private let delegate: FilterDetailDataSourceDelegate
-    private var movieGenreDate:[String] = []
+    private var movieGenreDate: [String] = []
     
     init(tableView: UITableView, delegate: FilterDetailDataSourceDelegate) {
         self.delegate = delegate
@@ -48,9 +48,11 @@ extension FilterDetailDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
 }
 
 extension FilterDetailDataSource: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movieGenreDate.count
     }

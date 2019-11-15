@@ -26,6 +26,7 @@ class MovieCell: UICollectionViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
+    
     let titleLabel: UILabel = {
         let title = UILabel(frame: .zero)
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +35,7 @@ class MovieCell: UICollectionViewCell {
         title.textColor = .white
         return title
     }()
+    
     let favoriteButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +57,7 @@ class MovieCell: UICollectionViewCell {
         self.index = index
         self.titleLabel.text = movie.title
         let url = API.imageURL + (movie.posterPath ?? "")
-        if let url2 = URL(string: url){
+        if let url2 = URL(string: url) {
              imageView.sd_setImage(with: url2, completed: nil)
         }
         favoriteButton.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)

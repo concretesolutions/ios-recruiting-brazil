@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct API {
     static var apiKey: String =  "e67ebe33d00c9960fe5c35b3e75a1b22"
     static var baseURL: String = "https://api.themoviedb.org/3/"

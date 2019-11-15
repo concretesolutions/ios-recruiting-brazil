@@ -30,7 +30,5 @@ struct Strings {
     static let userDefaultsKey = "MovieDateKey"
     static let userDefaultsFilterDetailGenreKey = "userDefaultsFilterDetailGenreKey"
     static let userDefaultsFilterDetailYearKey = "userDefaultsFilterDetailYearKey"
-    static let userDefaultsCheckmark = "userDefaultsCheckmark"
-
-    
+    static let userDefaultsCheckmark = "userDefaultsCheckmark"    
 }

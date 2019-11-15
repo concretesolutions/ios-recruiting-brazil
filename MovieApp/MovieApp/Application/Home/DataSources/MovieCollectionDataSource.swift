@@ -10,7 +10,6 @@
 import UIKit
 
 protocol MovieDataSourceDelegate: class {
-    
     func didScroll()
     func didSelected(movie: Movie)
     func favoriteMovie(movie: Movie)
@@ -20,7 +19,7 @@ final class MovieCollectionDataSource: NSObject {
     
     private weak var collectionView: UICollectionView?
     private let delegate: MovieDataSourceDelegate
-    private var movies:[Movie] = []
+    private var movies: [Movie] = []
     
     init(collectionView: UICollectionView, delegate: MovieDataSourceDelegate) {
         self.delegate = delegate

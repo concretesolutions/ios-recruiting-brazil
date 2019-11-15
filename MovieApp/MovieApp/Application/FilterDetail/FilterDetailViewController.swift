@@ -8,8 +8,8 @@
 
 import UIKit
 
-
 class FilterDetailViewController: UIViewController {
+    
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .background
@@ -41,12 +41,13 @@ class FilterDetailViewController: UIViewController {
         controller.delegate = self
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         if genrOrYear == .genre {
-            title = "Genres"
+            title = Strings.labelGenreFilter
             controller.getGenres()
-        }else {
-            title = "Year"
+        } else {
+            title = Strings.labelYearFilter
             controller.getYears()
         }
     }
@@ -71,17 +72,15 @@ extension FilterDetailViewController: FilterDetailControllerDelegate {
     func updateMovies(genreDate: [String]) {
         dataSource.updateGenresDate(genreDate: genreDate)
     }
-    
-    
 }
 
 extension FilterDetailViewController: FilterDetailDataSourceDelegate {
     func didSelect(text: String) {
         if genrOrYear == .genre {
             UserDefaults.standard.set(text, forKey: Strings.userDefaultsFilterDetailGenreKey)
-        }else {
+        } else {
             UserDefaults.standard.set(text, forKey: Strings.userDefaultsFilterDetailYearKey)
-           }
         }
     }
+}
 

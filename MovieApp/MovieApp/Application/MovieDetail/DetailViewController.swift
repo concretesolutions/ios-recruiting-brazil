@@ -33,6 +33,7 @@ class DetailViewController: UIViewController {
         image.clipsToBounds = true
         return image
     }()
+    
     let titleLabel: UILabel = {
         let title = UILabel(frame: .zero)
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -97,14 +98,12 @@ class DetailViewController: UIViewController {
         text.backgroundColor = .white
         text.font = UIFont(name: Strings.fontProject, size: 18)
         text.textColor = .darkGray
-        
         return text
     }()
     
     init(movie: Movie) {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -148,8 +147,6 @@ class DetailViewController: UIViewController {
         // MARK: - Screen
         
         self.view.backgroundColor = .background
-        
-        
         self.view.addSubview(imageMovie)
         self.view.addSubview(viewBackground)
         
@@ -159,9 +156,7 @@ class DetailViewController: UIViewController {
         self.viewBackground.addSubview(releaseDateLabel)
         self.viewBackground.addSubview(movieDateRelease)
         self.viewBackground.addSubview(textView)
-        
-        
-        
+
         imageMovie.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
         imageMovie.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         imageMovie.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
@@ -183,7 +178,7 @@ class DetailViewController: UIViewController {
         releaseDateLabel.topAnchor.constraint(equalTo: genresLabel.bottomAnchor, constant: 8).isActive = true
         releaseDateLabel.leadingAnchor.constraint(equalTo: viewBackground.leadingAnchor, constant: 16).isActive = true
         releaseDateLabel.sizeToFit()
-        
+    
         movieDateRelease.leadingAnchor.constraint(equalTo: releaseDateLabel.trailingAnchor, constant: 8).isActive = true
         movieDateRelease.trailingAnchor.constraint(equalTo: viewBackground.trailingAnchor, constant: -8).isActive = true
         movieDateRelease.centerYAnchor.constraint(equalTo: releaseDateLabel.centerYAnchor).isActive = true
@@ -197,7 +192,6 @@ class DetailViewController: UIViewController {
         textView.leadingAnchor.constraint(equalTo: viewBackground.leadingAnchor, constant: 16).isActive = true
         textView.trailingAnchor.constraint(equalTo: viewBackground.trailingAnchor, constant: -16).isActive = true
         textView.bottomAnchor.constraint(equalTo: viewBackground.bottomAnchor, constant: -16).isActive = true
-        
     }
 
 }

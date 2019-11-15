@@ -14,6 +14,7 @@ enum DidSelectType: Int {
 }
 
 class FilterViewController: UIViewController {
+    
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .background
@@ -36,17 +37,18 @@ class FilterViewController: UIViewController {
         return button
     }()
     
-    private lazy var dataSource = FilterTableViewDataSource(tableView: self.tableView, delegate: self)
+    private var dataSource: FilterTableViewDataSource?
     
     override func loadView() {
         super.loadView()
         setupView()
         setupLayout()
         setupAlert()
-        dataSource.test()
+        dataSource = FilterTableViewDataSource(tableView: self.tableView, delegate: self)
         filterButton.addTarget(self, action: #selector(clearFilter), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
     }
+    
     func setupAlert()  {
         let actionOk: UIAlertAction = UIAlertAction(title: "Yes", style: .default) { (action) in
             UserDefaults.standard.set(nil, forKey: Strings.userDefaultsFilterDetailGenreKey)
@@ -81,11 +83,11 @@ class FilterViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    
-    
+
 }
 
 extension FilterViewController: FilterDataSourceDelegate {
+    
     func didSelected(index: Int) {
         switch index {
         case DidSelectType.genre.rawValue:
@@ -98,6 +100,7 @@ extension FilterViewController: FilterDataSourceDelegate {
             return
         }
     }
+    
 }
 
 

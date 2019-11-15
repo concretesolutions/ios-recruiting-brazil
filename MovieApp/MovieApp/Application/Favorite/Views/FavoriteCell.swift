@@ -10,11 +10,10 @@ import UIKit
 
 class FavoriteCell: UITableViewCell {
     
-    
     let favoriteImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleToFill
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -40,9 +39,10 @@ class FavoriteCell: UITableViewCell {
         self.backgroundColor = .background
         let url = API.imageURL + (movie.backdropPath ?? "")
 
-        if let url2 = URL(string: url){
+        if let url2 = URL(string: url) {
              favoriteImage.sd_setImage(with: url2, completed: nil)
         }
+        
         self.titleLabel.text = movie.title
         self.overViewLabel.text = movie.overview
         setupConst()

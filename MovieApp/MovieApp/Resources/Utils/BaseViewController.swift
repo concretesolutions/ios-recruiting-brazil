@@ -131,7 +131,6 @@ class BaseViewController: UIViewController {
             self.descLabel.text = Strings.noInternet
         case .notFound:
             self.descLabel.text = Strings.notFound
-            
         }
         
         blackUIView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true

@@ -21,21 +21,25 @@ class StyleView: UIView {
             layer.borderColor = borderColor.cgColor
         }
     }
+    
     var borderWidth: CGFloat = 0.0 {
         didSet {
             layer.borderWidth = borderWidth
         }
     }
+    
     var shadowRadius: CGFloat = 0.0 {
         didSet {
             layer.shadowRadius = shadowRadius
         }
     }
+    
     var shadowOpacity: Float = 0.0 {
         didSet {
             layer.shadowOpacity = shadowOpacity/100
         }
     }
+    
     var shadowOffset: CGSize = .zero {
         didSet {
             layer.shadowOffset = shadowOffset

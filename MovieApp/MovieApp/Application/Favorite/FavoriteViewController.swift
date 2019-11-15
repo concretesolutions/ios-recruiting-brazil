@@ -48,7 +48,7 @@ class FavoriteViewController: UIViewController {
         if genreDefaults != nil || year != nil {
             filterButton.isSelected = true
             filterIsActive()
-        }else {
+        } else {
             filterButton.isSelected = false
         }
     }
@@ -65,9 +65,9 @@ class FavoriteViewController: UIViewController {
         if filterButton.isSelected {
             if genreDefaults != nil && year != nil {
                 controller.filterGenresAndYears(genreText: genreDefaults ?? "", yearText: year ?? "")
-            }else if year != nil {
+            } else if year != nil {
                 controller.getYears(text: year ?? "")
-            }else if genreDefaults != nil {
+            } else if genreDefaults != nil {
                 controller.filterGenres(text: genreDefaults ?? "")
             }
             
@@ -90,11 +90,11 @@ class FavoriteViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
-    
-    
+
 }
 
 extension FavoriteViewController: FavoriteDataSourceDelegate {
+    
     func editStyle(movie: Movie) {
         controller.delete(movie: movie) { (success) in
             if success {
@@ -107,8 +107,8 @@ extension FavoriteViewController: FavoriteDataSourceDelegate {
     func didSelected(movie: Movie) {
         let viewController = DetailViewController(movie: movie)
         navigationController?.pushViewController(viewController, animated: true)
-        
     }
+    
 }
 
 extension FavoriteViewController: FavoriteControllerDelegate {
