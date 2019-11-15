@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterDetailDataSourceDelegate: class {
-    func didSelect()
+    func didSelect(text: String)
 }
 
 final class FilterDetailDataSource: NSObject {
@@ -64,21 +64,12 @@ extension FilterDetailDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-               cell.accessoryType = .checkmark
-//            let movieDateSelected = movieGenreDate[indexPath.row]
-//            UserDefaults.standard.set(movieDateSelected, forKey: Strings.userDefaultsKey)
-           }
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        delegate.didSelect(text: movieGenreDate[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.accessoryType = .none
-//                let movieDateSelected = movieGenreDate[indexPath.row]
-//                UserDefaults.standard.set(movieDateSelected, forKey: Strings.userDefaultsKey)
-            }
-        }
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
     
 }

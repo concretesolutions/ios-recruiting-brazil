@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class FilterDetailViewController: UIViewController {
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
@@ -15,6 +16,8 @@ class FilterDetailViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.allowsMultipleSelection = false
+        tableView.allowsMultipleSelectionDuringEditing = false
         return tableView
     }()
     
@@ -47,7 +50,7 @@ class FilterDetailViewController: UIViewController {
             controller.getYears()
         }
     }
-        
+    
     private func setupView() {
         self.navigationController?.view.tintColor = .orange
         self.navigationController?.navigationBar.titleTextAttributes =
@@ -73,6 +76,12 @@ extension FilterDetailViewController: FilterDetailControllerDelegate {
 }
 
 extension FilterDetailViewController: FilterDetailDataSourceDelegate {
-    func didSelect() {
+    func didSelect(text: String) {
+        if genrOrYear == .genre {
+            UserDefaults.standard.set(text, forKey: Strings.userDefaultsFilterDetailGenreKey)
+        }else {
+            UserDefaults.standard.set(text, forKey: Strings.userDefaultsFilterDetailYearKey)
+           }
+        }
     }
-}
+

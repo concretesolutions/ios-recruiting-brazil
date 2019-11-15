@@ -54,7 +54,7 @@ class MovieCell: UICollectionViewCell {
         self.movie = movie
         self.index = index
         self.titleLabel.text = movie.title
-        let url = API.imageURL + movie.posterPath
+        let url = API.imageURL + (movie.posterPath ?? "")
         if let url2 = URL(string: url){
              imageView.sd_setImage(with: url2, completed: nil)
         }

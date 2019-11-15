@@ -23,15 +23,49 @@ class FilterViewController: UIViewController {
         return tableView
     }()
     
+    let alertController: UIAlertController = {
+        let alert = UIAlertController(title: Strings.alertTitle, message: "", preferredStyle: .actionSheet)
+        return alert
+    }()
+    
+    let filterButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Clear", for: .normal)
+        button.tintColor = .orange
+        return button
+    }()
+    
     private lazy var dataSource = FilterTableViewDataSource(tableView: self.tableView, delegate: self)
     
     override func loadView() {
         super.loadView()
         setupView()
         setupLayout()
+        setupAlert()
         dataSource.test()
+        filterButton.addTarget(self, action: #selector(clearFilter), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterButton)
     }
-        
+    func setupAlert()  {
+        let actionOk: UIAlertAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            UserDefaults.standard.set(nil, forKey: Strings.userDefaultsFilterDetailGenreKey)
+            UserDefaults.standard.set(nil, forKey: Strings.userDefaultsFilterDetailYearKey)
+            self.tableView.reloadData()
+        }
+        let actionCancel: UIAlertAction = UIAlertAction(title: "No", style: .destructive, handler: nil)
+        alertController.addAction(actionOk)
+        alertController.addAction(actionCancel)
+    }
+    
+    @objc func clearFilter() {
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     private func setupView() {
         self.navigationController?.view.tintColor = .orange
         title = "Filter"
@@ -67,4 +101,4 @@ extension FilterViewController: FilterDataSourceDelegate {
 }
 
 
-    
+

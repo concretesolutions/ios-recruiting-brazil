@@ -26,7 +26,9 @@ class FilterDetailController {
                     arrayMovie.forEach { (movie) in
                         movie.genres?.forEach({ (genreID) in
                             if genre.id == Int32(genreID) {
-                                genres.append(genre.name ?? "")
+                                if !genres.contains(genre.name ?? "") {
+                                    genres.append(genre.name ?? "")
+                                }
                             }
                         })
                     }
@@ -56,7 +58,7 @@ class FilterDetailController {
         dateFormatterPrint.dateFormat = "yyyy"
         
         if let date = dateFormatterGet.date(from: movie.releaseDate ?? "") {
-             return dateFormatterPrint.string(from: date)
+            return dateFormatterPrint.string(from: date)
         }
         return ""
     }

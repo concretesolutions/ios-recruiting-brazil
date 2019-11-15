@@ -64,11 +64,14 @@ extension FilterTableViewDataSource: UITableViewDataSource, UITableViewDelegate 
         let cell = UITableViewCell(style: .value1, reuseIdentifier: Strings.filterCell)
         cell.backgroundColor = .background
         cell.textLabel?.textColor = .orange
+        cell.detailTextLabel?.textColor = .white
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = Strings.labelGenreFilter
+            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: Strings.userDefaultsFilterDetailGenreKey)
         case 1:
             cell.textLabel?.text = Strings.labelYearFilter
+            cell.detailTextLabel?.text = UserDefaults.standard.string(forKey: Strings.userDefaultsFilterDetailYearKey)
         default:
             cell.textLabel?.text = ""
         }

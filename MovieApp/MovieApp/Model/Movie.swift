@@ -10,12 +10,12 @@ import Foundation
 
 class Movie: Codable {
    
-    let posterPath: String
+    let posterPath: String?
     let id: Int
     let backdropPath: String?
     let genreIDS: [Int]
-    let title: String
-    let overview, releaseDate: String
+    let title: String?
+    let overview, releaseDate: String?
     var isFavorite: Bool = false
     
     init(movie: MovieData) {

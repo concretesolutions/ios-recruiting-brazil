@@ -35,7 +35,8 @@ class HomeController: NSObject {
                     self.movies.append(contentsOf: movieList)
                     self.indexPageRequest += 1
                     self.delegate?.showMovies(movies: self.movies)
-                } else {
+                }
+                else {
                     self.delegate?.error(type: .failureRequest)
                 }
                 self.fetchMore = true
@@ -80,7 +81,7 @@ class HomeController: NSObject {
             fetchMore = true
         } else {
             let movies = self.movies.filter({ (movie) -> Bool in
-                      movie.title.lowercased().contains(text.lowercased())
+                (movie.title?.lowercased().contains(text.lowercased()) ?? false)
             })
             delegate?.showMovies(movies: movies)
             fetchMore = false

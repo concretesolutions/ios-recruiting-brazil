@@ -43,11 +43,35 @@ class FavoriteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         controller.getMovies()
         tableView.reloadData()
+        let genreDefaults = UserDefaults.standard.string(forKey: Strings.userDefaultsFilterDetailGenreKey)
+        let year = UserDefaults.standard.string(forKey: Strings.userDefaultsFilterDetailYearKey)
+        if genreDefaults != nil || year != nil {
+            filterButton.isSelected = true
+            filterIsActive()
+        }else {
+            filterButton.isSelected = false
+        }
     }
     
     @objc func filterMovie() {
         let viewController = FilterViewController()
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func filterIsActive() {
+        let genreDefaults = UserDefaults.standard.string(forKey: Strings.userDefaultsFilterDetailGenreKey)
+        let year = UserDefaults.standard.string(forKey: Strings.userDefaultsFilterDetailYearKey)
+        
+        if filterButton.isSelected {
+            if genreDefaults != nil && year != nil {
+                controller.filterGenresAndYears(genreText: genreDefaults ?? "", yearText: year ?? "")
+            }else if year != nil {
+                controller.getYears(text: year ?? "")
+            }else if genreDefaults != nil {
+                controller.filterGenres(text: genreDefaults ?? "")
+            }
+            
+        }
     }
     
     func setupView() {

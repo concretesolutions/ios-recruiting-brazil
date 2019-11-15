@@ -79,7 +79,7 @@ class DetailController {
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "dd/MM/yyyy"
         
-        if let movieSelected = movie, let date = dateFormatterGet.date(from: movieSelected.releaseDate) {
+        if let movieSelected = movie, let date = dateFormatterGet.date(from: movieSelected.releaseDate ?? "") {
             return dateFormatterPrint.string(from: date)
         } else if let movieSelectedSave = movieData, let date = dateFormatterGet.date(from: movieSelectedSave.releaseDate ?? "") {
             return dateFormatterPrint.string(from: date)
