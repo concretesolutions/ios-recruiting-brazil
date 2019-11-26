@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		A01AFC08238D992D00D93D5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC07238D992D00D93D5D /* AppDelegate.swift */; };
 		A01AFC0A238D992D00D93D5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC09238D992D00D93D5D /* SceneDelegate.swift */; };
-		A01AFC0C238D992D00D93D5D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC0B238D992D00D93D5D /* ViewController.swift */; };
+		A01AFC0C238D992D00D93D5D /* FilmeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC0B238D992D00D93D5D /* FilmeFeedViewController.swift */; };
 		A01AFC0F238D992D00D93D5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01AFC0D238D992D00D93D5D /* Main.storyboard */; };
 		A01AFC12238D992D00D93D5D /* Desafio_Concrete.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC10238D992D00D93D5D /* Desafio_Concrete.xcdatamodeld */; };
 		A01AFC14238D992F00D93D5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01AFC13238D992F00D93D5D /* Assets.xcassets */; };
 		A01AFC17238D992F00D93D5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01AFC15238D992F00D93D5D /* LaunchScreen.storyboard */; };
 		A01AFC22238D992F00D93D5D /* Desafio_ConcreteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC21238D992F00D93D5D /* Desafio_ConcreteTests.swift */; };
 		A01AFC2D238D992F00D93D5D /* Desafio_ConcreteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC2C238D992F00D93D5D /* Desafio_ConcreteUITests.swift */; };
+		A01AFC43238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC42238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift */; };
+		A01AFC46238DB2A000D93D5D /* Filme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC45238DB29F00D93D5D /* Filme.swift */; };
+		A01AFC48238DB31700D93D5D /* FuncoesFilme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +42,7 @@
 		A01AFC04238D992D00D93D5D /* Desafio Concrete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Desafio Concrete.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01AFC07238D992D00D93D5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A01AFC09238D992D00D93D5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A01AFC0B238D992D00D93D5D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A01AFC0B238D992D00D93D5D /* FilmeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeFeedViewController.swift; sourceTree = "<group>"; };
 		A01AFC0E238D992D00D93D5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A01AFC11238D992D00D93D5D /* Desafio_Concrete.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Desafio_Concrete.xcdatamodel; sourceTree = "<group>"; };
 		A01AFC13238D992F00D93D5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +54,9 @@
 		A01AFC28238D992F00D93D5D /* Desafio ConcreteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Desafio ConcreteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01AFC2C238D992F00D93D5D /* Desafio_ConcreteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Desafio_ConcreteUITests.swift; sourceTree = "<group>"; };
 		A01AFC2E238D992F00D93D5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A01AFC42238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		A01AFC45238DB29F00D93D5D /* Filme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filme.swift; sourceTree = "<group>"; };
+		A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncoesFilme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +107,12 @@
 		A01AFC06238D992D00D93D5D /* Desafio Concrete */ = {
 			isa = PBXGroup;
 			children = (
-				A01AFC07238D992D00D93D5D /* AppDelegate.swift */,
-				A01AFC09238D992D00D93D5D /* SceneDelegate.swift */,
-				A01AFC0B238D992D00D93D5D /* ViewController.swift */,
-				A01AFC0D238D992D00D93D5D /* Main.storyboard */,
+				A01AFC3D238D9BF700D93D5D /* Modelos */,
+				A01AFC3C238D9BE500D93D5D /* Views */,
+				A01AFC3B238D9BD000D93D5D /* ViewControllers */,
+				A01AFC3A238D9BB300D93D5D /* Delegates */,
 				A01AFC13238D992F00D93D5D /* Assets.xcassets */,
-				A01AFC15238D992F00D93D5D /* LaunchScreen.storyboard */,
 				A01AFC18238D992F00D93D5D /* Info.plist */,
-				A01AFC10238D992D00D93D5D /* Desafio_Concrete.xcdatamodeld */,
 			);
 			path = "Desafio Concrete";
 			sourceTree = "<group>";
@@ -129,6 +133,83 @@
 				A01AFC2E238D992F00D93D5D /* Info.plist */,
 			);
 			path = "Desafio ConcreteUITests";
+			sourceTree = "<group>";
+		};
+		A01AFC3A238D9BB300D93D5D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC07238D992D00D93D5D /* AppDelegate.swift */,
+				A01AFC09238D992D00D93D5D /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		A01AFC3B238D9BD000D93D5D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC0B238D992D00D93D5D /* FilmeFeedViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A01AFC3C238D9BE500D93D5D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC40238DA9C100D93D5D /* Custom Cells */,
+				A01AFC3E238D9C0900D93D5D /* SplashScreen */,
+				A01AFC0D238D992D00D93D5D /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A01AFC3D238D9BF700D93D5D /* Modelos */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC44238DB29300D93D5D /* Filme */,
+				A01AFC3F238D9C1E00D93D5D /* CoreData */,
+			);
+			path = Modelos;
+			sourceTree = "<group>";
+		};
+		A01AFC3E238D9C0900D93D5D /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC15238D992F00D93D5D /* LaunchScreen.storyboard */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		A01AFC3F238D9C1E00D93D5D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC10238D992D00D93D5D /* Desafio_Concrete.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		A01AFC40238DA9C100D93D5D /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC41238DA9D000D93D5D /* Filmes Feed Cell */,
+			);
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		A01AFC41238DA9D000D93D5D /* Filmes Feed Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC42238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift */,
+			);
+			path = "Filmes Feed Cell";
+			sourceTree = "<group>";
+		};
+		A01AFC44238DB29300D93D5D /* Filme */ = {
+			isa = PBXGroup;
+			children = (
+				A01AFC45238DB29F00D93D5D /* Filme.swift */,
+				A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */,
+			);
+			path = Filme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,10 +343,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01AFC0C238D992D00D93D5D /* ViewController.swift in Sources */,
+				A01AFC0C238D992D00D93D5D /* FilmeFeedViewController.swift in Sources */,
+				A01AFC46238DB2A000D93D5D /* Filme.swift in Sources */,
 				A01AFC08238D992D00D93D5D /* AppDelegate.swift in Sources */,
 				A01AFC12238D992D00D93D5D /* Desafio_Concrete.xcdatamodeld in Sources */,
+				A01AFC48238DB31700D93D5D /* FuncoesFilme.swift in Sources */,
 				A01AFC0A238D992D00D93D5D /* SceneDelegate.swift in Sources */,
+				A01AFC43238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
