@@ -25,5 +25,12 @@ class FavoritosTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setupCell(filme: Filme){
+        nomeFilme.text = filme.filmeDecodable.title
+        poster.image = filme.posterUIImage
+        descricaoFilme.text = filme.filmeDecodable.overview
+        anoFilme.text = "\(filme.pegarAnoFilme())"
+    }
 
 }

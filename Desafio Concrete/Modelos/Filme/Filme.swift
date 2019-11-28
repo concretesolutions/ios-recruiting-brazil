@@ -109,10 +109,46 @@ class Filme {
             }
         }
         
-        FuncoesFilme().baixarPosterFilme(filme: filmeDecodable) { (poster) in
+        RequestAPI().baixarPosterFilme(filme: filmeDecodable) { (poster) in
             self.posterUIImage = poster
             completion(self)
         }
+    }
+    
+    func pegarAnoFilme() -> Int{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+           
+        let dataLancamento = formatter.date(from: self.filmeDecodable.release_date ?? "") ?? Date()
+        
+        let userCalendar = Calendar.current
+     
+        let ano = userCalendar.component(.year, from: dataLancamento)
+        
+        return ano
+    }
+    
+    func verificarGenerosFilme(generosID: [Int], completion: @escaping([String]) -> ()){
+        
+        var generosString = [String]()
+        
+        RequestAPI().baixarGeneros { (result) in
+            if let result = result,
+                let generos = result.genres {
+                
+                for elemento in generos {
+                    if generosID.contains(elemento.id ?? 0) {
+                        generosString.append(elemento.name ?? "")
+                    }
+                }
+                
+                completion(generosString)
+                
+            }else{
+                completion([])
+            }
+        }
+    
     }
     
 }

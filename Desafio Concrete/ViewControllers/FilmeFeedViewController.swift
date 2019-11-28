@@ -49,7 +49,6 @@ class FilmeFeedViewController: UIViewController {
     
         pegarFilmesPopulares()
         
-        print(FuncoesFilme().pegarListaFavoritos())
     }
     
     //***********************************
@@ -100,7 +99,7 @@ class FilmeFeedViewController: UIViewController {
     }
     
     func pegarFilmesPopulares(){
-        FuncoesFilme().pegarFilmesPopulares(pagina: 1) { (filmes, erro) in
+        RequestAPI().pegarFilmesPopulares(pagina: 1) { (filmes, erro) in
             DispatchQueue.main.async {
                 
                 if let _ = erro {
@@ -130,7 +129,7 @@ class FilmeFeedViewController: UIViewController {
         //IR PARA PROXIMA PAGINA
         paginaAtual += 1
         
-        FuncoesFilme().pegarFilmesPopulares(pagina: paginaAtual) { (filmes,erro) in
+        RequestAPI().pegarFilmesPopulares(pagina: paginaAtual) { (filmes,erro) in
             
             DispatchQueue.main.async {
                 
@@ -139,6 +138,7 @@ class FilmeFeedViewController: UIViewController {
                 }else{
                     for filme in filmes {
                         self.filmesFiltrados.append(filme)
+                        self.filmesPopulares.append(filme)
                     }
                     self.collectionView.reloadData()
                 }
@@ -155,7 +155,7 @@ class FilmeFeedViewController: UIViewController {
     
         let filme = filmesFiltrados[indexFilme]
     
-        if FuncoesFilme().verificarFavorito(id: filme.filmeDecodable.id ?? 0, filme: filme) == -1 {
+        if RequestFavoritos().verificarFavorito(id: filme.filmeDecodable.id ?? 0, filme: filme) == -1 {
             let image = #imageLiteral(resourceName: "favorite_full_icon")
             sender.setBackgroundImage(image, for: .normal)
         }else{
@@ -163,7 +163,7 @@ class FilmeFeedViewController: UIViewController {
             sender.setBackgroundImage(image, for: .normal)
         }
     
-        FuncoesFilme().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0, filme: filme)
+        RequestFavoritos().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0, filme: filme)
     
     }
     
@@ -204,19 +204,10 @@ extension FilmeFeedViewController: UICollectionViewDelegate, UICollectionViewDat
         
         let filme = filmesFiltrados[indexPath.row]
         
-        cell.nomeFilme.text = filme.filmeDecodable.title
-        cell.imagemFilme.image = filme.posterUIImage
+        cell.setupCell(filme: filme)
         
         cell.btFavorito.layer.setValue(indexPath.row, forKey: "index")
         cell.btFavorito.addTarget(self, action: #selector(salvarFavorito), for: .touchUpInside)
-        
-        if FuncoesFilme().verificarFavorito(id: filme.filmeDecodable.id ?? 0, filme: filme) != -1 {
-            let image = #imageLiteral(resourceName: "favorite_full_icon")
-            cell.btFavorito.setBackgroundImage(image, for: .normal)
-        }else{
-            let image = #imageLiteral(resourceName: "favorite_gray_icon")
-            cell.btFavorito.setBackgroundImage(image, for: .normal)
-        }
         
         return cell
     }

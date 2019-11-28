@@ -37,7 +37,7 @@ class FiltroSelecionadoViewController: UIViewController {
     
     func verificarFiltro(){
         if tipoFiltro == "generos" {
-            FuncoesFilme().baixarGeneros { (result) in
+            RequestAPI().baixarGeneros { (result) in
                 if let generos = result {
                     DispatchQueue.main.async {
                         self.generos = generos.genres ?? []

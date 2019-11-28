@@ -46,9 +46,9 @@ class FilmeDetalheViewController: UIViewController {
         
         nomeFilme.text = filme.filmeDecodable.title ?? ""
         
-        anoFilme.text = "\(FuncoesFilme.pegarAnoFilme(filme: filme))"
+        anoFilme.text = "\(filme.pegarAnoFilme())"
             
-        FuncoesFilme().verificarGenerosFilme(generosID: filme.filmeDecodable.genre_ids ?? [], completion: { (generos) in
+        filme.verificarGenerosFilme(generosID: filme.filmeDecodable.genre_ids ?? [], completion: { (generos) in
             DispatchQueue.main.async {
                 self.generoFilme.text = generos.joined(separator: ",")
             }
@@ -61,7 +61,7 @@ class FilmeDetalheViewController: UIViewController {
         btFavorito.addTarget(self, action:  #selector(favoritar), for: .touchUpInside)
         
         if let id = filme.filmeDecodable.id {
-            if FuncoesFilme().verificarFavorito(id: id, filme: filme) == -1 {
+            if RequestFavoritos().verificarFavorito(id: id, filme: filme) == -1 {
                 let image = #imageLiteral(resourceName: "favorite_gray_icon")
                 btFavorito.setBackgroundImage(image, for: .normal)
             }else{
@@ -77,14 +77,14 @@ class FilmeDetalheViewController: UIViewController {
         guard let filme = filme else { return }
         
         if let id = filme.filmeDecodable.id {
-            if FuncoesFilme().verificarFavorito(id: id, filme: filme) == -1 {
+            if RequestFavoritos().verificarFavorito(id: id, filme: filme) == -1 {
                 let image = #imageLiteral(resourceName: "favorite_full_icon")
                 btFavorito.setBackgroundImage(image, for: .normal)
             }else{
                 let image = #imageLiteral(resourceName: "favorite_gray_icon")
                 btFavorito.setBackgroundImage(image, for: .normal)
             }
-            FuncoesFilme().salvarFilmeFavorito(id: id, filme: filme)
+            RequestFavoritos().salvarFilmeFavorito(id: id, filme: filme)
         }
     }
 

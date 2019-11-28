@@ -67,7 +67,7 @@ class FavoritosViewController: UIViewController {
     //***********************************
     
     func pegarFavoritos(){
-        let favoritos = FuncoesFilme().pegarListaFavoritos()
+        let favoritos = RequestFavoritos().pegarListaFavoritos()
         let semaforo = DispatchSemaphore(value: favoritos.count)
         
         if favoritos.count == 0 {
@@ -79,7 +79,7 @@ class FavoritosViewController: UIViewController {
         viewErro.isHidden = true
         
         for idFavorito in favoritos {
-            FuncoesFilme().pegarFilmesPorID(id: idFavorito) { (result, erro) in
+            RequestAPI().pegarFilmesPorID(id: idFavorito) { (result, erro) in
                 if let filme = result {
                     DispatchQueue.main.async {
                         self.filmesFiltrados.append(filme)
@@ -106,7 +106,7 @@ class FavoritosViewController: UIViewController {
             return
         }
         
-        filmesFiltrados = filmesFiltrados.filter { (filme) -> Bool in
+        filmesFiltrados = filmesFavoritados.filter { (filme) -> Bool in
             let titulo = filme.filmeDecodable.title ?? ""
             return titulo.contains(searchBarText)
         }
@@ -130,7 +130,7 @@ class FavoritosViewController: UIViewController {
     func aplicarFiltro(){
         if anoSelecionado != 0 && generoSelecionado != ""{
             filmesFiltrados = filmesFiltrados.filter({ (filme) -> Bool in
-                return (FuncoesFilme.pegarAnoFilme(filme: filme) == anoSelecionado) && (filme.generoFormatado.contains(generoSelecionado))
+                return (filme.pegarAnoFilme() == anoSelecionado) && (filme.generoFormatado.contains(generoSelecionado))
             })
         }else if anoSelecionado == 0 && generoSelecionado != "" {
             filmesFiltrados = filmesFiltrados.filter({ (filme) -> Bool in
@@ -138,13 +138,15 @@ class FavoritosViewController: UIViewController {
             })
         }else if anoSelecionado != 0 && generoSelecionado == "" {
             filmesFiltrados = filmesFiltrados.filter({ (filme) -> Bool in
-                return (FuncoesFilme.pegarAnoFilme(filme: filme) == anoSelecionado)
+                return (filme.pegarAnoFilme() == anoSelecionado)
             })
         }
         
         if filmesFiltrados.count > 0 {
+            tableView.isHidden = false
             tableView.reloadData()
         }else{
+            tableView.isHidden = true
             viewErro.isHidden = false
             mensagemErro.text = "Nāo há filmes favoritados com esses filtros"
         }
@@ -176,10 +178,7 @@ extension FavoritosViewController: UITableViewDataSource, UITableViewDelegate {
         
         let filme = filmesFiltrados[indexPath.row]
         
-        cell.nomeFilme.text = filme.filmeDecodable.title
-        cell.poster.image = filme.posterUIImage
-        cell.descricaoFilme.text = filme.filmeDecodable.overview
-        cell.anoFilme.text = "\(FuncoesFilme.pegarAnoFilme(filme: filme))"
+        cell.setupCell(filme: filme)
         
         return cell
     }
@@ -191,7 +190,7 @@ extension FavoritosViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
           if editingStyle == .delete {
                 let filme = filmesFiltrados[indexPath.row]
-                FuncoesFilme().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0 , filme: filme)
+                RequestFavoritos().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0 , filme: filme)
                 self.filmesFiltrados.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 

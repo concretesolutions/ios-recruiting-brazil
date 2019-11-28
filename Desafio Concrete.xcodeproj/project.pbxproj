@@ -21,13 +21,13 @@
 		A01AFC2D238D992F00D93D5D /* Desafio_ConcreteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC2C238D992F00D93D5D /* Desafio_ConcreteUITests.swift */; };
 		A01AFC43238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC42238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift */; };
 		A01AFC46238DB2A000D93D5D /* Filme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC45238DB29F00D93D5D /* Filme.swift */; };
-		A01AFC48238DB31700D93D5D /* FuncoesFilme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */; };
 		A05106B5238F1990004D5327 /* Favoritos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05106B4238F1990004D5327 /* Favoritos.storyboard */; };
 		A05106B7238F1FB5004D5327 /* FilmeDetalheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106B6238F1FB5004D5327 /* FilmeDetalheViewController.swift */; };
 		A05106B9238F68AD004D5327 /* FavoritosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106B8238F68AD004D5327 /* FavoritosViewController.swift */; };
 		A05106BC238F6CD7004D5327 /* FavoritosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106BB238F6CD7004D5327 /* FavoritosTableViewCell.swift */; };
 		A05106C3238F77FD004D5327 /* FiltroSelecionadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106C2238F77FD004D5327 /* FiltroSelecionadoViewController.swift */; };
 		A05106C5238F7809004D5327 /* OpcoesFiltroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106C4238F7809004D5327 /* OpcoesFiltroViewController.swift */; };
+		A05106C7239071DD004D5327 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106C6239071DD004D5327 /* Services.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,13 +71,13 @@
 		A01AFC2E238D992F00D93D5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A01AFC42238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeFeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		A01AFC45238DB29F00D93D5D /* Filme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filme.swift; sourceTree = "<group>"; };
-		A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncoesFilme.swift; sourceTree = "<group>"; };
 		A05106B4238F1990004D5327 /* Favoritos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favoritos.storyboard; sourceTree = "<group>"; };
 		A05106B6238F1FB5004D5327 /* FilmeDetalheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeDetalheViewController.swift; sourceTree = "<group>"; };
 		A05106B8238F68AD004D5327 /* FavoritosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosViewController.swift; sourceTree = "<group>"; };
 		A05106BB238F6CD7004D5327 /* FavoritosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosTableViewCell.swift; sourceTree = "<group>"; };
 		A05106C2238F77FD004D5327 /* FiltroSelecionadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltroSelecionadoViewController.swift; sourceTree = "<group>"; };
 		A05106C4238F7809004D5327 /* OpcoesFiltroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcoesFiltroViewController.swift; sourceTree = "<group>"; };
+		A05106C6239071DD004D5327 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		BC07C05B8698611C30A2EEB2 /* Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig"; path = "Target Support Files/Pods-Desafio Concrete-Desafio ConcreteUITests/Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CBABD3700FC63016BFE83555 /* Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7FE3B87E78D3289B00F5D7D /* Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig"; path = "Target Support Files/Pods-Desafio Concrete-Desafio ConcreteUITests/Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +151,7 @@
 				A01AFC3B238D9BD000D93D5D /* ViewControllers */,
 				A01AFC3A238D9BB300D93D5D /* Delegates */,
 				A01AFC13238D992F00D93D5D /* Assets.xcassets */,
+				A05106C6239071DD004D5327 /* Services.swift */,
 				A01AFC18238D992F00D93D5D /* Info.plist */,
 			);
 			path = "Desafio Concrete";
@@ -251,7 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				A01AFC45238DB29F00D93D5D /* Filme.swift */,
-				A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */,
 			);
 			path = Filme;
 			sourceTree = "<group>";
@@ -526,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05106C7239071DD004D5327 /* Services.swift in Sources */,
 				A01AFC0C238D992D00D93D5D /* FilmeFeedViewController.swift in Sources */,
 				A01AFC46238DB2A000D93D5D /* Filme.swift in Sources */,
 				A01AFC08238D992D00D93D5D /* AppDelegate.swift in Sources */,
@@ -533,7 +534,6 @@
 				A01AFC12238D992D00D93D5D /* Desafio_Concrete.xcdatamodeld in Sources */,
 				A05106B7238F1FB5004D5327 /* FilmeDetalheViewController.swift in Sources */,
 				A05106C5238F7809004D5327 /* OpcoesFiltroViewController.swift in Sources */,
-				A01AFC48238DB31700D93D5D /* FuncoesFilme.swift in Sources */,
 				A01AFC0A238D992D00D93D5D /* SceneDelegate.swift in Sources */,
 				A01AFC43238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift in Sources */,
 				A05106B9238F68AD004D5327 /* FavoritosViewController.swift in Sources */,
