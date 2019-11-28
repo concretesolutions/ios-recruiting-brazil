@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F08566BEF40F3753A11EE0F /* Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBABD3700FC63016BFE83555 /* Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework */; };
+		418657821551C698950D80A0 /* Pods_Desafio_ConcreteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0921AF01199CA53AA700C751 /* Pods_Desafio_ConcreteTests.framework */; };
+		60051FFF7573117B5AE3CCDA /* Pods_Desafio_Concrete.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EDDD070ED8F4927D436FD7 /* Pods_Desafio_Concrete.framework */; };
 		A01AFC08238D992D00D93D5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC07238D992D00D93D5D /* AppDelegate.swift */; };
 		A01AFC0A238D992D00D93D5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC09238D992D00D93D5D /* SceneDelegate.swift */; };
 		A01AFC0C238D992D00D93D5D /* FilmeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC0B238D992D00D93D5D /* FilmeFeedViewController.swift */; };
@@ -19,6 +22,12 @@
 		A01AFC43238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC42238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift */; };
 		A01AFC46238DB2A000D93D5D /* Filme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC45238DB29F00D93D5D /* Filme.swift */; };
 		A01AFC48238DB31700D93D5D /* FuncoesFilme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */; };
+		A05106B5238F1990004D5327 /* Favoritos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05106B4238F1990004D5327 /* Favoritos.storyboard */; };
+		A05106B7238F1FB5004D5327 /* FilmeDetalheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106B6238F1FB5004D5327 /* FilmeDetalheViewController.swift */; };
+		A05106B9238F68AD004D5327 /* FavoritosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106B8238F68AD004D5327 /* FavoritosViewController.swift */; };
+		A05106BC238F6CD7004D5327 /* FavoritosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106BB238F6CD7004D5327 /* FavoritosTableViewCell.swift */; };
+		A05106C3238F77FD004D5327 /* FiltroSelecionadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106C2238F77FD004D5327 /* FiltroSelecionadoViewController.swift */; };
+		A05106C5238F7809004D5327 /* OpcoesFiltroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05106C4238F7809004D5327 /* OpcoesFiltroViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0921AF01199CA53AA700C751 /* Pods_Desafio_ConcreteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Desafio_ConcreteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		106FD130AC6DF13BAD576766 /* Pods-Desafio ConcreteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio ConcreteTests.release.xcconfig"; path = "Target Support Files/Pods-Desafio ConcreteTests/Pods-Desafio ConcreteTests.release.xcconfig"; sourceTree = "<group>"; };
+		3125F558782491B396D71F5F /* Pods-Desafio ConcreteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio ConcreteTests.debug.xcconfig"; path = "Target Support Files/Pods-Desafio ConcreteTests/Pods-Desafio ConcreteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4BEB4FF9AF58309456ECA729 /* Pods-Desafio Concrete.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio Concrete.debug.xcconfig"; path = "Target Support Files/Pods-Desafio Concrete/Pods-Desafio Concrete.debug.xcconfig"; sourceTree = "<group>"; };
+		4E7453F19B00ACDC2E32A52E /* Pods-Desafio Concrete.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio Concrete.release.xcconfig"; path = "Target Support Files/Pods-Desafio Concrete/Pods-Desafio Concrete.release.xcconfig"; sourceTree = "<group>"; };
+		61EDDD070ED8F4927D436FD7 /* Pods_Desafio_Concrete.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Desafio_Concrete.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01AFC04238D992D00D93D5D /* Desafio Concrete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Desafio Concrete.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01AFC07238D992D00D93D5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A01AFC09238D992D00D93D5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +72,15 @@
 		A01AFC42238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeFeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		A01AFC45238DB29F00D93D5D /* Filme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filme.swift; sourceTree = "<group>"; };
 		A01AFC47238DB31700D93D5D /* FuncoesFilme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncoesFilme.swift; sourceTree = "<group>"; };
+		A05106B4238F1990004D5327 /* Favoritos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favoritos.storyboard; sourceTree = "<group>"; };
+		A05106B6238F1FB5004D5327 /* FilmeDetalheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmeDetalheViewController.swift; sourceTree = "<group>"; };
+		A05106B8238F68AD004D5327 /* FavoritosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosViewController.swift; sourceTree = "<group>"; };
+		A05106BB238F6CD7004D5327 /* FavoritosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosTableViewCell.swift; sourceTree = "<group>"; };
+		A05106C2238F77FD004D5327 /* FiltroSelecionadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltroSelecionadoViewController.swift; sourceTree = "<group>"; };
+		A05106C4238F7809004D5327 /* OpcoesFiltroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcoesFiltroViewController.swift; sourceTree = "<group>"; };
+		BC07C05B8698611C30A2EEB2 /* Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig"; path = "Target Support Files/Pods-Desafio Concrete-Desafio ConcreteUITests/Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CBABD3700FC63016BFE83555 /* Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7FE3B87E78D3289B00F5D7D /* Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig"; path = "Target Support Files/Pods-Desafio Concrete-Desafio ConcreteUITests/Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60051FFF7573117B5AE3CCDA /* Pods_Desafio_Concrete.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418657821551C698950D80A0 /* Pods_Desafio_ConcreteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,12 +104,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F08566BEF40F3753A11EE0F /* Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03A817118A97AAACE847AF6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61EDDD070ED8F4927D436FD7 /* Pods_Desafio_Concrete.framework */,
+				CBABD3700FC63016BFE83555 /* Pods_Desafio_Concrete_Desafio_ConcreteUITests.framework */,
+				0921AF01199CA53AA700C751 /* Pods_Desafio_ConcreteTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A01AFBFB238D992D00D93D5D = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +128,8 @@
 				A01AFC20238D992F00D93D5D /* Desafio ConcreteTests */,
 				A01AFC2B238D992F00D93D5D /* Desafio ConcreteUITests */,
 				A01AFC05238D992D00D93D5D /* Products */,
+				D69036C620DC518C4DBE2613 /* Pods */,
+				03A817118A97AAACE847AF6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,7 +186,10 @@
 		A01AFC3B238D9BD000D93D5D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A05106BD238F779E004D5327 /* Filtros */,
 				A01AFC0B238D992D00D93D5D /* FilmeFeedViewController.swift */,
+				A05106B6238F1FB5004D5327 /* FilmeDetalheViewController.swift */,
+				A05106B8238F68AD004D5327 /* FavoritosViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -158,6 +200,7 @@
 				A01AFC40238DA9C100D93D5D /* Custom Cells */,
 				A01AFC3E238D9C0900D93D5D /* SplashScreen */,
 				A01AFC0D238D992D00D93D5D /* Main.storyboard */,
+				A05106B4238F1990004D5327 /* Favoritos.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +233,7 @@
 		A01AFC40238DA9C100D93D5D /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A05106BA238F6CC0004D5327 /* Favoritos Cell */,
 				A01AFC41238DA9D000D93D5D /* Filmes Feed Cell */,
 			);
 			path = "Custom Cells";
@@ -212,6 +256,36 @@
 			path = Filme;
 			sourceTree = "<group>";
 		};
+		A05106BA238F6CC0004D5327 /* Favoritos Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A05106BB238F6CD7004D5327 /* FavoritosTableViewCell.swift */,
+			);
+			path = "Favoritos Cell";
+			sourceTree = "<group>";
+		};
+		A05106BD238F779E004D5327 /* Filtros */ = {
+			isa = PBXGroup;
+			children = (
+				A05106C2238F77FD004D5327 /* FiltroSelecionadoViewController.swift */,
+				A05106C4238F7809004D5327 /* OpcoesFiltroViewController.swift */,
+			);
+			path = Filtros;
+			sourceTree = "<group>";
+		};
+		D69036C620DC518C4DBE2613 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4BEB4FF9AF58309456ECA729 /* Pods-Desafio Concrete.debug.xcconfig */,
+				4E7453F19B00ACDC2E32A52E /* Pods-Desafio Concrete.release.xcconfig */,
+				E7FE3B87E78D3289B00F5D7D /* Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig */,
+				BC07C05B8698611C30A2EEB2 /* Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig */,
+				3125F558782491B396D71F5F /* Pods-Desafio ConcreteTests.debug.xcconfig */,
+				106FD130AC6DF13BAD576766 /* Pods-Desafio ConcreteTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -219,9 +293,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A01AFC31238D992F00D93D5D /* Build configuration list for PBXNativeTarget "Desafio Concrete" */;
 			buildPhases = (
+				0B0B3EDB7D731AE63CCC8C3E /* [CP] Check Pods Manifest.lock */,
 				A01AFC00238D992D00D93D5D /* Sources */,
 				A01AFC01238D992D00D93D5D /* Frameworks */,
 				A01AFC02238D992D00D93D5D /* Resources */,
+				D4F706BCA9F19322F34F9361 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,6 +312,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A01AFC34238D992F00D93D5D /* Build configuration list for PBXNativeTarget "Desafio ConcreteTests" */;
 			buildPhases = (
+				DB8D20D9F913091A64160587 /* [CP] Check Pods Manifest.lock */,
 				A01AFC19238D992F00D93D5D /* Sources */,
 				A01AFC1A238D992F00D93D5D /* Frameworks */,
 				A01AFC1B238D992F00D93D5D /* Resources */,
@@ -254,9 +331,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A01AFC37238D992F00D93D5D /* Build configuration list for PBXNativeTarget "Desafio ConcreteUITests" */;
 			buildPhases = (
+				79D9395279588C6D6276AB5A /* [CP] Check Pods Manifest.lock */,
 				A01AFC24238D992F00D93D5D /* Sources */,
 				A01AFC25238D992F00D93D5D /* Frameworks */,
 				A01AFC26238D992F00D93D5D /* Resources */,
+				4A6B71AF50DC21AAA5E2DBBE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -316,6 +395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05106B5238F1990004D5327 /* Favoritos.storyboard in Resources */,
 				A01AFC17238D992F00D93D5D /* LaunchScreen.storyboard in Resources */,
 				A01AFC14238D992F00D93D5D /* Assets.xcassets in Resources */,
 				A01AFC0F238D992D00D93D5D /* Main.storyboard in Resources */,
@@ -338,6 +418,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B0B3EDB7D731AE63CCC8C3E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Desafio Concrete-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A6B71AF50DC21AAA5E2DBBE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Desafio Concrete-Desafio ConcreteUITests/Pods-Desafio Concrete-Desafio ConcreteUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Desafio Concrete-Desafio ConcreteUITests/Pods-Desafio Concrete-Desafio ConcreteUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Desafio Concrete-Desafio ConcreteUITests/Pods-Desafio Concrete-Desafio ConcreteUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79D9395279588C6D6276AB5A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Desafio Concrete-Desafio ConcreteUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4F706BCA9F19322F34F9361 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Desafio Concrete/Pods-Desafio Concrete-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Desafio Concrete/Pods-Desafio Concrete-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Desafio Concrete/Pods-Desafio Concrete-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB8D20D9F913091A64160587 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Desafio ConcreteTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A01AFC00238D992D00D93D5D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -346,10 +529,15 @@
 				A01AFC0C238D992D00D93D5D /* FilmeFeedViewController.swift in Sources */,
 				A01AFC46238DB2A000D93D5D /* Filme.swift in Sources */,
 				A01AFC08238D992D00D93D5D /* AppDelegate.swift in Sources */,
+				A05106BC238F6CD7004D5327 /* FavoritosTableViewCell.swift in Sources */,
 				A01AFC12238D992D00D93D5D /* Desafio_Concrete.xcdatamodeld in Sources */,
+				A05106B7238F1FB5004D5327 /* FilmeDetalheViewController.swift in Sources */,
+				A05106C5238F7809004D5327 /* OpcoesFiltroViewController.swift in Sources */,
 				A01AFC48238DB31700D93D5D /* FuncoesFilme.swift in Sources */,
 				A01AFC0A238D992D00D93D5D /* SceneDelegate.swift in Sources */,
 				A01AFC43238DAA0300D93D5D /* FilmeFeedCollectionViewCell.swift in Sources */,
+				A05106B9238F68AD004D5327 /* FavoritosViewController.swift in Sources */,
+				A05106C3238F77FD004D5327 /* FiltroSelecionadoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,11 +708,13 @@
 		};
 		A01AFC32238D992F00D93D5D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BEB4FF9AF58309456ECA729 /* Pods-Desafio Concrete.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33974MC9LS;
 				INFOPLIST_FILE = "Desafio Concrete/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -532,17 +722,19 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "rebelatolucas.Desafio-Concrete";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		A01AFC33238D992F00D93D5D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E7453F19B00ACDC2E32A52E /* Pods-Desafio Concrete.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33974MC9LS;
 				INFOPLIST_FILE = "Desafio Concrete/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -550,12 +742,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "rebelatolucas.Desafio-Concrete";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		A01AFC35238D992F00D93D5D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3125F558782491B396D71F5F /* Pods-Desafio ConcreteTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -578,6 +771,7 @@
 		};
 		A01AFC36238D992F00D93D5D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 106FD130AC6DF13BAD576766 /* Pods-Desafio ConcreteTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -600,6 +794,7 @@
 		};
 		A01AFC38238D992F00D93D5D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7FE3B87E78D3289B00F5D7D /* Pods-Desafio Concrete-Desafio ConcreteUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -620,6 +815,7 @@
 		};
 		A01AFC39238D992F00D93D5D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC07C05B8698611C30A2EEB2 /* Pods-Desafio Concrete-Desafio ConcreteUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

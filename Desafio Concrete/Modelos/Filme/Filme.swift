@@ -7,21 +7,17 @@
 //
 
 import Foundation
+import UIKit
 
 //*********************
 //MARK: DECODABLE
 //*********************
 
-struct InformacoesPesquisa: Decodable {
+struct Lista: Decodable {
     
     let total_pages: Int
     let total_results: Int
     let page: Int
-    
-}
-
-struct Lista: Decodable {
-    
     let results: [FilmeDecodable]
     
 }
@@ -44,16 +40,6 @@ struct FilmeDecodable: Decodable {
     let video: Bool?
     let vote_average: Float?
     
-    //SERIE
-    let name: String?
-    let first_air_date: String?
-    let created_by: [created_by]?
-    let episode_run_time: [Int]?
-    let in_production: Bool?
-    let languages: [String]?
-    let number_of_episodes: Int?
-    let production_companies: [production_companies]?
-    
     //FILME DETALHADO
     let budget: Float?
     let genres: [genres]?
@@ -73,20 +59,6 @@ struct FilmeDecodable: Decodable {
 }
 
 //*********************
-//MARK: STRUCTS SERIE DETALHADA
-//*********************
-
-struct created_by: Decodable {
-    
-    let id: Int?
-    let credit_id: String?
-    let name: String?
-    let gender: Int?
-    let profile_path: String?
-    
-}
-
-//*********************
 //MARK: STRUCTS FILME DETALHADO
 //*********************
 
@@ -98,25 +70,24 @@ struct production_companies: Decodable {
     let origin_country: String?
 }
 
+struct generosDetalhados: Decodable {
+    let genres: [genres]?
+}
+
 struct genres: Decodable {
     
     let id: Int?
     let name: String?
-    
 }
 
 struct production_countries: Decodable {
-    
     let iso_3166_1: String?
     let name: String?
-    
 }
 
 struct spoken_languages: Decodable {
-    
     let iso_639_1: String?
     let name: String?
-    
 }
 
 //*********************
@@ -124,11 +95,24 @@ struct spoken_languages: Decodable {
 //*********************
 
 class Filme {
+        
+    var filmeDecodable: FilmeDecodable
+    var posterUIImage: UIImage = UIImage()
+    var generoFormatado = [String]()
     
-    let filmeDecodable: FilmeDecodable
-    
-    init(filmeDecodable: FilmeDecodable) {
+    init(filmeDecodable: FilmeDecodable, completion: @escaping (Filme) -> ()) {
         self.filmeDecodable = filmeDecodable
+        
+        if let generos = filmeDecodable.genres {
+            for genero in generos {
+                generoFormatado.append(genero.name ?? "")
+            }
+        }
+        
+        FuncoesFilme().baixarPosterFilme(filme: filmeDecodable) { (poster) in
+            self.posterUIImage = poster
+            completion(self)
+        }
     }
     
 }
