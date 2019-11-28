@@ -21,13 +21,12 @@ class FavoritosViewController: UIViewController {
     @IBOutlet weak var viewErro: UIView!
     @IBOutlet weak var mensagemErro: UILabel!
     
-    
     //var e let
     var filmesFavoritados = [Filme]()
     var filmesFiltrados = [Filme]()
-    
     var anoSelecionado = 0
     var generoSelecionado = ""
+    var pesquisaAtual = ""
     
     //***********************************
     //MARK: Ciclo de vida view controller
@@ -57,8 +56,8 @@ class FavoritosViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
-        self.navigationController?.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationController?.navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.searchController = searchController
         definesPresentationContext = true
     }
     
@@ -70,6 +69,14 @@ class FavoritosViewController: UIViewController {
     func pegarFavoritos(){
         let favoritos = FuncoesFilme().pegarListaFavoritos()
         let semaforo = DispatchSemaphore(value: favoritos.count)
+        
+        if favoritos.count == 0 {
+            viewErro.isHidden = false
+            mensagemErro.text = "Você ainda nāo tem filmes favoritados"
+            return
+        }
+        
+        viewErro.isHidden = true
         
         for idFavorito in favoritos {
             FuncoesFilme().pegarFilmesPorID(id: idFavorito) { (result, erro) in
@@ -85,6 +92,25 @@ class FavoritosViewController: UIViewController {
             semaforo.wait()
         }
         
+    }
+    
+    //***********************************
+    //MARK: Pesquisa Favoritos
+    //***********************************
+    
+    func pesquisarFilmes(searchBarText: String){
+        
+        if searchBarText == "" {
+            filmesFiltrados = filmesFavoritados
+            tableView.reloadData()
+            return
+        }
+        
+        filmesFiltrados = filmesFiltrados.filter { (filme) -> Bool in
+            let titulo = filme.filmeDecodable.title ?? ""
+            return titulo.contains(searchBarText)
+        }
+        tableView.reloadData()
     }
     
     //***********************************
@@ -116,10 +142,14 @@ class FavoritosViewController: UIViewController {
             })
         }
         
-        tableView.reloadData()
+        if filmesFiltrados.count > 0 {
+            tableView.reloadData()
+        }else{
+            viewErro.isHidden = false
+            mensagemErro.text = "Nāo há filmes favoritados com esses filtros"
+        }
         
     }
-    
     
     @IBAction func removerFiltro(_ sender: Any) {
         anoSelecionado = 0
@@ -160,10 +190,15 @@ extension FavoritosViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
           if editingStyle == .delete {
-            let filme = filmesFiltrados[indexPath.row]
-            FuncoesFilme().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0 , filme: filme)
-            self.filmesFiltrados.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                let filme = filmesFiltrados[indexPath.row]
+                FuncoesFilme().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0 , filme: filme)
+                self.filmesFiltrados.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+                if filmesFiltrados.count == 0 {
+                    viewErro.isHidden = false
+                    mensagemErro.text = "Você ainda nāo tem filmes favoritados"
+                }
           }
     }
     
@@ -175,8 +210,8 @@ extension FavoritosViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension FavoritosViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        //pesquisaAtual = searchController.searchBar.text ?? ""
-        //pesquisarFilmes(searchBarText: pesquisaAtual)
+        pesquisaAtual = searchController.searchBar.text ?? ""
+        pesquisarFilmes(searchBarText: pesquisaAtual)
     }
 }
 
