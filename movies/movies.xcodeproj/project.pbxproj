@@ -97,7 +97,6 @@
 			children = (
 				176F999C2393F51000023BE7 /* Model */,
 				176F999B2393F50900023BE7 /* View */,
-				176F99902393F2AD00023BE7 /* LaunchScreen.storyboard */,
 				176F999A2393F50100023BE7 /* ViewModel */,
 				176F99992393F4F700023BE7 /* Controller */,
 				176F99822393F2AC00023BE7 /* AppDelegate.swift */,
@@ -126,6 +125,7 @@
 		176F999B2393F50900023BE7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				176F99902393F2AD00023BE7 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +185,7 @@
 				176F997C2393F2AC00023BE7 /* Frameworks */,
 				176F997D2393F2AC00023BE7 /* Resources */,
 				1750B9702393F6BD007B178C /* SwiftLint */,
+				78691107257FA66A876B27DB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +271,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		78691107257FA66A876B27DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-movies/Pods-movies-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-movies/Pods-movies-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-movies/Pods-movies-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		970D64B32C42ACCD1C111AA3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
