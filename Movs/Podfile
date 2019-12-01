@@ -16,4 +16,11 @@ target 'Movs' do
 
   end
 
+  target 'MovsFunctionalTests' do
+    inherit! :search_paths
+ 
+    pod 'KIF', :configurations => ['Debug']
+
+  end	
+
 end
