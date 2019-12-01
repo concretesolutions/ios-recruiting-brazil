@@ -1,0 +1,26 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.1'
+
+target 'Movs' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Movs
+  pod 'SwiftLint'
+  pod 'SnapKit', '~> 5.0.0'
+
+  abstract_target 'Tests' do
+    # Pods for testing
+    pod 'Quick'
+
+    target 'MovsCodeViewTests' do
+      # Pods for testing
+      pod 'Nimble-Snapshots'
+    end
+  
+    target 'MovsTests' do
+      # Pods for testing
+      pod 'Nimble'
+    end
+  end
+end
