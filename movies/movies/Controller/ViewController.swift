@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         
@@ -22,4 +21,3 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 }
-
