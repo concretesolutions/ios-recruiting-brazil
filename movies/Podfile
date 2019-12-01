@@ -7,5 +7,13 @@ target 'movies' do
 
   pod 'SwiftLint'
   pod 'SnapKit', '~> 5.0.0'
+  
+  target 'moviesTests' do
+    inherit! :search_paths
+    
+    pod 'Nimble'
+    pod 'Quick'
+    pod 'Nimble-Snapshots'
+  end
 
 end

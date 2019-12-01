@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MovieListViewController.swift
 //  movies
 //
 //  Created by Jacqueline Alves on 01/12/19.
@@ -8,16 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MovieListViewController: UIViewController {
+    
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         
-        view.backgroundColor = .white
+        view.backgroundColor = .red
         self.view = view
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 }
