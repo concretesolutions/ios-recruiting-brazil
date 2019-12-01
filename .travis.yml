@@ -1,0 +1,4 @@
+os: osx
+osx_image: xcode11
+language: swift
+script: xcodebuild clean build test -workspace movies/movies.xcworkspace -scheme "movies" -sdk iphonesimulator -destination "platform=iOS Simulator,OS=13.0,name=iPhone 11" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO
