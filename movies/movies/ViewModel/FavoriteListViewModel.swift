@@ -1,14 +1,14 @@
 //
-//  MovieListViewModel.swift
+//  FavoriteListViewModel.swift
 //  movies
 //
-//  Created by Jacqueline Alves on 01/12/19.
+//  Created by Jacqueline Alves on 02/12/19.
 //  Copyright © 2019 jacquelinealves. All rights reserved.
 //
 
 import Foundation
 
-class MovieListViewModel: ObservableObject {
+class FavoriteListViewModel: ObservableObject {
     private var movies: [Movie] = [] {
         didSet {
             self.movieCount = self.movies.count
@@ -22,12 +22,12 @@ class MovieListViewModel: ObservableObject {
     }
     
     private func fetchMovies() {
-        self.movies = MockedDataProvider.shared.popularMovies
+        self.movies = MockedDataProvider.shared.favoriteMovies
     }
     
-    public func viewModelForMovie(at index: Int) -> MovieCellViewModel? {
+    public func viewModelForMovie(at index: Int) -> FavoriteMovieCellViewModel? {
         guard index < self.movieCount else { return nil } // Check if it is an valid index
-        return MovieCellViewModel(of: self.movies[index])
+        return FavoriteMovieCellViewModel(of: self.movies[index])
     }
     
     public func viewModelForMovieDetails(at index: Int) -> MovieDetailsViewModel? {
