@@ -30,6 +30,11 @@ class MovieListViewModel {
         return MovieCellViewModel(of: self.movies[index])
     }
     
+    public func viewModelForMovieDetails(at index: Int) -> MovieDetailsViewModel? {
+        guard index < self.movieCount else { return nil } // Check if it is an valid index
+        return MovieDetailsViewModel(of: self.movies[index])
+    }
+    
     public func toggleFavoriteMovie(at index: Int) {
         guard index < self.movieCount - 1 else { return } // Check if it is an valid index
         self.movies[index].favorite.toggle()

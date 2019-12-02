@@ -14,7 +14,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         didSet {
             self.posterImageView.image = UIImage(data: self.viewModel.poster)
             self.titleLabel.text = self.viewModel.title
-            self.favoriteImageView.tintColor = self.viewModel.favorite ? .yellow : .white
+            self.favoriteButton.type = self.viewModel.favorite ? .favorite  : .unfavorite
         }
     }
     
@@ -32,15 +32,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    lazy var favoriteImageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.image = UIImage(systemName: "heart.fill")
-        return view
-    }()
+    let favoriteButton = FavoriteButton()
     
     lazy var container: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemFill
         return view
     }()
     
@@ -65,7 +61,7 @@ extension MovieCollectionViewCell: CodeView {
     func buildViewHierarchy() {
         addSubview(posterImageView)
         container.addSubview(titleLabel)
-        container.addSubview(favoriteImageView)
+        container.addSubview(favoriteButton)
         addSubview(container)
     }
     
@@ -79,11 +75,11 @@ extension MovieCollectionViewCell: CodeView {
             make.height.equalToSuperview().multipliedBy(0.2)
         }
         
-        favoriteImageView.snp.makeConstraints { make in
+        favoriteButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.5)
             make.right.equalToSuperview().inset(5)
-            make.width.equalTo(favoriteImageView.snp.height)
+            make.width.equalTo(favoriteButton.snp.height)
         }
         
         titleLabel.snp.makeConstraints { make in

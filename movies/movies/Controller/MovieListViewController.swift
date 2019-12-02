@@ -58,4 +58,13 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDel
         let width: CGFloat = 180
         return CGSize(width: width, height: width*1.5)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movieViewModel = self.viewModel.viewModelForMovieDetails(at: indexPath.row) else { return }
+        
+        let detailsView = MovieDetailsViewController(viewModel: movieViewModel)
+        navigationController?.pushViewController(detailsView, animated: true)
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
 }

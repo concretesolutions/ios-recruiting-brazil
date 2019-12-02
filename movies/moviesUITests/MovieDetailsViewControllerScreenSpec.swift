@@ -31,7 +31,7 @@ class MovieDetailsViewControllerScreenSpec: QuickSpec {
                 }
                 
                 it("should have the expected look and feel.") {
-                    expect(sut) == recordSnapshot("MovieDetailsView")
+                    expect(sut) == snapshot("MovieDetailsView")
                 }
             }
             
@@ -47,7 +47,7 @@ class MovieDetailsViewControllerScreenSpec: QuickSpec {
                 }
                 
                 it("should have the expected look and feel.") {
-                    expect(sut) == recordSnapshot("MovieDetailsView_Favorite")
+                    expect(sut) == snapshot("MovieDetailsView_Favorite")
                 }
             }
         }

@@ -13,8 +13,7 @@ class MovieDetailsViewControllerScreen: UIView {
         didSet {
             self.posterImageView.image = UIImage(data: self.viewModel.poster)
             self.titleLabel.text = self.viewModel.title
-            self.favoriteImageView.tintColor = self.viewModel.favorite ? .systemYellow  : .label 
-            self.favoriteImageView.image = self.viewModel.favorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+            self.favoriteButton.type = self.viewModel.favorite ? .favorite  : .unfavorite
             self.dateLabel.text = self.viewModel.date
             self.genresLabel.text = self.viewModel.genres
             self.overviewLabel.text = self.viewModel.overview
@@ -32,10 +31,7 @@ class MovieDetailsViewControllerScreen: UIView {
         return view
     }()
     
-    lazy var favoriteImageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        return view
-    }()
+    let favoriteButton = FavoriteButton(type: .unfavorite)
     
     let titleDivider = Divider()
     
@@ -73,7 +69,7 @@ class MovieDetailsViewControllerScreen: UIView {
 extension MovieDetailsViewControllerScreen: CodeView {
     func buildViewHierarchy() {
         addSubview(posterImageView)
-        addSubview(favoriteImageView)
+        addSubview(favoriteButton)
         addSubview(titleLabel)
         addSubview(titleDivider)
         addSubview(dateLabel)
@@ -85,13 +81,13 @@ extension MovieDetailsViewControllerScreen: CodeView {
     
     func setupConstraints() {
         posterImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(30)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
             make.height.equalToSuperview().multipliedBy(0.4)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(1/1.5)
             make.centerX.equalToSuperview()
         }
         
-        favoriteImageView.snp.makeConstraints { make in
+        favoriteButton.snp.makeConstraints { make in
             make.width.height.equalTo(25)
             make.right.equalToSuperview().inset(20)
             make.top.equalTo(posterImageView.snp.bottom).offset(40)
@@ -99,8 +95,8 @@ extension MovieDetailsViewControllerScreen: CodeView {
         
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
-            make.right.equalTo(favoriteImageView.snp.left)
-            make.centerY.equalTo(favoriteImageView.snp.centerY)
+            make.right.equalTo(favoriteButton.snp.left)
+            make.centerY.equalTo(favoriteButton.snp.centerY)
         }
         
         titleDivider.snp.makeConstraints { make in
