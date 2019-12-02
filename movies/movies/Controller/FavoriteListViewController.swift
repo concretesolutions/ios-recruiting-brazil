@@ -24,7 +24,7 @@ class FavoriteListViewController: UIViewController {
         search.obscuresBackgroundDuringPresentation = false
         
         self.navigationItem.searchController = search
-        self.title = "Movies"
+        self.title = "Favorites"
     }
 
     override func viewDidLoad() {
@@ -66,5 +66,16 @@ extension FavoriteListViewController: UITableViewDelegate {
         navigationController?.pushViewController(detailsView, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Unfavorite"
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            self.viewModel.toggleFavoriteMovie(at: indexPath.row)
+            tableView.reloadSections(IndexSet(arrayLiteral: 0), with: .automatic)
+        }
     }
 }
