@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+struct Movie {
+    let id: Int
+    let title: String
+    let releaseDate: String
+    let description: String
+    let posterPath: String
+    let genres: [Genre]
+}
