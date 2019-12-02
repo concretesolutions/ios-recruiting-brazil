@@ -14,8 +14,8 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         // Create View Controllers
-        let movieListViewController = MovieListViewController()
-        let favoriteListViewController = FavoriteListViewController()
+        let movieListViewController = UINavigationController(rootViewController: MovieListViewController())
+        let favoriteListViewController = UINavigationController(rootViewController: FavoriteListViewController())
         
         // Set the View Controllers' tab items
         movieListViewController.tabBarItem = UITabBarItem(title: "Movies",
