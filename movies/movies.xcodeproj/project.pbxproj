@@ -30,6 +30,11 @@
 		176F998F2393F2AD00023BE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 176F998E2393F2AD00023BE7 /* Assets.xcassets */; };
 		176F99922393F2AD00023BE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 176F99902393F2AD00023BE7 /* LaunchScreen.storyboard */; };
 		17AF8FC923942F38001F7C16 /* TabBarViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AF8FC823942F38001F7C16 /* TabBarViewControllerSpec.swift */; };
+		17B0313C2395A5EB00C98D23 /* FavoriteMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B0313B2395A5EB00C98D23 /* FavoriteMovieTableViewCell.swift */; };
+		17B0313E2395A60C00C98D23 /* FavoriteMovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B0313D2395A60C00C98D23 /* FavoriteMovieCellViewModel.swift */; };
+		17B031402395A7D000C98D23 /* FavoriteMovieTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B0313F2395A7D000C98D23 /* FavoriteMovieTableViewCellSpec.swift */; };
+		17B031422395AD4800C98D23 /* FavoriteListViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B031412395AD4800C98D23 /* FavoriteListViewControllerScreen.swift */; };
+		17B031442395AD6C00C98D23 /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B031432395AD6C00C98D23 /* FavoriteListViewModel.swift */; };
 		17E616E12394241F003C7A2E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E616E02394241F003C7A2E /* TabBarViewController.swift */; };
 		17E616E323942446003C7A2E /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E616E223942446003C7A2E /* MovieListViewController.swift */; };
 		17E616E523942464003C7A2E /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E616E423942464003C7A2E /* FavoriteListViewController.swift */; };
@@ -85,6 +90,11 @@
 		176F99912393F2AD00023BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		176F99932393F2AD00023BE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17AF8FC823942F38001F7C16 /* TabBarViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControllerSpec.swift; sourceTree = "<group>"; };
+		17B0313B2395A5EB00C98D23 /* FavoriteMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieTableViewCell.swift; sourceTree = "<group>"; };
+		17B0313D2395A60C00C98D23 /* FavoriteMovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCellViewModel.swift; sourceTree = "<group>"; };
+		17B0313F2395A7D000C98D23 /* FavoriteMovieTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieTableViewCellSpec.swift; sourceTree = "<group>"; };
+		17B031412395AD4800C98D23 /* FavoriteListViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewControllerScreen.swift; sourceTree = "<group>"; };
+		17B031432395AD6C00C98D23 /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
 		17E616E02394241F003C7A2E /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		17E616E223942446003C7A2E /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		17E616E423942464003C7A2E /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +144,7 @@
 			children = (
 				17236F2E2394A5EE0015B113 /* MovieCollectionViewCellSpec.swift */,
 				17236F3C23953CB20015B113 /* MovieDetailsViewControllerScreenSpec.swift */,
+				17B0313F2395A7D000C98D23 /* FavoriteMovieTableViewCellSpec.swift */,
 				17236F282394A5DC0015B113 /* Info.plist */,
 			);
 			path = moviesUITests;
@@ -211,8 +222,10 @@
 			isa = PBXGroup;
 			children = (
 				1741EB4D239492F1007AD9FC /* MovieCellViewModel.swift */,
+				17B0313D2395A60C00C98D23 /* FavoriteMovieCellViewModel.swift */,
 				1741EB4F239495B2007AD9FC /* MovieListViewModel.swift */,
 				17236F3823952FDA0015B113 /* MovieDetailsViewModel.swift */,
+				17B031432395AD6C00C98D23 /* FavoriteListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -223,8 +236,10 @@
 				176F99902393F2AD00023BE7 /* LaunchScreen.storyboard */,
 				17236F3A23953A880015B113 /* Divider.swift */,
 				1741EB55239498D7007AD9FC /* MovieCollectionViewCell.swift */,
+				17B0313B2395A5EB00C98D23 /* FavoriteMovieTableViewCell.swift */,
 				1741EB5323949836007AD9FC /* MovieListViewControllerScreen.swift */,
 				17236F3623952FC60015B113 /* MovieDetailsViewControllerScreen.swift */,
+				17B031412395AD4800C98D23 /* FavoriteListViewControllerScreen.swift */,
 				17236F3E239596B70015B113 /* FavoriteButton.swift */,
 			);
 			path = View;
@@ -541,6 +556,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17B031402395A7D000C98D23 /* FavoriteMovieTableViewCellSpec.swift in Sources */,
 				17236F2F2394A5EE0015B113 /* MovieCollectionViewCellSpec.swift in Sources */,
 				17236F3D23953CB20015B113 /* MovieDetailsViewControllerScreenSpec.swift in Sources */,
 			);
@@ -569,14 +585,18 @@
 				17236F3923952FDA0015B113 /* MovieDetailsViewModel.swift in Sources */,
 				176F99832393F2AC00023BE7 /* AppDelegate.swift in Sources */,
 				176F998D2393F2AC00023BE7 /* movies.xcdatamodeld in Sources */,
+				17B0313E2395A60C00C98D23 /* FavoriteMovieCellViewModel.swift in Sources */,
 				1741EB4E239492F1007AD9FC /* MovieCellViewModel.swift in Sources */,
+				17B0313C2395A5EB00C98D23 /* FavoriteMovieTableViewCell.swift in Sources */,
 				1741EB5423949836007AD9FC /* MovieListViewControllerScreen.swift in Sources */,
 				17E616E323942446003C7A2E /* MovieListViewController.swift in Sources */,
 				17E616E12394241F003C7A2E /* TabBarViewController.swift in Sources */,
 				176F99852393F2AC00023BE7 /* SceneDelegate.swift in Sources */,
 				1741EB452394365A007AD9FC /* Genre.swift in Sources */,
 				1741EB5223949784007AD9FC /* CodeView.swift in Sources */,
+				17B031422395AD4800C98D23 /* FavoriteListViewControllerScreen.swift in Sources */,
 				17236F3F239596B70015B113 /* FavoriteButton.swift in Sources */,
+				17B031442395AD6C00C98D23 /* FavoriteListViewModel.swift in Sources */,
 				17236F3723952FC60015B113 /* MovieDetailsViewControllerScreen.swift in Sources */,
 				17236F3123952E770015B113 /* MovieDetailsViewController.swift in Sources */,
 			);
