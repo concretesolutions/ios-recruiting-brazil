@@ -3,17 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B531616908CDEBF22F7B569 /* Pods_DesafioConcrete.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09449CA0428C2F57D0C943BD /* Pods_DesafioConcrete.framework */; };
+		EC4F3E98238EF03C004412CC /* ApperanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F3E97238EF03C004412CC /* ApperanceHelper.swift */; };
+		EC4F3E9A238EF0C5004412CC /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F3E99238EF0C5004412CC /* CustomColor.swift */; };
+		EC661B4923960F36009CB266 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC661B4323960F36009CB266 /* FavoritesPresenter.swift */; };
+		EC661B4A23960F36009CB266 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC661B4423960F36009CB266 /* FavoritesRouter.swift */; };
+		EC661B4B23960F36009CB266 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC661B4523960F36009CB266 /* FavoritesViewController.swift */; };
+		EC661B4C23960F36009CB266 /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC661B4623960F36009CB266 /* FavoritesInteractor.swift */; };
+		EC661B4E23960F36009CB266 /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC661B4823960F36009CB266 /* FavoritesViewController.xib */; };
+		EC9A410D2396116400063B11 /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9A41072396116400063B11 /* MoviesPresenter.swift */; };
+		EC9A410E2396116400063B11 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9A41082396116400063B11 /* MoviesRouter.swift */; };
+		EC9A410F2396116400063B11 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9A41092396116400063B11 /* MoviesViewController.swift */; };
+		EC9A41102396116400063B11 /* MoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9A410A2396116400063B11 /* MoviesInteractor.swift */; };
+		EC9A41122396116400063B11 /* MoviesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC9A410C2396116400063B11 /* MoviesViewController.xib */; };
+		EC9A412223961CE600063B11 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9A412023961CE600063B11 /* MoviesCollectionViewCell.swift */; };
+		EC9A412323961CE600063B11 /* MoviesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC9A412123961CE600063B11 /* MoviesCollectionViewCell.xib */; };
+		ECD06218239634F400C39CF0 /* MoviesCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD06217239634F400C39CF0 /* MoviesCollectionDataSource.swift */; };
+		ECD0621B2396399A00C39CF0 /* MoviesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD0621A2396399A00C39CF0 /* MoviesDelegate.swift */; };
+		ECD0621D23963A5600C39CF0 /* MoviesCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD0621C23963A5600C39CF0 /* MoviesCollectionDelegate.swift */; };
 		ECFD97802389D6D0003D2799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFD977F2389D6D0003D2799 /* AppDelegate.swift */; };
 		ECFD97822389D6D0003D2799 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFD97812389D6D0003D2799 /* SceneDelegate.swift */; };
-		ECFD97842389D6D0003D2799 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFD97832389D6D0003D2799 /* ViewController.swift */; };
-		ECFD97872389D6D0003D2799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECFD97852389D6D0003D2799 /* Main.storyboard */; };
 		ECFD97892389D6D2003D2799 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECFD97882389D6D2003D2799 /* Assets.xcassets */; };
 		ECFD978C2389D6D2003D2799 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECFD978A2389D6D2003D2799 /* LaunchScreen.storyboard */; };
 		ECFD97972389D6D2003D2799 /* DesafioConcreteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFD97962389D6D2003D2799 /* DesafioConcreteTests.swift */; };
+		FF280198CD16504B1395E668 /* Pods_DesafioConcreteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D32E5E28CD21AD8D326586B /* Pods_DesafioConcreteTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,11 +44,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09449CA0428C2F57D0C943BD /* Pods_DesafioConcrete.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioConcrete.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		370D7FB1A0D93B86EEB32246 /* Pods-DesafioConcreteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioConcreteTests.debug.xcconfig"; path = "Target Support Files/Pods-DesafioConcreteTests/Pods-DesafioConcreteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3E6616423C26E6622B492A0A /* Pods-DesafioConcrete.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioConcrete.debug.xcconfig"; path = "Target Support Files/Pods-DesafioConcrete/Pods-DesafioConcrete.debug.xcconfig"; sourceTree = "<group>"; };
+		433011982C5C9E612292F684 /* Pods-DesafioConcrete.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioConcrete.release.xcconfig"; path = "Target Support Files/Pods-DesafioConcrete/Pods-DesafioConcrete.release.xcconfig"; sourceTree = "<group>"; };
+		4D32E5E28CD21AD8D326586B /* Pods_DesafioConcreteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioConcreteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B501EDFBC3FB52E9586D2D2 /* Pods-DesafioConcreteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioConcreteTests.release.xcconfig"; path = "Target Support Files/Pods-DesafioConcreteTests/Pods-DesafioConcreteTests.release.xcconfig"; sourceTree = "<group>"; };
+		EC4F3E97238EF03C004412CC /* ApperanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApperanceHelper.swift; sourceTree = "<group>"; };
+		EC4F3E99238EF0C5004412CC /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
+		EC661B4323960F36009CB266 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
+		EC661B4423960F36009CB266 /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
+		EC661B4523960F36009CB266 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		EC661B4623960F36009CB266 /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
+		EC661B4823960F36009CB266 /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
+		EC9A41072396116400063B11 /* MoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
+		EC9A41082396116400063B11 /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
+		EC9A41092396116400063B11 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		EC9A410A2396116400063B11 /* MoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesInteractor.swift; sourceTree = "<group>"; };
+		EC9A410C2396116400063B11 /* MoviesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesViewController.xib; sourceTree = "<group>"; };
+		EC9A412023961CE600063B11 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
+		EC9A412123961CE600063B11 /* MoviesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviesCollectionViewCell.xib; sourceTree = "<group>"; };
+		ECD06217239634F400C39CF0 /* MoviesCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionDataSource.swift; sourceTree = "<group>"; };
+		ECD0621A2396399A00C39CF0 /* MoviesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDelegate.swift; sourceTree = "<group>"; };
+		ECD0621C23963A5600C39CF0 /* MoviesCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionDelegate.swift; sourceTree = "<group>"; };
 		ECFD977C2389D6D0003D2799 /* DesafioConcrete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesafioConcrete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECFD977F2389D6D0003D2799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECFD97812389D6D0003D2799 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECFD97832389D6D0003D2799 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ECFD97862389D6D0003D2799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ECFD97882389D6D2003D2799 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECFD978B2389D6D2003D2799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECFD978D2389D6D2003D2799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B531616908CDEBF22F7B569 /* Pods_DesafioConcrete.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,18 +91,154 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF280198CD16504B1395E668 /* Pods_DesafioConcreteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D1D2A8DA0ECD69A0E76B0A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09449CA0428C2F57D0C943BD /* Pods_DesafioConcrete.framework */,
+				4D32E5E28CD21AD8D326586B /* Pods_DesafioConcreteTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC4F3E9B238F066D004412CC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC4F3E99238EF0C5004412CC /* CustomColor.swift */,
+				ECFD978D2389D6D2003D2799 /* Info.plist */,
+				ECFD97882389D6D2003D2799 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EC4F3E9C238F0730004412CC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ECFD978A2389D6D2003D2799 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		EC661B3623960DE5009CB266 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				EC9A4117239617A800063B11 /* View */,
+				EC9A41162396179D00063B11 /* Interactor */,
+				EC9A41152396178E00063B11 /* Presenter */,
+				EC9A41142396177400063B11 /* Entity */,
+				EC9A41132396175300063B11 /* Router */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		EC847517238FBFB200EBCB1F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EC9A41242396247300063B11 /* Xib */,
+				EC9A412023961CE600063B11 /* MoviesCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		EC9A41132396175300063B11 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				EC661B4423960F36009CB266 /* FavoritesRouter.swift */,
+				EC9A41082396116400063B11 /* MoviesRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		EC9A41142396177400063B11 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		EC9A41152396178E00063B11 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EC661B4323960F36009CB266 /* FavoritesPresenter.swift */,
+				EC9A41072396116400063B11 /* MoviesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		EC9A41162396179D00063B11 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				EC661B4623960F36009CB266 /* FavoritesInteractor.swift */,
+				EC9A410A2396116400063B11 /* MoviesInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		EC9A4117239617A800063B11 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC9A4118239617FD00063B11 /* Xibs */,
+				EC9A41092396116400063B11 /* MoviesViewController.swift */,
+				EC661B4523960F36009CB266 /* FavoritesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EC9A4118239617FD00063B11 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				EC661B4823960F36009CB266 /* FavoritesViewController.xib */,
+				EC9A410C2396116400063B11 /* MoviesViewController.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		EC9A4119239618A000063B11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC9A41242396247300063B11 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				EC9A412123961CE600063B11 /* MoviesCollectionViewCell.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		ECD06216239631B900C39CF0 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				ECD06217239634F400C39CF0 /* MoviesCollectionDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		ECD062192396397F00C39CF0 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				ECD0621A2396399A00C39CF0 /* MoviesDelegate.swift */,
+				ECD0621C23963A5600C39CF0 /* MoviesCollectionDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		ECFD97732389D6D0003D2799 = {
 			isa = PBXGroup;
 			children = (
 				ECFD977E2389D6D0003D2799 /* DesafioConcrete */,
 				ECFD97952389D6D2003D2799 /* DesafioConcreteTests */,
 				ECFD977D2389D6D0003D2799 /* Products */,
+				FC8895D84E633891BE1225DA /* Pods */,
+				8D1D2A8DA0ECD69A0E76B0A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,13 +254,15 @@
 		ECFD977E2389D6D0003D2799 /* DesafioConcrete */ = {
 			isa = PBXGroup;
 			children = (
-				ECFD977F2389D6D0003D2799 /* AppDelegate.swift */,
-				ECFD97812389D6D0003D2799 /* SceneDelegate.swift */,
-				ECFD97832389D6D0003D2799 /* ViewController.swift */,
-				ECFD97852389D6D0003D2799 /* Main.storyboard */,
-				ECFD97882389D6D2003D2799 /* Assets.xcassets */,
-				ECFD978A2389D6D2003D2799 /* LaunchScreen.storyboard */,
-				ECFD978D2389D6D2003D2799 /* Info.plist */,
+				EC847517238FBFB200EBCB1F /* Cells */,
+				EC9A4119239618A000063B11 /* Views */,
+				EC661B3623960DE5009CB266 /* Modules */,
+				ECD06216239631B900C39CF0 /* DataSources */,
+				ECD062192396397F00C39CF0 /* Delegates */,
+				ECFD97A6238DC689003D2799 /* Helpers */,
+				EC4F3E9B238F066D004412CC /* Resources */,
+				EC4F3E9C238F0730004412CC /* Storyboards */,
+				ECFD97A2238DC582003D2799 /* AppDelegate+SceneDelegate */,
 			);
 			path = DesafioConcrete;
 			sourceTree = "<group>";
@@ -99,6 +276,34 @@
 			path = DesafioConcreteTests;
 			sourceTree = "<group>";
 		};
+		ECFD97A2238DC582003D2799 /* AppDelegate+SceneDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				ECFD977F2389D6D0003D2799 /* AppDelegate.swift */,
+				ECFD97812389D6D0003D2799 /* SceneDelegate.swift */,
+			);
+			path = "AppDelegate+SceneDelegate";
+			sourceTree = "<group>";
+		};
+		ECFD97A6238DC689003D2799 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EC4F3E97238EF03C004412CC /* ApperanceHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FC8895D84E633891BE1225DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3E6616423C26E6622B492A0A /* Pods-DesafioConcrete.debug.xcconfig */,
+				433011982C5C9E612292F684 /* Pods-DesafioConcrete.release.xcconfig */,
+				370D7FB1A0D93B86EEB32246 /* Pods-DesafioConcreteTests.debug.xcconfig */,
+				7B501EDFBC3FB52E9586D2D2 /* Pods-DesafioConcreteTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +311,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECFD979B2389D6D2003D2799 /* Build configuration list for PBXNativeTarget "DesafioConcrete" */;
 			buildPhases = (
+				39E6D8BF625D8C044E4223D0 /* [CP] Check Pods Manifest.lock */,
 				ECFD97782389D6D0003D2799 /* Sources */,
 				ECFD97792389D6D0003D2799 /* Frameworks */,
 				ECFD977A2389D6D0003D2799 /* Resources */,
+				77293C4BD727FCB138FFF702 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -123,6 +330,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECFD979E2389D6D2003D2799 /* Build configuration list for PBXNativeTarget "DesafioConcreteTests" */;
 			buildPhases = (
+				4FD1443BB675890BD74E1522 /* [CP] Check Pods Manifest.lock */,
 				ECFD978E2389D6D2003D2799 /* Sources */,
 				ECFD978F2389D6D2003D2799 /* Frameworks */,
 				ECFD97902389D6D2003D2799 /* Resources */,
@@ -181,8 +389,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECFD978C2389D6D2003D2799 /* LaunchScreen.storyboard in Resources */,
+				EC661B4E23960F36009CB266 /* FavoritesViewController.xib in Resources */,
+				EC9A412323961CE600063B11 /* MoviesCollectionViewCell.xib in Resources */,
 				ECFD97892389D6D2003D2799 /* Assets.xcassets in Resources */,
-				ECFD97872389D6D0003D2799 /* Main.storyboard in Resources */,
+				EC9A41122396116400063B11 /* MoviesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,14 +405,91 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		39E6D8BF625D8C044E4223D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DesafioConcrete-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FD1443BB675890BD74E1522 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DesafioConcreteTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77293C4BD727FCB138FFF702 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesafioConcrete/Pods-DesafioConcrete-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesafioConcrete/Pods-DesafioConcrete-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesafioConcrete/Pods-DesafioConcrete-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ECFD97782389D6D0003D2799 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECFD97842389D6D0003D2799 /* ViewController.swift in Sources */,
+				EC9A41102396116400063B11 /* MoviesInteractor.swift in Sources */,
+				EC9A410E2396116400063B11 /* MoviesRouter.swift in Sources */,
+				EC661B4C23960F36009CB266 /* FavoritesInteractor.swift in Sources */,
+				ECD0621D23963A5600C39CF0 /* MoviesCollectionDelegate.swift in Sources */,
+				EC661B4923960F36009CB266 /* FavoritesPresenter.swift in Sources */,
 				ECFD97802389D6D0003D2799 /* AppDelegate.swift in Sources */,
+				EC661B4A23960F36009CB266 /* FavoritesRouter.swift in Sources */,
+				ECD06218239634F400C39CF0 /* MoviesCollectionDataSource.swift in Sources */,
+				EC4F3E9A238EF0C5004412CC /* CustomColor.swift in Sources */,
+				EC4F3E98238EF03C004412CC /* ApperanceHelper.swift in Sources */,
+				EC9A412223961CE600063B11 /* MoviesCollectionViewCell.swift in Sources */,
 				ECFD97822389D6D0003D2799 /* SceneDelegate.swift in Sources */,
+				EC661B4B23960F36009CB266 /* FavoritesViewController.swift in Sources */,
+				ECD0621B2396399A00C39CF0 /* MoviesDelegate.swift in Sources */,
+				EC9A410D2396116400063B11 /* MoviesPresenter.swift in Sources */,
+				EC9A410F2396116400063B11 /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,14 +512,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		ECFD97852389D6D0003D2799 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECFD97862389D6D0003D2799 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ECFD978A2389D6D2003D2799 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -360,11 +639,12 @@
 		};
 		ECFD979C2389D6D2003D2799 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E6616423C26E6622B492A0A /* Pods-DesafioConcrete.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M4Q8B5NHUM;
-				INFOPLIST_FILE = DesafioConcrete/Info.plist;
+				INFOPLIST_FILE = DesafioConcrete/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -372,17 +652,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gustavo.leite.DesafioConcrete;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		ECFD979D2389D6D2003D2799 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 433011982C5C9E612292F684 /* Pods-DesafioConcrete.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M4Q8B5NHUM;
-				INFOPLIST_FILE = DesafioConcrete/Info.plist;
+				INFOPLIST_FILE = DesafioConcrete/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -390,12 +671,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gustavo.leite.DesafioConcrete;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		ECFD979F2389D6D2003D2799 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 370D7FB1A0D93B86EEB32246 /* Pods-DesafioConcreteTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -418,6 +700,7 @@
 		};
 		ECFD97A02389D6D2003D2799 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B501EDFBC3FB52E9586D2D2 /* Pods-DesafioConcreteTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
