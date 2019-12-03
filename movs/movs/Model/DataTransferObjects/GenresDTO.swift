@@ -9,11 +9,11 @@
 
 import Foundation
 
-struct GenresDTO: Codable {
+struct GenresDTO: Codable, Equatable {
     let genres: [GenreDTO]
 }
 
-struct GenreDTO: Codable {
+struct GenreDTO: Codable, Equatable {
     let id: Int
     let name: String
 }

@@ -17,7 +17,6 @@
 		D9FBF7272395355200C09F2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF7262395355200C09F2C /* AppDelegate.swift */; };
 		D9FBF7302395355600C09F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9FBF72F2395355600C09F2C /* Assets.xcassets */; };
 		D9FBF7332395355600C09F2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9FBF7312395355600C09F2C /* LaunchScreen.storyboard */; };
-		D9FBF73E2395355600C09F2C /* movsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF73D2395355600C09F2C /* movsTests.swift */; };
 		D9FBF760239539CA00C09F2C /* MoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF75F239539CA00C09F2C /* MoviesController.swift */; };
 		D9FBF76223953A7000C09F2C /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF76123953A7000C09F2C /* MovieCell.swift */; };
 		D9FBF76423953A9000C09F2C /* LoadingMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF76323953A9000C09F2C /* LoadingMovieCell.swift */; };
@@ -38,6 +37,8 @@
 		D9FBF79A2395417900C09F2C /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF7992395417900C09F2C /* Movie.swift */; };
 		D9FBF7A22395422400C09F2C /* movsSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF7A12395422400C09F2C /* movsSnapshotTests.swift */; };
 		D9FBF7B02395424000C09F2C /* movsFunctionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF7AF2395424000C09F2C /* movsFunctionalTests.swift */; };
+		D9FE791B2397009A0000C0C7 /* MovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FE791A2397009A0000C0C7 /* MovieTests.swift */; };
+		D9FE791E239700E40000C0C7 /* DataTransferObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FE791D239700E40000C0C7 /* DataTransferObjectsTests.swift */; };
 		E4C4D8439EBD161CBDFE2792 /* Pods_movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D1B3B19C91A544C8393439 /* Pods_movs.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,7 +99,6 @@
 		D9FBF7322395355600C09F2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9FBF7342395355600C09F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9FBF7392395355600C09F2C /* movsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9FBF73D2395355600C09F2C /* movsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movsTests.swift; sourceTree = "<group>"; };
 		D9FBF73F2395355600C09F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9FBF75F239539CA00C09F2C /* MoviesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesController.swift; sourceTree = "<group>"; };
 		D9FBF76123953A7000C09F2C /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
@@ -124,6 +124,8 @@
 		D9FBF7AD2395424000C09F2C /* movsFunctionalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movsFunctionalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9FBF7AF2395424000C09F2C /* movsFunctionalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movsFunctionalTests.swift; sourceTree = "<group>"; };
 		D9FBF7B12395424000C09F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9FE791A2397009A0000C0C7 /* MovieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTests.swift; sourceTree = "<group>"; };
+		D9FE791D239700E40000C0C7 /* DataTransferObjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferObjectsTests.swift; sourceTree = "<group>"; };
 		F275AFF99F2B0B42CF4095BA /* Pods-movs-movsFunctionalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movs-movsFunctionalTests.debug.xcconfig"; path = "Target Support Files/Pods-movs-movsFunctionalTests/Pods-movs-movsFunctionalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F7ED863A606F4319F5255384 /* Pods-movs-Tests-movsFunctionalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movs-Tests-movsFunctionalTests.debug.xcconfig"; path = "Target Support Files/Pods-movs-Tests-movsFunctionalTests/Pods-movs-Tests-movsFunctionalTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -242,7 +244,7 @@
 		D9FBF73C2395355600C09F2C /* movsTests */ = {
 			isa = PBXGroup;
 			children = (
-				D9FBF73D2395355600C09F2C /* movsTests.swift */,
+				D9FE791C239700B80000C0C7 /* Model */,
 				D9FBF73F2395355600C09F2C /* Info.plist */,
 			);
 			path = movsTests;
@@ -374,6 +376,15 @@
 			path = movsFunctionalTests;
 			sourceTree = "<group>";
 		};
+		D9FE791C239700B80000C0C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D9FE791A2397009A0000C0C7 /* MovieTests.swift */,
+				D9FE791D239700E40000C0C7 /* DataTransferObjectsTests.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -471,6 +482,7 @@
 					};
 					D9FBF7382395355600C09F2C = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 						TestTargetID = D9FBF7222395355200C09F2C;
 					};
 					D9FBF79E2395422400C09F2C = {
@@ -731,7 +743,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9FBF73E2395355600C09F2C /* movsTests.swift in Sources */,
+				D9FE791B2397009A0000C0C7 /* MovieTests.swift in Sources */,
+				D9FE791E239700E40000C0C7 /* DataTransferObjectsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,6 +955,7 @@
 			baseConfigurationReference = 7A61C18A82403EFF467933E8 /* Pods-movsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XP4ML92KUD;
 				INFOPLIST_FILE = movsTests/Info.plist;
@@ -953,6 +967,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.emer.movsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movs.app/movs";
@@ -964,6 +979,7 @@
 			baseConfigurationReference = A5B87FEADCF7D3E6139F9417 /* Pods-movsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XP4ML92KUD;
 				INFOPLIST_FILE = movsTests/Info.plist;

@@ -15,7 +15,7 @@ class Movie {
     let releaseDate: String
     let description: String
     let posterPath: String
-    let genres: [String]
+    let genres: Set<String>
     let isFavorite: Bool
 
     init(movie: MovieDTO) {

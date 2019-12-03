@@ -20,3 +20,12 @@ struct MoviesRequestDTO: Codable {
         case totalPages = "total_pages"
     }
 }
+
+extension MoviesRequestDTO: Equatable {
+    static func == (lhs: MoviesRequestDTO, rhs: MoviesRequestDTO) -> Bool {
+        return lhs.page == rhs.page &&
+            lhs.movies == rhs.movies &&
+            lhs.totalResults == rhs.totalResults &&
+            lhs.totalPages == rhs.totalPages
+    }
+}

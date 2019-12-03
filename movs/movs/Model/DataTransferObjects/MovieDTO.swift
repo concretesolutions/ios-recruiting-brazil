@@ -9,7 +9,7 @@
 
 import Foundation
 
-struct MovieDTO: Codable {
+struct MovieDTO: Codable, Equatable {
     let id: Int
     let title: String
     let releaseDate: String
