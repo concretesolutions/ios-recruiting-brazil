@@ -9,11 +9,22 @@
 
 import Foundation
 
-struct Movie {
+class Movie {
     let id: Int
     let title: String
     let releaseDate: String
     let description: String
     let posterPath: String
-    let genres: [Genre]
+    let genres: [String]
+    let isFavorite: Bool
+
+    init(movie: MovieDTO) {
+        id = movie.id
+        title = movie.title
+        releaseDate = String(movie.releaseDate.prefix(4))
+        description = movie.description
+        posterPath = movie.posterPath
+        genres = []
+        isFavorite = false
+    }
 }
