@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import Combine
 
 class MovieListViewController: UIViewController {
     var viewModel: MovieListViewModel = MovieListViewModel()
+    let screen = MovieListViewControllerScreen(frame: UIScreen.main.bounds)
     
     override func loadView() {
-        let view = MovieListViewControllerScreen(frame: UIScreen.main.bounds)
+        screen.collectionView.dataSource = self
+        screen.collectionView.delegate = self
         
-        view.collectionView.dataSource = self
-        view.collectionView.delegate = self
-        
-        self.view = view
+        self.view = screen
         
         let search = UISearchController(searchResultsController: nil)
         search.obscuresBackgroundDuringPresentation = false
@@ -29,6 +29,15 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        _ = self.viewModel.$movieCount
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.perform(#selector(self?.loadCollectionView), with: nil, afterDelay: 1.0)
+            }
+    }
+    
+    @objc func loadCollectionView() {
+        self.screen.collectionView.reloadData()
     }
 }
 
@@ -46,7 +55,7 @@ extension MovieListViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.viewModel = cellViewModel
+        cell.setViewModel(cellViewModel)
         
         return cell
     }
@@ -66,5 +75,11 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDel
         navigationController?.pushViewController(detailsView, animated: true)
         
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.viewModel.movieCount - 1 {
+            self.viewModel.fetchMovies()
+        }
     }
 }

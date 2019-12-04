@@ -13,6 +13,10 @@ enum FavoriteButtonType {
     case unfavorite
 }
 
+protocol FavoriteButtonDelegate: class {
+    func click()
+}
+
 class FavoriteButton: UIButton {
     var type: FavoriteButtonType! {
         didSet {
@@ -23,9 +27,18 @@ class FavoriteButton: UIButton {
         }
     }
     
-    convenience init(type: FavoriteButtonType) {
-        self.init(frame: .zero)
-        
-        self.type = type
+    weak var delegate: FavoriteButtonDelegate?
+    
+    init() {
+        super.init(frame: .zero)
+        addTarget(nil, action: #selector(click), for: .touchUpInside)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func click() {
+        delegate?.click()
     }
 }

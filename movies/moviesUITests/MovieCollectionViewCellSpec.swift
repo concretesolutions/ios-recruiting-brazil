@@ -25,9 +25,11 @@ class MovieCollectionViewCellSpec: QuickSpec {
                         movie.favorite = false
 
                         let viewModel = MovieCellViewModel(of: movie)
+                        let frame = CGRect(x: 0, y: 0, width: 250, height: 375)
                         
-                        sut = MovieCollectionViewCell(with: viewModel)
-                        sut.frame = CGRect(x: 0, y: 0, width: 250, height: 375)
+                        sut = MovieCollectionViewCell(frame: frame)
+                        
+                        sut.setViewModel(viewModel)
                     }
                     
                     it("should have the expected look and feel.") {
@@ -40,9 +42,11 @@ class MovieCollectionViewCellSpec: QuickSpec {
                         movie.favorite = true
 
                         let viewModel = MovieCellViewModel(of: movie)
+                        let frame = CGRect(x: 0, y: 0, width: 250, height: 375)
                         
-                        sut = MovieCollectionViewCell(with: viewModel)
-                        sut.frame = CGRect(x: 0, y: 0, width: 250, height: 375)
+                        sut = MovieCollectionViewCell(frame: frame)
+                        
+                        sut.setViewModel(viewModel)
                     }
                     
                     it("should have the expected look and feel.") {

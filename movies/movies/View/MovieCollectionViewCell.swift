@@ -8,13 +8,12 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 class MovieCollectionViewCell: UICollectionViewCell {
-    public var viewModel: MovieCellViewModel! {
+    private var viewModel: MovieCellViewModel! {
         didSet {
-            self.posterImageView.image = UIImage(data: self.viewModel.poster)
             self.titleLabel.text = self.viewModel.title
-            self.favoriteButton.type = self.viewModel.favorite ? .favorite  : .unfavorite
         }
     }
     
@@ -27,8 +26,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "Title"
-        view.textAlignment = .center
-        view.numberOfLines = 0
         return view
     }()
     
@@ -40,20 +37,35 @@ class MovieCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    convenience init(with viewModel: MovieCellViewModel) {
-        self.init(frame: .zero)
-        
-        defer {
-            self.viewModel = viewModel
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setupView()
+        favoriteButton.delegate = self
     }
     
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setViewModel(_ viewModel: MovieCellViewModel) {
+        self.viewModel = viewModel
+        self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
         
-        setupView()
+        _ = self.viewModel.$favorite
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] favorite in
+                self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
+            }
+    }
+    
+    private func downloadPoster() {
+        URLSession.shared.dataTask(with: self.viewModel.posterURL) { (data, _, _) in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.posterImageView.image = UIImage(data: data)
+            }
+        }.resume()
     }
 }
 
@@ -84,11 +96,18 @@ extension MovieCollectionViewCell: CodeView {
         
         titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+            make.right.equalTo(favoriteButton.snp.left)
         }
     }
     
     func setupAdditionalConfiguration() {
         backgroundColor = .systemYellow
+    }
+}
+
+extension MovieCollectionViewCell: FavoriteButtonDelegate {
+    func click() {
+        self.viewModel.toggleFavorite()
     }
 }

@@ -28,16 +28,11 @@ class FavoriteMovieCellViewModel: ObservableObject {
         return self.movie.overview
     }
     
-    @Published var poster: Data = Data()
+    var posterURL: URL {
+        return self.movie.posterURL
+    }
 
     init(of movie: Movie) {
         self.movie = movie
-    }
-    
-    private func downloadPoster() {
-        URLSession.shared.dataTask(with: self.movie.posterURL) { (data, _, _) in
-            guard let data = data else { return }
-            self.poster = data
-        }
     }
 }

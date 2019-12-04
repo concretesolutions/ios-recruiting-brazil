@@ -11,12 +11,12 @@ import UIKit
 class MovieDetailsViewControllerScreen: UIView {
     public var viewModel: MovieDetailsViewModel! {
         didSet {
-            self.posterImageView.image = UIImage(data: self.viewModel.poster)
             self.titleLabel.text = self.viewModel.title
             self.favoriteButton.type = self.viewModel.favorite ? .favorite  : .unfavorite
             self.dateLabel.text = self.viewModel.date
             self.genresLabel.text = self.viewModel.genres
             self.overviewLabel.text = self.viewModel.overview
+//            downloadPoster()
         }
     }
     
@@ -31,7 +31,7 @@ class MovieDetailsViewControllerScreen: UIView {
         return view
     }()
     
-    let favoriteButton = FavoriteButton(type: .unfavorite)
+    let favoriteButton = FavoriteButton()
     
     let titleDivider = Divider()
     
@@ -63,6 +63,15 @@ class MovieDetailsViewControllerScreen: UIView {
         }
         
         setupView()
+    }
+    
+    private func downloadPoster() {
+        URLSession.shared.dataTask(with: self.viewModel.posterURL) { (data, _, _) in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.posterImageView.image = UIImage(data: data)
+            }
+        }.resume()
     }
 }
 
