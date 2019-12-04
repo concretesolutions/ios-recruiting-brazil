@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+protocol CodeView {
+    func buildViewHierarchy()
+    func setupConstratins()
+    func setupAdditionalConfiguration()
+    func setupView()
+}
+
+extension CodeView {
+    func setupView() {
+        self.buildViewHierarchy()
+        self.setupConstratins()
+        self.setupAdditionalConfiguration()
+    }
+    
+    func setupAdditionalConfiguration() {}
+}
