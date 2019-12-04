@@ -6,6 +6,10 @@
 //  Copyright © 2019 jacquelinealves. All rights reserved.
 //
 
+public struct GenresResponse: Codable {
+    public let genres: [Genre]?
+}
+
 public struct Genre: Codable {
     public let id: Int
     public let name: String

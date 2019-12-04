@@ -10,5 +10,5 @@ public struct MoviesResponse: Codable {
     public let page: Int
     public let totalResults: Int
     public let totalPages: Int
-    public let results: [Movie]
+    public let results: [MovieDTO]
 }

@@ -29,12 +29,12 @@ class MovieDetailsViewModel: ObservableObject {
     }
     
     var genres: String {
-        guard let genres = self.movie.genres?.reduce("", { (genres, genre) -> String in
-            "\(genres), \(genre.name)"
+        guard let genres = self.movie.genreIds?.reduce("", { (genres, genre) -> String in
+            "\(genres), \(MovieService.genres[genre] ?? "")"
         }) else {
             return ""
         }
-        
+
         return String(genres.dropFirst())
     }
     
@@ -42,7 +42,10 @@ class MovieDetailsViewModel: ObservableObject {
         return self.movie.overview
     }
     
-    @Published var poster: Data = Data()
+    var posterURL: URL {
+        return self.movie.posterURL
+    }
+    
     @Published var favorite: Bool
 
     init(of movie: Movie) {
@@ -52,12 +55,5 @@ class MovieDetailsViewModel: ObservableObject {
     
     public func toggleFavorite() {
         self.movie.favorite.toggle()
-    }
-    
-    private func downloadPoster() {
-        URLSession.shared.dataTask(with: self.movie.posterURL) { (data, _, _) in
-            guard let data = data else { return }
-            self.poster = data
-        }
     }
 }

@@ -21,8 +21,10 @@ class MovieListViewModel: ObservableObject {
         fetchMovies()
     }
     
-    private func fetchMovies() {
-        self.movies = MockedDataProvider.shared.popularMovies
+    public func fetchMovies() {
+        DataProvider.shared.fetchMovies { movies in
+            self.movies.append(contentsOf: movies)
+        }
     }
     
     public func viewModelForMovie(at index: Int) -> MovieCellViewModel? {

@@ -11,10 +11,10 @@ import UIKit
 class FavoriteMovieTableViewCell: UITableViewCell {
     public var viewModel: FavoriteMovieCellViewModel! {
         didSet {
-            self.posterImageView.image = UIImage(data: self.viewModel.poster)
             self.titleLabel.text = self.viewModel.title
             self.dateLabel.text = self.viewModel.date
             self.overviewLabel.text = self.viewModel.overview
+//            downloadPoster()
         }
     }
     
@@ -47,20 +47,29 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     }()
     
     convenience init(with viewModel: FavoriteMovieCellViewModel) {
-           self.init(frame: .zero)
-           
-           defer {
-               self.viewModel = viewModel
-           }
-           
-           setupView()
-       }
-       
-       override func didMoveToSuperview() {
-           super.didMoveToSuperview()
-           
-           setupView()
-       }
+        self.init(frame: .zero)
+        
+        defer {
+            self.viewModel = viewModel
+        }
+        
+        setupView()
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        
+        setupView()
+    }
+    
+    private func downloadPoster() {
+        URLSession.shared.dataTask(with: self.viewModel.posterURL) { (data, _, _) in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.posterImageView.image = UIImage(data: data)
+            }
+        }.resume()
+    }
 }
 
 extension FavoriteMovieTableViewCell: CodeView {
