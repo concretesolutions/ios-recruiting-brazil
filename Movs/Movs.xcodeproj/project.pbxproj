@@ -13,8 +13,12 @@
 		772A8B8A23945B8D00303636 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 772A8B8923945B8D00303636 /* Assets.xcassets */; };
 		772A8B8D23945B8D00303636 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772A8B8B23945B8D00303636 /* LaunchScreen.storyboard */; };
 		772A8B9D23945DEC00303636 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772A8B9C23945DEC00303636 /* ViewController.swift */; };
+		776AD8B1239595D600521410 /* PopularMovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B0239595D600521410 /* PopularMovieDTO.swift */; };
+		776AD8B323959F8D00521410 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B223959F8D00521410 /* Movie.swift */; };
+		776AD8BA2395A34600521410 /* ConfigurationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B92395A34600521410 /* ConfigurationDTO.swift */; };
 		77C453332395781800545CF7 /* MovsCodeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C453322395781800545CF7 /* MovsCodeViewTests.swift */; };
 		77C453412395782300545CF7 /* MovsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C453402395782300545CF7 /* MovsTests.swift */; };
+		77F9F56B2396876F00D7DAF0 /* GenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9F56A2396876F00D7DAF0 /* GenreDTO.swift */; };
 		E6C0EC1128A07E29096883F3 /* Pods_Movs_Tests_MovsCodeViewTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7806CF6BCA457CBBC2EE79A7 /* Pods_Movs_Tests_MovsCodeViewTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,12 +51,16 @@
 		772A8B8C23945B8D00303636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		772A8B8E23945B8D00303636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		772A8B9C23945DEC00303636 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		776AD8B0239595D600521410 /* PopularMovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieDTO.swift; sourceTree = "<group>"; };
+		776AD8B223959F8D00521410 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		776AD8B92395A34600521410 /* ConfigurationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationDTO.swift; sourceTree = "<group>"; };
 		77C453302395781800545CF7 /* MovsCodeViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsCodeViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C453322395781800545CF7 /* MovsCodeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsCodeViewTests.swift; sourceTree = "<group>"; };
 		77C453342395781800545CF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77C4533E2395782300545CF7 /* MovsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C453402395782300545CF7 /* MovsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovsTests.swift; sourceTree = "<group>"; };
 		77C453422395782300545CF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77F9F56A2396876F00D7DAF0 /* GenreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDTO.swift; sourceTree = "<group>"; };
 		7806CF6BCA457CBBC2EE79A7 /* Pods_Movs_Tests_MovsCodeViewTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movs_Tests_MovsCodeViewTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD4F668883C7478F1F053B4 /* Pods-MovsCodeViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsCodeViewTests.release.xcconfig"; path = "Target Support Files/Pods-MovsCodeViewTests/Pods-MovsCodeViewTests.release.xcconfig"; sourceTree = "<group>"; };
 		9124E903706C33728403CD42 /* Pods-MovsCodeViewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsCodeViewTests.debug.xcconfig"; path = "Target Support Files/Pods-MovsCodeViewTests/Pods-MovsCodeViewTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,8 +147,8 @@
 		772A8B9423945BAD00303636 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				778DE79923958B51007FD47A /* Model */,
-				778DE79823958B4C007FD47A /* View */,
+				776AD8AE2395959600521410 /* Model */,
+				776AD8AD2395959200521410 /* View */,
 				772A8B9723945BBE00303636 /* Controller */,
 			);
 			path = Modules;
@@ -162,18 +170,30 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		778DE79823958B4C007FD47A /* View */ = {
+		776AD8AD2395959200521410 /* View */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		778DE79923958B51007FD47A /* Model */ = {
+		776AD8AE2395959600521410 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				776AD8B223959F8D00521410 /* Movie.swift */,
+				776AD8AF2395959A00521410 /* DTO */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		776AD8AF2395959A00521410 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				776AD8B92395A34600521410 /* ConfigurationDTO.swift */,
+				77F9F56A2396876F00D7DAF0 /* GenreDTO.swift */,
+				776AD8B0239595D600521410 /* PopularMovieDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		77C4530D23956A0A00545CF7 /* Recovered References */ = {
@@ -493,7 +513,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				772A8B9D23945DEC00303636 /* ViewController.swift in Sources */,
+				77F9F56B2396876F00D7DAF0 /* GenreDTO.swift in Sources */,
+				776AD8B1239595D600521410 /* PopularMovieDTO.swift in Sources */,
+				776AD8BA2395A34600521410 /* ConfigurationDTO.swift in Sources */,
 				772A8B8123945B8B00303636 /* AppDelegate.swift in Sources */,
+				776AD8B323959F8D00521410 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
