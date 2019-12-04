@@ -21,7 +21,7 @@ final class MoviesViewScreen: UIView {
     
     // MARK: - Properties
     
-    weak var collectionDelegate: MoviesViewController? {
+    weak var collectionDelegate: PopularMoviesViewController? {
         didSet {
             guard let delegate = self.collectionDelegate else { return }
             self.moviesCollectionView.delegate = delegate
@@ -49,7 +49,8 @@ extension MoviesViewScreen: CodeView {
     
     func setupConstraints() {        
         self.moviesCollectionView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.bottom.equalTo(self)
         }
     }
     

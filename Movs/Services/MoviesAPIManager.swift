@@ -47,4 +47,8 @@ class MoviesAPIManager: MoviesAPIDataFetcher {
     func getGenres(completion: @escaping (Data?, Error?) -> Void) {
         self.session.getData(from: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(self.apiKey)&language=en-US", completion: completion)
     }
+    
+    func getImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
+        self.session.getData(from: "https://image.tmdb.org/t/p/w342\(path)", completion: completion)
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  MoviesViewController.swift
+//  PopularMoviesViewController.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 02/12/19.
@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-class MoviesViewController: UIViewController {
+class PopularMoviesViewController: UIViewController {
 
     // MARK: - Attributes and Properties
     
