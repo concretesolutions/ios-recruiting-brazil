@@ -39,21 +39,18 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setupView()
+        favoriteButton.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        
-        setupView()
-        favoriteButton.delegate = self
-    }
-    
     func setViewModel(_ viewModel: MovieCellViewModel) {
         self.viewModel = viewModel
+        self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
         
         _ = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
