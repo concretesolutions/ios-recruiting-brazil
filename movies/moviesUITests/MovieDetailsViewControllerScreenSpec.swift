@@ -17,17 +17,16 @@ class MovieDetailsViewControllerScreenSpec: QuickSpec {
         var sut: MovieDetailsViewControllerScreen!
         
         describe("the 'Details View' ") {
-            var movie = MockedDataProvider.shared.popularMovies.first!
+            let movie = MockedDataProvider.shared.popularMovies.first!
+            let viewModel = MovieDetailsViewModel(of: movie)
+            let frame = UIScreen.main.bounds
             
             context("when is not on favorites list") {
                 beforeEach {
-                    movie.favorite = false
-
-                    let viewModel = MovieDetailsViewModel(of: movie)
-                    let frame = UIScreen.main.bounds
+                    viewModel.favorite = false
                     
-                    sut = MovieDetailsViewControllerScreen(with: viewModel, frame: frame)
-                    
+                    sut = MovieDetailsViewControllerScreen(frame: frame)
+                    sut.setViewModel(viewModel)
                 }
                 
                 it("should have the expected look and feel.") {
@@ -37,13 +36,10 @@ class MovieDetailsViewControllerScreenSpec: QuickSpec {
             
             context("when is on favorites list") {
                 beforeEach {
-                    movie.favorite = true
-
-                    let viewModel = MovieDetailsViewModel(of: movie)
-                    let frame = UIScreen.main.bounds
+                    viewModel.favorite = true
                     
-                    sut = MovieDetailsViewControllerScreen(with: viewModel, frame: frame)
-                    
+                    sut = MovieDetailsViewControllerScreen(frame: frame)
+                    sut.setViewModel(viewModel)
                 }
                 
                 it("should have the expected look and feel.") {

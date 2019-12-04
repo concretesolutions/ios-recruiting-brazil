@@ -37,7 +37,7 @@ class FavoriteListViewModel: ObservableObject {
     
     public func toggleFavoriteMovie(at index: Int) {
         guard index < self.movieCount else { return } // Check if it is an valid index
-        self.movies[index].favorite.toggle()
+        UserDefaults.standard.toggleFavorite(withId: self.movies[index].id)
         self.movies.remove(at: index)
     }
 }

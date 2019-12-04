@@ -17,18 +17,16 @@ class MovieCollectionViewCellSpec: QuickSpec {
         var sut: MovieCollectionViewCell!
 
         describe("the 'Movie Cell' ") {
-            var movie = MockedDataProvider.shared.popularMovies.first!
+            let movie = MockedDataProvider.shared.popularMovies.first!
+            let viewModel = MovieCellViewModel(of: movie)
+            let frame = CGRect(x: 0, y: 0, width: 250, height: 375)
             
             context("when fetched from API ") {
                 context("and is not on favorites list ") {
                     beforeEach {
-                        movie.favorite = false
-
-                        let viewModel = MovieCellViewModel(of: movie)
-                        let frame = CGRect(x: 0, y: 0, width: 250, height: 375)
+                        viewModel.favorite = false
                         
                         sut = MovieCollectionViewCell(frame: frame)
-                        
                         sut.setViewModel(viewModel)
                     }
                     
@@ -39,13 +37,9 @@ class MovieCollectionViewCellSpec: QuickSpec {
                 
                 context("and is on favorites list ") {
                     beforeEach {
-                        movie.favorite = true
-
-                        let viewModel = MovieCellViewModel(of: movie)
-                        let frame = CGRect(x: 0, y: 0, width: 250, height: 375)
+                        viewModel.favorite = true
                         
                         sut = MovieCollectionViewCell(frame: frame)
-                        
                         sut.setViewModel(viewModel)
                     }
                     

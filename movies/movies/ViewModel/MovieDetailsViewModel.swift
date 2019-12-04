@@ -14,11 +14,7 @@ class MovieDetailsViewModel: ObservableObject {
         return $0
     }(DateFormatter())
     
-    private var movie: Movie {
-        didSet {
-            self.favorite = self.movie.favorite
-        }
-    }
+    private var movie: Movie
     
     var title: String {
         return self.movie.title
@@ -50,10 +46,17 @@ class MovieDetailsViewModel: ObservableObject {
 
     init(of movie: Movie) {
         self.movie = movie
-        self.favorite = movie.favorite
+        self.favorite = UserDefaults.standard.isFavorite(self.movie.id)
+               
+        _ = UserDefaults.standard.publisher(for: \.favorites)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                guard let id = self?.movie.id else { return }
+                self?.favorite = UserDefaults.standard.isFavorite(id)
+            })
     }
     
     public func toggleFavorite() {
-        self.movie.favorite.toggle()
+        UserDefaults.standard.toggleFavorite(withId: self.movie.id)
     }
 }

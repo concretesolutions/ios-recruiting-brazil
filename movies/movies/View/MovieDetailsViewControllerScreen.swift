@@ -55,14 +55,26 @@ class MovieDetailsViewControllerScreen: UIView {
         return view
     }()
     
-    convenience init(with viewModel: MovieDetailsViewModel, frame: CGRect = .zero) {
-        self.init(frame: frame)
-        
-        defer {
-            self.viewModel = viewModel
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setupView()
+        favoriteButton.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setViewModel(_ viewModel: MovieDetailsViewModel) {
+        self.viewModel = viewModel
+        self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
+        
+        _ = self.viewModel.$favorite
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] favorite in
+                self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
+            })
     }
     
     private func downloadPoster() {
@@ -75,6 +87,14 @@ class MovieDetailsViewControllerScreen: UIView {
     }
 }
 
+// MARK: - Favorite button delegate
+extension MovieDetailsViewControllerScreen: FavoriteButtonDelegate {
+    func click() {
+        self.viewModel.toggleFavorite()
+    }
+}
+
+// MARK: - Code View
 extension MovieDetailsViewControllerScreen: CodeView {
     func buildViewHierarchy() {
         addSubview(posterImageView)

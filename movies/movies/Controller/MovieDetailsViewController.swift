@@ -9,12 +9,12 @@
 import UIKit
 
 class MovieDetailsViewController: UIViewController {
-    var screen: MovieDetailsViewControllerScreen!
+    var screen: MovieDetailsViewControllerScreen = MovieDetailsViewControllerScreen(frame: UIScreen.main.bounds)
     
     convenience init(viewModel: MovieDetailsViewModel) {
         self.init()
     
-        self.screen = MovieDetailsViewControllerScreen(with: viewModel, frame: UIScreen.main.bounds)
+        self.screen.setViewModel(viewModel)
     }
     
     override func loadView() {
