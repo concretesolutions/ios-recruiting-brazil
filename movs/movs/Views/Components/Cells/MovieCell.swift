@@ -9,4 +9,19 @@
 import UIKit
 
 class MovieCell: UICollectionViewCell {
+    
+    // MARK: - Subviews
+//    lazy var posterImage: PosterImageView = {
+//
+//    }()
+//
+//    lazy var title: UILabel = {
+//
+//    }()
+//
+//    lazy var favoriteButton: UILabel = {
+//
+//    }()
+    
+    // MARK: - Stacks
 }

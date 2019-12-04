@@ -13,14 +13,14 @@ struct MovieDTO: Codable, Equatable {
     let id: Int
     let title: String
     let releaseDate: String
-    let description: String
-    let posterPath: String
+    let synopsis: String
+    let posterPath: String?
     let genreIDS: [Int]
 
     enum CodingKeys: String, CodingKey {
         case id, title
         case releaseDate = "release_date"
-        case description = "overview"
+        case synopsis = "overview"
         case posterPath = "poster_path"
         case genreIDS = "genre_ids"
     }

@@ -13,8 +13,8 @@ class Movie {
     let id: Int
     let title: String
     let releaseDate: String
-    let description: String
-    let posterPath: String
+    let synopsis: String
+    let posterPath: String?
     let genres: Set<String>
     let isFavorite: Bool
 
@@ -22,7 +22,7 @@ class Movie {
         id = movie.id
         title = movie.title
         releaseDate = String(movie.releaseDate.prefix(4))
-        description = movie.description
+        synopsis = movie.synopsis
         posterPath = movie.posterPath
         genres = []
         isFavorite = false

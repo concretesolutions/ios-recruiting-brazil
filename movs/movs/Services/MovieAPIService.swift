@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MovieAPIService {
+final class MovieAPIService {
 
     // API properties
     private static let keyAPI = "ba993d6b1312f03c80a322c3e00fab4d"
@@ -31,8 +31,8 @@ class MovieAPIService {
                 return
             }
             
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
             guard let _ = response, let data = data else {
-                let error = NSError(domain: "error", code: 0, userInfo: nil)
                 completion(.failure(error))
                 return
             }
@@ -40,6 +40,8 @@ class MovieAPIService {
             if let genres = try? JSONDecoder().decode(GenresDTO.self, from: data) {
                 completion(.success(genres))
                 return
+            } else {
+                completion(.failure(error))
             }
         }.resume()
     }
@@ -54,13 +56,14 @@ class MovieAPIService {
         let url = URL(string: stringURL)!
 
         URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
             if let error = error {
                 completion(.failure(error))
                 return
             }
             
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
             guard let _ = response, let data = data else {
-                let error = NSError(domain: "error", code: 0, userInfo: nil)
                 completion(.failure(error))
                 return
             }
@@ -68,6 +71,8 @@ class MovieAPIService {
             if let moviesRequest = try? JSONDecoder().decode(MoviesRequestDTO.self, from: data) {
                 completion(.success(moviesRequest))
                 return
+            } else {
+                completion(.failure(error))
             }
         }.resume()
     }
@@ -87,6 +92,7 @@ class MovieAPIService {
                 return
             }
             
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
             guard let _ = response, let data = data else {
                 let error = NSError(domain: "error", code: 0, userInfo: nil)
                 completion(.failure(error))
@@ -96,6 +102,8 @@ class MovieAPIService {
             if let poster = UIImage(data: data) {
                 completion(.success(poster))
                 return
+            } else {
+                completion(.failure(error))
             }
         }.resume()
     }

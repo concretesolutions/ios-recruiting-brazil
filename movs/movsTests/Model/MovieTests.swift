@@ -21,7 +21,7 @@ class MovieTests: XCTestCase {
         movieDTO = MovieDTO(id: 10,
                             title: "Movie title",
                             releaseDate: "2010-10-10",
-                            description: "Movie description",
+                            synopsis: "Movie synopsis",
                             posterPath: "/poster-url-string",
                             genreIDS: [28, 14])
         movie = Movie(movie: movieDTO)
@@ -38,7 +38,7 @@ class MovieTests: XCTestCase {
         XCTAssertEqual(movie.id, 10)
         XCTAssertEqual(movie.title, "Movie title")
         XCTAssertEqual(movie.releaseDate, "2010")
-        XCTAssertEqual(movie.description, "Movie description")
+        XCTAssertEqual(movie.synopsis, "Movie synopsis")
         XCTAssertEqual(movie.posterPath, "/poster-url-string")
         XCTAssertEqual(movie.genres, ["Action", "Fantasy"])
     }
