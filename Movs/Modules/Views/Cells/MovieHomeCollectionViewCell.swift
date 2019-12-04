@@ -7,17 +7,32 @@
 //
 
 import UIKit
+import SnapKit
 
 class MovieHomeCollectionViewCell: UICollectionViewCell {
 
-    internal var coverImage: UIImageView
-    internal var favoriteButton: UIButton
+    // MARK: - Interface Elements
+    
+    internal lazy var poster: UIImageView = {
+        let poster = UIImageView(frame: .zero)
+        poster.layer.cornerRadius = 4.0
+        poster.layer.masksToBounds = true
+        return poster
+    }()
+    
+    internal lazy var favoriteButton: FavoriteButton = {
+        let button = FavoriteButton(frame: .zero)
+        button.backgroundColor = .white
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.layer.cornerRadius = 12.0
+        button.layer.masksToBounds = true
+        return button
+    }()
+    
+    // MARK: - Initializers and Deinitializers
         
     override required init(frame: CGRect) {
-        self.coverImage = UIImageView(frame: .zero)
-        self.favoriteButton = UIButton(frame: .zero)
         super.init(frame: frame)
-
         self.setupView()
     }
         
@@ -28,12 +43,12 @@ class MovieHomeCollectionViewCell: UICollectionViewCell {
 
 extension MovieHomeCollectionViewCell: CodeView {
     func buildViewHierarchy() {
-        self.contentView.addSubview(self.coverImage)
+        self.contentView.addSubview(self.poster)
         self.contentView.addSubview(self.favoriteButton)
     }
     
     func setupConstraints() {
-        self.coverImage.snp.makeConstraints({ make in
+        self.poster.snp.makeConstraints({ make in
             make.centerX.centerY.equalTo(self)
             make.width.height.equalTo(self)
         })
@@ -42,16 +57,5 @@ extension MovieHomeCollectionViewCell: CodeView {
             make.width.height.equalTo(24.0)
             make.bottom.trailing.equalTo(-8.0)
         })
-    }
-    
-    func setupAdditionalConfiguration() {
-        self.coverImage.layer.cornerRadius = 4.0
-        self.coverImage.layer.masksToBounds = true
-        self.favoriteButton.backgroundColor = .white
-        self.favoriteButton.tintColor = .red
-        self.favoriteButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
-        self.favoriteButton.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 3.0, bottom: 5.0, right: 5.0)
-        self.favoriteButton.layer.cornerRadius = 12.0
-        self.favoriteButton.layer.masksToBounds = true
     }
 }

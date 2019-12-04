@@ -1,5 +1,5 @@
 //
-//  MoviesCollectionViewModel.swift
+//  MoviesControllerViewModel.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 03/12/19.
@@ -11,9 +11,15 @@ import Combine
 
 class MoviesControllerViewModel {
     
+    // MARK: - Models
+    
+    private var movies: [MovieDTO] = []
+    
+    // MARK: - Properties
+    
     internal let apiManager = MoviesAPIManager()
     internal let decoder = JSONDecoder()
-    internal var isFetchingData: Bool = false
+    internal var isMovieFetchInProgress: Bool = false
     
     // MARK: - Publishers
     
@@ -27,23 +33,37 @@ class MoviesControllerViewModel {
         self.numberOfMovies = numberOfMovies
     }
     
-    func requestMorePopularMovies() {
-        self.isFetchingData = true
-        
+    // MARK: - MovieCellViewModel
+    
+    func viewModelForCellAt(indexPath: IndexPath) -> MovieCellViewModel {        
+        return MovieCellViewModel(movie: self.movies[indexPath.row])
+    }
+    
+    // MARK: - Fetch Methods
+    
+    func shouldFetchMovies() -> Bool {
+        return self.currentPage < 500 && !self.isMovieFetchInProgress
+    }
+
+    func fetchPopularMovies() {
+        self.isMovieFetchInProgress = true
         self.apiManager.getPopularMovies(page: self.currentPage + 1, completion: { (data, error) in
             if let data = data {
                 do {
                     let popularMovies = try self.decoder.decode(PopularMoviesDTO.self, from: data)
-                    self.currentPage = popularMovies.page
-                    self.numberOfMovies += popularMovies.movies.count
+                    self.updateData(with: popularMovies)
                 } catch {
                     print(error)
                 }
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                self.isFetchingData = false
-            })
+            self.isMovieFetchInProgress = false
         })
+    }
+    
+    private func updateData(with popularMovies: PopularMoviesDTO) {
+        self.currentPage = popularMovies.page
+        self.movies += popularMovies.movies
+        self.numberOfMovies += popularMovies.movies.count
     }
 }

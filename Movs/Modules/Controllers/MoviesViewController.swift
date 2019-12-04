@@ -20,31 +20,37 @@ class MoviesViewController: UIViewController {
     
     var moviesSubscriber: AnyCancellable?
     
+    // MARK: - Initializers and Deinitializers
+    
+    deinit {
+        self.moviesSubscriber?.cancel()
+    }
+    
     // MARK: - ViewController life cycle
     
     override func loadView() {
         super.loadView()
         self.view = self.screen
         self.screen.collectionDelegate = self
-        self.bind(to: self.viewModel)
         self.title = "Home"
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel.requestMorePopularMovies()
+        self.bind(to: self.viewModel)
+        
+        if self.viewModel.shouldFetchMovies() {
+            self.viewModel.fetchPopularMovies()
+        }
     }
+    
+    // MARK: - Binding
     
     func bind(to viewModel: MoviesControllerViewModel) {
         self.moviesSubscriber = viewModel.$numberOfMovies.sink(receiveValue: { _ in
             DispatchQueue.main.async {
-                self.screen.moviesCollection.performBatchUpdates({
-                    self.screen.moviesCollection.reloadSections(IndexSet(integer: 0))
+                self.screen.moviesCollectionView.performBatchUpdates({
+                    self.screen.moviesCollectionView.reloadSections(IndexSet(integer: 0))
                 })
             }
         })

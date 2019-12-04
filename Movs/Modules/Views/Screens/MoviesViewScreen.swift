@@ -12,20 +12,21 @@ final class MoviesViewScreen: UIView {
     
     // MARK: - Interface elements
     
-    lazy var moviesCollection: MoviesCollectionView = {
-        let moviesCollection = MoviesCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    lazy var moviesCollectionView: UICollectionView = {
+        let moviesCollection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        moviesCollection.backgroundColor = UIColor.clear
         moviesCollection.register(MovieHomeCollectionViewCell.self, forCellWithReuseIdentifier: "movies")
         return moviesCollection
     }()
     
-    // MARK: -
+    // MARK: - Properties
     
     weak var collectionDelegate: MoviesViewController? {
         didSet {
             guard let delegate = self.collectionDelegate else { return }
-            self.moviesCollection.delegate = delegate
-            self.moviesCollection.dataSource = delegate
-            self.moviesCollection.prefetchDataSource = delegate
+            self.moviesCollectionView.delegate = delegate
+            self.moviesCollectionView.dataSource = delegate
+            self.moviesCollectionView.prefetchDataSource = delegate
         }
     }
     
@@ -43,11 +44,11 @@ final class MoviesViewScreen: UIView {
 
 extension MoviesViewScreen: CodeView {
     func buildViewHierarchy() {
-        self.addSubview(self.moviesCollection)
+        self.addSubview(self.moviesCollectionView)
     }
     
     func setupConstraints() {        
-        self.moviesCollection.snp.makeConstraints { make in
+        self.moviesCollectionView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalTo(self.safeAreaLayoutGuide)
         }
     }

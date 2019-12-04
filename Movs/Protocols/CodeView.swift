@@ -9,20 +9,15 @@
 import Foundation
 
 @objc protocol CodeView {
-    @objc optional func buildViewHierarchy()
-    @objc optional func setupConstraints()
+    func buildViewHierarchy()
+    func setupConstraints()
     @objc optional func setupAdditionalConfiguration()
 }
 
 extension CodeView {
     func setupView() {
-        if let buildViewHierarchy = self.buildViewHierarchy {
-            buildViewHierarchy()
-        }
-        
-        if let setupConstraints = self.setupConstraints {
-            setupConstraints()
-        }
+        self.buildViewHierarchy()
+        self.setupConstraints()
         
         if let setupAdditionalConfiguration = self.setupAdditionalConfiguration {
             setupAdditionalConfiguration()

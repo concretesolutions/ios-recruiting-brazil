@@ -20,7 +20,7 @@ extension MoviesViewController: UICollectionViewDataSource {
             fatalError("Failed to dequeue movies cell as MovieHomeCollectionViewCell")
         }
         
-        cell.coverImage.image = UIImage(named: "placeholder")
+        cell.poster.image = UIImage(named: "placeholder")
         return cell
     }
 }
@@ -47,9 +47,9 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
 
 extension MoviesViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        let rows = indexPaths.filter({ $0.row == self.viewModel.numberOfMovies - 1 })
-        if !rows.isEmpty {
-            self.viewModel.requestMorePopularMovies()
+        let rows = indexPaths.filter({ $0.row >= self.viewModel.numberOfMovies - 1 })
+        if !rows.isEmpty && self.viewModel.shouldFetchMovies() {
+            self.viewModel.fetchPopularMovies()
         }
     }
 }

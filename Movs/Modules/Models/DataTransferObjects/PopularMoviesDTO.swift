@@ -9,13 +9,20 @@
 import Foundation
 
 class PopularMoviesDTO: Decodable {
+    
+    // MARK: - Attributes
+    
     let page: Int
     let movies: [MovieDTO]
+    
+    // MARK: - Enums
     
     enum CodingKeys: String, CodingKey {
         case page
         case results
     }
+    
+    // MARK: - Initializers and Deinitializers
     
     init(page: Int, movies: [MovieDTO]) {
         self.page = page

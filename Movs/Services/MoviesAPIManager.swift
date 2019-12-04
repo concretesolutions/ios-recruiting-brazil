@@ -8,17 +8,34 @@
 
 import Foundation
 
-class MoviesAPIManager: NSObject, MoviesAPIDataFetcher {
+class MoviesAPIManager: MoviesAPIDataFetcher {
 
     // MARK: - Attributes
     
     private let apiKey: String = "eea991e8b8c8738c849cddf195bc2813"
     private let session: NetworkSession
+    internal var genres: [GenreDTO] = []
     
     // MARK: - Initializers and Deinitializers
     
     init(session: NetworkSession = URLSession.shared) {
         self.session = session
+        self.fetchGenresList()
+    }
+    
+    // MARK: - Fetch methods
+    
+    func fetchGenresList() {
+        self.getGenres(completion: { (data, error) in
+            if let data = data {
+                do {
+                    let genresList = try JSONDecoder().decode(GenresListDTO.self, from: data)
+                    self.genres = genresList.genres
+                } catch {
+                    print(error)
+                }
+            }
+        })
     }
     
     // MARK: - Request Methods
