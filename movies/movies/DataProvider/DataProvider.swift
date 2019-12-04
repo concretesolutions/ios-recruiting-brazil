@@ -19,13 +19,15 @@ class DataProvider: DataProvidable, ObservableObject {
     private var page: Int = 1
     
     @Published var popularMovies: [Movie] = []
-    var favoriteMovies: [Movie] {
-        return popularMovies.filter { UserDefaults.standard.isFavorite($0.id) == true }
-    }
+    @Published var favoriteMovies: [Movie] = []
     
-//    init() {
-//        fetchMovies()
-//    }
+    init() {
+        _ = UserDefaults.standard.publisher(for: \.favorites)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] favoritesIDs in
+                self?.fetchFavorites(withIDs: favoritesIDs)
+            })
+    }
     
     public func fetchMovies(completion: @escaping (_ movies: [Movie]) -> Void) {
         
@@ -40,6 +42,30 @@ class DataProvider: DataProvidable, ObservableObject {
             case .failure(let error):
                 print(error) // TO DO: Handle error
             }
+        }
+    }
+    
+    public func fetchFavorites(withIDs ids: [Int]) {
+        let group = DispatchGroup()
+        var favorites = [Movie]()
+        
+        for id in ids {
+            group.enter()
+            
+            MovieService.fecthMovie(withId: id) { result in
+                switch result {
+                case .failure(let error):
+                    print(error) // TO DO: Handle error
+                case .success(let movie):
+                    favorites.append(movie)
+                }
+                
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.favoriteMovies = favorites
         }
     }
 }

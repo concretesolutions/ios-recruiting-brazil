@@ -22,7 +22,11 @@ class FavoriteListViewModel: ObservableObject {
     }
     
     private func fetchMovies() {
-        self.movies = MockedDataProvider.shared.favoriteMovies
+        _ = DataProvider.shared.$favoriteMovies
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] movies in
+                self?.movies = movies
+            }
     }
     
     public func viewModelForMovie(at index: Int) -> FavoriteMovieCellViewModel? {

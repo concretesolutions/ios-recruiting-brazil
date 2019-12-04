@@ -11,14 +11,13 @@ import UIKit
 class FavoriteListViewController: UIViewController {
     
     var viewModel: FavoriteListViewModel = FavoriteListViewModel()
+    let screen = FavoriteListViewControllerScreen(frame: UIScreen.main.bounds)
     
     override func loadView() {
-        let view = FavoriteListViewControllerScreen(frame: UIScreen.main.bounds)
+        screen.tableView.dataSource = self
+        screen.tableView.delegate = self
         
-        view.tableView.dataSource = self
-        view.tableView.delegate = self
-        
-        self.view = view
+        self.view = screen
         
         let search = UISearchController(searchResultsController: nil)
         search.obscuresBackgroundDuringPresentation = false
@@ -30,6 +29,15 @@ class FavoriteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        _ = self.viewModel.$movieCount
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.perform(#selector(self?.loadTableView), with: nil, afterDelay: 1.0)
+            }
+    }
+    
+    @objc func loadTableView() {
+        self.screen.tableView.reloadData()
     }
 }
 
