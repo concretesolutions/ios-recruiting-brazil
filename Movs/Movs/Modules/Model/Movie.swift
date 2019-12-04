@@ -33,6 +33,6 @@ class Movie {
 
 extension Movie: CustomStringConvertible {
     var description: String {
-        "Movie{\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(self.posterPath)\n" + "\tgenreIds: \(self.genreIds)\n" + "\tisFavourite: \(self.isFavourite)\n" + "}\n"
+        "Movie{\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(String(describing: self.posterPath))\n" + "\tgenreIds: \(self.genreIds)\n" + "\tisFavourite: \(self.isFavourite)\n" + "}\n"
     }
 }
