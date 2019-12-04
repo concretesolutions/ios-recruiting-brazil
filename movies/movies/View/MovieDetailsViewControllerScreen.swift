@@ -16,7 +16,7 @@ class MovieDetailsViewControllerScreen: UIView {
             self.dateLabel.text = self.viewModel.date
             self.genresLabel.text = self.viewModel.genres
             self.overviewLabel.text = self.viewModel.overview
-//            downloadPoster()
+            self.posterImageView.loadImage(from: self.viewModel.posterURL)
         }
     }
     
@@ -75,15 +75,6 @@ class MovieDetailsViewControllerScreen: UIView {
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
             })
-    }
-    
-    private func downloadPoster() {
-        URLSession.shared.dataTask(with: self.viewModel.posterURL) { (data, _, _) in
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                self.posterImageView.image = UIImage(data: data)
-            }
-        }.resume()
     }
 }
 
