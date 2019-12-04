@@ -8,15 +8,26 @@
 
 import UIKit
 
-final class MoviesViewScreen: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+final class MoviesViewScreen: UIView {
+    
+    // MARK: - Interface elements
     
     lazy var moviesCollection: MoviesCollectionView = {
         let moviesCollection = MoviesCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        moviesCollection.delegate = moviesCollection
-        moviesCollection.dataSource = self
         moviesCollection.register(MovieHomeCollectionViewCell.self, forCellWithReuseIdentifier: "movies")
         return moviesCollection
     }()
+    
+    // MARK: -
+    
+    weak var collectionDelegate: MoviesViewController? {
+        didSet {
+            guard let delegate = self.collectionDelegate else { return }
+            self.moviesCollection.delegate = delegate
+            self.moviesCollection.dataSource = delegate
+            self.moviesCollection.prefetchDataSource = delegate
+        }
+    }
     
     // MARK: - Initializers and Deinitializers
     
@@ -27,19 +38,6 @@ final class MoviesViewScreen: UIView, UICollectionViewDelegate, UICollectionView
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movies", for: indexPath) as? MovieHomeCollectionViewCell else {
-            fatalError()
-        }
-        
-        cell.coverImage.image = UIImage(named: "placeholder")
-        return cell
     }
 }
 

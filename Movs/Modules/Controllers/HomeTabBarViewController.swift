@@ -1,5 +1,5 @@
 //
-//  MVTabBarViewController.swift
+//  HomeTabBarViewController.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 02/12/19.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MVTabBarViewController: UITabBarController {
+class HomeTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let firstViewController = HomeViewController()
+        let firstViewController = MoviesViewController()
         firstViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         self.viewControllers = [firstViewController]
         // Do any additional setup after loading the view.
