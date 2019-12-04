@@ -54,9 +54,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         _ = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] favorite in
+            .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
-            }
+            })
     }
     
     private func downloadPoster() {
@@ -69,6 +69,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: - Favorite button delegate
+extension MovieCollectionViewCell: FavoriteButtonDelegate {
+    func click() {
+        self.viewModel.toggleFavorite()
+    }
+}
+
+// MARK: - Code View
 extension MovieCollectionViewCell: CodeView {
     func buildViewHierarchy() {
         addSubview(posterImageView)
@@ -106,8 +114,3 @@ extension MovieCollectionViewCell: CodeView {
     }
 }
 
-extension MovieCollectionViewCell: FavoriteButtonDelegate {
-    func click() {
-        self.viewModel.toggleFavorite()
-    }
-}

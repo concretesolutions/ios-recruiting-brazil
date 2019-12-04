@@ -20,7 +20,7 @@ class DataProvider: DataProvidable, ObservableObject {
     
     @Published var popularMovies: [Movie] = []
     var favoriteMovies: [Movie] {
-        return popularMovies.filter { $0.favorite == true }
+        return popularMovies.filter { UserDefaults.standard.isFavorite($0.id) == true }
     }
     
 //    init() {

@@ -27,7 +27,6 @@ public struct Movie: Codable {
     public var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
     }
-    public var favorite: Bool
     
     init(_ dto: MovieDTO) {
         self.id = dto.id
@@ -36,7 +35,6 @@ public struct Movie: Codable {
         self.overview = dto.overview
         self.releaseDate = dto.releaseDate
         self.genreIds = dto.genreIds
-        self.favorite = false
     }
     
     init(id: Int, title: String, posterPath: String?, overview: String, releaseDate: Date, genreIds: [Int], favorite: Bool = false) {
@@ -46,6 +44,5 @@ public struct Movie: Codable {
         self.overview = overview
         self.releaseDate = releaseDate
         self.genreIds = genreIds
-        self.favorite = favorite
     }
 }

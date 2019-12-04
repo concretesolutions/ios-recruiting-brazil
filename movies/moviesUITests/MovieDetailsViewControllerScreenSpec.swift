@@ -21,13 +21,13 @@ class MovieDetailsViewControllerScreenSpec: QuickSpec {
             
             context("when is not on favorites list") {
                 beforeEach {
-                    movie.favorite = false
-
                     let viewModel = MovieDetailsViewModel(of: movie)
+                    viewModel.favorite = false
+                    
                     let frame = UIScreen.main.bounds
                     
-                    sut = MovieDetailsViewControllerScreen(with: viewModel, frame: frame)
-                    
+                    sut = MovieDetailsViewControllerScreen(frame: frame)
+                    sut.setViewModel(viewModel)
                 }
                 
                 it("should have the expected look and feel.") {
@@ -37,13 +37,13 @@ class MovieDetailsViewControllerScreenSpec: QuickSpec {
             
             context("when is on favorites list") {
                 beforeEach {
-                    movie.favorite = true
-
                     let viewModel = MovieDetailsViewModel(of: movie)
+                    viewModel.favorite = true
+                    
                     let frame = UIScreen.main.bounds
                     
-                    sut = MovieDetailsViewControllerScreen(with: viewModel, frame: frame)
-                    
+                    sut = MovieDetailsViewControllerScreen(frame: frame)
+                    sut.setViewModel(viewModel)
                 }
                 
                 it("should have the expected look and feel.") {
