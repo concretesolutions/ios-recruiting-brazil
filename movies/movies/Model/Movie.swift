@@ -15,6 +15,7 @@ public struct MovieDTO: Codable {
     public let overview: String
     public let releaseDate: Date
     public let genreIds: [Int]?
+    public let genres: [Genre]?
 }
 
 public struct Movie: Codable {
@@ -34,7 +35,12 @@ public struct Movie: Codable {
         self.posterPath = dto.posterPath
         self.overview = dto.overview
         self.releaseDate = dto.releaseDate
-        self.genreIds = dto.genreIds
+        
+        if let genres = dto.genres {
+            self.genreIds = genres.map { $0.id }
+        } else {
+            self.genreIds = dto.genreIds
+        }
     }
     
     init(id: Int, title: String, posterPath: String?, overview: String, releaseDate: Date, genreIds: [Int], favorite: Bool = false) {

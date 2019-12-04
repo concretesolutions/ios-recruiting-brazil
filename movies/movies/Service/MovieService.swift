@@ -61,6 +61,37 @@ class MovieService {
         }
     }
     
+    /// Fetch movie with id from API
+    /// - Parameters:
+    ///   - id: ID of the movie to fecth
+    ///   - params: Request params
+    ///   - completion: Results handler
+    static public func fecthMovie(withId id: Int, params: [String: String]? = nil, completion: @escaping (Result<Movie, Error>) -> Void) {
+        guard let urlComponents = URLComponents(string: "\(baseAPIURL)/movie/\(id)") else { // URL to request from
+            completion(.failure(MovieError.invalidURL))
+            return
+        }
+        
+        MovieService.request(urlComponents: urlComponents, params: params) { result in // Request data from url with params
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+                
+            case .success(let data):
+                do {
+                    let movieResponse = try self.jsonDecoder.decode(MovieDTO.self, from: data) // Try to decode response
+                    let movie = Movie(movieResponse)
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(movie))
+                    }
+                } catch {
+                    completion(.failure(MovieError.serializationError))
+                }
+            }
+        }
+    }
+    
     /// Fetch genres and their ids from API
     static public func fetchGenres() {
         guard let urlComponents = URLComponents(string: "\(baseAPIURL)/genre/movie/list") else { return } // URL to request from
