@@ -9,7 +9,7 @@
 import UIKit
 
 class MoviesCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -26,7 +26,8 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         return "movieCollection"
     }
     
-    func setup(item: String) {
-        movieName.text = item
+    func setup(item: Movie) {
+        movieImage.downloaded(from: "https://image.tmdb.org/t/p/w300\(item.posterPath)", contentMode: .scaleAspectFill)
+        movieName.text = item.title
     }
 }

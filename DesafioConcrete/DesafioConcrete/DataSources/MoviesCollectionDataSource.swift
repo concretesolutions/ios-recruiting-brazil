@@ -9,19 +9,24 @@
 import UIKit
 
 final class MoviesCollectionDataSource: NSObject {
-    var items: [String] = []
+    
     weak var collectionView: UICollectionView?
     weak var delegate: UICollectionViewDelegate?
+    var items: [Movie] = []
     
-    required init(items: [String], collectionView: UICollectionView, delegate: UICollectionViewDelegate) {
+    required init(items: [Movie], collectionView: UICollectionView, delegate: UICollectionViewDelegate) {
         super.init()
         self.items = items
         self.collectionView = collectionView
         self.delegate = delegate
-        
         collectionView.register(MoviesCollectionViewCell.nib(), forCellWithReuseIdentifier: MoviesCollectionViewCell.identifier())
         self.collectionView?.dataSource = self
         self.collectionView?.delegate = self.delegate
+        self.collectionView?.reloadData()
+    }
+    
+    func reloadData(with items: [Movie]) {
+        self.items = items
         self.collectionView?.reloadData()
     }
 }

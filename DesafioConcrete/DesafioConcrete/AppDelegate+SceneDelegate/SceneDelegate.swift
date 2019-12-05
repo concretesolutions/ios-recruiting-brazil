@@ -19,12 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBar = UITabBarController()
         let moviesController = MoviesRouter.createModule()
-        let favoritosController = FavoritesRouter.createModule()
+        let favoritesController = FavoritesRouter.createModule()
         let moviesNavigation = UINavigationController(rootViewController: moviesController)
-        let favoritosNavigation = UINavigationController(rootViewController: favoritosController)
+        let favoritesNavigation = UINavigationController(rootViewController: favoritesController)
         moviesNavigation.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "list_icon")?.withRenderingMode(.alwaysOriginal))
-        favoritosNavigation.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "favorite_empty_icon")?.withRenderingMode(.alwaysOriginal))
-        tabBar.viewControllers = [moviesNavigation, favoritosNavigation]
+        favoritesNavigation.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "favorite_empty_icon")?.withRenderingMode(.alwaysOriginal))
+        tabBar.viewControllers = [moviesNavigation, favoritesNavigation]
         
         ApperanceHelper.customizeNavigationBar()
         ApperanceHelper.customizeTabBar()

@@ -8,6 +8,7 @@ protocol MoviesViewProtocol: class {
 
     var presenter: MoviesPresenterProtocol?  { get set }
 
+    func requestCollectionSetup()
     /* Presenter -> ViewController */
 }
 
@@ -17,9 +18,10 @@ protocol MoviesPresenterProtocol: class {
     var interactor: MoviesInteractorInputProtocol? { get set }
     var collectionViewDatasource: MoviesCollectionDataSource? { get set }
     var collectionViewDelegate: MoviesCollectionDelegate? { get set }
-    var movies: [String]? { get set }
+    var movies: [Movie]? { get set }
     
     func setupView(with collection: UICollectionView)
+    func requestData()
     /* ViewController -> Presenter */
 }
 
@@ -27,7 +29,7 @@ final class MoviesPresenter: MoviesPresenterProtocol {
     
     var collectionViewDatasource: MoviesCollectionDataSource?
     var collectionViewDelegate: MoviesCollectionDelegate?
-    var movies: [String]? = ["Thor", "Homem Aranha", "X-men", "Coringa", "Thor", "Homem Aranha", "X-men", "Coringa"]
+    var movies: [Movie]?
     
     weak private var view: MoviesViewProtocol?
     var interactor: MoviesInteractorInputProtocol?
@@ -39,22 +41,30 @@ final class MoviesPresenter: MoviesPresenterProtocol {
         self.interactor = interactor
         self.router = router
     }
-
+    
     func setupView(with collection: UICollectionView) {
         guard let movies = movies else { return }
         self.setupCollectionView(with: collection, using: movies)
     }
     
-    func setupCollectionView(with collection: UICollectionView, using movies: [String]) {
-        self.movies = movies
+    func setupCollectionView(with collection: UICollectionView, using movies: [Movie]) {
         collectionViewDelegate = MoviesCollectionDelegate(self)
         collectionViewDatasource = MoviesCollectionDataSource(items: movies, collectionView: collection, delegate: collectionViewDelegate!)
+    }
+    
+    func requestData() {
+        guard let interactor = interactor else { return }
+        interactor.requestDataToApi()
     }
 }
 
 //MARK: - MoviesInteractorOutputProtocol
 extension MoviesPresenter: MoviesInteractorOutputProtocol {
-    
+    func sendData(movies: [Movie]) {
+        self.movies = movies
+        guard let view = view else { return }
+        view.requestCollectionSetup()
+    }
 }
 
  //MARK: - MoviesDelegate
