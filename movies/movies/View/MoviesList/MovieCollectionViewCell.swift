@@ -9,11 +9,13 @@
 import UIKit
 import SnapKit
 import Combine
+import Kingfisher
 
 class MovieCollectionViewCell: UICollectionViewCell {
     private var viewModel: MovieCellViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
+            self.posterImageView.kf.setImage(with: self.viewModel.posterURL, options: [.transition(.fade(0.3))])
         }
     }
     
@@ -57,15 +59,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
             })
-    }
-    
-    private func downloadPoster() {
-        URLSession.shared.dataTask(with: self.viewModel.posterURL) { (data, _, _) in
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                self.posterImageView.image = UIImage(data: data)
-            }
-        }.resume()
     }
 }
 

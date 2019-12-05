@@ -172,30 +172,8 @@ class MovieService {
         
         urlComponents.queryItems = queryItems
         
-        guard let url = urlComponents.url else { // Check it the final url is valid
-            completion(.failure(MovieError.invalidURL))
-            return
+        URLSession.shared.request(from: urlComponents.url, params: params) { result in
+            completion(result)
         }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil { // Check if request returned an error
-                completion(.failure(MovieError.apiError))
-                return
-            }
-            
-            // Check if the http response status code is >= 200 and <= 300
-            guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-                completion(.failure(MovieError.invalidResponse))
-                return
-            }
-            
-            guard let data = data else { // Check if returned any data
-                completion(.failure(MovieError.noData))
-                return
-            }
-            
-            completion(.success(data))
-            
-        }.resume()
     }
 }

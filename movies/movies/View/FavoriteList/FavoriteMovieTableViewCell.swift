@@ -14,7 +14,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
             self.titleLabel.text = self.viewModel.title
             self.dateLabel.text = self.viewModel.date
             self.overviewLabel.text = self.viewModel.overview
-//            downloadPoster()
+            self.posterImageView.kf.setImage(with: self.viewModel.posterURL, options: [.transition(.fade(0.3))])
         }
     }
     
@@ -60,15 +60,6 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         super.didMoveToSuperview()
         
         setupView()
-    }
-    
-    private func downloadPoster() {
-        URLSession.shared.dataTask(with: self.viewModel.posterURL) { (data, _, _) in
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                self.posterImageView.image = UIImage(data: data)
-            }
-        }.resume()
     }
 }
 
