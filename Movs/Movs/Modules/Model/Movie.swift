@@ -36,3 +36,9 @@ extension Movie: CustomStringConvertible {
         "Movie{\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(String(describing: self.posterPath))\n" + "\tgenreIds: \(self.genreIds)\n" + "\tisFavourite: \(self.isFavourite)\n" + "}\n"
     }
 }
+
+extension Movie: Equatable {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.posterPath == rhs.posterPath && lhs.genreIds == rhs.genreIds && lhs.isFavourite == rhs.isFavourite
+    }
+}

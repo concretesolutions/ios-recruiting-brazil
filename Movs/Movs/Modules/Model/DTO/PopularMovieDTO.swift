@@ -22,3 +22,9 @@ struct PopularMovieDTO: Decodable {
         case id, title, overview, genreIds = "genre_ids", releaseDate = "release_date", posterPath = "poster_path"
     }
 }
+
+extension PopularMovieDTO: Equatable {
+    static func == (lhs: PopularMovieDTO, rhs: PopularMovieDTO) -> Bool {
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseDate == rhs.releaseDate && lhs.posterPath == rhs.posterPath && lhs.genreIds == rhs.genreIds
+    }
+}

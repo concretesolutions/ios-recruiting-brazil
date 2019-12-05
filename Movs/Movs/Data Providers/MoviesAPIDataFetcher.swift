@@ -150,11 +150,6 @@ extension MoviesAPIDataFetcher: MoviesDataFetcherProtocol {
     }
 
     func requestPopularMovies(fromPage page: Int, completion: @escaping (_ movies: [PopularMovieDTO], _ error: Error?) -> Void) {
-        guard page > 0 && page <= 500 else {
-            completion([], MovieAPIError(description: "Invalid page number"))
-            return
-        }
-
         let url = self.baseURL + "/movie/popular" + self.apiKey + "&page=\(page)"
         self.requestData(with: url) { (data, error) in
             if let error = error {

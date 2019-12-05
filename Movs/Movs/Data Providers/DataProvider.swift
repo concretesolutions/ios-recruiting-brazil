@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DataProvider {
 
@@ -118,4 +119,44 @@ class DataProvider {
             }
         }
     }
+
+    func getSmallImage(forIndex index: Int, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+        guard index >= 0 && index < self.movies.count else {
+            completion(nil, DataProviderError(description: "Index out of range"))
+            return
+        }
+
+        guard let path = self.movies[index].posterPath else {
+            completion(nil, DataProviderError(description: "The movie has no image"))
+            return
+        }
+
+        // TODO: check cache
+
+        self.moviesDataFetcher.requestSmallImage(withPath: path) { (image, error) in
+            completion(image, error)
+        }
+    }
+
+    func getBigImage(forIndex index: Int, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
+        guard index > 0 && index < self.movies.count else {
+            completion(nil, DataProviderError(description: "Index out of range"))
+            return
+        }
+
+        guard let path = self.movies[index].posterPath else {
+            completion(nil, DataProviderError(description: "The movie has no image"))
+            return
+        }
+
+        // TODO: check cache
+
+        self.moviesDataFetcher.requestBigImage(withPath: path) { (image, error) in
+            completion(image, error)
+        }
+    }
+}
+
+struct DataProviderError: Error {
+    let description: String
 }
