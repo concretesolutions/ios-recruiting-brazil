@@ -9,12 +9,13 @@
 import UIKit
 import SnapKit
 import Combine
+import Kingfisher
 
 class MovieCollectionViewCell: UICollectionViewCell {
     private var viewModel: MovieCellViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
-            self.posterImageView.loadImage(from: self.viewModel.posterURL)
+            self.posterImageView.kf.setImage(with: self.viewModel.posterURL, options: [.transition(.fade(0.3))])
         }
     }
     
