@@ -1,5 +1,5 @@
 //
-//  GenresListDTO.swift
+//  GenresDTO.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 04/12/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GenresListDTO: Decodable {
+class GenresDTO: Decodable {
     
     // MARK: - Attributes
     
@@ -27,8 +27,7 @@ class GenresListDTO: Decodable {
     }
     
     required public convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: GenresListDTO.CodingKeys.self)
-        
+        let container = try decoder.container(keyedBy: GenresDTO.CodingKeys.self)
         let genres: [GenreDTO] = try container.decode([GenreDTO].self, forKey: .genres)
         self.init(genres: genres)
     }

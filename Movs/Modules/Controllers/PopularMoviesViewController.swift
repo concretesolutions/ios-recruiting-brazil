@@ -11,9 +11,9 @@ import Combine
 
 class PopularMoviesViewController: UIViewController {
 
-    // MARK: - Attributes and Properties
+    // MARK: - Properties
     
-    internal let screen = MoviesViewScreen()
+    internal let screen = PopularMoviesViewScreen()
     internal let viewModel = MoviesControllerViewModel()
     
     // MARK: - Subscribers
@@ -31,8 +31,13 @@ class PopularMoviesViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.view = self.screen
-        self.screen.collectionDelegate = self
-        self.title = "Home"
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.screen.moviesCollectionView.delegate = self
+        self.screen.moviesCollectionView.dataSource = self
+        self.screen.moviesCollectionView.prefetchDataSource = self
     }
         
     override func viewWillAppear(_ animated: Bool) {

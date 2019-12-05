@@ -8,6 +8,16 @@
 
 import UIKit
 
+// MARK: - UICollectionViewDelegate
+
+extension PopularMoviesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewModel = self.viewModel.detailsViewModelForItemAt(indexPath: indexPath)
+        let controller = MovieDetailsViewController(viewModel: viewModel)
+        self.present(controller, animated: true, completion: nil)
+    }
+}
+
 // MARK: - UICollectionViewDataSource
 
 extension PopularMoviesViewController: UICollectionViewDataSource {
@@ -16,11 +26,11 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movies", for: indexPath) as? MovieHomeCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movies", for: indexPath) as? PopularMovieCollectionViewCell else {
             fatalError("Failed to dequeue movies cell as MovieHomeCollectionViewCell")
         }
         
-        cell.viewModel = self.viewModel.viewModelForCellAt(indexPath: indexPath)
+        cell.viewModel = self.viewModel.cellViewModelForItemAt(indexPath: indexPath)
         cell.poster.image = UIImage.from(color: UIColor.secondarySystemBackground)
         return cell
     }

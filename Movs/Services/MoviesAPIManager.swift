@@ -29,7 +29,7 @@ class MoviesAPIManager: MoviesAPIDataFetcher {
         self.getGenres(completion: { (data, error) in
             if let data = data {
                 do {
-                    let genresList = try JSONDecoder().decode(GenresListDTO.self, from: data)
+                    let genresList = try JSONDecoder().decode(GenresDTO.self, from: data)
                     self.genres = genresList.genres
                 } catch {
                     print(error)
@@ -48,7 +48,7 @@ class MoviesAPIManager: MoviesAPIDataFetcher {
         self.session.getData(from: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(self.apiKey)&language=en-US", completion: completion)
     }
     
-    func getImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
-        self.session.getData(from: "https://image.tmdb.org/t/p/w342\(path)", completion: completion)
+    func getImage(path: String, widthSize: Int, completion: @escaping (Data?, Error?) -> Void) {
+        self.session.getData(from: "https://image.tmdb.org/t/p/w\(widthSize)\(path)", completion: completion)
     }
 }

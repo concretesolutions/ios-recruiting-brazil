@@ -10,7 +10,7 @@
 
 import Foundation
 
-class GenreDTO: Decodable {
+class GenreDTO: NSObject, Decodable {
     
     // MARK: - Attributes
     

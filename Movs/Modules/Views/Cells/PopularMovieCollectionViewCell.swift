@@ -1,5 +1,5 @@
 //
-//  MovieHomeCollectionViewCell.swift
+//  PopularMovieCollectionViewCell.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 02/12/19.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Combine
 
-class MovieHomeCollectionViewCell: UICollectionViewCell {
+class PopularMovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Interface Elements
     
@@ -30,8 +30,8 @@ class MovieHomeCollectionViewCell: UICollectionViewCell {
     
     internal lazy var favoriteButton: FavoriteButton = {
         let button = FavoriteButton(frame: .zero)
-        button.backgroundColor = .white
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.backgroundColor = UIColor.white
+        button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         button.layer.cornerRadius = 12.0
         button.layer.masksToBounds = true
         return button
@@ -42,11 +42,7 @@ class MovieHomeCollectionViewCell: UICollectionViewCell {
     internal var viewModel: MovieCellViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
-            self.posterSubscriber = self.viewModel.$poster.sink(receiveValue: { image in
-                DispatchQueue.main.async {
-                    self.poster.image = image
-                }
-            })
+            self.bind(to: self.viewModel)
         }
     }
     
@@ -68,9 +64,19 @@ class MovieHomeCollectionViewCell: UICollectionViewCell {
     deinit {
         self.posterSubscriber?.cancel()
     }
+    
+    // MARK: - Binding
+    
+    func bind(to viewModel: MovieCellViewModel) {
+        self.posterSubscriber = viewModel.$posterImage.sink(receiveValue: { image in
+            DispatchQueue.main.async {
+                self.poster.image = image
+            }
+        })
+    }
 }
 
-extension MovieHomeCollectionViewCell: CodeView {
+extension PopularMovieCollectionViewCell: CodeView {
     func buildViewHierarchy() {
         self.contentView.addSubview(self.poster)
         self.contentView.addSubview(self.favoriteButton)

@@ -1,5 +1,5 @@
 //
-//  MoviesViewScreen.swift
+//  PopularMoviesViewScreen.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 02/12/19.
@@ -8,27 +8,16 @@
 
 import UIKit
 
-final class MoviesViewScreen: UIView {
+final class PopularMoviesViewScreen: UIView {
     
     // MARK: - Interface elements
     
     lazy var moviesCollectionView: UICollectionView = {
         let moviesCollection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         moviesCollection.backgroundColor = UIColor.clear
-        moviesCollection.register(MovieHomeCollectionViewCell.self, forCellWithReuseIdentifier: "movies")
+        moviesCollection.register(PopularMovieCollectionViewCell.self, forCellWithReuseIdentifier: "movies")
         return moviesCollection
     }()
-    
-    // MARK: - Properties
-    
-    weak var collectionDelegate: PopularMoviesViewController? {
-        didSet {
-            guard let delegate = self.collectionDelegate else { return }
-            self.moviesCollectionView.delegate = delegate
-            self.moviesCollectionView.dataSource = delegate
-            self.moviesCollectionView.prefetchDataSource = delegate
-        }
-    }
     
     // MARK: - Initializers and Deinitializers
     
@@ -42,7 +31,7 @@ final class MoviesViewScreen: UIView {
     }
 }
 
-extension MoviesViewScreen: CodeView {
+extension PopularMoviesViewScreen: CodeView {
     func buildViewHierarchy() {
         self.addSubview(self.moviesCollectionView)
     }

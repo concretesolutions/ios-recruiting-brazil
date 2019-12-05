@@ -15,6 +15,7 @@ class MovieDTO: Decodable {
     // MARK: - Attributes
     
     let id: Int
+    let backdropPath: String?
     let genreIDS: [Int]
     let popularity: Double
     let posterPath: String?
@@ -27,6 +28,7 @@ class MovieDTO: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case popularity
+        case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
         case genreIDS = "genre_ids"
         case releaseDate = "release_date"
@@ -36,8 +38,9 @@ class MovieDTO: Decodable {
     
     // MARK: - Initializers and Deinitializers
     
-    init(id: Int, genreIDS: [Int], popularity: Double, posterPath: String?, releaseDate: String, title: String, overview: String) {
+    init(id: Int, backdropPath: String?, genreIDS: [Int], popularity: Double, posterPath: String?, releaseDate: String, title: String, overview: String) {
         self.id = id
+        self.backdropPath = backdropPath
         self.genreIDS = genreIDS
         self.popularity = popularity
         self.posterPath = posterPath
@@ -50,6 +53,7 @@ class MovieDTO: Decodable {
         let container = try decoder.container(keyedBy: MovieDTO.CodingKeys.self)
         
         let id: Int = try container.decode(Int.self, forKey: .id)
+        let backdropPath: String? = try container.decode(String?.self, forKey: .backdropPath)
         let genreIDS: [Int] = try container.decode([Int].self, forKey: .genreIDS)
         let popularity: Double = try container.decode(Double.self, forKey: .popularity)
         let posterPath: String? = try container.decode(String?.self, forKey: .posterPath)
@@ -57,6 +61,6 @@ class MovieDTO: Decodable {
         let title: String = try container.decode(String.self, forKey: .title)
         let overview: String = try container.decode(String.self, forKey: .overview)
         
-        self.init(id: id, genreIDS: genreIDS, popularity: popularity, posterPath: posterPath, releaseDate: releaseDate, title: title, overview: overview)
+        self.init(id: id, backdropPath: backdropPath, genreIDS: genreIDS, popularity: popularity, posterPath: posterPath, releaseDate: releaseDate, title: title, overview: overview)
     }
 }

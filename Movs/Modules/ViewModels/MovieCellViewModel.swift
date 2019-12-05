@@ -12,37 +12,49 @@ import UIKit
 
 class MovieCellViewModel {
     
+    // MARK: - Model
+    
+    private let movie: Movie
+    
     // MARK: - Properties
     
-    internal let apiManager = MoviesAPIManager()
+    internal let apiManager: MoviesAPIManager
     internal let decoder = JSONDecoder()
     
     // MARK: - Attributes
     
     public let id: Int
-    @Published var poster: UIImage?
-    public let releaseDate: String
+    public let releaseYear: String
     public let title: String
-    public let overview: String
+    public let summary: String
+    
+    // MARK: - Publishers
+    
+    @Published var posterImage: UIImage?
     
     // MARK: - Initializers
     
-    init(movie: MovieDTO) {
+    init(movie: Movie, apiManager: MoviesAPIManager) {
+        self.movie = movie
+        self.apiManager = apiManager
+        
         self.id = movie.id
-        self.poster = UIImage.from(color: .secondarySystemBackground)
-        self.releaseDate = movie.releaseDate
+        self.posterImage = UIImage.from(color: .secondarySystemBackground)
+        self.releaseYear = String(date: movie.releaseDate, components: [.year])
         self.title = movie.title
-        self.overview = movie.overview
+        self.summary = movie.summary
         
         if let imagePath = movie.posterPath {
-            self.requestImage(path: imagePath)
+            self.fetchPosterImage(path: imagePath)
         }
     }
     
-    func requestImage(path: String) {
-        self.apiManager.getImage(path: path, completion: { (data, error) in
+    // MARK: - Fetch methods
+    
+    func fetchPosterImage(path: String) {
+        self.apiManager.getImage(path: path, widthSize: 342, completion: { (data, error) in
             if let data = data {
-                self.poster = UIImage(data: data)
+                self.posterImage = UIImage(data: data)
             }
         })
     }

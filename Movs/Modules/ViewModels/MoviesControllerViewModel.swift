@@ -13,7 +13,7 @@ class MoviesControllerViewModel {
     
     // MARK: - Models
     
-    private var movies: [MovieDTO] = []
+    private var movies: [Movie] = []
     
     // MARK: - Properties
     
@@ -35,8 +35,12 @@ class MoviesControllerViewModel {
     
     // MARK: - MovieCellViewModel
     
-    func viewModelForCellAt(indexPath: IndexPath) -> MovieCellViewModel {        
-        return MovieCellViewModel(movie: self.movies[indexPath.row])
+    func cellViewModelForItemAt(indexPath: IndexPath) -> MovieCellViewModel {
+        return MovieCellViewModel(movie: self.movies[indexPath.row], apiManager: self.apiManager)
+    }
+    
+    func detailsViewModelForItemAt(indexPath: IndexPath) -> MovieDetailsControllerViewModel {
+        return MovieDetailsControllerViewModel(movie: self.movies[indexPath.row], apiManager: self.apiManager)
     }
     
     // MARK: - Fetch Methods
@@ -63,7 +67,7 @@ class MoviesControllerViewModel {
     
     private func updateData(with popularMovies: PopularMoviesDTO) {
         self.currentPage = popularMovies.page
-        self.movies += popularMovies.movies
+        self.movies += popularMovies.movies.map({ Movie(movieDTO: $0, genres: self.apiManager.genres) })
         self.numberOfMovies += popularMovies.movies.count
     }
 }
