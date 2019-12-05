@@ -49,7 +49,7 @@ final class MoviesPresenter: MoviesPresenterProtocol {
     
     func setupCollectionView(with collection: UICollectionView, using movies: [Movie]) {
         collectionViewDelegate = MoviesCollectionDelegate(self)
-        collectionViewDatasource = MoviesCollectionDataSource(items: movies, collectionView: collection, delegate: collectionViewDelegate!)
+        collectionViewDatasource = MoviesCollectionDataSource(with: movies, collectionView: collection, delegate: collectionViewDelegate!)
     }
     
     func requestData() {
@@ -70,6 +70,7 @@ extension MoviesPresenter: MoviesInteractorOutputProtocol {
  //MARK: - MoviesDelegate
 extension MoviesPresenter: MoviesDelegate {
     func didSelectMovie(at: IndexPath) {
-        print("Ola")
+        guard let movies = movies else { return }
+        router.showDetails(of: movies[at.row])
     }
 }

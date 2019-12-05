@@ -9,6 +9,6 @@
 import Foundation
 
 struct Genre: Decodable {
-    let id: Double
+    let id: Int
     let name: String
 }

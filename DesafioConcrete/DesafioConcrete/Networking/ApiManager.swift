@@ -8,13 +8,11 @@
 
 import Foundation
 import Alamofire
-import AlamofireImage
 
 class ApiManager: ApiMethodsProtocol {
     
     static var movieURL: String = "https://api.themoviedb.org/3/movie/popular"
     static var genreURL: String = "https://api.themoviedb.org/3/genre/movie/list"
-    static var imageURL: String = "https://image.tmdb.org/t/p/w500"
     static var apiKey: String =  "0570b0af82a221b5511cf9b99c4ffc37"
     static var language: String = "en-US"
     

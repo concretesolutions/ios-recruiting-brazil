@@ -1,31 +1,30 @@
-//  Created Gustavo Garcia Leite on 03/12/19.
+//  Created Gustavo Garcia Leite on 05/12/19.
 //  Copyright © 2019 Gustavo Garcia Leite. All rights reserved.
-
 import UIKit
 
-
-final class MoviesViewController: UIViewController {
-    
+final class MovieDetailsViewController: UIViewController {
     //MARK: - Variables
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var detalisTableView: UITableView!
     var activityIndicatorView = UIActivityIndicatorView()
-    var presenter: MoviesPresenterProtocol?
+    var presenter: MovieDetailsPresenterProtocol?
 }
 
 //MARK: - Life cycles
-extension MoviesViewController {
+extension MovieDetailsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let presenter = presenter else { return }
         activityIndicatorView.frame = UIScreen.main.bounds
         self.view.addSubview(activityIndicatorView)
         activityIndicatorView.startAnimating()
-        presenter.requestData()
+        presenter.getGenres()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = "Movies"
+        self.title = "Movie"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,12 +40,11 @@ extension MoviesViewController {
     }
 }
 
-
-//MARK: - MoviesView
-extension MoviesViewController: MoviesViewProtocol {
-    func requestCollectionSetup() {
+//MARK: - MovieDetailsViewProtocol
+extension MovieDetailsViewController: MovieDetailsViewProtocol {
+    func requestViewSetup() {
         guard let presenter = presenter else { return }
         activityIndicatorView.stopAnimating()
-        presenter.setupView(with: collectionView)
+        presenter.setupView(with: detalisTableView, and: posterImageView)
     }
 }

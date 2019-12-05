@@ -4,14 +4,14 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-
+    
+    //MARK: - Variables
 	var presenter: FavoritesPresenterProtocol?
 
 }
 
+//MARK: - Life cycles
 extension FavoritesViewController {
-    // MARK: - All life cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -34,6 +34,7 @@ extension FavoritesViewController {
     }
 }
 
+//MARK: - FavoritesViewProtocol
 extension FavoritesViewController: FavoritesViewProtocol {
     
 }

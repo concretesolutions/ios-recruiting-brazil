@@ -14,7 +14,7 @@ final class MoviesCollectionDataSource: NSObject {
     weak var delegate: UICollectionViewDelegate?
     var items: [Movie] = []
     
-    required init(items: [Movie], collectionView: UICollectionView, delegate: UICollectionViewDelegate) {
+    required init(with items: [Movie], collectionView: UICollectionView, delegate: UICollectionViewDelegate) {
         super.init()
         self.items = items
         self.collectionView = collectionView
@@ -24,14 +24,10 @@ final class MoviesCollectionDataSource: NSObject {
         self.collectionView?.delegate = self.delegate
         self.collectionView?.reloadData()
     }
-    
-    func reloadData(with items: [Movie]) {
-        self.items = items
-        self.collectionView?.reloadData()
-    }
 }
 
 extension MoviesCollectionDataSource: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
@@ -39,7 +35,7 @@ extension MoviesCollectionDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier(), for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
         let item = items[indexPath.item]
-        cell.setup(item: item)
+        cell.setup(with: item)
         return cell
     }
 }
