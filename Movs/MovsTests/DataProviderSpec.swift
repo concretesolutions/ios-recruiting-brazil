@@ -6,14 +6,12 @@
 //  Copyright © 2019 Carolina Lopes. All rights reserved.
 //
 
-//swiftlint:disable file_length
 import Quick
 import Nimble
 import UIKit
 
 @testable import Movs
 
-//swiftlint:disable type_body_length
 class DataProviderSpec: QuickSpec {
 
     // MARK: - Sut
@@ -27,7 +25,6 @@ class DataProviderSpec: QuickSpec {
     // MARK: - Tests
 
     //swiftlint:disable function_body_length
-    //swiftlint:disable cyclomatic_complexity
     override func spec() {
         describe("DataProvider") {
 
@@ -86,24 +83,6 @@ class DataProviderSpec: QuickSpec {
 
                                 done()
                             }
-                        }
-                    }
-                }
-
-                it("should not be able to get any small image") {
-                    waitUntil { done in
-                        self.sut.getSmallImage(forIndex: 0) { (_, error) in
-                            expect(error).toNot(beNil())
-                            done()
-                        }
-                    }
-                }
-
-                it("should not be able to get any big image") {
-                    waitUntil { done in
-                        self.sut.getBigImage(forIndex: 1) { (_, error) in
-                            expect(error).toNot(beNil())
-                            done()
                         }
                     }
                 }
@@ -218,163 +197,16 @@ class DataProviderSpec: QuickSpec {
                             }
                         }
                     }
-
-                    context("when requesting a small image") {
-
-                        context("for a valid index") {
-
-                            context("for a movie with a posterPath") {
-
-                                it("should get the movie's poster image") {
-                                    waitUntil { done in
-                                        self.sut.getSmallImage(forIndex: 0) { image, error in
-                                            if error != nil {
-                                                fail("Expected call to suceed, but it failed")
-                                            } else if let image = image {
-                                                expect(image) == UIImage(systemName: "sun.min")
-                                                done()
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            context("for a movie without a posterPath") {
-
-                                it("should get an error") {
-                                    waitUntil { done in
-                                        self.sut.getSmallImage(forIndex: 1) { _, error in
-                                            expect(error).toNot(beNil())
-                                            done()
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        context("for an invalid index") {
-
-                            it("should get an error") {
-                                waitUntil { done in
-                                    self.sut.getSmallImage(forIndex: -1) { _, error in
-                                        expect(error).toNot(beNil())
-                                        done()
-                                    }
-                                }
-                            }
-
-                            it("should get an error") {
-                                waitUntil { done in
-                                    self.sut.getSmallImage(forIndex: 2) { _, error in
-                                        expect(error).toNot(beNil())
-                                        done()
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    context("when requesting a big image") {
-
-                        context("with a valid index") {
-
-                            context("for a movie with a posterPath") {
-
-                                it("should get the movie's poster image") {
-                                    waitUntil { done in
-                                        self.sut.getBigImage(forIndex: 1) { image, error in
-                                            if error != nil {
-                                                fail("Expected call to suceed, but it failed")
-                                            } else if let image = image {
-                                                expect(image) == UIImage(systemName: "moon")
-                                                done()
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            context("for a movie without a posterPath") {
-
-                                it("should get an error") {
-                                    waitUntil { done in
-                                        self.sut.getBigImage(forIndex: 0) { _, error in
-                                            expect(error).toNot(beNil())
-                                            done()
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        context("with an invalid index") {
-
-                            it("should get an error") {
-                                waitUntil { done in
-                                    self.sut.getSmallImage(forIndex: -1) { _, error in
-                                        expect(error).toNot(beNil())
-                                        done()
-                                    }
-                                }
-                            }
-
-                            it("should get an error") {
-                                waitUntil { done in
-                                    self.sut.getSmallImage(forIndex: 2) { _, error in
-                                        expect(error).toNot(beNil())
-                                        done()
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
 
                 // MARK: With errors
 
                 context("when the data fetcher returns an error") {
 
-                    context("when the error comes from the general setup") {
-
-                        beforeEach {
-                            self.mockGenres()
-                            self.mockMovies()
-
-                            waitUntil { done in
-                                self.sut.setup { error in
-                                    if error != nil {
-                                        fail("Expected setup to suceed, but it failed")
-                                    }
-
-                                    done()
-                                }
-                            }
-                        }
-
-                        it("should not be able to get any small image") {
-                            waitUntil { done in
-                                self.sut.getSmallImage(forIndex: 0) { (_, error) in
-                                    expect(error).toNot(beNil())
-                                    done()
-                                }
-                            }
-                        }
-
-                        it("should not be able to get any big image") {
-                            waitUntil { done in
-                                self.sut.getBigImage(forIndex: 1) { (_, error) in
-                                    expect(error).toNot(beNil())
-                                    done()
-                                }
-                            }
-                        }
-                    }
-
                     context("when the error comes from the genre setup") {
 
                         beforeEach {
                             self.mockMovies()
-                            self.mockImages()
 
                             waitUntil { done in
                                 self.sut.setup { error in
@@ -401,7 +233,6 @@ class DataProviderSpec: QuickSpec {
 
                         beforeEach {
                             self.mockGenres()
-                            self.mockImages()
 
                             waitUntil { done in
                                 self.sut.setup { error in
@@ -426,7 +257,6 @@ class DataProviderSpec: QuickSpec {
             }
         }
     }
-    //swiftlint:enable cyclomatic_complexity
     //swiftlint:enable function_body_length
 
     // MARK: - Helpers
@@ -434,7 +264,6 @@ class DataProviderSpec: QuickSpec {
     private func mockData() {
         self.mockGenres()
         self.mockMovies()
-        self.mockImages()
     }
 
     private func mockGenres() {
@@ -456,11 +285,4 @@ class DataProviderSpec: QuickSpec {
             PopularMovieDTO(id: 3, title: "Movie_3", overview: "Movie_3 overview", genreIds: [2, 4], releaseDate: "3000", posterPath: nil)
         ]
     }
-
-    private func mockImages() {
-        self.dataFetcher.smallImages["/Movie_1.jpg"] = UIImage(systemName: "sun.min")
-        self.dataFetcher.bigImages["/Movie_2.jpg"] = UIImage(systemName: "moon")
-    }
 }
-//swiftlint:enable type_body_length
-//swiftlint:enable file_length

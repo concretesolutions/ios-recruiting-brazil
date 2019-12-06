@@ -47,13 +47,6 @@ class DataProvider {
     // MARK: - Setup
 
     func setup(completion: @escaping (_ error: Error?) -> Void) {
-        // General setup
-        self.moviesDataFetcher.setup { error in
-            if let error = error {
-                print(error)
-            }
-        }
-
         // Genres setup
         self.genreSemaphore.wait()
         self.genresGroup = DispatchGroup()
@@ -108,7 +101,14 @@ class DataProvider {
                 self.movieSemaphore.signal()
                 completion(error)
             } else {
-                let movies = moviesDTO.map { Movie(fromDTO: $0, isFavourite: false) }
+                let movies = moviesDTO.map { movieDTO -> Movie in
+                    if let posterPath = movieDTO.posterPath {
+                        return Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath), isFavourite: false)
+                    } else {
+                        return Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil, isFavourite: false)
+                    }
+                }
+
                 self.movies += movies
                 self.page += 1
 
@@ -119,44 +119,4 @@ class DataProvider {
             }
         }
     }
-
-    func getSmallImage(forIndex index: Int, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
-        guard index >= 0 && index < self.movies.count else {
-            completion(nil, DataProviderError(description: "Index out of range"))
-            return
-        }
-
-        guard let path = self.movies[index].posterPath else {
-            completion(nil, DataProviderError(description: "The movie has no image"))
-            return
-        }
-
-        // TODO: check cache
-
-        self.moviesDataFetcher.requestSmallImage(withPath: path) { (image, error) in
-            completion(image, error)
-        }
-    }
-
-    func getBigImage(forIndex index: Int, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void) {
-        guard index > 0 && index < self.movies.count else {
-            completion(nil, DataProviderError(description: "Index out of range"))
-            return
-        }
-
-        guard let path = self.movies[index].posterPath else {
-            completion(nil, DataProviderError(description: "The movie has no image"))
-            return
-        }
-
-        // TODO: check cache
-
-        self.moviesDataFetcher.requestBigImage(withPath: path) { (image, error) in
-            completion(image, error)
-        }
-    }
-}
-
-struct DataProviderError: Error {
-    let description: String
 }

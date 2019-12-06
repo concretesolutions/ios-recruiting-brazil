@@ -14,14 +14,6 @@ protocol MoviesDataFetcherProtocol {
 
     func requestGenres(completion: @escaping (_ genres: [Int: String], _ error: Error?) -> Void)
     func requestPopularMovies(fromPage page: Int, completion: @escaping (_ movies: [PopularMovieDTO], _ error: Error?) -> Void)
-    func requestSmallImage(withPath imagePath: String, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void)
-    func requestBigImage(withPath imagePath: String, completion: @escaping (_ image: UIImage?, _ error: Error?) -> Void)
-}
-
-extension MoviesDataFetcherProtocol {
-
-    // Optional setup function
-    func setup(completion: @escaping (_ error: Error?) -> Void) {
-        completion(nil)
-    }
+    func smallImageURL(forPath imagePath: String) -> String
+    func bigImageURL(forPath imagePath: String) -> String
 }
