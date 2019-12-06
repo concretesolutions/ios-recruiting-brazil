@@ -11,9 +11,13 @@ import UIKit
 
 class DataProvider {
 
+    // MARK: - Singleton
+
+    static var shared = DataProvider()
+
     // MARK: - Data fetcher
 
-    private let moviesDataFetcher: MoviesDataFetcherProtocol
+    private var moviesDataFetcher: MoviesDataFetcherProtocol!
 
     // MARK: - Data variables
 
@@ -35,25 +39,38 @@ class DataProvider {
 
     // MARK: - Concurrency handler
 
-    private let genreSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
-    private let movieSemaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    private var genreSemaphore: DispatchSemaphore? = DispatchSemaphore(value: 1)
+    private var movieSemaphore: DispatchSemaphore? = DispatchSemaphore(value: 1)
 
     // MARK: - Initializers
 
-    init(moviesDataFetcher: MoviesDataFetcherProtocol) {
-        self.moviesDataFetcher = moviesDataFetcher
+    private init() { }
+
+    // MARK: - Reset
+
+    func reset() {
+        self.moviesDataFetcher = nil
+        self.movies = []
+        self.genres = [:]
+        self.page = 1
+        self.isFetchingMovies = false
+        self.genresGroup = nil
+        self.genreSemaphore = nil
+        self.movieSemaphore = nil
     }
 
     // MARK: - Setup
 
-    func setup(completion: @escaping (_ error: Error?) -> Void) {
+    func setup(withDataFetcher moviesDataFetcher: MoviesDataFetcherProtocol, completion: @escaping (_ error: Error?) -> Void) {
+        self.moviesDataFetcher = moviesDataFetcher
+
         // Genres setup
-        self.genreSemaphore.wait()
+        self.genreSemaphore?.wait()
         self.genresGroup = DispatchGroup()
         self.genresGroup?.enter()
-        self.genreSemaphore.signal()
+        self.genreSemaphore?.signal()
         self.moviesDataFetcher.requestGenres { (genres, error) in
-            self.genreSemaphore.wait()
+            self.genreSemaphore?.wait()
             if let error = error {
                 print(error)
             } else {
@@ -62,7 +79,7 @@ class DataProvider {
             }
 
             self.genresGroup = nil
-            self.genreSemaphore.signal()
+            self.genreSemaphore?.signal()
         }
 
         // Movies setup
@@ -72,33 +89,38 @@ class DataProvider {
     // MARK: - Get methods
 
     func genre(forId id: Int, completion: @escaping (String?) -> Void) {
-        self.genreSemaphore.wait()
+        self.genreSemaphore?.wait()
         if self.genres == [:] && self.genresGroup != nil {
             self.genresGroup?.notify(queue: DispatchQueue.global()) {
-                self.genreSemaphore.signal()
+                self.genreSemaphore?.signal()
                 completion(self.genres[id])
             }
         } else {
-            self.genreSemaphore.signal()
+            self.genreSemaphore?.signal()
             completion(self.genres[id])
         }
     }
 
     func getMoreMovies(completion: @escaping (_ error: Error?) -> Void) {
-        self.movieSemaphore.wait()
+        guard self.moviesDataFetcher != nil else {
+            completion(DataProviderError(desciption: "Tried to get more movies without a dataFetcher"))
+            return
+        }
+
+        self.movieSemaphore?.wait()
         guard self.isFetchingMovies == false else {
-            self.movieSemaphore.signal()
+            self.movieSemaphore?.signal()
             return
         }
 
         self.isFetchingMovies = true
-        self.movieSemaphore.signal()
+        self.movieSemaphore?.signal()
 
         self.moviesDataFetcher.requestPopularMovies(fromPage: self.page) { (moviesDTO, error) in
             if let error = error {
-                self.movieSemaphore.wait()
+                self.movieSemaphore?.wait()
                 self.isFetchingMovies = false
-                self.movieSemaphore.signal()
+                self.movieSemaphore?.signal()
                 completion(error)
             } else {
                 let movies = moviesDTO.map { movieDTO -> Movie in
@@ -112,11 +134,15 @@ class DataProvider {
                 self.movies += movies
                 self.page += 1
 
-                self.movieSemaphore.wait()
+                self.movieSemaphore?.wait()
                 self.isFetchingMovies = false
-                self.movieSemaphore.signal()
+                self.movieSemaphore?.signal()
                 completion(nil)
             }
         }
     }
+}
+
+struct DataProviderError: Error {
+    let desciption: String
 }

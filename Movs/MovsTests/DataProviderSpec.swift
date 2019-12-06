@@ -30,12 +30,13 @@ class DataProviderSpec: QuickSpec {
 
             beforeEach {
                 self.dataFetcher = MockDataFetcher()
-                self.sut = DataProvider(moviesDataFetcher: self.dataFetcher)
+                self.sut = DataProvider.shared
             }
 
             afterEach {
                 self.sut = nil
                 self.dataFetcher = nil
+                DataProvider.shared.reset()
             }
 
             // MARK: Before setup
@@ -59,30 +60,11 @@ class DataProviderSpec: QuickSpec {
                     }
                 }
 
-                it("should be able to get the movies from the first page") {
+                it("should not be able to get any movies") {
                     waitUntil { done in
                         self.sut.getMoreMovies { error in
-                            if error != nil {
-                                fail("Expected call to suceed, but it failed")
-                            } else if self.sut.movies.count != 2 {
-                                fail("Expected the data provider to have exactly 2 movies, but it has \(self.sut.movies.count)")
-                            } else {
-                                expect(self.sut.movies[0].id) == 1
-                                expect(self.sut.movies[0].title) == "Movie_1"
-                                expect(self.sut.movies[0].overview) == "Movie_1 overview"
-                                expect(self.sut.movies[0].genreIds) == [1]
-                                expect(self.sut.movies[0].releaseYear) == "2019"
-                                expect(self.sut.movies[0].posterPath) == "/Movie_1.jpg"
-
-                                expect(self.sut.movies[1].id) == 2
-                                expect(self.sut.movies[1].title) == "Movie_2"
-                                expect(self.sut.movies[1].overview) == "Movie_2 overview"
-                                expect(self.sut.movies[1].genreIds) == [4]
-                                expect(self.sut.movies[1].releaseYear) == "2010"
-                                expect(self.sut.movies[1].posterPath) == "/Movie_2.jpg"
-
-                                done()
-                            }
+                            expect(error).toNot(beNil())
+                            done()
                         }
                     }
                 }
@@ -100,7 +82,7 @@ class DataProviderSpec: QuickSpec {
                         self.mockData()
 
                         waitUntil { done in
-                            self.sut.setup { error in
+                            self.sut.setup(withDataFetcher: self.dataFetcher) { error in
                                 if error != nil {
                                     fail("Expected setup to suceed, but it failed")
                                 }
@@ -209,7 +191,7 @@ class DataProviderSpec: QuickSpec {
                             self.mockMovies()
 
                             waitUntil { done in
-                                self.sut.setup { error in
+                                self.sut.setup(withDataFetcher: self.dataFetcher) { error in
                                     if error != nil {
                                         fail("Expected setup to suceed, but it failed")
                                     }
@@ -235,7 +217,7 @@ class DataProviderSpec: QuickSpec {
                             self.mockGenres()
 
                             waitUntil { done in
-                                self.sut.setup { error in
+                                self.sut.setup(withDataFetcher: self.dataFetcher) { error in
                                     expect(error).toNot(beNil())
                                     done()
                                 }
@@ -245,10 +227,8 @@ class DataProviderSpec: QuickSpec {
                         it("should not be able to get any movies") {
                             waitUntil { done in
                                 self.sut.getMoreMovies { error in
-                                    if error != nil {
-                                        expect(error).toNot(beNil())
-                                        done()
-                                    }
+                                    expect(error).toNot(beNil())
+                                    done()
                                 }
                             }
                         }
