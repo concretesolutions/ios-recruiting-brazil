@@ -52,7 +52,6 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
             return collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             
         }
-//        cell.backgroundColor = .blue
         
         return cell
     }

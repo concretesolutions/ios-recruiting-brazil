@@ -7,13 +7,18 @@
 //
 
 import UIKit
-
+import SnapKit
 class FavoriteMoviesController: UIViewController {
-    
+    var itemsToLoad: [String] = ["One", "Two", "Three"]
+    lazy var tableView:UITableView = {
+        let view = UITableView(frame: .zero)
+        return view
+    }()
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .blue
         self.view = view
+        setupView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +26,38 @@ class FavoriteMoviesController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return itemsToLoad.count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        cell.textLabel?.text = itemsToLoad[indexPath.row]
+        return cell
 
+    }
+    
+    
+}
+extension FavoriteMoviesController:CodeView{
+    func buildViewHierarchy() {
+        self.view.addSubview(tableView)
+    }
+    
+    func setupConstraints() {
+        self.tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func setupAdditionalConfiguration() {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
+    
+    
 }
