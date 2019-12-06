@@ -36,6 +36,26 @@ extension MoviesCollectionDataSource: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesCollectionViewCell.identifier(), for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
         let item = items[indexPath.item]
         cell.setup(with: item)
+        cell.delegate = self
         return cell
+    }
+}
+
+extension MoviesCollectionDataSource: FavoriteMovieDelegate {
+    func favoriteMovie(movie: Movie) {
+        
+    }
+    
+    func favoriteMovie(movieId: Int) {
+//        if DataManager.shared.checkData(movieId: movieId) {
+//            DataManager.shared.deleteData(movieId: movieId)
+//        } else {
+//            DataManager.shared.createData(movieId: movieId)
+//        }
+//        collectionView?.reloadData()
+    }
+    
+    func favoriteMovie() {
+        
     }
 }

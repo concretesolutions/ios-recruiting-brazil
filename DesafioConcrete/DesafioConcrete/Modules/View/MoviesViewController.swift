@@ -16,28 +16,16 @@ final class MoviesViewController: UIViewController {
 extension MoviesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let presenter = presenter else { return }
-        activityIndicatorView.frame = UIScreen.main.bounds
-        self.view.addSubview(activityIndicatorView)
-        activityIndicatorView.startAnimating()
-        presenter.requestData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "Movies"
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        guard let presenter = presenter else { return }
+        activityIndicatorView.frame = UIScreen.main.bounds
+        self.view.addSubview(activityIndicatorView)
+        activityIndicatorView.startAnimating()
+        presenter.requestData()
     }
 }
 

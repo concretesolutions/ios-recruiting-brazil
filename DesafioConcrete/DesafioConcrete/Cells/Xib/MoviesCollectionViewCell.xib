@@ -29,23 +29,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LmB-1L-Obk">
-                                <rect key="frame" x="121" y="10" width="19" height="20"/>
+                                <rect key="frame" x="119" y="10" width="23" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="LmB-1L-Obk" secondAttribute="height" multiplier="19:20" id="YGB-Ec-Qix"/>
+                                    <constraint firstAttribute="width" secondItem="LmB-1L-Obk" secondAttribute="height" multiplier="23:21" id="Mdn-C8-zqO"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="favorite_gray_icon"/>
+                                <connections>
+                                    <action selector="favoriteAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="d6t-Me-gIz"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1717375219" green="0.1863906085" blue="0.27346238490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lgP-Yq-4cf" firstAttribute="leading" secondItem="8u0-dP-oW3" secondAttribute="leading" constant="4" id="7zP-If-GTe"/>
-                            <constraint firstAttribute="bottom" secondItem="LmB-1L-Obk" secondAttribute="bottom" constant="10" id="976-sY-z9B"/>
-                            <constraint firstItem="LmB-1L-Obk" firstAttribute="leading" secondItem="lgP-Yq-4cf" secondAttribute="trailing" constant="10" id="FCa-6c-vdB"/>
+                            <constraint firstItem="LmB-1L-Obk" firstAttribute="top" secondItem="8u0-dP-oW3" secondAttribute="top" constant="10" id="EpY-Aa-BHC"/>
                             <constraint firstAttribute="bottom" secondItem="lgP-Yq-4cf" secondAttribute="bottom" constant="4" id="LpT-v2-keJ"/>
-                            <constraint firstAttribute="trailing" secondItem="LmB-1L-Obk" secondAttribute="trailing" constant="10" id="Pxe-wT-5vH"/>
+                            <constraint firstItem="LmB-1L-Obk" firstAttribute="leading" secondItem="lgP-Yq-4cf" secondAttribute="trailing" constant="8" id="MMG-vB-DXb"/>
+                            <constraint firstAttribute="bottom" secondItem="LmB-1L-Obk" secondAttribute="bottom" constant="9" id="RfZ-uS-VCt"/>
                             <constraint firstItem="lgP-Yq-4cf" firstAttribute="top" secondItem="8u0-dP-oW3" secondAttribute="top" constant="4" id="cGe-ls-Hl1"/>
                             <constraint firstAttribute="height" constant="40" id="cf1-0M-nrA"/>
-                            <constraint firstItem="LmB-1L-Obk" firstAttribute="top" secondItem="8u0-dP-oW3" secondAttribute="top" constant="10" id="pBc-k6-4aT"/>
+                            <constraint firstAttribute="trailing" secondItem="LmB-1L-Obk" secondAttribute="trailing" constant="8" id="hpb-H1-o89"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -61,11 +65,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
-                <outlet property="favoriteButton" destination="LmB-1L-Obk" id="jYk-0S-DmC"/>
+                <outlet property="btnFavorite" destination="LmB-1L-Obk" id="jYk-0S-DmC"/>
                 <outlet property="movieImage" destination="mvQ-dJ-Kmy" id="v2a-HO-boG"/>
                 <outlet property="movieName" destination="lgP-Yq-4cf" id="ugq-QT-VTU"/>
             </connections>
-            <point key="canvasLocation" x="36" y="56"/>
+            <point key="canvasLocation" x="34.782608695652179" y="55.580357142857139"/>
         </collectionViewCell>
     </objects>
     <resources>

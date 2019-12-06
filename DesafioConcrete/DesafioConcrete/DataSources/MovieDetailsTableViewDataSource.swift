@@ -24,8 +24,7 @@ final class MovieDetailsTableViewDataSource: NSObject {
         tableView.register(MovieDetailsReleaseDateTableViewCell.nib(), forCellReuseIdentifier: MovieDetailsReleaseDateTableViewCell.identifier())
         tableView.register(MovieDetailsGenreTableViewCell.nib(), forCellReuseIdentifier: MovieDetailsGenreTableViewCell.identifier())
         tableView.register(MovieDetailsOverviewTableViewCell.nib(), forCellReuseIdentifier: MovieDetailsOverviewTableViewCell.identifier())
-        self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = 50
+        self.tableView?.estimatedRowHeight = 120
         self.tableView?.dataSource = self
         self.tableView?.reloadData()
     }
@@ -45,6 +44,7 @@ extension MovieDetailsTableViewDataSource: UITableViewDataSource {
             guard let cellTitle = tableView.dequeueReusableCell(withIdentifier: MovieDetailsTitleTableViewCell.identifier(), for: indexPath) as? MovieDetailsTitleTableViewCell
                 else { return cell }
             cellTitle.setup(with: movie)
+            cellTitle.delegate = self
             cell = cellTitle
         } else if index == 1 {
             guard let cellReleaseDate = tableView.dequeueReusableCell(withIdentifier: MovieDetailsReleaseDateTableViewCell.identifier(), for: indexPath) as? MovieDetailsReleaseDateTableViewCell else { return cell }
@@ -61,5 +61,21 @@ extension MovieDetailsTableViewDataSource: UITableViewDataSource {
             cell = cellOverview
         }
         return cell
+    }
+}
+
+extension MovieDetailsTableViewDataSource: FavoriteMovieDelegate {
+    func favoriteMovie(movie: Movie) {
+        guard let movie = item else { return }
+        if DataManager.shared.checkData(movieId: movie.id) {
+            DataManager.shared.deleteData(movieId: movie.id)
+        } else {
+            DataManager.shared.createData(movie: movie)
+        }
+        tableView?.reloadData()
+    }
+    
+    func favoriteMovie() {
+
     }
 }

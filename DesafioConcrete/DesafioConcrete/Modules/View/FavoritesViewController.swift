@@ -7,6 +7,11 @@ class FavoritesViewController: UIViewController {
     
     //MARK: - Variables
 	var presenter: FavoritesPresenterProtocol?
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var btnRemoveFilter: UIButton!
+    @IBOutlet weak var btnRemoveFilterHeight: NSLayoutConstraint!
+    var activityIndicatorView = UIActivityIndicatorView()
+    let searchController = UISearchController(searchResultsController: nil)
 
 }
 
@@ -14,23 +19,19 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+//        searchController.searchResultsUpdater = self
+//        searchController.obscuresBackgroundDuringPresentation = false
+//        searchController.searchBar.placeholder = "Search Candies"
+//        navigationItem.searchController = searchController
+//        definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "Favorites"
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        guard let presenter = presenter else { return }
+        presenter.getFavorites()
+        presenter.setupTableView(with: tableView)
     }
 }
 
@@ -38,3 +39,9 @@ extension FavoritesViewController {
 extension FavoritesViewController: FavoritesViewProtocol {
     
 }
+
+//extension FavoritesViewController: UISearchResultsUpdating {
+//  func updateSearchResults(for searchController: UISearchController) {
+//    // TODO
+//  }
+//}

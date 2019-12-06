@@ -9,8 +9,6 @@
 import UIKit
 
 final class MovieDetailsTitleTableViewCell: UITableViewCell {
-
-    
     static func fileName() -> String {
         return String(describing: self)
     }
@@ -25,12 +23,21 @@ final class MovieDetailsTitleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var btnFavorite: UIButton!
+    weak var delegate: FavoriteMovieDelegate?
+    var item: Movie?
     
     func setup(with item: Movie) {
         self.lblTitle.text = item.title
+        self.item = item
+        if DataManager.shared.checkData(movieId: item.id) {
+            self.btnFavorite.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+        } else {
+            self.btnFavorite.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+        }
     }
     
     @IBAction func favoriteAction(_ sender: UIButton) {
-        
+        guard let delegate = delegate, let item = item else { return }
+        delegate.favoriteMovie(movie: item)
     }
 }
