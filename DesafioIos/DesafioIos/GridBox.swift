@@ -6,7 +6,6 @@
 //  Created by Kacio Henrique Couto Batista on 02/12/19.
 //  Copyright © 2019 Kacio Henrique Couto Batista. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import SnapKit

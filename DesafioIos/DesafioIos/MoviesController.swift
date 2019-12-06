@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 class MoviesController: UIViewController{
 
     
@@ -27,23 +27,9 @@ class MoviesController: UIViewController{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(collectionView)
-        collectionView.delegate = self
-               collectionView.dataSource = self
-               collectionView.register(UICollectionViewCell.self,forCellWithReuseIdentifier: "cell")
-        setupCollectionConstraints()
-
+        setupView()
         // Do any additional setup after loading the view.
     }
-    func setupCollectionConstraints() {
-          collectionView.translatesAutoresizingMaskIntoConstraints = false
-          collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-          collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-          collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-          collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    }
-
-
     /*
     // MARK: - Navigation
 
@@ -61,8 +47,13 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .white
+        guard let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCellView else {
+            
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            
+        }
+//        cell.backgroundColor = .blue
+        
         return cell
     }
     
@@ -73,4 +64,23 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
     
 }
 
+extension MoviesController:CodeView{
+    func buildViewHierarchy() {
+        view.addSubview(collectionView)
+    }
+    
+    func setupConstraints() {
+        collectionView.snp.makeConstraints { (make) in
+            make.bottom.top.left.right.equalToSuperview()
+        }
+    }
+    
+    func setupAdditionalConfiguration() {
+        collectionView.register(MovieCellView.self,forCellWithReuseIdentifier: "cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    
+}
 
