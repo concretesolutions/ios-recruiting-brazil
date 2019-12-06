@@ -16,29 +16,33 @@ class Movie {
     let releaseYear: String
     let posterPath: String?
     let genreIds: [Int]
+    let smallImageURL: String?
+    let bigImageURL: String?
     var isFavourite: Bool
 
     // MARK: - Initializers
 
-    init(fromDTO dto: PopularMovieDTO, isFavourite: Bool) {
+    init(fromDTO dto: PopularMovieDTO, smallImageURL: String?, bigImageURL: String?, isFavourite: Bool) {
         self.id = dto.id
         self.title = dto.title
         self.overview = dto.overview
         self.releaseYear = String(dto.releaseDate.split(separator: "-").first!)
         self.posterPath = dto.posterPath
         self.genreIds = dto.genreIds
+        self.smallImageURL = smallImageURL
+        self.bigImageURL = bigImageURL
         self.isFavourite = isFavourite
     }
 }
 
 extension Movie: CustomStringConvertible {
     var description: String {
-        "Movie{\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(String(describing: self.posterPath))\n" + "\tgenreIds: \(self.genreIds)\n" + "\tisFavourite: \(self.isFavourite)\n" + "}\n"
+        "Movie{\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(String(describing: self.posterPath))\n" + "\tgenreIds: \(self.genreIds)\n" + "\tsmallImageURL: \(String(describing: self.smallImageURL))\n" + "\tbigImageURL:: \(String(describing: self.bigImageURL))\n" + "\tisFavourite: \(self.isFavourite)\n" + "}\n"
     }
 }
 
 extension Movie: Equatable {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.posterPath == rhs.posterPath && lhs.genreIds == rhs.genreIds && lhs.isFavourite == rhs.isFavourite
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.posterPath == rhs.posterPath && lhs.genreIds == rhs.genreIds && lhs.smallImageURL == rhs.smallImageURL && lhs.bigImageURL == rhs.bigImageURL && lhs.isFavourite == rhs.isFavourite
     }
 }

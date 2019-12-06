@@ -6,7 +6,6 @@
 //  Copyright © 2019 Carolina Lopes. All rights reserved.
 //
 
-import UIKit
 @testable import Movs
 
 class MockDataFetcher {
@@ -15,8 +14,8 @@ class MockDataFetcher {
 
     var genres: [Int: String] = [:]
     var movies: [Int: [PopularMovieDTO]] = [:]
-    var smallImages: [String: UIImage] = [:]
-    var bigImages: [String: UIImage] = [:]
+    var smallImages: [String: String] = [:]
+    var bigImages: [String: String] = [:]
 }
 
 extension MockDataFetcher: MoviesDataFetcherProtocol {
@@ -36,18 +35,12 @@ extension MockDataFetcher: MoviesDataFetcherProtocol {
         completion(movies ?? [], error)
     }
 
-    func requestSmallImage(withPath imagePath: String, completion: @escaping (UIImage?, Error?) -> Void) {
-        let image = self.smallImages[imagePath]
-        let error: Error? = image == nil ? MoviesDataFetcherError(description: "No image") : nil
-
-        completion(image, error)
+    func smallImageURL(forPath imagePath: String) -> String {
+        return self.smallImages[imagePath] ?? ""
     }
 
-    func requestBigImage(withPath imagePath: String, completion: @escaping (UIImage?, Error?) -> Void) {
-        let image = self.bigImages[imagePath]
-        let error: Error? = image == nil ? MoviesDataFetcherError(description: "No image") : nil
-
-        completion(image, error)
+    func bigImageURL(forPath imagePath: String) -> String {
+        return self.bigImages[imagePath] ?? ""
     }
 }
 
