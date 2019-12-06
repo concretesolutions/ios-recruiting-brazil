@@ -1,0 +1,143 @@
+//
+//  PopularMovieCell.swift
+//  Movs
+//
+//  Created by Carolina Cruz Agra Lopes on 05/12/19.
+//  Copyright © 2019 Carolina Lopes. All rights reserved.
+//
+
+import SnapKit
+import UIKit
+
+class PopularMovieCell: UICollectionViewCell {
+
+    // MARK: - Model
+
+    private var movie: Movie!
+
+    // MARK: - Delegate
+
+    weak var delegate: PopularMovieCellDelegate?
+
+    // MARK: - Subviews
+
+    private lazy var mainStack: UIStackView = {
+        let view = UIStackView(frame: .zero)
+        view.axis = .vertical
+        view.distribution = .fill
+        view.spacing = 0.0
+        return view
+    }()
+
+    private lazy var posterImageView: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.backgroundColor = .systemGray
+        return view
+    }()
+
+    private lazy var bottomView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = UIColor(red: 45/255, green: 47/255, blue: 71/255, alpha: 1.0)
+        return view
+    }()
+
+    private lazy var bottomStack: UIStackView = {
+        let view = UIStackView(frame: .zero)
+        view.axis = .horizontal
+        view.alignment = .center
+        view.distribution = .fill
+        view.spacing = 10.0
+        return view
+    }()
+
+    private lazy var titleLabel: UILabel = {
+        let view = UILabel(frame: .zero)
+        view.font = UIFont.systemFont(ofSize: 18.0, weight: .semibold)
+        view.textColor = UIColor(named: "Yellow")
+        view.numberOfLines = 2
+        return view
+    }()
+
+    private lazy var heartImageView: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.contentMode = .scaleAspectFill
+        view.image = UIImage(systemName: "heart.fill")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapOnHeart))
+        return view
+    }()
+
+    // MARK: - Initializers
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Configuration methods
+
+    func configure(with movie: Movie) {
+        self.movie = movie
+
+        self.titleLabel.text = movie.title
+        self.posterImageView.loadImage(fromURL: movie.smallImageURL)
+        self.heartImageView.tintColor = movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
+        self.setupView()
+    }
+}
+
+// MARK: - CodeView
+
+extension PopularMovieCell: CodeView {
+    func buildViewHierarchy() {
+        self.addSubview(self.mainStack)
+        self.mainStack.addArrangedSubview(self.posterImageView)
+        self.mainStack.addArrangedSubview(self.bottomView)
+        self.bottomView.addSubview(self.bottomStack)
+        self.bottomStack.addArrangedSubview(self.titleLabel)
+        self.bottomStack.addArrangedSubview(self.heartImageView)
+    }
+
+    func setupContraints() {
+        self.mainStack.snp.makeConstraints { maker in
+            maker.top.equalToSuperview()
+            maker.bottom.equalToSuperview()
+            maker.leading.equalToSuperview()
+            maker.trailing.equalToSuperview()
+        }
+
+        self.bottomView.snp.makeConstraints { maker in
+            maker.height.equalTo(60)
+        }
+
+        self.bottomStack.snp.makeConstraints { maker in
+            maker.top.equalToSuperview()
+            maker.bottom.equalToSuperview()
+            maker.leadingMargin.equalToSuperview()
+            maker.trailingMargin.equalToSuperview()
+        }
+
+        self.heartImageView.snp.makeConstraints { maker in
+            maker.width.equalTo(30)
+        }
+    }
+
+    func setupAdditionalConfiguration() {
+        self.layer.cornerRadius = 15.0
+        self.layer.masksToBounds = true
+    }
+}
+
+extension PopularMovieCell {
+
+    // MARK: - Tap handlers
+
+    @objc func didTapOnHeart() {
+        self.movie.isFavourite = self.movie.isFavourite ? false : true
+        self.heartImageView.tintColor = self.movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
+        self.delegate?.didClickOnHeart(movieID: self.movie.id)
+    }
+}
