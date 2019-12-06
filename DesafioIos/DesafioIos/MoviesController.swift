@@ -58,10 +58,10 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         return CGSize(width: 250, height: 100)
+        let width = self.view.frame.width
+        return CGSize(width: (width)/2.5, height: (width)/2)
      }
-    
-    
+        
 }
 
 extension MoviesController:CodeView{
