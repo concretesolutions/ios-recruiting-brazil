@@ -4,7 +4,6 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-    
     //MARK: - Variables
     var presenter: FavoritesPresenterProtocol?
     @IBOutlet weak var tableView: UITableView!
@@ -12,7 +11,6 @@ class FavoritesViewController: UIViewController {
     @IBOutlet weak var btnRemoveFilterHeight: NSLayoutConstraint!
     @IBOutlet weak var imgSearchEmptyState: UIImageView!
     @IBOutlet weak var lblSearchEmptyState: UILabel!
-    
     var activityIndicatorView = UIActivityIndicatorView()
     let searchController = UISearchController(searchResultsController: nil)
     var isSearchBarEmpty: Bool {
@@ -46,7 +44,6 @@ extension FavoritesViewController: FavoritesViewProtocol {
     }
     
     func setupSearchController() {
-        //searchController.searchBar.tintColor = CustomColor.orange
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
@@ -60,6 +57,7 @@ extension FavoritesViewController: FavoritesViewProtocol {
     }
 }
 
+//MARK: - UISearchResultsUpdating
 extension FavoritesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let presenter = presenter, let text = searchController.searchBar.text else { return }

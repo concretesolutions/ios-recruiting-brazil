@@ -12,7 +12,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieName: UILabel!
-    @IBOutlet weak var btnFavorite: UIButton!
+    @IBOutlet weak var imgFavorite: UIImageView!
     
     static func fileName() -> String {
         return String(describing: self)
@@ -30,14 +30,14 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     var item: Movie?
     
     func setup(with item: Movie) {
-        if DataManager.shared.checkData(movieId: item.id) {
-            self.btnFavorite.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
-        } else {
-            self.btnFavorite.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
-        }
         self.item = item
+        if DataManager.shared.checkData(movieId: item.id) {
+            self.imgFavorite.image = FavoriteImages.favorited.getImage()
+        } else {
+            self.imgFavorite.image = FavoriteImages.unfavorited.getImage()
+        }
         if item.posterPath != "" {
-            movieImage.downloaded(from: "https://image.tmdb.org/t/p/w300\(item.posterPath)", contentMode: .scaleAspectFill)
+            movieImage.downloaded(from: item.posterPath, contentMode: .scaleAspectFill)
         }
         movieName.text = item.title
     }

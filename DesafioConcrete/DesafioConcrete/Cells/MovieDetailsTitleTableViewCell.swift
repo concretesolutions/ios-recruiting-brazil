@@ -30,9 +30,9 @@ final class MovieDetailsTitleTableViewCell: UITableViewCell {
         self.lblTitle.text = item.title
         self.item = item
         if DataManager.shared.checkData(movieId: item.id) {
-            self.btnFavorite.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+            self.btnFavorite.setImage(FavoriteImages.favorited.getImage(), for: .normal)
         } else {
-            self.btnFavorite.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+            self.btnFavorite.setImage(FavoriteImages.unfavorited.getImage(), for: .normal)
         }
     }
     

@@ -12,18 +12,13 @@ final class MovieDetailsViewController: UIViewController {
 
 //MARK: - Life cycles
 extension MovieDetailsViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        guard let presenter = presenter else { return }
-        activityIndicatorView.frame = UIScreen.main.bounds
-        self.view.addSubview(activityIndicatorView)
-        activityIndicatorView.startAnimating()
-        presenter.getGenres()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "Movie"
+        guard let presenter = presenter else { return }
+        presenter.callCreateActivityIndicator()
+        presenter.setAnimation(to: true)
+        presenter.getGenres()
     }
 }
 
@@ -31,7 +26,20 @@ extension MovieDetailsViewController {
 extension MovieDetailsViewController: MovieDetailsViewProtocol {
     func requestViewSetup() {
         guard let presenter = presenter else { return }
-        activityIndicatorView.stopAnimating()
+        presenter.setAnimation(to: false)
         presenter.setupView(with: detalisTableView, and: posterImageView)
+    }
+    
+    func createActivityIndicator() {
+        activityIndicatorView.frame = UIScreen.main.bounds
+        self.view.addSubview(activityIndicatorView)
+    }
+    
+    func changeIsAnimating(to animation: Bool) {
+        if animation {
+            activityIndicatorView.startAnimating()
+        } else {
+            activityIndicatorView.stopAnimating()
+        }
     }
 }

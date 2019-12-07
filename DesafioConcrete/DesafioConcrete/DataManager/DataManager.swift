@@ -24,6 +24,7 @@ final class DataManager {
         newMovie.setValue(movie.posterPath, forKey: "posterPath")
         newMovie.setValue(movie.releaseDate, forKey: "releaseDate")
         newMovie.setValue(movie.title, forKey: "title")
+        newMovie.setValue(movie.genreIds, forKey: "genres")
         
         do {
             try managedcontext.save()
@@ -46,7 +47,8 @@ final class DataManager {
                 let posterPath = data.value(forKey: "posterPath") as! String
                 let releaseDate = data.value(forKey: "releaseDate") as! String
                 let title = data.value(forKey: "title") as! String
-                let movie = Movie(popularity: 0.0, voteCount: 1, video: false, posterPath: posterPath, id: id, adult: false, backdropPath: "", originalLanguage: "", originalTitle: "", genreIds: [], title: title, voteAverage: 1.0, overview: overview, releaseDate: releaseDate)
+                let genres = data.value(forKey: "genres") as! [Int]
+                let movie = Movie(popularity: 0.0, voteCount: 1, video: false, posterPath: posterPath, id: id, adult: false, backdropPath: "", originalLanguage: "", originalTitle: "", genreIds: genres, title: title, voteAverage: 1.0, overview: overview, releaseDate: releaseDate)
                 results.append(movie)
             }
             print("Fetch data done")

@@ -29,7 +29,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     
     func setup(with item: Movie) {
-        self.imgMovie.downloaded(from: "https://image.tmdb.org/t/p/w500\(item.posterPath)", contentMode: .scaleAspectFill)
+        self.imgMovie.downloaded(from: item.posterPath, contentMode: .scaleAspectFill)
         self.lblTitle.text = item.title
         self.lblReleaseDate.text = String(item.releaseDate.prefix(4))
         self.lblOverview.text = item.overview

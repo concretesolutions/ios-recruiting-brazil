@@ -28,28 +28,23 @@
                                 <color key="textColor" red="0.97254901959999995" green="0.80000000000000004" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LmB-1L-Obk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_gray_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ap5-Ac-tfK">
                                 <rect key="frame" x="119" y="10" width="23" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="LmB-1L-Obk" secondAttribute="height" multiplier="23:21" id="Mdn-C8-zqO"/>
+                                    <constraint firstAttribute="width" secondItem="Ap5-Ac-tfK" secondAttribute="height" multiplier="23:21" id="KhL-pO-FrU"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" backgroundImage="favorite_gray_icon"/>
-                                <connections>
-                                    <action selector="favoriteAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="d6t-Me-gIz"/>
-                                </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.1764705882" green="0.18823529410000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Ap5-Ac-tfK" secondAttribute="trailing" constant="8" id="1nI-bt-9Pq"/>
                             <constraint firstItem="lgP-Yq-4cf" firstAttribute="leading" secondItem="8u0-dP-oW3" secondAttribute="leading" constant="4" id="7zP-If-GTe"/>
-                            <constraint firstItem="LmB-1L-Obk" firstAttribute="top" secondItem="8u0-dP-oW3" secondAttribute="top" constant="10" id="EpY-Aa-BHC"/>
                             <constraint firstAttribute="bottom" secondItem="lgP-Yq-4cf" secondAttribute="bottom" constant="4" id="LpT-v2-keJ"/>
-                            <constraint firstItem="LmB-1L-Obk" firstAttribute="leading" secondItem="lgP-Yq-4cf" secondAttribute="trailing" constant="8" id="MMG-vB-DXb"/>
-                            <constraint firstAttribute="bottom" secondItem="LmB-1L-Obk" secondAttribute="bottom" constant="9" id="RfZ-uS-VCt"/>
+                            <constraint firstItem="Ap5-Ac-tfK" firstAttribute="top" secondItem="8u0-dP-oW3" secondAttribute="top" constant="10" id="Tly-aa-zrp"/>
+                            <constraint firstItem="Ap5-Ac-tfK" firstAttribute="leading" secondItem="lgP-Yq-4cf" secondAttribute="trailing" constant="8" id="akW-kE-ddU"/>
+                            <constraint firstAttribute="bottom" secondItem="Ap5-Ac-tfK" secondAttribute="bottom" constant="9" id="bvX-Kx-zjm"/>
                             <constraint firstItem="lgP-Yq-4cf" firstAttribute="top" secondItem="8u0-dP-oW3" secondAttribute="top" constant="4" id="cGe-ls-Hl1"/>
                             <constraint firstAttribute="height" constant="40" id="cf1-0M-nrA"/>
-                            <constraint firstAttribute="trailing" secondItem="LmB-1L-Obk" secondAttribute="trailing" constant="8" id="hpb-H1-o89"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -65,7 +60,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
-                <outlet property="btnFavorite" destination="LmB-1L-Obk" id="jYk-0S-DmC"/>
+                <outlet property="imgFavorite" destination="Ap5-Ac-tfK" id="ozG-tT-Lkw"/>
                 <outlet property="movieImage" destination="mvQ-dJ-Kmy" id="v2a-HO-boG"/>
                 <outlet property="movieName" destination="lgP-Yq-4cf" id="ugq-QT-VTU"/>
             </connections>
