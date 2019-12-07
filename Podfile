@@ -7,6 +7,7 @@ target 'ConcreteChallenge' do
 
   # Pods for ConcreteChallenge
   pod 'SnapKit', '~> 5.0.0'
+  pod 'Kingfisher', '~> 5.11'
 
   target 'ConcreteChallengeTests' do
     inherit! :complete
