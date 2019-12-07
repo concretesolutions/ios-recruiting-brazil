@@ -22,9 +22,8 @@ extension MoviesViewController {
         super.viewWillAppear(animated)
         self.title = "Movies"
         guard let presenter = presenter else { return }
-        activityIndicatorView.frame = UIScreen.main.bounds
-        self.view.addSubview(activityIndicatorView)
-        activityIndicatorView.startAnimating()
+        presenter.callCreateActivityIndicator()
+        presenter.setAnimation(to: true)
         presenter.requestData()
     }
 }
@@ -34,7 +33,21 @@ extension MoviesViewController {
 extension MoviesViewController: MoviesViewProtocol {
     func requestCollectionSetup() {
         guard let presenter = presenter else { return }
+        presenter.setAnimation(to: false)
         activityIndicatorView.stopAnimating()
         presenter.setupView(with: collectionView)
+    }
+    
+    func createActivityIndicator() {
+        activityIndicatorView.frame = UIScreen.main.bounds
+        self.view.addSubview(activityIndicatorView)
+    }
+    
+    func changeIsAnimating(to animation: Bool) {
+        if animation {
+            activityIndicatorView.startAnimating()
+        } else {
+            activityIndicatorView.stopAnimating()
+        }
     }
 }

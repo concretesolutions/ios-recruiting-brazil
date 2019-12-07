@@ -32,5 +32,8 @@ extension MoviesCollectionDelegate: UICollectionViewDelegateFlowLayout {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.height - 30 {
+            delegate.fetchMoreMovies()
+        }
     }
 }

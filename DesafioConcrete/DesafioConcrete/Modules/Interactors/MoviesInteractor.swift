@@ -8,13 +8,14 @@ protocol MoviesInteractorOutputProtocol: class {
     
     /* Interactor -> Presenter */
     func sendData(movies: [Movie])
+    func sendMoreData(movies: [Movie])
 }
 
 protocol MoviesInteractorInputProtocol: class {
     
     var presenter: MoviesInteractorOutputProtocol?  { get set }
     
-    func requestDataToApi()
+    func requestDataToApi(page: Int)
     /* Presenter -> Interactor */
 }
 
@@ -22,12 +23,16 @@ final class MoviesInteractor: MoviesInteractorInputProtocol {
     
     weak var presenter: MoviesInteractorOutputProtocol?
     
-    func requestDataToApi() {
-        ApiManager.getMovies(page: 1, success: { data in
+    func requestDataToApi(page: Int) {
+        ApiManager.getMovies(page: page, success: { data in
             do {
                 let root = try JSONDecoder().decode(MovieRoot.self, from: data)
                 guard let presenter = self.presenter else { return }
-                presenter.sendData(movies: root.results)
+                if page > 1 {
+                    presenter.sendMoreData(movies: root.results)
+                } else {
+                    presenter.sendData(movies: root.results)
+                }
             } catch let error as NSError {
                 print(error)
             }
