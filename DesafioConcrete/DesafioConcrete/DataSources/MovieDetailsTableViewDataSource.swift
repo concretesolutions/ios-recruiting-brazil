@@ -76,6 +76,5 @@ extension MovieDetailsTableViewDataSource: FavoriteMovieDelegate {
     }
     
     func favoriteMovie() {
-
     }
 }

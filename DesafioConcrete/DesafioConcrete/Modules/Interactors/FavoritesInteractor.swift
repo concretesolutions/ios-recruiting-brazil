@@ -14,7 +14,7 @@ protocol FavoritesInteractorInputProtocol: class {
     
     var presenter: FavoritesInteractorOutputProtocol?  { get set }
     func requestMovies()
-    
+    func unfavorite(movie: Movie)
     /* Presenter -> Interactor */
 }
 
@@ -26,5 +26,9 @@ final class FavoritesInteractor: FavoritesInteractorInputProtocol {
         let movies = DataManager.shared.getData()
         guard let presenter = presenter else { return }
         presenter.sendMovies(movies: movies)
+    }
+    
+    func unfavorite(movie: Movie) {
+        DataManager.shared.deleteData(movieId: movie.id)
     }
 }

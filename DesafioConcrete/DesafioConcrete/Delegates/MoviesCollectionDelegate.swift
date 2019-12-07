@@ -28,4 +28,9 @@ extension MoviesCollectionDelegate: UICollectionViewDelegateFlowLayout {
         let screen = UIScreen.main.bounds
         return CGSize(width: screen.width/2 - 20, height: screen.height/3)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+    }
 }

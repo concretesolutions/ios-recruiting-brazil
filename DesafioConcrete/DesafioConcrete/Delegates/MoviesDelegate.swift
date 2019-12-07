@@ -10,4 +10,5 @@ import Foundation
 
 protocol MoviesDelegate: class {
     func didSelectMovie(at: IndexPath)
+    func fetchMoreMovies()
 }

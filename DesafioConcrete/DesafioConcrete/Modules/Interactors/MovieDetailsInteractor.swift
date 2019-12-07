@@ -15,6 +15,7 @@ protocol MovieDetailsInteractorInputProtocol: class {
     var presenter: MovieDetailsInteractorOutputProtocol?  { get set }
 
     func requestGenres()
+    
     /* Presenter -> Interactor */
 }
 
