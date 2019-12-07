@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashVC: BaseViewController {
+final class SplashVC: BaseViewController {
     
     override func setupUI() {
         super.setupUI()

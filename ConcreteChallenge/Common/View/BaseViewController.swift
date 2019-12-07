@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class BaseViewController: UIViewController, ViewDelegate {
     
@@ -15,9 +16,13 @@ class BaseViewController: UIViewController, ViewDelegate {
     /// The presenter for this view. The use of a typecast is recommended whenever used.
     let presenter: Presenter
     
+    /// Variable to enable or disable view's logs
+    static var logEnabled: Bool = true
+    
     // MARK: - Init -
     init(presenter: Presenter) {
         guard type(of: self) != BaseViewController.self else {
+            os_log("❌ - BaseViewController instanciated directly", log: Logger.appLog(), type: .fault)
             fatalError(
                 "Creating `BaseViewController` instances directly is not supported. This class is meant to be subclassed."
             )
@@ -25,6 +30,10 @@ class BaseViewController: UIViewController, ViewDelegate {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         self.presenter.attachView(self)
+        
+        if BaseViewController.logEnabled {
+            os_log("🎮 👶 %@", log: Logger.lifecycleLog(), type: .info, "\(self)")
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,6 +42,9 @@ class BaseViewController: UIViewController, ViewDelegate {
     
     deinit {
         presenter.detachView()
+        if BaseViewController.logEnabled {
+            os_log("🎮 ⚰️ %@", log: Logger.lifecycleLog(), type: .info, "\(self)")
+        }
     }
     
     // MARK: - View Lifecycle -
@@ -68,7 +80,7 @@ class BaseViewController: UIViewController, ViewDelegate {
      */
     func setupConstraints() {}
 
-    
+    // MARK: - ViewDelegate
     func startLoading() {}
     
     func finishLoading() {}

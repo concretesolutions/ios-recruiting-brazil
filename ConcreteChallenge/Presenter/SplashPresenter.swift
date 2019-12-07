@@ -8,6 +8,6 @@
 
 import Foundation
 
-class SplashPresenter: BasePresenter {
+final class SplashPresenter: BasePresenter {
     
 }

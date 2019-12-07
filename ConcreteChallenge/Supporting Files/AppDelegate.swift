@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        print(UIScreen.main.bounds)
 
         // Set the the main VC
         window?.rootViewController = SplashVC(presenter: SplashPresenter())
