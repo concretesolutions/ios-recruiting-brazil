@@ -15,10 +15,22 @@ class MovieDetailsViewController: UIViewController {
     
     internal let screen = MovieDetailsViewScreen()
     internal var viewModel: MovieDetailsControllerViewModel
-   
-    // MARK: - Subscribers
+    internal var subscribers: [AnyCancellable?] = []
     
-    internal var backdropSubscriber: AnyCancellable?
+    // MARK: - Initializers and Deinitializers
+    
+    init(viewModel: MovieDetailsControllerViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
+        if let backdropPath = self.viewModel.backdropPath {
+            self.screen.backdrop.download(imageURL: "https://image.tmdb.org/t/p/w780\(backdropPath)")
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - ViewController life cycle
     
@@ -26,32 +38,5 @@ class MovieDetailsViewController: UIViewController {
         super.loadView()
         self.screen.titleLabel.text = self.viewModel.title
         self.view = self.screen
-    }
-    
-    // MARK: - Initializers and Deinitializers
-    
-    init(viewModel: MovieDetailsControllerViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-
-        self.bind(to: self.viewModel)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        self.backdropSubscriber?.cancel()
-    }
-    
-    // MARK: - Binding
-    
-    func bind(to viewModel: MovieDetailsControllerViewModel) {
-        self.backdropSubscriber = viewModel.$backdropImage
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { image in
-                self.screen.backdrop.image = image
-            })
     }
 }

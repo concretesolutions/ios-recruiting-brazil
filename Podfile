@@ -8,6 +8,7 @@ target 'Movs' do
   # Pods for Movs
   pod "SwiftLint"
   pod "SnapKit"
+  pod "Kingfisher"
 
   target 'MovsTests' do
     inherit! :search_paths

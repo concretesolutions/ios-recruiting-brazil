@@ -42,13 +42,12 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     internal var viewModel: MovieCellViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
-            self.bind(to: self.viewModel)
+            
+            if let posterPath = self.viewModel.posterPath {
+                self.poster.download(imageURL: "https://image.tmdb.org/t/p/w342\(posterPath)")
+            }
         }
     }
-    
-    // MARK: - Subscribers
-
-    var posterSubscriber: AnyCancellable?
     
     // MARK: - Initializers and Deinitializers
         
@@ -59,20 +58,6 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        self.posterSubscriber?.cancel()
-    }
-    
-    // MARK: - Binding
-    
-    func bind(to viewModel: MovieCellViewModel) {
-        self.posterSubscriber = viewModel.$posterImage
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { image in
-                self.poster.image = image
-            })
     }
 }
 

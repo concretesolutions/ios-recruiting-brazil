@@ -24,13 +24,10 @@ class MovieCellViewModel {
     // MARK: - Attributes
     
     public let id: Int
+    public let posterPath: String?
     public let releaseYear: String
     public let title: String
     public let summary: String
-    
-    // MARK: - Publishers
-    
-    @Published var posterImage: UIImage?
     
     // MARK: - Initializers
     
@@ -39,23 +36,9 @@ class MovieCellViewModel {
         self.apiManager = apiManager
         
         self.id = movie.id
-        self.posterImage = UIImage.from(color: .secondarySystemBackground)
+        self.posterPath = movie.posterPath
         self.releaseYear = String(date: movie.releaseDate, components: [.year])
         self.title = movie.title
         self.summary = movie.summary
-        
-        if let imagePath = movie.posterPath {
-            self.fetchPosterImage(path: imagePath)
-        }
-    }
-    
-    // MARK: - Fetch methods
-    
-    func fetchPosterImage(path: String) {
-        self.apiManager.getImage(path: path, widthSize: 342, completion: { (data, error) in
-            if let data = data {
-                self.posterImage = UIImage(data: data)
-            }
-        })
     }
 }

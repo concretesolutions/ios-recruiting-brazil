@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MoviesAPIManager: MoviesAPIDataFetcher {
+final class MoviesAPIManager: MoviesAPIDataFetcher {
 
     // MARK: - Attributes
     
@@ -46,9 +46,5 @@ class MoviesAPIManager: MoviesAPIDataFetcher {
     
     func getGenres(completion: @escaping (Data?, Error?) -> Void) {
         self.session.getData(from: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(self.apiKey)&language=en-US", completion: completion)
-    }
-    
-    func getImage(path: String, widthSize: Int, completion: @escaping (Data?, Error?) -> Void) {
-        self.session.getData(from: "https://image.tmdb.org/t/p/w\(widthSize)\(path)", completion: completion)
     }
 }

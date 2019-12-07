@@ -15,16 +15,9 @@ class PopularMoviesViewController: UIViewController {
     
     internal let screen = PopularMoviesViewScreen()
     internal let viewModel: PopularMoviesControllerViewModel
-    
-    // MARK: - Subscribers
-    
-    var moviesSubscriber: AnyCancellable?
+    internal var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers
-    
-    deinit {
-        self.moviesSubscriber?.cancel()
-    }
     
     init(viewModel: PopularMoviesControllerViewModel) {
         self.viewModel = viewModel
@@ -33,6 +26,12 @@ class PopularMoviesViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        for subscriber in self.subscribers {
+            subscriber?.cancel()
+        }
     }
     
     // MARK: - ViewController life cycle
@@ -61,12 +60,11 @@ class PopularMoviesViewController: UIViewController {
     // MARK: - Binding
     
     func bind(to viewModel: PopularMoviesControllerViewModel) {
-        self.moviesSubscriber = viewModel.$numberOfMovies
+        let moviesSubscriber = viewModel.$numberOfMovies
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
-                self.screen.moviesCollectionView.performBatchUpdates({
-                    self.screen.moviesCollectionView.reloadSections(IndexSet(integer: 0))
-                })
+                self.screen.moviesCollectionView.reloadData()
             })
+        self.subscribers.append(moviesSubscriber)
     }
 }

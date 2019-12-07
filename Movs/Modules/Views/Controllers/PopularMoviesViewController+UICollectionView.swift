@@ -29,7 +29,7 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
         }
         
         cell.viewModel = self.viewModel.cellViewModelForItemAt(indexPath: indexPath)
-        cell.poster.image = UIImage.from(color: UIColor.secondarySystemBackground)
+        cell.poster.backgroundColor = UIColor.secondarySystemBackground
         return cell
     }
 }
