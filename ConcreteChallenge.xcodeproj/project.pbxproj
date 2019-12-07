@@ -50,7 +50,7 @@
 		10031393F99F3CA3306336C9 /* Pods-ConcreteChallenge-ConcreteChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge-ConcreteChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge-ConcreteChallengeUITests/Pods-ConcreteChallenge-ConcreteChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A06C02CA59039B4B263ABE3 /* Pods_ConcreteChallenge_ConcreteChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge_ConcreteChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		286E16E848B818DBA10FEB2E /* Pods-ConcreteChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.release.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.release.xcconfig"; sourceTree = "<group>"; };
-		5E6AACDD239C3DB100564F6A /* ConcreteChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E6AACDD239C3DB100564F6A /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E6AACE0239C3DB100564F6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E6AACE9239C3DB200564F6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E6AACEC239C3DB200564F6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		5E6AACDE239C3DB100564F6A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E6AACDD239C3DB100564F6A /* ConcreteChallenge.app */,
+				5E6AACDD239C3DB100564F6A /* Movs.app */,
 				5E6AACF3239C3DB300564F6A /* ConcreteChallengeTests.xctest */,
 				5E6AACFE239C3DB300564F6A /* ConcreteChallengeUITests.xctest */,
 			);
@@ -158,6 +158,7 @@
 		5E6AACDF239C3DB100564F6A /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				5E6AAD33239C6A6000564F6A /* Service */,
 				5E6AAD21239C486900564F6A /* Resources */,
 				5E6AAD14239C411000564F6A /* Common */,
 				5E6AAD13239C40F200564F6A /* Supporting Files */,
@@ -267,6 +268,13 @@
 			path = Log;
 			sourceTree = "<group>";
 		};
+		5E6AAD33239C6A6000564F6A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -286,7 +294,7 @@
 			);
 			name = ConcreteChallenge;
 			productName = ConcreteChallenge;
-			productReference = 5E6AACDD239C3DB100564F6A /* ConcreteChallenge.app */;
+			productReference = 5E6AACDD239C3DB100564F6A /* Movs.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5E6AACF2239C3DB300564F6A /* ConcreteChallengeTests */ = {
@@ -711,7 +719,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = concrete.ConcreteChallenge;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Movs;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -732,7 +740,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = concrete.ConcreteChallenge;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Movs;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
