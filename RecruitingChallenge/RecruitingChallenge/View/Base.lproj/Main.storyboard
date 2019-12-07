@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="liq-UC-uhZ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Favorites-->
+        <scene sceneID="ecj-77-ex6">
+            <objects>
+                <viewController id="lZW-Iz-pEl" customClass="FavoritesViewController" customModule="RecruitingChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a4E-BW-usw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="C0E-VG-c60"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" id="2Kx-Bk-zM3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zJI-9g-lxJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="148" y="83"/>
+        </scene>
+        <!--Movies-->
+        <scene sceneID="qmg-eb-ZqX">
+            <objects>
+                <viewController id="8eG-yg-4dw" customClass="MoviesViewController" customModule="RecruitingChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="99F-le-2xr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MxP-hD-Ouc">
+                                <rect key="frame" x="0.0" y="132" width="414" height="681"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="cPl-0C-VX1">
+                                    <size key="itemSize" width="200" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="hF3-CB-CrY">
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="buA-UE-BWw"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="search"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.80392156862745101" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hF3-CB-CrY" firstAttribute="leading" secondItem="MxP-hD-Ouc" secondAttribute="leading" id="B02-33-sYu"/>
+                            <constraint firstItem="MxP-hD-Ouc" firstAttribute="trailing" secondItem="oLY-H8-TT4" secondAttribute="trailing" id="KPx-rJ-OkC"/>
+                            <constraint firstItem="MxP-hD-Ouc" firstAttribute="bottom" secondItem="oLY-H8-TT4" secondAttribute="bottom" id="KXh-m1-4N1"/>
+                            <constraint firstItem="MxP-hD-Ouc" firstAttribute="top" secondItem="hF3-CB-CrY" secondAttribute="bottom" id="SvP-Lc-uD9"/>
+                            <constraint firstItem="MxP-hD-Ouc" firstAttribute="leading" secondItem="oLY-H8-TT4" secondAttribute="leading" id="bOA-zc-hbl"/>
+                            <constraint firstItem="hF3-CB-CrY" firstAttribute="trailing" secondItem="MxP-hD-Ouc" secondAttribute="trailing" id="e2i-BJ-kD3"/>
+                            <constraint firstItem="hF3-CB-CrY" firstAttribute="top" secondItem="oLY-H8-TT4" secondAttribute="top" id="lYa-mo-W0F"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oLY-H8-TT4"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="xbr-6j-M10"/>
+                    <connections>
+                        <outlet property="collectionView" destination="MxP-hD-Ouc" id="npv-En-3Ys"/>
+                        <outlet property="searchBar" destination="hF3-CB-CrY" id="0wx-1d-xer"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ibE-Xy-X0S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="147.82608695652175" y="-565.17857142857144"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Wpm-ym-OOS">
+            <objects>
+                <tabBarController interfaceStyle="light" id="liq-UC-uhZ" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ad7-pK-Efs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.80392156859999997" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.96470588239999999" green="0.80392156859999997" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8eG-yg-4dw" kind="relationship" relationship="viewControllers" id="zTV-Oe-fRc"/>
+                        <segue destination="lZW-Iz-pEl" kind="relationship" relationship="viewControllers" id="G5i-mj-UN7"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fgY-0I-py5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-770" y="-241"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="list_icon" width="18" height="10"/>
+    </resources>
+</document>
