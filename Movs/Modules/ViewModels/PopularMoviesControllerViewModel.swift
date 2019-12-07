@@ -1,5 +1,5 @@
 //
-//  MoviesControllerViewModel.swift
+//  PopularMoviesControllerViewModel.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 03/12/19.
@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class MoviesControllerViewModel {
+class PopularMoviesControllerViewModel {
     
     // MARK: - Models
     
@@ -17,20 +17,20 @@ class MoviesControllerViewModel {
     
     // MARK: - Properties
     
-    internal let apiManager = MoviesAPIManager()
+    internal let apiManager: MoviesAPIManager
     internal let decoder = JSONDecoder()
     internal var isMovieFetchInProgress: Bool = false
+    weak var coordinatorDelegate: PopularMoviesCoordinator?
     
     // MARK: - Publishers
     
-    @Published var currentPage: Int
-    @Published var numberOfMovies: Int
+    @Published var currentPage: Int = 0
+    @Published var numberOfMovies: Int = 0
         
     // MARK: - Initializers and Deinitializers
     
-    init(currentPage: Int = 0, numberOfMovies: Int = 0) {
-        self.currentPage = currentPage
-        self.numberOfMovies = numberOfMovies
+    init(apiManager: MoviesAPIManager) {
+        self.apiManager = apiManager
     }
     
     // MARK: - MovieCellViewModel
@@ -39,8 +39,8 @@ class MoviesControllerViewModel {
         return MovieCellViewModel(movie: self.movies[indexPath.row], apiManager: self.apiManager)
     }
     
-    func detailsViewModelForItemAt(indexPath: IndexPath) -> MovieDetailsControllerViewModel {
-        return MovieDetailsControllerViewModel(movie: self.movies[indexPath.row], apiManager: self.apiManager)
+    func didSelectItemAt(indexPath: IndexPath) {
+        self.coordinatorDelegate?.didSelectItem(movie: self.movies[indexPath.row])
     }
     
     // MARK: - Fetch Methods

@@ -12,9 +12,7 @@ import UIKit
 
 extension PopularMoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let viewModel = self.viewModel.detailsViewModelForItemAt(indexPath: indexPath)
-        let controller = MovieDetailsViewController(viewModel: viewModel)
-        self.present(controller, animated: true, completion: nil)
+        self.viewModel.didSelectItemAt(indexPath: indexPath)
     }
 }
 

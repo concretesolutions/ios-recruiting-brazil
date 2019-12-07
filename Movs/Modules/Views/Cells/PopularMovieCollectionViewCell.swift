@@ -68,11 +68,11 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     // MARK: - Binding
     
     func bind(to viewModel: MovieCellViewModel) {
-        self.posterSubscriber = viewModel.$posterImage.sink(receiveValue: { image in
-            DispatchQueue.main.async {
+        self.posterSubscriber = viewModel.$posterImage
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { image in
                 self.poster.image = image
-            }
-        })
+            })
     }
 }
 

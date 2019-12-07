@@ -15,6 +15,7 @@ class MovieDetailsViewController: UIViewController {
     
     internal let screen = MovieDetailsViewScreen()
     internal var viewModel: MovieDetailsControllerViewModel
+   
     // MARK: - Subscribers
     
     internal var backdropSubscriber: AnyCancellable?
@@ -47,10 +48,10 @@ class MovieDetailsViewController: UIViewController {
     // MARK: - Binding
     
     func bind(to viewModel: MovieDetailsControllerViewModel) {
-        self.backdropSubscriber = viewModel.$backdropImage.sink(receiveValue: { image in
-            DispatchQueue.main.async {
+        self.backdropSubscriber = viewModel.$backdropImage
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { image in
                 self.screen.backdrop.image = image
-            }
-        })
+            })
     }
 }

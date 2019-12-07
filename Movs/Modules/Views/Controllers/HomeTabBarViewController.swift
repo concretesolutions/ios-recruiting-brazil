@@ -9,13 +9,8 @@
 import UIKit
 
 class HomeTabBarViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let firstViewController = PopularMoviesViewController()
-        firstViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        self.viewControllers = [firstViewController]
-        // Do any additional setup after loading the view.
     }
 }
