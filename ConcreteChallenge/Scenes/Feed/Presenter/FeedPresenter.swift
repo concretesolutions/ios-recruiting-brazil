@@ -71,4 +71,12 @@ final class FeedPresenter: BasePresenter {
                             imageUrl: nil,
                             isFavorite: false)
     }
+    
+    func getHeaderData() -> FeedHeaderViewData {
+        
+        // TODO: Localize
+        return FeedHeaderViewData(title: "Popular Movies",
+                                  greeting: "Today's",
+                                  searchBarPlaceholder: "Looking for a movie?")
+    }
 }

@@ -11,11 +11,13 @@ import SnapKit
 
 final class ItemCollectionViewCell: BaseCollectionViewCell {
     
+    // MARK: - Properties -
     /// Height / Width
     static let imageAspect: CGFloat = (1080/1920)
     
-    let filmImageView: UIImageView = {
-        let view = UIImageView()
+    // MARK: View
+    let filmImageView: GradientImageView = {
+        let view = GradientImageView(frame: .zero)
         view.layer.cornerRadius = 15.0
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
@@ -26,11 +28,13 @@ final class ItemCollectionViewCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.numberOfLines = 0
+        label.textColor = .white
         return label
     }()
     
+    // MARK: - Methods -
     override func setupUI() {
-        self.backgroundColor = .yellow
+        
         contentView.addSubview(filmImageView)
         filmImageView.addSubview(titleLabel)
     }

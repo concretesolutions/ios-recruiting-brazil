@@ -16,8 +16,8 @@ import os.log
  */
 enum Colors {
     
-    static let color: UIColor = {
-        guard let color = UIColor(named: "Color") else {
+    static let almostBlack: UIColor = {
+        guard let color = UIColor(named: "almostBlack") else {
             os_log("❌ - Unknown color", log: Logger.appLog(), type: .fault)
             return UIColor.white
         }
