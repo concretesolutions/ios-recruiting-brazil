@@ -35,29 +35,13 @@ class FilmesViewController: UIViewController, UICollectionViewDelegate, UICollec
         collectionFilmes.dataSource = self
 
         getMovies()
-        
-        //Seta as imagens dos filmes favoritados
-        //let fav = Favorito()
-        //self.favorito = fav.carregaFavorito()
-        //carregaFavorito()
-        
-        //Mark - Cria conexão com CoreData
-         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-         let context = appDelegate?.persistentContainer.viewContext
-         //let conectBD = NSEntityDescription.insertNewObject(forEntityName: "FilmesFavoritos", into: context!)
-         let requisicaoFavorito = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
-        
-         do {
-             self.favorito = try  context?.fetch(requisicaoFavorito) as! [NSManagedObject]
-         } catch  {
-             print ("Erro ao carregar Favorito")
-         }
-        
+        carregaFavorito ()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        //collectionFilmes.reloadData()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        getMovies()
+//        carregaFavorito ()
+//    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filmes.count
@@ -128,17 +112,19 @@ class FilmesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 }
     }
     
-//    func carregaFavorito() -> [NSManagedObject]{
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//        let requisicaoFavorito = NSFetchRequest<NSFetchRequestResult>(entityName: "Favoritos")
-//        do {
-//            self.favorito = try  context.fetch(requisicaoFavorito) as! [NSManagedObject]
-//        } catch  {
-//            print ("Erro ao carregar Favorito")
-//        }
-//
-//        return self.favorito
-//    }
+    func carregaFavorito () {
+        //Mark - Cria conexão com CoreData
+         let appDelegate = UIApplication.shared.delegate as? AppDelegate
+         let context = appDelegate?.persistentContainer.viewContext
+         let requisicaoFavorito = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteMovie")
+        
+         do {
+             self.favorito = try  context?.fetch(requisicaoFavorito) as! [NSManagedObject]
+         } catch  {
+             print ("Erro ao carregar Favorito")
+         }
+        
+        collectionFilmes.reloadData()
+    }
     
 }
