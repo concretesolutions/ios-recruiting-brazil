@@ -19,7 +19,12 @@ final class SplashVC: BaseViewController {
             
             if let movies = movies {
                 dump(movies)
-                debugPrint("Success")
+            }
+        }
+        
+        MovieClient.getGenreList { (genreList, error) in
+            if let list = genreList {
+                dump(list)
             }
         }
     }

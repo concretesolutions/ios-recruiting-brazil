@@ -22,10 +22,15 @@ enum MovieEndpoint: APIConfiguration {
      */
     case popular(page: Int)
     
+    /**
+     Get the genre list
+     */
+    case genreList
+    
     // MARK: - HTTPMethod
     var method: HTTPMethod {
         switch self {
-        case .popular:
+        case .popular, .genreList:
             return .get
         }
     }
@@ -35,13 +40,15 @@ enum MovieEndpoint: APIConfiguration {
         switch self {
         case .popular(let page):
             return "/movie/popular?api_key=\(NetworkInfo.APIParameterKey.apiKey)&page=\(page)"
+        case .genreList:
+            return "/genre/movie/list?api_key=\(NetworkInfo.APIParameterKey.apiKey)"
         }
     }
     
     // MARK: - Parameters
     var parameters: Parameters? {
         switch self {
-        case .popular:
+        case .popular, .genreList:
             return nil
         }
     }

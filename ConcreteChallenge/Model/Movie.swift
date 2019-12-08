@@ -11,8 +11,11 @@ import Foundation
 class Movie: Codable {
     
     let id: Int
-    let title: String?
-    
+    let title: String
+    let overview: String
+    let genreIDs: [Int]
+    let posterPath: String?
+    let releaseDate: String
 }
 
 extension Movie {
@@ -20,5 +23,9 @@ extension Movie {
     enum CodingKeys: String, CodingKey {
         case id
         case title
+        case overview
+        case genreIDs = "genre_ids"
+        case posterPath = "poster_path"
+        case releaseDate = "release_date"
     }
 }

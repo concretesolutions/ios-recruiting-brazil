@@ -32,7 +32,8 @@
 		5E6AAD39239C7D8B00564F6A /* MovieEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD38239C7D8B00564F6A /* MovieEndpoint.swift */; };
 		5E6AAD3B239C8E2700564F6A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD3A239C8E2700564F6A /* Genre.swift */; };
 		5E6AAD3D239C91E900564F6A /* MovieClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD3C239C91E900564F6A /* MovieClient.swift */; };
-		5E6AAD3F239C941000564F6A /* MDBResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD3E239C941000564F6A /* MDBResponse.swift */; };
+		5E6AAD3F239C941000564F6A /* PopularResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD3E239C941000564F6A /* PopularResponse.swift */; };
+		5E6AAD42239CA1BC00564F6A /* GenreListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD41239CA1BC00564F6A /* GenreListResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +85,8 @@
 		5E6AAD38239C7D8B00564F6A /* MovieEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEndpoint.swift; sourceTree = "<group>"; };
 		5E6AAD3A239C8E2700564F6A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		5E6AAD3C239C91E900564F6A /* MovieClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieClient.swift; sourceTree = "<group>"; };
-		5E6AAD3E239C941000564F6A /* MDBResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBResponse.swift; sourceTree = "<group>"; };
+		5E6AAD3E239C941000564F6A /* PopularResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularResponse.swift; sourceTree = "<group>"; };
+		5E6AAD41239CA1BC00564F6A /* GenreListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreListResponse.swift; sourceTree = "<group>"; };
 		607AF2E4B0344954FF4EE8DE /* Pods_ConcreteChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7726C2AE05F2BDA60189463E /* Pods-ConcreteChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		910EE706690D4D630F32CCF6 /* Pods_ConcreteChallenge_ConcreteChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge_ConcreteChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,9 +213,9 @@
 		5E6AAD11239C40DA00564F6A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5E6AAD40239CA17100564F6A /* Response */,
 				5E6AAD2F239C50BE00564F6A /* Movie.swift */,
 				5E6AAD3A239C8E2700564F6A /* Genre.swift */,
-				5E6AAD3E239C941000564F6A /* MDBResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,6 +293,15 @@
 				5E6AAD3C239C91E900564F6A /* MovieClient.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		5E6AAD40239CA17100564F6A /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				5E6AAD3E239C941000564F6A /* PopularResponse.swift */,
+				5E6AAD41239CA1BC00564F6A /* GenreListResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,13 +562,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E6AAD42239CA1BC00564F6A /* GenreListResponse.swift in Sources */,
 				5E6AAD20239C468700564F6A /* BasePresenter.swift in Sources */,
 				5E6AAD29239C4CDA00564F6A /* Colors.swift in Sources */,
 				5E6AAD25239C49E100564F6A /* SplashPresenter.swift in Sources */,
 				5E6AAD16239C423700564F6A /* BaseViewController.swift in Sources */,
 				5E6AAD2C239C4F3A00564F6A /* Logger.swift in Sources */,
 				5E6AAD1E239C439400564F6A /* ViewDelegate.swift in Sources */,
-				5E6AAD3F239C941000564F6A /* MDBResponse.swift in Sources */,
+				5E6AAD3F239C941000564F6A /* PopularResponse.swift in Sources */,
 				5E6AAD30239C50BE00564F6A /* Movie.swift in Sources */,
 				5E6AAD1C239C436A00564F6A /* Presenter.swift in Sources */,
 				5E6AAD2E239C4F7D00564F6A /* LoggerCategory.swift in Sources */,

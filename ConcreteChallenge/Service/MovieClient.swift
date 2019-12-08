@@ -29,7 +29,7 @@ class MovieClient {
                     
                     do {
                         let decoder = JSONDecoder()
-                        let decodedJson = try decoder.decode(MDBResponse.self, from: jsonData)
+                        let decodedJson = try decoder.decode(PopularResponse.self, from: jsonData)
                         dump(decodedJson)
                         
                         completion(decodedJson.results, nil)
@@ -39,7 +39,34 @@ class MovieClient {
                     }
                 }
             } else {
-                debugPrint(response?.error as Any)
+                debugPrint(response?.error?.localizedDescription as Any)
+            }
+        }
+    }
+    
+    static func getGenreList(completion: @escaping ([Genre]?, Error?) -> Void) {
+        performRequest(route: .genreList) { response in
+            if response?.error == nil {
+                if let data = response?.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    
+                    guard let jsonData = utf8Text.data(using: .utf8) else {
+                        completion(nil, response?.error)
+                        return
+                    }
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let decodedJson = try decoder.decode(GenreListResponse.self, from: jsonData)
+                        dump(decodedJson)
+                        
+                        completion(decodedJson.genres, nil)
+                    } catch {
+                        completion(nil, error)
+                        debugPrint(error)
+                    }
+                }
+            } else {
+                debugPrint(response?.error?.localizedDescription as Any)
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  MDBResponse.swift
+//  PopularResponse.swift
 //  ConcreteChallenge
 //
 //  Created by Alexandre Abrahão on 07/12/19.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct MDBResponse: Codable {
+struct PopularResponse: Codable {
     
     let page: Int
     let totalPages: Int
-    let results: [Movie]?
+    let results: [Movie]
 }
 
-extension MDBResponse {
+extension PopularResponse {
     
     enum CodingKeys: String, CodingKey {
         case page
