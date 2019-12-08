@@ -19,6 +19,10 @@ class PopularMovieCell: UICollectionViewCell {
 
     weak var delegate: PopularMovieCellDelegate?
 
+    // MARK: - Reusable Identifier
+
+    static let reusableIdentifier: String = "PopularMovieCell"
+
     // MARK: - Subviews
 
     private lazy var mainStack: UIStackView = {
