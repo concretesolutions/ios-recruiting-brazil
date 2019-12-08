@@ -14,5 +14,13 @@ final class SplashVC: BaseViewController {
         super.setupUI()
         
         view.backgroundColor = .yellow
+        
+        MovieClient.getPopular(page: 1) { (movies, error) in
+            
+            if let movies = movies {
+                dump(movies)
+                debugPrint("Success")
+            }
+        }
     }
 }
