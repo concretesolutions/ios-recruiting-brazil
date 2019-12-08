@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         // Set the the main VC
-        window?.rootViewController = SplashVC(presenter: SplashPresenter())
+//        window?.rootViewController = SplashVC(presenter: SplashPresenter())
+        window?.rootViewController = FeedVC(presenter: FeedPresenter())
 
         // Present the window
         window?.makeKeyAndVisible()

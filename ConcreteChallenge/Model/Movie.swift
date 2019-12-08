@@ -15,6 +15,7 @@ class Movie: Codable {
     let overview: String
     let genreIDs: [Int]
     let posterPath: String?
+    let backdropPath: String?
     let releaseDate: String
 }
 
@@ -26,6 +27,7 @@ extension Movie {
         case overview
         case genreIDs = "genre_ids"
         case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
         case releaseDate = "release_date"
     }
 }
