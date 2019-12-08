@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+protocol DetailViewDelegate: ViewDelegate {
+    
+    /// Set the movie genres whenever it has loaded
+    func setGenres(data: GenreViewData)
+}

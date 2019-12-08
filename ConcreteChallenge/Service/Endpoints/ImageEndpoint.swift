@@ -18,7 +18,7 @@ enum ImageEndpoint: APIConfiguration {
     /**
      Get the genre list
      */
-    case image(width: Int, path: String)
+    case image(width: Int, path: String? = nil)
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
@@ -32,6 +32,7 @@ enum ImageEndpoint: APIConfiguration {
     var path: String {
         switch self {
         case .image(let width, let path):
+            guard let path = path else { return "" }
             return "/w\(width)\(path)"
         }
     }
@@ -45,13 +46,15 @@ enum ImageEndpoint: APIConfiguration {
     }
     
     // MARK: - URL -
-    var completeURL: URL {
+    var completeURL: URL? {
+        guard path != "" else { return nil }
         let completePath = NetworkInfo.ProductionServer.imageBaseURL + path
         return URL(string: completePath)!
     }
     
     // MARK: - URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
+        
         let url = NetworkInfo.ProductionServer.imageBaseURL + path
         
         var urlRequest = URLRequest(url: URL(string: url)!)
