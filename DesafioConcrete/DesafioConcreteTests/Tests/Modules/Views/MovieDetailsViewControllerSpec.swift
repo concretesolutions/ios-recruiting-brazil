@@ -16,5 +16,4 @@ class MovieDetailsViewControllerSpec: XCTestCase {
         let vc = MovieDetailsRouter.createModule(movie: movie)
         _ = vc.view
     }
-
 }

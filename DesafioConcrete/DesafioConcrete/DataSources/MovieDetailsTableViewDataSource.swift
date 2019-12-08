@@ -74,7 +74,4 @@ extension MovieDetailsTableViewDataSource: FavoriteMovieDelegate {
         }
         tableView?.reloadData()
     }
-    
-    func favoriteMovie() {
-    }
 }

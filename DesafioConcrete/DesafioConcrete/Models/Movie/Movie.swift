@@ -41,5 +41,3 @@ struct Movie: Decodable {
         case releaseDate = "release_date"
     }
 }
-
-

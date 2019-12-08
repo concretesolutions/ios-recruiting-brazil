@@ -42,5 +42,4 @@ extension FavoritesTableViewDataSource: UITableViewDataSource {
         cell.setup(with: items[indexPath.row])
         return cell
     }
-    
 }

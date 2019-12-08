@@ -15,5 +15,4 @@ class MoviesViewControllerSpec: XCTestCase {
         let vc = MoviesRouter.createModule()
         _ = vc.view
     }
-
 }

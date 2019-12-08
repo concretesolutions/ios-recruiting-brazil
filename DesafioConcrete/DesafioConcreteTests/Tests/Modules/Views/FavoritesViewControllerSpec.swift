@@ -15,5 +15,4 @@ class FavoritesViewControllerSpec: XCTestCase {
         let vc = FavoritesRouter.createModule()
         _ = vc.view
     }
-
 }

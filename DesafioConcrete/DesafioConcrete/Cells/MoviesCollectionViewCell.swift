@@ -26,7 +26,6 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
         return "movieCollection"
     }
     
-    weak var delegate: FavoriteMovieDelegate?
     var item: Movie?
     
     func setup(with item: Movie) {
@@ -40,10 +39,5 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
             movieImage.downloaded(from: item.posterPath, contentMode: .scaleAspectFill)
         }
         movieName.text = item.title
-    }
-    
-    @IBAction func favoriteAction(_ sender: UIButton) {
-        guard let delegate = delegate, let item = item else { return }
-        delegate.favoriteMovie(movie: item)
     }
 }

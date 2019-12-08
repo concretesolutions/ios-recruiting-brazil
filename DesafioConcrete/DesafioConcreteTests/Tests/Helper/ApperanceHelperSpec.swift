@@ -25,5 +25,4 @@ class ApperanceHelperSpec: XCTestCase {
         XCTAssertTrue(tabBarAppearace.unselectedItemTintColor == CustomColor.gray)
         XCTAssertTrue(tabBarAppearace.barTintColor == CustomColor.yellow)
     }
-    
 }

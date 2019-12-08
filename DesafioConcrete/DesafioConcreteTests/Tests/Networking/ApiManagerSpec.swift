@@ -18,8 +18,8 @@ class ApiManagerSpec: XCTestCase {
             do {
                 let _ = try JSONDecoder().decode(GenreRoot.self, from: data)
                 promise.fulfill()
-            } catch let error as NSError {
-                XCTFail("\(error)")
+            } catch {
+                XCTFail("StatusCode != 200")
             }
         }) { (error) in
             XCTFail("\(error)")

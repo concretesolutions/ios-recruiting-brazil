@@ -95,5 +95,4 @@ final class DataManager {
         
         return false
     }
-    
 }
