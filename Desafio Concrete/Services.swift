@@ -10,23 +10,42 @@ import Foundation
 import UIKit
 import AlamofireImage
 import Alamofire
+import CoreData
 
 class RequestAPI {
+    
+    private let apiKey = "dcfdbbf8648cddebeb0decb1f27aca9a"
+    
+    enum HttpMethod: String {
+        case GET = "GET"
+    }
+    
+    func setupBaseURL(fimURL: String) -> URL? {
+        guard let url = URL(string: "https://api.themoviedb.org/3/\(fimURL)") else {
+            return nil
+        }
+        
+        return url
+    }
+    
     func pegarFilmesPopulares(pagina: Int, completion: @escaping([Filme], String?) -> ()){
 
         var listaFilmesObj: [Filme] = []
 
-        let url = "https://api.themoviedb.org/3/movie/popular?api_key=dcfdbbf8648cddebeb0decb1f27aca9a&language=pt-BR&page=\(pagina)"
+        guard let url = setupBaseURL(fimURL: "movie/popular?api_key=\(apiKey)&language=pt-BR&page=\(pagina)") else {
+            completion([], "erro ao accesar URL filme populares")
+            return
+        }
 
-        let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
+        let request = NSMutableURLRequest(url: url,
                                             cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
-        request.httpMethod = "GET"
+        
+        request.httpMethod = HttpMethod.GET.rawValue
 
         let dataTask = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
                     
             if let erro = error {
-                print(erro.localizedDescription)
                 completion([],"\(erro.localizedDescription)")
             }
                     
@@ -55,7 +74,6 @@ class RequestAPI {
                     completion(listaFilmesObj, nil)
             
                 } catch {
-                    print(error)
                     completion(listaFilmesObj, error.localizedDescription)
                 }
             }
@@ -66,22 +84,24 @@ class RequestAPI {
    
    func pegarFilmesPorID(id: Int, completion: @escaping(Filme?, String?) -> ()){
  
-       let url = "https://api.themoviedb.org/3/movie/\(id)?api_key=dcfdbbf8648cddebeb0decb1f27aca9a&language=pt-BR"
+        guard let url = setupBaseURL(fimURL: "movie/\(id)?api_key=\(apiKey)&language=pt-BR") else {
+            completion(nil, "erro ao accesar URL do filme com id \(id)")
+            return
+        }
        
-       let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
+        let request = NSMutableURLRequest(url: url,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                   timeoutInterval: 10.0)
-       request.httpMethod = "GET"
+        request.httpMethod = HttpMethod.GET.rawValue
 
-       let dataTask = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+        let dataTask = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
                        
-           if let erro = error {
-               print(erro.localizedDescription)
-               completion(nil,nil)
-           }
+            if let erro = error {
+                completion(nil,erro.localizedDescription)
+            }
                        
-           if let data = data {
-               do {
+            if let data = data {
+                do {
                    
                    let json = try JSONDecoder().decode(FilmeDecodable.self, from: data)
                    
@@ -89,14 +109,13 @@ class RequestAPI {
                        completion(filme,nil)
                    }
                
-               } catch {
-                   print(error)
-                   completion(nil,nil)
-               }
-           }
-       })
+                } catch {
+                    completion(nil,error.localizedDescription)
+                }
+            }
+        })
        
-       dataTask.resume()
+        dataTask.resume()
    }
    
    func baixarPosterFilme(filme: FilmeDecodable, completion: @escaping(UIImage) -> ()){
@@ -117,17 +136,19 @@ class RequestAPI {
    
    func baixarGeneros(completion: @escaping(generosDetalhados?) -> ()){
        
-       let url = "https://api.themoviedb.org/3/genre/movie/list?language=pt-BR&api_key=dcfdbbf8648cddebeb0decb1f27aca9a"
-      
-       let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
+        guard let url = setupBaseURL(fimURL: "genre/movie/list?language=pt-BR&api_key=\(apiKey)&language=pt-BR") else {
+            completion(nil)
+            return
+        }
+    
+        let request = NSMutableURLRequest(url: url,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                   timeoutInterval: 10.0)
-       request.httpMethod = "GET"
+       request.httpMethod =  HttpMethod.GET.rawValue
 
        let dataTask = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
                        
-           if let erro = error {
-               print(erro.localizedDescription)
+           if let _ = error {
                completion(nil)
            }
                        
@@ -136,7 +157,6 @@ class RequestAPI {
                    let json = try JSONDecoder().decode(generosDetalhados.self, from: data)
                    completion(json)
                }catch{
-                   print(error.localizedDescription)
                    completion(nil)
                }
            }else{
@@ -149,48 +169,99 @@ class RequestAPI {
 }
 
 class RequestFavoritos {
-    func tirarFilmeFavorito(index: Int){
-        var favoritos = pegarListaFavoritos()
-        
-        favoritos.remove(at: index)
-        
-        UserDefaults.standard.set(favoritos, forKey: "favoritos")
-        
+    
+    let managedContext: NSManagedObjectContext
+    
+    init(context: NSManagedObjectContext) {
+        self.managedContext = context
     }
     
-    func salvarFilmeFavorito(id: Int, filme: Filme){
+    func salvarFavorito(id: Int){
         
-        var favoritos = pegarListaFavoritos()
-        let indexPossivelFav = verificarFavorito(id: id, filme: filme)
-        
-        if indexPossivelFav == -1 {
-            favoritos.append(filme.filmeDecodable.id ?? 0)
-            UserDefaults.standard.set(favoritos, forKey: "favoritos")
-        }else{
-            tirarFilmeFavorito(index: indexPossivelFav)
+        if pegarFavoritoPorId(id: id) != nil {
+            deletarFavorito(id: id) { (_) in }
+            return
         }
-            
+        
+        guard let entity = NSEntityDescription.entity(forEntityName: "FilmeObj", in: managedContext) else { return }
+                   
+        let person = NSManagedObject(entity: entity, insertInto: managedContext)
+                   
+        person.setValue(id, forKey: "id")
+                   
+        do{
+            try managedContext.save()
+        }catch _ as NSError{
+            return
+        }
+                   
     }
     
-    func verificarFavorito(id: Int, filme: Filme) -> Int{
+    func pegarFavoritos() -> [Int] {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FilmeObj")
         
-        let favoritos = pegarListaFavoritos()
-        
-        for (index, favorito) in favoritos.enumerated() {
-            if filme.filmeDecodable.id == favorito {
-                return index
+        do{
+            var favoritos: [Int] = []
+            let coreDataObj = try managedContext.fetch(fetchRequest)
+            for elemento in coreDataObj {
+                favoritos.append(elemento.value(forKey: "id") as? Int ?? 0)
             }
+            return favoritos
+        }catch{
+            return []
         }
-        return -1
     }
     
-    func pegarListaFavoritos() -> [Int] {
+    func pegarFavoritoPorId(id: Int) -> NSManagedObject? {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FilmeObj")
         
-        if let idFavoritos = UserDefaults.standard.value(forKey: "favoritos") as? [Int] {
-            return idFavoritos
-        }else{
-           return []
+        do{
+            let coreDataObj = try managedContext.fetch(fetchRequest)
+            for elemento in coreDataObj {
+                if elemento.value(forKey: "id") as? Int == id {
+                    return elemento
+                }
+            }
+            return nil
+        }catch{
+            return nil
         }
+    }
+    
+    func deletarFavorito(id: Int, completion: @escaping(String?) -> ()){
+        if let filme = pegarFavoritoPorId(id: id) {
+            managedContext.delete(filme)
+            do{
+                try managedContext.save()
+                completion(nil)
+            }catch{
+                completion("Nāo foi possivel deletar este filme dos favoritos")
+            }
+        }else{
+            completion("Nāo foi possivel deletar este filme dos favoritos")
+        }
+        
+    }
+
+}
+
+class Filtro {
+    func aplicarFiltro(filmesFiltrados: [Filme], anoSelecionado: Int, generoSelecionado: String) -> [Filme]{
+        if !anoSelecionado.isZero() && !generoSelecionado.isEmpty {
+            return filmesFiltrados.filter({ (filme) -> Bool in
+                return (filme.pegarAnoFilme() == anoSelecionado) && (filme.generoFormatado.contains(generoSelecionado))
+            })
+        }else if anoSelecionado.isZero() && !generoSelecionado.isEmpty {
+            return filmesFiltrados.filter({ (filme) -> Bool in
+                return (filme.generoFormatado.contains(generoSelecionado))
+            })
+        }else if !anoSelecionado.isZero() && generoSelecionado.isEmpty {
+            return filmesFiltrados.filter({ (filme) -> Bool in
+                return (filme.pegarAnoFilme() == anoSelecionado)
+            })
+        }
+        
+        return []
         
     }
 }

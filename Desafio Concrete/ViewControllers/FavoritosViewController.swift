@@ -22,11 +22,15 @@ class FavoritosViewController: UIViewController {
     @IBOutlet weak var mensagemErro: UILabel!
     
     //var e let
-    var filmesFavoritados = [Filme]()
-    var filmesFiltrados = [Filme]()
-    var anoSelecionado = 0
-    var generoSelecionado = ""
-    var pesquisaAtual = ""
+    let variaveis = VariaveisFavoritos()
+    var filmesFiltrados: [Filme] = [] {
+        didSet{
+            DispatchQueue.main.async {
+                self.setupTableView()
+            }
+        }
+    }
+
     
     //***********************************
     //MARK: Ciclo de vida view controller
@@ -34,15 +38,19 @@ class FavoritosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.delegate = self
-        tableView.dataSource = self
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        variaveis.requestFavoritos = RequestFavoritos(context: appDelegate.persistentContainer.viewContext)
         setupSearchBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if anoSelecionado != 0 || generoSelecionado != "" { return }
-        filmesFavoritados.removeAll()
+        super.viewDidAppear(animated)
+        if !variaveis.anoSelecionado.isZero() || !variaveis.generoSelecionado.isEmpty { return }
+        variaveis.filmesFavoritados.removeAll()
         filmesFiltrados.removeAll()
         pegarFavoritos()
     }
@@ -62,15 +70,23 @@ class FavoritosViewController: UIViewController {
     }
     
     
+    func setupTableView(){
+        variaveis.dataSource = favoritosTableViewDataSource(elementos: filmesFiltrados, delegate: self, requestFavoritos: variaveis.requestFavoritos, tableView: tableView)
+        variaveis.delegate = favoritosTableViewDelegate(elementos: filmesFiltrados)
+        tableView.delegate = variaveis.delegate
+        tableView.dataSource = variaveis.dataSource
+        tableView.reloadData()
+    }
+    
     //***********************************
     //MARK: Request Api
     //***********************************
     
     func pegarFavoritos(){
-        let favoritos = RequestFavoritos().pegarListaFavoritos()
+        let favoritos = variaveis.requestFavoritos.pegarFavoritos()
         let semaforo = DispatchSemaphore(value: favoritos.count)
         
-        if favoritos.count == 0 {
+        if favoritos.count.isZero() {
             viewErro.isHidden = false
             mensagemErro.text = "Você ainda nāo tem filmes favoritados"
             return
@@ -83,8 +99,7 @@ class FavoritosViewController: UIViewController {
                 if let filme = result {
                     DispatchQueue.main.async {
                         self.filmesFiltrados.append(filme)
-                        self.filmesFavoritados.append(filme)
-                        self.tableView.reloadData()
+                        self.variaveis.filmesFavoritados.append(filme)
                     }
                 }
                 semaforo.signal()
@@ -100,17 +115,16 @@ class FavoritosViewController: UIViewController {
     
     func pesquisarFilmes(searchBarText: String){
         
-        if searchBarText == "" {
-            filmesFiltrados = filmesFavoritados
-            tableView.reloadData()
+        if searchBarText.isEmpty {
+            filmesFiltrados = variaveis.filmesFavoritados
             return
         }
         
-        filmesFiltrados = filmesFavoritados.filter { (filme) -> Bool in
+        filmesFiltrados = variaveis.filmesFavoritados.filter { (filme) -> Bool in
             let titulo = filme.filmeDecodable.title ?? ""
             return titulo.contains(searchBarText)
         }
-        tableView.reloadData()
+        
     }
     
     //***********************************
@@ -121,46 +135,37 @@ class FavoritosViewController: UIViewController {
         
         let opcoesFiltroViewController = self.storyboard?.instantiateViewController(withIdentifier: "OpcoesFiltroViewController") as! OpcoesFiltroViewController
 
-        opcoesFiltroViewController.delegate = self
+        opcoesFiltroViewController.variaveis.delegate = self
         
          self.navigationController?.pushViewController(opcoesFiltroViewController, animated: true)
         
     }
     
     func aplicarFiltro(){
-        if anoSelecionado != 0 && generoSelecionado != ""{
-            filmesFiltrados = filmesFiltrados.filter({ (filme) -> Bool in
-                return (filme.pegarAnoFilme() == anoSelecionado) && (filme.generoFormatado.contains(generoSelecionado))
-            })
-        }else if anoSelecionado == 0 && generoSelecionado != "" {
-            filmesFiltrados = filmesFiltrados.filter({ (filme) -> Bool in
-                return (filme.generoFormatado.contains(generoSelecionado))
-            })
-        }else if anoSelecionado != 0 && generoSelecionado == "" {
-            filmesFiltrados = filmesFiltrados.filter({ (filme) -> Bool in
-                return (filme.pegarAnoFilme() == anoSelecionado)
-            })
-        }
         
-        if filmesFiltrados.count > 0 {
-            tableView.isHidden = false
-            tableView.reloadData()
-        }else{
-            tableView.isHidden = true
-            viewErro.isHidden = false
-            mensagemErro.text = "Nāo há filmes favoritados com esses filtros"
-        }
+        filmesFiltrados = Filtro().aplicarFiltro(filmesFiltrados: filmesFiltrados, anoSelecionado: variaveis.anoSelecionado, generoSelecionado: variaveis.generoSelecionado)
         
+        mostrarViewErro()
     }
     
     @IBAction func removerFiltro(_ sender: Any) {
-        anoSelecionado = 0
-        generoSelecionado = ""
-        filmesFiltrados = filmesFavoritados
-        tableView.reloadData()
+        variaveis.anoSelecionado = 0
+        variaveis.generoSelecionado = ""
+        filmesFiltrados = variaveis.filmesFavoritados
+        mostrarViewErro()
         removerFiltro.isHidden = true
     }
     
+    func mostrarViewErro(){
+        if filmesFiltrados.count.isZero() {
+            tableView.isHidden = true
+            viewErro.isHidden = false
+            mensagemErro.text = "Nāo há filmes favoritados com esses filtros"
+        }else{
+            tableView.isHidden = false
+            viewErro.isHidden = true
+        }
+    }
     
 }
 
@@ -168,49 +173,10 @@ class FavoritosViewController: UIViewController {
 //MARK: Extensions
 //***********************************
 
-extension FavoritosViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filmesFiltrados.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favoritoCell") as! FavoritosTableViewCell
-        
-        let filme = filmesFiltrados[indexPath.row]
-        
-        cell.setupCell(filme: filme)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-          if editingStyle == .delete {
-                let filme = filmesFiltrados[indexPath.row]
-                RequestFavoritos().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0 , filme: filme)
-                self.filmesFiltrados.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                
-                if filmesFiltrados.count == 0 {
-                    viewErro.isHidden = false
-                    mensagemErro.text = "Você ainda nāo tem filmes favoritados"
-                }
-          }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "Desfavoritar"
-    }
-    
-}
-
 extension FavoritosViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        pesquisaAtual = searchController.searchBar.text ?? ""
-        pesquisarFilmes(searchBarText: pesquisaAtual)
+        variaveis.pesquisaAtual = searchController.searchBar.text ?? ""
+        pesquisarFilmes(searchBarText: variaveis.pesquisaAtual)
     }
 }
 
@@ -229,16 +195,31 @@ extension FavoritosViewController {
 
 extension FavoritosViewController: voltarFiltro {
     func voltarFiltro(date: Int?, genre: String?) {
-        if let ano = date,
-            let genero = genre{
-            anoSelecionado = ano
-            generoSelecionado = genero
+        if let ano = date {
+            variaveis.anoSelecionado = ano
             removerFiltro.isHidden = false
+            aplicarFiltro()
         }
         
-        print(anoSelecionado)
-        print(generoSelecionado)
+        if let genero = genre {
+            variaveis.generoSelecionado = genero
+            removerFiltro.isHidden = false
+            aplicarFiltro()
+        }
         
-        aplicarFiltro()
     }
 }
+
+extension FavoritosViewController: favoritoSelecionado {
+    func didRemove(elementos: [Filme]) {
+        self.filmesFiltrados = elementos
+        self.variaveis.filmesFavoritados = elementos
+        if elementos.count.isZero() {
+            viewErro.isHidden = false
+            mensagemErro.text = "Você ainda nāo tem filmes favoritados"
+        }
+    }
+
+}
+
+

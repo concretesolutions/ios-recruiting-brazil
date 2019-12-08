@@ -13,84 +13,60 @@ protocol voltarFiltro {
 }
 
 class OpcoesFiltroViewController: UIViewController {
-
-    let opcoes = ["Date", "Genre"]
-    
-    var anoSelecionado = 0
-    var generoSelecionado = ""
-    
-    var delegate: voltarFiltro?
     
     @IBOutlet weak var tableView: UITableView!
+    let variaveis = VariaveisOpcoesFiltro()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupTableView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        if delegate != nil {
-            delegate?.voltarFiltro(date: anoSelecionado, genre: generoSelecionado)
+        super.viewDidDisappear(animated)
+        if variaveis.delegate != nil {
+            variaveis.delegate?.voltarFiltro(date: variaveis.anoSelecionado, genre: variaveis.generoSelecionado)
         }
+    }
+    
+    func setupTableView(){
+        variaveis.dataSource = opcoesFiltroTableViewDataSource(elementos: variaveis.opcoes, filtroAno: variaveis.anoSelecionado, filtroGenero: variaveis.generoSelecionado)
+        variaveis.filtroDelegate = opcoesFiltroTableViewDelegate(elementos: variaveis.opcoes, delegate: self)
+        tableView.dataSource = variaveis.dataSource
+        tableView.delegate = variaveis.filtroDelegate
+        tableView.reloadData()
     }
 
-}
-
-extension OpcoesFiltroViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return opcoes.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = opcoes[indexPath.row]
-        
-        if generoSelecionado != "" && indexPath.row == 1 {
-            cell.textLabel?.text = "Genero: \(generoSelecionado)"
-        }
-        
-        if anoSelecionado != 0 && indexPath.row == 0 {
-            cell.textLabel?.text = "Date: \(anoSelecionado)"
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let filtroSelecionadoViewController = self.storyboard?.instantiateViewController(withIdentifier: "FiltroSelecionadoViewController") as! FiltroSelecionadoViewController
-        
-        if indexPath.row == 0 {
-            filtroSelecionadoViewController.tipoFiltro = "anos"
-            if anoSelecionado != 0 { filtroSelecionadoViewController.ano = anoSelecionado }
-        }else{
-            filtroSelecionadoViewController.tipoFiltro = "generos"
-            if generoSelecionado != "" { filtroSelecionadoViewController.genero = generoSelecionado }
-        }
-        
-        filtroSelecionadoViewController.delegate = self
-        
-        self.navigationController?.pushViewController(filtroSelecionadoViewController, animated: true)
-    }
-    
 }
 
 extension OpcoesFiltroViewController: voltarFiltro {
     func voltarFiltro(date: Int?, genre: String?) {
         if let ano = date {
-            anoSelecionado = ano
+            variaveis.anoSelecionado = ano
         }
         
         if let genero = genre {
-            generoSelecionado = genero
+            variaveis.generoSelecionado = genero
         }
         
-        print(anoSelecionado)
-        print(generoSelecionado)
-        
-        tableView.reloadData()
+        setupTableView()
+    }
+}
+
+extension OpcoesFiltroViewController: opcoesFiltroSelecionadoDelegate {
+    func didSelect(indexPath: IndexPath) {
+        let filtroSelecionadoViewController = self.storyboard?.instantiateViewController(withIdentifier: "FiltroSelecionadoViewController") as! FiltroSelecionadoViewController
+
+        if indexPath.row.isZero() {
+            filtroSelecionadoViewController.variaveis.tipoFiltro = "anos"
+            if !(variaveis.anoSelecionado?.isZero() ?? true) { filtroSelecionadoViewController.variaveis.ano = variaveis.anoSelecionado }
+        }else{
+            filtroSelecionadoViewController.variaveis.tipoFiltro = "generos"
+            if !(variaveis.generoSelecionado?.isEmpty ?? true) { filtroSelecionadoViewController.variaveis.genero = variaveis.generoSelecionado }
+        }
+
+        filtroSelecionadoViewController.variaveis.delegate = self
+
+        self.navigationController?.pushViewController(filtroSelecionadoViewController, animated: true)
     }
 }

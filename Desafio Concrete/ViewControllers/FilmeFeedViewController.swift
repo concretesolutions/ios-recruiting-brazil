@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum Erro {
     case naoAchou
@@ -28,11 +29,14 @@ class FilmeFeedViewController: UIViewController {
     @IBOutlet weak var imagemErro: UIImageView!
     @IBOutlet weak var viewErro: UIView!
     
-    //Let e Vars
-    var filmesPopulares = [Filme]()
-    var filmesFiltrados = [Filme]()
-    var paginaAtual = 1
-    var pesquisaAtual = ""
+    var variaveis: VariaveisFeed!
+    var filmesFiltrados: [Filme] = [] {
+        didSet{
+            DispatchQueue.main.async {
+                self.setupTableView()
+            }
+        }
+    }
     
     //***********************************
     //MARK: Ciclo de vida view controller
@@ -40,15 +44,19 @@ class FilmeFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        variaveis = VariaveisFeed(collectionView: self.collectionView)
         setupSearchBar()
         setupLayoutCells()
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    
+        pegarContexto()
+        variaveis.requestFavoritos = RequestFavoritos(context: variaveis.context)
         pegarFilmesPopulares()
         
+    }
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionView.reloadData()
     }
     
     //***********************************
@@ -79,23 +87,42 @@ class FilmeFeedViewController: UIViewController {
         
     }
     
+    func setupTableView(){
+        variaveis.delegate = feedCollectionViewDelegate(filmes: filmesFiltrados, delegate: self)
+        variaveis.dataSource = feedCollectionViewDataSource(filmes: filmesFiltrados, context: variaveis.context, requestFavoritos: variaveis.requestFavoritos)
+        
+        collectionView.delegate = variaveis.delegate
+        collectionView.dataSource = variaveis.dataSource
+        collectionView.reloadData()
+    }
+    
+    //***********************************
+    //MARK: Context
+    //***********************************
+    
+    func pegarContexto(){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        variaveis.context = appDelegate.persistentContainer.viewContext
+    }
+    
     //***********************************
     //MARK: Pesquisa Filmes
     //***********************************
     
     func pesquisarFilmes(searchBarText: String){
         
-        if searchBarText == "" {
-            filmesFiltrados = filmesPopulares
-            collectionView.reloadData()
+        if searchBarText.isEmpty {
+            filmesFiltrados = variaveis.filmesPopulares
             return
         }
         
-        filmesFiltrados = filmesPopulares.filter { (filme) -> Bool in
+        filmesFiltrados = variaveis.filmesPopulares.filter { (filme) -> Bool in
             let titulo = filme.filmeDecodable.title ?? ""
             return titulo.contains(searchBarText)
         }
-        collectionView.reloadData()
     }
     
     func pegarFilmesPopulares(){
@@ -107,10 +134,9 @@ class FilmeFeedViewController: UIViewController {
                 }else{
                     if filmes.count > 0 {
                         self.viewErro.isHidden = true
-                        self.filmesPopulares.removeAll()
-                        self.filmesPopulares = filmes
+                        self.variaveis.filmesPopulares.removeAll()
+                        self.variaveis.filmesPopulares = filmes
                         self.filmesFiltrados = filmes
-                        self.collectionView.reloadData()
                     }else{
                         self.viewErro(erro: .naoAchou)
                     }
@@ -127,9 +153,9 @@ class FilmeFeedViewController: UIViewController {
     func puxarProximaPagina(){
         
         //IR PARA PROXIMA PAGINA
-        paginaAtual += 1
+        variaveis.paginaAtual += 1
         
-        RequestAPI().pegarFilmesPopulares(pagina: paginaAtual) { (filmes,erro) in
+        RequestAPI().pegarFilmesPopulares(pagina: variaveis.paginaAtual) { (filmes,erro) in
             
             DispatchQueue.main.async {
                 
@@ -138,33 +164,14 @@ class FilmeFeedViewController: UIViewController {
                 }else{
                     for filme in filmes {
                         self.filmesFiltrados.append(filme)
-                        self.filmesPopulares.append(filme)
+                        self.variaveis.filmesPopulares.append(filme)
                     }
-                    self.collectionView.reloadData()
                 }
                 
             }
             
         }
         
-    }
-    
-    @objc func salvarFavorito(sender: UIButton){
-        
-        guard let indexFilme = (sender.layer.value(forKey: "index")) as? Int else { return }
-    
-        let filme = filmesFiltrados[indexFilme]
-    
-        if RequestFavoritos().verificarFavorito(id: filme.filmeDecodable.id ?? 0, filme: filme) == -1 {
-            let image = #imageLiteral(resourceName: "favorite_full_icon")
-            sender.setBackgroundImage(image, for: .normal)
-        }else{
-            let image = #imageLiteral(resourceName: "favorite_gray_icon")
-            sender.setBackgroundImage(image, for: .normal)
-        }
-    
-        RequestFavoritos().salvarFilmeFavorito(id: filme.filmeDecodable.id ?? 0, filme: filme)
-    
     }
     
     //***********************************
@@ -178,68 +185,28 @@ class FilmeFeedViewController: UIViewController {
         switch erro {
         case .naoAchou:
             imagemErro.image = #imageLiteral(resourceName: "search_icon")
-            txtErro.text = "Sua busca por \(pesquisaAtual) nāo resultou em nenhum resultado."
+            txtErro.text = "Sua busca por \(variaveis.pesquisaAtual) nāo resultou em nenhum resultado."
         case .erroGenerico:
             imagemErro.image = #imageLiteral(resourceName: "error-image-icon-23")
             txtErro.text = "Um erro ocorreu. Por favor, tente novamente."
         }
-            
+        
     }
-    
 
 }
-
 
 //***********************************
 //MARK: Extensions
 //***********************************
 
-extension FilmeFeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filmesFiltrados.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedFilmeCell", for: indexPath) as! FilmeFeedCollectionViewCell
-        
-        let filme = filmesFiltrados[indexPath.row]
-        
-        cell.setupCell(filme: filme)
-        
-        cell.btFavorito.layer.setValue(indexPath.row, forKey: "index")
-        cell.btFavorito.addTarget(self, action: #selector(salvarFavorito), for: .touchUpInside)
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //SE O ULTIMO FILME DA LISTA FOR MOSTRADO, CHAMAR A PROXIMA PAGINA
-        if indexPath.row == filmesFiltrados.count - 1 && pesquisaAtual == "" {
-            puxarProximaPagina()
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let filme = filmesFiltrados[indexPath.row]
-
-        let filmeDetalheViewController = self.storyboard?.instantiateViewController(withIdentifier: "FilmeDetalheViewController") as! FilmeDetalheViewController
-
-        filmeDetalheViewController.filme = filme
-
-        self.navigationController?.pushViewController(filmeDetalheViewController, animated: true)
-    }
-    
-}
-
 extension FilmeFeedViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        pesquisaAtual = searchController.searchBar.text ?? ""
-        pesquisarFilmes(searchBarText: pesquisaAtual)
+        variaveis.pesquisaAtual = searchController.searchBar.text ?? ""
+        pesquisarFilmes(searchBarText: variaveis.pesquisaAtual)
     }
 }
 
 extension FilmeFeedViewController {
-    
     func esconderTeclado() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dispensarTeclado))
         tap.cancelsTouchesInView = false
@@ -248,6 +215,24 @@ extension FilmeFeedViewController {
     
     @objc func dispensarTeclado() {
         view.endEditing(true)
+    }
+}
+
+extension FilmeFeedViewController: feedSelecionado {
+    func didSelect(filme: Filme) {
+
+        let filmeDetalheViewController = self.storyboard?.instantiateViewController(withIdentifier: "FilmeDetalheViewController") as! FilmeDetalheViewController
+
+        filmeDetalheViewController.filme = filme
+
+        self.navigationController?.pushViewController(filmeDetalheViewController, animated: true)
+    }
+    
+    func puxarProximaPagina(index: IndexPath) {
+        //SE O ULTIMO FILME DA LISTA FOR MOSTRADO, CHAMAR A PROXIMA PAGINA
+        if index.row == filmesFiltrados.count - 1 && variaveis.pesquisaAtual.isEmpty {
+             puxarProximaPagina()
+        }
     }
 }
 
