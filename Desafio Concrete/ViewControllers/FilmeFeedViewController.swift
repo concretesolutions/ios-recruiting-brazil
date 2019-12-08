@@ -121,7 +121,7 @@ class FilmeFeedViewController: UIViewController {
         
         filmesFiltrados = variaveis.filmesPopulares.filter { (filme) -> Bool in
             let titulo = filme.filmeDecodable.title ?? ""
-            return titulo.contains(searchBarText)
+            return titulo.lowercased().contains(searchBarText.lowercased())
         }
     }
     

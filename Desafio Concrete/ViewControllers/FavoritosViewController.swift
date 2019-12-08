@@ -126,7 +126,7 @@ class FavoritosViewController: UIViewController {
         
         filmesFiltrados = variaveis.filmesFavoritados.filter { (filme) -> Bool in
             let titulo = filme.filmeDecodable.title ?? ""
-            return titulo.contains(searchBarText)
+            return titulo.lowercased().contains(searchBarText.lowercased())
         }
         
     }

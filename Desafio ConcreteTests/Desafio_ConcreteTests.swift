@@ -11,24 +11,50 @@ import XCTest
 
 class Desafio_ConcreteTests: XCTestCase {
 
+   var requestAPI: RequestAPI!
+    var filme: Filme!
+
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        requestAPI = RequestAPI()
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        requestAPI = nil
+        filme = nil
+        super.tearDown()
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testPuxarFilmes(){
+        requestAPI.pegarFilmesPopulares(pagina: 1) { result in
+            switch result {
+            case .success(let filmes):
+                 XCTAssertGreaterThan(filmes.count, 0, "deve puxar mais 1 de um filme")
+            case .failure( _): break
+            }
         }
     }
-
+    
+    func testPuxarGeneros(){
+        requestAPI.baixarGeneros { (generosDetalhados) in
+            XCTAssertNotNil(generosDetalhados)
+        }
+    }
+    
+    func testPuxarFilmePorId(){
+        //tentando puxar o filme Joker(2019)
+        requestAPI.pegarFilmesPorID(id: 475557) { result in
+            switch result {
+            case .success(let filme):
+                 filme.verificarGenerosFilme(generosID: self.filme.filmeDecodable.genre_ids ?? []) { (generos) in
+                     XCTAssertGreaterThan(generos.count, 0)
+                 }
+            case .failure( _): break
+            }
+        }
+    }
+    
+    func testBaseURL(){
+        XCTAssertNotNil(requestAPI.setupBaseURL(fimURL: "testeURL"))
+    }
 }

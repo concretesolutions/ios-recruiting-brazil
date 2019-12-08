@@ -58,10 +58,10 @@ extension OpcoesFiltroViewController: opcoesFiltroSelecionadoDelegate {
         let filtroSelecionadoViewController = self.storyboard?.instantiateViewController(withIdentifier: "FiltroSelecionadoViewController") as! FiltroSelecionadoViewController
 
         if indexPath.row.isZero() {
-            filtroSelecionadoViewController.variaveis.tipoFiltro = "anos"
+            filtroSelecionadoViewController.variaveis.tipoFiltro = .ano
             if !(variaveis.anoSelecionado?.isZero() ?? true) { filtroSelecionadoViewController.variaveis.ano = variaveis.anoSelecionado }
         }else{
-            filtroSelecionadoViewController.variaveis.tipoFiltro = "generos"
+            filtroSelecionadoViewController.variaveis.tipoFiltro = .generos
             if !(variaveis.generoSelecionado?.isEmpty ?? true) { filtroSelecionadoViewController.variaveis.genero = variaveis.generoSelecionado }
         }
 

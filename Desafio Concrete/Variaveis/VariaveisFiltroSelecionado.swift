@@ -9,7 +9,7 @@
 import Foundation
 
 class VariaveisFiltroSelecionado {
-    var tipoFiltro: String = ""
+    var tipoFiltro: Filtro!
     var filtroDataSource: filtroTableViewDataSource?
     var filtroDelegate: filtroTableViewDelegate?
     var anos: [Int] = []
@@ -18,4 +18,9 @@ class VariaveisFiltroSelecionado {
     var delegate: voltarFiltro?
     var ano: Int? = nil
     var genero: String? = nil
+    
+    enum Filtro {
+        case generos
+        case ano
+    }
 }

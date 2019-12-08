@@ -9,12 +9,13 @@
 import UIKit
 
 class FiltroSelecionadoViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     let variaveis = VariaveisFiltroSelecionado()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableViewDelegates()
         verificarFiltro()
     }
     
@@ -26,7 +27,7 @@ class FiltroSelecionadoViewController: UIViewController {
     }
     
     func setupTableViewDelegates(){
-        if variaveis.tipoFiltro == "generos"{
+        if variaveis.tipoFiltro == VariaveisFiltroSelecionado.Filtro.generos {
             variaveis.filtroDataSource = filtroTableViewDataSource(elementos: variaveis.generos)
             variaveis.filtroDelegate = filtroTableViewDelegate(elementos: variaveis.generos,tipoFiltro: .genero, delegate: self)
         }else{
@@ -45,16 +46,16 @@ class FiltroSelecionadoViewController: UIViewController {
     }
     
     func verificarFiltro(){
-        if variaveis.tipoFiltro == "generos" {
+        if variaveis.tipoFiltro == VariaveisFiltroSelecionado.Filtro.generos {
             RequestAPI().baixarGeneros { (result) in
-                if let generos = result {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if let generos = result {
                         let genResult = generos.genres ?? []
                         let _ = genResult.map { (result) in
                             self.variaveis.generos.append(result.name ?? "")
-                            self.setupTableViewDelegates()
                         }
                     }
+                    self.setupTableViewDelegates()
                 }
             }
         }else{
