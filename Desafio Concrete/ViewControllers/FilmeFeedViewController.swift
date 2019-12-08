@@ -126,12 +126,10 @@ class FilmeFeedViewController: UIViewController {
     }
     
     func pegarFilmesPopulares(){
-        RequestAPI().pegarFilmesPopulares(pagina: 1) { (filmes, erro) in
+        variaveis.requestApi.pegarFilmesPopulares(pagina: 1) { result in
             DispatchQueue.main.async {
-                
-                if let _ = erro {
-                    self.viewErro(erro: .erroGenerico)
-                }else{
+                switch result {
+                case .success(let filmes):
                     if filmes.count > 0 {
                         self.viewErro.isHidden = true
                         self.variaveis.filmesPopulares.removeAll()
@@ -140,8 +138,9 @@ class FilmeFeedViewController: UIViewController {
                     }else{
                         self.viewErro(erro: .naoAchou)
                     }
+                case .failure( _):
+                    self.viewErro(erro: .erroGenerico)
                 }
-                
             }
         }
     }
@@ -155,21 +154,18 @@ class FilmeFeedViewController: UIViewController {
         //IR PARA PROXIMA PAGINA
         variaveis.paginaAtual += 1
         
-        RequestAPI().pegarFilmesPopulares(pagina: variaveis.paginaAtual) { (filmes,erro) in
-            
+        variaveis.requestApi.pegarFilmesPopulares(pagina: variaveis.paginaAtual) { result in
             DispatchQueue.main.async {
-                
-                if let _ = erro {
-                    self.viewErro(erro: .erroGenerico)
-                }else{
+                switch result {
+                case .success(let filmes):
                     for filme in filmes {
                         self.filmesFiltrados.append(filme)
                         self.variaveis.filmesPopulares.append(filme)
                     }
+                case .failure( _):
+                    self.viewErro(erro: .erroGenerico)
                 }
-                
             }
-            
         }
         
     }

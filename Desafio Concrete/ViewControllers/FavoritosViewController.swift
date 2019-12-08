@@ -92,14 +92,18 @@ class FavoritosViewController: UIViewController {
             return
         }
         
+        tableView.isHidden = false
         viewErro.isHidden = true
         
         for idFavorito in favoritos {
-            RequestAPI().pegarFilmesPorID(id: idFavorito) { (result, erro) in
-                if let filme = result {
-                    DispatchQueue.main.async {
+            RequestAPI().pegarFilmesPorID(id: idFavorito) { result in
+                DispatchQueue.main.async {
+                switch result{
+                    case .success(let filme):
                         self.filmesFiltrados.append(filme)
                         self.variaveis.filmesFavoritados.append(filme)
+                    case .failure( _):
+                        self.mostrarViewErro()
                     }
                 }
                 semaforo.signal()

@@ -28,12 +28,11 @@ class RequestAPI {
         return url
     }
     
-    func pegarFilmesPopulares(pagina: Int, completion: @escaping([Filme], String?) -> ()){
+    func pegarFilmesPopulares(pagina: Int, completion: @escaping(Swift.Result<[Filme],Error>) -> ()){
 
         var listaFilmesObj: [Filme] = []
-
+        
         guard let url = setupBaseURL(fimURL: "movie/popular?api_key=\(apiKey)&language=pt-BR&page=\(pagina)") else {
-            completion([], "erro ao accesar URL filme populares")
             return
         }
 
@@ -46,7 +45,7 @@ class RequestAPI {
         let dataTask = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
                     
             if let erro = error {
-                completion([],"\(erro.localizedDescription)")
+                completion(.failure(erro))
             }
                     
             if let data = data {
@@ -58,7 +57,7 @@ class RequestAPI {
                 
                     if json.total_pages < pagina {
                         semaforo.signal()
-                        completion(listaFilmesObj, nil)
+                        completion(.success(listaFilmesObj))
                     }
             
                     for result in json.results {
@@ -71,10 +70,10 @@ class RequestAPI {
                         semaforo.wait()
                     }
                 
-                    completion(listaFilmesObj, nil)
+                    completion(.success(listaFilmesObj))
             
                 } catch {
-                    completion(listaFilmesObj, error.localizedDescription)
+                    completion(.failure(error))
                 }
             }
         })
@@ -82,10 +81,9 @@ class RequestAPI {
         dataTask.resume()
     }
    
-   func pegarFilmesPorID(id: Int, completion: @escaping(Filme?, String?) -> ()){
+   func pegarFilmesPorID(id: Int, completion: @escaping(Swift.Result<Filme,Error>) -> ()){
  
         guard let url = setupBaseURL(fimURL: "movie/\(id)?api_key=\(apiKey)&language=pt-BR") else {
-            completion(nil, "erro ao accesar URL do filme com id \(id)")
             return
         }
        
@@ -97,7 +95,7 @@ class RequestAPI {
         let dataTask = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
                        
             if let erro = error {
-                completion(nil,erro.localizedDescription)
+                completion(.failure(erro))
             }
                        
             if let data = data {
@@ -106,11 +104,11 @@ class RequestAPI {
                    let json = try JSONDecoder().decode(FilmeDecodable.self, from: data)
                    
                    let _ = Filme(filmeDecodable: json) { (filme) in
-                       completion(filme,nil)
+                        completion(.success(filme))
                    }
                
                 } catch {
-                    completion(nil,error.localizedDescription)
+                    completion(.failure(error))
                 }
             }
         })

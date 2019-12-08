@@ -19,6 +19,8 @@ class VariaveisFeed {
     var requestFavoritos: RequestFavoritos!
     var dataSource: feedCollectionViewDataSource!
     var delegate: feedCollectionViewDelegate!
+    let requestApi = RequestAPI()
+    
     init(collectionView: UICollectionView){
         self.collectionView = collectionView
     }
