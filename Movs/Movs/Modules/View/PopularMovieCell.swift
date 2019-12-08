@@ -58,11 +58,11 @@ class PopularMovieCell: UICollectionViewCell {
         return view
     }()
 
-    private lazy var heartImageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
+    private lazy var heartButton: UIButton = {
+        let view = UIButton(frame: .zero)
         view.contentMode = .scaleAspectFill
-        view.image = UIImage(systemName: "heart.fill")
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapOnHeart))
+        view.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        view.addTarget(self, action: #selector(self.didTapOnHeart), for: .touchUpInside)
         return view
     }()
 
@@ -84,7 +84,7 @@ class PopularMovieCell: UICollectionViewCell {
 
         self.titleLabel.text = movie.title
         self.posterImageView.loadImage(fromURL: movie.smallImageURL)
-        self.heartImageView.tintColor = movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
+        self.heartButton.tintColor = movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
         self.setupView()
     }
 }
@@ -98,7 +98,7 @@ extension PopularMovieCell: CodeView {
         self.mainStack.addArrangedSubview(self.bottomView)
         self.bottomView.addSubview(self.bottomStack)
         self.bottomStack.addArrangedSubview(self.titleLabel)
-        self.bottomStack.addArrangedSubview(self.heartImageView)
+        self.bottomStack.addArrangedSubview(self.heartButton)
     }
 
     func setupContraints() {
@@ -120,8 +120,9 @@ extension PopularMovieCell: CodeView {
             maker.trailingMargin.equalToSuperview()
         }
 
-        self.heartImageView.snp.makeConstraints { maker in
+        self.heartButton.snp.makeConstraints { maker in
             maker.width.equalTo(30)
+            maker.height.equalTo(self.heartButton.snp.width).multipliedBy(0.93)
         }
     }
 
@@ -131,13 +132,13 @@ extension PopularMovieCell: CodeView {
     }
 }
 
-extension PopularMovieCell {
+extension PopularMovieCell: UIGestureRecognizerDelegate {
 
     // MARK: - Tap handlers
 
     @objc func didTapOnHeart() {
         self.movie.isFavourite = self.movie.isFavourite ? false : true
-        self.heartImageView.tintColor = self.movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
-        self.delegate?.didClickOnHeart(movieID: self.movie.id)
+        self.heartButton.tintColor = self.movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
+        self.delegate?.didTapOnHeart(movieID: self.movie.id)
     }
 }

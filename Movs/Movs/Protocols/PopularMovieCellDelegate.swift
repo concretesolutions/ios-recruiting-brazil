@@ -12,5 +12,5 @@ protocol PopularMovieCellDelegate: class {
 
     // MARK: - Tap handlers
 
-    func didClickOnHeart(movieID: Int)
+    func didTapOnHeart(movieID: Int)
 }
