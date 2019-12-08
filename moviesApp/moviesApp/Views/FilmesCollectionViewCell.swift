@@ -10,4 +10,9 @@ import UIKit
 
 class FilmesCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var imgFoto: UIImageView!
+    @IBOutlet weak var labelNomeFilme: UILabel!
+    @IBOutlet weak var imgFavorito: UIImageView!
+    
+    
 }
