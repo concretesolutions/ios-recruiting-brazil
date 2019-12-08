@@ -45,6 +45,7 @@ extension FavoritesViewController: FavoritesViewProtocol {
     }
     
     func setupSearchController() {
+        searchController.searchBar.searchTextField.backgroundColor = CustomColor.orange
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"

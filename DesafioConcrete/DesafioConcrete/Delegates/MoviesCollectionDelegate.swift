@@ -26,7 +26,7 @@ extension MoviesCollectionDelegate: UICollectionViewDelegate {
 extension MoviesCollectionDelegate: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screen = UIScreen.main.bounds
-        return CGSize(width: screen.width/2 - 20, height: screen.height/3)
+        return CGSize(width: screen.width/2 - 15, height: screen.height/3)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
