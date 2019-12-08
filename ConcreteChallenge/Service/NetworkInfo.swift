@@ -11,6 +11,7 @@ import Foundation
 struct NetworkInfo {
     struct ProductionServer {
         static let baseURL = "https://api.themoviedb.org/3"
+        static let imageBaseURL = "https://image.tmdb.org/t/p"
     }
     
     struct APIParameterKey {

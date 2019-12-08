@@ -154,6 +154,7 @@ extension FeedVC: UICollectionViewDataSource {
         
         // TODO: Implement favorite
         cell.titleLabel.text = itemData.title
+        cell.filmImageView.kf.indicatorType = .activity
         cell.filmImageView.kf.setImage(with: itemData.imageUrl)
         
         return cell

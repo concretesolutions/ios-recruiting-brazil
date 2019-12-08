@@ -9,7 +9,7 @@
 import Alamofire
 
 /**
-Provides requests for weather operations
+Provides requests for movie operations
  
  - Returns: The request for a determinated operation
  */

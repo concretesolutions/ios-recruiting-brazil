@@ -63,12 +63,16 @@ final class FeedPresenter: BasePresenter {
         }
         
         let movie = movies[item]
-//        let imageURL =
+        let imageURL: URL?
+        if let path = movie.backdropPath {
+            imageURL = ImageEndpoint.image(width: 780, path: path).completeURL
+        } else {
+            imageURL = nil
+        }
         
-        // TODO: Implement image when endpoint is ready
         // TODO: Get favorite
         return ItemViewData(title: movie.title,
-                            imageUrl: nil,
+                            imageUrl: imageURL,
                             isFavorite: false)
     }
     
