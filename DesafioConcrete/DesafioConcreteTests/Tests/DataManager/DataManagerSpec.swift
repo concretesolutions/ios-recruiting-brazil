@@ -18,7 +18,7 @@ class DataManagerSpec: XCTestCase {
     }
     
     func testIfDeleteDataIsWorking() {
-        let movie = Movie(popularity: 0.0, voteCount: 1, video: false, posterPath: "", id: 2222, adult: false, backdropPath: "", originalLanguage: "", originalTitle: "", genreIds: [1], title: "Frozen II", voteAverage: 1.0, overview: "", releaseDate: "")
+        let movie = Movie(popularity: 0.0, voteCount: 1, video: false, posterPath: "", id: 1111, adult: false, backdropPath: "", originalLanguage: "", originalTitle: "", genreIds: [1], title: "Frozen II", voteAverage: 1.0, overview: "", releaseDate: "")
         DataManager.shared.createData(movie: movie)
         DataManager.shared.deleteData(movieId: movie.id)
         XCTAssertFalse(DataManager.shared.checkData(movieId: movie.id))

@@ -28,7 +28,6 @@ final class DataManager {
         
         do {
             try managedcontext.save()
-            print("ID \(movie.id) saved")
         } catch let error as NSError {
             print("id: \(movie.id), \n error: \(error),  \n userInfo error: \(error.userInfo)")
         }
@@ -51,7 +50,6 @@ final class DataManager {
                 let movie = Movie(popularity: 0.0, voteCount: 1, video: false, posterPath: posterPath, id: id, adult: false, backdropPath: "", originalLanguage: "", originalTitle: "", genreIds: genres, title: title, voteAverage: 1.0, overview: overview, releaseDate: releaseDate)
                 results.append(movie)
             }
-            print("Fetch data done")
         } catch (let error){
             print("Failed \(error)")
         }
@@ -71,8 +69,6 @@ final class DataManager {
             }
             guard let object = objectToDelete else { return }
             managedcontext.delete(object)
-            print("ID \(movieId) deleted")
-            
             do {
                 try managedcontext.save()
             } catch (let error) {

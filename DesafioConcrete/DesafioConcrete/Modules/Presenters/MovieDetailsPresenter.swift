@@ -51,7 +51,6 @@ final class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     
     private func setupTable(with tableView: UITableView, using movie: Movie) {
         guard let genres = genres else { return }
-        print("DETALHE \(movie.title): \(movie.id)")
         tableViewDatasource = MovieDetailsTableViewDataSource(using: movie, with: tableView, checking: genres)
     }
     

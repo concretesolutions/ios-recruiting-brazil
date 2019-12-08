@@ -105,7 +105,6 @@ final class MoviesPresenter: MoviesPresenterProtocol {
 //MARK: - MoviesInteractorOutputProtocol
 extension MoviesPresenter: MoviesInteractorOutputProtocol {
     func sendMoreData(movies: [Movie]) {
-        print(numberOfPages)
         guard let allMovies = self.movies else { return }
         if !allMovies.isEmpty {
             self.movies! += movies
