@@ -23,6 +23,7 @@
 		7775E3922399ED9F00132D17 /* PopularMovieCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775E3912399ED9F00132D17 /* PopularMovieCellSpec.swift */; };
 		77A71A96239741B700D06E36 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A71A95239741B700D06E36 /* DataProvider.swift */; };
 		77A71A99239767A700D06E36 /* MoviesAPIDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A71A98239767A700D06E36 /* MoviesAPIDataFetcher.swift */; };
+		77B471CD239B633C00A72C25 /* MockDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDA0722397C841004E4E36 /* MockDataFetcher.swift */; };
 		77BDA0732397C841004E4E36 /* MockDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDA0722397C841004E4E36 /* MockDataFetcher.swift */; };
 		77BDA0772397E0AB004E4E36 /* DataProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BDA0762397E0AB004E4E36 /* DataProviderSpec.swift */; };
 		77E5850F2399CFAF0032BD88 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5850E2399CFAF0032BD88 /* CodeView.swift */; };
@@ -129,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				772A8B7F23945B8B00303636 /* Movs */,
+				77B471CC239B632500A72C25 /* Tests Mock Data */,
 				77C453312395781800545CF7 /* MovsCodeViewTests */,
 				77C4533F2395782300545CF7 /* MovsTests */,
 				772A8B7E23945B8B00303636 /* Products */,
@@ -243,6 +245,14 @@
 			path = "Data Providers";
 			sourceTree = "<group>";
 		};
+		77B471CC239B632500A72C25 /* Tests Mock Data */ = {
+			isa = PBXGroup;
+			children = (
+				77BDA0722397C841004E4E36 /* MockDataFetcher.swift */,
+			);
+			path = "Tests Mock Data";
+			sourceTree = "<group>";
+		};
 		77C4530D23956A0A00545CF7 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,7 +272,6 @@
 		77C4533F2395782300545CF7 /* MovsTests */ = {
 			isa = PBXGroup;
 			children = (
-				77BDA0722397C841004E4E36 /* MockDataFetcher.swift */,
 				77BDA0762397E0AB004E4E36 /* DataProviderSpec.swift */,
 				77C453422395782300545CF7 /* Info.plist */,
 			);
@@ -582,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7775E3922399ED9F00132D17 /* PopularMovieCellSpec.swift in Sources */,
+				77B471CD239B633C00A72C25 /* MockDataFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
