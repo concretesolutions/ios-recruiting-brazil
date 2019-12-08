@@ -41,7 +41,7 @@ extension FavoritesViewController: FavoritesViewProtocol {
     func showResultImage(isHidden: Bool, text: String) {
         imgSearchEmptyState.isHidden = isHidden
         lblSearchEmptyState.isHidden = isHidden
-        lblSearchEmptyState.text = "No resuls for '\(text)'"
+        lblSearchEmptyState.text = "No results for '\(text)'"
     }
     
     func setupSearchController() {
