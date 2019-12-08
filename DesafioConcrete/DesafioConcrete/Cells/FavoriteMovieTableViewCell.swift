@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoriteMovieTableViewCell: UITableViewCell {
+final class FavoriteMovieTableViewCell: UITableViewCell {
 
     static func fileName() -> String {
         return String(describing: self)
@@ -26,7 +26,6 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblReleaseDate: UILabel!
     @IBOutlet weak var lblOverview: UILabel!
-    
     
     func setup(with item: Movie) {
         self.imgMovie.downloaded(from: item.posterPath, contentMode: .scaleAspectFill)

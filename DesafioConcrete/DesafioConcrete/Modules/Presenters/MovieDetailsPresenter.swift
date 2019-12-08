@@ -71,6 +71,7 @@ final class MovieDetailsPresenter: MovieDetailsPresenterProtocol {
     }
 }
 
+//MARK: MovieDetailsInteractorOutputProtocol -
 extension MovieDetailsPresenter: MovieDetailsInteractorOutputProtocol {
     func sendGenres(genres: [Genre]) {
         self.genres = genres

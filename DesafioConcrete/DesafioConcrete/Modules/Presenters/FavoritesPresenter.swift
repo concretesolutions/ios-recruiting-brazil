@@ -10,6 +10,7 @@ protocol FavoritesViewProtocol: class {
     func setupSearchController()
     func reloadTableView()
     func showResultImage(isHidden: Bool, text: String)
+    func createFilterButton()
     /* Presenter -> ViewController */
 }
 
@@ -25,6 +26,7 @@ protocol FavoritesPresenterProtocol: class {
     func setupTableView(with tableView: UITableView, isSearchBarEmpty: Bool)
     func callSetupSearchController()
     func filterMovies(using text: String)
+    func callCreateFilterButton()
 }
 
 final class FavoritesPresenter: FavoritesPresenterProtocol {
@@ -74,14 +76,21 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
         }
         view.reloadTableView()
     }
+    
+    func callCreateFilterButton() {
+        guard let view = view else { return }
+        view.createFilterButton()
+    }
 }
 
+//MARK: FavoritesInteractorOutputProtocol
 extension FavoritesPresenter: FavoritesInteractorOutputProtocol {
     func sendMovies(movies: [Movie]) {
         self.movies = movies
     }
 }
 
+//MARK: FavoritesDelegate
 extension FavoritesPresenter: FavoritesDelegate {
     func unfavoriteMovie(at: Int) {
         guard let movies = movies, let interactor = interactor, let view = view else { return }

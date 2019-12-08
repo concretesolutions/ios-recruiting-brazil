@@ -3,7 +3,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController {
     //MARK: - Variables
     var presenter: FavoritesPresenterProtocol?
     @IBOutlet weak var tableView: UITableView!
@@ -24,6 +24,7 @@ extension FavoritesViewController {
         super.viewDidLoad()
         guard let presenter = presenter else { return }
         presenter.callSetupSearchController()
+        presenter.callCreateFilterButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +48,7 @@ extension FavoritesViewController: FavoritesViewProtocol {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -54,6 +56,18 @@ extension FavoritesViewController: FavoritesViewProtocol {
     func reloadTableView() {
         guard let presenter = presenter else { return }
         presenter.setupTableView(with: tableView, isSearchBarEmpty: isSearchBarEmpty)
+    }
+    
+    func createFilterButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: CustomImages.filter.getImage(), style: .plain, target: self, action: #selector(filterTapped))
+    }
+}
+
+//MARK: -
+extension FavoritesViewController {
+    @objc
+    func filterTapped() {
+        // TODO
     }
 }
 

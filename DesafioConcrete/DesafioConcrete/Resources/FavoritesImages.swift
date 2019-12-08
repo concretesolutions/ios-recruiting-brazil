@@ -8,7 +8,8 @@
 
 import UIKit
 
-enum FavoriteImages: String {
+enum CustomImages: String {
+    case filter = "FilterIcon"
     case favorited = "favorite_full_icon"
     case unfavorited = "favorite_gray_icon"
     

@@ -32,9 +32,9 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     func setup(with item: Movie) {
         self.item = item
         if DataManager.shared.checkData(movieId: item.id) {
-            self.imgFavorite.image = FavoriteImages.favorited.getImage()
+            self.imgFavorite.image = CustomImages.favorited.getImage()
         } else {
-            self.imgFavorite.image = FavoriteImages.unfavorited.getImage()
+            self.imgFavorite.image = CustomImages.unfavorited.getImage()
         }
         if item.posterPath != "" {
             movieImage.downloaded(from: item.posterPath, contentMode: .scaleAspectFill)
