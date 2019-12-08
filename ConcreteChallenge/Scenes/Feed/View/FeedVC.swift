@@ -62,6 +62,8 @@ final class FeedVC: BaseViewController {
         let view = UISearchBar()
         view.layer.cornerRadius = 23
         view.backgroundColor = .white
+        view.tintColor = .white
+        view.backgroundImage = UIImage()
         view.searchBarStyle = .prominent
         view.searchTextField.backgroundColor = .white
         view.clipsToBounds = true
