@@ -40,6 +40,12 @@ final class DetailVC: BaseViewController {
         return view
     }()
     
+    lazy var favoriteButton: UIBarButtonItem = {
+        // TODO: Get which image to put from presenter
+        let button = UIBarButtonItem(image: UIImage(named: "favoriteEmpty"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(favoriteTapped(_:)))
+        return button
+    }()
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -50,6 +56,7 @@ final class DetailVC: BaseViewController {
         
         view.backgroundColor = .white
         self.title = detailPresenter?.getBarTitle()
+        self.navigationItem.rightBarButtonItem = favoriteButton
         
         detailTableView.dataSource = self
         detailTableView.delegate = self
@@ -70,6 +77,13 @@ final class DetailVC: BaseViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = false
+    }
+    
+    @objc func favoriteTapped(_ sender: UIBarButtonItem) {
+        
+        // TODO: Implement favorite
+        favoriteButton = UIBarButtonItem(image: UIImage(named: "favoriteFull"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(favoriteTapped(_:)))
+        self.navigationItem.rightBarButtonItem = favoriteButton
     }
 }
 
