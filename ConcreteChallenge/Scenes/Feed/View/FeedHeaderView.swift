@@ -28,10 +28,10 @@ class FeedHeaderView: UIView {
         let label = UILabel()
         label.textColor = .white
         if #available(iOS 13.0, *) {
-            label.font = UIFont.rounded(27)
+            label.font = UIFont.roundedBold(27)
         } else {
             // Fallback on earlier versions
-            label.font = UIFont.regular(27)
+            label.font = UIFont.bold(27)
         }
         return label
     }()

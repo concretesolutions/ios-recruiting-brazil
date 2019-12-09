@@ -20,6 +20,9 @@ class NavigationController: UINavigationController {
         
         self.navigationBar.barTintColor = Colors.almostBlack
         self.navigationBar.isTranslucent = false
+        self.navigationBar.tintColor = Colors.tmdbGreen
+        let textAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationBar.titleTextAttributes = textAttributes
     }
     
     required init?(coder aDecoder: NSCoder) {

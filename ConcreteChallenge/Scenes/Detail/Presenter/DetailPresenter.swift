@@ -76,4 +76,8 @@ final class DetailPresenter: BasePresenter {
         
         return displayData[row]
     }
+    
+    func getBarTitle() -> String {
+        return "Movie"
+    }
 }

@@ -49,6 +49,7 @@ final class DetailVC: BaseViewController {
         super.setupUI()
         
         view.backgroundColor = .white
+        self.title = detailPresenter?.getBarTitle()
         
         detailTableView.dataSource = self
         detailTableView.delegate = self
