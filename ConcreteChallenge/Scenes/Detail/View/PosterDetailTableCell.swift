@@ -35,7 +35,11 @@ final class PosterDetailTableCell: BaseTableViewCell {
             let imageWidth = UIScreen.main.bounds.width - 60
             make.center.equalToSuperview()
             make.width.equalTo(imageWidth)
-            make.height.equalTo(imageWidth * ItemCollectionViewCell.imageAspect)
+            make.height.equalTo(imageWidth * PosterDetailTableCell.imageAspect)
+            make.top.equalToSuperview().offset(20).priority(999)
+            make.bottom.equalToSuperview().inset(20).priority(999)
         }
+        
+        contentView.sizeToFit()
     }
 }

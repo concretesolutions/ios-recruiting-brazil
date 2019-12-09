@@ -83,4 +83,15 @@ final class FeedPresenter: BasePresenter {
                                   greeting: "Today's",
                                   searchBarPlaceholder: "Looking for a movie?")
     }
+    
+    func selectItem(item: Int) {
+        guard item < self.numberOfItems else {
+            os_log("❌ - Number of items > number of movies", log: Logger.appLog(), type: .fault)
+            return
+        }
+        
+        let movie = movies[item]
+        let detailPresenter = DetailPresenter(movie: movie)
+        feedView.navigateToView(presenter: detailPresenter)
+    }
 }

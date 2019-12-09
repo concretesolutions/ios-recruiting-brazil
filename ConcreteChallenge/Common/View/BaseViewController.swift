@@ -96,7 +96,7 @@ class BaseViewController: UIViewController, ViewDelegate {
     
     func navigateToView(presenter: Presenter) {
         
-        let newVC: BaseViewController = BaseViewController(presenter: presenter)
+        let newVC: BaseViewController = Factory.getViewController(using: presenter)
         
         if let navigationController = self.navigationController {
             navigationController.pushViewController(newVC, animated: true)

@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Set the the main VC
 //        window?.rootViewController = SplashVC(presenter: SplashPresenter())
-        window?.rootViewController = FeedVC(presenter: FeedPresenter())
+        let navigationController = NavigationController(rootViewController: Factory.getViewController(using: FeedPresenter()))
+        window?.rootViewController = navigationController
+        
 
         // Present the window
         window?.makeKeyAndVisible()

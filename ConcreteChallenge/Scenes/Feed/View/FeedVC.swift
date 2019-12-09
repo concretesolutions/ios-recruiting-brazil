@@ -19,8 +19,8 @@ final class FeedVC: BaseViewController {
     }
     
     // MARK: Header
-    internal let headerViewMaxHeight: CGFloat = 144 + UIApplication.shared.statusBarFrame.height
-    internal let headerViewMinHeight: CGFloat = 86 + UIApplication.shared.statusBarFrame.height
+    internal let headerViewMaxHeight: CGFloat = 144
+    internal let headerViewMinHeight: CGFloat = 86
     internal var headerViewHeightConstraint: Constraint?
     internal lazy var headerViewHeightConstant: CGFloat = self.headerViewMaxHeight
     
@@ -33,8 +33,8 @@ final class FeedVC: BaseViewController {
         layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 15, right: 0)
         layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.width - 40) * ItemCollectionViewCell.imageAspect)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.showsHorizontalScrollIndicator = false
-        view.backgroundColor = .clear
+        view.showsVerticalScrollIndicator = false
+        view.backgroundColor = .white
         view.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         return view
     }()
@@ -43,6 +43,7 @@ final class FeedVC: BaseViewController {
         let view = UIScrollView()
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
+        view.backgroundColor = Colors.almostBlack
         return view
     }()
 
@@ -57,7 +58,13 @@ final class FeedVC: BaseViewController {
     }()
 
     internal var headerView: FeedHeaderView = FeedHeaderView()
-
+    
+    internal lazy var auxiliarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.feedCollectionView.backgroundColor
+        return view
+    }()
+    
     internal lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
         view.layer.cornerRadius = 23
@@ -92,6 +99,7 @@ final class FeedVC: BaseViewController {
     
     override func addSubviews() {
         self.view.addSubview(scrollView)
+        self.scrollView.addSubview(auxiliarView)
         self.scrollView.addSubview(feedCollectionView)
         self.scrollView.addSubview(headerBackgroundView)
         self.headerBackgroundView.addSubview(headerView)
@@ -101,13 +109,18 @@ final class FeedVC: BaseViewController {
     override func setupConstraints() {
         
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.snp.bottomMargin)
         }
-
+        
         headerBackgroundView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             self.headerViewHeightConstraint = make.height.equalTo(self.headerViewMaxHeight).constraint
+        }
+        
+        auxiliarView.snp.makeConstraints { (make) in
+            make.edges.equalTo(headerBackgroundView)
         }
         
         headerView.snp.makeConstraints { (make) in
@@ -126,6 +139,12 @@ final class FeedVC: BaseViewController {
             make.top.equalTo(headerBackgroundView.snp.bottom)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = true
     }
 }
 
@@ -166,6 +185,9 @@ extension FeedVC: UICollectionViewDataSource {
 // MARK: - CollectionView Delegate -
 extension FeedVC: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        feedPresenter?.selectItem(item: indexPath.item)
+    }
 }
 
 // MARK: - ScrollView Delegate -

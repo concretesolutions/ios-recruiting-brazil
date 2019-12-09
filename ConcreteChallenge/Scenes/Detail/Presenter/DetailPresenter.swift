@@ -44,6 +44,10 @@ final class DetailPresenter: BasePresenter {
         }
     }
     
+    var numberOfRows: Int {
+        return displayData.count
+    }
+    
     // MARK: - Init -
     init(movie: Movie) {
         self.movie = movie
@@ -61,5 +65,15 @@ final class DetailPresenter: BasePresenter {
                 self.genres = matchingGenres
             }
         }
+    }
+    
+    func getDetailInfo(row: Int) -> DetailInfoType {
+        guard row < self.numberOfRows else {
+            os_log("❌ - Number of rows > number of info", log: Logger.appLog(), type: .fault)
+            // Return anything so as not to just crash
+            return .overview(text: "")
+        }
+        
+        return displayData[row]
     }
 }

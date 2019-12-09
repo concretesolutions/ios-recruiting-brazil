@@ -30,7 +30,6 @@ class MovieClient {
                     do {
                         let decoder = JSONDecoder()
                         let decodedJson = try decoder.decode(PopularResponse.self, from: jsonData)
-//                        dump(decodedJson)
                         
                         completion(decodedJson.results, nil)
                     } catch {
@@ -57,7 +56,6 @@ class MovieClient {
                     do {
                         let decoder = JSONDecoder()
                         let decodedJson = try decoder.decode(GenreListResponse.self, from: jsonData)
-                        dump(decodedJson)
                         
                         completion(decodedJson.genres, nil)
                     } catch {

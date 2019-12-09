@@ -21,9 +21,19 @@ final class DetailVC: BaseViewController {
     // MARK: View
     let detailTableView: UITableView = {
         let view = UITableView()
-        view.showsHorizontalScrollIndicator = false
+        view.layoutMargins = .zero
+        view.isScrollEnabled = true
+        view.separatorStyle = .none
+        view.backgroundColor = .white
+        view.estimatedSectionHeaderHeight = 0
+        view.showsVerticalScrollIndicator = false
+        view.accessibilityIdentifier = "feedTableView"
+        view.rowHeight = UITableView.automaticDimension
+        view.sectionHeaderHeight = 0
+        view.showsVerticalScrollIndicator = false
         view.backgroundColor = .clear
         view.register(PosterDetailTableCell.self, forCellReuseIdentifier: PosterDetailTableCell.identifier)
+        view.register(DefaultInfoTableCell.self, forCellReuseIdentifier: DefaultInfoTableCell.identifier)
         return view
     }()
     
@@ -51,31 +61,78 @@ final class DetailVC: BaseViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = false
+    }
+}
+
+// MARK: - Detail View Delegate -
+extension DetailVC: DetailViewDelegate {
+    func setGenres(data: GenreViewData) {
+        
+    }
 }
 
 // MARK: - TableView Data Source -
 extension DetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // FIXME: Number of rows
-        return 1
+        return detailPresenter?.numberOfRows ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard
-            let cell = detailTableView.dequeueReusableCell(withIdentifier: PosterDetailTableCell.identifier, for: indexPath) as? PosterDetailTableCell
-//            let itemData = detailPresenter?.getItemData(item: indexPath.item)
-        else {
-            os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
-            fatalError("Unknown identifier")
+        guard let info = detailPresenter?.getDetailInfo(row: indexPath.row) else {
+            os_log("❌ - Unknown presenter %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
+            fatalError("Unknown Presenter")
         }
         
-        // TODO: Implement favorite
-//        cell.titleLabel.text = itemData.title
-//        cell.filmImageView.kf.indicatorType = .activity
-//        cell.filmImageView.kf.setImage(with: itemData.imageUrl)
-        
-        return cell
+        switch info {
+        case .poster(let imageURL):
+            guard let cell = detailTableView.dequeueReusableCell(withIdentifier: info.identifier, for: indexPath) as? PosterDetailTableCell else {
+                os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
+                fatalError("Unknown identifier")
+            }
+            cell.posterImageView.kf.indicatorType = .activity
+            cell.posterImageView.kf.setImage(with: imageURL)
+            return cell
+            
+        case .title(let title):
+            guard let cell = detailTableView.dequeueReusableCell(withIdentifier: DefaultInfoTableCell.identifier, for: indexPath) as? DefaultInfoTableCell else {
+                os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
+                fatalError("Unknown identifier")
+            }
+            cell.textLabel?.text = title
+            return cell
+            
+        case .year(let year):
+            guard let cell = detailTableView.dequeueReusableCell(withIdentifier: DefaultInfoTableCell.identifier, for: indexPath) as? DefaultInfoTableCell else {
+                os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
+                fatalError("Unknown identifier")
+            }
+            cell.textLabel?.text = year
+            return cell
+            
+        case .genres:
+            guard let cell = detailTableView.dequeueReusableCell(withIdentifier: DefaultInfoTableCell.identifier, for: indexPath) as? DefaultInfoTableCell else {
+                os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
+                fatalError("Unknown identifier")
+            }
+            // TODO: treat when it gets the genres
+            cell.textLabel?.text = "Wait"
+            return cell
+            
+        case .overview(let text):
+            guard let cell = detailTableView.dequeueReusableCell(withIdentifier: DefaultInfoTableCell.identifier, for: indexPath) as? DefaultInfoTableCell else {
+                os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
+                fatalError("Unknown identifier")
+            }
+            
+            cell.textLabel?.text = text
+            return cell
+        }
     }
 }
 
