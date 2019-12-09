@@ -10,10 +10,15 @@ import UIKit
 import Combine
 
 class MovieListViewController: UIViewController {
-    var viewModel: MovieListViewModel = MovieListViewModel()
-    let screen = MovieListViewControllerScreen(frame: UIScreen.main.bounds)
+    var viewModel: MovieListViewModel!
+    var screen: MovieListViewControllerScreen!
+    
+    var query = PassthroughSubject<String?, Never>() // String written in search bar
     
     override func loadView() {
+        viewModel = MovieListViewModel(query: query.eraseToAnyPublisher())
+        
+        screen = MovieListViewControllerScreen(frame: UIScreen.main.bounds, state: viewModel.$state.eraseToAnyPublisher())
         screen.collectionView.dataSource = self
         screen.collectionView.delegate = self
         
@@ -23,7 +28,10 @@ class MovieListViewController: UIViewController {
         search.obscuresBackgroundDuringPresentation = false
         
         self.navigationItem.searchController = search
+        self.navigationItem.searchController!.searchBar.delegate = self // Set the serach bar delegate to this
+        
         self.title = "Movies"
+        self.query.send("")
     }
 
     override func viewDidLoad() {
@@ -38,6 +46,26 @@ class MovieListViewController: UIViewController {
     
     @objc func loadCollectionView() {
         self.screen.collectionView.reloadData()
+    }
+}
+
+// MARK: - SearchBar
+extension MovieListViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.query.send(searchBar.text) // Send changes in query string value
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.query.send(searchBar.text) // Send changes in query string value
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -64,7 +92,9 @@ extension MovieListViewController: UICollectionViewDataSource {
 // MARK: - Collection View Data Source
 extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = 180
+        let padding: CGFloat = 20
+        // Let collection view with two cells when in portrait mode and with four in landscape mode
+        let width: CGFloat = self.view.frame.height > self.view.frame.width ? (self.view.frame.width - (3 * padding))/2 : (self.view.frame.width - (3 * padding))/5
         return CGSize(width: width, height: width*1.5)
     }
     

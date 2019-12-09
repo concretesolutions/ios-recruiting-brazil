@@ -129,7 +129,7 @@ class MovieService {
     ///   - query: Text to be searching for on API
     ///   - params: Request params
     ///   - completion: Results handler
-    static public func searchMovie(query: String, params: [String: String]? = nil, completion: @escaping (Result<MoviesResponse, Error>) -> Void) {
+    static public func searchMovie(query: String, params: [String: String]? = nil, completion: @escaping (Result<[Movie], Error>) -> Void) {
         guard let urlComponents = URLComponents(string: "\(baseAPIURL)/search/movie") else { // URL to request from
             completion(.failure(MovieError.invalidURL))
             return
@@ -146,9 +146,10 @@ class MovieService {
             case .success(let data):
                 do {
                     let movieResponse = try self.jsonDecoder.decode(MoviesResponse.self, from: data) // Try to decode response
+                    let movies = movieResponse.results.map { Movie($0) }
                     
                     DispatchQueue.main.async {
-                        completion(.success(movieResponse))
+                        completion(.success(movies))
                     }
                 } catch {
                     completion(.failure(MovieError.serializationError))
