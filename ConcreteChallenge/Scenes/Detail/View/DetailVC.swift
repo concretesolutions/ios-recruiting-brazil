@@ -18,6 +18,9 @@ final class DetailVC: BaseViewController {
         return presenter as? DetailPresenter
     }
     
+    /// Cell that displays the genres info, to be updated when necessary
+    weak var genresCell: DefaultInfoTableCell?
+    
     // MARK: View
     let detailTableView: UITableView = {
         let view = UITableView()
@@ -72,7 +75,9 @@ final class DetailVC: BaseViewController {
 // MARK: - Detail View Delegate -
 extension DetailVC: DetailViewDelegate {
     func setGenres(data: GenreViewData) {
-        
+        DispatchQueue.main.async { [weak self] in
+            self?.genresCell?.textLabel?.text = data.genres
+        }
     }
 }
 
@@ -121,7 +126,8 @@ extension DetailVC: UITableViewDataSource {
                 fatalError("Unknown identifier")
             }
             // TODO: treat when it gets the genres
-            cell.textLabel?.text = "Wait"
+            cell.textLabel?.text = "Loading genres"
+            self.genresCell = cell
             return cell
             
         case .overview(let text):
