@@ -10,10 +10,15 @@ import UIKit
 import Combine
 
 class MovieListViewController: UIViewController {
-    var viewModel: MovieListViewModel = MovieListViewModel()
-    let screen = MovieListViewControllerScreen(frame: UIScreen.main.bounds)
+    var viewModel: MovieListViewModel!
+    var screen: MovieListViewControllerScreen!
+    
+    var query = PassthroughSubject<String?, Never>() // String written in search bar
     
     override func loadView() {
+        viewModel = MovieListViewModel(query: query.eraseToAnyPublisher())
+        
+        screen = MovieListViewControllerScreen(frame: UIScreen.main.bounds, state: viewModel.$state.eraseToAnyPublisher())
         screen.collectionView.dataSource = self
         screen.collectionView.delegate = self
         
@@ -23,7 +28,10 @@ class MovieListViewController: UIViewController {
         search.obscuresBackgroundDuringPresentation = false
         
         self.navigationItem.searchController = search
+        self.navigationItem.searchController!.searchBar.delegate = self // Set the serach bar delegate to this
+        
         self.title = "Movies"
+        self.query.send("")
     }
 
     override func viewDidLoad() {
@@ -38,6 +46,27 @@ class MovieListViewController: UIViewController {
     
     @objc func loadCollectionView() {
         self.screen.collectionView.reloadData()
+    }
+}
+
+// MARK: - SearchBar
+extension MovieListViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.query.send(searchBar.text) // Send changes in query string value
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.query.send(searchBar.text) // Send changes in query string value
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
 }
 

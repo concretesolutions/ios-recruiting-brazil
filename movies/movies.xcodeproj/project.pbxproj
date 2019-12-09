@@ -32,6 +32,8 @@
 		176F998D2393F2AC00023BE7 /* movies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 176F998B2393F2AC00023BE7 /* movies.xcdatamodeld */; };
 		176F998F2393F2AD00023BE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 176F998E2393F2AD00023BE7 /* Assets.xcassets */; };
 		176F99922393F2AD00023BE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 176F99902393F2AD00023BE7 /* LaunchScreen.storyboard */; };
+		177E9CEB239ED04200DBBF0C /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E9CEA239ED04200DBBF0C /* ErrorView.swift */; };
+		177E9CED239ED34A00DBBF0C /* ErrorViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177E9CEC239ED34A00DBBF0C /* ErrorViewSpec.swift */; };
 		178FC083239741FA00AB2ACF /* MovieServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178FC082239741FA00AB2ACF /* MovieServiceSpec.swift */; };
 		178FC0852397D2D300AB2ACF /* UserDefaults+ToggleFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178FC0842397D2D300AB2ACF /* UserDefaults+ToggleFavorite.swift */; };
 		17AF8FC923942F38001F7C16 /* TabBarViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AF8FC823942F38001F7C16 /* TabBarViewControllerSpec.swift */; };
@@ -97,6 +99,8 @@
 		176F998E2393F2AD00023BE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		176F99912393F2AD00023BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		176F99932393F2AD00023BE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		177E9CEA239ED04200DBBF0C /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		177E9CEC239ED34A00DBBF0C /* ErrorViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewSpec.swift; sourceTree = "<group>"; };
 		178FC082239741FA00AB2ACF /* MovieServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceSpec.swift; sourceTree = "<group>"; };
 		178FC0842397D2D300AB2ACF /* UserDefaults+ToggleFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ToggleFavorite.swift"; sourceTree = "<group>"; };
 		17AF8FC823942F38001F7C16 /* TabBarViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControllerSpec.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				17236F2E2394A5EE0015B113 /* MovieCollectionViewCellSpec.swift */,
 				17236F3C23953CB20015B113 /* MovieDetailsViewControllerScreenSpec.swift */,
 				17B0313F2395A7D000C98D23 /* FavoriteMovieTableViewCellSpec.swift */,
+				177E9CEC239ED34A00DBBF0C /* ErrorViewSpec.swift */,
 				17236F282394A5DC0015B113 /* Info.plist */,
 			);
 			path = moviesUITests;
@@ -295,6 +300,7 @@
 				174D331C239840B6004FDB38 /* MoviesList */,
 				174D331D239840C4004FDB38 /* FavoriteList */,
 				17236F3623952FC60015B113 /* MovieDetailsViewControllerScreen.swift */,
+				177E9CEA239ED04200DBBF0C /* ErrorView.swift */,
 				17236F3E239596B70015B113 /* FavoriteButton.swift */,
 			);
 			path = View;
@@ -613,6 +619,7 @@
 			files = (
 				17B031402395A7D000C98D23 /* FavoriteMovieTableViewCellSpec.swift in Sources */,
 				17236F2F2394A5EE0015B113 /* MovieCollectionViewCellSpec.swift in Sources */,
+				177E9CED239ED34A00DBBF0C /* ErrorViewSpec.swift in Sources */,
 				17236F3D23953CB20015B113 /* MovieDetailsViewControllerScreenSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,6 +662,7 @@
 				174D331B23983603004FDB38 /* UIImageView+Cache.swift in Sources */,
 				174D33192398316A004FDB38 /* URLSession+RequestFromURL.swift in Sources */,
 				17B031422395AD4800C98D23 /* FavoriteListViewControllerScreen.swift in Sources */,
+				177E9CEB239ED04200DBBF0C /* ErrorView.swift in Sources */,
 				17236F3F239596B70015B113 /* FavoriteButton.swift in Sources */,
 				17B031442395AD6C00C98D23 /* FavoriteListViewModel.swift in Sources */,
 				17236F3723952FC60015B113 /* MovieDetailsViewControllerScreen.swift in Sources */,
