@@ -65,7 +65,6 @@ extension MovieListViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
         searchBar.resignFirstResponder()
     }
 }
@@ -93,7 +92,9 @@ extension MovieListViewController: UICollectionViewDataSource {
 // MARK: - Collection View Data Source
 extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = 180
+        let padding: CGFloat = 20
+        // Let collection view with two cells when in portrait mode and with four in landscape mode
+        let width: CGFloat = self.view.frame.height > self.view.frame.width ? (self.view.frame.width - (3 * padding))/2 : (self.view.frame.width - (3 * padding))/5
         return CGSize(width: width, height: width*1.5)
     }
     

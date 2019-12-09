@@ -26,7 +26,6 @@ final class MovieListViewControllerScreen: UIView {
     lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(frame: CGRect.zero)
         view.isUserInteractionEnabled = false
-        view.startAnimating()
         
         return view
     }()
@@ -63,6 +62,12 @@ final class MovieListViewControllerScreen: UIView {
         genericErrorView.isHidden = !(state == .error)
         // State = .noDataError
         noDataErrorView.isHidden = !(state == .noDataError)
+        
+        if state == .loading {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
     }
 }
 
