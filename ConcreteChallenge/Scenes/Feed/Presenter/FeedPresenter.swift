@@ -20,13 +20,17 @@ final class FeedPresenter: BasePresenter {
         return view
     }
     
+    /// The movie data to be displayed
     private var movies: [Movie] = [] {
         didSet {
             feedView.reloadFeed()
         }
     }
     
+    /// Controls which page to load next on
     private var pagesLoaded: Int = 0
+    
+    private var maxPages: Int = 500
     
     // MARK: Computed
     var numberOfItems: Int {
@@ -50,6 +54,24 @@ final class FeedPresenter: BasePresenter {
             
             if let movies = movies {
                 self?.movies = movies
+                self?.feedView.reloadFeed()
+            }
+        }
+        pagesLoaded = 1
+    }
+    
+    func loadMoreItems() {
+        guard pagesLoaded <= maxPages else { return }
+        pagesLoaded += 1
+        MovieClient.getPopular(page: pagesLoaded) { [weak self] (movies, error) in
+            
+            if let error = error {
+                os_log("❌ - Error loading movie feed: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                return
+            }
+            
+            if let movies = movies {
+                self?.movies.append(contentsOf: movies)
                 self?.feedView.reloadFeed()
             }
         }

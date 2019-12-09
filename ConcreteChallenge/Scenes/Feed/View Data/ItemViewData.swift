@@ -15,6 +15,6 @@ struct ItemViewData {
     let isFavorite: Bool
     
     static var mockData: ItemViewData {
-        return ItemViewData(title: "Movie", imageUrl: nil, isFavorite: false)
+        return ItemViewData(title: "Loading...", imageUrl: nil, isFavorite: false)
     }
 }

@@ -152,7 +152,9 @@ final class FeedVC: BaseViewController {
 extension FeedVC: FeedViewDelegate {
     
     func reloadFeed() {
-        feedCollectionView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.feedCollectionView.reloadData()
+        }
     }
 }
 
