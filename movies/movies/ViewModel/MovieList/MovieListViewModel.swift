@@ -41,7 +41,6 @@ class MovieListViewModel: ObservableObject {
     }
     
     public func fetchMovies() {
-        self.state = .loading
         if searching == false {
             DataProvider.shared.fetchMovies { movies in
                 self.movies.append(contentsOf: movies)
