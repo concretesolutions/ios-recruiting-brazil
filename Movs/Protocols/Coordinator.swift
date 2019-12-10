@@ -17,6 +17,7 @@ protocol Coordinator {
 
     // MARK: - Properties
     
+    var dependencies: Dependencies { get }
     var presenter: Presenter { get }
     var coordinatedViewController: Controller { get }
         

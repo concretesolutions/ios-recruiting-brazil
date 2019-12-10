@@ -36,7 +36,28 @@ class MovieDetailsViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        let favoriteStatus = self.viewModel.coreDataManager.isFavorited(movieID: self.viewModel.id)
+        
         self.screen.titleLabel.text = self.viewModel.title
+        self.screen.favoriteButton.setFavorited(favoriteStatus)
+        self.screen.favoriteButton.addTarget(self, action: #selector(self.didTapFavorite(_: )), for: .touchUpInside)
         self.view = self.screen
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.viewModel.coordinatorDelegate?.finish()
+    }
+    
+    // MARK: - Actions
+    
+    @objc func didTapFavorite(_ sender: FavoriteButton) {
+        sender.setFavorited(!sender.favorited)
+        
+        if sender.favorited == true {
+            self.viewModel.coreDataManager.addFavorite(movieID: self.viewModel.id)
+        } else {
+            self.viewModel.coreDataManager.removeFavorite(movieID: self.viewModel.id)
+        }
     }
 }

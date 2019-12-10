@@ -10,10 +10,10 @@ import Foundation
 
 final class MoviesAPIManager: MoviesAPIDataFetcher {
 
-    // MARK: - Attributes
+    // MARK: - Properties
     
-    private let apiKey: String = "eea991e8b8c8738c849cddf195bc2813"
-    private let session: NetworkSession
+    internal let apiKey: String = "eea991e8b8c8738c849cddf195bc2813"
+    internal let session: NetworkSession
     internal var genres: [GenreDTO] = []
     
     // MARK: - Initializers and Deinitializers

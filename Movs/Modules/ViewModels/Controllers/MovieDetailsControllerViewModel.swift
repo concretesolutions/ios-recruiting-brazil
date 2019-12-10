@@ -15,12 +15,16 @@ class MovieDetailsControllerViewModel {
     // MARK: - Model
     
     private let movie: Movie
+
+    // MARK: - Dependencies
+    
+    typealias Dependencies = HasCoreDataManager
+    internal let coreDataManager: CoreDataManager
     
     // MARK: - Properties
     
-    internal let apiManager: MoviesAPIManager
-    internal let decoder = JSONDecoder()
-
+    weak var coordinatorDelegate: MovieDetailsCoordinator?
+    
     // MARK: - Attributes
     
     public let backdropPath: String?
@@ -32,9 +36,9 @@ class MovieDetailsControllerViewModel {
     
     // MARK: - Initializers and Deinitializers
     
-    init(movie: Movie, apiManager: MoviesAPIManager) {
-        self.apiManager = apiManager
+    init(movie: Movie, dependencies: Dependencies) {
         self.movie = movie
+        self.coreDataManager = dependencies.coreDataManager
         
         self.backdropPath = self.movie.backdropPath
         self.id = self.movie.id

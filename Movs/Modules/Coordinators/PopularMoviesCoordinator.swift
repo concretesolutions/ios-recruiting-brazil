@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class PopularMoviesCoordinator: Coordinator {
     
@@ -16,32 +17,62 @@ class PopularMoviesCoordinator: Coordinator {
     typealias Controller = PopularMoviesViewController
     
     // MARK: - Properties
-
-    private let apiManager: MoviesAPIManager
+    
+    internal let dependencies: Dependencies
+    internal var movieDetailsCoordinator: MovieDetailsCoordinator!
     internal let coordinatedViewController: Controller
     internal let presenter: Presenter
     
+    // MARK: - Publishers and Subscribers
+    
+    internal var subscribers: [AnyCancellable?] = []
+    
     // MARK: - Initializers and Deinitializers
     
-    init(presenter: UITabBarController, apiManager: MoviesAPIManager) {
-        self.presenter = presenter
-        self.apiManager = apiManager
+    init(parent: HomeTabBarCoordinator) {
+        self.presenter = parent.coordinatedViewController
+        self.dependencies = parent.dependencies
         
-        let viewModel = PopularMoviesControllerViewModel(apiManager: apiManager)
+        let viewModel = PopularMoviesControllerViewModel(dependencies: self.dependencies)
         self.coordinatedViewController = PopularMoviesViewController(viewModel: viewModel)
         self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         
         viewModel.coordinatorDelegate = self
     }
     
-    // MARK: - Coordination
+    deinit {
+        for subscriber in self.subscribers {
+            subscriber?.cancel()
+        }
+    }
+    
+    // MARK: - Coordinator
     
     func start() { }
+    
+    func finish() {
+        self.movieDetailsCoordinator = nil
+    }
+    
+    // MARK: - Binding
+    
+    func bind(to coordinator: MovieDetailsCoordinator) {
+        self.subscribers.append(coordinator.$coordinatorDidFinish
+            .sink(receiveValue: { isFinishing in
+                if isFinishing {
+                    self.movieDetailsCoordinator = nil
+                }
+            })
+        )
+    }
 }
 
-extension PopularMoviesCoordinator: SelectionCoordinator {
+extension PopularMoviesCoordinator: MovieCoordinator {
+    func didFavoriteItem(movie: Movie) { }
+    
     func didSelectItem(movie: Movie) {
-        let coordinator = MovieDetailsCoordinator(presenter: self.coordinatedViewController, movie: movie, apiManager: self.apiManager)
-        coordinator.start()
+        self.movieDetailsCoordinator = MovieDetailsCoordinator(parent: self, movie: movie)
+        self.movieDetailsCoordinator.start()
+        self.bind(to: self.movieDetailsCoordinator)
     }
 }

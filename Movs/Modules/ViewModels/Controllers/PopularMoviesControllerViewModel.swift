@@ -10,33 +10,39 @@ import Foundation
 import Combine
 
 class PopularMoviesControllerViewModel {
-    
+
     // MARK: - Models
     
     private var movies: [Movie] = []
     
-    // MARK: - Properties
+    // MARK: - Dependencies
     
+    typealias Dependencies = HasAPIManager & HasCoreDataManager
     internal let apiManager: MoviesAPIManager
+    internal let coreDataManager: CoreDataManager
+    
+    // MARK: - Properties
+
     internal let decoder = JSONDecoder()
     internal var isMovieFetchInProgress: Bool = false
     weak var coordinatorDelegate: PopularMoviesCoordinator?
     
-    // MARK: - Publishers
+    // MARK: - Publishers and Subscribers
     
     @Published var currentPage: Int = 0
     @Published var numberOfMovies: Int = 0
         
     // MARK: - Initializers and Deinitializers
     
-    init(apiManager: MoviesAPIManager) {
-        self.apiManager = apiManager
+    init(dependencies: Dependencies) {
+        self.coreDataManager = dependencies.coreDataManager
+        self.apiManager = dependencies.apiManager
     }
     
     // MARK: - MovieCellViewModel
     
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieCellViewModel {
-        return MovieCellViewModel(movie: self.movies[indexPath.row], apiManager: self.apiManager)
+        return MovieCellViewModel(movie: self.movies[indexPath.row], coreDataManager: self.coreDataManager)
     }
     
     func didSelectItemAt(indexPath: IndexPath) {

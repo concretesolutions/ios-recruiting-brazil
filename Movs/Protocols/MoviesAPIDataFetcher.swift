@@ -9,6 +9,14 @@
 import Foundation
 
 protocol MoviesAPIDataFetcher {
+    
+    // MARK: - Properties
+    
+    var apiKey: String { get }
+    var session: NetworkSession { get }
+    
+    // MARK: - Request Methods
+    
     func getPopularMovies(page: Int, completion: @escaping (Data?, Error?) -> Void)
     func getGenres(completion: @escaping (Data?, Error?) -> Void)
 }

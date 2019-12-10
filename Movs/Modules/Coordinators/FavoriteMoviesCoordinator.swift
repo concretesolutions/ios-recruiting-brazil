@@ -17,19 +17,23 @@ class FavoriteMoviesCoordinator: Coordinator {
     
     // MARK: - Properties
     
+    internal let dependencies: Dependencies
     internal let coordinatedViewController: Controller
     internal let presenter: Presenter
     
     // MARK: - Initializers and Deinitializers
     
-    init(presenter: UITabBarController, apiManager: MoviesAPIManager) {
-        self.presenter = presenter
+    init(parent: HomeTabBarCoordinator) {
+        self.presenter = parent.coordinatedViewController
+        self.dependencies = parent.dependencies
         
         self.coordinatedViewController = FavoriteMoviesViewController()
         self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
     }
     
-    // MARK: - Coordination
+    // MARK: - Coordinator
     
     func start() { }
+    
+    func finish() { }
 }

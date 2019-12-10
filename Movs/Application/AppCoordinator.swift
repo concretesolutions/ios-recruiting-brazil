@@ -17,16 +17,17 @@ class AppCoordinator: Coordinator {
     
     // MARK: - Properties
     
+    internal let dependencies = Dependencies()
     internal let presenter: Presenter
     internal let coordinatedViewController: Controller
-    private let homeCoordinator: HomeTabBarCoordinator
+    private var homeCoordinator: HomeTabBarCoordinator!
     
     // MARK: - Initializers
     
     init(window: UIWindow) {
         self.presenter = window
         self.coordinatedViewController = UINavigationController()
-        self.homeCoordinator = HomeTabBarCoordinator(presenter: self.coordinatedViewController)
+        self.homeCoordinator = HomeTabBarCoordinator(parent: self)
     }
     
     // MARK: - Coordination
@@ -35,5 +36,12 @@ class AppCoordinator: Coordinator {
         self.presenter.rootViewController = self.coordinatedViewController
         self.homeCoordinator.start()
         self.presenter.makeKeyAndVisible()
+    }
+    
+    func finish() {
+        self.presenter.rootViewController = nil
+        self.homeCoordinator.finish()
+        self.homeCoordinator = nil
+        self.presenter.resignKey()
     }
 }

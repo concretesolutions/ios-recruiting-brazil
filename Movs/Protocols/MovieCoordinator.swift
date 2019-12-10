@@ -1,5 +1,5 @@
 //
-//  SelectionCoordinatorDelegate.swift
+//  MovieCoordinator.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 06/12/19.
@@ -8,6 +8,7 @@
 
 import UIKit
 
-protocol SelectionCoordinator {
+protocol MovieCoordinator {
     func didSelectItem(movie: Movie)
+    func didFavoriteItem(movie: Movie)
 }

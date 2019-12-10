@@ -12,6 +12,7 @@ import UIKit
 
 extension PopularMoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedIndex = indexPath
         self.viewModel.didSelectItemAt(indexPath: indexPath)
     }
 }

@@ -31,9 +31,9 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     internal lazy var favoriteButton: FavoriteButton = {
         let button = FavoriteButton(frame: .zero)
         button.backgroundColor = UIColor.white
-        button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         button.layer.cornerRadius = 12.0
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(self.didTapFavorite(_: )), for: .touchUpInside)
         return button
     }()
     
@@ -41,7 +41,9 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     
     internal var viewModel: MovieCellViewModel! {
         didSet {
+            let favoriteStatus = self.viewModel.coreDataManager.isFavorited(movieID: self.viewModel.id)
             self.titleLabel.text = self.viewModel.title
+            self.favoriteButton.setFavorited(favoriteStatus)
             
             if let posterPath = self.viewModel.posterPath {
                 self.poster.download(imageURL: "https://image.tmdb.org/t/p/w342\(posterPath)")
@@ -58,6 +60,18 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Actions
+    
+    @objc func didTapFavorite(_ sender: FavoriteButton) {
+        sender.setFavorited(!sender.favorited)
+        
+        if sender.favorited {
+            self.viewModel.coreDataManager.addFavorite(movieID: self.viewModel.id)
+        } else {
+            self.viewModel.coreDataManager.removeFavorite(movieID: self.viewModel.id)
+        }
     }
 }
 

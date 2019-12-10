@@ -10,24 +10,28 @@ import UIKit
 
 class FavoriteButton: UIButton {
     
+    var favorited: Bool = false
+    
     // MARK: - Initializers and Deinitializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.tintColor = UIColor.lightGray
+        self.tintColor = .lightGray
+        self.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         self.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 3.0, bottom: 5.0, right: 5.0)
-        self.addTarget(self, action: #selector(self.handleTouchUpInside), for: .touchUpInside)
+    }
+    
+    public func setFavorited(_ state: Bool) {
+        if state == true {
+            self.tintColor = .red
+        } else {
+            self.tintColor = .lightGray
+        }
+        
+        self.favorited = state
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-        
-    // MARK: - Gesture Recognizers
-    
-    @objc func handleTouchUpInside() {
-        UIView.transition(with: self, duration: 0.15, options: .transitionCrossDissolve, animations: {
-            self.tintColor = self.tintColor == UIColor.red ? UIColor.lightGray : UIColor.red
-        })
     }
 }

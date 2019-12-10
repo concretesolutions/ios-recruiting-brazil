@@ -14,12 +14,11 @@ class MovieCellViewModel {
     
     // MARK: - Model
     
-    private let movie: Movie
+    private let movie: Movie    
     
-    // MARK: - Properties
+    // MARK: - Dependencies
     
-    internal let apiManager: MoviesAPIManager
-    internal let decoder = JSONDecoder()
+    var coreDataManager: CoreDataManager
     
     // MARK: - Attributes
     
@@ -31,9 +30,9 @@ class MovieCellViewModel {
     
     // MARK: - Initializers
     
-    init(movie: Movie, apiManager: MoviesAPIManager) {
+    init(movie: Movie, coreDataManager: CoreDataManager) {
         self.movie = movie
-        self.apiManager = apiManager
+        self.coreDataManager = coreDataManager
         
         self.id = movie.id
         self.posterPath = movie.posterPath

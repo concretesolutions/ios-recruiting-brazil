@@ -17,30 +17,38 @@ class HomeTabBarCoordinator: Coordinator {
     
     // MARK: - Properties
     
-    private let apiManager: MoviesAPIManager
+    internal let dependencies: Dependencies
     internal let coordinatedViewController: Controller
     internal let presenter: Presenter
     
     // MARK: - Child coordinators
     
-    private var favoriteMoviesCoordinator: FavoriteMoviesCoordinator
-    private var popularMoviesCoordinator: PopularMoviesCoordinator
+    private var favoriteMoviesCoordinator: FavoriteMoviesCoordinator!
+    private var popularMoviesCoordinator: PopularMoviesCoordinator!
     
     // MARK: - Initializers and Deinitializers
     
-    init(presenter: UINavigationController) {
-        self.presenter = presenter
-        self.apiManager = MoviesAPIManager()
+    init(parent: AppCoordinator) {
+        self.presenter = parent.coordinatedViewController
+        self.dependencies = parent.dependencies
 
         self.coordinatedViewController = HomeTabBarViewController()
-        self.popularMoviesCoordinator = PopularMoviesCoordinator(presenter: self.coordinatedViewController, apiManager: self.apiManager)
-        self.favoriteMoviesCoordinator = FavoriteMoviesCoordinator(presenter: self.coordinatedViewController, apiManager: self.apiManager)
+        self.popularMoviesCoordinator = PopularMoviesCoordinator(parent: self)
+        self.favoriteMoviesCoordinator = FavoriteMoviesCoordinator(parent: self)
     }
         
-    // MARK: - Coordination
+    // MARK: - Coordinator
     
     func start() {
         self.coordinatedViewController.viewControllers = [self.popularMoviesCoordinator.coordinatedViewController, self.favoriteMoviesCoordinator.coordinatedViewController]
         self.presenter.pushViewController(self.coordinatedViewController, animated: true)
+    }
+    
+    func finish() {
+        self.popularMoviesCoordinator.finish()
+        self.favoriteMoviesCoordinator.finish()
+        
+        self.popularMoviesCoordinator = nil
+        self.favoriteMoviesCoordinator = nil
     }
 }

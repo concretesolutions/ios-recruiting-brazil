@@ -13,8 +13,12 @@ class PopularMoviesViewController: UIViewController {
 
     // MARK: - Properties
     
+    internal var selectedIndex: IndexPath?
     internal let screen = PopularMoviesViewScreen()
     internal let viewModel: PopularMoviesControllerViewModel
+    
+    // MARK: - Publishers and Subscribers
+    
     internal var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers
@@ -60,11 +64,18 @@ class PopularMoviesViewController: UIViewController {
     // MARK: - Binding
     
     func bind(to viewModel: PopularMoviesControllerViewModel) {
-        let moviesSubscriber = viewModel.$numberOfMovies
+        self.subscribers.append(viewModel.$numberOfMovies
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
                 self.screen.moviesCollectionView.reloadData()
             })
-        self.subscribers.append(moviesSubscriber)
+        )
+        
+        self.subscribers.append(viewModel.coreDataManager.$favorites
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { _ in
+                self.screen.moviesCollectionView.reloadData()
+            })
+        )
     }
 }

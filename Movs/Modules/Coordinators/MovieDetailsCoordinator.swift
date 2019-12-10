@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Combine
 
 class MovieDetailsCoordinator: Coordinator {
-
+    
     // MARK: - Typealiases
     
     typealias Presenter = UIViewController
@@ -17,20 +18,39 @@ class MovieDetailsCoordinator: Coordinator {
     
     // MARK: - Properties
     
+    internal let dependencies: Dependencies
     internal var coordinatedViewController: Controller
     internal var presenter: Presenter
     
+    // MARK: - Publishers and Subscribers
+    
+    @Published var coordinatorDidFinish: Bool = false
+    private var subscribers: [AnyCancellable?] = []
+    
     // MARK: - Initializers and Deinitializers
     
-    init(presenter: UIViewController, movie: Movie, apiManager: MoviesAPIManager) {
-        self.presenter = presenter
-        let viewModel = MovieDetailsControllerViewModel(movie: movie, apiManager: apiManager)
+    init<Parent: Coordinator>(parent: Parent, movie: Movie) {
+        self.presenter = parent.coordinatedViewController
+        self.dependencies = parent.dependencies
+                
+        let viewModel = MovieDetailsControllerViewModel(movie: movie, dependencies: self.dependencies)
         self.coordinatedViewController = MovieDetailsViewController(viewModel: viewModel)
+        viewModel.coordinatorDelegate = self
     }
     
-    // MARK: - Coordination
+    deinit {
+        for subscriber in self.subscribers {
+            subscriber?.cancel()
+        }
+    }
+    
+    // MARK: - Coordinator
     
     func start() {
-        self.presenter.present(self.coordinatedViewController, animated: true, completion: nil)
+        self.presenter.present(self.coordinatedViewController, animated: true)
+    }
+    
+    func finish() {
+        self.coordinatorDidFinish = true
     }
 }

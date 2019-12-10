@@ -30,7 +30,6 @@ final class MovieDetailsViewScreen: UIView {
     lazy var favoriteButton: FavoriteButton = {
         let button = FavoriteButton()
         button.backgroundColor = UIColor.white
-        button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         button.layer.cornerRadius = 16.0
         button.layer.masksToBounds = true
         return button
