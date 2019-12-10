@@ -12,18 +12,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    let tabBarController: UITabBarController = {
-        let tabBarController = UITabBarController()
-        let moviesViewController = MoviesViewController()
-        let favoritesViewController = FavoritesViewController()
-        tabBarController.viewControllers = [moviesViewController, favoritesViewController]
-        return tabBarController
-    }()
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = tabBarController
+        window.rootViewController = TabBarViewController()
         self.window = window
 
         window.makeKeyAndVisible()
