@@ -33,6 +33,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         let view = UILabel(frame: .zero)
         view.font = UIFont.preferredFont(forTextStyle: .headline)
         view.textColor = .secondaryLabel
+        view.textAlignment = .right
         return view
     }()
     
@@ -69,18 +70,20 @@ extension FavoriteMovieTableViewCell: CodeView {
     
     func setupConstraints() {
         posterImageView.snp.makeConstraints { make in
-            make.top.left.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().inset(5)
+            make.left.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().inset(10)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(1/1.5)
         }
         
         dateLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(15)
             make.right.equalToSuperview().inset(10)
+            make.width.equalTo(60)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(15)
             make.left.equalTo(posterImageView.snp.right).offset(10)
             make.right.equalTo(dateLabel.snp.left).inset(10)
         }
@@ -90,7 +93,7 @@ extension FavoriteMovieTableViewCell: CodeView {
             make.top.equalTo(dateLabel.snp.bottom).offset(15)
             make.left.equalTo(posterImageView.snp.right).offset(10)
             make.right.equalToSuperview().inset(10)
-            make.bottom.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(15)
         }
     }
     
