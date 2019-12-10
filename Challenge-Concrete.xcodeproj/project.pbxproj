@@ -38,6 +38,9 @@
 		6CE72A2D23A02D26001B6D1C /* MoviesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A2C23A02D26001B6D1C /* MoviesDelegate.swift */; };
 		6CE72A2F23A02D3E001B6D1C /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A2E23A02D3E001B6D1C /* MovieData.swift */; };
 		6CE72A3123A02D55001B6D1C /* MovieVCProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A3023A02D55001B6D1C /* MovieVCProtocol.swift */; };
+		6CE72A3C23A03365001B6D1C /* Table&Collection+DequeueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A3B23A03365001B6D1C /* Table&Collection+DequeueCell.swift */; };
+		6CE72A3E23A0337B001B6D1C /* MovieTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A3D23A0337B001B6D1C /* MovieTableDataSource.swift */; };
+		6CE72A4023A03391001B6D1C /* MovieCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A3F23A03391001B6D1C /* MovieCollectionDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +98,9 @@
 		6CE72A2C23A02D26001B6D1C /* MoviesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDelegate.swift; sourceTree = "<group>"; };
 		6CE72A2E23A02D3E001B6D1C /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
 		6CE72A3023A02D55001B6D1C /* MovieVCProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVCProtocol.swift; sourceTree = "<group>"; };
+		6CE72A3B23A03365001B6D1C /* Table&Collection+DequeueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Table&Collection+DequeueCell.swift"; sourceTree = "<group>"; };
+		6CE72A3D23A0337B001B6D1C /* MovieTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieTableDataSource.swift; path = "../../../../.Trash/Challenge-Concrete/Challenge-Concrete/Extension/MovieTableDataSource.swift"; sourceTree = "<group>"; };
+		6CE72A3F23A03391001B6D1C /* MovieCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieCollectionDataSource.swift; path = "../../../../.Trash/Challenge-Concrete/Challenge-Concrete/Extension/MovieCollectionDataSource.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,7 @@
 		6CE729C123A01FFB001B6D1C /* Challenge-Concrete */ = {
 			isa = PBXGroup;
 			children = (
+				6CE72A3A23A03331001B6D1C /* Extension */,
 				6CE72A3223A02D88001B6D1C /* Views */,
 				6CE72A2223A02CA2001B6D1C /* DataSource */,
 				6CE72A1C23A02BD2001B6D1C /* Protocol */,
@@ -306,6 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				6CE72A2323A02CAD001B6D1C /* GenericDataSource.swift */,
+				6CE72A3D23A0337B001B6D1C /* MovieTableDataSource.swift */,
+				6CE72A3F23A03391001B6D1C /* MovieCollectionDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -315,6 +324,14 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6CE72A3A23A03331001B6D1C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6CE72A3B23A03365001B6D1C /* Table&Collection+DequeueCell.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,13 +468,16 @@
 				6CE72A0023A02A44001B6D1C /* Encodable+ToData.swift in Sources */,
 				6CE72A2D23A02D26001B6D1C /* MoviesDelegate.swift in Sources */,
 				6CE729C723A01FFB001B6D1C /* ViewController.swift in Sources */,
+				6CE72A3E23A0337B001B6D1C /* MovieTableDataSource.swift in Sources */,
 				6CE729FE23A02A2B001B6D1C /* URLComponents+RouterService.swift in Sources */,
 				6CE72A1B23A02BB8001B6D1C /* Response.swift in Sources */,
 				6CE72A2F23A02D3E001B6D1C /* MovieData.swift in Sources */,
 				6CE72A1523A02B73001B6D1C /* TrendingFilters.swift in Sources */,
+				6CE72A3C23A03365001B6D1C /* Table&Collection+DequeueCell.swift in Sources */,
 				6CE729FC23A029FF001B6D1C /* URLRequest+RouterService.swift in Sources */,
 				6CE72A0423A02A76001B6D1C /* URLSession+CustomResult.swift in Sources */,
 				6CE72A0223A02A5A001B6D1C /* Data+Decode.swift in Sources */,
+				6CE72A4023A03391001B6D1C /* MovieCollectionDataSource.swift in Sources */,
 				6CE72A2623A02CD2001B6D1C /* DataFetchDelegate.swift in Sources */,
 				6CE72A0923A02AA9001B6D1C /* HTTPTask.swift in Sources */,
 				6CE729C323A01FFB001B6D1C /* AppDelegate.swift in Sources */,
