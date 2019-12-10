@@ -3,19 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F8F0F957C7011122F67F48A /* Pods_iOS_Recruiting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD3BF8393F5BD9C163409BE /* Pods_iOS_Recruiting.framework */; };
 		AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EB623A01FE0005F219B /* AppDelegate.swift */; };
 		AFF71EB923A01FE0005F219B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EB823A01FE0005F219B /* SceneDelegate.swift */; };
 		AFF71EBB23A01FE0005F219B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EBA23A01FE0005F219B /* ViewController.swift */; };
 		AFF71EBE23A01FE0005F219B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFF71EBC23A01FE0005F219B /* Main.storyboard */; };
 		AFF71EC023A01FE2005F219B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF71EBF23A01FE2005F219B /* Assets.xcassets */; };
 		AFF71EC323A01FE2005F219B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFF71EC123A01FE2005F219B /* LaunchScreen.storyboard */; };
+		AFF71EE623A033D7005F219B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE023A033D7005F219B /* NetworkService.swift */; };
+		AFF71EE723A033D7005F219B /* NetworkDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE123A033D7005F219B /* NetworkDispatch.swift */; };
+		AFF71EE823A033D7005F219B /* NetworkBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE223A033D7005F219B /* NetworkBaseService.swift */; };
+		AFF71EE923A033D7005F219B /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE323A033D7005F219B /* NetworkProtocol.swift */; };
+		AFF71EEA23A033D7005F219B /* NetworkEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE423A033D7005F219B /* NetworkEncoding.swift */; };
+		AFF71EEB23A033D7005F219B /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE523A033D7005F219B /* HomeService.swift */; };
+		AFF71EEE23A03588005F219B /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EED23A03588005F219B /* CustomError.swift */; };
+		AFF71EF023A037A1005F219B /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EEF23A037A1005F219B /* Environment.swift */; };
+		AFF71EF223A03BB8005F219B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF123A03BB8005F219B /* Log.swift */; };
+		AFF71EF423A03F0B005F219B /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF323A03F0B005F219B /* NSErrorExtension.swift */; };
+		AFF71EF623A03F75005F219B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF523A03F75005F219B /* DataExtension.swift */; };
+		AFF71EF823A040B9005F219B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF723A040B9005F219B /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D7A9B4A78ED7C24CDAF6C52 /* Pods-iOS-Recruiting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-Recruiting.release.xcconfig"; path = "Target Support Files/Pods-iOS-Recruiting/Pods-iOS-Recruiting.release.xcconfig"; sourceTree = "<group>"; };
+		8CD3BF8393F5BD9C163409BE /* Pods_iOS_Recruiting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Recruiting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A237BB8FDFD332C5A08F8276 /* Pods-iOS-Recruiting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-Recruiting.debug.xcconfig"; path = "Target Support Files/Pods-iOS-Recruiting/Pods-iOS-Recruiting.debug.xcconfig"; sourceTree = "<group>"; };
 		AFF71EB323A01FE0005F219B /* iOS-Recruiting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Recruiting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFF71EB623A01FE0005F219B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFF71EB823A01FE0005F219B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +40,18 @@
 		AFF71EBF23A01FE2005F219B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFF71EC223A01FE2005F219B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFF71EC423A01FE2005F219B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFF71EE023A033D7005F219B /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		AFF71EE123A033D7005F219B /* NetworkDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDispatch.swift; sourceTree = "<group>"; };
+		AFF71EE223A033D7005F219B /* NetworkBaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkBaseService.swift; sourceTree = "<group>"; };
+		AFF71EE323A033D7005F219B /* NetworkProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
+		AFF71EE423A033D7005F219B /* NetworkEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEncoding.swift; sourceTree = "<group>"; };
+		AFF71EE523A033D7005F219B /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		AFF71EED23A03588005F219B /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		AFF71EEF23A037A1005F219B /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		AFF71EF123A03BB8005F219B /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		AFF71EF323A03F0B005F219B /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
+		AFF71EF523A03F75005F219B /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		AFF71EF723A040B9005F219B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +59,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F8F0F957C7011122F67F48A /* Pods_iOS_Recruiting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		662AAC11EAF27706CE5B1FE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CD3BF8393F5BD9C163409BE /* Pods_iOS_Recruiting.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		85D6E0F244AA89BC9AEA6C1E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A237BB8FDFD332C5A08F8276 /* Pods-iOS-Recruiting.debug.xcconfig */,
+				0D7A9B4A78ED7C24CDAF6C52 /* Pods-iOS-Recruiting.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		AFF71EAA23A01FE0005F219B = {
 			isa = PBXGroup;
 			children = (
 				AFF71EB523A01FE0005F219B /* iOS-Recruiting */,
 				AFF71EB423A01FE0005F219B /* Products */,
+				85D6E0F244AA89BC9AEA6C1E /* Pods */,
+				662AAC11EAF27706CE5B1FE5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,10 +104,10 @@
 		AFF71EB523A01FE0005F219B /* iOS-Recruiting */ = {
 			isa = PBXGroup;
 			children = (
-				AFF71ED123A027B7005F219B /* Objects */,
 				AFF71EC423A01FE2005F219B /* Info.plist */,
 				AFF71EB623A01FE0005F219B /* AppDelegate.swift */,
 				AFF71EB823A01FE0005F219B /* SceneDelegate.swift */,
+				AFF71ED123A027B7005F219B /* Objects */,
 				AFF71ECE23A02052005F219B /* Services */,
 				AFF71ECD23A0204D005F219B /* Resources */,
 				AFF71ECC23A0201D005F219B /* Extensions */,
@@ -87,6 +135,9 @@
 		AFF71ECC23A0201D005F219B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AFF71EF323A03F0B005F219B /* NSErrorExtension.swift */,
+				AFF71EF523A03F75005F219B /* DataExtension.swift */,
+				AFF71EF723A040B9005F219B /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -103,6 +154,9 @@
 		AFF71ECE23A02052005F219B /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AFF71EEC23A03575005F219B /* Models */,
+				AFF71EE523A033D7005F219B /* HomeService.swift */,
+				AFF71EDF23A033D7005F219B /* NetworkService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -119,8 +173,30 @@
 		AFF71ED123A027B7005F219B /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				AFF71EEF23A037A1005F219B /* Environment.swift */,
+				AFF71EF123A03BB8005F219B /* Log.swift */,
 			);
 			path = Objects;
+			sourceTree = "<group>";
+		};
+		AFF71EDF23A033D7005F219B /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				AFF71EE023A033D7005F219B /* NetworkService.swift */,
+				AFF71EE123A033D7005F219B /* NetworkDispatch.swift */,
+				AFF71EE223A033D7005F219B /* NetworkBaseService.swift */,
+				AFF71EE323A033D7005F219B /* NetworkProtocol.swift */,
+				AFF71EE423A033D7005F219B /* NetworkEncoding.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		AFF71EEC23A03575005F219B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AFF71EED23A03588005F219B /* CustomError.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,9 +206,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFF71EC723A01FE2005F219B /* Build configuration list for PBXNativeTarget "iOS-Recruiting" */;
 			buildPhases = (
+				76496F869BCA731DF2146686 /* [CP] Check Pods Manifest.lock */,
 				AFF71EAF23A01FE0005F219B /* Sources */,
 				AFF71EB023A01FE0005F219B /* Frameworks */,
 				AFF71EB123A01FE0005F219B /* Resources */,
+				747FD06789D986A8FFEA1735 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -189,14 +267,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		747FD06789D986A8FFEA1735 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-Recruiting/Pods-iOS-Recruiting-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-Recruiting/Pods-iOS-Recruiting-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-Recruiting/Pods-iOS-Recruiting-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76496F869BCA731DF2146686 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-Recruiting-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AFF71EAF23A01FE0005F219B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF71EF423A03F0B005F219B /* NSErrorExtension.swift in Sources */,
 				AFF71EBB23A01FE0005F219B /* ViewController.swift in Sources */,
+				AFF71EF823A040B9005F219B /* StringExtension.swift in Sources */,
+				AFF71EEA23A033D7005F219B /* NetworkEncoding.swift in Sources */,
+				AFF71EF223A03BB8005F219B /* Log.swift in Sources */,
 				AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */,
+				AFF71EE723A033D7005F219B /* NetworkDispatch.swift in Sources */,
+				AFF71EE923A033D7005F219B /* NetworkProtocol.swift in Sources */,
+				AFF71EEE23A03588005F219B /* CustomError.swift in Sources */,
+				AFF71EE623A033D7005F219B /* NetworkService.swift in Sources */,
+				AFF71EF023A037A1005F219B /* Environment.swift in Sources */,
+				AFF71EEB23A033D7005F219B /* HomeService.swift in Sources */,
+				AFF71EF623A03F75005F219B /* DataExtension.swift in Sources */,
 				AFF71EB923A01FE0005F219B /* SceneDelegate.swift in Sources */,
+				AFF71EE823A033D7005F219B /* NetworkBaseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +470,7 @@
 		};
 		AFF71EC823A01FE2005F219B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A237BB8FDFD332C5A08F8276 /* Pods-iOS-Recruiting.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -353,11 +486,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				movieDB = "";
+				movieDBKEY = bb4f35bc1c79d72773daa497785f2c16;
 			};
 			name = Debug;
 		};
 		AFF71EC923A01FE2005F219B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D7A9B4A78ED7C24CDAF6C52 /* Pods-iOS-Recruiting.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -373,6 +509,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				movieDB = "";
+				movieDBKEY = bb4f35bc1c79d72773daa497785f2c16;
 			};
 			name = Release;
 		};
