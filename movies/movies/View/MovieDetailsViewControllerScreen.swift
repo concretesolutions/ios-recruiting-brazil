@@ -20,13 +20,25 @@ class MovieDetailsViewControllerScreen: UIView {
         }
     }
     
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        return view
+    }()
+    
+    lazy var contentView: UIView = {
+        let view = UIView(frame: .zero)
+        return view
+    }()
+    
     let posterImageView = PosterImageView()
     
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
+        let font = UIFont.preferredFont(forTextStyle: .title1)
+        view.font = UIFont.boldSystemFont(ofSize: font.pointSize)
         return view
     }()
-    
+
     lazy var favoriteButton: FavoriteButton = {
         let view = FavoriteButton()
         view.tintColor = UIColor.systemOrange
@@ -34,25 +46,30 @@ class MovieDetailsViewControllerScreen: UIView {
         return view
     }()
     
-    let titleDivider = Divider()
-    
     lazy var dateLabel: UILabel = {
         let view = UILabel(frame: .zero)
+        view.font = UIFont.preferredFont(forTextStyle: .subheadline)
         return view
     }()
-    
-    let dateDivider = Divider()
-    
+
     lazy var genresLabel: UILabel = {
         let view = UILabel(frame: .zero)
+        view.font = UIFont.preferredFont(forTextStyle: .caption1)
+        view.textColor = .systemOrange
         return view
     }()
     
-    let genresDivider = Divider()
-    
+    lazy var detailsLabel: UILabel = {
+        let view = UILabel(frame: .zero)
+        view.text = "Details"
+        view.font = UIFont.preferredFont(forTextStyle: .headline)
+        return view
+    }()
+
     lazy var overviewLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.numberOfLines = 0
+        view.font = UIFont.preferredFont(forTextStyle: .body)
         return view
     }()
     
@@ -69,7 +86,7 @@ class MovieDetailsViewControllerScreen: UIView {
     func setViewModel(_ viewModel: MovieDetailsViewModel) {
         self.viewModel = viewModel
         self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
-        
+
         _ = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favorite in
@@ -88,21 +105,35 @@ extension MovieDetailsViewControllerScreen: FavoriteButtonDelegate {
 // MARK: - Code View
 extension MovieDetailsViewControllerScreen: CodeView {
     func buildViewHierarchy() {
-        addSubview(posterImageView)
-        addSubview(favoriteButton)
-        addSubview(titleLabel)
-        addSubview(titleDivider)
-        addSubview(dateLabel)
-        addSubview(dateDivider)
-        addSubview(genresLabel)
-        addSubview(genresDivider)
-        addSubview(overviewLabel)
+        contentView.addSubview(posterImageView)
+        contentView.addSubview(favoriteButton)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(genresLabel)
+        contentView.addSubview(detailsLabel)
+        contentView.addSubview(overviewLabel)
+        
+        scrollView.addSubview(contentView)
+        
+        addSubview(scrollView)
     }
     
     func setupConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.right.left.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+            make.width.equalTo(self.snp.width)
+            make.height.equalTo(self.snp.height).offset(safeAreaLayoutGuide.layoutFrame.height).multipliedBy(1.2)
+        }
+        
         posterImageView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
-            make.height.equalToSuperview().multipliedBy(0.4)
+            make.top.equalToSuperview().offset(20)
+            make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(1/1.5)
             make.centerX.equalToSuperview()
         }
@@ -119,43 +150,28 @@ extension MovieDetailsViewControllerScreen: CodeView {
             make.centerY.equalTo(favoriteButton.snp.centerY)
         }
         
-        titleDivider.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(20)
-            make.left.equalToSuperview().offset(20)
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.height.equalTo(1)
-        }
-        
         dateLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().inset(30)
-            make.top.equalTo(titleDivider.snp.bottom).offset(10)
-        }
-        
-        dateDivider.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(20)
-            make.left.equalToSuperview().offset(20)
-            make.top.equalTo(dateLabel.snp.bottom).offset(10)
-            make.height.equalTo(1)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
         
         genresLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().inset(30)
-            make.top.equalTo(dateDivider.snp.bottom).offset(10)
+            make.top.equalTo(dateLabel.snp.bottom).offset(5)
         }
         
-        genresDivider.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(20)
-            make.left.equalToSuperview().offset(20)
-            make.top.equalTo(genresLabel.snp.bottom).offset(10)
-            make.height.equalTo(1)
+        detailsLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(30)
+            make.right.equalToSuperview().inset(30)
+            make.top.equalTo(genresLabel.snp.bottom).offset(30)
         }
-        
+
         overviewLabel.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(30)
             make.left.equalToSuperview().offset(30)
-            make.top.equalTo(genresDivider.snp.bottom).offset(10)
+            make.top.equalTo(detailsLabel.snp.bottom).offset(10)
         }
     }
     

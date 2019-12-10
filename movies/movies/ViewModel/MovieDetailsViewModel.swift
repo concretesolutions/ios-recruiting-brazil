@@ -10,7 +10,7 @@ import Foundation
 
 class MovieDetailsViewModel: ObservableObject {
     private static let dateFormatter: DateFormatter = {
-        $0.dateFormat = "YYYY"
+        $0.dateFormat = "MMM, YYYY"
         return $0
     }(DateFormatter())
     
@@ -31,7 +31,7 @@ class MovieDetailsViewModel: ObservableObject {
             return ""
         }
 
-        return String(genres.dropFirst())
+        return String(genres.dropFirst(2))
     }
     
     var overview: String {
