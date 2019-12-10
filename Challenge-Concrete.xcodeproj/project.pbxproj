@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,6 +41,7 @@
 		6CE72A3C23A03365001B6D1C /* Table&Collection+DequeueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A3B23A03365001B6D1C /* Table&Collection+DequeueCell.swift */; };
 		6CE72A4223A03814001B6D1C /* MovieTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A4123A03814001B6D1C /* MovieTableDataSource.swift */; };
 		6CE72A4423A03832001B6D1C /* MovieCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A4323A03832001B6D1C /* MovieCollectionDataSource.swift */; };
+		6CE72A5123A06057001B6D1C /* SmartConstraint in Frameworks */ = {isa = PBXBuildFile; productRef = 6CE72A5023A06057001B6D1C /* SmartConstraint */; };
 		6CE72A4623A05E17001B6D1C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A4523A05E17001B6D1C /* TabBarController.swift */; };
 		6CE72A4823A05E32001B6D1C /* TrendingMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A4723A05E32001B6D1C /* TrendingMoviesViewController.swift */; };
 		6CE72A4A23A05E6A001B6D1C /* TrendingMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE72A4923A05E6A001B6D1C /* TrendingMoviesViewModel.swift */; };
@@ -118,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CE72A5123A06057001B6D1C /* SmartConstraint in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +367,9 @@
 			dependencies = (
 			);
 			name = "Challenge-Concrete";
+			packageProductDependencies = (
+				6CE72A5023A06057001B6D1C /* SmartConstraint */,
+			);
 			productName = "Challenge-Concrete";
 			productReference = 6CE729BF23A01FFB001B6D1C /* Challenge-Concrete.app */;
 			productType = "com.apple.product-type.application";
@@ -437,6 +442,9 @@
 				Base,
 			);
 			mainGroup = 6CE729B623A01FFB001B6D1C;
+			packageReferences = (
+				6CE72A4F23A06057001B6D1C /* XCRemoteSwiftPackageReference "SmartConstraint" */,
+			);
 			productRefGroup = 6CE729C023A01FFB001B6D1C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -834,6 +842,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6CE72A4F23A06057001B6D1C /* XCRemoteSwiftPackageReference "SmartConstraint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonhpol/SmartConstraint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6CE72A5023A06057001B6D1C /* SmartConstraint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CE72A4F23A06057001B6D1C /* XCRemoteSwiftPackageReference "SmartConstraint" */;
+			productName = SmartConstraint;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6CE729B723A01FFB001B6D1C /* Project object */;
 }
