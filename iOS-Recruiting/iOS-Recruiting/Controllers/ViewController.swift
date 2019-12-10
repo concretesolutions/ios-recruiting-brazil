@@ -12,7 +12,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        MovieService.shared.getPopularMovies(page: 1) { (result) in
+            switch result {
+            case .success(let contents, _):
+                let a = contents
+            case .failure(let error, _):
+                let b = error
+            }
+            
+        }
     }
 
 

@@ -19,13 +19,14 @@
 		AFF71EE823A033D7005F219B /* NetworkBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE223A033D7005F219B /* NetworkBaseService.swift */; };
 		AFF71EE923A033D7005F219B /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE323A033D7005F219B /* NetworkProtocol.swift */; };
 		AFF71EEA23A033D7005F219B /* NetworkEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE423A033D7005F219B /* NetworkEncoding.swift */; };
-		AFF71EEB23A033D7005F219B /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE523A033D7005F219B /* HomeService.swift */; };
+		AFF71EEB23A033D7005F219B /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EE523A033D7005F219B /* MovieService.swift */; };
 		AFF71EEE23A03588005F219B /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EED23A03588005F219B /* CustomError.swift */; };
 		AFF71EF023A037A1005F219B /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EEF23A037A1005F219B /* Environment.swift */; };
 		AFF71EF223A03BB8005F219B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF123A03BB8005F219B /* Log.swift */; };
 		AFF71EF423A03F0B005F219B /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF323A03F0B005F219B /* NSErrorExtension.swift */; };
 		AFF71EF623A03F75005F219B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF523A03F75005F219B /* DataExtension.swift */; };
 		AFF71EF823A040B9005F219B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF723A040B9005F219B /* StringExtension.swift */; };
+		AFF71EFA23A043AE005F219B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF923A043AE005F219B /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,13 +46,14 @@
 		AFF71EE223A033D7005F219B /* NetworkBaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkBaseService.swift; sourceTree = "<group>"; };
 		AFF71EE323A033D7005F219B /* NetworkProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
 		AFF71EE423A033D7005F219B /* NetworkEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEncoding.swift; sourceTree = "<group>"; };
-		AFF71EE523A033D7005F219B /* HomeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		AFF71EE523A033D7005F219B /* MovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		AFF71EED23A03588005F219B /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		AFF71EEF23A037A1005F219B /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		AFF71EF123A03BB8005F219B /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		AFF71EF323A03F0B005F219B /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
 		AFF71EF523A03F75005F219B /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		AFF71EF723A040B9005F219B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		AFF71EF923A043AE005F219B /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				AFF71EEC23A03575005F219B /* Models */,
-				AFF71EE523A033D7005F219B /* HomeService.swift */,
+				AFF71EE523A033D7005F219B /* MovieService.swift */,
 				AFF71EDF23A033D7005F219B /* NetworkService */,
 			);
 			path = Services;
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				AFF71EED23A03588005F219B /* CustomError.swift */,
+				AFF71EF923A043AE005F219B /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -320,12 +323,13 @@
 				AFF71EEA23A033D7005F219B /* NetworkEncoding.swift in Sources */,
 				AFF71EF223A03BB8005F219B /* Log.swift in Sources */,
 				AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */,
+				AFF71EFA23A043AE005F219B /* Movie.swift in Sources */,
 				AFF71EE723A033D7005F219B /* NetworkDispatch.swift in Sources */,
 				AFF71EE923A033D7005F219B /* NetworkProtocol.swift in Sources */,
 				AFF71EEE23A03588005F219B /* CustomError.swift in Sources */,
 				AFF71EE623A033D7005F219B /* NetworkService.swift in Sources */,
 				AFF71EF023A037A1005F219B /* Environment.swift in Sources */,
-				AFF71EEB23A033D7005F219B /* HomeService.swift in Sources */,
+				AFF71EEB23A033D7005F219B /* MovieService.swift in Sources */,
 				AFF71EF623A03F75005F219B /* DataExtension.swift in Sources */,
 				AFF71EB923A01FE0005F219B /* SceneDelegate.swift in Sources */,
 				AFF71EE823A033D7005F219B /* NetworkBaseService.swift in Sources */,
