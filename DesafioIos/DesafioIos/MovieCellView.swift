@@ -9,16 +9,26 @@
 import UIKit
 import SnapKit
 final class MovieCellView: UICollectionViewCell {
-    let imageBackground:UIImageView = {
+    var movie:Movie?
+    lazy var imageBackground:UIImageView = {
         let view = UIImageView(frame: .zero)
         view.backgroundColor = .red
         view.contentMode = .scaleToFill
-        view.image = #imageLiteral(resourceName: "list_icon")
+        DispatchQueue.main.async {
+            if let dest = self.movie?.backdropPath{
+                view.loadImageMovie(dest)
+            }else{
+                view.image = #imageLiteral(resourceName: "list_icon")
+            }
+        }
+        
         return view
     }()
-    let nameMovie:UILabel = {
+    lazy var nameMovie:UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "name movie"
+        DispatchQueue.main.async {
+            view.text = self.name()
+        }
         view.textColor = .yellow
         view.textAlignment = .center
         return view
@@ -39,12 +49,24 @@ final class MovieCellView: UICollectionViewCell {
         return stack
     }()
     override init(frame: CGRect) {
+        self.movie = nil
         super.init(frame:.zero)
         self.setupView()
     }
-    
+    convenience init(movie:Movie){
+        self.init()
+        self.movie = movie
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    func name()->String{
+        if let name = self.movie?.title{
+            return name
+        }
+        else {
+            return "dont load name"
+        }
     }
 }
 extension MovieCellView: CodeView {

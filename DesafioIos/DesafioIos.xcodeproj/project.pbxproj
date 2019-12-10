@@ -24,6 +24,9 @@
 		97BE540C239A914E000639D8 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE540B239A914E000639D8 /* CodeView.swift */; };
 		97BE540E239A9909000639D8 /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE540D239A9909000639D8 /* MovieCellView.swift */; };
 		97BE5412239AD7E7000639D8 /* FavoriteMovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE5411239AD7E7000639D8 /* FavoriteMovieCellView.swift */; };
+		97BE5415239FE780000639D8 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE5414239FE780000639D8 /* Movies.swift */; };
+		97BE5417239FE873000639D8 /* ManegerModel .swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE5416239FE873000639D8 /* ManegerModel .swift */; };
+		97BE541923A01B41000639D8 /* UIImageLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE541823A01B41000639D8 /* UIImageLoad.swift */; };
 		B0FBD41B1BC6A4C771EB8343 /* Pods_DesafioIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +76,9 @@
 		97BE540B239A914E000639D8 /* CodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		97BE540D239A9909000639D8 /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
 		97BE5411239AD7E7000639D8 /* FavoriteMovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCellView.swift; sourceTree = "<group>"; };
+		97BE5414239FE780000639D8 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
+		97BE5416239FE873000639D8 /* ManegerModel .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManegerModel .swift"; sourceTree = "<group>"; };
+		97BE541823A01B41000639D8 /* UIImageLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageLoad.swift; sourceTree = "<group>"; };
 		A68FD1768CC4D05DBDCC0CFC /* Pods-DesafioIos-DesafioIosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos-DesafioIosUITests.debug.xcconfig"; path = "Target Support Files/Pods-DesafioIos-DesafioIosUITests/Pods-DesafioIos-DesafioIosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5025EA2C77350FC43159B97 /* Pods-DesafioIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos.debug.xcconfig"; path = "Target Support Files/Pods-DesafioIos/Pods-DesafioIos.debug.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 		97BE53CC239A8AE6000639D8 /* DesafioIos */ = {
 			isa = PBXGroup;
 			children = (
+				97BE5413239FE763000639D8 /* Model */,
 				97BE5406239A90F9000639D8 /* FavoriteMoviesController.swift */,
 				97BE5405239A90F9000639D8 /* MoviesController.swift */,
 				97BE5407239A90F9000639D8 /* TabBarController.swift */,
@@ -176,6 +183,16 @@
 				97BE53F1239A8AE9000639D8 /* Info.plist */,
 			);
 			path = DesafioIosUITests;
+			sourceTree = "<group>";
+		};
+		97BE5413239FE763000639D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97BE5414239FE780000639D8 /* Movies.swift */,
+				97BE5416239FE873000639D8 /* ManegerModel .swift */,
+				97BE541823A01B41000639D8 /* UIImageLoad.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C7D01317D303F4AC89F439EF /* Pods */ = {
@@ -431,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97BE5412239AD7E7000639D8 /* FavoriteMovieCellView.swift in Sources */,
+				97BE5415239FE780000639D8 /* Movies.swift in Sources */,
 				97BE5408239A90F9000639D8 /* MoviesController.swift in Sources */,
 				97BE53D2239A8AE6000639D8 /* ViewController.swift in Sources */,
 				97BE5404239A90EF000639D8 /* GridBox.swift in Sources */,
@@ -439,6 +457,8 @@
 				97BE53CE239A8AE6000639D8 /* AppDelegate.swift in Sources */,
 				97BE53D0239A8AE6000639D8 /* SceneDelegate.swift in Sources */,
 				97BE540C239A914E000639D8 /* CodeView.swift in Sources */,
+				97BE541923A01B41000639D8 /* UIImageLoad.swift in Sources */,
+				97BE5417239FE873000639D8 /* ManegerModel .swift in Sources */,
 				97BE5409239A90F9000639D8 /* FavoriteMoviesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

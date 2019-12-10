@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 class MoviesController: UIViewController{
 
-    
+   var movies:[Movie] = []
    let collectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
        layout.scrollDirection = .vertical
@@ -23,12 +23,17 @@ class MoviesController: UIViewController{
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .red
         self.view = view
-       
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         // Do any additional setup after loading the view.
+        getRequest(url: "https://api.themoviedb.org/3/movie/popular", data: querys, completion:  { data in
+             self.movies = data.results
+             DispatchQueue.main.async {
+                 self.collectionView.reloadData()
+             }
+         })
     }
     /*
     // MARK: - Navigation
@@ -43,16 +48,12 @@ class MoviesController: UIViewController{
 }
 extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCellView else {
-            
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-            
-        }
-        
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCellView 
+        cell.movie = movies[indexPath.row]
         return cell
     }
     
@@ -78,6 +79,7 @@ extension MoviesController:CodeView{
         collectionView.register(MovieCellView.self,forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
+
     }
     
     
