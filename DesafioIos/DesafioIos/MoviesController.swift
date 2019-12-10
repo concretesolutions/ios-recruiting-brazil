@@ -44,7 +44,6 @@ class MoviesController: UIViewController{
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
