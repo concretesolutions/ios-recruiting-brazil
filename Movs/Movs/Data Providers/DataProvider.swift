@@ -61,7 +61,7 @@ class DataProvider {
 
     // MARK: - Setup
 
-    func setup(withDataFetcher moviesDataFetcher: MoviesDataFetcherProtocol, completion: @escaping (_ error: Error?) -> Void) {
+    func setup(withDataFetcher moviesDataFetcher: MoviesDataFetcherProtocol = MoviesAPIDataFetcher(), completion: @escaping (_ error: Error?) -> Void) {
         self.moviesDataFetcher = moviesDataFetcher
 
         // Genres setup

@@ -44,7 +44,7 @@ class DataProviderSpec: QuickSpec {
             context("before setup") {
 
                 beforeEach {
-                    self.mockData()
+                    self.dataFetcher.mockData()
                 }
 
                 it("should not have any movies") {
@@ -79,7 +79,7 @@ class DataProviderSpec: QuickSpec {
                 context("when the data fetcher doesn't return any errors") {
 
                     beforeEach {
-                        self.mockData()
+                        self.dataFetcher.mockData()
 
                         waitUntil { done in
                             self.sut.setup(withDataFetcher: self.dataFetcher) { error in
@@ -188,7 +188,7 @@ class DataProviderSpec: QuickSpec {
                     context("when the error comes from the genre setup") {
 
                         beforeEach {
-                            self.mockMovies()
+                            self.dataFetcher.mockMovies()
 
                             waitUntil { done in
                                 self.sut.setup(withDataFetcher: self.dataFetcher) { error in
@@ -214,7 +214,7 @@ class DataProviderSpec: QuickSpec {
                     context("when the error comes from the movies setup") {
 
                         beforeEach {
-                            self.mockGenres()
+                            self.dataFetcher.mockGenres()
 
                             waitUntil { done in
                                 self.sut.setup(withDataFetcher: self.dataFetcher) { error in
@@ -238,31 +238,4 @@ class DataProviderSpec: QuickSpec {
         }
     }
     //swiftlint:enable function_body_length
-
-    // MARK: - Helpers
-
-    private func mockData() {
-        self.mockGenres()
-        self.mockMovies()
-    }
-
-    private func mockGenres() {
-        self.dataFetcher.genres = [
-            1: "Action",
-            2: "Romance",
-            3: "Adventure",
-            4: "Comedy",
-            5: "Drama"
-        ]
-    }
-
-    private func mockMovies() {
-        self.dataFetcher.movies[1] = [
-            PopularMovieDTO(id: 1, title: "Movie_1", overview: "Movie_1 overview", genreIds: [1], releaseDate: "2019", posterPath: "/Movie_1.jpg"),
-            PopularMovieDTO(id: 2, title: "Movie_2", overview: "Movie_2 overview", genreIds: [4], releaseDate: "2010", posterPath: "/Movie_2.jpg")
-        ]
-        self.dataFetcher.movies[2] = [
-            PopularMovieDTO(id: 3, title: "Movie_3", overview: "Movie_3 overview", genreIds: [2, 4], releaseDate: "3000", posterPath: nil)
-        ]
-    }
 }
