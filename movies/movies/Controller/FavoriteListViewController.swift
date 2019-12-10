@@ -31,6 +31,7 @@ class FavoriteListViewController: UIViewController {
         self.navigationItem.searchController = search
         self.navigationItem.searchController!.searchBar.delegate = self // Set the serach bar delegate to this
         
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "Favorites"
         self.query.send("")
     }
