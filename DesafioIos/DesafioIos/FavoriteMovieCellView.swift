@@ -16,6 +16,28 @@ class FavoriteMovieCellView: UITableViewCell {
         view.image = #imageLiteral(resourceName: "favorite_gray_icon")
         return view
     }()
+    let movieName:UILabel = {
+        let view = UILabel(frame: .zero)
+        //view.backgroundColor = .black
+        view.text = "thor"
+        view.font = UIFont(name: "Times New Roman", size: 30.0)
+        return view
+    }()
+    let movieYear:UILabel = {
+        let view = UILabel(frame: .zero)
+        //view.backgroundColor = .black
+        view.text = "2008"
+        view.font = UIFont(name: "Times New Roman", size: 22.0)
+        return view
+    }()
+    let movieDescription:UILabel = {
+        let view = UILabel(frame: .zero)
+        view.text = "foi o deus nórdico do trovão (por isto representava a força da natureza), talvez o mais popular deus da mitologia nórdica. Ele tinha um martelo chamado Mjolnir (o destruidor), feito por anões das cavernas subterrâneas, com o qual dominava o trovão."
+        view.font = UIFont(name: "Times New Roman", size: 15.0)
+        view.lineBreakMode = .byCharWrapping
+        view.numberOfLines = 3
+        return view
+    }()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,11 +61,28 @@ class FavoriteMovieCellView: UITableViewCell {
 extension FavoriteMovieCellView:CodeView {
     func buildViewHierarchy() {
         self.addSubview(imageMovie)
+        self.addSubview(movieName)
+        self.addSubview(movieYear)
+        self.addSubview(movieDescription)
     }
     
     func setupConstraints() {
         imageMovie.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.bottom.top.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.3)
+        }
+        movieName.snp.makeConstraints { (make) in
+            make.left.equalTo(imageMovie.snp.right).offset(10)
+            make.top.equalToSuperview().offset(10)
+        }
+        movieYear.snp.makeConstraints { (make) in
+            make.right.top.equalToSuperview().inset(10)
+        }
+        movieDescription.snp.makeConstraints { (make) in
+            make.left.equalTo(imageMovie.snp.right).offset(10)
+            make.top.equalTo(movieName.snp.bottom).offset(10)
+            make.right.equalTo(movieYear.snp.right)
+            make.bottom.equalToSuperview()
         }
     }
     
