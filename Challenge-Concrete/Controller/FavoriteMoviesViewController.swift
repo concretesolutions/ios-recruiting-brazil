@@ -13,16 +13,16 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
     let dataSource = MovieDataSource()
     var delegate = MovieTableDelegate()
     var movieViewModel = FavoriteMoviesViewModel()
-    //let moviesView = FavoriteMoviesView()
+    let moviesView = FavoriteMoviesView()
     
     override func loadView() {
-        //view = moviesView
+        view = moviesView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegateDataSource()
-        //moviesView.setupTableView(delegate: delegate, dataSource: dataSource)
+        moviesView.setupTableView(delegate: delegate, dataSource: dataSource)
         movieViewModel.fetchTrendingMovies()
     }
 }
@@ -31,7 +31,7 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
 extension FavoriteMoviesViewController {
     func didUpdateData() {
         DispatchQueue.main.async {
-            //self.moviesView.reloadTableData()
+            self.moviesView.reloadTableData()
         }
     }
     
@@ -44,7 +44,7 @@ extension FavoriteMoviesViewController {
 extension FavoriteMoviesViewController {
     func didSelectMovie(at index: Int) {
         let movie = dataSource.data[index]
-        //navigationController?.pushViewController(MovieDetailViewController(), animated: true)
+        navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
     

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  UIView+AddSubviews.swift
 //  Challenge-Concrete
 //
 //  Created by João Paulo de Oliveira Sabino on 10/12/19.
@@ -8,13 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .red
+extension UIView {
+    func addSubviews(_ views: [UIView]) {
+        views.forEach { addSubview($0) }
     }
-
-
 }
-

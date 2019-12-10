@@ -12,16 +12,16 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     let dataSource = MovieCollectionDataSource()
     var delegate = MovieCollectionDelegate()
     var movieViewModel = TrendingMoviesViewModel()
-    //let moviesView = TrendingMoviesView()
+    let moviesView = TrendingMoviesView()
     
     override func loadView() {
-        //view = moviesView
+        view = moviesView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegateDataSource()
-        //moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
+        moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
         movieViewModel.fetchTrendingMovies()
     }
         
@@ -29,7 +29,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     /// Correct collectionView layout on view transition
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        //moviesView.invalidateCollectionLayout()
+        moviesView.invalidateCollectionLayout()
     }
 }
 
@@ -38,7 +38,7 @@ extension TrendingMoviesViewController {
     func didUpdateData() {
         DispatchQueue.main.async {
             print(self.dataSource.data)
-            //self.moviesView.reloadCollectionData()
+            self.moviesView.reloadCollectionData()
         }
     }
     func didFailFetchData(with error: Error) {
@@ -50,7 +50,7 @@ extension TrendingMoviesViewController {
 extension TrendingMoviesViewController {
     func didSelectMovie(at index: Int) {
         let movie = dataSource.data[index]
-        //navigationController?.pushViewController(MovieDetailViewController(), animated: true)
+        navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
 }

@@ -19,9 +19,11 @@ extension UITableView {
 
 extension UICollectionView {
     func register<T: AnyObject>(_ cellClass: T.Type) {
+        print("Register: \(T.self)")
         register(cellClass, forCellWithReuseIdentifier: "\(T.self)")
     }
     func dequeueReusableCell<T>(for indexPath: IndexPath) -> T {
+        print("Dequeue: \(T.self)")
         return dequeueReusableCell(withReuseIdentifier: "\(T.self)", for: indexPath) as! T
     }
 }
