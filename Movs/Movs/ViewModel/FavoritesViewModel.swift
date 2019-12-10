@@ -9,5 +9,7 @@
 import Foundation
 
 struct FavoritesViewModel {
-    
+
+    //[Movie].filter{isLiked = true}
+
 }
