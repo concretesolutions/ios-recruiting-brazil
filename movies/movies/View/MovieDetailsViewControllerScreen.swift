@@ -20,6 +20,16 @@ class MovieDetailsViewControllerScreen: UIView {
         }
     }
     
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        return view
+    }()
+    
+    lazy var contentView: UIView = {
+        let view = UIView(frame: .zero)
+        return view
+    }()
+    
     let posterImageView = PosterImageView()
     
     lazy var titleLabel: UILabel = {
@@ -88,21 +98,38 @@ extension MovieDetailsViewControllerScreen: FavoriteButtonDelegate {
 // MARK: - Code View
 extension MovieDetailsViewControllerScreen: CodeView {
     func buildViewHierarchy() {
-        addSubview(posterImageView)
-        addSubview(favoriteButton)
-        addSubview(titleLabel)
-        addSubview(titleDivider)
-        addSubview(dateLabel)
-        addSubview(dateDivider)
-        addSubview(genresLabel)
-        addSubview(genresDivider)
-        addSubview(overviewLabel)
+        contentView.addSubview(posterImageView)
+        contentView.addSubview(favoriteButton)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(titleDivider)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(dateDivider)
+        contentView.addSubview(genresLabel)
+        contentView.addSubview(genresDivider)
+        contentView.addSubview(overviewLabel)
+        
+        scrollView.addSubview(contentView)
+        
+        addSubview(scrollView)
     }
     
     func setupConstraints() {
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.right.left.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+            make.width.equalTo(self.snp.width)
+            make.height.equalTo(self.snp.height).offset(safeAreaLayoutGuide.layoutFrame.height).multipliedBy(1.2)
+        }
+        
         posterImageView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
-            make.height.equalToSuperview().multipliedBy(0.4)
+//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            make.top.equalToSuperview().offset(20)
+            make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(1/1.5)
             make.centerX.equalToSuperview()
         }
