@@ -1,5 +1,4 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '13.2'
 
 target 'Movs' do
   use_frameworks!
@@ -7,20 +6,26 @@ target 'Movs' do
   pod 'SwiftLint'
   pod 'SnapKit', '~> 5.0.0'
 
-  target 'MovsTests' do
+  target 'MovsUITests' do
     inherit! :search_paths
 
-    pod 'Nimble', '~> 6.0.0'
     pod 'Quick'
     pod 'Nimble-Snapshots'
-
   end
 
   target 'MovsFunctionalTests' do
     inherit! :search_paths
- 
+   
+    pod 'Quick'
+    pod 'Nimble'
     pod 'KIF', :configurations => ['Debug']
+  end
 
-  end	
+  target 'MovsTests' do
+    inherit! :search_paths
+
+    pod 'Nimble'
+    pod 'Quick'
+  end
 
 end
