@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Combine
+import UIKit
 
 struct MovieViewModel {
 
@@ -14,14 +16,6 @@ struct MovieViewModel {
     var title: String
     var overview: String
     var releaseDate: String
-    var poster: String?
-
-    init(withMovie movie: Movie) {
-        self.id = movie.id
-        self.title = movie.title
-        self.overview = movie.overview
-        self.releaseDate = movie.releaseDate
-        self.poster = movie.posterPath
-    }
+    var posterImage: UIImage
 
 }

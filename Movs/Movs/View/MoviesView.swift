@@ -29,15 +29,12 @@ class MoviesView: UIView {
 extension MoviesView: ViewCode {
 
     func buildViewHierarchy() {
-        addSubview(collectionView)
+        self.addSubview(collectionView)
     }
 
     func setupContraints() {
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
 

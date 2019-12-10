@@ -35,7 +35,7 @@ extension FavoritesView: ViewCode {
 
     func setupContraints() {
         tableView.snp.makeConstraints { (make) in
-            make.top.bottom.left.right.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
 

@@ -20,7 +20,7 @@ class TabBarViewController: UITabBarController {
     private let favoritesViewController: FavoritesViewController = {
         let favoritesViewController = FavoritesViewController()
         favoritesViewController.title = "Favorites"
-        favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), tag: 0)
+        favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), tag: 1)
         return favoritesViewController
     }()
 
@@ -40,7 +40,7 @@ class TabBarViewController: UITabBarController {
     private func navigationController(for controller: UIViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: controller)
         navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.navigationItem.largeTitleDisplayMode = .automatic
+        navigationController.navigationItem.largeTitleDisplayMode = .always
         return navigationController
     }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesCollectionView: UICollectionView {
+class MoviesCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout {
 
     private let itemsPerRow: Int
     private let margin: CGFloat
@@ -17,8 +17,8 @@ class MoviesCollectionView: UICollectionView {
         self.itemsPerRow = itemsPerRow
         self.margin = margin
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        self.backgroundColor = .systemBackground
         self.delegate = self
-        self.backgroundColor = .white
         self.register(MoviesCollectionViewCell.self, forCellWithReuseIdentifier: "moviesCollectionViewCell")
     }
 
@@ -26,33 +26,22 @@ class MoviesCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
 
-}
-
-extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (self.bounds.width - (CGFloat(itemsPerRow + 1) * self.margin)) / CGFloat(itemsPerRow)
-        return CGSize(width: width, height: width * 1.5)
+        return CGSize(width: width, height: width * 1.7)
+
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: self.margin, left: self.margin, bottom: self.margin, right: self.margin)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return margin
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return self.margin
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return margin * 1.2
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return self.margin
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
     }
 
 }

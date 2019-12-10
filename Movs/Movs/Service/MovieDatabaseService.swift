@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 enum MovieDatabaseServiceError: Error {
     case url(URLError?)
@@ -53,22 +54,27 @@ final class MovieDatabaseService {
             .eraseToAnyPublisher()
     }
 
-    class func searchMovies(withQuery query: String, fromPage page: Int) -> AnyPublisher<[Movie], MovieDatabaseServiceError> {
+    class func getMovieImage(fromPoster posterPath: String?) -> AnyPublisher<UIImage, Never> {
         var urlComponents = self.urlComponents
-        urlComponents.path = "/3/search/movie"
-        urlComponents.queryItems?.append(URLQueryItem(name: "page", value: String(page)))
-        urlComponents.queryItems?.append(URLQueryItem(name: "query", value: query))
+        urlComponents.host = "image.tmdb.org"
+        urlComponents.path = "/t/p/w500/\(posterPath ?? "")"
+        guard let url = urlComponents.url else { fatalError() }
+        return self.session.dataTaskPublisher(for: url)
+            .map { (data: Data, _: URLResponse) -> UIImage in
+                return UIImage(data: data) ?? UIImage(named: "imagePlaceholder")!
+            }
+            .replaceError(with: UIImage(named: "imagePlaceholder")!)
+            .retry(5)
+            .eraseToAnyPublisher()
+    }
+
+    class func getMovie(withId id: Int) -> AnyPublisher<Movie, MovieDatabaseServiceError> {
+        var urlComponents = self.urlComponents
+        urlComponents.path = "/3/movie/\(id)"
         guard let url = urlComponents.url else { fatalError() }
         return request(inUrl: url)
-            .map { (wrapper: MovieWrapperDTO) in
-                return wrapper.results
-            }
-            .map { (moviesDTO) -> [Movie] in
-                var movies: [Movie] = []
-                for movieDTO in moviesDTO {
-                    movies.append(Movie(withMovie: movieDTO))
-                }
-                return movies
+            .map { (movieDetails: MovieDetailsWrapperDTO) -> Movie in
+                return Movie(withMovieDetails: movieDetails)
             }
             .eraseToAnyPublisher()
     }
@@ -111,6 +117,7 @@ final class MovieDatabaseService {
 
 }
 
+// ------------------------------------------ WRAPPERS
 struct GenreWrapperDTO: Decodable {
     var genres: [GenreDTO]
 }
@@ -135,6 +142,24 @@ struct MovieWrapperDTO: Decodable {
 
 }
 
+struct MovieDetailsWrapperDTO: Decodable {
+    var id: Int
+    var overview: String
+    var releaseDate: String
+    var genres: [GenreDTO]
+    var title: String
+    var posterPath: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case overview
+        case releaseDate = "release_date"
+        case genres
+        case title
+        case posterPath = "poster_path"
+    }
+}
+
 struct MovieDTO: Decodable {
     var id: Int
     var overview: String
@@ -154,6 +179,7 @@ struct MovieDTO: Decodable {
 
 }
 
+// ------------------------------------------ FINAL STRUCTS
 struct Genre {
     var id: Int
     var name: String
@@ -164,13 +190,15 @@ struct Genre {
     }
 }
 
-struct Movie {
+class Movie {
+
     var id: Int
     var overview: String
     var releaseDate: String
     var genreIds: [Int]
     var title: String
     var posterPath: String?
+    @Published var isLiked: Bool = false
 
     init(withMovie movie: MovieDTO) {
         self.id = movie.id
@@ -179,6 +207,17 @@ struct Movie {
         self.genreIds = movie.genreIds
         self.title = movie.title
         self.posterPath = movie.posterPath
+        self.isLiked = false
+    }
+
+    init(withMovieDetails movie: MovieDetailsWrapperDTO) {
+        self.id = movie.id
+        self.overview = movie.overview
+        self.releaseDate = movie.releaseDate
+        self.genreIds = movie.genres.compactMap { $0.id }
+        self.title = movie.title
+        self.posterPath = movie.posterPath
+        self.isLiked = false
     }
 
 }

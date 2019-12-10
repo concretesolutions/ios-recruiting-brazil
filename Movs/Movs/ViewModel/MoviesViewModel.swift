@@ -13,52 +13,31 @@ class MoviesViewModel {
 
     @Published var count = 0
 
-//    private var movies = CurrentValueSubject<[Movie], Never>([])
-
-    private lazy var popularMovies = CurrentValueSubject<[Movie], Never>([])
-    private lazy var searchMovies = CurrentValueSubject<[Movie], Never>([])
+    public let movies = CurrentValueSubject<[Movie], MovieDatabaseServiceError>([])
 
     private var currentPopularMoviesPage: Int = 1
-    private var currentSearchMoviesPage: Int = 1
 
     var popularMoviesCancellable: AnyCancellable?
 
     init() {
-        let cancellable = MovieDatabaseService.popularMovies(fromPage: self.currentPopularMoviesPage)
-            .assertNoFailure("Não temos internet")
-            .sink { (movies) in
-                self.popularMovies.send(movies)
-                self.count = movies.count
-            }
-        self.popularMoviesCancellable = cancellable
+        self.getMovies()
     }
 
-    public func getPopularMovies() {
-        self.currentPopularMoviesPage += 1
+    public func getMovies() {
         let cancellable = MovieDatabaseService.popularMovies(fromPage: self.currentPopularMoviesPage)
-            .assertNoFailure("Não temos internet")
+            .assertNoFailure("Deu ruim pegando filmes populares")
             .sink { (movies) in
-                var totalMovies = self.popularMovies.value
+                var totalMovies = self.movies.value
                 totalMovies.append(contentsOf: movies)
-                self.popularMovies.send(totalMovies)
+                self.movies.send(totalMovies)
                 self.count = totalMovies.count
-            }
+                self.currentPopularMoviesPage += 1
+        }
         self.popularMoviesCancellable = cancellable
     }
 
-    public func getSearchMovies(withQuery query: String) {
-        self.currentSearchMoviesPage += 1
-        let cancellable = MovieDatabaseService.searchMovies(withQuery: query, fromPage: self.currentSearchMoviesPage)
-            .assertNoFailure("Não temos internet")
-            .sink { (movies) in
-                self.searchMovies.send(movies)
-                self.count = movies.count
-            }
-        self.popularMoviesCancellable = cancellable
-    }
-
-    func viewModel(forCellAt indexPath: IndexPath) -> MovieViewModel {
-        let viewModel = MovieViewModel(withMovie: self.popularMovies.value[indexPath.row])
+    func viewModel(forCellAt indexPath: IndexPath) -> MoviesCollectionCellViewModel {
+        let viewModel = MoviesCollectionCellViewModel(withMovie: self.movies.value[indexPath.row])
         return viewModel
     }
 

@@ -12,21 +12,15 @@ class FavoritesTableView: UITableView {
 
     required init() {
         super.init(frame: .zero, style: .plain)
-        self.delegate = self
         self.register(FavoritesTableViewCell.self, forCellReuseIdentifier: "favoritesTableViewCell")
         self.separatorStyle = .none
+        self.rowHeight = 160.0
+        self.allowsSelection = false
+
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
-extension FavoritesTableView: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160.0
     }
 
 }

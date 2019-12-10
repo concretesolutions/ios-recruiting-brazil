@@ -14,9 +14,20 @@ class FavoritesViewController: UIViewController {
     private let screen = FavoritesView()
 
     override func loadView() {
-        self.view = screen
+        self.view = self.screen
+    }
+
+    required init() {
+        super.init(nibName: nil, bundle: nil)
         self.screen.tableView.dataSource = self
-        self.getSearchController()
+
+        // Sets SearchController for this ViewController
+        self.navigationItem.searchController = SearchController(withPlaceholder: "Search", searchResultsUpdater: self)
+        self.definesPresentationContext = true
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
@@ -28,15 +39,6 @@ extension FavoritesViewController: UISearchResultsUpdating {
         if !searchText.isEmpty {
             print(searchText.lowercased())
         }
-    }
-
-    func getSearchController() {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Movs"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
     }
 
 }

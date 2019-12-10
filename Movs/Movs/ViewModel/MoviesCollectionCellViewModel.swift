@@ -7,12 +7,31 @@
 //
 
 import Foundation
+import UIKit
+import Combine
 
-struct MoviesCollectionCellViewModel {
+class MoviesCollectionCellViewModel {
 
-    //ID
-    //Title
-    //Poster
-    //IsLiked
+    private var movie: Movie
+
+    var id: Int
+    var title: String
+    @Published var posterImage: UIImage = UIImage(named: "imagePlaceholder")!
+    @Published var isLiked: Bool = false
+
+    var posterImageCancellable: AnyCancellable?
+    var isLikedCancellable: AnyCancellable?
+
+    init(withMovie movie: Movie) {
+        self.movie = movie
+        self.id = movie.id
+        self.title = movie.title
+        self.setCombine()
+    }
+
+    private func setCombine() {
+        self.isLikedCancellable = self.movie.$isLiked.assign(to: \.isLiked, on: self)
+        self.posterImageCancellable = MovieDatabaseService.getMovieImage(fromPoster: movie.posterPath).assign(to: \.posterImage, on: self)
+    }
 
 }
