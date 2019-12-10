@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PopularMoviesVC.swift
 //  iOS-Recruiting
 //
 //  Created by Thiago Augusto on 10/12/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PopularMoviesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,6 @@ class ViewController: UIViewController {
             case .failure(let error, _):
                 let b = error
             }
-            
         }
     }
 

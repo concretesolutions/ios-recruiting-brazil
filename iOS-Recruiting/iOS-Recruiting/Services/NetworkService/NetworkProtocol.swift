@@ -48,8 +48,7 @@ enum Network: NetworkDelegate {
             self.resume(handler: handler)
         } else {
             NetworkAttempt.shared.reset()
-            let error = NSError.from(code: code, data: Data())
-            handler(NetworkResponse.failure(error: error, code: code))
+            handler(NetworkResponse.failure(data: Data(), code: code))
         }
     }
 
@@ -99,8 +98,7 @@ enum Network: NetworkDelegate {
                     self.retry(code: code, handler: handler)
                 } else {
                     NetworkAttempt.shared.reset()
-                    let error = error as NSError? ?? NSError.from(code: code, data: data)
-                    handler(NetworkResponse.failure(error: error, code: code))
+                    handler(NetworkResponse.failure(data: data, code: code))
                 }
             }
         }

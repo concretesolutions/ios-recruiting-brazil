@@ -46,7 +46,7 @@ enum NetworkError: Error {
 
 enum NetworkResponse {
     case success(data: Data, code: Int)
-    case failure(error: Error, code: Int)
+    case failure(data: Data, code: Int)
 }
 
 enum HTTPMethod: String {

@@ -25,8 +25,8 @@ class NetworkDispatch: NetworkBaseService {
                 } else {
                     handler(self.handleModelObject(data: data, code: code))
                 }
-            case .failure(let error, let code):
-                handler(self.handleError(error: error, code: code))
+            case .failure(let data, let code):
+                handler(self.handleError(data: data, code: code))
             }
         }
     }
@@ -41,8 +41,8 @@ class NetworkDispatch: NetworkBaseService {
                 } else {
                     handler(self.handleModelObject(data: data, code: code))
                 }
-            case .failure(let error, let code):
-                handler(self.handleError(error: error, code: code))
+            case .failure(let data, let code):
+                handler(self.handleError(data: data, code: code))
             }
         }
     }
@@ -56,8 +56,8 @@ class NetworkDispatch: NetworkBaseService {
                 } else {
                     handler(self.handleModelObject(data: data, code: code))
                 }
-            case .failure(let error, let code):
-                handler(self.handleError(error: error, code: code))
+            case .failure(let data, let code):
+                handler(self.handleError(data: data, code: code))
             }
         }
     }
@@ -71,8 +71,8 @@ class NetworkDispatch: NetworkBaseService {
                 } else {
                     handler(self.handleModelObject(data: data, code: code))
                 }
-            case .failure(let error, let code):
-                handler(self.handleError(error: error, code: code))
+            case .failure(let data, let code):
+                handler(self.handleError(data: data, code: code))
             }
         }
     }

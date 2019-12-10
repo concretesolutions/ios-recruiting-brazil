@@ -10,7 +10,7 @@
 		7F8F0F957C7011122F67F48A /* Pods_iOS_Recruiting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD3BF8393F5BD9C163409BE /* Pods_iOS_Recruiting.framework */; };
 		AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EB623A01FE0005F219B /* AppDelegate.swift */; };
 		AFF71EB923A01FE0005F219B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EB823A01FE0005F219B /* SceneDelegate.swift */; };
-		AFF71EBB23A01FE0005F219B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EBA23A01FE0005F219B /* ViewController.swift */; };
+		AFF71EBB23A01FE0005F219B /* PopularMoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EBA23A01FE0005F219B /* PopularMoviesVC.swift */; };
 		AFF71EBE23A01FE0005F219B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFF71EBC23A01FE0005F219B /* Main.storyboard */; };
 		AFF71EC023A01FE2005F219B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFF71EBF23A01FE2005F219B /* Assets.xcassets */; };
 		AFF71EC323A01FE2005F219B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFF71EC123A01FE2005F219B /* LaunchScreen.storyboard */; };
@@ -27,16 +27,19 @@
 		AFF71EF623A03F75005F219B /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF523A03F75005F219B /* DataExtension.swift */; };
 		AFF71EF823A040B9005F219B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF723A040B9005F219B /* StringExtension.swift */; };
 		AFF71EFA23A043AE005F219B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EF923A043AE005F219B /* Movie.swift */; };
+		AFF71EFC23A0552A005F219B /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EFB23A0552A005F219B /* UITableViewExtension.swift */; };
+		AFF71EFE23A05552005F219B /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EFD23A05552005F219B /* UICollectionViewExtension.swift */; };
+		AFF71F0023A05581005F219B /* ReusableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EFF23A05581005F219B /* ReusableViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0D7A9B4A78ED7C24CDAF6C52 /* Pods-iOS-Recruiting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-Recruiting.release.xcconfig"; path = "Target Support Files/Pods-iOS-Recruiting/Pods-iOS-Recruiting.release.xcconfig"; sourceTree = "<group>"; };
 		8CD3BF8393F5BD9C163409BE /* Pods_iOS_Recruiting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Recruiting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A237BB8FDFD332C5A08F8276 /* Pods-iOS-Recruiting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-Recruiting.debug.xcconfig"; path = "Target Support Files/Pods-iOS-Recruiting/Pods-iOS-Recruiting.debug.xcconfig"; sourceTree = "<group>"; };
-		AFF71EB323A01FE0005F219B /* iOS-Recruiting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Recruiting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFF71EB323A01FE0005F219B /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFF71EB623A01FE0005F219B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFF71EB823A01FE0005F219B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AFF71EBA23A01FE0005F219B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AFF71EBA23A01FE0005F219B /* PopularMoviesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesVC.swift; sourceTree = "<group>"; };
 		AFF71EBD23A01FE0005F219B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AFF71EBF23A01FE2005F219B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFF71EC223A01FE2005F219B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +57,9 @@
 		AFF71EF523A03F75005F219B /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		AFF71EF723A040B9005F219B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		AFF71EF923A043AE005F219B /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		AFF71EFB23A0552A005F219B /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		AFF71EFD23A05552005F219B /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		AFF71EFF23A05581005F219B /* ReusableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +104,7 @@
 		AFF71EB423A01FE0005F219B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AFF71EB323A01FE0005F219B /* iOS-Recruiting.app */,
+				AFF71EB323A01FE0005F219B /* Movs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,7 +135,7 @@
 		AFF71ECB23A02017005F219B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AFF71EBA23A01FE0005F219B /* ViewController.swift */,
+				AFF71EBA23A01FE0005F219B /* PopularMoviesVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -140,6 +146,9 @@
 				AFF71EF323A03F0B005F219B /* NSErrorExtension.swift */,
 				AFF71EF523A03F75005F219B /* DataExtension.swift */,
 				AFF71EF723A040B9005F219B /* StringExtension.swift */,
+				AFF71EFB23A0552A005F219B /* UITableViewExtension.swift */,
+				AFF71EFD23A05552005F219B /* UICollectionViewExtension.swift */,
+				AFF71EFF23A05581005F219B /* ReusableViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -221,7 +230,7 @@
 			);
 			name = "iOS-Recruiting";
 			productName = "iOS-Recruiting";
-			productReference = AFF71EB323A01FE0005F219B /* iOS-Recruiting.app */;
+			productReference = AFF71EB323A01FE0005F219B /* Movs.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -318,13 +327,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFF71EF423A03F0B005F219B /* NSErrorExtension.swift in Sources */,
-				AFF71EBB23A01FE0005F219B /* ViewController.swift in Sources */,
+				AFF71EBB23A01FE0005F219B /* PopularMoviesVC.swift in Sources */,
 				AFF71EF823A040B9005F219B /* StringExtension.swift in Sources */,
 				AFF71EEA23A033D7005F219B /* NetworkEncoding.swift in Sources */,
+				AFF71F0023A05581005F219B /* ReusableViewExtension.swift in Sources */,
+				AFF71EFE23A05552005F219B /* UICollectionViewExtension.swift in Sources */,
 				AFF71EF223A03BB8005F219B /* Log.swift in Sources */,
 				AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */,
 				AFF71EFA23A043AE005F219B /* Movie.swift in Sources */,
 				AFF71EE723A033D7005F219B /* NetworkDispatch.swift in Sources */,
+				AFF71EFC23A0552A005F219B /* UITableViewExtension.swift in Sources */,
 				AFF71EE923A033D7005F219B /* NetworkProtocol.swift in Sources */,
 				AFF71EEE23A03588005F219B /* CustomError.swift in Sources */,
 				AFF71EE623A033D7005F219B /* NetworkService.swift in Sources */,
@@ -487,7 +499,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sevontheedge.iOS-Recruiting";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Movs;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				movieDB = "";
@@ -510,7 +522,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sevontheedge.iOS-Recruiting";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Movs;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				movieDB = "";
