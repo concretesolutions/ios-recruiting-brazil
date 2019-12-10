@@ -16,22 +16,23 @@ class MovieDetailsViewControllerScreen: UIView {
             self.dateLabel.text = self.viewModel.date
             self.genresLabel.text = self.viewModel.genres
             self.overviewLabel.text = self.viewModel.overview
-            self.posterImageView.kf.setImage(with: self.viewModel.posterURL, options: [.transition(.fade(0.3))])
+            self.posterImageView.setImage(withURL: self.viewModel.posterURL)
         }
     }
     
-    lazy var posterImageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.backgroundColor = .secondarySystemBackground
-        return view
-    }()
+    let posterImageView = PosterImageView()
     
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         return view
     }()
     
-    let favoriteButton = FavoriteButton()
+    lazy var favoriteButton: FavoriteButton = {
+        let view = FavoriteButton()
+        view.tintColor = UIColor.systemOrange
+        view.delegate = self
+        return view
+    }()
     
     let titleDivider = Divider()
     
@@ -59,7 +60,6 @@ class MovieDetailsViewControllerScreen: UIView {
         super.init(frame: frame)
         
         setupView()
-        favoriteButton.delegate = self
     }
     
     required init?(coder: NSCoder) {

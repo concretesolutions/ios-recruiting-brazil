@@ -14,15 +14,11 @@ class FavoriteMovieTableViewCell: UITableViewCell {
             self.titleLabel.text = self.viewModel.title
             self.dateLabel.text = self.viewModel.date
             self.overviewLabel.text = self.viewModel.overview
-            self.posterImageView.kf.setImage(with: self.viewModel.posterURL, options: [.transition(.fade(0.3))])
+            self.posterImageView.setImage(withURL: self.viewModel.posterURL)
         }
     }
     
-    lazy var posterImageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.backgroundColor = .secondarySystemBackground
-        return view
-    }()
+    let posterImageView = PosterImageView()
     
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)

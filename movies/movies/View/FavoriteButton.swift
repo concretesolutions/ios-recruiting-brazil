@@ -20,10 +20,9 @@ protocol FavoriteButtonDelegate: class {
 class FavoriteButton: UIButton {
     var type: FavoriteButtonType! {
         didSet {
-            let imageColor: UIColor = self.type == .favorite ? .systemYellow : .secondarySystemFill
+            let imageName: String = self.type == .favorite ? "heart.fill" : "heart"
             
-            self.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            self.imageView?.tintColor = imageColor
+            self.setImage(UIImage(systemName: imageName), for: .normal)
         }
     }
     
@@ -31,6 +30,7 @@ class FavoriteButton: UIButton {
     
     init() {
         super.init(frame: .zero)
+        self.tintColor = .white
         addTarget(nil, action: #selector(click), for: .touchUpInside)
     }
     

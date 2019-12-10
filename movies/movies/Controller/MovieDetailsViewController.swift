@@ -15,6 +15,7 @@ class MovieDetailsViewController: UIViewController {
         self.init()
     
         self.screen.setViewModel(viewModel)
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     override func loadView() {

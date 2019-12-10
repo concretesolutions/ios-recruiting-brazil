@@ -15,29 +15,35 @@ class MovieCollectionViewCell: UICollectionViewCell {
     private var viewModel: MovieCellViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
-            self.posterImageView.kf.setImage(with: self.viewModel.posterURL, options: [.transition(.fade(0.3))])
+            self.posterImageView.setImage(withURL: self.viewModel.posterURL)
         }
     }
     
-    lazy var posterImageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.backgroundColor = .secondarySystemBackground
-        return view
-    }()
+    let posterImageView = PosterImageView()
     
     lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "Title"
+        view.textAlignment = .center
+        view.font = UIFont.preferredFont(forTextStyle: .headline)
+        
+        return view
+    }()
+    
+    lazy var container: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .systemOrange
+        view.layer.cornerRadius = 10
+        
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 4
+        view.layer.shadowColor = UIColor.label.cgColor
+        view.layer.shadowOpacity = 0.5
+        
         return view
     }()
     
     let favoriteButton = FavoriteButton()
-    
-    lazy var container: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .systemFill
-        return view
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,37 +79,38 @@ extension MovieCollectionViewCell: FavoriteButtonDelegate {
 extension MovieCollectionViewCell: CodeView {
     func buildViewHierarchy() {
         addSubview(posterImageView)
-        container.addSubview(titleLabel)
+        addSubview(titleLabel)
         container.addSubview(favoriteButton)
         addSubview(container)
     }
     
     func setupConstraints() {
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(10)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().inset(10)
+            make.height.equalTo(20)
+        }
+        
         posterImageView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalToSuperview()
+            make.top.equalToSuperview().offset(5)
+            make.bottom.equalTo(titleLabel.snp.top).offset(-10)
+            make.width.equalTo(posterImageView.snp.height).dividedBy(1.5)
+            make.centerX.equalToSuperview()
         }
         
         container.snp.makeConstraints { make in
-            make.left.bottom.right.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.top.right.equalToSuperview()
+            make.height.width.equalTo(posterImageView.snp.width).multipliedBy(0.2)
         }
         
         favoriteButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.5)
-            make.right.equalToSuperview().inset(5)
-            make.width.equalTo(favoriteButton.snp.height)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.left.equalToSuperview().offset(10)
-            make.right.equalTo(favoriteButton.snp.left)
+            make.top.leading.equalToSuperview().offset(5)
+            make.bottom.right.equalToSuperview().inset(5)
         }
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = .systemYellow
+        backgroundColor = .clear
     }
 }
-
