@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 struct MoviesModel {
     let movieTitle: String
     let posterImage: String
@@ -16,7 +15,15 @@ struct MoviesModel {
     let genreIds: [Int]
     let overview: String
     
-    ///Computed Property
+    ///Computed Properties
+
+    ///Get only the release Year
+    var year: String {
+        let getYear: Substring = releaseDate.prefix(4)
+        let toString = String(getYear)
+        return toString
+    }
+    
     ///Get Genre Id and convert to Genre literal
     var genreNames: [String] {
         var genreName: [String] = []

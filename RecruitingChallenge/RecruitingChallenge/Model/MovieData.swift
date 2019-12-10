@@ -12,8 +12,6 @@ struct MovieData: Decodable {
     let results: [Main]
 }
 
-//https://image.tmdb.org/t/p/w185_and_h278_bestv2//9zDwvsISU8bR15R2yN3kh1lfqve.jpg
-
 struct Main: Decodable {
     let title: String
     let poster_path: String?
