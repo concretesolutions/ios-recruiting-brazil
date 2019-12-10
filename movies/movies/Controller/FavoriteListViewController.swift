@@ -94,7 +94,7 @@ extension FavoriteListViewController: UITableViewDataSource {
 // MARK: - Table View Delegate
 extension FavoriteListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 125
+        return 140
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
