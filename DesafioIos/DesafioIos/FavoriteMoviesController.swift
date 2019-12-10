@@ -43,8 +43,17 @@ extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+
+            // remove the item from the data model
+            itemsToLoad.remove(at: indexPath.row)
+
+            // delete the table view row
+            tableView.deleteRows(at: [indexPath], with: .fade)
+
+        }
+    }
 }
 extension FavoriteMoviesController:CodeView{
     func buildViewHierarchy() {
