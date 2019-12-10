@@ -33,10 +33,15 @@ extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        cell.textLabel?.text = itemsToLoad[indexPath.row]
+        guard let cell:FavoriteMovieCellView = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as? FavoriteMovieCellView
+            else{
+                return tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        }
         return cell
 
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
     
     
@@ -53,7 +58,7 @@ extension FavoriteMoviesController:CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myCell")
+        tableView.register(FavoriteMovieCellView.self, forCellReuseIdentifier: "myCell")
         tableView.delegate = self
         tableView.dataSource = self
         
