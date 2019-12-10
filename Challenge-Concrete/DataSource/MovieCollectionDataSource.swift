@@ -15,8 +15,8 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        //cell.setupData()
-        return UICollectionViewCell()
+        let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.setupData()
+        return cell
     }
 }

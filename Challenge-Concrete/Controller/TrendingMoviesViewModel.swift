@@ -8,7 +8,7 @@
 
 class TrendingMoviesViewModel: MovieViewModel {
     
-    var dataSource: GenericDataSource<Movie>?
+    weak var dataSource: GenericDataSource<Movie>?
     
     func fetchTrendingMovies(mediaType: MediaType = .all, timeWindow: TimeWindow = .day) {
         fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow)) { error in
