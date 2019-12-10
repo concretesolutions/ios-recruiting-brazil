@@ -38,8 +38,7 @@ class DetailMovieViewController: UIViewController {
         tableView.delegate = self
         registerAllCells()
         getCachedImage()
-        
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+
 
     }
     
