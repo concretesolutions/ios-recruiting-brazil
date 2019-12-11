@@ -7,7 +7,7 @@
 //
 // swiftlint:disable identifier_name
 
-import Foundation
+import UIKit
 
 class Movie {
     let id: Int
@@ -15,16 +15,18 @@ class Movie {
     let releaseDate: String
     let synopsis: String
     let posterPath: String?
+    var posterImage: UIImage?
     let genres: Set<String>
     let isFavorite: Bool
 
     init(movie: MovieDTO) {
-        id = movie.id
-        title = movie.title
-        releaseDate = String(movie.releaseDate.prefix(4))
-        synopsis = movie.synopsis
-        posterPath = movie.posterPath
-        genres = []
-        isFavorite = false
+        self.id = movie.id
+        self.title = movie.title
+        self.releaseDate = String(movie.releaseDate.prefix(4))
+        self.synopsis = movie.synopsis
+        self.posterPath = movie.posterPath
+        self.posterImage = nil
+        self.genres = []
+        self.isFavorite = false
     }
 }

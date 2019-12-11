@@ -80,7 +80,7 @@ class DataTransferObjectsTests: XCTestCase {
                                                 MovieDTO(id: 297761,
                                                          title: "Suicide Squad",
                                                          releaseDate: "2016-08-03",
-                                                         description: "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.",
+                                                         synopsis: "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.",
                                                          posterPath: "/e1mjopzAS2KNsvpbpahQ1a6SkSn.jpg",
                                                          genreIDS: [14, 28, 80])],
                                             totalResults: 19629,

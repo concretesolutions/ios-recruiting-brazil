@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class MovieAPIService {
+final class MovieAPIService: DataSource {
 
     // API properties
     private static let keyAPI = "ba993d6b1312f03c80a322c3e00fab4d"
@@ -50,7 +50,7 @@ final class MovieAPIService {
     /// - Parameters:
     ///   - completion: The completion handler to call when the load request is complete.
     ///                 Return GenresDTO on success and and Error on failure
-    class func fetchPopularMovies(fromPage page: Int = 1,
+    class func fetchPopularMovies(of page: Int = 1,
                                   completion: @escaping (Result<MoviesRequestDTO, Error>) -> Void) {
         let stringURL = "\(baseStringURL)/movie/popular?api_key=\(keyAPI)&page=\(page)"
         let url = URL(string: stringURL)!
@@ -101,6 +101,33 @@ final class MovieAPIService {
             
             if let poster = UIImage(data: data) {
                 completion(.success(poster))
+                return
+            } else {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    class func fetchMovieDetail(withID id: Int,
+                                completion: @escaping (Result<MovieDTO, Error>) -> Void) {
+        let stringURL = "\(baseStringURL)/movie/\(id)?api_key=\(keyAPI)"
+        let url = URL(string: stringURL)!
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            let error = NSError(domain: "error", code: 0, userInfo: nil)
+            guard let _ = response, let data = data else {
+                let error = NSError(domain: "error", code: 0, userInfo: nil)
+                completion(.failure(error))
+                return
+            }
+            
+            if let movie = try? JSONDecoder().decode(MovieDTO.self, from: data) {
+                completion(.success(movie))
                 return
             } else {
                 completion(.failure(error))
