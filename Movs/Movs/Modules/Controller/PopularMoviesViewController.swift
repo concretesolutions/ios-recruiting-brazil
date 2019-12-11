@@ -73,4 +73,11 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
 
         return UIEdgeInsets(top: 0, left: edgeInsets, bottom: 0, right: edgeInsets)
     }
+
+    // MARK: - UICollectionViewDelegate
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = MovieDetailViewController(movie: DataProvider.shared.movies[indexPath.row])
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

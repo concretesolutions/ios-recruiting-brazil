@@ -17,7 +17,7 @@ class PopularMovieCell: UICollectionViewCell {
 
     // MARK: - Delegate
 
-    weak var delegate: PopularMovieCellDelegate?
+    weak var delegate: HeartButtonDelegate?
 
     // MARK: - Reusable Identifier
 
@@ -41,7 +41,7 @@ class PopularMovieCell: UICollectionViewCell {
 
     private lazy var bottomView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = UIColor(red: 45/255, green: 47/255, blue: 71/255, alpha: 1.0)
+        view.backgroundColor = UIColor(named: "Blue")
         return view
     }()
 
@@ -88,8 +88,12 @@ class PopularMovieCell: UICollectionViewCell {
 
         self.titleLabel.text = movie.title
         self.posterImageView.loadImage(fromURL: movie.smallImageURL)
-        self.heartButton.tintColor = movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
+        self.configureHeartImage()
         self.setupView()
+    }
+
+    private func configureHeartImage() {
+        self.heartButton.tintColor = self.movie.isFavourite ? UIColor(named: "Yellow") : .systemGray
     }
 }
 
@@ -142,7 +146,7 @@ extension PopularMovieCell: UIGestureRecognizerDelegate {
 
     @objc func didTapOnHeart() {
         self.movie.isFavourite = self.movie.isFavourite ? false : true
-        self.heartButton.tintColor = self.movie.isFavourite ? UIColor(named: "Yellow") : UIColor(named: "Gray")
+        self.configureHeartImage()
         self.delegate?.didTapOnHeart(movieID: self.movie.id)
     }
 }
