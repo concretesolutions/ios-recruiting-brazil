@@ -30,6 +30,11 @@
 		AFF71EFC23A0552A005F219B /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EFB23A0552A005F219B /* UITableViewExtension.swift */; };
 		AFF71EFE23A05552005F219B /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EFD23A05552005F219B /* UICollectionViewExtension.swift */; };
 		AFF71F0023A05581005F219B /* ReusableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EFF23A05581005F219B /* ReusableViewExtension.swift */; };
+		AFF71F0223A063DF005F219B /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71F0123A063DF005F219B /* PopularMoviesViewModel.swift */; };
+		AFF71F0423A06576005F219B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71F0323A06576005F219B /* UIViewControllerExtension.swift */; };
+		AFF71F0623A08012005F219B /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71F0523A08012005F219B /* CollectionViewFlowLayout.swift */; };
+		AFF71F0B23A0811C005F219B /* MovieGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71F0923A0811C005F219B /* MovieGridCell.swift */; };
+		AFF71F0C23A0811C005F219B /* MovieGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFF71F0A23A0811C005F219B /* MovieGridCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +65,11 @@
 		AFF71EFB23A0552A005F219B /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		AFF71EFD23A05552005F219B /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		AFF71EFF23A05581005F219B /* ReusableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewExtension.swift; sourceTree = "<group>"; };
+		AFF71F0123A063DF005F219B /* PopularMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewModel.swift; sourceTree = "<group>"; };
+		AFF71F0323A06576005F219B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		AFF71F0523A08012005F219B /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		AFF71F0923A0811C005F219B /* MovieGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGridCell.swift; sourceTree = "<group>"; };
+		AFF71F0A23A0811C005F219B /* MovieGridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieGridCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +138,8 @@
 		AFF71ECA23A02013005F219B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				AFF71F0823A080F4005F219B /* TableViewCell */,
+				AFF71F0723A080D9005F219B /* CollectionViewCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -136,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				AFF71EBA23A01FE0005F219B /* PopularMoviesVC.swift */,
+				AFF71F0123A063DF005F219B /* PopularMoviesViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -149,6 +162,7 @@
 				AFF71EFB23A0552A005F219B /* UITableViewExtension.swift */,
 				AFF71EFD23A05552005F219B /* UICollectionViewExtension.swift */,
 				AFF71EFF23A05581005F219B /* ReusableViewExtension.swift */,
+				AFF71F0323A06576005F219B /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -186,6 +200,7 @@
 			children = (
 				AFF71EEF23A037A1005F219B /* Environment.swift */,
 				AFF71EF123A03BB8005F219B /* Log.swift */,
+				AFF71F0523A08012005F219B /* CollectionViewFlowLayout.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -209,6 +224,22 @@
 				AFF71EF923A043AE005F219B /* Movie.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AFF71F0723A080D9005F219B /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				AFF71F0923A0811C005F219B /* MovieGridCell.swift */,
+				AFF71F0A23A0811C005F219B /* MovieGridCell.xib */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		AFF71F0823A080F4005F219B /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF71F0C23A0811C005F219B /* MovieGridCell.xib in Resources */,
 				AFF71EC323A01FE2005F219B /* LaunchScreen.storyboard in Resources */,
 				AFF71EC023A01FE2005F219B /* Assets.xcassets in Resources */,
 				AFF71EBE23A01FE0005F219B /* Main.storyboard in Resources */,
@@ -328,9 +360,11 @@
 			files = (
 				AFF71EF423A03F0B005F219B /* NSErrorExtension.swift in Sources */,
 				AFF71EBB23A01FE0005F219B /* PopularMoviesVC.swift in Sources */,
+				AFF71F0B23A0811C005F219B /* MovieGridCell.swift in Sources */,
 				AFF71EF823A040B9005F219B /* StringExtension.swift in Sources */,
 				AFF71EEA23A033D7005F219B /* NetworkEncoding.swift in Sources */,
 				AFF71F0023A05581005F219B /* ReusableViewExtension.swift in Sources */,
+				AFF71F0423A06576005F219B /* UIViewControllerExtension.swift in Sources */,
 				AFF71EFE23A05552005F219B /* UICollectionViewExtension.swift in Sources */,
 				AFF71EF223A03BB8005F219B /* Log.swift in Sources */,
 				AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */,
@@ -343,6 +377,8 @@
 				AFF71EF023A037A1005F219B /* Environment.swift in Sources */,
 				AFF71EEB23A033D7005F219B /* MovieService.swift in Sources */,
 				AFF71EF623A03F75005F219B /* DataExtension.swift in Sources */,
+				AFF71F0623A08012005F219B /* CollectionViewFlowLayout.swift in Sources */,
+				AFF71F0223A063DF005F219B /* PopularMoviesViewModel.swift in Sources */,
 				AFF71EB923A01FE0005F219B /* SceneDelegate.swift in Sources */,
 				AFF71EE823A033D7005F219B /* NetworkBaseService.swift in Sources */,
 			);
