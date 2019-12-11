@@ -30,10 +30,10 @@ public struct MovieDTO: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.id = (try container.decodeIfPresent(Int.self, forKey: .id)) ?? 0
-        self.title = (try container.decodeIfPresent(String.self, forKey: .title)) ?? "Title"
+        self.id = (try container.decodeIfPresent(Int.self, forKey: .id)) ?? 0 // Default value for missind id
+        self.title = (try container.decodeIfPresent(String.self, forKey: .title)) ?? "Title" // Default value for missing title
         self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
-        self.overview = (try container.decodeIfPresent(String.self, forKey: .overview)) ?? ""
+        self.overview = (try container.decodeIfPresent(String.self, forKey: .overview)) ?? "" // Default value for missing overview
         self.genreIds = try container.decodeIfPresent([Int].self, forKey: .genreIds)
         self.genres = try container.decodeIfPresent([Genre].self, forKey: .genres)
         
@@ -41,7 +41,7 @@ public struct MovieDTO: Codable {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         let dateString = (try container.decodeIfPresent(String.self, forKey: .releaseDate)) ?? ""
-        self.releaseDate = dateFormatter.date(from: dateString)
+        self.releaseDate = dateFormatter.date(from: dateString) // Nil release date when parameter come with empty string
     }
 }
 
