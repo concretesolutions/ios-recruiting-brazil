@@ -64,6 +64,7 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
      }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DetailMovieController()
+        vc.movie = self.movies[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 }

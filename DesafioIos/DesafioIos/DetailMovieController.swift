@@ -9,23 +9,24 @@
 import UIKit
 
 class DetailMovieController: UIViewController {
+    var movie:Movie? {
+        didSet{
+           setView()
+        }
+    }
     override func loadView() {
-        let view = DetailMovieView(frame: UIScreen.main.bounds)
-            //UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .red
-        self.view = view
+       
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func setView(){
+        guard let movie = self.movie else{
+            return
+        }
+        let view = DetailMovieView(movie: movie)
+        self.view = view
     }
-
-
 }

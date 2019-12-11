@@ -9,9 +9,10 @@
 import UIKit
 
 class DetailMovieView: UIView {
-    let movieImage:UIImageView = {
+    let movie:Movie
+    lazy var movieImage:UIImageView = {
         let view = UIImageView(frame: .zero)
-        view.image = #imageLiteral(resourceName: "list_icon")
+        view.loadImageMovie(self.movie.backdropPath)
         return view
     }()
     lazy var containerNameMovieLikeButton:UIStackView = {
@@ -25,7 +26,7 @@ class DetailMovieView: UIView {
     lazy var containerDescriptionMovie:UIStackView = {
         let stack = UIStackView(frame: .zero)
         stack.axis = .vertical
-        stack.distribution = .equalSpacing
+        stack.distribution = .fillEqually
         stack.backgroundColor = .red
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 8.0
@@ -38,13 +39,13 @@ class DetailMovieView: UIView {
     }()
     lazy var movieName:UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "nome do filme"
+        view.text = self.movie.title
         view.font = UIFont(name: "Times New Roman", size: 30.0)
         return view
     }()
     lazy var movieYear:UILabel = {
            let view = UILabel(frame: .zero)
-           view.text = "2008"
+           view.text = self.movie.releaseDate
            view.font = UIFont(name: "Times New Roman", size: 30.0)
            return view
     }()
@@ -54,17 +55,19 @@ class DetailMovieView: UIView {
            view.font = UIFont(name: "Times New Roman", size: 30.0)
            return view
     }()
-    let movieDescription:UILabel = {
+    lazy var movieDescription:UILabel = {
         let view = UILabel(frame: .zero)
-        view.text = "foi o deus nórdico do trovão (por isto representava a força da natureza), talvez o mais popular deus da mitologia nórdica. Ele tinha um martelo chamado Mjolnir (o destruidor), feito por anões das cavernas subterrâneas, com o qual dominava o trovão."
+        view.text = self.movie.overview
         view.font = UIFont(name: "Times New Roman", size: 15.0)
         view.lineBreakMode = .byCharWrapping
-        view.numberOfLines = 3
+        view.numberOfLines = 5
         return view
     }()
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(movie:Movie) {
+        self.movie = movie
+        super.init(frame: UIScreen.main.bounds)
         self.setupView()
+
     }
     
     required init?(coder: NSCoder) {
@@ -97,7 +100,6 @@ extension DetailMovieView:CodeView{
         containerDescriptionMovie.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(movieImage.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.3)
         }
         movieDescription.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
@@ -106,6 +108,6 @@ extension DetailMovieView:CodeView{
     }
     
     func setupAdditionalConfiguration() {
-        
+        self.backgroundColor = .white
     }
 }
