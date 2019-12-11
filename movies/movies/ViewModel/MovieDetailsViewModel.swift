@@ -21,7 +21,8 @@ class MovieDetailsViewModel: ObservableObject {
     }
     
     var date: String {
-        return MovieDetailsViewModel.dateFormatter.string(from: self.movie.releaseDate)
+        guard let releaseDate = self.movie.releaseDate else { return "Upcoming" }
+        return MovieDetailsViewModel.dateFormatter.string(from: releaseDate)
     }
     
     var genres: String {

@@ -21,13 +21,9 @@ class MovieService {
     private static let baseAPIURL = "https://api.themoviedb.org/3"
     public static var genres: [Int: String] = [:]
     
-    private static let jsonDecoder: JSONDecoder = {
+    static let jsonDecoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
         
         return jsonDecoder
     }()

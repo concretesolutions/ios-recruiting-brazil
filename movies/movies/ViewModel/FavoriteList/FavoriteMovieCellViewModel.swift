@@ -21,7 +21,8 @@ class FavoriteMovieCellViewModel: ObservableObject {
     }
     
     var date: String {
-        return FavoriteMovieCellViewModel.dateFormatter.string(from: self.movie.releaseDate)
+        guard let releaseDate = self.movie.releaseDate else { return "Upcoming" }
+        return FavoriteMovieCellViewModel.dateFormatter.string(from: releaseDate)
     }
     
     var overview: String {

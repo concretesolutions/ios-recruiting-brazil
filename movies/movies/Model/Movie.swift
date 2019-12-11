@@ -13,9 +13,36 @@ public struct MovieDTO: Codable {
     public let title: String
     public let posterPath: String?
     public let overview: String
-    public let releaseDate: Date
+    public let releaseDate: Date?
     public let genreIds: [Int]?
     public let genres: [Genre]?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case posterPath
+        case overview
+        case releaseDate
+        case genreIds
+        case genres
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.id = (try container.decodeIfPresent(Int.self, forKey: .id)) ?? 0 // Default value for missind id
+        self.title = (try container.decodeIfPresent(String.self, forKey: .title)) ?? "Title" // Default value for missing title
+        self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
+        self.overview = (try container.decodeIfPresent(String.self, forKey: .overview)) ?? "" // Default value for missing overview
+        self.genreIds = try container.decodeIfPresent([Int].self, forKey: .genreIds)
+        self.genres = try container.decodeIfPresent([Genre].self, forKey: .genres)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let dateString = (try container.decodeIfPresent(String.self, forKey: .releaseDate)) ?? ""
+        self.releaseDate = dateFormatter.date(from: dateString) // Nil release date when parameter come with empty string
+    }
 }
 
 public struct Movie: Codable {
@@ -23,7 +50,7 @@ public struct Movie: Codable {
     public let title: String
     public let posterPath: String?
     public let overview: String
-    public let releaseDate: Date
+    public let releaseDate: Date?
     public let genreIds: [Int]?
     public var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
