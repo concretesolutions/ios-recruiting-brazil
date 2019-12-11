@@ -9,7 +9,7 @@
 import Quick
 import Nimble
 
-@testable import movies
+@testable import Movs
 
 class MovieServiceSpec: QuickSpec {
     override func spec() {

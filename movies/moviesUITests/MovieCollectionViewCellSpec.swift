@@ -10,7 +10,7 @@ import Quick
 import Nimble
 import Nimble_Snapshots
 
-@testable import movies
+@testable import Movs
 
 class MovieCollectionViewCellSpec: QuickSpec {
     override func spec() {
