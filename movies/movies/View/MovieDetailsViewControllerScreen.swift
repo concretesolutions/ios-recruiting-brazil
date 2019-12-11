@@ -12,6 +12,7 @@ class MovieDetailsViewControllerScreen: UIView {
     public var viewModel: MovieDetailsViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
+            self.favoriteButton.delegate = self.viewModel
             self.favoriteButton.type = self.viewModel.favorite ? .favorite  : .unfavorite
             self.dateLabel.text = self.viewModel.date
             self.genresLabel.text = self.viewModel.genres
@@ -42,7 +43,6 @@ class MovieDetailsViewControllerScreen: UIView {
     lazy var favoriteButton: FavoriteButton = {
         let view = FavoriteButton()
         view.tintColor = UIColor.systemOrange
-        view.delegate = self
         return view
     }()
     
@@ -92,13 +92,6 @@ class MovieDetailsViewControllerScreen: UIView {
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
             })
-    }
-}
-
-// MARK: - Favorite button delegate
-extension MovieDetailsViewControllerScreen: FavoriteButtonDelegate {
-    func click() {
-        self.viewModel.toggleFavorite()
     }
 }
 

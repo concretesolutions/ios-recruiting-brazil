@@ -37,3 +37,10 @@ class MovieCellViewModel: ObservableObject {
         UserDefaults.standard.toggleFavorite(withId: self.movie.id)
     }
 }
+
+// MARK: - Favorite button delegate
+extension MovieCellViewModel: FavoriteButtonDelegate {
+    func click() {
+        self.toggleFavorite()
+    }
+}

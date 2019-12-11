@@ -16,6 +16,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         didSet {
             self.titleLabel.text = self.viewModel.title
             self.posterImageView.setImage(withURL: self.viewModel.posterURL)
+            self.favoriteButton.delegate = self.viewModel
         }
     }
     
@@ -49,7 +50,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupView()
-        favoriteButton.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -65,13 +65,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
             })
-    }
-}
-
-// MARK: - Favorite button delegate
-extension MovieCollectionViewCell: FavoriteButtonDelegate {
-    func click() {
-        self.viewModel.toggleFavorite()
     }
 }
 
