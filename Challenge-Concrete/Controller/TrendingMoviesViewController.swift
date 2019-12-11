@@ -49,7 +49,6 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
 extension TrendingMoviesViewController {
     func didUpdateData() {
         DispatchQueue.main.async {
-            print(self.dataSource.data)
             self.moviesView.reloadCollectionData()
         }
     }

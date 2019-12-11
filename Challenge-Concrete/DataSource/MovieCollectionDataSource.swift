@@ -16,7 +16,10 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.setupData()
+        let movie = data[indexPath.row]
+        let imageURL = "https://image.tmdb.org/t/p/w185/\(movie.posterPath!)"
+        cell.setupData(title: movie.title ?? movie.name)
+        cell.imageView.setImage(withURL: imageURL)
         return cell
     }
 }
