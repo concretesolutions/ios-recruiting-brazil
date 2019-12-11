@@ -14,7 +14,7 @@ extension UINavigationController {
         
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = color
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]      
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
     }
@@ -26,6 +26,5 @@ extension UITabBarController {
         tabBar.barTintColor = color
         tabBar.tintColor = .black
         tabBar.unselectedItemTintColor = .gray
-        UITabBar.appearance()
     }
 }

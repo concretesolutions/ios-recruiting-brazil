@@ -70,6 +70,8 @@ extension TrendingMoviesViewController {
 // MARK: - SearchResultsUpdating
 extension TrendingMoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        movieViewModel.searchMovies(query: searchController.searchBar.text ?? "")
+        if let text = searchController.searchBar.text {
+            movieViewModel.searchMovies(query: text)
+        }
     }
 }
