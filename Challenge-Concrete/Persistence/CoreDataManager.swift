@@ -8,6 +8,10 @@
 
 import CoreData
 
+protocol PersistableObject: NSManagedObject {
+    
+}
+
 class CoreDataManager {
     // MARK: - Core Data stack
     static var persistentContainer: NSPersistentContainer = {
@@ -20,13 +24,14 @@ class CoreDataManager {
         return container
     }()
     
-    static func fetch<T>(_ request: NSFetchRequest<T>) -> [T]{
+    static func fetch<T: PersistableObject>() -> [T]{
         do{
-            let result = try persistentContainer.viewContext.fetch(request)
-            return result
+            let request = T.fetchRequest()
+            let result = try persistentContainer.viewContext.fetch(request) as? [T]
+            return result ?? []
         } catch{
             print(error)
-            return [T]()
+            return []
         }
     }
     

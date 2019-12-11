@@ -8,7 +8,9 @@
 
 import CoreData
 
-extension FavoriteMovie {
+
+
+extension FavoriteMovie: PersistableObject {
     convenience init() {
         self.init(context: CoreDataManager.persistentContainer.viewContext)
     }
