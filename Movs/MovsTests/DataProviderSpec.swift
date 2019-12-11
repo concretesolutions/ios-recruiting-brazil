@@ -29,6 +29,7 @@ class DataProviderSpec: QuickSpec {
         describe("DataProvider") {
 
             beforeEach {
+                DataProvider.shared.reset()
                 self.dataFetcher = MockDataFetcher()
                 self.sut = DataProvider.shared
             }
@@ -36,7 +37,6 @@ class DataProviderSpec: QuickSpec {
             afterEach {
                 self.sut = nil
                 self.dataFetcher = nil
-                DataProvider.shared.reset()
             }
 
             // MARK: Before setup

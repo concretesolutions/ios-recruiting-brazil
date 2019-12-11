@@ -18,8 +18,8 @@ final class MoviesAPIDataFetcher {
     // MARK: - Variables
 
     private let imageBaseURL = "https://image.tmdb.org/t/p/"
-    private let smallImageSize = "w185"
-    private let bigImageSize = "w300"
+    private let smallImageSize = "w342"
+    private let bigImageSize = "w500"
 
     // MARK: - Request methods
 
