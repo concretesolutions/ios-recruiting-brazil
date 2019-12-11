@@ -24,7 +24,11 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
         title = "Movies"
         setupDelegateDataSource()
         moviesView.setupTableView(delegate: delegate, dataSource: dataSource)
-        movieViewModel.fetchTrendingMovies()
+        
+        movieViewModel.fetchFavoriteMovies().forEach { (fav) in
+            
+            print("Favorites: ", fav.image)
+        }
     }
 }
 

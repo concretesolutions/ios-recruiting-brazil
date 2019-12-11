@@ -23,12 +23,13 @@ extension UIImage {
 }
 
 extension UIImageView {
-    func setImage(withURL url: String) {
+    func setImage(withURL url: String, completion: ((_ imgData: Data) -> Void)? = nil) {
         let apiProvider = APIProvider<Movie>()
         apiProvider.requestImage(withURL: url) { result in
             switch result {
             case .success(let data):
                 self.image = UIImage(data: data)
+                completion?(data)
             case .failure: break
             }
         }

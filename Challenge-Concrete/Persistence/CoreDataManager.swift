@@ -24,9 +24,10 @@ class CoreDataManager {
         return container
     }()
     
-    static func fetch<T: PersistableObject>() -> [T]{
+    static func fetch<T: PersistableObject>(predicate: NSPredicate? = nil) -> [T] {
         do{
             let request = T.fetchRequest()
+            request.predicate = predicate
             let result = try persistentContainer.viewContext.fetch(request) as? [T]
             return result ?? []
         } catch{

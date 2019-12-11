@@ -33,4 +33,11 @@ class TrendingMoviesViewModel: MovieViewModel {
             }
         }
     }
+    
+    func favorite(_ movie: Movie) {
+        if let title = movie.title, let imageData = movie.movieImageData {
+            _ = FavoriteMovie(id: Int64(movie.id), title: title, image: imageData)
+            CoreDataManager.saveContext()
+        }
+    }
 }

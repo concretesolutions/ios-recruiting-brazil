@@ -61,6 +61,7 @@ extension TrendingMoviesViewController {
 extension TrendingMoviesViewController {
     func didSelectMovie(at index: Int) {
         let movie = dataSource.data[index]
+        movieViewModel.favorite(movie)
         navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
