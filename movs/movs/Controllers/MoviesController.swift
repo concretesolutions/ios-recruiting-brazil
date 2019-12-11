@@ -32,14 +32,22 @@ class MoviesController: UIViewController {
                     self.screen.moviesCollectionView.reloadData()
                 }
             case .normal:
+                self.screen.presentEmptySearch(false)
                 self.movies = self.dataService.movies
                 DispatchQueue.main.async {
                     self.screen.moviesCollectionView.reloadData()
                 }
             case .filtered:
                 self.movies = self.dataService.movies.filter({ (movie) -> Bool in
-                    return movie.title.lowercased().hasPrefix(self.filteredBy.lowercased())
+                    return movie.title.lowercased().contains(self.filteredBy.lowercased())
                 })
+                
+                if self.movies.count == 0 {
+                    self.screen.presentEmptySearch(true)
+                } else {
+                    self.screen.presentEmptySearch(false)
+                }
+                
                 DispatchQueue.main.async {
                     self.screen.moviesCollectionView.reloadData()
                 }

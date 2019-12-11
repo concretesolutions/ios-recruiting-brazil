@@ -63,11 +63,21 @@ class MoviesScreen: UIView {
     
     // MARK: - Exception view
     func showErrorView() {
-        
+        DispatchQueue.main.async {
+            self.moviesCollectionView.backgroundView = ExceptionView(type: .error)
+        }
     }
     
-    func showSearchErrorView() {
-        
+    func presentEmptySearch(_ shouldPresent: Bool) {
+        if shouldPresent {
+            DispatchQueue.main.async {
+                self.moviesCollectionView.backgroundView = ExceptionView(type: .emptySearch)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.moviesCollectionView.backgroundView = nil
+            }
+        }
     }
 }
 
