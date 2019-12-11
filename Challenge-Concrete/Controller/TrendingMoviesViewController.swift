@@ -20,6 +20,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Movies"
         setupDelegateDataSource()
         moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
         movieViewModel.fetchTrendingMovies()
