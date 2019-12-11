@@ -27,7 +27,8 @@ class FavoriteMoviesCoordinator: Coordinator {
         self.presenter = parent.coordinatedViewController
         self.dependencies = parent.dependencies
         
-        self.coordinatedViewController = FavoriteMoviesViewController()
+        let viewModel = FavoriteMoviesControllerViewModel(dependencies: self.dependencies)
+        self.coordinatedViewController = FavoriteMoviesViewController(viewModel: viewModel)
         self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
     }
     

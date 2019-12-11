@@ -11,6 +11,10 @@ import Foundation
 extension String {
     init(date: Date, components: Set<Calendar.Component>) {
         let dateComponents = Calendar.current.dateComponents(components, from: date)
-        self = String(dateComponents.year!)
+        if components == [.year] {
+            self = String(dateComponents.year!)
+        } else {
+            self = "\(dateComponents.year!)-\(dateComponents.month!)-\(dateComponents.day!)"
+        }
     }
 }

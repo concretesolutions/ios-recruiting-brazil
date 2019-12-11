@@ -10,14 +10,11 @@ import Foundation
 import Combine
 
 class PopularMoviesControllerViewModel {
-
-    // MARK: - Models
-    
-    private var movies: [Movie] = []
     
     // MARK: - Dependencies
     
     typealias Dependencies = HasAPIManager & HasCoreDataManager
+    private let dependencies: Dependencies
     internal let apiManager: MoviesAPIManager
     internal let coreDataManager: CoreDataManager
     
@@ -35,18 +32,21 @@ class PopularMoviesControllerViewModel {
     // MARK: - Initializers and Deinitializers
     
     init(dependencies: Dependencies) {
+        self.dependencies = dependencies
         self.coreDataManager = dependencies.coreDataManager
         self.apiManager = dependencies.apiManager
     }
     
     // MARK: - MovieCellViewModel
     
-    func cellViewModelForItemAt(indexPath: IndexPath) -> MovieCellViewModel {
-        return MovieCellViewModel(movie: self.movies[indexPath.row], coreDataManager: self.coreDataManager)
+    func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
+        let movie = Movie(movieDTO: self.apiManager.movies[indexPath.row], genres: self.apiManager.genres)
+        return MovieViewModel(movie: movie, dependencies: self.dependencies)
     }
     
     func didSelectItemAt(indexPath: IndexPath) {
-        self.coordinatorDelegate?.didSelectItem(movie: self.movies[indexPath.row])
+        let movie = Movie(movieDTO: self.apiManager.movies[indexPath.row], genres: self.apiManager.genres)
+        self.coordinatorDelegate?.didSelectItem(movie: movie)
     }
     
     // MARK: - Fetch Methods
@@ -73,7 +73,7 @@ class PopularMoviesControllerViewModel {
     
     private func updateData(with popularMovies: PopularMoviesDTO) {
         self.currentPage = popularMovies.page
-        self.movies += popularMovies.movies.map({ Movie(movieDTO: $0, genres: self.apiManager.genres) })
+        self.apiManager.movies += popularMovies.movies
         self.numberOfMovies += popularMovies.movies.count
     }
 }

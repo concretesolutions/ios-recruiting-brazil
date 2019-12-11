@@ -39,7 +39,7 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    internal var viewModel: MovieCellViewModel! {
+    internal var viewModel: MovieViewModel! {
         didSet {
             let favoriteStatus = self.viewModel.coreDataManager.isFavorited(movieID: self.viewModel.id)
             self.titleLabel.text = self.viewModel.title
@@ -68,9 +68,9 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
         sender.setFavorited(!sender.favorited)
         
         if sender.favorited {
-            self.viewModel.coreDataManager.addFavorite(movieID: self.viewModel.id)
+            self.viewModel.addToFavorites()
         } else {
-            self.viewModel.coreDataManager.removeFavorite(movieID: self.viewModel.id)
+            self.viewModel.removeFromFavorites()
         }
     }
 }

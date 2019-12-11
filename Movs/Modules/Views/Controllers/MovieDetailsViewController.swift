@@ -14,12 +14,12 @@ class MovieDetailsViewController: UIViewController {
     // MARK: - Properties
     
     internal let screen = MovieDetailsViewScreen()
-    internal var viewModel: MovieDetailsControllerViewModel
+    internal var viewModel: MovieViewModel
     internal var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers
     
-    init(viewModel: MovieDetailsControllerViewModel) {
+    init(viewModel: MovieViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         
@@ -55,9 +55,9 @@ class MovieDetailsViewController: UIViewController {
         sender.setFavorited(!sender.favorited)
         
         if sender.favorited == true {
-            self.viewModel.coreDataManager.addFavorite(movieID: self.viewModel.id)
+            self.viewModel.addToFavorites()
         } else {
-            self.viewModel.coreDataManager.removeFavorite(movieID: self.viewModel.id)
+            self.viewModel.removeFromFavorites()
         }
     }
 }

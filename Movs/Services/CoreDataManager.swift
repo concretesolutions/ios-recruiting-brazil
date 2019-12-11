@@ -27,7 +27,14 @@ class CoreDataManager {
         self.favorites = self.fetch(request: NSFetchRequest<CDFavoriteMovie>(entityName: "CDFavoriteMovie"))
     }
     
-    // MARK: - Helpers
+    // MARK: - Management
+    
+    private func createEntity(named name: String) -> NSEntityDescription {
+        guard let entity = NSEntityDescription.entity(forEntityName: name, in: self.managedContext) else {
+            fatalError("Failed to retrieve CDFavoriteMovie in current context")
+        }
+        return entity
+    }
     
     private func fetch<Entity: NSFetchRequestResult>(request: NSFetchRequest<Entity>) -> Set<Entity> {
         do {
@@ -41,26 +48,34 @@ class CoreDataManager {
     // MARK: - Update methods
     
     func isFavorited(movieID: Int) -> Bool {
-        let result = self.favorites.map({ $0.movieID }).contains(Int64(movieID))
+        let result = self.favorites.map({ $0.id }).contains(Int64(movieID))
         return result
     }
     
-    func addFavorite(movieID: Int) {
-        guard !self.isFavorited(movieID: movieID) else {
+    func addFavorite(movie: Movie) {
+        guard !self.isFavorited(movieID: movie.id) else {
             return
         }
         
-        guard let entity = NSEntityDescription.entity(forEntityName: "CDFavoriteMovie", in: self.managedContext) else {
-            fatalError("Failed to retrieve CDFavoriteMovie in current context")
-        }
-
-        let newInstance = CDFavoriteMovie(entity: entity, insertInto: self.managedContext)
-        newInstance.movieID = Int64(movieID)
-        self.favorites.insert(newInstance)
+        let entity = self.createEntity(named: "CDFavoriteMovie")
+        let favoriteMovie = self.createFavoriteMovie(movie: movie, description: entity)
+        self.favorites.insert(favoriteMovie)
     }
     
-    func removeFavorite(movieID: Int) {
-        let objects = self.favorites.filter({ $0.movieID == Int64(movieID) })
+    func createFavoriteMovie(movie: Movie, description: NSEntityDescription) -> CDFavoriteMovie {
+        let instance = CDFavoriteMovie(entity: description, insertInto: self.managedContext)
+        instance.backdropPath = movie.backdropPath
+        instance.genreIDs = NSSet(array: movie.genres.map({ $0.id }))
+        instance.id = Int64(movie.id)
+        instance.posterPath = movie.posterPath
+        instance.releaseDate = movie.releaseDate
+        instance.summary = movie.summary
+        instance.title = movie.title
+        return instance
+    }
+    
+    func removeFavorite(movieID: Int64) {
+        let objects = self.favorites.filter({ $0.id == movieID })
         for object in objects {
             self.managedContext.delete(object)
             self.favorites.remove(object)

@@ -1,7 +1,7 @@
 // swiftlint:disable identifier_name
 
 //
-//  MovieDetailsControllerViewModel.swift
+//  MovieViewModel.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 04/12/19.
@@ -10,12 +10,12 @@
 
 import UIKit
 
-class MovieDetailsControllerViewModel {
+class MovieViewModel {
     
     // MARK: - Model
     
-    private let movie: Movie
-
+    private let movie: Movie    
+    
     // MARK: - Dependencies
     
     typealias Dependencies = HasCoreDataManager
@@ -30,21 +30,33 @@ class MovieDetailsControllerViewModel {
     public let backdropPath: String?
     public let id: Int
     public var genresNames: Set<String>
+    public let posterPath: String?
     public let releaseYear: String
     public let title: String
     public let summary: String
     
-    // MARK: - Initializers and Deinitializers
+    // MARK: - Initializers
     
     init(movie: Movie, dependencies: Dependencies) {
         self.movie = movie
         self.coreDataManager = dependencies.coreDataManager
         
-        self.backdropPath = self.movie.backdropPath
-        self.id = self.movie.id
-        self.genresNames = Set(self.movie.genres.map({ $0.name }))
-        self.releaseYear = String(date: self.movie.releaseDate, components: [.year])
-        self.title = self.movie.title
-        self.summary = self.movie.summary
+        self.backdropPath = movie.backdropPath
+        self.id = movie.id
+        self.genresNames = Set(movie.genres.map({ $0.name }))
+        self.posterPath = movie.posterPath
+        self.releaseYear = String(date: movie.releaseDate, components: [.year])
+        self.title = movie.title
+        self.summary = movie.summary
+    }
+    
+    // MARK: -
+    
+    func addToFavorites() {
+        self.coreDataManager.addFavorite(movie: self.movie)
+    }
+    
+    func removeFromFavorites() {
+        self.coreDataManager.removeFavorite(movieID: Int64(self.id))
     }
 }

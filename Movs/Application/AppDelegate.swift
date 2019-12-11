@@ -13,23 +13,12 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        if !UserDefaults.standard.bool(forKey: "previouslyLaunched") {
-            self.configureInitialState()
-            UserDefaults.standard.set(true, forKey: "previouslyLaunched")
-        }
         // Override point for customization after application launch.
         return true
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         self.saveContext()
-    }
-    
-    // MARK: Application data
-    
-    private func configureInitialState() {
-        UserDefaults.standard.set([], forKey: "favorites")
     }
 
     // MARK: UISceneSession Lifecycle

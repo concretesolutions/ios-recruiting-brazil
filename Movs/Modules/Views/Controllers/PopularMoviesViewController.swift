@@ -13,7 +13,6 @@ class PopularMoviesViewController: UIViewController {
 
     // MARK: - Properties
     
-    internal var selectedIndex: IndexPath?
     internal let screen = PopularMoviesViewScreen()
     internal let viewModel: PopularMoviesControllerViewModel
     

@@ -14,6 +14,7 @@ final class MoviesAPIManager: MoviesAPIDataFetcher {
     
     internal let apiKey: String = "eea991e8b8c8738c849cddf195bc2813"
     internal let session: NetworkSession
+    internal var movies: [MovieDTO] = []
     internal var genres: [GenreDTO] = []
     
     // MARK: - Initializers and Deinitializers

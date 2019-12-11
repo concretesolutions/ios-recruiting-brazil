@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class PopularMoviesViewScreen: UIView {
     

@@ -34,6 +34,19 @@ class Movie {
         self.summary = summary
     }
     
+    convenience init(favoriteMovie: CDFavoriteMovie, genres: [GenreDTO]) {        
+        let date = String(date: favoriteMovie.releaseDate!, components: [.year, .month, .day])
+        let genres: Set<Genre> = Set(
+            genres.filter({ genreDTO in
+                favoriteMovie.genreIDs!.contains(genreDTO.id)
+            }).map({ genreDTO in
+                Genre(genreDTO: genreDTO)
+            })
+        )
+
+        self.init(id: Int(favoriteMovie.id), backdropPath: favoriteMovie.backdropPath, genres: genres, posterPath: favoriteMovie.posterPath, releaseDate: date, title: favoriteMovie.title!, summary: favoriteMovie.summary!)
+    }
+    
     convenience init(movieDTO: MovieDTO, genres: [GenreDTO]) {
         let genres: Set<Genre> = Set(
             genres.filter({ genreDTO in
