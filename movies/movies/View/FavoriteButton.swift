@@ -31,7 +31,7 @@ class FavoriteButton: UIButton {
     init() {
         super.init(frame: .zero)
         self.tintColor = .white
-        addTarget(nil, action: #selector(click), for: .touchUpInside)
+        addTarget(self, action: #selector(click), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {

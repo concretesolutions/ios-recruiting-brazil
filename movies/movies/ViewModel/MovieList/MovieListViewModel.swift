@@ -60,11 +60,6 @@ class MovieListViewModel: ObservableObject {
         return MovieDetailsViewModel(of: self.searchMovies[index])
     }
     
-    public func toggleFavoriteMovie(at index: Int) {
-        guard index < self.movieCount else { return } // Check if it is an valid index
-        UserDefaults.standard.toggleFavorite(withId: self.searchMovies[index].id)
-    }
-    
     public func searchMovie(query: String?) {
         guard let query = query, !query.isEmpty else { // Check if there is a valid text on the query
             self.searchMovies = self.movies // If don't, show all movies

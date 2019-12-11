@@ -37,11 +37,13 @@ class FavoriteListViewModel: ObservableObject {
     }
     
     private func fetchMovies() {
+        self.state = .loading
         _ = DataProvider.shared.$favoriteMovies
             .receive(on: DispatchQueue.main)
             .sink { [weak self] movies in
                 self?.movies = movies
                 self?.searchMovies = movies
+                self?.state = .movies
             }
     }
     
