@@ -33,7 +33,7 @@ class FavoriteListViewModel: ObservableObject {
             .removeDuplicates()
             .sink { [weak self] queryString in
                 self?.searchMovie(query: queryString)
-        }
+            }
     }
     
     private func fetchMovies() {
@@ -41,7 +41,8 @@ class FavoriteListViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] movies in
                 self?.movies = movies
-        }
+                self?.searchMovies = movies
+            }
     }
     
     public func viewModelForMovie(at index: Int) -> FavoriteMovieCellViewModel? {
