@@ -21,6 +21,7 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Movies"
         setupDelegateDataSource()
         moviesView.setupTableView(delegate: delegate, dataSource: dataSource)
         movieViewModel.fetchTrendingMovies()

@@ -14,15 +14,27 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     var movieViewModel = TrendingMoviesViewModel()
     let moviesView = TrendingMoviesView()
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func loadView() {
         view = moviesView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Movies"
+        setupSearchController()
         setupDelegateDataSource()
         moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
         movieViewModel.fetchTrendingMovies()
+    }
+    
+    func setupSearchController() {
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        definesPresentationContext = true
     }
         
     // MARK: - ViewWillTransition
@@ -52,5 +64,12 @@ extension TrendingMoviesViewController {
         let movie = dataSource.data[index]
         navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
+    }
+}
+
+// MARK: - SearchResultsUpdating
+extension TrendingMoviesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        movieViewModel.searchMovies(query: searchController.searchBar.text ?? "")
     }
 }
