@@ -11,7 +11,12 @@ import UIKit
 extension UINavigationController {
     convenience init(rootVC: UIViewController, color: UIColor) {
         self.init(rootViewController: rootVC)
-        navigationBar.barTintColor = color
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = color
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]      
+        navigationBar.standardAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
     }
 }
 
