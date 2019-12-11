@@ -31,10 +31,11 @@ class MovieCell: UICollectionViewCell {
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "heart"),
-                                  for: .normal)
-        button.tintColor = .white
+        let button = FavoriteButton()
+        button.isSelected = false
+        button.addTarget(self,
+                         action: #selector(didFavoriteMovie),
+                         for: .touchUpInside)
         return button
     }()
     
@@ -48,6 +49,9 @@ class MovieCell: UICollectionViewCell {
         return container
     }()
     
+    // MARK: - Attributes
+    var movie: Movie?
+    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,6 +64,7 @@ class MovieCell: UICollectionViewCell {
     
     // MARK: - Setup cell content
     func setup(with movie: Movie) {
+        self.movie = movie
         self.title.text = movie.title
         let dataService = DataService.shared
         if let posterPath =  movie.posterPath {
@@ -74,6 +79,15 @@ class MovieCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         self.posterImage.image = nil
+    }
+    
+    // MARK: - Favorite
+    @objc func didFavoriteMovie() {
+        self.favoriteButton.isSelected = !self.favoriteButton.isSelected
+        if let movie = self.movie {
+            let dataService = DataService.shared
+            dataService.addToFavorites(movie.id)
+        }
     }
 }
 

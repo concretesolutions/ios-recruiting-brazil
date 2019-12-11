@@ -16,12 +16,9 @@ final class DataService {
     // Movies
     private(set) var movies: [Movie] = []
     
-//    // Favorites
-////    private var favoritesIDs: [Int]
-//    private var favorites: [Movie] = []
-//    var favoritesCount: Int {
-//        return self.favorites.count
-//    }
+    // Favorites
+    private var favoritesIDs: [Int] = []
+    private(set) var favorites: [Movie] = []
     
     // MARK: - Shared instance
     static let shared = DataService()
@@ -87,5 +84,9 @@ final class DataService {
                 completion(image)
             }
         }
+    }
+    
+    func addToFavorites(_ id: Int) {
+        self.favoritesIDs.append(id)
     }
 }
