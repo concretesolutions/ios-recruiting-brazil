@@ -9,7 +9,12 @@
 import UIKit
 
 class FavoriteMovieCellView: UITableViewCell {
-    let imageMovie:UIImageView = {
+    var movie:Movie?{
+        didSet{
+            self.updateUI()
+        }
+    }
+    let movieImage:UIImageView = {
         let view = UIImageView(frame: .zero)
         view.backgroundColor = .red
         view.contentMode = .scaleToFill
@@ -57,29 +62,37 @@ class FavoriteMovieCellView: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    func updateUI(){
+        if let movie = self.movie{
+            movieImage.loadImageMovie(movie.backdropPath)
+            movieName.text = movie.title
+            movieYear.text = movie.releaseDate
+            movieDescription.text = movie.overview
+        }
+    }
 }
 extension FavoriteMovieCellView:CodeView {
     func buildViewHierarchy() {
-        self.addSubview(imageMovie)
+        self.addSubview(movieImage)
         self.addSubview(movieName)
         self.addSubview(movieYear)
         self.addSubview(movieDescription)
     }
     
     func setupConstraints() {
-        imageMovie.snp.makeConstraints { (make) in
+        movieImage.snp.makeConstraints { (make) in
             make.left.bottom.top.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.3)
         }
         movieName.snp.makeConstraints { (make) in
-            make.left.equalTo(imageMovie.snp.right).offset(10)
+            make.left.equalTo(movieImage.snp.right).offset(10)
             make.top.equalToSuperview().offset(10)
         }
         movieYear.snp.makeConstraints { (make) in
             make.right.top.equalToSuperview().inset(10)
         }
         movieDescription.snp.makeConstraints { (make) in
-            make.left.equalTo(imageMovie.snp.right).offset(10)
+            make.left.equalTo(movieImage.snp.right).offset(10)
             make.top.equalTo(movieName.snp.bottom).offset(10)
             make.right.equalTo(movieYear.snp.right)
             make.bottom.equalToSuperview()

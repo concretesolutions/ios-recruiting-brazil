@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 class MoviesController: UIViewController{
-
    var movies:[Movie] = []
    let collectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
@@ -44,7 +43,10 @@ class MoviesController: UIViewController{
         // Pass the selected object to the new view controller.
     }
     */
+
 }
+// MARK: - Protocols of CollectionView
+
 extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.movies.count
@@ -60,8 +62,12 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
         let width = self.view.frame.width
         return CGSize(width: (width)/2.5, height: (width)/2)
      }
-        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = DetailMovieController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
+// MARK: - Protocols CodeView
 
 extension MoviesController:CodeView{
     func buildViewHierarchy() {

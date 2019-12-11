@@ -24,7 +24,6 @@ public final class GridBox:UIView{
         stack.backgroundColor = .red
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
-        
     }()
     lazy var title:UILabel = {
         let view = UILabel(frame: .zero)

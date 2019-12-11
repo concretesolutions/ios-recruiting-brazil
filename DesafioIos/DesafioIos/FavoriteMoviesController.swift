@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 class FavoriteMoviesController: UIViewController {
-    var itemsToLoad: [String] = ["One", "Two", "Three"]
+    var itemsToLoad: [Movie] = []
     lazy var tableView:UITableView = {
         let view = UITableView(frame: .zero)
         return view
@@ -22,7 +22,12 @@ class FavoriteMoviesController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getRequest(url: "https://api.themoviedb.org/3/movie/popular", data: querys, completion:  { data in
+             self.itemsToLoad = data.results
+             DispatchQueue.main.async {
+                 self.tableView.reloadData()
+             }
+         })
         // Do any additional setup after loading the view.
     }
     
@@ -37,6 +42,7 @@ extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
             else{
                 return tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         }
+        cell.movie = itemsToLoad[indexPath.row]
         return cell
 
     }
