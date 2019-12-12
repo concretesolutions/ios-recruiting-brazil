@@ -32,6 +32,7 @@ final class FavoriteListViewControllerScreen: UIView {
     
     var state: MovieListViewState = .movies {
         willSet {
+            // Update view when state is changed
             self.updateViewState(to: newValue)
         }
     }
@@ -65,11 +66,14 @@ final class FavoriteListViewControllerScreen: UIView {
         }
     }
     
+    /// Set table view data source and delegate
+    /// - Parameter controller: Controller responsable for table view delegate and data source
     public func setupTableView<T: UITableViewDelegate & UITableViewDataSource>(controller: T) {
         self.tableView.delegate = controller
         self.tableView.dataSource = controller
     }
     
+    /// Reloads the table view
     public func reloadTableView() {
         self.tableView.reloadData()
     }
