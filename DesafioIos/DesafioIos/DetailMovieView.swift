@@ -12,7 +12,7 @@ class DetailMovieView: UIView {
     let movie:Movie
     lazy var movieImage:UIImageView = {
         let view = UIImageView(frame: .zero)
-        view.loadImageMovie(self.movie.backdropPath)
+        view.loadImageMovie(self.movie.backdropPath, width: 500)
         return view
     }()
     lazy var containerNameMovieLikeButton:UIStackView = {
@@ -51,8 +51,8 @@ class DetailMovieView: UIView {
     }()
     lazy var movieGenre:UILabel = {
            let view = UILabel(frame: .zero)
-           view.text = "Action,adventure"
            view.font = UIFont(name: "Times New Roman", size: 30.0)
+           view.text = decoderGenres(list: self.movie.genreIDS)
            return view
     }()
     lazy var movieDescription:UILabel = {
@@ -67,9 +67,8 @@ class DetailMovieView: UIView {
         self.movie = movie
         super.init(frame: UIScreen.main.bounds)
         self.setupView()
-
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

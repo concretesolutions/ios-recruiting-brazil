@@ -64,7 +64,7 @@ class FavoriteMovieCellView: UITableViewCell {
     }
     func updateUI(){
         if let movie = self.movie{
-            movieImage.loadImageMovie(movie.backdropPath)
+            movieImage.loadImageMovie(movie.backdropPath, width: 500)
             movieName.text = movie.title
             movieYear.text = movie.releaseDate
             movieDescription.text = movie.overview

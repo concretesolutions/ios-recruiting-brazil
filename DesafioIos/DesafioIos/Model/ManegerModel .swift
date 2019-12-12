@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+// MARK: - Get movies
 func getRequest(url:String,data:[String:Any],completion: @escaping (_ results: Movies) -> Void) {
     guard var urlComponents = URLComponents(string: url) else{
         return
@@ -33,6 +35,35 @@ func getRequest(url:String,data:[String:Any],completion: @escaping (_ results: M
     }.resume()
 }
 
+// MARK: - request Genres
+func requestGenres(url:String,data:[String:Any],completion: @escaping (_ results: AllGenres) -> Void){
+    guard var urlComponents = URLComponents(string: url) else{
+        return
+    }
+    urlComponents.queryItems = creatQuery(json: data)
+    guard let url = urlComponents.url else{
+        return
+    }
+    URLSession.shared.dataTask(with: url){
+        (data,_,error) in
+        do{
+            if let data = data {
+                if let genres = try? JSONDecoder().decode(AllGenres.self, from: data){
+                    completion(genres)
+                }
+            }
+            else{
+                print("error")
+            }
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+    }.resume()
+    
+}
+
+
 func creatQuery(json:[String:Any])->[URLQueryItem]{
     var querys:[URLQueryItem] = []
     for query in json{
@@ -40,13 +71,40 @@ func creatQuery(json:[String:Any])->[URLQueryItem]{
     }
     return querys
 }
-var querys:[String:Any] =  ["api_key":"21f18125f6767ae14a2f2577d85de3db",
-                          "page":"2",
-                          "language":"en-US",
-                          "region":"US"]
+var queryMoviesPopular:[String:Any] =  ["api_key":apiKey,
+                                        "page":"2",
+                                        "language":"en-US",
+                                        "region":"US"]
+var apiKey = "21f18125f6767ae14a2f2577d85de3db"
+var queryGenre = ["api_key":apiKey,
+                  "language":"en-US"]
 
-func fetchimage(completion: @escaping (_ results: Data) -> Void,dest:String){
-    var url = URL(fileURLWithPath: "https://image.tmdb.org/t/p/w200/")
+var genres:[Genre] = [] {
+    didSet{
+        print("chegou")
+    }
+}
+func getGenres(){
+    requestGenres(url: "https://api.themoviedb.org/3/genre/movie/list", data: queryGenre) { (all) in
+        genres.append(contentsOf: all.genres)
+    }
+}
+
+func decoderGenres(list:[Int]) -> String{
+    var value = ""
+    for id in list{
+        for genre in genres{
+            if genre.id == id{
+                value.append(genre.name)
+                value.append(",")
+            }
+        }
+    }
+    value.removeLast()
+    return value
+}
+func fetchimage(completion: @escaping (_ results: Data) -> Void,dest:String,width:Int){
+    var url = URL(fileURLWithPath: "https://image.tmdb.org/t/p/w\(width)/")
     url.appendPathComponent(dest)
     URLSession.shared.dataTask(with: url){
         (data,_,_) in
@@ -60,13 +118,3 @@ func fetchimage(completion: @escaping (_ results: Data) -> Void,dest:String){
     }.resume()
     
 }
-//for i in 1...5{
-//    let text = String(i)
-//    json["page"] = text
-//    getRequest(url: "https://api.themoviedb.org/3/movie/popular", data: json) { (data) in
-//        for movie in data.results{
-//            print(movie.title)
-//        }
-//    }
-//
-//}

@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 extension UIImageView{
-     func loadImageMovie(_ dest:String){
+    func loadImageMovie(_ dest:String , width:Int){
         fetchimage(completion: { (data) in
             if let image = UIImage(data: data){
                 DispatchQueue.main.async {
                     self.image = image
                 }
             }
-        }, dest: dest)
+        }, dest: dest, width: width)
     }
 }

@@ -27,22 +27,15 @@ class MoviesController: UIViewController{
         super.viewDidLoad()
         setupView()
         // Do any additional setup after loading the view.
-        getRequest(url: "https://api.themoviedb.org/3/movie/popular", data: querys, completion:  { data in
+        getRequest(url: "https://api.themoviedb.org/3/movie/popular", data: queryMoviesPopular, completion:  { data in
              self.movies = data.results
              DispatchQueue.main.async {
                  self.collectionView.reloadData()
              }
          })
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
     }
-    */
 
 }
 // MARK: - Protocols of CollectionView

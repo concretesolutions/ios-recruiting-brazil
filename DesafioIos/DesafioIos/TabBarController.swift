@@ -16,7 +16,6 @@ class TabBarController: UITabBarController {
         movieController.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
               let favoriteMovieController = FavoriteMoviesController()
               favoriteMovieController.tabBarItem =  UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-              //let tabBarList = [movieController, favoriteMovieController]
               self.viewControllers = [movieController,favoriteMovieController]
     }
 }

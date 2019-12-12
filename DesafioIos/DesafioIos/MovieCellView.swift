@@ -54,7 +54,7 @@ final class MovieCellView: UICollectionViewCell {
     func updateUI() {
         self.nameMovie.text = self.movie?.title
         if let dest = self.movie?.backdropPath{
-            self.imageBackground.loadImageMovie(dest)
+            self.imageBackground.loadImageMovie(dest, width: 500)
         }
     }
 }

@@ -22,7 +22,7 @@ class FavoriteMoviesController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRequest(url: "https://api.themoviedb.org/3/movie/popular", data: querys, completion:  { data in
+        getRequest(url: "https://api.themoviedb.org/3/movie/popular", data: queryMoviesPopular, completion:  { data in
              self.itemsToLoad = data.results
              DispatchQueue.main.async {
                  self.tableView.reloadData()
