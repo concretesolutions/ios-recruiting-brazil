@@ -37,7 +37,7 @@ final class MovieCellView: UICollectionViewCell {
     let container:UIStackView = {
         let stack = UIStackView(frame: .zero)
         stack.axis = .horizontal
-        stack.distribution = .fillProportionally
+        stack.distribution = .equalSpacing
         stack.spacing = 8.0
         stack.backgroundColor = .red
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -75,9 +75,9 @@ extension MovieCellView: CodeView {
             make.left.right.bottom.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.3)
         }
-        buttonLike.snp.makeConstraints { (make) in
-            //make.width.height.equalTo(50)
-        }
+        buttonLike.imageView?.snp.makeConstraints({ (make) in
+            make.width.height.equalTo(20)
+        })
     }
     
     func setupAdditionalConfiguration() {

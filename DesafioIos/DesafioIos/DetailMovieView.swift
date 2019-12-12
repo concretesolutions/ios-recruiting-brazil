@@ -26,39 +26,38 @@ class DetailMovieView: UIView {
     lazy var containerDescriptionMovie:UIStackView = {
         let stack = UIStackView(frame: .zero)
         stack.axis = .vertical
-        stack.distribution = .fillEqually
-        stack.backgroundColor = .red
+        stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 8.0
         return stack
     }()
     lazy var favoriteButton:UIButton = {
         let view = UIButton(frame: .zero)
-        view.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+        view.setBackgroundImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
         return view
     }()
     lazy var movieName:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = self.movie.title
-        view.font = UIFont(name: "Times New Roman", size: 30.0)
+        view.font = UIFont(name: "Times New Roman", size: 25.0)
         return view
     }()
     lazy var movieYear:UILabel = {
            let view = UILabel(frame: .zero)
-           view.text = self.movie.releaseDate
-           view.font = UIFont(name: "Times New Roman", size: 30.0)
+           view.text = formateYear(date:self.movie.releaseDate)
+           view.font = UIFont(name: "Times New Roman", size: 25.0)
            return view
     }()
     lazy var movieGenre:UILabel = {
            let view = UILabel(frame: .zero)
-           view.font = UIFont(name: "Times New Roman", size: 30.0)
-           view.text = decoderGenres(list: self.movie.genreIDS)
+           view.font = UIFont(name: "Times New Roman", size: 25.0)
+           view.text = formatGenres(list: self.movie.genreIDS)
            return view
     }()
     lazy var movieDescription:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = self.movie.overview
-        view.font = UIFont(name: "Times New Roman", size: 15.0)
+        view.font = UIFont(name: "Times New Roman", size: 20.0)
         view.lineBreakMode = .byCharWrapping
         view.numberOfLines = 5
         return view
@@ -76,13 +75,15 @@ class DetailMovieView: UIView {
 extension DetailMovieView:CodeView{
     func buildViewHierarchy() {
         self.addSubview(movieImage)
+        //containerDescriptionMovie.addArrangedSubview(movieImage)
         containerNameMovieLikeButton.addArrangedSubview(movieName)
         containerNameMovieLikeButton.addArrangedSubview(favoriteButton)
         containerDescriptionMovie.addArrangedSubview(containerNameMovieLikeButton)
         containerDescriptionMovie.addArrangedSubview(movieYear)
         containerDescriptionMovie.addArrangedSubview(movieGenre)
+        containerDescriptionMovie.addArrangedSubview(movieDescription)
         self.addSubview(containerDescriptionMovie)
-        self.addSubview(movieDescription)
+        //self.addSubview(movieDescription)
     }
     
     func setupConstraints() {
@@ -90,21 +91,23 @@ extension DetailMovieView:CodeView{
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().inset(15)
             make.top.equalToSuperview().inset(80)
-            make.height.equalToSuperview().multipliedBy(0.5)
+            make.height.equalToSuperview().multipliedBy(0.4)
         }
         containerNameMovieLikeButton.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
         containerDescriptionMovie.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(movieImage.snp.bottom)
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().inset(15)
+            make.top.equalTo(movieImage.snp.bottom).offset(15)
         }
-        movieDescription.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(containerDescriptionMovie.snp.bottom)
+        favoriteButton.snp.makeConstraints { (make) in
+            make.width.height.equalTo(25)
+           
         }
     }
+        
     
     func setupAdditionalConfiguration() {
         self.backgroundColor = .white

@@ -71,38 +71,13 @@ func creatQuery(json:[String:Any])->[URLQueryItem]{
     }
     return querys
 }
-var queryMoviesPopular:[String:Any] =  ["api_key":apiKey,
-                                        "page":"2",
-                                        "language":"en-US",
-                                        "region":"US"]
-var apiKey = "21f18125f6767ae14a2f2577d85de3db"
-var queryGenre = ["api_key":apiKey,
-                  "language":"en-US"]
 
-var genres:[Genre] = [] {
-    didSet{
-        print("chegou")
-    }
-}
 func getGenres(){
     requestGenres(url: "https://api.themoviedb.org/3/genre/movie/list", data: queryGenre) { (all) in
         genres.append(contentsOf: all.genres)
     }
 }
 
-func decoderGenres(list:[Int]) -> String{
-    var value = ""
-    for id in list{
-        for genre in genres{
-            if genre.id == id{
-                value.append(genre.name)
-                value.append(",")
-            }
-        }
-    }
-    value.removeLast()
-    return value
-}
 func fetchimage(completion: @escaping (_ results: Data) -> Void,dest:String,width:Int){
     var url = URL(fileURLWithPath: "https://image.tmdb.org/t/p/w\(width)/")
     url.appendPathComponent(dest)
