@@ -44,16 +44,14 @@ class DetailMovieView: UIView {
     }()
     lazy var movieYear:UILabel = {
            let view = UILabel(frame: .zero)
-           view.text = self.movie.releaseDate
-            //formateYear(date:self.movie.releaseDate)
+           view.text = formateYear(date:self.movie.releaseDate)
            view.font = UIFont(name: "Times New Roman", size: 25.0)
            return view
     }()
     lazy var movieGenre:UILabel = {
            let view = UILabel(frame: .zero)
            view.font = UIFont(name: "Times New Roman", size: 25.0)
-           view.text = "qualquer"
-        //formatGenres(list: self.movie.genreIDS)
+           view.text = formatGenres(list: self.movie.genreIDS)
            return view
     }()
     lazy var movieDescription:UILabel = {

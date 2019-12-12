@@ -10,33 +10,7 @@ import Foundation
 
 
 
-// MARK: - request Genres
-func requestGenres(url:String,data:[String:Any],completion: @escaping (_ results: AllGenres) -> Void){
-    guard var urlComponents = URLComponents(string: url) else{
-        return
-    }
-    urlComponents.queryItems = creatQuery(json: data)
-    guard let url = urlComponents.url else{
-        return
-    }
-    URLSession.shared.dataTask(with: url){
-        (data,_,error) in
-        do{
-            if let data = data {
-                if let genres = try? JSONDecoder().decode(AllGenres.self, from: data){
-                    completion(genres)
-                }
-            }
-            else{
-                print("error")
-            }
-        }
-        catch{
-            print(error.localizedDescription)
-        }
-    }.resume()
-    
-}
+
 
 
 func creatQuery(json:[String:Any])->[URLQueryItem]{

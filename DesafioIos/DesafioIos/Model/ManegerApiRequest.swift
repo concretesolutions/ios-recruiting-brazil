@@ -14,12 +14,17 @@ class ManegerApiRequest{
     let queryGenre = ["api_key":apiKey,
                       "language":"en-US"]
     
-    //MARK: - urlMoviePopular
+    //MARK: - url Movie Popular
     let urlMoviePopular = "https://api.themoviedb.org/3/movie/popular"
-    var genres:[Genre] = [] {
+    //MARK: - url genres Movies
+    let urlGenresMovies = "https://api.themoviedb.org/3/genre/movie/list"
+    static var genres:[Genre] = [] {
         didSet{
-            print("load genre")
+            print("load all genres")
         }
+    }
+    init() {
+        self.getGenres()
     }
     func sendMovies(){
         for i in 1...100{
@@ -47,6 +52,39 @@ class ManegerApiRequest{
                 if let data = data {
                     if let movies = try? JSONDecoder().decode(Movies.self, from: data){
                         completion(movies)
+                    }
+                }
+                else{
+                    print("error")
+                }
+            }
+            catch{
+                print(error.localizedDescription)
+            }
+        }.resume()
+    }
+    func getGenres(){
+        self.requestGenres(url: urlGenresMovies, data: queryGenre) { (allGenres) in
+            ManegerApiRequest.genres = allGenres.genres
+        }
+    }
+
+
+    // MARK: - request Genres
+    func requestGenres(url:String,data:[String:Any],completion: @escaping (_ results: AllGenres) -> Void){
+        guard var urlComponents = URLComponents(string: url) else{
+            return
+        }
+        urlComponents.queryItems = creatQuery(json: data)
+        guard let url = urlComponents.url else{
+            return
+        }
+        URLSession.shared.dataTask(with: url){
+            (data,_,error) in
+            do{
+                if let data = data {
+                    if let genres = try? JSONDecoder().decode(AllGenres.self, from: data){
+                        completion(genres)
                     }
                 }
                 else{
