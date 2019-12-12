@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        self.window?.rootViewController = //ViewController()
         self.window?.rootViewController = UINavigationController(rootViewController: TabBarController())
         self.window?.makeKeyAndVisible()
-        getGenres()
+        //getGenres()
+        //takePopularMovies()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

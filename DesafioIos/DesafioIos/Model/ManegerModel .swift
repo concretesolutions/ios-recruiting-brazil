@@ -8,32 +8,7 @@
 
 import Foundation
 
-// MARK: - Get movies
-func getRequest(url:String,data:[String:Any],completion: @escaping (_ results: Movies) -> Void) {
-    guard var urlComponents = URLComponents(string: url) else{
-        return
-    }
-    urlComponents.queryItems = creatQuery(json: data)
-    guard let url = urlComponents.url else{
-        return
-    }
-    URLSession.shared.dataTask(with: url){
-        (data,_,error) in
-        do{
-            if let data = data {
-                if let movies = try? JSONDecoder().decode(Movies.self, from: data){
-                    completion(movies)
-                }
-            }
-            else{
-                print("error")
-            }
-        }
-        catch{
-            print(error.localizedDescription)
-        }
-    }.resume()
-}
+
 
 // MARK: - request Genres
 func requestGenres(url:String,data:[String:Any],completion: @escaping (_ results: AllGenres) -> Void){
@@ -72,11 +47,11 @@ func creatQuery(json:[String:Any])->[URLQueryItem]{
     return querys
 }
 
-func getGenres(){
-    requestGenres(url: "https://api.themoviedb.org/3/genre/movie/list", data: queryGenre) { (all) in
-        genres.append(contentsOf: all.genres)
-    }
-}
+//func getGenres(){
+//    requestGenres(url: "https://api.themoviedb.org/3/genre/movie/list", data: queryGenre) { (all) in
+//        genres.append(contentsOf: all.genres)
+//    }
+//}
 
 func fetchimage(completion: @escaping (_ results: Data) -> Void,dest:String,width:Int){
     var url = URL(fileURLWithPath: "https://image.tmdb.org/t/p/w\(width)/")
