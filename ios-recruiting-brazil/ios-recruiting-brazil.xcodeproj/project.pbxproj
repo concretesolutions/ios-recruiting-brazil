@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		1B2044640D63AFA9B369D19D /* Pods_ios_recruiting_brazil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCF706C07EE664138F59105 /* Pods_ios_recruiting_brazil.framework */; };
 		1E7AD78D68E2F1D6647ECD45 /* Pods_ios_recruiting_brazilTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B93A2DD0E485FB8D9260E3 /* Pods_ios_recruiting_brazilTests.framework */; };
+		FC16030C23A25E09008A0612 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16030B23A25E09008A0612 /* Provider.swift */; };
+		FC16030E23A25E1E008A0612 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16030D23A25E1E008A0612 /* Service.swift */; };
+		FC16031123A25E49008A0612 /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031023A25E49008A0612 /* EncodableExtension.swift */; };
+		FC16031323A25E6C008A0612 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031223A25E6C008A0612 /* URLSessionExtension.swift */; };
+		FC16031523A25E85008A0612 /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031423A25E85008A0612 /* URLRequestExtension.swift */; };
+		FC16031723A25E9E008A0612 /* URLComponentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031623A25E9E008A0612 /* URLComponentExtension.swift */; };
+		FC16031A23A25F22008A0612 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031923A25F22008A0612 /* HTTPMethod.swift */; };
+		FC16031C23A25F39008A0612 /* ParametersEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031B23A25F39008A0612 /* ParametersEncoding.swift */; };
+		FC16031E23A25F63008A0612 /* NetworError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031D23A25F63008A0612 /* NetworError.swift */; };
+		FC16032023A25F8C008A0612 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031F23A25F8C008A0612 /* HTTPTask.swift */; };
+		FC16032323A25FF1008A0612 /* URLSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16032223A25FF1008A0612 /* URLSessionProvider.swift */; };
 		FC5AB71723A1E6FA0095DDC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71623A1E6FA0095DDC0 /* AppDelegate.swift */; };
 		FC5AB71B23A1E6FA0095DDC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71A23A1E6FA0095DDC0 /* ViewController.swift */; };
 		FC5AB72123A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71F23A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld */; };
@@ -34,6 +45,17 @@
 		62D4C0B874E97DF981366BF5 /* Pods-ios-recruiting-brazilTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-recruiting-brazilTests.debug.xcconfig"; path = "Target Support Files/Pods-ios-recruiting-brazilTests/Pods-ios-recruiting-brazilTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ABCF706C07EE664138F59105 /* Pods_ios_recruiting_brazil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_recruiting_brazil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D11DB7C55C3E0CB629A36F80 /* Pods-ios-recruiting-brazilTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-recruiting-brazilTests.release.xcconfig"; path = "Target Support Files/Pods-ios-recruiting-brazilTests/Pods-ios-recruiting-brazilTests.release.xcconfig"; sourceTree = "<group>"; };
+		FC16030B23A25E09008A0612 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		FC16030D23A25E1E008A0612 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		FC16031023A25E49008A0612 /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
+		FC16031223A25E6C008A0612 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
+		FC16031423A25E85008A0612 /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
+		FC16031623A25E9E008A0612 /* URLComponentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentExtension.swift; sourceTree = "<group>"; };
+		FC16031923A25F22008A0612 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		FC16031B23A25F39008A0612 /* ParametersEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersEncoding.swift; sourceTree = "<group>"; };
+		FC16031D23A25F63008A0612 /* NetworError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworError.swift; sourceTree = "<group>"; };
+		FC16031F23A25F8C008A0612 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		FC16032223A25FF1008A0612 /* URLSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProvider.swift; sourceTree = "<group>"; };
 		FC5AB71323A1E6FA0095DDC0 /* ios-recruiting-brazil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-recruiting-brazil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5AB71623A1E6FA0095DDC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5AB71A23A1E6FA0095DDC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +108,56 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC16030923A25DD9008A0612 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FC16032123A25FDF008A0612 /* Provider */,
+				FC16031823A25EAB008A0612 /* Enums */,
+				FC16030F23A25E33008A0612 /* Extensions */,
+				FC16030A23A25DF3008A0612 /* Protocols */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FC16030A23A25DF3008A0612 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC16030B23A25E09008A0612 /* Provider.swift */,
+				FC16030D23A25E1E008A0612 /* Service.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FC16030F23A25E33008A0612 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FC16031023A25E49008A0612 /* EncodableExtension.swift */,
+				FC16031223A25E6C008A0612 /* URLSessionExtension.swift */,
+				FC16031423A25E85008A0612 /* URLRequestExtension.swift */,
+				FC16031623A25E9E008A0612 /* URLComponentExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FC16031823A25EAB008A0612 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				FC16031923A25F22008A0612 /* HTTPMethod.swift */,
+				FC16031B23A25F39008A0612 /* ParametersEncoding.swift */,
+				FC16031D23A25F63008A0612 /* NetworError.swift */,
+				FC16031F23A25F8C008A0612 /* HTTPTask.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		FC16032123A25FDF008A0612 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				FC16032223A25FF1008A0612 /* URLSessionProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
 		FC5AB70A23A1E6FA0095DDC0 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +181,7 @@
 		FC5AB71523A1E6FA0095DDC0 /* ios-recruiting-brazil */ = {
 			isa = PBXGroup;
 			children = (
+				FC16030923A25DD9008A0612 /* Network */,
 				FC5AB71623A1E6FA0095DDC0 /* AppDelegate.swift */,
 				FC5AB71A23A1E6FA0095DDC0 /* ViewController.swift */,
 				FC5AB72223A1E6FC0095DDC0 /* Assets.xcassets */,
@@ -295,8 +368,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC16030C23A25E09008A0612 /* Provider.swift in Sources */,
+				FC16031323A25E6C008A0612 /* URLSessionExtension.swift in Sources */,
+				FC16031123A25E49008A0612 /* EncodableExtension.swift in Sources */,
 				FC5AB71B23A1E6FA0095DDC0 /* ViewController.swift in Sources */,
+				FC16031723A25E9E008A0612 /* URLComponentExtension.swift in Sources */,
+				FC16032323A25FF1008A0612 /* URLSessionProvider.swift in Sources */,
+				FC16032023A25F8C008A0612 /* HTTPTask.swift in Sources */,
+				FC16031E23A25F63008A0612 /* NetworError.swift in Sources */,
+				FC16030E23A25E1E008A0612 /* Service.swift in Sources */,
+				FC16031523A25E85008A0612 /* URLRequestExtension.swift in Sources */,
+				FC16031C23A25F39008A0612 /* ParametersEncoding.swift in Sources */,
 				FC5AB71723A1E6FA0095DDC0 /* AppDelegate.swift in Sources */,
+				FC16031A23A25F22008A0612 /* HTTPMethod.swift in Sources */,
 				FC5AB72123A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
