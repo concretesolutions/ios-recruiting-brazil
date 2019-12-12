@@ -17,7 +17,7 @@ class Movie {
     let posterPath: String?
     var posterImage: UIImage?
     let genres: Set<String>
-    let isFavorite: Bool
+    var isFavorite: Bool
 
     init(movie: MovieDTO) {
         self.id = movie.id
@@ -26,7 +26,22 @@ class Movie {
         self.synopsis = movie.synopsis
         self.posterPath = movie.posterPath
         self.posterImage = nil
-        self.genres = []
-        self.isFavorite = false
+        self.genres = Set(movie.genreIDs.map({ (id) -> String in
+            return DataService.shared.genres[id] ?? ""
+        }))
+        self.isFavorite = DataService.shared.movieIsFavorite(movie.id)
+    }
+    
+    init(movie: MovieDetailDTO) {
+        self.id = movie.id
+        self.title = movie.title
+        self.releaseDate = String(movie.releaseDate.prefix(4))
+        self.synopsis = movie.synopsis
+        self.posterPath = movie.posterPath
+        self.posterImage = nil
+        self.genres = Set(movie.genres.map({ (genre) -> String in
+            return genre.name
+        }))
+        self.isFavorite = DataService.shared.movieIsFavorite(movie.id)
     }
 }

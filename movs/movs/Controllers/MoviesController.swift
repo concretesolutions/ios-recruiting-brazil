@@ -65,13 +65,18 @@ class MoviesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .always
+        if self.nextPage == 1 {
+            self.dataService.loadMovies(of: self.nextPage) { (state) in
+                self.collectionState = state
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.dataService.loadMovies(of: self.nextPage) { (state) in
-            self.collectionState = state
+        DispatchQueue.main.async {
+            self.screen.moviesCollectionView.reloadData()
         }
+        super.viewWillAppear(animated)
     }
 }
 

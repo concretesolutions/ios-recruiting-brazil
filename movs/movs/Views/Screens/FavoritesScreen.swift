@@ -44,7 +44,21 @@ class FavoritesScreen: UIView {
     
     // MARK: - Exception view
     func showErrorView() {
-        
+        DispatchQueue.main.async {
+            self.favoritesTableView.backgroundView = ExceptionView(type: .error)
+        }
+    }
+    
+    func presentEmptySearch(_ shouldPresent: Bool) {
+        if shouldPresent {
+            DispatchQueue.main.async {
+                self.favoritesTableView.backgroundView = ExceptionView(type: .emptySearch)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.favoritesTableView.backgroundView = nil
+            }
+        }
     }
 }
 

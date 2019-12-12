@@ -14,11 +14,11 @@ class FavoriteButton: UIButton {
             UIView.animate(withDuration: 0.2) {
                 if self.isSelected {
                     self.setBackgroundImage(UIImage(systemName: "heart.fill"),
-                                              for: .normal)
+                                            for: .normal)
                     self.tintColor = .systemRed
                 } else {
-                   self.setBackgroundImage(UIImage(systemName: "heart"),
-                                              for: .normal)
+                    self.setBackgroundImage(UIImage(systemName: "heart"),
+                                            for: .normal)
                     self.tintColor = .white
                 }
             }

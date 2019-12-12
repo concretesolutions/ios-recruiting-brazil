@@ -35,10 +35,11 @@ class MovieDetailScreen: UIView {
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "heart"),
-                                  for: .normal)
-        button.tintColor = .label
+        let button = FavoriteButton()
+        button.isSelected = self.movie.isFavorite
+        button.addTarget(self,
+                         action: #selector(didFavoriteMovie),
+                         for: .touchUpInside)
         return button
     }()
     
@@ -82,6 +83,18 @@ class MovieDetailScreen: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Favorite
+    @objc func didFavoriteMovie() {
+        self.favoriteButton.isSelected = !self.favoriteButton.isSelected
+        self.movie.isFavorite = !self.movie.isFavorite
+        let dataService = DataService.shared
+        if self.favoriteButton.isSelected {
+            dataService.addToFavorites(self.movie.id)
+        } else {
+            dataService.removeFromFavorites(self.movie.id)
+        }
     }
 }
 

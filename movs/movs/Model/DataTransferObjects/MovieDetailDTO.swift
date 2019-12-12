@@ -1,27 +1,30 @@
 //
-//  MovieDTO.swift
+//  MovieDetailDTO.swift
 //  movs
 //
-//  Created by Emerson Victor on 02/12/19.
+//  Created by Emerson Victor on 11/12/19.
 //  Copyright © 2019 emer. All rights reserved.
 //
-// swiftlint:disable identifier_name
 
 import Foundation
 
-struct MovieDTO: Codable, Equatable {
+struct MovieDetailDTO: Codable {
     let id: Int
     let title: String
     let releaseDate: String
     let synopsis: String
     let posterPath: String?
-    let genreIDs: [Int]
+    let genres: [Genre]
 
     enum CodingKeys: String, CodingKey {
-        case id, title
+        case id, title, genres
         case releaseDate = "release_date"
         case synopsis = "overview"
         case posterPath = "poster_path"
-        case genreIDs = "genre_ids"
     }
+}
+
+struct Genre: Codable {
+    let id: Int
+    let name: String
 }

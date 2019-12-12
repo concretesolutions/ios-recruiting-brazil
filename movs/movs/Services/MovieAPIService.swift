@@ -5,22 +5,20 @@
 //  Created by Emerson Victor on 02/12/19.
 //  Copyright © 2019 emer. All rights reserved.
 //
+// swiftlint:disable identifier_name
 
 import Foundation
 import UIKit
 
 final class MovieAPIService: DataSource {
 
-    // API properties
+    // MARK: - API properties
     private static let keyAPI = "ba993d6b1312f03c80a322c3e00fab4d"
     private static let baseStringURL = "https://api.themoviedb.org/3"
-    private static let baseImageStringURL = "http://image.tmdb.org/t/p/"
+    private static let baseImageStringURL = "http://image.tmdb.org/t/p"
     private static let imageSize = "w500"
     
-    /// Fetch movies genres
-    /// - Parameters:
-    ///   - completion: The completion handler to call when the load request is complete.
-    ///                 Return GenresDTO on success and and Error on failure
+    // MARK: - Fetches
     class func fetchGenres(completion: @escaping (Result<GenresDTO, Error>) -> Void) {
         let stringURL = "\(baseStringURL)/genre/movie/list?api_key=\(keyAPI)"
         let url = URL(string: stringURL)!
@@ -46,10 +44,6 @@ final class MovieAPIService: DataSource {
         }.resume()
     }
     
-    /// Fetch popular movies from page
-    /// - Parameters:
-    ///   - completion: The completion handler to call when the load request is complete.
-    ///                 Return GenresDTO on success and and Error on failure
     class func fetchPopularMovies(of page: Int = 1,
                                   completion: @escaping (Result<MoviesRequestDTO, Error>) -> Void) {
         let stringURL = "\(baseStringURL)/movie/popular?api_key=\(keyAPI)&page=\(page)"
@@ -77,11 +71,7 @@ final class MovieAPIService: DataSource {
         }.resume()
     }
 
-    /// Fetch movie poster with URL
-    /// - Parameters:
-    ///   - completion: The completion handler to call when the load request is complete.
-    ///                 Return GenresDTO on success and and Error on failure
-    class func fetchMoviePoster(withURL imageURL: String,
+    class func fetchMoviePoster(with imageURL: String,
                                 completion: @escaping (Result<UIImage, Error>) -> Void) {
         let stringURL = "\(baseImageStringURL)/\(imageSize)/\(imageURL)?api_key=\(keyAPI)"
         let url = URL(string: stringURL)!
@@ -108,8 +98,8 @@ final class MovieAPIService: DataSource {
         }.resume()
     }
     
-    class func fetchMovieDetail(withID id: Int,
-                                completion: @escaping (Result<MovieDTO, Error>) -> Void) {
+    class func fetchMovieDetail(with id: Int,
+                                completion: @escaping (Result<MovieDetailDTO, Error>) -> Void) {
         let stringURL = "\(baseStringURL)/movie/\(id)?api_key=\(keyAPI)"
         let url = URL(string: stringURL)!
         
@@ -126,7 +116,7 @@ final class MovieAPIService: DataSource {
                 return
             }
             
-            if let movie = try? JSONDecoder().decode(MovieDTO.self, from: data) {
+            if let movie = try? JSONDecoder().decode(MovieDetailDTO.self, from: data) {
                 completion(.success(movie))
                 return
             } else {

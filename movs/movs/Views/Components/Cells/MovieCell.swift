@@ -32,7 +32,6 @@ class MovieCell: UICollectionViewCell {
     
     lazy var favoriteButton: UIButton = {
         let button = FavoriteButton()
-        button.isSelected = false
         button.addTarget(self,
                          action: #selector(didFavoriteMovie),
                          for: .touchUpInside)
@@ -66,9 +65,10 @@ class MovieCell: UICollectionViewCell {
     func setup(with movie: Movie) {
         self.movie = movie
         self.title.text = movie.title
+        self.favoriteButton.isSelected = movie.isFavorite
         let dataService = DataService.shared
         if let posterPath =  movie.posterPath {
-            dataService.loadPosterImage(withURL: posterPath) { (image) in
+            dataService.loadPosterImage(with: posterPath) { (image) in
                 movie.posterImage = image
                 DispatchQueue.main.async {
                     self.posterImage.image = image
@@ -79,14 +79,24 @@ class MovieCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         self.posterImage.image = nil
+        self.title.text = nil
+        self.favoriteButton.isSelected = false
     }
     
     // MARK: - Favorite
     @objc func didFavoriteMovie() {
+        guard let movie = self.movie else {
+            return
+        }
+        
         self.favoriteButton.isSelected = !self.favoriteButton.isSelected
-        if let movie = self.movie {
-            let dataService = DataService.shared
+        let dataService = DataService.shared
+        movie.isFavorite = !movie.isFavorite
+        
+        if self.favoriteButton.isSelected {
             dataService.addToFavorites(movie.id)
+        } else {
+            dataService.removeFromFavorites(movie.id)
         }
     }
 }

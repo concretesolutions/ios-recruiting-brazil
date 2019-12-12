@@ -20,22 +20,46 @@ class FavoritesController: UIViewController {
     // MARK: - Attributes
     lazy var screen = FavoritesScreen(delegate: self)
     let dataService = DataService.shared
-    var collectionState: CollectionState = .loading //{
-//        didSet {
-//            switch self.collectionState {
-//            case .loading:
-//                DispatchQueue.main.async {
-//                    self.screen.favoritesTableView.reloadData()
-//                }
-//            case .success:
-//                DispatchQueue.main.async {
-//                    self.screen.favoritesTableView.reloadData()
-//                }
-//            case .failure:
-//                self.screen.showErrorView()
-//            }
-//        }
-    //}
+    var filteredBy = ""
+    var favorites: [Movie] = []
+    var collectionState: CollectionState = .loading {
+        didSet {
+            switch self.collectionState {
+            case .loading:
+                return
+            case .loadSuccess:
+                self.favorites = self.dataService.favorites
+                DispatchQueue.main.async {
+                    self.screen.favoritesTableView.reloadData()
+                }
+            case .loadError:
+                self.screen.showErrorView()
+                DispatchQueue.main.async {
+                    self.screen.favoritesTableView.reloadData()
+                }
+            case .normal:
+                self.screen.presentEmptySearch(false)
+                self.favorites = self.dataService.favorites
+                DispatchQueue.main.async {
+                    self.screen.favoritesTableView.reloadData()
+                }
+            case .filtered:
+                self.favorites = self.dataService.favorites.filter({ (movie) -> Bool in
+                    return movie.title.lowercased().contains(self.filteredBy.lowercased())
+                })
+                
+                if self.favorites.count == 0 {
+                    self.screen.presentEmptySearch(true)
+                } else {
+                    self.screen.presentEmptySearch(false)
+                }
+                
+                DispatchQueue.main.async {
+                    self.screen.favoritesTableView.reloadData()
+                }
+            }
+        }
+    }
     
     // MARK: - View controller life cycle
     override func loadView() {
@@ -48,6 +72,14 @@ class FavoritesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .always
+        self.dataService.loadFavorites { (state) in
+            self.collectionState = state
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.screen.favoritesTableView.reloadData()
     }
     
     // MARK: - Navigation controller action
@@ -59,13 +91,28 @@ class FavoritesController: UIViewController {
 
 extension FavoritesController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        switch self.collectionState {
+        case .loading:
+            return 1
+        case .loadError:
+            return 0
+        case .loadSuccess, .normal, .filtered:
+            return self.favorites.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if self.collectionState == .loading {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteMovieCell",
+                                                     for: indexPath)
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteMovieCell",
-                                                 for: indexPath)
-        return cell
+                                                 for: indexPath) as? FavoriteMovieCell
+        let movie = self.favorites[indexPath.row]
+        cell?.setup(with: movie)
+        return cell!
     }
 }
 
@@ -77,7 +124,7 @@ extension FavoritesController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
+    
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
@@ -87,14 +134,20 @@ extension FavoritesController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let movieDetailControler = MovieDetailController(
-//        self.navigationController?.pushViewController(movieDetailControler,
-//                                                      animated: true)
+        let movieDetailControler = MovieDetailController(movie: self.favorites[indexPath.row])
+            self.navigationController?.pushViewController(movieDetailControler,
+                                                          animated: true)
     }
 }
 
 extension FavoritesController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        let text = searchController.searchBar.text ?? ""
+        self.filteredBy = text
+        if text == "" {
+            self.collectionState = .normal
+        } else {
+            self.collectionState = .filtered
+        }
     }
 }

@@ -11,5 +11,6 @@ import UIKit
 protocol DataSource {
     static func fetchGenres(completion: @escaping (Result<GenresDTO, Error>) -> Void)
     static func fetchPopularMovies(of page: Int, completion: @escaping (Result<MoviesRequestDTO, Error>) -> Void)
-    static func fetchMoviePoster(withURL imageURL: String, completion: @escaping (Result<UIImage, Error>) -> Void)
+    static func fetchMoviePoster(with imageURL: String, completion: @escaping (Result<UIImage, Error>) -> Void)
+    static func fetchMovieDetail(with id: Int, completion: @escaping (Result<MovieDetailDTO, Error>) -> Void)
 }

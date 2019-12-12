@@ -19,14 +19,13 @@ class FavoriteMovieCell: UITableViewCell {
     }()
     
     lazy var posterImage: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "PosterUnavailabe"))
+        let view = UIImageView(image: nil)
         view.contentMode = .scaleAspectFill
         return view
     }()
 
     lazy var title: UILabel = {
         let view = UILabel()
-        view.text = "----"
         view.numberOfLines = 2
         view.lineBreakMode = .byTruncatingTail
         view.textColor = .label
@@ -39,7 +38,6 @@ class FavoriteMovieCell: UITableViewCell {
         view.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
         view.textColor = .secondaryLabel
         view.textAlignment = .right
-        view.text = "--"
         return view
     }()
     
@@ -77,7 +75,7 @@ class FavoriteMovieCell: UITableViewCell {
         self.releaseDate.text = movie.releaseDate
         self.synopsis.text = movie.synopsis
         if let posterPath =  movie.posterPath {
-            DataService.shared.loadPosterImage(withURL: posterPath) { (image) in
+            DataService.shared.loadPosterImage(with: posterPath) { (image) in
                 DispatchQueue.main.async {
                     self.posterImage.image = image
                 }
