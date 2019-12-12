@@ -29,6 +29,7 @@ class DataProvider: DataProvidable, ObservableObject {
             })
     }
     
+    // TO DO: Fix like the favorites
     public func fetchMovies(completion: @escaping (_ movies: [Movie]) -> Void) {
         
         MovieService.fecthMovies(params: ["page": "\(page)"]) { result in
