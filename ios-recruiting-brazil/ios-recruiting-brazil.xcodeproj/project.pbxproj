@@ -20,6 +20,7 @@
 		FC16031E23A25F63008A0612 /* NetworError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031D23A25F63008A0612 /* NetworError.swift */; };
 		FC16032023A25F8C008A0612 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16031F23A25F8C008A0612 /* HTTPTask.swift */; };
 		FC16032323A25FF1008A0612 /* URLSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16032223A25FF1008A0612 /* URLSessionProvider.swift */; };
+		FC16032623A260B7008A0612 /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16032523A260B7008A0612 /* MoviesService.swift */; };
 		FC5AB71723A1E6FA0095DDC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71623A1E6FA0095DDC0 /* AppDelegate.swift */; };
 		FC5AB71B23A1E6FA0095DDC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71A23A1E6FA0095DDC0 /* ViewController.swift */; };
 		FC5AB72123A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71F23A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld */; };
@@ -56,6 +57,7 @@
 		FC16031D23A25F63008A0612 /* NetworError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworError.swift; sourceTree = "<group>"; };
 		FC16031F23A25F8C008A0612 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		FC16032223A25FF1008A0612 /* URLSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProvider.swift; sourceTree = "<group>"; };
+		FC16032523A260B7008A0612 /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
 		FC5AB71323A1E6FA0095DDC0 /* ios-recruiting-brazil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-recruiting-brazil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5AB71623A1E6FA0095DDC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5AB71A23A1E6FA0095DDC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		FC16030923A25DD9008A0612 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				FC16032423A260AB008A0612 /* Services */,
 				FC16032123A25FDF008A0612 /* Provider */,
 				FC16031823A25EAB008A0612 /* Enums */,
 				FC16030F23A25E33008A0612 /* Extensions */,
@@ -156,6 +159,14 @@
 				FC16032223A25FF1008A0612 /* URLSessionProvider.swift */,
 			);
 			path = Provider;
+			sourceTree = "<group>";
+		};
+		FC16032423A260AB008A0612 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FC16032523A260B7008A0612 /* MoviesService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		FC5AB70A23A1E6FA0095DDC0 = {
@@ -379,6 +390,7 @@
 				FC16030E23A25E1E008A0612 /* Service.swift in Sources */,
 				FC16031523A25E85008A0612 /* URLRequestExtension.swift in Sources */,
 				FC16031C23A25F39008A0612 /* ParametersEncoding.swift in Sources */,
+				FC16032623A260B7008A0612 /* MoviesService.swift in Sources */,
 				FC5AB71723A1E6FA0095DDC0 /* AppDelegate.swift in Sources */,
 				FC16031A23A25F22008A0612 /* HTTPMethod.swift in Sources */,
 				FC5AB72123A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld in Sources */,
