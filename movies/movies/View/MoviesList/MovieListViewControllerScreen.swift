@@ -33,6 +33,13 @@ final class MovieListViewControllerScreen: UIView {
     let genericErrorView = ErrorView(imageName: "error_icon", text: "An error occured. Please try again.")
     let noDataErrorView = ErrorView(imageName: "search_icon", text: "Your search didn't return anything.")
     
+    var state: MovieListViewState = .movies {
+        willSet {
+            // Update view when state is changed
+            self.updateViewState(to: newValue)
+        }
+    }
+    
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         
@@ -43,31 +50,35 @@ final class MovieListViewControllerScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(frame: CGRect = .zero, state: AnyPublisher<MovieListViewState, Never>) {
-        self.init(frame: frame)
-        
-        _ = state
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] state in
-                self?.updateViewState(to: state)
-            })
-    }
-    
+    /// Update view according to current state
+    /// - Parameter state: Current state
     func updateViewState(to state: MovieListViewState) {
         // State = .movies
         collectionView.isHidden = !(state == .movies)
-        // State = .loading
-        activityIndicator.isHidden = !(state == .loading)
         // State = .error
         genericErrorView.isHidden = !(state == .error)
         // State = .noDataError
         noDataErrorView.isHidden = !(state == .noDataError)
+        // State = .loading
+        activityIndicator.isHidden = !(state == .loading)
         
         if state == .loading {
             activityIndicator.startAnimating()
         } else {
             activityIndicator.stopAnimating()
         }
+    }
+    
+    /// Set collection view data source and delegate
+    /// - Parameter controller: Controller responsable for collection view delegate and data source
+    public func setupTableView<T: UICollectionViewDelegate & UICollectionViewDataSource>(controller: T) {
+        self.collectionView.delegate = controller
+        self.collectionView.dataSource = controller
+    }
+    
+    /// Reloads the collection view
+    public func reloadCollectionView() {
+        self.collectionView.reloadData()
     }
 }
 

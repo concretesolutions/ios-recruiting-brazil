@@ -10,14 +10,14 @@ import UIKit
 import Combine
 
 class MovieListViewController: UIViewController {
-    var viewModel: MovieListViewModel = MovieListViewModel()
-    var screen: MovieListViewControllerScreen!
+    let viewModel: MovieListViewModel = MovieListViewModel()
+    let screen: MovieListViewControllerScreen = MovieListViewControllerScreen(frame: UIScreen.main.bounds)
+    
+    // Cancellables
+    var stateSubscriber: AnyCancellable?
+    var movieCountSubscriber: AnyCancellable?
         
     override func loadView() {
-        screen = MovieListViewControllerScreen(frame: UIScreen.main.bounds, state: viewModel.$state.eraseToAnyPublisher())
-        screen.collectionView.dataSource = self
-        screen.collectionView.delegate = self
-        
         self.view = screen
         
         self.setupNavigationController()
@@ -26,11 +26,7 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        _ = self.viewModel.$movieCount
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.perform(#selector(self?.loadCollectionView), with: nil, afterDelay: 1.0)
-            }
+        self.setupScreen()
     }
     
     func setupNavigationController() {
@@ -43,7 +39,24 @@ class MovieListViewController: UIViewController {
         }
     }
     
-    @objc func loadCollectionView() {
+    func setupScreen() {
+        // Binds view model state to view state
+        stateSubscriber = viewModel.$state
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.state, on: self.screen)
+        
+        // Set table view data source and delegate
+        screen.setupTableView(controller: self)
+        
+        // Update table view when movie count changes
+        movieCountSubscriber = self.viewModel.$movieCount
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.perform(#selector(self?.reloadCollectionView), with: nil, afterDelay: 0.5)
+            }
+    }
+    
+    @objc func reloadCollectionView() {
         self.screen.collectionView.reloadData()
     }
 }
@@ -88,6 +101,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == self.viewModel.movieCount - 1 {
+            // Fetch next page when reaches the end of the collection view
             DataProvider.shared.fetchMovies()
         }
     }
