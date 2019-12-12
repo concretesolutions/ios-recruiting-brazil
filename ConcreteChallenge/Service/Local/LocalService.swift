@@ -9,13 +9,12 @@
 import Foundation
 import os.log
 
-/// The singleton to save and retrieve data locally
-class LocalService {
-    static let instance = LocalService()
-    private init(){}
+/// The singleton class to save and retrieve data locally
+final class LocalService {
     
-    /// Identifier to save and retrieve favorites
-    private static let favoriteIdentifier: String = "Favorites"
+    /// Singleton instance
+    static let instance = LocalService()
+    private init() {}
     
     /// System default Documents Directory
     private static let documentsDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
@@ -25,10 +24,22 @@ class LocalService {
         return URL(fileURLWithPath: LocalService.documentsDir.appendingPathComponent(file + ".json"))
     }
     
+    /// Enumeration of the identifiers to save
+    fileprivate enum Identifier: String {
+        /// Identifier to save and retrieve favorites
+        case favorites = "Favorites"
+        /// Identifier to save and retrieve genres
+        case genres = "Genres"
+    }
+}
+
+// MARK: - Favorite saving -
+extension LocalService {
+    
     /// Save the favorites list
-    private func saveFavorites(_ favorites: [Int]) {
+    private func saveFavorites(_ favorites: [Movie]) {
         
-        let url = getURLInDocumentDir(for: LocalService.favoriteIdentifier)
+        let url = getURLInDocumentDir(for: LocalService.Identifier.favorites.rawValue)
         
         do {
             try JSONEncoder().encode(favorites).write(to: url)
@@ -39,38 +50,38 @@ class LocalService {
     }
     
     /// Set movie as favorite
-    func setFavorite(movieID: Int) {
+    func setFavorite(movie: Movie) {
         
         // Get the previous favorites to append if necessary
-        var favoriteIDsToSave: [Int]
-        if let previousFavorites = self.getFavoriteIDs() {
-            favoriteIDsToSave = previousFavorites
-            favoriteIDsToSave.append(movieID)
+        var favoritesToSave: [Movie]
+        if let previousFavorites = self.getFavorites() {
+            favoritesToSave = previousFavorites
+            favoritesToSave.append(movie)
         } else {
-            favoriteIDsToSave = [movieID]
+            favoritesToSave = [movie]
         }
         
-        saveFavorites(favoriteIDsToSave)
+        saveFavorites(favoritesToSave)
     }
     
     /// Remove movie as favorite
-    func removeFavorite(movieID: Int) {
+    func removeFavorite(movie: Movie) {
         
         // Get the previous favorites to remove the found if necessary
-        let favoriteIDsToSave: [Int]
-        if let previousFavorites = self.getFavoriteIDs() {
-            favoriteIDsToSave = previousFavorites.filter { $0 != movieID }
-            saveFavorites(favoriteIDsToSave)
+        let favoritesToSave: [Movie]
+        if let previousFavorites = self.getFavorites() {
+            favoritesToSave = previousFavorites.filter { $0.id != movie.id }
+            saveFavorites(favoritesToSave)
         }
         // Else can't remove something nil
     }
     
     /// Get the favorite movie IDs
-    func getFavoriteIDs() -> [Int]? {
-        let url = getURLInDocumentDir(for: LocalService.favoriteIdentifier)
+    func getFavorites() -> [Movie]? {
+        let url = getURLInDocumentDir(for: LocalService.Identifier.favorites.rawValue)
         do {
             let readData = try Data(contentsOf: url)
-            let favorites = try JSONDecoder().decode([Int].self, from: readData)
+            let favorites = try JSONDecoder().decode([Movie].self, from: readData)
             return favorites
         } catch {
             os_log("Could not read from @", log: Logger.appLog(), type: .info, String(describing: url))
