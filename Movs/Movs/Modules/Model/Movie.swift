@@ -26,7 +26,11 @@ class Movie {
         self.id = dto.id
         self.title = dto.title
         self.overview = dto.overview
-        self.releaseYear = String(dto.releaseDate.split(separator: "-").first!)
+        if let releaseDate = dto.releaseDate, let year = releaseDate.split(separator: "-").first {
+            self.releaseYear = String(year)
+        } else {
+            self.releaseYear = "----"
+        }
         self.posterPath = dto.posterPath
         self.genreIds = dto.genreIds
         self.smallImageURL = smallImageURL

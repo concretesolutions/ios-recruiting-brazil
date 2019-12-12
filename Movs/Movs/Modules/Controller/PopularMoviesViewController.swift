@@ -69,6 +69,9 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
             DataProvider.shared.getMoreMovies { error in
                 if let error = error {
                     print(error)
+                    if (error as? DecodingError) == nil {
+                        // TODO: show error screen
+                    }
                 } else {
                     var indexPaths: [IndexPath] = []
                     for row in indexPath.row+1...DataProvider.shared.movies.count-1 {
