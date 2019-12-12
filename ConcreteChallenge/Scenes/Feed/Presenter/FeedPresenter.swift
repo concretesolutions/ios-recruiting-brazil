@@ -54,7 +54,6 @@ final class FeedPresenter: BasePresenter {
             
             if let movies = movies {
                 self?.movies = movies
-                self?.feedView.reloadFeed()
             }
         }
         pagesLoaded = 1
@@ -72,7 +71,6 @@ final class FeedPresenter: BasePresenter {
             
             if let movies = movies {
                 self?.movies.append(contentsOf: movies)
-                self?.feedView.reloadFeed()
             }
         }
     }

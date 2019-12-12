@@ -19,8 +19,6 @@
 		5E6AAD1C239C436A00564F6A /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD1B239C436A00564F6A /* Presenter.swift */; };
 		5E6AAD1E239C439400564F6A /* ViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD1D239C439400564F6A /* ViewDelegate.swift */; };
 		5E6AAD20239C468700564F6A /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD1F239C468700564F6A /* BasePresenter.swift */; };
-		5E6AAD23239C48E800564F6A /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD22239C48E700564F6A /* SplashVC.swift */; };
-		5E6AAD25239C49E100564F6A /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD24239C49E100564F6A /* SplashPresenter.swift */; };
 		5E6AAD27239C4CC500564F6A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E6AAD26239C4CC500564F6A /* Colors.xcassets */; };
 		5E6AAD29239C4CDA00564F6A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD28239C4CDA00564F6A /* Colors.swift */; };
 		5E6AAD2C239C4F3A00564F6A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6AAD2B239C4F3A00564F6A /* Logger.swift */; };
@@ -95,8 +93,6 @@
 		5E6AAD1B239C436A00564F6A /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		5E6AAD1D239C439400564F6A /* ViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDelegate.swift; sourceTree = "<group>"; };
 		5E6AAD1F239C468700564F6A /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
-		5E6AAD22239C48E700564F6A /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
-		5E6AAD24239C49E100564F6A /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		5E6AAD26239C4CC500564F6A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5E6AAD28239C4CDA00564F6A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5E6AAD2B239C4F3A00564F6A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -246,14 +242,6 @@
 			path = ConcreteChallengeUITests;
 			sourceTree = "<group>";
 		};
-		5E6AAD10239C40D300564F6A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5E6AAD22239C48E700564F6A /* SplashVC.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		5E6AAD11239C40DA00564F6A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,14 +250,6 @@
 				5E6AAD3A239C8E2700564F6A /* Genre.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		5E6AAD12239C40E000564F6A /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				5E6AAD24239C49E100564F6A /* SplashPresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		5E6AAD13239C40F200564F6A /* Supporting Files */ = {
@@ -370,19 +350,9 @@
 			isa = PBXGroup;
 			children = (
 				5E6AAD63239D8A3100564F6A /* Detail */,
-				5E6AAD45239CA82F00564F6A /* Splash */,
 				5E6AAD43239CA76200564F6A /* Feed */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		5E6AAD45239CA82F00564F6A /* Splash */ = {
-			isa = PBXGroup;
-			children = (
-				5E6AAD10239C40D300564F6A /* View */,
-				5E6AAD12239C40E000564F6A /* Presenter */,
-			);
-			path = Splash;
 			sourceTree = "<group>";
 		};
 		5E6AAD46239CA85E00564F6A /* View */ = {
@@ -744,7 +714,6 @@
 				5E6AAD51239CBFFA00564F6A /* ItemCollectionViewCell.swift in Sources */,
 				5E6AAD4D239CAD1F00564F6A /* FeedViewDelegate.swift in Sources */,
 				5E6AAD55239D6B2100564F6A /* GradientImageView.swift in Sources */,
-				5E6AAD25239C49E100564F6A /* SplashPresenter.swift in Sources */,
 				5E6AAD57239D6E6D00564F6A /* FeedHeaderView.swift in Sources */,
 				5E6AAD16239C423700564F6A /* BaseViewController.swift in Sources */,
 				5E6AAD2C239C4F3A00564F6A /* Logger.swift in Sources */,
@@ -775,7 +744,6 @@
 				5E6AAD76239DAC3D00564F6A /* DefaultInfoTableCell.swift in Sources */,
 				5E6AAD5A239D6EFB00564F6A /* UIFont+Extensions.swift in Sources */,
 				5E6AAD62239D781000564F6A /* ImageEndpoint.swift in Sources */,
-				5E6AAD23239C48E800564F6A /* SplashVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
