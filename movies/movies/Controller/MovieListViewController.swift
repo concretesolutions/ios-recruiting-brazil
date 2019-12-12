@@ -10,30 +10,17 @@ import UIKit
 import Combine
 
 class MovieListViewController: UIViewController {
-    var viewModel: MovieListViewModel!
+    var viewModel: MovieListViewModel = MovieListViewModel()
     var screen: MovieListViewControllerScreen!
-    
-    var query = PassthroughSubject<String?, Never>() // String written in search bar
-    
-    override func loadView() {
-        viewModel = MovieListViewModel(query: query.eraseToAnyPublisher())
         
+    override func loadView() {
         screen = MovieListViewControllerScreen(frame: UIScreen.main.bounds, state: viewModel.$state.eraseToAnyPublisher())
         screen.collectionView.dataSource = self
         screen.collectionView.delegate = self
         
         self.view = screen
         
-        let search = UISearchController(searchResultsController: nil)
-        search.obscuresBackgroundDuringPresentation = false
-        
-        self.navigationItem.searchController = search
-        self.navigationItem.searchController!.searchBar.delegate = self // Set the serach bar delegate to this
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        self.title = "Movies"
-        
-        self.query.send("")
+        self.setupNavigationController()
     }
 
     override func viewDidLoad() {
@@ -46,28 +33,18 @@ class MovieListViewController: UIViewController {
             }
     }
     
+    func setupNavigationController() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Movies"
+        self.navigationItem.searchController = SearchController() // Set custom search controller as navigation item search
+        
+        if let searchController = self.navigationItem.searchController as? SearchController {
+            self.viewModel.bindQuery(searchController.publisher) // Use search controller as query publisher
+        }
+    }
+    
     @objc func loadCollectionView() {
         self.screen.collectionView.reloadData()
-    }
-}
-
-// MARK: - SearchBar
-extension MovieListViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.query.send(searchBar.text) // Send changes in query string value
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.query.send(searchBar.text) // Send changes in query string value
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
     }
 }
 
@@ -111,7 +88,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == self.viewModel.movieCount - 1 {
-            self.viewModel.fetchMovies()
+            DataProvider.shared.fetchMovies()
         }
     }
 }
