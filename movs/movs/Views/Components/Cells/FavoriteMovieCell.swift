@@ -74,8 +74,10 @@ class FavoriteMovieCell: UITableViewCell {
         self.title.text = movie.title
         self.releaseDate.text = movie.releaseDate
         self.synopsis.text = movie.synopsis
+        let dataService = DataService.shared
         if let posterPath =  movie.posterPath {
-            DataService.shared.loadPosterImage(with: posterPath) { (image) in
+            dataService.loadPosterImage(with: posterPath) { (image) in
+                movie.posterImage = image
                 DispatchQueue.main.async {
                     self.posterImage.image = image
                 }

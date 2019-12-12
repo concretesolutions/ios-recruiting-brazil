@@ -5,7 +5,6 @@
 //  Created by Emerson Victor on 03/12/19.
 //  Copyright © 2019 emer. All rights reserved.
 //
-// swiftlint:disable identifier_name
 
 import UIKit
 
@@ -53,7 +52,7 @@ final class DataService {
                     genresDTO.genres.forEach { (genre) in
                         self.genres[genre.id] = genre.name
                     }
-
+                    
                     MovieAPIService.fetchPopularMovies(of: page) { (result) in
                         switch result {
                         case .failure:
@@ -91,9 +90,9 @@ final class DataService {
         self.favoritesIDs.forEach { (id) in
             group.enter()
             
-            let movie = self.movies.first { $0.id == id }
-            
-            if let movie = movie {
+            if self.favorites.contains(where: { movie in movie.id == id }) {
+                group.leave()
+            } else if let movie = self.movies.first(where: { movie in movie.id == id }) {
                 self.favorites.append(movie)
                 group.leave()
             } else {
@@ -136,6 +135,9 @@ final class DataService {
     
     func removeFromFavorites(_ id: Int) {
         self.favoritesIDs.remove(id)
+        self.favorites.removeAll { (movie) -> Bool in
+            return movie.id == id
+        }
     }
     
     func movieIsFavorite(_ id: Int) -> Bool {

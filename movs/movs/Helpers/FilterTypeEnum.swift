@@ -8,7 +8,16 @@
 
 import Foundation
 
-enum FilterType: Int {
+enum FilterType: Int, CaseIterable {
     case date = 0
     case genre = 1
+    
+    var stringValue: String {
+        switch self {
+        case .date:
+            return "Date"
+        case .genre:
+            return "Genre"
+        }
+    }
 }

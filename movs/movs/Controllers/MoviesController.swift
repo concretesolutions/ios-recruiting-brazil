@@ -14,32 +14,44 @@ class MoviesController: UIViewController {
     let dataService = DataService.shared
     var movies: [Movie] = []
     var nextPage: Int = 1
-    var filteredBy = ""
+    var searchFilteredBy = ""
     var collectionState: CollectionState = .loading {
         didSet {
             switch self.collectionState {
             case .loading:
-                return
+                if self.nextPage == 1 {
+                    self.dataService.loadMovies(of: self.nextPage) { (state) in
+                        self.collectionState = state
+                    }
+                } else {
+                    self.collectionState = .normal
+                    DispatchQueue.main.async {
+                        self.screen.moviesCollectionView.reloadData()
+                    }
+                }
             case .loadSuccess:
                 self.nextPage += 1
                 self.movies = self.dataService.movies
+                
                 DispatchQueue.main.async {
                     self.screen.moviesCollectionView.reloadData()
                 }
             case .loadError:
                 self.screen.showErrorView()
+                
                 DispatchQueue.main.async {
                     self.screen.moviesCollectionView.reloadData()
                 }
             case .normal:
                 self.screen.presentEmptySearch(false)
                 self.movies = self.dataService.movies
+                
                 DispatchQueue.main.async {
                     self.screen.moviesCollectionView.reloadData()
                 }
             case .filtered:
                 self.movies = self.dataService.movies.filter({ (movie) -> Bool in
-                    return movie.title.lowercased().contains(self.filteredBy.lowercased())
+                    return movie.title.lowercased().contains(self.searchFilteredBy.lowercased())
                 })
                 
                 if self.movies.count == 0 {
@@ -65,17 +77,11 @@ class MoviesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .always
-        if self.nextPage == 1 {
-            self.dataService.loadMovies(of: self.nextPage) { (state) in
-                self.collectionState = state
-            }
-        }
+//        self.collectionState = .loading
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.screen.moviesCollectionView.reloadData()
-        }
+        self.collectionState = .loading
         super.viewWillAppear(animated)
     }
 }
@@ -131,7 +137,7 @@ extension MoviesController: UICollectionViewDelegate {
 extension MoviesController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text ?? ""
-        self.filteredBy = text
+        self.searchFilteredBy = text
         if text == "" {
             self.collectionState = .normal
         } else {

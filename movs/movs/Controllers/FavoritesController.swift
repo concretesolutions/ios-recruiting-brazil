@@ -11,24 +11,40 @@ import UIKit
 class FavoritesController: UIViewController {
     // MARK: - Navigation item
     lazy var filterButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(barButtonSystemItem: .add,
+        let item = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease"),
+                                   style: .plain,
                                    target: self,
                                    action: #selector(goToFilters))
+        
         return item
     }()
     
     // MARK: - Attributes
     lazy var screen = FavoritesScreen(delegate: self)
     let dataService = DataService.shared
-    var filteredBy = ""
-    var favorites: [Movie] = []
+    var searchFilteredBy = ""
+    var filters: [FilterType: String] = [:]
+    var favorites: [Movie] = [] {
+        didSet {
+            self.favorites.sort { (lmovie, rmovie) -> Bool in
+                return lmovie.title < rmovie.title
+            }
+        }
+    }
     var collectionState: CollectionState = .loading {
         didSet {
             switch self.collectionState {
             case .loading:
-                return
+                self.dataService.loadFavorites { (state) in
+                    self.collectionState = state
+                }
             case .loadSuccess:
-                self.favorites = self.dataService.favorites
+                if self.searchFilteredBy.isEmpty {
+                    self.favorites = self.dataService.favorites
+                } else {
+                    
+                }
+                
                 DispatchQueue.main.async {
                     self.screen.favoritesTableView.reloadData()
                 }
@@ -45,7 +61,7 @@ class FavoritesController: UIViewController {
                 }
             case .filtered:
                 self.favorites = self.dataService.favorites.filter({ (movie) -> Bool in
-                    return movie.title.lowercased().contains(self.filteredBy.lowercased())
+                    return movie.title.lowercased().contains(self.searchFilteredBy.lowercased())
                 })
                 
                 if self.favorites.count == 0 {
@@ -72,19 +88,20 @@ class FavoritesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .always
-        self.dataService.loadFavorites { (state) in
-            self.collectionState = state
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.screen.favoritesTableView.reloadData()
+        self.collectionState = .loading
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     // MARK: - Navigation controller action
     @objc func goToFilters() {
-        let controller = FiltersController()
+        let controller = FiltersController(filters: self.filters)
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -128,22 +145,28 @@ extension FavoritesController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            let movie = self.favorites.remove(at: indexPath.row)
+            movie.isFavorite = false
+            self.dataService.removeFromFavorites(movie.id)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            tableView.endUpdates()
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movieDetailControler = MovieDetailController(movie: self.favorites[indexPath.row])
-            self.navigationController?.pushViewController(movieDetailControler,
-                                                          animated: true)
+        let movie = self.favorites[indexPath.row]
+        let movieDetailControler = MovieDetailController(movie: movie)
+               self.navigationController?.pushViewController(movieDetailControler,
+                                                             animated: true)
     }
 }
 
 extension FavoritesController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text ?? ""
-        self.filteredBy = text
+        self.searchFilteredBy = text
         if text == "" {
             self.collectionState = .normal
         } else {

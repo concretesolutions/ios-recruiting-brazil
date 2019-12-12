@@ -22,6 +22,7 @@ class FiltersScreen: UIView {
         button.setTitle("apply", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         button.backgroundColor = .label
+        button.setTitleColor(UIColor(named: "LabelInverse"), for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         return button
