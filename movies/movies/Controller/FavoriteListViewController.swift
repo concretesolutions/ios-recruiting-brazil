@@ -10,64 +10,54 @@ import UIKit
 import Combine
 
 class FavoriteListViewController: UIViewController {
+    let viewModel: FavoriteListViewModel = FavoriteListViewModel()
+    let screen: FavoriteListViewControllerScreen = FavoriteListViewControllerScreen(frame: UIScreen.main.bounds)
     
-    var viewModel: FavoriteListViewModel!
-    var screen: FavoriteListViewControllerScreen!
-    
-    var query = PassthroughSubject<String?, Never>() // String written in search bar
+    // Cancellables
+    var stateSubscriber: AnyCancellable?
+    var movieCountSubscriber: AnyCancellable?
     
     override func loadView() {
-        viewModel = FavoriteListViewModel(query: query.eraseToAnyPublisher())
-        
-        screen = FavoriteListViewControllerScreen(frame: UIScreen.main.bounds, state: viewModel.$state.eraseToAnyPublisher())
-        screen.tableView.dataSource = self
-        screen.tableView.delegate = self
-        
         self.view = screen
         
-        let search = UISearchController(searchResultsController: nil)
-        search.obscuresBackgroundDuringPresentation = false
-        
-        self.navigationItem.searchController = search
-        self.navigationItem.searchController!.searchBar.delegate = self // Set the serach bar delegate to this
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.title = "Favorites"
-        self.query.send("")
+        self.setupNavigationController()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        _ = self.viewModel.$movieCount
+        
+        self.setupScreen()
+    }
+    
+    func setupNavigationController() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Favorites"
+        self.navigationItem.searchController = SearchController() // Set custom search controller as navigation item search
+        
+        if let searchController = self.navigationItem.searchController as? SearchController {
+            self.viewModel.bindQuery(searchController.publisher) // Use search controller as query publisher
+        }
+    }
+    
+    func setupScreen() {
+        // Binds view model state to view state
+        stateSubscriber = viewModel.$state
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.state, on: self.screen)
+        
+        // Set table view data source and delegate
+        screen.setupTableView(controller: self)
+        
+        // Update table view when movie count changes
+        movieCountSubscriber = self.viewModel.$movieCount
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.perform(#selector(self?.loadTableView), with: nil, afterDelay: 1.0)
+                self?.perform(#selector(self?.reloadTableView), with: nil, afterDelay: 0.5)
             }
     }
     
-    @objc func loadTableView() {
-        self.screen.tableView.reloadData()
-    }
-}
-
-// MARK: - SearchBar
-extension FavoriteListViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.query.send(searchBar.text) // Send changes in query string value
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.query.send(searchBar.text) // Send changes in query string value
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+    @objc func reloadTableView() {
+        self.screen.reloadTableView()
     }
 }
 

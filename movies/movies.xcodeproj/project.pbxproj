@@ -11,9 +11,9 @@
 		17236F3123952E770015B113 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17236F3023952E770015B113 /* MovieDetailsViewController.swift */; };
 		17236F3723952FC60015B113 /* MovieDetailsViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17236F3623952FC60015B113 /* MovieDetailsViewControllerScreen.swift */; };
 		17236F3923952FDA0015B113 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17236F3823952FDA0015B113 /* MovieDetailsViewModel.swift */; };
-		17236F3B23953A880015B113 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17236F3A23953A880015B113 /* Divider.swift */; };
 		17236F3D23953CB20015B113 /* MovieDetailsViewControllerScreenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17236F3C23953CB20015B113 /* MovieDetailsViewControllerScreenSpec.swift */; };
 		17236F3F239596B70015B113 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17236F3E239596B70015B113 /* FavoriteButton.swift */; };
+		173DB74423A270AB00269A09 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DB74323A270AB00269A09 /* SearchController.swift */; };
 		1741EB432394361B007AD9FC /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741EB422394361B007AD9FC /* Movie.swift */; };
 		1741EB452394365A007AD9FC /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741EB442394365A007AD9FC /* Genre.swift */; };
 		1741EB47239438AB007AD9FC /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741EB46239438AB007AD9FC /* MoviesResponse.swift */; };
@@ -75,9 +75,9 @@
 		17236F3023952E770015B113 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		17236F3623952FC60015B113 /* MovieDetailsViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewControllerScreen.swift; sourceTree = "<group>"; };
 		17236F3823952FDA0015B113 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
-		17236F3A23953A880015B113 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		17236F3C23953CB20015B113 /* MovieDetailsViewControllerScreenSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewControllerScreenSpec.swift; sourceTree = "<group>"; };
 		17236F3E239596B70015B113 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		173DB74323A270AB00269A09 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		1741EB422394361B007AD9FC /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		1741EB442394365A007AD9FC /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		1741EB46239438AB007AD9FC /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
@@ -198,7 +198,6 @@
 			children = (
 				17B0313B2395A5EB00C98D23 /* FavoriteMovieTableViewCell.swift */,
 				17B031412395AD4800C98D23 /* FavoriteListViewControllerScreen.swift */,
-				17236F3A23953A880015B113 /* Divider.swift */,
 			);
 			path = FavoriteList;
 			sourceTree = "<group>";
@@ -280,6 +279,7 @@
 				17E616E223942446003C7A2E /* MovieListViewController.swift */,
 				17E616E423942464003C7A2E /* FavoriteListViewController.swift */,
 				17236F3023952E770015B113 /* MovieDetailsViewController.swift */,
+				173DB74323A270AB00269A09 /* SearchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -655,9 +655,9 @@
 				1741EB4C23948B23007AD9FC /* MockedDataProvider.swift in Sources */,
 				174C053E2396813800886DD8 /* MovieService.swift in Sources */,
 				1741EB47239438AB007AD9FC /* MoviesResponse.swift in Sources */,
+				173DB74423A270AB00269A09 /* SearchController.swift in Sources */,
 				1741EB50239495B2007AD9FC /* MovieListViewModel.swift in Sources */,
 				1741EB56239498D7007AD9FC /* MovieCollectionViewCell.swift in Sources */,
-				17236F3B23953A880015B113 /* Divider.swift in Sources */,
 				17236F3923952FDA0015B113 /* MovieDetailsViewModel.swift in Sources */,
 				177E9CEF239F230200DBBF0C /* PosterImageView.swift in Sources */,
 				176F99832393F2AC00023BE7 /* AppDelegate.swift in Sources */,
