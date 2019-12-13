@@ -15,7 +15,7 @@ struct PopularMovieDTO: Decodable {
     let title: String
     let overview: String
     let genreIds: [Int]
-    let releaseDate: String
+    let releaseDate: String?
     let posterPath: String?
 
     private enum CodingKeys: String, CodingKey {

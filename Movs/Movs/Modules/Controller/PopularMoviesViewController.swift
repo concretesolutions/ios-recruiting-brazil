@@ -31,8 +31,13 @@ class PopularMoviesViewController: UIViewController {
             if let error = error {
                 print(error)
             } else {
+                var indexPaths: [IndexPath] = []
+                for row in 0...DataProvider.shared.movies.count-1 {
+                    indexPaths.append(IndexPath(row: row, section: 0))
+                }
+
                 DispatchQueue.main.async {
-                    self.screen.collectionView.reloadData()
+                    self.screen.collectionView.insertItems(at: indexPaths)
                 }
             }
         }
@@ -55,6 +60,30 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
         cell.configure(with: DataProvider.shared.movies[indexPath.row])
 
         return cell
+    }
+
+    // MARK: - UICollectionViewDelegate
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == DataProvider.shared.movies.count - 1 {
+            DataProvider.shared.getMoreMovies { error in
+                if let error = error {
+                    print(error)
+                    if (error as? DecodingError) == nil {
+                        // TODO: show error screen
+                    }
+                } else {
+                    var indexPaths: [IndexPath] = []
+                    for row in indexPath.row+1...DataProvider.shared.movies.count-1 {
+                        indexPaths.append(IndexPath(row: row, section: 0))
+                    }
+
+                    DispatchQueue.main.async {
+                        self.screen.collectionView.insertItems(at: indexPaths)
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - UICollectionViewDelegateFlowLayout
