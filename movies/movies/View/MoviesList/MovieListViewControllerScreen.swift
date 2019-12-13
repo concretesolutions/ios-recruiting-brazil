@@ -71,7 +71,7 @@ final class MovieListViewControllerScreen: UIView {
     
     /// Set collection view data source and delegate
     /// - Parameter controller: Controller responsable for collection view delegate and data source
-    public func setupTableView<T: UICollectionViewDelegate & UICollectionViewDataSource>(controller: T) {
+    public func setupCollectionView<T: UICollectionViewDelegate & UICollectionViewDataSource>(controller: T) {
         self.collectionView.delegate = controller
         self.collectionView.dataSource = controller
     }
