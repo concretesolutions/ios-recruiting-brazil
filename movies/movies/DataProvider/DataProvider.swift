@@ -22,6 +22,8 @@ class DataProvider: DataProvidable, ObservableObject {
     @Published var favoriteMovies: [Movie] = []
     
     init() {
+        fetchMovies()
+        
         _ = UserDefaults.standard.publisher(for: \.favorites)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favoritesIDs in
@@ -29,16 +31,14 @@ class DataProvider: DataProvidable, ObservableObject {
             })
     }
     
-    // TO DO: Fix like the favorites
-    public func fetchMovies(completion: @escaping (_ movies: [Movie]) -> Void) {
-        
+    public func fetchMovies() {
         MovieService.fecthMovies(params: ["page": "\(page)"]) { result in
             switch result {
             case .success(let response):
                 self.page += 1 // Update current page to fetch
                 
                 let movies = response.results.map { Movie($0) } // Map response to array of movies
-                completion(movies)
+                self.popularMovies = movies
 
             case .failure(let error):
                 print(error) // TO DO: Handle error

@@ -75,7 +75,7 @@ extension FavoriteListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.viewModel = cellViewModel
+        cell.setViewModel(cellViewModel)
         
         return cell
     }
