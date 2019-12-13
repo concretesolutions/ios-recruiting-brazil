@@ -34,7 +34,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     lazy var container: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .systemOrange
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = 8
         
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
         view.layer.shadowRadius = 4
@@ -94,7 +94,8 @@ extension MovieCollectionViewCell: CodeView {
         
         container.snp.makeConstraints { make in
             make.top.right.equalToSuperview()
-            make.height.width.equalTo(posterImageView.snp.width).multipliedBy(0.2)
+            make.height.width.greaterThanOrEqualTo(25).priority(.high)
+            make.height.width.equalTo(posterImageView.snp.width).multipliedBy(0.2).priority(.low)
         }
         
         favoriteButton.snp.makeConstraints { make in

@@ -16,6 +16,7 @@ class FavoriteListViewController: UIViewController {
     // Cancellables
     var stateSubscriber: AnyCancellable?
     var movieCountSubscriber: AnyCancellable?
+    var tabBarSelectSubscriber: AnyCancellable?
     
     override func loadView() {
         self.view = screen
@@ -54,6 +55,9 @@ class FavoriteListViewController: UIViewController {
             .sink { [weak self] _ in
                 self?.perform(#selector(self?.reloadTableView), with: nil, afterDelay: 0.5)
             }
+        
+        // Scroll to top when view controller is selected on tab bar
+        self.subscribeToTabSelection(cancellable: &tabBarSelectSubscriber)
     }
     
     @objc func reloadTableView() {

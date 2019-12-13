@@ -23,7 +23,8 @@ class FavoriteMovieTableViewCellSpec: QuickSpec {
                 beforeEach {
                     let viewModel = FavoriteMovieCellViewModel(of: movie)
                     
-                    sut = FavoriteMovieTableViewCell(with: viewModel)
+                    sut = FavoriteMovieTableViewCell()
+                    sut.setViewModel(viewModel)
                     sut.frame = CGRect(x: 0, y: 0, width: 500, height: 125)
                 }
                 

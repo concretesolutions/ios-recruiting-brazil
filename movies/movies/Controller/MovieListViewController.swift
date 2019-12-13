@@ -16,16 +16,17 @@ class MovieListViewController: UIViewController {
     // Cancellables
     var stateSubscriber: AnyCancellable?
     var movieCountSubscriber: AnyCancellable?
-        
+    var tabBarSelectSubscriber: AnyCancellable?
+    
     override func loadView() {
         self.view = screen
         
         self.setupNavigationController()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.setupScreen()
     }
     
@@ -53,7 +54,10 @@ class MovieListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.perform(#selector(self?.reloadCollectionView), with: nil, afterDelay: 0.5)
-            }
+        }
+        
+        // Scroll to top when view controller is selected on tab bar
+        self.subscribeToTabSelection(cancellable: &tabBarSelectSubscriber)
     }
     
     @objc func reloadCollectionView() {
