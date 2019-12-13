@@ -104,7 +104,6 @@ extension DetailMovieView:CodeView{
         }
         favoriteButton.snp.makeConstraints { (make) in
             make.width.height.equalTo(25)
-           
         }
     }
         

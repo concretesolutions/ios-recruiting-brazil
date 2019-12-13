@@ -12,11 +12,18 @@ class FavoriteMoviesController: UIViewController , SendDataApi ,UISearchResultsU
     func sendMovie(movies: [Movie]) {
         self.favoriteMovies = movies
         DispatchQueue.main.async {
+            self.filterFavoriteMovies = self.favoriteMovies
             self.tableView.reloadData()
         }
     }
     var favoriteMovies:[Movie] = []
-    var filterFavoriteMovies:[Movie] = []
+    var filterFavoriteMovies:[Movie] = [] {
+        didSet{
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     lazy var tableView:UITableView = {
         let view = UITableView(frame: .zero)
@@ -30,7 +37,7 @@ class FavoriteMoviesController: UIViewController , SendDataApi ,UISearchResultsU
         let manege = ManegerApiRequest()
         manege.delegate = self
         manege.sendMovies()
-        filterFavoriteMovies = favoriteMovies
+       
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -23,17 +23,22 @@ class FavoriteMovieCellView: UITableViewCell {
     }()
     let movieName:UILabel = {
         let view = UILabel(frame: .zero)
-        //view.backgroundColor = .black
         view.text = "thor"
         view.font = UIFont(name: "Times New Roman", size: 30.0)
         return view
     }()
     let movieYear:UILabel = {
         let view = UILabel(frame: .zero)
-        //view.backgroundColor = .black
         view.text = "2008"
         view.font = UIFont(name: "Times New Roman", size: 22.0)
         return view
+    }()
+    lazy var containerMovieNameAndMovieYear:UIStackView = {
+        let stack = UIStackView(frame: .zero)
+        stack.axis = .horizontal
+        stack.distribution = .fillProportionally
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     let movieDescription:UILabel = {
         let view = UILabel(frame: .zero)
@@ -47,16 +52,16 @@ class FavoriteMovieCellView: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -66,36 +71,33 @@ class FavoriteMovieCellView: UITableViewCell {
         if let movie = self.movie{
             movieImage.loadImageMovie(movie.backdropPath, width: 500)
             movieName.text = movie.title
-            movieYear.text = movie.releaseDate
+            movieYear.text = formateYear(date:movie.releaseDate)
             movieDescription.text = movie.overview
         }
     }
 }
 extension FavoriteMovieCellView:CodeView {
     func buildViewHierarchy() {
+        self.containerMovieNameAndMovieYear.addArrangedSubview(movieName)
+        self.containerMovieNameAndMovieYear.addArrangedSubview(movieYear)
+        self.addSubview(containerMovieNameAndMovieYear)
         self.addSubview(movieImage)
-        self.addSubview(movieName)
-        self.addSubview(movieYear)
         self.addSubview(movieDescription)
     }
     
     func setupConstraints() {
         movieImage.snp.makeConstraints { (make) in
-            make.left.bottom.top.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.3)
+            make.top.left.bottom.equalToSuperview()
+            make.right.equalToSuperview().multipliedBy(0.3)
         }
-        movieName.snp.makeConstraints { (make) in
-            make.left.equalTo(movieImage.snp.right).offset(10)
-            make.top.equalToSuperview().offset(10)
-        }
-        movieYear.snp.makeConstraints { (make) in
-            make.right.top.equalToSuperview().inset(10)
+        containerMovieNameAndMovieYear.snp.makeConstraints { (make) in
+            make.left.equalTo(movieImage.snp.right)
+            make.top.right.equalToSuperview()
         }
         movieDescription.snp.makeConstraints { (make) in
-            make.left.equalTo(movieImage.snp.right).offset(10)
-            make.top.equalTo(movieName.snp.bottom).offset(10)
-            make.right.equalTo(movieYear.snp.right)
-            make.bottom.equalToSuperview()
+            make.left.equalTo(movieImage.snp.right).offset(5)
+            make.right.equalToSuperview()
+            make.top.equalTo(containerMovieNameAndMovieYear.snp.bottom)
         }
     }
     

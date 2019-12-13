@@ -22,6 +22,8 @@ func formatGenres(list:[Int]) -> String{
             }
         }
     }
-    value.removeLast()
+    if value != ""{
+        value.removeLast()
+    }
     return value
 }
