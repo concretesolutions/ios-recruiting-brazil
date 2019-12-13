@@ -13,9 +13,10 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let movieController = UINavigationController(rootViewController: MoviesController())
-        movieController.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
+        movieController.tabBarItem =
+            UITabBarItem(title: "Movies", image: #imageLiteral(resourceName: "list_icon"), selectedImage: #imageLiteral(resourceName: "list_icon"))
         let favoriteMovieController = UINavigationController(rootViewController: FavoriteMoviesController())
-        favoriteMovieController.tabBarItem =  UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        favoriteMovieController.tabBarItem = UITabBarItem(title: "Favorites", image: #imageLiteral(resourceName: "favorite_empty_icon"), selectedImage: #imageLiteral(resourceName: "favorite_empty_icon"))
         self.viewControllers = [movieController,favoriteMovieController]
         
     }
