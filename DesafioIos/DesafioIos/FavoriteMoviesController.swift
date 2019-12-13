@@ -8,14 +8,18 @@
 
 import UIKit
 import SnapKit
-class FavoriteMoviesController: UIViewController {
-    var itemsToLoad: [Movie] = []
+class FavoriteMoviesController: UIViewController , SendDataApi ,UISearchResultsUpdating{
+    func sendMovie(movies: [Movie]) {
+        self.favoriteMovies = movies
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    var favoriteMovies:[Movie] = []
+    var filterFavoriteMovies:[Movie] = []
+    
     lazy var tableView:UITableView = {
         let view = UITableView(frame: .zero)
-        return view
-    }()
-    var searchBar:UISearchBar = {
-        let view = UISearchBar(frame: .zero)
         return view
     }()
     override func loadView() {
@@ -23,16 +27,39 @@ class FavoriteMoviesController: UIViewController {
         view.backgroundColor = .blue
         self.view = view
         setupView()
+        let manege = ManegerApiRequest()
+        manege.delegate = self
+        manege.sendMovies()
+        filterFavoriteMovies = favoriteMovies
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        makeSearchController()
     }
-    
+    func makeSearchController(){
+        let searchController = UISearchController(nibName: nil, bundle: nil)
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
+        searchController.searchResultsUpdater = self
+    }
+    //MARK: - protocol function SearchBarController Updating
+    func updateSearchResults(for searchController: UISearchController) {
+        if searchController.searchBar.text == ""{
+            filterFavoriteMovies = favoriteMovies
+        }
+        else {
+            filterFavoriteMovies = favoriteMovies.filter({ movie in
+                return movie.title.lowercased().contains(searchController.searchBar.text!.lowercased())
+            })
+        }
+        self.tableView.reloadData()
+    }
 }
+//MARK: - Protocols UITableViewDataSource and UITableViewDelegate
 extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemsToLoad.count
+        return filterFavoriteMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,39 +67,37 @@ extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
             else{
                 return tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         }
-        cell.movie = itemsToLoad[indexPath.row]
+        cell.movie = filterFavoriteMovies[indexPath.row]
         return cell
-
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-
+            
             // remove the item from the data model
-            itemsToLoad.remove(at: indexPath.row)
-
+            favoriteMovies = favoriteMovies.filter { movie in
+                return filterFavoriteMovies[indexPath.row].id != movie.id
+            }
+            filterFavoriteMovies.remove(at: indexPath.row)
             // delete the table view row
             tableView.deleteRows(at: [indexPath], with: .fade)
-
+            
         }
     }
 }
+
+// MARK: - Protocols CodeView
 extension FavoriteMoviesController:CodeView{
     func buildViewHierarchy() {
         self.view.addSubview(tableView)
-        self.view.addSubview(searchBar)
     }
     
     func setupConstraints() {
         self.tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.searchBar.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
-        }
-        self.searchBar.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(100)
-            make.left.right.equalToSuperview()
+            make.left.right.bottom.top.equalToSuperview()
         }
     }
     
