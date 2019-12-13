@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteMovieTableViewCell: UITableViewCell {
-    public var viewModel: FavoriteMovieCellViewModel! {
+    private var viewModel: FavoriteMovieCellViewModel! {
         didSet {
             self.titleLabel.text = self.viewModel.title
             self.dateLabel.text = self.viewModel.date
@@ -43,20 +43,18 @@ class FavoriteMovieTableViewCell: UITableViewCell {
         return view
     }()
     
-    convenience init(with viewModel: FavoriteMovieCellViewModel) {
-        self.init(frame: .zero)
-        
-        defer {
-            self.viewModel = viewModel
-        }
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
     }
     
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        
-        setupView()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setViewModel(_ viewModel: FavoriteMovieCellViewModel) {
+        self.viewModel = viewModel
     }
 }
 
