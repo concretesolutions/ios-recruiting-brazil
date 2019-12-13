@@ -13,6 +13,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
     let imageView = UIImageView()
     let backgroundLabelView = UIView()
     let titleLabel = UILabel()
+    
+    var favoriteAction: (() -> Void)?
+    
+    lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        return button
+    }()
+    
     static var lineSpacing: CGFloat = 16
     
     static func size(for parentWidth: CGFloat) -> CGSize {
@@ -34,7 +43,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
 extension MovieCollectionViewCell: ViewCode {
     func buildViewHierarchy() {
         addSubviews([imageView, backgroundLabelView])
-        backgroundLabelView.addSubview(titleLabel)
+        backgroundLabelView.addSubviews([titleLabel, favoriteButton])
     }
     
     func buildConstraints() {
@@ -51,8 +60,14 @@ extension MovieCollectionViewCell: ViewCode {
             .right(safeAreaLayoutGuide.rightAnchor)
         
         titleLabel.anchor
-            .width(backgroundLabelView.widthAnchor)
-            .centerX(backgroundLabelView.centerXAnchor)
+            .left(backgroundLabelView.leftAnchor)
+            .right(favoriteButton.leftAnchor)
+            .centerY(backgroundLabelView.centerYAnchor)
+        
+        favoriteButton.anchor
+            .right(backgroundLabelView.rightAnchor, padding: 8)
+            .width(constant: 30)
+            .height(constant: 30)
             .centerY(backgroundLabelView.centerYAnchor)
     }
     
@@ -61,5 +76,12 @@ extension MovieCollectionViewCell: ViewCode {
         imageView.clipsToBounds = true
         backgroundLabelView.backgroundColor = .gray
         titleLabel.textAlignment = .center
+        
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
     }
+    
+    @objc func favoriteButtonTapped() {
+        favoriteAction?()
+    }
+    
 }

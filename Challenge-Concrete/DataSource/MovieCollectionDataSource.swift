@@ -20,7 +20,7 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
         let imageURL = "https://image.tmdb.org/t/p/w185/\(movie.posterPath!)"
         cell.setupData(title: movie.title ?? movie.name)
         cell.imageView.setImage(withURL: imageURL) { imgData in
-            self.data[indexPath.row].movieImageData = imgData
+            //self.data[indexPath.row].movieImageData = imgData
         }
         return cell
     }

@@ -65,6 +65,10 @@ extension TrendingMoviesViewController {
         navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
+    
+    func didFavoriteMovie(at index: Int) {
+        print("FAVORITE AT: \(index)")
+    }
 }
 
 // MARK: - SearchResultsUpdating

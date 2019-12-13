@@ -26,8 +26,7 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
         moviesView.setupTableView(delegate: delegate, dataSource: dataSource)
         
         movieViewModel.fetchFavoriteMovies().forEach { (fav) in
-            
-            print("Favorites: ", fav.image)
+
         }
     }
 }
@@ -52,6 +51,4 @@ extension FavoriteMoviesViewController {
         navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
-    
-    
 }

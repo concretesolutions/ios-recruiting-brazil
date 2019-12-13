@@ -28,8 +28,10 @@ extension UIImageView {
         apiProvider.requestImage(withURL: url) { result in
             switch result {
             case .success(let data):
-                self.image = UIImage(data: data)
-                completion?(data)
+                DispatchQueue.main.async {
+                    self.image = UIImage(data: data)
+                }
+                //completion?(data)
             case .failure: break
             }
         }
