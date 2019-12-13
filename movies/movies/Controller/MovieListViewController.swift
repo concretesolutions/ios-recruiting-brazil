@@ -46,7 +46,7 @@ class MovieListViewController: UIViewController {
             .assign(to: \.state, on: self.screen)
         
         // Set table view data source and delegate
-        screen.setupTableView(controller: self)
+        screen.setupCollectionView(controller: self)
         
         // Update table view when movie count changes
         movieCountSubscriber = self.viewModel.$movieCount
