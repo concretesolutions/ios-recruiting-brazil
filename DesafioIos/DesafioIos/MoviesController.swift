@@ -25,21 +25,24 @@ class MoviesController: UIViewController , SendDataApi {
         cv.backgroundColor = .lightGray
         return cv
     }()
-    lazy var searchBar: UISearchBar = {
-        let view = UISearchBar(frame: .zero)
-        view.backgroundColor = .black
-        return view
-    }()
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .red
         self.view = view
-        
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        self.title = "Movies"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupDataMovie()
+        makeSearchController()
+    }
+    func makeSearchController(){
+        let searchController = UISearchController(nibName: nil, bundle: nil)
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
+        searchController.searchResultsUpdater = self
     }
     func setupDataMovie(){
         let maneger = ManegerApiRequest()
@@ -49,7 +52,7 @@ class MoviesController: UIViewController , SendDataApi {
     func sendMovie(movies: [Movie]) {
         moviesData.append(contentsOf: movies)
     }
-
+    
 }
 // MARK: - Protocols of CollectionView
 
@@ -74,14 +77,14 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-//MARK: - Protocols Search Bar
-extension MoviesController:UISearchBarDelegate{
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-        if searchBar.text == "" {
+//MARK: - Protocols SearchBarController Updating
+extension MoviesController:UISearchResultsUpdating{
+    func updateSearchResults(for searchController: UISearchController) {
+        if searchController.searchBar.text == "" {
             self.filterMovies = self.moviesData
         } else {
             filterMovies = self.moviesData.filter({ (movie) -> Bool in
-                return movie.title.lowercased().contains(searchBar.text!.lowercased())
+                return movie.title.lowercased().contains(searchController.searchBar.text!.lowercased())
             })
         }
         self.collectionView.reloadData()
@@ -89,27 +92,20 @@ extension MoviesController:UISearchBarDelegate{
 }
 // MARK: - Protocols CodeView
 extension MoviesController:CodeView{
+    
     func buildViewHierarchy() {
         view.addSubview(collectionView)
-        view.addSubview(searchBar)
     }
     
     func setupConstraints() {
         collectionView.snp.makeConstraints { (make) in
-            make.bottom.left.right.equalToSuperview()
-            make.top.equalTo(searchBar.snp.bottom)
-        }
-        searchBar.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(80)
+            make.bottom.left.right.top.equalToSuperview()
         }
     }
-    
     func setupAdditionalConfiguration() {
         collectionView.register(MovieCellView.self,forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        searchBar.delegate = self
     }
     
     

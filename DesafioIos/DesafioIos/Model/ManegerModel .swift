@@ -7,12 +7,6 @@
 //
 
 import Foundation
-
-
-
-
-
-
 func creatQuery(json:[String:Any])->[URLQueryItem]{
     var querys:[URLQueryItem] = []
     for query in json{
@@ -20,12 +14,6 @@ func creatQuery(json:[String:Any])->[URLQueryItem]{
     }
     return querys
 }
-
-//func getGenres(){
-//    requestGenres(url: "https://api.themoviedb.org/3/genre/movie/list", data: queryGenre) { (all) in
-//        genres.append(contentsOf: all.genres)
-//    }
-//}
 
 func fetchimage(completion: @escaping (_ results: Data) -> Void,dest:String,width:Int){
     var url = URL(fileURLWithPath: "https://image.tmdb.org/t/p/w\(width)/")

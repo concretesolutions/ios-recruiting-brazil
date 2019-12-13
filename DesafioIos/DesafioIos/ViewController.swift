@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 class ViewController: UIViewController {
     override func loadView() {
-        self.view = GridBox()
+        
     }
     
     override func viewDidLoad() {

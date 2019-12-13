@@ -14,6 +14,10 @@ class FavoriteMoviesController: UIViewController {
         let view = UITableView(frame: .zero)
         return view
     }()
+    var searchBar:UISearchBar = {
+        let view = UISearchBar(frame: .zero)
+        return view
+    }()
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .blue
@@ -58,11 +62,17 @@ extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
 extension FavoriteMoviesController:CodeView{
     func buildViewHierarchy() {
         self.view.addSubview(tableView)
+        self.view.addSubview(searchBar)
     }
     
     func setupConstraints() {
         self.tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalTo(self.searchBar.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+        self.searchBar.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(100)
+            make.left.right.equalToSuperview()
         }
     }
     
