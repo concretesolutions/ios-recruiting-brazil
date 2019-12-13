@@ -17,7 +17,7 @@ class Movie: Codable {
     let posterPath: String?
     let backdropPath: String?
     let releaseDate: String
-    let isFavorite: Bool? = false
+    var isFavorite: Bool = false
 }
 
 extension Movie {

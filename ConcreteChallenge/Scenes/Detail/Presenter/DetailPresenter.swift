@@ -48,6 +48,10 @@ final class DetailPresenter: BasePresenter {
         return displayData.count
     }
     
+    var isFavorite: Bool {
+        return movie.isFavorite ?? false
+    }
+    
     // MARK: - Init -
     init(movie: Movie) {
         self.movie = movie
@@ -79,5 +83,12 @@ final class DetailPresenter: BasePresenter {
     
     func getBarTitle() -> String {
         return "Movie"
+    }
+    
+    /// To be called when the user wants to change the favorites state
+    func setFavorite() {
+        /// TODO: Implement persistence
+        movie.isFavorite = !movie.isFavorite
+        detailView.setFavorite(movie.isFavorite)
     }
 }

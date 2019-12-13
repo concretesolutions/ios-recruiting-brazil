@@ -41,8 +41,8 @@ final class DetailVC: BaseViewController {
     }()
     
     lazy var favoriteButton: UIBarButtonItem = {
-        // TODO: Get which image to put from presenter
-        let button = UIBarButtonItem(image: UIImage(named: "favoriteEmpty"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(favoriteTapped(_:)))
+        
+        let button = UIBarButtonItem(image: UIImage(named: (detailPresenter?.isFavorite ?? false) ? "favoriteFull" : "favoriteEmpty"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(favoriteTapped(_:)))
         return button
     }()
     
@@ -81,9 +81,7 @@ final class DetailVC: BaseViewController {
     
     @objc func favoriteTapped(_ sender: UIBarButtonItem) {
         
-        // TODO: Implement favorite
-        favoriteButton = UIBarButtonItem(image: UIImage(named: "favoriteFull"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(favoriteTapped(_:)))
-        self.navigationItem.rightBarButtonItem = favoriteButton
+        detailPresenter?.setFavorite()
     }
 }
 
@@ -93,6 +91,12 @@ extension DetailVC: DetailViewDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.genresCell?.textLabel?.text = data.genres
         }
+    }
+    
+    func setFavorite(_ isFavorite: Bool) {
+        let image = UIImage(named: isFavorite ? "favoriteFull" : "favoriteEmpty")
+        favoriteButton = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(favoriteTapped(_:)))
+        self.navigationItem.rightBarButtonItem = favoriteButton
     }
 }
 
