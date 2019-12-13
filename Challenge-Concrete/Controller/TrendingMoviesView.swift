@@ -44,4 +44,9 @@ extension TrendingMoviesView: ViewCode {
         collectionView.anchor
             .attatch(to: safeAreaLayoutGuide, paddings: [.top(16), .left(16), .right(16), .bottom(16)])
     }
+    
+    func setupAditionalConfiguration() {
+        backgroundColor = .white
+        collectionView.backgroundColor = .white
+    }
 }

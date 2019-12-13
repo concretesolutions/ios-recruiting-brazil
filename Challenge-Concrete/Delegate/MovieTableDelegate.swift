@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class MovieTableDelegate: NSObject, MovieData, UITableViewDelegate {
+class MovieTableDelegate: NSObject, GenericDelegate, UITableViewDelegate {
     
     weak var moviesDelegate: MoviesDelegate?
         

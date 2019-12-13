@@ -7,5 +7,6 @@
 //
 
 protocol MovieViewModel {
-    var dataSource: GenericDataSource<Movie>? {get set}
+    associatedtype T: Any
+    var dataSource: T? {get set}
 }

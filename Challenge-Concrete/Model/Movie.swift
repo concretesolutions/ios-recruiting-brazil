@@ -7,7 +7,7 @@
 //
 import Foundation
 
-struct Movie: Codable {
+class Movie: Codable {
     let id: Int
     var video: Bool?
     let voteCount: Int
@@ -22,4 +22,9 @@ struct Movie: Codable {
     var mediaType: String?
     
     var movieImageData: Data?
+}
+
+struct MovieImage {
+    let movieId: Int
+    let imageData: Data
 }

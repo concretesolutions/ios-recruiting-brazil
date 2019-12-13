@@ -9,13 +9,15 @@
 import UIKit
 
 class TrendingMoviesViewController: UIViewController, MoviesVC {
-    let dataSource = MovieCollectionDataSource()
+    
+    var dataSource = MovieCollectionDataSource()
     var delegate = MovieCollectionDelegate()
     var movieViewModel = TrendingMoviesViewModel()
     let moviesView = TrendingMoviesView()
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    weak var addFavoriteMovieDelegate: AddFavoriteMovieDelegate?
     override func loadView() {
         view = moviesView
     }
@@ -24,7 +26,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         super.viewDidLoad()
         title = "Movies"
         setupSearchController()
-        setupDelegateDataSource()
+        setup(with: dataSource)
         moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
         movieViewModel.fetchTrendingMovies()
     }
@@ -67,7 +69,13 @@ extension TrendingMoviesViewController {
     }
     
     func didFavoriteMovie(at index: Int) {
-        print("FAVORITE AT: \(index)")
+        let movie = dataSource.data[index]
+        if let favoriteMovie = movieViewModel.favorite(movie) {
+            self.addFavoriteMovieDelegate?.didAdd(favoriteMovie)
+        } else {
+            
+        }
+        
     }
 }
 

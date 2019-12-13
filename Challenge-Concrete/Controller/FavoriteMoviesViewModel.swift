@@ -8,35 +8,18 @@
 
 class FavoriteMoviesViewModel: MovieViewModel {
 
-    weak var dataSource: GenericDataSource<Movie>?
-    
-    
-    func fetchFavoriteMovies() -> [FavoriteMovie] {
-        _ = FavoriteMovie(context: CoreDataManager.persistentContainer.viewContext)
-        return CoreDataManager.fetch()
+    weak var dataSource: MovieDataSource?
+
+    func fetchFavoriteMovies() {
+        self.dataSource?.data = CoreDataManager.fetch()
     }
     
-//    func fetchTrendingMovies(mediaType: MediaType = .all, timeWindow: TimeWindow = .day) {
-//        fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow)) { error in
-//            self.dataSource?.dataFetchDelegate?.didFailFetchData(with: error)
-//        }
-//    }
-//    
-//    func searchMovies(query: String) {
-//        fetch(endPoint: EndPoint.searchMovie(query: query)) { error in
-//            self.dataSource?.dataFetchDelegate?.didFailFetchData(with: error)
-//        }
-//    }
-//    
-//    private func fetch(endPoint: EndPoint, errorHandling: @escaping (NetworkError) -> Void) {
-//        let apiProvider = APIProvider<Movie>()
-//        apiProvider.request(endPoint) { (result: Result<Response<Movie>, NetworkError>) in
-//            switch result {
-//            case .success(let response):
-//               self.dataSource?.data = response.results
-//            case.failure(let error):
-//                errorHandling(error)
-//            }
-//        }
-//    }
+    func add(_ favoriteMovie: FavoriteMovie) {
+        self.dataSource?.data.append(favoriteMovie)
+    }
+    
+    func remove(_ favoriteMovie: FavoriteMovie) {
+        //self.dataSource?.data.first(where: {$0.id == favoriteMovie.id}) 
+    }
+
 }

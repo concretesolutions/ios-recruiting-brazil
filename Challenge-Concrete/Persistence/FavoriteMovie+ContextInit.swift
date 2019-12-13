@@ -8,8 +8,6 @@
 
 import CoreData
 
-
-
 extension FavoriteMovie: PersistableObject {
     convenience init(id: Int64, title: String, image: Data) {
         self.init(context: CoreDataManager.persistentContainer.viewContext)

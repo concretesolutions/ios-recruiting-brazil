@@ -5,10 +5,11 @@
 //  Created by João Paulo de Oliveira Sabino on 10/12/19.
 //  Copyright © 2019 João Paulo de Oliveira Sabino. All rights reserved.
 //
+import CoreData
 
 class TrendingMoviesViewModel: MovieViewModel {
     
-    weak var dataSource: GenericDataSource<Movie>?
+    weak var dataSource: MovieCollectionDataSource?
     
     func fetchTrendingMovies(mediaType: MediaType = .all, timeWindow: TimeWindow = .day) {
         fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow)) { error in
@@ -34,10 +35,20 @@ class TrendingMoviesViewModel: MovieViewModel {
         }
     }
     
-    func favorite(_ movie: Movie) {
-        if let title = movie.title, let imageData = movie.movieImageData {
-            _ = FavoriteMovie(id: Int64(movie.id), title: title, image: imageData)
+    @discardableResult
+    func favorite(_ movie: Movie) -> FavoriteMovie? {
+        let favMovie: FavoriteMovie? = CoreDataManager.fetchBy(id: movie.id)
+  
+        if favMovie == nil, let title = movie.title ?? movie.name {
+            let favoriteMovie = FavoriteMovie(id: Int64(movie.id),
+                                              title: title,
+                                              image: movie.movieImageData!)
             CoreDataManager.saveContext()
+            return favoriteMovie
+        } else if favMovie != nil {
+            CoreDataManager.deleteBy(id: movie.id, entityType: FavoriteMovie.self)
         }
+        
+        return nil
     }
 }

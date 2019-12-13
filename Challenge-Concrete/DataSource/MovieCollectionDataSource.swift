@@ -19,8 +19,11 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
         let movie = data[indexPath.row]
         let imageURL = "https://image.tmdb.org/t/p/w185/\(movie.posterPath!)"
         cell.setupData(title: movie.title ?? movie.name)
+        
+        let alreadyFavorite = CoreDataManager.isSaved(entityType: FavoriteMovie.self, id: movie.id)
+        cell.changeFavoriteIcon(isAdding: alreadyFavorite)
         cell.imageView.setImage(withURL: imageURL) { imgData in
-            //self.data[indexPath.row].movieImageData = imgData
+            movie.movieImageData = imgData
         }
         return cell
     }

@@ -30,10 +30,23 @@ extension UIImageView {
             case .success(let data):
                 DispatchQueue.main.async {
                     self.image = UIImage(data: data)
+                    completion?(data)
                 }
-                //completion?(data)
             case .failure: break
             }
         }
     }
+    
+//    static func setImage(withURL url: String, completion: ((_ imgData: Data) -> Void)? = nil) {
+//        let apiProvider = APIProvider<Movie>()
+//        apiProvider.requestImage(withURL: url) { result in
+//            switch result {
+//            case .success(let data):
+//                DispatchQueue.main.async {
+//                    completion?(data)
+//                }
+//            case .failure: break
+//            }
+//        }
+//    }
 }

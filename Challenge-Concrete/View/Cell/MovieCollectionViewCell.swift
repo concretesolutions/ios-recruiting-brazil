@@ -15,7 +15,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     let titleLabel = UILabel()
     
     var favoriteAction: (() -> Void)?
-    
+    var isFavorite: Bool = false
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
@@ -36,6 +36,18 @@ class MovieCollectionViewCell: UICollectionViewCell {
     func setupData(title: String?) {
         titleLabel.text = title
         setupView()
+    }
+    
+    @objc func favoriteButtonTapped() {
+        favoriteAction?()
+        isFavorite = !isFavorite
+        changeFavoriteIcon(isAdding: isFavorite)
+    }
+    
+    func changeFavoriteIcon(isAdding: Bool) {
+        let imageName: String = isAdding ? "favorite_full_icon" : "favorite_gray_icon"
+        favoriteButton.setImage(UIImage(named: imageName), for: .normal)
+        isFavorite = isAdding
     }
     
 }
@@ -78,10 +90,6 @@ extension MovieCollectionViewCell: ViewCode {
         titleLabel.textAlignment = .center
         
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc func favoriteButtonTapped() {
-        favoriteAction?()
     }
     
 }

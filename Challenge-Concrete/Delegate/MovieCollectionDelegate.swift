@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class MovieCollectionDelegate: NSObject, MovieData, UICollectionViewDelegateFlowLayout {
+class MovieCollectionDelegate: NSObject, GenericDelegate, UICollectionViewDelegateFlowLayout {
     
     weak var moviesDelegate: MoviesDelegate?
     

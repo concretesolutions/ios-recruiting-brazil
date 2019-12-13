@@ -8,18 +8,16 @@
 import UIKit
 
 protocol MoviesVC: UIViewController, DataFetchDelegate, MoviesDelegate {
-    associatedtype A: GenericDataSource<Movie>
-    associatedtype T: MovieData
+    associatedtype T: GenericDelegate
     associatedtype G: MovieViewModel
-    var dataSource: A {get}
     var delegate: T {get set}
     var movieViewModel: G {get set}
 }
 
 extension MoviesVC {
-    func setupDelegateDataSource() {
+    func setup<T>(with dataSource: GenericDataSource<T>) {
         dataSource.dataFetchDelegate = self
         delegate.moviesDelegate = self
-        movieViewModel.dataSource = dataSource
+        movieViewModel.dataSource = dataSource as? Self.G.T
     }
 }
