@@ -10,6 +10,9 @@ import UIKit
 class MoviesGridController: UIViewController {
     private let customView = MoviesGridView()
     var pagesRequested = 1
+    var searchName: String = ""
+    var searchTimer: Timer?
+    let searchView = UIView()
     var movies = [MovieDTO]() {
         didSet {
             DispatchQueue.main.async {
@@ -36,6 +39,15 @@ class MoviesGridController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = .yellow
         self.navigationController?.navigationBar.backgroundColor = .yellow
+
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        search.searchBar.placeholder = "Search"
+        searchView.backgroundColor = .blue
+//        searchView.grid.delegate = self
+//        searchView.grid.dataSource = self
+        search.view = searchView
+        self.navigationItem.searchController = search
 
     }
 
