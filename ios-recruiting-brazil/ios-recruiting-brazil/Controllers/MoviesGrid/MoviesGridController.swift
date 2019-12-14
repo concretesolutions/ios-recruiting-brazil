@@ -9,7 +9,14 @@
 import UIKit
 class MoviesGridController: UIViewController {
     private let customView = MoviesGridView()
-    let dataSource = MoviesGridDataSource()
+//    let dataSource = MoviesGridDataSource()
+    var movies = [MovieDTO]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.customView.grid.reloadData()                
+            }
+        }
+    }
 
     override func loadView() {
         self.view = customView
@@ -17,17 +24,31 @@ class MoviesGridController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        customView.grid.dataSource = dataSource
+        customView.grid.dataSource = self
         customView.grid.delegate = self
         setNavigation()
+        requestMovies()
     }
 
-    func setNavigation() {
+    private func setNavigation() {
         self.title = "Movies"
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = .yellow
         self.navigationController?.navigationBar.backgroundColor = .yellow
+    }
+
+    private func requestMovies() {
+        let service = MovieService.getTrendingMovies
+        let session = URLSessionProvider()
+        session.request(type: MoviesResultDTO.self, service: service) { (result) in
+            switch result {
+            case .success(let result):
+                self.movies = result.movies
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

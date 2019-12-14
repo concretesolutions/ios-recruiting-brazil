@@ -9,7 +9,9 @@
 import UIKit
 class MoviesGridView: UIView, ConfigView {
     let grid: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.registerCell(cellType: MoviesCollectionViewCell.self)
         collection.backgroundColor = .white
         collection.translatesAutoresizingMaskIntoConstraints = false

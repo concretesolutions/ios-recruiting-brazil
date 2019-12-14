@@ -7,15 +7,16 @@
 //
 
 import UIKit
-class MoviesGridDataSource: NSObject, UICollectionViewDataSource {
+extension MoviesGridController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return movies.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MoviesCollectionViewCell.self)
-        cell.movieName.text = "Teste"
+        let movie = movies[indexPath.row]
+        cell.movieName.text = movie.title
         return cell
     }
 
