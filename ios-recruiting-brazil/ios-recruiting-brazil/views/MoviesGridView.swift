@@ -6,4 +6,38 @@
 //  Copyright © 2019 Adriel Freire. All rights reserved.
 //
 
-import Foundation
+import UIKit
+class MoviesGridView: UIView, ConfigView {
+    let grid: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collection.registerCell(cellType: MoviesCollectionViewCell.self)
+        collection.backgroundColor = .white
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        return collection
+    }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    func createViewHierarchy() {
+        self.addSubview(grid)
+    }
+
+    func addConstraints() {
+        //grid constraints
+        NSLayoutConstraint.activate([
+            grid.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            grid.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            grid.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            grid.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    func setAdditionalConfiguration() {
+        self.backgroundColor = .white
+    }
+}

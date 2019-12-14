@@ -41,6 +41,9 @@
 		FCA6210A23A55F2E001ACA95 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210923A55F2E001ACA95 /* MoviesCollectionViewCell.swift */; };
 		FCA6210E23A55FB6001ACA95 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210D23A55FB6001ACA95 /* Reusable.swift */; };
 		FCA6211023A55FD9001ACA95 /* UICollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210F23A55FD9001ACA95 /* UICollectionView+Reusable.swift */; };
+		FCA6211223A562D5001ACA95 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6211123A562D5001ACA95 /* ConfigView.swift */; };
+		FCA6211523A567DC001ACA95 /* MoviesGridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6211423A567DC001ACA95 /* MoviesGridController.swift */; };
+		FCA6211723A56841001ACA95 /* MoviesGridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6211623A56841001ACA95 /* MoviesGridDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,9 @@
 		FCA6210923A55F2E001ACA95 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCA6210D23A55FB6001ACA95 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		FCA6210F23A55FD9001ACA95 /* UICollectionView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Reusable.swift"; sourceTree = "<group>"; };
+		FCA6211123A562D5001ACA95 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
+		FCA6211423A567DC001ACA95 /* MoviesGridController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridController.swift; sourceTree = "<group>"; };
+		FCA6211623A56841001ACA95 /* MoviesGridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +288,7 @@
 		FCA6210623A55EE0001ACA95 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FCA6211323A567CD001ACA95 /* MoviesGrid */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -298,8 +305,18 @@
 			isa = PBXGroup;
 			children = (
 				FCA6210D23A55FB6001ACA95 /* Reusable.swift */,
+				FCA6211123A562D5001ACA95 /* ConfigView.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FCA6211323A567CD001ACA95 /* MoviesGrid */ = {
+			isa = PBXGroup;
+			children = (
+				FCA6211423A567DC001ACA95 /* MoviesGridController.swift */,
+				FCA6211623A56841001ACA95 /* MoviesGridDataSource.swift */,
+			);
+			path = MoviesGrid;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,14 +497,17 @@
 				FC16031723A25E9E008A0612 /* URLComponentExtension.swift in Sources */,
 				FC16032323A25FF1008A0612 /* URLSessionProvider.swift in Sources */,
 				FC16032023A25F8C008A0612 /* HTTPTask.swift in Sources */,
+				FCA6211523A567DC001ACA95 /* MoviesGridController.swift in Sources */,
 				FC16031E23A25F63008A0612 /* NetworError.swift in Sources */,
 				FC16030E23A25E1E008A0612 /* Service.swift in Sources */,
 				FC16033323A28346008A0612 /* URLSessionDataTaskProtocol.swift in Sources */,
 				FCA6211023A55FD9001ACA95 /* UICollectionView+Reusable.swift in Sources */,
+				FCA6211723A56841001ACA95 /* MoviesGridDataSource.swift in Sources */,
 				FC16031523A25E85008A0612 /* URLRequestExtension.swift in Sources */,
 				FC16031C23A25F39008A0612 /* ParametersEncoding.swift in Sources */,
 				FC16032623A260B7008A0612 /* MoviesService.swift in Sources */,
 				FC16033123A28148008A0612 /* URLSessionProtocol.swift in Sources */,
+				FCA6211223A562D5001ACA95 /* ConfigView.swift in Sources */,
 				FC5AB71723A1E6FA0095DDC0 /* AppDelegate.swift in Sources */,
 				FC16031A23A25F22008A0612 /* HTTPMethod.swift in Sources */,
 				FC5AB72123A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld in Sources */,
