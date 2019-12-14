@@ -9,9 +9,9 @@
 import Foundation
 final class URLSessionProvider: Provider {
 
-    private var session: URLSession
+    private var session: URLSessionProtocol
 
-    init(session: URLSession = URLSession.shared) {
+    init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
 

@@ -7,14 +7,14 @@
 //
 
 import Foundation
-extension URLSession {
+extension URLSession: URLSessionProtocol {
 
     /// Overload dataTask to work with Result type
     /// - Parameter url: The URL to be retrieved
     /// - Parameter result: The completion handler to call when the load request is complete
     func dataTask(
         with url: URLRequest,
-        result: @escaping (Result<(URLResponse, Data), Error>) -> Void) -> URLSessionDataTask {
+        result: @escaping (Result<(URLResponse, Data), Error>) -> Void) -> URLSessionDataTaskProtocol {
 
         return dataTask(with: url) { (data, response, error) in
             if let error = error {
