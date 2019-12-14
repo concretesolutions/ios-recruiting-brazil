@@ -28,10 +28,15 @@ final class MovieCellView: UICollectionViewCell {
         view.textAlignment = .center
         return view
     }()
-    let buttonLike:UIButton = {
+    lazy var buttonLike:UIButton = {
         let view = UIButton(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+        if let movie = self.movie{
+            if movieIsfavorite(by: movie.id){
+                view.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+            }
+
+        }
         return view
     }()
     let container:UIStackView = {

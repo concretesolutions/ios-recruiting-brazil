@@ -29,4 +29,10 @@ class DetailMovieController: UIViewController {
         let view = DetailMovieView(movie: movie)
         self.view = view
     }
+    @objc func favoriteMovie(sender: UIButton!) {
+        (self.view as? DetailMovieView)?.favoriteButton.setBackgroundImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+        if let movie = self.movie{
+            save(id: movie.id)
+        }
+    }
 }
