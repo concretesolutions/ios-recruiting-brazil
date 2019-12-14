@@ -36,6 +36,8 @@
 		FC5AB72323A1E6FC0095DDC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC5AB72223A1E6FC0095DDC0 /* Assets.xcassets */; };
 		FC5AB72623A1E6FC0095DDC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5AB72423A1E6FC0095DDC0 /* LaunchScreen.storyboard */; };
 		FC5AB73123A1E6FC0095DDC0 /* ios_recruiting_brazilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB73023A1E6FC0095DDC0 /* ios_recruiting_brazilTests.swift */; };
+		FC7D9ADF23A581EC007F88A2 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D9ADE23A581EC007F88A2 /* MovieDTO.swift */; };
+		FC7D9AE123A5821E007F88A2 /* MoviesResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D9AE023A5821E007F88A2 /* MoviesResultDTO.swift */; };
 		FCA6210223A5516A001ACA95 /* MockWrongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210123A5516A001ACA95 /* MockWrongModel.swift */; };
 		FCA6210823A55F1C001ACA95 /* MoviesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210723A55F1C001ACA95 /* MoviesGridView.swift */; };
 		FCA6210A23A55F2E001ACA95 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210923A55F2E001ACA95 /* MoviesCollectionViewCell.swift */; };
@@ -94,6 +96,8 @@
 		FC5AB72C23A1E6FC0095DDC0 /* ios-recruiting-brazilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-recruiting-brazilTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5AB73023A1E6FC0095DDC0 /* ios_recruiting_brazilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_recruiting_brazilTests.swift; sourceTree = "<group>"; };
 		FC5AB73223A1E6FC0095DDC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC7D9ADE23A581EC007F88A2 /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
+		FC7D9AE023A5821E007F88A2 /* MoviesResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResultDTO.swift; sourceTree = "<group>"; };
 		FCA6210123A5516A001ACA95 /* MockWrongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWrongModel.swift; sourceTree = "<group>"; };
 		FCA6210723A55F1C001ACA95 /* MoviesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridView.swift; sourceTree = "<group>"; };
 		FCA6210923A55F2E001ACA95 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				FC16030923A25DD9008A0612 /* Network */,
+				FC7D9ADD23A581BB007F88A2 /* Models */,
 				FCA6210623A55EE0001ACA95 /* Controllers */,
 				FCA6210323A55EC3001ACA95 /* views */,
 				FCA6210B23A55F34001ACA95 /* Extensions */,
@@ -274,6 +279,15 @@
 				FC5AB73223A1E6FC0095DDC0 /* Info.plist */,
 			);
 			path = "ios-recruiting-brazilTests";
+			sourceTree = "<group>";
+		};
+		FC7D9ADD23A581BB007F88A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FC7D9ADE23A581EC007F88A2 /* MovieDTO.swift */,
+				FC7D9AE023A5821E007F88A2 /* MoviesResultDTO.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FCA6210323A55EC3001ACA95 /* views */ = {
@@ -495,6 +509,7 @@
 				FC5AB71B23A1E6FA0095DDC0 /* ViewController.swift in Sources */,
 				FCA6210E23A55FB6001ACA95 /* Reusable.swift in Sources */,
 				FC16031723A25E9E008A0612 /* URLComponentExtension.swift in Sources */,
+				FC7D9ADF23A581EC007F88A2 /* MovieDTO.swift in Sources */,
 				FC16032323A25FF1008A0612 /* URLSessionProvider.swift in Sources */,
 				FC16032023A25F8C008A0612 /* HTTPTask.swift in Sources */,
 				FCA6211523A567DC001ACA95 /* MoviesGridController.swift in Sources */,
@@ -511,6 +526,7 @@
 				FC5AB71723A1E6FA0095DDC0 /* AppDelegate.swift in Sources */,
 				FC16031A23A25F22008A0612 /* HTTPMethod.swift in Sources */,
 				FC5AB72123A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld in Sources */,
+				FC7D9AE123A5821E007F88A2 /* MoviesResultDTO.swift in Sources */,
 				FCA6210A23A55F2E001ACA95 /* MoviesCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
