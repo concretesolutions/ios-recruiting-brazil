@@ -34,6 +34,7 @@
 		97BE542623A285B0000639D8 /* ManegerApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE542523A285B0000639D8 /* ManegerApiRequest.swift */; };
 		97BE542823A28846000639D8 /* SendDataApi .swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE542723A28846000639D8 /* SendDataApi .swift */; };
 		B0FBD41B1BC6A4C771EB8343 /* Pods_DesafioIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */; };
+		E625607923A5813F005CF564 /* ModelCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E625607723A5813F005CF564 /* ModelCoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		A68FD1768CC4D05DBDCC0CFC /* Pods-DesafioIos-DesafioIosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos-DesafioIosUITests.debug.xcconfig"; path = "Target Support Files/Pods-DesafioIos-DesafioIosUITests/Pods-DesafioIos-DesafioIosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5025EA2C77350FC43159B97 /* Pods-DesafioIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos.debug.xcconfig"; path = "Target Support Files/Pods-DesafioIos/Pods-DesafioIos.debug.xcconfig"; sourceTree = "<group>"; };
+		E625607823A5813F005CF564 /* ModelCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelCoreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				97BE542323A276A5000639D8 /* Helpers.swift */,
 				97BE542523A285B0000639D8 /* ManegerApiRequest.swift */,
 				97BE542723A28846000639D8 /* SendDataApi .swift */,
+				E625607723A5813F005CF564 /* ModelCoreData.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				97BE540C239A914E000639D8 /* CodeView.swift in Sources */,
 				97BE541923A01B41000639D8 /* UIImageLoad.swift in Sources */,
 				97BE5417239FE873000639D8 /* ManegerModel .swift in Sources */,
+				E625607923A5813F005CF564 /* ModelCoreData.xcdatamodeld in Sources */,
 				97BE5409239A90F9000639D8 /* FavoriteMoviesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,6 +816,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E625607723A5813F005CF564 /* ModelCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E625607823A5813F005CF564 /* ModelCoreData.xcdatamodel */,
+			);
+			currentVersion = E625607823A5813F005CF564 /* ModelCoreData.xcdatamodel */;
+			path = ModelCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 97BE53C2239A8AE6000639D8 /* Project object */;
 }
