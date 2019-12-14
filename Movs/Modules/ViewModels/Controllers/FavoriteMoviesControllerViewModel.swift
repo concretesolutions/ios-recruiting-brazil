@@ -12,27 +12,27 @@ class FavoriteMoviesControllerViewModel {
     
     // MARK: - Dependencies
     
-    typealias Dependencies = HasAPIManager & HasCoreDataManager
+    typealias Dependencies = HasAPIManager & HasStorageManager
     internal let dependencies: Dependencies
     internal let apiManager: MoviesAPIManager
-    internal let coreDataManager: CoreDataManager
+    internal let storageManager: StorageManager
     
     // MARK: - Initializers and Deinitializers
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
-        self.coreDataManager = dependencies.coreDataManager
+        self.storageManager = dependencies.storageManager
         self.apiManager = dependencies.apiManager
     }
     
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
-        let favoriteMovie = Array(self.coreDataManager.favorites)[indexPath.row]
+        let favoriteMovie = Array(self.storageManager.favorites)[indexPath.row]
         let movie = Movie(favoriteMovie: favoriteMovie, genres: self.apiManager.genres)
         return MovieViewModel(movie: movie, dependencies: self.dependencies)
     }
     
     func removeItemAt(indexPath: IndexPath) {
-        let favoriteMovie = Array(self.coreDataManager.favorites)[indexPath.row]
-        self.coreDataManager.removeFavorite(movieID: favoriteMovie.id)
+        let favoriteMovie = Array(self.storageManager.favorites)[indexPath.row]
+        self.storageManager.removeFavorite(movieID: favoriteMovie.id)
     }
 }

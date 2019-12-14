@@ -10,7 +10,7 @@
 
 import Foundation
 
-class MovieDTO: Decodable {
+struct MovieDTO: Decodable, Equatable {
     
     // MARK: - Attributes
     
@@ -34,33 +34,5 @@ class MovieDTO: Decodable {
         case releaseDate = "release_date"
         case title
         case overview
-    }
-    
-    // MARK: - Initializers and Deinitializers
-    
-    init(id: Int, backdropPath: String?, genreIDS: [Int], popularity: Double, posterPath: String?, releaseDate: String, title: String, overview: String) {
-        self.id = id
-        self.backdropPath = backdropPath
-        self.genreIDS = genreIDS
-        self.popularity = popularity
-        self.posterPath = posterPath
-        self.releaseDate = releaseDate
-        self.title = title
-        self.overview = overview
-    }
-    
-    required public convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: MovieDTO.CodingKeys.self)
-        
-        let id: Int = try container.decode(Int.self, forKey: .id)
-        let backdropPath: String? = try container.decode(String?.self, forKey: .backdropPath)
-        let genreIDS: [Int] = try container.decode([Int].self, forKey: .genreIDS)
-        let popularity: Double = try container.decode(Double.self, forKey: .popularity)
-        let posterPath: String? = try container.decode(String?.self, forKey: .posterPath)
-        let releaseDate: String = try container.decode(String.self, forKey: .releaseDate)
-        let title: String = try container.decode(String.self, forKey: .title)
-        let overview: String = try container.decode(String.self, forKey: .overview)
-        
-        self.init(id: id, backdropPath: backdropPath, genreIDS: genreIDS, popularity: popularity, posterPath: posterPath, releaseDate: releaseDate, title: title, overview: overview)
     }
 }

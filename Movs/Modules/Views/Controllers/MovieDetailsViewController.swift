@@ -36,7 +36,7 @@ class MovieDetailsViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        let favoriteStatus = self.viewModel.coreDataManager.isFavorited(movieID: self.viewModel.id)
+        let favoriteStatus = self.viewModel.storageManager.isFavorited(movieID: self.viewModel.id)
         
         self.screen.titleLabel.text = self.viewModel.title
         self.screen.favoriteButton.setFavorited(favoriteStatus)

@@ -59,7 +59,7 @@ class FavoriteMoviesViewController: UIViewController {
     // MARK: - Binding
     
     func bind(to viewModel: FavoriteMoviesControllerViewModel) {
-        self.subscribers.append(viewModel.coreDataManager.$favorites
+        self.subscribers.append(viewModel.storageManager.$favorites
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
                 if let deletedIndex = self.deletedRowIndex {

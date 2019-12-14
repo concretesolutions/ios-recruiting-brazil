@@ -41,7 +41,7 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     
     internal var viewModel: MovieViewModel! {
         didSet {
-            let favoriteStatus = self.viewModel.coreDataManager.isFavorited(movieID: self.viewModel.id)
+            let favoriteStatus = self.viewModel.storageManager.isFavorited(movieID: self.viewModel.id)
             self.titleLabel.text = self.viewModel.title
             self.favoriteButton.setFavorited(favoriteStatus)
             

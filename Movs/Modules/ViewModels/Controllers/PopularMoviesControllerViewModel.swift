@@ -13,10 +13,10 @@ class PopularMoviesControllerViewModel {
     
     // MARK: - Dependencies
     
-    typealias Dependencies = HasAPIManager & HasCoreDataManager
+    typealias Dependencies = HasAPIManager & HasStorageManager
     private let dependencies: Dependencies
     internal let apiManager: MoviesAPIManager
-    internal let coreDataManager: CoreDataManager
+    internal let storageManager: StorageManager
     
     // MARK: - Properties
 
@@ -33,7 +33,7 @@ class PopularMoviesControllerViewModel {
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
-        self.coreDataManager = dependencies.coreDataManager
+        self.storageManager = dependencies.storageManager
         self.apiManager = dependencies.apiManager
     }
     
@@ -73,7 +73,7 @@ class PopularMoviesControllerViewModel {
     
     private func updateData(with popularMovies: PopularMoviesDTO) {
         self.currentPage = popularMovies.page
-        self.apiManager.movies += popularMovies.movies
-        self.numberOfMovies += popularMovies.movies.count
+        self.apiManager.movies += popularMovies.results
+        self.numberOfMovies += popularMovies.results.count
     }
 }

@@ -18,8 +18,8 @@ class MovieViewModel {
     
     // MARK: - Dependencies
     
-    typealias Dependencies = HasCoreDataManager
-    internal let coreDataManager: CoreDataManager
+    typealias Dependencies = HasStorageManager
+    internal let storageManager: StorageManager
     
     // MARK: - Properties
     
@@ -39,13 +39,13 @@ class MovieViewModel {
     
     init(movie: Movie, dependencies: Dependencies) {
         self.movie = movie
-        self.coreDataManager = dependencies.coreDataManager
+        self.storageManager = dependencies.storageManager
         
         self.backdropPath = movie.backdropPath
         self.id = movie.id
         self.genresNames = Set(movie.genres.map({ $0.name }))
         self.posterPath = movie.posterPath
-        self.releaseYear = String(date: movie.releaseDate, components: [.year])
+        self.releaseYear = String(date: movie.releaseDate, format: "yyyy")
         self.title = movie.title
         self.summary = movie.summary
     }
@@ -53,10 +53,10 @@ class MovieViewModel {
     // MARK: -
     
     func addToFavorites() {
-        self.coreDataManager.addFavorite(movie: self.movie)
+        self.storageManager.addFavorite(movie: self.movie)
     }
     
     func removeFromFavorites() {
-        self.coreDataManager.removeFavorite(movieID: Int64(self.id))
+        self.storageManager.removeFavorite(movieID: Int64(self.id))
     }
 }

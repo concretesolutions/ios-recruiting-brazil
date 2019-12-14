@@ -29,13 +29,18 @@ class Movie {
         self.backdropPath = backdropPath
         self.genres = genres
         self.posterPath = posterPath
-        self.releaseDate = Date(string: releaseDate)
         self.title = title
         self.summary = summary
+        
+        do {
+            self.releaseDate = try Date(string: releaseDate)
+        } catch {
+            fatalError("Failed to initialize date from string \(releaseDate).")
+        }
     }
     
-    convenience init(favoriteMovie: CDFavoriteMovie, genres: [GenreDTO]) {        
-        let date = String(date: favoriteMovie.releaseDate!, components: [.year, .month, .day])
+    convenience init(favoriteMovie: CDFavoriteMovie, genres: [GenreDTO]) {
+        let dateString = String(date: favoriteMovie.releaseDate!)
         let genres: Set<Genre> = Set(
             genres.filter({ genreDTO in
                 favoriteMovie.genreIDs!.contains(genreDTO.id)
@@ -44,7 +49,7 @@ class Movie {
             })
         )
 
-        self.init(id: Int(favoriteMovie.id), backdropPath: favoriteMovie.backdropPath, genres: genres, posterPath: favoriteMovie.posterPath, releaseDate: date, title: favoriteMovie.title!, summary: favoriteMovie.summary!)
+        self.init(id: Int(favoriteMovie.id), backdropPath: favoriteMovie.backdropPath, genres: genres, posterPath: favoriteMovie.posterPath, releaseDate: dateString, title: favoriteMovie.title!, summary: favoriteMovie.summary!)
     }
     
     convenience init(movieDTO: MovieDTO, genres: [GenreDTO]) {

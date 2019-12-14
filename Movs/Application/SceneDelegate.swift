@@ -11,18 +11,22 @@ import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    // MARK: - Properties
+    
     var window: UIWindow?
-    var appCoordinator: AppCoordinator?
 
+    // MARK: - UIWindowSceneDelegate life cycle
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
+        guard let appDelegate = (UIApplication.shared.delegate as? AppDelegate) else { return }
         
         self.window = UIWindow(windowScene: scene)
-        self.appCoordinator = AppCoordinator(window: self.window!)
-        self.appCoordinator?.start()
+        appDelegate.appCoordinator = AppCoordinator(window: self.window!)
+        appDelegate.appCoordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -53,6 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        guard let appDelegate = (UIApplication.shared.delegate as? AppDelegate) else { return }
+        appDelegate.appCoordinator?.dependencies.storageManager.save()
     }
 }

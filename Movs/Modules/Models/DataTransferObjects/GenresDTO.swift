@@ -8,27 +8,10 @@
 
 import Foundation
 
-class GenresDTO: Decodable {
+struct GenresDTO: Decodable, Equatable {
     
     // MARK: - Attributes
     
     let genres: [GenreDTO]
-
-    // MARK: - Enums
     
-    enum CodingKeys: String, CodingKey {
-        case genres
-    }
-    
-    // MARK: - Initializers and Deinitializers
-    
-    init(genres: [GenreDTO]) {
-        self.genres = genres
-    }
-    
-    required public convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: GenresDTO.CodingKeys.self)
-        let genres: [GenreDTO] = try container.decode([GenreDTO].self, forKey: .genres)
-        self.init(genres: genres)
-    }
 }

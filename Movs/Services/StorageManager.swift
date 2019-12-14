@@ -1,5 +1,5 @@
 //
-//  CoreDataManager.swift
+//  StorageManager.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 07/12/19.
@@ -9,22 +9,32 @@
 import UIKit
 import CoreData
 
-class CoreDataManager {
+class StorageManager {
     
     // MARK: - Properties
     
-    private let managedContext: NSManagedObjectContext
+    internal let managedContext: NSManagedObjectContext
+    internal let persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Movs")
+        container.loadPersistentStores(completionHandler: { (_, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    // MARK: - Publishers
+    
     @Published var favorites: Set<CDFavoriteMovie> = Set()
     
     // MARK: - Initializers and Deinitializers
     
     init() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError("Failed to retrieve AppDelegate")
-        }
+        self.managedContext = self.persistentContainer.viewContext
         
-        self.managedContext = appDelegate.persistentContainer.viewContext
-        self.favorites = self.fetch(request: NSFetchRequest<CDFavoriteMovie>(entityName: "CDFavoriteMovie"))
+        let fetchAllFavorites = NSFetchRequest<CDFavoriteMovie>(entityName: "CDFavoriteMovie")
+        self.favorites = self.fetch(request: fetchAllFavorites)
     }
     
     // MARK: - Management
@@ -45,6 +55,17 @@ class CoreDataManager {
         }
     }
     
+    func save() {
+        if self.managedContext.hasChanges {
+            do {
+                try self.managedContext.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
     // MARK: - Update methods
     
     func isFavorited(movieID: Int) -> Bool {
@@ -62,6 +83,16 @@ class CoreDataManager {
         self.favorites.insert(favoriteMovie)
     }
     
+    func removeFavorite(movieID: Int64) {
+        let objects = self.favorites.filter({ $0.id == movieID })
+        for object in objects {
+            self.managedContext.delete(object)
+            self.favorites.remove(object)
+        }
+    }
+}
+
+extension StorageManager: CoreDataFactory {
     func createFavoriteMovie(movie: Movie, description: NSEntityDescription) -> CDFavoriteMovie {
         let instance = CDFavoriteMovie(entity: description, insertInto: self.managedContext)
         instance.backdropPath = movie.backdropPath
@@ -72,13 +103,5 @@ class CoreDataManager {
         instance.summary = movie.summary
         instance.title = movie.title
         return instance
-    }
-    
-    func removeFavorite(movieID: Int64) {
-        let objects = self.favorites.filter({ $0.id == movieID })
-        for object in objects {
-            self.managedContext.delete(object)
-            self.favorites.remove(object)
-        }
     }
 }

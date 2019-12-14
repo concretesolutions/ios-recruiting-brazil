@@ -9,9 +9,23 @@
 import Foundation
 
 extension Date {
-    init(string: String, format: String = "yyyy-MM-dd") {
+    
+    // MARK: - Enums
+    
+    enum ConversionError: Error {
+        case runtimeError(String)
+    }
+    
+    // MARK: - Initializers
+    
+    init(string: String, format: String = "yyyy-MM-dd") throws {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        self = dateFormatter.date(from: string)!
+        
+        if let formattedString = dateFormatter.date(from: string) {
+            self = formattedString
+        } else {
+            throw ConversionError.runtimeError("Failed to match string \"\(string)\" for provided format \"\(format)\".")
+        }
     }
 }

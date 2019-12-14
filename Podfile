@@ -13,14 +13,15 @@ target 'Movs' do
   target 'MovsTests' do
     inherit! :search_paths
     # Pods for testing
-    pod "Quick"
-    pod "Nimble"
+    pod 'Quick'
+    pod 'Nimble'
   end
 
   target 'MovsUITests' do
+    inherit! :search_paths
     # Pods for testing
-    pod "Quick"
-    pod "Nimble"
+    pod 'Quick'
+    pod 'Nimble'
   end
 
 end

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_Movs_MovsUITestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_Movs_MovsUITestsVersionString[];
+FOUNDATION_EXPORT double Pods_MovsUITestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_MovsUITestsVersionString[];
 

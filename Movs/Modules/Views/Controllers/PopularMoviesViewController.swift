@@ -70,7 +70,7 @@ class PopularMoviesViewController: UIViewController {
             })
         )
         
-        self.subscribers.append(viewModel.coreDataManager.$favorites
+        self.subscribers.append(viewModel.storageManager.$favorites
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
                 self.screen.moviesCollectionView.reloadData()

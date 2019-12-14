@@ -10,21 +10,21 @@ protocol HasAPIManager {
     var apiManager: MoviesAPIManager { get }
 }
 
-protocol HasCoreDataManager {
-    var coreDataManager: CoreDataManager { get }
+protocol HasStorageManager {
+    var storageManager: StorageManager { get }
 }
 
-class Dependencies: HasAPIManager, HasCoreDataManager {
+class Dependencies: HasAPIManager, HasStorageManager {
     
     // MARK: - Properties
     
     let apiManager: MoviesAPIManager
-    let coreDataManager: CoreDataManager
+    let storageManager: StorageManager
 
     // MARK: - Initializers and Deinitializers
     
-    init(apiManager: MoviesAPIManager = MoviesAPIManager(), coreDataManager: CoreDataManager = CoreDataManager()) {
+    init(apiManager: MoviesAPIManager = MoviesAPIManager(), storageManager: StorageManager = StorageManager()) {
         self.apiManager = apiManager
-        self.coreDataManager = coreDataManager
+        self.storageManager = storageManager
     }
 }
