@@ -9,11 +9,10 @@
 import UIKit
 class MoviesGridController: UIViewController {
     private let customView = MoviesGridView()
-//    let dataSource = MoviesGridDataSource()
     var movies = [MovieDTO]() {
         didSet {
             DispatchQueue.main.async {
-                self.customView.grid.reloadData()                
+                self.customView.grid.reloadData()
             }
         }
     }
@@ -36,6 +35,7 @@ class MoviesGridController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = .yellow
         self.navigationController?.navigationBar.backgroundColor = .yellow
+
     }
 
     private func requestMovies() {

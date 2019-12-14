@@ -20,18 +20,28 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .yellow
-        label.backgroundColor = .darkGray
         label.font = .boldSystemFont(ofSize: 18)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    let wrapperView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     let favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+        button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        movieImage.image = nil
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,6 +54,7 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
 
     func createViewHierarchy() {
         self.addSubview(movieImage)
+        self.addSubview(wrapperView)
         self.addSubview(movieName)
         self.addSubview(favoriteButton)
 
@@ -60,17 +71,27 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
         //movieName constraints
         NSLayoutConstraint.activate([
             movieName.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            movieName.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            movieName.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            movieName.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor),
+            movieName.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             movieName.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2)
         ])
 
-        //favoriteButton constraint
+        //wrapperView constraints
         NSLayoutConstraint.activate([
-            favoriteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            wrapperView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            wrapperView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            wrapperView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            wrapperView.topAnchor.constraint(equalTo: movieName.topAnchor)
+        ])
+
+        //favoriteButton constraint
+        let buttonHeight = favoriteButton.currentImage?.size.height ?? 50
+        let buttonWidth = favoriteButton.currentImage?.size.width ?? 50
+        NSLayoutConstraint.activate([
+            favoriteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             favoriteButton.centerYAnchor.constraint(equalTo: movieName.centerYAnchor),
-            favoriteButton.heightAnchor.constraint(equalTo: movieImage.heightAnchor, multiplier: 0.3),
-            favoriteButton.widthAnchor.constraint(equalTo: favoriteButton.heightAnchor, multiplier: 0.5)
+            favoriteButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            favoriteButton.widthAnchor.constraint(equalToConstant: buttonWidth)
         ])
 
     }
