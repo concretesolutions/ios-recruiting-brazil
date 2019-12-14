@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [LaunchOptions: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = MoviesGridController()
+        self.window?.rootViewController = UINavigationController(rootViewController: MoviesGridController())
         self.window?.makeKeyAndVisible()
         return true
     }

@@ -33,6 +33,15 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
         return button
     }()
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func createViewHierarchy() {
         self.addSubview(movieImage)
         self.addSubview(movieName)
