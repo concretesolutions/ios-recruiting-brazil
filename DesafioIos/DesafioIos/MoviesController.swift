@@ -52,7 +52,12 @@ class MoviesController: UIViewController , SendDataApi {
     func sendMovie(movies: [Movie]) {
         moviesData.append(contentsOf: movies)
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+
 }
 // MARK: - Protocols of CollectionView
 
@@ -62,8 +67,8 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCellView 
-        cell.movie = self.filterMovies[indexPath.row]
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCellView
+        cell.setupUIData(movie: filterMovies[indexPath.row])
         return cell
     }
     
