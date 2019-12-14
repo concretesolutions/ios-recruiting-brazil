@@ -17,7 +17,6 @@ class MockURLSession: URLSessionProtocol {
         return nextDataTask
     }
     
-//    private (set) var lastURL: URL?
 
     private func loadJson(withTitle title: String) -> Data {
         var data = Data()
