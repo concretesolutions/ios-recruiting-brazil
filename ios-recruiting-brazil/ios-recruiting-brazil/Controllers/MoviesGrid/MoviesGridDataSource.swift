@@ -17,6 +17,7 @@ extension MoviesGridController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MoviesCollectionViewCell.self)
         let movie = movies[indexPath.row]
         cell.movieName.text = movie.title
+        cell.movieImage.image = nil
 
         let service = MovieService.getImage(movie.poster)
         let session = URLSessionProvider()
@@ -32,6 +33,14 @@ extension MoviesGridController: UICollectionViewDataSource {
         }
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == movies.count - 5 {
+            pagesRequested += 1
+            requestMovies(page: pagesRequested)
+        }
     }
 
 }

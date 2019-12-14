@@ -9,6 +9,7 @@
 import UIKit
 class MoviesGridController: UIViewController {
     private let customView = MoviesGridView()
+    var pagesRequested = 1
     var movies = [MovieDTO]() {
         didSet {
             DispatchQueue.main.async {
@@ -38,13 +39,13 @@ class MoviesGridController: UIViewController {
 
     }
 
-    private func requestMovies() {
-        let service = MovieService.getTrendingMovies
+    func requestMovies(page: Int = 1) {
+        let service = MovieService.getTrendingMovies(page)
         let session = URLSessionProvider()
         session.request(type: MoviesResultDTO.self, service: service) { (result) in
             switch result {
             case .success(let result):
-                self.movies = result.movies
+                self.movies.append(contentsOf: result.movies)
             case .failure(let error):
                 print(error)
             }
