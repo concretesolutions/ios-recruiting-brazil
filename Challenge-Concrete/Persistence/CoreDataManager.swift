@@ -25,6 +25,7 @@ class CoreDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return container
     }()
     
@@ -45,6 +46,12 @@ class CoreDataManager {
            let favMovie: [T] = CoreDataManager.fetch(predicate: predicate)
            return favMovie.first
     }
+    
+//    static func fetchBy<T: PersistableObject>(name: String) -> T? {
+//           let predicate = NSPredicate(format: "(name == %d)", name)
+//           let favMovie: [T] = CoreDataManager.fetch(predicate: predicate)
+//           return favMovie.first
+//    }
     
     static func isSaved<T: PersistableObject>(entityType: T.Type, id: Int) -> Bool {
         let item: T? = fetchBy(id: id)

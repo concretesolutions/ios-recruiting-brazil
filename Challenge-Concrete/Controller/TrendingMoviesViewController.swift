@@ -29,6 +29,10 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         setup(with: dataSource)
         moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
         movieViewModel.fetchTrendingMovies()
+        movieViewModel.fetchGenres { genres in
+            let localGenre: [GenreLocal] = CoreDataManager.fetch()
+            print("LOCAL: \(localGenre.count)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

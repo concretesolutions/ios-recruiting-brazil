@@ -12,6 +12,7 @@ class MovieDetailViewController: UIViewController {
     let movieDetailView: MovieDetailView
     var movie: Movie!
     var favoriteMovie: FavoriteMovie!
+    let movieDetailViewModel = MovieDetailViewModel()
     
     weak var favoriteMovieDelegate: FavoriteMovieDelegate?
     init(with movie: Movie) {
@@ -34,6 +35,16 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         
         movieDetailView.favoriteAction = favoriteAction(_:)
+        
+        var genresString = ""
+        if let movie = movie {
+            genresString = movieDetailViewModel.getGenres(movie)
+        } else if let favoriteMovie = favoriteMovie {
+            genresString = movieDetailViewModel.getGenres(favoriteMovie)
+        }
+        self.movieDetailView.genders.text = genresString
+        
+
     }
     
     func favoriteAction(_ isFavorite: Bool) {

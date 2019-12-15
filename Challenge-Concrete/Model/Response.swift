@@ -12,3 +12,7 @@ struct Response<T: Decodable>: Decodable {
     let totalPages: Int
     let totalResults: Int
 }
+
+struct GenreResponse: Decodable {
+    let genres: [Genre]
+}

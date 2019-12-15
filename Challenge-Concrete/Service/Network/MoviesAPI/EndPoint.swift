@@ -9,6 +9,7 @@
 enum EndPoint {
     case getMovie(id: Int)
     case getTrending(mediaType: MediaType, timeWindow: TimeWindow)
+    case getGenres
     case searchMovie(query: String)
 }
 
@@ -25,6 +26,8 @@ extension EndPoint: RouterService {
             return "/trending/\(mediaType.rawValue)/\(timeWindow.rawValue)"
         case .searchMovie:
             return "/search/movie"
+        case .getGenres:
+            return "/genre/movie/list"
         }
         
     }

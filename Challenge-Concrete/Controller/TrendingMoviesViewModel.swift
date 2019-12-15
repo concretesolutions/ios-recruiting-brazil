@@ -23,6 +23,46 @@ class TrendingMoviesViewModel: MovieViewModel {
         }
     }
     
+    func fetchGenres(completion: @escaping ([Genre]) -> Void) {
+        let apiProvider = APIProvider<Genre>()
+        apiProvider.request(EndPoint.getGenres) { (result: Result<GenreResponse, NetworkError>) in
+                switch result {
+                case .success(let response):
+                    let genres = response.genres
+                    if self.genreIsDifferentFromLocal(genres) {
+                        self.saveAllGenresLocal(genres)
+                    }
+                    completion(genres)
+                case .failure:
+                    break
+                }
+        }
+    }
+    
+    func genreIsDifferentFromLocal(_ genres: [Genre]) -> Bool {
+        var isDifferent = true
+        for genre in genres {
+            if let _: GenreLocal = CoreDataManager.fetchBy(id: genre.id) {
+                isDifferent = false
+                break
+            }
+        }
+        
+        return isDifferent
+    }
+    
+    func saveAllGenresLocal(_ genres: [Genre]) {
+        CoreDataManager.delete(entityType: GenreLocal.self)
+        genres.forEach { genre in
+            saveGenreLocal(genre)
+        }
+    }
+    
+    private func saveGenreLocal(_ genre: Genre) {
+        _ = GenreLocal(id: Int64(genre.id), name: genre.name)
+        CoreDataManager.saveContext()
+    }
+    
     private func fetch(endPoint: EndPoint, errorHandling: @escaping (NetworkError) -> Void) {
         let apiProvider = APIProvider<Movie>()
         apiProvider.request(endPoint) { (result: Result<Response<Movie>, NetworkError>) in

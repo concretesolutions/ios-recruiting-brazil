@@ -84,7 +84,7 @@ extension MovieDetailView: ViewCode {
         
         title.anchor
             .top(movieImageView.bottomAnchor, padding: 16)
-            .left(scrollView.leftAnchor, padding: 16)
+            .left(safeAreaLayoutGuide.leftAnchor, padding: 16)
             .right(favoriteButton.leftAnchor, padding: 16)
         
         favoriteButton.anchor
@@ -95,13 +95,13 @@ extension MovieDetailView: ViewCode {
         
         year.anchor
             .top(title.bottomAnchor, padding: 16)
-            .left(scrollView.leftAnchor, padding: 16)
-            .right(scrollView.rightAnchor, padding: 16)
+            .left(safeAreaLayoutGuide.leftAnchor, padding: 16)
+            .right(safeAreaLayoutGuide.rightAnchor, padding: 16)
         
         genders.anchor
             .top(year.bottomAnchor, padding: 16)
-            .left(scrollView.leftAnchor, padding: 16)
-            .right(scrollView.rightAnchor, padding: 16)
+            .left(safeAreaLayoutGuide.leftAnchor, padding: 16)
+            .right(safeAreaLayoutGuide.rightAnchor, padding: 16)
         
         overview.anchor
             .top(genders.bottomAnchor, padding: 16)
@@ -114,7 +114,7 @@ extension MovieDetailView: ViewCode {
         backgroundColor = .white
         movieImageView.contentMode = .scaleAspectFill
         movieImageView.clipsToBounds = true
-        genders.text = "Action, Adventure"
+        genders.numberOfLines = 0
         overview.numberOfLines = 0
         
     }

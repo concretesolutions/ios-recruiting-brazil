@@ -7,10 +7,12 @@
 //
 import Foundation
 
-class Movie: Codable {
+class Movie: Decodable {
     let id: Int
-    var title, name, releaseDate, originalTitle, originalName: String?
-    var genreIDS: [Int]?
+    var title: String?
+    var name: String?
+    var releaseDate: String?
+    var genreIds: [Int]?
     let overview: String
     var posterPath: String?
     var mediaType: String?
