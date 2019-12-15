@@ -9,8 +9,13 @@
 import UIKit
 
 class MovieDetailViewController: UIViewController {
+    let movieDetailView = MovieDetailView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+    }
+    
+    override func loadView() {
+        view = movieDetailView
     }
 }

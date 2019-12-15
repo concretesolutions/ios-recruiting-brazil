@@ -31,10 +31,11 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         movieViewModel.fetchTrendingMovies()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        moviesView.reloadCollectionData()
-    }
+    //TODO: Update favorite icon in trending when unfavorite movie
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        moviesView.reloadCollectionData()
+//    }
     
     func setupSearchController() {
         navigationItem.searchController = searchController
