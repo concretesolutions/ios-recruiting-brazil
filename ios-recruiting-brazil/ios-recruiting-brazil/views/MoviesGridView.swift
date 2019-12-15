@@ -17,6 +17,11 @@ class MoviesGridView: UIView, ConfigView {
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
+    let activityView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +33,7 @@ class MoviesGridView: UIView, ConfigView {
     }
     func createViewHierarchy() {
         self.addSubview(grid)
+        self.addSubview(activityView)
     }
 
     func addConstraints() {
@@ -38,8 +44,19 @@ class MoviesGridView: UIView, ConfigView {
             grid.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             grid.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
+        //activityView constraints
+        NSLayoutConstraint.activate([
+            activityView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            activityView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityView.widthAnchor.constraint(equalToConstant: 100),
+            activityView.heightAnchor.constraint(equalToConstant: 100)
+        ])
     }
     func setAdditionalConfiguration() {
         self.backgroundColor = .white
+        activityView.startAnimating()
+    }
+    func stopActivityIndicator() {
+        self.activityView.stopAnimating()
     }
 }
