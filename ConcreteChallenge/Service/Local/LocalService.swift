@@ -29,7 +29,7 @@ final class LocalService {
         /// Identifier to save and retrieve favorites
         case favorites = "Favorites"
         /// Identifier to save and retrieve genres
-        case genres = "Genres"
+        case genreList = "GenreList"
     }
 }
 
@@ -43,7 +43,7 @@ extension LocalService {
         
         do {
             try JSONEncoder().encode(favorites).write(to: url)
-            os_log("Saved favorites at @", log: Logger.appLog(), type: .info, String(describing: url))
+            os_log("💾 - Saved favorites at @", log: Logger.appLog(), type: .info, String(describing: url))
         } catch {
             os_log("❌ - Could not save at @", log: Logger.appLog(), type: .fault, String(describing: url))
         }
@@ -75,8 +75,8 @@ extension LocalService {
         // Else can't remove from something nil
     }
     
-    /// Get the favorite movie IDs
-    func getFavorites() -> [Int : Movie]? {
+    /// Get the favorite movies dictionary
+    private func getFavorites() -> [Int : Movie]? {
         let url = getURLInDocumentDir(for: LocalService.Identifier.favorites.rawValue)
         do {
             let readData = try Data(contentsOf: url)
@@ -95,6 +95,10 @@ extension LocalService {
         return true
     }
     
+    /**
+     Check multiple favorites at once, and set the `isFavorite` property accordingly.
+     - Parameter movies: The movie list to be checked.
+     */
     func checkFavorites(on movies: [Movie]) {
         guard let favorites = getFavorites() else {
             return
@@ -102,5 +106,70 @@ extension LocalService {
         // A movie is a favorite if it's contained in the local favorites list
         // Since movies are passed by reference, it's only necessary to set here
         movies.forEach { $0.isFavorite = (favorites[$0.id] != nil) }
+    }
+}
+
+// MARK: - Genre list saving -
+extension LocalService {
+    /// Save the genre list as a dictionary with the genre id as key
+    private func saveGenreList(_ list: [Int : Genre]) {
+        
+        let url = getURLInDocumentDir(for: LocalService.Identifier.genreList.rawValue)
+        
+        do {
+            try JSONEncoder().encode(list).write(to: url)
+            os_log("💾 - Saved genres at @", log: Logger.appLog(), type: .info, String(describing: url))
+        } catch {
+            os_log("❌ - Could not save genres at @", log: Logger.appLog(), type: .fault, String(describing: url))
+        }
+    }
+    
+    private func getGenres() -> [Int : Genre]? {
+        
+        let url = getURLInDocumentDir(for: LocalService.Identifier.genreList.rawValue)
+        do {
+            let readData = try Data(contentsOf: url)
+            let genreList = try JSONDecoder().decode([Int : Genre].self, from: readData)
+            return genreList
+        } catch {
+            os_log("Could not read from @", log: Logger.appLog(), type: .info, String(describing: url))
+        }
+        return nil
+    }
+    
+    /**
+     Saves the genre list locally.
+     - Parameter list: The `Genre` list to be saved.
+     - Important: The existing list will be overriten, may there be one.
+     */
+    func setGenres(list: [Genre]) {
+        
+        var genresToSave: [Int: Genre] = [:]
+        list.forEach { genresToSave[$0.id] = $0 }
+        
+        saveGenreList(genresToSave)
+    }
+    
+    /**
+     Get the locally stored genres.
+     - Parameter genreIDs: List of genre IDs.
+     - Returns: A list of the found `Genre` or `nil` if one or more genres were not found.
+     - Important: If a genre is not found, it may be time to update the saved ones.
+     */
+    func getGenreList(from genreIDs: [Int]) -> [Genre]? {
+        
+        var foundGenres = [Genre]()
+        guard let genreDict = getGenres() else {
+            // There's no genres saved locally
+            return nil
+        }
+        for id in genreIDs {
+            guard let genre = genreDict[id] else {
+                // Means it got a genre not in the list
+                return nil
+            }
+            foundGenres.append(genre)
+        }
+        return foundGenres
     }
 }

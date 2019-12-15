@@ -57,8 +57,12 @@ class MovieClient {
                     do {
                         let decoder = JSONDecoder()
                         let decodedJson = try decoder.decode(GenreListResponse.self, from: jsonData)
+                        let genreList = decodedJson.genres
                         
-                        completion(decodedJson.genres, nil)
+                        // Save locally the results
+                        LocalService.instance.setGenres(list: genreList)
+                        
+                        completion(genreList, nil)
                     } catch {
                         completion(nil, error)
                         debugPrint(error)

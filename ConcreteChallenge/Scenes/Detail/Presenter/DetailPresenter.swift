@@ -60,17 +60,27 @@ final class DetailPresenter: BasePresenter {
     init(movie: Movie) {
         self.movie = movie
         super.init()
-        getGenres()
     }
     
     // MARK: - Methods -
+    override func attachView(_ view: ViewDelegate) {
+        super.attachView(view)
+        getGenres()
+    }
+    
     private func getGenres() {
-        // TODO: Optimize to search locally before
-        MovieClient.getGenreList { [weak self] (genreList, error) in
-            guard let self = self else { return }
-            if let genreList = genreList {
-                let matchingGenres = genreList.filter { self.movie.genreIDs.contains($0.id) }
-                self.genres = matchingGenres
+        // Searchs locally before
+        if let genreList = LocalService.instance.getGenreList(from: movie.genreIDs) {
+            self.genres = genreList
+        } else {
+            // Had one or more genres not locally found.
+            // Needs to update the local list.
+            MovieClient.getGenreList { [weak self] (genreList, error) in
+                guard let self = self else { return }
+                if let genreList = genreList {
+                    let matchingGenres = genreList.filter { self.movie.genreIDs.contains($0.id) }
+                    self.genres = matchingGenres
+                }
             }
         }
     }
