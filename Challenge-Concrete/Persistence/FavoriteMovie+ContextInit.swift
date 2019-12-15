@@ -9,10 +9,12 @@
 import CoreData
 
 extension FavoriteMovie: PersistableObject {
-    convenience init(id: Int64, title: String, image: Data) {
+    convenience init(id: Int64, title: String, year: String, descript: String, image: Data) {
         self.init(context: CoreDataManager.persistentContainer.viewContext)
         self.id = id
         self.title = title
+        self.year = year
+        self.descript = descript
         self.image = image
     }
 }

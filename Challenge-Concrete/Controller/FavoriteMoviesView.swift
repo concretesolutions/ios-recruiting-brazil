@@ -14,7 +14,6 @@ class FavoriteMoviesView: UIView {
     init() {
         super.init(frame: .zero)
         tableView.register(MovieTableViewCell.self)
-        //tableView.rowHeight = UITableView.automaticDimension
         setupView()
     }
     

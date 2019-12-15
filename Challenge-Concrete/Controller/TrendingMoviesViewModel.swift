@@ -38,10 +38,16 @@ class TrendingMoviesViewModel: MovieViewModel {
     @discardableResult
     func favorite(_ movie: Movie) -> FavoriteMovie? {
         let favMovie: FavoriteMovie? = CoreDataManager.fetchBy(id: movie.id)
-  
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        let date = dateFormatter.date(from: movie.releaseDate ?? "")
+        let dateString = dateFormatter.string(from: date ?? Date())
+        
         if favMovie == nil, let title = movie.title ?? movie.name {
             let favoriteMovie = FavoriteMovie(id: Int64(movie.id),
                                               title: title,
+                                              year: dateString,
+                                              descript: movie.overview,
                                               image: movie.movieImageData!)
             CoreDataManager.saveContext()
             return favoriteMovie
@@ -52,10 +58,7 @@ class TrendingMoviesViewModel: MovieViewModel {
         return nil
     }
     
-    @discardableResult
-    func removeFavorite(_ movie: Movie) -> FavoriteMovie? {
+    func removeFavorite(_ movie: Movie) {
         CoreDataManager.deleteBy(id: movie.id, entityType: FavoriteMovie.self)
-        
-        return nil
     }
 }

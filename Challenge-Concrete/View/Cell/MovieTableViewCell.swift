@@ -21,8 +21,8 @@ class MovieTableViewCell: UITableViewCell {
     func setupFavoriteMovie(_ favoriteMovie: FavoriteMovie) {
         movieImageView.image = UIImage(data: favoriteMovie.image!)
         titleLabel.text = favoriteMovie.title
-        yearLabel.text = "2008"
-        descriptionLabel.text = "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"
+        yearLabel.text = favoriteMovie.year
+        descriptionLabel.text = favoriteMovie.descript
         
         setupView()
     }
@@ -40,21 +40,21 @@ extension MovieTableViewCell: ViewCode {
         movieImageView.anchor
             .top(safeAreaLayoutGuide.topAnchor)
             .left(safeAreaLayoutGuide.leftAnchor)
-            .bottom(safeAreaLayoutGuide.bottomAnchor)
-            .height(constant: imageHeight, priority: .defaultHigh)
+            .bottom(safeAreaLayoutGuide.bottomAnchor, priority: .defaultHigh)
+            .height(constant: imageHeight)
             .width(constant: imageWidth)
         
         titleLabel.anchor
             .top(safeAreaLayoutGuide.topAnchor, padding: 16)
             .left(movieImageView.rightAnchor, padding: 16)
-            .right(yearLabel.leftAnchor, padding: 8, priority: .defaultHigh)
+            .right(yearLabel.leftAnchor, padding: 8)
             .height(constant: 20)
             
         yearLabel.anchor
             .top(safeAreaLayoutGuide.topAnchor, padding: 16)
             .right(safeAreaLayoutGuide.rightAnchor, padding: 16)
             .height(constant: 20)
-            .width(constant: 50)
+            .width(constant: 70)
         
         descriptionLabel.anchor
             .top(yearLabel.bottomAnchor, padding: 16)

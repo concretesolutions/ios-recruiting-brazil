@@ -19,6 +19,7 @@ class FavoriteMoviesViewModel: MovieViewModel {
     }
     
     func remove(_ favoriteMovieId: Int) {
+        CoreDataManager.deleteBy(id: favoriteMovieId, entityType: FavoriteMovie.self)
         self.dataSource?.data.removeAll(where: {$0.id == favoriteMovieId})
     }
 

@@ -14,4 +14,14 @@ class MovieTableDelegate: NSObject, GenericDelegate, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         moviesDelegate?.didSelectMovie(at: indexPath.row)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let unfavorite = UIContextualAction(style: .destructive, title: "Unfavorite",
+          handler: { [weak self] (action, view, completionHandler) in
+          
+            self?.moviesDelegate?.didFavoriteMovie(at: indexPath.row, turnFavorite: false)
+        })
+        let configuration = UISwipeActionsConfiguration(actions: [unfavorite])
+        return configuration
+    }
 }

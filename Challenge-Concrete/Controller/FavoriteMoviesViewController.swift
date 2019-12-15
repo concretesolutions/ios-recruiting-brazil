@@ -49,6 +49,13 @@ extension FavoriteMoviesViewController {
         navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
+    
+    func didFavoriteMovie(at index: Int, turnFavorite: Bool) {
+        if !turnFavorite {
+            let movie = dataSource.data[index]
+            movieViewModel.remove(Int(movie.id))
+        }
+    }
 }
 
 extension FavoriteMoviesViewController: FavoriteMovieDelegate {
