@@ -31,6 +31,7 @@ class PopularMoviesVC: UIViewController {
         flowLayout.flowDelegate = self
         self.collectionView.collectionViewLayout = flowLayout
         self.collectionView.register(MovieGridCell.self)
+        self.collectionView.register(ActivityIndicationFooter.self, kind: .footer)
         self.refreshControl.addTarget(self, action: #selector(self.refreshList), for: .valueChanged)
         self.collectionView.addSubview(self.refreshControl)
         self.refreshControl.beginRefreshing()
@@ -94,6 +95,24 @@ extension PopularMoviesVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        return self.viewModel.movies?.results?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            let currentPage = self.viewModel.movies?.page ?? 0
+            let pages = self.viewModel.movies?.total_pages ?? 0
+            if currentPage < pages {
+                let footer: ActivityIndicationFooter = collectionView.dequeue(for: indexPath, kind: .footer)
+                footer.activityIndicatorView.startAnimating()
+                return footer
+            }
+            
+        default:
+            break
+        }
+        
+        return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
