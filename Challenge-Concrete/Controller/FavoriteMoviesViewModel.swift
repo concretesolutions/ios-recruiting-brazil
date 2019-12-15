@@ -24,26 +24,16 @@ class FavoriteMoviesViewModel: MovieViewModel {
         let genres = fetchGenresFrom(movie)
         if favMovie == nil, let title = movie.title ?? movie.name {
             let favoriteMovie = FavoriteMovie(id: Int64(movie.id),
-                              title: title,
-                              year: releaseDate.year,
-                              descript: movie.overview,
-                              image: movie.movieImageData!,
-                              genres: genres)
+                                              title: title,
+                                              year: releaseDate.year,
+                                              descript: movie.overview,
+                                              image: movie.movieImageData!,
+                                              genres: genres)
             CoreDataManager.saveContext()
             add(favoriteMovie)
         } else if favMovie != nil {
             remove(movie.id)
         }
-    }
-    
-    func fetchGenresFrom(_ movie: Movie) -> [GenreLocal] {
-        var genres: [GenreLocal] = []
-        movie.genreIds?.forEach({ id in
-            if let genre: GenreLocal = CoreDataManager.fetchBy(id: id) {
-                genres.append(genre)
-            }
-        })
-        return genres
     }
     
     func toggleFavorite(_ movie: FavoriteMovie) {
@@ -57,6 +47,17 @@ class FavoriteMoviesViewModel: MovieViewModel {
             remove(Int(movie.id))
         }
     }
+    
+    func fetchGenresFrom(_ movie: Movie) -> [GenreLocal] {
+        var genres: [GenreLocal] = []
+        movie.genreIds?.forEach({ id in
+            if let genre: GenreLocal = CoreDataManager.fetchBy(id: id) {
+                genres.append(genre)
+            }
+        })
+        return genres
+    }
+    
     
     func removeFavorite(_ movie: Movie) {
         CoreDataManager.deleteBy(id: movie.id, entityType: FavoriteMovie.self)
