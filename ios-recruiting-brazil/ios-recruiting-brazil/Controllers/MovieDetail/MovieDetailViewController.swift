@@ -10,6 +10,8 @@ import UIKit
 class MovieDetailViewController: UIViewController {
     let customView = MovieDetailView()
     let movie: MovieDTO
+    let coreDataManager = CoreDataManager()
+    var fetchedMovies = [Movie]()
     var genresString = ""
     var genres = [GenreDTO]() {
         didSet {
@@ -35,6 +37,9 @@ class MovieDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         requestGenres()
         requestImage()
+        if let movies = coreDataManager.fetchMovies() {
+            self.fetchedMovies = movies
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -61,6 +66,15 @@ class MovieDetailViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    func checkMovieFavorite() -> Bool {
+        var isFavorite = false
+        fetchedMovies.forEach({
+            if $0.name == movie.title {
+            isFavorite = true
+            }
+        })
+        return isFavorite
     }
 
     private func requestGenres() {
