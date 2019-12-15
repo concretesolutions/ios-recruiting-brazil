@@ -11,7 +11,7 @@ import os.log
 
 final class PopularsPresenter: FeedPresenter {
     
-    // MARK: - Properties -
+    // MARK: - Properties -    
     /// Controls which page to load next on
     private var pagesLoaded: Int = 0
     

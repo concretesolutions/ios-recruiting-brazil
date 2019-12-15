@@ -129,6 +129,14 @@ final class PopularsVC: FeedVC {
         
         navigationController?.isNavigationBarHidden = true
     }
+    
+    override func setFavorite(_ isFavorite: Bool, tag: Int?) {
+        guard let item = tag, let cell = feedCollectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? ItemCollectionViewCell else {
+            // TODO: Log error
+            return
+        }
+        cell.isFavorite = isFavorite
+    }
 }
 
 // MARK: - ScrollView Delegate -

@@ -9,36 +9,10 @@
 import Foundation
 import os.log
 
-final class FavoritesPresenter: BasePresenter {
+final class FavoritesPresenter: FeedPresenter {
     
     // MARK: - Properties -
-    private var favoritesView: FeedViewDelegate {
-        guard let view = view as? FeedViewDelegate else {
-            os_log("❌ - FavoritesPresenter was given to the wrong view", log: Logger.appLog(), type: .fault)
-            fatalError("FavoritesPresenter was given to the wrong view")
-        }
-        return view
-    }
-    
-    /// The movie data to be displayed
-    private var movies: [Movie] = [] {
-        didSet {
-            favoritesView.reloadFeed()
-        }
-    }
-    
-    // MARK: Computed
-    var numberOfItems: Int {
-        return movies.count
-    }
-    
-    // MARK: - Methods -
-    override func attachView(_ view: ViewDelegate) {
-        super.attachView(view)
-        loadFavorites()
-    }
-    
-    func loadFavorites() {
+    override func loadFeed() {
         
         let moviesList = LocalService.instance.getFavoritesList()
         guard !moviesList.isEmpty else {
@@ -48,40 +22,11 @@ final class FavoritesPresenter: BasePresenter {
         movies = moviesList
     }
     
-    func getItemData(item: Int) -> ItemViewData {
-        
-        guard item < self.numberOfItems else {
-            os_log("❌ - Number of items > number of movies", log: Logger.appLog(), type: .fault)
-            return ItemViewData.mockData
-        }
-        
-        let movie = movies[item]
-        let imageURL: URL?
-        if let path = movie.backdropPath {
-            imageURL = ImageEndpoint.image(width: 780, path: path).completeURL
-        } else {
-            imageURL = nil
-        }
-        
-        return ItemViewData(title: movie.title,
-                            imageUrl: imageURL,
-                            isFavorite: movie.isFavorite)
+    override func updateData() {
+        loadFeed()
     }
-    
-    func selectItem(item: Int) {
-        guard item < self.numberOfItems else {
-            os_log("❌ - Number of items > number of movies", log: Logger.appLog(), type: .fault)
-            return
-        }
-        
-        let movie = movies[item]
-        let detailPresenter = DetailPresenter(movie: movie)
-        favoritesView.navigateToView(presenter: detailPresenter)
-    }
-}
 
-extension FavoritesPresenter: FavoriteHandler {
-    func favoriteStateChanged(tag: Int?) {
+    override func favoriteStateChanged(tag: Int?) {
         guard let item = tag else {
             os_log("❌ - Favorite had no tag", log: Logger.appLog(), type: .fault)
             return

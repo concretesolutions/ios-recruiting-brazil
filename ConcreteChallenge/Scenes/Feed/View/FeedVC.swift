@@ -12,7 +12,7 @@ import Kingfisher
 import SnapKit
 
 /// A basic View Controller to display a feed of movies
-class FeedVC: BaseViewController {
+class FeedVC: BaseViewController, FavoriteViewDelegate {
     
     // MARK: - Properties -
     var feedPresenter: FeedPresenter? {
@@ -50,6 +50,14 @@ class FeedVC: BaseViewController {
         feedPresenter?.updateData()
     }
     
+    func setFavorite(_ isFavorite: Bool, tag: Int?) {
+        guard let item = tag, let cell = feedCollectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? ItemCollectionViewCell else {
+            // TODO: Log error
+            return
+        }
+        cell.isFavorite = isFavorite
+    }
+    
     // MARK: Button methods
     @objc func favoriteTapped(_ sender: UIButton) {
         feedPresenter?.favoriteStateChanged(tag: sender.tag)
@@ -63,14 +71,6 @@ extension FeedVC: FeedViewDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.feedCollectionView.reloadData()
         }
-    }
-    
-    func setFavorite(_ isFavorite: Bool, tag: Int?) {
-        guard let item = tag, let cell = feedCollectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? ItemCollectionViewCell else {
-            // TODO: Log error
-            return
-        }
-        cell.isFavorite = isFavorite
     }
 }
 

@@ -17,7 +17,3 @@ protocol FavoriteHandler {
      */
     func favoriteStateChanged(tag: Int?)
 }
-
-//extension FavoriteHandler {
-//    func favoriteStateChanged(tag: Int? = nil) {}
-//}
