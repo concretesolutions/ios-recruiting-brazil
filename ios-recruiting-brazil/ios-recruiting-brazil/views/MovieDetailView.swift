@@ -48,5 +48,9 @@ class MovieDetailView: UIView, ConfigView {
             detailsTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
+
+    func setAdditionalConfiguration() {
+        self.backgroundColor = .white
+    }
+
 }
