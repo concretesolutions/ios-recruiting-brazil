@@ -12,6 +12,7 @@ class MoviesTableViewCell: UITableViewCell, ConfigView {
     let movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .darkGray
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

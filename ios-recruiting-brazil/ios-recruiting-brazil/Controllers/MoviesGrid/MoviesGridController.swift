@@ -22,6 +22,7 @@ class MoviesGridController: UIViewController {
             }
         }
     }
+    var fetchedMovies = [Movie]()
     let searchDataSource = SearchTableDataSource()
     lazy var searchView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -51,6 +52,13 @@ class MoviesGridController: UIViewController {
         setNavigation()
         requestMovies()
         requestGenres()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let movies = coreDataManager.fetchMovies() {
+            self.fetchedMovies = movies
+        }
     }
 
     private func setNavigation() {

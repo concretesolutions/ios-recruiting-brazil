@@ -45,6 +45,7 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
     override func prepareForReuse() {
         super.prepareForReuse()
         movieImage.image = nil
+        favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
     }
 
     override init(frame: CGRect) {

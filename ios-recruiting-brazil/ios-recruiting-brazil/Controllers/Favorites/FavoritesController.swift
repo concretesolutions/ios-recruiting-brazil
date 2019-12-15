@@ -10,6 +10,7 @@ import UIKit
 class FavoritesController: UIViewController {
     let customView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
+        table.rowHeight = 150
         table.registerCell(cellType: MoviesTableViewCell.self)
         return table
     }()

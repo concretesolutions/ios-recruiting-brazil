@@ -20,7 +20,9 @@ extension FavoritesController: UITableViewDataSource {
         if let date = movie.date {
             cell.date.text = String(date.prefix(4))
         }
-        cell.imageView?.image = nil
+        if let imageData = movie.image {
+            cell.movieImage.image = UIImage(data: imageData)
+        }
         return cell
     }
 
