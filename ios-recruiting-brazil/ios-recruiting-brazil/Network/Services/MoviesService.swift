@@ -11,7 +11,7 @@ enum MovieService: Service {
     private var apiKey: String {
         "751e969079abb838516dbe21d3f2e686"
     }
-    case getTrendingMovies
+    case getTrendingMovies(Int)
     case getImage(String)
     case getGenres
     case searchMovie(String)
@@ -54,8 +54,10 @@ enum MovieService: Service {
         switch self {
         case .getImage:
             return .requestPlain
-        case .getTrendingMovies, .getGenres:
+        case .getGenres:
             return .requestParameters(["api_key": apiKey])
+        case .getTrendingMovies(let page):
+            return .requestParameters(["api_key": apiKey, "page": page])
         case .searchMovie(let name):
             return .requestParameters(["api_key": apiKey, "query": name])
         }
