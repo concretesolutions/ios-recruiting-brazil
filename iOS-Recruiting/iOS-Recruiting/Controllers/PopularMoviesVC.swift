@@ -185,10 +185,13 @@ extension PopularMoviesVC: PopularMoviesDelegate {
             error.configure(type: type)
             error.delegate = self
             self.collectionView.backgroundView = error
+        case .search:
+            let error = ErrorView()
+            error.configure(type: type)
+            error.delegate = self
+            self.collectionView.backgroundView = error
         case .none:
             self.collectionView.backgroundView = nil
-        default:
-            break
         }
     }
 }

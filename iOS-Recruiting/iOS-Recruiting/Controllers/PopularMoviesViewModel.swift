@@ -43,7 +43,12 @@ class PopularMoviesViewModel {
     
     internal func search(byName name: String) {
         self.searchTerm = name
+        let isEmpty = self.movieList?.isEmpty ?? true
+        if isEmpty {
+            self.controller?.showTableError(type: .search)
+        }
         self.controller?.reloadData()
+        
     }
     
     internal func getPopularMovies(reload: Bool = false) {

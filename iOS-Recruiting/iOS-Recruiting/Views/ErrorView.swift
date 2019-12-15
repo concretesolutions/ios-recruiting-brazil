@@ -44,8 +44,13 @@ class ErrorView: UIView, NibLoadableView {
         switch type {
         case .undefined:
             self.iconImage.image = #imageLiteral(resourceName: "error-icon")
-            self.errorLabel.text = "Um erro ocorreu. Por favor tente novamente"
+            self.errorLabel.text = "Um erro ocorreu. Por favor tente novamente."
             self.retryButton.setTitle("Tentar novamente", for: .normal)
+            self.retryButton.isHidden = false
+        case .search:
+            self.iconImage.image = #imageLiteral(resourceName: "search_icon")
+            self.errorLabel.text = "Sua busca não obteve nenhum resultado."
+            self.retryButton.isHidden = true
         default:
             break
         }
