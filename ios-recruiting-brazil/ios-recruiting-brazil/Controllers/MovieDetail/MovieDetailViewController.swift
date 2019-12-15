@@ -10,6 +10,9 @@ import UIKit
 class MovieDetailViewController: UIViewController {
     let customView = MovieDetailView()
     let movie: MovieDTO
+    let coreDataManager = CoreDataManager()
+    var fetchedMovies = [Movie]()
+    var genresString = ""
     var genres = [GenreDTO]() {
         didSet {
             DispatchQueue.main.async {
@@ -17,11 +20,26 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
+
+    convenience init(withMovie movie: Movie) {
+        let movieDTO = MovieDTO(title: movie.name ?? "",
+                                overview: movie.overview ?? "", poster: "",
+                                releaseDate: movie.date ?? "", genreIDs: [0])
+        self.init(withMovie: movieDTO)
+        if let imageData = movie.image, let genres = movie.genres {
+            customView.movieImage.image = UIImage(data: imageData)
+            genresString = genres
+        }
+
+    }
     init(withMovie movie: MovieDTO) {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
         requestGenres()
         requestImage()
+        if let movies = coreDataManager.fetchMovies() {
+            self.fetchedMovies = movies
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -49,6 +67,15 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
+    func checkMovieFavorite() -> Bool {
+        var isFavorite = false
+        fetchedMovies.forEach({
+            if $0.name == movie.title {
+            isFavorite = true
+            }
+        })
+        return isFavorite
+    }
 
     private func requestGenres() {
         let service = MovieService.getGenres
@@ -60,6 +87,24 @@ class MovieDetailViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+
+    @objc func favoriteButtonClicked(sender: Any) {
+        guard let button = sender as? UIButton else {return}
+        if checkMovieFavorite() {
+            button.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            coreDataManager.deleteMovie(withName: movie.title)
+        } else {
+            button.setImage(UIImage(named: "favorite_full_icon"),
+            for: .normal)
+            coreDataManager.saveMovie(name: movie.title, genres: "",
+                                      overview: movie.overview, date: movie.releaseDate,
+                                      image: customView.movieImage.image)
+        }
+
+        if let movies = coreDataManager.fetchMovies() {
+            self.fetchedMovies = movies
         }
     }
 }

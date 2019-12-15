@@ -9,6 +9,9 @@
 import UIKit
 class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
 
+    var movie: MovieDTO?
+    public weak var delegate: MovieCellDelegate?
+    var isFavorite = false
     let movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -32,15 +35,17 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
         return view
     }()
 
-    let favoriteButton: UIButton = {
+    lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        button.addTarget(self, action: #selector(favoriteButtonClicked), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     override func prepareForReuse() {
         super.prepareForReuse()
         movieImage.image = nil
+        favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
     }
 
     override init(frame: CGRect) {
@@ -50,6 +55,42 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func buildCell() {
+        guard let movie = movie else {
+            return
+        }
+        self.movieName.text = movie.title
+        setImage()
+    }
+
+    private func setImage() {
+        guard let movie = movie else {
+            return
+        }
+        let service = MovieService.getImage(movie.poster)
+        let session = URLSessionProvider()
+        session.request(type: Data.self, service: service) { (result) in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.sync {
+                    self.movieImage.image = UIImage(data: data)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    @objc func favoriteButtonClicked() {
+        if let movie = movie {
+            delegate?.didFavoriteMovie(movie: movie, withImage: movieImage.image)
+            isFavorite = !isFavorite
+            isFavorite ? favoriteButton.setImage(
+                UIImage(named: "favorite_full_icon"), for: .normal) :
+                favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        }
     }
 
     func createViewHierarchy() {

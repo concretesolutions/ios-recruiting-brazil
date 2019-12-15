@@ -17,22 +17,29 @@ extension MovieDetailViewController: UITableViewDataSource {
         cell.textLabel?.numberOfLines = 0
         if indexPath.row == 0 {
             cell.textLabel?.text = movie.title
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            self.checkMovieFavorite() ? button.setImage(UIImage(named: "favorite_full_icon"),
+                                                        for: .normal) :
+                button.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            button.addTarget(self, action: #selector(favoriteButtonClicked), for: .touchUpInside)
+            cell.accessoryView = button
         }
         if indexPath.row == 1 {
             cell.textLabel?.text = String(movie.releaseDate.prefix(4))
         }
         if indexPath.row == 2 {
-            var genresString = ""
-            movie.genreIDs.forEach({genreID in
-                genres.forEach({ genre in
-                    if genreID == genre.genreID {
-                        if !genresString.isEmpty {
-                            genresString += ", "
+            if genresString.isEmpty {
+                movie.genreIDs.forEach({genreID in
+                    genres.forEach({ genre in
+                        if genreID == genre.genreID {
+                            if !genresString.isEmpty {
+                                genresString += ", "
+                            }
+                            genresString += genre.name
                         }
-                        genresString += genre.name
-                    }
+                    })
                 })
-            })
+            }
             cell.textLabel?.text = genresString
         }
         if indexPath.row == 3 {

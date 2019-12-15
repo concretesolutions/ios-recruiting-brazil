@@ -16,20 +16,13 @@ extension MoviesGridController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MoviesCollectionViewCell.self)
         let movie = movies[indexPath.row]
-        cell.movieName.text = movie.title
-        cell.movieImage.image = nil
+        cell.movie = movie
+        cell.buildCell()
+        cell.delegate = self
 
-        let service = MovieService.getImage(movie.poster)
-        let session = URLSessionProvider()
-        session.request(type: Data.self, service: service) { (result) in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.sync {
-                    cell.movieImage.image = UIImage(data: data)
-                }
-            case .failure(let error):
-                print(error)
-            }
+        if fetchedMovies.contains(where: { (movie2) -> Bool in movie2.name == movie.title}) {
+            cell.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            cell.isFavorite = true
         }
 
         return cell

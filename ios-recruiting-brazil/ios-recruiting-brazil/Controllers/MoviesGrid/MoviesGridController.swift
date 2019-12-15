@@ -9,6 +9,8 @@
 import UIKit
 class MoviesGridController: UIViewController {
     private let customView = MoviesGridView()
+    let coreDataManager = CoreDataManager()
+    var genres = [GenreDTO]()
     var pagesRequested = 1
     var searchName: String = ""
     var searchTimer: Timer?
@@ -20,6 +22,7 @@ class MoviesGridController: UIViewController {
             }
         }
     }
+    var fetchedMovies = [Movie]()
     let searchDataSource = SearchTableDataSource()
     lazy var searchView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -48,6 +51,15 @@ class MoviesGridController: UIViewController {
         customView.grid.delegate = self
         setNavigation()
         requestMovies()
+        requestGenres()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let movies = coreDataManager.fetchMovies() {
+            self.fetchedMovies = movies
+        }
+        customView.grid.reloadData()
     }
 
     private func setNavigation() {
@@ -58,6 +70,7 @@ class MoviesGridController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .yellow
 
         let search = UISearchController(searchResultsController: nil)
+        navigationItem.hidesSearchBarWhenScrolling = false
         search.searchResultsUpdater = self
         search.searchBar.placeholder = "Search"
         search.modalPresentationStyle = .fullScreen
@@ -74,6 +87,19 @@ class MoviesGridController: UIViewController {
             switch result {
             case .success(let result):
                 self.movies.append(contentsOf: result.movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    private func requestGenres() {
+        let service = MovieService.getGenres
+        let session = URLSessionProvider()
+        session.request(type: GenresDTO.self, service: service) { (result) in
+            switch result {
+            case .success(let genres) :
+                self.genres = genres.genres
             case .failure(let error):
                 print(error)
             }
