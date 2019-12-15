@@ -10,10 +10,10 @@ import UIKit
 
 class MovieGridCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet weak var movieImage: UIImageView!
+    @IBOutlet weak var heartIconImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+
 
 }
 

@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1tv-dA-Sos">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RZ3-0V-sag">
                                     <size key="itemSize" width="50" height="50"/>
@@ -36,16 +36,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="Fsc-Se-juX">
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" title="Movies" id="aYF-h4-tXa"/>
                     <connections>
                         <outlet property="collectionView" destination="1tv-dA-Sos" id="Rf2-NY-Cbh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="225" y="886"/>
+            <point key="canvasLocation" x="1134.7826086956522" y="885.9375"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="Vf1-6Q-ZGW">
@@ -57,11 +55,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="5Vs-tJ-WpU"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" id="ThO-y4-nkR"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="zJT-FN-9sa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UR2-oi-J0o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2232" y="301"/>
+            <point key="canvasLocation" x="2991" y="-66"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9RB-Sz-g8i">
@@ -76,13 +74,55 @@
                         <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="HtC-b1-1HF"/>
-                        <segue destination="BcE-jo-jNt" kind="relationship" relationship="viewControllers" id="6wF-pn-pBf"/>
+                        <segue destination="EQ8-Gx-mXk" kind="relationship" relationship="viewControllers" id="HtC-b1-1HF"/>
+                        <segue destination="uhY-6k-NTe" kind="relationship" relationship="viewControllers" id="6wF-pn-pBf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Emp-3G-v13" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-174" y="-66"/>
+        </scene>
+        <!--Movies-->
+        <scene sceneID="dmO-Sp-pjf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EQ8-Gx-mXk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Movies" image="list_icon" id="Fsc-Se-juX">
+                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NZx-Nh-jpf">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Rba-C0-dcK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XFZ-aN-e4t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="224.63768115942031" y="885.9375"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="YzL-LF-0C2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uhY-6k-NTe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite_empty_icon" id="ThO-y4-nkR"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="x5p-rU-Ahg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BcE-jo-jNt" kind="relationship" relationship="rootViewController" id="GBF-JD-Vqg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nAC-nd-Y9o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800" y="-66"/>
         </scene>
     </scenes>
     <resources>
