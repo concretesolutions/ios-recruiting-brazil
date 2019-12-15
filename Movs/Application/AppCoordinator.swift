@@ -17,7 +17,7 @@ class AppCoordinator: Coordinator {
     
     // MARK: - Properties
     
-    internal let dependencies = Dependencies()
+    internal let dependencies: Dependencies
     internal let presenter: Presenter
     internal let coordinatedViewController: Controller
     private var homeCoordinator: HomeTabBarCoordinator!
@@ -25,6 +25,11 @@ class AppCoordinator: Coordinator {
     // MARK: - Initializers
     
     init(window: UIWindow) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Failed to retrieve AppDelegate.")
+        }
+        
+        self.dependencies = Dependencies(storageManager: StorageManager(container: appDelegate.persistentContainer))
         self.presenter = window
         self.coordinatedViewController = UINavigationController()
         self.homeCoordinator = HomeTabBarCoordinator(parent: self)

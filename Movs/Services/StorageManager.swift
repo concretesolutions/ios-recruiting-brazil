@@ -30,7 +30,7 @@ class StorageManager {
     
     // MARK: - Initializers and Deinitializers
     
-    init() {
+    init(container: NSPersistentContainer) {
         self.managedContext = self.persistentContainer.viewContext
         
         let fetchAllFavorites = NSFetchRequest<CDFavoriteMovie>(entityName: "CDFavoriteMovie")

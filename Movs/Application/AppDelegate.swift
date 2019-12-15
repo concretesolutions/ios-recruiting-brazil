@@ -15,6 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Properties
     
     var appCoordinator: AppCoordinator?
+    internal let persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Movs")
+        container.loadPersistentStores(completionHandler: { (_, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
     
     // MARK: - UIApplicationDelegate life cycle
     

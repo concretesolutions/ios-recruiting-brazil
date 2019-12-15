@@ -16,22 +16,25 @@ class PopularMoviesDTOTests: XCTestCase {
     // MARK: - Properties
     
     var sut: PopularMoviesDTO!
+    var bundle: Bundle!
     
     // MARK: - Setup and Teardown
     
     override func setUp() {
         self.sut = PopularMoviesDTO(page: 327, results: [])
+        self.bundle = Bundle(for: type(of: self))
     }
     
     override func tearDown() {
         self.sut = nil
+        self.bundle = nil
     }
     
     // MARK: - Tests
     
     func testShouldDecodeDataForCorrectFormat() {
         do {
-            let popularMovies = try JSONDecoder().decode(PopularMoviesDTO.self, resourceName: "PopularMoviesTestData", resourceType: "json")
+            let popularMovies = try JSONDecoder().decode(PopularMoviesDTO.self, resourceName: "PopularMoviesTestData", resourceType: "json", bundle: self.bundle)
             expect(self.sut).to(equal(popularMovies), description: "Expected decoded data to be parsed correctly.")
         } catch is DecodingError {
             fail("Failed to decode PopularMoviesDTO from data.")
@@ -42,7 +45,7 @@ class PopularMoviesDTOTests: XCTestCase {
     
     func testDecodeShouldFailForIncorrectFormat() {
         do {
-            _ = try JSONDecoder().decode(PopularMoviesDTO.self, resourceName: "GenresTestData", resourceType: "json")
+            _ = try JSONDecoder().decode(PopularMoviesDTO.self, resourceName: "GenresTestData", resourceType: "json", bundle: self.bundle)
             fail("Expected PopularMoviesDTO decoding throw a DecodingError for incorrect data.")
         } catch is DecodingError {
             _ = succeed()

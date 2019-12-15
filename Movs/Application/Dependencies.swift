@@ -6,6 +6,8 @@
 //  Copyright © 2019 Gabriel D'Luca. All rights reserved.
 //
 
+import UIKit
+
 protocol HasAPIManager {
     var apiManager: MoviesAPIManager { get }
 }
@@ -23,7 +25,7 @@ class Dependencies: HasAPIManager, HasStorageManager {
 
     // MARK: - Initializers and Deinitializers
     
-    init(apiManager: MoviesAPIManager = MoviesAPIManager(), storageManager: StorageManager = StorageManager()) {
+    init(apiManager: MoviesAPIManager = MoviesAPIManager(), storageManager: StorageManager) {
         self.apiManager = apiManager
         self.storageManager = storageManager
     }
