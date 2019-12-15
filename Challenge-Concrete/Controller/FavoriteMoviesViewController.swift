@@ -15,6 +15,8 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
     var delegate = MovieTableDelegate()
     var movieViewModel = FavoriteMoviesViewModel()
     let moviesView = FavoriteMoviesView()
+    var isDeleting = false
+    var lastDeletedRowIndex: Int = 0
     
     override func loadView() {
         view = moviesView
@@ -32,7 +34,9 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
 // MARK: DataFetchDelegate
 extension FavoriteMoviesViewController {
     func didUpdateData() {
-        DispatchQueue.main.async {
+        if isDeleting {
+            isDeleting = false
+        } else {
             self.moviesView.reloadTableData()
         }
     }
@@ -52,12 +56,15 @@ extension FavoriteMoviesViewController {
     
     func didFavoriteMovie(at index: Int, turnFavorite: Bool) {
         if !turnFavorite {
+            isDeleting = true
             let movie = dataSource.data[index]
             movieViewModel.remove(Int(movie.id))
+            moviesView.deleteTableRowAt(index: index)
         }
     }
 }
 
+// MARK: - FavoriteMovieDelegate
 extension FavoriteMoviesViewController: FavoriteMovieDelegate {
     func didAdd(_ favoriteMovie: FavoriteMovie) {
         movieViewModel.add(favoriteMovie)

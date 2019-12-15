@@ -31,6 +31,11 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         movieViewModel.fetchTrendingMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        moviesView.reloadCollectionData()
+    }
+    
     func setupSearchController() {
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
@@ -80,7 +85,6 @@ extension TrendingMoviesViewController {
             movieViewModel.removeFavorite(movie)
             self.addFavoriteMovieDelegate?.didRemove(favoriteMovieId: movie.id)
         }
-        
     }
 }
 

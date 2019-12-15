@@ -29,6 +29,11 @@ class FavoriteMoviesView: UIView {
     func reloadTableData() {
         tableView.reloadData()
     }
+    
+    func deleteTableRowAt(index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .left)
+    }
 }
 
 extension FavoriteMoviesView: ViewCode {
