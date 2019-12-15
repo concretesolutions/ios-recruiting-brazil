@@ -10,6 +10,7 @@ import UIKit
 class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
 
     var movie: MovieDTO?
+    private let dispatch = DispatchGroup()
     public weak var delegate: MovieCellDelegate?
     var isFavorite = false
     let movieImage: UIImageView = {
@@ -69,17 +70,24 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
         guard let movie = movie else {
             return
         }
+        movieImage.image = nil
+        var image: UIImage? = UIImage()
+        dispatch.enter()
         let service = MovieService.getImage(movie.poster)
         let session = URLSessionProvider()
         session.request(type: Data.self, service: service) { (result) in
             switch result {
             case .success(let data):
-                DispatchQueue.main.sync {
-                    self.movieImage.image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    image = UIImage(data: data)
                 }
             case .failure(let error):
                 print(error)
             }
+            self.dispatch.leave()
+        }
+        dispatch.notify(queue: .main) {
+            self.movieImage.image = image
         }
     }
 
