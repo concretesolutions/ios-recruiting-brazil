@@ -18,6 +18,39 @@ class FavoriteMoviesViewModel: MovieViewModel {
         self.dataSource?.data.append(favoriteMovie)
     }
     
+    func toggleFavorite(_ movie: Movie) {
+        let favMovie: FavoriteMovie? = CoreDataManager.fetchBy(id: movie.id)
+        let releaseDate = movie.releaseDate ?? ""
+        
+        if favMovie == nil, let title = movie.title ?? movie.name {
+            let favoriteMovie = FavoriteMovie(id: Int64(movie.id),
+                              title: title,
+                              year: releaseDate.year,
+                              descript: movie.overview,
+                              image: movie.movieImageData!)
+            CoreDataManager.saveContext()
+            add(favoriteMovie)
+        } else if favMovie != nil {
+            remove(movie.id)
+        }
+    }
+    
+    func toggleFavorite(_ movie: FavoriteMovie) {
+        print(dataSource!.data)
+        let isFavorite = dataSource!.data.contains(where: {$0.id == movie.id})
+        print("IS FAVORITE: \(isFavorite)")
+        if !isFavorite {
+            CoreDataManager.saveContext()
+            add(movie)
+        } else {
+            remove(Int(movie.id))
+        }
+    }
+    
+    func removeFavorite(_ movie: Movie) {
+        CoreDataManager.deleteBy(id: movie.id, entityType: FavoriteMovie.self)
+    }
+    
     func remove(_ favoriteMovieId: Int) {
         CoreDataManager.deleteBy(id: favoriteMovieId, entityType: FavoriteMovie.self)
         self.dataSource?.data.removeAll(where: {$0.id == favoriteMovieId})

@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        trendingMoviesVC.addFavoriteMovieDelegate = favoriteMoviesVC
+        trendingMoviesVC.favoriteMovieDelegate = favoriteMoviesVC
         setupTabBar()
     }
     

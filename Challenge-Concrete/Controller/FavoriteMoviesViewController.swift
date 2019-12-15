@@ -50,7 +50,9 @@ extension FavoriteMoviesViewController {
 extension FavoriteMoviesViewController {
     func didSelectMovie(at index: Int) {
         let movie = dataSource.data[index]
-        navigationController?.pushViewController(MovieDetailViewController(), animated: true)
+        let movieDetailVC = MovieDetailViewController(with: movie)
+        movieDetailVC.favoriteMovieDelegate = self
+        navigationController?.pushViewController(movieDetailVC, animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
     
@@ -66,12 +68,12 @@ extension FavoriteMoviesViewController {
 
 // MARK: - FavoriteMovieDelegate
 extension FavoriteMoviesViewController: FavoriteMovieDelegate {
-    func didAdd(_ favoriteMovie: FavoriteMovie) {
-        movieViewModel.add(favoriteMovie)
+    func didToggle(_ movie: Movie) {
+        movieViewModel.toggleFavorite(movie)
     }
     
-    func didRemove(favoriteMovieId: Int) {
-        movieViewModel.remove(favoriteMovieId)
+    func didToggle(_ movie: FavoriteMovie) {
+        movieViewModel.toggleFavorite(movie)
     }
     
     

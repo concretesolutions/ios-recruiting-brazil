@@ -14,6 +14,7 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
         return data.count
     }
     
+    //TODO: Refactor the image request
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MovieCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         let movie = data[indexPath.row]
@@ -21,10 +22,13 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
         cell.setupData(title: movie.title ?? movie.name)
         
         let alreadyFavorite = CoreDataManager.isSaved(entityType: FavoriteMovie.self, id: movie.id)
+        movie.isFavorite = alreadyFavorite
         cell.changeFavoriteIcon(isAdding: alreadyFavorite)
+        
         cell.imageView.setImage(withURL: imageURL) { imgData in
             movie.movieImageData = imgData
         }
+
         return cell
     }
 }

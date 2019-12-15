@@ -17,7 +17,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    weak var addFavoriteMovieDelegate: FavoriteMovieDelegate?
+    weak var favoriteMovieDelegate: FavoriteMovieDelegate?
     override func loadView() {
         view = moviesView
     }
@@ -31,11 +31,10 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         movieViewModel.fetchTrendingMovies()
     }
     
-    //TODO: Update favorite icon in trending when unfavorite movie
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        moviesView.reloadCollectionData()
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        moviesView.reloadCollectionData()
+    }
     
     func setupSearchController() {
         navigationItem.searchController = searchController
@@ -69,23 +68,18 @@ extension TrendingMoviesViewController {
 extension TrendingMoviesViewController {
     func didSelectMovie(at index: Int) {
         let movie = dataSource.data[index]
-        movieViewModel.favorite(movie)
-        navigationController?.pushViewController(MovieDetailViewController(), animated: true)
+        let movieDetailVC = MovieDetailViewController(with: movie)
+        print()
+        let favoriteVC = (tabBarController as! TabBarController).favoriteMoviesVC
+        movieDetailVC.favoriteMovieDelegate = favoriteVC
+        navigationController?.pushViewController(movieDetailVC, animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
     
     func didFavoriteMovie(at index: Int, turnFavorite: Bool) {
         let movie = dataSource.data[index]
-        if turnFavorite {
-            if let favoriteMovie = movieViewModel.favorite(movie) {
-                self.addFavoriteMovieDelegate?.didAdd(favoriteMovie)
-            } else {
-                
-            }
-        } else {
-            movieViewModel.removeFavorite(movie)
-            self.addFavoriteMovieDelegate?.didRemove(favoriteMovieId: movie.id)
-        }
+        movie.isFavorite = turnFavorite
+        self.favoriteMovieDelegate?.didToggle(movie)
     }
 }
 

@@ -9,19 +9,14 @@ import Foundation
 
 class Movie: Codable {
     let id: Int
-    var video: Bool?
-    let voteCount: Int
-    let voteAverage: Double
-    var title, name, releaseDate, originalLanguage, originalTitle, originalName: String?
+    var title, name, releaseDate, originalTitle, originalName: String?
     var genreIDS: [Int]?
-    var backdropPath: String?
-    var adult: Bool?
     let overview: String
     var posterPath: String?
-    let popularity: Double
     var mediaType: String?
     
     var movieImageData: Data?
+    var isFavorite: Bool? = false
 }
 
 struct MovieImage {

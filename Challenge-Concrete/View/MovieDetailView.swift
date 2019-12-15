@@ -12,13 +12,55 @@ class MovieDetailView: UIView {
     let scrollView = UIScrollView()
     let movieImageView = UIImageView()
     let title = UILabel()
-    let favoriteButton = UIButton(type: .infoDark)
     let year = UILabel()
     let genders = UILabel()
     let overview = UILabel()
+    lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        return button
+    }()
+    var favoriteAction: ((_ isFavorite: Bool) -> Void)?
+    var isFavorite = false
+    
+    init(with movie: Movie) {
+        super.init(frame: .zero)
+        movieImageView.image = UIImage(data: movie.movieImageData ?? Data())
+        title.text = movie.title ?? movie.name
+        year.text = (movie.releaseDate ?? "").year
+        overview.text = movie.overview
+        changeFavoriteIcon(isAdding: movie.isFavorite ?? false)
+        isFavorite = movie.isFavorite ?? false
+    }
+    
+    init(with favoriteMovie: FavoriteMovie) {
+        super.init(frame: .zero)
+        movieImageView.image = UIImage(data: favoriteMovie.image ?? Data())
+        title.text = favoriteMovie.title
+        year.text = favoriteMovie.year
+        overview.text = favoriteMovie.descript
+        isFavorite = true
+        changeFavoriteIcon(isAdding: isFavorite)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func didMoveToSuperview() {
         setupView()
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func favoriteButtonTapped() {
+        isFavorite = !isFavorite
+        favoriteAction?(isFavorite)
+        changeFavoriteIcon(isAdding: isFavorite)
+    }
+    
+    func changeFavoriteIcon(isAdding: Bool) {
+        let imageName: String = isAdding ? "favorite_full_icon" : "favorite_gray_icon"
+        favoriteButton.setImage(UIImage(named: imageName), for: .normal)
     }
 }
 
@@ -70,11 +112,10 @@ extension MovieDetailView: ViewCode {
     
     func setupAditionalConfiguration() {
         backgroundColor = .white
-        movieImageView.backgroundColor = .red
-        title.text = "Thor 2412412412412 123123123123123231"
-        year.text = "2008"
+        movieImageView.contentMode = .scaleAspectFill
+        movieImageView.clipsToBounds = true
         genders.text = "Action, Adventure"
         overview.numberOfLines = 0
-        overview.text = "The powerful, put arrogant god Thor. The powerful, put arrogant god Thor. The powerful, put arrogant god Thor. The powerful, put arrogant god Thor. The powerful, put arrogant god Thor."
+        
     }
 }

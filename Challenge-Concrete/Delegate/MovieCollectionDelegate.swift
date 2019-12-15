@@ -29,6 +29,7 @@ class MovieCollectionDelegate: NSObject, GenericDelegate, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let movieCell = cell as? MovieCollectionViewCell {
             movieCell.favoriteAction = { [weak self, index = indexPath.row] turnFavorite in
+                print("turn fav: \(turnFavorite)")
                 self?.moviesDelegate?.didFavoriteMovie(at: index, turnFavorite: turnFavorite)
             }
         }

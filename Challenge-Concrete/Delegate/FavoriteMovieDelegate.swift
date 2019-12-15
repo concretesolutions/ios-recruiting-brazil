@@ -9,6 +9,6 @@
 import Foundation
 
 protocol FavoriteMovieDelegate: AnyObject {
-    func didAdd(_ favoriteMovie: FavoriteMovie)
-    func didRemove(favoriteMovieId: Int)
+    func didToggle(_ movie: Movie)
+    func didToggle(_ movie: FavoriteMovie)
 }
