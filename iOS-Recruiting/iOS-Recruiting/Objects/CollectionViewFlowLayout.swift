@@ -49,6 +49,9 @@ public class CollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     public override func prepare() {
+        super.prepare()
+        self.cache.removeAll()
+        
         guard let collectionView = self.collectionView else {
             return
         }
@@ -62,19 +65,21 @@ public class CollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
         var column = 0
         var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
-
-        for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
-            let indexPath = IndexPath(item: item, section: 0)
-            let photoHeight = self.flowDelegate?.height(at: indexPath) ?? 1
-            let height = cellPadding * 2 + photoHeight
-            let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
-            let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = insetFrame
-            self.cache[indexPath] = attributes
-            self.contentHeight = max(self.contentHeight, frame.maxY)
-            yOffset[column] = yOffset[column] + height
-            column = column < (numberOfColumns - 1) ? (column + 1) : 0
+        
+        if collectionView.numberOfSections > 0 {
+            for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
+                let indexPath = IndexPath(item: item, section: 0)
+                let photoHeight = self.flowDelegate?.height(at: indexPath) ?? 1
+                let height = cellPadding * 2 + photoHeight
+                let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
+                let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                attributes.frame = insetFrame
+                self.cache[indexPath] = attributes
+                self.contentHeight = max(self.contentHeight, frame.maxY)
+                yOffset[column] = yOffset[column] + height
+                column = column < (numberOfColumns - 1) ? (column + 1) : 0
+            }
         }
     }
 }

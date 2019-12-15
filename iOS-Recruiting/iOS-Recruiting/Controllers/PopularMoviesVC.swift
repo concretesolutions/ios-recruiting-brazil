@@ -33,6 +33,7 @@ class PopularMoviesVC: UIViewController {
         self.collectionView.register(MovieGridCell.self)
         self.refreshControl.addTarget(self, action: #selector(self.refreshList), for: .valueChanged)
         self.collectionView.addSubview(self.refreshControl)
+        self.refreshControl.beginRefreshing()
         
         self.viewModel.getPopularMovies(reload: true)
         
@@ -49,7 +50,7 @@ class PopularMoviesVC: UIViewController {
     
     private func refreshAction() {
         self.viewModel.getPopularMovies(reload: true)
-       }
+    }
     
     private func getMovie(indexPath: IndexPath) -> Movie? {
         let movies = self.viewModel.movies?.results ?? []
@@ -84,18 +85,15 @@ extension PopularMoviesVC: UICollectionViewDelegate {
 extension PopularMoviesVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if self.viewModel.movies != nil {
+        guard self.viewModel.movies != nil else {
             self.activityIndicator.startAnimating()
+            return 0
         }
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.viewModel.movies != nil {
-            self.activityIndicator.stopAnimating()
-        }
-        
-        return self.viewModel.movies?.results?.count ?? 0
+       return self.viewModel.movies?.results?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,15 +123,26 @@ extension PopularMoviesVC: PopularMoviesDelegate {
     func reloadData() {
         
         if self.refreshControl.isRefreshing {
-                   self.refreshControl.endRefreshing()
+            self.refreshControl.endRefreshing()
         }
 
        if let isAnimating = self.activityIndicator?.isAnimating, isAnimating {
            self.activityIndicator?.stopAnimating()
        }
        
-       self.collectionView?.reloadData()
+        self.collectionView.reloadData()
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
 }
 
+
+extension PopularMoviesVC: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if self.refreshControl.isRefreshing {
+            self.refreshAction()
+        }
+    }
+
+}
