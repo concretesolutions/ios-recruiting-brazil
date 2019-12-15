@@ -21,6 +21,7 @@ extension MovieDetailViewController: UITableViewDataSource {
             self.checkMovieFavorite() ? button.setImage(UIImage(named: "favorite_full_icon"),
                                                         for: .normal) :
                 button.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            button.addTarget(self, action: #selector(favoriteButtonClicked), for: .touchUpInside)
             cell.accessoryView = button
         }
         if indexPath.row == 1 {

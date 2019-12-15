@@ -89,4 +89,22 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
+
+    @objc func favoriteButtonClicked(sender: Any) {
+        guard let button = sender as? UIButton else {return}
+        if checkMovieFavorite() {
+            button.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+            coreDataManager.deleteMovie(withName: movie.title)
+        } else {
+            button.setImage(UIImage(named: "favorite_full_icon"),
+            for: .normal)
+            coreDataManager.saveMovie(name: movie.title, genres: "",
+                                      overview: movie.overview, date: movie.releaseDate,
+                                      image: customView.movieImage.image)
+        }
+
+        if let movies = coreDataManager.fetchMovies() {
+            self.fetchedMovies = movies
+        }
+    }
 }
