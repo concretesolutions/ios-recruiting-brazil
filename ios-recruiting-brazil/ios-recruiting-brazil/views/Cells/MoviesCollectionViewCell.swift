@@ -84,7 +84,7 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
 
     @objc func favoriteButtonClicked() {
         if let movie = movie {
-            delegate?.didFavoriteMovie(movie: movie)
+            delegate?.didFavoriteMovie(movie: movie, withImage: movieImage.image)
             isFavorite = !isFavorite
             isFavorite ? favoriteButton.setImage(
                 UIImage(named: "favorite_full_icon"), for: .normal) :

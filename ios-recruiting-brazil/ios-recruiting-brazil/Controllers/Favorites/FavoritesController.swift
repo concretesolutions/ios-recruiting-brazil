@@ -13,6 +13,14 @@ class FavoritesController: UIViewController {
         table.registerCell(cellType: MoviesTableViewCell.self)
         return table
     }()
+    let coreDataManager = CoreDataManager()
+    var movies = [Movie]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.customView.reloadData()
+            }
+        }
+    }
 
     override func loadView() {
         self.view = customView
@@ -21,6 +29,14 @@ class FavoritesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
+        customView.dataSource = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let movies = coreDataManager.fetchMovies() {
+            self.movies = movies
+        }
     }
 
     private func setNavigation() {

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Adriel Freire. All rights reserved.
 //
 
-import Foundation
+import UIKit
 protocol MovieCellDelegate: AnyObject {
-    func didFavoriteMovie(movie: MovieDTO)
+    func didFavoriteMovie(movie: MovieDTO, withImage image: UIImage?)
 }
