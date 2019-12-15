@@ -11,3 +11,11 @@ import Foundation
 enum errorType {
     case undefined, search, none
 }
+
+enum StoryboardType: String {
+    case main
+
+    var name: String {
+        return self.rawValue.capitalized
+    }
+}

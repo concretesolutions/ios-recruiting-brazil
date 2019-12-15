@@ -68,6 +68,17 @@ class PopularMoviesVC: UIViewController {
 
 extension PopularMoviesVC: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movie = self.getMovie(indexPath: indexPath) else {
+            return
+        }
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        
+        let controller: MovieDetailsVC? = self.navigationController?.push(.main)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         guard let movies = self.viewModel.movieList,
