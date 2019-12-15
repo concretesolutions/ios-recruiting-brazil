@@ -12,7 +12,23 @@ class MoviesGridController: UIViewController {
     var pagesRequested = 1
     var searchName: String = ""
     var searchTimer: Timer?
-    let searchView = UIView()
+    var searchedMovies = [MovieDTO]() {
+        didSet {
+            searchDataSource.searchedMovies = searchedMovies
+            DispatchQueue.main.async {
+                self.searchView.reloadData()
+            }
+        }
+    }
+    let searchDataSource = SearchTableDataSource()
+    lazy var searchView: UITableView = {
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.registerCell(cellType: MoviesTableViewCell.self)
+        table.dataSource = searchDataSource
+        table.rowHeight = 150
+        table.backgroundColor = .lightGray
+        return table
+    }()
     var movies = [MovieDTO]() {
         didSet {
             DispatchQueue.main.async {
@@ -43,9 +59,8 @@ class MoviesGridController: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.searchBar.placeholder = "Search"
-        searchView.backgroundColor = .blue
-//        searchView.grid.delegate = self
-//        searchView.grid.dataSource = self
+        search.modalPresentationStyle = .fullScreen
+        search.edgesForExtendedLayout = .all
         search.view = searchView
         self.navigationItem.searchController = search
 

@@ -40,6 +40,9 @@
 		FC7D9AE123A5821E007F88A2 /* MoviesResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D9AE023A5821E007F88A2 /* MoviesResultDTO.swift */; };
 		FC7D9AE323A58FFD007F88A2 /* MoviesSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D9AE223A58FFD007F88A2 /* MoviesSearch.swift */; };
 		FC7D9AE623A5921F007F88A2 /* MoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D9AE523A5921F007F88A2 /* MoviesTableViewCell.swift */; };
+		FC7D9AE923A5A6B7007F88A2 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D9AE823A5A6B7007F88A2 /* UITableView+Reusable.swift */; };
+		FC7D9AEB23A5A726007F88A2 /* SearchTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D9AEA23A5A726007F88A2 /* SearchTableDataSource.swift */; };
+		FC9609C823A5BC0300F1D006 /* UISearchController+ViewWillppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9609C723A5BC0300F1D006 /* UISearchController+ViewWillppear.swift */; };
 		FCA6210223A5516A001ACA95 /* MockWrongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210123A5516A001ACA95 /* MockWrongModel.swift */; };
 		FCA6210823A55F1C001ACA95 /* MoviesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210723A55F1C001ACA95 /* MoviesGridView.swift */; };
 		FCA6210A23A55F2E001ACA95 /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA6210923A55F2E001ACA95 /* MoviesCollectionViewCell.swift */; };
@@ -102,6 +105,9 @@
 		FC7D9AE023A5821E007F88A2 /* MoviesResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResultDTO.swift; sourceTree = "<group>"; };
 		FC7D9AE223A58FFD007F88A2 /* MoviesSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSearch.swift; sourceTree = "<group>"; };
 		FC7D9AE523A5921F007F88A2 /* MoviesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableViewCell.swift; sourceTree = "<group>"; };
+		FC7D9AE823A5A6B7007F88A2 /* UITableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
+		FC7D9AEA23A5A726007F88A2 /* SearchTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableDataSource.swift; sourceTree = "<group>"; };
+		FC9609C723A5BC0300F1D006 /* UISearchController+ViewWillppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchController+ViewWillppear.swift"; sourceTree = "<group>"; };
 		FCA6210123A5516A001ACA95 /* MockWrongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWrongModel.swift; sourceTree = "<group>"; };
 		FCA6210723A55F1C001ACA95 /* MoviesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridView.swift; sourceTree = "<group>"; };
 		FCA6210923A55F2E001ACA95 /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -303,6 +309,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		FC7D9AE723A5A61A007F88A2 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				FC7D9AEA23A5A726007F88A2 /* SearchTableDataSource.swift */,
+				FC7D9AE223A58FFD007F88A2 /* MoviesSearch.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		FCA6210323A55EC3001ACA95 /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,6 +339,8 @@
 			isa = PBXGroup;
 			children = (
 				FCA6210F23A55FD9001ACA95 /* UICollectionView+Reusable.swift */,
+				FC7D9AE823A5A6B7007F88A2 /* UITableView+Reusable.swift */,
+				FC9609C723A5BC0300F1D006 /* UISearchController+ViewWillppear.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -340,9 +357,9 @@
 		FCA6211323A567CD001ACA95 /* MoviesGrid */ = {
 			isa = PBXGroup;
 			children = (
+				FC7D9AE723A5A61A007F88A2 /* Search */,
 				FCA6211423A567DC001ACA95 /* MoviesGridController.swift */,
 				FCA6211623A56841001ACA95 /* MoviesGridDataSource.swift */,
-				FC7D9AE223A58FFD007F88A2 /* MoviesSearch.swift */,
 			);
 			path = MoviesGrid;
 			sourceTree = "<group>";
@@ -525,9 +542,12 @@
 				FCA6210E23A55FB6001ACA95 /* Reusable.swift in Sources */,
 				FC16031723A25E9E008A0612 /* URLComponentExtension.swift in Sources */,
 				FC7D9ADF23A581EC007F88A2 /* MovieDTO.swift in Sources */,
+				FC7D9AE923A5A6B7007F88A2 /* UITableView+Reusable.swift in Sources */,
 				FC16032323A25FF1008A0612 /* URLSessionProvider.swift in Sources */,
 				FC16032023A25F8C008A0612 /* HTTPTask.swift in Sources */,
 				FCA6211523A567DC001ACA95 /* MoviesGridController.swift in Sources */,
+				FC7D9AEB23A5A726007F88A2 /* SearchTableDataSource.swift in Sources */,
+				FC9609C823A5BC0300F1D006 /* UISearchController+ViewWillppear.swift in Sources */,
 				FC16031E23A25F63008A0612 /* NetworError.swift in Sources */,
 				FC16030E23A25E1E008A0612 /* Service.swift in Sources */,
 				FC16033323A28346008A0612 /* URLSessionDataTaskProtocol.swift in Sources */,

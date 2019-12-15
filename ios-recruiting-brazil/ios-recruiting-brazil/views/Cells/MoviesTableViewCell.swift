@@ -11,7 +11,7 @@ class MoviesTableViewCell: UITableViewCell, ConfigView {
 
     let movieImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = .darkGray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -27,10 +27,12 @@ class MoviesTableViewCell: UITableViewCell, ConfigView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let movieDescription: UITextView = {
-        let textView = UITextView()
-        textView.isUserInteractionEnabled = false
-        return textView
+    let movieDescription: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -54,31 +56,33 @@ class MoviesTableViewCell: UITableViewCell, ConfigView {
             movieImage.topAnchor.constraint(equalTo: self.topAnchor),
             movieImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             movieImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            movieImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2)
+            movieImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3)
         ])
         //date constraints
         NSLayoutConstraint.activate([
             date.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             date.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            date.heightAnchor.constraint(equalToConstant: date.font.pointSize)
+            date.heightAnchor.constraint(equalToConstant: date.font.pointSize),
+            date.widthAnchor.constraint(equalToConstant: 50)
         ])
         //movieName constraints
         NSLayoutConstraint.activate([
             movieName.topAnchor.constraint(equalTo: date.topAnchor),
             movieName.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 10),
             movieName.heightAnchor.constraint(equalToConstant: movieName.font.pointSize),
-            movieName.trailingAnchor.constraint(equalTo: date.leadingAnchor, constant:  -10)
+            movieName.trailingAnchor.constraint(equalTo: date.leadingAnchor, constant: -10)
         ])
         //movieDescription constraints
         NSLayoutConstraint.activate([
             movieDescription.leadingAnchor.constraint(equalTo: movieName.leadingAnchor),
-            movieDescription.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 20),
+            movieDescription.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 10),
             movieDescription.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-            movieName.trailingAnchor.constraint(equalTo: date.trailingAnchor)
+            movieDescription.trailingAnchor.constraint(equalTo: date.trailingAnchor)
         ])
     }
     func setAdditionalConfiguration() {
         self.backgroundColor = .lightGray
+        self.selectionStyle = .none
     }
 }
 
