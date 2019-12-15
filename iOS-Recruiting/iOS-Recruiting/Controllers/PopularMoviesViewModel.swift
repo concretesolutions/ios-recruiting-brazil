@@ -11,6 +11,7 @@ import UIKit
 
 protocol PopularMoviesDelegate: UIViewController {
     func reloadData()
+    func showTableError(type: errorType)
 }
 
 class PopularMoviesViewModel {
@@ -45,8 +46,13 @@ class PopularMoviesViewModel {
                     self.movies?.results = movies.unique { $0.id ?? 0 }
                     self.movies?.page = contents.page
                 }
+                self.controller?.showTableError(type: .none)
             case .failure(let error, _):
-                self.controller?.showError(message: error.message())
+                if reload {
+                    self.controller?.showTableError(type: .undefined)
+                } else {
+                    self.controller?.showError(message: error.message())
+                }
             }
             
             self.controller?.reloadData()

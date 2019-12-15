@@ -14,6 +14,9 @@
 		AF48A09423A66DD1008A4617 /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48A09323A66DD1008A4617 /* DictionaryExtension.swift */; };
 		AF48A09723A6737F008A4617 /* ActivityIndicationFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48A09523A6737F008A4617 /* ActivityIndicationFooter.swift */; };
 		AF48A09823A6737F008A4617 /* ActivityIndicationFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF48A09623A6737F008A4617 /* ActivityIndicationFooter.xib */; };
+		AF48A09A23A67593008A4617 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48A09923A67593008A4617 /* Enum.swift */; };
+		AF48A09D23A68011008A4617 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48A09C23A68011008A4617 /* ErrorView.swift */; };
+		AF48A09F23A6801A008A4617 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF48A09E23A6801A008A4617 /* ErrorView.xib */; };
 		AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EB623A01FE0005F219B /* AppDelegate.swift */; };
 		AFF71EB923A01FE0005F219B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EB823A01FE0005F219B /* SceneDelegate.swift */; };
 		AFF71EBB23A01FE0005F219B /* PopularMoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF71EBA23A01FE0005F219B /* PopularMoviesVC.swift */; };
@@ -53,6 +56,9 @@
 		AF48A09323A66DD1008A4617 /* DictionaryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
 		AF48A09523A6737F008A4617 /* ActivityIndicationFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicationFooter.swift; sourceTree = "<group>"; };
 		AF48A09623A6737F008A4617 /* ActivityIndicationFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityIndicationFooter.xib; sourceTree = "<group>"; };
+		AF48A09923A67593008A4617 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		AF48A09C23A68011008A4617 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		AF48A09E23A6801A008A4617 /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		AFF71EB323A01FE0005F219B /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFF71EB623A01FE0005F219B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFF71EB823A01FE0005F219B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +119,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AF48A09B23A67FF0008A4617 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AF48A09C23A68011008A4617 /* ErrorView.swift */,
+				AF48A09E23A6801A008A4617 /* ErrorView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		AFF71EAA23A01FE0005F219B = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +149,7 @@
 		AFF71EB523A01FE0005F219B /* iOS-Recruiting */ = {
 			isa = PBXGroup;
 			children = (
+				AF48A09B23A67FF0008A4617 /* Views */,
 				AFF71EC423A01FE2005F219B /* Info.plist */,
 				AFF71EB623A01FE0005F219B /* AppDelegate.swift */,
 				AFF71EB823A01FE0005F219B /* SceneDelegate.swift */,
@@ -217,6 +233,7 @@
 				AFF71EF123A03BB8005F219B /* Log.swift */,
 				AFF71F0523A08012005F219B /* CollectionViewFlowLayout.swift */,
 				AF48A08F23A5EA1C008A4617 /* Cookie.swift */,
+				AF48A09923A67593008A4617 /* Enum.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -323,6 +340,7 @@
 				AFF71F0C23A0811C005F219B /* MovieGridCell.xib in Resources */,
 				AF48A09823A6737F008A4617 /* ActivityIndicationFooter.xib in Resources */,
 				AFF71EC323A01FE2005F219B /* LaunchScreen.storyboard in Resources */,
+				AF48A09F23A6801A008A4617 /* ErrorView.xib in Resources */,
 				AFF71EC023A01FE2005F219B /* Assets.xcassets in Resources */,
 				AFF71EBE23A01FE0005F219B /* Main.storyboard in Resources */,
 			);
@@ -386,6 +404,7 @@
 				AFF71F0023A05581005F219B /* ReusableViewExtension.swift in Sources */,
 				AFF71F0423A06576005F219B /* UIViewControllerExtension.swift in Sources */,
 				AFF71EFE23A05552005F219B /* UICollectionViewExtension.swift in Sources */,
+				AF48A09A23A67593008A4617 /* Enum.swift in Sources */,
 				AFF71EF223A03BB8005F219B /* Log.swift in Sources */,
 				AFF71EB723A01FE0005F219B /* AppDelegate.swift in Sources */,
 				AF48A09723A6737F008A4617 /* ActivityIndicationFooter.swift in Sources */,
@@ -401,6 +420,7 @@
 				AFF71EEB23A033D7005F219B /* MovieService.swift in Sources */,
 				AFF71EF623A03F75005F219B /* DataExtension.swift in Sources */,
 				AFF71F0623A08012005F219B /* CollectionViewFlowLayout.swift in Sources */,
+				AF48A09D23A68011008A4617 /* ErrorView.swift in Sources */,
 				AFF71F0223A063DF005F219B /* PopularMoviesViewModel.swift in Sources */,
 				AFF71EB923A01FE0005F219B /* SceneDelegate.swift in Sources */,
 				AFF71EE823A033D7005F219B /* NetworkBaseService.swift in Sources */,

@@ -40,6 +40,7 @@ class PopularMoviesVC: UIViewController {
         
     }
     
+    
     @objc func refreshList() {
         if !self.collectionView.isDragging {
             self.refreshAction()
@@ -153,6 +154,21 @@ extension PopularMoviesVC: PopularMoviesDelegate {
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
+    
+     func showTableError(type: errorType) {
+        self.activityIndicator.stopAnimating()
+        switch type {
+        case .undefined:
+            let error = ErrorView()
+            error.configure(type: type)
+            error.delegate = self
+            self.collectionView.backgroundView = error
+        case .none:
+            self.collectionView.backgroundView = nil
+        default:
+            break
+        }
+    }
 }
 
 
@@ -165,3 +181,13 @@ extension PopularMoviesVC: UIScrollViewDelegate {
     }
 
 }
+
+extension PopularMoviesVC: ErrorDelegate {
+    
+    func retry() {
+        self.collectionView.backgroundView = nil
+        self.refreshList()
+    }
+
+}
+
