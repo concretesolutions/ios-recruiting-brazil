@@ -17,7 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [LaunchOptions: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = ViewController()
+
+        let moviesGrid = UINavigationController(rootViewController: MoviesGridController())
+        moviesGrid.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
+        let favories = UINavigationController(rootViewController: FavoritesController())
+        favories.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "favorite_empty_icon"), tag: 1)
+
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.barTintColor = .yellow
+        tabBarController.setViewControllers([moviesGrid, favories], animated: true)
+        self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         return true
     }
