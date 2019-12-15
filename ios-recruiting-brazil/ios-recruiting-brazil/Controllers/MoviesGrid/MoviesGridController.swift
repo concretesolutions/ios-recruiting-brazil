@@ -25,6 +25,7 @@ class MoviesGridController: UIViewController {
         let table = UITableView(frame: .zero, style: .grouped)
         table.registerCell(cellType: MoviesTableViewCell.self)
         table.dataSource = searchDataSource
+        table.delegate = self
         table.rowHeight = 150
         table.backgroundColor = .lightGray
         return table

@@ -21,6 +21,5 @@ extension MoviesGridController: UICollectionViewDelegateFlowLayout {
         let movie = movies[indexPath.row]
         let detailsController = MovieDetailViewController(withMovie: movie)
         self.navigationController?.pushViewController(detailsController, animated: true)
-//        let controller = Movies
     }
 }
