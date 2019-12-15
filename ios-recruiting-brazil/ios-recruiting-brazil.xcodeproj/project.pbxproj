@@ -36,6 +36,8 @@
 		FC28869323A516660081A8DE /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC28869223A516660081A8DE /* MockModel.swift */; };
 		FC28869623A5406E0081A8DE /* Result.json in Resources */ = {isa = PBXBuildFile; fileRef = FC28869523A5406E0081A8DE /* Result.json */; };
 		FC3AEAEF23A64AB5008918FA /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3AEAEE23A64AB5008918FA /* FavoritesController.swift */; };
+		FC3AEAF323A65116008918FA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3AEAF223A65116008918FA /* CoreDataManager.swift */; };
+		FC3AEAF523A651E7008918FA /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3AEAF423A651E7008918FA /* CoreDataManagerTests.swift */; };
 		FC5AB71723A1E6FA0095DDC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71623A1E6FA0095DDC0 /* AppDelegate.swift */; };
 		FC5AB71B23A1E6FA0095DDC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71A23A1E6FA0095DDC0 /* ViewController.swift */; };
 		FC5AB72123A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC5AB71F23A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld */; };
@@ -105,6 +107,8 @@
 		FC28869223A516660081A8DE /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
 		FC28869523A5406E0081A8DE /* Result.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Result.json; sourceTree = "<group>"; };
 		FC3AEAEE23A64AB5008918FA /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		FC3AEAF223A65116008918FA /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		FC3AEAF423A651E7008918FA /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		FC5AB71323A1E6FA0095DDC0 /* ios-recruiting-brazil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-recruiting-brazil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5AB71623A1E6FA0095DDC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5AB71A23A1E6FA0095DDC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -279,8 +283,17 @@
 			isa = PBXGroup;
 			children = (
 				FC5AB71F23A1E6FA0095DDC0 /* ios_recruiting_brazil.xcdatamodeld */,
+				FC3AEAF223A65116008918FA /* CoreDataManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		FC3AEAF123A650CE008918FA /* CoreDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				FC3AEAF423A651E7008918FA /* CoreDataManagerTests.swift */,
+			);
+			path = CoreDataTests;
 			sourceTree = "<group>";
 		};
 		FC5AB70A23A1E6FA0095DDC0 = {
@@ -325,6 +338,7 @@
 		FC5AB72F23A1E6FC0095DDC0 /* ios-recruiting-brazilTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC3AEAF123A650CE008918FA /* CoreDataTests */,
 				FC16032723A262D4008A0612 /* NetworkTests */,
 				FC5AB73023A1E6FC0095DDC0 /* ios_recruiting_brazilTests.swift */,
 				FC5AB73223A1E6FC0095DDC0 /* Info.plist */,
@@ -603,6 +617,7 @@
 				FC16033323A28346008A0612 /* URLSessionDataTaskProtocol.swift in Sources */,
 				FCA6211023A55FD9001ACA95 /* UICollectionView+Reusable.swift in Sources */,
 				FC2717FD23A5D3B400077F38 /* MovieDetailViewController.swift in Sources */,
+				FC3AEAF323A65116008918FA /* CoreDataManager.swift in Sources */,
 				FCA6211723A56841001ACA95 /* MoviesGridDataSource.swift in Sources */,
 				FC9609CA23A5CF9900F1D006 /* MovieDetailView.swift in Sources */,
 				FC7D9AE623A5921F007F88A2 /* MoviesTableViewCell.swift in Sources */,
@@ -633,6 +648,7 @@
 				FC16032F23A27AFD008A0612 /* MockURLSessionDataTask.swift in Sources */,
 				FC28869323A516660081A8DE /* MockModel.swift in Sources */,
 				FC5AB73123A1E6FC0095DDC0 /* ios_recruiting_brazilTests.swift in Sources */,
+				FC3AEAF523A651E7008918FA /* CoreDataManagerTests.swift in Sources */,
 				FC16032B23A2634C008A0612 /* URLSessionProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

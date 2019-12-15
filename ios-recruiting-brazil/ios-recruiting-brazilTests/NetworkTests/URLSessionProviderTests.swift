@@ -25,12 +25,15 @@ class URLSessionProviderTests: XCTestCase {
     
     func testGetResumeCalled() {
         let dataTask = MockURLSessionDataTask()
+        let expectation = XCTestExpectation(description: "Esperando resultado")
         session.nextDataTask = dataTask
         let provider = URLSessionProvider(session: session)
         let service = MockService.get
         provider.request(type: MockModel.self, service: service) { (result) in
+            expectation.fulfill()
             return
         }
+        wait(for: [expectation], timeout: 10)
         XCTAssert(dataTask.resumeWasCalled)
         
     }
