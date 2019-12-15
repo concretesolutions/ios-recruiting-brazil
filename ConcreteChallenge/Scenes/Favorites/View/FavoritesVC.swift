@@ -86,7 +86,14 @@ extension FavoritesVC: FeedViewDelegate {
             return
         }
         cell.isFavorite = isFavorite
-        reloadFeed()
+        if !isFavorite {
+            let indexPath = IndexPath(item: item, section: 0)
+            self.feedCollectionView.performBatchUpdates({ [weak self] in
+                self?.feedCollectionView.deleteItems(at: [indexPath])
+            }) { [weak self] (_) in
+                self?.reloadFeed()
+            }
+        }
     }
 }
 
