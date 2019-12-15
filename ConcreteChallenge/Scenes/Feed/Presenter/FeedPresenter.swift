@@ -81,6 +81,12 @@ final class FeedPresenter: BasePresenter {
             return ItemViewData.mockData
         }
         
+        // Prefetching if necessary
+        if item > numberOfItems - 5 {
+            loadMoreItems()
+        }
+        
+        // Building the view data
         let movie = movies[item]
         let imageURL: URL?
         if let path = movie.backdropPath {
