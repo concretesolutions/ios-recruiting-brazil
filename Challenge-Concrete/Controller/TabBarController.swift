@@ -8,19 +8,28 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-    
-    let trendingMoviesVC = UINavigationController(rootVC: TrendingMoviesViewController(), color: .customYellow)
-    let favoriteMoviesVC = UINavigationController(rootVC: FavoriteMoviesViewController(), color: .customYellow)
+    let trendingMoviesVC = TrendingMoviesViewController()
+    let favoriteMoviesVC = FavoriteMoviesViewController()
+    lazy var trendingNavigation: UINavigationController = {
+        return UINavigationController(rootVC: trendingMoviesVC, color: .customYellow)
+    }()
+    lazy var favoriteNavigation: UINavigationController = {
+       return UINavigationController(rootVC: favoriteMoviesVC, color: .customYellow)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        trendingMoviesVC.addFavoriteMovieDelegate = favoriteMoviesVC
+        setupTabBar()
+    }
+    
+    func setupTabBar() {
         let listIcon = UIImage(named: "list_icon")
         let favoriteIcon = UIImage(named: "favorite_empty_icon")
-        trendingMoviesVC.tabBarItem = UITabBarItem(title: "Trending", image: listIcon, tag: 0)
-        favoriteMoviesVC.tabBarItem = UITabBarItem(title: "Favorites", image: favoriteIcon, tag: 1)
+        trendingNavigation.tabBarItem = UITabBarItem(title: "Trending", image: listIcon, tag: 0)
+        favoriteNavigation.tabBarItem = UITabBarItem(title: "Favorites", image: favoriteIcon, tag: 1)
         
-        let controllers = [trendingMoviesVC, favoriteMoviesVC]
+        let controllers = [trendingNavigation, favoriteNavigation]
         viewControllers = controllers
     }
 }

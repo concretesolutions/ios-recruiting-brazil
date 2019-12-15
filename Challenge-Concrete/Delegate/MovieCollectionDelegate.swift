@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class MovieCollectionDelegate: NSObject, MovieData, UICollectionViewDelegateFlowLayout {
+class MovieCollectionDelegate: NSObject, GenericDelegate, UICollectionViewDelegateFlowLayout {
     
     weak var moviesDelegate: MoviesDelegate?
     
@@ -24,5 +24,13 @@ class MovieCollectionDelegate: NSObject, MovieData, UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         moviesDelegate?.didSelectMovie(at: indexPath.item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let movieCell = cell as? MovieCollectionViewCell {
+            movieCell.favoriteAction = { [weak self, index = indexPath.row] in
+                self?.moviesDelegate?.didFavoriteMovie(at: index)
+            }
+        }
     }
 }

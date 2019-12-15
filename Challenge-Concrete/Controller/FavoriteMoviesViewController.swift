@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoriteMoviesViewController: UIViewController, MoviesVC {
 
-    let dataSource = MovieDataSource()
+    var dataSource = MovieDataSource()
     var delegate = MovieTableDelegate()
     var movieViewModel = FavoriteMoviesViewModel()
     let moviesView = FavoriteMoviesView()
@@ -22,9 +23,9 @@ class FavoriteMoviesViewController: UIViewController, MoviesVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Movies"
-        setupDelegateDataSource()
+        setup(with: dataSource)
         moviesView.setupTableView(delegate: delegate, dataSource: dataSource)
-        movieViewModel.fetchTrendingMovies()
+        movieViewModel.fetchFavoriteMovies()
     }
 }
 
@@ -47,6 +48,12 @@ extension FavoriteMoviesViewController {
         let movie = dataSource.data[index]
         navigationController?.pushViewController(MovieDetailViewController(), animated: true)
         print("MOVIE INDEX: \(movie.title ?? "none")")
+    }
+}
+
+extension FavoriteMoviesViewController: AddFavoriteMovieDelegate {
+    func didAdd(_ favoriteMovie: FavoriteMovie) {
+        movieViewModel.add(favoriteMovie)
     }
     
     

@@ -19,12 +19,43 @@ final class APIProvider<T: Decodable> {
     func request<ResultType: Decodable>(_ endPoint: RouterService, completion: @escaping (Result<ResultType, NetworkError>) -> Void) {
         let request = URLRequest(endPoint: endPoint)
 
-        let task = session.dataTask(with: request) { (result) in
+        let task = session.dataTask(with: request) { result in
             self.handleResult(result: result, completion: completion)
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
             task.resume()
+        }
+    }
+    
+    func requestImage(withURL url: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        guard let imageURL = URL(string: url) else { return}
+        let cache = URLCache.shared
+        let request = URLRequest(url: imageURL)
+        
+        if let data = cache.cachedResponse(for: request)?.data {
+            completion(.success(data))
+        } else {
+            let task = session.dataTask(with: request) { result in
+                switch result {
+                case .success(let response, let data):
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        completion(.failure(NetworkError.noResponseData))
+                        return
+                    }
+                    switch httpResponse.statusCode {
+                    case 200...299:
+                        completion(.success(data))
+                    default: break
+                    }
+                case .failure(let error):
+                    completion(.failure(NetworkError.connectionError(error)))
+                }
+            }
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                task.resume()
+            }
         }
     }
     

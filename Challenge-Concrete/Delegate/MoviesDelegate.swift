@@ -8,4 +8,9 @@
 
 protocol MoviesDelegate: AnyObject {
     func didSelectMovie(at index: Int)
+    func didFavoriteMovie(at index: Int)
+}
+
+extension MoviesDelegate {
+    func didFavoriteMovie(at index: Int) { }
 }

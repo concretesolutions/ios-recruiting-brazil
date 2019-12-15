@@ -10,16 +10,17 @@ protocol ViewCode {
     func buildViewHierarchy()
     func buildConstraints()
     func setupView()
+    func setupAditionalConfiguration()
 }
 
-extension ViewCode{
+extension ViewCode {
     func setupView() {
         buildViewHierarchy()
         buildConstraints()
-        aditionalConfiguration()
+        setupAditionalConfiguration()
     }
     
-    func aditionalConfiguration() {
+    func setupAditionalConfiguration() {
         
     }
 }

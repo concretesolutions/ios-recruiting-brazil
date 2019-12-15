@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class MovieDataSource: GenericDataSource<Movie>, UITableViewDataSource {
+class MovieDataSource: GenericDataSource<FavoriteMovie>, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
@@ -16,8 +17,8 @@ class MovieDataSource: GenericDataSource<Movie>, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        let movie = self.data[indexPath.row]
-        cell.textLabel?.text = movie.title ?? movie.overview
+        let favoriteMovie = self.data[indexPath.row]
+        cell.textLabel?.text = favoriteMovie.title
         return cell
     }
 }
