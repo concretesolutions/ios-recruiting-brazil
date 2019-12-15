@@ -18,6 +18,7 @@ extension MoviesGridController: UICollectionViewDataSource {
         let movie = movies[indexPath.row]
         cell.movie = movie
         cell.buildCell()
+        cell.delegate = self
 
         return cell
     }

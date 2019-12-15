@@ -10,6 +10,8 @@ import UIKit
 class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
 
     var movie: MovieDTO?
+    public weak var delegate: MovieCellDelegate?
+    private var isFavorite = false
     let movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -33,9 +35,10 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
         return view
     }()
 
-    let favoriteButton: UIButton = {
+    lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
+        button.addTarget(self, action: #selector(favoriteButtonClicked), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -76,6 +79,16 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+
+    @objc func favoriteButtonClicked() {
+        if let movie = movie {
+            delegate?.didFavoriteMovie(movie: movie)
+            isFavorite = !isFavorite
+            isFavorite ? favoriteButton.setImage(
+                UIImage(named: "favorite_full_icon"), for: .normal) :
+                favoriteButton.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
         }
     }
 
