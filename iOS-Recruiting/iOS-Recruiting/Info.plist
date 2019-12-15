@@ -71,7 +71,14 @@
 		<dict>
 			<key>movieDB</key>
 			<string>https://api.themoviedb.org</string>
+			<key>imagesMovieDB</key>
+			<string>http://image.tmdb.org/t/p/</string>
 		</dict>
+	</dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
 </dict>
 </plist>

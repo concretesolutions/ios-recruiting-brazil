@@ -27,7 +27,7 @@ extension NetworkBaseService {
     
     func handleModelObject<T>(data: Data, key: String? = nil, code: Int) -> NetworkResult<T, NetworkError, Int> where T : Mappable {
         if let key = key {
-            if let JSON = data.modelObject(), let container = CustomError(JSON: JSON) {
+            if let JSON = data.modelObject(), let container = CustomError(JSON: JSON), container.toJSON().count > 0 {
                 return NetworkResult.failure(NetworkError.withContainer(container: container), code)
             } else if let JSON = data.modelObject(key: key), let model = Mapper<T>().map(JSON: JSON) {
                 return NetworkResult.success(model, code)
@@ -35,7 +35,7 @@ extension NetworkBaseService {
                 return NetworkResult.failure(NetworkError.undefined, code)
             }
         } else {
-            if let JSON = data.modelObject(), let container = CustomError(JSON: JSON) {
+            if let JSON = data.modelObject(), let container = CustomError(JSON: JSON), container.toJSON().count > 0 {
                 return NetworkResult.failure(NetworkError.withContainer(container: container), code)
             } else if let JSON = data.modelObject(), let model = Mapper<T>().map(JSON: JSON) {
                 return NetworkResult.success(model, code)

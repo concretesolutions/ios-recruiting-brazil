@@ -64,6 +64,7 @@ enum HTTPMethod: String {
 enum Service: String {
     case movieDBv3  = "3"
     case mockv2     = "api/v2"
+    case imagesMovieDB = "w500"
 }
 
 struct NetworkService {
@@ -79,22 +80,37 @@ struct NetworkService {
     }
     
     init(api: Service, path: String, parameters: [String : Any]? = nil) {
-        switch api {
-        case .movieDBv3:
-            if let hosts = EnvironmentUtil.hosts, let base = hosts.movieDB {
-                self.base = base
-            }
-        case .mockv2:
-            self.base = "http://www.mocky.io"
-        }
-        
         self.api = api
         self.path = path
         self.parameters = self.defaults(with: parameters)
         
-        if let url = URL(string: self.base) {
-            self.url = url.appendingPathComponent(api.rawValue).appendingPathComponent(self.path)
+        if let url = NetworkService.getURL(api: api, path: path) {
+            self.url = url
         }
+    }
+    
+    static func getURL(api: Service, path: String) -> URL? {
+        var base = ""
+        
+        switch api {
+        case .movieDBv3:
+            if let hosts = EnvironmentUtil.hosts, let baseURL = hosts.movieDB {
+                base = baseURL
+            }
+        case .imagesMovieDB:
+            if let hosts = EnvironmentUtil.hosts, let baseURL = hosts.imagesMovieDB {
+                base = baseURL
+            }
+        case .mockv2:
+            base = "http://www.mocky.io"
+        }
+        
+        
+        if let url = URL(string: base) {
+            return url.appendingPathComponent(api.rawValue).appendingPathComponent(path)
+        }
+        
+        return nil
     }
     
     private func defaults(with parameters: [String : Any]? = nil) -> [String : Any] {

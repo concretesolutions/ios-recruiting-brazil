@@ -17,7 +17,7 @@ class MovieService: NetworkBaseService {
     
     // MARK: - Endpoints
     internal func getPopularMovies(page: Int, handler: @escaping MovieResultHandler) {
-        let path = "movie/populare"
+        let path = "movie/popular"
         let parameters: [String : Any] = ["language": "en-US", "page": page]
         let service = NetworkService(api: .movieDBv3, path: path, parameters: parameters)
         NetworkDispatch.shared.get(service) {

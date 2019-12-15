@@ -13,12 +13,14 @@ class HostsObject: Mappable {
     
     var base: String?
     var movieDB: String?
+    var imagesMovieDB: String?
     
     required init?(map: Map) {}
     
     func mapping(map: Map) {
         self.base  <- map["Base"]
         self.movieDB <- map["movieDB"]
+        self.imagesMovieDB <- map["imagesMovieDB"]
     }
 }
 

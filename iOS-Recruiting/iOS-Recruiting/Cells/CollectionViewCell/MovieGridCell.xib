@@ -19,7 +19,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdy-ls-2d9">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="458"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjh-5u-4ro">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjh-5u-4ro">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="366.5"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osx-HG-hl5">
@@ -31,8 +31,8 @@
                                             <constraint firstAttribute="width" secondItem="bkA-PA-dAt" secondAttribute="height" multiplier="1:1" id="8bc-Ly-JQt"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJp-vQ-Zm4">
-                                        <rect key="frame" x="8" y="33.5" width="322" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJp-vQ-Zm4">
+                                        <rect key="frame" x="8" y="4" width="322" height="83.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -41,9 +41,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="cJp-vQ-Zm4" firstAttribute="leading" secondItem="osx-HG-hl5" secondAttribute="leading" constant="8" id="991-9k-wry"/>
-                                    <constraint firstItem="cJp-vQ-Zm4" firstAttribute="centerY" secondItem="osx-HG-hl5" secondAttribute="centerY" id="AOi-08-bON"/>
                                     <constraint firstItem="bkA-PA-dAt" firstAttribute="leading" secondItem="cJp-vQ-Zm4" secondAttribute="trailing" constant="8" id="Dk8-xS-QGj"/>
                                     <constraint firstAttribute="trailing" secondItem="bkA-PA-dAt" secondAttribute="trailing" constant="16" id="GIR-d7-VIL"/>
+                                    <constraint firstItem="cJp-vQ-Zm4" firstAttribute="top" secondItem="osx-HG-hl5" secondAttribute="top" constant="4" id="KLw-ju-KbL"/>
+                                    <constraint firstAttribute="bottom" secondItem="cJp-vQ-Zm4" secondAttribute="bottom" constant="4" id="YPh-aR-v4w"/>
                                     <constraint firstItem="bkA-PA-dAt" firstAttribute="height" secondItem="osx-HG-hl5" secondAttribute="height" multiplier="1/2" id="ddX-gh-xGk"/>
                                     <constraint firstItem="bkA-PA-dAt" firstAttribute="centerY" secondItem="osx-HG-hl5" secondAttribute="centerY" id="qHe-wo-zsk"/>
                                 </constraints>

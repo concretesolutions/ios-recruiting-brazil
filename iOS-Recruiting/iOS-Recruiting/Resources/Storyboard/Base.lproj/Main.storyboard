@@ -26,6 +26,10 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" id="om2-Lh-2Qb">
+                                <rect key="frame" x="0.0" y="85" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -38,6 +42,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="aYF-h4-tXa"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="om2-Lh-2Qb" id="rEr-Ch-ODi"/>
                         <outlet property="collectionView" destination="1tv-dA-Sos" id="Rf2-NY-Cbh"/>
                     </connections>
                 </viewController>
@@ -67,6 +72,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="R6F-hN-Lzf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t3v-aR-7l2">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

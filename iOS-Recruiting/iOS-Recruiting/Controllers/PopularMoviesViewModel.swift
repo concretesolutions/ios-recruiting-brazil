@@ -27,17 +27,29 @@ class PopularMoviesViewModel {
         
         if reload {
             self.movies = nil
+            self.controller?.reloadData()
         }
         
+        let currentPage = self.movies?.page ?? 0
+        let page = currentPage + 1
         
-        MovieService.shared.getPopularMovies(page: 1) { (result) in
+        
+        MovieService.shared.getPopularMovies(page: page) { (result) in
             switch result {
             case .success(let contents, _):
-                self.movies = contents
-                self.controller?.reloadData()
+                if self.movies == nil {
+                    self.movies = contents
+                } else {
+                    var movies = self.movies?.results ?? []
+                    movies += contents.results ?? []
+                    self.movies?.results = movies.unique { $0.id ?? 0 }
+                    self.movies?.page = contents.page
+                }
             case .failure(let error, _):
                 self.controller?.showError(message: error.message())
             }
+            
+            self.controller?.reloadData()
         }
     }
 }
