@@ -91,6 +91,14 @@ class MoviesGridController: UIViewController {
                 self.movies.append(contentsOf: result.movies)
             case .failure(let error):
                 print(error)
+
+                let alert = UIAlertController(title: "Error", message: "An error has occurred, please try again",
+                                              preferredStyle: .alert)
+                let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(dismiss)
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
             self.dispatchGroup.leave()
         }
