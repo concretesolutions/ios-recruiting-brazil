@@ -58,6 +58,7 @@ class MoviesGridController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .yellow
 
         let search = UISearchController(searchResultsController: nil)
+        navigationItem.hidesSearchBarWhenScrolling = false
         search.searchResultsUpdater = self
         search.searchBar.placeholder = "Search"
         search.modalPresentationStyle = .fullScreen

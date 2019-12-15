@@ -16,21 +16,8 @@ extension MoviesGridController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: MoviesCollectionViewCell.self)
         let movie = movies[indexPath.row]
-        cell.movieName.text = movie.title
-        cell.movieImage.image = nil
-
-        let service = MovieService.getImage(movie.poster)
-        let session = URLSessionProvider()
-        session.request(type: Data.self, service: service) { (result) in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.sync {
-                    cell.movieImage.image = UIImage(data: data)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        cell.movie = movie
+        cell.buildCell()
 
         return cell
     }
