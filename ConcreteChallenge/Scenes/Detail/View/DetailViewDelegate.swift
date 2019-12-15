@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol DetailViewDelegate: ViewDelegate {
+protocol DetailViewDelegate: ViewDelegate, FavoriteViewDelegate {
     
     /// Set the movie genres whenever it has loaded
     func setGenres(data: GenreViewData)
-    
-    /// Set the favorite state when it has changed
-    func setFavorite(_ isFavorite: Bool)
+//    
+//    /// Set the favorite state when it has changed
+//    func setFavorite(_ isFavorite: Bool)
 }

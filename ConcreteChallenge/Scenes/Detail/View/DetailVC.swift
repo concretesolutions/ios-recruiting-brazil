@@ -81,7 +81,7 @@ final class DetailVC: BaseViewController {
     
     @objc func favoriteTapped(_ sender: UIBarButtonItem) {
         
-        detailPresenter?.setFavorite()
+        detailPresenter?.favoriteStateChanged()
     }
 }
 
@@ -93,7 +93,7 @@ extension DetailVC: DetailViewDelegate {
         }
     }
     
-    func setFavorite(_ isFavorite: Bool) {
+    func setFavorite(_ isFavorite: Bool, tag: Int? = nil) {
         let image = UIImage(named: isFavorite ? "favoriteFull" : "favoriteEmpty")
         favoriteButton = UIBarButtonItem(image: image, style: UIBarButtonItem.Style.plain, target: self, action: #selector(favoriteTapped(_:)))
         self.navigationItem.rightBarButtonItem = favoriteButton

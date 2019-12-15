@@ -32,11 +32,28 @@ final class ItemCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
+    let favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "favoriteEmpty"), for: .normal)
+        return button
+    }()
+    
+    /// Changes the display image for the favorite button depending on the state
+    var isFavorite: Bool = false {
+        didSet {
+            favoriteButton.setImage(UIImage(named: isFavorite ? "favoriteFull" : "favoriteEmpty"), for: .normal)
+        }
+    }
+    
     // MARK: - Methods -
     override func setupUI() {
         
+        // Make the button able to be pressed
+        filmImageView.isUserInteractionEnabled = true
+        
         contentView.addSubview(filmImageView)
         filmImageView.addSubview(titleLabel)
+        filmImageView.addSubview(favoriteButton)
     }
     
     override func setupConstraints() {
@@ -48,9 +65,15 @@ final class ItemCollectionViewCell: BaseCollectionViewCell {
             make.height.equalTo(imageWidth * ItemCollectionViewCell.imageAspect)
         }
         
+        favoriteButton.snp.makeConstraints { (make) in
+            make.trailing.bottom.equalToSuperview()
+            make.height.width.equalTo(44)
+        }
+        
         titleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(15)
-            make.trailing.bottom.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(10)
+            make.trailing.equalTo(favoriteButton.snp.leading)
         }
     }
 }

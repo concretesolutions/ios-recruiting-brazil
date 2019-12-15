@@ -88,12 +88,13 @@ final class DetailPresenter: BasePresenter {
     func getBarTitle() -> String {
         return "Movie"
     }
-    
-    /// To be called when the user wants to change the favorites state
-    func setFavorite() {
-        /// TODO: Implement persistence
+}
+
+extension DetailPresenter: FavoriteHandler {
+    func favoriteStateChanged(tag: Int? = nil) {
+        
         movie.isFavorite = !movie.isFavorite
-        detailView.setFavorite(movie.isFavorite)
+        detailView.setFavorite(movie.isFavorite, tag: nil)
         if movie.isFavorite {
             LocalService.instance.setFavorite(movie: movie)
         } else {

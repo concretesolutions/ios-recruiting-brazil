@@ -90,10 +90,9 @@ final class FeedPresenter: BasePresenter {
             imageURL = nil
         }
         
-        // TODO: Get favorite
         return ItemViewData(title: movie.title,
                             imageUrl: imageURL,
-                            isFavorite: false)
+                            isFavorite: movie.isFavorite)
     }
     
     func getHeaderData() -> FeedHeaderViewData {
@@ -113,5 +112,28 @@ final class FeedPresenter: BasePresenter {
         let movie = movies[item]
         let detailPresenter = DetailPresenter(movie: movie)
         feedView.navigateToView(presenter: detailPresenter)
+    }
+}
+
+extension FeedPresenter: FavoriteHandler {
+    func favoriteStateChanged(tag: Int?) {
+        guard let item = tag else {
+            os_log("❌ - Favorite had no tag", log: Logger.appLog(), type: .fault)
+            return
+        }
+        
+        guard item < self.numberOfItems else {
+            os_log("❌ - Number of items > number of movies", log: Logger.appLog(), type: .fault)
+            return
+        }
+        
+        let movie = movies[item]
+        movie.isFavorite = !movie.isFavorite
+        feedView.setFavorite(movie.isFavorite, tag: item)
+        if movie.isFavorite {
+            LocalService.instance.setFavorite(movie: movie)
+        } else {
+            LocalService.instance.removeFavorite(movie: movie)
+        }
     }
 }

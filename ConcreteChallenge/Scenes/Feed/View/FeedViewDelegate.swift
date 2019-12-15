@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FeedViewDelegate: ViewDelegate {
+protocol FeedViewDelegate: ViewDelegate, FavoriteViewDelegate {
     
     /// Whenever new data is loaded, the feed must reload the displayed data
     func reloadFeed()

@@ -141,10 +141,21 @@ final class FeedVC: BaseViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadFeed()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
+    }
+    
+    // MARK: Button methods
+    @objc func favoriteTapped(_ sender: UIButton) {
+        feedPresenter?.favoriteStateChanged(tag: sender.tag)
     }
 }
 
@@ -155,6 +166,14 @@ extension FeedVC: FeedViewDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.feedCollectionView.reloadData()
         }
+    }
+    
+    func setFavorite(_ isFavorite: Bool, tag: Int?) {
+        guard let item = tag, let cell = feedCollectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? ItemCollectionViewCell else {
+            // TODO: Log error
+            return
+        }
+        cell.isFavorite = isFavorite
     }
 }
 
@@ -174,11 +193,13 @@ extension FeedVC: UICollectionViewDataSource {
             os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
             fatalError("Unknown identifier")
         }
-        
-        // TODO: Implement favorite
+
+        cell.favoriteButton.tag = indexPath.item
+        cell.favoriteButton.addTarget(self, action: #selector(favoriteTapped(_:)), for: .touchUpInside)
         cell.titleLabel.text = itemData.title
         cell.filmImageView.kf.indicatorType = .activity
         cell.filmImageView.kf.setImage(with: itemData.imageUrl)
+        cell.isFavorite = itemData.isFavorite
         
         return cell
     }
