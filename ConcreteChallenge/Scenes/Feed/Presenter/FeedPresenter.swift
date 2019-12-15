@@ -9,10 +9,10 @@
 import Foundation
 import os.log
 
-final class FeedPresenter: BasePresenter {
+class FeedPresenter: BasePresenter {
     
     // MARK: - Properties -
-    private var feedView: FeedViewDelegate {
+    internal var feedView: FeedViewDelegate {
         guard let view = view as? FeedViewDelegate else {
             os_log("❌ - FeedPresenter was given to the wrong view", log: Logger.appLog(), type: .fault)
             fatalError("FeedPresenter was given to the wrong view")
@@ -21,16 +21,16 @@ final class FeedPresenter: BasePresenter {
     }
     
     /// The movie data to be displayed
-    private var movies: [Movie] = [] {
+    internal var movies: [Movie] = [] {
         didSet {
             feedView.reloadFeed()
         }
     }
     
     /// Controls which page to load next on
-    private var pagesLoaded: Int = 0
-    
-    private var maxPages: Int = 500
+//    private var pagesLoaded: Int = 0
+//
+//    private var maxPages: Int = 500
     
     // MARK: Computed
     var numberOfItems: Int {
@@ -43,47 +43,16 @@ final class FeedPresenter: BasePresenter {
         loadFeed()
     }
     
-    func loadFeed() {
-        MovieClient.getPopular(page: 1) { [weak self] (movies, error) in
-            
-            if let error = error {
-                os_log("❌ - Error loading movie feed: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
-                return
-            }
-            
-            if let movies = movies {
-                self?.movies = movies
-            }
-        }
-        pagesLoaded = 1
-    }
-    
-    func loadMoreItems() {
-        guard pagesLoaded <= maxPages else { return }
-        pagesLoaded += 1
-        MovieClient.getPopular(page: pagesLoaded) { [weak self] (movies, error) in
-            
-            if let error = error {
-                os_log("❌ - Error loading movie feed: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
-                return
-            }
-            
-            if let movies = movies {
-                self?.movies.append(contentsOf: movies)
-            }
-        }
-    }
+    /**
+     Override to do the necessary steps to load the feed data.
+     */
+    func loadFeed() {}
     
     func getItemData(item: Int) -> ItemViewData {
         
         guard item < self.numberOfItems else {
             os_log("❌ - Number of items > number of movies", log: Logger.appLog(), type: .fault)
             return ItemViewData.mockData
-        }
-        
-        // Prefetching if necessary
-        if item > numberOfItems - 5 {
-            loadMoreItems()
         }
         
         // Building the view data
@@ -98,14 +67,6 @@ final class FeedPresenter: BasePresenter {
         return ItemViewData(title: movie.title,
                             imageUrl: imageURL,
                             isFavorite: movie.isFavorite)
-    }
-    
-    func getHeaderData() -> FeedHeaderViewData {
-        
-        // TODO: Localize
-        return FeedHeaderViewData(title: "Popular Movies",
-                                  greeting: "Today's",
-                                  searchBarPlaceholder: "Looking for a movie?")
     }
     
     func selectItem(item: Int) {

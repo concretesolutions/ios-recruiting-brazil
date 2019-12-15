@@ -26,6 +26,7 @@ final class PosterDetailTableCell: BaseTableViewCell {
     // MARK: - Methods -
     override func setupUI() {
         
+        posterImageView.kf.indicatorType = .activity
         contentView.addSubview(posterImageView)
     }
     

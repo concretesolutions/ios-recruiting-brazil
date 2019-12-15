@@ -1,5 +1,5 @@
 //
-//  FeedHeaderView.swift
+//  PopularsHeaderView.swift
 //  ConcreteChallenge
 //
 //  Created by Alexandre Abrahão on 08/12/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedHeaderView: UIView {
+class PopularsHeaderView: UIView {
     
     // MARK: - Properties -
     // MARK: View

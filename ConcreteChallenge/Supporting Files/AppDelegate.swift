@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 
         // Set the the main VC
-        let popularNavigationController = NavigationController(rootViewController: Factory.getViewController(using: FeedPresenter()))
+        let popularNavigationController = NavigationController(rootViewController: Factory.getViewController(using: PopularsPresenter()))
         popularNavigationController.tabBarItem = UITabBarItem(title: "Popular", image: #imageLiteral(resourceName: "star"), tag: 0)
         
         // TODO: Change to the favorites feed controller

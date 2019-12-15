@@ -1,5 +1,5 @@
 //
-//  FeedHeaderViewData.swift
+//  PopularHeaderViewData.swift
 //  ConcreteChallenge
 //
 //  Created by Alexandre Abrahão on 08/12/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FeedHeaderViewData {
+struct PopularHeaderViewData {
     
     let title: String
     let greeting: String

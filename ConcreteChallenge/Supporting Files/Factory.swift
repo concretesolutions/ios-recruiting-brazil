@@ -15,9 +15,9 @@ struct Factory {
         
         switch presenter {
             
-        case is FeedPresenter: return FeedVC(presenter: presenter)
         case is DetailPresenter: return DetailVC(presenter: presenter)
         case is FavoritesPresenter: return FavoritesVC(presenter: presenter)
+        case is PopularsPresenter: return PopularsVC(presenter: presenter)
             
         default:
             os_log("❌ - Unknown presenter type %@", log: Logger.appLog(), type: .fault, "\(String(describing: presenter))")
