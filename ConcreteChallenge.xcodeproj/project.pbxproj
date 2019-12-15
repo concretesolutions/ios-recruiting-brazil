@@ -58,6 +58,8 @@
 		5E6FC71B23A6002600BA5DEF /* FavoriteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FC71A23A6002600BA5DEF /* FavoriteHandler.swift */; };
 		5E6FC71D23A602DD00BA5DEF /* FavoriteViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FC71C23A602DD00BA5DEF /* FavoriteViewDelegate.swift */; };
 		5E6FC71F23A697DF00BA5DEF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FC71E23A697DF00BA5DEF /* TabBarController.swift */; };
+		5E6FC72523A69D7F00BA5DEF /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FC72423A69D7F00BA5DEF /* FavoritesVC.swift */; };
+		5E6FC72723A69D9E00BA5DEF /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FC72623A69D9E00BA5DEF /* FavoritesPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +137,8 @@
 		5E6FC71A23A6002600BA5DEF /* FavoriteHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHandler.swift; sourceTree = "<group>"; };
 		5E6FC71C23A602DD00BA5DEF /* FavoriteViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewDelegate.swift; sourceTree = "<group>"; };
 		5E6FC71E23A697DF00BA5DEF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		5E6FC72423A69D7F00BA5DEF /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		5E6FC72623A69D9E00BA5DEF /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		607AF2E4B0344954FF4EE8DE /* Pods_ConcreteChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7726C2AE05F2BDA60189463E /* Pods-ConcreteChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConcreteChallenge.debug.xcconfig"; path = "Target Support Files/Pods-ConcreteChallenge/Pods-ConcreteChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		910EE706690D4D630F32CCF6 /* Pods_ConcreteChallenge_ConcreteChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConcreteChallenge_ConcreteChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,6 +362,7 @@
 		5E6AAD44239CA7F200564F6A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5E6FC72023A69D1100BA5DEF /* Favorites */,
 				5E6AAD63239D8A3100564F6A /* Detail */,
 				5E6AAD43239CA76200564F6A /* Feed */,
 			);
@@ -454,6 +459,39 @@
 				5E6AAD7C239DE9FF00564F6A /* LocalService.swift */,
 			);
 			path = Local;
+			sourceTree = "<group>";
+		};
+		5E6FC72023A69D1100BA5DEF /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FC72323A69D3A00BA5DEF /* View Data */,
+				5E6FC72223A69D2E00BA5DEF /* View */,
+				5E6FC72123A69D2200BA5DEF /* Presenter */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		5E6FC72123A69D2200BA5DEF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FC72623A69D9E00BA5DEF /* FavoritesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		5E6FC72223A69D2E00BA5DEF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FC72423A69D7F00BA5DEF /* FavoritesVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5E6FC72323A69D3A00BA5DEF /* View Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -728,9 +766,11 @@
 				5E6AAD2C239C4F3A00564F6A /* Logger.swift in Sources */,
 				5E6FC71D23A602DD00BA5DEF /* FavoriteViewDelegate.swift in Sources */,
 				5E6AAD1E239C439400564F6A /* ViewDelegate.swift in Sources */,
+				5E6FC72723A69D9E00BA5DEF /* FavoritesPresenter.swift in Sources */,
 				5E6AAD6E239D8CDF00564F6A /* BaseTableViewCell.swift in Sources */,
 				5E6AAD3F239C941000564F6A /* PopularResponse.swift in Sources */,
 				5E6AAD30239C50BE00564F6A /* Movie.swift in Sources */,
+				5E6FC72523A69D7F00BA5DEF /* FavoritesVC.swift in Sources */,
 				5E6AAD7D239DE9FF00564F6A /* LocalService.swift in Sources */,
 				5E6AAD7A239DDC6900564F6A /* NavigationController.swift in Sources */,
 				5E6AAD5E239D74F800564F6A /* FeedHeaderViewData.swift in Sources */,

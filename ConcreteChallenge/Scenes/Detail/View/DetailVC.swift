@@ -34,6 +34,7 @@ final class DetailVC: BaseViewController {
         view.rowHeight = UITableView.automaticDimension
         view.sectionHeaderHeight = 0
         view.showsVerticalScrollIndicator = false
+        view.allowsSelection = false
         view.backgroundColor = .clear
         view.register(PosterDetailTableCell.self, forCellReuseIdentifier: PosterDetailTableCell.identifier)
         view.register(DefaultInfoTableCell.self, forCellReuseIdentifier: DefaultInfoTableCell.identifier)

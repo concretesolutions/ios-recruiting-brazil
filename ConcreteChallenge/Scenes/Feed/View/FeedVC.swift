@@ -144,7 +144,7 @@ final class FeedVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadFeed()
+        feedPresenter?.updateData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

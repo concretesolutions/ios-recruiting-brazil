@@ -23,10 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         popularNavigationController.tabBarItem = UITabBarItem(title: "Popular", image: #imageLiteral(resourceName: "star"), tag: 0)
         
         // TODO: Change to the favorites feed controller
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        vc.title = "Favorites"
-        let favoritesNavigationController = NavigationController(rootViewController: vc)
+
+        let favoritesNavigationController = NavigationController(rootViewController: Factory.getViewController(using: FavoritesPresenter()))
         favoritesNavigationController.tabBarItem = UITabBarItem(title: "Favorites", image: #imageLiteral(resourceName: "favoriteFull"), tag: 1)
         
         let tabBarController = TabBarController()

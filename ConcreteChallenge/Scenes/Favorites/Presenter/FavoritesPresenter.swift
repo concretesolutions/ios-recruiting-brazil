@@ -1,21 +1,21 @@
 //
-//  FeedPresenter.swift
+//  FavoritesPresenter.swift
 //  ConcreteChallenge
 //
-//  Created by Alexandre Abrahão on 08/12/19.
+//  Created by Alexandre Abrahão on 15/12/19.
 //  Copyright © 2019 Concrete. All rights reserved.
 //
 
 import Foundation
 import os.log
 
-final class FeedPresenter: BasePresenter {
+final class FavoritesPresenter: BasePresenter {
     
     // MARK: - Properties -
-    private var feedView: FeedViewDelegate {
+    private var favoritesView: FeedViewDelegate {
         guard let view = view as? FeedViewDelegate else {
-            os_log("❌ - FeedPresenter was given to the wrong view", log: Logger.appLog(), type: .fault)
-            fatalError("FeedPresenter was given to the wrong view")
+            os_log("❌ - FavoritesPresenter was given to the wrong view", log: Logger.appLog(), type: .fault)
+            fatalError("FavoritesPresenter was given to the wrong view")
         }
         return view
     }
@@ -23,14 +23,9 @@ final class FeedPresenter: BasePresenter {
     /// The movie data to be displayed
     private var movies: [Movie] = [] {
         didSet {
-            feedView.reloadFeed()
+            favoritesView.reloadFeed()
         }
     }
-    
-    /// Controls which page to load next on
-    private var pagesLoaded: Int = 0
-    
-    private var maxPages: Int = 500
     
     // MARK: Computed
     var numberOfItems: Int {
@@ -40,38 +35,17 @@ final class FeedPresenter: BasePresenter {
     // MARK: - Methods -
     override func attachView(_ view: ViewDelegate) {
         super.attachView(view)
-        loadFeed()
+        loadFavorites()
     }
     
-    func loadFeed() {
-        MovieClient.getPopular(page: 1) { [weak self] (movies, error) in
-            
-            if let error = error {
-                os_log("❌ - Error loading movie feed: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
-                return
-            }
-            
-            if let movies = movies {
-                self?.movies = movies
-            }
+    func loadFavorites() {
+        
+        let moviesList = LocalService.instance.getFavoritesList()
+        guard !moviesList.isEmpty else {
+            // TODO: Handle having no favorites
+            return
         }
-        pagesLoaded = 1
-    }
-    
-    func loadMoreItems() {
-        guard pagesLoaded <= maxPages else { return }
-        pagesLoaded += 1
-        MovieClient.getPopular(page: pagesLoaded) { [weak self] (movies, error) in
-            
-            if let error = error {
-                os_log("❌ - Error loading movie feed: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
-                return
-            }
-            
-            if let movies = movies {
-                self?.movies.append(contentsOf: movies)
-            }
-        }
+        movies = moviesList
     }
     
     func getItemData(item: Int) -> ItemViewData {
@@ -94,14 +68,6 @@ final class FeedPresenter: BasePresenter {
                             isFavorite: movie.isFavorite)
     }
     
-    func getHeaderData() -> FeedHeaderViewData {
-        
-        // TODO: Localize
-        return FeedHeaderViewData(title: "Popular Movies",
-                                  greeting: "Today's",
-                                  searchBarPlaceholder: "Looking for a movie?")
-    }
-    
     func selectItem(item: Int) {
         guard item < self.numberOfItems else {
             os_log("❌ - Number of items > number of movies", log: Logger.appLog(), type: .fault)
@@ -110,17 +76,11 @@ final class FeedPresenter: BasePresenter {
         
         let movie = movies[item]
         let detailPresenter = DetailPresenter(movie: movie)
-        feedView.navigateToView(presenter: detailPresenter)
-    }
-    
-    /// Do any steps to update the displayed data
-    func updateData() {
-        LocalService.instance.checkFavorites(on: movies)
-        feedView.reloadFeed()
+        favoritesView.navigateToView(presenter: detailPresenter)
     }
 }
 
-extension FeedPresenter: FavoriteHandler {
+extension FavoritesPresenter: FavoriteHandler {
     func favoriteStateChanged(tag: Int?) {
         guard let item = tag else {
             os_log("❌ - Favorite had no tag", log: Logger.appLog(), type: .fault)
@@ -134,11 +94,14 @@ extension FeedPresenter: FavoriteHandler {
         
         let movie = movies[item]
         movie.isFavorite = !movie.isFavorite
-        feedView.setFavorite(movie.isFavorite, tag: item)
+        
         if movie.isFavorite {
             LocalService.instance.setFavorite(movie: movie)
         } else {
             LocalService.instance.removeFavorite(movie: movie)
+            movies.remove(at: item)
         }
+        
+        favoritesView.setFavorite(movie.isFavorite, tag: item)
     }
 }

@@ -96,6 +96,20 @@ extension LocalService {
     }
     
     /**
+     Get a list of the movies favorited by the user.
+     - Returns: A list of favorited movies. Might be empty.
+     */
+    func getFavoritesList() -> [Movie] {
+        guard let favorites = getFavorites() else {
+            return []
+        }
+        let list = Array(favorites.values)
+        list.forEach{ $0.isFavorite = true }
+        
+        return list
+    }
+    
+    /**
      Check multiple favorites at once, and set the `isFavorite` property accordingly.
      - Parameter movies: The movie list to be checked.
      */
