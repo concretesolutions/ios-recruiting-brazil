@@ -8,14 +8,8 @@
 
 import UIKit
 import SnapKit
-class FavoriteMoviesController: UIViewController , SendDataApi ,UISearchResultsUpdating{
-    func sendMovie(movies: [Movie]) {
-        self.favoriteMovies = movies
-        DispatchQueue.main.async {
-            self.filterFavoriteMovies = self.favoriteMovies
-            self.tableView.reloadData()
-        }
-    }
+class FavoriteMoviesController: UIViewController ,UISearchResultsUpdating{
+    
     var favoriteMovies:[Movie] = []
     var filterFavoriteMovies:[Movie] = [] {
         didSet{
@@ -34,10 +28,6 @@ class FavoriteMoviesController: UIViewController , SendDataApi ,UISearchResultsU
         view.backgroundColor = .blue
         self.view = view
         setupView()
-        let manege = ManegerApiRequest()
-        manege.delegate = self
-        manege.sendMovies()
-       
     }
     override func viewDidLoad() {
         super.viewDidLoad()

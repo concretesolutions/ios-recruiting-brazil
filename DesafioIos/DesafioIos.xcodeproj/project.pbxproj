@@ -34,7 +34,7 @@
 		97BE542623A285B0000639D8 /* ManegerApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE542523A285B0000639D8 /* ManegerApiRequest.swift */; };
 		97BE542823A28846000639D8 /* SendDataApi .swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE542723A28846000639D8 /* SendDataApi .swift */; };
 		B0FBD41B1BC6A4C771EB8343 /* Pods_DesafioIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */; };
-		E625607923A5813F005CF564 /* ModelCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E625607723A5813F005CF564 /* ModelCoreData.xcdatamodeld */; };
+		E62125AF23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E62125AD23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld */; };
 		E625607B23A5842A005CF564 /* CoreDataFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E625607A23A5842A005CF564 /* CoreDataFuncs.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,7 +96,7 @@
 		A68FD1768CC4D05DBDCC0CFC /* Pods-DesafioIos-DesafioIosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos-DesafioIosUITests.debug.xcconfig"; path = "Target Support Files/Pods-DesafioIos-DesafioIosUITests/Pods-DesafioIos-DesafioIosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5025EA2C77350FC43159B97 /* Pods-DesafioIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos.debug.xcconfig"; path = "Target Support Files/Pods-DesafioIos/Pods-DesafioIos.debug.xcconfig"; sourceTree = "<group>"; };
-		E625607823A5813F005CF564 /* ModelCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelCoreData.xcdatamodel; sourceTree = "<group>"; };
+		E62125AE23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteMoviesDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E625607A23A5842A005CF564 /* CoreDataFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFuncs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,8 +213,8 @@
 				97BE542323A276A5000639D8 /* Helpers.swift */,
 				97BE542523A285B0000639D8 /* ManegerApiRequest.swift */,
 				97BE542723A28846000639D8 /* SendDataApi .swift */,
-				E625607723A5813F005CF564 /* ModelCoreData.xcdatamodeld */,
 				E625607A23A5842A005CF564 /* CoreDataFuncs.swift */,
+				E62125AD23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -480,6 +480,7 @@
 				97BE53D2239A8AE6000639D8 /* ViewController.swift in Sources */,
 				97BE5404239A90EF000639D8 /* GridBox.swift in Sources */,
 				97BE540E239A9909000639D8 /* MovieCellView.swift in Sources */,
+				E62125AF23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld in Sources */,
 				97BE540A239A90F9000639D8 /* TabBarController.swift in Sources */,
 				97BE53CE239A8AE6000639D8 /* AppDelegate.swift in Sources */,
 				97BE542423A276A5000639D8 /* Helpers.swift in Sources */,
@@ -490,7 +491,6 @@
 				97BE540C239A914E000639D8 /* CodeView.swift in Sources */,
 				97BE541923A01B41000639D8 /* UIImageLoad.swift in Sources */,
 				97BE5417239FE873000639D8 /* ManegerModel .swift in Sources */,
-				E625607923A5813F005CF564 /* ModelCoreData.xcdatamodeld in Sources */,
 				97BE5409239A90F9000639D8 /* FavoriteMoviesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -822,13 +822,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		E625607723A5813F005CF564 /* ModelCoreData.xcdatamodeld */ = {
+		E62125AD23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E625607823A5813F005CF564 /* ModelCoreData.xcdatamodel */,
+				E62125AE23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodel */,
 			);
-			currentVersion = E625607823A5813F005CF564 /* ModelCoreData.xcdatamodel */;
-			path = ModelCoreData.xcdatamodeld;
+			currentVersion = E62125AE23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodel */;
+			path = FavoriteMoviesDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

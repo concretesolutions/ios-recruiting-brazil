@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 import UIKit
 
-let EntityName = "MovieIds"
+let EntityName = "FavoriteMovie"
 //MARK: saved Object
-func save(id: Int) {
+func save(movie: Movie) {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -23,16 +23,19 @@ func save(id: Int) {
         NSEntityDescription.entity(forEntityName: EntityName ,
                                    in: managedContext)!
     
-    let movie = NSManagedObject(entity: entity,
-                                insertInto: managedContext)
-    if let savedMovies = fetch(){
-        for movie in savedMovies {
-            if (movie.value(forKey:"id") as! Int) == id{
-                erase(object: movie)
-            }
+    let manager = NSManagedObject(entity: entity,
+                                  insertInto: managedContext)
+    let savedMovies = fetch()
+    for movieObject in savedMovies {
+        if (movieObject.value(forKey:"id") as! Int) == movie.id{
+            erase(object: movieObject)
         }
     }
-    movie.setValue(id, forKeyPath: "id")
+    manager.setValue(movie.id, forKeyPath: "id")
+    manager.setValue(movie.title, forKey: "title")
+    manager.setValue(movie.backdropPath, forKey: "backdropPath")
+    manager.setValue(movie.genreIDS, forKey: "genreIDS")
+    manager.setValue(movie.overview, forKey: "overview")
     do {
         try managedContext.save()
     } catch let error as NSError {
@@ -57,11 +60,11 @@ func erase(object:NSManagedObject){
     }
 }
 // MARK: Fetch Core Data
-func fetch() -> [NSManagedObject]?{
+func fetch() -> [NSManagedObject]{
     var movies: [NSManagedObject] = []
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
-            return nil
+            return []
     }
     let managedContext =
         appDelegate.persistentContainer.viewContext
@@ -75,9 +78,7 @@ func fetch() -> [NSManagedObject]?{
     return movies
 }
 func movieIsfavorite(by id:Int) -> Bool{
-    guard let movies = fetch() else {
-        return false
-    }
+    let movies = fetch()
     for movie in movies{
         if id == (movie.value(forKey: "id") as! Int){
             return true
@@ -86,9 +87,14 @@ func movieIsfavorite(by id:Int) -> Bool{
     return false
 }
 func showALLMovies(){
-    if let movies = fetch(){
-        for movie in movies {
-            print((movie.value(forKey:"id") as! Int))
+    let movies = fetch()
+    for movie in movies {
+        print((movie.value(forKey:"title") as! String))
+        print(movie.value(forKey: "overview") as! String)
+        if let genres = movie.value(forKey: "genreIDS") as? [Int]{
+            for genre in genres{
+                print(genre)
+            }
         }
     }
 }
