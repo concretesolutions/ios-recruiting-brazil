@@ -15,14 +15,16 @@ class MovieTableViewCell: UITableViewCell {
     let descriptionLabel = UILabel()
     
     override func didMoveToSuperview() {
-        setupView()
+        
     }
     
     func setupFavoriteMovie(_ favoriteMovie: FavoriteMovie) {
         movieImageView.image = UIImage(data: favoriteMovie.image!)
         titleLabel.text = favoriteMovie.title
         yearLabel.text = "2008"
-        descriptionLabel.text = "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"
+        descriptionLabel.text = "Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"
+        
+        setupView()
     }
 }
 
@@ -34,23 +36,25 @@ extension MovieTableViewCell: ViewCode {
     func buildConstraints() {
         let imageHeight: CGFloat = 160
         let imageWidth: CGFloat = imageHeight / 1.3
+        
         movieImageView.anchor
             .top(safeAreaLayoutGuide.topAnchor)
             .left(safeAreaLayoutGuide.leftAnchor)
             .bottom(safeAreaLayoutGuide.bottomAnchor)
-            .height(constant: imageHeight)
+            .height(constant: imageHeight, priority: .defaultHigh)
             .width(constant: imageWidth)
         
         titleLabel.anchor
             .top(safeAreaLayoutGuide.topAnchor, padding: 16)
             .left(movieImageView.rightAnchor, padding: 16)
-            .right(yearLabel.leftAnchor, padding: 8)
+            .right(yearLabel.leftAnchor, padding: 8, priority: .defaultHigh)
             .height(constant: 20)
-        
+            
         yearLabel.anchor
             .top(safeAreaLayoutGuide.topAnchor, padding: 16)
             .right(safeAreaLayoutGuide.rightAnchor, padding: 16)
             .height(constant: 20)
+            .width(constant: 50)
         
         descriptionLabel.anchor
             .top(yearLabel.bottomAnchor, padding: 16)
@@ -62,6 +66,7 @@ extension MovieTableViewCell: ViewCode {
     func setupAditionalConfiguration() {
         movieImageView.contentMode = .scaleAspectFill
         movieImageView.clipsToBounds = true
+        yearLabel.textAlignment = .right
         descriptionLabel.numberOfLines = 0
         
     }
