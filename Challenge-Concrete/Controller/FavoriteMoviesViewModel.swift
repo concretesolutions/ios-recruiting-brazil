@@ -18,8 +18,8 @@ class FavoriteMoviesViewModel: MovieViewModel {
         self.dataSource?.data.append(favoriteMovie)
     }
     
-    func remove(_ favoriteMovie: FavoriteMovie) {
-        //self.dataSource?.data.first(where: {$0.id == favoriteMovie.id}) 
+    func remove(_ favoriteMovieId: Int) {
+        self.dataSource?.data.removeAll(where: {$0.id == favoriteMovieId})
     }
 
 }

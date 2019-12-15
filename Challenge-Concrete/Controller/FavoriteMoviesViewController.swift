@@ -51,9 +51,13 @@ extension FavoriteMoviesViewController {
     }
 }
 
-extension FavoriteMoviesViewController: AddFavoriteMovieDelegate {
+extension FavoriteMoviesViewController: FavoriteMovieDelegate {
     func didAdd(_ favoriteMovie: FavoriteMovie) {
         movieViewModel.add(favoriteMovie)
+    }
+    
+    func didRemove(favoriteMovieId: Int) {
+        movieViewModel.remove(favoriteMovieId)
     }
     
     

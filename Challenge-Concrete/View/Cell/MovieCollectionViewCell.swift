@@ -14,7 +14,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     let backgroundLabelView = UIView()
     let titleLabel = UILabel()
     
-    var favoriteAction: (() -> Void)?
+    var favoriteAction: ((_ turnFavorite: Bool) -> Void)?
     var isFavorite: Bool = false
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
@@ -39,8 +39,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func favoriteButtonTapped() {
-        favoriteAction?()
         isFavorite = !isFavorite
+        favoriteAction?(isFavorite)
         changeFavoriteIcon(isAdding: isFavorite)
     }
     

@@ -17,7 +17,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    weak var addFavoriteMovieDelegate: AddFavoriteMovieDelegate?
+    weak var addFavoriteMovieDelegate: FavoriteMovieDelegate?
     override func loadView() {
         view = moviesView
     }
@@ -68,12 +68,17 @@ extension TrendingMoviesViewController {
         print("MOVIE INDEX: \(movie.title ?? "none")")
     }
     
-    func didFavoriteMovie(at index: Int) {
+    func didFavoriteMovie(at index: Int, turnFavorite: Bool) {
         let movie = dataSource.data[index]
-        if let favoriteMovie = movieViewModel.favorite(movie) {
-            self.addFavoriteMovieDelegate?.didAdd(favoriteMovie)
+        if turnFavorite {
+            if let favoriteMovie = movieViewModel.favorite(movie) {
+                self.addFavoriteMovieDelegate?.didAdd(favoriteMovie)
+            } else {
+                
+            }
         } else {
-            
+            movieViewModel.removeFavorite(movie)
+            self.addFavoriteMovieDelegate?.didRemove(favoriteMovieId: movie.id)
         }
         
     }

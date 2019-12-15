@@ -51,4 +51,11 @@ class TrendingMoviesViewModel: MovieViewModel {
         
         return nil
     }
+    
+    @discardableResult
+    func removeFavorite(_ movie: Movie) -> FavoriteMovie? {
+        CoreDataManager.deleteBy(id: movie.id, entityType: FavoriteMovie.self)
+        
+        return nil
+    }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 
-protocol AddFavoriteMovieDelegate: AnyObject {
+protocol FavoriteMovieDelegate: AnyObject {
     func didAdd(_ favoriteMovie: FavoriteMovie)
+    func didRemove(favoriteMovieId: Int)
 }
