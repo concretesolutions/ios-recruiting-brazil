@@ -9,6 +9,7 @@
 import UIKit
 class MoviesGridController: UIViewController {
     private let customView = MoviesGridView()
+    private let dispatchGroup = DispatchGroup()
     let coreDataManager = CoreDataManager()
     var genres = [GenreDTO]()
     var pagesRequested = 1
@@ -83,13 +84,26 @@ class MoviesGridController: UIViewController {
     func requestMovies(page: Int = 1) {
         let service = MovieService.getTrendingMovies(page)
         let session = URLSessionProvider()
+        dispatchGroup.enter()
         session.request(type: MoviesResultDTO.self, service: service) { (result) in
             switch result {
             case .success(let result):
                 self.movies.append(contentsOf: result.movies)
             case .failure(let error):
                 print(error)
+
+                let alert = UIAlertController(title: "Error", message: "An error has occurred, please try again",
+                                              preferredStyle: .alert)
+                let dismiss = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(dismiss)
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
+            self.dispatchGroup.leave()
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.customView.stopActivityIndicator()
         }
     }
 
@@ -105,4 +119,5 @@ class MoviesGridController: UIViewController {
             }
         }
     }
+
 }
