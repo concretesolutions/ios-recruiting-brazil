@@ -18,10 +18,32 @@ class PopularMoviesViewModel {
     
     internal var movies: MovieResult?
     
+    private(set) var searchTerm: String?
+    
+    internal var movieList: [Movie]? {
+        if let term = self.searchTerm {
+            return self.movies?.results?.filter({ (movie) -> Bool in
+                return movie.title?.contains(term) ?? false
+            })
+        }
+        
+        return self.movies?.results
+    }
+    
     internal weak var controller: PopularMoviesDelegate?
 
     internal func setView(_ controller: PopularMoviesDelegate) {
         self.controller = controller
+    }
+    
+    internal func resetSearch() {
+        self.searchTerm = nil
+        self.controller?.reloadData()
+    }
+    
+    internal func search(byName name: String) {
+        self.searchTerm = name
+        self.controller?.reloadData()
     }
     
     internal func getPopularMovies(reload: Bool = false) {

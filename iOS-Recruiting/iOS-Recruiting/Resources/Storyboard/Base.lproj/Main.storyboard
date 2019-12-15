@@ -15,8 +15,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" placeholder="Pesquisar" translatesAutoresizingMaskIntoConstraints="NO" id="dgh-TJ-YFJ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <color key="barTintColor" red="0.96862745100000003" green="0.80784313730000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1tv-dA-Sos">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RZ3-0V-sag">
                                     <size key="itemSize" width="50" height="50"/>
@@ -27,14 +32,17 @@
                                 <cells/>
                             </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" id="om2-Lh-2Qb">
-                                <rect key="frame" x="0.0" y="85" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="313" width="414" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="1tv-dA-Sos" firstAttribute="top" secondItem="dgh-TJ-YFJ" secondAttribute="bottom" id="Bkh-7T-Nds"/>
+                            <constraint firstItem="dgh-TJ-YFJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OcD-xc-8lT"/>
+                            <constraint firstItem="dgh-TJ-YFJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VCt-tg-yY8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1tv-dA-Sos" secondAttribute="trailing" id="Y4R-av-jMf"/>
-                            <constraint firstItem="1tv-dA-Sos" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="YtE-He-FB3"/>
+                            <constraint firstAttribute="trailing" secondItem="dgh-TJ-YFJ" secondAttribute="trailing" id="bVs-w1-o3g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1tv-dA-Sos" secondAttribute="bottom" id="kuU-Q2-8vM"/>
                             <constraint firstItem="1tv-dA-Sos" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zrk-Nk-vWo"/>
                         </constraints>
@@ -44,6 +52,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="om2-Lh-2Qb" id="rEr-Ch-ODi"/>
                         <outlet property="collectionView" destination="1tv-dA-Sos" id="Rf2-NY-Cbh"/>
+                        <outlet property="searchBar" destination="dgh-TJ-YFJ" id="yHK-Wi-rOD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

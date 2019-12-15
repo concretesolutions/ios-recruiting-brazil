@@ -12,7 +12,7 @@ class PopularMoviesVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     internal var refreshControl = UIRefreshControl()
     
@@ -35,11 +35,11 @@ class PopularMoviesVC: UIViewController {
         self.refreshControl.addTarget(self, action: #selector(self.refreshList), for: .valueChanged)
         self.collectionView.addSubview(self.refreshControl)
         self.refreshControl.beginRefreshing()
+        self.searchBar.delegate = self
         
         self.viewModel.getPopularMovies(reload: true)
         
     }
-    
     
     @objc func refreshList() {
         if !self.collectionView.isDragging {
@@ -55,7 +55,7 @@ class PopularMoviesVC: UIViewController {
     }
     
     private func getMovie(indexPath: IndexPath) -> Movie? {
-        let movies = self.viewModel.movies?.results ?? []
+        let movies = self.viewModel.movieList ?? []
         
         guard movies.indices.contains(indexPath.row) else {
             return nil
@@ -70,7 +70,7 @@ extension PopularMoviesVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        guard let movies = self.viewModel.movies?.results,
+        guard let movies = self.viewModel.movieList,
             let currentPage = self.viewModel.movies?.page,
             let pages = self.viewModel.movies?.total_pages else {
                 return
@@ -84,10 +84,32 @@ extension PopularMoviesVC: UICollectionViewDelegate {
     }
 }
 
+extension PopularMoviesVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let selector = #selector(self.searchBarTextDidEndTyping)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: selector, object: searchBar)
+        self.perform(selector, with: searchBar, afterDelay: 1)
+    }
+
+    
+    @objc private func searchBarTextDidEndTyping(searchBar: UISearchBar) {
+        guard let text = searchBar.text, text.count >= 3 else {
+            self.viewModel.resetSearch()
+            return
+        }
+        
+        if text.count >= 3 {
+            self.viewModel.search(byName: text)
+        }
+    }
+    
+}
+
 extension PopularMoviesVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        guard self.viewModel.movies != nil else {
+        guard self.viewModel.movieList != nil else {
             self.activityIndicator.startAnimating()
             return 0
         }
@@ -95,7 +117,7 @@ extension PopularMoviesVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return self.viewModel.movies?.results?.count ?? 0
+       return self.viewModel.movieList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
