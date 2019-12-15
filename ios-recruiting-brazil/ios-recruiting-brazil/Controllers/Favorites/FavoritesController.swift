@@ -31,6 +31,7 @@ class FavoritesController: UIViewController {
         super.viewDidLoad()
         setNavigation()
         customView.dataSource = self
+        customView.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
