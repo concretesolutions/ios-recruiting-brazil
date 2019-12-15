@@ -10,12 +10,25 @@ import UIKit
 class MovieDetailViewController: UIViewController {
     let customView = MovieDetailView()
     let movie: MovieDTO
+    var genresString = ""
     var genres = [GenreDTO]() {
         didSet {
             DispatchQueue.main.async {
                 self.customView.detailsTable.reloadData()
             }
         }
+    }
+
+    convenience init(withMovie movie: Movie) {
+        let movieDTO = MovieDTO(title: movie.name ?? "",
+                                overview: movie.overview ?? "", poster: "",
+                                releaseDate: movie.date ?? "", genreIDs: [0])
+        self.init(withMovie: movieDTO)
+        if let imageData = movie.image, let genres = movie.genres {
+            customView.movieImage.image = UIImage(data: imageData)
+            genresString = genres
+        }
+
     }
     init(withMovie movie: MovieDTO) {
         self.movie = movie

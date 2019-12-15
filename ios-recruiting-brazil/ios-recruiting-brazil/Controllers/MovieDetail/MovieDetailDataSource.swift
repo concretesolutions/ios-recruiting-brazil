@@ -22,17 +22,18 @@ extension MovieDetailViewController: UITableViewDataSource {
             cell.textLabel?.text = String(movie.releaseDate.prefix(4))
         }
         if indexPath.row == 2 {
-            var genresString = ""
-            movie.genreIDs.forEach({genreID in
-                genres.forEach({ genre in
-                    if genreID == genre.genreID {
-                        if !genresString.isEmpty {
-                            genresString += ", "
+            if genresString.isEmpty {
+                movie.genreIDs.forEach({genreID in
+                    genres.forEach({ genre in
+                        if genreID == genre.genreID {
+                            if !genresString.isEmpty {
+                                genresString += ", "
+                            }
+                            genresString += genre.name
                         }
-                        genresString += genre.name
-                    }
+                    })
                 })
-            })
+            }
             cell.textLabel?.text = genresString
         }
         if indexPath.row == 3 {
