@@ -22,6 +22,7 @@ extension MoviesGridController: UICollectionViewDataSource {
 
         if fetchedMovies.contains(where: { (movie2) -> Bool in movie2.name == movie.title}) {
             cell.favoriteButton.setImage(UIImage(named: "favorite_full_icon"), for: .normal)
+            cell.isFavorite = true
         }
 
         return cell

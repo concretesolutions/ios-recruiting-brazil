@@ -10,6 +10,13 @@ import UIKit
 extension MoviesGridController: MovieCellDelegate {
 
     func didFavoriteMovie(movie: MovieDTO, withImage image: UIImage?) {
+        if let movies = coreDataManager.fetchMovies() {
+            self.fetchedMovies = movies
+        }
+        if fetchedMovies.contains(where: { $0.name == movie.title}) {
+            coreDataManager.deleteMovie(withName: movie.title)
+            return
+        }
         var genresString = ""
         movie.genreIDs.forEach({genreID in
             genres.forEach({ genre in

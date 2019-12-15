@@ -59,6 +59,7 @@ class MoviesGridController: UIViewController {
         if let movies = coreDataManager.fetchMovies() {
             self.fetchedMovies = movies
         }
+        customView.grid.reloadData()
     }
 
     private func setNavigation() {

@@ -11,7 +11,7 @@ class MoviesCollectionViewCell: UICollectionViewCell, ConfigView {
 
     var movie: MovieDTO?
     public weak var delegate: MovieCellDelegate?
-    private var isFavorite = false
+    var isFavorite = false
     let movieImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
