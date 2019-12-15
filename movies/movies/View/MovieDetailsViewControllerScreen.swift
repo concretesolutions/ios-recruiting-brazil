@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class MovieDetailsViewControllerScreen: UIView {
     public var viewModel: MovieDetailsViewModel! {
@@ -75,6 +76,9 @@ class MovieDetailsViewControllerScreen: UIView {
         return view
     }()
     
+    // Cancellables
+    private var favoriteSubscriber: AnyCancellable?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -89,7 +93,7 @@ class MovieDetailsViewControllerScreen: UIView {
         self.viewModel = viewModel
         self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
 
-        _ = self.viewModel.$favorite
+        favoriteSubscriber = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite

@@ -46,6 +46,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let favoriteButton = FavoriteButton()
     
+    // Cancellables
+    private var favoriteSubscriber: AnyCancellable?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -60,7 +63,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
         
-        _ = self.viewModel.$favorite
+        favoriteSubscriber = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
