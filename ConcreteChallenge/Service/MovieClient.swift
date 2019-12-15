@@ -30,8 +30,9 @@ class MovieClient {
                     do {
                         let decoder = JSONDecoder()
                         let decodedJson = try decoder.decode(PopularResponse.self, from: jsonData)
-                        
-                        completion(decodedJson.results, nil)
+                        let returnedMovies = decodedJson.results
+                        LocalService.instance.checkFavorites(on: returnedMovies)
+                        completion(returnedMovies, nil)
                     } catch {
                         completion(nil, error)
                         debugPrint(error)

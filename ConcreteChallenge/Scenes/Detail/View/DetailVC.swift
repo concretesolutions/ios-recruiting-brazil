@@ -139,13 +139,13 @@ extension DetailVC: UITableViewDataSource {
             cell.textLabel?.text = year
             return cell
             
-        case .genres:
+        case .genres(let genres):
             guard let cell = detailTableView.dequeueReusableCell(withIdentifier: DefaultInfoTableCell.identifier, for: indexPath) as? DefaultInfoTableCell else {
                 os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
                 fatalError("Unknown identifier")
             }
             // TODO: treat when it gets the genres
-            cell.textLabel?.text = "Loading genres"
+            cell.textLabel?.text = genres
             self.genresCell = cell
             return cell
             

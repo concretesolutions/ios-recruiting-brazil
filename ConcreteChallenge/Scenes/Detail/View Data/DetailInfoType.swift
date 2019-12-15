@@ -14,7 +14,7 @@ enum DetailInfoType {
     case poster(imageURL: URL?)
     case title(_ title: String)
     case year(_ year: String)
-    case genres
+    case genres(_ text: String)
     case overview(text: String)
 
     var identifier: String {

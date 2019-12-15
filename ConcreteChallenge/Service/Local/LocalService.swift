@@ -36,8 +36,8 @@ final class LocalService {
 // MARK: - Favorite saving -
 extension LocalService {
     
-    /// Save the favorites list
-    private func saveFavorites(_ favorites: [Movie]) {
+    /// Save the favorites list as a dictionary with the movie id as key
+    private func saveFavorites(_ favorites: [Int : Movie]) {
         
         let url = getURLInDocumentDir(for: LocalService.Identifier.favorites.rawValue)
         
@@ -52,13 +52,13 @@ extension LocalService {
     /// Set movie as favorite
     func setFavorite(movie: Movie) {
         
-        // Get the previous favorites to append if necessary
-        var favoritesToSave: [Movie]
+        // Get the previous favorites to add if necessary
+        var favoritesToSave: [Int : Movie]
         if let previousFavorites = self.getFavorites() {
             favoritesToSave = previousFavorites
-            favoritesToSave.append(movie)
+            favoritesToSave[movie.id] = movie
         } else {
-            favoritesToSave = [movie]
+            favoritesToSave = [movie.id : movie]
         }
         
         saveFavorites(favoritesToSave)
@@ -67,25 +67,40 @@ extension LocalService {
     /// Remove movie as favorite
     func removeFavorite(movie: Movie) {
         
-        // Get the previous favorites to remove the found if necessary
-        let favoritesToSave: [Movie]
-        if let previousFavorites = self.getFavorites() {
-            favoritesToSave = previousFavorites.filter { $0.id != movie.id }
-            saveFavorites(favoritesToSave)
+        // Get the current favorites to remove the movie if necessary
+        if var currentFavorites = self.getFavorites() {
+            currentFavorites[movie.id] = nil
+            saveFavorites(currentFavorites)
         }
-        // Else can't remove something nil
+        // Else can't remove from something nil
     }
     
     /// Get the favorite movie IDs
-    func getFavorites() -> [Movie]? {
+    func getFavorites() -> [Int : Movie]? {
         let url = getURLInDocumentDir(for: LocalService.Identifier.favorites.rawValue)
         do {
             let readData = try Data(contentsOf: url)
-            let favorites = try JSONDecoder().decode([Movie].self, from: readData)
+            let favorites = try JSONDecoder().decode([Int : Movie].self, from: readData)
             return favorites
         } catch {
             os_log("Could not read from @", log: Logger.appLog(), type: .info, String(describing: url))
         }
         return nil
+    }
+    
+    func isMovieFavorite(_ movie: Movie) -> Bool {
+        guard let favorites = getFavorites(), let _ = favorites[movie.id] else {
+            return false
+        }
+        return true
+    }
+    
+    func checkFavorites(on movies: [Movie]) {
+        guard let favorites = getFavorites() else {
+            return
+        }
+        // A movie is a favorite if it's contained in the local favorites list
+        // Since movies are passed by reference, it's only necessary to set here
+        movies.forEach { $0.isFavorite = (favorites[$0.id] != nil) }
     }
 }

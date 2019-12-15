@@ -27,21 +27,25 @@ final class DetailPresenter: BasePresenter {
         .poster(imageURL: ImageEndpoint.image(width: 500, path: movie.posterPath).completeURL),
         .title(movie.title),
         .year(movie.releaseDate),
-        .genres,
+        .genres(self.genresText),
         .overview(text: movie.overview)
     ]
     
     private var genres: [Genre] = [] {
         didSet {
-            var completeGenres: String = ""
-            genres.forEach { (genre) in
-                completeGenres += genre.name
-                if let lastGenre = genres.last, lastGenre.name != genre.name {
-                    completeGenres += ", "
-                }
-            }
-            detailView.setGenres(data: GenreViewData(genres: completeGenres))
+            detailView.setGenres(data: GenreViewData(genres: self.genresText))
         }
+    }
+    
+    var genresText: String {
+        var completeGenres: String = ""
+        genres.forEach { (genre) in
+            completeGenres += genre.name
+            if let lastGenre = genres.last, lastGenre.name != genre.name {
+                completeGenres += ", "
+            }
+        }
+        return completeGenres != "" ? completeGenres : "Loading genres..."
     }
     
     var numberOfRows: Int {
@@ -49,7 +53,7 @@ final class DetailPresenter: BasePresenter {
     }
     
     var isFavorite: Bool {
-        return movie.isFavorite ?? false
+        return movie.isFavorite
     }
     
     // MARK: - Init -
@@ -90,5 +94,10 @@ final class DetailPresenter: BasePresenter {
         /// TODO: Implement persistence
         movie.isFavorite = !movie.isFavorite
         detailView.setFavorite(movie.isFavorite)
+        if movie.isFavorite {
+            LocalService.instance.setFavorite(movie: movie)
+        } else {
+            LocalService.instance.removeFavorite(movie: movie)
+        }
     }
 }
