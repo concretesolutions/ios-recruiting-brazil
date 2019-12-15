@@ -16,9 +16,10 @@ class MovieDataSource: GenericDataSource<FavoriteMovie>, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: MovieTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         let favoriteMovie = self.data[indexPath.row]
-        cell.textLabel?.text = favoriteMovie.title
+        cell.setupFavoriteMovie(favoriteMovie)
+        //cell.textLabel?.text = favoriteMovie.title
         return cell
     }
 }

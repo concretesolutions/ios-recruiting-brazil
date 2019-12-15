@@ -10,11 +10,7 @@ import UIKit
 class MovieTableDelegate: NSObject, GenericDelegate, UITableViewDelegate {
     
     weak var moviesDelegate: MoviesDelegate?
-        
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
-    
+            
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         moviesDelegate?.didSelectMovie(at: indexPath.row)
     }

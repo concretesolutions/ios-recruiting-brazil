@@ -13,7 +13,8 @@ class FavoriteMoviesView: UIView {
     
     init() {
         super.init(frame: .zero)
-        tableView.register(UITableViewCell.self)
+        tableView.register(MovieTableViewCell.self)
+        tableView.rowHeight = UITableView.automaticDimension
         setupView()
     }
     
