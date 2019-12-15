@@ -10,7 +10,12 @@ import UIKit
 import SnapKit
 class FavoriteMoviesController: UIViewController ,UISearchResultsUpdating{
     
-    var favoriteMovies:[Movie] = []
+    var favoriteMovies:[Movie] = getFavoritesMovies() {
+        didSet{
+            self.filterFavoriteMovies = self.favoriteMovies
+        }
+    }
+
     var filterFavoriteMovies:[Movie] = [] {
         didSet{
             DispatchQueue.main.async {
@@ -27,12 +32,17 @@ class FavoriteMoviesController: UIViewController ,UISearchResultsUpdating{
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .blue
         self.view = view
+        filterFavoriteMovies = favoriteMovies
         setupView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         makeSearchController()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.favoriteMovies = getFavoritesMovies()
+        
     }
     func makeSearchController(){
         let searchController = UISearchController(nibName: nil, bundle: nil)
@@ -74,12 +84,10 @@ extension FavoriteMoviesController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            // remove the item from the data model
-            favoriteMovies = favoriteMovies.filter { movie in
-                return filterFavoriteMovies[indexPath.row].id != movie.id
-            }
-            filterFavoriteMovies.remove(at: indexPath.row)
-            // delete the table view row
+            // remove the item from CoreData
+            removeNSManagedObjectById(id: filterFavoriteMovies[indexPath.row].id)
+            //get update Favorite Movies
+            favoriteMovies = getFavoritesMovies()
             tableView.deleteRows(at: [indexPath], with: .fade)
             
         }

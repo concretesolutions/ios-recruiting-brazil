@@ -33,7 +33,6 @@ class DetailMovieController: UIViewController {
         (self.view as? DetailMovieView)?.favoriteButton.setBackgroundImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
         if let movie = self.movie{
             save(movie: movie)
-            showALLMovies()
         }
     }
 }

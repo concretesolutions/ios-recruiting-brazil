@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
-let EntityName = "FavoriteMovie"
+let EntityName = "FavoriteMovies"
 //MARK: saved Object
 func save(movie: Movie) {
     guard let appDelegate =
@@ -36,6 +36,7 @@ func save(movie: Movie) {
     manager.setValue(movie.backdropPath, forKey: "backdropPath")
     manager.setValue(movie.genreIDS, forKey: "genreIDS")
     manager.setValue(movie.overview, forKey: "overview")
+    manager.setValue(movie.releaseDate, forKey: "releaseDate")
     do {
         try managedContext.save()
     } catch let error as NSError {
@@ -86,15 +87,17 @@ func movieIsfavorite(by id:Int) -> Bool{
     }
     return false
 }
-func showALLMovies(){
-    let movies = fetch()
-    for movie in movies {
-        print((movie.value(forKey:"title") as! String))
-        print(movie.value(forKey: "overview") as! String)
-        if let genres = movie.value(forKey: "genreIDS") as? [Int]{
-            for genre in genres{
-                print(genre)
-            }
+func removeNSManagedObjectById(id:Int){
+    if let object = getNSManagedObjectById(id: id){
+        erase(object: object)
+    }
+}
+func getNSManagedObjectById(id:Int) -> NSManagedObject?{
+    let allNSManagedObjects = fetch()
+    for object in allNSManagedObjects {
+        if (object.value(forKey: "id") as? Int) == id{
+            return object
         }
     }
+    return nil
 }
