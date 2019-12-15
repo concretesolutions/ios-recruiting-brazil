@@ -25,6 +25,7 @@ class MoviesGridController: UIViewController {
         let table = UITableView(frame: .zero, style: .grouped)
         table.registerCell(cellType: MoviesTableViewCell.self)
         table.dataSource = searchDataSource
+        table.delegate = self
         table.rowHeight = 150
         table.backgroundColor = .lightGray
         return table
@@ -77,16 +78,5 @@ class MoviesGridController: UIViewController {
                 print(error)
             }
         }
-    }
-}
-
-extension MoviesGridController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screeSize = UIScreen.main.bounds
-        let cellWidth = screeSize.width/2 - 20
-        let cellHeight = cellWidth * 1.5
-        return CGSize(width: cellWidth, height: cellHeight)
     }
 }
