@@ -26,7 +26,7 @@ final class DetailPresenter: BasePresenter {
     private lazy var displayData: [DetailInfoType] = [
         .poster(imageURL: ImageEndpoint.image(width: 500, path: movie.posterPath).completeURL),
         .title(movie.title),
-        .year(movie.releaseDate),
+        .year(movieYear),
         .genres(self.genresText),
         .overview(text: movie.overview)
     ]
@@ -41,7 +41,7 @@ final class DetailPresenter: BasePresenter {
         var completeGenres: String = ""
         genres.forEach { (genre) in
             completeGenres += genre.name
-            if let lastGenre = genres.last, lastGenre.name != genre.name {
+            if let lastGenre = genres.last, lastGenre.id != genre.id {
                 completeGenres += ", "
             }
         }
@@ -54,6 +54,11 @@ final class DetailPresenter: BasePresenter {
     
     var isFavorite: Bool {
         return movie.isFavorite
+    }
+    
+    private var movieYear: String {
+        let year = movie.releaseDate.prefix(4)
+        return "Year: " + String(year)
     }
     
     // MARK: - Init -

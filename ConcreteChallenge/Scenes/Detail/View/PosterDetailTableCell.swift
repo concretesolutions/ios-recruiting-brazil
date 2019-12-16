@@ -23,6 +23,8 @@ final class PosterDetailTableCell: BaseTableViewCell {
         return view
     }()
     
+    let errorView = ErrorView()
+    
     // MARK: - Methods -
     override func setupUI() {
         
@@ -42,5 +44,32 @@ final class PosterDetailTableCell: BaseTableViewCell {
         }
         
         contentView.sizeToFit()
+    }
+    
+    func makeErrorConstraints() {
+        errorView.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            let width = UIScreen.main.bounds.width - 40
+            make.width.equalTo(width)
+            make.height.equalTo(width * 9/16)
+        }
+    }
+}
+
+// MARK: - ErrorDelegate -
+extension PosterDetailTableCell: ErrorDelegate {
+    func displayError(_ type: ErrorMessageType) {
+        
+        errorView.displayMessage(type)
+        
+        guard errorView.superview == nil else { return }
+        
+        contentView.addSubview(errorView)
+        
+        makeErrorConstraints()
+    }
+    
+    func hideError() {
+        errorView.removeFromSuperview()
     }
 }
