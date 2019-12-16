@@ -70,7 +70,7 @@ public struct Movie: Codable {
         }
     }
     
-    init(id: Int, title: String, posterPath: String?, overview: String, releaseDate: Date, genreIds: [Int], favorite: Bool = false) {
+    init(id: Int, title: String, posterPath: String?, overview: String, releaseDate: Date?, genreIds: [Int]) {
         self.id = id
         self.title = title
         self.posterPath = posterPath

@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 class MovieListViewController: UIViewController {
-    let viewModel: MovieListViewModel = MovieListViewModel()
+    let viewModel: MovieListViewModel = MovieListViewModel(dataProvider: DataProvider.shared)
     let screen: MovieListViewControllerScreen = MovieListViewControllerScreen(frame: UIScreen.main.bounds)
     
     // Cancellables

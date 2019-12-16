@@ -17,14 +17,6 @@ enum MovieListViewState {
 }
 
 class MovieListViewModel: ObservableObject {
-    private var movies: [Movie] = [] {
-        willSet {
-            if self.searching == false {
-                // Set searchMovies to show all movies if it not searching
-                self.searchMovies = newValue
-            }
-        }
-    }
     
     private var searchMovies: [Movie] = [] {
         willSet {
@@ -36,7 +28,7 @@ class MovieListViewModel: ObservableObject {
     private var searching: Bool = false {
         willSet {
             // Set searchMovies to show all movies when stop searching
-            self.searchMovies = self.movies
+            self.searchMovies = self.dataProvider.popularMovies
         }
     }
     
@@ -48,7 +40,12 @@ class MovieListViewModel: ObservableObject {
     var querySubscriber: AnyCancellable?
     var popularMoviesSubscriber: AnyCancellable?
     
-    init() {
+    // Data provider
+    let dataProvider: DataProvidable
+       
+    init(dataProvider: DataProvidable) {
+        self.dataProvider = dataProvider
+        
         subscribeToPopularMovies()
     }
     
@@ -63,10 +60,12 @@ class MovieListViewModel: ObservableObject {
     
     public func subscribeToPopularMovies() {
         self.state = .loading
-        popularMoviesSubscriber = DataProvider.shared.$popularMovies
+        popularMoviesSubscriber = dataProvider.popularMoviesPublisher
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] movies in
-                self?.movies.append(contentsOf: movies)
+                // Set searchMovies to show all movies if it not searching
+                guard self?.searching == false else { return }
+                self?.searchMovies.append(contentsOf: movies)
                 self?.state = .movies
             })
     }

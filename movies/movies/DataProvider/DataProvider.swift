@@ -10,17 +10,32 @@ import Foundation
 import Combine
 
 protocol DataProvidable {
-    var popularMovies: [Movie] { get set }
+    var popularMoviesPublisher: CurrentValueSubject<[Movie], Never> { get }
+    var favoriteMoviesPublisher: CurrentValueSubject<[Movie], Never> { get }
+    
+    var popularMovies: [Movie] { get }
     var favoriteMovies: [Movie] { get }
+    
+    func toggleFavorite(withId id: Int)
+    func isFavorite(_ id: Int) -> Bool
 }
 
 class DataProvider: DataProvidable, ObservableObject {
+    
     public static let shared = DataProvider()
     
-    private var page: Int = 1
+    var popularMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
+    var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
     
-    @Published var popularMovies: [Movie] = []
-    @Published var favoriteMovies: [Movie] = []
+    var popularMovies: [Movie] {
+        return self.popularMoviesPublisher.value
+    }
+    
+    var favoriteMovies: [Movie] {
+        return self.favoriteMoviesPublisher.value
+    }
+    
+    private var page: Int = 1
     
     // Cancellables
     private var favoriteIdsSubscriber: AnyCancellable?
@@ -42,7 +57,7 @@ class DataProvider: DataProvidable, ObservableObject {
                 self.page += 1 // Update current page to fetch
                 
                 let movies = response.results.map { Movie($0) } // Map response to array of movies
-                self.popularMovies = movies
+                self.popularMoviesPublisher.send(movies)
 
             case .failure(let error):
                 print(error) // TO DO: Handle error
@@ -70,7 +85,16 @@ class DataProvider: DataProvidable, ObservableObject {
         }
         
         group.notify(queue: .main) {
-            self.favoriteMovies = favorites
+            self.favoriteMoviesPublisher.send(favorites)
         }
+    }
+    
+    // MARK: - Handle favorites
+    func toggleFavorite(withId id: Int) {
+        UserDefaults.standard.toggleFavorite(withId: id)
+    }
+    
+    func isFavorite(_ id: Int) -> Bool {
+        return UserDefaults.standard.isFavorite(id)
     }
 }
