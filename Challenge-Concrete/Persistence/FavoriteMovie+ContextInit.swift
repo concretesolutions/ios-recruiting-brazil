@@ -9,8 +9,9 @@
 import CoreData
 
 extension FavoriteMovie: PersistableObject {
-    convenience init(id: Int64, title: String, year: String, descript: String, image: Data, genres: [GenreLocal]) {
-        self.init(context: CoreDataManager.persistentContainer.viewContext)
+    convenience init(context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext,
+                     id: Int64, title: String, year: String, descript: String, image: Data, genres: [GenreLocal]) {
+        self.init(context: context)
         self.id = id
         self.title = title
         self.year = year
@@ -21,8 +22,9 @@ extension FavoriteMovie: PersistableObject {
 }
 
 extension GenreLocal: PersistableObject {
-    convenience init(id: Int64, name: String) {
-        self.init(context: CoreDataManager.persistentContainer.viewContext)
+    convenience init(context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext,
+                     id: Int64, name: String) {
+        self.init(context: context)
         self.id = id
         self.name = name
     }

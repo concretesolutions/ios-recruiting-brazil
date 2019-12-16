@@ -31,7 +31,7 @@ class MovieDetailViewModel {
     func getGenres(_ movie: Movie) -> String {
         var genresString = ""
         movie.genreIds?.forEach { id in
-            if let genre: GenreLocal = CoreDataManager.fetchBy(id: id) {
+            if let genre: GenreLocal = CoreDataManager.shared.fetchBy(id: id) {
                 genresString.append("\(genre.name ?? ""), ")
             }
         }

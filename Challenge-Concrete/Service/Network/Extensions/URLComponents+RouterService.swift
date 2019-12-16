@@ -10,7 +10,14 @@ import Foundation
 
 extension URLComponents {
     init(endPoint: RouterService) {
-        let baseURL = URL(string: endPoint.baseURL)
+        var baseURLString = ""
+        if case EndPoint.getImage = endPoint {
+            baseURLString = endPoint.imagesURL
+        } else {
+            baseURLString = endPoint.baseURL
+        }
+        let baseURL = URL(string: baseURLString)
+        
         let url = baseURL?.appendingPathComponent(endPoint.path)
         self.init(url: url!, resolvingAgainstBaseURL: false)!
         

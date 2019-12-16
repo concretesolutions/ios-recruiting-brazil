@@ -19,7 +19,7 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     func setupFavoriteMovie(_ favoriteMovie: FavoriteMovie) {
-        movieImageView.image = UIImage(data: favoriteMovie.image!)
+        movieImageView.image = UIImage(data: favoriteMovie.image ?? Data())
         titleLabel.text = favoriteMovie.title
         yearLabel.text = favoriteMovie.year
         descriptionLabel.text = favoriteMovie.descript

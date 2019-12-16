@@ -39,8 +39,7 @@ class TrendingMoviesViewModel: MovieViewModel {
     func genreIsDifferentFromLocal(_ genres: [Genre]) -> Bool {
         var isDifferent = true
         for genre in genres {
-            if let _: GenreLocal = CoreDataManager.fetchBy(id: genre.id) {
-                print("enter here")
+            if let _: GenreLocal = CoreDataManager.shared.fetchBy(id: genre.id) {
                 isDifferent = false
                 break
             }
@@ -49,7 +48,7 @@ class TrendingMoviesViewModel: MovieViewModel {
     }
     
     func saveAllGenresLocal(_ genres: [Genre]) {
-        CoreDataManager.delete(entityType: GenreLocal.self)
+        CoreDataManager.shared.delete(entityType: GenreLocal.self)
         genres.forEach { genre in
             self.saveGenreLocal(genre)
         }
@@ -57,7 +56,7 @@ class TrendingMoviesViewModel: MovieViewModel {
     
     private func saveGenreLocal(_ genre: Genre) {
         _ = GenreLocal(id: Int64(genre.id), name: genre.name)
-        CoreDataManager.saveContext()
+        CoreDataManager.shared.saveContext()
     }
     
     private func fetch(endPoint: EndPoint) {

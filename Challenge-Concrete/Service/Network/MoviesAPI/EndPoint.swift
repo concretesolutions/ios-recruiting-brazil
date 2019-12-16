@@ -11,11 +11,20 @@ enum EndPoint {
     case getTrending(mediaType: MediaType, timeWindow: TimeWindow, page: Int)
     case getGenres
     case searchMovie(query: String)
+    case getImage(path: String)
 }
 
 extension EndPoint: RouterService {
     var baseURL: String {
         return "https://api.themoviedb.org/3"
+    }
+    
+    var imagesURL: String {
+        return "https://image.tmdb.org/t/p/w185"
+    }
+    
+    var apiKey: String {
+        return "bcf0a220ff2f5cad9a4c21be24bb23b6"
     }
     
     var path: String {
@@ -28,6 +37,8 @@ extension EndPoint: RouterService {
             return "/search/movie"
         case .getGenres:
             return "/genre/movie/list"
+        case .getImage(let path):
+            return path
         }
         
     }
@@ -37,10 +48,9 @@ extension EndPoint: RouterService {
     }
     
     var task: Task {
-        let apiKey = "bcf0a220ff2f5cad9a4c21be24bb23b6"
         switch self {
         case .searchMovie(let query):
-            return .requestWithQuery(["query": query, "api_key":apiKey])
+            return .requestWithQuery(["query": query, "api_key": apiKey])
         case .getTrending(_,_, let page):
             return .requestWithQuery(["api_key": apiKey, "page": page])
         default:

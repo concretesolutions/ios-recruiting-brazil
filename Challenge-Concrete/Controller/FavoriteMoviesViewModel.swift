@@ -11,7 +11,7 @@ class FavoriteMoviesViewModel: MovieViewModel {
     weak var dataSource: MovieDataSource?
 
     func fetchFavoriteMovies() {
-        self.dataSource?.data = CoreDataManager.fetch()
+        self.dataSource?.data = CoreDataManager.shared.fetch()
     }
     
     func add(_ favoriteMovie: FavoriteMovie) {
@@ -19,7 +19,7 @@ class FavoriteMoviesViewModel: MovieViewModel {
     }
     
     func toggleFavorite(_ movie: Movie) {
-        let favMovie: FavoriteMovie? = CoreDataManager.fetchBy(id: movie.id)
+        let favMovie: FavoriteMovie? = CoreDataManager.shared.fetchBy(id: movie.id)
         let releaseDate = movie.releaseDate ?? ""
         let genres = fetchGenresFrom(movie)
         if favMovie == nil, let title = movie.title ?? movie.name {
@@ -29,7 +29,7 @@ class FavoriteMoviesViewModel: MovieViewModel {
                                               descript: movie.overview,
                                               image: movie.movieImageData!,
                                               genres: genres)
-            CoreDataManager.saveContext()
+            CoreDataManager.shared.saveContext()
             add(favoriteMovie)
         } else if favMovie != nil {
             remove(movie.id)
@@ -41,7 +41,7 @@ class FavoriteMoviesViewModel: MovieViewModel {
         let isFavorite = dataSource!.data.contains(where: {$0.id == movie.id})
         print("IS FAVORITE: \(isFavorite)")
         if !isFavorite {
-            CoreDataManager.saveContext()
+            CoreDataManager.shared.saveContext()
             add(movie)
         } else {
             remove(Int(movie.id))
@@ -51,7 +51,7 @@ class FavoriteMoviesViewModel: MovieViewModel {
     func fetchGenresFrom(_ movie: Movie) -> [GenreLocal] {
         var genres: [GenreLocal] = []
         movie.genreIds?.forEach({ id in
-            if let genre: GenreLocal = CoreDataManager.fetchBy(id: id) {
+            if let genre: GenreLocal = CoreDataManager.shared.fetchBy(id: id) {
                 genres.append(genre)
             }
         })
@@ -60,11 +60,11 @@ class FavoriteMoviesViewModel: MovieViewModel {
     
     
     func removeFavorite(_ movie: Movie) {
-        CoreDataManager.deleteBy(id: movie.id, entityType: FavoriteMovie.self)
+        CoreDataManager.shared.deleteBy(id: movie.id, entityType: FavoriteMovie.self)
     }
     
     func remove(_ favoriteMovieId: Int) {
-        CoreDataManager.deleteBy(id: favoriteMovieId, entityType: FavoriteMovie.self)
+        CoreDataManager.shared.deleteBy(id: favoriteMovieId, entityType: FavoriteMovie.self)
         self.dataSource?.data.removeAll(where: {$0.id == favoriteMovieId})
     }
 

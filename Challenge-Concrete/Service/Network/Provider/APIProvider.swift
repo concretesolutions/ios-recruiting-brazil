@@ -27,38 +27,7 @@ final class APIProvider<T: Decodable> {
             task.resume()
         }
     }
-    
-    func requestImage(withURL url: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        guard let imageURL = URL(string: url) else { return}
-        let cache = URLCache.shared
-        let request = URLRequest(url: imageURL)
         
-        if let data = cache.cachedResponse(for: request)?.data {
-            completion(.success(data))
-        } else {
-            let task = session.dataTask(with: request) { result in
-                switch result {
-                case .success(let response, let data):
-                    guard let httpResponse = response as? HTTPURLResponse else {
-                        completion(.failure(NetworkError.noResponseData))
-                        return
-                    }
-                    switch httpResponse.statusCode {
-                    case 200...299:
-                        completion(.success(data))
-                    default: break
-                    }
-                case .failure(let error):
-                    completion(.failure(NetworkError.connectionError(error)))
-                }
-            }
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                task.resume()
-            }
-        }
-    }
-    
     private func handleResult<T: Decodable>(result: Result<(URLResponse, Data), Error>,
                                             completion: (Result<T, NetworkError>) -> Void) {
         switch result {
@@ -69,15 +38,25 @@ final class APIProvider<T: Decodable> {
                 completion(.failure(NetworkError.noResponseData))
                 return
             }
+            
+            //If T is Data type
+            if let dataDecodable = data as? T {
+                completion(.success(dataDecodable))
+            }
+            
             guard let dataString = String(bytes: data, encoding: .utf8) else { return }
+            
             switch httpResponse.statusCode {
+                
             case 200...299:
+                print("model:", try! data.decode(type: T.self))
                 do {
                     let model = try data.decode(type: T.self)
                     completion(.success(model))
                 } catch {
                     completion(.failure(NetworkError.decodeError(error)))
                 }
+
             case 400...499:
                 completion(.failure(NetworkError.clientError(statusCode: httpResponse.statusCode, dataResponse: dataString)))
             case 500...599:

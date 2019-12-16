@@ -23,16 +23,19 @@ extension UIImage {
 }
 
 extension UIImageView {
-    func setImage(withURL url: String, completion: ((_ imgData: Data) -> Void)? = nil) {
+    func setImage(withPath path: String, completion: ((_ imgData: Data) -> Void)? = nil) {
         let apiProvider = APIProvider<Movie>()
-        apiProvider.requestImage(withURL: url) { result in
+        apiProvider.request(EndPoint.getImage(path: path)) { (result: Result<Data, NetworkError>) in
+            print("result: \(result)")
             switch result {
             case .success(let data):
+                print("Data: \(data)")
                 DispatchQueue.main.async {
                     self.image = UIImage(data: data)
                     completion?(data)
                 }
-            case .failure: break
+            case .failure(let error):
+                print("Error get image: \(error)")
             }
         }
     }

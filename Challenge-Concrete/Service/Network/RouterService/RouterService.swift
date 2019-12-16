@@ -10,6 +10,7 @@ public typealias Headers = [String: String]
 
 protocol RouterService {
     var baseURL: String { get }
+    var imagesURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var task: Task { get }
