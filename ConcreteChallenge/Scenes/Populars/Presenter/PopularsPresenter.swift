@@ -35,6 +35,7 @@ final class PopularsPresenter: FeedPresenter {
         pagesLoaded = 1
     }
     
+    /// Load more items for the infinite scrolling feed.
     func loadMoreItems() {
         guard pagesLoaded <= maxPages else { return }
         pagesLoaded += 1
@@ -56,7 +57,7 @@ final class PopularsPresenter: FeedPresenter {
         let itemData = super.getItemData(item: item)
         
         // Prefetching if necessary
-        if item > numberOfItems - 5 {
+        if !isSearching && item > numberOfItems - 5 {
             loadMoreItems()
         }
         
@@ -77,17 +78,22 @@ final class PopularsPresenter: FeedPresenter {
         feedView.reloadFeed()
     }
     
+    /// Execute commands to return to the previous state and end a search.
+    private func endSearching() {
+        if isSearching {
+            loadFeed()
+            feedView.resetFeedPosition()
+        }
+        isSearching = false
+    }
+    
     /**
      Search a movie from some text.
-     - Parameter text:
+     - Parameter text: The text to be searched.
      */
     func searchMovie(_ text: String?) {
         guard let text = text, text != "" else {
-            os_log("Tried to search with no text", log: Logger.appLog(), type: .info)
-            if isSearching {
-                loadFeed()
-            }
-            isSearching = false
+            endSearching()
             return
         }
         
@@ -95,7 +101,7 @@ final class PopularsPresenter: FeedPresenter {
         
         MovieClient.search(text) { [weak self] (movies, error) in
             if let error = error {
-                os_log("❌ - Error searching movies: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                os_log("❌ - Error searching movies: %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
                 return
             }
             
