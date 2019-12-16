@@ -16,6 +16,11 @@ class PopularMoviesListViewController: UIViewController {
     private let urlSessionProvider = URLSessionProvider()
     private var currentPage = 1
 
+    var viewState: PopularMoviesListView.State {
+        get { return popularMoviesListView.viewState }
+        set { popularMoviesListView.viewState = newValue }
+    }
+
     // MARK: - Lifecycle
     override func loadView() {
         self.view = popularMoviesListView
@@ -29,20 +34,20 @@ class PopularMoviesListViewController: UIViewController {
         popularMoviesListView.collectionView.dataSource = self
         popularMoviesListView.collectionView.delegate = self
 
+        viewState = .loading
         fetchMoviesList()
     }
 
     private func fetchMoviesList() {
         let service = MovieDBService.popularMovies(currentPage)
-        popularMoviesListView.viewState = .loading
         urlSessionProvider.request(type: PopularMoviesRoot.self, service: service) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.currentPage = data.page
+                    self.currentPage += 1
                     self.movies.append(contentsOf: data.results)
                     self.popularMoviesListView.collectionView.reloadData()
-                    self.popularMoviesListView.viewState = .ready
+                    self.viewState = .ready
                     self.fetchPosterImages()
                 }
             case .failure(let error):
@@ -99,6 +104,18 @@ extension PopularMoviesListViewController: UICollectionViewDataSource {
 
         return cell
     }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if indexPath.row == movies.count - 1 && !(viewState == .fetchingContent) {
+            fetchMoviesList()
+            viewState = .fetchingContent
+        }
+    }
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

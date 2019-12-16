@@ -11,25 +11,24 @@ import UIKit
 class PopularMoviesListView: UIView {
 
     enum State {
-        case loading, ready, error
+        case loading, ready, error, fetchingContent
     }
 
     var viewState: State {
         didSet {
+            collectionView.isHidden = true
+            errorLabel.isHidden = true
+            loadingActivityIndicator.isHidden = true
+            loadingActivityIndicator.stopAnimating()
+
             switch viewState {
             case .loading:
-                collectionView.isHidden = true
-                errorLabel.isHidden = true
                 loadingActivityIndicator.isHidden = false
                 loadingActivityIndicator.startAnimating()
-            case .ready:
+            case .ready, .fetchingContent:
                 collectionView.isHidden = false
-                errorLabel.isHidden = true
-                loadingActivityIndicator.stopAnimating()
             case .error:
                 errorLabel.isHidden = false
-                collectionView.isHidden = true
-                loadingActivityIndicator.stopAnimating()
             }
         }
     }
@@ -37,7 +36,6 @@ class PopularMoviesListView: UIView {
     let collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.registerCell(PopularMovieCollectionViewCell.self)
         collectionView.backgroundColor = .white
 
         return collectionView
@@ -72,6 +70,7 @@ class PopularMoviesListView: UIView {
         addSubview(collectionView)
 
         buildContraints()
+        aditionalConfiguration()
     }
 
     required init?(coder: NSCoder) {
@@ -97,5 +96,9 @@ class PopularMoviesListView: UIView {
             errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
+    }
+
+    private func aditionalConfiguration() {
+        collectionView.registerCell(PopularMovieCollectionViewCell.self)
     }
 }
