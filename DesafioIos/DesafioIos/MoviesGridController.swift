@@ -9,27 +9,6 @@
 import UIKit
 import SnapKit
 class MoviesGridController: UIViewController , SendDataApi {
-    func sendStatus(status: StatusConnection) {
-        if status == .send {
-            DispatchQueue.main.async {
-                self.view.bringSubviewToFront(MoviesGridStatusView(image: #imageLiteral(resourceName: "favorite_empty_icon"), description: "Load ... \(self.moviesData.count)"))
-                self.collectionView.isHidden = true
-            }
-            print("is load")
-            print(self.moviesData.count)
-
-        }
-        if status == .finish{
-            DispatchQueue.main.async {
-                //self.view  =  MoviesGridStatusView(image: #imageLiteral(resourceName: "list_icon"), description: "carregou \(self.moviesData.count)")
-                //self.view.removeFromSuperview()
-                self.collectionView.isHidden = false
-            }
-            print("finish load")
-            print(self.moviesData.count)
-        }
-    }
-    
     var moviesData:[Movie] = [] {
         didSet{
             DispatchQueue.main.async {
@@ -40,14 +19,14 @@ class MoviesGridController: UIViewController , SendDataApi {
     }
     var filterMovies:[Movie] = [] {
         didSet{
-            if !self.filterMovies.isEmpty {
+            if !self.filterMovies.isEmpty{
                 DispatchQueue.main.async {
                     self.collectionView.isHidden = false
                 }
             }
         }
     }
-    
+    let maneger = ManegerApiRequest()
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -55,8 +34,9 @@ class MoviesGridController: UIViewController , SendDataApi {
         cv.backgroundColor = .lightGray
         return cv
     }()
+    let stateView = MoviesGridStatusView(state: .sending)
     override func loadView() {
-        self.view = UIView(frame: UIScreen.main.bounds)
+        self.view = MoviesGridStatusView(image: #imageLiteral(resourceName: "search_icon"), descriptionScreen: "not found movie X")
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         self.title = "Movies"
     }
@@ -74,12 +54,37 @@ class MoviesGridController: UIViewController , SendDataApi {
         searchController.searchResultsUpdater = self
     }
     func setupDataMovie(){
-        let maneger = ManegerApiRequest()
+       
         maneger.delegate = self
-        maneger.sendMovies()
+        maneger.sendMovies(page: 6)
     }
+// MARK: - Func to Get Movies From api
     func sendMovie(movies: [Movie]) {
         moviesData.append(contentsOf: movies)
+    }
+// MARK: - Func to Get Status From api
+    func sendStatus(status: StatusConnection) {
+        if status == .sending {
+            DispatchQueue.main.async {
+                self.collectionView.isHidden = true
+                self.stateView.isHidden = false
+                self.stateView.state = status
+            }
+        
+        }
+        if status == .finish{
+            DispatchQueue.main.async {
+                self.collectionView.isHidden = false
+                self.stateView.isHidden = true
+            }
+        }
+        if status == .dontConnection{
+           DispatchQueue.main.async {
+              self.collectionView.isHidden = true
+              self.stateView.isHidden = false
+              self.stateView.state = .dontConnection
+           }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
@@ -134,6 +139,7 @@ extension MoviesGridController:CodeView{
 
     func buildViewHierarchy() {
         view.addSubview(collectionView)
+        view.addSubview(stateView)
     }
 
     func setupConstraints() {

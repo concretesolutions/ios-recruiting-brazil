@@ -9,7 +9,7 @@
 import Foundation
 
 enum StatusConnection {
-    case send
+    case sending
     case dontConnection
     case finish
 }

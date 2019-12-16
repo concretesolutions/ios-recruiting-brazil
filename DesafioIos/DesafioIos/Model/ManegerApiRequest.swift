@@ -7,7 +7,16 @@
 //
 
 import Foundation
-class ManegerApiRequest{
+final class ManegerApiRequest{
+    var numPages = 1
+    var dataToSend:[Movie] = [] {
+        didSet{
+            if self.numPages * 20 == self.dataToSend.count{
+                self.delegate?.sendMovie(movies: self.dataToSend)
+                self.delegate?.sendStatus(status: .finish)
+            }
+        }
+    }
     static let apiKey = "21f18125f6767ae14a2f2577d85de3db"
     var delegate:SendDataApi?
     
@@ -26,19 +35,18 @@ class ManegerApiRequest{
     init() {
         self.getGenres()
     }
-    func sendMovies(){
-        for i in 1...100{
-            let queryMoviesPopular:[String:Any] =  ["api_key":ManegerApiRequest.apiKey,
-                                                    "page":"\(i)",
+    func sendMovies(page:Int){
+        numPages = page
+        for i in 1...page{
+            let queryMoviesPopular:[String:Any] = ["api_key":ManegerApiRequest.apiKey,
+                                                   "page":"\(i)",
                 "language":"en-US",
                 "region":"US"]
             self.getRequest(querys: queryMoviesPopular) { (catalog) in
-                self.delegate?.sendMovie(movies: catalog.results)
-                self.delegate?.sendStatus(status: .send)
-                self.delegate?.sendStatus(status: .finish)
+                self.delegate?.sendStatus(status: .sending)
+                self.dataToSend.append(contentsOf: catalog.results)
             }
         }
-        
         
     }
     // MARK: - Get movies
@@ -59,6 +67,7 @@ class ManegerApiRequest{
                     }
                 }
                 else{
+                    self.delegate?.sendStatus(status: .dontConnection)
                     print("error")
                 }
             }
@@ -72,7 +81,6 @@ class ManegerApiRequest{
             ManegerApiRequest.genres = allGenres.genres
         }
     }
-
 
     // MARK: - request Genres
     func requestGenres(url:String,data:[String:Any],completion: @escaping (_ results: AllGenres) -> Void){

@@ -7,10 +7,15 @@
 //
 
 import UIKit
-
+import Foundation
 class MoviesGridStatusView: UIView {
-    let image:UIImage
-    let descriptionScreen:String?
+    var image:UIImage?
+    var descriptionScreen:String?
+    var state:StatusConnection? {
+        didSet{
+            self.upadateUI()
+        }
+    }
     lazy var imageDescriptionProblem:UIImageView = {
         let view = UIImageView(frame: .zero)
         view.adjustsImageSizeForAccessibilityContentSizeCategory = true
@@ -25,14 +30,34 @@ class MoviesGridStatusView: UIView {
         view.textAlignment = .center
         return view
     }()
-    init(image:UIImage,description:String?){
-        self.image = image
-        self.descriptionScreen = description
-        super.init(frame: .zero)
+    init(state:StatusConnection){
+        self.state = state
+        super.init(frame: UIScreen.main.bounds)
+        self.upadateUI()
         setupView()
+    }
+    init(image:UIImage,descriptionScreen:String){
+        super.init(frame: UIScreen.main.bounds)
+        self.imageDescriptionProblem.image = image
+        self.textDescriptionProblem.text = descriptionScreen
+        self.setupView()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    func upadateUI(){
+        if self.state == .sending {
+            DispatchQueue.main.async {
+                self.imageDescriptionProblem.image = #imageLiteral(resourceName: "FilterIcon")
+                self.textDescriptionProblem.text = "carregando"
+            }
+        }
+        if self.state == .dontConnection{
+            DispatchQueue.main.async {
+                self.imageDescriptionProblem.image = #imageLiteral(resourceName: "list_icon")
+                self.textDescriptionProblem.text = "sem concetion"
+            }
+        }
     }
 }
 extension MoviesGridStatusView:CodeView{
@@ -58,6 +83,5 @@ extension MoviesGridStatusView:CodeView{
     func setupAdditionalConfiguration() {
         self.backgroundColor = .white
     }
-    
-    
 }
+

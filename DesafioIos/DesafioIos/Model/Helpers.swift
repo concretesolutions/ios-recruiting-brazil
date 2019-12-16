@@ -17,19 +17,11 @@ func getFavoritesMovies() -> [Movie]{
     var movies:[Movie] = []
     for coreData in coreDataFavoritesMovies{
         if let title = coreData.value(forKey: "title") as? String{
-            print(title)
             if let genreIDS = coreData.value(forKey: "genreIDS") as? [Int]{
-                for genre in genreIDS {
-                    print(genre)
-                }
                 if let overview = coreData.value(forKey: "overview") as? String{
-                    print(overview)
                     if let backdropPath = coreData.value(forKey: "backdropPath") as? String{
-                        print(backdropPath)
                         if let id = coreData.value(forKey: "id") as? Int{
-                            print(id)
                             if let releaseDate = coreData.value(forKey: "releaseDate") as? String{
-                                print(releaseDate)
                                 movies.append(Movie(id: id, backdropPath: backdropPath, genreIDS: genreIDS, title: title, overview: overview, releaseDate: releaseDate))
                             }
                         }
