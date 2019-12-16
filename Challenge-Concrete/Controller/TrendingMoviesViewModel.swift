@@ -11,7 +11,7 @@ class TrendingMoviesViewModel: MovieViewModel {
     
     weak var dataSource: MovieCollectionDataSource?
     
-    func fetchTrendingMovies(mediaType: MediaType = .all, timeWindow: TimeWindow = .day) {
+    func fetchTrendingMovies(mediaType: MediaType = .movie, timeWindow: TimeWindow = .day) {
         fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow))
     }
     
