@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// A UIImage with gradient
 class GradientImageView: UIImageView {
@@ -41,3 +42,6 @@ class GradientImageView: UIImageView {
         gradient.frame = self.layer.bounds
     }
 }
+
+// Kingfisher needs this to work as a placeholder
+extension GradientImageView: Placeholder {}

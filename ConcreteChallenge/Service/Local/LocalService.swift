@@ -43,9 +43,9 @@ extension LocalService {
         
         do {
             try JSONEncoder().encode(favorites).write(to: url)
-            os_log("💾 - Saved favorites at @", log: Logger.appLog(), type: .info, String(describing: url))
+            os_log("💾 - Saved favorites at %@", log: Logger.appLog(), type: .info, String(describing: url))
         } catch {
-            os_log("❌ - Could not save at @", log: Logger.appLog(), type: .fault, String(describing: url))
+            os_log("❌ - Could not save at %@", log: Logger.appLog(), type: .fault, String(describing: url))
         }
     }
     
@@ -83,7 +83,7 @@ extension LocalService {
             let favorites = try JSONDecoder().decode([Int : Movie].self, from: readData)
             return favorites
         } catch {
-            os_log("Could not read from @", log: Logger.appLog(), type: .info, String(describing: url))
+            os_log("Could not read from %@", log: Logger.appLog(), type: .info, String(describing: url))
         }
         return nil
     }
@@ -132,9 +132,9 @@ extension LocalService {
         
         do {
             try JSONEncoder().encode(list).write(to: url)
-            os_log("💾 - Saved genres at @", log: Logger.appLog(), type: .info, String(describing: url))
+            os_log("💾 - Saved genres at %@", log: Logger.appLog(), type: .info, String(describing: url))
         } catch {
-            os_log("❌ - Could not save genres at @", log: Logger.appLog(), type: .fault, String(describing: url))
+            os_log("❌ - Could not save genres at %@", log: Logger.appLog(), type: .fault, String(describing: url))
         }
     }
     
@@ -146,7 +146,7 @@ extension LocalService {
             let genreList = try JSONDecoder().decode([Int : Genre].self, from: readData)
             return genreList
         } catch {
-            os_log("Could not read from @", log: Logger.appLog(), type: .info, String(describing: url))
+            os_log("Could not read from %@", log: Logger.appLog(), type: .info, String(describing: url))
         }
         return nil
     }

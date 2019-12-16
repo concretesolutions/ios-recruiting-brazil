@@ -19,7 +19,11 @@ class MovieClient {
 
     static func getPopular(page: Int, completion: @escaping ([Movie]?, Error?) -> Void) {
         performRequest(route: .popular(page: page)) { response in
-            if response?.error == nil {
+            
+            if let error = response?.error {
+                completion(nil, error)
+            } else {
+                
                 if let data = response?.data, let utf8Text = String(data: data, encoding: .utf8) {
                     
                     guard let jsonData = utf8Text.data(using: .utf8) else {
@@ -35,18 +39,18 @@ class MovieClient {
                         completion(returnedMovies, nil)
                     } catch {
                         completion(nil, error)
-                        debugPrint(error)
                     }
                 }
-            } else {
-                debugPrint(response?.error?.localizedDescription as Any)
             }
         }
     }
     
     static func getGenreList(completion: @escaping ([Genre]?, Error?) -> Void) {
         performRequest(route: .genreList) { response in
-            if response?.error == nil {
+            
+            if let error = response?.error {
+                completion(nil, error)
+            } else {
                 if let data = response?.data, let utf8Text = String(data: data, encoding: .utf8) {
                     
                     guard let jsonData = utf8Text.data(using: .utf8) else {
@@ -65,18 +69,19 @@ class MovieClient {
                         completion(genreList, nil)
                     } catch {
                         completion(nil, error)
-                        debugPrint(error)
                     }
                 }
-            } else {
-                debugPrint(response?.error?.localizedDescription as Any)
             }
         }
     }
     
     static func search(_ text: String, completion: @escaping ([Movie]?, Error?) -> Void) {
         performRequest(route: .search(text)) { response in
-            if response?.error == nil {
+            
+            if let error = response?.error {
+                completion(nil, error)
+            } else {
+                
                 if let data = response?.data, let utf8Text = String(data: data, encoding: .utf8) {
                     
                     guard let jsonData = utf8Text.data(using: .utf8) else {
@@ -92,11 +97,8 @@ class MovieClient {
                         completion(returnedMovies, nil)
                     } catch {
                         completion(nil, error)
-                        debugPrint(error)
                     }
                 }
-            } else {
-                debugPrint(response?.error?.localizedDescription as Any)
             }
         }
     }

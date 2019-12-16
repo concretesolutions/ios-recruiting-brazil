@@ -45,7 +45,7 @@ final class DetailPresenter: BasePresenter {
                 completeGenres += ", "
             }
         }
-        return completeGenres != "" ? completeGenres : "Loading genres..."
+        return completeGenres != "" ? completeGenres : "No known genres"
     }
     
     var numberOfRows: Int {
@@ -80,6 +80,8 @@ final class DetailPresenter: BasePresenter {
                 if let genreList = genreList {
                     let matchingGenres = genreList.filter { self.movie.genreIDs.contains($0.id) }
                     self.genres = matchingGenres
+                } else if let error = error {
+                    os_log("❌ - Error loading genres: @", log: Logger.appLog(), type: .error, error.localizedDescription)
                 }
             }
         }

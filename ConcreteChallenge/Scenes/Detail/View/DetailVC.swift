@@ -121,7 +121,16 @@ extension DetailVC: UITableViewDataSource {
                 fatalError("Unknown identifier")
             }
             cell.posterImageView.kf.indicatorType = .activity
-            cell.posterImageView.kf.setImage(with: imageURL)
+            cell.posterImageView.kf.setImage(with: imageURL, placeholder: GradientImageView(frame: .zero))
+            cell.posterImageView.kf.setImage(with: imageURL, placeholder: GradientImageView(frame: .zero), options: nil, progressBlock: nil) { [weak cell] (result) in
+                switch result {
+                case .failure(let error):
+                    cell?.posterImageView.image = #imageLiteral(resourceName: "TMDbLogo")
+                    os_log("❌ - Image not downloaded %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                default:
+                    return
+                }
+            }
             return cell
             
         case .title(let title):
@@ -145,7 +154,7 @@ extension DetailVC: UITableViewDataSource {
                 os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
                 fatalError("Unknown identifier")
             }
-            // TODO: treat when it gets the genres
+            
             cell.textLabel?.text = genres
             self.genresCell = cell
             return cell

@@ -19,6 +19,9 @@ class BaseViewController: UIViewController, ViewDelegate {
     /// Variable to enable or disable view's logs
     static var logEnabled: Bool = true
     
+    /// View to display many kinds of error. Add this as a subview when needed.
+    var errorView: ErrorView = ErrorView()
+    
     // MARK: - Init -
     init(presenter: Presenter) {
         guard type(of: self) != BaseViewController.self else {
@@ -102,6 +105,38 @@ class BaseViewController: UIViewController, ViewDelegate {
             navigationController.pushViewController(newVC, animated: true)
         } else {
             self.present(newVC, animated: true, completion: nil)
+        }
+    }
+    
+    
+    // MARK: - ErrorDelegate
+    func displayError(_ type: ErrorMessageType) {
+        
+        errorView.displayMessage(type)
+        
+        guard errorView.superview == nil else { return }
+        
+        view.addSubview(errorView)
+        
+        makeErrorConstraints()
+    }
+    
+    func hideError() {
+        errorView.removeFromSuperview()
+    }
+    
+    // MARK: Other error methods
+    /**
+     Setup the `errorView` constraints at the center of the screen.
+     
+     Override to display the error view elsewhere.
+     */
+    func makeErrorConstraints() {
+        errorView.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            let width = UIScreen.main.bounds.width - 40
+            make.width.equalTo(width)
+            make.height.equalTo(width * 9/16)
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ViewDelegate: NSObjectProtocol {
+protocol ViewDelegate: NSObjectProtocol, ErrorDelegate {
     
     /// Do the necessary steps to inform the user that the view is loading
     func startLoading()

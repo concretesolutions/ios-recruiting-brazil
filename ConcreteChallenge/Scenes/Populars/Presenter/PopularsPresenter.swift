@@ -24,7 +24,8 @@ final class PopularsPresenter: FeedPresenter {
         MovieClient.getPopular(page: 1) { [weak self] (movies, error) in
             
             if let error = error {
-                os_log("❌ - Error loading movie feed: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                os_log("❌ - Error loading movie feed: %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                self?.view?.displayError(.generic)
                 return
             }
             
@@ -42,7 +43,7 @@ final class PopularsPresenter: FeedPresenter {
         MovieClient.getPopular(page: pagesLoaded) { [weak self] (movies, error) in
             
             if let error = error {
-                os_log("❌ - Error loading movie feed: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                os_log("❌ - Error loading movie feed: %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
                 return
             }
             
@@ -80,7 +81,9 @@ final class PopularsPresenter: FeedPresenter {
     
     /// Execute commands to return to the previous state and end a search.
     private func endSearching() {
+        
         if isSearching {
+            view?.hideError()
             loadFeed()
             feedView.resetFeedPosition()
         }
@@ -92,6 +95,8 @@ final class PopularsPresenter: FeedPresenter {
      - Parameter text: The text to be searched.
      */
     func searchMovie(_ text: String?) {
+        view?.hideError()
+        
         guard let text = text, text != "" else {
             endSearching()
             return
@@ -99,15 +104,24 @@ final class PopularsPresenter: FeedPresenter {
         
         isSearching = true
         
+        view?.startLoading()
+        
         MovieClient.search(text) { [weak self] (movies, error) in
+            
+            self?.view?.finishLoading()
+            
             if let error = error {
                 os_log("❌ - Error searching movies: %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                self?.view?.displayError(.info("Error loading search results"))
                 return
             }
             
             if let movies = movies {
                 self?.movies = movies
                 self?.feedView.resetFeedPosition()
+                if movies.isEmpty {
+                    self?.view?.displayError(.missing("Your search of \"\(text)\" found nothing"))
+                }
             }
         }
     }
