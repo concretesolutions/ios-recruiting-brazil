@@ -44,7 +44,7 @@ class CoreDataManager {
     
     func fetchBy<T: PersistableObject>(id: Int) -> T? {
            let predicate = NSPredicate(format: "(id == %d)", id)
-           let favMovie: [T] = CoreDataManager().fetch(predicate: predicate)
+        let favMovie: [T] = CoreDataManager.shared.fetch(predicate: predicate)
            return favMovie.first
     }
     
