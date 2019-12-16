@@ -97,12 +97,18 @@ class FavoriteListViewModel: ObservableObject {
         
         self.searching = true
         self.state = .loading
-        self.searchMovies = self.movies.filter { $0.title.lowercased().contains(query.lowercased()) } // Filter search list with text in query
+        self.searchMovies = self.filterArray(self.movies, with: query) // Filter search list with text in query
         
         if searchMovies.isEmpty { // Check if found any movies with the given name
             self.state = .noDataError
         } else {
             self.state = .movies
         }
+    }
+    
+    private func filterArray(_ array: [Movie], with query: String) -> [Movie] {
+        let regex = "^\(query.lowercased())(\\s?\\w*)*" // Create regular expression to catch only strings starting with query text
+        
+        return array.filter { $0.title.lowercased().range(of: regex, options: .regularExpression) != nil } // Filter movies with title starting with query text
     }
 }
