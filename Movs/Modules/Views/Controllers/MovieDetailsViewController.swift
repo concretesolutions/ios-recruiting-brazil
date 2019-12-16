@@ -14,16 +14,16 @@ class MovieDetailsViewController: UIViewController {
     // MARK: - Properties
     
     internal let screen = MovieDetailsViewScreen()
-    internal var viewModel: MovieViewModel
+    internal var viewModel: MovieDetailsControllerViewModel
     internal var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers
     
-    init(viewModel: MovieViewModel) {
+    init(viewModel: MovieDetailsControllerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         
-        if let backdropPath = self.viewModel.backdropPath {
+        if let backdropPath = self.viewModel.movieViewModel.backdropPath {
             self.screen.backdrop.download(imageURL: "https://image.tmdb.org/t/p/w780\(backdropPath)")
         }
     }
@@ -36,12 +36,18 @@ class MovieDetailsViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        let favoriteStatus = self.viewModel.storageManager.isFavorited(movieID: self.viewModel.id)
+        let favoriteStatus = self.viewModel.movieViewModel.getFavoriteStatus()
         
-        self.screen.titleLabel.text = self.viewModel.title
+        self.screen.titleLabel.text = self.viewModel.movieViewModel.title
         self.screen.favoriteButton.setFavorited(favoriteStatus)
         self.screen.favoriteButton.addTarget(self, action: #selector(self.didTapFavorite(_: )), for: .touchUpInside)
         self.view = self.screen
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.screen.detailsTableView.delegate = self
+        self.screen.detailsTableView.dataSource = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -55,9 +61,9 @@ class MovieDetailsViewController: UIViewController {
         sender.setFavorited(!sender.favorited)
         
         if sender.favorited == true {
-            self.viewModel.addToFavorites()
+            self.viewModel.movieViewModel.addToFavorites()
         } else {
-            self.viewModel.removeFromFavorites()
+            self.viewModel.movieViewModel.removeFromFavorites()
         }
     }
 }

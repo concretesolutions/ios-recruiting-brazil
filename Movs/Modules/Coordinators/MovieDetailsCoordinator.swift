@@ -33,7 +33,8 @@ class MovieDetailsCoordinator: Coordinator {
         self.presenter = parent.coordinatedViewController
         self.dependencies = parent.dependencies
                 
-        let viewModel = MovieViewModel(movie: movie, dependencies: self.dependencies)
+        let movieViewModel = MovieViewModel(movie: movie, dependencies: self.dependencies)
+        let viewModel = MovieDetailsControllerViewModel(movieViewModel: movieViewModel)
         self.coordinatedViewController = MovieDetailsViewController(viewModel: viewModel)
         viewModel.coordinatorDelegate = self
     }

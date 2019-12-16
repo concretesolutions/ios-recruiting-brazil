@@ -15,7 +15,6 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     lazy var posterImage: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.backgroundColor = .systemPink
         return imageView
     }()
     
@@ -62,7 +61,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.clear
-        self.contentView.backgroundColor = .systemGray6
+        self.contentView.backgroundColor = UIColor(named: "favoritesGroupedBackground")
         self.contentView.layer.masksToBounds = true
         self.contentView.layer.cornerRadius = 8.0
         self.setupView()
@@ -76,7 +75,7 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16.0, left: 8.0, bottom: 16.0, right: 8.0))
+        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 16.0, left: 8.0, bottom: 16.0, right: 8.0))
     }
 }
 

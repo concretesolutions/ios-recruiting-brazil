@@ -43,8 +43,13 @@ final class MovieDetailsViewScreen: UIView {
         return title
     }()
     
-    lazy var releaseYearLabel: SectionHeadingLabel = {
-        return SectionHeadingLabel()
+    lazy var detailsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 24.0, right: 0.0)
+        tableView.register(GenresDetailsTableViewCell.self, forCellReuseIdentifier: "GenresCell")
+        tableView.register(MovieDetailsTableViewCell.self, forCellReuseIdentifier: "DetailCell")
+        return tableView
     }()
     
     // MARK: - Initializers and Deinitializers
@@ -65,6 +70,7 @@ extension MovieDetailsViewScreen: CodeView {
         self.addSubview(self.overlay)
         self.addSubview(self.favoriteButton)
         self.addSubview(self.titleLabel)
+        self.addSubview(self.detailsTableView)
     }
     
     func setupConstraints() {
@@ -87,6 +93,11 @@ extension MovieDetailsViewScreen: CodeView {
             make.leading.equalTo(self.backdrop).inset(24.0)
             make.bottom.equalTo(self.backdrop).inset(16.0)
             make.trailing.lessThanOrEqualTo(self.favoriteButton).offset(-24.0)
+        })
+        
+        self.detailsTableView.snp.makeConstraints({ make in
+            make.top.equalTo(self.overlay.snp.bottom)
+            make.left.right.bottom.equalTo(self)
         })
     }
     

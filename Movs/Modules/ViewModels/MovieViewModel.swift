@@ -21,10 +21,6 @@ class MovieViewModel {
     typealias Dependencies = HasStorageManager
     internal let storageManager: StorageManager
     
-    // MARK: - Properties
-    
-    weak var coordinatorDelegate: MovieDetailsCoordinator?
-    
     // MARK: - Attributes
     
     public let backdropPath: String?
@@ -58,5 +54,9 @@ class MovieViewModel {
     
     func removeFromFavorites() {
         self.storageManager.removeFavorite(movieID: Int64(self.id))
+    }
+    
+    func getFavoriteStatus() -> Bool {
+        return self.storageManager.isFavorited(movieID: self.id)
     }
 }
