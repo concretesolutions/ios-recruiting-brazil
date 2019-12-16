@@ -74,4 +74,8 @@ final class PopularsPresenter: FeedPresenter {
         LocalService.instance.checkFavorites(on: movies)
         feedView.reloadFeed()
     }
+    
+    func searchMovie(_ text: String?) {
+        
+    }
 }

@@ -61,6 +61,8 @@ final class PopularsVC: FeedVC {
         view.searchBarStyle = .prominent
         view.searchTextField.backgroundColor = .white
         view.clipsToBounds = true
+        view.searchTextField.textColor = .black
+        view.searchTextField.tintColor = Colors.tmdbGreen
         return view
     }()
     
@@ -73,6 +75,7 @@ final class PopularsVC: FeedVC {
         super.setupUI()
         
         scrollView.delegate = self
+        searchBar.delegate = self
         
         let headerData = popularsPresenter?.getHeaderData()
         headerView.callToActionLabel.text = headerData?.title
@@ -129,18 +132,11 @@ final class PopularsVC: FeedVC {
         
         navigationController?.isNavigationBarHidden = true
     }
-    
-    override func setFavorite(_ isFavorite: Bool, tag: Int?) {
-        guard let item = tag, let cell = feedCollectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? ItemCollectionViewCell else {
-            // TODO: Log error
-            return
-        }
-        cell.isFavorite = isFavorite
-    }
 }
 
 // MARK: - ScrollView Delegate -
 extension PopularsVC {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let y: CGFloat = scrollView.contentOffset.y
         let oldViewHeight: CGFloat = headerViewHeightConstant
@@ -166,6 +162,24 @@ extension PopularsVC {
                 self?.headerView.alpha = progressPercentage
             }
             self.view.animateConstraints()
+        }
+        
+        // Hide the keyboard if it's on the screen
+        searchBar.endEditing(true)
+    }
+}
+
+// MARK: - SearchBar Delegate -
+extension PopularsVC: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        popularsPresenter?.searchMovie(searchBar.text)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            popularsPresenter?.searchMovie(searchText)
         }
     }
 }
