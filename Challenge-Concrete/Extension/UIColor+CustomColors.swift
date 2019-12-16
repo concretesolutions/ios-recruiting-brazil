@@ -9,6 +9,6 @@
 import UIKit
 
 extension UIColor {
-    static var customYellow: UIColor = UIColor(named: "customYellow") ?? .white
+    static var customYellow: UIColor = UIColor(named: "CustomYellow") ?? .white
 }
 
