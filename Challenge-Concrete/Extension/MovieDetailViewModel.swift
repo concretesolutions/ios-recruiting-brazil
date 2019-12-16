@@ -45,7 +45,6 @@ class MovieDetailViewModel {
         var genresString = ""
         
         movie.genres?.forEach({ genre in
-            print("GENRE: \(genre)")
             if let genre = genre as? GenreLocal {
                 genresString.append("\(genre.name ?? ""), ")
             }

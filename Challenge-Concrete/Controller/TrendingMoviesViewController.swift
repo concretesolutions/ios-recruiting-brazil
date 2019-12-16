@@ -84,7 +84,6 @@ extension TrendingMoviesViewController {
     func didUpdateData() {
         
         DispatchQueue.main.async {
-            print("data: \(self.dataSource.data.count)")
             self.moviesView.reloadCollectionData()
             self.removeLoadingIndicator()
         }
@@ -129,7 +128,6 @@ extension TrendingMoviesViewController {
         let favoriteVC = (tabBarController as! TabBarController).favoriteMoviesVC
         movieDetailVC.favoriteMovieDelegate = favoriteVC
         navigationController?.pushViewController(movieDetailVC, animated: true)
-        print("MOVIE INDEX: \(movie.title ?? "none")")
     }
     
     func didFavoriteMovie(at index: Int, turnFavorite: Bool) {

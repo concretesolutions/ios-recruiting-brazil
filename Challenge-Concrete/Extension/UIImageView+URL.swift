@@ -26,10 +26,8 @@ extension UIImageView {
     func setImage(withPath path: String, completion: ((_ imgData: Data) -> Void)? = nil) {
         let apiProvider = APIProvider<Movie>()
         apiProvider.request(EndPoint.getImage(path: path)) { (result: Result<Data, NetworkError>) in
-            print("result: \(result)")
             switch result {
             case .success(let data):
-                print("Data: \(data)")
                 DispatchQueue.main.async {
                     self.image = UIImage(data: data)
                     completion?(data)

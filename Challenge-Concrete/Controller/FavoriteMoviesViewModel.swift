@@ -37,9 +37,7 @@ class FavoriteMoviesViewModel: MovieViewModel {
     }
     
     func toggleFavorite(_ movie: FavoriteMovie) {
-        print(dataSource!.data)
         let isFavorite = dataSource!.data.contains(where: {$0.id == movie.id})
-        print("IS FAVORITE: \(isFavorite)")
         if !isFavorite {
             CoreDataManager.shared.saveContext()
             add(movie)

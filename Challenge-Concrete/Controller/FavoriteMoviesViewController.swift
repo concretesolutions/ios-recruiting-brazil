@@ -53,7 +53,6 @@ extension FavoriteMoviesViewController {
         let movieDetailVC = MovieDetailViewController(with: movie)
         movieDetailVC.favoriteMovieDelegate = self
         navigationController?.pushViewController(movieDetailVC, animated: true)
-        print("MOVIE INDEX: \(movie.title ?? "none")")
     }
     
     func didFavoriteMovie(at index: Int, turnFavorite: Bool) {

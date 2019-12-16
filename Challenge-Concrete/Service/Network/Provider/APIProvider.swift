@@ -18,7 +18,6 @@ final class APIProvider<T: Decodable> {
     
     func request<ResultType: Decodable>(_ endPoint: RouterService, completion: @escaping (Result<ResultType, NetworkError>) -> Void) {
         let request = URLRequest(endPoint: endPoint)
-        print("REQUEST: \(request)")
         let task = session.dataTask(with: request) { result in
             self.handleResult(result: result, completion: completion)
         }
@@ -49,7 +48,6 @@ final class APIProvider<T: Decodable> {
             switch httpResponse.statusCode {
                 
             case 200...299:
-                print("model:", try! data.decode(type: T.self))
                 do {
                     let model = try data.decode(type: T.self)
                     completion(.success(model))
