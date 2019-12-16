@@ -72,6 +72,12 @@ extension FeedVC: FeedViewDelegate {
             self?.feedCollectionView.reloadData()
         }
     }
+    
+    func resetFeedPosition() {
+        self.feedCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0),
+              at: .top,
+        animated: true)
+    }
 }
 
 // MARK: - CollectionView Data Source -

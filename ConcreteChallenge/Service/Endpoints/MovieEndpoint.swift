@@ -27,10 +27,16 @@ enum MovieEndpoint: APIConfiguration {
      */
     case genreList
     
+    /**
+     Do a search query.
+     - Parameter text: The text to be searched.
+     */
+    case search(_ text: String)
+    
     // MARK: - HTTPMethod
     var method: HTTPMethod {
         switch self {
-        case .popular, .genreList:
+        case .popular, .genreList, .search:
             return .get
         }
     }
@@ -42,13 +48,16 @@ enum MovieEndpoint: APIConfiguration {
             return "/movie/popular?api_key=\(NetworkInfo.APIParameterKey.apiKey)&page=\(page)"
         case .genreList:
             return "/genre/movie/list?api_key=\(NetworkInfo.APIParameterKey.apiKey)"
+        case .search(let text):
+            let safeText = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            return "/search/movie?api_key=\(NetworkInfo.APIParameterKey.apiKey)&query=\(safeText ?? "%20")"
         }
     }
     
     // MARK: - Parameters
     var parameters: Parameters? {
         switch self {
-        case .popular, .genreList:
+        case .popular, .genreList, .search:
             return nil
         }
     }

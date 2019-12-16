@@ -74,4 +74,30 @@ class MovieClient {
         }
     }
     
+    static func search(_ text: String, completion: @escaping ([Movie]?, Error?) -> Void) {
+        performRequest(route: .search(text)) { response in
+            if response?.error == nil {
+                if let data = response?.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    
+                    guard let jsonData = utf8Text.data(using: .utf8) else {
+                        completion(nil, response?.error)
+                        return
+                    }
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let decodedJson = try decoder.decode(PopularResponse.self, from: jsonData)
+                        let returnedMovies = decodedJson.results
+                        LocalService.instance.checkFavorites(on: returnedMovies)
+                        completion(returnedMovies, nil)
+                    } catch {
+                        completion(nil, error)
+                        debugPrint(error)
+                    }
+                }
+            } else {
+                debugPrint(response?.error?.localizedDescription as Any)
+            }
+        }
+    }
 }

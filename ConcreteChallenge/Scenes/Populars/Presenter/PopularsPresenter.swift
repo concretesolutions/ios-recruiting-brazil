@@ -17,6 +17,8 @@ final class PopularsPresenter: FeedPresenter {
     
     private var maxPages: Int = 500
     
+    private var isSearching: Bool = false
+    
     // MARK: - Methods -
     override func loadFeed() {
         MovieClient.getPopular(page: 1) { [weak self] (movies, error) in
@@ -75,7 +77,32 @@ final class PopularsPresenter: FeedPresenter {
         feedView.reloadFeed()
     }
     
+    /**
+     Search a movie from some text.
+     - Parameter text:
+     */
     func searchMovie(_ text: String?) {
+        guard let text = text, text != "" else {
+            os_log("Tried to search with no text", log: Logger.appLog(), type: .info)
+            if isSearching {
+                loadFeed()
+            }
+            isSearching = false
+            return
+        }
         
+        isSearching = true
+        
+        MovieClient.search(text) { [weak self] (movies, error) in
+            if let error = error {
+                os_log("❌ - Error searching movies: @", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                return
+            }
+            
+            if let movies = movies {
+                self?.movies = movies
+                self?.feedView.resetFeedPosition()
+            }
+        }
     }
 }
