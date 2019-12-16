@@ -9,7 +9,8 @@
 import UIKit
 
 class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataSource {
-    
+    var currentPage: Int = 1
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
@@ -24,11 +25,26 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
         let alreadyFavorite = CoreDataManager.isSaved(entityType: FavoriteMovie.self, id: movie.id)
         movie.isFavorite = alreadyFavorite
         cell.changeFavoriteIcon(isAdding: alreadyFavorite)
-        
+
         cell.imageView.setImage(withURL: imageURL) { imgData in
             movie.movieImageData = imgData
         }
 
         return cell
+    }
+}
+
+extension MovieCollectionDataSource: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let countItems = collectionView.numberOfItems(inSection: 0)
+        
+        if countItems <= 20 {
+            currentPage = 1
+        }
+        
+        if indexPaths[0].item >= countItems - 5 {
+            currentPage += 1
+            dataFetchDelegate?.didChange(page: currentPage)
+        }
     }
 }

@@ -14,7 +14,7 @@ enum ErrorType {
 class TrendingMoviesView: UIView {
     lazy var errorRequestView = ErrorRequestView()
     
-    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
     init() {
         super.init(frame: .zero)

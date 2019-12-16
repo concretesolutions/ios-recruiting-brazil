@@ -11,8 +11,8 @@ class TrendingMoviesViewModel: MovieViewModel {
     
     weak var dataSource: MovieCollectionDataSource?
     
-    func fetchTrendingMovies(mediaType: MediaType = .movie, timeWindow: TimeWindow = .day) {
-        fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow))
+    func fetchTrendingMovies(mediaType: MediaType = .movie, timeWindow: TimeWindow = .day, page: Int = 1) {
+        fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow, page: page))
     }
     
     func searchMovies(query: String) {
@@ -39,14 +39,12 @@ class TrendingMoviesViewModel: MovieViewModel {
     func genreIsDifferentFromLocal(_ genres: [Genre]) -> Bool {
         var isDifferent = true
         for genre in genres {
-            print("enter \(genre)")
             if let _: GenreLocal = CoreDataManager.fetchBy(id: genre.id) {
                 print("enter here")
                 isDifferent = false
                 break
             }
         }
-        
         return isDifferent
     }
     
@@ -67,11 +65,17 @@ class TrendingMoviesViewModel: MovieViewModel {
         apiProvider.request(endPoint) { (result: Result<Response<Movie>, NetworkError>) in
             switch result {
             case .success(let response):
-                if response.results.count > 0 {
-                    self.dataSource?.data = response.results
-                } else {
+                if response.results.isEmpty {
                     self.dataSource?.dataFetchDelegate?.didFailFetchData(with: NetworkError.emptyResult)
+                } else {
+                    if case .getTrending(_,_,let page) = endPoint {
+                        if page > 1 {
+                            self.dataSource!.data.append(contentsOf: response.results)
+                            return
+                        }
+                    }
                 }
+                self.dataSource?.data = response.results
             case.failure(let error):
                 self.dataSource?.dataFetchDelegate?.didFailFetchData(with: error)
             }

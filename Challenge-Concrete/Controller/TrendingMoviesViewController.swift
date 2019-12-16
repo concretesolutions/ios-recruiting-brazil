@@ -16,7 +16,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     let moviesView = TrendingMoviesView()
     var loadingIndicator: UIActivityIndicatorView!
     let searchController = UISearchController(searchResultsController: nil)
-    
+    var searchTimer: Timer?
     weak var favoriteMovieDelegate: FavoriteMovieDelegate?
     override func loadView() {
         view = moviesView
@@ -28,7 +28,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         setupSearchController()
         setup(with: dataSource)
         moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
-        
+        moviesView.collectionView.prefetchDataSource = dataSource
         startFetch()
         moviesView.errorRequestView.tryAgainAction = { [weak self] in
             self?.startFetch()
@@ -38,7 +38,6 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     func startFetch() {
         setLoadingIndicator()
         movieViewModel.fetchTrendingMovies()
-        //TODO: FetchGenres has bugs
         movieViewModel.fetchGenres()
     }
     
@@ -84,10 +83,15 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
 extension TrendingMoviesViewController {
     func didUpdateData() {
         
-        DispatchQueue.main.async { [weak self] in
-            self?.moviesView.reloadCollectionData()
-            self?.removeLoadingIndicator()
+        DispatchQueue.main.async {
+            print("data: \(self.dataSource.data.count)")
+            self.moviesView.reloadCollectionData()
+            self.removeLoadingIndicator()
         }
+    }
+    
+    func didChange(page: Int) {
+        movieViewModel.fetchTrendingMovies(page: page)
     }
 
     func didFailFetchData(with error: Error) {
@@ -138,11 +142,18 @@ extension TrendingMoviesViewController {
 // MARK: - SearchResultsUpdating
 extension TrendingMoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text, !text.isEmpty {
-            moviesView.removeErrorRequestView()
-            movieViewModel.searchMovies(query: text)
-        } else {
-            startFetch()
-        }
+        searchTimer?.invalidate()
+        
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
+            
+            if let text = searchController.searchBar.text, !text.isEmpty {
+                self?.moviesView.removeErrorRequestView()
+                self?.movieViewModel.searchMovies(query: text)
+            } else {
+                self?.startFetch()
+            }
+        })
+        
+        
     }
 }

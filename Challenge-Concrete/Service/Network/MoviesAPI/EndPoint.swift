@@ -8,7 +8,7 @@
 
 enum EndPoint {
     case getMovie(id: Int)
-    case getTrending(mediaType: MediaType, timeWindow: TimeWindow)
+    case getTrending(mediaType: MediaType, timeWindow: TimeWindow, page: Int)
     case getGenres
     case searchMovie(query: String)
 }
@@ -22,7 +22,7 @@ extension EndPoint: RouterService {
         switch self {
         case .getMovie(let id):
             return "/movie/\(id)"
-        case .getTrending(let mediaType, let timeWindow):
+        case .getTrending(let mediaType, let timeWindow, _):
             return "/trending/\(mediaType.rawValue)/\(timeWindow.rawValue)"
         case .searchMovie:
             return "/search/movie"
@@ -41,6 +41,8 @@ extension EndPoint: RouterService {
         switch self {
         case .searchMovie(let query):
             return .requestWithQuery(["query": query, "api_key":apiKey])
+        case .getTrending(_,_, let page):
+            return .requestWithQuery(["api_key": apiKey, "page": page])
         default:
             return .requestWithQuery(["api_key": apiKey])
         }
