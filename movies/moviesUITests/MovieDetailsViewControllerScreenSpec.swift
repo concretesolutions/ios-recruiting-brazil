@@ -18,7 +18,7 @@ class MovieDetailsViewControllerScreenSpec: QuickSpec {
         
         describe("the 'Details View' ") {
             let movie = MockedDataProvider.shared.popularMovies.first!
-            let viewModel = MovieDetailsViewModel(of: movie)
+            let viewModel = MovieDetailsViewModel(of: movie, dataProvider: MockedDataProvider.shared)
             let frame = UIScreen.main.bounds
             
             context("when is not on favorites list") {

@@ -22,23 +22,24 @@ class MovieCellViewModel: ObservableObject {
     
     @Published var favorite: Bool
     
+    var toggleFavorite: () -> Void // Toggle favorite handler
+    
     // Cancellables
     private var favoriteIdsSubscriber: AnyCancellable?
 
-    init(of movie: Movie) {
+    init(of movie: Movie, dataProvider: DataProvidable = DataProvider.shared) {
         self.movie = movie
-        self.favorite = UserDefaults.standard.isFavorite(self.movie.id)
+        self.favorite = dataProvider.isFavorite(self.movie.id)
+        self.toggleFavorite = {
+            dataProvider.toggleFavorite(withId: movie.id)
+        }
         
-        favoriteIdsSubscriber = UserDefaults.standard.publisher(for: \.favorites)
+        favoriteIdsSubscriber = dataProvider.favoriteMoviesPublisher
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
                 guard let id = self?.movie.id else { return }
-                self?.favorite = UserDefaults.standard.isFavorite(id)
+                self?.favorite = dataProvider.isFavorite(id)
             })
-    }
-    
-    public func toggleFavorite() {
-        UserDefaults.standard.toggleFavorite(withId: self.movie.id)
     }
 }
 

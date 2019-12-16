@@ -105,7 +105,7 @@ class FavoriteListViewModel: ObservableObject {
         }
     }
     
-    private func filterArray(_ array: [Movie], with query: String) -> [Movie] {
+    internal func filterArray(_ array: [Movie], with query: String) -> [Movie] {
         let regex = "^\(query.lowercased())(\\s?\\w*)*" // Create regular expression to catch only strings starting with query text
         
         return array.filter { $0.title.lowercased().range(of: regex, options: .regularExpression) != nil } // Filter movies with title starting with query text
