@@ -16,6 +16,8 @@ class PopularMoviesListViewController: UIViewController {
     private let urlSessionProvider = URLSessionProvider()
     private var currentPage = 1
 
+    weak var coordinator: PopularMoviesTabCoordinator?
+
     var viewState: PopularMoviesListView.State {
         get { return popularMoviesListView.viewState }
         set { popularMoviesListView.viewState = newValue }
@@ -120,6 +122,11 @@ extension PopularMoviesListViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension PopularMoviesListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        coordinator?.showDetails(of: movie)
+    }
+
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
