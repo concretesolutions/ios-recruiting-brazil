@@ -18,7 +18,7 @@ class MovieCollectionViewCellSpec: QuickSpec {
 
         describe("the 'Movie Cell' ") {
             let movie = MockedDataProvider.shared.popularMovies.first!
-            let viewModel = MovieCellViewModel(of: movie)
+            let viewModel = MovieCellViewModel(of: movie, dataProvider: MockedDataProvider.shared)
             let frame = CGRect(x: 0, y: 0, width: 250, height: 375)
             
             context("when fetched from API ") {
