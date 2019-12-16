@@ -43,7 +43,7 @@ final class PopularsPresenter: FeedPresenter {
         MovieClient.getPopular(page: pagesLoaded) { [weak self] (movies, error) in
             
             if let error = error {
-                os_log("❌ - Error loading movie feed: %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                os_log("❌ - Error loading movie feed: %@", log: Logger.appLog(), type: .error, error.localizedDescription)
                 return
             }
             
@@ -111,7 +111,7 @@ final class PopularsPresenter: FeedPresenter {
             self?.view?.finishLoading()
             
             if let error = error {
-                os_log("❌ - Error searching movies: %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                os_log("❌ - Error searching movies: %@", log: Logger.appLog(), type: .error, error.localizedDescription)
                 self?.view?.displayError(.info("Error loading search results"))
                 return
             }

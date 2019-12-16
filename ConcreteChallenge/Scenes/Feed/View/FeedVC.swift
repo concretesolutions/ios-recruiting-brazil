@@ -34,6 +34,21 @@ class FeedVC: BaseViewController, FavoriteViewDelegate {
         return view
     }()
     
+    // MARK: - Init -
+    override init(presenter: Presenter) {
+        guard type(of: self) != FeedVC.self else {
+            os_log("❌ - FeedVC instanciated directly", log: Logger.appLog(), type: .fault)
+            fatalError(
+                "Creating `FeedVC` instances directly is not supported. This class is meant to be subclassed."
+            )
+        }
+        super.init(presenter: presenter)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Methods -
     override func setupUI() {
         super.setupUI()
@@ -52,7 +67,7 @@ class FeedVC: BaseViewController, FavoriteViewDelegate {
     
     func setFavorite(_ isFavorite: Bool, tag: Int?) {
         guard let item = tag, let cell = feedCollectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? ItemCollectionViewCell else {
-            // TODO: Log error
+            os_log("❌ - Unknown cell type %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
             return
         }
         cell.isFavorite = isFavorite

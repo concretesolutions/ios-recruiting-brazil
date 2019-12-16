@@ -40,6 +40,17 @@ class FeedPresenter: BasePresenter, FavoriteHandler {
         return movies.count
     }
     
+    // MARK: - Init -
+    override init() {
+        guard type(of: self) != FeedPresenter.self else {
+            os_log("❌ - FeedPresenter instanciated directly", log: Logger.appLog(), type: .fault)
+            fatalError(
+                "Creating `FeedPresenter` instances directly is not supported. This class is meant to be subclassed."
+            )
+        }
+        super.init()
+    }
+    
     // MARK: - Methods -
     override func attachView(_ view: ViewDelegate) {
         super.attachView(view)
