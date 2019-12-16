@@ -35,8 +35,9 @@ class MovieDetailViewModel {
                 genresString.append("\(genre.name ?? ""), ")
             }
         }
-        
-        genresString.removeLast(2)
+        if genresString.count > 2 {
+            genresString.removeLast(2)
+        }
         return genresString
     }
     
@@ -49,7 +50,9 @@ class MovieDetailViewModel {
                 genresString.append("\(genre.name ?? ""), ")
             }
         })
-        genresString.removeLast(2)
+        if genresString.count > 2 {
+            genresString.removeLast(2)
+        }
         
         return genresString
     }
