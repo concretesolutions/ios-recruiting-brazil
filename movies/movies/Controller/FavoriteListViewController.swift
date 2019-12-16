@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 class FavoriteListViewController: UIViewController {
-    let viewModel: FavoriteListViewModel = FavoriteListViewModel()
+    let viewModel: FavoriteListViewModel = FavoriteListViewModel(dataProvider: DataProvider.shared)
     let screen: FavoriteListViewControllerScreen = FavoriteListViewControllerScreen(frame: UIScreen.main.bounds)
     
     // Cancellables

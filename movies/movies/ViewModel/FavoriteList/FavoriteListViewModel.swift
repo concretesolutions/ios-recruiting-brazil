@@ -10,14 +10,6 @@ import Foundation
 import Combine
 
 class FavoriteListViewModel: ObservableObject {
-    private var movies: [Movie] = [] {
-        willSet {
-            if self.searching == false {
-                // Set searchMovies to show all movies if it not searching
-                self.searchMovies = newValue
-            }
-        }
-    }
     
     private var searchMovies: [Movie] = [] {
         willSet {
@@ -29,7 +21,7 @@ class FavoriteListViewModel: ObservableObject {
     private var searching: Bool = false {
         willSet {
             // Set searchMovies to show all movies when stop searching
-            self.searchMovies = self.movies
+            self.searchMovies = self.dataProvider.favoriteMovies
         }
     }
     
@@ -41,7 +33,12 @@ class FavoriteListViewModel: ObservableObject {
     var querySubscriber: AnyCancellable?
     var favoriteMoviesSubscriber: AnyCancellable?
     
-    init() {
+    // Data provider
+    let dataProvider: DataProvidable
+    
+    init(dataProvider: DataProvidable) {
+        self.dataProvider = dataProvider
+        
         subscribeToFavoriteMovies()
     }
     
@@ -57,10 +54,12 @@ class FavoriteListViewModel: ObservableObject {
     /// Subscribe to list of favorite movies from the data provider
     private func subscribeToFavoriteMovies() {
         self.state = .loading
-        favoriteMoviesSubscriber = DataProvider.shared.$favoriteMovies
+        favoriteMoviesSubscriber = dataProvider.favoriteMoviesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] movies in
-                self?.movies = movies
+                // Set searchMovies to show all movies if it not searching
+                guard self?.searching == false else { return }
+                self?.searchMovies = movies
                 self?.state = .movies
             }
     }
@@ -83,7 +82,7 @@ class FavoriteListViewModel: ObservableObject {
     /// - Parameter index: Index of the movie
     public func toggleFavoriteMovie(at index: Int) {
         guard index < self.movieCount else { return } // Check if it is an valid index
-        UserDefaults.standard.toggleFavorite(withId: self.searchMovies[index].id)
+        dataProvider.toggleFavorite(withId: self.searchMovies[index].id)
     }
     
     /// Filter movies according to their names using the given query
@@ -97,7 +96,7 @@ class FavoriteListViewModel: ObservableObject {
         
         self.searching = true
         self.state = .loading
-        self.searchMovies = self.filterArray(self.movies, with: query) // Filter search list with text in query
+        self.searchMovies = self.filterArray(self.dataProvider.favoriteMovies, with: query) // Filter search list with text in query
         
         if searchMovies.isEmpty { // Check if found any movies with the given name
             self.state = .noDataError
