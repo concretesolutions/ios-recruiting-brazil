@@ -24,6 +24,8 @@ extension UIImage {
 
 extension UIImageView {
     func setImage(withURL url: String, completion: ((_ imgData: Data) -> Void)? = nil) {
+        let dispatch = DispatchGroup()
+        dispatch.enter()
         let apiProvider = APIProvider<Movie>()
         apiProvider.requestImage(withURL: url) { result in
             switch result {
@@ -35,18 +37,6 @@ extension UIImageView {
             case .failure: break
             }
         }
+        dispatch.leave()
     }
-    
-//    static func setImage(withURL url: String, completion: ((_ imgData: Data) -> Void)? = nil) {
-//        let apiProvider = APIProvider<Movie>()
-//        apiProvider.requestImage(withURL: url) { result in
-//            switch result {
-//            case .success(let data):
-//                DispatchQueue.main.async {
-//                    completion?(data)
-//                }
-//            case .failure: break
-//            }
-//        }
-//    }
 }

@@ -19,16 +19,18 @@ class TrendingMoviesViewModel: MovieViewModel {
         fetch(endPoint: EndPoint.searchMovie(query: query))
     }
     
-    func fetchGenres(completion: (([Genre]) -> Void)? = nil) {
+    func fetchGenres() {
         let apiProvider = APIProvider<Genre>()
         apiProvider.request(EndPoint.getGenres) { (result: Result<GenreResponse, NetworkError>) in
                 switch result {
                 case .success(let response):
+                    
                     let genres = response.genres
-                    if self.genreIsDifferentFromLocal(genres) {
-                        self.saveAllGenresLocal(genres)
+                    DispatchQueue.main.async {
+                        if self.genreIsDifferentFromLocal(genres) {
+                            self.saveAllGenresLocal(genres)
+                        }
                     }
-                    completion?(genres)
                 case .failure: break
                 }
         }
@@ -37,7 +39,9 @@ class TrendingMoviesViewModel: MovieViewModel {
     func genreIsDifferentFromLocal(_ genres: [Genre]) -> Bool {
         var isDifferent = true
         for genre in genres {
+            print("enter \(genre)")
             if let _: GenreLocal = CoreDataManager.fetchBy(id: genre.id) {
+                print("enter here")
                 isDifferent = false
                 break
             }
@@ -49,7 +53,7 @@ class TrendingMoviesViewModel: MovieViewModel {
     func saveAllGenresLocal(_ genres: [Genre]) {
         CoreDataManager.delete(entityType: GenreLocal.self)
         genres.forEach { genre in
-            saveGenreLocal(genre)
+            self.saveGenreLocal(genre)
         }
     }
     

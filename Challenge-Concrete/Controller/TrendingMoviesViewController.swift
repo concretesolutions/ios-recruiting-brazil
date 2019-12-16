@@ -14,7 +14,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     var delegate = MovieCollectionDelegate()
     var movieViewModel = TrendingMoviesViewModel()
     let moviesView = TrendingMoviesView()
-    let loadingIndicator = UIActivityIndicatorView()
+    var loadingIndicator: UIActivityIndicatorView!
     let searchController = UISearchController(searchResultsController: nil)
     
     weak var favoriteMovieDelegate: FavoriteMovieDelegate?
@@ -38,6 +38,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     func startFetch() {
         setLoadingIndicator()
         movieViewModel.fetchTrendingMovies()
+        //TODO: FetchGenres has bugs
         movieViewModel.fetchGenres()
     }
     
@@ -62,25 +63,37 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     }
     
     func setLoadingIndicator() {
-        view.addSubview(loadingIndicator)
-        loadingIndicator.anchor.attatch(to: view)
-        loadingIndicator.startAnimating()
+        loadingIndicator = UIActivityIndicatorView()
+        view.addSubview(loadingIndicator!)
+        loadingIndicator!.anchor
+            .centerX(view.centerXAnchor)
+            .centerY(view.centerYAnchor)
+            .width(constant: 20)
+            .height(constant: 20)
+        loadingIndicator!.startAnimating()
+    }
+    
+    func removeLoadingIndicator() {
+        loadingIndicator?.stopAnimating()
+        loadingIndicator?.removeFromSuperview()
+        loadingIndicator = nil
     }
 }
 
 // MARK: - DataFetchDelegate
 extension TrendingMoviesViewController {
     func didUpdateData() {
-        DispatchQueue.main.async {
-            self.moviesView.reloadCollectionData()
-            self.loadingIndicator.stopAnimating()
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.moviesView.reloadCollectionData()
+            self?.removeLoadingIndicator()
         }
     }
 
     func didFailFetchData(with error: Error) {
         guard let networkError = error as? NetworkError else { return}
         DispatchQueue.main.async {
-            self.loadingIndicator.stopAnimating()
+            self.removeLoadingIndicator()
             
             var imageName: String
             var message: String
@@ -127,7 +140,6 @@ extension TrendingMoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, !text.isEmpty {
             moviesView.removeErrorRequestView()
-            self.loadingIndicator.startAnimating()
             movieViewModel.searchMovies(query: text)
         } else {
             startFetch()
