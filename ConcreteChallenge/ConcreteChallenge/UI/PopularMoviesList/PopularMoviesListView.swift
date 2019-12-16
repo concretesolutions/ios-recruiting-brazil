@@ -56,6 +56,7 @@ class PopularMoviesListView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
         label.text = "Um erro ocorreu. Por favor, tente novamente."
 
         return label
@@ -93,7 +94,7 @@ class PopularMoviesListView: UIView {
         NSLayoutConstraint.activate([
             errorLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20),
+            errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
     }

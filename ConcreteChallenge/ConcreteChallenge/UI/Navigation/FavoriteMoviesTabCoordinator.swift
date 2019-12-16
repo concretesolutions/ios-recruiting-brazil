@@ -21,10 +21,11 @@ final class FavoriteMoviesTabCoordinator: NSObject, Coordinator {
         self.navigationController = navigationController
 
         self.navigationController.tabBarItem = UITabBarItem(
-            title: "Favorites", image: UIImage(named: "favorite_empty_icon"), tag: 1)
+            title: "Favoritados", image: UIImage(named: "favorite_empty_icon"), tag: 1)
     }
 
     func start() {
+        guard navigationController.topViewController == nil else { return } 
         let vc = FavoriteMoviesListViewController()
         navigationController.pushViewController(vc, animated: true)
     }

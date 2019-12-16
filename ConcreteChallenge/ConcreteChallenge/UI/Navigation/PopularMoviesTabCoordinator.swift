@@ -21,10 +21,11 @@ final class PopularMoviesTabCoordinator: NSObject, Coordinator {
         self.navigationController = navigationController
 
         self.navigationController.tabBarItem = UITabBarItem(
-            title: "Movies", image: UIImage(named: "list_icon"), tag: 0)
+            title: "Filmes populares", image: UIImage(named: "list_icon"), tag: 0)
     }
 
     func start() {
+        guard navigationController.topViewController == nil else { return } 
         let vc = PopularMoviesListViewController()
         navigationController.pushViewController(vc, animated: true)
     }

@@ -24,6 +24,8 @@ class PopularMoviesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Filmes populares"
+
         popularMoviesListView.collectionView.dataSource = self
         popularMoviesListView.collectionView.delegate = self
 
@@ -69,6 +71,16 @@ class PopularMoviesListViewController: UIViewController {
         }
     }
 
+    private func favorite(movie: Movie) {
+        let newFavorite = FavoriteMovie(context: CoreDataStore.context)
+        newFavorite.title = movie.title
+        newFavorite.id = Int64(movie.id)
+        newFavorite.overview = movie.overview
+        newFavorite.posterImage = movie.posterImage?.jpegData(compressionQuality: 1.0)
+
+        CoreDataStore.saveContext()
+    }
+
 }
 
 // MARK: - UICollectionViewDataSource
@@ -81,7 +93,9 @@ extension PopularMoviesListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as PopularMovieCollectionViewCell
         let movie = movies[indexPath.row]
 
-        cell.setup(movie: movie)
+        cell.setup(movie: movie) {
+            self.favorite(movie: movie)
+        }
 
         return cell
     }
