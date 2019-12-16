@@ -13,4 +13,5 @@ enum NetworkError: Error {
     case decodeError(Error)
     case noResponseData
     case connectionError(Error)
+    case emptyResult
 }

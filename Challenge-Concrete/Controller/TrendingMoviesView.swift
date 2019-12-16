@@ -7,8 +7,13 @@
 //
 
 import UIKit
-
+enum ErrorType {
+    case generic
+    case emptySearch
+}
 class TrendingMoviesView: UIView {
+    lazy var errorRequestView = ErrorRequestView()
+    
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
     init() {
@@ -32,6 +37,21 @@ class TrendingMoviesView: UIView {
     
     func invalidateCollectionLayout() {
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    func addErrorRequestView(imageName: String, message: String, isGenericError: Bool = true) {
+        errorRequestView.imageView.image = UIImage(named: imageName)
+        errorRequestView.label.text = message
+        addSubview(errorRequestView)
+        errorRequestView.anchor.attatch(to: safeAreaLayoutGuide)
+        
+        if isGenericError {
+            errorRequestView.setupTryAgainButton()
+        }
+    }
+    
+    func removeErrorRequestView() {
+        errorRequestView.removeFromSuperview()
     }
 }
 

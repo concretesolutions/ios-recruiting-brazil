@@ -12,18 +12,14 @@ class TrendingMoviesViewModel: MovieViewModel {
     weak var dataSource: MovieCollectionDataSource?
     
     func fetchTrendingMovies(mediaType: MediaType = .all, timeWindow: TimeWindow = .day) {
-        fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow)) { error in
-            self.dataSource?.dataFetchDelegate?.didFailFetchData(with: error)
-        }
+        fetch(endPoint: EndPoint.getTrending(mediaType: mediaType, timeWindow: timeWindow))
     }
     
     func searchMovies(query: String) {
-        fetch(endPoint: EndPoint.searchMovie(query: query)) { error in
-            self.dataSource?.dataFetchDelegate?.didFailFetchData(with: error)
-        }
+        fetch(endPoint: EndPoint.searchMovie(query: query))
     }
     
-    func fetchGenres(completion: @escaping ([Genre]) -> Void) {
+    func fetchGenres(completion: (([Genre]) -> Void)? = nil) {
         let apiProvider = APIProvider<Genre>()
         apiProvider.request(EndPoint.getGenres) { (result: Result<GenreResponse, NetworkError>) in
                 switch result {
@@ -32,9 +28,8 @@ class TrendingMoviesViewModel: MovieViewModel {
                     if self.genreIsDifferentFromLocal(genres) {
                         self.saveAllGenresLocal(genres)
                     }
-                    completion(genres)
-                case .failure:
-                    break
+                    completion?(genres)
+                case .failure: break
                 }
         }
     }
@@ -63,14 +58,18 @@ class TrendingMoviesViewModel: MovieViewModel {
         CoreDataManager.saveContext()
     }
     
-    private func fetch(endPoint: EndPoint, errorHandling: @escaping (NetworkError) -> Void) {
+    private func fetch(endPoint: EndPoint) {
         let apiProvider = APIProvider<Movie>()
         apiProvider.request(endPoint) { (result: Result<Response<Movie>, NetworkError>) in
             switch result {
             case .success(let response):
-                self.dataSource?.data = response.results
+                if response.results.count > 0 {
+                    self.dataSource?.data = response.results
+                } else {
+                    self.dataSource?.dataFetchDelegate?.didFailFetchData(with: NetworkError.emptyResult)
+                }
             case.failure(let error):
-                errorHandling(error)
+                self.dataSource?.dataFetchDelegate?.didFailFetchData(with: error)
             }
         }
     }

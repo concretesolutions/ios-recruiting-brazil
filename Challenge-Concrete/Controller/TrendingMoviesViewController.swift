@@ -14,7 +14,7 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
     var delegate = MovieCollectionDelegate()
     var movieViewModel = TrendingMoviesViewModel()
     let moviesView = TrendingMoviesView()
-    
+    let loadingIndicator = UIActivityIndicatorView()
     let searchController = UISearchController(searchResultsController: nil)
     
     weak var favoriteMovieDelegate: FavoriteMovieDelegate?
@@ -28,11 +28,17 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         setupSearchController()
         setup(with: dataSource)
         moviesView.setupCollectionView(delegate: delegate, dataSource: dataSource)
-        movieViewModel.fetchTrendingMovies()
-        movieViewModel.fetchGenres { genres in
-            let localGenre: [GenreLocal] = CoreDataManager.fetch()
-            print("LOCAL: \(localGenre.count)")
+        
+        startFetch()
+        moviesView.errorRequestView.tryAgainAction = { [weak self] in
+            self?.startFetch()
         }
+    }
+    
+    func startFetch() {
+        setLoadingIndicator()
+        movieViewModel.fetchTrendingMovies()
+        movieViewModel.fetchGenres()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +60,12 @@ class TrendingMoviesViewController: UIViewController, MoviesVC {
         super.viewWillTransition(to: size, with: coordinator)
         moviesView.invalidateCollectionLayout()
     }
+    
+    func setLoadingIndicator() {
+        view.addSubview(loadingIndicator)
+        loadingIndicator.anchor.attatch(to: view)
+        loadingIndicator.startAnimating()
+    }
 }
 
 // MARK: - DataFetchDelegate
@@ -61,11 +73,35 @@ extension TrendingMoviesViewController {
     func didUpdateData() {
         DispatchQueue.main.async {
             self.moviesView.reloadCollectionData()
+            self.loadingIndicator.stopAnimating()
         }
     }
+
     func didFailFetchData(with error: Error) {
-        print("Error AQUI AQUI: \(error)")
+        guard let networkError = error as? NetworkError else { return}
+        DispatchQueue.main.async {
+            self.loadingIndicator.stopAnimating()
+            
+            var imageName: String
+            var message: String
+            var isGenericError: Bool
+            
+            switch networkError {
+            case .emptyResult:
+                imageName = "search_icon"
+                message = "Não houve resultados para a busca."
+                isGenericError = false
+            default:
+                imageName = "error_icon"
+                message = "Um erro ocorreu."
+                isGenericError = true
+
+            }
+            
+            self.moviesView.addErrorRequestView(imageName: imageName, message: message, isGenericError: isGenericError)
+        }
     }
+        
 }
 
 // MARK: - MoviesDelegate
@@ -73,7 +109,6 @@ extension TrendingMoviesViewController {
     func didSelectMovie(at index: Int) {
         let movie = dataSource.data[index]
         let movieDetailVC = MovieDetailViewController(with: movie)
-        print()
         let favoriteVC = (tabBarController as! TabBarController).favoriteMoviesVC
         movieDetailVC.favoriteMovieDelegate = favoriteVC
         navigationController?.pushViewController(movieDetailVC, animated: true)
@@ -90,8 +125,12 @@ extension TrendingMoviesViewController {
 // MARK: - SearchResultsUpdating
 extension TrendingMoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text {
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            moviesView.removeErrorRequestView()
+            self.loadingIndicator.startAnimating()
             movieViewModel.searchMovies(query: text)
+        } else {
+            startFetch()
         }
     }
 }
