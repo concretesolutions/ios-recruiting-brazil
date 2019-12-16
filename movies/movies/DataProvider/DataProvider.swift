@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol DataProvidable {
     var popularMovies: [Movie] { get set }
@@ -21,10 +22,13 @@ class DataProvider: DataProvidable, ObservableObject {
     @Published var popularMovies: [Movie] = []
     @Published var favoriteMovies: [Movie] = []
     
+    // Cancellables
+    private var favoriteIdsSubscriber: AnyCancellable?
+    
     init() {
         fetchMovies()
         
-        _ = UserDefaults.standard.publisher(for: \.favorites)
+        favoriteIdsSubscriber = UserDefaults.standard.publisher(for: \.favorites)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favoritesIDs in
                 self?.fetchFavorites(withIDs: favoritesIDs)

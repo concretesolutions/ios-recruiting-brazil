@@ -34,7 +34,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     lazy var container: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .systemOrange
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = 8
         
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
         view.layer.shadowRadius = 4
@@ -45,6 +45,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }()
     
     let favoriteButton = FavoriteButton()
+    
+    // Cancellables
+    private var favoriteSubscriber: AnyCancellable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,7 +63,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
         
-        _ = self.viewModel.$favorite
+        favoriteSubscriber = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
@@ -94,7 +97,8 @@ extension MovieCollectionViewCell: CodeView {
         
         container.snp.makeConstraints { make in
             make.top.right.equalToSuperview()
-            make.height.width.equalTo(posterImageView.snp.width).multipliedBy(0.2)
+            make.height.width.greaterThanOrEqualTo(25).priority(.high)
+            make.height.width.equalTo(posterImageView.snp.width).multipliedBy(0.2).priority(.low)
         }
         
         favoriteButton.snp.makeConstraints { make in

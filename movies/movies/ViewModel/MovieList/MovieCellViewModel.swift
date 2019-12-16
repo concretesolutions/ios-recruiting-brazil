@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 class MovieCellViewModel: ObservableObject {
     private var movie: Movie
@@ -20,12 +21,15 @@ class MovieCellViewModel: ObservableObject {
     }
     
     @Published var favorite: Bool
+    
+    // Cancellables
+    private var favoriteIdsSubscriber: AnyCancellable?
 
     init(of movie: Movie) {
         self.movie = movie
         self.favorite = UserDefaults.standard.isFavorite(self.movie.id)
         
-        _ = UserDefaults.standard.publisher(for: \.favorites)
+        favoriteIdsSubscriber = UserDefaults.standard.publisher(for: \.favorites)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
                 guard let id = self?.movie.id else { return }

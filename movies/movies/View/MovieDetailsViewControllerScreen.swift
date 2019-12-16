@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class MovieDetailsViewControllerScreen: UIView {
     public var viewModel: MovieDetailsViewModel! {
@@ -37,6 +38,7 @@ class MovieDetailsViewControllerScreen: UIView {
         let view = UILabel(frame: .zero)
         let font = UIFont.preferredFont(forTextStyle: .title1)
         view.font = UIFont.boldSystemFont(ofSize: font.pointSize)
+        view.numberOfLines = 0
         return view
     }()
 
@@ -49,6 +51,7 @@ class MovieDetailsViewControllerScreen: UIView {
     lazy var dateLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        view.textColor = .secondaryLabel
         return view
     }()
 
@@ -73,6 +76,9 @@ class MovieDetailsViewControllerScreen: UIView {
         return view
     }()
     
+    // Cancellables
+    private var favoriteSubscriber: AnyCancellable?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -87,7 +93,7 @@ class MovieDetailsViewControllerScreen: UIView {
         self.viewModel = viewModel
         self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
 
-        _ = self.viewModel.$favorite
+        favoriteSubscriber = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
@@ -134,13 +140,13 @@ extension MovieDetailsViewControllerScreen: CodeView {
         favoriteButton.snp.makeConstraints { make in
             make.width.height.equalTo(25)
             make.right.equalToSuperview().inset(20)
-            make.top.equalTo(posterImageView.snp.bottom).offset(40)
+            make.centerY.equalTo(titleLabel.snp.centerY)
         }
         
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(30)
             make.right.equalTo(favoriteButton.snp.left)
-            make.centerY.equalTo(favoriteButton.snp.centerY)
+            make.top.equalTo(posterImageView.snp.bottom).offset(40)
         }
         
         dateLabel.snp.makeConstraints { make in
