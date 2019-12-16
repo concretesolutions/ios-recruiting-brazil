@@ -44,4 +44,10 @@ extension SearchController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         textDidChangePublisher.send(searchBar.text) // Send changes to publisher
     }
+    
+    /// Called when cancel burron is clicked
+    /// - Parameter searchBar: Search bar
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        textDidChangePublisher.send("")
+    }
 }
