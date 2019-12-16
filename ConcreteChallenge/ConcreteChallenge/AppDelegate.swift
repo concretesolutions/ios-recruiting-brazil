@@ -13,6 +13,21 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private var appCoordinator: AppCoordinator?
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        appCoordinator = AppCoordinator(tabBarController: UITabBarController())
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = appCoordinator?.rootViewController
+        appCoordinator?.start()
+
+        return true
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         saveContext()
