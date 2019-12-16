@@ -81,7 +81,7 @@ final class DetailPresenter: BasePresenter {
                     let matchingGenres = genreList.filter { self.movie.genreIDs.contains($0.id) }
                     self.genres = matchingGenres
                 } else if let error = error {
-                    os_log("❌ - Error loading genres: @", log: Logger.appLog(), type: .error, error.localizedDescription)
+                    os_log("❌ - Error loading genres: %@", log: Logger.appLog(), type: .error, error.localizedDescription)
                 }
             }
         }
@@ -89,7 +89,7 @@ final class DetailPresenter: BasePresenter {
     
     func getDetailInfo(row: Int) -> DetailInfoType {
         guard row < self.numberOfRows else {
-            os_log("❌ - Number of rows > number of info", log: Logger.appLog(), type: .fault)
+            os_log("❌ - Number of rows > number of info", log: Logger.appLog(), type: .error)
             // Return anything so as not to just crash
             return .overview(text: "")
         }

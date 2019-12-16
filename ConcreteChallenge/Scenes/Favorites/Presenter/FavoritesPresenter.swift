@@ -12,12 +12,15 @@ import os.log
 final class FavoritesPresenter: FeedPresenter {
     
     // MARK: - Properties -
+    private var noFavoritesMessage: ErrorMessageType = .missing("No favorites just yet...\nTry tapping the 💚 icon on a movie you like!")
+    
+    // MARK: - Methods -
     override func loadFeed() {
         
+        view?.hideError()
         let moviesList = LocalService.instance.getFavoritesList()
-        guard !moviesList.isEmpty else {
-            // TODO: Handle having no favorites
-            return
+        if moviesList.isEmpty {
+            view?.displayError(noFavoritesMessage)
         }
         movies = moviesList
     }
@@ -48,5 +51,14 @@ final class FavoritesPresenter: FeedPresenter {
         }
         
         favoritesView.setFavorite(movie.isFavorite, tag: item)
+        
+        // Handle last favorite removed
+        if movies.isEmpty {
+            // Delay to display the info
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [weak self] in
+                guard let self = self else { return }
+                self.view?.displayError(self.noFavoritesMessage)
+            }
+        }
     }
 }
