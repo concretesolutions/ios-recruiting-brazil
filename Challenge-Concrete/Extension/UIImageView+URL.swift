@@ -29,7 +29,7 @@ extension UIImageView {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.image = UIImage(data: data)
+                    self.image = UIImage(data: data) ?? UIImage(named: "placeholder_icon")
                     completion?(data)
                 }
             case .failure(let error):

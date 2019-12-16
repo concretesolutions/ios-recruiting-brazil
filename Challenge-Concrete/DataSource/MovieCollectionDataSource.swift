@@ -25,7 +25,7 @@ class MovieCollectionDataSource: GenericDataSource<Movie>, UICollectionViewDataS
         let alreadyFavorite = CoreDataManager.shared.isSaved(entityType: FavoriteMovie.self, id: movie.id)
         movie.isFavorite = alreadyFavorite
         cell.changeFavoriteIcon(isAdding: alreadyFavorite)
-
+        cell.imageView.image = nil
         cell.imageView.setImage(withPath: movie.posterPath ?? "") { imgData in
             movie.movieImageData = imgData
         }
