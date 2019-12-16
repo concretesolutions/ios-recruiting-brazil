@@ -14,8 +14,13 @@ final class MoviesAPIManager: MoviesAPIDataFetcher {
     
     internal let apiKey: String = "eea991e8b8c8738c849cddf195bc2813"
     internal let session: NetworkSession
-    internal var movies: [MovieDTO] = []
     internal var genres: [GenreDTO] = []
+    internal var isMovieFetchInProgress: Bool = false
+    internal var currentPage: Int = 0
+    
+    // MARK: - Publishers
+    
+    @Published var movies: [MovieDTO] = []
     
     // MARK: - Initializers and Deinitializers
     
@@ -37,6 +42,27 @@ final class MoviesAPIManager: MoviesAPIDataFetcher {
                 }
             }
         })
+    }
+    
+    func fetchNextPopularMoviesPage() {
+        self.isMovieFetchInProgress = true
+        self.getPopularMovies(page: self.currentPage + 1, completion: { (data, error) in
+            if let data = data {
+                do {
+                    let popularMovies = try JSONDecoder().decode(PopularMoviesDTO.self, from: data)
+                    self.currentPage = popularMovies.page
+                    self.movies += popularMovies.results
+                } catch {
+                    print(error)
+                }
+            }
+            
+            self.isMovieFetchInProgress = false
+        })
+    }
+    
+    func shouldFetchNextPage() -> Bool {
+        return self.currentPage < 500 && !self.isMovieFetchInProgress
     }
     
     // MARK: - Request Methods

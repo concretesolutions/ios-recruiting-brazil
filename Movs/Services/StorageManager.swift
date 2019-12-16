@@ -14,15 +14,12 @@ class StorageManager {
     // MARK: - Properties
     
     internal let managedContext: NSManagedObjectContext
-    internal let persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Movs")
-        container.loadPersistentStores(completionHandler: { (_, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
+    
+    // MARK: - Enums
+    
+    enum CreationError: Error {
+        case runtimeError(String)
+    }
     
     // MARK: - Publishers
     
@@ -31,28 +28,28 @@ class StorageManager {
     // MARK: - Initializers and Deinitializers
     
     init(container: NSPersistentContainer) {
-        self.managedContext = self.persistentContainer.viewContext
+        self.managedContext = container.viewContext
         
         let fetchAllFavorites = NSFetchRequest<CDFavoriteMovie>(entityName: "CDFavoriteMovie")
-        self.favorites = self.fetch(request: fetchAllFavorites)
+        do {
+            self.favorites = try self.fetch(request: fetchAllFavorites)
+        } catch {
+            fatalError("Failed to fetch all instances of CDFavoriteMovie.")
+        }
     }
     
-    // MARK: - Management
+    // MARK: - Container Management
     
-    private func createEntity(named name: String) -> NSEntityDescription {
+    func createEntity(named name: String) throws -> NSEntityDescription {
         guard let entity = NSEntityDescription.entity(forEntityName: name, in: self.managedContext) else {
-            fatalError("Failed to retrieve CDFavoriteMovie in current context")
+            throw CreationError.runtimeError("Failed to retrieve entity \(name) in current context")
         }
         return entity
     }
     
-    private func fetch<Entity: NSFetchRequestResult>(request: NSFetchRequest<Entity>) -> Set<Entity> {
-        do {
-            let fetchResults = try self.managedContext.fetch(request)
-            return Set(fetchResults)
-        } catch {
-            return Set()
-        }
+    func fetch<Entity: NSFetchRequestResult>(request: NSFetchRequest<Entity>) throws -> Set<Entity> {
+        let fetchResults = try self.managedContext.fetch(request)
+        return Set(fetchResults)
     }
     
     func save() {
@@ -66,7 +63,7 @@ class StorageManager {
         }
     }
     
-    // MARK: - Update methods
+    // MARK: - Instance Management
     
     func isFavorited(movieID: Int) -> Bool {
         let result = self.favorites.map({ $0.id }).contains(Int64(movieID))
@@ -78,9 +75,13 @@ class StorageManager {
             return
         }
         
-        let entity = self.createEntity(named: "CDFavoriteMovie")
-        let favoriteMovie = self.createFavoriteMovie(movie: movie, description: entity)
-        self.favorites.insert(favoriteMovie)
+        do {
+            let entity = try self.createEntity(named: "CDFavoriteMovie")
+            let favoriteMovie = self.createFavoriteMovie(movie: movie, description: entity)
+            self.favorites.insert(favoriteMovie)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     func removeFavorite(movieID: Int64) {

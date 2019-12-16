@@ -55,8 +55,8 @@ class PopularMoviesViewController: UIViewController {
         super.viewWillAppear(animated)
         self.bind(to: self.viewModel)
         
-        if self.viewModel.shouldFetchMovies() {
-            self.viewModel.fetchPopularMovies()
+        if self.viewModel.apiManager.shouldFetchNextPage() {
+            self.viewModel.apiManager.fetchNextPopularMoviesPage()
         }
     }
     

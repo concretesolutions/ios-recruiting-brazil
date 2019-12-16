@@ -9,15 +9,13 @@
 import Foundation
 @testable import Movs
 
-class URLSessionMock: NetworkSession {
+class URLSessionMock: Movs.NetworkSession {
     
     // MARK: - Properties
     
     var data: Data?
     var error: Error?
-    
-    // MARK: - Mocked methods
-    
+
     func getData(from urlString: String, completion: @escaping (Data?, Error?) -> Void) {
         completion(data, error)
     }

@@ -26,8 +26,8 @@ class PopularMoviesControllerViewModel {
     
     // MARK: - Publishers and Subscribers
     
-    @Published var currentPage: Int = 0
     @Published var numberOfMovies: Int = 0
+    private var subscribers: [AnyCancellable?] = []
         
     // MARK: - Initializers and Deinitializers
     
@@ -35,9 +35,25 @@ class PopularMoviesControllerViewModel {
         self.dependencies = dependencies
         self.storageManager = dependencies.storageManager
         self.apiManager = dependencies.apiManager
+        
+        self.bind(to: dependencies.apiManager)
     }
     
-    // MARK: - MovieCellViewModel
+    deinit {
+        for subscriber in self.subscribers {
+            subscriber?.cancel()
+        }
+    }
+    
+    // MARK: - Binding
+    
+    func bind(to apiManager: MoviesAPIManager) {
+        self.subscribers.append(self.apiManager.$movies.sink(receiveValue: { fetchedMovies in
+            self.numberOfMovies = fetchedMovies.count
+        }))
+    }
+    
+    // MARK: - Methods
     
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
         let movie = Movie(movieDTO: self.apiManager.movies[indexPath.row], genres: self.apiManager.genres)
@@ -47,33 +63,5 @@ class PopularMoviesControllerViewModel {
     func didSelectItemAt(indexPath: IndexPath) {
         let movie = Movie(movieDTO: self.apiManager.movies[indexPath.row], genres: self.apiManager.genres)
         self.coordinatorDelegate?.didSelectItem(movie: movie)
-    }
-    
-    // MARK: - Fetch Methods
-    
-    func shouldFetchMovies() -> Bool {
-        return self.currentPage < 500 && !self.isMovieFetchInProgress
-    }
-
-    func fetchPopularMovies() {
-        self.isMovieFetchInProgress = true
-        self.apiManager.getPopularMovies(page: self.currentPage + 1, completion: { (data, error) in
-            if let data = data {
-                do {
-                    let popularMovies = try self.decoder.decode(PopularMoviesDTO.self, from: data)
-                    self.updateData(with: popularMovies)
-                } catch {
-                    print(error)
-                }
-            }
-            
-            self.isMovieFetchInProgress = false
-        })
-    }
-    
-    private func updateData(with popularMovies: PopularMoviesDTO) {
-        self.currentPage = popularMovies.page
-        self.apiManager.movies += popularMovies.results
-        self.numberOfMovies += popularMovies.results.count
     }
 }

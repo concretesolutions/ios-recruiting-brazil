@@ -25,6 +25,8 @@ class FavoriteMoviesControllerViewModel {
         self.apiManager = dependencies.apiManager
     }
     
+    // MARK: - Methods
+    
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
         let favoriteMovie = Array(self.storageManager.favorites)[indexPath.row]
         let movie = Movie(favoriteMovie: favoriteMovie, genres: self.apiManager.genres)
