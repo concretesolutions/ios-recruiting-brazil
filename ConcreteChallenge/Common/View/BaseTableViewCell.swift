@@ -23,6 +23,8 @@ class BaseTableViewCell: UITableViewCell {
             setSelected(isSelected, animated: true)
         }
     }
+    /// View to display many kinds of errors.
+    var errorView = ErrorView()
 
     // MARK: - Lifecycle
 

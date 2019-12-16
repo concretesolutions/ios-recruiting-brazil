@@ -76,4 +76,29 @@ final class ItemCollectionViewCell: BaseCollectionViewCell {
             make.trailing.equalTo(favoriteButton.snp.leading)
         }
     }
+    
+    func makeErrorConstraints() {
+        errorView.snp.makeConstraints { (make) in
+            make.edges.equalTo(filmImageView)
+        }
+    }
+}
+
+// MARK: - ErrorDelegate -
+extension ItemCollectionViewCell: ErrorDelegate {
+    func displayError(_ type: ErrorMessageType) {
+        
+        errorView.displayMessage(type)
+        
+        guard errorView.superview == nil else { return }
+        
+        contentView.insertSubview(errorView, at: 0)
+//        contentView.addSubview(errorView)
+        
+        makeErrorConstraints()
+    }
+    
+    func hideError() {
+        errorView.removeFromSuperview()
+    }
 }

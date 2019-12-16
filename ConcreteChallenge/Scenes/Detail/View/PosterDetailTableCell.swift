@@ -22,9 +22,7 @@ final class PosterDetailTableCell: BaseTableViewCell {
         view.contentMode = .scaleAspectFill
         return view
     }()
-    
-    let errorView = ErrorView()
-    
+        
     // MARK: - Methods -
     override func setupUI() {
         

@@ -126,7 +126,7 @@ extension DetailVC: UITableViewDataSource {
                     switch result {
                     case .failure(let error):
                         cell?.displayError(.info("Image could not be downloaded"))
-                        os_log("❌ - Image not downloaded %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
+                        os_log("❌ - Image not downloaded %@", log: Logger.appLog(), type: .error, error.localizedDescription)
                     default:
                         return
                     }

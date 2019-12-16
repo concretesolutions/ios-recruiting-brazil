@@ -111,12 +111,25 @@ extension FeedVC: UICollectionViewDataSource {
             os_log("❌ - Unknown cell identifier %@", log: Logger.appLog(), type: .fault, "\(String(describing: self))")
             fatalError("Unknown identifier")
         }
-
+        cell.hideError()
         cell.favoriteButton.tag = indexPath.item
         cell.favoriteButton.addTarget(self, action: #selector(favoriteTapped(_:)), for: .touchUpInside)
         cell.titleLabel.text = itemData.title
         cell.filmImageView.kf.indicatorType = .activity
-        cell.filmImageView.kf.setImage(with: itemData.imageUrl)
+        if let imageURL = itemData.imageUrl {
+            cell.filmImageView.kf.setImage(with: imageURL) { [weak cell] (result) in
+                switch result {
+                case .failure(let error):
+                    cell?.displayError(.info("Image could not be downloaded"))
+                    os_log("❌ - Image not downloaded %@", log: Logger.appLog(), type: .error, error.localizedDescription)
+                default:
+                    break
+                }
+            }
+        } else {
+            cell.filmImageView.kf.setImage(with: itemData.imageUrl)
+            cell.displayError(.missing("No backdrop available 😭"))
+        }
         cell.isFavorite = itemData.isFavorite
         
         return cell

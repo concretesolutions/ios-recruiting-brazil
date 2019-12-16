@@ -16,6 +16,8 @@ class BaseCollectionViewCell: UICollectionViewCell {
     static var identifier: String {
         return String(describing: self)
     }
+    /// View to display many kinds of errors.
+    var errorView = ErrorView()
 
     // MARK: - Lifecycle
 
