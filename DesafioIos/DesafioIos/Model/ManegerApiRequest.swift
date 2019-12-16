@@ -34,8 +34,12 @@ class ManegerApiRequest{
                 "region":"US"]
             self.getRequest(querys: queryMoviesPopular) { (catalog) in
                 self.delegate?.sendMovie(movies: catalog.results)
+                self.delegate?.sendStatus(status: .send)
+                self.delegate?.sendStatus(status: .finish)
             }
         }
+        
+        
     }
     // MARK: - Get movies
     func getRequest(querys:[String:Any],completion: @escaping (_ results: Movies) -> Void) {

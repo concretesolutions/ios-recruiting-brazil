@@ -8,7 +8,28 @@
 
 import UIKit
 import SnapKit
-class MoviesController: UIViewController , SendDataApi {
+class MoviesGridController: UIViewController , SendDataApi {
+    func sendStatus(status: StatusConnection) {
+        if status == .send {
+            DispatchQueue.main.async {
+                self.view.bringSubviewToFront(MoviesGridStatusView(image: #imageLiteral(resourceName: "favorite_empty_icon"), description: "Load ... \(self.moviesData.count)"))
+                self.collectionView.isHidden = true
+            }
+            print("is load")
+            print(self.moviesData.count)
+
+        }
+        if status == .finish{
+            DispatchQueue.main.async {
+                //self.view  =  MoviesGridStatusView(image: #imageLiteral(resourceName: "list_icon"), description: "carregou \(self.moviesData.count)")
+                //self.view.removeFromSuperview()
+                self.collectionView.isHidden = false
+            }
+            print("finish load")
+            print(self.moviesData.count)
+        }
+    }
+    
     var moviesData:[Movie] = [] {
         didSet{
             DispatchQueue.main.async {
@@ -17,7 +38,16 @@ class MoviesController: UIViewController , SendDataApi {
             }
         }
     }
-    var filterMovies:[Movie] = []
+    var filterMovies:[Movie] = [] {
+        didSet{
+            if !self.filterMovies.isEmpty {
+                DispatchQueue.main.async {
+                    self.collectionView.isHidden = false
+                }
+            }
+        }
+    }
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -26,9 +56,7 @@ class MoviesController: UIViewController , SendDataApi {
         return cv
     }()
     override func loadView() {
-        let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .red
-        self.view = view
+        self.view = UIView(frame: UIScreen.main.bounds)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         self.title = "Movies"
     }
@@ -38,6 +66,7 @@ class MoviesController: UIViewController , SendDataApi {
         setupDataMovie()
         makeSearchController()
     }
+    
     func makeSearchController(){
         let searchController = UISearchController(nibName: nil, bundle: nil)
         self.navigationItem.searchController = searchController
@@ -61,7 +90,7 @@ class MoviesController: UIViewController , SendDataApi {
 }
 // MARK: - Protocols of CollectionView
 
-extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
+extension MoviesGridController:UICollectionViewDataSource, UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.filterMovies.count
     }
@@ -83,7 +112,7 @@ extension MoviesController:UICollectionViewDataSource, UICollectionViewDelegate 
     }
 }
 //MARK: - Protocols SearchBarController Updating
-extension MoviesController:UISearchResultsUpdating{
+extension MoviesGridController:UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text == "" {
             self.filterMovies = self.moviesData
@@ -91,28 +120,35 @@ extension MoviesController:UISearchResultsUpdating{
             filterMovies = self.moviesData.filter({ (movie) -> Bool in
                 return movie.title.lowercased().contains(searchController.searchBar.text!.lowercased())
             })
+            if self.filterMovies.isEmpty {
+                DispatchQueue.main.async {
+                    self.collectionView.isHidden = true
+                }
+            }
         }
         self.collectionView.reloadData()
     }
 }
 // MARK: - Protocols CodeView
-extension MoviesController:CodeView{
-    
+extension MoviesGridController:CodeView{
+
     func buildViewHierarchy() {
         view.addSubview(collectionView)
     }
-    
+
     func setupConstraints() {
         collectionView.snp.makeConstraints { (make) in
             make.bottom.left.right.top.equalToSuperview()
         }
+
     }
     func setupAdditionalConfiguration() {
         collectionView.register(MovieCellView.self,forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        
     }
-    
-    
+
+
 }
 

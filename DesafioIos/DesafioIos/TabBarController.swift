@@ -12,7 +12,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let movieController = UINavigationController(rootViewController: MoviesController())
+        let movieController = UINavigationController(rootViewController: MoviesGridController())
         movieController.tabBarItem =
             UITabBarItem(title: "Movies", image: #imageLiteral(resourceName: "list_icon"), selectedImage: #imageLiteral(resourceName: "list_icon"))
         let favoriteMovieController = UINavigationController(rootViewController: FavoriteMoviesController())

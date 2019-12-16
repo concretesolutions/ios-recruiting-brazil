@@ -9,4 +9,5 @@
 import Foundation
 protocol SendDataApi {
     func sendMovie(movies:[Movie])
+    func sendStatus(status:StatusConnection)
 }

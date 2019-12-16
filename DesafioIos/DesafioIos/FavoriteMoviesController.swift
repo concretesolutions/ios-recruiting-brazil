@@ -110,7 +110,8 @@ extension FavoriteMoviesController:CodeView{
         tableView.register(FavoriteMovieCellView.self, forCellReuseIdentifier: "myCell")
         tableView.delegate = self
         tableView.dataSource = self
-        
+        self.title = "Movies"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "FilterIcon"), style: .done, target: nil, action: nil)
     }
     
     
