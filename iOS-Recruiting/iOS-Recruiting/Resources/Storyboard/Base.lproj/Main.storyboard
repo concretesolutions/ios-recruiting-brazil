@@ -97,18 +97,33 @@
         <!--Favorites-->
         <scene sceneID="Vf1-6Q-ZGW">
             <objects>
-                <viewController id="BcE-jo-jNt" sceneMemberID="viewController">
+                <viewController id="BcE-jo-jNt" customClass="FavouritesVC" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nht-2e-Bw4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Sx4-FU-Vbh">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Sx4-FU-Vbh" firstAttribute="top" secondItem="5Vs-tJ-WpU" secondAttribute="top" id="4Xu-bQ-Enp"/>
+                            <constraint firstAttribute="trailing" secondItem="Sx4-FU-Vbh" secondAttribute="trailing" id="Vhe-Az-1rv"/>
+                            <constraint firstItem="Sx4-FU-Vbh" firstAttribute="leading" secondItem="Nht-2e-Bw4" secondAttribute="leading" id="kgh-Ja-DeA"/>
+                            <constraint firstAttribute="bottom" secondItem="Sx4-FU-Vbh" secondAttribute="bottom" id="tsx-p1-Nmr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5Vs-tJ-WpU"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="zJT-FN-9sa"/>
+                    <connections>
+                        <outlet property="tableView" destination="Sx4-FU-Vbh" id="hs2-96-4ij"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UR2-oi-J0o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2991" y="-66"/>
+            <point key="canvasLocation" x="2989.8550724637685" y="-66.294642857142861"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9RB-Sz-g8i">

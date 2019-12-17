@@ -51,6 +51,10 @@ class ErrorView: UIView, NibLoadableView {
             self.iconImage.image = #imageLiteral(resourceName: "search_icon")
             self.errorLabel.text = "Sua busca não obteve nenhum resultado."
             self.retryButton.isHidden = true
+        case .empty:
+            self.iconImage.image = #imageLiteral(resourceName: "error-icon")
+            self.errorLabel.text = "Nenhum favorito encontrado."
+            self.retryButton.isHidden = true
         default:
             break
         }

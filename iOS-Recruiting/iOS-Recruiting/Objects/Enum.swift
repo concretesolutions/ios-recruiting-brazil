@@ -9,7 +9,7 @@
 import Foundation
 
 enum errorType {
-    case undefined, search, none
+    case undefined, search, none, empty
 }
 
 enum StoryboardType: String {

@@ -30,6 +30,18 @@ class PopularMoviesViewModel {
         return self.movies?.results
     }
     
+    internal var favourites: [Movie] {
+        let cookieName = CookieName.movie.rawValue
+        let items = Cookie.shared.getAll(cookieName)
+        var response = [Movie]()
+        items?.forEach({ (cookie) in
+            if let movie = Movie(JSONString: cookie.value) {
+                response.append(movie)
+            }
+        })
+        return response
+    }
+    
     internal weak var controller: PopularMoviesDelegate?
 
     internal func setView(_ controller: PopularMoviesDelegate) {
