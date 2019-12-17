@@ -22,6 +22,7 @@ class FavouritesVC: UIViewController {
         self.tableView.dataSource = self
         self.refreshControl.addTarget(self, action: #selector(self.refreshList), for: .valueChanged)
         self.tableView.addSubview(self.refreshControl)
+        self.tableView.register(MovieDetailCell.self)
         self.tableView.tableFooterView = UIView()
     }
     
@@ -33,6 +34,7 @@ class FavouritesVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.reloadData()
     }
     
     @objc func refreshList() {
@@ -42,11 +44,11 @@ class FavouritesVC: UIViewController {
     }
     
     private func refreshAction() {
-        self.viewModel.getPopularMovies(reload: true)
+        self.reloadData()
     }
     
     private func getMovie(indexPath: IndexPath) -> Movie? {
-        let movies = self.viewModel.movieList ?? []
+        let movies = self.viewModel.favourites
         
         guard movies.indices.contains(indexPath.row) else {
             return nil
@@ -62,7 +64,17 @@ extension FavouritesVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let movie = self.getMovie(indexPath: indexPath) else {
+            return UITableViewCell()
+        }
+        
+        let cell: MovieDetailCell = tableView.dequeue(for: indexPath)
+        cell.configure(movie)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 186
     }
 
 }
@@ -86,6 +98,16 @@ extension FavouritesVC: UITableViewDelegate {
         swipeActionsConfiguration.performsFirstActionWithFullSwipe = true
         return swipeActionsConfiguration
     }
+}
+
+extension FavouritesVC: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if self.refreshControl.isRefreshing {
+            self.refreshAction()
+        }
+    }
+
 }
 
 extension FavouritesVC: PopularMoviesDelegate {
