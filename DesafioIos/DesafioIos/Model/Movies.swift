@@ -21,7 +21,7 @@ struct Movies: Codable {
 }
 
 // MARK: - Result
-struct Movie: Codable {
+struct Movie: Codable{
     let id: Int
     let backdropPath: String
     let genreIDS: [Int]
@@ -36,4 +36,5 @@ struct Movie: Codable {
         case overview
         case releaseDate = "release_date"
     }
+
 }

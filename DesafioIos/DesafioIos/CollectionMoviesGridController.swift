@@ -7,7 +7,7 @@
 //
 
 import UIKit
-final class CollectionMoviesGridController: UICollectionViewController , UICollectionViewDelegateFlowLayout , SendDataApi {
+final class CollectionMoviesGridController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
     var movie:[Movie] = [] {
         didSet{
             DispatchQueue.main.async {
@@ -15,14 +15,11 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
             }
         }
     }
-    let reuseIdentifier = "cell"
-    let manege = ManegerApiRequest()
+    private let reuseIdentifier = "cell"
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(MovieCellView.self, forCellWithReuseIdentifier:reuseIdentifier)
         collectionView.backgroundColor = .red
-        manege.delegate = self
-        manege.sendMovies(page: 4)
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.movie.count
@@ -31,7 +28,6 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCellView
         cell.movie = self.movie[indexPath.row]
-        //cell.backgroundColor = .white
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -50,16 +46,6 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
         let vc = DetailMovieController()
               vc.movie = self.movie[indexPath.row]
               navigationController?.pushViewController(vc, animated: true)
-    }
-    func sendMovie(movies: [Movie]) {
-        self.movie.append(contentsOf: movies)
-    }
-    
-    func sendStatus(status: StatusConnection) {
-    }
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
     }
 
 }

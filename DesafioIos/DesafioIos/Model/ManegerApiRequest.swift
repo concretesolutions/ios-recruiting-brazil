@@ -8,10 +8,11 @@
 
 import Foundation
 final class ManegerApiRequest{
-    var numPages = 1
+    private var numPages = 1
     var dataToSend:[Movie] = [] {
         didSet{
-            if self.numPages * 20 == self.dataToSend.count{
+            print("\(self.numPages * 20) --- \(self.dataToSend.count)")
+            if Int(Double(self.numPages) * 20.0 * 0.8) <= self.dataToSend.count{
                 self.delegate?.sendMovie(movies: self.dataToSend)
                 self.delegate?.sendStatus(status: .finish)
             }
@@ -35,27 +36,48 @@ final class ManegerApiRequest{
     init() {
         self.getGenres()
     }
-    func sendMovies(page:Int){
-        numPages = page
-        for i in 1...page + 1{
-            let queryMoviesPopular:[String:Any] = ["api_key":ManegerApiRequest.apiKey,
-                                                   "page":"\(i)",
-                "language":"en-US",
-                "region":"US"]
-            self.getRequest(querys: queryMoviesPopular) { (catalog) in
-                self.delegate?.sendStatus(status: .sending)
-                self.dataToSend.append(contentsOf: catalog.results)
+    func sendMovies(numPage:Int){
+        self.delegate?.sendStatus(status: .sending)
+        DispatchQueue.main.async {
+            self.numPages = numPage
+            let querysPopularMovies = self.createQuerysMoviesPopular(quant:numPage)
+            querysPopularMovies.forEach { query in
+                self.getRequest(querys: query) { (catolog) in
+                    self.addToDataToSend(movies: catolog.results)
+                }
             }
         }
-        
+    }
+    private func addToDataToSend(movies:[Movie]){
+        for movie in movies {
+            if !self.dataToSend.contains { (previoMovies) -> Bool in
+                return movie.id == previoMovies.id
+                }{
+                self.dataToSend.append(movie)
+            }
+        }
+    }
+    private func createQuerysMoviesPopular(quant:Int)->[[String:Any]]{
+        var querys : [[String:Any]] = []
+        for i in 1...quant + 1{
+            let query:[String:Any] = ["api_key":ManegerApiRequest.apiKey,
+                                      "page":"\(i)",
+                "language":"en-US",
+                "region":"US"]
+            querys.append(query)
+            print(i)
+        }
+        return querys
     }
     // MARK: - Get movies
     func getRequest(querys:[String:Any],completion: @escaping (_ results: Movies) -> Void) {
         guard var urlComponents = URLComponents(string: urlMoviePopular) else{
+            print("erro no component url")
             return
         }
         urlComponents.queryItems = creatQuery(json: querys)
         guard let url = urlComponents.url else{
+            print("erro ao montar url")
             return
         }
         URLSession.shared.dataTask(with: url){
@@ -73,6 +95,8 @@ final class ManegerApiRequest{
             }
             catch{
                 print(error.localizedDescription)
+                
+                print("error")
             }
         }.resume()
     }
@@ -81,7 +105,7 @@ final class ManegerApiRequest{
             ManegerApiRequest.genres = allGenres.genres
         }
     }
-
+    
     // MARK: - request Genres
     func requestGenres(url:String,data:[String:Any],completion: @escaping (_ results: AllGenres) -> Void){
         guard var urlComponents = URLComponents(string: url) else{

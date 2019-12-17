@@ -12,41 +12,29 @@ class MoviesGridController: UIViewController , SendDataApi {
     var moviesData:[Movie] = [] {
         didSet{
             DispatchQueue.main.async {
-                self.filterMovies = self.moviesData
-                self.collectionView.reloadData()
-            }
-        }
-    }
-    var filterMovies:[Movie] = [] {
-        didSet{
-            if !self.filterMovies.isEmpty{
-                DispatchQueue.main.async {
-                    self.collectionView.isHidden = false
-                }
+                self.collectionViewController.movie = self.moviesData
+                self.collectionViewController.collectionView.reloadData()
             }
         }
     }
     let maneger = ManegerApiRequest()
-    let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .lightGray
-        return cv
-    }()
+    let collectionViewController = CollectionMoviesGridController(collectionViewLayout: UICollectionViewFlowLayout())
     let stateView = MoviesGridStatusView(state: .sending)
     override func loadView() {
-        self.view = MoviesGridStatusView(image: #imageLiteral(resourceName: "search_icon"), descriptionScreen: "not found")
+        self.view = UIView(frame: UIScreen.main.bounds)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         self.title = "Movies"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         setupDataMovie()
         makeSearchController()
+        setupCollectionViewController()
+        setupViews()
     }
-    
+    func setupViews(){
+        self.view.addSubview(stateView)
+    }
     func makeSearchController(){
         let searchController = UISearchController(nibName: nil, bundle: nil)
         self.navigationItem.searchController = searchController
@@ -54,107 +42,60 @@ class MoviesGridController: UIViewController , SendDataApi {
         searchController.searchResultsUpdater = self
     }
     func setupDataMovie(){
-       
         maneger.delegate = self
-        maneger.sendMovies(page: 6)
+        maneger.sendMovies(numPage: 100)
     }
-// MARK: - Func to Get Movies From api
+    // MARK: - Func to Get Movies From api
     func sendMovie(movies: [Movie]) {
-        moviesData.append(contentsOf: movies)
+        moviesData = movies
     }
-// MARK: - Func to Get Status From api
+    // MARK: - Func to Get Status From api
     func sendStatus(status: StatusConnection) {
         if status == .sending {
             DispatchQueue.main.async {
-                self.collectionView.isHidden = true
+                self.collectionViewController.collectionView.isHidden = true
                 self.stateView.isHidden = false
                 self.stateView.state = status
             }
-        
+            
         }
         if status == .finish{
             DispatchQueue.main.async {
-                self.collectionView.isHidden = false
+                self.collectionViewController.collectionView.isHidden = false
                 self.stateView.isHidden = true
             }
         }
         if status == .dontConnection{
-           DispatchQueue.main.async {
-              self.collectionView.isHidden = true
-              self.stateView.isHidden = false
-              self.stateView.state = .dontConnection
-           }
+            DispatchQueue.main.async {
+                self.collectionViewController.collectionView.isHidden = true
+                self.stateView.isHidden = false
+                self.stateView.state = .dontConnection
+            }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            self.collectionViewController.collectionView.reloadData()
         }
     }
-
-}
-// MARK: - Protocols of CollectionView
-
-extension MoviesGridController:UICollectionViewDataSource, UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.filterMovies.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCellView
-        cell.movie = filterMovies[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.view.frame.width
-        return CGSize(width: (width)/2.5, height: (width)/2)
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailMovieController()
-        vc.movie = self.filterMovies[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+    func setupCollectionViewController(){
+        self.addChild(collectionViewController)
+        collectionViewController.view.frame = UIScreen.main.bounds
+        self.view.addSubview(collectionViewController.view)
     }
 }
 //MARK: - Protocols SearchBarController Updating
 extension MoviesGridController:UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text == "" {
-            self.filterMovies = self.moviesData
+            self.collectionViewController.movie = self.moviesData
         } else {
-            filterMovies = self.moviesData.filter({ (movie) -> Bool in
+            self.collectionViewController.movie = self.moviesData.filter({ (movie) -> Bool in
                 return movie.title.lowercased().contains(searchController.searchBar.text!.lowercased())
             })
-            if self.filterMovies.isEmpty {
-                DispatchQueue.main.async {
-                    self.collectionView.isHidden = true
-                }
-            }
         }
-        self.collectionView.reloadData()
+        self.collectionViewController.collectionView.reloadData()
     }
 }
-// MARK: - Protocols CodeView
-extension MoviesGridController:CodeView{
 
-    func buildViewHierarchy() {
-        view.addSubview(collectionView)
-        view.addSubview(stateView)
-    }
-
-    func setupConstraints() {
-        collectionView.snp.makeConstraints { (make) in
-            make.bottom.left.right.top.equalToSuperview()
-        }
-
-    }
-    func setupAdditionalConfiguration() {
-        collectionView.register(MovieCellView.self,forCellWithReuseIdentifier: "cell")
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-    }
-
-
-}
 
