@@ -18,6 +18,16 @@ class Movie: Codable {
     let backdropPath: String?
     let releaseDate: String
     var isFavorite: Bool = false
+    
+    init(id: Int, title: String, overview: String, genreIDs: [Int], posterPath: String?, backdropPath: String?, releaseDate: String) {
+        self.id = id
+        self.title = title
+        self.overview = overview
+        self.genreIDs = genreIDs
+        self.posterPath = posterPath
+        self.backdropPath = backdropPath
+        self.releaseDate = releaseDate
+    }
 }
 
 extension Movie {
