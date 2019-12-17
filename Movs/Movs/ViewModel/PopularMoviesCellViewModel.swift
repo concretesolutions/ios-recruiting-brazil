@@ -1,5 +1,5 @@
 //
-//  MoviesCollectionCellViewModel.swift
+//  PopularMoviesCellViewModel.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 04/12/19.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Combine
 
-class MoviesCollectionCellViewModel {
+class PopularMoviesCellViewModel {
 
     private var movie: Movie
 
@@ -31,7 +31,7 @@ class MoviesCollectionCellViewModel {
 
     private func setCombine() {
         self.isLikedCancellable = self.movie.$isLiked.assign(to: \.isLiked, on: self)
-        self.posterImageCancellable = MovieDatabaseService.getMovieImage(fromPoster: movie.posterPath).assign(to: \.posterImage, on: self)
+        self.posterImageCancellable = MovsServiceAPI.getMoviePoster(fromPath: movie.posterPath).assign(to: \.posterImage, on: self)
     }
 
 }

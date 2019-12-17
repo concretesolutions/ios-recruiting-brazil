@@ -1,5 +1,5 @@
 //
-//  FavoritesTableCellViewModel.swift
+//  FavoriteMoviesCellViewModel.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 04/12/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FavoritesTableCellViewModel {
+struct FavoriteMoviesCellViewModel {
 
     //ID
     //Title

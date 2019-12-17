@@ -1,5 +1,5 @@
 //
-//  FavoritesView.swift
+//  FavoriteMoviesView.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 02/12/19.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class FavoritesView: UIView {
+class FavoriteMoviesView: UIView {
 
     let tableView: FavoritesTableView = {
         let tableView = FavoritesTableView()
@@ -27,7 +27,7 @@ class FavoritesView: UIView {
 
 }
 
-extension FavoritesView: ViewCode {
+extension FavoriteMoviesView: ViewCode {
 
     func buildViewHierarchy() {
         self.addSubview(tableView)

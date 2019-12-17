@@ -1,5 +1,5 @@
 //
-//  MoviesViewModel.swift
+//  PopularMoviesViewModel.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 01/12/19.
@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class MoviesViewModel {
+class PopularMoviesViewModel {
 
     @Published var count = 0
 
@@ -24,7 +24,7 @@ class MoviesViewModel {
     }
 
     public func getMovies() {
-        let cancellable = MovieDatabaseService.popularMovies(fromPage: self.currentPopularMoviesPage)
+        let cancellable = MovsServiceAPI.popularMovies(fromPage: self.currentPopularMoviesPage)
             .assertNoFailure("Deu ruim pegando filmes populares")
             .sink { (movies) in
                 var totalMovies = self.movies.value
@@ -36,8 +36,8 @@ class MoviesViewModel {
         self.popularMoviesCancellable = cancellable
     }
 
-    func viewModel(forCellAt indexPath: IndexPath) -> MoviesCollectionCellViewModel {
-        let viewModel = MoviesCollectionCellViewModel(withMovie: self.movies.value[indexPath.row])
+    func viewModel(forCellAt indexPath: IndexPath) -> PopularMoviesCellViewModel {
+        let viewModel = PopularMoviesCellViewModel(withMovie: self.movies.value[indexPath.row])
         return viewModel
     }
 

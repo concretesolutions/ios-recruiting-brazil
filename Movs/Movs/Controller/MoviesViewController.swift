@@ -11,8 +11,8 @@ import Combine
 
 class MoviesViewController: UIViewController {
 
-    private let viewModel = MoviesViewModel()
-    private let screen = MoviesView()
+    private let viewModel = PopularMoviesViewModel()
+    private let screen = PopularMoviesView()
 
     var cancellables: [AnyCancellable] = []
 

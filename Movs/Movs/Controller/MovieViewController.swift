@@ -11,7 +11,7 @@ import UIKit
 class MovieViewController: UIViewController {
 
     private var viewModel: MovieViewModel
-    private let screen = MovieView()
+    private let screen = MovieDetailsView()
 
     required init(withMovieViewModel viewModel: MovieViewModel) {
         self.viewModel = viewModel

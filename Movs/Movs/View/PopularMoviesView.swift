@@ -1,5 +1,5 @@
 //
-//  MoviesView.swift
+//  PopularMoviesView.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 02/12/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesView: UIView {
+class PopularMoviesView: UIView {
 
     let collectionView: MoviesCollectionView = {
         let collectionView = MoviesCollectionView(itemsPerRow: 2, withMargin: 16.0)
@@ -26,7 +26,7 @@ class MoviesView: UIView {
 
 }
 
-extension MoviesView: ViewCode {
+extension PopularMoviesView: ViewCode {
 
     func buildViewHierarchy() {
         self.addSubview(collectionView)

@@ -1,5 +1,5 @@
 //
-//  FavoritesViewModel.swift
+//  FavoriteMoviesViewModel.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 01/12/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FavoritesViewModel {
+struct FavoriteMoviesViewModel {
 
     //[Movie].filter{isLiked = true}
 

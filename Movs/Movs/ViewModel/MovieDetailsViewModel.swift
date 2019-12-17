@@ -1,5 +1,5 @@
 //
-//  MovieViewModel.swift
+//  MovieDetailsViewModel.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 04/12/19.
@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import UIKit
 
-struct MovieViewModel {
+struct MovieDetailsViewModel {
 
     var id: Int
     var title: String

@@ -10,8 +10,8 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
-    private let viewModel = FavoritesViewModel()
-    private let screen = FavoritesView()
+    private let viewModel = FavoriteMoviesViewModel()
+    private let screen = FavoriteMoviesView()
 
     override func loadView() {
         self.view = self.screen

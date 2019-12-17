@@ -16,7 +16,7 @@ enum MovieDatabaseServiceError: Error {
     case unknown(Error)
 }
 
-final class MovieDatabaseService {
+final class MovsServiceAPI {
 
     static private let session: URLSession = {
         let configuration = URLSessionConfiguration.default
@@ -41,23 +41,21 @@ final class MovieDatabaseService {
         urlComponents.queryItems?.append(URLQueryItem(name: "page", value: String(page)))
         guard let url = urlComponents.url else { fatalError() }
         return request(inUrl: url)
-            .map { (wrapper: MovieWrapperDTO) in
+            .map { (wrapper: PopularMoviesWrapperDTO) in
                     return wrapper.results
             }
             .map { (moviesDTO) -> [Movie] in
-                var movies: [Movie] = []
-                for movieDTO in moviesDTO {
-                    movies.append(Movie(withMovie: movieDTO))
+                return moviesDTO.compactMap { (movieDTO) -> Movie? in
+                    return Movie(withMovie: movieDTO)
                 }
-                return movies
             }
             .eraseToAnyPublisher()
     }
 
-    class func getMovieImage(fromPoster posterPath: String?) -> AnyPublisher<UIImage, Never> {
+    class func getMoviePoster(fromPath path: String?) -> AnyPublisher<UIImage, Never> {
         var urlComponents = self.urlComponents
         urlComponents.host = "image.tmdb.org"
-        urlComponents.path = "/t/p/w500/\(posterPath ?? "")"
+        urlComponents.path = "/t/p/w500/\(path ?? "")"
         guard let url = urlComponents.url else { fatalError() }
         return self.session.dataTaskPublisher(for: url)
             .map { (data: Data, _: URLResponse) -> UIImage in
@@ -73,9 +71,10 @@ final class MovieDatabaseService {
         urlComponents.path = "/3/movie/\(id)"
         guard let url = urlComponents.url else { fatalError() }
         return request(inUrl: url)
-            .map { (movieDetails: MovieDetailsWrapperDTO) -> Movie in
+            .map { (movieDetails: MovieWrapperDTO) -> Movie in
                 return Movie(withMovieDetails: movieDetails)
             }
+            .retry(5)
             .eraseToAnyPublisher()
     }
 
@@ -117,107 +116,3 @@ final class MovieDatabaseService {
 
 }
 
-// ------------------------------------------ WRAPPERS
-struct GenreWrapperDTO: Decodable {
-    var genres: [GenreDTO]
-}
-
-struct GenreDTO: Decodable {
-    var id: Int
-    var name: String
-}
-
-struct MovieWrapperDTO: Decodable {
-    var page: Int
-    var results: [MovieDTO]
-    var totalResults: Int
-    var totalPages: Int
-
-    enum CodingKeys: String, CodingKey {
-        case page
-        case results
-        case totalResults = "total_results"
-        case totalPages = "total_pages"
-    }
-
-}
-
-struct MovieDetailsWrapperDTO: Decodable {
-    var id: Int
-    var overview: String
-    var releaseDate: String
-    var genres: [GenreDTO]
-    var title: String
-    var posterPath: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case overview
-        case releaseDate = "release_date"
-        case genres
-        case title
-        case posterPath = "poster_path"
-    }
-}
-
-struct MovieDTO: Decodable {
-    var id: Int
-    var overview: String
-    var releaseDate: String
-    var genreIds: [Int]
-    var title: String
-    var posterPath: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case overview
-        case releaseDate = "release_date"
-        case genreIds = "genre_ids"
-        case title
-        case posterPath = "poster_path"
-    }
-
-}
-
-// ------------------------------------------ FINAL STRUCTS
-struct Genre {
-    var id: Int
-    var name: String
-
-    init(withGenre genre: GenreDTO) {
-        self.id = genre.id
-        self.name = genre.name
-    }
-}
-
-class Movie {
-
-    var id: Int
-    var overview: String
-    var releaseDate: String
-    var genreIds: [Int]
-    var title: String
-    var posterPath: String?
-    @Published var isLiked: Bool = false
-
-    init(withMovie movie: MovieDTO) {
-        self.id = movie.id
-        self.overview = movie.overview
-        self.releaseDate = movie.releaseDate
-        self.genreIds = movie.genreIds
-        self.title = movie.title
-        self.posterPath = movie.posterPath
-        self.isLiked = false
-    }
-
-    init(withMovieDetails movie: MovieDetailsWrapperDTO) {
-        self.id = movie.id
-        self.overview = movie.overview
-        self.releaseDate = movie.releaseDate
-        self.genreIds = movie.genres.compactMap { $0.id }
-        self.title = movie.title
-        self.posterPath = movie.posterPath
-        self.isLiked = false
-    }
-
-}

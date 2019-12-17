@@ -12,7 +12,7 @@ import Combine
 
 class MoviesCollectionViewCell: UICollectionViewCell {
 
-    private var viewModel: MoviesCollectionCellViewModel!
+    private var viewModel: PopularMoviesCellViewModel!
     private var cancellables: [AnyCancellable] = []
 
     private let verticalStackView: UIStackView = {
@@ -59,7 +59,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(withViewModel viewModel: MoviesCollectionCellViewModel) {
+    func setup(withViewModel viewModel: PopularMoviesCellViewModel) {
         self.viewModel = viewModel
         self.movieTitle.text = self.viewModel.title
         likeButton.addTarget(self, action: #selector(touchLikeButton), for: .touchUpInside)
