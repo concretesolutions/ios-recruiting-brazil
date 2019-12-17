@@ -37,8 +37,36 @@ class PopularMoviesVC: UIViewController {
         self.refreshControl.beginRefreshing()
         self.searchBar.delegate = self
         
+        self.setHeaderColor()
+        
+        
         self.viewModel.getPopularMovies(reload: true)
         
+    }
+    
+    private func setHeaderColor() {
+        
+        let image = UIImage()
+        
+        self.searchBar.backgroundImage = image
+        self.navigationController?.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = image
+        
+        let color = UIColor(red:0.97, green:0.81, blue:0.36, alpha:1.0)
+        
+        if #available(iOS 13.0, *) {
+            let statusBar = UIView(frame: UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+             statusBar.backgroundColor = color
+             UIApplication.shared.keyWindow?.addSubview(statusBar)
+        } else {
+            let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView
+            if statusBar?.responds(to: #selector(setter: UIView.backgroundColor)) ?? false {
+                statusBar?.backgroundColor = color
+            }
+        }
+        
+        self.searchBar.backgroundColor = color
+        self.navigationController?.navigationBar.backgroundColor = color
     }
     
     @objc func refreshList() {
