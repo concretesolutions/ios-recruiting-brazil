@@ -9,6 +9,7 @@
 import UIKit
 
 class FavoriteButton: UIButton {
+    // MARK: - Attributes
     override var isSelected: Bool {
         didSet {
             UIView.animate(withDuration: 0.2) {
@@ -19,9 +20,21 @@ class FavoriteButton: UIButton {
                 } else {
                     self.setBackgroundImage(UIImage(systemName: "heart"),
                                             for: .normal)
-                    self.tintColor = .white
+                    self.tintColor = self.baseTintColor
                 }
             }
         }
+    }
+    
+    let baseTintColor: UIColor
+    
+    // MARK: - Initializers
+    required init(frame: CGRect = .zero, baseTintColor: UIColor) {
+        self.baseTintColor = baseTintColor
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

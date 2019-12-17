@@ -17,6 +17,14 @@ class MovieDetailScreen: UIView {
         return view
     }()
     
+    lazy var releaseDate: UILabel = {
+        let view = UILabel()
+        view.text = self.movie.releaseDate
+        view.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        view.textColor = .secondaryLabel
+        return view
+    }()
+    
     lazy var title: UILabel = {
         let view = UILabel()
         view.text = self.movie.title
@@ -26,16 +34,19 @@ class MovieDetailScreen: UIView {
         return view
     }()
     
-    lazy var releaseDate: UILabel = {
+    lazy var genres: UILabel = {
         let view = UILabel()
-        view.text = self.movie.releaseDate
-        view.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         view.textColor = .secondaryLabel
+        view.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        let genres = self.movie.genres.sorted()
+        view.text = genres.dropFirst().reduce(genres[0], { (result, movie) -> String in
+            return "\(result), \(movie)"
+        })
         return view
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = FavoriteButton()
+        let button = FavoriteButton(baseTintColor: .label)
         button.isSelected = self.movie.isFavorite
         button.addTarget(self,
                          action: #selector(didFavoriteMovie),
@@ -103,6 +114,7 @@ extension MovieDetailScreen: CodeView {
         // Title container
         self.titleContainer.addArrangedSubview(self.releaseDate)
         self.titleContainer.addArrangedSubview(self.title)
+        self.titleContainer.addArrangedSubview(self.genres)
         
         // Favorite container
         self.favoriteContainer.addArrangedSubview(self.titleContainer)

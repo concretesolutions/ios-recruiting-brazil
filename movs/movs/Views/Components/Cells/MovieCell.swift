@@ -31,7 +31,7 @@ class MovieCell: UICollectionViewCell {
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = FavoriteButton()
+        let button = FavoriteButton(baseTintColor: .white)
         button.addTarget(self,
                          action: #selector(didFavoriteMovie),
                          for: .touchUpInside)
