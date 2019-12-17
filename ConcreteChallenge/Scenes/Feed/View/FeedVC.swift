@@ -34,6 +34,20 @@ class FeedVC: BaseViewController, FavoriteViewDelegate {
         return view
     }()
     
+    /// An activity indicator to show when the view is loading
+    let activityIndicator: UIActivityIndicatorView = {
+        let style: UIActivityIndicatorView.Style
+        if #available(iOS 13.0, *) {
+            style = .whiteLarge
+        } else {
+            // Fallback on earlier versions
+            style = .gray
+        }
+        let view = UIActivityIndicatorView(style: style)
+        view.hidesWhenStopped = true
+        return view
+    }()
+    
     // MARK: - Init -
     override init(presenter: Presenter) {
         guard type(of: self) != FeedVC.self else {
@@ -57,6 +71,16 @@ class FeedVC: BaseViewController, FavoriteViewDelegate {
 
         feedCollectionView.dataSource = self
         feedCollectionView.delegate = self
+    }
+    
+    override func startLoading() {
+        activityIndicator.startAnimating()
+        feedCollectionView.backgroundColor = UIColor.gray.withAlphaComponent(0.7)
+    }
+    
+    override func finishLoading() {
+        activityIndicator.stopAnimating()
+        feedCollectionView.backgroundColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {

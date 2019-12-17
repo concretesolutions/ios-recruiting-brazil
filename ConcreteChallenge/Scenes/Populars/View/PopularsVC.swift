@@ -46,9 +46,9 @@ final class PopularsVC: FeedVC {
 
     internal var headerView: PopularsHeaderView = PopularsHeaderView()
     
-    internal lazy var auxiliarView: UIView = {
+    internal var auxiliarView: UIView = {
         let view = UIView()
-        view.backgroundColor = self.feedCollectionView.backgroundColor
+        view.backgroundColor = .white
         return view
     }()
     
@@ -90,6 +90,7 @@ final class PopularsVC: FeedVC {
         self.scrollView.addSubview(headerBackgroundView)
         self.headerBackgroundView.addSubview(headerView)
         self.headerBackgroundView.addSubview(searchBar)
+        self.view.addSubview(activityIndicator)
     }
     
     override func setupConstraints() {
@@ -125,6 +126,21 @@ final class PopularsVC: FeedVC {
             make.top.equalTo(headerBackgroundView.snp.bottom)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        activityIndicator.snp.makeConstraints { (make) in
+            make.center.equalTo(feedCollectionView)
+            make.width.height.equalTo(100)
+        }
+    }
+    
+    override func startLoading() {
+        super.startLoading()
+        auxiliarView.backgroundColor = feedCollectionView.backgroundColor
+    }
+    
+    override func finishLoading() {
+        super.finishLoading()
+        auxiliarView.backgroundColor = feedCollectionView.backgroundColor
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -21,7 +21,10 @@ final class PopularsPresenter: FeedPresenter {
     
     // MARK: - Methods -
     override func loadFeed() {
+        view?.startLoading()
         MovieClient.getPopular(page: 1) { [weak self] (movies, error) in
+            
+            self?.view?.finishLoading()
             
             if let error = error {
                 os_log("❌ - Error loading movie feed: %@", log: Logger.appLog(), type: .fault, error.localizedDescription)
@@ -38,10 +41,14 @@ final class PopularsPresenter: FeedPresenter {
     
     /// Load more items for the infinite scrolling feed.
     func loadMoreItems() {
+        
         guard pagesLoaded <= maxPages else { return }
         pagesLoaded += 1
+        view?.startLoading()
+        
         MovieClient.getPopular(page: pagesLoaded) { [weak self] (movies, error) in
             
+            self?.view?.finishLoading()
             if let error = error {
                 os_log("❌ - Error loading movie feed: %@", log: Logger.appLog(), type: .error, error.localizedDescription)
                 return
