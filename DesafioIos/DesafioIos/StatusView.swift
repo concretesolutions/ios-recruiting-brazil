@@ -16,6 +16,7 @@ class StatusView: UIView {
             self.upadateUI()
         }
     }
+    var vSpinner:UIView?
     lazy var imageDescriptionProblem:UIImageView = {
         let view = UIImageView(frame: .zero)
         view.adjustsImageSizeForAccessibilityContentSizeCategory = true
@@ -50,15 +51,39 @@ class StatusView: UIView {
             DispatchQueue.main.async {
                 self.imageDescriptionProblem.image = #imageLiteral(resourceName: "FilterIcon")
                 self.textDescriptionProblem.text = "carregando"
+                self.showSpinner()
             }
         }
         if self.state == .dontConnection{
             DispatchQueue.main.async {
                 self.imageDescriptionProblem.image = #imageLiteral(resourceName: "list_icon")
                 self.textDescriptionProblem.text = "sem concetion"
+                self.removeSpinner()
             }
         }
+        else {
+            self.removeSpinner()
+        }
     }
+    func showSpinner() {
+        let spinnerView = UIView.init(frame: self.bounds)
+        spinnerView.backgroundColor = .white
+        let ai = UIActivityIndicatorView(style: .large)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            self.addSubview(spinnerView)
+        }
+        self.vSpinner = spinnerView
+    }
+    func removeSpinner() {
+         DispatchQueue.main.async {
+            self.vSpinner?.removeFromSuperview()
+            self.vSpinner = nil
+         }
+     }
 }
 extension StatusView:CodeView{
     func buildViewHierarchy() {
