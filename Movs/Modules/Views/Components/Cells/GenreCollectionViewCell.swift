@@ -15,6 +15,7 @@ class GenreCollectionViewCell: UICollectionViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16.0, weight: .bold)
+        label.textColor = UIColor.white
         return label
     }()
     
@@ -42,6 +43,7 @@ extension GenreCollectionViewCell: CodeView {
     }
     
     func setupAdditionalConfiguration() {
+        self.contentView.backgroundColor = UIColor(named: "palettePurple")
         self.contentView.layer.masksToBounds = true
         self.contentView.layer.cornerRadius = self.contentView.bounds.height / 2.0
     }

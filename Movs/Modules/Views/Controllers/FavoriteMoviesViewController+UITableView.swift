@@ -29,7 +29,7 @@ extension FavoriteMoviesViewController: UITableViewDelegate {
 
 extension FavoriteMoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.storageManager.favorites.count
+        return self.viewModel.numberOfFavoriteMovies
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,7 +38,7 @@ extension FavoriteMoviesViewController: UITableViewDataSource {
         }
         
         cell.viewModel = self.viewModel.cellViewModelForItemAt(indexPath: indexPath)
-                
         return cell
     }
+    
 }

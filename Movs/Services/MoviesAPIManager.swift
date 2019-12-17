@@ -15,7 +15,7 @@ final class MoviesAPIManager: MoviesAPIDataFetcher {
     internal let apiKey: String = "eea991e8b8c8738c849cddf195bc2813"
     internal let session: NetworkSession
     internal var genres: [GenreDTO] = []
-    internal var isMovieFetchInProgress: Bool = false
+    internal var isFetchInProgress: Bool = false
     internal var currentPage: Int = 0
     
     // MARK: - Publishers
@@ -32,6 +32,7 @@ final class MoviesAPIManager: MoviesAPIDataFetcher {
     // MARK: - Fetch methods
     
     func fetchGenresList() {
+        self.isFetchInProgress = true
         self.getGenres(completion: { (data, error) in
             if let data = data {
                 do {
@@ -41,11 +42,13 @@ final class MoviesAPIManager: MoviesAPIDataFetcher {
                     print(error)
                 }
             }
+            
+            self.isFetchInProgress = false
         })
     }
     
     func fetchNextPopularMoviesPage() {
-        self.isMovieFetchInProgress = true
+        self.isFetchInProgress = true
         self.getPopularMovies(page: self.currentPage + 1, completion: { (data, error) in
             if let data = data {
                 do {
@@ -57,12 +60,12 @@ final class MoviesAPIManager: MoviesAPIDataFetcher {
                 }
             }
             
-            self.isMovieFetchInProgress = false
+            self.isFetchInProgress = false
         })
     }
     
     func shouldFetchNextPage() -> Bool {
-        return self.currentPage < 500 && !self.isMovieFetchInProgress
+        return self.currentPage < 500 && !self.isFetchInProgress
     }
     
     // MARK: - Request Methods

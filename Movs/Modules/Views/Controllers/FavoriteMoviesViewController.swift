@@ -16,6 +16,7 @@ class FavoriteMoviesViewController: UIViewController {
     internal var deletedRowIndex: IndexPath?
     internal let screen = FavoriteMoviesViewScreen()
     internal let viewModel: FavoriteMoviesControllerViewModel
+    internal let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Publishers and Subscribers
     
@@ -47,19 +48,23 @@ class FavoriteMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.bind(to: self.viewModel)
         self.screen.favoriteMoviesTableView.delegate = self
         self.screen.favoriteMoviesTableView.dataSource = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.bind(to: self.viewModel)
+        
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search favorites..."
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
     }
     
     // MARK: - Binding
     
     func bind(to viewModel: FavoriteMoviesControllerViewModel) {
-        self.subscribers.append(viewModel.storageManager.$favorites
+        self.subscribers.append(viewModel.$numberOfFavoriteMovies
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
                 if let deletedIndex = self.deletedRowIndex {

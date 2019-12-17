@@ -13,6 +13,7 @@ class PopularMoviesViewController: UIViewController {
 
     // MARK: - Properties
     
+    internal let searchController = UISearchController(searchResultsController: nil)
     internal let screen = PopularMoviesViewScreen()
     internal let viewModel: PopularMoviesControllerViewModel
     
@@ -46,18 +47,23 @@ class PopularMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.screen.moviesCollectionView.delegate = self
-        self.screen.moviesCollectionView.dataSource = self
-        self.screen.moviesCollectionView.prefetchDataSource = self
-    }
-        
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.bind(to: self.viewModel)
         
         if self.viewModel.apiManager.shouldFetchNextPage() {
             self.viewModel.apiManager.fetchNextPopularMoviesPage()
         }
+        
+        self.screen.moviesCollectionView.delegate = self
+        self.screen.moviesCollectionView.dataSource = self
+        self.screen.moviesCollectionView.prefetchDataSource = self
+        
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search movies..."
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
     }
     
     // MARK: - Binding

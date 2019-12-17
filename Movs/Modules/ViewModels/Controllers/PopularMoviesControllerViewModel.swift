@@ -11,6 +11,14 @@ import Combine
 
 class PopularMoviesControllerViewModel {
     
+    // MARK: - Data Source
+    
+    private var dataSource: [MovieDTO] {
+        didSet {
+            self.numberOfMovies = self.dataSource.count
+        }
+    }
+    
     // MARK: - Dependencies
     
     typealias Dependencies = HasAPIManager & HasStorageManager
@@ -21,7 +29,7 @@ class PopularMoviesControllerViewModel {
     // MARK: - Properties
 
     internal let decoder = JSONDecoder()
-    internal var isMovieFetchInProgress: Bool = false
+    internal var isSearchInProgress: Bool = false
     weak var coordinatorDelegate: PopularMoviesCoordinator?
     
     // MARK: - Publishers and Subscribers
@@ -35,7 +43,8 @@ class PopularMoviesControllerViewModel {
         self.dependencies = dependencies
         self.storageManager = dependencies.storageManager
         self.apiManager = dependencies.apiManager
-        
+
+        self.dataSource = self.apiManager.movies
         self.bind(to: dependencies.apiManager)
     }
     
@@ -48,20 +57,34 @@ class PopularMoviesControllerViewModel {
     // MARK: - Binding
     
     func bind(to apiManager: MoviesAPIManager) {
-        self.subscribers.append(self.apiManager.$movies.sink(receiveValue: { fetchedMovies in
-            self.numberOfMovies = fetchedMovies.count
-        }))
+        self.subscribers.append(apiManager.$movies
+            .sink(receiveValue: { fetchedMovies in
+                self.dataSource = fetchedMovies
+            })
+        )
     }
     
-    // MARK: - Methods
+    // MARK: - UICollectionView
     
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
-        let movie = Movie(movieDTO: self.apiManager.movies[indexPath.row], genres: self.apiManager.genres)
+        let movie = Movie(movieDTO: self.dataSource[indexPath.row], genres: self.apiManager.genres)
         return MovieViewModel(movie: movie, dependencies: self.dependencies)
     }
     
     func didSelectItemAt(indexPath: IndexPath) {
-        let movie = Movie(movieDTO: self.apiManager.movies[indexPath.row], genres: self.apiManager.genres)
+        let movie = Movie(movieDTO: self.dataSource[indexPath.row], genres: self.apiManager.genres)
         self.coordinatorDelegate?.didSelectItem(movie: movie)
+    }
+    
+    // MARK: - UISearchController
+    
+    func filterMovies(for title: String) {
+        if title.isEmpty {
+            self.dataSource = self.apiManager.movies
+            self.isSearchInProgress = false
+        } else {
+            self.dataSource = self.apiManager.movies.filter({ $0.title.starts(with: title) })
+            self.isSearchInProgress = true
+        }
     }
 }

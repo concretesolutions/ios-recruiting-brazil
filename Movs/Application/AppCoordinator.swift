@@ -13,14 +13,18 @@ class AppCoordinator: Coordinator {
     // MARK: - Typealiases
     
     typealias Presenter = UIWindow
-    typealias Controller = UINavigationController
+    typealias Controller = HomeTabBarViewController
     
     // MARK: - Properties
     
     internal let dependencies: Dependencies
     internal let presenter: Presenter
     internal let coordinatedViewController: Controller
-    private var homeCoordinator: HomeTabBarCoordinator!
+    
+    // MARK: - Child coordinators
+    
+    private var favoriteMoviesCoordinator: FavoriteMoviesCoordinator!
+    private var popularMoviesCoordinator: PopularMoviesCoordinator!
     
     // MARK: - Initializers
     
@@ -31,22 +35,21 @@ class AppCoordinator: Coordinator {
         
         self.dependencies = Dependencies(storageManager: StorageManager(container: appDelegate.persistentContainer))
         self.presenter = window
-        self.coordinatedViewController = UINavigationController()
-        self.homeCoordinator = HomeTabBarCoordinator(parent: self)
+        self.coordinatedViewController = HomeTabBarViewController()
+        self.popularMoviesCoordinator = PopularMoviesCoordinator(parent: self)
+        self.favoriteMoviesCoordinator = FavoriteMoviesCoordinator(parent: self)
     }
     
     // MARK: - Coordination
     
     func start() {
+        self.coordinatedViewController.viewControllers = [self.popularMoviesCoordinator.coordinatedViewController, self.favoriteMoviesCoordinator.coordinatedViewController]
         self.presenter.rootViewController = self.coordinatedViewController
-        self.homeCoordinator.start()
         self.presenter.makeKeyAndVisible()
     }
     
     func finish() {
         self.presenter.rootViewController = nil
-        self.homeCoordinator.finish()
-        self.homeCoordinator = nil
         self.presenter.resignKey()
     }
 }

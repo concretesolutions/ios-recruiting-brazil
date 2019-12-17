@@ -16,6 +16,7 @@ final class FavoriteMoviesViewScreen: UIView {
     lazy var favoriteMoviesTableView: UITableView = {
         let favoritesTable = UITableView(frame: .zero)
         favoritesTable.backgroundColor = UIColor.clear
+        favoritesTable.contentInset = UIEdgeInsets(top: 8.0, left: 0.0, bottom: 8.0, right: 0.0)
         favoritesTable.register(FavoriteMovieTableViewCell.self, forCellReuseIdentifier: "favoriteMovie")
         return favoritesTable
     }()

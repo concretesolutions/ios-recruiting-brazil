@@ -14,7 +14,7 @@ class PopularMoviesCoordinator: Coordinator {
     // MARK: - Typealiases
     
     typealias Presenter = UITabBarController
-    typealias Controller = PopularMoviesViewController
+    typealias Controller = UINavigationController
     
     // MARK: - Properties
     
@@ -29,12 +29,13 @@ class PopularMoviesCoordinator: Coordinator {
     
     // MARK: - Initializers and Deinitializers
     
-    init(parent: HomeTabBarCoordinator) {
+    init(parent: AppCoordinator) {
         self.presenter = parent.coordinatedViewController
         self.dependencies = parent.dependencies
         
         let viewModel = PopularMoviesControllerViewModel(dependencies: self.dependencies)
-        self.coordinatedViewController = PopularMoviesViewController(viewModel: viewModel)
+        let controller = PopularMoviesViewController(viewModel: viewModel)
+        self.coordinatedViewController = UINavigationController(rootViewController: controller)
         self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         
         viewModel.coordinatorDelegate = self

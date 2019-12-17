@@ -37,7 +37,7 @@ class MoviesAPIManagerTests: XCTestCase {
        
     func testShouldSignalToFetchPopularMovies() {
         self.sut.currentPage = 100
-        self.sut.isMovieFetchInProgress = false
+        self.sut.isFetchInProgress = false
     
         let signal = self.sut.shouldFetchNextPage()
         expect(signal).to(beTrue())
@@ -45,7 +45,7 @@ class MoviesAPIManagerTests: XCTestCase {
        
     func testShouldntSignalToFetchPopularMoviesWhenNoNextPage() {
         self.sut.currentPage = 510
-        self.sut.isMovieFetchInProgress = false
+        self.sut.isFetchInProgress = false
            
         let signal = self.sut.shouldFetchNextPage()
         expect(signal).to(beFalse())
@@ -53,7 +53,7 @@ class MoviesAPIManagerTests: XCTestCase {
        
     func testShouldntSignalToFetchPopularMoviesWithFetchInProgress() {
         self.sut.currentPage = 100
-        self.sut.isMovieFetchInProgress = true
+        self.sut.isFetchInProgress = true
            
         let signal = self.sut.shouldFetchNextPage()
         expect(signal).to(beFalse())

@@ -13,7 +13,7 @@ class FavoriteMoviesCoordinator: Coordinator {
     // MARK: - Typealiases
     
     typealias Presenter = UITabBarController
-    typealias Controller = FavoriteMoviesViewController
+    typealias Controller = UINavigationController
     
     // MARK: - Properties
     
@@ -23,12 +23,13 @@ class FavoriteMoviesCoordinator: Coordinator {
     
     // MARK: - Initializers and Deinitializers
     
-    init(parent: HomeTabBarCoordinator) {
+    init(parent: AppCoordinator) {
         self.presenter = parent.coordinatedViewController
         self.dependencies = parent.dependencies
         
         let viewModel = FavoriteMoviesControllerViewModel(dependencies: self.dependencies)
-        self.coordinatedViewController = FavoriteMoviesViewController(viewModel: viewModel)
+        let controller = FavoriteMoviesViewController(viewModel: viewModel)
+        self.coordinatedViewController = UINavigationController(rootViewController: controller)
         self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
     }
     

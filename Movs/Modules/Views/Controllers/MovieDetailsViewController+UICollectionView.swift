@@ -21,8 +21,6 @@ extension MovieDetailsViewController: UICollectionViewDataSource {
         }
         
         cell.nameLabel.text = self.viewModel.genresNames[indexPath.row]
-        cell.nameLabel.textColor = UIColor.systemBackground
-        cell.contentView.backgroundColor = UIColor(named: "palettePurple")
         return cell
     }
 }

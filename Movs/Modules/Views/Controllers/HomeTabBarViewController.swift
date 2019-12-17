@@ -10,7 +10,10 @@ import UIKit
 
 class HomeTabBarViewController: UITabBarController {
     
+    // MARK: - UITabBarController life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBar.tintColor = UIColor(named: "palettePurple")
     }
 }
