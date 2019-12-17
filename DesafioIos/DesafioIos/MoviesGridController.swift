@@ -102,7 +102,7 @@ extension MoviesGridController:UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCellView
-        cell.setupUIData(movie: filterMovies[indexPath.row])
+        cell.movie = filterMovies[indexPath.row]
         return cell
     }
     

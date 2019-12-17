@@ -30,7 +30,7 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCellView
-        cell.setupUIData(movie: movie[indexPath.row])
+        cell.movie = self.movie[indexPath.row]
         //cell.backgroundColor = .white
         return cell
     }
@@ -56,9 +56,10 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
     }
     
     func sendStatus(status: StatusConnection) {
-        
     }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
+
 }

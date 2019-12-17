@@ -9,6 +9,13 @@
 import UIKit
 import SnapKit
 final class MovieCellView: UICollectionViewCell {
+    var movie:Movie? {
+        didSet{
+            if let movie = self.movie{
+                setupUIData(movie: movie)
+            }
+        }
+    }
     lazy var imageBackground:UIImageView = {
         let view = UIImageView(frame: .zero)
         view.backgroundColor = .red
@@ -25,9 +32,15 @@ final class MovieCellView: UICollectionViewCell {
     lazy var favoriteButton:UIButton = {
         let view = UIButton(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.addTarget(self, action:#selector(favoriteMovie), for: .touchDown)
         return view
     }()
+    @objc func favoriteMovie(){
+        if let movie = self.movie {
+            save(movie: movie)
+            favoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+        }
+    }
     let container:UIStackView = {
         let stack = UIStackView(frame: .zero)
         stack.axis = .horizontal
@@ -37,7 +50,7 @@ final class MovieCellView: UICollectionViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    func setupUIData(movie: Movie){
+    private func setupUIData(movie: Movie){
         imageBackground.loadImageMovie(movie.backdropPath, width: 500)
         nameMovie.text = movie.title
         movieIsfavorite(by:movie.id) ? favoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal) : favoriteButton.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
