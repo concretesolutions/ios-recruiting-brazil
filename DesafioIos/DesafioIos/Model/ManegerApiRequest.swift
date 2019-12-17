@@ -37,7 +37,7 @@ final class ManegerApiRequest{
     }
     func sendMovies(page:Int){
         numPages = page
-        for i in 1...page{
+        for i in 1...page + 1{
             let queryMoviesPopular:[String:Any] = ["api_key":ManegerApiRequest.apiKey,
                                                    "page":"\(i)",
                 "language":"en-US",

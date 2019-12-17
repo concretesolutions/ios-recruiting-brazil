@@ -13,7 +13,6 @@ final class MovieCellView: UICollectionViewCell {
         let view = UIImageView(frame: .zero)
         view.backgroundColor = .red
         view.contentMode = .scaleToFill
-        //view.loadImageMovie(self.movie.backdropPath, width: 500)
         return view
     }()
     lazy var nameMovie:UILabel = {
@@ -26,6 +25,7 @@ final class MovieCellView: UICollectionViewCell {
     lazy var favoriteButton:UIButton = {
         let view = UIButton(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     let container:UIStackView = {

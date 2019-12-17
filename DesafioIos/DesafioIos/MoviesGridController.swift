@@ -36,7 +36,7 @@ class MoviesGridController: UIViewController , SendDataApi {
     }()
     let stateView = MoviesGridStatusView(state: .sending)
     override func loadView() {
-        self.view = MoviesGridStatusView(image: #imageLiteral(resourceName: "search_icon"), descriptionScreen: "not found movie X")
+        self.view = MoviesGridStatusView(image: #imageLiteral(resourceName: "search_icon"), descriptionScreen: "not found")
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         self.title = "Movies"
     }
