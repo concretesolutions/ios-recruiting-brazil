@@ -11,15 +11,24 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
     var movie:[Movie] = [] {
         didSet{
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                if !self.movie.isEmpty{
+                    self.collectionView.reloadData()
+                    self.statusView.isHidden = true
+                }
+                else{
+                    self.statusView.isHidden = false
+                }
             }
         }
     }
     private let reuseIdentifier = "cell"
+    private var statusView = StatusView(image: #imageLiteral(resourceName: "search_icon"), descriptionScreen: "dont find X")
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(MovieCellView.self, forCellWithReuseIdentifier:reuseIdentifier)
         collectionView.backgroundColor = .red
+        self.collectionView.addSubview(statusView)
+        statusView.isHidden = true
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.movie.count

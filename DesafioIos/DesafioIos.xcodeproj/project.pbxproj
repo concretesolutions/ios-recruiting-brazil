@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		48A3BCB597BEAF7F3C2B39BA /* Pods_DesafioIosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30456D2ED92654A492367626 /* Pods_DesafioIosTests.framework */; };
 		6B3F6A8072886DDD55C256C8 /* Pods_DesafioIos_DesafioIosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FED5D53EE889403F0AC82E /* Pods_DesafioIos_DesafioIosUITests.framework */; };
+		97A732FB23A9452900F4C815 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A732FA23A9452900F4C815 /* StatusView.swift */; };
 		97BE53CE239A8AE6000639D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE53CD239A8AE6000639D8 /* AppDelegate.swift */; };
 		97BE53D0239A8AE6000639D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE53CF239A8AE6000639D8 /* SceneDelegate.swift */; };
 		97BE53D2239A8AE6000639D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE53D1239A8AE6000639D8 /* ViewController.swift */; };
@@ -36,7 +37,6 @@
 		97CD7F6123A7FC1E00BB9A96 /* CollectionMoviesGridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CD7F6023A7FC1E00BB9A96 /* CollectionMoviesGridController.swift */; };
 		B0FBD41B1BC6A4C771EB8343 /* Pods_DesafioIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */; };
 		E62125AF23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E62125AD23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld */; };
-		E62125B923A685370036CF77 /* MoviesGridStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62125B823A685370036CF77 /* MoviesGridStatusView.swift */; };
 		E62125BB23A6CDEF0036CF77 /* StatusConnection .swift in Sources */ = {isa = PBXBuildFile; fileRef = E62125BA23A6CDEF0036CF77 /* StatusConnection .swift */; };
 		E625607B23A5842A005CF564 /* CoreDataFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E625607A23A5842A005CF564 /* CoreDataFuncs.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +65,7 @@
 		3AFD16621E534ED8AAEADDB6 /* Pods-DesafioIos-DesafioIosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos-DesafioIosUITests.release.xcconfig"; path = "Target Support Files/Pods-DesafioIos-DesafioIosUITests/Pods-DesafioIos-DesafioIosUITests.release.xcconfig"; sourceTree = "<group>"; };
 		76FED5D53EE889403F0AC82E /* Pods_DesafioIos_DesafioIosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioIos_DesafioIosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8086C02496A758895ECEB295 /* Pods-DesafioIosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIosTests.release.xcconfig"; path = "Target Support Files/Pods-DesafioIosTests/Pods-DesafioIosTests.release.xcconfig"; sourceTree = "<group>"; };
+		97A732FA23A9452900F4C815 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		97BE53CA239A8AE6000639D8 /* DesafioIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesafioIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97BE53CD239A8AE6000639D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97BE53CF239A8AE6000639D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		B09CD878BED9BD00F3B0B464 /* Pods_DesafioIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5025EA2C77350FC43159B97 /* Pods-DesafioIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioIos.debug.xcconfig"; path = "Target Support Files/Pods-DesafioIos/Pods-DesafioIos.debug.xcconfig"; sourceTree = "<group>"; };
 		E62125AE23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteMoviesDataModel.xcdatamodel; sourceTree = "<group>"; };
-		E62125B823A685370036CF77 /* MoviesGridStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesGridStatusView.swift; sourceTree = "<group>"; };
 		E62125BA23A6CDEF0036CF77 /* StatusConnection .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusConnection .swift"; sourceTree = "<group>"; };
 		E625607A23A5842A005CF564 /* CoreDataFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFuncs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,8 +187,8 @@
 				97BE53D3239A8AE6000639D8 /* Main.storyboard */,
 				97BE541A23A137FB000639D8 /* DetailMovieController.swift */,
 				97BE541C23A13D7A000639D8 /* DetailMovieView.swift */,
-				E62125B823A685370036CF77 /* MoviesGridStatusView.swift */,
 				97CD7F6023A7FC1E00BB9A96 /* CollectionMoviesGridController.swift */,
+				97A732FA23A9452900F4C815 /* StatusView.swift */,
 			);
 			path = DesafioIos;
 			sourceTree = "<group>";
@@ -491,7 +491,6 @@
 				97BE540E239A9909000639D8 /* MovieCellView.swift in Sources */,
 				E62125AF23A6574A0036CF77 /* FavoriteMoviesDataModel.xcdatamodeld in Sources */,
 				97BE540A239A90F9000639D8 /* TabBarController.swift in Sources */,
-				E62125B923A685370036CF77 /* MoviesGridStatusView.swift in Sources */,
 				97BE53CE239A8AE6000639D8 /* AppDelegate.swift in Sources */,
 				97BE542423A276A5000639D8 /* Helpers.swift in Sources */,
 				97BE53D0239A8AE6000639D8 /* SceneDelegate.swift in Sources */,
@@ -504,6 +503,7 @@
 				97BE541923A01B41000639D8 /* UIImageLoad.swift in Sources */,
 				97BE5417239FE873000639D8 /* ManegerModel .swift in Sources */,
 				97BE5409239A90F9000639D8 /* FavoriteMoviesController.swift in Sources */,
+				97A732FB23A9452900F4C815 /* StatusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

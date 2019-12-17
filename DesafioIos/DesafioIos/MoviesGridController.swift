@@ -19,7 +19,7 @@ class MoviesGridController: UIViewController , SendDataApi {
     }
     let maneger = ManegerApiRequest()
     let collectionViewController = CollectionMoviesGridController(collectionViewLayout: UICollectionViewFlowLayout())
-    let stateView = MoviesGridStatusView(state: .sending)
+    let stateView = StatusView(state: .sending)
     override func loadView() {
         self.view = UIView(frame: UIScreen.main.bounds)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)

@@ -1,5 +1,5 @@
 //
-//  MoviesGridStatusView.swift
+//  StatusView.swift
 //  DesafioIos
 //
 //  Created by Kacio on 15/12/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-class MoviesGridStatusView: UIView {
+class StatusView: UIView {
     var image:UIImage?
     var descriptionScreen:String?
     var state:StatusConnection? {
@@ -60,7 +60,7 @@ class MoviesGridStatusView: UIView {
         }
     }
 }
-extension MoviesGridStatusView:CodeView{
+extension StatusView:CodeView{
     func buildViewHierarchy() {
         self.addSubview(imageDescriptionProblem)
         self.addSubview(textDescriptionProblem)
@@ -84,4 +84,5 @@ extension MoviesGridStatusView:CodeView{
         self.backgroundColor = .white
     }
 }
+
 
