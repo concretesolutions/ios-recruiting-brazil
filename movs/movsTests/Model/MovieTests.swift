@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import movs
+@testable import Movs
 
 class MovieTests: XCTestCase {
     
@@ -23,7 +23,7 @@ class MovieTests: XCTestCase {
                             releaseDate: "2010-10-10",
                             synopsis: "Movie synopsis",
                             posterPath: "/poster-url-string",
-                            genreIDS: [28, 14])
+                            genreIDs: [28, 14])
         movie = Movie(movie: movieDTO)
     }
 

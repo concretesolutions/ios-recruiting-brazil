@@ -17,6 +17,13 @@
 		D917E6B52395948E00BDBA43 /* MoviesRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917E6B42395948E00BDBA43 /* MoviesRequestDTO.swift */; };
 		D94DF1C423A1B61D001B090B /* MovieDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94DF1C323A1B61D001B090B /* MovieDetailDTO.swift */; };
 		D9651B4B23A15C4400F75E90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9651B4A23A15C4400F75E90 /* LaunchScreen.storyboard */; };
+		D965A5F023A8F8F900B6B618 /* MovieCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5EF23A8F8F900B6B618 /* MovieCellSpec.swift */; };
+		D965A5F223A8F92E00B6B618 /* FavoriteCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5F123A8F92E00B6B618 /* FavoriteCellSpec.swift */; };
+		D965A5F423A8F94300B6B618 /* MoviesScreenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5F323A8F94300B6B618 /* MoviesScreenSpec.swift */; };
+		D965A5F623A8F95600B6B618 /* FavoritesScreenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5F523A8F95600B6B618 /* FavoritesScreenSpec.swift */; };
+		D965A5F823A8F96700B6B618 /* FiltersScreenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5F723A8F96600B6B618 /* FiltersScreenSpec.swift */; };
+		D965A5FA23A8F9B900B6B618 /* FilterScreenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5F923A8F9B900B6B618 /* FilterScreenSpec.swift */; };
+		D965A5FC23A8F9DC00B6B618 /* MovieDetailSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5FB23A8F9DC00B6B618 /* MovieDetailSpec.swift */; };
 		D9B27E8F239F0CC60071D9E5 /* FilterTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B27E8E239F0CC60071D9E5 /* FilterTypeEnum.swift */; };
 		D9BA93CC23974649009671EB /* CodeViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA93CB23974649009671EB /* CodeViewProtocol.swift */; };
 		D9CDDD4E23986B6800F629D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9CDDD4D23986B6700F629D6 /* Assets.xcassets */; };
@@ -100,6 +107,14 @@
 		D917E6B42395948E00BDBA43 /* MoviesRequestDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesRequestDTO.swift; sourceTree = "<group>"; };
 		D94DF1C323A1B61D001B090B /* MovieDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailDTO.swift; sourceTree = "<group>"; };
 		D9651B4A23A15C4400F75E90 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D965A5EE23A8F8F800B6B618 /* movsSnapshotTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "movsSnapshotTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		D965A5EF23A8F8F900B6B618 /* MovieCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellSpec.swift; sourceTree = "<group>"; };
+		D965A5F123A8F92E00B6B618 /* FavoriteCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCellSpec.swift; sourceTree = "<group>"; };
+		D965A5F323A8F94300B6B618 /* MoviesScreenSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesScreenSpec.swift; sourceTree = "<group>"; };
+		D965A5F523A8F95600B6B618 /* FavoritesScreenSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreenSpec.swift; sourceTree = "<group>"; };
+		D965A5F723A8F96600B6B618 /* FiltersScreenSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersScreenSpec.swift; sourceTree = "<group>"; };
+		D965A5F923A8F9B900B6B618 /* FilterScreenSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreenSpec.swift; sourceTree = "<group>"; };
+		D965A5FB23A8F9DC00B6B618 /* MovieDetailSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailSpec.swift; sourceTree = "<group>"; };
 		D9B27E8E239F0CC60071D9E5 /* FilterTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeEnum.swift; sourceTree = "<group>"; };
 		D9BA93CB23974649009671EB /* CodeViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewProtocol.swift; sourceTree = "<group>"; };
 		D9CDDD4D23986B6700F629D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -215,6 +230,11 @@
 		D9BA93C823970FDF009671EB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D965A5F523A8F95600B6B618 /* FavoritesScreenSpec.swift */,
+				D965A5F923A8F9B900B6B618 /* FilterScreenSpec.swift */,
+				D965A5F723A8F96600B6B618 /* FiltersScreenSpec.swift */,
+				D965A5FB23A8F9DC00B6B618 /* MovieDetailSpec.swift */,
+				D965A5F323A8F94300B6B618 /* MoviesScreenSpec.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -222,16 +242,10 @@
 		D9BA93C923971021009671EB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D9BA93CA23971029009671EB /* Cells */,
+				D965A5F123A8F92E00B6B618 /* FavoriteCellSpec.swift */,
+				D965A5EF23A8F8F900B6B618 /* MovieCellSpec.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		D9BA93CA23971029009671EB /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		D9FBF71A2395355200C09F2C = {
@@ -396,9 +410,10 @@
 		D9FBF7A02395422400C09F2C /* movsSnapshotTests */ = {
 			isa = PBXGroup;
 			children = (
+				D965A5EE23A8F8F800B6B618 /* movsSnapshotTests-Bridging-Header.h */,
+				D9FBF7A32395422400C09F2C /* Info.plist */,
 				D9BA93C923971021009671EB /* Components */,
 				D9BA93C823970FDF009671EB /* Screens */,
-				D9FBF7A32395422400C09F2C /* Info.plist */,
 			);
 			path = movsSnapshotTests;
 			sourceTree = "<group>";
@@ -523,6 +538,7 @@
 					};
 					D9FBF79E2395422400C09F2C = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1130;
 						TestTargetID = D9FBF7222395355200C09F2C;
 					};
 					D9FBF7AC2395424000C09F2C = {
@@ -793,6 +809,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D965A5F423A8F94300B6B618 /* MoviesScreenSpec.swift in Sources */,
+				D965A5F823A8F96700B6B618 /* FiltersScreenSpec.swift in Sources */,
+				D965A5F223A8F92E00B6B618 /* FavoriteCellSpec.swift in Sources */,
+				D965A5F623A8F95600B6B618 /* FavoritesScreenSpec.swift in Sources */,
+				D965A5FC23A8F9DC00B6B618 /* MovieDetailSpec.swift in Sources */,
+				D965A5FA23A8F9B900B6B618 /* FilterScreenSpec.swift in Sources */,
+				D965A5F023A8F8F900B6B618 /* MovieCellSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,7 +1022,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movs.app/movs";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
 			};
 			name = Debug;
 		};
@@ -1022,7 +1045,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movs.app/movs";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
 			};
 			name = Release;
 		};
@@ -1031,6 +1054,7 @@
 			baseConfigurationReference = 83E6D443A237C43DD0D1CE46 /* Pods-movsSnapshotTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XP4ML92KUD;
 				INFOPLIST_FILE = movsSnapshotTests/Info.plist;
@@ -1041,9 +1065,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.emer.movsSnapshotTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "movsSnapshotTests/movsSnapshotTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movs.app/movs";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
 			};
 			name = Debug;
 		};
@@ -1052,6 +1078,7 @@
 			baseConfigurationReference = 0163DBE0B847EF59EA967EB2 /* Pods-movsSnapshotTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XP4ML92KUD;
 				INFOPLIST_FILE = movsSnapshotTests/Info.plist;
@@ -1062,9 +1089,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.emer.movsSnapshotTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "movsSnapshotTests/movsSnapshotTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movs.app/movs";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
 			};
 			name = Release;
 		};
@@ -1085,7 +1113,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movs.app/movs";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
 			};
 			name = Debug;
 		};
@@ -1106,7 +1134,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movs.app/movs";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Movs.app/Movs";
 			};
 			name = Release;
 		};

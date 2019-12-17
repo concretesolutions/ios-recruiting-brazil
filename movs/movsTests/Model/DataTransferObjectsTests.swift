@@ -7,7 +7,7 @@
 //
 // swiftlint:disable line_length force_try
 import XCTest
-@testable import movs
+@testable import Movs
 
 class DataTransferObjectsTests: XCTestCase {
     
@@ -82,7 +82,7 @@ class DataTransferObjectsTests: XCTestCase {
                                                          releaseDate: "2016-08-03",
                                                          synopsis: "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.",
                                                          posterPath: "/e1mjopzAS2KNsvpbpahQ1a6SkSn.jpg",
-                                                         genreIDS: [14, 28, 80])],
+                                                         genreIDs: [14, 28, 80])],
                                             totalResults: 19629,
                                             totalPages: 982)
         
