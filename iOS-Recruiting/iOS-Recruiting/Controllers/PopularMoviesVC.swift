@@ -75,8 +75,9 @@ extension PopularMoviesVC: UICollectionViewDelegate {
         
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        
         let controller: MovieDetailsVC? = self.navigationController?.push(.main)
+        
+        controller?.viewModel.movie = movie
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

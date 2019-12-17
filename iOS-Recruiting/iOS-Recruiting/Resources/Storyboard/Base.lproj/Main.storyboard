@@ -59,20 +59,40 @@
             </objects>
             <point key="canvasLocation" x="1134.7826086956522" y="885.9375"/>
         </scene>
-        <!--Movie DetailsVC-->
+        <!--Movie-->
         <scene sceneID="psj-SG-Xgv">
             <objects>
-                <viewController storyboardIdentifier="MovieDetailsVC" id="FOV-yx-x6z" customClass="MovieDetailsVC" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailsVC" title="Movie" id="FOV-yx-x6z" customClass="MovieDetailsVC" customModule="Movs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vkM-BW-o4z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5wT-qI-MUM">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="drM-l1-nkU">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="drM-l1-nkU" firstAttribute="centerY" secondItem="vkM-BW-o4z" secondAttribute="centerY" id="6lY-xH-VXO"/>
+                            <constraint firstAttribute="trailing" secondItem="5wT-qI-MUM" secondAttribute="trailing" id="BPd-4j-415"/>
+                            <constraint firstItem="5wT-qI-MUM" firstAttribute="top" secondItem="Wgk-y6-rKn" secondAttribute="top" id="Oa5-gb-FCa"/>
+                            <constraint firstAttribute="bottom" secondItem="5wT-qI-MUM" secondAttribute="bottom" id="hdt-cy-ClO"/>
+                            <constraint firstItem="5wT-qI-MUM" firstAttribute="leading" secondItem="vkM-BW-o4z" secondAttribute="leading" id="lIw-hM-VNN"/>
+                            <constraint firstItem="drM-l1-nkU" firstAttribute="centerX" secondItem="vkM-BW-o4z" secondAttribute="centerX" id="yYq-2k-y5J"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Wgk-y6-rKn"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="drM-l1-nkU" id="AHw-Lj-fKG"/>
+                        <outlet property="tableView" destination="5wT-qI-MUM" id="BkW-oX-2t3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BwM-Zu-gXO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2606" y="886"/>
+            <point key="canvasLocation" x="2453.6231884057975" y="885.9375"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="Vf1-6Q-ZGW">
