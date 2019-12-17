@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class MovieDetailsVC: UIViewController {
 
@@ -27,6 +28,9 @@ class MovieDetailsVC: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.register(MovieMainHeaderCell.self)
+        self.tableView.register(MovieTextCell.self)
+        self.tableView.tableFooterView = UIView()
         self.refreshControl.addTarget(self, action: #selector(self.refreshList), for: .valueChanged)
         self.tableView.addSubview(self.refreshControl)
         
@@ -50,12 +54,33 @@ class MovieDetailsVC: UIViewController {
 }
 
 extension MovieDetailsVC: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        let isEmpty = self.viewModel.movie?.original_title?.isEmpty ?? true
+        return isEmpty ? 0 : 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        switch indexPath.row {
+        case 0:
+            let cell: MovieMainHeaderCell = tableView.dequeue(for: indexPath)
+            cell.configure(self.viewModel.movie)
+            return cell
+        case 1:
+            let cell: MovieTextCell = tableView.dequeue(for: indexPath)
+            cell.mainTextLabel.text = self.viewModel.movie?.release_date?.split{$0 == "-"}.map(String.init).first
+            return cell
+        case 2:
+            let cell: MovieTextCell = tableView.dequeue(for: indexPath)
+            cell.mainTextLabel.text =  self.viewModel.movie?.genres?.map({ $0.name ?? "" }).joined(separator: ", ")
+            return cell
+        case 3:
+            let cell: MovieTextCell = tableView.dequeue(for: indexPath)
+            cell.mainTextLabel.text = self.viewModel.movie?.overview
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
 
 }
