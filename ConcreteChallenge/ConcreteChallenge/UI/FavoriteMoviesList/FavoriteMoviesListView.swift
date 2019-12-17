@@ -10,13 +10,8 @@ import UIKit
 
 class FavoriteMoviesListView: UIView {
 
-    enum State {
-        case empty, ready
-    }
-
-    var viewState: State = .ready {
+    var isEmptyState: Bool = false {
         didSet {
-            let isEmptyState = viewState == .empty
             emptyLabel.isHidden = !isEmptyState
             tableView.isHidden = isEmptyState
         }

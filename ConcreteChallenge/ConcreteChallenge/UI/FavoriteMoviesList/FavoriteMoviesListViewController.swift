@@ -7,20 +7,11 @@
 //
 
 import UIKit
-import CoreData
 
 class FavoriteMoviesListViewController: UIViewController {
 
     private let favoriteMoviesListView = FavoriteMoviesListView()
-
-    lazy var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> = {
-        let fetchRequest: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStore.context, sectionNameKeyPath: nil, cacheName: nil)
-        controller.delegate = self
-
-        return controller
-    }()
+    private let viewModel = FavoriteMoviesListViewModel()
 
     override func loadView() {
         view = favoriteMoviesListView
@@ -29,32 +20,22 @@ class FavoriteMoviesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Favoritados"
+        title = viewModel.navigationTitle
 
         favoriteMoviesListView.tableView.delegate = self
         favoriteMoviesListView.tableView.dataSource = self
 
-        loadFavorites()
-        updateViewState()
+        // Bind view model
+        viewModel.didStateChange = shouldChangeViewState(to:)
+        viewModel.didDeleteItem = shouldRemoveItem(at:)
     }
 
-    private func loadFavorites() {
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            print(error.localizedDescription)
-        }
+    func shouldRemoveItem(at indexPath: IndexPath) {
+        favoriteMoviesListView.tableView.deleteRows(at: [indexPath], with: .fade)
     }
 
-    func updateViewState() {
-        let nextViewState: FavoriteMoviesListView.State
-        if fetchedResultsController.fetchedObjects?.count == 0 {
-            nextViewState = .empty
-        } else {
-            nextViewState = .ready
-        }
-
-        favoriteMoviesListView.viewState = nextViewState
+    func shouldChangeViewState(to newState: FavoriteMoviesListViewModel.State) {
+        favoriteMoviesListView.isEmptyState = newState == .empty
     }
 
 }
@@ -62,13 +43,13 @@ class FavoriteMoviesListViewController: UIViewController {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension FavoriteMoviesListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+        return viewModel.favoritesList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as FavoriteMovieTableViewCell
 
-        let favorite = fetchedResultsController.object(at: indexPath)
+        let favorite = viewModel.favorite(at: indexPath)
         cell.setup(favorite: favorite)
 
         return cell
@@ -86,7 +67,7 @@ extension FavoriteMoviesListViewController: UITableViewDelegate, UITableViewData
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        let favorite = fetchedResultsController.object(at: indexPath)
+        let favorite = viewModel.favorite(at: indexPath)
         let actionTitle = "Remover favorito"
         let unfavoriteAction = UIContextualAction(style: .destructive, title: actionTitle) { (_, _, completionHandler) in
             CoreDataStore.delete(favorite)
@@ -95,21 +76,5 @@ extension FavoriteMoviesListViewController: UITableViewDelegate, UITableViewData
         let configuration = UISwipeActionsConfiguration(actions: [unfavoriteAction])
 
         return configuration
-    }
-}
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension FavoriteMoviesListViewController: NSFetchedResultsControllerDelegate {
-    func controller(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-        didChange anObject: Any,
-        at indexPath: IndexPath?,
-        for type: NSFetchedResultsChangeType,
-        newIndexPath: IndexPath?
-    ) {
-        if type == .delete, let indexPath = indexPath {
-            favoriteMoviesListView.tableView.deleteRows(at: [indexPath], with: .fade)
-            updateViewState()
-        }
     }
 }

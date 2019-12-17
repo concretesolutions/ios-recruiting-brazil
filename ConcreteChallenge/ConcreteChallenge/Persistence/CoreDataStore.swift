@@ -29,6 +29,20 @@ class CoreDataStore {
         saveContext()
     }
 
+    static func fetch<T>(_ request: NSFetchRequest<T>) -> [T] {
+        do {
+            let list = try persistentContainer.viewContext.fetch(request)
+            return list
+        } catch {
+            print(error)
+            return [T]()
+        }
+    }
+
+    static func findFirst<T>(_ request: NSFetchRequest<T>) -> T? {
+        return fetch(request).first
+    }
+
     static func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
