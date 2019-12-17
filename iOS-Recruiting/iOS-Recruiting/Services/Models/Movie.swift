@@ -30,7 +30,11 @@ class MovieResult: Mappable {
 class Movie: Mappable {
     
     var title: String?
-    var isFavourite: Bool?
+    var isFavourite: Bool? {
+        let cookieName = CookieName.movie.movieNameId(id: self.id ?? 0)
+        
+        return Cookie.shared.get(cookieName) != nil
+    }
     var poster_path: String?
     var id: Int?
     var original_title: String?

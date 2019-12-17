@@ -19,6 +19,12 @@ class Cookie {
         return sorted.last
     }
     
+    internal func getAll(_ name: String) -> [HTTPCookie]? {
+        let cookies = HTTPCookieStorage.shared.cookies?.filter { $0.name.contains(name) } ?? []
+        let sorted = cookies.sorted { $0.expiresDate ?? Date() < $1.expiresDate ?? Date() }
+        return sorted
+    }
+    
     internal func set(_ name: String, values: [String : Any], expires: Date) {
         let JSON = values.toJSONString() ?? ""
         let domain = Bundle.main.bundleIdentifier ?? ""

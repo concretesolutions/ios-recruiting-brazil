@@ -53,6 +53,22 @@ class MovieDetailsVC: UIViewController {
 
 }
 
+extension MovieDetailsVC : MovieHeaderDelegate {
+    func setFavourite(movie: Movie?) {
+        let cookieName = CookieName.movie.movieNameId(id: movie?.id ?? 0)
+        if Cookie.shared.get(cookieName) != nil {
+            Cookie.shared.delete(cookieName)
+        } else {
+            let movie = movie?.toJSON() ?? [:]
+            
+            let newDate = Calendar.current.date(byAdding: .month, value: 120, to: Date())
+
+            Cookie.shared.set(cookieName, values: movie, expires: newDate ?? Date())
+        }
+        self.tableView.reloadRows(at: [IndexPath(item: 0, section: 0)], with: .automatic)
+    }
+}
+
 extension MovieDetailsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,6 +81,7 @@ extension MovieDetailsVC: UITableViewDataSource {
         case 0:
             let cell: MovieMainHeaderCell = tableView.dequeue(for: indexPath)
             cell.configure(self.viewModel.movie)
+            cell.delegate = self
             return cell
         case 1:
             let cell: MovieTextCell = tableView.dequeue(for: indexPath)

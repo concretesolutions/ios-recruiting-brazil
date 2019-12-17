@@ -19,3 +19,12 @@ enum StoryboardType: String {
         return self.rawValue.capitalized
     }
 }
+
+enum CookieName: String {
+    case movie = "cookie_movie"
+
+    internal func movieNameId(id: Int) -> String {
+        return "\(self.rawValue)_\(id)"
+    }
+
+}
