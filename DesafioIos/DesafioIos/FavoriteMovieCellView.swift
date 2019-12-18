@@ -16,15 +16,15 @@ class FavoriteMovieCellView: UITableViewCell {
     }
     let movieImage:UIImageView = {
         let view = UIImageView(frame: .zero)
-        view.backgroundColor = .red
         view.contentMode = .scaleToFill
-        view.image = #imageLiteral(resourceName: "favorite_gray_icon")
+        //view.image = #imageLiteral(resourceName: "favorite_gray_icon")
         return view
     }()
     let movieName:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "thor"
         view.font = UIFont(name: "Helvetica-Bold", size: 25.0)
+        //view.numberOfLines = 3
         return view
     }()
     let movieYear:UILabel = {
@@ -35,8 +35,9 @@ class FavoriteMovieCellView: UITableViewCell {
     }()
     lazy var containerMovieNameAndMovieYear:UIStackView = {
         let stack = UIStackView(frame: .zero)
-        stack.axis = .horizontal
-        stack.distribution = .fillProportionally
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -69,7 +70,7 @@ class FavoriteMovieCellView: UITableViewCell {
     }
     func updateUI(){
         if let movie = self.movie{
-            movieImage.loadImageMovie(movie.backdropPath, width: 500)
+            movieImage.loadImageMovie(movie.backdropPath, width: 200)
             movieName.text = movie.title
             movieYear.text = formateYear(date:movie.releaseDate)
             movieDescription.text = movie.overview
@@ -87,19 +88,20 @@ extension FavoriteMovieCellView:CodeView {
     
     func setupConstraints() {
         movieImage.snp.makeConstraints { (make) in
-            make.top.left.bottom.equalToSuperview()
-            make.right.equalToSuperview().multipliedBy(0.3)
+            make.left.top.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview().inset(8)
+            make.width.equalToSuperview().multipliedBy(0.5)
         }
         containerMovieNameAndMovieYear.snp.makeConstraints { (make) in
-            make.left.equalTo(movieImage.snp.right)
-            make.top.right.equalToSuperview()
+            make.left.equalTo(movieImage.snp.right).offset(8)
+            make.top.right.equalToSuperview().inset(8)
         }
         movieDescription.snp.makeConstraints { (make) in
-            make.left.equalTo(movieImage.snp.right).offset(5)
+            make.left.equalTo(movieImage.snp.right).offset(8)
             make.right.equalToSuperview()
-            make.top.equalTo(containerMovieNameAndMovieYear.snp.bottom)
+            make.top.equalTo(containerMovieNameAndMovieYear.snp.bottom).offset(8)
         }
-        
+
     }
     
     func setupAdditionalConfiguration() {

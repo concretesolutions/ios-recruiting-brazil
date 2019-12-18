@@ -35,9 +35,9 @@ class DetailMovieView: UIView {
     lazy var favoriteButton:UIButton = {
         let view = UIButton(frame: .zero)
         if(movieIsfavorite(by: self.movie.id)){
-            view.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+            view.setBackgroundImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
         }else{
-            view.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+            view.setBackgroundImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
         }
         view.addTarget(DetailMovieController(), action: #selector(DetailMovieController.favoriteMovie(sender:)), for: .touchDown)
         return view
