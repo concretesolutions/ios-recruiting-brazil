@@ -11,13 +11,14 @@ import UIKit
 class PopularMoviesListView: UIView {
 
     enum State {
-        case loading, ready, error, fetchingContent
+        case loading, ready, error, fetchingContent, empty
     }
 
     var viewState: State {
         didSet {
             collectionView.isHidden = true
             errorLabel.isHidden = true
+            errorImageView.isHidden = true
             loadingActivityIndicator.isHidden = true
             loadingActivityIndicator.stopAnimating()
 
@@ -29,6 +30,11 @@ class PopularMoviesListView: UIView {
                 collectionView.isHidden = false
             case .error:
                 errorLabel.isHidden = false
+                errorLabel.text = "Um erro ocorreu. Por favor, tente novamente."
+            case .empty:
+                errorLabel.isHidden = false
+                errorImageView.isHidden = false
+                errorLabel.text = "Sua busca não resultou em nenhum resultado"
             }
         }
     }
@@ -49,13 +55,20 @@ class PopularMoviesListView: UIView {
         return activityIndicator
     }()
 
+    let errorImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "search_icon")
+
+        return imageView
+    }()
+
     let errorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
-        label.text = "Um erro ocorreu. Por favor, tente novamente."
 
         return label
     }()
@@ -66,6 +79,7 @@ class PopularMoviesListView: UIView {
         backgroundColor = .white
 
         addSubview(errorLabel)
+        addSubview(errorImageView)
         addSubview(loadingActivityIndicator)
         addSubview(collectionView)
 
@@ -91,8 +105,13 @@ class PopularMoviesListView: UIView {
         ])
 
         NSLayoutConstraint.activate([
-            errorLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            errorImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
+            errorImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            errorImageView.heightAnchor.constraint(equalToConstant: 100),
+            errorImageView.widthAnchor.constraint(equalToConstant: 100),
+
+            errorLabel.centerYAnchor.constraint(equalTo: errorImageView.bottomAnchor, constant: 20),
+            errorLabel.centerXAnchor.constraint(equalTo: errorImageView.centerXAnchor),
             errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         ])
