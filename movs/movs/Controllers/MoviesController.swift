@@ -77,7 +77,6 @@ class MoviesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .always
-//        self.collectionState = .loading
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -74,6 +74,9 @@ class MovieCell: UICollectionViewCell {
                     self.posterImage.image = image
                 }
             }
+        } else {
+            movie.posterImage = UIImage(named: "PosterUnavailabe")
+            self.posterImage.image = movie.posterImage
         }
     }
     

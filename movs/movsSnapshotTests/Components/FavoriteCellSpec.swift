@@ -15,14 +15,24 @@ import UIKit
 class FavoriteMovieCellSpec: QuickSpec {
     override func spec() {
         describe("FavoriteCell") {
-            var cell: FavoriteMovieCell!
+            var view: FavoriteMovieCell!
+            var movie: Movie!
             
             beforeEach {
-                
+                view = FavoriteMovieCell()
+                view.frame = CGRect(x: 0, y: 0, width: 400, height: 176)
+                let movieDetailDTO = MovieDetailDTO(id: 10,
+                                                    title: "Movie title",
+                                                    releaseDate: "2010-10-10",
+                                                    synopsis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                                    posterPath: nil,
+                                                    genres: [GenreDTO(id: 10,
+                                                                      name: "Fantasy")])
+                movie = Movie(movie: movieDetailDTO)
             }
             
             it("should have a cool layout") {
-                // let view = ...  some view you want to test
+                view.setup(with: movie)
                 expect(view).to(haveValidSnapshot(named: "FavoriteMovieCell"))
             }
         }

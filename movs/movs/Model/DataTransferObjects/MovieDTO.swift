@@ -10,11 +10,11 @@ import Foundation
 
 struct MovieDTO: Codable, Equatable {
     let id: Int
-    let title: String
-    let releaseDate: String
-    let synopsis: String
+    let title: String?
+    let releaseDate: String?
+    let synopsis: String?
     let posterPath: String?
-    let genreIDs: [Int]
+    let genreIDs: [Int]?
 
     enum CodingKeys: String, CodingKey {
         case id, title

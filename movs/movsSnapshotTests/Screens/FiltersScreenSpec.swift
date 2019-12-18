@@ -23,12 +23,12 @@ class FiltersScreenSpec: QuickSpec {
             
             it("should have a filter selected") {
                 // let view = ...  some view you want to test
-                expect(view).to(haveValidSnapshot(named: "MovieCell"))
+//                expect(view).to(haveValidSnapshot(named: "MovieCell"))
             }
             
             it("shouldn't have a filter selected") {
                 // let view = ...  some view you want to test
-                expect(view).to(haveValidSnapshot(named: "MovieCell"))
+//                expect(view).to(haveValidSnapshot(named: "MovieCell"))
             }
         }
     }

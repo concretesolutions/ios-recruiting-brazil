@@ -75,6 +75,7 @@ class FavoriteMovieCell: UITableViewCell {
         self.releaseDate.text = movie.releaseDate
         self.synopsis.text = movie.synopsis
         let dataService = DataService.shared
+        
         if let posterPath =  movie.posterPath {
             dataService.loadPosterImage(with: posterPath) { (image) in
                 movie.posterImage = image
@@ -82,6 +83,9 @@ class FavoriteMovieCell: UITableViewCell {
                     self.posterImage.image = image
                 }
             }
+        } else {
+            movie.posterImage = UIImage(named: "PosterUnavailabe")
+            self.posterImage.image = movie.posterImage
         }
     }
     

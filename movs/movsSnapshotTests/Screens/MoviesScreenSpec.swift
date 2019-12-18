@@ -23,12 +23,12 @@ class MoviesScreenSpec: QuickSpec {
             
             it("should have a cool layout") {
                 // let view = ...  some view you want to test
-                expect(view).to(haveValidSnapshot(named: "FavoriteCell"))
+//                expect(view).to(haveValidSnapshot(named: "FavoriteCell"))
             }
             
             it("should be loading") {
                 // let view = ...  some view you want to test
-                expect(view).to(haveValidSnapshot(named: "MovieCell"))
+//                expect(view).to(haveValidSnapshot(named: "MovieCell"))
             }
             
             it("should be filtered with search and have content") {
