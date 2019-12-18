@@ -13,6 +13,7 @@ class DetailMovieView: UIView {
     lazy var movieImage:UIImageView = {
         let view = UIImageView(frame: .zero)
         view.loadImageMovie(self.movie.backdropPath, width: 500)
+        view.contentMode = .scaleAspectFit
         return view
     }()
     lazy var containerNameMovieLikeButton:UIStackView = {
@@ -34,9 +35,9 @@ class DetailMovieView: UIView {
     lazy var favoriteButton:UIButton = {
         let view = UIButton(frame: .zero)
         if(movieIsfavorite(by: self.movie.id)){
-            view.setBackgroundImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
+            view.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal)
         }else{
-            view.setBackgroundImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+            view.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
         }
         view.addTarget(DetailMovieController(), action: #selector(DetailMovieController.favoriteMovie(sender:)), for: .touchDown)
         return view
@@ -45,31 +46,32 @@ class DetailMovieView: UIView {
     lazy var movieName:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = self.movie.title
-        view.font = UIFont(name: "Times New Roman", size: 25.0)
-        view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.font = UIFont(name: "Helvetica-Bold", size: 25.0)
+        view.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.numberOfLines = 4
         return view
     }()
     lazy var movieYear:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = formateYear(date:self.movie.releaseDate)
-        view.font = UIFont(name: "Times New Roman", size: 25.0)
-        view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.font = UIFont(name: "Helvetica", size: 20.0)
+        view.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return view
     }()
     lazy var movieGenre:UILabel = {
            let view = UILabel(frame: .zero)
-           view.font = UIFont(name: "Times New Roman", size: 25.0)
+           view.font = UIFont(name: "Helvetica", size: 20.0)
            view.text = formatGenres(list: self.movie.genreIDS)
-           view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+           view.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
            return view
     }()
     lazy var movieDescription:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = self.movie.overview
-        view.font = UIFont(name: "Times New Roman", size: 20.0)
-        view.lineBreakMode = .byCharWrapping
+        view.font = UIFont(name: "Helvetica", size: 20.0)
+        view.lineBreakMode = .byTruncatingMiddle
         view.numberOfLines = 5
-        view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.textColor = #colorLiteral(red: 0.5276738405, green: 0.5793740153, blue: 0.6459704638, alpha: 1)
         return view
     }()
     init(movie:Movie) {
@@ -98,10 +100,10 @@ extension DetailMovieView:CodeView{
     
     func setupConstraints() {
         movieImage.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().inset(15)
-            make.top.equalToSuperview().inset(80)
-            make.height.equalToSuperview().multipliedBy(0.4)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.5)
         }
         containerNameMovieLikeButton.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
@@ -110,7 +112,7 @@ extension DetailMovieView:CodeView{
         containerDescriptionMovie.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().inset(15)
-            make.top.equalTo(movieImage.snp.bottom).offset(15)
+            make.top.equalTo(movieImage.snp.bottom).inset(35)
         }
         favoriteButton.snp.makeConstraints { (make) in
             make.width.height.equalTo(25)
@@ -119,6 +121,6 @@ extension DetailMovieView:CodeView{
         
     
     func setupAdditionalConfiguration() {
-        self.backgroundColor = .white
+        self.backgroundColor = #colorLiteral(red: 0.1757613122, green: 0.1862640679, blue: 0.2774662971, alpha: 1)
     }
 }

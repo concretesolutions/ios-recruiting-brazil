@@ -25,14 +25,16 @@ final class MovieCellView: UICollectionViewCell {
     lazy var nameMovie:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = nil
-        view.textColor = .yellow
-        view.textAlignment = .center
+        view.textColor = #colorLiteral(red: 0.8823153377, green: 0.7413565516, blue: 0.3461299241, alpha: 1)
+        view.textAlignment = .left
+        view.numberOfLines = 2
         return view
     }()
     lazy var favoriteButton:UIButton = {
         let view = UIButton(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addTarget(self, action:#selector(favoriteMovie), for: .touchDown)
+        view.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
         return view
     }()
     @objc func favoriteMovie(){
@@ -44,7 +46,7 @@ final class MovieCellView: UICollectionViewCell {
     let container:UIStackView = {
         let stack = UIStackView(frame: .zero)
         stack.axis = .horizontal
-        stack.distribution = .equalSpacing
+        stack.distribution = .fill
         stack.spacing = 8.0
         stack.backgroundColor = .red
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -81,8 +83,13 @@ extension MovieCellView: CodeView {
             make.left.right.bottom.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.3)
         }
+        nameMovie.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(8)
+        }
         favoriteButton.imageView?.snp.makeConstraints({ (make) in
-            make.width.height.equalTo(20)
+            make.height.equalTo(22)
+            make.width.equalTo(20)
+            make.right.equalToSuperview().inset(8)
         })
     }
     

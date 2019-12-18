@@ -24,13 +24,13 @@ class FavoriteMovieCellView: UITableViewCell {
     let movieName:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "thor"
-        view.font = UIFont(name: "Times New Roman", size: 30.0)
+        view.font = UIFont(name: "Helvetica-Bold", size: 25.0)
         return view
     }()
     let movieYear:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "2008"
-        view.font = UIFont(name: "Times New Roman", size: 22.0)
+        view.font = UIFont(name: "Helvetica", size: 20.0)
         return view
     }()
     lazy var containerMovieNameAndMovieYear:UIStackView = {
@@ -43,8 +43,8 @@ class FavoriteMovieCellView: UITableViewCell {
     let movieDescription:UILabel = {
         let view = UILabel(frame: .zero)
         view.text = "foi o deus nórdico do trovão (por isto representava a força da natureza), talvez o mais popular deus da mitologia nórdica. Ele tinha um martelo chamado Mjolnir (o destruidor), feito por anões das cavernas subterrâneas, com o qual dominava o trovão."
-        view.font = UIFont(name: "Times New Roman", size: 15.0)
-        view.lineBreakMode = .byCharWrapping
+        view.font = UIFont(name: "Helvetica", size: 15.0)
+        view.lineBreakMode = .byTruncatingMiddle
         view.numberOfLines = 3
         return view
     }()
@@ -99,6 +99,7 @@ extension FavoriteMovieCellView:CodeView {
             make.right.equalToSuperview()
             make.top.equalTo(containerMovieNameAndMovieYear.snp.bottom)
         }
+        
     }
     
     func setupAdditionalConfiguration() {

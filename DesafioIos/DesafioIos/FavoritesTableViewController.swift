@@ -18,7 +18,7 @@ final class FavoritesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(FavoriteMovieCellView.self, forCellReuseIdentifier: cellId)
-        self.tableView.backgroundColor = #colorLiteral(red: 0.08962006122, green: 0.1053769067, blue: 0.1344628036, alpha: 1)
+        self.tableView.backgroundColor = #colorLiteral(red: 0.5276738405, green: 0.5793740153, blue: 0.6459704638, alpha: 1)
 
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
