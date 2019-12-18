@@ -54,8 +54,8 @@ class StatusView: UIView {
         }
         if self.state == .dontConnection{
             self.removeSpinner()
-            descriptionScreen = "don't connection"
-            self.image = #imageLiteral(resourceName: "no-wifi")
+            descriptionScreen = "erro!"
+            self.image = #imageLiteral(resourceName: "error")
         }
         else {
             self.removeSpinner()
