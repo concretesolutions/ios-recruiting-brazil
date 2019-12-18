@@ -25,7 +25,7 @@ class StatusView: UIView {
     }()
     lazy var textDescriptionProblem:UILabel = {
         let view = UILabel(frame: .zero)
-        view.font = UIFont(name: "Times New Roman", size: 32)
+        view.font = UIFont(name: "Helvetica", size: 32.0)
         view.text = self.descriptionScreen
         view.numberOfLines = 10
         view.textAlignment = .center
@@ -49,17 +49,13 @@ class StatusView: UIView {
     func upadateUI(){
         if self.state == .sending {
             DispatchQueue.main.async {
-                self.imageDescriptionProblem.image = #imageLiteral(resourceName: "FilterIcon")
-                self.textDescriptionProblem.text = "carregando"
                 self.showSpinner()
             }
         }
         if self.state == .dontConnection{
-            DispatchQueue.main.async {
-                self.imageDescriptionProblem.image = #imageLiteral(resourceName: "list_icon")
-                self.textDescriptionProblem.text = "sem concetion"
-                self.removeSpinner()
-            }
+            self.removeSpinner()
+            descriptionScreen = "don't connection"
+            self.image = #imageLiteral(resourceName: "no-wifi")
         }
         else {
             self.removeSpinner()

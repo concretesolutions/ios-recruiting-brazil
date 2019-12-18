@@ -13,13 +13,14 @@ class MoviesGridController: UIViewController , SendDataApi {
         didSet{
             DispatchQueue.main.async {
                 self.collectionViewController.movie = self.moviesData
-                self.collectionViewController.collectionView.reloadData()
+                //self.collectionViewController.collectionView.reloadData()
             }
         }
     }
     let maneger = ManegerApiRequest()
     let collectionViewController = CollectionMoviesGridController(collectionViewLayout: UICollectionViewFlowLayout())
-    let stateView = StatusView(state: .sending)
+    let stateViewLoading = StatusView(state: .sending)
+    let stateViewDontConnection = StatusView(state: .dontConnection)
     override func loadView() {
         self.view = UIView(frame: UIScreen.main.bounds)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1757613122, green: 0.1862640679, blue: 0.2774662971, alpha: 1)
@@ -34,7 +35,8 @@ class MoviesGridController: UIViewController , SendDataApi {
         setupViews()
     }
     func setupViews(){
-        self.view.addSubview(stateView)
+        self.view.addSubview(stateViewDontConnection)
+        self.view.addSubview(stateViewLoading)
     }
     func makeSearchController(){
         let searchController = UISearchController(nibName: nil, bundle: nil)
@@ -55,29 +57,32 @@ class MoviesGridController: UIViewController , SendDataApi {
         if status == .sending {
             DispatchQueue.main.async {
                 self.collectionViewController.collectionView.isHidden = true
-                self.stateView.isHidden = false
-                self.stateView.state = status
+                self.stateViewDontConnection.isHidden = true
+                self.stateViewLoading.isHidden = false
+                self.stateViewLoading.state = status
             }
             
         }
         if status == .finish{
             DispatchQueue.main.async {
                 self.collectionViewController.collectionView.isHidden = false
-                self.stateView.isHidden = true
+                self.stateViewLoading.isHidden = true
+                self.stateViewDontConnection.isHidden = true
+                self.view.bringSubviewToFront(self.collectionViewController.collectionView)
             }
         }
         if status == .dontConnection{
             DispatchQueue.main.async {
                 self.collectionViewController.collectionView.isHidden = true
-                self.stateView.isHidden = false
-                self.stateView.state = .dontConnection
+                self.stateViewLoading.isHidden = true
+                self.stateViewDontConnection.isHidden = false
+                self.stateViewDontConnection.state = .dontConnection
+                print("erro da internet")
             }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.collectionViewController.collectionView.reloadData()
-        }
+        collectionViewController.collectionView.reloadData()
     }
     func setupCollectionViewController(){
         self.addChild(collectionViewController)

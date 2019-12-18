@@ -90,13 +90,13 @@ final class ManegerApiRequest{
                 }
                 else{
                     self.delegate?.sendStatus(status: .dontConnection)
-                    print("error")
+                    print("error1")
                 }
             }
             catch{
                 print(error.localizedDescription)
-                
-                print("error")
+                self.delegate?.sendStatus(status: .dontConnection)
+                print("error2")
             }
         }.resume()
     }
