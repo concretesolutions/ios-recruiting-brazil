@@ -1,5 +1,5 @@
 //
-//  MovieViewController.swift
+//  MovieDetailsViewController.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 04/12/19.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MovieViewController: UIViewController {
+class MovieDetailsViewController: UIViewController {
 
-    private var viewModel: MovieViewModel
+    private var viewModel: MovieDetailsViewModel
     private let screen = MovieDetailsView()
 
-    required init(withMovieViewModel viewModel: MovieViewModel) {
+    required init(withMovieViewModel viewModel: MovieDetailsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

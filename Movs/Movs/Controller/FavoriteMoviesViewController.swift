@@ -1,5 +1,5 @@
 //
-//  FavoritesViewController.swift
+//  FavoriteMoviesViewController.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 01/12/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class FavoriteMoviesViewController: UIViewController {
 
     private let viewModel = FavoriteMoviesViewModel()
     private let screen = FavoriteMoviesView()
@@ -32,7 +32,7 @@ class FavoritesViewController: UIViewController {
 
 }
 
-extension FavoritesViewController: UISearchResultsUpdating {
+extension FavoriteMoviesViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
@@ -43,7 +43,7 @@ extension FavoritesViewController: UISearchResultsUpdating {
 
 }
 
-extension FavoritesViewController: UITableViewDataSource {
+extension FavoriteMoviesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10

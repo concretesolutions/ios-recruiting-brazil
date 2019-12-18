@@ -1,5 +1,5 @@
 //
-//  MoviesViewController.swift
+//  PopularMoviesViewController.swift
 //  Movs
 //
 //  Created by Lucca Ferreira on 01/12/19.
@@ -9,12 +9,12 @@
 import UIKit
 import Combine
 
-class MoviesViewController: UIViewController {
+class PopularMoviesViewController: UIViewController {
 
     private let viewModel = PopularMoviesViewModel()
     private let screen = PopularMoviesView()
 
-    var cancellables: [AnyCancellable] = []
+    private var countCnacellable: AnyCancellable?
 
     override func loadView() {
         self.view = screen
@@ -28,6 +28,7 @@ class MoviesViewController: UIViewController {
         // Sets SearchController for this ViewController
         self.navigationItem.searchController = SearchController(withPlaceholder: "Search", searchResultsUpdater: self)
         self.definesPresentationContext = true
+        self.navigationItem.searchController?.delegate = self
 
         // MARK: Sets pull to refresh - Under construction
         // let refreshControl = UIRefreshControl()
@@ -41,28 +42,32 @@ class MoviesViewController: UIViewController {
     }
 
     func setCombine() {
-        let cancellable = viewModel.$count
+        self.countCnacellable = self.viewModel.$count
             .receive(on: RunLoop.main)
             .sink { _ in
                 self.screen.collectionView.performBatchUpdates({
                     self.screen.collectionView.reloadSections(IndexSet(integer: 0))
                 })
-
-        }
-        self.cancellables.append(cancellable)
+            }
     }
     
 }
 
-extension MoviesViewController: UISearchResultsUpdating {
+extension PopularMoviesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchTerm = searchController.searchBar.text else { return }
+        self.viewModel.isSearching = true
+        self.viewModel.search(formTerm: searchTerm)
+    }
+
+    func didDismissSearchController(_ searchController: UISearchController) {
+        self.viewModel.isSearching = false
     }
 
 }
 
-extension MoviesViewController: UICollectionViewDataSource {
+extension PopularMoviesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.count
@@ -77,7 +82,7 @@ extension MoviesViewController: UICollectionViewDataSource {
 
 }
 
-extension MoviesViewController: UICollectionViewDataSourcePrefetching {
+extension PopularMoviesViewController: UICollectionViewDataSourcePrefetching {
 
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         guard let indexPath = indexPaths.first else { return }

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Combine
+import UIKit
 
 class Movie {
 
@@ -17,6 +19,9 @@ class Movie {
     var title: String
     var posterPath: String?
     @Published var isLiked: Bool = false
+    @Published var posterImage: UIImage = UIImage(named: "imagePlaceholder")!
+
+    private var posterImageCancellable: AnyCancellable?
 
     init(withMovie movie: MovieDTO) {
         self.id = movie.id
@@ -26,6 +31,7 @@ class Movie {
         self.title = movie.title
         self.posterPath = movie.posterPath
         self.isLiked = false
+        self.setCombine()
     }
 
     init(withMovieDetails movie: MovieWrapperDTO) {
@@ -36,6 +42,12 @@ class Movie {
         self.title = movie.title
         self.posterPath = movie.posterPath
         self.isLiked = false
+        self.setCombine()
+
+    }
+
+    private func setCombine() {
+        self.posterImageCancellable = MovsServiceAPI.getMoviePoster(fromPath: self.posterPath).assign(to: \.posterImage, on: self)
     }
 
 }

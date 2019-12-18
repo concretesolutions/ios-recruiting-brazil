@@ -10,15 +10,15 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
-    private let moviesViewController: MoviesViewController = {
-        let moviesViewController = MoviesViewController()
+    private let moviesViewController: PopularMoviesViewController = {
+        let moviesViewController = PopularMoviesViewController()
         moviesViewController.title = "Movs"
         moviesViewController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "film"), tag: 0)
         return moviesViewController
     }()
 
-    private let favoritesViewController: FavoritesViewController = {
-        let favoritesViewController = FavoritesViewController()
+    private let favoritesViewController: FavoriteMoviesViewController = {
+        let favoritesViewController = FavoriteMoviesViewController()
         favoritesViewController.title = "Favorites"
         favoritesViewController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), tag: 1)
         return favoritesViewController

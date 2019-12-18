@@ -31,7 +31,7 @@ class PopularMoviesCellViewModel {
 
     private func setCombine() {
         self.isLikedCancellable = self.movie.$isLiked.assign(to: \.isLiked, on: self)
-        self.posterImageCancellable = MovsServiceAPI.getMoviePoster(fromPath: movie.posterPath).assign(to: \.posterImage, on: self)
+        self.posterImageCancellable = self.movie.$posterImage.assign(to: \.posterImage, on: self)
     }
 
 }

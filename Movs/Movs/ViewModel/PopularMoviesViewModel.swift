@@ -13,31 +13,54 @@ class PopularMoviesViewModel {
 
     @Published var count = 0
 
-    public let movies = CurrentValueSubject<[Movie], MovieDatabaseServiceError>([])
+    var movies: [Movie] {
+        return self.isSearching ? self.filteredMovies : self.popularMovies
+    }
 
-    private var currentPopularMoviesPage: Int = 1
+    private var filteredMovies: [Movie] = [] {
+        didSet {
+            self.count = self.filteredMovies.count
+        }
+    }
+    private var popularMovies: [Movie] = [] {
+        didSet {
+            self.count = self.popularMovies.count
+        }
+    }
 
-    var popularMoviesCancellable: AnyCancellable?
+    private var currentPage: Int = 1
+    private var moviesCancellable: AnyCancellable?
+
+    var isSearching: Bool = false {
+        didSet {
+            self.count = self.movies.count
+        }
+    }
 
     init() {
         self.getMovies()
     }
 
     public func getMovies() {
-        let cancellable = MovsServiceAPI.popularMovies(fromPage: self.currentPopularMoviesPage)
+        self.moviesCancellable = MovsServiceAPI.popularMovies(fromPage: self.currentPage)
             .assertNoFailure("Deu ruim pegando filmes populares")
             .sink { (movies) in
-                var totalMovies = self.movies.value
-                totalMovies.append(contentsOf: movies)
-                self.movies.send(totalMovies)
-                self.count = totalMovies.count
-                self.currentPopularMoviesPage += 1
+                self.popularMovies += movies
+                self.currentPage += 1
         }
-        self.popularMoviesCancellable = cancellable
+    }
+
+    func search(formTerm term: String) {
+        if term.isEmpty {
+            self.filteredMovies = self.popularMovies
+        } else {
+            self.filteredMovies = self.popularMovies.filter { $0.title.lowercased().contains(term.lowercased()) }
+        }
+        self.count = self.filteredMovies.count
     }
 
     func viewModel(forCellAt indexPath: IndexPath) -> PopularMoviesCellViewModel {
-        let viewModel = PopularMoviesCellViewModel(withMovie: self.movies.value[indexPath.row])
+        let viewModel = PopularMoviesCellViewModel(withMovie: self.movies[indexPath.row])
         return viewModel
     }
 
