@@ -18,6 +18,7 @@ final class FavoritesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(FavoriteMovieCellView.self, forCellReuseIdentifier: cellId)
+        self.tableView.backgroundColor = #colorLiteral(red: 0.08962006122, green: 0.1053769067, blue: 0.1344628036, alpha: 1)
 
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,6 +33,9 @@ final class FavoritesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! FavoriteMovieCellView
         cell.movie = movies[indexPath.row]
         return cell
+    }
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
          if editingStyle == .delete {

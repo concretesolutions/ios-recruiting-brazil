@@ -17,7 +17,7 @@ class FavoriteMoviesController: UIViewController ,UISearchResultsUpdating{
     var tableViewController = FavoritesTableViewController()
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.08962006122, green: 0.1053769067, blue: 0.1344628036, alpha: 1)
         self.view = view
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1757613122, green: 0.1862640679, blue: 0.2774662971, alpha: 1)
        
