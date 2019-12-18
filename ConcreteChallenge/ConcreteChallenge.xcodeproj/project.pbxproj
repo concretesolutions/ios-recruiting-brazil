@@ -16,6 +16,7 @@
 		27968BEA23A9216B00CC4B5A /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27968BE923A9216B00CC4B5A /* MovieDetailsViewModel.swift */; };
 		27968BED23AA3E4200CC4B5A /* UINavigationController+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27968BEC23AA3E4200CC4B5A /* UINavigationController+Configuration.swift */; };
 		27968BEF23AA421000CC4B5A /* UITabBarController+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27968BEE23AA421000CC4B5A /* UITabBarController+Configuration.swift */; };
+		27968BF823AA583C00CC4B5A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27968BF723AA583C00CC4B5A /* Default-568h@2x.png */; };
 		27EFBE8723A3DC760021E527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EFBE8623A3DC760021E527 /* Coordinator.swift */; };
 		27EFBE8923A3DCEC0021E527 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EFBE8823A3DCEC0021E527 /* AppCoordinator.swift */; };
 		27F2B19023A56DA9002CAB94 /* PopularMoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F2B18F23A56DA9002CAB94 /* PopularMoviesListViewController.swift */; };
@@ -63,6 +64,7 @@
 		27968BE923A9216B00CC4B5A /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		27968BEC23AA3E4200CC4B5A /* UINavigationController+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Configuration.swift"; sourceTree = "<group>"; };
 		27968BEE23AA421000CC4B5A /* UITabBarController+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Configuration.swift"; sourceTree = "<group>"; };
+		27968BF723AA583C00CC4B5A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		27EFBE8623A3DC760021E527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		27EFBE8823A3DCEC0021E527 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		27F2B18F23A56DA9002CAB94 /* PopularMoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesListViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		2768C89323A115C9000B8B62 = {
 			isa = PBXGroup;
 			children = (
+				27968BF723AA583C00CC4B5A /* Default-568h@2x.png */,
 				2768C89E23A115C9000B8B62 /* ConcreteChallenge */,
 				27F2B19E23A56ECD002CAB94 /* ConcreteChallengeTests */,
 				2768C89D23A115C9000B8B62 /* Products */,
@@ -143,11 +146,8 @@
 				270472DF23A8575000341931 /* Persistence */,
 				27F2B19823A56E9A002CAB94 /* Network */,
 				27F2B18D23A56D7C002CAB94 /* UI */,
-				2768C89F23A115C9000B8B62 /* AppDelegate.swift */,
-				27EFBE8823A3DCEC0021E527 /* AppCoordinator.swift */,
-				2768C8AB23A115CD000B8B62 /* Assets.xcassets */,
-				2768C8AD23A115CD000B8B62 /* LaunchScreen.storyboard */,
-				2768C8B023A115CD000B8B62 /* Info.plist */,
+				27968BF423AA57F800CC4B5A /* Resources */,
+				27968BF623AA580C00CC4B5A /* SupportingFiles */,
 			);
 			path = ConcreteChallenge;
 			sourceTree = "<group>";
@@ -161,9 +161,36 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		27968BF323AA57D600CC4B5A /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				27EFBE8823A3DCEC0021E527 /* AppCoordinator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		27968BF423AA57F800CC4B5A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2768C8AB23A115CD000B8B62 /* Assets.xcassets */,
+				2768C8AD23A115CD000B8B62 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		27968BF623AA580C00CC4B5A /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2768C89F23A115C9000B8B62 /* AppDelegate.swift */,
+				2768C8B023A115CD000B8B62 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		27EFBE8523A3DC680021E527 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				27968BF323AA57D600CC4B5A /* Navigation */,
 				27968BEB23AA3E2800CC4B5A /* Extensions */,
 				27F2B1A823A56F57002CAB94 /* Protocols */,
 			);
@@ -401,6 +428,7 @@
 			files = (
 				2768C8AF23A115CD000B8B62 /* LaunchScreen.storyboard in Resources */,
 				2768C8AC23A115CD000B8B62 /* Assets.xcassets in Resources */,
+				27968BF823AA583C00CC4B5A /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +628,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y93JMM3H2T;
-				INFOPLIST_FILE = ConcreteChallenge/Info.plist;
+				INFOPLIST_FILE = ConcreteChallenge/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -619,7 +647,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y93JMM3H2T;
-				INFOPLIST_FILE = ConcreteChallenge/Info.plist;
+				INFOPLIST_FILE = ConcreteChallenge/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
