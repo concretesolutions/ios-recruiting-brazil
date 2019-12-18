@@ -22,8 +22,9 @@ class MoviesGridController: UIViewController , SendDataApi {
     let stateView = StatusView(state: .sending)
     override func loadView() {
         self.view = UIView(frame: UIScreen.main.bounds)
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
-        self.title = "Movies"
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1757613122, green: 0.1862640679, blue: 0.2774662971, alpha: 1)
+        self.navigationItem.title = "Movies"
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.8823153377, green: 0.7413565516, blue: 0.3461299241, alpha: 1)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

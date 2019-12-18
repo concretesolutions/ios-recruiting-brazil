@@ -9,15 +9,18 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-    
+    let movieControllerGrid = UINavigationController(rootViewController: MoviesGridController())
+     let favoriteMovieController = UINavigationController(rootViewController: FavoriteMoviesController())
     override func viewDidLoad() {
         super.viewDidLoad()
-        let movieController = UINavigationController(rootViewController: MoviesGridController())
-        movieController.tabBarItem =
+        movieControllerGrid.tabBarItem =
             UITabBarItem(title: "Movies", image: #imageLiteral(resourceName: "list_icon"), selectedImage: #imageLiteral(resourceName: "list_icon"))
-        let favoriteMovieController = UINavigationController(rootViewController: FavoriteMoviesController())
+        movieControllerGrid.navigationBar.barStyle = .black
+
         favoriteMovieController.tabBarItem = UITabBarItem(title: "Favorites", image: #imageLiteral(resourceName: "favorite_empty_icon"), selectedImage: #imageLiteral(resourceName: "favorite_empty_icon"))
-        self.viewControllers = [movieController,favoriteMovieController]
+        favoriteMovieController.navigationBar.barStyle = .default
+        self.viewControllers = [movieControllerGrid,favoriteMovieController]
         
     }
+   
 }

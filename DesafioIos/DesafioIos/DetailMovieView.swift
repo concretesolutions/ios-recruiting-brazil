@@ -46,18 +46,21 @@ class DetailMovieView: UIView {
         let view = UILabel(frame: .zero)
         view.text = self.movie.title
         view.font = UIFont(name: "Times New Roman", size: 25.0)
+        view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return view
     }()
     lazy var movieYear:UILabel = {
-           let view = UILabel(frame: .zero)
-           view.text = formateYear(date:self.movie.releaseDate)
-           view.font = UIFont(name: "Times New Roman", size: 25.0)
-           return view
+        let view = UILabel(frame: .zero)
+        view.text = formateYear(date:self.movie.releaseDate)
+        view.font = UIFont(name: "Times New Roman", size: 25.0)
+        view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        return view
     }()
     lazy var movieGenre:UILabel = {
            let view = UILabel(frame: .zero)
            view.font = UIFont(name: "Times New Roman", size: 25.0)
            view.text = formatGenres(list: self.movie.genreIDS)
+           view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
            return view
     }()
     lazy var movieDescription:UILabel = {
@@ -66,6 +69,7 @@ class DetailMovieView: UIView {
         view.font = UIFont(name: "Times New Roman", size: 20.0)
         view.lineBreakMode = .byCharWrapping
         view.numberOfLines = 5
+        view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return view
     }()
     init(movie:Movie) {

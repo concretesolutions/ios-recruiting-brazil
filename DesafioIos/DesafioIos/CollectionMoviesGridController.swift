@@ -26,7 +26,7 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(MovieCellView.self, forCellWithReuseIdentifier:reuseIdentifier)
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = #colorLiteral(red: 0.08962006122, green: 0.1053769067, blue: 0.1344628036, alpha: 1)
         self.collectionView.addSubview(statusView)
         statusView.isHidden = true
     }
