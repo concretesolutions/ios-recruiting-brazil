@@ -13,6 +13,8 @@ class FavoriteMoviesListViewController: UIViewController {
     private let favoriteMoviesListView = FavoriteMoviesListView()
     private let viewModel = FavoriteMoviesListViewModel()
 
+    weak var coordinator: FavoriteMoviesTabCoordinator?
+
     override func loadView() {
         view = favoriteMoviesListView
     }
@@ -28,6 +30,13 @@ class FavoriteMoviesListViewController: UIViewController {
         // Bind view model
         viewModel.didStateChange = shouldChangeViewState(to:)
         viewModel.didDeleteItem = shouldRemoveItem(at:)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        viewModel.performFetch()
+        favoriteMoviesListView.tableView.reloadData()
     }
 
     func shouldRemoveItem(at indexPath: IndexPath) {
@@ -59,6 +68,11 @@ extension FavoriteMoviesListViewController: UITableViewDelegate, UITableViewData
         return UITableView.automaticDimension
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favoritedMovie = viewModel.favorite(at: indexPath)
+        coordinator?.showDetails(of: favoritedMovie)
+    }
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -78,3 +92,4 @@ extension FavoriteMoviesListViewController: UITableViewDelegate, UITableViewData
         return configuration
     }
 }
+

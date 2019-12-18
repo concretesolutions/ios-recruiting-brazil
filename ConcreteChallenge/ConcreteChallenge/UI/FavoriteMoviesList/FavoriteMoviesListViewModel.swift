@@ -43,7 +43,7 @@ class FavoriteMoviesListViewModel: NSObject {
         performFetch()
     }
 
-    private func performFetch() {
+    func performFetch() {
         do {
             try fetchedResultsController.performFetch()
         } catch {

@@ -12,8 +12,8 @@ class MovieDetailsView: UIView {
 
     var isFavorited: Bool = false {
         didSet {
-            let imageName = isFavorited ? "favorite_full_icon" : "favorite_empty_icon"
-            saveFavoriteButton.setImage(UIImage(named: imageName), for: .normal)
+            let imageName = isFavorited ? "favorite_full_icon" : "favorite_gray_icon"
+            favoriteButton.setImage(UIImage(named: imageName), for: .normal)
         }
     }
 
@@ -34,10 +34,10 @@ class MovieDetailsView: UIView {
         return label
     }()
 
-    let saveFavoriteButton: UIButton = {
+    let favoriteButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "favorite_empty_icon"), for: .normal)
+        button.setImage(UIImage(named: "favorite_gray_icon"), for: .normal)
 
         return button
     }()
@@ -60,21 +60,20 @@ class MovieDetailsView: UIView {
         addSubview(posterImageView)
         addSubview(titleLabel)
         addSubview(genreNamesLabel)
-        addSubview(saveFavoriteButton)
+        addSubview(favoriteButton)
 
         buildConstraints()
         aditionalConfiguration()
     }
 
-    func setup(movie: Movie, favoriteAction: @escaping () -> Void) {
-        titleLabel.text = movie.title
-        posterImageView.image = movie.posterImage
-        self.saveFavoriteAction = favoriteAction
-    }
-
-    func updateGenres(with genres: [Genre]) {
-        let names = genres.map({ $0.name })
-        genreNamesLabel.text = names.joined(separator: " | ")
+    func setup(viewModel: MovieDetailsViewModel) {
+        titleLabel.text = viewModel.title
+        posterImageView.image = viewModel.posterImage
+        isFavorited = viewModel.isFavorited
+        favoriteButtonAction = {
+            viewModel.favoriteButtonHandler { self.isFavorited = $0 }
+        }
+        genreNamesLabel.text = viewModel.genreNames.joined(separator: " | ")
     }
 
     required init?(coder: NSCoder) {
@@ -89,26 +88,26 @@ class MovieDetailsView: UIView {
             posterImageView.heightAnchor.constraint(equalToConstant: 300),
 
             titleLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: saveFavoriteButton.leadingAnchor, constant: -10),
+            titleLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -10),
             titleLabel.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor),
 
             genreNamesLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             genreNamesLabel.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor),
             genreNamesLabel.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor),
 
-            saveFavoriteButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            saveFavoriteButton.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor),
-            saveFavoriteButton.heightAnchor.constraint(equalToConstant: 50),
-            saveFavoriteButton.widthAnchor.constraint(equalToConstant: 50)
+            favoriteButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            favoriteButton.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 50),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 
     private func aditionalConfiguration() {
-        saveFavoriteButton.addTarget(self, action: #selector(saveFavoriteButtonTapped(_:)), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
     }
 
-    var saveFavoriteAction: (() -> Void)?
-    @objc func saveFavoriteButtonTapped(_ sender: UIButton) {
-        saveFavoriteAction?()
+    var favoriteButtonAction: (() -> Void)?
+    @objc func favoriteButtonTapped(_ sender: UIButton) {
+        favoriteButtonAction?()
     }
 }

@@ -27,8 +27,8 @@ final class AppCoordinator: NSObject, Coordinator {
         super.init()
 
         self.tabBarController.viewControllers = self.childCoordinators?.map { $0.rootViewController }
-        self.tabBarController.tabBar.isTranslucent = true
         self.tabBarController.delegate = self
+        self.tabBarController.setupStyle()
     }
 
     func start() {

@@ -84,6 +84,7 @@ class PopularMoviesListViewController: UIViewController {
         newFavorite.id = Int64(movie.id)
         newFavorite.overview = movie.overview
         newFavorite.posterImage = movie.posterImage?.jpegData(compressionQuality: 1.0)
+        newFavorite.genreIDs = movie.genreIDs.map({ NSNumber(integerLiteral: $0) })
 
         CoreDataStore.saveContext()
     }

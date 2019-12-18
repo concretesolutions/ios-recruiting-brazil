@@ -22,6 +22,7 @@ final class PopularMoviesTabCoordinator: NSObject, Coordinator {
 
         self.navigationController.tabBarItem = UITabBarItem(
             title: "Filmes populares", image: UIImage(named: "list_icon"), tag: 0)
+        self.navigationController.setupStyle()
     }
 
     func start() {
@@ -32,7 +33,8 @@ final class PopularMoviesTabCoordinator: NSObject, Coordinator {
     }
 
     func showDetails(of movie: Movie) {
-        let vc = MovieDetailsViewController(movie: movie)
+        let viewModel = MovieDetailsViewModel(movie: movie)
+        let vc = MovieDetailsViewController(viewModel: viewModel)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
