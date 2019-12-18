@@ -8,9 +8,15 @@
 
 import Foundation
 
-func formateYear(date:String) -> String{
-    let parts:[String] = date.components(separatedBy: "-")
-    return parts[0]
+func formateYear(date:String?) -> String{
+    if let date = date {
+        let parts:[String] = date.components(separatedBy: "-")
+           return parts[0]
+    }
+    else {
+        return ""
+    }
+   
 }
 func getFavoritesMovies() -> [Movie]{
     let coreDataFavoritesMovies = fetch()

@@ -19,4 +19,19 @@ extension UIImageView{
             }
         }, dest: dest, width: width)
     }
+    private func fetchimage(completion: @escaping (_ results: Data) -> Void,dest:String,width:Int){
+        var url = URL(fileURLWithPath: "https://image.tmdb.org/t/p/w\(width)/")
+        url.appendPathComponent(dest)
+        URLSession.shared.dataTask(with: url){
+            (data,_,_) in
+            do{
+                guard let data = data else {
+                    print("Error fetching the image! 😢")
+                    return
+                }
+                completion(data)
+            }
+        }.resume()
+        
+    }
 }

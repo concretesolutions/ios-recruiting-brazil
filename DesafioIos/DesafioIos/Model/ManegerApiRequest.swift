@@ -132,4 +132,12 @@ final class ManegerApiRequest{
             }
         }.resume()
     }
+    private func creatQuery(json:[String:Any])->[URLQueryItem]{
+        var querys:[URLQueryItem] = []
+        for query in json{
+            querys.append(URLQueryItem(name: query.key, value: query.value as? String))
+        }
+        return querys
+    }
+
 }

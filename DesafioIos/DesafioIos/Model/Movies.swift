@@ -26,7 +26,7 @@ struct Movie: Codable{
     let backdropPath: String
     let genreIDS: [Int]
     let title: String
-    let overview, releaseDate: String
+    let overview, releaseDate: String?
 
     enum CodingKeys: String, CodingKey {
         case id
