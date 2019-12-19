@@ -16,12 +16,12 @@ final class MoviesAPIManager {
     internal let decoder: DTODecoder = DTODecoder()
     internal let session: NetworkSession
     internal var currentPage: Int = 0
-    internal var genres: [GenreDTO] = []
         
     // MARK: - Publishers and Subscribers
     
     @Published var fetchStatus: FetchStatus = .none
     @Published var movies: [MovieDTO] = []
+    @Published var genres: [GenreDTO] = []
     
     // MARK: - Enums
     

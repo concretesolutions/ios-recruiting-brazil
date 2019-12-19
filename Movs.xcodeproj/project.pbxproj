@@ -12,6 +12,8 @@
 		9677E08327C23A5CE4A1E988 /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB6887971B043E9E90DB910 /* Pods_Movs.framework */; };
 		A41F996A23A482AB004B5276 /* MovieDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F996923A482AB004B5276 /* MovieDTOTests.swift */; };
 		A41F996C23A4838E004B5276 /* PopularMoviesDTOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F996B23A4838E004B5276 /* PopularMoviesDTOTests.swift */; };
+		A428738F23AB477C0091B65B /* StorageManager+Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A428738E23AB477C0091B65B /* StorageManager+Factories.swift */; };
+		A428739123AB58B80091B65B /* StorageManager+CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A428739023AB58B80091B65B /* StorageManager+CRUD.swift */; };
 		A4299F322395AD040068B3D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4299F312395AD040068B3D8 /* AppDelegate.swift */; };
 		A4299F342395AD040068B3D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4299F332395AD040068B3D8 /* SceneDelegate.swift */; };
 		A4299F3C2395AD040068B3D8 /* Movs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4299F3A2395AD040068B3D8 /* Movs.xcdatamodeld */; };
@@ -124,6 +126,8 @@
 		9673DE8E82B4DC815DB90DF0 /* Pods-MovsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsUITests.release.xcconfig"; path = "Target Support Files/Pods-MovsUITests/Pods-MovsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A41F996923A482AB004B5276 /* MovieDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTOTests.swift; sourceTree = "<group>"; };
 		A41F996B23A4838E004B5276 /* PopularMoviesDTOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesDTOTests.swift; sourceTree = "<group>"; };
+		A428738E23AB477C0091B65B /* StorageManager+Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageManager+Factories.swift"; sourceTree = "<group>"; };
+		A428739023AB58B80091B65B /* StorageManager+CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageManager+CRUD.swift"; sourceTree = "<group>"; };
 		A4299F2E2395AD040068B3D8 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4299F312395AD040068B3D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4299F332395AD040068B3D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -544,6 +548,8 @@
 			children = (
 				A48D5ECC2396C23000257E88 /* MoviesAPIManager.swift */,
 				A4A5021923A20CC000148CA0 /* StorageManager.swift */,
+				A428739023AB58B80091B65B /* StorageManager+CRUD.swift */,
+				A428738E23AB477C0091B65B /* StorageManager+Factories.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -910,6 +916,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A428738F23AB477C0091B65B /* StorageManager+Factories.swift in Sources */,
 				A4A5021623A20BF000148CA0 /* CoreDataFactory.swift in Sources */,
 				A4A481B823A9CBF1003629B6 /* SearchStatus.swift in Sources */,
 				A4499A04239742BB0037D2C5 /* FavoriteButton.swift in Sources */,
@@ -938,6 +945,7 @@
 				A47AF92D23A75C28003C3A70 /* GenresDetailsTableViewCell.swift in Sources */,
 				A468092823AAF87400D3BA61 /* TranslucidActivityIndicator.swift in Sources */,
 				A48D5ECD2396C23000257E88 /* MoviesAPIManager.swift in Sources */,
+				A428739123AB58B80091B65B /* StorageManager+CRUD.swift in Sources */,
 				A4299F322395AD040068B3D8 /* AppDelegate.swift in Sources */,
 				A467291A239BFBBD00DB657E /* UIImageView.swift in Sources */,
 				A429D15723A808A9008518F4 /* MovieDetailsViewController+UICollectionView.swift in Sources */,

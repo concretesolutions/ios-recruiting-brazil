@@ -11,7 +11,7 @@ import Combine
 
 class PopularMoviesControllerViewModel {
     
-    // MARK: - Data Source
+    // MARK: Data Source
     
     private var dataSource: [MovieDTO] {
         didSet {
@@ -19,25 +19,36 @@ class PopularMoviesControllerViewModel {
         }
     }
     
-    // MARK: - Dependencies
+    // MARK: Dependencies
     
     typealias Dependencies = HasAPIManager & HasStorageManager
     private let dependencies: Dependencies
-    internal let apiManager: MoviesAPIManager
-    internal let storageManager: StorageManager
+    private let apiManager: MoviesAPIManager
+    private let storageManager: StorageManager
     
-    // MARK: - Properties
+    // MARK: Properties
 
     internal let decoder = JSONDecoder()
     weak var detailsPresenter: PopularMoviesCoordinator?
     
-    // MARK: - Publishers and Subscribers
+    // MARK: Outputs
+    
+    var shouldFetchGenres: Bool {
+        return self.apiManager.shouldFetchGenres()
+    }
+    var shouldFetchNextPage: Bool {
+        return self.apiManager.shouldFetchNextPage()
+    }
+    
+    // MARK: Publishers and Subscribers
     
     @Published var numberOfMovies: Int = 0
+    @Published var numberOfFavorites: Int = 0
+    @Published var fetchStatus: MoviesAPIManager.FetchStatus = .none
     @Published var searchStatus: SearchStatus = .none
     private var subscribers: [AnyCancellable?] = []
         
-    // MARK: - Initializers and Deinitializers
+    // MARK: Initializers and Deinitializers
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -46,6 +57,7 @@ class PopularMoviesControllerViewModel {
 
         self.dataSource = self.apiManager.movies
         self.bind(to: dependencies.apiManager)
+        self.bind(to: dependencies.storageManager)
     }
     
     deinit {
@@ -54,7 +66,7 @@ class PopularMoviesControllerViewModel {
         }
     }
     
-    // MARK: - Binding
+    // MARK: Binding
     
     func bind(to apiManager: MoviesAPIManager) {
         self.subscribers.append(apiManager.$movies
@@ -62,12 +74,49 @@ class PopularMoviesControllerViewModel {
                 self.dataSource = fetchedMovies
             })
         )
+        
+        self.subscribers.append(apiManager.$fetchStatus
+            .sink(receiveValue: { status in
+                self.fetchStatus = status
+            })
+        )
     }
     
-    // MARK: - UICollectionView
+    func bind(to storageManager: StorageManager) {
+        self.subscribers.append(storageManager.$favorites
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { fetchedFavorites in
+                self.numberOfFavorites = fetchedFavorites.count
+            })
+        )
+    }
+}
+
+// MARK: - MoviesAPIManager
+
+extension PopularMoviesControllerViewModel {
+    func fetchGenresList() {
+        self.apiManager.fetchGenresList(completion: { completionStatus in
+            if completionStatus == .none {
+                self.apiManager.fetchNextPopularMoviesPage()
+            }
+        })
+    }
     
+    func fetchNextPopularMoviesPage() {
+        self.apiManager.fetchNextPopularMoviesPage()
+    }
+}
+
+// MARK: - UICollectionView
+
+extension PopularMoviesControllerViewModel {
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
         let movie = Movie(movieDTO: self.dataSource[indexPath.row], genres: self.apiManager.genres)
+        if self.storageManager.isMovieStored(movieID: movie.id) {
+            self.storageManager.updateFavoriteMovie(with: movie)
+        }
+        
         return MovieViewModel(movie: movie, dependencies: self.dependencies)
     }
     
@@ -75,9 +124,11 @@ class PopularMoviesControllerViewModel {
         let movie = Movie(movieDTO: self.dataSource[indexPath.row], genres: self.apiManager.genres)
         self.detailsPresenter?.showDetails(movie: movie)
     }
-    
-    // MARK: - UISearchController
-    
+}
+
+// MARK: - UISearchController
+
+extension PopularMoviesControllerViewModel {
     func filterMovies(for title: String) {
         if title.isEmpty {
             self.dataSource = self.apiManager.movies

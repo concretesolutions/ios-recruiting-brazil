@@ -14,6 +14,7 @@ class StorageManager {
     // MARK: - Properties
     
     internal let managedContext: NSManagedObjectContext
+    internal var genres: Set<CDGenre> = Set()
     
     // MARK: - Enums
     
@@ -30,8 +31,10 @@ class StorageManager {
     init(container: NSPersistentContainer) {
         self.managedContext = container.viewContext
         
+        let fetchAllGenres = NSFetchRequest<CDGenre>(entityName: "CDGenre")
         let fetchAllFavorites = NSFetchRequest<CDFavoriteMovie>(entityName: "CDFavoriteMovie")
         do {
+            self.genres = try self.fetch(request: fetchAllGenres)
             self.favorites = try self.fetch(request: fetchAllFavorites)
         } catch {
             fatalError("Failed to fetch all instances of CDFavoriteMovie.")
@@ -61,49 +64,5 @@ class StorageManager {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
-    }
-    
-    // MARK: - Instance Management
-    
-    func isFavorited(movieID: Int) -> Bool {
-        let result = self.favorites.map({ $0.id }).contains(Int64(movieID))
-        return result
-    }
-    
-    func addFavorite(movie: Movie) {
-        guard !self.isFavorited(movieID: movie.id) else {
-            return
-        }
-        
-        do {
-            let entity = try self.createEntity(named: "CDFavoriteMovie")
-            let favoriteMovie = self.createFavoriteMovie(movie: movie, description: entity)
-            self.favorites.insert(favoriteMovie)
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-    
-    func removeFavorite(movieID: Int64) {
-        let objects = self.favorites.filter({ $0.id == movieID })
-        for object in objects {
-            self.managedContext.delete(object)
-            self.favorites.remove(object)
-        }
-    }
-}
-
-extension StorageManager: CoreDataFactory {
-    func createFavoriteMovie(movie: Movie, description: NSEntityDescription) -> CDFavoriteMovie {
-        let instance = CDFavoriteMovie(entity: description, insertInto: self.managedContext)
-        instance.backdropPath = movie.backdropPath
-        instance.genreIDs = NSSet(array: movie.genres.map({ $0.id }))
-        instance.id = Int64(movie.id)
-        instance.posterPath = movie.posterPath
-        instance.releaseDate = movie.releaseDate
-        instance.summary = movie.summary
-        instance.title = movie.title
-        
-        return instance
     }
 }

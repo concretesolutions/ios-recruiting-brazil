@@ -98,19 +98,19 @@ class StorageManagerTests: XCTestCase {
     
     // MARK: - Instace Management tests
     
-    func testShouldAddMovieToFavorites() {
+    func testShouldStoreMovieToFavorites() {
         let movie = Movie(id: 100, backdropPath: "", genres: Set(), posterPath: "", releaseDate: "2000-01-01", title: "", summary: "")
         
-        self.sut.addFavorite(movie: movie)
+        self.sut.storeFavorite(movie: movie)
         let favoriteIDs = self.sut.favorites.map({ $0.id })
         
         expect(favoriteIDs).to(contain(Int64(100)))
     }
     
-    func testShouldRemoveFavoritedIDFromFavorites() {
+    func testShouldDeleteFavoritedIDFromFavorites() {
         let removedID = Int64(3)
         
-        self.sut.removeFavorite(movieID: removedID)
+        self.sut.deleteFavorite(movieID: removedID)
         
         let fetchAllFavorites = NSFetchRequest<Movs.CDFavoriteMovie>(entityName: "CDFavoriteMovie")
         let fetchResults: Set<Movs.CDFavoriteMovie>
@@ -127,13 +127,13 @@ class StorageManagerTests: XCTestCase {
         expect(fetchedFavoritedIDs).notTo(contain(removedID))
     }
     
-    func testShouldSignalFavoritedMovie() {
-        let isFavorited = self.sut.isFavorited(movieID: 3)
-        expect(isFavorited).to(beTrue())
+    func testShouldSignalStoredMovie() {
+        let isStored = self.sut.isMovieStored(movieID: 3)
+        expect(isStored).to(beTrue())
     }
     
-    func testShouldSignalNotFavoritedMovie() {
-        let isFavorited = self.sut.isFavorited(movieID: 10)
-        expect(isFavorited).to(beFalse())
+    func testShouldSignalNotStoredMovie() {
+        let isStored = self.sut.isMovieStored(movieID: 10)
+        expect(isStored).to(beFalse())
     }
 }

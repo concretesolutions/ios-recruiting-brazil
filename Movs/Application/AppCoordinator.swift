@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class AppCoordinator: Coordinator {
     
@@ -26,6 +27,10 @@ class AppCoordinator: Coordinator {
     private var favoriteMoviesCoordinator: FavoriteMoviesCoordinator!
     private var popularMoviesCoordinator: PopularMoviesCoordinator!
     
+    // MARK: - Publishers and Subscribers
+    
+    private var subscribers: [AnyCancellable?] = []
+    
     // MARK: - Initializers
     
     init(window: UIWindow) {
@@ -38,6 +43,14 @@ class AppCoordinator: Coordinator {
         self.coordinatedViewController = HomeTabBarViewController()
         self.popularMoviesCoordinator = PopularMoviesCoordinator(parent: self)
         self.favoriteMoviesCoordinator = FavoriteMoviesCoordinator(parent: self)
+        
+        self.bindDependencies()
+    }
+    
+    deinit {
+        for subscriber in self.subscribers {
+            subscriber?.cancel()
+        }
     }
     
     // MARK: - Coordination
@@ -51,5 +64,20 @@ class AppCoordinator: Coordinator {
     func finish() {
         self.presenter.rootViewController = nil
         self.presenter.resignKey()
+    }
+    
+    // MARK: - Dependency Binding
+    
+    func bindDependencies() {
+        self.subscribers.append(self.dependencies.apiManager.$genres
+            .sink(receiveValue: { fetchedGenres in
+                for fetchedGenre in fetchedGenres {
+                    let genre = Genre(genreDTO: fetchedGenre)
+                    self.dependencies.storageManager.storeGenre(genre: genre)
+                }
+                
+                self.dependencies.storageManager.deleteGenresIfNeeded(fetchedGenres: fetchedGenres)
+            })
+        )
     }
 }

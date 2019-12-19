@@ -43,7 +43,7 @@ class Movie {
         }
     }
     
-    convenience init(favoriteMovie: CDFavoriteMovie, genres: [GenreDTO]) {
+    convenience init(favoriteMovie: CDFavoriteMovie, genres: Set<CDGenre>) {
         let dateString: String?
         if let movieRelease = favoriteMovie.releaseDate {
             dateString = String(date: movieRelease)
@@ -52,10 +52,10 @@ class Movie {
         }
         
         let genres: Set<Genre> = Set(
-            genres.filter({ genreDTO in
-                favoriteMovie.genreIDs!.contains(genreDTO.id)
-            }).map({ genreDTO in
-                Genre(genreDTO: genreDTO)
+            genres.filter({ cdGenre in
+                favoriteMovie.genres!.contains(cdGenre)
+            }).map({ cdGenre in
+                Genre(cdGenre: cdGenre)
             })
         )
 

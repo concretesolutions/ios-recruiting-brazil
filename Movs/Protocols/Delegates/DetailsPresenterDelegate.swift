@@ -1,3 +1,5 @@
+// swiftlint:disable class_delegate_protocol
+
 //
 //  DetailsPresenterDelegate.swift
 //  Movs

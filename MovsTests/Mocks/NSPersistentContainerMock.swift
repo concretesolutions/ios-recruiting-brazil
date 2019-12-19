@@ -73,13 +73,25 @@ class NSPersistentContainerMock: NSPersistentContainer {
     // MARK: - Helpers
     
     private func addFavoriteMovie(id: Int, genres: [Genre]) {
-        guard let description = NSEntityDescription.entity(forEntityName: "CDFavoriteMovie", in: self.viewContext) else {
+        guard let movieDescription = NSEntityDescription.entity(forEntityName: "CDFavoriteMovie", in: self.viewContext) else {
             fatalError("Failed to retrieve CDFavoriteMovie in current context")
         }
 
-        let instance = CDFavoriteMovie(entity: description, insertInto: self.viewContext)
+        let instance = Movs.CDFavoriteMovie(entity: movieDescription, insertInto: self.viewContext)
+        let genresInstances = NSSet(array: genres.map({ self.addGenre(genre: $0) }))
         instance.id = Int64(id)
-        instance.genreIDs = NSSet(array: genres)
+        instance.addToGenres(genresInstances)
+    }
+    
+    private func addGenre(genre: Genre) -> Movs.CDGenre {
+        guard let genreDescription = NSEntityDescription.entity(forEntityName: "CDGenre", in: self.viewContext) else {
+            fatalError("Failed to retrieve CDGenre in current context")
+        }
+        
+        let instance = Movs.CDGenre(entity: genreDescription, insertInto: self.viewContext)
+        instance.id = Int64(genre.id)
+        instance.name = genre.name
+        return instance
     }
     
     private func save() {

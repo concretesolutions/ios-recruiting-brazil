@@ -68,6 +68,13 @@ class PopularMoviesViewController: UIViewController {
             })
         )
         
+        self.subscribers.append(viewModel.$numberOfFavorites
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { _ in
+                self.screen.moviesCollectionView.reloadData()
+            })
+        )
+        
         self.subscribers.append(viewModel.$searchStatus
             .receive(on: RunLoop.main)
             .sink(receiveValue: { status in
@@ -80,21 +87,7 @@ class PopularMoviesViewController: UIViewController {
             })
         )
         
-        self.bind(to: viewModel.storageManager)
-        self.bind(to: viewModel.apiManager)
-    }
-    
-    func bind(to storageManager: StorageManager) {
-        self.subscribers.append(storageManager.$favorites
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { _ in
-                self.screen.moviesCollectionView.reloadData()
-            })
-        )
-    }
-    
-    func bind(to apiManager: MoviesAPIManager) {
-        self.subscribers.append(apiManager.$fetchStatus
+        self.subscribers.append(viewModel.$fetchStatus
             .receive(on: RunLoop.main)
             .sink(receiveValue: { status in
                 if status == .completedFetchWithError {

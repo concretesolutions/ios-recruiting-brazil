@@ -66,8 +66,8 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
 extension PopularMoviesViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let rows = indexPaths.filter({ $0.row >= self.viewModel.numberOfMovies - 3 })
-        if !rows.isEmpty && self.viewModel.searchStatus == .none && self.viewModel.apiManager.shouldFetchNextPage() {
-            self.viewModel.apiManager.fetchNextPopularMoviesPage()
+        if !rows.isEmpty && self.viewModel.searchStatus == .none && self.viewModel.shouldFetchNextPage {
+            self.viewModel.fetchNextPopularMoviesPage()
         }
     }
 }

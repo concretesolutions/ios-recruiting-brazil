@@ -2,14 +2,20 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A583" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDFavoriteMovie" representedClassName="CDFavoriteMovie" syncable="YES" codeGenerationType="class">
         <attribute name="backdropPath" optional="YES" attributeType="String"/>
-        <attribute name="genreIDs" optional="YES" attributeType="Transformable" customClassName="NSSet"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="posterPath" optional="YES" attributeType="String"/>
         <attribute name="releaseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="genres" toMany="YES" deletionRule="Nullify" destinationEntity="CDGenre" inverseName="movies" inverseEntity="CDGenre"/>
+    </entity>
+    <entity name="CDGenre" representedClassName="CDGenre" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDFavoriteMovie" inverseName="genres" inverseEntity="CDFavoriteMovie"/>
     </entity>
     <elements>
         <element name="CDFavoriteMovie" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="CDGenre" positionX="207.90234375" positionY="-27.85546875" width="128" height="88"/>
     </elements>
 </model>

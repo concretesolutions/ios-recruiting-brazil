@@ -52,14 +52,10 @@ extension PopularMoviesViewController: ErrorIndicator {
         self.displayedError = self.displayedError == .searchAndNetworkError ? .searchError : .none
         self.view = self.screen
         
-        if self.viewModel.apiManager.shouldFetchGenres() {
-            self.viewModel.apiManager.fetchGenresList(completion: { completionStatus in
-                if completionStatus == .none {
-                    self.viewModel.apiManager.fetchNextPopularMoviesPage()
-                }
-            })
-        } else if self.viewModel.apiManager.shouldFetchNextPage() {
-            self.viewModel.apiManager.fetchNextPopularMoviesPage()
+        if self.viewModel.shouldFetchGenres {
+            self.viewModel.fetchGenresList()
+        } else if self.viewModel.shouldFetchNextPage {
+            self.viewModel.fetchNextPopularMoviesPage()
         }
     }
 }

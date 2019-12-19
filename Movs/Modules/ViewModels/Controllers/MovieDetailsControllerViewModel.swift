@@ -10,14 +10,14 @@ import Foundation
 
 class MovieDetailsControllerViewModel {
     
-    // MARK: - Properties
+    // MARK: Properties
     
     internal var movieViewModel: MovieViewModel
     internal var genresNames: [String]
     internal var detailsContent: [(String, String?)]
     weak var coordinatorDelegate: MovieDetailsCoordinator?
     
-    // MARK: - Initializers and Deinitializers
+    // MARK: Initializers and Deinitializers
     
     init(movieViewModel: MovieViewModel) {
         self.movieViewModel = movieViewModel
@@ -28,7 +28,11 @@ class MovieDetailsControllerViewModel {
             ("Release Year", movieViewModel.releaseYear)
         ]
     }
-    
+}
+
+// MARK: - UITableView
+
+extension MovieDetailsControllerViewModel {
     func detailForCellAt(indexPath: IndexPath) -> (String, String?) {
         return self.detailsContent[indexPath.row]
     }

@@ -19,7 +19,7 @@ class MovieViewModel {
     // MARK: - Dependencies
     
     typealias Dependencies = HasStorageManager
-    internal let storageManager: StorageManager
+    private let storageManager: StorageManager
     
     // MARK: - Attributes
     
@@ -57,14 +57,14 @@ class MovieViewModel {
     // MARK: - Storage Manager helpers
     
     func addToFavorites() {
-        self.storageManager.addFavorite(movie: self.movie)
+        self.storageManager.storeFavorite(movie: self.movie)
     }
     
     func removeFromFavorites() {
-        self.storageManager.removeFavorite(movieID: Int64(self.id))
+        self.storageManager.deleteFavorite(movieID: Int64(self.id))
     }
     
     func getFavoriteStatus() -> Bool {
-        return self.storageManager.isFavorited(movieID: self.id)
+        return self.storageManager.isMovieStored(movieID: self.id)
     }
 }

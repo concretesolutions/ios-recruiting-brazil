@@ -27,4 +27,8 @@ class Genre: NSObject {
     convenience init(genreDTO: GenreDTO) {
         self.init(id: genreDTO.id, name: genreDTO.name)
     }
+    
+    convenience init(cdGenre: CDGenre) {
+        self.init(id: Int(cdGenre.id), name: cdGenre.name!)
+    }
 }

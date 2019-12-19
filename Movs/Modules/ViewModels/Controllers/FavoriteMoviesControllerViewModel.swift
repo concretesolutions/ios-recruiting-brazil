@@ -11,7 +11,7 @@ import Combine
 
 class FavoriteMoviesControllerViewModel {
     
-    // MARK: - Data Source
+    // MARK: Data Source
     
     private var dataSource: [CDFavoriteMovie] {
         didSet {
@@ -19,25 +19,23 @@ class FavoriteMoviesControllerViewModel {
         }
     }
     
-    // MARK: - Dependencies
+    // MARK: Dependencies
     
-    typealias Dependencies = HasAPIManager & HasStorageManager
-    internal let dependencies: Dependencies
-    internal let apiManager: MoviesAPIManager
-    internal let storageManager: StorageManager
+    typealias Dependencies = HasStorageManager
+    private let dependencies: Dependencies
+    private let storageManager: StorageManager
     
-    // MARK: - Publishers and Subscribers
+    // MARK: Publishers and Subscribers
     
     @Published var numberOfFavoriteMovies: Int
     @Published var searchStatus: SearchStatus = .none
     private var subscribers: [AnyCancellable?] = []
     
-    // MARK: - Initializers and Deinitializers
+    // MARK: Initializers and Deinitializers
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
         self.storageManager = dependencies.storageManager
-        self.apiManager = dependencies.apiManager
         
         self.dataSource = Array(self.storageManager.favorites)
         self.numberOfFavoriteMovies = self.storageManager.favorites.count
@@ -50,7 +48,7 @@ class FavoriteMoviesControllerViewModel {
         }
     }
     
-    // MARK: - Binding
+    // MARK: Binding
     
     func bind(to storageManager: StorageManager) {
         self.subscribers.append(storageManager.$favorites
@@ -61,27 +59,31 @@ class FavoriteMoviesControllerViewModel {
             })
         )
     }
-    
-    // MARK: - UITableView
-    
+}
+
+// MARK: - UITableView
+
+extension FavoriteMoviesControllerViewModel {
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
         let favoriteMovie = self.dataSource[indexPath.row]
-        let movie = Movie(favoriteMovie: favoriteMovie, genres: self.apiManager.genres)
+        let movie = Movie(favoriteMovie: favoriteMovie, genres: self.storageManager.genres)
         return MovieViewModel(movie: movie, dependencies: self.dependencies)
     }
     
     func removeItemAt(indexPath: IndexPath) {
         let favoriteMovie = self.dataSource[indexPath.row]
-        self.storageManager.removeFavorite(movieID: favoriteMovie.id)
+        self.storageManager.deleteFavorite(movieID: favoriteMovie.id)
         
         if [.filter, .search, .searchAndFilter].contains(self.searchStatus) {
             self.dataSource.remove(at: indexPath.row)
             if self.dataSource.isEmpty { self.searchStatus = .noResults }
         }
     }
-    
-    // MARK: - UISearchController
-    
+}
+
+// MARK: - UISearchController
+
+extension FavoriteMoviesControllerViewModel {
     func filterMovies(for title: String) {
         if title.isEmpty {
             self.dataSource = Array(self.storageManager.favorites)

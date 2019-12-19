@@ -92,7 +92,7 @@ extension MovieDetailsViewScreen: CodeView {
         self.titleLabel.snp.makeConstraints({ make in
             make.leading.equalTo(self.backdrop).inset(24.0)
             make.bottom.equalTo(self.backdrop).inset(16.0)
-            make.trailing.lessThanOrEqualTo(self.favoriteButton).offset(-24.0)
+            make.trailing.lessThanOrEqualTo(self.favoriteButton.snp.leading).offset(-24.0)
         })
         
         self.detailsTableView.snp.makeConstraints({ make in
