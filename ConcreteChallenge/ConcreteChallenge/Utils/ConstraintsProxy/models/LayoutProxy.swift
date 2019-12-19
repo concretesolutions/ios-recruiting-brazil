@@ -35,18 +35,29 @@ class LayoutProxy: BuilderBlock {
         self.anchorable = anchorable
     }
     
+    /// It fills the given anchorable with the anchorable of the this layout
+    /// - Parameters:
+    ///   - view: the view to be filled
+    ///   - margin: the margins to the above view borders
     func fill(view: Anchorable?, margin: CGFloat) {
-        self.equal(to: view, type: .top, operation: .margin(margin))
-        self.equal(to: view, type: .bottom, operation: .margin(-margin))
-        self.equal(to: view, type: .left, operation: .margin(margin))
-        self.equal(to: view, type: .right, operation: .margin(-margin))
+        self.makeRelation(to: view, type: .top, operation: .margin(margin))
+        self.makeRelation(to: view, type: .bottom, operation: .margin(-margin))
+        self.makeRelation(to: view, type: .left, operation: .margin(margin))
+        self.makeRelation(to: view, type: .right, operation: .margin(-margin))
     }
     
+    /// It fills the superview with a margin
+    /// - Parameter margin: the margin to the superview borders
     func fillSuperView(withMargin margin: CGFloat = 0) {
         self.fill(view: nil, margin: margin)
     }
     
-    func equal(to relatedAnchorable: Anchorable?, type: LayoutPropertyProxyType, operation: ConstraintOperation) {
+    /// It makes the constraints between the given anchorable with the anchorable of this layout
+    /// - Parameters:
+    ///   - relatedAnchorable: the anchorable to make constraints with
+    ///   - type: the type of the  Anchor to make the constraint
+    ///   - operation: the operation of the constraint, it can be .multiply or .margin
+    func makeRelation(to relatedAnchorable: Anchorable?, type: LayoutPropertyProxyType, operation: ConstraintOperation) {
         let anchorableSuperView = (self.anchorable as? UIView)?.superview
         
         guard let relatedAnchorable = relatedAnchorable ?? anchorableSuperView else {

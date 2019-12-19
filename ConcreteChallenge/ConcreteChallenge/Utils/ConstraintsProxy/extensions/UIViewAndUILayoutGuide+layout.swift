@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension UIView {
+extension UIView: Anchorable {
     var layout: LayoutProxy {
         self.translatesAutoresizingMaskIntoConstraints = false
         return LayoutProxy(anchorable: self)
     }
 }
 
-extension UILayoutGuide {
+extension UILayoutGuide: Anchorable {
     var layout: LayoutProxy {
         return LayoutProxy(anchorable: self)
     }

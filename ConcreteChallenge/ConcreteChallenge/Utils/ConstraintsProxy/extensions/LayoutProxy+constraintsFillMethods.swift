@@ -9,7 +9,8 @@
 import Foundation
 
 extension LayoutPropertyProxy {
+    /// it makes this Anchor property be equal to the superview
     func equalToSuperView() {
-        self.layout.equal(to: nil, type: self.type, operation: .margin(0))
+        self.layout.makeRelation(to: nil, type: self.type, operation: .margin(0))
     }
 }

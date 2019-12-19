@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// This are the two types of operation with constraint, multiply: for dimension constraints and margin for all of them.
 enum ConstraintOperation {
     case multiply(CGFloat), margin(CGFloat)
 }

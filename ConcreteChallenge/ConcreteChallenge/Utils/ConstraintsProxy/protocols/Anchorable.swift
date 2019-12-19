@@ -23,6 +23,3 @@ protocol Anchorable {
     
     var layout: LayoutProxy { get } 
 }
-
-extension UIView: Anchorable { }
-extension UILayoutGuide: Anchorable { }
