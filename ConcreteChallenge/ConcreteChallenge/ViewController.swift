@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         blaView.backgroundColor = .black
 
         
-        blaView.layout.fillSuperView(withMargin: 20)
+        blaView.layout.fill(view: view.safeAreaLayoutGuide, margin: 20)
         
         
         view.backgroundColor = .red

@@ -20,6 +20,8 @@ protocol Anchorable {
     var centerYAnchor: NSLayoutYAxisAnchor { get }
     var leadingAnchor: NSLayoutXAxisAnchor { get }
     var trailingAnchor: NSLayoutXAxisAnchor { get }
+    
+    var layout: LayoutProxy { get } 
 }
 
 extension UIView: Anchorable { }

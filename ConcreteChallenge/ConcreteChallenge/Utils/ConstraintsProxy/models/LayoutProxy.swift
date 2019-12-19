@@ -35,20 +35,21 @@ class LayoutProxy: BuilderBlock {
         self.anchorable = anchorable
     }
     
-    func fill(view: UIView?, margin: CGFloat) {
-        self.equal(toView: view, type: .top, operation: .margin(margin))
-        self.equal(toView: view, type: .bottom, operation: .margin(-margin))
-        self.equal(toView: view, type: .left, operation: .margin(margin))
-        self.equal(toView: view, type: .right, operation: .margin(-margin))
+    func fill(view: Anchorable?, margin: CGFloat) {
+        self.equal(to: view, type: .top, operation: .margin(margin))
+        self.equal(to: view, type: .bottom, operation: .margin(-margin))
+        self.equal(to: view, type: .left, operation: .margin(margin))
+        self.equal(to: view, type: .right, operation: .margin(-margin))
     }
     
     func fillSuperView(withMargin margin: CGFloat = 0) {
         self.fill(view: nil, margin: margin)
     }
     
-    func equal(toView relatedView: UIView?, type: LayoutPropertyProxyType, operation: ConstraintOperation) {
-        guard let view = self.anchorable as? UIView,
-              let relatedView = relatedView ?? view.superview else {
+    func equal(to relatedAnchorable: Anchorable?, type: LayoutPropertyProxyType, operation: ConstraintOperation) {
+        let anchorableSuperView = (self.anchorable as? UIView)?.superview
+        
+        guard let relatedAnchorable = relatedAnchorable ?? anchorableSuperView else {
             return
         }
         
@@ -58,56 +59,56 @@ class LayoutProxy: BuilderBlock {
             case .multiply:
                 fatalError()
             case .margin(let margin):
-                self.top.equal(to: relatedView.layout.top, offsetBy: margin)
+                self.top.equal(to: relatedAnchorable.layout.top, offsetBy: margin)
             }
         case .bottom:
             switch operation {
             case .multiply:
                 fatalError()
             case .margin(let margin):
-                self.bottom.equal(to: relatedView.layout.bottom, offsetBy: margin)
+                self.bottom.equal(to: relatedAnchorable.layout.bottom, offsetBy: margin)
             }
         case .left:
             switch operation {
             case .multiply:
-               fatalError()
+                fatalError()
             case .margin(let margin):
-               self.left.equal(to: relatedView.layout.left, offsetBy: margin)
+                self.left.equal(to: relatedAnchorable.layout.left, offsetBy: margin)
             }
         case .right:
             switch operation {
             case .multiply:
-               fatalError()
+                fatalError()
             case .margin(let margin):
-               self.right.equal(to: relatedView.layout.right, offsetBy: margin)
+                self.right.equal(to: relatedAnchorable.layout.right, offsetBy: margin)
             }
         case .centerX:
             switch operation {
             case .multiply:
-               fatalError()
+                fatalError()
             case .margin(let margin):
-               self.centerX.equal(to: relatedView.layout.centerX, offsetBy: margin)
+                self.centerX.equal(to: relatedAnchorable.layout.centerX, offsetBy: margin)
             }
         case .centerY:
             switch operation {
             case .multiply:
-               fatalError()
+                fatalError()
             case .margin(let margin):
-               self.centerY.equal(to: relatedView.layout.centerY, offsetBy: margin)
+                self.centerY.equal(to: relatedAnchorable.layout.centerY, offsetBy: margin)
             }
         case .width:
             switch operation {
             case .multiply(let factor):
-                self.width.equal(to: relatedView.layout.width, multiplier: factor)
+                self.width.equal(to: relatedAnchorable.layout.width, multiplier: factor)
             case .margin(let margin):
-               self.width.equal(to: relatedView.layout.width, offsetBy: margin)
+                self.width.equal(to: relatedAnchorable.layout.width, offsetBy: margin)
             }
         case .height:
             switch operation {
             case .multiply(let factor):
-                self.height.equal(to: relatedView.layout.height, multiplier: factor)
+                self.height.equal(to: relatedAnchorable.layout.height, multiplier: factor)
             case .margin(let margin):
-               self.height.equal(to: relatedView.layout.height, offsetBy: margin)
+                self.height.equal(to: relatedAnchorable.layout.height, offsetBy: margin)
             }
         }
     }

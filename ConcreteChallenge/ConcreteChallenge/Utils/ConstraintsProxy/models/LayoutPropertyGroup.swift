@@ -66,15 +66,15 @@ class LayoutPropertyGroup {
     }
     
     func relatedToSuperView() {
-        self.related(toView: nil)
+        self.related(to: nil)
     }
     
-    func related(toView view: UIView? = nil) {
+    func related(to anchorable: Anchorable? = nil) {
         self.propertyTypes.keys.forEach { (constraintPropertyType) in
             guard let operation = self.propertyTypes[constraintPropertyType] else {
                 return
             }
-            layout.equal(toView: view, type: constraintPropertyType, operation: operation)
+            layout.equal(to: anchorable, type: constraintPropertyType, operation: operation)
         }
     }
 }
