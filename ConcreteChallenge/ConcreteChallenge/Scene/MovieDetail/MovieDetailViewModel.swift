@@ -6,6 +6,8 @@
 //  Copyright © 2019 Marcos Santos. All rights reserved.
 //
 
+import NetworkLayer
+
 class MovieDetailViewModel {
     enum State {
         case loading, show
@@ -24,12 +26,16 @@ class MovieDetailViewModel {
 
     var movie: Movie
 
+    var networkManager: NetworkManager<MovieService>!
+
     // MARK: View actions
 
     var setLoadingLayout: VoidClosure?
     var setShowLayout: VoidClosure?
 
-    init(movie: Movie) {
+    // TODO: mock NetworkManager
+    init(movie: Movie, networkManager: NetworkManager<MovieService> = NetworkManager()) {
+        self.networkManager = networkManager
         self.movie = movie
     }
 }

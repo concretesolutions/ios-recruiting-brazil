@@ -6,8 +6,7 @@
 //  Copyright © 2019 Marcos Santos. All rights reserved.
 //
 
-typealias VoidClosure = () -> Void
-typealias MovieClosure = (Movie) -> Void
+import NetworkLayer
 
 class MoviesViewModel {
     enum State {
@@ -31,7 +30,7 @@ class MoviesViewModel {
 
     var movies = [Movie]()
 
-//    var networkManager: NetworkManager!
+    var networkManager: NetworkManager<MovieService>!
 
     // MARK: Coordinator actions
 
@@ -45,9 +44,9 @@ class MoviesViewModel {
     var setGridLayout: VoidClosure?
 
     // TODO: mock NetworkManager
-//    init(networkManager: NetworkManager = NetworkManager()) {
-//        self.networkManager = networkManager
-//    }
+    init(networkManager: NetworkManager<MovieService> = NetworkManager()) {
+        self.networkManager = networkManager
+    }
 
     func loadMovies() {
         state = .loading
