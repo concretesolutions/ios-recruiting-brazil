@@ -10,7 +10,18 @@ import UIKit
 import GenericNetwork
 
 class MoviesListViewController: UIViewController {
-    let moviesListView = MoviesListView(viewModel: DefaultMoviesListViewModel(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>(), imagesProvider: URLSessionFileProvider(), moviesRouter: { return TMDBMoviesRoute.popular($0) }, imageRouter: { return TMDBMoviesRoute.image($0)}))
+    
+    let viewModel: MoviesListViewModel
+    lazy var moviesListView = MoviesListView(viewModel: viewModel)
+    
+    init(viewModel: MoviesListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         

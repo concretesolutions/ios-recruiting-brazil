@@ -17,10 +17,10 @@ public class URLSessionFileProvider: FileProvider {
     /// - Parameters:
     ///   - route: the route containing the wanted data
     ///   - completion: a completion called when the request is completed. Returns the URL of the file or a error.
-    public func request(route: Route, completion: @escaping (Result<URL, Error>) -> Void) {
+    public func request(route: Route, completion: @escaping (Result<URL, Error>) -> Void) -> CancellableTask? {
         guard let routeURL = route.completeUrl else {
             completion(.failure(NetworkError.wrongURL(route)))
-            return
+            return nil
         }
         
         let routeRequestURL = URLRequest(url: routeURL, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
@@ -40,5 +40,7 @@ public class URLSessionFileProvider: FileProvider {
         }
         
         downloadTask.resume()
+        
+        return downloadTask
     }
 }

@@ -12,6 +12,8 @@ import GenericNetwork
 protocol MovieViewModel: AnyObject {
     var movieTitle: String? { get }
     var needReplaceImage: ((_ image: UIImage) -> Void)? { get set }
+    
+    func movieViewWasReused()
 }
 
 typealias ImageRouter = (_ imagePath: String) -> Route
@@ -63,9 +65,13 @@ class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
             }
         }
     }
+    
+    func movieViewWasReused() {
+        
+    }
 }
 
 private struct Constants {
-    static let placeholderImage = UIImage(named: "")!
+    static let placeholderImage = UIImage(named: "placeholderImage")!
 }
 

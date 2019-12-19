@@ -12,6 +12,8 @@ class MoviesListView: UIView, ViewCodable {
     let viewModel: MoviesListViewModel
     let moviesCollectionLayout = UICollectionViewFlowLayout()
     
+    weak var delegate: MoviesListViewDelegate?
+    
     lazy var moviesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: moviesCollectionLayout).build {
         $0.registerReusableCell(forCellType: MinimizedMovieCollectionCell.self)
         $0.dataSource = self
@@ -44,7 +46,9 @@ class MoviesListView: UIView, ViewCodable {
         }
         
         viewModel.needShowError = { [weak self] errorMessage in
-            print(errorMessage)
+            self?.delegate?.needShowError(withMessage: errorMessage) {
+                self?.viewModel.thePageReachedTheEnd()
+            }
         }
         
         viewModel.thePageReachedTheEnd()
@@ -70,6 +74,12 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let movieCellWidth = (collectionView.frame.width - 3 * moviesCollectionLayout.minimumInteritemSpacing)/3
         return CGSize(width: movieCellWidth, height: movieCellWidth * 1.5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.numberOfMovies - 1 {
+            viewModel.thePageReachedTheEnd()
+        }
     }
 }
 

@@ -12,8 +12,9 @@ import Foundation
 extension ParserProvider {
     public typealias ParsableType = ParserType.ParsableType
     
-    public func requestAndParse(route: Route, completion: @escaping (Result<ParsableType, Error>) -> Void) {
-        self.request(route: route) { [weak self] (result: Result<Data, Error>) in
+    @discardableResult
+    public func requestAndParse(route: Route, completion: @escaping (Result<ParsableType, Error>) -> Void) -> CancellableTask? {
+        return self.request(route: route) { [weak self] (result: Result<Data, Error>) in
             guard let self = self else {
                 return
             }

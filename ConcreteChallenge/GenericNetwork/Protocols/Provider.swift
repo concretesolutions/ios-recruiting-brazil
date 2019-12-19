@@ -21,5 +21,6 @@ public protocol Provider {
     associatedtype ReturnType
     
     /// requests a route and calls a completion at the request end. It can result a Error or a ResultType
-    func request(route: Route, completion: @escaping (Result<ReturnType, Error>) -> Void)
+    @discardableResult
+    func request(route: Route, completion: @escaping (Result<ReturnType, Error>) -> Void) -> CancellableTask?
 }

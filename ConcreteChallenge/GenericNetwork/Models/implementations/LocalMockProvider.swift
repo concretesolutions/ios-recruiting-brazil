@@ -22,12 +22,12 @@ public class LocalMockProvider<ParserType: Parser>: ParserProvider {
         self.error = error
     }
     
-    public func request(route: Route, completion: @escaping (Result<Data, Error>) -> Void) {
+    public func request(route: Route, completion: @escaping (Result<Data, Error>) -> Void) -> CancellableTask? {
         
         // if there is a error, only completes with it.
         if let error = self.error {
             completion(.failure(error))
-            return
+            return nil
         }
         
         guard route.method == .get else {
@@ -42,5 +42,7 @@ public class LocalMockProvider<ParserType: Parser>: ParserProvider {
         } catch {
             completion(.failure(error))
         }
+        
+        return nil
     }
 }

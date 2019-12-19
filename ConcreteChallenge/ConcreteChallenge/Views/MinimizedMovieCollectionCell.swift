@@ -14,6 +14,8 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
         didSet {
             let viewModel = self.viewModel!
             
+            oldValue?.movieViewWasReused()
+            
             viewModel.needReplaceImage = { [weak self] image in
                 DispatchQueue.main.async {
                     self?.movieImageView.image = image

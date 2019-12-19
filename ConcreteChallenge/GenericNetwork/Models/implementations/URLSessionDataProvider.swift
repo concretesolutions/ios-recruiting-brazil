@@ -19,7 +19,7 @@ public class URLSessionParserProvider<ParserType: Parser>: ParserProvider {
         self.parser = parser
     }
     
-    public func request(route: Route, completion: @escaping (Result<Data, Error>) -> Void) {
+    public func request(route: Route, completion: @escaping (Result<Data, Error>) -> Void) -> CancellableTask? {
         // the other route methods supossed to be implemmented when they be necessary in the future.
         guard route.method == .get else {
             fatalError("URLSessionProvider doesnt support \(route.method.rawValue) method")
@@ -27,7 +27,7 @@ public class URLSessionParserProvider<ParserType: Parser>: ParserProvider {
         
         guard let routeURL = route.completeUrl else {
             completion(.failure(NetworkError.wrongURL(route)))
-            return
+            return nil
         }
         
         let routeRequestURL = URLRequest(url: routeURL, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
@@ -57,5 +57,7 @@ public class URLSessionParserProvider<ParserType: Parser>: ParserProvider {
         }
         
         dataTask.resume()
+        
+        return dataTask
     }
 }
