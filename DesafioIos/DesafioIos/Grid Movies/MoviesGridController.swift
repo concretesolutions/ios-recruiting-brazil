@@ -13,7 +13,6 @@ class MoviesGridController: UIViewController , SendDataApi {
         didSet{
             DispatchQueue.main.async {
                 self.collectionViewController.movie = self.moviesData
-                //self.collectionViewController.collectionView.reloadData()
             }
         }
     }
@@ -77,7 +76,6 @@ class MoviesGridController: UIViewController , SendDataApi {
                 self.stateViewLoading.isHidden = true
                 self.stateViewDontConnection.isHidden = false
                 self.stateViewDontConnection.state = .dontConnection
-                print("erro da internet")
             }
         }
     }

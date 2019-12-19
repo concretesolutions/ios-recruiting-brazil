@@ -39,8 +39,11 @@ func getFavoritesMovies() -> [Movie]{
     
     return movies
 }
-func formatGenres(list:[Int]) -> String{
+func formatGenres(list:[Int]?) -> String{
     var value = ""
+    guard let list = list else{
+        return value
+    }
     for id in list{
         for genre in ManegerApiRequest.genres{
             if genre.id == id{

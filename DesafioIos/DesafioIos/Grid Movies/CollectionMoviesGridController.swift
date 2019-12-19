@@ -58,5 +58,5 @@ final class CollectionMoviesGridController: UICollectionViewController , UIColle
               vc.movie = self.movie[indexPath.row]
               navigationController?.pushViewController(vc, animated: true)
     }
-
+    
 }

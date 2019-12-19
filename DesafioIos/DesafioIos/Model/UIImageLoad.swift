@@ -10,7 +10,10 @@ import Foundation
 import UIKit
 
 extension UIImageView{
-    func loadImageMovie(_ dest:String , width:Int){
+    func loadImageMovie(_ dest:String? , width:Int){
+        guard let dest = dest else {
+            return
+        }
         fetchimage(completion: { (data) in
             if let image = UIImage(data: data){
                 DispatchQueue.main.async {

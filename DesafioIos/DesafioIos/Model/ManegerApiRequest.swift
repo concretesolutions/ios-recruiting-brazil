@@ -11,8 +11,7 @@ final class ManegerApiRequest{
     private var numPages = 1
     var dataToSend:[Movie] = [] {
         didSet{
-            print("\(self.numPages * 20) --- \(self.dataToSend.count)")
-            if Int(Double(self.numPages) * 20.0 * 0.8) <= self.dataToSend.count{
+            if self.numPages * 20 <= self.dataToSend.count{
                 self.delegate?.sendMovie(movies: self.dataToSend)
                 self.delegate?.sendStatus(status: .finish)
             }

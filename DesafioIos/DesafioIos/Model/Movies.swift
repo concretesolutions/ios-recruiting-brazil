@@ -23,8 +23,8 @@ struct Movies: Codable {
 // MARK: - Result
 struct Movie: Codable{
     let id: Int
-    let backdropPath: String
-    let genreIDS: [Int]
+    let backdropPath: String?
+    let genreIDS: [Int]?
     let title: String
     let overview, releaseDate: String?
 
