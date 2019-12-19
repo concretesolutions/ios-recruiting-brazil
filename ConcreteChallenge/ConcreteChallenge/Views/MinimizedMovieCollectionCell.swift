@@ -11,12 +11,15 @@ import UIKit
 class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
     let movieImageView = UIImageView().build {
         $0.contentMode = .scaleAspectFit
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .appRed
+        $0.layer.cornerRadius = 5
     }
     
     let movieLabel = UILabel().build {
-        $0.backgroundColor = .blue
         $0.text = "bla"
+        $0.textColor = .appTextBlue
+        $0.font = .boldSystemFont(ofSize: 17)
+        $0.textAlignment = .center
     }
     
     override init(frame: CGRect) {
@@ -42,5 +45,9 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
             $0.top.equal(to: movieImageView.layout.bottom)
             $0.group.bottom.left.right.fillToSuperView()
         }
+    }
+    
+    func applyAditionalChanges() {
+       
     }
 }
