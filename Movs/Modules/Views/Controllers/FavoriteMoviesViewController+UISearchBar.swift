@@ -23,10 +23,7 @@ extension FavoriteMoviesViewController {
 
 extension FavoriteMoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else {
-            return
-        }
-        
-        self.viewModel.filterMovies(for: searchText)
+        guard let text = searchController.searchBar.text else { return }
+        self.viewModel.applySearch(searchText: text)
     }
 }

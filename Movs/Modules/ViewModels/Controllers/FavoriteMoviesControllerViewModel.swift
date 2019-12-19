@@ -13,9 +13,12 @@ class FavoriteMoviesControllerViewModel {
     
     // MARK: Data Source
     
-    private var dataSource: [CDFavoriteMovie] {
-        didSet {
-            self.numberOfFavoriteMovies = self.dataSource.count
+    private var dataSource: [Movie] = [] {
+        willSet {
+            if newValue.isEmpty, self.currentSearch != nil {
+                self.searchStatus = .noResults
+            }
+            self.numberOfFavoriteMovies = newValue.count
         }
     }
     
@@ -24,6 +27,12 @@ class FavoriteMoviesControllerViewModel {
     typealias Dependencies = HasStorageManager
     private let dependencies: Dependencies
     private let storageManager: StorageManager
+    
+    // MARK: Properties
+    
+    weak var detailsPresenter: FavoriteMoviesCoordinator?
+    internal var deletedIndex: IndexPath?
+    internal var currentSearch: String?
     
     // MARK: Publishers and Subscribers
     
@@ -37,8 +46,8 @@ class FavoriteMoviesControllerViewModel {
         self.dependencies = dependencies
         self.storageManager = dependencies.storageManager
         
-        self.dataSource = Array(self.storageManager.favorites)
         self.numberOfFavoriteMovies = self.storageManager.favorites.count
+        self.dataSource = self.storageManager.favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
         self.bind(to: self.storageManager)
     }
     
@@ -52,9 +61,15 @@ class FavoriteMoviesControllerViewModel {
     
     func bind(to storageManager: StorageManager) {
         self.subscribers.append(storageManager.$favorites
-            .sink(receiveValue: { value in
-                if self.searchStatus == .none {
-                    self.dataSource = Array(value)
+            .sink(receiveValue: { favorites in
+                let newData = favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+                
+                if let index = self.deletedIndex {
+                    self.dataSource.remove(at: index.row)
+                } else if self.searchStatus == .none {
+                    self.dataSource = newData
+                } else if [.search, .searchAndFilter].contains(self.searchStatus), let text = self.currentSearch {
+                    self.filterMovies(newData, searchText: text)
                 }
             })
         )
@@ -65,36 +80,44 @@ class FavoriteMoviesControllerViewModel {
 
 extension FavoriteMoviesControllerViewModel {
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
-        let favoriteMovie = self.dataSource[indexPath.row]
-        let movie = Movie(favoriteMovie: favoriteMovie, genres: self.storageManager.genres)
+        let movie = self.dataSource[indexPath.row]
         return MovieViewModel(movie: movie, dependencies: self.dependencies)
     }
     
+    func didSelectItemAt(indexPath: IndexPath) {
+        let movie = self.dataSource[indexPath.row]
+        self.detailsPresenter?.showDetails(movie: movie)
+    }
+    
     func removeItemAt(indexPath: IndexPath) {
-        let favoriteMovie = self.dataSource[indexPath.row]
-        self.storageManager.deleteFavorite(movieID: favoriteMovie.id)
-        
-        if [.filter, .search, .searchAndFilter].contains(self.searchStatus) {
-            self.dataSource.remove(at: indexPath.row)
-            if self.dataSource.isEmpty { self.searchStatus = .noResults }
-        }
+        self.deletedIndex = indexPath
+        let movie = self.dataSource[indexPath.row]
+        self.storageManager.deleteFavorite(movieID: movie.id)
     }
 }
 
 // MARK: - UISearchController
 
 extension FavoriteMoviesControllerViewModel {
-    func filterMovies(for title: String) {
-        if title.isEmpty {
-            self.dataSource = Array(self.storageManager.favorites)
-            self.searchStatus = .none
+    func applySearch(searchText: String) {
+        let storedMovies = self.storageManager.favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+        
+        if searchText.isEmpty {
+            self.resetSearch(with: storedMovies)
         } else {
-            self.dataSource = self.storageManager.favorites.filter({ $0.title!.starts(with: title) })
-            if self.dataSource.isEmpty {
-                self.searchStatus = .noResults
-            } else {
-                self.searchStatus = self.searchStatus == .filter ? .searchAndFilter : .search
-            }
+            self.currentSearch = searchText
+            self.filterMovies(storedMovies, searchText: searchText)
         }
+    }
+    
+    func filterMovies(_ movies: [Movie], searchText: String) {
+        self.searchStatus = self.searchStatus == .filter ? .searchAndFilter : .search
+        self.dataSource = movies.filter({ $0.title.starts(with: searchText.capitalized) })
+    }
+    
+    func resetSearch(with movies: [Movie]) {
+        self.dataSource = movies
+        self.currentSearch = nil
+        self.searchStatus = .none
     }
 }

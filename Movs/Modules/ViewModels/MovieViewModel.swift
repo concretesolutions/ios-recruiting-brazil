@@ -61,7 +61,7 @@ class MovieViewModel {
     }
     
     func removeFromFavorites() {
-        self.storageManager.deleteFavorite(movieID: Int64(self.id))
+        self.storageManager.deleteFavorite(movieID: self.id)
     }
     
     func getFavoriteStatus() -> Bool {

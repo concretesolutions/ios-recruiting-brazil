@@ -98,8 +98,8 @@ extension StorageManager {
         }
     }
     
-    func deleteFavorite(movieID: Int64) {
-        let objects = self.favorites.filter({ $0.id == movieID })
+    func deleteFavorite(movieID: Int) {
+        let objects = self.favorites.filter({ $0.id == Int64(movieID) })
         for object in objects {
             self.managedContext.delete(object)
             self.favorites.remove(object)

@@ -18,7 +18,6 @@ class FavoriteMoviesViewController: UIViewController {
     internal let errorScreen = ErrorViewScreen()
     internal let viewModel: FavoriteMoviesControllerViewModel
     internal var displayedError: ApplicationError = .none
-    internal var deletedRowIndex: IndexPath?
     
     // MARK: - Publishers and Subscribers
     
@@ -29,6 +28,7 @@ class FavoriteMoviesViewController: UIViewController {
     init(viewModel: FavoriteMoviesControllerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.bind(to: self.viewModel)
     }
     
     required init?(coder: NSCoder) {
@@ -50,7 +50,6 @@ class FavoriteMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bind(to: self.viewModel)
         
         self.screen.favoriteMoviesTableView.delegate = self
         self.screen.favoriteMoviesTableView.dataSource = self
@@ -63,9 +62,9 @@ class FavoriteMoviesViewController: UIViewController {
         self.subscribers.append(viewModel.$numberOfFavoriteMovies
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
-                if let deletedIndex = self.deletedRowIndex {
-                    self.screen.favoriteMoviesTableView.deleteRows(at: [deletedIndex], with: .fade)
-                    self.deletedRowIndex = nil
+                if let index = self.viewModel.deletedIndex {
+                    self.screen.favoriteMoviesTableView.deleteRows(at: [index], with: .fade)
+                    self.viewModel.deletedIndex = nil
                 } else {
                     self.screen.favoriteMoviesTableView.reloadData()
                 }

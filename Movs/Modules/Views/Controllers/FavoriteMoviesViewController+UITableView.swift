@@ -15,14 +15,13 @@ extension FavoriteMoviesViewController: UITableViewDelegate {
         return 200
     }
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.viewModel.didSelectItemAt(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let unfavorite = UIContextualAction(style: .destructive, title: "Unfavorite") { (_, _, _) in
             self.viewModel.removeItemAt(indexPath: indexPath)
-            self.deletedRowIndex = indexPath
         }
 
         return UISwipeActionsConfiguration(actions: [unfavorite])
@@ -42,6 +41,7 @@ extension FavoriteMoviesViewController: UITableViewDataSource {
         }
         
         cell.viewModel = self.viewModel.cellViewModelForItemAt(indexPath: indexPath)
+        cell.selectionStyle = .none
         return cell
     }
     

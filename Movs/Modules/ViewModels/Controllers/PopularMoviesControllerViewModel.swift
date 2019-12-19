@@ -13,7 +13,7 @@ class PopularMoviesControllerViewModel {
     
     // MARK: Data Source
     
-    private var dataSource: [MovieDTO] {
+    private var dataSource: [Movie] = [] {
         didSet {
             self.numberOfMovies = self.dataSource.count
         }
@@ -55,7 +55,7 @@ class PopularMoviesControllerViewModel {
         self.storageManager = dependencies.storageManager
         self.apiManager = dependencies.apiManager
 
-        self.dataSource = self.apiManager.movies
+        self.dataSource = self.apiManager.movies.map({ Movie(movieDTO: $0, genres: self.apiManager.genres) })
         self.bind(to: dependencies.apiManager)
         self.bind(to: dependencies.storageManager)
     }
@@ -71,7 +71,7 @@ class PopularMoviesControllerViewModel {
     func bind(to apiManager: MoviesAPIManager) {
         self.subscribers.append(apiManager.$movies
             .sink(receiveValue: { fetchedMovies in
-                self.dataSource = fetchedMovies
+                self.dataSource = fetchedMovies.map({ Movie(movieDTO: $0, genres: apiManager.genres) })
             })
         )
         
@@ -112,7 +112,7 @@ extension PopularMoviesControllerViewModel {
 
 extension PopularMoviesControllerViewModel {
     func cellViewModelForItemAt(indexPath: IndexPath) -> MovieViewModel {
-        let movie = Movie(movieDTO: self.dataSource[indexPath.row], genres: self.apiManager.genres)
+        let movie = self.dataSource[indexPath.row]
         if self.storageManager.isMovieStored(movieID: movie.id) {
             self.storageManager.updateFavoriteMovie(with: movie)
         }
@@ -121,7 +121,7 @@ extension PopularMoviesControllerViewModel {
     }
     
     func didSelectItemAt(indexPath: IndexPath) {
-        let movie = Movie(movieDTO: self.dataSource[indexPath.row], genres: self.apiManager.genres)
+        let movie = self.dataSource[indexPath.row]
         self.detailsPresenter?.showDetails(movie: movie)
     }
 }
@@ -130,11 +130,13 @@ extension PopularMoviesControllerViewModel {
 
 extension PopularMoviesControllerViewModel {
     func filterMovies(for title: String) {
+        let fetchedMovies = self.apiManager.movies.map({ Movie(movieDTO: $0, genres: self.apiManager.genres) })
+        
         if title.isEmpty {
-            self.dataSource = self.apiManager.movies
+            self.dataSource = fetchedMovies
             self.searchStatus = .none
         } else {
-            self.dataSource = self.apiManager.movies.filter({ $0.title.starts(with: title) })
+            self.dataSource = fetchedMovies.filter({ $0.title.starts(with: title) })
             if self.dataSource.isEmpty {
                 self.searchStatus = .noResults
             } else {
