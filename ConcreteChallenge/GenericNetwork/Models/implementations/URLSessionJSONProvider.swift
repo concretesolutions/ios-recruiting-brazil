@@ -9,7 +9,7 @@
 import Foundation
 
 /// Specialization of URLSessionProvider with JSONParser as Parser to be easier to use the provider.
-public class URLSessionJSONParserProvider<RouteType: Route, ParsableType: Codable>: URLSessionParserProvider<RouteType, JSONParser<ParsableType>> {
+public class URLSessionJSONParserProvider<ParsableType: Codable>: URLSessionParserProvider<JSONParser<ParsableType>> {
     public init() {
         super.init(parser: JSONParser())
     }

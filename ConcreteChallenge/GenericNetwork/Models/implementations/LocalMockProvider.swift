@@ -9,7 +9,7 @@
 import Foundation
 
 /// A provider that simulates requesting, while reading from a local file. It also can send intentional errors at the completion
-public class LocalMockProvider<RouteType: Route, ParserType: Parser>: ParserProvider {
+public class LocalMockProvider<ParserType: Parser>: ParserProvider {
     public var parser: ParserType
     public var error: Error?
     
@@ -22,7 +22,7 @@ public class LocalMockProvider<RouteType: Route, ParserType: Parser>: ParserProv
         self.error = error
     }
     
-    public func request(route: RouteType, completion: @escaping (Result<Data, Error>) -> Void) {
+    public func request(route: Route, completion: @escaping (Result<Data, Error>) -> Void) {
         
         // if there is a error, only completes with it.
         if let error = self.error {

@@ -9,7 +9,7 @@
 import Foundation
 
 /// A provider implementation responsible for providing files. For example, this can be used for requesting images.
-public class FileProvider<RouteType: Route>: Provider {
+public class FileProvider: Provider {
     public init() {
         
     }
@@ -17,7 +17,7 @@ public class FileProvider<RouteType: Route>: Provider {
     /// - Parameters:
     ///   - route: the route containing the wanted data
     ///   - completion: a completion called when the request is completed. Returns the URL of the file or a error.
-    public func request(route: RouteType, completion: @escaping (Result<URL, Error>) -> Void) {
+    public func request(route: Route, completion: @escaping (Result<URL, Error>) -> Void) {
         guard let routeURL = route.completeUrl else {
             completion(.failure(NetworkError.wrongURL(route)))
             return

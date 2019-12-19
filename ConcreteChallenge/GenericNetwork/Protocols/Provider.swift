@@ -15,14 +15,11 @@ import Foundation
     At **LocalMockProvider.swift** file there is an implementation make for helping to mock errors and local data requests
 */
 public protocol Provider {
-    /// The route type from where retrieve the ReturnType
-    associatedtype RouteType: Route
-    
     /// The return type of the provider.
     /// In the majority of the cases this is a Data value.
     /// But in some cases can be URl, when providing Files for example.
     associatedtype ReturnType
     
     /// requests a route and calls a completion at the request end. It can result a Error or a ResultType
-    func request(route: RouteType, completion: @escaping (Result<ReturnType, Error>) -> Void)
+    func request(route: Route, completion: @escaping (Result<ReturnType, Error>) -> Void)
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 /// A default implementation of ParsableProvider made with URLSession and dataTask.
-public class URLSessionParserProvider<RouteType: Route, ParserType: Parser>: ParserProvider {
+public class URLSessionParserProvider<ParserType: Parser>: ParserProvider {
     public var parser: ParserType
     
     
@@ -19,7 +19,7 @@ public class URLSessionParserProvider<RouteType: Route, ParserType: Parser>: Par
         self.parser = parser
     }
     
-    public func request(route: RouteType, completion: @escaping (Result<Data, Error>) -> Void) {
+    public func request(route: Route, completion: @escaping (Result<Data, Error>) -> Void) {
         // the other route methods supossed to be implemmented when they be necessary in the future.
         guard route.method == .get else {
             fatalError("URLSessionProvider doesnt support \(route.method.rawValue) method")

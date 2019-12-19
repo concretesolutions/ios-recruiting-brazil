@@ -10,10 +10,12 @@ import UIKit
 import GenericNetwork
 
 class ViewController: UIViewController {
+        
     override func viewDidLoad() {
         super.viewDidLoad()
        
         addChild(MoviesListViewController(), inView: view)
+        
     }
 }
 
