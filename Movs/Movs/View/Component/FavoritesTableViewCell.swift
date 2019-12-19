@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Combine
 
 class FavoritesTableViewCell: UITableViewCell {
+
+    private var viewModel: FavoriteMoviesCellViewModel!
+
+    private var posterImageCancellable: AnyCancellable?
 
     let containerView: UIView = {
         let view = UIView(frame: .zero)
@@ -22,12 +27,12 @@ class FavoritesTableViewCell: UITableViewCell {
         return view
     }()
 
-    private let posterImage: UIImageView = {
+    private let posterImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.layer.cornerRadius = 10.0
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "marvel")
+        imageView.image = UIImage()
         return imageView
     }()
 
@@ -40,7 +45,6 @@ class FavoritesTableViewCell: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
         label.numberOfLines = 0
-        label.text = "Uma descrição qualquer de um texto bem legal de um projeto do qual eu não sei nada sabe"
         return label
     }()
 
@@ -51,11 +55,10 @@ class FavoritesTableViewCell: UITableViewCell {
         return label
     }()
 
-    private let titleLabel: UILabel = {
+    private let movieTitle: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 2
-        label.text = "Vingadores Ultimato"
         return label
     }()
 
@@ -67,6 +70,25 @@ class FavoritesTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setup(withViewModel viewModel: FavoriteMoviesCellViewModel) {
+        self.viewModel = viewModel
+        self.movieTitle.text = self.viewModel.title
+        self.yearLabel.text = self.viewModel.releaseDate
+        self.overviewLabel.text = self.viewModel.overview
+        self.setCombine()
+    }
+
+    private func setCombine() {
+        self.posterImageCancellable = self.viewModel.$posterImage
+            .receive(on: RunLoop.main)
+            .assign(to: \.image!, on: posterImageView)
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.posterImageView.image = UIImage(named: "imagePlaceholder")
+    }
     
 }
 
@@ -74,9 +96,9 @@ extension FavoritesTableViewCell: ViewCode {
 
     func buildViewHierarchy() {
         self.addSubview(containerView)
-        self.containerView.addSubview(posterImage)
+        self.containerView.addSubview(posterImageView)
         self.containerView.addSubview(textContainerView)
-        self.textContainerView.addSubview(titleLabel)
+        self.textContainerView.addSubview(movieTitle)
         self.textContainerView.addSubview(yearLabel)
         self.textContainerView.addSubview(overviewLabel)
     }
@@ -88,26 +110,25 @@ extension FavoritesTableViewCell: ViewCode {
             make.left.equalToSuperview().offset(16.0)
             make.right.equalToSuperview().inset(16.0)
         }
-        self.posterImage.snp.makeConstraints { (make) in
+        self.posterImageView.snp.makeConstraints { (make) in
             make.top.bottom.left.equalToSuperview()
-            make.width.equalTo(self.posterImage.snp.height).multipliedBy(0.8)
+            make.width.equalTo(self.posterImageView.snp.height).multipliedBy(0.8)
         }
         self.textContainerView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(16.0)
             make.bottom.equalToSuperview().inset(16.0)
-            make.left.equalTo(self.posterImage.snp.right).offset(16.0)
+            make.left.equalTo(self.posterImageView.snp.right).offset(16.0)
             make.right.equalToSuperview().inset(16.0)
         }
         self.yearLabel.snp.makeConstraints { (make) in
             make.top.right.equalToSuperview()
         }
-        self.titleLabel.snp.makeConstraints { (make) in
+        self.movieTitle.snp.makeConstraints { (make) in
             make.top.left.equalToSuperview()
-//            make.right.greaterThanOrEqualTo(self.yearLabel.snp.left)
         }
         self.overviewLabel.snp.makeConstraints { (make) in
             make.bottom.left.right.equalToSuperview()
-            make.top.greaterThanOrEqualTo(self.titleLabel.snp.bottom).offset(2.0)
+            make.top.greaterThanOrEqualTo(self.movieTitle.snp.bottom).offset(2.0)
         }
     }
 

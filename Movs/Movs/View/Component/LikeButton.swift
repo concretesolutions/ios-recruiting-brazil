@@ -13,9 +13,13 @@ class LikeButton: UIButton {
     override var isSelected: Bool {
         didSet {
             if self.isSelected {
-                self.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
+                    self.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                }, completion: nil)
             } else {
-                self.setImage(UIImage(systemName: "heart"), for: .normal)
+                UIView.transition(with: self, duration: 0.2, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
+                    self.setImage(UIImage(systemName: "heart"), for: .normal)
+                }, completion: nil)
             }
         }
     }

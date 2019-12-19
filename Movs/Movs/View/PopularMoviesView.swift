@@ -10,8 +10,8 @@ import UIKit
 
 class PopularMoviesView: UIView {
 
-    let collectionView: MoviesCollectionView = {
-        let collectionView = MoviesCollectionView(itemsPerRow: 2, withMargin: 16.0)
+    let collectionView: PopularMoviesCollectionView = {
+        let collectionView = PopularMoviesCollectionView(itemsPerRow: 2, withMargin: 16.0)
         return collectionView
     }()
 

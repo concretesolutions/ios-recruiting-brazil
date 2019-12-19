@@ -14,9 +14,8 @@ class PopularMoviesCellViewModel {
 
     private var movie: Movie
 
-    var id: Int
-    var title: String
-    @Published var posterImage: UIImage = UIImage(named: "imagePlaceholder")!
+    private(set) var title: String
+    @Published var posterImage: UIImage = UIImage()
     @Published var isLiked: Bool = false
 
     var posterImageCancellable: AnyCancellable?
@@ -24,7 +23,6 @@ class PopularMoviesCellViewModel {
 
     init(withMovie movie: Movie) {
         self.movie = movie
-        self.id = movie.id
         self.title = movie.title
         self.setCombine()
     }
@@ -32,6 +30,10 @@ class PopularMoviesCellViewModel {
     private func setCombine() {
         self.isLikedCancellable = self.movie.$isLiked.assign(to: \.isLiked, on: self)
         self.posterImageCancellable = self.movie.$posterImage.assign(to: \.posterImage, on: self)
+    }
+
+    public func toggleFavorite() {
+        PersistenceService.favorite(movie: self.movie)
     }
 
 }

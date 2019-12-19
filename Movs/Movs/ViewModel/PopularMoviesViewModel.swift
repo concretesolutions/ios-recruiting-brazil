@@ -64,4 +64,9 @@ class PopularMoviesViewModel {
         return viewModel
     }
 
+    func viewModel1(forCellAt indexPath: IndexPath) -> MovieDetailsViewModel {
+        let viewModel = MovieDetailsViewModel(withMovie: self.movies[indexPath.row])
+        return viewModel
+    }
+
 }

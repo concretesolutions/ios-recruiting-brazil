@@ -10,12 +10,20 @@ import Foundation
 import Combine
 import UIKit
 
-struct MovieDetailsViewModel {
+protocol MovieProtocol {}
 
-    var id: Int
+class MovieDetailsViewModel: MovieProtocol {
+
     var title: String
     var overview: String
     var releaseDate: String
     var posterImage: UIImage
+
+    init(withMovie movie: Movie) {
+        self.title = movie.title
+        self.overview = movie.overview
+        self.releaseDate = movie.releaseDate
+        self.posterImage = movie.posterImage
+    }
 
 }

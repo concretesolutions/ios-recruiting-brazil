@@ -14,7 +14,7 @@ class FavoritesTableView: UITableView {
         super.init(frame: .zero, style: .plain)
         self.register(FavoritesTableViewCell.self, forCellReuseIdentifier: "favoritesTableViewCell")
         self.separatorStyle = .none
-        self.rowHeight = 160.0
+        self.rowHeight = 168.0
         self.allowsSelection = false
 
     }

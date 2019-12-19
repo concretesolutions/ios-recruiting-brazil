@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import UIKit
 
-class Movie {
+class Movie: ObservableObject {
 
     var id: Int
     var overview: String
@@ -18,7 +18,7 @@ class Movie {
     var genreIds: [Int]
     var title: String
     var posterPath: String?
-    @Published var isLiked: Bool = false
+    @Published var isLiked: Bool = false 
     @Published var posterImage: UIImage = UIImage(named: "imagePlaceholder")!
 
     private var posterImageCancellable: AnyCancellable?
@@ -30,7 +30,7 @@ class Movie {
         self.genreIds = movie.genreIds
         self.title = movie.title
         self.posterPath = movie.posterPath
-        self.isLiked = false
+        self.isLiked = PersistenceService.favoriteMovies.contains(self.id)
         self.setCombine()
     }
 
@@ -41,7 +41,7 @@ class Movie {
         self.genreIds = movie.genres.compactMap { $0.id }
         self.title = movie.title
         self.posterPath = movie.posterPath
-        self.isLiked = false
+        self.isLiked = PersistenceService.favoriteMovies.contains(self.id)
         self.setCombine()
 
     }

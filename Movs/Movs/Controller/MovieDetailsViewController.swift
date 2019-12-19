@@ -11,11 +11,17 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
 
     private var viewModel: MovieDetailsViewModel
-    private let screen = MovieDetailsView()
+    private lazy var screen: MovieDetailsView = {
+        let screen = MovieDetailsView(withViewModel: self.viewModel)
+        return screen
+    }()
 
     required init(withMovieViewModel viewModel: MovieDetailsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationController?.navigationBar.isTranslucent = true
+
     }
 
     required init?(coder: NSCoder) {

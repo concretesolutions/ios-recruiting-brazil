@@ -13,7 +13,9 @@ import Combine
 class MoviesCollectionViewCell: UICollectionViewCell {
 
     private var viewModel: PopularMoviesCellViewModel!
-    private var cancellables: [AnyCancellable] = []
+
+    private var posterImageCancellable: AnyCancellable?
+    private var likeButtonCancellable: AnyCancellable?
 
     private let verticalStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
@@ -26,7 +28,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 16.0
-        imageView.image = UIImage()  //Problem related
+        imageView.image = UIImage()  //Problem related with combine assign operation
         return imageView
     }()
 
@@ -51,6 +53,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         self.setupView()
+
         self.backgroundColor = UIColor(named: "cellBackground")
         self.layer.cornerRadius = 16.0
     }
@@ -62,21 +65,24 @@ class MoviesCollectionViewCell: UICollectionViewCell {
     func setup(withViewModel viewModel: PopularMoviesCellViewModel) {
         self.viewModel = viewModel
         self.movieTitle.text = self.viewModel.title
-        likeButton.addTarget(self, action: #selector(touchLikeButton), for: .touchUpInside)
+        self.likeButton.addTarget(self, action: #selector(touchLikeButton), for: .touchUpInside)
         self.setCombine()
     }
 
     private func setCombine() {
-        let posterImageCancellable = self.viewModel.$posterImage
+        self.posterImageCancellable = self.viewModel.$posterImage
             .receive(on: RunLoop.main)
             .assign(to: \.image!, on: posterImageView)
-        let likeButtonCancellable = self.viewModel.$isLiked.assign(to: \.isSelected, on: likeButton)
-        self.cancellables.append(posterImageCancellable)
-        self.cancellables.append(likeButtonCancellable)
+        self.likeButtonCancellable = self.viewModel.$isLiked.assign(to: \.isSelected, on: likeButton)
     }
 
     @objc func touchLikeButton() {
-        print("Cliquei")
+        self.viewModel.toggleFavorite()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.posterImageView.image = UIImage(named: "imagePlaceholder")
     }
 
 }
@@ -84,11 +90,11 @@ class MoviesCollectionViewCell: UICollectionViewCell {
 extension MoviesCollectionViewCell: ViewCode {
 
     func buildViewHierarchy() {
-        addSubview(verticalStackView)
+        self.contentView.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(posterImageView)
         verticalStackView.addArrangedSubview(movieTitleContainer)
         self.movieTitleContainer.addSubview(movieTitle)
-        self.posterImageView.addSubview(likeButton)
+        self.contentView.addSubview(likeButton)
     }
 
     func setupContraints() {

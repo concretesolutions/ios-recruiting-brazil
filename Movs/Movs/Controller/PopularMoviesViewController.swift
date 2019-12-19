@@ -14,7 +14,7 @@ class PopularMoviesViewController: UIViewController {
     private let viewModel = PopularMoviesViewModel()
     private let screen = PopularMoviesView()
 
-    private var countCnacellable: AnyCancellable?
+    private var countCancellable: AnyCancellable?
 
     override func loadView() {
         self.view = screen
@@ -30,6 +30,8 @@ class PopularMoviesViewController: UIViewController {
         self.definesPresentationContext = true
         self.navigationItem.searchController?.delegate = self
 
+        self.screen.collectionView.delegate = self
+
         // MARK: Sets pull to refresh - Under construction
         // let refreshControl = UIRefreshControl()
         // self.screen.collectionView.refreshControl = refreshControl
@@ -42,7 +44,7 @@ class PopularMoviesViewController: UIViewController {
     }
 
     func setCombine() {
-        self.countCnacellable = self.viewModel.$count
+        self.countCancellable = self.viewModel.$count
             .receive(on: RunLoop.main)
             .sink { _ in
                 self.screen.collectionView.performBatchUpdates({
@@ -78,6 +80,15 @@ extension PopularMoviesViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
         cell.setup(withViewModel: self.viewModel.viewModel(forCellAt: indexPath))
         return cell
+    }
+
+}
+
+extension PopularMoviesViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = MovieDetailsViewController(withMovieViewModel: self.viewModel.viewModel1(forCellAt: indexPath))
+        self.navigationController!.pushViewController(controller, animated: true)
     }
 
 }
