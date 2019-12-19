@@ -34,7 +34,7 @@ class FilterController: UIViewController {
                 self.filterValues = []
             }
         case .genre:
-            self.filterValues = Array(self.dataService.genres.values)
+            self.filterValues = Array(self.dataService.genres.values).sorted()
         }
         
         super.init(nibName: nil, bundle: nil)

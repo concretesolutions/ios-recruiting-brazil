@@ -36,15 +36,15 @@ class FavoritesController: UIViewController {
             switch self.collectionState {
             case .loading:
                 self.dataService.loadFavorites { (state) in
-                    self.collectionState = state
+                    if state == .loadSuccess && (!self.filters.isEmpty || !self.searchFilteredBy.isEmpty) {
+                        self.collectionState = .filtered
+                    } else {
+                        self.collectionState = state
+                        self.screen.hideButton()
+                    }
                 }
             case .loadSuccess:
-                if self.searchFilteredBy.isEmpty {
-                    self.favorites = self.dataService.favorites
-                } else {
-                    
-                }
-                
+                self.favorites = self.dataService.favorites
                 DispatchQueue.main.async {
                     self.screen.favoritesTableView.reloadData()
                 }
@@ -61,8 +61,23 @@ class FavoritesController: UIViewController {
                 }
             case .filtered:
                 self.favorites = self.dataService.favorites.filter({ (movie) -> Bool in
-                    return movie.title.lowercased().contains(self.searchFilteredBy.lowercased())
+                    var isMatching = true
+                    self.filters.forEach { (key, value) in
+                        if isMatching == true {
+                            isMatching = movie.has(value, for: key)
+                        }
+                    }
+                    
+                    if self.searchFilteredBy != "" {
+                        isMatching = movie.title.lowercased().contains(self.searchFilteredBy.lowercased())
+                    }
+                    
+                    return isMatching
                 })
+                
+                if !self.filters.isEmpty {
+                    self.screen.showButton()
+                }
                 
                 if self.favorites.count == 0 {
                     self.screen.presentEmptySearch(true)
@@ -99,10 +114,16 @@ class FavoritesController: UIViewController {
         super.viewDidAppear(animated)
     }
     
-    // MARK: - Navigation controller action
+    // MARK: - Filter actions
     @objc func goToFilters() {
         let controller = FiltersController(filters: self.filters)
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func removeFilters() {
+        self.filters = [:]
+        self.searchFilteredBy = ""
+        self.collectionState = .loading
     }
 }
 
@@ -167,7 +188,7 @@ extension FavoritesController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text ?? ""
         self.searchFilteredBy = text
-        if text == "" {
+        if self.searchFilteredBy.isEmpty && self.filters.isEmpty {
             self.collectionState = .normal
         } else {
             self.collectionState = .filtered

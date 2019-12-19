@@ -25,6 +25,9 @@ class FiltersScreen: UIView {
         button.setTitleColor(UIColor(named: "LabelInverse"), for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
+        button.addTarget(self.delegate,
+                         action: #selector(self.delegate?.applyFilters),
+                         for: .touchUpInside)
         return button
     }()
     

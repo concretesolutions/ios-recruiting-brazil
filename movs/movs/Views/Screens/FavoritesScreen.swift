@@ -17,6 +17,20 @@ class FavoritesScreen: UIView {
         searchController.searchBar.placeholder = "Search a movie by name"
         return searchController
     }()
+    
+    lazy var removeFiltersButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("remove filters", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        button.backgroundColor = .label
+        button.setTitleColor(UIColor(named: "LabelInverse"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+        button.addTarget(self.delegate,
+                         action: #selector(self.delegate?.removeFilters),
+                         for: .touchUpInside)
+        return button
+    }()
 
     lazy var favoritesTableView: UITableView = {
         let tableView = UITableView()
@@ -60,16 +74,46 @@ class FavoritesScreen: UIView {
             }
         }
     }
+    
+    // MARK: - Remove filters button
+    func hideButton() {
+        self.removeFiltersButton.snp.updateConstraints { (make) in
+            make.height.equalTo(0)
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func showButton() {
+        self.removeFiltersButton.snp.updateConstraints { (make) in
+            make.height.equalTo(45)
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
+        }
+    }
 }
 
 extension FavoritesScreen: CodeView {
     func buildViewHierarchy() {
+        self.addSubview(self.removeFiltersButton)
         self.addSubview(self.favoritesTableView)
     }
     
     func setupConstraints() {
+        self.removeFiltersButton.snp.makeConstraints { (make) in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(8)
+            make.right.equalToSuperview().inset(16)
+            make.left.equalToSuperview().offset(16)
+            make.height.equalTo(0)
+        }
+        
         self.favoritesTableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.right.bottom.left.equalToSuperview()
+            make.top.equalTo(self.removeFiltersButton.snp.bottom)
         }
     }
     

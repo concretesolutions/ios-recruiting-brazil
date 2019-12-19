@@ -37,8 +37,15 @@ final class DataService {
     }
     
     // MARK: - Setup data service for tests
-    func setup(with dataService: DataSource.Type) {
+    func setup(with dataService: DataSource.Type = MovieAPIService.self) {
         self.dataSource = dataService.self
+        self.movies = []
+    }
+    
+    func reset() {
+        self.genres = [:]
+        self.movies = []
+        self.favorites = []
     }
     
     // MARK: - Load methods
@@ -53,7 +60,7 @@ final class DataService {
                         self.genres[genre.id] = genre.name
                     }
                     
-                    MovieAPIService.fetchPopularMovies(of: page) { (result) in
+                    self.dataSource.fetchPopularMovies(of: page) { (result) in
                         switch result {
                         case .failure:
                             completion(.loadError)

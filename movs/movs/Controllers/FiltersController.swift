@@ -46,13 +46,14 @@ class FiltersController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    // MARK: - Apply filters action
+    @objc func applyFilters() {
+        self.navigationController?.popViewController(animated: true)
         if let controller = self.navigationController?.visibleViewController as? FavoritesController {
             self.filters.forEach { (key, value) in
                 controller.filters[key] = value == "" ? nil : value
             }
         }
-        super.viewWillDisappear(animated)
     }
 }
 

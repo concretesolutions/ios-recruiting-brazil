@@ -47,4 +47,13 @@ class Movie {
             }))
         self.isFavorite = DataService.shared.movieIsFavorite(movie.id)
     }
+    
+    func has(_ value: String, for key: FilterType) -> Bool {
+        switch key {
+        case .date:
+            return self.releaseDate == value
+        case .genre:
+            return self.genres.contains(value)
+        }
+    }
 }
