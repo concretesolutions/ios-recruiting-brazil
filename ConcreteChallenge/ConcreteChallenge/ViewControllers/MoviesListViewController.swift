@@ -9,11 +9,11 @@
 import UIKit
 
 class MoviesListViewController: UIViewController {
-    let moviesListView = MoviesListView(viewModel: .init())
+//    let moviesListView = MoviesListView(viewModel: .init())
     
     override func viewDidLoad() {
-        
-        view.addSubViews(moviesListView)
-        moviesListView.layout.fillSuperView()
+//        
+//        view.addSubViews(moviesListView)
+//        moviesListView.layout.fillSuperView()
     }
 }

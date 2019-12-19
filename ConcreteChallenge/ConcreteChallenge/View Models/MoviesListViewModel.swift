@@ -7,10 +7,16 @@
 //
 
 import Foundation
+import GenericNetwork
 
-class MoviesListViewModel {
-    var isExpanded: Bool {
-        return false
-    }
+protocol MoviesListViewModel {
     
+}
+
+class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider>: MoviesListViewModel where MoviesProviderType.ParsableType == Movie {
+    let moviesProvider: MoviesProviderType
+    
+    init(moviesProvider: MoviesProviderType) {
+        self.moviesProvider = moviesProvider
+    }
 }

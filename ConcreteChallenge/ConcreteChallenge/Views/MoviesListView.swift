@@ -48,7 +48,7 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let movieCellWidth = (collectionView.frame.width - 3 * moviesCollectionLayout.minimumInteritemSpacing)/3
-        return CGSize(width: movieCellWidth, height: movieCellWidth)
+        return CGSize(width: movieCellWidth, height: movieCellWidth * 1.5)
     }
 }
 
