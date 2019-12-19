@@ -41,7 +41,7 @@ class MoviesGridController: UIViewController , SendDataApi {
     func makeSearchController(){
         let searchController = UISearchController(nibName: nil, bundle: nil)
         self.navigationItem.searchController = searchController
-        self.definesPresentationContext = true
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
     }
     func setupDataMovie(){

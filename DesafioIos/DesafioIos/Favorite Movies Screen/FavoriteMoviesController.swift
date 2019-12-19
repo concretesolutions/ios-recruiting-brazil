@@ -46,6 +46,7 @@ class FavoriteMoviesController: UIViewController ,UISearchResultsUpdating{
         let searchController = UISearchController(nibName: nil, bundle: nil)
         self.navigationItem.searchController = searchController
         self.definesPresentationContext = true
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
     }
     //MARK: - protocol function SearchBarController Updating
