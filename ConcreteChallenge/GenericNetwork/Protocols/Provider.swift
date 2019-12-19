@@ -12,7 +12,7 @@ import Foundation
 /// This protocol can be implemented in multiple ways, using URLSession, Alamofire, Moya or other frameworks. This is usefull, because it makes easier switching between Provider implementations, then your code become more independent of especific things and third party code. It makes also easier implementing Mock Providers for unit tests.
 /**
     At **URLSessionDataProvider.swift** file there is an implementation made using URLSession.
-    At **MockProvider.swift** file there is an implementation make for helping to mock errors and local data requests
+    At **LocalMockProvider.swift** file there is an implementation make for helping to mock errors and local data requests
 */
 public protocol Provider {
     /// The route type from where retrieve the ReturnType

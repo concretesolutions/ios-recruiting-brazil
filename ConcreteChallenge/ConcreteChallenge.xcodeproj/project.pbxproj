@@ -31,6 +31,10 @@
 		E37E9BAC23ABA13500911EC8 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BAB23ABA13500911EC8 /* JSONParser.swift */; };
 		E37E9BAE23ABA17000911EC8 /* URLSessionJSONProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BAD23ABA17000911EC8 /* URLSessionJSONProvider.swift */; };
 		E37E9BB023ABA21F00911EC8 /* LocalMockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BAF23ABA21F00911EC8 /* LocalMockProvider.swift */; };
+		E37E9BB223ABA36C00911EC8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E37E9BB123ABA36C00911EC8 /* README.md */; };
+		E37E9BB523ABA3C300911EC8 /* TMDBRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BB423ABA3C300911EC8 /* TMDBRoute.swift */; };
+		E37E9BB723ABA6B400911EC8 /* TMDBQueryProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BB623ABA6B400911EC8 /* TMDBQueryProperty.swift */; };
+		E37E9BBA23ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BB923ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +121,10 @@
 		E37E9BAB23ABA13500911EC8 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		E37E9BAD23ABA17000911EC8 /* URLSessionJSONProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionJSONProvider.swift; sourceTree = "<group>"; };
 		E37E9BAF23ABA21F00911EC8 /* LocalMockProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMockProvider.swift; sourceTree = "<group>"; };
+		E37E9BB123ABA36C00911EC8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E37E9BB423ABA3C300911EC8 /* TMDBRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBRoute.swift; sourceTree = "<group>"; };
+		E37E9BB623ABA6B400911EC8 /* TMDBQueryProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBQueryProperty.swift; sourceTree = "<group>"; };
+		E37E9BB923ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLQueryItem+initWithTMDBQueryProperty.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +195,7 @@
 		E37E9B3F23AB97B300911EC8 /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				E37E9BB323ABA39900911EC8 /* Network */,
 				E37E9B4023AB97B300911EC8 /* AppDelegate.swift */,
 				E37E9B4423AB97B300911EC8 /* ViewController.swift */,
 				E37E9B4923AB97B400911EC8 /* Assets.xcassets */,
@@ -217,11 +226,12 @@
 		E37E9B7623AB9D6200911EC8 /* GenericNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				E37E9B9F23AB9F5E00911EC8 /* extenions */,
-				E37E9B9623AB9DC800911EC8 /* models */,
-				E37E9B9323AB9D6D00911EC8 /* protocols */,
+				E37E9B9F23AB9F5E00911EC8 /* Extenions */,
+				E37E9B9623AB9DC800911EC8 /* Models */,
+				E37E9B9323AB9D6D00911EC8 /* Protocols */,
 				E37E9B7723AB9D6200911EC8 /* GenericNetwork.h */,
 				E37E9B7823AB9D6200911EC8 /* Info.plist */,
+				E37E9BB123ABA36C00911EC8 /* README.md */,
 			);
 			path = GenericNetwork;
 			sourceTree = "<group>";
@@ -235,7 +245,7 @@
 			path = GenericNetworkTests;
 			sourceTree = "<group>";
 		};
-		E37E9B9323AB9D6D00911EC8 /* protocols */ = {
+		E37E9B9323AB9D6D00911EC8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				E37E9B9423AB9DB700911EC8 /* Route.swift */,
@@ -243,27 +253,27 @@
 				E37E9B9B23AB9EA500911EC8 /* Provider.swift */,
 				E37E9B9D23AB9EE700911EC8 /* ParserProvider.swift */,
 			);
-			path = protocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
-		E37E9B9623AB9DC800911EC8 /* models */ = {
+		E37E9B9623AB9DC800911EC8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E37E9BA623ABA07200911EC8 /* implementations */,
 				E37E9B9723AB9DDE00911EC8 /* HttpMethod.swift */,
 				E37E9BA923ABA0AB00911EC8 /* NetworkError.swift */,
 			);
-			path = models;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		E37E9B9F23AB9F5E00911EC8 /* extenions */ = {
+		E37E9B9F23AB9F5E00911EC8 /* Extenions */ = {
 			isa = PBXGroup;
 			children = (
 				E37E9BA023AB9F7000911EC8 /* ParserProvider+requestAndParse.swift */,
 				E37E9BA223AB9FA500911EC8 /* Route+initRouteType.swift */,
 				E37E9BA423AB9FC500911EC8 /* Route+completeURL.swift */,
 			);
-			path = extenions;
+			path = Extenions;
 			sourceTree = "<group>";
 		};
 		E37E9BA623ABA07200911EC8 /* implementations */ = {
@@ -275,6 +285,24 @@
 				E37E9BAF23ABA21F00911EC8 /* LocalMockProvider.swift */,
 			);
 			path = implementations;
+			sourceTree = "<group>";
+		};
+		E37E9BB323ABA39900911EC8 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BB823ABA6E600911EC8 /* extensions */,
+				E37E9BB423ABA3C300911EC8 /* TMDBRoute.swift */,
+				E37E9BB623ABA6B400911EC8 /* TMDBQueryProperty.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E37E9BB823ABA6E600911EC8 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BB923ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,6 +492,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E37E9BB223ABA36C00911EC8 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,7 +511,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E37E9B4523AB97B300911EC8 /* ViewController.swift in Sources */,
+				E37E9BBA23ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift in Sources */,
 				E37E9B4123AB97B300911EC8 /* AppDelegate.swift in Sources */,
+				E37E9BB523ABA3C300911EC8 /* TMDBRoute.swift in Sources */,
+				E37E9BB723ABA6B400911EC8 /* TMDBQueryProperty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
