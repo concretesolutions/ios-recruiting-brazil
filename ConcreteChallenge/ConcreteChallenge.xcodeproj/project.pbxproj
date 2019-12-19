@@ -23,6 +23,9 @@
 		E37E9B9A23AB9E6E00911EC8 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9B9923AB9E6E00911EC8 /* Parser.swift */; };
 		E37E9B9C23AB9EA500911EC8 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9B9B23AB9EA500911EC8 /* Provider.swift */; };
 		E37E9B9E23AB9EE700911EC8 /* ParserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9B9D23AB9EE700911EC8 /* ParserProvider.swift */; };
+		E37E9BA123AB9F7000911EC8 /* ParserProvider+requestAndParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BA023AB9F7000911EC8 /* ParserProvider+requestAndParse.swift */; };
+		E37E9BA323AB9FA500911EC8 /* Route+initRouteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BA223AB9FA500911EC8 /* Route+initRouteType.swift */; };
+		E37E9BA523AB9FC500911EC8 /* Route+completeURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BA423AB9FC500911EC8 /* Route+completeURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,9 @@
 		E37E9B9923AB9E6E00911EC8 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		E37E9B9B23AB9EA500911EC8 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		E37E9B9D23AB9EE700911EC8 /* ParserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProvider.swift; sourceTree = "<group>"; };
+		E37E9BA023AB9F7000911EC8 /* ParserProvider+requestAndParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserProvider+requestAndParse.swift"; sourceTree = "<group>"; };
+		E37E9BA223AB9FA500911EC8 /* Route+initRouteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+initRouteType.swift"; sourceTree = "<group>"; };
+		E37E9BA423AB9FC500911EC8 /* Route+completeURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+completeURL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +207,7 @@
 		E37E9B7623AB9D6200911EC8 /* GenericNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				E37E9B9F23AB9F5E00911EC8 /* extenions */,
 				E37E9B9623AB9DC800911EC8 /* models */,
 				E37E9B9323AB9D6D00911EC8 /* protocols */,
 				E37E9B7723AB9D6200911EC8 /* GenericNetwork.h */,
@@ -235,6 +242,16 @@
 				E37E9B9723AB9DDE00911EC8 /* HttpMethod.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E37E9B9F23AB9F5E00911EC8 /* extenions */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BA023AB9F7000911EC8 /* ParserProvider+requestAndParse.swift */,
+				E37E9BA223AB9FA500911EC8 /* Route+initRouteType.swift */,
+				E37E9BA423AB9FC500911EC8 /* Route+completeURL.swift */,
+			);
+			path = extenions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,9 +483,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E37E9BA523AB9FC500911EC8 /* Route+completeURL.swift in Sources */,
 				E37E9B9C23AB9EA500911EC8 /* Provider.swift in Sources */,
 				E37E9B9823AB9DDE00911EC8 /* HttpMethod.swift in Sources */,
 				E37E9B9523AB9DB700911EC8 /* Route.swift in Sources */,
+				E37E9BA123AB9F7000911EC8 /* ParserProvider+requestAndParse.swift in Sources */,
+				E37E9BA323AB9FA500911EC8 /* Route+initRouteType.swift in Sources */,
 				E37E9B9E23AB9EE700911EC8 /* ParserProvider.swift in Sources */,
 				E37E9B9A23AB9E6E00911EC8 /* Parser.swift in Sources */,
 			);
