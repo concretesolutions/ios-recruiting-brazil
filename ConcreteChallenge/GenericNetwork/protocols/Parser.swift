@@ -10,6 +10,9 @@ import Foundation
 
 /// A protocol for types that can parse Data values.
 /// This protocol can be implemented for parsing any Data format like: JSON and XML
+/**
+    At **JSONParser.swift** file there is an implementation for the JSON patterns
+*/
 public protocol Parser {
     //the result type from the parser
     associatedtype ParsableType

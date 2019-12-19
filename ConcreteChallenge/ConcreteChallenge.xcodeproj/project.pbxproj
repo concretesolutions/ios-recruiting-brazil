@@ -28,6 +28,9 @@
 		E37E9BA523AB9FC500911EC8 /* Route+completeURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BA423AB9FC500911EC8 /* Route+completeURL.swift */; };
 		E37E9BA823ABA08900911EC8 /* URLSessionDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BA723ABA08900911EC8 /* URLSessionDataProvider.swift */; };
 		E37E9BAA23ABA0AB00911EC8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BA923ABA0AB00911EC8 /* NetworkError.swift */; };
+		E37E9BAC23ABA13500911EC8 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BAB23ABA13500911EC8 /* JSONParser.swift */; };
+		E37E9BAE23ABA17000911EC8 /* URLSessionJSONProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BAD23ABA17000911EC8 /* URLSessionJSONProvider.swift */; };
+		E37E9BB023ABA21F00911EC8 /* LocalMockProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BAF23ABA21F00911EC8 /* LocalMockProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +114,9 @@
 		E37E9BA423AB9FC500911EC8 /* Route+completeURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+completeURL.swift"; sourceTree = "<group>"; };
 		E37E9BA723ABA08900911EC8 /* URLSessionDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataProvider.swift; sourceTree = "<group>"; };
 		E37E9BA923ABA0AB00911EC8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		E37E9BAB23ABA13500911EC8 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		E37E9BAD23ABA17000911EC8 /* URLSessionJSONProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionJSONProvider.swift; sourceTree = "<group>"; };
+		E37E9BAF23ABA21F00911EC8 /* LocalMockProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMockProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +270,9 @@
 			isa = PBXGroup;
 			children = (
 				E37E9BA723ABA08900911EC8 /* URLSessionDataProvider.swift */,
+				E37E9BAB23ABA13500911EC8 /* JSONParser.swift */,
+				E37E9BAD23ABA17000911EC8 /* URLSessionJSONProvider.swift */,
+				E37E9BAF23ABA21F00911EC8 /* LocalMockProvider.swift */,
 			);
 			path = implementations;
 			sourceTree = "<group>";
@@ -500,6 +509,8 @@
 				E37E9BA523AB9FC500911EC8 /* Route+completeURL.swift in Sources */,
 				E37E9B9C23AB9EA500911EC8 /* Provider.swift in Sources */,
 				E37E9B9823AB9DDE00911EC8 /* HttpMethod.swift in Sources */,
+				E37E9BB023ABA21F00911EC8 /* LocalMockProvider.swift in Sources */,
+				E37E9BAC23ABA13500911EC8 /* JSONParser.swift in Sources */,
 				E37E9B9523AB9DB700911EC8 /* Route.swift in Sources */,
 				E37E9BA123AB9F7000911EC8 /* ParserProvider+requestAndParse.swift in Sources */,
 				E37E9BA323AB9FA500911EC8 /* Route+initRouteType.swift in Sources */,
@@ -507,6 +518,7 @@
 				E37E9B9A23AB9E6E00911EC8 /* Parser.swift in Sources */,
 				E37E9BA823ABA08900911EC8 /* URLSessionDataProvider.swift in Sources */,
 				E37E9BAA23ABA0AB00911EC8 /* NetworkError.swift in Sources */,
+				E37E9BAE23ABA17000911EC8 /* URLSessionJSONProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

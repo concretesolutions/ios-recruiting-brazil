@@ -9,7 +9,7 @@
 import Foundation
 
 /// A default implementation of ParsableProvider made with URLSession and dataTask.
-public class URLSessionDataProvider<RouteType: Route, ParserType: Parser>: ParserProvider {
+public class URLSessionParserProvider<RouteType: Route, ParserType: Parser>: ParserProvider {
     public var parser: ParserType
     
     
