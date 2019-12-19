@@ -26,7 +26,7 @@ final class PopularMoviesTabCoordinator: NSObject, Coordinator {
     }
 
     func start() {
-        guard navigationController.topViewController == nil else { return } 
+        guard navigationController.topViewController == nil else { return }
         let vc = PopularMoviesListViewController()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)

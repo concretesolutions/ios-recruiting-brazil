@@ -17,7 +17,7 @@ enum MovieDBService {
 extension MovieDBService: Service {
     var baseURL: URL {
         switch self {
-        case .posterImage(_):
+        case .posterImage:
             return URL(string: "https://image.tmdb.org/t/p/w500")!
         default:
             return URL(string: "https://api.themoviedb.org/3")!
@@ -26,7 +26,7 @@ extension MovieDBService: Service {
 
     var path: String {
         switch self {
-        case .popularMovies(_):
+        case .popularMovies:
             return "/movie/popular"
         case .movieGenres:
             return "/genre/movie/list"
@@ -56,6 +56,5 @@ extension MovieDBService: Service {
     var parametersEncoding: ParametersEncoding {
         return .url
     }
-
 
 }

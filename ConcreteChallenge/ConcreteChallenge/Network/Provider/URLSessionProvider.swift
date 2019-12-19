@@ -25,7 +25,9 @@ final class URLSessionProvider: Provider {
     func request<T: Decodable>(
         type: T.Type, service: Service, completion: @escaping (Result<T, Error>) -> Void) {
 
-        guard let request = URLRequest(service: service) else { return completion(.failure(NetworkError.invalidRequest)) }
+        guard let request = URLRequest(service: service) else {
+            return completion(.failure(NetworkError.invalidRequest))
+        }
 
         let task = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -44,7 +46,8 @@ final class URLSessionProvider: Provider {
         }
     }
 
-    private func handleResult<T: Decodable>(data: Data, response: HTTPURLResponse, completion: (Result<T, Error>) -> Void) {
+    private func handleResult<T: Decodable>(
+        data: Data, response: HTTPURLResponse, completion: (Result<T, Error>) -> Void) {
         if case 200...299 = response.statusCode {
             do {
                 let model = try JSONDecoder().decode(T.self, from: data)
@@ -58,7 +61,9 @@ final class URLSessionProvider: Provider {
     }
 
     func request(service: Service, completion: @escaping (Result<Data, Error>) -> Void) {
-        guard let request = URLRequest(service: service) else { return completion(.failure(NetworkError.invalidRequest)) }
+        guard let request = URLRequest(service: service) else {
+            return completion(.failure(NetworkError.invalidRequest))
+        }
 
         let task = session.dataTask(with: request) { (data, response, error) in
             if let error = error {

@@ -16,7 +16,9 @@ class URLSessionMockSuccess: URLSession {
         self.modelData = modelData
     }
 
-    override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    override func dataTask(
+        with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
+    ) -> URLSessionDataTask {
         let urlResponse = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)
 
         completionHandler(modelData, urlResponse, nil)
@@ -31,7 +33,9 @@ class URLSessionMockError: URLSession {
     override init() {
     }
 
-    override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    override func dataTask(
+        with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
+    ) -> URLSessionDataTask {
         let nsError = NSError(domain: "", code: 0, userInfo: nil)
         completionHandler(nil, nil, nsError)
         return URLSessionDataTaskMock()
@@ -44,7 +48,9 @@ class URLSessionMockInvalidStatusCode: URLSession {
     override init() {
     }
 
-    override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    override func dataTask(
+        with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
+    ) -> URLSessionDataTask {
         let urlResponse = HTTPURLResponse(url: request.url!, statusCode: 400, httpVersion: nil, headerFields: nil)
         completionHandler(nil, urlResponse, nil)
         return URLSessionDataTaskMock()
@@ -53,7 +59,7 @@ class URLSessionMockInvalidStatusCode: URLSession {
 }
 
 class URLSessionDataTaskMock: URLSessionDataTask {
-    
+
     override init() {
     }
 

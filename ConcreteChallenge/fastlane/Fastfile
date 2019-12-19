@@ -1,0 +1,68 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Run tests"
+  lane :test do
+    run_tests
+  end
+
+  desc "Build new minor version"
+  lane :beta_minor do
+    beta(bump_type: "minor")
+  end
+
+  desc "Build new patch version"
+  lane :beta_patch do
+    beta(bump_type: "patch")
+  end
+
+  desc "Creating a new beta version"
+  desc "Steps:"
+  desc "1. Update build and version numbers"
+  desc "2. Push a new beta build to TestFlight"
+  desc "3. Update the repository"
+  lane :beta do |options|
+    # Atualiza o número da build
+    build_number = Time.new.strftime("%d%m%y%H%M")
+    increment_build_number(
+      build_number: build_number,
+      xcodeproj: "Movinning.xcodeproj"
+    )
+
+    # Atualiza o número da versão caso passado com options
+    if options[:bump_type]
+      increment_version_number(
+        bump_type: options[:bump_type]
+      )
+    end
+    version_number = get_version_number
+
+    # Build do app e envio para o testflight
+    build_app(scheme: "Movinning")
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
+
+    # Atualiza o repositório
+    clean_build_artifacts
+    commit_version_bump message: "Deploy da versão #{version_number} (#{build_number})."
+    push_to_git_remote
+
+  end
+
+end

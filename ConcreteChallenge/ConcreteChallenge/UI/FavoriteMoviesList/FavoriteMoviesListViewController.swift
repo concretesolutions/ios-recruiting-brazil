@@ -83,7 +83,8 @@ extension FavoriteMoviesListViewController: UITableViewDelegate, UITableViewData
     ) -> UISwipeActionsConfiguration? {
         let favorite = viewModel.favorite(at: indexPath)
         let actionTitle = "Remover favorito"
-        let unfavoriteAction = UIContextualAction(style: .destructive, title: actionTitle) { (_, _, completionHandler) in
+        let unfavoriteAction = UIContextualAction(style: .destructive, title: actionTitle) {
+            (_, _, completionHandler) in
             CoreDataStore.delete(favorite)
             completionHandler(true)
         }
@@ -92,4 +93,3 @@ extension FavoriteMoviesListViewController: UITableViewDelegate, UITableViewData
         return configuration
     }
 }
-

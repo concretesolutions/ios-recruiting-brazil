@@ -102,7 +102,7 @@ class PopularMoviesListViewController: UIViewController {
         newFavorite.id = Int64(movie.id)
         newFavorite.overview = movie.overview
         newFavorite.posterImage = movie.posterImage?.jpegData(compressionQuality: 1.0)
-        newFavorite.genreIDs = movie.genreIDs.map({ NSNumber(integerLiteral: $0) })
+        newFavorite.genreIDs = movie.genreIDs.map({ NSNumber(value: $0) })
 
         CoreDataStore.saveContext()
     }
@@ -115,7 +115,10 @@ extension PopularMoviesListViewController: UICollectionViewDataSource {
         return isFiltering ? filteredMovies.count : movies.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as PopularMovieCollectionViewCell
 
         let movie: Movie

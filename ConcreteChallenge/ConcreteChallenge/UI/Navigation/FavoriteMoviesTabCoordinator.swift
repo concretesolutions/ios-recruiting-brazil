@@ -26,7 +26,7 @@ final class FavoriteMoviesTabCoordinator: NSObject, Coordinator {
     }
 
     func start() {
-        guard navigationController.topViewController == nil else { return } 
+        guard navigationController.topViewController == nil else { return }
         let vc = FavoriteMoviesListViewController()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
@@ -40,4 +40,3 @@ final class FavoriteMoviesTabCoordinator: NSObject, Coordinator {
     }
 
 }
-

@@ -15,7 +15,7 @@ extension UINavigationController {
         navigationBar.barTintColor = UIColor(named: "movs-yellow")
 
         let defaultAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.black,
+            .foregroundColor: UIColor.black
         ]
         navigationBar.titleTextAttributes = defaultAttributes
     }

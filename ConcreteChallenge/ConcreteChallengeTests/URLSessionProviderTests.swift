@@ -21,7 +21,7 @@ class URLSessionProviderTests: XCTestCase {
             case .success:
                 expectation.fulfill()
             case .failure:
-                XCTFail()
+                XCTFail("Test case \(#function) falhou")
             }
         }
 
@@ -36,7 +36,7 @@ class URLSessionProviderTests: XCTestCase {
         provider.request(type: ModelMock.self, service: basicRequest) { (result) in
             switch result {
             case .success:
-                XCTFail()
+                XCTFail("Test case \(#function) teve sucesso")
             case .failure:
                 expectation.fulfill()
             }
@@ -55,7 +55,7 @@ class URLSessionProviderTests: XCTestCase {
             case .success:
                 expectation.fulfill()
             case .failure:
-                XCTFail()
+                XCTFail("Test case \(#function) falhou")
             }
         }
 
@@ -70,7 +70,7 @@ class URLSessionProviderTests: XCTestCase {
         provider.request(service: basicRequest) { (result) in
             switch result {
             case .success:
-                XCTFail()
+                XCTFail("Test case \(#function) teve sucesso")
             case .failure:
                 expectation.fulfill()
             }
@@ -92,7 +92,7 @@ class URLSessionProviderTests: XCTestCase {
                 XCTAssertEqual(root.results.first?.title, "Ad Astra")
                 expectation.fulfill()
             case .failure:
-                XCTFail()
+                XCTFail("Test case \(#function) falhou")
             }
         }
 

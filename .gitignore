@@ -70,10 +70,14 @@ Dependencies/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/#source-control
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
+# fastlane specific
+**/fastlane/report.xml
+# deliver temporary files
+**/fastlane/Preview.html
+# snapshot generated screenshots
+**/fastlane/screenshots
+# scan temporary files
+**/fastlane/test_output
 
 # Code Injection
 # After new code Injection tools there's a generated folder /iOSInjectionProject

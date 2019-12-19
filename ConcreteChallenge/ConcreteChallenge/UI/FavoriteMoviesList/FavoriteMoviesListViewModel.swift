@@ -17,7 +17,12 @@ class FavoriteMoviesListViewModel: NSObject {
     private lazy var fetchedResultsController: NSFetchedResultsController<FavoriteMovie> = {
         let fetchRequest: NSFetchRequest<FavoriteMovie> = FavoriteMovie.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStore.context, sectionNameKeyPath: nil, cacheName: nil)
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: CoreDataStore.context,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
         controller.delegate = self
 
         return controller

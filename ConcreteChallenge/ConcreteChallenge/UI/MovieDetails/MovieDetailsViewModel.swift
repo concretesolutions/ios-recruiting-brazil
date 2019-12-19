@@ -90,7 +90,7 @@ class MovieDetailsViewModel: NSObject {
         newFavorite.id = Int64(id)
         newFavorite.overview = overview
         newFavorite.posterImage = posterImage.jpegData(compressionQuality: 1.0)
-        newFavorite.genreIDs = genreIDs.map({ NSNumber(integerLiteral: $0) })
+        newFavorite.genreIDs = genreIDs.map({ NSNumber(value: $0) })
 
         CoreDataStore.saveContext()
         isFavorited = true
