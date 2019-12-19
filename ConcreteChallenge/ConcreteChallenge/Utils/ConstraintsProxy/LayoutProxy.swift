@@ -10,7 +10,7 @@ import Foundation
 
 /// This is a proxy for the layout of a view. It has properties for each type of anchor of a view.
 /// Use it to have access to this properties and use the constraint methods
-class ViewLayoutProxy: BuilderBlock {
+class LayoutProxy: BuilderBlock {
     //A view or a layoutGuide
     var anchorable: Anchorable
     
