@@ -30,9 +30,11 @@ final class FavoritesTableViewController: UITableViewController {
         return heightScreen * 0.2
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! FavoriteMovieCellView
-        cell.movie = movies[indexPath.row]
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? FavoriteMovieCellView{
+            cell.movie = movies[indexPath.row]
+            return cell
+        }
+        return UITableViewCell()
     }
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
