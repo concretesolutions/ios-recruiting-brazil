@@ -25,8 +25,13 @@ class Movie {
             } else {
                 DataProvider.shared.removeFavoriteMovie(self)
             }
+            self.didSetIsFavorite()
         }
     }
+
+    // MARK: - Closures
+
+    var didSetIsFavorite: () -> Void = { }
 
     // MARK: - Initializers
 
