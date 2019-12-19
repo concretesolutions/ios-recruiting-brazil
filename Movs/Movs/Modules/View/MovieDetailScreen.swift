@@ -107,7 +107,7 @@ final class MovieDetailScreen: UIView {
     }
 
     private func configureHeartImage() {
-        let imageName = self.movie.isFavourite ? "heart.fill" : "heart"
+        let imageName = self.movie.isFavorite ? "heart.fill" : "heart"
         self.heartButton.setBackgroundImage(UIImage(systemName: imageName), for: .normal)
     }
 
@@ -221,8 +221,7 @@ extension MovieDetailScreen: UIGestureRecognizerDelegate {
     // MARK: - Tap handlers
 
     @objc func didTapOnHeart() {
-        self.movie.isFavourite = self.movie.isFavourite ? false : true
+        self.delegate?.didTapOnHeart(fromMovie: self.movie)
         self.configureHeartImage()
-        self.delegate?.didTapOnHeart(movieID: self.movie.id)
     }
 }

@@ -24,9 +24,9 @@ class MovsViewController: UITabBarController {
         popularNavController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "list.bullet"), tag: 0)
         popularNavController.navigationBar.prefersLargeTitles = true
 
-        // Favourite Movies' screen
+        // Favorite Movies' screen
 
-        // TODO: add Favourite Movies's screen
+        // TODO: add Favorite Movies's screen
 
         self.viewControllers = [popularNavController]
     }

@@ -35,25 +35,25 @@ class PopularMovieCellSpec: QuickSpec {
                 self.sut = nil
             }
 
-            context("when configured with a non favourite movie") {
+            context("when configured with a non favorite movie") {
 
                 beforeEach {
-                    self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavourite: false))
+                    self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: false))
                 }
 
                 it("should have the expected look and feel") {
-                    expect(self.sut) == snapshot("PopularMovieCell_nonFavourite")
+                    expect(self.sut) == snapshot("PopularMovieCell_nonFavorite")
                 }
             }
 
-            context("when configured with a favourite movie") {
+            context("when configured with a favorite movie") {
 
                 beforeEach {
-                    self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavourite: true))
+                    self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: true))
                 }
 
                 it("should have the expected look and feel") {
-                    expect(self.sut) == snapshot("PopularMovieCell_favourite")
+                    expect(self.sut) == snapshot("PopularMovieCell_favorite")
                 }
             }
 
@@ -62,25 +62,25 @@ class PopularMovieCellSpec: QuickSpec {
                 context("when is is tapped on once") {
 
                     beforeEach {
-                        self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavourite: false))
+                        self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: false))
                         self.sut.didTapOnHeart()
                     }
 
                     it("should change its color") {
-                        expect(self.sut) == snapshot("PopularMovieCell_favourite")
+                        expect(self.sut) == snapshot("PopularMovieCell_favorite")
                     }
                 }
 
                 context("when is is tapped on twice") {
 
                     beforeEach {
-                        self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavourite: false))
+                        self.sut.configure(with: Movie(fromDTO: self.movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: false))
                         self.sut.didTapOnHeart()
                         self.sut.didTapOnHeart()
                     }
 
                     it("should change its color") {
-                        expect(self.sut) == snapshot("PopularMovieCell_nonFavourite")
+                        expect(self.sut) == snapshot("PopularMovieCell_nonFavorite")
                     }
                 }
             }

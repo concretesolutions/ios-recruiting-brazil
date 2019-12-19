@@ -31,7 +31,7 @@ class MovieDetailScreenSpec: QuickSpec {
                 DataProvider.shared.reset()
                 DataProvider.shared.setup(withDataFetcher: mockFetcher) { _ in }
 
-                self.sut.configure(with: Movie(fromDTO: mockFetcher.movies[2]![0], smallImageURL: nil, bigImageURL: nil, isFavourite: false))
+                self.sut.configure(with: Movie(fromDTO: mockFetcher.movies[2]![0], smallImageURL: nil, bigImageURL: nil, isFavorite: false))
             }
 
             afterEach {

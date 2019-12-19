@@ -8,6 +8,4 @@
 
 import UIKit
 
-//swiftlint:disable class_delegate_protocol
-protocol PopularMoviesScreenDelegate: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout { }
-//swiftlint:enable class_delegate_protocol
+protocol PopularMoviesScreenDelegate: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, HeartButtonDelegate { }
