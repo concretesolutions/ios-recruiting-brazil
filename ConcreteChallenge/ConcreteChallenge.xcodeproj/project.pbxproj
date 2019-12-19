@@ -44,6 +44,9 @@
 		E37E9BCD23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BCC23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift */; };
 		E37E9BCF23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BCE23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift */; };
 		E37E9BD123ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BD023ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift */; };
+		E37E9BD623ABB51900911EC8 /* LayoutProxy+constraintsFillMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BD523ABB51900911EC8 /* LayoutProxy+constraintsFillMethods.swift */; };
+		E3A494B823ABB7E50045F439 /* UIViewAndUILayoutGuide+layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A494B723ABB7E50045F439 /* UIViewAndUILayoutGuide+layout.swift */; };
+		E3F1C36D23ABC75A00206CBA /* LayoutPropertyProxyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C36C23ABC75A00206CBA /* LayoutPropertyProxyType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +146,9 @@
 		E37E9BCC23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLayoutPropertyProxy.swift; sourceTree = "<group>"; };
 		E37E9BCE23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayoutPropertyProxy+constraintMethods.swift"; sourceTree = "<group>"; };
 		E37E9BD023ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayoutPropertyProxy+dimensionConstraintMethods.swift"; sourceTree = "<group>"; };
+		E37E9BD523ABB51900911EC8 /* LayoutProxy+constraintsFillMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayoutProxy+constraintsFillMethods.swift"; sourceTree = "<group>"; };
+		E3A494B723ABB7E50045F439 /* UIViewAndUILayoutGuide+layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewAndUILayoutGuide+layout.swift"; sourceTree = "<group>"; };
+		E3F1C36C23ABC75A00206CBA /* LayoutPropertyProxyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyProxyType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,14 +344,41 @@
 		E37E9BC523ABB01C00911EC8 /* ConstraintsProxy */ = {
 			isa = PBXGroup;
 			children = (
-				E37E9BC623ABB04300911EC8 /* LayoutPropertyProxy.swift */,
-				E37E9BC823ABB08A00911EC8 /* LayoutProxy.swift */,
-				E37E9BCA23ABB0BA00911EC8 /* Anchorable.swift */,
-				E37E9BCC23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift */,
-				E37E9BCE23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift */,
-				E37E9BD023ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift */,
+				E37E9BD423ABB4FF00911EC8 /* models */,
+				E37E9BD323ABB4F400911EC8 /* extensions */,
+				E37E9BD223ABB4DE00911EC8 /* protocols */,
 			);
 			path = ConstraintsProxy;
+			sourceTree = "<group>";
+		};
+		E37E9BD223ABB4DE00911EC8 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BCA23ABB0BA00911EC8 /* Anchorable.swift */,
+				E37E9BC623ABB04300911EC8 /* LayoutPropertyProxy.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		E37E9BD323ABB4F400911EC8 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BCE23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift */,
+				E37E9BD023ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift */,
+				E37E9BD523ABB51900911EC8 /* LayoutProxy+constraintsFillMethods.swift */,
+				E3A494B723ABB7E50045F439 /* UIViewAndUILayoutGuide+layout.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		E37E9BD423ABB4FF00911EC8 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BC823ABB08A00911EC8 /* LayoutProxy.swift */,
+				E37E9BCC23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift */,
+				E3F1C36C23ABC75A00206CBA /* LayoutPropertyProxyType.swift */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -554,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E37E9BCB23ABB0BA00911EC8 /* Anchorable.swift in Sources */,
+				E3A494B823ABB7E50045F439 /* UIViewAndUILayoutGuide+layout.swift in Sources */,
 				E37E9BCD23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift in Sources */,
 				E37E9B4523AB97B300911EC8 /* ViewController.swift in Sources */,
 				E37E9BBA23ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift in Sources */,
@@ -565,7 +599,9 @@
 				E37E9BB723ABA6B400911EC8 /* TMDBQueryProperty.swift in Sources */,
 				E37E9BC423ABAFA500911EC8 /* BuilderBlock.swift in Sources */,
 				E37E9BC223ABAF1800911EC8 /* ViewCodable.swift in Sources */,
+				E37E9BD623ABB51900911EC8 /* LayoutProxy+constraintsFillMethods.swift in Sources */,
 				E37E9BC923ABB08B00911EC8 /* LayoutProxy.swift in Sources */,
+				E3F1C36D23ABC75A00206CBA /* LayoutPropertyProxyType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

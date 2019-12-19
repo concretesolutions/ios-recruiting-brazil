@@ -14,5 +14,8 @@ protocol LayoutPropertyProxy {
     associatedtype AnchorType: AnyObject
     
     var anchor: NSLayoutAnchor<AnchorType> { get set }
-    init(anchor: NSLayoutAnchor<AnchorType>)
+    var layout: LayoutProxy { get }
+    var type: LayoutPropertyProxyType { get }
+    
+    init(anchor: NSLayoutAnchor<AnchorType>, layout: LayoutProxy, type: LayoutPropertyProxyType)
 }

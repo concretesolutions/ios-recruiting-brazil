@@ -10,10 +10,7 @@ import UIKit
 
 /// Any LayoutPropertyProxy has methods for handling constraints
 extension LayoutPropertyProxy {
-    
-    
     // so, here we are only using the default UIKit constrait methods to make the LayoutPropertyProxy methods.
-    
     @discardableResult
     func equal(to otherAnchorLayout: DefaultLayoutPropertyProxy<AnchorType>, offsetBy constant: CGFloat = 0) -> NSLayoutConstraint {
         let constraint = anchor.constraint(equalTo: otherAnchorLayout.anchor, constant: constant)

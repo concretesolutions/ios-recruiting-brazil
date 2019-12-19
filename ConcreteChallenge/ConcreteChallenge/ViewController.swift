@@ -10,21 +10,19 @@ import UIKit
 import GenericNetwork
 
 class ViewController: UIViewController {
-
-    var provider = URLSessionJSONParserProvider<TMDBMoviesRoute, [String: String]>()
-    
+    let blaView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(TMDBMoviesRoute.popular(nil).completeUrl)
-        provider.request(route: .popular(2)) { (result) in
-            switch result {
-                
-            case .success(let dataValue):
-                print(dataValue)
-            case .failure(let error):
-                print(error)
-            }
+        view.addSubview(blaView)
+        
+        blaView.backgroundColor = .black
+        
+        blaView.layout.build {
+            $0.width.equal(to: 150)
+            $0.height.equal(to: 150)
+            $0.centerY.equalToSuperView()
+            $0.centerX.equalToSuperView()
         }
         
         view.backgroundColor = .red
