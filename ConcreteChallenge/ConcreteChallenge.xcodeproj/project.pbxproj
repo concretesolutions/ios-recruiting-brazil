@@ -36,6 +36,7 @@
 		E37E9BB723ABA6B400911EC8 /* TMDBQueryProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BB623ABA6B400911EC8 /* TMDBQueryProperty.swift */; };
 		E37E9BBA23ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BB923ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift */; };
 		E37E9BBC23ABAB8700911EC8 /* FileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BBB23ABAB8700911EC8 /* FileProvider.swift */; };
+		E37E9BC223ABAF1800911EC8 /* ViewCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BC123ABAF1800911EC8 /* ViewCodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		E37E9BB623ABA6B400911EC8 /* TMDBQueryProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBQueryProperty.swift; sourceTree = "<group>"; };
 		E37E9BB923ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLQueryItem+initWithTMDBQueryProperty.swift"; sourceTree = "<group>"; };
 		E37E9BBB23ABAB8700911EC8 /* FileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProvider.swift; sourceTree = "<group>"; };
+		E37E9BC123ABAF1800911EC8 /* ViewCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 		E37E9B3F23AB97B300911EC8 /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				E37E9BC023ABAF0A00911EC8 /* Utils */,
 				E37E9BB323ABA39900911EC8 /* Network */,
 				E37E9B4023AB97B300911EC8 /* AppDelegate.swift */,
 				E37E9B4423AB97B300911EC8 /* ViewController.swift */,
@@ -306,6 +309,14 @@
 				E37E9BB923ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		E37E9BC023ABAF0A00911EC8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BC123ABAF1800911EC8 /* ViewCodable.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,6 +529,7 @@
 				E37E9B4123AB97B300911EC8 /* AppDelegate.swift in Sources */,
 				E37E9BB523ABA3C300911EC8 /* TMDBRoute.swift in Sources */,
 				E37E9BB723ABA6B400911EC8 /* TMDBQueryProperty.swift in Sources */,
+				E37E9BC223ABAF1800911EC8 /* ViewCodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
