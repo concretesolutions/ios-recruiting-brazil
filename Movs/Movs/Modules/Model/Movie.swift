@@ -18,11 +18,19 @@ class Movie {
     let genreIds: [Int]
     let smallImageURL: String?
     let bigImageURL: String?
-    var isFavourite: Bool
+    var isFavorite: Bool {
+        didSet {
+            if self.isFavorite {
+                DataProvider.shared.addFavoriteMovie(self)
+            } else {
+                DataProvider.shared.removeFavoriteMovie(self)
+            }
+        }
+    }
 
     // MARK: - Initializers
 
-    init(fromDTO dto: PopularMovieDTO, smallImageURL: String?, bigImageURL: String?, isFavourite: Bool) {
+    init(fromDTO dto: PopularMovieDTO, smallImageURL: String?, bigImageURL: String?, isFavorite: Bool) {
         self.id = dto.id
         self.title = dto.title
         self.overview = dto.overview
@@ -35,18 +43,18 @@ class Movie {
         self.genreIds = dto.genreIds
         self.smallImageURL = smallImageURL
         self.bigImageURL = bigImageURL
-        self.isFavourite = isFavourite
+        self.isFavorite = isFavorite
     }
 }
 
 extension Movie: CustomStringConvertible {
     var description: String {
-        "Movie{\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(String(describing: self.posterPath))\n" + "\tgenreIds: \(self.genreIds)\n" + "\tsmallImageURL: \(String(describing: self.smallImageURL))\n" + "\tbigImageURL:: \(String(describing: self.bigImageURL))\n" + "\tisFavourite: \(self.isFavourite)\n" + "}\n"
+        "Movie {\n" + "\tid: \(self.id)\n" + "\ttitle: \(self.title)\n" + "\toverview: \(self.overview)\n" + "\treleaseYear: \(self.releaseYear)\n" + "\tposterPath: \(String(describing: self.posterPath))\n" + "\tgenreIds: \(self.genreIds)\n" + "\tsmallImageURL: \(String(describing: self.smallImageURL))\n" + "\tbigImageURL:: \(String(describing: self.bigImageURL))\n" + "\tisFavorite: \(self.isFavorite)\n" + "}\n"
     }
 }
 
 extension Movie: Equatable {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.posterPath == rhs.posterPath && lhs.genreIds == rhs.genreIds && lhs.smallImageURL == rhs.smallImageURL && lhs.bigImageURL == rhs.bigImageURL && lhs.isFavourite == rhs.isFavourite
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.overview == rhs.overview && lhs.releaseYear == rhs.releaseYear && lhs.posterPath == rhs.posterPath && lhs.genreIds == rhs.genreIds && lhs.smallImageURL == rhs.smallImageURL && lhs.bigImageURL == rhs.bigImageURL && lhs.isFavorite == rhs.isFavorite
     }
 }

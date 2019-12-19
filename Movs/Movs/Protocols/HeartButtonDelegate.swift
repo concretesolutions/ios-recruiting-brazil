@@ -12,5 +12,12 @@ protocol HeartButtonDelegate: class {
 
     // MARK: - Tap handlers
 
-    func didTapOnHeart(movieID: Int)
+    func didTapOnHeart(fromMovie movie: Movie)
+}
+
+extension HeartButtonDelegate {
+
+    func didTapOnHeart(fromMovie movie: Movie) {
+        movie.isFavorite = movie.isFavorite ? false : true
+    }
 }

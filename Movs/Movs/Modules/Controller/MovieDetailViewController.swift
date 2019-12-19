@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController, HeartButtonDelegate {
 
     // MARK: - Model
 
@@ -23,6 +23,7 @@ class MovieDetailViewController: UIViewController {
     init(movie: Movie) {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
+        self.screen.delegate = self
         self.screen.configure(with: self.movie)
     }
 

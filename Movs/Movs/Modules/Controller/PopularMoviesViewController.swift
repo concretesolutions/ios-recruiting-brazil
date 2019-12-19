@@ -57,6 +57,7 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
             fatalError("Wrong collection view cell type")
         }
 
+        cell.delegate = self
         cell.configure(with: DataProvider.shared.movies[indexPath.row])
 
         return cell
