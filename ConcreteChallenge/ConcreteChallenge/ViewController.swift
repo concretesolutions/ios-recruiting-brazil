@@ -10,19 +10,10 @@ import UIKit
 import GenericNetwork
 
 class ViewController: UIViewController {
-    let blaView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(blaView)
-        
-        blaView.backgroundColor = .black
-
-        
-        blaView.layout.fill(view: view.safeAreaLayoutGuide, margin: 20)
-        
-        
-        view.backgroundColor = .red
+       
+        addChild(MoviesListViewController(), inView: view)
     }
 }
 

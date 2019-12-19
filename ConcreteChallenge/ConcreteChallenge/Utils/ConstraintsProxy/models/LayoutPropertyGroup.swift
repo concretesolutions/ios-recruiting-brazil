@@ -69,12 +69,12 @@ class LayoutPropertyGroup {
     }
     
     /// It apply all the constraints of the group related with the superview.
-    func relatedToSuperView() {
-        self.related(to: nil)
+    func fillToSuperView() {
+        self.fill(to: nil)
     }
     
     /// It apply all the constraints of the group related with the given anchorable.
-    func related(to anchorable: Anchorable? = nil) {
+    func fill(to anchorable: Anchorable? = nil) {
         self.propertyTypes.keys.forEach { (constraintPropertyType) in
             guard let operation = self.propertyTypes[constraintPropertyType] else {
                 return

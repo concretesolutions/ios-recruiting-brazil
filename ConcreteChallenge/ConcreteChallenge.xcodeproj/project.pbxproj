@@ -49,6 +49,13 @@
 		E3F1C36D23ABC75A00206CBA /* LayoutPropertyProxyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C36C23ABC75A00206CBA /* LayoutPropertyProxyType.swift */; };
 		E3F1C36F23ABC7B800206CBA /* LayoutPropertyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C36E23ABC7B800206CBA /* LayoutPropertyGroup.swift */; };
 		E3F1C37123ABD71300206CBA /* ConstraintOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C37023ABD71300206CBA /* ConstraintOperation.swift */; };
+		E3F1C37523ABDC8500206CBA /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C37423ABDC8500206CBA /* MoviesListViewController.swift */; };
+		E3F1C37723ABDCB900206CBA /* MoviesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C37623ABDCB900206CBA /* MoviesListView.swift */; };
+		E3F1C37923ABDE0700206CBA /* MinimizedMovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C37823ABDE0700206CBA /* MinimizedMovieCollectionCell.swift */; };
+		E3F1C37C23ABDF5C00206CBA /* UIView+addSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F1C37B23ABDF5C00206CBA /* UIView+addSubViews.swift */; };
+		E3F832DF23ABE25C00E1B1E2 /* UICollectionView+dequeueReusableCell+registerReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F832DE23ABE25C00E1B1E2 /* UICollectionView+dequeueReusableCell+registerReusableCell.swift */; };
+		E3F832E123ABE2F500E1B1E2 /* UIViewController+addChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F832E023ABE2F500E1B1E2 /* UIViewController+addChild.swift */; };
+		E3F832E423ABE48400E1B1E2 /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F832E323ABE48400E1B1E2 /* MoviesListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +160,13 @@
 		E3F1C36C23ABC75A00206CBA /* LayoutPropertyProxyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyProxyType.swift; sourceTree = "<group>"; };
 		E3F1C36E23ABC7B800206CBA /* LayoutPropertyGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyGroup.swift; sourceTree = "<group>"; };
 		E3F1C37023ABD71300206CBA /* ConstraintOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintOperation.swift; sourceTree = "<group>"; };
+		E3F1C37423ABDC8500206CBA /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewController.swift; sourceTree = "<group>"; };
+		E3F1C37623ABDCB900206CBA /* MoviesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListView.swift; sourceTree = "<group>"; };
+		E3F1C37823ABDE0700206CBA /* MinimizedMovieCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimizedMovieCollectionCell.swift; sourceTree = "<group>"; };
+		E3F1C37B23ABDF5C00206CBA /* UIView+addSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addSubViews.swift"; sourceTree = "<group>"; };
+		E3F832DE23ABE25C00E1B1E2 /* UICollectionView+dequeueReusableCell+registerReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+dequeueReusableCell+registerReusableCell.swift"; sourceTree = "<group>"; };
+		E3F832E023ABE2F500E1B1E2 /* UIViewController+addChild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+addChild.swift"; sourceTree = "<group>"; };
+		E3F832E323ABE48400E1B1E2 /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +237,10 @@
 		E37E9B3F23AB97B300911EC8 /* ConcreteChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				E3F832E223ABE47100E1B1E2 /* View Models */,
+				E3F1C37A23ABDF4F00206CBA /* Extensions */,
+				E3F1C37323ABDC6800206CBA /* ViewControllers */,
+				E3F1C37223ABDC5A00206CBA /* Views */,
 				E37E9BC023ABAF0A00911EC8 /* Utils */,
 				E37E9BB323ABA39900911EC8 /* Network */,
 				E37E9B4023AB97B300911EC8 /* AppDelegate.swift */,
@@ -385,6 +403,41 @@
 				E3F1C37023ABD71300206CBA /* ConstraintOperation.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E3F1C37223ABDC5A00206CBA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E3F1C37623ABDCB900206CBA /* MoviesListView.swift */,
+				E3F1C37823ABDE0700206CBA /* MinimizedMovieCollectionCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E3F1C37323ABDC6800206CBA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E3F1C37423ABDC8500206CBA /* MoviesListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E3F1C37A23ABDF4F00206CBA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E3F1C37B23ABDF5C00206CBA /* UIView+addSubViews.swift */,
+				E3F832DE23ABE25C00E1B1E2 /* UICollectionView+dequeueReusableCell+registerReusableCell.swift */,
+				E3F832E023ABE2F500E1B1E2 /* UIViewController+addChild.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E3F832E223ABE47100E1B1E2 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E3F832E323ABE48400E1B1E2 /* MoviesListViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -595,21 +648,28 @@
 				E37E9BCB23ABB0BA00911EC8 /* Anchorable.swift in Sources */,
 				E3A494B823ABB7E50045F439 /* UIViewAndUILayoutGuide+layout.swift in Sources */,
 				E37E9BCD23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift in Sources */,
+				E3F1C37723ABDCB900206CBA /* MoviesListView.swift in Sources */,
 				E37E9B4523AB97B300911EC8 /* ViewController.swift in Sources */,
 				E3F1C36F23ABC7B800206CBA /* LayoutPropertyGroup.swift in Sources */,
+				E3F1C37C23ABDF5C00206CBA /* UIView+addSubViews.swift in Sources */,
 				E37E9BBA23ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift in Sources */,
 				E3F1C37123ABD71300206CBA /* ConstraintOperation.swift in Sources */,
 				E37E9B4123AB97B300911EC8 /* AppDelegate.swift in Sources */,
 				E37E9BB523ABA3C300911EC8 /* TMDBRoute.swift in Sources */,
+				E3F832DF23ABE25C00E1B1E2 /* UICollectionView+dequeueReusableCell+registerReusableCell.swift in Sources */,
 				E37E9BC723ABB04300911EC8 /* LayoutPropertyProxy.swift in Sources */,
 				E37E9BCF23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift in Sources */,
 				E37E9BD123ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift in Sources */,
+				E3F832E123ABE2F500E1B1E2 /* UIViewController+addChild.swift in Sources */,
 				E37E9BB723ABA6B400911EC8 /* TMDBQueryProperty.swift in Sources */,
 				E37E9BC423ABAFA500911EC8 /* BuilderBlock.swift in Sources */,
+				E3F1C37523ABDC8500206CBA /* MoviesListViewController.swift in Sources */,
 				E37E9BC223ABAF1800911EC8 /* ViewCodable.swift in Sources */,
+				E3F832E423ABE48400E1B1E2 /* MoviesListViewModel.swift in Sources */,
 				E37E9BD623ABB51900911EC8 /* LayoutProxy+constraintsFillMethods.swift in Sources */,
 				E37E9BC923ABB08B00911EC8 /* LayoutProxy.swift in Sources */,
 				E3F1C36D23ABC75A00206CBA /* LayoutPropertyProxyType.swift in Sources */,
+				E3F1C37923ABDE0700206CBA /* MinimizedMovieCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
