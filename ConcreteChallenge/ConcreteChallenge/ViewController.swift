@@ -17,13 +17,10 @@ class ViewController: UIViewController {
         view.addSubview(blaView)
         
         blaView.backgroundColor = .black
+
         
-        blaView.layout.build {
-            $0.width.equal(to: 150)
-            $0.height.equal(to: 150)
-            $0.centerY.equalToSuperView()
-            $0.centerX.equalToSuperView()
-        }
+        blaView.layout.fillSuperView(withMargin: 20)
+        
         
         view.backgroundColor = .red
     }

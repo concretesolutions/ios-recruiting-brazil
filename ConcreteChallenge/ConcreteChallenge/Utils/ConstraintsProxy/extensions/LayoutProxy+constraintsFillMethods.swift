@@ -10,6 +10,6 @@ import Foundation
 
 extension LayoutPropertyProxy {
     func equalToSuperView() {
-        self.layout.equalOnSuperView(type: self.type)
+        self.layout.equal(toView: nil, type: self.type, operation: .margin(0))
     }
 }

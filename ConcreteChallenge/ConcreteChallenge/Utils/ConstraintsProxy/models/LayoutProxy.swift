@@ -25,35 +25,90 @@ class LayoutProxy: BuilderBlock {
     lazy var width = DefaultLayoutPropertyProxy(anchor: anchorable.widthAnchor, layout: self, type: .width)
     lazy var height = DefaultLayoutPropertyProxy(anchor: anchorable.heightAnchor, layout: self, type: .height)
         
+    var group: LayoutPropertyGroup {
+        return LayoutPropertyGroup(layout: self)
+    }
+    
     /// Initilized the Proxy
     /// - Parameter anchorable: a anchorable (a view or a layoutguide)
     init(anchorable: Anchorable) {
         self.anchorable = anchorable
     }
     
-    func equalOnSuperView(type: LayoutPropertyProxyType) {
+    func fill(view: UIView?, margin: CGFloat) {
+        self.equal(toView: view, type: .top, operation: .margin(margin))
+        self.equal(toView: view, type: .bottom, operation: .margin(-margin))
+        self.equal(toView: view, type: .left, operation: .margin(margin))
+        self.equal(toView: view, type: .right, operation: .margin(-margin))
+    }
+    
+    func fillSuperView(withMargin margin: CGFloat = 0) {
+        self.fill(view: nil, margin: margin)
+    }
+    
+    func equal(toView relatedView: UIView?, type: LayoutPropertyProxyType, operation: ConstraintOperation) {
         guard let view = self.anchorable as? UIView,
-              let superView = view.superview else {
+              let relatedView = relatedView ?? view.superview else {
             return
         }
         
         switch type {
         case .top:
-            self.top.equal(to: superView.layout.top)
+            switch operation {
+            case .multiply:
+                fatalError()
+            case .margin(let margin):
+                self.top.equal(to: relatedView.layout.top, offsetBy: margin)
+            }
         case .bottom:
-            self.bottom.equal(to: superView.layout.bottom)
+            switch operation {
+            case .multiply:
+                fatalError()
+            case .margin(let margin):
+                self.bottom.equal(to: relatedView.layout.bottom, offsetBy: margin)
+            }
         case .left:
-            self.left.equal(to: superView.layout.left)
+            switch operation {
+            case .multiply:
+               fatalError()
+            case .margin(let margin):
+               self.left.equal(to: relatedView.layout.left, offsetBy: margin)
+            }
         case .right:
-            self.right.equal(to: superView.layout.right)
+            switch operation {
+            case .multiply:
+               fatalError()
+            case .margin(let margin):
+               self.right.equal(to: relatedView.layout.right, offsetBy: margin)
+            }
         case .centerX:
-            self.centerX.equal(to: superView.layout.centerX)
+            switch operation {
+            case .multiply:
+               fatalError()
+            case .margin(let margin):
+               self.centerX.equal(to: relatedView.layout.centerX, offsetBy: margin)
+            }
         case .centerY:
-            self.centerY.equal(to: superView.layout.centerY)
+            switch operation {
+            case .multiply:
+               fatalError()
+            case .margin(let margin):
+               self.centerY.equal(to: relatedView.layout.centerY, offsetBy: margin)
+            }
         case .width:
-            self.width.equal(to: superView.layout.width)
+            switch operation {
+            case .multiply(let factor):
+                self.width.equal(to: relatedView.layout.width, multiplier: factor)
+            case .margin(let margin):
+               self.width.equal(to: relatedView.layout.width, offsetBy: margin)
+            }
         case .height:
-            self.height.equal(to: superView.layout.height)
+            switch operation {
+            case .multiply(let factor):
+                self.height.equal(to: relatedView.layout.height, multiplier: factor)
+            case .margin(let margin):
+               self.height.equal(to: relatedView.layout.height, offsetBy: margin)
+            }
         }
     }
 }
