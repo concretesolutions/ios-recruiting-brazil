@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 /// A protocol for types that can make a Route.
 /// Usually, each of the final applications has a Enum, and it has a case for each route.
 public protocol Route {

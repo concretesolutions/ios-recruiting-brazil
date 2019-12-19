@@ -8,6 +8,29 @@
 
 import Foundation
 
-struct Movie {
+struct Movie: Codable {
+    var id: Int?
+    var title: String?
+    var posterPath: String?
+    var backdropPath: String?
+    var isAdult: Bool?
+    var overview: String?
+    var releaseDate: String?
+    var genreIDs: [Int]
     
+    var posterURL: URL? {
+        guard let posterPath = self.posterPath else {
+            return nil
+        }
+        return URL(string: posterPath)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id, title, overview
+        case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
+        case isAdult = "adult"
+        case releaseDate = "release_date"
+        case genreIDs = "genre_ids"
+    }
 }

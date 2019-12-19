@@ -9,7 +9,7 @@
 import Foundation
 
 /// A provider implementation responsible for providing files. For example, this can be used for requesting images.
-public class FileProvider: Provider {
+public class URLSessionFileProvider: FileProvider {
     public init() {
         
     }

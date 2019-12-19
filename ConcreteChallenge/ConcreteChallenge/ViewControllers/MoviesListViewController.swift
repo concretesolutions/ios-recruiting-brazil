@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import GenericNetwork
 
 class MoviesListViewController: UIViewController {
-//    let moviesListView = MoviesListView(viewModel: .init())
+    let moviesListView = MoviesListView(viewModel: DefaultMoviesListViewModel(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>(), imagesProvider: URLSessionFileProvider(), moviesRouter: { return TMDBMoviesRoute.popular($0) }, imageRouter: { return TMDBMoviesRoute.image($0)}))
     
     override func viewDidLoad() {
-//        
-//        view.addSubViews(moviesListView)
-//        moviesListView.layout.fillSuperView()
+        
+        view.addSubViews(moviesListView)
+        moviesListView.layout.fillSuperView()
     }
 }
+ 

@@ -35,15 +35,36 @@ class MoviesListView: UIView, ViewCodable {
     func addConstraints() {
         moviesCollectionView.layout.fillSuperView()
     }
+    
+    func observeViewModel() {
+        viewModel.needShowNewMovies = { [weak self] newMoviesRange in
+            DispatchQueue.main.async {
+                self?.moviesCollectionView.insertItemsInRange(newMoviesRange)
+            }
+        }
+        
+        viewModel.needShowError = { [weak self] errorMessage in
+            print(errorMessage)
+        }
+        
+        viewModel.thePageReachedTheEnd()
+    }
 }
 
 extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.numberOfMovies
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return moviesCollectionView.dequeueReusableCell(forCellType: MinimizedMovieCollectionCell.self, for: indexPath)
+        let movieCell = moviesCollectionView.dequeueReusableCell(
+            forCellType: MinimizedMovieCollectionCell.self,
+            for: indexPath
+        )
+        
+        movieCell.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
+        
+        return movieCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

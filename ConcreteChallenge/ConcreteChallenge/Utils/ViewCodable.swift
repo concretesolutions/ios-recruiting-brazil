@@ -19,6 +19,9 @@ protocol ViewCodable {
     
     /// Add code that makes non-hierachy and layout changes on the View
     func applyAditionalChanges()
+    
+    /// Add the code to observe the view model here
+    func observeViewModel()
 }
 
 extension ViewCodable {
@@ -26,7 +29,9 @@ extension ViewCodable {
         self.buildHierarchy()
         self.addConstraints()
         self.applyAditionalChanges()
+        self.observeViewModel()
     }
     
     func applyAditionalChanges() { }
+    func observeViewModel() { }
 }

@@ -9,13 +9,28 @@
 import UIKit
 
 class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
-    let movieImageView = UIImageView().build {
+    
+    var viewModel: MovieViewModel? {
+        didSet {
+            let viewModel = self.viewModel!
+            
+            viewModel.needReplaceImage = { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.movieImageView.image = image
+                }
+            }
+            
+            titleLabel.text = viewModel.movieTitle
+        }
+    }
+    
+    private let movieImageView = UIImageView().build {
         $0.contentMode = .scaleAspectFit
         $0.backgroundColor = .appRed
         $0.layer.cornerRadius = 5
     }
     
-    let movieLabel = UILabel().build {
+    private let titleLabel = UILabel().build {
         $0.text = "bla"
         $0.textColor = .appTextBlue
         $0.font = .boldSystemFont(ofSize: 17)
@@ -32,7 +47,7 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
     }
     
     func buildHierarchy() {
-        self.addSubViews(movieImageView, movieLabel)
+        self.addSubViews(movieImageView, titleLabel)
     }
 
     func addConstraints() {
@@ -41,13 +56,9 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
             .left
             .right.fillToSuperView()
         
-        movieLabel.layout.build {
+        titleLabel.layout.build {
             $0.top.equal(to: movieImageView.layout.bottom)
             $0.group.bottom.left.right.fillToSuperView()
         }
-    }
-    
-    func applyAditionalChanges() {
-       
     }
 }
