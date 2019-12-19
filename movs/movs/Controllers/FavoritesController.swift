@@ -68,7 +68,7 @@ class FavoritesController: UIViewController {
                         }
                     }
                     
-                    if self.searchFilteredBy != "" {
+                    if !self.searchFilteredBy.isEmpty && isMatching == true {
                         isMatching = movie.title.lowercased().contains(self.searchFilteredBy.lowercased())
                     }
                     
