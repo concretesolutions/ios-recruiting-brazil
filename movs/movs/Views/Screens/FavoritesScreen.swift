@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoritesScreen: UIView {
-    // MARK: - Subview
+    // MARK: - Subviews
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self.delegate
@@ -31,6 +31,14 @@ class FavoritesScreen: UIView {
                          for: .touchUpInside)
         return button
     }()
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self.delegate,
+                                 action: #selector(self.delegate?.reloadTableView),
+                                 for: .valueChanged)
+        return refreshControl
+    }()
 
     lazy var favoritesTableView: UITableView = {
         let tableView = UITableView()
@@ -39,6 +47,7 @@ class FavoritesScreen: UIView {
         tableView.separatorStyle = .none     
         tableView.dataSource = self.delegate
         tableView.delegate = self.delegate
+        tableView.refreshControl = self.refreshControl
         return tableView
     }()
     

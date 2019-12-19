@@ -83,6 +83,12 @@ class MoviesController: UIViewController {
         self.collectionState = .loading
         super.viewWillAppear(animated)
     }
+    
+    // MARK: - Table view reloading
+    @objc func reloadTableView(_ sender: UIRefreshControl) {
+        self.collectionState = .loading
+        sender.endRefreshing()
+    }
 }
 
 extension MoviesController: UICollectionViewDataSource {

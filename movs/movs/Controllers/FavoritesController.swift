@@ -114,6 +114,12 @@ class FavoritesController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    // MARK: - Table view reloading
+    @objc func reloadTableView(_ sender: UIRefreshControl) {
+        self.collectionState = .loading
+        sender.endRefreshing()
+    }
+    
     // MARK: - Filter actions
     @objc func goToFilters() {
         let controller = FiltersController(filters: self.filters)

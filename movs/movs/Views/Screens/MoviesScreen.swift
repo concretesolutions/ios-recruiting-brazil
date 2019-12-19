@@ -18,6 +18,14 @@ class MoviesScreen: UIView {
         return searchController
     }()
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self.delegate,
+                                 action: #selector(self.delegate?.reloadTableView),
+                                 for: .valueChanged)
+        return refreshControl
+    }()
+    
     lazy var moviesCollectionView: UICollectionView = {
         // Setup collection view layout
         let cellSpacing: CGFloat = 16
@@ -44,6 +52,7 @@ class MoviesScreen: UIView {
         view.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
         view.dataSource = self.delegate
         view.delegate = self.delegate
+        view.refreshControl = self.refreshControl
         return view
     }()
     
