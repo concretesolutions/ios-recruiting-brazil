@@ -8,11 +8,15 @@
 
 import UIKit
 
+// MARK: - UITableViewDelegate
+
 extension MovieDetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 }
+
+// MARK: - UITableViewDataSource
 
 extension MovieDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -25,11 +25,21 @@ class MovieViewModel {
     
     public let backdropPath: String?
     public let id: Int
-    public var genresNames: Set<String>
+    public let genresNames: Set<String>
     public let posterPath: String?
-    public let releaseYear: String
+    public var releaseYear: String {
+        if let movieRelease = self.movie.releaseDate {
+            return String(date: movieRelease, format: "YYYY")
+        }
+        return "Unknown"
+    }    
     public let title: String
-    public let summary: String
+    public var summary: String {
+        if let movieSummary = self.movie.summary {
+            return movieSummary
+        }
+        return "Unavailable"
+    }
     
     // MARK: - Initializers
     
@@ -41,12 +51,10 @@ class MovieViewModel {
         self.id = movie.id
         self.genresNames = Set(movie.genres.map({ $0.name }))
         self.posterPath = movie.posterPath
-        self.releaseYear = String(date: movie.releaseDate, format: "yyyy")
         self.title = movie.title
-        self.summary = movie.summary
     }
     
-    // MARK: -
+    // MARK: - Storage Manager helpers
     
     func addToFavorites() {
         self.storageManager.addFavorite(movie: self.movie)

@@ -18,13 +18,13 @@ class Movie {
     let backdropPath: String?
     let genres: Set<Genre>
     let posterPath: String?
-    let releaseDate: Date
+    let releaseDate: Date?
     let title: String
-    let summary: String
+    let summary: String?
     
     // MARK: - Initializers and Deinitializers
     
-    init(id: Int, backdropPath: String?, genres: Set<Genre>, posterPath: String?, releaseDate: String, title: String, summary: String) {
+    init(id: Int, backdropPath: String?, genres: Set<Genre>, posterPath: String?, releaseDate: String?, title: String, summary: String?) {
         self.id = id
         self.backdropPath = backdropPath
         self.genres = genres
@@ -32,15 +32,25 @@ class Movie {
         self.title = title
         self.summary = summary
         
-        do {
-            self.releaseDate = try Date(string: releaseDate)
-        } catch {
-            fatalError("Failed to initialize date from string \(releaseDate).")
+        if let date = releaseDate {
+            do {
+                self.releaseDate = try Date(string: date)
+            } catch {
+                fatalError("Failed to initialize date from string \(date).")
+            }
+        } else {
+            self.releaseDate = nil
         }
     }
     
     convenience init(favoriteMovie: CDFavoriteMovie, genres: [GenreDTO]) {
-        let dateString = String(date: favoriteMovie.releaseDate!)
+        let dateString: String?
+        if let movieRelease = favoriteMovie.releaseDate {
+            dateString = String(date: movieRelease)
+        } else {
+            dateString = nil
+        }
+        
         let genres: Set<Genre> = Set(
             genres.filter({ genreDTO in
                 favoriteMovie.genreIDs!.contains(genreDTO.id)
@@ -53,14 +63,19 @@ class Movie {
     }
     
     convenience init(movieDTO: MovieDTO, genres: [GenreDTO]) {
-        let genres: Set<Genre> = Set(
-            genres.filter({ genreDTO in
-                movieDTO.genreIDS.contains(genreDTO.id)
-            }).map({ genreDTO in
-                Genre(genreDTO: genreDTO)
-            })
-        )
-
-        self.init(id: movieDTO.id, backdropPath: movieDTO.backdropPath, genres: genres, posterPath: movieDTO.posterPath, releaseDate: movieDTO.releaseDate, title: movieDTO.title, summary: movieDTO.overview)
+        let filteredGenres: Set<Genre>
+        if let genresIDs = movieDTO.genreIDS {
+            filteredGenres = Set(
+                genres.filter({ genreDTO in
+                    genresIDs.contains(genreDTO.id)
+                }).map({ genreDTO in
+                    Genre(genreDTO: genreDTO)
+                })
+            )
+        } else {
+            filteredGenres = Set()
+        }
+        
+        self.init(id: movieDTO.id, backdropPath: movieDTO.backdropPath, genres: filteredGenres, posterPath: movieDTO.posterPath, releaseDate: movieDTO.releaseDate, title: movieDTO.title, summary: movieDTO.overview)
     }
 }

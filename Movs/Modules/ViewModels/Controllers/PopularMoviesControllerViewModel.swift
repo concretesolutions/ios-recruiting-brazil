@@ -29,12 +29,12 @@ class PopularMoviesControllerViewModel {
     // MARK: - Properties
 
     internal let decoder = JSONDecoder()
-    internal var isSearchInProgress: Bool = false
-    weak var coordinatorDelegate: PopularMoviesCoordinator?
+    weak var detailsPresenter: PopularMoviesCoordinator?
     
     // MARK: - Publishers and Subscribers
     
     @Published var numberOfMovies: Int = 0
+    @Published var searchStatus: SearchStatus = .none
     private var subscribers: [AnyCancellable?] = []
         
     // MARK: - Initializers and Deinitializers
@@ -73,7 +73,7 @@ class PopularMoviesControllerViewModel {
     
     func didSelectItemAt(indexPath: IndexPath) {
         let movie = Movie(movieDTO: self.dataSource[indexPath.row], genres: self.apiManager.genres)
-        self.coordinatorDelegate?.didSelectItem(movie: movie)
+        self.detailsPresenter?.showDetails(movie: movie)
     }
     
     // MARK: - UISearchController
@@ -81,10 +81,14 @@ class PopularMoviesControllerViewModel {
     func filterMovies(for title: String) {
         if title.isEmpty {
             self.dataSource = self.apiManager.movies
-            self.isSearchInProgress = false
+            self.searchStatus = .none
         } else {
             self.dataSource = self.apiManager.movies.filter({ $0.title.starts(with: title) })
-            self.isSearchInProgress = true
+            if self.dataSource.isEmpty {
+                self.searchStatus = .noResults
+            } else {
+                self.searchStatus = .search
+            }
         }
     }
 }

@@ -103,6 +103,7 @@ extension StorageManager: CoreDataFactory {
         instance.releaseDate = movie.releaseDate
         instance.summary = movie.summary
         instance.title = movie.title
+        
         return instance
     }
 }

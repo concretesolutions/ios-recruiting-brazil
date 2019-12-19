@@ -38,7 +38,7 @@ class PopularMoviesCoordinator: Coordinator {
         self.coordinatedViewController = UINavigationController(rootViewController: controller)
         self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         
-        viewModel.coordinatorDelegate = self
+        viewModel.detailsPresenter = self
     }
     
     deinit {
@@ -68,10 +68,8 @@ class PopularMoviesCoordinator: Coordinator {
     }
 }
 
-extension PopularMoviesCoordinator: MovieCoordinator {
-    func didFavoriteItem(movie: Movie) { }
-    
-    func didSelectItem(movie: Movie) {
+extension PopularMoviesCoordinator: DetailsPresenterDelegate {
+    func showDetails(movie: Movie) {
         self.movieDetailsCoordinator = MovieDetailsCoordinator(parent: self, movie: movie)
         self.movieDetailsCoordinator.start()
         self.bind(to: self.movieDetailsCoordinator)

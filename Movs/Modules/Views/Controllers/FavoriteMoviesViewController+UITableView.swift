@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - UITableViewDelegate
+
 extension FavoriteMoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
@@ -26,6 +28,8 @@ extension FavoriteMoviesViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [unfavorite])
     }
 }
+
+// MARK: - UITableViewDataSource
 
 extension FavoriteMoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

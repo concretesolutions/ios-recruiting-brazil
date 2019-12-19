@@ -13,10 +13,12 @@ class FavoriteMoviesViewController: UIViewController {
 
     // MARK: - Properties
     
-    internal var deletedRowIndex: IndexPath?
-    internal let screen = FavoriteMoviesViewScreen()
-    internal let viewModel: FavoriteMoviesControllerViewModel
     internal let searchController = UISearchController(searchResultsController: nil)
+    internal let screen = FavoriteMoviesViewScreen()
+    internal let errorScreen = ErrorViewScreen()
+    internal let viewModel: FavoriteMoviesControllerViewModel
+    internal var displayedError: ApplicationError = .none
+    internal var deletedRowIndex: IndexPath?
     
     // MARK: - Publishers and Subscribers
     
@@ -49,16 +51,10 @@ class FavoriteMoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bind(to: self.viewModel)
+        
         self.screen.favoriteMoviesTableView.delegate = self
         self.screen.favoriteMoviesTableView.dataSource = self
-        
-        self.extendedLayoutIncludesOpaqueBars = true
-        self.searchController.searchResultsUpdater = self
-        self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search favorites..."
-        self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationItem.searchController = searchController
-        self.definesPresentationContext = true
+        self.configureSearchBar()
     }
     
     // MARK: - Binding
@@ -72,6 +68,18 @@ class FavoriteMoviesViewController: UIViewController {
                     self.deletedRowIndex = nil
                 } else {
                     self.screen.favoriteMoviesTableView.reloadData()
+                }
+            })
+        )
+        
+        self.subscribers.append(viewModel.$searchStatus
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { status in
+                if status == .noResults {
+                    self.showSearchError()
+                } else if self.displayedError == .searchError {
+                    self.displayedError = .none
+                    self.view = self.screen
                 }
             })
         )

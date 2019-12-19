@@ -10,6 +10,8 @@ import UIKit
 
 class FavoriteButton: UIButton {
     
+    // MARK: - Properties
+    
     var favorited: Bool = false
     
     // MARK: - Initializers and Deinitializers
@@ -17,9 +19,12 @@ class FavoriteButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.tintColor = .lightGray
+        self.contentMode = .scaleAspectFit
         self.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         self.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 3.0, bottom: 5.0, right: 5.0)
     }
+    
+    // MARK: - Methods
     
     public func setFavorited(_ state: Bool) {
         if state == true {

@@ -20,11 +20,21 @@ final class PopularMoviesViewScreen: UIView {
         return moviesCollection
     }()
     
+    lazy var loadingIndicatorView: TranslucidActivityIndicatorView = {
+        let blur = UIBlurEffect(style: .systemUltraThinMaterial)
+        let indicatorView = TranslucidActivityIndicatorView(effect: blur)
+        indicatorView.layer.cornerRadius = 8.0
+        indicatorView.layer.masksToBounds = true
+        return indicatorView
+    }()
+    
     // MARK: - Initializers and Deinitializers
     
     init() {
         super.init(frame: .zero)
         self.setupView()
+        self.loadingIndicatorView.alpha = 0
+        self.loadingIndicatorView.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -35,6 +45,7 @@ final class PopularMoviesViewScreen: UIView {
 extension PopularMoviesViewScreen: CodeView {
     func buildViewHierarchy() {
         self.addSubview(self.moviesCollectionView)
+        self.addSubview(self.loadingIndicatorView)
     }
     
     func setupConstraints() {        
@@ -42,6 +53,12 @@ extension PopularMoviesViewScreen: CodeView {
             make.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
             make.bottom.equalTo(self)
         }
+        
+        self.loadingIndicatorView.snp.makeConstraints({ make in
+            make.centerX.centerY.equalTo(self)
+            make.width.equalTo(self).multipliedBy(0.2)
+            make.height.equalTo(self.loadingIndicatorView.snp.width)
+        })
     }
     
     func setupAdditionalConfiguration() {

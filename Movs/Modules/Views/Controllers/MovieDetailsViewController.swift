@@ -15,6 +15,9 @@ class MovieDetailsViewController: UIViewController {
     
     internal let screen = MovieDetailsViewScreen()
     internal var viewModel: MovieDetailsControllerViewModel
+    
+    // MARK: - Publishers and Subscribers
+    
     internal var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers

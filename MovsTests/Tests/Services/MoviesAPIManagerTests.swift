@@ -36,24 +36,35 @@ class MoviesAPIManagerTests: XCTestCase {
     // MARK: - Tests
        
     func testShouldSignalToFetchPopularMovies() {
+        self.sut.genres = [GenreDTO(id: 28, name: "Action"), GenreDTO(id: 30, name: "Drama"), GenreDTO(id: 32, name: "Horror")]
         self.sut.currentPage = 100
-        self.sut.isFetchInProgress = false
+        self.sut.fetchStatus = .none
     
         let signal = self.sut.shouldFetchNextPage()
         expect(signal).to(beTrue())
     }
        
     func testShouldntSignalToFetchPopularMoviesWhenNoNextPage() {
+        self.sut.genres = [GenreDTO(id: 28, name: "Action"), GenreDTO(id: 30, name: "Drama"), GenreDTO(id: 32, name: "Horror")]
         self.sut.currentPage = 510
-        self.sut.isFetchInProgress = false
+        self.sut.fetchStatus = .none
            
         let signal = self.sut.shouldFetchNextPage()
         expect(signal).to(beFalse())
     }
        
     func testShouldntSignalToFetchPopularMoviesWithFetchInProgress() {
+        self.sut.genres = [GenreDTO(id: 28, name: "Action"), GenreDTO(id: 30, name: "Drama"), GenreDTO(id: 32, name: "Horror")]
         self.sut.currentPage = 100
-        self.sut.isFetchInProgress = true
+        self.sut.fetchStatus = .fetchingMovies
+           
+        let signal = self.sut.shouldFetchNextPage()
+        expect(signal).to(beFalse())
+    }
+    
+    func testShouldntSignalToFetchPopularMoviesWithNoGenres() {
+        self.sut.currentPage = 100
+        self.sut.fetchStatus = .none
            
         let signal = self.sut.shouldFetchNextPage()
         expect(signal).to(beFalse())

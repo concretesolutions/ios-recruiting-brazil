@@ -8,6 +8,19 @@
 
 import UIKit
 
+extension FavoriteMoviesViewController {
+    func configureSearchBar() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search favorites..."
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
 extension FavoriteMoviesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else {

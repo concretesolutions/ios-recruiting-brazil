@@ -42,16 +42,10 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
         let heightSpacing: CGFloat = self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
         let insets: UIEdgeInsets = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
         
-        let width: CGFloat = (collectionView.bounds.width/3.0) - widthSpacing
-        let height: CGFloat
+        let width: CGFloat = (collectionView.bounds.width/3.0)
+        let height: CGFloat = width * 1.755
         
-        if collectionView.bounds.height > 590.0 {
-            height = (collectionView.bounds.height/2.75) - heightSpacing
-        } else {
-            height = (collectionView.bounds.height/2.545) - heightSpacing
-        }
-        
-        return CGSize(width: width - insets.left, height: height - insets.top)
+        return CGSize(width: width - insets.left - widthSpacing, height: height - insets.top - heightSpacing)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -71,8 +65,8 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
 
 extension PopularMoviesViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        let rows = indexPaths.filter({ $0.row >= self.viewModel.numberOfMovies - 1 })
-        if !rows.isEmpty && !self.viewModel.isSearchInProgress && self.viewModel.apiManager.shouldFetchNextPage() {
+        let rows = indexPaths.filter({ $0.row >= self.viewModel.numberOfMovies - 3 })
+        if !rows.isEmpty && self.viewModel.searchStatus == .none && self.viewModel.apiManager.shouldFetchNextPage() {
             self.viewModel.apiManager.fetchNextPopularMoviesPage()
         }
     }

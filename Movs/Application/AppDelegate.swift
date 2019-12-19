@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.appCoordinator?.dependencies.storageManager.save()
     }
 
-    // MARK: UISceneSession life cycle
+    // MARK: - UISceneSession life cycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.

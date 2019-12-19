@@ -15,7 +15,9 @@ class PopularMoviesViewController: UIViewController {
     
     internal let searchController = UISearchController(searchResultsController: nil)
     internal let screen = PopularMoviesViewScreen()
+    internal let errorScreen = ErrorViewScreen()
     internal let viewModel: PopularMoviesControllerViewModel
+    internal var displayedError: ApplicationError = .none
     
     // MARK: - Publishers and Subscribers
     
@@ -26,6 +28,7 @@ class PopularMoviesViewController: UIViewController {
     init(viewModel: PopularMoviesControllerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.errorScreen.retryButton.addTarget(self, action: #selector(self.retryConnection(_:)), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -49,21 +52,10 @@ class PopularMoviesViewController: UIViewController {
         super.viewDidLoad()
         self.bind(to: self.viewModel)
         
-        if self.viewModel.apiManager.shouldFetchNextPage() {
-            self.viewModel.apiManager.fetchNextPopularMoviesPage()
-        }
-        
         self.screen.moviesCollectionView.delegate = self
         self.screen.moviesCollectionView.dataSource = self
         self.screen.moviesCollectionView.prefetchDataSource = self
-        
-        self.extendedLayoutIncludesOpaqueBars = true
-        self.searchController.searchResultsUpdater = self
-        self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search movies..."
-        self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationItem.searchController = searchController
-        self.definesPresentationContext = true
+        self.configureSearchBar()
     }
     
     // MARK: - Binding
@@ -76,10 +68,42 @@ class PopularMoviesViewController: UIViewController {
             })
         )
         
-        self.subscribers.append(viewModel.storageManager.$favorites
+        self.subscribers.append(viewModel.$searchStatus
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { status in
+                if status == .noResults && self.displayedError == .none {
+                    self.showSearchError()
+                } else if status != .noResults && self.displayedError == .searchError {
+                    self.displayedError = .none
+                    self.view = self.screen
+                }
+            })
+        )
+        
+        self.bind(to: viewModel.storageManager)
+        self.bind(to: viewModel.apiManager)
+    }
+    
+    func bind(to storageManager: StorageManager) {
+        self.subscribers.append(storageManager.$favorites
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
                 self.screen.moviesCollectionView.reloadData()
+            })
+        )
+    }
+    
+    func bind(to apiManager: MoviesAPIManager) {
+        self.subscribers.append(apiManager.$fetchStatus
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { status in
+                if status == .completedFetchWithError {
+                    self.showNetworkError()
+                } else if [.fetchingGenres, .fetchingMovies].contains(status) {
+                    self.showLoadingIndicator()
+                } else if !self.screen.loadingIndicatorView.isHidden {
+                    self.hideLoadingIndicator()
+                }
             })
         )
     }

@@ -8,7 +8,11 @@
 
 import UIKit
 
+// MARK: - UICollectionViewDelegate
+
 extension MovieDetailsViewController: UICollectionViewDelegate { }
+
+// MARK: - UICollectionViewDataSource
 
 extension MovieDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -24,6 +28,8 @@ extension MovieDetailsViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension MovieDetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

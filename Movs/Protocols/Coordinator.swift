@@ -24,4 +24,5 @@ protocol Coordinator {
     // MARK: - Coordination
     
     func start()
+    func finish()
 }

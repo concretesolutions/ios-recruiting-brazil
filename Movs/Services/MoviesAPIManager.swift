@@ -8,64 +8,76 @@
 
 import Foundation
 
-final class MoviesAPIManager: MoviesAPIDataFetcher {
+final class MoviesAPIManager {
 
     // MARK: - Properties
     
     internal let apiKey: String = "eea991e8b8c8738c849cddf195bc2813"
+    internal let decoder: DTODecoder = DTODecoder()
     internal let session: NetworkSession
-    internal var genres: [GenreDTO] = []
-    internal var isFetchInProgress: Bool = false
     internal var currentPage: Int = 0
+    internal var genres: [GenreDTO] = []
+        
+    // MARK: - Publishers and Subscribers
     
-    // MARK: - Publishers
-    
+    @Published var fetchStatus: FetchStatus = .none
     @Published var movies: [MovieDTO] = []
+    
+    // MARK: - Enums
+    
+    enum FetchStatus {
+        case none
+        case completedFetchWithError
+        case fetchingGenres
+        case fetchingMovies
+    }
     
     // MARK: - Initializers and Deinitializers
     
     init(session: NetworkSession = URLSession.shared) {
         self.session = session
-        self.fetchGenresList()
+        self.fetchGenresList(completion: { completionStatus in
+            if completionStatus == .none {
+                self.fetchNextPopularMoviesPage()
+            }
+        })
     }
     
     // MARK: - Fetch methods
     
-    func fetchGenresList() {
-        self.isFetchInProgress = true
-        self.getGenres(completion: { (data, error) in
+    func fetchGenresList(completion: ((FetchStatus) -> Void)? = nil) {
+        self.fetchStatus = .fetchingGenres
+        self.getGenres(completion: { (data, _) in
             if let data = data {
-                do {
-                    let genresList = try JSONDecoder().decode(GenresDTO.self, from: data)
-                    self.genres = genresList.genres
-                } catch {
-                    print(error)
-                }
+                self.genres = self.decoder.decodeGenres(from: data)
+                self.fetchStatus = .none
+            } else {
+                self.fetchStatus = .completedFetchWithError
             }
             
-            self.isFetchInProgress = false
+            completion?(self.fetchStatus)
         })
     }
     
     func fetchNextPopularMoviesPage() {
-        self.isFetchInProgress = true
-        self.getPopularMovies(page: self.currentPage + 1, completion: { (data, error) in
+        self.fetchStatus = .fetchingMovies
+        self.getPopularMovies(page: self.currentPage + 1, completion: { (data, _) in
             if let data = data {
-                do {
-                    let popularMovies = try JSONDecoder().decode(PopularMoviesDTO.self, from: data)
-                    self.currentPage = popularMovies.page
-                    self.movies += popularMovies.results
-                } catch {
-                    print(error)
-                }
+                self.currentPage += 1
+                self.movies += self.decoder.decodePopularMovies(from: data)
+                self.fetchStatus = .none
+            } else {
+                self.fetchStatus = .completedFetchWithError
             }
-            
-            self.isFetchInProgress = false
         })
     }
     
     func shouldFetchNextPage() -> Bool {
-        return self.currentPage < 500 && !self.isFetchInProgress
+        return !self.shouldFetchGenres() && self.currentPage < 500 && !([.fetchingGenres, .fetchingMovies].contains(self.fetchStatus))
+    }
+    
+    func shouldFetchGenres() -> Bool {
+        return self.genres.count == 0
     }
     
     // MARK: - Request Methods

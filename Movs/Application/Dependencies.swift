@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Protocol Composition
+
 protocol HasAPIManager {
     var apiManager: MoviesAPIManager { get }
 }
@@ -16,14 +18,16 @@ protocol HasStorageManager {
     var storageManager: StorageManager { get }
 }
 
+// MARK: - Dependencies
+
 class Dependencies: HasAPIManager, HasStorageManager {
     
-    // MARK: - Properties
+    // MARK: Properties
     
     let apiManager: MoviesAPIManager
     let storageManager: StorageManager
 
-    // MARK: - Initializers and Deinitializers
+    // MARK: Initializers and Deinitializers
     
     init(apiManager: MoviesAPIManager = MoviesAPIManager(), storageManager: StorageManager) {
         self.apiManager = apiManager

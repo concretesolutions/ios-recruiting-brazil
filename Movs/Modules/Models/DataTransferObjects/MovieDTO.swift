@@ -16,12 +16,12 @@ struct MovieDTO: Decodable, Equatable {
     
     let id: Int
     let backdropPath: String?
-    let genreIDS: [Int]
+    let genreIDS: [Int]?
     let popularity: Double
     let posterPath: String?
-    let releaseDate: String
+    let releaseDate: String?
     let title: String
-    let overview: String
+    let overview: String?
 
     // MARK: - Enums
     

@@ -26,13 +26,10 @@ class FavoriteMoviesControllerViewModel {
     internal let apiManager: MoviesAPIManager
     internal let storageManager: StorageManager
     
-    // MARK: - Properties
-    
-    internal var isSearchInProgress: Bool = false
-    
     // MARK: - Publishers and Subscribers
     
     @Published var numberOfFavoriteMovies: Int
+    @Published var searchStatus: SearchStatus = .none
     private var subscribers: [AnyCancellable?] = []
     
     // MARK: - Initializers and Deinitializers
@@ -58,7 +55,7 @@ class FavoriteMoviesControllerViewModel {
     func bind(to storageManager: StorageManager) {
         self.subscribers.append(storageManager.$favorites
             .sink(receiveValue: { value in
-                if !self.isSearchInProgress {
+                if self.searchStatus == .none {
                     self.dataSource = Array(value)
                 }
             })
@@ -76,8 +73,10 @@ class FavoriteMoviesControllerViewModel {
     func removeItemAt(indexPath: IndexPath) {
         let favoriteMovie = self.dataSource[indexPath.row]
         self.storageManager.removeFavorite(movieID: favoriteMovie.id)
-        if self.isSearchInProgress {
+        
+        if [.filter, .search, .searchAndFilter].contains(self.searchStatus) {
             self.dataSource.remove(at: indexPath.row)
+            if self.dataSource.isEmpty { self.searchStatus = .noResults }
         }
     }
     
@@ -86,10 +85,14 @@ class FavoriteMoviesControllerViewModel {
     func filterMovies(for title: String) {
         if title.isEmpty {
             self.dataSource = Array(self.storageManager.favorites)
-            self.isSearchInProgress = false
+            self.searchStatus = .none
         } else {
             self.dataSource = self.storageManager.favorites.filter({ $0.title!.starts(with: title) })
-            self.isSearchInProgress = true
+            if self.dataSource.isEmpty {
+                self.searchStatus = .noResults
+            } else {
+                self.searchStatus = self.searchStatus == .filter ? .searchAndFilter : .search
+            }
         }
     }
 }
