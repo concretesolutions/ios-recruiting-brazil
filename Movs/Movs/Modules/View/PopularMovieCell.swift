@@ -85,6 +85,11 @@ class PopularMovieCell: UICollectionViewCell {
 
     func configure(with movie: Movie) {
         self.movie = movie
+        self.movie.didSetIsFavorite = {
+            DispatchQueue.main.async {
+                self.configureHeartImage()
+            }
+        }
 
         self.titleLabel.text = movie.title
         self.posterImageView.loadImage(fromURL: movie.smallImageURL)
