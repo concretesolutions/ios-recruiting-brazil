@@ -38,6 +38,12 @@
 		E37E9BBC23ABAB8700911EC8 /* FileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BBB23ABAB8700911EC8 /* FileProvider.swift */; };
 		E37E9BC223ABAF1800911EC8 /* ViewCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BC123ABAF1800911EC8 /* ViewCodable.swift */; };
 		E37E9BC423ABAFA500911EC8 /* BuilderBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BC323ABAFA500911EC8 /* BuilderBlock.swift */; };
+		E37E9BC723ABB04300911EC8 /* LayoutPropertyProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BC623ABB04300911EC8 /* LayoutPropertyProxy.swift */; };
+		E37E9BC923ABB08B00911EC8 /* LayoutProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BC823ABB08A00911EC8 /* LayoutProxy.swift */; };
+		E37E9BCB23ABB0BA00911EC8 /* Anchorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BCA23ABB0BA00911EC8 /* Anchorable.swift */; };
+		E37E9BCD23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BCC23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift */; };
+		E37E9BCF23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BCE23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift */; };
+		E37E9BD123ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9BD023ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +137,12 @@
 		E37E9BBB23ABAB8700911EC8 /* FileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProvider.swift; sourceTree = "<group>"; };
 		E37E9BC123ABAF1800911EC8 /* ViewCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodable.swift; sourceTree = "<group>"; };
 		E37E9BC323ABAFA500911EC8 /* BuilderBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderBlock.swift; sourceTree = "<group>"; };
+		E37E9BC623ABB04300911EC8 /* LayoutPropertyProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyProxy.swift; sourceTree = "<group>"; };
+		E37E9BC823ABB08A00911EC8 /* LayoutProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutProxy.swift; sourceTree = "<group>"; };
+		E37E9BCA23ABB0BA00911EC8 /* Anchorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anchorable.swift; sourceTree = "<group>"; };
+		E37E9BCC23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLayoutPropertyProxy.swift; sourceTree = "<group>"; };
+		E37E9BCE23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayoutPropertyProxy+constraintMethods.swift"; sourceTree = "<group>"; };
+		E37E9BD023ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LayoutPropertyProxy+dimensionConstraintMethods.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,10 +328,24 @@
 		E37E9BC023ABAF0A00911EC8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E37E9BC523ABB01C00911EC8 /* ConstraintsProxy */,
 				E37E9BC123ABAF1800911EC8 /* ViewCodable.swift */,
 				E37E9BC323ABAFA500911EC8 /* BuilderBlock.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E37E9BC523ABB01C00911EC8 /* ConstraintsProxy */ = {
+			isa = PBXGroup;
+			children = (
+				E37E9BC623ABB04300911EC8 /* LayoutPropertyProxy.swift */,
+				E37E9BC823ABB08A00911EC8 /* LayoutProxy.swift */,
+				E37E9BCA23ABB0BA00911EC8 /* Anchorable.swift */,
+				E37E9BCC23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift */,
+				E37E9BCE23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift */,
+				E37E9BD023ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift */,
+			);
+			path = ConstraintsProxy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,13 +553,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E37E9BCB23ABB0BA00911EC8 /* Anchorable.swift in Sources */,
+				E37E9BCD23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift in Sources */,
 				E37E9B4523AB97B300911EC8 /* ViewController.swift in Sources */,
 				E37E9BBA23ABA6FC00911EC8 /* URLQueryItem+initWithTMDBQueryProperty.swift in Sources */,
 				E37E9B4123AB97B300911EC8 /* AppDelegate.swift in Sources */,
 				E37E9BB523ABA3C300911EC8 /* TMDBRoute.swift in Sources */,
+				E37E9BC723ABB04300911EC8 /* LayoutPropertyProxy.swift in Sources */,
+				E37E9BCF23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift in Sources */,
+				E37E9BD123ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift in Sources */,
 				E37E9BB723ABA6B400911EC8 /* TMDBQueryProperty.swift in Sources */,
 				E37E9BC423ABAFA500911EC8 /* BuilderBlock.swift in Sources */,
 				E37E9BC223ABAF1800911EC8 /* ViewCodable.swift in Sources */,
+				E37E9BC923ABB08B00911EC8 /* LayoutProxy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
