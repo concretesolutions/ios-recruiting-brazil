@@ -41,7 +41,7 @@ platform :ios do
     build_number = Time.new.strftime("%d%m%y%H%M")
     increment_build_number(
       build_number: build_number,
-      xcodeproj: "Movinning.xcodeproj"
+      xcodeproj: "ConcreteChallenge.xcodeproj"
     )
 
     # Atualiza o número da versão caso passado com options
@@ -53,7 +53,7 @@ platform :ios do
     version_number = get_version_number
 
     # Build do app e envio para o testflight
-    build_app(scheme: "Movinning")
+    build_app(scheme: "ConcreteChallenge")
     upload_to_testflight(
       skip_waiting_for_build_processing: true
     )
