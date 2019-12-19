@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(TMDBMoviesRoute.popular.completeUrl)
-        provider.request(route: .popular) { (result) in
+        print(TMDBMoviesRoute.popular(nil).completeUrl)
+        provider.request(route: .popular(2)) { (result) in
             switch result {
                 
             case .success(let dataValue):

@@ -11,7 +11,9 @@ import GenericNetwork
 
 //The routes of the TMDB API
 enum TMDBMoviesRoute: Route {
-    case popular
+    
+    // the associetedValue is the page
+    case popular(Int?)
     
     var baseURL: URL {
         return URL(string: "https://api.themoviedb.org/")!
@@ -26,6 +28,15 @@ enum TMDBMoviesRoute: Route {
     }
     
     var urlParams: [URLQueryItem] {
-        return [.init(tmdbProperty: .apiKey, value: "4b8d40349182e03ae8e2f6fd304c9aee")]
+        
+        switch self {
+        case .popular(let pageNumber):
+            let pageNumber = pageNumber ?? 1
+            
+            return [
+                .init(tmdbProperty: .apiKey, value: "4b8d40349182e03ae8e2f6fd304c9aee"),
+                .init(tmdbProperty: .pageNumber, value: String(pageNumber))
+            ]
+        }
     }
 }
