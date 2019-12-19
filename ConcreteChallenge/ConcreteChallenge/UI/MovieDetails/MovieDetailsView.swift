@@ -52,15 +52,30 @@ class MovieDetailsView: UIView {
         return label
     }()
 
+    let overviewLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = .systemFont(ofSize: 17, weight: .regular)
+
+        return label
+    }()
+
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
 
-        backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
 
         addSubview(posterImageView)
         addSubview(titleLabel)
         addSubview(genreNamesLabel)
         addSubview(favoriteButton)
+        addSubview(overviewLabel)
 
         buildConstraints()
         aditionalConfiguration()
@@ -74,6 +89,7 @@ class MovieDetailsView: UIView {
             viewModel.favoriteButtonHandler { self.isFavorited = $0 }
         }
         genreNamesLabel.text = viewModel.genreNames.joined(separator: " | ")
+        overviewLabel.text = viewModel.overview
     }
 
     required init?(coder: NSCoder) {
@@ -98,7 +114,11 @@ class MovieDetailsView: UIView {
             favoriteButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor),
             favoriteButton.heightAnchor.constraint(equalToConstant: 50),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 50)
+            favoriteButton.widthAnchor.constraint(equalToConstant: 50),
+
+            overviewLabel.topAnchor.constraint(equalTo: genreNamesLabel.bottomAnchor, constant: 20),
+            overviewLabel.leadingAnchor.constraint(equalTo: posterImageView.leadingAnchor),
+            overviewLabel.trailingAnchor.constraint(equalTo: posterImageView.trailingAnchor)
         ])
     }
 

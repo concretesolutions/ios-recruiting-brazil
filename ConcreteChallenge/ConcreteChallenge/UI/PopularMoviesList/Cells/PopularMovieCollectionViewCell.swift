@@ -53,6 +53,9 @@ class PopularMovieCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
 
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+
         addSubview(favoriteButton)
         addSubview(posterImageView)
         addSubview(titleLabel)

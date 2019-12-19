@@ -20,7 +20,7 @@ class FavoriteMoviesListView: UIView {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .clear
         tableView.registerCell(FavoriteMovieTableViewCell.self)
         tableView.separatorStyle = .none
 
@@ -40,7 +40,12 @@ class FavoriteMoviesListView: UIView {
 
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
-        backgroundColor = .white
+
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
 
         addSubview(emptyLabel)
         addSubview(tableView)

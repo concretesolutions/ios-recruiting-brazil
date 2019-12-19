@@ -42,7 +42,7 @@ class PopularMoviesListView: UIView {
     let collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .clear
 
         return collectionView
     }()
@@ -76,7 +76,12 @@ class PopularMoviesListView: UIView {
     override init(frame: CGRect = .zero) {
         self.viewState = .ready
         super.init(frame: frame)
-        backgroundColor = .white
+
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+        }
 
         addSubview(errorLabel)
         addSubview(errorImageView)

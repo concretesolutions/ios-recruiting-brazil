@@ -13,7 +13,14 @@ extension UITabBarController {
         tabBar.isTranslucent = false
         tabBar.backgroundColor = UIColor(named: "movs-yellow")
         tabBar.barTintColor = UIColor(named: "movs-yellow")
-        tabBar.tintColor = .black
-        tabBar.unselectedItemTintColor = .darkGray
+
+        if #available(iOS 13.0, *) {
+            tabBar.tintColor = .label
+            tabBar.unselectedItemTintColor = .secondaryLabel
+        } else {
+            tabBar.tintColor = .black
+            tabBar.unselectedItemTintColor = .darkGray
+        }
+
     }
 }

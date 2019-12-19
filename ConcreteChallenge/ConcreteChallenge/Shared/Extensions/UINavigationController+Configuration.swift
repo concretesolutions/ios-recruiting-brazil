@@ -10,13 +10,17 @@ import UIKit
 
 extension UINavigationController {
     func setupStyle() {
-        navigationBar.isTranslucent = false
+        navigationBar.isTranslucent = true
         navigationBar.backgroundColor = UIColor(named: "movs-yellow")
         navigationBar.barTintColor = UIColor(named: "movs-yellow")
 
-        let defaultAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.black
-        ]
+        let defaultAttributes: [NSAttributedString.Key: Any]
+        if #available(iOS 13.0, *) {
+            defaultAttributes =  [ .foregroundColor: UIColor.label ]
+        } else {
+            defaultAttributes =  [ .foregroundColor: UIColor.black ]
+        }
+
         navigationBar.titleTextAttributes = defaultAttributes
     }
 }
