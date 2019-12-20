@@ -89,25 +89,7 @@ class DataProvider {
         }
 
         // Movies setup
-        self.getMoreMovies { error in
-            // Favorite movies setup
-            self.setupFavoriteMovies()
-
-            completion(error)
-        }
-    }
-
-    private func setupFavoriteMovies() {
-        guard let favoriteIDs = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] else {
-            return
-        }
-
-        for id in favoriteIDs {
-            if let movie = self.movies.first(where: { $0.id == id }) {
-                movie.isFavorite = true
-                self.favoriteMovies.append(movie)
-            }
-        }
+        self.getMoreMovies(completion: completion)
     }
 
     // MARK: - Get methods
@@ -147,12 +129,24 @@ class DataProvider {
                 self.movieSemaphore?.signal()
                 completion(error)
             } else {
+                let favoriteIDs: [Int] = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] ?? []
+
                 let movies = moviesDTO.map { movieDTO -> Movie in
+                    let movie: Movie
                     if let posterPath = movieDTO.posterPath {
-                        return Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath), isFavorite: false)
+                        movie = Movie(fromDTO: movieDTO, smallImageURL: self.moviesDataFetcher.smallImageURL(forPath: posterPath), bigImageURL: self.moviesDataFetcher.bigImageURL(forPath: posterPath), isFavorite: false)
                     } else {
-                        return Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: false)
+                        movie = Movie(fromDTO: movieDTO, smallImageURL: nil, bigImageURL: nil, isFavorite: false)
                     }
+
+                    if favoriteIDs.contains(movie.id) {
+                        movie.isFavorite = true
+                        self.favoriteMovies.append(movie)
+                    } else {
+                        movie.isFavorite = false
+                    }
+
+                    return movie
                 }
 
                 self.movies += movies
@@ -169,24 +163,30 @@ class DataProvider {
     // MARK: - Favorite movies
 
     func addFavoriteMovie(_ movie: Movie) {
-        if !self.favoriteMovies.contains(movie) {
-            movie.isFavorite = true
+        guard var favoriteIDs = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] else {
+            UserDefaults.standard.set([movie.id], forKey: "favoriteIDs")
             self.favoriteMovies.append(movie)
-            self.saveFavoriteMovies()
+            self.didChangeFavorites()
+            return
+        }
+
+        if !favoriteIDs.contains(movie.id) {
+            favoriteIDs.append(movie.id)
+            UserDefaults.standard.set(favoriteIDs, forKey: "favoriteIDs")
+            self.favoriteMovies.append(movie)
             self.didChangeFavorites()
         }
     }
 
     func removeFavoriteMovie(_ movie: Movie) {
-        movie.isFavorite = false
-        self.favoriteMovies.removeAll(where: { $0 == movie })
-        self.saveFavoriteMovies()
-        self.didChangeFavorites()
-    }
+        guard var favoriteIDs = UserDefaults.standard.object(forKey: "favoriteIDs") as? [Int] else {
+            return
+        }
 
-    private func saveFavoriteMovies() {
-        let ids = self.favoriteMovies.map { $0.id }
-        UserDefaults.standard.set(ids, forKey: "favoriteIDs")
+        favoriteIDs.removeAll(where: { $0 == movie.id })
+        UserDefaults.standard.set(favoriteIDs, forKey: "favoriteIDs")
+        self.favoriteMovies.removeAll(where: { $0 == movie })
+        self.didChangeFavorites()
     }
 }
 

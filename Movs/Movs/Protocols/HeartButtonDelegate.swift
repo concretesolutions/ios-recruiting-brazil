@@ -18,10 +18,6 @@ protocol HeartButtonDelegate: class {
 extension HeartButtonDelegate {
 
     func didTapOnHeart(fromMovie movie: Movie) {
-        if movie.isFavorite {
-            DataProvider.shared.removeFavoriteMovie(movie)
-        } else {
-            DataProvider.shared.addFavoriteMovie(movie)
-        }
+        movie.isFavorite = movie.isFavorite ? false : true
     }
 }
