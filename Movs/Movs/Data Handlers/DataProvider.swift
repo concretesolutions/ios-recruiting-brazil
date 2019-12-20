@@ -25,6 +25,10 @@ class DataProvider {
     var favoriteMovies: [Movie] = []
     private var genres: [Int: String] = [:]
 
+    // MARK: - Closures
+
+    var didChangeFavorites: () -> Void = { }
+
     // MARK: - Caches
 
     // TODO: Add caches
@@ -168,13 +172,14 @@ class DataProvider {
         if !self.favoriteMovies.contains(movie) {
             self.favoriteMovies.append(movie)
         }
-
         self.saveFavoriteMovies()
+        self.didChangeFavorites()
     }
 
     func removeFavoriteMovie(_ movie: Movie) {
         self.favoriteMovies.removeAll(where: { $0 == movie })
         self.saveFavoriteMovies()
+        self.didChangeFavorites()
     }
 
     private func saveFavoriteMovies() {

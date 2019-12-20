@@ -13,6 +13,7 @@ class MovsViewController: UITabBarController {
     // MARK: - ViewControllers
 
     let popularMoviesVC = PopularMoviesViewController()
+    let favoriteMoviesVC = FavoriteMoviesViewController()
 
     // MARK: - Life cycle
 
@@ -26,8 +27,10 @@ class MovsViewController: UITabBarController {
 
         // Favorite Movies' screen
 
-        // TODO: add Favorite Movies's screen
+        let favoriteNavController = UINavigationController(rootViewController: self.favoriteMoviesVC)
+        favoriteNavController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 0)
+        favoriteNavController.navigationBar.prefersLargeTitles = true
 
-        self.viewControllers = [popularNavController]
+        self.viewControllers = [popularNavController, favoriteNavController]
     }
 }
