@@ -23,7 +23,7 @@ class FavoriteMovieCell: UITableViewCell {
         view.contentMode = .scaleAspectFill
         return view
     }()
-
+    
     lazy var title: UILabel = {
         let view = UILabel()
         view.numberOfLines = 2
@@ -32,7 +32,7 @@ class FavoriteMovieCell: UITableViewCell {
         view.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         return view
     }()
-
+    
     lazy var releaseDate: UILabel = {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
@@ -51,12 +51,12 @@ class FavoriteMovieCell: UITableViewCell {
     }()
     
     // MARK: - Stacks
-    lazy var titleContainer: UIStackView = {
-        let container = UIStackView()
-        container.axis = .horizontal
-        container.distribution = .fill
-        container.alignment = .center
-        return container
+    lazy var titleStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fill
+        stack.alignment = .center
+        return stack
     }()
     
     // MARK: - Initializers
@@ -91,18 +91,21 @@ class FavoriteMovieCell: UITableViewCell {
     
     override func prepareForReuse() {
         self.posterImage.image = nil
+        self.title.text = nil
+        self.releaseDate.text = nil
+        self.synopsis.text = nil
     }
 }
 
 extension FavoriteMovieCell: CodeView {
     func buildViewHierarchy() {
         // Title container
-        self.titleContainer.addArrangedSubview(self.title)
-        self.titleContainer.addArrangedSubview(self.releaseDate)
+        self.titleStack.addArrangedSubview(self.title)
+        self.titleStack.addArrangedSubview(self.releaseDate)
         
         // Container view
         self.containerView.addSubview(self.posterImage)
-        self.containerView.addSubview(self.titleContainer)
+        self.containerView.addSubview(self.titleStack)
         self.containerView.addSubview(self.synopsis)
         
         // View
@@ -124,17 +127,17 @@ extension FavoriteMovieCell: CodeView {
             make.left.equalToSuperview()
         }
         
-        self.titleContainer.snp.makeConstraints { (make) in
+        self.titleStack.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(16)
             make.right.equalToSuperview().inset(16)
             make.left.equalTo(self.posterImage.snp.right).offset(16)
         }
         
         self.synopsis.snp.makeConstraints { (make) in
-            make.top.equalTo(self.titleContainer.snp.bottom).offset(8).priority(.low)
-            make.right.equalTo(self.titleContainer.snp.right)
+            make.top.equalTo(self.titleStack.snp.bottom).offset(8).priority(.low)
+            make.right.equalTo(self.titleStack.snp.right)
             make.bottom.equalToSuperview().inset(16)
-            make.left.equalTo(self.titleContainer.snp.left)
+            make.left.equalTo(self.titleStack.snp.left)
             
         }
     }

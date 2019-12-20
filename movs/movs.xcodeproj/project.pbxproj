@@ -22,6 +22,7 @@
 		D965A5FC23A8F9DC00B6B618 /* MovieDetailSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5FB23A8F9DC00B6B618 /* MovieDetailSpec.swift */; };
 		D9B27E8F239F0CC60071D9E5 /* FilterTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B27E8E239F0CC60071D9E5 /* FilterTypeEnum.swift */; };
 		D9BA93CC23974649009671EB /* CodeViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA93CB23974649009671EB /* CodeViewProtocol.swift */; };
+		D9BF319C23AD62C70069232A /* DataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BF319B23AD62C70069232A /* DataServiceTests.swift */; };
 		D9CDDD4E23986B6800F629D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9CDDD4D23986B6700F629D6 /* Assets.xcassets */; };
 		D9DF74CE23AACB6600DC0EAC /* DataSourceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965A5FE23AA4C8B00B6B618 /* DataSourceMock.swift */; };
 		D9DF74D223AAE92B00DC0EAC /* ExceptionViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DF74D123AAE92B00DC0EAC /* ExceptionViewSpec.swift */; };
@@ -43,7 +44,6 @@
 		D9FBF78B23953F8800C09F2C /* FiltersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF78A23953F8800C09F2C /* FiltersScreen.swift */; };
 		D9FBF78D23953FA400C09F2C /* MovieDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF78C23953FA400C09F2C /* MovieDetailScreen.swift */; };
 		D9FBF78F23953FB100C09F2C /* MoviesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF78E23953FB100C09F2C /* MoviesScreen.swift */; };
-		D9FBF7942395408200C09F2C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF7932395408200C09F2C /* NetworkService.swift */; };
 		D9FBF79A2395417900C09F2C /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF7992395417900C09F2C /* Movie.swift */; };
 		D9FBF7B02395424000C09F2C /* movsFunctionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FBF7AF2395424000C09F2C /* movsFunctionalTests.swift */; };
 		D9FE791B2397009A0000C0C7 /* MovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FE791A2397009A0000C0C7 /* MovieTests.swift */; };
@@ -112,6 +112,7 @@
 		D965A5FE23AA4C8B00B6B618 /* DataSourceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceMock.swift; sourceTree = "<group>"; };
 		D9B27E8E239F0CC60071D9E5 /* FilterTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeEnum.swift; sourceTree = "<group>"; };
 		D9BA93CB23974649009671EB /* CodeViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewProtocol.swift; sourceTree = "<group>"; };
+		D9BF319B23AD62C70069232A /* DataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceTests.swift; sourceTree = "<group>"; };
 		D9CDDD4D23986B6700F629D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9DF74D123AAE92B00DC0EAC /* ExceptionViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionViewSpec.swift; sourceTree = "<group>"; };
 		D9F33F412396800F00D427BD /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -136,7 +137,6 @@
 		D9FBF78A23953F8800C09F2C /* FiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersScreen.swift; sourceTree = "<group>"; };
 		D9FBF78C23953FA400C09F2C /* MovieDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailScreen.swift; sourceTree = "<group>"; };
 		D9FBF78E23953FB100C09F2C /* MoviesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesScreen.swift; sourceTree = "<group>"; };
-		D9FBF7932395408200C09F2C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		D9FBF7992395417900C09F2C /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D9FBF79F2395422400C09F2C /* movsSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movsSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9FBF7A32395422400C09F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,6 +241,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		D9BF319A23AD629A0069232A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D9BF319B23AD62C70069232A /* DataServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		D9FBF71A2395355200C09F2C = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +289,7 @@
 		D9FBF73C2395355600C09F2C /* movsTests */ = {
 			isa = PBXGroup;
 			children = (
+				D9BF319A23AD629A0069232A /* Services */,
 				D9FE791C239700B80000C0C7 /* Model */,
 				D9FBF73F2395355600C09F2C /* Info.plist */,
 			);
@@ -344,7 +353,6 @@
 				D9F33F412396800F00D427BD /* DataService.swift */,
 				D965A5FE23AA4C8B00B6B618 /* DataSourceMock.swift */,
 				D9FBF77423953C6D00C09F2C /* MovieAPIService.swift */,
-				D9FBF7932395408200C09F2C /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -783,7 +791,6 @@
 				D9F505AF23980E8A00EF7833 /* TabBarController.swift in Sources */,
 				D9FBF79A2395417900C09F2C /* Movie.swift in Sources */,
 				D9FBF76923953B8C00C09F2C /* ExceptionView.swift in Sources */,
-				D9FBF7942395408200C09F2C /* NetworkService.swift in Sources */,
 				D9FBF77223953C0D00C09F2C /* FilterController.swift in Sources */,
 				D94DF1C423A1B61D001B090B /* MovieDetailDTO.swift in Sources */,
 				D9FBF78B23953F8800C09F2C /* FiltersScreen.swift in Sources */,
@@ -795,6 +802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9BF319C23AD62C70069232A /* DataServiceTests.swift in Sources */,
 				D9FE791B2397009A0000C0C7 /* MovieTests.swift in Sources */,
 				D9FE791E239700E40000C0C7 /* DataTransferObjectsTests.swift in Sources */,
 			);

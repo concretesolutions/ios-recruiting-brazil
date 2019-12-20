@@ -30,7 +30,7 @@ class TabBarController: UITabBarController {
         
         // Setup tab bar
         self.viewControllers = [moviesNavigationController,
-                           favoritesNavigationController]
+                                favoritesNavigationController]
         self.tabBar.isTranslucent = false
         self.tabBar.tintColor = .label
     }

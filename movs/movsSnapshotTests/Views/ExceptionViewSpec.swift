@@ -18,13 +18,15 @@ class ExceptionViewSpec: QuickSpec {
             var view: ExceptionView!
             
             it("should show generic error") {
-                view = ExceptionView(type: .error)
+                view = ExceptionView(imageNamed: "Error",
+                                     title: "An error has occurred. Please try again")
                 view.frame = CGRect(x: 0, y: 0, width: 414, height: 813)
                 expect(view).to(haveValidSnapshot(named: "ExceptionViewError"))
             }
             
             it("should show empty search error") {
-                view = ExceptionView(type: .emptySearch)
+                view = ExceptionView(imageNamed: "EmptySearch",
+                                     title: "Your search returned no results")
                 view.frame = CGRect(x: 0, y: 0, width: 414, height: 813)
                 expect(view).to(haveValidSnapshot(named: "ExceptionViewEmptySearch"))
             }

@@ -31,12 +31,15 @@ class FavoritesController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Collection state
     var collectionState: CollectionState = .loading {
         didSet {
             switch self.collectionState {
             case .loading:
                 self.dataService.loadFavorites { (state) in
-                    if state == .loadSuccess && (!self.filters.isEmpty || !self.searchFilteredBy.isEmpty) {
+                    // Set state according to filter existence and load result
+                    if state == .loadSuccess && !(self.filters.isEmpty && self.searchFilteredBy.isEmpty) {
                         self.collectionState = .filtered
                     } else {
                         self.collectionState = state
@@ -45,29 +48,24 @@ class FavoritesController: UIViewController {
                 }
             case .loadSuccess:
                 self.favorites = self.dataService.favorites
-                DispatchQueue.main.async {
-                    self.screen.favoritesTableView.reloadData()
-                }
             case .loadError:
                 self.screen.showErrorView()
-                DispatchQueue.main.async {
-                    self.screen.favoritesTableView.reloadData()
-                }
             case .normal:
                 self.screen.presentEmptySearch(false)
                 self.favorites = self.dataService.favorites
-                DispatchQueue.main.async {
-                    self.screen.favoritesTableView.reloadData()
-                }
             case .filtered:
                 self.favorites = self.dataService.favorites.filter({ (movie) -> Bool in
+                    // Movie match status
                     var isMatching = true
+                    
+                    // Apply filters
                     self.filters.forEach { (key, value) in
                         if isMatching == true {
                             isMatching = movie.has(value, for: key)
                         }
                     }
                     
+                    // Apply search
                     if !self.searchFilteredBy.isEmpty && isMatching == true {
                         isMatching = movie.title.lowercased().contains(self.searchFilteredBy.lowercased())
                     }
@@ -75,16 +73,20 @@ class FavoritesController: UIViewController {
                     return isMatching
                 })
                 
+                // Show button if has filters
                 if !self.filters.isEmpty {
                     self.screen.showButton()
                 }
                 
+                // Show exeption screen if filters results is empty
                 if self.favorites.count == 0 {
-                    self.screen.presentEmptySearch(true)
+//                    self.screen.presentEmptySearch(true, with: self.searchFilteredBy)
                 } else {
                     self.screen.presentEmptySearch(false)
                 }
-                
+            }
+            
+            if self.collectionState != .loading {
                 DispatchQueue.main.async {
                     self.screen.favoritesTableView.reloadData()
                 }
@@ -114,7 +116,7 @@ class FavoritesController: UIViewController {
         super.viewDidAppear(animated)
     }
     
-    // MARK: - Table view reloading
+    // MARK: - Table view reloading from refresh controll
     @objc func reloadTableView(_ sender: UIRefreshControl) {
         self.collectionState = .loading
         sender.endRefreshing()
@@ -133,6 +135,7 @@ class FavoritesController: UIViewController {
     }
 }
 
+// MARK: - Table view data source
 extension FavoritesController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.collectionState {
@@ -147,8 +150,7 @@ extension FavoritesController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.collectionState == .loading {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteMovieCell",
-                                                     for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteMovieCell", for: indexPath)
             return cell
         }
         
@@ -160,6 +162,7 @@ extension FavoritesController: UITableViewDataSource {
     }
 }
 
+// MARK: - Table view delegate
 extension FavoritesController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 176
@@ -185,15 +188,16 @@ extension FavoritesController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = self.favorites[indexPath.row]
         let movieDetailControler = MovieDetailController(movie: movie)
-               self.navigationController?.pushViewController(movieDetailControler,
-                                                             animated: true)
+        self.navigationController?.pushViewController(movieDetailControler,
+                                                      animated: true)
     }
 }
 
+// MARK: - Search results updating
 extension FavoritesController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        let text = searchController.searchBar.text ?? ""
-        self.searchFilteredBy = text
+        self.searchFilteredBy = searchController.searchBar.text ?? ""
+        // Set state according to filter existence
         if self.searchFilteredBy.isEmpty && self.filters.isEmpty {
             self.collectionState = .normal
         } else {

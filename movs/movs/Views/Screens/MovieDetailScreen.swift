@@ -38,6 +38,8 @@ class MovieDetailScreen: UIView {
         let view = UILabel()
         view.textColor = .secondaryLabel
         view.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        view.numberOfLines = 2
+        view.lineBreakMode = .byWordWrapping
         let genres = self.movie.genres.sorted()
         view.text = genres.dropFirst().reduce(genres[0], { (result, movie) -> String in
             return "\(result), \(movie)"

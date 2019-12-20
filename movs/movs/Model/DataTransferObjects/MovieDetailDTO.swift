@@ -15,7 +15,7 @@ struct MovieDetailDTO: Codable {
     let synopsis: String?
     let posterPath: String?
     let genres: [GenreDTO]?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, title, genres
         case releaseDate = "release_date"

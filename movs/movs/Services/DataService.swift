@@ -39,7 +39,6 @@ final class DataService {
     // MARK: - Setup data service for tests
     func setup(with dataService: DataSource.Type = MovieAPIService.self) {
         self.dataSource = dataService.self
-        self.movies = []
     }
     
     func reset() {

@@ -31,7 +31,7 @@ class FiltersScreen: UIView {
         return button
     }()
     
-    // MARK: - Delegate
+    // MARK: - Controller
     weak var controller: FiltersController?
     
     // MARK: - Initializers

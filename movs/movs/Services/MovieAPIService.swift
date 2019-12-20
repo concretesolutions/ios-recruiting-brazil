@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 final class MovieAPIService: DataSource {
-
+    
     // MARK: - API properties
     private static let keyAPI = "ba993d6b1312f03c80a322c3e00fab4d"
     private static let baseStringURL = "https://api.themoviedb.org/3"
@@ -21,7 +21,7 @@ final class MovieAPIService: DataSource {
     class func fetchGenres(completion: @escaping (Result<GenresDTO, Error>) -> Void) {
         let stringURL = "\(baseStringURL)/genre/movie/list?api_key=\(keyAPI)"
         let url = URL(string: stringURL)!
-
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))
@@ -47,7 +47,7 @@ final class MovieAPIService: DataSource {
                                   completion: @escaping (Result<MoviesRequestDTO, Error>) -> Void) {
         let stringURL = "\(baseStringURL)/movie/popular?api_key=\(keyAPI)&page=\(page)"
         let url = URL(string: stringURL)!
-
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if let error = error {
@@ -69,12 +69,12 @@ final class MovieAPIService: DataSource {
             }
         }.resume()
     }
-
+    
     class func fetchMoviePoster(with imageURL: String,
                                 completion: @escaping (Result<UIImage, Error>) -> Void) {
         let stringURL = "\(baseImageStringURL)/\(imageSize)/\(imageURL)?api_key=\(keyAPI)"
         let url = URL(string: stringURL)!
-
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))

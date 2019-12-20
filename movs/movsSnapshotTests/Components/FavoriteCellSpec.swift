@@ -5,6 +5,7 @@
 //  Created by Emerson Victor on 17/12/19.
 //  Copyright © 2019 emer. All rights reserved.
 //
+// swiftlint:disable line_length
 
 import Quick
 import Nimble

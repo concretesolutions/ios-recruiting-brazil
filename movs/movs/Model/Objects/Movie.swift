@@ -17,7 +17,7 @@ class Movie {
     var posterImage: UIImage?
     let genres: Set<String>
     var isFavorite: Bool
-
+    
     init(movie: MovieDTO) {
         self.id = movie.id
         self.title = movie.title ?? ""

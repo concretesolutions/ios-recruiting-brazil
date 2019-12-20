@@ -12,7 +12,7 @@ struct MoviesRequestDTO: Codable {
     let page: Int
     let movies: [MovieDTO]
     let totalResults, totalPages: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case page
         case movies = "results"

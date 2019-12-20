@@ -57,6 +57,7 @@ class FiltersController: UIViewController {
     }
 }
 
+// MARK: - Table view data source
 extension FiltersController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filters.count
@@ -73,6 +74,7 @@ extension FiltersController: UITableViewDataSource {
     }
 }
 
+// MARK: - Table view delegate
 extension FiltersController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let filterType = FilterType(rawValue: indexPath.row)!

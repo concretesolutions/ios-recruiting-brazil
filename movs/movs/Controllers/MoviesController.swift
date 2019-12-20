@@ -15,6 +15,8 @@ class MoviesController: UIViewController {
     var movies: [Movie] = []
     var nextPage: Int = 1
     var searchFilteredBy = ""
+    
+    // MARK: - Collection state
     var collectionState: CollectionState = .loading {
         didSet {
             switch self.collectionState {
@@ -25,30 +27,15 @@ class MoviesController: UIViewController {
                     }
                 } else {
                     self.collectionState = .normal
-                    DispatchQueue.main.async {
-                        self.screen.moviesCollectionView.reloadData()
-                    }
                 }
             case .loadSuccess:
                 self.nextPage += 1
                 self.movies = self.dataService.movies
-                
-                DispatchQueue.main.async {
-                    self.screen.moviesCollectionView.reloadData()
-                }
             case .loadError:
                 self.screen.showErrorView()
-                
-                DispatchQueue.main.async {
-                    self.screen.moviesCollectionView.reloadData()
-                }
             case .normal:
                 self.screen.presentEmptySearch(false)
                 self.movies = self.dataService.movies
-                
-                DispatchQueue.main.async {
-                    self.screen.moviesCollectionView.reloadData()
-                }
             case .filtered:
                 self.movies = self.dataService.movies.filter({ (movie) -> Bool in
                     return movie.title.lowercased().contains(self.searchFilteredBy.lowercased())
@@ -59,7 +46,10 @@ class MoviesController: UIViewController {
                 } else {
                     self.screen.presentEmptySearch(false)
                 }
-                
+            }
+            
+            // Reload collection view if not loading or the first time
+            if self.collectionState != .loading || self.nextPage != 1 {
                 DispatchQueue.main.async {
                     self.screen.moviesCollectionView.reloadData()
                 }
@@ -84,13 +74,14 @@ class MoviesController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    // MARK: - Table view reloading
-    @objc func reloadTableView(_ sender: UIRefreshControl) {
+    // MARK: - Collection view reloading from refresh controll
+    @objc func reloadCollectionView(_ sender: UIRefreshControl) {
         self.collectionState = .loading
         sender.endRefreshing()
     }
 }
 
+// MARK: - Collection view data source
 extension MoviesController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
@@ -107,19 +98,18 @@ extension MoviesController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if self.collectionState == .loading {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell",
-            for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath)
             return cell
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell",
-                                                      for: indexPath) as? MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell
         let movie = self.movies[indexPath.row]
         cell?.setup(with: movie)
         return cell!
     }
 }
 
+// MARK: - Collection view delegate
 extension MoviesController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = self.movies[indexPath.row]
@@ -139,11 +129,12 @@ extension MoviesController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Search results updating
 extension MoviesController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        let text = searchController.searchBar.text ?? ""
-        self.searchFilteredBy = text
-        if text == "" {
+        self.searchFilteredBy = searchController.searchBar.text ?? ""
+        // Set state according to search existence
+        if self.searchFilteredBy.isEmpty {
             self.collectionState = .normal
         } else {
             self.collectionState = .filtered

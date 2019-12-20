@@ -39,7 +39,7 @@ class FavoritesScreen: UIView {
                                  for: .valueChanged)
         return refreshControl
     }()
-
+    
     lazy var favoritesTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(FavoriteMovieCell.self,
@@ -51,7 +51,7 @@ class FavoritesScreen: UIView {
         return tableView
     }()
     
-    // MARK: - Delegate
+    // MARK: - Controller
     weak var controller: FavoritesController?
     
     // MARK: - Initializers
@@ -68,14 +68,16 @@ class FavoritesScreen: UIView {
     // MARK: - Exception view
     func showErrorView() {
         DispatchQueue.main.async {
-            self.favoritesTableView.backgroundView = ExceptionView(type: .error)
+            self.favoritesTableView.backgroundView = ExceptionView(imageNamed: "Error",
+                                                                   title: "An error has occurred. Please try again")
         }
     }
     
     func presentEmptySearch(_ shouldPresent: Bool) {
         if shouldPresent {
             DispatchQueue.main.async {
-                self.favoritesTableView.backgroundView = ExceptionView(type: .emptySearch)
+                self.favoritesTableView.backgroundView = ExceptionView(imageNamed: "EmptySearch",
+                                                                       title: "Your search returned no results")
             }
         } else {
             DispatchQueue.main.async {

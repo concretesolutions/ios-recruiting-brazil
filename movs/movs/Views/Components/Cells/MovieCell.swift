@@ -39,13 +39,13 @@ class MovieCell: UICollectionViewCell {
     }()
     
     // MARK: - Stacks
-    lazy var infoContainer: UIStackView = {
-        let container = UIStackView()
-        container.axis = .horizontal
-        container.spacing = 8
-        container.alignment = .center
-        container.distribution = .fill
-        return container
+    lazy var infoStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.alignment = .center
+        stack.distribution = .fill
+        return stack
     }()
     
     // MARK: - Attributes
@@ -110,12 +110,12 @@ extension MovieCell: CodeView {
         self.posterImage.addSubview(self.posterGradientLayer)
         
         // Info container
-        self.infoContainer.addArrangedSubview(self.title)
-        self.infoContainer.addArrangedSubview(self.favoriteButton)
+        self.infoStack.addArrangedSubview(self.title)
+        self.infoStack.addArrangedSubview(self.favoriteButton)
         
         // View
         self.contentView.addSubview(self.posterImage)
-        self.contentView.addSubview(self.infoContainer)
+        self.contentView.addSubview(self.infoStack)
     }
     
     func setupConstraints() {
@@ -127,7 +127,7 @@ extension MovieCell: CodeView {
             make.edges.equalToSuperview()
         }
         
-        self.infoContainer.snp.makeConstraints { (make) in
+        self.infoStack.snp.makeConstraints { (make) in
             make.height.lessThanOrEqualToSuperview().multipliedBy(0.2)
             make.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(12)

@@ -13,31 +13,15 @@ class FilterController: UIViewController {
     lazy var screen = FilterScreen(controller: self)
     let dataService = DataService.shared
     let filterType: FilterType
-    let filterValues: [String]
     var selectedValue: String?
+    var filterValues: [String] = []
     
     // MARK: - Initializers
     required init(filterType: FilterType, selectedValue: String?) {
         self.filterType = filterType
         self.selectedValue = selectedValue
-        
-        switch self.filterType {
-        case .date:
-            let movieMinYear = self.dataService.favorites.min { (lmovie, rmovie) -> Bool in
-                return Int(lmovie.releaseDate)! < Int(rmovie.releaseDate)!
-            }
-            
-            if let minYear = Int(movieMinYear?.releaseDate ?? "") {
-                let currentYear = Int(Calendar.current.component(.year, from: Date()))
-                self.filterValues = Array(minYear...currentYear).map({ year in String(year)})
-            } else {
-                self.filterValues = []
-            }
-        case .genre:
-            self.filterValues = Array(self.dataService.genres.values).sorted()
-        }
-        
         super.init(nibName: nil, bundle: nil)
+        self.filterValues = self.createFilterValues(for: filterType)
     }
     
     required init?(coder: NSCoder) {
@@ -48,12 +32,7 @@ class FilterController: UIViewController {
     override func loadView() {
         super.loadView()
         self.view = self.screen
-        switch self.filterType {
-        case .date:
-            self.title = "Date"
-        case .genre:
-            self.title = "Genres"
-        }
+        self.title = self.filterType.stringValue
     }
     
     override func viewDidLoad() {
@@ -67,8 +46,28 @@ class FilterController: UIViewController {
         }
         super.viewWillDisappear(animated)
     }
+    
+    // MARK: - Create filter values
+    func createFilterValues(for type: FilterType) -> [String] {
+        switch type {
+        case .date:
+            let movieMinYear = self.dataService.favorites.min { (lmovie, rmovie) -> Bool in
+                return Int(lmovie.releaseDate)! < Int(rmovie.releaseDate)!
+            }
+            
+            if let minYear = Int(movieMinYear?.releaseDate ?? "") {
+                let currentYear = Int(Calendar.current.component(.year, from: Date()))
+                return Array(minYear...currentYear).map({ year in String(year)})
+            } else {
+                return []
+            }
+        case .genre:
+            return Array(self.dataService.genres.values).sorted()
+        }
+    }
 }
 
+// MARK: - Table view data source
 extension FilterController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filterValues.count
@@ -89,6 +88,7 @@ extension FilterController: UITableViewDataSource {
     }
 }
 
+// MARK: - Table view delegate
 extension FilterController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath)!
@@ -100,13 +100,13 @@ extension FilterController: UITableViewDelegate {
             let lastSelectedCell = tableView.cellForRow(at: IndexPath(item: index, section: 0))!
             lastSelectedCell.accessoryType = .none
             
-            // If the selected cell was the last selected cell remove value
-            // Don't update value/add checkmark
+            // If the selected cell was the last selected cell remove value and checkmark
             if selectedValue == selectedCell.textLabel?.text {
                 self.selectedValue = nil
                 return
             }
         }
+        
         self.selectedValue = self.filterValues[indexPath.row]
         selectedCell.accessoryType = .checkmark
     }

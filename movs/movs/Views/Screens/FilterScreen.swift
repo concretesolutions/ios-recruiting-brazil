@@ -9,7 +9,7 @@
 import UIKit
 
 class FilterScreen: UIView {
-    // MARK: - Subview
+    // MARK: - Subviews
     lazy var filterValuesTableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self.controller
@@ -17,7 +17,7 @@ class FilterScreen: UIView {
         return tableView
     }()
     
-    // MARK: - Delegate
+    // MARK: - Controller
     weak var controller: FilterController?
     
     // MARK: - Initializers

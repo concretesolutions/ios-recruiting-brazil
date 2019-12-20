@@ -21,7 +21,7 @@ class MoviesScreen: UIView {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self.controller,
-                                 action: #selector(self.controller?.reloadTableView),
+                                 action: #selector(self.controller?.reloadCollectionView),
                                  for: .valueChanged)
         return refreshControl
     }()
@@ -73,14 +73,16 @@ class MoviesScreen: UIView {
     // MARK: - Exception view
     func showErrorView() {
         DispatchQueue.main.async {
-            self.moviesCollectionView.backgroundView = ExceptionView(type: .error)
+            self.moviesCollectionView.backgroundView = ExceptionView(imageNamed: "Error",
+                                                                     title: "An error has occurred. Please try again")
         }
     }
     
     func presentEmptySearch(_ shouldPresent: Bool) {
         if shouldPresent {
             DispatchQueue.main.async {
-                self.moviesCollectionView.backgroundView = ExceptionView(type: .emptySearch)
+                self.moviesCollectionView.backgroundView = ExceptionView(imageNamed: "EmptySearch",
+                                                                         title: "Your search returned no results")
             }
         } else {
             DispatchQueue.main.async {
