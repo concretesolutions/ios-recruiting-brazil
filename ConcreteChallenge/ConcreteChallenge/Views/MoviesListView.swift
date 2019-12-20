@@ -10,15 +10,16 @@ import UIKit
 
 class MoviesListView: UIView, ViewCodable {
     let viewModel: MoviesListViewModel
-    let moviesCollectionLayout = UICollectionViewFlowLayout()
-    
     weak var delegate: MoviesListViewDelegate?
     
-    lazy var moviesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: moviesCollectionLayout).build {
+    private let moviesCollectionLayout = UICollectionViewFlowLayout()
+    private lazy var moviesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: moviesCollectionLayout).build {
         $0.registerReusableCell(forCellType: MinimizedMovieCollectionCell.self)
         $0.dataSource = self
         $0.delegate = self
+        $0.contentInset.top = 50
     }
+    private let toggleButton = ToggleButton(firstImage: UIImage(named: "grid")!, secondImage: UIImage(named: "expanded")!)
     
     init(viewModel: MoviesListViewModel) {
         self.viewModel = viewModel
@@ -31,11 +32,17 @@ class MoviesListView: UIView, ViewCodable {
     }
     
     func buildHierarchy() {
-        addSubViews(moviesCollectionView)
+        addSubViews(moviesCollectionView, toggleButton)
     }
     
     func addConstraints() {
         moviesCollectionView.layout.fillSuperView()
+        toggleButton.layout.group.top.right.fillToSuperView()
+        toggleButton.layout.build {
+            $0.group.top.right.fillToSuperView()
+            $0.width.equal(to: 140)
+            $0.height.equal(to: 40)
+        }
     }
     
     func observeViewModel() {
@@ -48,6 +55,12 @@ class MoviesListView: UIView, ViewCodable {
         viewModel.needShowError = { [weak self] errorMessage in
             self?.delegate?.needShowError(withMessage: errorMessage) {
                 self?.viewModel.thePageReachedTheEnd()
+            }
+        }
+        
+        viewModel.needReloadAllMovies = { [weak self] in
+            DispatchQueue.main.async {
+                self?.moviesCollectionView.reloadData()
             }
         }
         
@@ -77,9 +90,8 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == viewModel.numberOfMovies - 1 {
+        if indexPath.row == viewModel.numberOfMovies - 2 {
             viewModel.thePageReachedTheEnd()
         }
     }
 }
-

@@ -27,16 +27,19 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
     }
     
     private let movieImageView = UIImageView().build {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.backgroundColor = .appRed
         $0.layer.cornerRadius = 5
+        $0.clipsToBounds = true
     }
     
     private let titleLabel = UILabel().build {
         $0.text = "bla"
         $0.textColor = .appTextBlue
-        $0.font = .boldSystemFont(ofSize: 17)
+        $0.font = .boldSystemFont(ofSize: 15)
         $0.textAlignment = .center
+        $0.numberOfLines = 2
+        
     }
     
     override init(frame: CGRect) {
@@ -61,6 +64,7 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
         titleLabel.layout.build {
             $0.top.equal(to: movieImageView.layout.bottom)
             $0.group.bottom.left.right.fillToSuperView()
+            $0.height.equal(to: 40)
         }
     }
 }

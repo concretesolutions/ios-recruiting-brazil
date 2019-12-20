@@ -16,5 +16,6 @@ public protocol ParserProvider: AnyObject, Provider where ReturnType == Data {
     var parser: ParserType { get set }
         
     /// It requests Data from a Route and parses it with the parser instance
+    @discardableResult
     func requestAndParse(route: Route, completion: @escaping (Result<ParserType.ParsableType, Error>) -> Void) -> CancellableTask?
 }

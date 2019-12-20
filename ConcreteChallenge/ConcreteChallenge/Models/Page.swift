@@ -31,13 +31,14 @@ struct Page<ItemType: Codable>: Codable {
     
     init() {
         self.items = []
-        self.pageNumber = 1
+        self.pageNumber = 0
         self.totalOfItems = 0
         self.totalOfPages = 0
     }
     
     mutating func addNewPage(_ page: Page<ItemType>) {
         items.append(contentsOf: page.items)
-        pageNumber = page.pageNumber
+        
+        pageNumber += 1
     }
 }

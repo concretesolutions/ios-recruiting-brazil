@@ -26,7 +26,7 @@ class MoviesListViewController: UIViewController {
     override func viewDidLoad() {
         
         view.addSubViews(moviesListView)
-        moviesListView.layout.fillSuperView()
+        moviesListView.layout.fill(view: view.safeAreaLayoutGuide)
     }
 }
  

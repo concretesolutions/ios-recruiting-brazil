@@ -14,13 +14,14 @@ protocol MoviesListViewModel: AnyObject {
         
     var needShowError: ((_ message: String) -> Void)? { get set }
     var needShowNewMovies: ((_ atRange: Range<Int>) -> Void)? { get set }
+    var needReloadAllMovies: (() -> Void)? { get set }
     
     func thePageReachedTheEnd()
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel
 }
 
 class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProviderType: FileProvider>: MoviesListViewModel where MoviesProviderType.ParsableType == Page<Movie> {
-    
+   
     typealias MoviesRouter = (_ pageNumber: Int) -> Route
     
     var numberOfMovies: Int {
@@ -32,6 +33,7 @@ class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProvid
             needShowNewMovies?(0..<moviesPage.items.count)
         }
     }
+    var needReloadAllMovies: (() -> Void)?
     var needShowError: ((_ message: String) -> Void)?
     
     private let moviesProvider: MoviesProviderType
@@ -48,7 +50,7 @@ class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProvid
     }
     
     private func getMovies() {
-        moviesProvider.requestAndParse(route: moviesRouter(moviesPage.pageNumber)) { [weak self] (result) in
+        moviesProvider.requestAndParse(route: moviesRouter(moviesPage.nextPage)) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
@@ -65,7 +67,12 @@ class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProvid
         let newMoviesRange = self.moviesPage.items.count ..< totalOfMovies
         
         self.moviesPage.addNewPage(moviesPage)
-        self.needShowNewMovies?(newMoviesRange)
+        
+        if moviesPage.pageNumber == 1 {
+            self.needReloadAllMovies?()
+        } else {
+            self.needShowNewMovies?(newMoviesRange)
+        }
     }
     
     func thePageReachedTheEnd() {

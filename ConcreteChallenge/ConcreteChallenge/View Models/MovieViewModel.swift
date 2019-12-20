@@ -37,6 +37,7 @@ class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
     private let movie: Movie
     private var movieImage: UIImage?
     private let imageRouter: ImageRouter
+    private var imageTask: CancellableTask?
     
     init(movie: Movie, imageProvider: ImageProviderType, imageRouter: @escaping ImageRouter) {
         self.movie = movie
@@ -52,7 +53,7 @@ class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
             return
         }
         
-        imageProvider.request(route: imageRouter(posterPath)) { [weak self] (result) in
+        self.imageTask = imageProvider.request(route: imageRouter(posterPath)) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
@@ -67,7 +68,10 @@ class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
     }
     
     func movieViewWasReused() {
+        self.imageTask?.cancel()
+        self.imageTask = nil
         
+        self.needReplaceImage?(Constants.placeholderImage)
     }
 }
 

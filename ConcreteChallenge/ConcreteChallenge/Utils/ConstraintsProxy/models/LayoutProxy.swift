@@ -39,7 +39,7 @@ class LayoutProxy: BuilderBlock {
     /// - Parameters:
     ///   - view: the view to be filled
     ///   - margin: the margins to the above view borders
-    func fill(view: Anchorable?, margin: CGFloat) {
+    func fill(view: Anchorable?, margin: CGFloat = 0) {
         self.makeRelation(to: view, type: .top, operation: .margin(margin))
         self.makeRelation(to: view, type: .bottom, operation: .margin(-margin))
         self.makeRelation(to: view, type: .left, operation: .margin(margin))
