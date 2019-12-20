@@ -15,6 +15,7 @@ class MoviesListView: UIView, ViewCodable {
     private let moviesCollectionLayout = UICollectionViewFlowLayout()
     private lazy var moviesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: moviesCollectionLayout).build {
         $0.registerReusableCell(forCellType: MinimizedMovieCollectionCell.self)
+        $0.registerReusableCell(forCellType: MaximizedMovieCollectionCell.self)
         $0.dataSource = self
         $0.delegate = self
         $0.contentInset.top = 50
@@ -75,11 +76,11 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let movieCell = moviesCollectionView.dequeueReusableCell(
-            forCellType: MinimizedMovieCollectionCell.self,
+            forCellType: MaximizedMovieCollectionCell.self,
             for: indexPath
         )
         
-        movieCell.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
+//        movieCell.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
         
         return movieCell
     }
