@@ -39,8 +39,8 @@ final class PopularMoviesScreen: UIView {
         return view
     }()
 
-    private lazy var errorView: ErrorView = {
-        let view = ErrorView(imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
+    private lazy var errorView: ExceptionView = {
+        let view = ExceptionView(imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
         return view
     }()
 

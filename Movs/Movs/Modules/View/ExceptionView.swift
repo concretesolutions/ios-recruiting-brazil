@@ -1,5 +1,5 @@
 //
-//  ErrorView.swift
+//  ExceptionView.swift
 //  Movs
 //
 //  Created by Carolina Cruz Agra Lopes on 20/12/19.
@@ -9,7 +9,7 @@
 import SnapKit
 import UIKit
 
-final class ErrorView: UIView {
+final class ExceptionView: UIView {
 
     // MARK: - Subviews
 
@@ -52,7 +52,7 @@ final class ErrorView: UIView {
     }
 }
 
-extension ErrorView: CodeView {
+extension ExceptionView: CodeView {
     func buildViewHierarchy() {
         self.addSubview(self.mainStack)
         self.mainStack.addArrangedSubview(self.imageView)

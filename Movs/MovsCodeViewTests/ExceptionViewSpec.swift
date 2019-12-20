@@ -1,5 +1,5 @@
 //
-//  ErrorViewSpec.swift
+//  ExceptionViewSpec.swift
 //  MovsCodeViewTests
 //
 //  Created by Carolina Cruz Agra Lopes on 20/12/19.
@@ -11,11 +11,11 @@ import Nimble
 import Nimble_Snapshots
 @testable import Movs
 
-class ErrorViewSpec: QuickSpec {
+class ExceptionViewSpec: QuickSpec {
 
     // MARK: - Sut
 
-    private var sut: ErrorView!
+    private var sut: ExceptionView!
 
     // MARK: - Tests
 
@@ -23,7 +23,7 @@ class ErrorViewSpec: QuickSpec {
         describe("ErrorView") {
             context("get popular movies error") {
                 beforeEach {
-                    self.sut = ErrorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
+                    self.sut = ExceptionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
                 }
 
                 afterEach {
@@ -31,13 +31,13 @@ class ErrorViewSpec: QuickSpec {
                 }
 
                 it("should have the expected look and feel") {
-                    expect(self.sut) == snapshot("ErrorView_popular")
+                    expect(self.sut) == snapshot("ExceptionView_popular")
                 }
             }
 
             context("search error") {
                 beforeEach {
-                    self.sut = ErrorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "magnifyingglass.circle.fill", text: "Sorry, we couldn't find any movie with \"x\"")
+                    self.sut = ExceptionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "magnifyingglass.circle.fill", text: "Sorry, we couldn't find any movie with \"x\"")
                     DataProvider.shared.reset()
                 }
 
@@ -46,7 +46,7 @@ class ErrorViewSpec: QuickSpec {
                 }
 
                 it("should have the expected look and feel") {
-                    expect(self.sut) == snapshot("ErrorView_search")
+                    expect(self.sut) == snapshot("ExceptionView_search")
                 }
             }
         }

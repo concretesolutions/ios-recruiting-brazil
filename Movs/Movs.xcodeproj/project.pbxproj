@@ -26,8 +26,8 @@
 		776AD8B1239595D600521410 /* PopularMovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B0239595D600521410 /* PopularMovieDTO.swift */; };
 		776AD8B323959F8D00521410 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B223959F8D00521410 /* Movie.swift */; };
 		776AD8BA2395A34600521410 /* ConfigurationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776AD8B92395A34600521410 /* ConfigurationDTO.swift */; };
-		776DC82623AD4F0D00C0F3C2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DC82523AD4F0D00C0F3C2 /* ErrorView.swift */; };
-		776DC82823AD51C200C0F3C2 /* ErrorViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DC82723AD51C200C0F3C2 /* ErrorViewSpec.swift */; };
+		776DC82623AD4F0D00C0F3C2 /* ExceptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DC82523AD4F0D00C0F3C2 /* ExceptionView.swift */; };
+		776DC82823AD51C200C0F3C2 /* ExceptionViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DC82723AD51C200C0F3C2 /* ExceptionViewSpec.swift */; };
 		776F0C2323AC0E5600A47E76 /* FavoriteMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776F0C2223AC0E5600A47E76 /* FavoriteMovieCell.swift */; };
 		776F0C2523AC192400A47E76 /* FavoriteMovieCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776F0C2423AC192400A47E76 /* FavoriteMovieCellSpec.swift */; };
 		7775E3922399ED9F00132D17 /* PopularMovieCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775E3912399ED9F00132D17 /* PopularMovieCellSpec.swift */; };
@@ -86,8 +86,8 @@
 		776AD8B0239595D600521410 /* PopularMovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieDTO.swift; sourceTree = "<group>"; };
 		776AD8B223959F8D00521410 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		776AD8B92395A34600521410 /* ConfigurationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationDTO.swift; sourceTree = "<group>"; };
-		776DC82523AD4F0D00C0F3C2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		776DC82723AD51C200C0F3C2 /* ErrorViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewSpec.swift; sourceTree = "<group>"; };
+		776DC82523AD4F0D00C0F3C2 /* ExceptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionView.swift; sourceTree = "<group>"; };
+		776DC82723AD51C200C0F3C2 /* ExceptionViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionViewSpec.swift; sourceTree = "<group>"; };
 		776F0C2223AC0E5600A47E76 /* FavoriteMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCell.swift; sourceTree = "<group>"; };
 		776F0C2423AC192400A47E76 /* FavoriteMovieCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCellSpec.swift; sourceTree = "<group>"; };
 		7775E3912399ED9F00132D17 /* PopularMovieCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieCellSpec.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		776AD8AD2395959200521410 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				776DC82523AD4F0D00C0F3C2 /* ErrorView.swift */,
+				776DC82523AD4F0D00C0F3C2 /* ExceptionView.swift */,
 				776F0C2223AC0E5600A47E76 /* FavoriteMovieCell.swift */,
 				7703F6A923AC298100CFA8C7 /* FavoriteMoviesScreen.swift */,
 				77AA5A97239D930A008EBC9C /* MovieDetailScreen.swift */,
@@ -299,7 +299,7 @@
 		77C453312395781800545CF7 /* MovsCodeViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				776DC82723AD51C200C0F3C2 /* ErrorViewSpec.swift */,
+				776DC82723AD51C200C0F3C2 /* ExceptionViewSpec.swift */,
 				776F0C2423AC192400A47E76 /* FavoriteMovieCellSpec.swift */,
 				77AA5A9D239FBFD3008EBC9C /* MovieDetailScreenSpec.swift */,
 				7775E3912399ED9F00132D17 /* PopularMovieCellSpec.swift */,
@@ -617,7 +617,7 @@
 				77348472239AFD4800424F81 /* PopularMoviesViewController.swift in Sources */,
 				77F9F56B2396876F00D7DAF0 /* GenreDTO.swift in Sources */,
 				776AD8B1239595D600521410 /* PopularMovieDTO.swift in Sources */,
-				776DC82623AD4F0D00C0F3C2 /* ErrorView.swift in Sources */,
+				776DC82623AD4F0D00C0F3C2 /* ExceptionView.swift in Sources */,
 				7741158D239A954100C91F2B /* UIImageView.swift in Sources */,
 				776AD8BA2395A34600521410 /* ConfigurationDTO.swift in Sources */,
 				772A8B8123945B8B00303636 /* AppDelegate.swift in Sources */,
@@ -643,7 +643,7 @@
 				776F0C2523AC192400A47E76 /* FavoriteMovieCellSpec.swift in Sources */,
 				77B471CD239B633C00A72C25 /* MockDataFetcher.swift in Sources */,
 				77AA5A9E239FBFD3008EBC9C /* MovieDetailScreenSpec.swift in Sources */,
-				776DC82823AD51C200C0F3C2 /* ErrorViewSpec.swift in Sources */,
+				776DC82823AD51C200C0F3C2 /* ExceptionViewSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
