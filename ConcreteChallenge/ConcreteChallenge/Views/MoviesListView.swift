@@ -20,7 +20,11 @@ class MoviesListView: UIView, ViewCodable {
         $0.delegate = self
         $0.contentInset.top = 50
     }
-    private let toggleButton = ToggleButton(firstImage: UIImage(named: "grid")!, secondImage: UIImage(named: "expanded")!)
+    private lazy var toggleButton = ToggleButton(firstImage: UIImage(named: "grid")!, secondImage: UIImage(named: "expanded")!).build {
+        $0.wasToggledCompletion = { [weak self] firstOptionIsSelected in
+            self?.viewModel.viewStateChanged()
+        }
+    }
     
     init(viewModel: MoviesListViewModel) {
         self.viewModel = viewModel
@@ -76,11 +80,11 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let movieCell = moviesCollectionView.dequeueReusableCell(
-            forCellType: MaximizedMovieCollectionCell.self,
+            forCellType: MinimizedMovieCollectionCell.self,
             for: indexPath
         )
         
-//        movieCell.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
+        movieCell.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
         
         return movieCell
     }

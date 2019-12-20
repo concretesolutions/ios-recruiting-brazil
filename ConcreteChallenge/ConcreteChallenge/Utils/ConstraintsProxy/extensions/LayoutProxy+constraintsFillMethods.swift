@@ -6,11 +6,11 @@
 //  Copyright © 2019 Elias Paulino. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension LayoutPropertyProxy {
     /// it makes this Anchor property be equal to the superview
-    func equalToSuperView() {
-        self.layout.makeRelation(to: nil, type: self.type, operation: .margin(0))
+    func equalToSuperView(margin: CGFloat = 0) {
+        self.layout.makeRelation(to: nil, type: self.type, operation: .margin(margin))
     }
 }

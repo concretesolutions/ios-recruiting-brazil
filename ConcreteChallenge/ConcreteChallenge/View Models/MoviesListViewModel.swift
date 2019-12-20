@@ -18,6 +18,7 @@ protocol MoviesListViewModel: AnyObject {
     
     func thePageReachedTheEnd()
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel
+    func viewStateChanged()
 }
 
 class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProviderType: FileProvider>: MoviesListViewModel where MoviesProviderType.ParsableType == Page<Movie> {
@@ -85,5 +86,9 @@ class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProvid
         }
 
         return DefaultMovieViewModel(movie: self.moviesPage.items[position], imageProvider: imagesProvider, imageRouter: imageRouter)
+    }
+    
+    func viewStateChanged() {
+           
     }
 }

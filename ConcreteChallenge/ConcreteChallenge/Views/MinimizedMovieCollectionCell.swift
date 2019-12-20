@@ -39,7 +39,6 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable {
         $0.font = .boldSystemFont(ofSize: 15)
         $0.textAlignment = .center
         $0.numberOfLines = 2
-        
     }
     
     override init(frame: CGRect) {

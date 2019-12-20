@@ -9,6 +9,14 @@
 import UIKit
 
 class ToggleButton: UIVisualEffectView, ViewCodable {
+    public var firstOptionIsSelected = true {
+        didSet {
+            wasToggledCompletion?(self.firstOptionIsSelected)
+        }
+    }
+    
+    public var wasToggledCompletion: ((Bool) -> Void)?
+    
     private let firstOptionImageView = UIImageView().build(block: formatOptionView)
     private let secondOptionImageView = UIImageView().build(block: formatOptionView)
     private let overlayView = UIView().build {
@@ -81,8 +89,10 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
         
         switch touchedView {
         case firstOptionImageView:
+            firstOptionIsSelected = true
             animateOverlayMovement(toAnchor: contentLayoutGuide.layout.left.layout.left)
         case secondOptionImageView:
+            firstOptionIsSelected = false
             animateOverlayMovement(toAnchor: contentLayoutGuide.layout.left.layout.centerX)
         default:
             break
