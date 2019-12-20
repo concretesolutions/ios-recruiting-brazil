@@ -32,6 +32,11 @@ final class FavoriteMoviesScreen: UIView {
         return view
     }()
 
+    private lazy var emptyView: ExceptionView = {
+        let view = ExceptionView(imageSystemName: "heart", text: "You don't have any favorite movies yet.")
+        return view
+    }()
+
     // MARK: - Initializers
 
     override init(frame: CGRect = .zero) {
@@ -41,6 +46,16 @@ final class FavoriteMoviesScreen: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Empty handlers
+
+    func displayEmptyView() {
+        self.tableView.backgroundView = self.emptyView
+    }
+
+    func hideEmptyView() {
+        self.tableView.backgroundView = nil
     }
 }
 
