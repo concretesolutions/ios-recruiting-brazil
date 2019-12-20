@@ -27,7 +27,13 @@ class PopularMoviesViewController: UIViewController {
         self.title = "Movies"
         self.navigationItem.largeTitleDisplayMode = .always
 
+        self.screen.startLoading()
+
         DataProvider.shared.setup { error in
+            DispatchQueue.main.async {
+                self.screen.stopLoading()
+            }
+
             if let error = error {
                 print(error)
             } else {

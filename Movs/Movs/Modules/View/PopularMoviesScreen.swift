@@ -32,6 +32,13 @@ final class PopularMoviesScreen: UIView {
         return view
     }()
 
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(frame: .zero)
+        view.hidesWhenStopped = true
+        view.color = UIColor(named: "Yellow")
+        return view
+    }()
+
     // MARK: - Initializers
 
     override init(frame: CGRect = .zero) {
@@ -42,11 +49,22 @@ final class PopularMoviesScreen: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Activity Indicator handlers
+
+    func startLoading() {
+        self.activityIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        self.activityIndicator.stopAnimating()
+    }
 }
 
 extension PopularMoviesScreen: CodeView {
     func buildViewHierarchy() {
         self.addSubview(self.collectionView)
+        self.addSubview(self.activityIndicator)
     }
 
     func setupContraints() {
@@ -55,6 +73,10 @@ extension PopularMoviesScreen: CodeView {
             maker.bottom.equalTo(self.safeAreaLayoutGuide)
             maker.leading.equalTo(self.safeAreaLayoutGuide)
             maker.trailing.equalTo(self.safeAreaLayoutGuide)
+        }
+
+        self.activityIndicator.snp.makeConstraints { maker in
+            maker.centerX.centerY.equalToSuperview()
         }
     }
 
