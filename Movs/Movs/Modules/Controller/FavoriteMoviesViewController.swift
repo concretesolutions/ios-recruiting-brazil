@@ -40,8 +40,15 @@ extension FavoriteMoviesViewController: FavoriteMoviesScreenDelegate {
     // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int {
+        if DataProvider.shared.favoriteMovies.isEmpty {
+            self.screen.displayEmptyView()
+        } else {
+            self.screen.hideEmptyView()
+        }
+
         return DataProvider.shared.favoriteMovies.count
     }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
