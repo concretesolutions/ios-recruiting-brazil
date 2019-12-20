@@ -39,6 +39,11 @@ final class PopularMoviesScreen: UIView {
         return view
     }()
 
+    private lazy var errorView: ErrorView = {
+        let view = ErrorView(imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
+        return view
+    }()
+
     // MARK: - Initializers
 
     override init(frame: CGRect = .zero) {
@@ -58,6 +63,12 @@ final class PopularMoviesScreen: UIView {
 
     func stopLoading() {
         self.activityIndicator.stopAnimating()
+    }
+
+    // MARK: - Error handlers
+
+    func displayError() {
+        self.collectionView.backgroundView = self.errorView
     }
 }
 

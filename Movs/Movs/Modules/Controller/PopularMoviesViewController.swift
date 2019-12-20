@@ -34,8 +34,10 @@ class PopularMoviesViewController: UIViewController {
                 self.screen.stopLoading()
             }
 
-            if let error = error {
-                print(error)
+            if error != nil {
+                DispatchQueue.main.async {
+                    self.screen.displayError()
+                }
             } else {
                 var indexPaths: [IndexPath] = []
                 for row in 0...DataProvider.shared.movies.count-1 {
