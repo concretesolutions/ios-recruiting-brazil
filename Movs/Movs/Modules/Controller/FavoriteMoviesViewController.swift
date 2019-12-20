@@ -75,4 +75,14 @@ extension FavoriteMoviesViewController: FavoriteMoviesScreenDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 117
     }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let unfavoriteAction = UIContextualAction(style: .normal, title: "Unfavorite", handler: { (_, _, success) in
+            DataProvider.shared.removeFavoriteMovie(DataProvider.shared.favoriteMovies[indexPath.section])
+            success(true)
+        })
+        unfavoriteAction.backgroundColor = .red
+
+        return UISwipeActionsConfiguration(actions: [unfavoriteAction])
+    }
 }
