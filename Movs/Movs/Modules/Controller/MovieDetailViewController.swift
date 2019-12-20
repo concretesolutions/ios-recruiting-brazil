@@ -43,4 +43,8 @@ class MovieDetailViewController: UIViewController, HeartButtonDelegate {
         self.title = "Movie"
         self.navigationItem.largeTitleDisplayMode = .never
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.screen.configureHeartImage()
+    }
 }
