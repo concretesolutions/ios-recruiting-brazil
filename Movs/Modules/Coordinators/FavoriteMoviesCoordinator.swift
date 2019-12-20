@@ -19,6 +19,7 @@ class FavoriteMoviesCoordinator: Coordinator {
     // MARK: - Properties
     
     internal let dependencies: Dependencies
+    internal var filtersCoordinator: FavoriteMoviesFiltersCoordinator!
     internal var movieDetailsCoordinator: MovieDetailsCoordinator!
     internal let coordinatedViewController: Controller
     internal let presenter: Presenter
@@ -38,7 +39,7 @@ class FavoriteMoviesCoordinator: Coordinator {
         self.coordinatedViewController = UINavigationController(rootViewController: controller)
         self.coordinatedViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         
-        viewModel.detailsPresenter = self
+        viewModel.modalPresenter = self
     }
     
     deinit {
@@ -56,9 +57,19 @@ class FavoriteMoviesCoordinator: Coordinator {
     }
     
     // MARK: - Binding
+
+    func bind(to modalCoordinator: FavoriteMoviesFiltersCoordinator) {
+        self.subscribers.append(modalCoordinator.finishingPublisher
+            .sink(receiveValue: { finished in
+                if finished {
+                    self.filtersCoordinator = nil
+                }
+            })
+        )
+    }
     
-    func bind(to coordinator: MovieDetailsCoordinator) {
-        self.subscribers.append(coordinator.$coordinatorDidFinish
+    func bind(to modalCoordinator: MovieDetailsCoordinator) {
+        self.subscribers.append(modalCoordinator.finishingPublisher
             .sink(receiveValue: { finished in
                 if finished {
                     self.movieDetailsCoordinator = nil
@@ -68,8 +79,14 @@ class FavoriteMoviesCoordinator: Coordinator {
     }
 }
 
-extension FavoriteMoviesCoordinator: DetailsPresenterDelegate {
-    func showDetails(movie: Movie) {
+extension FavoriteMoviesCoordinator: ModalPresenterDelegate {
+    func showFilters() {
+        self.filtersCoordinator = FavoriteMoviesFiltersCoordinator(parent: self)
+        self.filtersCoordinator.start()
+        self.bind(to: self.filtersCoordinator)
+    }
+    
+    func showMovieDetails(movie: Movie) {
         self.movieDetailsCoordinator = MovieDetailsCoordinator(parent: self, movie: movie)
         self.movieDetailsCoordinator.start()
         self.bind(to: self.movieDetailsCoordinator)

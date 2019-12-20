@@ -33,13 +33,13 @@ class PopularMoviesControllerViewModel {
     
     // MARK: - Properties
 
+    weak var modalPresenter: ModalPresenterDelegate?
     internal let decoder = JSONDecoder()
     internal var currentSearch: String?
-    weak var detailsPresenter: PopularMoviesCoordinator?
-    var shouldFetchGenres: Bool {
+    internal var shouldFetchGenres: Bool {
         return self.apiManager.shouldFetchGenres()
     }
-    var shouldFetchNextPage: Bool {
+    internal var shouldFetchNextPage: Bool {
         return self.apiManager.shouldFetchNextPage()
     }
     
@@ -121,7 +121,9 @@ extension PopularMoviesControllerViewModel {
     
     func didSelectItemAt(indexPath: IndexPath) {
         let movie = self.dataSource[indexPath.row]
-        self.detailsPresenter?.showDetails(movie: movie)
+        if let showDetails = self.modalPresenter?.showMovieDetails {
+            showDetails(movie)
+        }
     }
 }
 

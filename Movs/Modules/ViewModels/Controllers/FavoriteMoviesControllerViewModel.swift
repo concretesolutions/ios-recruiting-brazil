@@ -33,7 +33,7 @@ class FavoriteMoviesControllerViewModel {
     
     // MARK: - Properties
     
-    weak var detailsPresenter: FavoriteMoviesCoordinator?
+    weak var modalPresenter: ModalPresenterDelegate?
     internal var deletedIndex: IndexPath?
     internal var currentSearch: String?
     
@@ -88,7 +88,9 @@ extension FavoriteMoviesControllerViewModel {
     
     func didSelectItemAt(indexPath: IndexPath) {
         let movie = self.dataSource[indexPath.row]
-        self.detailsPresenter?.showDetails(movie: movie)
+        if let showDetails = self.modalPresenter?.showMovieDetails {
+            showDetails(movie)
+        }
     }
     
     func removeItemAt(indexPath: IndexPath) {

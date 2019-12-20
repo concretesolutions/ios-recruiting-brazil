@@ -55,7 +55,7 @@ class MovieDetailsViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.viewModel.coordinatorDelegate?.finish()
+        self.viewModel.coordinator?.finish()
     }
     
     // MARK: - Actions

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Movie {
+class Movie: NSObject {
     
     // MARK: - Attributes
     

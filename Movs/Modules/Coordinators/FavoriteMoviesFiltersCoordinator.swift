@@ -1,20 +1,20 @@
 //
-//  PopularMoviesCoordinator.swift
+//  FavoriteMoviesFiltersCoordinator.swift
 //  Movs
 //
-//  Created by Gabriel D'Luca on 06/12/19.
+//  Created by Gabriel D'Luca on 20/12/19.
 //  Copyright © 2019 Gabriel D'Luca. All rights reserved.
 //
 
 import UIKit
 import Combine
 
-class MovieDetailsCoordinator: ModalCoordinator {
+class FavoriteMoviesFiltersCoordinator: ModalCoordinator {
     
     // MARK: - Typealiases
     
     typealias Presenter = UIViewController
-    typealias Controller = MovieDetailsViewController
+    typealias Controller = FavoriteMoviesFiltersViewController
     
     // MARK: - Properties
     
@@ -31,13 +31,12 @@ class MovieDetailsCoordinator: ModalCoordinator {
     
     // MARK: - Initializers and Deinitializers
     
-    init<Parent: Coordinator>(parent: Parent, movie: Movie) {
+    init<Parent: Coordinator>(parent: Parent) {
         self.presenter = parent.coordinatedViewController
         self.dependencies = parent.dependencies
                 
-        let movieViewModel = MovieViewModel(movie: movie, dependencies: self.dependencies)
-        let viewModel = MovieDetailsControllerViewModel(movieViewModel: movieViewModel)
-        self.coordinatedViewController = MovieDetailsViewController(viewModel: viewModel)
+        let viewModel = FavoriteMoviesFiltersControllerViewModel(dependencies: self.dependencies)
+        self.coordinatedViewController = FavoriteMoviesFiltersViewController(viewModel: viewModel)
         
         viewModel.coordinator = self
     }

@@ -15,7 +15,7 @@ class MovieDetailsControllerViewModel {
     internal var movieViewModel: MovieViewModel
     internal var genresNames: [String]
     internal var detailsContent: [(String, String?)]
-    weak var coordinatorDelegate: MovieDetailsCoordinator?
+    weak var coordinator: MovieDetailsCoordinator?
     
     // MARK: - Initializers and Deinitializers
     

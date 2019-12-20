@@ -56,9 +56,17 @@ class FavoriteMoviesViewController: UIViewController {
         self.screen.favoriteMoviesTableView.dataSource = self
         self.configureSearchBar()
 
-        let filterButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: nil, action: nil)
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(self.presentFiltersModal))
         filterButton.tintColor = UIColor.label
         self.navigationItem.rightBarButtonItem = filterButton
+    }
+    
+    // MARK: - Present
+    
+    @objc func presentFiltersModal() {
+        if let presentModal = self.viewModel.modalPresenter?.showFilters {
+            presentModal()
+        }
     }
     
     // MARK: - Binding

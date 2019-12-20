@@ -26,3 +26,8 @@ protocol Coordinator {
     func start()
     func finish()
 }
+
+protocol ModalCoordinator: Coordinator {
+    var coordinatorDidFinish: Bool { get set }
+    var finishingPublisher: Published<Bool>.Publisher { get }
+}

@@ -1,5 +1,5 @@
 //
-//  MovieFiltersViewScreen.swift
+//  FavoriteMoviesFiltersViewScreen.swift
 //  Movs
 //
 //  Created by Gabriel D'Luca on 19/12/19.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-final class MovieFiltersViewScreen: UIView {
+final class FavoriteMoviesFiltersViewScreen: UIView {
     lazy var yearPicker: UIPickerView = {
         let picker = UIPickerView()
         return picker
@@ -25,7 +25,7 @@ final class MovieFiltersViewScreen: UIView {
     }
 }
 
-extension MovieFiltersViewScreen: CodeView {
+extension FavoriteMoviesFiltersViewScreen: CodeView {
     func buildViewHierarchy() {
         self.addSubview(self.yearPicker)
     }
@@ -36,5 +36,9 @@ extension MovieFiltersViewScreen: CodeView {
             make.top.equalTo(self).inset(24.0)
             make.height.equalTo(self.yearPicker.snp.width).multipliedBy(0.6)
         })
+    }
+    
+    func setupAdditionalConfiguration() {
+        self.backgroundColor = .systemBackground
     }
 }
