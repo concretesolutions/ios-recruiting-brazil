@@ -23,7 +23,7 @@ final class ExceptionView: UIView {
 
     private lazy var imageView: UIImageView = {
         let view = UIImageView(frame: .zero)
-        view.tintColor = UIColor(named: "Yellow")
+        view.tintColor = .systemIndigo
         return view
     }()
 

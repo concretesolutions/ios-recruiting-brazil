@@ -54,7 +54,7 @@ final class MovieDetailScreen: UIView {
     private lazy var heartButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.contentMode = .scaleAspectFill
-        view.tintColor = UIColor(named: "Yellow")
+        view.tintColor = .systemIndigo
         view.addTarget(self, action: #selector(self.didTapOnHeart), for: .touchUpInside)
         return view
     }()

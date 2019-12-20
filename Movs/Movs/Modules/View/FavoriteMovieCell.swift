@@ -48,7 +48,6 @@ final class FavoriteMovieCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.font = UIFont.systemFont(ofSize: 20.0, weight: .semibold)
-        view.textColor = UIColor(named: "Yellow")
         view.numberOfLines = 1
         return view
     }()
@@ -56,7 +55,6 @@ final class FavoriteMovieCell: UITableViewCell {
     private lazy var yearLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
-        view.textColor = UIColor(named: "Yellow")
         view.textAlignment = .right
         view.numberOfLines = 1
         return view
@@ -140,6 +138,6 @@ extension FavoriteMovieCell: CodeView {
     }
 
     func setupAdditionalConfiguration() {
-        self.backgroundColor = UIColor(named: "Blue")
+        self.backgroundColor = .systemGray3
     }
 }

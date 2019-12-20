@@ -35,7 +35,7 @@ final class PopularMoviesScreen: UIView {
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(frame: .zero)
         view.hidesWhenStopped = true
-        view.color = UIColor(named: "Yellow")
+        view.color = .systemIndigo
         return view
     }()
 

@@ -41,7 +41,7 @@ class PopularMovieCell: UICollectionViewCell {
 
     private lazy var bottomView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = UIColor(named: "Blue")
+        view.backgroundColor = .systemGray3
         return view
     }()
 
@@ -57,7 +57,6 @@ class PopularMovieCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.font = UIFont.systemFont(ofSize: 18.0, weight: .semibold)
-        view.textColor = UIColor(named: "Yellow")
         view.numberOfLines = 2
         return view
     }()
@@ -65,7 +64,7 @@ class PopularMovieCell: UICollectionViewCell {
     private lazy var heartButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.contentMode = .scaleAspectFill
-        view.tintColor = UIColor(named: "Yellow")
+        view.tintColor = .systemIndigo
         view.addTarget(self, action: #selector(self.didTapOnHeart), for: .touchUpInside)
         return view
     }()

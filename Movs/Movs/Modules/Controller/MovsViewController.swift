@@ -19,26 +19,26 @@ class MovsViewController: UITabBarController {
 
     override func viewDidLoad() {
 
-        self.tabBar.tintColor = UIColor(named: "Yellow")
+        self.tabBar.tintColor = .systemIndigo
 
         // Popular Movies' screen
 
         let popularNavController = UINavigationController(rootViewController: self.popularMoviesVC)
         popularNavController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "list.bullet"), tag: 0)
-        popularNavController.navigationBar.tintColor = UIColor(named: "Yellow")
+        popularNavController.navigationBar.tintColor = .systemIndigo
         popularNavController.navigationBar.prefersLargeTitles = true
-        popularNavController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "Yellow")!]
-        popularNavController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "Yellow")!]
+        popularNavController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
+        popularNavController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
 
         // Favorite Movies' screen
 
         let favoriteNavController = UINavigationController(rootViewController: self.favoriteMoviesVC)
         favoriteNavController.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 0)
         favoriteNavController.tabBarItem.selectedImage = UIImage(systemName: "heart.fill")
-        favoriteNavController.navigationBar.tintColor = UIColor(named: "Yellow")
+        favoriteNavController.navigationBar.tintColor = .systemIndigo
         favoriteNavController.navigationBar.prefersLargeTitles = true
-        favoriteNavController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "Yellow")!]
-        favoriteNavController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(named: "Yellow")!]
+        favoriteNavController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
+        favoriteNavController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
 
         self.viewControllers = [popularNavController, favoriteNavController]
     }
