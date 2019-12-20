@@ -27,9 +27,17 @@ class PopularMoviesViewController: UIViewController {
         self.title = "Movies"
         self.navigationItem.largeTitleDisplayMode = .always
 
+        self.screen.startLoading()
+
         DataProvider.shared.setup { error in
-            if let error = error {
-                print(error)
+            DispatchQueue.main.async {
+                self.screen.stopLoading()
+            }
+
+            if error != nil {
+                DispatchQueue.main.async {
+                    self.screen.displayError()
+                }
             } else {
                 var indexPaths: [IndexPath] = []
                 for row in 0...DataProvider.shared.movies.count-1 {
