@@ -11,7 +11,6 @@ final class ManegerApiRequest{
     private var numPages = 1
     var dataToSend:[Movie] = [] {
         didSet{
-            //print("movies buffer \(self.dataToSend.count)")
             if Int(Double(self.numPages) * 20.0 * 0.8) <= self.dataToSend.count{
                 self.delegate?.sendMovie(movies: self.dataToSend)
                 self.delegate?.sendStatus(status: .finish)
@@ -30,7 +29,6 @@ final class ManegerApiRequest{
     let urlGenresMovies = "https://api.themoviedb.org/3/genre/movie/list"
     static var genres:[Genre] = [] {
         didSet{
-            print("load all genres")
         }
     }
     init() {
@@ -65,7 +63,6 @@ final class ManegerApiRequest{
                 "language":"en-US",
                 "region":"US"]
             querys.append(query)
-            print(i)
         }
         return querys
     }
