@@ -20,7 +20,7 @@ class FavoritesController: UIViewController {
     }()
     
     // MARK: - Attributes
-    lazy var screen = FavoritesScreen(delegate: self)
+    lazy var screen = FavoritesScreen(controller: self)
     let dataService = DataService.shared
     var searchFilteredBy = ""
     var filters: [FilterType: String] = [:]

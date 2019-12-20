@@ -12,8 +12,8 @@ class FiltersScreen: UIView {
     // MARK: - Subviews
     lazy var filtersTableView: UITableView = {
         let tableView = UITableView()
-        tableView.dataSource = self.delegate
-        tableView.delegate = self.delegate
+        tableView.dataSource = self.controller
+        tableView.delegate = self.controller
         return tableView
     }()
     
@@ -25,18 +25,18 @@ class FiltersScreen: UIView {
         button.setTitleColor(UIColor(named: "LabelInverse"), for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.addTarget(self.delegate,
-                         action: #selector(self.delegate?.applyFilters),
+        button.addTarget(self.controller,
+                         action: #selector(self.controller?.applyFilters),
                          for: .touchUpInside)
         return button
     }()
     
     // MARK: - Delegate
-    weak var delegate: FiltersController?
+    weak var controller: FiltersController?
     
     // MARK: - Initializers
-    required init(frame: CGRect = .zero, delegate: FiltersController) {
-        self.delegate = delegate
+    required init(frame: CGRect = .zero, controller: FiltersController) {
+        self.controller = controller
         super.init(frame: frame)
         self.setupView()
     }

@@ -12,7 +12,7 @@ class MoviesScreen: UIView {
     // MARK: - Subviews
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self.delegate
+        searchController.searchResultsUpdater = self.controller
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search a movie by name"
         return searchController
@@ -20,8 +20,8 @@ class MoviesScreen: UIView {
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self.delegate,
-                                 action: #selector(self.delegate?.reloadTableView),
+        refreshControl.addTarget(self.controller,
+                                 action: #selector(self.controller?.reloadTableView),
                                  for: .valueChanged)
         return refreshControl
     }()
@@ -50,18 +50,18 @@ class MoviesScreen: UIView {
                                     collectionViewLayout: layout)
         view.backgroundColor = .systemGray6
         view.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
-        view.dataSource = self.delegate
-        view.delegate = self.delegate
+        view.dataSource = self.controller
+        view.delegate = self.controller
         view.refreshControl = self.refreshControl
         return view
     }()
     
     // MARK: - Delegate
-    weak var delegate: MoviesController?
+    weak var controller: MoviesController?
     
     // MARK: - Initializers
-    required init(frame: CGRect = .zero, delegate: MoviesController) {
-        self.delegate = delegate
+    required init(frame: CGRect = .zero, controller: MoviesController) {
+        self.controller = controller
         super.init(frame: frame)
         self.setupView()
     }
@@ -103,6 +103,6 @@ extension MoviesScreen: CodeView {
     
     func setupAdditionalConfiguration() {
         self.backgroundColor = .systemBackground
-        self.delegate?.navigationItem.searchController = self.searchController
+        self.controller?.navigationItem.searchController = self.searchController
     }
 }

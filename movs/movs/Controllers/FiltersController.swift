@@ -10,7 +10,7 @@ import UIKit
 
 class FiltersController: UIViewController {
     // MARK: - Attributes
-    lazy var screen = FiltersScreen(delegate: self)
+    lazy var screen = FiltersScreen(controller: self)
     var filters: [FilterType: String?] = [:]
     
     // MARK: - Initializers

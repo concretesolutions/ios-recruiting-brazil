@@ -12,17 +12,17 @@ class FilterScreen: UIView {
     // MARK: - Subview
     lazy var filterValuesTableView: UITableView = {
         let tableView = UITableView()
-        tableView.dataSource = self.delegate
-        tableView.delegate = self.delegate
+        tableView.dataSource = self.controller
+        tableView.delegate = self.controller
         return tableView
     }()
     
     // MARK: - Delegate
-    weak var delegate: FilterController?
+    weak var controller: FilterController?
     
     // MARK: - Initializers
-    required init(frame: CGRect = .zero, delegate: FilterController) {
-        self.delegate = delegate
+    required init(frame: CGRect = .zero, controller: FilterController) {
+        self.controller = controller
         super.init(frame: frame)
         self.setupView()
     }

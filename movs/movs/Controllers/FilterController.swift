@@ -10,7 +10,7 @@ import UIKit
 
 class FilterController: UIViewController {
     // MARK: - Attributes
-    lazy var screen = FilterScreen(delegate: self)
+    lazy var screen = FilterScreen(controller: self)
     let dataService = DataService.shared
     let filterType: FilterType
     let filterValues: [String]

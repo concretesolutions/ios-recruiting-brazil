@@ -12,7 +12,7 @@ class FavoritesScreen: UIView {
     // MARK: - Subviews
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self.delegate
+        searchController.searchResultsUpdater = self.controller
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search a movie by name"
         return searchController
@@ -26,16 +26,16 @@ class FavoritesScreen: UIView {
         button.setTitleColor(UIColor(named: "LabelInverse"), for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.addTarget(self.delegate,
-                         action: #selector(self.delegate?.removeFilters),
+        button.addTarget(self.controller,
+                         action: #selector(self.controller?.removeFilters),
                          for: .touchUpInside)
         return button
     }()
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self.delegate,
-                                 action: #selector(self.delegate?.reloadTableView),
+        refreshControl.addTarget(self.controller,
+                                 action: #selector(self.controller?.reloadTableView),
                                  for: .valueChanged)
         return refreshControl
     }()
@@ -45,18 +45,18 @@ class FavoritesScreen: UIView {
         tableView.register(FavoriteMovieCell.self,
                            forCellReuseIdentifier: "FavoriteMovieCell")
         tableView.separatorStyle = .none     
-        tableView.dataSource = self.delegate
-        tableView.delegate = self.delegate
+        tableView.dataSource = self.controller
+        tableView.delegate = self.controller
         tableView.refreshControl = self.refreshControl
         return tableView
     }()
     
     // MARK: - Delegate
-    weak var delegate: FavoritesController?
+    weak var controller: FavoritesController?
     
     // MARK: - Initializers
-    required init(frame: CGRect = .zero, delegate: FavoritesController) {
-        self.delegate = delegate
+    required init(frame: CGRect = .zero, controller: FavoritesController) {
+        self.controller = controller
         super.init(frame: frame)
         self.setupView()
     }
@@ -128,6 +128,6 @@ extension FavoritesScreen: CodeView {
     
     func setupAdditionalConfiguration() {
         self.backgroundColor = .systemBackground
-        self.delegate?.navigationItem.searchController = self.searchController
+        self.controller?.navigationItem.searchController = self.searchController
     }
 }

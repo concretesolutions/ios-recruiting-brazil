@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesController: UIViewController {
     // MARK: - Attributes
-    lazy var screen = MoviesScreen(delegate: self)
+    lazy var screen = MoviesScreen(controller: self)
     let dataService = DataService.shared
     var movies: [Movie] = []
     var nextPage: Int = 1
