@@ -20,6 +20,11 @@ class Movie {
     let bigImageURL: String?
     var isFavorite: Bool {
         didSet {
+            if self.isFavorite {
+                DataProvider.shared.addFavoriteMovie(self)
+            } else {
+                DataProvider.shared.removeFavoriteMovie(self)
+            }
             self.didSetIsFavorite()
         }
     }
