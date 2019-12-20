@@ -1,5 +1,3 @@
-// swiftlint:disable identifier_name
-
 //
 //  GenreDTO.swift
 //  Movs

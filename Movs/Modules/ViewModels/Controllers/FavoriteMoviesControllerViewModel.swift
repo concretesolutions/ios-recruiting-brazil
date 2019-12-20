@@ -11,43 +11,44 @@ import Combine
 
 class FavoriteMoviesControllerViewModel {
     
-    // MARK: Data Source
+    // MARK: - Data Source
     
     private var dataSource: [Movie] = [] {
         willSet {
             if newValue.isEmpty, self.currentSearch != nil {
                 self.searchStatus = .noResults
             }
-            self.numberOfFavoriteMovies = newValue.count
+        }
+        didSet {
+            self.numberOfFavoriteMovies = self.dataSource.count
         }
     }
     
-    // MARK: Dependencies
+    // MARK: - Dependencies
     
     typealias Dependencies = HasStorageManager
     private let dependencies: Dependencies
     private let storageManager: StorageManager
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak var detailsPresenter: FavoriteMoviesCoordinator?
     internal var deletedIndex: IndexPath?
     internal var currentSearch: String?
     
-    // MARK: Publishers and Subscribers
+    // MARK: - Publishers and Subscribers
     
-    @Published var numberOfFavoriteMovies: Int
+    @Published var numberOfFavoriteMovies: Int = 0
     @Published var searchStatus: SearchStatus = .none
     private var subscribers: [AnyCancellable?] = []
     
-    // MARK: Initializers and Deinitializers
+    // MARK: - Initializers and Deinitializers
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
         self.storageManager = dependencies.storageManager
-        
-        self.numberOfFavoriteMovies = self.storageManager.favorites.count
         self.dataSource = self.storageManager.favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+
         self.bind(to: self.storageManager)
     }
     
@@ -57,19 +58,19 @@ class FavoriteMoviesControllerViewModel {
         }
     }
     
-    // MARK: Binding
+    // MARK: - Binding
     
     func bind(to storageManager: StorageManager) {
         self.subscribers.append(storageManager.$favorites
-            .sink(receiveValue: { favorites in
-                let newData = favorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
+            .sink(receiveValue: { storedFavorites in
+                let favorites = storedFavorites.map({ Movie(favoriteMovie: $0, genres: self.storageManager.genres) })
                 
                 if let index = self.deletedIndex {
                     self.dataSource.remove(at: index.row)
                 } else if self.searchStatus == .none {
-                    self.dataSource = newData
+                    self.dataSource = favorites
                 } else if [.search, .searchAndFilter].contains(self.searchStatus), let text = self.currentSearch {
-                    self.filterMovies(newData, searchText: text)
+                    self.filterMovies(favorites, searchText: text)
                 }
             })
         )

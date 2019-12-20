@@ -70,16 +70,22 @@ extension StorageManager {
 // MARK: - Update
 
 extension StorageManager {
-    func updateFavoriteMovie(with movie: Movie) {
+    func updateFavoriteMovie(with movie: MovieDTO) throws {
         let storedMovie = self.getFavoriteMovie(movieID: movie.id)
         storedMovie.backdropPath = movie.backdropPath
-        storedMovie.summary = movie.summary
+        storedMovie.summary = movie.overview
         storedMovie.title = movie.title
         storedMovie.posterPath = movie.posterPath
-        storedMovie.releaseDate = movie.releaseDate
-        storedMovie.genres = NSSet(array: movie.genres.map({ genre in
-            self.getGenre(genreID: genre.id)
-        }))
+        
+        if let genreIDs = movie.genreIDS {
+            storedMovie.genres = NSSet(array: genreIDs.map({ id in
+                self.getGenre(genreID: id)
+            }))
+        }
+        
+        if let movieRelease = movie.releaseDate {
+            storedMovie.releaseDate = try Date(string: movieRelease)
+        }
     }
 }
 

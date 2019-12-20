@@ -44,5 +44,4 @@ extension FavoriteMoviesViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
 }

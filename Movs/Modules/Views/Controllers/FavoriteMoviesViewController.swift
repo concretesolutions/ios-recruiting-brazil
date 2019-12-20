@@ -28,6 +28,7 @@ class FavoriteMoviesViewController: UIViewController {
     init(viewModel: FavoriteMoviesControllerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.title = "Favorites"
         self.bind(to: self.viewModel)
     }
     
@@ -54,6 +55,10 @@ class FavoriteMoviesViewController: UIViewController {
         self.screen.favoriteMoviesTableView.delegate = self
         self.screen.favoriteMoviesTableView.dataSource = self
         self.configureSearchBar()
+
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: nil, action: nil)
+        filterButton.tintColor = UIColor.label
+        self.navigationItem.rightBarButtonItem = filterButton
     }
     
     // MARK: - Binding

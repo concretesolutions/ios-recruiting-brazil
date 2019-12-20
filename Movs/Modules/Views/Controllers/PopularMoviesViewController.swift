@@ -28,6 +28,7 @@ class PopularMoviesViewController: UIViewController {
     init(viewModel: PopularMoviesControllerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.title = "Popular"
         self.errorScreen.retryButton.addTarget(self, action: #selector(self.retryConnection(_:)), for: .touchUpInside)
     }
     
@@ -61,17 +62,19 @@ class PopularMoviesViewController: UIViewController {
     // MARK: - Binding
     
     func bind(to viewModel: PopularMoviesControllerViewModel) {
-        self.subscribers.append(viewModel.$numberOfMovies
+        self.subscribers.append(viewModel.$numberOfPopularMovies
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
-                self.screen.moviesCollectionView.reloadData()
+                let section = IndexSet(integer: 0)
+                self.screen.moviesCollectionView.reloadSections(section)
             })
         )
         
-        self.subscribers.append(viewModel.$numberOfFavorites
+        self.subscribers.append(viewModel.$numberOfFavoriteMovies
             .receive(on: RunLoop.main)
             .sink(receiveValue: { _ in
-                self.screen.moviesCollectionView.reloadData()
+                let section = IndexSet(integer: 0)
+                self.screen.moviesCollectionView.reloadSections(section)
             })
         )
         

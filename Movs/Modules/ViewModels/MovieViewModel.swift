@@ -1,5 +1,3 @@
-// swiftlint:disable identifier_name
-
 //
 //  MovieViewModel.swift
 //  Movs
@@ -53,9 +51,11 @@ class MovieViewModel {
         self.posterPath = movie.posterPath
         self.title = movie.title
     }
-    
-    // MARK: - Storage Manager helpers
-    
+}
+
+// MARK: - StorageManager
+
+extension MovieViewModel {
     func addToFavorites() {
         self.storageManager.storeFavorite(movie: self.movie)
     }

@@ -69,10 +69,24 @@ class AppCoordinator: Coordinator {
     // MARK: - Dependency Binding
     
     func bindDependencies() {
+        self.subscribers.append(self.dependencies.apiManager.$movies
+            .sink(receiveValue: { fetchedMovies in
+                for movie in fetchedMovies.suffix(20) {
+                    if self.dependencies.storageManager.isMovieStored(movieID: movie.id) {
+                        do {
+                            try self.dependencies.storageManager.updateFavoriteMovie(with: movie)
+                        } catch {
+                            continue
+                        }
+                    }
+                }
+            })
+        )
+        
         self.subscribers.append(self.dependencies.apiManager.$genres
             .sink(receiveValue: { fetchedGenres in
-                for fetchedGenre in fetchedGenres {
-                    let genre = Genre(genreDTO: fetchedGenre)
+                for genreDTO in fetchedGenres {
+                    let genre = Genre(genreDTO: genreDTO)
                     self.dependencies.storageManager.storeGenre(genre: genre)
                 }
                 

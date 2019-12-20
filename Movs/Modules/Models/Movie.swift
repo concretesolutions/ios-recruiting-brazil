@@ -1,5 +1,3 @@
-// swiftlint:disable identifier_name
-
 //
 //  Movie.swift
 //  Movs
@@ -44,26 +42,30 @@ class Movie {
     }
     
     convenience init(favoriteMovie: CDFavoriteMovie, genres: Set<CDGenre>) {
-        let dateString: String?
+        var dateString: String?
+        var filteredGenres: Set<Genre> = Set()
+        
         if let movieRelease = favoriteMovie.releaseDate {
             dateString = String(date: movieRelease)
-        } else {
-            dateString = nil
         }
         
-        let genres: Set<Genre> = Set(
-            genres.filter({ cdGenre in
-                favoriteMovie.genres!.contains(cdGenre)
-            }).map({ cdGenre in
-                Genre(cdGenre: cdGenre)
-            })
-        )
+        if let movieGenres = favoriteMovie.genres as? Set<CDGenre> {
+            let movieGenresIDs = movieGenres.map({ $0.id })
+            filteredGenres = Set(
+                genres.filter({ cdGenre in
+                    movieGenresIDs.contains(cdGenre.id)
+                }).map({ cdGenre in
+                    Genre(cdGenre: cdGenre)
+                })
+            )
+        }
 
-        self.init(id: Int(favoriteMovie.id), backdropPath: favoriteMovie.backdropPath, genres: genres, posterPath: favoriteMovie.posterPath, releaseDate: dateString, title: favoriteMovie.title!, summary: favoriteMovie.summary!)
+        self.init(id: Int(favoriteMovie.id), backdropPath: favoriteMovie.backdropPath, genres: filteredGenres, posterPath: favoriteMovie.posterPath, releaseDate: dateString, title: favoriteMovie.title!, summary: favoriteMovie.summary!)
     }
     
     convenience init(movieDTO: MovieDTO, genres: [GenreDTO]) {
-        let filteredGenres: Set<Genre>
+        var filteredGenres: Set<Genre> = Set()
+
         if let genresIDs = movieDTO.genreIDS {
             filteredGenres = Set(
                 genres.filter({ genreDTO in
@@ -72,8 +74,6 @@ class Movie {
                     Genre(genreDTO: genreDTO)
                 })
             )
-        } else {
-            filteredGenres = Set()
         }
         
         self.init(id: movieDTO.id, backdropPath: movieDTO.backdropPath, genres: filteredGenres, posterPath: movieDTO.posterPath, releaseDate: movieDTO.releaseDate, title: movieDTO.title, summary: movieDTO.overview)

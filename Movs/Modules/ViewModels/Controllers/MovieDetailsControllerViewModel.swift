@@ -10,14 +10,14 @@ import Foundation
 
 class MovieDetailsControllerViewModel {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     internal var movieViewModel: MovieViewModel
     internal var genresNames: [String]
     internal var detailsContent: [(String, String?)]
     weak var coordinatorDelegate: MovieDetailsCoordinator?
     
-    // MARK: Initializers and Deinitializers
+    // MARK: - Initializers and Deinitializers
     
     init(movieViewModel: MovieViewModel) {
         self.movieViewModel = movieViewModel

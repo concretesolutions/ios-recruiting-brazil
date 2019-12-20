@@ -59,8 +59,8 @@ class FavoriteMoviesCoordinator: Coordinator {
     
     func bind(to coordinator: MovieDetailsCoordinator) {
         self.subscribers.append(coordinator.$coordinatorDidFinish
-            .sink(receiveValue: { isFinishing in
-                if isFinishing {
+            .sink(receiveValue: { finished in
+                if finished {
                     self.movieDetailsCoordinator = nil
                 }
             })

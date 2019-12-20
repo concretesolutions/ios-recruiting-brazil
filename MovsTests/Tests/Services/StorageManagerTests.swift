@@ -108,7 +108,7 @@ class StorageManagerTests: XCTestCase {
     }
     
     func testShouldDeleteFavoritedIDFromFavorites() {
-        let removedID = Int64(3)
+        let removedID = 3
         
         self.sut.deleteFavorite(movieID: removedID)
         
@@ -123,8 +123,8 @@ class StorageManagerTests: XCTestCase {
         let favoritedIDs = self.sut.favorites.map({ $0.id })
         let fetchedFavoritedIDs = fetchResults.map({ $0.id })
         
-        expect(favoritedIDs).notTo(contain(removedID))
-        expect(fetchedFavoritedIDs).notTo(contain(removedID))
+        expect(favoritedIDs).notTo(contain(Int64(removedID)))
+        expect(fetchedFavoritedIDs).notTo(contain(Int64(removedID)))
     }
     
     func testShouldSignalStoredMovie() {

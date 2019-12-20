@@ -20,7 +20,7 @@ extension PopularMoviesViewController: UICollectionViewDelegate {
 
 extension PopularMoviesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.numberOfMovies
+        return self.viewModel.numberOfPopularMovies
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +65,7 @@ extension PopularMoviesViewController: UICollectionViewDelegateFlowLayout {
 
 extension PopularMoviesViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        let rows = indexPaths.filter({ $0.row >= self.viewModel.numberOfMovies - 3 })
+        let rows = indexPaths.filter({ $0.row >= self.viewModel.numberOfPopularMovies - 3 })
         if !rows.isEmpty && self.viewModel.searchStatus == .none && self.viewModel.shouldFetchNextPage {
             self.viewModel.fetchNextPopularMoviesPage()
         }

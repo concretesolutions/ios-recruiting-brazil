@@ -35,6 +35,7 @@ extension PopularMoviesViewController: ErrorIndicator {
     func showNetworkError() {
         self.displayedError = self.displayedError == .searchError ? .searchAndNetworkError : .networkError
         self.errorScreen.retryButton.isHidden = false
+        self.errorScreen.titleLabel.text = "An error ocurred"
         self.errorScreen.descriptionLabel.text = "Something went wrong. Please, try again."
         self.errorScreen.errorIcon.image = UIImage(systemName: "wifi.exclamationmark")
         self.view = self.errorScreen
@@ -43,6 +44,7 @@ extension PopularMoviesViewController: ErrorIndicator {
     func showSearchError() {
         self.displayedError = self.displayedError == .networkError ? .searchAndNetworkError : .searchError
         self.errorScreen.retryButton.isHidden = true
+        self.errorScreen.titleLabel.text = "Nothing to see here!"
         self.errorScreen.descriptionLabel.text = "Sorry, we didn't find any results matching your search."
         self.errorScreen.errorIcon.image = UIImage(systemName: "magnifyingglass")
         self.view = self.errorScreen
