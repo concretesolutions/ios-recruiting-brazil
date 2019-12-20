@@ -123,7 +123,8 @@ extension FavoriteMovieCell: CodeView {
         // detailStack
 
         self.detailStack.snp.makeConstraints { maker in
-            maker.top.bottom.trailing.equalToSuperview().inset(16)
+            maker.top.trailing.equalToSuperview().inset(16)
+            maker.bottom.lessThanOrEqualToSuperview().inset(16)
             maker.leading.equalTo(self.posterImageView.snp.trailing).offset(16)
         }
 
@@ -136,7 +137,6 @@ extension FavoriteMovieCell: CodeView {
         // titleLabel
 
         self.titleLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 749), for: .horizontal)
-        self.titleLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 749), for: .vertical)
     }
 
     func setupAdditionalConfiguration() {
