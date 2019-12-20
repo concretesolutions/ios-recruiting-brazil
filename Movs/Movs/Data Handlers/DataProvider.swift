@@ -170,13 +170,15 @@ class DataProvider {
 
     func addFavoriteMovie(_ movie: Movie) {
         if !self.favoriteMovies.contains(movie) {
+            movie.isFavorite = true
             self.favoriteMovies.append(movie)
+            self.saveFavoriteMovies()
+            self.didChangeFavorites()
         }
-        self.saveFavoriteMovies()
-        self.didChangeFavorites()
     }
 
     func removeFavoriteMovie(_ movie: Movie) {
+        movie.isFavorite = false
         self.favoriteMovies.removeAll(where: { $0 == movie })
         self.saveFavoriteMovies()
         self.didChangeFavorites()

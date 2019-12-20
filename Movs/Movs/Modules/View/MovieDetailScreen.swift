@@ -106,7 +106,7 @@ final class MovieDetailScreen: UIView {
         self.overviewLabel.text = self.movie.overview
     }
 
-    private func configureHeartImage() {
+    func configureHeartImage() {
         let imageName = self.movie.isFavorite ? "heart.fill" : "heart"
         self.heartButton.setBackgroundImage(UIImage(systemName: imageName), for: .normal)
     }
