@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3FC84E4F7C0E14C374A0D4DE /* Pods_Movs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F7E59C63F3C5FE8D3C2F2C /* Pods_Movs.framework */; };
 		759B0771C076B09B8D0E22C9 /* Pods_Movs_Tests_MovsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AC56D8EA0F0585BBD4CE89 /* Pods_Movs_Tests_MovsTests.framework */; };
+		7703F6A623AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703F6A523AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift */; };
+		7703F6AA23AC298100CFA8C7 /* FavoriteMoviesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703F6A923AC298100CFA8C7 /* FavoriteMoviesScreen.swift */; };
+		7703F6AC23AC29F900CFA8C7 /* FavoriteMoviesScreenDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703F6AB23AC29F900CFA8C7 /* FavoriteMoviesScreenDelegate.swift */; };
 		772A8B8123945B8B00303636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772A8B8023945B8B00303636 /* AppDelegate.swift */; };
 		772A8B8A23945B8D00303636 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 772A8B8923945B8D00303636 /* Assets.xcassets */; };
 		772A8B8D23945B8D00303636 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772A8B8B23945B8D00303636 /* LaunchScreen.storyboard */; };
@@ -62,6 +65,9 @@
 		2C0ABF6A85A82F98A7D5B439 /* Pods-Movs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs.debug.xcconfig"; path = "Target Support Files/Pods-Movs/Pods-Movs.debug.xcconfig"; sourceTree = "<group>"; };
 		496503DFD71F34720162C37D /* Pods-Movs-Tests-MovsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movs-Tests-MovsTests.release.xcconfig"; path = "Target Support Files/Pods-Movs-Tests-MovsTests/Pods-Movs-Tests-MovsTests.release.xcconfig"; sourceTree = "<group>"; };
 		6C1E34C29B5B8A157B6EBB1D /* Pods-MovsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovsTests.debug.xcconfig"; path = "Target Support Files/Pods-MovsTests/Pods-MovsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7703F6A523AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesViewController.swift; sourceTree = "<group>"; };
+		7703F6A923AC298100CFA8C7 /* FavoriteMoviesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesScreen.swift; sourceTree = "<group>"; };
+		7703F6AB23AC29F900CFA8C7 /* FavoriteMoviesScreenDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesScreenDelegate.swift; sourceTree = "<group>"; };
 		772A8B7D23945B8B00303636 /* Movs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		772A8B8023945B8B00303636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		772A8B8923945B8D00303636 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 		772A8B9723945BBE00303636 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7703F6A523AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift */,
 				77AA5A99239D9908008EBC9C /* MovieDetailViewController.swift */,
 				77348473239B00F700424F81 /* MovsViewController.swift */,
 				77348471239AFD4800424F81 /* PopularMoviesViewController.swift */,
@@ -213,8 +220,9 @@
 			isa = PBXGroup;
 			children = (
 				77E5850E2399CFAF0032BD88 /* CodeView.swift */,
-				772B79F82395D9890026E4C8 /* MoviesDataFetcherProtocol.swift */,
+				7703F6AB23AC29F900CFA8C7 /* FavoriteMoviesScreenDelegate.swift */,
 				77348469239AF3BD00424F81 /* HeartButtonDelegate.swift */,
+				772B79F82395D9890026E4C8 /* MoviesDataFetcherProtocol.swift */,
 				7734846F239AFC3D00424F81 /* PopularMoviesScreenDelegate.swift */,
 			);
 			path = Protocols;
@@ -232,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				776F0C2223AC0E5600A47E76 /* FavoriteMovieCell.swift */,
+				7703F6A923AC298100CFA8C7 /* FavoriteMoviesScreen.swift */,
 				77AA5A97239D930A008EBC9C /* MovieDetailScreen.swift */,
 				77348465239AE8A800424F81 /* PopularMovieCell.swift */,
 				7734846B239AF8E100424F81 /* PopularMoviesScreen.swift */,
@@ -594,6 +603,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7703F6A623AC26AA00CFA8C7 /* FavoriteMoviesViewController.swift in Sources */,
+				7703F6AA23AC298100CFA8C7 /* FavoriteMoviesScreen.swift in Sources */,
 				77348470239AFC3D00424F81 /* PopularMoviesScreenDelegate.swift in Sources */,
 				7734846C239AF8E100424F81 /* PopularMoviesScreen.swift in Sources */,
 				77348466239AE8A800424F81 /* PopularMovieCell.swift in Sources */,
@@ -605,6 +616,7 @@
 				772A8B8123945B8B00303636 /* AppDelegate.swift in Sources */,
 				77AA5A98239D930A008EBC9C /* MovieDetailScreen.swift in Sources */,
 				7734846A239AF3BD00424F81 /* HeartButtonDelegate.swift in Sources */,
+				7703F6AC23AC29F900CFA8C7 /* FavoriteMoviesScreenDelegate.swift in Sources */,
 				776F0C2323AC0E5600A47E76 /* FavoriteMovieCell.swift in Sources */,
 				77E5850F2399CFAF0032BD88 /* CodeView.swift in Sources */,
 				776AD8B323959F8D00521410 /* Movie.swift in Sources */,
