@@ -20,6 +20,7 @@ class FavoriteMoviesControllerViewModel {
             }
         }
         didSet {
+            self.dataSource.sort(by: { $0.title < $1.title })
             self.numberOfFavoriteMovies = self.dataSource.count
         }
     }

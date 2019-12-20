@@ -21,7 +21,7 @@ class MovieDetailsControllerViewModel {
     
     init(movieViewModel: MovieViewModel) {
         self.movieViewModel = movieViewModel
-        self.genresNames = Array(movieViewModel.genresNames)
+        self.genresNames = Array(movieViewModel.genresNames).sorted()
         self.detailsContent = [
             ("Genres", nil),
             ("Summary", movieViewModel.summary),
