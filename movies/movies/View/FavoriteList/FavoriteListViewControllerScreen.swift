@@ -27,6 +27,14 @@ final class FavoriteListViewControllerScreen: UIView {
         return refreshControl
     }()
     
+    lazy var removeFiltersButton: UIButton = {
+        let view: UIButton = UIButton(frame: .zero)
+        view.backgroundColor = .systemOrange
+        view.setTitle("Remove Filter", for: .normal)
+        view.layer.cornerRadius = 15
+        return view
+    }()
+    
     lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(frame: CGRect.zero)
         view.isUserInteractionEnabled = false
@@ -57,6 +65,8 @@ final class FavoriteListViewControllerScreen: UIView {
     /// Update view according to current state
     /// - Parameter state: Current state
     public func updateViewState(to state: MovieListViewState) {
+        removeFiltersButton.isHidden = !(state == .filter)
+        // State = .filter
         // State = .error
         genericErrorView.isHidden = !(state == .error)
         // State = .noDataError
@@ -91,6 +101,7 @@ extension FavoriteListViewControllerScreen: CodeView {
         addSubview(activityIndicator)
         addSubview(genericErrorView)
         addSubview(noDataErrorView)
+        addSubview(removeFiltersButton)
     }
     
     func setupConstraints() {
@@ -112,6 +123,13 @@ extension FavoriteListViewControllerScreen: CodeView {
         noDataErrorView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(10)
             make.right.bottom.equalToSuperview().inset(10)
+        }
+        
+        removeFiltersButton.snp.makeConstraints { make in
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().inset(20)
+            make.height.equalTo(45)
         }
     }
     

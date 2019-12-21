@@ -23,7 +23,18 @@ class MockedDataProvider: DataProvidable {
         return self.favoriteMoviesPublisher.value.0
     }
     
-    private var favoriteIds = [0]
+    var genres: [Int: String] = {
+        let dict: [Int: String] = [
+            0: "Animation",
+            1: "Comedy",
+            2: "Adventure",
+            3: "Drama"
+        ]
+        
+        return dict
+    }()
+    
+    private var favoriteIds = [0, 1, 2, 5]
     private var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -38,7 +49,7 @@ class MockedDataProvider: DataProvidable {
                   posterPath: nil,
                   overview: "This colorful adventure tells the story of an impetuous mermaid princess named Ariel who falls in love with the very human Prince",
                   releaseDate: dateFormatter.date(from: "1989-12-12"),
-                  genreIds: [0]),
+                  genreIds: [0, 3]),
             Movie(id: 1,
                   title: "The Princess and the Frog",
                   posterPath: nil,
@@ -50,13 +61,25 @@ class MockedDataProvider: DataProvidable {
                   posterPath: nil,
                   overview: "When the kingdom's most wanted-and most charming-bandit Flynn Rider hides out in a mysterious tower, he's taken hostage by Rapunzel",
                   releaseDate: dateFormatter.date(from: "2010-12-12"),
-                  genreIds: [0, 1]),
+                  genreIds: [1]),
             Movie(id: 3,
                   title: "Moana",
                   posterPath: nil,
                   overview: "In Ancient Polynesia, when a terrible curse incurred by Maui reaches an impetuous Chieftain's daughter's island",
                   releaseDate: dateFormatter.date(from: "2016-12-12"),
-                  genreIds: [1, 2])
+                  genreIds: [1, 2]),
+            Movie(id: 4,
+                  title: "Zootopia",
+                  posterPath: nil,
+                  overview: "Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia's police force",
+                  releaseDate: dateFormatter.date(from: "2016-12-12"),
+                  genreIds: [1, 2, 3]),
+            Movie(id: 5,
+                  title: "Shrek Forever After",
+                  posterPath: nil,
+                  overview: "A bored and domesticated Shrek pacts with deal-maker Rumpelstiltskin to get back to feeling like a real ogre again",
+                  releaseDate: dateFormatter.date(from: "2010-12-12"),
+                  genreIds: [0, 3])
         ]
         
         popularMoviesPublisher.send((movies, nil))

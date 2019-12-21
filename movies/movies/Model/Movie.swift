@@ -45,7 +45,7 @@ public struct MovieDTO: Codable {
     }
 }
 
-public struct Movie: Codable {
+public struct Movie: Codable, Hashable {
     public let id: Int
     public let title: String
     public let posterPath: String?
