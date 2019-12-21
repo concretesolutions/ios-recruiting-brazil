@@ -80,7 +80,7 @@ class FavoriteMoviesViewController: UIViewController {
     }
 }
 
-extension FavoriteMoviesViewController: FavoriteMoviesScreenDelegate {
+extension FavoriteMoviesViewController: TableViewScreenDelegate {
 
     // MARK: - UITableViewDataSource
 

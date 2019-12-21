@@ -1,5 +1,5 @@
 //
-//  FavoriteMoviesScreenDelegate.swift
+//  TableViewScreenDelegate.swift
 //  Movs
 //
 //  Created by Carolina Cruz Agra Lopes on 19/12/19.
@@ -8,4 +8,4 @@
 
 import UIKit
 
-protocol FavoriteMoviesScreenDelegate: UIViewController, UITableViewDataSource, UITableViewDelegate { }
+protocol TableViewScreenDelegate: UIViewController, UITableViewDataSource, UITableViewDelegate { }

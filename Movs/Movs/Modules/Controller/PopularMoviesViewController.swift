@@ -92,7 +92,7 @@ class PopularMoviesViewController: UIViewController {
     }
 }
 
-extension PopularMoviesViewController: PopularMoviesScreenDelegate {
+extension PopularMoviesViewController: CollectionViewScreenDelegate {
 
     // MARK: UICollectionViewDataSource
 

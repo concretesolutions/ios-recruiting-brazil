@@ -1,5 +1,5 @@
 //
-//  PopularMoviesScreenDelegate.swift
+//  CollectionViewScreenDelegate.swift
 //  Movs
 //
 //  Created by Carolina Cruz Agra Lopes on 06/12/19.
@@ -9,5 +9,5 @@
 import UIKit
 
 //swiftlint:disable class_delegate_protocol
-protocol PopularMoviesScreenDelegate: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout { }
+protocol CollectionViewScreenDelegate: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout { }
 //swiftlint:enable class_delegate_protocol

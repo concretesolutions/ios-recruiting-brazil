@@ -13,7 +13,7 @@ final class FavoriteMoviesScreen: UIView {
 
     // MARK: - Delegate
 
-    weak var delegate: FavoriteMoviesScreenDelegate? {
+    weak var delegate: TableViewScreenDelegate? {
         didSet {
             self.tableView.delegate = self.delegate
             self.tableView.dataSource = self.delegate
