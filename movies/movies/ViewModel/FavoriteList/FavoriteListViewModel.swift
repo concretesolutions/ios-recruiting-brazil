@@ -117,6 +117,9 @@ class FavoriteListViewModel: ObservableObject {
     public func refreshMovies(completion: @escaping () -> Void) {
         // TODO: Get from any data provider
         DataProvider.shared.fetchFavorites(withIDs: UserDefaults.standard.favorites, completion: completion)
+        if self.dataProvider.genres.isEmpty {
+            MovieService.fetchGenres()
+        }
     }
     
     /// Filter movies according to their names using the given query

@@ -110,6 +110,9 @@ class MovieListViewModel: ObservableObject {
         self.searchMovies = []
         // TODO: Get from data provider
         DataProvider.shared.fetchMovies(page: self.page, completion: completion)
+        if self.dataProvider.genres.isEmpty {
+            MovieService.fetchGenres()
+        }
     }
     
     /// Search movies according to their names using the given query
