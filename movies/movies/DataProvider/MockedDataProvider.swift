@@ -12,8 +12,8 @@ import Combine
 class MockedDataProvider: DataProvidable {
     public static let shared = MockedDataProvider()
     
-    var popularMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
-    var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
+    var popularMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
+    var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
     
     var popularMovies: [Movie] {
         return self.popularMoviesPublisher.value
