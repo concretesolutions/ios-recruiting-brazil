@@ -36,7 +36,6 @@ class MovieCellViewModel: ObservableObject {
         
         favoriteIdsSubscriber = dataProvider.favoriteMoviesPublisher
             .receive(on: DispatchQueue.main)
-            .replaceError(with: [])
             .sink(receiveValue: { [weak self] _ in
                 guard let id = self?.movie.id else { return }
                 self?.favorite = dataProvider.isFavorite(id)

@@ -13,14 +13,14 @@ class MockedDataProvider: DataProvidable {
     public static let shared = MockedDataProvider()
     
     var popularMoviesPublisher = CurrentValueSubject<([Movie], Error?), Never>(([], nil))
-    var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
+    var favoriteMoviesPublisher = CurrentValueSubject<([Movie], Error?), Never>(([], nil))
     
     var popularMovies: [Movie] {
         return self.popularMoviesPublisher.value.0
     }
     
     var favoriteMovies: [Movie] {
-        return self.favoriteMoviesPublisher.value
+        return self.favoriteMoviesPublisher.value.0
     }
     
     private var favoriteIds = [0]
@@ -60,7 +60,7 @@ class MockedDataProvider: DataProvidable {
         ]
         
         popularMoviesPublisher.send((movies, nil))
-        favoriteMoviesPublisher.send(movies.filter { isFavorite($0.id) })
+        favoriteMoviesPublisher.send((movies.filter { isFavorite($0.id) }, nil))
     }
     
     func toggleFavorite(withId id: Int) {
