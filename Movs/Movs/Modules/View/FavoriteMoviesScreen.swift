@@ -32,7 +32,8 @@ final class FavoriteMoviesScreen: UIView {
         return view
     }()
 
-    private lazy var emptyView: ExceptionView = ExceptionView.emptyFavorites
+    private let emptyFavoritesView: ExceptionView = ExceptionView.emptyFavorites
+    private let emptySearchView: ExceptionView = ExceptionView.emptySearch
 
     // MARK: - Initializers
 
@@ -45,14 +46,26 @@ final class FavoriteMoviesScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Empty handlers
+    // MARK: - Exception handlers
 
-    func displayEmptyView() {
-        self.tableView.backgroundView = self.emptyView
+    func displayEmptyFavorites() {
+        self.tableView.backgroundView = self.emptyFavoritesView
     }
 
-    func hideEmptyView() {
+    func hideEmptyFavorites() {
         self.tableView.backgroundView = nil
+    }
+
+    func displayEmptySearch() {
+        if self.tableView.backgroundView == nil {
+            self.tableView.backgroundView = self.emptySearchView
+        }
+    }
+
+    func hideEmptySearch() {
+        if self.tableView.backgroundView == self.emptySearchView {
+            self.tableView.backgroundView = nil
+        }
     }
 }
 

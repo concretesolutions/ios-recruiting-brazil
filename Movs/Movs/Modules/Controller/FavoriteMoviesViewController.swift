@@ -14,6 +14,30 @@ class FavoriteMoviesViewController: UIViewController {
 
     private lazy var screen = FavoriteMoviesScreen()
 
+    // MARK: - Search
+
+    private var searchedMovies: [Movie] = []
+    private let searchController: UISearchController = UISearchController(searchResultsController: nil)
+    private var lastSearchText: String = ""
+
+    var isSearchBarEmpty: Bool {
+        return self.searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    private var isSearching: Bool {
+        return self.searchController.isActive && !self.isSearchBarEmpty
+    }
+
+    // MARK: - Data
+
+    private var displayMovies: [Movie] {
+        if self.isSearching {
+            return self.searchedMovies
+        } else {
+            return DataProvider.shared.favoriteMovies
+        }
+    }
+
     // MARK: - Life cycle
 
     override func loadView() {
@@ -26,12 +50,33 @@ class FavoriteMoviesViewController: UIViewController {
 
         self.title = "Favorites"
         self.navigationItem.largeTitleDisplayMode = .always
+        self.setupSearch()
 
         DataProvider.shared.didChangeFavorites = {
             DispatchQueue.main.async {
+                self.filterContent(forText: self.lastSearchText)
                 self.screen.tableView.reloadData()
             }
         }
+    }
+
+    // MARK: - Search
+
+    private func setupSearch() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search"
+
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
+    }
+
+    private func filterContent(forText text: String) {
+        self.searchedMovies = DataProvider.shared.favoriteMovies.filter { movie in
+            return movie.title.lowercased().contains(text.lowercased())
+        }
+
+        self.screen.tableView.reloadData()
     }
 }
 
@@ -41,12 +86,15 @@ extension FavoriteMoviesViewController: FavoriteMoviesScreenDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if DataProvider.shared.favoriteMovies.isEmpty {
-            self.screen.displayEmptyView()
+            self.screen.displayEmptyFavorites()
+        } else if self.isSearching && self.searchedMovies.isEmpty {
+            self.screen.displayEmptySearch()
         } else {
-            self.screen.hideEmptyView()
+            self.screen.hideEmptyFavorites()
+            self.screen.hideEmptySearch()
         }
 
-        return DataProvider.shared.favoriteMovies.count
+        return self.displayMovies.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,7 +106,7 @@ extension FavoriteMoviesViewController: FavoriteMoviesScreenDelegate {
             fatalError("Wrong table view cell type")
         }
 
-        cell.configure(with: DataProvider.shared.favoriteMovies[indexPath.section])
+        cell.configure(with: self.displayMovies[indexPath.section])
 
         return cell
     }
@@ -75,7 +123,7 @@ extension FavoriteMoviesViewController: FavoriteMoviesScreenDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = MovieDetailViewController(movie: DataProvider.shared.favoriteMovies[indexPath.section])
+        let vc = MovieDetailViewController(movie: self.displayMovies[indexPath.section])
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -85,11 +133,25 @@ extension FavoriteMoviesViewController: FavoriteMoviesScreenDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let unfavoriteAction = UIContextualAction(style: .normal, title: "Unfavorite", handler: { (_, _, success) in
-            DataProvider.shared.favoriteMovies[indexPath.section].isFavorite = false
+            self.displayMovies[indexPath.section].isFavorite = false
             success(true)
         })
         unfavoriteAction.backgroundColor = .red
 
         return UISwipeActionsConfiguration(actions: [unfavoriteAction])
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension FavoriteMoviesViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) ?? ""
+
+        if text != self.lastSearchText {
+            self.filterContent(forText: text)
+            self.lastSearchText = text
+        }
     }
 }
