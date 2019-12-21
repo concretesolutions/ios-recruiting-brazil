@@ -15,7 +15,13 @@ class PopularMoviesCoordinator: Coordinator {
     private lazy var viewModel: DefaultMoviesListViewModel = {
         let viewModel = DefaultMoviesListViewModel(
             moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
-            imagesRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider())
+            movieViewModelInjector: { movie in
+                return DefaultMovieViewModel(
+                    movie: movie,
+                    imageRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider()),
+                    genresRepository: DefaultGenresRepository(genresProvider: URLSessionJSONParserProvider())
+                )
+            }
         )
         
         viewModel.navigator = self

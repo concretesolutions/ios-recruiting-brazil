@@ -21,6 +21,11 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
                     self?.headerBackgroundView.image = image
                 }
             }
+            viewModel.needReplaceGenres = { [weak self] genres in
+                DispatchQueue.main.async {
+                    self?.genresLabel.text = genres
+                }
+            }
 
             titleLabel.text = viewModel.movieAtributtes.title
         }
@@ -40,15 +45,15 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
         $0.clipsToBounds = true
     }
     
-    let titleLabel = UILabel(text: "Title").build {
+    let titleLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 25, weight: .bold)
         $0.textColor = .appTextPurple
     }
-    let genresLabel = UILabel(text: "Genres").build {
+    let genresLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 15, weight: .bold)
         $0.textColor = .appTextBlue
     }
-    let releaseLabel = UILabel(text: "Release").build {
+    let releaseLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 14, weight: .semibold)
         $0.textColor = .white
     }

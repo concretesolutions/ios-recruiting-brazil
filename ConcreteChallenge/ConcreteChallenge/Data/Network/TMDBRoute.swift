@@ -15,10 +15,11 @@ enum TMDBMoviesRoute: Route {
     // the associetedValue is the page
     case popular(Int?)
     case image(String)
+    case genres
     
     var baseURL: URL {
         switch  self {
-        case .popular:
+        case .popular, .genres:
             return URL(string: "https://api.themoviedb.org/")!
         case .image:
             return URL(string: "http://image.tmdb.org/")!
@@ -31,6 +32,8 @@ enum TMDBMoviesRoute: Route {
             return "/3/movie/upcoming"
         case .image(let imagePath):
             return "/t/p/w780/\(imagePath)"
+        case .genres:
+            return "/3/genre/movie/list"
         }
     }
     
@@ -50,6 +53,10 @@ enum TMDBMoviesRoute: Route {
             ]
         case .image:
             return []
+        case .genres:
+            return [
+                .init(tmdbProperty: .apiKey, value: "4b8d40349182e03ae8e2f6fd304c9aee"),
+            ]
         }
     }
 }

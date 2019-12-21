@@ -110,5 +110,10 @@ class MovieDetailView: UIView, ViewCodable {
                 self?.movieImageView.image = image
             }
         }
+        viewModel.needReplaceGenres = { [weak self] genres in
+            DispatchQueue.main.async {
+                self?.genresLabel.text = genres
+            }
+        }
     }
 }

@@ -35,6 +35,8 @@ enum ListState {
     }
 }
 
+typealias Injector<Injected, Data> = (Data) -> Injected
+
 class DefaultMoviesListViewModel: MoviesListViewModel {
     typealias MoviesRouter = (_ pageNumber: Int) -> Route
     
@@ -58,7 +60,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     weak var navigator: MoviesListViewModelNavigator?
     
     private let moviesRepository: MoviesRepository
-    private let imagesRepository: MovieImageRepository
+    private let movieViewModelInjector: Injector<MovieViewModel, Movie>
     private var moviesPage = Page<Movie>()
     private var state = ListState.grid {
         didSet {
@@ -66,9 +68,9 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         }
     }
     
-    init(moviesRepository: MoviesRepository, imagesRepository: MovieImageRepository) {
+    init(moviesRepository: MoviesRepository, movieViewModelInjector: @escaping Injector<MovieViewModel, Movie>) {
         self.moviesRepository = moviesRepository
-        self.imagesRepository = imagesRepository
+        self.movieViewModelInjector = movieViewModelInjector
     }
     
     private func getMovies() {
@@ -106,7 +108,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
             fatalError("The \(position) position is wrong, the total of movies is \(moviesPage.numberOfItem)")
         }
 
-        return DefaultMovieViewModel(movie: self.moviesPage.items[position], imageRepository: imagesRepository)
+        return movieViewModelInjector(moviesPage.items[position])
     }
     
     func viewStateChanged() {

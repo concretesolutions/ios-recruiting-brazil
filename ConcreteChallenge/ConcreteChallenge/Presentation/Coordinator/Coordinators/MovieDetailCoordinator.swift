@@ -15,7 +15,8 @@ class MovieDetailCoordinator: Coordinator {
     private let movie: Movie
     private lazy var viewModel = DefaultMovieViewModel(
         movie: movie,
-        imageRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider())
+        imageRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider()),
+        genresRepository: DefaultGenresRepository(genresProvider: URLSessionJSONParserProvider())
     )
     private lazy var movieDetailViewController = MovieDetailViewController(viewModel: viewModel)
     
