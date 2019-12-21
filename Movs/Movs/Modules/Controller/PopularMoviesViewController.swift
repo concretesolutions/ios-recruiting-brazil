@@ -76,10 +76,12 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == DataProvider.shared.movies.count - 1 {
             DataProvider.shared.getMoreMovies { error in
-                if let error = error {
-                    print(error)
-                    if (error as? DecodingError) == nil {
-                        // TODO: show error screen
+                if error != nil {
+                    let alert = UIAlertController(title: "Error", message: "Could not load more movies", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default))
+ 
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true)
                     }
                 } else {
                     var indexPaths: [IndexPath] = []
