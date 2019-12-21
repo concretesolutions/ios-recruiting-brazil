@@ -35,13 +35,11 @@ class DataProvider: DataProvidable, ObservableObject {
         return self.favoriteMoviesPublisher.value.0
     }
     
-    private var page: Int = 1
-    
     // Cancellables
     private var favoriteIdsSubscriber: AnyCancellable?
     
     init() {
-        fetchMovies()
+        fetchMovies(page: 1)
         
         favoriteIdsSubscriber = UserDefaults.standard.publisher(for: \.favorites)
             .receive(on: DispatchQueue.main)
@@ -50,22 +48,22 @@ class DataProvider: DataProvidable, ObservableObject {
             })
     }
     
-    public func fetchMovies() {
+    public func fetchMovies(page: Int, completion: (() -> Void)? = nil) {
         MovieService.fecthMovies(params: ["page": "\(page)"]) { result in
             switch result {
             case .failure(let error):
                 self.popularMoviesPublisher.send(([], error))
             case .success(let response):
-                self.page += 1 // Update current page to fetch
-                
                 let movies = response.results.map { Movie($0) } // Map response to array of movies
                 self.popularMoviesPublisher.send((movies, nil))
 
             }
+            
+            completion?()
         }
     }
     
-    public func fetchFavorites(withIDs ids: [Int]) {
+    public func fetchFavorites(withIDs ids: [Int], completion: (() -> Void)? = nil) {
         let group = DispatchGroup()
         var favorites = [Movie]()
         var fetchError: Error?
@@ -95,6 +93,8 @@ class DataProvider: DataProvidable, ObservableObject {
             } else {
                 self.favoriteMoviesPublisher.send((favorites, nil))
             }
+            
+            completion?()
         }
     }
     

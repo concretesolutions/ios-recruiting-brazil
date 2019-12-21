@@ -48,6 +48,7 @@ class FavoriteListViewController: UIViewController {
         
         // Set table view data source and delegate
         screen.setupTableView(controller: self)
+        screen.refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
         // Update table view when movie count changes
         movieCountSubscriber = self.viewModel.$movieCount
@@ -58,6 +59,14 @@ class FavoriteListViewController: UIViewController {
         
         // Scroll to top when view controller is selected on tab bar
         self.subscribeToTabSelection(cancellable: &tabBarSelectSubscriber)
+    }
+    
+    @objc func refreshTableView(_ refreshControl: UIRefreshControl) {
+        self.viewModel.refreshMovies {
+            DispatchQueue.main.async {
+                refreshControl.endRefreshing()
+            }
+        }
     }
     
     @objc func reloadTableView() {

@@ -19,8 +19,15 @@ final class MovieListViewControllerScreen: UIView {
         let view: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCollectionViewCell")
         view.backgroundColor = .systemBackground
+        view.refreshControl = self.refreshControl
         
         return view
+    }()
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        
+        return refreshControl
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
@@ -53,8 +60,6 @@ final class MovieListViewControllerScreen: UIView {
     /// Update view according to current state
     /// - Parameter state: Current state
     func updateViewState(to state: MovieListViewState) {
-        // State = .movies
-        collectionView.isHidden = !(state == .movies)
         // State = .error
         genericErrorView.isHidden = !(state == .error)
         // State = .noDataError
@@ -93,7 +98,8 @@ extension MovieListViewControllerScreen: CodeView {
     
     func setupConstraints() {
         collectionView.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().offset(10)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
             make.right.bottom.equalToSuperview().inset(10)
         }
         

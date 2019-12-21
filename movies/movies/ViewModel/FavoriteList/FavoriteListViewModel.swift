@@ -94,6 +94,10 @@ class FavoriteListViewModel: ObservableObject {
     }
     
     // MARK: - Search
+    public func refreshMovies(completion: @escaping () -> Void) {
+        // TODO: Get from any data provider
+        DataProvider.shared.fetchFavorites(withIDs: UserDefaults.standard.favorites, completion: completion)
+    }
     
     /// Filter movies according to their names using the given query
     /// - Parameter query: Name of the movie being searched

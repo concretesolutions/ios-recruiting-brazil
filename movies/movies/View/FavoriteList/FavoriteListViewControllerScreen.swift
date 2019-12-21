@@ -16,8 +16,15 @@ final class FavoriteListViewControllerScreen: UIView {
         view.register(FavoriteMovieTableViewCell.self, forCellReuseIdentifier: "FavoriteMovieTableViewCell")
         view.backgroundColor = .systemBackground
         view.separatorStyle = .none
+        view.refreshControl = self.refreshControl
         
         return view
+    }()
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        
+        return refreshControl
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
@@ -50,8 +57,6 @@ final class FavoriteListViewControllerScreen: UIView {
     /// Update view according to current state
     /// - Parameter state: Current state
     public func updateViewState(to state: MovieListViewState) {
-        // State = .movies
-        tableView.isHidden = !(state == .movies)
         // State = .error
         genericErrorView.isHidden = !(state == .error)
         // State = .noDataError
