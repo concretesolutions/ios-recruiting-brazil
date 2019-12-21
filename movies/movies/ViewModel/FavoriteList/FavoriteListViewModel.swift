@@ -6,6 +6,8 @@
 //  Copyright © 2019 jacquelinealves. All rights reserved.
 //
 
+// TODO: Remove or add favorite when filter is applied
+
 import Foundation
 import Combine
 
