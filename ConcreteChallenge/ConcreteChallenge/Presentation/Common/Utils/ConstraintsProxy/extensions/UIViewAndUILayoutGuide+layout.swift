@@ -13,6 +13,10 @@ extension UIView: Anchorable {
         self.translatesAutoresizingMaskIntoConstraints = false
         return LayoutProxy(anchorable: self)
     }
+    
+    var frameLayout: LayoutProxy {
+        return LayoutProxy(anchorable: self)
+    }
 }
 
 extension UILayoutGuide: Anchorable {

@@ -12,18 +12,23 @@ import GenericNetwork
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
+    var window: UIWindow?
     
-    let viewModel = DefaultMoviesListViewModel(
-        moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
-        imagesRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider())
-    )
+    let appCoorinator = AppCoordinator()
+    
+//    let viewModel = DefaultMoviesListViewModel(
+//        moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
+//        imagesRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider())
+//    )
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        window?.rootViewController = PopularMoviesViewController(viewModel: viewModel)
-        window?.makeKeyAndVisible()
-        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        appCoorinator.start()
+//
+//        window?.rootViewController = PopularMoviesViewController(viewModel: viewModel)
+//        window?.makeKeyAndVisible()
+//
         return true
     }
 }

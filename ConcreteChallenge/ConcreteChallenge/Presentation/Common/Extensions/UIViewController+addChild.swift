@@ -12,7 +12,12 @@ extension UIViewController {
     func addChild(_ child: UIViewController, inView view: UIView) {
         addChild(child)
         view.addSubview(child.view)
-        child.view.layout.fillSuperView()
+        child.view.layout.build {
+            $0.top.equal(to: view.frameLayout.top)
+            $0.bottom.equal(to: view.frameLayout.bottom)
+            $0.left.equal(to: view.frameLayout.left)
+            $0.right.equal(to: view.frameLayout.right)
+        }
         child.didMove(toParent: self)
     }
 }

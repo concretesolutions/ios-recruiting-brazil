@@ -9,7 +9,7 @@
 import UIKit
 
 /// This must be implemented by any type that acts as a coordinator.
-@objc protocol CoordinatorProtocol {
+@objc protocol Coordinator {
     var rootViewController: RootViewController { get set }
     
     /// This method must be called to do the initial setup of the navigation flow starting from the current coordinator.
