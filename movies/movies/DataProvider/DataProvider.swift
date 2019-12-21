@@ -15,6 +15,7 @@ protocol DataProvidable {
     
     var popularMovies: [Movie] { get }
     var favoriteMovies: [Movie] { get }
+    var genres: [Int: String] { get }
     
     func toggleFavorite(withId id: Int)
     func isFavorite(_ id: Int) -> Bool
@@ -35,6 +36,9 @@ class DataProvider: DataProvidable, ObservableObject {
         return self.favoriteMoviesPublisher.value.0
     }
     
+    var genres: [Int: String] {
+        return MovieService.genres
+    }
     // Cancellables
     private var favoriteIdsSubscriber: AnyCancellable?
     

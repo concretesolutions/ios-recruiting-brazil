@@ -14,6 +14,7 @@ enum MovieListViewState {
     case noDataError
     case error
     case loading
+    case filter
 }
 
 class MovieListViewModel: ObservableObject {

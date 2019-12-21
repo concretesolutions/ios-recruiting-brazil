@@ -23,7 +23,7 @@ class FavoriteListViewController: UIViewController {
         
         self.setupNavigationController()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +31,12 @@ class FavoriteListViewController: UIViewController {
     }
     
     func setupNavigationController() {
+        // Filter button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle.fill"),
+                                                                 style: .plain,
+                                                                 target: self,
+                                                                 action: #selector(showFilterView))
+        
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "Favorites"
         self.navigationItem.searchController = SearchController() // Set custom search controller as navigation item search
@@ -55,10 +61,13 @@ class FavoriteListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.perform(#selector(self?.reloadTableView), with: nil, afterDelay: 0.5)
-            }
+        }
         
         // Scroll to top when view controller is selected on tab bar
         self.subscribeToTabSelection(cancellable: &tabBarSelectSubscriber)
+        
+        // Add button action to remove filter
+        screen.removeFiltersButton.addTarget(self, action: #selector(self.removeFilter), for: .touchUpInside)
     }
     
     @objc func refreshTableView(_ refreshControl: UIRefreshControl) {
@@ -71,6 +80,17 @@ class FavoriteListViewController: UIViewController {
     
     @objc func reloadTableView() {
         self.screen.reloadTableView()
+    }
+    
+    @objc func showFilterView() {
+        let viewModel = FilterViewViewModel(filterSubject: self.viewModel.filters)
+        let filterViewController = FilterViewController(viewModel: viewModel)
+        
+        self.present(UINavigationController(rootViewController: filterViewController), animated: true)
+    }
+    
+    @objc func removeFilter() {
+        self.viewModel.removeFilter()
     }
 }
 
