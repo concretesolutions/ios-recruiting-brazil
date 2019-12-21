@@ -60,7 +60,7 @@ public struct NetworkManager<ServiceType: NetworkService> {
         }
 
         if case let .requestParameters(parameters, .body) = endpoint.task,
-            let encodedParameters = parameters.asData() {
+            let encodedParameters = try? parameters.encoded() {
             request.httpBody = encodedParameters
         }
 
@@ -69,12 +69,10 @@ public struct NetworkManager<ServiceType: NetworkService> {
 
     static func handleResponse<ResponseType: Decodable>(_ response: HTTPURLResponse,
                                                         data: Data) -> Result<ResponseType, Error> {
-        let decoder = JSONDecoder()
-
         switch response.statusCode {
         case 200...299:
             do {
-                let result = try decoder.decode(ResponseType.self, from: data)
+                let result: ResponseType = try data.decoded()
                 return .success(result)
             } catch {
                 return .failure(NetworkError.decodeError(error))
@@ -92,11 +90,5 @@ public struct NetworkManager<ServiceType: NetworkService> {
             debugPrint(String(data: data, encoding: .utf8)!)
             return .failure(NetworkError.unknown)
         }
-    }
-}
-
-extension Encodable {
-    func asData() -> Data? {
-        return try? JSONEncoder().encode(self)
     }
 }

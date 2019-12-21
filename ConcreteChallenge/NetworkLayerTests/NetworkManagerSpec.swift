@@ -29,7 +29,7 @@ class NetworkManagerSpec: QuickSpec {
                 let expectedUser = UserMock.testInstance()
                 var user: UserMock?
 
-                self.session.data = expectedUser.asData()
+                self.session.data = try? expectedUser.encoded()
                 self.networkManager.session = self.session
 
                 self.networkManager.request(.success) { (result: Result<UserMock, Error>) in
@@ -63,7 +63,7 @@ class NetworkManagerSpec: QuickSpec {
                 }
 
                 it("should encode request body") {
-                    expect(session?.request?.httpBody).to(equal(user.asData()))
+                    expect(session?.request?.httpBody).to(equal(try? user.encoded()))
                 }
             }
         }
