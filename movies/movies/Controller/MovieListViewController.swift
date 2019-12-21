@@ -48,6 +48,7 @@ class MovieListViewController: UIViewController {
         
         // Set table view data source and delegate
         screen.setupCollectionView(controller: self)
+        screen.refreshControl.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
         // Update table view when movie count changes
         movieCountSubscriber = self.viewModel.$movieCount
@@ -58,6 +59,14 @@ class MovieListViewController: UIViewController {
         
         // Scroll to top when view controller is selected on tab bar
         self.subscribeToTabSelection(cancellable: &tabBarSelectSubscriber)
+    }
+    
+    @objc func refreshCollectionView(_ refreshControl: UIRefreshControl) {
+        self.viewModel.refreshMovies {
+            DispatchQueue.main.async {
+                refreshControl.endRefreshing()
+            }
+        }
     }
     
     @objc func reloadCollectionView() {
@@ -75,11 +84,10 @@ extension MovieListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionViewCell", for: indexPath) as? MovieCollectionViewCell else {
             return UICollectionViewCell()
         }
-        guard let cellViewModel = self.viewModel.viewModelForMovie(at: indexPath.row) else {
-            return UICollectionViewCell()
-        }
         
-        cell.setViewModel(cellViewModel)
+        if let cellViewModel = self.viewModel.viewModelForMovie(at: indexPath.row) {
+            cell.setViewModel(cellViewModel)
+        }
         
         return cell
     }
@@ -106,7 +114,7 @@ extension MovieListViewController: UICollectionViewDelegate, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == self.viewModel.movieCount - 1 {
             // Fetch next page when reaches the end of the collection view
-            DataProvider.shared.fetchMovies()
+            self.viewModel.fetchNextPage()
         }
     }
 }

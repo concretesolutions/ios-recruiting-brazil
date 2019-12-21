@@ -68,5 +68,6 @@ extension ErrorView: CodeView {
     
     func setupAdditionalConfiguration() {
         backgroundColor = .clear
+        isUserInteractionEnabled = false
     }
 }

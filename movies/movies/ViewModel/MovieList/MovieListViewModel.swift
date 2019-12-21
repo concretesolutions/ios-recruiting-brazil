@@ -27,10 +27,14 @@ class MovieListViewModel: ObservableObject {
     
     private var searching: Bool = false {
         willSet {
-            // Set searchMovies to show all movies when stop searching
-            self.searchMovies = self.dataProvider.popularMovies
+            if newValue == false {
+                // Set searchMovies to show all movies when stop searching
+                self.searchMovies = self.dataProvider.popularMovies
+            }
         }
     }
+    
+    private var page: Int = 0
     
     // Publishers
     @Published private(set) var movieCount: Int = 0
@@ -69,6 +73,7 @@ class MovieListViewModel: ObservableObject {
                     self?.searchMovies = []
                     self?.state = .error
                 } else {
+                    self?.page += 1
                     guard self?.searching == false else { return }
                     self?.searchMovies.append(contentsOf: movies)
                     self?.state = .movies
@@ -93,6 +98,18 @@ class MovieListViewModel: ObservableObject {
     }
     
     // MARK: - Search
+    
+    public func fetchNextPage() {
+        // TODO: Get from data provider
+        DataProvider.shared.fetchMovies(page: self.page)
+    }
+    
+    public func refreshMovies(completion: @escaping () -> Void) {
+        self.page = 1
+        self.searchMovies = []
+        // TODO: Get from data provider
+        DataProvider.shared.fetchMovies(page: self.page, completion: completion)
+    }
     
     /// Search movies according to their names using the given query
     /// - Parameter query: Name of the movie being searched
