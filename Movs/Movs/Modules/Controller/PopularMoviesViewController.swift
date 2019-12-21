@@ -14,6 +14,30 @@ class PopularMoviesViewController: UIViewController {
 
     private lazy var screen = PopularMoviesScreen()
 
+    // MARK: - Search
+
+    private var searchedMovies: [Movie] = []
+    private let searchController: UISearchController = UISearchController(searchResultsController: nil)
+    private var lastSearchText: String = ""
+
+    var isSearchBarEmpty: Bool {
+        return self.searchController.searchBar.text?.isEmpty ?? true
+    }
+
+    private var isSearching: Bool {
+        return self.searchController.isActive && !self.isSearchBarEmpty
+    }
+
+    // MARK: - Data
+
+    private var displayMovies: [Movie] {
+        if self.isSearching {
+            return self.searchedMovies
+        } else {
+            return DataProvider.shared.movies
+        }
+    }
+
     // MARK: - Life cycle
 
     override func loadView() {
@@ -26,29 +50,45 @@ class PopularMoviesViewController: UIViewController {
 
         self.title = "Movies"
         self.navigationItem.largeTitleDisplayMode = .always
+        self.setupSearch()
 
         self.screen.startLoading()
 
         DataProvider.shared.setup { error in
             DispatchQueue.main.async {
                 self.screen.stopLoading()
-            }
 
-            if error != nil {
-                DispatchQueue.main.async {
+                if error != nil {
                     self.screen.displayError()
-                }
-            } else {
-                var indexPaths: [IndexPath] = []
-                for row in 0...DataProvider.shared.movies.count-1 {
-                    indexPaths.append(IndexPath(row: row, section: 0))
-                }
+                } else {
+                    var indexPaths: [IndexPath] = []
+                    for row in 0...DataProvider.shared.movies.count-1 {
+                        indexPaths.append(IndexPath(row: row, section: 0))
+                    }
 
-                DispatchQueue.main.async {
                     self.screen.collectionView.insertItems(at: indexPaths)
                 }
             }
         }
+    }
+
+    // MARK: - Search
+
+    private func setupSearch() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search"
+
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = true
+    }
+
+    private func filterContent(forText text: String) {
+        self.searchedMovies = DataProvider.shared.movies.filter { movie in
+            return movie.title.lowercased().contains(text.lowercased())
+        }
+
+        self.screen.collectionView.reloadData()
     }
 }
 
@@ -57,7 +97,7 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
     // MARK: UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DataProvider.shared.movies.count
+        return self.displayMovies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +105,7 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
             fatalError("Wrong collection view cell type")
         }
 
-        cell.configure(with: DataProvider.shared.movies[indexPath.row])
+        cell.configure(with: self.displayMovies[indexPath.row])
 
         return cell
     }
@@ -73,22 +113,20 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
     // MARK: - UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == DataProvider.shared.movies.count - 1 {
+        if !self.isSearching && indexPath.row == DataProvider.shared.movies.count - 1 {
             DataProvider.shared.getMoreMovies { error in
-                if error != nil {
-                    let alert = UIAlertController(title: "Error", message: "Could not load more movies", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default))
+                DispatchQueue.main.async {
+                    if error != nil {
+                        let alert = UIAlertController(title: "Error", message: "Could not load more movies", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default))
 
-                    DispatchQueue.main.async {
                         self.present(alert, animated: true)
-                    }
-                } else {
-                    var indexPaths: [IndexPath] = []
-                    for row in indexPath.row+1...DataProvider.shared.movies.count-1 {
-                        indexPaths.append(IndexPath(row: row, section: 0))
-                    }
+                    } else {
+                        var indexPaths: [IndexPath] = []
+                        for row in indexPath.row+1...DataProvider.shared.movies.count-1 {
+                            indexPaths.append(IndexPath(row: row, section: 0))
+                        }
 
-                    DispatchQueue.main.async {
                         self.screen.collectionView.insertItems(at: indexPaths)
                     }
                 }
@@ -116,7 +154,21 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
     // MARK: - UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = MovieDetailViewController(movie: DataProvider.shared.movies[indexPath.row])
+        let vc = MovieDetailViewController(movie: self.displayMovies[indexPath.row])
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension PopularMoviesViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        let text = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) ?? ""
+
+        if text != self.lastSearchText {
+            self.filterContent(forText: text)
+            self.lastSearchText = text
+        }
     }
 }
