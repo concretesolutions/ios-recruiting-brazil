@@ -11,10 +11,6 @@ import UIKit
 
 final class MovieDetailScreen: UIView {
 
-    // MARK: - Delegate
-
-    weak var delegate: HeartButtonDelegate?
-
     // MARK: - Model
 
     private var movie: Movie!
@@ -221,7 +217,7 @@ extension MovieDetailScreen: UIGestureRecognizerDelegate {
     // MARK: - Tap handlers
 
     @objc func didTapOnHeart() {
-        self.delegate?.didTapOnHeart(fromMovie: self.movie)
+        self.movie.isFavorite = self.movie.isFavorite ? false : true
         self.configureHeartImage()
     }
 }

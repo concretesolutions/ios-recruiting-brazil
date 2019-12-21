@@ -15,10 +15,6 @@ class PopularMovieCell: UICollectionViewCell {
 
     private var movie: Movie!
 
-    // MARK: - Delegate
-
-    weak var delegate: HeartButtonDelegate?
-
     // MARK: - Reusable Identifier
 
     static let reusableIdentifier: String = "PopularMovieCell"
@@ -149,7 +145,7 @@ extension PopularMovieCell: UIGestureRecognizerDelegate {
     // MARK: - Tap handlers
 
     @objc func didTapOnHeart() {
-        self.delegate?.didTapOnHeart(fromMovie: self.movie)
+        self.movie.isFavorite = self.movie.isFavorite ? false : true
         self.configureHeartImage()
     }
 }

@@ -14,7 +14,7 @@ extension UIImageView {
             self.image = nil
         }
 
-        guard let url = url else {
+        guard let url = url, url != "" else {
             return
         }
 

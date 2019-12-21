@@ -65,7 +65,6 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
             fatalError("Wrong collection view cell type")
         }
 
-        cell.delegate = self
         cell.configure(with: DataProvider.shared.movies[indexPath.row])
 
         return cell
@@ -79,7 +78,7 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
                 if error != nil {
                     let alert = UIAlertController(title: "Error", message: "Could not load more movies", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default))
- 
+
                     DispatchQueue.main.async {
                         self.present(alert, animated: true)
                     }
