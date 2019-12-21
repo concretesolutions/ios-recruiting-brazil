@@ -44,6 +44,11 @@ final class PopularMoviesScreen: UIView {
         return view
     }()
 
+    private lazy var emptySearchView: ExceptionView = {
+        let view = ExceptionView(imageSystemName: "magnifyingglass.circle.fill", text: "Sorry, we couldn't find any movie that matches this search.")
+        return view
+    }()
+
     // MARK: - Initializers
 
     override init(frame: CGRect = .zero) {
@@ -65,12 +70,22 @@ final class PopularMoviesScreen: UIView {
         self.activityIndicator.stopAnimating()
     }
 
-    // MARK: - Error handlers
+    // MARK: - Exception handlers
 
     func displayError() {
-        DataProvider.shared.movies = []
-        self.collectionView.reloadData()
         self.collectionView.backgroundView = self.errorView
+    }
+
+    func displayEmptySearch() {
+        if self.collectionView.backgroundView == nil {
+            self.collectionView.backgroundView = self.emptySearchView
+        }
+    }
+
+    func hideEmptySearch() {
+        if self.collectionView.backgroundView == self.emptySearchView {
+            self.collectionView.backgroundView = nil
+        }
     }
 }
 

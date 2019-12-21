@@ -37,7 +37,7 @@ class ExceptionViewSpec: QuickSpec {
 
             context("search error") {
                 beforeEach {
-                    self.sut = ExceptionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "magnifyingglass.circle.fill", text: "Sorry, we couldn't find any movie with \"x\"")
+                    self.sut = ExceptionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "magnifyingglass.circle.fill", text: "Sorry, we couldn't find any movie that matches this search.")
                     DataProvider.shared.reset()
                 }
 

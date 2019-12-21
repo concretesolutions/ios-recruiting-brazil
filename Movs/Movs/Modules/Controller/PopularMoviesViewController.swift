@@ -97,6 +97,12 @@ extension PopularMoviesViewController: PopularMoviesScreenDelegate {
     // MARK: UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.isSearching && self.searchedMovies.isEmpty {
+            self.screen.displayEmptySearch()
+        } else {
+            self.screen.hideEmptySearch()
+        }
+
         return self.displayMovies.count
     }
 
