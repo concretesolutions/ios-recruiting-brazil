@@ -68,6 +68,8 @@ final class PopularMoviesScreen: UIView {
     // MARK: - Error handlers
 
     func displayError() {
+        DataProvider.shared.movies = []
+        self.collectionView.reloadData()
         self.collectionView.backgroundView = self.errorView
     }
 }
