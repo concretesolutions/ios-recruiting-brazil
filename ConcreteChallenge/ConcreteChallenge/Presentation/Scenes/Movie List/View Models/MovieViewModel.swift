@@ -18,7 +18,7 @@ protocol MovieViewModel: AnyObject {
 
 typealias ImageRouter = (_ imagePath: String) -> Route
 
-class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
+class DefaultMovieViewModel: MovieViewModel {
     var movieTitle: (String?) {
         return (movie.title ?? "No Title.")
     }
@@ -33,16 +33,14 @@ class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
         }
     }
     
-    private let imageProvider: ImageProviderType
+    private let imageRepository: MovieImageRepository
     private let movie: Movie
     private var movieImage: UIImage?
-    private let imageRouter: ImageRouter
-    private var imageTask: CancellableTask?
+    private var imageTaskCancelCompletion: CancellCompletion?
     
-    init(movie: Movie, imageProvider: ImageProviderType, imageRouter: @escaping ImageRouter) {
+    init(movie: Movie, imageRepository: MovieImageRepository) {
         self.movie = movie
-        self.imageProvider = imageProvider
-        self.imageRouter = imageRouter
+        self.imageRepository = imageRepository
         
         getImage()
     }
@@ -53,7 +51,7 @@ class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
             return
         }
         
-        self.imageTask = imageProvider.request(route: imageRouter(posterPath)) { [weak self] (result) in
+        self.imageTaskCancelCompletion = self.imageRepository.getImage(withPath: posterPath) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
@@ -68,8 +66,8 @@ class DefaultMovieViewModel<ImageProviderType: FileProvider>: MovieViewModel {
     }
     
     func movieViewWasReused() {
-        self.imageTask?.cancel()
-        self.imageTask = nil
+        self.imageTaskCancelCompletion?()
+        self.imageTaskCancelCompletion = nil
         
         self.needReplaceImage?(Constants.placeholderImage)
     }

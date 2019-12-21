@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        addChild(MoviesListViewController(viewModel: DefaultMoviesListViewModel(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>(), imagesProvider: URLSessionFileProvider(), moviesRouter: { return TMDBMoviesRoute.popular($0) }, imageRouter: { return TMDBMoviesRoute.image($0)})), inView: view)
+        addChild(MoviesListViewController(viewModel: DefaultMoviesListViewModel(moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()), imagesRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider()))), inView: view)
         
     }
 }

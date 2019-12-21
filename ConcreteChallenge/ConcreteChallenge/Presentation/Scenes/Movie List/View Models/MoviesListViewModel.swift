@@ -21,7 +21,7 @@ protocol MoviesListViewModel: AnyObject {
     func viewStateChanged()
 }
 
-class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProviderType: FileProvider>: MoviesListViewModel where MoviesProviderType.ParsableType == Page<Movie> {
+class DefaultMoviesListViewModel: MoviesListViewModel {
    
     typealias MoviesRouter = (_ pageNumber: Int) -> Route
     
@@ -37,21 +37,17 @@ class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProvid
     var needReloadAllMovies: (() -> Void)?
     var needShowError: ((_ message: String) -> Void)?
     
-    private let moviesProvider: MoviesProviderType
-    private let moviesRouter: MoviesRouter
+    private let moviesRepository: MoviesRepository
+    private let imagesRepository: MovieImageRepository
     private var moviesPage = Page<Movie>()
-    private let imagesProvider: ImageProviderType
-    private let imageRouter: ImageRouter
     
-    init(moviesProvider: MoviesProviderType, imagesProvider: ImageProviderType, moviesRouter: @escaping MoviesRouter, imageRouter: @escaping ImageRouter) {
-        self.moviesProvider = moviesProvider
-        self.moviesRouter = moviesRouter
-        self.imagesProvider = imagesProvider
-        self.imageRouter = imageRouter
+    init(moviesRepository: MoviesRepository, imagesRepository: MovieImageRepository) {
+        self.moviesRepository = moviesRepository
+        self.imagesRepository = imagesRepository
     }
     
     private func getMovies() {
-        moviesProvider.requestAndParse(route: moviesRouter(moviesPage.nextPage)) { [weak self] (result) in
+        moviesRepository.getMovies(fromPage: moviesPage.nextPage) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
@@ -85,7 +81,7 @@ class DefaultMoviesListViewModel<MoviesProviderType: ParserProvider, ImageProvid
             fatalError("The \(position) position is wrong, the total of movies is \(moviesPage.numberOfItem)")
         }
 
-        return DefaultMovieViewModel(movie: self.moviesPage.items[position], imageProvider: imagesProvider, imageRouter: imageRouter)
+        return DefaultMovieViewModel(movie: self.moviesPage.items[position], imageRepository: imagesRepository)
     }
     
     func viewStateChanged() {
