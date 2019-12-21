@@ -96,7 +96,7 @@ class FavoriteListViewModel: ObservableObject {
     // MARK: - Search
     public func refreshMovies(completion: @escaping () -> Void) {
         // TODO: Get from any data provider
-        DataProvider.shared.fetchFavorites(withIDs: self.dataProvider.favoriteMovies.map { $0.id }, completion: completion)
+        DataProvider.shared.fetchFavorites(withIDs: UserDefaults.standard.favorites, completion: completion)
     }
     
     /// Filter movies according to their names using the given query
