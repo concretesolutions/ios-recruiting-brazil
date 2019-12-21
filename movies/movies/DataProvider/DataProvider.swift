@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol DataProvidable {
-    var popularMoviesPublisher: CurrentValueSubject<[Movie], Never> { get }
+    var popularMoviesPublisher: CurrentValueSubject<[Movie], Error> { get }
     var favoriteMoviesPublisher: CurrentValueSubject<[Movie], Never> { get }
     
     var popularMovies: [Movie] { get }
@@ -24,7 +24,7 @@ class DataProvider: DataProvidable, ObservableObject {
     
     public static let shared = DataProvider()
     
-    var popularMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
+    var popularMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
     var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
     
     var popularMovies: [Movie] {
@@ -60,7 +60,7 @@ class DataProvider: DataProvidable, ObservableObject {
                 self.popularMoviesPublisher.send(movies)
 
             case .failure(let error):
-                print(error) // TO DO: Handle error
+                self.popularMoviesPublisher.send(completion: Subscribers.Completion<Error>.failure(error))
             }
         }
     }

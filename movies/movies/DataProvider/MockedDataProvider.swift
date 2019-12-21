@@ -12,7 +12,7 @@ import Combine
 class MockedDataProvider: DataProvidable {
     public static let shared = MockedDataProvider()
     
-    var popularMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
+    var popularMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
     var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
     
     var popularMovies: [Movie] {

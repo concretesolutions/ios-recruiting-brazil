@@ -46,8 +46,10 @@ class MovieListViewModel: ObservableObject {
     init(dataProvider: DataProvidable) {
         self.dataProvider = dataProvider
         
-        subscribeToPopularMovies()
+        self.subscribeToPopularMovies(dataProvider.popularMoviesPublisher.eraseToAnyPublisher())
     }
+    
+    // MARK: - Subscribers
     
     public func bindQuery(_ query: AnyPublisher<String?, Never>) {
         querySubscriber = query // Listen to changes in query and search movie
@@ -57,18 +59,31 @@ class MovieListViewModel: ObservableObject {
                 self?.searchMovie(query: queryString)
             }
     }
-    
-    public func subscribeToPopularMovies() {
-        self.state = .loading
-        popularMoviesSubscriber = dataProvider.popularMoviesPublisher
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] movies in
-                // Set searchMovies to show all movies if it not searching
-                guard self?.searching == false else { return }
-                self?.searchMovies.append(contentsOf: movies)
-                self?.state = .movies
-            })
+
+    lazy var onCompletionHandler: ((Subscribers.Completion<Error>) -> Void)? = { [weak self] completion in
+        switch completion {
+        case .finished:
+            print("Finished!")
+        case .failure:
+            self?.state = .error
+        }
     }
+
+    lazy var onValueHandler: ([Movie]) -> Void = { [weak self] movies in
+        // Set searchMovies to show all movies if it not searching
+        guard self?.searching == false else { return }
+        self?.searchMovies.append(contentsOf: movies)
+        self?.state = .movies
+    }
+    
+    public func subscribeToPopularMovies(_ publisher: AnyPublisher<[Movie], Error>) {
+        self.state = .loading
+        self.popularMoviesSubscriber = publisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: onCompletionHandler!, receiveValue: onValueHandler)
+    }
+    
+    // MARK: - Data convertion
     
     /// Returns the cell view model for a movie at an index
     /// - Parameter index: Index of the movie
@@ -83,6 +98,8 @@ class MovieListViewModel: ObservableObject {
         guard index < self.movieCount else { return nil } // Check if it is an valid index
         return MovieDetailsViewModel(of: self.searchMovies[index])
     }
+    
+    // MARK: - Search
     
     /// Search movies according to their names using the given query
     /// - Parameter query: Name of the movie being searched
