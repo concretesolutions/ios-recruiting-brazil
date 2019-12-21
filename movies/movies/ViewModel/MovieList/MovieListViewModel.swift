@@ -59,28 +59,21 @@ class MovieListViewModel: ObservableObject {
                 self?.searchMovie(query: queryString)
             }
     }
-
-    lazy var onCompletionHandler: ((Subscribers.Completion<Error>) -> Void)? = { [weak self] completion in
-        switch completion {
-        case .finished:
-            print("Finished!")
-        case .failure:
-            self?.state = .error
-        }
-    }
-
-    lazy var onValueHandler: ([Movie]) -> Void = { [weak self] movies in
-        // Set searchMovies to show all movies if it not searching
-        guard self?.searching == false else { return }
-        self?.searchMovies.append(contentsOf: movies)
-        self?.state = .movies
-    }
     
-    public func subscribeToPopularMovies(_ publisher: AnyPublisher<[Movie], Error>) {
+    public func subscribeToPopularMovies(_ publisher: AnyPublisher<([Movie], Error?), Never>) {
         self.state = .loading
         self.popularMoviesSubscriber = publisher
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onCompletionHandler!, receiveValue: onValueHandler)
+            .sink(receiveValue: { [weak self] (movies, error) in
+                if error != nil {
+                    self?.searchMovies = []
+                    self?.state = .error
+                } else {
+                    guard self?.searching == false else { return }
+                    self?.searchMovies.append(contentsOf: movies)
+                    self?.state = .movies
+                }
+            })
     }
     
     // MARK: - Data convertion

@@ -10,8 +10,8 @@ import Foundation
 import Combine
 
 protocol DataProvidable {
-    var popularMoviesPublisher: CurrentValueSubject<[Movie], Error> { get }
-    var favoriteMoviesPublisher: CurrentValueSubject<[Movie], Error> { get }
+    var popularMoviesPublisher: CurrentValueSubject<([Movie], Error?), Never> { get }
+    var favoriteMoviesPublisher: CurrentValueSubject<([Movie], Error?), Never> { get }
     
     var popularMovies: [Movie] { get }
     var favoriteMovies: [Movie] { get }
@@ -24,15 +24,15 @@ class DataProvider: DataProvidable, ObservableObject {
     
     public static let shared = DataProvider()
     
-    var popularMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
-    var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
+    var popularMoviesPublisher = CurrentValueSubject<([Movie], Error?), Never>(([], nil))
+    var favoriteMoviesPublisher = CurrentValueSubject<([Movie], Error?), Never>(([], nil))
     
     var popularMovies: [Movie] {
-        return self.popularMoviesPublisher.value
+        return self.popularMoviesPublisher.value.0
     }
     
     var favoriteMovies: [Movie] {
-        return self.favoriteMoviesPublisher.value
+        return self.favoriteMoviesPublisher.value.0
     }
     
     private var page: Int = 1
@@ -54,12 +54,12 @@ class DataProvider: DataProvidable, ObservableObject {
         MovieService.fecthMovies(params: ["page": "\(page)"]) { result in
             switch result {
             case .failure(let error):
-                self.popularMoviesPublisher.send(completion: Subscribers.Completion<Error>.failure(error))
+                self.popularMoviesPublisher.send(([], error))
             case .success(let response):
                 self.page += 1 // Update current page to fetch
                 
                 let movies = response.results.map { Movie($0) } // Map response to array of movies
-                self.popularMoviesPublisher.send(movies)
+                self.popularMoviesPublisher.send((movies, nil))
 
             }
         }
@@ -91,9 +91,9 @@ class DataProvider: DataProvidable, ObservableObject {
         
         group.notify(queue: .main) {
             if let error = fetchError {
-                self.favoriteMoviesPublisher.send(completion: Subscribers.Completion<Error>.failure(error))
+                self.favoriteMoviesPublisher.send(([], error))
             } else {
-                self.favoriteMoviesPublisher.send(favorites)
+                self.favoriteMoviesPublisher.send((favorites, nil))
             }
         }
     }
