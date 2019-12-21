@@ -11,11 +11,11 @@
 		E32972C323AC4AC700BDEA6D /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32972C223AC4AC700BDEA6D /* ToggleButton.swift */; };
 		E32972C523AC5D9600BDEA6D /* MaximizedMovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32972C423AC5D9600BDEA6D /* MaximizedMovieCollectionCell.swift */; };
 		E331045F23AEA01F0078B10C /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E331045E23AEA01F0078B10C /* MovieView.swift */; };
+		E331046423AEA3D90078B10C /* PopularMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E331046323AEA3D90078B10C /* PopularMoviesViewController.swift */; };
 		E376475623AC65500047F008 /* MaximizedMovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32972C423AC5D9600BDEA6D /* MaximizedMovieCollectionCell.swift */; };
 		E376475823AC65F80047F008 /* UILabel+initWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E376475723AC65F80047F008 /* UILabel+initWithText.swift */; };
 		E37D4E9723AC23E0001A0051 /* MoviesListViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37D4E9623AC23E0001A0051 /* MoviesListViewDelegate.swift */; };
 		E37E9B4123AB97B300911EC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9B4023AB97B300911EC8 /* AppDelegate.swift */; };
-		E37E9B4523AB97B300911EC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9B4423AB97B300911EC8 /* ViewController.swift */; };
 		E37E9B4A23AB97B400911EC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E37E9B4923AB97B400911EC8 /* Assets.xcassets */; };
 		E37E9B4D23AB97B400911EC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E37E9B4B23AB97B400911EC8 /* LaunchScreen.storyboard */; };
 		E37E9B5823AB97B500911EC8 /* ConcreteChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E9B5723AB97B500911EC8 /* ConcreteChallengeTests.swift */; };
@@ -136,11 +136,11 @@
 		E32972C223AC4AC700BDEA6D /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		E32972C423AC5D9600BDEA6D /* MaximizedMovieCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximizedMovieCollectionCell.swift; sourceTree = "<group>"; };
 		E331045E23AEA01F0078B10C /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
+		E331046323AEA3D90078B10C /* PopularMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewController.swift; sourceTree = "<group>"; };
 		E376475723AC65F80047F008 /* UILabel+initWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+initWithText.swift"; sourceTree = "<group>"; };
 		E37D4E9623AC23E0001A0051 /* MoviesListViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewDelegate.swift; sourceTree = "<group>"; };
 		E37E9B3D23AB97B300911EC8 /* ConcreteChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E37E9B4023AB97B300911EC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E37E9B4423AB97B300911EC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E37E9B4923AB97B400911EC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E37E9B4C23AB97B400911EC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E37E9B4E23AB97B400911EC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -251,6 +251,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E331046123AEA39F0078B10C /* Popular Movies List */ = {
+			isa = PBXGroup;
+			children = (
+				E331046223AEA3BB0078B10C /* View Controllers */,
+			);
+			path = "Popular Movies List";
+			sourceTree = "<group>";
+		};
+		E331046223AEA3BB0078B10C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E331046323AEA3D90078B10C /* PopularMoviesViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		E37E9B3423AB97B200911EC8 = {
 			isa = PBXGroup;
 			children = (
@@ -284,7 +300,6 @@
 				E3F8330623AC13B400E1B1E2 /* Resources */,
 				E37E9BB323ABA39900911EC8 /* Network */,
 				E37E9B4023AB97B300911EC8 /* AppDelegate.swift */,
-				E37E9B4423AB97B300911EC8 /* ViewController.swift */,
 				E37E9B4B23AB97B400911EC8 /* LaunchScreen.storyboard */,
 				E37E9B4E23AB97B400911EC8 /* Info.plist */,
 			);
@@ -469,6 +484,7 @@
 		E3D70F5B23AE9567008E26D9 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E331046123AEA39F0078B10C /* Popular Movies List */,
 				E3D70F5C23AE9570008E26D9 /* Movie List */,
 			);
 			path = Scenes;
@@ -791,7 +807,6 @@
 				E3A494B823ABB7E50045F439 /* UIViewAndUILayoutGuide+layout.swift in Sources */,
 				E37E9BCD23ABB0CF00911EC8 /* DefaultLayoutPropertyProxy.swift in Sources */,
 				E3F1C37723ABDCB900206CBA /* MoviesListView.swift in Sources */,
-				E37E9B4523AB97B300911EC8 /* ViewController.swift in Sources */,
 				E3F1C36F23ABC7B800206CBA /* LayoutPropertyGroup.swift in Sources */,
 				E3F832E623ABE79A00E1B1E2 /* UIColor+defaultColors.swift in Sources */,
 				E3F1C37C23ABDF5C00206CBA /* UIView+addSubViews.swift in Sources */,
@@ -824,6 +839,7 @@
 				E37E9BD623ABB51900911EC8 /* LayoutProxy+constraintsFillMethods.swift in Sources */,
 				E37E9BC923ABB08B00911EC8 /* LayoutProxy.swift in Sources */,
 				E3F1C36D23ABC75A00206CBA /* LayoutPropertyProxyType.swift in Sources */,
+				E331046423AEA3D90078B10C /* PopularMoviesViewController.swift in Sources */,
 				E3F1C37923ABDE0700206CBA /* MinimizedMovieCollectionCell.swift in Sources */,
 				E37D4E9723AC23E0001A0051 /* MoviesListViewDelegate.swift in Sources */,
 				E331045F23AEA01F0078B10C /* MovieView.swift in Sources */,

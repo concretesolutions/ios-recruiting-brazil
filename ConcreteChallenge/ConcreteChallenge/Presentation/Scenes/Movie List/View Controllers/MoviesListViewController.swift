@@ -10,7 +10,6 @@ import UIKit
 import GenericNetwork
 
 class MoviesListViewController: UIViewController {
-    
     let viewModel: MoviesListViewModel
     lazy var moviesListView = MoviesListView(viewModel: viewModel)
     
