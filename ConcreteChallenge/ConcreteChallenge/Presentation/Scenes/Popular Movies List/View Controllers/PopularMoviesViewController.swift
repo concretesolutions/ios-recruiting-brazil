@@ -8,9 +8,10 @@
 
 import UIKit
 
-class PopularMoviesViewController: UIViewController {
+class PopularMoviesViewController: UIViewController, ViewCodable {
     private var viewModel: DefaultMoviesListViewModel
     private lazy var moviesListViewController = MoviesListViewController(viewModel: self.viewModel)
+    private let moviesListLayoutGuide = UILayoutGuide()
     
     init(viewModel: DefaultMoviesListViewModel) {
         self.viewModel = viewModel
@@ -23,7 +24,18 @@ class PopularMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        addChild(moviesListViewController, inView: view)
+        
+        setupView()
+        addChild(moviesListViewController, inView: view, fillingAnchorable: moviesListLayoutGuide)
+    }
+    
+    func buildHierarchy() {
+        view.addLayoutGuide(moviesListLayoutGuide)
+    }
+       
+    func addConstraints() {
+        moviesListLayoutGuide.layout.group
+            .top(10).left(10).right(-10).bottom
+            .fill(to: view.safeAreaLayoutGuide)
     }
 }

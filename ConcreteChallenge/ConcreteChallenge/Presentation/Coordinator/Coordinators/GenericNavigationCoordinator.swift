@@ -36,9 +36,5 @@ class GenericNavigationCoordinator<ChildType: InitializableCoordinator>: Coordin
         self.parentRootViewController.add(viewController: rootViewController)
 
         childCoordinator.start(previousController: rootViewController)
-
-//        rootViewController.tabBarItem = UITabBarItem.init(title: "", image: UIImage(named: "home"), tag: 0)
     }
-
-    func willDisappear() { }
 }

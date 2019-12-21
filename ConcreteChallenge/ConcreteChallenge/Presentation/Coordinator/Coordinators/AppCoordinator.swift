@@ -13,9 +13,9 @@ class AppCoordinator: Coordinator {
     lazy var rootViewController: RootViewController = {
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = UIColor.appLightPurple
-        tabBarController.tabBar.tintColor = UIColor.white
+        tabBarController.tabBar.tintColor = UIColor.appExtraLightRed
         tabBarController.tabBar.barStyle = .black
-
+    
         return tabBarController
     }()
 

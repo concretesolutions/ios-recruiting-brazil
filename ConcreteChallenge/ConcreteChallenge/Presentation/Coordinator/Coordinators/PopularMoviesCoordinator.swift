@@ -28,5 +28,7 @@ class PopularMoviesCoordinator: InitializableCoordinator {
         
         popularMoviesViewController.title = "Popular"
         rootViewController.tabBarItem = UITabBarItem.init(title: "Home", image: UIImage(named: "home"), tag: 0)
+        rootViewController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
+
     }
 }
