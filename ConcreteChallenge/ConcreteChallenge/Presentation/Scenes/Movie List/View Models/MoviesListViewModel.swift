@@ -11,6 +11,7 @@ import GenericNetwork
 
 protocol MoviesListViewModel: AnyObject {
     var numberOfMovies: Int { get }
+    var mustShowGridMode: Bool { get }
         
     var needShowError: ((_ message: String) -> Void)? { get set }
     var needShowNewMovies: ((_ atRange: Range<Int>) -> Void)? { get set }
@@ -21,8 +22,19 @@ protocol MoviesListViewModel: AnyObject {
     func viewStateChanged()
 }
 
+enum ListState {
+    case grid, cards
+    
+    mutating func toggle() {
+        if self == .grid {
+            self = .cards
+        } else {
+            self = .grid
+        }
+    }
+}
+
 class DefaultMoviesListViewModel: MoviesListViewModel {
-   
     typealias MoviesRouter = (_ pageNumber: Int) -> Route
     
     var numberOfMovies: Int {
@@ -34,12 +46,22 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
             needShowNewMovies?(0..<moviesPage.items.count)
         }
     }
+    
+    var mustShowGridMode: Bool {
+        return self.state == .grid
+    }
+    
     var needReloadAllMovies: (() -> Void)?
     var needShowError: ((_ message: String) -> Void)?
     
     private let moviesRepository: MoviesRepository
     private let imagesRepository: MovieImageRepository
     private var moviesPage = Page<Movie>()
+    private var state = ListState.grid {
+        didSet {
+            self.needReloadAllMovies?()
+        }
+    }
     
     init(moviesRepository: MoviesRepository, imagesRepository: MovieImageRepository) {
         self.moviesRepository = moviesRepository
@@ -85,6 +107,6 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     }
     
     func viewStateChanged() {
-           
+        self.state.toggle()
     }
 }

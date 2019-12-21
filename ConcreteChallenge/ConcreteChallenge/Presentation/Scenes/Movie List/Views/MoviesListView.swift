@@ -42,9 +42,8 @@ class MoviesListView: UIView, ViewCodable {
     
     func addConstraints() {
         moviesCollectionView.layout.fillSuperView()
-        toggleButton.layout.group.top.right.fillToSuperView()
         toggleButton.layout.build {
-            $0.group.top.right.fillToSuperView()
+            $0.group.top(5).right(-5).fillToSuperView()
             $0.width.equal(to: 140)
             $0.height.equal(to: 40)
         }
@@ -80,18 +79,25 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let movieCell = moviesCollectionView.dequeueReusableCell(
-            forCellType: MinimizedMovieCollectionCell.self,
+            forCellType: viewModel.mustShowGridMode ? MinimizedMovieCollectionCell.self : MaximizedMovieCollectionCell.self,
             for: indexPath
         )
         
-        movieCell.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
-        
+        if let movieView = movieCell as? MovieView {
+            movieView.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
+        }
+                
         return movieCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let movieCellWidth = (collectionView.frame.width - 3 * moviesCollectionLayout.minimumInteritemSpacing)/3
-        return CGSize(width: movieCellWidth, height: movieCellWidth * 1.5)
+        let gridMode = viewModel.mustShowGridMode
+        
+        let numberOfColumns: CGFloat = gridMode ? 3 : 1
+        let movieCellHeightFactor: CGFloat = gridMode ? 1.5 : 1.2
+        
+        let movieCellWidth = (collectionView.frame.width - numberOfColumns * moviesCollectionLayout.minimumInteritemSpacing)/numberOfColumns
+        return CGSize(width: movieCellWidth, height: movieCellWidth * movieCellHeightFactor)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
