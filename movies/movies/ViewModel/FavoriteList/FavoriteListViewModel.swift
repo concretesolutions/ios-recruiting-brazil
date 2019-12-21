@@ -39,8 +39,10 @@ class FavoriteListViewModel: ObservableObject {
     init(dataProvider: DataProvidable) {
         self.dataProvider = dataProvider
         
-        subscribeToFavoriteMovies()
+        self.subscribeToFavoriteMovies(dataProvider.favoriteMoviesPublisher.eraseToAnyPublisher())
     }
+    
+    // MARK: - Subscribers
     
     public func bindQuery(_ query: AnyPublisher<String?, Never>) {
         querySubscriber = query // Listen to changes in query and search movie
@@ -48,21 +50,34 @@ class FavoriteListViewModel: ObservableObject {
             .removeDuplicates()
             .sink { [weak self] queryString in
                 self?.searchMovie(query: queryString)
-            }
+        }
+    }
+    
+    lazy var onCompletionHandler: ((Subscribers.Completion<Error>) -> Void)? = { [weak self] completion in
+        switch completion {
+        case .finished:
+            print("Finished!")
+        case .failure:
+            self?.state = .error
+        }
+    }
+    
+    lazy var onValueHandler: ([Movie]) -> Void = { [weak self] movies in
+        // Set searchMovies to show all movies if it not searching
+        guard self?.searching == false else { return }
+        self?.searchMovies = movies
+        self?.state = .movies
     }
     
     /// Subscribe to list of favorite movies from the data provider
-    private func subscribeToFavoriteMovies() {
+    private func subscribeToFavoriteMovies(_ publisher: AnyPublisher<[Movie], Error>) {
         self.state = .loading
-        favoriteMoviesSubscriber = dataProvider.favoriteMoviesPublisher
+        favoriteMoviesSubscriber = publisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] movies in
-                // Set searchMovies to show all movies if it not searching
-                guard self?.searching == false else { return }
-                self?.searchMovies = movies
-                self?.state = .movies
-            }
+            .sink(receiveCompletion: onCompletionHandler!, receiveValue: onValueHandler)
     }
+    
+    // MARK: - Data convertion
     
     /// Returns the cell view model for a movie at an index
     /// - Parameter index: Index of the movie
@@ -84,6 +99,8 @@ class FavoriteListViewModel: ObservableObject {
         guard index < self.movieCount else { return } // Check if it is an valid index
         dataProvider.toggleFavorite(withId: self.searchMovies[index].id)
     }
+    
+    // MARK: - Search
     
     /// Filter movies according to their names using the given query
     /// - Parameter query: Name of the movie being searched

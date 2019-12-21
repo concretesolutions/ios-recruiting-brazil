@@ -11,7 +11,7 @@ import Combine
 
 protocol DataProvidable {
     var popularMoviesPublisher: CurrentValueSubject<[Movie], Error> { get }
-    var favoriteMoviesPublisher: CurrentValueSubject<[Movie], Never> { get }
+    var favoriteMoviesPublisher: CurrentValueSubject<[Movie], Error> { get }
     
     var popularMovies: [Movie] { get }
     var favoriteMovies: [Movie] { get }
@@ -25,7 +25,7 @@ class DataProvider: DataProvidable, ObservableObject {
     public static let shared = DataProvider()
     
     var popularMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
-    var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Never>([])
+    var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
     
     var popularMovies: [Movie] {
         return self.popularMoviesPublisher.value
@@ -53,14 +53,14 @@ class DataProvider: DataProvidable, ObservableObject {
     public func fetchMovies() {
         MovieService.fecthMovies(params: ["page": "\(page)"]) { result in
             switch result {
+            case .failure(let error):
+                self.popularMoviesPublisher.send(completion: Subscribers.Completion<Error>.failure(error))
             case .success(let response):
                 self.page += 1 // Update current page to fetch
                 
                 let movies = response.results.map { Movie($0) } // Map response to array of movies
                 self.popularMoviesPublisher.send(movies)
 
-            case .failure(let error):
-                self.popularMoviesPublisher.send(completion: Subscribers.Completion<Error>.failure(error))
             }
         }
     }
@@ -68,6 +68,7 @@ class DataProvider: DataProvidable, ObservableObject {
     public func fetchFavorites(withIDs ids: [Int]) {
         let group = DispatchGroup()
         var favorites = [Movie]()
+        var fetchError: Error?
         
         for id in ids {
             group.enter()
@@ -75,17 +76,25 @@ class DataProvider: DataProvidable, ObservableObject {
             MovieService.fecthMovie(withId: id) { result in
                 switch result {
                 case .failure(let error):
-                    print(error) // TO DO: Handle error
+                    fetchError = error
                 case .success(let movie):
                     favorites.append(movie)
                 }
                 
                 group.leave()
             }
+            
+            if fetchError != nil {
+                break
+            }
         }
         
         group.notify(queue: .main) {
-            self.favoriteMoviesPublisher.send(favorites)
+            if let error = fetchError {
+                self.favoriteMoviesPublisher.send(completion: Subscribers.Completion<Error>.failure(error))
+            } else {
+                self.favoriteMoviesPublisher.send(favorites)
+            }
         }
     }
     
