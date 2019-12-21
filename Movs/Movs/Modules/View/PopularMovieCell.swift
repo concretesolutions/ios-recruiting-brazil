@@ -87,6 +87,7 @@ class PopularMovieCell: UICollectionViewCell {
         }
 
         self.titleLabel.text = movie.title
+        self.posterImageView.image = nil
         self.posterImageView.loadImage(fromURL: movie.smallImageURL)
         self.configureHeartImage()
     }
