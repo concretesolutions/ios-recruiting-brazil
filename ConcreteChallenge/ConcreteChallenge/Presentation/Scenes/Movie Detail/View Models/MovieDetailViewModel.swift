@@ -1,5 +1,5 @@
 //
-//  InitializableCoordinator.swift
+//  MovieDetailViewModel.swift
 //  ConcreteChallenge
 //
 //  Created by Elias Paulino on 21/12/19.
@@ -7,7 +7,3 @@
 //
 
 import Foundation
-
-protocol InitializableCoordinator: Coordinator {
-    init(rootViewController: RootViewController)
-}

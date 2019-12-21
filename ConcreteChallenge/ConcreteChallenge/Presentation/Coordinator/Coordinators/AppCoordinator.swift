@@ -21,7 +21,7 @@ class AppCoordinator: Coordinator {
 
     private lazy var firstTabCoordinator = GenericNavigationCoordinator(
         rootViewController: rootViewController,
-        childType: PopularMoviesCoordinator.self
+        childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController)
     )
     
     func start(previousController: UIViewController? = nil) {

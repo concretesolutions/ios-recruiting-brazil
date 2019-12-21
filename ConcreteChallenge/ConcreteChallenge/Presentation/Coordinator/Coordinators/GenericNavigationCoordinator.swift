@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenericNavigationCoordinator<ChildType: InitializableCoordinator>: Coordinator {
+class GenericNavigationCoordinator: Coordinator {
 
     var parentRootViewController: RootViewController
 
@@ -24,12 +24,13 @@ class GenericNavigationCoordinator<ChildType: InitializableCoordinator>: Coordin
         return navigationViewController
     }()
 
-    private let childCoordinatorType: ChildType.Type
-    private lazy var childCoordinator = ChildType(rootViewController: self.rootViewController)
+    private var childCoordinator: Coordinator
     
-    init(rootViewController: RootViewController, childType: ChildType.Type) {
+    init(rootViewController: RootViewController, childCoordinator: Coordinator) {
         self.parentRootViewController = rootViewController
-        self.childCoordinatorType = childType
+        self.childCoordinator = childCoordinator
+        
+        childCoordinator.rootViewController = self.rootViewController
     }
 
     func start(previousController: UIViewController? = nil) {

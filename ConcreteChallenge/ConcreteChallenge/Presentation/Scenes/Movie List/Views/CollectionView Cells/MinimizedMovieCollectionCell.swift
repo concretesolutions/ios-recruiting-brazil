@@ -21,7 +21,7 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
                 }
             }
             
-            titleLabel.text = viewModel.movieTitle
+            titleLabel.text = viewModel.movieAtributtes.title
         }
     }
     

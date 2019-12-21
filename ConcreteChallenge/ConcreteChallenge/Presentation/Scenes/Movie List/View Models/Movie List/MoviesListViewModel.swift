@@ -20,6 +20,7 @@ protocol MoviesListViewModel: AnyObject {
     func thePageReachedTheEnd()
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel
     func viewStateChanged()
+    func userSelectedMovie(atPosition position: Int)
 }
 
 enum ListState {
@@ -53,6 +54,8 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     
     var needReloadAllMovies: (() -> Void)?
     var needShowError: ((_ message: String) -> Void)?
+    
+    weak var navigator: MoviesListViewModelNavigator?
     
     private let moviesRepository: MoviesRepository
     private let imagesRepository: MovieImageRepository
@@ -99,7 +102,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     }
     
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel {
-        guard position >= 0 && position < moviesPage.numberOfItem else {
+        guard moviesPage.isValidPosition(position) else {
             fatalError("The \(position) position is wrong, the total of movies is \(moviesPage.numberOfItem)")
         }
 
@@ -108,5 +111,13 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     
     func viewStateChanged() {
         self.state.toggle()
+    }
+    
+    func userSelectedMovie(atPosition position: Int) {
+        guard moviesPage.isValidPosition(position) else {
+            fatalError("The \(position) position is wrong, the total of movies is \(moviesPage.numberOfItem)")
+        }
+        
+        navigator?.movieWasSelected(movie: moviesPage.items[position])
     }
 }

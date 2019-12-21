@@ -41,4 +41,8 @@ struct Page<ItemType: Codable>: Codable {
         
         pageNumber += 1
     }
+    
+    func isValidPosition(_ position: Int) -> Bool {
+        return position >= 0 && position < numberOfItem
+    }
 }

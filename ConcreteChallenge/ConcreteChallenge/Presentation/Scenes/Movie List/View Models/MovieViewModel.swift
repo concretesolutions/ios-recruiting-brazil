@@ -10,7 +10,7 @@ import UIKit
 import GenericNetwork
 
 protocol MovieViewModel: AnyObject {
-    var movieTitle: String? { get }
+    var  movieAtributtes: (title: String, description: String, genres: String, release: String) { get }
     var needReplaceImage: ((_ image: UIImage) -> Void)? { get set }
     
     func movieViewWasReused()
@@ -19,8 +19,8 @@ protocol MovieViewModel: AnyObject {
 typealias ImageRouter = (_ imagePath: String) -> Route
 
 class DefaultMovieViewModel: MovieViewModel {
-    var movieTitle: (String?) {
-        return (movie.title ?? "No Title.")
+    var movieAtributtes: (title: String, description: String, genres: String, release: String) {
+        return (movie.title ?? "No Title.", movie.overview ?? "No Title.", "No Genres", movie.releaseDate ?? "No Release Date.")
     }
     
     var needReplaceImage: ((_ image: UIImage) -> Void)? {

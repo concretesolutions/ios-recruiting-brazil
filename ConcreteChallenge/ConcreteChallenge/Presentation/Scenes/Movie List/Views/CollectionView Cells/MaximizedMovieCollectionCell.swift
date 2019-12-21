@@ -22,7 +22,7 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
                 }
             }
 
-            titleLabel.text = viewModel.movieTitle
+            titleLabel.text = viewModel.movieAtributtes.title
         }
     }
     
@@ -69,7 +69,7 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
     
     func addConstraints() {
         let horizontalFillConstraints: (LayoutProxy) -> Void = {
-            $0.group.left(10).right(10).fillToSuperView()
+            $0.group.left(10).right(-10).fillToSuperView()
         }
 
         let headerConstraintsBlock: (LayoutProxy) -> Void = {

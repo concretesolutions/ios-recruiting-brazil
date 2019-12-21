@@ -9,17 +9,24 @@
 import UIKit
 import GenericNetwork
 
-class PopularMoviesCoordinator: InitializableCoordinator {
+class PopularMoviesCoordinator: Coordinator {
     var rootViewController: RootViewController
 
-    private let viewModel = DefaultMoviesListViewModel(
-        moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
-        imagesRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider())
-    )
+    private lazy var viewModel: DefaultMoviesListViewModel = {
+        let viewModel = DefaultMoviesListViewModel(
+            moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
+            imagesRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider())
+        )
+        
+        viewModel.navigator = self
+        
+        return viewModel
+    }()
     
     private lazy var popularMoviesViewController = PopularMoviesViewController(viewModel: viewModel)
+    private var movieDetailCoordinator: MovieDetailCoordinator?
     
-    required init(rootViewController: RootViewController) {
+    init(rootViewController: RootViewController) {
         self.rootViewController = rootViewController
     }
     
@@ -29,6 +36,12 @@ class PopularMoviesCoordinator: InitializableCoordinator {
         popularMoviesViewController.title = "Popular"
         rootViewController.tabBarItem = UITabBarItem.init(title: "Home", image: UIImage(named: "home"), tag: 0)
         rootViewController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
+    }
+}
 
+extension PopularMoviesCoordinator: MoviesListViewModelNavigator {
+    func movieWasSelected(movie: Movie) {
+        movieDetailCoordinator = MovieDetailCoordinator(rootViewController: rootViewController, movie: movie)
+        movieDetailCoordinator?.start(previousController: popularMoviesViewController)
     }
 }

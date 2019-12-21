@@ -105,4 +105,8 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
             viewModel.thePageReachedTheEnd()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.userSelectedMovie(atPosition: indexPath.row)
+    }
 }
