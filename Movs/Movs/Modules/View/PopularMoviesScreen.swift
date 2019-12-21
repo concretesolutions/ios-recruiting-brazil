@@ -39,15 +39,8 @@ final class PopularMoviesScreen: UIView {
         return view
     }()
 
-    private lazy var errorView: ExceptionView = {
-        let view = ExceptionView(imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
-        return view
-    }()
-
-    private lazy var emptySearchView: ExceptionView = {
-        let view = ExceptionView(imageSystemName: "magnifyingglass.circle.fill", text: "Sorry, we couldn't find any movie that matches this search.")
-        return view
-    }()
+    private let errorView: ExceptionView = ExceptionView.error
+    private let emptySearchView: ExceptionView = ExceptionView.emptySearch
 
     // MARK: - Initializers
 

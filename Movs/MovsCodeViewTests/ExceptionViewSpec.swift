@@ -21,9 +21,10 @@ class ExceptionViewSpec: QuickSpec {
 
     override func spec() {
         describe("ErrorView") {
-            context("get popular movies error") {
+            context("error") {
                 beforeEach {
-                    self.sut = ExceptionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
+                    self.sut = ExceptionView.error
+                    self.sut.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 }
 
                 afterEach {
@@ -31,13 +32,14 @@ class ExceptionViewSpec: QuickSpec {
                 }
 
                 it("should have the expected look and feel") {
-                    expect(self.sut) == snapshot("ExceptionView_popular")
+                    expect(self.sut) == snapshot("ExceptionView_error")
                 }
             }
 
-            context("search error") {
+            context("empty search") {
                 beforeEach {
-                    self.sut = ExceptionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), imageSystemName: "magnifyingglass.circle.fill", text: "Sorry, we couldn't find any movie that matches this search.")
+                    self.sut = ExceptionView.emptySearch
+                    self.sut.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                     DataProvider.shared.reset()
                 }
 
@@ -46,7 +48,23 @@ class ExceptionViewSpec: QuickSpec {
                 }
 
                 it("should have the expected look and feel") {
-                    expect(self.sut) == snapshot("ExceptionView_search")
+                    expect(self.sut) == snapshot("ExceptionView_emptySearch")
+                }
+            }
+
+            context("empty favorites") {
+                beforeEach {
+                    self.sut = ExceptionView.emptyFavorites
+                    self.sut.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    DataProvider.shared.reset()
+                }
+
+                afterEach {
+                    self.sut = nil
+                }
+
+                it("should have the expected look and feel") {
+                    expect(self.sut) == snapshot("ExceptionView_emptyFavorites")
                 }
             }
         }

@@ -84,3 +84,13 @@ extension ExceptionView: CodeView {
         self.backgroundColor = .systemBackground
     }
 }
+
+// MARK: - Standard Exception views
+
+extension ExceptionView {
+    static let error = ExceptionView(imageSystemName: "xmark.circle.fill", text: "An error occurred. Please try again later.")
+
+    static let emptySearch = ExceptionView(imageSystemName: "magnifyingglass.circle.fill", text: "No matching movie found for this search.")
+
+    static let emptyFavorites = ExceptionView(imageSystemName: "heart.circle.fill", text: "You don't have any favorite movie yet.")
+}

@@ -32,10 +32,7 @@ final class FavoriteMoviesScreen: UIView {
         return view
     }()
 
-    private lazy var emptyView: ExceptionView = {
-        let view = ExceptionView(imageSystemName: "heart", text: "You don't have any favorite movies yet.")
-        return view
-    }()
+    private lazy var emptyView: ExceptionView = ExceptionView.emptyFavorites
 
     // MARK: - Initializers
 
