@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol DataProvidable {
-    var popularMoviesPublisher: CurrentValueSubject<[Movie], Error> { get }
+    var popularMoviesPublisher: CurrentValueSubject<([Movie], Error?), Never> { get }
     var favoriteMoviesPublisher: CurrentValueSubject<[Movie], Error> { get }
     
     var popularMovies: [Movie] { get }
@@ -24,11 +24,11 @@ class DataProvider: DataProvidable, ObservableObject {
     
     public static let shared = DataProvider()
     
-    var popularMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
+    var popularMoviesPublisher = CurrentValueSubject<([Movie], Error?), Never>(([], nil))
     var favoriteMoviesPublisher = CurrentValueSubject<[Movie], Error>([])
     
     var popularMovies: [Movie] {
-        return self.popularMoviesPublisher.value
+        return self.popularMoviesPublisher.value.0
     }
     
     var favoriteMovies: [Movie] {
@@ -54,12 +54,12 @@ class DataProvider: DataProvidable, ObservableObject {
         MovieService.fecthMovies(params: ["page": "\(page)"]) { result in
             switch result {
             case .failure(let error):
-                self.popularMoviesPublisher.send(completion: Subscribers.Completion<Error>.failure(error))
+                self.popularMoviesPublisher.send(([], error))
             case .success(let response):
                 self.page += 1 // Update current page to fetch
                 
                 let movies = response.results.map { Movie($0) } // Map response to array of movies
-                self.popularMoviesPublisher.send(movies)
+                self.popularMoviesPublisher.send((movies, nil))
 
             }
         }

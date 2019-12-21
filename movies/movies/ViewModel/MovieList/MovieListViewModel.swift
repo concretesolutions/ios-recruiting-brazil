@@ -76,11 +76,20 @@ class MovieListViewModel: ObservableObject {
         self?.state = .movies
     }
     
-    public func subscribeToPopularMovies(_ publisher: AnyPublisher<[Movie], Error>) {
+    public func subscribeToPopularMovies(_ publisher: AnyPublisher<([Movie], Error?), Never>) {
         self.state = .loading
         self.popularMoviesSubscriber = publisher
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onCompletionHandler!, receiveValue: onValueHandler)
+            .sink(receiveValue: { [weak self] (movies, error) in
+                if error != nil {
+                    self?.searchMovies = []
+                    self?.state = .error
+                } else {
+                    guard self?.searching == false else { return }
+                    self?.searchMovies.append(contentsOf: movies)
+                    self?.state = .movies
+                }
+            })
     }
     
     // MARK: - Data convertion
