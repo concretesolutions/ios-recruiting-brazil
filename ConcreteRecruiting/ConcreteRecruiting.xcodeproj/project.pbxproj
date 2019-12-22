@@ -30,6 +30,9 @@
 		3F55C15823AFF626008F38FC /* NetworkLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F55C14823AFF626008F38FC /* NetworkLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F55C15B23AFF626008F38FC /* NetworkLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F55C14623AFF626008F38FC /* NetworkLayer.framework */; };
 		3F55C15C23AFF626008F38FC /* NetworkLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F55C14623AFF626008F38FC /* NetworkLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3F55C16523B00E55008F38FC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C16423B00E55008F38FC /* HTTPMethod.swift */; };
+		3F55C16823B00FA3008F38FC /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C16723B00FA3008F38FC /* HTTPTask.swift */; };
+		3F55C16A23B0126F008F38FC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C16923B0126F008F38FC /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,9 @@
 		3F55C14E23AFF626008F38FC /* NetworkLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F55C15523AFF626008F38FC /* NetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerTests.swift; sourceTree = "<group>"; };
 		3F55C15723AFF626008F38FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F55C16423B00E55008F38FC /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		3F55C16723B00FA3008F38FC /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		3F55C16923B0126F008F38FC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +313,7 @@
 		3F55C14723AFF626008F38FC /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				3F55C16623B00F84008F38FC /* Enums */,
 				3F55C14823AFF626008F38FC /* NetworkLayer.h */,
 				3F55C14923AFF626008F38FC /* Info.plist */,
 			);
@@ -320,6 +327,16 @@
 				3F55C15723AFF626008F38FC /* Info.plist */,
 			);
 			path = NetworkLayerTests;
+			sourceTree = "<group>";
+		};
+		3F55C16623B00F84008F38FC /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				3F55C16423B00E55008F38FC /* HTTPMethod.swift */,
+				3F55C16723B00FA3008F38FC /* HTTPTask.swift */,
+				3F55C16923B0126F008F38FC /* NetworkError.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +469,7 @@
 					};
 					3F55C14523AFF626008F38FC = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 					};
 					3F55C14D23AFF626008F38FC = {
 						CreatedOnToolsVersion = 11.3;
@@ -583,6 +601,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F55C16A23B0126F008F38FC /* NetworkError.swift in Sources */,
+				3F55C16823B00FA3008F38FC /* HTTPTask.swift in Sources */,
+				3F55C16523B00E55008F38FC /* HTTPMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +774,7 @@
 		3F55C0A423AEDB81008F38FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LF3U834HDS;
@@ -771,6 +793,7 @@
 		3F55C0A523AEDB81008F38FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LF3U834HDS;
@@ -873,6 +896,7 @@
 		3F55C15E23AFF626008F38FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -890,6 +914,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.alysson.NetworkLayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -900,6 +925,7 @@
 		3F55C15F23AFF626008F38FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
