@@ -17,12 +17,15 @@ protocol DataProvidable {
     var favoriteMovies: [Movie] { get }
     var genres: [Int: String] { get }
     
+    func fetchPopularMovies(page: Int, completion: (() -> Void)?)
+    func fetchFavoriteMovies(completion: (() -> Void)?)
+    func searchMovie(query: String, completion: @escaping (Result<[Movie], Error>) -> Void)
     func toggleFavorite(withId id: Int)
     func isFavorite(_ id: Int) -> Bool
 }
 
 class DataProvider: DataProvidable, ObservableObject {
-    
+
     public static let shared = DataProvider()
     
     var popularMoviesPublisher = CurrentValueSubject<([Movie], Error?), Never>(([], nil))
@@ -43,7 +46,7 @@ class DataProvider: DataProvidable, ObservableObject {
     private var favoriteIdsSubscriber: AnyCancellable?
     
     init() {
-        fetchMovies(page: 1)
+        fetchPopularMovies(page: 1)
         
         favoriteIdsSubscriber = UserDefaults.standard.publisher(for: \.favorites)
             .receive(on: DispatchQueue.main)
@@ -52,7 +55,7 @@ class DataProvider: DataProvidable, ObservableObject {
             })
     }
     
-    public func fetchMovies(page: Int, completion: (() -> Void)? = nil) {
+    public func fetchPopularMovies(page: Int, completion: (() -> Void)? = nil) {
         MovieService.fecthMovies(params: ["page": "\(page)"]) { result in
             switch result {
             case .failure(let error):
@@ -67,7 +70,11 @@ class DataProvider: DataProvidable, ObservableObject {
         }
     }
     
-    public func fetchFavorites(withIDs ids: [Int], completion: (() -> Void)? = nil) {
+    func fetchFavoriteMovies(completion: (() -> Void)?) {
+        self.fetchFavorites(withIDs: UserDefaults.standard.favorites, completion: completion)
+    }
+    
+    private func fetchFavorites(withIDs ids: [Int], completion: (() -> Void)? = nil) {
         let group = DispatchGroup()
         var favorites = [Movie]()
         var fetchError: Error?
@@ -99,6 +106,12 @@ class DataProvider: DataProvidable, ObservableObject {
             }
             
             completion?()
+        }
+    }
+    
+    func searchMovie(query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
+        MovieService.searchMovie(query: query) { result in
+            completion(result)
         }
     }
     

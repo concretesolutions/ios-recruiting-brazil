@@ -24,19 +24,19 @@ class FilterOptionsViewModel {
     }
     
     public func toggleSelection(at index: Int) {
-        guard index < self.options.count else { return }
+        guard index < self.options.count else { return } // Check if it is an valid index
         
-        if isSelected(at: index) {
-            let selected = filter.selected.value.filter { $0 != index }
+        if isSelected(at: index) { // Check if the given index is on the list of selected options
+            let selected = filter.selected.value.filter { $0 != index } // Remove the given index from the list
             
-            self.filter.selected.send(selected)
+            self.filter.selected.send(selected) // Send new selected value withput the given index
         } else {
-            self.filter.selected.send(self.filter.selected.value + [index])
+            self.filter.selected.send(self.filter.selected.value + [index]) // Send new selected value with new index
         }
     }
     
     public func isSelected(at index: Int) -> Bool {
-        guard index < self.options.count else { return false }
+        guard index < self.options.count else { return false } // Check if it is an valid index
         return self.filter.selected.value.contains(index)
     }
 }
