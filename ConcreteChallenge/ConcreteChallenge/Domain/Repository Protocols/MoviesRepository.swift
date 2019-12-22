@@ -11,7 +11,3 @@ import Foundation
 protocol MoviesRepository {
     func getMovies(fromPage page: Int, completion: @escaping (Result<Page<Movie>, Error>) -> Void)
 }
-
-//protocol EditableMoviesRepository {
-//    func addMovie(movie: Movie, completion: @escaping (ActionResult<Error>) -> Void)
-//}

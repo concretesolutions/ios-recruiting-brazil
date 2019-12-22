@@ -10,6 +10,7 @@ import Foundation
 
 //A enum with the url paramenters keys for making requests to the TMDB api.
 enum TMDBQueryProperty: String {
+    case query
     case apiKey = "api_key"
     case pageNumber = "page"
 }
