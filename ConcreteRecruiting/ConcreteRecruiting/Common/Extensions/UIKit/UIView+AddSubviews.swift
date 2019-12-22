@@ -6,4 +6,18 @@
 //  Copyright © 2019 Alysson Moreira. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UIView {
+    
+    func addSubviews(_ views: [UIView]) {
+        
+        for view in views {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(view)
+        }
+        
+    }
+    
+}
+
