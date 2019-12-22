@@ -47,6 +47,7 @@ class MovieListView: UIView {
     }()
     
     lazy var datasource = MovieListDataSource()
+    lazy var delegate = MovieListDelegate()
     
       override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,6 +56,7 @@ class MovieListView: UIView {
         self.setupLayout()
        
         collectionView.dataSource = self.datasource
+        collectionView.delegate = self.delegate
         
       }
       
