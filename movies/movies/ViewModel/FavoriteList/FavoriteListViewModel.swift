@@ -17,12 +17,6 @@ class FavoriteListViewModel: ObservableObject {
         willSet {
             // Update movie count when search movies is updated
             self.movieCount = newValue.count
-            // Check if list is empty
-            if newValue.isEmpty && !self.dataProvider.favoriteMovies.isEmpty {
-                self.state = .noDataError
-            } else {
-                self.state = self.isFiltering(self.filters.value) ? .filter : .movies
-            }
         }
     }
     
@@ -65,6 +59,9 @@ class FavoriteListViewModel: ObservableObject {
                 guard let movieList = self?.getMoviesList(favoriteMovies, withFilters: filters, andQuery: query) else { return }
                 
                 self?.searchMovies = movieList
+                
+                guard let state = self?.getState(movieList, filters: self?.filters.value) else { return }
+                self?.state = state
             })
     }
     
@@ -84,6 +81,9 @@ class FavoriteListViewModel: ObservableObject {
                     
                     guard let newFilters = self?.getFilters(for: movies) else { return }
                     self?.filters.send(newFilters)
+                    
+                    guard let state = self?.getState(movieList, filters: self?.filters.value) else { return }
+                    self?.state = state
                 }
             })
     }
@@ -96,6 +96,9 @@ class FavoriteListViewModel: ObservableObject {
                 guard let movieList = self?.getMoviesList(favoriteMovies, withFilters: filters, andQuery: self?.query) else { return }
                 
                 self?.searchMovies = movieList
+                
+                guard let state = self?.getState(movieList, filters: self?.filters.value) else { return }
+                self?.state = state
             })
     }
     
@@ -166,6 +169,22 @@ class FavoriteListViewModel: ObservableObject {
         let sortedMovies = self.sortMovies(searchedMovies)
         
         return sortedMovies
+    }
+    
+    /// Return current state according to movie list
+    /// Returns:
+    ///     .noDataError if list of movies is empty
+    ///     .filter if there are selected options on list of filters
+    ///     .movies if none of the above
+    /// - Parameters:
+    ///   - movies: List of movies
+    ///   - filters: Current filters
+    private func getState(_ movies: [Movie], filters: [Filter]?) -> MovieListViewState {
+        if movies.isEmpty && !self.dataProvider.favoriteMovies.isEmpty {
+            return .noDataError
+        } else {
+            return self.isFiltering(self.filters.value) ? .filter : .movies
+        }
     }
 }
 
