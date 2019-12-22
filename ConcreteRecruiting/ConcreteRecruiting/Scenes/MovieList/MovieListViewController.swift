@@ -13,6 +13,12 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        view = MovieListView()
+        
+        // TODO: Title should come from elsewhere
+        self.title = "Movies"
+        
     }
 
 }

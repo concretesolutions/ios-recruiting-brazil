@@ -17,6 +17,14 @@
 		3F55C0AE23AEE8FA008F38FC /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F55C0AD23AEE8FA008F38FC /* Color.xcassets */; };
 		3F55C0B923AEED4A008F38FC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F55C0B823AEED4A008F38FC /* Localizable.strings */; };
 		3F55C0BB23AEED72008F38FC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F55C0BA23AEED72008F38FC /* InfoPlist.strings */; };
+		3F55C0BD23AEFBD6008F38FC /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0BC23AEFBD6008F38FC /* MovieCollectionCell.swift */; };
+		3F55C0BF23AF00D5008F38FC /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0BE23AF00D5008F38FC /* MovieListView.swift */; };
+		3F55C0C223AF0559008F38FC /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0C123AF0559008F38FC /* UIView+AddSubviews.swift */; };
+		3F55C0C423AF1183008F38FC /* MovieListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0C323AF1183008F38FC /* MovieListDatasource.swift */; };
+		3F55C0C623AF1425008F38FC /* MovieListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0C523AF1425008F38FC /* MovieListDelegate.swift */; };
+		3F55C0C823AFB4F1008F38FC /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0C723AFB4F1008F38FC /* Movie.swift */; };
+		3F55C0CA23AFBACD008F38FC /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0C923AFBACD008F38FC /* Genre.swift */; };
+		3F55C0CC23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0CB23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +61,14 @@
 		3F55C0AD23AEE8FA008F38FC /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		3F55C0B823AEED4A008F38FC /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		3F55C0BA23AEED72008F38FC /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		3F55C0BC23AEFBD6008F38FC /* MovieCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
+		3F55C0BE23AF00D5008F38FC /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
+		3F55C0C123AF0559008F38FC /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
+		3F55C0C323AF1183008F38FC /* MovieListDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDatasource.swift; sourceTree = "<group>"; };
+		3F55C0C523AF1425008F38FC /* MovieListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListDelegate.swift; sourceTree = "<group>"; };
+		3F55C0C723AFB4F1008F38FC /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		3F55C0C923AFBACD008F38FC /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		3F55C0CB23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+DefaultStyle.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +180,7 @@
 		3F55C0B223AEEA8F008F38FC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3F55C0C023AF0542008F38FC /* UIKit */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -180,6 +197,7 @@
 		3F55C0B423AEEAF2008F38FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3F55C0BC23AEFBD6008F38FC /* MovieCollectionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +212,8 @@
 		3F55C0B623AEEC33008F38FC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3F55C0C723AFB4F1008F38FC /* Movie.swift */,
+				3F55C0C923AFBACD008F38FC /* Genre.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -202,8 +222,20 @@
 			isa = PBXGroup;
 			children = (
 				3F55C08023AEDB7F008F38FC /* MovieListViewController.swift */,
+				3F55C0BE23AF00D5008F38FC /* MovieListView.swift */,
+				3F55C0C323AF1183008F38FC /* MovieListDatasource.swift */,
+				3F55C0C523AF1425008F38FC /* MovieListDelegate.swift */,
 			);
 			path = MovieList;
+			sourceTree = "<group>";
+		};
+		3F55C0C023AF0542008F38FC /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				3F55C0C123AF0559008F38FC /* UIView+AddSubviews.swift */,
+				3F55C0CB23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,9 +392,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F55C0BD23AEFBD6008F38FC /* MovieCollectionCell.swift in Sources */,
+				3F55C0C623AF1425008F38FC /* MovieListDelegate.swift in Sources */,
+				3F55C0CC23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift in Sources */,
+				3F55C0C823AFB4F1008F38FC /* Movie.swift in Sources */,
 				3F55C08123AEDB7F008F38FC /* MovieListViewController.swift in Sources */,
+				3F55C0C223AF0559008F38FC /* UIView+AddSubviews.swift in Sources */,
+				3F55C0C423AF1183008F38FC /* MovieListDatasource.swift in Sources */,
+				3F55C0BF23AF00D5008F38FC /* MovieListView.swift in Sources */,
 				3F55C07D23AEDB7F008F38FC /* AppDelegate.swift in Sources */,
 				3F55C07F23AEDB7F008F38FC /* SceneDelegate.swift in Sources */,
+				3F55C0CA23AFBACD008F38FC /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
