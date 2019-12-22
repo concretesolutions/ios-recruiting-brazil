@@ -42,6 +42,15 @@ class MovieCollectionCell: UICollectionViewCell {
         }
     }
     
+    func setup(with model: Movie) {
+        
+        // TODO: Download image
+        
+        self.titleLabel.text = model.title
+        self.isFavorite = model.isFavorite
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

@@ -20,6 +20,8 @@ struct Movie: Decodable {
     
     let genres: [Genre]
     
+    var isFavorite: Bool = false
+    
     enum CodingKeys: String, CodingKey {
         case title
         case description = "overview"
