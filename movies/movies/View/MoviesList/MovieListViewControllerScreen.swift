@@ -59,19 +59,19 @@ final class MovieListViewControllerScreen: UIView {
     
     /// Update view according to current state
     /// - Parameter state: Current state
-    func updateViewState(to state: MovieListViewState) {
+    private func updateViewState(to state: MovieListViewState) {
         // State = .error
-        genericErrorView.isHidden = !(state == .error)
+        self.genericErrorView.isHidden = !(state == .error)
         // State = .noDataError
-        noDataErrorView.isHidden = !(state == .noDataError)
+        self.noDataErrorView.isHidden = !(state == .noDataError)
         // State = .loading
-        activityIndicator.isHidden = !(state == .loading)
-        collectionView.isHidden = (state == .loading)
+        self.activityIndicator.isHidden = !(state == .loading)
+        self.collectionView.isHidden = (state == .loading)
         
         if state == .loading {
-            activityIndicator.startAnimating()
+            self.activityIndicator.startAnimating()
         } else {
-            activityIndicator.stopAnimating()
+            self.activityIndicator.stopAnimating()
         }
     }
     

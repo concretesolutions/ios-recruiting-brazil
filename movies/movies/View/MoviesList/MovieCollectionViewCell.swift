@@ -63,7 +63,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         self.favoriteButton.type = viewModel.favorite ? .favorite  : .unfavorite
         
-        favoriteSubscriber = self.viewModel.$favorite
+        // Observe changes in favorite state and change favorite button
+        self.favoriteSubscriber = self.viewModel.$favorite
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] favorite in
                 self?.favoriteButton.type = favorite ? .favorite  : .unfavorite
