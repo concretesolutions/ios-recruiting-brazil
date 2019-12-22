@@ -20,14 +20,15 @@ protocol SeachMoviesViewModel {
 class DefaultSeachMoviesViewModel: SeachMoviesViewModel {
     var moviesViewModel: MoviesListViewModel
     private var moviesSearchRepository: SearchMoviesRepository
-    private var currentQuery: String = ""
+    private var currentQuery: String?
     
-    init(moviesSearchRepository: SearchMoviesRepository, movieViewModelInjector: Injector<MoviesListViewModel, MoviesRepository>) {
+    init(moviesSearchRepository: SearchMoviesRepository,
+         movieViewModelInjector: Injector<MoviesListViewModel, (repository: MoviesRepository, emptyState: String)>) {
         self.moviesSearchRepository = moviesSearchRepository
-        self.moviesViewModel = movieViewModelInjector(moviesSearchRepository)
+        self.moviesViewModel = movieViewModelInjector((moviesSearchRepository, "No search results."))
         
         self.moviesSearchRepository.searchQueryProvider = { [weak self] in
-            return self?.currentQuery ?? " "
+            return self?.currentQuery ?? nil
         }
     }
 

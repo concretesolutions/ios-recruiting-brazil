@@ -9,11 +9,13 @@
 import Foundation
 
 class FavoriteViewModelsFactory: DefaultViewModelFactory {
-    override func movieListViewModel(moviesRepository: MoviesRepository? = nil) -> MoviesListViewModel {
+    override func movieListViewModel(moviesRepository: MoviesRepository? = nil, emptyStateTitle: String? = nil) -> MoviesListViewModel {
         return DefaultMoviesListViewModel(moviesRepository: FavoriteMoviesRepository(), presentations: [
             Presentation(hasFavorite: false),
             Presentation(hasFavorite: true)
-        ]) { (injectorData) -> MovieViewModel in
+        ],
+        emptyStateTitle: emptyStateTitle
+        ) { (injectorData) -> MovieViewModel in
             switch injectorData {
             case .favorite(let movie):
                 return self.movieViewModelWithFavoriteOptions(movie: movie)

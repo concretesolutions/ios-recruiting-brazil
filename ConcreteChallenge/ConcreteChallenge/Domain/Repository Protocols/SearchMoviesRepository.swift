@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SearchMoviesRepository: MoviesRepository {
-    var searchQueryProvider: (() -> String)? { get set }
+    var searchQueryProvider: (() -> String?)? { get set }
 }

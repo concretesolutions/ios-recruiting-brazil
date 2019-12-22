@@ -28,6 +28,12 @@ class MoviesListView: UIView, ViewCodable {
         $0.contentInset.top = 50
     }
     
+    private lazy var emptyWarningLabel = UILabel(text: viewModel.emptyStateDescription).build {
+        $0.textColor = .appTextPurple
+        $0.font = .systemFont(ofSize: 15)
+        $0.numberOfLines = 0
+    }
+    
     private lazy var toggleButton = ToggleButton(items: presentationManager.toggleButtonItems).build {
         $0.wasToggledCompletion = { [weak self] currentSelection in
             self?.viewModel.viewStateChanged(toState: currentSelection)
@@ -46,10 +52,11 @@ class MoviesListView: UIView, ViewCodable {
     }
     
     func buildHierarchy() {
-        addSubViews(moviesCollectionView, toggleButton)
+        addSubViews(moviesCollectionView, toggleButton, emptyWarningLabel)
     }
     
     func addConstraints() {
+        emptyWarningLabel.layout.group.left(10).top(10).right(-10).fill(to: safeAreaLayoutGuide)
         moviesCollectionView.layout.fillSuperView()
         toggleButton.layout.build {
             $0.group.top(5).right(-5).fillToSuperView()
@@ -65,8 +72,11 @@ class MoviesListView: UIView, ViewCodable {
         }
         
         viewModel.needShowError = { [weak self] errorMessage in
-            self?.delegate?.needShowError(withMessage: errorMessage) {
-                self?.viewModel.thePageReachedTheEnd()
+            print(errorMessage)
+            DispatchQueue.main.async {
+                self?.delegate?.needShowError(withMessage: errorMessage) {
+                    self?.viewModel.thePageReachedTheEnd()
+                }
             }
         }
         
@@ -97,6 +107,14 @@ class MoviesListView: UIView, ViewCodable {
             DispatchQueue.main.async {
                 let movieIndexPath = IndexPath(row: moviePosition, section: 0)
                 self?.moviesCollectionView.insertItems(at: [movieIndexPath])
+            }
+        }
+        
+        viewModel.needChangeEmptyStateVisibility = { [weak self] visible in
+            DispatchQueue.main.async {
+                self?.moviesCollectionView.isHidden = visible
+                self?.toggleButton.isHidden = visible
+                self?.emptyWarningLabel.isHidden = !visible
             }
         }
         

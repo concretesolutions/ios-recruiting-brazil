@@ -13,6 +13,7 @@ protocol MoviesListViewModel: AnyObject {
     var numberOfMovies: Int { get }
     var currentPresentation: Int { get }
     var navigator: MoviesListViewModelNavigator? { get set }
+    var emptyStateDescription: String { get }
         
     var needShowError: ((_ message: String) -> Void)? { get set }
     var needShowNewMovies: ((_ atRange: Range<Int>) -> Void)? { get set }
@@ -20,6 +21,7 @@ protocol MoviesListViewModel: AnyObject {
     var needReloadMovieView: ((_ position: Int) -> Void)? { get set }
     var needDeleteMovieView: ((_ position: Int) -> Void)? { get set }
     var needInsertMovieView: ((_ position: Int) -> Void)? { get set }
+    var needChangeEmptyStateVisibility: ((_ visible: Bool) -> Void)? { get set }
     
     func thePageReachedTheEnd()
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel
@@ -70,11 +72,24 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         return self.currentState
     }
     
+    var emptyStateDescription: String {
+        return self.emptyStateTitle
+    }
+    
     var needReloadAllMovies: (() -> Void)?
     var needShowError: ((_ message: String) -> Void)?
     var needReloadMovieView: ((Int) -> Void)?
     var needDeleteMovieView: ((Int) -> Void)?
     var needInsertMovieView: ((Int) -> Void)?
+    var needChangeEmptyStateVisibility: ((Bool) -> Void)? {
+        didSet {
+            if moviesPage.items.count == 0 {
+                self.needChangeEmptyStateVisibility?(true)
+            } else {
+                self.needChangeEmptyStateVisibility?(false)
+            }
+        }
+    }
     
     weak var navigator: MoviesListViewModelNavigator?
     
@@ -82,6 +97,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     private let movieViewModelInjector: Injector<MovieViewModel, MoviesListViewModelInjetorData>
     private var moviesPage = Page<Movie>()
     private var presentations: [Presentation]
+    private let emptyStateTitle: String
     
     private var currentState: Int = 0 {
         didSet {
@@ -89,10 +105,11 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         }
     }
 
-    init(moviesRepository: MoviesRepository, presentations: [Presentation], movieViewModelInjector: @escaping Injector<MovieViewModel, MoviesListViewModelInjetorData>) {
+    init(moviesRepository: MoviesRepository, presentations: [Presentation], emptyStateTitle: String? = nil, movieViewModelInjector: @escaping Injector<MovieViewModel, MoviesListViewModelInjetorData>) {
         self.moviesRepository = moviesRepository
         self.movieViewModelInjector = movieViewModelInjector
         self.presentations = presentations
+        self.emptyStateTitle = emptyStateTitle ?? "No movies were find."
     }
     
     private func getMovies() {
@@ -116,6 +133,12 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         let newMoviesRange = self.moviesPage.items.count ..< totalOfMovies
         
         self.moviesPage.addNewPage(moviesPage)
+        
+        if moviesPage.items.count == 0 {
+            needChangeEmptyStateVisibility?(true)
+        } else {
+            needChangeEmptyStateVisibility?(false)
+        }
         
         if moviesPage.pageNumber == 1 {
             self.needReloadAllMovies?()
@@ -190,6 +213,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     func deleteAllMovies() {
         moviesPage = Page<Movie>()
         self.needReloadAllMovies?()
+        self.needChangeEmptyStateVisibility?(true)
     }
 }
 

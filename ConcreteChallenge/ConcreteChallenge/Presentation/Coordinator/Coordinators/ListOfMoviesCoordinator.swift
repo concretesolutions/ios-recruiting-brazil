@@ -18,7 +18,7 @@ class ListOfMoviesCoordinator: Coordinator, MoviesListViewModelNavigator {
     var userUnFavedMovieCompletion: UserFavedMovieEvent?
     
     lazy var moviesListViewController: MoviesListViewController = {
-        let viewModel = self.viewModelsFactory.movieListViewModel(moviesRepository: nil)
+        let viewModel = self.viewModelsFactory.movieListViewModel(moviesRepository: nil, emptyStateTitle: nil)
         viewModel.navigator = self
         
         let moviesListViewController = MoviesListViewController(viewModel: viewModel, presentationManager: moviesListPresentationManager)

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol MoviesListViewDelegate: AnyObject {
-    func needShowError(withMessage message: String, retryCompletion: (() -> Void))
+    func needShowError(withMessage message: String, retryCompletion: @escaping (() -> Void))
 }

@@ -18,7 +18,7 @@ class DefaultSearchMoviesRepository<MoviesProviderType: ParserProvider>: SearchM
         self.moviesProvider = moviesProvider
     }
     
-    var searchQueryProvider: (() -> String)?
+    var searchQueryProvider: (() -> String?)?
        
     func getMovies(fromPage page: Int, completion: @escaping (Result<Page<Movie>, Error>) -> Void) {
         guard let query = searchQueryProvider?() else {

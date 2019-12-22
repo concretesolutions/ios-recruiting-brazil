@@ -12,7 +12,9 @@ import GenericNetwork
 class MoviesListViewController: UIViewController {
     let viewModel: MoviesListViewModel
     private let presentationManager: MovieListPresentationManager
-    lazy var moviesListView = MoviesListView(viewModel: viewModel, presentationManager: self.presentationManager)
+    lazy var moviesListView = MoviesListView(viewModel: viewModel, presentationManager: self.presentationManager).build {
+        $0.delegate = self
+    }
     
     init(viewModel: MoviesListViewModel, presentationManager: MovieListPresentationManager) {
         self.viewModel = viewModel
@@ -25,7 +27,6 @@ class MoviesListViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        
         view.addSubViews(moviesListView)
         
         moviesListView.layout.group
@@ -34,3 +35,12 @@ class MoviesListViewController: UIViewController {
     }
 }
  
+extension MoviesListViewController: MoviesListViewDelegate {
+    func needShowError(withMessage message: String, retryCompletion: @escaping (() -> Void)) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Retry", style: .default, handler: { (_) in
+            retryCompletion()
+        }))
+        present(alertController, animated: true, completion: nil)
+    }
+}
