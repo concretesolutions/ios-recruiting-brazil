@@ -25,6 +25,11 @@
 		3F55C0C823AFB4F1008F38FC /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0C723AFB4F1008F38FC /* Movie.swift */; };
 		3F55C0CA23AFBACD008F38FC /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0C923AFBACD008F38FC /* Genre.swift */; };
 		3F55C0CC23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C0CB23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift */; };
+		3F55C14F23AFF626008F38FC /* NetworkLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F55C14623AFF626008F38FC /* NetworkLayer.framework */; };
+		3F55C15623AFF626008F38FC /* NetworkLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C15523AFF626008F38FC /* NetworkLayerTests.swift */; };
+		3F55C15823AFF626008F38FC /* NetworkLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F55C14823AFF626008F38FC /* NetworkLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F55C15B23AFF626008F38FC /* NetworkLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F55C14623AFF626008F38FC /* NetworkLayer.framework */; };
+		3F55C15C23AFF626008F38FC /* NetworkLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F55C14623AFF626008F38FC /* NetworkLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +47,42 @@
 			remoteGlobalIDString = 3F55C07823AEDB7F008F38FC;
 			remoteInfo = ConcreteRecruiting;
 		};
+		3F55C15023AFF626008F38FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F55C07123AEDB7F008F38FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F55C14523AFF626008F38FC;
+			remoteInfo = NetworkLayer;
+		};
+		3F55C15223AFF626008F38FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F55C07123AEDB7F008F38FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F55C07823AEDB7F008F38FC;
+			remoteInfo = ConcreteRecruiting;
+		};
+		3F55C15923AFF626008F38FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F55C07123AEDB7F008F38FC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F55C14523AFF626008F38FC;
+			remoteInfo = NetworkLayer;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3F55C15D23AFF626008F38FC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3F55C15C23AFF626008F38FC /* NetworkLayer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3F55C07923AEDB7F008F38FC /* ConcreteRecruiting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcreteRecruiting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +109,12 @@
 		3F55C0C723AFB4F1008F38FC /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		3F55C0C923AFBACD008F38FC /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		3F55C0CB23AFC2DA008F38FC /* UINavigationBar+DefaultStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+DefaultStyle.swift"; sourceTree = "<group>"; };
+		3F55C14623AFF626008F38FC /* NetworkLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F55C14823AFF626008F38FC /* NetworkLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkLayer.h; sourceTree = "<group>"; };
+		3F55C14923AFF626008F38FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F55C14E23AFF626008F38FC /* NetworkLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F55C15523AFF626008F38FC /* NetworkLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerTests.swift; sourceTree = "<group>"; };
+		3F55C15723AFF626008F38FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F55C15B23AFF626008F38FC /* NetworkLayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +140,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F55C14323AFF626008F38FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F55C14B23AFF626008F38FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F55C14F23AFF626008F38FC /* NetworkLayer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -102,6 +164,8 @@
 				3F55C07B23AEDB7F008F38FC /* ConcreteRecruiting */,
 				3F55C09223AEDB81008F38FC /* ConcreteRecruitingTests */,
 				3F55C09D23AEDB81008F38FC /* ConcreteRecruitingUITests */,
+				3F55C14723AFF626008F38FC /* NetworkLayer */,
+				3F55C15423AFF626008F38FC /* NetworkLayerTests */,
 				3F55C07A23AEDB7F008F38FC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +176,8 @@
 				3F55C07923AEDB7F008F38FC /* ConcreteRecruiting.app */,
 				3F55C08F23AEDB81008F38FC /* ConcreteRecruitingTests.xctest */,
 				3F55C09A23AEDB81008F38FC /* ConcreteRecruitingUITests.xctest */,
+				3F55C14623AFF626008F38FC /* NetworkLayer.framework */,
+				3F55C14E23AFF626008F38FC /* NetworkLayerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,7 +304,36 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		3F55C14723AFF626008F38FC /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				3F55C14823AFF626008F38FC /* NetworkLayer.h */,
+				3F55C14923AFF626008F38FC /* Info.plist */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		3F55C15423AFF626008F38FC /* NetworkLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				3F55C15523AFF626008F38FC /* NetworkLayerTests.swift */,
+				3F55C15723AFF626008F38FC /* Info.plist */,
+			);
+			path = NetworkLayerTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3F55C14123AFF626008F38FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F55C15823AFF626008F38FC /* NetworkLayer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		3F55C07823AEDB7F008F38FC /* ConcreteRecruiting */ = {
@@ -249,10 +344,12 @@
 				3F55C07623AEDB7F008F38FC /* Frameworks */,
 				3F55C07723AEDB7F008F38FC /* Resources */,
 				3F55C0AC23AEE142008F38FC /* ShellScript */,
+				3F55C15D23AFF626008F38FC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3F55C15A23AFF626008F38FC /* PBXTargetDependency */,
 			);
 			name = ConcreteRecruiting;
 			productName = ConcreteRecruiting;
@@ -295,6 +392,43 @@
 			productReference = 3F55C09A23AEDB81008F38FC /* ConcreteRecruitingUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		3F55C14523AFF626008F38FC /* NetworkLayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F55C16223AFF626008F38FC /* Build configuration list for PBXNativeTarget "NetworkLayer" */;
+			buildPhases = (
+				3F55C14123AFF626008F38FC /* Headers */,
+				3F55C14223AFF626008F38FC /* Sources */,
+				3F55C14323AFF626008F38FC /* Frameworks */,
+				3F55C14423AFF626008F38FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetworkLayer;
+			productName = NetworkLayer;
+			productReference = 3F55C14623AFF626008F38FC /* NetworkLayer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3F55C14D23AFF626008F38FC /* NetworkLayerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F55C16323AFF626008F38FC /* Build configuration list for PBXNativeTarget "NetworkLayerTests" */;
+			buildPhases = (
+				3F55C14A23AFF626008F38FC /* Sources */,
+				3F55C14B23AFF626008F38FC /* Frameworks */,
+				3F55C14C23AFF626008F38FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F55C15123AFF626008F38FC /* PBXTargetDependency */,
+				3F55C15323AFF626008F38FC /* PBXTargetDependency */,
+			);
+			name = NetworkLayerTests;
+			productName = NetworkLayerTests;
+			productReference = 3F55C14E23AFF626008F38FC /* NetworkLayerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -316,6 +450,13 @@
 						CreatedOnToolsVersion = 11.3;
 						TestTargetID = 3F55C07823AEDB7F008F38FC;
 					};
+					3F55C14523AFF626008F38FC = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					3F55C14D23AFF626008F38FC = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 3F55C07823AEDB7F008F38FC;
+					};
 				};
 			};
 			buildConfigurationList = 3F55C07423AEDB7F008F38FC /* Build configuration list for PBXProject "ConcreteRecruiting" */;
@@ -334,6 +475,8 @@
 				3F55C07823AEDB7F008F38FC /* ConcreteRecruiting */,
 				3F55C08E23AEDB81008F38FC /* ConcreteRecruitingTests */,
 				3F55C09923AEDB81008F38FC /* ConcreteRecruitingUITests */,
+				3F55C14523AFF626008F38FC /* NetworkLayer */,
+				3F55C14D23AFF626008F38FC /* NetworkLayerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +502,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3F55C09823AEDB81008F38FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F55C14423AFF626008F38FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F55C14C23AFF626008F38FC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -422,6 +579,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F55C14223AFF626008F38FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F55C14A23AFF626008F38FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F55C15623AFF626008F38FC /* NetworkLayerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -434,6 +606,21 @@
 			isa = PBXTargetDependency;
 			target = 3F55C07823AEDB7F008F38FC /* ConcreteRecruiting */;
 			targetProxy = 3F55C09B23AEDB81008F38FC /* PBXContainerItemProxy */;
+		};
+		3F55C15123AFF626008F38FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F55C14523AFF626008F38FC /* NetworkLayer */;
+			targetProxy = 3F55C15023AFF626008F38FC /* PBXContainerItemProxy */;
+		};
+		3F55C15323AFF626008F38FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F55C07823AEDB7F008F38FC /* ConcreteRecruiting */;
+			targetProxy = 3F55C15223AFF626008F38FC /* PBXContainerItemProxy */;
+		};
+		3F55C15A23AFF626008F38FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F55C14523AFF626008F38FC /* NetworkLayer */;
+			targetProxy = 3F55C15923AFF626008F38FC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -683,6 +870,100 @@
 			};
 			name = Release;
 		};
+		3F55C15E23AFF626008F38FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = LF3U834HDS;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = NetworkLayer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.alysson.NetworkLayer;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3F55C15F23AFF626008F38FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = LF3U834HDS;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = NetworkLayer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.alysson.NetworkLayer;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3F55C16023AFF626008F38FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LF3U834HDS;
+				INFOPLIST_FILE = NetworkLayerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.alysson.NetworkLayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteRecruiting.app/ConcreteRecruiting";
+			};
+			name = Debug;
+		};
+		3F55C16123AFF626008F38FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LF3U834HDS;
+				INFOPLIST_FILE = NetworkLayerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.alysson.NetworkLayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConcreteRecruiting.app/ConcreteRecruiting";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -718,6 +999,24 @@
 			buildConfigurations = (
 				3F55C0AA23AEDB81008F38FC /* Debug */,
 				3F55C0AB23AEDB81008F38FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F55C16223AFF626008F38FC /* Build configuration list for PBXNativeTarget "NetworkLayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F55C15E23AFF626008F38FC /* Debug */,
+				3F55C15F23AFF626008F38FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F55C16323AFF626008F38FC /* Build configuration list for PBXNativeTarget "NetworkLayerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F55C16023AFF626008F38FC /* Debug */,
+				3F55C16123AFF626008F38FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
