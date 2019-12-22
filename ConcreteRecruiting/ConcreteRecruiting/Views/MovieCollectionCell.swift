@@ -12,13 +12,21 @@ class MovieCollectionCell: UICollectionViewCell {
     
     lazy var bannerImageView: UIImageView = UIImageView()
     
-    lazy var titleLabel: UILabel = UILabel()
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.textColor = UIColor(named: "MainYellow")
+        
+        return label
+    }()
     
     lazy var favoriteButton: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = UIColor(named: "CellBlue")
+
         self.setupLayout()
     }
     
