@@ -234,6 +234,7 @@ extension FavoriteListViewModel {
     ///   - array: Array of movies do be filtered
     ///   - query: Title of the movie to filter
     internal func filterArray(_ array: [Movie], with query: String) -> [Movie] {
+        guard query.isEmpty == false else { return array }
         return array.filter { $0.title.lowercased().contains(query.lowercased()) } // Filter movies with title starting with query text
     }
     
@@ -242,6 +243,8 @@ extension FavoriteListViewModel {
     ///   - array: Array of movies to be filtered
     ///   - filters: Array of custom filters
     internal func filterArray(_ array: [Movie], with filters: [Filter]) -> [Movie] {
+        guard self.isFiltering(filters) else { return array }
+        
         var filteredMovies = [Movie]()
         
         for filter in filters {
