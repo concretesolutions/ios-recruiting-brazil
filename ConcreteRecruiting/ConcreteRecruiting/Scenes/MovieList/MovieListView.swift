@@ -24,6 +24,7 @@ class MovieListView: UIView {
         let view = UIView()
         
         view.backgroundColor = .red
+        view.isHidden = true
         
         return view
     }()
@@ -32,6 +33,7 @@ class MovieListView: UIView {
         let view = UIView()
         
         view.backgroundColor = .gray
+        view.isHidden = true
         
         return view
     }()
@@ -44,12 +46,16 @@ class MovieListView: UIView {
         return activityIndicator
     }()
     
+    lazy var datasource = MovieListDataSource()
+    
       override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.backgroundColor = .systemGray6
-        self.activityIndicator.startAnimating()
         self.setupLayout()
+       
+        collectionView.dataSource = self.datasource
+        
       }
       
       required init?(coder: NSCoder) {
