@@ -11,11 +11,6 @@ import CoreData
 
 class FavoriteMoviesRepository: MoviesRepository {
     func getMovies(fromPage page: Int, completion: @escaping (Result<Page<Movie>, Error>) -> Void) {
-        guard page == 1 else {
-            completion(.success(Page<Movie>()))
-            return
-        }
-        
         let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
 
         do {
@@ -23,7 +18,7 @@ class FavoriteMoviesRepository: MoviesRepository {
 
             completion(.success(Page<Movie>(items: cdMovies.map({ (cdMovie) -> Movie in
                 return Movie(cdMovie: cdMovie)
-            }))))
+            }), totalOfPages: 1)))
         } catch {
             completion(.failure(error))
         }

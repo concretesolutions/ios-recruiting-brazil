@@ -75,7 +75,10 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     }
     
     private func getMovies() {
-        moviesRepository.getMovies(fromPage: moviesPage.nextPage) { [weak self] (result) in
+        guard let nextPage = moviesPage.nextPage else {
+            return
+        }
+        moviesRepository.getMovies(fromPage: nextPage) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {

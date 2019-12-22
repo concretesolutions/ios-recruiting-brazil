@@ -11,15 +11,24 @@ import Foundation
 struct Page<ItemType: Decodable>: Decodable {
     var items: [ItemType]
     var pageNumber: Int
-    var totalOfItems: Int
-    var totalOfPages: Int
+    var totalOfItems: Int?
+    var totalOfPages: Int?
     
     var numberOfItem: Int {
         return items.count
     }
     
-    var nextPage: Int {
-        return pageNumber + 1
+    var nextPage: Int? {
+        let nextPage = pageNumber + 1
+        guard let totalOfPages = self.totalOfPages else {
+            return nextPage
+        }
+        
+        guard nextPage <= totalOfPages else {
+            return nil
+        }
+        
+        return nextPage
     }
     
     enum CodingKeys: String, CodingKey {
@@ -29,22 +38,22 @@ struct Page<ItemType: Decodable>: Decodable {
         case totalOfPages = "total_pages"
     }
     
-    init(items: [ItemType]) {
+    init(items: [ItemType], totalOfPages: Int? = nil) {
         self.init()
         self.items = items
+        self.totalOfPages = totalOfPages
     }
     
     init() {
         self.items = []
         self.pageNumber = 0
-        self.totalOfItems = 0
-        self.totalOfPages = 0
     }
     
     mutating func addNewPage(_ page: Page<ItemType>) {
         items.append(contentsOf: page.items)
         
         pageNumber += 1
+        self.totalOfPages = page.totalOfPages
     }
     
     func isValidPosition(_ position: Int) -> Bool {

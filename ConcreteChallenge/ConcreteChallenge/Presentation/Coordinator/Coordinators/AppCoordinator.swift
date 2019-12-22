@@ -22,13 +22,15 @@ class AppCoordinator: Coordinator {
     private lazy var firstTabCoordinator = GenericNavigationCoordinator(
         rootViewController: rootViewController,
         childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController,
-                                                   viewModelsFactory: self.viewModelsFactory)
+                                                   viewModelsFactory: self.viewModelsFactory,
+                                                   atributtes: ("Popular", .custom("Home", "home")))
     )
     
     private lazy var secondTabCoordinator = GenericNavigationCoordinator(
         rootViewController: rootViewController,
         childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController,
-                                                   viewModelsFactory: FavoriteViewModelsFactory())
+                                                   viewModelsFactory: FavoriteViewModelsFactory(),
+                                                   atributtes: ("Favorites", .system(.favorites)))
     )
     
     private let viewModelsFactory: ViewModelsFactory
@@ -44,8 +46,8 @@ class AppCoordinator: Coordinator {
 
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
-
-        firstTabCoordinator.start()
+        
         secondTabCoordinator.start()
+        firstTabCoordinator.start()
     }
 }
