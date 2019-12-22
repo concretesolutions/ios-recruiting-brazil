@@ -28,3 +28,23 @@ extension UICollectionView {
         self.register(cellType.self, forCellWithReuseIdentifier: cellIdentifier)
     }
 }
+
+extension UITableView {
+    func dequeueReusableCell<CellType: UITableViewCell>(forCellType cellType: CellType.Type, for indexPath: IndexPath) -> CellType {
+        let cellIdentifier = String(describing: cellType)
+        
+        guard let dequeuedCell = self.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CellType else {
+            fatalError("""
+                No collection view cell registered for the type: \(cellIdentifier) and
+                IndexPath: \(indexPath)
+            """)
+        }
+        
+        return dequeuedCell
+    }
+    
+    func registerReusableCell<CellType: UITableViewCell>(forCellType cellType: CellType.Type) {
+        let cellIdentifier = String(describing: cellType)
+        self.register(cellType.self, forCellReuseIdentifier: cellIdentifier)
+    }
+}

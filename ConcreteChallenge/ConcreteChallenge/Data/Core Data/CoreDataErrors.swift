@@ -11,4 +11,6 @@ import Foundation
 enum CoreDataErrors: Error {
     case movieIsAlreadyFaved
     case cannotFindMovieWithID(Int)
+    case suggestionIsAlreadySaved
+    case cannotFindSuggestionWithName(String)
 }

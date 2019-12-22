@@ -53,14 +53,13 @@ class DefaultFavoriteMovieHandlerRepository: FavoriteMovieHandlerRepository {
     }
     
     private func getMovie(withID movieID: Int) -> Movie? {
-          let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
-          movieRequest.predicate = NSPredicate(format: "id == %@", String(movieID))
+        let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
+        movieRequest.predicate = NSPredicate(format: "id == %@", String(movieID))
 
-          guard let cdMovie = try? CoreDataStack.persistentContainer.viewContext.fetch(movieRequest).first else {
-              return nil
-          }
+        guard let cdMovie = try? CoreDataStack.persistentContainer.viewContext.fetch(movieRequest).first else {
+            return nil
+        }
 
-          return Movie(cdMovie: cdMovie)
-      }
-      
+        return Movie(cdMovie: cdMovie)
+    }
 }

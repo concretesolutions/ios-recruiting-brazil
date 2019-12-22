@@ -7,7 +7,12 @@
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="CDSuggestion" representedClassName="CDSuggestion" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="CDMovie" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="CDSuggestion" positionX="-63" positionY="18" width="128" height="73"/>
     </elements>
 </model>

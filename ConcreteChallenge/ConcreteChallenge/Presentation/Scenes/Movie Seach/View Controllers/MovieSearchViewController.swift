@@ -16,8 +16,7 @@ class MovieSearchViewController: UIViewController, ViewCodable {
     )
 
     private let moviesListLayoutGuide = UILayoutGuide()
-    
-    lazy var searchController: UISearchController = {
+    private lazy var searchController: UISearchController = {
         let searchController = UISearchController.init(searchResultsController: nil)
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.definesPresentationContext = true
@@ -29,14 +28,19 @@ class MovieSearchViewController: UIViewController, ViewCodable {
 
         return searchController
     }()
-    
-    lazy var searchOptionsSegmentedControl = UISegmentedControl(items: ["All", "Favorites"]).build {
+    private lazy var searchOptionsSegmentedControl = UISegmentedControl(items: ["All", "Favorites"]).build {
         $0.selectedSegmentIndex = 0
         if #available(iOS 13.0, *) {
             $0.selectedSegmentTintColor = .appLightRed
         } else {
             $0.tintColor = .appLightRed
         }
+    }
+    private lazy var suggestionsTableView = UITableView().build {
+        $0.registerReusableCell(forCellType: UITableViewCell.self)
+        $0.delegate = self
+        $0.dataSource = self
+        $0.tableFooterView = UIView(frame: .zero)
     }
     
     init(viewModel: SeachMoviesViewModel) {
@@ -56,7 +60,7 @@ class MovieSearchViewController: UIViewController, ViewCodable {
     }
     
     func buildHierarchy() {
-        view.addSubview(searchOptionsSegmentedControl)
+        view.addSubViews(searchOptionsSegmentedControl, suggestionsTableView)
         view.addLayoutGuide(moviesListLayoutGuide)
     }
        
@@ -66,6 +70,7 @@ class MovieSearchViewController: UIViewController, ViewCodable {
             .fill(to: view.safeAreaLayoutGuide)
         moviesListLayoutGuide.layout.top.equal(to: searchOptionsSegmentedControl.layout.bottom)
         moviesListLayoutGuide.layout.group.left.right.bottom.fill(to: view.safeAreaLayoutGuide)
+        suggestionsTableView.layout.fill(view: moviesListLayoutGuide, margin: 15)
     }
     
     func applyAditionalChanges() {
@@ -75,6 +80,21 @@ class MovieSearchViewController: UIViewController, ViewCodable {
         searchController.searchBar.becomeFirstResponder()
         searchController.searchBar.resignFirstResponder()
         searchController.resignFirstResponder()
+    }
+    
+    func observeViewModel() {
+        viewModel.needReloadSuggestions = { [weak self] in
+            DispatchQueue.main.async {
+                self?.suggestionsTableView.reloadData()
+            }
+        }
+        
+        viewModel.needChangeSuggestionsVisibility = { [weak self] visible in
+            DispatchQueue.main.async {
+                self?.moviesListViewController.view.isHidden = visible
+                self?.suggestionsTableView.isHidden = !visible
+            }
+        }
     }
 }
 
@@ -90,16 +110,38 @@ extension MovieSearchViewController: UISearchControllerDelegate, UISearchBarDele
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.userTappedSearchButton()
     }
-    
-    func willPresentSearchController(_ searchController: UISearchController) {
-        
-    }
 
     func willDismissSearchController(_ searchController: UISearchController) {
         viewModel.userTappedCancelSearch()
     }
+}
 
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+extension MovieSearchViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UILabel(text: "Suggestions").build {
+            $0.backgroundColor = .black
+            $0.font = .systemFont(ofSize: 15, weight: .bold)
+            $0.textColor = .appTextBlue
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfSuggestions
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let suggestionCell = tableView.dequeueReusableCell(forCellType: UITableViewCell.self, for: indexPath)
         
+        suggestionCell.textLabel?.text = viewModel.suggestionAt(position: indexPath.row)
+        
+        return suggestionCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let suggestion = tableView.cellForRow(at: indexPath)?.textLabel?.text else {
+            return
+        }
+        
+        searchController.searchBar.text = suggestion
     }
 }

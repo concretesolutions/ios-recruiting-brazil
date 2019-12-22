@@ -43,7 +43,7 @@ class DefaultViewModelFactory: ViewModelsFactory {
     }
     
     func searchMoviesViewModel() -> SeachMoviesViewModel {
-        return DefaultSeachMoviesViewModel(moviesSearchRepository: DefaultSearchMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>())) { (movieRepositoryData) -> MoviesListViewModel in
+        return DefaultSeachMoviesViewModel(moviesSearchRepository: DefaultSearchMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()), suggestionsRepository: DefaultSuggestionsRepository()) { (movieRepositoryData) -> MoviesListViewModel in
             return self.movieListViewModel(moviesRepository: movieRepositoryData.repository, emptyStateTitle: movieRepositoryData.emptyState)
         }
     }
