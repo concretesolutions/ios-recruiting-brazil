@@ -51,16 +51,14 @@ class MovieListView: UIView {
 extension MovieListView {
     
     func addViews() {
-        self.addSubview(self.collectionView)
-        self.addSubview(self.errorView)
-        self.addSubview(self.searchErrorView)
-        self.addSubview(self.activityIndicator)
+        self.addSubviews([self.collectionView,
+                        self.errorView,
+                        self.searchErrorView,
+                        self.activityIndicator])
     }
     
     func setupLayout() {
         self.addViews()
-        
-    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),

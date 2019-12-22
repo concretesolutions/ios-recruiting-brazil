@@ -32,9 +32,9 @@ class MovieCollectionCell: UICollectionViewCell {
 extension MovieCollectionCell {
     
     func addViews() {
-        self.addSubview(self.bannerImageView)
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.favoriteButton)
+        self.addSubviews([self.bannerImageView,
+                        self.titleLabel,
+                        self.favoriteButton])
     }
     
     func setupLayout() {
