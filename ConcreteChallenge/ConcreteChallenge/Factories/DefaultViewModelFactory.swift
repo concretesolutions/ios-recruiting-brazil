@@ -18,10 +18,17 @@ struct DefaultViewModelFactory: ViewModelsFactory {
         )
     }
     
+    func movieViewModelWithFavoriteOptions(movie: Movie) -> MovieViewModelWithFavoriteOptions {
+        return DefaultMovieViewModelWithFavoriteOptions(
+            favoriteHandlerRepository: DefaultFavoriteMovieHandlerRepository(),
+            decorated: movieViewModel(movie: movie) as! DefaultMovieViewModel
+        )
+    }
+    
     func movieListViewModel() -> MoviesListViewModel {
         return DefaultMoviesListViewModel(
             moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
-            movieViewModelInjector: movieViewModel
+            movieViewModelInjector: movieViewModelWithFavoriteOptions
         )
     }
 }

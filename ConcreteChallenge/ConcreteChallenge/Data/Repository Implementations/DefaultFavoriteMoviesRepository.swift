@@ -9,30 +9,16 @@
 import Foundation
 import CoreData
 
-class DefaultFavoriteMoviesRepository: FavoriteMoviesRepository {
-    
-    func getMovies(fromPage page: Int, completion: @escaping (Result<Page<Movie>, Error>) -> Void) {
-        let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
-
-        do {
-            let cdMovies = try CoreDataStack.persistentContainer.viewContext.fetch(movieRequest)
-
-            completion(.success(Page<Movie>(items: cdMovies.map({ (cdMovie) -> Movie in
-                return Movie(cdMovie: cdMovie)
-            }))))
-        } catch {
-            completion(.failure(error))
-        }
-    }
+class DefaultFavoriteMovieHandlerRepository: FavoriteMovieHandlerRepository {
     
     func addMovieToFavorite(_ movie: Movie, completion: @escaping (ActionResult<Error>) -> Void) {
-        guard getMovie(withID: String(movie.id)) == nil else {
+        guard getMovie(withID: movie.id) == nil else {
             completion(.failure(CoreDataErrors.movieIsAlreadyFaved))
             return
         }
 
         do {
-            CDMovie(movie: movie)
+            CDMovie(movie: movie, context: CoreDataStack.persistentContainer.viewContext)
             try CoreDataStack.persistentContainer.viewContext.save()
 
             completion(.success(()))
@@ -41,17 +27,14 @@ class DefaultFavoriteMoviesRepository: FavoriteMoviesRepository {
         }
     }
 
-    private func getMovie(withID movieID: String) -> Movie? {
-        let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
-        movieRequest.predicate = NSPredicate(format: "id == %@", movieID)
-
-        guard let cdMovie = try? CoreDataStack.persistentContainer.viewContext.fetch(movieRequest).first else {
-            return nil
+    func movieIsFavorite(_ movie: Movie, completion: @escaping (Result<Bool, Error>) -> Void) {
+        if getMovie(withID: movie.id) != nil {
+            completion(.success(true))
+        } else {
+            completion(.success(false))
         }
-
-        return Movie(cdMovie: cdMovie)
     }
-     
+    
     func removeMovieFromFavorite(movieID: Int, completion: @escaping (ActionResult<Error>) -> Void) {
         let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
         movieRequest.predicate = NSPredicate(format: "id == %@", movieID)
@@ -68,4 +51,16 @@ class DefaultFavoriteMoviesRepository: FavoriteMoviesRepository {
             completion(.failure(error))
         }
     }
+    
+    private func getMovie(withID movieID: Int) -> Movie? {
+          let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
+          movieRequest.predicate = NSPredicate(format: "id == %@", String(movieID))
+
+          guard let cdMovie = try? CoreDataStack.persistentContainer.viewContext.fetch(movieRequest).first else {
+              return nil
+          }
+
+          return Movie(cdMovie: cdMovie)
+      }
+      
 }

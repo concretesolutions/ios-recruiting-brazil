@@ -17,9 +17,13 @@ protocol MovieViewModel: AnyObject {
     func movieViewWasReused()
 }
 
+protocol MovieViewModelWithData: MovieViewModel {
+    var movie: Movie { get }
+}
+
 typealias ImageRouter = (_ imagePath: String) -> Route
 
-class DefaultMovieViewModel: MovieViewModel {
+class DefaultMovieViewModel: MovieViewModelWithData {
     var movieAtributtes: (title: String, description: String, release: String) {
         return (movie.title ?? "No Title.", movie.overview ?? "No Title.", movie.releaseDate ?? "No Release Date.")
     }
@@ -43,9 +47,9 @@ class DefaultMovieViewModel: MovieViewModel {
         }
     }
     
+    let movie: Movie
     private let imageRepository: MovieImageRepository
     private let genresRepository: GenresRepository
-    private let movie: Movie
     private var movieImage: UIImage?
     private var imageTaskCancelCompletion: CancellCompletion?
     private var movieGenres: String? {
@@ -122,4 +126,3 @@ class DefaultMovieViewModel: MovieViewModel {
 private struct Constants {
     static let placeholderImage = UIImage(named: "placeholderImage")!
 }
-

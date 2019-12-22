@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Decodable {
     var id: Int
     var title: String?
     var posterPath: String?

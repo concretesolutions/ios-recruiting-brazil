@@ -9,7 +9,7 @@
 import Foundation
 
 /// Parses JSON Data to Swift objects using JSONDecoder. The ParsableType needs to be Codable to be parsed.
-public struct JSONParser<ParsableType: Codable>: Parser {
+public struct JSONParser<ParsableType: Decodable>: Parser {
     let jsonDecoder: JSONDecoder
     
     /// Initilizes the JSONParser with a jsonDecoder

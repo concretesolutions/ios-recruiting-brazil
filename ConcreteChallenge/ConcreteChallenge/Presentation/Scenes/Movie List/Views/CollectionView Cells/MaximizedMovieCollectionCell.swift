@@ -12,24 +12,18 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
     var viewModel: MovieViewModel? {
         didSet {
             let viewModel = self.viewModel!
-
             oldValue?.movieViewWasReused()
 
-            viewModel.needReplaceImage = { [weak self] image in
-                DispatchQueue.main.async {
-                    self?.movieImageView.image = image
-                    self?.headerBackgroundView.image = image
-                }
+            handleMovieViewModel(viewModel)
+            
+            if let favoriteViewModel = self.favoriteViewModel {
+                handleFavoritesViewModel(favoriteViewModel)
             }
-            viewModel.needReplaceGenres = { [weak self] genres in
-                DispatchQueue.main.async {
-                    self?.genresLabel.text = genres
-                }
-            }
-
-            titleLabel.text = viewModel.movieAtributtes.title
-            releaseLabel.text = viewModel.movieAtributtes.release
         }
+    }
+    
+    var favoriteViewModel: MovieViewModelWithFavoriteOptions? {
+        return viewModel as? MovieViewModelWithFavoriteOptions
     }
     
     private let headerBackgroundView = UIImageView().build {
@@ -55,9 +49,11 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
         $0.font = .systemFont(ofSize: 14, weight: .semibold)
         $0.textColor = .white
     }
-    private let faveImageView = UIImageView().build {
+    private lazy var faveImageView = UIImageView().build {
         $0.contentMode = .scaleAspectFit
         $0.setStateTo(.unfaved)
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(favoriteButtonWasTapped)))
     }
     private let footerView = UIView().build {
         $0.backgroundColor = UIColor.appPurple.withAlphaComponent(0.5)
@@ -129,5 +125,34 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
     func applyAditionalChanges() {
         self.layer.cornerRadius = 15
         self.clipsToBounds = true
+    }
+    
+    @objc func favoriteButtonWasTapped() {
+        self.favoriteViewModel?.usedTappedToFavoriteMovie()
+    }
+    
+    private func handleMovieViewModel(_ viewModel: MovieViewModel) {
+        viewModel.needReplaceImage = { [weak self] image in
+            DispatchQueue.main.async {
+                self?.movieImageView.image = image
+                self?.headerBackgroundView.image = image
+            }
+        }
+        viewModel.needReplaceGenres = { [weak self] genres in
+            DispatchQueue.main.async {
+                self?.genresLabel.text = genres
+            }
+        }
+
+        titleLabel.text = viewModel.movieAtributtes.title
+        releaseLabel.text = viewModel.movieAtributtes.release
+    }
+    
+    private func handleFavoritesViewModel(_ viewModel: MovieViewModelWithFavoriteOptions) {
+        viewModel.needUpdateFavorite = { [weak self] isFaved in
+            DispatchQueue.main.async {
+                self?.faveImageView.setStateTo(isFaved ? .faved : .unfaved)
+            }
+        }
     }
 }

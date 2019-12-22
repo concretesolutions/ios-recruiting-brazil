@@ -9,5 +9,6 @@
 import UIKit
 
 protocol MovieView: UIView {
+    
     var viewModel: MovieViewModel? { get set }
 }

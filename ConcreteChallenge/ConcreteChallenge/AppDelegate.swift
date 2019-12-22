@@ -16,19 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let appCoorinator = AppCoordinator(viewModelsFactory: DefaultViewModelFactory())
     
-//    let viewModel = DefaultMoviesListViewModel(
-//        moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
-//        imagesRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider())
-//    )
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         appCoorinator.start()
-//
-//        window?.rootViewController = PopularMoviesViewController(viewModel: viewModel)
-//        window?.makeKeyAndVisible()
-//
+
         return true
     }
 }

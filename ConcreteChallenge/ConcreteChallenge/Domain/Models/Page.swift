@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Page<ItemType: Codable>: Codable {
+struct Page<ItemType: Decodable>: Decodable {
     var items: [ItemType]
     var pageNumber: Int
     var totalOfItems: Int
