@@ -25,7 +25,10 @@ class MoviesListViewController: UIViewController {
     override func viewDidLoad() {
         
         view.addSubViews(moviesListView)
-        moviesListView.layout.fill(view: view.safeAreaLayoutGuide)
+        
+        moviesListView.layout.group
+        .top(10).left(10).right(-10).bottom
+        .fill(to: view.safeAreaLayoutGuide)
     }
 }
  

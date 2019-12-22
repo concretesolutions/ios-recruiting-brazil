@@ -19,8 +19,8 @@ class AppCoordinator: Coordinator {
         return tabBarController
     }()
     
-    private lazy var popularMoviesCoordinator: PopularMoviesCoordinator = {
-        let popularMoviesCoordinator = PopularMoviesCoordinator(
+    private lazy var popularMoviesCoordinator: ListOfMoviesCoordinator = {
+        let popularMoviesCoordinator = ListOfMoviesCoordinator(
             rootViewController: rootViewController,
             viewModelsFactory: self.viewModelsFactory,
             atributtes: ("Popular", .custom("Home", "home"))
@@ -37,7 +37,7 @@ class AppCoordinator: Coordinator {
         return popularMoviesCoordinator
     }()
     
-    private lazy var favoriteMoviesCoordinator: PopularMoviesCoordinator = {
+    private lazy var favoriteMoviesCoordinator: ListOfMoviesCoordinator = {
         let favoriteMoviesCoordinator = FavoriteMoviesCoordinator(
             rootViewController: rootViewController,
             viewModelsFactory: FavoriteViewModelsFactory(),
