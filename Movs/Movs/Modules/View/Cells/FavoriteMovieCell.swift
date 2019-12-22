@@ -17,7 +17,7 @@ final class FavoriteMovieCell: UITableViewCell {
 
     // MARK: - Reusable Identifier
 
-    static let reusableIdentifier: String = "FavoriteMovieCell"
+    static let reuseIdentifier: String = "FavoriteMovieCell"
 
     // MARK: - Subviews
 
@@ -73,13 +73,12 @@ final class FavoriteMovieCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.imageView?.backgroundColor = .systemRed
         self.selectionStyle = .none
         self.setupView()
     }
 
     convenience init(frame: CGRect) {
-        self.init(style: .default, reuseIdentifier: FavoriteMovieCell.reusableIdentifier)
+        self.init(style: .default, reuseIdentifier: FavoriteMovieCell.reuseIdentifier)
         self.frame = frame
     }
 

@@ -107,7 +107,7 @@ extension PopularMoviesViewController: CollectionViewScreenDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCell.reusableIdentifier, for: indexPath) as? PopularMovieCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularMovieCell.reuseIdentifier, for: indexPath) as? PopularMovieCell else {
             fatalError("Wrong collection view cell type")
         }
 

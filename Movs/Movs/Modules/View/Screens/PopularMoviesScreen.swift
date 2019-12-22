@@ -24,7 +24,7 @@ final class PopularMoviesScreen: UIView {
 
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        view.register(PopularMovieCell.self, forCellWithReuseIdentifier: PopularMovieCell.reusableIdentifier)
+        view.register(PopularMovieCell.self, forCellWithReuseIdentifier: PopularMovieCell.reuseIdentifier)
         view.delegate = self.delegate
         view.dataSource = self.delegate
         view.backgroundColor = .systemBackground

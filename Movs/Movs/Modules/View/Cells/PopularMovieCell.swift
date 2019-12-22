@@ -17,7 +17,7 @@ class PopularMovieCell: UICollectionViewCell {
 
     // MARK: - Reusable Identifier
 
-    static let reusableIdentifier: String = "PopularMovieCell"
+    static let reuseIdentifier: String = "PopularMovieCell"
 
     // MARK: - Subviews
 
