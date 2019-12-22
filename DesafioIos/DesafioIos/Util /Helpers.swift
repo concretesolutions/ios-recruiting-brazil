@@ -57,3 +57,4 @@ func formatGenres(list:[Int]?) -> String{
     }
     return value
 }
+

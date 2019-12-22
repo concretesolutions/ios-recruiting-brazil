@@ -8,7 +8,7 @@
 
 import Foundation
 // MARK: - Movies
-struct Movies: Codable {
+public struct Movies: Codable {
     let page, totalResults, totalPages: Int
     let results: [Movie]
 
@@ -21,7 +21,7 @@ struct Movies: Codable {
 }
 
 // MARK: - Result
-struct Movie: Codable{
+public struct Movie: Codable{
     let id: Int
     let backdropPath: String?
     let genreIDS: [Int]?

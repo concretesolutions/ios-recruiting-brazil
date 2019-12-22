@@ -8,8 +8,8 @@
 
 import UIKit
 import SnapKit
-final class MovieCellView: UICollectionViewCell {
-    var movie:Movie? {
+final class MovieCollectionCellView: UICollectionViewCell {
+    var movie:Movie?{
         didSet{
             if let movie = self.movie{
                 setupUIData(movie: movie)
@@ -52,10 +52,13 @@ final class MovieCellView: UICollectionViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    private func setupUIData(movie: Movie){
-        imageBackground.loadImageMovie(movie.backdropPath, width: 500)
-        nameMovie.text = movie.title
-        movieIsfavorite(by:movie.id) ? favoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal) : favoriteButton.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+    func setupUIData(movie: Movie){
+        DispatchQueue.main.async {
+            self.imageBackground.loadImageMovie(movie.backdropPath, width: 500)
+            self.nameMovie.text = movie.title
+            movieIsfavorite(by:movie.id) ? self.favoriteButton.setImage(#imageLiteral(resourceName: "favorite_full_icon"), for: .normal) : self.favoriteButton.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+        }
+        
     }
     override init(frame: CGRect) {
         super.init(frame:.zero)
@@ -64,9 +67,11 @@ final class MovieCellView: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    override func prepareForReuse() {
+        self.movie  = nil
+    }
 }
-extension MovieCellView: CodeView {
+extension MovieCollectionCellView: CodeView {
     func buildViewHierarchy() {
         self.contentView.addSubview(imageBackground)
         container.addArrangedSubview(nameMovie)

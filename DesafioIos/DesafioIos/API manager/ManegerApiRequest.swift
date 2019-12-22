@@ -7,16 +7,21 @@
 //
 
 import Foundation
-final class ManegerApiRequest{
+public final class ManegerApiRequest{
     private var numPages = 1
     var dataToSend:[Movie] = [] {
         didSet{
             if Int(Double(self.numPages) * 20.0 * 0.8) <= self.dataToSend.count{
                 self.delegate?.sendMovie(movies: self.dataToSend)
-                self.delegate?.sendStatus(status: .finish)
+                let seconds = 5.0
+                DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                    self.delegate?.sendStatus(status: .finish)
+                   
+                }
             }
         }
     }
+   
     static let apiKey = "21f18125f6767ae14a2f2577d85de3db"
     var delegate:SendDataApi?
     
@@ -100,9 +105,10 @@ final class ManegerApiRequest{
     func getGenres(){
         self.requestGenres(url: urlGenresMovies, data: queryGenre) { (allGenres) in
             ManegerApiRequest.genres = allGenres.genres
+            print("request genres")
         }
     }
-    
+
     // MARK: - request Genres
     func requestGenres(url:String,data:[String:Any],completion: @escaping (_ results: AllGenres) -> Void){
         guard var urlComponents = URLComponents(string: url) else{

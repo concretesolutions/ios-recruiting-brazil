@@ -12,7 +12,7 @@ import UIKit
 
 let EntityName = "FavoriteMovies"
 //MARK: saved Object
-func save(movie: Movie) {
+public func save(movie: Movie) {
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -44,7 +44,7 @@ func save(movie: Movie) {
     }
 }
 // MARK: Erase a Object
-func erase(object:NSManagedObject){
+public func erase(object:NSManagedObject){
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -61,7 +61,7 @@ func erase(object:NSManagedObject){
     }
 }
 // MARK: Fetch Core Data
-func fetch() -> [NSManagedObject]{
+public func fetch() -> [NSManagedObject]{
     var movies: [NSManagedObject] = []
     guard let appDelegate =
         UIApplication.shared.delegate as? AppDelegate else {
