@@ -28,34 +28,39 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
             }
 
             titleLabel.text = viewModel.movieAtributtes.title
+            releaseLabel.text = viewModel.movieAtributtes.release
         }
     }
     
-    let headerBackgroundView = UIImageView().build {
+    private let headerBackgroundView = UIImageView().build {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
-    
-    let headerContentView = UIView().build {
+    private let headerContentView = UIView().build {
         $0.backgroundColor = UIColor.appPurple.withAlphaComponent(0.8)
     }
-    
-    let movieImageView = UIImageView().build {
+    private let movieImageView = UIImageView().build {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
     }
-    
-    let titleLabel = UILabel().build {
+    private let titleLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 25, weight: .bold)
         $0.textColor = .appTextPurple
     }
-    let genresLabel = UILabel().build {
+    private let genresLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 15, weight: .bold)
         $0.textColor = .appTextBlue
     }
-    let releaseLabel = UILabel().build {
+    private let releaseLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 14, weight: .semibold)
         $0.textColor = .white
+    }
+    private let faveImageView = UIImageView().build {
+        $0.contentMode = .scaleAspectFit
+        $0.setStateTo(.unfaved)
+    }
+    private let footerView = UIView().build {
+        $0.backgroundColor = UIColor.appPurple.withAlphaComponent(0.5)
     }
     
     override init(frame: CGRect) {
@@ -68,8 +73,9 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
     }
     
     func buildHierarchy() {
-        addSubViews(headerBackgroundView, headerContentView, movieImageView)
+        addSubViews(headerBackgroundView, headerContentView, movieImageView, footerView)
         headerContentView.addSubViews(titleLabel, genresLabel, releaseLabel)
+        footerView.addSubview(faveImageView)
     }
     
     func addConstraints() {
@@ -101,10 +107,17 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
             $0.top.equal(to: genresLabel.layout.bottom, offsetBy: 5)
             $0.bottom.equalToSuperView(margin: -5)
         }
-        
         movieImageView.layout.build {
             $0.top.equal(to: headerContentView.layout.bottom)
             $0.group.left.right.bottom.fillToSuperView()
+        }
+        footerView.layout.build {
+            $0.group.bottom.left.right.fillToSuperView()
+            $0.height.equal(to: 50)
+        }
+        faveImageView.layout.build {
+            $0.group.left(10).centerY.height(.multiply(0.8)).fillToSuperView()
+            $0.width.equal(to: $0.height)
         }
         
         movieImageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)

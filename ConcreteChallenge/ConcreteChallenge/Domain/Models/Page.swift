@@ -29,6 +29,11 @@ struct Page<ItemType: Codable>: Codable {
         case totalOfPages = "total_pages"
     }
     
+    init(items: [ItemType]) {
+        self.init()
+        self.items = items
+    }
+    
     init() {
         self.items = []
         self.pageNumber = 0

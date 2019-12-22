@@ -1,5 +1,5 @@
 //
-//  MovieDetailViewModel.swift
+//  CoreDataErrors.swift
 //  ConcreteChallenge
 //
 //  Created by Elias Paulino on 21/12/19.
@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+enum CoreDataErrors: Error {
+    case movieIsAlreadyFaved
+    case cannotFindMovieWithID(Int)
+}
