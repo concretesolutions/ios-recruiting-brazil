@@ -59,4 +59,8 @@ struct Page<ItemType: Decodable>: Decodable {
     func isValidPosition(_ position: Int) -> Bool {
         return position >= 0 && position < numberOfItem
     }
+    
+    func positionOf(_ whereCompletion: (_ item: ItemType) -> Bool) -> Int? {
+        return self.items.firstIndex(where: whereCompletion)
+    }
 }

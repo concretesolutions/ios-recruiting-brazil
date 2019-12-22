@@ -17,11 +17,17 @@ protocol MoviesListViewModel: AnyObject {
     var needShowError: ((_ message: String) -> Void)? { get set }
     var needShowNewMovies: ((_ atRange: Range<Int>) -> Void)? { get set }
     var needReloadAllMovies: (() -> Void)? { get set }
+    var needReloadMovieView: ((_ position: Int) -> Void)? { get set }
+    var needDeleteMovieView: ((_ position: Int) -> Void)? { get set }
+    var needInsertMovieView: ((_ position: Int) -> Void)? { get set }
     
     func thePageReachedTheEnd()
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel
     func viewStateChanged()
     func userSelectedMovie(atPosition position: Int)
+    func reloadMovie(_ movie: Movie)
+    func insertMovie(_ movie: Movie)
+    func deleteMovie(_ movie: Movie)
 }
 
 enum ListState {
@@ -34,6 +40,10 @@ enum ListState {
             self = .grid
         }
     }
+}
+
+enum MovieViewModelInjetorData {
+    case grid(Movie), cards(Movie)
 }
 
 typealias Injector<Injected, Data> = (Data) -> Injected
@@ -57,11 +67,14 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     
     var needReloadAllMovies: (() -> Void)?
     var needShowError: ((_ message: String) -> Void)?
+    var needReloadMovieView: ((Int) -> Void)?
+    var needDeleteMovieView: ((Int) -> Void)?
+    var needInsertMovieView: ((Int) -> Void)?
     
     weak var navigator: MoviesListViewModelNavigator?
     
     private let moviesRepository: MoviesRepository
-    private let movieViewModelInjector: Injector<MovieViewModel, Movie>
+    private let movieViewModelInjector: Injector<MovieViewModel, MovieViewModelInjetorData>
     private var moviesPage = Page<Movie>()
     private var state = ListState.grid {
         didSet {
@@ -69,7 +82,7 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         }
     }
     
-    init(moviesRepository: MoviesRepository, movieViewModelInjector: @escaping Injector<MovieViewModel, Movie>) {
+    init(moviesRepository: MoviesRepository, movieViewModelInjector: @escaping Injector<MovieViewModel, MovieViewModelInjetorData>) {
         self.moviesRepository = moviesRepository
         self.movieViewModelInjector = movieViewModelInjector
     }
@@ -112,7 +125,14 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
             fatalError("The \(position) position is wrong, the total of movies is \(moviesPage.numberOfItem)")
         }
 
-        return movieViewModelInjector(moviesPage.items[position])
+        switch self.state {
+        case .grid:
+            return movieViewModelInjector(.grid(moviesPage.items[position]))
+        case .cards:
+            let movieViewModel = movieViewModelInjector(.cards(moviesPage.items[position]))
+            movieViewModel.withFavoriteOptions?.navigator = self
+            return movieViewModel
+        }
     }
     
     func viewStateChanged() {
@@ -125,5 +145,45 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         }
         
         navigator?.movieWasSelected(movie: moviesPage.items[position])
+    }
+    
+    func reloadMovie(_ movie: Movie) {
+        findPositionOf(movie: movie) { (moviePosition) in
+            needReloadMovieView?(moviePosition)
+        }
+    }
+    
+    func deleteMovie(_ movie: Movie) {
+        findPositionOf(movie: movie) { (moviePosition) in
+            self.moviesPage.items.remove(at: moviePosition)
+            self.needDeleteMovieView?(moviePosition)
+        }
+    }
+    
+    func insertMovie(_ movie: Movie) {
+        self.moviesPage.items.insert(movie, at: 0)
+        self.needInsertMovieView?(0)
+    }
+    
+    private func findPositionOf(movie: Movie, completion: (Int) -> Void) {
+        let favedMoviePosition = self.moviesPage.positionOf { (currentMovie) -> Bool in
+            return currentMovie.id == movie.id
+        }
+
+        guard let safefavedMoviePosition = favedMoviePosition else {
+            return
+        }
+           
+        completion(safefavedMoviePosition)
+    }
+}
+
+extension DefaultMoviesListViewModel: MovieViewModelWithFavoriteOptionsNavigator {
+    func userFavedMovie(movie: Movie) {
+        self.navigator?.movieWasFaved(movie: movie)
+    }
+    
+    func userUnFavedMovie(movie: Movie) {
+        self.navigator?.movieWasUnfaved(movie: movie)
     }
 }

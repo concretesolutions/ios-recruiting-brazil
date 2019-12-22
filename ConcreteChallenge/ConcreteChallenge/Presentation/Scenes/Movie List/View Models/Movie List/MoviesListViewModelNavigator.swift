@@ -10,4 +10,6 @@ import Foundation
 
 protocol MoviesListViewModelNavigator: AnyObject {
     func movieWasSelected(movie: Movie)
+    func movieWasFaved(movie: Movie)
+    func movieWasUnfaved(movie: Movie)
 }

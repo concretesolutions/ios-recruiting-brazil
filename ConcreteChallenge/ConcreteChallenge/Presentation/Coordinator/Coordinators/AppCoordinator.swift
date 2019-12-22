@@ -18,19 +18,47 @@ class AppCoordinator: Coordinator {
     
         return tabBarController
     }()
+    
+    private lazy var popularMoviesCoordinator: PopularMoviesCoordinator = {
+        let popularMoviesCoordinator = PopularMoviesCoordinator(
+            rootViewController: rootViewController,
+            viewModelsFactory: self.viewModelsFactory,
+            atributtes: ("Popular", .custom("Home", "home"))
+        )
+        
+        popularMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in
+            self?.favoriteMoviesCoordinator.movieRemovedInOtherScene(movie: movie)
+        }
+        
+        popularMoviesCoordinator.userFavedMovieCompletion = { [weak self] movie in
+            self?.favoriteMoviesCoordinator.movieWasAddedInOtherScene(movie: movie)
+        }
+        
+        return popularMoviesCoordinator
+    }()
+    
+    private lazy var favoriteMoviesCoordinator: PopularMoviesCoordinator = {
+        let favoriteMoviesCoordinator = FavoriteMoviesCoordinator(
+            rootViewController: rootViewController,
+            viewModelsFactory: FavoriteViewModelsFactory(),
+            atributtes: ("Favorites", .system(.favorites))
+        )
+        
+        favoriteMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in
+            self?.popularMoviesCoordinator.movieChangedInOtherScene(movie: movie)
+        }
+        
+        return favoriteMoviesCoordinator
+    }()
 
     private lazy var firstTabCoordinator = GenericNavigationCoordinator(
         rootViewController: rootViewController,
-        childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController,
-                                                   viewModelsFactory: self.viewModelsFactory,
-                                                   atributtes: ("Popular", .custom("Home", "home")))
+        childCoordinator: popularMoviesCoordinator
     )
     
     private lazy var secondTabCoordinator = GenericNavigationCoordinator(
         rootViewController: rootViewController,
-        childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController,
-                                                   viewModelsFactory: FavoriteViewModelsFactory(),
-                                                   atributtes: ("Favorites", .system(.favorites)))
+        childCoordinator: favoriteMoviesCoordinator
     )
     
     private let viewModelsFactory: ViewModelsFactory

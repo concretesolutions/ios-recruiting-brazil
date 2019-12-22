@@ -17,3 +17,7 @@ import UIKit
     /// - Parameter previousController: the viewcontroller that was presented before the current coordinator be started.
     func start(previousController: UIViewController?)
 }
+
+protocol StopableCoordinator: Coordinator {
+    func stop(completion: (() -> Void)?)
+}

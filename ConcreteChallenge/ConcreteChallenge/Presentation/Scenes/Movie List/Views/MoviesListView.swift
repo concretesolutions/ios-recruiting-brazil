@@ -68,7 +68,40 @@ class MoviesListView: UIView, ViewCodable {
             }
         }
         
+        viewModel.needReloadMovieView = { [weak self] moviePosition in
+            DispatchQueue.main.async {
+                self?.findMovieCell(atPosition: moviePosition) { (movieView) in
+                    movieView.viewModel = self?.viewModel.viewModelFromMovie(atPosition: moviePosition)
+                }
+
+                self?.moviesCollectionView.reloadItems(at: [IndexPath(item: moviePosition, section: 0)])
+            }
+        }
+        
+        viewModel.needDeleteMovieView = { [weak self] moviePosition in
+            DispatchQueue.main.async {
+                let movieIndexPath = IndexPath(row: moviePosition, section: 0)
+                self?.moviesCollectionView.deleteItems(at: [movieIndexPath])
+            }
+        }
+        
+        viewModel.needInsertMovieView = { [weak self] moviePosition in
+            DispatchQueue.main.async {
+                let movieIndexPath = IndexPath(row: moviePosition, section: 0)
+                self?.moviesCollectionView.insertItems(at: [movieIndexPath])
+            }
+        }
+        
         viewModel.thePageReachedTheEnd()
+    }
+    
+    private func findMovieCell(atPosition position: Int, completion: (MovieView) -> Void) {
+        let movieIndexPath = IndexPath(row: position, section: 0)
+        guard let movieView = self.moviesCollectionView.cellForItem(at: movieIndexPath) as? MovieView else {
+            return
+        }
+        
+        completion(movieView)
     }
 }
 

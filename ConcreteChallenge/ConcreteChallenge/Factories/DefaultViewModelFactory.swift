@@ -27,9 +27,15 @@ class DefaultViewModelFactory: ViewModelsFactory {
     
     func movieListViewModel() -> MoviesListViewModel {
         return DefaultMoviesListViewModel(
-            moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
-            movieViewModelInjector: movieViewModelWithFavoriteOptions
-        )
+            moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>())
+        ) { (injectorData) -> MovieViewModel in
+            switch injectorData {
+            case .cards(let movie):
+                return self.movieViewModelWithFavoriteOptions(movie: movie)
+            case .grid(let movie):
+                return self.movieViewModel(movie: movie)
+            }
+        }
     }
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class PopularMoviesViewController: UIViewController, ViewCodable {
-    private var viewModel: MoviesListViewModel
+    var viewModel: MoviesListViewModel
     private lazy var moviesListViewController = MoviesListViewController(viewModel: self.viewModel)
     private let moviesListLayoutGuide = UILayoutGuide()
     

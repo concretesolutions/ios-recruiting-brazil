@@ -30,17 +30,35 @@ extension UITabBarItem {
     }
 }
 
-class PopularMoviesCoordinator: Coordinator {
+typealias UserFavedMovieEvent = (_ movie: Movie) -> Void
+
+class PopularMoviesCoordinator: Coordinator, MoviesListViewModelNavigator {
     var rootViewController: RootViewController
     
-    private lazy var popularMoviesViewController: PopularMoviesViewController = {
+    var userFavedMovieCompletion: UserFavedMovieEvent?
+    var userUnFavedMovieCompletion: UserFavedMovieEvent?
+    
+    lazy var popularMoviesViewController: PopularMoviesViewController = {
         let viewModel = self.viewModelsFactory.movieListViewModel()
         viewModel.navigator = self
         
         let popularMoviesViewController = PopularMoviesViewController(viewModel: viewModel)
         return popularMoviesViewController
     }()
-    private var movieDetailCoordinator: MovieDetailCoordinator?
+    
+    var movieDetailCoordinator: MovieDetailCoordinator? {
+        didSet {
+            movieDetailCoordinator?.userFavedMovieCompletion = { [weak self] movie in
+                self?.popularMoviesViewController.viewModel.reloadMovie(movie)
+                self?.userFavedMovieCompletion?(movie)
+            }
+            
+            movieDetailCoordinator?.userUnFavedMovieCompletion = { [weak self] movie in
+                self?.popularMoviesViewController.viewModel.reloadMovie(movie)
+                self?.userUnFavedMovieCompletion?(movie)
+            }
+        }
+    }
     private var viewModelsFactory: ViewModelsFactory
     private let atributtes: PopularCoordinatorAtributtes
     
@@ -58,9 +76,19 @@ class PopularMoviesCoordinator: Coordinator {
         rootViewController.tabBarItem = UITabBarItem(tabbarAttributtes: atributtes.tabbarAttributtes)
         rootViewController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
     }
-}
-
-extension PopularMoviesCoordinator: MoviesListViewModelNavigator {
+    
+    func movieChangedInOtherScene(movie: Movie) {
+        self.popularMoviesViewController.viewModel.reloadMovie(movie)
+    }
+    
+    func movieWasAddedInOtherScene(movie: Movie) {
+        self.popularMoviesViewController.viewModel.insertMovie(movie)
+    }
+    
+    func movieRemovedInOtherScene(movie: Movie) {
+        self.popularMoviesViewController.viewModel.deleteMovie(movie)
+    }
+    
     func movieWasSelected(movie: Movie) {
         movieDetailCoordinator = MovieDetailCoordinator(
             rootViewController: rootViewController,
@@ -68,5 +96,31 @@ extension PopularMoviesCoordinator: MoviesListViewModelNavigator {
             viewModelsFactory: self.viewModelsFactory
         )
         movieDetailCoordinator?.start(previousController: popularMoviesViewController)
+    }
+    
+    func movieWasFaved(movie: Movie) {
+        self.userFavedMovieCompletion?(movie)
+    }
+
+    func movieWasUnfaved(movie: Movie) {
+        self.userUnFavedMovieCompletion?(movie)
+    }
+}
+
+class FavoriteMoviesCoordinator: PopularMoviesCoordinator {
+    override var movieDetailCoordinator: MovieDetailCoordinator? {
+        didSet {
+            movieDetailCoordinator?.userUnFavedMovieCompletion = { [weak self] movie in
+                self?.movieDetailCoordinator?.stop(completion: {
+                    self?.popularMoviesViewController.viewModel.deleteMovie(movie)
+                    self?.userUnFavedMovieCompletion?(movie)
+                })
+            }
+        }
+    }
+    
+    override func movieWasUnfaved(movie: Movie) {
+        self.popularMoviesViewController.viewModel.deleteMovie(movie)
+        self.userUnFavedMovieCompletion?(movie)
     }
 }

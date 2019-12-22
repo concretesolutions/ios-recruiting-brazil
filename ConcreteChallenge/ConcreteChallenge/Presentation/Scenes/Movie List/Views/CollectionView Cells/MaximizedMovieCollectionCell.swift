@@ -11,7 +11,10 @@ import UIKit
 class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView {
     var viewModel: MovieViewModel? {
         didSet {
-            let viewModel = self.viewModel!
+            guard let viewModel = self.viewModel else {
+                return
+            }
+
             oldValue?.movieViewWasReused()
 
             handleMovieViewModel(viewModel)

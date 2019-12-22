@@ -10,11 +10,20 @@ import Foundation
 
 protocol MovieViewModelWithFavoriteOptions: MovieViewModel {
     var needUpdateFavorite: ((_ faved: Bool) -> Void)? { get set}
+    var navigator: MovieViewModelWithFavoriteOptionsNavigator? { get set }
     
     func usedTappedToFavoriteMovie()
 }
 
+extension MovieViewModel {
+    var withFavoriteOptions: MovieViewModelWithFavoriteOptions? {
+        return self as? MovieViewModelWithFavoriteOptions
+    }
+}
+
 class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieViewModelWithFavoriteOptions {
+    weak var navigator: MovieViewModelWithFavoriteOptionsNavigator?
+    
     var needUpdateFavorite: ((Bool) -> Void)? {
         didSet {
             self.needUpdateFavorite?(self.isFaved ?? false)
@@ -52,21 +61,23 @@ class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieVi
     }
     
     private func getFavoriteInformation() {
-        favoriteHandlerRepository.movieIsFavorite(movie) { (result) in
+        favoriteHandlerRepository.movieIsFavorite(movie) { [weak self] (result) in
             switch result {
             case .success(let isFaved):
-                self.isFaved = isFaved
+                self?.isFaved = isFaved
             case .failure:
-                self.isFaved = false
+                self?.isFaved = false
             }
         }
     }
     
     private func addToFavorites() {
-        favoriteHandlerRepository.addMovieToFavorite(movie) { (result) in
+        favoriteHandlerRepository.addMovieToFavorite(movie) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success:
                 self.isFaved = true
+                self.navigator?.userFavedMovie(movie: self.movie)
             default:
                 break
             }
@@ -74,10 +85,12 @@ class DefaultMovieViewModelWithFavoriteOptions: MovieViewModelDecorator, MovieVi
     }
     
     private func removeFavorite() {
-        favoriteHandlerRepository.removeMovieFromFavorite(movieID: movie.id) { (result) in
+        favoriteHandlerRepository.removeMovieFromFavorite(movieID: movie.id) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success:
                 self.isFaved = false
+                self.navigator?.userUnFavedMovie(movie: self.movie)
             default:
                 break
             }
