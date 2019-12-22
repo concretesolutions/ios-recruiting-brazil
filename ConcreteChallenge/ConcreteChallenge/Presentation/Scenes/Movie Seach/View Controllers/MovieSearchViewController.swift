@@ -10,6 +10,7 @@ import UIKit
 
 class MovieSearchViewController: UIViewController, ViewCodable {
     var viewModel: SeachMoviesViewModel
+
     private lazy var moviesListViewController = MoviesListViewController(viewModel: viewModel.moviesViewModel, presentationManager: MovieListPresentationManager(
             modes:[.init(cellType: InformativeMovieCollectionViewCell.self, numberOfColumns: 1, heightFactor: 0.4)]
         )
@@ -41,6 +42,7 @@ class MovieSearchViewController: UIViewController, ViewCodable {
         $0.delegate = self
         $0.dataSource = self
         $0.tableFooterView = UIView(frame: .zero)
+        $0.backgroundColor = .black
     }
     
     init(viewModel: SeachMoviesViewModel) {
@@ -130,11 +132,11 @@ extension MovieSearchViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let suggestionCell = tableView.dequeueReusableCell(forCellType: UITableViewCell.self, for: indexPath)
-        
-        suggestionCell.textLabel?.text = viewModel.suggestionAt(position: indexPath.row)
-        
-        return suggestionCell
+        return tableView.dequeueReusableCell(forCellType: UITableViewCell.self, for: indexPath).build {
+            $0.textLabel?.text = viewModel.suggestionAt(position: indexPath.row)
+            $0.backgroundColor = .black
+            $0.textLabel?.textColor = .white
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -80,10 +80,16 @@ class AppCoordinator: Coordinator {
             viewModelsFactory: self.viewModelsFactory
         )
         
-//        searchMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in
-//            self?.popularMoviesCoordinator.movieChangedInOtherScene(movie: movie)
-//        }
+        searchMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in
+            self?.favoriteMoviesCoordinator.movieRemovedInOtherScene(movie: movie)
+            self?.popularMoviesCoordinator.movieChangedInOtherScene(movie: movie)
+        }
         
+        searchMoviesCoordinator.userFavedMovieCompletion = { [weak self] movie in
+            self?.popularMoviesCoordinator.movieChangedInOtherScene(movie: movie)
+            self?.favoriteMoviesCoordinator.movieWasAddedInOtherScene(movie: movie)
+        }
+
         return searchMoviesCoordinator
     }()
 

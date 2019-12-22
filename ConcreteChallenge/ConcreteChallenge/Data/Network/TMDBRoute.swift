@@ -12,6 +12,8 @@ import GenericNetwork
 //The routes of the TMDB API
 enum TMDBMoviesRoute: Route {
     
+    private static var apiKey = "4b8d40349182e03ae8e2f6fd304c9aee"
+    
     // the associetedValue is the page
     case popular(Int?)
     case image(String)
@@ -50,19 +52,19 @@ enum TMDBMoviesRoute: Route {
         case .popular(let pageNumber):
             let pageNumber = pageNumber ?? 1
             return [
-                .init(tmdbProperty: .apiKey, value: "4b8d40349182e03ae8e2f6fd304c9aee"),
+                .init(tmdbProperty: .apiKey, value: TMDBMoviesRoute.apiKey),
                 .init(tmdbProperty: .pageNumber, value: String(pageNumber))
             ]
         case .image:
             return []
         case .genres:
             return [
-                .init(tmdbProperty: .apiKey, value: "4b8d40349182e03ae8e2f6fd304c9aee"),
+                .init(tmdbProperty: .apiKey, value: TMDBMoviesRoute.apiKey),
             ]
         case .searchMovies(let query, let pageNumber):
             let pageNumber = pageNumber ?? 1
             return [
-                .init(tmdbProperty: .apiKey, value: "4b8d40349182e03ae8e2f6fd304c9aee"),
+                .init(tmdbProperty: .apiKey, value: TMDBMoviesRoute.apiKey),
                 .init(tmdbProperty: .query, value: query),
                 .init(tmdbProperty: .pageNumber, value: String(pageNumber))
             ]

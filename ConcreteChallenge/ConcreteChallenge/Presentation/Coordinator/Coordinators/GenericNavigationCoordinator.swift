@@ -9,7 +9,6 @@
 import UIKit
 
 class GenericNavigationCoordinator: Coordinator {
-
     var parentRootViewController: RootViewController
 
     var rootViewController: RootViewController = {
