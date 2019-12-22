@@ -25,6 +25,6 @@ extension UICollectionView {
     func registerReusableCell<CellType: UICollectionViewCell>(forCellType cellType: CellType.Type) {
         let cellIdentifier = String(describing: cellType)
         
-        self.register(CellType.self, forCellWithReuseIdentifier: cellIdentifier)
+        self.register(cellType.self, forCellWithReuseIdentifier: cellIdentifier)
     }
 }

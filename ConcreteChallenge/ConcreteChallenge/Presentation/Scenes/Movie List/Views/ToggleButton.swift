@@ -8,17 +8,25 @@
 
 import UIKit
 
+struct ToggleButtonItem {
+    var image: UIImage?
+}
+
 class ToggleButton: UIVisualEffectView, ViewCodable {
-    public var firstOptionIsSelected = true {
+    public var wasToggledCompletion: ((Int) -> Void)?
+    private let items: [ToggleButtonItem]
+    private var currentItem = 0 {
         didSet {
-            wasToggledCompletion?(self.firstOptionIsSelected)
+            self.wasToggledCompletion?(currentItem)
         }
     }
     
-    public var wasToggledCompletion: ((Bool) -> Void)?
+    private lazy var itemsViews: [UIImageView] = {
+        return self.items.map { (toggleItem) -> UIImageView in
+            return UIImageView(image: toggleItem.image).build(block: ToggleButton.formatOptionView)
+        }
+    }()
     
-    private let firstOptionImageView = UIImageView().build(block: formatOptionView)
-    private let secondOptionImageView = UIImageView().build(block: formatOptionView)
     private let overlayView = UIView().build {
         $0.backgroundColor = .appLightRed
         $0.layer.cornerRadius = 5
@@ -27,10 +35,9 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
     private let contentLayoutGuide = UILayoutGuide()
     private var overlayViewLeftConstraint: NSLayoutConstraint?
     
-    init(firstImage: UIImage, secondImage: UIImage) {
+    init(items: [ToggleButtonItem]) {
+        self.items = items
         super.init(effect: UIBlurEffect(style: .dark))
-        firstOptionImageView.image = firstImage
-        secondOptionImageView.image = secondImage
         setupView()
     }
     
@@ -39,37 +46,49 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
     }
     
     func buildHierarchy() {
-        self.contentView.addSubViews(overlayView, firstOptionImageView, secondOptionImageView)
+        self.contentView.addSubViews(overlayView)
+        self.contentView.addSubViews(itemsViews)
         addLayoutGuide(contentLayoutGuide)
     }
     
     func addConstraints() {
         contentLayoutGuide.layout.group
-            .width(.margin(-30)).height(.margin(-10))
+            .width(.margin(-30))
+            .height(.margin(-10))
             .centerX.centerY
             .fill(to: self)
                 
         let dimensionAndVerticalConstraintsBlock: (LayoutProxy) -> Void = { [weak self] in
             $0.group.height(.multiply(0.7))
-                    .width(.multiply(0.5))
                     .centerY
                     .fill(to: self?.contentLayoutGuide)
+            $0.width.equal(to: $0.height, multiplier: 2)
         }
         
-        firstOptionImageView.layout.build(block: dimensionAndVerticalConstraintsBlock).build {
-            $0.left.equal(to: contentLayoutGuide.layout.left)
+        var previousItemView: UIView?
+        itemsViews.forEach { (itemView) in
+            itemView.layout.build(block: dimensionAndVerticalConstraintsBlock)
+            
+            if let previsousItemView = previousItemView {
+                itemView.layout.left.equal(to: previsousItemView.layout.right, offsetBy: 10)
+            } else {
+                itemView.layout.left.equal(to: contentLayoutGuide.layout.left)
+            }
+            
+            previousItemView = itemView
         }
         
-        secondOptionImageView.layout.build(block: dimensionAndVerticalConstraintsBlock).build {
-            $0.right.equal(to: contentLayoutGuide.layout.right)
+        if let lastItemView = previousItemView {
+            lastItemView.layout.right.equal(to: contentLayoutGuide.layout.right)
         }
         
         overlayView.layout.group
-            .height.width(.multiply(0.5))
+            .height
+            .width(.multiply(CGFloat(1)/CGFloat(self.items.count)))
             .centerY
             .fill(to: contentLayoutGuide)
         
-        self.overlayViewLeftConstraint = overlayView.layout.left.equal(to: contentLayoutGuide.layout.left)
+        self.overlayViewLeftConstraint = self.itemsViews.first?.layout.centerX.equal(to: overlayView.layout.centerX)
     }
     
     func applyAditionalChanges() {
@@ -83,20 +102,20 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let firstTouch = touches.first,
-              let touchedView = firstTouch.view else {
+              let touchedView = firstTouch.view as? UIImageView else {
             return
         }
         
-        switch touchedView {
-        case firstOptionImageView:
-            firstOptionIsSelected = true
-            animateOverlayMovement(toAnchor: contentLayoutGuide.layout.left.layout.left)
-        case secondOptionImageView:
-            firstOptionIsSelected = false
-            animateOverlayMovement(toAnchor: contentLayoutGuide.layout.left.layout.centerX)
-        default:
-            break
+        let itemIndex = itemsViews.firstIndex { (currentItem) -> Bool in
+            return currentItem == touchedView
         }
+        
+        guard let safeItemIndex = itemIndex, currentItem != safeItemIndex else {
+            return
+        }
+        
+        currentItem = safeItemIndex
+        animateOverlayMovement(toAnchor: touchedView.layout.centerX)
     }
     
     private static func formatOptionView(optionView: UIImageView) {
@@ -107,7 +126,7 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
     private func animateOverlayMovement(toAnchor anchor: DefaultLayoutPropertyProxy<NSLayoutXAxisAnchor>) {
         self.overlayView.superview?.layoutIfNeeded()
         self.overlayViewLeftConstraint?.isActive = false
-        self.overlayViewLeftConstraint = overlayView.layout.left.equal(to: anchor)
+        self.overlayViewLeftConstraint = overlayView.layout.centerX.equal(to: anchor)
         
         UIView.animate(withDuration: 0.5) {
             self.overlayView.superview?.layoutIfNeeded()

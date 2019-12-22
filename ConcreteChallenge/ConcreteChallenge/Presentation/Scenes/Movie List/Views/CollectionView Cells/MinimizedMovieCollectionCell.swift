@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView {
+class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieViewCell {
     var viewModel: MovieViewModel? {
         didSet {
             let viewModel = self.viewModel!

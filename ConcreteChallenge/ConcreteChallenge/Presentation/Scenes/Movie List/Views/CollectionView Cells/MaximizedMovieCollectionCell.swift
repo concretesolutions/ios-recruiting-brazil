@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView {
+class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieViewCell {
     var viewModel: MovieViewModel? {
         didSet {
             guard let viewModel = self.viewModel else {

@@ -11,7 +11,7 @@ import GenericNetwork
 
 protocol MoviesListViewModel: AnyObject {
     var numberOfMovies: Int { get }
-    var mustShowGridMode: Bool { get }
+    var currentPresentation: Int { get }
     var navigator: MoviesListViewModelNavigator? { get set }
         
     var needShowError: ((_ message: String) -> Void)? { get set }
@@ -23,7 +23,7 @@ protocol MoviesListViewModel: AnyObject {
     
     func thePageReachedTheEnd()
     func viewModelFromMovie(atPosition position: Int) -> MovieViewModel
-    func viewStateChanged()
+    func viewStateChanged(toState state: Int)
     func userSelectedMovie(atPosition position: Int)
     func reloadMovie(_ movie: Movie)
     func insertMovie(_ movie: Movie)
@@ -42,11 +42,15 @@ enum ListState {
     }
 }
 
-enum MovieViewModelInjetorData {
-    case grid(Movie), cards(Movie)
+enum MoviesListViewModelInjetorData {
+    case normal(Movie), favorite(Movie)
 }
 
 typealias Injector<Injected, Data> = (Data) -> Injected
+
+struct Presentation {
+    var hasFavorite: Bool
+}
 
 class DefaultMoviesListViewModel: MoviesListViewModel {
     typealias MoviesRouter = (_ pageNumber: Int) -> Route
@@ -61,8 +65,8 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         }
     }
     
-    var mustShowGridMode: Bool {
-        return self.state == .grid
+    var currentPresentation: Int {
+        return self.currentState
     }
     
     var needReloadAllMovies: (() -> Void)?
@@ -74,17 +78,20 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
     weak var navigator: MoviesListViewModelNavigator?
     
     private let moviesRepository: MoviesRepository
-    private let movieViewModelInjector: Injector<MovieViewModel, MovieViewModelInjetorData>
+    private let movieViewModelInjector: Injector<MovieViewModel, MoviesListViewModelInjetorData>
     private var moviesPage = Page<Movie>()
-    private var state = ListState.grid {
+    private var presentations: [Presentation]
+    
+    private var currentState: Int = 0 {
         didSet {
             self.needReloadAllMovies?()
         }
     }
-    
-    init(moviesRepository: MoviesRepository, movieViewModelInjector: @escaping Injector<MovieViewModel, MovieViewModelInjetorData>) {
+
+    init(moviesRepository: MoviesRepository, presentations: [Presentation], movieViewModelInjector: @escaping Injector<MovieViewModel, MoviesListViewModelInjetorData>) {
         self.moviesRepository = moviesRepository
         self.movieViewModelInjector = movieViewModelInjector
+        self.presentations = presentations
     }
     
     private func getMovies() {
@@ -125,18 +132,20 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
             fatalError("The \(position) position is wrong, the total of movies is \(moviesPage.numberOfItem)")
         }
 
-        switch self.state {
-        case .grid:
-            return movieViewModelInjector(.grid(moviesPage.items[position]))
-        case .cards:
-            let movieViewModel = movieViewModelInjector(.cards(moviesPage.items[position]))
+        if self.presentations[currentState].hasFavorite {
+            let movieViewModel = movieViewModelInjector(.favorite(moviesPage.items[position]))
             movieViewModel.withFavoriteOptions?.navigator = self
             return movieViewModel
+        } else {
+            return movieViewModelInjector(.normal(moviesPage.items[position]))
         }
     }
     
-    func viewStateChanged() {
-        self.state.toggle()
+    func viewStateChanged(toState state: Int) {
+        guard state >= 0 && state < presentations.count else {
+            fatalError("The \(state) state is wrong, the total of presentations modes is \(presentations.count)")
+        }
+        self.currentState = state
     }
     
     func userSelectedMovie(atPosition position: Int) {

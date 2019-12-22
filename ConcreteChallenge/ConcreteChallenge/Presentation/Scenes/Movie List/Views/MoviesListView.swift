@@ -8,26 +8,35 @@
 
 import UIKit
 
+struct MovieListPresentationMode {
+    var cellType: MovieViewCell.Type
+    var iconImage: UIImage?
+    var numberOfColumns: Int
+    var heightFactor: CGFloat
+}
+
 class MoviesListView: UIView, ViewCodable {
     let viewModel: MoviesListViewModel
     weak var delegate: MoviesListViewDelegate?
+    var cellsManipulator: MovieListPresentationManager
     
     private let moviesCollectionLayout = UICollectionViewFlowLayout()
     private lazy var moviesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: moviesCollectionLayout).build {
-        $0.registerReusableCell(forCellType: MinimizedMovieCollectionCell.self)
-        $0.registerReusableCell(forCellType: MaximizedMovieCollectionCell.self)
+        self.cellsManipulator.registerCells(atMoviesCollectionView: $0)
         $0.dataSource = self
         $0.delegate = self
         $0.contentInset.top = 50
     }
-    private lazy var toggleButton = ToggleButton(firstImage: UIImage(named: "grid")!, secondImage: UIImage(named: "expanded")!).build {
-        $0.wasToggledCompletion = { [weak self] firstOptionIsSelected in
-            self?.viewModel.viewStateChanged()
+    
+    private lazy var toggleButton = ToggleButton(items: cellsManipulator.toggleButtonItems).build {
+        $0.wasToggledCompletion = { [weak self] currentSelection in
+            self?.viewModel.viewStateChanged(toState: currentSelection)
         }
     }
     
-    init(viewModel: MoviesListViewModel) {
+    init(viewModel: MoviesListViewModel, cellsManipulator: MovieListPresentationManager) {
         self.viewModel = viewModel
+        self.cellsManipulator = cellsManipulator
         super.init(frame: .zero)
         self.setupView()
     }
@@ -44,7 +53,6 @@ class MoviesListView: UIView, ViewCodable {
         moviesCollectionView.layout.fillSuperView()
         toggleButton.layout.build {
             $0.group.top(5).right(-5).fillToSuperView()
-            $0.width.equal(to: 140)
             $0.height.equal(to: 40)
         }
     }
@@ -111,26 +119,22 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let movieCell = moviesCollectionView.dequeueReusableCell(
-            forCellType: viewModel.mustShowGridMode ? MinimizedMovieCollectionCell.self : MaximizedMovieCollectionCell.self,
-            for: indexPath
+        let movieCell = cellsManipulator.dequeueCell(
+            fromCollection: collectionView,
+            indexPath: indexPath,
+            presentationMode: viewModel.currentPresentation
         )
         
-        if let movieView = movieCell as? MovieView {
-            movieView.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
-        }
-                
+        movieCell.viewModel = viewModel.viewModelFromMovie(atPosition: indexPath.row)
+           
         return movieCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let gridMode = viewModel.mustShowGridMode
-        
-        let numberOfColumns: CGFloat = gridMode ? 3 : 1
-        let movieCellHeightFactor: CGFloat = gridMode ? 1.5 : 1.2
-        
-        let movieCellWidth = (collectionView.frame.width - numberOfColumns * moviesCollectionLayout.minimumInteritemSpacing)/numberOfColumns
-        return CGSize(width: movieCellWidth, height: movieCellWidth * movieCellHeightFactor)
+
+        return cellsManipulator.sizeForCell(
+            presentationMode: viewModel.currentPresentation,
+            atCollectionView: collectionView) ?? .zero
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

@@ -10,11 +10,14 @@ import Foundation
 
 class FavoriteViewModelsFactory: DefaultViewModelFactory {
     override func movieListViewModel() -> MoviesListViewModel {
-        return DefaultMoviesListViewModel(moviesRepository: FavoriteMoviesRepository()) { (injectorData) -> MovieViewModel in
+        return DefaultMoviesListViewModel(moviesRepository: FavoriteMoviesRepository(), presentations: [
+            Presentation(hasFavorite: false),
+            Presentation(hasFavorite: true)
+        ]) { (injectorData) -> MovieViewModel in
             switch injectorData {
-            case .cards(let movie):
+            case .favorite(let movie):
                 return self.movieViewModelWithFavoriteOptions(movie: movie)
-            case .grid(let movie):
+            case .normal(let movie):
                 return self.movieViewModel(movie: movie)
             }
         }
