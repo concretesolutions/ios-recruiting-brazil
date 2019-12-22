@@ -65,14 +65,15 @@ final class FavoriteListViewControllerScreen: UIView {
     /// Update view according to current state
     /// - Parameter state: Current state
     public func updateViewState(to state: MovieListViewState) {
-        removeFiltersButton.isHidden = !(state == .filter)
         // State = .filter
+        removeFiltersButton.isHidden = !(state == .filter)
         // State = .error
         genericErrorView.isHidden = !(state == .error)
         // State = .noDataError
         noDataErrorView.isHidden = !(state == .noDataError)
         // State = .loading
         activityIndicator.isHidden = !(state == .loading)
+        tableView.isHidden = (state == .loading)
         
         if state == .loading {
             activityIndicator.startAnimating()
