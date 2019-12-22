@@ -11,7 +11,9 @@ import UIKit
 class MovieListView: UIView {
     
     lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        
+        collectionView.backgroundColor = .systemGray6
         
         collectionView.register(MovieCollectionCell.self, forCellWithReuseIdentifier: "MovieCell")
         
@@ -34,12 +36,20 @@ class MovieListView: UIView {
         return view
     }()
     
-    lazy var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        
+        activityIndicator.hidesWhenStopped = true
+        
+        return activityIndicator
+    }()
     
       override init(frame: CGRect) {
-          super.init(frame: frame)
-          
-          self.setupLayout()
+        super.init(frame: frame)
+        
+        self.backgroundColor = .systemGray6
+        self.activityIndicator.startAnimating()
+        self.setupLayout()
       }
       
       required init?(coder: NSCoder) {
@@ -61,21 +71,30 @@ extension MovieListView {
         self.addViews()
         
         NSLayoutConstraint.activate([
+            self.collectionView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.errorView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.errorView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.errorView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
+            self.errorView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7)
+        ])
+        
+        NSLayoutConstraint.activate([
+            self.searchErrorView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.searchErrorView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.searchErrorView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5),
+            self.searchErrorView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7)
+        ])
+        
+        NSLayoutConstraint.activate([
             self.activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
-//
-//        NSLayoutConstraint.activate([
-//            titleLabel.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 8),
-//            titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//            titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            favoriteButton.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 8),
-//            favoriteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-//            favoriteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
-//        ])
         
     }
     

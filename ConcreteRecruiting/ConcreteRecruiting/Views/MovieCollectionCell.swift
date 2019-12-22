@@ -26,7 +26,6 @@ class MovieCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
 }
 
 extension MovieCollectionCell {
