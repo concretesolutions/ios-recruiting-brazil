@@ -40,8 +40,6 @@ struct Movie: Decodable {
         
         genres = try values.decode([Genre].self, forKey: .genres)
         
-//        let additionalInfo = try values.nestedContainer(keyedBy: AdditionalInfoKeys.self, forKey: .additionalInfo)
-//        elevation = try additionalInfo.decode(Double.self, forKey: .elevation)
     }
     
 }
