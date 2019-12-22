@@ -27,7 +27,7 @@ class FavoriteListViewModel: ObservableObject {
     @Published private(set) var state: MovieListViewState = .movies
     @Published private var query: String?
 
-    private var filters = CurrentValueSubject<[Filter], Never>([])
+    internal var filters = CurrentValueSubject<[Filter], Never>([])
     
     // Cancellables
     private var querySubscriber: AnyCancellable?
@@ -35,7 +35,7 @@ class FavoriteListViewModel: ObservableObject {
     private var filtersSubscriber: AnyCancellable?
     
     // Data provider
-    private let dataProvider: DataProvidable
+    internal let dataProvider: DataProvidable
     
     init(dataProvider: DataProvidable) {
         self.dataProvider = dataProvider
