@@ -33,6 +33,7 @@
 		3F55C16523B00E55008F38FC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C16423B00E55008F38FC /* HTTPMethod.swift */; };
 		3F55C16823B00FA3008F38FC /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C16723B00FA3008F38FC /* HTTPTask.swift */; };
 		3F55C16A23B0126F008F38FC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C16923B0126F008F38FC /* NetworkError.swift */; };
+		3F55C16F23B01BD9008F38FC /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55C16E23B01BD9008F38FC /* EndPointType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		3F55C16423B00E55008F38FC /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		3F55C16723B00FA3008F38FC /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		3F55C16923B0126F008F38FC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		3F55C16E23B01BD9008F38FC /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 		3F55C14723AFF626008F38FC /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				3F55C16D23B01A4A008F38FC /* Protocols */,
 				3F55C16623B00F84008F38FC /* Enums */,
 				3F55C14823AFF626008F38FC /* NetworkLayer.h */,
 				3F55C14923AFF626008F38FC /* Info.plist */,
@@ -337,6 +340,14 @@
 				3F55C16923B0126F008F38FC /* NetworkError.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		3F55C16D23B01A4A008F38FC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3F55C16E23B01BD9008F38FC /* EndPointType.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -601,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F55C16F23B01BD9008F38FC /* EndPointType.swift in Sources */,
 				3F55C16A23B0126F008F38FC /* NetworkError.swift in Sources */,
 				3F55C16823B00FA3008F38FC /* HTTPTask.swift in Sources */,
 				3F55C16523B00E55008F38FC /* HTTPMethod.swift in Sources */,
