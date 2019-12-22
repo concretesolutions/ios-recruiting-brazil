@@ -50,6 +50,7 @@ class FavoriteMoviesViewController: UIViewController {
 
         self.title = "Favorites"
         self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(self.showFilterOptions))
         self.setupSearch()
 
         DataProvider.shared.didChangeFavorites = {
@@ -77,6 +78,18 @@ class FavoriteMoviesViewController: UIViewController {
         }
 
         self.screen.tableView.reloadData()
+    }
+
+    // MARK: - Navigation Bar actions
+
+    @objc func showFilterOptions() {
+        let filterNavController = UINavigationController(rootViewController: FilterOptionsViewController())
+        filterNavController.navigationBar.tintColor = .systemIndigo
+        filterNavController.navigationBar.prefersLargeTitles = false
+        filterNavController.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
+        filterNavController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.systemIndigo]
+
+        self.present(filterNavController, animated: true)
     }
 }
 
