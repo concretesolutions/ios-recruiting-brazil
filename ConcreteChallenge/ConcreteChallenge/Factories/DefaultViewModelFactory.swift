@@ -25,9 +25,9 @@ class DefaultViewModelFactory: ViewModelsFactory {
         )
     }
     
-    func movieListViewModel() -> MoviesListViewModel {
+    func movieListViewModel(moviesRepository: MoviesRepository? = nil) -> MoviesListViewModel {
         return DefaultMoviesListViewModel(
-            moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()), presentations: [
+            moviesRepository: moviesRepository ?? DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()), presentations: [
                 Presentation(hasFavorite: false),
                 Presentation(hasFavorite: true)
             ]
@@ -38,6 +38,12 @@ class DefaultViewModelFactory: ViewModelsFactory {
             case .normal(let movie):
                 return self.movieViewModel(movie: movie)
             }
+        }
+    }
+    
+    func searchMoviesViewModel() -> SeachMoviesViewModel {
+        return DefaultSeachMoviesViewModel(moviesSearchRepository: DefaultSearchMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>())) { (movieRepository) -> MoviesListViewModel in
+            return self.movieListViewModel(moviesRepository: movieRepository)
         }
     }
 }

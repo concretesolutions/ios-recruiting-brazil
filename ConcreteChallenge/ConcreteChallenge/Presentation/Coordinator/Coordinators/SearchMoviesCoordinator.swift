@@ -1,73 +1,66 @@
 //
-//  ListOfMoviesCoordinator.swift
+//  SearchMoviesCoordinator.swift
 //  ConcreteChallenge
 //
-//  Created by Elias Paulino on 21/12/19.
+//  Created by Elias Paulino on 22/12/19.
 //  Copyright © 2019 Elias Paulino. All rights reserved.
 //
 
 import UIKit
 
-typealias ListOfMoviesCoordinatorAtributtes = (navigationTitle: String, tabbarAttributtes: TabbarAttributtes)
-typealias UserFavedMovieEvent = (_ movie: Movie) -> Void
-
-class ListOfMoviesCoordinator: Coordinator, MoviesListViewModelNavigator {
+class SearchMoviesCoordinator: Coordinator, MoviesListViewModelNavigator {
     var rootViewController: RootViewController
     
     var userFavedMovieCompletion: UserFavedMovieEvent?
     var userUnFavedMovieCompletion: UserFavedMovieEvent?
     
-    lazy var moviesListViewController: MoviesListViewController = {
-        let viewModel = self.viewModelsFactory.movieListViewModel(moviesRepository: nil)
-        viewModel.navigator = self
+    lazy var moviesListViewController: MovieSearchViewController = {
+        let viewModel = self.viewModelsFactory.searchMoviesViewModel()
+        viewModel.moviesViewModel.navigator = self
         
-        let moviesListViewController = MoviesListViewController(viewModel: viewModel, presentationManager: moviesListPresentationManager)
+        let moviesListViewController = MovieSearchViewController(viewModel: viewModel)
         return moviesListViewController
     }()
     
     var movieDetailCoordinator: MovieDetailCoordinator? {
         didSet {
             movieDetailCoordinator?.userFavedMovieCompletion = { [weak self] movie in
-                self?.moviesListViewController.viewModel.reloadMovie(movie)
+                self?.moviesListViewController.viewModel.moviesViewModel.reloadMovie(movie)
                 self?.userFavedMovieCompletion?(movie)
             }
             
             movieDetailCoordinator?.userUnFavedMovieCompletion = { [weak self] movie in
-                self?.moviesListViewController.viewModel.reloadMovie(movie)
+                self?.moviesListViewController.viewModel.moviesViewModel.reloadMovie(movie)
                 self?.userUnFavedMovieCompletion?(movie)
             }
         }
     }
     private var viewModelsFactory: ViewModelsFactory
-    private let atributtes: ListOfMoviesCoordinatorAtributtes
-    private let moviesListPresentationManager: MovieListPresentationManager
     
-    init(rootViewController: RootViewController, viewModelsFactory: ViewModelsFactory, atributtes: ListOfMoviesCoordinatorAtributtes, moviesListPresentationManager: MovieListPresentationManager) {
+    init(rootViewController: RootViewController, viewModelsFactory: ViewModelsFactory) {
         self.rootViewController = rootViewController
         self.viewModelsFactory = viewModelsFactory
-        self.atributtes = atributtes
-        self.moviesListPresentationManager = moviesListPresentationManager
     }
     
     func start(previousController: UIViewController? = nil) {
         rootViewController.add(viewController: moviesListViewController)
         
-        moviesListViewController.title = atributtes.navigationTitle
+        moviesListViewController.title = "Search"
         
-        rootViewController.tabBarItem = UITabBarItem(tabbarAttributtes: atributtes.tabbarAttributtes)
+        rootViewController.tabBarItem = UITabBarItem(tabbarAttributtes: TabbarAttributtes.custom("Search", "search"))
         rootViewController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
     }
     
     func movieChangedInOtherScene(movie: Movie) {
-        self.moviesListViewController.viewModel.reloadMovie(movie)
+        self.moviesListViewController.viewModel.moviesViewModel.reloadMovie(movie)
     }
     
     func movieWasAddedInOtherScene(movie: Movie) {
-        self.moviesListViewController.viewModel.insertMovie(movie)
+        self.moviesListViewController.viewModel.moviesViewModel.insertMovie(movie)
     }
     
     func movieRemovedInOtherScene(movie: Movie) {
-        self.moviesListViewController.viewModel.deleteMovie(movie)
+        self.moviesListViewController.viewModel.moviesViewModel.deleteMovie(movie)
     }
     
     func movieWasSelected(movie: Movie) {

@@ -9,7 +9,7 @@
 import Foundation
 
 class FavoriteViewModelsFactory: DefaultViewModelFactory {
-    override func movieListViewModel() -> MoviesListViewModel {
+    override func movieListViewModel(moviesRepository: MoviesRepository? = nil) -> MoviesListViewModel {
         return DefaultMoviesListViewModel(moviesRepository: FavoriteMoviesRepository(), presentations: [
             Presentation(hasFavorite: false),
             Presentation(hasFavorite: true)

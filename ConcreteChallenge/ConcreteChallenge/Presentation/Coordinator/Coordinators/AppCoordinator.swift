@@ -74,12 +74,10 @@ class AppCoordinator: Coordinator {
         return favoriteMoviesCoordinator
     }()
     
-    private lazy var searchMoviesCoordinator: ListOfMoviesCoordinator = {
-        let searchMoviesCoordinator = ListOfMoviesCoordinator(
+    private lazy var searchMoviesCoordinator: SearchMoviesCoordinator = {
+        let searchMoviesCoordinator = SearchMoviesCoordinator(
             rootViewController: rootViewController,
-            viewModelsFactory: self.viewModelsFactory,
-            atributtes: ("Search", .custom("Search", "search")),
-            moviesListPresentationManager: searchPresentationManager
+            viewModelsFactory: self.viewModelsFactory
         )
         
 //        searchMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in

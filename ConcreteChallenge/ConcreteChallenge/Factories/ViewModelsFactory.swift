@@ -10,6 +10,7 @@ import Foundation
 
 protocol ViewModelsFactory: AnyObject {
     func movieViewModel(movie: Movie) -> MovieViewModel
-    func movieListViewModel() -> MoviesListViewModel
+    func movieListViewModel(moviesRepository: MoviesRepository?) -> MoviesListViewModel
     func movieViewModelWithFavoriteOptions(movie: Movie) -> MovieViewModelWithFavoriteOptions
+    func searchMoviesViewModel() -> SeachMoviesViewModel
 }

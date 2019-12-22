@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol SearchMoviesRepository {
-    func getMovies(query: String, fromPage page: Int, completion: @escaping (Result<Page<Movie>, Error>) -> Void)
+protocol SearchMoviesRepository: MoviesRepository {
+    var searchQueryProvider: (() -> String)? { get set }
 }

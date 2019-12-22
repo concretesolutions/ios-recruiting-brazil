@@ -28,6 +28,7 @@ protocol MoviesListViewModel: AnyObject {
     func reloadMovie(_ movie: Movie)
     func insertMovie(_ movie: Movie)
     func deleteMovie(_ movie: Movie)
+    func deleteAllMovies()
 }
 
 enum ListState {
@@ -184,6 +185,11 @@ class DefaultMoviesListViewModel: MoviesListViewModel {
         }
            
         completion(safefavedMoviePosition)
+    }
+    
+    func deleteAllMovies() {
+        moviesPage = Page<Movie>()
+        self.needReloadAllMovies?()
     }
 }
 
