@@ -24,6 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let movieListVC = MovieListViewController()
         let navigationController = UINavigationController(rootViewController: movieListVC)
         
+        navigationController.navigationBar.applyDefaultStyle()
+        
         self.window?.rootViewController = navigationController
                 
     }

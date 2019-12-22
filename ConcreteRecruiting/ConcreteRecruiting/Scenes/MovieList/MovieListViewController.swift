@@ -16,6 +16,9 @@ class MovieListViewController: UIViewController {
         
         view = MovieListView()
         
+        // TODO: Title should come from elsewhere
+        self.title = "Movies"
+        
     }
 
 }

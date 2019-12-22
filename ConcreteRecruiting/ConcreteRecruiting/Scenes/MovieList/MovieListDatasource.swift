@@ -14,7 +14,6 @@ class MovieListDataSource: NSObject, UICollectionViewDataSource {
         return 8
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCollectionCell else {
             fatalError("Unable to dequeue a cell with the MovieCell identifier")
