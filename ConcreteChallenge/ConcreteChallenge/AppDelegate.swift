@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let appCoorinator = AppCoordinator()
+    let appCoorinator = AppCoordinator(viewModelsFactory: DefaultViewModelFactory())
     
 //    let viewModel = DefaultMoviesListViewModel(
 //        moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),

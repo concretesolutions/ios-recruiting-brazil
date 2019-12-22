@@ -12,6 +12,7 @@ import GenericNetwork
 protocol MoviesListViewModel: AnyObject {
     var numberOfMovies: Int { get }
     var mustShowGridMode: Bool { get }
+    var navigator: MoviesListViewModelNavigator? { get set }
         
     var needShowError: ((_ message: String) -> Void)? { get set }
     var needShowNewMovies: ((_ atRange: Range<Int>) -> Void)? { get set }

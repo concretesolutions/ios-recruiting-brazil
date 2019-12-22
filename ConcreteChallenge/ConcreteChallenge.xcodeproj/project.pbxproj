@@ -64,6 +64,8 @@
 		E3B5506023AEDCC5007C2DC3 /* GenresRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B5505F23AEDCC5007C2DC3 /* GenresRepository.swift */; };
 		E3B5506223AEDCFF007C2DC3 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B5506123AEDCFF007C2DC3 /* Genre.swift */; };
 		E3B5506423AEDD2A007C2DC3 /* DefaultGenresRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B5506323AEDD2A007C2DC3 /* DefaultGenresRepository.swift */; };
+		E3B5506723AEE972007C2DC3 /* ViewModelsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B5506623AEE972007C2DC3 /* ViewModelsFactory.swift */; };
+		E3B5506923AEE9F5007C2DC3 /* DefaultViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B5506823AEE9F5007C2DC3 /* DefaultViewModelFactory.swift */; };
 		E3D70F6123AE96EF008E26D9 /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D70F6023AE96EF008E26D9 /* MoviesRepository.swift */; };
 		E3D70F6523AE97B2008E26D9 /* DefaultMoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D70F6423AE97B2008E26D9 /* DefaultMoviesRepository.swift */; };
 		E3D70F6723AE9A2D008E26D9 /* MovieImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D70F6623AE9A2D008E26D9 /* MovieImageRepository.swift */; };
@@ -212,6 +214,8 @@
 		E3B5505F23AEDCC5007C2DC3 /* GenresRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresRepository.swift; sourceTree = "<group>"; };
 		E3B5506123AEDCFF007C2DC3 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		E3B5506323AEDD2A007C2DC3 /* DefaultGenresRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGenresRepository.swift; sourceTree = "<group>"; };
+		E3B5506623AEE972007C2DC3 /* ViewModelsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelsFactory.swift; sourceTree = "<group>"; };
+		E3B5506823AEE9F5007C2DC3 /* DefaultViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultViewModelFactory.swift; sourceTree = "<group>"; };
 		E3D70F6023AE96EF008E26D9 /* MoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepository.swift; sourceTree = "<group>"; };
 		E3D70F6423AE97B2008E26D9 /* DefaultMoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMoviesRepository.swift; sourceTree = "<group>"; };
 		E3D70F6623AE9A2D008E26D9 /* MovieImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImageRepository.swift; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 				E3D70F6223AE9788008E26D9 /* Data */,
 				E3D70F5A23AE951B008E26D9 /* Presentation */,
 				E3F8330623AC13B400E1B1E2 /* Resources */,
+				E3B5506523AEE95B007C2DC3 /* Factories */,
 				E37E9B4023AB97B300911EC8 /* AppDelegate.swift */,
 				E37E9B4B23AB97B400911EC8 /* LaunchScreen.storyboard */,
 				E37E9B4E23AB97B400911EC8 /* Info.plist */,
@@ -566,6 +571,15 @@
 				E3F1C37023ABD71300206CBA /* ConstraintOperation.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E3B5506523AEE95B007C2DC3 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				E3B5506623AEE972007C2DC3 /* ViewModelsFactory.swift */,
+				E3B5506823AEE9F5007C2DC3 /* DefaultViewModelFactory.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		E3D70F5923AE9510008E26D9 /* Domain */ = {
@@ -962,10 +976,12 @@
 				E3FD709723AEC2C700E43C41 /* MovieDetailCoordinator.swift in Sources */,
 				E3F832DF23ABE25C00E1B1E2 /* UICollectionView+dequeueReusableCell+registerReusableCell.swift in Sources */,
 				E331047723AEACC60078B10C /* GenericNavigationCoordinator.swift in Sources */,
+				E3B5506923AEE9F5007C2DC3 /* DefaultViewModelFactory.swift in Sources */,
 				E331046823AEA5960078B10C /* Coordinator.swift in Sources */,
 				E37E9BC723ABB04300911EC8 /* LayoutPropertyProxy.swift in Sources */,
 				E37E9BCF23ABB18900911EC8 /* LayoutPropertyProxy+constraintMethods.swift in Sources */,
 				E37E9BD123ABB1B600911EC8 /* LayoutPropertyProxy+dimensionConstraintMethods.swift in Sources */,
+				E3B5506723AEE972007C2DC3 /* ViewModelsFactory.swift in Sources */,
 				E3D70F6523AE97B2008E26D9 /* DefaultMoviesRepository.swift in Sources */,
 				E3F832E123ABE2F500E1B1E2 /* UIViewController+addChild.swift in Sources */,
 				E331046A23AEA5B10078B10C /* RootViewController.swift in Sources */,

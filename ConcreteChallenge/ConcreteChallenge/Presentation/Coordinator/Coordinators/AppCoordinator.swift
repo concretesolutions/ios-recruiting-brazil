@@ -21,8 +21,15 @@ class AppCoordinator: Coordinator {
 
     private lazy var firstTabCoordinator = GenericNavigationCoordinator(
         rootViewController: rootViewController,
-        childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController)
+        childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController,
+                                                   viewModelsFactory: self.viewModelsFactory)
     )
+    
+    private let viewModelsFactory: ViewModelsFactory
+    
+    init(viewModelsFactory: ViewModelsFactory) {
+        self.viewModelsFactory = viewModelsFactory
+    }
     
     func start(previousController: UIViewController? = nil) {
         guard let window = UIApplication.shared.delegate?.window else {

@@ -11,29 +11,20 @@ import GenericNetwork
 
 class PopularMoviesCoordinator: Coordinator {
     var rootViewController: RootViewController
-
-    private lazy var viewModel: DefaultMoviesListViewModel = {
-        let viewModel = DefaultMoviesListViewModel(
-            moviesRepository: DefaultMoviesRepository(moviesProvider: URLSessionJSONParserProvider<Page<Movie>>()),
-            movieViewModelInjector: { movie in
-                return DefaultMovieViewModel(
-                    movie: movie,
-                    imageRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider()),
-                    genresRepository: DefaultGenresRepository(genresProvider: URLSessionJSONParserProvider())
-                )
-            }
-        )
-        
+    
+    private lazy var popularMoviesViewController: PopularMoviesViewController = {
+        let viewModel = self.viewModelsFactory.movieListViewModel()
         viewModel.navigator = self
         
-        return viewModel
+        let popularMoviesViewController = PopularMoviesViewController(viewModel: viewModel)
+        return popularMoviesViewController
     }()
-    
-    private lazy var popularMoviesViewController = PopularMoviesViewController(viewModel: viewModel)
     private var movieDetailCoordinator: MovieDetailCoordinator?
+    private var viewModelsFactory: ViewModelsFactory
     
-    init(rootViewController: RootViewController) {
+    init(rootViewController: RootViewController, viewModelsFactory: ViewModelsFactory) {
         self.rootViewController = rootViewController
+        self.viewModelsFactory = viewModelsFactory
     }
     
     func start(previousController: UIViewController? = nil) {
