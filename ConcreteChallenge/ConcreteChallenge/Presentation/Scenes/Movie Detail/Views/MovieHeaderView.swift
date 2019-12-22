@@ -17,6 +17,12 @@ class MovieHeaderView: UIView, ViewCodable {
             return (titleLabel.text, subTitleLabel.text)
         }
     }
+
+    var favoriteButtonTapCompletion: (() -> Void)? {
+        didSet {
+            faveImageView.favoriteButtonTapCompletion = self.favoriteButtonTapCompletion
+        }
+    }
     
     private let titleLabel = UILabel().build {
         $0.numberOfLines = 0
@@ -29,7 +35,12 @@ class MovieHeaderView: UIView, ViewCodable {
         $0.font = .systemFont(ofSize: 15, weight: .semibold)
         $0.textColor = .white
     }
-    private let favoriteImageView = UIImageView()
+    private lazy var faveImageView = FavoriteImageView(imagesForState: [
+        .faved: UIImage(named: "cleanFaved")!,
+        .unfaved: UIImage(named: "cleanUnfaved")!]).build {
+        $0.favoriteButtonTapCompletion = self.favoriteButtonTapCompletion
+    }
+    
     private let marginsLayoutGuide = UILayoutGuide()
     
     init() {
@@ -41,8 +52,12 @@ class MovieHeaderView: UIView, ViewCodable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setFavoriteState(isFaved: Bool) {
+        self.faveImageView.isFaved = isFaved
+    }
+    
     func buildHierarchy() {
-        addSubViews(titleLabel, subTitleLabel, favoriteImageView)
+        addSubViews(titleLabel, subTitleLabel, faveImageView)
         addLayoutGuide(marginsLayoutGuide)
     }
     
@@ -53,6 +68,11 @@ class MovieHeaderView: UIView, ViewCodable {
             $0.group.left.bottom.right.fill(to: marginsLayoutGuide)
             $0.top.equal(to: titleLabel.layout.bottom, offsetBy: 20)
             $0.height.equal(to: 20)
+        }
+        faveImageView.layout.build {
+            $0.group.right.bottom.fill(to: marginsLayoutGuide)
+            $0.width.equal(to: 30)
+            $0.height.equal(to: $0.width)
         }
     }
     

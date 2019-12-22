@@ -13,16 +13,15 @@ class MovieDetailCoordinator: Coordinator {
     var rootViewController: RootViewController
 
     private let movie: Movie
-    private lazy var viewModel = DefaultMovieViewModel(
-        movie: movie,
-        imageRepository: DefaultMovieImageRepository(imagesProvider: URLSessionFileProvider()),
-        genresRepository: DefaultGenresRepository(genresProvider: URLSessionJSONParserProvider())
+    private lazy var movieDetailViewController = MovieDetailViewController(viewModel:
+        viewModelsFactory.movieViewModelWithFavoriteOptions(movie: movie)
     )
-    private lazy var movieDetailViewController = MovieDetailViewController(viewModel: viewModel)
+    private let viewModelsFactory: ViewModelsFactory
     
-    init(rootViewController: RootViewController, movie: Movie) {
+    init(rootViewController: RootViewController, movie: Movie, viewModelsFactory: ViewModelsFactory) {
         self.movie = movie
         self.rootViewController = rootViewController
+        self.viewModelsFactory = viewModelsFactory
     }
     
     func start(previousController: UIViewController?) {

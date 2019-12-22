@@ -9,7 +9,7 @@
 import Foundation
 import GenericNetwork
 
-struct DefaultViewModelFactory: ViewModelsFactory {
+class DefaultViewModelFactory: ViewModelsFactory {
     func movieViewModel(movie: Movie) -> MovieViewModel {
         return DefaultMovieViewModel(
             movie: movie,

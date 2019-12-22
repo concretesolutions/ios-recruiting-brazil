@@ -11,6 +11,11 @@ import CoreData
 
 class FavoriteMoviesRepository: MoviesRepository {
     func getMovies(fromPage page: Int, completion: @escaping (Result<Page<Movie>, Error>) -> Void) {
+        guard page == 1 else {
+            completion(.success(Page<Movie>()))
+            return
+        }
+        
         let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
 
         do {

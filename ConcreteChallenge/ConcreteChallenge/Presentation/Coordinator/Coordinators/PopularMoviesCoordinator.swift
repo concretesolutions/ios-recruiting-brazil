@@ -38,7 +38,11 @@ class PopularMoviesCoordinator: Coordinator {
 
 extension PopularMoviesCoordinator: MoviesListViewModelNavigator {
     func movieWasSelected(movie: Movie) {
-        movieDetailCoordinator = MovieDetailCoordinator(rootViewController: rootViewController, movie: movie)
+        movieDetailCoordinator = MovieDetailCoordinator(
+            rootViewController: rootViewController,
+            movie: movie,
+            viewModelsFactory: self.viewModelsFactory
+        )
         movieDetailCoordinator?.start(previousController: popularMoviesViewController)
     }
 }

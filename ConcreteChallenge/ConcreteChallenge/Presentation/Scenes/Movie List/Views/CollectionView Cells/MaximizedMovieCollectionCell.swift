@@ -49,11 +49,11 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
         $0.font = .systemFont(ofSize: 14, weight: .semibold)
         $0.textColor = .white
     }
-    private lazy var faveImageView = UIImageView().build {
-        $0.contentMode = .scaleAspectFit
-        $0.setStateTo(.unfaved)
-        $0.isUserInteractionEnabled = true
-        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(favoriteButtonWasTapped)))
+    private lazy var faveImageView = FavoriteImageView(
+        imagesForState: [.faved: UIImage(named: "faved")!, .unfaved: UIImage(named: "unfaved")]).build {
+        $0.favoriteButtonTapCompletion = { [weak self] in
+             self?.favoriteViewModel?.usedTappedToFavoriteMovie()
+        }
     }
     private let footerView = UIView().build {
         $0.backgroundColor = UIColor.appPurple.withAlphaComponent(0.5)
@@ -127,10 +127,6 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
         self.clipsToBounds = true
     }
     
-    @objc func favoriteButtonWasTapped() {
-        self.favoriteViewModel?.usedTappedToFavoriteMovie()
-    }
-    
     private func handleMovieViewModel(_ viewModel: MovieViewModel) {
         viewModel.needReplaceImage = { [weak self] image in
             DispatchQueue.main.async {
@@ -151,7 +147,7 @@ class MaximizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
     private func handleFavoritesViewModel(_ viewModel: MovieViewModelWithFavoriteOptions) {
         viewModel.needUpdateFavorite = { [weak self] isFaved in
             DispatchQueue.main.async {
-                self?.faveImageView.setStateTo(isFaved ? .faved : .unfaved)
+                self?.faveImageView.isFaved = isFaved
             }
         }
     }

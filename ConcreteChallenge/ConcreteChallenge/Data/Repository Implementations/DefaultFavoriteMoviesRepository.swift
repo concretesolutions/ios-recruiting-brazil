@@ -37,7 +37,7 @@ class DefaultFavoriteMovieHandlerRepository: FavoriteMovieHandlerRepository {
     
     func removeMovieFromFavorite(movieID: Int, completion: @escaping (ActionResult<Error>) -> Void) {
         let movieRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
-        movieRequest.predicate = NSPredicate(format: "id == %@", movieID)
+        movieRequest.predicate = NSPredicate(format: "id == %@", String(movieID))
 
         do {
             guard let cdMovie = try CoreDataStack.persistentContainer.viewContext.fetch(movieRequest).first else {

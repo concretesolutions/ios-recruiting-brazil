@@ -11,11 +11,19 @@ import UIKit
 class MovieDetailView: UIView, ViewCodable {
     let viewModel: MovieViewModel
     
+    var favoriteViewModel: MovieViewModelWithFavoriteOptions? {
+        return viewModel as? MovieViewModelWithFavoriteOptions
+    }
+    
     private let scrollView = UIScrollView()
     private let scrollContentView = UIView().build {
         $0.backgroundColor = .clear
     }
-    private let headerView = MovieHeaderView()
+    private lazy var headerView = MovieHeaderView().build {
+        $0.favoriteButtonTapCompletion = { [weak self] in
+            self?.favoriteViewModel?.usedTappedToFavoriteMovie()
+        }
+    }
     private let genresLabel = UILabel().build {
         $0.font = .systemFont(ofSize: 15, weight: .bold)
         $0.textColor = .appTextBlue
@@ -113,6 +121,11 @@ class MovieDetailView: UIView, ViewCodable {
         viewModel.needReplaceGenres = { [weak self] genres in
             DispatchQueue.main.async {
                 self?.genresLabel.text = genres
+            }
+        }
+        favoriteViewModel?.needUpdateFavorite = { [weak self] isFaved in
+            DispatchQueue.main.async {
+                self?.headerView.setFavoriteState(isFaved: isFaved)
             }
         }
     }

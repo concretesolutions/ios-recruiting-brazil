@@ -25,6 +25,12 @@ class AppCoordinator: Coordinator {
                                                    viewModelsFactory: self.viewModelsFactory)
     )
     
+    private lazy var secondTabCoordinator = GenericNavigationCoordinator(
+        rootViewController: rootViewController,
+        childCoordinator: PopularMoviesCoordinator(rootViewController: rootViewController,
+                                                   viewModelsFactory: FavoriteViewModelsFactory())
+    )
+    
     private let viewModelsFactory: ViewModelsFactory
     
     init(viewModelsFactory: ViewModelsFactory) {
@@ -40,5 +46,6 @@ class AppCoordinator: Coordinator {
         window?.makeKeyAndVisible()
 
         firstTabCoordinator.start()
+        secondTabCoordinator.start()
     }
 }

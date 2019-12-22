@@ -8,7 +8,8 @@
 
 import Foundation
 
-protocol ViewModelsFactory {
+protocol ViewModelsFactory: AnyObject {
     func movieViewModel(movie: Movie) -> MovieViewModel
     func movieListViewModel() -> MoviesListViewModel
+    func movieViewModelWithFavoriteOptions(movie: Movie) -> MovieViewModelWithFavoriteOptions
 }
