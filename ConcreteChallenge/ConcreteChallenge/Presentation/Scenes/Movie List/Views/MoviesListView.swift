@@ -18,25 +18,25 @@ struct MovieListPresentationMode {
 class MoviesListView: UIView, ViewCodable {
     let viewModel: MoviesListViewModel
     weak var delegate: MoviesListViewDelegate?
-    var cellsManipulator: MovieListPresentationManager
+    var presentationManager: MovieListPresentationManager
     
     private let moviesCollectionLayout = UICollectionViewFlowLayout()
     private lazy var moviesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: moviesCollectionLayout).build {
-        self.cellsManipulator.registerCells(atMoviesCollectionView: $0)
+        self.presentationManager.registerCells(atMoviesCollectionView: $0)
         $0.dataSource = self
         $0.delegate = self
         $0.contentInset.top = 50
     }
     
-    private lazy var toggleButton = ToggleButton(items: cellsManipulator.toggleButtonItems).build {
+    private lazy var toggleButton = ToggleButton(items: presentationManager.toggleButtonItems).build {
         $0.wasToggledCompletion = { [weak self] currentSelection in
             self?.viewModel.viewStateChanged(toState: currentSelection)
         }
     }
     
-    init(viewModel: MoviesListViewModel, cellsManipulator: MovieListPresentationManager) {
+    init(viewModel: MoviesListViewModel, presentationManager: MovieListPresentationManager) {
         self.viewModel = viewModel
-        self.cellsManipulator = cellsManipulator
+        self.presentationManager = presentationManager
         super.init(frame: .zero)
         self.setupView()
     }
@@ -119,7 +119,7 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let movieCell = cellsManipulator.dequeueCell(
+        let movieCell = presentationManager.dequeueCell(
             fromCollection: collectionView,
             indexPath: indexPath,
             presentationMode: viewModel.currentPresentation
@@ -132,7 +132,7 @@ extension MoviesListView: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return cellsManipulator.sizeForCell(
+        return presentationManager.sizeForCell(
             presentationMode: viewModel.currentPresentation,
             atCollectionView: collectionView) ?? .zero
     }

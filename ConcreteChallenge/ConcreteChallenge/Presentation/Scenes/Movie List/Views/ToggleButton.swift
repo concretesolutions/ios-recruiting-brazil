@@ -38,7 +38,10 @@ class ToggleButton: UIVisualEffectView, ViewCodable {
     init(items: [ToggleButtonItem]) {
         self.items = items
         super.init(effect: UIBlurEffect(style: .dark))
-        setupView()
+        
+        if self.items.count > 1 {
+            setupView()
+        }
     }
     
     required init?(coder: NSCoder) {

@@ -33,7 +33,6 @@ class MinimizedMovieCollectionCell: UICollectionViewCell, ViewCodable, MovieView
     }
     
     private let titleLabel = UILabel().build {
-        $0.text = "bla"
         $0.textColor = .appTextBlue
         $0.font = .boldSystemFont(ofSize: 15)
         $0.textAlignment = .center

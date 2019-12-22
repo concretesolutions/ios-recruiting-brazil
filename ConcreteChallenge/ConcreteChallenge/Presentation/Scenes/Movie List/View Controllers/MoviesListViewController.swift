@@ -11,21 +11,12 @@ import GenericNetwork
 
 class MoviesListViewController: UIViewController {
     let viewModel: MoviesListViewModel
-    lazy var moviesListView = MoviesListView(viewModel: viewModel, cellsManipulator: MovieListPresentationManager(modes: [
-        MovieListPresentationMode(
-            cellType: MinimizedMovieCollectionCell.self,
-            iconImage: UIImage(named: "grid"),
-            numberOfColumns: 3, heightFactor: 1.5
-        ),
-        MovieListPresentationMode(
-            cellType: MaximizedMovieCollectionCell.self,
-            iconImage: UIImage(named: "expanded"),
-            numberOfColumns: 1, heightFactor: 1.3
-        )
-    ]))
+    private let presentationManager: MovieListPresentationManager
+    lazy var moviesListView = MoviesListView(viewModel: viewModel, presentationManager: self.presentationManager)
     
-    init(viewModel: MoviesListViewModel) {
+    init(viewModel: MoviesListViewModel, presentationManager: MovieListPresentationManager) {
         self.viewModel = viewModel
+        self.presentationManager = presentationManager
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -21,7 +21,7 @@ class ListOfMoviesCoordinator: Coordinator, MoviesListViewModelNavigator {
         let viewModel = self.viewModelsFactory.movieListViewModel()
         viewModel.navigator = self
         
-        let moviesListViewController = MoviesListViewController(viewModel: viewModel)
+        let moviesListViewController = MoviesListViewController(viewModel: viewModel, presentationManager: moviesListPresentationManager)
         return moviesListViewController
     }()
     
@@ -40,11 +40,13 @@ class ListOfMoviesCoordinator: Coordinator, MoviesListViewModelNavigator {
     }
     private var viewModelsFactory: ViewModelsFactory
     private let atributtes: ListOfMoviesCoordinatorAtributtes
+    private let moviesListPresentationManager: MovieListPresentationManager
     
-    init(rootViewController: RootViewController, viewModelsFactory: ViewModelsFactory, atributtes: ListOfMoviesCoordinatorAtributtes) {
+    init(rootViewController: RootViewController, viewModelsFactory: ViewModelsFactory, atributtes: ListOfMoviesCoordinatorAtributtes, moviesListPresentationManager: MovieListPresentationManager) {
         self.rootViewController = rootViewController
         self.viewModelsFactory = viewModelsFactory
         self.atributtes = atributtes
+        self.moviesListPresentationManager = moviesListPresentationManager
     }
     
     func start(previousController: UIViewController? = nil) {

@@ -19,11 +19,33 @@ class AppCoordinator: Coordinator {
         return tabBarController
     }()
     
+    private let popularAndFavoritesPresentationManager = MovieListPresentationManager(modes: [
+        MovieListPresentationMode(
+            cellType: MinimizedMovieCollectionCell.self,
+            iconImage: UIImage(named: "grid"),
+            numberOfColumns: 3, heightFactor: 1.7
+        ),
+        MovieListPresentationMode(
+            cellType: MaximizedMovieCollectionCell.self,
+            iconImage: UIImage(named: "expanded"),
+            numberOfColumns: 1, heightFactor: 1.3
+        )
+    ])
+    
+    private let searchPresentationManager = MovieListPresentationManager(modes: [
+        MovieListPresentationMode(
+            cellType: InformativeMovieCollectionViewCell.self,
+            iconImage: nil,
+            numberOfColumns: 1, heightFactor: 0.4
+        ),
+    ])
+    
     private lazy var popularMoviesCoordinator: ListOfMoviesCoordinator = {
         let popularMoviesCoordinator = ListOfMoviesCoordinator(
             rootViewController: rootViewController,
             viewModelsFactory: self.viewModelsFactory,
-            atributtes: ("Popular", .custom("Home", "home"))
+            atributtes: ("Popular", .custom("Home", "home")),
+            moviesListPresentationManager: popularAndFavoritesPresentationManager
         )
         
         popularMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in
@@ -41,7 +63,8 @@ class AppCoordinator: Coordinator {
         let favoriteMoviesCoordinator = FavoriteMoviesCoordinator(
             rootViewController: rootViewController,
             viewModelsFactory: FavoriteViewModelsFactory(),
-            atributtes: ("Favorites", .system(.favorites))
+            atributtes: ("Favorites", .system(.favorites)),
+            moviesListPresentationManager: popularAndFavoritesPresentationManager
         )
         
         favoriteMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in
@@ -49,6 +72,21 @@ class AppCoordinator: Coordinator {
         }
         
         return favoriteMoviesCoordinator
+    }()
+    
+    private lazy var searchMoviesCoordinator: ListOfMoviesCoordinator = {
+        let searchMoviesCoordinator = ListOfMoviesCoordinator(
+            rootViewController: rootViewController,
+            viewModelsFactory: self.viewModelsFactory,
+            atributtes: ("Search", .custom("Search", "search")),
+            moviesListPresentationManager: searchPresentationManager
+        )
+        
+//        searchMoviesCoordinator.userUnFavedMovieCompletion = { [weak self] movie in
+//            self?.popularMoviesCoordinator.movieChangedInOtherScene(movie: movie)
+//        }
+        
+        return searchMoviesCoordinator
     }()
 
     private lazy var firstTabCoordinator = GenericNavigationCoordinator(
@@ -59,6 +97,11 @@ class AppCoordinator: Coordinator {
     private lazy var secondTabCoordinator = GenericNavigationCoordinator(
         rootViewController: rootViewController,
         childCoordinator: favoriteMoviesCoordinator
+    )
+    
+    private lazy var thirdTabCoordinator = GenericNavigationCoordinator(
+        rootViewController: rootViewController,
+        childCoordinator: searchMoviesCoordinator
     )
     
     private let viewModelsFactory: ViewModelsFactory
@@ -75,6 +118,7 @@ class AppCoordinator: Coordinator {
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         
+        thirdTabCoordinator.start()
         secondTabCoordinator.start()
         firstTabCoordinator.start()
     }
