@@ -15,7 +15,7 @@ public protocol EndPointType {
     var path: String { get }
     var method: HTTPMethod { get }
     var task: HTTPTask { get }
-    var headers: HTTPHeaders { get }
-    
+    var headers: HTTPHeaders? { get }
+    var parametersEncoding: ParametersEncoding { get }
     
 }
